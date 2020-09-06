@@ -1,25 +1,25 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class CurrentUser {
   @Field((type) => ID)
-  id: string
+  id: string;
 
   @Field()
-  name: string
+  name: string;
 
   @Field()
-  email: string
+  email: string;
 
   @Field({ nullable: true })
-  avatar?: string
+  avatar?: string;
 }
 
 @ObjectType()
 export class Team {
   @Field((type) => ID)
-  id: string
+  id: string;
 
   @Field()
-  name: string
+  name: string;
 }

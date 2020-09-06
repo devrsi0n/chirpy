@@ -1,13 +1,13 @@
-import connect from 'next-connect'
-import { passport } from '@server/passport'
+import connect from 'next-connect';
+import { passport } from '@server/passport';
 
-const handler = connect()
+const handler = connect();
 
 handler.use(
   passport.initialize(),
   passport.authenticate('google', {
     scope: ['profile', 'email'],
   }),
-)
+);
 
-export default handler
+export default handler;

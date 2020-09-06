@@ -94,5 +94,3 @@ migration ..20200902071422-init
 +  members   Member[]
 +}
 ```
-
-
