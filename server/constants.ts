@@ -1,1 +1,1 @@
-export const AUTH_COOKIE_NAME = `app.auth`;
+export const AUTH_COOKIE_NAME = `zoo.auth`;
