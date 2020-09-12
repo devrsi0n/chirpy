@@ -6,10 +6,10 @@ import { ModelUserWithMembers } from './require-auth';
  * @param currentUser Current authenticated user
  * @param targetUserId The user to view
  */
-export async function requireUserAccess(
+export function requireUserAccess(
   currentUser: ModelUserWithMembers,
   targetUserId: string,
-) {
+): void {
   if (currentUser.id !== targetUserId) {
     throw new ApolloError(`Forbidden`);
   }

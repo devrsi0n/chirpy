@@ -8,11 +8,15 @@ import { serialize } from 'cookie';
 import { redirect } from './response';
 import { prisma } from './prisma';
 
-passport.serializeUser<any, string>((user, done) => {
+interface User {
+  id: string;
+}
+
+passport.serializeUser<User, string>((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser<any, string>((id, done) => {
+passport.deserializeUser<User, string>((id, done) => {
   prisma.user
     .findOne({
       where: {
@@ -20,7 +24,7 @@ passport.deserializeUser<any, string>((id, done) => {
       },
     })
     .then((user) => {
-      done(null, user);
+      done(null, user as User);
     })
     .catch((error) => {
       console.log(`Error: ${error}`);
@@ -36,7 +40,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, cb) => {
       const user = await getUserByProviderProfile(profile, 'google');
-      cb(null, user);
+      cb(undefined, user);
     },
   ),
 );
@@ -59,8 +63,11 @@ async function getUserByProviderProfile(
   profile: Profile,
   provider: 'github' | 'google',
 ) {
+  if (!profile.emails?.length) {
+    throw new Error(`Can't find a valid email`);
+  }
   const email = profile.emails[0].value;
-  const avatar = profile.photos[0].value;
+  const avatar = profile.photos?.[0].value;
 
   const providerKey = `${provider}UserId` as 'githubUserId' | 'googleUserId';
 
@@ -93,7 +100,7 @@ async function getUserByProviderProfile(
     existing = await prisma.user.create({
       data: {
         email,
-        name: profile.displayName || profile.username,
+        name: profile.displayName || (profile.username as string),
         [providerKey]: profile.id,
         avatar,
       },
@@ -119,7 +126,7 @@ export { passport };
 export async function handleSuccessfulLogin(
   req: IncomingMessage,
   res: ServerResponse,
-) {
+): Promise<void> {
   const { id } = (req as $TsFixMe).user;
   const authToken = createSecureToken({
     userId: id,

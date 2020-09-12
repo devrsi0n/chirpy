@@ -17,12 +17,15 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx,json,md,css}": [
+    "*.{json,md,css}": [
       "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix"
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.1.4",
+    "@apollo/client": "^3.1.5",
     "@prisma/client": "2.6.2",
     "apollo-server-micro": "^2.17.0",
     "class-validator": "^0.12.2",
@@ -48,27 +51,30 @@
     "@graphql-codegen/typescript-react-apollo": "^2.0.6",
     "@prisma/cli": "2.6.2",
     "@types/cookie": "^0.4.0",
-    "@types/node": "^14.6.0",
+    "@types/node": "^14.10.1",
     "@types/passport": "^1.0.4",
     "@types/passport-github": "^1.1.5",
-    "@types/passport-google-oauth20": "^2.0.3",
+    "@types/passport-google-oauth20": "^2.0.4",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",
     "dotenv-expand": "^5.1.0",
     "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.6",
-    "eslint-plugin-react-hooks": "^4.1.0",
-    "husky": "^4.2.5",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "husky": "^4.3.0",
     "lint-staged": "^10.3.0",
     "prettier": "^2.1.1",
-    "tailwindcss": "^1.8.3",
+    "tailwindcss": "^1.8.8",
     "ts-loader": "^8.0.3",
     "typescript": "^4.0.2"
   }
