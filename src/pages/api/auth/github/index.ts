@@ -1,5 +1,5 @@
 import connect from 'next-connect';
-import { passport } from '@server/passport';
+import { passport } from '$server/passport';
 
 const handler = connect();
 

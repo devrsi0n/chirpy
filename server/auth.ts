@@ -14,7 +14,7 @@ function verifyToken(token: string) {
 
 const JWK_KEY = JWK.asKey(Buffer.from(process.env.HASH_KEY));
 
-export function createSecureToken(payload: AuthUser) {
+export function createSecureToken(payload: AuthUser): string {
   const token = createToken(payload);
   return JWE.encrypt(token, JWK_KEY);
 }

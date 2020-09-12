@@ -6,6 +6,6 @@ export type TGqlContext = {
   res: NextApiResponse;
 };
 
-export function GqlContext() {
+export function GqlContext(): ParameterDecorator {
   return createParamDecorator<TGqlContext>(({ context }) => context);
 }

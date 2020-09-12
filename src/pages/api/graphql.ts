@@ -2,8 +2,8 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiHandler } from 'next';
 import { buildSchema } from 'type-graphql';
-import { UserResolver } from '@server/resolvers/user.resolver';
-import { TeamResolver } from '@server/resolvers/team.resolver';
+import { UserResolver } from '$server/resolvers/user.resolver';
+import { TeamResolver } from '$server/resolvers/team.resolver';
 
 export const config = {
   api: {
@@ -11,7 +11,7 @@ export const config = {
   },
 };
 
-let handler: any;
+let handler: NextApiHandler;
 
 const isProd = process.env.NODE_ENV === 'production';
 

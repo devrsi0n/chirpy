@@ -1,11 +1,11 @@
-import { AUTH_COOKIE_NAME } from '@server/constants';
+import { AUTH_COOKIE_NAME } from '$server/constants';
 import { AuthenticationError } from 'apollo-server-micro';
 import { IncomingMessage } from 'http';
 import { NextApiRequest } from 'next';
 import { parse } from 'cookie';
-import { parseSecureToken } from '@server/auth';
-import { ModelMember, ModelUser } from '@server/db.types';
-import { prisma } from '@server/prisma';
+import { parseSecureToken } from '$server/auth';
+import { ModelMember, ModelUser } from '$server/db.types';
+import { prisma } from '$server/prisma';
 
 export type ModelUserWithMembers = ModelUser & { members: ModelMember[] };
 

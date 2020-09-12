@@ -1,12 +1,12 @@
 import { ApolloError } from 'apollo-server-micro';
-import { ModelTeam } from '@server/db.types';
+import { ModelTeam } from '$server/db.types';
 import { ModelUserWithMembers } from './require-auth';
 
-export async function requireTeamAccess(
+export function requireTeamAccess(
   level: 'member' | 'admin',
   user: ModelUserWithMembers,
   team: ModelTeam,
-) {
+): void {
   const member = user.members.find((member) => member.teamId === team.id);
 
   if (level === 'admin' && (!member || !member.isAdmin)) {

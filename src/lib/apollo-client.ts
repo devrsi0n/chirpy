@@ -24,7 +24,9 @@ const createApolloClient = () =>
     ssrMode: !process.browser,
   });
 
-function initializeApollo(initialState = null) {
+function initializeApollo(
+  initialState: $TsFixMe = null,
+): ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> {
   const _apolloClient = apolloClient ?? createApolloClient();
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -44,7 +46,9 @@ function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
-export function useApollo(initialState?: any) {
+export function useApollo(
+  initialState?: $TsFixMe,
+): ReturnType<typeof initializeApollo> {
   const store = React.useMemo(() => initializeApollo(initialState), [
     initialState,
   ]);

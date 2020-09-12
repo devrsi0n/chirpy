@@ -15,8 +15,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@server/*": ["server/*"],
-      "@/*": ["src/*"]
+      "$server/*": ["server/*"],
+      "$/*": ["src/*"]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
