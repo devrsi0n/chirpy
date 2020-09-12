@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
+import { ThemeProvider } from 'theme-ui';
 import { useApollo } from '$/lib/apollo-client';
-
-import '../css/tailwind.css';
+import theme from '$/theme';
 
 interface IAppProps {
   Component: React.ComponentType;
@@ -12,9 +12,11 @@ interface IAppProps {
 const App = ({ Component, pageProps }: IAppProps): JSX.Element => {
   const apollo = useApollo();
   return (
-    <ApolloProvider client={apollo}>
-      <Component {...pageProps} />
-    </ApolloProvider>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={apollo}>
+        <Component {...pageProps} />
+      </ApolloProvider>
+    </ThemeProvider>
   );
 };
 

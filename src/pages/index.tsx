@@ -1,7 +1,17 @@
+/** @jsx jsx */
+import { Heading, jsx } from 'theme-ui';
+
 const Home = (): JSX.Element => {
   return (
     <>
-      <h1 className="text-center text-4xl my-10">Hello Next!</h1>
+      <Heading
+        as="h1"
+        sx={{
+          textAlign: 'center',
+        }}
+      >
+        Hello Next!
+      </Heading>
     </>
   );
 };
