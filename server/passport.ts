@@ -1,8 +1,10 @@
 import passport, { Profile } from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as GitHubStrategy } from 'passport-github';
-import { AUTH_COOKIE_NAME } from './constants';
 import { IncomingMessage, ServerResponse } from 'http';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { ErrorHandler } from 'next-connect';
+import { AUTH_COOKIE_NAME } from './constants';
 import { createSecureToken } from './auth';
 import { serialize } from 'cookie';
 import { redirect } from './response';
@@ -51,6 +53,8 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/github/callback`,
+      // Get a user's email no matter it's public or not
+      scope: ['user:email'],
     },
     async (accessToken, refreshToken, profile, cb) => {
       const user = await getUserByProviderProfile(profile, 'github');
@@ -64,6 +68,7 @@ async function getUserByProviderProfile(
   provider: 'github' | 'google',
 ) {
   if (!profile.emails?.length) {
+    console.log(profile);
     throw new Error(`Can't find a valid email`);
   }
   const email = profile.emails[0].value;
@@ -140,3 +145,12 @@ export async function handleSuccessfulLogin(
   res.setHeader('Set-Cookie', [authCookie]);
   redirect(res, '/dashboard');
 }
+
+export const handleFailedLogin: ErrorHandler<
+  NextApiRequest,
+  NextApiResponse
+> = (err, req, res) => {
+  console.error(err);
+
+  res.status(500).end('zoo error:' + err.toString());
+};

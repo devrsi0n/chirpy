@@ -1,3 +1,4 @@
 # Prisma Migrate lockfile v1
 
 20200902071422-init
+20200913080821-make-github-and-google-user-id-unique

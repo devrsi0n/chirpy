@@ -1,12 +1,15 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import connect from 'next-connect';
-import { passport } from '$server/passport';
+import { handleFailedLogin, passport } from '$server/passport';
 
-const handler = connect();
+const handler = connect<NextApiRequest, NextApiResponse>({
+  onError: handleFailedLogin,
+});
 
 handler.use(
   passport.initialize(),
   passport.authenticate('github', {
-    scope: ['email', 'user:profile'],
+    scope: ['user:email'],
   }),
 );
 

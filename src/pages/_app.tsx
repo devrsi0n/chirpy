@@ -3,6 +3,7 @@ import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from 'theme-ui';
 import { useApollo } from '$/lib/apollo-client';
 import theme from '$/theme';
+import { Layout } from '$/components/Layout';
 
 interface IAppProps {
   Component: React.ComponentType;
@@ -14,7 +15,9 @@ const App = ({ Component, pageProps }: IAppProps): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={apollo}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ApolloProvider>
     </ThemeProvider>
   );

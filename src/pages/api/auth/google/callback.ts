@@ -1,7 +1,14 @@
-import { handleSuccessfulLogin, passport } from '$server/passport';
+import { NextApiRequest, NextApiResponse } from 'next';
 import connect from 'next-connect';
+import {
+  handleFailedLogin,
+  handleSuccessfulLogin,
+  passport,
+} from '$server/passport';
 
-export default connect().use(
+export default connect<NextApiRequest, NextApiResponse>({
+  onError: handleFailedLogin,
+}).use(
   passport.initialize(),
   passport.authenticate('google', { failureRedirect: '/login' }),
   handleSuccessfulLogin,
