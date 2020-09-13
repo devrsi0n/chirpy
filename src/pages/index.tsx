@@ -10,7 +10,7 @@ const Home = (): JSX.Element => {
           textAlign: 'center',
         }}
       >
-        Hello Next!
+        Hello zoo!
       </Heading>
     </>
   );
