@@ -1,6 +1,6 @@
 import passport, { Profile } from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { Strategy as GitHubStrategy } from 'passport-github';
+import { Strategy as GitHubStrategy } from 'passport-github2';
 import { IncomingMessage, ServerResponse } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorHandler } from 'next-connect';
@@ -56,7 +56,12 @@ passport.use(
       // Get a user's email no matter it's public or not
       scope: ['user:email'],
     },
-    async (accessToken, refreshToken, profile, cb) => {
+    async (
+      accessToken: string,
+      refreshToken: string,
+      profile: Profile,
+      cb: $TsFixMe,
+    ) => {
       const user = await getUserByProviderProfile(profile, 'github');
       cb(null, user);
     },
@@ -67,8 +72,8 @@ async function getUserByProviderProfile(
   profile: Profile,
   provider: 'github' | 'google',
 ) {
+  console.log(profile);
   if (!profile.emails?.length) {
-    console.log(profile);
     throw new Error(`Can't find a valid email`);
   }
   const email = profile.emails[0].value;
@@ -143,7 +148,7 @@ export async function handleSuccessfulLogin(
     maxAge: 60 * 60 * 24 * 365, // A year
   });
   res.setHeader('Set-Cookie', [authCookie]);
-  redirect(res, '/dashboard');
+  redirect(res, '/');
 }
 
 export const handleFailedLogin: ErrorHandler<
