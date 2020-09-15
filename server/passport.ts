@@ -156,6 +156,8 @@ export const handleFailedLogin: ErrorHandler<
   NextApiResponse
 > = (err, req, res) => {
   console.error(err);
+  console.dir(req);
+  console.dir(res);
 
-  res.status(500).end('zoo error:' + err.toString());
+  res.status(500).end('zoo error: ' + err.toString());
 };
