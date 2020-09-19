@@ -24,7 +24,7 @@ export function parseSecureToken(token: string): AuthUser | null {
     const jwtToken = JWE.decrypt(token, JWK_KEY);
     return verifyToken(jwtToken.toString());
   } catch (error) {
-    console.error('auth error', error);
+    console.error('auth error: ', error);
     return null;
   }
 }

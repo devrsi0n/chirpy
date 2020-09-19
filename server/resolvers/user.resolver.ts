@@ -7,9 +7,7 @@ import { ModelUserWithMembers, requireAuth } from '$server/guards/require-auth';
 @Resolver()
 export class UserResolver {
   @Query((returns) => CurrentUser)
-  async currentUser(
-    @GqlContext() ctx: TGqlContext,
-  ): Promise<ModelUserWithMembers> {
+  async currentUser(@GqlContext() ctx: TGqlContext): Promise<ModelUserWithMembers> {
     const user = await requireAuth(ctx.req);
     return user;
   }

@@ -13,6 +13,10 @@ export async function requireAuth(
   req: NextApiRequest | IncomingMessage,
 ): Promise<ModelUserWithMembers> {
   const token = parse(req.headers.cookie || '')[AUTH_COOKIE_NAME];
+  if (!token) {
+    throw new AuthenticationError(`Authentication Error`);
+  }
+
   const authUser = parseSecureToken(token);
 
   if (!authUser) {
