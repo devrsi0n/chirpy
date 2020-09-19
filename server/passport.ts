@@ -56,22 +56,14 @@ passport.use(
       // Get a user's email no matter it's public or not
       scope: ['user:email'],
     },
-    async (
-      accessToken: string,
-      refreshToken: string,
-      profile: Profile,
-      cb: $TsFixMe,
-    ) => {
+    async (accessToken: string, refreshToken: string, profile: Profile, cb: $TsFixMe) => {
       const user = await getUserByProviderProfile(profile, 'github');
       cb(null, user);
     },
   ),
 );
 
-async function getUserByProviderProfile(
-  profile: Profile,
-  provider: 'github' | 'google',
-) {
+async function getUserByProviderProfile(profile: Profile, provider: 'github' | 'google') {
   console.log(profile);
   if (!profile.emails?.length) {
     throw new Error(`Can't find a valid email`);
@@ -151,10 +143,7 @@ export async function handleSuccessfulLogin(
   redirect(res, '/');
 }
 
-export const handleFailedLogin: ErrorHandler<
-  NextApiRequest,
-  NextApiResponse
-> = (err, req, res) => {
+export const handleFailedLogin: ErrorHandler<NextApiRequest, NextApiResponse> = (err, req, res) => {
   console.error(err);
   console.error(req.query);
   console.error(req.env);

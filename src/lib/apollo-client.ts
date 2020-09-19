@@ -7,10 +7,7 @@ import {
   NormalizedCacheObject,
 } from '@apollo/client';
 
-let apolloClient:
-  | ApolloClient<NormalizedCache>
-  | ApolloClient<NormalizedCacheObject>
-  | undefined;
+let apolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | undefined;
 
 const link = createHttpLink({
   uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/graphql`,
@@ -46,11 +43,7 @@ function initializeApollo(
   return _apolloClient;
 }
 
-export function useApollo(
-  initialState?: $TsFixMe,
-): ReturnType<typeof initializeApollo> {
-  const store = React.useMemo(() => initializeApollo(initialState), [
-    initialState,
-  ]);
+export function useApollo(initialState?: $TsFixMe): ReturnType<typeof initializeApollo> {
+  const store = React.useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
 }

@@ -15,10 +15,7 @@ class TeamsArgs {
 @Resolver((of) => Team)
 export class TeamResolver {
   @Query((returns) => [Team])
-  async teams(
-    @GqlContext() ctx: TGqlContext,
-    @Args() args: TeamsArgs,
-  ): Promise<Team[]> {
+  async teams(@GqlContext() ctx: TGqlContext, @Args() args: TeamsArgs): Promise<Team[]> {
     const user = await requireAuth(ctx.req);
     // View teams for current user if `user_id` is not specified
     const userId = args.user_id || user.id;
