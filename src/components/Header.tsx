@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, NavLink, Flex } from 'theme-ui';
+import { jsx, NavLink, Flex, Avatar, Heading } from 'theme-ui';
 import * as React from 'react';
 import Link from 'next/link';
 import { useCurrentUserQuery } from '$/generated/graphql';
@@ -12,7 +12,7 @@ export function Header(): JSX.Element {
   return (
     <header>
       <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <h1>zoo</h1>
+        <Heading as="h3">zoo</Heading>
         <nav
           sx={{
             display: 'flex',
@@ -23,11 +23,7 @@ export function Header(): JSX.Element {
         >
           {data?.currentUser?.avatar ? (
             <figure>
-              <img
-                src={data.currentUser.avatar}
-                alt="The avatar of current user"
-                sx={{ width: '64px' }}
-              />
+              <Avatar src={data.currentUser.avatar} alt="The avatar of current user" />
             </figure>
           ) : (
             <NavLink as="span">
