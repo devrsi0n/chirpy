@@ -158,4 +158,29 @@ export default {
       borderRadius: 99999,
     },
   },
+  text: {
+    default: {
+      color: 'text',
+      fontSize: 3,
+    },
+    caps: {
+      textTransform: 'uppercase',
+      letterSpacing: '0.2em',
+    },
+    heading: {
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+      padding: '1.1rem 0',
+      h1: {
+        padding: '2rem 0',
+      },
+      h2: {
+        padding: '1.5rem 0',
+      },
+      h3: {
+        padding: '1.25rem 0',
+      },
+    },
+  },
 };
