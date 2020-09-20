@@ -12,7 +12,11 @@ export function Header(): JSX.Element {
   return (
     <header>
       <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Heading as="h3">zoo</Heading>
+        <Heading as="h3">
+          <NavLink as="span">
+            <Link href="/">ZOO</Link>
+          </NavLink>
+        </Heading>
         <nav
           sx={{
             display: 'flex',
