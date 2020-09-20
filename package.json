@@ -38,6 +38,7 @@
     "jose": "^1.28.0",
     "next": "^9.5.3",
     "next-connect": "^0.9.0",
+    "normalize.css": "^8.0.1",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.11",
     "passport-google-oauth20": "^2.0.0",
