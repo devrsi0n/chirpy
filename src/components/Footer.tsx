@@ -14,15 +14,15 @@ export function Footer(): JSX.Element {
           },
         }}
       >
-        <NavLink as="span">
-          <Link href="/">&copy; 2020 ZOO</Link>
-        </NavLink>
-        <NavLink as="span">
-          <Link href="/terms-of-service">Terms of Service</Link>
-        </NavLink>
-        <NavLink as="span">
-          <Link href="/privacy-policy">Privacy Policy</Link>
-        </NavLink>
+        <Link href="/">
+          <NavLink>&copy; 2020 ZOO</NavLink>
+        </Link>
+        <Link href="/terms-of-service">
+          <NavLink>Terms of Service</NavLink>
+        </Link>
+        <Link href="/privacy-policy">
+          <NavLink>Privacy Policy</NavLink>
+        </Link>
       </nav>
     </footer>
   );

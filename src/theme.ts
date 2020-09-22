@@ -1,3 +1,5 @@
+import { Theme } from 'theme-ui';
+
 const fontBody = [
   'system-ui',
   /* macOS 10.11-10.12 */ '-apple-system',
@@ -28,7 +30,7 @@ const fontMonospace = [
   /* Linux emoji */ 'Noto Color Emoji',
 ];
 
-export default {
+const theme: Theme = {
   useColorSchemeMediaQuery: true,
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
@@ -72,6 +74,13 @@ export default {
       lineHeight: 'body',
       fontWeight: 'body',
     },
+    a: {
+      textDecoration: 'none',
+      color: 'primary',
+      ':hover': {
+        cursor: 'pointer',
+      },
+    },
   },
 
   images: {
@@ -106,4 +115,15 @@ export default {
       },
     },
   },
+  links: {
+    nav: {
+      textDecoration: 'none',
+      color: 'primary',
+      ':hover': {
+        cursor: 'pointer',
+      },
+    },
+  },
 };
+
+export default theme;
