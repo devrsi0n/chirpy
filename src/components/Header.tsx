@@ -13,9 +13,9 @@ export function Header(): JSX.Element {
     <header>
       <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Heading as="h3">
-          <NavLink as="span">
-            <Link href="/">ZOO</Link>
-          </NavLink>
+          <Link href="/">
+            <NavLink>ZOO</NavLink>
+          </Link>
         </Heading>
         <nav
           sx={{
