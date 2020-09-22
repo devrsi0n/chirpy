@@ -2,25 +2,34 @@
 import { jsx, Heading, Text, Box } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
+import { Link } from '$/components/Link';
 
 export default function TermsOfService(): JSX.Element {
   return (
-    <>
+    <section>
       <Head>
         <title>ZOO: Terms of Service</title>
       </Head>
-      <article sx={{ display: 'flex', gap: 4, flexDirection: 'column' }}>
+      <article
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          '& > *': {
+            marginBottom: 3,
+          },
+        }}
+      >
         <Heading as="h1">Terms of Service</Heading>
         <Box>
           <Heading as="h2">1. Terms</Heading>
           <Text>
             By accessing the website at{' '}
-            <a href={process.env.NEXT_PUBLIC_APP_URL}>{process.env.NEXT_PUBLIC_APP_URL}</a>, you are
-            agreeing to be bound by these terms of service, all applicable laws and regulations, and
-            agree that you are responsible for compliance with any applicable local laws. If you do
-            not agree with any of these terms, you are prohibited from using or accessing this site.
-            The materials contained in this website are protected by applicable copyright and
-            trademark law.
+            <Link href={process.env.NEXT_PUBLIC_APP_URL}>{process.env.NEXT_PUBLIC_APP_URL}</Link>,
+            you are agreeing to be bound by these terms of service, all applicable laws and
+            regulations, and agree that you are responsible for compliance with any applicable local
+            laws. If you do not agree with any of these terms, you are prohibited from using or
+            accessing this site. The materials contained in this website are protected by applicable
+            copyright and trademark law.
           </Text>
         </Box>
         <Box>
@@ -117,6 +126,6 @@ export default function TermsOfService(): JSX.Element {
           </Text>
         </Box>
       </article>
-    </>
+    </section>
   );
 }

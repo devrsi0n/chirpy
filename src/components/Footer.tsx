@@ -5,13 +5,23 @@ import Link from 'next/link';
 
 export function Footer(): JSX.Element {
   return (
-    <footer sx={{ padding: '40px 20px' }}>
-      <nav sx={{ display: 'flex', gap: '15px' }}>
+    <footer sx={{ padding: '40px 0' }}>
+      <nav
+        sx={{
+          display: 'flex',
+          '& > *': {
+            marginRight: 4,
+          },
+        }}
+      >
         <NavLink as="span">
           <Link href="/">&copy; 2020 ZOO</Link>
         </NavLink>
         <NavLink as="span">
           <Link href="/terms-of-service">Terms of Service</Link>
+        </NavLink>
+        <NavLink as="span">
+          <Link href="/privacy-policy">Privacy Policy</Link>
         </NavLink>
       </nav>
     </footer>
