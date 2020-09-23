@@ -125,6 +125,38 @@ const theme: Theme = {
         cursor: 'pointer',
       },
     },
+    reverse: {
+      color: 'background',
+    },
+  },
+  buttons: {
+    primary: {
+      color: 'background',
+      bg: 'primary',
+      '&:hover': {
+        bg: 'secondary',
+        cursor: 'pointer',
+      },
+    },
+    secondary: {
+      color: 'background',
+      bg: 'secondary',
+    },
+  },
+  cards: {
+    primary: {
+      padding: 4,
+      borderRadius: 4,
+      boxShadow: '0 0 8px rgba(0, 0, 0, 0.125)',
+      marginTop: 4,
+      marginBottom: 4,
+    },
+    compact: {
+      padding: 1,
+      borderRadius: 2,
+      border: '1px solid',
+      borderColor: 'muted',
+    },
   },
 };
 
