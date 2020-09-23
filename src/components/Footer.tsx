@@ -10,8 +10,15 @@ export function Footer(): JSX.Element {
       <nav
         sx={{
           display: 'flex',
-          '& > *': {
+          '& > :not(:last-child)': {
             marginRight: 4,
+          },
+          '@media screen and (max-width: 620px)': {
+            flexDirection: 'column',
+            '& > :not(:last-child)': {
+              marginBottom: 4,
+              marginRight: 0,
+            },
           },
         }}
       >

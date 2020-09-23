@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, Heading, Text, Box } from 'theme-ui';
+import { jsx, Heading, Text } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
 import { Link } from '$/components/Link';
@@ -15,12 +15,12 @@ export default function TermsOfService(): JSX.Element {
           display: 'flex',
           flexDirection: 'column',
           '& > *': {
-            marginBottom: 3,
+            marginBottom: 4,
           },
         }}
       >
         <Heading as="h1">Terms of Service</Heading>
-        <Box>
+        <div>
           <Heading as="h2">1. Terms</Heading>
           <Text>
             By accessing the website at{' '}
@@ -31,8 +31,8 @@ export default function TermsOfService(): JSX.Element {
             accessing this site. The materials contained in this website are protected by applicable
             copyright and trademark law.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">2. Use License</Heading>
           <Text>
             Permission is granted to temporarily download one copy of the materials (information or
@@ -51,8 +51,8 @@ export default function TermsOfService(): JSX.Element {
             must destroy any downloaded materials in your possession whether in electronic or
             printed format.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">3. Disclaimer</Heading>
           <Text>
             a. The materials on ZOO's website are provided on an ‘as is’ basis. ZOO makes no
@@ -67,8 +67,8 @@ export default function TermsOfService(): JSX.Element {
             likely results, or reliability of the use of the materials on its website or otherwise
             relating to such materials or on any sites linked to this site.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">4. Limitations</Heading>
           <Text>
             In no event shall ZOO or its suppliers be liable for any damages (including, without
@@ -79,8 +79,8 @@ export default function TermsOfService(): JSX.Element {
             or limitations of liability for consequential or incidental damages, these limitations
             may not apply to you.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">5. Accuracy of materials</Heading>
           <Text>
             The materials appearing on ZOO website could include technical, typographical, or
@@ -89,8 +89,8 @@ export default function TermsOfService(): JSX.Element {
             website at any time without notice. However ZOO does not make any commitment to update
             the materials.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">5. Accuracy of materials</Heading>
           <Text>
             The materials appearing on ZOO website could include technical, typographical, or
@@ -99,8 +99,8 @@ export default function TermsOfService(): JSX.Element {
             website at any time without notice. However ZOO does not make any commitment to update
             the materials.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">6. Links</Heading>
           <Text>
             ZOO has not reviewed all of the sites linked to its website and is not responsible for
@@ -108,23 +108,23 @@ export default function TermsOfService(): JSX.Element {
             endorsement by ZOO of the site. Use of any such linked website is at the user’s own
             risk.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">7. Modifications</Heading>
           <Text>
             ZOO may revise these terms of service for its website at any time without notice. By
             using this website you are agreeing to be bound by the then current version of these
             terms of service.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">8. Governing Law</Heading>
           <Text>
             These terms and conditions are governed by and construed in accordance with the laws of
             Vancouver, Canada and you irrevocably submit to the exclusive jurisdiction of the courts
             in that State or location.
           </Text>
-        </Box>
+        </div>
       </article>
     </section>
   );
