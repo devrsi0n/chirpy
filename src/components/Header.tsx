@@ -3,6 +3,7 @@ import { jsx, NavLink, Flex, Avatar, Heading } from 'theme-ui';
 import * as React from 'react';
 import Link from 'next/link';
 import { useCurrentUserQuery } from '$/generated/graphql';
+import { layoutStyle } from './styles';
 
 export function Header(): JSX.Element {
   const { data, error } = useCurrentUserQuery();
@@ -10,9 +11,18 @@ export function Header(): JSX.Element {
     console.error('Ger current user error: ', error);
   }
   return (
-    <header>
+    <header
+      sx={{
+        ...layoutStyle,
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        backgroundColor: 'navbarBackground',
+        backdropFilter: 'blur(10px)',
+      }}
+    >
       <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Heading as="h3">
+        <Heading as="h3" sx={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
             <NavLink>ZOO</NavLink>
           </Link>
