@@ -51,6 +51,7 @@ const theme: Theme = {
   colors: {
     text: '#000',
     background: '#fff',
+    navbarBackground: '#ffffff90',
     primary: '#609',
     secondary: '#306',
     muted: '#f6f6f6',
@@ -58,6 +59,7 @@ const theme: Theme = {
       dark: {
         text: '#fff',
         background: '#060606',
+        navbarBackground: '#06060690',
         primary: '#3cf',
         secondary: '#e0f',
         muted: '#191919',

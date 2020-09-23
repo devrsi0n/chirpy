@@ -2,10 +2,11 @@
 import { jsx, NavLink } from 'theme-ui';
 import * as React from 'react';
 import Link from 'next/link';
+import { layoutStyle } from './styles';
 
 export function Footer(): JSX.Element {
   return (
-    <footer sx={{ padding: '40px 0' }}>
+    <footer sx={{ ...layoutStyle, paddingTop: 5, paddingBottom: 5 }}>
       <nav
         sx={{
           display: 'flex',
