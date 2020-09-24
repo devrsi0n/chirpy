@@ -24,7 +24,7 @@ export default function Login(): JSX.Element {
         <Button variant="primary" onClick={handleClick}>
           Continue with GitHub
         </Button>
-        <Text sx={{ paddingTop: 3, paddingBottom: 3 }}>
+        <Text sx={{ paddingTop: 3, paddingBottom: 3 }} variant="secondary">
           By clicking the buttons above, you acknowledge that you have read and understood, and
           agree to ZOO's{' '}
           <Link href="/terms-of-service">
