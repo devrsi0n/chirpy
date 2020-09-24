@@ -1,4 +1,5 @@
 import { Theme } from 'theme-ui';
+import { lightColors, darkColors } from './colors';
 
 const fontBody = [
   'system-ui',
@@ -49,23 +50,22 @@ const theme: Theme = {
     heading: 1.25,
   },
   colors: {
-    text: '#000',
-    background: '#fff',
+    text: lightColors.foreground,
+    textSecondary: lightColors.accents5,
+    background: lightColors.background,
     navbarBackground: '#ffffff90',
-    primary: '#609',
-    secondary: '#306',
-    muted: '#f6f6f6',
+    primary: lightColors.success,
+    secondary: lightColors.secondary,
+    muted: lightColors.border,
     modes: {
       dark: {
-        text: '#fff',
-        background: '#060606',
+        text: darkColors.foreground,
+        textSecondary: darkColors.accents5,
+        background: darkColors.background,
         navbarBackground: '#06060690',
-        primary: '#3cf',
-        secondary: '#e0f',
-        muted: '#191919',
-        highlight: '#29112c',
-        gray: '#999',
-        purple: '#c0f',
+        primary: darkColors.success,
+        secondary: darkColors.secondary,
+        muted: lightColors.border,
       },
     },
   },
@@ -84,7 +84,6 @@ const theme: Theme = {
       },
     },
   },
-
   images: {
     avatar: {
       width: 48,
@@ -116,6 +115,9 @@ const theme: Theme = {
         padding: '1.25rem 0',
       },
     },
+    secondary: {
+      color: 'textSecondary',
+    },
   },
   links: {
     nav: {
@@ -133,8 +135,12 @@ const theme: Theme = {
     primary: {
       color: 'background',
       bg: 'primary',
+      border: '1px solid transparent',
       '&:hover': {
-        bg: 'secondary',
+        bg: 'background',
+        color: 'primary',
+        border: '1px solid',
+        borderColor: 'primary',
         cursor: 'pointer',
       },
     },
