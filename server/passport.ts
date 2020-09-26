@@ -4,9 +4,10 @@ import { Strategy as GitHubStrategy } from 'passport-github2';
 import { IncomingMessage, ServerResponse } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorHandler } from 'next-connect';
-import { AUTH_COOKIE_NAME } from './constants';
-import { createSecureToken } from './auth';
 import { serialize } from 'cookie';
+
+import { AUTH_COOKIE_NAME } from './constants';
+import { createSecureToken } from './utilities/auth';
 import { redirect } from './response';
 import { prisma } from './prisma';
 
@@ -143,7 +144,19 @@ export async function handleSuccessfulLogin(
   redirect(res, '/');
 }
 
-export const handleFailedLogin: ErrorHandler<NextApiRequest, NextApiResponse> = (err, req, res) => {
+export async function handleLogout(req: IncomingMessage, res: ServerResponse): Promise<void> {
+  const authCookie = serialize(AUTH_COOKIE_NAME, ' ', {
+    maxAge: 0,
+  });
+  res.setHeader('Set-Cookie', [authCookie]);
+  redirect(res, '/');
+}
+
+export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (
+  err,
+  req,
+  res,
+) => {
   console.error(err);
   console.error(req.query);
   console.error(req.env);

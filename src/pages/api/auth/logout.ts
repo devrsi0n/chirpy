@@ -1,16 +1,11 @@
 import connect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { handleInternalLoginFailure, passport } from '$server/passport';
+import { handleInternalLoginFailure, handleLogout } from '$server/passport';
 
 const handler = connect<NextApiRequest, NextApiResponse>({
   onError: handleInternalLoginFailure,
 });
 
-handler.use(
-  passport.initialize(),
-  passport.authenticate('google', {
-    scope: ['profile', 'email'],
-  }),
-);
+handler.use(handleLogout);
 
 export default handler;

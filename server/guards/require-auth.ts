@@ -3,7 +3,7 @@ import { AuthenticationError } from 'apollo-server-micro';
 import { IncomingMessage } from 'http';
 import { NextApiRequest } from 'next';
 import { parse } from 'cookie';
-import { parseSecureToken } from '$server/auth';
+import { parseSecureToken } from '$server/utilities/auth';
 import { ModelMember, ModelUser } from '$server/db.types';
 import { prisma } from '$server/prisma';
 
