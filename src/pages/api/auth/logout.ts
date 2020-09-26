@@ -6,6 +6,6 @@ const handler = connect<NextApiRequest, NextApiResponse>({
   onError: handleInternalLoginFailure,
 });
 
-handler.use(handleLogout);
+handler.get(handleLogout);
 
 export default handler;
