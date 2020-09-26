@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, NavLink, Flex, Avatar, Heading } from 'theme-ui';
+import { jsx, Flex, Avatar, Heading } from 'theme-ui';
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from '../components/Link';
 import { useCurrentUserQuery } from '$/generated/graphql';
 import { layoutStyle } from './styles';
 
@@ -19,33 +19,31 @@ export function Header(): JSX.Element {
         left: 0,
         backgroundColor: 'navbarBackground',
         backdropFilter: 'blur(10px)',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
       }}
     >
-      <Flex sx={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-        <Heading as="h3" sx={{ display: 'flex', alignItems: 'center' }}>
-          <Link href="/">
-            <NavLink>ZOO</NavLink>
-          </Link>
-        </Heading>
-        <nav
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            height: '100%',
-          }}
-        >
-          {data?.currentUser?.avatar ? (
-            <figure>
-              <Avatar src={data.currentUser.avatar} alt="The avatar of current user" />
-            </figure>
-          ) : (
-            <NavLink as="span">
-              <Link href="/login">Login</Link>
-            </NavLink>
-          )}
-        </nav>
-      </Flex>
+      <Heading as="h3" sx={{ display: 'flex', alignItems: 'center' }}>
+        <Link href="/">ZOO</Link>
+      </Heading>
+      <nav
+        sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          height: '100%',
+        }}
+      >
+        {data?.currentUser?.avatar ? (
+          <figure>
+            <Avatar src={data.currentUser.avatar} alt="The avatar of current user" />
+          </figure>
+        ) : (
+          <Link href="/login">Login</Link>
+        )}
+      </nav>
     </header>
   );
 }
