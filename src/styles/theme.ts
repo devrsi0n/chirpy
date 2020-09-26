@@ -34,6 +34,13 @@ const fontMonospace = [
 const theme: Theme = {
   useColorSchemeMediaQuery: true,
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
+  radii: [0, 2, 4, 8, 16],
+  shadows: {
+    s: '0 1.6px 3.6px 0 rgba(0,0,0,.132), 0 0.3px 0.9px 0 rgba(0,0,0,.108)',
+    m: '0 3.2px 7.2px 0 rgba(0,0,0,.132), 0 0.6px 1.8px 0 rgba(0,0,0,.108)',
+    l: '0 6.4px 14.4px 0 rgba(0,0,0,.132), 0 1.2px 3.6px 0 rgba(0,0,0,.108)',
+    xl: '0 25.6px 57.6px 0 rgba(0,0,0,.22), 0 4.8px 14.4px 0 rgba(0,0,0,.18)',
+  },
   fonts: {
     body: fontBody.join(', '),
     heading: `Georgia, "Palatino Linotype", "Book Antiqua", Palatino, serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'`,
@@ -57,6 +64,7 @@ const theme: Theme = {
     primary: lightColors.success,
     secondary: lightColors.secondary,
     muted: lightColors.border,
+    border: lightColors.border,
     modes: {
       dark: {
         text: darkColors.foreground,
@@ -66,6 +74,7 @@ const theme: Theme = {
         primary: darkColors.success,
         secondary: darkColors.secondary,
         muted: lightColors.border,
+        border: lightColors.border,
       },
     },
   },
@@ -86,9 +95,10 @@ const theme: Theme = {
   },
   images: {
     avatar: {
-      width: 48,
-      height: 48,
+      width: 32,
+      height: 32,
       borderRadius: 99999,
+      border: (theme: Theme): string => `1px solid ${theme.colors?.border}`,
     },
   },
   text: {
@@ -132,6 +142,14 @@ const theme: Theme = {
     },
   },
   buttons: {
+    text: {
+      bg: 'background',
+      color: 'text',
+      p: 3,
+      '&:hover': {
+        cursor: 'pointer',
+      },
+    },
     primary: {
       color: 'background',
       bg: 'primary',
@@ -153,7 +171,7 @@ const theme: Theme = {
     primary: {
       padding: 4,
       borderRadius: 4,
-      boxShadow: '0 0 8px rgba(0, 0, 0, 0.125)',
+      boxShadow: 'm',
       marginTop: 4,
       marginBottom: 4,
     },
@@ -162,6 +180,16 @@ const theme: Theme = {
       borderRadius: 2,
       border: '1px solid',
       borderColor: 'muted',
+    },
+  },
+  layout: {
+    header: {
+      borderBottom: (theme: Theme): string => `1px solid ${theme.colors?.border}`,
+      position: 'sticky',
+      top: 0,
+      left: 0,
+      backgroundColor: 'navbarBackground',
+      backdropFilter: 'blur(10px)',
     },
   },
 };
