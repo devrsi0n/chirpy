@@ -145,9 +145,13 @@ export async function handleSuccessfulLogin(
 }
 
 export async function handleLogout(req: IncomingMessage, res: ServerResponse): Promise<void> {
-  const authCookie = serialize(AUTH_COOKIE_NAME, ' ', {
-    maxAge: 0,
+  const authCookie = serialize(AUTH_COOKIE_NAME, '', {
+    path: '/',
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: -1,
   });
+  console.log(authCookie);
   res.setHeader('Set-Cookie', [authCookie]);
   redirect(res, '/');
 }
