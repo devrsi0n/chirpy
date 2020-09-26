@@ -1,7 +1,7 @@
 /** @jsx jsx */
-import { jsx, NavLink } from 'theme-ui';
+import { jsx } from 'theme-ui';
 import * as React from 'react';
-import Link from 'next/link';
+import { Link } from '../components/Link';
 import { layoutStyle } from './styles';
 
 export function Footer(): JSX.Element {
@@ -22,15 +22,9 @@ export function Footer(): JSX.Element {
           },
         }}
       >
-        <Link href="/">
-          <NavLink>&copy; 2020 ZOO</NavLink>
-        </Link>
-        <Link href="/terms-of-service">
-          <NavLink>Terms of Service</NavLink>
-        </Link>
-        <Link href="/privacy-policy">
-          <NavLink>Privacy Policy</NavLink>
-        </Link>
+        <Link href="/">&copy; 2020 ZOO</Link>
+        <Link href="/terms-of-service">Terms of Service</Link>
+        <Link href="/privacy-policy">Privacy policy</Link>
       </nav>
     </footer>
   );

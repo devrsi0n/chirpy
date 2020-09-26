@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import { Button, Card, Heading, jsx, NavLink, Text } from 'theme-ui';
+import { Button, Card, Heading, jsx, Text } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { Link } from '../components/Link';
 
 export default function Login(): JSX.Element {
   const router = useRouter();
@@ -26,15 +26,8 @@ export default function Login(): JSX.Element {
         </Button>
         <Text sx={{ paddingTop: 3, paddingBottom: 3 }} variant="secondary">
           By clicking the buttons above, you acknowledge that you have read and understood, and
-          agree to ZOO's{' '}
-          <Link href="/terms-of-service">
-            <NavLink>Terms of Service</NavLink>
-          </Link>{' '}
-          and{' '}
-          <Link href="/privacy-policy">
-            <NavLink>Privacy Policy</NavLink>
-          </Link>
-          .
+          agree to ZOO's <Link href="/terms-of-service">Terms of Service</Link> and{' '}
+          <Link href="/privacy-policy">Privacy Policy</Link>.
         </Text>
       </Card>
     </main>
