@@ -57,6 +57,7 @@ const theme: Theme = {
     heading: 1.25,
   },
   colors: {
+    ...lightColors,
     text: lightColors.foreground,
     textSecondary: lightColors.accents5,
     background: lightColors.background,
@@ -67,6 +68,7 @@ const theme: Theme = {
     border: lightColors.border,
     modes: {
       dark: {
+        ...darkColors,
         text: darkColors.foreground,
         textSecondary: darkColors.accents5,
         background: darkColors.background,
@@ -143,14 +145,18 @@ const theme: Theme = {
   },
   buttons: {
     text: {
+      borderRadius: 1,
       bg: 'background',
-      color: 'text',
+      color: 'secondary',
       p: 3,
       '&:hover': {
+        color: 'text',
+        bg: 'accents1',
         cursor: 'pointer',
       },
     },
     primary: {
+      borderRadius: 1,
       color: 'background',
       bg: 'primary',
       border: '1px solid transparent',
