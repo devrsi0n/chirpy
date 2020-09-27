@@ -144,11 +144,23 @@ const theme: Theme = {
     },
   },
   buttons: {
+    icon: {
+      p: 1,
+      bg: 'background',
+      color: 'secondary',
+      border: (theme: Theme): string => `1px solid ${theme.colors?.border}`,
+      borderRadius: 2,
+      fontSize: 1,
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
     text: {
       borderRadius: 1,
       bg: 'background',
       color: 'secondary',
-      p: 3,
+      py: 2,
+      px: 3,
       '&:hover': {
         color: 'text',
         bg: 'accents1',
