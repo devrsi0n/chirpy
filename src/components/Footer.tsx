@@ -13,7 +13,7 @@ export function Footer(): JSX.Element {
           '& > :not(:last-child)': {
             marginRight: 4,
           },
-          '@media screen and (max-width: 620px)': {
+          '@media screen and (max-width: 634px)': {
             flexDirection: 'column',
             '& > :not(:last-child)': {
               marginBottom: 4,
