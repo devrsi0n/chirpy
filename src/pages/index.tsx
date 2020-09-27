@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Heading, jsx, Text } from 'theme-ui';
+import { Button, Heading, jsx, Text } from 'theme-ui';
 import Head from 'next/head';
 
 const Home = (): JSX.Element => {
@@ -17,6 +17,7 @@ const Home = (): JSX.Element => {
         Welcome to ZOO!
       </Heading>
       <Text>ZOO is a comment service.</Text>
+      <Button>Start for free</Button>
     </>
   );
 };

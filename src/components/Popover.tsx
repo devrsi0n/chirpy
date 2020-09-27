@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { Box, jsx } from 'theme-ui';
 import * as React from 'react';
-import { darken } from '@theme-ui/color';
 
 import { useClickOutside } from '../hooks/useOutside';
 
@@ -31,26 +30,30 @@ export function Popover(props: IPopoverProps): JSX.Element {
           sx={{
             position: 'absolute',
             right: 0,
-            top: ref.current?.getBoundingClientRect().height,
+            top: ref.current?.getBoundingClientRect().height || 0 + 8,
+            boxShadow: 's',
+            borderRadius: 2,
           }}
         >
           <div
             sx={{
-              margin: '0 10px 0 auto',
-              width: 0,
-              height: 0,
-              borderLeft: `8px solid transparent`,
-              borderRight: `8px solid transparent`,
-              borderBottom: (theme) =>
-                `10px solid ${darken(theme.colors.background, 0.0175)(theme)}`,
+              position: 'absolute',
+              top: '-8px',
+              right: '8px',
+              backgroundColor: 'background',
+              boxShadow: 's',
+              boxSizing: 'border-box',
+              transform: 'rotate(45deg)',
+              height: '16px',
+              width: '16px',
             }}
           />
           <div
             sx={{
-              p: 3,
-              boxShadow: 's',
+              py: 2,
               borderRadius: 2,
               bg: 'background',
+              position: 'relative',
             }}
           >
             {props.content}
