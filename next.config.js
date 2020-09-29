@@ -1,4 +1,9 @@
-module.exports = {
+const { withPlugins } = require('next-compose-plugins');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+const customConfig = {
   webpack(config) {
     // Use ts-loader for decorators support
     for (const rule of config.module.rules) {
@@ -8,9 +13,16 @@ module.exports = {
           options: {
             transpileOnly: true,
           },
-        })
+        });
       }
     }
-    return config
+    return config;
   },
-}
+};
+
+module.exports = withPlugins(
+  [
+    [withBundleAnalyzer(customConfig)]
+  ],
+  // customConfig
+);
