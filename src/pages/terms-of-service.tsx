@@ -11,9 +11,8 @@ export default function TermsOfService(): JSX.Element {
         <title>ZOO: Terms of Service</title>
       </Head>
       <article
+        className="flex flex-col"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
           '& > *': {
             marginBottom: 4,
           },

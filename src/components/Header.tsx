@@ -23,25 +23,15 @@ export function Header(): JSX.Element {
   return (
     <Container as="header" variant="header">
       <section
+        className="flex flex-row justify-between items-center"
         sx={{
           ...layoutStyle,
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
         }}
       >
-        <Heading as="h3" sx={{ display: 'flex', alignItems: 'center' }}>
+        <Heading as="h3" className="flex items-center">
           <Link href="/">ZOO</Link>
         </Heading>
-        <nav
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            height: '100%',
-          }}
-        >
+        <nav className="flex flex-row items-center h-full">
           {data?.currentUser?.avatar ? (
             <Popover
               content={

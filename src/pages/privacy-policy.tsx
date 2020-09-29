@@ -11,9 +11,8 @@ export default function PrivacyPolicy(): JSX.Element {
         <title>ZOO: Privacy Policy</title>
       </Head>
       <article
+        className="flex flex-col"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
           '& > *': {
             marginBottom: 3,
           },
@@ -24,7 +23,8 @@ export default function PrivacyPolicy(): JSX.Element {
           <Text>
             Your privacy is important to us. As a web-based service provider, we require some
             personal information in order to provide a service to you. However, we don’t ask for
-            this information unless we truly need it. It is ZOO's policy to respect your privacy regarding any information we may collect from you across our website,{' '}
+            this information unless we truly need it. It is ZOO's policy to respect your privacy
+            regarding any information we may collect from you across our website,{' '}
             <Link href={process.env.NEXT_PUBLIC_APP_URL}>{process.env.NEXT_PUBLIC_APP_URL}</Link>.
             Personal Information We may ask you for personal information, such as:
           </Text>

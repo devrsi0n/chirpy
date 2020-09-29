@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { Button, jsx, useThemeUI } from 'theme-ui';
 import * as React from 'react';
-import { Sun, Settings, Moon } from '@geist-ui/react-icons';
+import Sun from '@geist-ui/react-icons/sun';
+import Settings from '@geist-ui/react-icons/settings';
+import Moon from '@geist-ui/react-icons/moon';
 import { Link } from '../components/Link';
 import { layoutStyle } from './styles';
 
@@ -43,14 +45,11 @@ export function Footer(): JSX.Element {
   const Icon = modeIcons[mode];
   return (
     <footer
+      className="flex flex-row justify-between items-center"
       sx={{
         ...layoutStyle,
         paddingTop: 5,
         paddingBottom: 5,
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         '@media screen and (max-width: 634px)': {
           flexDirection: 'column',
           alignItems: 'flex-start',

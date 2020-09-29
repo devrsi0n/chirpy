@@ -1,6 +1,8 @@
 /** @jsx jsx */
-import { Button, Heading, jsx, Text } from 'theme-ui';
+import { Heading, jsx, Text } from 'theme-ui';
 import Head from 'next/head';
+
+import { Button } from '$/components/Button';
 
 const Home = (): JSX.Element => {
   return (
@@ -8,12 +10,7 @@ const Home = (): JSX.Element => {
       <Head>
         <title>ZOO</title>
       </Head>
-      <Heading
-        as="h1"
-        sx={{
-          textAlign: 'center',
-        }}
-      >
+      <Heading as="h1" className="text-center text-6xl">
         Welcome to ZOO!
       </Heading>
       <Text>ZOO is a comment service.</Text>

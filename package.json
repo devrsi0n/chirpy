@@ -4,6 +4,7 @@
     "dev": "next",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
     "start": "next start",
     "with-env": "node scripts/with-env",
     "migrate:save": "node scripts/with-env prisma migrate save --experimental",
@@ -29,6 +30,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.1",
     "@geist-ui/react-icons": "^1.0.0",
+    "@next/bundle-analyzer": "^9.5.3",
     "@prisma/client": "2.7.1",
     "@theme-ui/color": "^0.3.1",
     "@theme-ui/presets": "^0.3.0",
@@ -39,6 +41,7 @@
     "graphql-tag": "^2.11.0",
     "jose": "^1.28.0",
     "next": "^9.5.3",
+    "next-compose-plugins": "^2.2.0",
     "next-connect": "^0.9.0",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.11",

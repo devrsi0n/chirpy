@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Box, jsx } from 'theme-ui';
+import { jsx } from 'theme-ui';
 import * as React from 'react';
 
 import { useClickOutside } from '../hooks/useOutside';
@@ -10,56 +10,46 @@ interface IPopoverProps {
 }
 
 export function Popover(props: IPopoverProps): JSX.Element {
-  const ref: React.RefObject<HTMLDivElement> = React.useRef(null);
+  const ref: React.RefObject<HTMLButtonElement> = React.useRef(null);
   const [hidePopup, setHidePopup] = React.useState(false);
   useClickOutside(ref, setHidePopup);
-  const handleClick = React.useCallback(() => {
-    setHidePopup(false);
-  }, []);
+  const handleClick = React.useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      setHidePopup(false);
+      event.preventDefault();
+    },
+    [],
+  );
   return (
-    <Box
-      ref={ref}
-      onClick={handleClick}
-      sx={{
-        position: 'relative',
-      }}
-    >
+    <button ref={ref} onClick={handleClick} className="relative focus:outline-none">
       {props.children}
       {!hidePopup && (
         <div
+          className="absolute right-0 rounded-sm"
           sx={{
-            position: 'absolute',
-            right: 0,
-            top: ref.current?.getBoundingClientRect().height || 0 + 8,
+            top: (ref.current?.getBoundingClientRect().height || 0) + 8,
             boxShadow: 's',
-            borderRadius: 2,
           }}
         >
           <div
+            className="absolute h-4 w-4 transform rotate-45"
             sx={{
-              position: 'absolute',
               top: '-8px',
               right: '8px',
               backgroundColor: 'background',
               boxShadow: 's',
-              boxSizing: 'border-box',
-              transform: 'rotate(45deg)',
-              height: '16px',
-              width: '16px',
             }}
           />
           <div
+            className="relative py-2 rounded-sm"
             sx={{
-              py: 2,
-              borderRadius: 2,
               bg: 'background',
-              position: 'relative',
             }}
           >
             {props.content}
           </div>
         </div>
       )}
-    </Box>
+    </button>
   );
 }
