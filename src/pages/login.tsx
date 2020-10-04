@@ -1,9 +1,11 @@
-/** @jsx jsx */
-import { Button, Card, Heading, jsx, Text } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Link } from '../components/Link';
+import { Link } from '$/components/Link';
+import { Button } from '$/components/Button';
+import { Text } from '$/components/Text';
+import { Heading } from '$/components/Heading';
+import { Card } from '$/components/Card';
 
 export default function Login(): JSX.Element {
   const router = useRouter();
@@ -19,12 +21,12 @@ export default function Login(): JSX.Element {
       <Head>
         <title>ZOO: login</title>
       </Head>
-      <Card sx={{ width: 'max-content', maxWidth: '70%' }}>
+      <Card className="py-5 max-w-screen-md">
         <Heading as="h2">Log in</Heading>
         <Button variant="primary" onClick={handleClick}>
           Continue with GitHub
         </Button>
-        <Text sx={{ paddingTop: 3, paddingBottom: 3 }} variant="secondary">
+        <Text className="py-3" variant="secondary">
           By clicking the buttons above, you acknowledge that you have read and understood, and
           agree to ZOO's <Link href="/terms-of-service">Terms of Service</Link> and{' '}
           <Link href="/privacy-policy">Privacy Policy</Link>.

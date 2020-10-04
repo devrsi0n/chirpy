@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import { jsx, Heading, Text } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
 import { Link } from '$/components/Link';
+import { Heading } from '$/components/Heading';
+import { Text } from '$/components/Text';
 
 export default function TermsOfService(): JSX.Element {
   return (
@@ -10,15 +10,10 @@ export default function TermsOfService(): JSX.Element {
       <Head>
         <title>ZOO: Terms of Service</title>
       </Head>
-      <article
-        className="flex flex-col"
-        sx={{
-          '& > *': {
-            marginBottom: 4,
-          },
-        }}
-      >
-        <Heading as="h1">Terms of Service</Heading>
+      <article className="flex flex-col pb-12 article">
+        <Heading as="h1" className="pb-6">
+          Terms of Service
+        </Heading>
         <div>
           <Heading as="h2">1. Terms</Heading>
           <Text>
@@ -125,6 +120,13 @@ export default function TermsOfService(): JSX.Element {
           </Text>
         </div>
       </article>
+      <style jsx>
+        {`
+          .article > * {
+            margin-bottom: theme('padding.8');
+          }
+        `}
+      </style>
     </section>
   );
 }

@@ -5,16 +5,18 @@ module.exports = {
   theme: {
     colors: {
       ...defaultTheme.colors,
-      primary: defaultTheme.colors.blue[500],
-      secondary: defaultTheme.colors.purple[400],
+      'primary-light': 'var(--colors-primary-light)',
+      primary: 'var(--colors-primary)',
+      'primary-dark': 'var(--colors-primary-dark)',
+      'text-light': 'var(--colors-text-light)',
+      text: 'var(--colors-text)',
+      'text-dark': 'var(--colors-text-dark)',
+      background: 'var(--colors-background)',
     },
-    backgroundColor: (theme) => ({
-      primary: theme('colors.blue.500'),
-      secondary: theme('colors.purple.400'),
-    }),
   },
   variants: {
     outline: ['responsive', 'hover', 'focus'],
+    backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
   },
   plugins: [],
   corePlugins: {

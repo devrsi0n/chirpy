@@ -1,4 +1,3 @@
-import { Theme } from 'theme-ui';
 import { lightColors, darkColors } from './colors';
 
 const fontBody = [
@@ -198,16 +197,6 @@ const theme: Theme = {
       borderRadius: 2,
       border: '1px solid',
       borderColor: 'muted',
-    },
-  },
-  layout: {
-    header: {
-      borderBottom: (theme: Theme): string => `1px solid ${theme.colors?.border}`,
-      position: 'sticky',
-      top: 0,
-      left: 0,
-      backgroundColor: 'navbarBackground',
-      backdropFilter: 'blur(10px)',
     },
   },
 };

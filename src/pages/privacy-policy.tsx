@@ -1,8 +1,8 @@
-/** @jsx jsx */
-import { Box, Heading, Text, jsx } from 'theme-ui';
 import * as React from 'react';
 import Head from 'next/head';
 import { Link } from '$/components/Link';
+import { Heading } from '$/components/Heading';
+import { Text } from '$/components/Text';
 
 export default function PrivacyPolicy(): JSX.Element {
   return (
@@ -10,16 +10,11 @@ export default function PrivacyPolicy(): JSX.Element {
       <Head>
         <title>ZOO: Privacy Policy</title>
       </Head>
-      <article
-        className="flex flex-col"
-        sx={{
-          '& > *': {
-            marginBottom: 3,
-          },
-        }}
-      >
-        <Heading as="h1">Privacy Policy</Heading>
-        <Box>
+      <article className="flex flex-col pb-12 article">
+        <Heading as="h1" className="pb-6">
+          Privacy Policy
+        </Heading>
+        <div>
           <Text>
             Your privacy is important to us. As a web-based service provider, we require some
             personal information in order to provide a service to you. However, we don’t ask for
@@ -66,8 +61,8 @@ export default function PrivacyPolicy(): JSX.Element {
             We will only retain personal information for as long as necessary to provide you with a
             service.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">Business Data</Heading>
           <Text>
             Our respect for your privacy extends to the data you input into our website over the
@@ -77,8 +72,8 @@ export default function PrivacyPolicy(): JSX.Element {
             business, marketing or public relations purposes. We will only retain your data for as
             long as necessary to provide you with a service.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">Cookies</Heading>
           <Text>
             We use “cookies” to collect information about you and your activity across our site. A
@@ -94,8 +89,8 @@ export default function PrivacyPolicy(): JSX.Element {
             cookies between your computer and our website; it does not cover the use of cookies by
             any advertisers. For more details, please refer to our Cookie Policy.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">Third-Party Services</Heading>
           <Text>We employ third-party services for our:</Text>
           <ul>
@@ -111,8 +106,8 @@ export default function PrivacyPolicy(): JSX.Element {
             you. We review the privacy policies of all our third-party providers before enlisting
             their services to ensure their practices align with ours.
           </Text>
-        </Box>
-        <Box>
+        </div>
+        <div>
           <Heading as="h2">Security</Heading>
           <Text>
             We take security seriously, and do what we can within commercially acceptable means to
@@ -121,8 +116,15 @@ export default function PrivacyPolicy(): JSX.Element {
             electronic transmission or storage is 100% secure, and cannot guarantee the absolute
             security of your data.
           </Text>
-        </Box>
+        </div>
       </article>
+      <style jsx>
+        {`
+          .article > * {
+            margin-bottom: theme('padding.10');
+          }
+        `}
+      </style>
     </section>
   );
 }

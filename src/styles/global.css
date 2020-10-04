@@ -7,3 +7,27 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* .dark-mode {
+  --colors-primary: theme('colors.indigo.500');
+  --colors-primary-light: theme('colors.indigo.400');
+  --colors-primary-dark: theme('colors.indigo.600');
+
+  --colors-text: theme('colors.gray.700');
+  --colors-text-light: theme('colors.gray.500');
+  --colors-text-dark: theme('colors.gray.900');
+
+  --colors-background: theme('colors.white');
+}
+
+.light-mode {
+  --colors-primary: theme('colors.indigo.500');
+  --colors-primary-light: theme('colors.indigo.400');
+  --colors-primary-dark: theme('colors.indigo.600');
+
+  --colors-text: theme('colors.gray.300');
+  --colors-text-light: theme('colors.gray.500');
+  --colors-text-dark: theme('colors.gray.100');
+
+  --colors-background: theme('colors.black');
+} */

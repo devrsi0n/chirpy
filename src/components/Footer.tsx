@@ -1,87 +1,49 @@
-/** @jsx jsx */
-import { Button, jsx, useThemeUI } from 'theme-ui';
 import * as React from 'react';
-import Sun from '@geist-ui/react-icons/sun';
-import Settings from '@geist-ui/react-icons/settings';
-import Moon from '@geist-ui/react-icons/moon';
+
+import { SunIcon } from './Sun.Icon';
+import { SettingIcon } from './Setting.Icon';
+import { MoonIcon } from './Moon.Icon';
+import { Button } from '$/components/Button';
 import { Link } from '../components/Link';
 import { layoutStyle } from './styles';
+import { useTheme } from '$/hooks/useTheme';
+import { ColorMode } from '../types/theme.type';
 
-const modeIcons = {
-  System: Settings,
-  Light: Sun,
-  Dark: Moon,
+const modeIcons: Record<ColorMode, React.FunctionComponent<{ size?: number }>> = {
+  System: SettingIcon,
+  Light: SunIcon,
+  Dark: MoonIcon,
 };
 
 export function Footer(): JSX.Element {
-  const [mode, setMode] = React.useState<'System' | 'Light' | 'Dark'>('System');
-  const { setColorMode } = useThemeUI();
+  const { colorMode, setColorMode } = useTheme();
   const handleClick = React.useCallback(() => {
-    if (mode === 'System') {
-      setMode('Dark');
-      setColorMode('dark');
-    } else if (mode === 'Dark') {
-      setMode('Light');
-      setColorMode('default');
-    } else if (mode === 'Light') {
-      setMode('System');
+    if (colorMode === 'System') {
+      setColorMode('Dark');
+    } else if (colorMode === 'Dark') {
+      setColorMode('Light');
+    } else if (colorMode === 'Light') {
+      setColorMode('System');
     }
-  }, [mode, setColorMode]);
-  React.useEffect(() => {
-    if (mode !== 'System') {
-      return;
-    }
-    const switchMode = (e: MediaQueryListEvent) => {
-      const isDarkMode = e.matches;
-      console.log(e);
-      isDarkMode ? setColorMode('dark') : setColorMode('light');
-    };
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    darkModeMediaQuery.addEventListener('change', switchMode);
-    // cleanup on unmount
-    return () => darkModeMediaQuery.removeEventListener('change', switchMode);
-  }, [setColorMode, mode]);
+  }, [colorMode, setColorMode]);
 
-  const Icon = modeIcons[mode];
+  const Icon = modeIcons[colorMode];
   return (
-    <footer
-      className="flex flex-row justify-between items-center"
-      sx={{
-        ...layoutStyle,
-        paddingTop: 5,
-        paddingBottom: 5,
-        '@media screen and (max-width: 634px)': {
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          '& > :not(:last-child)': {
-            marginBottom: 4,
-          },
-        },
-      }}
-    >
-      <nav
-        sx={{
-          display: 'flex',
-          '& > :not(:last-child)': {
-            marginRight: 4,
-          },
-          '@media screen and (max-width: 634px)': {
-            flexDirection: 'column',
-            '& > :not(:last-child)': {
-              marginBottom: 4,
-              marginRight: 0,
-            },
-          },
-        }}
-      >
-        <Link href="/">&copy; 2020 ZOO</Link>
-        <Link href="/terms-of-service">Terms of Service</Link>
+    <footer className="flex flex-col items-start sm:items-center sm:flex-row justify-between my-10 py-10 border-t border-gray-300 layout footer">
+      <nav className="flex flex-col mb-8 sm:mb-0 sm:flex-row">
+        <Link href="/" className="mb-6 mr-0 sm:mr-8 sm:mb-0">
+          &copy; 2020 ZOO
+        </Link>
+        <Link href="/terms-of-service" className="mb-6 mr-0 sm:mr-8 sm:mb-0">
+          Terms of Service
+        </Link>
         <Link href="/privacy-policy">Privacy policy</Link>
       </nav>
-      <Button variant="icon" onClick={handleClick} sx={{ width: '76px' }}>
-        <Icon sx={{ pr: 1 }} size={18} />
-        {mode}
+      <Button variant="text" className="" onClick={handleClick}>
+        <Icon size={18} />
+        <span>{colorMode}</span>
       </Button>
+      <style jsx>{layoutStyle}</style>
     </footer>
   );
 }
