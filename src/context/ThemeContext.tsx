@@ -4,7 +4,7 @@ import { ColorMode } from '../types/theme.type';
 
 export const ThemeContext = React.createContext<ThemeContextType>({
   isDarkMode: false,
-  colorMode: 'System',
+  colorMode: 'system',
   setColorMode: (colorMode: ColorMode) => {
     console.error(`Shouldn't exist setColorMode function`);
   },

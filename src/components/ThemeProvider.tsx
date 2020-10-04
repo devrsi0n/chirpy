@@ -15,16 +15,16 @@ export type ThemeProviderProps = {
 };
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const [colorMode, setColorMode] = React.useState<ColorMode>('Light');
-  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(colorMode === 'Dark');
+  const [colorMode, setColorMode] = React.useState<ColorMode>('light');
+  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(colorMode === 'dark');
   const contextValue = React.useMemo<ThemeContextType>(
     () => ({
       isDarkMode,
       colorMode,
       setColorMode: (value: ColorMode) => {
-        if (value === 'Dark') {
+        if (value === 'dark') {
           setIsDarkMode(true);
-        } else if (value === 'Light') {
+        } else if (value === 'light') {
           setIsDarkMode(false);
         }
         saveThemeColorMode(value);
@@ -41,16 +41,16 @@ export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
   React.useEffect(() => {
     const mode = getThemeColorMode(true);
     setColorMode(mode);
-    if (mode === 'Dark') {
+    if (mode === 'dark') {
       setIsDarkMode(true);
-    } else if (mode === 'Light') {
+    } else if (mode === 'light') {
       setIsDarkMode(false);
     }
   }, []);
 
-  // Listen to theme change when color mode is 'System'
+  // Listen to theme change when color mode is 'system'
   React.useEffect(() => {
-    if (colorMode !== 'System') {
+    if (colorMode !== 'system') {
       return;
     }
     const switchMode = (e: MediaQueryListEvent) => {
