@@ -1,21 +1,21 @@
-/** @jsx jsx */
-import { Heading, jsx, Text } from 'theme-ui';
 import Head from 'next/head';
 
+import { Heading } from '$/components/Heading';
 import { Button } from '$/components/Button';
+import { Text } from '$/components/Text';
 
 const Home = (): JSX.Element => {
   return (
-    <>
+    <main>
       <Head>
         <title>ZOO</title>
       </Head>
-      <Heading as="h1" className="text-center text-6xl">
+      <Heading as="h1" className="text-center">
         Welcome to ZOO!
       </Heading>
-      <Text>ZOO is a comment service.</Text>
+      <Text className="py-6">ZOO is a comment service.</Text>
       <Button>Start for free</Button>
-    </>
+    </main>
   );
 };
 

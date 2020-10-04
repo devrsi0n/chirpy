@@ -1,11 +1,14 @@
-import { SxStyleProp } from 'theme-ui';
+import css from 'styled-jsx/css';
 
-export const layoutStyle: SxStyleProp = {
-  width: 'clamp(280px, 70%, 1080px)',
-  margin: '0 auto',
-  paddingLeft: 4,
-  paddingRight: 4,
-  '@media screen and (max-width: 540px)': {
-    width: '100%',
-  },
-};
+export const layoutStyle = css`
+  .layout {
+    width: clamp(540px, 70%, 1080px);
+  }
+  @media screen and (max-width: 540px) {
+    .layout {
+      width: 100%;
+      padding-left: theme('padding.4');
+      padding-right: theme('spacing.4');
+    }
+  }
+`;

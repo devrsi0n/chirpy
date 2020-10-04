@@ -1,9 +1,7 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
 import * as React from 'react';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Variant = 'primary' | 'secondary';
+type Variant = 'primary' | 'secondary' | 'text';
 
 export interface IButtonProps extends React.ComponentProps<'button'> {
   children: React.ReactNode;
@@ -20,17 +18,26 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'bg-primary text-white',
+  primary: 'bg-primary text-white border border-primary hover:bg-white hover:text-primary',
   secondary: 'bg-secondary text-white',
+  text: 'text-gray-600 border-none hover:text-gray-900',
 };
 
 export function Button(props: IButtonProps): JSX.Element {
-  const { variant = 'primary', disabled = false, size = 'md', children } = props;
+  const {
+    variant = 'primary',
+    disabled = false,
+    size = 'md',
+    children,
+    className = '',
+    ...restProps
+  } = props;
   return (
     <button
-      className={`${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} ${sizeStyles[size]} ${
-        variantStyles[variant]
-      }`}
+      {...restProps}
+      className={`inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out ${
+        disabled ? 'cursor-not-allowed' : 'cursor-pointer'
+      } ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
     >
       {children}
     </button>

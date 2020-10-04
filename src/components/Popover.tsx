@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
 import * as React from 'react';
 
 import { useClickOutside } from '../hooks/useOutside';
@@ -25,29 +23,19 @@ export function Popover(props: IPopoverProps): JSX.Element {
       {props.children}
       {!hidePopup && (
         <div
-          className="absolute right-0 rounded-sm"
-          sx={{
+          className="absolute right-0 rounded-sm shadow"
+          style={{
             top: (ref.current?.getBoundingClientRect().height || 0) + 8,
-            boxShadow: 's',
           }}
         >
           <div
-            className="absolute h-4 w-4 transform rotate-45"
-            sx={{
+            className="absolute h-4 w-4 transform rotate-45 shadow bg-background"
+            style={{
               top: '-8px',
               right: '8px',
-              backgroundColor: 'background',
-              boxShadow: 's',
             }}
           />
-          <div
-            className="relative py-2 rounded-sm"
-            sx={{
-              bg: 'background',
-            }}
-          >
-            {props.content}
-          </div>
+          <div className="relative py-2 rounded-sm bg-background">{props.content}</div>
         </div>
       )}
     </button>
