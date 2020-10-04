@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Link } from '$/components/Link';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
+import { List } from '$/components/List';
 
 export default function PrivacyPolicy(): JSX.Element {
   return (
@@ -23,15 +24,15 @@ export default function PrivacyPolicy(): JSX.Element {
             <Link href={process.env.NEXT_PUBLIC_APP_URL}>{process.env.NEXT_PUBLIC_APP_URL}</Link>.
             Personal Information We may ask you for personal information, such as:
           </Text>
-          <ul>
+          <List variant="unordered">
             <li>Your name</li>
             <li>Email address</li>
             <li>Contact details</li>
             <li>Company details</li>
             <li>Payment details</li>
-          </ul>
+          </List>
           <Text>This information is used for the purposes of:</Text>
-          <ul>
+          <List variant="unordered">
             <li>providing you with products and services</li>
             <li>providing you with information about our products and services</li>
             <li>
@@ -43,7 +44,7 @@ export default function PrivacyPolicy(): JSX.Element {
             <li>granting you access to your account with us</li>
             <li>investigating any enquiries or complaints submitted by or about you</li>
             <li>complying with regulatory or legal obligations</li>
-          </ul>
+          </List>
           <Text>
             You are free to refuse our request for your personal information, with the understanding
             that we may be unable to provide you with some of your desired services. We do not share
@@ -93,12 +94,12 @@ export default function PrivacyPolicy(): JSX.Element {
         <div>
           <Heading as="h2">Third-Party Services</Heading>
           <Text>We employ third-party services for our:</Text>
-          <ul>
+          <List variant="unordered">
             <li>Payment processing (checkout)</li>
             <li>Email (customer support)</li>
             <li>Customer relationship management</li>
             <li>Advertising and remarketing</li>
-          </ul>
+          </List>
           <br />
           <Text>
             These third parties have access to selected personal information only to perform

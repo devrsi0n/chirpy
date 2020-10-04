@@ -11,4 +11,4 @@ export interface ITheme {
   dark: Colors;
 }
 
-export type ColorMode = 'Dark' | 'Light' | 'System';
+export type ColorMode = 'dark' | 'light' | 'system';

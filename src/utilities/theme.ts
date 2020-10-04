@@ -6,13 +6,13 @@ const THEME_KEY = 'ThemeColorMode';
 
 export function getThemeColorMode(isOnMount: boolean): ColorMode {
   const savedMode: ColorMode = localStorage?.getItem(THEME_KEY) as ColorMode;
-  if (['Dark', 'Light', 'System'].includes(savedMode)) {
+  if (['dark', 'light', 'system'].includes(savedMode)) {
     return savedMode;
   }
   if (isOnMount) {
-    return 'System';
+    return 'system';
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'Dark' : 'Light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 export function saveThemeColorMode(mode: ColorMode): void {

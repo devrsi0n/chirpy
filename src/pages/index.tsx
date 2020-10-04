@@ -14,7 +14,7 @@ const Home = (): JSX.Element => {
         Welcome to ZOO!
       </Heading>
       <Text className="py-6">ZOO is a comment service.</Text>
-      <Button>Start for free</Button>
+      <Button shadow>Start for free</Button>
     </main>
   );
 };

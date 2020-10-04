@@ -23,7 +23,11 @@ export function Avatar({
   ...imgProps
 }: AvatarProps): JSX.Element {
   return (
-    <img {...imgProps} alt={alt} className={`rounded-full ${sizeStyles[size]} ${className}`}>
+    <img
+      {...imgProps}
+      alt={alt}
+      className={`flex items-center justify-center rounded-full ${sizeStyles[size]} ${className}`}
+    >
       {children}
     </img>
   );

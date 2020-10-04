@@ -20,13 +20,13 @@ export function Header(): JSX.Element {
     [router],
   );
   if (error) {
-    console.error('Ger current user error: ', error);
+    console.error('Get current user error: ', error);
   }
   return (
-    <header className="sticky top-0 left-0 header w-full border-b border-gray-300">
+    <header className="sticky top-0 left-0 header w-full border-b border-divider">
       <div className="layout mx-auto">
         <section className="flex flex-row justify-between items-center">
-          <Heading as="h3" className="flex items-center">
+          <Heading as="h3" className="flex items-center font-bold">
             <Link href="/">ZOO</Link>
           </Heading>
           <nav className="flex flex-row items-center h-full">
