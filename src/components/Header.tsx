@@ -12,13 +12,9 @@ import { layoutStyle } from './styles';
 export function Header(): JSX.Element {
   const { data, error } = useCurrentUserQuery();
   const router = useRouter();
-  const handleClick = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      router.push('/api/auth/logout');
-    },
-    [router],
-  );
+  const handleClick = React.useCallback(() => {
+    router.push('/api/auth/logout');
+  }, [router]);
   if (error) {
     console.error('Get current user error: ', error);
   }
