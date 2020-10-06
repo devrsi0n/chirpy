@@ -15,6 +15,7 @@ export interface IButtonProps extends React.ComponentProps<'button'> {
   size?: Size;
   icon?: Icon;
   shadow?: boolean;
+  onClick?: () => void;
 }
 
 const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
@@ -43,9 +44,9 @@ export function Button(props: IButtonProps): JSX.Element {
     size = 'md',
     className = '',
     icon,
+    shadow = false,
     onMouseDown,
     onClick,
-    shadow = false,
     children,
     ...restProps
   } = props;
@@ -53,20 +54,20 @@ export function Button(props: IButtonProps): JSX.Element {
   const [dripShow, setDripShow] = React.useState<boolean>(false);
   const [dripX, setDripX] = React.useState<number>(0);
   const [dripY, setDripY] = React.useState<number>(0);
-  const onDripCompleted = () => {
+  const onDripCompleted = React.useCallback(() => {
     setDripShow(false);
     setDripX(0);
     setDripY(0);
-    onClick?.({} as any);
-  };
-  const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onClick?.();
+  }, [onClick]);
+  const clickHandler = React.useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       setDripShow(true);
       setDripX(event.clientX - rect.left);
       setDripY(event.clientY - rect.top);
     }
-  };
+  }, []);
   const handleMouseDown = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       // Prevent mouse click styles(e.g. outline)
@@ -118,7 +119,13 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 
   return (
     <div ref={dripRef} className="absolute left-0 right-0 top-0 bottom-0">
-      <svg width="20" height="20" viewBox="0 0 20 20" style={{ top, left }}>
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        style={{ top, left }}
+        className="absolute w-4 h-4"
+      >
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g>
             <rect width="100%" height="100%" rx="10" />
@@ -128,11 +135,8 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 
       <style jsx>{`
         svg {
-          position: absolute;
           animation: 250ms ease-in expand;
           animation-fill-mode: forwards;
-          width: 1rem;
-          height: 1rem;
         }
         svg > g > g {
           fill: theme('colors.gray.100');

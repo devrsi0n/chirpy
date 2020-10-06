@@ -20,7 +20,7 @@ export function Link(props: LinkProps): JSX.Element {
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch, className }}>
       <a
         {...restProps}
-        className={`text-primary hover:text-gray-700 transition duration-150 ease-in-out ${className}`}
+        className={`text-primary hover:text-text transition duration-150 ease-in-out ${className}`}
       >
         {children}
       </a>
