@@ -9,7 +9,7 @@ export function requireTeamAccess(
 ): void {
   const member = user.members.find((member) => member.teamId === team.id);
 
-  if (level === 'admin' && (!member || !member.isAdmin)) {
+  if (level === 'admin' && (!member || member.role !== 'ADMIN')) {
     throw new ApolloError(`Require admin permission to access this team`);
   }
 

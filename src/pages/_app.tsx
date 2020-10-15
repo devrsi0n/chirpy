@@ -5,6 +5,7 @@ import { ThemeProvider } from '$/components/ThemeProvider';
 import { useApollo } from '$/lib/apollo-client';
 import { Layout } from '$/components/Layout';
 import { colorModes } from '$/styles/colors';
+import { CurrentUserProvider } from '$/components/CurrentUserProvider';
 
 interface IAppProps {
   Component: React.ComponentType;
@@ -16,9 +17,11 @@ function App({ Component, pageProps }: IAppProps): JSX.Element {
   return (
     <ThemeProvider colorModes={colorModes}>
       <ApolloProvider client={apollo}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <CurrentUserProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </CurrentUserProvider>
       </ApolloProvider>
     </ThemeProvider>
   );

@@ -7,3 +7,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+@layer base {
+  input:focus {
+    outline: none;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+  }
+}

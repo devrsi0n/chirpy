@@ -26,7 +26,7 @@ export function Footer(): JSX.Element {
 
   const icon = icons[colorMode];
   return (
-    <footer className="flex flex-col items-start sm:items-center sm:flex-row justify-between my-10 py-10 border-t border-divider layout footer">
+    <footer className="flex flex-col items-start sm:items-center sm:flex-row justify-between my-10 py-10 border-t border-divider layout footer transition duration-150">
       <nav className="flex flex-col mb-8 sm:mb-0 sm:flex-row">
         <Link href="/" className="mb-6 mr-0 sm:mr-8 sm:mb-0">
           &copy; 2020 ZOO
@@ -36,12 +36,7 @@ export function Footer(): JSX.Element {
         </Link>
         <Link href="/privacy-policy">Privacy policy</Link>
       </nav>
-      <Button
-        variant="text"
-        className="capitalize text-text-secondary"
-        onClick={handleClick}
-        icon={icon}
-      >
+      <Button variant="text" className="capitalize" onClick={handleClick} icon={icon}>
         {colorMode}
       </Button>
       <style jsx>{layoutStyle}</style>

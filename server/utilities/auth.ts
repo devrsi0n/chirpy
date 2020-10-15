@@ -1,4 +1,9 @@
+import { AUTH_COOKIE_NAME } from '$server/constants';
+import { AuthenticationError } from 'apollo-server-micro';
+import { parse } from 'cookie';
+import { IncomingMessage } from 'http';
 import { JWT, JWE, JWK } from 'jose';
+import { NextApiRequest } from 'next';
 
 export type AuthUser = {
   userId: string;
@@ -27,4 +32,19 @@ export function parseSecureToken(token: string): AuthUser | null {
     console.error('auth error: ', error);
     return null;
   }
+}
+
+export function getUserId(req: NextApiRequest | IncomingMessage): string {
+  const token = parse(req.headers.cookie || '')[AUTH_COOKIE_NAME];
+  if (!token) {
+    throw new AuthenticationError(`Authentication Error`);
+  }
+
+  const authUser = parseSecureToken(token);
+
+  if (!authUser) {
+    throw new AuthenticationError(`Authentication Error`);
+  }
+
+  return authUser.userId;
 }

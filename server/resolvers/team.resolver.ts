@@ -1,6 +1,6 @@
 import { GqlContext } from '$server/decorators/gql-context';
 import type { TGqlContext } from '$server/decorators/gql-context';
-import { Team } from '$server/graphql.types';
+import { Team } from '$server/type-graphql';
 import { requireAuth } from '$server/guards/require-auth';
 import { requireUserAccess } from '$server/guards/require-user-access';
 import { prisma } from '$server/prisma';
@@ -15,14 +15,14 @@ class TeamsArgs {
 @Resolver((of) => Team)
 export class TeamResolver {
   @Query((returns) => [Team])
-  async teams(@GqlContext() ctx: TGqlContext, @Args() args: TeamsArgs): Promise<Team[]> {
+  async currentTeams(@GqlContext() ctx: TGqlContext, @Args() args: TeamsArgs): Promise<Team[]> {
     const user = await requireAuth(ctx.req);
     // View teams for current user if `user_id` is not specified
     const userId = args.user_id || user.id;
     // Check if current user can view teams of this user
     requireUserAccess(user, userId);
     // Get teams for this user
-    const teams = await prisma.team.findMany({
+    const teams: Team[] = await prisma.team.findMany({
       where: {
         members: {
           some: {
@@ -32,29 +32,45 @@ export class TeamResolver {
           },
         },
       },
+      include: {
+        members: {
+          include: {
+            user: true,
+            team: true,
+          },
+        },
+      },
       orderBy: {
         createdAt: 'desc',
       },
     });
     // Create a default team for this user if they don't have one
-    if (teams.length === 0) {
-      const team = await prisma.team.create({
-        data: {
-          name: `Personal Team`,
-          members: {
-            create: {
-              isAdmin: true,
-              user: {
-                connect: {
-                  id: userId,
-                },
-              },
-            },
-          },
-        },
-      });
-      teams.push(team);
-    }
+    // if (teams.length === 0) {
+    //   const team = await prisma.team.create({
+    //     data: {
+    //       name: `Your Team`,
+    //       members: {
+    //         create: {
+    //           role: 'ADMIN' as Role,
+    //           user: {
+    //             connect: {
+    //               id: userId,
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //     include: {
+    //       members: {
+    //         include: {
+    //           user: true,
+    //           team: true,
+    //         },
+    //       },
+    //     },
+    //   });
+    //   teams.push(team as unknown as GqlTeam);
+    // }
     return teams;
   }
 }

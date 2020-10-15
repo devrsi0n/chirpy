@@ -2,8 +2,9 @@ import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiHandler } from 'next';
 import { buildSchema } from 'type-graphql';
+import { prisma } from '$server/prisma';
 import { UserResolver } from '$server/resolvers/user.resolver';
-import { TeamResolver } from '$server/resolvers/team.resolver';
+import { ProjectResolver } from '$server/resolvers/project.resolver';
 
 export const config = {
   api: {
@@ -21,7 +22,7 @@ const apiHandler: NextApiHandler = async (req, res) => {
   }
 
   const schema = await buildSchema({
-    resolvers: [UserResolver, TeamResolver],
+    resolvers: [UserResolver, ProjectResolver],
   });
 
   const apolloServer = new ApolloServer({
@@ -33,7 +34,11 @@ const apiHandler: NextApiHandler = async (req, res) => {
         req,
         res,
         user: req.user,
+        prisma,
       };
+    },
+    cacheControl: {
+      defaultMaxAge: isProd ? 10 : 0,
     },
   });
 
