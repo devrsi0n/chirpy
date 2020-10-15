@@ -1,32 +1,34 @@
-import { AUTH_COOKIE_NAME } from '$server/constants';
 import { AuthenticationError } from 'apollo-server-micro';
 import { IncomingMessage } from 'http';
 import { NextApiRequest } from 'next';
-import { parse } from 'cookie';
-import { parseSecureToken } from '$server/utilities/auth';
-import { ModelMember, ModelUser } from '$server/db.types';
+
+import { getUserId } from '$server/utilities/auth';
 import { prisma } from '$server/prisma';
+import { User, Member, Team, Project } from '@prisma/client';
 
-export type ModelUserWithMembers = ModelUser & { members: ModelMember[] };
+export type AllUserData = User & {
+  members: (Member & {
+    team: Team & {
+      project: Project[];
+    };
+  })[];
+};
 
-export async function requireAuth(
-  req: NextApiRequest | IncomingMessage,
-): Promise<ModelUserWithMembers> {
-  const token = parse(req.headers.cookie || '')[AUTH_COOKIE_NAME];
-  if (!token) {
-    throw new AuthenticationError(`Authentication Error`);
-  }
-
-  const authUser = parseSecureToken(token);
-
-  if (!authUser) {
-    throw new AuthenticationError(`Authentication Error`);
-  }
+export async function requireAuth(req: NextApiRequest | IncomingMessage): Promise<AllUserData> {
+  const userId = getUserId(req);
 
   const user = await prisma.user.findOne({
-    where: { id: authUser.userId },
+    where: { id: userId },
     include: {
-      members: true,
+      members: {
+        include: {
+          team: {
+            include: {
+              project: true,
+            },
+          },
+        },
+      },
     },
   });
   if (!user) {

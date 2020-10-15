@@ -9,13 +9,9 @@ import { Card } from '$/components/Card';
 
 export default function Login(): JSX.Element {
   const router = useRouter();
-  const handleClick = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      e.preventDefault();
-      router.push('/api/auth/github');
-    },
-    [router],
-  );
+  const handleClick = React.useCallback(() => {
+    router.push('/api/auth/github');
+  }, [router]);
   return (
     <main>
       <Head>

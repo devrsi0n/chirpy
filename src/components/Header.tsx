@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Button } from '$/components/Button';
 import { Link } from '../components/Link';
-import { useCurrentUserQuery } from '$/generated/graphql';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Popover } from './Popover';
 import { useRouter } from 'next/router';
 import { Heading } from './Heading';
@@ -10,7 +10,7 @@ import { Avatar } from './Avatar';
 import { layoutStyle } from './styles';
 
 export function Header(): JSX.Element {
-  const { data, error } = useCurrentUserQuery();
+  const { data, error } = useCurrentUser();
   const router = useRouter();
   const handleClick = React.useCallback(() => {
     router.push('/api/auth/logout');
@@ -19,7 +19,7 @@ export function Header(): JSX.Element {
     console.error('Get current user error: ', error);
   }
   return (
-    <header className="sticky top-0 left-0 header w-full border-b border-divider">
+    <header className="sm:sticky sm:top-0 sm:left-0 header w-full border-b border-divider transition duration-150 sm:z-20">
       <div className="layout mx-auto">
         <section className="flex flex-row justify-between items-center">
           <Heading as="h3" className="flex items-center font-bold">

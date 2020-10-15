@@ -106,6 +106,7 @@ async function getUserByProviderProfile(profile: Profile, provider: 'github' | '
         name: profile.displayName || (profile.username as string),
         [providerKey]: profile.id,
         avatar,
+        type: 'FREE',
       },
     });
   }

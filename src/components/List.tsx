@@ -24,3 +24,15 @@ export function List({ className, variant, ...restProps }: IListProps): JSX.Elem
     <Tag {...restProps} className={`py-2 list-inside ${variantStyles[variant]} ${className}`} />
   );
 }
+
+List.Item = ListItem;
+
+export type IListItemProps = React.PropsWithChildren<React.ComponentPropsWithoutRef<'li'>>;
+
+function ListItem({ className, children, ...liProps }: IListItemProps): JSX.Element {
+  return (
+    <li {...liProps} className={`text-text ${className}`}>
+      {children}
+    </li>
+  );
+}

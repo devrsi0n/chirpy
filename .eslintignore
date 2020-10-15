@@ -1,2 +1,3 @@
 src/generated/*
 *.js
+server/type-graphql

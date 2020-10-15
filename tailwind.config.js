@@ -52,6 +52,11 @@ module.exports = {
       md: '2px',
       lg: '4px',
     },
+    extend: {
+      width: {
+        11: '2.75rem'
+      }
+    },
   },
   variants: {
     outline: ['responsive', 'hover', 'focus'],

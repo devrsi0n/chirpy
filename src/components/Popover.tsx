@@ -8,18 +8,25 @@ interface IPopoverProps {
 }
 
 export function Popover(props: IPopoverProps): JSX.Element {
-  const ref: React.RefObject<HTMLButtonElement> = React.useRef(null);
-  const [hidePopup, setHidePopup] = React.useState(false);
+  const ref: React.RefObject<HTMLDivElement> = React.useRef(null);
+  const [hidePopup, setHidePopup] = React.useState(true);
   useClickOutside(ref, setHidePopup);
   const handleClick = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>) => {
       setHidePopup(false);
       event.preventDefault();
     },
     [],
   );
   return (
-    <button ref={ref} onClick={handleClick} className="relative focus:outline-none">
+    <div
+      ref={ref}
+      onClick={handleClick}
+      onKeyPress={handleClick}
+      className="relative focus:outline-none"
+      role="button"
+      tabIndex={0}
+    >
       {props.children}
       {!hidePopup && (
         <div
@@ -38,6 +45,6 @@ export function Popover(props: IPopoverProps): JSX.Element {
           <div className="relative py-2 rounded-sm bg-background">{props.content}</div>
         </div>
       )}
-    </button>
+    </div>
   );
 }

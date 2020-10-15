@@ -1,0 +1,42 @@
+# Create a whole new project with a new team, and associate the current user with it.
+# For PRO user
+mutation createProjectForProUser(
+  $projectName: String!
+  $teamName: String!
+  $teamRole: Role!
+  $userId: String!
+) {
+  createProject(
+    data: {
+      name: $projectName
+      team: {
+        create: {
+          name: $teamName
+          members: { create: { role: $teamRole, user: { connect: { id: $userId } } } }
+        }
+      }
+    }
+  ) {
+    id
+    name
+    team {
+      id
+      name
+      members {
+        id
+        role
+        user {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+
+mutation createProject($projectName: String!) {
+  createProject(data: { name: $projectName }) {
+    id
+    name
+  }
+}

@@ -2,3 +2,9 @@
 
 20200902071422-init
 20200913080821-make-github-and-google-user-id-unique
+20201006093525
+20201006093641-add-role-to-memeber
+20201006141341-new-model--project
+20201008133517-fix--team--project-field-name-case
+20201012142329-add-user-type
+20201012145516-make-team-in-project-optional

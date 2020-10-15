@@ -32,8 +32,8 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'bg-primary text-white border border-primary hover:bg-white hover:text-primary',
-  secondary: 'bg-secondary text-white',
+  primary: 'bg-primary text-text-inverse border border-primary hover:bg-white hover:text-primary',
+  secondary: 'bg-background-secondary text-text-secondary border hover:text-text hover:bg-gray-200',
   text: 'text-text border-none hover:text-text-light',
 };
 
@@ -45,6 +45,7 @@ export function Button(props: IButtonProps): JSX.Element {
     className = '',
     icon,
     shadow = false,
+    type = 'button',
     onMouseDown,
     onClick,
     children,
@@ -80,8 +81,9 @@ export function Button(props: IButtonProps): JSX.Element {
   return (
     <button
       {...restProps}
+      type={type}
       ref={buttonRef}
-      className={`relative overflow-hidden inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out ${
+      className={`btn relative overflow-hidden inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out ${
         sizeStyles[size]
       } ${variantStyles[variant]} ${
         disabled ? 'cursor-not-allowed text-text-light' : 'cursor-pointer'
@@ -89,9 +91,15 @@ export function Button(props: IButtonProps): JSX.Element {
       onClick={clickHandler}
       onMouseDown={handleMouseDown}
     >
-      {Icon && <Icon size={14} className="z-10 mr-2 fill-current focus:fill-light" />}
-      <span className="z-10">{children}</span>
+      {Icon && <Icon size={14} className="mr-2" />}
+      <span className="">{children}</span>
       {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
+      <style jsx>{`
+        .btn {
+          -webkit-tap-highlight-color: transparent;
+          -webkit-appearance: none;
+        }
+      `}</style>
     </button>
   );
 }

@@ -17,7 +17,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="bg-background">
+        <body className="bg-background transition duration-150">
           <Main />
           <NextScript />
         </body>
