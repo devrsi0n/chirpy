@@ -2,7 +2,7 @@ import css from 'styled-jsx/css';
 
 export const layoutStyle = css`
   .layout {
-    width: clamp(540px, 70%, 1080px);
+    width: clamp(540px, 70ch, 1080px);
   }
   @media screen and (max-width: 540px) {
     .layout {

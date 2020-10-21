@@ -9,7 +9,7 @@ import { serialize } from 'cookie';
 import { AUTH_COOKIE_NAME } from './constants';
 import { createSecureToken } from './utilities/auth';
 import { redirect } from './response';
-import { prisma } from './prisma';
+import { prisma } from './context';
 
 interface User {
   id: string;
