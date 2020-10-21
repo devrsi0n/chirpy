@@ -9,374 +9,111 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+  /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  Date: any;
   DateTime: any;
 };
 
-export type Query = {
-  __typename?: 'Query';
-  currentUser: User;
-};
 
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
   name: Scalars['String'];
-  email: Scalars['String'];
-  googleUserId?: Maybe<Scalars['String']>;
-  githubUserId?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
-  members?: Maybe<Array<Member>>;
+  email: Scalars['String'];
+  members: Array<Member>;
+  projects: Array<Project>;
 };
 
+
 export type UserMembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<Array<MemberOrderByInput>>;
-  cursor?: Maybe<MemberWhereUniqueInput>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<MemberDistinctFieldEnum>>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<MemberWhereUniqueInput>;
+  after?: Maybe<MemberWhereUniqueInput>;
+};
+
+
+export type UserProjectsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<ProjectWhereUniqueInput>;
+  after?: Maybe<ProjectWhereUniqueInput>;
+};
+
+export type Team = {
+  __typename?: 'Team';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  project: Array<Project>;
+  members: Array<Member>;
+};
+
+
+export type TeamProjectArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<ProjectWhereUniqueInput>;
+  after?: Maybe<ProjectWhereUniqueInput>;
+};
+
+
+export type TeamMembersArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<MemberWhereUniqueInput>;
+  after?: Maybe<MemberWhereUniqueInput>;
+};
+
+export type Project = {
+  __typename?: 'Project';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  team?: Maybe<Team>;
+  user?: Maybe<User>;
 };
 
 export type Member = {
   __typename?: 'Member';
   id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  userId: Scalars['String'];
-  teamId: Scalars['String'];
   role: Role;
   user: User;
   team: Team;
 };
 
-export enum Role {
-  User = 'USER',
-  Admin = 'ADMIN',
-}
-
-export type Team = {
-  __typename?: 'Team';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  name: Scalars['String'];
-  members?: Maybe<Array<Member>>;
-  project?: Maybe<Array<Project>>;
+export type Query = {
+  __typename?: 'Query';
+  user?: Maybe<User>;
+  currentUser?: Maybe<User>;
 };
 
-export type TeamMembersArgs = {
-  where?: Maybe<MemberWhereInput>;
-  orderBy?: Maybe<Array<MemberOrderByInput>>;
-  cursor?: Maybe<MemberWhereUniqueInput>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<MemberDistinctFieldEnum>>;
+
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
-export type TeamProjectArgs = {
-  where?: Maybe<ProjectWhereInput>;
-  orderBy?: Maybe<Array<ProjectOrderByInput>>;
-  cursor?: Maybe<ProjectWhereUniqueInput>;
-  take?: Maybe<Scalars['Int']>;
-  skip?: Maybe<Scalars['Int']>;
-  distinct?: Maybe<Array<ProjectDistinctFieldEnum>>;
+export type Mutation = {
+  __typename?: 'Mutation';
+  createOneProject: Project;
 };
 
-export type MemberWhereInput = {
-  AND?: Maybe<Array<MemberWhereInput>>;
-  OR?: Maybe<Array<MemberWhereInput>>;
-  NOT?: Maybe<Array<MemberWhereInput>>;
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  user?: Maybe<UserRelationFilter>;
-  userId?: Maybe<StringFilter>;
-  team?: Maybe<TeamRelationFilter>;
-  teamId?: Maybe<StringFilter>;
-  role?: Maybe<EnumRoleFilter>;
+
+export type MutationCreateOneProjectArgs = {
+  data: ProjectCreateInput;
 };
-
-export type StringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  mode?: Maybe<QueryMode>;
-  not?: Maybe<NestedStringFilter>;
-};
-
-export enum QueryMode {
-  Default = 'default',
-  Insensitive = 'insensitive',
-}
-
-export type NestedStringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  not?: Maybe<NestedStringFilter>;
-};
-
-export type DateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<NestedDateTimeFilter>;
-};
-
-export type NestedDateTimeFilter = {
-  equals?: Maybe<Scalars['DateTime']>;
-  in?: Maybe<Array<Scalars['DateTime']>>;
-  notIn?: Maybe<Array<Scalars['DateTime']>>;
-  lt?: Maybe<Scalars['DateTime']>;
-  lte?: Maybe<Scalars['DateTime']>;
-  gt?: Maybe<Scalars['DateTime']>;
-  gte?: Maybe<Scalars['DateTime']>;
-  not?: Maybe<NestedDateTimeFilter>;
-};
-
-export type UserRelationFilter = {
-  is?: Maybe<UserWhereInput>;
-  isNot?: Maybe<UserWhereInput>;
-};
-
-export type UserWhereInput = {
-  AND?: Maybe<Array<UserWhereInput>>;
-  OR?: Maybe<Array<UserWhereInput>>;
-  NOT?: Maybe<Array<UserWhereInput>>;
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  name?: Maybe<StringFilter>;
-  email?: Maybe<StringFilter>;
-  googleUserId?: Maybe<StringNullableFilter>;
-  githubUserId?: Maybe<StringNullableFilter>;
-  avatar?: Maybe<StringNullableFilter>;
-  members?: Maybe<MemberListRelationFilter>;
-};
-
-export type StringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  mode?: Maybe<QueryMode>;
-  not?: Maybe<NestedStringNullableFilter>;
-};
-
-export type NestedStringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  not?: Maybe<NestedStringNullableFilter>;
-};
-
-export type MemberListRelationFilter = {
-  every?: Maybe<MemberWhereInput>;
-  some?: Maybe<MemberWhereInput>;
-  none?: Maybe<MemberWhereInput>;
-};
-
-export type TeamRelationFilter = {
-  is?: Maybe<TeamWhereInput>;
-  isNot?: Maybe<TeamWhereInput>;
-};
-
-export type TeamWhereInput = {
-  AND?: Maybe<Array<TeamWhereInput>>;
-  OR?: Maybe<Array<TeamWhereInput>>;
-  NOT?: Maybe<Array<TeamWhereInput>>;
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  name?: Maybe<StringFilter>;
-  members?: Maybe<MemberListRelationFilter>;
-  project?: Maybe<ProjectListRelationFilter>;
-};
-
-export type ProjectListRelationFilter = {
-  every?: Maybe<ProjectWhereInput>;
-  some?: Maybe<ProjectWhereInput>;
-  none?: Maybe<ProjectWhereInput>;
-};
-
-export type ProjectWhereInput = {
-  AND?: Maybe<Array<ProjectWhereInput>>;
-  OR?: Maybe<Array<ProjectWhereInput>>;
-  NOT?: Maybe<Array<ProjectWhereInput>>;
-  id?: Maybe<StringFilter>;
-  createdAt?: Maybe<DateTimeFilter>;
-  updatedAt?: Maybe<DateTimeFilter>;
-  name?: Maybe<StringFilter>;
-  team?: Maybe<TeamRelationFilter>;
-  teamId?: Maybe<StringFilter>;
-};
-
-export type EnumRoleFilter = {
-  equals?: Maybe<Role>;
-  in?: Maybe<Array<Role>>;
-  notIn?: Maybe<Array<Role>>;
-  not?: Maybe<NestedEnumRoleFilter>;
-};
-
-export type NestedEnumRoleFilter = {
-  equals?: Maybe<Role>;
-  in?: Maybe<Array<Role>>;
-  notIn?: Maybe<Array<Role>>;
-  not?: Maybe<NestedEnumRoleFilter>;
-};
-
-export type MemberOrderByInput = {
-  id?: Maybe<SortOrder>;
-  createdAt?: Maybe<SortOrder>;
-  updatedAt?: Maybe<SortOrder>;
-  userId?: Maybe<SortOrder>;
-  teamId?: Maybe<SortOrder>;
-  role?: Maybe<SortOrder>;
-};
-
-export enum SortOrder {
-  Asc = 'asc',
-  Desc = 'desc',
-}
 
 export type MemberWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
-};
-
-export enum MemberDistinctFieldEnum {
-  Id = 'id',
-  CreatedAt = 'createdAt',
-  UpdatedAt = 'updatedAt',
-  UserId = 'userId',
-  TeamId = 'teamId',
-  Role = 'role',
-}
-
-export type Project = {
-  __typename?: 'Project';
-  id: Scalars['String'];
-  createdAt: Scalars['DateTime'];
-  updatedAt: Scalars['DateTime'];
-  name: Scalars['String'];
-  teamId: Scalars['String'];
-  team: Team;
-};
-
-export type ProjectOrderByInput = {
-  id?: Maybe<SortOrder>;
-  createdAt?: Maybe<SortOrder>;
-  updatedAt?: Maybe<SortOrder>;
-  name?: Maybe<SortOrder>;
-  teamId?: Maybe<SortOrder>;
 };
 
 export type ProjectWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export enum ProjectDistinctFieldEnum {
-  Id = 'id',
-  CreatedAt = 'createdAt',
-  UpdatedAt = 'updatedAt',
-  Name = 'name',
-  TeamId = 'teamId',
+export enum Role {
+  User = 'USER',
+  Admin = 'ADMIN'
 }
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  createProject: Project;
-};
-
-export type MutationCreateProjectArgs = {
-  data: ProjectCreateInput;
-};
-
-export type ProjectCreateInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  team: TeamCreateOneWithoutProjectInput;
-};
-
-export type TeamCreateOneWithoutProjectInput = {
-  create?: Maybe<TeamCreateWithoutProjectInput>;
-  connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutProjectInput>;
-};
-
-export type TeamCreateWithoutProjectInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  members?: Maybe<MemberCreateManyWithoutTeamInput>;
-};
-
-export type MemberCreateManyWithoutTeamInput = {
-  create?: Maybe<Array<MemberCreateWithoutTeamInput>>;
-  connect?: Maybe<Array<MemberWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutTeamInput>>;
-};
-
-export type MemberCreateWithoutTeamInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  role?: Maybe<Role>;
-  user: UserCreateOneWithoutMembersInput;
-};
-
-export type UserCreateOneWithoutMembersInput = {
-  create?: Maybe<UserCreateWithoutMembersInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutMemberInput>;
-};
-
-export type UserCreateWithoutMembersInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  email: Scalars['String'];
-  googleUserId?: Maybe<Scalars['String']>;
-  githubUserId?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
-};
 
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
@@ -385,14 +122,34 @@ export type UserWhereUniqueInput = {
   githubUserId?: Maybe<Scalars['String']>;
 };
 
-export type UserCreateOrConnectWithoutMemberInput = {
-  where: UserWhereUniqueInput;
-  create: UserCreateWithoutMembersInput;
+export type ProjectCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  team?: Maybe<TeamCreateOneWithoutProjectInput>;
+  user?: Maybe<UserCreateOneWithoutProjectsInput>;
 };
 
-export type MemberCreateOrConnectWithoutTeamInput = {
-  where: MemberWhereUniqueInput;
-  create: MemberCreateWithoutTeamInput;
+
+export type TeamCreateOneWithoutProjectInput = {
+  create?: Maybe<TeamCreateWithoutProjectInput>;
+  connect?: Maybe<TeamWhereUniqueInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutProjectInput>;
+};
+
+export type UserCreateOneWithoutProjectsInput = {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutProjectInput>;
+};
+
+export type TeamCreateWithoutProjectInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  members?: Maybe<MemberCreateManyWithoutTeamInput>;
 };
 
 export type TeamWhereUniqueInput = {
@@ -404,124 +161,249 @@ export type TeamCreateOrConnectWithoutProjectInput = {
   create: TeamCreateWithoutProjectInput;
 };
 
-export type CreateProjectMutationVariables = Exact<{
+export type UserCreateWithoutProjectsInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  email: Scalars['String'];
+  googleUserId?: Maybe<Scalars['String']>;
+  githubUserId?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  type?: Maybe<UserType>;
+  members?: Maybe<MemberCreateManyWithoutUserInput>;
+};
+
+export type UserCreateOrConnectWithoutProjectInput = {
+  where: UserWhereUniqueInput;
+  create: UserCreateWithoutProjectsInput;
+};
+
+export type MemberCreateManyWithoutTeamInput = {
+  create?: Maybe<Array<MemberCreateWithoutTeamInput>>;
+  connect?: Maybe<Array<MemberWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutTeamInput>>;
+};
+
+export enum UserType {
+  Free = 'FREE',
+  Pro = 'PRO'
+}
+
+export type MemberCreateManyWithoutUserInput = {
+  create?: Maybe<Array<MemberCreateWithoutUserInput>>;
+  connect?: Maybe<Array<MemberWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutUserInput>>;
+};
+
+export type MemberCreateWithoutTeamInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<Role>;
+  user: UserCreateOneWithoutMembersInput;
+};
+
+export type MemberCreateOrConnectWithoutTeamInput = {
+  where: MemberWhereUniqueInput;
+  create: MemberCreateWithoutTeamInput;
+};
+
+export type MemberCreateWithoutUserInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<Role>;
+  team: TeamCreateOneWithoutMembersInput;
+};
+
+export type MemberCreateOrConnectWithoutUserInput = {
+  where: MemberWhereUniqueInput;
+  create: MemberCreateWithoutUserInput;
+};
+
+export type UserCreateOneWithoutMembersInput = {
+  create?: Maybe<UserCreateWithoutMembersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutMemberInput>;
+};
+
+export type TeamCreateOneWithoutMembersInput = {
+  create?: Maybe<TeamCreateWithoutMembersInput>;
+  connect?: Maybe<TeamWhereUniqueInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutMemberInput>;
+};
+
+export type UserCreateWithoutMembersInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  email: Scalars['String'];
+  googleUserId?: Maybe<Scalars['String']>;
+  githubUserId?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  type?: Maybe<UserType>;
+  projects?: Maybe<ProjectCreateManyWithoutUserInput>;
+};
+
+export type UserCreateOrConnectWithoutMemberInput = {
+  where: UserWhereUniqueInput;
+  create: UserCreateWithoutMembersInput;
+};
+
+export type TeamCreateWithoutMembersInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  project?: Maybe<ProjectCreateManyWithoutTeamInput>;
+};
+
+export type TeamCreateOrConnectWithoutMemberInput = {
+  where: TeamWhereUniqueInput;
+  create: TeamCreateWithoutMembersInput;
+};
+
+export type ProjectCreateManyWithoutUserInput = {
+  create?: Maybe<Array<ProjectCreateWithoutUserInput>>;
+  connect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutUserInput>>;
+};
+
+export type ProjectCreateManyWithoutTeamInput = {
+  create?: Maybe<Array<ProjectCreateWithoutTeamInput>>;
+  connect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutTeamInput>>;
+};
+
+export type ProjectCreateWithoutUserInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  team?: Maybe<TeamCreateOneWithoutProjectInput>;
+};
+
+export type ProjectCreateOrConnectWithoutUserInput = {
+  where: ProjectWhereUniqueInput;
+  create: ProjectCreateWithoutUserInput;
+};
+
+export type ProjectCreateWithoutTeamInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  user?: Maybe<UserCreateOneWithoutProjectsInput>;
+};
+
+export type ProjectCreateOrConnectWithoutTeamInput = {
+  where: ProjectWhereUniqueInput;
+  create: ProjectCreateWithoutTeamInput;
+};
+
+export type CreateOneProjectMutationVariables = Exact<{
   projectName: Scalars['String'];
-  teamName: Scalars['String'];
-  teamRole: Role;
-  userId: Scalars['String'];
+  userID: Scalars['String'];
 }>;
 
-export type CreateProjectMutation = { __typename?: 'Mutation' } & {
-  createProject: { __typename?: 'Project' } & Pick<Project, 'id' | 'name'> & {
-      team: { __typename?: 'Team' } & Pick<Team, 'id' | 'name'> & {
-          members?: Maybe<
-            Array<
-              { __typename?: 'Member' } & Pick<Member, 'id' | 'role'> & {
-                  user: { __typename?: 'User' } & Pick<User, 'id' | 'name'>;
-                }
-            >
-          >;
-        };
-    };
-};
 
-export type CurrentUserQueryVariables = Exact<{ [key: string]: never }>;
+export type CreateOneProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { createOneProject: (
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'name'>
+  ) }
+);
 
-export type CurrentUserQuery = { __typename?: 'Query' } & {
-  currentUser: { __typename?: 'User' } & Pick<User, 'id' | 'email' | 'name' | 'avatar'> & {
-      members?: Maybe<Array<{ __typename?: 'Member' } & Pick<Member, 'id' | 'role' | 'teamId'>>>;
-    };
-};
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const CreateProjectDocument = gql`
-  mutation createProject(
-    $projectName: String!
-    $teamName: String!
-    $teamRole: Role!
-    $userId: String!
-  ) {
-    createProject(
-      data: {
-        name: $projectName
-        team: {
-          create: {
-            name: $teamName
-            members: { create: { role: $teamRole, user: { connect: { id: $userId } } } }
-          }
-        }
-      }
-    ) {
-      id
-      name
-      team {
-        id
-        name
-        members {
-          id
-          role
-          user {
-            id
-            name
-          }
-        }
-      }
-    }
+
+export type CurrentUserQuery = (
+  { __typename?: 'Query' }
+  & { currentUser?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'name' | 'avatar'>
+    & { members: Array<(
+      { __typename?: 'Member' }
+      & Pick<Member, 'id' | 'role'>
+      & { team: (
+        { __typename?: 'Team' }
+        & Pick<Team, 'id' | 'name'>
+        & { project: Array<(
+          { __typename?: 'Project' }
+          & Pick<Project, 'id' | 'name'>
+        )> }
+      ) }
+    )>, projects: Array<(
+      { __typename?: 'Project' }
+      & Pick<Project, 'id' | 'name'>
+    )> }
+  )> }
+);
+
+
+export const CreateOneProjectDocument = gql`
+    mutation createOneProject($projectName: String!, $userID: String!) {
+  createOneProject(data: {name: $projectName, user: {connect: {id: $userID}}}) {
+    id
+    name
   }
-`;
-export type CreateProjectMutationFn = Apollo.MutationFunction<
-  CreateProjectMutation,
-  CreateProjectMutationVariables
->;
+}
+    `;
+export type CreateOneProjectMutationFn = Apollo.MutationFunction<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
 
 /**
- * __useCreateProjectMutation__
+ * __useCreateOneProjectMutation__
  *
- * To run a mutation, you first call `useCreateProjectMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateProjectMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateOneProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneProjectMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createProjectMutation, { data, loading, error }] = useCreateProjectMutation({
+ * const [createOneProjectMutation, { data, loading, error }] = useCreateOneProjectMutation({
  *   variables: {
  *      projectName: // value for 'projectName'
- *      teamName: // value for 'teamName'
- *      teamRole: // value for 'teamRole'
- *      userId: // value for 'userId'
+ *      userID: // value for 'userID'
  *   },
  * });
  */
-export function useCreateProjectMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateProjectMutation, CreateProjectMutationVariables>,
-) {
-  return Apollo.useMutation<CreateProjectMutation, CreateProjectMutationVariables>(
-    CreateProjectDocument,
-    baseOptions,
-  );
-}
-export type CreateProjectMutationHookResult = ReturnType<typeof useCreateProjectMutation>;
-export type CreateProjectMutationResult = Apollo.MutationResult<CreateProjectMutation>;
-export type CreateProjectMutationOptions = Apollo.BaseMutationOptions<
-  CreateProjectMutation,
-  CreateProjectMutationVariables
->;
+export function useCreateOneProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>) {
+        return Apollo.useMutation<CreateOneProjectMutation, CreateOneProjectMutationVariables>(CreateOneProjectDocument, baseOptions);
+      }
+export type CreateOneProjectMutationHookResult = ReturnType<typeof useCreateOneProjectMutation>;
+export type CreateOneProjectMutationResult = Apollo.MutationResult<CreateOneProjectMutation>;
+export type CreateOneProjectMutationOptions = Apollo.BaseMutationOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
 export const CurrentUserDocument = gql`
-  query currentUser {
-    currentUser {
+    query currentUser {
+  currentUser {
+    id
+    email
+    name
+    avatar
+    members {
       id
-      email
-      name
-      avatar
-      members {
+      role
+      team {
         id
-        role
-        teamId
+        name
+        project {
+          id
+          name
+        }
       }
     }
+    projects {
+      id
+      name
+    }
   }
-`;
+}
+    `;
 
 /**
  * __useCurrentUserQuery__
@@ -538,25 +420,12 @@ export const CurrentUserDocument = gql`
  *   },
  * });
  */
-export function useCurrentUserQuery(
-  baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>,
-) {
-  return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(
-    CurrentUserDocument,
-    baseOptions,
-  );
-}
-export function useCurrentUserLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>,
-) {
-  return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(
-    CurrentUserDocument,
-    baseOptions,
-  );
-}
+export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+      }
+export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+        }
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
-export type CurrentUserQueryResult = Apollo.QueryResult<
-  CurrentUserQuery,
-  CurrentUserQueryVariables
->;
+export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;

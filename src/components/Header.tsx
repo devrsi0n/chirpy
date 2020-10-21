@@ -2,15 +2,16 @@ import * as React from 'react';
 
 import { Button } from '$/components/Button';
 import { Link } from '../components/Link';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Popover } from './Popover';
 import { useRouter } from 'next/router';
 import { Heading } from './Heading';
 import { Avatar } from './Avatar';
+import { Text } from './Text';
 import { layoutStyle } from './styles';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
 
 export function Header(): JSX.Element {
-  const { data, error } = useCurrentUser();
+  const { data, error, loading } = useCurrentUser();
   const router = useRouter();
   const handleClick = React.useCallback(() => {
     router.push('/api/auth/logout');
@@ -26,6 +27,7 @@ export function Header(): JSX.Element {
             <Link href="/">ZOO</Link>
           </Heading>
           <nav className="flex flex-row items-center h-full">
+            {loading && <Text>Loading...</Text>}
             {data?.currentUser?.avatar ? (
               <Popover
                 content={

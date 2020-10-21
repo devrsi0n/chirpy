@@ -1,10 +1,8 @@
-import 'reflect-metadata';
 import { ApolloServer } from 'apollo-server-micro';
 import { NextApiHandler } from 'next';
-import { buildSchema } from 'type-graphql';
-import { prisma } from '$server/prisma';
-import { UserResolver } from '$server/resolvers/user.resolver';
-import { ProjectResolver } from '$server/resolvers/project.resolver';
+
+import { prisma } from '$server/context';
+import { schema } from '$server/schema';
 
 export const config = {
   api: {
@@ -20,10 +18,6 @@ const apiHandler: NextApiHandler = async (req, res) => {
   if (handler && isProd) {
     return handler(req, res);
   }
-
-  const schema = await buildSchema({
-    resolvers: [UserResolver, ProjectResolver],
-  });
 
   const apolloServer = new ApolloServer({
     schema,

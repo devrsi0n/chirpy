@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Role, useCreateProjectMutation } from '$/generated/graphql';
+import { Role, useCreateOneProjectMutation } from '$/generated/graphql';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Button } from '$/components/Button';
 import { List } from '$/components/List';
@@ -10,49 +10,45 @@ import { Textfield } from '$/components/TextField';
 import { useRouter } from 'next/router';
 import { Toggle } from '$/components/Toggle';
 import { Select } from '$/components/Select';
+import { Text } from '$/components/Text';
 
 export default function Dashboard(): JSX.Element {
-  const { data, isLogin } = useCurrentUser();
-  const [
-    createProjectMutation,
-    { data: createProjectData, loading, error },
-  ] = useCreateProjectMutation();
+  const { data, isLogin, refetch } = useCurrentUser();
+  const [createProjectMutation] = useCreateOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
-  }, [createProjectMutation, data?.currentUser.id]);
-  const [showDialog, setShowDialog] = React.useState(false);
-  const handleSubmit = () => {
-    console.log('submit');
-    if (data?.currentUser.id) {
-      // createProjectMutation({
-      //   variables: {
-      //     projectName: 'test',
-      //     teamName: 'test',
-      //     teamRole: Role.Admin,
-      //     userId: data?.currentUser.id,
-      //   },
-      // });
-    }
-  };
-  const [shouldCreateTeam, setShouldCreateTeam] = React.useState(true);
-  const handleToggleCreateTeam = React.useCallback((checked: boolean) => {
-    setShouldCreateTeam(checked);
   }, []);
+  const [showDialog, setShowDialog] = React.useState(false);
+
   const handleCloseDialog = React.useCallback(() => {
     setShowDialog(false);
   }, []);
-  const [selectedTeam, setSelectedTeam] = React.useState('1');
   const [projectName, setProjectName] = React.useState('');
-  const [teamName, setTeamName] = React.useState('');
+  const [projectNameError, setProjectNameError] = React.useState('');
   const handleChangeProjectName = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      setProjectName(event.target.value);
+      const { value } = event.target;
+      if (value.length > 64) {
+        setProjectNameError('64 characters at most.');
+      } else {
+        setProjectNameError('');
+      }
+      setProjectName(value);
     },
     [],
   );
-  const handleChangeTeamName = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setTeamName(event.target.value);
-  }, []);
+  const handleSubmit = React.useCallback(() => {
+    createProjectMutation({
+      variables: {
+        projectName,
+        userID: data!.currentUser!.id!,
+      },
+    }).then((data) => {
+      setShowDialog(false);
+      refetch?.();
+      return data;
+    });
+  }, [projectName, createProjectMutation, data, refetch]);
 
   const router = useRouter();
   React.useEffect(() => {
@@ -73,60 +69,43 @@ export default function Dashboard(): JSX.Element {
   return (
     <main>
       <Heading as="h2">Welcome to dashboard.</Heading>
-      {data?.currentUser?.members?.length ? (
+      {data?.currentUser?.projects?.length ? (
         <List variant="unordered">
-          {data.currentUser.members.map((member) => (
-            <List.Item key={member.teamId}>
-              {member.teamId}, {member.role}
+          {data.currentUser.projects.map((project) => (
+            <List.Item key={project.id}>
+              {project.id} - {project.name}
             </List.Item>
           ))}
         </List>
       ) : (
-        ''
+        <div className="py-6">
+          <Text>No projects</Text>
+        </div>
       )}
       <Button onClick={handleCreateProject}>Create a new project</Button>
       <Dialog show={showDialog} title="Create a new project">
-        <form onSubmit={handleSubmit} className="flex flex-col w-full">
+        <div className="flex flex-col w-full">
           <Textfield
             placeholder="Project name"
             label="Project name"
             value={projectName}
             onChange={handleChangeProjectName}
+            errorMessage={projectNameError}
           />
-          <Toggle
-            enabled={shouldCreateTeam}
-            label="Create or connect a team?"
-            onChange={handleToggleCreateTeam}
-          />
-          {shouldCreateTeam ? (
-            <>
-              <Textfield
-                type="text"
-                placeholder="Team name"
-                label="Team name"
-                value={teamName}
-                onChange={handleChangeTeamName}
-              />
-              <Textfield type="email" placeholder="Email" label="Add new member(s)" />
-            </>
-          ) : (
-            <Select
-              label="Connect team"
-              options={['1', '2', '3']}
-              value={selectedTeam}
-              onChange={setSelectedTeam}
-            />
-          )}
 
           <DialogFooter>
             <Button variant="secondary" onClick={handleCloseDialog} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit" className="w-full sm:w-auto">
+            <Button
+              className="w-full sm:w-auto"
+              disabled={!!projectNameError.length}
+              onClick={handleSubmit}
+            >
               Submit
             </Button>
           </DialogFooter>
-        </form>
+        </div>
       </Dialog>
     </main>
   );

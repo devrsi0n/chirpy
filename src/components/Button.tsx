@@ -3,6 +3,7 @@ import * as React from 'react';
 import { SunIcon, ISunIconProps } from './Icons/Sun.Icon';
 import { SettingIcon } from './Icons/Setting.Icon';
 import { MoonIcon } from './Icons/Moon.Icon';
+import clsx from 'clsx';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Variant = 'primary' | 'secondary' | 'text';
@@ -83,11 +84,13 @@ export function Button(props: IButtonProps): JSX.Element {
       {...restProps}
       type={type}
       ref={buttonRef}
-      className={`btn relative overflow-hidden inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out ${
-        sizeStyles[size]
-      } ${variantStyles[variant]} ${
-        disabled ? 'cursor-not-allowed text-text-light' : 'cursor-pointer'
-      } ${shadow ? 'shadow-md transform hover:-translate-y-1' : ''} ${className}`}
+      className={clsx(
+        `btn relative overflow-hidden inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out`,
+        sizeStyles[size],
+        { [variantStyles[variant]]: !disabled, 'shadow-md transform hover:-translate-y-1': shadow },
+        disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
+        className,
+      )}
       onClick={clickHandler}
       onMouseDown={handleMouseDown}
     >

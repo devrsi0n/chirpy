@@ -3,7 +3,7 @@ import { IncomingMessage } from 'http';
 import { NextApiRequest } from 'next';
 
 import { getUserId } from '$server/utilities/auth';
-import { prisma } from '$server/prisma';
+import { prisma } from '$server/context';
 import { User, Member, Team, Project } from '@prisma/client';
 
 export type AllUserData = User & {
