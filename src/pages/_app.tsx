@@ -1,4 +1,5 @@
-import '../styles/global.css';
+import '../styles/tailwind.css';
+import '../styles/utilities.css';
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '$/components/ThemeProvider';
