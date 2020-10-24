@@ -1,7 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+const isEnvProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
-  purge: ['./src/**/*.tsx'],
+  purge: isEnvProd ? ['./src/**/*.tsx'] : [],
   theme: {
     colors: {
       ...defaultTheme.colors,
