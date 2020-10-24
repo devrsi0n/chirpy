@@ -9,9 +9,34 @@ import { Avatar } from './Avatar';
 import { Text } from './Text';
 import { layoutStyle } from './styles';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { Select } from './Select';
+import { Project } from '$/generated/graphql';
+import { SlashIcon } from './Icons/Slash.Icon';
+
+const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 
 export function Header(): JSX.Element {
   const { data, error, loading } = useCurrentUser();
+  const [selectedProject, setSelectedProject] = React.useState<Project>();
+  React.useEffect(() => {
+    if (data?.currentUser?.projects?.length && !selectedProject) {
+      const lastSelectedProject = localStorage.getItem(SELECTED_PROJECT_ID);
+      setSelectedProject(
+        data.currentUser.projects.filter((project) => project.id === lastSelectedProject)[0] ||
+          data.currentUser.projects[0],
+      );
+    }
+  }, [data?.currentUser?.projects, selectedProject]);
+  const handleSelectProject = React.useCallback(
+    (projectID: string) => {
+      setSelectedProject(
+        data?.currentUser?.projects?.filter((project) => project.id === projectID)[0],
+      );
+      localStorage.setItem(SELECTED_PROJECT_ID, projectID);
+    },
+    [data?.currentUser?.projects],
+  );
+
   const router = useRouter();
   const handleClick = React.useCallback(() => {
     router.push('/api/auth/logout');
@@ -20,12 +45,29 @@ export function Header(): JSX.Element {
     console.error('Get current user error: ', error);
   }
   return (
-    <header className="sm:sticky sm:top-0 sm:left-0 header w-full border-b border-divider transition duration-150 sm:z-20">
+    <header className="sm:sticky sm:top-0 sm:left-0 header w-full border-b border-divider transition duration-150 sm:z-20 py-2">
       <div className="layout mx-auto">
         <section className="flex flex-row justify-between items-center">
-          <Heading as="h3" className="flex items-center font-bold">
-            <Link href="/">ZOO</Link>
-          </Heading>
+          <div className="flex flex-row items-center space-x-2">
+            <Heading as="h3" className="flex items-center font-bold">
+              <Link href="/">ZOO</Link>
+            </Heading>
+            <SlashIcon className="text-gray-400" />
+            {data?.currentUser?.projects?.length && selectedProject && (
+              <Select
+                value={selectedProject.id}
+                name={selectedProject.name}
+                onChange={handleSelectProject}
+                className="w-30 sm:w-40"
+              >
+                {data?.currentUser?.projects.map((project: Project) => (
+                  <Select.Option key={project.id} value={project.id}>
+                    {project.name}
+                  </Select.Option>
+                ))}
+              </Select>
+            )}
+          </div>
           <nav className="flex flex-row items-center h-full">
             {loading && <Text>Loading...</Text>}
             {data?.currentUser?.avatar ? (
