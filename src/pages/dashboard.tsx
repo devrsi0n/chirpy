@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Role, useCreateOneProjectMutation } from '$/generated/graphql';
+import { useCreateOneProjectMutation } from '$/generated/graphql';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Button } from '$/components/Button';
 import { List } from '$/components/List';
@@ -8,8 +8,6 @@ import { Heading } from '$/components/Heading';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Textfield } from '$/components/TextField';
 import { useRouter } from 'next/router';
-import { Toggle } from '$/components/Toggle';
-import { Select } from '$/components/Select';
 import { Text } from '$/components/Text';
 
 export default function Dashboard(): JSX.Element {
@@ -51,11 +49,14 @@ export default function Dashboard(): JSX.Element {
   }, [projectName, createProjectMutation, data, refetch]);
 
   const router = useRouter();
+  const timeout = React.useRef<number>();
   React.useEffect(() => {
     if (!isLogin) {
-      setTimeout(() => {
+      timeout.current = window.setTimeout(() => {
         router.push('/login');
       }, 3000);
+    } else {
+      timeout.current && clearTimeout(timeout.current);
     }
   }, [router, isLogin]);
 
