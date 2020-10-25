@@ -81,6 +81,40 @@ export type Member = {
   team: Team;
 };
 
+export type Page = {
+  __typename?: 'Page';
+  id: Scalars['String'];
+  url: Scalars['String'];
+  title: Scalars['String'];
+  project?: Maybe<Project>;
+  comments: Array<Comment>;
+};
+
+
+export type PageCommentsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<CommentWhereUniqueInput>;
+  after?: Maybe<CommentWhereUniqueInput>;
+};
+
+export type Comment = {
+  __typename?: 'Comment';
+  id: Scalars['String'];
+  content: Scalars['String'];
+  page?: Maybe<Page>;
+  replies: Array<Comment>;
+  user: User;
+};
+
+
+export type CommentRepliesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<CommentWhereUniqueInput>;
+  after?: Maybe<CommentWhereUniqueInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
@@ -115,6 +149,10 @@ export enum Role {
   Admin = 'ADMIN'
 }
 
+export type CommentWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -129,6 +167,7 @@ export type ProjectCreateInput = {
   name: Scalars['String'];
   team?: Maybe<TeamCreateOneWithoutProjectInput>;
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 
@@ -142,6 +181,12 @@ export type UserCreateOneWithoutProjectsInput = {
   create?: Maybe<UserCreateWithoutProjectsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
   connectOrCreate?: Maybe<UserCreateOrConnectWithoutProjectInput>;
+};
+
+export type PageCreateManyWithoutProjectInput = {
+  create?: Maybe<Array<PageCreateWithoutProjectInput>>;
+  connect?: Maybe<Array<PageWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutProjectInput>>;
 };
 
 export type TeamCreateWithoutProjectInput = {
@@ -172,11 +217,30 @@ export type UserCreateWithoutProjectsInput = {
   avatar?: Maybe<Scalars['String']>;
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
+  comment?: Maybe<CommentCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutProjectInput = {
   where: UserWhereUniqueInput;
   create: UserCreateWithoutProjectsInput;
+};
+
+export type PageCreateWithoutProjectInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['String'];
+  title: Scalars['String'];
+  comments?: Maybe<CommentCreateManyWithoutPageInput>;
+};
+
+export type PageWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type PageCreateOrConnectWithoutProjectInput = {
+  where: PageWhereUniqueInput;
+  create: PageCreateWithoutProjectInput;
 };
 
 export type MemberCreateManyWithoutTeamInput = {
@@ -194,6 +258,18 @@ export type MemberCreateManyWithoutUserInput = {
   create?: Maybe<Array<MemberCreateWithoutUserInput>>;
   connect?: Maybe<Array<MemberWhereUniqueInput>>;
   connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutUserInput>>;
+};
+
+export type CommentCreateManyWithoutUserInput = {
+  create?: Maybe<Array<CommentCreateWithoutUserInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutUserInput>>;
+};
+
+export type CommentCreateManyWithoutPageInput = {
+  create?: Maybe<Array<CommentCreateWithoutPageInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutPageInput>>;
 };
 
 export type MemberCreateWithoutTeamInput = {
@@ -222,6 +298,36 @@ export type MemberCreateOrConnectWithoutUserInput = {
   create: MemberCreateWithoutUserInput;
 };
 
+export type CommentCreateWithoutUserInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['String'];
+  page?: Maybe<PageCreateOneWithoutCommentsInput>;
+  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
+  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+};
+
+export type CommentCreateOrConnectWithoutUserInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutUserInput;
+};
+
+export type CommentCreateWithoutPageInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['String'];
+  user: UserCreateOneWithoutCommentInput;
+  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
+  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+};
+
+export type CommentCreateOrConnectWithoutPageInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutPageInput;
+};
+
 export type UserCreateOneWithoutMembersInput = {
   create?: Maybe<UserCreateWithoutMembersInput>;
   connect?: Maybe<UserWhereUniqueInput>;
@@ -232,6 +338,30 @@ export type TeamCreateOneWithoutMembersInput = {
   create?: Maybe<TeamCreateWithoutMembersInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutMemberInput>;
+};
+
+export type PageCreateOneWithoutCommentsInput = {
+  create?: Maybe<PageCreateWithoutCommentsInput>;
+  connect?: Maybe<PageWhereUniqueInput>;
+  connectOrCreate?: Maybe<PageCreateOrConnectWithoutCommentInput>;
+};
+
+export type CommentCreateManyWithoutCommentInput = {
+  create?: Maybe<Array<CommentCreateWithoutCommentInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutCommentInput>>;
+};
+
+export type CommentCreateOneWithoutRepliesInput = {
+  create?: Maybe<CommentCreateWithoutRepliesInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutCommentInput>;
+};
+
+export type UserCreateOneWithoutCommentInput = {
+  create?: Maybe<UserCreateWithoutCommentInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutCommentInput>;
 };
 
 export type UserCreateWithoutMembersInput = {
@@ -245,6 +375,7 @@ export type UserCreateWithoutMembersInput = {
   avatar?: Maybe<Scalars['String']>;
   type?: Maybe<UserType>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
+  comment?: Maybe<CommentCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutMemberInput = {
@@ -265,6 +396,64 @@ export type TeamCreateOrConnectWithoutMemberInput = {
   create: TeamCreateWithoutMembersInput;
 };
 
+export type PageCreateWithoutCommentsInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  url: Scalars['String'];
+  title: Scalars['String'];
+  project?: Maybe<ProjectCreateOneWithoutPagesInput>;
+};
+
+export type PageCreateOrConnectWithoutCommentInput = {
+  where: PageWhereUniqueInput;
+  create: PageCreateWithoutCommentsInput;
+};
+
+export type CommentCreateWithoutCommentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['String'];
+  user: UserCreateOneWithoutCommentInput;
+  page?: Maybe<PageCreateOneWithoutCommentsInput>;
+  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
+};
+
+export type CommentCreateOrConnectWithoutCommentInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutCommentInput;
+};
+
+export type CommentCreateWithoutRepliesInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['String'];
+  user: UserCreateOneWithoutCommentInput;
+  page?: Maybe<PageCreateOneWithoutCommentsInput>;
+  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+};
+
+export type UserCreateWithoutCommentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  email: Scalars['String'];
+  googleUserId?: Maybe<Scalars['String']>;
+  githubUserId?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  type?: Maybe<UserType>;
+  members?: Maybe<MemberCreateManyWithoutUserInput>;
+  projects?: Maybe<ProjectCreateManyWithoutUserInput>;
+};
+
+export type UserCreateOrConnectWithoutCommentInput = {
+  where: UserWhereUniqueInput;
+  create: UserCreateWithoutCommentInput;
+};
+
 export type ProjectCreateManyWithoutUserInput = {
   create?: Maybe<Array<ProjectCreateWithoutUserInput>>;
   connect?: Maybe<Array<ProjectWhereUniqueInput>>;
@@ -277,12 +466,19 @@ export type ProjectCreateManyWithoutTeamInput = {
   connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutTeamInput>>;
 };
 
+export type ProjectCreateOneWithoutPagesInput = {
+  create?: Maybe<ProjectCreateWithoutPagesInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+  connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutPageInput>;
+};
+
 export type ProjectCreateWithoutUserInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   team?: Maybe<TeamCreateOneWithoutProjectInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 export type ProjectCreateOrConnectWithoutUserInput = {
@@ -296,11 +492,26 @@ export type ProjectCreateWithoutTeamInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 export type ProjectCreateOrConnectWithoutTeamInput = {
   where: ProjectWhereUniqueInput;
   create: ProjectCreateWithoutTeamInput;
+};
+
+export type ProjectCreateWithoutPagesInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  team?: Maybe<TeamCreateOneWithoutProjectInput>;
+  user?: Maybe<UserCreateOneWithoutProjectsInput>;
+};
+
+export type ProjectCreateOrConnectWithoutPageInput = {
+  where: ProjectWhereUniqueInput;
+  create: ProjectCreateWithoutPagesInput;
 };
 
 export type CreateOneProjectMutationVariables = Exact<{

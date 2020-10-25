@@ -3,7 +3,10 @@ import * as React from 'react';
 type AS = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type IHeadingProps = React.ComponentProps<'h1'> & {
-  as: AS;
+  /**
+   * @default h3
+   */
+  as?: AS;
 };
 
 const styles: Record<AS, string> = {
@@ -16,7 +19,7 @@ const styles: Record<AS, string> = {
 };
 
 export function Heading(props: IHeadingProps): JSX.Element {
-  const { as: Component, className = '', ...restProps } = props;
+  const { as: Component = 'h3', className = '', ...restProps } = props;
 
   return (
     <Component {...restProps} className={`text-text ${styles[Component] || ''} ${className}`} />

@@ -9,6 +9,7 @@ import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Textfield } from '$/components/TextField';
 import { useRouter } from 'next/router';
 import { Text } from '$/components/Text';
+import { Layout } from '$/components/Layout';
 
 export default function Dashboard(): JSX.Element {
   const { data, isLogin, refetch } = useCurrentUser();
@@ -67,48 +68,52 @@ export default function Dashboard(): JSX.Element {
       </div>
     );
   }
-  return (
-    <main>
-      <Heading as="h2">Welcome to dashboard.</Heading>
-      {data?.currentUser?.projects?.length ? (
-        <List variant="unordered">
-          {data.currentUser.projects.map((project) => (
-            <List.Item key={project.id}>
-              {project.id} - {project.name}
-            </List.Item>
-          ))}
-        </List>
-      ) : (
-        <div className="py-6">
-          <Text>No projects</Text>
-        </div>
-      )}
-      <Button onClick={handleCreateProject}>Create a new project</Button>
-      <Button className="mt-5">Integrate comment</Button>
-      <Dialog show={showDialog} title="Create a new project">
-        <div className="flex flex-col w-full">
-          <Textfield
-            placeholder="Project name"
-            label="Project name"
-            value={projectName}
-            onChange={handleChangeProjectName}
-            errorMessage={projectNameError}
-          />
 
-          <DialogFooter>
-            <Button variant="secondary" onClick={handleCloseDialog} className="w-full sm:w-auto">
-              Cancel
-            </Button>
-            <Button
-              className="w-full sm:w-auto"
-              disabled={!!projectNameError.length}
-              onClick={handleSubmit}
-            >
-              Submit
-            </Button>
-          </DialogFooter>
-        </div>
-      </Dialog>
-    </main>
+  return (
+    <Layout>
+      <main>
+        <Heading as="h2">Welcome to dashboard.</Heading>
+        <Text>userId - {data?.currentUser?.id}</Text>
+        {data?.currentUser?.projects?.length ? (
+          <List variant="unordered">
+            {data.currentUser.projects.map((project) => (
+              <List.Item key={project.id}>
+                {project.id} - {project.name}
+              </List.Item>
+            ))}
+          </List>
+        ) : (
+          <div className="py-6">
+            <Text>No projects</Text>
+          </div>
+        )}
+        <Button onClick={handleCreateProject}>Create a new project</Button>
+        <Button className="mt-5">Integrate comment</Button>
+        <Dialog show={showDialog} title="Create a new project">
+          <div className="flex flex-col w-full">
+            <Textfield
+              placeholder="Project name"
+              label="Project name"
+              value={projectName}
+              onChange={handleChangeProjectName}
+              errorMessage={projectNameError}
+            />
+
+            <DialogFooter>
+              <Button variant="secondary" onClick={handleCloseDialog} className="w-full sm:w-auto">
+                Cancel
+              </Button>
+              <Button
+                className="w-full sm:w-auto"
+                disabled={!!projectNameError.length}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </DialogFooter>
+          </div>
+        </Dialog>
+      </main>
+    </Layout>
   );
 }
