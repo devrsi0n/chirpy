@@ -84,6 +84,7 @@ export default function Dashboard(): JSX.Element {
         </div>
       )}
       <Button onClick={handleCreateProject}>Create a new project</Button>
+      <Button className="mt-5">Integrate comment</Button>
       <Dialog show={showDialog} title="Create a new project">
         <div className="flex flex-col w-full">
           <Textfield
