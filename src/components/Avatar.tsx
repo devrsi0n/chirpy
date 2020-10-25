@@ -26,7 +26,7 @@ export function Avatar({
     <img
       {...imgProps}
       alt={alt}
-      className={`flex items-center justify-center rounded-full ${sizeStyles[size]} ${className}`}
+      className={`flex items-center justify-center rounded-full bg-gray-100 ${sizeStyles[size]} ${className}`}
     >
       {children}
     </img>

@@ -26,9 +26,11 @@ export function Text({
   italic,
   ...restProps
 }: ITextProps): JSX.Element {
-  const classes = clsx(variantStyles[variant], bold && 'font-bold', italic && 'italic');
   return (
-    <Tag {...restProps} className={`${classes} ${className}`}>
+    <Tag
+      {...restProps}
+      className={clsx(variantStyles[variant], bold && 'font-bold', italic && 'italic', className)}
+    >
       {children}
     </Tag>
   );

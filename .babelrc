@@ -10,5 +10,9 @@
         }
       }
     ]
+  ],
+  "plugins": [
+    // To support date type in nextjs `getStaticProps`
+    "superjson-next"
   ]
 }

@@ -4,7 +4,6 @@ import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '$/components/ThemeProvider';
 import { useApollo } from '$/lib/apollo-client';
-import { Layout } from '$/components/Layout';
 import { colorModes } from '$/styles/colors';
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
 
@@ -19,9 +18,7 @@ function App({ Component, pageProps }: IAppProps): JSX.Element {
     <ThemeProvider colorModes={colorModes}>
       <ApolloProvider client={apollo}>
         <CurrentUserProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Component {...pageProps} />
         </CurrentUserProvider>
       </ApolloProvider>
     </ThemeProvider>
