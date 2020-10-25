@@ -46,7 +46,7 @@
     "jose": "^1.28.0",
     "next": "^9.5.3",
     "next-compose-plugins": "^2.2.0",
-    "next-connect": "^0.9.0",
+    "next-connect": "^0.9.1",
     "nexus-plugin-prisma": "^0.22.0",
     "passport": "^0.4.1",
     "passport-github2": "^0.1.11",
@@ -91,10 +91,10 @@
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-preset-env": "^6.7.0",
     "prettier": "^2.1.2",
-    "styled-jsx": "^3.3.0",
+    "styled-jsx": "^3.3.1",
     "styled-jsx-plugin-postcss": "^3.0.2",
     "tailwindcss": "^1.9.6",
-    "ts-loader": "^8.0.6",
+    "ts-loader": "^8.0.7",
     "typescript": "^4.0.3"
   }
 }

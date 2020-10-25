@@ -44,7 +44,6 @@ export function Header(): JSX.Element {
   if (error) {
     console.error('Get current user error: ', error);
   }
-  const shouldShowProjectSelect = data?.currentUser?.projects?.length && selectedProject;
   return (
     <header className="sm:sticky sm:top-0 sm:left-0 header w-full border-b border-divider transition duration-150 sm:z-20 py-2">
       <div className="layout mx-auto">
@@ -53,21 +52,22 @@ export function Header(): JSX.Element {
             <Heading as="h3" className="flex items-center font-bold">
               <Link href="/">ZOO</Link>
             </Heading>
-            {shouldShowProjectSelect && <SlashIcon className="text-gray-400" />}
-
-            {shouldShowProjectSelect && (
-              <Select
-                value={selectedProject?.id}
-                name={selectedProject?.name}
-                onChange={handleSelectProject}
-                className="w-32 sm:w-40"
-              >
-                {data?.currentUser?.projects.map((project: Project) => (
-                  <Select.Option key={project.id} value={project.id}>
-                    {project.name}
-                  </Select.Option>
-                ))}
-              </Select>
+            {data?.currentUser?.projects?.length && selectedProject && (
+              <>
+                <SlashIcon className="text-gray-400" />
+                <Select
+                  value={selectedProject?.id}
+                  name={selectedProject?.name}
+                  onChange={handleSelectProject}
+                  className="w-32 sm:w-40"
+                >
+                  {data?.currentUser?.projects.map((project: Project) => (
+                    <Select.Option key={project.id} value={project.id}>
+                      {project.name}
+                    </Select.Option>
+                  ))}
+                </Select>
+              </>
             )}
           </div>
           <nav className="flex flex-row items-center h-full">
