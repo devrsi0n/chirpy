@@ -1,6 +1,10 @@
 import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
 import * as React from 'react';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
+
+dayjs.extend(relativeTime);
 
 export type CommentProps = {
   name: string;
@@ -16,8 +20,8 @@ export function Comment({ avatar, name, content, date }: CommentProps): JSX.Elem
       <div>
         <p className="text-blue-500">{name}</p>
         <Text>{content}</Text>
-        <Text variant="secondary" className="text-xs">
-          {date}
+        <Text variant="secondary" className="text-xs" title={date}>
+          {dayjs(date).fromNow()}
         </Text>
       </div>
     </section>
