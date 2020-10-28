@@ -5,7 +5,6 @@ import { Comment, User } from '@prisma/client';
 
 import { prisma } from '$server/context';
 import { Heading } from '$/components/Heading';
-import { Text } from '$/components/Text';
 import { Comment as SectionComment } from '$/sections/Comment';
 
 export type CommentProps = React.PropsWithChildren<InferGetStaticPropsType<typeof getStaticProps>>;
@@ -17,8 +16,8 @@ export type CommentProps = React.PropsWithChildren<InferGetStaticPropsType<typeo
 export default function PageComment({ comments }: CommentProps): JSX.Element {
   return (
     <div>
-      <Heading as="h4">This is a comment widget</Heading>
-      <Text>comments:</Text>
+      <Heading as="h2">This is a comment widget</Heading>
+      <Heading>comments:</Heading>
       {comments?.map((comment) => (
         <SectionComment
           name={comment.user.name}
