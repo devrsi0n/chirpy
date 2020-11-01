@@ -4,7 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const customConfig = {
-  webpack(config) {
+  webpack(config, dev, isServer) {
     // Use ts-loader for decorators support
     for (const rule of config.module.rules) {
       if (rule.test && rule.test.test('foo.ts')) {
@@ -16,13 +16,37 @@ const customConfig = {
         });
       }
     }
+    // const entryFactory = config.entry;
+    // config.entry = () => (
+    //   entryFactory()
+    //     .then((entry) => {
+    //       console.log({ entry });
+    //       // if (!entry["main"]) {
+    //       //   return entry;
+    //       // }
+    //       // entry["main"] = [
+    //       //   "./src/comment.ts",
+    //       //   entry["main"],
+    //       // ];
+    //       // entry['widget/comment'] = "./src/comment.ts";
+    //       // entry["main.js"] = [
+    //       //   "./src/comment.ts",
+    //       //   ...entry["main.js"],
+    //       // ];
+    //       if (!isServer) {
+    //         return {
+    //           ...entry,
+    //           'public/comment': './src/lib/comment.ts',
+    //         };
+    //       }
+    //       return entry;
+    //     })
+    // );
     return config;
   },
 };
 
 module.exports = withPlugins(
-  [
-    [withBundleAnalyzer(customConfig)]
-  ],
+  [[withBundleAnalyzer(customConfig)]],
   // customConfig
 );

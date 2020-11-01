@@ -10,3 +10,4 @@
 20201012145516-make-team-in-project-optional
 20201021144105-fix-project-field--user--name-case
 20201025092053-add-page-and-comment-model
+20201030143628-mark-project-as-required-in-page-and-page-as-required-in-comment

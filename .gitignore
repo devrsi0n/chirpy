@@ -7,3 +7,4 @@ out/
 .env*.local
 .envproduction
 .vercel
+.cache

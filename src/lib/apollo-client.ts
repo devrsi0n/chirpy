@@ -21,7 +21,7 @@ const createApolloClient = () =>
     ssrMode: !process.browser,
   });
 
-function initializeApollo(
+export function initializeApollo(
   initialState: $TsFixMe = null,
 ): ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> {
   const _apolloClient = apolloClient ?? createApolloClient();

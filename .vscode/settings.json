@@ -3,5 +3,7 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true
-  }
+  },
+  "prisma.plugin.nextjs.addTypesOnSave": true,
+  "prisma.plugin.nextjs.hasPrompted": true
 }

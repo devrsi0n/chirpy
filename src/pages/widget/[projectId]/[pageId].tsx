@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useRouter } from 'next/router';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import { Comment, User } from '@prisma/client';
 
@@ -9,17 +8,22 @@ import { Comment as SectionComment } from '$/sections/Comment';
 
 export type CommentProps = React.PropsWithChildren<InferGetStaticPropsType<typeof getStaticProps>>;
 
+// Demo: http://localhost:3000/widget/ckgji3ebs0019fncvpx2oa6x6/ckgp3mwax0000hmcvo897omp3
+
 /**
  * Comment widget for a page
  * @param props
  */
-export default function PageComment({ comments }: CommentProps): JSX.Element {
+export default function PageComment({
+  comments,
+}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   return (
     <div>
       <Heading as="h2">This is a comment widget</Heading>
       <Heading>comments:</Heading>
-      {comments?.map((comment) => (
+      {comments?.map((comment: $TsFixMe) => (
         <SectionComment
+          key={comment.id}
           name={comment.user.name}
           avatar={comment.user.avatar!}
           content={comment.content}
@@ -31,8 +35,8 @@ export default function PageComment({ comments }: CommentProps): JSX.Element {
 }
 
 type PathParams = {
-  projectId?: string;
-  pageId?: string;
+  projectId: string;
+  pageId: string;
 };
 
 // Get all project then prerender all their page comments
@@ -62,15 +66,15 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: true };
 };
 
-type StaticProps = PathParams & {
-  comments?: (Comment & {
-    user: User;
-    replies: Comment[];
-  })[];
-  error?: string;
-};
+// type StaticProps = PathParams & {
+//   comments?: (Comment & {
+//     user: User;
+//     replies: Comment[];
+//   })[];
+//   error?: string;
+// };
 
-export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<$TsFixMe, PathParams> = async ({ params }) => {
   try {
     if (!params) {
       return { props: { error: 'Error' } };
