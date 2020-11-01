@@ -1,0 +1,7 @@
+query pageByProject($projectId: String!, $url: String!, $title: String!) {
+  getOrCreatePage(projectId: $projectId, url: $url, title: $title) {
+    id
+    url
+    title
+  }
+}
