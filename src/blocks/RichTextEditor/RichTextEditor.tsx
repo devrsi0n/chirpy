@@ -15,13 +15,13 @@ import { Code } from '$/components/Code';
 import { Text as TextElement } from '$/components/Text';
 import { CustomEditor } from './utilities';
 import ReactDOM from 'react-dom';
-import { Button } from '$/components/Button';
-import clsx from 'clsx';
 import { BoldIcon } from '$/components/Icons/Bold.Icon';
 import { ItalicIcon } from '$/components/Icons/Italic.Icon';
+import { Format } from './type';
 
 export type RichTextEditorProps = React.PropsWithChildren<{
-  // Empty
+  value?: Node[];
+  onChange(value: Node[]): void;
 }>;
 
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
@@ -37,14 +37,23 @@ const getSavedContent = (): Node[] | undefined => {
   const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
   return content && JSON.parse(content);
 };
+const getValue = (propValue?: Node[]) => {
+  if (typeof propValue !== 'undefined') {
+    return propValue;
+  }
+  return getSavedContent() || INIT_INPUT;
+};
+const editor = withReact(createEditor());
 
 export function RichTextEditor(props: RichTextEditorProps): JSX.Element {
-  const editor = React.useMemo(() => withReact(createEditor()), []);
-  const [value, setValue] = React.useState<Node[]>(getSavedContent() || INIT_INPUT);
-  const handleRTEChange = React.useCallback((newValue: Node[]) => {
-    setValue(newValue);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
-  }, []);
+  const value = getValue(props.value);
+  const handleRTEChange = React.useCallback(
+    (newValue: Node[]) => {
+      props.onChange(newValue);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
+    },
+    [props.onChange],
+  );
   return (
     <Slate editor={editor} value={value} onChange={handleRTEChange}>
       <Editable
@@ -63,8 +72,8 @@ export function RichTextEditor(props: RichTextEditorProps): JSX.Element {
               return CustomEditor.toggleFormat(editor, 'bold');
             case 'formatItalic':
               return CustomEditor.toggleFormat(editor, 'italic');
-            case 'formatUnderline':
-              return CustomEditor.toggleFormat(editor, 'underline');
+            // case 'formatUnderline':
+            //   return CustomEditor.toggleFormat(editor, 'underline');
           }
         }}
       />
@@ -160,7 +169,6 @@ const HoveringToolbar = () => {
 };
 
 type Icon = 'bold' | 'italic';
-type Format = 'bold' | 'italic';
 
 const iconMap = {
   bold: BoldIcon,

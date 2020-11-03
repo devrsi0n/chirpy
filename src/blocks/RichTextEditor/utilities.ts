@@ -1,4 +1,5 @@
 import { Transforms, Editor, Text } from 'slate';
+import { Format } from './type';
 
 // Define our own custom set of helpers.
 export const CustomEditor = {
@@ -19,7 +20,7 @@ export const CustomEditor = {
     return !!match;
   },
 
-  isFormatActive(editor: Editor, format): boolean {
+  isFormatActive(editor: Editor, format: Format): boolean {
     const [match] = Editor.nodes(editor, {
       match: (n) => n[format] === true,
       mode: 'all',
@@ -27,7 +28,7 @@ export const CustomEditor = {
     return !!match;
   },
 
-  toggleFormat(editor: Editor, format): void {
+  toggleFormat(editor: Editor, format: Format): void {
     const isActive = CustomEditor.isFormatActive(editor, format);
     Transforms.setNodes(
       editor,

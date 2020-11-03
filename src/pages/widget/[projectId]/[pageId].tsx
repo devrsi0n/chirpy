@@ -5,8 +5,8 @@ import { Comment, User } from '@prisma/client';
 import { prisma } from '$server/context';
 import { Heading } from '$/components/Heading';
 import { Comment as SectionComment } from '$/blocks/Comment';
-import { CommentInput } from '$/blocks/CommentInput';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
+import { Node } from 'slate';
 
 export type CommentProps = React.PropsWithChildren<InferGetStaticPropsType<typeof getStaticProps>>;
 
@@ -19,10 +19,7 @@ export type CommentProps = React.PropsWithChildren<InferGetStaticPropsType<typeo
 export default function PageComment({
   comments,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  const [input, setInput] = React.useState('');
-  const handleChangeInput = React.useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(event.target.value);
-  }, []);
+  const [input, setInput] = React.useState<Node[]>();
   return (
     <div className="max-w-md mx-auto">
       {/* <Heading as="h2">This is a comment widget</Heading> */}
@@ -36,7 +33,7 @@ export default function PageComment({
           date={String(comment.createdAt)}
         />
       ))}
-      <RichTextEditor /*value={input} onChange={handleChangeInput}*/ />
+      <RichTextEditor value={input} onChange={setInput} />
     </div>
   );
 }
