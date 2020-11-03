@@ -55,6 +55,10 @@
     "passport-google-oauth20": "^2.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-markdown": "^5.0.2",
+    "remark-gfm": "^1.0.0",
+    "slate": "^0.59.0",
+    "slate-react": "^0.59.0",
     "superjson": "^1.4.0"
   },
   "devDependencies": {
@@ -76,8 +80,8 @@
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
     "@types/styled-jsx": "^2.2.8",
-    "@typescript-eslint/eslint-plugin": "^4.6.0",
-    "@typescript-eslint/parser": "^4.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-superjson-next": "^0.1.8",
     "concurrently": "^5.3.0",
