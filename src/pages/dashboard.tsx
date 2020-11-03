@@ -6,7 +6,7 @@ import { Button } from '$/components/Button';
 import { List } from '$/components/List';
 import { Heading } from '$/components/Heading';
 import { Dialog, DialogFooter } from '$/components/Dialog';
-import { Textfield } from '$/components/TextField';
+import { TextField } from '$/components/TextField';
 import { useRouter } from 'next/router';
 import { Text } from '$/components/Text';
 import { Layout } from '$/components/Layout';
@@ -91,7 +91,7 @@ export default function Dashboard(): JSX.Element {
         <Button className="mt-5">Integrate comment</Button>
         <Dialog show={showDialog} title="Create a new project">
           <div className="flex flex-col w-full">
-            <Textfield
+            <TextField
               placeholder="Project name"
               label="Project name"
               value={projectName}
