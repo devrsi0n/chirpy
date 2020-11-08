@@ -33,7 +33,8 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'bg-primary text-text-inverse border border-primary hover:bg-white hover:text-primary',
+  primary:
+    'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
   secondary: 'bg-background-secondary text-text-secondary border hover:text-text hover:bg-gray-200',
   text: 'text-text border-none hover:text-text-light',
 };

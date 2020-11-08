@@ -5,5 +5,17 @@
     "**/.hg/store/**": true
   },
   "prisma.plugin.nextjs.addTypesOnSave": true,
-  "prisma.plugin.nextjs.hasPrompted": true
+  "prisma.plugin.nextjs.hasPrompted": true,
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "askForPassword": true,
+      "driver": "PostgreSQL",
+      "name": "local-posrgres",
+      "database": "zoo",
+      "username": "postgres"
+    }
+  ]
 }

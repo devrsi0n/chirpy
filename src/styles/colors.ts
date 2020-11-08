@@ -2,41 +2,109 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import { ITheme } from '../types/theme.type';
 
 const { colors } = defaultTheme;
-const { gray, ...darkColors } = colors;
+// const { ...darkColors } = colors;
+
+const gray = {
+  // Off-white, Used to avoid darkmode strain.
+  100: '#FCFCFC',
+  // Background, Used for element backgrounds.
+  200: '#F7F7FC',
+  // Input Background, Used for input bg accessibility.
+  300: '#EFF0F7',
+  // Line, Used for line based elements.
+  400: '#D6D8E7',
+  // Placeholder, Used for initial copy of inputs.
+  500: '#A0A3BD',
+  // Label, Used for the label text.
+  600: '#6E7191',
+  // Body, Used for body copy text
+  700: '#4E4B66',
+  // Title-Active, Used for both links and titles.
+  800: '#14142B',
+  900: '#030310',
+};
 
 export const colorModes: ITheme = {
   light: {
-    ...colors,
+    // primary, Purple, Used as the primary color.
     primary: {
-      light: colors.indigo['400'],
-      '': colors.indigo['500'],
-      dark: colors.indigo['600'],
+      light: '#DED3FF',
+      '': '#5F2EEA',
+      dark: '#2A00A2',
+    },
+    // Secondary, Blue, Used for accents & actions.
+    secondary: {
+      light: '#D5F7FF',
+      '': '#1CC8EE',
+      dark: '#0096B7',
+    },
+    // Error, red, Used for error states.
+    error: {
+      light: '#FFF2F7',
+      '': '#ED2E7E',
+      dark: '#C30052',
+    },
+    // Green, Used for success states.
+    success: {
+      light: '#F3FDFA',
+      '': '#00BA88',
+      dark: '#00966D',
+    },
+    // yellow, Used to represent caution.
+    warn: {
+      light: '#FFF0D4',
+      '': '#F4B740',
+      dark: '#A26B00',
     },
     text: {
       light: gray['600'],
-      '': gray['900'],
-      secondary: gray['700'],
-      placeholder: gray['300'],
+      '': gray['700'],
+      active: gray['800'],
+      placeholder: gray['500'],
       inverse: colors.white,
     },
     background: {
-      secondary: gray['100'],
+      secondary: gray['200'],
       inverse: gray['800'],
-      '': colors.white,
+      '': gray['100'],
     },
-    divider: gray['200'],
+    gray,
+    divider: gray['300'],
   },
   dark: {
-    ...darkColors,
     primary: {
-      light: colors.indigo['400'],
-      '': colors.indigo['500'],
-      dark: colors.indigo['600'],
+      dark: '#DED3FF',
+      '': '#5F2EEA',
+      light: '#2A00A2',
+    },
+    // Secondary, Blue, Used for accents & actions.
+    secondary: {
+      dark: '#D5F7FF',
+      '': '#1CC8EE',
+      light: '#0096B7',
+    },
+    // Error, red, Used for error states.
+    error: {
+      light: '#FFF2F7',
+      '': '#ED2E7E',
+      dark: '#C30052',
+    },
+    // Green, Used for success states.
+    success: {
+      dark: '#F3FDFA',
+      '': '#00BA88',
+      light: '#00966D',
+    },
+    // yellow, Used to represent caution.
+    warn: {
+      dark: '#FFF0D4',
+      '': '#F4B740',
+      light: '#A26B00',
     },
     text: {
       light: gray['400'],
       '': gray['100'],
-      secondary: gray['300'],
+      active: gray['200'],
       placeholder: gray['700'],
       inverse: colors.black,
     },
@@ -56,6 +124,6 @@ export const colorModes: ITheme = {
       800: gray['200'],
       900: gray['100'],
     },
-    divider: gray['800'],
+    divider: gray['700'],
   },
 };
