@@ -10,7 +10,7 @@ export type DialogProps = React.PropsWithChildren<{
 export function Dialog({ title, footer, children, show }: DialogProps): JSX.Element {
   return (
     <Transition show={show}>
-      <div className="fixed z-10 inset-0 overflow-y-auto">
+      <dialog className="fixed z-10 inset-0 overflow-y-auto">
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition
             show={show}
@@ -54,7 +54,7 @@ export function Dialog({ title, footer, children, show }: DialogProps): JSX.Elem
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">{footer}</div>
           </Transition>
         </div>
-      </div>
+      </dialog>
     </Transition>
   );
 }

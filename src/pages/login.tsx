@@ -24,7 +24,7 @@ export default function Login(): JSX.Element {
           <Button variant="primary" onClick={handleClick}>
             Continue with GitHub
           </Button>
-          <Text className="py-3" variant="secondary">
+          <Text className="py-3" variant="sm">
             By clicking the buttons above, you acknowledge that you have read and understood, and
             agree to ZOO's <Link href="/terms-of-service">Terms of Service</Link> and{' '}
             <Link href="/privacy-policy">Privacy Policy</Link>.

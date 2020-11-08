@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-type Variant = 'primary' | 'secondary';
+type Variant = 'xs' | 'sm' | 'md' | 'lg';
 
 export type ITextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
@@ -13,12 +13,14 @@ export type ITextProps = React.PropsWithChildren<
 >;
 
 const variantStyles: Record<Variant, string> = {
-  primary: 'text-text',
-  secondary: 'text-text-secondary',
+  xs: 'text-xs font-medium',
+  sm: 'text-sm font-normal',
+  md: 'text-md font-normal',
+  lg: 'text-lg font-normal',
 };
 
 export function Text({
-  variant = 'primary',
+  variant = 'md',
   as: Tag = 'p',
   children,
   className = '',
@@ -29,7 +31,13 @@ export function Text({
   return (
     <Tag
       {...restProps}
-      className={clsx(variantStyles[variant], bold && 'font-bold', italic && 'italic', className)}
+      className={clsx(
+        'text-sans text-text',
+        variantStyles[variant],
+        bold && 'font-bold',
+        italic && 'italic',
+        className,
+      )}
     >
       {children}
     </Tag>

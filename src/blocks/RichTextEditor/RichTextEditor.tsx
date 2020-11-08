@@ -1,32 +1,27 @@
 // @refresh reset
 import * as React from 'react';
 import { createEditor, Editor, Node, Range } from 'slate';
-import {
-  Slate,
-  Editable,
-  withReact,
-  RenderElementProps,
-  RenderLeafProps,
-  useSlate,
-  ReactEditor,
-} from 'slate-react';
+import { Slate, Editable, withReact, useSlate, ReactEditor } from 'slate-react';
 
-import { Code } from '$/components/Code';
-import { Text as TextElement } from '$/components/Text';
 import { CustomEditor } from './utilities';
 import ReactDOM from 'react-dom';
 import { BoldIcon } from '$/components/Icons/Bold.Icon';
 import { ItalicIcon } from '$/components/Icons/Italic.Icon';
 import { Format } from './type';
+import { Leaf } from './Leaf';
+import { RenderElement } from './RenderElement';
+import clsx from 'clsx';
 
 export type RichTextEditorProps = React.PropsWithChildren<{
   value?: Node[];
-  onChange(value: Node[]): void;
+  onChange?(value: Node[]): void;
+  className?: string;
+  readOnly?: boolean;
 }>;
 
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
 
-const INIT_INPUT = [
+const DEFAULT_INPUT = [
   {
     type: 'paragraph',
     children: [{ text: `What's in your mind?` }],
@@ -41,32 +36,46 @@ const getValue = (propValue?: Node[]) => {
   if (typeof propValue !== 'undefined') {
     return propValue;
   }
-  return getSavedContent() || INIT_INPUT;
+  return getSavedContent() || DEFAULT_INPUT;
 };
-const editor = withReact(createEditor());
 
-export function RichTextEditor(props: RichTextEditorProps): JSX.Element {
-  const value = getValue(props.value);
+export function RichTextEditor({
+  onChange,
+  value: _value,
+  readOnly,
+  className,
+}: RichTextEditorProps): JSX.Element {
+  const value = getValue(_value);
   const handleRTEChange = React.useCallback(
     (newValue: Node[]) => {
-      props.onChange(newValue);
+      if (newValue === _value) {
+        return;
+      }
+      onChange?.(newValue);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
     },
-    [props.onChange],
+    [onChange, _value],
   );
+  const editor = React.useMemo(() => withReact(createEditor()), []);
+
   return (
     <Slate editor={editor} value={value} onChange={handleRTEChange}>
       <Editable
-        className="border p-2 m-1"
+        className={clsx(
+          'border p-2 m-1 rounded-sm',
+          readOnly && 'pointer-events-none select-text',
+          className,
+        )}
         style={{
-          resize: 'vertical',
-          overflowY: 'auto',
-          minHeight: '4em',
+          ...(!readOnly && {
+            resize: 'vertical',
+            overflowY: 'auto',
+            minHeight: '4em',
+          }),
         }}
         renderElement={RenderElement}
         renderLeaf={Leaf}
         onDOMBeforeInput={(event: Event): void => {
-          event.preventDefault();
           switch ((event as InputEvent).inputType) {
             case 'formatBold':
               return CustomEditor.toggleFormat(editor, 'bold');
@@ -80,31 +89,6 @@ export function RichTextEditor(props: RichTextEditorProps): JSX.Element {
       <HoveringToolbar />
     </Slate>
   );
-}
-
-function RenderElement(props: RenderElementProps) {
-  switch (props.element.type) {
-    case 'code':
-      return <Code {...props} />;
-    default:
-      return <TextElement {...props} />;
-  }
-}
-
-function Leaf({ attributes, children, leaf }: RenderLeafProps): JSX.Element {
-  if (leaf.bold) {
-    children = <strong>{children}</strong>;
-  }
-
-  if (leaf.italic) {
-    children = <em>{children}</em>;
-  }
-
-  if (leaf.underlined) {
-    children = <u>{children}</u>;
-  }
-
-  return <span {...attributes}>{children}</span>;
 }
 
 const HoveringToolbar = () => {

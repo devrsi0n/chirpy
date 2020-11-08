@@ -1,6 +1,7 @@
 import { asNexusMethod, makeSchema } from '@nexus/schema';
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 import { GraphQLDate } from 'graphql-iso-date';
+import GraphQLJSON from 'graphql-type-json';
 
 import { User } from './types/user';
 import { Team } from './types/team';
@@ -35,6 +36,6 @@ export const schema = makeSchema({
   shouldGenerateArtifacts: !isENVProd,
   shouldExitAfterGenerateArtifacts: Boolean(process.env.NEXUS_SHOULD_EXIT_AFTER_REFLECTION),
   plugins: [nexusSchemaPrisma({ experimentalCRUD: true })],
-  types: [GQLDate, User, Team, Project, Member, Page, Comment, Query, Mutation],
+  types: [GQLDate, GraphQLJSON, User, Team, Project, Member, Page, Comment, Query, Mutation],
   prettierConfig: process.cwd() + '/.prettierrc',
 });

@@ -1,0 +1,18 @@
+mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
+  createOneComment(data: { content: $content, page: { connect: { id: $pageId }}, user: { connect: { id: $userId }}}) {
+    id
+    content
+  }
+}
+
+query getAllCommentsByPage($pageId: String!) {
+  getAllCommentsByPage(pageId: $pageId ) {
+    id
+    content
+    user {
+      id
+      avatar
+      name
+    }
+  }
+}
