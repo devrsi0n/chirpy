@@ -1,7 +1,6 @@
 import passport, { Profile } from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as GitHubStrategy } from 'passport-github2';
-import { IncomingMessage, ServerResponse } from 'http';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ErrorHandler } from 'next-connect';
 import { serialize } from 'cookie';
@@ -10,6 +9,7 @@ import { AUTH_COOKIE_NAME } from './constants';
 import { createSecureToken } from './utilities/auth';
 import { redirect } from './response';
 import { prisma } from './context';
+import { getFirstQueryParam } from './utilities/url';
 
 interface User {
   id: string;
@@ -128,8 +128,8 @@ async function getUserByProviderProfile(profile: Profile, provider: 'github' | '
 export { passport };
 
 export async function handleSuccessfulLogin(
-  req: IncomingMessage,
-  res: ServerResponse,
+  req: NextApiRequest,
+  res: NextApiResponse,
 ): Promise<void> {
   const { id } = (req as $TsFixMe).user;
   const authToken = createSecureToken({
@@ -142,19 +142,21 @@ export async function handleSuccessfulLogin(
     maxAge: 60 * 60 * 24 * 365, // A year
   });
   res.setHeader('Set-Cookie', [authCookie]);
-  redirect(res, '/');
+  const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
+  redirect(res, redirectURL || '/');
 }
 
-export async function handleLogout(req: IncomingMessage, res: ServerResponse): Promise<void> {
+export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const authCookie = serialize(AUTH_COOKIE_NAME, '', {
     path: '/',
     httpOnly: true,
     sameSite: 'lax',
     maxAge: -1,
   });
-  console.log(authCookie);
+
   res.setHeader('Set-Cookie', [authCookie]);
-  redirect(res, '/');
+  const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
+  redirect(res, redirectURL || '/');
 }
 
 export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (

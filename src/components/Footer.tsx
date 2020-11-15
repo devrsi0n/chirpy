@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '$/components/Button';
+import { Button } from '$/components/buttons/Button';
 import { Link } from '../components/Link';
 import { layoutStyle } from './styles';
 import { useTheme } from '$/hooks/useTheme';
@@ -36,7 +36,7 @@ export function Footer(): JSX.Element {
         </Link>
         <Link href="/privacy-policy">Privacy policy</Link>
       </nav>
-      <Button variant="text" className="capitalize" onClick={handleClick} icon={icon}>
+      <Button variant="borderless" className="capitalize" onClick={handleClick} icon={icon}>
         {colorMode}
       </Button>
       <style jsx>{layoutStyle}</style>

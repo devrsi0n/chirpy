@@ -1,21 +1,30 @@
 import * as React from 'react';
 
-import { SunIcon, ISunIconProps } from './Icons/Sun.Icon';
-import { SettingIcon } from './Icons/Setting.Icon';
-import { MoonIcon } from './Icons/Moon.Icon';
+import { SunIcon, ISunIconProps } from '../Icons/Sun.Icon';
+import { SettingIcon } from '../Icons/Setting.Icon';
+import { MoonIcon } from '../Icons/Moon.Icon';
 import clsx from 'clsx';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Variant = 'primary' | 'secondary' | 'text';
+type Color = 'primary' /*| 'secondary'*/;
+type Variant = 'solid' | 'borderless' /*| 'ghost' */;
 type Icon = 'sun' | 'moon' | 'setting';
 
 export interface IButtonProps extends React.ComponentProps<'button'> {
-  children: React.ReactNode;
+  /**
+   * @default solid
+   */
   variant?: Variant;
+  children: React.ReactNode;
+  color?: Color;
   disabled?: boolean;
   size?: Size;
   icon?: Icon;
   shadow?: boolean;
+  /**
+   * @default true
+   */
+  rounded?: boolean;
   onClick?: () => void;
 }
 
@@ -32,22 +41,31 @@ const sizeStyles: Record<Size, string> = {
   xl: 'p-4 text-xl',
 };
 
-const variantStyles: Record<Variant, string> = {
-  primary:
-    'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
-  secondary: 'bg-background-secondary text-text-secondary border hover:text-text hover:bg-gray-200',
-  text: 'text-text border-none hover:text-text-light',
+// const colorStyles: Record<Color, string> = {
+//   primary:
+//     'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
+//   secondary: 'bg-background-secondary text-text-secondary border hover:text-text hover:bg-gray-200',
+//   // text: 'text-text border-none hover:text-text-light',
+// };
+
+type VariantColor = `${Variant}-${Color}`;
+
+const variantColors: Record<VariantColor, string> = {
+  'solid-primary': 'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
+  'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary'
 };
 
 export function Button(props: IButtonProps): JSX.Element {
   const {
-    variant = 'primary',
+    variant = 'solid',
+    color = 'primary',
     disabled = false,
     size = 'md',
     className = '',
     icon,
     shadow = false,
     type = 'button',
+    rounded= 'true',
     onMouseDown,
     onClick,
     children,
@@ -86,9 +104,10 @@ export function Button(props: IButtonProps): JSX.Element {
       type={type}
       ref={buttonRef}
       className={clsx(
-        `btn relative overflow-hidden inline-flex flex-row justify-center items-center rounded select-none outline-none transition duration-150 ease-in-out`,
+        `btn relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out`,
         sizeStyles[size],
-        { [variantStyles[variant]]: !disabled, 'shadow-md transform hover:-translate-y-1': shadow },
+        variantColors[`${variant}-${color}`],
+        { 'shadow-md transform hover:-translate-y-1': shadow, 'rounded': rounded },
         disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
         className,
       )}

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 type Variant = 'xs' | 'sm' | 'md' | 'lg';
 
-export type ITextProps = React.PropsWithChildren<
+export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
     variant?: Variant;
     as?: 'p' | 'span';
@@ -27,7 +27,7 @@ export function Text({
   bold,
   italic,
   ...restProps
-}: ITextProps): JSX.Element {
+}: TextProps): JSX.Element {
   return (
     <Tag
       {...restProps}

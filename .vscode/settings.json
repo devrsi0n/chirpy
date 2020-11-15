@@ -17,5 +17,6 @@
       "database": "zoo",
       "username": "postgres"
     }
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { useCreateOneProjectMutation } from '$/generated/graphql';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Button } from '$/components/Button';
+import { Button } from '$/components/buttons/Button';
 import { List } from '$/components/List';
 import { Heading } from '$/components/Heading';
 import { Dialog, DialogFooter } from '$/components/Dialog';
@@ -100,7 +100,7 @@ export default function Dashboard(): JSX.Element {
             />
 
             <DialogFooter>
-              <Button variant="secondary" onClick={handleCloseDialog} className="w-full sm:w-auto">
+              <Button variant="borderless" onClick={handleCloseDialog} className="w-full sm:w-auto">
                 Cancel
               </Button>
               <Button

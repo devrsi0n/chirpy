@@ -2,7 +2,7 @@ import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Link } from '$/components/Link';
-import { Button } from '$/components/Button';
+import { Button } from '$/components/buttons/Button';
 import { Text } from '$/components/Text';
 import { Heading } from '$/components/Heading';
 import { Card } from '$/components/Card';
@@ -21,9 +21,7 @@ export default function Login(): JSX.Element {
         </Head>
         <Card className="py-5 max-w-screen-md">
           <Heading as="h2">Log in</Heading>
-          <Button variant="primary" onClick={handleClick}>
-            Continue with GitHub
-          </Button>
+          <Button onClick={handleClick}>Continue with GitHub</Button>
           <Text className="py-3" variant="sm">
             By clicking the buttons above, you acknowledge that you have read and understood, and
             agree to ZOO's <Link href="/terms-of-service">Terms of Service</Link> and{' '}

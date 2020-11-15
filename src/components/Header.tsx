@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '$/components/Button';
+import { Button } from '$/components/buttons/Button';
 import { Link } from '../components/Link';
 import { Popover } from './Popover';
 import { useRouter } from 'next/router';
@@ -75,7 +75,7 @@ export function Header(): JSX.Element {
             {data?.currentUser?.avatar ? (
               <Popover
                 content={
-                  <Button variant="text" onClick={handleClick}>
+                  <Button variant="borderless" onClick={handleClick}>
                     Logout
                   </Button>
                 }

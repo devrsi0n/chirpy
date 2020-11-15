@@ -5,8 +5,8 @@ import { prisma } from '$server/context';
 import { Comment as SectionComment } from '$/blocks/Comment';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
-import { Tab } from '$/components/Tab';
-import { Button } from '$/components/Button';
+import { Tabs } from '$/components/Tabs/Tabs';
+import { Button } from '$/components/buttons/Button';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
@@ -15,10 +15,14 @@ import {
   GetAllCommentsByPageQueryVariables,
 } from '$/generated/graphql';
 import { useApollo } from '$/lib/apollo-client';
+import { DropDownLogin } from '$/blocks/DropDownLogin';
+import { DropDownUser } from '$/blocks/DropDownUser';
 
 export type CommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 // Demo: http://localhost:3000/widget/ckgji3ebs0019fncvpx2oa6x6/ckgp3mwax0000hmcvo897omp3
+
+const COMMENT_TAB_VALUE = 'Comment';
 
 /**
  * Comment widget for a page
@@ -57,30 +61,46 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment, client]);
 
-  const [activeIndex, setActiveIndex] = React.useState(0);
   return (
     <div className="max-w-md mx-auto my-3">
-      <Tab
-        activeIndex={activeIndex}
-        onClickTab={setActiveIndex}
+      <Tabs
+        initialValue={COMMENT_TAB_VALUE}
         className="mb-3"
-        tabs={[<span>{comments.length} comments</span>, <span>Echo</span>]}
-      />
-      <div className="space-y-2">
-        {comments?.map((comment: $TsFixMe) => (
-          <SectionComment
-            key={comment.id}
-            name={comment.user.name}
-            avatar={comment.user.avatar!}
-            content={comment.content}
-            date={String(comment.createdAt)}
+        rightItems={
+          isLogin && userData?.currentUser?.avatar && userData?.currentUser?.name ? (
+            <DropDownUser
+              avatar={userData?.currentUser?.avatar}
+              name={userData?.currentUser?.name}
+            />
+          ) : (
+            <DropDownLogin />
+          )
+        }
+      >
+        <div className="flex flex-row justify-between">
+          <Tabs.Item label={`${comments.length} comments`} value={COMMENT_TAB_VALUE}>
+            <div className="space-y-2">
+              {comments?.map((comment: Comment) => (
+                <SectionComment
+                  key={comment.id}
+                  name={comment.user.name}
+                  avatar={comment.user.avatar!}
+                  content={comment.content}
+                  date={String((comment as $TsFixMe).createdAt as string)}
+                />
+              ))}
+              <RichTextEditor value={input} onChange={setInput} />
+              <div className="flex flex-row justify-end">
+                {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
+              </div>
+            </div>
+          </Tabs.Item>
+          <Tabs.Item
+            label={process.env.NEXT_PUBLIC_APP_NAME}
+            value={process.env.NEXT_PUBLIC_APP_NAME}
           />
-        ))}
-        <RichTextEditor value={input} onChange={setInput} />
-        <div className="flex flex-row justify-end">
-          {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
         </div>
-      </div>
+      </Tabs>
     </div>
   );
 }
