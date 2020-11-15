@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
 type Size = 'sm' | 'md' | 'lg';
@@ -26,7 +27,11 @@ export function Avatar({
     <img
       {...imgProps}
       alt={alt}
-      className={`flex items-center justify-center rounded-full bg-gray-100 ${sizeStyles[size]} ${className}`}
+      className={clsx(
+        `flex items-center justify-center rounded-full bg-gray-100 select-none`,
+        sizeStyles[size],
+        className,
+      )}
     >
       {children}
     </img>

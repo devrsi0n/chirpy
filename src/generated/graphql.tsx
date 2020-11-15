@@ -109,6 +109,7 @@ export type Comment = {
   page: Page;
   replies: Array<Comment>;
   user: User;
+  createdAt: Scalars['DateTime'];
 };
 
 
@@ -190,6 +191,7 @@ export type CommentWhereUniqueInput = {
 };
 
 
+
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -232,59 +234,58 @@ export type CommentCreateInput = {
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
 };
 
-
 export type TeamCreateOneWithoutProjectInput = {
   create?: Maybe<TeamCreateWithoutProjectInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutProjectInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectInput>;
 };
 
 export type UserCreateOneWithoutProjectsInput = {
   create?: Maybe<UserCreateWithoutProjectsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutProjectInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutprojectsInput>;
 };
 
 export type PageCreateManyWithoutProjectInput = {
   create?: Maybe<Array<PageCreateWithoutProjectInput>>;
   connect?: Maybe<Array<PageWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutProjectInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectInput>>;
 };
 
 export type CommentCreateManyWithoutPageInput = {
   create?: Maybe<Array<CommentCreateWithoutPageInput>>;
   connect?: Maybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutPageInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutpageInput>>;
 };
 
 export type ProjectCreateOneWithoutPagesInput = {
   create?: Maybe<ProjectCreateWithoutPagesInput>;
   connect?: Maybe<ProjectWhereUniqueInput>;
-  connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutPageInput>;
+  connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutpagesInput>;
 };
 
 export type UserCreateOneWithoutCommentInput = {
   create?: Maybe<UserCreateWithoutCommentInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutCommentInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutcommentInput>;
 };
 
 export type PageCreateOneWithoutCommentsInput = {
   create?: Maybe<PageCreateWithoutCommentsInput>;
   connect?: Maybe<PageWhereUniqueInput>;
-  connectOrCreate?: Maybe<PageCreateOrConnectWithoutCommentInput>;
+  connectOrCreate?: Maybe<PageCreateOrConnectWithoutcommentsInput>;
 };
 
 export type CommentCreateManyWithoutCommentInput = {
   create?: Maybe<Array<CommentCreateWithoutCommentInput>>;
   connect?: Maybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutCommentInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutcommentInput>>;
 };
 
 export type CommentCreateOneWithoutRepliesInput = {
   create?: Maybe<CommentCreateWithoutRepliesInput>;
   connect?: Maybe<CommentWhereUniqueInput>;
-  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutCommentInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutrepliesInput>;
 };
 
 export type TeamCreateWithoutProjectInput = {
@@ -299,7 +300,7 @@ export type TeamWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export type TeamCreateOrConnectWithoutProjectInput = {
+export type TeamCreateOrConnectWithoutprojectInput = {
   where: TeamWhereUniqueInput;
   create: TeamCreateWithoutProjectInput;
 };
@@ -318,7 +319,7 @@ export type UserCreateWithoutProjectsInput = {
   comment?: Maybe<CommentCreateManyWithoutUserInput>;
 };
 
-export type UserCreateOrConnectWithoutProjectInput = {
+export type UserCreateOrConnectWithoutprojectsInput = {
   where: UserWhereUniqueInput;
   create: UserCreateWithoutProjectsInput;
 };
@@ -332,7 +333,7 @@ export type PageCreateWithoutProjectInput = {
   comments?: Maybe<CommentCreateManyWithoutPageInput>;
 };
 
-export type PageCreateOrConnectWithoutProjectInput = {
+export type PageCreateOrConnectWithoutprojectInput = {
   where: PageWhereUniqueInput;
   create: PageCreateWithoutProjectInput;
 };
@@ -347,7 +348,7 @@ export type CommentCreateWithoutPageInput = {
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
 };
 
-export type CommentCreateOrConnectWithoutPageInput = {
+export type CommentCreateOrConnectWithoutpageInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutPageInput;
 };
@@ -361,7 +362,7 @@ export type ProjectCreateWithoutPagesInput = {
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
 };
 
-export type ProjectCreateOrConnectWithoutPageInput = {
+export type ProjectCreateOrConnectWithoutpagesInput = {
   where: ProjectWhereUniqueInput;
   create: ProjectCreateWithoutPagesInput;
 };
@@ -380,7 +381,7 @@ export type UserCreateWithoutCommentInput = {
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
 };
 
-export type UserCreateOrConnectWithoutCommentInput = {
+export type UserCreateOrConnectWithoutcommentInput = {
   where: UserWhereUniqueInput;
   create: UserCreateWithoutCommentInput;
 };
@@ -394,7 +395,7 @@ export type PageCreateWithoutCommentsInput = {
   project: ProjectCreateOneWithoutPagesInput;
 };
 
-export type PageCreateOrConnectWithoutCommentInput = {
+export type PageCreateOrConnectWithoutcommentsInput = {
   where: PageWhereUniqueInput;
   create: PageCreateWithoutCommentsInput;
 };
@@ -409,7 +410,7 @@ export type CommentCreateWithoutCommentInput = {
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
 };
 
-export type CommentCreateOrConnectWithoutCommentInput = {
+export type CommentCreateOrConnectWithoutcommentInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutCommentInput;
 };
@@ -424,10 +425,15 @@ export type CommentCreateWithoutRepliesInput = {
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
 };
 
+export type CommentCreateOrConnectWithoutrepliesInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutRepliesInput;
+};
+
 export type MemberCreateManyWithoutTeamInput = {
   create?: Maybe<Array<MemberCreateWithoutTeamInput>>;
   connect?: Maybe<Array<MemberWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutTeamInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutteamInput>>;
 };
 
 export enum UserType {
@@ -438,19 +444,19 @@ export enum UserType {
 export type MemberCreateManyWithoutUserInput = {
   create?: Maybe<Array<MemberCreateWithoutUserInput>>;
   connect?: Maybe<Array<MemberWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutuserInput>>;
 };
 
 export type CommentCreateManyWithoutUserInput = {
   create?: Maybe<Array<CommentCreateWithoutUserInput>>;
   connect?: Maybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutuserInput>>;
 };
 
 export type ProjectCreateManyWithoutUserInput = {
   create?: Maybe<Array<ProjectCreateWithoutUserInput>>;
   connect?: Maybe<Array<ProjectWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutuserInput>>;
 };
 
 export type MemberCreateWithoutTeamInput = {
@@ -461,7 +467,7 @@ export type MemberCreateWithoutTeamInput = {
   user: UserCreateOneWithoutMembersInput;
 };
 
-export type MemberCreateOrConnectWithoutTeamInput = {
+export type MemberCreateOrConnectWithoutteamInput = {
   where: MemberWhereUniqueInput;
   create: MemberCreateWithoutTeamInput;
 };
@@ -474,7 +480,7 @@ export type MemberCreateWithoutUserInput = {
   team: TeamCreateOneWithoutMembersInput;
 };
 
-export type MemberCreateOrConnectWithoutUserInput = {
+export type MemberCreateOrConnectWithoutuserInput = {
   where: MemberWhereUniqueInput;
   create: MemberCreateWithoutUserInput;
 };
@@ -489,7 +495,7 @@ export type CommentCreateWithoutUserInput = {
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
 };
 
-export type CommentCreateOrConnectWithoutUserInput = {
+export type CommentCreateOrConnectWithoutuserInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutUserInput;
 };
@@ -503,7 +509,7 @@ export type ProjectCreateWithoutUserInput = {
   pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
-export type ProjectCreateOrConnectWithoutUserInput = {
+export type ProjectCreateOrConnectWithoutuserInput = {
   where: ProjectWhereUniqueInput;
   create: ProjectCreateWithoutUserInput;
 };
@@ -511,13 +517,13 @@ export type ProjectCreateOrConnectWithoutUserInput = {
 export type UserCreateOneWithoutMembersInput = {
   create?: Maybe<UserCreateWithoutMembersInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutMemberInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutmembersInput>;
 };
 
 export type TeamCreateOneWithoutMembersInput = {
   create?: Maybe<TeamCreateWithoutMembersInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutMemberInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutmembersInput>;
 };
 
 export type UserCreateWithoutMembersInput = {
@@ -534,7 +540,7 @@ export type UserCreateWithoutMembersInput = {
   comment?: Maybe<CommentCreateManyWithoutUserInput>;
 };
 
-export type UserCreateOrConnectWithoutMemberInput = {
+export type UserCreateOrConnectWithoutmembersInput = {
   where: UserWhereUniqueInput;
   create: UserCreateWithoutMembersInput;
 };
@@ -547,7 +553,7 @@ export type TeamCreateWithoutMembersInput = {
   project?: Maybe<ProjectCreateManyWithoutTeamInput>;
 };
 
-export type TeamCreateOrConnectWithoutMemberInput = {
+export type TeamCreateOrConnectWithoutmembersInput = {
   where: TeamWhereUniqueInput;
   create: TeamCreateWithoutMembersInput;
 };
@@ -555,7 +561,7 @@ export type TeamCreateOrConnectWithoutMemberInput = {
 export type ProjectCreateManyWithoutTeamInput = {
   create?: Maybe<Array<ProjectCreateWithoutTeamInput>>;
   connect?: Maybe<Array<ProjectWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutTeamInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutteamInput>>;
 };
 
 export type ProjectCreateWithoutTeamInput = {
@@ -567,7 +573,7 @@ export type ProjectCreateWithoutTeamInput = {
   pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
-export type ProjectCreateOrConnectWithoutTeamInput = {
+export type ProjectCreateOrConnectWithoutteamInput = {
   where: ProjectWhereUniqueInput;
   create: ProjectCreateWithoutTeamInput;
 };
@@ -583,7 +589,7 @@ export type CreateOneCommentMutation = (
   { __typename?: 'Mutation' }
   & { createOneComment: (
     { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'content'>
+    & Pick<Comment, 'id' | 'content' | 'createdAt'>
   ) }
 );
 
@@ -596,7 +602,7 @@ export type GetAllCommentsByPageQuery = (
   { __typename?: 'Query' }
   & { getAllCommentsByPage?: Maybe<Array<Maybe<(
     { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'content'>
+    & Pick<Comment, 'id' | 'content' | 'createdAt'>
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'avatar' | 'name'>
@@ -667,6 +673,7 @@ export const CreateOneCommentDocument = gql`
   ) {
     id
     content
+    createdAt
   }
 }
     `;
@@ -707,6 +714,7 @@ export const GetAllCommentsByPageDocument = gql`
       avatar
       name
     }
+    createdAt
   }
 }
     `;

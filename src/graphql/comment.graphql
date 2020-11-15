@@ -2,6 +2,7 @@ mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
   createOneComment(data: { content: $content, page: { connect: { id: $pageId }}, user: { connect: { id: $userId }}}) {
     id
     content
+    createdAt
   }
 }
 
@@ -14,5 +15,6 @@ query getAllCommentsByPage($pageId: String!) {
       avatar
       name
     }
+    createdAt
   }
 }
