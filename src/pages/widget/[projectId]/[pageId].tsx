@@ -7,6 +7,7 @@ import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
 import { Tabs } from '$/components/Tabs/Tabs';
 import { Button } from '$/components/buttons/Button';
+import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
@@ -56,6 +57,7 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
           },
         })
         .then((data) => {
+          setInput(undefined);
           setComments(data.data.getAllCommentsByPage);
         });
     });
@@ -77,30 +79,43 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
           )
         }
       >
-        <div className="flex flex-row justify-between">
-          <Tabs.Item label={`${comments.length} comments`} value={COMMENT_TAB_VALUE}>
-            <div className="space-y-2">
-              {comments?.map((comment: Comment) => (
-                <SectionComment
-                  key={comment.id}
-                  name={comment.user.name}
-                  avatar={comment.user.avatar!}
-                  content={comment.content}
-                  date={String((comment as $TsFixMe).createdAt as string)}
-                />
-              ))}
-              <RichTextEditor value={input} onChange={setInput} />
-              <div className="flex flex-row justify-end">
-                {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
-              </div>
+        <Tabs.Item label={`${comments.length} comments`} value={COMMENT_TAB_VALUE}>
+          <div className="space-y-2">
+            {comments?.map((comment: Comment) => (
+              <SectionComment
+                key={comment.id}
+                name={comment.user.name}
+                avatar={comment.user.avatar!}
+                content={comment.content}
+                date={String((comment as $TsFixMe).createdAt as string)}
+              />
+            ))}
+            <RichTextEditor
+              {...{
+                ...(!isLogin && {
+                  disabled: true,
+                  placeholder: [
+                    {
+                      type: 'paragraph',
+                      children: [{ text: `Please login first.` }],
+                    },
+                  ],
+                }),
+              }}
+              value={input}
+              onChange={setInput}
+            />
+            <div className="flex flex-row justify-end">
+              {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
             </div>
-          </Tabs.Item>
-          <Tabs.Item
-            label={process.env.NEXT_PUBLIC_APP_NAME}
-            value={process.env.NEXT_PUBLIC_APP_NAME}
-          />
-        </div>
+          </div>
+        </Tabs.Item>
+        <Tabs.Item
+          label={process.env.NEXT_PUBLIC_APP_NAME}
+          value={process.env.NEXT_PUBLIC_APP_NAME}
+        />
       </Tabs>
+      <Text className="text-right">Powered by {process.env.NEXT_PUBLIC_APP_NAME}</Text>
     </div>
   );
 }

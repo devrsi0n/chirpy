@@ -6,9 +6,10 @@ type Variant = 'xs' | 'sm' | 'md' | 'lg';
 export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
     variant?: Variant;
-    as?: 'p' | 'span';
+    as?: 'p' | 'span' | 'time';
     bold?: boolean;
     italic?: boolean;
+    disabled?: boolean;
   }
 >;
 
@@ -26,6 +27,7 @@ export function Text({
   className = '',
   bold,
   italic,
+  disabled,
   ...restProps
 }: TextProps): JSX.Element {
   return (
@@ -36,6 +38,7 @@ export function Text({
         variantStyles[variant],
         bold && 'font-bold',
         italic && 'italic',
+        disabled && 'text-gray-500',
         className,
       )}
     >

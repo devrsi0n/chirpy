@@ -11,16 +11,6 @@
 @tailwind components;
 
 @layer base {
-  input:focus {
-    outline: none;
-  }
-
-  * {
-    text-rendering: optimizeLegibility;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-appearance: none;
-  }
-
   :root {
     /* 13px */
     --text-xs: 0.8125rem;
@@ -65,4 +55,14 @@
     color: var(--colors-primary-light);
     background: var(--colors-primary);
   }
+}
+
+input:focus {
+  outline: none;
+}
+
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
 }

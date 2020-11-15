@@ -25,7 +25,13 @@ export function Toggle({
   const memoLabel = React.useMemo(
     () => (
       <Switch.Label className="overflow-hidden whitespace-no-wrap">
-        <Text as="span" {...labelProps}>
+        <Text
+          as="span"
+          style={{
+            cursor: 'pointer',
+          }}
+          {...labelProps}
+        >
           {label}
         </Text>
       </Switch.Label>
@@ -61,7 +67,7 @@ export function Toggle({
   );
 
   return (
-    <Switch.Group as="div" className="w-full flex items-center space-x-4 mb-4">
+    <Switch.Group as="div" className="w-full flex items-center space-x-4">
       {memoElements}
     </Switch.Group>
   );

@@ -8,5 +8,6 @@ export const Comment = objectType({
     t.model.page();
     t.model.replies();
     t.model.user();
+    t.model.createdAt();
   },
 });

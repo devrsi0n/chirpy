@@ -104,7 +104,7 @@ export function Button(props: IButtonProps): JSX.Element {
       type={type}
       ref={buttonRef}
       className={clsx(
-        `btn relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out`,
+        'btn',
         sizeStyles[size],
         variantColors[`${variant}-${color}`],
         { 'shadow-md transform hover:-translate-y-1': shadow, 'rounded': rounded },
@@ -119,6 +119,7 @@ export function Button(props: IButtonProps): JSX.Element {
       {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
       <style jsx>{`
         .btn {
+          @apply relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out;
           -webkit-tap-highlight-color: transparent;
           -webkit-appearance: none;
         }

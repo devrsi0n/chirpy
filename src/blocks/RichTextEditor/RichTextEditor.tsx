@@ -2,22 +2,29 @@
 import * as React from 'react';
 import { createEditor, Editor, Node, Range } from 'slate';
 import { Slate, Editable, withReact, useSlate, ReactEditor } from 'slate-react';
+import clsx from 'clsx';
 
 import { CustomEditor } from './utilities';
-import ReactDOM from 'react-dom';
 import { BoldIcon } from '$/components/Icons/Bold.Icon';
 import { ItalicIcon } from '$/components/Icons/Italic.Icon';
 import { Format } from './type';
 import { Leaf } from './Leaf';
 import { RenderElement } from './RenderElement';
-import clsx from 'clsx';
+import { RichTextEditorContext } from './RichTextEditorContext';
+import { Divider } from '$/components/Divider';
 
-export type RichTextEditorProps = React.PropsWithChildren<{
+interface IBaseProps {
+  children?: React.ReactNode;
   value?: Node[];
   onChange?(value: Node[]): void;
   className?: string;
   readOnly?: boolean;
-}>;
+}
+
+interface IRichTextEditorProps extends IBaseProps {
+  disabled?: boolean;
+  placeholder?: Node[];
+}
 
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
 
@@ -32,20 +39,19 @@ const getSavedContent = (): Node[] | undefined => {
   const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
   return content && JSON.parse(content);
 };
-const getValue = (propValue?: Node[]) => {
-  if (typeof propValue !== 'undefined') {
-    return propValue;
+const getValue = (props?: IRichTextEditorProps) => {
+  if (props?.disabled) {
+    return props.placeholder || DEFAULT_INPUT;
   }
-  return getSavedContent() || DEFAULT_INPUT;
+  if (typeof props?.value !== 'undefined') {
+    return props.value;
+  }
+  return getSavedContent() || props?.placeholder || DEFAULT_INPUT;
 };
 
-export function RichTextEditor({
-  onChange,
-  value: _value,
-  readOnly,
-  className,
-}: RichTextEditorProps): JSX.Element {
-  const value = getValue(_value);
+export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
+  const { onChange, value: _value, readOnly, className, disabled } = props;
+  const value = getValue(props);
   const handleRTEChange = React.useCallback(
     (newValue: Node[]) => {
       if (newValue === _value) {
@@ -57,98 +63,60 @@ export function RichTextEditor({
     [onChange, _value],
   );
   const editor = React.useMemo(() => withReact(createEditor()), []);
+  const richTextEditorContext = React.useMemo(() => ({ disabled }), [disabled]);
 
   return (
-    <Slate editor={editor} value={value} onChange={handleRTEChange}>
-      <Editable
-        className={clsx(
-          'border p-2 m-1 rounded-sm',
-          readOnly && 'pointer-events-none select-text',
-          className,
-        )}
-        style={{
-          ...(!readOnly && {
-            resize: 'vertical',
-            overflowY: 'auto',
-            minHeight: '4em',
-          }),
-        }}
-        renderElement={RenderElement}
-        renderLeaf={Leaf}
-        onDOMBeforeInput={(event: Event): void => {
-          switch ((event as InputEvent).inputType) {
-            case 'formatBold':
-              return CustomEditor.toggleFormat(editor, 'bold');
-            case 'formatItalic':
-              return CustomEditor.toggleFormat(editor, 'italic');
-            // case 'formatUnderline':
-            //   return CustomEditor.toggleFormat(editor, 'underline');
-          }
-        }}
-      />
-      <HoveringToolbar />
-    </Slate>
+    <RichTextEditorContext.Provider value={richTextEditorContext}>
+      <Slate editor={editor} value={value} onChange={handleRTEChange}>
+        <section className="border m-1">
+          {!readOnly && <HoveringToolbar />}
+          <Editable
+            className={clsx(
+              'rounded-sm pb-2 px-2',
+              readOnly && 'pointer-events-none select-text',
+              disabled &&
+                'bg-gray-200 text-text-placeholder pointer-events-none cursor-not-allowed',
+              className,
+            )}
+            style={{
+              ...(!readOnly && {
+                resize: 'vertical',
+                overflowY: 'auto',
+                minHeight: '4em',
+              }),
+              ...(disabled && {
+                cursor: 'not-allowed',
+              }),
+            }}
+            renderElement={RenderElement}
+            renderLeaf={Leaf}
+            onDOMBeforeInput={(event: Event): void => {
+              switch ((event as InputEvent).inputType) {
+                case 'formatBold':
+                  return CustomEditor.toggleFormat(editor, 'bold');
+                case 'formatItalic':
+                  return CustomEditor.toggleFormat(editor, 'italic');
+                // case 'formatUnderline':
+                //   return CustomEditor.toggleFormat(editor, 'underline');
+              }
+            }}
+          />
+        </section>
+      </Slate>
+    </RichTextEditorContext.Provider>
   );
 }
 
 const HoveringToolbar = () => {
-  const ref = React.useRef<HTMLDivElement>(null);
-  const editor = useSlate();
-
-  React.useEffect(() => {
-    const el = ref.current;
-    const { selection } = editor;
-
-    if (!el) {
-      return;
-    }
-
-    if (
-      !selection ||
-      !ReactEditor.isFocused(editor) ||
-      Range.isCollapsed(selection) ||
-      Editor.string(editor, selection) === ''
-    ) {
-      // el.removeAttribute('style');
-      el.style.top = '-10000px';
-      el.style.left = '-10000px';
-      return;
-    }
-
-    const domSelection = window.getSelection();
-    if (!domSelection) {
-      return;
-    }
-    const domRange = domSelection.getRangeAt(0);
-    const rect = domRange.getBoundingClientRect();
-    el.style.opacity = '1';
-    el.style.top = `${rect.top + window.pageYOffset - el.offsetHeight}px`;
-    el.style.left = `${rect.left + window.pageXOffset - el.offsetWidth / 2 + rect.width / 2}px`;
-  });
-
   return (
-    <Portal>
-      <div
-        id="test"
-        ref={ref}
-        style={{
-          padding: '8px 7px 6px',
-          position: 'absolute',
-          zIndex: 1,
-          top: '-10000px',
-          left: '-10000px',
-          marginTop: '-6px',
-          opacity: '0',
-          backgroundColor: '#222',
-          borderRadius: '4px',
-          transition: 'opacity 0.75s',
-        }}
-      >
-        <FormatButton format="bold" icon="bold" className="text-background" />
-        <FormatButton format="italic" icon="italic" className="text-background" />
-        {/* <FormatButton format="underlined" icon="format_underlined" /> */}
+    <div className="pt-2">
+      <div className="px-2 space-x-2">
+        <FormatButton format="bold" icon="bold" className="text-text" />
+        <FormatButton format="italic" icon="italic" className="text-text" />
       </div>
-    </Portal>
+      {/* <FormatButton format="underlined" icon="format_underlined" /> */}
+      <Divider />
+    </div>
   );
 };
 
@@ -180,11 +148,4 @@ const FormatButton = ({ format, icon, ...restProps }: FormatButtonProps) => {
       <Icon />
     </button>
   );
-};
-
-export const Portal = ({ children }: { children: React.ReactNode }): JSX.Element => {
-  if (typeof window === 'undefined') {
-    return <></>;
-  }
-  return ReactDOM.createPortal(children, window.document.body);
 };

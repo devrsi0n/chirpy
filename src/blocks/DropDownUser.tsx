@@ -4,6 +4,7 @@ import * as React from 'react';
 import LogOut from '@geist-ui/react-icons/logOut';
 import { useRouter } from 'next/router';
 import { Toggle } from '$/components/Toggle';
+import { Divider } from '$/components/Divider';
 
 export type DropDownUserProps = {
   avatar: string;
@@ -21,13 +22,6 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   return (
     <DropDownMenu content={<Avatar src={props.avatar} alt={`The avatar of ${props.name}`} />}>
-      <DropDownMenu.Item
-        className="flex flex-row justify-end items-center space-x-2"
-        onClick={handleClickLogOut}
-      >
-        <LogOut />
-        <span>Logout</span>
-      </DropDownMenu.Item>
       <DropDownMenu.Item>
         <Toggle
           label="Subscribe this comment"
@@ -43,6 +37,11 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
           onChange={setEnableSubscribeSite}
           reverse
         />
+      </DropDownMenu.Item>
+      <Divider />
+      <DropDownMenu.Item className="justify-end space-x-2" onClick={handleClickLogOut}>
+        <LogOut />
+        <span>Logout</span>
       </DropDownMenu.Item>
     </DropDownMenu>
   );
