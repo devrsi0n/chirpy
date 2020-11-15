@@ -135,21 +135,21 @@ exports.comment = comment;
 function comment() {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
-  var script = window.document.querySelector("[data-".concat("zoo", "-pid]"));
+  var script = window.document.querySelector("[data-".concat("Echo", "-pid]"));
 
   if (!script) {
     console.error("Can't find the comment script");
     return;
   }
 
-  var pid = script.dataset["".concat("zoo", "Pid")];
+  var pid = script.dataset["".concat("Echo", "Pid")];
 
   if (!pid) {
     alert("Please add the pid in your script");
     return;
   }
 
-  var renderTarget = window.document.querySelector("[data-".concat("zoo", "-comment]"));
+  var renderTarget = window.document.querySelector("[data-".concat("Echo", "-comment]"));
 
   if (!renderTarget) {
     alert("Can't find the render target");
@@ -180,12 +180,12 @@ function comment() {
 }
 
 var getIframeId = function getIframeId(id) {
-  return "".concat("zoo", "-").concat(id);
+  return "".concat("Echo", "-").concat(id);
 };
 
 if (typeof window !== 'undefined') {
   comment();
-  window["zoo"] = {
+  window["Echo"] = {
     comment: comment
   };
 }
@@ -217,7 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50433" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53653" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

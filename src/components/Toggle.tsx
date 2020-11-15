@@ -1,27 +1,47 @@
 import * as React from 'react';
 import { Switch } from '@headlessui/react';
 
+import { Text, TextProps } from './Text';
+
 export type ToggleProps = {
   label: string;
+  labelProps?: TextProps;
   enabled: boolean;
   onChange(checked: boolean): void;
+  reverse?: boolean;
 };
 
-export function Toggle({ enabled, label, onChange }: ToggleProps): JSX.Element {
+export function Toggle({
+  enabled,
+  label,
+  labelProps,
+  onChange,
+  reverse,
+}: ToggleProps): JSX.Element {
   const handleMoudDown = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => e.preventDefault(),
     [],
   );
-  return (
-    <Switch.Group as="div" className="w-full flex items-center space-x-4 mb-4">
-      <Switch.Label className="text-text font-bold">{label}</Switch.Label>
+  const memoLabel = React.useMemo(
+    () => (
+      <Switch.Label className="overflow-hidden whitespace-no-wrap">
+        <Text as="span" {...labelProps}>
+          {label}
+        </Text>
+      </Switch.Label>
+    ),
+    [label, labelProps],
+  );
+  const memoSwitch = React.useMemo(
+    () => (
       <Switch
         as="button"
+        type="button"
         checked={enabled}
         onChange={onChange}
         onMouseDown={handleMoudDown}
         className={`${
-          enabled ? 'bg-primary' : 'bg-gray-200'
+          enabled ? 'bg-primary' : 'bg-gray-300'
         } relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-11 focus:outline-none focus:shadow-outline`}
       >
         {({ checked }) => (
@@ -32,6 +52,17 @@ export function Toggle({ enabled, label, onChange }: ToggleProps): JSX.Element {
           />
         )}
       </Switch>
+    ),
+    [enabled, onChange, handleMoudDown],
+  );
+  const memoElements = React.useMemo(
+    () => (reverse ? [memoSwitch, memoLabel] : [memoLabel, memoSwitch]),
+    [reverse, memoSwitch, memoLabel],
+  );
+
+  return (
+    <Switch.Group as="div" className="w-full flex items-center space-x-4 mb-4">
+      {memoElements}
     </Switch.Group>
   );
 }
