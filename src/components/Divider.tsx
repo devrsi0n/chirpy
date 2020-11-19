@@ -4,12 +4,21 @@ import * as React from 'react';
 export type DividerProps = React.ComponentPropsWithoutRef<'div'>;
 
 export function Divider({ className, style, ...divProps }: DividerProps): JSX.Element {
-  const isRetina = window && window.devicePixelRatio && devicePixelRatio >= 2;
+  const [isRetina, setIsRetina] = React.useState(false);
+  React.useEffect(() => {
+    if (window.devicePixelRatio && devicePixelRatio >= 2) {
+      setIsRetina(true);
+    }
+  }, []);
   return (
     <>
       <div
         role="separator"
-        className={clsx('w-auto max-w-full relative', isRetina && 'hairlines', className)}
+        className={clsx(
+          'w-auto max-w-full relative bg-divider',
+          isRetina && 'hairlines',
+          className,
+        )}
         style={{
           ...(!isRetina && {
             height: '1px',
@@ -20,7 +29,7 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
       />
       <style jsx>{`
         .hairlines:after {
-          @apply bg-gray-400;
+          @apply bg-divider;
           content: '';
           position: absolute;
           left: 0;
