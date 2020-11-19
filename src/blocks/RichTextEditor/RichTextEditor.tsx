@@ -1,17 +1,16 @@
 // @refresh reset
 import * as React from 'react';
-import { createEditor, Editor, Node, Range } from 'slate';
-import { Slate, Editable, withReact, useSlate, ReactEditor } from 'slate-react';
+import { createEditor, Node } from 'slate';
+import { Slate, Editable, withReact } from 'slate-react';
 import clsx from 'clsx';
 
 import { CustomEditor } from './utilities';
-import { BoldIcon } from '$/components/Icons/Bold.Icon';
-import { ItalicIcon } from '$/components/Icons/Italic.Icon';
-import { Format } from './type';
+
 import { Leaf } from './Leaf';
 import { RenderElement } from './RenderElement';
 import { RichTextEditorContext } from './RichTextEditorContext';
-import { Divider } from '$/components/Divider';
+
+import { Toolbar } from './Toolbar';
 
 interface IBaseProps {
   children?: React.ReactNode;
@@ -68,14 +67,13 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   return (
     <RichTextEditorContext.Provider value={richTextEditorContext}>
       <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section className="border m-1">
-          {!readOnly && <HoveringToolbar />}
+        <section className={clsx('border m-1', disabled && 'cursor-not-allowed')}>
+          {!readOnly && <Toolbar />}
           <Editable
             className={clsx(
               'rounded-sm pb-2 px-2',
               readOnly && 'pointer-events-none select-text',
-              disabled &&
-                'bg-gray-200 text-text-placeholder pointer-events-none cursor-not-allowed',
+              disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
               className,
             )}
             style={{
@@ -83,9 +81,6 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
                 resize: 'vertical',
                 overflowY: 'auto',
                 minHeight: '4em',
-              }),
-              ...(disabled && {
-                cursor: 'not-allowed',
               }),
             }}
             renderElement={RenderElement}
@@ -106,46 +101,3 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
     </RichTextEditorContext.Provider>
   );
 }
-
-const HoveringToolbar = () => {
-  return (
-    <div className="pt-2">
-      <div className="px-2 space-x-2">
-        <FormatButton format="bold" icon="bold" className="text-text" />
-        <FormatButton format="italic" icon="italic" className="text-text" />
-      </div>
-      {/* <FormatButton format="underlined" icon="format_underlined" /> */}
-      <Divider />
-    </div>
-  );
-};
-
-type Icon = 'bold' | 'italic';
-
-const iconMap = {
-  bold: BoldIcon,
-  italic: ItalicIcon,
-};
-
-type FormatButtonProps = {
-  format: Format;
-  icon: Icon;
-} & React.ComponentProps<'button'>;
-
-const FormatButton = ({ format, icon, ...restProps }: FormatButtonProps) => {
-  const editor = useSlate();
-  const Icon = iconMap[icon];
-  return (
-    <button
-      // reversed
-      // active={CustomEditor.isFormatActive(editor, format)}
-      onMouseDown={(event) => {
-        event.preventDefault();
-        CustomEditor.toggleFormat(editor, format);
-      }}
-      {...restProps}
-    >
-      <Icon />
-    </button>
-  );
-};
