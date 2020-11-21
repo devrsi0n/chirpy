@@ -17,3 +17,7 @@ type $TsFixMe = any;
 declare module 'tailwindcss/defaultTheme' {
   export = any;
 }
+
+declare module 'tailwindcss/colors' {
+  export = any;
+}

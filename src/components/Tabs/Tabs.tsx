@@ -14,6 +14,7 @@ export type TabProps = React.ComponentProps<'section'> & {
   rightItems?: React.ReactNode;
 };
 
+// TODO: Animation https://codepen.io/devrsi0n/pen/XWKQJoY?editors=0110
 export function Tabs({
   onChange,
   className,
@@ -73,7 +74,7 @@ export function Tabs({
     <TabsContext.Provider value={initialValue}>
       <section {...restProps} className={clsx('', className)}>
         <header className="flex flex-row items-center justify-between border-b">
-          <div className="space-x-1 border-gray-400">
+          <nav className="space-x-1 border-gray-400">
             {tabs.map((item) => (
               <Button
                 variant="borderless"
@@ -94,7 +95,7 @@ export function Tabs({
                 {item.label}
               </Button>
             ))}
-          </div>
+          </nav>
           <div>{rightItems}</div>
         </header>
         <div className="content">{children}</div>

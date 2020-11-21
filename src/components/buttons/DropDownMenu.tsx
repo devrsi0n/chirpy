@@ -65,7 +65,7 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
         <button
           type="button"
           className={clsx(
-            'flex flex-row items-center',
+            'flex flex-row items-center border-none',
             active ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
             `w-full px-6 py-2 text-sm leading-5 text-right`,
             props.className,

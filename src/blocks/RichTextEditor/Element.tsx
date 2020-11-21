@@ -5,7 +5,7 @@ import { Code } from '$/components/Code';
 import { Text } from '$/components/Text';
 import { useRichTextEditorContext } from './RichTextEditorContext';
 
-export function RenderElement(props: RenderElementProps): JSX.Element {
+export function Element(props: RenderElementProps): JSX.Element {
   const { disabled } = useRichTextEditorContext();
   const mergedProps = {
     ...props,

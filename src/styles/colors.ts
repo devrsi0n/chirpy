@@ -1,60 +1,41 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
+import * as colors from 'tailwindcss/colors';
 import { ITheme } from '../types/theme.type';
 
-const { colors } = defaultTheme;
 // const { ...darkColors } = colors;
 
-const gray = {
-  // Off-white, Used to avoid darkmode strain.
-  100: '#FCFCFC',
-  // Background, Used for element backgrounds.
-  200: '#F7F7FC',
-  // Input Background, Used for input bg accessibility.
-  300: '#EFF0F7',
-  // Line, Used for line based elements.
-  400: '#D6D8E7',
-  // Placeholder, Used for initial copy of inputs.
-  500: '#A0A3BD',
-  // Label, Used for the label text.
-  600: '#6E7191',
-  // Body, Used for body copy text
-  700: '#4E4B66',
-  // Title-Active, Used for both links and titles.
-  800: '#14142B',
-  900: '#030310',
-};
+const gray = colors.gray;
 
 export const colorModes: ITheme = {
   light: {
     // primary, Purple, Used as the primary color.
     primary: {
-      light: '#DED3FF',
-      '': '#5F2EEA',
-      dark: '#2A00A2',
+      light: colors.violet[300],
+      '': colors.violet[500],
+      dark: colors.violet[700],
     },
     // Secondary, Blue, Used for accents & actions.
     secondary: {
-      light: '#D5F7FF',
-      '': '#1CC8EE',
-      dark: '#0096B7',
+      light: colors.pink[300],
+      '': colors.pink[500],
+      dark: colors.pink[700],
     },
     // Error, red, Used for error states.
     error: {
-      light: '#FFF2F7',
-      '': '#ED2E7E',
-      dark: '#C30052',
+      light: colors.red[300],
+      '': colors.red[500],
+      dark: colors.red[700],
     },
     // Green, Used for success states.
     success: {
-      light: '#F3FDFA',
-      '': '#00BA88',
-      dark: '#00966D',
+      light: colors.emerald[300],
+      '': colors.emerald[500],
+      dark: colors.emerald[700],
     },
     // yellow, Used to represent caution.
     warn: {
-      light: '#FFF0D4',
-      '': '#F4B740',
-      dark: '#A26B00',
+      light: colors.amber[300],
+      '': colors.amber[500],
+      dark: colors.amber[700],
     },
     text: {
       light: gray['600'],
@@ -66,40 +47,40 @@ export const colorModes: ITheme = {
     background: {
       secondary: gray['200'],
       inverse: gray['800'],
-      '': gray['100'],
+      '': colors.white,
     },
     gray,
     divider: gray['300'],
   },
   dark: {
     primary: {
-      dark: '#DED3FF',
-      '': '#5F2EEA',
-      light: '#2A00A2',
+      light: colors.violet[700],
+      '': colors.violet[500],
+      dark: colors.violet[300],
     },
     // Secondary, Blue, Used for accents & actions.
     secondary: {
-      dark: '#D5F7FF',
-      '': '#1CC8EE',
-      light: '#0096B7',
+      light: colors.pink[300],
+      '': colors.pink[500],
+      dark: colors.pink[700],
     },
     // Error, red, Used for error states.
     error: {
-      light: '#FFF2F7',
-      '': '#ED2E7E',
-      dark: '#C30052',
+      light: colors.red[700],
+      '': colors.red[500],
+      dark: colors.red[300],
     },
     // Green, Used for success states.
     success: {
-      dark: '#F3FDFA',
-      '': '#00BA88',
-      light: '#00966D',
+      light: colors.emerald[700],
+      '': colors.emerald[500],
+      dark: colors.emerald[300],
     },
     // yellow, Used to represent caution.
     warn: {
-      dark: '#FFF0D4',
-      '': '#F4B740',
-      light: '#A26B00',
+      light: colors.amber[700],
+      '': colors.amber[500],
+      dark: colors.amber[300],
     },
     text: {
       light: gray['400'],
@@ -114,15 +95,16 @@ export const colorModes: ITheme = {
       '': colors.black,
     },
     gray: {
-      100: gray['900'],
-      200: gray['800'],
-      300: gray['700'],
-      400: gray['600'],
-      500: gray['500'],
-      600: gray['400'],
-      700: gray['300'],
-      800: gray['200'],
-      900: gray['100'],
+      50: gray['900'],
+      100: gray['800'],
+      200: gray['700'],
+      300: gray['600'],
+      400: gray['500'],
+      500: gray['400'],
+      600: gray['300'],
+      700: gray['200'],
+      800: gray['100'],
+      900: gray['50'],
     },
     divider: gray['700'],
   },

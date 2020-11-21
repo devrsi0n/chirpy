@@ -28,7 +28,7 @@ export function Avatar({
       {...imgProps}
       alt={alt}
       className={clsx(
-        `flex items-center justify-center rounded-full bg-gray-100 select-none`,
+        `flex items-center justify-center rounded-full bg-gray-50 select-none`,
         sizeStyles[size],
         className,
       )}

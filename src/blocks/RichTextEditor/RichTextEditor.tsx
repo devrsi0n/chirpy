@@ -4,13 +4,12 @@ import { createEditor, Node } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import clsx from 'clsx';
 
-import { CustomEditor } from './utilities';
-
 import { Leaf } from './Leaf';
-import { RenderElement } from './RenderElement';
+import { Element } from './Element';
 import { RichTextEditorContext } from './RichTextEditorContext';
 
 import { Toolbar } from './Toolbar';
+import { MarkButton } from './Button';
 
 interface IBaseProps {
   children?: React.ReactNode;
@@ -67,12 +66,18 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   return (
     <RichTextEditorContext.Provider value={richTextEditorContext}>
       <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section className={clsx('border m-1', disabled && 'cursor-not-allowed')}>
-          {!readOnly && <Toolbar />}
+        <section className={clsx('m-1', disabled && 'cursor-not-allowed')}>
+          {!readOnly && (
+            <Toolbar>
+              <MarkButton format="bold" icon="bold" />
+              <MarkButton format="italic" icon="italic" />
+              <MarkButton format="underline" icon="underline" />
+            </Toolbar>
+          )}
           <Editable
+            readOnly={readOnly}
             className={clsx(
-              'rounded-sm pb-2 px-2',
-              readOnly && 'pointer-events-none select-text',
+              'rounded-sm pb-2 px-2 bg-gray-50 border border-transparent focus:border-gray-400',
               disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
               className,
             )}
@@ -83,18 +88,18 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
                 minHeight: '4em',
               }),
             }}
-            renderElement={RenderElement}
+            renderElement={Element}
             renderLeaf={Leaf}
-            onDOMBeforeInput={(event: Event): void => {
-              switch ((event as InputEvent).inputType) {
-                case 'formatBold':
-                  return CustomEditor.toggleFormat(editor, 'bold');
-                case 'formatItalic':
-                  return CustomEditor.toggleFormat(editor, 'italic');
-                // case 'formatUnderline':
-                //   return CustomEditor.toggleFormat(editor, 'underline');
-              }
-            }}
+            // onDOMBeforeInput={(event: Event): void => {
+            //   switch ((event as InputEvent).inputType) {
+            //     case 'formatBold':
+            //       return CustomEditor.toggleFormat(editor, 'bold');
+            //     case 'formatItalic':
+            //       return CustomEditor.toggleFormat(editor, 'italic');
+            //     case 'formatUnderline':
+            //       return CustomEditor.toggleFormat(editor, 'underline');
+            //   }
+            // }}
           />
         </section>
       </Slate>

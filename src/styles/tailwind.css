@@ -52,7 +52,7 @@
   }
 
   ::selection {
-    color: var(--colors-primary-light);
+    color: var(--colors-background);
     background: var(--colors-primary);
   }
 }
