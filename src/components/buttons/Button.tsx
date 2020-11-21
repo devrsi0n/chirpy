@@ -51,7 +51,7 @@ const sizeStyles: Record<Size, string> = {
 type VariantColor = `${Variant}-${Color}`;
 
 const variantColors: Record<VariantColor, string> = {
-  'solid-primary': 'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
+  'solid-primary': 'bg-purple-500 text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
   'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary'
 };
 

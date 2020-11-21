@@ -24,7 +24,7 @@ export function Toggle({
   );
   const memoLabel = React.useMemo(
     () => (
-      <Switch.Label className="overflow-hidden whitespace-no-wrap">
+      <Switch.Label className="overflow-hidden whitespace-nowrap">
         <Text
           as="span"
           style={{
