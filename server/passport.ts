@@ -132,7 +132,7 @@ export async function handleSuccessfulLogin(
   res: NextApiResponse,
 ): Promise<void> {
   const { id } = (req as $TsFixMe).user;
-  const authToken = createSecureToken({
+  const authToken = await createSecureToken({
     userId: id,
   });
   const authCookie = serialize(AUTH_COOKIE_NAME, authToken, {
