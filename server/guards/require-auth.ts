@@ -1,5 +1,4 @@
 import { AuthenticationError } from 'apollo-server-micro';
-import { IncomingMessage } from 'http';
 import { NextApiRequest } from 'next';
 
 import { getUserId } from '$server/utilities/auth';
@@ -14,8 +13,8 @@ export type AllUserData = User & {
   })[];
 };
 
-export async function requireAuth(req: NextApiRequest | IncomingMessage): Promise<AllUserData> {
-  const userId = getUserId(req);
+export async function requireAuth(req: NextApiRequest): Promise<AllUserData> {
+  const userId = await getUserId(req);
 
   const user = await prisma.user.findOne({
     where: { id: userId },

@@ -29,6 +29,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.7",
     "@geist-ui/react-icons": "^1.0.1",
+    "@hapi/iron": "^6.0.0",
     "@headlessui/react": "^0.2.0",
     "@next/bundle-analyzer": "^10.0.2",
     "@nexus/schema": "^0.18.0",
@@ -46,7 +47,6 @@
     "graphql-iso-date": "^3.6.1",
     "graphql-tag": "^2.11.0",
     "graphql-type-json": "^0.3.2",
-    "jose": "^1.28.0",
     "next": "^10.0.2",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.9.1",
@@ -82,7 +82,6 @@
     "@types/styled-jsx": "^2.2.8",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
-    "autoprefixer": "^10.0.2",
     "babel-eslint": "^10.1.0",
     "babel-plugin-superjson-next": "^0.1.8",
     "concurrently": "^5.3.0",
