@@ -8,7 +8,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["atomicNumberOperations", "connectOrCreate", "transactionApi"]
+  // previewFeatures = ["nativeTypes"]
 }
 
 model User {
@@ -72,8 +72,8 @@ model Page {
   url       String
   title     String
   comments  Comment[]
-  project   Project?  @relation(fields: [projectId], references: [id])
-  projectId String?
+  project   Project   @relation(fields: [projectId], references: [id])
+  projectId String
 }
 
 model Comment {
@@ -83,11 +83,11 @@ model Comment {
 
   user    User   @relation(fields: [userId], references: [id])
   userId  String
-  // User input: markdown or rich text format
-  content String
+  // User input: Slate.js data
+  content Json
 
-  page   Page?   @relation(fields: [pageId], references: [id])
-  pageId String?
+  page   Page   @relation(fields: [pageId], references: [id])
+  pageId String
 
   replies   Comment[] @relation("RepliesToComment")
   comment   Comment?  @relation("RepliesToComment", fields: [commentId], references: [id])

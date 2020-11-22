@@ -7,7 +7,7 @@
     "analyze": "ANALYZE=true next build",
     "start": "next start",
     "migrate:save": "dotenv -e .env.development -- prisma migrate save --experimental",
-    "migrate:up": "dotenv -e .env.development -- prisma migrate up --experimental",
+    "migrate:up": "dotenv -e .env.development -- prisma migrate up --experimental --verbose",
     "migrate:rollback": "dotenv -e .env.development -- prisma migrate rollback --experimental",
     "studio": "dotenv -e .env.development -- prisma studio",
     "g:prisma": "prisma generate",

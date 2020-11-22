@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
 
 import { prisma } from '$server/context';
 import { Comment as SectionComment } from '$/blocks/Comment';
@@ -21,7 +22,7 @@ import { DropDownUser } from '$/blocks/DropDownUser';
 
 export type CommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-// Demo: http://localhost:3000/widget/ckgji3ebs0019fncvpx2oa6x6/ckgp3mwax0000hmcvo897omp3
+// Demo: http://localhost:3000/widget/ckhsvc67800093wcvw0bdjibk/ckhsvd40j00019ucv8dng90b8
 
 const COMMENT_TAB_VALUE = 'Comment';
 
@@ -65,6 +66,9 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
 
   return (
     <div className="max-w-md mx-auto my-3">
+      <Head>
+        <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
+      </Head>
       <Tabs
         initialValue={COMMENT_TAB_VALUE}
         className="mb-3"

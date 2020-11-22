@@ -19,7 +19,7 @@ export default function Login(): JSX.Element {
         <Head>
           <title>ZOO: login</title>
         </Head>
-        <Card className="py-5 max-w-screen-md">
+        <Card className="py-5 max-w-screen-md space-y-4">
           <Heading as="h2">Log in</Heading>
           <Button onClick={handleClick}>Continue with GitHub</Button>
           <Text className="py-3" variant="sm">
