@@ -1,14 +1,3 @@
 # Prisma Migrate lockfile v1
 
-20200902071422-init
-20200913080821-make-github-and-google-user-id-unique
-20201006093525
-20201006093641-add-role-to-memeber
-20201006141341-new-model--project
-20201008133517-fix--team--project-field-name-case
-20201012142329-add-user-type
-20201012145516-make-team-in-project-optional
-20201021144105-fix-project-field--user--name-case
-20201025092053-add-page-and-comment-model
-20201030143628-mark-project-as-required-in-page-and-page-as-required-in-comment
-20201107044858-comment-content----json
+20201122065126-init

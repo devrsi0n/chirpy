@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Head from 'next/head';
 
 import { useCreateOneProjectMutation } from '$/generated/graphql';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
@@ -71,6 +72,9 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <Layout>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
       <main>
         <Heading as="h2">Welcome to dashboard.</Heading>
         <Text>userId - {data?.currentUser?.id}</Text>
@@ -87,8 +91,10 @@ export default function Dashboard(): JSX.Element {
             <Text>No projects</Text>
           </div>
         )}
-        <Button onClick={handleCreateProject}>Create a new project</Button>
-        <Button className="mt-5">Integrate comment</Button>
+        <div className="space-x-2">
+          <Button onClick={handleCreateProject}>Create a new project</Button>
+          <Button className="mt-5">Integrate comment</Button>
+        </div>
         <Dialog show={showDialog} title="Create a new project">
           <div className="flex flex-col w-full">
             <TextField

@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { Transition } from '@headlessui/react';
+import clsx from 'clsx';
+import ReactDOM from 'react-dom';
 
 export type DialogProps = React.PropsWithChildren<{
   show: boolean;
   title: string;
-  footer?: React.ReactNode;
 }>;
 
-export function Dialog({ title, footer, children, show }: DialogProps): JSX.Element {
-  return (
+export function Dialog({ title, children, show }: DialogProps): JSX.Element {
+  return ReactDOM.createPortal(
     <Transition show={show}>
-      <dialog className="fixed z-10 inset-0 overflow-y-auto">
+      <div role="dialog" className="fixed z-10 inset-0 overflow-y-auto">
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition
             show={show}
@@ -51,11 +52,11 @@ export function Dialog({ title, footer, children, show }: DialogProps): JSX.Elem
                 </div>
               </div>
             </div>
-            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">{footer}</div>
           </Transition>
         </div>
-      </dialog>
-    </Transition>
+      </div>
+    </Transition>,
+    document.body,
   );
 }
 
@@ -65,7 +66,10 @@ export function DialogFooter({ className, ...restProps }: IDialogFooterProps): J
   return (
     <div
       {...restProps}
-      className={`space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 sm:flex sm:flex-row sm:justify-end mt-8 ${className}`}
+      className={clsx(
+        `space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 sm:flex sm:flex-row sm:justify-end mt-8`,
+        className,
+      )}
     />
   );
 }

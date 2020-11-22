@@ -52,7 +52,7 @@ export function Header(): JSX.Element {
             <Heading as="h3" className="flex items-center font-bold">
               <Link href="/">ZOO</Link>
             </Heading>
-            {data?.currentUser?.projects?.length && selectedProject && (
+            {!!data?.currentUser?.projects?.length && selectedProject && (
               <>
                 <SlashIcon className="text-gray-400" />
                 <Select
