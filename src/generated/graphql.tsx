@@ -606,7 +606,14 @@ export type GetAllCommentsByPageQuery = (
     & { user: (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'avatar' | 'name'>
-    ) }
+    ), replies: Array<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'content' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'avatar' | 'name'>
+      ) }
+    )> }
   )>>> }
 );
 
@@ -709,12 +716,22 @@ export const GetAllCommentsByPageDocument = gql`
   getAllCommentsByPage(pageId: $pageId) {
     id
     content
+    createdAt
     user {
       id
       avatar
       name
     }
-    createdAt
+    replies {
+      id
+      content
+      createdAt
+      user {
+        id
+        avatar
+        name
+      }
+    }
   }
 }
     `;

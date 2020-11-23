@@ -13,6 +13,8 @@ declare namespace NodeJS {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type $TsFixMe = any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type $TsAny = any; // For valid any scenarios
 
 declare module 'tailwindcss/defaultTheme' {
   export = any;

@@ -1,8 +1,15 @@
 import * as React from 'react';
-import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from 'next';
 import Head from 'next/head';
 
 import { prisma } from '$server/context';
+import { Comment, User } from '@prisma/client';
 import { Comment as SectionComment } from '$/blocks/Comment';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
@@ -13,7 +20,7 @@ import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
   GetAllCommentsByPageDocument,
-  Comment,
+  GetAllCommentsByPageQuery,
   GetAllCommentsByPageQueryVariables,
 } from '$/generated/graphql';
 import { useApollo } from '$/lib/apollo-client';
@@ -30,14 +37,26 @@ const COMMENT_TAB_VALUE = 'Comment';
  * Comment widget for a page
  * @param props
  */
-export default function PageComment({ comments: _comments, pageId }: CommentProps): JSX.Element {
+export default function PageComment(props: CommentProps): JSX.Element {
+  let error = '';
+  let pageId = '';
+  let _comments: CommentWithContext[] = [];
+  if (isStaticError(props)) {
+    error = props.error!;
+  } else {
+    _comments = props.comments;
+    pageId = props.pageId;
+  }
   const { isLogin, data: userData } = useCurrentUser();
   const [input, setInput] = React.useState<Node[]>();
-  const [comments, setComments] = React.useState<Comment[]>(_comments);
+  const [comments, setComments] = React.useState<CommentWithContext[]>(_comments);
 
   const client = useApollo();
 
-  const [createOneComment, { data, loading, error }] = useCreateOneCommentMutation();
+  const [
+    createOneComment,
+    { data, loading, error: createCommentError },
+  ] = useCreateOneCommentMutation();
   const handleSubmit = React.useCallback(() => {
     if (!userData?.currentUser?.id) {
       console.error('login first');
@@ -51,7 +70,7 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
       },
     }).then(() => {
       client
-        .query<{ getAllCommentsByPage: Comment[] }, GetAllCommentsByPageQueryVariables>({
+        .query<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>({
           query: GetAllCommentsByPageDocument,
           variables: {
             pageId,
@@ -59,10 +78,18 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
         })
         .then((data) => {
           setInput(undefined);
-          setComments(data.data.getAllCommentsByPage);
+          if (!data.data.getAllCommentsByPage) {
+            console.error('Unexpected empty comments');
+            return;
+          }
+          setComments((data.data.getAllCommentsByPage as unknown) as CommentWithContext[]);
         });
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment, client]);
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   return (
     <div className="max-w-md mx-auto my-3">
@@ -83,14 +110,14 @@ export default function PageComment({ comments: _comments, pageId }: CommentProp
           )
         }
       >
-        <Tabs.Item label={`${comments.length} comments`} value={COMMENT_TAB_VALUE}>
+        <Tabs.Item label={`${process.env.NEXT_PUBLIC_APP_NAME} comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
-            {comments?.map((comment: Comment) => (
+            {comments?.map((comment) => (
               <SectionComment
                 key={comment.id}
                 name={comment.user.name}
                 avatar={comment.user.avatar!}
-                content={comment.content}
+                content={comment.content as Node[]}
                 date={String((comment as $TsFixMe).createdAt as string)}
               />
             ))}
@@ -157,14 +184,24 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: true };
 };
 
-type StaticProps = PathParams & {
-  comments: Comment[];
+type CommentWithContext = Comment & {
+  user: User;
+  replies: Comment[];
 };
 
-export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({ params }) => {
+type StaticProps = PathParams & {
+  comments: CommentWithContext[];
+};
+type StaticError = {
+  error?: string;
+};
+
+export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
+  params,
+}: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
   try {
     if (!params) {
-      return { props: { error: 'Error' } };
+      return { props: { error: 'No params' } };
     }
     const { projectId, pageId } = params;
     // console.log({ params });
@@ -188,8 +225,11 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({ 
         },
       },
     });
+    if (!((project?.pages[0]?.comments?.length ?? 0) > 0)) {
+      return { props: { error: 'No comments' } };
+    }
     return {
-      props: { projectId, pageId, comments: project?.pages[0]?.comments },
+      props: { projectId, pageId, comments: project!.pages[0].comments! },
       // TODO: Shorter time for pro user?
       revalidate: 60 * 60,
     };
@@ -198,3 +238,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({ 
     throw new Error(err);
   }
 };
+
+function isStaticError(props: $TsAny): props is StaticError {
+  return !!props.error;
+}
