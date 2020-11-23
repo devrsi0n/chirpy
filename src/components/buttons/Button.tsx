@@ -50,9 +50,14 @@ const sizeStyles: Record<Size, string> = {
 
 type VariantColor = `${Variant}-${Color}`;
 
-const variantColors: Record<VariantColor, string> = {
-  'solid-primary': 'bg-purple-500 text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
-  'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary'
+type VariantColors = {
+  [index in VariantColor]: string;
+};
+
+const variantColors: VariantColors = {
+  'solid-primary':
+    'bg-purple-500 text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
+  'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary',
 };
 
 export function Button(props: IButtonProps): JSX.Element {
@@ -65,7 +70,7 @@ export function Button(props: IButtonProps): JSX.Element {
     icon,
     shadow = false,
     type = 'button',
-    rounded= 'true',
+    rounded = 'true',
     onMouseDown,
     onClick,
     children,
@@ -98,6 +103,7 @@ export function Button(props: IButtonProps): JSX.Element {
     [onMouseDown],
   );
   const Icon = icon ? icons[icon] : null;
+  const variantColor: VariantColor = `${variant}-${color}` as VariantColor;
   return (
     <button
       {...restProps}
@@ -106,8 +112,8 @@ export function Button(props: IButtonProps): JSX.Element {
       className={clsx(
         'btn',
         sizeStyles[size],
-        variantColors[`${variant}-${color}`],
-        { 'shadow-md transform hover:-translate-y-1': shadow, 'rounded': rounded },
+        variantColors[variantColor],
+        { 'shadow-md transform hover:-translate-y-1': shadow, rounded: rounded },
         disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
         className,
       )}

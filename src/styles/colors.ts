@@ -1,4 +1,4 @@
-import * as colors from 'tailwindcss/colors';
+import colors from 'tailwindcss/colors';
 import { ITheme } from '../types/theme.type';
 
 // const { ...darkColors } = colors;
