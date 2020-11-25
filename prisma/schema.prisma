@@ -48,8 +48,8 @@ model Team {
   project   Project[]
 }
 
-// A project is associated with a `FREE` user or a Team(create by `PRO` user)
-// A project has multiple pages
+/// A project is associated with a `FREE` user or a Team(create by `PRO` user)
+/// A project has multiple pages
 model Project {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -63,7 +63,7 @@ model Project {
   pages     Page[]
 }
 
-// A page has multiple comments
+/// A page has multiple comments
 model Page {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
