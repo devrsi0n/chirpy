@@ -1,7 +1,8 @@
 import { queryType, stringArg } from '@nexus/schema';
-import { requireAuth } from '$server/guards/require-auth';
-import { prisma } from '$server/context';
 import { Page, Comment } from '@prisma/client';
+
+import { requireAuth } from '../guards/require-auth';
+import { prisma } from '../context';
 import getOrCreatePage from './resolvers/getOrCreatePage';
 
 export const Query = queryType({

@@ -6,10 +6,10 @@ import { ErrorHandler } from 'next-connect';
 import { serialize } from 'cookie';
 
 import { AUTH_COOKIE_NAME } from './constants';
-import { createSecureToken } from './utilities/auth';
-import { redirect } from './response';
-import { prisma } from './context';
-import { getFirstQueryParam } from './utilities/url';
+import { createSecureToken } from '../utilities/auth';
+import { redirect } from '../response';
+import { prisma } from '../context';
+import { getFirstQueryParam } from '../utilities/url';
 
 interface User {
   id: string;

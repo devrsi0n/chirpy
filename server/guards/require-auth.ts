@@ -1,9 +1,9 @@
 import { AuthenticationError } from 'apollo-server-micro';
 import { NextApiRequest } from 'next';
-
-import { getUserId } from '$server/utilities/auth';
-import { prisma } from '$server/context';
 import { User, Member, Team, Project } from '@prisma/client';
+
+import { getUserId } from '../utilities/auth';
+import { prisma } from '../context';
 
 export type AllUserData = User & {
   members: (Member & {

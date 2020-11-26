@@ -2,7 +2,7 @@ import connect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
 
-import { handleInternalLoginFailure } from '$server/passport';
+import { handleInternalLoginFailure } from '$server/services/passport';
 import { handleGetPageByProject } from '$server/services/page';
 
 const cors = Cors({

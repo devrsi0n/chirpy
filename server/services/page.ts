@@ -1,6 +1,7 @@
-import { prisma } from '$server/context';
 import type { Page } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
+
+import { prisma } from '../context';
 
 export async function handleGetPageByProject(
   req: NextApiRequest,
