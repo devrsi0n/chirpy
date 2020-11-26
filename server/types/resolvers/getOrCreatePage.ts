@@ -1,5 +1,6 @@
-import { prisma } from '$server/context';
 import { Page } from '@prisma/client';
+
+import { prisma } from '../../context';
 
 export type Args = {
   projectId: string;

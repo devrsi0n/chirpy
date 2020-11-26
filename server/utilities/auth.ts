@@ -3,7 +3,7 @@ import { parse } from 'cookie';
 import Iron from '@hapi/iron';
 import { NextApiRequest } from 'next';
 
-import { AUTH_COOKIE_NAME } from '$server/constants';
+import { AUTH_COOKIE_NAME } from '../services/constants';
 
 export type AuthUser = {
   userId: string;

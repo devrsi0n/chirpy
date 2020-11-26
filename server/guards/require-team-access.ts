@@ -1,5 +1,5 @@
 import { ApolloError } from 'apollo-server-micro';
-import { ModelTeam } from '$server/db.types';
+import { ModelTeam } from '../db.types';
 import { AllUserData } from './require-auth';
 
 export function requireTeamAccess(
