@@ -9,7 +9,7 @@ import {
 import Head from 'next/head';
 
 import { prisma } from '$server/context';
-import { Comment, User } from '@prisma/client';
+import { Comment, Like, User } from '@prisma/client';
 import { Comment as SectionComment } from '$/blocks/Comment';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
@@ -22,6 +22,8 @@ import {
   GetAllCommentsByPageDocument,
   GetAllCommentsByPageQuery,
   GetAllCommentsByPageQueryVariables,
+  useCreateOneLikeMutation,
+  useDeleteOneLikeMutation,
 } from '$/generated/graphql';
 import { useApollo } from '$/lib/apollo-client';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
@@ -57,6 +59,24 @@ export default function PageComment(props: CommentProps): JSX.Element {
     createOneComment,
     { data, loading, error: createCommentError },
   ] = useCreateOneCommentMutation();
+  const refreshComments = React.useCallback(() => {
+    client
+      .query<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>({
+        query: GetAllCommentsByPageDocument,
+        variables: {
+          pageId,
+        },
+        fetchPolicy: 'no-cache',
+      })
+      .then((data) => {
+        setInput(undefined);
+        if (!data.data.getAllCommentsByPage) {
+          console.error('Unexpected empty comments');
+          return;
+        }
+        setComments((data.data.getAllCommentsByPage as unknown) as CommentWithContext[]);
+      });
+  }, [client, pageId]);
   const handleSubmit = React.useCallback(() => {
     if (!userData?.currentUser?.id) {
       console.error('login first');
@@ -69,23 +89,39 @@ export default function PageComment(props: CommentProps): JSX.Element {
         userId: userData.currentUser.id,
       },
     }).then(() => {
-      client
-        .query<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>({
-          query: GetAllCommentsByPageDocument,
-          variables: {
-            pageId,
-          },
-        })
-        .then((data) => {
-          setInput(undefined);
-          if (!data.data.getAllCommentsByPage) {
-            console.error('Unexpected empty comments');
-            return;
-          }
-          setComments((data.data.getAllCommentsByPage as unknown) as CommentWithContext[]);
-        });
+      refreshComments();
     });
-  }, [input, pageId, userData?.currentUser?.id, createOneComment, client]);
+  }, [input, pageId, userData?.currentUser?.id, createOneComment, refreshComments]);
+
+  const [createOneLike] = useCreateOneLikeMutation();
+  const [deleteOneLike] = useDeleteOneLikeMutation();
+  const handleClickLike = React.useCallback(
+    (liked: boolean, commentId: string, likedId: string) => {
+      if (!userData?.currentUser?.id) {
+        console.error('No user id');
+        return;
+      }
+      let promise: Promise<$TsAny>;
+      if (liked) {
+        promise = deleteOneLike({
+          variables: {
+            id: likedId,
+          },
+        });
+      } else {
+        promise = createOneLike({
+          variables: {
+            commentId,
+            userId: userData?.currentUser?.id,
+          },
+        });
+      }
+      promise.then(() => {
+        refreshComments();
+      });
+    },
+    [createOneLike, userData, deleteOneLike, refreshComments],
+  );
 
   if (error) {
     return <p>{error}</p>;
@@ -110,15 +146,19 @@ export default function PageComment(props: CommentProps): JSX.Element {
           )
         }
       >
-        <Tabs.Item label={`${process.env.NEXT_PUBLIC_APP_NAME} comments`} value={COMMENT_TAB_VALUE}>
+        <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
-            {comments?.map((comment) => (
+            {comments?.map((comment: CommentWithContext) => (
               <SectionComment
                 key={comment.id}
+                id={comment.id}
                 name={comment.user.name}
                 avatar={comment.user.avatar!}
                 content={comment.content as Node[]}
                 date={String((comment as $TsFixMe).createdAt as string)}
+                likeList={comment.likes}
+                onClickLike={handleClickLike}
+                userId={userData?.currentUser?.id}
               />
             ))}
             <RichTextEditor
@@ -187,6 +227,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 type CommentWithContext = Comment & {
   user: User;
   replies: Comment[];
+  likes: Like[];
 };
 
 type StaticProps = PathParams & {
@@ -219,6 +260,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
               include: {
                 user: true,
                 replies: true,
+                likes: true,
               },
             },
           },

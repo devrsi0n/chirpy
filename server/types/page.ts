@@ -6,7 +6,7 @@ export const Page = objectType({
     t.model.id();
     t.model.url();
     t.model.title();
-    t.model.project();
+    t.model.projects();
     t.model.comments();
   },
 });

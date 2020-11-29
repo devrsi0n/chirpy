@@ -73,7 +73,9 @@ export type Project = {
   __typename?: 'Project';
   id: Scalars['String'];
   name: Scalars['String'];
+  teamId?: Maybe<Scalars['String']>;
   team?: Maybe<Team>;
+  userId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
 };
 
@@ -81,7 +83,9 @@ export type Member = {
   __typename?: 'Member';
   id: Scalars['String'];
   role: Role;
+  userId: Scalars['String'];
   user: User;
+  teamId: Scalars['String'];
   team: Team;
 };
 
@@ -90,7 +94,7 @@ export type Page = {
   id: Scalars['String'];
   url: Scalars['String'];
   title: Scalars['String'];
-  project: Project;
+  projects: Project;
   comments: Array<Comment>;
 };
 
@@ -106,10 +110,13 @@ export type Comment = {
   __typename?: 'Comment';
   id: Scalars['String'];
   content: Scalars['Json'];
+  pageId: Scalars['String'];
   page: Page;
   replies: Array<Comment>;
+  userId: Scalars['String'];
   user: User;
   createdAt: Scalars['DateTime'];
+  likes: Array<Like>;
 };
 
 
@@ -118,6 +125,23 @@ export type CommentRepliesArgs = {
   last?: Maybe<Scalars['Int']>;
   before?: Maybe<CommentWhereUniqueInput>;
   after?: Maybe<CommentWhereUniqueInput>;
+};
+
+
+export type CommentLikesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<LikeWhereUniqueInput>;
+  after?: Maybe<LikeWhereUniqueInput>;
+};
+
+export type Like = {
+  __typename?: 'Like';
+  id: Scalars['String'];
+  userId: Scalars['String'];
+  user: User;
+  commentId: Scalars['String'];
+  comment: Comment;
 };
 
 export type Query = {
@@ -156,6 +180,8 @@ export type Mutation = {
   createOneProject: Project;
   createOnePage: Page;
   createOneComment: Comment;
+  createOneLike: Like;
+  deleteOneLike?: Maybe<Like>;
 };
 
 
@@ -171,6 +197,16 @@ export type MutationCreateOnePageArgs = {
 
 export type MutationCreateOneCommentArgs = {
   data: CommentCreateInput;
+};
+
+
+export type MutationCreateOneLikeArgs = {
+  data: LikeCreateInput;
+};
+
+
+export type MutationDeleteOneLikeArgs = {
+  where: LikeWhereUniqueInput;
 };
 
 export type MemberWhereUniqueInput = {
@@ -192,6 +228,10 @@ export type CommentWhereUniqueInput = {
 
 
 
+export type LikeWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
 export type UserWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -210,7 +250,7 @@ export type ProjectCreateInput = {
   name: Scalars['String'];
   team?: Maybe<TeamCreateOneWithoutProjectInput>;
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
 };
 
 export type PageCreateInput = {
@@ -220,7 +260,7 @@ export type PageCreateInput = {
   url: Scalars['String'];
   title: Scalars['String'];
   comments?: Maybe<CommentCreateManyWithoutPageInput>;
-  project: ProjectCreateOneWithoutPagesInput;
+  projects: ProjectCreateOneWithoutPagesInput;
 };
 
 export type CommentCreateInput = {
@@ -232,6 +272,15 @@ export type CommentCreateInput = {
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+};
+
+export type LikeCreateInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user: UserCreateOneWithoutLikeInput;
+  comment: CommentCreateOneWithoutLikesInput;
 };
 
 export type TeamCreateOneWithoutProjectInput = {
@@ -246,10 +295,10 @@ export type UserCreateOneWithoutProjectsInput = {
   connectOrCreate?: Maybe<UserCreateOrConnectWithoutprojectsInput>;
 };
 
-export type PageCreateManyWithoutProjectInput = {
-  create?: Maybe<Array<PageCreateWithoutProjectInput>>;
+export type PageCreateManyWithoutProjectsInput = {
+  create?: Maybe<Array<PageCreateWithoutProjectsInput>>;
   connect?: Maybe<Array<PageWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectsInput>>;
 };
 
 export type CommentCreateManyWithoutPageInput = {
@@ -288,6 +337,24 @@ export type CommentCreateOneWithoutRepliesInput = {
   connectOrCreate?: Maybe<CommentCreateOrConnectWithoutrepliesInput>;
 };
 
+export type LikeCreateManyWithoutCommentInput = {
+  create?: Maybe<Array<LikeCreateWithoutCommentInput>>;
+  connect?: Maybe<Array<LikeWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutcommentInput>>;
+};
+
+export type UserCreateOneWithoutLikeInput = {
+  create?: Maybe<UserCreateWithoutLikeInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutLikeInput>;
+};
+
+export type CommentCreateOneWithoutLikesInput = {
+  create?: Maybe<CommentCreateWithoutLikesInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutlikesInput>;
+};
+
 export type TeamCreateWithoutProjectInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
@@ -317,6 +384,7 @@ export type UserCreateWithoutProjectsInput = {
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
   comment?: Maybe<CommentCreateManyWithoutUserInput>;
+  Like?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutprojectsInput = {
@@ -324,7 +392,7 @@ export type UserCreateOrConnectWithoutprojectsInput = {
   create: UserCreateWithoutProjectsInput;
 };
 
-export type PageCreateWithoutProjectInput = {
+export type PageCreateWithoutProjectsInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -333,9 +401,9 @@ export type PageCreateWithoutProjectInput = {
   comments?: Maybe<CommentCreateManyWithoutPageInput>;
 };
 
-export type PageCreateOrConnectWithoutprojectInput = {
+export type PageCreateOrConnectWithoutprojectsInput = {
   where: PageWhereUniqueInput;
-  create: PageCreateWithoutProjectInput;
+  create: PageCreateWithoutProjectsInput;
 };
 
 export type CommentCreateWithoutPageInput = {
@@ -346,6 +414,7 @@ export type CommentCreateWithoutPageInput = {
   user: UserCreateOneWithoutCommentInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
 };
 
 export type CommentCreateOrConnectWithoutpageInput = {
@@ -379,6 +448,7 @@ export type UserCreateWithoutCommentInput = {
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
+  Like?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutcommentInput = {
@@ -392,7 +462,7 @@ export type PageCreateWithoutCommentsInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   url: Scalars['String'];
   title: Scalars['String'];
-  project: ProjectCreateOneWithoutPagesInput;
+  projects: ProjectCreateOneWithoutPagesInput;
 };
 
 export type PageCreateOrConnectWithoutcommentsInput = {
@@ -408,6 +478,7 @@ export type CommentCreateWithoutCommentInput = {
   user: UserCreateOneWithoutCommentInput;
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
 };
 
 export type CommentCreateOrConnectWithoutcommentInput = {
@@ -423,11 +494,60 @@ export type CommentCreateWithoutRepliesInput = {
   user: UserCreateOneWithoutCommentInput;
   page: PageCreateOneWithoutCommentsInput;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
 };
 
 export type CommentCreateOrConnectWithoutrepliesInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutRepliesInput;
+};
+
+export type LikeCreateWithoutCommentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  user: UserCreateOneWithoutLikeInput;
+};
+
+export type LikeCreateOrConnectWithoutcommentInput = {
+  where: LikeWhereUniqueInput;
+  create: LikeCreateWithoutCommentInput;
+};
+
+export type UserCreateWithoutLikeInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  name: Scalars['String'];
+  email: Scalars['String'];
+  googleUserId?: Maybe<Scalars['String']>;
+  githubUserId?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  type?: Maybe<UserType>;
+  members?: Maybe<MemberCreateManyWithoutUserInput>;
+  projects?: Maybe<ProjectCreateManyWithoutUserInput>;
+  comment?: Maybe<CommentCreateManyWithoutUserInput>;
+};
+
+export type UserCreateOrConnectWithoutLikeInput = {
+  where: UserWhereUniqueInput;
+  create: UserCreateWithoutLikeInput;
+};
+
+export type CommentCreateWithoutLikesInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['Json'];
+  user: UserCreateOneWithoutCommentInput;
+  page: PageCreateOneWithoutCommentsInput;
+  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
+  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+};
+
+export type CommentCreateOrConnectWithoutlikesInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutLikesInput;
 };
 
 export type MemberCreateManyWithoutTeamInput = {
@@ -451,6 +571,12 @@ export type CommentCreateManyWithoutUserInput = {
   create?: Maybe<Array<CommentCreateWithoutUserInput>>;
   connect?: Maybe<Array<CommentWhereUniqueInput>>;
   connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutuserInput>>;
+};
+
+export type LikeCreateManyWithoutUserInput = {
+  create?: Maybe<Array<LikeCreateWithoutUserInput>>;
+  connect?: Maybe<Array<LikeWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutuserInput>>;
 };
 
 export type ProjectCreateManyWithoutUserInput = {
@@ -493,11 +619,24 @@ export type CommentCreateWithoutUserInput = {
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
 };
 
 export type CommentCreateOrConnectWithoutuserInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutUserInput;
+};
+
+export type LikeCreateWithoutUserInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  comment: CommentCreateOneWithoutLikesInput;
+};
+
+export type LikeCreateOrConnectWithoutuserInput = {
+  where: LikeWhereUniqueInput;
+  create: LikeCreateWithoutUserInput;
 };
 
 export type ProjectCreateWithoutUserInput = {
@@ -506,7 +645,7 @@ export type ProjectCreateWithoutUserInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   team?: Maybe<TeamCreateOneWithoutProjectInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateOrConnectWithoutuserInput = {
@@ -538,6 +677,7 @@ export type UserCreateWithoutMembersInput = {
   type?: Maybe<UserType>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
   comment?: Maybe<CommentCreateManyWithoutUserInput>;
+  Like?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutmembersInput = {
@@ -570,7 +710,7 @@ export type ProjectCreateWithoutTeamInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
 };
 
 export type ProjectCreateOrConnectWithoutteamInput = {
@@ -613,6 +753,9 @@ export type GetAllCommentsByPageQuery = (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'avatar' | 'name'>
       ) }
+    )>, likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Like, 'id' | 'userId' | 'commentId'>
     )> }
   )>>> }
 );
@@ -654,6 +797,33 @@ export type CurrentUserQuery = (
       { __typename?: 'Project' }
       & Pick<Project, 'id' | 'name'>
     )> }
+  )> }
+);
+
+export type CreateOneLikeMutationVariables = Exact<{
+  userId: Scalars['String'];
+  commentId: Scalars['String'];
+}>;
+
+
+export type CreateOneLikeMutation = (
+  { __typename?: 'Mutation' }
+  & { createOneLike: (
+    { __typename?: 'Like' }
+    & Pick<Like, 'id'>
+  ) }
+);
+
+export type DeleteOneLikeMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type DeleteOneLikeMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteOneLike?: Maybe<(
+    { __typename?: 'Like' }
+    & Pick<Like, 'id'>
   )> }
 );
 
@@ -731,6 +901,11 @@ export const GetAllCommentsByPageDocument = gql`
         avatar
         name
       }
+    }
+    likes {
+      id
+      userId
+      commentId
     }
   }
 }
@@ -846,6 +1021,73 @@ export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
+export const CreateOneLikeDocument = gql`
+    mutation createOneLike($userId: String!, $commentId: String!) {
+  createOneLike(
+    data: {comment: {connect: {id: $commentId}}, user: {connect: {id: $userId}}}
+  ) {
+    id
+  }
+}
+    `;
+export type CreateOneLikeMutationFn = Apollo.MutationFunction<CreateOneLikeMutation, CreateOneLikeMutationVariables>;
+
+/**
+ * __useCreateOneLikeMutation__
+ *
+ * To run a mutation, you first call `useCreateOneLikeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneLikeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneLikeMutation, { data, loading, error }] = useCreateOneLikeMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *      commentId: // value for 'commentId'
+ *   },
+ * });
+ */
+export function useCreateOneLikeMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneLikeMutation, CreateOneLikeMutationVariables>) {
+        return Apollo.useMutation<CreateOneLikeMutation, CreateOneLikeMutationVariables>(CreateOneLikeDocument, baseOptions);
+      }
+export type CreateOneLikeMutationHookResult = ReturnType<typeof useCreateOneLikeMutation>;
+export type CreateOneLikeMutationResult = Apollo.MutationResult<CreateOneLikeMutation>;
+export type CreateOneLikeMutationOptions = Apollo.BaseMutationOptions<CreateOneLikeMutation, CreateOneLikeMutationVariables>;
+export const DeleteOneLikeDocument = gql`
+    mutation deleteOneLike($id: String!) {
+  deleteOneLike(where: {id: $id}) {
+    id
+  }
+}
+    `;
+export type DeleteOneLikeMutationFn = Apollo.MutationFunction<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>;
+
+/**
+ * __useDeleteOneLikeMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneLikeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneLikeMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneLikeMutation, { data, loading, error }] = useDeleteOneLikeMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteOneLikeMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>) {
+        return Apollo.useMutation<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>(DeleteOneLikeDocument, baseOptions);
+      }
+export type DeleteOneLikeMutationHookResult = ReturnType<typeof useDeleteOneLikeMutation>;
+export type DeleteOneLikeMutationResult = Apollo.MutationResult<DeleteOneLikeMutation>;
+export type DeleteOneLikeMutationOptions = Apollo.BaseMutationOptions<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>;
 export const PageByProjectDocument = gql`
     query pageByProject($projectId: String!, $url: String!, $title: String!) {
   getOrCreatePage(projectId: $projectId, url: $url, title: $title) {

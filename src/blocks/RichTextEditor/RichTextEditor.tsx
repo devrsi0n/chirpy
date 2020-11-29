@@ -66,7 +66,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   return (
     <RichTextEditorContext.Provider value={richTextEditorContext}>
       <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section className={clsx('m-1', disabled && 'cursor-not-allowed')}>
+        <section className={clsx(disabled && 'cursor-not-allowed')}>
           {!readOnly && (
             <Toolbar>
               <MarkButton format="bold" icon="bold" />
@@ -77,8 +77,9 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
           <Editable
             readOnly={readOnly}
             className={clsx(
-              'rounded-sm pb-2 px-2 bg-gray-50 border border-transparent focus:border-gray-400',
+              'rounded-sm bg-gray-50 border border-transparent focus:border-gray-400',
               disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
+              !readOnly && 'pb-2 px-2',
               className,
             )}
             style={{

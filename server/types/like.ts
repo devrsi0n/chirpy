@@ -1,13 +1,12 @@
 import { objectType } from '@nexus/schema';
 
-export const Member = objectType({
-  name: 'Member',
+export const Like = objectType({
+  name: 'Like',
   definition(t) {
     t.model.id();
-    t.model.role();
     t.model.userId();
     t.model.user();
-    t.model.teamId();
-    t.model.team();
+    t.model.commentId();
+    t.model.comment();
   },
 });
