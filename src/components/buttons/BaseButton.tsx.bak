@@ -1,0 +1,33 @@
+import * as React from 'react';
+
+export type BaseButtonProps = React.ComponentPropsWithoutRef<'button'>;
+
+const BaseButton = React.forwardRef(function BaseButton(
+  { type = 'button', children, onMouseDown, ...restProps }: BaseButtonProps,
+  ref: React.Ref<HTMLButtonElement>,
+): JSX.Element {
+  const handleMouseDown = React.useCallback(
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      // Prevent mouse click with focus styles(e.g. outline)
+      e.preventDefault();
+      onMouseDown?.(e);
+    },
+    [onMouseDown],
+  );
+  const defaultRef = React.useRef<HTMLButtonElement>();
+  const _ref: React.RefObject<HTMLButtonElement> = (ref ||
+    defaultRef) as React.RefObject<HTMLButtonElement>;
+  const props = {
+    type,
+    onMouseDown: handleMouseDown,
+    ...restProps,
+  };
+
+  return (
+    <button {...props} ref={_ref}>
+      {children}
+    </button>
+  );
+});
+
+export { BaseButton };

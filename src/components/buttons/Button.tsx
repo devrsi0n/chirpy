@@ -1,16 +1,17 @@
 import * as React from 'react';
+import clsx from 'clsx';
 
 import { SunIcon, ISunIconProps } from '../Icons/Sun.Icon';
 import { SettingIcon } from '../Icons/Setting.Icon';
 import { MoonIcon } from '../Icons/Moon.Icon';
-import clsx from 'clsx';
+import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' /*| 'secondary'*/;
 type Variant = 'solid' | 'borderless' /*| 'ghost' */;
 type Icon = 'sun' | 'moon' | 'setting';
 
-export interface IButtonProps extends React.ComponentProps<'button'> {
+export type IButtonProps = BaseButtonProps & {
   /**
    * @default solid
    */
@@ -26,7 +27,7 @@ export interface IButtonProps extends React.ComponentProps<'button'> {
    */
   rounded?: boolean;
   onClick?: () => void;
-}
+};
 
 const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
   sun: SunIcon,
@@ -69,9 +70,7 @@ export function Button(props: IButtonProps): JSX.Element {
     className = '',
     icon,
     shadow = false,
-    type = 'button',
     rounded = 'true',
-    onMouseDown,
     onClick,
     children,
     ...restProps
@@ -94,43 +93,27 @@ export function Button(props: IButtonProps): JSX.Element {
       setDripY(event.clientY - rect.top);
     }
   }, []);
-  const handleMouseDown = React.useCallback(
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      // Prevent mouse click styles(e.g. outline)
-      e.preventDefault();
-      onMouseDown?.(e);
-    },
-    [onMouseDown],
-  );
   const Icon = icon ? icons[icon] : null;
   const variantColor: VariantColor = `${variant}-${color}` as VariantColor;
   return (
-    <button
-      {...restProps}
-      type={type}
-      ref={buttonRef}
-      className={clsx(
-        'btn',
-        sizeStyles[size],
-        variantColors[variantColor],
-        { 'shadow-md transform hover:-translate-y-1': shadow, rounded: rounded },
-        disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
-        className,
-      )}
-      onClick={clickHandler}
-      onMouseDown={handleMouseDown}
-    >
-      {Icon && <Icon size={14} className="mr-2" />}
-      <span className="">{children}</span>
-      {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
-      <style jsx>{`
-        .btn {
-          @apply relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out;
-          -webkit-tap-highlight-color: transparent;
-          -webkit-appearance: none;
-        }
-      `}</style>
-    </button>
+    <>
+      <BaseButton
+        {...restProps}
+        ref={buttonRef}
+        className={clsx(
+          sizeStyles[size],
+          variantColors[variantColor],
+          { 'shadow-md transform hover:-translate-y-1': shadow, rounded: rounded },
+          disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
+          className,
+        )}
+        onClick={clickHandler}
+      >
+        {Icon && <Icon size={14} className="mr-2" />}
+        <span className="">{children}</span>
+        {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
+      </BaseButton>
+    </>
   );
 }
 
