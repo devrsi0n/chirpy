@@ -8,3 +8,5 @@ out/
 .envproduction
 .vercel
 .cache
+public/*.js.map
+public/*.js
