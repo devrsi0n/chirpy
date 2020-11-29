@@ -2,6 +2,7 @@ import * as React from 'react';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import Heart from '@geist-ui/react-icons/heart';
+import HeartFill from '@geist-ui/react-icons/heartFill';
 import { MessageIcon } from '$/components/Icons/Message.Icon';
 
 import { Avatar } from '$/components/Avatar';
@@ -9,6 +10,7 @@ import { Text } from '$/components/Text';
 import { Node } from 'slate';
 import { RichTextEditor } from './RichTextEditor/RichTextEditor';
 import { Like } from '@prisma/client';
+import { ActionButton } from '$/components/buttons/ActionButton';
 
 dayjs.extend(relativeTime);
 
@@ -46,6 +48,7 @@ function Comment({
   const handleClickLike = () => {
     onClickLike(liked, id, likedId);
   };
+  const HeartComponent = liked ? HeartFill : Heart;
 
   return (
     <section className="flex flex-row items-start space-x-2 py-2">
@@ -59,16 +62,24 @@ function Comment({
         </div>
         <RichTextEditor value={content} readOnly />
         <div className="flex flex-row items-center space-x-6">
-          <div className="flex flex-row items-center space-x-1">
-            <Heart size={20} onClick={handleClickLike} />
+          <ActionButton
+            color="pink"
+            activated={liked}
+            icon={<HeartComponent size={20} onClick={handleClickLike} />}
+          >
             {!!likeList.length && <span>{likeList.length}</span>}
-          </div>
-          <MessageIcon
-            width={20}
-            height={20}
-            style={{
-              transform: 'scaleX(-1)',
-            }}
+          </ActionButton>
+          <ActionButton
+            color="indigo"
+            icon={
+              <MessageIcon
+                width={20}
+                height={20}
+                style={{
+                  transform: 'scaleX(-1)',
+                }}
+              />
+            }
           />
         </div>
       </div>

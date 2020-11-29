@@ -6,7 +6,8 @@
         "styled-jsx": {
           "plugins": [
             "styled-jsx-plugin-postcss"
-          ]
+          ],
+          "optimizeForSpeed": true
         }
       }
     ]

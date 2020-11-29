@@ -79,7 +79,7 @@ export function Tabs({
               <Button
                 variant="borderless"
                 className={clsx(
-                  'hover:rounded hover:bg-gray-200 border-b-2 border-transparent p-3',
+                  'hover:rounded hover:bg-gray-50 border-b-2 border-transparent p-3',
                   selfValue === item.value && 'text-primary border-primary',
                 )}
                 style={{
