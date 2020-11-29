@@ -1,4 +1,4 @@
-import { queryType, stringArg } from '@nexus/schema';
+import { nonNull, queryType, stringArg } from '@nexus/schema';
 import { Page, Comment } from '@prisma/client';
 
 import { requireAuth } from '../guards/require-auth';
@@ -13,8 +13,8 @@ export const Query = queryType({
     t.list.field('getAllCommentsByPage', {
       type: 'Comment',
       args: {
-        // projectId: stringArg({ required: true }),
-        pageId: stringArg({ required: true }),
+        // projectId: stringArg(),
+        pageId: nonNull(stringArg()),
       },
       async resolve(_root, args, ctx): Promise<Comment[]> {
         const comments: Comment[] = await prisma.comment.findMany({
@@ -22,7 +22,7 @@ export const Query = queryType({
             pageId: args.pageId,
           },
         });
-        console.log({ comments });
+        // console.log({ comments });
         return comments;
       },
     });
@@ -38,9 +38,9 @@ export const Query = queryType({
     t.field('getOrCreatePage', {
       type: 'Page',
       args: {
-        projectId: stringArg({ required: true }),
-        url: stringArg({ required: true }),
-        title: stringArg({ required: true }),
+        projectId: nonNull(stringArg()),
+        url: nonNull(stringArg()),
+        title: nonNull(stringArg()),
       },
       async resolve(_root, args, ctx): Promise<Page | null> {
         return getOrCreatePage(_root, args);

@@ -246,7 +246,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
     }
     const { projectId, pageId } = params;
     // console.log({ params });
-    const project = await prisma.project.findOne({
+    const project = await prisma.project.findUnique({
       where: {
         id: projectId,
       },
