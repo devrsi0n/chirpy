@@ -21,7 +21,7 @@ passport.serializeUser<User, string>((user, done) => {
 
 passport.deserializeUser<User, string>((id, done) => {
   prisma.user
-    .findOne({
+    .findUnique({
       where: {
         id,
       },
@@ -75,14 +75,14 @@ async function getUserByProviderProfile(profile: Profile, provider: 'github' | '
   const providerKey = `${provider}UserId` as 'githubUserId' | 'googleUserId';
 
   // Find one by provider user id
-  let existing = await prisma.user.findOne({
+  let existing = await prisma.user.findUnique({
     where: {
       [providerKey]: profile.id,
     },
   });
   // Otherwise find one with the same email and link them
   if (!existing) {
-    existing = await prisma.user.findOne({
+    existing = await prisma.user.findUnique({
       where: {
         email,
       },
