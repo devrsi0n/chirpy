@@ -12,6 +12,7 @@ import { Query } from './types/query';
 import { Mutation } from './types/mutation';
 import { Page } from './types/page';
 import { Comment } from './types/comment';
+import { Like } from './types/like';
 
 export const GQLDate = asNexusMethod(GraphQLDate, 'date');
 
@@ -36,6 +37,6 @@ export const schema = makeSchema({
   shouldGenerateArtifacts: !isENVProd,
   shouldExitAfterGenerateArtifacts: Boolean(process.env.NEXUS_SHOULD_EXIT_AFTER_REFLECTION),
   plugins: [nexusSchemaPrisma({ experimentalCRUD: true })],
-  types: [GQLDate, GraphQLJSON, User, Team, Project, Member, Page, Comment, Query, Mutation],
+  types: [GQLDate, GraphQLJSON, User, Team, Project, Member, Page, Comment, Like, Query, Mutation],
   prettierConfig: process.cwd() + '/.prettierrc',
 });

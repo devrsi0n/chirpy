@@ -28,5 +28,10 @@ query getAllCommentsByPage($pageId: String!) {
         name
       }
     }
+    likes {
+      id
+      userId
+      commentId
+    }
   }
 }
