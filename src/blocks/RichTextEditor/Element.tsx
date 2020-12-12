@@ -14,10 +14,18 @@ export function Element(props: RenderElementProps): JSX.Element {
 
   switch (props.element.type) {
     case 'code':
-      return <Code {...mergedProps} />;
+      return (
+        <Code
+          {...mergedProps}
+          /* attributes={{
+            contentEditable: false,
+            style: { userSelect: 'none' },
+          }} */
+        />
+      );
     case 'paragraph':
-      return <Text {...mergedProps} />;
+      return <Text {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
     default:
-      return <Text {...mergedProps} />;
+      return <Text {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
   }
 }

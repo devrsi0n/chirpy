@@ -3,21 +3,22 @@ import { RenderLeafProps } from 'slate-react';
 
 import { Text } from '$/components/Text';
 
-export function Leaf(props: RenderLeafProps): JSX.Element {
-  const { attributes, leaf, children } = props;
-  let childWithWrap = children;
-
+export function Leaf({ attributes, children, leaf }: RenderLeafProps): JSX.Element {
   if (leaf.bold) {
-    childWithWrap = <Text bold>{childWithWrap}</Text>;
+    children = <strong>{children}</strong>;
+  }
+
+  if (leaf.code) {
+    children = <code>{children}</code>;
   }
 
   if (leaf.italic) {
-    childWithWrap = <Text italic>{childWithWrap}</Text>;
+    children = <em>{children}</em>;
   }
 
   if (leaf.underline) {
-    childWithWrap = <Text underline>{childWithWrap}</Text>;
+    children = <u>{children}</u>;
   }
 
-  return <span {...attributes}>{childWithWrap}</span>;
+  return <span {...attributes}>{children}</span>;
 }

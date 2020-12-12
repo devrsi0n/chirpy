@@ -37,7 +37,7 @@ export async function handleGetPageByProject(
       data: {
         url: req.query.url as string,
         title: req.query.title as string,
-        project: {
+        projects: {
           connect: {
             id: req.query.projectId as string,
           },

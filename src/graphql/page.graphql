@@ -5,3 +5,39 @@ query pageByProject($projectId: String!, $url: String!, $title: String!) {
     title
   }
 }
+
+query commentsInPage($id: String!) {
+  page(where: { id: $id }) {
+    id
+    comments {
+      id
+      pageId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+      replies {
+        id
+        pageId
+        content
+        createdAt
+        user {
+          id
+          name
+          avatar
+        }
+        likes {
+          id
+          userId
+        }
+      }
+    }
+  }
+}

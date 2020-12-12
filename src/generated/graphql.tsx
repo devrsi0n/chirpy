@@ -2,6 +2,8 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -77,6 +79,15 @@ export type Project = {
   team?: Maybe<Team>;
   userId?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
+  pages: Array<Page>;
+};
+
+
+export type ProjectPagesArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<PageWhereUniqueInput>;
+  after?: Maybe<PageWhereUniqueInput>;
 };
 
 export type Member = {
@@ -148,7 +159,7 @@ export type Query = {
   __typename?: 'Query';
   user?: Maybe<User>;
   page?: Maybe<Page>;
-  getAllCommentsByPage?: Maybe<Array<Maybe<Comment>>>;
+  project?: Maybe<Project>;
   currentUser?: Maybe<User>;
   getOrCreatePage?: Maybe<Page>;
 };
@@ -164,8 +175,8 @@ export type QueryPageArgs = {
 };
 
 
-export type QueryGetAllCommentsByPageArgs = {
-  pageId: Scalars['String'];
+export type QueryProjectArgs = {
+  where: ProjectWhereUniqueInput;
 };
 
 
@@ -182,6 +193,7 @@ export type Mutation = {
   createOneComment: Comment;
   createOneLike: Like;
   deleteOneLike?: Maybe<Like>;
+  updateOneComment?: Maybe<Comment>;
 };
 
 
@@ -209,11 +221,21 @@ export type MutationDeleteOneLikeArgs = {
   where: LikeWhereUniqueInput;
 };
 
+
+export type MutationUpdateOneCommentArgs = {
+  data: CommentUpdateInput;
+  where: CommentWhereUniqueInput;
+};
+
 export type MemberWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
 export type ProjectWhereUniqueInput = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type PageWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
@@ -237,10 +259,6 @@ export type UserWhereUniqueInput = {
   email?: Maybe<Scalars['String']>;
   googleUserId?: Maybe<Scalars['String']>;
   githubUserId?: Maybe<Scalars['String']>;
-};
-
-export type PageWhereUniqueInput = {
-  id?: Maybe<Scalars['String']>;
 };
 
 export type ProjectCreateInput = {
@@ -268,7 +286,7 @@ export type CommentCreateInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentInput;
+  user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
@@ -279,8 +297,20 @@ export type LikeCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutLikeInput;
+  user: UserCreateOneWithoutLikesInput;
   comment: CommentCreateOneWithoutLikesInput;
+};
+
+export type CommentUpdateInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
 };
 
 export type TeamCreateOneWithoutProjectInput = {
@@ -313,10 +343,10 @@ export type ProjectCreateOneWithoutPagesInput = {
   connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutpagesInput>;
 };
 
-export type UserCreateOneWithoutCommentInput = {
-  create?: Maybe<UserCreateWithoutCommentInput>;
+export type UserCreateOneWithoutCommentsInput = {
+  create?: Maybe<UserCreateWithoutCommentsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutcommentInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutcommentsInput>;
 };
 
 export type PageCreateOneWithoutCommentsInput = {
@@ -343,16 +373,76 @@ export type LikeCreateManyWithoutCommentInput = {
   connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutcommentInput>>;
 };
 
-export type UserCreateOneWithoutLikeInput = {
-  create?: Maybe<UserCreateWithoutLikeInput>;
+export type UserCreateOneWithoutLikesInput = {
+  create?: Maybe<UserCreateWithoutLikesInput>;
   connect?: Maybe<UserWhereUniqueInput>;
-  connectOrCreate?: Maybe<UserCreateOrConnectWithoutLikeInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutlikesInput>;
 };
 
 export type CommentCreateOneWithoutLikesInput = {
   create?: Maybe<CommentCreateWithoutLikesInput>;
   connect?: Maybe<CommentWhereUniqueInput>;
   connectOrCreate?: Maybe<CommentCreateOrConnectWithoutlikesInput>;
+};
+
+export type StringFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['String']>;
+};
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['DateTime']>;
+};
+
+export type UserUpdateOneRequiredWithoutCommentsInput = {
+  create?: Maybe<UserCreateWithoutCommentsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  update?: Maybe<UserUpdateWithoutCommentsInput>;
+  upsert?: Maybe<UserUpsertWithoutCommentsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutcommentsInput>;
+};
+
+export type PageUpdateOneRequiredWithoutCommentsInput = {
+  create?: Maybe<PageCreateWithoutCommentsInput>;
+  connect?: Maybe<PageWhereUniqueInput>;
+  update?: Maybe<PageUpdateWithoutCommentsInput>;
+  upsert?: Maybe<PageUpsertWithoutCommentsInput>;
+  connectOrCreate?: Maybe<PageCreateOrConnectWithoutcommentsInput>;
+};
+
+export type CommentUpdateManyWithoutCommentInput = {
+  create?: Maybe<Array<CommentCreateWithoutCommentInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  set?: Maybe<Array<CommentWhereUniqueInput>>;
+  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
+  delete?: Maybe<Array<CommentWhereUniqueInput>>;
+  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutCommentInput>>;
+  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutCommentInput>>;
+  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
+  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutCommentInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutcommentInput>>;
+};
+
+export type CommentUpdateOneWithoutRepliesInput = {
+  create?: Maybe<CommentCreateWithoutRepliesInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<CommentUpdateWithoutRepliesInput>;
+  upsert?: Maybe<CommentUpsertWithoutRepliesInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutrepliesInput>;
+};
+
+export type LikeUpdateManyWithoutCommentInput = {
+  create?: Maybe<Array<LikeCreateWithoutCommentInput>>;
+  connect?: Maybe<Array<LikeWhereUniqueInput>>;
+  set?: Maybe<Array<LikeWhereUniqueInput>>;
+  disconnect?: Maybe<Array<LikeWhereUniqueInput>>;
+  delete?: Maybe<Array<LikeWhereUniqueInput>>;
+  update?: Maybe<Array<LikeUpdateWithWhereUniqueWithoutCommentInput>>;
+  updateMany?: Maybe<Array<LikeUpdateManyWithWhereWithoutCommentInput>>;
+  deleteMany?: Maybe<Array<LikeScalarWhereInput>>;
+  upsert?: Maybe<Array<LikeUpsertWithWhereUniqueWithoutCommentInput>>;
+  connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutcommentInput>>;
 };
 
 export type TeamCreateWithoutProjectInput = {
@@ -383,8 +473,8 @@ export type UserCreateWithoutProjectsInput = {
   avatar?: Maybe<Scalars['String']>;
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
-  comment?: Maybe<CommentCreateManyWithoutUserInput>;
-  Like?: Maybe<LikeCreateManyWithoutUserInput>;
+  comments?: Maybe<CommentCreateManyWithoutUserInput>;
+  likes?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutprojectsInput = {
@@ -411,7 +501,7 @@ export type CommentCreateWithoutPageInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentInput;
+  user: UserCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
@@ -436,7 +526,7 @@ export type ProjectCreateOrConnectWithoutpagesInput = {
   create: ProjectCreateWithoutPagesInput;
 };
 
-export type UserCreateWithoutCommentInput = {
+export type UserCreateWithoutCommentsInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -448,12 +538,12 @@ export type UserCreateWithoutCommentInput = {
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
-  Like?: Maybe<LikeCreateManyWithoutUserInput>;
+  likes?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
-export type UserCreateOrConnectWithoutcommentInput = {
+export type UserCreateOrConnectWithoutcommentsInput = {
   where: UserWhereUniqueInput;
-  create: UserCreateWithoutCommentInput;
+  create: UserCreateWithoutCommentsInput;
 };
 
 export type PageCreateWithoutCommentsInput = {
@@ -475,7 +565,7 @@ export type CommentCreateWithoutCommentInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentInput;
+  user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
@@ -491,7 +581,7 @@ export type CommentCreateWithoutRepliesInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentInput;
+  user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
@@ -506,7 +596,7 @@ export type LikeCreateWithoutCommentInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  user: UserCreateOneWithoutLikeInput;
+  user: UserCreateOneWithoutLikesInput;
 };
 
 export type LikeCreateOrConnectWithoutcommentInput = {
@@ -514,7 +604,7 @@ export type LikeCreateOrConnectWithoutcommentInput = {
   create: LikeCreateWithoutCommentInput;
 };
 
-export type UserCreateWithoutLikeInput = {
+export type UserCreateWithoutLikesInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -526,12 +616,12 @@ export type UserCreateWithoutLikeInput = {
   type?: Maybe<UserType>;
   members?: Maybe<MemberCreateManyWithoutUserInput>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
-  comment?: Maybe<CommentCreateManyWithoutUserInput>;
+  comments?: Maybe<CommentCreateManyWithoutUserInput>;
 };
 
-export type UserCreateOrConnectWithoutLikeInput = {
+export type UserCreateOrConnectWithoutlikesInput = {
   where: UserWhereUniqueInput;
-  create: UserCreateWithoutLikeInput;
+  create: UserCreateWithoutLikesInput;
 };
 
 export type CommentCreateWithoutLikesInput = {
@@ -539,7 +629,7 @@ export type CommentCreateWithoutLikesInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentInput;
+  user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
   replies?: Maybe<CommentCreateManyWithoutCommentInput>;
   comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
@@ -548,6 +638,111 @@ export type CommentCreateWithoutLikesInput = {
 export type CommentCreateOrConnectWithoutlikesInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutLikesInput;
+};
+
+export type UserUpdateWithoutCommentsInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  googleUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  githubUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  avatar?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  type?: Maybe<EnumUserTypeFieldUpdateOperationsInput>;
+  members?: Maybe<MemberUpdateManyWithoutUserInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutUserInput>;
+  likes?: Maybe<LikeUpdateManyWithoutUserInput>;
+};
+
+export type UserUpsertWithoutCommentsInput = {
+  update: UserUpdateWithoutCommentsInput;
+  create: UserCreateWithoutCommentsInput;
+};
+
+export type PageUpdateWithoutCommentsInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  url?: Maybe<StringFieldUpdateOperationsInput>;
+  title?: Maybe<StringFieldUpdateOperationsInput>;
+  projects?: Maybe<ProjectUpdateOneRequiredWithoutPagesInput>;
+};
+
+export type PageUpsertWithoutCommentsInput = {
+  update: PageUpdateWithoutCommentsInput;
+  create: PageCreateWithoutCommentsInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutCommentInput = {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutCommentInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutCommentInput = {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyMutationInput;
+};
+
+export type CommentScalarWhereInput = {
+  AND?: Maybe<Array<CommentScalarWhereInput>>;
+  OR?: Maybe<Array<CommentScalarWhereInput>>;
+  NOT?: Maybe<Array<CommentScalarWhereInput>>;
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  userId?: Maybe<StringFilter>;
+  pageId?: Maybe<StringFilter>;
+  commentId?: Maybe<StringNullableFilter>;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutCommentInput = {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutCommentInput;
+  create: CommentCreateWithoutCommentInput;
+};
+
+export type CommentUpdateWithoutRepliesInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+};
+
+export type CommentUpsertWithoutRepliesInput = {
+  update: CommentUpdateWithoutRepliesInput;
+  create: CommentCreateWithoutRepliesInput;
+};
+
+export type LikeUpdateWithWhereUniqueWithoutCommentInput = {
+  where: LikeWhereUniqueInput;
+  data: LikeUpdateWithoutCommentInput;
+};
+
+export type LikeUpdateManyWithWhereWithoutCommentInput = {
+  where: LikeScalarWhereInput;
+  data: LikeUpdateManyMutationInput;
+};
+
+export type LikeScalarWhereInput = {
+  AND?: Maybe<Array<LikeScalarWhereInput>>;
+  OR?: Maybe<Array<LikeScalarWhereInput>>;
+  NOT?: Maybe<Array<LikeScalarWhereInput>>;
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  userId?: Maybe<StringFilter>;
+  commentId?: Maybe<StringFilter>;
+};
+
+export type LikeUpsertWithWhereUniqueWithoutCommentInput = {
+  where: LikeWhereUniqueInput;
+  update: LikeUpdateWithoutCommentInput;
+  create: LikeCreateWithoutCommentInput;
 };
 
 export type MemberCreateManyWithoutTeamInput = {
@@ -583,6 +778,133 @@ export type ProjectCreateManyWithoutUserInput = {
   create?: Maybe<Array<ProjectCreateWithoutUserInput>>;
   connect?: Maybe<Array<ProjectWhereUniqueInput>>;
   connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutuserInput>>;
+};
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: Maybe<Scalars['String']>;
+};
+
+export type EnumUserTypeFieldUpdateOperationsInput = {
+  set?: Maybe<UserType>;
+};
+
+export type MemberUpdateManyWithoutUserInput = {
+  create?: Maybe<Array<MemberCreateWithoutUserInput>>;
+  connect?: Maybe<Array<MemberWhereUniqueInput>>;
+  set?: Maybe<Array<MemberWhereUniqueInput>>;
+  disconnect?: Maybe<Array<MemberWhereUniqueInput>>;
+  delete?: Maybe<Array<MemberWhereUniqueInput>>;
+  update?: Maybe<Array<MemberUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: Maybe<Array<MemberUpdateManyWithWhereWithoutUserInput>>;
+  deleteMany?: Maybe<Array<MemberScalarWhereInput>>;
+  upsert?: Maybe<Array<MemberUpsertWithWhereUniqueWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutuserInput>>;
+};
+
+export type ProjectUpdateManyWithoutUserInput = {
+  create?: Maybe<Array<ProjectCreateWithoutUserInput>>;
+  connect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  set?: Maybe<Array<ProjectWhereUniqueInput>>;
+  disconnect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  delete?: Maybe<Array<ProjectWhereUniqueInput>>;
+  update?: Maybe<Array<ProjectUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: Maybe<Array<ProjectUpdateManyWithWhereWithoutUserInput>>;
+  deleteMany?: Maybe<Array<ProjectScalarWhereInput>>;
+  upsert?: Maybe<Array<ProjectUpsertWithWhereUniqueWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutuserInput>>;
+};
+
+export type LikeUpdateManyWithoutUserInput = {
+  create?: Maybe<Array<LikeCreateWithoutUserInput>>;
+  connect?: Maybe<Array<LikeWhereUniqueInput>>;
+  set?: Maybe<Array<LikeWhereUniqueInput>>;
+  disconnect?: Maybe<Array<LikeWhereUniqueInput>>;
+  delete?: Maybe<Array<LikeWhereUniqueInput>>;
+  update?: Maybe<Array<LikeUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: Maybe<Array<LikeUpdateManyWithWhereWithoutUserInput>>;
+  deleteMany?: Maybe<Array<LikeScalarWhereInput>>;
+  upsert?: Maybe<Array<LikeUpsertWithWhereUniqueWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutuserInput>>;
+};
+
+export type ProjectUpdateOneRequiredWithoutPagesInput = {
+  create?: Maybe<ProjectCreateWithoutPagesInput>;
+  connect?: Maybe<ProjectWhereUniqueInput>;
+  update?: Maybe<ProjectUpdateWithoutPagesInput>;
+  upsert?: Maybe<ProjectUpsertWithoutPagesInput>;
+  connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutpagesInput>;
+};
+
+export type CommentUpdateWithoutCommentInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+};
+
+export type CommentUpdateManyMutationInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+};
+
+export type StringFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
+  not?: Maybe<NestedStringFilter>;
+};
+
+export type DateTimeFilter = {
+  equals?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
+};
+
+export type StringNullableFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
+  not?: Maybe<NestedStringNullableFilter>;
+};
+
+export type LikeUpdateWithoutCommentInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutLikesInput>;
+};
+
+export type LikeUpdateManyMutationInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
 };
 
 export type MemberCreateWithoutTeamInput = {
@@ -653,6 +975,144 @@ export type ProjectCreateOrConnectWithoutuserInput = {
   create: ProjectCreateWithoutUserInput;
 };
 
+export type MemberUpdateWithWhereUniqueWithoutUserInput = {
+  where: MemberWhereUniqueInput;
+  data: MemberUpdateWithoutUserInput;
+};
+
+export type MemberUpdateManyWithWhereWithoutUserInput = {
+  where: MemberScalarWhereInput;
+  data: MemberUpdateManyMutationInput;
+};
+
+export type MemberScalarWhereInput = {
+  AND?: Maybe<Array<MemberScalarWhereInput>>;
+  OR?: Maybe<Array<MemberScalarWhereInput>>;
+  NOT?: Maybe<Array<MemberScalarWhereInput>>;
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  userId?: Maybe<StringFilter>;
+  teamId?: Maybe<StringFilter>;
+  role?: Maybe<EnumRoleFilter>;
+};
+
+export type MemberUpsertWithWhereUniqueWithoutUserInput = {
+  where: MemberWhereUniqueInput;
+  update: MemberUpdateWithoutUserInput;
+  create: MemberCreateWithoutUserInput;
+};
+
+export type ProjectUpdateWithWhereUniqueWithoutUserInput = {
+  where: ProjectWhereUniqueInput;
+  data: ProjectUpdateWithoutUserInput;
+};
+
+export type ProjectUpdateManyWithWhereWithoutUserInput = {
+  where: ProjectScalarWhereInput;
+  data: ProjectUpdateManyMutationInput;
+};
+
+export type ProjectScalarWhereInput = {
+  AND?: Maybe<Array<ProjectScalarWhereInput>>;
+  OR?: Maybe<Array<ProjectScalarWhereInput>>;
+  NOT?: Maybe<Array<ProjectScalarWhereInput>>;
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  name?: Maybe<StringFilter>;
+  teamId?: Maybe<StringNullableFilter>;
+  userId?: Maybe<StringNullableFilter>;
+};
+
+export type ProjectUpsertWithWhereUniqueWithoutUserInput = {
+  where: ProjectWhereUniqueInput;
+  update: ProjectUpdateWithoutUserInput;
+  create: ProjectCreateWithoutUserInput;
+};
+
+export type LikeUpdateWithWhereUniqueWithoutUserInput = {
+  where: LikeWhereUniqueInput;
+  data: LikeUpdateWithoutUserInput;
+};
+
+export type LikeUpdateManyWithWhereWithoutUserInput = {
+  where: LikeScalarWhereInput;
+  data: LikeUpdateManyMutationInput;
+};
+
+export type LikeUpsertWithWhereUniqueWithoutUserInput = {
+  where: LikeWhereUniqueInput;
+  update: LikeUpdateWithoutUserInput;
+  create: LikeCreateWithoutUserInput;
+};
+
+export type ProjectUpdateWithoutPagesInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneWithoutProjectInput>;
+  user?: Maybe<UserUpdateOneWithoutProjectsInput>;
+};
+
+export type ProjectUpsertWithoutPagesInput = {
+  update: ProjectUpdateWithoutPagesInput;
+  create: ProjectCreateWithoutPagesInput;
+};
+
+export enum QueryMode {
+  Default = 'default',
+  Insensitive = 'insensitive'
+}
+
+export type NestedStringFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringFilter>;
+};
+
+export type NestedDateTimeFilter = {
+  equals?: Maybe<Scalars['DateTime']>;
+  in?: Maybe<Array<Scalars['DateTime']>>;
+  notIn?: Maybe<Array<Scalars['DateTime']>>;
+  lt?: Maybe<Scalars['DateTime']>;
+  lte?: Maybe<Scalars['DateTime']>;
+  gt?: Maybe<Scalars['DateTime']>;
+  gte?: Maybe<Scalars['DateTime']>;
+  not?: Maybe<NestedDateTimeFilter>;
+};
+
+export type NestedStringNullableFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringNullableFilter>;
+};
+
+export type UserUpdateOneRequiredWithoutLikesInput = {
+  create?: Maybe<UserCreateWithoutLikesInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  update?: Maybe<UserUpdateWithoutLikesInput>;
+  upsert?: Maybe<UserUpsertWithoutLikesInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutlikesInput>;
+};
+
 export type UserCreateOneWithoutMembersInput = {
   create?: Maybe<UserCreateWithoutMembersInput>;
   connect?: Maybe<UserWhereUniqueInput>;
@@ -663,6 +1123,91 @@ export type TeamCreateOneWithoutMembersInput = {
   create?: Maybe<TeamCreateWithoutMembersInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
   connectOrCreate?: Maybe<TeamCreateOrConnectWithoutmembersInput>;
+};
+
+export type MemberUpdateWithoutUserInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneRequiredWithoutMembersInput>;
+};
+
+export type MemberUpdateManyMutationInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
+};
+
+export type EnumRoleFilter = {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  notIn?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+};
+
+export type ProjectUpdateWithoutUserInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  team?: Maybe<TeamUpdateOneWithoutProjectInput>;
+  pages?: Maybe<PageUpdateManyWithoutProjectsInput>;
+};
+
+export type ProjectUpdateManyMutationInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+};
+
+export type LikeUpdateWithoutUserInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  comment?: Maybe<CommentUpdateOneRequiredWithoutLikesInput>;
+};
+
+export type TeamUpdateOneWithoutProjectInput = {
+  create?: Maybe<TeamCreateWithoutProjectInput>;
+  connect?: Maybe<TeamWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<TeamUpdateWithoutProjectInput>;
+  upsert?: Maybe<TeamUpsertWithoutProjectInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectInput>;
+};
+
+export type UserUpdateOneWithoutProjectsInput = {
+  create?: Maybe<UserCreateWithoutProjectsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<UserUpdateWithoutProjectsInput>;
+  upsert?: Maybe<UserUpsertWithoutProjectsInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutprojectsInput>;
+};
+
+export type UserUpdateWithoutLikesInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  googleUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  githubUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  avatar?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  type?: Maybe<EnumUserTypeFieldUpdateOperationsInput>;
+  members?: Maybe<MemberUpdateManyWithoutUserInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutUserInput>;
+  comments?: Maybe<CommentUpdateManyWithoutUserInput>;
+};
+
+export type UserUpsertWithoutLikesInput = {
+  update: UserUpdateWithoutLikesInput;
+  create: UserCreateWithoutLikesInput;
 };
 
 export type UserCreateWithoutMembersInput = {
@@ -676,8 +1221,8 @@ export type UserCreateWithoutMembersInput = {
   avatar?: Maybe<Scalars['String']>;
   type?: Maybe<UserType>;
   projects?: Maybe<ProjectCreateManyWithoutUserInput>;
-  comment?: Maybe<CommentCreateManyWithoutUserInput>;
-  Like?: Maybe<LikeCreateManyWithoutUserInput>;
+  comments?: Maybe<CommentCreateManyWithoutUserInput>;
+  likes?: Maybe<LikeCreateManyWithoutUserInput>;
 };
 
 export type UserCreateOrConnectWithoutmembersInput = {
@@ -698,10 +1243,182 @@ export type TeamCreateOrConnectWithoutmembersInput = {
   create: TeamCreateWithoutMembersInput;
 };
 
+export type EnumRoleFieldUpdateOperationsInput = {
+  set?: Maybe<Role>;
+};
+
+export type TeamUpdateOneRequiredWithoutMembersInput = {
+  create?: Maybe<TeamCreateWithoutMembersInput>;
+  connect?: Maybe<TeamWhereUniqueInput>;
+  update?: Maybe<TeamUpdateWithoutMembersInput>;
+  upsert?: Maybe<TeamUpsertWithoutMembersInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutmembersInput>;
+};
+
+export type NestedEnumRoleFilter = {
+  equals?: Maybe<Role>;
+  in?: Maybe<Array<Role>>;
+  notIn?: Maybe<Array<Role>>;
+  not?: Maybe<NestedEnumRoleFilter>;
+};
+
+export type PageUpdateManyWithoutProjectsInput = {
+  create?: Maybe<Array<PageCreateWithoutProjectsInput>>;
+  connect?: Maybe<Array<PageWhereUniqueInput>>;
+  set?: Maybe<Array<PageWhereUniqueInput>>;
+  disconnect?: Maybe<Array<PageWhereUniqueInput>>;
+  delete?: Maybe<Array<PageWhereUniqueInput>>;
+  update?: Maybe<Array<PageUpdateWithWhereUniqueWithoutProjectsInput>>;
+  updateMany?: Maybe<Array<PageUpdateManyWithWhereWithoutProjectsInput>>;
+  deleteMany?: Maybe<Array<PageScalarWhereInput>>;
+  upsert?: Maybe<Array<PageUpsertWithWhereUniqueWithoutProjectsInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectsInput>>;
+};
+
+export type CommentUpdateOneRequiredWithoutLikesInput = {
+  create?: Maybe<CommentCreateWithoutLikesInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  update?: Maybe<CommentUpdateWithoutLikesInput>;
+  upsert?: Maybe<CommentUpsertWithoutLikesInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutlikesInput>;
+};
+
+export type TeamUpdateWithoutProjectInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  members?: Maybe<MemberUpdateManyWithoutTeamInput>;
+};
+
+export type TeamUpsertWithoutProjectInput = {
+  update: TeamUpdateWithoutProjectInput;
+  create: TeamCreateWithoutProjectInput;
+};
+
+export type UserUpdateWithoutProjectsInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  googleUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  githubUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  avatar?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  type?: Maybe<EnumUserTypeFieldUpdateOperationsInput>;
+  members?: Maybe<MemberUpdateManyWithoutUserInput>;
+  comments?: Maybe<CommentUpdateManyWithoutUserInput>;
+  likes?: Maybe<LikeUpdateManyWithoutUserInput>;
+};
+
+export type UserUpsertWithoutProjectsInput = {
+  update: UserUpdateWithoutProjectsInput;
+  create: UserCreateWithoutProjectsInput;
+};
+
+export type CommentUpdateManyWithoutUserInput = {
+  create?: Maybe<Array<CommentCreateWithoutUserInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  set?: Maybe<Array<CommentWhereUniqueInput>>;
+  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
+  delete?: Maybe<Array<CommentWhereUniqueInput>>;
+  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutUserInput>>;
+  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutUserInput>>;
+  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
+  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutUserInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutuserInput>>;
+};
+
 export type ProjectCreateManyWithoutTeamInput = {
   create?: Maybe<Array<ProjectCreateWithoutTeamInput>>;
   connect?: Maybe<Array<ProjectWhereUniqueInput>>;
   connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutteamInput>>;
+};
+
+export type TeamUpdateWithoutMembersInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  project?: Maybe<ProjectUpdateManyWithoutTeamInput>;
+};
+
+export type TeamUpsertWithoutMembersInput = {
+  update: TeamUpdateWithoutMembersInput;
+  create: TeamCreateWithoutMembersInput;
+};
+
+export type PageUpdateWithWhereUniqueWithoutProjectsInput = {
+  where: PageWhereUniqueInput;
+  data: PageUpdateWithoutProjectsInput;
+};
+
+export type PageUpdateManyWithWhereWithoutProjectsInput = {
+  where: PageScalarWhereInput;
+  data: PageUpdateManyMutationInput;
+};
+
+export type PageScalarWhereInput = {
+  AND?: Maybe<Array<PageScalarWhereInput>>;
+  OR?: Maybe<Array<PageScalarWhereInput>>;
+  NOT?: Maybe<Array<PageScalarWhereInput>>;
+  id?: Maybe<StringFilter>;
+  createdAt?: Maybe<DateTimeFilter>;
+  updatedAt?: Maybe<DateTimeFilter>;
+  url?: Maybe<StringFilter>;
+  title?: Maybe<StringFilter>;
+  projectId?: Maybe<StringFilter>;
+};
+
+export type PageUpsertWithWhereUniqueWithoutProjectsInput = {
+  where: PageWhereUniqueInput;
+  update: PageUpdateWithoutProjectsInput;
+  create: PageCreateWithoutProjectsInput;
+};
+
+export type CommentUpdateWithoutLikesInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+};
+
+export type CommentUpsertWithoutLikesInput = {
+  update: CommentUpdateWithoutLikesInput;
+  create: CommentCreateWithoutLikesInput;
+};
+
+export type MemberUpdateManyWithoutTeamInput = {
+  create?: Maybe<Array<MemberCreateWithoutTeamInput>>;
+  connect?: Maybe<Array<MemberWhereUniqueInput>>;
+  set?: Maybe<Array<MemberWhereUniqueInput>>;
+  disconnect?: Maybe<Array<MemberWhereUniqueInput>>;
+  delete?: Maybe<Array<MemberWhereUniqueInput>>;
+  update?: Maybe<Array<MemberUpdateWithWhereUniqueWithoutTeamInput>>;
+  updateMany?: Maybe<Array<MemberUpdateManyWithWhereWithoutTeamInput>>;
+  deleteMany?: Maybe<Array<MemberScalarWhereInput>>;
+  upsert?: Maybe<Array<MemberUpsertWithWhereUniqueWithoutTeamInput>>;
+  connectOrCreate?: Maybe<Array<MemberCreateOrConnectWithoutteamInput>>;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutUserInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutUserInput = {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyMutationInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutUserInput;
+  create: CommentCreateWithoutUserInput;
 };
 
 export type ProjectCreateWithoutTeamInput = {
@@ -716,6 +1433,164 @@ export type ProjectCreateWithoutTeamInput = {
 export type ProjectCreateOrConnectWithoutteamInput = {
   where: ProjectWhereUniqueInput;
   create: ProjectCreateWithoutTeamInput;
+};
+
+export type ProjectUpdateManyWithoutTeamInput = {
+  create?: Maybe<Array<ProjectCreateWithoutTeamInput>>;
+  connect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  set?: Maybe<Array<ProjectWhereUniqueInput>>;
+  disconnect?: Maybe<Array<ProjectWhereUniqueInput>>;
+  delete?: Maybe<Array<ProjectWhereUniqueInput>>;
+  update?: Maybe<Array<ProjectUpdateWithWhereUniqueWithoutTeamInput>>;
+  updateMany?: Maybe<Array<ProjectUpdateManyWithWhereWithoutTeamInput>>;
+  deleteMany?: Maybe<Array<ProjectScalarWhereInput>>;
+  upsert?: Maybe<Array<ProjectUpsertWithWhereUniqueWithoutTeamInput>>;
+  connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutteamInput>>;
+};
+
+export type PageUpdateWithoutProjectsInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  url?: Maybe<StringFieldUpdateOperationsInput>;
+  title?: Maybe<StringFieldUpdateOperationsInput>;
+  comments?: Maybe<CommentUpdateManyWithoutPageInput>;
+};
+
+export type PageUpdateManyMutationInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  url?: Maybe<StringFieldUpdateOperationsInput>;
+  title?: Maybe<StringFieldUpdateOperationsInput>;
+};
+
+export type MemberUpdateWithWhereUniqueWithoutTeamInput = {
+  where: MemberWhereUniqueInput;
+  data: MemberUpdateWithoutTeamInput;
+};
+
+export type MemberUpdateManyWithWhereWithoutTeamInput = {
+  where: MemberScalarWhereInput;
+  data: MemberUpdateManyMutationInput;
+};
+
+export type MemberUpsertWithWhereUniqueWithoutTeamInput = {
+  where: MemberWhereUniqueInput;
+  update: MemberUpdateWithoutTeamInput;
+  create: MemberCreateWithoutTeamInput;
+};
+
+export type CommentUpdateWithoutUserInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+};
+
+export type ProjectUpdateWithWhereUniqueWithoutTeamInput = {
+  where: ProjectWhereUniqueInput;
+  data: ProjectUpdateWithoutTeamInput;
+};
+
+export type ProjectUpdateManyWithWhereWithoutTeamInput = {
+  where: ProjectScalarWhereInput;
+  data: ProjectUpdateManyMutationInput;
+};
+
+export type ProjectUpsertWithWhereUniqueWithoutTeamInput = {
+  where: ProjectWhereUniqueInput;
+  update: ProjectUpdateWithoutTeamInput;
+  create: ProjectCreateWithoutTeamInput;
+};
+
+export type CommentUpdateManyWithoutPageInput = {
+  create?: Maybe<Array<CommentCreateWithoutPageInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  set?: Maybe<Array<CommentWhereUniqueInput>>;
+  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
+  delete?: Maybe<Array<CommentWhereUniqueInput>>;
+  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutPageInput>>;
+  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutPageInput>>;
+  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
+  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutPageInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutpageInput>>;
+};
+
+export type MemberUpdateWithoutTeamInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  role?: Maybe<EnumRoleFieldUpdateOperationsInput>;
+  user?: Maybe<UserUpdateOneRequiredWithoutMembersInput>;
+};
+
+export type ProjectUpdateWithoutTeamInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  user?: Maybe<UserUpdateOneWithoutProjectsInput>;
+  pages?: Maybe<PageUpdateManyWithoutProjectsInput>;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutPageInput = {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutPageInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutPageInput = {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyMutationInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutPageInput = {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutPageInput;
+  create: CommentCreateWithoutPageInput;
+};
+
+export type UserUpdateOneRequiredWithoutMembersInput = {
+  create?: Maybe<UserCreateWithoutMembersInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+  update?: Maybe<UserUpdateWithoutMembersInput>;
+  upsert?: Maybe<UserUpsertWithoutMembersInput>;
+  connectOrCreate?: Maybe<UserCreateOrConnectWithoutmembersInput>;
+};
+
+export type CommentUpdateWithoutPageInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+};
+
+export type UserUpdateWithoutMembersInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  name?: Maybe<StringFieldUpdateOperationsInput>;
+  email?: Maybe<StringFieldUpdateOperationsInput>;
+  googleUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  githubUserId?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  avatar?: Maybe<NullableStringFieldUpdateOperationsInput>;
+  type?: Maybe<EnumUserTypeFieldUpdateOperationsInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutUserInput>;
+  comments?: Maybe<CommentUpdateManyWithoutUserInput>;
+  likes?: Maybe<LikeUpdateManyWithoutUserInput>;
+};
+
+export type UserUpsertWithoutMembersInput = {
+  update: UserUpdateWithoutMembersInput;
+  create: UserCreateWithoutMembersInput;
 };
 
 export type CreateOneCommentMutationVariables = Exact<{
@@ -733,45 +1608,20 @@ export type CreateOneCommentMutation = (
   ) }
 );
 
-export type GetAllCommentsByPageQueryVariables = Exact<{
+export type UpdateOneCommentMutationVariables = Exact<{
+  id: Scalars['String'];
+  content: Scalars['Json'];
+  userId: Scalars['String'];
   pageId: Scalars['String'];
 }>;
 
 
-export type GetAllCommentsByPageQuery = (
-  { __typename?: 'Query' }
-  & { getAllCommentsByPage?: Maybe<Array<Maybe<(
-    { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'content' | 'createdAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'avatar' | 'name'>
-    ), replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'avatar' | 'name'>
-      ) }
-    )>, likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Like, 'id' | 'userId' | 'commentId'>
-    )> }
-  )>>> }
-);
-
-export type CreateOneProjectMutationVariables = Exact<{
-  projectName: Scalars['String'];
-  userID: Scalars['String'];
-}>;
-
-
-export type CreateOneProjectMutation = (
+export type UpdateOneCommentMutation = (
   { __typename?: 'Mutation' }
-  & { createOneProject: (
-    { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'name'>
-  ) }
+  & { updateOneComment?: Maybe<(
+    { __typename?: 'Comment' }
+    & Pick<Comment, 'id'>
+  )> }
 );
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
@@ -842,6 +1692,86 @@ export type PageByProjectQuery = (
   )> }
 );
 
+export type CommentsInPageQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type CommentsInPageQuery = (
+  { __typename?: 'Query' }
+  & { page?: Maybe<(
+    { __typename?: 'Page' }
+    & Pick<Page, 'id'>
+    & { comments: Array<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Like, 'id' | 'userId'>
+      )>, replies: Array<(
+        { __typename?: 'Comment' }
+        & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name' | 'avatar'>
+        ), likes: Array<(
+          { __typename?: 'Like' }
+          & Pick<Like, 'id' | 'userId'>
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
+export type CreateOneProjectMutationVariables = Exact<{
+  projectName: Scalars['String'];
+  userID: Scalars['String'];
+}>;
+
+
+export type CreateOneProjectMutation = (
+  { __typename?: 'Mutation' }
+  & { createOneProject: (
+    { __typename?: 'Project' }
+    & Pick<Project, 'id' | 'name'>
+  ) }
+);
+
+export type ProjectAllCommentsQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type ProjectAllCommentsQuery = (
+  { __typename?: 'Query' }
+  & { project?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'id'>
+    & { pages: Array<(
+      { __typename?: 'Page' }
+      & Pick<Page, 'id'>
+      & { comments: Array<(
+        { __typename?: 'Comment' }
+        & Pick<Comment, 'id' | 'content'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<User, 'id' | 'name' | 'avatar'>
+        ), replies: Array<(
+          { __typename?: 'Comment' }
+          & Pick<Comment, 'id' | 'content'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'name' | 'avatar'>
+          ) }
+        )> }
+      )> }
+    )> }
+  )> }
+);
+
 
 export const CreateOneCommentDocument = gql`
     mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
@@ -881,95 +1811,44 @@ export function useCreateOneCommentMutation(baseOptions?: Apollo.MutationHookOpt
 export type CreateOneCommentMutationHookResult = ReturnType<typeof useCreateOneCommentMutation>;
 export type CreateOneCommentMutationResult = Apollo.MutationResult<CreateOneCommentMutation>;
 export type CreateOneCommentMutationOptions = Apollo.BaseMutationOptions<CreateOneCommentMutation, CreateOneCommentMutationVariables>;
-export const GetAllCommentsByPageDocument = gql`
-    query getAllCommentsByPage($pageId: String!) {
-  getAllCommentsByPage(pageId: $pageId) {
+export const UpdateOneCommentDocument = gql`
+    mutation updateOneComment($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
+  updateOneComment(
+    where: {id: $id}
+    data: {replies: {create: {content: $content, user: {connect: {id: $userId}}, page: {connect: {id: $pageId}}}}}
+  ) {
     id
-    content
-    createdAt
-    user {
-      id
-      avatar
-      name
-    }
-    replies {
-      id
-      content
-      createdAt
-      user {
-        id
-        avatar
-        name
-      }
-    }
-    likes {
-      id
-      userId
-      commentId
-    }
   }
 }
     `;
+export type UpdateOneCommentMutationFn = Apollo.MutationFunction<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>;
 
 /**
- * __useGetAllCommentsByPageQuery__
+ * __useUpdateOneCommentMutation__
  *
- * To run a query within a React component, call `useGetAllCommentsByPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAllCommentsByPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetAllCommentsByPageQuery({
- *   variables: {
- *      pageId: // value for 'pageId'
- *   },
- * });
- */
-export function useGetAllCommentsByPageQuery(baseOptions: Apollo.QueryHookOptions<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>) {
-        return Apollo.useQuery<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>(GetAllCommentsByPageDocument, baseOptions);
-      }
-export function useGetAllCommentsByPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>) {
-          return Apollo.useLazyQuery<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>(GetAllCommentsByPageDocument, baseOptions);
-        }
-export type GetAllCommentsByPageQueryHookResult = ReturnType<typeof useGetAllCommentsByPageQuery>;
-export type GetAllCommentsByPageLazyQueryHookResult = ReturnType<typeof useGetAllCommentsByPageLazyQuery>;
-export type GetAllCommentsByPageQueryResult = Apollo.QueryResult<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>;
-export const CreateOneProjectDocument = gql`
-    mutation createOneProject($projectName: String!, $userID: String!) {
-  createOneProject(data: {name: $projectName, user: {connect: {id: $userID}}}) {
-    id
-    name
-  }
-}
-    `;
-export type CreateOneProjectMutationFn = Apollo.MutationFunction<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
-
-/**
- * __useCreateOneProjectMutation__
- *
- * To run a mutation, you first call `useCreateOneProjectMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneProjectMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateOneCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateOneCommentMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createOneProjectMutation, { data, loading, error }] = useCreateOneProjectMutation({
+ * const [updateOneCommentMutation, { data, loading, error }] = useUpdateOneCommentMutation({
  *   variables: {
- *      projectName: // value for 'projectName'
- *      userID: // value for 'userID'
+ *      id: // value for 'id'
+ *      content: // value for 'content'
+ *      userId: // value for 'userId'
+ *      pageId: // value for 'pageId'
  *   },
  * });
  */
-export function useCreateOneProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>) {
-        return Apollo.useMutation<CreateOneProjectMutation, CreateOneProjectMutationVariables>(CreateOneProjectDocument, baseOptions);
+export function useUpdateOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>) {
+        return Apollo.useMutation<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>(UpdateOneCommentDocument, baseOptions);
       }
-export type CreateOneProjectMutationHookResult = ReturnType<typeof useCreateOneProjectMutation>;
-export type CreateOneProjectMutationResult = Apollo.MutationResult<CreateOneProjectMutation>;
-export type CreateOneProjectMutationOptions = Apollo.BaseMutationOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
+export type UpdateOneCommentMutationHookResult = ReturnType<typeof useUpdateOneCommentMutation>;
+export type UpdateOneCommentMutationResult = Apollo.MutationResult<UpdateOneCommentMutation>;
+export type UpdateOneCommentMutationOptions = Apollo.BaseMutationOptions<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>;
 export const CurrentUserDocument = gql`
     query currentUser {
   currentUser {
@@ -1125,3 +2004,154 @@ export function usePageByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageByProjectQueryHookResult = ReturnType<typeof usePageByProjectQuery>;
 export type PageByProjectLazyQueryHookResult = ReturnType<typeof usePageByProjectLazyQuery>;
 export type PageByProjectQueryResult = Apollo.QueryResult<PageByProjectQuery, PageByProjectQueryVariables>;
+export const CommentsInPageDocument = gql`
+    query commentsInPage($id: String!) {
+  page(where: {id: $id}) {
+    id
+    comments {
+      id
+      pageId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+      replies {
+        id
+        pageId
+        content
+        createdAt
+        user {
+          id
+          name
+          avatar
+        }
+        likes {
+          id
+          userId
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCommentsInPageQuery__
+ *
+ * To run a query within a React component, call `useCommentsInPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCommentsInPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCommentsInPageQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCommentsInPageQuery(baseOptions: Apollo.QueryHookOptions<CommentsInPageQuery, CommentsInPageQueryVariables>) {
+        return Apollo.useQuery<CommentsInPageQuery, CommentsInPageQueryVariables>(CommentsInPageDocument, baseOptions);
+      }
+export function useCommentsInPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentsInPageQuery, CommentsInPageQueryVariables>) {
+          return Apollo.useLazyQuery<CommentsInPageQuery, CommentsInPageQueryVariables>(CommentsInPageDocument, baseOptions);
+        }
+export type CommentsInPageQueryHookResult = ReturnType<typeof useCommentsInPageQuery>;
+export type CommentsInPageLazyQueryHookResult = ReturnType<typeof useCommentsInPageLazyQuery>;
+export type CommentsInPageQueryResult = Apollo.QueryResult<CommentsInPageQuery, CommentsInPageQueryVariables>;
+export const CreateOneProjectDocument = gql`
+    mutation createOneProject($projectName: String!, $userID: String!) {
+  createOneProject(data: {name: $projectName, user: {connect: {id: $userID}}}) {
+    id
+    name
+  }
+}
+    `;
+export type CreateOneProjectMutationFn = Apollo.MutationFunction<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
+
+/**
+ * __useCreateOneProjectMutation__
+ *
+ * To run a mutation, you first call `useCreateOneProjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneProjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createOneProjectMutation, { data, loading, error }] = useCreateOneProjectMutation({
+ *   variables: {
+ *      projectName: // value for 'projectName'
+ *      userID: // value for 'userID'
+ *   },
+ * });
+ */
+export function useCreateOneProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>) {
+        return Apollo.useMutation<CreateOneProjectMutation, CreateOneProjectMutationVariables>(CreateOneProjectDocument, baseOptions);
+      }
+export type CreateOneProjectMutationHookResult = ReturnType<typeof useCreateOneProjectMutation>;
+export type CreateOneProjectMutationResult = Apollo.MutationResult<CreateOneProjectMutation>;
+export type CreateOneProjectMutationOptions = Apollo.BaseMutationOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
+export const ProjectAllCommentsDocument = gql`
+    query projectAllComments($id: String!) {
+  project(where: {id: $id}) {
+    id
+    pages {
+      id
+      comments {
+        id
+        content
+        user {
+          id
+          name
+          avatar
+        }
+        replies {
+          id
+          content
+          user {
+            id
+            name
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useProjectAllCommentsQuery__
+ *
+ * To run a query within a React component, call `useProjectAllCommentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectAllCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectAllCommentsQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useProjectAllCommentsQuery(baseOptions: Apollo.QueryHookOptions<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>) {
+        return Apollo.useQuery<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>(ProjectAllCommentsDocument, baseOptions);
+      }
+export function useProjectAllCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>) {
+          return Apollo.useLazyQuery<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>(ProjectAllCommentsDocument, baseOptions);
+        }
+export type ProjectAllCommentsQueryHookResult = ReturnType<typeof useProjectAllCommentsQuery>;
+export type ProjectAllCommentsLazyQueryHookResult = ReturnType<typeof useProjectAllCommentsLazyQuery>;
+export type ProjectAllCommentsQueryResult = Apollo.QueryResult<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>;

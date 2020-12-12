@@ -3,42 +3,32 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
-import { MessageIcon } from '$/components/Icons/Message.Icon';
+import { Node } from 'slate';
 
+import { MessageIcon } from '$/components/Icons/Message.Icon';
 import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
-import { Node } from 'slate';
 import { RichTextEditor } from './RichTextEditor/RichTextEditor';
-import { Like } from '@prisma/client';
 import { ActionButton } from '$/components/buttons/ActionButton';
+import { Button } from '$/components/buttons/Button';
+import { CommentInWidget } from '$/types/widget';
+import { useUpdateOneCommentMutation } from '$/generated/graphql';
 
 dayjs.extend(relativeTime);
 
 export type CommentProps = {
-  id: string;
-  name: string;
-  avatar: string;
-  content: Node[];
-  date: string;
+  comment: CommentInWidget;
   userId?: string;
-  likeList: Like[];
   onClickLike(liked: boolean, commentId: string, likedId: string): void;
 };
 
-function Comment({
-  id,
-  avatar,
-  name,
-  content,
-  date,
-  userId,
-  likeList,
-  onClickLike,
-}: CommentProps): JSX.Element {
+function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
+  const { id, user, content, createdAt, pageId, likes, replies } = comment;
+  const { avatar, name, id: userId } = user;
   let likedId = '';
   const liked =
     !!userId &&
-    likeList.some((like) => {
+    likes.some((like) => {
       if (like.userId === userId) {
         likedId = like.id;
         return true;
@@ -49,28 +39,55 @@ function Comment({
     onClickLike(liked, id, likedId);
   };
   const HeartComponent = liked ? HeartFill : Heart;
+  const [showReplyEditor, setShowReplyEditor] = React.useState(false);
+  const [replyContent, setReplyContent] = React.useState<Node[]>([
+    {
+      type: 'paragraph',
+      children: [{ text: `What are your thoughts?` }],
+    },
+  ]);
+  const handlePressReply = React.useCallback(() => {
+    setShowReplyEditor((prev) => !prev);
+  }, []);
+
+  const [updateOneComment] = useUpdateOneCommentMutation();
+  const handleSubmitReply = React.useCallback(() => {
+    if (!userId) {
+      return;
+    }
+    updateOneComment({
+      variables: {
+        content: replyContent,
+        id,
+        pageId,
+        userId,
+      },
+    });
+  }, [replyContent, id, pageId, userId, updateOneComment]);
 
   return (
     <section className="flex flex-row items-start space-x-2 py-2">
-      <Avatar size="md" src={avatar} alt={`User ${name}'s avatar`} />
-      <div className="bg-gray-50 px-6 py-4 rounded-r-3xl rounded-bl-3xl space-y-2">
+      <Avatar size="md" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+      <div className="bg-gray-50 flex-1 px-6 py-4 rounded-r-3xl rounded-bl-3xl space-y-2">
         <div className="flex flex-row items-center space-x-4">
           <Text>{name}</Text>
-          <Text as="time" variant="xs" title={date} className="text-text-light cursor-default">
-            {dayjs(date).fromNow()}
+          <Text as="time" variant="xs" title={createdAt} className="text-text-light cursor-default">
+            {dayjs(createdAt).fromNow()}
           </Text>
         </div>
-        <RichTextEditor value={content} readOnly />
+        <div>
+          <RichTextEditor value={content} readOnly />
+        </div>
         <div className="flex flex-row items-center space-x-6">
           <ActionButton
             color="pink"
             activated={liked}
             icon={<HeartComponent size={20} onClick={handleClickLike} />}
           >
-            {!!likeList.length && <span>{likeList.length}</span>}
+            {!!likes.length && <span>{likes.length}</span>}
           </ActionButton>
           <ActionButton
-            color="indigo"
+            color="blue"
             icon={
               <MessageIcon
                 width={20}
@@ -80,8 +97,37 @@ function Comment({
                 }}
               />
             }
+            onClick={handlePressReply}
           />
         </div>
+        {showReplyEditor && (
+          <div className="flex flex-col space-y-2">
+            <RichTextEditor
+              value={replyContent}
+              placeholder={[
+                {
+                  type: 'paragraph',
+                  children: [{ text: `What are your thoughts?` }],
+                },
+              ]}
+              onChange={setReplyContent}
+              className="bg-white"
+            />
+            <div className="flex flex-row justify-end">
+              <Button size="md" onClick={handleSubmitReply}>
+                Submit
+              </Button>
+            </div>
+          </div>
+        )}
+        {replies &&
+          replies.map((reply) => (
+            <Comment
+              key={reply.id}
+              comment={reply as CommentInWidget}
+              onClickLike={handleClickLike}
+            />
+          ))}
       </div>
     </section>
   );

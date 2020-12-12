@@ -8,5 +8,7 @@ export const Mutation = mutationType({
 
     t.crud.createOneLike();
     t.crud.deleteOneLike();
+
+    t.crud.updateOneComment();
   },
 });

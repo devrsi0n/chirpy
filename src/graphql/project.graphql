@@ -42,3 +42,30 @@ mutation createOneProject($projectName: String!, $userID: String!) {
     name
   }
 }
+
+query projectAllComments($id: String!) {
+  project(where: { id: $id }) {
+    id
+    pages {
+      id
+      comments {
+        id
+        content
+        user {
+          id
+          name
+          avatar
+        }
+        replies {
+          id
+          content
+          user {
+            id
+            name
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,32 +6,24 @@ mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
   }
 }
 
-# Query one level replies currently.
-# For nested query: https://hashinteractive.com/blog/graphql-recursive-query-with-fragments/
-query getAllCommentsByPage($pageId: String!) {
-  getAllCommentsByPage(pageId: $pageId ) {
-    id
-    content
-    createdAt
-    user {
-      id
-      avatar
-      name
-    }
-    replies {
-      id
-      content
-      createdAt
-      user {
-        id
-        avatar
-        name
+mutation updateOneComment(
+  $id: String!
+  $content: Json!
+  $userId: String!
+  $pageId: String!
+) {
+  updateOneComment(
+    where: { id: $id }
+    data: {
+      replies: {
+        create: {
+          content: $content
+          user: { connect: { id: $userId } }
+          page: { connect: { id: $pageId } }
+        }
       }
     }
-    likes {
-      id
-      userId
-      commentId
-    }
+  ) {
+    id
   }
 }
