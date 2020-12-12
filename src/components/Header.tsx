@@ -10,10 +10,11 @@ import { Text } from './Text';
 import { layoutStyle } from './styles';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from './Select';
-import { Project } from '$/generated/graphql';
+import { CurrentUserQuery } from '$/generated/graphql';
 import { SlashIcon } from './Icons/Slash.Icon';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
+type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
 
 export function Header(): JSX.Element {
   const { data, error, loading } = useCurrentUser();

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {
   GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
+  GetServerSideProps,
+  InferGetServerSidePropsType,
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from 'next';
 import Head from 'next/head';
+import { ApolloQueryResult } from '@apollo/client';
 
 import { prisma } from '$server/context';
-import { Comment, Like, User } from '@prisma/client';
 import { Comment as SectionComment } from '$/blocks/Comment';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
@@ -19,17 +19,19 @@ import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
-  GetAllCommentsByPageDocument,
-  GetAllCommentsByPageQuery,
-  GetAllCommentsByPageQueryVariables,
   useCreateOneLikeMutation,
   useDeleteOneLikeMutation,
+  CommentsInPageDocument,
+  CommentsInPageQuery,
+  CommentsInPageQueryVariables,
 } from '$/generated/graphql';
 import { useApollo } from '$/lib/apollo-client';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
+import { initializeApollo } from '$/lib/apollo-client';
+import { PageInWidget, CommentInWidget } from '$/types/widget';
 
-export type CommentProps = InferGetStaticPropsType<typeof getStaticProps>;
+export type PageCommentProps = InferGetServerSidePropsType<typeof getServerProps>;
 
 // Demo: http://localhost:3000/widget/ckhsvc67800093wcvw0bdjibk/ckhsvd40j00019ucv8dng90b8
 
@@ -39,19 +41,19 @@ const COMMENT_TAB_VALUE = 'Comment';
  * Comment widget for a page
  * @param props
  */
-export default function PageComment(props: CommentProps): JSX.Element {
+export default function PageComment(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  let _comments: CommentWithContext[] = [];
+  let _comments: CommentInWidget[] = [];
   if (isStaticError(props)) {
     error = props.error!;
   } else {
-    _comments = props.comments;
+    _comments = props.page?.comments || [];
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
   const [input, setInput] = React.useState<Node[]>();
-  const [comments, setComments] = React.useState<CommentWithContext[]>(_comments);
+  const [comments, setComments] = React.useState<CommentInWidget[]>(_comments);
 
   const client = useApollo();
 
@@ -61,20 +63,20 @@ export default function PageComment(props: CommentProps): JSX.Element {
   ] = useCreateOneCommentMutation();
   const refreshComments = React.useCallback(() => {
     client
-      .query<GetAllCommentsByPageQuery, GetAllCommentsByPageQueryVariables>({
-        query: GetAllCommentsByPageDocument,
+      .query<CommentsInPageQuery, CommentsInPageQueryVariables>({
+        query: CommentsInPageDocument,
         variables: {
-          pageId,
+          id: pageId,
         },
         fetchPolicy: 'no-cache',
       })
       .then((data) => {
         setInput(undefined);
-        if (!data.data.getAllCommentsByPage) {
+        if (!data.data.page) {
           console.error('Unexpected empty comments');
           return;
         }
-        setComments((data.data.getAllCommentsByPage as unknown) as CommentWithContext[]);
+        setComments(data.data.page.comments);
       });
   }, [client, pageId]);
   const handleSubmit = React.useCallback(() => {
@@ -148,15 +150,10 @@ export default function PageComment(props: CommentProps): JSX.Element {
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
-            {comments?.map((comment: CommentWithContext) => (
+            {comments?.map((comment: CommentInWidget) => (
               <SectionComment
                 key={comment.id}
-                id={comment.id}
-                name={comment.user.name}
-                avatar={comment.user.avatar!}
-                content={comment.content as Node[]}
-                date={String((comment as $TsFixMe).createdAt as string)}
-                likeList={comment.likes}
+                comment={comment}
                 onClickLike={handleClickLike}
                 userId={userData?.currentUser?.id}
               />
@@ -175,6 +172,7 @@ export default function PageComment(props: CommentProps): JSX.Element {
               }}
               value={input}
               onChange={setInput}
+              className="bg-gray-100"
             />
             <div className="flex flex-row justify-end">
               {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
@@ -197,81 +195,69 @@ type PathParams = {
 };
 
 // Get all project then prerender all their page comments
-export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const projects = await prisma.project.findMany({
-    include: {
-      pages: {
-        include: {
-          comments: true,
-        },
-      },
-    },
-  });
-  const paths: { params: PathParams }[] = [];
-  projects.forEach((project) =>
-    project.pages?.forEach((page) => {
-      paths.push({
-        params: {
-          projectId: project.id,
-          pageId: page.id,
-        },
-      });
-    }),
-  );
+// export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+//   const projects = await prisma.project.findMany({
+//     include: {
+//       pages: {
+//         include: {
+//           comments: true,
+//         },
+//       },
+//     },
+//   });
+//   const paths: { params: PathParams }[] = [];
+//   projects.forEach((project) =>
+//     project.pages?.forEach((page) => {
+//       paths.push({
+//         params: {
+//           projectId: project.id,
+//           pageId: page.id,
+//         },
+//       });
+//     }),
+//   );
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: true };
-};
-
-type CommentWithContext = Comment & {
-  user: User;
-  replies: Comment[];
-  likes: Like[];
-};
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: true };
+// };
 
 type StaticProps = PathParams & {
-  comments: CommentWithContext[];
+  page: PageInWidget;
 };
 type StaticError = {
   error?: string;
 };
 
-export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
+const client = initializeApollo();
+
+export const getServerProps: GetServerSideProps<StaticProps | StaticError, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
   try {
     if (!params) {
       return { props: { error: 'No params' } };
     }
-    const { projectId, pageId } = params;
-    // console.log({ params });
-    const project = await prisma.project.findUnique({
-      where: {
-        id: projectId,
+    const { pageId, projectId } = params;
+
+    // TODO: fix http performance issue, better to fetch the data directly
+    const page: ApolloQueryResult<CommentsInPageQuery> = await client.query<
+      CommentsInPageQuery,
+      CommentsInPageQueryVariables
+    >({
+      query: CommentsInPageDocument,
+      variables: {
+        id: pageId,
       },
-      include: {
-        pages: {
-          where: {
-            id: pageId,
-          },
-          include: {
-            comments: {
-              include: {
-                user: true,
-                replies: true,
-                likes: true,
-              },
-            },
-          },
-        },
-      },
+      fetchPolicy: 'no-cache',
     });
-    if (!((project?.pages[0]?.comments?.length ?? 0) > 0)) {
-      return { props: { error: 'No comments' } };
+
+    if (!page.data?.page) {
+      return { props: { error: 'No page data' } };
     }
+
     return {
-      props: { projectId, pageId, comments: project!.pages[0].comments! },
+      props: { page: page.data.page, pageId, projectId },
       // TODO: Shorter time for pro user?
       revalidate: 60 * 60,
     };

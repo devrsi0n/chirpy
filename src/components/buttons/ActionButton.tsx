@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
-type Color = 'pink' | 'indigo';
+type Color = 'pink' | 'blue';
 
 export type ActionButtonProps = BaseButtonProps & {
   icon: React.ReactNode;
@@ -27,7 +27,10 @@ export function ActionButton({
   );
 }
 
-function getClassName(color: Color, activated: boolean): { iconStyle: string; childStyle: string } {
+function getClassName(
+  color: Color,
+  activated: boolean | undefined,
+): { iconStyle: string; childStyle: string } {
   const textStyle = activated ? `text-${color}-500` : `group-hover:text-${color}-500`;
   return {
     iconStyle: `${textStyle} group-hover:bg-${color}-50`,

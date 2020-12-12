@@ -9,5 +9,6 @@ export const Project = objectType({
     t.model.team();
     t.model.userId();
     t.model.user();
+    t.model.pages();
   },
 });
