@@ -5,7 +5,7 @@
     "dev:both": "concurrently \"next\" \"parcel watch ./src/external/comment.ts --out-dir public\"",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "concurrently \"next build\" \"parcel build ./src/external/comment.ts --out-dir public --no-source-maps\"",
-    "build:local": "dotenv -e .env.development -- concurrently \"next build\" \"parcel build ./src/lib/comment.ts --out-dir public --no-source-maps\"",
+    "build:local": "dotenv -e .env.development -- concurrently \"next build\" \"parcel build ./src/external/comment.ts --out-dir public --no-source-maps\"",
     "analyze": "ANALYZE=true dotenv -e .env.development -- next build",
     "start": "next start",
     "migrate:save": "dotenv -e .env.development -- prisma migrate save --experimental",
