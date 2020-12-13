@@ -9,6 +9,7 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
+    "prettier/prettier"
   ],
   rules: {
     'prettier/prettier': 'warn',
