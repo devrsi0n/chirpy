@@ -9,6 +9,7 @@ export const Query = queryType({
     t.crud.user();
     t.crud.page();
     t.crud.project();
+    t.crud.comment();
 
     t.field('currentUser', {
       type: 'User',

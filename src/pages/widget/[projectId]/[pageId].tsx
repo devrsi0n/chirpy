@@ -22,14 +22,14 @@ import {
   CommentsInPageDocument,
   CommentsInPageQuery,
   CommentsInPageQueryVariables,
+  useCommentsInPageLazyQuery,
 } from '$/generated/graphql';
-import { useApollo } from '$/lib/apollo-client';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
 import { PageInWidget, CommentInWidget } from '$/types/widget';
 
-export type PageCommentProps = InferGetServerSidePropsType<typeof getServerProps>;
+export type PageCommentProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 // Demo: http://localhost:3000/widget/ckhsvc67800093wcvw0bdjibk/ckhsvd40j00019ucv8dng90b8
 
@@ -46,37 +46,28 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
   if (isStaticError(props)) {
     error = props.error!;
   } else {
-    _comments = props.page?.comments || [];
+    _comments = props.page?.comments || _comments;
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
   const [input, setInput] = React.useState<Node[]>();
   const [comments, setComments] = React.useState<CommentInWidget[]>(_comments);
 
-  const client = useApollo();
+  const [queryCommentsInPage] = useCommentsInPageLazyQuery({
+    variables: {
+      id: pageId,
+    },
+    fetchPolicy: 'no-cache',
+    onCompleted(data: CommentsInPageQuery) {
+      data.page?.comments && setComments(data.page.comments);
+    },
+  });
+  const [createOneComment] = useCreateOneCommentMutation({
+    onCompleted() {
+      queryCommentsInPage();
+    },
+  });
 
-  const [
-    createOneComment,
-    { data, loading, error: createCommentError },
-  ] = useCreateOneCommentMutation();
-  const refreshComments = React.useCallback(() => {
-    client
-      .query<CommentsInPageQuery, CommentsInPageQueryVariables>({
-        query: CommentsInPageDocument,
-        variables: {
-          id: pageId,
-        },
-        fetchPolicy: 'no-cache',
-      })
-      .then((data) => {
-        setInput(undefined);
-        if (!data.data.page) {
-          console.error('Unexpected empty comments');
-          return;
-        }
-        setComments(data.data.page.comments);
-      });
-  }, [client, pageId]);
   const handleSubmit = React.useCallback(() => {
     if (!userData?.currentUser?.id) {
       console.error('login first');
@@ -88,10 +79,8 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         content: input,
         userId: userData.currentUser.id,
       },
-    }).then(() => {
-      refreshComments();
     });
-  }, [input, pageId, userData?.currentUser?.id, createOneComment, refreshComments]);
+  }, [input, pageId, userData?.currentUser?.id, createOneComment]);
 
   const [createOneLike] = useCreateOneLikeMutation();
   const [deleteOneLike] = useDeleteOneLikeMutation();
@@ -117,10 +106,10 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         });
       }
       promise.then(() => {
-        refreshComments();
+        queryCommentsInPage();
       });
     },
-    [createOneLike, userData, deleteOneLike, refreshComments],
+    [createOneLike, userData, deleteOneLike, queryCommentsInPage],
   );
 
   if (error) {

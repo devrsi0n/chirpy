@@ -22,6 +22,7 @@ export type CommentProps = {
   onClickLike(liked: boolean, commentId: string, likedId: string): void;
 };
 
+// TODO: Handle click like inside this component.
 function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
   const { id, user, content, createdAt, pageId, likes, replies } = comment;
   const { avatar, name, id: userId } = user;
@@ -120,14 +121,13 @@ function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
             </div>
           </div>
         )}
-        {replies &&
-          replies.map((reply) => (
-            <Comment
-              key={reply.id}
-              comment={reply as CommentInWidget}
-              onClickLike={handleClickLike}
-            />
-          ))}
+        {replies?.map((reply) => (
+          <Comment
+            key={reply.id}
+            comment={reply as CommentInWidget}
+            onClickLike={handleClickLike}
+          />
+        ))}
       </div>
     </section>
   );
