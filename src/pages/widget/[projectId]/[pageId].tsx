@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  GetStaticPaths,
   GetServerSideProps,
   InferGetServerSidePropsType,
   GetStaticPropsContext,
@@ -9,7 +8,6 @@ import {
 import Head from 'next/head';
 import { ApolloQueryResult } from '@apollo/client';
 
-import { prisma } from '$server/context';
 import { Comment as SectionComment } from '$/blocks/Comment';
 import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
 import { Node } from 'slate';
@@ -231,7 +229,11 @@ type StaticError = {
 
 const client = initializeApollo();
 
-export const getServerProps: GetServerSideProps<StaticProps | StaticError, PathParams> = async ({
+// TODO: Re-enable static build page: getStaticProps
+export const getServerSideProps: GetServerSideProps<
+  StaticProps | StaticError,
+  PathParams
+> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
   try {
@@ -259,7 +261,7 @@ export const getServerProps: GetServerSideProps<StaticProps | StaticError, PathP
     return {
       props: { page: page.data.page, pageId, projectId },
       // TODO: Shorter time for pro user?
-      revalidate: 60 * 60,
+      // revalidate: 60 * 60,
     };
   } catch (err) {
     console.error(err);

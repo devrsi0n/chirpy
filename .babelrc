@@ -6,15 +6,9 @@
         "styled-jsx": {
           "plugins": [
             "styled-jsx-plugin-postcss"
-          ],
-          "optimizeForSpeed": true
+          ]
         }
       }
     ]
-  ],
-  "plugins": [
-    // To support date type in nextjs `getStaticProps`
-    // TODO: Remove this plugin since it brings 93kb bundle size
-    "superjson-next"
   ]
 }
