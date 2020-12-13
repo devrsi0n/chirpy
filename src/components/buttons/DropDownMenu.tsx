@@ -37,7 +37,7 @@ export function DropDownMenu(props: DropDownMenuProps): JSX.Element {
               <Menu.Items
                 static
                 className={clsx(
-                  'absolute right-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 py-1',
+                  'absolute right-0 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 py-1 z-30',
                   props.classes?.items,
                 )}
               >
@@ -62,8 +62,7 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
   return (
     <Menu.Item onClick={props.onClick}>
       {({ active }) => (
-        <button
-          type="button"
+        <div
           className={clsx(
             'flex flex-row items-center border-none',
             active ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
@@ -72,7 +71,7 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
           )}
         >
           {props.children}
-        </button>
+        </div>
       )}
     </Menu.Item>
   );

@@ -24,7 +24,7 @@ export function Toggle({
   );
   const memoLabel = React.useMemo(
     () => (
-      <Switch.Label className="overflow-hidden whitespace-nowrap">
+      <Switch.Label key="label" className="overflow-hidden whitespace-nowrap">
         <Text
           as="span"
           style={{
@@ -41,6 +41,7 @@ export function Toggle({
   const memoSwitch = React.useMemo(
     () => (
       <Switch
+        key="switch"
         as="button"
         type="button"
         checked={enabled}
