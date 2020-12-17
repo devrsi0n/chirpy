@@ -12,7 +12,7 @@ import { RichTextEditor } from './RichTextEditor/RichTextEditor';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { Button } from '$/components/buttons/Button';
 import { CommentInWidget } from '$/types/widget';
-import { useUpdateOneCommentMutation } from '$/generated/graphql';
+import { useCreateOneReplyMutation } from '$/generated/graphql';
 import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 dayjs.extend(relativeTime);
@@ -25,7 +25,8 @@ export type CommentProps = {
 
 // TODO: Handle click like inside this component.
 function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
-  const { id, user, content, createdAt, pageId, likes, replies } = comment;
+  const { id, user, content, createdAt, pageId, likes, replies: _replies } = comment;
+  const [replies, setReplies] = React.useState(_replies);
   const { avatar, name, id: userId } = user;
   let likedId = '';
   const liked =
@@ -52,21 +53,25 @@ function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
     setShowReplyEditor((prev) => !prev);
   }, []);
 
-  const refreshProps = useRefreshServerProps();
-  const [updateOneComment] = useUpdateOneCommentMutation();
+  // const refreshProps = useRefreshServerProps();
+  const [createOneReply] = useCreateOneReplyMutation();
   const handleSubmitReply = React.useCallback(() => {
     if (!userId) {
       return;
     }
-    updateOneComment({
+    createOneReply({
       variables: {
         content: replyContent,
         id,
         pageId,
         userId,
       },
-    }).then(() => refreshProps());
-  }, [replyContent, id, pageId, userId, updateOneComment, refreshProps]);
+    }).then(({ data }) => {
+      if (data?.updateOneComment?.replies) {
+        setReplies(data.updateOneComment.replies);
+      }
+    });
+  }, [replyContent, id, pageId, userId, createOneReply]);
 
   return (
     <section className="flex flex-row items-start space-x-2 py-2">

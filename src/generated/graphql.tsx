@@ -160,6 +160,7 @@ export type Query = {
   user?: Maybe<User>;
   page?: Maybe<Page>;
   project?: Maybe<Project>;
+  comment?: Maybe<Comment>;
   currentUser?: Maybe<User>;
   getOrCreatePage?: Maybe<Page>;
 };
@@ -177,6 +178,11 @@ export type QueryPageArgs = {
 
 export type QueryProjectArgs = {
   where: ProjectWhereUniqueInput;
+};
+
+
+export type QueryCommentArgs = {
+  where: CommentWhereUniqueInput;
 };
 
 
@@ -1608,7 +1614,7 @@ export type CreateOneCommentMutation = (
   ) }
 );
 
-export type UpdateOneCommentMutationVariables = Exact<{
+export type CreateOneReplyMutationVariables = Exact<{
   id: Scalars['String'];
   content: Scalars['Json'];
   userId: Scalars['String'];
@@ -1616,11 +1622,28 @@ export type UpdateOneCommentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateOneCommentMutation = (
+export type CreateOneReplyMutation = (
   { __typename?: 'Mutation' }
   & { updateOneComment?: Maybe<(
     { __typename?: 'Comment' }
-    & Pick<Comment, 'id'>
+    & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+    & { likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Like, 'id' | 'userId'>
+    )>, user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'avatar'>
+    ), replies: Array<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Like, 'id' | 'userId'>
+      )> }
+    )> }
   )> }
 );
 
@@ -1811,30 +1834,57 @@ export function useCreateOneCommentMutation(baseOptions?: Apollo.MutationHookOpt
 export type CreateOneCommentMutationHookResult = ReturnType<typeof useCreateOneCommentMutation>;
 export type CreateOneCommentMutationResult = Apollo.MutationResult<CreateOneCommentMutation>;
 export type CreateOneCommentMutationOptions = Apollo.BaseMutationOptions<CreateOneCommentMutation, CreateOneCommentMutationVariables>;
-export const UpdateOneCommentDocument = gql`
-    mutation updateOneComment($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
+export const CreateOneReplyDocument = gql`
+    mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
   updateOneComment(
     where: {id: $id}
     data: {replies: {create: {content: $content, user: {connect: {id: $userId}}, page: {connect: {id: $pageId}}}}}
   ) {
     id
+    pageId
+    content
+    createdAt
+    likes {
+      id
+      userId
+    }
+    user {
+      id
+      name
+      avatar
+    }
+    replies {
+      id
+      pageId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+    }
   }
 }
     `;
-export type UpdateOneCommentMutationFn = Apollo.MutationFunction<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>;
+export type CreateOneReplyMutationFn = Apollo.MutationFunction<CreateOneReplyMutation, CreateOneReplyMutationVariables>;
 
 /**
- * __useUpdateOneCommentMutation__
+ * __useCreateOneReplyMutation__
  *
- * To run a mutation, you first call `useUpdateOneCommentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateOneCommentMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateOneReplyMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateOneReplyMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateOneCommentMutation, { data, loading, error }] = useUpdateOneCommentMutation({
+ * const [createOneReplyMutation, { data, loading, error }] = useCreateOneReplyMutation({
  *   variables: {
  *      id: // value for 'id'
  *      content: // value for 'content'
@@ -1843,12 +1893,12 @@ export type UpdateOneCommentMutationFn = Apollo.MutationFunction<UpdateOneCommen
  *   },
  * });
  */
-export function useUpdateOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>) {
-        return Apollo.useMutation<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>(UpdateOneCommentDocument, baseOptions);
+export function useCreateOneReplyMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneReplyMutation, CreateOneReplyMutationVariables>) {
+        return Apollo.useMutation<CreateOneReplyMutation, CreateOneReplyMutationVariables>(CreateOneReplyDocument, baseOptions);
       }
-export type UpdateOneCommentMutationHookResult = ReturnType<typeof useUpdateOneCommentMutation>;
-export type UpdateOneCommentMutationResult = Apollo.MutationResult<UpdateOneCommentMutation>;
-export type UpdateOneCommentMutationOptions = Apollo.BaseMutationOptions<UpdateOneCommentMutation, UpdateOneCommentMutationVariables>;
+export type CreateOneReplyMutationHookResult = ReturnType<typeof useCreateOneReplyMutation>;
+export type CreateOneReplyMutationResult = Apollo.MutationResult<CreateOneReplyMutation>;
+export type CreateOneReplyMutationOptions = Apollo.BaseMutationOptions<CreateOneReplyMutation, CreateOneReplyMutationVariables>;
 export const CurrentUserDocument = gql`
     query currentUser {
   currentUser {
