@@ -1,17 +1,18 @@
 mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
-  createOneComment(data: { content: $content, page: { connect: { id: $pageId }}, user: { connect: { id: $userId }}}) {
+  createOneComment(
+    data: {
+      content: $content
+      page: { connect: { id: $pageId } }
+      user: { connect: { id: $userId } }
+    }
+  ) {
     id
     content
     createdAt
   }
 }
 
-mutation updateOneComment(
-  $id: String!
-  $content: Json!
-  $userId: String!
-  $pageId: String!
-) {
+mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
   updateOneComment(
     where: { id: $id }
     data: {
@@ -25,5 +26,32 @@ mutation updateOneComment(
     }
   ) {
     id
+    pageId
+    content
+    createdAt
+    likes {
+      id
+      userId
+    }
+    user {
+      id
+      name
+      avatar
+    }
+    replies {
+      id
+      pageId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+    }
   }
 }
