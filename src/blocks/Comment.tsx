@@ -13,6 +13,7 @@ import { ActionButton } from '$/components/buttons/ActionButton';
 import { Button } from '$/components/buttons/Button';
 import { CommentInWidget } from '$/types/widget';
 import { useUpdateOneCommentMutation } from '$/generated/graphql';
+import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 dayjs.extend(relativeTime);
 
@@ -51,6 +52,7 @@ function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
     setShowReplyEditor((prev) => !prev);
   }, []);
 
+  const refreshProps = useRefreshServerProps();
   const [updateOneComment] = useUpdateOneCommentMutation();
   const handleSubmitReply = React.useCallback(() => {
     if (!userId) {
@@ -63,8 +65,8 @@ function Comment({ comment, onClickLike }: CommentProps): JSX.Element {
         pageId,
         userId,
       },
-    });
-  }, [replyContent, id, pageId, userId, updateOneComment]);
+    }).then(() => refreshProps());
+  }, [replyContent, id, pageId, userId, updateOneComment, refreshProps]);
 
   return (
     <section className="flex flex-row items-start space-x-2 py-2">

@@ -22,12 +22,12 @@ import {
   CommentsInPageDocument,
   CommentsInPageQuery,
   CommentsInPageQueryVariables,
-  useCommentsInPageLazyQuery,
 } from '$/generated/graphql';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
 import { PageInWidget, CommentInWidget } from '$/types/widget';
+import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 export type PageCommentProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -42,29 +42,20 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function PageComment(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  let _comments: CommentInWidget[] = [];
+  let comments: CommentInWidget[] = [];
   if (isStaticError(props)) {
     error = props.error!;
   } else {
-    _comments = props.page?.comments || _comments;
+    comments = props.page?.comments || comments;
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
   const [input, setInput] = React.useState<Node[]>();
-  const [comments, setComments] = React.useState<CommentInWidget[]>(_comments);
 
-  const [queryCommentsInPage] = useCommentsInPageLazyQuery({
-    variables: {
-      id: pageId,
-    },
-    fetchPolicy: 'no-cache',
-    onCompleted(data: CommentsInPageQuery) {
-      data.page?.comments && setComments(data.page.comments);
-    },
-  });
+  const refreshProps = useRefreshServerProps();
   const [createOneComment] = useCreateOneCommentMutation({
     onCompleted() {
-      queryCommentsInPage();
+      refreshProps();
     },
   });
 
@@ -106,10 +97,10 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         });
       }
       promise.then(() => {
-        queryCommentsInPage();
+        refreshProps();
       });
     },
-    [createOneLike, userData, deleteOneLike, queryCommentsInPage],
+    [createOneLike, userData, deleteOneLike, refreshProps],
   );
 
   if (error) {
