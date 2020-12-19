@@ -1,4 +1,4 @@
-import { asNexusMethod, makeSchema } from '@nexus/schema';
+import { asNexusMethod, makeSchema } from 'nexus';
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 import { GraphQLDate } from 'graphql-iso-date';
 import GraphQLJSON from 'graphql-type-json';
@@ -17,15 +17,27 @@ import { Like } from './types/like';
 export const GQLDate = asNexusMethod(GraphQLDate, 'date');
 
 export const schema = makeSchema({
-  typegenAutoConfig: {
-    contextType: 'Context.Context',
-    sources: [
+  // typegenAutoConfig: {
+  //   contextType: 'Context.Context',
+  //   sources: [
+  //     {
+  //       source: '@prisma/client',
+  //       alias: 'prisma',
+  //     },
+  //     {
+  //       source: require.resolve('./context'),
+  //       alias: 'Context',
+  //     },
+  //   ],
+  // },
+  sourceTypes: {
+    modules: [
       {
-        source: '@prisma/client',
+        module: '@prisma/client',
         alias: 'prisma',
       },
       {
-        source: require.resolve('./context'),
+        module: require.resolve('./context'),
         alias: 'Context',
       },
     ],
