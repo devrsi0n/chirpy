@@ -1,4 +1,4 @@
-import { mutationType } from '@nexus/schema';
+import { mutationType } from 'nexus';
 
 export const Mutation = mutationType({
   definition(t) {

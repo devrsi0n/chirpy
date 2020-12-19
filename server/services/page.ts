@@ -45,6 +45,7 @@ export async function handleGetPageByProject(
       },
     });
     res.json(createdPage);
+  } else {
+    res.json(null);
   }
-  res.json(null);
 }

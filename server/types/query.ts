@@ -1,4 +1,4 @@
-import { nonNull, queryType, stringArg } from '@nexus/schema';
+import { nonNull, queryType, stringArg } from 'nexus';
 import { Page } from '@prisma/client';
 
 import { requireAuth } from '../guards/require-auth';
