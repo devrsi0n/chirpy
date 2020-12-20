@@ -17,8 +17,6 @@ import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
-  useCreateOneLikeMutation,
-  useDeleteOneLikeMutation,
   CommentsInPageDocument,
   CommentsInPageQuery,
   CommentsInPageQueryVariables,
@@ -31,7 +29,7 @@ import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 export type PageCommentProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
-// Demo: http://localhost:3000/widget/ckhsvc67800093wcvw0bdjibk/ckhsvd40j00019ucv8dng90b8
+// Demo: http://localhost:3000/__testing/comment
 
 const COMMENT_TAB_VALUE = 'Comment';
 
@@ -73,36 +71,6 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment]);
 
-  const [createOneLike] = useCreateOneLikeMutation();
-  const [deleteOneLike] = useDeleteOneLikeMutation();
-  const handleClickLike = React.useCallback(
-    (liked: boolean, commentId: string, likedId: string) => {
-      if (!userData?.currentUser?.id) {
-        console.error('No user id');
-        return;
-      }
-      let promise: Promise<$TsAny>;
-      if (liked) {
-        promise = deleteOneLike({
-          variables: {
-            id: likedId,
-          },
-        });
-      } else {
-        promise = createOneLike({
-          variables: {
-            commentId,
-            userId: userData?.currentUser?.id,
-          },
-        });
-      }
-      promise.then(() => {
-        refreshProps();
-      });
-    },
-    [createOneLike, userData, deleteOneLike, refreshProps],
-  );
-
   if (error) {
     return <p>{error}</p>;
   }
@@ -129,12 +97,7 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
             {comments?.map((comment: CommentInWidget) => (
-              <SectionComment
-                key={comment.id}
-                comment={comment}
-                onClickLike={handleClickLike}
-                userId={userData?.currentUser?.id}
-              />
+              <SectionComment key={comment.id} comment={comment} />
             ))}
             <RichTextEditor
               {...{
