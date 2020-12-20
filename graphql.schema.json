@@ -287,7 +287,7 @@
             "deprecationReason": null
           },
           {
-            "name": "project",
+            "name": "projects",
             "description": null,
             "args": [
               {
@@ -739,7 +739,7 @@
             "deprecationReason": null
           },
           {
-            "name": "projects",
+            "name": "project",
             "description": null,
             "args": [],
             "type": {
@@ -840,6 +840,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
                 "ofType": null
               }
             },
@@ -992,17 +1008,25 @@
             "deprecationReason": null
           },
           {
-            "name": "createdAt",
+            "name": "parentId",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Comment",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1278,6 +1302,81 @@
               "kind": "OBJECT",
               "name": "Comment",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "comments",
+            "description": null,
+            "args": [
+              {
+                "name": "where",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "QueryCommentsWhereInput",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "first",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "last",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "before",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "after",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Comment",
+                    "ofType": null
+                  }
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1667,7 +1766,7 @@
       },
       {
         "kind": "SCALAR",
-        "name": "Json",
+        "name": "DateTime",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -1677,7 +1776,7 @@
       },
       {
         "kind": "SCALAR",
-        "name": "DateTime",
+        "name": "Json",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -1759,6 +1858,37 @@
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "QueryCommentsWhereInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parentId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "ProjectCreateInput",
         "description": null,
         "fields": null,
@@ -1812,7 +1942,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOneWithoutProjectInput",
+              "name": "TeamCreateOneWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1832,7 +1962,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PageCreateManyWithoutProjectsInput",
+              "name": "PageCreateManyWithoutProjectInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1917,7 +2047,7 @@
             "defaultValue": null
           },
           {
-            "name": "projects",
+            "name": "project",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -2014,21 +2144,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateManyWithoutCommentInput",
+              "name": "CommentCreateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOneWithoutRepliesInput",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2039,6 +2179,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2184,21 +2334,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutCommentInput",
+              "name": "CommentUpdateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateOneWithoutRepliesInput",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2212,6 +2372,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -2220,7 +2390,301 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamCreateOneWithoutProjectInput",
+        "name": "StringFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "equals",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "notIn",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "startsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "endsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mode",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "QueryMode",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NestedStringFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "StringNullableFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "equals",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "notIn",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "startsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "endsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mode",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "QueryMode",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NestedStringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TeamCreateOneWithoutProjectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -2229,7 +2693,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateWithoutProjectInput",
+              "name": "TeamCreateWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2249,7 +2713,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOrConnectWithoutprojectInput",
+              "name": "TeamCreateOrConnectWithoutprojectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2302,7 +2766,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageCreateManyWithoutProjectsInput",
+        "name": "PageCreateManyWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -2317,7 +2781,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageCreateWithoutProjectsInput",
+                  "name": "PageCreateWithoutProjectInput",
                   "ofType": null
                 }
               }
@@ -2353,7 +2817,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageCreateOrConnectWithoutprojectsInput",
+                  "name": "PageCreateOrConnectWithoutprojectInput",
                   "ofType": null
                 }
               }
@@ -2555,7 +3019,48 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentCreateManyWithoutCommentInput",
+        "name": "CommentCreateOneWithoutRepliesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOrConnectWithoutrepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateManyWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -2570,7 +3075,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentCreateWithoutCommentInput",
+                  "name": "CommentCreateWithoutReplyInput",
                   "ofType": null
                 }
               }
@@ -2606,7 +3111,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentCreateOrConnectWithoutcommentInput",
+                  "name": "CommentCreateOrConnectWithoutreplyInput",
                   "ofType": null
                 }
               }
@@ -2620,7 +3125,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentCreateOneWithoutRepliesInput",
+        "name": "CommentCreateOneWithoutCommentInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -2629,7 +3134,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateWithoutRepliesInput",
+              "name": "CommentCreateWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2649,7 +3154,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOrConnectWithoutrepliesInput",
+              "name": "CommentCreateOrConnectWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -2713,6 +3218,71 @@
                 "ofType": {
                   "kind": "INPUT_OBJECT",
                   "name": "LikeCreateOrConnectWithoutcommentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateManyWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentCreateWithoutParentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentCreateOrConnectWithoutparentInput",
                   "ofType": null
                 }
               }
@@ -2972,7 +3542,98 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateManyWithoutCommentInput",
+        "name": "CommentUpdateOneWithoutRepliesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentWhereUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpsertWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOrConnectWithoutrepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpdateManyWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -2987,7 +3648,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentCreateWithoutCommentInput",
+                  "name": "CommentCreateWithoutReplyInput",
                   "ofType": null
                 }
               }
@@ -3077,7 +3738,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentUpdateWithWhereUniqueWithoutCommentInput",
+                  "name": "CommentUpdateWithWhereUniqueWithoutReplyInput",
                   "ofType": null
                 }
               }
@@ -3095,7 +3756,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentUpdateManyWithWhereWithoutCommentInput",
+                  "name": "CommentUpdateManyWithWhereWithoutReplyInput",
                   "ofType": null
                 }
               }
@@ -3131,7 +3792,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentUpsertWithWhereUniqueWithoutCommentInput",
+                  "name": "CommentUpsertWithWhereUniqueWithoutReplyInput",
                   "ofType": null
                 }
               }
@@ -3149,7 +3810,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "CommentCreateOrConnectWithoutcommentInput",
+                  "name": "CommentCreateOrConnectWithoutreplyInput",
                   "ofType": null
                 }
               }
@@ -3163,7 +3824,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateOneWithoutRepliesInput",
+        "name": "CommentUpdateOneWithoutCommentInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -3172,7 +3833,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateWithoutRepliesInput",
+              "name": "CommentCreateWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3212,7 +3873,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateWithoutRepliesInput",
+              "name": "CommentUpdateWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3222,7 +3883,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpsertWithoutRepliesInput",
+              "name": "CommentUpsertWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3232,22 +3893,12 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOrConnectWithoutrepliesInput",
+              "name": "CommentCreateOrConnectWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
           }
         ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "fields": null,
-        "inputFields": null,
         "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
@@ -3445,7 +4096,495 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamCreateWithoutProjectInput",
+        "name": "CommentUpdateManyWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentCreateWithoutParentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "set",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "disconnect",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "delete",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentUpdateWithWhereUniqueWithoutParentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updateMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentUpdateManyWithWhereWithoutParentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "deleteMany",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentScalarWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentUpsertWithWhereUniqueWithoutParentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connectOrCreate",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CommentCreateOrConnectWithoutparentInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "ENUM",
+        "name": "QueryMode",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "default",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "insensitive",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NestedStringFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "equals",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "notIn",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "startsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "endsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NestedStringFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NestedStringNullableFilter",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "equals",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "notIn",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "contains",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "startsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "endsWith",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "not",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NestedStringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TeamCreateWithoutProjectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -3531,7 +4670,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamCreateOrConnectWithoutprojectInput",
+        "name": "TeamCreateOrConnectWithoutprojectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -3557,7 +4696,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "TeamCreateWithoutProjectInput",
+                "name": "TeamCreateWithoutProjectsInput",
                 "ofType": null
               }
             },
@@ -3748,7 +4887,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageCreateWithoutProjectsInput",
+        "name": "PageCreateWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -3827,7 +4966,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageCreateOrConnectWithoutprojectsInput",
+        "name": "PageCreateOrConnectWithoutprojectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -3853,7 +4992,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "PageCreateWithoutProjectsInput",
+                "name": "PageCreateWithoutProjectInput",
                 "ofType": null
               }
             },
@@ -3929,21 +5068,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateManyWithoutCommentInput",
+              "name": "CommentCreateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOneWithoutRepliesInput",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3954,6 +5103,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4057,7 +5216,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOneWithoutProjectInput",
+              "name": "TeamCreateOneWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4359,7 +5518,7 @@
             "defaultValue": null
           },
           {
-            "name": "projects",
+            "name": "project",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -4406,148 +5565,6 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "PageCreateWithoutCommentsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "CommentCreateWithoutCommentInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "DateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "content",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Json",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "user",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserCreateOneWithoutCommentsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "page",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "PageCreateOneWithoutCommentsInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "replies",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "CommentCreateManyWithoutCommentInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "likes",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "LikeCreateManyWithoutCommentInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "CommentCreateOrConnectWithoutcommentInput",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CommentWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "create",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "CommentCreateWithoutCommentInput",
                 "ofType": null
               }
             },
@@ -4637,11 +5654,21 @@
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CommentCreateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4652,6 +5679,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4690,6 +5727,330 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "CommentCreateWithoutRepliesInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateWithoutReplyInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Json",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PageCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "replies",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "likes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateOrConnectWithoutreplyInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentCreateWithoutReplyInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateWithoutCommentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Json",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PageCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "reply",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "replies",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "likes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateOrConnectWithoutCommentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentCreateWithoutCommentInput",
                 "ofType": null
               }
             },
@@ -4784,6 +6145,168 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "LikeCreateWithoutCommentInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Json",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "UserCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "PageCreateOneWithoutCommentsInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "reply",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "replies",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "likes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentCreateOrConnectWithoutparentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentCreateWithoutParentInput",
                 "ofType": null
               }
             },
@@ -5051,21 +6574,41 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateManyWithoutCommentInput",
+              "name": "CommentCreateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOneWithoutRepliesInput",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -5341,7 +6884,7 @@
             "defaultValue": null
           },
           {
-            "name": "projects",
+            "name": "project",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -5396,7 +6939,157 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateWithWhereUniqueWithoutCommentInput",
+        "name": "CommentUpdateWithoutRepliesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Json",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneRequiredWithoutCommentsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PageUpdateOneRequiredWithoutCommentsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "reply",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "likes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeUpdateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpsertWithoutRepliesInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentUpdateWithoutRepliesInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentCreateWithoutRepliesInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpdateWithWhereUniqueWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -5422,7 +7115,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "CommentUpdateWithoutCommentInput",
+                "name": "CommentUpdateWithoutReplyInput",
                 "ofType": null
               }
             },
@@ -5435,7 +7128,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateManyWithWhereWithoutCommentInput",
+        "name": "CommentUpdateManyWithWhereWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -5583,7 +7276,17 @@
             "defaultValue": null
           },
           {
-            "name": "commentId",
+            "name": "replyId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringNullableFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parentId",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -5599,7 +7302,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpsertWithWhereUniqueWithoutCommentInput",
+        "name": "CommentUpsertWithWhereUniqueWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -5625,7 +7328,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "CommentUpdateWithoutCommentInput",
+                "name": "CommentUpdateWithoutReplyInput",
                 "ofType": null
               }
             },
@@ -5639,7 +7342,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "CommentCreateWithoutCommentInput",
+                "name": "CommentCreateWithoutReplyInput",
                 "ofType": null
               }
             },
@@ -5652,7 +7355,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateWithoutRepliesInput",
+        "name": "CommentUpdateWithoutCommentInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -5717,11 +7420,31 @@
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "CommentUpdateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "replies",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -5743,7 +7466,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpsertWithoutRepliesInput",
+        "name": "CommentUpsertWithoutCommentInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -5755,7 +7478,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "CommentUpdateWithoutRepliesInput",
+                "name": "CommentUpdateWithoutCommentInput",
                 "ofType": null
               }
             },
@@ -5769,7 +7492,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "CommentCreateWithoutRepliesInput",
+                "name": "CommentCreateWithoutCommentInput",
                 "ofType": null
               }
             },
@@ -6016,6 +7739,137 @@
               "ofType": {
                 "kind": "INPUT_OBJECT",
                 "name": "LikeCreateWithoutCommentInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpdateWithWhereUniqueWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentUpdateWithoutParentInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpdateManyWithWhereWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentScalarWhereInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentUpdateManyMutationInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpsertWithWhereUniqueWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentUpdateWithoutParentInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "CommentCreateWithoutParentInput",
                 "ofType": null
               }
             },
@@ -7052,7 +8906,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CommentUpdateWithoutCommentInput",
+        "name": "CommentUpdateWithoutReplyInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -7121,7 +8975,17 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutCommentInput",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7132,6 +8996,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeUpdateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7183,153 +9057,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Json",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "StringFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "contains",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "mode",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "QueryMode",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedStringFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -7448,153 +9175,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "StringNullableFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "contains",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "mode",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "QueryMode",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedStringNullableFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "LikeUpdateWithoutCommentInput",
         "description": null,
         "fields": null,
@@ -7676,6 +9256,117 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "CommentUpdateWithoutParentInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "DateTimeFieldUpdateOperationsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Json",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserUpdateOneRequiredWithoutCommentsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "page",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "PageUpdateOneRequiredWithoutCommentsInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "reply",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutRepliesInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "replies",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "likes",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeUpdateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7958,21 +9649,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateManyWithoutCommentInput",
+              "name": "CommentCreateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentCreateOneWithoutRepliesInput",
+              "name": "CommentCreateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7983,6 +9684,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeCreateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentCreateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8180,7 +9891,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOneWithoutProjectInput",
+              "name": "TeamCreateOneWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8190,7 +9901,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PageCreateManyWithoutProjectsInput",
+              "name": "PageCreateManyWithoutProjectInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8933,7 +10644,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamUpdateOneWithoutProjectInput",
+              "name": "TeamUpdateOneWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8984,166 +10695,6 @@
                 "name": "ProjectCreateWithoutPagesInput",
                 "ofType": null
               }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "ENUM",
-        "name": "QueryMode",
-        "description": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": [
-          {
-            "name": "default",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "insensitive",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "NestedStringFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "contains",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedStringFilter",
-              "ofType": null
             },
             "defaultValue": null
           }
@@ -9250,143 +10801,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "NestedDateTimeFilter",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "NestedStringNullableFilter",
-        "description": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "equals",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "in",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "notIn",
-            "description": null,
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "lte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gte",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "contains",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "startsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "endsWith",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "not",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "NestedStringNullableFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -9769,7 +11183,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamUpdateOneWithoutProjectInput",
+              "name": "TeamUpdateOneWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9779,7 +11193,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PageUpdateManyWithoutProjectsInput",
+              "name": "PageUpdateManyWithoutProjectInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9893,7 +11307,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamUpdateOneWithoutProjectInput",
+        "name": "TeamUpdateOneWithoutProjectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -9902,7 +11316,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateWithoutProjectInput",
+              "name": "TeamCreateWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9942,7 +11356,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamUpdateWithoutProjectInput",
+              "name": "TeamUpdateWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9952,7 +11366,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamUpsertWithoutProjectInput",
+              "name": "TeamUpsertWithoutProjectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9962,7 +11376,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOrConnectWithoutprojectInput",
+              "name": "TeamCreateOrConnectWithoutprojectsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -10452,7 +11866,7 @@
             "defaultValue": null
           },
           {
-            "name": "project",
+            "name": "projects",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -10656,7 +12070,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageUpdateManyWithoutProjectsInput",
+        "name": "PageUpdateManyWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -10671,7 +12085,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageCreateWithoutProjectsInput",
+                  "name": "PageCreateWithoutProjectInput",
                   "ofType": null
                 }
               }
@@ -10761,7 +12175,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageUpdateWithWhereUniqueWithoutProjectsInput",
+                  "name": "PageUpdateWithWhereUniqueWithoutProjectInput",
                   "ofType": null
                 }
               }
@@ -10779,7 +12193,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageUpdateManyWithWhereWithoutProjectsInput",
+                  "name": "PageUpdateManyWithWhereWithoutProjectInput",
                   "ofType": null
                 }
               }
@@ -10815,7 +12229,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageUpsertWithWhereUniqueWithoutProjectsInput",
+                  "name": "PageUpsertWithWhereUniqueWithoutProjectInput",
                   "ofType": null
                 }
               }
@@ -10833,7 +12247,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "PageCreateOrConnectWithoutprojectsInput",
+                  "name": "PageCreateOrConnectWithoutprojectInput",
                   "ofType": null
                 }
               }
@@ -10908,7 +12322,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamUpdateWithoutProjectInput",
+        "name": "TeamUpdateWithoutProjectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -10969,7 +12383,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamUpsertWithoutProjectInput",
+        "name": "TeamUpsertWithoutProjectsInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -10981,7 +12395,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "TeamUpdateWithoutProjectInput",
+                "name": "TeamUpdateWithoutProjectsInput",
                 "ofType": null
               }
             },
@@ -10995,7 +12409,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "TeamCreateWithoutProjectInput",
+                "name": "TeamCreateWithoutProjectsInput",
                 "ofType": null
               }
             },
@@ -11479,7 +12893,7 @@
             "defaultValue": null
           },
           {
-            "name": "project",
+            "name": "projects",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -11534,7 +12948,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageUpdateWithWhereUniqueWithoutProjectsInput",
+        "name": "PageUpdateWithWhereUniqueWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11560,7 +12974,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "PageUpdateWithoutProjectsInput",
+                "name": "PageUpdateWithoutProjectInput",
                 "ofType": null
               }
             },
@@ -11573,7 +12987,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageUpdateManyWithWhereWithoutProjectsInput",
+        "name": "PageUpdateManyWithWhereWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11737,7 +13151,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageUpsertWithWhereUniqueWithoutProjectsInput",
+        "name": "PageUpsertWithWhereUniqueWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -11763,7 +13177,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "PageUpdateWithoutProjectsInput",
+                "name": "PageUpdateWithoutProjectInput",
                 "ofType": null
               }
             },
@@ -11777,7 +13191,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "PageCreateWithoutProjectsInput",
+                "name": "PageCreateWithoutProjectInput",
                 "ofType": null
               }
             },
@@ -11855,21 +13269,41 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutCommentInput",
+              "name": "CommentUpdateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateOneWithoutRepliesInput",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -12305,7 +13739,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PageCreateManyWithoutProjectsInput",
+              "name": "PageCreateManyWithoutProjectInput",
               "ofType": null
             },
             "defaultValue": null
@@ -12547,7 +13981,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "PageUpdateWithoutProjectsInput",
+        "name": "PageUpdateWithoutProjectInput",
         "description": null,
         "fields": null,
         "inputFields": [
@@ -12865,21 +14299,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutCommentInput",
+              "name": "CommentUpdateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateOneWithoutRepliesInput",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -12890,6 +14334,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeUpdateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -13343,7 +14797,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "PageUpdateManyWithoutProjectsInput",
+              "name": "PageUpdateManyWithoutProjectInput",
               "ofType": null
             },
             "defaultValue": null
@@ -13602,21 +15056,31 @@
             "defaultValue": null
           },
           {
-            "name": "replies",
+            "name": "reply",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateManyWithoutCommentInput",
+              "name": "CommentUpdateOneWithoutRepliesInput",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "comment",
+            "name": "replies",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "CommentUpdateOneWithoutRepliesInput",
+              "name": "CommentUpdateManyWithoutReplyInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "parent",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateOneWithoutCommentInput",
               "ofType": null
             },
             "defaultValue": null
@@ -13627,6 +15091,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LikeUpdateManyWithoutCommentInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "Comment",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
             },
             "defaultValue": null

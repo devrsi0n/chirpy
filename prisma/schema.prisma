@@ -46,7 +46,7 @@ model Team {
   updatedAt DateTime  @updatedAt
   name      String
   members   Member[]
-  project   Project[]
+  projects   Project[]
 }
 
 /// A project is associated with a `FREE` user or a Team(create by `PRO` user)
@@ -73,7 +73,8 @@ model Page {
   url       String
   title     String
   comments  Comment[]
-  projects  Project   @relation(fields: [projectId], references: [id])
+  // A page has one project
+  project  Project   @relation(fields: [projectId], references: [id])
   projectId String
 }
 
@@ -91,12 +92,16 @@ model Comment {
   page   Page   @relation(fields: [pageId], references: [id])
   pageId String
 
-  replies   Comment[] @relation("RepliesToComment")
-  comment   Comment?  @relation("RepliesToComment", fields: [commentId], references: [id])
-  commentId String?
+  reply   Comment?   @relation("RepliesToComment", fields: [replyId], references: [id])
+  replyId String?
+  replies Comment[] @relation("RepliesToComment")
+
+  // Parent linked by replies, root comments don't have a parent.
+  parent   Comment? @relation("ReplyParent", fields: [parentId], references: [id])
+  parentId String?
 
   // One comment has multiply likes, one like made by one user and link to one comment
-  likes Like[]
+  likes   Like[]
 }
 
 model Like {

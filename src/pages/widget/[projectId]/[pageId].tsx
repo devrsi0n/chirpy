@@ -186,7 +186,7 @@ export const getServerSideProps: GetServerSideProps<
     const { pageId, projectId } = params;
 
     // TODO: fix http performance issue, better to fetch the data directly
-    const page: ApolloQueryResult<CommentsInPageQuery> = await client.query<
+    const pageResult: ApolloQueryResult<CommentsInPageQuery> = await client.query<
       CommentsInPageQuery,
       CommentsInPageQueryVariables
     >({
@@ -197,12 +197,15 @@ export const getServerSideProps: GetServerSideProps<
       fetchPolicy: 'no-cache',
     });
 
-    if (!page.data?.page) {
+    if (!pageResult.data?.page) {
       return { props: { error: 'No page data' } };
     }
+    const { page } = pageResult.data;
+    // Filter the root comments. TODO: Do filter in graphql
+    page.comments = page.comments.filter((comment) => !comment.parentId);
 
     return {
-      props: { page: page.data.page, pageId, projectId },
+      props: { page: pageResult.data.page, pageId, projectId },
       // TODO: Shorter time for pro user?
       // revalidate: 60 * 60,
     };

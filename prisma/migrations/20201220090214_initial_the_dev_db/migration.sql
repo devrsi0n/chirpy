@@ -73,7 +73,8 @@ CREATE TABLE "Comment" (
     "userId" TEXT NOT NULL,
     "content" JSONB NOT NULL,
     "pageId" TEXT NOT NULL,
-    "commentId" TEXT,
+    "replyId" TEXT,
+    "parentId" TEXT,
 
     PRIMARY KEY ("id")
 );
@@ -120,7 +121,10 @@ ALTER TABLE "Comment" ADD FOREIGN KEY("userId")REFERENCES "User"("id") ON DELETE
 ALTER TABLE "Comment" ADD FOREIGN KEY("pageId")REFERENCES "Page"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comment" ADD FOREIGN KEY("commentId")REFERENCES "Comment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Comment" ADD FOREIGN KEY("replyId")REFERENCES "Comment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comment" ADD FOREIGN KEY("parentId")REFERENCES "Comment"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Like" ADD FOREIGN KEY("userId")REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
