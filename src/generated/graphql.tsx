@@ -15,8 +15,8 @@ export type Scalars = {
   Date: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  Json: any;
   DateTime: any;
+  Json: any;
 };
 
 
@@ -51,12 +51,12 @@ export type Team = {
   __typename?: 'Team';
   id: Scalars['String'];
   name: Scalars['String'];
-  project: Array<Project>;
+  projects: Array<Project>;
   members: Array<Member>;
 };
 
 
-export type TeamProjectArgs = {
+export type TeamProjectsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   before?: Maybe<ProjectWhereUniqueInput>;
@@ -105,7 +105,7 @@ export type Page = {
   id: Scalars['String'];
   url: Scalars['String'];
   title: Scalars['String'];
-  projects: Project;
+  project: Project;
   comments: Array<Comment>;
 };
 
@@ -120,13 +120,15 @@ export type PageCommentsArgs = {
 export type Comment = {
   __typename?: 'Comment';
   id: Scalars['String'];
+  createdAt: Scalars['DateTime'];
   content: Scalars['Json'];
   pageId: Scalars['String'];
   page: Page;
   replies: Array<Comment>;
   userId: Scalars['String'];
   user: User;
-  createdAt: Scalars['DateTime'];
+  parentId?: Maybe<Scalars['String']>;
+  parent?: Maybe<Comment>;
   likes: Array<Like>;
 };
 
@@ -161,6 +163,7 @@ export type Query = {
   page?: Maybe<Page>;
   project?: Maybe<Project>;
   comment?: Maybe<Comment>;
+  comments: Array<Comment>;
   currentUser?: Maybe<User>;
   getOrCreatePage?: Maybe<Page>;
 };
@@ -183,6 +186,15 @@ export type QueryProjectArgs = {
 
 export type QueryCommentArgs = {
   where: CommentWhereUniqueInput;
+};
+
+
+export type QueryCommentsArgs = {
+  where?: Maybe<QueryCommentsWhereInput>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  before?: Maybe<CommentWhereUniqueInput>;
+  after?: Maybe<CommentWhereUniqueInput>;
 };
 
 
@@ -267,14 +279,19 @@ export type UserWhereUniqueInput = {
   githubUserId?: Maybe<Scalars['String']>;
 };
 
+export type QueryCommentsWhereInput = {
+  id?: Maybe<StringFilter>;
+  parentId?: Maybe<StringNullableFilter>;
+};
+
 export type ProjectCreateInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  team?: Maybe<TeamCreateOneWithoutProjectInput>;
+  team?: Maybe<TeamCreateOneWithoutProjectsInput>;
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 export type PageCreateInput = {
@@ -284,7 +301,7 @@ export type PageCreateInput = {
   url: Scalars['String'];
   title: Scalars['String'];
   comments?: Maybe<CommentCreateManyWithoutPageInput>;
-  projects: ProjectCreateOneWithoutPagesInput;
+  project: ProjectCreateOneWithoutPagesInput;
 };
 
 export type CommentCreateInput = {
@@ -294,9 +311,11 @@ export type CommentCreateInput = {
   content: Scalars['Json'];
   user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
-  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
-  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
 };
 
 export type LikeCreateInput = {
@@ -314,15 +333,47 @@ export type CommentUpdateInput = {
   content?: Maybe<Scalars['Json']>;
   user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
   page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
-  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
-  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
-export type TeamCreateOneWithoutProjectInput = {
-  create?: Maybe<TeamCreateWithoutProjectInput>;
+export type StringFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
+  not?: Maybe<NestedStringFilter>;
+};
+
+export type StringNullableFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  mode?: Maybe<QueryMode>;
+  not?: Maybe<NestedStringNullableFilter>;
+};
+
+export type TeamCreateOneWithoutProjectsInput = {
+  create?: Maybe<TeamCreateWithoutProjectsInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectsInput>;
 };
 
 export type UserCreateOneWithoutProjectsInput = {
@@ -331,10 +382,10 @@ export type UserCreateOneWithoutProjectsInput = {
   connectOrCreate?: Maybe<UserCreateOrConnectWithoutprojectsInput>;
 };
 
-export type PageCreateManyWithoutProjectsInput = {
-  create?: Maybe<Array<PageCreateWithoutProjectsInput>>;
+export type PageCreateManyWithoutProjectInput = {
+  create?: Maybe<Array<PageCreateWithoutProjectInput>>;
   connect?: Maybe<Array<PageWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectsInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectInput>>;
 };
 
 export type CommentCreateManyWithoutPageInput = {
@@ -361,22 +412,34 @@ export type PageCreateOneWithoutCommentsInput = {
   connectOrCreate?: Maybe<PageCreateOrConnectWithoutcommentsInput>;
 };
 
-export type CommentCreateManyWithoutCommentInput = {
-  create?: Maybe<Array<CommentCreateWithoutCommentInput>>;
-  connect?: Maybe<Array<CommentWhereUniqueInput>>;
-  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutcommentInput>>;
-};
-
 export type CommentCreateOneWithoutRepliesInput = {
   create?: Maybe<CommentCreateWithoutRepliesInput>;
   connect?: Maybe<CommentWhereUniqueInput>;
   connectOrCreate?: Maybe<CommentCreateOrConnectWithoutrepliesInput>;
 };
 
+export type CommentCreateManyWithoutReplyInput = {
+  create?: Maybe<Array<CommentCreateWithoutReplyInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutreplyInput>>;
+};
+
+export type CommentCreateOneWithoutCommentInput = {
+  create?: Maybe<CommentCreateWithoutCommentInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutCommentInput>;
+};
+
 export type LikeCreateManyWithoutCommentInput = {
   create?: Maybe<Array<LikeCreateWithoutCommentInput>>;
   connect?: Maybe<Array<LikeWhereUniqueInput>>;
   connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutcommentInput>>;
+};
+
+export type CommentCreateManyWithoutParentInput = {
+  create?: Maybe<Array<CommentCreateWithoutParentInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutparentInput>>;
 };
 
 export type UserCreateOneWithoutLikesInput = {
@@ -415,19 +478,6 @@ export type PageUpdateOneRequiredWithoutCommentsInput = {
   connectOrCreate?: Maybe<PageCreateOrConnectWithoutcommentsInput>;
 };
 
-export type CommentUpdateManyWithoutCommentInput = {
-  create?: Maybe<Array<CommentCreateWithoutCommentInput>>;
-  connect?: Maybe<Array<CommentWhereUniqueInput>>;
-  set?: Maybe<Array<CommentWhereUniqueInput>>;
-  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
-  delete?: Maybe<Array<CommentWhereUniqueInput>>;
-  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutCommentInput>>;
-  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutCommentInput>>;
-  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
-  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutCommentInput>>;
-  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutcommentInput>>;
-};
-
 export type CommentUpdateOneWithoutRepliesInput = {
   create?: Maybe<CommentCreateWithoutRepliesInput>;
   connect?: Maybe<CommentWhereUniqueInput>;
@@ -436,6 +486,29 @@ export type CommentUpdateOneWithoutRepliesInput = {
   update?: Maybe<CommentUpdateWithoutRepliesInput>;
   upsert?: Maybe<CommentUpsertWithoutRepliesInput>;
   connectOrCreate?: Maybe<CommentCreateOrConnectWithoutrepliesInput>;
+};
+
+export type CommentUpdateManyWithoutReplyInput = {
+  create?: Maybe<Array<CommentCreateWithoutReplyInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  set?: Maybe<Array<CommentWhereUniqueInput>>;
+  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
+  delete?: Maybe<Array<CommentWhereUniqueInput>>;
+  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutReplyInput>>;
+  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutReplyInput>>;
+  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
+  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutReplyInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutreplyInput>>;
+};
+
+export type CommentUpdateOneWithoutCommentInput = {
+  create?: Maybe<CommentCreateWithoutCommentInput>;
+  connect?: Maybe<CommentWhereUniqueInput>;
+  disconnect?: Maybe<Scalars['Boolean']>;
+  delete?: Maybe<Scalars['Boolean']>;
+  update?: Maybe<CommentUpdateWithoutCommentInput>;
+  upsert?: Maybe<CommentUpsertWithoutCommentInput>;
+  connectOrCreate?: Maybe<CommentCreateOrConnectWithoutCommentInput>;
 };
 
 export type LikeUpdateManyWithoutCommentInput = {
@@ -451,7 +524,53 @@ export type LikeUpdateManyWithoutCommentInput = {
   connectOrCreate?: Maybe<Array<LikeCreateOrConnectWithoutcommentInput>>;
 };
 
-export type TeamCreateWithoutProjectInput = {
+export type CommentUpdateManyWithoutParentInput = {
+  create?: Maybe<Array<CommentCreateWithoutParentInput>>;
+  connect?: Maybe<Array<CommentWhereUniqueInput>>;
+  set?: Maybe<Array<CommentWhereUniqueInput>>;
+  disconnect?: Maybe<Array<CommentWhereUniqueInput>>;
+  delete?: Maybe<Array<CommentWhereUniqueInput>>;
+  update?: Maybe<Array<CommentUpdateWithWhereUniqueWithoutParentInput>>;
+  updateMany?: Maybe<Array<CommentUpdateManyWithWhereWithoutParentInput>>;
+  deleteMany?: Maybe<Array<CommentScalarWhereInput>>;
+  upsert?: Maybe<Array<CommentUpsertWithWhereUniqueWithoutParentInput>>;
+  connectOrCreate?: Maybe<Array<CommentCreateOrConnectWithoutparentInput>>;
+};
+
+export enum QueryMode {
+  Default = 'default',
+  Insensitive = 'insensitive'
+}
+
+export type NestedStringFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringFilter>;
+};
+
+export type NestedStringNullableFilter = {
+  equals?: Maybe<Scalars['String']>;
+  in?: Maybe<Array<Scalars['String']>>;
+  notIn?: Maybe<Array<Scalars['String']>>;
+  lt?: Maybe<Scalars['String']>;
+  lte?: Maybe<Scalars['String']>;
+  gt?: Maybe<Scalars['String']>;
+  gte?: Maybe<Scalars['String']>;
+  contains?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  not?: Maybe<NestedStringNullableFilter>;
+};
+
+export type TeamCreateWithoutProjectsInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -463,9 +582,9 @@ export type TeamWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
 
-export type TeamCreateOrConnectWithoutprojectInput = {
+export type TeamCreateOrConnectWithoutprojectsInput = {
   where: TeamWhereUniqueInput;
-  create: TeamCreateWithoutProjectInput;
+  create: TeamCreateWithoutProjectsInput;
 };
 
 export type UserCreateWithoutProjectsInput = {
@@ -488,7 +607,7 @@ export type UserCreateOrConnectWithoutprojectsInput = {
   create: UserCreateWithoutProjectsInput;
 };
 
-export type PageCreateWithoutProjectsInput = {
+export type PageCreateWithoutProjectInput = {
   id?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -497,9 +616,9 @@ export type PageCreateWithoutProjectsInput = {
   comments?: Maybe<CommentCreateManyWithoutPageInput>;
 };
 
-export type PageCreateOrConnectWithoutprojectsInput = {
+export type PageCreateOrConnectWithoutprojectInput = {
   where: PageWhereUniqueInput;
-  create: PageCreateWithoutProjectsInput;
+  create: PageCreateWithoutProjectInput;
 };
 
 export type CommentCreateWithoutPageInput = {
@@ -508,9 +627,11 @@ export type CommentCreateWithoutPageInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
   user: UserCreateOneWithoutCommentsInput;
-  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
-  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
 };
 
 export type CommentCreateOrConnectWithoutpageInput = {
@@ -523,7 +644,7 @@ export type ProjectCreateWithoutPagesInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  team?: Maybe<TeamCreateOneWithoutProjectInput>;
+  team?: Maybe<TeamCreateOneWithoutProjectsInput>;
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
 };
 
@@ -558,28 +679,12 @@ export type PageCreateWithoutCommentsInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   url: Scalars['String'];
   title: Scalars['String'];
-  projects: ProjectCreateOneWithoutPagesInput;
+  project: ProjectCreateOneWithoutPagesInput;
 };
 
 export type PageCreateOrConnectWithoutcommentsInput = {
   where: PageWhereUniqueInput;
   create: PageCreateWithoutCommentsInput;
-};
-
-export type CommentCreateWithoutCommentInput = {
-  id?: Maybe<Scalars['String']>;
-  createdAt?: Maybe<Scalars['DateTime']>;
-  updatedAt?: Maybe<Scalars['DateTime']>;
-  content: Scalars['Json'];
-  user: UserCreateOneWithoutCommentsInput;
-  page: PageCreateOneWithoutCommentsInput;
-  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
-  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
-};
-
-export type CommentCreateOrConnectWithoutcommentInput = {
-  where: CommentWhereUniqueInput;
-  create: CommentCreateWithoutCommentInput;
 };
 
 export type CommentCreateWithoutRepliesInput = {
@@ -589,13 +694,51 @@ export type CommentCreateWithoutRepliesInput = {
   content: Scalars['Json'];
   user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
-  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
 };
 
 export type CommentCreateOrConnectWithoutrepliesInput = {
   where: CommentWhereUniqueInput;
   create: CommentCreateWithoutRepliesInput;
+};
+
+export type CommentCreateWithoutReplyInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['Json'];
+  user: UserCreateOneWithoutCommentsInput;
+  page: PageCreateOneWithoutCommentsInput;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
+};
+
+export type CommentCreateOrConnectWithoutreplyInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutReplyInput;
+};
+
+export type CommentCreateWithoutCommentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['Json'];
+  user: UserCreateOneWithoutCommentsInput;
+  page: PageCreateOneWithoutCommentsInput;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+};
+
+export type CommentCreateOrConnectWithoutCommentInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutCommentInput;
 };
 
 export type LikeCreateWithoutCommentInput = {
@@ -608,6 +751,24 @@ export type LikeCreateWithoutCommentInput = {
 export type LikeCreateOrConnectWithoutcommentInput = {
   where: LikeWhereUniqueInput;
   create: LikeCreateWithoutCommentInput;
+};
+
+export type CommentCreateWithoutParentInput = {
+  id?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  content: Scalars['Json'];
+  user: UserCreateOneWithoutCommentsInput;
+  page: PageCreateOneWithoutCommentsInput;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
+};
+
+export type CommentCreateOrConnectWithoutparentInput = {
+  where: CommentWhereUniqueInput;
+  create: CommentCreateWithoutParentInput;
 };
 
 export type UserCreateWithoutLikesInput = {
@@ -637,8 +798,10 @@ export type CommentCreateWithoutLikesInput = {
   content: Scalars['Json'];
   user: UserCreateOneWithoutCommentsInput;
   page: PageCreateOneWithoutCommentsInput;
-  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
-  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
 };
 
 export type CommentCreateOrConnectWithoutlikesInput = {
@@ -672,7 +835,7 @@ export type PageUpdateWithoutCommentsInput = {
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   url?: Maybe<StringFieldUpdateOperationsInput>;
   title?: Maybe<StringFieldUpdateOperationsInput>;
-  projects?: Maybe<ProjectUpdateOneRequiredWithoutPagesInput>;
+  project?: Maybe<ProjectUpdateOneRequiredWithoutPagesInput>;
 };
 
 export type PageUpsertWithoutCommentsInput = {
@@ -680,12 +843,30 @@ export type PageUpsertWithoutCommentsInput = {
   create: PageCreateWithoutCommentsInput;
 };
 
-export type CommentUpdateWithWhereUniqueWithoutCommentInput = {
-  where: CommentWhereUniqueInput;
-  data: CommentUpdateWithoutCommentInput;
+export type CommentUpdateWithoutRepliesInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
-export type CommentUpdateManyWithWhereWithoutCommentInput = {
+export type CommentUpsertWithoutRepliesInput = {
+  update: CommentUpdateWithoutRepliesInput;
+  create: CommentCreateWithoutRepliesInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutReplyInput = {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutReplyInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutReplyInput = {
   where: CommentScalarWhereInput;
   data: CommentUpdateManyMutationInput;
 };
@@ -699,29 +880,32 @@ export type CommentScalarWhereInput = {
   updatedAt?: Maybe<DateTimeFilter>;
   userId?: Maybe<StringFilter>;
   pageId?: Maybe<StringFilter>;
-  commentId?: Maybe<StringNullableFilter>;
+  replyId?: Maybe<StringNullableFilter>;
+  parentId?: Maybe<StringNullableFilter>;
 };
 
-export type CommentUpsertWithWhereUniqueWithoutCommentInput = {
+export type CommentUpsertWithWhereUniqueWithoutReplyInput = {
   where: CommentWhereUniqueInput;
-  update: CommentUpdateWithoutCommentInput;
-  create: CommentCreateWithoutCommentInput;
+  update: CommentUpdateWithoutReplyInput;
+  create: CommentCreateWithoutReplyInput;
 };
 
-export type CommentUpdateWithoutRepliesInput = {
+export type CommentUpdateWithoutCommentInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   content?: Maybe<Scalars['Json']>;
   user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
   page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
-  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
 };
 
-export type CommentUpsertWithoutRepliesInput = {
-  update: CommentUpdateWithoutRepliesInput;
-  create: CommentCreateWithoutRepliesInput;
+export type CommentUpsertWithoutCommentInput = {
+  update: CommentUpdateWithoutCommentInput;
+  create: CommentCreateWithoutCommentInput;
 };
 
 export type LikeUpdateWithWhereUniqueWithoutCommentInput = {
@@ -749,6 +933,22 @@ export type LikeUpsertWithWhereUniqueWithoutCommentInput = {
   where: LikeWhereUniqueInput;
   update: LikeUpdateWithoutCommentInput;
   create: LikeCreateWithoutCommentInput;
+};
+
+export type CommentUpdateWithWhereUniqueWithoutParentInput = {
+  where: CommentWhereUniqueInput;
+  data: CommentUpdateWithoutParentInput;
+};
+
+export type CommentUpdateManyWithWhereWithoutParentInput = {
+  where: CommentScalarWhereInput;
+  data: CommentUpdateManyMutationInput;
+};
+
+export type CommentUpsertWithWhereUniqueWithoutParentInput = {
+  where: CommentWhereUniqueInput;
+  update: CommentUpdateWithoutParentInput;
+  create: CommentCreateWithoutParentInput;
 };
 
 export type MemberCreateManyWithoutTeamInput = {
@@ -841,15 +1041,17 @@ export type ProjectUpdateOneRequiredWithoutPagesInput = {
   connectOrCreate?: Maybe<ProjectCreateOrConnectWithoutpagesInput>;
 };
 
-export type CommentUpdateWithoutCommentInput = {
+export type CommentUpdateWithoutReplyInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   content?: Maybe<Scalars['Json']>;
   user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
   page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
-  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
 export type CommentUpdateManyMutationInput = {
@@ -857,21 +1059,6 @@ export type CommentUpdateManyMutationInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   content?: Maybe<Scalars['Json']>;
-};
-
-export type StringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  mode?: Maybe<QueryMode>;
-  not?: Maybe<NestedStringFilter>;
 };
 
 export type DateTimeFilter = {
@@ -885,21 +1072,6 @@ export type DateTimeFilter = {
   not?: Maybe<NestedDateTimeFilter>;
 };
 
-export type StringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  mode?: Maybe<QueryMode>;
-  not?: Maybe<NestedStringNullableFilter>;
-};
-
 export type LikeUpdateWithoutCommentInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -911,6 +1083,19 @@ export type LikeUpdateManyMutationInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+};
+
+export type CommentUpdateWithoutParentInput = {
+  id?: Maybe<StringFieldUpdateOperationsInput>;
+  createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
+  content?: Maybe<Scalars['Json']>;
+  user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
+  page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
 export type MemberCreateWithoutTeamInput = {
@@ -945,9 +1130,11 @@ export type CommentCreateWithoutUserInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   content: Scalars['Json'];
   page: PageCreateOneWithoutCommentsInput;
-  replies?: Maybe<CommentCreateManyWithoutCommentInput>;
-  comment?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentCreateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentCreateManyWithoutReplyInput>;
+  parent?: Maybe<CommentCreateOneWithoutCommentInput>;
   likes?: Maybe<LikeCreateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentCreateManyWithoutParentInput>;
 };
 
 export type CommentCreateOrConnectWithoutuserInput = {
@@ -972,8 +1159,8 @@ export type ProjectCreateWithoutUserInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  team?: Maybe<TeamCreateOneWithoutProjectInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
+  team?: Maybe<TeamCreateOneWithoutProjectsInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 export type ProjectCreateOrConnectWithoutuserInput = {
@@ -1058,32 +1245,13 @@ export type ProjectUpdateWithoutPagesInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
-  team?: Maybe<TeamUpdateOneWithoutProjectInput>;
+  team?: Maybe<TeamUpdateOneWithoutProjectsInput>;
   user?: Maybe<UserUpdateOneWithoutProjectsInput>;
 };
 
 export type ProjectUpsertWithoutPagesInput = {
   update: ProjectUpdateWithoutPagesInput;
   create: ProjectCreateWithoutPagesInput;
-};
-
-export enum QueryMode {
-  Default = 'default',
-  Insensitive = 'insensitive'
-}
-
-export type NestedStringFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  not?: Maybe<NestedStringFilter>;
 };
 
 export type NestedDateTimeFilter = {
@@ -1095,20 +1263,6 @@ export type NestedDateTimeFilter = {
   gt?: Maybe<Scalars['DateTime']>;
   gte?: Maybe<Scalars['DateTime']>;
   not?: Maybe<NestedDateTimeFilter>;
-};
-
-export type NestedStringNullableFilter = {
-  equals?: Maybe<Scalars['String']>;
-  in?: Maybe<Array<Scalars['String']>>;
-  notIn?: Maybe<Array<Scalars['String']>>;
-  lt?: Maybe<Scalars['String']>;
-  lte?: Maybe<Scalars['String']>;
-  gt?: Maybe<Scalars['String']>;
-  gte?: Maybe<Scalars['String']>;
-  contains?: Maybe<Scalars['String']>;
-  startsWith?: Maybe<Scalars['String']>;
-  endsWith?: Maybe<Scalars['String']>;
-  not?: Maybe<NestedStringNullableFilter>;
 };
 
 export type UserUpdateOneRequiredWithoutLikesInput = {
@@ -1158,8 +1312,8 @@ export type ProjectUpdateWithoutUserInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
-  team?: Maybe<TeamUpdateOneWithoutProjectInput>;
-  pages?: Maybe<PageUpdateManyWithoutProjectsInput>;
+  team?: Maybe<TeamUpdateOneWithoutProjectsInput>;
+  pages?: Maybe<PageUpdateManyWithoutProjectInput>;
 };
 
 export type ProjectUpdateManyMutationInput = {
@@ -1176,14 +1330,14 @@ export type LikeUpdateWithoutUserInput = {
   comment?: Maybe<CommentUpdateOneRequiredWithoutLikesInput>;
 };
 
-export type TeamUpdateOneWithoutProjectInput = {
-  create?: Maybe<TeamCreateWithoutProjectInput>;
+export type TeamUpdateOneWithoutProjectsInput = {
+  create?: Maybe<TeamCreateWithoutProjectsInput>;
   connect?: Maybe<TeamWhereUniqueInput>;
   disconnect?: Maybe<Scalars['Boolean']>;
   delete?: Maybe<Scalars['Boolean']>;
-  update?: Maybe<TeamUpdateWithoutProjectInput>;
-  upsert?: Maybe<TeamUpsertWithoutProjectInput>;
-  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectInput>;
+  update?: Maybe<TeamUpdateWithoutProjectsInput>;
+  upsert?: Maybe<TeamUpsertWithoutProjectsInput>;
+  connectOrCreate?: Maybe<TeamCreateOrConnectWithoutprojectsInput>;
 };
 
 export type UserUpdateOneWithoutProjectsInput = {
@@ -1241,7 +1395,7 @@ export type TeamCreateWithoutMembersInput = {
   createdAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
-  project?: Maybe<ProjectCreateManyWithoutTeamInput>;
+  projects?: Maybe<ProjectCreateManyWithoutTeamInput>;
 };
 
 export type TeamCreateOrConnectWithoutmembersInput = {
@@ -1268,17 +1422,17 @@ export type NestedEnumRoleFilter = {
   not?: Maybe<NestedEnumRoleFilter>;
 };
 
-export type PageUpdateManyWithoutProjectsInput = {
-  create?: Maybe<Array<PageCreateWithoutProjectsInput>>;
+export type PageUpdateManyWithoutProjectInput = {
+  create?: Maybe<Array<PageCreateWithoutProjectInput>>;
   connect?: Maybe<Array<PageWhereUniqueInput>>;
   set?: Maybe<Array<PageWhereUniqueInput>>;
   disconnect?: Maybe<Array<PageWhereUniqueInput>>;
   delete?: Maybe<Array<PageWhereUniqueInput>>;
-  update?: Maybe<Array<PageUpdateWithWhereUniqueWithoutProjectsInput>>;
-  updateMany?: Maybe<Array<PageUpdateManyWithWhereWithoutProjectsInput>>;
+  update?: Maybe<Array<PageUpdateWithWhereUniqueWithoutProjectInput>>;
+  updateMany?: Maybe<Array<PageUpdateManyWithWhereWithoutProjectInput>>;
   deleteMany?: Maybe<Array<PageScalarWhereInput>>;
-  upsert?: Maybe<Array<PageUpsertWithWhereUniqueWithoutProjectsInput>>;
-  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectsInput>>;
+  upsert?: Maybe<Array<PageUpsertWithWhereUniqueWithoutProjectInput>>;
+  connectOrCreate?: Maybe<Array<PageCreateOrConnectWithoutprojectInput>>;
 };
 
 export type CommentUpdateOneRequiredWithoutLikesInput = {
@@ -1289,7 +1443,7 @@ export type CommentUpdateOneRequiredWithoutLikesInput = {
   connectOrCreate?: Maybe<CommentCreateOrConnectWithoutlikesInput>;
 };
 
-export type TeamUpdateWithoutProjectInput = {
+export type TeamUpdateWithoutProjectsInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -1297,9 +1451,9 @@ export type TeamUpdateWithoutProjectInput = {
   members?: Maybe<MemberUpdateManyWithoutTeamInput>;
 };
 
-export type TeamUpsertWithoutProjectInput = {
-  update: TeamUpdateWithoutProjectInput;
-  create: TeamCreateWithoutProjectInput;
+export type TeamUpsertWithoutProjectsInput = {
+  update: TeamUpdateWithoutProjectsInput;
+  create: TeamCreateWithoutProjectsInput;
 };
 
 export type UserUpdateWithoutProjectsInput = {
@@ -1346,7 +1500,7 @@ export type TeamUpdateWithoutMembersInput = {
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
-  project?: Maybe<ProjectUpdateManyWithoutTeamInput>;
+  projects?: Maybe<ProjectUpdateManyWithoutTeamInput>;
 };
 
 export type TeamUpsertWithoutMembersInput = {
@@ -1354,12 +1508,12 @@ export type TeamUpsertWithoutMembersInput = {
   create: TeamCreateWithoutMembersInput;
 };
 
-export type PageUpdateWithWhereUniqueWithoutProjectsInput = {
+export type PageUpdateWithWhereUniqueWithoutProjectInput = {
   where: PageWhereUniqueInput;
-  data: PageUpdateWithoutProjectsInput;
+  data: PageUpdateWithoutProjectInput;
 };
 
-export type PageUpdateManyWithWhereWithoutProjectsInput = {
+export type PageUpdateManyWithWhereWithoutProjectInput = {
   where: PageScalarWhereInput;
   data: PageUpdateManyMutationInput;
 };
@@ -1376,10 +1530,10 @@ export type PageScalarWhereInput = {
   projectId?: Maybe<StringFilter>;
 };
 
-export type PageUpsertWithWhereUniqueWithoutProjectsInput = {
+export type PageUpsertWithWhereUniqueWithoutProjectInput = {
   where: PageWhereUniqueInput;
-  update: PageUpdateWithoutProjectsInput;
-  create: PageCreateWithoutProjectsInput;
+  update: PageUpdateWithoutProjectInput;
+  create: PageCreateWithoutProjectInput;
 };
 
 export type CommentUpdateWithoutLikesInput = {
@@ -1389,8 +1543,10 @@ export type CommentUpdateWithoutLikesInput = {
   content?: Maybe<Scalars['Json']>;
   user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
   page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
-  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
-  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
 export type CommentUpsertWithoutLikesInput = {
@@ -1433,7 +1589,7 @@ export type ProjectCreateWithoutTeamInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   name: Scalars['String'];
   user?: Maybe<UserCreateOneWithoutProjectsInput>;
-  pages?: Maybe<PageCreateManyWithoutProjectsInput>;
+  pages?: Maybe<PageCreateManyWithoutProjectInput>;
 };
 
 export type ProjectCreateOrConnectWithoutteamInput = {
@@ -1454,7 +1610,7 @@ export type ProjectUpdateManyWithoutTeamInput = {
   connectOrCreate?: Maybe<Array<ProjectCreateOrConnectWithoutteamInput>>;
 };
 
-export type PageUpdateWithoutProjectsInput = {
+export type PageUpdateWithoutProjectInput = {
   id?: Maybe<StringFieldUpdateOperationsInput>;
   createdAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
@@ -1493,9 +1649,11 @@ export type CommentUpdateWithoutUserInput = {
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   content?: Maybe<Scalars['Json']>;
   page?: Maybe<PageUpdateOneRequiredWithoutCommentsInput>;
-  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
-  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
 export type ProjectUpdateWithWhereUniqueWithoutTeamInput = {
@@ -1541,7 +1699,7 @@ export type ProjectUpdateWithoutTeamInput = {
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   name?: Maybe<StringFieldUpdateOperationsInput>;
   user?: Maybe<UserUpdateOneWithoutProjectsInput>;
-  pages?: Maybe<PageUpdateManyWithoutProjectsInput>;
+  pages?: Maybe<PageUpdateManyWithoutProjectInput>;
 };
 
 export type CommentUpdateWithWhereUniqueWithoutPageInput = {
@@ -1574,9 +1732,11 @@ export type CommentUpdateWithoutPageInput = {
   updatedAt?: Maybe<DateTimeFieldUpdateOperationsInput>;
   content?: Maybe<Scalars['Json']>;
   user?: Maybe<UserUpdateOneRequiredWithoutCommentsInput>;
-  replies?: Maybe<CommentUpdateManyWithoutCommentInput>;
-  comment?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  reply?: Maybe<CommentUpdateOneWithoutRepliesInput>;
+  replies?: Maybe<CommentUpdateManyWithoutReplyInput>;
+  parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
+  Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
 };
 
 export type UserUpdateWithoutMembersInput = {
@@ -1661,7 +1821,7 @@ export type CurrentUserQuery = (
       & { team: (
         { __typename?: 'Team' }
         & Pick<Team, 'id' | 'name'>
-        & { project: Array<(
+        & { projects: Array<(
           { __typename?: 'Project' }
           & Pick<Project, 'id' | 'name'>
         )> }
@@ -1727,7 +1887,7 @@ export type CommentsInPageQuery = (
     & Pick<Page, 'id'>
     & { comments: Array<(
       { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+      & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
       & { user: (
         { __typename?: 'User' }
         & Pick<User, 'id' | 'name' | 'avatar'>
@@ -1736,7 +1896,7 @@ export type CommentsInPageQuery = (
         & Pick<Like, 'id' | 'userId'>
       )>, replies: Array<(
         { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
+        & Pick<Comment, 'id' | 'pageId' | 'parentId' | 'content' | 'createdAt'>
         & { user: (
           { __typename?: 'User' }
           & Pick<User, 'id' | 'name' | 'avatar'>
@@ -1838,7 +1998,7 @@ export const CreateOneReplyDocument = gql`
     mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
   updateOneComment(
     where: {id: $id}
-    data: {replies: {create: {content: $content, user: {connect: {id: $userId}}, page: {connect: {id: $pageId}}}}}
+    data: {replies: {create: {content: $content, parent: {connect: {id: $id}}, user: {connect: {id: $userId}}, page: {connect: {id: $pageId}}}}}
   ) {
     id
     pageId
@@ -1912,7 +2072,7 @@ export const CurrentUserDocument = gql`
       team {
         id
         name
-        project {
+        projects {
           id
           name
         }
@@ -2062,6 +2222,7 @@ export const CommentsInPageDocument = gql`
       id
       pageId
       content
+      parentId
       createdAt
       user {
         id
@@ -2075,6 +2236,7 @@ export const CommentsInPageDocument = gql`
       replies {
         id
         pageId
+        parentId
         content
         createdAt
         user {

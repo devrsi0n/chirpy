@@ -17,19 +17,6 @@ import { Like } from './types/like';
 export const GQLDate = asNexusMethod(GraphQLDate, 'date');
 
 export const schema = makeSchema({
-  // typegenAutoConfig: {
-  //   contextType: 'Context.Context',
-  //   sources: [
-  //     {
-  //       source: '@prisma/client',
-  //       alias: 'prisma',
-  //     },
-  //     {
-  //       source: require.resolve('./context'),
-  //       alias: 'Context',
-  //     },
-  //   ],
-  // },
   sourceTypes: {
     modules: [
       {

@@ -13,6 +13,7 @@ query commentsInPage($id: String!) {
       id
       pageId
       content
+      parentId
       createdAt
       user {
         id
@@ -26,6 +27,7 @@ query commentsInPage($id: String!) {
       replies {
         id
         pageId
+        parentId
         content
         createdAt
         user {

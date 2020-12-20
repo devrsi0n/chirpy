@@ -8,7 +8,7 @@ import { prisma } from '../context';
 export type AllUserData = User & {
   members: (Member & {
     team: Team & {
-      project: Project[];
+      projects: Project[];
     };
   })[];
 };
@@ -23,7 +23,7 @@ export async function requireAuth(req: NextApiRequest): Promise<AllUserData> {
         include: {
           team: {
             include: {
-              project: true,
+              projects: true,
             },
           },
         },

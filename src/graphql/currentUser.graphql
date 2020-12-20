@@ -11,7 +11,7 @@ query currentUser {
       team {
         id
         name
-        project {
+        projects {
           id
           name
         }

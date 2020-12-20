@@ -10,6 +10,12 @@ export const Query = queryType({
     t.crud.page();
     t.crud.project();
     t.crud.comment();
+    t.crud.comments({
+      filtering: {
+        id: true,
+        parentId: true,
+      },
+    });
 
     t.field('currentUser', {
       type: 'User',

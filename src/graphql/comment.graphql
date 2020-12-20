@@ -19,6 +19,7 @@ mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId
       replies: {
         create: {
           content: $content
+          parent: { connect: { id: $id } }
           user: { connect: { id: $userId } }
           page: { connect: { id: $pageId } }
         }

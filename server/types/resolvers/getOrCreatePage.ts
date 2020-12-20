@@ -42,7 +42,7 @@ export default async function getOrCreatePage(_root: Root, args: Args): Promise<
       data: {
         url: args.url,
         title: args.title,
-        projects: {
+        project: {
           connect: {
             id: args.projectId,
           },
