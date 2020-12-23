@@ -9,7 +9,7 @@ import Head from 'next/head';
 import { ApolloQueryResult } from '@apollo/client';
 
 import { Comment as SectionComment } from '$/blocks/Comment';
-import { RichTextEditor } from '$/blocks/RichTextEditor/RichTextEditor';
+import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Node } from 'slate';
 import { Tabs } from '$/components/Tabs/Tabs';
 import { Button } from '$/components/buttons/Button';

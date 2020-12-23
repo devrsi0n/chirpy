@@ -6,7 +6,7 @@ import { Node } from 'slate';
 import { MessageIcon } from '$/components/Icons/Message.Icon';
 import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
-import { RichTextEditor } from './RichTextEditor/RichTextEditor';
+import { RichTextEditor } from './RichTextEditor';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { Button } from '$/components/buttons/Button';
 import { CommentInWidget } from '$/types/widget';
