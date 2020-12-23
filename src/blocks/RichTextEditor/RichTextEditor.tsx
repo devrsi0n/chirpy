@@ -19,7 +19,7 @@ interface IBaseProps {
   readOnly?: boolean;
 }
 
-interface IRichTextEditorProps extends IBaseProps {
+export interface IRichTextEditorProps extends IBaseProps {
   disabled?: boolean;
   placeholder?: Node[];
 }
@@ -47,7 +47,7 @@ const getValue = (props?: IRichTextEditorProps) => {
   return getSavedContent() || props?.placeholder || DEFAULT_INPUT;
 };
 
-export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
+export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const { onChange, value: _value, readOnly, className, disabled } = props;
   const value = getValue(props);
   const handleRTEChange = React.useCallback(
