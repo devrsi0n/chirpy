@@ -26,6 +26,7 @@ import { DropDownUser } from '$/blocks/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
 import { PageInWidget, CommentInWidget } from '$/types/widget';
 import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
+import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 
 export type PageCommentProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
@@ -70,6 +71,8 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
       },
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment]);
+
+  useNotifyHostPageOfHeight();
 
   if (error) {
     return <p>{error}</p>;
@@ -206,8 +209,7 @@ export const getServerSideProps: GetServerSideProps<
 
     return {
       props: { page: pageResult.data.page, pageId, projectId },
-      // TODO: Shorter time for pro user?
-      // revalidate: 60 * 60,
+      // revalidate: 1,
     };
   } catch (err) {
     console.error(err);

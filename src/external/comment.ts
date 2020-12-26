@@ -48,9 +48,27 @@ export function comment(): void {
       container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/${pid}/${page.id}`;
       container.id = id;
       container.style.width = '100%';
-      // TODO: auto grow the iframe height
-      container.style.minHeight = '500px';
       container.frameBorder = '0';
+      container.scrolling = 'no';
+      let previousHeight = 0;
+      container.onload = function () {
+        previousHeight = setIframeHeight(container, previousHeight);
+        window.addEventListener(
+          'message',
+          (event) => {
+            if (
+              origin === process.env.NEXT_PUBLIC_APP_URL &&
+              event.data?.height &&
+              event.data?.height !== previousHeight
+            ) {
+              container.style.height = event.data.height + 'px';
+              previousHeight = event.data.height;
+            }
+          },
+          false,
+        );
+      };
+
       renderTarget.appendChild(container);
     });
 }
@@ -62,4 +80,16 @@ if (typeof window !== 'undefined') {
   (window as { [key: string]: $TsFixMe })[appNameLowerCase] = {
     comment,
   };
+}
+
+function setIframeHeight(iframe: HTMLIFrameElement, previousHeight: number): number {
+  const doc = iframe.contentDocument || iframe.contentWindow?.document;
+  if (!doc) {
+    throw new Error(`Can't find the iframe document`);
+  }
+  const newHeight: number = doc.body.scrollHeight + 10;
+  if (newHeight !== previousHeight) {
+    iframe.style.height = newHeight + 'px';
+  }
+  return newHeight;
 }
