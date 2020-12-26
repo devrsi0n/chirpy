@@ -25,6 +25,7 @@ export default function TestingComment(/*props: ITestCommentProps*/): JSX.Elemen
           [`data-${appNameLowerCase}-comment`]: 'true',
         }}
       ></div>
+      <footer>This is the bottom of this page.</footer>
     </div>
   );
 }
