@@ -1,5 +1,3 @@
-import { CommentsInPageQuery } from '$/generated/graphql';
+import { CommentsByPageQuery } from '$/generated/graphql';
 
-export type PageInWidget = CommentsInPageQuery['page'];
-export type NonNullablePage = NonNullable<PageInWidget>;
-export type CommentInWidget = NonNullablePage['comments'][number];
+export type CommentByPage = CommentsByPageQuery['comments'][number];

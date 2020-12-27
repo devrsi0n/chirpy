@@ -17,14 +17,14 @@ import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
-  CommentsInPageDocument,
-  CommentsInPageQuery,
-  CommentsInPageQueryVariables,
+  CommentsByPageQuery,
+  CommentsByPageQueryVariables,
+  CommentsByPageDocument,
 } from '$/generated/graphql';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
-import { PageInWidget, CommentInWidget } from '$/types/widget';
+import { CommentByPage } from '$/types/widget';
 import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 
@@ -41,11 +41,11 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function PageComment(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  let comments: CommentInWidget[] = [];
+  let comments: CommentByPage[] = [];
   if (isStaticError(props)) {
     error = props.error!;
   } else {
-    comments = props.page?.comments || comments;
+    comments = props?.comments || comments;
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
@@ -99,7 +99,7 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
-            {comments?.map((comment: CommentInWidget) => (
+            {comments?.map((comment: CommentByPage) => (
               <SectionComment key={comment.id} comment={comment} />
             ))}
             <RichTextEditor
@@ -167,7 +167,7 @@ type PathParams = {
 // };
 
 type StaticProps = PathParams & {
-  page: PageInWidget;
+  comments: CommentByPage[];
 };
 type StaticError = {
   error?: string;
@@ -189,26 +189,24 @@ export const getServerSideProps: GetServerSideProps<
     const { pageId, projectId } = params;
 
     // TODO: fix http performance issue, better to fetch the data directly
-    const pageResult: ApolloQueryResult<CommentsInPageQuery> = await client.query<
-      CommentsInPageQuery,
-      CommentsInPageQueryVariables
+    const pageResult: ApolloQueryResult<CommentsByPageQuery> = await client.query<
+      CommentsByPageQuery,
+      CommentsByPageQueryVariables
     >({
-      query: CommentsInPageDocument,
+      query: CommentsByPageDocument,
       variables: {
-        id: pageId,
+        pageId: pageId,
       },
       fetchPolicy: 'no-cache',
     });
 
-    if (!pageResult.data?.page) {
+    if (!pageResult.data?.comments) {
       return { props: { error: 'No page data' } };
     }
-    const { page } = pageResult.data;
-    // Filter the root comments. TODO: Do filter in graphql
-    page.comments = page.comments.filter((comment) => !comment.parentId);
+    const { comments } = pageResult.data;
 
     return {
-      props: { page: pageResult.data.page, pageId, projectId },
+      props: { comments, pageId, projectId },
       // revalidate: 1,
     };
   } catch (err) {

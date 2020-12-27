@@ -1873,6 +1873,16 @@
             "defaultValue": null
           },
           {
+            "name": "pageId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "StringFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "parentId",
             "description": null,
             "type": {

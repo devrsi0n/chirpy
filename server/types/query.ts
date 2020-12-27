@@ -14,6 +14,7 @@ export const Query = queryType({
       filtering: {
         id: true,
         parentId: true,
+        pageId: true,
       },
     });
 
