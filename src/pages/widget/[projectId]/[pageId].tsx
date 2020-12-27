@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  GetStaticPropsContext,
+  GetStaticProps,
+  InferGetStaticPropsType,
   GetStaticPropsResult,
+  GetStaticPropsContext,
+  GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
 import { ApolloQueryResult } from '@apollo/client';
@@ -27,8 +28,9 @@ import { initializeApollo } from '$/lib/apollo-client';
 import { CommentByPage } from '$/types/widget';
 import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
+import { prisma } from '$server/context';
 
-export type PageCommentProps = InferGetServerSidePropsType<typeof getServerSideProps>;
+export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 // Demo: http://localhost:3000/__testing/comment
 
@@ -139,32 +141,32 @@ type PathParams = {
 };
 
 // Get all project then prerender all their page comments
-// export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-//   const projects = await prisma.project.findMany({
-//     include: {
-//       pages: {
-//         include: {
-//           comments: true,
-//         },
-//       },
-//     },
-//   });
-//   const paths: { params: PathParams }[] = [];
-//   projects.forEach((project) =>
-//     project.pages?.forEach((page) => {
-//       paths.push({
-//         params: {
-//           projectId: project.id,
-//           pageId: page.id,
-//         },
-//       });
-//     }),
-//   );
+export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+  const projects = await prisma.project.findMany({
+    include: {
+      pages: {
+        include: {
+          comments: true,
+        },
+      },
+    },
+  });
+  const paths: { params: PathParams }[] = [];
+  projects.forEach((project) =>
+    project.pages?.forEach((page) => {
+      paths.push({
+        params: {
+          projectId: project.id,
+          pageId: page.id,
+        },
+      });
+    }),
+  );
 
-//   // We'll pre-render only these paths at build time.
-//   // { fallback: false } means other routes should 404.
-//   return { paths, fallback: true };
-// };
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: true };
+};
 
 type StaticProps = PathParams & {
   comments: CommentByPage[];
@@ -175,11 +177,7 @@ type StaticError = {
 
 const client = initializeApollo();
 
-// TODO: Re-enable static build page: getStaticProps
-export const getServerSideProps: GetServerSideProps<
-  StaticProps | StaticError,
-  PathParams
-> = async ({
+export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
   try {
@@ -188,7 +186,6 @@ export const getServerSideProps: GetServerSideProps<
     }
     const { pageId, projectId } = params;
 
-    // TODO: fix http performance issue, better to fetch the data directly
     const pageResult: ApolloQueryResult<CommentsByPageQuery> = await client.query<
       CommentsByPageQuery,
       CommentsByPageQueryVariables
@@ -207,7 +204,7 @@ export const getServerSideProps: GetServerSideProps<
 
     return {
       props: { comments, pageId, projectId },
-      // revalidate: 1,
+      revalidate: 1,
     };
   } catch (err) {
     console.error(err);
