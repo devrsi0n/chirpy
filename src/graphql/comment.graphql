@@ -56,3 +56,38 @@ mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId
     }
   }
 }
+
+query commentsByPage($pageId: String!) {
+  comments(where: { pageId: { equals: $pageId }, parentId: { equals: null } }) {
+    id
+    pageId
+    content
+    parentId
+    createdAt
+    user {
+      id
+      name
+      avatar
+    }
+    likes {
+      id
+      userId
+    }
+    replies {
+      id
+      pageId
+      parentId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+    }
+  }
+}

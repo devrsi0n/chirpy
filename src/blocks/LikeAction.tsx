@@ -2,13 +2,13 @@ import * as React from 'react';
 import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
 
-import { CommentInWidget } from '$/types/widget';
+import { CommentByPage } from '$/types/widget';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/generated/graphql';
 import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 export type LikeActionProps = React.PropsWithChildren<{
-  likes: CommentInWidget['likes'];
+  likes: CommentByPage['likes'];
   commentId: string;
   currentUserId?: string;
 }>;

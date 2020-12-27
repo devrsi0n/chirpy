@@ -9,7 +9,7 @@ import { Text } from '$/components/Text';
 import { RichTextEditor } from './RichTextEditor';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { Button } from '$/components/buttons/Button';
-import { CommentInWidget } from '$/types/widget';
+import { CommentByPage } from '$/types/widget';
 import { useCreateOneReplyMutation } from '$/generated/graphql';
 import { LikeAction } from './LikeAction';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
@@ -17,7 +17,7 @@ import { useCurrentUser } from '$/hooks/useCurrentUser';
 dayjs.extend(relativeTime);
 
 export type CommentProps = {
-  comment: CommentInWidget;
+  comment: CommentByPage;
   userId?: string;
 };
 
@@ -119,7 +119,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
           </div>
         )}
         {replies?.map((reply) => (
-          <Comment key={reply.id} comment={reply as CommentInWidget} />
+          <Comment key={reply.id} comment={reply as CommentByPage} />
         ))}
       </div>
     </section>

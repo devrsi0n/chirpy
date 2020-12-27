@@ -281,6 +281,7 @@ export type UserWhereUniqueInput = {
 
 export type QueryCommentsWhereInput = {
   id?: Maybe<StringFilter>;
+  pageId?: Maybe<StringFilter>;
   parentId?: Maybe<StringNullableFilter>;
 };
 
@@ -1807,6 +1808,36 @@ export type CreateOneReplyMutation = (
   )> }
 );
 
+export type CommentsByPageQueryVariables = Exact<{
+  pageId: Scalars['String'];
+}>;
+
+
+export type CommentsByPageQuery = (
+  { __typename?: 'Query' }
+  & { comments: Array<(
+    { __typename?: 'Comment' }
+    & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'avatar'>
+    ), likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Like, 'id' | 'userId'>
+    )>, replies: Array<(
+      { __typename?: 'Comment' }
+      & Pick<Comment, 'id' | 'pageId' | 'parentId' | 'content' | 'createdAt'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Like, 'id' | 'userId'>
+      )> }
+    )> }
+  )> }
+);
+
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -1872,40 +1903,6 @@ export type PageByProjectQuery = (
   & { getOrCreatePage?: Maybe<(
     { __typename?: 'Page' }
     & Pick<Page, 'id' | 'url' | 'title'>
-  )> }
-);
-
-export type CommentsInPageQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type CommentsInPageQuery = (
-  { __typename?: 'Query' }
-  & { page?: Maybe<(
-    { __typename?: 'Page' }
-    & Pick<Page, 'id'>
-    & { comments: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Like, 'id' | 'userId'>
-      )>, replies: Array<(
-        { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'pageId' | 'parentId' | 'content' | 'createdAt'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Like, 'id' | 'userId'>
-        )> }
-      )> }
-    )> }
   )> }
 );
 
@@ -2059,6 +2056,68 @@ export function useCreateOneReplyMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreateOneReplyMutationHookResult = ReturnType<typeof useCreateOneReplyMutation>;
 export type CreateOneReplyMutationResult = Apollo.MutationResult<CreateOneReplyMutation>;
 export type CreateOneReplyMutationOptions = Apollo.BaseMutationOptions<CreateOneReplyMutation, CreateOneReplyMutationVariables>;
+export const CommentsByPageDocument = gql`
+    query commentsByPage($pageId: String!) {
+  comments(where: {pageId: {equals: $pageId}, parentId: {equals: null}}) {
+    id
+    pageId
+    content
+    parentId
+    createdAt
+    user {
+      id
+      name
+      avatar
+    }
+    likes {
+      id
+      userId
+    }
+    replies {
+      id
+      pageId
+      parentId
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCommentsByPageQuery__
+ *
+ * To run a query within a React component, call `useCommentsByPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCommentsByPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCommentsByPageQuery({
+ *   variables: {
+ *      pageId: // value for 'pageId'
+ *   },
+ * });
+ */
+export function useCommentsByPageQuery(baseOptions: Apollo.QueryHookOptions<CommentsByPageQuery, CommentsByPageQueryVariables>) {
+        return Apollo.useQuery<CommentsByPageQuery, CommentsByPageQueryVariables>(CommentsByPageDocument, baseOptions);
+      }
+export function useCommentsByPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentsByPageQuery, CommentsByPageQueryVariables>) {
+          return Apollo.useLazyQuery<CommentsByPageQuery, CommentsByPageQueryVariables>(CommentsByPageDocument, baseOptions);
+        }
+export type CommentsByPageQueryHookResult = ReturnType<typeof useCommentsByPageQuery>;
+export type CommentsByPageLazyQueryHookResult = ReturnType<typeof useCommentsByPageLazyQuery>;
+export type CommentsByPageQueryResult = Apollo.QueryResult<CommentsByPageQuery, CommentsByPageQueryVariables>;
 export const CurrentUserDocument = gql`
     query currentUser {
   currentUser {
@@ -2214,71 +2273,6 @@ export function usePageByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageByProjectQueryHookResult = ReturnType<typeof usePageByProjectQuery>;
 export type PageByProjectLazyQueryHookResult = ReturnType<typeof usePageByProjectLazyQuery>;
 export type PageByProjectQueryResult = Apollo.QueryResult<PageByProjectQuery, PageByProjectQueryVariables>;
-export const CommentsInPageDocument = gql`
-    query commentsInPage($id: String!) {
-  page(where: {id: $id}) {
-    id
-    comments {
-      id
-      pageId
-      content
-      parentId
-      createdAt
-      user {
-        id
-        name
-        avatar
-      }
-      likes {
-        id
-        userId
-      }
-      replies {
-        id
-        pageId
-        parentId
-        content
-        createdAt
-        user {
-          id
-          name
-          avatar
-        }
-        likes {
-          id
-          userId
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useCommentsInPageQuery__
- *
- * To run a query within a React component, call `useCommentsInPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useCommentsInPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCommentsInPageQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useCommentsInPageQuery(baseOptions: Apollo.QueryHookOptions<CommentsInPageQuery, CommentsInPageQueryVariables>) {
-        return Apollo.useQuery<CommentsInPageQuery, CommentsInPageQueryVariables>(CommentsInPageDocument, baseOptions);
-      }
-export function useCommentsInPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentsInPageQuery, CommentsInPageQueryVariables>) {
-          return Apollo.useLazyQuery<CommentsInPageQuery, CommentsInPageQueryVariables>(CommentsInPageDocument, baseOptions);
-        }
-export type CommentsInPageQueryHookResult = ReturnType<typeof useCommentsInPageQuery>;
-export type CommentsInPageLazyQueryHookResult = ReturnType<typeof useCommentsInPageLazyQuery>;
-export type CommentsInPageQueryResult = Apollo.QueryResult<CommentsInPageQuery, CommentsInPageQueryVariables>;
 export const CreateOneProjectDocument = gql`
     mutation createOneProject($projectName: String!, $userID: String!) {
   createOneProject(data: {name: $projectName, user: {connect: {id: $userID}}}) {
