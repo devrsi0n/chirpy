@@ -7,7 +7,7 @@
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "node ./scripts/build.js",
     "build:local": "dotenv -e .env.development -- yarn run build",
-    "analyze": "ANALYZE=true dotenv -e .env.development -- next build",
+    "analyze": "ANALYZE=true yarn run build:local",
     "start": "next start",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev --preview-feature",
     "studio": "dotenv -e .env.development -- prisma studio",
@@ -23,7 +23,7 @@
     "*.{json,md,css}": [
       "prettier --write"
     ],
-    "*.{ts,tsx}": [
+    "*.{ts,tsx,js}": [
       "eslint --fix"
     ]
   },
@@ -35,7 +35,6 @@
     "@next/bundle-analyzer": "^10.0.4",
     "@prisma/client": "~2.13.1",
     "@react-aria/button": "^3.3.0",
-    "@types/graphql-fields": "^1.3.3",
     "apollo-server-micro": "^2.19.1",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
@@ -72,17 +71,17 @@
     "@prisma/cli": "~2.13.1",
     "@types/cookie": "^0.4.0",
     "@types/cors": "^2.8.9",
+    "@types/graphql-fields": "^1.3.3",
     "@types/graphql-iso-date": "^3.4.0",
     "@types/node": "^14.14.16",
-    "@types/passport": "^1.0.4",
-    "@types/passport-github": "^1.1.5",
+    "@types/passport": "1.0.4",
     "@types/passport-github2": "^1.2.4",
-    "@types/passport-google-oauth20": "^2.0.5",
+    "@types/passport-google-oauth20": "2.0.6",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/styled-jsx": "^2.2.8",
-    "@typescript-eslint/eslint-plugin": "^4.11.0",
-    "@typescript-eslint/parser": "^4.11.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
     "autoprefixer": "^9",
     "babel-eslint": "^10.1.0",
     "concurrently": "^5.3.0",
