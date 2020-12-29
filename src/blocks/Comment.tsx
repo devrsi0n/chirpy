@@ -30,6 +30,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
     pageId,
     likes,
     replies: _replies,
+    // replies,
   } = comment;
   const [replies, setReplies] = React.useState(_replies);
   const { avatar, name } = author;
@@ -47,7 +48,6 @@ function Comment({ comment }: CommentProps): JSX.Element {
     setShowReplyEditor((prev) => !prev);
   }, []);
 
-  // const refreshProps = useRefreshServerProps();
   const [createOneReply] = useCreateOneReplyMutation();
   const handleSubmitReply = React.useCallback(() => {
     if (!currentUserId) {
@@ -119,7 +119,7 @@ function Comment({ comment }: CommentProps): JSX.Element {
           </div>
         )}
         {replies?.map((reply) => (
-          <Comment key={reply.id} comment={reply as CommentByPage} />
+          <MemoComment key={reply.id} comment={reply as CommentByPage} />
         ))}
       </div>
     </section>

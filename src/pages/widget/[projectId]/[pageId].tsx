@@ -26,7 +26,6 @@ import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
 import { CommentByPage } from '$/types/widget';
-import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 import { prisma } from '$server/context';
 
@@ -43,22 +42,18 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function PageComment(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  let comments: CommentByPage[] = [];
+  const [comments, setComments] = React.useState<CommentByPage[]>(
+    isStaticError(props) ? [] : props.comments,
+  );
   if (isStaticError(props)) {
     error = props.error!;
   } else {
-    comments = props?.comments || comments;
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
   const [input, setInput] = React.useState<Node[]>();
 
-  const refreshProps = useRefreshServerProps();
-  const [createOneComment] = useCreateOneCommentMutation({
-    onCompleted() {
-      refreshProps();
-    },
-  });
+  const [createOneComment] = useCreateOneCommentMutation();
 
   const handleSubmit = React.useCallback(() => {
     if (!userData?.currentUser?.id) {
@@ -71,6 +66,16 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         content: input,
         userId: userData.currentUser.id,
       },
+    }).then((data) => {
+      if (data.data?.createOneComment.id) {
+        setComments((prev) => [
+          ...prev,
+          {
+            ...data.data!.createOneComment,
+            replies: [],
+          },
+        ]);
+      }
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment]);
 

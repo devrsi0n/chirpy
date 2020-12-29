@@ -1771,7 +1771,14 @@ export type CreateOneCommentMutation = (
   { __typename?: 'Mutation' }
   & { createOneComment: (
     { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'content' | 'createdAt'>
+    & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'name' | 'avatar'>
+    ), likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Like, 'id' | 'userId'>
+    )> }
   ) }
 );
 
@@ -1959,8 +1966,19 @@ export const CreateOneCommentDocument = gql`
     data: {content: $content, page: {connect: {id: $pageId}}, user: {connect: {id: $userId}}}
   ) {
     id
+    pageId
     content
+    parentId
     createdAt
+    user {
+      id
+      name
+      avatar
+    }
+    likes {
+      id
+      userId
+    }
   }
 }
     `;

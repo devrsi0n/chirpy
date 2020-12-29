@@ -5,7 +5,6 @@ import HeartFill from '@geist-ui/react-icons/heartFill';
 import { CommentByPage } from '$/types/widget';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/generated/graphql';
-import { useRefreshServerProps } from '$/hooks/useRefreshServerProps';
 
 export type LikeActionProps = React.PropsWithChildren<{
   likes: CommentByPage['likes'];
@@ -14,18 +13,23 @@ export type LikeActionProps = React.PropsWithChildren<{
 }>;
 
 // TODO: Animation
-export function LikeAction({ likes, commentId, currentUserId }: LikeActionProps): JSX.Element {
+export function LikeAction({
+  likes: _likes,
+  commentId,
+  currentUserId,
+}: LikeActionProps): JSX.Element {
   let likedId = '';
-  const liked =
+  const [likes, setLikes] = React.useState(_likes);
+  const [liked, setLiked] = React.useState(
     !!currentUserId &&
-    likes.some((like) => {
-      if (like.userId === currentUserId) {
-        likedId = like.id;
-        return true;
-      }
-      return false;
-    });
-  const refreshProps = useRefreshServerProps();
+      likes.some((like) => {
+        if (like.userId === currentUserId) {
+          likedId = like.id;
+          return true;
+        }
+        return false;
+      }),
+  );
   const [createOneLike] = useCreateOneLikeMutation();
   const [deleteOneLike] = useDeleteOneLikeMutation();
   const handleClickLike = React.useCallback(() => {
@@ -33,25 +37,40 @@ export function LikeAction({ likes, commentId, currentUserId }: LikeActionProps)
       console.error('No user id, login first');
       return;
     }
-    let promise: Promise<$TsAny>;
     if (liked) {
-      promise = deleteOneLike({
+      deleteOneLike({
         variables: {
           id: likedId,
         },
+      }).then(() => {
+        setLiked(false);
+        setLikes((prev) => prev.filter(({ id }) => id !== likedId));
       });
     } else {
-      promise = createOneLike({
+      createOneLike({
         variables: {
           commentId,
           userId: currentUserId,
         },
+      }).then((data) => {
+        if (data.data?.createOneLike.id) {
+          setLiked(true);
+          setLikes((prev) => [
+            ...prev,
+            {
+              id: data.data!.createOneLike.id,
+              userId: currentUserId,
+            },
+          ]);
+        }
       });
     }
-    promise.then(() => {
-      refreshProps();
-    });
-  }, [commentId, liked, likedId, createOneLike, currentUserId, deleteOneLike, refreshProps]);
+  }, [commentId, liked, likedId, createOneLike, currentUserId, deleteOneLike]);
+  React.useEffect(() => {
+    if (!!_likes.length) {
+      setLikes(_likes);
+    }
+  }, [_likes]);
 
   const HeartComponent = liked ? HeartFill : Heart;
   return (

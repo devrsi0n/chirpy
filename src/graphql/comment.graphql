@@ -7,8 +7,19 @@ mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
     }
   ) {
     id
+    pageId
     content
+    parentId
     createdAt
+    user {
+      id
+      name
+      avatar
+    }
+    likes {
+      id
+      userId
+    }
   }
 }
 
