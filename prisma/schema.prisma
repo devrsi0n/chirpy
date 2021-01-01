@@ -114,6 +114,9 @@ model Like {
 
   comment   Comment @relation(fields: [commentId], references: [id])
   commentId String
+
+  // Make sure one user can only create one like on a comment
+  @@unique(fields: [userId, commentId])
 }
 
 enum Role {
