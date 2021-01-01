@@ -2,11 +2,15 @@ import '../styles/tailwind.css';
 import '../styles/utilities.css';
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 
 import { ThemeProvider } from '$/components/ThemeProvider';
 import { useApollo } from '$/lib/apollo-client';
 import { colorModes } from '$/styles/colors';
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
+
+dayjs.extend(relativeTime);
 
 interface IAppProps {
   Component: React.ComponentType;
