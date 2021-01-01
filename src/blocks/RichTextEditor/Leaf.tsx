@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { RenderLeafProps } from 'slate-react';
 
-import { Text } from '$/components/Text';
+// import { Text } from '$/components/Text';
 
 export function Leaf({ attributes, children, leaf }: RenderLeafProps): JSX.Element {
   if (leaf.bold) {

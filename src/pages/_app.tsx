@@ -4,6 +4,7 @@ import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 import { ThemeProvider } from '$/components/ThemeProvider';
 import { useApollo } from '$/lib/apollo-client';
@@ -20,13 +21,15 @@ interface IAppProps {
 function App({ Component, pageProps }: IAppProps): JSX.Element {
   const apollo = useApollo();
   return (
-    <ThemeProvider colorModes={colorModes}>
-      <ApolloProvider client={apollo}>
-        <CurrentUserProvider>
-          <Component {...pageProps} />
-        </CurrentUserProvider>
-      </ApolloProvider>
-    </ThemeProvider>
+    <NextThemesProvider attribute="class" storageKey="EchoTheme">
+      <ThemeProvider colorModes={colorModes}>
+        <ApolloProvider client={apollo}>
+          <CurrentUserProvider>
+            <Component {...pageProps} />
+          </CurrentUserProvider>
+        </ApolloProvider>
+      </ThemeProvider>
+    </NextThemesProvider>
   );
 }
 

@@ -11,7 +11,7 @@ module.exports = {
         // transparent: 'transparent',
         // current: 'currentColor',
         // black: '#000',
-        // white: '#fff',
+        white: 'var(--colors-white)',
   
         primary: {
           light: 'var(--colors-primary-light)',
@@ -67,6 +67,7 @@ module.exports = {
           light: 'var(--colors-text-light)',
         },
         gray: {
+          50: 'var(--colors-gray-50)',
           100: 'var(--colors-gray-100)',
           200: 'var(--colors-gray-200)',
           300: 'var(--colors-gray-300)',
