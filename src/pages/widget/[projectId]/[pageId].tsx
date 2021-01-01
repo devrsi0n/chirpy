@@ -58,104 +58,103 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
     pageId = props.pageId;
   }
   const { isLogin, data: userData } = useCurrentUser();
+  const currentUserId = userData?.currentUser?.id;
   const [input, setInput] = React.useState<Node[]>();
 
   const [createOneComment] = useCreateOneCommentMutation();
 
-  const handleSubmit = React.useCallback(() => {
-    if (!userData?.currentUser?.id) {
+  const handleSubmit = React.useCallback(async () => {
+    if (!currentUserId) {
       console.error('login first');
       return;
     }
-    createOneComment({
+    const { data } = await createOneComment({
       variables: {
         pageId,
         content: input,
-        userId: userData.currentUser.id,
+        userId: currentUserId,
       },
-    }).then((data) => {
-      if (data.data?.createOneComment.id) {
-        setComments((prev) => [
-          ...prev,
-          {
-            ...data.data!.createOneComment,
-            replies: [],
-          },
-        ]);
-      }
     });
-  }, [input, pageId, userData?.currentUser?.id, createOneComment]);
+    if (data?.createOneComment.id) {
+      setComments((prev) => [
+        ...prev,
+        {
+          ...data!.createOneComment,
+          replies: [],
+        },
+      ]);
+    }
+  }, [input, pageId, currentUserId, createOneComment]);
 
   const [createOneLike] = useCreateOneLikeMutation();
   const [deleteOneLike] = useDeleteOneLikeMutation();
-  const currentUserId = userData?.currentUser?.id;
-  const handleClickLikeAction = (isLiked: boolean, likeId: string, commentId: string) => {
+  const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
       throw Error('Login first');
     }
     if (isLiked) {
-      deleteOneLike({
+      await deleteOneLike({
         variables: {
           id: likeId,
         },
-      }).then(() => {
-        const updatedComments = deleteOneLikeInComments(comments, commentId, likeId);
-        if (updatedComments !== comments) {
-          setComments(updatedComments);
-        } else {
-          console.error(`Can't find the deleted like`);
-        }
       });
+      const updatedComments = deleteOneLikeInComments(comments, commentId, likeId);
+      if (updatedComments !== comments) {
+        setComments(updatedComments);
+      } else {
+        console.error(`Can't find the deleted like`);
+      }
     } else {
-      createOneLike({
-        variables: {
-          commentId,
-          userId: currentUserId,
-        },
-      }).then((data) => {
-        if (data.data?.createOneLike.id) {
-          const updatedComments = createOneLikeInComments(
-            comments,
+      try {
+        const { data } = await createOneLike({
+          variables: {
             commentId,
-            data.data.createOneLike,
-          );
+            userId: currentUserId,
+          },
+        });
+        if (data?.createOneLike.id) {
+          const updatedComments = createOneLikeInComments(comments, commentId, data.createOneLike);
           if (updatedComments !== comments) {
             setComments(updatedComments);
           } else {
             console.error(`Can't insert the created like`);
           }
         }
-      });
+      } catch (error) {
+        // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
+        // when a user click the like button again during this API processing
+        // TODO: Refresh UI immediately, call APIs in the background
+        console.error(error);
+      }
     }
   };
 
   const [createOneReply] = useCreateOneReplyMutation();
-  const handleSubmitReply = (reply: Node[], commentId: string) => {
+  const handleSubmitReply = async (reply: Node[], commentId: string) => {
     if (!currentUserId) {
       console.error('Please login first');
       return Promise.reject();
     }
-    return createOneReply({
+    const { data } = await createOneReply({
       variables: {
         id: commentId,
         content: reply,
         pageId,
         userId: currentUserId,
       },
-    }).then(({ data }) => {
-      if (data?.updateOneComment?.replies) {
-        const updatedComments = updateReplyInComments(
-          comments,
-          commentId,
-          data.updateOneComment.replies,
-        );
-        if (updatedComments !== comments) {
-          setComments(updatedComments);
-        } else {
-          console.error(`Can't update reply in comments`);
-        }
-      }
     });
+    if (data?.updateOneComment?.replies) {
+      const updatedComments = updateReplyInComments(
+        comments,
+        commentId,
+        data.updateOneComment.replies,
+      );
+      if (updatedComments !== comments) {
+        setComments(updatedComments);
+      } else {
+        console.error(`Can't update reply in comments`);
+      }
+    }
   };
 
   useNotifyHostPageOfHeight();
@@ -185,6 +184,27 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
+            <div className="space-y-2">
+              <RichTextEditor
+                {...{
+                  ...(!isLogin && {
+                    disabled: true,
+                    placeholder: [
+                      {
+                        type: 'paragraph',
+                        children: [{ text: `Please login first.` }],
+                      },
+                    ],
+                  }),
+                }}
+                value={input}
+                onChange={setInput}
+                className="bg-gray-100"
+              />
+              <div className="flex flex-row justify-end">
+                {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
+              </div>
+            </div>
             {comments?.map((comment: CommentByPage) => (
               <MemoCommentBlock
                 key={comment.id}
@@ -194,25 +214,6 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
                 onSubmitReply={handleSubmitReply}
               />
             ))}
-            <RichTextEditor
-              {...{
-                ...(!isLogin && {
-                  disabled: true,
-                  placeholder: [
-                    {
-                      type: 'paragraph',
-                      children: [{ text: `Please login first.` }],
-                    },
-                  ],
-                }),
-              }}
-              value={input}
-              onChange={setInput}
-              className="bg-gray-100"
-            />
-            <div className="flex flex-row justify-end">
-              {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
-            </div>
           </div>
         </Tabs.Item>
         <Tabs.Item
