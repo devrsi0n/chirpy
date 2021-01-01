@@ -1,13 +1,8 @@
 import * as React from 'react';
+import { useTheme } from 'next-themes';
+import * as CSS from 'csstype';
 
-import { ThemeContext, ThemeContextType } from '$/context/ThemeContext';
-import { ITheme, ColorMode } from '../types/theme.type';
-import {
-  CSSVariables,
-  getThemeColorMode,
-  getThemeCSSVariables,
-  saveThemeColorMode,
-} from '../utilities/theme';
+import { ITheme, Colors, ObjectOf } from '$/types/theme.type';
 
 export type ThemeProviderProps = {
   children: React.ReactNode;
@@ -15,67 +10,20 @@ export type ThemeProviderProps = {
 };
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const [colorMode, setColorMode] = React.useState<ColorMode>('light');
-  const [isDarkMode, setIsDarkMode] = React.useState<boolean>(colorMode === 'dark');
-  const contextValue = React.useMemo<ThemeContextType>(
-    () => ({
-      isDarkMode,
-      colorMode,
-      setColorMode: (value: ColorMode) => {
-        if (value === 'dark') {
-          setIsDarkMode(true);
-        } else if (value === 'light') {
-          setIsDarkMode(false);
-        }
-        saveThemeColorMode(value);
-        setColorMode(value);
-      },
-    }),
-    [isDarkMode, colorMode],
-  );
+  const { resolvedTheme } = useTheme();
   const { light, dark } = React.useMemo(() => getThemeCSSVariables(props.colorModes), [
     props.colorModes,
   ]);
-
-  // Set color mode after mounted
-  React.useEffect(() => {
-    const mode = getThemeColorMode(true);
-    setColorMode(mode);
-    if (mode === 'dark') {
-      setIsDarkMode(true);
-    } else if (mode === 'light') {
-      setIsDarkMode(false);
-    }
-  }, []);
-
-  // Listen to theme change when color mode is 'system'
-  React.useEffect(() => {
-    if (colorMode !== 'system') {
-      return;
-    }
-    const switchMode = (e: MediaQueryListEvent) => {
-      if (e.matches) {
-        setIsDarkMode(true);
-      } else {
-        setIsDarkMode(false);
-      }
-    };
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    darkModeMediaQuery.addEventListener('change', switchMode);
-    // cleanup on unmount
-    return () => darkModeMediaQuery.removeEventListener('change', switchMode);
-  }, [colorMode]);
-
   // Update theme CSS variables
   React.useEffect(() => {
-    if (isDarkMode) {
+    if (resolvedTheme === 'dark') {
       setColorModeCSSVariable(dark);
     } else {
       setColorModeCSSVariable(light);
     }
-  }, [isDarkMode, light, dark]);
+  }, [resolvedTheme, light, dark]);
 
-  return <ThemeContext.Provider value={contextValue}>{props.children}</ThemeContext.Provider>;
+  return <>{props.children}</>;
 }
 
 function setColorModeCSSVariable(colors: CSSVariables) {
@@ -83,4 +31,35 @@ function setColorModeCSSVariable(colors: CSSVariables) {
   for (const [key, value] of colors) {
     root.style.setProperty(`--colors-${key}`, value);
   }
+}
+
+export type ThemeCSSVariables = {
+  light: CSSVariables;
+  dark: CSSVariables;
+};
+
+export function getThemeCSSVariables(theme: ITheme): ThemeCSSVariables {
+  const { light, dark } = theme;
+  return {
+    light: getColorModeCSSVariable(light),
+    dark: getColorModeCSSVariable(dark),
+  };
+}
+
+export type CSSVariables = Array<[string, string]>;
+
+function getColorModeCSSVariable(colors: Colors, prefix = ''): CSSVariables {
+  const cssVariables: Array<[string, string]> = [];
+  for (const [key, value] of Object.entries(colors)) {
+    if (typeof value === 'string') {
+      // Handle { primary: { '': '#123' } }
+      const cssVariableKey = prefix && key ? [prefix, key].join('-') : prefix || key;
+      cssVariables.push([cssVariableKey, value]);
+    } else if (typeof value === 'object' && value) {
+      cssVariables.push(...getColorModeCSSVariable(value as ObjectOf<CSS.Property.Color>, key));
+    } else {
+      throw new Error(`Unexpected color mode value: ${value}`);
+    }
+  }
+  return cssVariables;
 }

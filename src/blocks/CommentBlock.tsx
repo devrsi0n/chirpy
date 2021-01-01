@@ -44,7 +44,7 @@ function CommentBlock({
   return (
     <section className="flex flex-row items-start py-2 space-x-2">
       <Avatar size="md" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
-      <div className="flex-1 px-6 py-4 space-y-2 bg-gray-50 rounded-r-3xl rounded-bl-3xl">
+      <div className="flex-1 px-6 py-4 space-y-2 bg-gray-100 rounded-r-3xl rounded-bl-3xl">
         <div className="flex flex-row items-center space-x-4">
           <Text>{name}</Text>
           <Text as="time" variant="xs" title={createdAt} className="cursor-default text-text-light">
@@ -86,7 +86,7 @@ function CommentBlock({
                 },
               ]}
               onChange={setReplyContent}
-              className="bg-white"
+              className="bg-gray-100"
             />
             <div className="flex flex-row justify-end">
               <Button size="md" onClick={handleSubmitReply}>

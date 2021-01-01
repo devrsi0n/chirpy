@@ -51,6 +51,7 @@ export const colorModes: ITheme = {
     },
     gray,
     divider: gray['300'],
+    white: colors.white,
   },
   dark: {
     primary: {
@@ -107,5 +108,6 @@ export const colorModes: ITheme = {
       900: gray['50'],
     },
     divider: gray['700'],
+    white: gray['900'],
   },
 };
