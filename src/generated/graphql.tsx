@@ -1881,7 +1881,7 @@ export type CreateOneLikeMutation = (
   { __typename?: 'Mutation' }
   & { createOneLike: (
     { __typename?: 'Like' }
-    & Pick<Like, 'id'>
+    & Pick<Like, 'id' | 'userId'>
   ) }
 );
 
@@ -2193,6 +2193,7 @@ export const CreateOneLikeDocument = gql`
     data: {comment: {connect: {id: $commentId}}, user: {connect: {id: $userId}}}
   ) {
     id
+    userId
   }
 }
     `;

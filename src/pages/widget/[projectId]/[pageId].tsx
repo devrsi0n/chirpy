@@ -9,7 +9,7 @@ import {
 import Head from 'next/head';
 import { ApolloQueryResult } from '@apollo/client';
 
-import { Comment as SectionComment } from '$/blocks/Comment';
+import { MemoCommentBlock } from '$/blocks/CommentBlock';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Node } from 'slate';
 import { Tabs } from '$/components/Tabs/Tabs';
@@ -21,6 +21,7 @@ import {
   CommentsByPageQuery,
   CommentsByPageQueryVariables,
   CommentsByPageDocument,
+  useCreateOneReplyMutation,
 } from '$/generated/graphql';
 import { DropDownLogin } from '$/blocks/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser';
@@ -28,6 +29,12 @@ import { initializeApollo } from '$/lib/apollo-client';
 import { CommentByPage } from '$/types/widget';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 import { prisma } from '$server/context';
+import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/generated/graphql';
+import {
+  deleteOneLikeInComments,
+  createOneLikeInComments,
+  updateReplyInComments,
+} from '$/utilities/comment';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -39,7 +46,7 @@ const COMMENT_TAB_VALUE = 'Comment';
  * Comment widget for a page
  * @param props
  */
-export default function PageComment(props: PageCommentProps): JSX.Element {
+export default function CommentWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
   const [comments, setComments] = React.useState<CommentByPage[]>(
@@ -79,6 +86,78 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
     });
   }, [input, pageId, userData?.currentUser?.id, createOneComment]);
 
+  const [createOneLike] = useCreateOneLikeMutation();
+  const [deleteOneLike] = useDeleteOneLikeMutation();
+  const currentUserId = userData?.currentUser?.id;
+  const handleClickLikeAction = (isLiked: boolean, likeId: string, commentId: string) => {
+    if (!currentUserId) {
+      throw Error('Login first');
+    }
+    if (isLiked) {
+      deleteOneLike({
+        variables: {
+          id: likeId,
+        },
+      }).then(() => {
+        const updatedComments = deleteOneLikeInComments(comments, commentId, likeId);
+        if (updatedComments !== comments) {
+          setComments(updatedComments);
+        } else {
+          console.error(`Can't find the deleted like`);
+        }
+      });
+    } else {
+      createOneLike({
+        variables: {
+          commentId,
+          userId: currentUserId,
+        },
+      }).then((data) => {
+        if (data.data?.createOneLike.id) {
+          const updatedComments = createOneLikeInComments(
+            comments,
+            commentId,
+            data.data.createOneLike,
+          );
+          if (updatedComments !== comments) {
+            setComments(updatedComments);
+          } else {
+            console.error(`Can't insert the created like`);
+          }
+        }
+      });
+    }
+  };
+
+  const [createOneReply] = useCreateOneReplyMutation();
+  const handleSubmitReply = (reply: Node[], commentId: string) => {
+    if (!currentUserId) {
+      console.error('Please login first');
+      return Promise.reject();
+    }
+    return createOneReply({
+      variables: {
+        id: commentId,
+        content: reply,
+        pageId,
+        userId: currentUserId,
+      },
+    }).then(({ data }) => {
+      if (data?.updateOneComment?.replies) {
+        const updatedComments = updateReplyInComments(
+          comments,
+          commentId,
+          data.updateOneComment.replies,
+        );
+        if (updatedComments !== comments) {
+          setComments(updatedComments);
+        } else {
+          console.error(`Can't update reply in comments`);
+        }
+      }
+    });
+  };
+
   useNotifyHostPageOfHeight();
 
   if (error) {
@@ -107,7 +186,13 @@ export default function PageComment(props: PageCommentProps): JSX.Element {
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
           <div className="space-y-2">
             {comments?.map((comment: CommentByPage) => (
-              <SectionComment key={comment.id} comment={comment} />
+              <MemoCommentBlock
+                key={comment.id}
+                comment={comment}
+                currentUserId={currentUserId}
+                onClickLikeAction={handleClickLikeAction}
+                onSubmitReply={handleSubmitReply}
+              />
             ))}
             <RichTextEditor
               {...{

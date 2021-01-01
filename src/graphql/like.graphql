@@ -1,6 +1,7 @@
 mutation createOneLike($userId: String!, $commentId: String!) {
   createOneLike(data: { comment: { connect: { id: $commentId }}, user: { connect: { id: $userId }}}) {
     id
+    userId
   }
 }
 

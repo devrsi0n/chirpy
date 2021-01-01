@@ -1,5 +1,4 @@
 import * as React from 'react';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
 import { Node } from 'slate';
 
@@ -10,32 +9,22 @@ import { RichTextEditor } from './RichTextEditor';
 import { ActionButton } from '$/components/buttons/ActionButton';
 import { Button } from '$/components/buttons/Button';
 import { CommentByPage } from '$/types/widget';
-import { useCreateOneReplyMutation } from '$/generated/graphql';
-import { LikeAction } from './LikeAction';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
-
-dayjs.extend(relativeTime);
+import { LikeAction, LikeActionProps } from './LikeAction';
 
 export type CommentProps = {
   comment: CommentByPage;
-  userId?: string;
-};
+  currentUserId?: string;
+  onSubmitReply: (reply: Node[], commentId: string) => Promise<void>;
+} & Pick<LikeActionProps, 'onClickLikeAction'>;
 
-function Comment({ comment }: CommentProps): JSX.Element {
-  const {
-    id: commentId,
-    user: author,
-    content,
-    createdAt,
-    pageId,
-    likes,
-    replies: _replies,
-    // replies,
-  } = comment;
-  const [replies, setReplies] = React.useState(_replies);
+function CommentBlock({
+  comment,
+  currentUserId,
+  onClickLikeAction,
+  onSubmitReply,
+}: CommentProps): JSX.Element {
+  const { id: commentId, user: author, content, createdAt, likes, replies } = comment;
   const { avatar, name } = author;
-  const { data: userData } = useCurrentUser();
-  const currentUserId = userData?.currentUser?.id;
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
   const [replyContent, setReplyContent] = React.useState<Node[]>([
@@ -47,35 +36,18 @@ function Comment({ comment }: CommentProps): JSX.Element {
   const handlePressReply = React.useCallback(() => {
     setShowReplyEditor((prev) => !prev);
   }, []);
-
-  const [createOneReply] = useCreateOneReplyMutation();
-  const handleSubmitReply = React.useCallback(() => {
-    if (!currentUserId) {
-      alert('Please login first');
-      return;
-    }
-    createOneReply({
-      variables: {
-        id: commentId,
-        content: replyContent,
-        pageId,
-        userId: currentUserId,
-      },
-    }).then(({ data }) => {
-      setShowReplyEditor(false);
-      if (data?.updateOneComment?.replies) {
-        setReplies(data.updateOneComment.replies);
-      }
-    });
-  }, [replyContent, commentId, pageId, currentUserId, createOneReply]);
+  const handleSubmitReply = async () => {
+    await onSubmitReply(replyContent, commentId);
+    setShowReplyEditor(false);
+  };
 
   return (
-    <section className="flex flex-row items-start space-x-2 py-2">
+    <section className="flex flex-row items-start py-2 space-x-2">
       <Avatar size="md" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
-      <div className="bg-gray-50 flex-1 px-6 py-4 rounded-r-3xl rounded-bl-3xl space-y-2">
+      <div className="flex-1 px-6 py-4 space-y-2 bg-gray-50 rounded-r-3xl rounded-bl-3xl">
         <div className="flex flex-row items-center space-x-4">
           <Text>{name}</Text>
-          <Text as="time" variant="xs" title={createdAt} className="text-text-light cursor-default">
+          <Text as="time" variant="xs" title={createdAt} className="cursor-default text-text-light">
             {dayjs(createdAt).fromNow()}
           </Text>
         </div>
@@ -83,7 +55,12 @@ function Comment({ comment }: CommentProps): JSX.Element {
           <RichTextEditor value={content} readOnly />
         </div>
         <div className="flex flex-row items-center space-x-6">
-          <LikeAction likes={likes} commentId={commentId} currentUserId={currentUserId} />
+          <LikeAction
+            likes={likes}
+            commentId={commentId}
+            currentUserId={currentUserId}
+            onClickLikeAction={onClickLikeAction}
+          />
           <ActionButton
             color="blue"
             icon={
@@ -119,12 +96,19 @@ function Comment({ comment }: CommentProps): JSX.Element {
           </div>
         )}
         {replies?.map((reply) => (
-          <MemoComment key={reply.id} comment={reply as CommentByPage} />
+          <MemoCommentBlock
+            key={reply.id}
+            comment={reply as CommentByPage}
+            currentUserId={currentUserId}
+            onClickLikeAction={onClickLikeAction}
+            onSubmitReply={onSubmitReply}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-const MemoComment = React.memo(Comment);
-export { MemoComment as Comment };
+const MemoCommentBlock = React.memo(CommentBlock);
+// const MemoCommentBlock = CommentBlock;
+export { MemoCommentBlock };
