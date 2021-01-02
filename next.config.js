@@ -1,6 +1,6 @@
 const { withPlugins } = require('next-compose-plugins');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === 'true' && process.env.NODE_ENV !== 'development',
 });
 
 const customConfig = {
