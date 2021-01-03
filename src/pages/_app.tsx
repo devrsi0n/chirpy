@@ -1,5 +1,6 @@
 import '../styles/tailwind.css';
 import '../styles/utilities.css';
+import '../styles/common.scss';
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import relativeTime from 'dayjs/plugin/relativeTime';
