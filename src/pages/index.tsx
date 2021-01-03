@@ -3,10 +3,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { Heading } from '$/components/Heading';
-import { Button } from '$/components/buttons/Button';
+import { Button } from '$/components/Button/Button';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Layout } from '$/components/Layout';
+import { Layout } from '$/components/Layout/Layout';
 
 function Home(): JSX.Element {
   const { data } = useCurrentUser();

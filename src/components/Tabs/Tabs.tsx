@@ -2,7 +2,7 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { TabsConfig, TabsContext, TabsLabelItem } from './TabsContext';
 import { TabsItem } from './TabsItem';
-import { Button } from '../buttons/Button';
+import { Button } from '../Button/Button';
 
 export type TabProps = React.ComponentProps<'section'> & {
   initialValue?: string;

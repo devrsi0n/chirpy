@@ -4,7 +4,7 @@ import { Link } from '$/components/Link';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
 import { List } from '$/components/List';
-import { Layout } from '$/components/Layout';
+import { Layout } from '$/components/Layout/Layout';
 
 export default function PrivacyPolicy(): JSX.Element {
   return (

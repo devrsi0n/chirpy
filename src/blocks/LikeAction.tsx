@@ -3,7 +3,7 @@ import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
 
 import { CommentByPage } from '$/types/widget';
-import { ActionButton } from '$/components/buttons/ActionButton';
+import { ActionButton } from '$/components/Button/ActionButton';
 
 export type HandleClickLikeAction = (isLiked: boolean, likeId: string, commentId: string) => void;
 

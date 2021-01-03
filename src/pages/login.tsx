@@ -2,11 +2,11 @@ import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Link } from '$/components/Link';
-import { Button } from '$/components/buttons/Button';
+import { Button } from '$/components/Button/Button';
 import { Text } from '$/components/Text';
 import { Heading } from '$/components/Heading';
 import { Card } from '$/components/Card';
-import { Layout } from '$/components/Layout';
+import { Layout } from '$/components/Layout/Layout';
 
 export default function Login(): JSX.Element {
   const router = useRouter();

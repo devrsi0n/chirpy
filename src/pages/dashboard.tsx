@@ -3,14 +3,14 @@ import Head from 'next/head';
 
 import { useCreateOneProjectMutation } from '$/generated/graphql';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Button } from '$/components/buttons/Button';
+import { Button } from '$/components/Button/Button';
 import { List } from '$/components/List';
 import { Heading } from '$/components/Heading';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { TextField } from '$/components/TextField';
 import { useRouter } from 'next/router';
 import { Text } from '$/components/Text';
-import { Layout } from '$/components/Layout';
+import { Layout } from '$/components/Layout/Layout';
 
 export default function Dashboard(): JSX.Element {
   const { data, isLogin, refetch } = useCurrentUser();

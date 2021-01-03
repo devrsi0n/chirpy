@@ -31,7 +31,7 @@
     "types.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/buttons/BaseButton.tsx",
-    "src/components/buttons/BaseButton.tsx.bak"
+    "src/components/Button/BaseButton.tsx",
+    "src/components/Button/BaseButton.tsx.bak"
   ]
 }

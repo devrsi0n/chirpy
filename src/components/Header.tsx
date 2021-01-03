@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '$/components/buttons/Button';
+import { Button } from '$/components/Button/Button';
 import { Link } from '../components/Link';
 import { Popover } from './Popover';
 import { useRouter } from 'next/router';

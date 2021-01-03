@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Link } from '$/components/Link';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
-import { Layout } from '$/components/Layout';
+import { Layout } from '$/components/Layout/Layout';
 
 export default function TermsOfService(): JSX.Element {
   return (

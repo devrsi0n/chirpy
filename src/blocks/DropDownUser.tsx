@@ -1,5 +1,5 @@
 import { Avatar } from '$/components/Avatar';
-import { DropDownMenu } from '$/components/buttons/DropDownMenu';
+import { DropDownMenu } from '$/components/Button/DropDownMenu';
 import * as React from 'react';
 import LogOut from '@geist-ui/react-icons/logOut';
 import { useRouter } from 'next/router';

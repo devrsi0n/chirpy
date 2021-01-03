@@ -13,7 +13,7 @@ import { MemoCommentBlock } from '$/blocks/CommentBlock';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Node } from 'slate';
 import { Tabs } from '$/components/Tabs/Tabs';
-import { Button } from '$/components/buttons/Button';
+import { Button } from '$/components/Button/Button';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
@@ -164,7 +164,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
   }
 
   return (
-    <div className="max-w-md mx-auto my-3">
+    <div className="main-container">
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
