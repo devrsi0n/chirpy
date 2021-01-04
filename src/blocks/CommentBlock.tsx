@@ -6,8 +6,8 @@ import { MessageIcon } from '$/components/Icons/Message.Icon';
 import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
 import { RichTextEditor } from './RichTextEditor';
-import { ActionButton } from '$/components/Button/ActionButton';
-import { Button } from '$/components/Button/Button';
+import { ActionButton } from '$/components/Button';
+import { Button } from '$/components/Button';
 import { CommentByPage } from '$/types/widget';
 import { LikeAction, LikeActionProps } from './LikeAction';
 

@@ -13,7 +13,7 @@ import { MemoCommentBlock } from '$/blocks/CommentBlock';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Node } from 'slate';
 import { Tabs } from '$/components/Tabs/Tabs';
-import { Button } from '$/components/Button/Button';
+import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {

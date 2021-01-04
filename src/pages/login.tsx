@@ -2,7 +2,7 @@ import * as React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Link } from '$/components/Link';
-import { Button } from '$/components/Button/Button';
+import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
 import { Heading } from '$/components/Heading';
 import { Card } from '$/components/Card';
@@ -19,7 +19,7 @@ export default function Login(): JSX.Element {
         <Head>
           <title>ZOO: login</title>
         </Head>
-        <Card className="py-5 max-w-screen-md space-y-4">
+        <Card className="max-w-screen-md py-5 space-y-4">
           <Heading as="h2">Log in</Heading>
           <Button onClick={handleClick}>Continue with GitHub</Button>
           <Text className="py-3" variant="sm">
