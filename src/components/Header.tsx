@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '$/components/Button/Button';
+import { Button } from '$/components/Button';
 import { Link } from '../components/Link';
 import { Popover } from './Popover';
 import { useRouter } from 'next/router';
@@ -46,9 +46,9 @@ export function Header(): JSX.Element {
     console.error('Get current user error: ', error);
   }
   return (
-    <header className="sm:sticky sm:top-0 sm:left-0 header w-full border-b border-divider transition duration-150 sm:z-20 py-2">
-      <div className="layout mx-auto">
-        <section className="flex flex-row justify-between items-center">
+    <header className="w-full py-2 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 header border-divider sm:z-20">
+      <div className="mx-auto layout">
+        <section className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center space-x-2">
             <Heading as="h3" className="flex items-center font-bold">
               <Link href="/">ZOO</Link>
