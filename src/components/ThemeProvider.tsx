@@ -10,27 +10,28 @@ export type ThemeProviderProps = {
 };
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const { resolvedTheme } = useTheme();
-  const { light, dark } = React.useMemo(() => getThemeCSSVariables(props.colorModes), [
-    props.colorModes,
-  ]);
-  // Update theme CSS variables
+  // Set theme CSS variables
   React.useEffect(() => {
-    if (resolvedTheme === 'dark') {
-      setColorModeCSSVariable(dark);
-    } else {
-      setColorModeCSSVariable(light);
-    }
-  }, [resolvedTheme, light, dark]);
+    const style = document.createElement('style');
+    style.appendChild(
+      document.createTextNode(`.light {
+      ${getColorModeCSSVariable(props.colorModes.light)
+        .map(([key, value]) => `--colors-${key}: ${value};`)
+        .join('\n')}
+      }\n`),
+    );
+    style.appendChild(
+      document.createTextNode(`.dark {
+      ${getColorModeCSSVariable(props.colorModes.dark)
+        .map(([key, value]) => `--colors-${key}: ${value};`)
+        .join('\n')}
+      }\n`),
+    );
+
+    document.head.appendChild(style);
+  }, [props.colorModes.light, props.colorModes.dark]);
 
   return <>{props.children}</>;
-}
-
-function setColorModeCSSVariable(colors: CSSVariables) {
-  const root = document.documentElement;
-  for (const [key, value] of colors) {
-    root.style.setProperty(`--colors-${key}`, value);
-  }
 }
 
 export type ThemeCSSVariables = {
