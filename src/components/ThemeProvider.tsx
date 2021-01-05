@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTheme } from 'next-themes';
 import * as CSS from 'csstype';
 
 import { ITheme, Colors, ObjectOf } from '$/types/theme.type';
