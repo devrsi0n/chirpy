@@ -1799,6 +1799,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "userId_commentId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LikeUserIdCommentIdCompoundUniqueInput",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
@@ -2390,6 +2400,45 @@
               "kind": "INPUT_OBJECT",
               "name": "CommentUpdateManyWithoutParentInput",
               "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LikeUserIdCommentIdCompoundUniqueInput",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "commentId",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }

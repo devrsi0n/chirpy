@@ -270,6 +270,7 @@ export type CommentWhereUniqueInput = {
 
 export type LikeWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
+  userId_commentId?: Maybe<LikeUserIdCommentIdCompoundUniqueInput>;
 };
 
 export type UserWhereUniqueInput = {
@@ -339,6 +340,11 @@ export type CommentUpdateInput = {
   parent?: Maybe<CommentUpdateOneWithoutCommentInput>;
   likes?: Maybe<LikeUpdateManyWithoutCommentInput>;
   Comment?: Maybe<CommentUpdateManyWithoutParentInput>;
+};
+
+export type LikeUserIdCommentIdCompoundUniqueInput = {
+  userId: Scalars['String'];
+  commentId: Scalars['String'];
 };
 
 export type StringFilter = {
