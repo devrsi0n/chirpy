@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 
 import { Button } from '$/components/Button';
-import { Link } from '../components/Link';
-import { Popover } from './Popover';
-import { useRouter } from 'next/router';
-import { Heading } from './Heading';
-import { Avatar } from './Avatar';
-import { Text } from './Text';
-import { layoutStyle } from './styles';
+import { Link } from '$/components/Link';
+import { Popover } from '$/components/Popover';
+import { Heading } from '$/components/Heading';
+import { Avatar } from '$/components/Avatar';
+import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Select } from './Select';
+import { Select } from '$/components/Select';
 import { CurrentUserQuery } from '$/generated/graphql';
-import { SlashIcon } from './Icons/Slash.Icon';
+import { SlashIcon } from '$/components/Icons/Slash.Icon';
+
+import styles from './style.module.scss';
+import clsx from 'clsx';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -46,7 +48,12 @@ export function Header(): JSX.Element {
     console.error('Get current user error: ', error);
   }
   return (
-    <header className="w-full py-2 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 header border-divider sm:z-20">
+    <header
+      className={clsx(
+        'w-full py-2 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20',
+        styles.header,
+      )}
+    >
       <div className="mx-auto layout">
         <section className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center space-x-2">
@@ -91,14 +98,6 @@ export function Header(): JSX.Element {
           </nav>
         </section>
       </div>
-      <style jsx>
-        {`
-          .header {
-            backdrop-filter: blur(10px);
-          }
-        `}
-      </style>
-      <style jsx>{layoutStyle}</style>
     </header>
   );
 }

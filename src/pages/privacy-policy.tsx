@@ -4,7 +4,7 @@ import { Link } from '$/components/Link';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
 import { List } from '$/components/List';
-import { Layout } from '$/components/Layout/Layout';
+import { Layout } from '$/components/Layout';
 
 export default function PrivacyPolicy(): JSX.Element {
   return (
@@ -121,13 +121,6 @@ export default function PrivacyPolicy(): JSX.Element {
             </Text>
           </div>
         </article>
-        <style jsx>
-          {`
-            .article > * {
-              margin-bottom: theme('padding.10');
-            }
-          `}
-        </style>
       </section>
     </Layout>
   );

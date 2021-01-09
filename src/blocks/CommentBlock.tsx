@@ -2,7 +2,7 @@ import * as React from 'react';
 import dayjs from 'dayjs';
 import { Node } from 'slate';
 
-import { MessageIcon } from '$/components/Icons/Message.Icon';
+import { MessageIcon } from '$/components/Icons';
 import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
 import { RichTextEditor } from './RichTextEditor';

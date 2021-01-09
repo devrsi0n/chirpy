@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 
 import { Heading } from '$/components/Heading';
 import { Button } from '$/components/Button';
-import { Text } from '$/components/Text';
+import { Text } from '$/components/Text/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Layout } from '$/components/Layout/Layout';
+import { Layout } from '$/components/Layout';
 
 function Home(): JSX.Element {
   const { data } = useCurrentUser();

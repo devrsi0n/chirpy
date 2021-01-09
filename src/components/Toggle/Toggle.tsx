@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Switch } from '@headlessui/react';
 
-import { Text, TextProps } from './Text';
+import { Text, TextProps } from '../Text/Text';
 
 export type ToggleProps = {
   label: string;
