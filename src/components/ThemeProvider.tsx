@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as CSS from 'csstype';
+import Head from 'next/head';
 
 import { ITheme, Colors, ObjectOf } from '$/types/theme.type';
 
@@ -9,28 +10,27 @@ export type ThemeProviderProps = {
 };
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  // Set theme CSS variables
-  React.useEffect(() => {
-    const style = document.createElement('style');
-    style.appendChild(
-      document.createTextNode(`.light {
-      ${getColorModeCSSVariable(props.colorModes.light)
-        .map(([key, value]) => `--colors-${key}: ${value};`)
-        .join('\n')}
-      }\n`),
-    );
-    style.appendChild(
-      document.createTextNode(`.dark {
-      ${getColorModeCSSVariable(props.colorModes.dark)
-        .map(([key, value]) => `--colors-${key}: ${value};`)
-        .join('\n')}
-      }\n`),
-    );
+  return (
+    <>
+      <Head>
+        <style>
+          {`.light {
+              ${getColorModeCSSVariable(props.colorModes.light)
+                .map(([key, value]) => `--colors-${key}: ${value};`)
+                .join('\n')}
+            }
 
-    document.head.appendChild(style);
-  }, [props.colorModes.light, props.colorModes.dark]);
-
-  return <>{props.children}</>;
+            .dark {
+              ${getColorModeCSSVariable(props.colorModes.dark)
+                .map(([key, value]) => `--colors-${key}: ${value};`)
+                .join('\n')}
+            }
+          `}
+        </style>
+      </Head>
+      {props.children}
+    </>
+  );
 }
 
 export type ThemeCSSVariables = {
