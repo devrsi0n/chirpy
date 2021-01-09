@@ -33,19 +33,15 @@ const BaseButton = React.forwardRef(function BaseButton(
   return (
     <button
       {...allProps}
-      className={clsx('btn', className)}
+      className={clsx(
+        'relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out',
+        className,
+      )}
       onMouseDown={handleMouseDown}
       onClick={onClick}
       ref={_ref}
     >
       {children}
-      <style jsx>{`
-        .btn {
-          @apply relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out;
-          -webkit-tap-highlight-color: transparent;
-          -webkit-appearance: none;
-        }
-      `}</style>
     </button>
   );
 });

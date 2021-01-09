@@ -10,7 +10,7 @@ import { Dialog, DialogFooter } from '$/components/Dialog';
 import { TextField } from '$/components/TextField';
 import { useRouter } from 'next/router';
 import { Text } from '$/components/Text';
-import { Layout } from '$/components/Layout/Layout';
+import { Layout } from '$/components/Layout';
 
 export default function Dashboard(): JSX.Element {
   const { data, isLogin, refetch } = useCurrentUser();

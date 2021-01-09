@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSlate } from 'slate-react';
-import { BoldIcon } from '$/components/Icons/Bold.Icon';
-import { ItalicIcon } from '$/components/Icons/Italic.Icon';
+import { BoldIcon } from '$/components/Icons';
+import { ItalicIcon } from '$/components/Icons';
 import Underline from '@geist-ui/react-icons/underline';
 import { Format, Icon } from './type';
 import { isBlockActive, isMarkActive, toggleBlock, toggleMark } from './utilities';

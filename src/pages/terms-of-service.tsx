@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Link } from '$/components/Link';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
-import { Layout } from '$/components/Layout/Layout';
+import { Layout } from '$/components/Layout';
 
 export default function TermsOfService(): JSX.Element {
   return (
@@ -123,13 +123,6 @@ export default function TermsOfService(): JSX.Element {
             </Text>
           </div>
         </article>
-        <style jsx>
-          {`
-            .article > * {
-              margin-bottom: theme('padding.8');
-            }
-          `}
-        </style>
       </section>
     </Layout>
   );

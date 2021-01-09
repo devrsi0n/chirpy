@@ -1,9 +1,9 @@
 import * as React from 'react';
-
-import { DropDownMenu } from '$/components/Button/DropDownMenu';
-import { GoogleIcon } from '$/components/Icons/GoogleIcon';
-import { GitHubIcon } from '$/components/Icons/GitHubIcon';
 import { useRouter } from 'next/router';
+
+import { DropDownMenu } from '$/components/Button';
+import { GoogleIcon } from '$/components/Icons';
+import { GitHubIcon } from '$/components/Icons';
 
 export type DropDownLoginProps = {
   //

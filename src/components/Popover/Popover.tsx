@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useClickOutside } from '../hooks/useOutside';
+import { useClickOutside } from '../../hooks/useOutside';
 
 interface IPopoverProps {
   children: React.ReactNode;

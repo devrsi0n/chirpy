@@ -2,9 +2,8 @@ import * as React from 'react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '$/components/Button';
-import { Link } from '../components/Link';
-import { layoutStyle } from './styles';
-import { ColorMode } from '../types/theme.type';
+import { Link } from '../Link/Link';
+import { ColorMode } from '../../types/theme.type';
 import { useMounted } from '$/hooks/useMounted';
 
 const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
@@ -43,7 +42,6 @@ export function Footer(): JSX.Element {
           {theme}
         </Button>
       )}
-      <style jsx>{layoutStyle}</style>
     </footer>
   );
 }

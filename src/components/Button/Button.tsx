@@ -6,6 +6,8 @@ import { SettingIcon } from '../Icons/Setting.Icon';
 import { MoonIcon } from '../Icons/Moon.Icon';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
+import styles from './style.module.scss';
+
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' /*| 'secondary'*/;
 type Variant = 'solid' | 'borderless' /*| 'ghost' */;
@@ -139,7 +141,10 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   }, [onCompleted]);
 
   return (
-    <div ref={dripRef} className="absolute left-0 right-0 top-0 bottom-0">
+    <div
+      ref={dripRef}
+      className={clsx('absolute top-0 bottom-0 left-0 right-0', styles.buttonDrip)}
+    >
       <svg
         width="20"
         height="20"
@@ -153,32 +158,6 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
           </g>
         </g>
       </svg>
-
-      <style jsx>{`
-        svg {
-          animation: 250ms ease-in expand;
-          animation-fill-mode: forwards;
-        }
-        svg > g > g {
-          fill: theme('colors.gray.100');
-        }
-        @keyframes expand {
-          0% {
-            opacity: 0;
-            transform: scale(1);
-          }
-          30% {
-            opacity: 1;
-          }
-          80% {
-            opacity: 0.5;
-          }
-          100% {
-            transform: scale(28);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   );
 }

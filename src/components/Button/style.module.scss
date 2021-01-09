@@ -1,0 +1,25 @@
+.buttonDrip {
+  animation: expand 250ms ease-in;
+  animation-fill-mode: forwards;
+
+  & > g > g {
+    fill: theme('colors.gray.100');
+  }
+}
+
+@keyframes expand {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(28);
+    opacity: 0;
+  }
+}
