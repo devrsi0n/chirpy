@@ -22,5 +22,7 @@ const customConfig = {
 
 module.exports = withPlugins(
   [[withBundleAnalyzer(customConfig)]],
-  // customConfig
+  {
+    // experimental: { modern: true }
+  }
 );
