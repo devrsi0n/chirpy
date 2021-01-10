@@ -8,10 +8,10 @@ import {
 } from 'next';
 import Head from 'next/head';
 import { ApolloQueryResult } from '@apollo/client';
-
-import { MemoCommentBlock } from '$/blocks/CommentBlock';
-import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Node } from 'slate';
+
+import { MemoCommentBlock } from '$/blocks/CommentBlock/CommentBlock';
+import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Tabs } from '$/components/Tabs';
 import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
@@ -23,8 +23,8 @@ import {
   CommentsByPageDocument,
   useCreateOneReplyMutation,
 } from '$/generated/graphql';
-import { DropDownLogin } from '$/blocks/DropDownLogin';
-import { DropDownUser } from '$/blocks/DropDownUser';
+import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
+import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { initializeApollo } from '$/lib/apollo-client';
 import { CommentByPage } from '$/types/widget';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
@@ -183,7 +183,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
         }
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
-          <div className="space-y-2">
+          <div className="space-y-4">
             <div className="space-y-2">
               <RichTextEditor
                 {...{

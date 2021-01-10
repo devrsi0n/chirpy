@@ -3,8 +3,8 @@ import '../styles/utilities.css';
 import '../styles/common.scss';
 import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 
 import { ThemeProvider } from '$/components/ThemeProvider';

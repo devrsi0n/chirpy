@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-type Size = 'sm' | 'md' | 'lg';
+type Size = 'sm' | 'md' | 'lg' | 'xl';
 
 export type AvatarProps = React.PropsWithChildren<
   {
@@ -13,7 +13,8 @@ export type AvatarProps = React.PropsWithChildren<
 const sizeStyles: Record<Size, string> = {
   sm: 'w-4 h-4',
   md: 'w-8 h-8',
-  lg: 'w-16 h-16',
+  lg: 'w-12 h-12',
+  xl: 'w-16 h-16',
 };
 
 export function Avatar({
