@@ -9,6 +9,7 @@
     "build:local": "dotenv -e .env.development -- yarn run build",
     "analyze": "ANALYZE=true yarn run build:local",
     "start": "next start",
+    "start:local": "dotenv -e .env.development -- next start",
     "migrate:dev": "dotenv -e .env.development -- prisma migrate dev --preview-feature",
     "studio": "dotenv -e .env.development -- prisma studio",
     "g:prisma": "prisma generate",
