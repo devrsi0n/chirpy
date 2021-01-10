@@ -13,7 +13,6 @@ import { Node } from 'slate';
 import { MemoCommentBlock } from '$/blocks/CommentBlock/CommentBlock';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Tabs } from '$/components/Tabs';
-import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
@@ -59,32 +58,34 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
   }
   const { isLogin, data: userData } = useCurrentUser();
   const currentUserId = userData?.currentUser?.id;
-  const [input, setInput] = React.useState<Node[]>();
 
   const [createOneComment] = useCreateOneCommentMutation();
 
-  const handleSubmit = React.useCallback(async () => {
-    if (!currentUserId) {
-      console.error('login first');
-      return;
-    }
-    const { data } = await createOneComment({
-      variables: {
-        pageId,
-        content: input,
-        userId: currentUserId,
-      },
-    });
-    if (data?.createOneComment.id) {
-      setComments((prev) => [
-        ...prev,
-        {
-          ...data!.createOneComment,
-          replies: [],
+  const handleSubmit = React.useCallback(
+    async (content: Node[]) => {
+      if (!currentUserId) {
+        console.error('login first');
+        return;
+      }
+      const { data } = await createOneComment({
+        variables: {
+          pageId,
+          content,
+          userId: currentUserId,
         },
-      ]);
-    }
-  }, [input, pageId, currentUserId, createOneComment]);
+      });
+      if (data?.createOneComment.id) {
+        setComments((prev) => [
+          ...prev,
+          {
+            ...data!.createOneComment,
+            replies: [],
+          },
+        ]);
+      }
+    },
+    [pageId, currentUserId, createOneComment],
+  );
 
   const [createOneLike] = useCreateOneLikeMutation();
   const [deleteOneLike] = useDeleteOneLikeMutation();
@@ -183,27 +184,12 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
         }
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
-          <div className="space-y-4">
+          <div className="space-y-5">
             <div className="space-y-2">
               <RichTextEditor
-                {...{
-                  ...(!isLogin && {
-                    disabled: true,
-                    placeholder: [
-                      {
-                        type: 'paragraph',
-                        children: [{ text: `Please login first.` }],
-                      },
-                    ],
-                  }),
-                }}
-                value={input}
-                onChange={setInput}
-                className="bg-gray-100"
+                onSubmit={handleSubmit}
+                submitButtonLabel={!isLogin ? 'Login' : undefined}
               />
-              <div className="flex flex-row justify-end">
-                {isLogin ? <Button onClick={handleSubmit}>Submit</Button> : <Button>Login</Button>}
-              </div>
             </div>
             {comments?.map((comment: CommentByPage) => (
               <MemoCommentBlock

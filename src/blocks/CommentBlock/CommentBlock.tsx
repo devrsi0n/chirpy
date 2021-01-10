@@ -7,7 +7,7 @@ import { Avatar } from '$/components/Avatar';
 import { Text } from '$/components/Text';
 import { RichTextEditor } from '../RichTextEditor';
 import { ActionButton } from '$/components/Button';
-import { Button } from '$/components/Button';
+
 import { CommentByPage } from '$/types/widget';
 import { LikeAction, LikeActionProps } from '../LikeAction/LikeAction';
 
@@ -30,17 +30,15 @@ function CommentBlock({
   const { avatar, name } = author;
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-  const [replyContent, setReplyContent] = React.useState<Node[]>([
-    {
-      type: 'paragraph',
-      children: [{ text: `What are your thoughts?` }],
-    },
-  ]);
   const handlePressReply = React.useCallback(() => {
     setShowReplyEditor((prev) => !prev);
   }, []);
-  const handleSubmitReply = async () => {
+  const handleSubmitReply = async (replyContent: Node[]) => {
     await onSubmitReply(replyContent, commentId);
+    setShowReplyEditor(false);
+    // TODO: Notification
+  };
+  const handleDimissRTE = () => {
     setShowReplyEditor(false);
   };
 
@@ -48,7 +46,7 @@ function CommentBlock({
     <div className="space-y-1">
       <section className="flex flex-row items-start px-6 py-4 space-x-3 bg-gray-100 rounded-lg shadow-sm">
         <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
-        <div className="flex-1 space-y-2">
+        <div className="flex-1">
           <div className="flex flex-row items-baseline space-x-4 leading-none">
             <Text bold>{name}</Text>
             <Text
@@ -59,8 +57,8 @@ function CommentBlock({
               {dayjs(createdAt).fromNow()}
             </Text>
           </div>
-          <div>
-            <RichTextEditor value={content} readOnly />
+          <div className="mt-2">
+            <RichTextEditor initialValue={content} readOnly />
           </div>
           <div className="flex flex-row items-center space-x-6 transform -translate-x-2">
             <LikeAction
@@ -84,23 +82,19 @@ function CommentBlock({
             />
           </div>
           {showReplyEditor && (
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 bg-white">
               <RichTextEditor
-                value={replyContent}
-                placeholder={[
+                initialValue={[
                   {
                     type: 'paragraph',
                     children: [{ text: `What are your thoughts?` }],
                   },
                 ]}
-                onChange={setReplyContent}
-                className="bg-gray-100"
+                onSubmit={handleSubmitReply}
+                styles={{ root: 'px-2' }}
+                showDismissButton
+                onClickDismiss={handleDimissRTE}
               />
-              <div className="flex flex-row justify-end">
-                <Button size="md" onClick={handleSubmitReply}>
-                  Submit
-                </Button>
-              </div>
             </div>
           )}
         </div>

@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 
-import { CheckMarkIcon } from '../Icons/CheckMark.Icon';
-import { ChevronUpDownIcon } from '../Icons/ChevronUpDown.Icon';
+import { CheckMarkIcon } from '../Icons/CheckMarkIcon';
+import { ChevronUpDownIcon } from '../Icons/ChevronUpDownIcon';
 
 export type SelectProps<T> = React.PropsWithChildren<{
   value: T;

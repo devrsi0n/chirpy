@@ -10,7 +10,7 @@ import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
 import { CurrentUserQuery } from '$/generated/graphql';
-import { SlashIcon } from '$/components/Icons/Slash.Icon';
+import { SlashIcon } from '$/components/Icons/SlashIcon';
 
 import styles from './style.module.scss';
 import clsx from 'clsx';
