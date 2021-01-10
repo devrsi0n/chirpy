@@ -1,27 +1,38 @@
 // @refresh reset
 import * as React from 'react';
-import { createEditor, Node } from 'slate';
+import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import clsx from 'clsx';
+import DismissIcon from '@geist-ui/react-icons/x';
 
 import { Leaf } from './Leaf';
 import { Element } from './Element';
 import { RichTextEditorContext } from './RichTextEditorContext';
-
+import { Button } from '$/components/Button';
 import { Toolbar } from './Toolbar';
-import { MarkButton } from './Button';
+import { BaseFormatButton, MarkButton } from './FormatButton';
+import { ClientOnly } from '$/components/ClientOnly';
+import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 
 interface IBaseProps {
-  children?: React.ReactNode;
-  value?: Node[];
-  onChange?(value: Node[]): void;
-  className?: string;
+  onSubmit?: (value: Node[]) => Promise<void>;
+  styles?: {
+    root?: string;
+    editable?: string;
+  };
   readOnly?: boolean;
+  /**
+   * @default 'submit'
+   */
+  submitButtonLabel?: string;
+
+  showDismissButton?: boolean;
+  onClickDismiss?: () => void;
 }
 
 export interface IRichTextEditorProps extends IBaseProps {
   disabled?: boolean;
-  placeholder?: Node[];
+  initialValue?: Node[];
 }
 
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
@@ -39,71 +50,115 @@ const getSavedContent = (): Node[] | undefined => {
 };
 const getValue = (props?: IRichTextEditorProps) => {
   if (props?.disabled) {
-    return props.placeholder || DEFAULT_INPUT;
+    return props.initialValue || DEFAULT_INPUT;
   }
-  if (typeof props?.value !== 'undefined') {
-    return props.value;
-  }
-  return getSavedContent() || props?.placeholder || DEFAULT_INPUT;
+  return props?.initialValue || getSavedContent() || DEFAULT_INPUT;
 };
 
 export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
-  const { onChange, value: _value, readOnly, className, disabled } = props;
-  const value = getValue(props);
-  const handleRTEChange = React.useCallback(
-    (newValue: Node[]) => {
-      if (newValue === _value) {
-        return;
-      }
-      onChange?.(newValue);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
-    },
-    [onChange, _value],
-  );
+  const {
+    onSubmit,
+    readOnly,
+    styles,
+    disabled,
+    submitButtonLabel,
+    showDismissButton,
+    onClickDismiss,
+  } = props;
+  const [value, setValue] = React.useState<Node[]>(() => getValue(props));
+  const handleRTEChange = (newValue: Node[]) => {
+    if (newValue === value) {
+      return;
+    }
+    setValue(newValue);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
+  };
+
   const editor = React.useMemo(() => withReact(createEditor()), []);
   const richTextEditorContext = React.useMemo(() => ({ disabled }), [disabled]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const isUnmountingRef = useIsUnmountingRef();
+  const handleSubmitReply = async () => {
+    setIsLoading(true);
+    await onSubmit?.(value);
+    // Skip setState if this component is unmounting
+    if (isUnmountingRef.current) {
+      return;
+    }
+    setIsLoading(false);
+
+    // Transforms.deselect(editor);
+    Transforms.select(editor, [0]);
+    setValue(DEFAULT_INPUT);
+  };
 
   return (
-    <RichTextEditorContext.Provider value={richTextEditorContext}>
-      <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section className={clsx(disabled && 'cursor-not-allowed')}>
-          {!readOnly && (
-            <Toolbar>
-              <MarkButton format="bold" icon="bold" />
-              <MarkButton format="italic" icon="italic" />
-              <MarkButton format="underline" icon="underline" />
-            </Toolbar>
-          )}
-          <Editable
-            readOnly={readOnly}
-            className={clsx(
-              'rounded-sm border border-transparent focus:border-gray-400',
-              disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
-              !readOnly && 'pb-2 px-2',
-              className,
+    // Only render editor on client because we relay on localStorage
+    <ClientOnly>
+      <RichTextEditorContext.Provider value={richTextEditorContext}>
+        <Slate editor={editor} value={value} onChange={handleRTEChange}>
+          <section
+            className={clsx('py-2 space-y-2', disabled && 'cursor-not-allowed', styles?.root)}
+          >
+            {!readOnly && (
+              <Toolbar className="flex flex-row justify-between">
+                <div>
+                  <MarkButton format="bold" icon="bold" />
+                  <MarkButton format="italic" icon="italic" />
+                  <MarkButton format="underline" icon="underline" />
+                </div>
+                {showDismissButton && (
+                  <div>
+                    <BaseFormatButton onClick={onClickDismiss}>
+                      <DismissIcon size={20} />
+                    </BaseFormatButton>
+                  </div>
+                )}
+              </Toolbar>
             )}
-            style={{
-              ...(!readOnly && {
-                resize: 'vertical',
-                overflowY: 'auto',
-                minHeight: '4em',
-              }),
-            }}
-            renderElement={Element}
-            renderLeaf={Leaf}
-            // onDOMBeforeInput={(event: Event): void => {
-            //   switch ((event as InputEvent).inputType) {
-            //     case 'formatBold':
-            //       return CustomEditor.toggleFormat(editor, 'bold');
-            //     case 'formatItalic':
-            //       return CustomEditor.toggleFormat(editor, 'italic');
-            //     case 'formatUnderline':
-            //       return CustomEditor.toggleFormat(editor, 'underline');
-            //   }
-            // }}
-          />
-        </section>
-      </Slate>
-    </RichTextEditorContext.Provider>
+            <Editable
+              readOnly={readOnly}
+              className={clsx(
+                'rounded-sm border border-transparent focus:border-gray-600',
+                disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
+                !readOnly && 'pb-2 px-2 border-gray-200',
+                styles?.editable,
+              )}
+              style={{
+                ...(!readOnly && {
+                  resize: 'vertical',
+                  overflowY: 'auto',
+                  minHeight: '4em',
+                }),
+              }}
+              renderElement={Element}
+              renderLeaf={Leaf}
+              // onDOMBeforeInput={(event: Event): void => {
+              //   switch ((event as InputEvent).inputType) {
+              //     case 'formatBold':
+              //       return CustomEditor.toggleFormat(editor, 'bold');
+              //     case 'formatItalic':
+              //       return CustomEditor.toggleFormat(editor, 'italic');
+              //     case 'formatUnderline':
+              //       return CustomEditor.toggleFormat(editor, 'underline');
+              //   }
+              // }}
+            />
+            {!readOnly && (
+              <div className="flex flex-row justify-end">
+                <Button
+                  size="md"
+                  onClick={handleSubmitReply}
+                  icon={isLoading ? 'spinner' : undefined}
+                  className={isLoading ? 'cursor-not-allowed' : ''}
+                >
+                  {submitButtonLabel || 'Submit'}
+                </Button>
+              </div>
+            )}
+          </section>
+        </Slate>
+      </RichTextEditorContext.Provider>
+    </ClientOnly>
   );
 }

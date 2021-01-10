@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 import { Button } from '$/components/Button';
 import { Link } from '../Link/Link';
 import { ColorMode } from '../../types/theme.type';
-import { useMounted } from '$/hooks/useMounted';
+import { useHasMounted } from '$/hooks/useHasMounted';
 
 const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
   system: 'setting',
@@ -14,7 +14,7 @@ const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
 
 export function Footer(): JSX.Element {
   const { theme, setTheme } = useTheme();
-  const mounted = useMounted();
+  const hasMounted = useHasMounted();
   const handleClick = React.useCallback(() => {
     if (theme === 'system') {
       setTheme('dark');
@@ -37,7 +37,7 @@ export function Footer(): JSX.Element {
         </Link>
         <Link href="/privacy-policy">Privacy policy</Link>
       </nav>
-      {mounted && icon && theme && (
+      {hasMounted && icon && theme && (
         <Button variant="borderless" className="capitalize" onClick={handleClick} icon={icon}>
           {theme}
         </Button>

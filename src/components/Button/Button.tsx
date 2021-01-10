@@ -1,17 +1,16 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import { SunIcon, ISunIconProps } from '../Icons/Sun.Icon';
-import { SettingIcon } from '../Icons/Setting.Icon';
-import { MoonIcon } from '../Icons/Moon.Icon';
+import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 import styles from './style.module.scss';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' /*| 'secondary'*/;
+// TODO: New variant 'plain'
 type Variant = 'solid' | 'borderless' /*| 'ghost' */;
-type Icon = 'sun' | 'moon' | 'setting';
+type Icon = 'sun' | 'moon' | 'setting' | 'spinner';
 
 export type IButtonProps = BaseButtonProps & {
   /**
@@ -35,6 +34,7 @@ const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
   sun: SunIcon,
   moon: MoonIcon,
   setting: SettingIcon,
+  spinner: SpinnerIcon,
 };
 
 const sizeStyles: Record<Size, string> = {
