@@ -50,33 +50,53 @@ export function Header(): JSX.Element {
   return (
     <header
       className={clsx(
-        'w-full py-2 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20',
+        'w-full py-5 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20',
         styles.header,
       )}
     >
       <div className="mx-auto layout">
         <section className="flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center space-x-2">
-            <Heading as="h3" className="flex items-center font-bold">
-              <Link href="/">ZOO</Link>
-            </Heading>
-            {!!data?.currentUser?.projects?.length && selectedProject && (
-              <>
-                <SlashIcon className="text-gray-400" />
-                <Select
-                  value={selectedProject?.id}
-                  name={selectedProject?.name}
-                  onChange={handleSelectProject}
-                  className="w-32 sm:w-40"
-                >
-                  {data?.currentUser?.projects.map((project: Project) => (
-                    <Select.Option key={project.id} value={project.id}>
-                      {project.name}
-                    </Select.Option>
-                  ))}
-                </Select>
-              </>
-            )}
+          <div className="flex flex-row">
+            <div className="flex flex-row items-center space-x-2">
+              <Heading as="h3" className="flex items-center font-bold">
+                <Link href="/">
+                  <Text className="text-xl font-black leading-none select-none">Echo</Text>
+                </Link>
+              </Heading>
+              {router.pathname === '/dashboard' &&
+                !!data?.currentUser?.projects?.length &&
+                selectedProject && (
+                  <>
+                    <SlashIcon className="text-gray-400" />
+                    <Select
+                      value={selectedProject?.id}
+                      name={selectedProject?.name}
+                      onChange={handleSelectProject}
+                      className="w-32 sm:w-40"
+                    >
+                      {data?.currentUser?.projects.map((project: Project) => (
+                        <Select.Option key={project.id} value={project.id}>
+                          {project.name}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </>
+                )}
+            </div>
+            <nav className="flex flex-wrap items-center mb-5 space-x-5 md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
+              <Link href="/" className="font-medium" highlightMatch>
+                Home
+              </Link>
+              <Link href="/doc" className="font-medium" highlightMatch>
+                Documents
+              </Link>
+              <Link href="/pricing" className="font-medium" highlightMatch>
+                Pricing
+              </Link>
+              <Link href="/blog" className="font-medium" highlightMatch>
+                Blog
+              </Link>
+            </nav>
           </div>
           <nav className="flex flex-row items-center h-full">
             {loading && <Text>Loading...</Text>}
@@ -93,7 +113,9 @@ export function Header(): JSX.Element {
                 </figure>
               </Popover>
             ) : (
-              <Link href="/login">Login</Link>
+              <Link href="/login">
+                <Button className="">Log in</Button>
+              </Link>
             )}
           </nav>
         </section>

@@ -58,8 +58,7 @@ type VariantColors = {
 };
 
 const variantColors: VariantColors = {
-  'solid-primary':
-    'bg-purple-500 text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
+  'solid-primary': 'bg-purple-600 text-text-inverse border border-primary hover:bg-purple-500',
   'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary',
 };
 
@@ -105,7 +104,7 @@ export function Button(props: IButtonProps): JSX.Element {
         className={clsx(
           sizeStyles[size],
           variantColors[variantColor],
-          { 'shadow-md transform hover:-translate-y-1': shadow, rounded: rounded },
+          { 'shadow-md': shadow, rounded: rounded },
           disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
           className,
         )}
