@@ -1,13 +1,18 @@
 import * as React from 'react';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 
 type Variant = 'xs' | 'sm' | 'md' | 'lg';
 
 type LinkProps = React.PropsWithChildren<
   NextLinkProps &
-    React.ComponentProps<'a'> & {
+    React.ComponentPropsWithoutRef<'a'> & {
       variant?: Variant;
+      /**
+       * Hightlight the link when href match the current url
+       */
+      highlightMatch?: boolean;
     }
 >;
 
@@ -30,15 +35,19 @@ export function Link(props: LinkProps): JSX.Element {
     prefetch,
     className = '',
     children,
+    highlightMatch,
     ...restProps
   } = props;
+  const router = useRouter();
+  const isCurrentURL = highlightMatch && router.pathname === href;
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch, className }}>
       <a
         {...restProps}
         className={clsx(
-          `text-primary hover:text-text transition duration-150 ease-in-out`,
+          `text-gray-600 hover:text-primary transition duration-150 ease-in-out`,
           variant && variantStyles[variant],
+          isCurrentURL && 'text-primary-dark',
           className,
         )}
       >
