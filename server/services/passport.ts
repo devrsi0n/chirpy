@@ -168,5 +168,5 @@ export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiRes
   console.error(req.query);
   console.error(req.env);
 
-  res.status(500).end('zoo error: ' + err.toString());
+  res.status(500).end(`${process.env.NEXT_PUBLIC_APP_NAME} error: ${err.toString()}`);
 };

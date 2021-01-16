@@ -11,7 +11,7 @@ export function Layout(props: ILayoutProps): JSX.Element {
   return (
     <div className={`flex flex-col items-center`}>
       <Header />
-      <div className="py-10">{props.children}</div>
+      <div className="py-10 main-container">{props.children}</div>
       <Footer />
     </div>
   );
