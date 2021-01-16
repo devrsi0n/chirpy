@@ -79,6 +79,9 @@ module.exports = {
           900: 'var(--colors-gray-900)',
         },
       },
+      screens: {
+        xs: '375px',
+      },
       outlineWidth: {
         DEFAULT: '1px',
         0: '0',

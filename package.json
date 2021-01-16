@@ -29,14 +29,14 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.3.6",
+    "@apollo/client": "^3.3.7",
     "@geist-ui/react-icons": "^1.0.1",
     "@hapi/iron": "^6.0.0",
     "@headlessui/react": "^0.2.0",
     "@next/bundle-analyzer": "^10.0.5",
     "@prisma/client": "~2.14.0",
     "@react-aria/button": "^3.3.0",
-    "apollo-server-micro": "^2.19.1",
+    "apollo-server-micro": "^2.19.2",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",
     "cors": "^2.8.5",

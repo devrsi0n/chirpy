@@ -11,9 +11,12 @@ import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
 import { CurrentUserQuery } from '$/generated/graphql';
 import { SlashIcon } from '$/components/Icons/SlashIcon';
+import Menu from '@geist-ui/react-icons/menu';
+import Dismiss from '@geist-ui/react-icons/x';
 
 import styles from './style.module.scss';
 import clsx from 'clsx';
+import { BaseButton } from '../Button/BaseButton';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -40,6 +43,11 @@ export function Header(): JSX.Element {
     [data?.currentUser?.projects],
   );
 
+  const [showMenu, setShowMenu] = React.useState(false);
+  const handleClickMenu = React.useCallback(() => {
+    setShowMenu((prev) => !prev);
+  }, []);
+
   const router = useRouter();
   const handleClick = React.useCallback(() => {
     router.push('/api/auth/logout');
@@ -54,9 +62,16 @@ export function Header(): JSX.Element {
         styles.header,
       )}
     >
-      <div className="mx-auto layout">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section className="flex flex-row items-center justify-between">
-          <div className="flex flex-row">
+          <div className="flex items-center sm:hidden pl-3">
+            <BaseButton aria-expanded={false} onClick={handleClickMenu}>
+              <span className="sr-only">Open navigation menu</span>
+              <Menu className={clsx({ hidden: showMenu })} />
+              <Dismiss className={clsx({ hidden: !showMenu })} />
+            </BaseButton>
+          </div>
+          <div className="flex flex-row sm:items-stretch sm:justify-start">
             <div className="flex flex-row items-center space-x-2">
               <Heading as="h3" className="flex items-center font-bold">
                 <Link href="/">
@@ -83,12 +98,12 @@ export function Header(): JSX.Element {
                   </>
                 )}
             </div>
-            <nav className="flex flex-wrap items-center mb-5 space-x-5 md:mb-0 md:pl-8 md:ml-8 md:border-l md:border-gray-200">
+            <nav className="w-full hidden sm:flex flex-wrap items-center mb-5 space-x-5 sm:mb-0 sm:pl-8 sm:ml-8 sm:border-l sm:border-gray-200">
               <Link href="/" className="font-medium" highlightMatch>
                 Home
               </Link>
               <Link href="/doc" className="font-medium" highlightMatch>
-                Documents
+                Doc
               </Link>
               <Link href="/pricing" className="font-medium" highlightMatch>
                 Pricing
@@ -98,7 +113,7 @@ export function Header(): JSX.Element {
               </Link>
             </nav>
           </div>
-          <nav className="flex flex-row items-center h-full">
+          <div className="flex">
             {loading && <Text>Loading...</Text>}
             {data?.currentUser?.avatar ? (
               <Popover
@@ -114,11 +129,29 @@ export function Header(): JSX.Element {
               </Popover>
             ) : (
               <Link href="/login">
-                <Button className="">Log in</Button>
+                <Button className="">Sign in</Button>
               </Link>
             )}
-          </nav>
+          </div>
         </section>
+      </div>
+      <div className="w-full">
+        <nav
+          className={clsx('flex w-full flex-col px-2 pt-2 pb-3 space-y-1', { hidden: !showMenu })}
+        >
+          <Link href="/" className="font-medium px-3 py-2" highlightMatch>
+            Home
+          </Link>
+          <Link href="/doc" className="font-medium px-3 py-2" highlightMatch>
+            Documents
+          </Link>
+          <Link href="/pricing" className="font-medium px-3 py-2" highlightMatch>
+            Pricing
+          </Link>
+          <Link href="/blog" className="font-medium px-3 py-2" highlightMatch>
+            Blog
+          </Link>
+        </nav>
       </div>
     </header>
   );
