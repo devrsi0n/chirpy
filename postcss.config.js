@@ -23,9 +23,9 @@ module.exports = {
     'tailwindcss': {},
     'postcss-flexbugs-fixes': {},
     'postcss-preset-env': {
-        autoprefixer: isProd ? {
+        autoprefixer: {
           flexbox: 'no-2009',
-        } : false,
+        },
         stage: 3,
         features: {
           'custom-properties': false,
