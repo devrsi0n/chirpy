@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useTheme } from 'next-themes';
 
 import { Button } from '$/components/Button';
+import { Text } from '$/components/Text';
 import { Link } from '../Link/Link';
 import { ColorMode } from '../../types/theme.type';
 import { useHasMounted } from '$/hooks/useHasMounted';
@@ -27,21 +28,24 @@ export function Footer(): JSX.Element {
 
   const icon = icons[(theme as ColorMode) || 'system'];
   return (
-    <footer className="flex flex-col items-start justify-between py-10 my-10 transition duration-150 border-t sm:items-center sm:flex-row border-divider layout footer">
-      <nav className="flex flex-col mb-8 sm:mb-0 sm:flex-row">
-        <Link href="/" className="mb-6 mr-0 sm:mr-8 sm:mb-0">
-          &copy; 2020 ZOO
-        </Link>
-        <Link href="/terms-of-service" className="mb-6 mr-0 sm:mr-8 sm:mb-0">
-          Terms of Service
-        </Link>
-        <Link href="/privacy-policy">Privacy policy</Link>
+    <footer className="w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-divider footer text-text">
+      <nav className="flex flex-row flex-wrap justify-center w-full space-x-6 leading-8">
+        <Link href="/about">About</Link>
+        <Link href="/blog">Blog</Link>
+        <Link href="/pricing">Pricing</Link>
+        <Link href="/terms-of-service">Terms</Link>
+        <Link href="/privacy-policy">Privacy</Link>
       </nav>
-      {hasMounted && icon && theme && (
-        <Button variant="borderless" className="capitalize" onClick={handleClick} icon={icon}>
-          {theme}
-        </Button>
-      )}
+      <div className="flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-3 xs:flex-row">
+        <Text variant="sm" className="text-gray-500">
+          &copy; 2021 Chain Labs. All rights reserved.
+        </Text>
+        {hasMounted && icon && theme && (
+          <Button variant="borderless" className="capitalize" onClick={handleClick} icon={icon}>
+            {theme}
+          </Button>
+        )}
+      </div>
     </footer>
   );
 }

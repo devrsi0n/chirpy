@@ -55,14 +55,14 @@
     color: var(--colors-background);
     background: var(--colors-primary);
   }
-}
 
-input:focus {
-  outline: none;
-}
+  input:focus {
+    outline: none;
+  }
 
-* {
-  text-rendering: optimizeLegibility;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-appearance: none;
+  * {
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+  }
 }

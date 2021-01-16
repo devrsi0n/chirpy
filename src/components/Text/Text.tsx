@@ -48,7 +48,7 @@ export function Text({
     <Tag
       {...restProps}
       className={clsx(
-        'text-sans text-text',
+        'text-sans',
         variantStyles[variant],
         bold && 'font-bold',
         italic && 'italic',
