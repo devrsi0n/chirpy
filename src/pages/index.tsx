@@ -18,12 +18,12 @@ function Home(): JSX.Element {
     <Layout>
       <main>
         <Head>
-          <title>ZOO</title>
+          <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
         </Head>
         <Heading as="h1" className="text-center">
-          Welcome to ZOO!
+          Welcome to {process.env.NEXT_PUBLIC_APP_NAME}!
         </Heading>
-        <Text className="py-6">ZOO is a comment service.</Text>
+        <Text className="py-6">{process.env.NEXT_PUBLIC_APP_NAME} is a comment service.</Text>
         {data?.currentUser ? (
           <Button onClick={handleClickDashboard}>Dashboard</Button>
         ) : (

@@ -11,7 +11,10 @@ module.exports = {
         // transparent: 'transparent',
         // current: 'currentColor',
         // black: '#000',
-        white: 'var(--colors-white)',
+        white: {
+          light: 'var(--colors-white-light)',
+          DEFAULT: 'var(--colors-white)',
+        },
   
         primary: {
           light: 'var(--colors-primary-light)',

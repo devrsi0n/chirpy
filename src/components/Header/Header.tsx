@@ -58,7 +58,7 @@ export function Header(): JSX.Element {
   return (
     <header
       className={clsx(
-        'w-full py-5 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20',
+        'w-full py-5 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20 bg-white-light',
         styles.header,
       )}
     >
@@ -75,7 +75,9 @@ export function Header(): JSX.Element {
             <div className="flex flex-row items-center space-x-2">
               <Heading as="h3" className="flex items-center font-bold">
                 <Link href="/">
-                  <Text className="text-xl font-black leading-none select-none">Echo</Text>
+                  <Text className="text-xl font-black leading-none select-none">
+                    {process.env.NEXT_PUBLIC_APP_NAME}
+                  </Text>
                 </Link>
               </Heading>
               {router.pathname === '/dashboard' &&
