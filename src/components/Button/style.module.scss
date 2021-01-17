@@ -2,8 +2,8 @@
   animation: expand 250ms ease-in;
   animation-fill-mode: forwards;
 
-  & > g > g {
-    fill: theme('colors.gray.100');
+  svg > g > g {
+    fill: theme('colors.gray.300');
   }
 }
 

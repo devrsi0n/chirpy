@@ -1,16 +1,13 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 import styles from './style.module.scss';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Color = 'primary' /*| 'secondary'*/;
-// TODO: New variant 'plain'
-type Variant = 'solid' | 'borderless' /*| 'ghost' */;
-type Icon = 'sun' | 'moon' | 'setting' | 'spinner';
+type Color = 'purple' | 'gray';
+type Variant = 'solid' | 'plain' /*| 'ghost' */;
 
 export type IButtonProps = BaseButtonProps & {
   /**
@@ -21,20 +18,12 @@ export type IButtonProps = BaseButtonProps & {
   color?: Color;
   disabled?: boolean;
   size?: Size;
-  icon?: Icon;
   shadow?: boolean;
   /**
    * @default true
    */
   rounded?: boolean;
   onClick?: () => void;
-};
-
-const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
-  sun: SunIcon,
-  moon: MoonIcon,
-  setting: SettingIcon,
-  spinner: SpinnerIcon,
 };
 
 const sizeStyles: Record<Size, string> = {
@@ -51,26 +40,21 @@ const sizeStyles: Record<Size, string> = {
 //   // text: 'text-text border-none hover:text-text-light',
 // };
 
-type VariantColor = `${Variant}-${Color}`;
+const getVariantStyles = (variant: Variant, color: Color): string =>
+  ({
+    solid: `bg-${color}-600 text-text-inverse border border-${color}-700 hover:bg-${color}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`,
+    plain: `bg-white text-${color}-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`,
+  }[variant]);
 
-type VariantColors = {
-  [index in VariantColor]: string;
-};
-
-const variantColors: VariantColors = {
-  'solid-primary': 'bg-purple-600 text-text-inverse border border-primary hover:bg-purple-500',
-  'borderless-primary': 'bg-background text-primary border border-transparent hover:border-primary',
-};
-
+// TODO: Fix click drip animation and extract it to the base button
 export function Button(props: IButtonProps): JSX.Element {
   const {
-    variant = 'solid',
-    color = 'primary',
+    variant = 'plain',
+    color = 'gray',
     disabled = false,
     size = 'md',
     className = '',
-    icon,
-    shadow = false,
+    shadow = true,
     rounded = 'true',
     onClick,
     children,
@@ -94,23 +78,21 @@ export function Button(props: IButtonProps): JSX.Element {
       setDripY(event.clientY - rect.top);
     }
   }, []);
-  const Icon = icon ? icons[icon] : null;
-  const variantColor: VariantColor = `${variant}-${color}` as VariantColor;
   return (
     <>
       <BaseButton
         {...restProps}
         ref={buttonRef}
         className={clsx(
+          'focus:outline-none',
           sizeStyles[size],
-          variantColors[variantColor],
-          { 'shadow-md': shadow, rounded: rounded },
+          getVariantStyles(variant, color),
+          { 'shadow-sm': shadow, 'rounded-md': rounded },
           disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
           className,
         )}
         onClick={clickHandler}
       >
-        {Icon && <Icon size={14} className="mr-2" />}
         <span className="">{children}</span>
         {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
       </BaseButton>
