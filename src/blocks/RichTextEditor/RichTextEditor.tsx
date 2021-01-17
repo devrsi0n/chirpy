@@ -8,7 +8,7 @@ import DismissIcon from '@geist-ui/react-icons/x';
 import { Leaf } from './Leaf';
 import { Element } from './Element';
 import { RichTextEditorContext } from './RichTextEditorContext';
-import { Button } from '$/components/Button';
+import { IconButton } from '$/components/Button';
 import { Toolbar } from './Toolbar';
 import { BaseFormatButton, MarkButton } from './FormatButton';
 import { ClientOnly } from '$/components/ClientOnly';
@@ -146,14 +146,14 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             />
             {!readOnly && (
               <div className="flex flex-row justify-end">
-                <Button
+                <IconButton
                   size="md"
                   onClick={handleSubmitReply}
                   icon={isLoading ? 'spinner' : undefined}
                   className={isLoading ? 'cursor-not-allowed' : ''}
                 >
                   {submitButtonLabel || 'Submit'}
-                </Button>
+                </IconButton>
               </div>
             )}
           </section>

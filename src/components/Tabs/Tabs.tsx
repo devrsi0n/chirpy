@@ -2,7 +2,7 @@ import * as React from 'react';
 import clsx from 'clsx';
 import { TabsConfig, TabsContext, TabsLabelItem } from './TabsContext';
 import { TabsItem } from './TabsItem';
-import { Button } from '../Button';
+import { BaseButton } from '../Button';
 
 export type TabProps = React.ComponentProps<'section'> & {
   initialValue?: string;
@@ -76,8 +76,7 @@ export function Tabs({
         <header className="flex flex-row items-center justify-between border-b">
           <nav className="space-x-1 border-gray-400">
             {tabs.map((item) => (
-              <Button
-                variant="borderless"
+              <BaseButton
                 className={clsx(
                   'hover:rounded hover:bg-gray-50 border-b-2 border-transparent p-3',
                   selfValue === item.value && 'text-primary border-primary',
@@ -87,13 +86,12 @@ export function Tabs({
                   borderLeftWidth: 0,
                   borderRightWidth: 0,
                 }}
-                rounded={false}
                 onMouseDown={handleKeyDown}
                 key={item.value}
                 onClick={() => handleClickTab(item)}
               >
                 {item.label}
-              </Button>
+              </BaseButton>
             ))}
           </nav>
           <div>{rightItems}</div>
