@@ -16,7 +16,8 @@ import Dismiss from '@geist-ui/react-icons/x';
 
 import styles from './style.module.scss';
 import clsx from 'clsx';
-import { BaseButton } from '../Button/BaseButton';
+import { Logo } from '../Logo';
+import { IconButton } from '../Button/IconButton';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -65,20 +66,16 @@ export function Header(): JSX.Element {
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section className="flex flex-row items-center justify-between">
           <div className="flex items-center sm:hidden pl-3">
-            <BaseButton aria-expanded={false} onClick={handleClickMenu}>
+            <IconButton size="sm" aria-expanded={false} onClick={handleClickMenu}>
               <span className="sr-only">Open navigation menu</span>
               <Menu className={clsx({ hidden: showMenu })} />
               <Dismiss className={clsx({ hidden: !showMenu })} />
-            </BaseButton>
+            </IconButton>
           </div>
           <div className="flex flex-row sm:items-stretch sm:justify-start">
             <div className="flex flex-row items-center space-x-2">
               <Heading as="h3" className="flex items-center font-bold">
-                <Link href="/">
-                  <Text className="text-xl font-black leading-none select-none">
-                    {process.env.NEXT_PUBLIC_APP_NAME}
-                  </Text>
-                </Link>
+                <Logo />
               </Heading>
               {router.pathname === '/dashboard' &&
                 !!data?.currentUser?.projects?.length &&

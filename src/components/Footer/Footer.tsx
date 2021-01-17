@@ -6,6 +6,7 @@ import { Text } from '$/components/Text';
 import { Link } from '../Link/Link';
 import { ColorMode } from '../../types/theme.type';
 import { useHasMounted } from '$/hooks/useHasMounted';
+import { IconButton } from '../Button/IconButton';
 
 const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
   system: 'setting',
@@ -38,13 +39,9 @@ export function Footer(): JSX.Element {
       </nav>
       <div className="flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-3 xs:flex-row">
         <Text variant="sm" className="text-gray-500">
-          &copy; 2021 Chain Labs. All rights reserved.
+          &copy; 2021 Totalk Labs. All rights reserved.
         </Text>
-        {hasMounted && icon && theme && (
-          <Button variant="borderless" className="capitalize" onClick={handleClick} icon={icon}>
-            {theme}
-          </Button>
-        )}
+        {hasMounted && icon && theme && <IconButton onClick={handleClick} icon={icon}></IconButton>}
       </div>
     </footer>
   );
