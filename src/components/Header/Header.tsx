@@ -17,7 +17,7 @@ import Dismiss from '@geist-ui/react-icons/x';
 import styles from './style.module.scss';
 import clsx from 'clsx';
 import { Logo } from '../Logo';
-import { IconButton } from '../Button/IconButton';
+import { IconButton, BaseButton } from '../Button';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -115,13 +115,7 @@ export function Header(): JSX.Element {
           <div className="flex">
             {loading && <Text>Loading...</Text>}
             {data?.currentUser?.avatar ? (
-              <Popover
-                content={
-                  <Button variant="borderless" onClick={handleClick}>
-                    Logout
-                  </Button>
-                }
-              >
+              <Popover content={<BaseButton onClick={handleClick}>Logout</BaseButton>}>
                 <figure>
                   <Avatar src={data.currentUser.avatar} alt="The avatar of current user" />
                 </figure>

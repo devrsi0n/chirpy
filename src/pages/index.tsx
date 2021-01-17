@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text/Text';
 import { Layout } from '$/components/Layout';
-import { BaseButton } from '$/components/Button/BaseButton';
 import { Button } from '$/components/Button';
 
 function Home(): JSX.Element {

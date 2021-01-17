@@ -106,7 +106,7 @@ export default function Dashboard(): JSX.Element {
             />
 
             <DialogFooter>
-              <Button variant="borderless" onClick={handleCloseDialog} className="w-full sm:w-auto">
+              <Button variant="plain" onClick={handleCloseDialog} className="w-full sm:w-auto">
                 Cancel
               </Button>
               <Button
