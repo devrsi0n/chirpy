@@ -121,8 +121,10 @@ export function Header(): JSX.Element {
                 </figure>
               </Popover>
             ) : (
-              <Link href="/login">
-                <Button className="">Sign in</Button>
+              <Link href="/login" disableUnderline>
+                <Button color="purple" variant="solid">
+                  Sign in
+                </Button>
               </Link>
             )}
           </div>

@@ -16,6 +16,7 @@ type LinkProps = React.PropsWithChildren<
        */
       highlightMatch?: boolean;
       variant?: Variant;
+      disableUnderline?: boolean;
     }
 >;
 
@@ -37,8 +38,9 @@ export function Link(props: LinkProps): JSX.Element {
     passHref = true,
     prefetch,
     className = '',
-    children,
     highlightMatch,
+    disableUnderline,
+    children,
     ...restProps
   } = props;
   const router = useRouter();
@@ -58,19 +60,21 @@ export function Link(props: LinkProps): JSX.Element {
         onMouseLeave={() => setIsHovering(false)}
       >
         <span>{children}</span>
-        <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-          <Transition
-            as="span"
-            className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900"
-            show={isHovering}
-            enter="transition ease duration-200"
-            enterFrom="scale-0"
-            enterTo="scale-100"
-            leave="transition ease-out duration-300"
-            leaveFrom="scale-100"
-            leaveTo="scale-0"
-          />
-        </span>
+        {!disableUnderline && (
+          <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+            <Transition
+              as="span"
+              className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900"
+              show={isHovering}
+              enter="transition ease duration-200"
+              enterFrom="scale-0"
+              enterTo="scale-100"
+              leave="transition ease-out duration-300"
+              leaveFrom="scale-100"
+              leaveTo="scale-0"
+            />
+          </span>
+        )}
       </a>
     </NextLink>
   );
