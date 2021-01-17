@@ -84,7 +84,7 @@ export function Button(props: IButtonProps): JSX.Element {
         className={clsx(
           'focus:outline-none',
           sizeStyles[size],
-          ColorVariantStyles[`${variant}-${color}`],
+          ColorVariantStyles[`${variant}-${color}` as VariantColor],
           { 'shadow-sm': shadow, 'rounded-md': rounded },
           disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
           className,
