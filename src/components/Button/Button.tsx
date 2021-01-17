@@ -10,9 +10,6 @@ type Color = 'purple' | 'gray';
 type Variant = 'solid' | 'plain' /*| 'ghost' */;
 
 export type IButtonProps = BaseButtonProps & {
-  /**
-   * @default solid
-   */
   variant?: Variant;
   children: React.ReactNode;
   color?: Color;
@@ -33,18 +30,19 @@ const sizeStyles: Record<Size, string> = {
   xl: 'py-4 px-5 text-xl',
 };
 
-// const colorStyles: Record<Color, string> = {
-//   primary:
-//     'bg-primary text-text-inverse border border-primary hover:bg-transparent hover:text-primary',
-//   secondary: 'bg-background-secondary text-text-secondary border hover:text-text hover:bg-gray-200',
-//   // text: 'text-text border-none hover:text-text-light',
-// };
+type VariantColor = `${Variant}-${Color}`;
 
-const getVariantStyles = (variant: Variant, color: Color): string =>
-  ({
-    solid: `bg-${color}-600 text-text-inverse border border-${color}-700 hover:bg-${color}-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`,
-    plain: `bg-white text-${color}-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-${color}-500`,
-  }[variant]);
+type VariantColors = {
+  [index in VariantColor]: string;
+};
+
+const ColorVariantStyles: VariantColors = {
+  'solid-purple': `bg-purple-600 text-text-inverse border border-purple-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
+  'solid-gray': `bg-gray-600 text-text-inverse border border-gray-700 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
+
+  'plain-purple': `bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
+  'plain-gray': `bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
+};
 
 // TODO: Fix click drip animation and extract it to the base button
 export function Button(props: IButtonProps): JSX.Element {
@@ -86,7 +84,7 @@ export function Button(props: IButtonProps): JSX.Element {
         className={clsx(
           'focus:outline-none',
           sizeStyles[size],
-          getVariantStyles(variant, color),
+          ColorVariantStyles[`${variant}-${color}`],
           { 'shadow-sm': shadow, 'rounded-md': rounded },
           disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
           className,
