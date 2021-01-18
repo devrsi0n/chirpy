@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Head from 'next/head';
+import clsx from 'clsx';
 
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text/Text';
 import { Layout } from '$/components/Layout';
 import { Button } from '$/components/Button';
+
+import styles from '$/styles/home.module.scss';
 
 function Home(): JSX.Element {
   return (
@@ -13,11 +16,7 @@ function Home(): JSX.Element {
         <Head>
           <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
         </Head>
-        <Heading
-          as="h1"
-          className="font-black text-center"
-          style={{ lineHeight: 1.09, fontSize: '4.0rem' }}
-        >
+        <Heading as="h1" className={clsx('font-black text-center', styles.headline)}>
           <span>Comment system made </span>
           <span className="text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-blue-500 mt-1">
             easy.
