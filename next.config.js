@@ -4,20 +4,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const customConfig = {
-  // webpack(config, dev, isServer) {
-  //   // Use ts-loader for decorators support
-  //   for (const rule of config.module.rules) {
-  //     if (rule.test && rule.test.test('foo.ts')) {
-  //       rule.use = [].concat(rule.use, {
-  //         loader: 'ts-loader',
-  //         options: {
-  //           transpileOnly: true,
-  //         },
-  //       });
-  //     }
-  //   }
-  //   return config;
-  // },
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ["@svgr/webpack"]
+    });
+
+    return config;
+  }
 };
 
 module.exports = withPlugins(

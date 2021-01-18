@@ -23,3 +23,8 @@ declare module 'tailwindcss/defaultTheme' {
 declare module 'tailwindcss/colors' {
   export = any;
 }
+
+declare module '*.svg' {
+  const content: any;
+  export default content;
+}

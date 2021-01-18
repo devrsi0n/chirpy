@@ -27,6 +27,7 @@ const sizeStyles: Record<Size, string> = {
   lg: 'text-lg font-semibold',
 };
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 export function Link(props: LinkProps): JSX.Element {
   const {
     size,
@@ -40,6 +41,7 @@ export function Link(props: LinkProps): JSX.Element {
     className = '',
     highlightMatch,
     disableUnderline,
+    variant = 'nav',
     children,
     ...restProps
   } = props;
@@ -47,35 +49,41 @@ export function Link(props: LinkProps): JSX.Element {
   const isCurrentURL = highlightMatch && router.pathname === href;
   const [isHovering, setIsHovering] = React.useState(false);
   return (
-    <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch, className }}>
-      <a
-        {...restProps}
-        className={clsx(
-          `relative transition duration-150 ease-in-out`,
-          size && sizeStyles[size],
-          isCurrentURL ? 'text-primary-dark' : 'text-gray-600 hover:text-gray-900',
-          className,
-        )}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <span>{children}</span>
-        {!disableUnderline && (
-          <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-            <Transition
-              as="span"
-              className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900"
-              show={isHovering}
-              enter="transition ease duration-200"
-              enterFrom="scale-0"
-              enterTo="scale-100"
-              leave="transition ease-out duration-300"
-              leaveFrom="scale-100"
-              leaveTo="scale-0"
-            />
-          </span>
-        )}
-      </a>
+    <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
+      {variant === 'plain' ? (
+        <a {...restProps} className={className}>
+          {children}
+        </a>
+      ) : (
+        <a
+          {...restProps}
+          className={clsx(
+            `relative transition duration-150 ease-in-out`,
+            size && sizeStyles[size],
+            isCurrentURL ? 'text-primary-dark' : 'text-gray-600 hover:text-gray-900',
+            className,
+          )}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <span>{children}</span>
+          {!disableUnderline && (
+            <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+              <Transition
+                as="span"
+                className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900"
+                show={isHovering}
+                enter="transition ease duration-200"
+                enterFrom="scale-0"
+                enterTo="scale-100"
+                leave="transition ease-out duration-300"
+                leaveFrom="scale-100"
+                leaveTo="scale-0"
+              />
+            </span>
+          )}
+        </a>
+      )}
     </NextLink>
   );
 }
