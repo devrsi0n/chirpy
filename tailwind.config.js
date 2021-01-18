@@ -4,7 +4,7 @@ module.exports = {
   darkMode: 'class',
   purge: {
     content: ['./src/**/*.tsx'],
-    enabled: true,
+    enabled: process.env.NODE_ENV === 'production',
   },
   theme: {
     extend: {

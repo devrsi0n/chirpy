@@ -91,7 +91,7 @@ export function Button(props: IButtonProps): JSX.Element {
         )}
         onClick={clickHandler}
       >
-        <span className="">{children}</span>
+        {children}
         {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
       </BaseButton>
     </>
