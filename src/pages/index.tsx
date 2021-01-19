@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import clsx from 'clsx';
+import ArrowRight from '@geist-ui/react-icons/arrowRight';
 
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text/Text';
@@ -26,8 +27,9 @@ function Home(): JSX.Element {
           Access your audience quickly by integrating a modern comment system.
         </Text>
         <div className="flex justify-center items-center space-x-6">
-          <Button variant="solid" color="purple">
-            Try It Free
+          <Button variant="solid" color="purple" className="space-x-1">
+            <span>Try It Free</span>
+            <ArrowRight size="20px" />
           </Button>
           <Button variant="plain">Learn More</Button>
         </div>
