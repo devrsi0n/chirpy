@@ -18,12 +18,13 @@ import styles from './style.module.scss';
 import clsx from 'clsx';
 import { Logo } from '../Logo';
 import { IconButton, BaseButton } from '../Button';
+import { SpinnerIcon } from '../Icons';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
 
 export function Header(): JSX.Element {
-  const { data, error, loading } = useCurrentUser();
+  const { data, error, loading: signInLoading } = useCurrentUser();
   const [selectedProject, setSelectedProject] = React.useState<Project>();
   React.useEffect(() => {
     if (data?.currentUser?.projects?.length && !selectedProject) {
@@ -113,7 +114,7 @@ export function Header(): JSX.Element {
             </nav>
           </div>
           <div className="flex">
-            {loading && <Text>Loading...</Text>}
+            {/* {signInLoading && <Text>Loading...</Text>} */}
             {data?.currentUser?.avatar ? (
               <Popover content={<BaseButton onClick={handleClick}>Logout</BaseButton>}>
                 <figure>
@@ -121,13 +122,14 @@ export function Header(): JSX.Element {
                 </figure>
               </Popover>
             ) : (
-              <div className="space-x-2">
-                <Link href="/sign-in" disableUnderline>
-                  <Button color="gray" variant="plain">
-                    Sign in
+              <div className="flex flex-row items-center space-x-2">
+                <Link href="/sign-in" variant="plain" disableUnderline>
+                  <Button color="gray" variant="plain" className="space-x-1">
+                    {signInLoading && <SpinnerIcon className="text-gray-400" />}
+                    <span>Sign in</span>
                   </Button>
                 </Link>
-                <Link href="/sign-up" disableUnderline>
+                <Link href="/sign-up" variant="plain" disableUnderline>
                   <Button color="purple" variant="solid">
                     Sign up
                   </Button>

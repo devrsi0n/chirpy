@@ -8,11 +8,12 @@ import DismissIcon from '@geist-ui/react-icons/x';
 import { Leaf } from './Leaf';
 import { Element } from './Element';
 import { RichTextEditorContext } from './RichTextEditorContext';
-import { IconButton } from '$/components/Button';
+import { Button } from '$/components/Button';
 import { Toolbar } from './Toolbar';
 import { BaseFormatButton, MarkButton } from './FormatButton';
 import { ClientOnly } from '$/components/ClientOnly';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
+import { SpinnerIcon } from '$/components/Icons';
 
 interface IBaseProps {
   onSubmit?: (value: Node[]) => Promise<void>;
@@ -146,14 +147,15 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             />
             {!readOnly && (
               <div className="flex flex-row justify-end">
-                <IconButton
-                  size="md"
+                <Button
+                  color="purple"
+                  variant="solid"
+                  className={clsx('space-x-1', isLoading ? 'cursor-not-allowed' : '')}
                   onClick={handleSubmitReply}
-                  icon={isLoading ? 'spinner' : undefined}
-                  className={isLoading ? 'cursor-not-allowed' : ''}
                 >
-                  {submitButtonLabel || 'Submit'}
-                </IconButton>
+                  {isLoading && <SpinnerIcon className="text-gray-400" />}
+                  <span>{submitButtonLabel || 'Submit'}</span>
+                </Button>
               </div>
             )}
           </section>
