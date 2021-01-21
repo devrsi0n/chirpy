@@ -11,7 +11,7 @@ export default function SignIn(): JSX.Element {
       title="Welcome back 👋"
       subtitle={
         <div className="flex flex-row space-x-1">
-          <Text className="text-gray-600">Don't have an account yet?</Text>
+          <Text className="text-gray-500">Don't have an account yet?</Text>
           <Link href="/sign-up" variant="nav">
             Join {process.env.NEXT_PUBLIC_APP_NAME}
           </Link>
