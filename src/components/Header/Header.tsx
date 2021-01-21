@@ -99,16 +99,16 @@ export function Header(): JSX.Element {
                 )}
             </div>
             <nav className="w-full hidden sm:flex flex-wrap items-center mb-5 space-x-5 sm:mb-0 sm:pl-8 sm:ml-8 sm:border-l sm:border-gray-200">
-              <Link href="/" className="font-medium" highlightMatch>
+              <Link href="/" className="" highlightMatch>
                 Home
               </Link>
-              <Link href="/doc" className="font-medium" highlightMatch>
+              <Link href="/doc" className="" highlightMatch>
                 Doc
               </Link>
-              <Link href="/pricing" className="font-medium" highlightMatch>
+              <Link href="/pricing" className="" highlightMatch>
                 Pricing
               </Link>
-              <Link href="/blog" className="font-medium" highlightMatch>
+              <Link href="/blog" className="" highlightMatch>
                 Blog
               </Link>
             </nav>
@@ -143,16 +143,16 @@ export function Header(): JSX.Element {
         <nav
           className={clsx('flex w-full flex-col px-2 pt-2 pb-3 space-y-1', { hidden: !showMenu })}
         >
-          <Link href="/" className="font-medium px-3 py-2" highlightMatch>
+          <Link href="/" className="px-3 py-2" highlightMatch>
             Home
           </Link>
-          <Link href="/doc" className="font-medium px-3 py-2" highlightMatch>
+          <Link href="/doc" className="px-3 py-2" highlightMatch>
             Documents
           </Link>
-          <Link href="/pricing" className="font-medium px-3 py-2" highlightMatch>
+          <Link href="/pricing" className="px-3 py-2" highlightMatch>
             Pricing
           </Link>
-          <Link href="/blog" className="font-medium px-3 py-2" highlightMatch>
+          <Link href="/blog" className="px-3 py-2" highlightMatch>
             Blog
           </Link>
         </nav>

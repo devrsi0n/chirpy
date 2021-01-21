@@ -46,7 +46,7 @@ export function Auth({ name, title, subtitle }: AuthProps): JSX.Element {
                 </Link>
               ))}
             </div>
-            <Text className="py-3 text-gray-400" variant="sm">
+            <Text className="py-3 text-gray-500" variant="sm">
               By clicking the buttons above, you acknowledge that you have read and understood, and
               agree to {process.env.NEXT_PUBLIC_APP_NAME}'s{' '}
               <Link href="/terms-of-service">Terms of Service</Link> and{' '}
