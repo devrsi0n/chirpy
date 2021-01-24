@@ -3,10 +3,9 @@ import { useRouter } from 'next/router';
 
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
-import { Popover } from '$/components/Popover';
+import LogOut from '@geist-ui/react-icons/logOut';
 import { Heading } from '$/components/Heading';
 import { Avatar } from '$/components/Avatar';
-import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
 import { CurrentUserQuery } from '$/generated/graphql';
@@ -17,8 +16,11 @@ import Dismiss from '@geist-ui/react-icons/x';
 import styles from './style.module.scss';
 import clsx from 'clsx';
 import { Logo } from '../Logo';
-import { IconButton, BaseButton } from '../Button';
+import { IconButton } from '../Button';
 import { SpinnerIcon } from '../Icons';
+import { DropDownMenu } from '../DropDownMenu';
+import { Divider } from '../Divider';
+import { Text } from '../Text';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -114,13 +116,27 @@ export function Header(): JSX.Element {
             </nav>
           </div>
           <div className="flex">
-            {/* {signInLoading && <Text>Loading...</Text>} */}
-            {data?.currentUser?.avatar ? (
-              <Popover content={<BaseButton onClick={handleClick}>Logout</BaseButton>}>
-                <figure>
-                  <Avatar src={data.currentUser.avatar} alt="The avatar of current user" />
-                </figure>
-              </Popover>
+            {data?.currentUser?.name ? (
+              <DropDownMenu
+                content={
+                  <Avatar
+                    src={data.currentUser.avatar!}
+                    alt={`The avatar of ${data?.currentUser?.name}`}
+                  />
+                }
+              >
+                <DropDownMenu.Item className="justify-end space-x-2">
+                  <Link
+                    href="/api/auth/logout"
+                    variant="plain"
+                    className="flex flex-row items-center space-x-1"
+                  >
+                    <LogOut />
+                    <span>Logout</span>
+                  </Link>
+                </DropDownMenu.Item>
+                {/* <Divider /> */}
+              </DropDownMenu>
             ) : (
               <div className="flex flex-row items-center space-x-2">
                 <Link href="/sign-in" variant="plain" disableUnderline>

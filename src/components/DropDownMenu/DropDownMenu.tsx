@@ -3,27 +3,41 @@ import { Menu, Transition } from '@headlessui/react';
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
 import clsx from 'clsx';
 
+export type Shape = 'circle' | 'square';
+
 export type DropDownMenuProps = React.PropsWithChildren<{
   content: React.ReactNode;
+  shape?: Shape;
   classes?: {
     items?: string;
   };
 }>;
 
-export function DropDownMenu(props: DropDownMenuProps): JSX.Element {
+export function DropDownMenu({
+  content,
+  shape = 'circle',
+  classes,
+  children,
+}: DropDownMenuProps): JSX.Element {
   return (
     <div className="relative inline-block text-left">
       <Menu>
         {({ open }) => (
           <>
-            <span className="rounded-md shadow-sm">
-              <Menu.Button className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800">
-                <span>{props.content}</span>
+            <Menu.Button
+              className={clsx(
+                'inline-flex items-center justify-center p-1 w-full text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500 active:bg-gray-50 active:text-gray-800',
+                shape === 'circle' && 'rounded-full',
+                shape === 'square' && 'rounded-md border border-gray-300',
+              )}
+            >
+              <span>{content}</span>
+              {shape === 'square' && (
                 <ChevronDown
                   className={clsx('w-5 h-5 ml-2 -mr-1 transform', open && 'rotate-180')}
                 />
-              </Menu.Button>
-            </span>
+              )}
+            </Menu.Button>
 
             <Transition
               show={open}
@@ -37,11 +51,11 @@ export function DropDownMenu(props: DropDownMenuProps): JSX.Element {
               <Menu.Items
                 static
                 className={clsx(
-                  'absolute right-0 mt-2 origin-top-right bg-gray-100 border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 py-1 z-30',
-                  props.classes?.items,
+                  'absolute right-0 mt-1 bg-white origin-top-right border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 py-1 z-30',
+                  classes?.items,
                 )}
               >
-                {props.children}
+                {children}
               </Menu.Items>
             </Transition>
           </>
@@ -64,8 +78,7 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
       {({ active }) => (
         <div
           className={clsx(
-            'flex flex-row items-center border-none',
-            active ? 'bg-gray-200 text-gray-900' : 'text-gray-700',
+            'flex flex-row items-center border-none text-gray-500 hover:bg-gray-100 hover:text-gray-700',
             `w-full px-6 py-2 text-sm leading-5 text-right`,
             props.className,
           )}

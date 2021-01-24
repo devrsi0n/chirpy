@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
 
-import { DropDownMenu } from '$/components/Button';
+import { DropDownMenu } from '$/components/DropDownMenu';
 import { GoogleIcon } from '$/components/Icons';
 import { GitHubIcon } from '$/components/Icons';
 
