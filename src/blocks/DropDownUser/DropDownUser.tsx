@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 
 import { Avatar } from '$/components/Avatar';
-import { DropDownMenu } from '$/components/Button';
+import { DropDownMenu } from '$/components/DropDownMenu';
 import LogOut from '@geist-ui/react-icons/logOut';
 import { Toggle } from '$/components/Toggle';
 import { Divider } from '$/components/Divider';

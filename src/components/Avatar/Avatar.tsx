@@ -1,14 +1,15 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import User from '@geist-ui/react-icons/user';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
-export type AvatarProps = React.PropsWithChildren<
-  {
+export type AvatarProps = React.ComponentProps<'img'> &
+  React.PropsWithChildren<{
+    src?: string;
     size?: Size;
     className?: string;
-  } & React.ComponentProps<'img'>
->;
+  }>;
 
 const sizeStyles: Record<Size, string> = {
   sm: 'w-4 h-4',
@@ -22,11 +23,17 @@ export function Avatar({
   className = '',
   alt = '',
   children,
+  src,
   ...imgProps
 }: AvatarProps): JSX.Element {
+  if (!src) {
+    return <User size="24" />;
+  }
+
   return (
     <img
       {...imgProps}
+      src={src}
       alt={alt}
       className={clsx(
         `flex items-center justify-center rounded-full bg-gray-50 select-none ring-4 ring-white`,
