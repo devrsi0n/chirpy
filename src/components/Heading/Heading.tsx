@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
 type AS = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
@@ -21,7 +22,5 @@ const styles: Record<AS, string> = {
 export function Heading(props: IHeadingProps): JSX.Element {
   const { as: Component = 'h3', className = '', ...restProps } = props;
 
-  return (
-    <Component {...restProps} className={`text-text ${styles[Component] || ''} ${className}`} />
-  );
+  return <Component {...restProps} className={clsx(`text-text`, styles[Component], className)} />;
 }
