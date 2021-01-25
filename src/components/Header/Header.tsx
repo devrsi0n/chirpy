@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 import LogOut from '@geist-ui/react-icons/logOut';
-import { Heading } from '$/components/Heading';
 import { Avatar } from '$/components/Avatar';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
@@ -19,8 +18,6 @@ import { Logo } from '../Logo';
 import { IconButton } from '../Button';
 import { SpinnerIcon } from '../Icons';
 import { DropDownMenu } from '../DropDownMenu';
-import { Divider } from '../Divider';
-import { Text } from '../Text';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
@@ -53,9 +50,7 @@ export function Header(): JSX.Element {
   }, []);
 
   const router = useRouter();
-  const handleClick = React.useCallback(() => {
-    router.push('/api/auth/logout');
-  }, [router]);
+
   if (error) {
     console.error('Get current user error: ', error);
   }
@@ -77,9 +72,7 @@ export function Header(): JSX.Element {
           </div>
           <div className="flex flex-row sm:items-stretch sm:justify-start">
             <div className="flex flex-row items-center space-x-2">
-              <Heading as="h3" className="flex items-center font-bold">
-                <Logo />
-              </Heading>
+              <Logo />
               {router.pathname === '/dashboard' &&
                 !!data?.currentUser?.projects?.length &&
                 selectedProject && (
