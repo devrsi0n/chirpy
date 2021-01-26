@@ -36,6 +36,7 @@
     "@next/bundle-analyzer": "^10.0.5",
     "@prisma/client": "~2.14.0",
     "@react-aria/button": "^3.3.0",
+    "@tailwindcss/typography": "^0.4.0",
     "apollo-server-micro": "^2.19.2",
     "clsx": "^1.1.1",
     "cookie": "^0.4.1",

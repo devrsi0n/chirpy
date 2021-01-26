@@ -102,7 +102,9 @@ module.exports = {
       borderWidth: ['hover', 'focus'],
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
   corePlugins: {
     float: false,
   },
