@@ -120,7 +120,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             <Editable
               readOnly={readOnly}
               className={clsx(
-                'rounded-sm border border-transparent focus:border-gray-600',
+                'prose rounded-sm border border-transparent focus:border-gray-600',
                 disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
                 !readOnly && 'pb-2 px-2 border-gray-200',
                 styles?.editable,

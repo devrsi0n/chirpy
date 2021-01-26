@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { RenderElementProps } from 'slate-react';
 
-import { Code } from '$/components/Code';
-import { Text } from '$/components/Text';
 import { useRichTextEditorContext } from './RichTextEditorContext';
 
 export function Element(props: RenderElementProps): JSX.Element {
@@ -15,17 +13,19 @@ export function Element(props: RenderElementProps): JSX.Element {
   switch (props.element.type) {
     case 'code':
       return (
-        <Code
-          {...mergedProps}
-          /* attributes={{
-            contentEditable: false,
-            style: { userSelect: 'none' },
-          }} */
-        />
+        <pre>
+          <code
+            {...mergedProps}
+            /* attributes={{
+              contentEditable: false,
+              style: { userSelect: 'none' },
+            }} */
+          />
+        </pre>
       );
     case 'paragraph':
-      return <Text {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
+      return <p {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
     default:
-      return <Text {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
+      return <p {...mergedProps} /* contentEditable={false} style={{ userSelect: 'none' }} */ />;
   }
 }
