@@ -38,7 +38,7 @@ export function IconButton({
     <BaseButton
       {...restProps}
       className={clsx(
-        'rounded-full hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200',
+        'rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200',
         style,
       )}
     >

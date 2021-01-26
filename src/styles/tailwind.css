@@ -53,7 +53,7 @@
 
   ::selection {
     color: var(--colors-background);
-    background: var(--colors-primary);
+    background: var(--colors-primary-light);
   }
 
   input:focus {
