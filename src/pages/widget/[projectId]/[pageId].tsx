@@ -34,6 +34,7 @@ import {
   createOneLikeInComments,
   updateReplyInComments,
 } from '$/utilities/comment';
+import { Logo } from '$/components/Logo';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -207,7 +208,10 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
           value={process.env.NEXT_PUBLIC_APP_NAME}
         />
       </Tabs>
-      <Text className="text-right">Powered by {process.env.NEXT_PUBLIC_APP_NAME}</Text>
+      <div className="flex flex-row items-center justify-end">
+        <Text className="text-right">Powered by</Text>
+        <Logo size="sm" />
+      </div>
     </div>
   );
 }

@@ -16,7 +16,10 @@ class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="en">
-        <Head />
+        <Head>
+          <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
+          <link rel="alternate icon" href="/favicon.png"></link>
+        </Head>
         <body className="bg-background transition duration-150">
           <Main />
           <NextScript />

@@ -28,7 +28,11 @@ function Home(): JSX.Element {
           Access your audience quickly by integrating a modern comment system.
         </Text>
         <div className="flex justify-center items-center space-x-6">
-          <Button variant="solid" color="purple" className="space-x-1">
+          <Button
+            variant="solid"
+            color="purple"
+            className="space-x-1 transition-shadow hover:shadow-2xl"
+          >
             <span>Try It Free</span>
             <ArrowRight size="20px" />
           </Button>
