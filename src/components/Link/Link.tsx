@@ -60,7 +60,7 @@ export function Link(props: LinkProps): JSX.Element {
           className={clsx(
             `relative transition duration-150 ease-in-out`,
             size && sizeStyles[size],
-            isCurrentURL ? 'text-primary-dark' : 'text-gray-600 hover:text-gray-900',
+            isCurrentURL ? 'font-bold' : 'text-gray-600 hover:text-gray-900',
             className,
           )}
           onMouseEnter={() => setIsHovering(true)}
