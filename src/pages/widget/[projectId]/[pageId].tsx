@@ -166,7 +166,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
   }
 
   return (
-    <div className="main-container">
+    <div className="main-container py-8">
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
