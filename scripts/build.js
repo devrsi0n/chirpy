@@ -6,7 +6,7 @@ async function build() {
     nextDevProcess = execa('npx', ['next', 'dev']);
     nextDevProcess.stdout.pipe(process.stdout);
     nextDevProcess.stderr.pipe(process.stderr);
-    nextDevProcess.catch(() => {
+    nextDevProcess.catch((error) => {
       throw error;
     });
 
@@ -20,7 +20,7 @@ async function build() {
     ]);
     parcel.stdout.pipe(process.stdout);
     parcel.stderr.pipe(process.stderr);
-    parcel.catch(() => {
+    parcel.catch((error) => {
       nextDevProcess.kill();
       throw error;
     });
@@ -35,7 +35,7 @@ async function build() {
     nextBuildProcess.stderr.pipe(process.stderr);
     nextBuildProcess.then(() => {
       nextDevProcess.kill();
-    }).catch(() => {
+    }).catch((error) => {
       nextDevProcess.kill();
       throw error;
     });
