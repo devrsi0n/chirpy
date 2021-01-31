@@ -65,7 +65,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
   const handleSubmit = React.useCallback(
     async (content: Node[]) => {
       if (!currentUserId) {
-        console.error('login first');
+        console.error('Sign-in first');
         return;
       }
       const { data } = await createOneComment({
@@ -134,7 +134,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
   const [createOneReply] = useCreateOneReplyMutation();
   const handleSubmitReply = async (reply: Node[], commentId: string) => {
     if (!currentUserId) {
-      console.error('Please login first');
+      console.error('Please sign-in first');
       return Promise.reject();
     }
     const { data } = await createOneReply({
