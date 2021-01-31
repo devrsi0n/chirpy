@@ -11,6 +11,6 @@ export default connect<NextApiRequest, NextApiResponse>({
   onError: handleInternalLoginFailure,
 }).use(
   passport.initialize(),
-  passport.authenticate('github', { failureRedirect: '/login' }),
+  passport.authenticate('github', { failureRedirect: '/sign-in' }),
   handleSuccessfulLogin,
 );

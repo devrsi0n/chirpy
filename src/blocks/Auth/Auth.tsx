@@ -27,7 +27,7 @@ export function Auth({ name, title, subtitle }: AuthProps): JSX.Element {
       <div className="flex flex-row h-full">
         <div className="flex-1 flex flex-col justify-center">
           <div className="py-7 px-10">
-            <Logo size="lg" />
+            <Logo size="lg" noSpacing />
             <div className="space-y-2">
               <Heading as="h2" className="font-black mt-5">
                 {title}
