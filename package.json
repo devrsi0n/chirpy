@@ -62,7 +62,8 @@
     "react-dom": "^17.0.1",
     "slate": "^0.59.0",
     "slate-react": "^0.59.0",
-    "super-tiny-icons": "^0.4.0"
+    "super-tiny-icons": "^0.4.0",
+    "superjson": "^1.5.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

@@ -98,9 +98,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     <ClientOnly>
       <RichTextEditorContext.Provider value={richTextEditorContext}>
         <Slate editor={editor} value={value} onChange={handleRTEChange}>
-          <section
-            className={clsx('py-2 space-y-2', disabled && 'cursor-not-allowed', styles?.root)}
-          >
+          <section className={clsx('space-y-2', disabled && 'cursor-not-allowed', styles?.root)}>
             {!readOnly && (
               <Toolbar className="flex flex-row justify-between">
                 <div>
@@ -120,9 +118,9 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             <Editable
               readOnly={readOnly}
               className={clsx(
-                'prose rounded-sm border border-transparent focus:border-gray-600',
+                'prose rounded border border-transparent focus:border-gray-600',
                 disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
-                !readOnly && 'pb-2 px-2 border-gray-200',
+                !readOnly && ' shadow-sm pb-2 px-2 border-gray-200',
                 styles?.editable,
               )}
               style={{

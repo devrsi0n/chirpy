@@ -7,8 +7,8 @@ import {
   GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
-import { ApolloQueryResult } from '@apollo/client';
 import { Node } from 'slate';
+import { ExecutionResult } from 'graphql';
 
 import { MemoCommentBlock } from '$/blocks/CommentBlock/CommentBlock';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
@@ -24,7 +24,6 @@ import {
 } from '$/generated/graphql';
 import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
-import { initializeApollo } from '$/lib/apollo-client';
 import { CommentByPage } from '$/types/widget';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 import { prisma } from '$server/context';
@@ -35,6 +34,7 @@ import {
   updateReplyInComments,
 } from '$/utilities/comment';
 import { Logo } from '$/components/Logo';
+import { queryGraphql } from '$server/queryGraphQL';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -217,32 +217,24 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
 }
 
 type PathParams = {
-  projectId: string;
   pageId: string;
 };
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const projects = await prisma.project.findMany({
-    include: {
-      pages: {
-        include: {
-          comments: true,
-        },
-      },
+  const pages = await prisma.page.findMany({
+    select: {
+      id: true,
     },
   });
-  const paths: { params: PathParams }[] = [];
-  projects.forEach((project) =>
-    project.pages?.forEach((page) => {
-      paths.push({
-        params: {
-          projectId: project.id,
-          pageId: page.id,
-        },
-      });
-    }),
-  );
+
+  const paths: { params: PathParams }[] = pages.map(({ id }) => {
+    return {
+      params: {
+        pageId: id,
+      },
+    };
+  });
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -256,35 +248,29 @@ type StaticError = {
   error?: string;
 };
 
-const client = initializeApollo();
-
 export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
   try {
-    if (!params) {
-      return { props: { error: 'No params' } };
+    if (!params?.pageId) {
+      return { notFound: true };
     }
-    const { pageId, projectId } = params;
+    const { pageId } = params;
 
-    const pageResult: ApolloQueryResult<CommentsByPageQuery> = await client.query<
+    const pageResult: ExecutionResult<
       CommentsByPageQuery,
       CommentsByPageQueryVariables
-    >({
-      query: CommentsByPageDocument,
-      variables: {
-        pageId: pageId,
-      },
-      fetchPolicy: 'no-cache',
+    > = await queryGraphql(CommentsByPageDocument, {
+      pageId,
     });
 
     if (!pageResult.data?.comments) {
-      return { props: { error: 'No page data' } };
+      return { notFound: true };
     }
     const { comments } = pageResult.data;
 
     return {
-      props: { comments, pageId, projectId },
+      props: { comments, pageId },
       revalidate: 1,
     };
   } catch (err) {
