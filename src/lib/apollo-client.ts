@@ -10,8 +10,7 @@ import {
 let apolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | undefined;
 
 const link = createHttpLink({
-  // `ECHO_BUILD_ORIGIN` is for `next build` call this api. @see pages/widget/[projectId]/[pageId]
-  uri: `${process.env.ECHO_BUILD_ORIGIN || process.env.NEXT_PUBLIC_APP_URL}/api/graphql`,
+  uri: `${process.env.NEXT_PUBLIC_APP_URL}/api/graphql`,
   credentials: `same-origin`,
 });
 

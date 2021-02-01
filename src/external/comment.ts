@@ -45,7 +45,7 @@ export function comment(): void {
         return;
       }
       const container = document.createElement('iframe');
-      container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/${pid}/${page.id}`;
+      container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${page.id}`;
       container.id = id;
       container.style.width = '100%';
       container.frameBorder = '0';

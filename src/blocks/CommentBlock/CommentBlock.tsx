@@ -43,8 +43,8 @@ function CommentBlock({
   };
 
   return (
-    <div className="space-y-1">
-      <section className="flex flex-row items-start px-6 py-4 space-x-3 bg-gray-100 rounded-lg shadow-sm">
+    <div className="space-y-2">
+      <section className="flex flex-row items-start px-6 py-4 space-x-3 border rounded-lg shadow">
         <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
         <div className="flex-1">
           <div className="flex flex-row items-baseline space-x-4 leading-none">
