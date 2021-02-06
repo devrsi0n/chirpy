@@ -17,7 +17,7 @@ import {
   CommentDetailsQueryVariables,
   // useCreateOneLikeMutation,
   // useDeleteOneLikeMutation,
-} from '$/generated/graphql';
+} from '$/graphql/generated/comment';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 // import { deleteOneLikeInComments } from '$/utilities/comment';
 import { PoweredBy } from '$/blocks/PoweredBy';

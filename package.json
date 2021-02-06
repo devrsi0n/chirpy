@@ -69,6 +69,7 @@
     "@babel/core": "^7.12.13",
     "@graphql-codegen/cli": "^1.20.0",
     "@graphql-codegen/introspection": "^1.18.1",
+    "@graphql-codegen/near-operation-file-preset": "^1.17.13",
     "@graphql-codegen/typescript": "^1.20.2",
     "@graphql-codegen/typescript-operations": "^1.17.13",
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",

@@ -7,7 +7,7 @@ import LogOut from '@geist-ui/react-icons/logOut';
 import { Avatar } from '$/components/Avatar';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
-import { CurrentUserQuery } from '$/generated/graphql';
+import { CurrentUserQuery } from '$/graphql/generated/currentUser';
 import { SlashIcon } from '$/components/Icons/SlashIcon';
 import Menu from '@geist-ui/react-icons/menu';
 import Dismiss from '@geist-ui/react-icons/x';
@@ -29,15 +29,16 @@ export function Header(): JSX.Element {
     if (data?.currentUser?.projects?.length && !selectedProject) {
       const lastSelectedProject = localStorage.getItem(SELECTED_PROJECT_ID);
       setSelectedProject(
-        data.currentUser.projects.filter((project) => project.id === lastSelectedProject)[0] ||
-          data.currentUser.projects[0],
+        data.currentUser.projects.filter(
+          (project: Project) => project.id === lastSelectedProject,
+        )[0] || data.currentUser.projects[0],
       );
     }
   }, [data?.currentUser?.projects, selectedProject]);
   const handleSelectProject = React.useCallback(
     (projectID: string) => {
       setSelectedProject(
-        data?.currentUser?.projects?.filter((project) => project.id === projectID)[0],
+        data?.currentUser?.projects?.filter((project: Project) => project.id === projectID)[0],
       );
       localStorage.setItem(SELECTED_PROJECT_ID, projectID);
     },

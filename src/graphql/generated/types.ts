@@ -1,5 +1,3 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -19,8 +17,6 @@ export type Scalars = {
   Json: any;
 };
 
-
-
 export type User = {
   __typename?: 'User';
   id: Scalars['String'];
@@ -31,14 +27,12 @@ export type User = {
   projects: Array<Project>;
 };
 
-
 export type UserMembersArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   before?: Maybe<MemberWhereUniqueInput>;
   after?: Maybe<MemberWhereUniqueInput>;
 };
-
 
 export type UserProjectsArgs = {
   first?: Maybe<Scalars['Int']>;
@@ -55,14 +49,12 @@ export type Team = {
   members: Array<Member>;
 };
 
-
 export type TeamProjectsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   before?: Maybe<ProjectWhereUniqueInput>;
   after?: Maybe<ProjectWhereUniqueInput>;
 };
-
 
 export type TeamMembersArgs = {
   first?: Maybe<Scalars['Int']>;
@@ -81,7 +73,6 @@ export type Project = {
   user?: Maybe<User>;
   pages: Array<Page>;
 };
-
 
 export type ProjectPagesArgs = {
   first?: Maybe<Scalars['Int']>;
@@ -109,7 +100,6 @@ export type Page = {
   comments: Array<Comment>;
 };
 
-
 export type PageCommentsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
@@ -132,14 +122,12 @@ export type Comment = {
   likes: Array<Like>;
 };
 
-
 export type CommentRepliesArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   before?: Maybe<CommentWhereUniqueInput>;
   after?: Maybe<CommentWhereUniqueInput>;
 };
-
 
 export type CommentLikesArgs = {
   first?: Maybe<Scalars['Int']>;
@@ -168,26 +156,21 @@ export type Query = {
   getOrCreatePage?: Maybe<Page>;
 };
 
-
 export type QueryUserArgs = {
   where: UserWhereUniqueInput;
 };
-
 
 export type QueryPageArgs = {
   where: PageWhereUniqueInput;
 };
 
-
 export type QueryProjectArgs = {
   where: ProjectWhereUniqueInput;
 };
 
-
 export type QueryCommentArgs = {
   where: CommentWhereUniqueInput;
 };
-
 
 export type QueryCommentsArgs = {
   where?: Maybe<QueryCommentsWhereInput>;
@@ -196,7 +179,6 @@ export type QueryCommentsArgs = {
   before?: Maybe<CommentWhereUniqueInput>;
   after?: Maybe<CommentWhereUniqueInput>;
 };
-
 
 export type QueryGetOrCreatePageArgs = {
   projectId: Scalars['String'];
@@ -214,31 +196,25 @@ export type Mutation = {
   updateOneComment?: Maybe<Comment>;
 };
 
-
 export type MutationCreateOneProjectArgs = {
   data: ProjectCreateInput;
 };
-
 
 export type MutationCreateOnePageArgs = {
   data: PageCreateInput;
 };
 
-
 export type MutationCreateOneCommentArgs = {
   data: CommentCreateInput;
 };
-
 
 export type MutationCreateOneLikeArgs = {
   data: LikeCreateInput;
 };
 
-
 export type MutationDeleteOneLikeArgs = {
   where: LikeWhereUniqueInput;
 };
-
 
 export type MutationUpdateOneCommentArgs = {
   data: CommentUpdateInput;
@@ -259,14 +235,12 @@ export type PageWhereUniqueInput = {
 
 export enum Role {
   User = 'USER',
-  Admin = 'ADMIN'
+  Admin = 'ADMIN',
 }
 
 export type CommentWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
 };
-
-
 
 export type LikeWhereUniqueInput = {
   id?: Maybe<Scalars['String']>;
@@ -546,7 +520,7 @@ export type CommentUpdateManyWithoutParentInput = {
 
 export enum QueryMode {
   Default = 'default',
-  Insensitive = 'insensitive'
+  Insensitive = 'insensitive',
 }
 
 export type NestedStringFilter = {
@@ -966,7 +940,7 @@ export type MemberCreateNestedManyWithoutTeamInput = {
 
 export enum UserType {
   Free = 'FREE',
-  Pro = 'PRO'
+  Pro = 'PRO',
 }
 
 export type MemberCreateNestedManyWithoutUserInput = {
@@ -1765,907 +1739,3 @@ export type UserUpdateWithoutMembersInput = {
   comments?: Maybe<CommentUpdateManyWithoutUserInput>;
   likes?: Maybe<LikeUpdateManyWithoutUserInput>;
 };
-
-export type CreateOneCommentMutationVariables = Exact<{
-  pageId: Scalars['String'];
-  content: Scalars['Json'];
-  userId: Scalars['String'];
-}>;
-
-
-export type CreateOneCommentMutation = (
-  { __typename?: 'Mutation' }
-  & { createOneComment: (
-    { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Like, 'id'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ) }
-    )> }
-  ) }
-);
-
-export type CreateOneReplyMutationVariables = Exact<{
-  id: Scalars['String'];
-  content: Scalars['Json'];
-  userId: Scalars['String'];
-  pageId: Scalars['String'];
-}>;
-
-
-export type CreateOneReplyMutation = (
-  { __typename?: 'Mutation' }
-  & { updateOneComment?: Maybe<(
-    { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
-    & { likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Like, 'id'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ) }
-    )>, user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'avatar'>
-    ), replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Like, 'id'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ) }
-      )>, replies: Array<(
-        { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'pageId' | 'content' | 'createdAt'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Like, 'id'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'name' | 'avatar'>
-          ) }
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type CommentsByPageQueryVariables = Exact<{
-  pageId: Scalars['String'];
-}>;
-
-
-export type CommentsByPageQuery = (
-  { __typename?: 'Query' }
-  & { comments: Array<(
-    { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'pageId' | 'content' | 'parentId' | 'createdAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Like, 'id'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ) }
-    )>, replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'pageId' | 'parentId' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Like, 'id'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ) }
-      )>, replies: Array<(
-        { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'pageId' | 'parentId' | 'content' | 'createdAt'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Like, 'id'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'name' | 'avatar'>
-          ) }
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type CommentDetailsQueryVariables = Exact<{
-  commentId?: Maybe<Scalars['String']>;
-}>;
-
-
-export type CommentDetailsQuery = (
-  { __typename?: 'Query' }
-  & { comment?: Maybe<(
-    { __typename?: 'Comment' }
-    & Pick<Comment, 'id' | 'content' | 'createdAt'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Like, 'id'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ) }
-    )>, replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Like, 'id'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ) }
-      )> }
-    )>, parent?: Maybe<(
-      { __typename?: 'Comment' }
-      & Pick<Comment, 'id' | 'content' | 'createdAt'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Like, 'id'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ) }
-      )>, parent?: Maybe<(
-        { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'content' | 'createdAt'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Like, 'id'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'name' | 'avatar'>
-          ) }
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CurrentUserQuery = (
-  { __typename?: 'Query' }
-  & { currentUser?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'name' | 'avatar'>
-    & { members: Array<(
-      { __typename?: 'Member' }
-      & Pick<Member, 'id' | 'role'>
-      & { team: (
-        { __typename?: 'Team' }
-        & Pick<Team, 'id' | 'name'>
-        & { projects: Array<(
-          { __typename?: 'Project' }
-          & Pick<Project, 'id' | 'name'>
-        )> }
-      ) }
-    )>, projects: Array<(
-      { __typename?: 'Project' }
-      & Pick<Project, 'id' | 'name'>
-    )> }
-  )> }
-);
-
-export type CreateOneLikeMutationVariables = Exact<{
-  userId: Scalars['String'];
-  commentId: Scalars['String'];
-}>;
-
-
-export type CreateOneLikeMutation = (
-  { __typename?: 'Mutation' }
-  & { createOneLike: (
-    { __typename?: 'Like' }
-    & Pick<Like, 'id'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'avatar'>
-    ) }
-  ) }
-);
-
-export type DeleteOneLikeMutationVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type DeleteOneLikeMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteOneLike?: Maybe<(
-    { __typename?: 'Like' }
-    & Pick<Like, 'id'>
-  )> }
-);
-
-export type PageByProjectQueryVariables = Exact<{
-  projectId: Scalars['String'];
-  url: Scalars['String'];
-  title: Scalars['String'];
-}>;
-
-
-export type PageByProjectQuery = (
-  { __typename?: 'Query' }
-  & { getOrCreatePage?: Maybe<(
-    { __typename?: 'Page' }
-    & Pick<Page, 'id' | 'url' | 'title'>
-  )> }
-);
-
-export type CreateOneProjectMutationVariables = Exact<{
-  projectName: Scalars['String'];
-  userID: Scalars['String'];
-}>;
-
-
-export type CreateOneProjectMutation = (
-  { __typename?: 'Mutation' }
-  & { createOneProject: (
-    { __typename?: 'Project' }
-    & Pick<Project, 'id' | 'name'>
-  ) }
-);
-
-export type ProjectAllCommentsQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type ProjectAllCommentsQuery = (
-  { __typename?: 'Query' }
-  & { project?: Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'id'>
-    & { pages: Array<(
-      { __typename?: 'Page' }
-      & Pick<Page, 'id'>
-      & { comments: Array<(
-        { __typename?: 'Comment' }
-        & Pick<Comment, 'id' | 'content'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<User, 'id' | 'name' | 'avatar'>
-        ), replies: Array<(
-          { __typename?: 'Comment' }
-          & Pick<Comment, 'id' | 'content'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<User, 'id' | 'name' | 'avatar'>
-          ) }
-        )> }
-      )> }
-    )> }
-  )> }
-);
-
-
-export const CreateOneCommentDocument = gql`
-    mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
-  createOneComment(
-    data: {content: $content, page: {connect: {id: $pageId}}, user: {connect: {id: $userId}}}
-  ) {
-    id
-    pageId
-    content
-    parentId
-    createdAt
-    user {
-      id
-      name
-      avatar
-    }
-    likes {
-      id
-      user {
-        id
-        name
-        avatar
-      }
-    }
-  }
-}
-    `;
-export type CreateOneCommentMutationFn = Apollo.MutationFunction<CreateOneCommentMutation, CreateOneCommentMutationVariables>;
-
-/**
- * __useCreateOneCommentMutation__
- *
- * To run a mutation, you first call `useCreateOneCommentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneCommentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createOneCommentMutation, { data, loading, error }] = useCreateOneCommentMutation({
- *   variables: {
- *      pageId: // value for 'pageId'
- *      content: // value for 'content'
- *      userId: // value for 'userId'
- *   },
- * });
- */
-export function useCreateOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneCommentMutation, CreateOneCommentMutationVariables>) {
-        return Apollo.useMutation<CreateOneCommentMutation, CreateOneCommentMutationVariables>(CreateOneCommentDocument, baseOptions);
-      }
-export type CreateOneCommentMutationHookResult = ReturnType<typeof useCreateOneCommentMutation>;
-export type CreateOneCommentMutationResult = Apollo.MutationResult<CreateOneCommentMutation>;
-export type CreateOneCommentMutationOptions = Apollo.BaseMutationOptions<CreateOneCommentMutation, CreateOneCommentMutationVariables>;
-export const CreateOneReplyDocument = gql`
-    mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId: String!) {
-  updateOneComment(
-    where: {id: $id}
-    data: {replies: {create: {content: $content, parent: {connect: {id: $id}}, user: {connect: {id: $userId}}, page: {connect: {id: $pageId}}}}}
-  ) {
-    id
-    pageId
-    content
-    createdAt
-    likes {
-      id
-      user {
-        id
-        name
-        avatar
-      }
-    }
-    user {
-      id
-      name
-      avatar
-    }
-    replies {
-      id
-      pageId
-      content
-      createdAt
-      user {
-        id
-        name
-        avatar
-      }
-      likes {
-        id
-        user {
-          id
-          name
-          avatar
-        }
-      }
-      replies {
-        id
-        pageId
-        content
-        createdAt
-        user {
-          id
-          name
-          avatar
-        }
-        likes {
-          id
-          user {
-            id
-            name
-            avatar
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export type CreateOneReplyMutationFn = Apollo.MutationFunction<CreateOneReplyMutation, CreateOneReplyMutationVariables>;
-
-/**
- * __useCreateOneReplyMutation__
- *
- * To run a mutation, you first call `useCreateOneReplyMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneReplyMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createOneReplyMutation, { data, loading, error }] = useCreateOneReplyMutation({
- *   variables: {
- *      id: // value for 'id'
- *      content: // value for 'content'
- *      userId: // value for 'userId'
- *      pageId: // value for 'pageId'
- *   },
- * });
- */
-export function useCreateOneReplyMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneReplyMutation, CreateOneReplyMutationVariables>) {
-        return Apollo.useMutation<CreateOneReplyMutation, CreateOneReplyMutationVariables>(CreateOneReplyDocument, baseOptions);
-      }
-export type CreateOneReplyMutationHookResult = ReturnType<typeof useCreateOneReplyMutation>;
-export type CreateOneReplyMutationResult = Apollo.MutationResult<CreateOneReplyMutation>;
-export type CreateOneReplyMutationOptions = Apollo.BaseMutationOptions<CreateOneReplyMutation, CreateOneReplyMutationVariables>;
-export const CommentsByPageDocument = gql`
-    query commentsByPage($pageId: String!) {
-  comments(where: {pageId: {equals: $pageId}, parentId: {equals: null}}) {
-    id
-    pageId
-    content
-    parentId
-    createdAt
-    user {
-      id
-      name
-      avatar
-    }
-    likes {
-      id
-      user {
-        id
-        name
-        avatar
-      }
-    }
-    replies {
-      id
-      pageId
-      parentId
-      content
-      createdAt
-      user {
-        id
-        name
-        avatar
-      }
-      likes {
-        id
-        user {
-          id
-          name
-          avatar
-        }
-      }
-      replies {
-        id
-        pageId
-        parentId
-        content
-        createdAt
-        user {
-          id
-          name
-          avatar
-        }
-        likes {
-          id
-          user {
-            id
-            name
-            avatar
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useCommentsByPageQuery__
- *
- * To run a query within a React component, call `useCommentsByPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useCommentsByPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCommentsByPageQuery({
- *   variables: {
- *      pageId: // value for 'pageId'
- *   },
- * });
- */
-export function useCommentsByPageQuery(baseOptions: Apollo.QueryHookOptions<CommentsByPageQuery, CommentsByPageQueryVariables>) {
-        return Apollo.useQuery<CommentsByPageQuery, CommentsByPageQueryVariables>(CommentsByPageDocument, baseOptions);
-      }
-export function useCommentsByPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentsByPageQuery, CommentsByPageQueryVariables>) {
-          return Apollo.useLazyQuery<CommentsByPageQuery, CommentsByPageQueryVariables>(CommentsByPageDocument, baseOptions);
-        }
-export type CommentsByPageQueryHookResult = ReturnType<typeof useCommentsByPageQuery>;
-export type CommentsByPageLazyQueryHookResult = ReturnType<typeof useCommentsByPageLazyQuery>;
-export type CommentsByPageQueryResult = Apollo.QueryResult<CommentsByPageQuery, CommentsByPageQueryVariables>;
-export const CommentDetailsDocument = gql`
-    query commentDetails($commentId: String) {
-  comment(where: {id: $commentId}) {
-    id
-    content
-    createdAt
-    user {
-      id
-      name
-      avatar
-    }
-    likes {
-      id
-      user {
-        id
-        name
-        avatar
-      }
-    }
-    replies {
-      id
-      content
-      createdAt
-      user {
-        id
-        name
-        avatar
-      }
-      likes {
-        id
-        user {
-          id
-          name
-          avatar
-        }
-      }
-    }
-    parent {
-      id
-      content
-      createdAt
-      user {
-        id
-        name
-        avatar
-      }
-      likes {
-        id
-        user {
-          id
-          name
-          avatar
-        }
-      }
-      parent {
-        id
-        content
-        createdAt
-        user {
-          id
-          name
-          avatar
-        }
-        likes {
-          id
-          user {
-            id
-            name
-            avatar
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useCommentDetailsQuery__
- *
- * To run a query within a React component, call `useCommentDetailsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCommentDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCommentDetailsQuery({
- *   variables: {
- *      commentId: // value for 'commentId'
- *   },
- * });
- */
-export function useCommentDetailsQuery(baseOptions?: Apollo.QueryHookOptions<CommentDetailsQuery, CommentDetailsQueryVariables>) {
-        return Apollo.useQuery<CommentDetailsQuery, CommentDetailsQueryVariables>(CommentDetailsDocument, baseOptions);
-      }
-export function useCommentDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentDetailsQuery, CommentDetailsQueryVariables>) {
-          return Apollo.useLazyQuery<CommentDetailsQuery, CommentDetailsQueryVariables>(CommentDetailsDocument, baseOptions);
-        }
-export type CommentDetailsQueryHookResult = ReturnType<typeof useCommentDetailsQuery>;
-export type CommentDetailsLazyQueryHookResult = ReturnType<typeof useCommentDetailsLazyQuery>;
-export type CommentDetailsQueryResult = Apollo.QueryResult<CommentDetailsQuery, CommentDetailsQueryVariables>;
-export const CurrentUserDocument = gql`
-    query currentUser {
-  currentUser {
-    id
-    email
-    name
-    avatar
-    members {
-      id
-      role
-      team {
-        id
-        name
-        projects {
-          id
-          name
-        }
-      }
-    }
-    projects {
-      id
-      name
-    }
-  }
-}
-    `;
-
-/**
- * __useCurrentUserQuery__
- *
- * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCurrentUserQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-      }
-export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-        }
-export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
-export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
-export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
-export const CreateOneLikeDocument = gql`
-    mutation createOneLike($userId: String!, $commentId: String!) {
-  createOneLike(
-    data: {comment: {connect: {id: $commentId}}, user: {connect: {id: $userId}}}
-  ) {
-    id
-    user {
-      id
-      name
-      avatar
-    }
-  }
-}
-    `;
-export type CreateOneLikeMutationFn = Apollo.MutationFunction<CreateOneLikeMutation, CreateOneLikeMutationVariables>;
-
-/**
- * __useCreateOneLikeMutation__
- *
- * To run a mutation, you first call `useCreateOneLikeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneLikeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createOneLikeMutation, { data, loading, error }] = useCreateOneLikeMutation({
- *   variables: {
- *      userId: // value for 'userId'
- *      commentId: // value for 'commentId'
- *   },
- * });
- */
-export function useCreateOneLikeMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneLikeMutation, CreateOneLikeMutationVariables>) {
-        return Apollo.useMutation<CreateOneLikeMutation, CreateOneLikeMutationVariables>(CreateOneLikeDocument, baseOptions);
-      }
-export type CreateOneLikeMutationHookResult = ReturnType<typeof useCreateOneLikeMutation>;
-export type CreateOneLikeMutationResult = Apollo.MutationResult<CreateOneLikeMutation>;
-export type CreateOneLikeMutationOptions = Apollo.BaseMutationOptions<CreateOneLikeMutation, CreateOneLikeMutationVariables>;
-export const DeleteOneLikeDocument = gql`
-    mutation deleteOneLike($id: String!) {
-  deleteOneLike(where: {id: $id}) {
-    id
-  }
-}
-    `;
-export type DeleteOneLikeMutationFn = Apollo.MutationFunction<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>;
-
-/**
- * __useDeleteOneLikeMutation__
- *
- * To run a mutation, you first call `useDeleteOneLikeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteOneLikeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteOneLikeMutation, { data, loading, error }] = useDeleteOneLikeMutation({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useDeleteOneLikeMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>) {
-        return Apollo.useMutation<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>(DeleteOneLikeDocument, baseOptions);
-      }
-export type DeleteOneLikeMutationHookResult = ReturnType<typeof useDeleteOneLikeMutation>;
-export type DeleteOneLikeMutationResult = Apollo.MutationResult<DeleteOneLikeMutation>;
-export type DeleteOneLikeMutationOptions = Apollo.BaseMutationOptions<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>;
-export const PageByProjectDocument = gql`
-    query pageByProject($projectId: String!, $url: String!, $title: String!) {
-  getOrCreatePage(projectId: $projectId, url: $url, title: $title) {
-    id
-    url
-    title
-  }
-}
-    `;
-
-/**
- * __usePageByProjectQuery__
- *
- * To run a query within a React component, call `usePageByProjectQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageByProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageByProjectQuery({
- *   variables: {
- *      projectId: // value for 'projectId'
- *      url: // value for 'url'
- *      title: // value for 'title'
- *   },
- * });
- */
-export function usePageByProjectQuery(baseOptions: Apollo.QueryHookOptions<PageByProjectQuery, PageByProjectQueryVariables>) {
-        return Apollo.useQuery<PageByProjectQuery, PageByProjectQueryVariables>(PageByProjectDocument, baseOptions);
-      }
-export function usePageByProjectLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageByProjectQuery, PageByProjectQueryVariables>) {
-          return Apollo.useLazyQuery<PageByProjectQuery, PageByProjectQueryVariables>(PageByProjectDocument, baseOptions);
-        }
-export type PageByProjectQueryHookResult = ReturnType<typeof usePageByProjectQuery>;
-export type PageByProjectLazyQueryHookResult = ReturnType<typeof usePageByProjectLazyQuery>;
-export type PageByProjectQueryResult = Apollo.QueryResult<PageByProjectQuery, PageByProjectQueryVariables>;
-export const CreateOneProjectDocument = gql`
-    mutation createOneProject($projectName: String!, $userID: String!) {
-  createOneProject(data: {name: $projectName, user: {connect: {id: $userID}}}) {
-    id
-    name
-  }
-}
-    `;
-export type CreateOneProjectMutationFn = Apollo.MutationFunction<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
-
-/**
- * __useCreateOneProjectMutation__
- *
- * To run a mutation, you first call `useCreateOneProjectMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneProjectMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createOneProjectMutation, { data, loading, error }] = useCreateOneProjectMutation({
- *   variables: {
- *      projectName: // value for 'projectName'
- *      userID: // value for 'userID'
- *   },
- * });
- */
-export function useCreateOneProjectMutation(baseOptions?: Apollo.MutationHookOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>) {
-        return Apollo.useMutation<CreateOneProjectMutation, CreateOneProjectMutationVariables>(CreateOneProjectDocument, baseOptions);
-      }
-export type CreateOneProjectMutationHookResult = ReturnType<typeof useCreateOneProjectMutation>;
-export type CreateOneProjectMutationResult = Apollo.MutationResult<CreateOneProjectMutation>;
-export type CreateOneProjectMutationOptions = Apollo.BaseMutationOptions<CreateOneProjectMutation, CreateOneProjectMutationVariables>;
-export const ProjectAllCommentsDocument = gql`
-    query projectAllComments($id: String!) {
-  project(where: {id: $id}) {
-    id
-    pages {
-      id
-      comments {
-        id
-        content
-        user {
-          id
-          name
-          avatar
-        }
-        replies {
-          id
-          content
-          user {
-            id
-            name
-            avatar
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useProjectAllCommentsQuery__
- *
- * To run a query within a React component, call `useProjectAllCommentsQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectAllCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectAllCommentsQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useProjectAllCommentsQuery(baseOptions: Apollo.QueryHookOptions<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>) {
-        return Apollo.useQuery<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>(ProjectAllCommentsDocument, baseOptions);
-      }
-export function useProjectAllCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>) {
-          return Apollo.useLazyQuery<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>(ProjectAllCommentsDocument, baseOptions);
-        }
-export type ProjectAllCommentsQueryHookResult = ReturnType<typeof useProjectAllCommentsQuery>;
-export type ProjectAllCommentsLazyQueryHookResult = ReturnType<typeof useProjectAllCommentsLazyQuery>;
-export type ProjectAllCommentsQueryResult = Apollo.QueryResult<ProjectAllCommentsQuery, ProjectAllCommentsQueryVariables>;

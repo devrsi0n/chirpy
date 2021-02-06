@@ -20,13 +20,13 @@ import {
   CommentsByPageQueryVariables,
   CommentsByPageDocument,
   useCreateOneReplyMutation,
-} from '$/generated/graphql';
+} from '$/graphql/generated/comment';
 import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { CommentByPage } from '$/types/widget';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
 import { prisma } from '$server/context';
-import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/generated/graphql';
+import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/graphql/generated/like';
 import {
   deleteOneLikeInComments,
   createOneLikeInComments,

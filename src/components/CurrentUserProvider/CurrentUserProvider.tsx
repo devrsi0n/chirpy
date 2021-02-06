@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { CurrentUserContext } from '$/context/CurrentUserContext';
-import { CurrentUserQuery, Exact, useCurrentUserQuery } from '$/generated/graphql';
+import {
+  CurrentUserQuery,
+  useCurrentUserQuery,
+  CurrentUserQueryVariables,
+} from '$/graphql/generated/currentUser';
 import { QueryHookOptions } from '@apollo/client';
 
 export type CurrentUserProviderProps = React.PropsWithChildren<{
-  apolloBaseOptions?: QueryHookOptions<
-    CurrentUserQuery,
-    Exact<{
-      [key: string]: never;
-    }>
-  >;
+  apolloBaseOptions?: QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>;
 }>;
 
 export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Element {

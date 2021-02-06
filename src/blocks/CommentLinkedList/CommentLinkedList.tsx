@@ -46,10 +46,10 @@ export function CommentLinkedList({
       ))}
       <div className="flex flex-col items-end">
         <div className={clsx(styles.replyContainer)}>
-          {comment.replies?.map((reply) => (
+          {comment.replies?.map((reply: $TsFixMe) => (
             <MemoCommentLinkedList
               key={reply.id}
-              comment={reply as Comment}
+              comment={reply}
               onClickLikeAction={onClickLikeAction}
               onSubmitReply={onSubmitReply}
             />

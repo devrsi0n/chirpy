@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useCurrentUserQuery } from '$/generated/graphql';
+import { useCurrentUserQuery } from '$/graphql/generated/currentUser';
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>({
   isLogin: false,
