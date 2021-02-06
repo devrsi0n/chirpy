@@ -15,8 +15,10 @@ import { ClientOnly } from '$/components/ClientOnly';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 import { SpinnerIcon } from '$/components/Icons';
 
+export type RTEValue = Node[];
+
 interface IBaseProps {
-  onSubmit?: (value: Node[]) => Promise<void>;
+  onSubmit?: (value: RTEValue) => Promise<void>;
   styles?: {
     root?: string;
     editable?: string;
@@ -25,7 +27,7 @@ interface IBaseProps {
   /**
    * @default 'submit'
    */
-  submitButtonLabel?: string;
+  postButtonLabel?: string;
 
   showDismissButton?: boolean;
   onClickDismiss?: () => void;
@@ -33,8 +35,9 @@ interface IBaseProps {
 
 export interface IRichTextEditorProps extends IBaseProps {
   disabled?: boolean;
-  initialValue?: Node[];
+  initialValue?: RTEValue;
 }
+
 
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
 
@@ -45,7 +48,7 @@ const DEFAULT_INPUT = [
   },
 ];
 
-const getSavedContent = (): Node[] | undefined => {
+const getSavedContent = (): RTEValue | undefined => {
   const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
   return content && JSON.parse(content);
 };
@@ -62,12 +65,12 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     readOnly,
     styles,
     disabled,
-    submitButtonLabel,
+    postButtonLabel,
     showDismissButton,
     onClickDismiss,
   } = props;
-  const [value, setValue] = React.useState<Node[]>(() => getValue(props));
-  const handleRTEChange = (newValue: Node[]) => {
+  const [value, setValue] = React.useState<RTEValue>(() => getValue(props));
+  const handleRTEChange = (newValue: RTEValue) => {
     if (newValue === value) {
       return;
     }
@@ -152,7 +155,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                   onClick={handleSubmitReply}
                 >
                   {isLoading && <SpinnerIcon className="text-gray-400" />}
-                  <span>{submitButtonLabel || 'Submit'}</span>
+                  <span>{postButtonLabel || 'Post'}</span>
                 </Button>
               </div>
             )}
