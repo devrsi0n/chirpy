@@ -27,10 +27,10 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
       />
       <div className="flex flex-col items-end">
         <div className={clsx(styles.replyContainer)}>
-          {comment.replies?.map((reply) => (
+          {comment.replies?.map((reply: $TsFixMe) => (
             <MemoCommentTree
               key={reply.id}
-              comment={reply as CommentByPage}
+              comment={reply}
               onClickLikeAction={onClickLikeAction}
               onSubmitReply={onSubmitReply}
             />

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 
-import { useCreateOneProjectMutation } from '$/generated/graphql';
+import { useCreateOneProjectMutation } from '$/graphql/generated/project';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Button } from '$/components/Button';
 import { List } from '$/components/List';

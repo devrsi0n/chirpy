@@ -2,9 +2,15 @@ overwrite: true
 schema: 'http://localhost:3000/api/graphql'
 documents: 'src/**/*.graphql'
 generates:
-  src/generated/graphql.tsx:
+  src/graphql/generated/types.ts:
+    - typescript
+  src/:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./graphql/generated/types.ts
+      folder: generated
+      extension: .tsx
     plugins:
-      - 'typescript'
       - 'typescript-operations'
       - 'typescript-react-apollo'
   ./graphql.schema.json:
@@ -13,3 +19,6 @@ generates:
 config:
   withComponents: false
   withHooks: true
+hooks:
+  afterAllFileWrite:
+    - prettier --write
