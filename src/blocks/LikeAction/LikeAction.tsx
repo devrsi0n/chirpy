@@ -2,30 +2,37 @@ import * as React from 'react';
 import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
 
-import { CommentByPage } from '$/types/widget';
 import { ActionButton } from '$/components/Button';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
 
-export type HandleClickLikeAction = (isLiked: boolean, likeId: string, commentId: string) => void;
+export type ClickLikeActionHandler = (isLiked: boolean, likeId: string, commentId: string) => void;
+
+export type Like = {
+  id: string;
+  user: {
+    id: string;
+  };
+};
 
 export type LikeActionProps = React.PropsWithChildren<{
-  likes: CommentByPage['likes'];
+  likes: Like[];
   commentId: string;
-  onClickLikeAction: HandleClickLikeAction;
-  currentUserId?: string;
+  onClickLikeAction: ClickLikeActionHandler;
 }>;
 
 // TODO: Animation
 export function LikeAction({
-  likes,
+  likes = [],
   commentId,
-  currentUserId,
   onClickLikeAction,
 }: LikeActionProps): JSX.Element {
+  const { data } = useCurrentUser();
+  const currentUserId = data?.currentUser?.id;
   let likedId = '';
   const liked =
     !!currentUserId &&
     likes.some((like) => {
-      if (like.userId === currentUserId) {
+      if (like.user.id === currentUserId) {
         likedId = like.id;
         return true;
       }

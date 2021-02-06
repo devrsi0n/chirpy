@@ -1,11 +1,12 @@
 import clsx from 'clsx';
 import * as React from 'react';
+import { ArrowLeft } from '@geist-ui/react-icons';
 
 import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg';
-type Icon = 'sun' | 'moon' | 'setting' | 'spinner';
+type Icon = 'sun' | 'moon' | 'setting' | 'spinner' | 'arrow-left';
 
 export type IconButtonProps = BaseButtonProps & {
   icon?: Icon;
@@ -24,6 +25,7 @@ const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
   moon: MoonIcon,
   setting: SettingIcon,
   spinner: SpinnerIcon,
+  'arrow-left': ArrowLeft as $TsFixMe,
 };
 
 export function IconButton({

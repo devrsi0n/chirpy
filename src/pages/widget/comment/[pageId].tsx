@@ -10,10 +10,9 @@ import Head from 'next/head';
 import { Node } from 'slate';
 import { ExecutionResult } from 'graphql';
 
-import { MemoCommentBlock } from '$/blocks/CommentBlock/CommentBlock';
+import { CommentTree } from '$/blocks/CommentTree/CommentTree';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Tabs } from '$/components/Tabs';
-import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import {
   useCreateOneCommentMutation,
@@ -33,12 +32,12 @@ import {
   createOneLikeInComments,
   updateReplyInComments,
 } from '$/utilities/comment';
-import { Logo } from '$/components/Logo';
 import { queryGraphql } from '$server/queryGraphQL';
+import { PoweredBy } from '$/blocks/PoweredBy';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-// Demo: http://localhost:3000/__testing/comment
+// Demo: http://localhost:3000/widget/comment/ckiwwumiv0001uzcv79wjhagt
 
 const COMMENT_TAB_VALUE = 'Comment';
 
@@ -46,7 +45,7 @@ const COMMENT_TAB_VALUE = 'Comment';
  * Comment widget for a page
  * @param props
  */
-export default function CommentWidget(props: PageCommentProps): JSX.Element {
+export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
   const [comments, setComments] = React.useState<CommentByPage[]>(
@@ -172,7 +171,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
       </Head>
       <Tabs
         initialValue={COMMENT_TAB_VALUE}
-        className="mb-3"
+        className=""
         rightItems={
           isLogin && userData?.currentUser?.avatar && userData?.currentUser?.name ? (
             <DropDownUser
@@ -185,18 +184,18 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
         }
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
-          <div className="space-y-5">
+          <div className="space-y-7">
             <div className="space-y-2">
               <RichTextEditor
                 onSubmit={handleSubmit}
-                submitButtonLabel={!isLogin ? 'Login' : undefined}
+                postButtonLabel={!isLogin ? 'Login' : undefined}
               />
             </div>
+
             {comments?.map((comment: CommentByPage) => (
-              <MemoCommentBlock
+              <CommentTree
                 key={comment.id}
                 comment={comment}
-                currentUserId={currentUserId}
                 onClickLikeAction={handleClickLikeAction}
                 onSubmitReply={handleSubmitReply}
               />
@@ -208,10 +207,7 @@ export default function CommentWidget(props: PageCommentProps): JSX.Element {
           value={process.env.NEXT_PUBLIC_APP_NAME}
         />
       </Tabs>
-      <div className="flex flex-row items-center justify-end">
-        <Text className="text-right">Powered by</Text>
-        <Logo size="sm" />
-      </div>
+      <PoweredBy />
     </div>
   );
 }

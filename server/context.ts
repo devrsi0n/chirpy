@@ -5,14 +5,16 @@ const options: Prisma.PrismaClientOptions = {
     process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
 };
 
+let cachePrisma: PrismaClient | null = null;
+
 export const prisma: PrismaClient = (() => {
   if (process.env.NODE_ENV === 'production') {
     return new PrismaClient(options);
   } else {
-    if (!global.prisma) {
-      global.prisma = new PrismaClient(options);
+    if (!cachePrisma) {
+      cachePrisma = new PrismaClient(options);
     }
-    return global.prisma;
+    return cachePrisma;
   }
 })();
 

@@ -18,7 +18,11 @@ mutation createOneComment($pageId: String!, $content: Json!, $userId: String!) {
     }
     likes {
       id
-      userId
+      user {
+        id
+        name
+        avatar
+      }
     }
   }
 }
@@ -43,7 +47,11 @@ mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId
     createdAt
     likes {
       id
-      userId
+      user {
+        id
+        name
+        avatar
+      }
     }
     user {
       id
@@ -62,7 +70,31 @@ mutation createOneReply($id: String!, $content: Json!, $userId: String!, $pageId
       }
       likes {
         id
-        userId
+        user {
+          id
+          name
+          avatar
+        }
+      }
+
+      replies {
+        id
+        pageId
+        content
+        createdAt
+        user {
+          id
+          name
+          avatar
+        }
+        likes {
+          id
+          user {
+            id
+            name
+            avatar
+          }
+        }
       }
     }
   }
@@ -82,7 +114,11 @@ query commentsByPage($pageId: String!) {
     }
     likes {
       id
-      userId
+      user {
+        id
+        name
+        avatar
+      }
     }
     replies {
       id
@@ -97,7 +133,108 @@ query commentsByPage($pageId: String!) {
       }
       likes {
         id
-        userId
+        user {
+          id
+          name
+          avatar
+        }
+      }
+
+      replies {
+        id
+        pageId
+        parentId
+        content
+        createdAt
+        user {
+          id
+          name
+          avatar
+        }
+        likes {
+          id
+          user {
+            id
+            name
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+
+# Query ancestors up to 2 levels
+query commentDetails($commentId: String) {
+  comment(where: { id: $commentId }) {
+    id
+    content
+    createdAt
+    user {
+      id
+      name
+      avatar
+    }
+    likes {
+      id
+      user {
+        id
+        name
+        avatar
+      }
+    }
+    replies {
+      id
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        user {
+          id
+          name
+          avatar
+        }
+      }
+    }
+    parent {
+      id
+      content
+      createdAt
+      user {
+        id
+        name
+        avatar
+      }
+      likes {
+        id
+        user {
+          id
+          name
+          avatar
+        }
+      }
+      parent {
+        id
+        content
+        createdAt
+        user {
+          id
+          name
+          avatar
+        }
+        likes {
+          id
+          user {
+            id
+            name
+            avatar
+          }
+        }
       }
     }
   }
