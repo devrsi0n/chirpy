@@ -4,13 +4,12 @@ export type ISettingIconProps = React.ComponentProps<'svg'> & {
   size?: number;
 };
 
-export function SettingIcon(props: ISettingIconProps): JSX.Element {
-  const { size, ...svgProps } = props;
+export function SettingIcon({ size, ...svgProps }: ISettingIconProps): JSX.Element {
   return (
     <svg
       {...svgProps}
-      width={props.size}
-      height={props.size}
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -38,7 +38,6 @@ export interface IRichTextEditorProps extends IBaseProps {
   initialValue?: RTEValue;
 }
 
-
 const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
 
 const DEFAULT_INPUT = [

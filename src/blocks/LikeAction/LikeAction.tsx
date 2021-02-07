@@ -50,7 +50,7 @@ export function LikeAction({
       activated={liked}
       icon={<HeartComponent size={20} onClick={handleClickLike} />}
     >
-      {!!likes.length && <span>{likes.length}</span>}
+      {likes.length > 0 && <span>{likes.length}</span>}
     </ActionButton>
   );
 }

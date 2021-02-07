@@ -35,6 +35,7 @@ export function Tabs({
   const [tabs, setTabs] = React.useState<TabsLabelItem[]>([]);
 
   const register = React.useMemo(
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     () => (next: TabsLabelItem) => {
       setTabs((last) => {
         const hasItem = last.find((item) => item.value === next.value);

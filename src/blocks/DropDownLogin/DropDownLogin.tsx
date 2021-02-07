@@ -9,13 +9,13 @@ export type DropDownLoginProps = {
   //
 };
 
-export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
-  const handleClickLoginOption = (option: 'google' | 'github') => {
-    return () => {
-      popupCenterWindow(`/api/auth/${option}`, '_blank', 480, 760);
-    };
+const handleClickLoginOption = (option: 'google' | 'github') => {
+  return () => {
+    popupCenterWindow(`/api/auth/${option}`, '_blank', 480, 760);
   };
+};
 
+export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
   return (
     <DropDownMenu content="Login" shape="square">
       <DropDownMenu.Item
@@ -46,8 +46,8 @@ function popupCenterWindow(
   const isMobile =
     /\b(iPhone|iP[ao]d)/.test(userAgent) ||
     /\b(iP[ao]d)/.test(userAgent) ||
-    /Android/i.test(userAgent) ||
-    /Mobile/i.test(userAgent);
+    /android/i.test(userAgent) ||
+    /mobile/i.test(userAgent);
   const screenX = window.screenX || window.screenLeft;
   const screenY = window.screenY || window.screenTop;
   const outerWidth = window.outerWidth || document.documentElement.clientWidth;
@@ -64,9 +64,7 @@ function popupCenterWindow(
   if (targetHeight !== 0) {
     features.push('height=' + targetHeight);
   }
-  features.push('left=' + left);
-  features.push('top=' + right);
-  features.push('scrollbars=1');
+  features.push('left=' + left, 'top=' + right, 'scrollbars=1');
 
   const newWindow = window.open(url, title, features.join(','));
 

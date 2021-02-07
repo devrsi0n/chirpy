@@ -14,7 +14,7 @@ export default function TestingComment(/*props: ITestCommentProps*/): JSX.Elemen
       script.src = '/comment.js';
       script.setAttribute(`data-${appNameLowerCase}-pid`, pid);
 
-      document.body.appendChild(script);
+      document.body.append(script);
     }
   }, []);
   return (

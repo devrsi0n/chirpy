@@ -3,10 +3,8 @@ import * as React from 'react';
 import { CommentDetails } from '$/types/widget';
 import { CommentCard, CommentCardProps } from '../CommentCard';
 import clsx from 'clsx';
-import { ArrowLeft } from '@geist-ui/react-icons';
 
 import styles from './style.module.scss';
-import { IconButton } from '$/components/Button';
 
 export type Comment = NonNullable<CommentDetails>;
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useTheme } from 'next-themes';
 
-import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
 import { Link } from '../Link/Link';
 import { ColorMode } from '../../types/theme.type';

@@ -111,7 +111,7 @@ export default function Dashboard(): JSX.Element {
               </Button>
               <Button
                 className="w-full sm:w-auto"
-                disabled={!!projectNameError.length}
+                disabled={projectNameError.length > 0}
                 onClick={handleSubmit}
               >
                 Submit

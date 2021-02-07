@@ -1,7 +1,7 @@
 import { Transforms, Editor, Text } from 'slate';
 import { Format } from './type';
 
-const LIST_TYPES = ['numbered-list', 'bulleted-list'];
+const LIST_TYPES = new Set(['numbered-list', 'bulleted-list']);
 
 // Define our own custom set of helpers.
 export const CustomEditor = {
@@ -60,15 +60,16 @@ export const CustomEditor = {
 
 export function toggleBlock(editor: Editor, format: Format): void {
   const isActive = isBlockActive(editor, format);
-  const isList = LIST_TYPES.includes(format);
+  const isList = LIST_TYPES.has(format);
 
   Transforms.unwrapNodes(editor, {
-    match: (n) => LIST_TYPES.includes(n.type as string),
+    match: (n) => LIST_TYPES.has(n.type as string),
     split: true,
   });
 
   Transforms.setNodes(editor, {
-    type: isActive ? 'paragraph' : isList ? 'list-item' : format,
+    // eslint-disable-next-line prettier/prettier
+    type: isActive ? 'paragraph' : (isList ? 'list-item' : format),
   });
 
   if (!isActive && isList) {
