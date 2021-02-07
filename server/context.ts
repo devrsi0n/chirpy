@@ -1,21 +1,16 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 
+import { isENVDev } from './utilities/env';
+
 const options: Prisma.PrismaClientOptions = {
-  log:
-    process.env.NODE_ENV === 'development' ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
+  log: isENVDev ? ['query', 'info', 'warn', 'error'] : ['warn', 'error'],
 };
 
-let cachePrisma: PrismaClient | null = null;
-
 export const prisma: PrismaClient = (() => {
-  if (process.env.NODE_ENV === 'production') {
-    return new PrismaClient(options);
-  } else {
-    if (!cachePrisma) {
-      cachePrisma = new PrismaClient(options);
-    }
-    return cachePrisma;
+  if (!global.prisma) {
+    global.prisma = new PrismaClient(options);
   }
+  return global.prisma;
 })();
 
 export interface Context {
