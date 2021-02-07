@@ -41,7 +41,7 @@ export function comment(): void {
         return;
       }
       const id = getIframeId(page.id);
-      if (window.document.getElementById(id)) {
+      if (window.document.querySelector(`#${id}`)) {
         return;
       }
       const container = document.createElement('iframe');
@@ -51,7 +51,7 @@ export function comment(): void {
       container.frameBorder = '0';
       container.scrolling = 'no';
       let previousHeight = 0;
-      container.onload = function () {
+      container.addEventListener('load', function () {
         previousHeight = setIframeHeight(container, previousHeight);
         window.addEventListener(
           'message',
@@ -67,9 +67,9 @@ export function comment(): void {
           },
           false,
         );
-      };
+      });
 
-      renderTarget.appendChild(container);
+      renderTarget.append(container);
     });
 }
 

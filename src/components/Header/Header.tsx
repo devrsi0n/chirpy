@@ -29,16 +29,15 @@ export function Header(): JSX.Element {
     if (data?.currentUser?.projects?.length && !selectedProject) {
       const lastSelectedProject = localStorage.getItem(SELECTED_PROJECT_ID);
       setSelectedProject(
-        data.currentUser.projects.filter(
-          (project: Project) => project.id === lastSelectedProject,
-        )[0] || data.currentUser.projects[0],
+        data.currentUser.projects.find((project: Project) => project.id === lastSelectedProject) ||
+          data.currentUser.projects[0],
       );
     }
   }, [data?.currentUser?.projects, selectedProject]);
   const handleSelectProject = React.useCallback(
     (projectID: string) => {
       setSelectedProject(
-        data?.currentUser?.projects?.filter((project: Project) => project.id === projectID)[0],
+        data?.currentUser?.projects?.find((project: Project) => project.id === projectID),
       );
       localStorage.setItem(SELECTED_PROJECT_ID, projectID);
     },
@@ -53,7 +52,7 @@ export function Header(): JSX.Element {
   const router = useRouter();
 
   if (error) {
-    console.error('Get current user error: ', error);
+    console.error('Get current user error:', error);
   }
   return (
     <header

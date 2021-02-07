@@ -91,7 +91,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   const [deleteOneLike] = useDeleteOneLikeMutation();
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
-      throw Error('Login first');
+      throw new Error('Login first');
     }
     if (isLiked) {
       await deleteOneLike({
@@ -269,9 +269,9 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       props: { comments, pageId },
       revalidate: 1,
     };
-  } catch (err) {
-    console.error(err);
-    throw new Error(err);
+  } catch (error) {
+    console.error(error);
+    throw new Error(error);
   }
 };
 

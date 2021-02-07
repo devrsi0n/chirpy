@@ -4,13 +4,12 @@ export type ISunIconProps = React.ComponentProps<'svg'> & {
   size?: number;
 };
 
-export function SunIcon(props: ISunIconProps): JSX.Element {
-  const { size, ...svgProps } = props;
+export function SunIcon({ size, ...svgProps }: ISunIconProps): JSX.Element {
   return (
     <svg
       {...svgProps}
-      width={props.size}
-      height={props.size}
+      width={size}
+      height={size}
       viewBox="0 0 21 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

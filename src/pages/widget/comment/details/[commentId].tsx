@@ -24,6 +24,13 @@ import { PoweredBy } from '$/blocks/PoweredBy';
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { IconButton } from '$/components/Button';
 
+const handleSubmitReply = () => {
+  return Promise.resolve();
+};
+const handleClickBack = () => {
+  window.history.back();
+};
+
 // Demo: http://localhost:3000/widget/comment/details/ckjqveq4q0000docvo1otdtfb
 export default function CommentDetailsWidget({
   comment,
@@ -34,15 +41,9 @@ export default function CommentDetailsWidget({
   const currentUserId = userData?.currentUser?.id;
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
-      throw Error('Login first');
+      throw new Error('Login first');
     }
     console.log('handleClick');
-  };
-  const handleSubmitReply = () => {
-    return Promise.resolve();
-  };
-  const handleClickBack = () => {
-    window.history.back();
   };
 
   return (

@@ -4,13 +4,12 @@ export type IMoonIconProps = React.ComponentProps<'svg'> & {
   size?: number;
 };
 
-export function MoonIcon(props: IMoonIconProps): JSX.Element {
-  const { size, ...svgProps } = props;
+export function MoonIcon({ size, ...svgProps }: IMoonIconProps): JSX.Element {
   return (
     <svg
       {...svgProps}
-      width={props.size}
-      height={props.size}
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
