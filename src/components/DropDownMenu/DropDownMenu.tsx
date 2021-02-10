@@ -22,7 +22,7 @@ export function DropDownMenu({
   return (
     <div className="relative inline-block text-left">
       <Menu>
-        {({ open }) => (
+        {({ open }: { open: boolean }) => (
           <>
             <Menu.Button
               className={clsx(
