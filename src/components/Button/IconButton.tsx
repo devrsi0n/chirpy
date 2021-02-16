@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import * as React from 'react';
-import { ArrowLeft } from '@geist-ui/react-icons';
+import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 
 import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
