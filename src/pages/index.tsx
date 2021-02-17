@@ -24,7 +24,7 @@ function Home(): JSX.Element {
         >
           Comment system made easy.
         </h1>
-        <Text className="text-gray-500 text-center">
+        <Text className="text-gray-500 text-center dark:text-gray-400">
           Access your audience quickly by integrating a modern comment system.
         </Text>
         <div className="flex justify-center items-center space-x-6">

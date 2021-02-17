@@ -1,5 +1,4 @@
 import * as React from 'react';
-import clsx from 'clsx';
 import { useSlate } from 'slate-react';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import BoldIcon from '@geist-ui/react-icons/bold';
@@ -8,36 +7,36 @@ import ItalicIcon from '@geist-ui/react-icons/italic';
 import { Format, Icon } from './type';
 import { isBlockActive, isMarkActive, toggleBlock, toggleMark } from './utilities';
 import { useRichTextEditorContext } from './RichTextEditorContext';
+import { BaseButton, BaseButtonProps } from '$/components/Button';
+import clsx from 'clsx';
 
-type BaseButtonProps = {
+type BaseFormatButtonProps = {
   isActive?: boolean;
   children?: React.ReactNode;
-} & React.ComponentProps<'button'>;
+} & BaseButtonProps;
 
-/**
- * TODO: Replace this button with components/Button
- * @param param0
- */
 export function BaseFormatButton({
   className,
   isActive,
   children,
   ...restProps
-}: BaseButtonProps): JSX.Element {
+}: BaseFormatButtonProps): JSX.Element {
   const { disabled } = useRichTextEditorContext();
   return (
-    <button
-      type="button"
+    <BaseButton
       {...restProps}
+      disabled={disabled}
       className={clsx(
-        'p-1',
-        disabled ? 'pointer-events-none hover:cursor-not-allowed' : 'hover:bg-gray-100',
-        isActive ? 'text-blue-600' : 'text-gray-600',
+        'p-1 rounded-sm',
+        disabled
+          ? 'pointer-events-none hover:cursor-not-allowed'
+          : 'hover:bg-gray-100 dark:hover:bg-gray-800',
+        isActive ? 'text-gray-900 dark:text-gray-200' : 'text-gray-600 dark:text-gray-400',
         className,
       )}
     >
       {children}
-    </button>
+    </BaseButton>
   );
 }
 
@@ -47,18 +46,18 @@ const iconMap = {
   underline: UnderlineIcon,
 };
 
-export type ButtonProps = {
+export type ButtonFormatProps = {
   format: Format;
   icon: Icon;
 };
 
-export function BlockButton({ format, icon }: ButtonProps): JSX.Element {
+export function BlockButton({ format, icon }: ButtonFormatProps): JSX.Element {
   const editor = useSlate();
   const Icon = iconMap[icon];
   return (
     <BaseFormatButton
       isActive={isBlockActive(editor, format)}
-      onMouseDown={(event) => {
+      onClick={(event) => {
         event.preventDefault();
         toggleBlock(editor, format);
       }}
@@ -68,13 +67,13 @@ export function BlockButton({ format, icon }: ButtonProps): JSX.Element {
   );
 }
 
-export function MarkButton({ format, icon }: ButtonProps): JSX.Element {
+export function MarkButton({ format, icon }: ButtonFormatProps): JSX.Element {
   const editor = useSlate();
   const Icon = iconMap[icon];
   return (
     <BaseFormatButton
       isActive={isMarkActive(editor, format)}
-      onMouseDown={(event) => {
+      onClick={(event) => {
         event.preventDefault();
         toggleMark(editor, format);
       }}

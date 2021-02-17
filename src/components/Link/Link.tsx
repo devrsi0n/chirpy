@@ -60,7 +60,9 @@ export function Link(props: LinkProps): JSX.Element {
           className={clsx(
             `relative transition duration-150 ease-in-out`,
             size && sizeStyles[size],
-            isCurrentURL ? 'font-bold' : 'text-gray-600 hover:text-gray-900',
+            isCurrentURL
+              ? 'font-bold'
+              : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100',
             className,
           )}
           onMouseEnter={() => setIsHovering(true)}
@@ -71,7 +73,7 @@ export function Link(props: LinkProps): JSX.Element {
             <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
               <Transition
                 as="span"
-                className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900"
+                className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900 dark:bg-gray-300"
                 show={isHovering}
                 enter="transition ease duration-200"
                 enterFrom="scale-0"

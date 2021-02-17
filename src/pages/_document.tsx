@@ -20,7 +20,7 @@ class MyDocument extends Document {
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
         </Head>
-        <body className="bg-background transition duration-150">
+        <body className="bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-150">
           <Main />
           <NextScript />
         </body>

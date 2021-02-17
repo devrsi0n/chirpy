@@ -16,7 +16,7 @@ export type IconButtonProps = BaseButtonProps & {
 
 const sizeStyles: Record<Size, [string, number]> = {
   sm: ['p-2', 14],
-  md: ['p-4', 18],
+  md: ['p-3', 18],
   lg: ['p-6', 24],
 };
 
@@ -28,19 +28,18 @@ const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
   'arrow-left': ArrowLeft as $TsFixMe,
 };
 
-export function IconButton({
-  size = 'md',
-  icon,
-  children,
-  ...restProps
-}: IconButtonProps): JSX.Element {
+export const IconButton = React.forwardRef(function IconButton(
+  { size = 'md', icon, children, ...restProps }: IconButtonProps,
+  ref: React.Ref<HTMLButtonElement>,
+): JSX.Element {
   const Icon = icon ? icons[icon] : null;
   const [style, sizeNumber] = sizeStyles[size];
   return (
     <BaseButton
+      ref={ref}
       {...restProps}
       className={clsx(
-        'rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200',
+        'rounded-full hover:bg-gray-400 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200',
         style,
       )}
     >
@@ -48,4 +47,4 @@ export function IconButton({
       {children}
     </BaseButton>
   );
-}
+});

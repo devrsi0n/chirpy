@@ -1,10 +1,22 @@
 .hairlines {
+  @apply bg-gray-200;
   height: 1px;
+  border-style: initial;
+
+  &::after {
+    border-style: initial;
+  }
+}
+
+:global(.dark) {
+  .hairlines {
+    @apply bg-gray-700;
+  }
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .hairlines:after {
-    @apply bg-divider;
+    @apply bg-gray-200;
     content: '';
     position: absolute;
     left: 0;
@@ -12,5 +24,11 @@
     height: 1px;
     transform: scaleY(0.5);
     transform-origin: 0 0;
+  }
+
+  :global(.dark) {
+    .hairlines:after {
+      @apply bg-gray-700;
+    }
   }
 }

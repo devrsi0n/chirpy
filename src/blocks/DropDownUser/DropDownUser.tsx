@@ -22,7 +22,12 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   return (
-    <DropDownMenu content={<Avatar src={props.avatar} alt={`The avatar of ${props.name}`} />}>
+    <DropDownMenu
+      classes={{
+        button: 'transform translate-x-3',
+      }}
+      content={<Avatar src={props.avatar} alt={`The avatar of ${props.name}`} />}
+    >
       <DropDownMenu.Item>
         <Toggle
           label="Subscribe this comment"
@@ -41,7 +46,7 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
       </DropDownMenu.Item>
       <Divider />
       <DropDownMenu.Item className="justify-end space-x-2" onClick={handleClickLogOut}>
-        <LogOut />
+        <LogOut size={14} />
         <span>Logout</span>
       </DropDownMenu.Item>
     </DropDownMenu>

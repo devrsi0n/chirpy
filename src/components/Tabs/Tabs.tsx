@@ -74,20 +74,22 @@ export function Tabs({
   return (
     <TabsContext.Provider value={initialValue}>
       <section {...restProps} className={clsx('', className)}>
-        <header className="flex flex-row items-center justify-between border-b">
+        <header className="flex flex-row items-center justify-between border-b dark:border-gray-700">
           <nav className="space-x-1 border-gray-400">
             {tabs.map((item) => (
               <BaseButton
                 className={clsx(
-                  'hover:rounded hover:bg-gray-50 border-b-2 border-transparent p-3',
-                  selfValue === item.value && 'text-primary border-primary',
+                  'hover:rounded hover:bg-gray-50 dark:hover:bg-gray-900 border-b-2 p-3',
+                  selfValue === item.value
+                    ? 'text-purple-500 border-purple-500'
+                    : 'border-transparent',
                 )}
                 style={{
                   borderTopWidth: 0,
                   borderLeftWidth: 0,
                   borderRightWidth: 0,
                 }}
-                onMouseDown={handleKeyDown}
+                // onMouseDown={handleKeyDown}
                 key={item.value}
                 onClick={() => handleClickTab(item)}
               >

@@ -10,7 +10,7 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
     <>
       <div
         role="separator"
-        className={clsx('w-auto max-w-full relative bg-divider', styles.hairlines, className)}
+        className={clsx('w-auto max-w-full relative', styles.hairlines, className)}
         style={style}
         {...divProps}
       />

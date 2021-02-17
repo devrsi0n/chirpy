@@ -36,13 +36,13 @@ export function Popover(props: IPopoverProps): JSX.Element {
           }}
         >
           <div
-            className="absolute h-4 w-4 transform rotate-45 shadow bg-background"
+            className="absolute h-4 w-4 transform rotate-45 shadow bg-white dark:bg-black"
             style={{
               top: '-8px',
               right: '8px',
             }}
           />
-          <div className="relative py-2 rounded-sm bg-background">{props.content}</div>
+          <div className="relative py-2 rounded-sm bg-white dark:bg-black">{props.content}</div>
         </div>
       )}
     </div>

@@ -58,7 +58,7 @@ export function CommentCard({
   const detailsURL = `/widget/comment/details/${commentId}`;
   return (
     <article
-      className="flex flex-row items-start p-4 space-x-3 border rounded-lg shadow-sm"
+      className="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
       {...(isENVDev && {
         id: commentId,
       })}
