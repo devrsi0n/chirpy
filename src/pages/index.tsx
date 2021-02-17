@@ -31,10 +31,13 @@ function Home(): JSX.Element {
           <Button
             variant="solid"
             color="purple"
-            className="space-x-1 transition-shadow hover:shadow-2xl"
+            className="space-x-1 transition hover:shadow-2xl group"
           >
             <span>Try It Free</span>
-            <ArrowRight size="20px" />
+            <ArrowRight
+              size="20px"
+              className="inline-block transition transform group-hover:translate-x-1"
+            />
           </Button>
           <Button variant="plain">Learn More</Button>
         </div>
