@@ -57,7 +57,7 @@ export function Header(): JSX.Element {
   return (
     <header
       className={clsx(
-        'w-full py-5 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-divider sm:z-20 bg-white-light',
+        'w-full py-5 transition duration-150 border-b sm:sticky sm:top-0 sm:left-0 border-gray-300 dark:border-gray-700 sm:z-20',
         styles.header,
       )}
     >
@@ -124,7 +124,7 @@ export function Header(): JSX.Element {
                     variant="plain"
                     className="flex flex-row items-center space-x-1"
                   >
-                    <LogOut />
+                    <LogOut size={14} />
                     <span>Logout</span>
                   </Link>
                 </DropDownMenu.Item>

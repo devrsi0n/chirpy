@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { GoogleIcon } from '$/components/Icons';
-import { GitHubIcon } from '$/components/Icons';
+import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
 
 export type DropDownLoginProps = {
   //
@@ -29,7 +29,7 @@ export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
         className="flex flex-row justify-end space-x-4"
         onClick={handleClickLoginOption('github')}
       >
-        <GitHubIcon width={18} height={18} />
+        <GitHubLogo width={18} height={18} />
         <span>GitHub</span>
       </DropDownMenu.Item>
     </DropDownMenu>

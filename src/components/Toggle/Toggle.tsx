@@ -48,7 +48,7 @@ export function Toggle({
         onChange={onChange}
         onMouseDown={handleMoudDown}
         className={`${
-          enabled ? 'bg-primary' : 'bg-gray-300'
+          enabled ? 'bg-purple-500' : 'bg-gray-300 dark:bg-gray-600'
         } relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-11 focus:outline-none focus:shadow-outline`}
       >
         {({ checked }) => (

@@ -28,7 +28,7 @@ export function Footer(): JSX.Element {
 
   const icon = icons[(theme as ColorMode) || 'system'];
   return (
-    <footer className="w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-divider footer text-text">
+    <footer className="w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 footer text-text">
       <nav className="flex flex-row flex-wrap justify-center w-full space-x-6 leading-8">
         <Link href="/about">About</Link>
         <Link href="/blog">Blog</Link>

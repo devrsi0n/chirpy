@@ -4,7 +4,7 @@ import { AriaButtonProps } from '@react-types/button';
 import clsx from 'clsx';
 
 export type BaseButtonProps = AriaButtonProps &
-  Omit<React.ComponentPropsWithoutRef<'button'>, keyof AriaButtonProps>;
+  Omit<React.ComponentPropsWithRef<'button'>, keyof AriaButtonProps>;
 
 const BaseButton = React.forwardRef(function BaseButton(
   { type = 'button', children, className, onClick, ...restProps }: BaseButtonProps,

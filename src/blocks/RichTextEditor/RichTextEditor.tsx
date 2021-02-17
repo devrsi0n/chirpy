@@ -4,6 +4,8 @@ import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import clsx from 'clsx';
 import DismissIcon from '@geist-ui/react-icons/x';
+import Lock from '@geist-ui/react-icons/lock';
+import Send from '@geist-ui/react-icons/send';
 
 import { Leaf } from './Leaf';
 import { Element } from './Element';
@@ -14,6 +16,8 @@ import { BaseFormatButton, MarkButton } from './FormatButton';
 import { ClientOnly } from '$/components/ClientOnly';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 import { SpinnerIcon } from '$/components/Icons';
+import { Text } from '$/components/Text';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
 
 export type RTEValue = Node[];
 
@@ -77,6 +81,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     localStorage.setItem(STORAGE_KEY, JSON.stringify(newValue));
   };
 
+  const { isLogin } = useCurrentUser();
   const editor = React.useMemo(() => withReact(createEditor()), []);
   const richTextEditorContext = React.useMemo(() => ({ disabled }), [disabled]);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -120,9 +125,11 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             <Editable
               readOnly={readOnly}
               className={clsx(
-                'prose rounded border border-transparent focus:border-gray-600',
+                'prose dark:prose-light rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300',
                 disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
-                !readOnly && ' shadow-sm pb-2 px-2 border-gray-200',
+                !readOnly
+                  ? 'shadow-sm p-2 border-gray-200 dark:border-gray-700'
+                  : 'border-transparent',
                 styles?.editable,
               )}
               style={{
@@ -153,8 +160,14 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                   className={clsx('space-x-1', isLoading ? 'cursor-not-allowed' : '')}
                   onClick={handleSubmitReply}
                 >
-                  {isLoading && <SpinnerIcon className="text-gray-400" />}
-                  <span>{postButtonLabel || 'Post'}</span>
+                  {isLoading ? (
+                    <SpinnerIcon className="text-gray-400" />
+                  ) : !isLogin ? (
+                    <Lock size="14" />
+                  ) : (
+                    <Send size="14" />
+                  )}
+                  <Text>{postButtonLabel || 'Post'}</Text>
                 </Button>
               </div>
             )}

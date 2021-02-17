@@ -43,7 +43,7 @@ module.exports = {
     "unicorn/no-keyword-prefix": "off",
     "unicorn/no-lonely-if": "error",
     "no-nested-ternary": "off",
-    "unicorn/no-nested-ternary": "error",
+    "unicorn/no-nested-ternary": "off",
     "unicorn/no-new-array": "error",
     "unicorn/no-new-buffer": "error",
     // "unicorn/no-null": "error",

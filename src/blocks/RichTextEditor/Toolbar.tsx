@@ -8,7 +8,10 @@ export type ToolbarProps = React.PropsWithChildren<React.ComponentProps<'div'>>;
 export function Toolbar({ className, children, ...divProps }: ToolbarProps): JSX.Element {
   return (
     <div
-      className={clsx('px-1 py-1 leading-none border rounded shadow-sm', className)}
+      className={clsx(
+        'px-1 py-1 leading-none border dark:border-gray-700 rounded shadow-sm',
+        className,
+      )}
       {...divProps}
     >
       {children}

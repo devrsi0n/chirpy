@@ -19,13 +19,13 @@ export default function TestingComment(/*props: ITestCommentProps*/): JSX.Elemen
   }, []);
   return (
     <div>
-      <Text>Test comments:</Text>
+      <Text className="text-center">Test comments:</Text>
       <div
         {...{
           [`data-${appNameLowerCase}-comment`]: 'true',
         }}
       ></div>
-      <footer>This is the bottom of this page.</footer>
+      <footer className="text-center">This is the bottom of this page.</footer>
     </div>
   );
 }

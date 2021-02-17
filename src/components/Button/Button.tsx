@@ -9,7 +9,7 @@ type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'purple' | 'gray';
 type Variant = 'solid' | 'plain' /*| 'ghost' */;
 
-export type IButtonProps = BaseButtonProps & {
+export type ButtonProps = BaseButtonProps & {
   variant?: Variant;
   children: React.ReactNode;
   color?: Color;
@@ -37,15 +37,18 @@ type VariantColors = {
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-purple': `bg-purple-600 text-text-inverse border border-purple-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
+  'solid-purple': `bg-purple-600 text-white border border-purple-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
   'solid-gray': `bg-gray-600 text-text-inverse border border-gray-700 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
 
   'plain-purple': `bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
-  'plain-gray': `bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
+  'plain-gray': `bg-white dark:bg-transparent text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
 };
 
 // TODO: Fix click drip animation and extract it to the base button
-export function Button(props: IButtonProps): JSX.Element {
+export const Button = React.forwardRef(function Button(
+  props: ButtonProps,
+  ref: React.Ref<HTMLButtonElement>,
+): JSX.Element {
   const {
     variant = 'plain',
     color = 'gray',
@@ -58,29 +61,31 @@ export function Button(props: IButtonProps): JSX.Element {
     children,
     ...restProps
   } = props;
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
   const [dripShow, setDripShow] = React.useState<boolean>(false);
   const [dripX, setDripX] = React.useState<number>(0);
   const [dripY, setDripY] = React.useState<number>(0);
+  const defaultRef = React.useRef<HTMLButtonElement>();
+  const _ref: React.RefObject<HTMLButtonElement> = (ref ||
+    defaultRef) as React.RefObject<HTMLButtonElement>;
   const onDripCompleted = React.useCallback(() => {
     setDripShow(false);
     setDripX(0);
     setDripY(0);
-    onClick?.();
-  }, [onClick]);
-  const clickHandler = React.useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
+  }, []);
+  const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (_ref.current) {
+      const rect = _ref.current.getBoundingClientRect();
       setDripShow(true);
       setDripX(event.clientX - rect.left);
       setDripY(event.clientY - rect.top);
     }
-  }, []);
+    onClick?.(event);
+  };
   return (
     <>
       <BaseButton
         {...restProps}
-        ref={buttonRef}
+        ref={_ref}
         className={clsx(
           'focus:outline-none',
           sizeStyles[size],
@@ -96,7 +101,7 @@ export function Button(props: IButtonProps): JSX.Element {
       </BaseButton>
     </>
   );
-}
+});
 
 interface ButtonDripProps {
   x: number;
