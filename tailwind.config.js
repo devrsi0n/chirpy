@@ -93,6 +93,7 @@ module.exports = {
     extend: {
       borderWidth: ['hover', 'focus'],
       typography: ['dark'],
+      translate: ['group-hover'],
     }
   },
   plugins: [
