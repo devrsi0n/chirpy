@@ -1,4 +1,5 @@
 import { PrismaClient, Prisma } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 import { isENVDev } from './utilities/env';
 
@@ -13,10 +14,12 @@ export const prisma: PrismaClient = (() => {
   return global.prisma;
 })();
 
-export interface Context {
+export type Context = {
   prisma: PrismaClient;
-}
+  req: NextApiRequest;
+  res: NextApiResponse;
+};
 
-export function createContext(): Context {
-  return { prisma };
+export function createContext(req: NextApiRequest, res: NextApiResponse): Context {
+  return { prisma, req, res };
 }

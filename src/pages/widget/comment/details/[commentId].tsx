@@ -5,6 +5,8 @@ import {
   GetStaticPaths,
   InferGetStaticPropsType,
   GetStaticPropsResult,
+  NextApiResponse,
+  NextApiRequest,
 } from 'next';
 import { ExecutionResult } from 'graphql';
 
@@ -99,9 +101,14 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   const pageResult: ExecutionResult<
     CommentDetailsQuery,
     CommentDetailsQueryVariables
-  > = await queryGraphql(CommentDetailsDocument, {
-    commentId,
-  });
+  > = await queryGraphql(
+    CommentDetailsDocument,
+    {
+      commentId,
+    },
+    {} as NextApiRequest,
+    {} as NextApiResponse,
+  );
 
   if (!pageResult.data?.comment) {
     return { notFound: true };

@@ -1,18 +1,19 @@
+import * as path from 'path';
 import { asNexusMethod, makeSchema } from 'nexus';
 import { nexusSchemaPrisma } from 'nexus-plugin-prisma/schema';
 import { GraphQLDate } from 'graphql-iso-date';
 import GraphQLJSON from 'graphql-type-json';
 
-import { User } from './types/user';
-import { Team } from './types/team';
-import { Project } from './types/project';
-import { Member } from './types/member';
-import { isENVProd } from './utilities/env';
-import { Query } from './types/query';
-import { Mutation } from './types/mutation';
-import { Page } from './types/page';
-import { Comment } from './types/comment';
-import { Like } from './types/like';
+import { User } from './schema/user';
+import { Team } from './schema/team';
+import { Project } from './schema/project';
+import { Member } from './schema/member';
+import { isENVDev, isENVProd } from './utilities/env';
+import { Query } from './schema/query';
+import { Mutation } from './schema/mutation';
+import { Page } from './schema/page';
+import { Comment } from './schema/comment';
+import { Like } from './schema/like';
 
 export const GQLDate = asNexusMethod(GraphQLDate, 'date');
 
@@ -20,14 +21,15 @@ export const schema = makeSchema({
   sourceTypes: {
     modules: [
       {
-        module: '@prisma/client',
+        module: require.resolve('.prisma/client/index'),
         alias: 'prisma',
       },
-      {
-        module: require.resolve('./context'),
-        alias: 'Context',
-      },
     ],
+    debug: isENVDev,
+  },
+  contextType: {
+    module: path.resolve(require.resolve('./context')),
+    export: 'Context',
   },
   outputs: {
     typegen: process.cwd() + '/nexus-typegen/index.d.ts',
