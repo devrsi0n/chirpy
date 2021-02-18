@@ -5,6 +5,8 @@ import {
   GetStaticPropsResult,
   GetStaticPropsContext,
   GetStaticPaths,
+  NextApiRequest,
+  NextApiResponse,
 } from 'next';
 import Head from 'next/head';
 import { Node } from 'slate';
@@ -34,6 +36,7 @@ import {
 } from '$/utilities/comment';
 import { queryGraphql } from '$server/queryGraphQL';
 import { PoweredBy } from '$/blocks/PoweredBy';
+import { IncomingMessage, ServerResponse } from 'http';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -252,13 +255,17 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       return { notFound: true };
     }
     const { pageId } = params;
-
     const pageResult: ExecutionResult<
       CommentsByPageQuery,
       CommentsByPageQueryVariables
-    > = await queryGraphql(CommentsByPageDocument, {
-      pageId,
-    });
+    > = await queryGraphql(
+      CommentsByPageDocument,
+      {
+        pageId,
+      },
+      {} as NextApiRequest,
+      {} as NextApiResponse,
+    );
 
     if (!pageResult.data?.comments) {
       return { notFound: true };
