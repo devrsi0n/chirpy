@@ -1,0 +1,22 @@
+query pageByURL($url: String!, $projectId: uuid!) {
+  pages(limit: 1, where: { url: { _eq: $url }, projectId: { _eq: $projectId } }) {
+    id
+    url
+    title
+  }
+}
+
+mutation insertOnePage($projectId: uuid!, $title: String!, $url: String!) {
+  insertOnePage(object: { projectId: $projectId, title: $title, url: $url }) {
+    id
+    url
+    title
+  }
+}
+
+# Used in pages/widget/comment/[pageId].tsx
+query pages {
+  pages {
+    id
+  }
+}

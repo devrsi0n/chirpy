@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import Menu from '@geist-ui/react-icons/menu';
+import Dismiss from '@geist-ui/react-icons/x';
 
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
@@ -7,10 +9,8 @@ import LogOut from '@geist-ui/react-icons/logOut';
 import { Avatar } from '$/components/Avatar';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Select } from '$/components/Select';
-import { CurrentUserQuery } from '$/graphql/generated/currentUser';
 import { SlashIcon } from '$/components/Icons/SlashIcon';
-import Menu from '@geist-ui/react-icons/menu';
-import Dismiss from '@geist-ui/react-icons/x';
+import { CurrentUserContextType } from '$/context/CurrentUserContext';
 
 import styles from './style.module.scss';
 import clsx from 'clsx';
@@ -20,28 +20,25 @@ import { SpinnerIcon } from '../Icons';
 import { DropDownMenu } from '../DropDownMenu';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
-type Project = NonNullable<CurrentUserQuery['currentUser']>['projects'][number];
+type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
 
 export function Header(): JSX.Element {
-  const { data, error, loading: signInLoading } = useCurrentUser();
+  const { projects, displayName, avatar, error, loading: signInLoading } = useCurrentUser();
   const [selectedProject, setSelectedProject] = React.useState<Project>();
   React.useEffect(() => {
-    if (data?.currentUser?.projects?.length && !selectedProject) {
+    if (projects?.length && !selectedProject) {
       const lastSelectedProject = localStorage.getItem(SELECTED_PROJECT_ID);
       setSelectedProject(
-        data.currentUser.projects.find((project: Project) => project.id === lastSelectedProject) ||
-          data.currentUser.projects[0],
+        projects.find((project: Project) => project.id === lastSelectedProject) || projects[0],
       );
     }
-  }, [data?.currentUser?.projects, selectedProject]);
+  }, [projects, selectedProject]);
   const handleSelectProject = React.useCallback(
     (projectID: string) => {
-      setSelectedProject(
-        data?.currentUser?.projects?.find((project: Project) => project.id === projectID),
-      );
+      setSelectedProject(projects?.find((project: Project) => project.id === projectID));
       localStorage.setItem(SELECTED_PROJECT_ID, projectID);
     },
-    [data?.currentUser?.projects],
+    [projects],
   );
 
   const [showMenu, setShowMenu] = React.useState(false);
@@ -73,25 +70,23 @@ export function Header(): JSX.Element {
           <div className="flex flex-row sm:items-stretch sm:justify-start">
             <div className="flex flex-row items-center space-x-2">
               <Logo />
-              {router.pathname === '/dashboard' &&
-                !!data?.currentUser?.projects?.length &&
-                selectedProject && (
-                  <>
-                    <SlashIcon className="text-gray-400" />
-                    <Select
-                      value={selectedProject?.id}
-                      name={selectedProject?.name}
-                      onChange={handleSelectProject}
-                      className="w-32 sm:w-40"
-                    >
-                      {data?.currentUser?.projects.map((project: Project) => (
-                        <Select.Option key={project.id} value={project.id}>
-                          {project.name}
-                        </Select.Option>
-                      ))}
-                    </Select>
-                  </>
-                )}
+              {router.pathname === '/dashboard' && !!projects?.length && selectedProject && (
+                <>
+                  <SlashIcon className="text-gray-400" />
+                  <Select
+                    value={selectedProject?.id}
+                    name={selectedProject?.name}
+                    onChange={handleSelectProject}
+                    className="w-32 sm:w-40"
+                  >
+                    {projects.map((project: Project) => (
+                      <Select.Option key={project.id} value={project.id}>
+                        {project.name}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </>
+              )}
             </div>
             <nav className="w-full hidden sm:flex flex-wrap items-center mb-5 space-x-5 sm:mb-0 sm:pl-8 sm:ml-8 sm:border-l sm:border-gray-200">
               <Link href="/" className="" highlightMatch>
@@ -109,15 +104,8 @@ export function Header(): JSX.Element {
             </nav>
           </div>
           <div className="flex">
-            {data?.currentUser?.name ? (
-              <DropDownMenu
-                content={
-                  <Avatar
-                    src={data.currentUser.avatar!}
-                    alt={`The avatar of ${data?.currentUser?.name}`}
-                  />
-                }
-              >
+            {displayName ? (
+              <DropDownMenu content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}>
                 <DropDownMenu.Item className="justify-end space-x-2">
                   <Link
                     href="/api/auth/logout"

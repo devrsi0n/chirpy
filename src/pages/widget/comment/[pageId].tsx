@@ -5,38 +5,26 @@ import {
   GetStaticPropsResult,
   GetStaticPropsContext,
   GetStaticPaths,
-  NextApiRequest,
-  NextApiResponse,
 } from 'next';
 import Head from 'next/head';
 import { Node } from 'slate';
-import { ExecutionResult } from 'graphql';
 
 import { CommentTree } from '$/blocks/CommentTree/CommentTree';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Tabs } from '$/components/Tabs';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import {
-  useCreateOneCommentMutation,
-  CommentsByPageQuery,
-  CommentsByPageQueryVariables,
-  CommentsByPageDocument,
-  useCreateOneReplyMutation,
-} from '$/graphql/generated/comment';
 import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
-import { CommentByPage } from '$/types/widget';
+import { CommentLeaf } from '$/types/widget';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
-import { prisma } from '$server/context';
-import { useCreateOneLikeMutation, useDeleteOneLikeMutation } from '$/graphql/generated/like';
-import {
-  deleteOneLikeInComments,
-  createOneLikeInComments,
-  updateReplyInComments,
-} from '$/utilities/comment';
-import { queryGraphql } from '$server/queryGraphQL';
+import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
+import { deleteOneLikeInComments, createOneLikeInComments } from '$/utilities/like';
+import { updateReplyInComments } from '$/utilities/merge-comment';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { IncomingMessage, ServerResponse } from 'http';
+import { getAdminApollo } from '$server/common/admin-apollo';
+import { PagesDocument } from '$server/graphql/generated/page';
+import { CommentTreeDocument } from '$server/graphql/generated/comment';
+import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -51,7 +39,7 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  const [comments, setComments] = React.useState<CommentByPage[]>(
+  const [comments, setComments] = React.useState<CommentLeaf[]>(
     isStaticError(props) ? [] : props.comments,
   );
   if (isStaticError(props)) {
@@ -59,10 +47,9 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   } else {
     pageId = props.pageId;
   }
-  const { isLogin, data: userData } = useCurrentUser();
-  const currentUserId = userData?.currentUser?.id;
+  const { isLogin, id: currentUserId, avatar, displayName } = useCurrentUser();
 
-  const [createOneComment] = useCreateOneCommentMutation();
+  const [insertOneComment] = useInsertOneCommentMutation();
 
   const handleSubmit = React.useCallback(
     async (content: Node[]) => {
@@ -70,34 +57,33 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
         console.error('Sign-in first');
         return;
       }
-      const { data } = await createOneComment({
+      const { data } = await insertOneComment({
         variables: {
           pageId,
           content,
-          userId: currentUserId,
         },
       });
-      if (data?.createOneComment.id) {
+      if (data?.insertOneComment?.id) {
         setComments((prev) => [
           ...prev,
           {
-            ...data!.createOneComment,
+            ...data.insertOneComment!,
             replies: [],
           },
         ]);
       }
     },
-    [pageId, currentUserId, createOneComment],
+    [pageId, currentUserId, insertOneComment],
   );
 
-  const [createOneLike] = useCreateOneLikeMutation();
-  const [deleteOneLike] = useDeleteOneLikeMutation();
+  const [insertOneLike] = useInsertOneLikeMutation();
+  const [deleteLikeByPk] = useDeleteLikeByPkMutation();
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
       throw new Error('Login first');
     }
     if (isLiked) {
-      await deleteOneLike({
+      await deleteLikeByPk({
         variables: {
           id: likeId,
         },
@@ -110,14 +96,15 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
       }
     } else {
       try {
-        const { data } = await createOneLike({
+        const { data } = await insertOneLike({
           variables: {
             commentId,
-            userId: currentUserId,
+            // userId: currentUserId,
+            compoundId: `${currentUserId}:${commentId}`,
           },
         });
-        if (data?.createOneLike.id) {
-          const updatedComments = createOneLikeInComments(comments, commentId, data.createOneLike);
+        if (data?.insertOneLike?.id) {
+          const updatedComments = createOneLikeInComments(comments, commentId, data.insertOneLike!);
           if (updatedComments !== comments) {
             setComments(updatedComments);
           } else {
@@ -133,26 +120,25 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
     }
   };
 
-  const [createOneReply] = useCreateOneReplyMutation();
   const handleSubmitReply = async (reply: Node[], commentId: string) => {
     if (!currentUserId) {
       console.error('Please sign-in first');
       return Promise.reject();
     }
-    const { data } = await createOneReply({
+    const { data } = await insertOneComment({
       variables: {
-        id: commentId,
+        parentId: commentId,
         content: reply,
         pageId,
-        userId: currentUserId,
       },
     });
-    if (data?.updateOneComment?.replies) {
-      const updatedComments = updateReplyInComments(
-        comments,
-        commentId,
-        data.updateOneComment.replies,
-      );
+    if (data?.insertOneComment?.id) {
+      const updatedComments = updateReplyInComments(comments, commentId, [
+        {
+          ...data.insertOneComment!,
+          replies: [],
+        },
+      ]);
       if (updatedComments !== comments) {
         setComments(updatedComments);
       } else {
@@ -176,14 +162,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
         initialValue={COMMENT_TAB_VALUE}
         className=""
         rightItems={
-          isLogin && userData?.currentUser?.avatar && userData?.currentUser?.name ? (
-            <DropDownUser
-              avatar={userData?.currentUser?.avatar}
-              name={userData?.currentUser?.name}
-            />
-          ) : (
-            <DropDownLogin />
-          )
+          isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />
         }
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
@@ -195,7 +174,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
               />
             </div>
 
-            {comments?.map((comment: CommentByPage) => (
+            {comments?.map((comment: CommentLeaf) => (
               <CommentTree
                 key={comment.id}
                 comment={comment}
@@ -221,11 +200,12 @@ type PathParams = {
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const pages = await prisma.page.findMany({
-    select: {
-      id: true,
-    },
-  });
+  const adminApollo = getAdminApollo();
+  const pages = (
+    await adminApollo.query({
+      query: PagesDocument,
+    })
+  ).data.pages;
 
   const paths: { params: PathParams }[] = pages.map(({ id }) => {
     return {
@@ -241,7 +221,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = PathParams & {
-  comments: CommentByPage[];
+  comments: CommentLeaf[];
 };
 type StaticError = {
   error?: string;
@@ -255,17 +235,13 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       return { notFound: true };
     }
     const { pageId } = params;
-    const pageResult: ExecutionResult<
-      CommentsByPageQuery,
-      CommentsByPageQueryVariables
-    > = await queryGraphql(
-      CommentsByPageDocument,
-      {
+    const adminApollo = getAdminApollo();
+    const pageResult = await adminApollo.query({
+      query: CommentTreeDocument,
+      variables: {
         pageId,
       },
-      {} as NextApiRequest,
-      {} as NextApiResponse,
-    );
+    });
 
     if (!pageResult.data?.comments) {
       return { notFound: true };

@@ -1,40 +1,33 @@
-import { AuthenticationError } from 'apollo-server-micro';
 import { parse } from 'cookie';
-import Iron from '@hapi/iron';
+import jwt from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 
-import { AUTH_COOKIE_NAME } from '../services/constants';
+import { AUTH_COOKIE_NAME } from 'shared/constants';
 
 export type AuthUser = {
-  userId: string;
+  sub: string;
+  name: string;
+  email: string;
 };
 
-export function createSecureToken(payload: AuthUser): Promise<string> {
-  console.log({ hashKey: process.env.HASH_KEY });
-  const token = Iron.seal(payload, process.env.HASH_KEY, Iron.defaults);
-  return token;
-}
-
-export function parseSecureToken(token: string): Promise<AuthUser | null> {
-  try {
-    return Iron.unseal(token, process.env.HASH_KEY, Iron.defaults);
-  } catch (error) {
-    console.error('auth error: ', error);
-    return Promise.resolve(null);
-  }
+function verifyToken(token: string) {
+  const decodedToken = jwt.verify(token, process.env.HASH_KEY, {
+    algorithms: ['HS256'],
+  });
+  return decodedToken as AuthUser;
 }
 
 export async function getUserId(req: NextApiRequest): Promise<string> {
   const token = parse(req.headers.cookie || '')[AUTH_COOKIE_NAME];
   if (!token) {
-    throw new AuthenticationError(`Authentication Error`);
+    throw new Error(`Authentication Error`);
   }
 
-  const authUser = await parseSecureToken(token);
+  const authUser = verifyToken(token);
 
   if (!authUser) {
-    throw new AuthenticationError(`Authentication Error`);
+    throw new Error(`Authentication Error`);
   }
 
-  return authUser.userId;
+  return authUser.sub;
 }

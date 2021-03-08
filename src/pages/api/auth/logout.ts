@@ -1,6 +1,7 @@
 import connect from 'next-connect';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { handleInternalLoginFailure, handleLogout } from '$server/services/passport';
+import { handleLogout } from '$server/services/passport';
+import { handleInternalLoginFailure } from "$server/services/common";
 
 const handler = connect<NextApiRequest, NextApiResponse>({
   onError: handleInternalLoginFailure,

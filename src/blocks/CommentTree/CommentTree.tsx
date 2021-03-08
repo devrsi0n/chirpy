@@ -1,13 +1,13 @@
 import * as React from 'react';
 import clsx from 'clsx';
 
-import { CommentByPage } from '$/types/widget';
+import { CommentLeaf } from '$/types/widget';
 import { CommentCard, CommentCardProps } from '../CommentCard';
 
 import styles from './style.module.scss';
 
 export type CommentProps = {
-  comment: CommentByPage;
+  comment: CommentLeaf;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**

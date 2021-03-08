@@ -1,0 +1,143 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.ContainerInstance/containerGroups",
+      "apiVersion": "2019-12-01",
+      "name": "totalk-container-group",
+      "location": "Central US",
+      "properties": {
+        // "sku": "Standard",
+        "containers": [
+          {
+            "name": "hasura-graphql-engine",
+            "properties": {
+              "image": "hasura/graphql-engine:v1.3.3",
+              "command": [
+                "graphql-engine",
+                "--host",
+                "totalk-prod.postgres.database.azure.com",
+                "--port",
+                "5432",
+                "--user",
+                "totalk",
+                "--password",
+                "!cFK7aH-5hFd8F-&",
+                "--dbname",
+                "postgres",
+                "serve",
+                "--server-host",
+                "0.0.0.0",
+                "--server-port",
+                "8080",
+                "--enable-console",
+                "--admin-secret",
+                "&DJET64U^WZs",
+                "--jwt-secret",
+                "{\"type\":\"HS256\",\"key\":\"e1083d973c86ba865c3a3d5add51ec5d\"}"
+              ],
+              "ports": [
+                {
+                  "protocol": "TCP",
+                  "port": 8080
+                }
+              ],
+              "environmentVariables": [
+                {
+                  "name": "HASURA_GRAPHQL_CORS_DOMAIN",
+                  "value": "https://totalk.dev, https://*.totalk.dev, https://*.vercel.app, http://localhost:3000"
+                },
+                {
+                  "name": "HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS",
+                  "value": "true"
+                }
+              ],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
+                }
+              }
+            }
+          },
+          {
+            "name": "caddy-ssl-server",
+            "properties": {
+              "image": "caddy:latest",
+              "command": [
+                "caddy",
+                "reverse-proxy",
+                "--from",
+                "totalk.centralus.azurecontainer.io",
+                "--to",
+                "localhost:8080"
+              ],
+              "ports": [
+                {
+                  "protocol": "TCP",
+                  "port": 443
+                },
+                {
+                  "protocol": "TCP",
+                  "port": 80
+                }
+              ],
+              "environmentVariables": [],
+              "resources": {
+                "requests": {
+                  "memoryInGB": 1,
+                  "cpu": 1
+                }
+              },
+              "volumeMounts": [
+                {
+                  "name": "data",
+                  "mountPath": "/data"
+                },
+                {
+                  "name": "config",
+                  "mountPath": "/config"
+                }
+              ]
+            }
+          }
+        ],
+        // "initContainers": [],
+        "restartPolicy": "Always",
+        "ipAddress": {
+          "ports": [
+            {
+              "protocol": "TCP",
+              "port": 443
+            },
+            {
+              "protocol": "TCP",
+              "port": 8080
+            },
+            {
+              "protocol": "TCP",
+              "port": 80
+            }
+          ],
+          // "ip": "52.158.223.152",
+          "type": "Public",
+          "dnsNameLabel": "totalk"
+        },
+        "osType": "Linux",
+        "volumes": [
+          {
+            "name": "data",
+            "emptyDir": {}
+          },
+          {
+            "name": "config",
+            "emptyDir": {}
+          }
+        ]
+      }
+    }
+  ]
+}

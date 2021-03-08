@@ -1,0 +1,64 @@
+mutation upsertUser(
+  $email: String!
+  $username: String!
+  $displayName: String!
+  $avatar: String
+  $userType: UserType_enum!
+  $compoundId: String!
+  $provider: AccountProvider_enum!
+  $providerAccountId: String!
+) {
+  insertOneUser(
+    object: {
+      email: $email
+      username: $username
+      displayName: $displayName
+      avatar: $avatar
+      type: $userType
+      accounts: {
+        data: {
+          compoundId: $compoundId
+          provider: $provider
+          providerAccountId: $providerAccountId
+        }
+        on_conflict: {
+          constraint: Account_compoundId_key
+          update_columns: [provider, providerAccountId]
+        }
+      }
+    }
+    on_conflict: {
+      constraint: User_email_key
+      # Not update type in case of overwrite the existing value, e.g. paid user
+      update_columns: [displayName, username, avatar]
+    }
+  ) {
+    id
+    email
+    username
+    displayName
+    avatar
+    type
+    updatedAt
+    accounts {
+      id
+      compoundId
+      provider
+      providerAccountId
+      updatedAt
+    }
+  }
+}
+
+query userByPk($id: uuid!) {
+  userByPk(id: $id) {
+    id
+    email
+    username
+    type
+    avatar
+    displayName
+    updatedAt
+    createdAt
+  }
+}

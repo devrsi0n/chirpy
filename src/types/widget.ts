@@ -1,6 +1,6 @@
-import { CommentDetailsQuery, CommentsByPageQuery } from '$/graphql/generated/comment';
-import { CreateOneLikeMutation } from '$/graphql/generated/like';
+import { CommentDetailsQuery, CommentTreeQuery } from '$server/graphql/generated/comment';
+import { InsertOneLikeMutation } from '$/graphql/generated/like';
 
-export type CommentByPage = CommentsByPageQuery['comments'][number];
-export type CommentDetails = CommentDetailsQuery['comment'];
-export type CreateOneLike = CreateOneLikeMutation['createOneLike'];
+export type CommentLeaf = CommentTreeQuery['comments'][number];
+export type CommentDetailNode = CommentDetailsQuery['commentByPk'];
+export type InsertOneLike = NonNullable<InsertOneLikeMutation['insertOneLike']>;

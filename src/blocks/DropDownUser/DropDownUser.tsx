@@ -8,8 +8,8 @@ import { Toggle } from '$/components/Toggle';
 import { Divider } from '$/components/Divider';
 
 export type DropDownUserProps = {
-  avatar: string;
-  name: string;
+  avatar?: string;
+  name?: string;
 };
 
 export function DropDownUser(props: DropDownUserProps): JSX.Element {

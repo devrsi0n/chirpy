@@ -12,7 +12,7 @@ import { Link } from '$/components/Link';
 
 export type Author = {
   id: string;
-  name: string;
+  displayName: string;
   avatar?: string | null;
 };
 
@@ -41,7 +41,7 @@ export function CommentCard({
   onSubmitReply,
   onClickLikeAction,
 }: CommentCardProps): JSX.Element {
-  const { avatar, name } = author;
+  const { avatar, displayName } = author;
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
   const handlePressReply = React.useCallback(() => {
@@ -63,10 +63,10 @@ export function CommentCard({
         id: commentId,
       })}
     >
-      <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+      <Avatar size="lg" src={avatar ?? ''} alt={`User ${displayName}'s avatar`} />
       <div className="flex-1">
         <div className="flex flex-row items-baseline space-x-4 leading-none">
-          <Text bold>{name}</Text>
+          <Text bold>{displayName}</Text>
           <Text as="time" title={createdAt} className="leading-none cursor-default text-text-light">
             {dayjs(createdAt).fromNow()}
           </Text>

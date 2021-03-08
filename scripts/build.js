@@ -10,15 +10,15 @@ async function build() {
       'public',
       '--no-source-maps',
     ]);
-    parcel.stdout.pipe(process.stdout);
-    parcel.stderr.pipe(process.stderr);
+    parcel.stdout?.pipe(process.stdout);
+    parcel.stderr?.pipe(process.stderr);
     parcel.catch((error) => {
       throw error;
     });
 
     const nextBuildProcess = execa('npx', ['next', 'build']);
-    nextBuildProcess.stdout.pipe(process.stdout);
-    nextBuildProcess.stderr.pipe(process.stderr);
+    nextBuildProcess.stdout?.pipe(process.stdout);
+    nextBuildProcess.stderr?.pipe(process.stderr);
     nextBuildProcess.then(() => {
     }).catch((error) => {
       throw error;

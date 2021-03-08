@@ -19,6 +19,7 @@
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
+      "$shared/*": ["shared/*"],
       "$server/*": ["server/*"],
       "$/*": ["src/*"]
     },
@@ -29,9 +30,7 @@
   "include": [
     "next-env.d.ts",
     "types.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/components/Button/BaseButton.tsx",
-    "src/components/Button/BaseButton.tsx.bak"
+    "src",
+    "server"
   ]
 }

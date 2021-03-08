@@ -1,0 +1,31 @@
+overwrite: true
+schema:
+  - ./docs/graphql-schema.json
+documents:
+  - 'src/**/*.graphql'
+generates:
+  src/graphql/generated/types.ts:
+    - typescript
+  src/graphql:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./generated/types.ts
+      folder: generated
+      extension: .tsx
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+config:
+  withComponents: false
+  withHooks: true
+  # avoidOptionals: true
+  # immutableTypes: true
+  # maybeValue: T | null | undefined
+  # constEnums: true
+  scalars:
+    jsonb: "$TsAny"
+    timestamptz: string
+    uuid: string
+hooks:
+  afterAllFileWrite:
+    - prettier --write

@@ -2,14 +2,18 @@ import passport, { Profile } from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ErrorHandler } from 'next-connect';
-import { serialize } from 'cookie';
+import { CookieSerializeOptions, serialize } from 'cookie';
+import superjson from 'superjson';
 
-import { AUTH_COOKIE_NAME } from './constants';
-import { createSecureToken } from '../utilities/auth';
+import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from 'shared/constants';
+import { createToken } from '../utilities/create-token';
 import { redirect } from '../response';
-import { prisma } from '../context';
 import { getFirstQueryParam } from '../utilities/url';
+import { getAdminApollo } from '$server/common/admin-apollo';
+
+import { AccountProvider_Enum, UserType_Enum } from '$server/graphql/generated/types';
+import { UpsertUserDocument } from '$server/graphql/generated/user';
+import { UserByPkDocument } from '$server/graphql/generated/user';
 
 interface User {
   id: string;
@@ -20,17 +24,25 @@ passport.serializeUser<User, string>((user, done) => {
 });
 
 passport.deserializeUser<User, string>((id, done) => {
-  prisma.user
-    .findUnique({
-      where: {
+  const adminApollo = getAdminApollo();
+
+  adminApollo
+    .query({
+      query: UserByPkDocument,
+      variables: {
         id,
       },
     })
-    .then((user) => {
+    .then((result) => {
+      const { data } = result;
+      const user = data.userByPk;
+      if (!user) {
+        throw new Error(`Get data failed, result: ${superjson.stringify(result)}`);
+      }
       done(null, user as User);
     })
     .catch((error) => {
-      console.log(`Error: ${error}`);
+      console.error(`deserializeUser failed: ${error}`);
     });
 });
 
@@ -42,7 +54,7 @@ passport.use(
       callbackURL: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, cb) => {
-      const user = await getUserByProviderProfile(profile, 'google');
+      const user = await getUserByProviderProfile(profile, AccountProvider_Enum.Google);
       cb(undefined, user);
     },
   ),
@@ -58,115 +70,87 @@ passport.use(
       scope: ['user:email'],
     },
     async (accessToken: string, refreshToken: string, profile: Profile, cb: $TsFixMe) => {
-      const user = await getUserByProviderProfile(profile, 'github');
+      const user = await getUserByProviderProfile(profile, AccountProvider_Enum.GitHub);
       cb(null, user);
     },
   ),
 );
 
-async function getUserByProviderProfile(profile: Profile, provider: 'github' | 'google') {
+async function getUserByProviderProfile(profile: Profile, provider: AccountProvider_Enum) {
   console.log(profile);
   if (!profile.emails?.length) {
     throw new Error(`Can't find a valid email`);
   }
   const email = profile.emails[0].value;
-  const avatar = profile.photos?.[0].value;
+  const avatar = profile.photos?.[0].value || '';
+  const { displayName, username, id: providerAccountId } = profile;
+  if (!username) {
+    throw new Error(`Expect a valid username, get ${username}`);
+  }
+  const adminApollo = getAdminApollo();
+  const compoundId = `${provider}:${providerAccountId}`;
 
-  const providerKey = `${provider}UserId` as 'githubUserId' | 'googleUserId';
-
-  // Find one by provider user id
-  let existing = await prisma.user.findUnique({
-    where: {
-      [providerKey]: profile.id,
-    },
-  });
-  // Otherwise find one with the same email and link them
-  if (!existing) {
-    existing = await prisma.user.findUnique({
-      where: {
+  // TODO: Add exception for scenarios: duplicated username
+  const user = (
+    await adminApollo.mutate({
+      mutation: UpsertUserDocument,
+      variables: {
         email,
-      },
-    });
-    if (existing) {
-      await prisma.user.update({
-        where: {
-          id: existing.id,
-        },
-        data: {
-          [providerKey]: profile.id,
-        },
-      });
-    }
-  }
-
-  if (!existing) {
-    existing = await prisma.user.create({
-      data: {
-        email,
-        name: profile.displayName || (profile.username as string),
-        [providerKey]: profile.id,
+        username,
+        displayName,
         avatar,
-        type: 'FREE',
+        userType: UserType_Enum.Free,
+        compoundId,
+        providerAccountId,
+        provider,
       },
-    });
-  }
+    })
+  ).data!.insertOneUser!;
 
-  if (avatar && existing.avatar !== avatar) {
-    await prisma.user.update({
-      where: {
-        id: existing.id,
-      },
-      data: {
-        avatar,
-      },
-    });
-  }
-
-  return existing;
+  return user;
 }
 
 export { passport };
+
+const getCookieOptions = (maxAge: number, httpOnly = false): CookieSerializeOptions => ({
+  path: '/',
+  httpOnly,
+  sameSite: 'lax',
+  maxAge,
+});
 
 export async function handleSuccessfulLogin(
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> {
-  const { id } = (req as $TsFixMe).user;
-  const authToken = await createSecureToken({
-    userId: id,
-  });
-  const authCookie = serialize(AUTH_COOKIE_NAME, authToken, {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 365, // A year
-  });
-  res.setHeader('Set-Cookie', [authCookie]);
+  const { id, name, email } = (req as $TsFixMe).user;
+  const maxAge = 60 * 60 * 24;
+  const authToken = createToken(
+    {
+      userId: id,
+      name,
+      email,
+    },
+    { maxAge, allowedRoles: ['user'], defaultRole: 'user', role: 'user' },
+  );
+  const cookieOptions = getCookieOptions(maxAge);
+  const authCookie = serialize(AUTH_COOKIE_NAME, authToken, cookieOptions);
+  const userIdCookie = serialize(
+    USER_COOKIE_NAME,
+    Buffer.from(id).toString('base64'),
+    cookieOptions,
+  );
+  res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
   const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
   redirect(res, redirectURL || '/');
 }
 
 export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const authCookie = serialize(AUTH_COOKIE_NAME, '', {
-    path: '/',
-    httpOnly: true,
-    sameSite: 'lax',
-    maxAge: -1,
-  });
+  const cookieOptions = getCookieOptions(-1);
+  const authCookie = serialize(AUTH_COOKIE_NAME, '', cookieOptions);
+  const userIdCookie = serialize(USER_COOKIE_NAME, '', cookieOptions);
 
-  res.setHeader('Set-Cookie', [authCookie]);
+  res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
   const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
   redirect(res, redirectURL || '/');
 }
-
-export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (
-  err,
-  req,
-  res,
-) => {
-  console.error(err);
-  console.error(req.query);
-  console.error(req.env);
-
-  res.status(500).end(`${process.env.NEXT_PUBLIC_APP_NAME} error: ${err.toString()}`);
-};

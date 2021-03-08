@@ -5,26 +5,21 @@ import {
   GetStaticPaths,
   InferGetStaticPropsType,
   GetStaticPropsResult,
-  NextApiResponse,
-  NextApiRequest,
 } from 'next';
-import { ExecutionResult } from 'graphql';
 
-import { prisma } from '$server/context';
-import { CommentDetails } from '$/types/widget';
-import { queryGraphql } from '$server/queryGraphQL';
+import { CommentDetailNode } from '$/types/widget';
 import {
   CommentDetailsDocument,
-  CommentDetailsQuery,
-  CommentDetailsQueryVariables,
+  CommentsDocument,
   // useCreateOneLikeMutation,
   // useDeleteOneLikeMutation,
-} from '$/graphql/generated/comment';
+} from '$server/graphql/generated/comment';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 // import { deleteOneLikeInComments } from '$/utilities/comment';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { IconButton } from '$/components/Button';
+import { getAdminApollo } from '$server/common/admin-apollo';
 
 const handleSubmitReply = () => {
   return Promise.resolve();
@@ -39,8 +34,7 @@ export default function CommentDetailsWidget({
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
   // const [createOneLike] = useCreateOneLikeMutation();
   // const [deleteOneLike] = useDeleteOneLikeMutation();
-  const { data: userData } = useCurrentUser();
-  const currentUserId = userData?.currentUser?.id;
+  const { id: currentUserId } = useCurrentUser();
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
       throw new Error('Login first');
@@ -70,15 +64,16 @@ type PathParams = {
 };
 
 type StaticProps = PathParams & {
-  comment: CommentDetails;
+  comment: CommentDetailNode;
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const comments = await prisma.comment.findMany({
-    select: {
-      id: true,
-    },
-  });
+  const adminApollo = getAdminApollo();
+  const comments = (
+    await adminApollo.query({
+      query: CommentsDocument,
+    })
+  ).data.comments;
   const paths = comments.map(({ id }) => ({
     params: {
       commentId: id,
@@ -97,26 +92,21 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { commentId } = params;
-
-  const pageResult: ExecutionResult<
-    CommentDetailsQuery,
-    CommentDetailsQueryVariables
-  > = await queryGraphql(
-    CommentDetailsDocument,
-    {
-      commentId,
+  const adminApollo = getAdminApollo();
+  const pageResult = await adminApollo.query({
+    query: CommentDetailsDocument,
+    variables: {
+      id: commentId,
     },
-    {} as NextApiRequest,
-    {} as NextApiResponse,
-  );
+  });
 
-  if (!pageResult.data?.comment) {
+  if (!pageResult.data?.commentByPk) {
     return { notFound: true };
   }
-  const { comment } = pageResult.data;
+  const { commentByPk } = pageResult.data;
 
   return {
-    props: { comment, commentId },
+    props: { comment: commentByPk, commentId },
     revalidate: 1,
   };
 };
