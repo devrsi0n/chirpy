@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 
-import { useCreateOneProjectMutation } from '$/graphql/generated/project';
+import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { Button } from '$/components/Button';
 import { List } from '$/components/List';
@@ -13,8 +13,8 @@ import { Text } from '$/components/Text';
 import { Layout } from '$/components/Layout';
 
 export default function Dashboard(): JSX.Element {
-  const { data, isLogin, refetch } = useCurrentUser();
-  const [createProjectMutation] = useCreateOneProjectMutation();
+  const { id, projects, isLogin, refetch } = useCurrentUser();
+  const [insertProjectMutation] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -38,17 +38,18 @@ export default function Dashboard(): JSX.Element {
     [],
   );
   const handleSubmit = React.useCallback(() => {
-    createProjectMutation({
+    insertProjectMutation({
       variables: {
-        projectName,
-        userID: data!.currentUser!.id!,
+        // TODO: Team id?
+        name: projectName,
+        userId: id!,
       },
     }).then((data) => {
       setShowDialog(false);
       refetch?.();
       return data;
     });
-  }, [projectName, createProjectMutation, data, refetch]);
+  }, [projectName, insertProjectMutation, id, refetch]);
 
   const router = useRouter();
   const timeout = React.useRef<number>();
@@ -77,10 +78,10 @@ export default function Dashboard(): JSX.Element {
       </Head>
       <main>
         <Heading as="h2">Welcome to dashboard.</Heading>
-        <Text>userId - {data?.currentUser?.id}</Text>
-        {data?.currentUser?.projects?.length ? (
+        <Text>userId - {id}</Text>
+        {projects?.length ? (
           <List variant="unordered">
-            {data.currentUser.projects.map((project) => (
+            {projects.map((project) => (
               <List.Item key={project.id}>
                 {project.id} - {project.name}
               </List.Item>

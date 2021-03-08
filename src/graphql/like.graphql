@@ -1,18 +1,17 @@
-mutation createOneLike($userId: String!, $commentId: String!) {
-  createOneLike(
-    data: { comment: { connect: { id: $commentId } }, user: { connect: { id: $userId } } }
-  ) {
+mutation insertOneLike($compoundId: String!, $commentId: uuid!) {
+  insertOneLike(object: { commentId: $commentId, compoundId: $compoundId }) {
     id
+    userId
     user {
       id
-      name
+      displayName
       avatar
     }
   }
 }
 
-mutation deleteOneLike($id: String!) {
-  deleteOneLike(where: { id: $id }) {
+mutation deleteLikeByPk($id: uuid!) {
+  deleteLikeByPk(id: $id) {
     id
   }
 }

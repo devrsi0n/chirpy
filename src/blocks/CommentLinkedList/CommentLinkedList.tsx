@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { CommentDetails } from '$/types/widget';
+import { CommentDetailNode } from '$/types/widget';
 import { CommentCard, CommentCardProps } from '../CommentCard';
 import clsx from 'clsx';
 
 import styles from './style.module.scss';
 
-export type Comment = NonNullable<CommentDetails>;
+export type Comment = NonNullable<CommentDetailNode>;
 
 export type CommentLinkedListProps = {
   comment: Comment;

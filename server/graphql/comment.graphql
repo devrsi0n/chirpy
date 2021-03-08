@@ -1,0 +1,135 @@
+# Used in pages/widget/comment/[pageId].tsx
+
+query commentTree($pageId: uuid!) {
+  comments(where: { pageId: { _eq: $pageId }, parentId: { _is_null: true } }) {
+    content
+    id
+    createdAt
+    parentId
+    user {
+      id
+      displayName
+      avatar
+    }
+    replies {
+      id
+      content
+      createdAt
+      parentId
+      likes {
+        id
+        userId
+      }
+      user {
+        id
+        displayName
+        avatar
+      }
+      replies {
+        id
+        content
+        createdAt
+        parentId
+        likes {
+          id
+          userId
+        }
+        user {
+          id
+          displayName
+          avatar
+        }
+      }
+    }
+    likes {
+      id
+      userId
+    }
+  }
+}
+
+# Query ancestors up to 2 levels
+query commentDetails($id: uuid!) {
+  commentByPk(id: $id) {
+    id
+    content
+    createdAt
+    user {
+      id
+      displayName
+      avatar
+    }
+    likes {
+      id
+      userId
+      user {
+        id
+        displayName
+        avatar
+      }
+    }
+    replies {
+      id
+      content
+      createdAt
+      user {
+        id
+        displayName
+        avatar
+      }
+      likes {
+        id
+        userId
+        user {
+          id
+          displayName
+          avatar
+        }
+      }
+    }
+    parent {
+      id
+      content
+      createdAt
+      user {
+        id
+        displayName
+        avatar
+      }
+      likes {
+        id
+        userId
+        user {
+          id
+          displayName
+          avatar
+        }
+      }
+      parent {
+        id
+        content
+        createdAt
+        user {
+          id
+          displayName
+          avatar
+        }
+        likes {
+          id
+          userId
+          user {
+            id
+            displayName
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
+
+query comments {
+  comments {
+    id
+  }
+}

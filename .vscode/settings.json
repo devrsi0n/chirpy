@@ -25,5 +25,9 @@
     ".vscode{,/**}"
   ],
   "appService.defaultWebAppToDeploy": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/totalk/providers/Microsoft.Web/sites/totalk",
-  "appService.deploySubpath": "."
+  "appService.deploySubpath": ".",
+  "cSpell.words": [
+    "centralus",
+    "jsonb"
+  ]
 }
