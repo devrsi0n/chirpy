@@ -1,4 +1,4 @@
-import type { Page } from '@prisma/client';
+import type { Page } from '../graphql/generated/types';
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry,
  * it built by parcel.
@@ -31,8 +31,13 @@ export function comment(): void {
     alert(`Can't find the render target`);
     return;
   }
+  const { origin, pathname } = window.location;
   fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/get-page-by-project?projectId=${pid}&url=${window.location.origin}&title=${window.document.title}`,
+    `${
+      process.env.NEXT_PUBLIC_APP_URL
+    }/api/get-page-by-project?projectId=${pid}&url=${encodeURIComponent(origin + pathname)}&title=${
+      window.document.title
+    }`,
   )
     .then((res) => res.json())
     .then((page: Page | null) => {

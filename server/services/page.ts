@@ -1,51 +1,48 @@
-import type { Page } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { prisma } from '../context';
+import { getAdminApollo } from '$server/common/admin-apollo';
+import {
+  InsertOnePageDocument,
+  PageByUrlDocument,
+  PageByUrlQuery,
+} from '$server/graphql/generated/page';
 
 export async function handleGetPageByProject(
   req: NextApiRequest,
-  res: NextApiResponse<Page | null>,
+  res: NextApiResponse<PageByUrlQuery['pages'][number] | { error: string } | null>,
 ): Promise<void> {
-  console.log({ 'req.query': req.query });
-  const pages: Page[] = await prisma.page.findMany({
-    where: {
-      url: req.query.url as string,
-      projectId: req.query.projectId as string,
+  const { url, projectId, title } = req.query;
+  if (typeof url !== 'string' || typeof projectId !== 'string') {
+    return res.status(400).json({
+      error: 'Expect valid url and projectId',
+    });
+  }
+  const adminApollo = getAdminApollo();
+  const pageResult = await adminApollo.query({
+    query: PageByUrlDocument,
+    variables: {
+      url,
+      projectId,
     },
   });
-  if (pages.length > 1) {
-    console.error(
-      `One project can only have one page with url: ${req.query.url} projectId: ${req.query.projectId}`,
-    );
-    res.json(null);
-  } else if (pages.length === 1) {
-    let page = pages[0];
-    if (page.title !== req.query.title) {
-      page = await prisma.page.update({
-        where: {
-          id: page.id,
-        },
-        data: {
-          title: String(req.query.title) as string,
-        },
-      });
-    }
-    res.json(page);
-  } else if (pages.length === 0) {
-    const createdPage: Page = await prisma.page.create({
-      data: {
-        url: req.query.url as string,
-        title: req.query.title as string,
-        project: {
-          connect: {
-            id: req.query.projectId as string,
-          },
-        },
+  const page = pageResult.data.pages[0];
+  if (!page?.id) {
+    const createdPage = await adminApollo.mutate({
+      mutation: InsertOnePageDocument,
+      variables: {
+        projectId,
+        url,
+        title: title || '',
       },
     });
-    res.json(createdPage);
-  } else {
-    res.json(null);
+    if (!createdPage.data?.insertOnePage) {
+      return res.status(400).json({
+        error: 'Create page failed',
+      });
+    }
+
+    res.json(createdPage.data?.insertOnePage);
   }
+  // TODO: Update title?
+  res.json(page);
 }

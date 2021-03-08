@@ -6,18 +6,14 @@ import { ApolloProvider } from '@apollo/client';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import type { AppProps } from 'next/app';
 
 import { useApollo } from '$/lib/apollo-client';
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
 
 dayjs.extend(relativeTime);
 
-interface IAppProps {
-  Component: React.ComponentType;
-  pageProps: Record<string, unknown>;
-}
-
-function App({ Component, pageProps }: IAppProps): JSX.Element {
+function App({ Component, pageProps }: AppProps): JSX.Element {
   const apollo = useApollo();
   return (
     <NextThemesProvider attribute="class" storageKey="TotalkTheme">

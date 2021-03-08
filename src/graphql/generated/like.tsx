@@ -2,116 +2,117 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-export type CreateOneLikeMutationVariables = Types.Exact<{
-  userId: Types.Scalars['String'];
-  commentId: Types.Scalars['String'];
+export type InsertOneLikeMutationVariables = Types.Exact<{
+  compoundId: Types.Scalars['String'];
+  commentId: Types.Scalars['uuid'];
 }>;
 
-export type CreateOneLikeMutation = { __typename?: 'Mutation' } & {
-  createOneLike: { __typename?: 'Like' } & Pick<Types.Like, 'id'> & {
-      user: { __typename?: 'User' } & Pick<Types.User, 'id' | 'name' | 'avatar'>;
-    };
+export type InsertOneLikeMutation = { __typename?: 'mutation_root' } & {
+  insertOneLike?: Types.Maybe<
+    { __typename?: 'Like' } & Pick<Types.Like, 'id' | 'userId'> & {
+        user: { __typename?: 'User' } & Pick<Types.User, 'id' | 'displayName' | 'avatar'>;
+      }
+  >;
 };
 
-export type DeleteOneLikeMutationVariables = Types.Exact<{
-  id: Types.Scalars['String'];
+export type DeleteLikeByPkMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
 }>;
 
-export type DeleteOneLikeMutation = { __typename?: 'Mutation' } & {
-  deleteOneLike?: Types.Maybe<{ __typename?: 'Like' } & Pick<Types.Like, 'id'>>;
+export type DeleteLikeByPkMutation = { __typename?: 'mutation_root' } & {
+  deleteLikeByPk?: Types.Maybe<{ __typename?: 'Like' } & Pick<Types.Like, 'id'>>;
 };
 
-export const CreateOneLikeDocument = gql`
-  mutation createOneLike($userId: String!, $commentId: String!) {
-    createOneLike(
-      data: { comment: { connect: { id: $commentId } }, user: { connect: { id: $userId } } }
-    ) {
+export const InsertOneLikeDocument = gql`
+  mutation insertOneLike($compoundId: String!, $commentId: uuid!) {
+    insertOneLike(object: { commentId: $commentId, compoundId: $compoundId }) {
       id
+      userId
       user {
         id
-        name
+        displayName
         avatar
       }
     }
   }
 `;
-export type CreateOneLikeMutationFn = Apollo.MutationFunction<
-  CreateOneLikeMutation,
-  CreateOneLikeMutationVariables
+export type InsertOneLikeMutationFn = Apollo.MutationFunction<
+  InsertOneLikeMutation,
+  InsertOneLikeMutationVariables
 >;
 
 /**
- * __useCreateOneLikeMutation__
+ * __useInsertOneLikeMutation__
  *
- * To run a mutation, you first call `useCreateOneLikeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateOneLikeMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useInsertOneLikeMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertOneLikeMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createOneLikeMutation, { data, loading, error }] = useCreateOneLikeMutation({
+ * const [insertOneLikeMutation, { data, loading, error }] = useInsertOneLikeMutation({
  *   variables: {
- *      userId: // value for 'userId'
+ *      compoundId: // value for 'compoundId'
  *      commentId: // value for 'commentId'
  *   },
  * });
  */
-export function useCreateOneLikeMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateOneLikeMutation, CreateOneLikeMutationVariables>,
+export function useInsertOneLikeMutation(
+  baseOptions?: Apollo.MutationHookOptions<InsertOneLikeMutation, InsertOneLikeMutationVariables>,
 ) {
-  return Apollo.useMutation<CreateOneLikeMutation, CreateOneLikeMutationVariables>(
-    CreateOneLikeDocument,
+  return Apollo.useMutation<InsertOneLikeMutation, InsertOneLikeMutationVariables>(
+    InsertOneLikeDocument,
     baseOptions,
   );
 }
-export type CreateOneLikeMutationHookResult = ReturnType<typeof useCreateOneLikeMutation>;
-export type CreateOneLikeMutationResult = Apollo.MutationResult<CreateOneLikeMutation>;
-export type CreateOneLikeMutationOptions = Apollo.BaseMutationOptions<
-  CreateOneLikeMutation,
-  CreateOneLikeMutationVariables
+export type InsertOneLikeMutationHookResult = ReturnType<typeof useInsertOneLikeMutation>;
+export type InsertOneLikeMutationResult = Apollo.MutationResult<InsertOneLikeMutation>;
+export type InsertOneLikeMutationOptions = Apollo.BaseMutationOptions<
+  InsertOneLikeMutation,
+  InsertOneLikeMutationVariables
 >;
-export const DeleteOneLikeDocument = gql`
-  mutation deleteOneLike($id: String!) {
-    deleteOneLike(where: { id: $id }) {
+export const DeleteLikeByPkDocument = gql`
+  mutation deleteLikeByPk($id: uuid!) {
+    deleteLikeByPk(id: $id) {
       id
     }
   }
 `;
-export type DeleteOneLikeMutationFn = Apollo.MutationFunction<
-  DeleteOneLikeMutation,
-  DeleteOneLikeMutationVariables
+export type DeleteLikeByPkMutationFn = Apollo.MutationFunction<
+  DeleteLikeByPkMutation,
+  DeleteLikeByPkMutationVariables
 >;
 
 /**
- * __useDeleteOneLikeMutation__
+ * __useDeleteLikeByPkMutation__
  *
- * To run a mutation, you first call `useDeleteOneLikeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteOneLikeMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useDeleteLikeByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteLikeByPkMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [deleteOneLikeMutation, { data, loading, error }] = useDeleteOneLikeMutation({
+ * const [deleteLikeByPkMutation, { data, loading, error }] = useDeleteLikeByPkMutation({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useDeleteOneLikeMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>,
+export function useDeleteLikeByPkMutation(
+  baseOptions?: Apollo.MutationHookOptions<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>,
 ) {
-  return Apollo.useMutation<DeleteOneLikeMutation, DeleteOneLikeMutationVariables>(
-    DeleteOneLikeDocument,
+  return Apollo.useMutation<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>(
+    DeleteLikeByPkDocument,
     baseOptions,
   );
 }
-export type DeleteOneLikeMutationHookResult = ReturnType<typeof useDeleteOneLikeMutation>;
-export type DeleteOneLikeMutationResult = Apollo.MutationResult<DeleteOneLikeMutation>;
-export type DeleteOneLikeMutationOptions = Apollo.BaseMutationOptions<
-  DeleteOneLikeMutation,
-  DeleteOneLikeMutationVariables
+export type DeleteLikeByPkMutationHookResult = ReturnType<typeof useDeleteLikeByPkMutation>;
+export type DeleteLikeByPkMutationResult = Apollo.MutationResult<DeleteLikeByPkMutation>;
+export type DeleteLikeByPkMutationOptions = Apollo.BaseMutationOptions<
+  DeleteLikeByPkMutation,
+  DeleteLikeByPkMutationVariables
 >;

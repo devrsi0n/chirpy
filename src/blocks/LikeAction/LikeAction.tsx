@@ -9,9 +9,7 @@ export type ClickLikeActionHandler = (isLiked: boolean, likeId: string, commentI
 
 export type Like = {
   id: string;
-  user: {
-    id: string;
-  };
+  userId: string;
 };
 
 export type LikeActionProps = React.PropsWithChildren<{
@@ -26,13 +24,12 @@ export function LikeAction({
   commentId,
   onClickLikeAction,
 }: LikeActionProps): JSX.Element {
-  const { data } = useCurrentUser();
-  const currentUserId = data?.currentUser?.id;
+  const { id: currentUserId } = useCurrentUser();
   let likedId = '';
   const liked =
     !!currentUserId &&
     likes.some((like) => {
-      if (like.user.id === currentUserId) {
+      if (like.userId === currentUserId) {
         likedId = like.id;
         return true;
       }

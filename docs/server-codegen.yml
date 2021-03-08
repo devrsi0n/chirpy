@@ -1,0 +1,33 @@
+overwrite: true
+schema:
+  - https://totalk.centralus.azurecontainer.io/v1/graphql:
+      headers:
+        X-Hasura-Admin-Secret: '&DJET64U^WZs'
+documents: 'server/**/*.graphql'
+generates:
+  server/graphql/generated/types.ts:
+    - typescript
+  server/graphql:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./generated/types.ts
+      folder: generated
+      extension: .tsx
+    plugins:
+      - typescript-operations
+      - typed-document-node
+  ./docs/graphql-schema.json:
+    plugins:
+      - 'introspection'
+config:
+  # avoidOptionals: true
+  # immutableTypes: true
+  # maybeValue: T | null | undefined
+  # constEnums: true
+  scalars:
+    jsonb: "$TsAny"
+    timestamptz: string
+    uuid: string
+hooks:
+  afterAllFileWrite:
+    - prettier --write

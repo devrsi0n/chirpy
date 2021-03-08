@@ -1,0 +1,23 @@
+query userByPk($id: uuid!) {
+  userByPk(id: $id) {
+    id
+    email
+    username
+    displayName
+    avatar
+    members {
+      id
+      role
+      teamId
+      team {
+        id
+        name
+        uid
+      }
+    }
+    projects {
+      id
+      name
+    }
+  }
+}
