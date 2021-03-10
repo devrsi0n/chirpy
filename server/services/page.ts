@@ -41,7 +41,7 @@ export async function handleGetPageByProject(
       });
     }
 
-    res.json(createdPage.data?.insertOnePage);
+    return res.json(createdPage.data?.insertOnePage);
   }
   // TODO: Update title?
   res.json(page);
