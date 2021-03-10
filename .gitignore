@@ -3,7 +3,6 @@ node_modules
 .DS_Store
 .next
 out/
-.env
 .env*.local
 .envproduction
 .vercel

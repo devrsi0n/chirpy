@@ -4,7 +4,7 @@ const { createToken } = require('../../server/utilities/create-token');
  * @type {function (): string}
  */
 function getAnonymousToken() {
-  const maxAge = 60 * 60 * 24 * 365;
+  const maxAge = '30d';
   const authToken = createToken(
     {
       userId: 'anonymous',
