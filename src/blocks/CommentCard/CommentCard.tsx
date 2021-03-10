@@ -1,5 +1,6 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
+import Info from '@geist-ui/react-icons/info';
 
 import { MessageIcon } from '$/components/Icons';
 import { Avatar } from '$/components/Avatar';
@@ -72,13 +73,7 @@ export function CommentCard({
           </Text>
         </div>
         <div className="mt-2">
-          {disableLink ? (
-            <RichTextEditor initialValue={content} readOnly />
-          ) : (
-            <Link href={detailsURL} variant="plain">
-              <RichTextEditor initialValue={content} readOnly />
-            </Link>
-          )}
+          <RichTextEditor initialValue={content} readOnly />
         </div>
         <div className="flex flex-row items-center space-x-6 transform -translate-x-2">
           <LikeAction likes={likes} commentId={commentId} onClickLikeAction={onClickLikeAction} />
@@ -95,6 +90,9 @@ export function CommentCard({
             }
             onClick={handlePressReply}
           />
+          <Link href={!disableLink ? detailsURL : ''} variant="plain" title="Expand this comment">
+            <ActionButton color="green" icon={<Info size={20} />} />
+          </Link>
         </div>
 
         {showReplyEditor && (

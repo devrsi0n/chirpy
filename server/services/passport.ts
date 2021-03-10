@@ -77,7 +77,7 @@ passport.use(
 );
 
 async function getUserByProviderProfile(profile: Profile, provider: AccountProvider_Enum) {
-  console.log(profile);
+  console.log({ profile });
   if (!profile.emails?.length) {
     throw new Error(`Can't find a valid email`);
   }

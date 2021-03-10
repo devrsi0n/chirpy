@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
-type Color = 'pink' | 'blue';
+type Color = 'pink' | 'blue' | 'green';
 
 export type ActionButtonProps = BaseButtonProps & {
   icon: React.ReactNode;
@@ -13,6 +13,7 @@ export type ActionButtonProps = BaseButtonProps & {
 const colorStyleFunctions: Record<Color, typeof getPinkClassName> = {
   pink: getPinkClassName,
   blue: getBlueClassName,
+  green: getGreenClassName,
 };
 
 export function ActionButton({
@@ -49,5 +50,15 @@ function getBlueClassName(
   return {
     iconStyle: `${textStyle} group-hover:bg-blue-500`,
     childStyle: `group-hover:text-blue-500`,
+  };
+}
+
+function getGreenClassName(
+  activated: boolean | undefined,
+): { iconStyle: string; childStyle: string } {
+  const textStyle = activated ? `text-green-500` : `group-hover:text-green-500`;
+  return {
+    iconStyle: `${textStyle} group-hover:bg-green-500`,
+    childStyle: `group-hover:text-green-500`,
   };
 }
