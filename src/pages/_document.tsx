@@ -6,11 +6,15 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
+import { extractCritical } from '@emotion/server';
+import tw from 'twin.macro';
 
-class MyDocument extends Document {
+class MyDocument extends Document<ReturnType<typeof extractCritical>> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+    const page = await ctx.renderPage();
+    const styles = extractCritical(page.html);
+    return { ...initialProps, ...page, ...styles };
   }
 
   render(): JSX.Element {
@@ -19,8 +23,14 @@ class MyDocument extends Document {
         <Head>
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
+          <style
+            data-emotion-css={this.props.ids.join(' ')}
+            dangerouslySetInnerHTML={{ __html: this.props.css }}
+          />
         </Head>
-        <body className="bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-300">
+        <body
+          css={tw`bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-300`}
+        >
           <Main />
           <NextScript />
         </body>

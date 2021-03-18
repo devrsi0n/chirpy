@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import { CommentDetailNode } from '$/types/widget';
 import { CommentCard, CommentCardProps } from '../CommentCard';
-import clsx from 'clsx';
+import 'twin.macro';
 
-import styles from './style.module.scss';
+import { css, theme } from 'twin.macro';
 
 export type Comment = NonNullable<CommentDetailNode>;
 
@@ -21,14 +21,14 @@ export function CommentLinkedList({
   onClickLikeAction,
 }: CommentLinkedListProps): JSX.Element {
   const parentComments = [comment];
-  let currComment: $TsFixMe = comment;
+  let currComment: $TsAny = comment;
   while (currComment.parent) {
     parentComments.unshift(currComment.parent);
     currComment = currComment.parent;
   }
 
   return (
-    <div className="space-y-2">
+    <div tw="space-y-2">
       {parentComments.map((_comment, index) => (
         <CommentCard
           key={_comment.id}
@@ -42,8 +42,12 @@ export function CommentLinkedList({
           onClickLikeAction={onClickLikeAction}
         />
       ))}
-      <div className="flex flex-col items-end">
-        <div className={clsx(styles.replyContainer)}>
+      <div tw="flex flex-col items-end">
+        <div
+          css={css`
+            width: calc(100% - ${theme('spacing.8')});
+          `}
+        >
           {comment.replies?.map((reply: $TsFixMe) => (
             <MemoCommentLinkedList
               key={reply.id}

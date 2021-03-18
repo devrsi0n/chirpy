@@ -1,7 +1,5 @@
-import clsx from 'clsx';
 import * as React from 'react';
-
-import styles from './style.module.scss';
+import tw, { css } from 'twin.macro';
 
 export type DividerProps = React.ComponentPropsWithoutRef<'div'>;
 
@@ -10,7 +8,42 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
     <>
       <div
         role="separator"
-        className={clsx('w-auto max-w-full relative', styles.hairlines, className)}
+        className={className}
+        css={[
+          tw`w-auto max-w-full relative`,
+          css`
+            ${tw`bg-gray-200`};
+            height: 1px;
+            border-style: initial;
+
+            &::after {
+              border-style: initial;
+            }
+
+            .dark & {
+              ${tw`bg-gray-700`}
+            }
+
+            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+              &:after {
+                ${tw`bg-gray-200`};
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 1px;
+                transform: scaleY(0.5);
+                transform-origin: 0 0;
+              }
+
+              .dark {
+                &:after {
+                  ${tw`bg-gray-700`};
+                }
+              }
+            }
+          `,
+        ]}
         style={style}
         {...divProps}
       />

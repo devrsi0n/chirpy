@@ -2,10 +2,11 @@
 import * as React from 'react';
 import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
-import clsx from 'clsx';
 import DismissIcon from '@geist-ui/react-icons/x';
 import Lock from '@geist-ui/react-icons/lock';
 import Send from '@geist-ui/react-icons/send';
+import tw, { css, TwStyle } from 'twin.macro';
+import '@tailwindcss/typography/dist/typography.min.css';
 
 import { Leaf } from './Leaf';
 import { Element } from './Element';
@@ -24,8 +25,8 @@ export type RTEValue = Node[];
 interface IBaseProps {
   onSubmit?: (value: RTEValue) => Promise<void>;
   styles?: {
-    root?: string;
-    editable?: string;
+    root?: TwStyle;
+    editable?: TwStyle;
   };
   readOnly?: boolean;
   /**
@@ -105,9 +106,9 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     <ClientOnly>
       <RichTextEditorContext.Provider value={richTextEditorContext}>
         <Slate editor={editor} value={value} onChange={handleRTEChange}>
-          <section className={clsx('space-y-2', disabled && 'cursor-not-allowed', styles?.root)}>
+          <section css={[tw`space-y-2`, disabled && tw`cursor-not-allowed`, styles?.root]}>
             {!readOnly && (
-              <Toolbar className="flex flex-row justify-between">
+              <Toolbar tw="flex flex-row justify-between">
                 <div>
                   <MarkButton format="bold" icon="bold" />
                   <MarkButton format="italic" icon="italic" />
@@ -124,14 +125,16 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
             )}
             <Editable
               readOnly={readOnly}
-              className={clsx(
-                'prose dark:prose-light rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300',
-                disabled && 'bg-gray-200 text-text-placeholder pointer-events-none',
+              //
+              className="prose dark:prose-light"
+              css={[
+                tw`rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300`,
+                disabled && tw`bg-gray-200 text-gray-400 pointer-events-none`,
                 !readOnly
-                  ? 'shadow-sm p-2 border-gray-200 dark:border-gray-700'
-                  : 'border-transparent',
+                  ? tw`shadow-sm p-2 border-gray-200 dark:border-gray-700`
+                  : tw`border-transparent`,
                 styles?.editable,
-              )}
+              ]}
               style={{
                 ...(!readOnly && {
                   resize: 'vertical',
@@ -153,15 +156,15 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
               // }}
             />
             {!readOnly && (
-              <div className="flex flex-row justify-end">
+              <div tw="flex flex-row justify-end">
                 <Button
                   color="purple"
                   variant="solid"
-                  className={clsx('space-x-1', isLoading ? 'cursor-not-allowed' : '')}
+                  css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
                   onClick={handleSubmitReply}
                 >
                   {isLoading ? (
-                    <SpinnerIcon className="text-gray-400" />
+                    <SpinnerIcon tw="text-gray-400" />
                   ) : !isLogin ? (
                     <Lock size="14" />
                   ) : (

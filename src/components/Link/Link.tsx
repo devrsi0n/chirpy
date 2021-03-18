@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
-import clsx from 'clsx';
+
 import { useRouter } from 'next/router';
 import { Transition } from '@headlessui/react';
+import tw, { TwStyle } from 'twin.macro';
+import { ClassNames } from '@emotion/react';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 type Variant = 'nav' | 'plain';
@@ -20,11 +22,11 @@ type LinkProps = React.PropsWithChildren<
     }
 >;
 
-const sizeStyles: Record<Size, string> = {
-  xs: 'text-xs font-semibold',
-  sm: 'text-sm font-semibold',
-  md: 'text-md font-semibold',
-  lg: 'text-lg font-semibold',
+const sizeStyles: Record<Size, TwStyle> = {
+  xs: tw`text-xs font-semibold`,
+  sm: tw`text-sm font-semibold`,
+  md: tw`text-base font-semibold`,
+  lg: tw`text-lg font-semibold`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -57,32 +59,37 @@ export function Link(props: LinkProps): JSX.Element {
       ) : (
         <a
           {...restProps}
-          className={clsx(
-            `relative transition duration-150 ease-in-out`,
+          css={[
+            tw`relative transition duration-150 ease-in-out`,
             size && sizeStyles[size],
             isCurrentURL
-              ? 'font-bold'
-              : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100',
-            className,
-          )}
+              ? tw`font-bold`
+              : tw`text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100`,
+          ]}
+          className={className}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           <span>{children}</span>
           {!disableUnderline && (
-            <span className="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-              <Transition
-                as="span"
-                className="absolute inset-0 inline-block w-full h-1 transform bg-gray-900 dark:bg-gray-300"
-                show={isHovering}
-                enter="transition ease duration-200"
-                enterFrom="scale-0"
-                enterTo="scale-100"
-                leave="transition ease-out duration-300"
-                leaveFrom="scale-100"
-                leaveTo="scale-0"
-              />
-            </span>
+            <ClassNames>
+              {({ css }) => (
+                <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+                  <Transition
+                    as="span"
+                    className="transform"
+                    tw="absolute inset-0 inline-block w-full h-1 bg-gray-900 dark:bg-gray-300"
+                    show={isHovering}
+                    enter={css(tw`transition ease-in duration-200`)}
+                    enterFrom={css(tw`scale-0`)}
+                    enterTo={css(tw`scale-100`)}
+                    leave={css(tw`transition ease-out duration-300`)}
+                    leaveFrom={css(tw`scale-100`)}
+                    leaveTo={css(tw`scale-0`)}
+                  />
+                </span>
+              )}
+            </ClassNames>
           )}
         </a>
       )}

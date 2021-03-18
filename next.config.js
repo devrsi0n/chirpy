@@ -4,19 +4,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const customConfig = {
-  webpack(config) {
+  webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
-      use: ["@svgr/webpack"]
+      use: ['@svgr/webpack'],
     });
+    if (!isServer) {
+      config.node = { fs: 'empty', module: 'empty' };
+    }
 
     return config;
-  }
+  },
 };
 
-module.exports = withPlugins(
-  [[withBundleAnalyzer(customConfig)]],
-  {
-    // experimental: { modern: true }
-  }
-);
+module.exports = withPlugins([[withBundleAnalyzer(customConfig)]], {
+  // experimental: { modern: true }
+});

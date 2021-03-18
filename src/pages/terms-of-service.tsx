@@ -12,8 +12,8 @@ export default function TermsOfService(): JSX.Element {
         <Head>
           <title>Terms of Service</title>
         </Head>
-        <article className="flex flex-col pb-12 article">
-          <Heading as="h1" className="pb-6">
+        <article tw="flex flex-col pb-12">
+          <Heading as="h1" tw="pb-6">
             Terms of Service
           </Heading>
           <div>
