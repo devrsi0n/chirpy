@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useButton } from '@react-aria/button';
 import { AriaButtonProps } from '@react-types/button';
-import clsx from 'clsx';
+import tw from 'twin.macro';
 
 export type BaseButtonProps = AriaButtonProps &
   Omit<React.ComponentPropsWithRef<'button'>, keyof AriaButtonProps>;
@@ -33,10 +33,10 @@ const BaseButton = React.forwardRef(function BaseButton(
   return (
     <button
       {...allProps}
-      className={clsx(
-        'relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out',
-        className,
-      )}
+      className={className}
+      css={[
+        tw`relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out`,
+      ]}
       onMouseDown={handleMouseDown}
       onClick={onClick}
       ref={_ref}

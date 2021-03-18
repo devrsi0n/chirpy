@@ -1,9 +1,8 @@
 import * as React from 'react';
-import clsx from 'clsx';
+import { keyframes } from '@emotion/react';
+import tw, { css, theme, TwStyle } from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from './BaseButton';
-
-import styles from './style.module.scss';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'purple' | 'gray';
@@ -23,25 +22,27 @@ export type ButtonProps = BaseButtonProps & {
   onClick?: () => void;
 };
 
-const sizeStyles: Record<Size, string> = {
-  sm: 'py-1 px-2 text-sm',
-  md: 'py-2 px-3 text-md',
-  lg: 'py-3 px-4 text-lg',
-  xl: 'py-4 px-5 text-xl',
+const sizeStyles: Record<Size, TwStyle> = {
+  sm: tw`py-1 px-2 text-sm`,
+  md: tw`py-2 px-3 text-base`,
+  lg: tw`py-3 px-4 text-lg`,
+  xl: tw`py-4 px-5 text-xl`,
 };
 
 type VariantColor = `${Variant}-${Color}`;
 
 type VariantColors = {
-  [index in VariantColor]: string;
+  [index in VariantColor]: TwStyle;
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-purple': `bg-purple-600 text-white border border-purple-700 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
-  'solid-gray': `bg-gray-600 text-text-inverse border border-gray-700 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
+  'solid-purple': tw`bg-purple-600 text-white border border-purple-700 hover:bg-purple-700 focus:(outline-none ring-2 ring-offset-2 ring-purple-500)`,
 
-  'plain-purple': `bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:ring-2 focus:ring-offset-2 focus:ring-purple-500`,
-  'plain-gray': `bg-white dark:bg-transparent text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900 focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`,
+  'solid-gray': tw`bg-gray-600 text-black border border-gray-700 hover:bg-gray-700 focus:(outline-none ring-2 ring-offset-2 ring-gray-500)`,
+
+  'plain-purple': tw`bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
+
+  'plain-gray': tw`bg-white dark:(bg-transparent text-gray-300 border-gray-700) text-gray-600 border border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900 focus:(ring-2 ring-offset-2 ring-gray-500)`,
 };
 
 // TODO: Fix click drip animation and extract it to the base button
@@ -86,14 +87,15 @@ export const Button = React.forwardRef(function Button(
       <BaseButton
         {...restProps}
         ref={_ref}
-        className={clsx(
-          'focus:outline-none',
+        css={[
+          tw`focus:outline-none`,
           sizeStyles[size],
           ColorVariantStyles[`${variant}-${color}` as VariantColor],
-          { 'shadow-sm': shadow, 'rounded-md': rounded },
-          disabled ? 'cursor-not-allowed text-text-light bg-text-placeholder' : 'cursor-pointer',
-          className,
-        )}
+          shadow && tw`shadow-sm`,
+          rounded && tw`rounded-md`,
+          disabled ? tw`cursor-not-allowed text-gray-300 bg-gray-50` : tw`cursor-pointer`,
+        ]}
+        className={className}
         onClick={clickHandler}
       >
         {children}
@@ -127,14 +129,24 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   return (
     <div
       ref={dripRef}
-      className={clsx('absolute top-0 bottom-0 left-0 right-0', styles.buttonDrip)}
+      css={[
+        tw`absolute top-0 bottom-0 left-0 right-0`,
+        css`
+          animation: ${expandKeyFrame} 250ms ease-in;
+          animation-fill-mode: forwards;
+
+          svg > g > g {
+            fill: ${theme('colors.gray.300')};
+          }
+        `,
+      ]}
     >
       <svg
         width="20"
         height="20"
         viewBox="0 0 20 20"
         style={{ top, left }}
-        className="absolute w-4 h-4"
+        css={tw`absolute w-4 h-4`}
       >
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g>
@@ -145,3 +157,20 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
     </div>
   );
 }
+
+const expandKeyFrame = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  30% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(28);
+    opacity: 0;
+  }
+`;

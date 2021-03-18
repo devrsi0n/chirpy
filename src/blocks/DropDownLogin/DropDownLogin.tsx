@@ -1,9 +1,12 @@
 import * as React from 'react';
 // import { useRouter } from 'next/router';
+import 'twin.macro';
 
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { GoogleIcon } from '$/components/Icons';
+// @ts-ignore
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
+import tw from 'twin.macro';
 
 export type DropDownLoginProps = {
   //
@@ -18,23 +21,19 @@ const handleClickLoginOption = (option: 'google' | 'github') => {
 export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
   return (
     <DropDownMenu content="Login" shape="square">
-      <DropDownMenu.Item
-        className="flex flex-row justify-end space-x-4"
-        onClick={handleClickLoginOption('google')}
-      >
+      <DropDownMenu.Item css={itemStyle} onClick={handleClickLoginOption('google')}>
         <GoogleIcon width={20} height={20} />
         <span>Google</span>
       </DropDownMenu.Item>
-      <DropDownMenu.Item
-        className="flex flex-row justify-end space-x-4"
-        onClick={handleClickLoginOption('github')}
-      >
+      <DropDownMenu.Item css={itemStyle} onClick={handleClickLoginOption('github')}>
         <GitHubLogo width={18} height={18} />
         <span>GitHub</span>
       </DropDownMenu.Item>
     </DropDownMenu>
   );
 }
+
+const itemStyle = tw`flex flex-row justify-end space-x-4`;
 
 function popupCenterWindow(
   url: string,

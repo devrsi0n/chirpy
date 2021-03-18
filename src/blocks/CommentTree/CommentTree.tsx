@@ -1,10 +1,10 @@
 import * as React from 'react';
-import clsx from 'clsx';
+import 'twin.macro';
 
 import { CommentLeaf } from '$/types/widget';
 import { CommentCard, CommentCardProps } from '../CommentCard';
 
-import styles from './style.module.scss';
+import { css, theme } from 'twin.macro';
 
 export type CommentProps = {
   comment: CommentLeaf;
@@ -15,7 +15,7 @@ export type CommentProps = {
  */
 function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps): JSX.Element {
   return (
-    <div className="space-y-2">
+    <div tw="space-y-2">
       <CommentCard
         commentId={comment.id}
         author={comment.user}
@@ -25,8 +25,12 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
         onClickLikeAction={onClickLikeAction}
         onSubmitReply={onSubmitReply}
       />
-      <div className="flex flex-col items-end">
-        <div className={clsx(styles.replyContainer)}>
+      <div tw="flex flex-col items-end">
+        <div
+          css={css`
+            width: calc(100% - ${theme('spacing.8')});
+          `}
+        >
           {comment.replies?.map((reply: $TsFixMe) => (
             <MemoCommentTree
               key={reply.id}

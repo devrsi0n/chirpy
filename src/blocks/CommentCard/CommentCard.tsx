@@ -1,6 +1,7 @@
 import * as React from 'react';
 import dayjs from 'dayjs';
 import Info from '@geist-ui/react-icons/info';
+import tw from 'twin.macro';
 
 import { MessageIcon } from '$/components/Icons';
 import { Avatar } from '$/components/Avatar';
@@ -59,23 +60,29 @@ export function CommentCard({
   const detailsURL = `/widget/comment/details/${commentId}`;
   return (
     <article
-      className="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
+      tw="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
       {...(isENVDev && {
         id: commentId,
       })}
     >
       <Avatar size="lg" src={avatar ?? ''} alt={`User ${displayName}'s avatar`} />
-      <div className="flex-1">
-        <div className="flex flex-row items-baseline space-x-4 leading-none">
+      <div tw="flex-1">
+        <div tw="flex flex-row items-baseline space-x-4 leading-none">
           <Text bold>{displayName}</Text>
-          <Text as="time" title={createdAt} className="leading-none cursor-default text-text-light">
+          <Text
+            as="time"
+            title={createdAt}
+            tw="leading-none cursor-default text-gray-400"
+            // @ts-ignore
+            dateTime={createdAt}
+          >
             {dayjs(createdAt).fromNow()}
           </Text>
         </div>
-        <div className="mt-2">
+        <div tw="mt-2">
           <RichTextEditor initialValue={content} readOnly />
         </div>
-        <div className="flex flex-row items-center space-x-6 transform -translate-x-2">
+        <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
           <LikeAction likes={likes} commentId={commentId} onClickLikeAction={onClickLikeAction} />
           <ActionButton
             color="blue"
@@ -96,7 +103,7 @@ export function CommentCard({
         </div>
 
         {showReplyEditor && (
-          <div className="flex flex-col space-y-2 bg-white">
+          <div tw="flex flex-col space-y-2 bg-white">
             <RichTextEditor
               initialValue={[
                 {
@@ -105,7 +112,7 @@ export function CommentCard({
                 },
               ]}
               onSubmit={handleSubmitReply}
-              styles={{ root: 'px-2' }}
+              styles={{ root: tw`px-2` }}
               showDismissButton
               onClickDismiss={handleDimissRTE}
             />

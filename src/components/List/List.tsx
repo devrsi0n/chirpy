@@ -1,4 +1,5 @@
 import * as React from 'react';
+import tw, { TwStyle } from 'twin.macro';
 
 type Variant = 'ordered' | 'unordered';
 export type IListProps = React.PropsWithChildren<
@@ -13,15 +14,19 @@ const variantTags: Record<Variant, 'ul' | 'ol'> = {
   unordered: 'ul',
 };
 
-const variantStyles: Record<Variant, string> = {
-  ordered: 'list-decimal',
-  unordered: 'list-disc',
+const variantStyles: Record<Variant, TwStyle> = {
+  ordered: tw`list-decimal`,
+  unordered: tw`list-disc`,
 };
 
 export function List({ className, variant, ...restProps }: IListProps): JSX.Element {
   const Tag = variantTags[variant];
   return (
-    <Tag {...restProps} className={`py-2 list-inside ${variantStyles[variant]} ${className}`} />
+    <Tag
+      {...restProps}
+      className={className}
+      css={[tw`py-2 list-inside`, variantStyles[variant]]}
+    />
   );
 }
 
@@ -31,7 +36,7 @@ export type IListItemProps = React.PropsWithChildren<React.ComponentPropsWithout
 
 function ListItem({ className, children, ...liProps }: IListItemProps): JSX.Element {
   return (
-    <li {...liProps} className={`text-text ${className}`}>
+    <li {...liProps} tw="text-gray-500" className={className}>
       {children}
     </li>
   );

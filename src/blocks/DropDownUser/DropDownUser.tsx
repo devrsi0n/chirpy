@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
+import LogOut from '@geist-ui/react-icons/logOut';
+import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
 import { DropDownMenu } from '$/components/DropDownMenu';
-import LogOut from '@geist-ui/react-icons/logOut';
 import { Toggle } from '$/components/Toggle';
 import { Divider } from '$/components/Divider';
 
@@ -24,7 +25,7 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
   return (
     <DropDownMenu
       classes={{
-        button: 'transform translate-x-3',
+        button: tw`transform translate-x-3`,
       }}
       content={<Avatar src={props.avatar} alt={`The avatar of ${props.name}`} />}
     >
@@ -45,7 +46,7 @@ export function DropDownUser(props: DropDownUserProps): JSX.Element {
         />
       </DropDownMenu.Item>
       <Divider />
-      <DropDownMenu.Item className="justify-end space-x-2" onClick={handleClickLogOut}>
+      <DropDownMenu.Item tw="justify-end space-x-2" onClick={handleClickLogOut}>
         <LogOut size={14} />
         <span>Logout</span>
       </DropDownMenu.Item>

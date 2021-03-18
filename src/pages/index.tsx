@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Head from 'next/head';
-import clsx from 'clsx';
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
+import { css } from 'twin.macro';
 
 import { Text } from '$/components/Text/Text';
 import { Layout } from '$/components/Layout';
 import { Button } from '$/components/Button';
 
-import styles from '$/styles/home.module.scss';
 
 function Home(): JSX.Element {
   return (
@@ -15,28 +14,44 @@ function Home(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <main className="py-12 space-y-8">
+      <main tw="py-12 space-y-8">
         <h1
-          className={clsx(
-            'font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 mt-1',
-            styles.headline,
-          )}
+          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 mt-1"
+          css={css`
+            line-height: 1.09;
+            font-size: 3.25rem;
+            width: 100%;
+
+            @media (min-width: 320px) {
+              & {
+                line-height: 1.09;
+                font-size: 4rem;
+              }
+            }
+
+            @media (min-width: 640px) {
+              & {
+                width: 35rem;
+              }
+            }
+          `}
         >
           Comment system made easy.
         </h1>
-        <Text className="text-gray-500 text-center dark:text-gray-400">
+        <Text tw="text-gray-500 text-center dark:text-gray-400">
           Access your audience quickly by integrating a modern comment system.
         </Text>
-        <div className="flex justify-center items-center space-x-6">
+        <div tw="flex justify-center items-center space-x-6">
           <Button
             variant="solid"
             color="purple"
-            className="space-x-1 transition hover:shadow-2xl group"
+            className="group"
+            tw="space-x-1 transition hover:shadow-2xl"
           >
             <span>Try It Free</span>
             <ArrowRight
               size="20px"
-              className="inline-block transition transform group-hover:translate-x-1"
+              tw="inline-block transition transform group-hover:translate-x-1"
             />
           </Button>
           <Button variant="plain">Learn More</Button>

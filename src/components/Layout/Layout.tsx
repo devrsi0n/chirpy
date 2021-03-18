@@ -1,4 +1,5 @@
 import * as React from 'react';
+import 'twin.macro';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
@@ -10,9 +11,15 @@ interface ILayoutProps {
 
 export function Layout({ disableContainer, children }: ILayoutProps): JSX.Element {
   return (
-    <div className={`flex flex-col items-center`}>
+    <div tw="flex flex-col items-center">
       <Header />
-      {disableContainer ? children : <main className="py-10 main-container">{children}</main>}
+      {disableContainer ? (
+        children
+      ) : (
+        <main tw="py-10" className="main-container">
+          {children}
+        </main>
+      )}
 
       <Footer />
     </div>

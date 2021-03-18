@@ -5,5 +5,9 @@ export type ICardProps = React.PropsWithChildren<{
 }>;
 
 export function Card({ children, className }: ICardProps): JSX.Element {
-  return <div className={`border rounded my-5 px-5 ${className}`}>{children}</div>;
+  return (
+    <div tw="border rounded my-5 px-5" className={className}>
+      {children}
+    </div>
+  );
 }

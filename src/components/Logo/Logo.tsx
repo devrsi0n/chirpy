@@ -1,6 +1,7 @@
-import clsx from 'clsx';
-import { Link } from '../Link';
+import tw, { TwStyle } from 'twin.macro';
 import * as React from 'react';
+
+import { Link } from '../Link';
 
 type Size = 'sm' | 'md' | 'lg';
 export type LogoProps = {
@@ -8,22 +9,23 @@ export type LogoProps = {
   noSpacing?: boolean;
 };
 
-const sizeWidth: Record<Size, string> = {
-  sm: 'w-16',
-  md: 'w-24',
-  lg: 'w-32',
+const sizeWidth: Record<Size, TwStyle> = {
+  sm: tw`w-16`,
+  md: tw`w-24`,
+  lg: tw`w-32`,
 };
-const sizeSpacing: Record<Size, string> = {
-  sm: 'px-1',
-  md: 'px-2 py-1',
-  lg: 'px-3 py-2',
+
+const sizeSpacing: Record<Size, TwStyle> = {
+  sm: tw`px-1`,
+  md: tw`px-2 py-1`,
+  lg: tw`px-3 py-2`,
 };
 
 export function Logo({ size = 'md', noSpacing }: LogoProps): JSX.Element {
   return (
     <Link href="/" aria-label={`Logo of ${process.env.NEXT_PUBLIC_APP_NAME}`} variant="plain">
       <svg
-        className={clsx(sizeWidth[size], !noSpacing && sizeSpacing[size])}
+        css={[sizeWidth[size], !noSpacing && sizeSpacing[size]]}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 98 25"

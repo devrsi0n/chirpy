@@ -25,6 +25,7 @@ import { getAdminApollo } from '$server/common/admin-apollo';
 import { PagesDocument } from '$server/graphql/generated/page';
 import { CommentTreeDocument } from '$server/graphql/generated/comment';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
+import tw from 'twin.macro';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -154,20 +155,19 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <div className="main-container py-8">
+    <div className="main-container" css={tw`py-8`}>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
       <Tabs
         initialValue={COMMENT_TAB_VALUE}
-        className=""
         rightItems={
           isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />
         }
       >
         <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
-          <div className="space-y-7">
-            <div className="space-y-2">
+          <div css={tw`space-y-7`}>
+            <div css={tw`space-y-2`}>
               <RichTextEditor
                 onSubmit={handleSubmit}
                 postButtonLabel={!isLogin ? 'Login' : undefined}
