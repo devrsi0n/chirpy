@@ -1,8 +1,9 @@
 import * as React from 'react';
-import clsx from 'clsx';
+
 import { TabsConfig, TabsContext, TabsLabelItem } from './TabsContext';
 import { TabsItem } from './TabsItem';
 import { BaseButton } from '../Button';
+import tw from 'twin.macro';
 
 export type TabProps = React.ComponentProps<'section'> & {
   initialValue?: string;
@@ -24,13 +25,6 @@ export function Tabs({
   rightItems,
   ...restProps
 }: TabProps): JSX.Element {
-  const handleKeyDown = React.useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      event.preventDefault();
-    },
-    [],
-  );
-
   const [selfValue, setSelfValue] = React.useState<string | undefined>(userCustomInitialValue);
   const [tabs, setTabs] = React.useState<TabsLabelItem[]>([]);
 
@@ -73,17 +67,17 @@ export function Tabs({
 
   return (
     <TabsContext.Provider value={initialValue}>
-      <section {...restProps} className={clsx('', className)}>
-        <header className="flex flex-row items-center justify-between border-b dark:border-gray-700">
-          <nav className="space-x-1 border-gray-400">
+      <section {...restProps} className={className}>
+        <header tw="flex flex-row items-center justify-between border-b dark:border-gray-700">
+          <nav tw="space-x-1 border-gray-400">
             {tabs.map((item) => (
               <BaseButton
-                className={clsx(
-                  'hover:rounded hover:bg-gray-50 dark:hover:bg-gray-900 border-b-2 p-3',
+                css={[
+                  tw`hover:rounded hover:bg-gray-50 dark:hover:bg-gray-900 border-b-2 p-3`,
                   selfValue === item.value
-                    ? 'text-purple-500 border-purple-500'
-                    : 'border-transparent',
-                )}
+                    ? tw`text-purple-500 border-purple-500`
+                    : tw`border-transparent`,
+                ]}
                 style={{
                   borderTopWidth: 0,
                   borderLeftWidth: 0,
@@ -99,7 +93,7 @@ export function Tabs({
           </nav>
           <div>{rightItems}</div>
         </header>
-        <div className="content">{children}</div>
+        <div>{children}</div>
       </section>
     </TabsContext.Provider>
   );

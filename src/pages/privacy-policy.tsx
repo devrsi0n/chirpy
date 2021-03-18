@@ -13,8 +13,8 @@ export default function PrivacyPolicy(): JSX.Element {
         <Head>
           <title>Privacy Policy</title>
         </Head>
-        <article className="flex flex-col pb-12 article">
-          <Heading as="h1" className="pb-6">
+        <article tw="flex flex-col pb-12">
+          <Heading as="h1" tw="pb-6">
             Privacy Policy
           </Heading>
           <div>

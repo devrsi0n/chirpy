@@ -4,7 +4,7 @@ import { ErrorHandler } from 'next-connect';
 export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (
   err,
   req,
-  res
+  res,
 ) => {
   console.error(err);
   console.error(req.query);

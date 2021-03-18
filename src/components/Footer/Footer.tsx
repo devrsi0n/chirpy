@@ -6,6 +6,7 @@ import { Link } from '../Link/Link';
 import { ColorMode } from '../../types/theme.type';
 import { useHasMounted } from '$/hooks/useHasMounted';
 import { IconButton } from '../Button/IconButton';
+import tw from 'twin.macro';
 
 const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
   system: 'setting',
@@ -28,16 +29,20 @@ export function Footer(): JSX.Element {
 
   const icon = icons[(theme as ColorMode) || 'system'];
   return (
-    <footer className="w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 footer text-text">
-      <nav className="flex flex-row flex-wrap justify-center w-full space-x-6 leading-8">
+    <footer
+      css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 text-gray-500`}
+    >
+      <nav css={tw`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
         <Link href="/about">About</Link>
         <Link href="/blog">Blog</Link>
         <Link href="/pricing">Pricing</Link>
         <Link href="/terms-of-service">Terms</Link>
         <Link href="/privacy-policy">Privacy</Link>
       </nav>
-      <div className="flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-3 xs:flex-row">
-        <Text variant="sm" className="text-gray-500">
+      <div
+        css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-3 flex-row)`}
+      >
+        <Text variant="sm" css={tw`text-gray-500`}>
           &copy; 2021 Totalk Labs. All rights reserved.
         </Text>
         {hasMounted && icon && theme && <IconButton onClick={handleClick} icon={icon}></IconButton>}

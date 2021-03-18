@@ -88,16 +88,16 @@ export default function Dashboard(): JSX.Element {
             ))}
           </List>
         ) : (
-          <div className="py-6">
+          <div tw="py-6">
             <Text>No projects</Text>
           </div>
         )}
-        <div className="space-x-2">
+        <div tw="space-x-2">
           <Button onClick={handleCreateProject}>Create a new project</Button>
-          <Button className="mt-5">Integrate comment</Button>
+          <Button tw="mt-5">Integrate comment</Button>
         </div>
         <Dialog show={showDialog} title="Create a new project">
-          <div className="flex flex-col w-full">
+          <div tw="flex flex-col w-full">
             <TextField
               placeholder="Project name"
               label="Project name"
@@ -107,11 +107,11 @@ export default function Dashboard(): JSX.Element {
             />
 
             <DialogFooter>
-              <Button variant="plain" onClick={handleCloseDialog} className="w-full sm:w-auto">
+              <Button variant="plain" onClick={handleCloseDialog} tw="w-full sm:w-auto">
                 Cancel
               </Button>
               <Button
-                className="w-full sm:w-auto"
+                tw="w-full sm:w-auto"
                 disabled={projectNameError.length > 0}
                 onClick={handleSubmit}
               >

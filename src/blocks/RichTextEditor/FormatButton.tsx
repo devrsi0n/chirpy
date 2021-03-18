@@ -3,12 +3,13 @@ import { useSlate } from 'slate-react';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import BoldIcon from '@geist-ui/react-icons/bold';
 import ItalicIcon from '@geist-ui/react-icons/italic';
+import 'twin.macro';
 
 import { Format, Icon } from './type';
 import { isBlockActive, isMarkActive, toggleBlock, toggleMark } from './utilities';
 import { useRichTextEditorContext } from './RichTextEditorContext';
 import { BaseButton, BaseButtonProps } from '$/components/Button';
-import clsx from 'clsx';
+import tw from 'twin.macro';
 
 type BaseFormatButtonProps = {
   isActive?: boolean;
@@ -26,14 +27,14 @@ export function BaseFormatButton({
     <BaseButton
       {...restProps}
       disabled={disabled}
-      className={clsx(
-        'p-1 rounded-sm',
+      css={[
+        tw`p-1 rounded-sm`,
         disabled
-          ? 'pointer-events-none hover:cursor-not-allowed'
-          : 'hover:bg-gray-100 dark:hover:bg-gray-800',
-        isActive ? 'text-gray-900 dark:text-gray-200' : 'text-gray-600 dark:text-gray-400',
+          ? tw`pointer-events-none hover:cursor-not-allowed`
+          : tw`hover:bg-gray-100 dark:hover:bg-gray-800`,
+        isActive ? tw`text-gray-900 dark:text-gray-200` : tw`text-gray-600 dark:text-gray-400`,
         className,
-      )}
+      ]}
     >
       {children}
     </BaseButton>

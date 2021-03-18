@@ -1,6 +1,6 @@
-import clsx from 'clsx';
 import * as React from 'react';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
+import tw, { TwStyle } from 'twin.macro';
 
 import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
@@ -14,10 +14,10 @@ export type IconButtonProps = BaseButtonProps & {
   children?: React.ReactNode;
 };
 
-const sizeStyles: Record<Size, [string, number]> = {
-  sm: ['p-2', 14],
-  md: ['p-3', 18],
-  lg: ['p-6', 24],
+const sizeStyles: Record<Size, [TwStyle, number]> = {
+  sm: [tw`p-2`, 14],
+  md: [tw`p-3`, 18],
+  lg: [tw`p-6`, 24],
 };
 
 const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
@@ -38,10 +38,10 @@ export const IconButton = React.forwardRef(function IconButton(
     <BaseButton
       ref={ref}
       {...restProps}
-      className={clsx(
-        'rounded-full hover:bg-gray-400 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-200',
+      css={[
+        tw`rounded-full hover:(bg-gray-400 bg-opacity-10) focus:(outline-none ring-2 ring-inset ring-gray-200)`,
         style,
-      )}
+      ]}
     >
       {Icon && <Icon size={sizeNumber} />}
       {children}

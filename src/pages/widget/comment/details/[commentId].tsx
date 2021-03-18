@@ -20,6 +20,7 @@ import { PoweredBy } from '$/blocks/PoweredBy';
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { IconButton } from '$/components/Button';
 import { getAdminApollo } from '$server/common/admin-apollo';
+import tw from 'twin.macro';
 
 const handleSubmitReply = () => {
   return Promise.resolve();
@@ -43,7 +44,7 @@ export default function CommentDetailsWidget({
   };
 
   return (
-    <div className="main-container py-8">
+    <div className="main-container" css={tw`py-8`}>
       <div>
         <IconButton icon="arrow-left" size="lg" onClick={handleClickBack} />
       </div>

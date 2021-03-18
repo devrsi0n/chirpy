@@ -10,8 +10,8 @@ export default function SignUp(): JSX.Element {
       name="Sign up"
       title="Create an account 🎓"
       subtitle={
-        <div className="flex flex-row space-x-1">
-          <Text className="text-gray-500">Already have an account?</Text>
+        <div tw="flex flex-row space-x-1">
+          <Text tw="text-gray-500">Already have an account?</Text>
           <Link href="/sign-in" variant="nav">
             Sign in
           </Link>

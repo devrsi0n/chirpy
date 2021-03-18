@@ -23,26 +23,26 @@ export function Popover(props: IPopoverProps): JSX.Element {
       ref={ref}
       onClick={handleClick}
       onKeyPress={handleClick}
-      className="relative focus:outline-none"
+      tw="relative focus:outline-none"
       role="button"
       tabIndex={0}
     >
       {props.children}
       {!hidePopup && (
         <div
-          className="absolute right-0 rounded-sm shadow"
+          tw="absolute right-0 rounded-sm shadow"
           style={{
             top: (ref.current?.getBoundingClientRect().height || 0) + 8,
           }}
         >
           <div
-            className="absolute h-4 w-4 transform rotate-45 shadow bg-white dark:bg-black"
+            tw="absolute h-4 w-4 transform rotate-45 shadow bg-white dark:bg-black"
             style={{
               top: '-8px',
               right: '8px',
             }}
           />
-          <div className="relative py-2 rounded-sm bg-white dark:bg-black">{props.content}</div>
+          <div tw="relative py-2 rounded-sm bg-white dark:bg-black">{props.content}</div>
         </div>
       )}
     </div>
