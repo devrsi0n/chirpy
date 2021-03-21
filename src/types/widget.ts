@@ -2,6 +2,6 @@ import { CommentDetailsQuery, CommentTreeQuery } from '$server/graphql/generated
 
 import { InsertOneLikeMutation } from '$/graphql/generated/like';
 
-export type CommentLeaf = CommentTreeQuery['comments'][number];
+export type CommentLeafType = CommentTreeQuery['comments'][number];
 export type CommentDetailNode = CommentDetailsQuery['commentByPk'];
 export type InsertOneLike = NonNullable<InsertOneLikeMutation['insertOneLike']>;

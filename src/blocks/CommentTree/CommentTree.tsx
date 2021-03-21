@@ -2,20 +2,27 @@ import * as React from 'react';
 import 'twin.macro';
 import { css, theme } from 'twin.macro';
 
-import { CommentLeaf } from '$/types/widget';
+import { CommentLeafType } from '$/types/widget';
 
+import { CommentBranch } from '../CommentBranch';
 import { CommentCard, CommentCardProps } from '../CommentCard';
 
 export type CommentProps = {
-  comment: CommentLeaf;
+  comment: CommentLeafType;
+  isRoot?: boolean;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**
  * Render a comment with it's replies, like a tree.
  */
-function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps): JSX.Element {
+function CommentTree({
+  comment,
+  onClickLikeAction,
+  onSubmitReply,
+  isRoot = true,
+}: CommentProps): JSX.Element {
   return (
-    <div tw="space-y-2">
+    <CommentBranch hiddenBranch={isRoot}>
       <CommentCard
         commentId={comment.id}
         author={comment.user}
@@ -26,9 +33,9 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
         onSubmitReply={onSubmitReply}
       />
       <div tw="flex flex-col items-end">
-        <div
+        <ul
           css={css`
-            width: calc(100% - ${theme('spacing.8')});
+            width: calc(100% - ${theme('spacing.16')});
           `}
         >
           {comment.replies?.map((reply: $TsFixMe) => (
@@ -37,11 +44,12 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
               comment={reply}
               onClickLikeAction={onClickLikeAction}
               onSubmitReply={onSubmitReply}
+              isRoot={false}
             />
           ))}
-        </div>
+        </ul>
       </div>
-    </div>
+    </CommentBranch>
   );
 }
 
