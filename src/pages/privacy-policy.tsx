@@ -1,10 +1,11 @@
-import * as React from 'react';
 import Head from 'next/head';
-import { Link } from '$/components/Link';
+import * as React from 'react';
+
 import { Heading } from '$/components/Heading';
-import { Text } from '$/components/Text';
-import { List } from '$/components/List';
 import { Layout } from '$/components/Layout';
+import { Link } from '$/components/Link';
+import { List } from '$/components/List';
+import { Text } from '$/components/Text';
 
 export default function PrivacyPolicy(): JSX.Element {
   return (

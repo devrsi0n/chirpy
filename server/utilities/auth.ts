@@ -2,7 +2,7 @@ import { parse } from 'cookie';
 import jwt from 'jsonwebtoken';
 import { NextApiRequest } from 'next';
 
-import { AUTH_COOKIE_NAME } from 'shared/constants';
+import { AUTH_COOKIE_NAME } from '$shared/constants';
 
 export type AuthUser = {
   sub: string;

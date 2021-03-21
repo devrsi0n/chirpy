@@ -1,3 +1,4 @@
+import { extractCritical } from '@emotion/server';
 import Document, {
   Html,
   Head,
@@ -6,7 +7,6 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
-import { extractCritical } from '@emotion/server';
 import tw from 'twin.macro';
 
 class MyDocument extends Document<ReturnType<typeof extractCritical>> {

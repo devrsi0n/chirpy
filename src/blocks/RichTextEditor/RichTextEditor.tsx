@@ -1,24 +1,25 @@
 // @refresh reset
+import Lock from '@geist-ui/react-icons/lock';
+import Send from '@geist-ui/react-icons/send';
+import DismissIcon from '@geist-ui/react-icons/x';
+import '@tailwindcss/typography/dist/typography.min.css';
 import * as React from 'react';
 import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
-import DismissIcon from '@geist-ui/react-icons/x';
-import Lock from '@geist-ui/react-icons/lock';
-import Send from '@geist-ui/react-icons/send';
 import tw, { css, TwStyle } from 'twin.macro';
-import '@tailwindcss/typography/dist/typography.min.css';
 
-import { Leaf } from './Leaf';
-import { Element } from './Element';
-import { RichTextEditorContext } from './RichTextEditorContext';
 import { Button } from '$/components/Button';
-import { Toolbar } from './Toolbar';
-import { BaseFormatButton, MarkButton } from './FormatButton';
 import { ClientOnly } from '$/components/ClientOnly';
-import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 import { SpinnerIcon } from '$/components/Icons';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
+
+import { Element } from './Element';
+import { BaseFormatButton, MarkButton } from './FormatButton';
+import { Leaf } from './Leaf';
+import { RichTextEditorContext } from './RichTextEditorContext';
+import { Toolbar } from './Toolbar';
 
 export type RTEValue = Node[];
 

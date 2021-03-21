@@ -2,6 +2,7 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+const defaultOptions = {};
 export type InsertOneProjectMutationVariables = Types.Exact<{
   name: Types.Scalars['String'];
   teamId?: Types.Maybe<Types.Scalars['uuid']>;
@@ -54,9 +55,10 @@ export function useInsertOneProjectMutation(
     InsertOneProjectMutationVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(
     InsertOneProjectDocument,
-    baseOptions,
+    options,
   );
 }
 export type InsertOneProjectMutationHookResult = ReturnType<typeof useInsertOneProjectMutation>;

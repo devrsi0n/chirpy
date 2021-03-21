@@ -1,5 +1,6 @@
-import { CommentLeaf } from '$/types/widget';
 import { produce } from 'immer';
+
+import { CommentLeaf } from '$/types/widget';
 
 export function updateReplyInComments(
   comments: CommentLeaf[],

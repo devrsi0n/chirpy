@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import tw, { TwStyle } from 'twin.macro';
 
 type Variant = 'xs' | 'sm' | 'base' | 'lg';

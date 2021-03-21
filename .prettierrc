@@ -3,5 +3,7 @@
   "singleQuote": true,
   "printWidth": 100,
   "trailingComma": "all",
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "importOrder": ["^\\$server/(.*)$", "^\\$/(.*)$", "^\\$shared/(.*)$", "^[./]"],
+  "importOrderSeparation": true
 }

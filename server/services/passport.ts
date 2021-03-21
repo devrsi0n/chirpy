@@ -1,29 +1,26 @@
-import passport, { Profile } from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { Strategy as GitHubStrategy } from 'passport-github2';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { CookieSerializeOptions, serialize } from 'cookie';
+import { NextApiRequest, NextApiResponse } from 'next';
+import passport, { Profile } from 'passport';
+import { Strategy as GitHubStrategy } from 'passport-github2';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import superjson from 'superjson';
 
-import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from 'shared/constants';
-import { createToken } from '../utilities/create-token';
-import { redirect } from '../response';
-import { getFirstQueryParam } from '../utilities/url';
 import { getAdminApollo } from '$server/common/admin-apollo';
-
 import { AccountProvider_Enum, UserType_Enum } from '$server/graphql/generated/types';
 import { UpsertUserDocument } from '$server/graphql/generated/user';
 import { UserByPkDocument } from '$server/graphql/generated/user';
 
-interface User {
-  id: string;
-}
+import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from '$shared/constants';
 
-passport.serializeUser<User, string>((user, done) => {
+import { redirect } from '../response';
+import { createToken } from '../utilities/create-token';
+import { getFirstQueryParam } from '../utilities/url';
+
+passport.serializeUser<string>((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser<User, string>((id, done) => {
+passport.deserializeUser<string>((id, done) => {
   const adminApollo = getAdminApollo();
 
   adminApollo
@@ -39,7 +36,7 @@ passport.deserializeUser<User, string>((id, done) => {
       if (!user) {
         throw new Error(`Get data failed, result: ${superjson.stringify(result)}`);
       }
-      done(null, user as User);
+      done(null, user as Express.User);
     })
     .catch((error) => {
       console.error(`deserializeUser failed: ${error}`);
@@ -53,9 +50,14 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/google/callback`,
     },
-    async (accessToken, refreshToken, profile, cb) => {
-      const user = await getUserByProviderProfile(profile, AccountProvider_Enum.Google);
-      cb(undefined, user);
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const user = await getUserByProviderProfile(profile, AccountProvider_Enum.Google);
+        done(null, user);
+      } catch (error) {
+        console.error(`Google auth verify failed: ${error}`);
+        done(error);
+      }
     },
   ),
 );
@@ -70,8 +72,13 @@ passport.use(
       scope: ['user:email'],
     },
     async (accessToken: string, refreshToken: string, profile: Profile, cb: $TsFixMe) => {
-      const user = await getUserByProviderProfile(profile, AccountProvider_Enum.GitHub);
-      cb(null, user);
+      try {
+        const user = await getUserByProviderProfile(profile, AccountProvider_Enum.GitHub);
+        console.log({ user });
+        cb(null, user);
+      } catch (error) {
+        cb(error);
+      }
     },
   ),
 );
@@ -83,10 +90,7 @@ async function getUserByProviderProfile(profile: Profile, provider: AccountProvi
   }
   const email = profile.emails[0].value;
   const avatar = profile.photos?.[0].value || '';
-  const { displayName, username, id: providerAccountId } = profile;
-  if (!username) {
-    throw new Error(`Expect a valid username, get ${username}`);
-  }
+  const { displayName, username, id: providerAccountId, name } = profile;
   const adminApollo = getAdminApollo();
   const compoundId = `${provider}:${providerAccountId}`;
 
@@ -98,6 +102,9 @@ async function getUserByProviderProfile(profile: Profile, provider: AccountProvi
         email,
         username,
         displayName,
+        familyName: name?.familyName,
+        givenName: name?.givenName,
+        middleName: name?.middleName,
         avatar,
         userType: UserType_Enum.Free,
         compoundId,

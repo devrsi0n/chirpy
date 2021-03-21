@@ -19,10 +19,13 @@ async function build() {
     const nextBuildProcess = execa('npx', ['next', 'build']);
     nextBuildProcess.stdout?.pipe(process.stdout);
     nextBuildProcess.stderr?.pipe(process.stderr);
-    nextBuildProcess.then(() => {
-    }).catch((error) => {
-      throw error;
-    });
+    nextBuildProcess
+      .then(() => {
+        //
+      })
+      .catch((error) => {
+        throw error;
+      });
   } catch (error) {
     throw error;
   }

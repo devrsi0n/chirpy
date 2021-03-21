@@ -1,3 +1,6 @@
-generated/*
+generated
+.next
+.cache
+
 next.config.js
 tailwind.config.js

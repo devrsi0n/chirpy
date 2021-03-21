@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,9 +7,10 @@ import {
   ApolloLink,
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
-import { NextApiRequest } from 'next';
 import Cookies from 'js-cookie';
+import { NextApiRequest } from 'next';
 import preval from 'preval.macro';
+import * as React from 'react';
 
 import { AUTH_COOKIE_NAME } from '../../shared/constants';
 

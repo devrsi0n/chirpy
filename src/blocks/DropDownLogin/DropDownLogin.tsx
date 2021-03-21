@@ -1,12 +1,12 @@
 import * as React from 'react';
+// @ts-ignore
+import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
 // import { useRouter } from 'next/router';
 import 'twin.macro';
+import tw from 'twin.macro';
 
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { GoogleIcon } from '$/components/Icons';
-// @ts-ignore
-import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
-import tw from 'twin.macro';
 
 export type DropDownLoginProps = {
   //

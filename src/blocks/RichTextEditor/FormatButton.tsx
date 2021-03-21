@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { useSlate } from 'slate-react';
-import UnderlineIcon from '@geist-ui/react-icons/underline';
 import BoldIcon from '@geist-ui/react-icons/bold';
 import ItalicIcon from '@geist-ui/react-icons/italic';
+import UnderlineIcon from '@geist-ui/react-icons/underline';
+import * as React from 'react';
+import { useSlate } from 'slate-react';
 import 'twin.macro';
+import tw from 'twin.macro';
 
+import { BaseButton, BaseButtonProps } from '$/components/Button';
+
+import { useRichTextEditorContext } from './RichTextEditorContext';
 import { Format, Icon } from './type';
 import { isBlockActive, isMarkActive, toggleBlock, toggleMark } from './utilities';
-import { useRichTextEditorContext } from './RichTextEditorContext';
-import { BaseButton, BaseButtonProps } from '$/components/Button';
-import tw from 'twin.macro';
 
 type BaseFormatButtonProps = {
   isActive?: boolean;

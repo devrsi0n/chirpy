@@ -1,10 +1,10 @@
 import * as React from 'react';
+import 'twin.macro';
+import { css, theme } from 'twin.macro';
 
 import { CommentDetailNode } from '$/types/widget';
-import { CommentCard, CommentCardProps } from '../CommentCard';
-import 'twin.macro';
 
-import { css, theme } from 'twin.macro';
+import { CommentCard, CommentCardProps } from '../CommentCard';
 
 export type Comment = NonNullable<CommentDetailNode>;
 

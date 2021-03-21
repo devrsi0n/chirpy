@@ -2,6 +2,7 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+const defaultOptions = {};
 export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
   parentId?: Types.Maybe<Types.Scalars['uuid']>;
@@ -69,9 +70,10 @@ export function useInsertOneCommentMutation(
     InsertOneCommentMutationVariables
   >,
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<InsertOneCommentMutation, InsertOneCommentMutationVariables>(
     InsertOneCommentDocument,
-    baseOptions,
+    options,
   );
 }
 export type InsertOneCommentMutationHookResult = ReturnType<typeof useInsertOneCommentMutation>;
