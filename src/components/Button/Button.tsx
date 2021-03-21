@@ -38,7 +38,7 @@ type VariantColors = {
 const ColorVariantStyles: VariantColors = {
   'solid-purple': tw`bg-purple-600 text-white border border-purple-700 hover:bg-purple-700 focus:(outline-none ring-2 ring-offset-2 ring-purple-500)`,
 
-  'solid-gray': tw`bg-gray-600 text-black border border-gray-700 hover:bg-gray-700 focus:(outline-none ring-2 ring-offset-2 ring-gray-500)`,
+  'solid-gray': tw`bg-gray-600 text-white border border-gray-700 hover:bg-gray-700 focus:(outline-none ring-2 ring-offset-2 ring-gray-500)`,
 
   'plain-purple': tw`bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
 
