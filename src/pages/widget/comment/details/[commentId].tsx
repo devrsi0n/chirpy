@@ -19,17 +19,19 @@ import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 // import { deleteOneLikeInComments } from '$/utilities/comment';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { IconButton } from '$/components/Button';
+import { Heading } from '$/components/Heading';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { CommentDetailNode } from '$/types/widget';
 
 const handleSubmitReply = () => {
   return Promise.resolve();
 };
-const handleClickBack = () => {
-  window.history.back();
+const handleClickBack: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+  window.history.go(-1);
+  event.preventDefault();
 };
 
-// Demo: http://localhost:3000/widget/comment/details/ckjqveq4q0000docvo1otdtfb
+// Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
 export default function CommentDetailsWidget({
   comment,
 }: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
@@ -45,8 +47,16 @@ export default function CommentDetailsWidget({
 
   return (
     <div className="main-container" css={tw`py-8`}>
-      <div>
-        <IconButton icon="arrow-left" size="lg" onClick={handleClickBack} />
+      <div css={tw`flex flex-row items-center mb-4`}>
+        <IconButton
+          icon="arrow-left"
+          size="md"
+          onClick={handleClickBack}
+          css={tw`transform -translate-x-4`}
+        />
+        <Heading as="h4" css={tw`text-gray-600`}>
+          Comment details
+        </Heading>
       </div>
       {comment?.id && (
         <CommentLinkedList

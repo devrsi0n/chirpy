@@ -24,7 +24,7 @@ import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
-import { CommentLeaf } from '$/types/widget';
+import { CommentLeafType } from '$/types/widget';
 import { deleteOneLikeInComments, createOneLikeInComments } from '$/utilities/like';
 import { updateReplyInComments } from '$/utilities/merge-comment';
 
@@ -41,7 +41,7 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  const [comments, setComments] = React.useState<CommentLeaf[]>(
+  const [comments, setComments] = React.useState<CommentLeafType[]>(
     isStaticError(props) ? [] : props.comments,
   );
   if (isStaticError(props)) {
@@ -175,14 +175,16 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
               />
             </div>
 
-            {comments?.map((comment: CommentLeaf) => (
-              <CommentTree
-                key={comment.id}
-                comment={comment}
-                onClickLikeAction={handleClickLikeAction}
-                onSubmitReply={handleSubmitReply}
-              />
-            ))}
+            <ul>
+              {comments?.map((comment: CommentLeafType) => (
+                <CommentTree
+                  key={comment.id}
+                  comment={comment}
+                  onClickLikeAction={handleClickLikeAction}
+                  onSubmitReply={handleSubmitReply}
+                />
+              ))}
+            </ul>
           </div>
         </Tabs.Item>
         <Tabs.Item
@@ -222,7 +224,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = PathParams & {
-  comments: CommentLeaf[];
+  comments: CommentLeafType[];
 };
 type StaticError = {
   error?: string;
