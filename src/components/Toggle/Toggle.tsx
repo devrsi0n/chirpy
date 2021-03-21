@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Switch } from '@headlessui/react';
+import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Text, TextProps } from '../Text/Text';

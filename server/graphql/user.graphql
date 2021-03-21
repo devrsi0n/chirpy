@@ -1,7 +1,10 @@
 mutation upsertUser(
   $email: String!
-  $username: String!
   $displayName: String!
+  $username: String
+  $familyName: String
+  $givenName: String
+  $middleName: String
   $avatar: String
   $userType: UserType_enum!
   $compoundId: String!
@@ -13,6 +16,9 @@ mutation upsertUser(
       email: $email
       username: $username
       displayName: $displayName
+      familyName: $familyName
+      givenName: $givenName
+      middleName: $middleName
       avatar: $avatar
       type: $userType
       accounts: {

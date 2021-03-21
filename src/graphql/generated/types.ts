@@ -2042,6 +2042,8 @@ export type User = {
   createdAt: Scalars['timestamptz'];
   displayName: Scalars['String'];
   email: Scalars['String'];
+  familyName?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
   id: Scalars['uuid'];
   /** An array relationship */
   likes: Array<Like>;
@@ -2051,6 +2053,7 @@ export type User = {
   members: Array<Member>;
   /** An aggregated array relationship */
   members_aggregate: Member_Aggregate;
+  middleName?: Maybe<Scalars['String']>;
   /** An array relationship */
   projects: Array<Project>;
   /** An aggregated array relationship */
@@ -2058,7 +2061,7 @@ export type User = {
   type: UserType_Enum;
   updatedAt: Scalars['timestamptz'];
   /** Unique name, used for search a person, e.g. at some one in a comment. */
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 /** columns and relationships of "User" */
@@ -2379,9 +2382,12 @@ export type User_Bool_Exp = {
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   displayName?: Maybe<String_Comparison_Exp>;
   email?: Maybe<String_Comparison_Exp>;
+  familyName?: Maybe<String_Comparison_Exp>;
+  givenName?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   likes?: Maybe<Like_Bool_Exp>;
   members?: Maybe<Member_Bool_Exp>;
+  middleName?: Maybe<String_Comparison_Exp>;
   projects?: Maybe<Project_Bool_Exp>;
   type?: Maybe<UserType_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
@@ -2406,9 +2412,12 @@ export type User_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
+  familyName?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   likes?: Maybe<Like_Arr_Rel_Insert_Input>;
   members?: Maybe<Member_Arr_Rel_Insert_Input>;
+  middleName?: Maybe<Scalars['String']>;
   projects?: Maybe<Project_Arr_Rel_Insert_Input>;
   type?: Maybe<UserType_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -2422,7 +2431,10 @@ export type User_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
+  familyName?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  middleName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -2433,7 +2445,10 @@ export type User_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
+  familyName?: Maybe<Order_By>;
+  givenName?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  middleName?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   username?: Maybe<Order_By>;
 };
@@ -2445,7 +2460,10 @@ export type User_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
+  familyName?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  middleName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
 };
@@ -2456,7 +2474,10 @@ export type User_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
+  familyName?: Maybe<Order_By>;
+  givenName?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
+  middleName?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   username?: Maybe<Order_By>;
 };
@@ -2491,9 +2512,12 @@ export type User_Order_By = {
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
+  familyName?: Maybe<Order_By>;
+  givenName?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   likes_aggregate?: Maybe<Like_Aggregate_Order_By>;
   members_aggregate?: Maybe<Member_Aggregate_Order_By>;
+  middleName?: Maybe<Order_By>;
   projects_aggregate?: Maybe<Project_Aggregate_Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
@@ -2516,7 +2540,13 @@ export enum User_Select_Column {
   /** column name */
   Email = 'email',
   /** column name */
+  FamilyName = 'familyName',
+  /** column name */
+  GivenName = 'givenName',
+  /** column name */
   Id = 'id',
+  /** column name */
+  MiddleName = 'middleName',
   /** column name */
   Type = 'type',
   /** column name */
@@ -2531,7 +2561,10 @@ export type User_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
+  familyName?: Maybe<Scalars['String']>;
+  givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
+  middleName?: Maybe<Scalars['String']>;
   type?: Maybe<UserType_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
@@ -2548,7 +2581,13 @@ export enum User_Update_Column {
   /** column name */
   Email = 'email',
   /** column name */
+  FamilyName = 'familyName',
+  /** column name */
+  GivenName = 'givenName',
+  /** column name */
   Id = 'id',
+  /** column name */
+  MiddleName = 'middleName',
   /** column name */
   Type = 'type',
   /** column name */

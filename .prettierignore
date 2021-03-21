@@ -1,1 +1,3 @@
-generated/*
+generated
+.next
+.cache

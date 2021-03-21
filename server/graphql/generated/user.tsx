@@ -3,8 +3,11 @@ import * as Types from './types';
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type UpsertUserMutationVariables = Types.Exact<{
   email: Types.Scalars['String'];
-  username: Types.Scalars['String'];
   displayName: Types.Scalars['String'];
+  username?: Types.Maybe<Types.Scalars['String']>;
+  familyName?: Types.Maybe<Types.Scalars['String']>;
+  givenName?: Types.Maybe<Types.Scalars['String']>;
+  middleName?: Types.Maybe<Types.Scalars['String']>;
   avatar?: Types.Maybe<Types.Scalars['String']>;
   userType: Types.UserType_Enum;
   compoundId: Types.Scalars['String'];
@@ -59,7 +62,7 @@ export const UpsertUserDocument: DocumentNode<UpsertUserMutation, UpsertUserMuta
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'username' } },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'displayName' } },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
@@ -67,11 +70,23 @@ export const UpsertUserDocument: DocumentNode<UpsertUserMutation, UpsertUserMuta
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'displayName' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'username' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'familyName' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'givenName' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'middleName' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
@@ -138,6 +153,21 @@ export const UpsertUserDocument: DocumentNode<UpsertUserMutation, UpsertUserMuta
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'displayName' },
                       value: { kind: 'Variable', name: { kind: 'Name', value: 'displayName' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'familyName' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'familyName' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'givenName' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'givenName' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'middleName' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'middleName' } },
                     },
                     {
                       kind: 'ObjectField',

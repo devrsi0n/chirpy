@@ -1,6 +1,6 @@
-import * as React from 'react';
 import * as CSS from 'csstype';
 import Head from 'next/head';
+import * as React from 'react';
 
 import { ITheme, Colors, ObjectOf } from '$/types/theme.type';
 

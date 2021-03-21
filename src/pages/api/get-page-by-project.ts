@@ -1,6 +1,6 @@
-import connect from 'next-connect';
-import { NextApiRequest, NextApiResponse } from 'next';
 import Cors from 'cors';
+import { NextApiRequest, NextApiResponse } from 'next';
+import connect from 'next-connect';
 
 import { handleInternalLoginFailure } from '$server/services/common';
 import { handleGetPageByProject } from '$server/services/page';

@@ -1,15 +1,15 @@
-import 'tailwindcss/tailwind.css';
-import * as React from 'react';
 import { ApolloProvider } from '@apollo/client';
+import { Global } from '@emotion/react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
+import * as React from 'react';
+import 'tailwindcss/tailwind.css';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
-import { Global } from '@emotion/react';
 
-import { useApollo } from '$/lib/apollo-client';
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
+import { useApollo } from '$/lib/apollo-client';
 
 dayjs.extend(relativeTime);
 

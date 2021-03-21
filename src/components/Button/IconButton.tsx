@@ -1,5 +1,5 @@
-import * as React from 'react';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
+import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';

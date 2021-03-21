@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -7,25 +6,27 @@ import {
   GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
+import * as React from 'react';
 import { Node } from 'slate';
+import tw from 'twin.macro';
+
+import { getAdminApollo } from '$server/common/admin-apollo';
+import { CommentTreeDocument } from '$server/graphql/generated/comment';
+import { PagesDocument } from '$server/graphql/generated/page';
 
 import { CommentTree } from '$/blocks/CommentTree/CommentTree';
-import { RichTextEditor } from '$/blocks/RichTextEditor';
-import { Tabs } from '$/components/Tabs';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
-import { CommentLeaf } from '$/types/widget';
-import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
+import { PoweredBy } from '$/blocks/PoweredBy';
+import { RichTextEditor } from '$/blocks/RichTextEditor';
+import { Tabs } from '$/components/Tabs';
+import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
+import { CommentLeaf } from '$/types/widget';
 import { deleteOneLikeInComments, createOneLikeInComments } from '$/utilities/like';
 import { updateReplyInComments } from '$/utilities/merge-comment';
-import { PoweredBy } from '$/blocks/PoweredBy';
-import { getAdminApollo } from '$server/common/admin-apollo';
-import { PagesDocument } from '$server/graphql/generated/page';
-import { CommentTreeDocument } from '$server/graphql/generated/comment';
-import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
-import tw from 'twin.macro';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 

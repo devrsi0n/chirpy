@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { CurrentUserContext, CurrentUserContextType } from '$/context/CurrentUserContext';
 
 export function useCurrentUser(): CurrentUserContextType {

@@ -6,10 +6,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'react-app',
-    'prettier',
-    'prettier/@typescript-eslint',
-    'prettier/react',
-    'prettier/prettier',
+    'plugin:prettier/recommended',
   ],
   rules: {
     'prettier/prettier': 'warn',

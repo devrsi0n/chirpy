@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+
 import type { IRichTextEditorProps } from './RichTextEditor';
 
 const DynamicRichTextEditor = dynamic(

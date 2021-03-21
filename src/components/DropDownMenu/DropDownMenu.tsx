@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { Menu, Transition } from '@headlessui/react';
+import { ClassNames } from '@emotion/react';
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
+import { Menu, Transition } from '@headlessui/react';
+import * as React from 'react';
+import tw, { TwStyle } from 'twin.macro';
 
 import { Button, IconButton } from '../Button';
-import tw, { TwStyle } from 'twin.macro';
-import { ClassNames } from '@emotion/react';
 
 export type Shape = 'circle' | 'square';
 

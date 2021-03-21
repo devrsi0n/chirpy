@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
-
-import { useRouter } from 'next/router';
-import { Transition } from '@headlessui/react';
-import tw, { TwStyle } from 'twin.macro';
 import { ClassNames } from '@emotion/react';
+import { Transition } from '@headlessui/react';
+import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
+import { useRouter } from 'next/router';
+import * as React from 'react';
+import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 type Variant = 'nav' | 'plain';

@@ -1,658 +1,628 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {},
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.Web/sites",
-            "apiVersion": "2018-11-01",
-            "name": "totalk",
-            "location": "Central US",
-            "kind": "app,linux",
-            "properties": {
-                "enabled": true,
-                "hostNameSslStates": [
-                    {
-                        "name": "staging.totalk.dev",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "totalk.azurewebsites.net",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "totalk.dev",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "totalk.scm.azurewebsites.net",
-                        "sslState": "Disabled",
-                        "hostType": "Repository"
-                    }
-                ],
-                "serverFarmId": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/deprecated/providers/Microsoft.Web/serverfarms/ASP-totalk-bd87",
-                "reserved": true,
-                "isXenon": false,
-                "hyperV": false,
-                "siteConfig": {},
-                "scmSiteAlsoStopped": false,
-                "clientAffinityEnabled": false,
-                "clientCertEnabled": false,
-                "hostNamesDisabled": false,
-                "containerSize": 0,
-                "dailyMemoryTimeQuota": 0,
-                "httpsOnly": true,
-                "redundancyMode": "None"
-            }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
+      "name": "totalk",
+      "location": "Central US",
+      "kind": "app,linux",
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "staging.totalk.dev",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "totalk.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "totalk.dev",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "totalk.scm.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/deprecated/providers/Microsoft.Web/serverfarms/ASP-totalk-bd87",
+        "reserved": true,
+        "isXenon": false,
+        "hyperV": false,
+        "siteConfig": {},
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": true,
+        "redundancyMode": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/web",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "linuxFxVersion": "NODE|14-lts",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2019",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$totalk",
+        "azureStorageAccounts": {},
+        "scmType": "GitHubAction",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": false,
+        "alwaysOn": true,
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": true
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "experiments": {
+          "rampUpRules": []
         },
-        {
-            "type": "Microsoft.Web/sites/config",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/web",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "numberOfWorkers": 1,
-                "defaultDocuments": [
-                    "Default.htm",
-                    "Default.html",
-                    "Default.asp",
-                    "index.htm",
-                    "index.html",
-                    "iisstart.htm",
-                    "default.aspx",
-                    "index.php",
-                    "hostingstart.html"
-                ],
-                "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "NODE|14-lts",
-                "requestTracingEnabled": false,
-                "remoteDebuggingEnabled": false,
-                "remoteDebuggingVersion": "VS2019",
-                "httpLoggingEnabled": false,
-                "logsDirectorySizeLimit": 35,
-                "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$totalk",
-                "azureStorageAccounts": {},
-                "scmType": "GitHubAction",
-                "use32BitWorkerProcess": true,
-                "webSocketsEnabled": false,
-                "alwaysOn": true,
-                "managedPipelineMode": "Integrated",
-                "virtualApplications": [
-                    {
-                        "virtualPath": "/",
-                        "physicalPath": "site\\wwwroot",
-                        "preloadEnabled": true
-                    }
-                ],
-                "loadBalancing": "LeastRequests",
-                "experiments": {
-                    "rampUpRules": []
-                },
-                "autoHealEnabled": false,
-                "localMySqlEnabled": false,
-                "ipSecurityRestrictions": [
-                    {
-                        "ipAddress": "0.0.0.0/0",
-                        "action": "Allow",
-                        "tag": "Default",
-                        "priority": 1,
-                        "name": "all",
-                        "description": "internet"
-                    },
-                    {
-                        "ipAddress": "Any",
-                        "action": "Deny",
-                        "priority": 2147483647,
-                        "name": "Deny all",
-                        "description": "Deny all access"
-                    }
-                ],
-                "scmIpSecurityRestrictions": [
-                    {
-                        "ipAddress": "Any",
-                        "action": "Allow",
-                        "priority": 1,
-                        "name": "Allow all",
-                        "description": "Allow all access"
-                    }
-                ],
-                "scmIpSecurityRestrictionsUseMain": false,
-                "http20Enabled": false,
-                "minTlsVersion": "1.2",
-                "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
-            }
+        "autoHealEnabled": false,
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": [
+          {
+            "ipAddress": "0.0.0.0/0",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 1,
+            "name": "all",
+            "description": "internet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
+        "scmIpSecurityRestrictions": [
+          {
+            "ipAddress": "Any",
+            "action": "Allow",
+            "priority": 1,
+            "name": "Allow all",
+            "description": "Allow all access"
+          }
+        ],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "AllAllowed",
+        "reservedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/12c8d81946f04c0cb035a787028abb2a",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-16T08:59:58.0515363Z",
+        "end_time": "2021-02-16T09:05:23.4362805Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/3d85b9b5e87a4e14bb85d585adc22447",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-20T15:32:48.2343822Z",
+        "end_time": "2021-02-20T15:39:02.0752909Z",
+        "active": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/4dfb836b1ab4411d8afcb24a45161a8d",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-17T12:49:24.0941268Z",
+        "end_time": "2021-02-17T13:01:06.5649342Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/567f43d28e62415988d6af61a8aa64a9",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-14T15:26:40.0889823Z",
+        "end_time": "2021-02-14T15:32:33.9914375Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/571cc952dec64c4aba50916e65fd9bb2",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-17T13:17:24.7873863Z",
+        "end_time": "2021-02-17T13:23:07.0821766Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/9fb654b3076c407ba334f906afe277fa",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-14T21:53:24.703167Z",
+        "end_time": "2021-02-14T21:59:03.6216918Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/a4d087edee4a4c41b5526c18c01c2e09",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-16T08:44:56.429061Z",
+        "end_time": "2021-02-16T08:56:40.2799891Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/b4f7f4f108744f75997d46e8603823bd",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-14T14:57:09.5504226Z",
+        "end_time": "2021-02-14T15:03:11.3090003Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/d7bcf92cd47a4831b20a1f452911ee9d",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-18T15:05:21.9506886Z",
+        "end_time": "2021-02-18T15:10:38.4439566Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/ed1cdf36c59d40219b486968ac48adab",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-14T15:42:44.5896872Z",
+        "end_time": "2021-02-14T15:48:32.863695Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging.totalk.dev",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "siteName": "totalk",
+        "hostNameType": "Verified"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/totalk.azurewebsites.net",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "siteName": "totalk",
+        "hostNameType": "Verified"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/totalk.dev",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "properties": {
+        "siteName": "totalk",
+        "hostNameType": "Verified"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging",
+      "location": "Central US",
+      "dependsOn": ["[resourceId('Microsoft.Web/sites', 'totalk')]"],
+      "kind": "app,linux",
+      "properties": {
+        "enabled": true,
+        "hostNameSslStates": [
+          {
+            "name": "totalk-staging.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Standard"
+          },
+          {
+            "name": "totalk-staging.scm.azurewebsites.net",
+            "sslState": "Disabled",
+            "hostType": "Repository"
+          }
+        ],
+        "serverFarmId": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/deprecated/providers/Microsoft.Web/serverfarms/ASP-totalk-bd87",
+        "reserved": true,
+        "isXenon": false,
+        "hyperV": false,
+        "siteConfig": {},
+        "scmSiteAlsoStopped": false,
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "hostNamesDisabled": false,
+        "containerSize": 0,
+        "dailyMemoryTimeQuota": 0,
+        "httpsOnly": true,
+        "redundancyMode": "None"
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/config",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/web",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "numberOfWorkers": 1,
+        "defaultDocuments": [
+          "Default.htm",
+          "Default.html",
+          "Default.asp",
+          "index.htm",
+          "index.html",
+          "iisstart.htm",
+          "default.aspx",
+          "index.php",
+          "hostingstart.html"
+        ],
+        "netFrameworkVersion": "v4.0",
+        "linuxFxVersion": "NODE|14-lts",
+        "requestTracingEnabled": false,
+        "remoteDebuggingEnabled": false,
+        "remoteDebuggingVersion": "VS2019",
+        "httpLoggingEnabled": false,
+        "logsDirectorySizeLimit": 35,
+        "detailedErrorLoggingEnabled": false,
+        "publishingUsername": "$totalk__staging",
+        "azureStorageAccounts": {},
+        "scmType": "GitHubAction",
+        "use32BitWorkerProcess": true,
+        "webSocketsEnabled": false,
+        "alwaysOn": true,
+        "managedPipelineMode": "Integrated",
+        "virtualApplications": [
+          {
+            "virtualPath": "/",
+            "physicalPath": "site\\wwwroot",
+            "preloadEnabled": true
+          }
+        ],
+        "loadBalancing": "LeastRequests",
+        "experiments": {
+          "rampUpRules": []
         },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/12c8d81946f04c0cb035a787028abb2a",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-16T08:59:58.0515363Z",
-                "end_time": "2021-02-16T09:05:23.4362805Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/3d85b9b5e87a4e14bb85d585adc22447",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-20T15:32:48.2343822Z",
-                "end_time": "2021-02-20T15:39:02.0752909Z",
-                "active": true
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/4dfb836b1ab4411d8afcb24a45161a8d",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-17T12:49:24.0941268Z",
-                "end_time": "2021-02-17T13:01:06.5649342Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/567f43d28e62415988d6af61a8aa64a9",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-14T15:26:40.0889823Z",
-                "end_time": "2021-02-14T15:32:33.9914375Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/571cc952dec64c4aba50916e65fd9bb2",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-17T13:17:24.7873863Z",
-                "end_time": "2021-02-17T13:23:07.0821766Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/9fb654b3076c407ba334f906afe277fa",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-14T21:53:24.703167Z",
-                "end_time": "2021-02-14T21:59:03.6216918Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/a4d087edee4a4c41b5526c18c01c2e09",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-16T08:44:56.429061Z",
-                "end_time": "2021-02-16T08:56:40.2799891Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/b4f7f4f108744f75997d46e8603823bd",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-14T14:57:09.5504226Z",
-                "end_time": "2021-02-14T15:03:11.3090003Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/d7bcf92cd47a4831b20a1f452911ee9d",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-18T15:05:21.9506886Z",
-                "end_time": "2021-02-18T15:10:38.4439566Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/ed1cdf36c59d40219b486968ac48adab",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-14T15:42:44.5896872Z",
-                "end_time": "2021-02-14T15:48:32.863695Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging.totalk.dev",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "siteName": "totalk",
-                "hostNameType": "Verified"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/totalk.azurewebsites.net",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "siteName": "totalk",
-                "hostNameType": "Verified"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/hostNameBindings",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/totalk.dev",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "siteName": "totalk",
-                "hostNameType": "Verified"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "kind": "app,linux",
-            "properties": {
-                "enabled": true,
-                "hostNameSslStates": [
-                    {
-                        "name": "totalk-staging.azurewebsites.net",
-                        "sslState": "Disabled",
-                        "hostType": "Standard"
-                    },
-                    {
-                        "name": "totalk-staging.scm.azurewebsites.net",
-                        "sslState": "Disabled",
-                        "hostType": "Repository"
-                    }
-                ],
-                "serverFarmId": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/deprecated/providers/Microsoft.Web/serverfarms/ASP-totalk-bd87",
-                "reserved": true,
-                "isXenon": false,
-                "hyperV": false,
-                "siteConfig": {},
-                "scmSiteAlsoStopped": false,
-                "clientAffinityEnabled": false,
-                "clientCertEnabled": false,
-                "hostNamesDisabled": false,
-                "containerSize": 0,
-                "dailyMemoryTimeQuota": 0,
-                "httpsOnly": true,
-                "redundancyMode": "None"
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/config",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/web",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "numberOfWorkers": 1,
-                "defaultDocuments": [
-                    "Default.htm",
-                    "Default.html",
-                    "Default.asp",
-                    "index.htm",
-                    "index.html",
-                    "iisstart.htm",
-                    "default.aspx",
-                    "index.php",
-                    "hostingstart.html"
-                ],
-                "netFrameworkVersion": "v4.0",
-                "linuxFxVersion": "NODE|14-lts",
-                "requestTracingEnabled": false,
-                "remoteDebuggingEnabled": false,
-                "remoteDebuggingVersion": "VS2019",
-                "httpLoggingEnabled": false,
-                "logsDirectorySizeLimit": 35,
-                "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$totalk__staging",
-                "azureStorageAccounts": {},
-                "scmType": "GitHubAction",
-                "use32BitWorkerProcess": true,
-                "webSocketsEnabled": false,
-                "alwaysOn": true,
-                "managedPipelineMode": "Integrated",
-                "virtualApplications": [
-                    {
-                        "virtualPath": "/",
-                        "physicalPath": "site\\wwwroot",
-                        "preloadEnabled": true
-                    }
-                ],
-                "loadBalancing": "LeastRequests",
-                "experiments": {
-                    "rampUpRules": []
-                },
-                "autoHealEnabled": false,
-                "localMySqlEnabled": false,
-                "ipSecurityRestrictions": [
-                    {
-                        "ipAddress": "0.0.0.0/0",
-                        "action": "Allow",
-                        "tag": "Default",
-                        "priority": 1,
-                        "name": "all",
-                        "description": "internet"
-                    },
-                    {
-                        "ipAddress": "Any",
-                        "action": "Deny",
-                        "priority": 2147483647,
-                        "name": "Deny all",
-                        "description": "Deny all access"
-                    }
-                ],
-                "scmIpSecurityRestrictions": [
-                    {
-                        "ipAddress": "Any",
-                        "action": "Allow",
-                        "priority": 1,
-                        "name": "Allow all",
-                        "description": "Allow all access"
-                    }
-                ],
-                "scmIpSecurityRestrictionsUseMain": false,
-                "http20Enabled": false,
-                "minTlsVersion": "1.2",
-                "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/39f944d3f8ea48c0a37fbcd76f7166f0",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-16T08:46:00.7823652Z",
-                "end_time": "2021-02-16T08:56:47.4713094Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/4b47d615f4364485862dfcc0ebd0ae0b",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-18T14:42:16.0658459Z",
-                "end_time": "2021-02-18T14:48:15.4122151Z",
-                "active": true
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/782b7fb7e83d4c96bd8d4531d3c9892b",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-17T13:06:33.9101762Z",
-                "end_time": "2021-02-17T13:12:00.9800519Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/8711edb1f10fa3665032ee32073d786f0de9731a1613567526116",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author": "devrsi0n",
-                "deployer": "GitHub",
-                "message": "{\"type\":\"Deployment\",\"sha\":\"8711edb1f10fa3665032ee32073d786f0de9731a\",\"repoName\":\"devrsi0n/totalk\",\"slotName\":\"staging\"}",
-                "start_time": "2021-02-17T13:12:06.284299Z",
-                "end_time": "2021-02-17T13:12:06.284299Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/ab7982ca9c9e49ab98bd46e8a5dc1089",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-17T12:37:06.8119426Z",
-                "end_time": "2021-02-17T12:42:54.197986Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/b192fc753bcb488bab106c7300eebe71",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-16T08:16:10.7422333Z",
-                "end_time": "2021-02-16T08:23:18.5605397Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/df8c1fb8df5e48b096415e7389fa0eff",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-16T08:28:59.4639218Z",
-                "end_time": "2021-02-16T08:34:41.163399Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/deployments",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/ff178f1a7a2f4f809d37e2026a5ee668",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "status": 4,
-                "author_email": "N/A",
-                "author": "N/A",
-                "deployer": "GITHUB_ZIP_DEPLOY",
-                "message": "Created via a push deployment",
-                "start_time": "2021-02-17T12:51:13.3941233Z",
-                "end_time": "2021-02-17T13:02:09.5045281Z",
-                "active": false
-            }
-        },
-        {
-            "type": "Microsoft.Web/sites/slots/hostNameBindings",
-            "apiVersion": "2018-11-01",
-            "name": "totalk/staging/totalk-staging.azurewebsites.net",
-            "location": "Central US",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
-                "[resourceId('Microsoft.Web/sites', 'totalk')]"
-            ],
-            "properties": {
-                "siteName": "totalk(staging)",
-                "hostNameType": "Verified"
-            }
-        }
-    ]
+        "autoHealEnabled": false,
+        "localMySqlEnabled": false,
+        "ipSecurityRestrictions": [
+          {
+            "ipAddress": "0.0.0.0/0",
+            "action": "Allow",
+            "tag": "Default",
+            "priority": 1,
+            "name": "all",
+            "description": "internet"
+          },
+          {
+            "ipAddress": "Any",
+            "action": "Deny",
+            "priority": 2147483647,
+            "name": "Deny all",
+            "description": "Deny all access"
+          }
+        ],
+        "scmIpSecurityRestrictions": [
+          {
+            "ipAddress": "Any",
+            "action": "Allow",
+            "priority": 1,
+            "name": "Allow all",
+            "description": "Allow all access"
+          }
+        ],
+        "scmIpSecurityRestrictionsUseMain": false,
+        "http20Enabled": false,
+        "minTlsVersion": "1.2",
+        "ftpsState": "AllAllowed",
+        "reservedInstanceCount": 0
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/39f944d3f8ea48c0a37fbcd76f7166f0",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-16T08:46:00.7823652Z",
+        "end_time": "2021-02-16T08:56:47.4713094Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/4b47d615f4364485862dfcc0ebd0ae0b",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-18T14:42:16.0658459Z",
+        "end_time": "2021-02-18T14:48:15.4122151Z",
+        "active": true
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/782b7fb7e83d4c96bd8d4531d3c9892b",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-17T13:06:33.9101762Z",
+        "end_time": "2021-02-17T13:12:00.9800519Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/8711edb1f10fa3665032ee32073d786f0de9731a1613567526116",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author": "devrsi0n",
+        "deployer": "GitHub",
+        "message": "{\"type\":\"Deployment\",\"sha\":\"8711edb1f10fa3665032ee32073d786f0de9731a\",\"repoName\":\"devrsi0n/totalk\",\"slotName\":\"staging\"}",
+        "start_time": "2021-02-17T13:12:06.284299Z",
+        "end_time": "2021-02-17T13:12:06.284299Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/ab7982ca9c9e49ab98bd46e8a5dc1089",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-17T12:37:06.8119426Z",
+        "end_time": "2021-02-17T12:42:54.197986Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/b192fc753bcb488bab106c7300eebe71",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-16T08:16:10.7422333Z",
+        "end_time": "2021-02-16T08:23:18.5605397Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/df8c1fb8df5e48b096415e7389fa0eff",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-16T08:28:59.4639218Z",
+        "end_time": "2021-02-16T08:34:41.163399Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/deployments",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/ff178f1a7a2f4f809d37e2026a5ee668",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "status": 4,
+        "author_email": "N/A",
+        "author": "N/A",
+        "deployer": "GITHUB_ZIP_DEPLOY",
+        "message": "Created via a push deployment",
+        "start_time": "2021-02-17T12:51:13.3941233Z",
+        "end_time": "2021-02-17T13:02:09.5045281Z",
+        "active": false
+      }
+    },
+    {
+      "type": "Microsoft.Web/sites/slots/hostNameBindings",
+      "apiVersion": "2018-11-01",
+      "name": "totalk/staging/totalk-staging.azurewebsites.net",
+      "location": "Central US",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', 'totalk', 'staging')]",
+        "[resourceId('Microsoft.Web/sites', 'totalk')]"
+      ],
+      "properties": {
+        "siteName": "totalk(staging)",
+        "hostNameType": "Verified"
+      }
+    }
+  ]
 }

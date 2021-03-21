@@ -1,5 +1,5 @@
-import tw, { TwStyle } from 'twin.macro';
 import * as React from 'react';
+import tw, { TwStyle } from 'twin.macro';
 
 import { Link } from '../Link';
 

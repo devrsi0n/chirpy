@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 declare namespace NodeJS {
   interface ProcessEnv {
     // Additional environment variables
@@ -29,4 +30,10 @@ declare module '*.svg' {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const content: any;
   export default content;
+}
+
+namespace Express {
+  interface User {
+    id: string;
+  }
 }

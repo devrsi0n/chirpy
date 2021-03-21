@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { useUserByPkQuery } from '$/graphql/generated/user';
 
 type UserQueryResultType = ReturnType<typeof useUserByPkQuery>;

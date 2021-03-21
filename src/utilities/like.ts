@@ -1,5 +1,6 @@
-import { CommentLeaf, InsertOneLike } from '$/types/widget';
 import { produce } from 'immer';
+
+import { CommentLeaf, InsertOneLike } from '$/types/widget';
 
 function deleteOneLikeInRelies(replies: CommentLeaf[], commentId: string, likeId: string): void {
   for (const reply of replies) {

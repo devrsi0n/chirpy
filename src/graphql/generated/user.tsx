@@ -2,6 +2,7 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+const defaultOptions = {};
 export type UserByPkQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
@@ -67,12 +68,14 @@ export const UserByPkDocument = gql`
 export function useUserByPkQuery(
   baseOptions: Apollo.QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>,
 ) {
-  return Apollo.useQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, baseOptions);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
 }
 export function useUserByPkLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<UserByPkQuery, UserByPkQueryVariables>,
 ) {
-  return Apollo.useLazyQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, baseOptions);
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
 }
 export type UserByPkQueryHookResult = ReturnType<typeof useUserByPkQuery>;
 export type UserByPkLazyQueryHookResult = ReturnType<typeof useUserByPkLazyQuery>;

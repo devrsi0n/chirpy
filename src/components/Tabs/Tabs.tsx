@@ -1,9 +1,9 @@
 import * as React from 'react';
+import tw from 'twin.macro';
 
+import { BaseButton } from '../Button';
 import { TabsConfig, TabsContext, TabsLabelItem } from './TabsContext';
 import { TabsItem } from './TabsItem';
-import { BaseButton } from '../Button';
-import tw from 'twin.macro';
 
 export type TabProps = React.ComponentProps<'section'> & {
   initialValue?: string;

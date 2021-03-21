@@ -1,10 +1,10 @@
 import * as React from 'react';
 import 'twin.macro';
+import { css, theme } from 'twin.macro';
 
 import { CommentLeaf } from '$/types/widget';
-import { CommentCard, CommentCardProps } from '../CommentCard';
 
-import { css, theme } from 'twin.macro';
+import { CommentCard, CommentCardProps } from '../CommentCard';
 
 export type CommentProps = {
   comment: CommentLeaf;

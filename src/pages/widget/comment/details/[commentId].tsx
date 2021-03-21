@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -6,21 +5,22 @@ import {
   InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
+import * as React from 'react';
+import tw from 'twin.macro';
 
-import { CommentDetailNode } from '$/types/widget';
+import { getAdminApollo } from '$server/common/admin-apollo';
 import {
   CommentDetailsDocument,
-  CommentsDocument,
-  // useCreateOneLikeMutation,
+  CommentsDocument, // useCreateOneLikeMutation,
   // useDeleteOneLikeMutation,
 } from '$server/graphql/generated/comment';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
+
+import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 // import { deleteOneLikeInComments } from '$/utilities/comment';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { IconButton } from '$/components/Button';
-import { getAdminApollo } from '$server/common/admin-apollo';
-import tw from 'twin.macro';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { CommentDetailNode } from '$/types/widget';
 
 const handleSubmitReply = () => {
   return Promise.resolve();

@@ -1,15 +1,14 @@
-import * as React from 'react';
 import Head from 'next/head';
-import 'twin.macro';
+import * as React from 'react';
+import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Logo } from '$/components/Logo';
 import { Text } from '$/components/Text';
-import { authOptions } from './DataSource';
 
-import tw, { css } from 'twin.macro';
+import { authOptions } from './DataSource';
 
 export type AuthProps = React.PropsWithChildren<{
   name: 'Sign in' | 'Sign up';

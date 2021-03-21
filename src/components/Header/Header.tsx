@@ -1,22 +1,22 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
+import LogOut from '@geist-ui/react-icons/logOut';
 import Menu from '@geist-ui/react-icons/menu';
 import Dismiss from '@geist-ui/react-icons/x';
-
-import { Button } from '$/components/Button';
-import { Link } from '$/components/Link';
-import LogOut from '@geist-ui/react-icons/logOut';
-import { Avatar } from '$/components/Avatar';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { Select } from '$/components/Select';
-import { SlashIcon } from '$/components/Icons/SlashIcon';
-import { CurrentUserContextType } from '$/context/CurrentUserContext';
-
-import { Logo } from '../Logo';
-import { IconButton } from '../Button';
-import { SpinnerIcon } from '../Icons';
-import { DropDownMenu } from '../DropDownMenu';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 import tw, { css } from 'twin.macro';
+
+import { Avatar } from '$/components/Avatar';
+import { Button } from '$/components/Button';
+import { SlashIcon } from '$/components/Icons/SlashIcon';
+import { Link } from '$/components/Link';
+import { Select } from '$/components/Select';
+import { CurrentUserContextType } from '$/context/CurrentUserContext';
+import { useCurrentUser } from '$/hooks/useCurrentUser';
+
+import { IconButton } from '../Button';
+import { DropDownMenu } from '../DropDownMenu';
+import { SpinnerIcon } from '../Icons';
+import { Logo } from '../Logo';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
