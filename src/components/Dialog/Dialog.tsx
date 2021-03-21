@@ -1,8 +1,8 @@
-import * as React from 'react';
+import { ClassNames } from '@emotion/react';
 import { Transition } from '@headlessui/react';
+import * as React from 'react';
 import ReactDOM from 'react-dom';
 import tw from 'twin.macro';
-import { ClassNames } from '@emotion/react';
 
 export type DialogProps = React.PropsWithChildren<{
   show: boolean;

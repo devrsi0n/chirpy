@@ -1,6 +1,6 @@
-import * as React from 'react';
 import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
+import * as React from 'react';
 
 import { ActionButton } from '$/components/Button';
 import { useCurrentUser } from '$/hooks/useCurrentUser';

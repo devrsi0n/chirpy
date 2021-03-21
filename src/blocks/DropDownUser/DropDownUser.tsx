@@ -1,12 +1,12 @@
-import * as React from 'react';
-import { useRouter } from 'next/router';
 import LogOut from '@geist-ui/react-icons/logOut';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
+import { Divider } from '$/components/Divider';
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { Toggle } from '$/components/Toggle';
-import { Divider } from '$/components/Divider';
 
 export type DropDownUserProps = {
   avatar?: string;

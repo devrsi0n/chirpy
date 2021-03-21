@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { ClassNames } from '@emotion/react';
 import { Listbox, Transition } from '@headlessui/react';
+import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
 import { CheckMarkIcon } from '../Icons/CheckMarkIcon';
 import { ChevronUpDownIcon } from '../Icons/ChevronUpDownIcon';
-import { ClassNames } from '@emotion/react';
 
 export type SelectProps<T> = React.PropsWithChildren<{
   value: T;

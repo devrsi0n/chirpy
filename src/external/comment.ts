@@ -1,4 +1,5 @@
 import type { Page } from '../graphql/generated/types';
+
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry,
  * it built by parcel.

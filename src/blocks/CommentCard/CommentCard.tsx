@@ -1,16 +1,18 @@
-import * as React from 'react';
-import dayjs from 'dayjs';
 import Info from '@geist-ui/react-icons/info';
+import dayjs from 'dayjs';
+import * as React from 'react';
 import tw from 'twin.macro';
 
-import { MessageIcon } from '$/components/Icons';
-import { Avatar } from '$/components/Avatar';
-import { Text } from '$/components/Text';
-import { ActionButton } from '$/components/Button';
-import RichTextEditor, { RTEValue } from '../RichTextEditor/RichTextEditor';
-import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import { isENVDev } from '$server/utilities/env';
+
+import { Avatar } from '$/components/Avatar';
+import { ActionButton } from '$/components/Button';
+import { MessageIcon } from '$/components/Icons';
 import { Link } from '$/components/Link';
+import { Text } from '$/components/Text';
+
+import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
+import RichTextEditor, { RTEValue } from '../RichTextEditor/RichTextEditor';
 
 export type Author = {
   id: string;

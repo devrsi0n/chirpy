@@ -2,6 +2,7 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+const defaultOptions = {};
 export type InsertOneLikeMutationVariables = Types.Exact<{
   compoundId: Types.Scalars['String'];
   commentId: Types.Scalars['uuid'];
@@ -62,9 +63,10 @@ export type InsertOneLikeMutationFn = Apollo.MutationFunction<
 export function useInsertOneLikeMutation(
   baseOptions?: Apollo.MutationHookOptions<InsertOneLikeMutation, InsertOneLikeMutationVariables>,
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<InsertOneLikeMutation, InsertOneLikeMutationVariables>(
     InsertOneLikeDocument,
-    baseOptions,
+    options,
   );
 }
 export type InsertOneLikeMutationHookResult = ReturnType<typeof useInsertOneLikeMutation>;
@@ -105,9 +107,10 @@ export type DeleteLikeByPkMutationFn = Apollo.MutationFunction<
 export function useDeleteLikeByPkMutation(
   baseOptions?: Apollo.MutationHookOptions<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>,
 ) {
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>(
     DeleteLikeByPkDocument,
-    baseOptions,
+    options,
   );
 }
 export type DeleteLikeByPkMutationHookResult = ReturnType<typeof useDeleteLikeByPkMutation>;

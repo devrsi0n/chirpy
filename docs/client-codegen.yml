@@ -23,7 +23,7 @@ config:
   # maybeValue: T | null | undefined
   # constEnums: true
   scalars:
-    jsonb: "$TsAny"
+    jsonb: '$TsAny'
     timestamptz: string
     uuid: string
 hooks:

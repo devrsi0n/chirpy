@@ -1,5 +1,5 @@
-import * as React from 'react';
 import User from '@geist-ui/react-icons/user';
+import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';

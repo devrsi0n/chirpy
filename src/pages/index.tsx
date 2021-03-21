@@ -1,12 +1,11 @@
-import * as React from 'react';
-import Head from 'next/head';
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
+import Head from 'next/head';
+import * as React from 'react';
 import { css } from 'twin.macro';
 
-import { Text } from '$/components/Text/Text';
-import { Layout } from '$/components/Layout';
 import { Button } from '$/components/Button';
-
+import { Layout } from '$/components/Layout';
+import { Text } from '$/components/Text/Text';
 
 function Home(): JSX.Element {
   return (

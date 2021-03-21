@@ -1,4 +1,5 @@
 import { Transforms, Editor, Text } from 'slate';
+
 import { Format } from './type';
 
 const LIST_TYPES = new Set(['numbered-list', 'bulleted-list']);
@@ -69,7 +70,7 @@ export function toggleBlock(editor: Editor, format: Format): void {
 
   Transforms.setNodes(editor, {
     // eslint-disable-next-line prettier/prettier
-    type: isActive ? 'paragraph' : (isList ? 'list-item' : format),
+    type: isActive ? 'paragraph' : isList ? 'list-item' : format,
   });
 
   if (!isActive && isList) {

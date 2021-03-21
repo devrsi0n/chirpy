@@ -1,12 +1,13 @@
-import * as React from 'react';
 import { useTheme } from 'next-themes';
+import * as React from 'react';
+import tw from 'twin.macro';
 
 import { Text } from '$/components/Text';
-import { Link } from '../Link/Link';
-import { ColorMode } from '../../types/theme.type';
 import { useHasMounted } from '$/hooks/useHasMounted';
+
+import { ColorMode } from '../../types/theme.type';
 import { IconButton } from '../Button/IconButton';
-import tw from 'twin.macro';
+import { Link } from '../Link/Link';
 
 const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
   system: 'setting',

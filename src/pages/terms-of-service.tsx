@@ -1,9 +1,10 @@
-import * as React from 'react';
 import Head from 'next/head';
-import { Link } from '$/components/Link';
+import * as React from 'react';
+
 import { Heading } from '$/components/Heading';
-import { Text } from '$/components/Text';
 import { Layout } from '$/components/Layout';
+import { Link } from '$/components/Link';
+import { Text } from '$/components/Text';
 
 export default function TermsOfService(): JSX.Element {
   return (
