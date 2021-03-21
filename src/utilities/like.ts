@@ -1,8 +1,8 @@
 import { produce } from 'immer';
 
-import { CommentLeaf, InsertOneLike } from '$/types/widget';
+import { CommentLeafType, InsertOneLike } from '$/types/widget';
 
-function deleteOneLikeInRelies(replies: CommentLeaf[], commentId: string, likeId: string): void {
+function deleteOneLikeInRelies(replies: CommentLeafType[], commentId: string, likeId: string): void {
   for (const reply of replies) {
     if (reply.id === commentId) {
       const index = reply.likes.findIndex(({ id }) => id === likeId);
@@ -17,17 +17,17 @@ function deleteOneLikeInRelies(replies: CommentLeaf[], commentId: string, likeId
 }
 
 export function deleteOneLikeInComments(
-  comments: CommentLeaf[],
+  comments: CommentLeafType[],
   commentId: string,
   likeId: string,
-): CommentLeaf[] {
+): CommentLeafType[] {
   return produce(comments, (_comments) => {
     deleteOneLikeInRelies(_comments, commentId, likeId);
   });
 }
 
 function createOneLikeInRelies(
-  replies: CommentLeaf['replies'],
+  replies: CommentLeafType['replies'],
   commentId: string,
   insertedLike: InsertOneLike,
 ): void {
@@ -42,10 +42,10 @@ function createOneLikeInRelies(
 }
 
 export function createOneLikeInComments(
-  comments: CommentLeaf[],
+  comments: CommentLeafType[],
   commentId: string,
   insertedLike: InsertOneLike,
-): CommentLeaf[] {
+): CommentLeafType[] {
   return produce(comments, (_comments) => {
     createOneLikeInRelies(_comments, commentId, insertedLike);
   });

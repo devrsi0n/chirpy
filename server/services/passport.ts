@@ -9,6 +9,7 @@ import { getAdminApollo } from '$server/common/admin-apollo';
 import { AccountProvider_Enum, UserType_Enum } from '$server/graphql/generated/types';
 import { UpsertUserDocument } from '$server/graphql/generated/user';
 import { UserByPkDocument } from '$server/graphql/generated/user';
+import { isENVDev } from '$server/utilities/env';
 
 import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from '$shared/constants';
 
@@ -131,7 +132,8 @@ export async function handleSuccessfulLogin(
   res: NextApiResponse,
 ): Promise<void> {
   const { id, name, email } = (req as $TsFixMe).user;
-  const maxAge = 60 * 60 * 24;
+  const oneDayInMs = 60 * 60 * 24;
+  const maxAge = isENVDev ? oneDayInMs * 365 : oneDayInMs;
   const authToken = createToken(
     {
       userId: id,
