@@ -34,7 +34,7 @@ List.Item = ListItem;
 
 export type IListItemProps = React.PropsWithChildren<React.ComponentPropsWithoutRef<'li'>>;
 
-function ListItem({ className, children, ...liProps }: IListItemProps): JSX.Element {
+export function ListItem({ className, children, ...liProps }: IListItemProps): JSX.Element {
   return (
     <li {...liProps} tw="text-gray-500" className={className}>
       {children}

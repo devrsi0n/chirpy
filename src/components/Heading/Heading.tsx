@@ -23,6 +23,10 @@ export function Heading(props: IHeadingProps): JSX.Element {
   const { as: Component = 'h3', className = '', ...restProps } = props;
 
   return (
-    <Component {...restProps} css={[tw`text-gray-500`, styles[Component]]} className={className} />
+    <Component
+      {...restProps}
+      css={[tw`text-gray-700 dark:text-gray-300`, styles[Component]]}
+      className={className}
+    />
   );
 }
