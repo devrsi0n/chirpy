@@ -5,7 +5,6 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
-import 'tailwindcss/tailwind.css';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
@@ -18,8 +17,8 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
       {/* Tailwindcss global styles */}
-      <Global styles={globalStyles} />
       <GlobalStyles />
+      <Global styles={appGlobalStyles} />
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
         <ApolloProvider client={apollo}>
           <CurrentUserProvider>
@@ -33,7 +32,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 
 export default App;
 
-const globalStyles = css`
+const appGlobalStyles = css`
   ::selection {
     color: #fff;
     ${tw`bg-purple-400`}
@@ -82,5 +81,19 @@ const globalStyles = css`
 
   .article > * {
     margin-bottom: ${theme('padding.10')};
+  }
+
+  // Fix twin.macro not working
+  .transform {
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-rotate: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y))
+      rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+      scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 `;
