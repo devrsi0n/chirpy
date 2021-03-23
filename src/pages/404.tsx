@@ -10,7 +10,7 @@ import { Link } from '$/components/Link';
 import { List, ListItem } from '$/components/List';
 import { Text } from '$/components/Text/Text';
 
-function Home(): JSX.Element {
+export default function Custom404(): JSX.Element {
   return (
     <Layout disableContainer>
       <Head>
@@ -69,5 +69,3 @@ const listMakerStyle = css`
     color: ${theme('colors.red.600')};
   }
 `;
-
-export default Home;
