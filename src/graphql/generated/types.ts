@@ -47,6 +47,7 @@ export type AccountProvider = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "AccountProvider" */
 export type AccountProviderAccountsArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -55,6 +56,7 @@ export type AccountProviderAccountsArgs = {
   order_by?: Maybe<Array<Account_Order_By>>;
   where?: Maybe<Account_Bool_Exp>;
 };
+
 
 /** columns and relationships of "AccountProvider" */
 export type AccountProviderAccounts_AggregateArgs = {
@@ -79,6 +81,7 @@ export type AccountProvider_Aggregate_Fields = {
   max?: Maybe<AccountProvider_Max_Fields>;
   min?: Maybe<AccountProvider_Min_Fields>;
 };
+
 
 /** aggregate fields of "AccountProvider" */
 export type AccountProvider_Aggregate_FieldsCountArgs = {
@@ -112,7 +115,7 @@ export type AccountProvider_Bool_Exp = {
 /** unique or primary key constraints on table "AccountProvider" */
 export enum AccountProvider_Constraint {
   /** unique or primary key constraint */
-  AccountProviderPkey = 'AccountProvider_pkey',
+  AccountProviderPkey = 'AccountProvider_pkey'
 }
 
 export enum AccountProvider_Enum {
@@ -121,7 +124,7 @@ export enum AccountProvider_Enum {
   GitHub = 'GitHub',
   Google = 'Google',
   Microsoft = 'Microsoft',
-  Twitter = 'Twitter',
+  Twitter = 'Twitter'
 }
 
 /** expression to compare columns of type AccountProvider_enum. All fields are combined with logical 'AND'. */
@@ -205,7 +208,7 @@ export enum AccountProvider_Select_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "AccountProvider" */
@@ -219,7 +222,7 @@ export enum AccountProvider_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** aggregated selection of "Account" */
@@ -236,6 +239,7 @@ export type Account_Aggregate_Fields = {
   max?: Maybe<Account_Max_Fields>;
   min?: Maybe<Account_Min_Fields>;
 };
+
 
 /** aggregate fields of "Account" */
 export type Account_Aggregate_FieldsCountArgs = {
@@ -277,7 +281,7 @@ export enum Account_Constraint {
   /** unique or primary key constraint */
   AccountCompoundIdKey = 'Account_compoundId_key',
   /** unique or primary key constraint */
-  AccountPkey = 'Account_pkey',
+  AccountPkey = 'Account_pkey'
 }
 
 /** input type for inserting data into table "Account" */
@@ -390,7 +394,7 @@ export enum Account_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "Account" */
@@ -419,7 +423,7 @@ export enum Account_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** columns and relationships of "Comment" */
@@ -448,10 +452,12 @@ export type Comment = {
   userId: Scalars['uuid'];
 };
 
+
 /** columns and relationships of "Comment" */
 export type CommentContentArgs = {
   path?: Maybe<Scalars['String']>;
 };
+
 
 /** columns and relationships of "Comment" */
 export type CommentLikesArgs = {
@@ -462,6 +468,7 @@ export type CommentLikesArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** columns and relationships of "Comment" */
 export type CommentLikes_AggregateArgs = {
   distinct_on?: Maybe<Array<Like_Select_Column>>;
@@ -471,6 +478,7 @@ export type CommentLikes_AggregateArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** columns and relationships of "Comment" */
 export type CommentRepliesArgs = {
   distinct_on?: Maybe<Array<Comment_Select_Column>>;
@@ -479,6 +487,7 @@ export type CommentRepliesArgs = {
   order_by?: Maybe<Array<Comment_Order_By>>;
   where?: Maybe<Comment_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Comment" */
 export type CommentReplies_AggregateArgs = {
@@ -503,6 +512,7 @@ export type Comment_Aggregate_Fields = {
   max?: Maybe<Comment_Max_Fields>;
   min?: Maybe<Comment_Min_Fields>;
 };
+
 
 /** aggregate fields of "Comment" */
 export type Comment_Aggregate_FieldsCountArgs = {
@@ -550,7 +560,7 @@ export type Comment_Bool_Exp = {
 /** unique or primary key constraints on table "Comment" */
 export enum Comment_Constraint {
   /** unique or primary key constraint */
-  CommentPkey = 'Comment_pkey',
+  CommentPkey = 'Comment_pkey'
 }
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
@@ -689,7 +699,7 @@ export enum Comment_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "Comment" */
@@ -718,7 +728,7 @@ export enum Comment_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** columns and relationships of "Like" */
@@ -727,6 +737,7 @@ export type Like = {
   /** An object relationship */
   comment: Comment;
   commentId: Scalars['uuid'];
+  /** Make sure a user like a comment no more than once */
   compoundId: Scalars['String'];
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
@@ -750,6 +761,7 @@ export type Like_Aggregate_Fields = {
   max?: Maybe<Like_Max_Fields>;
   min?: Maybe<Like_Min_Fields>;
 };
+
 
 /** aggregate fields of "Like" */
 export type Like_Aggregate_FieldsCountArgs = {
@@ -790,7 +802,7 @@ export enum Like_Constraint {
   /** unique or primary key constraint */
   LikeCompoundIdKey = 'Like_compoundId_key',
   /** unique or primary key constraint */
-  LikePkey = 'Like_pkey',
+  LikePkey = 'Like_pkey'
 }
 
 /** input type for inserting data into table "Like" */
@@ -899,7 +911,7 @@ export enum Like_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "Like" */
@@ -925,7 +937,7 @@ export enum Like_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** columns and relationships of "Member" */
@@ -957,6 +969,7 @@ export type Member_Aggregate_Fields = {
   max?: Maybe<Member_Max_Fields>;
   min?: Maybe<Member_Min_Fields>;
 };
+
 
 /** aggregate fields of "Member" */
 export type Member_Aggregate_FieldsCountArgs = {
@@ -995,7 +1008,7 @@ export type Member_Bool_Exp = {
 /** unique or primary key constraints on table "Member" */
 export enum Member_Constraint {
   /** unique or primary key constraint */
-  MemberPkey = 'Member_pkey',
+  MemberPkey = 'Member_pkey'
 }
 
 /** input type for inserting data into table "Member" */
@@ -1100,7 +1113,7 @@ export enum Member_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "Member" */
@@ -1126,7 +1139,7 @@ export enum Member_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** columns and relationships of "Page" */
@@ -1146,6 +1159,7 @@ export type Page = {
   url: Scalars['String'];
 };
 
+
 /** columns and relationships of "Page" */
 export type PageCommentsArgs = {
   distinct_on?: Maybe<Array<Comment_Select_Column>>;
@@ -1154,6 +1168,7 @@ export type PageCommentsArgs = {
   order_by?: Maybe<Array<Comment_Order_By>>;
   where?: Maybe<Comment_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Page" */
 export type PageComments_AggregateArgs = {
@@ -1178,6 +1193,7 @@ export type Page_Aggregate_Fields = {
   max?: Maybe<Page_Max_Fields>;
   min?: Maybe<Page_Min_Fields>;
 };
+
 
 /** aggregate fields of "Page" */
 export type Page_Aggregate_FieldsCountArgs = {
@@ -1218,7 +1234,7 @@ export enum Page_Constraint {
   /** unique or primary key constraint */
   PagePkey = 'Page_pkey',
   /** unique or primary key constraint */
-  PageUrlKey = 'Page_url_key',
+  PageUrlKey = 'Page_url_key'
 }
 
 /** input type for inserting data into table "Page" */
@@ -1327,7 +1343,7 @@ export enum Page_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Url = 'url',
+  Url = 'url'
 }
 
 /** input type for updating data in table "Page" */
@@ -1353,7 +1369,7 @@ export enum Page_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Url = 'url',
+  Url = 'url'
 }
 
 /** columns and relationships of "Project" */
@@ -1375,6 +1391,7 @@ export type Project = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+
 /** columns and relationships of "Project" */
 export type ProjectPagesArgs = {
   distinct_on?: Maybe<Array<Page_Select_Column>>;
@@ -1383,6 +1400,7 @@ export type ProjectPagesArgs = {
   order_by?: Maybe<Array<Page_Order_By>>;
   where?: Maybe<Page_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Project" */
 export type ProjectPages_AggregateArgs = {
@@ -1407,6 +1425,7 @@ export type Project_Aggregate_Fields = {
   max?: Maybe<Project_Max_Fields>;
   min?: Maybe<Project_Min_Fields>;
 };
+
 
 /** aggregate fields of "Project" */
 export type Project_Aggregate_FieldsCountArgs = {
@@ -1446,7 +1465,7 @@ export type Project_Bool_Exp = {
 /** unique or primary key constraints on table "Project" */
 export enum Project_Constraint {
   /** unique or primary key constraint */
-  ProjectPkey = 'Project_pkey',
+  ProjectPkey = 'Project_pkey'
 }
 
 /** input type for inserting data into table "Project" */
@@ -1557,7 +1576,7 @@ export enum Project_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** input type for updating data in table "Project" */
@@ -1583,7 +1602,7 @@ export enum Project_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  UserId = 'userId',
+  UserId = 'userId'
 }
 
 /** columns and relationships of "Role" */
@@ -1597,6 +1616,7 @@ export type Role = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "Role" */
 export type RoleMembersArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -1605,6 +1625,7 @@ export type RoleMembersArgs = {
   order_by?: Maybe<Array<Member_Order_By>>;
   where?: Maybe<Member_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Role" */
 export type RoleMembers_AggregateArgs = {
@@ -1629,6 +1650,7 @@ export type Role_Aggregate_Fields = {
   max?: Maybe<Role_Max_Fields>;
   min?: Maybe<Role_Min_Fields>;
 };
+
 
 /** aggregate fields of "Role" */
 export type Role_Aggregate_FieldsCountArgs = {
@@ -1662,7 +1684,7 @@ export type Role_Bool_Exp = {
 /** unique or primary key constraints on table "Role" */
 export enum Role_Constraint {
   /** unique or primary key constraint */
-  RolePkey = 'Role_pkey',
+  RolePkey = 'Role_pkey'
 }
 
 export enum Role_Enum {
@@ -1673,7 +1695,7 @@ export enum Role_Enum {
   /** Team manager for inviting team member */
   Manager = 'manager',
   /** Logged in user */
-  User = 'user',
+  User = 'user'
 }
 
 /** expression to compare columns of type Role_enum. All fields are combined with logical 'AND'. */
@@ -1757,7 +1779,7 @@ export enum Role_Select_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "Role" */
@@ -1771,7 +1793,7 @@ export enum Role_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** expression to compare columns of type String. All fields are combined with logical 'AND'. */
@@ -1811,6 +1833,7 @@ export type Team = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "Team" */
 export type TeamMembersArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -1819,6 +1842,7 @@ export type TeamMembersArgs = {
   order_by?: Maybe<Array<Member_Order_By>>;
   where?: Maybe<Member_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Team" */
 export type TeamMembers_AggregateArgs = {
@@ -1829,6 +1853,7 @@ export type TeamMembers_AggregateArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** columns and relationships of "Team" */
 export type TeamProjectsArgs = {
   distinct_on?: Maybe<Array<Project_Select_Column>>;
@@ -1837,6 +1862,7 @@ export type TeamProjectsArgs = {
   order_by?: Maybe<Array<Project_Order_By>>;
   where?: Maybe<Project_Bool_Exp>;
 };
+
 
 /** columns and relationships of "Team" */
 export type TeamProjects_AggregateArgs = {
@@ -1861,6 +1887,7 @@ export type Team_Aggregate_Fields = {
   max?: Maybe<Team_Max_Fields>;
   min?: Maybe<Team_Min_Fields>;
 };
+
 
 /** aggregate fields of "Team" */
 export type Team_Aggregate_FieldsCountArgs = {
@@ -1900,7 +1927,7 @@ export enum Team_Constraint {
   /** unique or primary key constraint */
   TeamPkey = 'Team_pkey',
   /** unique or primary key constraint */
-  TeamUidKey = 'Team_uid_key',
+  TeamUidKey = 'Team_uid_key'
 }
 
 /** input type for inserting data into table "Team" */
@@ -2001,7 +2028,7 @@ export enum Team_Select_Column {
   /** column name */
   Uid = 'uid',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "Team" */
@@ -2024,7 +2051,7 @@ export enum Team_Update_Column {
   /** column name */
   Uid = 'uid',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** columns and relationships of "User" */
@@ -2064,6 +2091,7 @@ export type User = {
   username?: Maybe<Scalars['String']>;
 };
 
+
 /** columns and relationships of "User" */
 export type UserAccountsArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -2072,6 +2100,7 @@ export type UserAccountsArgs = {
   order_by?: Maybe<Array<Account_Order_By>>;
   where?: Maybe<Account_Bool_Exp>;
 };
+
 
 /** columns and relationships of "User" */
 export type UserAccounts_AggregateArgs = {
@@ -2082,6 +2111,7 @@ export type UserAccounts_AggregateArgs = {
   where?: Maybe<Account_Bool_Exp>;
 };
 
+
 /** columns and relationships of "User" */
 export type UserCommentsArgs = {
   distinct_on?: Maybe<Array<Comment_Select_Column>>;
@@ -2090,6 +2120,7 @@ export type UserCommentsArgs = {
   order_by?: Maybe<Array<Comment_Order_By>>;
   where?: Maybe<Comment_Bool_Exp>;
 };
+
 
 /** columns and relationships of "User" */
 export type UserComments_AggregateArgs = {
@@ -2100,6 +2131,7 @@ export type UserComments_AggregateArgs = {
   where?: Maybe<Comment_Bool_Exp>;
 };
 
+
 /** columns and relationships of "User" */
 export type UserLikesArgs = {
   distinct_on?: Maybe<Array<Like_Select_Column>>;
@@ -2108,6 +2140,7 @@ export type UserLikesArgs = {
   order_by?: Maybe<Array<Like_Order_By>>;
   where?: Maybe<Like_Bool_Exp>;
 };
+
 
 /** columns and relationships of "User" */
 export type UserLikes_AggregateArgs = {
@@ -2118,6 +2151,7 @@ export type UserLikes_AggregateArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** columns and relationships of "User" */
 export type UserMembersArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -2126,6 +2160,7 @@ export type UserMembersArgs = {
   order_by?: Maybe<Array<Member_Order_By>>;
   where?: Maybe<Member_Bool_Exp>;
 };
+
 
 /** columns and relationships of "User" */
 export type UserMembers_AggregateArgs = {
@@ -2136,6 +2171,7 @@ export type UserMembers_AggregateArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** columns and relationships of "User" */
 export type UserProjectsArgs = {
   distinct_on?: Maybe<Array<Project_Select_Column>>;
@@ -2144,6 +2180,7 @@ export type UserProjectsArgs = {
   order_by?: Maybe<Array<Project_Order_By>>;
   where?: Maybe<Project_Bool_Exp>;
 };
+
 
 /** columns and relationships of "User" */
 export type UserProjects_AggregateArgs = {
@@ -2165,6 +2202,7 @@ export type UserType = {
   value: Scalars['String'];
 };
 
+
 /** columns and relationships of "UserType" */
 export type UserTypeUsersArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
@@ -2173,6 +2211,7 @@ export type UserTypeUsersArgs = {
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
+
 
 /** columns and relationships of "UserType" */
 export type UserTypeUsers_AggregateArgs = {
@@ -2197,6 +2236,7 @@ export type UserType_Aggregate_Fields = {
   max?: Maybe<UserType_Max_Fields>;
   min?: Maybe<UserType_Min_Fields>;
 };
+
 
 /** aggregate fields of "UserType" */
 export type UserType_Aggregate_FieldsCountArgs = {
@@ -2230,13 +2270,13 @@ export type UserType_Bool_Exp = {
 /** unique or primary key constraints on table "UserType" */
 export enum UserType_Constraint {
   /** unique or primary key constraint */
-  UserTypePkey = 'UserType_pkey',
+  UserTypePkey = 'UserType_pkey'
 }
 
 export enum UserType_Enum {
   Free = 'free',
   /** Paid user */
-  Pro = 'pro',
+  Pro = 'pro'
 }
 
 /** expression to compare columns of type UserType_enum. All fields are combined with logical 'AND'. */
@@ -2320,7 +2360,7 @@ export enum UserType_Select_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "UserType" */
@@ -2334,7 +2374,7 @@ export enum UserType_Update_Column {
   /** column name */
   Comment = 'comment',
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** aggregated selection of "User" */
@@ -2351,6 +2391,7 @@ export type User_Aggregate_Fields = {
   max?: Maybe<User_Max_Fields>;
   min?: Maybe<User_Min_Fields>;
 };
+
 
 /** aggregate fields of "User" */
 export type User_Aggregate_FieldsCountArgs = {
@@ -2401,7 +2442,7 @@ export enum User_Constraint {
   /** unique or primary key constraint */
   UserPkey = 'User_pkey',
   /** unique or primary key constraint */
-  UserUidKey = 'User_uid_key',
+  UserUidKey = 'User_uid_key'
 }
 
 /** input type for inserting data into table "User" */
@@ -2552,7 +2593,7 @@ export enum User_Select_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Username = 'username',
+  Username = 'username'
 }
 
 /** input type for updating data in table "User" */
@@ -2593,8 +2634,9 @@ export enum User_Update_Column {
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Username = 'username',
+  Username = 'username'
 }
+
 
 /** expression to compare columns of type jsonb. All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
@@ -2756,115 +2798,138 @@ export type Mutation_Root = {
   updateUsers?: Maybe<User_Mutation_Response>;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAccountProviderByPkArgs = {
   value: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteAccountProvidersArgs = {
   where: AccountProvider_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteAccountsArgs = {
   where: Account_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteCommentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteCommentsArgs = {
   where: Comment_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteLikeByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteLikesArgs = {
   where: Like_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteMemberByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteMembersArgs = {
   where: Member_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeletePageByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeletePagesArgs = {
   where: Page_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteProjectByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteProjectsArgs = {
   where: Project_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteRoleByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteRolesArgs = {
   where: Role_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteTeamByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteTeamsArgs = {
   where: Team_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootDeleteUserTypeByPkArgs = {
   value: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteUserTypesArgs = {
   where: UserType_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDeleteUsersArgs = {
   where: User_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertAccountProvidersArgs = {
@@ -2872,11 +2937,13 @@ export type Mutation_RootInsertAccountProvidersArgs = {
   on_conflict?: Maybe<AccountProvider_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertAccountsArgs = {
   objects: Array<Account_Insert_Input>;
   on_conflict?: Maybe<Account_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertCommentsArgs = {
@@ -2884,11 +2951,13 @@ export type Mutation_RootInsertCommentsArgs = {
   on_conflict?: Maybe<Comment_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertLikesArgs = {
   objects: Array<Like_Insert_Input>;
   on_conflict?: Maybe<Like_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertMembersArgs = {
@@ -2896,11 +2965,13 @@ export type Mutation_RootInsertMembersArgs = {
   on_conflict?: Maybe<Member_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneAccountArgs = {
   object: Account_Insert_Input;
   on_conflict?: Maybe<Account_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertOneAccountProviderArgs = {
@@ -2908,11 +2979,13 @@ export type Mutation_RootInsertOneAccountProviderArgs = {
   on_conflict?: Maybe<AccountProvider_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneCommentArgs = {
   object: Comment_Insert_Input;
   on_conflict?: Maybe<Comment_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertOneLikeArgs = {
@@ -2920,11 +2993,13 @@ export type Mutation_RootInsertOneLikeArgs = {
   on_conflict?: Maybe<Like_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneMemberArgs = {
   object: Member_Insert_Input;
   on_conflict?: Maybe<Member_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertOnePageArgs = {
@@ -2932,11 +3007,13 @@ export type Mutation_RootInsertOnePageArgs = {
   on_conflict?: Maybe<Page_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneProjectArgs = {
   object: Project_Insert_Input;
   on_conflict?: Maybe<Project_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertOneRoleArgs = {
@@ -2944,11 +3021,13 @@ export type Mutation_RootInsertOneRoleArgs = {
   on_conflict?: Maybe<Role_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneTeamArgs = {
   object: Team_Insert_Input;
   on_conflict?: Maybe<Team_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertOneUserArgs = {
@@ -2956,11 +3035,13 @@ export type Mutation_RootInsertOneUserArgs = {
   on_conflict?: Maybe<User_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertOneUserTypeArgs = {
   object: UserType_Insert_Input;
   on_conflict?: Maybe<UserType_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertPagesArgs = {
@@ -2968,11 +3049,13 @@ export type Mutation_RootInsertPagesArgs = {
   on_conflict?: Maybe<Page_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertProjectsArgs = {
   objects: Array<Project_Insert_Input>;
   on_conflict?: Maybe<Project_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertRolesArgs = {
@@ -2980,11 +3063,13 @@ export type Mutation_RootInsertRolesArgs = {
   on_conflict?: Maybe<Role_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertTeamsArgs = {
   objects: Array<Team_Insert_Input>;
   on_conflict?: Maybe<Team_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsertUserTypesArgs = {
@@ -2992,11 +3077,13 @@ export type Mutation_RootInsertUserTypesArgs = {
   on_conflict?: Maybe<UserType_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsertUsersArgs = {
   objects: Array<User_Insert_Input>;
   on_conflict?: Maybe<User_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateAccountByPkArgs = {
@@ -3004,11 +3091,13 @@ export type Mutation_RootUpdateAccountByPkArgs = {
   pk_columns: Account_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAccountProviderByPkArgs = {
   _set?: Maybe<AccountProvider_Set_Input>;
   pk_columns: AccountProvider_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateAccountProvidersArgs = {
@@ -3016,11 +3105,13 @@ export type Mutation_RootUpdateAccountProvidersArgs = {
   where: AccountProvider_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateAccountsArgs = {
   _set?: Maybe<Account_Set_Input>;
   where: Account_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateCommentByPkArgs = {
@@ -3033,6 +3124,7 @@ export type Mutation_RootUpdateCommentByPkArgs = {
   pk_columns: Comment_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateCommentsArgs = {
   _append?: Maybe<Comment_Append_Input>;
@@ -3044,11 +3136,13 @@ export type Mutation_RootUpdateCommentsArgs = {
   where: Comment_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateLikeByPkArgs = {
   _set?: Maybe<Like_Set_Input>;
   pk_columns: Like_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateLikesArgs = {
@@ -3056,11 +3150,13 @@ export type Mutation_RootUpdateLikesArgs = {
   where: Like_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateMemberByPkArgs = {
   _set?: Maybe<Member_Set_Input>;
   pk_columns: Member_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateMembersArgs = {
@@ -3068,11 +3164,13 @@ export type Mutation_RootUpdateMembersArgs = {
   where: Member_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdatePageByPkArgs = {
   _set?: Maybe<Page_Set_Input>;
   pk_columns: Page_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdatePagesArgs = {
@@ -3080,11 +3178,13 @@ export type Mutation_RootUpdatePagesArgs = {
   where: Page_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateProjectByPkArgs = {
   _set?: Maybe<Project_Set_Input>;
   pk_columns: Project_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateProjectsArgs = {
@@ -3092,11 +3192,13 @@ export type Mutation_RootUpdateProjectsArgs = {
   where: Project_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateRoleByPkArgs = {
   _set?: Maybe<Role_Set_Input>;
   pk_columns: Role_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateRolesArgs = {
@@ -3104,11 +3206,13 @@ export type Mutation_RootUpdateRolesArgs = {
   where: Role_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateTeamByPkArgs = {
   _set?: Maybe<Team_Set_Input>;
   pk_columns: Team_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateTeamsArgs = {
@@ -3116,11 +3220,13 @@ export type Mutation_RootUpdateTeamsArgs = {
   where: Team_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: Maybe<User_Set_Input>;
   pk_columns: User_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateUserTypeByPkArgs = {
@@ -3128,11 +3234,13 @@ export type Mutation_RootUpdateUserTypeByPkArgs = {
   pk_columns: UserType_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdateUserTypesArgs = {
   _set?: Maybe<UserType_Set_Input>;
   where: UserType_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdateUsersArgs = {
@@ -3153,7 +3261,7 @@ export enum Order_By {
   /** in the descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in the descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last',
+  DescNullsLast = 'desc_nulls_last'
 }
 
 /** query root */
@@ -3227,6 +3335,7 @@ export type Query_Root = {
   users: Array<User>;
 };
 
+
 /** query root */
 export type Query_RootAccountAggregateArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -3236,10 +3345,12 @@ export type Query_RootAccountAggregateArgs = {
   where?: Maybe<Account_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootAccountProviderAggregateArgs = {
@@ -3250,10 +3361,12 @@ export type Query_RootAccountProviderAggregateArgs = {
   where?: Maybe<AccountProvider_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootAccountProviderByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** query root */
 export type Query_RootAccountProvidersArgs = {
@@ -3264,6 +3377,7 @@ export type Query_RootAccountProvidersArgs = {
   where?: Maybe<AccountProvider_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootAccountsArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -3272,6 +3386,7 @@ export type Query_RootAccountsArgs = {
   order_by?: Maybe<Array<Account_Order_By>>;
   where?: Maybe<Account_Bool_Exp>;
 };
+
 
 /** query root */
 export type Query_RootCommentAggregateArgs = {
@@ -3282,10 +3397,12 @@ export type Query_RootCommentAggregateArgs = {
   where?: Maybe<Comment_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootCommentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootCommentsArgs = {
@@ -3296,6 +3413,7 @@ export type Query_RootCommentsArgs = {
   where?: Maybe<Comment_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootLikeAggregateArgs = {
   distinct_on?: Maybe<Array<Like_Select_Column>>;
@@ -3305,10 +3423,12 @@ export type Query_RootLikeAggregateArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootLikeByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootLikesArgs = {
@@ -3319,6 +3439,7 @@ export type Query_RootLikesArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootMemberAggregateArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -3328,10 +3449,12 @@ export type Query_RootMemberAggregateArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootMemberByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootMembersArgs = {
@@ -3342,6 +3465,7 @@ export type Query_RootMembersArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootPageAggregateArgs = {
   distinct_on?: Maybe<Array<Page_Select_Column>>;
@@ -3351,10 +3475,12 @@ export type Query_RootPageAggregateArgs = {
   where?: Maybe<Page_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootPageByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootPagesArgs = {
@@ -3365,6 +3491,7 @@ export type Query_RootPagesArgs = {
   where?: Maybe<Page_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootProjectAggregateArgs = {
   distinct_on?: Maybe<Array<Project_Select_Column>>;
@@ -3374,10 +3501,12 @@ export type Query_RootProjectAggregateArgs = {
   where?: Maybe<Project_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootProjectByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootProjectsArgs = {
@@ -3388,6 +3517,7 @@ export type Query_RootProjectsArgs = {
   where?: Maybe<Project_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootRoleAggregateArgs = {
   distinct_on?: Maybe<Array<Role_Select_Column>>;
@@ -3397,10 +3527,12 @@ export type Query_RootRoleAggregateArgs = {
   where?: Maybe<Role_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootRoleByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** query root */
 export type Query_RootRolesArgs = {
@@ -3411,6 +3543,7 @@ export type Query_RootRolesArgs = {
   where?: Maybe<Role_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootTeamAggregateArgs = {
   distinct_on?: Maybe<Array<Team_Select_Column>>;
@@ -3420,10 +3553,12 @@ export type Query_RootTeamAggregateArgs = {
   where?: Maybe<Team_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootTeamByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootTeamsArgs = {
@@ -3434,6 +3569,7 @@ export type Query_RootTeamsArgs = {
   where?: Maybe<Team_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootUserAggregateArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
@@ -3443,10 +3579,12 @@ export type Query_RootUserAggregateArgs = {
   where?: Maybe<User_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** query root */
 export type Query_RootUserTypeAggregateArgs = {
@@ -3457,10 +3595,12 @@ export type Query_RootUserTypeAggregateArgs = {
   where?: Maybe<UserType_Bool_Exp>;
 };
 
+
 /** query root */
 export type Query_RootUserTypeByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** query root */
 export type Query_RootUserTypesArgs = {
@@ -3470,6 +3610,7 @@ export type Query_RootUserTypesArgs = {
   order_by?: Maybe<Array<UserType_Order_By>>;
   where?: Maybe<UserType_Bool_Exp>;
 };
+
 
 /** query root */
 export type Query_RootUsersArgs = {
@@ -3551,6 +3692,7 @@ export type Subscription_Root = {
   users: Array<User>;
 };
 
+
 /** subscription root */
 export type Subscription_RootAccountAggregateArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -3560,10 +3702,12 @@ export type Subscription_RootAccountAggregateArgs = {
   where?: Maybe<Account_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootAccountProviderAggregateArgs = {
@@ -3574,10 +3718,12 @@ export type Subscription_RootAccountProviderAggregateArgs = {
   where?: Maybe<AccountProvider_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootAccountProviderByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** subscription root */
 export type Subscription_RootAccountProvidersArgs = {
@@ -3588,6 +3734,7 @@ export type Subscription_RootAccountProvidersArgs = {
   where?: Maybe<AccountProvider_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootAccountsArgs = {
   distinct_on?: Maybe<Array<Account_Select_Column>>;
@@ -3596,6 +3743,7 @@ export type Subscription_RootAccountsArgs = {
   order_by?: Maybe<Array<Account_Order_By>>;
   where?: Maybe<Account_Bool_Exp>;
 };
+
 
 /** subscription root */
 export type Subscription_RootCommentAggregateArgs = {
@@ -3606,10 +3754,12 @@ export type Subscription_RootCommentAggregateArgs = {
   where?: Maybe<Comment_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootCommentByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootCommentsArgs = {
@@ -3620,6 +3770,7 @@ export type Subscription_RootCommentsArgs = {
   where?: Maybe<Comment_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootLikeAggregateArgs = {
   distinct_on?: Maybe<Array<Like_Select_Column>>;
@@ -3629,10 +3780,12 @@ export type Subscription_RootLikeAggregateArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootLikeByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootLikesArgs = {
@@ -3643,6 +3796,7 @@ export type Subscription_RootLikesArgs = {
   where?: Maybe<Like_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootMemberAggregateArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -3652,10 +3806,12 @@ export type Subscription_RootMemberAggregateArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootMemberByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootMembersArgs = {
@@ -3666,6 +3822,7 @@ export type Subscription_RootMembersArgs = {
   where?: Maybe<Member_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootPageAggregateArgs = {
   distinct_on?: Maybe<Array<Page_Select_Column>>;
@@ -3675,10 +3832,12 @@ export type Subscription_RootPageAggregateArgs = {
   where?: Maybe<Page_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootPageByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootPagesArgs = {
@@ -3689,6 +3848,7 @@ export type Subscription_RootPagesArgs = {
   where?: Maybe<Page_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootProjectAggregateArgs = {
   distinct_on?: Maybe<Array<Project_Select_Column>>;
@@ -3698,10 +3858,12 @@ export type Subscription_RootProjectAggregateArgs = {
   where?: Maybe<Project_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootProjectByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootProjectsArgs = {
@@ -3712,6 +3874,7 @@ export type Subscription_RootProjectsArgs = {
   where?: Maybe<Project_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootRoleAggregateArgs = {
   distinct_on?: Maybe<Array<Role_Select_Column>>;
@@ -3721,10 +3884,12 @@ export type Subscription_RootRoleAggregateArgs = {
   where?: Maybe<Role_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootRoleByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** subscription root */
 export type Subscription_RootRolesArgs = {
@@ -3735,6 +3900,7 @@ export type Subscription_RootRolesArgs = {
   where?: Maybe<Role_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootTeamAggregateArgs = {
   distinct_on?: Maybe<Array<Team_Select_Column>>;
@@ -3744,10 +3910,12 @@ export type Subscription_RootTeamAggregateArgs = {
   where?: Maybe<Team_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootTeamByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootTeamsArgs = {
@@ -3758,6 +3926,7 @@ export type Subscription_RootTeamsArgs = {
   where?: Maybe<Team_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootUserAggregateArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
@@ -3767,10 +3936,12 @@ export type Subscription_RootUserAggregateArgs = {
   where?: Maybe<User_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** subscription root */
 export type Subscription_RootUserTypeAggregateArgs = {
@@ -3781,10 +3952,12 @@ export type Subscription_RootUserTypeAggregateArgs = {
   where?: Maybe<UserType_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootUserTypeByPkArgs = {
   value: Scalars['String'];
 };
+
 
 /** subscription root */
 export type Subscription_RootUserTypesArgs = {
@@ -3795,6 +3968,7 @@ export type Subscription_RootUserTypesArgs = {
   where?: Maybe<UserType_Bool_Exp>;
 };
 
+
 /** subscription root */
 export type Subscription_RootUsersArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
@@ -3803,6 +3977,7 @@ export type Subscription_RootUsersArgs = {
   order_by?: Maybe<Array<User_Order_By>>;
   where?: Maybe<User_Bool_Exp>;
 };
+
 
 /** expression to compare columns of type timestamptz. All fields are combined with logical 'AND'. */
 export type Timestamptz_Comparison_Exp = {
@@ -3816,6 +3991,7 @@ export type Timestamptz_Comparison_Exp = {
   _neq?: Maybe<Scalars['timestamptz']>;
   _nin?: Maybe<Array<Scalars['timestamptz']>>;
 };
+
 
 /** expression to compare columns of type uuid. All fields are combined with logical 'AND'. */
 export type Uuid_Comparison_Exp = {

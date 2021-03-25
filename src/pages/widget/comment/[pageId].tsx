@@ -1,3 +1,4 @@
+import { useSubscription } from '@apollo/client';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -6,12 +7,9 @@ import {
   GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
-import * as React from 'react';
-import { Node } from 'slate';
 import tw from 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
-import { CommentTreeDocument } from '$server/graphql/generated/comment';
 import { PagesDocument } from '$server/graphql/generated/page';
 
 import { CommentTree } from '$/blocks/CommentTree/CommentTree';
@@ -20,13 +18,13 @@ import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
 import { Tabs } from '$/components/Tabs';
-import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
-import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
+import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
+import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
+import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { CommentLeafType } from '$/types/widget';
-import { deleteOneLikeInComments, createOneLikeInComments } from '$/utilities/like';
-import { updateReplyInComments } from '$/utilities/merge-comment';
+import { getQueryCommentTreeDoc, getSubscribeCommentTreeDoc } from '$/utilities/comment-request';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -41,113 +39,24 @@ const COMMENT_TAB_VALUE = 'Comment';
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  const [comments, setComments] = React.useState<CommentLeafType[]>(
-    isStaticError(props) ? [] : props.comments,
-  );
+
   if (isStaticError(props)) {
     error = props.error!;
   } else {
     pageId = props.pageId;
   }
-  const { isLogin, id: currentUserId, avatar, displayName } = useCurrentUser();
-
-  const [insertOneComment] = useInsertOneCommentMutation();
-
-  const handleSubmit = React.useCallback(
-    async (content: Node[]) => {
-      if (!currentUserId) {
-        console.error('Sign-in first');
-        return;
-      }
-      const { data } = await insertOneComment({
-        variables: {
-          pageId,
-          content,
-        },
-      });
-      if (data?.insertOneComment?.id) {
-        setComments((prev) => [
-          ...prev,
-          {
-            ...data.insertOneComment!,
-            replies: [],
-          },
-        ]);
-      }
+  const { data } = useSubscription<CommentTreeQuery, CommentTreeQueryVariables>(
+    getSubscribeCommentTreeDoc(),
+    {
+      variables: { pageId },
     },
-    [pageId, currentUserId, insertOneComment],
   );
+  const comments = data?.comments || (isStaticError(props) ? [] : props.comments);
+  const { isLogin, avatar, displayName } = useCurrentUser();
 
-  const [insertOneLike] = useInsertOneLikeMutation();
-  const [deleteLikeByPk] = useDeleteLikeByPkMutation();
-  const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
-    if (!currentUserId) {
-      throw new Error('Login first');
-    }
-    if (isLiked) {
-      await deleteLikeByPk({
-        variables: {
-          id: likeId,
-        },
-      });
-      const updatedComments = deleteOneLikeInComments(comments, commentId, likeId);
-      if (updatedComments !== comments) {
-        setComments(updatedComments);
-      } else {
-        console.error(`Can't find the deleted like`);
-      }
-    } else {
-      try {
-        const { data } = await insertOneLike({
-          variables: {
-            commentId,
-            // userId: currentUserId,
-            compoundId: `${currentUserId}:${commentId}`,
-          },
-        });
-        if (data?.insertOneLike?.id) {
-          const updatedComments = createOneLikeInComments(comments, commentId, data.insertOneLike!);
-          if (updatedComments !== comments) {
-            setComments(updatedComments);
-          } else {
-            console.error(`Can't insert the created like`);
-          }
-        }
-      } catch (error) {
-        // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
-        // when a user click the like button again during this API processing
-        // TODO: Refresh UI immediately, call APIs in the background
-        console.error(error);
-      }
-    }
-  };
+  const handleSubmitReply = useCreateAComment({ pageId });
 
-  const handleSubmitReply = async (reply: Node[], commentId: string) => {
-    if (!currentUserId) {
-      console.error('Please sign-in first');
-      return Promise.reject();
-    }
-    const { data } = await insertOneComment({
-      variables: {
-        parentId: commentId,
-        content: reply,
-        pageId,
-      },
-    });
-    if (data?.insertOneComment?.id) {
-      const updatedComments = updateReplyInComments(comments, commentId, [
-        {
-          ...data.insertOneComment!,
-          replies: [],
-        },
-      ]);
-      if (updatedComments !== comments) {
-        setComments(updatedComments);
-      } else {
-        console.error(`Can't update reply in comments`);
-      }
-    }
-  };
+  const handleClickLikeAction = useToggleALikeAction();
 
   useNotifyHostPageOfHeight();
 
@@ -170,7 +79,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
           <div css={tw`space-y-7`}>
             <div css={tw`space-y-2`}>
               <RichTextEditor
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmitReply}
                 postButtonLabel={!isLogin ? 'Login' : undefined}
               />
             </div>
@@ -227,7 +136,7 @@ type StaticProps = PathParams & {
   comments: CommentLeafType[];
 };
 type StaticError = {
-  error?: string;
+  error: string;
 };
 
 export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
@@ -240,7 +149,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
     const { pageId } = params;
     const adminApollo = getAdminApollo();
     const pageResult = await adminApollo.query({
-      query: CommentTreeDocument,
+      query: getQueryCommentTreeDoc(),
       variables: {
         pageId,
       },

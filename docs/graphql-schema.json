@@ -4922,7 +4922,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "args": [],
             "type": {
               "kind": "NON_NULL",
