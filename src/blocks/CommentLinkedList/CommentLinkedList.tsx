@@ -3,8 +3,8 @@ import tw, { css, styled, theme } from 'twin.macro';
 
 import { CommentDetailNode } from '$/types/widget';
 
-import { CommentCard, CommentCardProps } from '../CommentCard';
 import { CommentBranch } from '../CommentBranch';
+import { CommentCard, CommentCardProps } from '../CommentCard';
 
 export type Comment = NonNullable<CommentDetailNode>;
 
@@ -59,9 +59,8 @@ export function CommentLinkedList({
           ]}
         >
           {comment.replies?.map((reply: $TsFixMe) => (
-            <CommentBranch>
+            <CommentBranch key={reply.id}>
               <CommentCard
-                key={reply.id}
                 commentId={reply.id}
                 content={reply.content}
                 author={reply.user}

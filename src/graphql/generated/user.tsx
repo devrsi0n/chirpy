@@ -2,52 +2,57 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-const defaultOptions = {};
+const defaultOptions =  {}
 export type UserByPkQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
-export type UserByPkQuery = { __typename?: 'query_root' } & {
-  userByPk?: Types.Maybe<
-    { __typename?: 'User' } & Pick<
-      Types.User,
-      'id' | 'email' | 'username' | 'displayName' | 'avatar'
-    > & {
-        members: Array<
-          { __typename?: 'Member' } & Pick<Types.Member, 'id' | 'role' | 'teamId'> & {
-              team: { __typename?: 'Team' } & Pick<Types.Team, 'id' | 'name' | 'uid'>;
-            }
-        >;
-        projects: Array<{ __typename?: 'Project' } & Pick<Types.Project, 'id' | 'name'>>;
-      }
-  >;
-};
+
+export type UserByPkQuery = (
+  { __typename?: 'query_root' }
+  & { userByPk?: Types.Maybe<(
+    { __typename?: 'User' }
+    & Pick<Types.User, 'id' | 'email' | 'username' | 'displayName' | 'avatar'>
+    & { members: Array<(
+      { __typename?: 'Member' }
+      & Pick<Types.Member, 'id' | 'role' | 'teamId'>
+      & { team: (
+        { __typename?: 'Team' }
+        & Pick<Types.Team, 'id' | 'name' | 'uid'>
+      ) }
+    )>, projects: Array<(
+      { __typename?: 'Project' }
+      & Pick<Types.Project, 'id' | 'name'>
+    )> }
+  )> }
+);
+
 
 export const UserByPkDocument = gql`
-  query userByPk($id: uuid!) {
-    userByPk(id: $id) {
+    query userByPk($id: uuid!) {
+  userByPk(id: $id) {
+    id
+    email
+    username
+    displayName
+    avatar
+    members {
       id
-      email
-      username
-      displayName
-      avatar
-      members {
-        id
-        role
-        teamId
-        team {
-          id
-          name
-          uid
-        }
-      }
-      projects {
+      role
+      teamId
+      team {
         id
         name
+        uid
       }
     }
+    projects {
+      id
+      name
+    }
   }
-`;
+}
+    `;
 
 /**
  * __useUserByPkQuery__
@@ -65,18 +70,14 @@ export const UserByPkDocument = gql`
  *   },
  * });
  */
-export function useUserByPkQuery(
-  baseOptions: Apollo.QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
-}
-export function useUserByPkLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<UserByPkQuery, UserByPkQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
-}
+export function useUserByPkQuery(baseOptions: Apollo.QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
+      }
+export function useUserByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserByPkQuery, UserByPkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
+        }
 export type UserByPkQueryHookResult = ReturnType<typeof useUserByPkQuery>;
 export type UserByPkLazyQueryHookResult = ReturnType<typeof useUserByPkLazyQuery>;
 export type UserByPkQueryResult = Apollo.QueryResult<UserByPkQuery, UserByPkQueryVariables>;

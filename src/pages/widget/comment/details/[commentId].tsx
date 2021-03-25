@@ -1,3 +1,4 @@
+import { useSubscription } from '@apollo/client';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -9,41 +10,40 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
-import {
-  CommentDetailsDocument,
-  CommentsDocument, // useCreateOneLikeMutation,
-  // useDeleteOneLikeMutation,
-} from '$server/graphql/generated/comment';
+import { CommentsDocument } from '$server/graphql/generated/comment';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
-// import { deleteOneLikeInComments } from '$/utilities/comment';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { CommentDetailsQuery, CommentDetailsQueryVariables } from '$/graphql/generated/comment';
+import { useCreateAComment } from '$/hooks/useCreateAComment';
+import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { CommentDetailNode } from '$/types/widget';
+import {
+  getQueryCommentDetailsDoc,
+  getSubscribeCommentDetailsDoc,
+} from '$/utilities/comment-request';
 
-const handleSubmitReply = () => {
-  return Promise.resolve();
-};
 const handleClickBack: React.MouseEventHandler<HTMLButtonElement> = (event) => {
   window.history.go(-1);
   event.preventDefault();
 };
 
 // Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
-export default function CommentDetailsWidget({
-  comment,
-}: InferGetStaticPropsType<typeof getStaticProps>): JSX.Element {
-  // const [createOneLike] = useCreateOneLikeMutation();
-  // const [deleteOneLike] = useDeleteOneLikeMutation();
-  const { id: currentUserId } = useCurrentUser();
-  const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
-    if (!currentUserId) {
-      throw new Error('Login first');
-    }
-    console.log('handleClick');
-  };
+export default function CommentDetailsWidget(
+  props: InferGetStaticPropsType<typeof getStaticProps>,
+): JSX.Element {
+  const handleSubmitReply = useCreateAComment({ pageId: props.comment?.pageId || '' });
+
+  const handleClickLikeAction = useToggleALikeAction();
+  const { data } = useSubscription<CommentDetailsQuery, CommentDetailsQueryVariables>(
+    getSubscribeCommentDetailsDoc(),
+    {
+      variables: { id: props.commentId },
+    },
+  );
+  const comment = data?.commentByPk || props.comment;
 
   return (
     <div className="main-container" css={tw`py-8`}>
@@ -104,20 +104,19 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   const { commentId } = params;
   const adminApollo = getAdminApollo();
-  const pageResult = await adminApollo.query({
-    query: CommentDetailsDocument,
+  const { data } = await adminApollo.query<CommentDetailsQuery>({
+    query: getQueryCommentDetailsDoc(),
     variables: {
       id: commentId,
     },
   });
 
-  if (!pageResult.data?.commentByPk) {
+  if (!data?.commentByPk) {
     return { notFound: true };
   }
-  const { commentByPk } = pageResult.data;
 
   return {
-    props: { comment: commentByPk, commentId },
+    props: { comment: data.commentByPk, commentId },
     revalidate: 1,
   };
 };

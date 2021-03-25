@@ -1,17 +1,127 @@
-mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
-  insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
+# Used in pages/widget/comment/[pageId].tsx
+
+query commentTree($pageId: uuid!) {
+  comments(where: { pageId: { _eq: $pageId }, parentId: { _is_null: true } }) {
     id
     content
     createdAt
+    parentId
+    pageId
     user {
       id
       displayName
-      username
       avatar
     }
     likes {
       id
       userId
     }
+    replies {
+      id
+      content
+      createdAt
+      parentId
+      pageId
+      user {
+        id
+        displayName
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+      replies {
+        id
+        content
+        createdAt
+        parentId
+        pageId
+        user {
+          id
+          displayName
+          avatar
+        }
+        likes {
+          id
+          userId
+        }
+      }
+    }
+  }
+}
+
+# Query ancestors and children
+query commentDetails($id: uuid!) {
+  commentByPk(id: $id) {
+    id
+    content
+    createdAt
+    parentId
+    pageId
+    user {
+      id
+      displayName
+      avatar
+    }
+    likes {
+      id
+      userId
+    }
+    replies {
+      id
+      content
+      createdAt
+      parentId
+      pageId
+      user {
+        id
+        displayName
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+    }
+
+    parent {
+      id
+      content
+      createdAt
+      parentId
+      pageId
+      user {
+        id
+        displayName
+        avatar
+      }
+      likes {
+        id
+        userId
+      }
+      parent {
+        id
+        content
+        createdAt
+        parentId
+        pageId
+        user {
+          id
+          displayName
+          avatar
+        }
+        likes {
+          id
+          userId
+        }
+      }
+    }
+  }
+}
+
+mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
+  insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
+    id
   }
 }

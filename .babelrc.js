@@ -10,5 +10,5 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['babel-plugin-twin', '@emotion/babel-plugin', 'babel-plugin-macros'],
+  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
 };
