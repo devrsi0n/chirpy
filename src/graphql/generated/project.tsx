@@ -2,33 +2,34 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-const defaultOptions = {};
+const defaultOptions =  {}
 export type InsertOneProjectMutationVariables = Types.Exact<{
   name: Types.Scalars['String'];
   teamId?: Types.Maybe<Types.Scalars['uuid']>;
   userId?: Types.Maybe<Types.Scalars['uuid']>;
 }>;
 
-export type InsertOneProjectMutation = { __typename?: 'mutation_root' } & {
-  insertOneProject?: Types.Maybe<
-    { __typename?: 'Project' } & Pick<Types.Project, 'id' | 'name' | 'teamId' | 'userId'>
-  >;
-};
+
+export type InsertOneProjectMutation = (
+  { __typename?: 'mutation_root' }
+  & { insertOneProject?: Types.Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Types.Project, 'id' | 'name' | 'teamId' | 'userId'>
+  )> }
+);
+
 
 export const InsertOneProjectDocument = gql`
-  mutation insertOneProject($name: String!, $teamId: uuid, $userId: uuid) {
-    insertOneProject(object: { teamId: $teamId, name: $name, userId: $userId }) {
-      id
-      name
-      teamId
-      userId
-    }
+    mutation insertOneProject($name: String!, $teamId: uuid, $userId: uuid) {
+  insertOneProject(object: {teamId: $teamId, name: $name, userId: $userId}) {
+    id
+    name
+    teamId
+    userId
   }
-`;
-export type InsertOneProjectMutationFn = Apollo.MutationFunction<
-  InsertOneProjectMutation,
-  InsertOneProjectMutationVariables
->;
+}
+    `;
+export type InsertOneProjectMutationFn = Apollo.MutationFunction<InsertOneProjectMutation, InsertOneProjectMutationVariables>;
 
 /**
  * __useInsertOneProjectMutation__
@@ -49,21 +50,10 @@ export type InsertOneProjectMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useInsertOneProjectMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    InsertOneProjectMutation,
-    InsertOneProjectMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(
-    InsertOneProjectDocument,
-    options,
-  );
-}
+export function useInsertOneProjectMutation(baseOptions?: Apollo.MutationHookOptions<InsertOneProjectMutation, InsertOneProjectMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(InsertOneProjectDocument, options);
+      }
 export type InsertOneProjectMutationHookResult = ReturnType<typeof useInsertOneProjectMutation>;
 export type InsertOneProjectMutationResult = Apollo.MutationResult<InsertOneProjectMutation>;
-export type InsertOneProjectMutationOptions = Apollo.BaseMutationOptions<
-  InsertOneProjectMutation,
-  InsertOneProjectMutationVariables
->;
+export type InsertOneProjectMutationOptions = Apollo.BaseMutationOptions<InsertOneProjectMutation, InsertOneProjectMutationVariables>;

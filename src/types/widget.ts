@@ -1,4 +1,4 @@
-import { CommentDetailsQuery, CommentTreeQuery } from '$server/graphql/generated/comment';
+import { CommentDetailsQuery, CommentTreeQuery } from '$/graphql/generated/comment';
 
 import { InsertOneLikeMutation } from '$/graphql/generated/like';
 

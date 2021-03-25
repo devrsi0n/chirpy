@@ -1,12 +1,6 @@
 mutation insertOneLike($compoundId: String!, $commentId: uuid!) {
   insertOneLike(object: { commentId: $commentId, compoundId: $compoundId }) {
     id
-    userId
-    user {
-      id
-      displayName
-      avatar
-    }
   }
 }
 
