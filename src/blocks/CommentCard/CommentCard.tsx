@@ -62,22 +62,11 @@ export function CommentCard({
   };
   const detailsURL = `/widget/comment/details/${commentId}`;
 
-  const shakeVariants: Variants = {
-    start: {
-      translateX: [-20, 20, -10, 10, -5, 5, 0],
-      transition: {
-        duration: 0.35,
-      },
-    },
-    stop: {
-      translateX: 0,
-    },
-  };
-  const [containerAnimate, setContainerAnimate] = React.useState<'start' | 'stop'>('stop');
+  const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
   const handleClickLinkAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (disableLink) {
       e.preventDefault();
-      setContainerAnimate('start');
+      setContainerAnimate('shake');
     }
   };
 
@@ -159,3 +148,15 @@ export function CommentCard({
     </m.article>
   );
 }
+
+const shakeVariants: Variants = {
+  shake: {
+    translateX: [-20, 20, -10, 10, -5, 5, 0],
+    transition: {
+      duration: 0.35,
+    },
+  },
+  stop: {
+    translateX: 0,
+  },
+};

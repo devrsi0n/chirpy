@@ -12,7 +12,7 @@ import { Text } from '$/components/Text/Text';
 
 export default function Custom404(): JSX.Element {
   return (
-    <Layout disableContainer>
+    <Layout noContainer>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
