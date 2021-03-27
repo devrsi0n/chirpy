@@ -1,5 +1,5 @@
 import * as React from 'react';
-import tw, { css, styled, theme } from 'twin.macro';
+import tw, { css, theme } from 'twin.macro';
 
 import { CommentDetailNode } from '$/types/widget';
 
@@ -82,25 +82,35 @@ export { MemoCommentLinkedList };
 
 const branchWidth = '2.4rem';
 const branchHeight = '2.0';
-const ParentBranch = styled.li(() => [
-  tw`space-y-8`,
-  css`
-    position: relative;
 
-    &:before {
-      position: absolute;
-      top: -${branchHeight}rem;
-      left: ${branchWidth};
-      display: block;
-      width: ${branchWidth};
-      height: ${branchHeight}rem;
-      content: '';
-      border-left-width: 1px;
-      ${tw`border-gray-300`}
-    }
+type ParentBranchProps = React.ComponentPropsWithoutRef<'li'>;
 
-    &:first-child:before {
-      display: none;
-    }
-  `,
-]);
+function ParentBranch(props: ParentBranchProps): JSX.Element {
+  return (
+    <li
+      {...props}
+      css={[
+        tw`space-y-8`,
+        css`
+          position: relative;
+
+          &:before {
+            position: absolute;
+            top: -${branchHeight}rem;
+            left: ${branchWidth};
+            display: block;
+            width: ${branchWidth};
+            height: ${branchHeight}rem;
+            content: '';
+            border-left-width: 1px;
+            ${tw`border-gray-300`}
+          }
+
+          &:first-of-type:before {
+            display: none;
+          }
+        `,
+      ]}
+    />
+  );
+}
