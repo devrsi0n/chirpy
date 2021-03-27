@@ -55,7 +55,8 @@ export default function CommentDetailsWidget(
           css={tw`transform -translate-x-4`}
         />
         <Heading as="h4" css={tw`text-gray-600`}>
-          Comment details
+          <span tw="font-bold">{comment?.user.displayName}</span>
+          <span>'s comment details</span>
         </Heading>
       </div>
       {comment?.id && (

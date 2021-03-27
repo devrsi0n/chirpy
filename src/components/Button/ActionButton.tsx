@@ -22,14 +22,21 @@ export function ActionButton({
   children,
   color,
   activated,
+  disabled,
   ...restProps
 }: ActionButtonProps): JSX.Element {
   const Icon = icon;
   const { iconStyle, childStyle } = colorStyleFunctions[color](activated);
   return (
-    <BaseButton {...restProps} className="group" css={tw`flex flex-row items-center text-gray-600`}>
-      <span css={[tw`rounded-full p-2 group-hover:bg-opacity-10`, iconStyle]}>{Icon}</span>
-      {children && <span css={childStyle}>{children}</span>}
+    <BaseButton
+      {...restProps}
+      className="group"
+      css={[tw`flex flex-row items-center text-gray-600`, disabled && tw`text-gray-300`]}
+    >
+      <span css={[tw`rounded-full p-2 group-hover:bg-opacity-10`, !disabled && iconStyle]}>
+        {Icon}
+      </span>
+      {children && <span css={!disabled && childStyle}>{children}</span>}
     </BaseButton>
   );
 }

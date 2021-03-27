@@ -1,5 +1,6 @@
 import Info from '@geist-ui/react-icons/info';
 import dayjs from 'dayjs';
+import { m, Variants } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -60,12 +61,33 @@ export function CommentCard({
     setShowReplyEditor(false);
   };
   const detailsURL = `/widget/comment/details/${commentId}`;
+
+  const shakeVariants: Variants = {
+    start: {
+      translateX: [-20, 20, -10, 10, -5, 5, 0],
+      transition: {
+        duration: 0.35,
+      },
+    },
+    stop: {
+      translateX: 0,
+    },
+  };
+  const [containerAnimate, setContainerAnimate] = React.useState<'start' | 'stop'>('stop');
+  const handleClickLinkAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (disableLink) {
+      e.preventDefault();
+      setContainerAnimate('start');
+    }
+  };
+
   return (
-    <article
+    <m.article
+      animate={containerAnimate}
+      variants={shakeVariants}
+      onAnimationComplete={() => setContainerAnimate('stop')}
       tw="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
-      {...(isENVDev && {
-        id: commentId,
-      })}
+      id={isENVDev ? commentId : undefined}
     >
       <Avatar size="lg" src={avatar ?? ''} alt={`User ${displayName}'s avatar`} />
       <div tw="flex-1">
@@ -99,8 +121,21 @@ export function CommentCard({
             }
             onClick={handlePressReply}
           />
-          <Link href={!disableLink ? detailsURL : ''} variant="plain" title="Expand this comment">
-            <ActionButton color="green" icon={<Info size={20} />} />
+          <Link
+            href={!disableLink ? detailsURL : ''}
+            variant="plain"
+            title={
+              !disableLink
+                ? 'The details of this comment'
+                : `This is already the current comment's detail page`
+            }
+          >
+            <ActionButton
+              color="green"
+              icon={<Info size={20} />}
+              disabled={disableLink}
+              onClick={handleClickLinkAction}
+            />
           </Link>
         </div>
 
@@ -121,6 +156,6 @@ export function CommentCard({
           </div>
         )}
       </div>
-    </article>
+    </m.article>
   );
 }
