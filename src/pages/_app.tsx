@@ -63,6 +63,38 @@ const appGlobalStyles = css`
     height: 100%;
   }
 
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url(/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-display: optional;
+    src: url(/fonts/Roboto/Roboto-Italic.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-display: optional;
+    src: url(/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 700;
+    font-display: optional;
+    src: url(/fonts/Roboto/Roboto-BoldItalic.ttf) format('truetype');
+  }
+
   // https://www.joshwcomeau.com/css/full-bleed/
   .main-container {
     display: grid;

@@ -48,7 +48,7 @@ export function Text({
     <Tag
       {...restProps}
       css={[
-        tw`font-sans leading-normal`,
+        tw`leading-normal`,
         variantStyles[variant],
         bold && tw`font-bold`,
         italic && tw`italic`,
