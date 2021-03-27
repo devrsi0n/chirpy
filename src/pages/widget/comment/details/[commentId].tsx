@@ -16,6 +16,8 @@ import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
+import { Layout } from '$/components/Layout';
+import { Link } from '$/components/Link';
 import { CommentDetailsQuery, CommentDetailsQueryVariables } from '$/graphql/generated/comment';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
@@ -24,11 +26,6 @@ import {
   getQueryCommentDetailsDoc,
   getSubscribeCommentDetailsDoc,
 } from '$/utilities/comment-request';
-
-const handleClickBack: React.MouseEventHandler<HTMLButtonElement> = (event) => {
-  window.history.go(-1);
-  event.preventDefault();
-};
 
 // Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
 export default function CommentDetailsWidget(
@@ -46,14 +43,11 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <div className="main-container" css={tw`py-8`}>
+    <Layout noFooter noHeader>
       <div css={tw`flex flex-row items-center mb-4`}>
-        <IconButton
-          icon="arrow-left"
-          size="md"
-          onClick={handleClickBack}
-          css={tw`transform -translate-x-4`}
-        />
+        <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
+          <IconButton icon="arrow-left" size="md" css={tw`transform -translate-x-4`} />
+        </Link>
         <Heading as="h4" css={tw`text-gray-600`}>
           <span tw="font-bold">{comment?.user.displayName}</span>
           <span>'s comment details</span>
@@ -68,7 +62,7 @@ export default function CommentDetailsWidget(
         />
       )}
       <PoweredBy />
-    </div>
+    </Layout>
   );
 }
 type PathParams = {

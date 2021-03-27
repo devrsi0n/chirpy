@@ -17,6 +17,7 @@ import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
+import { Layout } from '$/components/Layout';
 import { Tabs } from '$/components/Tabs';
 import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
@@ -65,7 +66,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <div className="main-container" css={tw`py-8`}>
+    <Layout noFooter noHeader>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
@@ -102,7 +103,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
         />
       </Tabs>
       <PoweredBy />
-    </div>
+    </Layout>
   );
 }
 
