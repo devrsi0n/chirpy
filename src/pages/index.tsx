@@ -9,7 +9,7 @@ import { Text } from '$/components/Text/Text';
 
 function Home(): JSX.Element {
   return (
-    <Layout disableContainer>
+    <Layout noContainer>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
