@@ -19,11 +19,12 @@ export function Layout({
   ...divProps
 }: ILayoutProps): JSX.Element {
   return (
-    <div {...divProps} css={noContainer && tw`flex flex-col items-center`}>
+    <div {...divProps} css={[tw`min-h-full`, noContainer && tw`flex flex-col items-center`]}>
       {!noHeader && <Header />}
 
       <AnimatePresence>
         <m.div
+          tw="min-h-full"
           transition={{ duration: 0.35 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -32,14 +33,14 @@ export function Layout({
           {noContainer ? (
             children
           ) : (
-            <main tw="py-10" className="main-container">
+            <main tw="py-10 min-h-full" className="main-container">
               {children}
             </main>
           )}
         </m.div>
       </AnimatePresence>
 
-      {!noFooter && <Footer />}
+      {!noFooter && <Footer tw="mt-auto" />}
     </div>
   );
 }
