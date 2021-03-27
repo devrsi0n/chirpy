@@ -15,7 +15,9 @@ const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
   dark: 'moon',
 };
 
-export function Footer(): JSX.Element {
+export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
+
+export function Footer(props: FooterProps): JSX.Element {
   const { theme, setTheme } = useTheme();
   const hasMounted = useHasMounted();
   const handleClick = React.useCallback(() => {
@@ -31,6 +33,7 @@ export function Footer(): JSX.Element {
   const icon = icons[(theme as ColorMode) || 'system'];
   return (
     <footer
+      {...props}
       css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 text-gray-500`}
     >
       <nav css={tw`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
