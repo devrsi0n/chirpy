@@ -57,6 +57,12 @@ const appGlobalStyles = css`
     outline: 0;
   }
 
+  html,
+  body,
+  #__next {
+    height: 100%;
+  }
+
   // https://www.joshwcomeau.com/css/full-bleed/
   .main-container {
     display: grid;
