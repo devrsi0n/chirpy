@@ -27,13 +27,19 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
           />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
+          <link
+            rel="preload"
+            href="/fonts/Roboto/Roboto-Regular.ttf"
+            as="font"
+            crossOrigin="anonymous"
+          />
           <style
             data-emotion-css={this.props.ids.join(' ')}
             dangerouslySetInnerHTML={{ __html: this.props.css }}
           />
         </Head>
         <body
-          css={tw`bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-300`}
+          css={tw`bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-300 font-sans`}
         >
           <Main />
           <NextScript />
