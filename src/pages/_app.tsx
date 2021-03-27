@@ -2,6 +2,7 @@ import { ApolloProvider } from '@apollo/client';
 import { Global } from '@emotion/react';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { LazyMotion } from 'framer-motion';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
@@ -20,17 +21,21 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       <GlobalStyles />
       <Global styles={appGlobalStyles} />
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
-        <ApolloProvider client={apollo}>
-          <CurrentUserProvider>
-            <Component {...pageProps} />
-          </CurrentUserProvider>
-        </ApolloProvider>
+        <LazyMotion features={loadFeatures} strict>
+          <ApolloProvider client={apollo}>
+            <CurrentUserProvider>
+              <Component {...pageProps} />
+            </CurrentUserProvider>
+          </ApolloProvider>
+        </LazyMotion>
       </NextThemesProvider>
     </>
   );
 }
 
 export default App;
+
+const loadFeatures = () => import('../utilities/framer-motion-features').then((res) => res.default);
 
 const appGlobalStyles = css`
   ::selection {

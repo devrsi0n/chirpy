@@ -37,7 +37,7 @@ export function CommentLinkedList({
         {parentComments.map((_comment, index) => (
           <ParentBranch key={_comment.id}>
             <CommentCard
-              disableLink={index === 0}
+              disableLink={_comment.id === comment.id}
               commentId={_comment.id}
               content={_comment.content}
               author={_comment.user}

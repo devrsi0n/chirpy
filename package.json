@@ -40,6 +40,7 @@
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
     "dayjs": "^1.10.4",
+    "framer-motion": "^4.0.3",
     "graphql": "^15.5.0",
     "graphql-iso-date": "^3.6.1",
     "graphql-type-json": "^0.3.2",
