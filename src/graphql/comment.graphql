@@ -1,7 +1,10 @@
 # Used in pages/widget/comment/[pageId].tsx
-
+# Must sync with src/utilities/comment-request.ts
 query commentTree($pageId: uuid!) {
-  comments(where: { pageId: { _eq: $pageId }, parentId: { _is_null: true } }) {
+  comments(
+    where: { pageId: { _eq: $pageId }, parentId: { _is_null: true } }
+    order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+  ) {
     id
     content
     createdAt
@@ -16,7 +19,7 @@ query commentTree($pageId: uuid!) {
       id
       userId
     }
-    replies {
+    replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
       id
       content
       createdAt
@@ -31,7 +34,7 @@ query commentTree($pageId: uuid!) {
         id
         userId
       }
-      replies {
+      replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
         id
         content
         createdAt
@@ -52,6 +55,7 @@ query commentTree($pageId: uuid!) {
 }
 
 # Query ancestors and children
+# Must sync with src/utilities/comment-request.ts
 query commentDetails($id: uuid!) {
   commentByPk(id: $id) {
     id
@@ -63,12 +67,14 @@ query commentDetails($id: uuid!) {
       id
       displayName
       avatar
+      __typename
     }
     likes {
       id
       userId
+      __typename
     }
-    replies {
+    replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
       id
       content
       createdAt
@@ -84,7 +90,6 @@ query commentDetails($id: uuid!) {
         userId
       }
     }
-
     parent {
       id
       content
@@ -114,6 +119,22 @@ query commentDetails($id: uuid!) {
         likes {
           id
           userId
+        }
+        parent {
+          id
+          content
+          createdAt
+          parentId
+          pageId
+          user {
+            id
+            displayName
+            avatar
+          }
+          likes {
+            id
+            userId
+          }
         }
       }
     }

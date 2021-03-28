@@ -54,10 +54,10 @@ export type CommentDetailsQuery = (
     { __typename?: 'Comment' }
     & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
     & { user: (
-      { __typename?: 'User' }
+      { __typename: 'User' }
       & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
     ), likes: Array<(
-      { __typename?: 'Like' }
+      { __typename: 'Like' }
       & Pick<Types.Like, 'id' | 'userId'>
     )>, replies: Array<(
       { __typename?: 'Comment' }
@@ -87,6 +87,16 @@ export type CommentDetailsQuery = (
         ), likes: Array<(
           { __typename?: 'Like' }
           & Pick<Types.Like, 'id' | 'userId'>
+        )>, parent?: Types.Maybe<(
+          { __typename?: 'Comment' }
+          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
+          ), likes: Array<(
+            { __typename?: 'Like' }
+            & Pick<Types.Like, 'id' | 'userId'>
+          )> }
         )> }
       )> }
     )> }
@@ -111,7 +121,10 @@ export type InsertOneCommentMutation = (
 
 export const CommentTreeDocument = gql`
     query commentTree($pageId: uuid!) {
-  comments(where: {pageId: {_eq: $pageId}, parentId: {_is_null: true}}) {
+  comments(
+    where: {pageId: {_eq: $pageId}, parentId: {_is_null: true}}
+    order_by: {likes_aggregate: {count: desc}, createdAt: asc}
+  ) {
     id
     content
     createdAt
@@ -126,7 +139,7 @@ export const CommentTreeDocument = gql`
       id
       userId
     }
-    replies {
+    replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
       id
       content
       createdAt
@@ -141,7 +154,7 @@ export const CommentTreeDocument = gql`
         id
         userId
       }
-      replies {
+      replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
         id
         content
         createdAt
@@ -201,12 +214,14 @@ export const CommentDetailsDocument = gql`
       id
       displayName
       avatar
+      __typename
     }
     likes {
       id
       userId
+      __typename
     }
-    replies {
+    replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
       id
       content
       createdAt
@@ -251,6 +266,22 @@ export const CommentDetailsDocument = gql`
         likes {
           id
           userId
+        }
+        parent {
+          id
+          content
+          createdAt
+          parentId
+          pageId
+          user {
+            id
+            displayName
+            avatar
+          }
+          likes {
+            id
+            userId
+          }
         }
       }
     }
