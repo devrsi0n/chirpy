@@ -7,6 +7,7 @@ import {
   GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
+import superjson from 'superjson';
 import tw from 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
@@ -166,7 +167,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       revalidate: 1,
     };
   } catch (error) {
-    console.error(error);
+    console.error(superjson.stringify(error));
     throw new Error(error);
   }
 };
