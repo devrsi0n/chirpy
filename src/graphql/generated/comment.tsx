@@ -12,7 +12,7 @@ export type CommentTreeQuery = (
   { __typename?: 'query_root' }
   & { comments: Array<(
     { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
     & { user: (
       { __typename?: 'User' }
       & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -21,7 +21,7 @@ export type CommentTreeQuery = (
       & Pick<Types.Like, 'id' | 'userId'>
     )>, replies: Array<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
       & { user: (
         { __typename?: 'User' }
         & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -30,7 +30,7 @@ export type CommentTreeQuery = (
         & Pick<Types.Like, 'id' | 'userId'>
       )>, replies: Array<(
         { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
         & { user: (
           { __typename?: 'User' }
           & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -52,7 +52,7 @@ export type CommentDetailsQuery = (
   { __typename?: 'query_root' }
   & { commentByPk?: Types.Maybe<(
     { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
     & { user: (
       { __typename: 'User' }
       & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -61,7 +61,7 @@ export type CommentDetailsQuery = (
       & Pick<Types.Like, 'id' | 'userId'>
     )>, replies: Array<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
       & { user: (
         { __typename?: 'User' }
         & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -71,7 +71,7 @@ export type CommentDetailsQuery = (
       )> }
     )>, parent?: Types.Maybe<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
       & { user: (
         { __typename?: 'User' }
         & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -80,7 +80,7 @@ export type CommentDetailsQuery = (
         & Pick<Types.Like, 'id' | 'userId'>
       )>, parent?: Types.Maybe<(
         { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
         & { user: (
           { __typename?: 'User' }
           & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -89,7 +89,7 @@ export type CommentDetailsQuery = (
           & Pick<Types.Like, 'id' | 'userId'>
         )>, parent?: Types.Maybe<(
           { __typename?: 'Comment' }
-          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId'>
+          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
           & { user: (
             { __typename?: 'User' }
             & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
@@ -107,6 +107,7 @@ export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
   parentId?: Types.Maybe<Types.Scalars['uuid']>;
   pageId: Types.Scalars['uuid'];
+  depth: Types.Scalars['Int'];
 }>;
 
 
@@ -130,6 +131,7 @@ export const CommentTreeDocument = gql`
     createdAt
     parentId
     pageId
+    depth
     user {
       id
       displayName
@@ -145,6 +147,7 @@ export const CommentTreeDocument = gql`
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -160,6 +163,7 @@ export const CommentTreeDocument = gql`
         createdAt
         parentId
         pageId
+        depth
         user {
           id
           displayName
@@ -210,6 +214,7 @@ export const CommentDetailsDocument = gql`
     createdAt
     parentId
     pageId
+    depth
     user {
       id
       displayName
@@ -227,6 +232,7 @@ export const CommentDetailsDocument = gql`
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -243,6 +249,7 @@ export const CommentDetailsDocument = gql`
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -258,6 +265,7 @@ export const CommentDetailsDocument = gql`
         createdAt
         parentId
         pageId
+        depth
         user {
           id
           displayName
@@ -273,6 +281,7 @@ export const CommentDetailsDocument = gql`
           createdAt
           parentId
           pageId
+          depth
           user {
             id
             displayName
@@ -317,9 +326,9 @@ export type CommentDetailsQueryHookResult = ReturnType<typeof useCommentDetailsQ
 export type CommentDetailsLazyQueryHookResult = ReturnType<typeof useCommentDetailsLazyQuery>;
 export type CommentDetailsQueryResult = Apollo.QueryResult<CommentDetailsQuery, CommentDetailsQueryVariables>;
 export const InsertOneCommentDocument = gql`
-    mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
+    mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $depth: Int!) {
   insertOneComment(
-    object: {content: $content, parentId: $parentId, pageId: $pageId}
+    object: {content: $content, parentId: $parentId, pageId: $pageId, depth: $depth}
   ) {
     id
   }
@@ -343,6 +352,7 @@ export type InsertOneCommentMutationFn = Apollo.MutationFunction<InsertOneCommen
  *      content: // value for 'content'
  *      parentId: // value for 'parentId'
  *      pageId: // value for 'pageId'
+ *      depth: // value for 'depth'
  *   },
  * });
  */

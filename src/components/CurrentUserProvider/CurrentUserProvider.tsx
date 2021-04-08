@@ -12,12 +12,12 @@ export type CurrentUserProviderProps = React.PropsWithChildren<{
 }>;
 
 export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Element {
-  const id = typeof window !== 'undefined' ? atob(Cookies.get(USER_COOKIE_NAME) || '') : '';
   const { data, ...restProps } = useUserByPkQuery({
-    variables: {
-      id,
-    },
     ...props.apolloBaseOptions,
+    variables: {
+      id: getId(),
+    },
+    fetchPolicy: 'network-only',
   });
   const value = React.useMemo<CurrentUserContextType>(
     () => ({
@@ -29,4 +29,8 @@ export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Elemen
   );
 
   return <CurrentUserContext.Provider value={value}>{props.children}</CurrentUserContext.Provider>;
+}
+
+function getId(): string {
+  return typeof window !== 'undefined' ? atob(Cookies.get(USER_COOKIE_NAME) || '') : '';
 }

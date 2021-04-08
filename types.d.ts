@@ -9,7 +9,8 @@ declare namespace NodeJS {
     GOOGLE_CLIENT_SECRET: string;
     GITHUB_CLIENT_ID: string;
     GITHUB_CLIENT_SECRET: string;
-    NEXT_PUBLIC_HASURA_HOST: string;
+    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: string;
+    NEXT_PUBLIC_HASURA_WS_ORIGIN: string;
   }
 }
 

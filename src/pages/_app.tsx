@@ -9,6 +9,7 @@ import * as React from 'react';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
+import { ToastProvider } from '$/components/Toast';
 import { useApollo } from '$/lib/apollo-client';
 
 dayjs.extend(relativeTime);
@@ -24,7 +25,9 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
         <LazyMotion features={loadFeatures} strict>
           <ApolloProvider client={apollo}>
             <CurrentUserProvider>
-              <Component {...pageProps} />
+              <ToastProvider>
+                <Component {...pageProps} />
+              </ToastProvider>
             </CurrentUserProvider>
           </ApolloProvider>
         </LazyMotion>
