@@ -4,10 +4,10 @@ import { Auth } from '$/blocks/Auth';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 
-export default function SignIn(): JSX.Element {
+export default function LogIn(): JSX.Element {
   return (
     <Auth
-      name="Sign in"
+      name="Log in"
       title="Welcome back 👋"
       subtitle={
         <div tw="flex flex-row space-x-1">

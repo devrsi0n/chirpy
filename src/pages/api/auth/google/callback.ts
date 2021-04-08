@@ -8,6 +8,6 @@ export default connect<NextApiRequest, NextApiResponse>({
   onError: handleInternalLoginFailure,
 }).use(
   passport.initialize(),
-  passport.authenticate('google', { failureRedirect: '/sign-in' }),
+  passport.authenticate('google', { failureRedirect: '/log-in' }),
   handleSuccessfulLogin,
 );

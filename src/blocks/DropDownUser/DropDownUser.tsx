@@ -1,5 +1,4 @@
 import LogOut from '@geist-ui/react-icons/logOut';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -7,6 +6,7 @@ import { Avatar } from '$/components/Avatar';
 import { Divider } from '$/components/Divider';
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { Toggle } from '$/components/Toggle';
+import { LOG_OUT_SUCCESS_KEY } from '$/lib/constants';
 
 export type DropDownUserProps = {
   avatar?: string;
@@ -14,12 +14,11 @@ export type DropDownUserProps = {
 };
 
 export function DropDownUser(props: DropDownUserProps): JSX.Element {
-  const router = useRouter();
   const handleClickLogOut = React.useCallback(() => {
-    const url = new URL('/api/auth/logout', process.env.NEXT_PUBLIC_APP_URL);
-    url.searchParams.set('redirectURL', window.location.href);
-    router.push(url.toString());
-  }, [router]);
+    fetch('/api/auth/logout').then(() => {
+      window.localStorage.setItem(LOG_OUT_SUCCESS_KEY, 'true');
+    });
+  }, []);
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   return (

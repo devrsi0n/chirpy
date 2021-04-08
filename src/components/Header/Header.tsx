@@ -119,10 +119,10 @@ export function Header(): JSX.Element {
               </DropDownMenu>
             ) : (
               <div tw="flex flex-row items-center space-x-2">
-                <Link href="/sign-in" variant="plain" disableUnderline>
+                <Link href="/log-in" variant="plain" disableUnderline>
                   <Button color="gray" variant="plain" tw="space-x-1">
                     {signInLoading && <SpinnerIcon tw="text-gray-400" />}
-                    <span>Sign in</span>
+                    <span>Log in</span>
                   </Button>
                 </Link>
                 <Link href="/sign-up" variant="plain" disableUnderline>

@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - https://totalk.centralus.azurecontainer.io/v1/graphql:
+  - http://localhost:8080/v1/graphql:
       headers:
         X-Hasura-Admin-Secret: '&DJET64U^WZs'
 documents: 'server/**/*.graphql'

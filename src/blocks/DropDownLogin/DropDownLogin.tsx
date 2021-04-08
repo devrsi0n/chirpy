@@ -1,26 +1,35 @@
 import * as React from 'react';
 // @ts-ignore
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
-// import { useRouter } from 'next/router';
 import 'twin.macro';
 import tw from 'twin.macro';
 
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { GoogleIcon } from '$/components/Icons';
+import { useStorageListener } from '$/hooks/useMessageListener';
+import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type DropDownLoginProps = {
   //
 };
 
-const handleClickLoginOption = (option: 'google' | 'github') => {
-  return () => {
-    popupCenterWindow(`/api/auth/${option}`, '_blank', 480, 760);
-  };
-};
-
 export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
+  const loginWinow = React.useRef<Window | null>(null);
+  const handleClickLoginOption = (provider: 'google' | 'github') => {
+    return () => {
+      loginWinow.current = popupCenterWindow(`/api/auth/${provider}`, '_blank', 480, 760);
+    };
+  };
+
+  useStorageListener((event) => {
+    if (event.key === LOG_IN_SUCCESS_KEY) {
+      loginWinow.current?.close();
+      loginWinow.current = null;
+    }
+  });
+
   return (
-    <DropDownMenu content="Login" shape="square">
+    <DropDownMenu content="Log in" shape="square">
       <DropDownMenu.Item css={itemStyle} onClick={handleClickLoginOption('google')}>
         <GoogleIcon width={20} height={20} />
         <span>Google</span>
@@ -66,7 +75,6 @@ function popupCenterWindow(
   features.push('left=' + left, 'top=' + right, 'scrollbars=1');
 
   const newWindow = window.open(url, title, features.join(','));
-
   newWindow?.focus();
 
   return newWindow;

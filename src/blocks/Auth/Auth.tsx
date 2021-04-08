@@ -11,7 +11,7 @@ import { Text } from '$/components/Text';
 import { authOptions } from './DataSource';
 
 export type AuthProps = React.PropsWithChildren<{
-  name: 'Sign in' | 'Sign up';
+  name: 'Log in' | 'Sign up';
   title: string;
   subtitle?: React.ReactNode;
 }>;
@@ -63,6 +63,6 @@ const bannerStyle = css`
   width: 100%;
   height: 100vh;
   min-height: 200px;
-  background: url('/images/sign-in/banner.jpg') center no-repeat;
+  background: url('/images/log-in/banner.jpg') center no-repeat;
   background-size: cover;
 `;

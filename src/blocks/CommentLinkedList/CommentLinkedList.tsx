@@ -42,6 +42,7 @@ export function CommentLinkedList({
               content={_comment.content}
               author={_comment.user}
               likes={_comment.likes}
+              depth={_comment.depth}
               createdAt={_comment.createdAt}
               onSubmitReply={onSubmitReply}
               onClickLikeAction={onClickLikeAction}
@@ -65,6 +66,7 @@ export function CommentLinkedList({
                 content={reply.content}
                 author={reply.user}
                 likes={reply.likes}
+                depth={reply.depth}
                 createdAt={reply.createdAt}
                 onClickLikeAction={onClickLikeAction}
                 onSubmitReply={onSubmitReply}
@@ -103,7 +105,7 @@ function ParentBranch(props: ParentBranchProps): JSX.Element {
             height: ${branchHeight}rem;
             content: '';
             border-left-width: 1px;
-            ${tw`border-gray-300`}
+            ${tw`border-gray-200`}
           }
 
           &:first-of-type:before {
