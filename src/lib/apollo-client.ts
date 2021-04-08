@@ -22,7 +22,7 @@ let cachedApolloClient:
 // Used in server
 const getHttpLink = (headers: Record<string, string> | null) => {
   const link = createHttpLink({
-    uri: `https://${process.env.NEXT_PUBLIC_HASURA_HOST}/v1/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
     credentials: `include`,
     headers, // auth token is fetched on the server side
   });
@@ -32,7 +32,7 @@ const getHttpLink = (headers: Record<string, string> | null) => {
 // Used in browser
 const createWSLink = () => {
   return new WebSocketLink({
-    uri: `wss://${process.env.NEXT_PUBLIC_HASURA_HOST}/v1/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
     options: {
       lazy: true,
       reconnect: true,

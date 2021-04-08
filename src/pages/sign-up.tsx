@@ -12,8 +12,8 @@ export default function SignUp(): JSX.Element {
       subtitle={
         <div tw="flex flex-row space-x-1">
           <Text tw="text-gray-500">Already have an account?</Text>
-          <Link href="/sign-in" variant="nav">
-            Sign in
+          <Link href="/log-in" variant="nav">
+            Log in
           </Link>
         </div>
       }

@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, createHttpLink, NormalizedCacheObject } fr
 
 function getHttpLink() {
   const link = createHttpLink({
-    uri: `https://${process.env.NEXT_PUBLIC_HASURA_HOST}/v1/graphql`,
+    uri: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
     // credentials: `include`,
     headers: {
       'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,

@@ -18,24 +18,23 @@ import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
 import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
+import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
-import { Tabs } from '$/components/Tabs';
 import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { useNotifyHostPageOfHeight } from '$/hooks/useNotifyHostPageOfHeight';
+import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { CommentLeafType } from '$/types/widget';
 import { getQueryCommentTreeDoc, getSubscribeCommentTreeDoc } from '$/utilities/comment-request';
+import { getCommentCount } from '$/utilities/get-comment-count';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 // Demo: http://localhost:3000/widget/comment/ckiwwumiv0001uzcv79wjhagt
 
-const COMMENT_TAB_VALUE = 'Comment';
-
 /**
- * Comment widget for a page
+ * Comment tree widget for a page
  * @param props
  */
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
@@ -60,49 +59,49 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
 
   const handleClickLikeAction = useToggleALikeAction();
 
-  useNotifyHostPageOfHeight();
+  useNotifyHostHeightOfPage();
 
   if (error) {
     return <p>{error}</p>;
   }
+  // TODO: resolve this comments undefined error
+  if (!comments) {
+    return <p>Wrong page.</p>;
+  }
+  const commentCount = getCommentCount(comments);
 
   return (
     <Layout noFooter noHeader>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
-      <Tabs
-        initialValue={COMMENT_TAB_VALUE}
-        rightItems={
-          isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />
-        }
-      >
-        <Tabs.Item label={`Comments`} value={COMMENT_TAB_VALUE}>
-          <div css={tw`space-y-7`}>
-            <div css={tw`space-y-2`}>
-              <RichTextEditor
-                onSubmit={handleSubmitReply}
-                postButtonLabel={!isLogin ? 'Login' : undefined}
-              />
-            </div>
-
-            <ul>
-              {comments?.map((comment: CommentLeafType) => (
-                <CommentTree
-                  key={comment.id}
-                  comment={comment}
-                  onClickLikeAction={handleClickLikeAction}
-                  onSubmitReply={handleSubmitReply}
-                />
-              ))}
-            </ul>
+      <div css={tw`space-y-4`}>
+        <div tw="flex flex-row justify-between items-end">
+          <Heading as="h3" tw="text-2xl">
+            {formatTitle(commentCount)}
+          </Heading>
+          {isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />}
+        </div>
+        <div css={tw`space-y-7`}>
+          <div css={tw`space-y-2`}>
+            <RichTextEditor
+              onSubmit={handleSubmitReply}
+              postButtonLabel={!isLogin ? 'Log in' : undefined}
+            />
           </div>
-        </Tabs.Item>
-        <Tabs.Item
-          label={process.env.NEXT_PUBLIC_APP_NAME}
-          value={process.env.NEXT_PUBLIC_APP_NAME}
-        />
-      </Tabs>
+
+          <ul>
+            {comments?.map((comment: CommentLeafType) => (
+              <CommentTree
+                key={comment.id}
+                comment={comment}
+                onClickLikeAction={handleClickLikeAction}
+                onSubmitReply={handleSubmitReply}
+              />
+            ))}
+          </ul>
+        </div>
+      </div>
       <PoweredBy />
     </Layout>
   );
@@ -161,7 +160,6 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       return { notFound: true };
     }
     const { comments } = pageResult.data;
-
     return {
       props: { comments, pageId },
       revalidate: 1,
@@ -174,4 +172,13 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
 
 function isStaticError(props: $TsAny): props is StaticError {
   return !!props.error;
+}
+
+function formatTitle(count: number): string {
+  if (count === 0) {
+    return 'Comment';
+  } else if (count === 1) {
+    return '1 comment';
+  }
+  return `${count} comments`;
 }

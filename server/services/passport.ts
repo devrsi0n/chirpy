@@ -150,8 +150,7 @@ export async function handleSuccessfulLogin(
     cookieOptions,
   );
   res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
-  const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
-  redirect(res, redirectURL || '/');
+  redirect(res, '/log-in-success');
 }
 
 export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
@@ -160,6 +159,9 @@ export async function handleLogout(req: NextApiRequest, res: NextApiResponse): P
   const userIdCookie = serialize(USER_COOKIE_NAME, '', cookieOptions);
 
   res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
-  const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
-  redirect(res, redirectURL || '/');
+  // const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
+  // redirect(res, redirectURL || '/');
+  res.json({
+    logout: 'ok',
+  });
 }

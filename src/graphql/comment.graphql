@@ -10,6 +10,7 @@ query commentTree($pageId: uuid!) {
     createdAt
     parentId
     pageId
+    depth
     user {
       id
       displayName
@@ -25,6 +26,7 @@ query commentTree($pageId: uuid!) {
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -40,6 +42,7 @@ query commentTree($pageId: uuid!) {
         createdAt
         parentId
         pageId
+        depth
         user {
           id
           displayName
@@ -63,6 +66,7 @@ query commentDetails($id: uuid!) {
     createdAt
     parentId
     pageId
+    depth
     user {
       id
       displayName
@@ -80,6 +84,7 @@ query commentDetails($id: uuid!) {
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -96,6 +101,7 @@ query commentDetails($id: uuid!) {
       createdAt
       parentId
       pageId
+      depth
       user {
         id
         displayName
@@ -111,6 +117,7 @@ query commentDetails($id: uuid!) {
         createdAt
         parentId
         pageId
+        depth
         user {
           id
           displayName
@@ -126,6 +133,7 @@ query commentDetails($id: uuid!) {
           createdAt
           parentId
           pageId
+          depth
           user {
             id
             displayName
@@ -141,8 +149,10 @@ query commentDetails($id: uuid!) {
   }
 }
 
-mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
-  insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
+mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $depth: Int!) {
+  insertOneComment(
+    object: { content: $content, parentId: $parentId, pageId: $pageId, depth: $depth }
+  ) {
     id
   }
 }

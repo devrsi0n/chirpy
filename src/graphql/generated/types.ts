@@ -431,6 +431,7 @@ export type Comment = {
   __typename?: 'Comment';
   content: Scalars['jsonb'];
   createdAt: Scalars['timestamptz'];
+  depth: Scalars['Int'];
   id: Scalars['uuid'];
   /** An array relationship */
   likes: Array<Like>;
@@ -508,9 +509,17 @@ export type Comment_Aggregate = {
 /** aggregate fields of "Comment" */
 export type Comment_Aggregate_Fields = {
   __typename?: 'Comment_aggregate_fields';
+  avg?: Maybe<Comment_Avg_Fields>;
   count?: Maybe<Scalars['Int']>;
   max?: Maybe<Comment_Max_Fields>;
   min?: Maybe<Comment_Min_Fields>;
+  stddev?: Maybe<Comment_Stddev_Fields>;
+  stddev_pop?: Maybe<Comment_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Comment_Stddev_Samp_Fields>;
+  sum?: Maybe<Comment_Sum_Fields>;
+  var_pop?: Maybe<Comment_Var_Pop_Fields>;
+  var_samp?: Maybe<Comment_Var_Samp_Fields>;
+  variance?: Maybe<Comment_Variance_Fields>;
 };
 
 
@@ -522,9 +531,17 @@ export type Comment_Aggregate_FieldsCountArgs = {
 
 /** order by aggregate values of table "Comment" */
 export type Comment_Aggregate_Order_By = {
+  avg?: Maybe<Comment_Avg_Order_By>;
   count?: Maybe<Order_By>;
   max?: Maybe<Comment_Max_Order_By>;
   min?: Maybe<Comment_Min_Order_By>;
+  stddev?: Maybe<Comment_Stddev_Order_By>;
+  stddev_pop?: Maybe<Comment_Stddev_Pop_Order_By>;
+  stddev_samp?: Maybe<Comment_Stddev_Samp_Order_By>;
+  sum?: Maybe<Comment_Sum_Order_By>;
+  var_pop?: Maybe<Comment_Var_Pop_Order_By>;
+  var_samp?: Maybe<Comment_Var_Samp_Order_By>;
+  variance?: Maybe<Comment_Variance_Order_By>;
 };
 
 /** append existing jsonb value of filtered columns with new jsonb value */
@@ -538,6 +555,17 @@ export type Comment_Arr_Rel_Insert_Input = {
   on_conflict?: Maybe<Comment_On_Conflict>;
 };
 
+/** aggregate avg on columns */
+export type Comment_Avg_Fields = {
+  __typename?: 'Comment_avg_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "Comment" */
+export type Comment_Avg_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "Comment". All fields are combined with a logical 'AND'. */
 export type Comment_Bool_Exp = {
   _and?: Maybe<Array<Maybe<Comment_Bool_Exp>>>;
@@ -545,6 +573,7 @@ export type Comment_Bool_Exp = {
   _or?: Maybe<Array<Maybe<Comment_Bool_Exp>>>;
   content?: Maybe<Jsonb_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  depth?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   likes?: Maybe<Like_Bool_Exp>;
   page?: Maybe<Page_Bool_Exp>;
@@ -578,10 +607,16 @@ export type Comment_Delete_Key_Input = {
   content?: Maybe<Scalars['String']>;
 };
 
+/** input type for incrementing integer column in table "Comment" */
+export type Comment_Inc_Input = {
+  depth?: Maybe<Scalars['Int']>;
+};
+
 /** input type for inserting data into table "Comment" */
 export type Comment_Insert_Input = {
   content?: Maybe<Scalars['jsonb']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   likes?: Maybe<Like_Arr_Rel_Insert_Input>;
   page?: Maybe<Page_Obj_Rel_Insert_Input>;
@@ -598,6 +633,7 @@ export type Comment_Insert_Input = {
 export type Comment_Max_Fields = {
   __typename?: 'Comment_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
   parentId?: Maybe<Scalars['uuid']>;
@@ -608,6 +644,7 @@ export type Comment_Max_Fields = {
 /** order by max() on columns of table "Comment" */
 export type Comment_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
+  depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   pageId?: Maybe<Order_By>;
   parentId?: Maybe<Order_By>;
@@ -619,6 +656,7 @@ export type Comment_Max_Order_By = {
 export type Comment_Min_Fields = {
   __typename?: 'Comment_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
   parentId?: Maybe<Scalars['uuid']>;
@@ -629,6 +667,7 @@ export type Comment_Min_Fields = {
 /** order by min() on columns of table "Comment" */
 export type Comment_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
+  depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   pageId?: Maybe<Order_By>;
   parentId?: Maybe<Order_By>;
@@ -662,6 +701,7 @@ export type Comment_On_Conflict = {
 export type Comment_Order_By = {
   content?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
+  depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   likes_aggregate?: Maybe<Like_Aggregate_Order_By>;
   page?: Maybe<Page_Order_By>;
@@ -691,6 +731,8 @@ export enum Comment_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  Depth = 'depth',
+  /** column name */
   Id = 'id',
   /** column name */
   PageId = 'pageId',
@@ -706,11 +748,56 @@ export enum Comment_Select_Column {
 export type Comment_Set_Input = {
   content?: Maybe<Scalars['jsonb']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
   parentId?: Maybe<Scalars['uuid']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type Comment_Stddev_Fields = {
+  __typename?: 'Comment_stddev_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "Comment" */
+export type Comment_Stddev_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Comment_Stddev_Pop_Fields = {
+  __typename?: 'Comment_stddev_pop_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "Comment" */
+export type Comment_Stddev_Pop_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Comment_Stddev_Samp_Fields = {
+  __typename?: 'Comment_stddev_samp_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "Comment" */
+export type Comment_Stddev_Samp_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Comment_Sum_Fields = {
+  __typename?: 'Comment_sum_fields';
+  depth?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "Comment" */
+export type Comment_Sum_Order_By = {
+  depth?: Maybe<Order_By>;
 };
 
 /** update columns of table "Comment" */
@@ -719,6 +806,8 @@ export enum Comment_Update_Column {
   Content = 'content',
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  Depth = 'depth',
   /** column name */
   Id = 'id',
   /** column name */
@@ -730,6 +819,52 @@ export enum Comment_Update_Column {
   /** column name */
   UserId = 'userId'
 }
+
+/** aggregate var_pop on columns */
+export type Comment_Var_Pop_Fields = {
+  __typename?: 'Comment_var_pop_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "Comment" */
+export type Comment_Var_Pop_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Comment_Var_Samp_Fields = {
+  __typename?: 'Comment_var_samp_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "Comment" */
+export type Comment_Var_Samp_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Comment_Variance_Fields = {
+  __typename?: 'Comment_variance_fields';
+  depth?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "Comment" */
+export type Comment_Variance_Order_By = {
+  depth?: Maybe<Order_By>;
+};
+
+/** expression to compare columns of type Int. All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: Maybe<Scalars['Int']>;
+  _gt?: Maybe<Scalars['Int']>;
+  _gte?: Maybe<Scalars['Int']>;
+  _in?: Maybe<Array<Scalars['Int']>>;
+  _is_null?: Maybe<Scalars['Boolean']>;
+  _lt?: Maybe<Scalars['Int']>;
+  _lte?: Maybe<Scalars['Int']>;
+  _neq?: Maybe<Scalars['Int']>;
+  _nin?: Maybe<Array<Scalars['Int']>>;
+};
 
 /** columns and relationships of "Like" */
 export type Like = {
@@ -3119,6 +3254,7 @@ export type Mutation_RootUpdateCommentByPkArgs = {
   _delete_at_path?: Maybe<Comment_Delete_At_Path_Input>;
   _delete_elem?: Maybe<Comment_Delete_Elem_Input>;
   _delete_key?: Maybe<Comment_Delete_Key_Input>;
+  _inc?: Maybe<Comment_Inc_Input>;
   _prepend?: Maybe<Comment_Prepend_Input>;
   _set?: Maybe<Comment_Set_Input>;
   pk_columns: Comment_Pk_Columns_Input;
@@ -3131,6 +3267,7 @@ export type Mutation_RootUpdateCommentsArgs = {
   _delete_at_path?: Maybe<Comment_Delete_At_Path_Input>;
   _delete_elem?: Maybe<Comment_Delete_Elem_Input>;
   _delete_key?: Maybe<Comment_Delete_Key_Input>;
+  _inc?: Maybe<Comment_Inc_Input>;
   _prepend?: Maybe<Comment_Prepend_Input>;
   _set?: Maybe<Comment_Set_Input>;
   where: Comment_Bool_Exp;

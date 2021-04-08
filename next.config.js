@@ -4,14 +4,17 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const customConfig = {
+  future: {
+    webpack5: true,
+  },
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-    if (!isServer) {
-      config.node = { fs: 'empty', module: 'empty' };
-    }
+    // if (!isServer) {
+    //   config.node = { fs: 'empty', module: 'empty' };
+    // }
 
     return config;
   },

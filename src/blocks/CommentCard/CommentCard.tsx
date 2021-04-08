@@ -11,6 +11,9 @@ import { ActionButton } from '$/components/Button';
 import { MessageIcon } from '$/components/Icons';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { useToastContext } from '$/components/Toast';
+import { SubmitHandler } from '$/hooks/useCreateAComment';
+import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 
 import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import RichTextEditor, { RTEValue } from '../RichTextEditor/RichTextEditor';
@@ -21,7 +24,6 @@ export type Author = {
   avatar?: string | null;
 };
 
-export type SubmitReplyHandler = (value: RTEValue, commentId: string) => Promise<void>;
 export type { ClickLikeActionHandler };
 
 export type CommentCardProps = {
@@ -31,8 +33,9 @@ export type CommentCardProps = {
   createdAt: string;
   likes: Like[];
   disableLink?: boolean;
+  depth: number;
 
-  onSubmitReply: SubmitReplyHandler;
+  onSubmitReply: SubmitHandler;
   onClickLikeAction: ClickLikeActionHandler;
 };
 
@@ -40,6 +43,7 @@ export function CommentCard({
   commentId,
   author,
   content,
+  depth,
   createdAt,
   likes,
   disableLink,
@@ -49,13 +53,17 @@ export function CommentCard({
   const { avatar, displayName } = author;
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-  const handlePressReply = React.useCallback(() => {
-    setShowReplyEditor((prev) => !prev);
-  }, []);
+
+  const { showToast } = useToastContext();
+  const disabledReply: boolean = depth === COMMENT_TREE_MAX_DEPTH;
+
   const handleSubmitReply = async (replyContent: RTEValue) => {
-    await onSubmitReply(replyContent, commentId);
+    await onSubmitReply(replyContent, commentId, depth);
     setShowReplyEditor(false);
-    // TODO: Notification
+    showToast({
+      type: 'success',
+      title: 'Repied successfully!',
+    });
   };
   const handleDimissRTE = () => {
     setShowReplyEditor(false);
@@ -63,12 +71,21 @@ export function CommentCard({
   const detailsURL = `/widget/comment/details/${commentId}`;
 
   const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
+
   const handleClickLinkAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (disableLink) {
       e.preventDefault();
       setContainerAnimate('shake');
     }
   };
+
+  const handlePressReply = React.useCallback(() => {
+    if (disabledReply) {
+      setContainerAnimate('shake');
+      return;
+    }
+    setShowReplyEditor((prev) => !prev);
+  }, []);
 
   return (
     <m.article
@@ -99,6 +116,7 @@ export function CommentCard({
           <LikeAction likes={likes} commentId={commentId} onClickLikeAction={onClickLikeAction} />
           <ActionButton
             color="blue"
+            disabled={disabledReply}
             icon={
               <MessageIcon
                 width={20}
