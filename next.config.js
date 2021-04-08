@@ -4,9 +4,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 const customConfig = {
-  future: {
-    webpack5: true,
-  },
+  // future: {
+  //   webpack5: true,
+  // },
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.svg$/,
