@@ -4,3 +4,4 @@ generated
 
 next.config.js
 tailwind.config.js
+cypress-examples
