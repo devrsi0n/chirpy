@@ -9,3 +9,5 @@ out/
 .cache
 public/*.js.map
 public/*.js
+cypress/screenshots/
+cypress/videos/
