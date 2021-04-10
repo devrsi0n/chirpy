@@ -1,12 +1,9 @@
 name: Vercel Preview URL Lighthouse Audit
-
-on:
-  issue_comment:
-    types: [edited]
-
+on: [deployment_status]
 jobs:
   generate_lighthouse_audit:
     timeout-minutes: 30
+    if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Add comment to PR
@@ -18,18 +15,14 @@ jobs:
           header: lighthouse
           message: |
             Running Lighthouse audit...
-      - name: Capture Vercel preview URL
-        id: vercel_preview_url
-        uses: aaron-binary/vercel-preview-url-action@v0.0.2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
       - name: Audit preview URL with Lighthouse
         id: lighthouse_audit
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
-            ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}
+            ${{ github.event.deployment_status.target_url }}
           uploadArtifacts: true
           temporaryPublicStorage: true
       - name: Format lighthouse score
