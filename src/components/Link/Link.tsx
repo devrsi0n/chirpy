@@ -17,7 +17,7 @@ type LinkProps = React.PropsWithChildren<
        */
       highlightMatch?: boolean;
       variant?: Variant;
-      disableUnderline?: boolean;
+      noUnderline?: boolean;
     }
 >;
 
@@ -41,7 +41,7 @@ export function Link(props: LinkProps): JSX.Element {
     prefetch,
     className = '',
     highlightMatch,
-    disableUnderline,
+    noUnderline: disableUnderline,
     variant = 'nav',
     children,
     ...restProps

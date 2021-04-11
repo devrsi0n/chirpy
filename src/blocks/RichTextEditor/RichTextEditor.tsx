@@ -1,5 +1,4 @@
 // @refresh reset
-import Lock from '@geist-ui/react-icons/lock';
 import Send from '@geist-ui/react-icons/send';
 import DismissIcon from '@geist-ui/react-icons/x';
 import '@tailwindcss/typography/dist/typography.min.css';
@@ -15,6 +14,7 @@ import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 
+import { SignInButton } from '../SignInButton';
 import { Element } from './Element';
 import { BaseFormatButton, MarkButton } from './FormatButton';
 import { Leaf } from './Leaf';
@@ -145,34 +145,22 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
               }}
               renderElement={Element}
               renderLeaf={Leaf}
-              // onDOMBeforeInput={(event: Event): void => {
-              //   switch ((event as InputEvent).inputType) {
-              //     case 'formatBold':
-              //       return CustomEditor.toggleFormat(editor, 'bold');
-              //     case 'formatItalic':
-              //       return CustomEditor.toggleFormat(editor, 'italic');
-              //     case 'formatUnderline':
-              //       return CustomEditor.toggleFormat(editor, 'underline');
-              //   }
-              // }}
             />
             {!readOnly && (
               <div tw="flex flex-row justify-end">
-                <Button
-                  color="purple"
-                  variant="solid"
-                  css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
-                  onClick={handleSubmitReply}
-                >
-                  {isLoading ? (
-                    <SpinnerIcon tw="text-gray-400" />
-                  ) : !isLogin ? (
-                    <Lock size="14" />
-                  ) : (
-                    <Send size="14" />
-                  )}
-                  <Text>{postButtonLabel || 'Post'}</Text>
-                </Button>
+                {isLogin ? (
+                  <Button
+                    color="purple"
+                    variant={'solid'}
+                    css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
+                    onClick={handleSubmitReply}
+                  >
+                    {isLoading ? <SpinnerIcon tw="text-gray-400" /> : <Send size="14" />}
+                    <Text>{postButtonLabel || 'Post'}</Text>
+                  </Button>
+                ) : (
+                  <SignInButton variant="plain" />
+                )}
               </div>
             )}
           </section>

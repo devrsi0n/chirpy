@@ -1,48 +1,34 @@
 import * as React from 'react';
-// @ts-ignore
-import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
-import 'twin.macro';
-import tw from 'twin.macro';
 
-import { DropDownMenu } from '$/components/DropDownMenu';
-import { GoogleIcon } from '$/components/Icons';
-import { useStorageListener } from '$/hooks/useMessageListener';
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
-export type DropDownLoginProps = {
-  //
+import { useStorageListener } from './useMessageListener';
+
+export type usePopupWindowOptions = {
+  url: string;
+  width?: number;
+  height?: number;
 };
 
-export function DropDownLogin(props: DropDownLoginProps): JSX.Element {
-  const loginWinow = React.useRef<Window | null>(null);
-  const handleClickLoginOption = (provider: 'google' | 'github') => {
-    return () => {
-      loginWinow.current = popupCenterWindow(`/api/auth/${provider}`, '_blank', 480, 760);
-    };
+export function usePopupWindow({
+  url,
+  width = 480,
+  height = 760,
+}: usePopupWindowOptions): () => void {
+  const popupWindow = React.useRef<Window | null>(null);
+  const handleClickSignIn = () => {
+    popupWindow.current = popupCenterWindow(url, '_blank', width, height);
   };
 
   useStorageListener((event) => {
     if (event.key === LOG_IN_SUCCESS_KEY) {
-      loginWinow.current?.close();
-      loginWinow.current = null;
+      popupWindow.current?.close();
+      popupWindow.current = null;
     }
   });
 
-  return (
-    <DropDownMenu content="Log in" shape="square">
-      <DropDownMenu.Item css={itemStyle} onClick={handleClickLoginOption('google')}>
-        <GoogleIcon width={20} height={20} />
-        <span>Google</span>
-      </DropDownMenu.Item>
-      <DropDownMenu.Item css={itemStyle} onClick={handleClickLoginOption('github')}>
-        <GitHubLogo width={18} height={18} />
-        <span>GitHub</span>
-      </DropDownMenu.Item>
-    </DropDownMenu>
-  );
+  return handleClickSignIn;
 }
-
-const itemStyle = tw`flex flex-row justify-end space-x-4`;
 
 function popupCenterWindow(
   url: string,

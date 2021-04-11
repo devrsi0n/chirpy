@@ -5,24 +5,24 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
+import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
-import { Button } from '$/components/Button';
 import { SlashIcon } from '$/components/Icons/SlashIcon';
 import { Link } from '$/components/Link';
 import { Select } from '$/components/Select';
 import { CurrentUserContextType } from '$/context/CurrentUserContext';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { useLogout } from '$/hooks/useLogout';
 
 import { IconButton } from '../Button';
 import { DropDownMenu } from '../DropDownMenu';
-import { SpinnerIcon } from '../Icons';
 import { Logo } from '../Logo';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
 
 export function Header(): JSX.Element {
-  const { projects, displayName, avatar, error, loading: signInLoading } = useCurrentUser();
+  const { projects, displayName, avatar, error } = useCurrentUser();
   const [selectedProject, setSelectedProject] = React.useState<Project>();
   React.useEffect(() => {
     if (projects?.length && !selectedProject) {
@@ -47,6 +47,8 @@ export function Header(): JSX.Element {
 
   const router = useRouter();
 
+  const handleClickLogOut = useLogout();
+
   if (error) {
     console.error('Get current user error:', error);
   }
@@ -55,7 +57,7 @@ export function Header(): JSX.Element {
       css={css`
         backdrop-filter: blur(15px);
       `}
-      tw="w-full py-5 transition duration-150 border-b sm:(sticky top-0 left-0 z-20) border-gray-300 dark:border-gray-700"
+      tw="w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-20) border-gray-300 dark:border-gray-700"
     >
       <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section tw="flex flex-row items-center justify-between">
@@ -105,32 +107,16 @@ export function Header(): JSX.Element {
           <div tw="flex">
             {displayName ? (
               <DropDownMenu content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}>
-                <DropDownMenu.Item tw="justify-end space-x-2">
-                  <Link
-                    href="/api/auth/logout"
-                    variant="plain"
-                    tw="flex flex-row items-center space-x-1"
-                  >
-                    <LogOut size={14} />
-                    <span>Logout</span>
-                  </Link>
+                <DropDownMenu.Item
+                  tw="justify-end flex flex-row items-center space-x-1"
+                  onClick={handleClickLogOut}
+                >
+                  <LogOut size={14} />
+                  <span>Logout</span>
                 </DropDownMenu.Item>
-                {/* <Divider /> */}
               </DropDownMenu>
             ) : (
-              <div tw="flex flex-row items-center space-x-2">
-                <Link href="/log-in" variant="plain" disableUnderline>
-                  <Button color="gray" variant="plain" tw="space-x-1">
-                    {signInLoading && <SpinnerIcon tw="text-gray-400" />}
-                    <span>Log in</span>
-                  </Button>
-                </Link>
-                <Link href="/sign-up" variant="plain" disableUnderline>
-                  <Button color="purple" variant="solid">
-                    Sign up
-                  </Button>
-                </Link>
-              </div>
+              <SignInButton />
             )}
           </div>
         </section>
