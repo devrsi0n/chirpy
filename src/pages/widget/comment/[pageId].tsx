@@ -14,10 +14,10 @@ import { getAdminApollo } from '$server/common/admin-apollo';
 import { PagesDocument } from '$server/graphql/generated/page';
 
 import { CommentTree } from '$/blocks/CommentTree/CommentTree';
-import { DropDownLogin } from '$/blocks/DropDownLogin/DropDownLogin';
-import { DropDownUser } from '$/blocks/DropDownUser/DropDownUser';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
+import { SignInButton } from '$/blocks/SignInButton';
+import { UserDropDown } from '$/blocks/UserDropDown/UserDropDown';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
@@ -53,7 +53,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
     },
   );
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments);
-  const { isLogin, avatar, displayName } = useCurrentUser();
+  const { isLogin } = useCurrentUser();
 
   const handleSubmitReply = useCreateAComment({ pageId });
 
@@ -80,13 +80,13 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
           <Heading as="h3" tw="text-2xl">
             {formatTitle(commentCount)}
           </Heading>
-          {isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />}
+          <UserDropDown />
         </div>
         <div css={tw`space-y-7`}>
           <div css={tw`space-y-2`}>
             <RichTextEditor
               onSubmit={handleSubmitReply}
-              postButtonLabel={!isLogin ? 'Log in' : undefined}
+              postButtonLabel={!isLogin ? 'Sign in' : undefined}
             />
           </div>
 

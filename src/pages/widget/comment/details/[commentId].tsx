@@ -13,16 +13,14 @@ import { getAdminApollo } from '$server/common/admin-apollo';
 import { CommentsDocument } from '$server/graphql/generated/comment';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
-import { DropDownLogin } from '$/blocks/DropDownLogin';
-import { DropDownUser } from '$/blocks/DropDownUser';
 import { PoweredBy } from '$/blocks/PoweredBy';
+import { UserDropDown } from '$/blocks/UserDropDown';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { CommentDetailsQuery, CommentDetailsQueryVariables } from '$/graphql/generated/comment';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { CommentDetailNode } from '$/types/widget';
 import {
@@ -45,8 +43,6 @@ export default function CommentDetailsWidget(
   );
   const comment = data?.commentByPk || props.comment;
 
-  const { isLogin, avatar, displayName } = useCurrentUser();
-
   return (
     <Layout noFooter noHeader>
       <div css={tw`flex flex-row justify-between items-center mb-4`}>
@@ -57,7 +53,7 @@ export default function CommentDetailsWidget(
           <span tw="font-bold">{comment?.user.displayName}</span>
           <span>'s comment details</span>
         </Heading>
-        {isLogin ? <DropDownUser avatar={avatar} name={displayName} /> : <DropDownLogin />}
+        <UserDropDown />
       </div>
       {comment?.id && (
         <CommentLinkedList
