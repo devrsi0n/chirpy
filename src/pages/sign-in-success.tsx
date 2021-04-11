@@ -13,6 +13,9 @@ function LogInSuccess(): JSX.Element {
   const router = useRouter();
   React.useEffect(() => {
     setTimeout(() => {
+      if (window.localStorage.getItem(LOG_IN_SUCCESS_KEY) === 'true') {
+        window.localStorage.setItem(LOG_IN_SUCCESS_KEY, '');
+      }
       window.localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
     }, 3000);
     setTimeout(() => {
@@ -31,7 +34,7 @@ function LogInSuccess(): JSX.Element {
           <div tw="text-green-500">
             <CheckInCircle />
           </div>
-          <Text tw="text-lg text-center ">Log in success, redirecting to the original page.</Text>
+          <Text tw="text-lg text-center ">Sign in success, redirecting to the original page.</Text>
         </div>
       </main>
     </Layout>

@@ -10,17 +10,16 @@ import { Text } from '$/components/Text';
 
 import { authOptions } from './DataSource';
 
-export type AuthProps = React.PropsWithChildren<{
-  name: 'Log in' | 'Sign up';
+export type SignInProps = React.PropsWithChildren<{
   title: string;
   subtitle?: React.ReactNode;
 }>;
 
-export function Auth({ name, title, subtitle }: AuthProps): JSX.Element {
+export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
   return (
     <>
       <Head>
-        <title>{name}</title>
+        <title>Sign in</title>
       </Head>
 
       <div tw="flex flex-row h-full">
@@ -39,13 +38,13 @@ export function Auth({ name, title, subtitle }: AuthProps): JSX.Element {
                   <Button tw="w-full" size="lg">
                     <option.icon width={`${option.size}px`} height={`${option.size}px`} />
                     <span tw="inline-block ml-2 text-left" style={{ width: '11.5rem' }}>
-                      {name} with {option.name}
+                      Sign in with {option.name}
                     </span>
                   </Button>
                 </Link>
               ))}
             </div>
-            <Text tw="py-3 text-gray-500" variant="sm">
+            <Text tw="py-3 text-gray-400" variant="sm">
               By clicking the buttons above, you acknowledge that you have read and understood, and
               agree to {process.env.NEXT_PUBLIC_APP_NAME}'s{' '}
               <Link href="/terms-of-service">Terms of Service</Link> and{' '}
@@ -63,6 +62,6 @@ const bannerStyle = css`
   width: 100%;
   height: 100vh;
   min-height: 200px;
-  background: url('/images/log-in/banner.jpg') center no-repeat;
+  background: url('/images/sign-in/banner.jpg') center no-repeat;
   background-size: cover;
 `;

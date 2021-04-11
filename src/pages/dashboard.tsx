@@ -56,7 +56,7 @@ export default function Dashboard(): JSX.Element {
   React.useEffect(() => {
     if (!isLogin) {
       timeout.current = window.setTimeout(() => {
-        router.push('/log-in');
+        router.push('/sign-in');
       }, 3000);
     } else {
       timeout.current && clearTimeout(timeout.current);

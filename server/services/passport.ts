@@ -150,7 +150,7 @@ export async function handleSuccessfulLogin(
     cookieOptions,
   );
   res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
-  redirect(res, '/log-in-success');
+  redirect(res, '/sign-in-success');
 }
 
 export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
