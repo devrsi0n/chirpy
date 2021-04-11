@@ -4,14 +4,14 @@ export function useClickOutside(
   ref: React.RefObject<HTMLElement>,
   callback: (didClick: boolean) => void,
 ): void {
-  const { current } = ref;
   const handleClickOutside = React.useCallback(
     (event: MouseEvent) => {
-      if (current && !current.contains(event.target as Node)) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         callback(true);
       }
     },
-    [callback, current],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [callback],
   );
   React.useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);

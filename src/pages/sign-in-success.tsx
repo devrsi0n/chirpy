@@ -13,6 +13,13 @@ function LogInSuccess(): JSX.Element {
   const router = useRouter();
   React.useEffect(() => {
     setTimeout(() => {
+      window.postMessage(
+        {
+          key: LOG_IN_SUCCESS_KEY,
+          value: 'true',
+        },
+        '*',
+      );
       if (window.localStorage.getItem(LOG_IN_SUCCESS_KEY) === 'true') {
         window.localStorage.setItem(LOG_IN_SUCCESS_KEY, '');
       }

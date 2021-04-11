@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-export function useMessageListener<T>(handler: (event: MessageEvent<T>) => void): void {
+export function useStorageListener(handler: (event: StorageEvent) => void): void {
   React.useEffect(() => {
-    window.addEventListener('message', handler);
-    return () => window.removeEventListener('message', handler);
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
   }, [handler]);
 }
