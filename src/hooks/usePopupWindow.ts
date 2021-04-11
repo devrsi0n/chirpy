@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
-import { useStorageListener } from './useMessageListener';
+import { useStorageListener } from './useStorageListener';
 
 export type usePopupWindowOptions = {
   url: string;

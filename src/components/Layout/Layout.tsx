@@ -2,8 +2,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useStorageListener } from '$/hooks/useMessageListener';
-import { LOG_IN_SUCCESS_KEY, LOG_OUT_SUCCESS_KEY } from '$/lib/constants';
+import { useReloadOnAuthentication } from '$/hooks/useReloadOnAuthentication';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
@@ -21,15 +20,7 @@ export function Layout({
   children,
   ...divProps
 }: ILayoutProps): JSX.Element {
-  useStorageListener((event) => {
-    if (LOG_IN_SUCCESS_KEY === event.key) {
-      window.localStorage.setItem(LOG_OUT_SUCCESS_KEY, '');
-      window.location.reload();
-    } else if (LOG_OUT_SUCCESS_KEY === event.key) {
-      window.localStorage.setItem(LOG_IN_SUCCESS_KEY, '');
-      window.location.reload();
-    }
-  });
+  useReloadOnAuthentication();
 
   return (
     <div {...divProps} css={[tw`min-h-full`, noContainer && tw`flex flex-col items-center`]}>
