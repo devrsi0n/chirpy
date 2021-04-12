@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { ClientOnly } from '../ClientOnly';
 import { ToastContainer } from './ToastContainer';
 import { ToastContext, Toast, ShowToastProps } from './ToastContext';
 
@@ -20,7 +21,9 @@ export function ToastProvider({ children }: ToastProviderProps): JSX.Element {
   return (
     <ToastContext.Provider value={contextValue}>
       {children}
-      <ToastContainer />
+      <ClientOnly>
+        <ToastContainer />
+      </ClientOnly>
     </ToastContext.Provider>
   );
 }
