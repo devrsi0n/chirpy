@@ -4,9 +4,11 @@ import {
   createHttpLink,
   NormalizedCache,
   NormalizedCacheObject,
+  split,
   ApolloLink,
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 import Cookies from 'js-cookie';
 import { NextApiRequest } from 'next';
 import preval from 'preval.macro';
@@ -30,7 +32,7 @@ const getHttpLink = (headers: Record<string, string> | null) => {
 };
 
 // Used in browser
-const createWSLink = () => {
+const getWSLink = () => {
   return new WebSocketLink({
     uri: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
     options: {
@@ -68,7 +70,22 @@ function getHeaders(req?: NextApiRequest) {
 }
 
 const createApolloClient = (req?: NextApiRequest) => {
-  const link = (ssrMode ? getHttpLink(getHeaders(req)) : createWSLink()) as ApolloLink;
+  let link: ApolloLink;
+  const httpLink = getHttpLink(getHeaders(req));
+  if (ssrMode) {
+    link = httpLink;
+  } else {
+    const wsLink = getWSLink();
+    link = split(
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+      },
+      wsLink,
+      httpLink,
+    );
+  }
+
   return new ApolloClient({
     link,
     cache: new InMemoryCache(),

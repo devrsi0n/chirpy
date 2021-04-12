@@ -13,7 +13,7 @@ export const usePortal = (
   getContainer?: () => HTMLElement | null,
 ): HTMLElement | null => {
   const id = `notification-${selectId}`;
-  const [elSnapshot, setElSnapshot] = React.useState<HTMLElement | null>(
+  const [elSnapshot, setElSnapshot] = React.useState<HTMLElement | null>(() =>
     isBrowser() ? createElement(id) : null,
   );
 
