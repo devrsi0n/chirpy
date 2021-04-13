@@ -10,7 +10,6 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import Cookies from 'js-cookie';
-import { NextApiRequest } from 'next';
 import preval from 'preval.macro';
 import * as React from 'react';
 
@@ -22,11 +21,11 @@ let cachedApolloClient:
   | null = null;
 
 // Used in server
-const getHttpLink = (headers: Record<string, string> | null) => {
+const getHttpLink = () => {
   const link = createHttpLink({
     uri: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
     credentials: `include`,
-    headers, // auth token is fetched on the server side
+    headers: getHeaders(), // auth token is fetched on the server side
   });
   return link;
 };
@@ -40,38 +39,30 @@ const getWSLink = () => {
       reconnect: true,
       connectionParams: () => {
         return {
-          headers: {
-            authorization: `Bearer ${
-              Cookies.get(AUTH_COOKIE_NAME) ||
-              preval`
-              const token = require("./anonymous-token.js");
-              module.exports = token;
-            `
-            }`,
-          },
+          headers: getHeaders(),
         };
       },
     },
   });
 };
 
-const ssrMode = typeof window === 'undefined';
-
-function getHeaders(req?: NextApiRequest) {
-  if (ssrMode) return null;
-  if (!req) return null;
-
-  const cookie = req.cookies[AUTH_COOKIE_NAME];
-  if (!cookie) return null;
-
+function getHeaders() {
   return {
-    authorization: `Bearer ${cookie || ''}`,
+    authorization: `Bearer ${
+      Cookies.get(AUTH_COOKIE_NAME) ||
+      preval`
+      const token = require("./anonymous-token.js");
+      module.exports = token;
+    `
+    }`,
   };
 }
 
-const createApolloClient = (req?: NextApiRequest) => {
+const ssrMode = typeof window === 'undefined';
+
+const createApolloClient = () => {
   let link: ApolloLink;
-  const httpLink = getHttpLink(getHeaders(req));
+  const httpLink = getHttpLink();
   if (ssrMode) {
     link = httpLink;
   } else {
@@ -95,15 +86,8 @@ const createApolloClient = (req?: NextApiRequest) => {
 
 export function getApolloClient(
   initialState: $TsFixMe = null,
-  req?: NextApiRequest,
 ): ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> {
-  // Make sure to create a new client for every server-side request so that data
-  // isn't shared between connections (which would be bad)
-  if (ssrMode) {
-    return createApolloClient(req);
-  }
-
-  const _apolloClient = cachedApolloClient ?? createApolloClient(req);
+  const _apolloClient = cachedApolloClient ?? createApolloClient();
   cachedApolloClient = _apolloClient;
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
