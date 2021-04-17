@@ -6,6 +6,7 @@ import { LazyMotion } from 'framer-motion';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
+// import 'tailwindcss/tailwind.css';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';

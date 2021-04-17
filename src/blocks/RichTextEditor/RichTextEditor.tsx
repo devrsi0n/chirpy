@@ -1,7 +1,7 @@
 // @refresh reset
 import Send from '@geist-ui/react-icons/send';
 import DismissIcon from '@geist-ui/react-icons/x';
-import '@tailwindcss/typography/dist/typography.min.css';
+// import '@tailwindcss/typography/dist/typography.min.css';
 import * as React from 'react';
 import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';

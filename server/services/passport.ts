@@ -15,7 +15,6 @@ import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from '$shared/constants';
 
 import { redirect } from '../response';
 import { createToken } from '../utilities/create-token';
-import { getFirstQueryParam } from '../utilities/url';
 
 passport.serializeUser<string>((user, done) => {
   done(null, user.id);
