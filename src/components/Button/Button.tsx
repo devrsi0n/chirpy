@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/react';
 import * as React from 'react';
-import tw, { css, theme, TwStyle } from 'twin.macro';
+import tw, { css, TwStyle } from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
@@ -124,32 +124,25 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
     return () => {
       element?.removeEventListener('animationend', onCompleted);
     };
-  }, [onCompleted]);
+  });
 
   return (
-    <div
-      ref={dripRef}
-      css={[
-        tw`absolute top-0 bottom-0 left-0 right-0`,
-        css`
-          animation: ${expandKeyFrame} 250ms ease-in;
-          animation-fill-mode: forwards;
-
-          svg > g > g {
-            fill: ${theme('colors.gray.300')};
-          }
-        `,
-      ]}
-    >
+    <div ref={dripRef} css={[tw`absolute top-0 bottom-0 left-0 right-0`]}>
       <svg
         width="20"
         height="20"
         viewBox="0 0 20 20"
         style={{ top, left }}
-        css={tw`absolute w-4 h-4`}
+        css={[
+          tw`absolute w-4 h-4`,
+          css`
+            animation: ${expandKeyFrame} 350ms ease-in;
+            animation-fill-mode: forwards;
+          `,
+        ]}
       >
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-          <g>
+          <g tw="fill-gray-300">
             <rect width="100%" height="100%" rx="10" />
           </g>
         </g>
