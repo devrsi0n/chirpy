@@ -38,3 +38,8 @@ namespace Express {
     id: string;
   }
 }
+
+declare module 'mdx-prism' {
+  const MDXPrism: $TsAny;
+  export default MDXPrism;
+}

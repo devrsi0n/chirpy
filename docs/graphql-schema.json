@@ -12386,26 +12386,14 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "admin",
-            "description": "Administrator",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "anonymous",
-            "description": "Anonymous visitor",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "manager",
-            "description": "Team manager for inviting team member",
+            "description": "Manager of a team",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "user",
-            "description": "Logged in user",
+            "description": "Normal user",
             "isDeprecated": false,
             "deprecationReason": null
           }
