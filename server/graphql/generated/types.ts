@@ -1823,13 +1823,9 @@ export enum Role_Constraint {
 }
 
 export enum Role_Enum {
-  /** Administrator */
-  Admin = 'admin',
-  /** Anonymous visitor */
-  Anonymous = 'anonymous',
-  /** Team manager for inviting team member */
+  /** Manager of a team */
   Manager = 'manager',
-  /** Logged in user */
+  /** Normal user */
   User = 'user'
 }
 

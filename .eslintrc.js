@@ -35,7 +35,7 @@ module.exports = {
     'unicorn/no-array-callback-reference': 'error',
     'unicorn/no-array-for-each': 'error',
     'unicorn/no-array-push-push': 'error',
-    'unicorn/no-array-reduce': 'error',
+    // 'unicorn/no-array-reduce': 'error',
     'unicorn/no-console-spaces': 'error',
     'unicorn/no-for-loop': 'error',
     'unicorn/no-hex-escape': 'error',
