@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         gray: colors.trueGray,
       },
+      fill: colors,
       screens: {
         xs: '375px',
       },
