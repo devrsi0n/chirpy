@@ -11818,7 +11818,7 @@
       {
         "kind": "OBJECT",
         "name": "Role",
-        "description": "columns and relationships of \"Role\"",
+        "description": "This role table isn't map to hasura role, use UserType instead.\n\n\ncolumns and relationships of \"Role\"",
         "fields": [
           {
             "name": "comment",
@@ -15070,6 +15070,18 @@
             "deprecationReason": null
           },
           {
+            "name": "bio",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "comments",
             "description": "An array relationship",
             "args": [
@@ -15946,6 +15958,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "args": [],
@@ -15988,6 +16012,18 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
@@ -15998,7 +16034,7 @@
       {
         "kind": "OBJECT",
         "name": "UserType",
-        "description": "columns and relationships of \"UserType\"",
+        "description": "UserType map to Hasura role\n\n\ncolumns and relationships of \"UserType\"",
         "fields": [
           {
             "name": "comment",
@@ -16565,6 +16601,18 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "admin",
+            "description": "Totalk administrator",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "anonymous",
+            "description": "Anonymous widget vsisitor",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "free",
             "description": null,
@@ -17458,6 +17506,18 @@
             "deprecationReason": null
           },
           {
+            "name": "bio",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "comments",
             "description": null,
             "type": {
@@ -17590,6 +17650,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "type": {
@@ -17615,6 +17687,18 @@
           },
           {
             "name": "username",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -17679,6 +17763,18 @@
           },
           {
             "name": "avatar",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -17822,6 +17918,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "type": {
@@ -17856,6 +17964,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -17869,6 +17989,18 @@
         "fields": [
           {
             "name": "avatar",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": null,
             "args": [],
             "type": {
@@ -17964,6 +18096,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "args": [],
@@ -17977,6 +18121,18 @@
           },
           {
             "name": "username",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": null,
             "args": [],
             "type": {
@@ -18012,6 +18168,18 @@
             "deprecationReason": null
           },
           {
+            "name": "bio",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -18096,6 +18264,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -18118,6 +18298,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -18131,6 +18323,18 @@
         "fields": [
           {
             "name": "avatar",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": null,
             "args": [],
             "type": {
@@ -18226,6 +18430,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "args": [],
@@ -18239,6 +18455,18 @@
           },
           {
             "name": "username",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": null,
             "args": [],
             "type": {
@@ -18263,6 +18491,18 @@
         "inputFields": [
           {
             "name": "avatar",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -18358,6 +18598,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -18371,6 +18623,18 @@
           },
           {
             "name": "username",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -18570,6 +18834,18 @@
             "deprecationReason": null
           },
           {
+            "name": "bio",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "comments_aggregate",
             "description": null,
             "type": {
@@ -18702,6 +18978,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "type": {
@@ -18727,6 +19015,18 @@
           },
           {
             "name": "username",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -18784,6 +19084,12 @@
             "deprecationReason": null
           },
           {
+            "name": "bio",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
@@ -18826,6 +19132,12 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "column name",
             "isDeprecated": false,
@@ -18842,6 +19154,12 @@
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -18854,6 +19172,18 @@
         "inputFields": [
           {
             "name": "avatar",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -18949,6 +19279,18 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "type": {
@@ -18983,6 +19325,18 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "website",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -18999,6 +19353,12 @@
         "enumValues": [
           {
             "name": "avatar",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "bio",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -19046,6 +19406,12 @@
             "deprecationReason": null
           },
           {
+            "name": "twitterUserName",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": "column name",
             "isDeprecated": false,
@@ -19059,6 +19425,12 @@
           },
           {
             "name": "username",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "website",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

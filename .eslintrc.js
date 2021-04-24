@@ -16,6 +16,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
 
     'unicorn/better-regex': 'error',
     'unicorn/catch-error-name': 'error',

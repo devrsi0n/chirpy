@@ -12,20 +12,25 @@ export type CurrentUserProviderProps = React.PropsWithChildren<{
 }>;
 
 export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Element {
-  const { data, ...restProps } = useUserByPkQuery({
+  const { data, refetch, ...restProps } = useUserByPkQuery({
     ...props.apolloBaseOptions,
     variables: {
       id: getId(),
     },
     fetchPolicy: 'network-only',
+    notifyOnNetworkStatusChange: true,
   });
   const value = React.useMemo<CurrentUserContextType>(
     () => ({
       ...restProps,
       ...data?.userByPk,
+      refetchData: () =>
+        refetch({
+          id: getId(),
+        }),
       isLogin: !!data?.userByPk?.id,
     }),
-    [data, restProps],
+    [data, restProps, refetch],
   );
 
   return <CurrentUserContext.Provider value={value}>{props.children}</CurrentUserContext.Provider>;
