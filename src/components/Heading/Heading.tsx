@@ -1,7 +1,7 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-type AS = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export type AS = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 export type IHeadingProps = React.ComponentProps<'h1'> & {
   /**
@@ -25,7 +25,7 @@ export function Heading(props: IHeadingProps): JSX.Element {
   return (
     <Component
       {...restProps}
-      css={[tw`text-gray-700 dark:text-gray-300`, styles[Component]]}
+      css={[tw`text-gray-800 dark:text-gray-200`, styles[Component]]}
       className={className}
     />
   );

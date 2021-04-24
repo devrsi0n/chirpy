@@ -1,4 +1,3 @@
-import User from '@geist-ui/react-icons/user';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
@@ -27,7 +26,13 @@ export function Avatar({
   ...imgProps
 }: AvatarProps): JSX.Element {
   if (!src) {
-    return <User size="24" />;
+    return (
+      <span tw="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+        <svg tw="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </span>
+    );
   }
 
   return (
@@ -37,7 +42,7 @@ export function Avatar({
       alt={alt}
       className={className}
       css={[
-        tw`flex items-center justify-center rounded-full bg-gray-100 bg-opacity-10 select-none ring-2 ring-gray-50 dark:ring-gray-900`,
+        tw`flex items-center justify-center rounded-full bg-gray-100 select-none ring-2 ring-gray-50 dark:ring-gray-900`,
         sizeStyles[size],
       ]}
     >

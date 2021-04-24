@@ -6,7 +6,7 @@ import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'purple' | 'gray';
-type Variant = 'solid' | 'plain' /*| 'ghost' */;
+type Variant = 'solid' | 'plain' | 'text' /*| 'ghost' */;
 
 export type ButtonProps = BaseButtonProps & {
   variant?: Variant;
@@ -43,6 +43,9 @@ const ColorVariantStyles: VariantColors = {
   'plain-purple': tw`bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
 
   'plain-gray': tw`bg-white dark:(bg-transparent text-gray-300 border-gray-700) text-gray-600 border border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900 focus:(ring-2 ring-offset-2 ring-gray-500)`,
+
+  'text-purple': tw`text-purple-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
+  'text-gray': tw`text-gray-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-gray-500)`,
 };
 
 // TODO: Fix click drip animation and extract it to the base button
@@ -91,7 +94,7 @@ export const Button = React.forwardRef(function Button(
           tw`focus:outline-none`,
           sizeStyles[size],
           ColorVariantStyles[`${variant}-${color}` as VariantColor],
-          shadow && tw`shadow-sm`,
+          variant !== 'text' && shadow && tw`shadow-sm`,
           rounded && tw`rounded-md`,
           disabled ? tw`cursor-not-allowed text-gray-300 bg-gray-50` : tw`cursor-pointer`,
         ]}

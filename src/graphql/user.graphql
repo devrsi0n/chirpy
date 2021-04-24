@@ -4,7 +4,13 @@ query userByPk($id: uuid!) {
     email
     username
     displayName
+    givenName
+    middleName
+    familyName
     avatar
+    bio
+    website
+    twitterUserName
     members {
       id
       role
@@ -19,5 +25,25 @@ query userByPk($id: uuid!) {
       id
       name
     }
+  }
+}
+
+mutation updateUserByPk(
+  $id: uuid!
+  $bio: String
+  $displayName: String!
+  $twitterUserName: String
+  $website: String
+) {
+  updateUserByPk(
+    pk_columns: { id: $id }
+    _set: {
+      bio: $bio
+      displayName: $displayName
+      twitterUserName: $twitterUserName
+      website: $website
+    }
+  ) {
+    id
   }
 }

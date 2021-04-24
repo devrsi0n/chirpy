@@ -155,7 +155,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                     css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
                     onClick={handleSubmitReply}
                   >
-                    {isLoading ? <SpinnerIcon tw="text-gray-400" /> : <Send size="14" />}
+                    {isLoading ? <SpinnerIcon tw="text-gray-400 w-5 h-5" /> : <Send size="14" />}
                     <Text>{postButtonLabel || 'Post'}</Text>
                   </Button>
                 ) : (

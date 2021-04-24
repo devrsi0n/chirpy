@@ -8,7 +8,7 @@ export function SpinnerIcon({ className }: SpinnerProps): JSX.Element {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      css={tw`w-5 h-5 text-white animate-spin`}
+      css={tw`animate-spin`}
       className={className}
       viewBox="0 0 24 24"
     >

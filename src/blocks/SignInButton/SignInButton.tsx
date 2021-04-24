@@ -15,7 +15,7 @@ export function SignInButton({ variant = 'solid' }: SignInButtonProps): JSX.Elem
 
   return (
     <Button tw="space-x-1" color="purple" variant={variant} onClick={handleClickSignIn}>
-      {signInLoading ? <SpinnerIcon tw="text-gray-400" /> : <Lock size="14" />}
+      {signInLoading ? <SpinnerIcon tw="w-5 h-5" /> : <Lock size="14" />}
       <span>Sign in</span>
     </Button>
   );

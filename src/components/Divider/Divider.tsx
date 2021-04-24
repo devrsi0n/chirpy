@@ -12,7 +12,7 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
         css={[
           tw`w-auto max-w-full relative`,
           css`
-            ${tw`bg-gray-200`};
+            ${bgStyle};
             height: 1px;
             border-style: initial;
 
@@ -26,7 +26,7 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
 
             @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
               &:after {
-                ${tw`bg-gray-200`};
+                ${bgStyle};
                 content: '';
                 position: absolute;
                 left: 0;
@@ -50,3 +50,5 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
     </>
   );
 }
+
+const bgStyle = tw`bg-gray-100`;

@@ -1,5 +1,6 @@
 import LogOut from '@geist-ui/react-icons/logOut';
 import Menu from '@geist-ui/react-icons/menu';
+import User from '@geist-ui/react-icons/user';
 import Dismiss from '@geist-ui/react-icons/x';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -17,6 +18,7 @@ import { useLogout } from '$/hooks/useLogout';
 import { IconButton } from '../Button';
 import { DropDownMenu } from '../DropDownMenu';
 import { Logo } from '../Logo';
+import { Divider } from '../Divider';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
@@ -107,6 +109,17 @@ export function Header(): JSX.Element {
           <div tw="flex">
             {displayName ? (
               <DropDownMenu content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}>
+                <DropDownMenu.Item tw="" onClick={handleClickLogOut}>
+                  <Link
+                    variant="plain"
+                    href="/profile"
+                    tw="flex flex-row items-center justify-end space-x-1"
+                  >
+                    <User size={14} />
+                    <span>Profile</span>
+                  </Link>
+                </DropDownMenu.Item>
+                <Divider />
                 <DropDownMenu.Item
                   tw="justify-end flex flex-row items-center space-x-1"
                   onClick={handleClickLogOut}

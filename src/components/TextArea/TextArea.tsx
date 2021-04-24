@@ -3,24 +3,27 @@ import tw from 'twin.macro';
 
 export type TextfieldProps = React.ComponentPropsWithoutRef<'textarea'> & {
   label: string;
-  containerClassName?: string;
+  classes?: {
+    root?: string;
+    textarea?: string;
+  };
   errorMessage?: string;
 };
 
 export const TextArea = React.forwardRef(function TextArea(
-  { label, containerClassName, className, errorMessage, ...inputProps }: TextfieldProps,
+  { label, className, errorMessage, classes = {}, ...inputProps }: TextfieldProps,
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (
-    <label className={containerClassName} css={[tw`flex flex-col text-gray-500 mb-4`]}>
-      <p tw="font-bold mb-1 leading-6">{label}</p>
+    <label className={classes.root} css={[tw`flex flex-col text-gray-600 mb-4`]}>
+      <p tw="mb-1 leading-6 text-lg">{label}</p>
       <textarea
         {...inputProps}
         name={label}
         ref={ref}
-        className={className}
+        className={className || classes.textarea}
         css={[
-          tw`text-gray-500 leading-8 px-2 border border-gray-500 focus:border-gray-900 rounded-sm`,
+          tw`text-gray-600 leading-8 px-2 border border-gray-300 focus:(border-indigo-500 ring-indigo-500) rounded`,
           !!errorMessage && tw`border-red-700`,
         ]}
         style={{
