@@ -1740,7 +1740,12 @@ export enum Project_Update_Column {
   UserId = 'userId'
 }
 
-/** columns and relationships of "Role" */
+/**
+ * This role table isn't map to hasura role, use UserType instead.
+ *
+ *
+ * columns and relationships of "Role"
+ */
 export type Role = {
   __typename?: 'Role';
   comment?: Maybe<Scalars['String']>;
@@ -1752,7 +1757,12 @@ export type Role = {
 };
 
 
-/** columns and relationships of "Role" */
+/**
+ * This role table isn't map to hasura role, use UserType instead.
+ *
+ *
+ * columns and relationships of "Role"
+ */
 export type RoleMembersArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -1762,7 +1772,12 @@ export type RoleMembersArgs = {
 };
 
 
-/** columns and relationships of "Role" */
+/**
+ * This role table isn't map to hasura role, use UserType instead.
+ *
+ *
+ * columns and relationships of "Role"
+ */
 export type RoleMembers_AggregateArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2193,6 +2208,7 @@ export type User = {
   /** An aggregated array relationship */
   accounts_aggregate: Account_Aggregate;
   avatar: Scalars['String'];
+  bio?: Maybe<Scalars['String']>;
   /** An array relationship */
   comments: Array<Comment>;
   /** An aggregated array relationship */
@@ -2216,10 +2232,12 @@ export type User = {
   projects: Array<Project>;
   /** An aggregated array relationship */
   projects_aggregate: Project_Aggregate;
+  twitterUserName?: Maybe<Scalars['String']>;
   type: UserType_Enum;
   updatedAt: Scalars['timestamptz'];
   /** Unique name, used for search a person, e.g. at some one in a comment. */
   username?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 
@@ -2322,7 +2340,12 @@ export type UserProjects_AggregateArgs = {
   where?: Maybe<Project_Bool_Exp>;
 };
 
-/** columns and relationships of "UserType" */
+/**
+ * UserType map to Hasura role
+ *
+ *
+ * columns and relationships of "UserType"
+ */
 export type UserType = {
   __typename?: 'UserType';
   comment?: Maybe<Scalars['String']>;
@@ -2334,7 +2357,12 @@ export type UserType = {
 };
 
 
-/** columns and relationships of "UserType" */
+/**
+ * UserType map to Hasura role
+ *
+ *
+ * columns and relationships of "UserType"
+ */
 export type UserTypeUsersArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2344,7 +2372,12 @@ export type UserTypeUsersArgs = {
 };
 
 
-/** columns and relationships of "UserType" */
+/**
+ * UserType map to Hasura role
+ *
+ *
+ * columns and relationships of "UserType"
+ */
 export type UserTypeUsers_AggregateArgs = {
   distinct_on?: Maybe<Array<User_Select_Column>>;
   limit?: Maybe<Scalars['Int']>;
@@ -2405,6 +2438,10 @@ export enum UserType_Constraint {
 }
 
 export enum UserType_Enum {
+  /** Totalk administrator */
+  Admin = 'admin',
+  /** Anonymous widget vsisitor */
+  Anonymous = 'anonymous',
   Free = 'free',
   /** Paid user */
   Pro = 'pro'
@@ -2550,6 +2587,7 @@ export type User_Bool_Exp = {
   _or?: Maybe<Array<Maybe<User_Bool_Exp>>>;
   accounts?: Maybe<Account_Bool_Exp>;
   avatar?: Maybe<String_Comparison_Exp>;
+  bio?: Maybe<String_Comparison_Exp>;
   comments?: Maybe<Comment_Bool_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   displayName?: Maybe<String_Comparison_Exp>;
@@ -2561,9 +2599,11 @@ export type User_Bool_Exp = {
   members?: Maybe<Member_Bool_Exp>;
   middleName?: Maybe<String_Comparison_Exp>;
   projects?: Maybe<Project_Bool_Exp>;
+  twitterUserName?: Maybe<String_Comparison_Exp>;
   type?: Maybe<UserType_Enum_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   username?: Maybe<String_Comparison_Exp>;
+  website?: Maybe<String_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "User" */
@@ -2580,6 +2620,7 @@ export enum User_Constraint {
 export type User_Insert_Input = {
   accounts?: Maybe<Account_Arr_Rel_Insert_Input>;
   avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   comments?: Maybe<Comment_Arr_Rel_Insert_Input>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
@@ -2591,15 +2632,18 @@ export type User_Insert_Input = {
   members?: Maybe<Member_Arr_Rel_Insert_Input>;
   middleName?: Maybe<Scalars['String']>;
   projects?: Maybe<Project_Arr_Rel_Insert_Input>;
+  twitterUserName?: Maybe<Scalars['String']>;
   type?: Maybe<UserType_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 /** aggregate max on columns */
 export type User_Max_Fields = {
   __typename?: 'User_max_fields';
   avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -2607,13 +2651,16 @@ export type User_Max_Fields = {
   givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   middleName?: Maybe<Scalars['String']>;
+  twitterUserName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 /** order by max() on columns of table "User" */
 export type User_Max_Order_By = {
   avatar?: Maybe<Order_By>;
+  bio?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
@@ -2621,14 +2668,17 @@ export type User_Max_Order_By = {
   givenName?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   middleName?: Maybe<Order_By>;
+  twitterUserName?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   username?: Maybe<Order_By>;
+  website?: Maybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type User_Min_Fields = {
   __typename?: 'User_min_fields';
   avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -2636,13 +2686,16 @@ export type User_Min_Fields = {
   givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   middleName?: Maybe<Scalars['String']>;
+  twitterUserName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 /** order by min() on columns of table "User" */
 export type User_Min_Order_By = {
   avatar?: Maybe<Order_By>;
+  bio?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
   email?: Maybe<Order_By>;
@@ -2650,8 +2703,10 @@ export type User_Min_Order_By = {
   givenName?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   middleName?: Maybe<Order_By>;
+  twitterUserName?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   username?: Maybe<Order_By>;
+  website?: Maybe<Order_By>;
 };
 
 /** response of any mutation on the table "User" */
@@ -2680,6 +2735,7 @@ export type User_On_Conflict = {
 export type User_Order_By = {
   accounts_aggregate?: Maybe<Account_Aggregate_Order_By>;
   avatar?: Maybe<Order_By>;
+  bio?: Maybe<Order_By>;
   comments_aggregate?: Maybe<Comment_Aggregate_Order_By>;
   createdAt?: Maybe<Order_By>;
   displayName?: Maybe<Order_By>;
@@ -2691,9 +2747,11 @@ export type User_Order_By = {
   members_aggregate?: Maybe<Member_Aggregate_Order_By>;
   middleName?: Maybe<Order_By>;
   projects_aggregate?: Maybe<Project_Aggregate_Order_By>;
+  twitterUserName?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   username?: Maybe<Order_By>;
+  website?: Maybe<Order_By>;
 };
 
 /** primary key columns input for table: "User" */
@@ -2706,6 +2764,8 @@ export enum User_Select_Column {
   /** column name */
   Avatar = 'avatar',
   /** column name */
+  Bio = 'bio',
+  /** column name */
   CreatedAt = 'createdAt',
   /** column name */
   DisplayName = 'displayName',
@@ -2720,16 +2780,21 @@ export enum User_Select_Column {
   /** column name */
   MiddleName = 'middleName',
   /** column name */
+  TwitterUserName = 'twitterUserName',
+  /** column name */
   Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Username = 'username'
+  Username = 'username',
+  /** column name */
+  Website = 'website'
 }
 
 /** input type for updating data in table "User" */
 export type User_Set_Input = {
   avatar?: Maybe<Scalars['String']>;
+  bio?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
@@ -2737,15 +2802,19 @@ export type User_Set_Input = {
   givenName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   middleName?: Maybe<Scalars['String']>;
+  twitterUserName?: Maybe<Scalars['String']>;
   type?: Maybe<UserType_Enum>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   username?: Maybe<Scalars['String']>;
+  website?: Maybe<Scalars['String']>;
 };
 
 /** update columns of table "User" */
 export enum User_Update_Column {
   /** column name */
   Avatar = 'avatar',
+  /** column name */
+  Bio = 'bio',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -2761,11 +2830,15 @@ export enum User_Update_Column {
   /** column name */
   MiddleName = 'middleName',
   /** column name */
+  TwitterUserName = 'twitterUserName',
+  /** column name */
   Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
-  Username = 'username'
+  Username = 'username',
+  /** column name */
+  Website = 'website'
 }
 
 

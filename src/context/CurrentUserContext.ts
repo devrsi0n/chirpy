@@ -1,6 +1,7 @@
+import { ApolloQueryResult } from '@apollo/client';
 import * as React from 'react';
 
-import { useUserByPkQuery } from '$/graphql/generated/user';
+import { UserByPkQuery, useUserByPkQuery } from '$/graphql/generated/user';
 
 type UserQueryResultType = ReturnType<typeof useUserByPkQuery>;
 type UserQueryDataType = NonNullable<UserQueryResultType['data']>;
@@ -12,6 +13,7 @@ type UserQueryState = Partial<
 export type CurrentUserContextType = UserQueryDataPayload &
   UserQueryState & {
     isLogin: boolean;
+    refetchData?: () => Promise<ApolloQueryResult<UserByPkQuery>>;
   };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>({
