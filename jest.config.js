@@ -1,0 +1,23 @@
+module.exports = {
+  setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],
+  testEnvironment: 'jsdom',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
+  testMatch: [
+    '**/src/**/*.spec.ts?(x)',
+    '**/server/**/*.spec.ts?(x)',
+    '**/shared/**/*.spec.ts?(x)',
+  ],
+  transform: {
+    "\\.[jt]sx?$": "babel-jest",
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/jest/fileTransformer.js',
+  },
+  moduleNameMapper: {
+    '^$shared/*': '<rootDir>/shared/$1',
+    '^$server/*': '<rootDir>/server/$1',
+    '^$/*': '<rootDir>/src/$1',
+  },
+  moduleNameMapper: {
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+  },
+  moduleDirectories: ['node_modules', 'src', 'shared', 'server'],
+};
