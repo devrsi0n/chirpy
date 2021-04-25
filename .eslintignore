@@ -5,3 +5,5 @@ generated
 next.config.js
 tailwind.config.js
 cypress-examples
+jest.config.js
+jest/
