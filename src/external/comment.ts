@@ -58,12 +58,11 @@ export function comment(): void {
       container.scrolling = 'no';
       let previousHeight = 0;
       container.addEventListener('load', function () {
-        previousHeight = setIframeHeight(container, previousHeight);
         window.addEventListener(
           'message',
           (event) => {
             if (
-              origin === process.env.NEXT_PUBLIC_APP_URL &&
+              event.origin === process.env.NEXT_PUBLIC_APP_URL &&
               event.data?.height &&
               event.data?.height !== previousHeight
             ) {
@@ -86,16 +85,4 @@ if (typeof window !== 'undefined') {
   (window as { [key: string]: $TsFixMe })[appNameLowerCase] = {
     comment,
   };
-}
-
-function setIframeHeight(iframe: HTMLIFrameElement, previousHeight: number): number {
-  const doc = iframe.contentDocument || iframe.contentWindow?.document;
-  if (!doc) {
-    throw new Error(`Can't find the iframe document`);
-  }
-  const newHeight: number = doc.body.scrollHeight + 10;
-  if (newHeight !== previousHeight) {
-    iframe.style.height = newHeight + 'px';
-  }
-  return newHeight;
 }
