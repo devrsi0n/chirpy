@@ -5,7 +5,7 @@ import tw, { css, TwStyle } from 'twin.macro';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Color = 'purple' | 'gray';
+type Color = 'primary' | 'gray';
 type Variant = 'solid' | 'plain' | 'text' /*| 'ghost' */;
 
 export type ButtonProps = BaseButtonProps & {
@@ -36,15 +36,15 @@ type VariantColors = {
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-purple': tw`bg-purple-600 text-white border border-purple-700 hover:bg-purple-700 focus:(outline-none ring-2 ring-offset-2 ring-purple-500)`,
+  'solid-primary': tw`bg-primary-600 text-white border border-primary-700 hover:bg-primary-700 focus:(outline-none ring-2 ring-offset-2 ring-primary-500)`,
 
   'solid-gray': tw`bg-gray-600 text-white border border-gray-700 hover:bg-gray-700 focus:(outline-none ring-2 ring-offset-2 ring-gray-500)`,
 
-  'plain-purple': tw`bg-white text-purple-600 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
+  'plain-primary': tw`bg-white text-primary-600 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-primary-500)`,
 
   'plain-gray': tw`bg-white dark:(bg-transparent text-gray-300 border-gray-700) text-gray-600 border border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900 focus:(ring-2 ring-offset-2 ring-gray-500)`,
 
-  'text-purple': tw`text-purple-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-purple-500)`,
+  'text-primary': tw`text-primary-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-primary-500)`,
   'text-gray': tw`text-gray-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-gray-500)`,
 };
 

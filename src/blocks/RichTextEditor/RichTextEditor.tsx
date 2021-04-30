@@ -150,7 +150,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
               <div tw="flex flex-row justify-end">
                 {isLogin ? (
                   <Button
-                    color="purple"
+                    color="primary"
                     variant={'solid'}
                     css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
                     onClick={handleSubmitReply}

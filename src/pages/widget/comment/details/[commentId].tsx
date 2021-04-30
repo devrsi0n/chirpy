@@ -1,4 +1,6 @@
 import { useSubscription } from '@apollo/client';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -27,6 +29,8 @@ import {
   getQueryCommentDetailsDoc,
   getSubscribeCommentDetailsDoc,
 } from '$/utilities/comment-request';
+
+dayjs.extend(relativeTime);
 
 // Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
 export default function CommentDetailsWidget(

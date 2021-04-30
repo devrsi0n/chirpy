@@ -75,7 +75,7 @@ export function Tabs({
                 css={[
                   tw`hover:rounded hover:bg-gray-50 dark:hover:bg-gray-900 border-b-2 p-3`,
                   selfValue === item.value
-                    ? tw`text-purple-500 border-purple-500`
+                    ? tw`text-primary-500 border-primary-500`
                     : tw`border-transparent`,
                 ]}
                 style={{

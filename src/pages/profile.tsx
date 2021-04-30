@@ -121,7 +121,7 @@ function Profile(): JSX.Element {
     <ProfileContainer tw="space-y-7">
       <Heading as="h2">Profile</Heading>
       <section tw="space-y-6">
-        <div tw="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 mt-1 w-full h-40 rounded-t flex justify-center items-end">
+        <div tw="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-primary-500 mt-1 w-full h-40 rounded-t flex justify-center items-end">
           {avatar && <Avatar src={avatar} size="xl" tw="absolute transform translate-y-1/2" />}
         </div>
         <div tw="pt-4 flex flex-row justify-between items-start">

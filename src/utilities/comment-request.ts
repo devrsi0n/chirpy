@@ -8,6 +8,11 @@ const COMMENT_FIELDS = `{
   createdAt
   parentId
   pageId
+  page {
+    project {
+      theme
+    }
+  }
   depth
   user {
     id

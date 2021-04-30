@@ -11,6 +11,18 @@ module.exports = {
       },
       colors: {
         gray: colors.trueGray,
+        primary: {
+          50: 'var(--tw-colors-primary-50)',
+          100: 'var(--tw-colors-primary-100)',
+          200: 'var(--tw-colors-primary-200)',
+          300: 'var(--tw-colors-primary-300)',
+          400: 'var(--tw-colors-primary-400)',
+          500: 'var(--tw-colors-primary-500)',
+          600: 'var(--tw-colors-primary-600)',
+          700: 'var(--tw-colors-primary-700)',
+          800: 'var(--tw-colors-primary-800)',
+          900: 'var(--tw-colors-primary-900)',
+        },
       },
       fill: colors,
       screens: {
@@ -87,21 +99,8 @@ module.exports = {
     //   },
     // }),
   },
-  variants: {
-    outline: ['responsive', 'hover', 'focus'],
-    backgroundColor: ['responsive', 'hover', 'focus', 'active', 'group-hover', 'dark'],
-    fill: ['responsive', 'hover'],
-    extend: {
-      borderWidth: ['hover', 'focus'],
-      typography: ['dark'],
-      translate: ['group-hover'],
-    }
-  },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
   ],
-  corePlugins: {
-    float: false,
-  },
 };
