@@ -29,8 +29,8 @@ const sizeStyles: Record<Size, TwStyle> = {
 };
 
 const variantStyles: Record<Variant, TwStyle> = {
-  nav: tw``,
-  plain: tw`text-gray-700 hover:text-black dark:text-gray-200 dark:hover:text-gray-100`,
+  nav: tw`text-gray-700 hover:text-black dark:text-gray-200 dark:hover:text-gray-100`,
+  plain: tw``,
   primary: tw`text-blue-600 hover:text-blue-900 dark:text-blue-200 dark:hover:text-blue-100`,
 };
 
@@ -55,12 +55,12 @@ export function Link(props: LinkProps): JSX.Element {
   const router = useRouter();
   const isCurrentURL = highlightMatch && router.pathname === href;
   const [isHovering, setIsHovering] = React.useState(false);
-  const [target, setTarget] = React.useState('_self');
+  const [target, setTarget] = React.useState(props.target || '_self');
   React.useEffect(() => {
-    if (href.startsWith('http') && !href.startsWith(window.location.origin)) {
+    if (!props.target && href.startsWith('http') && !href.startsWith(window.location.origin)) {
       setTarget('_blank');
     }
-  }, [href]);
+  }, [props.target, href]);
 
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>

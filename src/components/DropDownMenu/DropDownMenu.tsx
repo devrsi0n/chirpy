@@ -31,7 +31,7 @@ export function DropDownMenu({
           <>
             <div css={classes?.button}>
               <Menu.Button as={shape === 'circle' ? IconButton : Button}>
-                <span>{content}</span>
+                {content}
                 {shape === 'square' && (
                   <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />
                 )}
