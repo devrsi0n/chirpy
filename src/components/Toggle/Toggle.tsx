@@ -49,7 +49,7 @@ export function Toggle({
         onChange={onChange}
         onMouseDown={handleMoudDown}
         css={[
-          enabled ? tw`bg-purple-500` : tw`bg-gray-300 dark:bg-gray-600`,
+          enabled ? tw`bg-primary-500` : tw`bg-gray-300 dark:bg-gray-600`,
           tw`relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-11 focus:(outline-none ring)`,
         ]}
       >

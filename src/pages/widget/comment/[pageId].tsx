@@ -1,4 +1,6 @@
 import { useSubscription } from '@apollo/client';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -7,6 +9,7 @@ import {
   GetStaticPaths,
 } from 'next';
 import Head from 'next/head';
+import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';
 
@@ -16,10 +19,10 @@ import { PagesDocument } from '$server/graphql/generated/page';
 import { CommentTree } from '$/blocks/CommentTree/CommentTree';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { RichTextEditor } from '$/blocks/RichTextEditor';
-import { SignInButton } from '$/blocks/SignInButton';
 import { UserDropDown } from '$/blocks/UserDropDown/UserDropDown';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
+import { useTheme } from '$/components/ThemeProvider';
 import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
@@ -29,9 +32,11 @@ import { CommentLeafType } from '$/types/widget';
 import { getQueryCommentTreeDoc, getSubscribeCommentTreeDoc } from '$/utilities/comment-request';
 import { getCommentCount } from '$/utilities/get-comment-count';
 
+dayjs.extend(relativeTime);
+
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
-// Demo: http://localhost:3000/widget/comment/ckiwwumiv0001uzcv79wjhagt
+// Demo: http://localhost:3000/widget/comment/b5a16120-593c-492f-ad94-e14d247485f3
 
 /**
  * Comment tree widget for a page
@@ -52,7 +57,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
       variables: { pageId },
     },
   );
-  const comments = data?.comments || (isStaticError(props) ? [] : props.comments);
+  const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
   const { isLogin } = useCurrentUser();
 
   const handleSubmitReply = useCreateAComment({ pageId });
@@ -60,6 +65,15 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   const handleClickLikeAction = useToggleALikeAction();
 
   useNotifyHostHeightOfPage();
+
+  const { mergeTheme } = useTheme();
+  const theme = comments[0]?.page.project.theme;
+  React.useEffect(() => {
+    if (theme) {
+      mergeTheme(theme);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [theme]);
 
   if (error) {
     return <p>{error}</p>;

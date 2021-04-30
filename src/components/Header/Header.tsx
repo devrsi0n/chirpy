@@ -4,7 +4,7 @@ import User from '@geist-ui/react-icons/user';
 import Dismiss from '@geist-ui/react-icons/x';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import tw, { css } from 'twin.macro';
+import tw from 'twin.macro';
 
 import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
@@ -16,9 +16,9 @@ import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useLogout } from '$/hooks/useLogout';
 
 import { IconButton } from '../Button';
+import { Divider } from '../Divider';
 import { DropDownMenu } from '../DropDownMenu';
 import { Logo } from '../Logo';
-import { Divider } from '../Divider';
 
 const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
@@ -55,12 +55,7 @@ export function Header(): JSX.Element {
     console.error('Get current user error:', error);
   }
   return (
-    <header
-      css={css`
-        backdrop-filter: blur(15px);
-      `}
-      tw="w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-20) border-gray-300 dark:border-gray-700"
-    >
+    <header tw="w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-20) border-gray-300 dark:border-gray-700 backdrop-filter backdrop-blur-lg">
       <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section tw="flex flex-row items-center justify-between">
           <div tw="flex items-center sm:hidden pl-3">

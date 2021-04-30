@@ -38,7 +38,7 @@ export function Select<T>({
           <div css={tw`relative`} className={className}>
             <span css={tw`inline-block w-full rounded-md shadow-sm`}>
               <Listbox.Button
-                css={tw`cursor-default relative w-full rounded-sm border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:(outline-none ring-blue-500 border-purple-300) transition ease-in-out duration-150 sm:text-sm`}
+                css={tw`cursor-default relative w-full rounded-sm border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:(outline-none ring-blue-500 border-primary-300) transition ease-in-out duration-150 sm:text-sm`}
               >
                 <span css={tw`block truncate`}>{name || value}</span>
                 <span
@@ -87,7 +87,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
       {({ selected, active }) => (
         <div
           css={[
-            active ? tw`text-white bg-purple-300` : tw`text-gray-900`,
+            active ? tw`text-white bg-primary-300` : tw`text-gray-900`,
             tw`cursor-pointer select-none relative py-2 pl-8 pr-4`,
           ]}
         >
