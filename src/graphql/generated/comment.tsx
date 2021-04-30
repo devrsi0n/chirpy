@@ -3,6 +3,24 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
+export type CommentContentFragment = (
+  { __typename?: 'Comment' }
+  & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
+  & { page: (
+    { __typename?: 'Page' }
+    & { project: (
+      { __typename?: 'Project' }
+      & Pick<Types.Project, 'theme'>
+    ) }
+  ), user: (
+    { __typename?: 'User' }
+    & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
+  ), likes: Array<(
+    { __typename?: 'Like' }
+    & Pick<Types.Like, 'id' | 'userId'>
+  )> }
+);
+
 export type CommentTreeQueryVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];
 }>;
@@ -12,34 +30,15 @@ export type CommentTreeQuery = (
   { __typename?: 'query_root' }
   & { comments: Array<(
     { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Types.Like, 'id' | 'userId'>
-    )>, replies: Array<(
+    & { replies: Array<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )>, replies: Array<(
+      & { replies: Array<(
         { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Types.Like, 'id' | 'userId'>
-        )> }
+        & CommentContentFragment
       )> }
+      & CommentContentFragment
     )> }
+    & CommentContentFragment
   )> }
 );
 
@@ -52,54 +51,22 @@ export type CommentDetailsQuery = (
   { __typename?: 'query_root' }
   & { commentByPk?: Types.Maybe<(
     { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-    & { user: (
-      { __typename: 'User' }
-      & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-    ), likes: Array<(
-      { __typename: 'Like' }
-      & Pick<Types.Like, 'id' | 'userId'>
-    )>, replies: Array<(
+    & { replies: Array<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )> }
+      & CommentContentFragment
     )>, parent?: Types.Maybe<(
       { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )>, parent?: Types.Maybe<(
+      & { parent?: Types.Maybe<(
         { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Types.Like, 'id' | 'userId'>
-        )>, parent?: Types.Maybe<(
+        & { parent?: Types.Maybe<(
           { __typename?: 'Comment' }
-          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
-          ), likes: Array<(
-            { __typename?: 'Like' }
-            & Pick<Types.Like, 'id' | 'userId'>
-          )> }
+          & CommentContentFragment
         )> }
+        & CommentContentFragment
       )> }
+      & CommentContentFragment
     )> }
+    & CommentContentFragment
   )> }
 );
 
@@ -119,65 +86,46 @@ export type InsertOneCommentMutation = (
   )> }
 );
 
-
+export const CommentContentFragmentDoc = gql`
+    fragment commentContent on Comment {
+  id
+  content
+  createdAt
+  parentId
+  pageId
+  page {
+    project {
+      theme
+    }
+  }
+  depth
+  user {
+    id
+    displayName
+    avatar
+  }
+  likes {
+    id
+    userId
+  }
+}
+    `;
 export const CommentTreeDocument = gql`
     query commentTree($pageId: uuid!) {
   comments(
     where: {pageId: {_eq: $pageId}, parentId: {_is_null: true}}
     order_by: {likes_aggregate: {count: desc}, createdAt: asc}
   ) {
-    id
-    content
-    createdAt
-    parentId
-    pageId
-    depth
-    user {
-      id
-      displayName
-      avatar
-    }
-    likes {
-      id
-      userId
-    }
+    ...commentContent
     replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
-      id
-      content
-      createdAt
-      parentId
-      pageId
-      depth
-      user {
-        id
-        displayName
-        avatar
-      }
-      likes {
-        id
-        userId
-      }
+      ...commentContent
       replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
-        id
-        content
-        createdAt
-        parentId
-        pageId
-        depth
-        user {
-          id
-          displayName
-          avatar
-        }
-        likes {
-          id
-          userId
-        }
+        ...commentContent
       }
     }
   }
 }
-    `;
+    ${CommentContentFragmentDoc}`;
 
 /**
  * __useCommentTreeQuery__
@@ -209,94 +157,22 @@ export type CommentTreeQueryResult = Apollo.QueryResult<CommentTreeQuery, Commen
 export const CommentDetailsDocument = gql`
     query commentDetails($id: uuid!) {
   commentByPk(id: $id) {
-    id
-    content
-    createdAt
-    parentId
-    pageId
-    depth
-    user {
-      id
-      displayName
-      avatar
-      __typename
-    }
-    likes {
-      id
-      userId
-      __typename
-    }
+    ...commentContent
     replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
-      id
-      content
-      createdAt
-      parentId
-      pageId
-      depth
-      user {
-        id
-        displayName
-        avatar
-      }
-      likes {
-        id
-        userId
-      }
+      ...commentContent
     }
     parent {
-      id
-      content
-      createdAt
-      parentId
-      pageId
-      depth
-      user {
-        id
-        displayName
-        avatar
-      }
-      likes {
-        id
-        userId
-      }
+      ...commentContent
       parent {
-        id
-        content
-        createdAt
-        parentId
-        pageId
-        depth
-        user {
-          id
-          displayName
-          avatar
-        }
-        likes {
-          id
-          userId
-        }
+        ...commentContent
         parent {
-          id
-          content
-          createdAt
-          parentId
-          pageId
-          depth
-          user {
-            id
-            displayName
-            avatar
-          }
-          likes {
-            id
-            userId
-          }
+          ...commentContent
         }
       }
     }
   }
 }
-    `;
+    ${CommentContentFragmentDoc}`;
 
 /**
  * __useCommentDetailsQuery__

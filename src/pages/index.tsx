@@ -15,7 +15,7 @@ function Home(): JSX.Element {
       </Head>
       <main tw="py-12 space-y-8">
         <h1
-          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-500 mt-1"
+          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-primary-500 mt-1"
           css={css`
             line-height: 1.09;
             font-size: 3.25rem;
@@ -41,7 +41,7 @@ function Home(): JSX.Element {
           Access your audience quickly by integrating a modern comment system.
         </Text>
         <div tw="flex justify-center items-center space-x-6">
-          <Button variant="solid" color="purple" className="group" tw="space-x-1 hover:shadow-2xl">
+          <Button variant="solid" color="primary" className="group" tw="space-x-1 hover:shadow-2xl">
             <span>Try It Free</span>
             <ArrowRight
               size="20px"

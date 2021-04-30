@@ -1,7 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
 import { Global } from '@emotion/react';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { LazyMotion } from 'framer-motion';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -10,10 +8,10 @@ import * as React from 'react';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
+import { ThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { useApollo } from '$/lib/apollo-client';
-
-dayjs.extend(relativeTime);
+import { defaultTheme } from '$/styles/theme';
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const apollo = useApollo();
@@ -23,15 +21,17 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       <GlobalStyles />
       <Global styles={appGlobalStyles} />
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
-        <LazyMotion features={loadFeatures} strict>
-          <ApolloProvider client={apollo}>
-            <CurrentUserProvider>
-              <ToastProvider>
-                <Component {...pageProps} />
-              </ToastProvider>
-            </CurrentUserProvider>
-          </ApolloProvider>
-        </LazyMotion>
+        <ThemeProvider theme={defaultTheme}>
+          <LazyMotion features={loadFeatures} strict>
+            <ApolloProvider client={apollo}>
+              <CurrentUserProvider>
+                <ToastProvider>
+                  <Component {...pageProps} />
+                </ToastProvider>
+              </CurrentUserProvider>
+            </ApolloProvider>
+          </LazyMotion>
+        </ThemeProvider>
       </NextThemesProvider>
     </>
   );
@@ -44,7 +44,7 @@ const loadFeatures = () => import('../utilities/framer-motion-features').then((r
 const appGlobalStyles = css`
   ::selection {
     color: #fff;
-    ${tw`bg-purple-400`}
+    ${tw`bg-primary-400`}
   }
 
   input:focus {

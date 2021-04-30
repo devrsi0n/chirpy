@@ -1520,6 +1520,7 @@ export type Project = {
   /** An object relationship */
   team?: Maybe<Team>;
   teamId?: Maybe<Scalars['uuid']>;
+  theme?: Maybe<Scalars['jsonb']>;
   updatedAt: Scalars['timestamptz'];
   /** An object relationship */
   user?: Maybe<User>;
@@ -1544,6 +1545,12 @@ export type ProjectPages_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Page_Order_By>>;
   where?: Maybe<Page_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Project" */
+export type ProjectThemeArgs = {
+  path?: Maybe<Scalars['String']>;
 };
 
 /** aggregated selection of "Project" */
@@ -1575,6 +1582,11 @@ export type Project_Aggregate_Order_By = {
   min?: Maybe<Project_Min_Order_By>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Project_Append_Input = {
+  theme?: Maybe<Scalars['jsonb']>;
+};
+
 /** input type for inserting array relation for remote table "Project" */
 export type Project_Arr_Rel_Insert_Input = {
   data: Array<Project_Insert_Input>;
@@ -1592,6 +1604,7 @@ export type Project_Bool_Exp = {
   pages?: Maybe<Page_Bool_Exp>;
   team?: Maybe<Team_Bool_Exp>;
   teamId?: Maybe<Uuid_Comparison_Exp>;
+  theme?: Maybe<Jsonb_Comparison_Exp>;
   updatedAt?: Maybe<Timestamptz_Comparison_Exp>;
   user?: Maybe<User_Bool_Exp>;
   userId?: Maybe<Uuid_Comparison_Exp>;
@@ -1603,6 +1616,21 @@ export enum Project_Constraint {
   ProjectPkey = 'Project_pkey'
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Project_Delete_At_Path_Input = {
+  theme?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Project_Delete_Elem_Input = {
+  theme?: Maybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Project_Delete_Key_Input = {
+  theme?: Maybe<Scalars['String']>;
+};
+
 /** input type for inserting data into table "Project" */
 export type Project_Insert_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1611,6 +1639,7 @@ export type Project_Insert_Input = {
   pages?: Maybe<Page_Arr_Rel_Insert_Input>;
   team?: Maybe<Team_Obj_Rel_Insert_Input>;
   teamId?: Maybe<Scalars['uuid']>;
+  theme?: Maybe<Scalars['jsonb']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   user?: Maybe<User_Obj_Rel_Insert_Input>;
   userId?: Maybe<Scalars['uuid']>;
@@ -1688,6 +1717,7 @@ export type Project_Order_By = {
   pages_aggregate?: Maybe<Page_Aggregate_Order_By>;
   team?: Maybe<Team_Order_By>;
   teamId?: Maybe<Order_By>;
+  theme?: Maybe<Order_By>;
   updatedAt?: Maybe<Order_By>;
   user?: Maybe<User_Order_By>;
   userId?: Maybe<Order_By>;
@@ -1696,6 +1726,11 @@ export type Project_Order_By = {
 /** primary key columns input for table: "Project" */
 export type Project_Pk_Columns_Input = {
   id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Project_Prepend_Input = {
+  theme?: Maybe<Scalars['jsonb']>;
 };
 
 /** select columns of table "Project" */
@@ -1709,6 +1744,8 @@ export enum Project_Select_Column {
   /** column name */
   TeamId = 'teamId',
   /** column name */
+  Theme = 'theme',
+  /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
   UserId = 'userId'
@@ -1720,6 +1757,7 @@ export type Project_Set_Input = {
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['uuid']>;
+  theme?: Maybe<Scalars['jsonb']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   userId?: Maybe<Scalars['uuid']>;
 };
@@ -1734,6 +1772,8 @@ export enum Project_Update_Column {
   Name = 'name',
   /** column name */
   TeamId = 'teamId',
+  /** column name */
+  Theme = 'theme',
   /** column name */
   UpdatedAt = 'updatedAt',
   /** column name */
@@ -3387,6 +3427,11 @@ export type Mutation_RootUpdatePagesArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdateProjectByPkArgs = {
+  _append?: Maybe<Project_Append_Input>;
+  _delete_at_path?: Maybe<Project_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Project_Delete_Elem_Input>;
+  _delete_key?: Maybe<Project_Delete_Key_Input>;
+  _prepend?: Maybe<Project_Prepend_Input>;
   _set?: Maybe<Project_Set_Input>;
   pk_columns: Project_Pk_Columns_Input;
 };
@@ -3394,6 +3439,11 @@ export type Mutation_RootUpdateProjectByPkArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdateProjectsArgs = {
+  _append?: Maybe<Project_Append_Input>;
+  _delete_at_path?: Maybe<Project_Delete_At_Path_Input>;
+  _delete_elem?: Maybe<Project_Delete_Elem_Input>;
+  _delete_key?: Maybe<Project_Delete_Key_Input>;
+  _prepend?: Maybe<Project_Prepend_Input>;
   _set?: Maybe<Project_Set_Input>;
   where: Project_Bool_Exp;
 };
