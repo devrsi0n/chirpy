@@ -15,7 +15,7 @@ function Home(): JSX.Element {
       </Head>
       <main tw="py-12 space-y-8">
         <h1
-          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-500 to-primary-500 mt-1"
+          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-primary-500 mt-1"
           css={css`
             line-height: 1.09;
             font-size: 3.25rem;

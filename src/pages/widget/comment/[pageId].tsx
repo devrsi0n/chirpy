@@ -90,7 +90,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
       <div css={tw`space-y-4`}>
-        <div tw="flex flex-row justify-between items-end">
+        <div tw="flex flex-row justify-between items-center">
           <Heading as="h3" tw="text-2xl">
             {formatTitle(commentCount)}
           </Heading>

@@ -104,7 +104,7 @@ export function Header(): JSX.Element {
           <div tw="flex">
             {displayName ? (
               <DropDownMenu content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}>
-                <DropDownMenu.Item tw="" onClick={handleClickLogOut}>
+                <DropDownMenu.Item tw="">
                   <Link
                     variant="plain"
                     href="/profile"
