@@ -8,10 +8,10 @@ import tw from 'twin.macro';
 
 import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
+import { CurrentUserContextType } from '$/components/CurrentUserProvider/CurrentUserContext';
 import { SlashIcon } from '$/components/Icons/SlashIcon';
 import { Link } from '$/components/Link';
 import { Select } from '$/components/Select';
-import { CurrentUserContextType } from '$/context/CurrentUserContext';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useLogout } from '$/hooks/useLogout';
 

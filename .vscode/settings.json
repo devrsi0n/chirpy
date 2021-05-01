@@ -27,5 +27,6 @@
     "centralus",
     "jsonb"
   ],
-  "tailwindcss.preferVariantWithParentheses": true
+  "tailwindcss.preferVariantWithParentheses": true,
+  "jestrunner.configPath": "jest.config.js"
 }
