@@ -2,7 +2,7 @@ import { Switch } from '@headlessui/react';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { Text, TextProps } from '../Text/Text';
+import { Text, TextProps } from '../Text';
 
 export type ToggleProps = {
   label: string;
@@ -31,6 +31,7 @@ export function Toggle({
           style={{
             cursor: 'pointer',
           }}
+          variant="sm"
           {...labelProps}
         >
           {label}
@@ -43,21 +44,19 @@ export function Toggle({
     () => (
       <Switch
         key="switch"
-        as="button"
-        type="button"
         checked={enabled}
         onChange={onChange}
         onMouseDown={handleMoudDown}
         css={[
           enabled ? tw`bg-primary-500` : tw`bg-gray-300 dark:bg-gray-600`,
-          tw`relative inline-flex flex-shrink-0 h-6 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-11 focus:(outline-none ring)`,
+          tw`relative inline-flex flex-shrink-0 h-4 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer w-8 focus:(outline-none ring)`,
         ]}
       >
         {({ checked }) => (
           <span
             css={[
               checked ? tw`translate-x-5` : tw`translate-x-0`,
-              tw`inline-block w-5 h-5 transition duration-200 ease-in-out transform bg-white rounded-full`,
+              tw`inline-block w-3 h-3 transition duration-200 ease-in-out transform bg-white rounded-full`,
             ]}
           />
         )}

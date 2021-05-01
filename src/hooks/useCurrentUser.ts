@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { CurrentUserContext, CurrentUserContextType } from '$/context/CurrentUserContext';
+import {
+  CurrentUserContext,
+  CurrentUserContextType,
+} from '$/components/CurrentUserProvider/CurrentUserContext';
 
 export function useCurrentUser(): CurrentUserContextType {
   const context = React.useContext(CurrentUserContext);
