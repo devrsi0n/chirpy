@@ -2,10 +2,11 @@ import { QueryHookOptions } from '@apollo/client';
 import Cookies from 'js-cookie';
 import * as React from 'react';
 
-import { CurrentUserContext, CurrentUserContextType } from '$/context/CurrentUserContext';
 import { UserByPkQuery, UserByPkQueryVariables, useUserByPkQuery } from '$/graphql/generated/user';
 
 import { USER_COOKIE_NAME } from '$shared/constants';
+
+import { CurrentUserContext, CurrentUserContextType } from './CurrentUserContext';
 
 export type CurrentUserProviderProps = React.PropsWithChildren<{
   apolloBaseOptions?: QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>;

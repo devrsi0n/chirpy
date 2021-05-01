@@ -84,8 +84,3 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
 }
 
 const itemStyle = tw`flex flex-row items-center border-none text-gray-600 dark:text-gray-300 hover:(bg-gray-100 text-gray-700) dark:hover:(text-gray-100 bg-gray-800) cursor-pointer w-full px-6 py-2 text-sm text-right`;
-
-// interface ItemRenderPropArg {
-//   active: boolean;
-//   disabled: boolean;
-// }
