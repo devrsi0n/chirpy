@@ -1,12 +1,10 @@
 import { promises as fs } from 'fs';
 import matter from 'gray-matter';
 import mdxPrism from 'mdx-prism';
-import renderToString from 'next-mdx-remote/render-to-string';
-import { MdxRemote } from 'next-mdx-remote/types';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
-
-import { MDXComponents } from '$/blocks/MDXComponents';
 
 const root = process.cwd();
 
@@ -15,7 +13,7 @@ export async function getFiles(type: string): Promise<string[]> {
 }
 
 export type MDXSource = {
-  mdxSource: MdxRemote.Source;
+  mdxSource: MDXRemoteSerializeResult;
   frontMatter: {
     wordCount: number;
     readingTime: ReturnType<typeof readingTime>;
@@ -30,8 +28,7 @@ export async function getFileBySlug(type: string, slug?: string): Promise<MDXSou
     : fs.readFile(path.join(root, 'posts', `${type}.mdx`), 'utf8'));
 
   const { data, content } = matter(source);
-  const mdxSource = await renderToString(content, {
-    components: MDXComponents,
+  const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
         // require('remark-autolink-headings'),

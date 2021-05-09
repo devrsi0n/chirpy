@@ -8,6 +8,6 @@ context('Home page', () => {
       .findByRole('navigation')
       .findAllByRole('link')
       .its('length')
-      .should('be.gte', 4);
+      .should('be.gte', 3);
   });
 });

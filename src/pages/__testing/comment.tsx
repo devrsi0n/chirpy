@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import * as React from 'react';
 
 import { Text } from '../../components/Text';
@@ -20,6 +21,9 @@ export default function TestingComment(/*props: ITestCommentProps*/): JSX.Elemen
   }, []);
   return (
     <div>
+      <Head>
+        <title>Testing Comment</title>
+      </Head>
       <Text tw="text-center">Test comments:</Text>
       <div
         {...{

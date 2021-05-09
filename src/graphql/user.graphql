@@ -24,6 +24,12 @@ query userByPk($id: uuid!) {
     projects {
       id
       name
+      pages {
+        id
+        title
+        url
+      }
+      createdAt
     }
   }
 }

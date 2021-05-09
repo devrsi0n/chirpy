@@ -9,7 +9,7 @@ const appNameLowerCase = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
 
 // User init a page by import a script
 // <script defer src="/widget/comment.js" data-${NEXT_PUBLIC_APP_NAME}-pid="xxxx"><script>
-// Render target: <div data-${NEXT_PUBLIC_APP_NAME}-comment="true"></div>
+// Render target: <div data-${NEXT_PUBLIC_APP_NAME}-comment></div>
 export function comment(): void {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
@@ -36,9 +36,9 @@ export function comment(): void {
   fetch(
     `${
       process.env.NEXT_PUBLIC_APP_URL
-    }/api/get-page-by-project?projectId=${pid}&url=${encodeURIComponent(origin + pathname)}&title=${
-      window.document.title
-    }`,
+    }/api/get-page-by-project?projectId=${pid}&url=${encodeURIComponent(
+      origin + pathname,
+    )}&title=${encodeURIComponent(window.document.title)}`,
   )
     .then((res) => res.json())
     .then((page: Page | null) => {
