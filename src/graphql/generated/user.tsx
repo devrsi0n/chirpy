@@ -22,7 +22,11 @@ export type UserByPkQuery = (
       ) }
     )>, projects: Array<(
       { __typename?: 'Project' }
-      & Pick<Types.Project, 'id' | 'name'>
+      & Pick<Types.Project, 'id' | 'name' | 'createdAt'>
+      & { pages: Array<(
+        { __typename?: 'Page' }
+        & Pick<Types.Page, 'id' | 'title' | 'url'>
+      )> }
     )> }
   )> }
 );
@@ -72,6 +76,12 @@ export const UserByPkDocument = gql`
     projects {
       id
       name
+      pages {
+        id
+        title
+        url
+      }
+      createdAt
     }
   }
 }
