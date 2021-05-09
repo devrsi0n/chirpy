@@ -1,24 +1,37 @@
 import { ClassNames } from '@emotion/react';
+import Dismiss from '@geist-ui/react-icons/x';
 import { Transition } from '@headlessui/react';
+import { Dialog as HeadlessDialog } from '@headlessui/react';
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import tw from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
+
+import { IconButton } from '../Button';
 
 export type DialogProps = React.PropsWithChildren<{
   show: boolean;
-  title: string;
+  title: React.ReactNode;
+  styles?: {
+    root?: TwStyle;
+    content?: TwStyle;
+  };
+  onClose: (value: boolean) => void;
 }>;
 
-export function Dialog({ title, children, show }: DialogProps): JSX.Element {
-  return ReactDOM.createPortal(
-    <Transition show={show}>
-      <div role="dialog" tw="fixed z-50 inset-0 overflow-y-auto">
-        <div tw="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+export function Dialog({ title, children, show, onClose, styles = {} }: DialogProps): JSX.Element {
+  return (
+    <Transition show={show} as={React.Fragment}>
+      <HeadlessDialog
+        tw="fixed inset-0 z-20 overflow-y-auto"
+        css={styles.root}
+        open={show}
+        onClose={onClose}
+      >
+        <div tw="min-h-screen px-4 text-center">
           <ClassNames>
             {({ css }) => (
               <>
-                <Transition
-                  show={show}
+                <Transition.Child
+                  as={React.Fragment}
                   enter={css(tw`ease-out duration-300`)}
                   enterFrom={css(tw`opacity-0`)}
                   enterTo={css(tw`opacity-100`)}
@@ -27,43 +40,44 @@ export function Dialog({ title, children, show }: DialogProps): JSX.Element {
                   leaveTo={css(tw`opacity-0`)}
                   css={tw`fixed inset-0 transition-opacity`}
                 >
-                  <div tw="absolute inset-0 bg-gray-500 opacity-75 z-30"></div>
-                </Transition>
+                  <HeadlessDialog.Overlay tw="fixed inset-0 backdrop-filter backdrop-blur-sm bg-gray-300 bg-opacity-30" />
+                </Transition.Child>
                 {/* This element is to trick the browser into centering the modal contents. */}
-                <span tw="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-                <Transition
-                  show={show}
+                <span tw="inline-block h-screen align-middle" aria-hidden="true">
+                  &#8203;
+                </span>
+                <Transition.Child
+                  as={React.Fragment}
                   enter={css(tw`ease-out duration-300`)}
-                  enterFrom={css(tw`opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95`)}
-                  enterTo={css(tw`opacity-100 translate-y-0 sm:scale-100`)}
+                  enterFrom={css(tw`opacity-0 scale-95`)}
+                  enterTo={css(tw`opacity-100 scale-100`)}
                   leave={css(tw`ease-in duration-200`)}
-                  leaveFrom={css(tw`opacity-100 translate-y-0 sm:scale-100`)}
-                  leaveTo={css(tw`opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95`)}
-                  css={tw`inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:(my-8 align-middle max-w-lg w-full)`}
-                  role="dialog"
-                  aria-modal="true"
-                  aria-labelledby="modal-headline"
+                  leaveFrom={css(tw`opacity-100 scale-100`)}
+                  leaveTo={css(tw`opacity-0 scale-95`)}
                 >
-                  <div tw="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div tw="">
-                      <div tw="mt-3 flex flex-col justify-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <h3 tw="text-2xl leading-6 font-medium text-gray-900" id="modal-headline">
-                          {title}
-                        </h3>
-                        <div tw="mt-4">
-                          <div tw="text-sm text-gray-500">{children}</div>
-                        </div>
-                      </div>
+                  <div
+                    tw="inline-block w-full max-w-md p-6 py-10 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg relative"
+                    css={[styles.content]}
+                  >
+                    <IconButton size="sm" tw="absolute right-1 top-1" onClick={() => onClose(true)}>
+                      <Dismiss />
+                    </IconButton>
+                    <div tw="flex flex-row justify-between items-start">
+                      <HeadlessDialog.Title as="h2" tw="text-2xl font-bold leading-8 text-gray-900">
+                        {title}
+                      </HeadlessDialog.Title>
+                    </div>
+                    <div tw="mt-4">
+                      <div tw="text-sm text-gray-500">{children}</div>
                     </div>
                   </div>
-                </Transition>
+                </Transition.Child>
               </>
             )}
           </ClassNames>
         </div>
-      </div>
-    </Transition>,
-    document.body,
+      </HeadlessDialog>
+    </Transition>
   );
 }
 
@@ -73,7 +87,7 @@ export function DialogFooter({ className, ...restProps }: IDialogFooterProps): J
   return (
     <div
       {...restProps}
-      tw="space-y-2 sm:space-y-0 space-x-0 sm:space-x-2 sm:flex sm:flex-row sm:justify-end mt-8"
+      tw="space-y-2 space-x-0 sm:(space-y-0 space-x-2 flex flex-row justify-end) mt-8"
       className={className}
     />
   );

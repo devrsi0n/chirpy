@@ -1,4 +1,4 @@
-import hydrate from 'next-mdx-remote/hydrate';
+import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
@@ -9,16 +9,15 @@ import { Layout } from '$/components/Layout';
 import { getFileBySlug, MDXSource } from '$shared/mdx';
 
 export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXSource): JSX.Element {
-  const content = hydrate(mdxSource, {
-    components: MDXComponents,
-  });
   return (
     <Layout>
       <section>
         <Head>
           <title>{frontMatter.title}</title>
         </Head>
-        <article tw="prose lg:prose-xl">{content}</article>
+        <article tw="prose lg:prose-xl">
+          <MDXRemote {...mdxSource} components={MDXComponents} />
+        </article>
       </section>
     </Layout>
   );

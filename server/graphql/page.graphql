@@ -14,6 +14,15 @@ mutation insertOnePage($projectId: uuid!, $title: String!, $url: String!) {
   }
 }
 
+mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
+  updatePages(where: {url: {_eq: $url}, projectId: {_eq: $projectId}}, _set: {title: $title}) {
+    returning {
+      id
+    }
+    affected_rows
+  }
+}
+
 # Used in pages/widget/comment/[pageId].tsx
 query pages {
   pages {

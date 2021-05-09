@@ -5,6 +5,7 @@ import {
   InsertOnePageDocument,
   PageByUrlDocument,
   PageByUrlQuery,
+  UpdatePagesDocument,
 } from '$server/graphql/generated/page';
 
 export async function handleGetPageByProject(
@@ -12,7 +13,7 @@ export async function handleGetPageByProject(
   res: NextApiResponse<PageByUrlQuery['pages'][number] | { error: string } | null>,
 ): Promise<void> {
   const { url, projectId, title } = req.query;
-  if (typeof url !== 'string' || typeof projectId !== 'string') {
+  if (!url || !projectId) {
     return res.status(400).json({
       error: 'Expect valid url and projectId',
     });
@@ -42,7 +43,24 @@ export async function handleGetPageByProject(
     }
 
     return res.json(createdPage.data?.insertOnePage);
+  } else if (page.title !== title) {
+    const updatePage = await adminApollo.mutate({
+      mutation: UpdatePagesDocument,
+      variables: {
+        projectId,
+        url,
+        title: title || '',
+      },
+    });
+    if (
+      updatePage.data?.updatePages?.affected_rows !== 1 ||
+      !updatePage.data.updatePages?.returning[0].id
+    ) {
+      return res.status(500).json({
+        error: 'Update page error',
+      });
+    }
   }
-  // TODO: Update title?
+
   res.json(page);
 }

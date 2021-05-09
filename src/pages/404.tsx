@@ -1,7 +1,7 @@
 import AlertCircleFill from '@geist-ui/react-icons/alertCircleFill';
 import Head from 'next/head';
 import * as React from 'react';
-import tw, { css, theme } from 'twin.macro';
+import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
@@ -40,9 +40,9 @@ export default function Custom404(): JSX.Element {
         <section>
           <Heading as="h5">What could have caused this?</Heading>
           <List variant="unordered">
-            <ListItem css={listMakerStyle}>Something went wrong in our services.</ListItem>
-            <ListItem css={listMakerStyle}>The page might be removed.</ListItem>
-            <ListItem css={listMakerStyle}>You might typed the wrong URL.</ListItem>
+            <ListItem markerStyle={listMakerStyle}>Something went wrong in our services.</ListItem>
+            <ListItem markerStyle={listMakerStyle}>The page might be removed.</ListItem>
+            <ListItem markerStyle={listMakerStyle}>You might typed the wrong URL.</ListItem>
           </List>
         </section>
         <div tw="flex justify-center items-center space-x-6">
@@ -64,8 +64,4 @@ export default function Custom404(): JSX.Element {
 }
 
 const dashedBorder = tw`rounded-full border border-dashed border-gray-300 dark:border-gray-600`;
-const listMakerStyle = css`
-  &::marker {
-    color: ${theme('colors.red.600')};
-  }
-`;
+const listMakerStyle = tw`bg-red-400`;

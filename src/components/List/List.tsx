@@ -4,7 +4,10 @@ import tw, { TwStyle } from 'twin.macro';
 type Variant = 'ordered' | 'unordered';
 export type IListProps = React.PropsWithChildren<
   {
-    variant: Variant;
+    /**
+     * @default 'unordered'
+     */
+    variant?: Variant;
   } & React.ComponentProps<'ul'> &
     React.ComponentProps<'ol'>
 >;
@@ -14,30 +17,29 @@ const variantTags: Record<Variant, 'ul' | 'ol'> = {
   unordered: 'ul',
 };
 
-const variantStyles: Record<Variant, TwStyle> = {
-  ordered: tw`list-decimal`,
-  unordered: tw`list-disc`,
-};
-
-export function List({ className, variant, ...restProps }: IListProps): JSX.Element {
+export function List({ className, variant = 'unordered', ...restProps }: IListProps): JSX.Element {
   const Tag = variantTags[variant];
-  return (
-    <Tag
-      {...restProps}
-      className={className}
-      css={[tw`py-2 list-inside`, variantStyles[variant]]}
-    />
-  );
+  return <Tag {...restProps} className={className} css={[tw`py-2 list-none`]} />;
 }
 
 List.Item = ListItem;
 
-export type IListItemProps = React.PropsWithChildren<React.ComponentPropsWithoutRef<'li'>>;
+export type IListItemProps = React.ComponentPropsWithoutRef<'li'> & {
+  markerStyle?: TwStyle;
+};
 
-export function ListItem({ className, children, ...liProps }: IListItemProps): JSX.Element {
+export function ListItem({
+  className,
+  children,
+  markerStyle: markerStyles,
+  ...liProps
+}: IListItemProps): JSX.Element {
+  const ChildrenContainer = typeof children === 'string' ? 'span' : React.Fragment;
+
   return (
-    <li {...liProps} tw="text-gray-500" className={className}>
-      {children}
+    <li {...liProps} tw="text-gray-500 flex flex-row items-center space-x-2" className={className}>
+      <span css={[tw`rounded-full w-2 h-2 bg-gray-500`, markerStyles]}></span>
+      <ChildrenContainer>{children}</ChildrenContainer>
     </li>
   );
 }
