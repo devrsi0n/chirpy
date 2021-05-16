@@ -1,0 +1,13 @@
+query themeProjects {
+  projects {
+    id
+  }
+}
+
+query themeProjectByPk($id: uuid!) {
+  projectByPk(id: $id) {
+    id
+    name
+    theme
+  }
+}

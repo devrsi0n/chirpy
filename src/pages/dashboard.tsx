@@ -7,6 +7,7 @@ import * as React from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
+import { IntegrateGuide } from '$/blocks/IntegrateGuide';
 import { Button } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Divider } from '$/components/Divider';
@@ -18,7 +19,6 @@ import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
-import { IntegrateGuide } from '$/blocks/IntegrateGuide';
 
 dayjs.extend(relativeTime);
 
@@ -86,7 +86,7 @@ export default function Dashboard(): JSX.Element {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <main>
+      <div>
         <section tw="space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
             <Heading as="h1" tw="text-4xl">
@@ -107,7 +107,7 @@ export default function Dashboard(): JSX.Element {
                       boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
                     }}
                   >
-                    <div tw="px-6 flex flex-row items-center justify-between space-x-14 flex-nowrap">
+                    <div tw="px-6 flex flex-col items-start justify-between space-y-1 flex-nowrap">
                       <div tw="flex flex-row items-center space-x-2">
                         <Heading tw="font-bold" as="h3">
                           {project.name}
@@ -123,7 +123,14 @@ export default function Dashboard(): JSX.Element {
                           <CheckCircle size={18} />
                         </span>
                       </div>
-                      <IntegrateGuide pid={project.id} />
+                      <div tw="flex flex-row space-x-2">
+                        <Link href={`/theme/${project.id}`} variant="plain">
+                          <Button tw="" color="primary" shadow={false} size="sm">
+                            Theme
+                          </Button>
+                        </Link>
+                        <IntegrateGuide pid={project.id} />
+                      </div>
                     </div>
                     {project.pages.length > 0 ? (
                       <List tw="px-6 space-y-1">
@@ -184,7 +191,7 @@ export default function Dashboard(): JSX.Element {
             </DialogFooter>
           </div>
         </Dialog>
-      </main>
+      </div>
     </Layout>
   );
 }

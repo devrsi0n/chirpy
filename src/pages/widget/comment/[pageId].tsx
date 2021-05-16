@@ -1,4 +1,4 @@
-import { useSubscription } from '@apollo/client';
+import { FetchResult } from '@apollo/client';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
@@ -11,26 +11,26 @@ import {
 import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
-import tw from 'twin.macro';
+import 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
 import { PagesDocument } from '$server/graphql/generated/page';
 
-import { CommentTree } from '$/blocks/CommentTree/CommentTree';
+import { CommentWidget } from '$/blocks/CommentWidget';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { RichTextEditor } from '$/blocks/RichTextEditor';
-import { UserDropDown } from '$/blocks/UserDropDown/UserDropDown';
-import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
-import { useTheme } from '$/components/ThemeProvider';
-import { CommentTreeQuery, CommentTreeQueryVariables } from '$/graphql/generated/comment';
+import { ThemeProvider } from '$/components/ThemeProvider';
+import {
+  CommentTreeDocument,
+  CommentTreeSubscription,
+  useCommentTreeSubscription,
+} from '$/graphql/generated/comment';
+import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
+import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
-import { getQueryCommentTreeDoc, getSubscribeCommentTreeDoc } from '$/utilities/comment-request';
-import { getCommentCount } from '$/utilities/get-comment-count';
 
 dayjs.extend(relativeTime);
 
@@ -45,35 +45,23 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
+  let theme;
 
   if (isStaticError(props)) {
     error = props.error!;
   } else {
     pageId = props.pageId;
+    theme = props.theme;
   }
-  const { data } = useSubscription<CommentTreeQuery, CommentTreeQueryVariables>(
-    getSubscribeCommentTreeDoc(),
-    {
-      variables: { pageId },
-    },
-  );
+  const { data } = useCommentTreeSubscription({
+    variables: { pageId },
+  });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
-  const { isLogin } = useCurrentUser();
-
-  const handleSubmitReply = useCreateAComment({ pageId });
-
-  const handleClickLikeAction = useToggleALikeAction();
 
   useNotifyHostHeightOfPage();
 
-  const { mergeTheme } = useTheme();
-  const theme = comments[0]?.page.project.theme;
-  React.useEffect(() => {
-    if (theme) {
-      mergeTheme(theme);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [theme]);
+  const onSubmitReply = useCreateAComment({ pageId });
+  const onClickLikeAction = useToggleALikeAction();
 
   if (error) {
     return <p>{error}</p>;
@@ -82,42 +70,17 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   if (!comments) {
     return <p>Wrong page.</p>;
   }
-  const commentCount = getCommentCount(comments);
 
   return (
-    <Layout noFooter noHeader>
-      <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
-      </Head>
-      <div css={tw`space-y-4`}>
-        <div tw="flex flex-row justify-between items-center">
-          <Heading as="h3" tw="text-2xl">
-            {formatTitle(commentCount)}
-          </Heading>
-          <UserDropDown />
-        </div>
-        <div css={tw`space-y-7`}>
-          <div css={tw`space-y-2`}>
-            <RichTextEditor
-              onSubmit={handleSubmitReply}
-              postButtonLabel={!isLogin ? 'Sign in' : undefined}
-            />
-          </div>
-
-          <ul>
-            {comments?.map((comment: CommentLeafType) => (
-              <CommentTree
-                key={comment.id}
-                comment={comment}
-                onClickLikeAction={handleClickLikeAction}
-                onSubmitReply={handleSubmitReply}
-              />
-            ))}
-          </ul>
-        </div>
-      </div>
-      <PoweredBy />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout noFooter noHeader>
+        <Head>
+          <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
+        </Head>
+        <CommentWidget {...{ comments, pageId, onSubmitReply, onClickLikeAction }} />
+        <PoweredBy />
+      </Layout>
+    </ThemeProvider>
   );
 }
 
@@ -149,6 +112,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 type StaticProps = PathParams & {
   comments: CommentLeafType[];
+  theme: Theme;
 };
 type StaticError = {
   error: string;
@@ -157,42 +121,49 @@ type StaticError = {
 export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
+  if (!params?.pageId) {
+    return { notFound: true };
+  }
+  const { pageId } = params;
+  const adminApollo = getAdminApollo();
+  const commentTreeSubscription = adminApollo.subscribe<CommentTreeSubscription>({
+    query: CommentTreeDocument,
+    variables: {
+      pageId,
+    },
+  });
   try {
-    if (!params?.pageId) {
+    const { data } = await new Promise<FetchResult<CommentTreeSubscription>>((resolve, reject) => {
+      commentTreeSubscription.subscribe(
+        (value) => {
+          resolve(value);
+        },
+        (error) => {
+          reject(error);
+        },
+      );
+    });
+
+    if (!data?.comments) {
       return { notFound: true };
     }
-    const { pageId } = params;
-    const adminApollo = getAdminApollo();
-    const pageResult = await adminApollo.query({
-      query: getQueryCommentTreeDoc(),
+    const { comments } = data;
+    const themeResult = await adminApollo.query<ThemeOfPageQuery>({
+      query: ThemeOfPageDocument,
       variables: {
         pageId,
       },
     });
-
-    if (!pageResult.data?.comments) {
-      return { notFound: true };
-    }
-    const { comments } = pageResult.data;
     return {
-      props: { comments, pageId },
+      props: { comments, pageId, theme: themeResult.data.pageByPk?.project.theme },
       revalidate: 1,
     };
   } catch (error) {
     console.error(superjson.stringify(error));
-    throw new Error(error);
+    return { notFound: true };
   }
 };
 
 function isStaticError(props: $TsAny): props is StaticError {
   return !!props.error;
-}
-
-function formatTitle(count: number): string {
-  if (count === 0) {
-    return 'Comment';
-  } else if (count === 1) {
-    return '1 comment';
-  }
-  return `${count} comments`;
 }

@@ -85,7 +85,7 @@ export function CommentCard({
       return;
     }
     setShowReplyEditor((prev) => !prev);
-  }, []);
+  }, [disabledReply]);
 
   return (
     <m.article

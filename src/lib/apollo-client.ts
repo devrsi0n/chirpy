@@ -15,10 +15,8 @@ import * as React from 'react';
 
 import { AUTH_COOKIE_NAME } from '../../shared/constants';
 
-let cachedApolloClient:
-  | ApolloClient<NormalizedCache>
-  | ApolloClient<NormalizedCacheObject>
-  | null = null;
+let cachedApolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | null =
+  null;
 
 // Used in server
 const getHttpLink = () => {

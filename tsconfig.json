@@ -32,6 +32,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "server/**/*.ts",
-    "server/**/*.tsx"
-, "shared/mdx.ts"  ]
+    "server/**/*.tsx",
+    "shared/*.ts"
+  ]
 }
