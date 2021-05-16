@@ -25,6 +25,7 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
         css={styles.root}
         open={show}
         onClose={onClose}
+        static
       >
         <div tw="min-h-screen px-4 text-center">
           <ClassNames>

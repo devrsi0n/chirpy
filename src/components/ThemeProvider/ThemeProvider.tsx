@@ -4,9 +4,12 @@ import * as React from 'react';
 
 import { Theme } from '$/types/theme.type';
 
+import { siteDefaultTheme } from './siteDefaultTheme';
+import { getThemeCSSVariables } from './utilities';
+
 export type ThemeProviderProps = {
   children: React.ReactNode;
-  theme: Theme;
+  theme?: Theme;
 };
 
 const themeVariablePrefix = '--tw';
@@ -26,19 +29,20 @@ export const ThemeContext = React.createContext<ThemeContextType>({
 });
 
 export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
-  const [theme, setTheme] = React.useState<Theme>(props.theme);
+  const [theme, setTheme] = React.useState<Theme>(() => merge({}, siteDefaultTheme, props.theme));
   const value = React.useMemo<ThemeContextType>(
     () => ({
       theme,
-      mergeTheme: (newTheme: Theme) => setTheme((prevTheme) => merge(prevTheme, newTheme)),
+      mergeTheme: (newTheme: Theme) => setTheme((prevTheme) => merge({}, prevTheme, newTheme)),
     }),
     [theme],
   );
+
   return (
     <ThemeContext.Provider value={value}>
       <Head>
         <style>
-          {`:root {
+          {`.widget-theme {
               ${getThemeCSSVariables(theme, themeVariablePrefix)
                 .map(([key, value]) => `${key}: ${value};`)
                 .join('\n')}
@@ -46,7 +50,7 @@ export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
           `}
         </style>
       </Head>
-      {props.children}
+      <div className="widget-theme">{props.children}</div>
     </ThemeContext.Provider>
   );
 }
@@ -54,25 +58,3 @@ export function ThemeProvider(props: ThemeProviderProps): JSX.Element {
 export const useTheme = () => {
   return React.useContext(ThemeContext);
 };
-
-export type CSSVariables = Array<[string, string]>;
-
-type NestedObject = { [key: string]: string | NestedObject };
-
-/**
- * Support any depth level of nesting objects
- */
-function getThemeCSSVariables(theme: NestedObject, prefix: string): CSSVariables {
-  const cssVariables: Array<[string, string]> = [];
-  for (const [key, value] of Object.entries(theme)) {
-    const cssVariableKey = prefix && key ? [prefix, key].join('-') : prefix || key;
-    if (typeof value === 'string') {
-      cssVariables.push([cssVariableKey, value]);
-    } else if (typeof value === 'object' && value) {
-      cssVariables.push(...getThemeCSSVariables(value, cssVariableKey));
-    } else {
-      throw new Error(`Unexpected theme value: ${value}`);
-    }
-  }
-  return cssVariables;
-}

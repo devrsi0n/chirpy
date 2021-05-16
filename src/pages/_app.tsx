@@ -8,10 +8,9 @@ import * as React from 'react';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
-import { ThemeProvider } from '$/components/ThemeProvider';
+import { SiteThemeProvider } from '$/components/ThemeProvider/SiteThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { useApollo } from '$/lib/apollo-client';
-import { defaultTheme } from '$/styles/theme';
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const apollo = useApollo();
@@ -21,7 +20,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       <GlobalStyles />
       <Global styles={appGlobalStyles} />
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
-        <ThemeProvider theme={defaultTheme}>
+        <SiteThemeProvider>
           <LazyMotion features={loadFeatures} strict>
             <ApolloProvider client={apollo}>
               <CurrentUserProvider>
@@ -31,7 +30,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
               </CurrentUserProvider>
             </ApolloProvider>
           </LazyMotion>
-        </ThemeProvider>
+        </SiteThemeProvider>
       </NextThemesProvider>
     </>
   );
@@ -102,7 +101,7 @@ const appGlobalStyles = css`
   // https://www.joshwcomeau.com/css/full-bleed/
   .main-container {
     display: grid;
-    grid-template-columns: 1fr min(60ch, calc(100% - 64px)) 1fr;
+    grid-template-columns: 1fr min(70ch, calc(100% - 64px)) 1fr;
     grid-column-gap: 32px;
 
     & > * {
