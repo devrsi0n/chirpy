@@ -1,4 +1,4 @@
-import { useSubscription } from '@apollo/client';
+import { FetchResult } from '@apollo/client';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
@@ -9,6 +9,7 @@ import {
   GetStaticPropsResult,
 } from 'next';
 import * as React from 'react';
+import superjson from 'superjson';
 import tw from 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
@@ -21,14 +22,18 @@ import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
-import { CommentDetailsQuery, CommentDetailsQueryVariables } from '$/graphql/generated/comment';
-import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
-import { CommentDetailNode } from '$/types/widget';
+import { ThemeProvider } from '$/components/ThemeProvider';
 import {
-  getQueryCommentDetailsDoc,
-  getSubscribeCommentDetailsDoc,
-} from '$/utilities/comment-request';
+  CommentDetailsDocument,
+  CommentDetailsSubscription,
+  useCommentDetailsSubscription,
+} from '$/graphql/generated/comment';
+import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
+import { useCreateAComment } from '$/hooks/useCreateAComment';
+import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
+import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
+import { Theme } from '$/types/theme.type';
+import { CommentDetailNode } from '$/types/widget';
 
 dayjs.extend(relativeTime);
 
@@ -39,36 +44,38 @@ export default function CommentDetailsWidget(
   const handleSubmitReply = useCreateAComment({ pageId: props.comment?.pageId || '' });
 
   const handleClickLikeAction = useToggleALikeAction();
-  const { data } = useSubscription<CommentDetailsQuery, CommentDetailsQueryVariables>(
-    getSubscribeCommentDetailsDoc(),
-    {
-      variables: { id: props.commentId },
-    },
-  );
+  const { data } = useCommentDetailsSubscription({
+    variables: { id: props.commentId },
+  });
+
+  useNotifyHostHeightOfPage();
+
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <Layout noFooter noHeader>
-      <div css={tw`flex flex-row justify-between items-center mb-4`}>
-        <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
-          <IconButton icon="arrow-left" size="md" css={tw`transform -translate-x-4`} />
-        </Link>
-        <Heading as="h4" css={tw`text-gray-600`}>
-          <span tw="font-bold">{comment?.user.displayName}</span>
-          <span>'s comment details</span>
-        </Heading>
-        <UserDropDown />
-      </div>
-      {comment?.id && (
-        <CommentLinkedList
-          key={comment!.id}
-          comment={comment!}
-          onClickLikeAction={handleClickLikeAction}
-          onSubmitReply={handleSubmitReply}
-        />
-      )}
-      <PoweredBy />
-    </Layout>
+    <ThemeProvider theme={props.theme}>
+      <Layout noFooter noHeader>
+        <div css={tw`flex flex-row justify-between items-center mb-4`}>
+          <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
+            <IconButton icon="arrow-left" size="md" css={tw`transform -translate-x-4`} />
+          </Link>
+          <Heading as="h4" css={tw`text-gray-600`}>
+            <span tw="font-bold">{comment?.user.displayName}</span>
+            <span>'s comment details</span>
+          </Heading>
+          <UserDropDown />
+        </div>
+        {comment?.id && (
+          <CommentLinkedList
+            key={comment!.id}
+            comment={comment!}
+            onClickLikeAction={handleClickLikeAction}
+            onSubmitReply={handleSubmitReply}
+          />
+        )}
+        <PoweredBy />
+      </Layout>
+    </ThemeProvider>
   );
 }
 type PathParams = {
@@ -77,6 +84,7 @@ type PathParams = {
 
 type StaticProps = PathParams & {
   comment: CommentDetailNode;
+  theme?: Theme;
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
@@ -105,19 +113,48 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   const { commentId } = params;
   const adminApollo = getAdminApollo();
-  const { data } = await adminApollo.query<CommentDetailsQuery>({
-    query: getQueryCommentDetailsDoc(),
+
+  const commentDetailsSubscription = adminApollo.subscribe<CommentDetailsSubscription>({
+    query: CommentDetailsDocument,
     variables: {
       id: commentId,
     },
   });
+  try {
+    const { data } = await new Promise<FetchResult<CommentDetailsSubscription>>(
+      (resolve, reject) => {
+        commentDetailsSubscription.subscribe(
+          (value) => {
+            resolve(value);
+          },
+          (error) => {
+            reject(error);
+          },
+        );
+      },
+    );
 
-  if (!data?.commentByPk) {
+    if (!data?.commentByPk) {
+      return { notFound: true };
+    }
+
+    const themeResult = await adminApollo.query<ThemeOfPageQuery>({
+      query: ThemeOfPageDocument,
+      variables: {
+        pageId: data.commentByPk.pageId,
+      },
+    });
+
+    return {
+      props: {
+        comment: data.commentByPk,
+        commentId,
+        theme: themeResult.data.pageByPk?.project.theme,
+      },
+      revalidate: 1,
+    };
+  } catch (error) {
+    console.error(superjson.stringify(error));
     return { notFound: true };
   }
-
-  return {
-    props: { comment: data.commentByPk, commentId },
-    revalidate: 1,
-  };
 };

@@ -4,23 +4,46 @@ import * as React from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
-import { Button, ButtonProps } from '../Button';
+import { Button } from '../Button';
 
-interface IPopoverProps {
+export type Placement = 'top' | 'topEnd';
+
+export interface IPopoverProps {
   children: React.ReactNode;
   content: React.ReactNode;
-  buttonProps: Partial<ButtonProps>;
+  buttonProps?: $TsAny;
+  buttonAs?: React.FunctionComponent<$TsAny>;
+  /**
+   * TODO
+   */
+  placement?: Placement;
+  /**
+   * Close panel automatically when clicking the content of the panel.
+   * @default true
+   */
+  autoClose?: boolean;
 }
 
-export function Popover(props: IPopoverProps): JSX.Element {
-  const ref: React.RefObject<HTMLButtonElement> = React.useRef(null);
+export function Popover({
+  autoClose = true,
+  buttonProps,
+  buttonAs,
+  children,
+  content,
+}: IPopoverProps): JSX.Element {
+  const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
+  const handleClickPanel = () => {
+    if (autoClose) {
+      buttonRef.current?.click();
+    }
+  };
 
   return (
     <HeadLessPopover tw="relative">
       {({ open }) => (
         <>
-          <HeadLessPopover.Button {...props.buttonProps} as={Button} ref={ref}>
-            {props.children}
+          <HeadLessPopover.Button {...buttonProps} as={buttonAs || Button} ref={buttonRef}>
+            {children}
           </HeadLessPopover.Button>
           <ClassNames>
             {({ css }) => (
@@ -35,19 +58,35 @@ export function Popover(props: IPopoverProps): JSX.Element {
               >
                 <HeadLessPopover.Panel
                   static
-                  tw="absolute right-0 z-10 border bg-white dark:bg-black rounded"
+                  css={[tw`absolute right-0 z-10`, panelBorder]}
                   style={{
-                    bottom: (ref.current?.getBoundingClientRect().height || 40) + 16,
+                    bottom: (buttonRef.current?.getBoundingClientRect().height || 40) + 16,
+                    transform: `translateX(calc(50% - ${
+                      (buttonRef.current?.getBoundingClientRect().width || 40) / 2
+                    }px))`,
+                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
                   }}
                 >
                   <div
-                    tw="absolute h-4 w-4 transform rotate-45 border bg-white dark:bg-black"
+                    css={[tw`relative py-2 px-4 rounded-lg`, panelBg, panelBorder]}
+                    onClick={handleClickPanel}
+                    onKeyDown={handleClickPanel}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {content}
+                  </div>
+                  <div
+                    css={[
+                      tw`absolute h-4 w-4 transform rotate-45`,
+                      panelBg,
+                      tw`border-t-0 border-l-0`,
+                    ]}
                     style={{
                       bottom: '-8px',
-                      right: `${(ref.current?.getBoundingClientRect().height || 16) / 2}px`,
+                      right: 'calc(50% - 8px)',
                     }}
                   />
-                  <div tw="relative py-2 px-4 bg-white dark:bg-black">{props.content}</div>
                 </HeadLessPopover.Panel>
               </Transition>
             )}
@@ -57,3 +96,6 @@ export function Popover(props: IPopoverProps): JSX.Element {
     </HeadLessPopover>
   );
 }
+
+const panelBg = tw`bg-gray-50 dark:bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur border border-gray-500 border-opacity-10`;
+const panelBorder = tw`rounded-lg`;

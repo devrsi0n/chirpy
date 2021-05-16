@@ -4,7 +4,7 @@ import tw from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Code } from '$/components/Code';
-import { Dialog, DialogFooter } from '$/components/Dialog';
+import { Dialog } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
 

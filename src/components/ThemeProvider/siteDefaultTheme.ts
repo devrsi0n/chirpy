@@ -1,8 +1,8 @@
 import { default as TailwindColors } from 'tailwindcss/colors';
 
-import { Theme } from '../types/theme.type';
+import { Theme } from '../../types/theme.type';
 
-export const defaultTheme: Theme = {
+export const siteDefaultTheme: Theme = {
   colors: {
     primary: TailwindColors.fuchsia,
   },

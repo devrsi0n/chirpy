@@ -15,9 +15,9 @@ export type IconButtonProps = BaseButtonProps & {
 };
 
 const sizeStyles: Record<Size, [TwStyle, number]> = {
-  sm: [tw`p-2`, 14],
-  md: [tw`p-3`, 18],
-  lg: [tw`p-6`, 24],
+  sm: [tw`p-1`, 14],
+  md: [tw`p-2`, 18],
+  lg: [tw`p-3`, 24],
 };
 
 const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
@@ -39,7 +39,7 @@ export const IconButton = React.forwardRef(function IconButton(
       ref={ref}
       {...restProps}
       css={[
-        tw`rounded-full hover:(bg-gray-400 bg-opacity-10) focus:(outline-none ring-2 ring-inset ring-gray-200)`,
+        tw`rounded-full hover:(bg-gray-400 bg-opacity-10) focus-visible:(outline-none ring-2 ring-inset ring-gray-200)`,
         style,
       ]}
     >

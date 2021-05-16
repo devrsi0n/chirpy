@@ -6,13 +6,7 @@ const defaultOptions =  {}
 export type CommentContentFragment = (
   { __typename?: 'Comment' }
   & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-  & { page: (
-    { __typename?: 'Page' }
-    & { project: (
-      { __typename?: 'Project' }
-      & Pick<Types.Project, 'theme'>
-    ) }
-  ), user: (
+  & { user: (
     { __typename?: 'User' }
     & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
   ), likes: Array<(
@@ -21,13 +15,13 @@ export type CommentContentFragment = (
   )> }
 );
 
-export type CommentTreeQueryVariables = Types.Exact<{
+export type CommentTreeSubscriptionVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentTreeQuery = (
-  { __typename?: 'query_root' }
+export type CommentTreeSubscription = (
+  { __typename?: 'subscription_root' }
   & { comments: Array<(
     { __typename?: 'Comment' }
     & { replies: Array<(
@@ -42,13 +36,13 @@ export type CommentTreeQuery = (
   )> }
 );
 
-export type CommentDetailsQueryVariables = Types.Exact<{
+export type CommentDetailsSubscriptionVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentDetailsQuery = (
-  { __typename?: 'query_root' }
+export type CommentDetailsSubscription = (
+  { __typename?: 'subscription_root' }
   & { commentByPk?: Types.Maybe<(
     { __typename?: 'Comment' }
     & { replies: Array<(
@@ -93,11 +87,6 @@ export const CommentContentFragmentDoc = gql`
   createdAt
   parentId
   pageId
-  page {
-    project {
-      theme
-    }
-  }
   depth
   user {
     id
@@ -111,7 +100,7 @@ export const CommentContentFragmentDoc = gql`
 }
     `;
 export const CommentTreeDocument = gql`
-    query commentTree($pageId: uuid!) {
+    subscription commentTree($pageId: uuid!) {
   comments(
     where: {pageId: {_eq: $pageId}, parentId: {_is_null: true}}
     order_by: {likes_aggregate: {count: desc}, createdAt: asc}
@@ -128,34 +117,29 @@ export const CommentTreeDocument = gql`
     ${CommentContentFragmentDoc}`;
 
 /**
- * __useCommentTreeQuery__
+ * __useCommentTreeSubscription__
  *
- * To run a query within a React component, call `useCommentTreeQuery` and pass it any options that fit your needs.
- * When your component renders, `useCommentTreeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCommentTreeSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCommentTreeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCommentTreeQuery({
+ * const { data, loading, error } = useCommentTreeSubscription({
  *   variables: {
  *      pageId: // value for 'pageId'
  *   },
  * });
  */
-export function useCommentTreeQuery(baseOptions: Apollo.QueryHookOptions<CommentTreeQuery, CommentTreeQueryVariables>) {
+export function useCommentTreeSubscription(baseOptions: Apollo.SubscriptionHookOptions<CommentTreeSubscription, CommentTreeSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CommentTreeQuery, CommentTreeQueryVariables>(CommentTreeDocument, options);
+        return Apollo.useSubscription<CommentTreeSubscription, CommentTreeSubscriptionVariables>(CommentTreeDocument, options);
       }
-export function useCommentTreeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentTreeQuery, CommentTreeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CommentTreeQuery, CommentTreeQueryVariables>(CommentTreeDocument, options);
-        }
-export type CommentTreeQueryHookResult = ReturnType<typeof useCommentTreeQuery>;
-export type CommentTreeLazyQueryHookResult = ReturnType<typeof useCommentTreeLazyQuery>;
-export type CommentTreeQueryResult = Apollo.QueryResult<CommentTreeQuery, CommentTreeQueryVariables>;
+export type CommentTreeSubscriptionHookResult = ReturnType<typeof useCommentTreeSubscription>;
+export type CommentTreeSubscriptionResult = Apollo.SubscriptionResult<CommentTreeSubscription>;
 export const CommentDetailsDocument = gql`
-    query commentDetails($id: uuid!) {
+    subscription commentDetails($id: uuid!) {
   commentByPk(id: $id) {
     ...commentContent
     replies(order_by: {likes_aggregate: {count: desc}, createdAt: asc}) {
@@ -175,32 +159,27 @@ export const CommentDetailsDocument = gql`
     ${CommentContentFragmentDoc}`;
 
 /**
- * __useCommentDetailsQuery__
+ * __useCommentDetailsSubscription__
  *
- * To run a query within a React component, call `useCommentDetailsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCommentDetailsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCommentDetailsSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useCommentDetailsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCommentDetailsQuery({
+ * const { data, loading, error } = useCommentDetailsSubscription({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useCommentDetailsQuery(baseOptions: Apollo.QueryHookOptions<CommentDetailsQuery, CommentDetailsQueryVariables>) {
+export function useCommentDetailsSubscription(baseOptions: Apollo.SubscriptionHookOptions<CommentDetailsSubscription, CommentDetailsSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CommentDetailsQuery, CommentDetailsQueryVariables>(CommentDetailsDocument, options);
+        return Apollo.useSubscription<CommentDetailsSubscription, CommentDetailsSubscriptionVariables>(CommentDetailsDocument, options);
       }
-export function useCommentDetailsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CommentDetailsQuery, CommentDetailsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CommentDetailsQuery, CommentDetailsQueryVariables>(CommentDetailsDocument, options);
-        }
-export type CommentDetailsQueryHookResult = ReturnType<typeof useCommentDetailsQuery>;
-export type CommentDetailsLazyQueryHookResult = ReturnType<typeof useCommentDetailsLazyQuery>;
-export type CommentDetailsQueryResult = Apollo.QueryResult<CommentDetailsQuery, CommentDetailsQueryVariables>;
+export type CommentDetailsSubscriptionHookResult = ReturnType<typeof useCommentDetailsSubscription>;
+export type CommentDetailsSubscriptionResult = Apollo.SubscriptionResult<CommentDetailsSubscription>;
 export const InsertOneCommentDocument = gql`
     mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $depth: Int!) {
   insertOneComment(

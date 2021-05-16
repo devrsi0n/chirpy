@@ -2,63 +2,61 @@ import * as Types from './types';
 
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
-export type PageByProjectQueryVariables = Types.Exact<{
-  projectId: Types.Scalars['String'];
-  url: Types.Scalars['String'];
-  title: Types.Scalars['String'];
+const defaultOptions =  {}
+export type ThemeOfPageQueryVariables = Types.Exact<{
+  pageId: Types.Scalars['uuid'];
 }>;
 
-export type PageByProjectQuery = { __typename?: 'Query' } & {
-  getOrCreatePage?: Types.Maybe<{ __typename?: 'Page' } & Pick<Types.Page, 'id' | 'url' | 'title'>>;
-};
 
-export const PageByProjectDocument = gql`
-  query pageByProject($projectId: String!, $url: String!, $title: String!) {
-    getOrCreatePage(projectId: $projectId, url: $url, title: $title) {
+export type ThemeOfPageQuery = (
+  { __typename?: 'query_root' }
+  & { pageByPk?: Types.Maybe<(
+    { __typename?: 'Page' }
+    & Pick<Types.Page, 'id'>
+    & { project: (
+      { __typename?: 'Project' }
+      & Pick<Types.Project, 'id' | 'theme'>
+    ) }
+  )> }
+);
+
+
+export const ThemeOfPageDocument = gql`
+    query themeOfPage($pageId: uuid!) {
+  pageByPk(id: $pageId) {
+    id
+    project {
       id
-      url
-      title
+      theme
     }
   }
-`;
+}
+    `;
 
 /**
- * __usePageByProjectQuery__
+ * __useThemeOfPageQuery__
  *
- * To run a query within a React component, call `usePageByProjectQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageByProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useThemeOfPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useThemeOfPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageByProjectQuery({
+ * const { data, loading, error } = useThemeOfPageQuery({
  *   variables: {
- *      projectId: // value for 'projectId'
- *      url: // value for 'url'
- *      title: // value for 'title'
+ *      pageId: // value for 'pageId'
  *   },
  * });
  */
-export function usePageByProjectQuery(
-  baseOptions: Apollo.QueryHookOptions<PageByProjectQuery, PageByProjectQueryVariables>,
-) {
-  return Apollo.useQuery<PageByProjectQuery, PageByProjectQueryVariables>(
-    PageByProjectDocument,
-    baseOptions,
-  );
-}
-export function usePageByProjectLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PageByProjectQuery, PageByProjectQueryVariables>,
-) {
-  return Apollo.useLazyQuery<PageByProjectQuery, PageByProjectQueryVariables>(
-    PageByProjectDocument,
-    baseOptions,
-  );
-}
-export type PageByProjectQueryHookResult = ReturnType<typeof usePageByProjectQuery>;
-export type PageByProjectLazyQueryHookResult = ReturnType<typeof usePageByProjectLazyQuery>;
-export type PageByProjectQueryResult = Apollo.QueryResult<
-  PageByProjectQuery,
-  PageByProjectQueryVariables
->;
+export function useThemeOfPageQuery(baseOptions: Apollo.QueryHookOptions<ThemeOfPageQuery, ThemeOfPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ThemeOfPageQuery, ThemeOfPageQueryVariables>(ThemeOfPageDocument, options);
+      }
+export function useThemeOfPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ThemeOfPageQuery, ThemeOfPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ThemeOfPageQuery, ThemeOfPageQueryVariables>(ThemeOfPageDocument, options);
+        }
+export type ThemeOfPageQueryHookResult = ReturnType<typeof useThemeOfPageQuery>;
+export type ThemeOfPageLazyQueryHookResult = ReturnType<typeof useThemeOfPageLazyQuery>;
+export type ThemeOfPageQueryResult = Apollo.QueryResult<ThemeOfPageQuery, ThemeOfPageQueryVariables>;

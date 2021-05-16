@@ -34,6 +34,9 @@ module.exports = {
         md: '2px',
         lg: '4px',
       },
+      flex: {
+        '2': '2 2 0%',
+      }
     },
     // typography: (theme) => ({
     //   light: {
