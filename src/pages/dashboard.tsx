@@ -102,7 +102,7 @@ export default function Dashboard(): JSX.Element {
                 {projects.map((project) => (
                   <section
                     key={project.id}
-                    tw="pt-4 rounded-lg space-y-3"
+                    tw="pt-4 rounded-lg space-y-4"
                     style={{
                       boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
                     }}
@@ -138,7 +138,7 @@ export default function Dashboard(): JSX.Element {
                               href={page.url}
                               title={page.title || page.url}
                               variant="plain"
-                              tw="hover:text-gray-700 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
+                              tw="text-gray-600 hover:text-gray-900 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
                             >
                               {page.title || page.url}
                             </Link>
@@ -150,7 +150,9 @@ export default function Dashboard(): JSX.Element {
                     )}
                     <Divider />
                     <div tw="px-6 pb-2">
-                      <Text variant="sm">Created {dayjs(project.createdAt).fromNow()}</Text>
+                      <Text tw="text-gray-400" variant="sm">
+                        Created {dayjs(project.createdAt).fromNow()}
+                      </Text>
                     </div>
                   </section>
                 ))}

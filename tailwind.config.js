@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', ...defaultTheme.fontFamily.sans]
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         gray: colors.trueGray,
@@ -35,8 +35,8 @@ module.exports = {
         lg: '4px',
       },
       flex: {
-        '2': '2 2 0%',
-      }
+        2: '2 2 0%',
+      },
     },
     // typography: (theme) => ({
     //   light: {
@@ -102,8 +102,5 @@ module.exports = {
     //   },
     // }),
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };

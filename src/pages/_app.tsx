@@ -50,6 +50,12 @@ const appGlobalStyles = css`
     outline: none;
   }
 
+  html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   * {
     text-rendering: optimizeLegibility;
     -webkit-tap-highlight-color: transparent;
@@ -67,35 +73,21 @@ const appGlobalStyles = css`
   }
 
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Inter var';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 100 900;
     font-display: optional;
-    src: url(/fonts/Roboto/Roboto-Regular.ttf) format('truetype');
+    src: url('/fonts/Inter/Inter-roman.var.woff2') format('woff2');
+    font-named-instance: 'Regular';
   }
 
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Inter var';
     font-style: italic;
-    font-weight: 400;
+    font-weight: 100 900;
     font-display: optional;
-    src: url(/fonts/Roboto/Roboto-Italic.ttf) format('truetype');
-  }
-
-  @font-face {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 700;
-    font-display: optional;
-    src: url(/fonts/Roboto/Roboto-Bold.ttf) format('truetype');
-  }
-
-  @font-face {
-    font-family: 'Roboto';
-    font-style: italic;
-    font-weight: 700;
-    font-display: optional;
-    src: url(/fonts/Roboto/Roboto-BoldItalic.ttf) format('truetype');
+    src: url('/fonts/Inter/Inter-italic.var.woff2') format('woff2');
+    font-named-instance: 'Italic';
   }
 
   // https://www.joshwcomeau.com/css/full-bleed/
