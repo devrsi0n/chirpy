@@ -5,6 +5,8 @@ import { Dialog as HeadlessDialog } from '@headlessui/react';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { bluredBg, bluredOverlay } from '$/styles/common';
+
 import { IconButton } from '../Button';
 
 export type DialogProps = React.PropsWithChildren<{
@@ -41,7 +43,7 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
                   leaveTo={css(tw`opacity-0`)}
                   css={tw`fixed inset-0 transition-opacity`}
                 >
-                  <HeadlessDialog.Overlay tw="fixed inset-0 backdrop-filter backdrop-blur-sm bg-gray-300 bg-opacity-30" />
+                  <HeadlessDialog.Overlay css={[tw`fixed inset-0`, bluredOverlay]} />
                 </Transition.Child>
                 {/* This element is to trick the browser into centering the modal contents. */}
                 <span tw="inline-block h-screen align-middle" aria-hidden="true">

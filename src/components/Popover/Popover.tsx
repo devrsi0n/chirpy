@@ -4,6 +4,8 @@ import * as React from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
+import { bluredBg } from '$/styles/common';
+
 import { Button } from '../Button';
 
 export type Placement = 'top' | 'topEnd';
@@ -97,5 +99,5 @@ export function Popover({
   );
 }
 
-const panelBg = tw`bg-gray-50 dark:bg-gray-900 bg-opacity-80 backdrop-filter backdrop-blur border border-gray-500 border-opacity-10`;
+const panelBg = [bluredBg, tw`border border-gray-500 border-opacity-10`];
 const panelBorder = tw`rounded-lg`;

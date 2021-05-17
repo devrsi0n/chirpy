@@ -102,38 +102,36 @@ export default function Dashboard(): JSX.Element {
                 {projects.map((project) => (
                   <section
                     key={project.id}
-                    tw="pt-4 rounded-lg space-y-2"
+                    tw="pt-4 rounded-lg space-y-3"
                     style={{
                       boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
                     }}
                   >
-                    <div tw="px-6 flex flex-col items-start justify-between space-y-1 flex-nowrap">
-                      <div tw="flex flex-row items-center space-x-2">
-                        <Heading tw="font-bold" as="h3">
-                          {project.name}
-                        </Heading>
-                        <span
-                          title={
-                            project.pages.length > 0
-                              ? 'You alread integrated this project into at least one page'
-                              : 'No page integrated'
-                          }
-                          css={project.pages.length > 0 ? tw`text-green-500` : tw`text-gray-500`}
-                        >
-                          <CheckCircle size={18} />
-                        </span>
-                      </div>
-                      <div tw="flex flex-row space-x-2">
-                        <Link href={`/theme/${project.id}`} variant="plain">
-                          <Button tw="" color="primary" shadow={false} size="sm">
-                            Theme
-                          </Button>
-                        </Link>
-                        <IntegrateGuide pid={project.id} />
-                      </div>
+                    <div tw="px-6 flex justify-start flex-nowrap flex-row items-center space-x-2">
+                      <Heading tw="font-bold" as="h3">
+                        {project.name}
+                      </Heading>
+                      <span
+                        title={
+                          project.pages.length > 0
+                            ? 'You alread integrated this project into at least one page'
+                            : 'No page integrated'
+                        }
+                        css={project.pages.length > 0 ? tw`text-green-500` : tw`text-gray-500`}
+                      >
+                        <CheckCircle size={18} />
+                      </span>
+                    </div>
+                    <div tw="px-6 flex flex-row space-x-2">
+                      <Link href={`/theme/${project.id}`} variant="plain">
+                        <Button tw="" color="primary" shadow={false} size="sm">
+                          Theme
+                        </Button>
+                      </Link>
+                      <IntegrateGuide pid={project.id} />
                     </div>
                     {project.pages.length > 0 ? (
-                      <List tw="px-6 space-y-1">
+                      <List tw="px-6 space-y-1.5">
                         {project.pages.map((page) => (
                           <List.Item key={page.id} markerStyle={tw`bg-black`}>
                             <Link

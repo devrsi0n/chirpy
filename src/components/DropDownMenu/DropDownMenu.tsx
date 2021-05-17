@@ -4,6 +4,8 @@ import { Menu, Transition } from '@headlessui/react';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { bluredBg } from '$/styles/common';
+
 import { Button, IconButton } from '../Button';
 
 export type Shape = 'circle' | 'square';
@@ -51,7 +53,8 @@ export function DropDownMenu({
                   <Menu.Items
                     static
                     css={[
-                      tw`absolute right-0 mt-1 bg-white origin-top-right border border-gray-200 dark:(border-gray-700 bg-black) divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 py-1 z-30`,
+                      tw`absolute right-0 mt-1 origin-top-right border border-gray-200 dark:(border-gray-700) divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      bluredBg,
                       classes?.items,
                     ]}
                   >
@@ -83,4 +86,4 @@ export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
   return <Menu.Item onClick={props.onClick}>{child}</Menu.Item>;
 }
 
-const itemStyle = tw`flex flex-row items-center border-none text-gray-600 dark:text-gray-300 hover:(bg-gray-100 text-gray-700) dark:hover:(text-gray-100 bg-gray-800) cursor-pointer w-full px-6 py-2 text-sm text-right`;
+const itemStyle = tw`flex flex-row items-center border-none rounded text-gray-600 dark:text-gray-300 hover:(bg-gray-100 text-gray-700) dark:hover:(text-gray-100 bg-gray-800) cursor-pointer w-full px-6 py-2 text-sm text-right`;
