@@ -1,9 +1,8 @@
 import LogOut from '@geist-ui/react-icons/logOut';
 import Menu from '@geist-ui/react-icons/menu';
+import Monitor from '@geist-ui/react-icons/monitor';
 import User from '@geist-ui/react-icons/user';
 import Dismiss from '@geist-ui/react-icons/x';
-import Monitor from '@geist-ui/react-icons/monitor'
-
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -13,6 +12,7 @@ import { CurrentUserContextType } from '$/components/CurrentUserProvider/Current
 import { Link } from '$/components/Link';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useLogout } from '$/hooks/useLogout';
+import { bluredBg } from '$/styles/common';
 
 import { IconButton } from '../Button';
 import { Divider } from '../Divider';
@@ -45,7 +45,12 @@ export function Header(): JSX.Element {
     console.error('Get current user error:', error);
   }
   return (
-    <header tw="w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-10) border-gray-300 dark:border-gray-700 backdrop-filter backdrop-blur-lg">
+    <header
+      css={[
+        tw`w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-10) border-gray-300 dark:border-gray-700`,
+        bluredBg,
+      ]}
+    >
       <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section tw="flex flex-row items-center justify-between">
           <div tw="flex items-center sm:hidden pl-3">

@@ -5,7 +5,6 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsRe
 import Head from 'next/head';
 import * as React from 'react';
 import colors from 'tailwindcss/colors';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { getAdminApollo } from '$server/common/admin-apollo';
@@ -86,20 +85,18 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             <Popover
               buttonAs={IconButton}
               content={
-                <>
-                  <ul tw="flex flex-row">
-                    {colorOptions.map((color) => (
-                      <li key={color[500]}>
-                        <IconButton onClick={handClickColorFunction(color)}>
-                          <span
-                            tw="inline-block w-6 h-6 rounded-full"
-                            style={{ background: color[500] }}
-                          />
-                        </IconButton>
-                      </li>
-                    ))}
-                  </ul>
-                </>
+                <ul tw="flex flex-row">
+                  {colorOptions.map((color) => (
+                    <li key={color[500]}>
+                      <IconButton onClick={handClickColorFunction(color)}>
+                        <span
+                          tw="inline-block w-6 h-6 rounded-full"
+                          style={{ background: color[500] }}
+                        />
+                      </IconButton>
+                    </li>
+                  ))}
+                </ul>
               }
             >
               <span tw="inline-block w-6 h-6 rounded-full bg-primary-500" />

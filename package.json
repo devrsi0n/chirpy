@@ -74,7 +74,7 @@
     "super-tiny-icons": "^0.4.0",
     "superjson": "^1.7.4",
     "uuid": "^8.3.2",
-    "ws": "^7.4.2"
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "@babel/core": "^7.14.2",
