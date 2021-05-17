@@ -48,8 +48,8 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
             {`<script defer src="https://totalk.dev/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
           </Code>
           <Text>
-            Then, add the data-feedback-fish attribute to any HTML element that should render the
-            widget:
+            Then, add the data-{appNameLowerCase}-comment attribute to any HTML element that should
+            render the widget:
           </Text>
           <Code>{`<div data-${appNameLowerCase}-comment>...</div>`}</Code>
         </div>
