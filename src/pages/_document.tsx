@@ -33,7 +33,7 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
           <link rel="alternate icon" href="/favicon.png"></link>
           <link
             rel="preload"
-            href="/fonts/Roboto/Roboto-Regular.ttf"
+            href="/fonts/Inter/Inter-roman.var.woff2"
             as="font"
             crossOrigin="anonymous"
           />
