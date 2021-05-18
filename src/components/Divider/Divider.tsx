@@ -20,11 +20,7 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
               border-style: initial;
             }
 
-            .dark & {
-              ${tw`bg-gray-700`}
-            }
-
-            @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            @media only screen and (max-width: 600px) (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi) {
               &:after {
                 ${bgStyle};
                 content: '';
@@ -51,4 +47,4 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
   );
 }
 
-const bgStyle = tw`bg-gray-100`;
+const bgStyle = tw`bg-gray-200 dark:bg-gray-700`;
