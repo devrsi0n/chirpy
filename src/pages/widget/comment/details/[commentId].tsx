@@ -61,7 +61,7 @@ export default function CommentDetailsWidget(
           </Link>
           <Heading as="h4" css={tw`text-gray-600`}>
             <span tw="font-bold">{comment?.user.displayName}</span>
-            <span>'s comment details</span>
+            <span>{`'s comment details`}</span>
           </Heading>
           <UserDropDown />
         </div>
@@ -149,7 +149,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       props: {
         comment: data.commentByPk,
         commentId,
-        theme: themeResult.data.pageByPk?.project.theme,
+        theme: themeResult.data.pageByPk?.project.theme || null,
       },
       revalidate: 1,
     };

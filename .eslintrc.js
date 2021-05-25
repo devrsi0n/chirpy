@@ -5,7 +5,7 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
-    'react-app',
+    'next',
     'plugin:prettier/recommended',
   ],
   rules: {

@@ -80,7 +80,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
         </div>
         <div tw="space-y-4">
           <BoldHeading>Colors</BoldHeading>
-          <Text>Priamry</Text>
+          <Text>Primary</Text>
           <div tw="flex flex-row items-center space-x-2 transform -translate-x-2">
             <Popover
               buttonAs={IconButton}
@@ -111,8 +111,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
         <div tw="space-y-5 mb-4">
           <BoldHeading as="h4">Preview</BoldHeading>
           <SubText>
-            Here's a preview of your changes to the Theme. When you set the changes, the entire
-            widget will change with the theme.
+            {`Here's a preview of your changes to the Theme. When you set the changes, the entire widget will change with the theme.`}
           </SubText>
         </div>
         <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
@@ -198,28 +197,6 @@ const comments = [
     createdAt: '2021-04-17T01:43:10.581584+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-    page: {
-      __typename: 'Page',
-      project: {
-        __typename: 'Project',
-        theme: {
-          colors: {
-            primary: {
-              '50': '#fffbeb',
-              '100': '#fef3c7',
-              '200': '#fde68a',
-              '300': '#fcd34d',
-              '400': '#fbbf24',
-              '500': '#f59e0b',
-              '600': '#d97706',
-              '700': '#b45309',
-              '800': '#92400e',
-              '900': '#78350f',
-            },
-          },
-        },
-      },
-    },
     depth: 1,
     user: {
       __typename: 'User',
@@ -245,28 +222,6 @@ const comments = [
         createdAt: '2021-04-17T02:31:51.05373+00:00',
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
         pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-        page: {
-          __typename: 'Page',
-          project: {
-            __typename: 'Project',
-            theme: {
-              colors: {
-                primary: {
-                  '50': '#fffbeb',
-                  '100': '#fef3c7',
-                  '200': '#fde68a',
-                  '300': '#fcd34d',
-                  '400': '#fbbf24',
-                  '500': '#f59e0b',
-                  '600': '#d97706',
-                  '700': '#b45309',
-                  '800': '#92400e',
-                  '900': '#78350f',
-                },
-              },
-            },
-          },
-        },
         depth: 2,
         user: {
           __typename: 'User',
@@ -295,28 +250,6 @@ const comments = [
     createdAt: '2021-04-17T02:51:30.517834+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-    page: {
-      __typename: 'Page',
-      project: {
-        __typename: 'Project',
-        theme: {
-          colors: {
-            primary: {
-              '50': '#fffbeb',
-              '100': '#fef3c7',
-              '200': '#fde68a',
-              '300': '#fcd34d',
-              '400': '#fbbf24',
-              '500': '#f59e0b',
-              '600': '#d97706',
-              '700': '#b45309',
-              '800': '#92400e',
-              '900': '#78350f',
-            },
-          },
-        },
-      },
-    },
     depth: 1,
     user: {
       __typename: 'User',
