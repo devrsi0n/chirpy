@@ -26,19 +26,22 @@ List.Item = ListItem;
 
 export type IListItemProps = React.ComponentPropsWithoutRef<'li'> & {
   markerStyle?: TwStyle;
+  noMarker?: boolean;
 };
 
 export function ListItem({
   className,
   children,
   markerStyle: markerStyles,
+  noMarker,
   ...liProps
 }: IListItemProps): JSX.Element {
   const ChildrenContainer = typeof children === 'string' ? 'span' : React.Fragment;
 
   return (
     <li {...liProps} tw="text-gray-500 flex flex-row items-center space-x-2" className={className}>
-      <span css={[tw`rounded-full w-2 h-2 bg-gray-500`, markerStyles]}></span>
+      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-gray-500`, markerStyles]}></span>}
+
       <ChildrenContainer>{children}</ChildrenContainer>
     </li>
   );

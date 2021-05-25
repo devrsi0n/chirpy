@@ -21,5 +21,7 @@ const customConfig = {
 };
 
 module.exports = withPlugins([[withBundleAnalyzer(customConfig)]], {
-  // experimental: { modern: true }
+  experimental: {
+    eslint: true,
+  },
 });

@@ -1,0 +1,17 @@
+import { isENVDev } from '$server/utilities/env';
+
+const cachedMap = new Map();
+
+export function getCachedValue<T>(params: string[], getValue: () => T): T {
+  if (isENVDev) {
+    return getValue();
+  }
+  const key = params.join('#');
+  let value = cachedMap.get(key);
+  if (value) {
+    return value;
+  }
+  value = getValue();
+  cachedMap.set(key, value);
+  return value;
+}

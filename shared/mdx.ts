@@ -1,18 +1,14 @@
 import { promises as fs } from 'fs';
-import matter from 'gray-matter';
 import mdxPrism from 'mdx-prism';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
 
-const root = process.cwd();
+import { POST_ROOT } from './constants';
+import { getFrontMatters } from './front-matter';
 
-export async function getFiles(type: string): Promise<string[]> {
-  return fs.readdir(path.join(root, 'data', type));
-}
-
-export type MDXSource = {
+export type MDXProps = {
   mdxSource: MDXRemoteSerializeResult;
   frontMatter: {
     wordCount: number;
@@ -22,12 +18,8 @@ export type MDXSource = {
   };
 };
 
-export async function getFileBySlug(type: string, slug?: string): Promise<MDXSource> {
-  const source = await (slug
-    ? fs.readFile(path.join(root, 'posts', type, `${slug}.mdx`), 'utf8')
-    : fs.readFile(path.join(root, 'posts', `${type}.mdx`), 'utf8'));
-
-  const { data, content } = matter(source);
+export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
+  const { data, content } = await getFrontMatters(path.join(POST_ROOT, `${slug}.mdx`));
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [
@@ -55,13 +47,12 @@ export type FrontMatterData = {
   [key: string]: $TsAny;
 };
 
-export async function getAllFilesFrontMatter(type: string): Promise<FrontMatterData[]> {
-  const files = await fs.readdir(path.join(root, 'data', type));
+export async function getAllFilesFrontMatter(subFolder: string): Promise<FrontMatterData[]> {
+  const files = await fs.readdir(path.join(POST_ROOT, subFolder));
 
   return Promise.all(
     files.map(async (postSlug: string) => {
-      const source = await fs.readFile(path.join(root, 'data', type, postSlug), 'utf8');
-      const { data } = matter(source);
+      const { data } = await getFrontMatters(path.join(POST_ROOT, subFolder, postSlug));
 
       return {
         ...data,

@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       },
     });
     return {
-      props: { comments, pageId, theme: themeResult.data.pageByPk?.project.theme },
+      props: { comments, pageId, theme: themeResult.data.pageByPk?.project.theme || null },
       revalidate: 1,
     };
   } catch (error) {

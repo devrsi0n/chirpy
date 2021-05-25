@@ -6,9 +6,9 @@ import 'twin.macro';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Layout } from '$/components/Layout';
 
-import { getFileBySlug, MDXSource } from '$shared/mdx';
+import { getMDXPropsBySlug, MDXProps } from '$shared/mdx';
 
-export default function TermsOfService({ mdxSource, frontMatter }: MDXSource): JSX.Element {
+export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
     <Layout>
       <section>
@@ -24,8 +24,8 @@ export default function TermsOfService({ mdxSource, frontMatter }: MDXSource): J
 }
 
 export async function getStaticProps(): Promise<{
-  props: MDXSource;
+  props: MDXProps;
 }> {
-  const termsProps = await getFileBySlug('terms-of-service');
+  const termsProps = await getMDXPropsBySlug('terms-of-service');
   return { props: termsProps };
 }
