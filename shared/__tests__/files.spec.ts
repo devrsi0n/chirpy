@@ -29,6 +29,7 @@ describe('files', () => {
     const root = path.resolve(__dirname, '../../');
     expect(directories).toEqual([
       {
+        banner: null,
         title: `${root}/posts/docs/get-started.mdx`,
         route: '/docs/get-started',
       },
@@ -36,16 +37,19 @@ describe('files', () => {
         title: 'features',
         children: [
           {
+            banner: null,
             title: `${root}/posts/docs/features/theme.mdx`,
             route: '/docs/features/theme',
           },
           {
+            banner: null,
             title: `${root}/posts/docs/features/third-party-integrating.mdx`,
             route: '/docs/features/third-party-integrating',
           },
         ],
       },
       {
+        banner: null,
         title: `${root}/posts/docs/self-hosted.mdx`,
         route: '/docs/self-hosted',
       },
