@@ -1,6 +1,10 @@
 export type Directory = {
   title: string;
   /**
+   * Banner image of MDX
+   */
+  banner?: string;
+  /**
    * Only files contains route
    */
   route?: string;

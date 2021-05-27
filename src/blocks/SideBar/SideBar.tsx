@@ -12,12 +12,16 @@ import { Directory } from '$shared/type';
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];
   title?: string;
+  className?: string;
 }>;
 
-export function SideBar({ directories, title }: SideBarProps) {
+export function SideBar({ directories, title, className }: SideBarProps) {
   const hasValidDirectories = directories.length > 0;
   return (
-    <aside tw="w-full flex-shrink-0 md:(w-64 block pb-16) height[calc(100vh - 4rem)] sticky top-16 flex flex-col items-end p-4 pb-40 isolate overflow-y-auto">
+    <aside
+      tw="w-full flex-shrink-0 md:(w-64 block pb-16) height[calc(100vh - 4rem)] sticky top-16 flex flex-col items-end px-4 isolate overflow-y-auto"
+      className={className}
+    >
       {title && hasValidDirectories && (
         <Heading as="h4" tw="font-bold px-1 pb-4">
           {title}
