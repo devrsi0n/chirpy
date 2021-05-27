@@ -4,7 +4,8 @@ export function getCommentCount(comments: CommentTreeSubscription['comments']): 
   let counter = 0;
   for (const comment of comments) {
     if (comment.replies) {
-      counter += getCommentCount((comment.replies as unknown) as CommentTreeSubscription['comments']) + 1;
+      counter +=
+        getCommentCount(comment.replies as unknown as CommentTreeSubscription['comments']) + 1;
     } else {
       counter++;
     }

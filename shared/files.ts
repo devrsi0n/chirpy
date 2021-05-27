@@ -53,9 +53,9 @@ export async function getDirectories(subFolder: string, routePrefix: string): Pr
         const dir = dirPoint.find((_d) => _d.title === dirPath);
         if (dirPath.endsWith('.mdx')) {
           const {
-            data: { title },
+            data: { title, banner = null },
           } = await getFrontMatters(dirAbsolutePath);
-          dirPoint.push({ title, route: path.resolve(routePrefix, routePath) });
+          dirPoint.push({ title, banner, route: path.resolve(routePrefix, routePath) });
         } else if (dir) {
           dirPoint = dir.children || [];
         } else {
@@ -69,9 +69,9 @@ export async function getDirectories(subFolder: string, routePrefix: string): Pr
       }
     } else {
       const {
-        data: { title },
+        data: { title, banner = null },
       } = await getFrontMatters(dirAbsolutePath);
-      directories.push({ title, route: path.resolve(routePrefix, routePath) });
+      directories.push({ title, banner, route: path.resolve(routePrefix, routePath) });
     }
   }
 

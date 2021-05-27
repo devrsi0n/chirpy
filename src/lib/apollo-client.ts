@@ -13,6 +13,8 @@ import Cookies from 'js-cookie';
 import preval from 'preval.macro';
 import * as React from 'react';
 
+import { ssrMode } from '$/utilities/env';
+
 import { AUTH_COOKIE_NAME } from '../../shared/constants';
 
 let cachedApolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | null =
@@ -55,8 +57,6 @@ function getHeaders() {
     }`,
   };
 }
-
-const ssrMode = typeof window === 'undefined';
 
 const createApolloClient = () => {
   let link: ApolloLink;

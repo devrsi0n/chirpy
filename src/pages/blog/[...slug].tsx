@@ -5,29 +5,40 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
-import { SideBar, SideBarProps } from '$/blocks/SideBar';
+import { Image } from '$/components/Image';
 import { Layout } from '$/components/Layout';
+import { useHasMounted } from '$/hooks/useHasMounted';
+import { getBannerProps } from '$/utilities/image';
 
 import { getAllFileStructures, getDirectories } from '$shared/files';
 import { getMDXPropsBySlug, MDXProps } from '$shared/mdx';
 
-type DocsProps = MDXProps & Pick<SideBarProps, 'directories'>;
-const CONTAINER_FOLDER = 'docs';
+type BlogProps = MDXProps;
+const CONTAINER_FOLDER = 'blog';
 
-export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
+export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element {
+  const hasMounted = useHasMounted();
+  const banner = React.useMemo(() => {
+    if (frontMatter?.banner && hasMounted) {
+      return getBannerProps(frontMatter.banner);
+    }
+  }, [frontMatter?.banner, hasMounted]);
+
   return (
     <>
       <Head>
-        <title>{frontMatter?.title} - Docs</title>
+        <title>{frontMatter?.title} - Blog</title>
       </Head>
       <Layout noContainer noFooter>
         <div tw="min-h-full" className="main-container">
-          <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
-            <SideBar tw="pt-10" directories={directories} title="Documentation" />
+          <section tw="flex flex-row py-10 min-h-full space-x-2">
             <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
-              <div tw="pt-10">
-                {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
-              </div>
+              {banner && (
+                <div tw="pb-10">
+                  <Image {...banner} layout="responsive" />
+                </div>
+              )}
+              {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
             </article>
           </section>
         </div>
@@ -53,10 +64,11 @@ export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
   return payload;
 };
 
-export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<BlogProps, PathParam> = async ({ params }) => {
   if (!params?.slug) {
     return { notFound: true };
   }
+  console.log({ slug: params.slug });
   const [mdxProps, directories] = await Promise.all([
     getMDXPropsBySlug([CONTAINER_FOLDER, ...params.slug].join('/')),
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
