@@ -7,6 +7,7 @@ import { CommentLeafType } from '$/types/widget';
 
 import { CommentBranch } from '../CommentBranch';
 import { CommentCard, CommentCardProps } from '../CommentCard';
+import { RTEValue } from '../RichTextEditor/RichTextEditor';
 
 export type CommentProps = {
   comment: CommentLeafType;
@@ -21,7 +22,7 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
       <CommentCard
         commentId={comment.id}
         author={comment.user}
-        content={comment.content}
+        content={comment.content as RTEValue}
         likes={comment.likes}
         depth={comment.depth}
         createdAt={comment.createdAt}

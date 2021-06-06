@@ -5,6 +5,7 @@ import { CommentDetailNode } from '$/types/widget';
 
 import { CommentBranch } from '../CommentBranch';
 import { CommentCard, CommentCardProps } from '../CommentCard';
+import { RTEValue } from '../RichTextEditor/RichTextEditor';
 
 export type Comment = NonNullable<CommentDetailNode>;
 
@@ -34,12 +35,12 @@ export function CommentLinkedList({
   return (
     <div tw="space-y-2">
       <ul tw="space-y-8">
-        {parentComments.map((_comment, index) => (
+        {parentComments.map((_comment) => (
           <ParentBranch key={_comment.id}>
             <CommentCard
               disableLink={_comment.id === comment.id}
               commentId={_comment.id}
-              content={_comment.content}
+              content={_comment.content as RTEValue}
               author={_comment.user}
               likes={_comment.likes}
               depth={_comment.depth}

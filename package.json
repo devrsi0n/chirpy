@@ -14,8 +14,7 @@
     "g:gql:watch": "concurrently \"graphql-codegen --watch --config ./docs/server-codegen.yml\" \"graphql-codegen --config ./docs/client-codegen.yml --watch\"",
     "cypress:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
     "cypress:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run",
-    "test": "jest --silent=false",
-    "test:ci": "jest --ci --reporters='default' --reporters='./jest/github-actions-reporter'"
+    "test": "jest --silent=false"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
