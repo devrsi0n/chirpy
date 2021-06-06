@@ -22,6 +22,7 @@ import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { ThemeProvider, useTheme } from '$/components/ThemeProvider';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
+import { Theme as ThemeType } from '$/types/theme.type';
 
 dayjs.extend(relativeTime);
 
@@ -42,7 +43,7 @@ const colorOptions: ColorSeries[] = [
 export default function Theme(props: ThemeProps): JSX.Element {
   return (
     <Layout>
-      <ThemeProvider theme={props.project?.theme}>
+      <ThemeProvider theme={props.project?.theme as ThemeType}>
         <Head>
           <title>Theme Editor</title>
         </Head>
