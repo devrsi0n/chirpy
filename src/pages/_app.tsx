@@ -19,6 +19,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       {/* Tailwindcss global styles */}
       <GlobalStyles />
       <Global styles={appGlobalStyles} />
+
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
         <SiteThemeProvider>
           <LazyMotion features={loadFeatures} strict>

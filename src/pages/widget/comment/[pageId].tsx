@@ -18,7 +18,7 @@ import { PagesDocument } from '$server/graphql/generated/page';
 
 import { CommentWidget } from '$/blocks/CommentWidget';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { Layout } from '$/components/Layout';
+import { WidgetLayout } from '$/components/Layout';
 import { ThemeProvider } from '$/components/ThemeProvider';
 import {
   CommentTreeDocument,
@@ -67,19 +67,19 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
     return <p>{error}</p>;
   }
   // TODO: resolve this comments undefined error
-  if (!comments) {
+  if (isStaticError(props)) {
     return <p>Wrong page.</p>;
   }
 
   return (
     <ThemeProvider theme={theme}>
-      <Layout noFooter noHeader>
+      <WidgetLayout projectId={props.projectId}>
         <Head>
           <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
         </Head>
         <CommentWidget {...{ comments, pageId, onSubmitReply, onClickLikeAction }} />
         <PoweredBy />
-      </Layout>
+      </WidgetLayout>
     </ThemeProvider>
   );
 }
@@ -111,6 +111,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = PathParams & {
+  projectId: string;
   comments: CommentLeafType[];
   theme: Theme;
 };
@@ -154,8 +155,17 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         pageId,
       },
     });
+    if (!themeResult?.data.pageByPk) {
+      console.error(`Can't find theme info`);
+      return { notFound: true };
+    }
     return {
-      props: { comments, pageId, theme: themeResult.data.pageByPk?.project.theme || null },
+      props: {
+        comments,
+        pageId,
+        projectId: themeResult.data.pageByPk.project.id,
+        theme: themeResult.data.pageByPk?.project.theme || null,
+      },
       revalidate: 1,
     };
   } catch (error) {

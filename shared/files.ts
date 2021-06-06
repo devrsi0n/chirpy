@@ -3,7 +3,7 @@ import path from 'path';
 
 import { POST_ROOT } from './constants';
 import { getFrontMatters } from './front-matter';
-import { Directory, FileStructure } from './type';
+import { Directory, FileStructure } from './types/file';
 
 const ignoreFileList = new Set(['meta.json']);
 

@@ -2,6 +2,7 @@ generated
 .next
 .cache
 
+.eslintrc.js
 next.config.js
 tailwind.config.js
 cypress-examples

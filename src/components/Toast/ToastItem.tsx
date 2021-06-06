@@ -14,7 +14,7 @@ import { Toast, ToastType } from './ToastContext';
 export type ToastProps = React.PropsWithChildren<Toast> & {
   onDismiss: (id: string) => void;
 };
-export const TOAST_DURATION = 10000;
+export const TOAST_DURATION = 10_000;
 
 export function ToastItem({
   id,
