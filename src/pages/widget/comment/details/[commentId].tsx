@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         projectId: themeResult.data.pageByPk.project.id,
         comment: data.commentByPk,
         commentId,
-        theme: themeResult.data.pageByPk?.project.theme || null,
+        theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
       },
       revalidate: 1,
     };

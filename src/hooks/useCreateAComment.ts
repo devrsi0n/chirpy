@@ -1,3 +1,5 @@
+import { JsonArray } from 'type-fest';
+
 import { RTEValue } from '$/blocks/RichTextEditor/RichTextEditor';
 import { useToast } from '$/components/Toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
@@ -28,7 +30,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
     const { data } = await insertOneComment({
       variables: {
         parentId: commentId,
-        content: reply,
+        content: reply as JsonArray,
         pageId,
         depth: depth ? depth + 1 : 1,
       },
