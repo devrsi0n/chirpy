@@ -1,4 +1,4 @@
-import { useToastContext } from '$/components/Toast';
+import { useToast } from '$/components/Toast';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
 
 import { useCurrentUser } from './useCurrentUser';
@@ -14,7 +14,7 @@ export function useToggleALikeAction(): ToggleLieAction {
   const [insertOneLike] = useInsertOneLikeMutation();
   const [deleteLikeByPk] = useDeleteLikeByPkMutation();
 
-  const { showToast } = useToastContext();
+  const { showToast } = useToast();
 
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {

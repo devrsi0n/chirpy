@@ -1,0 +1,5 @@
+mutation insertOneEvent($type: String, $params: jsonb, $url: String, $referrer: String, $sessionId: uuid) {
+  insertOneEvent(object: {type: $type, params: $params, url: $url, referrer: $referrer, sessionId: $sessionId}) {
+    id
+  }
+}

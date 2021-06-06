@@ -20,7 +20,7 @@ import { PoweredBy } from '$/blocks/PoweredBy';
 import { UserDropDown } from '$/blocks/UserDropDown';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
+import { WidgetLayout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { ThemeProvider } from '$/components/ThemeProvider';
 import {
@@ -54,7 +54,7 @@ export default function CommentDetailsWidget(
 
   return (
     <ThemeProvider theme={props.theme}>
-      <Layout noFooter noHeader>
+      <WidgetLayout projectId={props.projectId}>
         <div css={tw`flex flex-row justify-between items-center mb-4`}>
           <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
             <IconButton icon="arrow-left" size="md" css={tw`transform -translate-x-4`} />
@@ -74,7 +74,7 @@ export default function CommentDetailsWidget(
           />
         )}
         <PoweredBy />
-      </Layout>
+      </WidgetLayout>
     </ThemeProvider>
   );
 }
@@ -83,6 +83,7 @@ type PathParams = {
 };
 
 type StaticProps = PathParams & {
+  projectId: string;
   comment: CommentDetailNode;
   theme?: Theme;
 };
@@ -144,9 +145,14 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         pageId: data.commentByPk.pageId,
       },
     });
+    if (!themeResult.data.pageByPk) {
+      console.error(`Can't find theme info`);
+      return { notFound: true };
+    }
 
     return {
       props: {
+        projectId: themeResult.data.pageByPk.project.id,
         comment: data.commentByPk,
         commentId,
         theme: themeResult.data.pageByPk?.project.theme || null,

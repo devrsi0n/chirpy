@@ -7,7 +7,7 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 
-import { Directory } from '$shared/type';
+import { Directory } from '$shared/types/file';
 
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];

@@ -38,8 +38,10 @@ const getWSLink = () => {
   });
 };
 
+let apolloClient: ApolloClient<NormalizedCacheObject>;
+
 /**
- * Only user by internal service, never use it in client.
+ * Only used by service, never use it in client.
  */
 export function getAdminApollo(): ApolloClient<NormalizedCacheObject> {
   const link = split(
@@ -50,10 +52,14 @@ export function getAdminApollo(): ApolloClient<NormalizedCacheObject> {
     getWSLink(),
     getHttpLink(),
   );
+  if (apolloClient) {
+    return apolloClient;
+  }
 
-  return new ApolloClient({
+  apolloClient = new ApolloClient({
     link,
     cache: new InMemoryCache(),
     ssrMode: true,
   });
+  return apolloClient;
 }

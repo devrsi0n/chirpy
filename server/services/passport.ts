@@ -11,10 +11,10 @@ import { UpsertUserDocument } from '$server/graphql/generated/user';
 import { UserByPkDocument } from '$server/graphql/generated/user';
 import { isENVDev } from '$server/utilities/env';
 
-import { AUTH_COOKIE_NAME, USER_COOKIE_NAME } from '$shared/constants';
+import { AUTH_COOKIE_NAME } from '$shared/constants';
 
 import { redirect } from '../response';
-import { createToken } from '../utilities/create-token';
+import { createAuthToken } from '../utilities/create-token';
 
 passport.serializeUser<string>((user, done) => {
   done(null, user.id);
@@ -133,7 +133,7 @@ export async function handleSuccessfulLogin(
   const { id, name, email } = (req as $TsFixMe).user;
   const oneDayInMs = 60 * 60 * 24;
   const maxAge = isENVDev ? oneDayInMs * 365 : oneDayInMs;
-  const authToken = createToken(
+  const authToken = createAuthToken(
     {
       userId: id,
       name,
@@ -143,21 +143,15 @@ export async function handleSuccessfulLogin(
   );
   const cookieOptions = getCookieOptions(maxAge);
   const authCookie = serialize(AUTH_COOKIE_NAME, authToken, cookieOptions);
-  const userIdCookie = serialize(
-    USER_COOKIE_NAME,
-    Buffer.from(id).toString('base64'),
-    cookieOptions,
-  );
-  res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
+  res.setHeader('Set-Cookie', [authCookie]);
   redirect(res, '/sign-in-success');
 }
 
 export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const cookieOptions = getCookieOptions(-1);
   const authCookie = serialize(AUTH_COOKIE_NAME, '', cookieOptions);
-  const userIdCookie = serialize(USER_COOKIE_NAME, '', cookieOptions);
 
-  res.setHeader('Set-Cookie', [authCookie, userIdCookie]);
+  res.setHeader('Set-Cookie', [authCookie]);
   // const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
   // redirect(res, redirectURL || '/');
   res.json({
