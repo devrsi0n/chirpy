@@ -19,5 +19,3 @@ export const ToastContext = React.createContext<ToastContextType>({
   showToast: () => null,
   setToasts: () => null,
 });
-
-export const useToastContext = (): ToastContextType => React.useContext(ToastContext);

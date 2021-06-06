@@ -20,6 +20,9 @@ const customConfig = {
   },
 };
 
+/**
+ * @type {import('next/dist/next-server/server/config').NextConfig}
+ **/
 module.exports = withPlugins([[withBundleAnalyzer(customConfig)]], {
   experimental: {
     eslint: true,

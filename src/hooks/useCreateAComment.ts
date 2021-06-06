@@ -1,5 +1,5 @@
 import { RTEValue } from '$/blocks/RichTextEditor/RichTextEditor';
-import { useToastContext } from '$/components/Toast';
+import { useToast } from '$/components/Toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 
 import { useCurrentUser } from './useCurrentUser';
@@ -14,7 +14,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
   const { isLogin } = useCurrentUser();
   const [insertOneComment] = useInsertOneCommentMutation();
 
-  const { showToast } = useToastContext();
+  const { showToast } = useToast();
 
   const handleSubmitReply: SubmitHandler = async (
     reply: RTEValue,

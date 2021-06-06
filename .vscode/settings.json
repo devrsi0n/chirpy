@@ -28,5 +28,6 @@
     "jsonb"
   ],
   "tailwindcss.preferVariantWithParentheses": true,
-  "jestrunner.configPath": "jest.config.js"
+  "jestrunner.configPath": "jest.config.js",
+  "editor.formatOnSave": true
 }

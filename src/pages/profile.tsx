@@ -17,7 +17,7 @@ import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { TextArea } from '$/components/TextArea';
 import { TextField } from '$/components/TextField';
-import { useToastContext } from '$/components/Toast';
+import { useToast } from '$/components/Toast';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useForm } from '$/hooks/useForm';
@@ -59,7 +59,7 @@ function Profile(): JSX.Element {
       twitter: twitterUserName,
     },
   });
-  const { showToast } = useToastContext();
+  const { showToast } = useToast();
   const handleClickButton = async () => {
     if (isEditMode) {
       const f = await handleSubmit(async (fields) => {

@@ -10,7 +10,7 @@ import { Link } from '$/components/Link';
 import { getBannerProps } from '$/utilities/image';
 
 import { getDirectories } from '$shared/files';
-import { Directory } from '$shared/type';
+import { Directory } from '$shared/types/file';
 
 const CONTAINER_FOLDER = 'blog';
 

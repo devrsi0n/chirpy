@@ -5,15 +5,16 @@ import tw from 'twin.macro';
 
 import { usePortal } from '$/hooks/usePortal';
 
-import { Toast, useToastContext } from './ToastContext';
+import { Toast } from './ToastContext';
 import { ToastItem } from './ToastItem';
+import { useToast } from './useToast';
 
 export type ToastContainerProps = React.PropsWithChildren<{
   // title: string;
 }>;
 
 export function ToastContainer(props: ToastContainerProps): JSX.Element {
-  const { toasts, setToasts } = useToastContext();
+  const { toasts, setToasts } = useToast();
 
   const portal = usePortal('basic');
   const handleDismiss = React.useCallback((id: string) => {

@@ -11,7 +11,7 @@ import { ActionButton } from '$/components/Button';
 import { MessageIcon } from '$/components/Icons';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
-import { useToastContext } from '$/components/Toast';
+import { useToast } from '$/components/Toast';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 
@@ -54,7 +54,7 @@ export function CommentCard({
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
 
-  const { showToast } = useToastContext();
+  const { showToast } = useToast();
   const disabledReply: boolean = depth === COMMENT_TREE_MAX_DEPTH;
 
   const handleSubmitReply = async (replyContent: RTEValue) => {

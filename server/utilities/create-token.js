@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-module */
 /* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-ignore
 const jwt = require('jsonwebtoken');
@@ -5,7 +6,7 @@ const jwt = require('jsonwebtoken');
 /**
  * @type {function({ userId: string; name: string; email: string }, { maxAge: number | string; allowedRoles: string[]; defaultRole: string; role: string}): string}
  */
-function createToken(payload, options) {
+function createAuthToken(payload, options) {
   const { maxAge, allowedRoles, defaultRole, role } = options;
   const jwtClaims = {
     sub: payload.userId,
@@ -19,7 +20,18 @@ function createToken(payload, options) {
       'x-hasura-user-id': payload.userId,
     },
   };
-  const encodedToken = jwt.sign(jwtClaims, process.env.HASH_KEY, {
+  const encodedToken = createToken(jwtClaims, {
+    maxAge,
+  });
+  // console.log({ jwtClaims, key: process.env.HASH_KEY });
+  return encodedToken;
+}
+
+/**
+ * @type {function (string | object | Buffer, { maxAge: string | number }): string}
+ */
+function createToken(payload, { maxAge }) {
+  const encodedToken = jwt.sign(payload, process.env.HASH_KEY, {
     algorithm: 'HS256',
     expiresIn: maxAge,
   });
@@ -27,4 +39,5 @@ function createToken(payload, options) {
   return encodedToken;
 }
 
+module.exports.createAuthToken = createAuthToken;
 module.exports.createToken = createToken;

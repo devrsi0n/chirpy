@@ -11,3 +11,9 @@ query themeProjectByPk($id: uuid!) {
     theme
   }
 }
+
+query projectByPk($id: uuid!) {
+  projectByPk(id: $id) {
+    id
+  }
+}

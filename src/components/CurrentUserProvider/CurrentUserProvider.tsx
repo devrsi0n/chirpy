@@ -3,8 +3,9 @@ import Cookies from 'js-cookie';
 import * as React from 'react';
 
 import { UserByPkQuery, UserByPkQueryVariables, useUserByPkQuery } from '$/graphql/generated/user';
+import { ssrMode } from '$/utilities/env';
 
-import { USER_COOKIE_NAME } from '$shared/constants';
+import { AUTH_COOKIE_NAME } from '$shared/constants';
 
 import { CurrentUserContext, CurrentUserContextType } from './CurrentUserContext';
 
@@ -16,7 +17,7 @@ export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Elemen
   const { data, refetch, ...restProps } = useUserByPkQuery({
     ...props.apolloBaseOptions,
     variables: {
-      id: getId(),
+      id: getUserId(),
     },
     fetchPolicy: 'network-only',
     notifyOnNetworkStatusChange: true,
@@ -27,7 +28,7 @@ export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Elemen
       ...data?.userByPk,
       refetchData: () =>
         refetch({
-          id: getId(),
+          id: getUserId(),
         }),
       isLogin: !!data?.userByPk?.id,
     }),
@@ -37,6 +38,15 @@ export function CurrentUserProvider(props: CurrentUserProviderProps): JSX.Elemen
   return <CurrentUserContext.Provider value={value}>{props.children}</CurrentUserContext.Provider>;
 }
 
-function getId(): string {
-  return typeof window !== 'undefined' ? atob(Cookies.get(USER_COOKIE_NAME) || '') : '';
+function getUserId(): string {
+  // TODO: Fix reload page user un-authenticated.
+  if (ssrMode) {
+    return '';
+  }
+  const [, encryptedPayload] = (Cookies.get(AUTH_COOKIE_NAME) || '').split('.');
+  if (!encryptedPayload) {
+    return '';
+  }
+  const payloadString = atob(encryptedPayload);
+  return JSON.parse(payloadString).sub;
 }
