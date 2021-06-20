@@ -5,7 +5,7 @@ import { Dialog as HeadlessDialog } from '@headlessui/react';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-import { bluredBg, bluredOverlay } from '$/styles/common';
+import { bluredOverlay } from '$/styles/common';
 
 import { IconButton } from '../Button';
 

@@ -41,9 +41,10 @@ export function ActionButton({
   );
 }
 
-function getPinkClassName(
-  activated: boolean | undefined,
-): { iconStyle: TwStyle[]; childStyle: TwStyle } {
+function getPinkClassName(activated: boolean | undefined): {
+  iconStyle: TwStyle[];
+  childStyle: TwStyle;
+} {
   const textStyle = activated ? tw`text-pink-500` : tw`group-hover:text-pink-500`;
   return {
     iconStyle: [textStyle, tw`group-hover:bg-pink-50`],
@@ -51,9 +52,10 @@ function getPinkClassName(
   };
 }
 
-function getBlueClassName(
-  activated: boolean | undefined,
-): { iconStyle: TwStyle[]; childStyle: TwStyle } {
+function getBlueClassName(activated: boolean | undefined): {
+  iconStyle: TwStyle[];
+  childStyle: TwStyle;
+} {
   const textStyle = activated ? tw`text-blue-500` : tw`group-hover:text-blue-500`;
   return {
     iconStyle: [textStyle, tw`group-hover:bg-blue-50`],
@@ -61,9 +63,10 @@ function getBlueClassName(
   };
 }
 
-function getGreenClassName(
-  activated: boolean | undefined,
-): { iconStyle: TwStyle[]; childStyle: TwStyle } {
+function getGreenClassName(activated: boolean | undefined): {
+  iconStyle: TwStyle[];
+  childStyle: TwStyle;
+} {
   const textStyle = activated ? tw`text-green-500` : tw`group-hover:text-green-500`;
   return {
     iconStyle: [textStyle, tw`group-hover:bg-green-50`],

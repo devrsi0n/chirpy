@@ -11,7 +11,7 @@ import { getAdminApollo } from '$server/common/admin-apollo';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
-  ThemeProjectsDocument,
+  AllProjectsDocument,
 } from '$server/graphql/generated/project';
 
 import { CommentWidget } from '$/blocks/CommentWidget';
@@ -133,13 +133,13 @@ type PathParams = {
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const adminApollo = getAdminApollo();
-  const pages = (
+  const { projects } = (
     await adminApollo.query({
-      query: ThemeProjectsDocument,
+      query: AllProjectsDocument,
     })
-  ).data.projects;
+  ).data;
 
-  const paths: { params: PathParams }[] = pages.map(({ id }) => {
+  const paths: { params: PathParams }[] = projects.map(({ id }) => {
     return {
       params: {
         projectId: id,

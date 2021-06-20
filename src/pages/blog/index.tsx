@@ -33,7 +33,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
               return (
                 <article key={dir.route}>
                   <Link href={dir.route!} variant="plain">
-                    {bannerProps && <Image {...bannerProps} />}
+                    {bannerProps && <Image {...bannerProps} alt="Banner" />}
                     <Heading as="h4">{dir.title}</Heading>
                   </Link>
                 </article>

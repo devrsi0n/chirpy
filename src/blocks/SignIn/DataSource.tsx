@@ -7,39 +7,39 @@ import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 export type AuthOption = {
   name: string;
   href: string;
-  size: number;
-  icon: React.FC<{ width: string; height: string }>;
+  icon: React.FC;
 };
 
 export const authOptions: AuthOption[] = [
   {
     name: 'Google',
-    size: 26,
-    icon: GoogleLogo,
+    icon: getLogoComponent(GoogleLogo, 'google', 26),
     href: '/api/auth/google',
   },
   {
     name: 'Facebook',
-    size: 24,
-    icon: FacebookLogo,
+    icon: getLogoComponent(FacebookLogo, 'facebook', 24),
     href: '/api/auth/facebook',
   },
   {
     name: 'Microsoft',
-    size: 27,
-    icon: MicrosoftLogo,
+    icon: getLogoComponent(MicrosoftLogo, 'microsoft', 27),
     href: '/api/auth/microsoft',
   },
   {
     name: 'Twitter',
-    size: 24,
-    icon: TwitterLogo,
+    icon: getLogoComponent(TwitterLogo, 'twitter', 24),
     href: '/api/auth/twitter',
   },
   {
     name: 'GitHub',
-    size: 24,
-    icon: GitHubLogo,
+    icon: getLogoComponent(GitHubLogo, 'github', 24),
     href: '/api/auth/github',
   },
 ];
+
+function getLogoComponent(data: StaticImageData, brand: string, size: number) {
+  return function Logo() {
+    return <img src={data.src} width={size} height={size} alt={`Logo of ${brand}`} />;
+  };
+}

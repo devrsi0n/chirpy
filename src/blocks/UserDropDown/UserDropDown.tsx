@@ -4,10 +4,10 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Divider } from '$/components/Divider';
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { Toggle } from '$/components/Toggle';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useLogout } from '$/hooks/useLogout';
 import { useSignIn } from '$/hooks/useSignIn';
 

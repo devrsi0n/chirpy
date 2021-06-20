@@ -1,9 +1,9 @@
 import * as React from 'react';
 import tw from 'twin.macro';
 
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Heading } from '$/components/Heading';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { ToggleLieAction } from '$/hooks/useToggleALikeAction';
 import { CommentLeafType } from '$/types/widget';
 import { getCommentCount } from '$/utilities/get-comment-count';

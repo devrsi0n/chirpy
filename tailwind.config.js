@@ -37,6 +37,9 @@ module.exports = {
       flex: {
         2: '2 2 0%',
       },
+      scale: {
+        '-1': '-1',
+      },
     },
     // typography: (theme) => ({
     //   light: {
