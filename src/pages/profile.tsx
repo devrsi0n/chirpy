@@ -9,6 +9,7 @@ import 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Heading } from '$/components/Heading';
 import { SpinnerIcon } from '$/components/Icons';
 import { Layout } from '$/components/Layout';
@@ -19,7 +20,6 @@ import { TextArea } from '$/components/TextArea';
 import { TextField } from '$/components/TextField';
 import { useToast } from '$/components/Toast';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useForm } from '$/hooks/useForm';
 
 type FormFields = {

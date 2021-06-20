@@ -35,7 +35,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
             <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
               {banner && (
                 <div tw="pb-10">
-                  <Image {...banner} layout="responsive" />
+                  <Image {...banner} layout="responsive" alt="banner" />
                 </div>
               )}
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}

@@ -4,8 +4,8 @@ import { ProjectByPkDocument } from '$server/graphql/generated/project';
 export async function getProjectById(id: string) {
   const adminApollo = getAdminApollo();
   try {
-    const { data } = await adminApollo.mutate({
-      mutation: ProjectByPkDocument,
+    const { data } = await adminApollo.query({
+      query: ProjectByPkDocument,
       variables: {
         id,
       },

@@ -1,29 +1,33 @@
-import CheckCircle from '@geist-ui/react-icons/checkCircle';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
-import tw from 'twin.macro';
 
-import { IntegrateGuide } from '$/blocks/IntegrateGuide';
+import { getAdminApollo } from '$server/common/admin-apollo';
+import {
+  ProjectsOfDashboardDocument,
+  ProjectsOfDashboardQuery,
+} from '$server/graphql/generated/project';
+import { AllUsersDocument } from '$server/graphql/generated/user';
+
+import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Dialog, DialogFooter } from '$/components/Dialog';
-import { Divider } from '$/components/Divider';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
-import { Link } from '$/components/Link';
-import { List } from '$/components/List';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
+import { getStartOfSubtractDate } from '$/utilities/date';
 
 dayjs.extend(relativeTime);
 
-export default function Dashboard(): JSX.Element {
-  const { id, projects, isLogin, refetchData } = useCurrentUser();
+export default function Dashboard({ projects }: DashboardProps): JSX.Element {
+  const { id, isLogin, refetchData } = useCurrentUser();
   const [insertProjectMutation] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
@@ -73,14 +77,6 @@ export default function Dashboard(): JSX.Element {
     }
   }, [router, isLogin]);
 
-  if (!isLogin) {
-    return (
-      <div>
-        <Heading as="h3">You are not log-in, redirecting to log-in page</Heading>
-      </div>
-    );
-  }
-
   return (
     <Layout>
       <Head>
@@ -89,7 +85,7 @@ export default function Dashboard(): JSX.Element {
       <div>
         <section tw="space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
-            <Heading as="h1" tw="text-4xl">
+            <Heading as="h1" tw="text-4xl text-gray-600">
               Dashboard
             </Heading>
             <Button onClick={handleCreateProject} variant="solid" color="primary">
@@ -100,61 +96,7 @@ export default function Dashboard(): JSX.Element {
             <div tw="flex flex-row">
               <div tw="space-y-6 flex-1">
                 {projects.map((project) => (
-                  <section
-                    key={project.id}
-                    tw="pt-4 rounded-lg space-y-4"
-                    style={{
-                      boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
-                    }}
-                  >
-                    <div tw="px-6 flex justify-start flex-nowrap flex-row items-center space-x-2">
-                      <Heading tw="font-bold" as="h3">
-                        {project.name}
-                      </Heading>
-                      <span
-                        title={
-                          project.pages.length > 0
-                            ? 'You alread integrated this project into at least one page'
-                            : 'No page integrated'
-                        }
-                        css={project.pages.length > 0 ? tw`text-green-500` : tw`text-gray-500`}
-                      >
-                        <CheckCircle size={18} />
-                      </span>
-                    </div>
-                    <div tw="px-6 flex flex-row space-x-2">
-                      <Link href={`/theme/${project.id}`} variant="plain">
-                        <Button tw="" color="primary" shadow={false} size="sm">
-                          Theme
-                        </Button>
-                      </Link>
-                      <IntegrateGuide pid={project.id} />
-                    </div>
-                    {project.pages.length > 0 ? (
-                      <List tw="px-6 space-y-1.5">
-                        {project.pages.map((page) => (
-                          <List.Item key={page.id} markerStyle={tw`bg-black`}>
-                            <Link
-                              href={page.url}
-                              title={page.title || page.url}
-                              variant="plain"
-                              tw="text-gray-600 hover:text-gray-900 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
-                            >
-                              {page.title || page.url}
-                            </Link>
-                          </List.Item>
-                        ))}
-                      </List>
-                    ) : (
-                      <Text tw="px-6">No page integrated</Text>
-                    )}
-                    <Divider />
-                    <div tw="px-6 pb-2">
-                      <Text tw="text-gray-400" variant="sm">
-                        Created {dayjs(project.createdAt).fromNow()}
-                      </Text>
-                    </div>
-                  </section>
+                  <ProjectCard key={project.id} project={project} />
                 ))}
               </div>
               <div tw="flex-1" />
@@ -195,3 +137,54 @@ export default function Dashboard(): JSX.Element {
     </Layout>
   );
 }
+
+type PathParam = {
+  username: string;
+};
+
+export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
+  const client = getAdminApollo();
+  const allUsers = await client.query({
+    query: AllUsersDocument,
+  });
+  const paths = [];
+  for (const u of allUsers.data.users) {
+    if (!u.username) {
+      continue;
+    }
+    paths.push({
+      params: {
+        username: u.username,
+      },
+    });
+  }
+  const payload = {
+    paths,
+    fallback: true,
+  };
+  return payload;
+};
+
+type DashboardProps = {
+  projects: ProjectsOfDashboardQuery['projects'];
+};
+
+export const getStaticProps: GetStaticProps<DashboardProps, PathParam> = async ({ params }) => {
+  if (!params?.username) {
+    return { notFound: true };
+  }
+  const client = getAdminApollo();
+  const {
+    data: { projects },
+  } = await client.query({
+    query: ProjectsOfDashboardDocument,
+    variables: {
+      username: params.username,
+      today: dayjs().toISOString(),
+      yesterday: getStartOfSubtractDate(1),
+      twoDaysAgo: getStartOfSubtractDate(2),
+    },
+  });
+
+  return { props: { projects }, revalidate: 1 };
+};

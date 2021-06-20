@@ -9,8 +9,8 @@ import tw from 'twin.macro';
 import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
 import { CurrentUserContextType } from '$/components/CurrentUserProvider/CurrentUserContext';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Link } from '$/components/Link';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useLogout } from '$/hooks/useLogout';
 import { bluredBg } from '$/styles/common';
 
@@ -23,7 +23,7 @@ const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
 type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
 
 export function Header(): JSX.Element {
-  const { projects, displayName, avatar, error, isLogin } = useCurrentUser();
+  const { username, projects, displayName, avatar, error, isLogin } = useCurrentUser();
   const [selectedProject, setSelectedProject] = React.useState<Project>();
   React.useEffect(() => {
     if (projects?.length && !selectedProject) {
@@ -70,7 +70,7 @@ export function Header(): JSX.Element {
                   Pricing
                 </Link>
               ) : (
-                <Link href="/dashboard" tw="" highlightMatch>
+                <Link href={`/dashboard/${username}`} tw="" highlightMatch>
                   Dashboard
                 </Link>
               )}
@@ -88,7 +88,7 @@ export function Header(): JSX.Element {
                 <DropDownMenu.Item tw="">
                   <Link
                     variant="plain"
-                    href="/dashboard"
+                    href={`/dashboard/${username}`}
                     tw="flex flex-row items-center justify-end space-x-1"
                   >
                     <Monitor size={14} />
@@ -123,7 +123,7 @@ export function Header(): JSX.Element {
       <div tw="w-full">
         <nav css={[tw`flex w-full flex-col px-2 pt-2 pb-3 space-y-1`, !showMenu && tw`hidden`]}>
           {isLogin ? (
-            <Link href="/dashboard" tw="px-3 py-2" highlightMatch>
+            <Link href={`/dashboard/${username}`} tw="px-3 py-2" highlightMatch>
               Dashboard
             </Link>
           ) : (

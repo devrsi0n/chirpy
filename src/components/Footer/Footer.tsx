@@ -21,12 +21,20 @@ export function Footer(props: FooterProps): JSX.Element {
   const { theme, setTheme } = useTheme();
   const hasMounted = useHasMounted();
   const handleClick = React.useCallback(() => {
-    if (theme === 'system') {
-      setTheme('dark');
-    } else if (theme === 'dark') {
-      setTheme('light');
-    } else if (theme === 'light') {
-      setTheme('system');
+    switch (theme) {
+      case 'system': {
+        setTheme('dark');
+        break;
+      }
+      case 'dark': {
+        setTheme('light');
+        break;
+      }
+      case 'light': {
+        setTheme('system');
+        break;
+      }
+      // No default
     }
   }, [theme, setTheme]);
 
