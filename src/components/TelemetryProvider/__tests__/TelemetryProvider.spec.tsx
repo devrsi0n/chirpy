@@ -7,17 +7,6 @@ import { TelemetryProvider } from '../TelemetryProvider';
 // Defined at jest/mocks/handlers
 const MOCK_CACHE = 'mock cache';
 
-jest.mock('next/router', () => ({
-  useRouter() {
-    return {
-      route: '/',
-      pathname: '',
-      query: '',
-      asPath: '',
-    };
-  },
-}));
-
 const STORAGE_KEY = 'session.cache';
 
 describe('TelemetryProvider', () => {

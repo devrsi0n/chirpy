@@ -21,7 +21,7 @@ export type DialogProps = React.PropsWithChildren<{
 
 export function Dialog({ title, children, show, onClose, styles = {} }: DialogProps): JSX.Element {
   return (
-    <Transition show={show} as={React.Fragment}>
+    <Transition appear show={show} as={React.Fragment}>
       <HeadlessDialog
         tw="fixed inset-0 z-20 overflow-y-auto"
         css={styles.root}
@@ -62,7 +62,12 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
                     tw="inline-block w-full max-w-md p-6 py-10 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg relative"
                     css={[styles.content]}
                   >
-                    <IconButton size="sm" tw="absolute right-1 top-1" onClick={() => onClose(true)}>
+                    <IconButton
+                      size="sm"
+                      tw="absolute right-1 top-1"
+                      onClick={() => onClose(true)}
+                      aria-label="Dismiss"
+                    >
                       <Dismiss />
                     </IconButton>
                     <div tw="flex flex-row justify-between items-start">
