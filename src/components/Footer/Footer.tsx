@@ -20,7 +20,7 @@ export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
 export function Footer(props: FooterProps): JSX.Element {
   const { theme, setTheme } = useTheme();
   const hasMounted = useHasMounted();
-  const handleClick = React.useCallback(() => {
+  const handleClick = () => {
     switch (theme) {
       case 'system': {
         setTheme('dark');
@@ -34,9 +34,8 @@ export function Footer(props: FooterProps): JSX.Element {
         setTheme('system');
         break;
       }
-      // No default
     }
-  }, [theme, setTheme]);
+  };
 
   const icon = icons[(theme as ColorMode) || 'system'];
   return (
@@ -57,7 +56,13 @@ export function Footer(props: FooterProps): JSX.Element {
         <Text variant="sm" css={tw`text-gray-500`}>
           &copy; 2021 Totalk Labs. All rights reserved.
         </Text>
-        {hasMounted && icon && theme && <IconButton onClick={handleClick} icon={icon}></IconButton>}
+        {hasMounted && icon && theme && (
+          <IconButton
+            onClick={handleClick}
+            icon={icon}
+            aria-label="Switch to other themes"
+          ></IconButton>
+        )}
       </div>
     </footer>
   );

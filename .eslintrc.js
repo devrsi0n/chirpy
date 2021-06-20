@@ -1,11 +1,13 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'jsx-a11y', 'prettier', 'unicorn', '@emotion'],
+  plugins: ['@typescript-eslint', 'jsx-a11y', 'prettier', 'unicorn', '@emotion', 'jest'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:unicorn/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
     'next',
     'next/core-web-vitals',
     'plugin:prettier/recommended',

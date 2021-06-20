@@ -12,11 +12,11 @@ export type SiteThemeProviderProps = {
 
 const themeVariablePrefix = '--tw';
 
-export const ThemeContext = React.createContext<Theme>({ colors: { primary: {} } });
+export const SiteThemeContext = React.createContext<Theme>({ colors: { primary: {} } });
 
 export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
   return (
-    <ThemeContext.Provider value={siteDefaultTheme}>
+    <SiteThemeContext.Provider value={siteDefaultTheme}>
       <Head>
         <style>
           {`:root {
@@ -28,10 +28,10 @@ export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
         </style>
       </Head>
       {props.children}
-    </ThemeContext.Provider>
+    </SiteThemeContext.Provider>
   );
 }
 
 export const useSiteTheme = () => {
-  return React.useContext(ThemeContext);
+  return React.useContext(SiteThemeContext);
 };
