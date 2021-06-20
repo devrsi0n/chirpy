@@ -8,7 +8,7 @@ import * as React from 'react';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
 import { CurrentUserProvider } from '$/components/CurrentUserProvider';
-import { SiteThemeProvider } from '$/components/ThemeProvider/SiteThemeProvider';
+import { SiteThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { useApollo } from '$/lib/apollo-client';
 

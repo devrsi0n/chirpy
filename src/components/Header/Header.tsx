@@ -8,7 +8,6 @@ import tw from 'twin.macro';
 
 import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
-import { CurrentUserContextType } from '$/components/CurrentUserProvider/CurrentUserContext';
 import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Link } from '$/components/Link';
 import { useLogout } from '$/hooks/useLogout';
@@ -19,20 +18,8 @@ import { Divider } from '../Divider';
 import { DropDownMenu } from '../DropDownMenu';
 import { Logo } from '../Logo';
 
-const SELECTED_PROJECT_ID = 'SELECTED_PROJECT_ID';
-type Project = NonNullable<NonNullable<CurrentUserContextType['projects']>[number]>;
-
 export function Header(): JSX.Element {
-  const { username, projects, displayName, avatar, error, isLogin } = useCurrentUser();
-  const [selectedProject, setSelectedProject] = React.useState<Project>();
-  React.useEffect(() => {
-    if (projects?.length && !selectedProject) {
-      const lastSelectedProject = localStorage.getItem(SELECTED_PROJECT_ID);
-      setSelectedProject(
-        projects.find((project: Project) => project.id === lastSelectedProject) || projects[0],
-      );
-    }
-  }, [projects, selectedProject]);
+  const { username, displayName, avatar, error, isLogin } = useCurrentUser();
 
   const [showMenu, setShowMenu] = React.useState(false);
   const handleClickMenu = React.useCallback(() => {
