@@ -1776,17 +1776,18 @@ export enum Page_Update_Column {
 /** columns and relationships of "Project" */
 export type Project = {
   __typename?: 'Project';
-  /** An array relationship */
-  Sessions: Array<Session>;
-  /** An aggregated array relationship */
-  Sessions_aggregate: Session_Aggregate;
   createdAt: Scalars['timestamptz'];
+  domain: Scalars['String'];
   id: Scalars['uuid'];
   name: Scalars['String'];
   /** An array relationship */
   pages: Array<Page>;
   /** An aggregated array relationship */
   pages_aggregate: Page_Aggregate;
+  /** An array relationship */
+  sessions: Array<Session>;
+  /** An aggregated array relationship */
+  sessions_aggregate: Session_Aggregate;
   /** An object relationship */
   team?: Maybe<Team>;
   teamId?: Maybe<Scalars['uuid']>;
@@ -1795,26 +1796,6 @@ export type Project = {
   /** An object relationship */
   user?: Maybe<User>;
   userId?: Maybe<Scalars['uuid']>;
-};
-
-
-/** columns and relationships of "Project" */
-export type ProjectSessionsArgs = {
-  distinct_on?: Maybe<Array<Session_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Session_Order_By>>;
-  where?: Maybe<Session_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Project" */
-export type ProjectSessions_AggregateArgs = {
-  distinct_on?: Maybe<Array<Session_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<Session_Order_By>>;
-  where?: Maybe<Session_Bool_Exp>;
 };
 
 
@@ -1835,6 +1816,26 @@ export type ProjectPages_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Page_Order_By>>;
   where?: Maybe<Page_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Project" */
+export type ProjectSessionsArgs = {
+  distinct_on?: Maybe<Array<Session_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Session_Order_By>>;
+  where?: Maybe<Session_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Project" */
+export type ProjectSessions_AggregateArgs = {
+  distinct_on?: Maybe<Array<Session_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<Session_Order_By>>;
+  where?: Maybe<Session_Bool_Exp>;
 };
 
 
@@ -1885,14 +1886,15 @@ export type Project_Arr_Rel_Insert_Input = {
 
 /** Boolean expression to filter rows from the table "Project". All fields are combined with a logical 'AND'. */
 export type Project_Bool_Exp = {
-  Sessions?: Maybe<Session_Bool_Exp>;
   _and?: Maybe<Array<Maybe<Project_Bool_Exp>>>;
   _not?: Maybe<Project_Bool_Exp>;
   _or?: Maybe<Array<Maybe<Project_Bool_Exp>>>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  domain?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   pages?: Maybe<Page_Bool_Exp>;
+  sessions?: Maybe<Session_Bool_Exp>;
   team?: Maybe<Team_Bool_Exp>;
   teamId?: Maybe<Uuid_Comparison_Exp>;
   theme?: Maybe<Jsonb_Comparison_Exp>;
@@ -1903,6 +1905,8 @@ export type Project_Bool_Exp = {
 
 /** unique or primary key constraints on table "Project" */
 export enum Project_Constraint {
+  /** unique or primary key constraint */
+  ProjectDomainKey = 'Project_domain_key',
   /** unique or primary key constraint */
   ProjectPkey = 'Project_pkey'
 }
@@ -1924,11 +1928,12 @@ export type Project_Delete_Key_Input = {
 
 /** input type for inserting data into table "Project" */
 export type Project_Insert_Input = {
-  Sessions?: Maybe<Session_Arr_Rel_Insert_Input>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   pages?: Maybe<Page_Arr_Rel_Insert_Input>;
+  sessions?: Maybe<Session_Arr_Rel_Insert_Input>;
   team?: Maybe<Team_Obj_Rel_Insert_Input>;
   teamId?: Maybe<Scalars['uuid']>;
   theme?: Maybe<Scalars['jsonb']>;
@@ -1941,6 +1946,7 @@ export type Project_Insert_Input = {
 export type Project_Max_Fields = {
   __typename?: 'Project_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['uuid']>;
@@ -1951,6 +1957,7 @@ export type Project_Max_Fields = {
 /** order by max() on columns of table "Project" */
 export type Project_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   teamId?: Maybe<Order_By>;
@@ -1962,6 +1969,7 @@ export type Project_Max_Order_By = {
 export type Project_Min_Fields = {
   __typename?: 'Project_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['uuid']>;
@@ -1972,6 +1980,7 @@ export type Project_Min_Fields = {
 /** order by min() on columns of table "Project" */
 export type Project_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   teamId?: Maybe<Order_By>;
@@ -2003,11 +2012,12 @@ export type Project_On_Conflict = {
 
 /** ordering options when selecting data from "Project" */
 export type Project_Order_By = {
-  Sessions_aggregate?: Maybe<Session_Aggregate_Order_By>;
   createdAt?: Maybe<Order_By>;
+  domain?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   pages_aggregate?: Maybe<Page_Aggregate_Order_By>;
+  sessions_aggregate?: Maybe<Session_Aggregate_Order_By>;
   team?: Maybe<Team_Order_By>;
   teamId?: Maybe<Order_By>;
   theme?: Maybe<Order_By>;
@@ -2031,6 +2041,8 @@ export enum Project_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  Domain = 'domain',
+  /** column name */
   Id = 'id',
   /** column name */
   Name = 'name',
@@ -2047,6 +2059,7 @@ export enum Project_Select_Column {
 /** input type for updating data in table "Project" */
 export type Project_Set_Input = {
   createdAt?: Maybe<Scalars['timestamptz']>;
+  domain?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   teamId?: Maybe<Scalars['uuid']>;
@@ -2059,6 +2072,8 @@ export type Project_Set_Input = {
 export enum Project_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  Domain = 'domain',
   /** column name */
   Id = 'id',
   /** column name */

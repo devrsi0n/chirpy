@@ -36,8 +36,8 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
               {authOptions.map((option) => (
                 <Link key={option.name} href={option.href} variant="plain" tw="block">
                   <Button tw="w-full" size="lg">
-                    <option.icon width={`${option.size}px`} height={`${option.size}px`} />
-                    <span tw="inline-block ml-2 text-left" style={{ width: '11.5rem' }}>
+                    <option.icon />
+                    <span tw="inline-block ml-2 text-left" style={{ width: '12rem' }}>
                       Sign in with {option.name}
                     </span>
                   </Button>
@@ -46,7 +46,8 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
             </div>
             <Text tw="py-3 text-gray-400" variant="sm">
               By clicking the buttons above, you acknowledge that you have read and understood, and
-              agree to {process.env.NEXT_PUBLIC_APP_NAME}'s{' '}
+              agree to {process.env.NEXT_PUBLIC_APP_NAME}
+              {`'s `}
               <Link href="/terms-of-service">Terms of Service</Link> and{' '}
               <Link href="/privacy-policy">Privacy Policy</Link>.
             </Text>

@@ -68,3 +68,9 @@ query userByPk($id: uuid!) {
     createdAt
   }
 }
+
+query allUsers {
+  users {
+    username
+  }
+}

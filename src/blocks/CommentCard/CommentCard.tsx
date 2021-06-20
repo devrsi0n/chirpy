@@ -117,15 +117,7 @@ export function CommentCard({
           <ActionButton
             color="blue"
             disabled={disabledReply}
-            icon={
-              <MessageIcon
-                width={20}
-                height={20}
-                style={{
-                  transform: 'scaleX(-1)',
-                }}
-              />
-            }
+            icon={<MessageIcon width={20} height={20} tw="transform -scale-x-1" />}
             onClick={handlePressReply}
           />
           <Link

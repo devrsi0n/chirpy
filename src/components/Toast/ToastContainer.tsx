@@ -13,7 +13,7 @@ export type ToastContainerProps = React.PropsWithChildren<{
   // title: string;
 }>;
 
-export function ToastContainer(props: ToastContainerProps): JSX.Element {
+export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
   const { toasts, setToasts } = useToast();
 
   const portal = usePortal('basic');

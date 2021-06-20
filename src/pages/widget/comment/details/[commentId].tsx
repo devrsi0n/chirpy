@@ -146,7 +146,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       },
     });
     if (!themeResult.data.pageByPk) {
-      console.error(`Can't find theme info`);
+      console.error(`Can't find page info`);
       return { notFound: true };
     }
 

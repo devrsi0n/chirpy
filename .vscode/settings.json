@@ -25,7 +25,8 @@
   "appService.deploySubpath": ".",
   "cSpell.words": [
     "centralus",
-    "jsonb"
+    "jsonb",
+    "visx"
   ],
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",

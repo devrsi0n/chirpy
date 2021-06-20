@@ -9,9 +9,9 @@ import tw, { css, TwStyle } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { ClientOnly } from '$/components/ClientOnly';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { SpinnerIcon } from '$/components/Icons';
 import { Text } from '$/components/Text';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 
 import { SignInButton } from '../SignInButton';

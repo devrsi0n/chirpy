@@ -3,8 +3,8 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { Button, ButtonProps } from '$/components/Button';
+import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { SpinnerIcon } from '$/components/Icons';
-import { useCurrentUser } from '$/hooks/useCurrentUser';
 import { useSignIn } from '$/hooks/useSignIn';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant'>;

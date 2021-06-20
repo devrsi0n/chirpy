@@ -25,7 +25,13 @@ export function WidgetLayout({
 
   return (
     <TelemetryProvider projectId={projectId}>
-      <div {...divProps} css={[tw`min-h-full`, noContainer && tw`flex flex-col items-center`]}>
+      <div
+        {...divProps}
+        css={[tw`min-h-full`, noContainer && tw`flex flex-col items-center`]}
+        style={{
+          background: 'hsl(210, 10%, 98%)',
+        }}
+      >
         {header}
         <AnimatePresence>
           <m.div
