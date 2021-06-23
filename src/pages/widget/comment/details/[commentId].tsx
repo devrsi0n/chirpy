@@ -1,4 +1,5 @@
 import { FetchResult } from '@apollo/client';
+import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import {
@@ -57,7 +58,9 @@ export default function CommentDetailsWidget(
       <WidgetLayout projectId={props.projectId}>
         <div css={tw`flex flex-row justify-between items-center mb-4`}>
           <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
-            <IconButton icon="arrow-left" size="md" css={tw`transform -translate-x-4`} />
+            <IconButton size="md" css={tw`transform -translate-x-3`}>
+              <ArrowLeft size={20} />
+            </IconButton>
           </Link>
           <Heading as="h4" css={tw`text-gray-600`}>
             <span tw="font-bold">{comment?.user.displayName}</span>
