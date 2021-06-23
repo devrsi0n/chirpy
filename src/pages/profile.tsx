@@ -1,5 +1,6 @@
 import Edit2 from '@geist-ui/react-icons/edit2';
 import Link2 from '@geist-ui/react-icons/link2';
+import Loader from '@geist-ui/react-icons/loader';
 import Save from '@geist-ui/react-icons/save';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import Twitter from '@geist-ui/react-icons/twitter';
@@ -11,7 +12,6 @@ import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
 import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Heading } from '$/components/Heading';
-import { SpinnerIcon } from '$/components/Icons';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { Popover } from '$/components/Popover';
@@ -103,7 +103,7 @@ function Profile(): JSX.Element {
       <ProfileContainer>
         <div tw="text-gray-500 flex flex-col items-center justify-center">
           <Text>Loading...</Text>
-          <SpinnerIcon tw="h-8 w-8" />
+          <Loader tw="animate-spin h-8 w-8" />
         </div>
       </ProfileContainer>
     );

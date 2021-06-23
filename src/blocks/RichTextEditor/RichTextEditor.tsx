@@ -1,4 +1,5 @@
 // @refresh reset
+import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import DismissIcon from '@geist-ui/react-icons/x';
 // import '@tailwindcss/typography/dist/typography.min.css';
@@ -10,7 +11,6 @@ import tw, { css, TwStyle } from 'twin.macro';
 import { Button } from '$/components/Button';
 import { ClientOnly } from '$/components/ClientOnly';
 import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
-import { SpinnerIcon } from '$/components/Icons';
 import { Text } from '$/components/Text';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 
@@ -155,7 +155,11 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                     css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
                     onClick={handleSubmitReply}
                   >
-                    {isLoading ? <SpinnerIcon tw="text-gray-400 w-5 h-5" /> : <Send size="14" />}
+                    {isLoading ? (
+                      <Loader tw="animate-spin text-gray-400 w-5 h-5" />
+                    ) : (
+                      <Send size="14" />
+                    )}
                     <Text>{postButtonLabel || 'Post'}</Text>
                   </Button>
                 ) : (

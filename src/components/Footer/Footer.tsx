@@ -1,3 +1,7 @@
+import { Icon } from '@geist-ui/react-icons';
+import Moon from '@geist-ui/react-icons/moon';
+import Settings from '@geist-ui/react-icons/settings';
+import Sun from '@geist-ui/react-icons/sun';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 import tw from 'twin.macro';
@@ -9,10 +13,10 @@ import { ColorMode } from '../../types/theme.type';
 import { IconButton } from '../Button/IconButton';
 import { Link } from '../Link/Link';
 
-const icons: Record<ColorMode, 'setting' | 'sun' | 'moon'> = {
-  system: 'setting',
-  light: 'sun',
-  dark: 'moon',
+const icons: Record<ColorMode, Icon> = {
+  system: Settings,
+  light: Sun,
+  dark: Moon,
 };
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
@@ -37,7 +41,7 @@ export function Footer(props: FooterProps): JSX.Element {
     }
   };
 
-  const icon = icons[(theme as ColorMode) || 'system'];
+  const ThemeIcon = icons[(theme as ColorMode) || 'system'];
   return (
     <footer
       {...props}
@@ -56,12 +60,10 @@ export function Footer(props: FooterProps): JSX.Element {
         <Text variant="sm" css={tw`text-gray-500`}>
           &copy; 2021 Totalk Labs. All rights reserved.
         </Text>
-        {hasMounted && icon && theme && (
-          <IconButton
-            onClick={handleClick}
-            icon={icon}
-            aria-label="Switch to other themes"
-          ></IconButton>
+        {hasMounted && ThemeIcon && theme && (
+          <IconButton onClick={handleClick} aria-label={`${theme} theme`}>
+            <ThemeIcon size={18} />
+          </IconButton>
         )}
       </div>
     </footer>

@@ -1,39 +1,26 @@
-import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-import { SunIcon, ISunIconProps, SpinnerIcon, SettingIcon, MoonIcon } from '../Icons';
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg';
-type Icon = 'sun' | 'moon' | 'setting' | 'spinner' | 'arrow-left';
 
 export type IconButtonProps = BaseButtonProps & {
-  icon?: Icon;
   size?: Size;
   children?: React.ReactNode;
 };
 
-const sizeStyles: Record<Size, [TwStyle, number]> = {
-  sm: [tw`p-1`, 14],
-  md: [tw`p-2`, 18],
-  lg: [tw`p-3`, 24],
-};
-
-const icons: Record<Icon, React.FunctionComponent<ISunIconProps>> = {
-  sun: SunIcon,
-  moon: MoonIcon,
-  setting: SettingIcon,
-  spinner: SpinnerIcon,
-  'arrow-left': ArrowLeft as $TsFixMe,
+const sizeStyles: Record<Size, TwStyle> = {
+  sm: tw`p-1`,
+  md: tw`p-2`,
+  lg: tw`p-3`,
 };
 
 export const IconButton = React.forwardRef(function IconButton(
-  { size = 'md', icon, children, ...restProps }: IconButtonProps,
+  { size = 'md', children, ...restProps }: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
-  const Icon = icon ? icons[icon] : null;
-  const [style, sizeNumber] = sizeStyles[size];
+  const style = sizeStyles[size];
   return (
     <BaseButton
       ref={ref}
@@ -43,7 +30,6 @@ export const IconButton = React.forwardRef(function IconButton(
         style,
       ]}
     >
-      {Icon && <Icon size={sizeNumber} />}
       {children}
     </BaseButton>
   );

@@ -1,4 +1,5 @@
 import Info from '@geist-ui/react-icons/info';
+import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import dayjs from 'dayjs';
 import { m, Variants } from 'framer-motion';
 import * as React from 'react';
@@ -8,7 +9,6 @@ import { isENVDev } from '$server/utilities/env';
 
 import { Avatar } from '$/components/Avatar';
 import { ActionButton } from '$/components/Button';
-import { MessageIcon } from '$/components/Icons';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
@@ -117,7 +117,7 @@ export function CommentCard({
           <ActionButton
             color="blue"
             disabled={disabledReply}
-            icon={<MessageIcon width={20} height={20} tw="transform -scale-x-1" />}
+            icon={<MessageSquare size={20} tw="transform -scale-x-1" />}
             onClick={handlePressReply}
           />
           <Link
