@@ -1,10 +1,9 @@
 import { ClassNames } from '@emotion/react';
+import Check from '@geist-ui/react-icons/check';
+import ChevronUpDown from '@geist-ui/react-icons/chevronUpDown';
 import { Listbox, Transition } from '@headlessui/react';
 import * as React from 'react';
 import tw from 'twin.macro';
-
-import { CheckMarkIcon } from '../Icons/CheckMarkIcon';
-import { ChevronUpDownIcon } from '../Icons/ChevronUpDownIcon';
 
 export type SelectProps<T> = React.PropsWithChildren<{
   value: T;
@@ -44,7 +43,7 @@ export function Select<T>({
                 <span
                   css={tw`absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none`}
                 >
-                  <ChevronUpDownIcon />
+                  <ChevronUpDown />
                 </span>
               </Listbox.Button>
             </span>
@@ -101,7 +100,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
                 tw`absolute inset-y-0 left-0 flex items-center pl-1.5`,
               ]}
             >
-              <CheckMarkIcon />
+              <Check size={16} />
             </span>
           )}
         </div>

@@ -38,7 +38,7 @@ describe('Footer', () => {
 
   it('should call setTheme when click on icon button', () => {
     expect(mockSetTheme).not.toHaveBeenCalled();
-    userEvent.click(screen.getByLabelText('Switch to other themes'));
+    userEvent.click(screen.getByLabelText('light theme'));
     expect(mockSetTheme).toHaveBeenCalled();
   });
 });

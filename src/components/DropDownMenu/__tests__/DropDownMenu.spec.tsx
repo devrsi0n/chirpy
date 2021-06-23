@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
@@ -25,11 +25,10 @@ describe('DropDownMenu', () => {
     expect(button).toBeTruthy();
 
     userEvent.click(button);
-    const item1Button = screen.getByText(item1Text);
-    expect(item1Button).toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText(item1Text)).toBeInTheDocument());
     expect(screen.getByText(item2Text)).toBeInTheDocument();
 
-    userEvent.click(item1Button);
+    userEvent.click(screen.getByText(item1Text));
     expect(mockHandleClickItem1).toHaveBeenCalledTimes(1);
   });
 });

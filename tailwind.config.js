@@ -1,5 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
+const { lightBlue, ...colors } = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -10,7 +10,7 @@ module.exports = {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        gray: colors.trueGray,
+        // gray: colors.trueGray,
         primary: {
           50: 'var(--tw-colors-primary-50)',
           100: 'var(--tw-colors-primary-100)',
