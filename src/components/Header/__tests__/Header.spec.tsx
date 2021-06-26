@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from '@testing-library/react';
 
-import '$/test/mock-router';
+import '$/tests/mocks/router';
 
 import { Header } from '../';
 

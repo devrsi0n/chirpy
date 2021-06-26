@@ -1,7 +1,7 @@
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Heading } from '$/components/Heading';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
 import { ToggleLieAction } from '$/hooks/useToggleALikeAction';

@@ -1,9 +1,6 @@
 import TrendingUp from '@geist-ui/react-icons/trendingUp';
-import dayjs from 'dayjs';
 import * as React from 'react';
 import tw from 'twin.macro';
-
-import { ProjectsOfDashboardQuery } from '$server/graphql/generated/project';
 
 import { Button, IconButton } from '$/components/Button';
 import { Divider } from '$/components/Divider';
@@ -11,6 +8,8 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Text } from '$/components/Text';
+import { ProjectsOfDashboardQuery } from '$/server/graphql/generated/project';
+import { dayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../IntegrateGuide';
 

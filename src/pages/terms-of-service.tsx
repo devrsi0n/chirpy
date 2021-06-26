@@ -5,8 +5,7 @@ import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Layout } from '$/components/Layout';
-
-import { getMDXPropsBySlug, MDXProps } from '$shared/mdx';
+import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 
 export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (

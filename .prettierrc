@@ -4,6 +4,6 @@
   "printWidth": 100,
   "trailingComma": "all",
   "endOfLine": "lf",
-  "importOrder": ["^\\$server/(.*)$", "^\\$/(.*)$", "^\\$shared/(.*)$", "^[./]"],
+  "importOrder": ["^\\$/(.*)$", "^[./]"],
   "importOrderSeparation": true
 }

@@ -1,6 +1,4 @@
 import { extractCritical } from '@emotion/server';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import Document, {
   Html,
   Head,
@@ -10,8 +8,6 @@ import Document, {
   DocumentInitialProps,
 } from 'next/document';
 import tw from 'twin.macro';
-
-dayjs.extend(relativeTime);
 
 class MyDocument extends Document<ReturnType<typeof extractCritical>> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {

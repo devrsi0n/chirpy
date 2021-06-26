@@ -1,6 +1,5 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import 'twin.macro';
 import { css, theme } from 'twin.macro';
 
 import { CommentLeafType } from '$/types/widget';

@@ -1,7 +1,5 @@
 import { FetchResult } from '@apollo/client';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -12,9 +10,6 @@ import {
 import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';
-
-import { getAdminApollo } from '$server/common/admin-apollo';
-import { CommentsDocument } from '$server/graphql/generated/comment';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { PoweredBy } from '$/blocks/PoweredBy';
@@ -33,10 +28,10 @@ import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page'
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import { CommentsDocument } from '$/server/graphql/generated/comment';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
-
-dayjs.extend(relativeTime);
 
 // Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
 export default function CommentDetailsWidget(

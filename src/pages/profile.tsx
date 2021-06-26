@@ -8,9 +8,9 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
