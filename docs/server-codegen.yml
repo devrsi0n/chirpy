@@ -3,14 +3,14 @@ schema:
   - https://hasura.totalk.dev/v1/graphql:
       headers:
         X-Hasura-Admin-Secret: '&DJET64U^WZs'
-documents: 'server/**/*.graphql'
+documents: 'src/server/graphql/*.graphql'
 generates:
-  server/graphql/generated/types.ts:
+  src/server/graphql/generated/types.ts:
     plugins:
       - typescript
       - add:
           content: "import { JsonObject, JsonArray } from 'type-fest';"
-  server/graphql:
+  src/server/graphql:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts

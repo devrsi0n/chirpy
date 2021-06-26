@@ -1,21 +1,20 @@
-import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
-
-import { getAdminApollo } from '$server/common/admin-apollo';
-import {
-  AllProjectsDocument,
-  ProjectAnalyticsDocument,
-  ProjectAnalyticsQuery,
-} from '$server/graphql/generated/project';
 
 import { PageViewChart } from '$/blocks/PageViewChart';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import {
+  AllProjectsDocument,
+  ProjectAnalyticsDocument,
+  ProjectAnalyticsQuery,
+} from '$/server/graphql/generated/project';
+import { dayjs } from '$/utilities/date';
 import { getStartOfSubtractDate } from '$/utilities/date';
 
 export type AnalyticsProps = {

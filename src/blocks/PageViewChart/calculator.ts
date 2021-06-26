@@ -1,6 +1,5 @@
-import dayjs from 'dayjs';
-
-import { ProjectAnalyticsQuery } from '$server/graphql/generated/project';
+import { ProjectAnalyticsQuery } from '$/server/graphql/generated/project';
+import { dayjs } from '$/utilities/date';
 
 import { PageView, ViewType } from './type';
 

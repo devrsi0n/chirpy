@@ -4,7 +4,13 @@ const defaultWidth = 1.2;
 const defaultHeight = 3.2;
 export type CommentBranchProps = {
   hiddenBranch?: boolean;
+  /**
+   * rem
+   */
   width?: number;
+  /**
+   * rem
+   */
   height?: number;
 } & React.ComponentPropsWithoutRef<'li'>;
 

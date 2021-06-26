@@ -6,8 +6,7 @@ import tw from 'twin.macro';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
-
-import { Directory } from '$shared/types/file';
+import { Directory } from '$/server/types/file';
 
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires, unicorn/prefer-module */
-const { createToken } = require('../../server/utilities/create-token');
+const { createToken } = require('../server/utilities/create-token');
 
 /**
  * @type {function (): string}

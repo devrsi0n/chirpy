@@ -7,10 +7,9 @@ import { Heading } from '$/components/Heading';
 import { Image } from '$/components/Image';
 import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
+import { getDirectories } from '$/server/mdx/files';
+import { Directory } from '$/server/types/file';
 import { getBannerProps } from '$/utilities/image';
-
-import { getDirectories } from '$shared/files';
-import { Directory } from '$shared/types/file';
 
 const CONTAINER_FOLDER = 'blog';
 

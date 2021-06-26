@@ -7,9 +7,8 @@ import 'twin.macro';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { SideBar, SideBarProps } from '$/blocks/SideBar';
 import { Layout } from '$/components/Layout';
-
-import { getAllFileStructures, getDirectories } from '$shared/files';
-import { getMDXPropsBySlug, MDXProps } from '$shared/mdx';
+import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
+import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'>;
 const CONTAINER_FOLDER = 'docs';

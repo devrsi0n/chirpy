@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { EventRequestBody, EventResponseBody } from '$shared/types/event';
-import { SessionRequestBody } from '$shared/types/session';
+import { EventRequestBody, EventResponseBody } from '$/server/types/event';
+import { SessionRequestBody } from '$/server/types/session';
 
 import { TelemetryContext, TelemetryContextType } from './TelemetryContext';
 

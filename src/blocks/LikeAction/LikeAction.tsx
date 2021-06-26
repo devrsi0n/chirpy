@@ -2,31 +2,34 @@ import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
 import * as React from 'react';
 
-import { ActionButton } from '$/components/Button';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
+import { ActionButton, ActionButtonProps } from '$/components/Button';
 
-export type ClickLikeActionHandler = (isLiked: boolean, likeId: string, commentId: string) => void;
+export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
 
 export type Like = {
   id: string;
   userId: string;
 };
 
-export type LikeActionProps = React.PropsWithChildren<{
-  likes: Like[];
-  commentId: string;
-  onClickLikeAction: ClickLikeActionHandler;
-}>;
+export type LikeActionProps = React.PropsWithChildren<
+  {
+    likes: Like[];
+    commentId: string;
+    onClickLikeAction: ClickLikeActionHandler;
+  } & Omit<ActionButtonProps, 'icon' | 'color' | 'onClick'>
+>;
 
 // TODO: Animation
 export function LikeAction({
   likes = [],
   commentId,
   onClickLikeAction,
+  ...restProps
 }: LikeActionProps): JSX.Element {
   const { id: currentUserId } = useCurrentUser();
   let likedId = '';
-  const liked =
+  const didLike =
     !!currentUserId &&
     likes.some((like) => {
       if (like.userId === currentUserId) {
@@ -37,15 +40,17 @@ export function LikeAction({
     });
 
   const handleClickLike = () => {
-    onClickLikeAction(liked, likedId, commentId);
+    onClickLikeAction(didLike, likedId, commentId);
   };
 
-  const HeartComponent = liked ? HeartFill : Heart;
+  const HeartComponent = didLike ? HeartFill : Heart;
   return (
     <ActionButton
+      {...restProps}
       color="pink"
-      activated={liked}
-      icon={<HeartComponent size={20} onClick={handleClickLike} />}
+      activated={didLike}
+      onClick={handleClickLike}
+      icon={<HeartComponent size={20} />}
     >
       {likes.length > 0 && <span>{likes.length}</span>}
     </ActionButton>

@@ -1,6 +1,6 @@
 module.exports = {
   client: {
-    includes: ['./server/**/*.ts', './src/**/*.ts', './shared/**/*.ts'],
+    includes: ['./src/**/*.ts'],
     service: {
       name: 'totalk',
       localSchemaFile: './docs/graphql-schema.json',

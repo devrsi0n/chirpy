@@ -8,10 +8,9 @@ import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
 import { Layout } from '$/components/Layout';
 import { useHasMounted } from '$/hooks/useHasMounted';
+import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
+import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { getBannerProps } from '$/utilities/image';
-
-import { getAllFileStructures, getDirectories } from '$shared/files';
-import { getMDXPropsBySlug, MDXProps } from '$shared/mdx';
 
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';
