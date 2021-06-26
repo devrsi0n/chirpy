@@ -7,7 +7,7 @@ import * as React from 'react';
 // import 'tailwindcss/tailwind.css';
 import tw, { css, GlobalStyles, theme } from 'twin.macro';
 
-import { CurrentUserProvider } from '$/components/CurrentUserProvider';
+import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
 import { SiteThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { useApollo } from '$/lib/apollo-client';

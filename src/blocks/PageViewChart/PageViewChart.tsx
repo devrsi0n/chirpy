@@ -2,7 +2,7 @@ import { ParentSize } from '@visx/responsive';
 import * as React from 'react';
 import 'twin.macro';
 
-import { ProjectAnalyticsQuery } from '$server/graphql/generated/project';
+import { ProjectAnalyticsQuery } from '$/server/graphql/generated/project';
 
 import { NumberBlock } from './NumberBlock';
 import { ViewChart } from './ViewChart';

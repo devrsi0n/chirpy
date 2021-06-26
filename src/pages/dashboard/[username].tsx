@@ -1,30 +1,25 @@
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
-import { getAdminApollo } from '$server/common/admin-apollo';
-import {
-  ProjectsOfDashboardDocument,
-  ProjectsOfDashboardQuery,
-} from '$server/graphql/generated/project';
-import { AllUsersDocument } from '$server/graphql/generated/user';
-
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
-import { getStartOfSubtractDate } from '$/utilities/date';
-
-dayjs.extend(relativeTime);
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import {
+  ProjectsOfDashboardDocument,
+  ProjectsOfDashboardQuery,
+} from '$/server/graphql/generated/project';
+import { AllUsersDocument } from '$/server/graphql/generated/user';
+import { getStartOfSubtractDate, dayjs } from '$/utilities/date';
 
 export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   const { id, isLogin, refetchData } = useCurrentUser();

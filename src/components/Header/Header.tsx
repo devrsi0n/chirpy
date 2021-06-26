@@ -6,9 +6,9 @@ import Dismiss from '@geist-ui/react-icons/x';
 import * as React from 'react';
 import tw from 'twin.macro';
 
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { SignInButton } from '$/blocks/SignInButton';
 import { Avatar } from '$/components/Avatar';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Link } from '$/components/Link';
 import { useLogout } from '$/hooks/useLogout';
 import { bluredBg } from '$/styles/common';

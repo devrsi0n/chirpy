@@ -13,9 +13,8 @@ import Cookies from 'js-cookie';
 import preval from 'preval.macro';
 import * as React from 'react';
 
+import { AUTH_COOKIE_NAME } from '$/server/common/constants';
 import { ssrMode } from '$/utilities/env';
-
-import { AUTH_COOKIE_NAME } from '../../shared/constants';
 
 let cachedApolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | null =
   null;

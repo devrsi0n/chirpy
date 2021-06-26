@@ -3,8 +3,8 @@ import LogOut from '@geist-ui/react-icons/logOut';
 import * as React from 'react';
 import tw from 'twin.macro';
 
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Divider } from '$/components/Divider';
 import { DropDownMenu } from '$/components/DropDownMenu';
 import { Toggle } from '$/components/Toggle';

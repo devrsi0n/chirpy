@@ -8,9 +8,9 @@ import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import tw, { css, TwStyle } from 'twin.macro';
 
+import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Button } from '$/components/Button';
 import { ClientOnly } from '$/components/ClientOnly';
-import { useCurrentUser } from '$/components/CurrentUserProvider/useCurrentUser';
 import { Text } from '$/components/Text';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 
@@ -154,6 +154,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                     variant={'solid'}
                     css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
                     onClick={handleSubmitReply}
+                    aria-label={isLoading ? 'Posting' : 'Post'}
                   >
                     {isLoading ? (
                       <Loader tw="animate-spin text-gray-400 w-5 h-5" />

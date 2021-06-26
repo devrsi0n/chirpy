@@ -1,10 +1,8 @@
+node_modules
+jest
 generated
+cypress-examples
 .next
 .cache
 
-.eslintrc.js
-next.config.js
-tailwind.config.js
-cypress-examples
-jest.config.js
-jest/
+/*.js

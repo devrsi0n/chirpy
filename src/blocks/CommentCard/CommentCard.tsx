@@ -1,11 +1,8 @@
 import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
-import dayjs from 'dayjs';
 import { m, Variants } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
-
-import { isENVDev } from '$server/utilities/env';
 
 import { Avatar } from '$/components/Avatar';
 import { ActionButton } from '$/components/Button';
@@ -14,6 +11,8 @@ import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
+import { isENVDev } from '$/server/utilities/env';
+import { dayjs } from '$/utilities/date';
 
 import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import RichTextEditor, { RTEValue } from '../RichTextEditor/RichTextEditor';
@@ -32,9 +31,8 @@ export type CommentCardProps = {
   content: RTEValue;
   createdAt: string;
   likes: Like[];
-  disableLink?: boolean;
   depth: number;
-
+  preventDetailsPage?: boolean;
   onSubmitReply: SubmitHandler;
   onClickLikeAction: ClickLikeActionHandler;
 };
@@ -46,7 +44,7 @@ export function CommentCard({
   depth,
   createdAt,
   likes,
-  disableLink,
+  preventDetailsPage,
   onSubmitReply,
   onClickLikeAction,
 }: CommentCardProps): JSX.Element {
@@ -69,11 +67,10 @@ export function CommentCard({
     setShowReplyEditor(false);
   };
   const detailsURL = `/widget/comment/details/${commentId}`;
-
   const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
 
   const handleClickLinkAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    if (disableLink) {
+    if (preventDetailsPage) {
       e.preventDefault();
       setContainerAnimate('shake');
     }
@@ -113,18 +110,24 @@ export function CommentCard({
           <RichTextEditor initialValue={content} readOnly />
         </div>
         <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
-          <LikeAction likes={likes} commentId={commentId} onClickLikeAction={onClickLikeAction} />
+          <LikeAction
+            aria-label="Like"
+            likes={likes}
+            commentId={commentId}
+            onClickLikeAction={onClickLikeAction}
+          />
           <ActionButton
+            aria-label="Reply"
             color="blue"
             disabled={disabledReply}
             icon={<MessageSquare size={20} tw="transform -scale-x-1" />}
             onClick={handlePressReply}
           />
           <Link
-            href={!disableLink ? detailsURL : ''}
+            href={!preventDetailsPage ? detailsURL : ''}
             variant="plain"
             title={
-              !disableLink
+              !preventDetailsPage
                 ? 'The details of this comment'
                 : `This is already the current comment's detail page`
             }
@@ -132,7 +135,7 @@ export function CommentCard({
             <ActionButton
               color="green"
               icon={<Info size={20} />}
-              disabled={disableLink}
+              disabled={preventDetailsPage}
               onClick={handleClickLinkAction}
             />
           </Link>

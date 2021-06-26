@@ -1,18 +1,9 @@
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import merge from 'lodash/merge';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import colors from 'tailwindcss/colors';
 import tw from 'twin.macro';
-
-import { getAdminApollo } from '$server/common/admin-apollo';
-import {
-  ThemeProjectByPkDocument,
-  ThemeProjectByPkQuery,
-  AllProjectsDocument,
-} from '$server/graphql/generated/project';
 
 import { CommentWidget } from '$/blocks/CommentWidget';
 import { IconButton } from '$/components/Button';
@@ -22,9 +13,13 @@ import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { ThemeProvider, useTheme } from '$/components/ThemeProvider';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import {
+  ThemeProjectByPkDocument,
+  ThemeProjectByPkQuery,
+  AllProjectsDocument,
+} from '$/server/graphql/generated/project';
 import { Theme as ThemeType } from '$/types/theme.type';
-
-dayjs.extend(relativeTime);
 
 export type ThemeProps = StaticProps;
 

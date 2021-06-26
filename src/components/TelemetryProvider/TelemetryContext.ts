@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { EventRequestBody } from '$shared/types/event';
+import { EventRequestBody } from '$/server/types/event';
 
 export type TelemetryContextType = {
   recordEvent(type: string, params: EventRequestBody['params']): void;

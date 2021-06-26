@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - ./docs/graphql-schema.json
 documents:
-  - 'src/**/*.graphql'
+  - 'src/graphql/*.graphql'
 generates:
   src/graphql/generated/types.ts:
     plugins:

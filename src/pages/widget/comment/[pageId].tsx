@@ -1,6 +1,4 @@
 import { FetchResult } from '@apollo/client';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -12,9 +10,6 @@ import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import 'twin.macro';
-
-import { getAdminApollo } from '$server/common/admin-apollo';
-import { PagesDocument } from '$server/graphql/generated/page';
 
 import { CommentWidget } from '$/blocks/CommentWidget';
 import { PoweredBy } from '$/blocks/PoweredBy';
@@ -29,10 +24,10 @@ import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page'
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import { PagesDocument } from '$/server/graphql/generated/page';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
-
-dayjs.extend(relativeTime);
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
