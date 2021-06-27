@@ -2,7 +2,7 @@ overwrite: true
 schema:
   - https://hasura.totalk.dev/v1/graphql:
       headers:
-        X-Hasura-Admin-Secret: '&DJET64U^WZs'
+        X-Hasura-Admin-Secret: 'kseNjSD7Z7RP4XKg'
 documents: 'src/server/graphql/*.graphql'
 generates:
   src/server/graphql/generated/types.ts:
