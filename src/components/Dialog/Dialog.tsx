@@ -1,7 +1,6 @@
 import { ClassNames } from '@emotion/react';
 import Dismiss from '@geist-ui/react-icons/x';
-import { Transition } from '@headlessui/react';
-import { Dialog as HeadlessDialog } from '@headlessui/react';
+import { Transition, Dialog as HeadlessDialog } from '@headlessui/react';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 

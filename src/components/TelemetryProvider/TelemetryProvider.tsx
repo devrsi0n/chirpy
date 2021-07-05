@@ -70,7 +70,7 @@ function schedulePendingEvents() {
   }
 }
 
-const processPendingAnalyticsEvents: IdleRequestCallback = async (deadline) => {
+const processPendingAnalyticsEvents = (deadline: IdleDeadline): void => {
   while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && eventsToRecord.length > 0) {
     logEvent(eventsToRecord.pop()!);
   }

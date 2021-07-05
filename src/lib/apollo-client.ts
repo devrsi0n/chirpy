@@ -50,8 +50,9 @@ function getHeaders() {
     authorization: `Bearer ${
       Cookies.get(AUTH_COOKIE_NAME) ||
       preval`
-      const token = require("./anonymous-token.js");
-      module.exports = token;
+      process.env.HASH_KEY = ${process.env.HASH_KEY};
+      console.log({ hashKey: process.env.HASH_KEY });
+      module.exports = require("./anonymous-token.js");
     `
     }`,
   };

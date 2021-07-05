@@ -3,13 +3,13 @@ import { NextRouter } from 'next/router';
 
 jest.mock('next/router', () => ({
   useRouter() {
-    return mockRouter;
+    return mockNextRouter;
   },
 }));
 
 const emitter = new EventEmitter();
 
-export const mockRouter: NextRouter = {
+export const mockNextRouter: NextRouter = {
   basePath: '/',
   pathname: '/',
   route: '/',
@@ -31,3 +31,5 @@ export const mockRouter: NextRouter = {
   isReady: true,
   isPreview: false,
 };
+
+export const cleanEvents = () => emitter.removeAllListeners();

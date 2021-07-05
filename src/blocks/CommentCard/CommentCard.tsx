@@ -15,7 +15,7 @@ import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
 import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
-import RichTextEditor, { RTEValue } from '../RichTextEditor/RichTextEditor';
+import { RichTextEditor, RTEValue } from '../RichTextEditor';
 
 export type Author = {
   id: string;

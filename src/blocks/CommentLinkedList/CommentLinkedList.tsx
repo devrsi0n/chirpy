@@ -5,7 +5,7 @@ import { CommentDetailNode } from '$/types/widget';
 
 import { CommentBranch } from '../CommentBranch';
 import { CommentCard, CommentCardProps } from '../CommentCard';
-import { RTEValue } from '../RichTextEditor/RichTextEditor';
+import { RTEValue } from '../RichTextEditor';
 
 export type Comment = NonNullable<CommentDetailNode>;
 
@@ -21,7 +21,7 @@ export function CommentLinkedList({
   onSubmitReply,
   onClickLikeAction,
 }: CommentLinkedListProps): JSX.Element {
-  const [parentComments, setParentComments] = React.useState<Comment[]>([]);
+  const [ancestorComments, setAncestorComments] = React.useState<Comment[]>([]);
   React.useEffect(() => {
     let currComment: $TsAny = comment;
     const _parentComments = [comment];
@@ -29,13 +29,13 @@ export function CommentLinkedList({
       _parentComments.unshift(currComment.parent);
       currComment = currComment.parent;
     }
-    setParentComments(_parentComments);
+    setAncestorComments(_parentComments);
   }, [comment]);
 
   return (
     <div tw="space-y-2">
       <ul tw="space-y-8">
-        {parentComments.map((_comment) => (
+        {ancestorComments.map((_comment) => (
           <ParentBranch key={_comment.id}>
             <CommentCard
               preventDetailsPage={_comment.id === comment.id}

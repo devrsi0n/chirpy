@@ -11,6 +11,8 @@ module.exports = {
     'next',
     'next/core-web-vitals',
     'plugin:prettier/recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
   ],
   rules: {
     'prettier/prettier': 'warn',
@@ -24,11 +26,13 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
 
     'unicorn/filename-case': 'off',
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-null': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/prefer-node-protocol': 'off',
+    'unicorn/no-abusive-eslint-disable': 'off',
   },
 };
