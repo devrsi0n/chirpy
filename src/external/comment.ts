@@ -5,38 +5,34 @@ import type { Page } from '../graphql/generated/types';
  * it built by parcel.
  */
 
-const appNameLowerCase = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
+export const appName = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
+const scriptQuery = `[data-${appName}-pid]`;
+const targetQuery = `[data-${appName}-comment]`;
 
 // User init a page by import a script
 // <script defer src="/widget/comment.js" data-${NEXT_PUBLIC_APP_NAME}-pid="xxxx"><script>
 // Render target: <div data-${NEXT_PUBLIC_APP_NAME}-comment></div>
-export function comment(): void {
+export function comment(): Promise<void> {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
-  const script: HTMLScriptElement | null = window.document.querySelector(
-    `[data-${appNameLowerCase}-pid]`,
-  );
+  const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);
   if (!script) {
     console.error(`Can't find the comment script`);
-    return;
+    return Promise.reject();
   }
-  const pid = script.dataset[`${appNameLowerCase}Pid`];
+  const pid = script.dataset[`${appName}Pid`];
   if (!pid) {
     alert(`Please add the pid in your script`);
-    return;
+    return Promise.reject();
   }
-  const renderTarget: HTMLElement | null = window.document.querySelector(
-    `[data-${appNameLowerCase}-comment]`,
-  );
+  const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
     alert(`Can't find the render target`);
-    return;
+    return Promise.reject();
   }
   const { origin, pathname } = window.location;
-  fetch(
-    `${
-      process.env.NEXT_PUBLIC_APP_URL
-    }/api/get-page-by-project?projectId=${pid}&url=${encodeURIComponent(
+  return fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/page?projectId=${pid}&url=${encodeURIComponent(
       origin + pathname,
     )}&title=${encodeURIComponent(window.document.title)}`,
   )
@@ -78,11 +74,4 @@ export function comment(): void {
     });
 }
 
-const getIframeId = (id: string) => `${appNameLowerCase}-${id}`;
-
-if (typeof window !== 'undefined') {
-  comment();
-  (window as { [key: string]: $TsFixMe })[appNameLowerCase] = {
-    comment,
-  };
-}
+const getIframeId = (id: string) => `${appName}-${id}`;

@@ -20,7 +20,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const handleClickLogOut = useLogout();
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
-  const handleSignin = useSignIn();
+  const handleSignIn = useSignIn();
 
   return (
     <>
@@ -55,7 +55,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
             </DropDownMenu.Item>
           </>
         ) : (
-          <DropDownMenu.Item tw="justify-end space-x-2" onClick={handleSignin}>
+          <DropDownMenu.Item tw="justify-end space-x-2" onClick={handleSignIn}>
             <LogIn size={14} />
             <p tw="w-max">Sign in</p>
           </DropDownMenu.Item>

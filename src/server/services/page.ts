@@ -8,7 +8,7 @@ import {
   UpdatePagesDocument,
 } from '$/server/graphql/generated/page';
 
-export async function handleGetPageByProject(
+export async function handleGetPage(
   req: NextApiRequest,
   res: NextApiResponse<PageByUrlQuery['pages'][number] | { error: string } | null>,
 ): Promise<void> {

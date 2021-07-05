@@ -25,7 +25,6 @@ jest.mock('fs', () => ({
 describe('files', () => {
   it('should return correct directories', async () => {
     const directories = await getDirectories('docs', '/docs');
-    console.log(JSON.stringify(directories, null, 2));
     const root = process.cwd();
     expect(directories).toEqual([
       {

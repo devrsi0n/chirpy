@@ -29,6 +29,5 @@
     "visx"
   ],
   "tailwindcss.preferVariantWithParentheses": true,
-  "jestrunner.configPath": "jest.config.js",
-  "editor.formatOnSave": true
+  "jestrunner.configPath": "jest.config.js"
 }

@@ -3,6 +3,8 @@ import * as React from 'react';
 
 import { Text } from '../../components/Text';
 
+/* istanbul ignore file */
+
 // interface ITestCommentProps {}
 
 const pid = '46f49778-ed0f-4a5a-a244-80395eeb3a8d';

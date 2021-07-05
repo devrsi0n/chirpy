@@ -35,7 +35,7 @@ function createToken(payload, { maxAge }) {
     algorithm: 'HS256',
     expiresIn: maxAge,
   });
-  // console.log({ jwtClaims, key: process.env.HASH_KEY });
+  // console.log({ payload, key: process.env.HASH_KEY });
   return encodedToken;
 }
 

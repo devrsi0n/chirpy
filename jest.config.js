@@ -1,7 +1,6 @@
 module.exports = {
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/src/tests/jest.setup.ts'],
-  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/__tests__/jest.setup.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   testMatch: ['**/src/**/*.test.ts?(x)'],
   transform: {
@@ -10,11 +9,11 @@ module.exports = {
   },
   moduleNameMapper: {
     '^\\$/(.*)': '<rootDir>/src/$1',
-    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '\\.(css|less|sass|scss|svg)$': 'identity-obj-proxy',
   },
   coveragePathIgnorePatterns: [
     'node_modules',
-    '<rootDir>/src/tests/',
+    '<rootDir>/src/__tests__/',
     '<rootDir>/src/types/',
     '<rootDir>/src/server/types/',
     '<rootDir>/src/graphql/generated/',

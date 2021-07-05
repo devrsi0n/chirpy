@@ -29,7 +29,6 @@ function LogInSuccess(): JSX.Element {
       router.push('/');
     }, 6000);
   }, [router]);
-
   return (
     <Layout noContainer>
       <Head>

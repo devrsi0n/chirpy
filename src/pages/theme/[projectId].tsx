@@ -113,7 +113,6 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
         <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
         <CommentWidget
           comments={comments as $TsAny}
-          pageId={'12345'}
           onSubmitReply={() => Promise.resolve()}
           onClickLikeAction={() => Promise.resolve()}
         />

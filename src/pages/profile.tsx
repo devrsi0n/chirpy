@@ -29,7 +29,7 @@ type FormFields = {
   twitter: string;
 };
 
-function Profile(): JSX.Element {
+export default function Profile(): JSX.Element {
   const {
     isLogin,
     loading,
@@ -63,7 +63,6 @@ function Profile(): JSX.Element {
   const handleClickButton = async () => {
     if (isEditMode) {
       const f = await handleSubmit(async (fields) => {
-        console.log({ fields });
         try {
           await updateUserByPk({
             variables: {
@@ -122,7 +121,14 @@ function Profile(): JSX.Element {
       <Heading as="h2">Profile</Heading>
       <section tw="space-y-6">
         <div tw="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-primary-500 mt-1 w-full h-40 rounded-t flex justify-center items-end">
-          {avatar && <Avatar src={avatar} size="xl" tw="absolute transform translate-y-1/2" />}
+          {avatar && (
+            <Avatar
+              src={avatar}
+              size="xl"
+              tw="absolute transform translate-y-1/2"
+              alt={`Avatar of ${displayName}`}
+            />
+          )}
         </div>
         <div tw="pt-4 flex flex-row justify-between items-start">
           <div>
@@ -158,7 +164,11 @@ function Profile(): JSX.Element {
                 <span tw="ml-1">Discard</span>
               </Popover>
             )}
-            <Button tw="space-x-1" onClick={handleClickButton} aria-label="Edit profile infrmation">
+            <Button
+              tw="space-x-1"
+              onClick={handleClickButton}
+              aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
+            >
               {isEditMode ? <Save size={16} /> : <Edit2 size={16} />}
               <span>{isEditMode ? 'Save' : 'Edit'}</span>
             </Button>
@@ -193,8 +203,6 @@ function Profile(): JSX.Element {
     </ProfileContainer>
   );
 }
-
-export default Profile;
 
 function ProfileContainer({
   children,

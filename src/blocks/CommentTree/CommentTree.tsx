@@ -6,7 +6,7 @@ import { CommentLeafType } from '$/types/widget';
 
 import { CommentBranch } from '../CommentBranch';
 import { CommentCard, CommentCardProps } from '../CommentCard';
-import { RTEValue } from '../RichTextEditor/RichTextEditor';
+import { RTEValue } from '../RichTextEditor';
 
 export type CommentProps = {
   comment: CommentLeafType;
