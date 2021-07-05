@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connect from 'next-connect';
 
 import { handleInternalLoginFailure } from '$/server/services/common';
-import { handleGetPageByProject } from '$/server/services/page';
+import { handleGetPage } from '$/server/services/page';
 
 const cors = Cors({
   // Only allow requests with GET, POST and OPTIONS
@@ -16,6 +16,6 @@ const handler = connect<NextApiRequest, NextApiResponse>({
 
 handler.use(cors);
 
-handler.get(handleGetPageByProject);
+handler.get(handleGetPage);
 
 export default handler;

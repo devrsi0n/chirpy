@@ -1,7 +1,6 @@
 import { ClassNames } from '@emotion/react';
 import { Popover as HeadLessPopover, Transition } from '@headlessui/react';
 import * as React from 'react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { bluredBg } from '$/styles/common';

@@ -81,6 +81,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
           ]}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
+          aria-label="Expand children routes"
         >
           {listMarker}
           <span>{dir.title}</span>

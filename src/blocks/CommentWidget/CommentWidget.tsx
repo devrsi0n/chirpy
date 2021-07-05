@@ -14,7 +14,6 @@ import { UserDropDown } from '../UserDropDown';
 
 export type CommentWidgetProps = {
   comments: CommentLeafType[];
-  pageId: string;
   onSubmitReply: SubmitHandler;
   onClickLikeAction: ToggleLieAction;
 };

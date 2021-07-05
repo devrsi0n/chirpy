@@ -9,3 +9,5 @@ const DynamicRichTextEditor = dynamic(
 export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   return <DynamicRichTextEditor {...props} />;
 }
+
+export type { IRichTextEditorProps, RTEValue } from './RichTextEditor';

@@ -1,6 +1,6 @@
 import { JsonArray } from 'type-fest';
 
-import { RTEValue } from '$/blocks/RichTextEditor/RichTextEditor';
+import { RTEValue } from '$/blocks/RichTextEditor';
 import { useToast } from '$/components/Toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 

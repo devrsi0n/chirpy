@@ -20,7 +20,7 @@ const sizeStyles: Record<Size, TwStyle> = {
 export function Avatar({
   size = 'md',
   className = '',
-  alt = '',
+  alt = 'Avatar',
   children,
   src,
   ...imgProps

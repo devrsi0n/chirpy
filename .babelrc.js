@@ -11,4 +11,9 @@ module.exports = {
     ],
   ],
   plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
+  env: {
+    test: {
+      plugins: ['babel-plugin-dynamic-import-node'],
+    },
+  },
 };

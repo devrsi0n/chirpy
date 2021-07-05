@@ -1,5 +1,4 @@
 import * as React from 'react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { Button } from '$/components/Button';
@@ -18,7 +17,13 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
   const [showDialog, setShowDialog] = React.useState(false);
   return (
     <div>
-      <Button tw="" shadow={false} size="sm" onClick={() => setShowDialog(true)}>
+      <Button
+        tw=""
+        shadow={false}
+        size="sm"
+        onClick={() => setShowDialog(true)}
+        aria-label="Integrate guide"
+      >
         Integrate
       </Button>
       <Dialog

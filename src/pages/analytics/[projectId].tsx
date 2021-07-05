@@ -14,8 +14,7 @@ import {
   ProjectAnalyticsDocument,
   ProjectAnalyticsQuery,
 } from '$/server/graphql/generated/project';
-import { dayjs } from '$/utilities/date';
-import { getStartOfSubtractDate } from '$/utilities/date';
+import { dayjs, getStartOfSubtractDate } from '$/utilities/date';
 
 export type AnalyticsProps = {
   project: ProjectAnalyticsQuery['projectByPk'];

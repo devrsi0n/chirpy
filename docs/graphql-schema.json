@@ -275,7 +275,7 @@
           },
           {
             "name": "accounts_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -504,9 +504,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -553,100 +557,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "AccountProvider_aggregate_order_by",
-        "description": "order by aggregate values of table \"AccountProvider\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AccountProvider_max_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AccountProvider_min_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "AccountProvider_arr_rel_insert_input",
-        "description": "input type for inserting array relation for remote table \"AccountProvider\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "AccountProvider_insert_input",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AccountProvider_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "AccountProvider_bool_exp",
         "description": "Boolean expression to filter rows from the table \"AccountProvider\". All fields are combined with a logical 'AND'.",
         "fields": null,
@@ -658,9 +568,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "AccountProvider_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "AccountProvider_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -686,9 +600,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "AccountProvider_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "AccountProvider_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -803,7 +721,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "AccountProvider_enum_comparison_exp",
-        "description": "expression to compare columns of type AccountProvider_enum. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"AccountProvider_enum\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -970,41 +888,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "AccountProvider_max_order_by",
-        "description": "order by max() on columns of table \"AccountProvider\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "AccountProvider_min_fields",
         "description": "aggregate min on columns",
@@ -1040,48 +923,13 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "AccountProvider_min_order_by",
-        "description": "order by min() on columns of table \"AccountProvider\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "AccountProvider_mutation_response",
         "description": "response of any mutation on the table \"AccountProvider\"",
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1097,7 +945,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -1149,7 +997,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "AccountProvider_on_conflict",
@@ -1206,7 +1054,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -1230,7 +1078,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "AccountProvider_order_by",
-        "description": "ordering options when selecting data from \"AccountProvider\"",
+        "description": "Ordering options when selecting data from \"AccountProvider\".",
         "fields": null,
         "inputFields": [
           {
@@ -1277,7 +1125,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "AccountProvider_pk_columns_input",
-        "description": "primary key columns input for table: \"AccountProvider\"",
+        "description": "primary key columns input for table: AccountProvider",
         "fields": null,
         "inputFields": [
           {
@@ -1472,9 +1320,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1588,7 +1440,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Account_on_conflict",
@@ -1616,9 +1468,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Account_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Account_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -1644,9 +1500,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Account_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Account_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -1809,7 +1669,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -1915,7 +1775,7 @@
         "fields": [
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -1999,7 +1859,7 @@
         "inputFields": [
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -2081,7 +1941,7 @@
         "fields": [
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -2165,7 +2025,7 @@
         "inputFields": [
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -2247,7 +2107,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2263,7 +2123,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -2288,45 +2148,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Account_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"Account\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Account_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Account_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2372,7 +2193,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -2396,7 +2217,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Account_order_by",
-        "description": "ordering options when selecting data from \"Account\"",
+        "description": "Ordering options when selecting data from \"Account\".",
         "fields": null,
         "inputFields": [
           {
@@ -2515,7 +2336,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Account_pk_columns_input",
-        "description": "primary key columns input for table: \"Account\"",
+        "description": "primary key columns input for table: Account",
         "fields": null,
         "inputFields": [
           {
@@ -2600,7 +2421,7 @@
         "inputFields": [
           {
             "name": "compoundId",
-            "description": null,
+            "description": "providerName + providerAccountId = compoundId, to make sure the account unique.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -2925,7 +2746,7 @@
           },
           {
             "name": "likes_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -3175,7 +2996,7 @@
           },
           {
             "name": "replies_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -3422,9 +3243,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3741,7 +3566,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Comment_on_conflict",
@@ -3825,9 +3650,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Comment_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Comment_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -3853,9 +3682,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Comment_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Comment_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -4053,9 +3886,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -4116,7 +3953,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Comment_inc_input",
-        "description": "input type for incrementing integer column in table \"Comment\"",
+        "description": "input type for incrementing numeric columns in table \"Comment\"",
         "fields": null,
         "inputFields": [
           {
@@ -4690,7 +4527,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4706,7 +4543,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4758,7 +4595,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Comment_on_conflict",
@@ -4815,7 +4652,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -4839,7 +4676,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Comment_order_by",
-        "description": "ordering options when selecting data from \"Comment\"",
+        "description": "Ordering options when selecting data from \"Comment\".",
         "fields": null,
         "inputFields": [
           {
@@ -5006,7 +4843,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Comment_pk_columns_input",
-        "description": "primary key columns input for table: \"Comment\"",
+        "description": "primary key columns input for table: Comment",
         "fields": null,
         "inputFields": [
           {
@@ -5850,9 +5687,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -5989,7 +5830,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Event_on_conflict",
@@ -6017,9 +5858,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Event_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Event_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -6045,9 +5890,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Event_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Event_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -6197,9 +6046,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -6337,7 +6190,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -6431,7 +6284,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6527,7 +6380,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -6621,7 +6474,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -6717,7 +6570,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -6763,7 +6616,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6779,7 +6632,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -6804,45 +6657,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Event_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"Event\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Event_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Event_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -6888,7 +6702,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -6912,7 +6726,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Event_order_by",
-        "description": "ordering options when selecting data from \"Event\"",
+        "description": "Ordering options when selecting data from \"Event\".",
         "fields": null,
         "inputFields": [
           {
@@ -7031,7 +6845,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Event_pk_columns_input",
-        "description": "primary key columns input for table: \"Event\"",
+        "description": "primary key columns input for table: Event",
         "fields": null,
         "inputFields": [
           {
@@ -7205,7 +7019,7 @@
           },
           {
             "name": "type",
-            "description": null,
+            "description": "Event type, e.g. 'pageview', 'buttonClick'",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -7306,7 +7120,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Int_comparison_exp",
-        "description": "expression to compare columns of type Int. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"Int\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -7667,9 +7481,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7783,7 +7601,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Like_on_conflict",
@@ -7811,9 +7629,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Like_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Like_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -7839,9 +7661,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Like_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Like_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -8004,7 +7830,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -8098,7 +7924,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8182,7 +8008,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -8264,7 +8090,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8348,7 +8174,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -8418,7 +8244,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -8434,7 +8260,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -8459,45 +8285,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Like_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"Like\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Like_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Like_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -8543,7 +8330,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -8567,7 +8354,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Like_order_by",
-        "description": "ordering options when selecting data from \"Like\"",
+        "description": "Ordering options when selecting data from \"Like\".",
         "fields": null,
         "inputFields": [
           {
@@ -8674,7 +8461,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Like_pk_columns_input",
-        "description": "primary key columns input for table: \"Like\"",
+        "description": "primary key columns input for table: Like",
         "fields": null,
         "inputFields": [
           {
@@ -8765,7 +8552,7 @@
           },
           {
             "name": "compoundId",
-            "description": null,
+            "description": "Make sure a user like a comment no more than once",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -9104,9 +8891,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9220,7 +9011,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Member_on_conflict",
@@ -9248,9 +9039,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Member_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Member_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -9276,9 +9071,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Member_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Member_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -9801,7 +9600,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9817,7 +9616,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -9842,45 +9641,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Member_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"Member\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Member_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Member_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -9926,7 +9686,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -9950,7 +9710,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Member_order_by",
-        "description": "ordering options when selecting data from \"Member\"",
+        "description": "Ordering options when selecting data from \"Member\".",
         "fields": null,
         "inputFields": [
           {
@@ -10057,7 +9817,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Member_pk_columns_input",
-        "description": "primary key columns input for table: \"Member\"",
+        "description": "primary key columns input for table: Member",
         "fields": null,
         "inputFields": [
           {
@@ -10366,7 +10126,7 @@
           },
           {
             "name": "comments_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -10665,9 +10425,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -10781,7 +10545,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Page_on_conflict",
@@ -10809,9 +10573,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Page_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Page_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -10837,9 +10605,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Page_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Page_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -11416,7 +11188,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11432,7 +11204,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -11484,7 +11256,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Page_on_conflict",
@@ -11541,7 +11313,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -11565,7 +11337,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Page_order_by",
-        "description": "ordering options when selecting data from \"Page\"",
+        "description": "Ordering options when selecting data from \"Page\".",
         "fields": null,
         "inputFields": [
           {
@@ -11672,7 +11444,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Page_pk_columns_input",
-        "description": "primary key columns input for table: \"Page\"",
+        "description": "primary key columns input for table: Page",
         "fields": null,
         "inputFields": [
           {
@@ -12045,7 +11817,7 @@
           },
           {
             "name": "pages_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -12239,7 +12011,7 @@
           },
           {
             "name": "sessions_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -12515,9 +12287,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -12654,7 +12430,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Project_on_conflict",
@@ -12682,9 +12458,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Project_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Project_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -12710,9 +12490,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Project_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Project_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -12904,9 +12688,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -13506,7 +13294,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -13522,7 +13310,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -13574,7 +13362,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Project_on_conflict",
@@ -13631,7 +13419,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -13655,7 +13443,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Project_order_by",
-        "description": "ordering options when selecting data from \"Project\"",
+        "description": "Ordering options when selecting data from \"Project\".",
         "fields": null,
         "inputFields": [
           {
@@ -13810,7 +13598,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Project_pk_columns_input",
-        "description": "primary key columns input for table: \"Project\"",
+        "description": "primary key columns input for table: Project",
         "fields": null,
         "inputFields": [
           {
@@ -14202,7 +13990,7 @@
           },
           {
             "name": "members_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -14405,9 +14193,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -14444,100 +14236,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Role_aggregate_order_by",
-        "description": "order by aggregate values of table \"Role\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Role_max_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Role_min_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Role_arr_rel_insert_input",
-        "description": "input type for inserting array relation for remote table \"Role\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "Role_insert_input",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Role_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "Role_bool_exp",
         "description": "Boolean expression to filter rows from the table \"Role\". All fields are combined with a logical 'AND'.",
         "fields": null,
@@ -14549,9 +14247,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Role_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Role_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -14577,9 +14279,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Role_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Role_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -14670,7 +14376,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Role_enum_comparison_exp",
-        "description": "expression to compare columns of type Role_enum. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"Role_enum\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -14837,41 +14543,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "Role_max_order_by",
-        "description": "order by max() on columns of table \"Role\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Role_min_fields",
         "description": "aggregate min on columns",
@@ -14907,48 +14578,13 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "Role_min_order_by",
-        "description": "order by min() on columns of table \"Role\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Role_mutation_response",
         "description": "response of any mutation on the table \"Role\"",
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14964,7 +14600,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -14989,45 +14625,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Role_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"Role\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Role_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Role_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -15073,7 +14670,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -15097,7 +14694,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Role_order_by",
-        "description": "ordering options when selecting data from \"Role\"",
+        "description": "Ordering options when selecting data from \"Role\".",
         "fields": null,
         "inputFields": [
           {
@@ -15144,7 +14741,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Role_pk_columns_input",
-        "description": "primary key columns input for table: \"Role\"",
+        "description": "primary key columns input for table: Role",
         "fields": null,
         "inputFields": [
           {
@@ -15417,7 +15014,7 @@
           },
           {
             "name": "events_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -15728,9 +15325,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -15844,7 +15445,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Session_on_conflict",
@@ -15872,9 +15473,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Session_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Session_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -15900,9 +15505,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Session_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Session_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -16131,7 +15740,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -16227,7 +15836,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -16297,7 +15906,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16369,7 +15978,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16441,7 +16050,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -16513,7 +16122,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -16583,7 +16192,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16655,7 +16264,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -16727,7 +16336,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -16799,7 +16408,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -16833,7 +16442,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -16849,7 +16458,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -16901,7 +16510,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Session_on_conflict",
@@ -16958,7 +16567,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -16982,7 +16591,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Session_order_by",
-        "description": "ordering options when selecting data from \"Session\"",
+        "description": "Ordering options when selecting data from \"Session\".",
         "fields": null,
         "inputFields": [
           {
@@ -17149,7 +16758,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Session_pk_columns_input",
-        "description": "primary key columns input for table: \"Session\"",
+        "description": "primary key columns input for table: Session",
         "fields": null,
         "inputFields": [
           {
@@ -17294,7 +16903,7 @@
           },
           {
             "name": "device",
-            "description": null,
+            "description": "desktop, laptop or mobile",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17366,7 +16975,7 @@
           },
           {
             "name": "screen",
-            "description": null,
+            "description": "Screen dimensions, it should be {width} x {height}",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17473,7 +17082,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "String_comparison_exp",
-        "description": "expression to compare columns of type String. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"String\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -17514,7 +17123,7 @@
           },
           {
             "name": "_ilike",
-            "description": null,
+            "description": "does the column match the given case-insensitive pattern",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17545,6 +17154,18 @@
             "deprecationReason": null
           },
           {
+            "name": "_iregex",
+            "description": "does the column match the given POSIX regular expression, case insensitive",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "_is_null",
             "description": null,
             "type": {
@@ -17558,7 +17179,7 @@
           },
           {
             "name": "_like",
-            "description": null,
+            "description": "does the column match the given pattern",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17606,7 +17227,7 @@
           },
           {
             "name": "_nilike",
-            "description": null,
+            "description": "does the column NOT match the given case-insensitive pattern",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17637,8 +17258,32 @@
             "deprecationReason": null
           },
           {
+            "name": "_niregex",
+            "description": "does the column NOT match the given POSIX regular expression, case insensitive",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "_nlike",
-            "description": null,
+            "description": "does the column NOT match the given pattern",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_nregex",
+            "description": "does the column NOT match the given POSIX regular expression, case sensitive",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17650,7 +17295,19 @@
           },
           {
             "name": "_nsimilar",
-            "description": null,
+            "description": "does the column NOT match the given SQL regular expression",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "_regex",
+            "description": "does the column match the given POSIX regular expression, case sensitive",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17662,7 +17319,7 @@
           },
           {
             "name": "_similar",
-            "description": null,
+            "description": "does the column match the given SQL regular expression",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -17817,7 +17474,7 @@
           },
           {
             "name": "members_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -17926,7 +17583,7 @@
           },
           {
             "name": "projects",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"Project\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -18027,7 +17684,7 @@
           },
           {
             "name": "projects_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -18242,9 +17899,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -18281,100 +17942,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_aggregate_order_by",
-        "description": "order by aggregate values of table \"Team\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_max_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_min_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_arr_rel_insert_input",
-        "description": "input type for inserting array relation for remote table \"Team\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "Team_insert_input",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "Team_bool_exp",
         "description": "Boolean expression to filter rows from the table \"Team\". All fields are combined with a logical 'AND'.",
         "fields": null,
@@ -18386,9 +17953,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Team_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -18414,9 +17985,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "Team_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -18702,77 +18277,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_max_order_by",
-        "description": "order by max() on columns of table \"Team\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uid",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Team_min_fields",
         "description": "aggregate min on columns",
@@ -18844,84 +18348,13 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_min_order_by",
-        "description": "order by min() on columns of table \"Team\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "createdAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "uid",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "updatedAt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "Team_mutation_response",
         "description": "response of any mutation on the table \"Team\"",
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -18937,7 +18370,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -18989,7 +18422,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Team_on_conflict",
@@ -19046,7 +18479,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -19070,7 +18503,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Team_order_by",
-        "description": "ordering options when selecting data from \"Team\"",
+        "description": "Ordering options when selecting data from \"Team\".",
         "fields": null,
         "inputFields": [
           {
@@ -19165,7 +18598,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "Team_pk_columns_input",
-        "description": "primary key columns input for table: \"Team\"",
+        "description": "primary key columns input for table: Team",
         "fields": null,
         "inputFields": [
           {
@@ -19450,7 +18883,7 @@
           },
           {
             "name": "accounts_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -19672,7 +19105,7 @@
           },
           {
             "name": "comments_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -19954,7 +19387,7 @@
           },
           {
             "name": "likes_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -20148,7 +19581,7 @@
           },
           {
             "name": "members_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -20253,7 +19686,7 @@
           },
           {
             "name": "projects",
-            "description": "An array relationship",
+            "description": "fetch data from the table: \"Project\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -20354,7 +19787,7 @@
           },
           {
             "name": "projects_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -20639,7 +20072,7 @@
           },
           {
             "name": "users_aggregate",
-            "description": "An aggregated array relationship",
+            "description": "An aggregate relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -20842,9 +20275,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -20881,100 +20318,6 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "UserType_aggregate_order_by",
-        "description": "order by aggregate values of table \"UserType\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "count",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "max",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserType_max_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "min",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserType_min_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserType_arr_rel_insert_input",
-        "description": "input type for inserting array relation for remote table \"UserType\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "UserType_insert_input",
-                    "ofType": null
-                  }
-                }
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserType_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
         "name": "UserType_bool_exp",
         "description": "Boolean expression to filter rows from the table \"UserType\". All fields are combined with a logical 'AND'.",
         "fields": null,
@@ -20986,9 +20329,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserType_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserType_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -21014,9 +20361,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserType_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserType_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -21119,7 +20470,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserType_enum_comparison_exp",
-        "description": "expression to compare columns of type UserType_enum. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"UserType_enum\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -21286,41 +20637,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "UserType_max_order_by",
-        "description": "order by max() on columns of table \"UserType\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "UserType_min_fields",
         "description": "aggregate min on columns",
@@ -21356,48 +20672,13 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "UserType_min_order_by",
-        "description": "order by min() on columns of table \"UserType\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "comment",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "value",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "OBJECT",
         "name": "UserType_mutation_response",
         "description": "response of any mutation on the table \"UserType\"",
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -21413,7 +20694,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -21438,45 +20719,6 @@
         ],
         "inputFields": null,
         "interfaces": [],
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "UserType_obj_rel_insert_input",
-        "description": "input type for inserting object relation for remote table \"UserType\"",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "data",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "UserType_insert_input",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "on_conflict",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "UserType_on_conflict",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -21522,7 +20764,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -21546,7 +20788,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserType_order_by",
-        "description": "ordering options when selecting data from \"UserType\"",
+        "description": "Ordering options when selecting data from \"UserType\".",
         "fields": null,
         "inputFields": [
           {
@@ -21593,7 +20835,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "UserType_pk_columns_input",
-        "description": "primary key columns input for table: \"UserType\"",
+        "description": "primary key columns input for table: UserType",
         "fields": null,
         "inputFields": [
           {
@@ -21788,9 +21030,13 @@
               }
             ],
             "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21904,7 +21150,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "User_on_conflict",
@@ -21932,9 +21178,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "User_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "User_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -21960,9 +21210,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "User_bool_exp",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "User_bool_exp",
+                  "ofType": null
+                }
               }
             },
             "defaultValue": null,
@@ -22443,7 +21697,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -22609,7 +21863,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -22777,7 +22031,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -22943,7 +22197,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -23111,7 +22365,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -23145,7 +22399,7 @@
         "fields": [
           {
             "name": "affected_rows",
-            "description": "number of affected rows by the mutation",
+            "description": "number of rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -23161,7 +22415,7 @@
           },
           {
             "name": "returning",
-            "description": "data of the affected rows by the mutation",
+            "description": "data from the rows affected by the mutation",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -23213,7 +22467,7 @@
           },
           {
             "name": "on_conflict",
-            "description": null,
+            "description": "on conflict condition",
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "User_on_conflict",
@@ -23270,7 +22524,7 @@
                 }
               }
             },
-            "defaultValue": null,
+            "defaultValue": "[]",
             "isDeprecated": false,
             "deprecationReason": null
           },
@@ -23294,7 +22548,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "User_order_by",
-        "description": "ordering options when selecting data from \"User\"",
+        "description": "Ordering options when selecting data from \"User\".",
         "fields": null,
         "inputFields": [
           {
@@ -23533,7 +22787,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "User_pk_columns_input",
-        "description": "primary key columns input for table: \"User\"",
+        "description": "primary key columns input for table: User",
         "fields": null,
         "inputFields": [
           {
@@ -23804,7 +23058,7 @@
           },
           {
             "name": "username",
-            "description": null,
+            "description": "Unique name, used for search a person, e.g. at some one in a comment.",
             "type": {
               "kind": "SCALAR",
               "name": "String",
@@ -23939,7 +23193,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "jsonb_comparison_exp",
-        "description": "expression to compare columns of type jsonb. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"jsonb\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -26294,7 +25548,7 @@
               },
               {
                 "name": "_inc",
-                "description": "increments the integer columns with given value of the filtered values",
+                "description": "increments the numeric columns with given value of the filtered values",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "Comment_inc_input",
@@ -26407,7 +25661,7 @@
               },
               {
                 "name": "_inc",
-                "description": "increments the integer columns with given value of the filtered values",
+                "description": "increments the numeric columns with given value of the filtered values",
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "Comment_inc_input",
@@ -27542,37 +26796,37 @@
         "enumValues": [
           {
             "name": "asc",
-            "description": "in the ascending order, nulls last",
+            "description": "in ascending order, nulls last",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "asc_nulls_first",
-            "description": "in the ascending order, nulls first",
+            "description": "in ascending order, nulls first",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "asc_nulls_last",
-            "description": "in the ascending order, nulls last",
+            "description": "in ascending order, nulls last",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "desc",
-            "description": "in the descending order, nulls first",
+            "description": "in descending order, nulls first",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "desc_nulls_first",
-            "description": "in the descending order, nulls first",
+            "description": "in descending order, nulls first",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "desc_nulls_last",
-            "description": "in the descending order, nulls last",
+            "description": "in descending order, nulls last",
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -27582,7 +26836,7 @@
       {
         "kind": "OBJECT",
         "name": "query_root",
-        "description": "query root",
+        "description": null,
         "fields": [
           {
             "name": "accountAggregate",
@@ -27931,7 +27185,7 @@
           },
           {
             "name": "accounts",
-            "description": "fetch data from the table: \"Account\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -28154,7 +27408,7 @@
           },
           {
             "name": "comments",
-            "description": "fetch data from the table: \"Comment\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -28377,7 +27631,7 @@
           },
           {
             "name": "events",
-            "description": "fetch data from the table: \"Event\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -28600,7 +27854,7 @@
           },
           {
             "name": "likes",
-            "description": "fetch data from the table: \"Like\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -28823,7 +28077,7 @@
           },
           {
             "name": "members",
-            "description": "fetch data from the table: \"Member\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -29046,7 +28300,7 @@
           },
           {
             "name": "pages",
-            "description": "fetch data from the table: \"Page\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -29715,7 +28969,7 @@
           },
           {
             "name": "sessions",
-            "description": "fetch data from the table: \"Session\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -30384,7 +29638,7 @@
           },
           {
             "name": "users",
-            "description": "fetch data from the table: \"User\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -30492,7 +29746,7 @@
       {
         "kind": "OBJECT",
         "name": "subscription_root",
-        "description": "subscription root",
+        "description": null,
         "fields": [
           {
             "name": "accountAggregate",
@@ -30841,7 +30095,7 @@
           },
           {
             "name": "accounts",
-            "description": "fetch data from the table: \"Account\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -31064,7 +30318,7 @@
           },
           {
             "name": "comments",
-            "description": "fetch data from the table: \"Comment\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -31287,7 +30541,7 @@
           },
           {
             "name": "events",
-            "description": "fetch data from the table: \"Event\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -31510,7 +30764,7 @@
           },
           {
             "name": "likes",
-            "description": "fetch data from the table: \"Like\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -31733,7 +30987,7 @@
           },
           {
             "name": "members",
-            "description": "fetch data from the table: \"Member\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -31956,7 +31210,7 @@
           },
           {
             "name": "pages",
-            "description": "fetch data from the table: \"Page\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -32625,7 +31879,7 @@
           },
           {
             "name": "sessions",
-            "description": "fetch data from the table: \"Session\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -33294,7 +32548,7 @@
           },
           {
             "name": "users",
-            "description": "fetch data from the table: \"User\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -33412,7 +32666,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "timestamptz_comparison_exp",
-        "description": "expression to compare columns of type timestamptz. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"timestamptz\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -33557,7 +32811,7 @@
       {
         "kind": "INPUT_OBJECT",
         "name": "uuid_comparison_exp",
-        "description": "expression to compare columns of type uuid. All fields are combined with logical 'AND'.",
+        "description": "Boolean expression to compare columns of type \"uuid\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -34585,6 +33839,46 @@
       }
     ],
     "directives": [
+      {
+        "name": "cached",
+        "description": "whether this query should be cached (Hasura Cloud only)",
+        "isRepeatable": false,
+        "locations": ["QUERY"],
+        "args": [
+          {
+            "name": "ttl",
+            "description": "measured in seconds",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": "60",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "refresh",
+            "description": "refresh the cache entry",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": "false",
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ]
+      },
       {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
