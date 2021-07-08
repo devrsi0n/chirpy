@@ -1,8 +1,7 @@
-import path from 'path';
-
 import { getDirectories } from '../files';
 
 jest.mock('fs', () => ({
+  ...jest.requireActual('fs'),
   promises: {
     readFile: jest.fn().mockImplementation((filename: string) => {
       if (filename.endsWith('meta.json')) {

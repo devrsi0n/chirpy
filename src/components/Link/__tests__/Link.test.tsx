@@ -5,7 +5,7 @@ import { Link } from '../Link';
 
 describe('Link', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

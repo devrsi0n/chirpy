@@ -25,7 +25,7 @@ describe('CommentCard', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

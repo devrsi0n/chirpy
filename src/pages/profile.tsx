@@ -60,38 +60,35 @@ export default function Profile(): JSX.Element {
     },
   });
   const { showToast } = useToast();
-  const handleClickButton = async () => {
+  const handleClickButton = handleSubmit(async (fields) => {
     if (isEditMode) {
-      const f = await handleSubmit(async (fields) => {
-        try {
-          await updateUserByPk({
-            variables: {
-              id: id!,
-              displayName: fields.name,
-              bio: fields.bio,
-              website: fields.website,
-              twitterUserName: fields.twitter,
-            },
-          });
-          await refetchData?.();
-        } catch (error) {
-          console.error(error);
-          showToast({
-            type: 'error',
-            title: 'Sorry, something wrong happened in our side, please try again later.',
-          });
-        }
-      });
-      await f();
-      showToast({
-        type: 'success',
-        title: 'Content saved!',
-      });
-      setIsEditMode(false);
+      try {
+        await updateUserByPk({
+          variables: {
+            id: id!,
+            displayName: fields.name,
+            bio: fields.bio,
+            website: fields.website,
+            twitterUserName: fields.twitter,
+          },
+        });
+        await refetchData?.();
+        showToast({
+          type: 'success',
+          title: 'Profile saved!',
+        });
+        setIsEditMode(false);
+      } catch (error) {
+        console.error(error);
+        showToast({
+          type: 'error',
+          title: 'Sorry, something wrong happened in our side, please try again later.',
+        });
+      }
     } else {
       setIsEditMode(true);
     }
-  };
+  });
 
   const handleClickDiscard = () => {
     setIsEditMode(false);
@@ -135,7 +132,7 @@ export default function Profile(): JSX.Element {
             {isEditMode ? (
               <TextField
                 {...register('name', {
-                  required: { value: true, errorMessage: 'Name is required' },
+                  required: { value: true, message: 'Name is required' },
                 })}
                 label="Name"
                 errorMessage={errors.name}

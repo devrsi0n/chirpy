@@ -2,6 +2,7 @@ import { getFrontMatters } from '../front-matter';
 
 const title = 'Get started';
 jest.mock('fs', () => ({
+  ...jest.requireActual('fs'),
   promises: {
     readFile: jest
       .fn()

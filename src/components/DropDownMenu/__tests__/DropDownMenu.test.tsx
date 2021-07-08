@@ -6,7 +6,7 @@ import { DropDownMenu } from '../DropDownMenu';
 
 describe('DropDownMenu', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

@@ -33,6 +33,7 @@ export const mockUserData = {
 };
 
 jest.mock('../../graphql/generated/user', () => ({
+  ...jest.requireActual('../../graphql/generated/user'),
   useUserByPkQuery: () => ({
     data: {
       userByPk: mockUserData,

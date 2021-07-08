@@ -5,7 +5,7 @@ import { Text } from '../Text';
 
 describe('Text', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 
