@@ -6,6 +6,7 @@ import { Footer } from '../';
 const mockSetTheme = jest.fn();
 
 jest.mock('next-themes', () => ({
+  ...jest.requireActual('next-themes'),
   useTheme: () => ({
     theme: 'light',
     setTheme: mockSetTheme,
@@ -19,7 +20,7 @@ describe('Footer', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

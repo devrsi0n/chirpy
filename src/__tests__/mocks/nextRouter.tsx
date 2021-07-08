@@ -2,6 +2,7 @@ import EventEmitter from 'events';
 import { NextRouter } from 'next/router';
 
 jest.mock('next/router', () => ({
+  ...jest.requireActual('next/router'),
   useRouter() {
     return mockNextRouter;
   },

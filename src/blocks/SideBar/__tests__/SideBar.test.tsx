@@ -31,7 +31,7 @@ describe('SideBar', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

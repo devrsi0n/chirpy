@@ -6,7 +6,7 @@ import { mockNextRouter, cleanEvents } from '$/__tests__/mocks/nextRouter';
 import { TelemetryProvider } from '../TelemetryProvider';
 
 const STORAGE_KEY = 'session.cache';
-const SLEEP_TIME = 150;
+const SLEEP_TIME = 250;
 
 describe('TelemetryProvider', () => {
   beforeEach(() => {
@@ -26,7 +26,6 @@ describe('TelemetryProvider', () => {
   it('should set session when route is changed', async () => {
     await new Promise((resolve) => setTimeout(resolve, SLEEP_TIME));
     sessionStorage.clear();
-    // TODO: Use next-router-mock instead
     mockNextRouter.events.emit('routeChangeComplete');
     await new Promise((resolve) => setTimeout(resolve, SLEEP_TIME));
     expect(sessionStorage.getItem(STORAGE_KEY)).toBe(MOCK_CACHE);

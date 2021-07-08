@@ -10,7 +10,7 @@ describe('Code', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

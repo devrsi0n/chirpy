@@ -32,7 +32,7 @@ describe('CommentWidget', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

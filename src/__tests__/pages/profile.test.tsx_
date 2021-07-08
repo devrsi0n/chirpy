@@ -1,17 +1,15 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import * as graphQlUserModule from '$/graphql/generated/user';
-
 import Profile from '../../pages/profile';
 import { pageRender } from '../fixtures/render';
 import { mockUserData } from '../mocks/CurrentUserProvider';
 
 const mockUpdateUser = jest.fn();
 
-jest.spyOn(graphQlUserModule, 'useUpdateUserByPkMutation').mockImplementation(
-  // @ts-ignore
-  () => [
+jest.mock('../../graphql/generated/user', () => ({
+  ...jest.requireActual('../../graphql/generated/user'),
+  useUpdateUserByPkMutation: () => [
     mockUpdateUser,
     {
       data: {
@@ -20,7 +18,7 @@ jest.spyOn(graphQlUserModule, 'useUpdateUserByPkMutation').mockImplementation(
       loading: false,
     },
   ],
-);
+}));
 
 describe('Profile page', () => {
   beforeEach(() => {
@@ -28,7 +26,7 @@ describe('Profile page', () => {
   });
 
   afterAll(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

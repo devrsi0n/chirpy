@@ -11,7 +11,7 @@ const content = 'Content of dialog';
 
 describe('Dialog', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
-  label: string;
+  label: React.ReactNode;
   errorMessage?: string;
   styles?: {
     root?: TwStyle;
@@ -17,15 +17,16 @@ export const TextField = React.forwardRef(function TextfieldComponent(
     type = 'text',
     styles = {},
     className,
-    errorMessage,
+    errorMessage = ' ',
     prefixNode,
     ...inputProps
   }: TextfieldProps,
   ref: React.Ref<HTMLInputElement>,
 ): JSX.Element {
+  const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
   return (
     <label css={[tw`flex flex-col text-gray-600 mb-4`, styles?.root]}>
-      <p tw="mb-1 leading-6 text-lg">{label}</p>
+      <LabelWrapper tw="mb-1 leading-6 text-lg">{label}</LabelWrapper>
       <div css={[tw`mb-1`, prefixNode && tw`flex flex-row items-stretch`]}>
         {prefixNode && (
           <div tw="bg-gray-50 border-t border-b border-l px-3 rounded-l flex flex-row items-center">
@@ -34,7 +35,6 @@ export const TextField = React.forwardRef(function TextfieldComponent(
         )}
         <input
           {...inputProps}
-          name={label}
           ref={ref}
           type={type}
           className={className}
@@ -46,11 +46,9 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           ]}
         />
       </div>
-      {errorMessage && (
-        <p role="alert" tw="text-red-700 text-sm">
-          {errorMessage}
-        </p>
-      )}
+      <p role="alert" tw="text-red-700 text-sm h-5">
+        {errorMessage}
+      </p>
     </label>
   );
 });

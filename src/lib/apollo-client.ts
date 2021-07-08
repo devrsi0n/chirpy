@@ -51,7 +51,6 @@ function getHeaders() {
       Cookies.get(AUTH_COOKIE_NAME) ||
       preval`
       process.env.HASH_KEY = ${process.env.HASH_KEY};
-      console.log({ hashKey: process.env.HASH_KEY });
       module.exports = require("./anonymous-token.js");
     `
     }`,

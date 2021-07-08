@@ -5,7 +5,7 @@ import { Avatar } from '../Avatar';
 
 describe('Avatar', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

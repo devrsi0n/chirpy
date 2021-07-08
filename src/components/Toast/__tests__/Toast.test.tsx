@@ -13,7 +13,7 @@ describe('Toast', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 
