@@ -13,6 +13,7 @@ import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
+import { useForm } from '$/hooks/useForm';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   ProjectsOfDashboardDocument,
@@ -21,9 +22,14 @@ import {
 import { AllUsersDocument } from '$/server/graphql/generated/user';
 import { getStartOfSubtractDate, dayjs } from '$/utilities/date';
 
+type FormFields = {
+  name: string;
+  domain: string;
+};
+
 export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   const { id, isLogin, refetchData } = useCurrentUser();
-  const [insertProjectMutation] = useInsertOneProjectMutation();
+  const [insertProjectMutation, { loading }] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -32,33 +38,30 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   const handleCloseDialog = React.useCallback(() => {
     setShowDialog(false);
   }, []);
-  const [projectName, setProjectName] = React.useState('');
-  const [projectNameError, setProjectNameError] = React.useState('');
-  const handleChangeProjectName = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      if (value.length > 64) {
-        setProjectNameError('64 characters at most.');
-      } else {
-        setProjectNameError('');
-      }
-      setProjectName(value);
+  const { register, errors, handleSubmit } = useForm<FormFields>({
+    defaultValues: {
+      name: '',
+      domain: '',
     },
-    [],
-  );
-  const handleSubmit = React.useCallback(() => {
-    insertProjectMutation({
-      variables: {
-        // TODO: Team id?
-        name: projectName,
-        userId: id!,
+  });
+  const handleClickSubmit = handleSubmit(
+    React.useCallback(
+      (data): Promise<void> => {
+        return insertProjectMutation({
+          variables: {
+            // TODO: Team id?
+            name: data.name,
+            domain: data.domain,
+            userId: id!,
+          },
+        }).then(() => {
+          setShowDialog(false);
+          refetchData?.();
+        });
       },
-    }).then((data) => {
-      setShowDialog(false);
-      refetchData?.();
-      return data;
-    });
-  }, [projectName, insertProjectMutation, id, refetchData]);
+      [insertProjectMutation, id, refetchData],
+    ),
+  );
 
   const router = useRouter();
   const timeout = React.useRef<number>();
@@ -103,30 +106,61 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
           )}
         </section>
         <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-          <div tw="flex flex-col w-full">
+          <form tw="flex flex-col w-full" onSubmit={handleClickSubmit}>
             <TextField
-              aria-label="Name of project"
+              {...register('name', {
+                required: { value: true, message: 'Name is required' },
+                pattern: {
+                  value: /^\w+$/,
+                  message: `Only word characters are allowed`,
+                },
+                minLength: { value: 3, message: 'At least 3 characters' },
+                maxLength: { value: 16, message: 'At most 16 characters' },
+              })}
+              aria-label="Name of this project"
               label="Name"
-              value={projectName}
-              onChange={handleChangeProjectName}
-              errorMessage={projectNameError}
+              errorMessage={errors.name}
+              placeholder="hippo"
+              tw="w-full text-gray-600"
+            />
+            <TextField
+              {...register('domain', {
+                required: { value: true, message: 'Domain is required' },
+                pattern: {
+                  value:
+                    /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
+                  message: 'Invalid domain',
+                },
+              })}
+              aria-label="Associate a domain with this project"
+              label={
+                <>
+                  Domain
+                  <Text tw="text-gray-500" variant="sm">
+                    Associate a domain with this project
+                  </Text>
+                </>
+              }
+              errorMessage={errors.domain}
+              placeholder="example.com"
+              tw="w-full"
             />
 
-            <DialogFooter>
-              <Button variant="plain" onClick={handleCloseDialog} tw="w-full sm:w-auto">
+            <DialogFooter tw="space-x-3">
+              <Button variant="text" onClick={handleCloseDialog} tw="w-full sm:w-auto">
                 Cancel
               </Button>
               <Button
                 tw="w-full sm:w-auto"
-                disabled={projectNameError.length > 0}
-                onClick={handleSubmit}
-                variant="solid"
+                disabled={Object.values(errors).some((error) => error.length > 0) || loading}
+                variant="plain"
                 color="primary"
+                type="submit"
               >
                 Submit
               </Button>
             </DialogFooter>
-          </div>
+          </form>
         </Dialog>
       </div>
     </Layout>

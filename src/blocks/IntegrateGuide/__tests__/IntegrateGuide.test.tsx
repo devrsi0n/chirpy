@@ -11,7 +11,7 @@ describe('IntegrateGuide', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

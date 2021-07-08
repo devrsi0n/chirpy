@@ -10,7 +10,7 @@ describe('ClientOnly', () => {
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     cleanup();
   });
 

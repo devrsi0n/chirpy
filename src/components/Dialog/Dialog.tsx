@@ -58,7 +58,7 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
                   leaveTo={css(tw`opacity-0 scale-95`)}
                 >
                   <div
-                    tw="inline-block w-full max-w-md p-6 py-10 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg relative"
+                    tw="inline-block w-full max-w-md px-10 py-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl relative"
                     css={[styles.content]}
                   >
                     <IconButton
