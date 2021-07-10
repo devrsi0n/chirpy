@@ -1,7 +1,7 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import Head from 'next/head';
 import * as React from 'react';
-import { css } from 'twin.macro';
+import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Layout } from '$/components/Layout';
@@ -14,26 +14,18 @@ function Home(): JSX.Element {
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
       <main tw="py-12 space-y-8">
-        <h1
-          tw="font-black text-center text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-primary-500 mt-1"
-          css={css`
-            line-height: 1.09;
-            font-size: 3.25rem;
-            width: 100%;
-            @media (min-width: 320px) {
-              & {
-                line-height: 1.09;
-                font-size: 4rem;
+        <h1 tw="font-black text-center text-gray-800 mt-1 w-full max-w-2xl text-4xl leading-snug">
+          <span
+            tw="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary-500"
+            css={css`
+              ::selection {
+                ${tw`text-gray-800`}
               }
-            }
-            @media (min-width: 640px) {
-              & {
-                width: 40rem;
-              }
-            }
-          `}
-        >
-          {strings.heroTitle}
+            `}
+          >
+            {strings.heroTitlePoint}
+          </span>{' '}
+          <span>{strings.heroTitle}</span>
         </h1>
         <Text tw="text-gray-500 text-center dark:text-gray-400">{strings.heroDescription}</Text>
         <div tw="flex justify-center items-center space-x-6">
@@ -54,7 +46,8 @@ function Home(): JSX.Element {
 export default Home;
 
 export const strings = {
-  heroTitle: 'Open Source & Privacy Focused Disqus alternate',
+  heroTitlePoint: 'Open source & privacy friendly',
+  heroTitle: 'Disqus alternate',
   heroDescription: 'Access your audience quickly by integrating a modern comment system.',
   callToAction: {
     main: 'Try It Free',

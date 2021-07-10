@@ -43,8 +43,7 @@ const loadFeatures = () => import('../utilities/framer-motion-features').then((r
 
 const appGlobalStyles = css`
   ::selection {
-    color: #fff;
-    ${tw`bg-primary-400`}
+    ${tw`bg-primary-200`}
   }
 
   input:focus {

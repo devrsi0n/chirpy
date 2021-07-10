@@ -1,6 +1,8 @@
 import { ResponseError } from '$/server/types/error';
 import { GetPagByUrl } from '$/server/types/page';
 
+import { ERR_UNMATCHED_DOMAIN } from '../server/common/error-code';
+
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry,
  * it built by parcel.
@@ -39,7 +41,10 @@ export async function comment(): Promise<void> {
   );
   const page: GetPagByUrl = await res.json();
   if (isResponseError(page)) {
-    return alert(page.error);
+    if (page.code == ERR_UNMATCHED_DOMAIN) {
+      return alert(page.error);
+    }
+    throw new Error(page.error);
   }
   if (!page) {
     console.error('Unexpected null from response');

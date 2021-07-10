@@ -33,7 +33,7 @@ export function CommentWidget({
           <Heading as="h3" tw="text-2xl">
             {formatTitle(commentCount)}
           </Heading>
-          <UserDropDown />
+          <UserDropDown variant="Widget" />
         </div>
         <div css={tw`space-y-7`}>
           <div css={tw`space-y-2`}>
