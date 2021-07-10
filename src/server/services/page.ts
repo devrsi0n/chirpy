@@ -4,13 +4,15 @@ import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   InsertOnePageDocument,
   PageByUrlDocument,
-  PageByUrlQuery,
   UpdatePagesDocument,
 } from '$/server/graphql/generated/page';
 
+import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
+import { GetPagByUrl } from '../types/page';
+
 export async function handleGetPage(
   req: NextApiRequest,
-  res: NextApiResponse<PageByUrlQuery['pages'][number] | { error: string } | null>,
+  res: NextApiResponse<GetPagByUrl>,
 ): Promise<void> {
   const { url, projectId, title } = req.query;
   if (!url || !projectId) {
@@ -60,6 +62,13 @@ export async function handleGetPage(
         error: 'Update page error',
       });
     }
+  }
+  const domain = new URL(url as string).hostname;
+  if (domain !== page.project.domain) {
+    return res.status(500).json({
+      code: ERR_UNMATCHED_DOMAIN,
+      error: `Totalk: Wrong domain(${domain}), expected domain(${page.project.domain}), please contact your site administrator`,
+    });
   }
 
   res.json(page);
