@@ -46,18 +46,17 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   });
   const handleClickSubmit = handleSubmit(
     React.useCallback(
-      (data): Promise<void> => {
-        return insertProjectMutation({
+      async (data): Promise<void> => {
+        await insertProjectMutation({
           variables: {
             // TODO: Team id?
             name: data.name,
             domain: data.domain,
             userId: id!,
           },
-        }).then(() => {
-          setShowDialog(false);
-          refetchData?.();
         });
+        setShowDialog(false);
+        refetchData?.();
       },
       [insertProjectMutation, id, refetchData],
     ),
@@ -73,6 +72,7 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
     } else {
       timeout.current && clearTimeout(timeout.current);
     }
+    return () => clearTimeout(timeout.current);
   }, [router, isLogin]);
 
   return (

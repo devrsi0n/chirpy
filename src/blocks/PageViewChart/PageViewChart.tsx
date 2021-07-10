@@ -53,5 +53,8 @@ export function PageViewChart({ project }: PageViewChartProps): JSX.Element {
   );
 }
 
-const getDiffs = (prev: number, curr: number) =>
-  +(Math.round(((curr - prev) / prev) * 100) / 100).toFixed(2);
+const getDiffs = (prev: number, curr: number) => {
+  prev ||= 1;
+  curr ||= 1;
+  return +(Math.round(((curr - prev) / prev) * 100) / 100).toFixed(2);
+};
