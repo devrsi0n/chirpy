@@ -3,6 +3,9 @@ query pageByURL($url: String!, $projectId: uuid!) {
     id
     url
     title
+    project {
+      domain
+    }
   }
 }
 
@@ -11,11 +14,17 @@ mutation insertOnePage($projectId: uuid!, $title: String!, $url: String!) {
     id
     url
     title
+    project {
+      domain
+    }
   }
 }
 
 mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
-  updatePages(where: {url: {_eq: $url}, projectId: {_eq: $projectId}}, _set: {title: $title}) {
+  updatePages(
+    where: { url: { _eq: $url }, projectId: { _eq: $projectId } }
+    _set: { title: $title }
+  ) {
     returning {
       id
     }

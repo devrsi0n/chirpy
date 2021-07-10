@@ -1,6 +1,5 @@
 import ArrowUp from '@geist-ui/react-icons/arrowUp';
 import * as React from 'react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { Text } from '$/components/Text';
