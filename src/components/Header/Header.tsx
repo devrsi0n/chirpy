@@ -1,32 +1,24 @@
-import LogOut from '@geist-ui/react-icons/logOut';
 import Menu from '@geist-ui/react-icons/menu';
-import Monitor from '@geist-ui/react-icons/monitor';
-import User from '@geist-ui/react-icons/user';
 import Dismiss from '@geist-ui/react-icons/x';
 import * as React from 'react';
 import tw from 'twin.macro';
 
 import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { SignInButton } from '$/blocks/SignInButton';
-import { Avatar } from '$/components/Avatar';
+import { UserDropDown } from '$/blocks/UserDropDown';
 import { Link } from '$/components/Link';
-import { useLogout } from '$/hooks/useLogout';
 import { bluredBg } from '$/styles/common';
 
 import { IconButton } from '../Button';
-import { Divider } from '../Divider';
-import { DropDownMenu } from '../DropDownMenu';
 import { Logo } from '../Logo';
 
 export function Header(): JSX.Element {
-  const { username, displayName, avatar, error, isLogin } = useCurrentUser();
+  const { username, error, isLogin } = useCurrentUser();
 
   const [showMenu, setShowMenu] = React.useState(false);
   const handleClickMenu = React.useCallback(() => {
     setShowMenu((prev) => !prev);
   }, []);
-
-  const handleClickLogOut = useLogout();
 
   if (error) {
     console.error('Get current user error:', error);
@@ -69,42 +61,7 @@ export function Header(): JSX.Element {
               </Link>
             </nav>
           </div>
-          <div tw="flex">
-            {displayName ? (
-              <DropDownMenu content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}>
-                <DropDownMenu.Item tw="">
-                  <Link
-                    variant="plain"
-                    href={`/dashboard/${username}`}
-                    tw="flex flex-row items-center justify-end space-x-1"
-                  >
-                    <Monitor size={14} />
-                    <span>Dashboard</span>
-                  </Link>
-                </DropDownMenu.Item>
-                <DropDownMenu.Item tw="">
-                  <Link
-                    variant="plain"
-                    href="/profile"
-                    tw="flex flex-row items-center justify-end space-x-1"
-                  >
-                    <User size={14} />
-                    <span>Profile</span>
-                  </Link>
-                </DropDownMenu.Item>
-                <Divider />
-                <DropDownMenu.Item
-                  tw="flex flex-row justify-start items-center space-x-1"
-                  onClick={handleClickLogOut}
-                >
-                  <LogOut size={14} />
-                  <span>Logout</span>
-                </DropDownMenu.Item>
-              </DropDownMenu>
-            ) : (
-              <SignInButton />
-            )}
-          </div>
+          <div tw="flex">{isLogin ? <UserDropDown variant="Nav" /> : <SignInButton />}</div>
         </section>
       </div>
       <div tw="w-full">

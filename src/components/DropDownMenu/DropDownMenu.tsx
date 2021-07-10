@@ -12,7 +12,10 @@ export type Shape = 'circle' | 'square';
 
 export type DropDownMenuProps = React.PropsWithChildren<{
   content: React.ReactNode;
-  shape?: Shape;
+  buttonProps?: {
+    shape?: Shape;
+    ariaLabel?: string;
+  };
   classes?: {
     root?: TwStyle;
     button?: TwStyle;
@@ -22,17 +25,18 @@ export type DropDownMenuProps = React.PropsWithChildren<{
 
 export function DropDownMenu({
   content,
-  shape = 'circle',
+  buttonProps = { shape: 'circle', ariaLabel: 'Click to open dorp down' },
   classes,
   children,
 }: DropDownMenuProps): JSX.Element {
+  const { shape, ariaLabel } = buttonProps;
   return (
     <div css={[tw`relative inline-block text-left`, classes?.root]}>
       <Menu>
         {({ open }: { open: boolean }) => (
           <>
             <div css={classes?.button}>
-              <Menu.Button as={shape === 'circle' ? IconButton : Button}>
+              <Menu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
                 {content}
                 {shape === 'square' && (
                   <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />

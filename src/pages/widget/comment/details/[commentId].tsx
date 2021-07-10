@@ -61,7 +61,7 @@ export default function CommentDetailsWidget(
             <span tw="font-bold">{comment?.user.displayName}</span>
             <span>{`'s comment details`}</span>
           </Heading>
-          <UserDropDown />
+          <UserDropDown variant="Widget" />
         </div>
         {comment?.id && (
           <CommentLinkedList

@@ -1,5 +1,7 @@
+import { User } from '@geist-ui/react-icons';
 import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
+import Monitor from '@geist-ui/react-icons/monitor';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -7,16 +9,18 @@ import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Divider } from '$/components/Divider';
 import { DropDownMenu } from '$/components/DropDownMenu';
+import { Link } from '$/components/Link';
+import { Text } from '$/components/Text';
 import { Toggle } from '$/components/Toggle';
 import { useLogout } from '$/hooks/useLogout';
 import { useSignIn } from '$/hooks/useSignIn';
 
 export type UserDropDownProps = {
-  //
+  variant: 'Widget' | 'Nav';
 };
 
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
-  const { isLogin, avatar, displayName } = useCurrentUser();
+  const { isLogin, avatar, displayName, username } = useCurrentUser();
   const handleClickLogOut = useLogout();
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
@@ -30,37 +34,66 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         }}
         content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}
       >
-        {isLogin ? (
+        <div tw="px-6 py-2">
+          <Text tw="flex justify-start" bold>
+            {displayName}
+          </Text>
+        </div>
+        <Divider />
+        {props.variant === 'Widget' &&
+          (isLogin ? (
+            <>
+              <DropDownMenu.Item>
+                <Toggle
+                  label="Subscribe this comment"
+                  enabled={enableSubscribeComment}
+                  onChange={setEnableSubscribeComment}
+                  reverse
+                />
+              </DropDownMenu.Item>
+              <DropDownMenu.Item>
+                <Toggle
+                  label="Subscribe site comment"
+                  enabled={enableSubscribeSite}
+                  onChange={setEnableSubscribeSite}
+                  reverse
+                />
+              </DropDownMenu.Item>
+            </>
+          ) : (
+            <DropDownMenu.Item css={itemStyle} onClick={handleSignIn}>
+              <LogIn size={14} />
+              <p tw="w-max">Sign in</p>
+            </DropDownMenu.Item>
+          ))}
+        {props.variant === 'Nav' && (
           <>
             <DropDownMenu.Item>
-              <Toggle
-                label="Subscribe this comment"
-                enabled={enableSubscribeComment}
-                onChange={setEnableSubscribeComment}
-                reverse
-              />
+              <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>
+                <Monitor size={14} />
+                <span>Dashboard</span>
+              </Link>
             </DropDownMenu.Item>
             <DropDownMenu.Item>
-              <Toggle
-                label="Subscribe site comment"
-                enabled={enableSubscribeSite}
-                onChange={setEnableSubscribeSite}
-                reverse
-              />
-            </DropDownMenu.Item>
-            <Divider />
-            <DropDownMenu.Item tw="justify-end space-x-2" onClick={handleClickLogOut}>
-              <LogOut size={14} />
-              <p tw="w-max">Log out</p>
+              <Link variant="plain" href="/profile" css={itemStyle}>
+                <User size={14} />
+                <span>Profile</span>
+              </Link>
             </DropDownMenu.Item>
           </>
-        ) : (
-          <DropDownMenu.Item tw="justify-end space-x-2" onClick={handleSignIn}>
-            <LogIn size={14} />
-            <p tw="w-max">Sign in</p>
-          </DropDownMenu.Item>
+        )}
+        {isLogin && (
+          <>
+            <Divider />
+            <DropDownMenu.Item css={itemStyle} onClick={handleClickLogOut}>
+              <LogOut size={14} />
+              <span tw="w-max">Log out</span>
+            </DropDownMenu.Item>
+          </>
         )}
       </DropDownMenu>
     </>
   );
 }
+
+const itemStyle = tw`flex flex-row justify-start items-center space-x-1`;
