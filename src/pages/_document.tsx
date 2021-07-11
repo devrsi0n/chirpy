@@ -27,12 +27,7 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
           />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
-          <link
-            rel="preload"
-            href="/fonts/Inter/Inter-roman.var.woff2"
-            as="font"
-            crossOrigin="anonymous"
-          />
+          <link rel="preload" href="/fonts/Inter/Inter-roman.var.woff2" as="font" />
           <style
             data-emotion-css={this.props.ids.join(' ')}
             dangerouslySetInnerHTML={{ __html: this.props.css }}

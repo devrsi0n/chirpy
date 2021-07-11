@@ -31,7 +31,7 @@ const sizeStyles: Record<Size, TwStyle> = {
 const variantStyles: Record<Variant, TwStyle> = {
   nav: tw`text-gray-700 hover:text-black dark:text-gray-200 dark:hover:text-gray-100`,
   plain: tw``,
-  primary: tw`text-blue-600 hover:text-blue-900 dark:text-blue-200 dark:hover:text-blue-100`,
+  primary: tw`text-blue-600! hover:text-blue-900! dark:text-blue-200! dark:hover:text-blue-100!`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -72,7 +72,7 @@ export function Link(props: LinkProps): JSX.Element {
         <a
           {...restProps}
           css={[
-            tw`relative transition duration-150 ease-in-out`,
+            tw`relative transition duration-150 ease-in-out no-underline!`,
             size && sizeStyles[size],
             isCurrentURL && tw`font-bold`,
             variantStyles[variant],
