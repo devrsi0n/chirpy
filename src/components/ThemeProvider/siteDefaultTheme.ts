@@ -4,7 +4,7 @@ import { Theme } from '../../types/theme.type';
 
 export const siteDefaultTheme: Theme = {
   colors: {
-    primary: TailwindColors.fuchsia,
+    primary: TailwindColors.violet,
   },
 };
 
