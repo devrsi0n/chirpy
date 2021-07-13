@@ -10,7 +10,9 @@ export type ToggleLieAction = (
 ) => Promise<void>;
 
 export function useToggleALikeAction(): ToggleLieAction {
-  const { id: currentUserId } = useCurrentUser();
+  const {
+    data: { id: currentUserId },
+  } = useCurrentUser();
   const [insertOneLike] = useInsertOneLikeMutation();
   const [deleteLikeByPk] = useDeleteLikeByPkMutation();
 

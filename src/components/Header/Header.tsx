@@ -13,8 +13,8 @@ import { IconButton } from '../Button';
 import { Logo } from '../Logo';
 
 export function Header(): JSX.Element {
-  const { username, error, isLogin } = useCurrentUser();
-
+  const { data, error, isLogin } = useCurrentUser();
+  const { username } = data;
   const [showMenu, setShowMenu] = React.useState(false);
   const handleClickMenu = React.useCallback(() => {
     setShowMenu((prev) => !prev);
