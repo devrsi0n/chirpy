@@ -23,13 +23,15 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       <NextThemesProvider attribute="class" storageKey="TotalkTheme">
         <SiteThemeProvider>
           <LazyMotion features={loadFeatures} strict>
-            <ApolloProvider client={apollo}>
-              <CurrentUserProvider>
-                <ToastProvider>
-                  <Component {...pageProps} />
-                </ToastProvider>
-              </CurrentUserProvider>
-            </ApolloProvider>
+            {apollo && (
+              <ApolloProvider client={apollo}>
+                <CurrentUserProvider>
+                  <ToastProvider>
+                    <Component {...pageProps} />
+                  </ToastProvider>
+                </CurrentUserProvider>
+              </ApolloProvider>
+            )}
           </LazyMotion>
         </SiteThemeProvider>
       </NextThemesProvider>

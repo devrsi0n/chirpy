@@ -33,16 +33,18 @@ export default function Profile(): JSX.Element {
   const {
     isLogin,
     loading,
-    id,
-    avatar,
-    displayName,
-    givenName,
-    middleName,
-    familyName,
-    username,
-    bio,
-    website,
-    twitterUserName,
+    data: {
+      id,
+      avatar,
+      displayName,
+      givenName,
+      middleName,
+      familyName,
+      username,
+      bio,
+      website,
+      twitterUserName,
+    },
     refetchData,
   } = useCurrentUser();
 

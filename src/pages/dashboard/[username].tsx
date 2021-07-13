@@ -28,7 +28,8 @@ type FormFields = {
 };
 
 export default function Dashboard({ projects }: DashboardProps): JSX.Element {
-  const { id, isLogin, refetchData } = useCurrentUser();
+  const { data, isLogin, refetchData } = useCurrentUser();
+
   const [insertProjectMutation, { loading }] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
@@ -46,19 +47,19 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   });
   const handleClickSubmit = handleSubmit(
     React.useCallback(
-      async (data): Promise<void> => {
+      async (fields): Promise<void> => {
         await insertProjectMutation({
           variables: {
             // TODO: Team id?
-            name: data.name,
-            domain: data.domain,
-            userId: id!,
+            name: fields.name,
+            domain: fields.domain,
+            userId: data.id,
           },
         });
         setShowDialog(false);
         refetchData?.();
       },
-      [insertProjectMutation, id, refetchData],
+      [insertProjectMutation, data, refetchData],
     ),
   );
 

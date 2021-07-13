@@ -21,13 +21,13 @@ export function CurrentUserProvider({
     variables: {
       id: getUserId(),
     },
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-first',
     notifyOnNetworkStatusChange: true,
   });
   const value = React.useMemo<CurrentUserContextType>(
     () => ({
       ...restProps,
-      ...data?.userByPk,
+      data: data?.userByPk || {},
       refetchData: () =>
         refetch({
           id: getUserId(),
@@ -41,7 +41,6 @@ export function CurrentUserProvider({
 }
 
 function getUserId(): string {
-  // TODO: Fix reload page user un-authenticated.
   if (ssrMode) {
     return '';
   }
