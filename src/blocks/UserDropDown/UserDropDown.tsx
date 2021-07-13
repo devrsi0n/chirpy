@@ -20,7 +20,8 @@ export type UserDropDownProps = {
 };
 
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
-  const { isLogin, avatar, displayName, username } = useCurrentUser();
+  const { isLogin, data } = useCurrentUser();
+  const { avatar, displayName, username } = data;
   const handleClickLogOut = useLogout();
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);

@@ -2,22 +2,23 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
-  NormalizedCache,
   NormalizedCacheObject,
   split,
   ApolloLink,
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { persistCache, PersistentStorage, LocalForageWrapper } from 'apollo3-cache-persist';
+import { PersistedData } from 'apollo3-cache-persist/types';
 import Cookies from 'js-cookie';
+import * as localForage from 'localforage';
 import preval from 'preval.macro';
 import * as React from 'react';
+import { usePromise } from 'react-use';
 
 import { AUTH_COOKIE_NAME } from '$/server/common/constants';
+import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
-
-let cachedApolloClient: ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> | null =
-  null;
 
 // Used in server
 const getHttpLink = () => {
@@ -57,7 +58,7 @@ function getHeaders() {
   };
 }
 
-const createApolloClient = () => {
+const createApolloClient = async () => {
   let link: ApolloLink;
   const httpLink = getHttpLink();
   if (ssrMode) {
@@ -73,18 +74,28 @@ const createApolloClient = () => {
       httpLink,
     );
   }
+  const cache = new InMemoryCache();
+  await persistCache({
+    cache,
+    storage: new LocalForageWrapper(localForage) as PersistentStorage<
+      PersistedData<NormalizedCacheObject>
+    >,
+    debug: isENVDev,
+  });
 
   return new ApolloClient({
     link,
-    cache: new InMemoryCache(),
+    cache,
     ssrMode,
   });
 };
 
-export function getApolloClient(
+let cachedApolloClient: ApolloClient<NormalizedCacheObject> | null = null;
+
+export async function getApolloClient(
   initialState: $TsFixMe = null,
-): ApolloClient<NormalizedCache> | ApolloClient<NormalizedCacheObject> {
-  const _apolloClient = cachedApolloClient ?? createApolloClient();
+): Promise<ApolloClient<NormalizedCacheObject>> {
+  const _apolloClient = cachedApolloClient ?? (await createApolloClient());
   cachedApolloClient = _apolloClient;
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
@@ -100,7 +111,13 @@ export function getApolloClient(
   return _apolloClient;
 }
 
-export function useApollo(initialState?: $TsFixMe): ReturnType<typeof getApolloClient> {
-  const store = React.useMemo(() => getApolloClient(initialState), [initialState]);
-  return store;
+export function useApollo(initialState?: $TsFixMe): ApolloClient<NormalizedCacheObject> | null {
+  const [client, setClient] = React.useState<ApolloClient<NormalizedCacheObject> | null>(null);
+  const mounted = usePromise();
+  React.useEffect(() => {
+    mounted(getApolloClient(initialState)).then((client) => {
+      setClient(client);
+    });
+  });
+  return client;
 }

@@ -27,7 +27,8 @@ export function LikeAction({
   onClickLikeAction,
   ...restProps
 }: LikeActionProps): JSX.Element {
-  const { id: currentUserId } = useCurrentUser();
+  const { data } = useCurrentUser();
+  const currentUserId = data?.id;
   let likedId = '';
   const didLike =
     !!currentUserId &&
