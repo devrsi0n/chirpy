@@ -89,8 +89,8 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
         <Text tw="px-6">No page integrated</Text>
       )}
       <Divider />
-      <div tw="px-6 pb-2">
-        <Text tw="text-gray-400" variant="sm">
+      <div tw="px-6 pb-4">
+        <Text tw="text-gray-400 leading-none" variant="sm">
           Created {dayjs(project.createdAt).fromNow()}
         </Text>
       </div>

@@ -16,14 +16,14 @@ function LogInSuccess(): JSX.Element {
       window.postMessage(
         {
           key: LOG_IN_SUCCESS_KEY,
-          value: 'true',
+          value: location.pathname,
         },
         '*',
       );
-      if (window.localStorage.getItem(LOG_IN_SUCCESS_KEY) === 'true') {
+      if (window.localStorage.getItem(LOG_IN_SUCCESS_KEY)?.length) {
         window.localStorage.setItem(LOG_IN_SUCCESS_KEY, '');
       }
-      window.localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
+      window.localStorage.setItem(LOG_IN_SUCCESS_KEY, location.pathname);
     }, 3000);
     setTimeout(() => {
       router.push('/');

@@ -164,7 +164,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                     <Text>{postButtonLabel || 'Post'}</Text>
                   </Button>
                 ) : (
-                  <SignInButton variant="plain" />
+                  <SignInButton variant="plain" inPageNav={false} />
                 )}
               </div>
             )}
