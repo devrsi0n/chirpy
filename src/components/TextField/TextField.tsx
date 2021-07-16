@@ -17,7 +17,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
     type = 'text',
     styles = {},
     className,
-    errorMessage = ' ',
+    errorMessage,
     prefixNode,
     ...inputProps
   }: TextfieldProps,

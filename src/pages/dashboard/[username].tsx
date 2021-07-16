@@ -39,7 +39,7 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   const handleCloseDialog = React.useCallback(() => {
     setShowDialog(false);
   }, []);
-  const { register, errors, handleSubmit } = useForm<FormFields>({
+  const { register, errors, handleSubmit, hasError } = useForm<FormFields>({
     defaultValues: {
       name: '',
       domain: '',
@@ -153,7 +153,7 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
               </Button>
               <Button
                 tw="w-full sm:w-auto"
-                disabled={Object.values(errors).some((error) => error.length > 0) || loading}
+                disabled={hasError || loading}
                 variant="plain"
                 color="primary"
                 type="submit"

@@ -3,13 +3,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import passport, { Profile } from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as TwitterStrategy } from 'passport-twitter';
 import superjson from 'superjson';
 
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { AUTH_COOKIE_NAME } from '$/server/common/constants';
 import { AccountProvider_Enum, UserType_Enum } from '$/server/graphql/generated/types';
-import { UpsertUserDocument } from '$/server/graphql/generated/user';
-import { UserByPkDocument } from '$/server/graphql/generated/user';
+import { UpsertUserDocument, UserByPkDocument } from '$/server/graphql/generated/user';
 import { isENVDev } from '$/server/utilities/env';
 
 import { redirect } from '../response';
@@ -55,6 +55,24 @@ passport.use(
         done(null, user);
       } catch (error) {
         console.error(`Google auth verify failed: ${error}`);
+        done(error);
+      }
+    },
+  ),
+);
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: process.env.TWITTER_CONSUMER_KEY,
+      consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+      callbackURL: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/twitter/callback`,
+    },
+    async (token, tokenSecret, profile, done) => {
+      try {
+        const user = await getUserByProviderProfile(profile, AccountProvider_Enum.Twitter);
+        done(null, user);
+      } catch (error) {
+        console.error(`Twitter auth verify failed: ${error}`);
         done(error);
       }
     },
