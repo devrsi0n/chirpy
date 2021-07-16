@@ -61,7 +61,9 @@ export function Header(): JSX.Element {
               </Link>
             </nav>
           </div>
-          <div tw="flex">{isLogin ? <UserDropDown variant="Nav" /> : <SignInButton />}</div>
+          <div tw="flex">
+            {isLogin ? <UserDropDown variant="Nav" /> : <SignInButton inPageNav />}
+          </div>
         </section>
       </div>
       <div tw="w-full">

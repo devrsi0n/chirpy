@@ -35,12 +35,14 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         }}
         content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}
       >
-        <div tw="px-6 py-2">
-          <Text tw="flex justify-start" bold>
-            {displayName}
-          </Text>
-        </div>
-        <Divider />
+        {displayName && (
+          <div tw="px-6 py-2">
+            <Text tw="flex justify-start" bold>
+              {displayName}
+            </Text>
+          </div>
+        )}
+        {isLogin && <Divider />}
         {props.variant === 'Widget' &&
           (isLogin ? (
             <>
@@ -67,7 +69,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
               <p tw="w-max">Sign in</p>
             </DropDownMenu.Item>
           ))}
-        {props.variant === 'Nav' && (
+        {props.variant === 'Nav' && isLogin && (
           <>
             <DropDownMenu.Item>
               <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>

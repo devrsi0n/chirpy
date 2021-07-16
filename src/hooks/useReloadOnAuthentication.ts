@@ -9,11 +9,11 @@ import { useStorageListener } from './useStorageListener';
 export function useReloadOnAuthentication(): void {
   const handleAuthentication = React.useCallback(
     (key: string | null, newValue: string | null): void => {
-      if (newValue !== 'true') {
+      if (!newValue?.length) {
         return;
       }
 
-      if (LOG_IN_SUCCESS_KEY === key) {
+      if (LOG_IN_SUCCESS_KEY === key && newValue !== location.pathname) {
         window.localStorage.setItem(LOG_OUT_SUCCESS_KEY, '');
         window.location.reload();
       } else if (LOG_OUT_SUCCESS_KEY === key) {
