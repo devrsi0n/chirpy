@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { apiHandler } from '$/server/common/api-handler';
+import { authHandler } from '$/server/common/auth-handler';
 import { handleSuccessfulLogin, passport } from '$/server/services/passport';
 
 export default function handleAuthCallback(req: NextApiRequest, res: NextApiResponse) {
-  return apiHandler.use(
-    passport.initialize(),
+  console.log(`Auth callback`, req.query);
+  return authHandler.use(
     passport.authenticate(req.query.provider, { failureRedirect: '/sign-in' }),
     handleSuccessfulLogin,
   )(req, res);

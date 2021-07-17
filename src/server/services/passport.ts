@@ -1,4 +1,3 @@
-import { CookieSerializeOptions, serialize } from 'cookie';
 import { NextApiRequest, NextApiResponse } from 'next';
 import passport, { Profile } from 'passport';
 import { Strategy as GitHubStrategy } from 'passport-github2';
@@ -7,11 +6,11 @@ import { Strategy as TwitterStrategy } from 'passport-twitter';
 import superjson from 'superjson';
 
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { AUTH_COOKIE_NAME } from '$/server/common/constants';
 import { AccountProvider_Enum, UserType_Enum } from '$/server/graphql/generated/types';
 import { UpsertUserDocument, UserByPkDocument } from '$/server/graphql/generated/user';
 import { isENVDev } from '$/server/utilities/env';
 
+import { getAuthCookies } from '../common/cookie';
 import { redirect } from '../response';
 import { createAuthToken } from '../utilities/create-token';
 
@@ -136,13 +135,6 @@ async function getUserByProviderProfile(profile: Profile, provider: AccountProvi
 
 export { passport };
 
-const getCookieOptions = (maxAge: number, httpOnly = false): CookieSerializeOptions => ({
-  path: '/',
-  httpOnly,
-  sameSite: 'lax',
-  maxAge,
-});
-
 export async function handleSuccessfulLogin(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -158,15 +150,13 @@ export async function handleSuccessfulLogin(
     },
     { maxAge, allowedRoles: ['user'], defaultRole: 'user', role: 'user' },
   );
-  const cookieOptions = getCookieOptions(maxAge);
-  const authCookie = serialize(AUTH_COOKIE_NAME, authToken, cookieOptions);
+  const authCookie = getAuthCookies(authToken, maxAge);
   res.setHeader('Set-Cookie', [authCookie]);
   redirect(res, '/sign-in-success');
 }
 
 export async function handleLogout(req: NextApiRequest, res: NextApiResponse): Promise<void> {
-  const cookieOptions = getCookieOptions(-1);
-  const authCookie = serialize(AUTH_COOKIE_NAME, '', cookieOptions);
+  const authCookie = getAuthCookies('', -1);
 
   res.setHeader('Set-Cookie', [authCookie]);
   // const redirectURL = getFirstQueryParam(req.query, 'redirectURL');
