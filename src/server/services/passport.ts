@@ -91,7 +91,7 @@ passport.use(
     async (accessToken: string, refreshToken: string, profile: Profile, cb: $TsFixMe) => {
       try {
         const user = await getUserByProviderProfile(profile, AccountProvider_Enum.GitHub);
-        console.log({ user });
+        console.log('GitHub', { user });
         cb(null, user);
       } catch (error) {
         cb(error);
