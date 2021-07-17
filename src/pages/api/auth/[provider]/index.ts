@@ -1,15 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { apiHandler } from '$/server/common/api-handler';
+import { authHandler } from '$/server/common/auth-handler';
 import { passport } from '$/server/services/passport';
 
 export default function handleAuth(req: NextApiRequest, res: NextApiResponse) {
+  console.log(`Auth callback`, req.query);
   const provider = req.query.provider as string;
-  console.log('provider', provider);
-
   const scope = scopeMap[provider];
-  return apiHandler.use(
-    passport.initialize(),
+  return authHandler.use(
     passport.authenticate(provider, {
       ...(scope && { scope }),
     }),
