@@ -7,7 +7,7 @@ import {
   SessionByPkQuery,
 } from '$/server/graphql/generated/session';
 
-export async function createSession({
+export async function createTelemetrySession({
   id,
   projectId,
   hostname,
@@ -36,7 +36,9 @@ export async function createSession({
   return data?.insertOneSession;
 }
 
-export async function getSessionById(id: string): Promise<SessionByPkQuery['sessionByPk'] | null> {
+export async function getTelemetrySessionById(
+  id: string,
+): Promise<SessionByPkQuery['sessionByPk'] | null> {
   const adminApollo = getAdminApollo();
   try {
     const { data } = await adminApollo.query({
