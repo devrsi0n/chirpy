@@ -6,9 +6,9 @@ export const handleInternalLoginFailure: ErrorHandler<NextApiRequest, NextApiRes
   req,
   res,
 ) => {
-  console.error(err);
-  console.error(req.query);
-  console.error(req.env);
+  console.error('internal error', err);
+  console.error('query', req.query);
+  // console.error('request env', req.env);
 
   res.status(500).end(`${process.env.NEXT_PUBLIC_APP_NAME} error: ${err.toString()}`);
 };
