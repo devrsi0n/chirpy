@@ -5,10 +5,13 @@ import { passport } from '$/server/services/passport';
 
 export default function handleAuth(req: NextApiRequest, res: NextApiResponse) {
   const provider = req.query.provider as string;
+  console.log('provider', provider);
+
+  const scope = scopeMap[provider];
   return apiHandler.use(
     passport.initialize(),
     passport.authenticate(provider, {
-      scope: scopeMap[provider],
+      ...(scope && { scope }),
     }),
   )(req, res);
 }
