@@ -1,12 +1,15 @@
+import { signIn } from 'next-auth/client';
 import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
+import { Alert } from '$/components/Alert';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Logo } from '$/components/Logo';
 import { Text } from '$/components/Text';
+import { SIGN_IN_ERRORS } from '$/strings';
 
 import { authOptions } from './DataSource';
 
@@ -15,7 +18,17 @@ export type SignInProps = React.PropsWithChildren<{
   subtitle?: React.ReactNode;
 }>;
 
+type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
+
 export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
+  const [errorType, setErrorType] = React.useState<SignInErrorKeys | undefined>();
+  React.useEffect(() => {
+    const error = new URLSearchParams(location.search).get('error') as SignInErrorKeys | null;
+    if (error) {
+      setErrorType(error);
+    }
+  }, []);
+  const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
     <>
       <Head>
@@ -33,15 +46,23 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
               {subtitle}
             </div>
             <div tw="space-y-2 mt-8">
+              {error && <Alert type="warn">{error}</Alert>}
               {authOptions.map((option) => (
-                <Link key={option.name} href={option.href} variant="plain" tw="block">
-                  <Button tw="w-full" size="lg">
-                    <option.icon />
-                    <span tw="inline-block ml-2 text-left" style={{ width: '12rem' }}>
-                      Sign in with {option.name}
-                    </span>
-                  </Button>
-                </Link>
+                <Button
+                  key={option.name}
+                  onClick={() =>
+                    signIn(option.name.toLowerCase(), {
+                      callbackUrl: new URLSearchParams(location.search).get('callbackUrl') || '/',
+                    })
+                  }
+                  tw="w-full"
+                  size="lg"
+                >
+                  <option.icon />
+                  <span tw="inline-block ml-2 text-left" style={{ width: '12rem' }}>
+                    Sign in with {option.name}
+                  </span>
+                </Button>
               ))}
             </div>
             <Text tw="py-3 text-gray-400" variant="sm">

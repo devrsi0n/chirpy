@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import SignIn from '../../pages/sign-in';
-import { pageRender } from '../fixtures/render';
+import SignIn from '../../pages/auth/sign-in';
+import { pageRender } from '../fixtures/page-render';
 
 describe('Sign in page', () => {
   beforeEach(() => {

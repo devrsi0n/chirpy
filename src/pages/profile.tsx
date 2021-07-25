@@ -33,25 +33,12 @@ export default function Profile(): JSX.Element {
   const {
     isLogin,
     loading,
-    data: {
-      id,
-      avatar,
-      displayName,
-      givenName,
-      middleName,
-      familyName,
-      username,
-      bio,
-      website,
-      twitterUserName,
-    },
+    data: { id, avatar, name, username, bio, website, twitterUserName },
     refetchData,
   } = useCurrentUser();
 
   const [isEditMode, setIsEditMode] = React.useState(false);
   const [updateUserByPk] = useUpdateUserByPkMutation();
-  const name =
-    givenName && familyName ? [givenName, middleName, familyName].join(' ') : displayName;
 
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
@@ -68,13 +55,13 @@ export default function Profile(): JSX.Element {
         await updateUserByPk({
           variables: {
             id: id!,
-            displayName: fields.name,
+            name: fields.name,
             bio: fields.bio,
             website: fields.website,
             twitterUserName: fields.twitter,
           },
         });
-        await refetchData?.();
+        refetchData?.();
         showToast({
           type: 'success',
           title: 'Profile saved!',
@@ -125,7 +112,7 @@ export default function Profile(): JSX.Element {
               src={avatar}
               size="xl"
               tw="absolute transform translate-y-1/2"
-              alt={`Avatar of ${displayName}`}
+              alt={`Avatar of ${name}`}
             />
           )}
         </div>

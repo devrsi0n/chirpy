@@ -8,7 +8,7 @@ export type CommentContentFragment = (
   & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
   & { user: (
     { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'displayName' | 'avatar'>
+    & Pick<Types.User, 'id' | 'name' | 'avatar'>
   ), likes: Array<(
     { __typename?: 'Like' }
     & Pick<Types.Like, 'id' | 'userId'>
@@ -90,7 +90,7 @@ export const CommentContentFragmentDoc = gql`
   depth
   user {
     id
-    displayName
+    name
     avatar
   }
   likes {

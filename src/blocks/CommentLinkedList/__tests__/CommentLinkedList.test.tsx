@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 
 import { CommentLinkedList } from '../CommentLinkedList';
 import { generateComment, getTextsOfComment } from './mockData';
@@ -23,12 +23,12 @@ describe('CommentLinkedList', () => {
     return cleanup();
   });
 
-  it('should render the comments', () => {
+  it('should render the comments', async () => {
     const { parent, text, replies } = getTextsOfComment(mockComment);
-    expect(screen.queryByText(parent.text)).toBeInTheDocument();
-    expect(screen.queryByText(text)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(parent.text)).toBeInTheDocument());
+    expect(screen.getByText(text)).toBeInTheDocument();
     for (const reply of replies) {
-      expect(screen.queryByText(reply)).toBeInTheDocument();
+      expect(screen.getByText(reply)).toBeInTheDocument();
     }
   });
 });

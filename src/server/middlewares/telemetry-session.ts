@@ -3,18 +3,18 @@ import { NextApiResponse } from 'next';
 import { NextHandler } from 'next-connect';
 
 import { ApiError, HttpStatus } from '$/server/common/error';
-import { getProjectById } from '$/server/services/project';
 import {
-  createTelemetrySession,
-  getTelemetrySessionById,
-} from '$/server/services/telemetry-session';
-import { TelemetrySessionPayload, TelemetrySessionRequest } from '$/server/types/telemetry-session';
+  createAnonymousSession,
+  getAnonymousSessionById,
+} from '$/server/services/anonymous-session';
+import { getProjectById } from '$/server/services/project';
+import { AnonymousSessionPayload, AnonymousSessionRequest } from '$/server/types/anonymous-session';
 import { createUUID } from '$/server/utilities/crypto';
 import { getClientInfo } from '$/server/utilities/parse-request';
 import { parseToken } from '$/server/utilities/token';
 
 export async function telemetrySessionMiddleware(
-  req: TelemetrySessionRequest,
+  req: AnonymousSessionRequest,
   res: NextApiResponse,
   next: NextHandler,
 ): Promise<void> {
@@ -39,11 +39,11 @@ export async function telemetrySessionMiddleware(
   next();
 }
 
-async function getTelemetrySession(req: TelemetrySessionRequest): Promise<TelemetrySessionPayload> {
+async function getTelemetrySession(req: AnonymousSessionRequest): Promise<AnonymousSessionPayload> {
   const { projectId, hostname, screen, language, token } = req.body.session;
   if (token) {
     try {
-      const { sessionId, projectId } = parseToken(token) as TelemetrySessionPayload;
+      const { sessionId, projectId } = parseToken(token) as AnonymousSessionPayload;
       if (sessionId && projectId) {
         return { sessionId, projectId };
       }
@@ -57,9 +57,9 @@ async function getTelemetrySession(req: TelemetrySessionRequest): Promise<Teleme
   }
   const { userAgent, browser, os, ip, country, device } = await getClientInfo(req, { screen });
   const sessionId = createUUID(projectId, hostname, ip, userAgent, os);
-  let session = await getTelemetrySessionById(sessionId);
+  let session = await getAnonymousSessionById(sessionId);
   if (!session) {
-    session = await createTelemetrySession({
+    session = await createAnonymousSession({
       id: sessionId,
       projectId,
       hostname,

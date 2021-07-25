@@ -1,69 +1,25 @@
-mutation upsertUser(
-  $email: String!
-  $displayName: String!
-  $username: String
-  $familyName: String
-  $givenName: String
-  $middleName: String
-  $avatar: String
-  $userType: UserType_enum!
-  $compoundId: String!
-  $provider: AccountProvider_enum!
-  $providerAccountId: String!
+mutation updateUserByPk(
+  $id: Int!
+  $bio: String = ""
+  $website: String = ""
+  $twitterUserName: String = ""
 ) {
-  insertOneUser(
-    object: {
-      email: $email
-      username: $username
-      displayName: $displayName
-      familyName: $familyName
-      givenName: $givenName
-      middleName: $middleName
-      avatar: $avatar
-      type: $userType
-      accounts: {
-        data: {
-          compoundId: $compoundId
-          provider: $provider
-          providerAccountId: $providerAccountId
-        }
-        on_conflict: {
-          constraint: Account_compoundId_key
-          update_columns: [provider, providerAccountId]
-        }
-      }
-    }
-    on_conflict: {
-      constraint: User_email_key
-      # Not update type in case of overwrite the existing value, e.g. paid user
-      update_columns: [displayName, username, avatar]
-    }
+  updateUserByPk(
+    pk_columns: { id: $id }
+    _set: { bio: $bio, website: $website, twitterUserName: $twitterUserName }
   ) {
     id
-    email
-    username
-    displayName
-    avatar
-    type
-    updatedAt
-    accounts {
-      id
-      compoundId
-      provider
-      providerAccountId
-      updatedAt
-    }
   }
 }
 
-query userByPk($id: uuid!) {
+query userByPk($id: Int!) {
   userByPk(id: $id) {
     id
     email
     username
     type
     avatar
-    displayName
+    name
     updatedAt
     createdAt
   }

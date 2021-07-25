@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
 import PrivacyPolicy, { getStaticProps } from '../../pages/privacy-policy';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 
 describe('PrivacyPolicy page', () => {
   beforeEach(async () => {

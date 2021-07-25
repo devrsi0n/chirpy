@@ -3,7 +3,7 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 import SignInSuccess from '../../pages/sign-in-success';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 import { mockNextRouter } from '../mocks/nextRouter';
 
 const mockReload = jest.fn();

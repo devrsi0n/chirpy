@@ -55,7 +55,7 @@ export type ProjectsOfDashboardQuery = (
       { __typename?: 'Page' }
       & Pick<Types.Page, 'id' | 'title' | 'url'>
     )>, sessionsYesterday: Array<(
-      { __typename?: 'Session' }
+      { __typename?: 'AnonymousSession' }
       & { events_aggregate: (
         { __typename?: 'Event_aggregate' }
         & { aggregate?: Types.Maybe<(
@@ -67,7 +67,7 @@ export type ProjectsOfDashboardQuery = (
         )> }
       ) }
     )>, sessionsTwoDaysAgo: Array<(
-      { __typename?: 'Session' }
+      { __typename?: 'AnonymousSession' }
       & { events_aggregate: (
         { __typename?: 'Event_aggregate' }
         & { aggregate?: Types.Maybe<(
@@ -96,13 +96,13 @@ export type ProjectAnalyticsQuery = (
     { __typename?: 'Project' }
     & Pick<Types.Project, 'id' | 'name' | 'domain'>
     & { sessionsYesterday: Array<(
-      { __typename?: 'Session' }
+      { __typename?: 'AnonymousSession' }
       & { events: Array<(
         { __typename?: 'Event' }
         & Pick<Types.Event, 'created_at'>
       )> }
     )>, sessionsTwoDaysAgo: Array<(
-      { __typename?: 'Session' }
+      { __typename?: 'AnonymousSession' }
       & { events: Array<(
         { __typename?: 'Event' }
         & Pick<Types.Event, 'created_at'>
