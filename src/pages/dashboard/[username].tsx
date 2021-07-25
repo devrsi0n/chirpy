@@ -68,7 +68,7 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
   React.useEffect(() => {
     if (!isLogin) {
       timeout.current = window.setTimeout(() => {
-        router.push('/sign-in');
+        router.push('/auth/sign-in');
       }, 3000);
     } else {
       timeout.current && clearTimeout(timeout.current);
@@ -167,6 +167,8 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
     </Layout>
   );
 }
+
+Dashboard.auth = true;
 
 type PathParam = {
   username: string;

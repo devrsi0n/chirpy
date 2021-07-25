@@ -1,53 +1,47 @@
 import { QueryHookOptions } from '@apollo/client';
-import Cookies from 'js-cookie';
+import { useSession } from 'next-auth/client';
 import * as React from 'react';
 
-import { UserByPkQuery, UserByPkQueryVariables, useUserByPkQuery } from '$/graphql/generated/user';
-import { AUTH_COOKIE_NAME } from '$/server/common/constants';
-import { ssrMode } from '$/utilities/env';
+import {
+  CurrentUserQuery,
+  CurrentUserQueryVariables,
+  useCurrentUserLazyQuery,
+} from '$/graphql/generated/user';
 
 import { CurrentUserContext, CurrentUserContextType } from './CurrentUserContext';
 
 export type CurrentUserProviderProps = React.PropsWithChildren<{
-  apolloBaseOptions?: QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>;
+  apolloBaseOptions?: QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>;
 }>;
 
 export function CurrentUserProvider({
   apolloBaseOptions,
   children,
 }: CurrentUserProviderProps): JSX.Element {
-  const { data, refetch, ...restProps } = useUserByPkQuery({
+  const [session, sessionIsLoading] = useSession();
+  const [getUser, { data, ...restProps }] = useCurrentUserLazyQuery({
     ...apolloBaseOptions,
-    variables: {
-      id: getUserId(),
-    },
-    fetchPolicy: 'cache-first',
     notifyOnNetworkStatusChange: true,
   });
+
+  const handleFetchUser = React.useCallback(() => {
+    return getUser({ variables: { id: session?.user?.id || -1 } });
+  }, [getUser, session?.user?.id]);
+
+  React.useEffect(() => {
+    handleFetchUser();
+  }, [handleFetchUser]);
+
   const value = React.useMemo<CurrentUserContextType>(
     () => ({
       ...restProps,
+      loading: sessionIsLoading || restProps.loading,
       data: data?.userByPk || {},
-      refetchData: () =>
-        refetch({
-          id: getUserId(),
-        }),
+      refetchData: handleFetchUser,
       isLogin: !!data?.userByPk?.id,
     }),
-    [data, restProps, refetch],
+    [data, restProps, handleFetchUser, sessionIsLoading],
   );
 
   return <CurrentUserContext.Provider value={value}>{children}</CurrentUserContext.Provider>;
-}
-
-function getUserId(): string {
-  if (ssrMode) {
-    return '';
-  }
-  const [, encryptedPayload] = (Cookies.get(AUTH_COOKIE_NAME) || '').split('.');
-  if (!encryptedPayload) {
-    return '';
-  }
-  const payloadString = atob(encryptedPayload);
-  return JSON.parse(payloadString).sub;
 }

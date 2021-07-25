@@ -1,9 +1,9 @@
 import { JsonObject } from 'type-fest';
 
-import { TelemetrySessionRequest } from './telemetry-session';
+import { AnonymousSessionRequest } from './anonymous-session';
 
-export interface EventRequest extends TelemetrySessionRequest {
-  body: TelemetrySessionRequest['body'] & {
+export interface EventRequest extends AnonymousSessionRequest {
+  body: AnonymousSessionRequest['body'] & {
     event: EventRequestBody;
   };
 }

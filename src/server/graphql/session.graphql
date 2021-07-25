@@ -1,4 +1,4 @@
-mutation insertOneSession(
+mutation insertOneAnonymousSession(
   $id: uuid!
   $projectId: uuid!
   $hostname: String
@@ -9,7 +9,7 @@ mutation insertOneSession(
   $country: String
   $browser: String
 ) {
-  insertOneSession(
+  insertOneAnonymousSession(
     object: {
       id: $id
       projectId: $projectId
@@ -26,8 +26,8 @@ mutation insertOneSession(
   }
 }
 
-query sessionByPk($id: uuid!) {
-  sessionByPk(id: $id) {
+query anonymousSessionByPk($id: uuid!) {
+  anonymousSessionByPk(id: $id) {
     id
   }
 }

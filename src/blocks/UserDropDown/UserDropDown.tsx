@@ -2,6 +2,7 @@ import { User } from '@geist-ui/react-icons';
 import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
 import Monitor from '@geist-ui/react-icons/monitor';
+import { signOut } from 'next-auth/client';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -12,7 +13,6 @@ import { DropDownMenu } from '$/components/DropDownMenu';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { Toggle } from '$/components/Toggle';
-import { useLogout } from '$/hooks/useLogout';
 import { useSignIn } from '$/hooks/useSignIn';
 
 export type UserDropDownProps = {
@@ -21,8 +21,7 @@ export type UserDropDownProps = {
 
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const { isLogin, data } = useCurrentUser();
-  const { avatar, displayName, username } = data;
-  const handleClickLogOut = useLogout();
+  const { avatar, name, username } = data;
   const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   const handleSignIn = useSignIn();
@@ -33,12 +32,12 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         classes={{
           button: tw`transform translate-x-3`,
         }}
-        content={<Avatar src={avatar} alt={`The avatar of ${displayName}`} />}
+        content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}
       >
-        {displayName && (
+        {name && (
           <div tw="px-6 py-2">
             <Text tw="flex justify-start" bold>
-              {displayName}
+              {name}
             </Text>
           </div>
         )}
@@ -88,7 +87,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         {isLogin && (
           <>
             <Divider />
-            <DropDownMenu.Item css={itemStyle} onClick={handleClickLogOut}>
+            <DropDownMenu.Item css={itemStyle} onClick={() => signOut()}>
               <LogOut size={14} />
               <span tw="w-max">Log out</span>
             </DropDownMenu.Item>

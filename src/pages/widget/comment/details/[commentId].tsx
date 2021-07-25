@@ -58,7 +58,7 @@ export default function CommentDetailsWidget(
             </IconButton>
           </Link>
           <Heading as="h4" css={tw`text-gray-600`}>
-            <span tw="font-bold">{comment?.user.displayName}</span>
+            <span tw="font-bold">{comment?.user.name}</span>
             <span>{`'s comment details`}</span>
           </Heading>
           <UserDropDown variant="Widget" />

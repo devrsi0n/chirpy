@@ -7,7 +7,7 @@ fragment commentContent on Comment {
   depth
   user {
     id
-    displayName
+    name
     avatar
   }
   likes {

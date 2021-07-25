@@ -3,38 +3,23 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
-export type UserByPkQueryVariables = Types.Exact<{
-  id: Types.Scalars['uuid'];
+export type CurrentUserQueryVariables = Types.Exact<{
+  id: Types.Scalars['Int'];
 }>;
 
 
-export type UserByPkQuery = (
+export type CurrentUserQuery = (
   { __typename?: 'query_root' }
   & { userByPk?: Types.Maybe<(
     { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'email' | 'username' | 'displayName' | 'givenName' | 'middleName' | 'familyName' | 'avatar' | 'bio' | 'website' | 'twitterUserName'>
-    & { members: Array<(
-      { __typename?: 'Member' }
-      & Pick<Types.Member, 'id' | 'role' | 'teamId'>
-      & { team: (
-        { __typename?: 'Team' }
-        & Pick<Types.Team, 'id' | 'name' | 'uid'>
-      ) }
-    )>, projects: Array<(
-      { __typename?: 'Project' }
-      & Pick<Types.Project, 'id' | 'name' | 'createdAt'>
-      & { pages: Array<(
-        { __typename?: 'Page' }
-        & Pick<Types.Page, 'id' | 'title' | 'url'>
-      )> }
-    )> }
+    & Pick<Types.User, 'id' | 'email' | 'username' | 'name' | 'avatar' | 'bio' | 'website' | 'twitterUserName'>
   )> }
 );
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
-  id: Types.Scalars['uuid'];
+  id: Types.Scalars['Int'];
   bio?: Types.Maybe<Types.Scalars['String']>;
-  displayName: Types.Scalars['String'];
+  name: Types.Scalars['String'];
   twitterUserName?: Types.Maybe<Types.Scalars['String']>;
   website?: Types.Maybe<Types.Scalars['String']>;
 }>;
@@ -49,76 +34,53 @@ export type UpdateUserByPkMutation = (
 );
 
 
-export const UserByPkDocument = gql`
-    query userByPk($id: uuid!) {
+export const CurrentUserDocument = gql`
+    query currentUser($id: Int!) {
   userByPk(id: $id) {
     id
     email
     username
-    displayName
-    givenName
-    middleName
-    familyName
+    name
     avatar
     bio
     website
     twitterUserName
-    members {
-      id
-      role
-      teamId
-      team {
-        id
-        name
-        uid
-      }
-    }
-    projects {
-      id
-      name
-      pages {
-        id
-        title
-        url
-      }
-      createdAt
-    }
   }
 }
     `;
 
 /**
- * __useUserByPkQuery__
+ * __useCurrentUserQuery__
  *
- * To run a query within a React component, call `useUserByPkQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useUserByPkQuery({
+ * const { data, loading, error } = useCurrentUserQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useUserByPkQuery(baseOptions: Apollo.QueryHookOptions<UserByPkQuery, UserByPkQueryVariables>) {
+export function useCurrentUserQuery(baseOptions: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
+        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
       }
-export function useUserByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserByPkQuery, UserByPkQueryVariables>) {
+export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<UserByPkQuery, UserByPkQueryVariables>(UserByPkDocument, options);
+          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
         }
-export type UserByPkQueryHookResult = ReturnType<typeof useUserByPkQuery>;
-export type UserByPkLazyQueryHookResult = ReturnType<typeof useUserByPkLazyQuery>;
-export type UserByPkQueryResult = Apollo.QueryResult<UserByPkQuery, UserByPkQueryVariables>;
+export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
+export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
+export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const UpdateUserByPkDocument = gql`
-    mutation updateUserByPk($id: uuid!, $bio: String, $displayName: String!, $twitterUserName: String, $website: String) {
+    mutation updateUserByPk($id: Int!, $bio: String, $name: String!, $twitterUserName: String, $website: String) {
   updateUserByPk(
     pk_columns: {id: $id}
-    _set: {bio: $bio, displayName: $displayName, twitterUserName: $twitterUserName, website: $website}
+    _set: {bio: $bio, name: $name, twitterUserName: $twitterUserName, website: $website}
   ) {
     id
   }
@@ -141,7 +103,7 @@ export type UpdateUserByPkMutationFn = Apollo.MutationFunction<UpdateUserByPkMut
  *   variables: {
  *      id: // value for 'id'
  *      bio: // value for 'bio'
- *      displayName: // value for 'displayName'
+ *      name: // value for 'name'
  *      twitterUserName: // value for 'twitterUserName'
  *      website: // value for 'website'
  *   },
