@@ -1,9 +1,8 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pageRender } from '$/__tests__/fixtures/render';
+import { pageRender } from '$/__tests__/fixtures/page-render';
 import { mockUserData } from '$/__tests__/mocks/CurrentUserProvider';
-import { LOG_OUT_SUCCESS_KEY } from '$/lib/constants';
 
 import { UserDropDown, UserDropDownProps } from '../';
 
@@ -16,22 +15,14 @@ describe('UserDropDown', () => {
   describe('Variant Nav', () => {
     it('should render user display name after clicking the button with nav variant', async () => {
       renderDropMenu('Nav');
-      await waitFor(() => expect(screen.getByText(mockUserData.displayName)).toBeInTheDocument());
-    });
-    it('should receive log out message after clicking the log out button', async () => {
-      renderDropMenu('Nav');
-      const logoutButton = await screen.findByRole('menuitem', {
-        name: /log out/i,
-      });
-      userEvent.click(logoutButton);
-      await waitFor(() => expect(localStorage.getItem(LOG_OUT_SUCCESS_KEY)).toBe('true'));
+      await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
     });
   });
 
   describe('Variant Widget', () => {
     it('should render user display name after clicking the button', async () => {
       renderDropMenu('Widget');
-      await waitFor(() => expect(screen.getByText(mockUserData.displayName)).toBeInTheDocument());
+      await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
     });
   });
 });

@@ -48,6 +48,8 @@ export default function Theme(props: ThemeProps): JSX.Element {
   );
 }
 
+Theme.auth = true;
+
 function ThemeEditor(props: ThemeProps): JSX.Element {
   const { theme, mergeTheme } = useTheme();
   const [updateTheme] = useUpdateThemeMutation();
@@ -112,7 +114,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
         </div>
         <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
         <CommentWidget
-          comments={comments as $TsAny}
+          comments={comments as any}
           onSubmitReply={() => Promise.resolve()}
           onClickLikeAction={() => Promise.resolve()}
         />
@@ -196,7 +198,7 @@ const comments = [
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
-      displayName: 'devrsi0n',
+      name: 'devrsi0n',
       avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
     },
     likes: [],
@@ -221,7 +223,7 @@ const comments = [
         user: {
           __typename: 'User',
           id: '634da1be-cc04-4719-908e-c642de76e292',
-          displayName: 'devrsi0n',
+          name: 'devrsi0n',
           avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
         },
         likes: [],
@@ -249,7 +251,7 @@ const comments = [
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
-      displayName: 'devrsi0n',
+      name: 'devrsi0n',
       avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
     },
     likes: [],

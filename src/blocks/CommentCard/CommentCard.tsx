@@ -18,8 +18,8 @@ import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import { RichTextEditor, RTEValue } from '../RichTextEditor';
 
 export type Author = {
-  id: string;
-  displayName: string;
+  id: number;
+  name?: string | null;
   avatar?: string | null;
 };
 
@@ -48,7 +48,7 @@ export function CommentCard({
   onSubmitReply,
   onClickLikeAction,
 }: CommentCardProps): JSX.Element {
-  const { avatar, displayName } = author;
+  const { avatar, name } = author;
 
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
 
@@ -92,10 +92,10 @@ export function CommentCard({
       tw="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
       id={isENVDev ? commentId : undefined}
     >
-      <Avatar size="lg" src={avatar ?? ''} alt={`User ${displayName}'s avatar`} />
+      <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
       <div tw="flex-1">
         <div tw="flex flex-row items-baseline space-x-4 leading-none">
-          <Text bold>{displayName}</Text>
+          <Text bold>{name}</Text>
           <Text
             as="time"
             title={createdAt}

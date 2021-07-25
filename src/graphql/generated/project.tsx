@@ -5,7 +5,7 @@ import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
 export type InsertOneProjectMutationVariables = Types.Exact<{
   teamId?: Types.Maybe<Types.Scalars['uuid']>;
-  userId?: Types.Maybe<Types.Scalars['uuid']>;
+  userId?: Types.Maybe<Types.Scalars['Int']>;
   name: Types.Scalars['String'];
   domain: Types.Scalars['String'];
 }>;
@@ -35,7 +35,7 @@ export type UpdateThemeMutation = (
 
 
 export const InsertOneProjectDocument = gql`
-    mutation insertOneProject($teamId: uuid, $userId: uuid, $name: String!, $domain: String!) {
+    mutation insertOneProject($teamId: uuid, $userId: Int, $name: String!, $domain: String!) {
   insertOneProject(
     object: {teamId: $teamId, userId: $userId, name: $name, domain: $domain}
   ) {

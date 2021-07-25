@@ -9,7 +9,7 @@ DotEnv.config({
   path: '.env.test',
 });
 
-beforeAll(() => server.listen());
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => {
   cleanEvents();

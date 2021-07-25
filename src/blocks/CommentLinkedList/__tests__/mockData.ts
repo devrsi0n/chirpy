@@ -13,7 +13,7 @@ export function generateCommentFragment(fill: string, depth: number) {
     id: `comment-id-${fill}`,
     user: {
       id: `author-id-${fill}`,
-      displayName: `author-name-${fill}`,
+      name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
     content: [

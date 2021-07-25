@@ -1,7 +1,7 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { MockCurrentUserProvider } from '$/__tests__/mocks/CurrentUserProvider';
+import { pageRender } from '$/__tests__/fixtures/page-render';
 
 import { CommentCard } from '../';
 import { generateCommentCard } from './mockData';
@@ -9,18 +9,16 @@ import { generateCommentCard } from './mockData';
 const mockHandleSubmitReply = jest.fn().mockResolvedValue(null);
 const mockHandleClickLikeAction = jest.fn();
 
-const staticProps = generateCommentCard('1');
+const staticProps = generateCommentCard(1);
 
 describe('CommentCard', () => {
   beforeEach(() => {
-    render(
-      <MockCurrentUserProvider>
-        <CommentCard
-          {...staticProps}
-          onClickLikeAction={mockHandleClickLikeAction}
-          onSubmitReply={mockHandleSubmitReply}
-        ></CommentCard>
-      </MockCurrentUserProvider>,
+    pageRender(
+      <CommentCard
+        {...staticProps}
+        onClickLikeAction={mockHandleClickLikeAction}
+        onSubmitReply={mockHandleSubmitReply}
+      ></CommentCard>,
     );
   });
 
@@ -30,8 +28,8 @@ describe('CommentCard', () => {
   });
 
   it('should render the text', () => {
-    expect(screen.queryByText(staticProps.author.displayName)).toBeInTheDocument();
-    expect(screen.queryByText(staticProps.content[0].children[0].text)).toBeInTheDocument();
+    expect(screen.getByText(staticProps.author.name)).toBeInTheDocument();
+    expect(screen.getByText(staticProps.content[0].children[0].text)).toBeInTheDocument();
 
     expect((document.querySelector('time') as HTMLTimeElement).dateTime).toBe(
       staticProps.createdAt,
@@ -49,7 +47,7 @@ describe('CommentCard', () => {
       name: 'Reply',
     });
     userEvent.click(replyButton);
-    await waitFor(() => screen.queryByRole('textbox'));
+    await waitFor(() => screen.getByRole('textbox'));
     // const text = 'This is a testing comment';
     // const rte = screen.getByRole('textbox');
     // fireEvent.blur(rte, {

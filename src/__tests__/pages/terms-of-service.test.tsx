@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
 import TermsOfService, { getStaticProps } from '../../pages/terms-of-service';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 
 describe('TermsOfService page', () => {
   beforeEach(async () => {

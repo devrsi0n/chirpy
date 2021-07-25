@@ -1,9 +1,9 @@
-export function generateCommentCard(fill: string) {
+export function generateCommentCard(fill: number) {
   return {
     commentId: `comment-id-${fill}`,
     author: {
-      id: `author-id-${fill}`,
-      displayName: `author-name-${fill}`,
+      id: fill,
+      name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
     content: [
@@ -16,7 +16,7 @@ export function generateCommentCard(fill: string) {
     likes: [
       {
         id: `like-id-${fill}`,
-        userId: `like-user-id-${fill}`,
+        userId: fill,
       },
     ],
     depth: 1,

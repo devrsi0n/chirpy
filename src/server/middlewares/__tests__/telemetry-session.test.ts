@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 
+import * as sessionModule from '$/server/services/anonymous-session';
 import * as projectModule from '$/server/services/project';
-import * as sessionModule from '$/server/services/telemetry-session';
 import * as tokenModule from '$/server/utilities/token';
 
 import { telemetrySessionMiddleware } from '../telemetry-session';
@@ -40,7 +40,7 @@ describe('telemetry session middleware', () => {
     mockGetProjectById.mockResolvedValue({
       id: 'random project id',
     });
-    const mockGetSessionById = jest.spyOn(sessionModule, 'getTelemetrySessionById');
+    const mockGetSessionById = jest.spyOn(sessionModule, 'getAnonymousSessionById');
     mockGetSessionById.mockResolvedValue({
       id: 'random session id',
     });

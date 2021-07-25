@@ -9,7 +9,7 @@ export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentI
 
 export type Like = {
   id: string;
-  userId: string;
+  userId: number;
 };
 
 export type LikeActionProps = React.PropsWithChildren<

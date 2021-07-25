@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
 import Index, { strings } from '../../pages/index';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {
   beforeEach(() => {

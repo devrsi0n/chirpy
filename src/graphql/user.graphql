@@ -1,43 +1,20 @@
-query userByPk($id: uuid!) {
+query currentUser($id: Int!) {
   userByPk(id: $id) {
     id
     email
     username
-    displayName
-    givenName
-    middleName
-    familyName
+    name
     avatar
     bio
     website
     twitterUserName
-    members {
-      id
-      role
-      teamId
-      team {
-        id
-        name
-        uid
-      }
-    }
-    projects {
-      id
-      name
-      pages {
-        id
-        title
-        url
-      }
-      createdAt
-    }
   }
 }
 
 mutation updateUserByPk(
-  $id: uuid!
+  $id: Int!
   $bio: String
-  $displayName: String!
+  $name: String!
   $twitterUserName: String
   $website: String
 ) {
@@ -45,7 +22,7 @@ mutation updateUserByPk(
     pk_columns: { id: $id }
     _set: {
       bio: $bio
-      displayName: $displayName
+      name: $name
       twitterUserName: $twitterUserName
       website: $website
     }

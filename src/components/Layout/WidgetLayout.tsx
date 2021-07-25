@@ -2,8 +2,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useReloadOnAuthentication } from '$/hooks/useReloadOnAuthentication';
-
 import { TelemetryProvider, TelemetryProviderProps } from '../TelemetryProvider';
 
 export type WidgetLayoutProps = React.ComponentPropsWithoutRef<'div'> &
@@ -21,8 +19,6 @@ export function WidgetLayout({
   footer,
   ...divProps
 }: WidgetLayoutProps): JSX.Element {
-  useReloadOnAuthentication();
-
   return (
     <TelemetryProvider projectId={projectId}>
       <div

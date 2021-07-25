@@ -1,8 +1,6 @@
 import * as React from 'react';
 import 'twin.macro';
 
-import { useReloadOnAuthentication } from '$/hooks/useReloadOnAuthentication';
-
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { WidgetLayout, WidgetLayoutProps } from './WidgetLayout';
@@ -13,8 +11,6 @@ export type ILayoutProps = Omit<WidgetLayoutProps, 'projectId'> & {
 };
 
 export function Layout({ noHeader, noFooter, children, ...restProps }: ILayoutProps): JSX.Element {
-  useReloadOnAuthentication();
-
   return (
     <WidgetLayout
       {...restProps}

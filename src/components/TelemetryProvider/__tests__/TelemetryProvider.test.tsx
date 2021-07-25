@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 
-import { MOCK_CACHE } from '$/__tests__/fixtures/server/handlers';
+import { MOCK_CACHE } from '$/__tests__/fixtures/server/rest-handlers';
 import { mockNextRouter, cleanEvents } from '$/__tests__/mocks/nextRouter';
 
 import { TelemetryProvider } from '../TelemetryProvider';

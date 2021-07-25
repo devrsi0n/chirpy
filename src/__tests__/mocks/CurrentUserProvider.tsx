@@ -10,7 +10,7 @@ export const mockUserData = {
   id: 'user-id-1',
   username: 'username-1',
   email: 'user@example.com',
-  displayName: 'user display name',
+  name: 'user display name',
   avatar: 'https://avatars.com/1.jpg',
   bio: 'this is a testing bio',
   website: 'https://www.example.com',

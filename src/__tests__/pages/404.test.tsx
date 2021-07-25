@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
 import Page404 from '../../pages/404';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {
   beforeEach(() => {

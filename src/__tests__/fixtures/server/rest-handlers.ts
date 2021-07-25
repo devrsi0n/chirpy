@@ -9,8 +9,8 @@ afterEach(() => {
   mockLogout.mockReset();
 });
 
-export const handlers = [
-  rest.post('/api/event', (req, res, ctx) => {
+export const restHandlers = [
+  rest.post('*/api/event', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -18,7 +18,7 @@ export const handlers = [
       }),
     );
   }),
-  rest.get('/api/page', (req, res, ctx) => {
+  rest.get('*/api/page', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -26,7 +26,7 @@ export const handlers = [
       }),
     );
   }),
-  rest.get('/api/auth/logout', (req, res, ctx) => {
+  rest.get('*/api/auth/logout', (req, res, ctx) => {
     const result = mockLogout();
     if (result) {
       return res(ctx.status(200), ctx.json(result));
@@ -35,6 +35,20 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         id: MOCK_PAGE_ID,
+      }),
+    );
+  }),
+  rest.get('*/api/auth/session', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        hasuraToken: 'radom-token-skjadfhnkj',
+        user: {
+          id: 'user-id',
+          name: 'session user name',
+          email: 'test@session.com',
+          image: 'https://image.test',
+        },
       }),
     );
   }),

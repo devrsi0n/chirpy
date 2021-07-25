@@ -31,7 +31,7 @@ describe('Profile page', () => {
   });
 
   it('should render the text, links and avatar', () => {
-    expect(screen.getByText(mockUserData.displayName)).toBeInTheDocument();
+    expect(screen.getByText(mockUserData.name)).toBeInTheDocument();
     expect(screen.getByText(new RegExp(mockUserData.username))).toBeInTheDocument();
     expect(screen.getByText(mockUserData.bio)).toBeInTheDocument();
     expect(
@@ -85,7 +85,7 @@ describe('Profile page', () => {
       expect(mockUpdateUser).toHaveBeenCalledWith({
         variables: {
           id: mockUserData.id,
-          displayName: newName,
+          name: newName,
           bio: newBio,
           website: newWebsite,
           twitterUserName: newTwitter,

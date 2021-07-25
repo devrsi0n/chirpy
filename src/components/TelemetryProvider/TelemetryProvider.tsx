@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { AnonymousSessionRequestBody } from '$/server/types/anonymous-session';
 import { EventRequestBody, EventResponseBody } from '$/server/types/event';
-import { TelemetrySessionRequestBody } from '$/server/types/telemetry-session';
 
 import { TelemetryContext, TelemetryContextType } from './TelemetryContext';
 
@@ -84,7 +84,7 @@ async function logEvent({ type, params, url, projectId }: Event) {
     url,
     referrer: document.referrer,
   };
-  const session: TelemetrySessionRequestBody = {
+  const session: AnonymousSessionRequestBody = {
     projectId,
     token: sessionStorage.getItem(SESSION_KEY) || '',
     hostname: new URL(url).hostname,
