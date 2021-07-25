@@ -1,9 +1,9 @@
 import NextAuth from 'next-auth';
 import { JWT } from 'next-auth/jwt';
-import Providers from 'next-auth/providers';
 import pg from 'pg';
 
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
+import { authProviders } from '$/server/services/auth';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { isENVDev } from '$/server/utilities/env';
@@ -13,21 +13,7 @@ pg.defaults.ssl = {
 };
 
 export default NextAuth({
-  providers: [
-    Providers.GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      scope: 'user:email',
-    }),
-    Providers.Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    Providers.Twitter({
-      clientId: process.env.TWITTER_CONSUMER_KEY,
-      clientSecret: process.env.TWITTER_CONSUMER_SECRET,
-    }),
-  ],
+  providers: authProviders,
   session: {
     jwt: true,
     maxAge: SESSION_MAX_AGE,
