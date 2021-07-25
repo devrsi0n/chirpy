@@ -15,5 +15,7 @@ declare namespace NodeJS {
     GITHUB_CLIENT_SECRET: string;
     TWITTER_CONSUMER_KEY: string;
     TWITTER_CONSUMER_SECRET: string;
+    FACEBOOK_APP_ID: string;
+    FACEBOOK_APP_SECRET: string;
   }
 }
