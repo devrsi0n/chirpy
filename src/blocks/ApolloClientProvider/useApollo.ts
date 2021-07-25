@@ -26,20 +26,19 @@ export function useApollo(initialState?: any): ApolloClient<NormalizedCacheObjec
   );
   const mounted = usePromise();
   React.useEffect(() => {
-    if (!session?.hasuraToken) return;
-    setClient(getApolloClient(session?.hasuraToken, initialState));
+    if (!session?.hasuraToken) {
+      return;
+    }
+    setClient(getApolloClient(session.hasuraToken, initialState));
   }, [session?.hasuraToken, initialState, mounted]);
   return client;
 }
-
-let cachedApolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
 function getApolloClient(
   hasuraToken = '',
   initialState: any = null,
 ): ApolloClient<NormalizedCacheObject> {
-  const _apolloClient = cachedApolloClient ?? createApolloClient(hasuraToken);
-  cachedApolloClient = _apolloClient;
+  const _apolloClient = createApolloClient(hasuraToken);
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
