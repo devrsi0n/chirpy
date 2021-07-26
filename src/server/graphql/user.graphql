@@ -30,3 +30,9 @@ query allUsers {
     username
   }
 }
+
+mutation deleteFacebookUser($id: Int!) {
+  deleteUserByPk(id: $id) {
+    id
+  }
+}

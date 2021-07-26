@@ -1,10 +1,11 @@
+import * as useCurrentUserModule from '../../blocks/CurrentUserProvider/useCurrentUser';
 import { mockUserData } from './CurrentUserProvider';
 
-jest.mock('../../blocks/CurrentUserProvider/useCurrentUser', () => ({
-  ...jest.requireActual('../../blocks/CurrentUserProvider/useCurrentUser'),
-  useCurrentUser: () => ({
-    data: mockUserData,
-    isLogin: true,
-    refetch: jest.fn(),
-  }),
-}));
+jest.spyOn(useCurrentUserModule, 'useCurrentUser').mockImplementation(
+  () =>
+    ({
+      data: mockUserData,
+      isLogin: true,
+      refetch: jest.fn(),
+    } as any),
+);

@@ -30,6 +30,7 @@ export function Alert(props: AlertProps): JSX.Element {
             size="sm"
             tw="invisible group-hover:(visible)"
             onClick={() => setHidden(true)}
+            aria-label="Dismiss"
           >
             <X size={18} />
           </IconButton>
