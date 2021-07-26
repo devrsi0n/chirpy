@@ -25,17 +25,8 @@ export async function telemetrySessionMiddleware(
   if (isbot(userAgent)) {
     return res.status(200).send({ isbot: true });
   }
-  try {
-    const session = await getTelemetrySession(req);
-
-    req.session = session;
-  } catch (error) {
-    if (error instanceof ApiError) {
-      return res.status(error.httpStatus).send(error.message);
-    }
-    return res.status(500).send(error.message);
-  }
-
+  const session = await getTelemetrySession(req);
+  req.session = session;
   next();
 }
 

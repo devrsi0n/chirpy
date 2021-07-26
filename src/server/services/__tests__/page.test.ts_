@@ -1,0 +1,9 @@
+import { mockReq, mockRes } from '$/__tests__/mocks/mockApi';
+
+import { handleGetPage } from '../page';
+
+describe('Service: Page', () => {
+  it('should return', async () => {
+    await handleGetPage(mockReq, mockRes);
+  });
+});

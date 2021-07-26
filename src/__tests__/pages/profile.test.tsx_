@@ -2,7 +2,7 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Profile from '../../pages/profile';
-import { pageRender } from '../fixtures/render';
+import { pageRender } from '../fixtures/page-render';
 import { mockUserData } from '../mocks/CurrentUserProvider';
 
 const mockUpdateUser = jest.fn();

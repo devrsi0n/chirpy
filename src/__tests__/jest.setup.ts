@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import DotEnv from 'dotenv';
 import 'whatwg-fetch';
 
-import { server } from './fixtures/server/server';
+import { server } from './fixtures/server';
 import { cleanEvents } from './mocks/nextRouter';
 
 DotEnv.config({

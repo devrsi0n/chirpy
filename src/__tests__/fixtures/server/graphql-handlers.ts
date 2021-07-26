@@ -1,9 +1,9 @@
 import { graphql } from 'msw';
 
-// const localGraphQL = graphql.link('http://localhost:3000/v1/graphql');
+const localGraphQL = graphql.link('*/v1/graphql');
 
 export const graphqlHandlers = [
-  graphql.query('userByPk', (req, res, ctx) => {
+  localGraphQL.query('userByPk', (req, res, ctx) => {
     const { id } = req.variables;
     return res(
       ctx.data({
@@ -18,6 +18,24 @@ export const graphqlHandlers = [
           website: 'https://test.com',
           twitterUserName: 'twittertest',
         },
+      }),
+    );
+  }),
+  graphql.query('pageByURL', (req, res, ctx) => {
+    const { url, title } = req.variables;
+    return res(
+      ctx.data({
+        pages: [
+          {
+            __typename: 'Page',
+            id: 'page-id',
+            url,
+            title,
+            project: {
+              domain: 'test.com',
+            },
+          },
+        ],
       }),
     );
   }),
