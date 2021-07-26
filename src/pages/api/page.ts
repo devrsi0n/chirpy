@@ -1,8 +1,6 @@
 import Cors from 'cors';
-import { NextApiRequest, NextApiResponse } from 'next';
-import connect from 'next-connect';
 
-import { handleInternalLoginFailure } from '$/server/services/common';
+import { apiHandler } from '$/server/common/api-handler';
 import { handleGetPage } from '$/server/services/page';
 
 const cors = Cors({
@@ -10,12 +8,7 @@ const cors = Cors({
   methods: ['GET', 'POST', 'OPTIONS'],
 });
 
-const handler = connect<NextApiRequest, NextApiResponse>({
-  onError: handleInternalLoginFailure,
-});
+apiHandler.use(cors);
+apiHandler.get(handleGetPage);
 
-handler.use(cors);
-
-handler.get(handleGetPage);
-
-export default handler;
+export default apiHandler;

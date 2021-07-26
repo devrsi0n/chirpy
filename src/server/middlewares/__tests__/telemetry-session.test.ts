@@ -1,34 +1,18 @@
 import { merge } from 'lodash';
 
+import {
+  defaultRequest,
+  mockNext,
+  mockRes,
+  mockSend,
+  mockStatus,
+  projectId,
+} from '$/__tests__/mocks/mockApi';
 import * as sessionModule from '$/server/services/anonymous-session';
 import * as projectModule from '$/server/services/project';
 import * as tokenModule from '$/server/utilities/token';
 
 import { telemetrySessionMiddleware } from '../telemetry-session';
-
-const projectId = '2ba0f848-608e-488c-a483-f2e81c9d5e67';
-const defaultRequest = {
-  headers: {
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36',
-    'X-Client-IP': '46.82.174.69',
-  },
-  body: {
-    session: {
-      projectId,
-      hostname: 'totalk.dev',
-      screen: '2560x1440',
-      language: 'en',
-    },
-  },
-};
-
-const mockRes: $TsAny = {};
-const mockStatus = jest.fn().mockReturnValue(mockRes);
-mockRes.status = mockStatus;
-const mockSend = jest.fn().mockReturnValue(mockRes);
-mockRes.send = mockSend;
-const mockNext = jest.fn();
 
 describe('telemetry session middleware', () => {
   afterEach(() => {
@@ -81,10 +65,13 @@ describe('telemetry session middleware', () => {
     it('should send response with "bad request" with no valid project id', async () => {
       const mockGetProjectById = jest.spyOn(projectModule, 'getProjectById');
       mockGetProjectById.mockResolvedValue(null as $TsAny);
-      await telemetrySessionMiddleware(defaultRequest as $TsAny, mockRes, mockNext);
+      await expect(
+        telemetrySessionMiddleware(defaultRequest as $TsAny, mockRes, mockNext),
+      ).rejects.toMatchObject({
+        httpStatus: 400,
+        message: expect.stringContaining('Bad Request'),
+      });
       expect(mockGetProjectById).toHaveBeenCalled();
-      expect(mockStatus).toHaveBeenCalledWith(400);
-      expect(mockSend.mock.calls[0][0].startsWith('Bad Request')).toBe(true);
     });
 
     it('should send response with ok with robot request', async () => {

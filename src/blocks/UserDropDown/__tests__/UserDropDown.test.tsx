@@ -8,7 +8,7 @@ import { UserDropDown, UserDropDownProps } from '../';
 
 describe('UserDropDown', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 
