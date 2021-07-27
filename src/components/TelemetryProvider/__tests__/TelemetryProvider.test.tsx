@@ -10,6 +10,10 @@ const SLEEP_TIME = 250;
 
 describe('TelemetryProvider', () => {
   beforeEach(() => {
+    //@ts-ignore
+    delete window.location;
+    //@ts-ignore
+    window.location = new URL('https://www.example.com');
     render(<TelemetryProvider projectId="random-project-id" />);
   });
 

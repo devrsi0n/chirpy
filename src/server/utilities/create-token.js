@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/prefer-module */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-ignore
 const jwt = require('jsonwebtoken');
@@ -28,7 +29,7 @@ function createAuthToken(payload, options) {
 }
 
 /**
- * @type {function (string | object | Buffer, { maxAge: string | number }): string}
+ * @type {function (string | object | Buffer, { maxAge: string | number; allowedRoles?: string[]; defaultRole?: string; role?: string; }): string}
  */
 function createToken(payload, { maxAge }) {
   const encodedToken = jwt.sign(payload, process.env.HASH_KEY, {

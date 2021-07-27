@@ -12,12 +12,14 @@ import { persistCache, PersistentStorage, LocalForageWrapper } from 'apollo3-cac
 import { PersistedData } from 'apollo3-cache-persist/types';
 import * as localForage from 'localforage';
 import { useSession } from 'next-auth/client';
-import preval from 'preval.macro';
 import * as React from 'react';
 import { usePromise } from 'react-use';
 
 import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
+
+import anonymousToken from /* preval */
+'./anonymous-token';
 
 export function useApollo(initialState?: any): ApolloClient<NormalizedCacheObject> {
   const [session] = useSession();
@@ -81,13 +83,7 @@ const getWSLink = (hasuraToken: string) => {
 
 function getHeaders(hasuraToken: string) {
   return {
-    authorization: `Bearer ${
-      hasuraToken ||
-      preval`
-      process.env.HASH_KEY = ${process.env.HASH_KEY};
-      module.exports = require("./anonymous-token.js");
-    `
-    }`,
+    authorization: `Bearer ${hasuraToken || anonymousToken}`,
   };
 }
 
