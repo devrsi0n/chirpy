@@ -1,4 +1,3 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -12,14 +11,11 @@ import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
-import { useInsertOneProjectMutation } from '$/graphql/generated/project';
-import { useForm } from '$/hooks/useForm';
-import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
-  ProjectsOfDashboardDocument,
-  ProjectsOfDashboardQuery,
-} from '$/server/graphql/generated/project';
-import { AllUsersDocument } from '$/server/graphql/generated/user';
+  useInsertOneProjectMutation,
+  useUserDashboardProjectsQuery,
+} from '$/graphql/generated/project';
+import { useForm } from '$/hooks/useForm';
 import { getStartOfSubtractDate, dayjs } from '$/utilities/date';
 
 type FormFields = {
@@ -27,8 +23,22 @@ type FormFields = {
   domain: string;
 };
 
-export default function Dashboard({ projects }: DashboardProps): JSX.Element {
-  const { data, isLogin, refetchData } = useCurrentUser();
+export default function Dashboard(): JSX.Element {
+  const {
+    data: { id },
+    isLogin,
+    refetchData,
+  } = useCurrentUser();
+
+  const { data } = useUserDashboardProjectsQuery({
+    variables: {
+      id: id!,
+      today: dayjs().toISOString(),
+      yesterday: getStartOfSubtractDate(1),
+      twoDaysAgo: getStartOfSubtractDate(2),
+    },
+  });
+  const { projects } = data?.userByPk || {};
 
   const [insertProjectMutation, { loading }] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
@@ -53,13 +63,13 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
             // TODO: Team id?
             name: fields.name,
             domain: fields.domain,
-            userId: data.id,
+            userId: id,
           },
         });
         setShowDialog(false);
         refetchData?.();
       },
-      [insertProjectMutation, data, refetchData],
+      [insertProjectMutation, id, refetchData],
     ),
   );
 
@@ -169,54 +179,3 @@ export default function Dashboard({ projects }: DashboardProps): JSX.Element {
 }
 
 Dashboard.auth = true;
-
-type PathParam = {
-  username: string;
-};
-
-export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
-  const client = getAdminApollo();
-  const allUsers = await client.query({
-    query: AllUsersDocument,
-  });
-  const paths = [];
-  for (const u of allUsers.data.users) {
-    if (!u.username) {
-      continue;
-    }
-    paths.push({
-      params: {
-        username: u.username,
-      },
-    });
-  }
-  const payload = {
-    paths,
-    fallback: true,
-  };
-  return payload;
-};
-
-type DashboardProps = {
-  projects: ProjectsOfDashboardQuery['projects'];
-};
-
-export const getStaticProps: GetStaticProps<DashboardProps, PathParam> = async ({ params }) => {
-  if (!params?.username) {
-    return { notFound: true };
-  }
-  const client = getAdminApollo();
-  const {
-    data: { projects },
-  } = await client.query({
-    query: ProjectsOfDashboardDocument,
-    variables: {
-      username: params.username,
-      today: dayjs().toISOString(),
-      yesterday: getStartOfSubtractDate(1),
-      twoDaysAgo: getStartOfSubtractDate(2),
-    },
-  });
-
-  return { props: { projects }, revalidate: 1 };
-};

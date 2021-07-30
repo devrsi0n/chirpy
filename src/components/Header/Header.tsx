@@ -13,16 +13,12 @@ import { IconButton } from '../Button';
 import { Logo } from '../Logo';
 
 export function Header(): JSX.Element {
-  const { data, error, isLogin } = useCurrentUser();
-  const { username } = data;
+  const { isLogin } = useCurrentUser();
   const [showMenu, setShowMenu] = React.useState(false);
   const handleClickMenu = React.useCallback(() => {
     setShowMenu((prev) => !prev);
   }, []);
 
-  if (error) {
-    console.error('Get current user error:', error);
-  }
   return (
     <header
       css={[
@@ -49,7 +45,7 @@ export function Header(): JSX.Element {
                   Pricing
                 </Link>
               ) : (
-                <Link href={`/dashboard/${username}`} tw="" highlightMatch>
+                <Link href="/dashboard" tw="" highlightMatch>
                   Dashboard
                 </Link>
               )}
@@ -69,7 +65,7 @@ export function Header(): JSX.Element {
       <div tw="w-full">
         <nav css={[tw`flex w-full flex-col px-2 pt-2 pb-3 space-y-1`, !showMenu && tw`hidden`]}>
           {isLogin ? (
-            <Link href={`/dashboard/${username}`} tw="px-3 py-2" highlightMatch>
+            <Link href="/dashboard" tw="px-3 py-2" highlightMatch>
               Dashboard
             </Link>
           ) : (
