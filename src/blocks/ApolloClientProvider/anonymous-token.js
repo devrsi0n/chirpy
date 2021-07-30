@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires, unicorn/prefer-module */
-const { createToken } = require('../../server/utilities/create-token');
+const { createAuthToken } = require('../../server/utilities/create-token');
 
 /**
  * @type {function (): string}
  */
 function getAnonymousToken() {
   const maxAge = '30d';
-  const authToken = createToken(
+  const authToken = createAuthToken(
     {
       userId: 'anonymous',
       name: 'anonymous',

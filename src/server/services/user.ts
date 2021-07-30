@@ -4,18 +4,35 @@ import { UpdateUserByPkDocument } from '$/server/graphql/generated/user';
 
 import { getAdminApollo } from '../common/admin-apollo';
 
-export async function fillUserFields(user: User, profile: Profile, provider: Provider) {
+export type MissingFields = {
+  website: string;
+  bio: string;
+  twitterUserName: string;
+};
+
+export async function fillUserFields(
+  user: User,
+  profile: Profile,
+  provider: Provider,
+): Promise<MissingFields> {
   const client = getAdminApollo();
   try {
+    const fields = translatorMap[provider](profile);
     await client.mutate({
       mutation: UpdateUserByPkDocument,
       variables: {
         id: user.id,
-        ...translatorMap[provider](profile),
+        ...fields,
       },
     });
+    return fields;
   } catch (error) {
     console.log('fill user fields failed', error);
+    return {
+      website: '',
+      bio: '',
+      twitterUserName: '',
+    };
   }
 }
 

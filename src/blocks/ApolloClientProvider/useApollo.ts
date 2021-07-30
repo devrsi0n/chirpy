@@ -9,11 +9,10 @@ import {
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { persistCache, PersistentStorage, LocalForageWrapper } from 'apollo3-cache-persist';
-import { PersistedData } from 'apollo3-cache-persist/types';
+import { PersistedData } from 'apollo3-cache-persist/lib/types';
 import * as localForage from 'localforage';
 import { useSession } from 'next-auth/client';
 import * as React from 'react';
-import { usePromise } from 'react-use';
 
 import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
@@ -26,13 +25,12 @@ export function useApollo(initialState?: any): ApolloClient<NormalizedCacheObjec
   const [client, setClient] = React.useState<ApolloClient<NormalizedCacheObject>>(() =>
     getApolloClient(session?.hasuraToken, initialState),
   );
-  const mounted = usePromise();
   React.useEffect(() => {
     if (!session?.hasuraToken) {
       return;
     }
     setClient(getApolloClient(session.hasuraToken, initialState));
-  }, [session?.hasuraToken, initialState, mounted]);
+  }, [session?.hasuraToken, initialState]);
   return client;
 }
 
@@ -53,38 +51,6 @@ function getApolloClient(
   }
 
   return _apolloClient;
-}
-
-// Used in server
-const getHttpLink = (hasuraToken: string) => {
-  const link = createHttpLink({
-    uri: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
-    credentials: `include`,
-    headers: getHeaders(hasuraToken), // auth token is fetched on the server side
-  });
-  return link;
-};
-
-// Used in browser
-const getWSLink = (hasuraToken: string) => {
-  return new WebSocketLink({
-    uri: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
-    options: {
-      lazy: true,
-      reconnect: true,
-      connectionParams: () => {
-        return {
-          headers: getHeaders(hasuraToken),
-        };
-      },
-    },
-  });
-};
-
-function getHeaders(hasuraToken: string) {
-  return {
-    authorization: `Bearer ${hasuraToken || anonymousToken}`,
-  };
 }
 
 let cache: InMemoryCache;
@@ -124,3 +90,33 @@ const createApolloClient = (hasuraToken: string) => {
     ssrMode,
   });
 };
+
+const getHttpLink = (hasuraToken: string) => {
+  const link = createHttpLink({
+    uri: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
+    credentials: `include`,
+    headers: getHeaders(hasuraToken),
+  });
+  return link;
+};
+
+const getWSLink = (hasuraToken: string) => {
+  return new WebSocketLink({
+    uri: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
+    options: {
+      lazy: true,
+      reconnect: true,
+      connectionParams: () => {
+        return {
+          headers: getHeaders(hasuraToken),
+        };
+      },
+    },
+  });
+};
+
+function getHeaders(hasuraToken: string) {
+  return {
+    authorization: `Bearer ${hasuraToken || anonymousToken}`,
+  };
+}
