@@ -29,7 +29,7 @@ function createAuthToken(payload, options) {
 }
 
 /**
- * @type {function (string | object | Buffer, { maxAge: string | number; allowedRoles?: string[]; defaultRole?: string; role?: string; }): string}
+ * @type {function (string | object | Buffer, { maxAge: string | number; }): string}
  */
 function createToken(payload, { maxAge }) {
   const encodedToken = jwt.sign(payload, process.env.HASH_KEY, {

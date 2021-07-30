@@ -12,3 +12,48 @@ mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
     id
   }
 }
+
+query userDashboardProjects(
+  $id: Int!
+  $today: timestamptz!
+  $yesterday: timestamptz!
+  $twoDaysAgo: timestamptz!
+) {
+  userByPk(id: $id) {
+    id
+    projects {
+      id
+      name
+      createdAt
+      pages {
+        id
+        title
+        url
+      }
+      sessionsYesterday: sessions {
+        events_aggregate(
+          where: { type: { _eq: "pageview" }, created_at: { _gte: $yesterday, _lt: $today } }
+        ) {
+          aggregate {
+            count(columns: id)
+          }
+          nodes {
+            created_at
+          }
+        }
+      }
+      sessionsTwoDaysAgo: sessions {
+        events_aggregate(
+          where: { type: { _eq: "pageview" }, created_at: { _gte: $twoDaysAgo, _lt: $yesterday } }
+        ) {
+          aggregate {
+            count(columns: id)
+          }
+          nodes {
+            created_at
+          }
+        }
+      }
+    }
+  }
+}

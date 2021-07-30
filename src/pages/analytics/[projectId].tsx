@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
@@ -10,7 +10,6 @@ import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
-  AllProjectsDocument,
   ProjectAnalyticsDocument,
   ProjectAnalyticsQuery,
 } from '$/server/graphql/generated/project';
@@ -55,23 +54,9 @@ type PathParam = {
   projectId: string;
 };
 
-export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
-  const client = getAdminApollo();
-  const { projects } = (
-    await client.query({
-      query: AllProjectsDocument,
-    })
-  ).data;
-  const payload = {
-    paths: projects.map((p) => ({
-      params: { projectId: p.id },
-    })),
-    fallback: true,
-  };
-  return payload;
-};
-
-export const getStaticProps: GetStaticProps<AnalyticsProps, PathParam> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> = async ({
+  params,
+}) => {
   if (!params?.projectId) {
     return { notFound: true };
   }

@@ -8,13 +8,13 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Text } from '$/components/Text';
-import { ProjectsOfDashboardQuery } from '$/server/graphql/generated/project';
+import { UserDashboardProjectsQuery } from '$/graphql/generated/project';
 import { dayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../IntegrateGuide';
 
 export type ProjectCardProps = {
-  project: ProjectsOfDashboardQuery['projects'][number];
+  project: NonNullable<UserDashboardProjectsQuery['userByPk']>['projects'][number];
 };
 
 export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
