@@ -2427,6 +2427,10 @@ export enum Page_Update_Column {
 /** columns and relationships of "Project" */
 export type Project = {
   __typename?: 'Project';
+  /** An array relationship */
+  anonymousSession: Array<AnonymousSession>;
+  /** An aggregate relationship */
+  anonymousSession_aggregate: AnonymousSession_Aggregate;
   createdAt: Scalars['timestamptz'];
   domain: Scalars['String'];
   id: Scalars['uuid'];
@@ -2435,10 +2439,6 @@ export type Project = {
   pages: Array<Page>;
   /** An aggregate relationship */
   pages_aggregate: Page_Aggregate;
-  /** An array relationship */
-  sessions: Array<AnonymousSession>;
-  /** An aggregate relationship */
-  sessions_aggregate: AnonymousSession_Aggregate;
   /** An object relationship */
   team?: Maybe<Team>;
   teamId?: Maybe<Scalars['uuid']>;
@@ -2447,6 +2447,26 @@ export type Project = {
   /** An object relationship */
   user?: Maybe<User>;
   userId?: Maybe<Scalars['Int']>;
+};
+
+
+/** columns and relationships of "Project" */
+export type ProjectAnonymousSessionArgs = {
+  distinct_on?: Maybe<Array<AnonymousSession_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<AnonymousSession_Order_By>>;
+  where?: Maybe<AnonymousSession_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Project" */
+export type ProjectAnonymousSession_AggregateArgs = {
+  distinct_on?: Maybe<Array<AnonymousSession_Select_Column>>;
+  limit?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
+  order_by?: Maybe<Array<AnonymousSession_Order_By>>;
+  where?: Maybe<AnonymousSession_Bool_Exp>;
 };
 
 
@@ -2467,26 +2487,6 @@ export type ProjectPages_AggregateArgs = {
   offset?: Maybe<Scalars['Int']>;
   order_by?: Maybe<Array<Page_Order_By>>;
   where?: Maybe<Page_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Project" */
-export type ProjectSessionsArgs = {
-  distinct_on?: Maybe<Array<AnonymousSession_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<AnonymousSession_Order_By>>;
-  where?: Maybe<AnonymousSession_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Project" */
-export type ProjectSessions_AggregateArgs = {
-  distinct_on?: Maybe<Array<AnonymousSession_Select_Column>>;
-  limit?: Maybe<Scalars['Int']>;
-  offset?: Maybe<Scalars['Int']>;
-  order_by?: Maybe<Array<AnonymousSession_Order_By>>;
-  where?: Maybe<AnonymousSession_Bool_Exp>;
 };
 
 
@@ -2568,12 +2568,12 @@ export type Project_Bool_Exp = {
   _and?: Maybe<Array<Project_Bool_Exp>>;
   _not?: Maybe<Project_Bool_Exp>;
   _or?: Maybe<Array<Project_Bool_Exp>>;
+  anonymousSession?: Maybe<AnonymousSession_Bool_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
   domain?: Maybe<String_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   name?: Maybe<String_Comparison_Exp>;
   pages?: Maybe<Page_Bool_Exp>;
-  sessions?: Maybe<AnonymousSession_Bool_Exp>;
   team?: Maybe<Team_Bool_Exp>;
   teamId?: Maybe<Uuid_Comparison_Exp>;
   theme?: Maybe<Jsonb_Comparison_Exp>;
@@ -2612,12 +2612,12 @@ export type Project_Inc_Input = {
 
 /** input type for inserting data into table "Project" */
 export type Project_Insert_Input = {
+  anonymousSession?: Maybe<AnonymousSession_Arr_Rel_Insert_Input>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   domain?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   pages?: Maybe<Page_Arr_Rel_Insert_Input>;
-  sessions?: Maybe<AnonymousSession_Arr_Rel_Insert_Input>;
   team?: Maybe<Team_Obj_Rel_Insert_Input>;
   teamId?: Maybe<Scalars['uuid']>;
   theme?: Maybe<Scalars['jsonb']>;
@@ -2697,12 +2697,12 @@ export type Project_On_Conflict = {
 
 /** Ordering options when selecting data from "Project". */
 export type Project_Order_By = {
+  anonymousSession_aggregate?: Maybe<AnonymousSession_Aggregate_Order_By>;
   createdAt?: Maybe<Order_By>;
   domain?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   name?: Maybe<Order_By>;
   pages_aggregate?: Maybe<Page_Aggregate_Order_By>;
-  sessions_aggregate?: Maybe<AnonymousSession_Aggregate_Order_By>;
   team?: Maybe<Team_Order_By>;
   teamId?: Maybe<Order_By>;
   theme?: Maybe<Order_By>;
@@ -5303,7 +5303,7 @@ export type Query_Root = {
   accountProviders: Array<AccountProvider>;
   /** An array relationship */
   accounts: Array<Account>;
-  /** fetch data from the table: "AnonymousSession" */
+  /** An array relationship */
   anonymousSession: Array<AnonymousSession>;
   /** fetch aggregated fields from the table: "AnonymousSession" */
   anonymousSessionAggregate: AnonymousSession_Aggregate;
@@ -5742,7 +5742,7 @@ export type Subscription_Root = {
   accountProviders: Array<AccountProvider>;
   /** An array relationship */
   accounts: Array<Account>;
-  /** fetch data from the table: "AnonymousSession" */
+  /** An array relationship */
   anonymousSession: Array<AnonymousSession>;
   /** fetch aggregated fields from the table: "AnonymousSession" */
   anonymousSessionAggregate: AnonymousSession_Aggregate;

@@ -14,7 +14,7 @@ import * as localForage from 'localforage';
 import { useSession } from 'next-auth/client';
 import * as React from 'react';
 
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev, isENVProd } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
 
 import anonymousToken from /* preval */
@@ -73,7 +73,7 @@ const createApolloClient = (hasuraToken: string) => {
   }
   if (!cache) {
     cache = new InMemoryCache();
-    if (!ssrMode) {
+    if (!ssrMode && isENVProd) {
       persistCache({
         cache,
         storage: new LocalForageWrapper(localForage) as PersistentStorage<

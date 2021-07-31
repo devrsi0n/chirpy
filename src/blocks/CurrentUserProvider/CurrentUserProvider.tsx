@@ -19,14 +19,15 @@ export function CurrentUserProvider({
   children,
 }: CurrentUserProviderProps): JSX.Element {
   const [session, sessionIsLoading] = useSession();
-  const [getUser, { data, ...restProps }] = useCurrentUserLazyQuery({
+  const [fetchUser, { data, ...restProps }] = useCurrentUserLazyQuery({
     ...apolloBaseOptions,
     notifyOnNetworkStatusChange: true,
   });
 
   const handleFetchUser = React.useCallback(() => {
-    return getUser({ variables: { id: session?.user?.id || -1 } });
-  }, [getUser, session?.user?.id]);
+    if (typeof session?.user?.id !== 'number') return;
+    return fetchUser({ variables: { id: session.user.id || -1 } });
+  }, [fetchUser, session?.user?.id]);
 
   React.useEffect(() => {
     handleFetchUser();

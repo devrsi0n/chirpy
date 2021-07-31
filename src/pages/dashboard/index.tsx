@@ -11,10 +11,8 @@ import { Heading } from '$/components/Heading';
 import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
-import {
-  useInsertOneProjectMutation,
-  useUserDashboardProjectsQuery,
-} from '$/graphql/generated/project';
+import { useInsertOneProjectMutation } from '$/graphql/generated/project';
+import { useUserDashboardProjectsLazyQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
 import { getStartOfSubtractDate, dayjs } from '$/utilities/date';
 
@@ -27,17 +25,21 @@ export default function Dashboard(): JSX.Element {
   const {
     data: { id },
     isLogin,
-    refetchData,
   } = useCurrentUser();
 
-  const { data } = useUserDashboardProjectsQuery({
-    variables: {
-      id: id!,
-      today: dayjs().toISOString(),
-      yesterday: getStartOfSubtractDate(1),
-      twoDaysAgo: getStartOfSubtractDate(2),
-    },
-  });
+  const [fetchUserProjects, { data }] = useUserDashboardProjectsLazyQuery();
+  const handleFetchProjects = React.useCallback(() => {
+    if (!id) return;
+    fetchUserProjects({
+      variables: {
+        id: id!,
+        today: dayjs().toISOString(),
+        yesterday: getStartOfSubtractDate(1),
+        twoDaysAgo: getStartOfSubtractDate(2),
+      },
+    });
+  }, [id, fetchUserProjects]);
+  React.useEffect(handleFetchProjects, [handleFetchProjects]);
   const { projects } = data?.userByPk || {};
 
   const [insertProjectMutation, { loading }] = useInsertOneProjectMutation();
@@ -67,9 +69,9 @@ export default function Dashboard(): JSX.Element {
           },
         });
         setShowDialog(false);
-        refetchData?.();
+        handleFetchProjects();
       },
-      [insertProjectMutation, id, refetchData],
+      [insertProjectMutation, id, handleFetchProjects],
     ),
   );
 
@@ -117,7 +119,7 @@ export default function Dashboard(): JSX.Element {
           )}
         </section>
         <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-          <form tw="flex flex-col w-full" onSubmit={handleClickSubmit}>
+          <form tw="flex flex-col w-full">
             <TextField
               {...register('name', {
                 required: { value: true, message: 'Name is required' },
@@ -166,7 +168,7 @@ export default function Dashboard(): JSX.Element {
                 disabled={hasError || loading}
                 variant="plain"
                 color="primary"
-                type="submit"
+                onClick={handleClickSubmit}
               >
                 Submit
               </Button>
