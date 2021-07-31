@@ -8,7 +8,7 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Text } from '$/components/Text';
-import { UserDashboardProjectsQuery } from '$/graphql/generated/project';
+import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { dayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../IntegrateGuide';

@@ -34,6 +34,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           </div>
         )}
         <input
+          autoComplete="off"
           {...inputProps}
           ref={ref}
           type={type}

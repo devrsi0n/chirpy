@@ -20,13 +20,53 @@ mutation updateUserByPk(
 ) {
   updateUserByPk(
     pk_columns: { id: $id }
-    _set: {
-      bio: $bio
-      name: $name
-      twitterUserName: $twitterUserName
-      website: $website
-    }
+    _set: { bio: $bio, name: $name, twitterUserName: $twitterUserName, website: $website }
   ) {
     id
+  }
+}
+
+query userDashboardProjects(
+  $id: Int!
+  $today: timestamptz!
+  $yesterday: timestamptz!
+  $twoDaysAgo: timestamptz!
+) {
+  userByPk(id: $id) {
+    id
+    projects {
+      id
+      name
+      createdAt
+      pages {
+        id
+        title
+        url
+      }
+      sessionsYesterday: anonymousSession {
+        events_aggregate(
+          where: { type: { _eq: "pageview" }, created_at: { _gte: $yesterday, _lt: $today } }
+        ) {
+          aggregate {
+            count(columns: id)
+          }
+          nodes {
+            created_at
+          }
+        }
+      }
+      sessionsTwoDaysAgo: anonymousSession {
+        events_aggregate(
+          where: { type: { _eq: "pageview" }, created_at: { _gte: $twoDaysAgo, _lt: $yesterday } }
+        ) {
+          aggregate {
+            count(columns: id)
+          }
+          nodes {
+            created_at
+          }
+        }
+      }
+    }
   }
 }

@@ -28,12 +28,12 @@ query projectAnalytics(
     id
     name
     domain
-    sessionsYesterday: sessions {
+    sessionsYesterday: anonymousSession {
       events(where: { type: { _eq: "pageview" }, created_at: { _gte: $yesterday, _lt: $today } }) {
         created_at
       }
     }
-    sessionsTwoDaysAgo: sessions {
+    sessionsTwoDaysAgo: anonymousSession {
       events(
         where: { type: { _eq: "pageview" }, created_at: { _gte: $twoDaysAgo, _lt: $yesterday } }
       ) {
