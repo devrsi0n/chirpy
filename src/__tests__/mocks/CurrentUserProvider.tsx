@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
 
+import * as userModule from '../../graphql/generated/user';
+
 export type MockCurrentUserProviderProps = React.PropsWithChildren<{
   //
 }>;
@@ -32,15 +34,17 @@ export const mockUserData = {
   ],
 };
 
-jest.mock('../../graphql/generated/user', () => ({
-  ...jest.requireActual('../../graphql/generated/user'),
-  useUserByPkQuery: () => ({
+jest.spyOn(userModule, 'useCurrentUserLazyQuery').mockReturnValue([
+  jest.fn(),
+  {
     data: {
+      // @ts-ignore
       userByPk: mockUserData,
     },
+    loading: false,
     refetch: jest.fn(),
-  }),
-}));
+  },
+]);
 
 export function MockCurrentUserProvider({ children }: MockCurrentUserProviderProps): JSX.Element {
   return <CurrentUserProvider>{children}</CurrentUserProvider>;

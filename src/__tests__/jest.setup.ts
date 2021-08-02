@@ -3,6 +3,7 @@ import DotEnv from 'dotenv';
 import 'whatwg-fetch';
 
 import { server } from './fixtures/server';
+import './mocks/mockUseCurrentUser';
 import { cleanEvents } from './mocks/nextRouter';
 
 DotEnv.config({

@@ -1296,12 +1296,12 @@ export type Comment_Variance_Order_By = {
  */
 export type Event = {
   __typename?: 'Event';
+  /** An object relationship */
+  anonymousSession: AnonymousSession;
   created_at: Scalars['timestamptz'];
   id: Scalars['uuid'];
   params?: Maybe<Scalars['jsonb']>;
   referrer?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  session: AnonymousSession;
   sessionId: Scalars['uuid'];
   /** Event type, e.g. 'pageview', 'buttonClick' */
   type: Scalars['String'];
@@ -1366,11 +1366,11 @@ export type Event_Bool_Exp = {
   _and?: Maybe<Array<Event_Bool_Exp>>;
   _not?: Maybe<Event_Bool_Exp>;
   _or?: Maybe<Array<Event_Bool_Exp>>;
+  anonymousSession?: Maybe<AnonymousSession_Bool_Exp>;
   created_at?: Maybe<Timestamptz_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   params?: Maybe<Jsonb_Comparison_Exp>;
   referrer?: Maybe<String_Comparison_Exp>;
-  session?: Maybe<AnonymousSession_Bool_Exp>;
   sessionId?: Maybe<Uuid_Comparison_Exp>;
   type?: Maybe<String_Comparison_Exp>;
   updated_at?: Maybe<Timestamptz_Comparison_Exp>;
@@ -1400,11 +1400,11 @@ export type Event_Delete_Key_Input = {
 
 /** input type for inserting data into table "Event" */
 export type Event_Insert_Input = {
+  anonymousSession?: Maybe<AnonymousSession_Obj_Rel_Insert_Input>;
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   params?: Maybe<Scalars['jsonb']>;
   referrer?: Maybe<Scalars['String']>;
-  session?: Maybe<AnonymousSession_Obj_Rel_Insert_Input>;
   sessionId?: Maybe<Scalars['uuid']>;
   /** Event type, e.g. 'pageview', 'buttonClick' */
   type?: Maybe<Scalars['String']>;
@@ -1480,11 +1480,11 @@ export type Event_On_Conflict = {
 
 /** Ordering options when selecting data from "Event". */
 export type Event_Order_By = {
+  anonymousSession?: Maybe<AnonymousSession_Order_By>;
   created_at?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   params?: Maybe<Order_By>;
   referrer?: Maybe<Order_By>;
-  session?: Maybe<AnonymousSession_Order_By>;
   sessionId?: Maybe<Order_By>;
   type?: Maybe<Order_By>;
   updated_at?: Maybe<Order_By>;

@@ -14,7 +14,7 @@ function getAnonymousToken() {
     },
     { maxAge, allowedRoles: ['anonymous'], defaultRole: 'anonymous', role: 'anonymous' },
   );
-  // console.log(authToken);
+  console.log({ authToken });
   return authToken;
 }
 module.exports = getAnonymousToken();

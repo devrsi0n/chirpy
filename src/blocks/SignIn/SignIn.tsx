@@ -38,7 +38,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       <div tw="flex flex-row h-full">
         <div tw="flex-1 flex flex-col justify-center">
           <div tw="py-7 px-10">
-            <Logo size="lg" noSpacing />
+            <Logo size="lg" noSpacing tw="block mb-20" />
             <div tw="space-y-2">
               <Heading as="h2" tw="font-black mt-5">
                 {title}
@@ -52,7 +52,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                   key={option.name}
                   onClick={() =>
                     signIn(option.name.toLowerCase(), {
-                      callbackUrl: new URLSearchParams(location.search).get('callbackUrl') || '/',
+                      callbackUrl: `${location.origin}/auth/redirecting`,
                     })
                   }
                   tw="w-full"
