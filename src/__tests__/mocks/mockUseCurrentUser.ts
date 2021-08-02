@@ -1,11 +1,31 @@
+import { CurrentUserContextType, UserData } from '$/blocks/CurrentUserProvider/CurrentUserContext';
+
 import * as useCurrentUserModule from '../../blocks/CurrentUserProvider/useCurrentUser';
 import { mockUserData } from './CurrentUserProvider';
 
-jest.spyOn(useCurrentUserModule, 'useCurrentUser').mockImplementation(
+export const mockRefetch = jest.fn();
+
+const useCurrentUser: jest.SpyInstance<CurrentUserContextType, []> = jest.spyOn(
+  useCurrentUserModule,
+  'useCurrentUser',
+);
+
+useCurrentUser.mockImplementation(
   () =>
     ({
       data: mockUserData,
       isLogin: true,
-      refetch: jest.fn(),
+      refetch: mockRefetch,
     } as any),
 );
+
+export function setMockedUser(data: UserData) {
+  useCurrentUser.mockImplementation(
+    () =>
+      ({
+        data: { ...mockUserData, ...data },
+        isLogin: true,
+        refetch: mockRefetch,
+      } as any),
+  );
+}

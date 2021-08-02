@@ -39,4 +39,14 @@ export const graphqlHandlers = [
       }),
     );
   }),
+  graphql.mutation('updateUserFields', (req, res, ctx) => {
+    return res(
+      ctx.data({
+        updateUserByPk: {
+          __typename: 'User',
+          id: 'user-id',
+        },
+      }),
+    );
+  }),
 ];

@@ -2,8 +2,9 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render as reactRender } from '@testing-library/react';
 
-// import { ApolloClientProvider } from '../../blocks/ApolloClientProvider';
-import '../mocks/mockUseCurrentUser';
+import { ToastProvider } from '$/components/Toast';
+
+import '../mocks/mockUseSession';
 import '../mocks/nextRouter';
 
 // Disable emotion warning
@@ -14,9 +15,9 @@ export function pageRender(ui: React.ReactElement) {
   return reactRender(ui, {
     wrapper: function TestingWrapper({ children }) {
       return (
-        // <ApolloClientProvider>
-        <CacheProvider value={emotionCache}>{children}</CacheProvider>
-        // </ApolloClientProvider>
+        <ToastProvider>
+          <CacheProvider value={emotionCache}>{children}</CacheProvider>
+        </ToastProvider>
       );
     },
   });

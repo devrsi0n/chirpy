@@ -8752,6 +8752,22 @@
         "description": "Event for telemetry\n\n\ncolumns and relationships of \"Event\"\n",
         "fields": [
           {
+            "name": "anonymousSession",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "AnonymousSession",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "args": [],
@@ -8816,22 +8832,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "session",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "AnonymousSession",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9213,6 +9213,18 @@
             "deprecationReason": null
           },
           {
+            "name": "anonymousSession",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "AnonymousSession_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -9254,18 +9266,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "session",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AnonymousSession_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -9426,6 +9426,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "anonymousSession",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "AnonymousSession_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -9467,18 +9479,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "session",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AnonymousSession_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -10039,6 +10039,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "anonymousSession",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "AnonymousSession_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "created_at",
             "description": null,
             "type": {
@@ -10080,18 +10092,6 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "session",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "AnonymousSession_order_by",
               "ofType": null
             },
             "defaultValue": null,

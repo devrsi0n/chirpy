@@ -40,6 +40,9 @@ module.exports = {
       scale: {
         '-1': '-1',
       },
+      width: {
+        fit: 'fit-width'
+      }
     },
     // typography: (theme) => ({
     //   light: {
