@@ -13,5 +13,6 @@ declare module 'next-auth' {
       email: string;
       image: string;
     };
+    isNewUser: boolean;
   }
 }

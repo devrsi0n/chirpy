@@ -39,7 +39,10 @@ export default NextAuth({
       if (user) {
         await fillUserFields(user as any, profile as any, account?.provider as any);
       }
-      return decodedToken;
+      return {
+        ...decodedToken,
+        isNewUser: !!isNewUser,
+      };
     },
     async session(session, jwtPayload: JWT) {
       console.log({ session, jwtPayload });
@@ -62,9 +65,25 @@ export default NextAuth({
       return session;
     },
     async signIn(user, account, profile) {
+      console.log({ user, account, profile });
       // Restrict access to people with verified accounts
       if (account.provider === 'google' && profile.verified_email !== true) {
         return false;
+      } else if (account.provider === 'github' && !user.email) {
+        // Fetch user's hidden email.
+        const res = await fetch('https://api.github.com/user/emails', {
+          headers: {
+            Authorization: `token ${account.accessToken}`,
+          },
+        });
+        const emails: { email: string; primary: number; verified: number }[] = await res.json();
+        if (!emails || emails.length === 0) {
+          return true;
+        }
+        const sortedEmails = emails.sort(
+          (a, b) => b.primary - a.primary || b.verified - a.verified,
+        );
+        user.email = sortedEmails[0].email;
       }
       return true;
     },

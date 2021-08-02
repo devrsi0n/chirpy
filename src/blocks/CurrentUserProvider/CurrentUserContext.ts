@@ -9,11 +9,13 @@ type UserQueryState = Partial<
   Pick<UserQueryResultType, 'previousData' | 'error' | 'loading' | 'refetch'>
 >;
 
+export type UserData = Partial<UserQueryDataPayload>;
+
 export type CurrentUserContextType = UserQueryState & {
   refetchData?: () => void;
 } & {
   isLogin: boolean;
-  data: Partial<UserQueryDataPayload>;
+  data: UserData;
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>({
