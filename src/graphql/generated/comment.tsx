@@ -24,15 +24,34 @@ export type CommentTreeSubscription = (
   { __typename?: 'subscription_root' }
   & { comments: Array<(
     { __typename?: 'Comment' }
+    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
     & { replies: Array<(
       { __typename?: 'Comment' }
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
       & { replies: Array<(
         { __typename?: 'Comment' }
-        & CommentContentFragment
+        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
+        & { user: (
+          { __typename?: 'User' }
+          & Pick<Types.User, 'id' | 'name' | 'avatar'>
+        ), likes: Array<(
+          { __typename?: 'Like' }
+          & Pick<Types.Like, 'id' | 'userId'>
+        )> }
+      )>, user: (
+        { __typename?: 'User' }
+        & Pick<Types.User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Types.Like, 'id' | 'userId'>
       )> }
-      & CommentContentFragment
+    )>, user: (
+      { __typename?: 'User' }
+      & Pick<Types.User, 'id' | 'name' | 'avatar'>
+    ), likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Types.Like, 'id' | 'userId'>
     )> }
-    & CommentContentFragment
   )> }
 );
 
@@ -45,22 +64,54 @@ export type CommentDetailsSubscription = (
   { __typename?: 'subscription_root' }
   & { commentByPk?: Types.Maybe<(
     { __typename?: 'Comment' }
+    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
     & { replies: Array<(
       { __typename?: 'Comment' }
-      & CommentContentFragment
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<Types.User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Types.Like, 'id' | 'userId'>
+      )> }
     )>, parent?: Types.Maybe<(
       { __typename?: 'Comment' }
+      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
       & { parent?: Types.Maybe<(
         { __typename?: 'Comment' }
+        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
         & { parent?: Types.Maybe<(
           { __typename?: 'Comment' }
-          & CommentContentFragment
+          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<Types.User, 'id' | 'name' | 'avatar'>
+          ), likes: Array<(
+            { __typename?: 'Like' }
+            & Pick<Types.Like, 'id' | 'userId'>
+          )> }
+        )>, user: (
+          { __typename?: 'User' }
+          & Pick<Types.User, 'id' | 'name' | 'avatar'>
+        ), likes: Array<(
+          { __typename?: 'Like' }
+          & Pick<Types.Like, 'id' | 'userId'>
         )> }
-        & CommentContentFragment
+      )>, user: (
+        { __typename?: 'User' }
+        & Pick<Types.User, 'id' | 'name' | 'avatar'>
+      ), likes: Array<(
+        { __typename?: 'Like' }
+        & Pick<Types.Like, 'id' | 'userId'>
       )> }
-      & CommentContentFragment
+    )>, user: (
+      { __typename?: 'User' }
+      & Pick<Types.User, 'id' | 'name' | 'avatar'>
+    ), likes: Array<(
+      { __typename?: 'Like' }
+      & Pick<Types.Like, 'id' | 'userId'>
     )> }
-    & CommentContentFragment
   )> }
 );
 
