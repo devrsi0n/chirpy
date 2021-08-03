@@ -10,7 +10,7 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['@emotion/babel-plugin', 'babel-plugin-preval', 'babel-plugin-macros'],
+  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
   env: {
     test: {
       presets: [
