@@ -16,13 +16,16 @@ import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   useConfetti();
-  const { data } = useCurrentUser();
+  const { data, loading } = useCurrentUser();
   const [isFullFilled, setIsFullFilled] = React.useState(true);
   React.useEffect(() => {
+    if (loading) return;
     if (!hasValidUserProfile(data)) {
       setIsFullFilled(false);
+    } else {
+      setIsFullFilled(true);
     }
-  }, [data]);
+  }, [data, loading]);
   return (
     <Layout>
       <Head>
