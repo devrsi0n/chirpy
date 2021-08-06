@@ -1,4 +1,5 @@
 import { Send } from '@geist-ui/react-icons';
+import Check from '@geist-ui/react-icons/check';
 import Loader from '@geist-ui/react-icons/loader';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -18,19 +19,30 @@ export type ConfirmUserFieldsProps = {
 };
 
 export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
-  const { data } = useCurrentUser();
-  const { register, errors, hasError, handleSubmit } = useForm<FormFields>({
+  const { data, loading: isLoadingUser } = useCurrentUser();
+  const { register, errors, hasError, handleSubmit, setError, setFields } = useForm<FormFields>({
     defaultValues: {
       email: data.email || '',
       name: data.name || '',
       username: data.username || '',
     },
   });
+  React.useEffect(() => {
+    if (!isLoadingUser && data.id) {
+      setFields({
+        email: data.email!,
+        name: data.name!,
+        username: data.username!,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, isLoadingUser]);
   const [updateUser, { loading }] = useUpdateUserFieldsMutation();
-  const { showToast } = useToast();
+  const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
+  const { showToast } = useToast();
   const handleCLickSubmit = handleSubmit(async (fields) => {
-    if (!data.id) return;
+    if (!data.id || isSaved) return;
     try {
       await updateUser({
         variables: {
@@ -40,19 +52,21 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           username: fields.username,
         },
       });
-    } catch {
-      // TODO: Make a clear error message
-      showToast({
-        type: 'error',
-        title: 'Try another email or username!',
-      });
+    } catch (error: any) {
+      if (/duplicate key.+users_username_key/.test(error.message)) {
+        setError('username', 'Username already taken');
+      } else if (/duplicate key.+users_email_key/.test(error.message)) {
+        setError('email', 'Email already taken');
+      } else {
+        showToast({
+          type: 'error',
+          title: 'Somethingwent wrong, please try again later.',
+        });
+      }
       return;
     }
-    showToast({
-      type: 'success',
-      title: 'Thanks, your profile saved!',
-    });
-    await sleep(2.5);
+    setIsSaved(true);
+    await sleep(1);
     router.push('/dashboard');
   });
   return (
@@ -97,12 +111,18 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       <Button
         tw="space-x-1 w-full"
         onClick={handleCLickSubmit}
-        disabled={hasError}
+        disabled={hasError || loading}
         aria-label="Save"
         variant="solid"
         color="primary"
       >
-        {loading ? <Loader tw="animate-spin text-gray-400 w-5 h-5" /> : <Send size="14" />}
+        {isSaved ? (
+          <Check size={20} />
+        ) : loading ? (
+          <Loader tw="animate-spin text-gray-400 " size={20} />
+        ) : (
+          <Send size={20} />
+        )}
         <span>Save</span>
       </Button>
     </form>

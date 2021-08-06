@@ -42,10 +42,10 @@ export default function Profile(): JSX.Element {
 
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
-      name,
-      bio,
-      website,
-      twitter: twitterUserName,
+      name: name || '',
+      bio: bio || '',
+      website: website || '',
+      twitter: twitterUserName || '',
     },
   });
   const { showToast } = useToast();
