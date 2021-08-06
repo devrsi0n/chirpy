@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '$/__tests__/fixtures/page-render';
@@ -32,6 +32,8 @@ setMockedUser({
 
 jest.mock('canvas-confetti');
 
+jest.setTimeout(10_000);
+
 describe('Welcome', () => {
   beforeEach(() => {
     pageRender(<Welcome />);
@@ -39,6 +41,7 @@ describe('Welcome', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    return cleanup();
   });
 
   it('should render the form and text', () => {

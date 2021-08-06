@@ -15,16 +15,19 @@ useCurrentUser.mockImplementation(
     ({
       data: mockUserData,
       isLogin: true,
+      loading: false,
       refetch: mockRefetch,
     } as any),
 );
 
-export function setMockedUser(data: UserData) {
+export function setMockedUser(newData: UserData) {
+  const data = { ...mockUserData, ...newData };
   useCurrentUser.mockImplementation(
     () =>
       ({
-        data: { ...mockUserData, ...data },
+        data,
         isLogin: true,
+        loading: false,
         refetch: mockRefetch,
       } as any),
   );
