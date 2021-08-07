@@ -1,15 +1,16 @@
+import { GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
-import { Layout } from '$/components/Layout';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { CommonPageProps } from '$/types/page.type';
 
 export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <Layout>
+    <>
       <section>
         <Head>
           <title>{frontMatter.title}</title>
@@ -18,13 +19,11 @@ export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JS
           <MDXRemote {...mdxSource} components={MDXComponents} />
         </article>
       </section>
-    </Layout>
+    </>
   );
 }
 
-export async function getStaticProps(): Promise<{
-  props: MDXProps;
-}> {
+export const getStaticProps: GetStaticProps<CommonPageProps & MDXProps> = async () => {
   const termsProps = await getMDXPropsBySlug('terms-of-service');
   return { props: termsProps };
-}
+};

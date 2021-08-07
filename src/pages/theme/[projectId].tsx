@@ -8,7 +8,6 @@ import tw from 'twin.macro';
 import { CommentWidget } from '$/blocks/CommentWidget';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { ThemeProvider, useTheme } from '$/components/ThemeProvider';
@@ -37,14 +36,14 @@ const colorOptions: ColorSeries[] = [
 
 export default function Theme(props: ThemeProps): JSX.Element {
   return (
-    <Layout>
+    <>
       <ThemeProvider theme={props.project?.theme as ThemeType}>
         <Head>
           <title>Theme Editor</title>
         </Head>
         <ThemeEditor {...props} />
       </ThemeProvider>
-    </Layout>
+    </>
   );
 }
 

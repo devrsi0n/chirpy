@@ -5,7 +5,6 @@ import 'twin.macro';
 
 import { Heading } from '$/components/Heading';
 import { Image } from '$/components/Image';
-import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { getDirectories } from '$/server/mdx/files';
 import { Directory } from '$/server/types/file';
@@ -23,7 +22,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
       <Head>
         <title>Blog</title>
       </Head>
-      <Layout noContainer noFooter>
+      <>
         <div tw="min-h-full" className="main-container">
           <Heading tw="my-10 font-bold">Blog</Heading>
           <section tw="flex flex-row py-10 min-h-full space-x-2">
@@ -40,12 +39,21 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
             })}
           </section>
         </div>
-      </Layout>
+      </>
     </>
   );
 }
 
 export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
   const directories = await getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`);
-  return { props: { directories }, revalidate: 3600 };
+  return {
+    props: {
+      directories,
+      layoutProps: {
+        noContainer: true,
+        noFooter: true,
+      },
+    },
+    revalidate: 3600,
+  };
 };
