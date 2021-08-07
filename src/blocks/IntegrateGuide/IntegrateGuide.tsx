@@ -50,7 +50,7 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
             id to the HTML:
           </Text>
           <Code>
-            {`<script defer src="https://totalk.dev/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
+            {`<script defer src="https://totalk.dev/bootstrap/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
           </Code>
           <Text>
             Then, add the data-{appNameLowerCase}-comment attribute to any HTML element that should
