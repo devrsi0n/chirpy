@@ -5,7 +5,6 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
-import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { hasValidUserProfile } from '$/utilities/user';
 
@@ -23,14 +22,14 @@ export default function Redirecting(): JSX.Element {
     }
   }, [session?.isNewUser, router, data]);
   return (
-    <Layout>
+    <>
       <Head>
         <title>Redirecting</title>
       </Head>
       <section>
         <Text>Redirecting...</Text>
       </section>
-    </Layout>
+    </>
   );
 }
 

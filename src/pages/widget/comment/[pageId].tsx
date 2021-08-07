@@ -13,8 +13,6 @@ import 'twin.macro';
 
 import { CommentWidget } from '$/blocks/CommentWidget';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { WidgetLayout } from '$/components/Layout';
-import { ThemeProvider } from '$/components/ThemeProvider';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
@@ -26,6 +24,7 @@ import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { PagesDocument } from '$/server/graphql/generated/page';
+import { CommonPageProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
 
@@ -40,13 +39,11 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
-  let theme;
 
   if (isStaticError(props)) {
     error = props.error!;
   } else {
     pageId = props.pageId;
-    theme = props.theme;
   }
   const { data } = useCommentTreeSubscription({
     variables: { pageId },
@@ -67,15 +64,13 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <WidgetLayout projectId={props.projectId}>
-        <Head>
-          <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
-        </Head>
-        <CommentWidget {...{ comments, onSubmitReply, onClickLikeAction }} />
-        <PoweredBy />
-      </WidgetLayout>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
+      </Head>
+      <CommentWidget {...{ comments, onSubmitReply, onClickLikeAction }} />
+      <PoweredBy />
+    </>
   );
 }
 
@@ -105,11 +100,10 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: true };
 };
 
-type StaticProps = PathParams & {
-  projectId: string;
-  comments: CommentLeafType[];
-  theme: Theme;
-};
+type StaticProps = PathParams &
+  CommonPageProps & {
+    comments: CommentLeafType[];
+  };
 type StaticError = {
   error: string;
 };
@@ -160,6 +154,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         pageId,
         projectId: themeResult.data.pageByPk.project.id,
         theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
+        isWidget: true,
       },
       revalidate: 1,
     };

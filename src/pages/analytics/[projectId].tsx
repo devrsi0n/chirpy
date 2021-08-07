@@ -5,7 +5,6 @@ import 'twin.macro';
 
 import { PageViewChart } from '$/blocks/PageViewChart';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { getAdminApollo } from '$/server/common/admin-apollo';
@@ -21,7 +20,7 @@ export type AnalyticsProps = {
 
 export default function Analytics(props: AnalyticsProps): JSX.Element {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Analytics</title>
       </Head>
@@ -46,7 +45,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
         </div>
         <PageViewChart project={props.project} />
       </div>
-    </Layout>
+    </>
   );
 }
 
@@ -76,5 +75,5 @@ export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> =
   if (!project) {
     return { notFound: true };
   }
-  return { props: { project }, revalidate: 1 };
+  return { props: { project } };
 };

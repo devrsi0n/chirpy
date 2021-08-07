@@ -12,7 +12,6 @@ import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
@@ -198,11 +197,11 @@ function ProfileContainer({
   className?: string;
 }): JSX.Element {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Profile</title>
       </Head>
       <main className={className}>{children}</main>
-    </Layout>
+    </>
   );
 }

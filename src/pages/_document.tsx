@@ -7,7 +7,7 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
-import tw from 'twin.macro';
+import 'twin.macro';
 
 class MyDocument extends Document<ReturnType<typeof extractCritical>> {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
@@ -38,9 +38,7 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
             dangerouslySetInnerHTML={{ __html: this.props.css }}
           />
         </Head>
-        <body
-          css={tw`bg-white text-gray-600 dark:bg-black dark:text-gray-300 transition duration-300 font-sans`}
-        >
+        <body>
           <Main />
           <NextScript />
         </body>

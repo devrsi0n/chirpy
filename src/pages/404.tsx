@@ -1,18 +1,19 @@
 import AlertCircleFill from '@geist-ui/react-icons/alertCircleFill';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { List, ListItem } from '$/components/List';
 import { Text } from '$/components/Text/Text';
+import { CommonPageProps } from '$/types/page.type';
 
 export default function Custom404(): JSX.Element {
   return (
-    <Layout noContainer>
+    <>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
@@ -59,9 +60,19 @@ export default function Custom404(): JSX.Element {
           <Button variant="plain">Learn More</Button>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
+
+export const getStaticProps: GetStaticProps<CommonPageProps> = () => {
+  return {
+    props: {
+      layoutProps: {
+        noContainer: true,
+      },
+    },
+  };
+};
 
 const dashedBorder = tw`rounded-full border border-dashed border-gray-300 dark:border-gray-600`;
 const listMakerStyle = tw`bg-red-400`;
