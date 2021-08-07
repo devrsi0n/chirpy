@@ -6,10 +6,10 @@ import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
-import { Layout } from '$/components/Layout';
 import { useHasMounted } from '$/hooks/useHasMounted';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { CommonPageProps } from '$/types/page.type';
 import { getBannerProps } from '$/utilities/image';
 
 type BlogProps = MDXProps;
@@ -28,7 +28,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       <Head>
         <title>{frontMatter?.title} - Blog</title>
       </Head>
-      <Layout noContainer noFooter>
+      <>
         <div tw="min-h-full" className="main-container">
           <section tw="flex flex-row py-10 min-h-full space-x-2">
             <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
@@ -41,7 +41,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
             </article>
           </section>
         </div>
-      </Layout>
+      </>
     </>
   );
 }
@@ -63,7 +63,9 @@ export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
   return payload;
 };
 
-export const getStaticProps: GetStaticProps<BlogProps, PathParam> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<BlogProps & CommonPageProps, PathParam> = async ({
+  params,
+}) => {
   if (!params?.slug) {
     return { notFound: true };
   }
@@ -73,5 +75,15 @@ export const getStaticProps: GetStaticProps<BlogProps, PathParam> = async ({ par
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
   ]);
 
-  return { props: { ...mdxProps, directories }, revalidate: 3600 };
+  return {
+    props: {
+      ...mdxProps,
+      directories,
+      layoutProps: {
+        noContainer: true,
+        noFooter: true,
+      },
+    },
+    revalidate: 3600,
+  };
 };

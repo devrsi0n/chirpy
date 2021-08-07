@@ -4,13 +4,12 @@ import 'twin.macro';
 
 import { ConfirmUserFields } from '$/blocks/ConfirmUserFields';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 
 // export type confirmationProps = React.PropsWithChildren<{}>;
 
 export default function Confirmation(/*props: confirmationProps*/): JSX.Element {
   return (
-    <Layout>
+    <>
       <Head>
         <title>Confirmation</title>
       </Head>
@@ -23,7 +22,7 @@ export default function Confirmation(/*props: confirmationProps*/): JSX.Element 
         </div>
         <ConfirmUserFields />
       </section>
-    </Layout>
+    </>
   );
 }
 

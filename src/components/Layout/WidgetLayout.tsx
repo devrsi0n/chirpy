@@ -23,7 +23,10 @@ export function WidgetLayout({
     <TelemetryProvider projectId={projectId}>
       <div
         {...divProps}
-        css={[tw`min-h-full`, noContainer && tw`flex flex-col items-center`]}
+        css={[
+          tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans`,
+          noContainer && tw`flex flex-col items-center`,
+        ]}
         style={{
           background: 'hsl(210, 10%, 98%)',
         }}

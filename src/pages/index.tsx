@@ -1,15 +1,16 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
-import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text/Text';
+import { CommonPageProps } from '$/types/page.type';
 
 function Home(): JSX.Element {
   return (
-    <Layout noContainer>
+    <>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
@@ -39,11 +40,21 @@ function Home(): JSX.Element {
           <Button variant="plain">{strings.callToAction.secondary}</Button>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<CommonPageProps> = () => {
+  return {
+    props: {
+      layoutProps: {
+        noContainer: true,
+      },
+    },
+  };
+};
 
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',

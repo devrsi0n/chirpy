@@ -16,9 +16,7 @@ import { PoweredBy } from '$/blocks/PoweredBy';
 import { UserDropDown } from '$/blocks/UserDropDown';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { WidgetLayout } from '$/components/Layout';
 import { Link } from '$/components/Link';
-import { ThemeProvider } from '$/components/ThemeProvider';
 import {
   CommentDetailsDocument,
   CommentDetailsSubscription,
@@ -30,6 +28,7 @@ import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument } from '$/server/graphql/generated/comment';
+import { CommonPageProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
 
@@ -49,42 +48,39 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <ThemeProvider theme={props.theme}>
-      <WidgetLayout projectId={props.projectId}>
-        <div css={tw`flex flex-row justify-between items-center mb-4`}>
-          <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
-            <IconButton size="md" css={tw`transform -translate-x-3`}>
-              <ArrowLeft size={20} />
-            </IconButton>
-          </Link>
-          <Heading as="h4" css={tw`text-gray-600`}>
-            <span tw="font-bold">{comment?.user.name}</span>
-            <span>{`'s comment details`}</span>
-          </Heading>
-          <UserDropDown variant="Widget" />
-        </div>
-        {comment?.id && (
-          <CommentLinkedList
-            key={comment!.id}
-            comment={comment!}
-            onClickLikeAction={handleClickLikeAction}
-            onSubmitReply={handleSubmitReply}
-          />
-        )}
-        <PoweredBy />
-      </WidgetLayout>
-    </ThemeProvider>
+    <>
+      <div css={tw`flex flex-row justify-between items-center mb-4`}>
+        <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
+          <IconButton size="md" css={tw`transform -translate-x-3`}>
+            <ArrowLeft size={20} />
+          </IconButton>
+        </Link>
+        <Heading as="h4" css={tw`text-gray-600`}>
+          <span tw="font-bold">{comment?.user.name}</span>
+          <span>{`'s comment details`}</span>
+        </Heading>
+        <UserDropDown variant="Widget" />
+      </div>
+      {comment?.id && (
+        <CommentLinkedList
+          key={comment!.id}
+          comment={comment!}
+          onClickLikeAction={handleClickLikeAction}
+          onSubmitReply={handleSubmitReply}
+        />
+      )}
+      <PoweredBy />
+    </>
   );
 }
 type PathParams = {
   commentId: string;
 };
 
-type StaticProps = PathParams & {
-  projectId: string;
-  comment: CommentDetailNode;
-  theme?: Theme;
-};
+type StaticProps = PathParams &
+  CommonPageProps & {
+    comment: CommentDetailNode;
+  };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const adminApollo = getAdminApollo();
@@ -154,6 +150,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         comment: data.commentByPk,
         commentId,
         theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
+        isWidget: true,
       },
       revalidate: 1,
     };

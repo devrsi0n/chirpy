@@ -5,12 +5,12 @@ import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { WidgetLayout, WidgetLayoutProps } from './WidgetLayout';
 
-export type ILayoutProps = Omit<WidgetLayoutProps, 'projectId'> & {
+export type LayoutProps = Omit<WidgetLayoutProps, 'projectId'> & {
   noHeader?: boolean;
   noFooter?: boolean;
 };
 
-export function Layout({ noHeader, noFooter, children, ...restProps }: ILayoutProps): JSX.Element {
+export function Layout({ noHeader, noFooter, children, ...restProps }: LayoutProps): JSX.Element {
   return (
     <WidgetLayout
       {...restProps}

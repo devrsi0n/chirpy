@@ -6,7 +6,6 @@ import { ConfirmUserFields } from '$/blocks/ConfirmUserFields';
 import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { useConfetti } from '$/hooks/useConfetti';
@@ -27,7 +26,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <Layout>
+    <>
       <Head>
         <title>Welcome</title>
       </Head>
@@ -44,7 +43,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
           <ConfirmUserFields />
         </section>
       )}
-    </Layout>
+    </>
   );
 }
 

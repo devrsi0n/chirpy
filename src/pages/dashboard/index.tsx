@@ -8,7 +8,6 @@ import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
-import { Layout } from '$/components/Layout';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
@@ -89,7 +88,7 @@ export default function Dashboard(): JSX.Element {
   }, [router, isLogin]);
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Dashboard</title>
       </Head>
@@ -176,7 +175,7 @@ export default function Dashboard(): JSX.Element {
           </form>
         </Dialog>
       </div>
-    </Layout>
+    </>
   );
 }
 

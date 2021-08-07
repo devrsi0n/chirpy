@@ -6,11 +6,11 @@ import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { SideBar, SideBarProps } from '$/blocks/SideBar';
-import { Layout } from '$/components/Layout';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { CommonPageProps } from '$/types/page.type';
 
-type DocsProps = MDXProps & Pick<SideBarProps, 'directories'>;
+type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
 
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
@@ -19,7 +19,7 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
       <Head>
         <title>{frontMatter?.title} - Docs</title>
       </Head>
-      <Layout noContainer noFooter>
+      <>
         <div tw="min-h-full" className="main-container">
           <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
             <SideBar tw="pt-10" directories={directories} title="Documentation" />
@@ -30,7 +30,7 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
             </article>
           </section>
         </div>
-      </Layout>
+      </>
     </>
   );
 }
@@ -61,5 +61,15 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({ par
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
   ]);
 
-  return { props: { ...mdxProps, directories }, revalidate: 3600 };
+  return {
+    props: {
+      ...mdxProps,
+      directories,
+      layoutProps: {
+        noContainer: true,
+        noFooter: true,
+      },
+    },
+    revalidate: 3600,
+  };
 };

@@ -11,15 +11,19 @@ import { GlobalStyles } from 'twin.macro';
 import { ApolloClientProvider } from '$/blocks/ApolloClientProvider';
 import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
 import { Heading } from '$/components/Heading';
-import { SiteThemeProvider } from '$/components/ThemeProvider';
+import { Layout, WidgetLayout } from '$/components/Layout';
+import { SiteThemeProvider, ThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
+import { CommonPageProps } from '$/types/page.type';
 
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
   }, []);
+  const AuthWrapper = (Component as any).auth ? Auth : React.Fragment;
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
       <AuthProvider
@@ -38,13 +42,11 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
               <ApolloClientProvider>
                 <CurrentUserProvider>
                   <ToastProvider>
-                    {(Component as any).auth ? (
-                      <Auth>
+                    <AuthWrapper>
+                      <AppLayout {...pageProps}>
                         <Component {...pageProps} />
-                      </Auth>
-                    ) : (
-                      <Component {...pageProps} />
-                    )}
+                      </AppLayout>
+                    </AuthWrapper>
                   </ToastProvider>
                 </CurrentUserProvider>
               </ApolloClientProvider>
@@ -57,6 +59,23 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 }
 
 export default App;
+
+type AppLayoutProps = CommonPageProps & {
+  children: React.ReactNode;
+};
+
+function AppLayout(props: AppLayoutProps): JSX.Element {
+  const { isWidget, children, projectId, layoutProps, theme } = props;
+  const ThemeWrapper = isWidget ? ThemeProvider : React.Fragment;
+  const LayoutWrapper = isWidget ? WidgetLayout : Layout;
+  return (
+    <ThemeWrapper {...(isWidget && { theme })}>
+      <LayoutWrapper projectId={projectId!} {...layoutProps}>
+        {children}
+      </LayoutWrapper>
+    </ThemeWrapper>
+  );
+}
 
 function Auth({ children }: { children: React.ReactNode }): JSX.Element {
   const [session, loading] = useSession();
