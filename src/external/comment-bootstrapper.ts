@@ -4,8 +4,7 @@ import { GetPagByUrl } from '$/server/types/page';
 import { ERR_UNMATCHED_DOMAIN } from '../server/common/error-code';
 
 /*
- * Widget entry for customers, this file should be minimal since this file is a external entry,
- * it built by parcel.
+ * Widget entry for customers, this file should be minimal since this file is a external entry.
  */
 
 export const appName = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
