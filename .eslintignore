@@ -2,7 +2,9 @@ node_modules
 jest
 generated
 cypress-examples
+scripts
 .next
 .cache
+
 
 /*.js

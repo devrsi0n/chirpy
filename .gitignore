@@ -8,7 +8,8 @@ out/
 .envproduction
 .vercel
 .cache
-public/*.js.map
-public/*.js
+public/bootstrap/*.js.map
+public/bootstrap/*.js
 cypress/screenshots/
 cypress/videos/
+cypress-examples/
