@@ -4,33 +4,20 @@ import tw from 'twin.macro';
 
 import { TelemetryProvider, TelemetryProviderProps } from '../TelemetryProvider';
 
-export type WidgetLayoutProps = React.ComponentPropsWithoutRef<'div'> &
+export type WidgetLayoutProps = React.PropsWithChildren<
   Pick<TelemetryProviderProps, 'projectId'> & {
-    noContainer?: boolean;
     header?: React.ReactNode;
     footer?: React.ReactNode;
-  };
+    noWrapper?: boolean;
+    noContainer?: boolean;
+  }
+>;
 
-export function WidgetLayout({
-  noContainer,
-  children,
-  projectId,
-  header,
-  footer,
-  ...divProps
-}: WidgetLayoutProps): JSX.Element {
+export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
+  const { noContainer, children, projectId, header, footer } = props;
   return (
     <TelemetryProvider projectId={projectId}>
-      <div
-        {...divProps}
-        css={[
-          tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans`,
-          noContainer && tw`flex flex-col items-center`,
-        ]}
-        style={{
-          background: 'hsl(210, 10%, 98%)',
-        }}
-      >
+      <LayoutWrapper {...props}>
         {header}
         <AnimatePresence>
           <m.div
@@ -50,7 +37,26 @@ export function WidgetLayout({
           </m.div>
         </AnimatePresence>
         {footer}
-      </div>
+      </LayoutWrapper>
     </TelemetryProvider>
+  );
+}
+
+function LayoutWrapper({ noContainer, noWrapper, children }: WidgetLayoutProps): JSX.Element {
+  if (noWrapper) {
+    return <>{children}</>;
+  }
+  return (
+    <div
+      css={[
+        tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans`,
+        noContainer && tw`flex flex-col items-center`,
+      ]}
+      style={{
+        background: 'hsl(210, 10%, 98%)',
+      }}
+    >
+      {children}
+    </div>
   );
 }

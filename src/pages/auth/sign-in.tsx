@@ -14,6 +14,8 @@ export const getStaticProps: GetStaticProps<CommonPageProps> = () => {
       layoutProps: {
         noHeader: true,
         noFooter: true,
+        noContainer: true,
+        noWrapper: true,
       },
     },
   };
