@@ -34,10 +34,9 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       <Head>
         <title>Sign in</title>
       </Head>
-
       <div tw="flex flex-row h-full">
-        <div tw="flex-1 flex flex-col justify-center">
-          <div tw="py-7 px-10">
+        <div tw="flex-1 flex flex-col justify-center items-center">
+          <div tw="py-7 mx-20 w-full md:w-96">
             <Logo size="lg" noSpacing tw="block mb-20" />
             <div tw="space-y-2">
               <Heading as="h2" tw="font-black mt-5">
