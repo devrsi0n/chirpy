@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import DotEnv from 'dotenv';
+import 'intersection-observer';
 import 'whatwg-fetch';
 
 import { server } from './fixtures/server';

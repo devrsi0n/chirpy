@@ -7,6 +7,12 @@ mutation insertOneProject($teamId: uuid, $userId: Int, $name: String!, $domain: 
   }
 }
 
+mutation deleteProjectByPk($id: uuid = "") {
+  deleteProjectByPk(id: $id) {
+    id
+  }
+}
+
 mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
   updateProjectByPk(pk_columns: { id: $projectId }, _set: { theme: $theme }) {
     id

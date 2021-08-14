@@ -15,7 +15,7 @@ export default function Custom404(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <main tw="py-12 px-4 space-y-8">
+      <main tw="py-12 px-4 space-y-8 flex flex-col items-center">
         <div
           css={[
             tw`flex justify-center text-gray-400 dark:text-gray-500`,
@@ -36,9 +36,9 @@ export default function Custom404(): JSX.Element {
         </div>
         <Heading>Oops! Page not found</Heading>
         <Text>We might have encountered some issues...</Text>
-        <section>
+        <section tw="space-y-3">
           <Heading as="h5">What could have caused this?</Heading>
-          <List variant="unordered">
+          <List variant="unordered" tw="space-y-3">
             <ListItem markerStyle={listMakerStyle}>Something went wrong in our services.</ListItem>
             <ListItem markerStyle={listMakerStyle}>The page might be removed.</ListItem>
             <ListItem markerStyle={listMakerStyle}>You might typed the wrong URL.</ListItem>

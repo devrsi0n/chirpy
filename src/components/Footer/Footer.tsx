@@ -48,7 +48,7 @@ export function Footer(props: FooterProps): JSX.Element {
       css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 text-gray-500`}
     >
       <nav css={tw`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
-        <Link href="/about">About</Link>
+        <Link href="/docs/index">Docs</Link>
         <Link href="/blog">Blog</Link>
         <Link href="/pricing">Pricing</Link>
         <Link href="/terms-of-service">Terms</Link>

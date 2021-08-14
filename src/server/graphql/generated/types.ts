@@ -1,4 +1,3 @@
-import { JsonObject, JsonArray } from 'type-fest';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -10,7 +9,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  jsonb: JsonObject | JsonArray;
+  jsonb: any;
   timestamptz: string;
   uuid: string;
 };
@@ -3966,7 +3965,7 @@ export enum User_Constraint {
   /** unique or primary key constraint */
   PkA3ffb1c0c8416b9fc6f907b7433 = 'PK_a3ffb1c0c8416b9fc6f907b7433',
   /** unique or primary key constraint */
-  Uq_97672ac88f789774dd47f7c8be3 = 'UQ_97672ac88f789774dd47f7c8be3',
+  UsersEmailKey = 'users_email_key',
   /** unique or primary key constraint */
   UsersUsernameKey = 'users_username_key'
 }

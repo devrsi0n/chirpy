@@ -8,17 +8,7 @@ export type ThemeOfPageQueryVariables = Types.Exact<{
 }>;
 
 
-export type ThemeOfPageQuery = (
-  { __typename?: 'query_root' }
-  & { pageByPk?: Types.Maybe<(
-    { __typename?: 'Page' }
-    & Pick<Types.Page, 'id'>
-    & { project: (
-      { __typename?: 'Project' }
-      & Pick<Types.Project, 'id' | 'theme'>
-    ) }
-  )> }
-);
+export type ThemeOfPageQuery = { __typename?: 'query_root', pageByPk?: Types.Maybe<{ __typename?: 'Page', id: string, project: { __typename?: 'Project', id: string, theme?: Types.Maybe<any> } }> };
 
 
 export const ThemeOfPageDocument = gql`

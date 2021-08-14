@@ -8,8 +8,6 @@ generates:
   src/server/graphql/generated/types.ts:
     plugins:
       - typescript
-      - add:
-          content: "import { JsonObject, JsonArray } from 'type-fest';"
   src/server/graphql:
     preset: near-operation-file
     presetConfig:
@@ -28,7 +26,7 @@ config:
   # maybeValue: T | null | undefined
   # constEnums: true
   scalars:
-    jsonb: 'JsonObject | JsonArray'
+    jsonb: 'any'
     timestamptz: string
     uuid: string
 hooks:

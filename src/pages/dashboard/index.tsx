@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -23,7 +22,6 @@ type FormFields = {
 export default function Dashboard(): JSX.Element {
   const {
     data: { id },
-    isLogin,
   } = useCurrentUser();
 
   const [fetchUserProjects, { data }] = useUserDashboardProjectsLazyQuery();
@@ -74,19 +72,6 @@ export default function Dashboard(): JSX.Element {
     ),
   );
 
-  const router = useRouter();
-  const timeout = React.useRef<number>();
-  React.useEffect(() => {
-    if (!isLogin) {
-      timeout.current = window.setTimeout(() => {
-        router.push('/auth/sign-in');
-      }, 3000);
-    } else {
-      timeout.current && clearTimeout(timeout.current);
-    }
-    return () => clearTimeout(timeout.current);
-  }, [router, isLogin]);
-
   return (
     <>
       <Head>
@@ -95,7 +80,7 @@ export default function Dashboard(): JSX.Element {
       <div className="main-container">
         <section tw="py-10 space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
-            <Heading as="h1" tw="text-4xl text-gray-600">
+            <Heading as="h2" tw="text-3xl text-gray-600 font-bold">
               Dashboard
             </Heading>
             <Button onClick={handleCreateProject} variant="solid" color="primary">
@@ -106,7 +91,11 @@ export default function Dashboard(): JSX.Element {
             <div tw="flex flex-row">
               <div tw="space-y-6 flex-1">
                 {projects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
+                  <ProjectCard
+                    key={project.id}
+                    project={project}
+                    onDeletedProject={handleFetchProjects}
+                  />
                 ))}
               </div>
               <div tw="flex-1" />
@@ -118,7 +107,7 @@ export default function Dashboard(): JSX.Element {
           )}
         </section>
         <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-          <form tw="flex flex-col w-full">
+          <form tw="flex flex-col w-80">
             <TextField
               {...register('name', {
                 required: { value: true, message: 'Name is required' },
@@ -157,22 +146,21 @@ export default function Dashboard(): JSX.Element {
               placeholder="example.com"
               tw="w-full"
             />
-
-            <DialogFooter tw="space-x-3">
-              <Button variant="text" onClick={handleCloseDialog} tw="w-full sm:w-auto">
-                Cancel
-              </Button>
-              <Button
-                tw="w-full sm:w-auto"
-                disabled={hasError || loading}
-                variant="plain"
-                color="primary"
-                onClick={handleClickSubmit}
-              >
-                Submit
-              </Button>
-            </DialogFooter>
           </form>
+          <DialogFooter>
+            <Button variant="plain" onClick={handleCloseDialog} tw="w-full sm:w-auto">
+              Cancel
+            </Button>
+            <Button
+              tw="w-full sm:w-auto"
+              disabled={hasError || loading}
+              variant="plain"
+              color="primary"
+              onClick={handleClickSubmit}
+            >
+              Submit
+            </Button>
+          </DialogFooter>
         </Dialog>
       </div>
     </>
