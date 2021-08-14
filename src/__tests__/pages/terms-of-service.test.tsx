@@ -5,7 +5,7 @@ import { pageRender } from '../fixtures/page-render';
 
 describe('TermsOfService page', () => {
   beforeEach(async () => {
-    const { props } = await getStaticProps();
+    const { props } = (await getStaticProps({})) as any;
     pageRender(<TermsOfService {...props} />);
   });
 

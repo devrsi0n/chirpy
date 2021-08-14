@@ -11,13 +11,14 @@ export type InsertOneProjectMutationVariables = Types.Exact<{
 }>;
 
 
-export type InsertOneProjectMutation = (
-  { __typename?: 'mutation_root' }
-  & { insertOneProject?: Types.Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id' | 'name' | 'teamId' | 'userId'>
-  )> }
-);
+export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: Types.Maybe<{ __typename?: 'Project', id: string, name: string, teamId?: Types.Maybe<string>, userId?: Types.Maybe<number> }> };
+
+export type DeleteProjectByPkMutationVariables = Types.Exact<{
+  id?: Types.Maybe<Types.Scalars['uuid']>;
+}>;
+
+
+export type DeleteProjectByPkMutation = { __typename?: 'mutation_root', deleteProjectByPk?: Types.Maybe<{ __typename?: 'Project', id: string }> };
 
 export type UpdateThemeMutationVariables = Types.Exact<{
   projectId: Types.Scalars['uuid'];
@@ -25,13 +26,7 @@ export type UpdateThemeMutationVariables = Types.Exact<{
 }>;
 
 
-export type UpdateThemeMutation = (
-  { __typename?: 'mutation_root' }
-  & { updateProjectByPk?: Types.Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id'>
-  )> }
-);
+export type UpdateThemeMutation = { __typename?: 'mutation_root', updateProjectByPk?: Types.Maybe<{ __typename?: 'Project', id: string }> };
 
 
 export const InsertOneProjectDocument = gql`
@@ -75,6 +70,39 @@ export function useInsertOneProjectMutation(baseOptions?: Apollo.MutationHookOpt
 export type InsertOneProjectMutationHookResult = ReturnType<typeof useInsertOneProjectMutation>;
 export type InsertOneProjectMutationResult = Apollo.MutationResult<InsertOneProjectMutation>;
 export type InsertOneProjectMutationOptions = Apollo.BaseMutationOptions<InsertOneProjectMutation, InsertOneProjectMutationVariables>;
+export const DeleteProjectByPkDocument = gql`
+    mutation deleteProjectByPk($id: uuid = "") {
+  deleteProjectByPk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteProjectByPkMutationFn = Apollo.MutationFunction<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>;
+
+/**
+ * __useDeleteProjectByPkMutation__
+ *
+ * To run a mutation, you first call `useDeleteProjectByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteProjectByPkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteProjectByPkMutation, { data, loading, error }] = useDeleteProjectByPkMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteProjectByPkMutation(baseOptions?: Apollo.MutationHookOptions<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>(DeleteProjectByPkDocument, options);
+      }
+export type DeleteProjectByPkMutationHookResult = ReturnType<typeof useDeleteProjectByPkMutation>;
+export type DeleteProjectByPkMutationResult = Apollo.MutationResult<DeleteProjectByPkMutation>;
+export type DeleteProjectByPkMutationOptions = Apollo.BaseMutationOptions<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>;
 export const UpdateThemeDocument = gql`
     mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
   updateProjectByPk(pk_columns: {id: $projectId}, _set: {theme: $theme}) {

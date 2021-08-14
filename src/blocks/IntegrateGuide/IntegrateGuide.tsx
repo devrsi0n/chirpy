@@ -27,6 +27,7 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
         Integrate
       </Button>
       <Dialog
+        showDismissButton
         show={showDialog}
         title={
           <div>
@@ -39,24 +40,26 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
           </div>
         }
         onClose={() => setShowDialog(false)}
-        styles={{ content: tw`max-w-2xl` }}
+        styles={{ content: tw`max-w-2xl sm:(px-10 py-6)` }}
       >
-        <Heading as="h3" tw="mb-3">
-          Usage on any website
-        </Heading>
-        <div tw="space-y-2">
-          <Text>
-            To embed the comment widget on your website, first add the script tag with your project
-            id to the HTML:
-          </Text>
-          <Code>
-            {`<script defer src="https://totalk.dev/bootstrap/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
-          </Code>
-          <Text>
-            Then, add the data-{appNameLowerCase}-comment attribute to any HTML element that should
-            render the widget:
-          </Text>
-          <Code>{`<div data-${appNameLowerCase}-comment>...</div>`}</Code>
+        <div tw="">
+          <Heading as="h3" tw="mb-3">
+            Usage on any website
+          </Heading>
+          <div tw="space-y-2">
+            <Text>
+              To embed the comment widget on your website, first add the script tag with your
+              project id to the HTML:
+            </Text>
+            <Code>
+              {`<script defer src="https://totalk.dev/bootstrap/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
+            </Code>
+            <Text>
+              Then, add the data-{appNameLowerCase}-comment attribute to any HTML element that
+              should render the widget:
+            </Text>
+            <Code>{`<div data-${appNameLowerCase}-comment>...</div>`}</Code>
+          </div>
         </div>
       </Dialog>
     </div>

@@ -3,117 +3,21 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
-export type CommentContentFragment = (
-  { __typename?: 'Comment' }
-  & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'name' | 'avatar'>
-  ), likes: Array<(
-    { __typename?: 'Like' }
-    & Pick<Types.Like, 'id' | 'userId'>
-  )> }
-);
+export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> };
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentTreeSubscription = (
-  { __typename?: 'subscription_root' }
-  & { comments: Array<(
-    { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-    & { replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { replies: Array<(
-        { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-        & { user: (
-          { __typename?: 'User' }
-          & Pick<Types.User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Types.Like, 'id' | 'userId'>
-        )> }
-      )>, user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )> }
-    )>, user: (
-      { __typename?: 'User' }
-      & Pick<Types.User, 'id' | 'name' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Types.Like, 'id' | 'userId'>
-    )> }
-  )> }
-);
+export type CommentTreeSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
 
 export type CommentDetailsSubscriptionVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentDetailsSubscription = (
-  { __typename?: 'subscription_root' }
-  & { commentByPk?: Types.Maybe<(
-    { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-    & { replies: Array<(
-      { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )> }
-    )>, parent?: Types.Maybe<(
-      { __typename?: 'Comment' }
-      & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-      & { parent?: Types.Maybe<(
-        { __typename?: 'Comment' }
-        & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-        & { parent?: Types.Maybe<(
-          { __typename?: 'Comment' }
-          & Pick<Types.Comment, 'id' | 'content' | 'createdAt' | 'parentId' | 'pageId' | 'depth'>
-          & { user: (
-            { __typename?: 'User' }
-            & Pick<Types.User, 'id' | 'name' | 'avatar'>
-          ), likes: Array<(
-            { __typename?: 'Like' }
-            & Pick<Types.Like, 'id' | 'userId'>
-          )> }
-        )>, user: (
-          { __typename?: 'User' }
-          & Pick<Types.User, 'id' | 'name' | 'avatar'>
-        ), likes: Array<(
-          { __typename?: 'Like' }
-          & Pick<Types.Like, 'id' | 'userId'>
-        )> }
-      )>, user: (
-        { __typename?: 'User' }
-        & Pick<Types.User, 'id' | 'name' | 'avatar'>
-      ), likes: Array<(
-        { __typename?: 'Like' }
-        & Pick<Types.Like, 'id' | 'userId'>
-      )> }
-    )>, user: (
-      { __typename?: 'User' }
-      & Pick<Types.User, 'id' | 'name' | 'avatar'>
-    ), likes: Array<(
-      { __typename?: 'Like' }
-      & Pick<Types.Like, 'id' | 'userId'>
-    )> }
-  )> }
-);
+export type CommentDetailsSubscription = { __typename?: 'subscription_root', commentByPk?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
 
 export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
@@ -123,13 +27,7 @@ export type InsertOneCommentMutationVariables = Types.Exact<{
 }>;
 
 
-export type InsertOneCommentMutation = (
-  { __typename?: 'mutation_root' }
-  & { insertOneComment?: Types.Maybe<(
-    { __typename?: 'Comment' }
-    & Pick<Types.Comment, 'id'>
-  )> }
-);
+export type InsertOneCommentMutation = { __typename?: 'mutation_root', insertOneComment?: Types.Maybe<{ __typename?: 'Comment', id: string }> };
 
 export const CommentContentFragmentDoc = gql`
     fragment commentContent on Comment {

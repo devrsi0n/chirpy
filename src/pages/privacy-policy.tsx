@@ -6,7 +6,6 @@ import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from '$/types/page.type';
 
 export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
@@ -21,7 +20,7 @@ export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX
   );
 }
 
-export const getStaticProps: GetStaticProps<CommonPageProps & MDXProps> = async () => {
+export const getStaticProps: GetStaticProps<MDXProps> = async () => {
   const privacyPolicyProps = await getMDXPropsBySlug('privacy-policy');
   return {
     props: {

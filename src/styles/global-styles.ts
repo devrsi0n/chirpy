@@ -13,6 +13,7 @@ export const appGlobalStyles = css`
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
   }
 
   * {
