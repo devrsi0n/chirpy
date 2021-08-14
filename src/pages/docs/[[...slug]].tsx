@@ -65,10 +65,6 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({ par
     props: {
       ...mdxProps,
       directories,
-      layoutProps: {
-        noContainer: true,
-        noFooter: true,
-      },
     },
     revalidate: 3600,
   };

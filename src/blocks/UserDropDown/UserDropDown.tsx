@@ -1,7 +1,7 @@
-import { User } from '@geist-ui/react-icons';
 import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
 import Monitor from '@geist-ui/react-icons/monitor';
+import User from '@geist-ui/react-icons/user';
 import { signOut } from 'next-auth/client';
 import * as React from 'react';
 import tw from 'twin.macro';
@@ -30,7 +30,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
     <>
       <DropDownMenu
         classes={{
-          button: tw`transform translate-x-3`,
+          button: tw`transform translate-x-2`,
         }}
         content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}
       >

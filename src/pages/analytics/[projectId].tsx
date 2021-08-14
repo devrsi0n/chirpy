@@ -24,7 +24,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
       <Head>
         <title>Analytics</title>
       </Head>
-      <div>
+      <div tw="py-10" className="main-container">
         <div tw="flex flex-row justify-between pb-4">
           <div tw="flex flex-row items-center space-x-2">
             <Link variant="plain" href={`https://${props.project?.domain}`}>

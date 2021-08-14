@@ -3,7 +3,6 @@ import ItalicIcon from '@geist-ui/react-icons/italic';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import * as React from 'react';
 import { useSlate } from 'slate-react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from '$/components/Button';

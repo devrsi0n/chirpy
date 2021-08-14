@@ -26,7 +26,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <>
+    <div tw="py-12">
       <Head>
         <title>Welcome</title>
       </Head>
@@ -43,7 +43,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
           <ConfirmUserFields />
         </section>
       )}
-    </>
+    </div>
   );
 }
 
