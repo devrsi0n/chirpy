@@ -1,12 +1,10 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Text } from '$/components/Text/Text';
-import { CommonPageProps } from '$/types/page.type';
 
 function Home(): JSX.Element {
   return (
@@ -14,7 +12,7 @@ function Home(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <main tw="py-12 space-y-8">
+      <main tw="min-h-full flex flex-col items-center py-12 space-y-8">
         <h1 tw="font-black text-center text-gray-800 mt-1 w-full max-w-2xl text-4xl leading-snug">
           <span
             tw="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary-500"
@@ -45,16 +43,6 @@ function Home(): JSX.Element {
 }
 
 export default Home;
-
-export const getStaticProps: GetStaticProps<CommonPageProps> = () => {
-  return {
-    props: {
-      layoutProps: {
-        noContainer: true,
-      },
-    },
-  };
-};
 
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',

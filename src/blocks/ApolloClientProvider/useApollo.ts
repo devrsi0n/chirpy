@@ -77,9 +77,7 @@ const createApolloClient = (hasuraToken: string) => {
     if (!ssrMode && isENVProd) {
       persistCache({
         cache,
-        storage: new LocalForageWrapper(localForage) as PersistentStorage<
-          PersistedData<NormalizedCacheObject>
-        >,
+        storage: new LocalForageWrapper(localForage) as any,
         debug: isENVDev,
       });
     }

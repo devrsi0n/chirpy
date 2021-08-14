@@ -92,8 +92,8 @@ export default function Dashboard(): JSX.Element {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <div>
-        <section tw="space-y-10">
+      <div className="main-container">
+        <section tw="py-10 space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
             <Heading as="h1" tw="text-4xl text-gray-600">
               Dashboard

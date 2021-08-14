@@ -23,6 +23,7 @@ module.exports = {
           800: 'var(--tw-colors-primary-800)',
           900: 'var(--tw-colors-primary-900)',
         },
+        bg: 'hsl(210, 10%, 98%)'
       },
       fill: colors,
       screens: {

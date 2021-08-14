@@ -1,6 +1,6 @@
-import { Send } from '@geist-ui/react-icons';
 import Check from '@geist-ui/react-icons/check';
 import Loader from '@geist-ui/react-icons/loader';
+import Send from '@geist-ui/react-icons/send';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';

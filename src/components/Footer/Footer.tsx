@@ -1,4 +1,4 @@
-import { Icon } from '@geist-ui/react-icons';
+import type { Icon } from '@geist-ui/react-icons';
 import Moon from '@geist-ui/react-icons/moon';
 import Settings from '@geist-ui/react-icons/settings';
 import Sun from '@geist-ui/react-icons/sun';

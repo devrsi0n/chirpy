@@ -7,6 +7,8 @@ import 'twin.macro';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
 import { useHasMounted } from '$/hooks/useHasMounted';
+import { useScript } from '$/hooks/useScript';
+import { APP_NAME_LOWERCASE } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { CommonPageProps } from '$/types/page.type';
@@ -22,6 +24,10 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
+
+  useScript(`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment.js`, {
+    [`${APP_NAME_LOWERCASE}Pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT,
+  });
 
   return (
     <>
@@ -40,6 +46,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
             </article>
           </section>
+          <div data-totalk-comment="true" tw="mt-16"></div>
         </div>
       </>
     </>
@@ -69,7 +76,7 @@ export const getStaticProps: GetStaticProps<BlogProps & CommonPageProps, PathPar
   if (!params?.slug) {
     return { notFound: true };
   }
-  console.log({ slug: params.slug });
+  // console.log({ slug: params.slug });
   const [mdxProps, directories] = await Promise.all([
     getMDXPropsBySlug([CONTAINER_FOLDER, ...params.slug].join('/')),
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
@@ -79,10 +86,6 @@ export const getStaticProps: GetStaticProps<BlogProps & CommonPageProps, PathPar
     props: {
       ...mdxProps,
       directories,
-      layoutProps: {
-        noContainer: true,
-        noFooter: true,
-      },
     },
     revalidate: 3600,
   };

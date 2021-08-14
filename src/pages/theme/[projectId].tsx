@@ -66,58 +66,60 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   };
 
   return (
-    <div tw="flex flex-row px-2">
-      <aside tw="flex-1 border-r pr-4 space-y-8">
-        <div tw="space-y-4">
-          <BoldHeading>Theme Editor</BoldHeading>
-          <SubText>
-            Custom themes is a very simple thing in {process.env.NEXT_PUBLIC_APP_NAME}, click change
-            and save theme.
-          </SubText>
-        </div>
-        <div tw="space-y-4">
-          <BoldHeading>Colors</BoldHeading>
-          <Text>Primary</Text>
-          <div tw="flex flex-row items-center space-x-2 transform -translate-x-2">
-            <Popover
-              buttonAs={IconButton}
-              content={
-                <ul tw="flex flex-row">
-                  {colorOptions.map((color) => (
-                    <li key={color[500]}>
-                      <IconButton onClick={handClickColorFunction(color)}>
-                        <span
-                          tw="inline-block w-6 h-6 rounded-full"
-                          style={{ background: color[500] }}
-                        />
-                      </IconButton>
-                    </li>
-                  ))}
-                </ul>
-              }
-            >
-              <span tw="inline-block w-6 h-6 rounded-full bg-primary-500" />
-            </Popover>
-            <Text tw="px-4 py-2 border border-primary-500 rounded">
-              {theme.colors.primary[500]}
-            </Text>
+    <div className="main-container" tw="py-10 px-2">
+      <div tw="flex flex-row px-2">
+        <aside tw="flex-1 border-r pr-4 space-y-8">
+          <div tw="space-y-4">
+            <BoldHeading>Theme Editor</BoldHeading>
+            <SubText>
+              Custom themes is a very simple thing in {process.env.NEXT_PUBLIC_APP_NAME}, click
+              change and save theme.
+            </SubText>
           </div>
-        </div>
-      </aside>
-      <section tw="flex-2 pl-6">
-        <div tw="space-y-5 mb-4">
-          <BoldHeading as="h4">Preview</BoldHeading>
-          <SubText>
-            {`Here's a preview of your changes to the Theme. When you set the changes, the entire widget will change with the theme.`}
-          </SubText>
-        </div>
-        <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
-        <CommentWidget
-          comments={comments as any}
-          onSubmitReply={() => Promise.resolve()}
-          onClickLikeAction={() => Promise.resolve()}
-        />
-      </section>
+          <div tw="space-y-4">
+            <BoldHeading>Colors</BoldHeading>
+            <Text>Primary</Text>
+            <div tw="flex flex-row items-center space-x-2 transform -translate-x-2">
+              <Popover
+                buttonAs={IconButton}
+                content={
+                  <ul tw="flex flex-row">
+                    {colorOptions.map((color) => (
+                      <li key={color[500]}>
+                        <IconButton onClick={handClickColorFunction(color)}>
+                          <span
+                            tw="inline-block w-6 h-6 rounded-full"
+                            style={{ background: color[500] }}
+                          />
+                        </IconButton>
+                      </li>
+                    ))}
+                  </ul>
+                }
+              >
+                <span tw="inline-block w-6 h-6 rounded-full bg-primary-500" />
+              </Popover>
+              <Text tw="px-4 py-2 border border-primary-500 rounded">
+                {theme.colors.primary[500]}
+              </Text>
+            </div>
+          </div>
+        </aside>
+        <section tw="flex-2 pl-6">
+          <div tw="space-y-5 mb-4">
+            <BoldHeading as="h4">Preview</BoldHeading>
+            <SubText>
+              {`Here's a preview of your changes to the Theme. When you set the changes, the entire widget will change with the theme.`}
+            </SubText>
+          </div>
+          <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
+          <CommentWidget
+            comments={comments as any}
+            onSubmitReply={() => Promise.resolve()}
+            onClickLikeAction={() => Promise.resolve()}
+          />
+        </section>
+      </div>
     </div>
   );
 }

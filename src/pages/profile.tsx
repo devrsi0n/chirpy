@@ -201,7 +201,9 @@ function ProfileContainer({
       <Head>
         <title>Profile</title>
       </Head>
-      <main className={className}>{children}</main>
+      <main tw="py-10" className={'main-container ' + className}>
+        {children}
+      </main>
     </>
   );
 }
