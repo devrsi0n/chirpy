@@ -1,4 +1,5 @@
 import { ClassNames } from '@emotion/react';
+import AlertTriangle from '@geist-ui/react-icons/alertTriangle';
 import Dismiss from '@geist-ui/react-icons/x';
 import { Transition, Dialog as HeadlessDialog } from '@headlessui/react';
 import * as React from 'react';
@@ -15,10 +16,32 @@ export type DialogProps = React.PropsWithChildren<{
     root?: TwStyle;
     content?: TwStyle;
   };
+  /**
+   * @default false
+   */
+  showDismissButton?: boolean;
   onClose: (value: boolean) => void;
+  type?: 'Alert';
 }>;
 
-export function Dialog({ title, children, show, onClose, styles = {} }: DialogProps): JSX.Element {
+export function Dialog({
+  title,
+  children,
+  show,
+  onClose,
+  styles = {},
+  showDismissButton,
+  type,
+}: DialogProps): JSX.Element {
+  let footer: React.ReactElement;
+  const otherChildren: React.ReactElement[] = [];
+  React.Children.forEach(children, (child) => {
+    if (React.isValidElement(child) && (child as any).type.displayName === 'DialogFooter') {
+      footer = child as React.ReactElement;
+    } else {
+      otherChildren.push(child as React.ReactElement);
+    }
+  });
   return (
     <Transition appear show={show} as={React.Fragment}>
       <HeadlessDialog
@@ -28,7 +51,7 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
         onClose={onClose}
         static
       >
-        <div tw="min-h-screen px-4 text-center">
+        <div tw="min-h-full px-4 flex justify-center items-center">
           <ClassNames>
             {({ css }) => (
               <>
@@ -44,10 +67,6 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
                 >
                   <HeadlessDialog.Overlay css={[tw`fixed inset-0`, bluredOverlay]} />
                 </Transition.Child>
-                {/* This element is to trick the browser into centering the modal contents. */}
-                <span tw="inline-block h-screen align-middle" aria-hidden="true">
-                  &#8203;
-                </span>
                 <Transition.Child
                   as={React.Fragment}
                   enter={css(tw`ease-out duration-300`)}
@@ -57,26 +76,46 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
                   leaveFrom={css(tw`opacity-100 scale-100`)}
                   leaveTo={css(tw`opacity-0 scale-95`)}
                 >
-                  <div
-                    tw="inline-block w-full max-w-md px-10 py-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-xl relative"
-                    css={[styles.content]}
-                  >
-                    <IconButton
-                      size="sm"
-                      tw="absolute right-1 top-1"
-                      onClick={() => onClose(true)}
-                      aria-label="Dismiss"
+                  <div tw="inline-block transition-all transform shadow-md relative">
+                    <div
+                      css={[
+                        tw`max-w-lg flex flex-row px-4 pt-5 pb-4 sm:(p-6 pb-4) space-x-4 bg-white`,
+                        !footer ? tw`rounded-xl` : tw`rounded-t-xl`,
+                        styles.content,
+                      ]}
                     >
-                      <Dismiss />
-                    </IconButton>
-                    <div tw="flex flex-row justify-between items-start">
-                      <HeadlessDialog.Title as="h2" tw="text-2xl font-bold leading-8 text-gray-900">
-                        {title}
-                      </HeadlessDialog.Title>
+                      {type === 'Alert' && (
+                        <div tw="bg-red-100 h-full rounded-full">
+                          <div tw="p-2 text-red-600">
+                            <AlertTriangle size={24} />
+                          </div>
+                        </div>
+                      )}
+                      <div tw=" overflow-hidden text-left align-middle">
+                        {showDismissButton && (
+                          <IconButton
+                            size="sm"
+                            tw="absolute right-1 top-1"
+                            onClick={() => onClose(true)}
+                            aria-label="Dismiss"
+                          >
+                            <Dismiss />
+                          </IconButton>
+                        )}
+                        <div tw="flex flex-row justify-between items-start">
+                          <HeadlessDialog.Title
+                            as="h2"
+                            tw="text-2xl font-medium leading-8 text-gray-900"
+                          >
+                            {title}
+                          </HeadlessDialog.Title>
+                        </div>
+                        <div tw="mt-4">
+                          <div tw="text-sm text-gray-500">{otherChildren}</div>
+                        </div>
+                      </div>
                     </div>
-                    <div tw="mt-4">
-                      <div tw="text-sm text-gray-500">{children}</div>
-                    </div>
+                    {footer}
                   </div>
                 </Transition.Child>
               </>
@@ -90,12 +129,20 @@ export function Dialog({ title, children, show, onClose, styles = {} }: DialogPr
 
 type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>>;
 
-export function DialogFooter({ className, ...restProps }: IDialogFooterProps): JSX.Element {
+export function DialogFooter({
+  className,
+  children,
+  ...restProps
+}: IDialogFooterProps): JSX.Element {
   return (
     <div
       {...restProps}
-      tw="space-y-2 space-x-0 sm:(space-y-0 space-x-2 flex flex-row justify-end) mt-8"
+      tw="bg-gray-50 px-4 py-3 space-y-2 space-x-0 sm:(px-6 space-y-0 space-x-4 flex flex-row justify-end) rounded-b-xl"
       className={className}
-    />
+    >
+      {children}
+    </div>
   );
 }
+
+DialogFooter.displayName = 'DialogFooter';

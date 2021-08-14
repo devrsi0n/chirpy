@@ -9,26 +9,14 @@ export type InsertOneLikeMutationVariables = Types.Exact<{
 }>;
 
 
-export type InsertOneLikeMutation = (
-  { __typename?: 'mutation_root' }
-  & { insertOneLike?: Types.Maybe<(
-    { __typename?: 'Like' }
-    & Pick<Types.Like, 'id'>
-  )> }
-);
+export type InsertOneLikeMutation = { __typename?: 'mutation_root', insertOneLike?: Types.Maybe<{ __typename?: 'Like', id: string }> };
 
 export type DeleteLikeByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type DeleteLikeByPkMutation = (
-  { __typename?: 'mutation_root' }
-  & { deleteLikeByPk?: Types.Maybe<(
-    { __typename?: 'Like' }
-    & Pick<Types.Like, 'id'>
-  )> }
-);
+export type DeleteLikeByPkMutation = { __typename?: 'mutation_root', deleteLikeByPk?: Types.Maybe<{ __typename?: 'Like', id: string }> };
 
 
 export const InsertOneLikeDocument = gql`

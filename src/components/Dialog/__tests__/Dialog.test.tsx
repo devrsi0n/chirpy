@@ -1,6 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import 'intersection-observer';
 
 import { Dialog } from '../';
 
@@ -39,7 +38,7 @@ describe('Dialog', () => {
 
 function renderComponent() {
   render(
-    <Dialog title={title} show={mockShouldShowDialog()} onClose={mockHandleClose}>
+    <Dialog title={title} show={mockShouldShowDialog()} onClose={mockHandleClose} showDismissButton>
       {content}
     </Dialog>,
   );

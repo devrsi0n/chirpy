@@ -8,13 +8,7 @@ export type CurrentUserQueryVariables = Types.Exact<{
 }>;
 
 
-export type CurrentUserQuery = (
-  { __typename?: 'query_root' }
-  & { userByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'email' | 'username' | 'name' | 'avatar' | 'bio' | 'website' | 'twitterUserName'>
-  )> }
-);
+export type CurrentUserQuery = { __typename?: 'query_root', userByPk?: Types.Maybe<{ __typename?: 'User', id: number, email?: Types.Maybe<string>, username?: Types.Maybe<string>, name?: Types.Maybe<string>, avatar?: Types.Maybe<string>, bio?: Types.Maybe<string>, website?: Types.Maybe<string>, twitterUserName?: Types.Maybe<string> }> };
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['Int'];
@@ -25,13 +19,7 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
 }>;
 
 
-export type UpdateUserByPkMutation = (
-  { __typename?: 'mutation_root' }
-  & { updateUserByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id'>
-  )> }
-);
+export type UpdateUserByPkMutation = { __typename?: 'mutation_root', updateUserByPk?: Types.Maybe<{ __typename?: 'User', id: number }> };
 
 export type UpdateUserFieldsMutationVariables = Types.Exact<{
   id: Types.Scalars['Int'];
@@ -41,13 +29,7 @@ export type UpdateUserFieldsMutationVariables = Types.Exact<{
 }>;
 
 
-export type UpdateUserFieldsMutation = (
-  { __typename?: 'mutation_root' }
-  & { updateUserByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id'>
-  )> }
-);
+export type UpdateUserFieldsMutation = { __typename?: 'mutation_root', updateUserByPk?: Types.Maybe<{ __typename?: 'User', id: number }> };
 
 export type UserDashboardProjectsQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
@@ -57,45 +39,7 @@ export type UserDashboardProjectsQueryVariables = Types.Exact<{
 }>;
 
 
-export type UserDashboardProjectsQuery = (
-  { __typename?: 'query_root' }
-  & { userByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id'>
-    & { projects: Array<(
-      { __typename?: 'Project' }
-      & Pick<Types.Project, 'id' | 'name' | 'createdAt'>
-      & { pages: Array<(
-        { __typename?: 'Page' }
-        & Pick<Types.Page, 'id' | 'title' | 'url'>
-      )>, sessionsYesterday: Array<(
-        { __typename?: 'AnonymousSession' }
-        & { events_aggregate: (
-          { __typename?: 'Event_aggregate' }
-          & { aggregate?: Types.Maybe<(
-            { __typename?: 'Event_aggregate_fields' }
-            & Pick<Types.Event_Aggregate_Fields, 'count'>
-          )>, nodes: Array<(
-            { __typename?: 'Event' }
-            & Pick<Types.Event, 'created_at'>
-          )> }
-        ) }
-      )>, sessionsTwoDaysAgo: Array<(
-        { __typename?: 'AnonymousSession' }
-        & { events_aggregate: (
-          { __typename?: 'Event_aggregate' }
-          & { aggregate?: Types.Maybe<(
-            { __typename?: 'Event_aggregate_fields' }
-            & Pick<Types.Event_Aggregate_Fields, 'count'>
-          )>, nodes: Array<(
-            { __typename?: 'Event' }
-            & Pick<Types.Event, 'created_at'>
-          )> }
-        ) }
-      )> }
-    )> }
-  )> }
-);
+export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: Types.Maybe<{ __typename?: 'User', id: number, projects: Array<{ __typename?: 'Project', id: string, name: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title: string, url: string }>, sessionsYesterday: Array<{ __typename?: 'AnonymousSession', events_aggregate: { __typename?: 'Event_aggregate', aggregate?: Types.Maybe<{ __typename?: 'Event_aggregate_fields', count: number }>, nodes: Array<{ __typename?: 'Event', created_at: string }> } }>, sessionsTwoDaysAgo: Array<{ __typename?: 'AnonymousSession', events_aggregate: { __typename?: 'Event_aggregate', aggregate?: Types.Maybe<{ __typename?: 'Event_aggregate_fields', count: number }>, nodes: Array<{ __typename?: 'Event', created_at: string }> } }> }> }> };
 
 
 export const CurrentUserDocument = gql`

@@ -42,11 +42,11 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
               <ApolloClientProvider>
                 <CurrentUserProvider>
                   <ToastProvider>
-                    <AuthWrapper>
-                      <AppLayout {...pageProps}>
+                    <AppLayout {...pageProps}>
+                      <AuthWrapper>
                         <Component {...pageProps} />
-                      </AppLayout>
-                    </AuthWrapper>
+                      </AuthWrapper>
+                    </AppLayout>
                   </ToastProvider>
                 </CurrentUserProvider>
               </ApolloClientProvider>

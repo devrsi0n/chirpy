@@ -4,39 +4,21 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 export type AllProjectsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type AllProjectsQuery = (
-  { __typename?: 'query_root' }
-  & { projects: Array<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id'>
-  )> }
-);
+export type AllProjectsQuery = { __typename?: 'query_root', projects: Array<{ __typename?: 'Project', id: string }> };
 
 export type ThemeProjectByPkQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type ThemeProjectByPkQuery = (
-  { __typename?: 'query_root' }
-  & { projectByPk?: Types.Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id' | 'name' | 'theme'>
-  )> }
-);
+export type ThemeProjectByPkQuery = { __typename?: 'query_root', projectByPk?: Types.Maybe<{ __typename?: 'Project', id: string, name: string, theme?: Types.Maybe<any> }> };
 
 export type ProjectByPkQueryVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type ProjectByPkQuery = (
-  { __typename?: 'query_root' }
-  & { projectByPk?: Types.Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id'>
-  )> }
-);
+export type ProjectByPkQuery = { __typename?: 'query_root', projectByPk?: Types.Maybe<{ __typename?: 'Project', id: string }> };
 
 export type ProjectAnalyticsQueryVariables = Types.Exact<{
   projectId: Types.Scalars['uuid'];
@@ -46,26 +28,7 @@ export type ProjectAnalyticsQueryVariables = Types.Exact<{
 }>;
 
 
-export type ProjectAnalyticsQuery = (
-  { __typename?: 'query_root' }
-  & { projectByPk?: Types.Maybe<(
-    { __typename?: 'Project' }
-    & Pick<Types.Project, 'id' | 'name' | 'domain'>
-    & { sessionsYesterday: Array<(
-      { __typename?: 'AnonymousSession' }
-      & { events: Array<(
-        { __typename?: 'Event' }
-        & Pick<Types.Event, 'created_at'>
-      )> }
-    )>, sessionsTwoDaysAgo: Array<(
-      { __typename?: 'AnonymousSession' }
-      & { events: Array<(
-        { __typename?: 'Event' }
-        & Pick<Types.Event, 'created_at'>
-      )> }
-    )> }
-  )> }
-);
+export type ProjectAnalyticsQuery = { __typename?: 'query_root', projectByPk?: Types.Maybe<{ __typename?: 'Project', id: string, name: string, domain: string, sessionsYesterday: Array<{ __typename?: 'AnonymousSession', events: Array<{ __typename?: 'Event', created_at: string }> }>, sessionsTwoDaysAgo: Array<{ __typename?: 'AnonymousSession', events: Array<{ __typename?: 'Event', created_at: string }> }> }> };
 
 
 export const AllProjectsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allProjects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"projects"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AllProjectsQuery, AllProjectsQueryVariables>;

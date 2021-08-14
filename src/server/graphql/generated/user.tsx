@@ -9,50 +9,26 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
 }>;
 
 
-export type UpdateUserByPkMutation = (
-  { __typename?: 'mutation_root' }
-  & { updateUserByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id'>
-  )> }
-);
+export type UpdateUserByPkMutation = { __typename?: 'mutation_root', updateUserByPk?: Types.Maybe<{ __typename?: 'User', id: number }> };
 
 export type UserByPkQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
 }>;
 
 
-export type UserByPkQuery = (
-  { __typename?: 'query_root' }
-  & { userByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id' | 'email' | 'username' | 'type' | 'avatar' | 'name' | 'updatedAt' | 'createdAt'>
-  )> }
-);
+export type UserByPkQuery = { __typename?: 'query_root', userByPk?: Types.Maybe<{ __typename?: 'User', id: number, email?: Types.Maybe<string>, username?: Types.Maybe<string>, type?: Types.Maybe<Types.UserType_Enum>, avatar?: Types.Maybe<string>, name?: Types.Maybe<string>, updatedAt: string, createdAt: string }> };
 
 export type AllUsersQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type AllUsersQuery = (
-  { __typename?: 'query_root' }
-  & { users: Array<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'username'>
-  )> }
-);
+export type AllUsersQuery = { __typename?: 'query_root', users: Array<{ __typename?: 'User', username?: Types.Maybe<string> }> };
 
 export type DeleteFacebookUserMutationVariables = Types.Exact<{
   id: Types.Scalars['Int'];
 }>;
 
 
-export type DeleteFacebookUserMutation = (
-  { __typename?: 'mutation_root' }
-  & { deleteUserByPk?: Types.Maybe<(
-    { __typename?: 'User' }
-    & Pick<Types.User, 'id'>
-  )> }
-);
+export type DeleteFacebookUserMutation = { __typename?: 'mutation_root', deleteUserByPk?: Types.Maybe<{ __typename?: 'User', id: number }> };
 
 
 export const UpdateUserByPkDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateUserByPk"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"bio"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"website"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"","block":false}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"twitterUserName"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}},"defaultValue":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateUserByPk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"bio"},"value":{"kind":"Variable","name":{"kind":"Name","value":"bio"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"website"},"value":{"kind":"Variable","name":{"kind":"Name","value":"website"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"twitterUserName"},"value":{"kind":"Variable","name":{"kind":"Name","value":"twitterUserName"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<UpdateUserByPkMutation, UpdateUserByPkMutationVariables>;
