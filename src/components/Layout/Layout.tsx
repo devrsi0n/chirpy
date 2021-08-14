@@ -17,6 +17,7 @@ export function Layout({ noHeader, noFooter, children, ...restProps }: LayoutPro
       header={!noHeader && <Header />}
       footer={!noFooter && <Footer tw="mt-auto" />}
       projectId={process.env.NEXT_PUBLIC_COMMENT_PROJECT}
+      tw="bg-bg"
     >
       {children}
     </WidgetLayout>

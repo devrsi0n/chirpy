@@ -10,16 +10,14 @@ import { CommonPageProps } from '$/types/page.type';
 
 export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <>
-      <section>
-        <Head>
-          <title>{frontMatter.title}</title>
-        </Head>
-        <article tw="prose lg:prose-xl py-16">
-          <MDXRemote {...mdxSource} components={MDXComponents} />
-        </article>
-      </section>
-    </>
+    <section tw="py-10">
+      <Head>
+        <title>{frontMatter.title}</title>
+      </Head>
+      <article tw="mx-auto prose lg:prose-xl py-16">
+        <MDXRemote {...mdxSource} components={MDXComponents} />
+      </article>
+    </section>
   );
 }
 
@@ -28,9 +26,6 @@ export const getStaticProps: GetStaticProps<CommonPageProps & MDXProps> = async 
   return {
     props: {
       ...privacyPolicyProps,
-      layoutProps: {
-        noContainer: true,
-      },
     },
   };
 };

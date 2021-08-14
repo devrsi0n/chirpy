@@ -26,7 +26,7 @@ export default function Redirecting(): JSX.Element {
       <Head>
         <title>Redirecting</title>
       </Head>
-      <section>
+      <section tw="mx-auto">
         <Text>Redirecting...</Text>
       </section>
     </>

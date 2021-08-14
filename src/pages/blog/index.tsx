@@ -49,10 +49,6 @@ export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
   return {
     props: {
       directories,
-      layoutProps: {
-        noContainer: true,
-        noFooter: true,
-      },
     },
     revalidate: 3600,
   };

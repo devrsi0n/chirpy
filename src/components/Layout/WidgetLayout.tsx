@@ -8,13 +8,12 @@ export type WidgetLayoutProps = React.PropsWithChildren<
   Pick<TelemetryProviderProps, 'projectId'> & {
     header?: React.ReactNode;
     footer?: React.ReactNode;
-    noWrapper?: boolean;
-    noContainer?: boolean;
+    className?: string;
   }
 >;
 
 export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
-  const { noContainer, children, projectId, header, footer } = props;
+  const { children, projectId, header, footer } = props;
   return (
     <TelemetryProvider projectId={projectId}>
       <LayoutWrapper {...props}>
@@ -27,13 +26,7 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {noContainer ? (
-              children
-            ) : (
-              <main tw="py-10 min-h-full" className="main-container">
-                {children}
-              </main>
-            )}
+            {children}
           </m.div>
         </AnimatePresence>
         {footer}
@@ -42,19 +35,11 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
   );
 }
 
-function LayoutWrapper({ noContainer, noWrapper, children }: WidgetLayoutProps): JSX.Element {
-  if (noWrapper) {
-    return <>{children}</>;
-  }
+function LayoutWrapper({ children, className }: WidgetLayoutProps): JSX.Element {
   return (
     <div
-      css={[
-        tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans`,
-        noContainer && tw`flex flex-col items-center`,
-      ]}
-      style={{
-        background: 'hsl(210, 10%, 98%)',
-      }}
+      css={[tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans px-2`]}
+      className={className}
     >
       {children}
     </div>
