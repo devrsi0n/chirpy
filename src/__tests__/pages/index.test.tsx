@@ -15,8 +15,9 @@ describe('Index page', () => {
 
   it('should render the hero text and call to actions', () => {
     expect(screen.queryByText(strings.heroTitle)).toBeInTheDocument();
-    // TODO: expect some click actions
-    const mainCallToAction = screen.getByText(strings.callToAction.main);
-    expect(mainCallToAction).toBeInTheDocument();
+  });
+
+  it('should render the pricing', () => {
+    expect(screen.getByText('Pricing Plans')).toBeInTheDocument();
   });
 });

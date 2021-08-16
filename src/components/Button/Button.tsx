@@ -130,9 +130,9 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 
 const sizeStyles: Record<Size, TwStyle> = {
   sm: tw`py-1 px-2 text-sm`,
-  md: tw`py-2 px-3 text-base`,
-  lg: tw`py-3 px-4 text-lg`,
-  xl: tw`py-4 px-5 text-xl`,
+  md: tw`py-2 px-3 text-base font-medium`,
+  lg: tw`py-3 px-4 text-lg font-bold`,
+  xl: tw`py-4 px-5 text-xl font-bold`,
 };
 
 type VariantColor = `${Variant}-${Color}`;
