@@ -3,7 +3,9 @@ import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
+import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
+import { Link } from '$/components/Link';
 import { Text } from '$/components/Text/Text';
 
 function Home(): JSX.Element {
@@ -28,15 +30,23 @@ function Home(): JSX.Element {
         </h1>
         <Text tw="text-gray-500 text-center dark:text-gray-400">{strings.heroDescription}</Text>
         <div tw="flex justify-center items-center space-x-6">
-          <Button variant="solid" color="primary" className="group" tw="space-x-1 hover:shadow-2xl">
-            <span>{strings.callToAction.main}</span>
-            <ArrowRight
-              size="20px"
-              tw="inline-block transition transform group-hover:translate-x-1"
-            />
-          </Button>
+          <Link variant="plain" href="/auth/sign-in">
+            <Button
+              variant="solid"
+              color="primary"
+              className="group"
+              tw="space-x-1 hover:shadow-2xl"
+            >
+              <span>{strings.callToAction.main}</span>
+              <ArrowRight
+                size="20px"
+                tw="inline-block transition transform group-hover:translate-x-1"
+              />
+            </Button>
+          </Link>
           <Button variant="plain">{strings.callToAction.secondary}</Button>
         </div>
+        <Pricing id="pricing" />
       </main>
     </>
   );
