@@ -522,6 +522,7 @@ export type Account_Variance_Order_By = {
  *
  *
  * columns and relationships of "AnonymousSession"
+ *
  */
 export type AnonymousSession = {
   __typename?: 'AnonymousSession';
@@ -552,6 +553,7 @@ export type AnonymousSession = {
  *
  *
  * columns and relationships of "AnonymousSession"
+ *
  */
 export type AnonymousSessionEventsArgs = {
   distinct_on?: Maybe<Array<Event_Select_Column>>;
@@ -567,6 +569,7 @@ export type AnonymousSessionEventsArgs = {
  *
  *
  * columns and relationships of "AnonymousSession"
+ *
  */
 export type AnonymousSessionEvents_AggregateArgs = {
   distinct_on?: Maybe<Array<Event_Select_Column>>;
@@ -1292,6 +1295,7 @@ export type Comment_Variance_Order_By = {
  *
  *
  * columns and relationships of "Event"
+ *
  */
 export type Event = {
   __typename?: 'Event';
@@ -1314,6 +1318,7 @@ export type Event = {
  *
  *
  * columns and relationships of "Event"
+ *
  */
 export type EventParamsArgs = {
   path?: Maybe<Scalars['String']>;
@@ -2854,6 +2859,7 @@ export type Project_Variance_Order_By = {
  *
  *
  * columns and relationships of "Role"
+ *
  */
 export type Role = {
   __typename?: 'Role';
@@ -2871,6 +2877,7 @@ export type Role = {
  *
  *
  * columns and relationships of "Role"
+ *
  */
 export type RoleMembersArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -2886,6 +2893,7 @@ export type RoleMembersArgs = {
  *
  *
  * columns and relationships of "Role"
+ *
  */
 export type RoleMembers_AggregateArgs = {
   distinct_on?: Maybe<Array<Member_Select_Column>>;
@@ -3767,6 +3775,7 @@ export type UserSessions_AggregateArgs = {
  *
  *
  * columns and relationships of "UserType"
+ *
  */
 export type UserType = {
   __typename?: 'UserType';
