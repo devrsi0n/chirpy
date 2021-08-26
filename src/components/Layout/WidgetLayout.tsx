@@ -39,7 +39,7 @@ function LayoutWrapper({ children, className }: WidgetLayoutProps): JSX.Element 
   return (
     <div
       css={[
-        tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans px-2 flex flex-col`,
+        tw`min-h-full text-gray-600 dark:text-gray-300 transition duration-300 font-sans flex flex-col`,
       ]}
       className={className}
     >
