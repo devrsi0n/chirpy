@@ -2,7 +2,6 @@
 import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import DismissIcon from '@geist-ui/react-icons/x';
-// import '@tailwindcss/typography/dist/typography.min.css';
 import * as React from 'react';
 import { createEditor, Node, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
@@ -10,9 +9,9 @@ import tw, { css, TwStyle } from 'twin.macro';
 
 import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Button } from '$/components/Button';
-import { ClientOnly } from '$/components/ClientOnly';
 import { Text } from '$/components/Text';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
+import { APP_NAME_LOWERCASE } from '$/lib/constants';
 
 import { SignInButton } from '../SignInButton';
 import { Element } from './Element';
@@ -20,6 +19,7 @@ import { BaseFormatButton, MarkButton } from './FormatButton';
 import { Leaf } from './Leaf';
 import { RichTextEditorContext } from './RichTextEditorContext';
 import { Toolbar } from './Toolbar';
+import { EMPTY_INPUT } from './config';
 
 export type RTEValue = Node[];
 
@@ -34,7 +34,6 @@ interface IBaseProps {
    * @default 'submit'
    */
   postButtonLabel?: string;
-
   showDismissButton?: boolean;
   onClickDismiss?: () => void;
 }
@@ -42,27 +41,8 @@ interface IBaseProps {
 export interface IRichTextEditorProps extends IBaseProps {
   disabled?: boolean;
   initialValue?: RTEValue;
+  placeholder?: string;
 }
-
-const STORAGE_KEY = `${process.env.NEXT_PUBLIC_APP_NAME}RTEContent`;
-
-const DEFAULT_INPUT = [
-  {
-    type: 'paragraph',
-    children: [{ text: `What's in your mind?` }],
-  },
-];
-
-const getSavedContent = (): RTEValue | undefined => {
-  const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
-  return content && JSON.parse(content);
-};
-const getValue = (props?: IRichTextEditorProps) => {
-  if (props?.disabled) {
-    return props.initialValue || DEFAULT_INPUT;
-  }
-  return props?.initialValue || getSavedContent() || DEFAULT_INPUT;
-};
 
 export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const {
@@ -73,6 +53,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     postButtonLabel,
     showDismissButton,
     onClickDismiss,
+    placeholder,
   } = props;
   const [value, setValue] = React.useState<RTEValue>(() => getValue(props));
   const handleRTEChange = (newValue: RTEValue) => {
@@ -99,78 +80,88 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
 
     // Transforms.deselect(editor);
     Transforms.select(editor, [0]);
-    setValue(DEFAULT_INPUT);
+    setValue(EMPTY_INPUT);
   };
 
   return (
-    // Only render editor on client because we relay on localStorage
-    <ClientOnly>
-      <RichTextEditorContext.Provider value={richTextEditorContext}>
-        <Slate editor={editor} value={value} onChange={handleRTEChange}>
-          <section css={[tw`space-y-2`, disabled && tw`cursor-not-allowed`, styles?.root]}>
-            {!readOnly && (
-              <Toolbar tw="flex flex-row justify-between">
-                <div>
-                  <MarkButton format="bold" icon="bold" />
-                  <MarkButton format="italic" icon="italic" />
-                  <MarkButton format="underline" icon="underline" />
-                </div>
-                {showDismissButton && (
-                  <div>
-                    <BaseFormatButton onClick={onClickDismiss}>
-                      <DismissIcon size={20} />
-                    </BaseFormatButton>
-                  </div>
-                )}
-              </Toolbar>
-            )}
-            <Editable
-              readOnly={readOnly}
-              //
-              className="prose dark:prose-light"
-              css={[
-                tw`rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300`,
-                disabled && tw`bg-gray-200 text-gray-400 pointer-events-none`,
-                !readOnly
-                  ? tw`shadow-sm p-2 border-gray-200 dark:border-gray-700`
-                  : tw`border-transparent`,
-                styles?.editable,
-              ]}
-              style={{
-                ...(!readOnly && {
-                  resize: 'vertical',
-                  overflowY: 'auto',
-                  minHeight: '4em',
-                }),
-              }}
-              renderElement={Element}
-              renderLeaf={Leaf}
-            />
-            {!readOnly && (
-              <div tw="flex flex-row justify-end">
-                {isLogin ? (
-                  <Button
-                    color="primary"
-                    variant={'solid'}
-                    css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
-                    onClick={handleSubmitReply}
-                    aria-label={isLoading ? 'Posting' : 'Post'}
-                  >
-                    {isLoading ? (
-                      <Loader tw="animate-spin text-gray-400 w-5 h-5" />
-                    ) : (
-                      <Send size="14" />
-                    )}
-                    <Text>{postButtonLabel || 'Post'}</Text>
-                  </Button>
-                ) : (
-                  <SignInButton variant="plain" inPageNav={false} />
-                )}
+    <RichTextEditorContext.Provider value={richTextEditorContext}>
+      <Slate editor={editor} value={value} onChange={handleRTEChange}>
+        <section css={[tw`space-y-2`, disabled && tw`cursor-not-allowed`, styles?.root]}>
+          {!readOnly && (
+            <Toolbar tw="flex flex-row justify-between">
+              <div>
+                <MarkButton format="bold" icon="bold" />
+                <MarkButton format="italic" icon="italic" />
+                <MarkButton format="underline" icon="underline" />
               </div>
-            )}
-          </section>
-        </Slate>
-      </RichTextEditorContext.Provider>
-    </ClientOnly>
+              {showDismissButton && (
+                <div>
+                  <BaseFormatButton onClick={onClickDismiss}>
+                    <DismissIcon size={20} />
+                  </BaseFormatButton>
+                </div>
+              )}
+            </Toolbar>
+          )}
+          <Editable
+            readOnly={readOnly}
+            placeholder={placeholder}
+            className="prose dark:prose-light"
+            css={[
+              tw`rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300`,
+              disabled && tw`bg-gray-200 text-gray-400 pointer-events-none`,
+              !readOnly
+                ? tw`shadow-sm p-2 border-gray-200 dark:border-gray-700`
+                : tw`border-transparent`,
+              styles?.editable,
+            ]}
+            style={{
+              ...(!readOnly && {
+                resize: 'vertical',
+                overflowY: 'auto',
+                minHeight: '4em',
+              }),
+            }}
+            renderElement={Element}
+            renderLeaf={Leaf}
+          />
+          {!readOnly && (
+            <div tw="flex flex-row justify-end">
+              {isLogin ? (
+                <Button
+                  color="primary"
+                  variant={'solid'}
+                  css={css([tw`space-x-1`, isLoading && tw`cursor-not-allowed`])}
+                  onClick={handleSubmitReply}
+                  aria-label={isLoading ? 'Posting' : 'Post'}
+                >
+                  {isLoading ? (
+                    <Loader tw="animate-spin text-gray-400 w-5 h-5" />
+                  ) : (
+                    <Send size="14" />
+                  )}
+                  <Text>{postButtonLabel || 'Post'}</Text>
+                </Button>
+              ) : (
+                <SignInButton variant="plain" inPageNav={false} />
+              )}
+            </div>
+          )}
+        </section>
+      </Slate>
+    </RichTextEditorContext.Provider>
   );
 }
+
+const STORAGE_KEY = `${APP_NAME_LOWERCASE}.rte`;
+
+const getSavedContent = (): RTEValue | undefined => {
+  const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
+  return content && JSON.parse(content);
+};
+const getValue = (props?: IRichTextEditorProps) => {
+  if (props?.disabled) {
+    return props.initialValue || EMPTY_INPUT;
+  }
+  return props?.initialValue || getSavedContent() || EMPTY_INPUT;
+};
