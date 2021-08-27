@@ -1,4 +1,3 @@
-import { ClassNames } from '@emotion/react';
 import Check from '@geist-ui/react-icons/check';
 import ChevronUpDown from '@geist-ui/react-icons/chevronUpDown';
 import { Listbox, Transition } from '@headlessui/react';
@@ -47,24 +46,21 @@ export function Select<T>({
                 </span>
               </Listbox.Button>
             </span>
-            <ClassNames>
-              {({ css }) => (
-                <Transition
-                  show={open}
-                  leave={css(tw`transition ease-in duration-100`)}
-                  leaveFrom={css(tw`opacity-100`)}
-                  leaveTo={css(tw`opacity-0`)}
-                  tw="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20"
-                >
-                  <Listbox.Options
-                    static
-                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-                  >
-                    {children}
-                  </Listbox.Options>
-                </Transition>
-              )}
-            </ClassNames>
+
+            <Transition
+              show={open}
+              leave={`transition ease-in duration-100`}
+              leaveFrom={`opacity-100`}
+              leaveTo={`opacity-0`}
+              tw="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20"
+            >
+              <Listbox.Options
+                static
+                tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+              >
+                {children}
+              </Listbox.Options>
+            </Transition>
           </div>
         </>
       )}
