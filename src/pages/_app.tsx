@@ -5,7 +5,7 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-// import 'tailwindcss/tailwind.css';
+import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
 import { ApolloClientProvider } from '$/blocks/ApolloClientProvider';

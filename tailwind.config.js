@@ -2,8 +2,9 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const { lightBlue, ...colors } = require('tailwindcss/colors');
 
 module.exports = {
-  mode: 'jit',
+  // mode: 'jit',
   darkMode: 'class',
+  purge: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -23,7 +24,7 @@ module.exports = {
           800: 'var(--tw-colors-primary-800)',
           900: 'var(--tw-colors-primary-900)',
         },
-        bg: 'hsl(210, 10%, 98%)'
+        bg: 'hsl(210, 10%, 98%)',
       },
       fill: colors,
       screens: {
@@ -42,8 +43,8 @@ module.exports = {
         '-1': '-1',
       },
       width: {
-        fit: 'fit-width'
-      }
+        fit: 'fit-width',
+      },
     },
     // typography: (theme) => ({
     //   light: {

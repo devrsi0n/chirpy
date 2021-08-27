@@ -1,4 +1,3 @@
-import { ClassNames } from '@emotion/react';
 import { Transition } from '@headlessui/react';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
@@ -84,24 +83,20 @@ export function Link(props: LinkProps): JSX.Element {
         >
           {children}
           {!disableUnderline && variant === 'nav' && (
-            <ClassNames>
-              {({ css }) => (
-                <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-                  <Transition
-                    as="span"
-                    className="transform"
-                    tw="absolute inset-0 inline-block w-full h-1 bg-gray-900 dark:bg-gray-300"
-                    show={isHovering}
-                    enter={css(tw`transition ease-in duration-200`)}
-                    enterFrom={css(tw`scale-0`)}
-                    enterTo={css(tw`scale-100`)}
-                    leave={css(tw`transition ease-out duration-300`)}
-                    leaveFrom={css(tw`scale-100`)}
-                    leaveTo={css(tw`scale-0`)}
-                  />
-                </span>
-              )}
-            </ClassNames>
+            <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+              <Transition
+                as="span"
+                className="transform"
+                tw="absolute inset-0 inline-block w-full h-1 bg-gray-900 dark:bg-gray-300"
+                show={isHovering}
+                enter={`transition ease-in duration-200`}
+                enterFrom={`scale-0`}
+                enterTo={`scale-100`}
+                leave={`transition ease-out duration-300`}
+                leaveFrom={`scale-100`}
+                leaveTo={`scale-0`}
+              />
+            </span>
           )}
         </a>
       )}
