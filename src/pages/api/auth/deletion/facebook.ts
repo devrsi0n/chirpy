@@ -2,11 +2,12 @@ import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { apiHandler } from '$/server/common/api-handler';
+import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
 import { DeleteFacebookUserDocument } from '$/server/graphql/generated/user';
 
-apiHandler.post(async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = getApiHandler();
+handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const signedRequest = req.body.signed_request;
   console.log('Validating signature', {
     signedRequest,
@@ -63,10 +64,8 @@ function decodePayload(payload: string) {
   const bodyJson = base64Decode(urlDecode(payload));
   try {
     return JSON.parse(bodyJson);
-  } catch (error) {
-    // If the JSON is invalid, this is the client's fault
-    error.code = 400;
-    throw error;
+  } catch {
+    throw new ApiError(400, 'Signed request has invalid json');
   }
 }
 
@@ -92,4 +91,4 @@ function unescape(str: string) {
   return (str + '==='.slice((str.length + 3) % 4)).replace(/-/g, '+').replace(/_/g, '/');
 }
 
-export default apiHandler;
+export default handler;

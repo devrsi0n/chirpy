@@ -142,16 +142,11 @@ export function CommentCard({
         </div>
 
         {showReplyEditor && (
-          <div tw="flex flex-col space-y-2 bg-white">
+          <div tw="flex flex-col space-y-2 ">
             <RichTextEditor
-              initialValue={[
-                {
-                  type: 'paragraph',
-                  children: [{ text: `What are your thoughts?` }],
-                },
-              ]}
+              placeholder={`What are your thoughts?`}
               onSubmit={handleSubmitReply}
-              styles={{ root: tw`px-2` }}
+              styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
               showDismissButton
               onClickDismiss={handleDimissRTE}
             />

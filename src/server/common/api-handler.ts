@@ -19,6 +19,7 @@ export const handleInternalFailure: ErrorHandler<NextApiRequest, NextApiResponse
   res.status(500).end(`${process.env.NEXT_PUBLIC_APP_NAME} error: ${error.toString()}`);
 };
 
-export const apiHandler = connect<NextApiRequest, NextApiResponse>({
-  onError: handleInternalFailure,
-});
+export const getApiHandler = () =>
+  connect<NextApiRequest, NextApiResponse>({
+    onError: handleInternalFailure,
+  });
