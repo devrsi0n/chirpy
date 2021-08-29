@@ -164,7 +164,7 @@ export default function Profile(): JSX.Element {
           <TextField {...register('website')} label="Website" prefixNode="https://" />
         ) : (
           website && (
-            <Link variant="primary" href={website} tw="space-x-2 flex flex-row width[fit-content]">
+            <Link variant="solid" href={website} tw="space-x-2 flex flex-row width[fit-content]">
               <Link2 />
               <span>{website}</span>
             </Link>
@@ -175,7 +175,7 @@ export default function Profile(): JSX.Element {
         ) : (
           twitterUserName && (
             <Link
-              variant="primary"
+              variant="solid"
               href={`https://twitter.com/${twitterUserName}`}
               tw="space-x-2 flex flex-row items-center width[fit-content]"
             >
