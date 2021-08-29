@@ -1,6 +1,5 @@
 import Edit2 from '@geist-ui/react-icons/edit2';
 import Link2 from '@geist-ui/react-icons/link2';
-import Loader from '@geist-ui/react-icons/loader';
 import Save from '@geist-ui/react-icons/save';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import Twitter from '@geist-ui/react-icons/twitter';
@@ -14,6 +13,7 @@ import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Popover } from '$/components/Popover';
+import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
 import { TextArea } from '$/components/TextArea';
 import { TextField } from '$/components/TextField';
@@ -85,10 +85,7 @@ export default function Profile(): JSX.Element {
   if (!isLogin && loading) {
     return (
       <ProfileContainer>
-        <div tw="text-gray-500 flex flex-col items-center justify-center">
-          <Text>Loading...</Text>
-          <Loader tw="animate-spin h-8 w-8" />
-        </div>
+        <Spinner tw="justify-center mt-20" />
       </ProfileContainer>
     );
   }

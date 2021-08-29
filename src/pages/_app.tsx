@@ -10,8 +10,9 @@ import { GlobalStyles } from 'twin.macro';
 
 import { ApolloClientProvider } from '$/blocks/ApolloClientProvider';
 import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
-import { Heading } from '$/components/Heading';
 import { Layout, WidgetLayout } from '$/components/Layout';
+import { Spinner } from '$/components/Spinner';
+import { Text } from '$/components/Text';
 import { SiteThemeProvider, ThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
 import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
@@ -89,13 +90,13 @@ function Auth({ children }: { children: React.ReactNode }): JSX.Element {
     return <>{children}</>;
   }
 
-  return <div>Loading...</div>;
+  return <Spinner tw="mt-32 justify-center" />;
 }
 
 function ErrorFallback() {
   return (
     <div role="alert">
-      <Heading>Sorry, something went wrong in our side. Try again later.</Heading>
+      <Text>Sorry, something went wrong in our side. Try again later.</Text>
     </div>
   );
 }

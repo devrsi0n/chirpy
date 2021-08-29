@@ -119,7 +119,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {isSaved ? (
           <Check size={20} />
         ) : loading ? (
-          <Loader tw="animate-spin text-gray-400 " size={20} />
+          <Loader tw="animate-spin text-gray-400" size={20} />
         ) : (
           <Send size={20} />
         )}

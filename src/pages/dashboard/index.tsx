@@ -7,6 +7,7 @@ import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
+import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
@@ -24,7 +25,8 @@ export default function Dashboard(): JSX.Element {
     data: { id },
   } = useCurrentUser();
 
-  const [fetchUserProjects, { data }] = useUserDashboardProjectsLazyQuery();
+  const [fetchUserProjects, { data, loading: loadingProject }] =
+    useUserDashboardProjectsLazyQuery();
   const handleFetchProjects = React.useCallback(() => {
     if (!id) return;
     fetchUserProjects({
@@ -39,7 +41,7 @@ export default function Dashboard(): JSX.Element {
   React.useEffect(handleFetchProjects, [handleFetchProjects]);
   const { projects } = data?.userByPk || {};
 
-  const [insertProjectMutation, { loading }] = useInsertOneProjectMutation();
+  const [insertProjectMutation, { loading: loadingInsertProject }] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -100,6 +102,8 @@ export default function Dashboard(): JSX.Element {
               </div>
               <div tw="flex-1" />
             </div>
+          ) : loadingProject ? (
+            <Spinner />
           ) : (
             <div tw="py-6">
               <Text>No projects</Text>
@@ -153,7 +157,7 @@ export default function Dashboard(): JSX.Element {
             </Button>
             <Button
               tw="w-full sm:w-auto"
-              disabled={hasError || loading}
+              disabled={hasError || loadingInsertProject}
               variant="plain"
               color="primary"
               onClick={handleClickSubmit}
