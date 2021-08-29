@@ -58,7 +58,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                   size="lg"
                 >
                   <option.icon />
-                  <span tw="inline-block ml-2 text-left" style={{ width: '12rem' }}>
+                  <span tw="inline-block ml-2 text-left" style={{ width: '12.5rem' }}>
                     Sign in with {option.name}
                   </span>
                 </Button>

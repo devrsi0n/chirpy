@@ -14,6 +14,6 @@ jobs:
           node-version: '14'
       - uses: artiomtr/jest-coverage-report-action@v1.3
         with:
-          threshold: 50
+          threshold: 53
           github_token: ${{ secrets.GITHUB_TOKEN }}
           test_script: npx jest --silent=false --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"

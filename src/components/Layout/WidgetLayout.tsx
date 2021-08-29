@@ -20,7 +20,7 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
         {header}
         <AnimatePresence>
           <m.div
-            tw="min-h-full mx-2"
+            tw="min-h-full mx-4"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
