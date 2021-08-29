@@ -54,28 +54,26 @@ export async function comment(): Promise<void> {
     return;
   }
   const container = document.createElement('iframe');
-  container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${page.id}`;
   container.id = id;
   container.style.width = '100%';
   container.frameBorder = '0';
   container.scrolling = 'no';
   let previousHeight = 0;
-  container.addEventListener('load', function () {
-    window.addEventListener(
-      'message',
-      (event) => {
-        if (
-          event.origin === process.env.NEXT_PUBLIC_APP_URL &&
-          event.data?.height &&
-          event.data?.height !== previousHeight
-        ) {
-          container.style.height = event.data.height + 'px';
-          previousHeight = event.data.height;
-        }
-      },
-      false,
-    );
-  });
+  window.addEventListener(
+    'message',
+    (event) => {
+      if (
+        event.origin === process.env.NEXT_PUBLIC_APP_URL &&
+        event.data?.height &&
+        event.data?.height !== previousHeight
+      ) {
+        container.style.height = event.data.height + 'px';
+        previousHeight = event.data.height;
+      }
+    },
+    false,
+  );
+  container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${page.id}`;
   renderTarget.append(container);
 }
 
