@@ -9,9 +9,8 @@ export function Element(props: RenderElementProps): JSX.Element {
     ...props,
     disabled,
   };
-
   switch (props.element.type) {
-    case 'code':
+    case 'block-code':
       return (
         <pre>
           <code

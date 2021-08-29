@@ -1,85 +1,31 @@
-import { Transforms, Editor, Text } from 'slate';
+import { Transforms, Editor, Element as SlateElement } from 'slate';
+import { CustomElement } from 'types/slate';
 
-import { Format } from './type';
+import { BlockFormat, InlineFormat } from './type';
 
 const LIST_TYPES = new Set(['numbered-list', 'bulleted-list']);
 
-// Define our own custom set of helpers.
-export const CustomEditor = {
-  isBoldMarkActive(editor: Editor): boolean {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n.bold === true,
-      universal: true,
-    });
-
-    return !!match;
-  },
-
-  isCodeBlockActive(editor: Editor): boolean {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n.type === 'code',
-    });
-
-    return !!match;
-  },
-
-  isFormatActive(editor: Editor, format: Format): boolean {
-    const [match] = Editor.nodes(editor, {
-      match: (n) => n[format] === true,
-      mode: 'all',
-    });
-    return !!match;
-  },
-
-  toggleFormat(editor: Editor, format: Format): void {
-    const isActive = CustomEditor.isFormatActive(editor, format);
-    Transforms.setNodes(
-      editor,
-      { [format]: isActive ? null : true },
-      { match: Text.isText, split: true },
-    );
-  },
-
-  toggleBoldMark(editor: Editor): void {
-    const isActive = CustomEditor.isBoldMarkActive(editor);
-    Transforms.setNodes(
-      editor,
-      { bold: isActive ? null : true },
-      { match: (n) => Text.isText(n), split: true },
-    );
-  },
-
-  toggleCodeBlock(editor: Editor): void {
-    const isActive = CustomEditor.isCodeBlockActive(editor);
-    Transforms.setNodes(
-      editor,
-      { type: isActive ? null : 'code' },
-      { match: (n) => Editor.isBlock(editor, n) },
-    );
-  },
-};
-
-export function toggleBlock(editor: Editor, format: Format): void {
+export function toggleBlock(editor: Editor, format: BlockFormat): void {
   const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.has(format);
 
   Transforms.unwrapNodes(editor, {
-    match: (n) => LIST_TYPES.has(n.type as string),
+    match: (n) =>
+      LIST_TYPES.has((!Editor.isEditor(n) && SlateElement.isElement(n) && n.type) || ''),
     split: true,
   });
-
-  Transforms.setNodes(editor, {
-    // eslint-disable-next-line prettier/prettier
+  const newProperties: Partial<SlateElement> = {
     type: isActive ? 'paragraph' : isList ? 'list-item' : format,
-  });
+  };
+  Transforms.setNodes(editor, newProperties);
 
   if (!isActive && isList) {
-    const block = { type: format, children: [] };
+    const block = { type: format, children: [] } as CustomElement;
     Transforms.wrapNodes(editor, block);
   }
 }
 
-export function toggleMark(editor: Editor, format: Format): void {
+export function toggleMark(editor: Editor, format: InlineFormat): void {
   const isActive = isMarkActive(editor, format);
 
   if (isActive) {
@@ -89,15 +35,15 @@ export function toggleMark(editor: Editor, format: Format): void {
   }
 }
 
-export function isBlockActive(editor: Editor, format: Format): boolean {
+export function isBlockActive(editor: Editor, format: BlockFormat): boolean {
   const [match] = Editor.nodes(editor, {
-    match: (n) => n.type === format,
+    match: (n) => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === format,
   });
 
   return !!match;
 }
 
-export function isMarkActive(editor: Editor, format: Format): boolean {
+export function isMarkActive(editor: Editor, format: InlineFormat): boolean {
   const marks = Editor.marks(editor);
   return marks ? marks[format] === true : false;
 }

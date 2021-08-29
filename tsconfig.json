@@ -31,6 +31,7 @@
     "types/next-auth.d.ts",
     "types/next-env.d.ts",
     "types/node.d.ts",
+    "types/slate.d.ts",
     "types/twin.d.ts",
     "types/unknown-file.d.ts",
     "src/**/*.ts",
