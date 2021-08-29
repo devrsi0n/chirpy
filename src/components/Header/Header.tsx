@@ -21,10 +21,7 @@ export function Header(): JSX.Element {
 
   return (
     <header
-      css={[
-        tw`w-full py-3 transition duration-150 border-b sm:(sticky top-0 left-0 z-10) border-gray-300 dark:border-gray-700`,
-        bluredBg,
-      ]}
+      css={[tw`w-full py-3 transition duration-150 sm:(sticky top-0 left-0 z-10) `, bluredBg]}
     >
       <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section tw="flex flex-row items-center justify-between">

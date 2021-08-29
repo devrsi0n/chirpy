@@ -1,8 +1,11 @@
 import Check from '@geist-ui/react-icons/check';
 import ChevronUpDown from '@geist-ui/react-icons/chevronUpDown';
-import { Listbox, Transition } from '@headlessui/react';
+import { Listbox } from '@headlessui/react';
+import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
+
+import { easeInOut } from '../Animation';
 
 export type SelectProps<T> = React.PropsWithChildren<{
   value: T;
@@ -47,20 +50,18 @@ export function Select<T>({
               </Listbox.Button>
             </span>
 
-            <Transition
-              show={open}
-              leave={`transition ease-in duration-100`}
-              leaveFrom={`opacity-100`}
-              leaveTo={`opacity-0`}
-              tw="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20"
-            >
-              <Listbox.Options
-                static
-                tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-              >
-                {children}
-              </Listbox.Options>
-            </Transition>
+            <AnimatePresence>
+              {open && (
+                <m.div {...easeInOut} tw="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20">
+                  <Listbox.Options
+                    static
+                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                  >
+                    {children}
+                  </Listbox.Options>
+                </m.div>
+              )}
+            </AnimatePresence>
           </div>
         </>
       )}

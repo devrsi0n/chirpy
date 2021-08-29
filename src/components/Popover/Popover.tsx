@@ -1,9 +1,11 @@
-import { Popover as HeadLessPopover, Transition } from '@headlessui/react';
+import { Popover as HeadLessPopover } from '@headlessui/react';
+import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
 import { bluredBg } from '$/styles/common';
 
+import { easeInOut } from '../Animation';
 import { Button } from '../Button';
 
 export type Placement = 'top' | 'topEnd';
@@ -46,44 +48,44 @@ export function Popover({
             {children}
           </HeadLessPopover.Button>
 
-          <Transition
-            show={open}
-            enter={`transition duration-100 ease-out`}
-            enterFrom={`transform opacity-0`}
-            enterTo={`transform opacity-100`}
-            leave={`transition ease-out`}
-            leaveFrom={`transform opacity-100`}
-            leaveTo={`transform opacity-0`}
-          >
-            <HeadLessPopover.Panel
-              static
-              css={[tw`absolute right-0 z-10`, panelBorder]}
-              style={{
-                bottom: (buttonRef.current?.getBoundingClientRect().height || 40) + 16,
-                transform: `translateX(calc(50% - ${
-                  (buttonRef.current?.getBoundingClientRect().width || 40) / 2
-                }px))`,
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
-              }}
-            >
-              <div
-                css={[tw`relative py-2 px-4 rounded-lg`, panelBg, panelBorder]}
-                onClick={handleClickPanel}
-                onKeyDown={handleClickPanel}
-                role="button"
-                tabIndex={0}
-              >
-                {content}
-              </div>
-              <div
-                css={[tw`absolute h-4 w-4 transform rotate-45`, panelBg, tw`border-t-0 border-l-0`]}
-                style={{
-                  bottom: '-8px',
-                  right: 'calc(50% - 8px)',
-                }}
-              />
-            </HeadLessPopover.Panel>
-          </Transition>
+          <AnimatePresence>
+            {open && (
+              <m.div {...easeInOut}>
+                <HeadLessPopover.Panel
+                  static
+                  css={[tw`absolute right-0 z-10`, panelBorder]}
+                  style={{
+                    bottom: (buttonRef.current?.getBoundingClientRect().height || 40) + 16,
+                    transform: `translateX(calc(50% - ${
+                      (buttonRef.current?.getBoundingClientRect().width || 40) / 2
+                    }px))`,
+                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
+                  }}
+                >
+                  <div
+                    css={[tw`relative py-2 px-4 rounded-lg`, panelBg, panelBorder]}
+                    onClick={handleClickPanel}
+                    onKeyDown={handleClickPanel}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    {content}
+                  </div>
+                  <div
+                    css={[
+                      tw`absolute h-4 w-4 transform rotate-45`,
+                      panelBg,
+                      tw`border-t-0 border-l-0`,
+                    ]}
+                    style={{
+                      bottom: '-8px',
+                      right: 'calc(50% - 8px)',
+                    }}
+                  />
+                </HeadLessPopover.Panel>
+              </m.div>
+            )}
+          </AnimatePresence>
         </>
       )}
     </HeadLessPopover>

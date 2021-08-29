@@ -80,7 +80,7 @@ export default function Dashboard(): JSX.Element {
       <div className="main-container">
         <section tw="py-10 space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
-            <Heading as="h2" tw="text-3xl text-gray-600 font-bold">
+            <Heading as="h2" tw="text-3xl text-gray-600 font-semibold">
               Dashboard
             </Heading>
             <Button onClick={handleCreateProject} variant="solid" color="primary">

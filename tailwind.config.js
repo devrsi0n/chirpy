@@ -4,7 +4,7 @@ const { lightBlue, ...colors } = require('tailwindcss/colors');
 module.exports = {
   // mode: 'jit',
   darkMode: 'class',
-  purge: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}'],
+  purge: ['./src/pages/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}', './src/blocks/**/*.{ts,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -24,7 +24,7 @@ module.exports = {
           800: 'var(--tw-colors-primary-800)',
           900: 'var(--tw-colors-primary-900)',
         },
-        bg: 'hsl(210, 10%, 98%)',
+        bg: 'hsl(210, 8%, 98%)',
       },
       fill: colors,
       screens: {

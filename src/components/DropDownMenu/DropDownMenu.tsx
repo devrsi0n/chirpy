@@ -1,10 +1,12 @@
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
-import { Menu, Transition } from '@headlessui/react';
+import { Menu } from '@headlessui/react';
+import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 import { bluredBg } from '$/styles/common';
 
+import { easeInOut } from '../Animation';
 import { Button, IconButton } from '../Button';
 
 export type Shape = 'circle' | 'square';
@@ -43,24 +45,22 @@ export function DropDownMenu({
               </Menu.Button>
             </div>
 
-            <Transition
-              enter={`transition ease-out duration-150`}
-              enterFrom={`transform opacity-75 scale-90`}
-              enterTo={`transform opacity-100 scale-100`}
-              leave={`transition ease-in duration-150`}
-              leaveFrom={`transform opacity-100 scale-100`}
-              leaveTo={`transform opacity-75 scale-90`}
-            >
-              <Menu.Items
-                css={[
-                  tw`absolute right-0 mt-1 origin-top-right border border-gray-200 dark:(border-gray-700) divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
-                  bluredBg,
-                  classes?.items,
-                ]}
-              >
-                {children}
-              </Menu.Items>
-            </Transition>
+            <AnimatePresence>
+              {open && (
+                <m.div {...easeInOut}>
+                  <Menu.Items
+                    static
+                    css={[
+                      tw`absolute right-0 mt-1 origin-top-right border border-gray-200 dark:(border-gray-700) divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      bluredBg,
+                      classes?.items,
+                    ]}
+                  >
+                    {children}
+                  </Menu.Items>
+                </m.div>
+              )}
+            </AnimatePresence>
           </>
         )}
       </Menu>
