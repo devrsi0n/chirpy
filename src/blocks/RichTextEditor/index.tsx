@@ -13,4 +13,5 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   return <DynamicRichTextEditor {...props} />;
 }
 
-export type { IRichTextEditorProps, RTEValue } from './RichTextEditor';
+export type { IRichTextEditorProps } from './RichTextEditor';
+export type { RTEValue } from './type';

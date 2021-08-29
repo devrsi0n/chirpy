@@ -1,4 +1,5 @@
 import BoldIcon from '@geist-ui/react-icons/bold';
+import CodeIcon from '@geist-ui/react-icons/code';
 import ItalicIcon from '@geist-ui/react-icons/italic';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import * as React from 'react';
@@ -8,8 +9,8 @@ import tw from 'twin.macro';
 import { BaseButton, BaseButtonProps } from '$/components/Button';
 
 import { useRichTextEditorContext } from './RichTextEditorContext';
-import { Format, Icon } from './type';
-import { isBlockActive, isMarkActive, toggleBlock, toggleMark } from './utilities';
+import { InlineFormat, Icon } from './type';
+import { isMarkActive, toggleMark } from './utilities';
 
 type BaseFormatButtonProps = {
   isActive?: boolean;
@@ -45,30 +46,38 @@ const iconMap = {
   bold: BoldIcon,
   italic: ItalicIcon,
   underline: UnderlineIcon,
+  code: CodeIcon,
 };
 
-export type ButtonFormatProps = {
-  format: Format;
+interface IButtonFormatProps {
   icon: Icon;
-};
-
-export function BlockButton({ format, icon }: ButtonFormatProps): JSX.Element {
-  const editor = useSlate();
-  const Icon = iconMap[icon];
-  return (
-    <BaseFormatButton
-      isActive={isBlockActive(editor, format)}
-      onClick={(event) => {
-        event.preventDefault();
-        toggleBlock(editor, format);
-      }}
-    >
-      <Icon />
-    </BaseFormatButton>
-  );
 }
 
-export function MarkButton({ format, icon }: ButtonFormatProps): JSX.Element {
+// export interface IBlockButtonProps extends IButtonFormatProps {
+//   format: BlockFormat;
+// }
+
+// export function BlockButton({ format, icon }: IBlockButtonProps): JSX.Element {
+//   const editor = useSlate();
+//   const Icon = iconMap[icon];
+//   return (
+//     <BaseFormatButton
+//       isActive={isBlockActive(editor, format)}
+//       onClick={(event) => {
+//         event.preventDefault();
+//         toggleBlock(editor, format);
+//       }}
+//     >
+//       <Icon />
+//     </BaseFormatButton>
+//   );
+// }
+
+export interface IInlineButtonProps extends IButtonFormatProps {
+  format: InlineFormat;
+}
+
+export function MarkButton({ format, icon }: IInlineButtonProps): JSX.Element {
   const editor = useSlate();
   const Icon = iconMap[icon];
   return (
