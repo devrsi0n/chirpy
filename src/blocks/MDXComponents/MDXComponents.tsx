@@ -10,7 +10,7 @@ type MDXLinkProps = {
 };
 function MDXLink(props: MDXLinkProps): JSX.Element {
   return (
-    <Link href={props.href} variant="primary">
+    <Link href={props.href} variant="solid">
       {props.children}
     </Link>
   );

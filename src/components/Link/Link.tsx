@@ -1,11 +1,11 @@
-import { Transition } from '@headlessui/react';
+import { AnimatePresence, m } from 'framer-motion';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
-type Variant = 'nav' | 'plain' | 'primary';
+type Variant = 'nav' | 'plain' | 'solid';
 
 type LinkProps = React.PropsWithChildren<
   NextLinkProps &
@@ -30,7 +30,7 @@ const sizeStyles: Record<Size, TwStyle> = {
 const variantStyles: Record<Variant, TwStyle> = {
   nav: tw`text-gray-700 hover:text-black dark:text-gray-200 dark:hover:text-gray-100`,
   plain: tw``,
-  primary: tw`text-blue-600! hover:text-blue-900! dark:text-blue-200! dark:hover:text-blue-100!`,
+  solid: tw`text-blue-500! hover:text-blue-800! dark:text-blue-200! dark:hover:text-blue-100!`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -84,18 +84,14 @@ export function Link(props: LinkProps): JSX.Element {
           {children}
           {!disableUnderline && variant === 'nav' && (
             <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-              <Transition
-                as="span"
-                className="transform"
-                tw="absolute inset-0 inline-block w-full h-1 bg-gray-900 dark:bg-gray-300"
-                show={isHovering}
-                enter={`transition ease-in duration-200`}
-                enterFrom={`scale-0`}
-                enterTo={`scale-100`}
-                leave={`transition ease-out duration-300`}
-                leaveFrom={`scale-100`}
-                leaveTo={`scale-0`}
-              />
+              <AnimatePresence>
+                <m.span
+                  tw="absolute inset-0 inline-block w-full bg-gray-900 dark:bg-gray-300"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: isHovering ? 1 : 0 }}
+                  exit={{ scale: 0 }}
+                />
+              </AnimatePresence>
             </span>
           )}
         </a>
