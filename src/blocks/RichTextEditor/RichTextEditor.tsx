@@ -3,7 +3,7 @@ import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import DismissIcon from '@geist-ui/react-icons/x';
 import * as React from 'react';
-import { createEditor, Node, Transforms } from 'slate';
+import { createEditor, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import tw, { css, TwStyle } from 'twin.macro';
 
@@ -20,8 +20,7 @@ import { Leaf } from './Leaf';
 import { RichTextEditorContext } from './RichTextEditorContext';
 import { Toolbar } from './Toolbar';
 import { EMPTY_INPUT } from './config';
-
-export type RTEValue = Node[];
+import { RTEValue } from './type';
 
 interface IBaseProps {
   onSubmit?: (value: RTEValue) => Promise<void>;
@@ -72,7 +71,6 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
   const handleSubmitReply = async () => {
     setIsLoading(true);
     await onSubmit?.(value);
-    // Skip setState if this component is unmounting
     if (isUnmountingRef.current) {
       return;
     }
@@ -106,22 +104,14 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
           <Editable
             readOnly={readOnly}
             placeholder={placeholder}
-            className="prose dark:prose-light"
             css={[
-              tw`rounded border focus:border-gray-600 dark:focus:border-gray-300 dark:text-gray-300`,
+              tw`rounded border dark:text-gray-300`,
               disabled && tw`bg-gray-200 text-gray-400 pointer-events-none`,
               !readOnly
-                ? tw`shadow-sm p-2 border-gray-200 dark:border-gray-700`
+                ? tw`min-height[4em]! resize-y overflow-hidden shadow-sm focus:shadow-lg p-2 border-gray-200 dark:border-gray-700`
                 : tw`border-transparent`,
               styles?.editable,
             ]}
-            style={{
-              ...(!readOnly && {
-                resize: 'vertical',
-                overflowY: 'auto',
-                minHeight: '4em',
-              }),
-            }}
             renderElement={Element}
             renderLeaf={Leaf}
           />
@@ -159,7 +149,7 @@ const getSavedContent = (): RTEValue | undefined => {
   const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
   return content && JSON.parse(content);
 };
-const getValue = (props?: IRichTextEditorProps) => {
+const getValue = (props?: IRichTextEditorProps): RTEValue => {
   if (props?.disabled) {
     return props.initialValue || EMPTY_INPUT;
   }

@@ -44,16 +44,14 @@ export function DropDownMenu({
             </div>
 
             <Transition
-              show={open}
-              enter={`transition ease-out duration-100`}
-              enterFrom={`transform opacity-0 scale-95`}
+              enter={`transition ease-out duration-150`}
+              enterFrom={`transform opacity-75 scale-90`}
               enterTo={`transform opacity-100 scale-100`}
-              leave={`transition ease-in duration-75`}
+              leave={`transition ease-in duration-150`}
               leaveFrom={`transform opacity-100 scale-100`}
-              leaveTo={`transform opacity-0 scale-95`}
+              leaveTo={`transform opacity-75 scale-90`}
             >
               <Menu.Items
-                static
                 css={[
                   tw`absolute right-0 mt-1 origin-top-right border border-gray-200 dark:(border-gray-700) divide-y divide-gray-100 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
                   bluredBg,
