@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
@@ -75,5 +76,5 @@ export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> =
   if (!project) {
     return { notFound: true };
   }
-  return { props: { project } };
+  return { props: { project, session: await getSession() } };
 };

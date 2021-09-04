@@ -3,10 +3,10 @@ import Dismiss from '@geist-ui/react-icons/x';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { SignInButton } from '$/blocks/SignInButton';
 import { UserDropDown } from '$/blocks/UserDropDown';
 import { Link } from '$/components/Link';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { bluredBg } from '$/styles/common';
 
 import { IconButton } from '../Button';
@@ -38,7 +38,7 @@ export function Header(): JSX.Element {
             </div>
             <nav tw="w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-200) flex-wrap items-center mb-5 space-x-5">
               {!isLogin ? (
-                <Link href="/pricing" tw="" highlightMatch>
+                <Link href="/#pricing" tw="" highlightMatch>
                   Pricing
                 </Link>
               ) : (
@@ -66,7 +66,7 @@ export function Header(): JSX.Element {
               Dashboard
             </Link>
           ) : (
-            <Link href="/pricing" tw="px-3 py-2" highlightMatch>
+            <Link href="/#pricing" tw="px-3 py-2" highlightMatch>
               Pricing
             </Link>
           )}

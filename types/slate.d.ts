@@ -81,9 +81,9 @@ export type CustomText = {
   text: string;
 };
 
-// export type EmptyText = {
-//   text: string;
-// };
+export type EmptyText = {
+  text: string;
+};
 
 export type CustomEditor = BaseEditor & ReactEditor & HistoryEditor;
 

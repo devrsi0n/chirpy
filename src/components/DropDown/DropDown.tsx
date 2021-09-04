@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
 import { Menu } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
@@ -11,7 +14,7 @@ import { Button, IconButton } from '../Button';
 
 export type Shape = 'circle' | 'square';
 
-export type DropDownMenuProps = React.PropsWithChildren<{
+export type DropDownProps = React.PropsWithChildren<{
   content: React.ReactNode;
   buttonProps?: {
     shape?: Shape;
@@ -24,12 +27,12 @@ export type DropDownMenuProps = React.PropsWithChildren<{
   };
 }>;
 
-export function DropDownMenu({
+export function DropDown({
   content,
   buttonProps = { shape: 'circle', ariaLabel: 'Click to open dorp down' },
   classes,
   children,
-}: DropDownMenuProps): JSX.Element {
+}: DropDownProps): JSX.Element {
   const { shape, ariaLabel } = buttonProps;
   return (
     <div css={[tw`relative inline-block text-left`, classes?.root]}>
@@ -68,20 +71,37 @@ export function DropDownMenu({
   );
 }
 
-DropDownMenu.Item = DropDownMenuItem;
+DropDown.Item = DropDownItem;
 
-export type DropDownMenuItemProps = React.PropsWithChildren<{
-  className?: string;
-  onClick?(): void;
-}>;
+export type DropDownItemProps = React.PropsWithChildren<
+  {
+    className?: string;
+    disableAutoDismiss?: boolean;
+  } & Pick<React.ComponentProps<typeof Menu.Item>, 'onClick'>
+>;
 
-export function DropDownMenuItem(props: DropDownMenuItemProps): JSX.Element {
-  const child = (/* { active }: ItemRenderPropArg */) => (
-    <div css={itemStyle} className={props.className}>
-      {props.children}
-    </div>
+export function DropDownItem(props: DropDownItemProps): JSX.Element {
+  const child = props.disableAutoDismiss ? (
+    <div onClick={(e) => props.disableAutoDismiss && e.stopPropagation()}>{props.children}</div>
+  ) : (
+    props.children
   );
-  return <Menu.Item onClick={props.onClick}>{child}</Menu.Item>;
+  return (
+    <Menu.Item onClick={props.onClick}>
+      {
+        (/* { active }: ItemRenderPropArg */) => (
+          <div
+            css={[itemStyle, !props.disableAutoDismiss && DropDownItemPadding]}
+            className={props.className}
+          >
+            {child}
+          </div>
+        )
+      }
+    </Menu.Item>
+  );
 }
 
-const itemStyle = tw`flex flex-row items-center border-none rounded text-gray-600 dark:text-gray-300 hover:(bg-gray-100 text-gray-700) dark:hover:(text-gray-100 bg-gray-800) cursor-pointer w-full px-6 py-2 text-sm text-right`;
+export const DropDownItemPadding = tw`px-6 py-2`;
+
+const itemStyle = tw`flex flex-row items-center border-none rounded text-gray-600 dark:text-gray-300 hover:(bg-gray-100 text-gray-700) dark:hover:(text-gray-100 bg-gray-800) cursor-pointer w-full text-sm text-right`;

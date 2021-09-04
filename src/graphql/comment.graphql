@@ -2,6 +2,7 @@ fragment commentContent on Comment {
   id
   content
   createdAt
+  deletedAt
   parentId
   pageId
   depth
@@ -55,6 +56,12 @@ mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $de
   insertOneComment(
     object: { content: $content, parentId: $parentId, pageId: $pageId, depth: $depth }
   ) {
+    id
+  }
+}
+
+mutation deleteOneComment($id: uuid!) {
+  updateCommentByPk(pk_columns: { id: $id }, _set: { deletedAt: "now()" }) {
     id
   }
 }

@@ -6,10 +6,10 @@ import { signOut } from 'next-auth/client';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Divider } from '$/components/Divider';
-import { DropDownMenu } from '$/components/DropDownMenu';
+import { DropDown } from '$/components/DropDown';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { Toggle } from '$/components/Toggle';
@@ -27,7 +27,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const handleSignIn = useSignIn();
 
   return (
-    <DropDownMenu
+    <DropDown
       classes={{
         button: tw`transform translate-x-2`,
       }}
@@ -44,55 +44,55 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
       {props.variant === 'Widget' &&
         (isLogin ? (
           <>
-            <DropDownMenu.Item>
+            <DropDown.Item>
               <Toggle
                 label="Subscribe this comment"
                 enabled={enableSubscribeComment}
                 onChange={setEnableSubscribeComment}
                 reverse
               />
-            </DropDownMenu.Item>
-            <DropDownMenu.Item>
+            </DropDown.Item>
+            <DropDown.Item>
               <Toggle
                 label="Subscribe site comment"
                 enabled={enableSubscribeSite}
                 onChange={setEnableSubscribeSite}
                 reverse
               />
-            </DropDownMenu.Item>
+            </DropDown.Item>
           </>
         ) : (
-          <DropDownMenu.Item css={itemStyle} onClick={handleSignIn}>
+          <DropDown.Item css={itemStyle} onClick={handleSignIn}>
             <LogIn size={14} />
             <p tw="w-max">Sign in</p>
-          </DropDownMenu.Item>
+          </DropDown.Item>
         ))}
       {props.variant === 'Nav' && isLogin && (
         <>
-          <DropDownMenu.Item>
+          <DropDown.Item>
             <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>
               <Monitor size={14} />
               <span>Dashboard</span>
             </Link>
-          </DropDownMenu.Item>
-          <DropDownMenu.Item>
+          </DropDown.Item>
+          <DropDown.Item>
             <Link variant="plain" href="/profile" css={itemStyle}>
               <User size={14} />
               <span>Profile</span>
             </Link>
-          </DropDownMenu.Item>
+          </DropDown.Item>
         </>
       )}
       {isLogin && (
         <>
           <Divider />
-          <DropDownMenu.Item css={itemStyle} onClick={() => signOut()}>
+          <DropDown.Item css={itemStyle} onClick={() => signOut()}>
             <LogOut size={14} />
             <span tw="w-max">Log out</span>
-          </DropDownMenu.Item>
+          </DropDown.Item>
         </>
       )}
-    </DropDownMenu>
+    </DropDown>
   );
 }
 

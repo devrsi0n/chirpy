@@ -5,10 +5,10 @@
 const jwt = require('jsonwebtoken');
 
 /**
- * @type {function({ userId: string; name: string; email: string }, { maxAge: number | string; allowedRoles: string[]; defaultRole: string; role: string}): string}
+ * @type {function({ userId: string; name: string; email: string }, { maxAge: number | string; allowedRoles: string[]; defaultRole: string; role: string; hasuraClaims?: Record<string, string>}): string}
  */
 function createAuthToken(payload, options) {
-  const { maxAge, allowedRoles, defaultRole, role } = options;
+  const { maxAge, allowedRoles, defaultRole, role, hasuraClaims } = options;
   const jwtClaims = {
     sub: payload.userId,
     name: payload.name,
@@ -19,12 +19,12 @@ function createAuthToken(payload, options) {
       'x-hasura-default-role': defaultRole,
       'x-hasura-role': role,
       'x-hasura-user-id': payload.userId,
+      ...hasuraClaims,
     },
   };
   const encodedToken = createToken(jwtClaims, {
     maxAge,
   });
-  // console.log({ jwtClaims, key: process.env.HASH_KEY });
   return encodedToken;
 }
 

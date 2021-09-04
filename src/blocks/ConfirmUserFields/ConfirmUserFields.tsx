@@ -12,7 +12,7 @@ import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
 import { sleep } from '$/utilities/time';
 
-import { useCurrentUser } from '../CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '../../contexts/CurrentUserProvider/useCurrentUser';
 
 export type ConfirmUserFieldsProps = {
   //

@@ -18,3 +18,4 @@ function getAnonymousToken() {
   return authToken;
 }
 module.exports = getAnonymousToken();
+module.exports.getAnonymousToken = getAnonymousToken;

@@ -4,15 +4,18 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
-import { Text } from '$/components/Text';
+import { Spinner } from '$/components/Spinner';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
   const [session] = useSession();
-  const { data } = useCurrentUser();
+  const { data, loading } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {
+    if (loading) {
+      return;
+    }
     if (session?.isNewUser) {
       router.push('/auth/welcome');
     } else if (!hasValidUserProfile(data)) {
@@ -20,15 +23,13 @@ export default function Redirecting(): JSX.Element {
     } else {
       router.push('/dashboard');
     }
-  }, [session?.isNewUser, router, data]);
+  }, [session?.isNewUser, router, data, loading]);
   return (
     <>
       <Head>
         <title>Redirecting</title>
       </Head>
-      <section tw="mx-auto">
-        <Text>Redirecting...</Text>
-      </section>
+      <Spinner tw="mt-32 justify-center" />
     </>
   );
 }

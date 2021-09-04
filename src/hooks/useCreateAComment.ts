@@ -4,7 +4,7 @@ import { RTEValue } from '$/blocks/RichTextEditor';
 import { useToast } from '$/components/Toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 
-import { useCurrentUser } from '../blocks/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '../contexts/CurrentUserProvider/useCurrentUser';
 
 export type useCreateACommentOptions = {
   pageId: string;

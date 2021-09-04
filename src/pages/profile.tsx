@@ -7,7 +7,6 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
@@ -18,6 +17,7 @@ import { Text } from '$/components/Text';
 import { TextArea } from '$/components/TextArea';
 import { TextField } from '$/components/TextField';
 import { useToast } from '$/components/Toast';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
 

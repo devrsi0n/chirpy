@@ -18,6 +18,12 @@ query projectByPk($id: uuid!) {
   }
 }
 
+query userProjects($userId: Int!) {
+  projects(where: { userId: { _eq: $userId } }) {
+    id
+  }
+}
+
 query projectAnalytics(
   $projectId: uuid!
   $today: timestamptz!

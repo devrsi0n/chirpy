@@ -16,6 +16,7 @@ export type DialogProps = React.PropsWithChildren<{
   styles?: {
     root?: TwStyle;
     content?: TwStyle;
+    overlay?: TwStyle;
   };
   /**
    * @default false
@@ -55,7 +56,7 @@ export function Dialog({
         >
           <div tw="min-h-full px-4 flex justify-center items-center">
             <m.div {...easeInOutOpacity} tw="fixed inset-0">
-              <HeadlessDialog.Overlay css={[tw`fixed inset-0`, bluredOverlay]} />
+              <HeadlessDialog.Overlay css={[tw`fixed inset-0`, bluredOverlay, styles.overlay]} />
             </m.div>
             <m.div {...easeInOut}>
               <div tw="inline-block shadow-md relative">

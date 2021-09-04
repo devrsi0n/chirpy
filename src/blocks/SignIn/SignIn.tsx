@@ -7,7 +7,6 @@ import { Alert } from '$/components/Alert';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
-import { Logo } from '$/components/Logo';
 import { Text } from '$/components/Text';
 import { SIGN_IN_ERRORS } from '$/strings';
 
@@ -37,7 +36,6 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       <div tw="flex flex-row h-full">
         <div tw="flex-1 flex flex-col justify-center items-center">
           <div tw="py-7 mx-20 w-full md:w-96">
-            <Logo size="lg" noSpacing tw="block mb-20" />
             <div tw="space-y-2">
               <Heading as="h2" tw="font-black mt-5">
                 {title}
@@ -58,7 +56,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                   size="lg"
                 >
                   <option.icon />
-                  <span tw="inline-block ml-2 text-left" style={{ width: '12.5rem' }}>
+                  <span tw="inline-block ml-2 text-left font-semibold" style={{ width: '12.5rem' }}>
                     Sign in with {option.name}
                   </span>
                 </Button>

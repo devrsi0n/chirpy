@@ -15,7 +15,9 @@ export type CurrentUserContextType = UserQueryState & {
   refetchData?: () => void;
 } & {
   isLogin: boolean;
-  data: UserData;
+  data: UserData & {
+    editableProjectIds?: string[];
+  };
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>({

@@ -11,8 +11,9 @@ import * as React from 'react';
 import superjson from 'superjson';
 import 'twin.macro';
 
-import { CommentWidget } from '$/blocks/CommentWidget';
+import { CommentTrees } from '$/blocks/CommentTrees';
 import { PoweredBy } from '$/blocks/PoweredBy';
+import { CommentContextProvider } from '$/contexts/CommentContext';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
@@ -24,13 +25,11 @@ import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { PagesDocument } from '$/server/graphql/generated/page';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
-
-// Demo: http://localhost:3000/widget/comment/b5a16120-593c-492f-ad94-e14d247485f3
 
 /**
  * Comment tree widget for a page
@@ -64,13 +63,13 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <>
+    <CommentContextProvider projectId={props.projectId}>
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
-      <CommentWidget {...{ comments, onSubmitReply, onClickLikeAction }} />
+      <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
       <PoweredBy />
-    </>
+    </CommentContextProvider>
   );
 }
 
@@ -101,7 +100,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = PathParams &
-  CommonPageProps & {
+  CommonWidgetProps & {
     comments: CommentLeafType[];
   };
 type StaticError = {
