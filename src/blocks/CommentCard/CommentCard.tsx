@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
@@ -130,7 +127,7 @@ export function CommentCard({
                 <DropDownItem tw="space-x-1" disableAutoDismiss>
                   <Popover
                     placement="topEnd"
-                    buttonAs="div"
+                    buttonAs="button"
                     content={
                       <div tw="flex flex-row items-center space-x-2">
                         <Text variant="sm" tw="w-max">

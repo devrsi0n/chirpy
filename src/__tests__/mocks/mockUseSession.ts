@@ -1,5 +1,7 @@
 import * as AuthClient from 'next-auth/client';
 
+import { EDITABLE_PROJECT_IDS } from './editableProjectIds';
+
 const mockUseSession = jest.spyOn(AuthClient, 'useSession');
 
 mockUseSession.mockReturnValue([
@@ -10,6 +12,7 @@ mockUseSession.mockReturnValue([
       email: '',
       name: '',
       image: '',
+      editableProjectIds: EDITABLE_PROJECT_IDS,
     },
     isNewUser: true,
   },

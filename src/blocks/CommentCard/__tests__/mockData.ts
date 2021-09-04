@@ -8,7 +8,7 @@ export function generateCommentCard(fill: number) {
     },
     content: [
       {
-        type: 'paragraph',
+        type: 'paragraph' as const,
         children: [{ text: `comment content ${fill}` }],
       },
     ],

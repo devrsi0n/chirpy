@@ -1,3 +1,7 @@
+const nonTestConfig = {
+  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
+};
+
 module.exports = {
   presets: [
     [
@@ -10,8 +14,10 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['@emotion/babel-plugin', 'babel-plugin-macros'],
+  plugins: ['babel-plugin-macros'],
   env: {
+    production: nonTestConfig,
+    development: nonTestConfig,
     test: {
       presets: [
         [
