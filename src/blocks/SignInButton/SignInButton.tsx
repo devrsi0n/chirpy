@@ -4,8 +4,8 @@ import { signIn } from 'next-auth/client';
 import * as React from 'react';
 import 'twin.macro';
 
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { Button, ButtonProps } from '$/components/Button';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useSignIn } from '$/hooks/useSignIn';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant'> & {

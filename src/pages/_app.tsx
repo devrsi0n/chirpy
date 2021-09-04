@@ -41,17 +41,19 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
         <NextThemesProvider attribute="class" storageKey="TotalkTheme">
           <SiteThemeProvider>
             <LazyMotion features={loadFeatures} strict>
-              <AppLayout {...pageProps}>
+              <SessionGuard>
                 <ApolloClientProvider>
                   <CurrentUserProvider>
                     <ToastProvider>
-                      <AuthWrapper>
-                        <Component {...pageProps} />
-                      </AuthWrapper>
+                      <AppLayout {...pageProps}>
+                        <AuthWrapper>
+                          <Component {...pageProps} />
+                        </AuthWrapper>
+                      </AppLayout>
                     </ToastProvider>
                   </CurrentUserProvider>
                 </ApolloClientProvider>
-              </AppLayout>
+              </SessionGuard>
             </LazyMotion>
           </SiteThemeProvider>
         </NextThemesProvider>
@@ -70,12 +72,6 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
   const { isWidget, children, projectId, layoutProps, theme } = props;
   const ThemeWrapper = isWidget ? ThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
-  const [, loading] = useSession();
-  const isMounted = useMountedState();
-
-  if (loading && !isMounted) {
-    return <Spinner tw="mt-32 justify-center" />;
-  }
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
       <LayoutWrapper projectId={projectId!} {...layoutProps}>
@@ -83,6 +79,16 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
       </LayoutWrapper>
     </ThemeWrapper>
   );
+}
+
+function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element {
+  const [, loading] = useSession();
+  const isMounted = useMountedState();
+
+  if (loading && !isMounted) {
+    return <Spinner tw="mt-32 justify-center" />;
+  }
+  return <>{children}</>;
 }
 
 function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
