@@ -3,21 +3,21 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
-export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> };
+export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> };
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentTreeSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
+export type CommentTreeSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
 
 export type CommentDetailsSubscriptionVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentDetailsSubscription = { __typename?: 'subscription_root', commentByPk?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
+export type CommentDetailsSubscription = { __typename?: 'subscription_root', commentByPk?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, parent?: Types.Maybe<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: Types.Maybe<string>, parentId?: Types.Maybe<string>, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: Types.Maybe<string>, avatar?: Types.Maybe<string> }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
 
 export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
@@ -29,11 +29,19 @@ export type InsertOneCommentMutationVariables = Types.Exact<{
 
 export type InsertOneCommentMutation = { __typename?: 'mutation_root', insertOneComment?: Types.Maybe<{ __typename?: 'Comment', id: string }> };
 
+export type DeleteOneCommentMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+
+export type DeleteOneCommentMutation = { __typename?: 'mutation_root', updateCommentByPk?: Types.Maybe<{ __typename?: 'Comment', id: string }> };
+
 export const CommentContentFragmentDoc = gql`
     fragment commentContent on Comment {
   id
   content
   createdAt
+  deletedAt
   parentId
   pageId
   depth
@@ -167,3 +175,36 @@ export function useInsertOneCommentMutation(baseOptions?: Apollo.MutationHookOpt
 export type InsertOneCommentMutationHookResult = ReturnType<typeof useInsertOneCommentMutation>;
 export type InsertOneCommentMutationResult = Apollo.MutationResult<InsertOneCommentMutation>;
 export type InsertOneCommentMutationOptions = Apollo.BaseMutationOptions<InsertOneCommentMutation, InsertOneCommentMutationVariables>;
+export const DeleteOneCommentDocument = gql`
+    mutation deleteOneComment($id: uuid!) {
+  updateCommentByPk(pk_columns: {id: $id}, _set: {deletedAt: "now()"}) {
+    id
+  }
+}
+    `;
+export type DeleteOneCommentMutationFn = Apollo.MutationFunction<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>;
+
+/**
+ * __useDeleteOneCommentMutation__
+ *
+ * To run a mutation, you first call `useDeleteOneCommentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteOneCommentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteOneCommentMutation, { data, loading, error }] = useDeleteOneCommentMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>(DeleteOneCommentDocument, options);
+      }
+export type DeleteOneCommentMutationHookResult = ReturnType<typeof useDeleteOneCommentMutation>;
+export type DeleteOneCommentMutationResult = Apollo.MutationResult<DeleteOneCommentMutation>;
+export type DeleteOneCommentMutationOptions = Apollo.BaseMutationOptions<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>;

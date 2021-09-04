@@ -7,10 +7,11 @@ import { createEditor, Transforms } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import tw, { css, TwStyle } from 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Button } from '$/components/Button';
 import { Text } from '$/components/Text';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
+import { usePrevious } from '$/hooks/usePrevious';
 import { APP_NAME_LOWERCASE } from '$/lib/constants';
 
 import { SignInButton } from '../SignInButton';
@@ -54,7 +55,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
     onClickDismiss,
     placeholder,
   } = props;
-  const [value, setValue] = React.useState<RTEValue>(() => getValue(props));
+  const [value, setValue] = useRTEValue(props);
   const handleRTEChange = (newValue: RTEValue) => {
     if (newValue === value) {
       return;
@@ -75,7 +76,6 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
       return;
     }
     setIsLoading(false);
-
     // Transforms.deselect(editor);
     Transforms.select(editor, [0]);
     setValue(EMPTY_INPUT);
@@ -149,6 +149,21 @@ const getSavedContent = (): RTEValue | undefined => {
   const content = typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY);
   return content && JSON.parse(content);
 };
+
+const useRTEValue = (
+  props: IRichTextEditorProps,
+): [RTEValue, React.Dispatch<React.SetStateAction<RTEValue>>] => {
+  const [value, setValue] = React.useState<RTEValue>(() => getValue(props));
+  const prevValue = usePrevious(value);
+  React.useEffect(() => {
+    if (props.initialValue && prevValue !== props.initialValue) {
+      setValue(props.initialValue);
+    }
+  }, [props.initialValue, prevValue]);
+
+  return [value, setValue];
+};
+
 const getValue = (props?: IRichTextEditorProps): RTEValue => {
   if (props?.disabled) {
     return props.initialValue || EMPTY_INPUT;

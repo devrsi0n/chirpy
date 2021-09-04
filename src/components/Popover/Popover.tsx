@@ -3,8 +3,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { bluredBg } from '$/styles/common';
-
 import { easeInOut } from '../Animation';
 import { Button } from '../Button';
 
@@ -14,7 +12,8 @@ export interface IPopoverProps {
   children: React.ReactNode;
   content: React.ReactNode;
   buttonProps?: $TsAny;
-  buttonAs?: React.FunctionComponent<$TsAny>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  buttonAs?: React.ElementType<{}>;
   /**
    * TODO
    */
@@ -32,6 +31,7 @@ export function Popover({
   buttonAs,
   children,
   content,
+  placement = 'top',
 }: IPopoverProps): JSX.Element {
   const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
   const handleClickPanel = () => {
@@ -55,15 +55,15 @@ export function Popover({
                   static
                   css={[tw`absolute right-0 z-10`, panelBorder]}
                   style={{
-                    bottom: (buttonRef.current?.getBoundingClientRect().height || 40) + 16,
-                    transform: `translateX(calc(50% - ${
-                      (buttonRef.current?.getBoundingClientRect().width || 40) / 2
-                    }px))`,
+                    ...getPanelStyles(placement, {
+                      height: buttonRef.current?.getBoundingClientRect().height,
+                      width: buttonRef.current?.getBoundingClientRect().width,
+                    }),
                     boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
                   }}
                 >
                   <div
-                    css={[tw`relative py-2 px-4 rounded-lg`, panelBg, panelBorder]}
+                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder]}
                     onClick={handleClickPanel}
                     onKeyDown={handleClickPanel}
                     role="button"
@@ -77,10 +77,10 @@ export function Popover({
                       panelBg,
                       tw`border-t-0 border-l-0`,
                     ]}
-                    style={{
-                      bottom: '-8px',
-                      right: 'calc(50% - 8px)',
-                    }}
+                    style={getBeakStyles(
+                      placement,
+                      buttonRef.current?.getBoundingClientRect().width,
+                    )}
                   />
                 </HeadLessPopover.Panel>
               </m.div>
@@ -92,5 +92,48 @@ export function Popover({
   );
 }
 
-const panelBg = [bluredBg, tw`border border-gray-500 border-opacity-10`];
+function getPanelStyles(
+  placement: Placement,
+  { width, height }: ButtonDimension,
+): React.CSSProperties {
+  const bottom = (height || 40) + 16;
+  switch (placement) {
+    case 'top':
+      return {
+        bottom,
+        transform: `translateX(calc(50% - ${(width || DEFAULT_WIDTH) / 2}px))`,
+      };
+    case 'topEnd':
+      return {
+        bottom,
+        right: 0,
+      };
+    default:
+      return {};
+  }
+}
+
+function getBeakStyles(placement: Placement, width = DEFAULT_WIDTH): React.CSSProperties {
+  const bottom = '-8px';
+  switch (placement) {
+    case 'top':
+      return {
+        bottom,
+        right: 'calc(50% - 8px)',
+      };
+    case 'topEnd':
+      return {
+        bottom,
+        right: `${width / 2}px`,
+      };
+    default:
+      return {};
+  }
+}
+
+const DEFAULT_WIDTH = 40;
+
+type ButtonDimension = { height?: number; width?: number };
+
+const panelBg = [tw`bg-white`, tw`border border-gray-500 border-opacity-10`];
 const panelBorder = tw`rounded-lg`;

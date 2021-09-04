@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   CurrentUserContext,
   CurrentUserContextType,
-} from '$/blocks/CurrentUserProvider/CurrentUserContext';
+} from '$/contexts/CurrentUserProvider/CurrentUserContext';
 
 export function useCurrentUser(): CurrentUserContextType {
   const context = React.useContext(CurrentUserContext);

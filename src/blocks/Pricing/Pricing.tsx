@@ -15,14 +15,14 @@ export type PricingProps = React.PropsWithChildren<{
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} tw="py-8 flex flex-col items-center">
-      <Heading as="h2" tw="font-bold mb-4">
+      <Heading as="h2" tw="font-semibold mb-4">
         Pricing Plans
       </Heading>
-      <Text tw="text-gray-400 mb-8" variant="lg">
+      <Text tw="text-gray-400 mb-8 mx-6" variant="lg">
         Start building for free, then add a site to go live. Account plans unblock additional
         features.
       </Text>
-      <div tw="flex flex-row space-x-6">
+      <div tw="flex flex-col space-y-3 md:(flex-row space-x-6 space-y-0)">
         <PricingCard
           plan="Hobby"
           price="0"
@@ -33,7 +33,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             '1 Website',
             'Privacy-first, No Ads',
             'Basic rich text formatting',
-            'Markdown support',
+            // 'Markdown support',
             'Third party sign in',
             'Basic analytics',
           ]}
@@ -47,7 +47,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             </span>,
             'Privacy-first, No Ads',
             'Basic rich text formatting',
-            'Markdown support',
+            // 'Markdown support',
             'Third party sign in',
             'Basic analytics',
             'Text formatting with image',

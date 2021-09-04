@@ -37,11 +37,14 @@ export function CurrentUserProvider({
     () => ({
       ...restProps,
       loading: sessionIsLoading || restProps.loading,
-      data: data?.userByPk || {},
+      data: {
+        ...data?.userByPk,
+        editableProjectIds: session?.user.editableProjectIds || [],
+      },
       refetchData: handleFetchUser,
       isLogin: !!data?.userByPk?.id,
     }),
-    [data, restProps, handleFetchUser, sessionIsLoading],
+    [data, restProps, handleFetchUser, session, sessionIsLoading],
   );
 
   return <CurrentUserContext.Provider value={value}>{children}</CurrentUserContext.Provider>;

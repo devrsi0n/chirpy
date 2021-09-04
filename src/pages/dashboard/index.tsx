@@ -2,7 +2,6 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
@@ -10,6 +9,7 @@ import { Heading } from '$/components/Heading';
 import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsLazyQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';

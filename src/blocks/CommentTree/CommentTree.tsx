@@ -25,6 +25,7 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
         likes={comment.likes}
         depth={comment.depth}
         createdAt={comment.createdAt}
+        deletedAt={comment.deletedAt}
         onClickLikeAction={onClickLikeAction}
         onSubmitReply={onSubmitReply}
       />
@@ -43,7 +44,7 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
                 initial={{ opacity: 0, y: 50, scale: 0.3 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
               >
-                <MemoCommentTree
+                <CommentTree
                   key={reply.id}
                   comment={reply}
                   onClickLikeAction={onClickLikeAction}
@@ -58,5 +59,4 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
   );
 }
 
-const MemoCommentTree = React.memo(CommentTree);
-export { MemoCommentTree as CommentTree };
+export { CommentTree };

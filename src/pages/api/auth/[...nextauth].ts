@@ -1,12 +1,15 @@
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import pg from 'pg';
 
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
+import { getAdminApollo } from '$/server/common/admin-apollo';
+import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { authProviders } from '$/server/services/auth';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { isENVDev } from '$/server/utilities/env';
+import { getPGArray } from '$/server/utilities/get-pgarray';
 
 pg.defaults.ssl = {
   rejectUnauthorized: false,
@@ -34,8 +37,6 @@ export default NextAuth({
      * @return JSON Web Token that will be saved
      */
     async jwt(decodedToken, user, account, profile, isNewUser) {
-      console.log('jwt', { decodedToken, user, account, profile, isNewUser });
-
       if (user) {
         await fillUserFields(user as any, profile as any, account?.provider as any);
       }
@@ -44,8 +45,17 @@ export default NextAuth({
         isNewUser: !!isNewUser,
       };
     },
-    async session(session, jwtPayload: JWT) {
-      console.log({ session, jwtPayload });
+    async session(session: Session, jwtPayload: JWT) {
+      const adminClient = getAdminApollo();
+      const userId = +jwtPayload.sub!;
+      const { data } = await adminClient.query({
+        fetchPolicy: 'cache-first',
+        query: UserProjectsDocument,
+        variables: {
+          userId,
+        },
+      });
+      const editableProjectIds = data.projects.map(({ id }) => id);
       session.hasuraToken = createAuthToken(
         {
           userId: jwtPayload.sub!,
@@ -57,15 +67,20 @@ export default NextAuth({
           allowedRoles: ['user'],
           defaultRole: 'user',
           role: 'user',
+          hasuraClaims: {
+            // Projects with edit permission of the user
+            'X-Hasura-Editable-Project-Ids': getPGArray(editableProjectIds),
+            // 'X-Hasura-Editable-Project-Ids': editableProjectIds,
+          },
         },
       );
       if (session.user) {
-        session.user.id = +jwtPayload.sub!;
+        session.user.id = userId;
+        session.user.editableProjectIds = editableProjectIds;
       }
       return session;
     },
     async signIn(user, account, profile) {
-      console.log({ user, account, profile });
       // Restrict access to people with verified accounts
       if (account.provider === 'google' && profile.verified_email !== true) {
         return false;

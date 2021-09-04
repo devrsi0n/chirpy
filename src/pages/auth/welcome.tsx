@@ -3,11 +3,11 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { ConfirmUserFields } from '$/blocks/ConfirmUserFields';
-import { useCurrentUser } from '$/blocks/CurrentUserProvider/useCurrentUser';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useConfetti } from '$/hooks/useConfetti';
 import { hasValidUserProfile } from '$/utilities/user';
 

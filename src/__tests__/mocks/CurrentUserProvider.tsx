@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
+import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
 
 import * as userModule from '../../graphql/generated/user';
 

@@ -8,7 +8,7 @@ import tw from 'twin.macro';
 import { Button, IconButton } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Divider } from '$/components/Divider';
-import { DropDownMenu, DropDownMenuItem } from '$/components/DropDownMenu';
+import { DropDown, DropDownItem } from '$/components/DropDown';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
@@ -99,15 +99,15 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
           </div>
-          <DropDownMenu classes={{ root: tw`mr-2` }} content={<MoreVertical size={20} />}>
-            <DropDownMenuItem
+          <DropDown classes={{ root: tw`mr-2` }} content={<MoreVertical size={20} />}>
+            <DropDownItem
               onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
               tw="space-x-1"
             >
               <Trash2 size={14} />
               <span>Delete</span>
-            </DropDownMenuItem>
-          </DropDownMenu>
+            </DropDownItem>
+          </DropDown>
         </div>
       </div>
       <div tw="px-6 flex flex-row space-x-2">

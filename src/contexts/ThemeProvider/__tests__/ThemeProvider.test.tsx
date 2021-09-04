@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { ThemeProvider, useTheme, SiteThemeProvider } from '../';
+import { ThemeProvider, useTheme, SiteThemeProvider } from '..';
 import { siteDefaultTheme } from '../siteDefaultTheme';
 
 describe('ThemeProvider', () => {

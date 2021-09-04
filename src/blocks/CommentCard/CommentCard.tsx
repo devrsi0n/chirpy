@@ -1,12 +1,19 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
+import MoreVertical from '@geist-ui/react-icons/moreVertical';
+import Trash2 from '@geist-ui/react-icons/trash2';
 import { m, Variants } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
-import { ActionButton } from '$/components/Button';
+import { ActionButton, Button } from '$/components/Button';
+import { DropDown, DropDownItem, DropDownItemPadding } from '$/components/DropDown';
 import { Link } from '$/components/Link';
+import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
@@ -14,8 +21,11 @@ import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
+import { useCommentContext } from '../../contexts/CommentContext';
+import { useCurrentUser } from '../../contexts/CurrentUserProvider/useCurrentUser';
 import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import { RichTextEditor, RTEValue } from '../RichTextEditor';
+import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 
 export type Author = {
   id: number;
@@ -30,6 +40,7 @@ export type CommentCardProps = {
   author: Author;
   content: RTEValue;
   createdAt: string;
+  deletedAt?: string | null;
   likes: Like[];
   depth: number;
   preventDetailsPage?: boolean;
@@ -45,16 +56,17 @@ export function CommentCard({
   createdAt,
   likes,
   preventDetailsPage,
+  deletedAt,
   onSubmitReply,
   onClickLikeAction,
 }: CommentCardProps): JSX.Element {
   const { avatar, name } = author;
-
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-
+  const { projectId, deleteAComment } = useCommentContext();
   const { showToast } = useToast();
-  const disabledReply: boolean = depth === COMMENT_TREE_MAX_DEPTH;
-
+  const handleClickConfirmDelete = () => {
+    deleteAComment(commentId);
+  };
   const handleSubmitReply = async (replyContent: RTEValue) => {
     await onSubmitReply(replyContent, commentId, depth);
     setShowReplyEditor(false);
@@ -75,7 +87,7 @@ export function CommentCard({
       setContainerAnimate('shake');
     }
   };
-
+  const disabledReply: boolean = depth === COMMENT_TREE_MAX_DEPTH;
   const handlePressReply = React.useCallback(() => {
     if (disabledReply) {
       setContainerAnimate('shake');
@@ -83,77 +95,113 @@ export function CommentCard({
     }
     setShowReplyEditor((prev) => !prev);
   }, [disabledReply]);
+  const { data } = useCurrentUser();
+  const rteContent = deletedAt ? PLACEHOLDER_OF_DELETED_COMMENT : content;
+  const userHasModeratePermission = data?.editableProjectIds?.includes(projectId);
 
   return (
-    <m.article
-      animate={containerAnimate}
-      variants={shakeVariants}
-      onAnimationComplete={() => setContainerAnimate('stop')}
-      tw="flex flex-row items-start p-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
-      id={isENVDev ? commentId : undefined}
-    >
-      <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
-      <div tw="flex-1">
-        <div tw="flex flex-row items-baseline space-x-4 leading-none">
-          <Text bold>{name}</Text>
-          <Text
-            as="time"
-            title={createdAt}
-            tw="leading-none cursor-default text-gray-400"
-            // @ts-ignore
-            dateTime={createdAt}
-          >
-            {dayjs(createdAt).fromNow()}
-          </Text>
-        </div>
-        <div tw="mt-2">
-          <RichTextEditor initialValue={content} readOnly />
-        </div>
-        <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
-          <LikeAction
-            aria-label="Like"
-            likes={likes}
-            commentId={commentId}
-            onClickLikeAction={onClickLikeAction}
-          />
-          <ActionButton
-            aria-label="Reply"
-            color="blue"
-            disabled={disabledReply}
-            icon={<MessageSquare size={20} tw="transform -scale-x-1" />}
-            onClick={handlePressReply}
-          />
-          <Link
-            href={!preventDetailsPage ? detailsURL : ''}
-            variant="plain"
-            title={
-              !preventDetailsPage
-                ? 'The details of this comment'
-                : `This is already the current comment's detail page`
-            }
-          >
-            <ActionButton
-              color="green"
-              icon={<Info size={20} />}
-              disabled={preventDetailsPage}
-              onClick={handleClickLinkAction}
-            />
-          </Link>
-        </div>
-
-        {showReplyEditor && (
-          <div tw="flex flex-col space-y-2 ">
-            <RichTextEditor
-              placeholder={`What are your thoughts?`}
-              onSubmit={handleSubmitReply}
-              styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
-              showDismissButton
-              onClickDismiss={handleDimissRTE}
-            />
+    <>
+      <m.article
+        animate={containerAnimate}
+        variants={shakeVariants}
+        onAnimationComplete={() => setContainerAnimate('stop')}
+        tw="flex flex-row items-start py-4 pl-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
+        id={isENVDev ? commentId : undefined}
+      >
+        <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+        <div tw="flex-1">
+          <div tw="flex flex-row items-start justify-between">
+            <div tw="flex flex-row items-start space-x-4">
+              <Text bold tw="leading-none">
+                {name}
+              </Text>
+              <Text
+                as="time"
+                title={createdAt}
+                tw="leading-none cursor-default text-gray-400"
+                // @ts-ignore
+                dateTime={createdAt}
+              >
+                {dayjs(createdAt).fromNow()}
+              </Text>
+            </div>
+            {!deletedAt && userHasModeratePermission && (
+              <DropDown classes={{ root: tw`-mt-2 mr-2` }} content={<MoreVertical size={20} />}>
+                <DropDownItem tw="space-x-1" disableAutoDismiss>
+                  <Popover
+                    placement="topEnd"
+                    buttonAs="div"
+                    content={
+                      <div tw="flex flex-row items-center space-x-2">
+                        <Text variant="sm" tw="w-max">
+                          Are you sure?
+                        </Text>
+                        <Button size="sm" onClick={handleClickConfirmDelete}>
+                          Confirm
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <div css={[tw`flex flex-row items-center`, DropDownItemPadding]}>
+                      <Trash2 size={16} />
+                      <span tw="ml-1">Delete</span>
+                    </div>
+                  </Popover>
+                </DropDownItem>
+              </DropDown>
+            )}
           </div>
-        )}
-      </div>
-    </m.article>
+          <div tw="mt-1 mb-1.5">
+            <RichTextEditor initialValue={rteContent} readOnly />
+          </div>
+          {!deletedAt && (
+            <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
+              <LikeAction
+                aria-label="Like"
+                likes={likes}
+                commentId={commentId}
+                onClickLikeAction={onClickLikeAction}
+              />
+              <ActionButton
+                aria-label="Reply"
+                color="blue"
+                disabled={disabledReply}
+                icon={<MessageSquare size={20} tw="transform -scale-x-1" />}
+                onClick={handlePressReply}
+              />
+              <Link
+                href={!preventDetailsPage ? detailsURL : ''}
+                variant="plain"
+                title={
+                  !preventDetailsPage
+                    ? 'The details of this comment'
+                    : `This is already the current comment's detail page`
+                }
+              >
+                <ActionButton
+                  color="green"
+                  icon={<Info size={20} />}
+                  disabled={preventDetailsPage}
+                  onClick={handleClickLinkAction}
+                />
+              </Link>
+            </div>
+          )}
+
+          {showReplyEditor && (
+            <div tw="flex flex-col space-y-2 ">
+              <RichTextEditor
+                placeholder={`What are your thoughts?`}
+                onSubmit={handleSubmitReply}
+                styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
+                showDismissButton
+                onClickDismiss={handleDimissRTE}
+              />
+            </div>
+          )}
+        </div>
+      </m.article>
+    </>
   );
 }
 

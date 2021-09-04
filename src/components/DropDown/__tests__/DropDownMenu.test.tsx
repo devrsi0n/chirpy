@@ -2,7 +2,7 @@ import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
-import { DropDownMenu } from '../DropDownMenu';
+import { DropDown } from '../DropDown';
 
 describe('DropDownMenu', () => {
   afterEach(() => {
@@ -16,10 +16,10 @@ describe('DropDownMenu', () => {
     const item2Text = 'item 2';
     const mockHandleClickItem1 = jest.fn();
     render(
-      <DropDownMenu content={<span>{contentText}</span>}>
-        <DropDownMenu.Item onClick={mockHandleClickItem1}>{item1Text}</DropDownMenu.Item>
-        <DropDownMenu.Item>{item2Text}</DropDownMenu.Item>
-      </DropDownMenu>,
+      <DropDown content={<span>{contentText}</span>}>
+        <DropDown.Item onClick={mockHandleClickItem1}>{item1Text}</DropDown.Item>
+        <DropDown.Item>{item2Text}</DropDown.Item>
+      </DropDown>,
     );
     const button = screen.getByText(contentText);
     expect(button).toBeTruthy();
