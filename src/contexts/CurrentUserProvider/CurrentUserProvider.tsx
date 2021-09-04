@@ -25,7 +25,9 @@ export function CurrentUserProvider({
   });
 
   const handleFetchUser = React.useCallback(() => {
-    if (typeof session?.user?.id !== 'number') return;
+    if (typeof session?.user?.id !== 'number') {
+      return;
+    }
     return fetchUser({ variables: { id: session.user.id || -1 } });
   }, [fetchUser, session?.user?.id]);
 
@@ -33,8 +35,8 @@ export function CurrentUserProvider({
     handleFetchUser();
   }, [handleFetchUser]);
 
-  const value = React.useMemo<CurrentUserContextType>(
-    () => ({
+  const value = React.useMemo<CurrentUserContextType>(() => {
+    return {
       ...restProps,
       loading: sessionIsLoading || restProps.loading,
       data: {
@@ -43,9 +45,8 @@ export function CurrentUserProvider({
       },
       refetchData: handleFetchUser,
       isLogin: !!data?.userByPk?.id,
-    }),
-    [data, restProps, handleFetchUser, session, sessionIsLoading],
-  );
+    };
+  }, [data?.userByPk, restProps, handleFetchUser, session, sessionIsLoading]);
 
   return <CurrentUserContext.Provider value={value}>{children}</CurrentUserContext.Provider>;
 }
