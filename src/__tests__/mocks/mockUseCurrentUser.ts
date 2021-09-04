@@ -1,4 +1,7 @@
-import { CurrentUserContextType, UserData } from '$/contexts/CurrentUserProvider/CurrentUserContext';
+import {
+  CurrentUserContextType,
+  UserData,
+} from '$/contexts/CurrentUserProvider/CurrentUserContext';
 
 import * as useCurrentUserModule from '../../contexts/CurrentUserProvider/useCurrentUser';
 import { mockUserData } from './CurrentUserProvider';
