@@ -3,6 +3,7 @@ import * as React from 'react';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
 
 import * as userModule from '../../graphql/generated/user';
+import { EDITABLE_PROJECT_IDS } from './editableProjectIds';
 
 export type MockCurrentUserProviderProps = React.PropsWithChildren<{
   //
@@ -32,6 +33,7 @@ export const mockUserData = {
       ],
     },
   ],
+  editableProjectIds: EDITABLE_PROJECT_IDS,
 };
 
 jest.spyOn(userModule, 'useCurrentUserLazyQuery').mockReturnValue([
