@@ -45,6 +45,7 @@ export function CommentLinkedList({
               likes={_comment.likes}
               depth={_comment.depth}
               createdAt={_comment.createdAt}
+              deletedAt={_comment.deletedAt}
               onSubmitReply={onSubmitReply}
               onClickLikeAction={onClickLikeAction}
             />
@@ -69,6 +70,7 @@ export function CommentLinkedList({
                 likes={reply.likes}
                 depth={reply.depth}
                 createdAt={reply.createdAt}
+                deletedAt={reply.deletedAt}
                 onClickLikeAction={onClickLikeAction}
                 onSubmitReply={onSubmitReply}
               />

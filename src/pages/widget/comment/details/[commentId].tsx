@@ -17,6 +17,7 @@ import { UserDropDown } from '$/blocks/UserDropDown';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
+import { CommentContextProvider } from '$/contexts/CommentContext';
 import {
   CommentDetailsDocument,
   CommentDetailsSubscription,
@@ -28,7 +29,7 @@ import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument } from '$/server/graphql/generated/comment';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
 
@@ -48,7 +49,7 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <>
+    <CommentContextProvider projectId={props.projectId}>
       <div css={tw`flex flex-row justify-between items-center mb-4`}>
         <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
           <IconButton size="md" css={tw`transform -translate-x-3`}>
@@ -70,7 +71,7 @@ export default function CommentDetailsWidget(
         />
       )}
       <PoweredBy />
-    </>
+    </CommentContextProvider>
   );
 }
 type PathParams = {
@@ -78,7 +79,7 @@ type PathParams = {
 };
 
 type StaticProps = PathParams &
-  CommonPageProps & {
+  CommonWidgetProps & {
     comment: CommentDetailNode;
   };
 

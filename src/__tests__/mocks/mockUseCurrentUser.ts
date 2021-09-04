@@ -1,6 +1,6 @@
-import { CurrentUserContextType, UserData } from '$/blocks/CurrentUserProvider/CurrentUserContext';
+import { CurrentUserContextType, UserData } from '$/contexts/CurrentUserProvider/CurrentUserContext';
 
-import * as useCurrentUserModule from '../../blocks/CurrentUserProvider/useCurrentUser';
+import * as useCurrentUserModule from '../../contexts/CurrentUserProvider/useCurrentUser';
 import { mockUserData } from './CurrentUserProvider';
 
 export const mockRefetch = jest.fn();

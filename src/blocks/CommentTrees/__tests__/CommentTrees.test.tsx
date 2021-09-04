@@ -5,7 +5,7 @@ import {
   getTextsOfComment,
 } from '$/blocks/CommentLinkedList/__tests__/mockData';
 
-import { CommentWidget } from '../';
+import { CommentTrees } from '..';
 
 const mockOnSubmitReply = jest.fn();
 const mockOnClickLikeAction = jest.fn();
@@ -20,10 +20,10 @@ const mockComments = [
   },
 ];
 
-describe('CommentWidget', () => {
+describe('CommentTrees', () => {
   beforeEach(() => {
     render(
-      <CommentWidget
+      <CommentTrees
         comments={mockComments as any}
         onSubmitReply={mockOnSubmitReply}
         onClickLikeAction={mockOnClickLikeAction}

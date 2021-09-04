@@ -5,16 +5,17 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useMountedState } from 'react-use';
 import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
-import { ApolloClientProvider } from '$/blocks/ApolloClientProvider';
-import { CurrentUserProvider } from '$/blocks/CurrentUserProvider';
 import { Layout, WidgetLayout } from '$/components/Layout';
 import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
-import { SiteThemeProvider, ThemeProvider } from '$/components/ThemeProvider';
 import { ToastProvider } from '$/components/Toast';
+import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
+import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
+import { SiteThemeProvider, ThemeProvider } from '$/contexts/ThemeProvider';
 import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
@@ -23,7 +24,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
   }, []);
-  const AuthWrapper = (Component as any).auth ? Auth : React.Fragment;
+  const AuthWrapper = (Component as any).auth ? AuthGuard : React.Fragment;
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
@@ -40,17 +41,17 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
         <NextThemesProvider attribute="class" storageKey="TotalkTheme">
           <SiteThemeProvider>
             <LazyMotion features={loadFeatures} strict>
-              <ApolloClientProvider>
-                <CurrentUserProvider>
-                  <ToastProvider>
-                    <AppLayout {...pageProps}>
+              <AppLayout {...pageProps}>
+                <ApolloClientProvider>
+                  <CurrentUserProvider>
+                    <ToastProvider>
                       <AuthWrapper>
                         <Component {...pageProps} />
                       </AuthWrapper>
-                    </AppLayout>
-                  </ToastProvider>
-                </CurrentUserProvider>
-              </ApolloClientProvider>
+                    </ToastProvider>
+                  </CurrentUserProvider>
+                </ApolloClientProvider>
+              </AppLayout>
             </LazyMotion>
           </SiteThemeProvider>
         </NextThemesProvider>
@@ -69,6 +70,12 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
   const { isWidget, children, projectId, layoutProps, theme } = props;
   const ThemeWrapper = isWidget ? ThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
+  const [, loading] = useSession();
+  const isMounted = useMountedState();
+
+  if (loading && !isMounted) {
+    return <Spinner tw="mt-32 justify-center" />;
+  }
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
       <LayoutWrapper projectId={projectId!} {...layoutProps}>
@@ -78,19 +85,16 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
   );
 }
 
-function Auth({ children }: { children: React.ReactNode }): JSX.Element {
+function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
   const [session, loading] = useSession();
   const isUser = !!session?.user;
   React.useEffect(() => {
-    if (loading) return;
-    if (!isUser) signIn();
+    if (!loading && !isUser) {
+      signIn();
+    }
   }, [isUser, loading]);
 
-  if (isUser) {
-    return <>{children}</>;
-  }
-
-  return <Spinner tw="mt-32 justify-center" />;
+  return <>{children}</>;
 }
 
 function ErrorFallback() {

@@ -7,12 +7,12 @@ export function generateComment(): CommentLinkedListProps['comment'] {
     replies: [generateCommentFragment('sub-1', 3)],
   };
 }
-
+let counter = 0;
 export function generateCommentFragment(fill: string, depth: number) {
   return {
     id: `comment-id-${fill}`,
     user: {
-      id: `author-id-${fill}`,
+      id: counter++,
       name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
@@ -26,7 +26,7 @@ export function generateCommentFragment(fill: string, depth: number) {
     likes: [
       {
         id: `like-id-${fill}`,
-        userId: `like-user-id-${fill}`,
+        userId: counter++,
       },
     ],
     depth,

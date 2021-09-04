@@ -849,6 +849,7 @@ export type Comment = {
   __typename?: 'Comment';
   content: Scalars['jsonb'];
   createdAt: Scalars['timestamptz'];
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   depth: Scalars['Int'];
   id: Scalars['uuid'];
   /** An array relationship */
@@ -994,6 +995,7 @@ export type Comment_Bool_Exp = {
   _or?: Maybe<Array<Comment_Bool_Exp>>;
   content?: Maybe<Jsonb_Comparison_Exp>;
   createdAt?: Maybe<Timestamptz_Comparison_Exp>;
+  deletedAt?: Maybe<Timestamptz_Comparison_Exp>;
   depth?: Maybe<Int_Comparison_Exp>;
   id?: Maybe<Uuid_Comparison_Exp>;
   likes?: Maybe<Like_Bool_Exp>;
@@ -1038,6 +1040,7 @@ export type Comment_Inc_Input = {
 export type Comment_Insert_Input = {
   content?: Maybe<Scalars['jsonb']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   likes?: Maybe<Like_Arr_Rel_Insert_Input>;
@@ -1055,6 +1058,7 @@ export type Comment_Insert_Input = {
 export type Comment_Max_Fields = {
   __typename?: 'Comment_max_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
@@ -1066,6 +1070,7 @@ export type Comment_Max_Fields = {
 /** order by max() on columns of table "Comment" */
 export type Comment_Max_Order_By = {
   createdAt?: Maybe<Order_By>;
+  deletedAt?: Maybe<Order_By>;
   depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   pageId?: Maybe<Order_By>;
@@ -1078,6 +1083,7 @@ export type Comment_Max_Order_By = {
 export type Comment_Min_Fields = {
   __typename?: 'Comment_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
@@ -1089,6 +1095,7 @@ export type Comment_Min_Fields = {
 /** order by min() on columns of table "Comment" */
 export type Comment_Min_Order_By = {
   createdAt?: Maybe<Order_By>;
+  deletedAt?: Maybe<Order_By>;
   depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   pageId?: Maybe<Order_By>;
@@ -1124,6 +1131,7 @@ export type Comment_On_Conflict = {
 export type Comment_Order_By = {
   content?: Maybe<Order_By>;
   createdAt?: Maybe<Order_By>;
+  deletedAt?: Maybe<Order_By>;
   depth?: Maybe<Order_By>;
   id?: Maybe<Order_By>;
   likes_aggregate?: Maybe<Like_Aggregate_Order_By>;
@@ -1154,6 +1162,8 @@ export enum Comment_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  DeletedAt = 'deletedAt',
+  /** column name */
   Depth = 'depth',
   /** column name */
   Id = 'id',
@@ -1171,6 +1181,7 @@ export enum Comment_Select_Column {
 export type Comment_Set_Input = {
   content?: Maybe<Scalars['jsonb']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   depth?: Maybe<Scalars['Int']>;
   id?: Maybe<Scalars['uuid']>;
   pageId?: Maybe<Scalars['uuid']>;
@@ -1237,6 +1248,8 @@ export enum Comment_Update_Column {
   Content = 'content',
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  DeletedAt = 'deletedAt',
   /** column name */
   Depth = 'depth',
   /** column name */

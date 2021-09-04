@@ -2,7 +2,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { TelemetryProvider, TelemetryProviderProps } from '../TelemetryProvider';
+import { TelemetryProvider, TelemetryProviderProps } from '../../contexts/TelemetryProvider';
 
 export type WidgetLayoutProps = React.PropsWithChildren<
   Pick<TelemetryProviderProps, 'projectId'> & {

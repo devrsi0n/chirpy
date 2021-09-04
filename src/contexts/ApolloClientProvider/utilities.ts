@@ -8,34 +8,13 @@ import {
 } from '@apollo/client';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { persistCache, PersistentStorage, LocalForageWrapper } from 'apollo3-cache-persist';
-import { PersistedData } from 'apollo3-cache-persist/lib/types';
+import { persistCache, LocalForageWrapper } from 'apollo3-cache-persist';
 import * as localForage from 'localforage';
-import { useSession } from 'next-auth/client';
-import preval from 'preval.macro';
-import * as React from 'react';
 
 import { isENVDev, isENVProd } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
 
-// import anonymousToken from /* preval */
-// './anonymous-token';
-
-export function useApollo(initialState?: any): ApolloClient<NormalizedCacheObject> {
-  const [session] = useSession();
-  const [client, setClient] = React.useState<ApolloClient<NormalizedCacheObject>>(() =>
-    getApolloClient(session?.hasuraToken, initialState),
-  );
-  React.useEffect(() => {
-    if (!session?.hasuraToken) {
-      return;
-    }
-    setClient(getApolloClient(session.hasuraToken, initialState));
-  }, [session?.hasuraToken, initialState]);
-  return client;
-}
-
-function getApolloClient(
+export function getApolloClient(
   hasuraToken = '',
   initialState: any = null,
 ): ApolloClient<NormalizedCacheObject> {
@@ -116,11 +95,6 @@ const getWSLink = (hasuraToken: string) => {
 
 function getHeaders(hasuraToken: string) {
   return {
-    authorization: `Bearer ${
-      hasuraToken ||
-      preval`
-    process.env.HASH_KEY = ${process.env.HASH_KEY};
-    module.exports = require("./anonymous-token.js");`
-    }`,
+    authorization: `Bearer ${hasuraToken || 'anonymous'}`,
   };
 }

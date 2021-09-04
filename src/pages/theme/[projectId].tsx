@@ -5,12 +5,12 @@ import * as React from 'react';
 import colors from 'tailwindcss/colors';
 import tw from 'twin.macro';
 
-import { CommentWidget } from '$/blocks/CommentWidget';
+import { CommentTrees } from '$/blocks/CommentTrees';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
-import { ThemeProvider, useTheme } from '$/components/ThemeProvider';
+import { ThemeProvider, useTheme } from '$/contexts/ThemeProvider';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
@@ -113,7 +113,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             </SubText>
           </div>
           <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
-          <CommentWidget
+          <CommentTrees
             comments={comments as any}
             onSubmitReply={() => Promise.resolve()}
             onClickLikeAction={() => Promise.resolve()}
