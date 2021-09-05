@@ -1,13 +1,14 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-import { Link } from '../Link';
+import { Link, LinkProps } from '../Link';
 
 type Size = 'sm' | 'md' | 'lg';
 export type LogoProps = {
   size?: Size;
   noSpacing?: boolean;
   className?: string;
+  linkProps?: Partial<LinkProps>;
 };
 
 const sizeWidth: Record<Size, TwStyle> = {
@@ -22,13 +23,14 @@ const sizeSpacing: Record<Size, TwStyle> = {
   lg: tw`px-3 py-2`,
 };
 
-export function Logo({ size = 'md', noSpacing, className }: LogoProps): JSX.Element {
+export function Logo({ size = 'md', noSpacing, className, linkProps }: LogoProps): JSX.Element {
   return (
     <Link
       className={className}
       href="/"
       aria-label={`Logo of ${process.env.NEXT_PUBLIC_APP_NAME}`}
       variant="plain"
+      {...linkProps}
     >
       <svg
         css={[sizeWidth[size], !noSpacing && sizeSpacing[size]]}
