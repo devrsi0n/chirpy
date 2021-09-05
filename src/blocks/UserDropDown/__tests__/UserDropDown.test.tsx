@@ -29,6 +29,6 @@ describe('UserDropDown', () => {
 
 function renderDropMenu(variant: UserDropDownProps['variant']) {
   pageRender(<UserDropDown variant={variant} />);
-  const menuButton = screen.getByLabelText(/click to open the drop down/i);
+  const menuButton = screen.getByLabelText(/click to open the dropdown/i);
   userEvent.click(menuButton);
 }

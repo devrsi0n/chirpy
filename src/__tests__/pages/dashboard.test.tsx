@@ -53,7 +53,7 @@ describe('dashboard', () => {
 
   it('should delete the project', async () => {
     const menu = screen.getByRole('button', {
-      name: /click to open the drop down/i,
+      name: /click to open the dropdown/i,
     });
     userEvent.click(menu);
     const deleteOption = screen.getByRole('menuitem', {

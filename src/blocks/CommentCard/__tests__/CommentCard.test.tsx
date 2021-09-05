@@ -65,7 +65,7 @@ describe('CommentCard', () => {
 
   it('should delete comment after clicking the button', async () => {
     const menu = screen.getByRole('button', {
-      name: /click to open the drop down/i,
+      name: /click to open the dropdown/i,
     });
     userEvent.click(menu);
     const deleteButton = screen.getByRole('button', {
