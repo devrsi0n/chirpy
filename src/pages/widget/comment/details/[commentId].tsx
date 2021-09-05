@@ -25,7 +25,7 @@ import {
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
+import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument } from '$/server/graphql/generated/comment';
@@ -44,7 +44,7 @@ export default function CommentDetailsWidget(
     variables: { id: props.commentId },
   });
 
-  useNotifyHostHeightOfPage();
+  useWidgetSideEffects();
 
   const comment = data?.commentByPk || props.comment;
 

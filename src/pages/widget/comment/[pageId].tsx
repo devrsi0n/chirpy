@@ -21,7 +21,7 @@ import {
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useNotifyHostHeightOfPage } from '$/hooks/useNotifyHostHeightOfPage';
+import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { PagesDocument } from '$/server/graphql/generated/page';
@@ -49,7 +49,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
 
-  useNotifyHostHeightOfPage();
+  useWidgetSideEffects();
 
   const onSubmitReply = useCreateAComment({ pageId });
   const onClickLikeAction = useToggleALikeAction();
