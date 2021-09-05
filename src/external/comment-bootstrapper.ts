@@ -1,7 +1,7 @@
-import { ResponseError } from '$/server/types/error';
-import { GetPagByUrl } from '$/server/types/page';
-
+import { EVENT_CLICK_CONTAINER } from '../lib/constants';
 import { ERR_UNMATCHED_DOMAIN } from '../server/common/error-code';
+import { ResponseError } from '../server/types/error';
+import { GetPagByUrl } from '../server/types/page';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.
@@ -24,12 +24,12 @@ export async function comment(): Promise<void> {
   }
   const pid = script.dataset[`${appName}Pid`];
   if (!pid) {
-    alert(`Please add the pid in your script`);
+    console.error(`Please add the pid in your script`);
     return Promise.reject();
   }
   const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
-    alert(`Can't find the render target`);
+    console.error(`Can't find the render target`);
     return Promise.reject();
   }
   const { origin, pathname } = window.location;
@@ -41,7 +41,7 @@ export async function comment(): Promise<void> {
   const page: GetPagByUrl = await res.json();
   if (isResponseError(page)) {
     if (page.code == ERR_UNMATCHED_DOMAIN) {
-      return alert(page.error);
+      return console.error(page.error);
     }
     throw new Error(page.error);
   }
@@ -73,6 +73,9 @@ export async function comment(): Promise<void> {
     },
     false,
   );
+  window.document.body.addEventListener('click', () => {
+    container.contentWindow?.postMessage(EVENT_CLICK_CONTAINER);
+  });
   container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${page.id}`;
   renderTarget.append(container);
 }
