@@ -6,13 +6,13 @@ import { signOut } from 'next-auth/client';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { Avatar } from '$/components/Avatar';
 import { Divider } from '$/components/Divider';
 import { DropDown } from '$/components/DropDown';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
-import { Toggle } from '$/components/Toggle';
+// import { Toggle } from '$/components/Toggle';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useSignIn } from '$/hooks/useSignIn';
 
 export type UserDropDownProps = {
@@ -22,9 +22,11 @@ export type UserDropDownProps = {
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const { isLogin, data } = useCurrentUser();
   const { avatar, name, username } = data;
-  const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
-  const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
+  // const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
+  // const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   const handleSignIn = useSignIn();
+  const isWidget = props.variant === 'Widget';
+  const isNav = props.variant === 'Nav';
 
   return (
     <DropDown
@@ -41,10 +43,10 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         </div>
       )}
       {isLogin && <Divider />}
-      {props.variant === 'Widget' &&
+      {isWidget &&
         (isLogin ? (
           <>
-            <DropDown.Item>
+            {/* <DropDown.Item>
               <Toggle
                 label="Subscribe this comment"
                 enabled={enableSubscribeComment}
@@ -59,7 +61,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
                 onChange={setEnableSubscribeSite}
                 reverse
               />
-            </DropDown.Item>
+            </DropDown.Item> */}
           </>
         ) : (
           <DropDown.Item css={itemStyle} onClick={handleSignIn}>
@@ -67,24 +69,27 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
             <p tw="w-max">Sign in</p>
           </DropDown.Item>
         ))}
-      {props.variant === 'Nav' && isLogin && (
+      {isLogin && (
         <>
+          {isNav && (
+            <DropDown.Item>
+              <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>
+                <Monitor size={14} />
+                <span>Dashboard</span>
+              </Link>
+            </DropDown.Item>
+          )}
           <DropDown.Item>
-            <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>
-              <Monitor size={14} />
-              <span>Dashboard</span>
-            </Link>
-          </DropDown.Item>
-          <DropDown.Item>
-            <Link variant="plain" href="/profile" css={itemStyle}>
+            <Link
+              variant="plain"
+              href="/profile"
+              css={itemStyle}
+              target={isWidget ? '_blank' : undefined}
+            >
               <User size={14} />
               <span>Profile</span>
             </Link>
           </DropDown.Item>
-        </>
-      )}
-      {isLogin && (
-        <>
           <Divider />
           <DropDown.Item css={itemStyle} onClick={() => signOut()}>
             <LogOut size={14} />

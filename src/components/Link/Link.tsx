@@ -7,7 +7,7 @@ import tw, { TwStyle } from 'twin.macro';
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 type Variant = 'nav' | 'plain' | 'solid';
 
-type LinkProps = React.PropsWithChildren<
+export type LinkProps = React.PropsWithChildren<
   NextLinkProps &
     React.ComponentPropsWithoutRef<'a'> & {
       size?: Size;
