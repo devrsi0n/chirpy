@@ -31,7 +31,8 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
       <AuthProvider
         session={pageProps.session}
         options={{
-          clientMaxAge: HASURA_TOKEN_MAX_AGE,
+          // Refresh hasura token before it expires
+          clientMaxAge: HASURA_TOKEN_MAX_AGE - 5 * 60,
         }}
       >
         {/* Tailwindcss global styles */}

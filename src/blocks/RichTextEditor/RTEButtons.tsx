@@ -6,36 +6,33 @@ import * as React from 'react';
 import { useSlate } from 'slate-react';
 import tw from 'twin.macro';
 
-import { BaseButton, BaseButtonProps } from '$/components/Button';
+import { BaseButtonProps, BaseButton } from '$/components/Button';
 
 import { useRichTextEditorContext } from './RichTextEditorContext';
 import { InlineFormat, Icon } from './type';
 import { isMarkActive, toggleMark } from './utilities';
 
-type BaseFormatButtonProps = {
+export type BaseRTEButtonProps = {
   isActive?: boolean;
   children?: React.ReactNode;
 } & BaseButtonProps;
 
-export function BaseFormatButton({
+export function BaseMarkButton({
   className,
   isActive,
   children,
   ...restProps
-}: BaseFormatButtonProps): JSX.Element {
-  const { disabled } = useRichTextEditorContext();
+}: BaseRTEButtonProps): JSX.Element {
+  const { readOnly } = useRichTextEditorContext();
   return (
     <BaseButton
-      {...restProps}
-      disabled={disabled}
       css={[
-        tw`p-1 rounded-sm`,
-        disabled
-          ? tw`pointer-events-none hover:cursor-not-allowed`
-          : tw`hover:bg-gray-100 dark:hover:bg-gray-800`,
-        isActive ? tw`text-gray-900 dark:text-gray-200` : tw`text-gray-600 dark:text-gray-400`,
+        tw`p-1.5 rounded text-gray-500 hover:(bg-primary-50 text-primary-500)`,
+        isActive ? tw`text-black bg-gray-100 dark:(text-gray-100 bg-gray-800)` : tw``,
+        readOnly ? tw`cursor-not-allowed` : tw``,
         className,
       ]}
+      {...restProps}
     >
       {children}
     </BaseButton>
@@ -81,14 +78,13 @@ export function MarkButton({ format, icon }: IInlineButtonProps): JSX.Element {
   const editor = useSlate();
   const Icon = iconMap[icon];
   return (
-    <BaseFormatButton
+    <BaseMarkButton
       isActive={isMarkActive(editor, format)}
-      onClick={(event) => {
-        event.preventDefault();
+      onClick={() => {
         toggleMark(editor, format);
       }}
     >
       <Icon size={20} />
-    </BaseFormatButton>
+    </BaseMarkButton>
   );
 }

@@ -30,7 +30,7 @@ type FormFields = {
 
 export default function Profile(): JSX.Element {
   const {
-    isLogin,
+    isSignIn,
     loading,
     data: { id, avatar, name, username, bio, website, twitterUserName },
     refetchData,
@@ -82,7 +82,7 @@ export default function Profile(): JSX.Element {
     setIsEditMode(false);
   };
 
-  if (!isLogin && loading) {
+  if (!isSignIn && loading) {
     return (
       <ProfileContainer>
         <Spinner tw="justify-center mt-20" />
@@ -90,7 +90,7 @@ export default function Profile(): JSX.Element {
     );
   }
 
-  if (!isLogin) {
+  if (!isSignIn) {
     return (
       <ProfileContainer>
         <div tw="text-gray-500 flex items-center justify-center">Oops, please sign in first.</div>

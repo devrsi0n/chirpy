@@ -44,7 +44,7 @@ export function CurrentUserProvider({
         editableProjectIds: session?.user.editableProjectIds || [],
       },
       refetchData: handleFetchUser,
-      isLogin: !!data?.userByPk?.id,
+      isSignIn: !!data?.userByPk?.id,
     };
   }, [data?.userByPk, restProps, handleFetchUser, session, sessionIsLoading]);
 

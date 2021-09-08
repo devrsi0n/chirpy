@@ -17,7 +17,7 @@ useCurrentUser.mockImplementation(
   () =>
     ({
       data: mockUserData,
-      isLogin: true,
+      isSignIn: true,
       loading: false,
       refetch: mockRefetch,
     } as any),
@@ -29,7 +29,7 @@ export function setMockedUser(newData: UserData) {
     () =>
       ({
         data,
-        isLogin: true,
+        isSignIn: true,
         loading: false,
         refetch: mockRefetch,
       } as any),
