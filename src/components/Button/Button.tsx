@@ -22,7 +22,7 @@ export type ButtonProps = BaseButtonProps & {
   onClick?: () => void;
 };
 
-// TODO: Fix click drip animation and extract it to the base button
+// TODO: extract drip animation to the base button
 export const Button = React.forwardRef(function Button(
   props: ButtonProps,
   ref: React.Ref<HTMLButtonElement>,
@@ -51,6 +51,9 @@ export const Button = React.forwardRef(function Button(
     setDripY(0);
   }, []);
   const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (disabled) {
+      return;
+    }
     if (_ref.current) {
       const rect = _ref.current.getBoundingClientRect();
       setDripShow(true);
@@ -65,15 +68,15 @@ export const Button = React.forwardRef(function Button(
         {...restProps}
         ref={_ref}
         css={[
-          tw`focus:outline-none`,
+          tw`focus:outline-none disabled:(opacity-75 cursor-not-allowed)`,
           sizeStyles[size],
           ColorVariantStyles[`${variant}-${color}` as VariantColor],
           variant !== 'text' && shadow && tw`shadow-sm`,
           rounded && tw`rounded-md`,
-          disabled ? tw`cursor-not-allowed text-gray-300 bg-gray-50` : tw`cursor-pointer`,
         ]}
         className={className}
         onClick={clickHandler}
+        disabled={disabled}
       >
         {children}
         {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
@@ -90,9 +93,7 @@ interface ButtonDripProps {
 
 function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   const dripRef = React.useRef<HTMLDivElement>(null);
-
   const top = Number.isNaN(+y) ? 0 : y - 10;
-
   const left = Number.isNaN(+x) ? 0 : x - 10;
 
   React.useEffect(() => {

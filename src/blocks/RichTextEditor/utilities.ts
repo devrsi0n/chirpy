@@ -1,5 +1,6 @@
-import { Transforms, Editor, Element as SlateElement } from 'slate';
+import { Transforms, Editor, Element as SlateElement, Descendant } from 'slate';
 import { CustomElement } from 'types/slate';
+import { RTEValue } from '.';
 
 import { BlockFormat, InlineFormat } from './type';
 
@@ -46,4 +47,20 @@ export function isBlockActive(editor: Editor, format: BlockFormat): boolean {
 export function isMarkActive(editor: Editor, format: InlineFormat): boolean {
   const marks = Editor.marks(editor);
   return marks ? marks[format] === true : false;
+}
+
+export function isValueEmpty(value: RTEValue): boolean {
+  for (const val of value) {
+    if (!isEmptyDescendant(val)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function isEmptyDescendant(descendant: Descendant): boolean {
+  if (SlateElement.isElement(descendant)) {
+    return isValueEmpty(descendant.children);
+  }
+  return !descendant.text;
 }

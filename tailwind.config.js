@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         // gray: colors.trueGray,
@@ -24,7 +24,10 @@ module.exports = {
           800: 'var(--tw-colors-primary-800)',
           900: 'var(--tw-colors-primary-900)',
         },
-        bg: 'hsl(210, 8%, 98%)',
+        // 50 hsl(210, 20%, 98%)
+        // 100 hsl(220, 14%, 96%)
+        // 200 hsl(220, 13%, 91%)
+        bg: '#fcfcfc',
       },
       fill: colors,
       screens: {

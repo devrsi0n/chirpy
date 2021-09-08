@@ -95,6 +95,7 @@ export function CommentCard({
   const { data } = useCurrentUser();
   const rteContent = deletedAt ? PLACEHOLDER_OF_DELETED_COMMENT : content;
   const userHasModeratePermission = data?.editableProjectIds?.includes(projectId);
+  const isDeleted = !!deletedAt;
 
   return (
     <>
@@ -105,53 +106,62 @@ export function CommentCard({
         tw="flex flex-row items-start py-4 pl-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
         id={isENVDev ? commentId : undefined}
       >
-        <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+        {!isDeleted && <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />}
         <div tw="flex-1">
           <div tw="flex flex-row items-start justify-between">
-            <div tw="flex flex-row items-start space-x-4">
-              <Text bold tw="leading-none">
-                {name}
-              </Text>
-              <Text
-                as="time"
-                title={createdAt}
-                tw="leading-none cursor-default text-gray-400"
-                // @ts-ignore
-                dateTime={createdAt}
-              >
-                {dayjs(createdAt).fromNow()}
-              </Text>
-            </div>
-            {!deletedAt && userHasModeratePermission && (
-              <DropDown classes={{ root: tw`-mt-2 mr-2` }} content={<MoreVertical size={20} />}>
-                <DropDownItem tw="space-x-1" disableAutoDismiss>
-                  <Popover
-                    placement="topEnd"
-                    buttonAs="button"
-                    content={
-                      <div tw="flex flex-row items-center space-x-2">
-                        <Text variant="sm" tw="w-max">
-                          Are you sure?
-                        </Text>
-                        <Button size="sm" onClick={handleClickConfirmDelete}>
-                          Confirm
-                        </Button>
-                      </div>
-                    }
+            {!isDeleted && (
+              <>
+                <div tw="flex flex-row items-start space-x-4">
+                  <Text bold tw="leading-none">
+                    {name}
+                  </Text>
+                  <Text
+                    as="time"
+                    title={createdAt}
+                    tw="leading-none cursor-default text-gray-400"
+                    // @ts-ignore
+                    dateTime={createdAt}
                   >
-                    <div css={[tw`flex flex-row items-center`, DropDownItemPadding]}>
-                      <Trash2 size={16} />
-                      <span tw="ml-1">Delete</span>
-                    </div>
-                  </Popover>
-                </DropDownItem>
-              </DropDown>
+                    {dayjs(createdAt).fromNow()}
+                  </Text>
+                </div>
+                <>
+                  {userHasModeratePermission && (
+                    <DropDown
+                      classes={{ root: tw`-mt-2 mr-2` }}
+                      content={<MoreVertical size={20} />}
+                    >
+                      <DropDownItem tw="space-x-1" disableAutoDismiss>
+                        <Popover
+                          placement="topEnd"
+                          buttonAs="button"
+                          content={
+                            <div tw="flex flex-row items-center space-x-2">
+                              <Text variant="sm" tw="w-max">
+                                Are you sure?
+                              </Text>
+                              <Button size="sm" onClick={handleClickConfirmDelete}>
+                                Confirm
+                              </Button>
+                            </div>
+                          }
+                        >
+                          <div css={[tw`flex flex-row items-center`, DropDownItemPadding]}>
+                            <Trash2 size={16} />
+                            <span tw="ml-1">Delete</span>
+                          </div>
+                        </Popover>
+                      </DropDownItem>
+                    </DropDown>
+                  )}
+                </>
+              </>
             )}
           </div>
           <div tw="mt-1 mb-1.5">
             <RichTextEditor initialValue={rteContent} readOnly />
           </div>
-          {!deletedAt && (
+          {!isDeleted && (
             <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
               <LikeAction
                 aria-label="Like"
@@ -184,14 +194,13 @@ export function CommentCard({
               </Link>
             </div>
           )}
-
           {showReplyEditor && (
-            <div tw="flex flex-col space-y-2 ">
+            <div tw="flex flex-col space-y-2 pr-6">
               <RichTextEditor
                 placeholder={`What are your thoughts?`}
                 onSubmit={handleSubmitReply}
                 styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
-                showDismissButton
+                isReply
                 onClickDismiss={handleDimissRTE}
               />
             </div>

@@ -7,15 +7,16 @@ export type BaseButtonProps = AriaButtonProps &
   Omit<React.ComponentPropsWithRef<'button'>, keyof AriaButtonProps>;
 
 const BaseButton = React.forwardRef(function BaseButton(
-  { type = 'button', children, className, onClick, ...restProps }: BaseButtonProps,
+  { type = 'button', children, className, onClick, onMouseDown, ...restProps }: BaseButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   const handleMouseDown = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       // Prevent mouse click with focus styles(e.g. outline)
       e.preventDefault();
+      onMouseDown?.(e);
     },
-    [],
+    [onMouseDown],
   );
   const defaultRef = React.useRef<HTMLButtonElement>();
   const _ref: React.RefObject<HTMLButtonElement> = (ref ||
@@ -26,8 +27,8 @@ const BaseButton = React.forwardRef(function BaseButton(
   };
   const { buttonProps } = useButton(props, _ref);
   const allProps = {
-    ...restProps,
     ...buttonProps,
+    ...restProps,
   };
 
   return (

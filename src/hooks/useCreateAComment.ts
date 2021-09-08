@@ -13,7 +13,7 @@ export type useCreateACommentOptions = {
 export type SubmitHandler = (reply: RTEValue, commentId?: string, depth?: number) => Promise<void>;
 
 export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitHandler {
-  const { isLogin } = useCurrentUser();
+  const { isSignIn } = useCurrentUser();
   const [insertOneComment] = useInsertOneCommentMutation();
 
   const { showToast } = useToast();
@@ -23,7 +23,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
     commentId?: string,
     depth?: number,
   ) => {
-    if (!isLogin) {
+    if (!isSignIn) {
       console.error('Navigate to login page');
       return Promise.reject();
     }

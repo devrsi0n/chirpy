@@ -8,8 +8,27 @@
       "type": "node",
       "request": "attach",
       "name": "Next.js debug",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "port": 9229
+    },
+    {
+      "type": "node",
+      "name": "vscode-jest-tests",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "args": [
+        "run",
+        "ut",
+        "--",
+        "--runInBand",
+        "--watchAll=false"
+      ]
     }
   ]
 }

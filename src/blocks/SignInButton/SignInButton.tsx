@@ -8,11 +8,15 @@ import { Button, ButtonProps } from '$/components/Button';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useSignIn } from '$/hooks/useSignIn';
 
-export type SignInButtonProps = Pick<ButtonProps, 'variant'> & {
+export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;
 };
 
-export function SignInButton({ variant = 'solid', inPageNav }: SignInButtonProps): JSX.Element {
+export function SignInButton({
+  variant = 'solid',
+  inPageNav,
+  ...restProps
+}: SignInButtonProps): JSX.Element {
   const { loading: signInLoading } = useCurrentUser();
   const handleSignIn = useSignIn();
   return (
@@ -20,6 +24,7 @@ export function SignInButton({ variant = 'solid', inPageNav }: SignInButtonProps
       color="primary"
       variant={variant}
       onClick={() => (!inPageNav ? handleSignIn() : signIn())}
+      {...restProps}
     >
       <span tw="inline-flex flex-row items-center space-x-1">
         {signInLoading ? <Loader tw="animate-spin w-5 h-5" /> : <Lock size="14" />}

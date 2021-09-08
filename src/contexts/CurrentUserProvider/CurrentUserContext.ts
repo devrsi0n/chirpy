@@ -14,13 +14,13 @@ export type UserData = Partial<UserQueryDataPayload>;
 export type CurrentUserContextType = UserQueryState & {
   refetchData?: () => void;
 } & {
-  isLogin: boolean;
+  isSignIn: boolean;
   data: UserData & {
     editableProjectIds?: string[];
   };
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>({
-  isLogin: false,
+  isSignIn: false,
   data: {},
 });

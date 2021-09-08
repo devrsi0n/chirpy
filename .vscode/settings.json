@@ -4,30 +4,14 @@
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true
   },
-  "prisma.plugin.nextjs.addTypesOnSave": true,
-  "prisma.plugin.nextjs.hasPrompted": true,
-  "sqltools.connections": [
-    {
-      "previewLimit": 50,
-      "server": "localhost",
-      "port": 5432,
-      "askForPassword": true,
-      "driver": "PostgreSQL",
-      "name": "local-posrgres",
-      "database": "zoo",
-      "username": "postgres"
-    }
-  ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.fontSize": 16,
-  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
-  "appService.defaultWebAppToDeploy": "/subscriptions/7f4b6216-9f4b-4deb-97a9-72ac6f2d6946/resourceGroups/totalk/providers/Microsoft.Web/sites/totalk",
-  "appService.deploySubpath": ".",
   "cSpell.words": [
     "centralus",
     "jsonb",
     "visx"
   ],
   "tailwindcss.preferVariantWithParentheses": true,
-  "jestrunner.configPath": "jest.config.js"
+  "jestrunner.configPath": "jest.config.js",
+  "jest.jestCommandLine": "npm run ut --"
 }

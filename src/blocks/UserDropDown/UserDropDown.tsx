@@ -20,7 +20,7 @@ export type UserDropDownProps = {
 };
 
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
-  const { isLogin, data } = useCurrentUser();
+  const { isSignIn, data } = useCurrentUser();
   const { avatar, name, username } = data;
   // const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   // const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
@@ -42,9 +42,9 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
           </Text>
         </div>
       )}
-      {isLogin && <Divider />}
+      {isSignIn && <Divider />}
       {isWidget &&
-        (isLogin ? (
+        (isSignIn ? (
           <>
             {/* <DropDown.Item>
               <Toggle
@@ -69,7 +69,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
             <p tw="w-max">Sign in</p>
           </DropDown.Item>
         ))}
-      {isLogin && (
+      {isSignIn && (
         <>
           {isNav && (
             <DropDown.Item>
