@@ -2,7 +2,6 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Heading } from '$/components/Heading';
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { SubmitHandler } from '$/hooks/useCreateAComment';
 import { ToggleLieAction } from '$/hooks/useToggleALikeAction';
 import { CommentLeafType } from '$/types/widget';
@@ -23,8 +22,6 @@ export function CommentTrees({
   onSubmitReply,
   onClickLikeAction,
 }: CommentTreesProps): JSX.Element {
-  const { isLogin } = useCurrentUser();
-
   const commentCount = getCommentCount(comments);
   return (
     <div css={tw`space-y-4`}>
@@ -36,13 +33,8 @@ export function CommentTrees({
       </div>
       <div css={tw`space-y-7`}>
         <div css={tw`space-y-2`}>
-          <RichTextEditor
-            placeholder={`What are your thoughts?`}
-            onSubmit={onSubmitReply}
-            postButtonLabel={!isLogin ? 'Sign in' : undefined}
-          />
+          <RichTextEditor placeholder={`What are your thoughts?`} onSubmit={onSubmitReply} />
         </div>
-
         <ul>
           {comments?.map((comment: CommentLeafType) => (
             <CommentTree

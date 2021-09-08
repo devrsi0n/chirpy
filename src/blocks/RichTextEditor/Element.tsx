@@ -4,7 +4,7 @@ import { RenderElementProps } from 'slate-react';
 import { useRichTextEditorContext } from './RichTextEditorContext';
 
 export function Element(props: RenderElementProps): JSX.Element {
-  const { disabled } = useRichTextEditorContext();
+  const { readOnly: disabled } = useRichTextEditorContext();
   const mergedProps = {
     ...props,
     disabled,

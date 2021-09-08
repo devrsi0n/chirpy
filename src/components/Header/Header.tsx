@@ -13,7 +13,7 @@ import { IconButton } from '../Button';
 import { Logo } from '../Logo';
 
 export function Header(): JSX.Element {
-  const { isLogin } = useCurrentUser();
+  const { isSignIn } = useCurrentUser();
   const [showMenu, setShowMenu] = React.useState(false);
   const handleClickMenu = React.useCallback(() => {
     setShowMenu((prev) => !prev);
@@ -37,7 +37,7 @@ export function Header(): JSX.Element {
               <Logo />
             </div>
             <nav tw="w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-200) flex-wrap items-center mb-5 space-x-5">
-              {!isLogin ? (
+              {!isSignIn ? (
                 <Link href="/#pricing" tw="" highlightMatch>
                   Pricing
                 </Link>
@@ -55,13 +55,13 @@ export function Header(): JSX.Element {
             </nav>
           </div>
           <div tw="flex">
-            {isLogin ? <UserDropDown variant="Nav" /> : <SignInButton inPageNav />}
+            {isSignIn ? <UserDropDown variant="Nav" /> : <SignInButton inPageNav />}
           </div>
         </section>
       </div>
       <div tw="w-full">
         <nav css={[tw`flex w-full flex-col px-2 pt-2 pb-3 space-y-1`, !showMenu && tw`hidden`]}>
-          {isLogin ? (
+          {isSignIn ? (
             <Link href="/dashboard" tw="px-3 py-2" highlightMatch>
               Dashboard
             </Link>
