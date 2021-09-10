@@ -19,7 +19,7 @@ export function useWidgetSideEffects(): void {
 }
 
 function broadcastPageHeight(): void {
-  const newHeight: number = document.body.scrollHeight + 10;
+  const newHeight: number = document.body.scrollHeight;
   window.parent.postMessage({ height: newHeight }, '*');
 }
 
