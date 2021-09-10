@@ -56,7 +56,7 @@
     "canvas-confetti": "^1.4.0",
     "cors": "^2.8.5",
     "csstype": "^3.0.8",
-    "dayjs": "^1.10.6",
+    "dayjs": "^1.10.7",
     "framer-motion": "^4.1.17",
     "geoip-database": "^1.0.97",
     "github-slugger": "^1.4.0",
@@ -80,7 +80,7 @@
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.3",
     "react-use": "^17.3.1",
-    "reading-time": "^1.4.0",
+    "reading-time": "^1.5.0",
     "rehype": "^12.0.0",
     "request-ip": "^2.1.3",
     "slate": "^0.65.3",
@@ -89,10 +89,10 @@
     "subscriptions-transport-ws": "^0.9.19",
     "super-tiny-icons": "^0.4.0",
     "superjson": "^1.7.5",
-    "type-fest": "^2.2.0",
+    "type-fest": "^2.3.1",
     "ua-parser-js": "^0.7.28",
     "uuid": "^8.3.2",
-    "ws": "^8.2.1"
+    "ws": "^8.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -152,12 +152,12 @@
     "postcss": "^8.3.6",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.3.2",
+    "prettier": "^2.4.0",
     "simple-git-hooks": "^2.6.1",
-    "tailwindcss": "^2.2.12",
+    "tailwindcss": "^2.2.15",
     "twin.macro": "^2.7.0",
     "typescript": "^4.4.2",
-    "vite": "^2.5.5",
+    "vite": "^2.5.6",
     "whatwg-fetch": "^3.6.2"
   },
   "engines": {
