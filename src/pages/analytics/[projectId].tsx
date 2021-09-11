@@ -4,6 +4,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { PageTitle } from '$/blocks/PageTitle';
 import { PageViewChart } from '$/blocks/PageViewChart';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
@@ -26,6 +27,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
         <title>Analytics</title>
       </Head>
       <div tw="py-10" className="main-container">
+        <PageTitle tw="pb-6">Analytics</PageTitle>
         <div tw="flex flex-row justify-between pb-4">
           <div tw="flex flex-row items-center space-x-2">
             <Link variant="plain" href={`https://${props.project?.domain}`}>
@@ -49,6 +51,8 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
     </>
   );
 }
+
+Analytics.auth = true;
 
 type PathParam = {
   projectId: string;

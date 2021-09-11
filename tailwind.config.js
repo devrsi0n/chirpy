@@ -27,7 +27,7 @@ module.exports = {
         // 50 hsl(210, 20%, 98%)
         // 100 hsl(220, 14%, 96%)
         // 200 hsl(220, 13%, 91%)
-        bg: '#fcfcfc',
+        bg: '#F8FAFC',
       },
       fill: colors,
       screens: {
@@ -46,7 +46,7 @@ module.exports = {
         '-1': '-1',
       },
       width: {
-        fit: 'fit-width',
+        fit: 'fit-content',
       },
     },
     // typography: (theme) => ({

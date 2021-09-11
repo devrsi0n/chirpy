@@ -1,11 +1,12 @@
+import PlusCircle from '@geist-ui/react-icons/plusCircle';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { PageTitle } from '$/blocks/PageTitle';
 import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
 import { Dialog, DialogFooter } from '$/components/Dialog';
-import { Heading } from '$/components/Heading';
 import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
@@ -82,11 +83,10 @@ export default function Dashboard(): JSX.Element {
       <div className="main-container">
         <section tw="py-10 space-y-10">
           <div tw="space-x-2 flex flex-row justify-between items-center">
-            <Heading as="h2" tw="text-3xl text-gray-600 font-semibold">
-              Dashboard
-            </Heading>
-            <Button onClick={handleCreateProject} variant="solid" color="primary">
-              New project
+            <PageTitle>Dashboard</PageTitle>
+            <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
+              <PlusCircle size={18} />
+              <span>New project</span>
             </Button>
           </div>
           {projects?.length ? (

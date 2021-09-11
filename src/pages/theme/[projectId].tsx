@@ -6,6 +6,7 @@ import colors from 'tailwindcss/colors';
 import tw from 'twin.macro';
 
 import { CommentTrees } from '$/blocks/CommentTrees';
+import { PageTitle } from '$/blocks/PageTitle';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Popover } from '$/components/Popover';
@@ -69,8 +70,8 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
     <div className="main-container" tw="py-10 px-2">
       <div tw="flex flex-row px-2">
         <aside tw="flex-1 border-r pr-4 space-y-8">
-          <div tw="space-y-4">
-            <BoldHeading>Theme Editor</BoldHeading>
+          <div tw="space-y-5">
+            <PageTitle>Theme Editor</PageTitle>
             <SubText>
               Custom themes is a very simple thing in {process.env.NEXT_PUBLIC_APP_NAME}, click
               change and save theme.

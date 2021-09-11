@@ -103,7 +103,10 @@ export function CommentCard({
         animate={containerAnimate}
         variants={shakeVariants}
         onAnimationComplete={() => setContainerAnimate('stop')}
-        tw="flex flex-row items-start py-4 pl-4 space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm"
+        css={[
+          tw`flex flex-row items-start space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm`,
+          isDeleted ? tw`py-2 pl-4` : tw`pt-4 pb-2 pl-4`,
+        ]}
         id={isENVDev ? commentId : undefined}
       >
         {!isDeleted && <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />}

@@ -68,7 +68,7 @@ export const Button = React.forwardRef(function Button(
         {...restProps}
         ref={_ref}
         css={[
-          tw`focus:outline-none disabled:(opacity-75 cursor-not-allowed)`,
+          tw`transition focus:outline-none disabled:(opacity-75 cursor-not-allowed)`,
           sizeStyles[size],
           ColorVariantStyles[`${variant}-${color}` as VariantColor],
           variant !== 'text' && shadow && tw`shadow-sm`,
@@ -131,9 +131,9 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 
 const sizeStyles: Record<Size, TwStyle> = {
   sm: tw`py-1 px-2 text-sm`,
-  md: tw`py-2 px-3 text-base font-medium`,
-  lg: tw`py-3 px-4 text-lg font-bold`,
-  xl: tw`py-4 px-5 text-xl font-bold`,
+  md: tw`py-2 px-3 text-base`,
+  lg: tw`py-3 px-4 text-lg`,
+  xl: tw`py-4 px-5 text-xl`,
 };
 
 type VariantColor = `${Variant}-${Color}`;
