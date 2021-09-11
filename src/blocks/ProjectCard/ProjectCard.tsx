@@ -126,7 +126,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                 href={page.url}
                 title={page.title || page.url}
                 variant="plain"
-                tw="text-gray-600 hover:text-gray-900 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
+                tw="transition text-gray-600 hover:text-primary-600 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
               >
                 {page.title || page.url}
               </Link>
