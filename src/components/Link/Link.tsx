@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from 'framer-motion';
+import { m } from 'framer-motion';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -71,7 +71,7 @@ export function Link(props: LinkProps): JSX.Element {
         <a
           {...restProps}
           css={[
-            tw`relative transition duration-150 ease-in-out no-underline!`,
+            tw`relative transition duration-150 ease-in-out no-underline! whitespace-nowrap`,
             size && sizeStyles[size],
             isCurrentURL && tw`font-bold`,
             variantStyles[variant],
@@ -81,17 +81,16 @@ export function Link(props: LinkProps): JSX.Element {
           onMouseLeave={() => setIsHovering(false)}
           target={target}
         >
-          {children}
+          <span>{children}</span>
+
           {!disableUnderline && variant === 'nav' && (
             <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
-              <AnimatePresence>
-                <m.span
-                  tw="absolute inset-0 inline-block w-full bg-gray-900 dark:bg-gray-300"
-                  initial={{ scale: 0 }}
-                  animate={{ scale: isHovering ? 1 : 0 }}
-                  exit={{ scale: 0 }}
-                />
-              </AnimatePresence>
+              <m.span
+                tw="absolute inset-0 inline-block bg-gray-900 dark:bg-gray-300"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: isHovering ? 1 : 0, opacity: isHovering ? 1 : 0 }}
+                exit={{ scale: 0, opacity: 0 }}
+              />
             </span>
           )}
         </a>
