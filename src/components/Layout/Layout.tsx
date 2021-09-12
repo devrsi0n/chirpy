@@ -1,5 +1,6 @@
 import * as React from 'react';
 import 'twin.macro';
+import tw from 'twin.macro';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
@@ -18,6 +19,9 @@ export function Layout({ noHeader, noFooter, children, ...restProps }: LayoutPro
       footer={!noFooter && <Footer tw="mt-auto" />}
       projectId={process.env.NEXT_PUBLIC_COMMENT_PROJECT}
       tw="bg-bg"
+      styles={{
+        container: tw`mx-4`,
+      }}
     >
       {children}
     </WidgetLayout>

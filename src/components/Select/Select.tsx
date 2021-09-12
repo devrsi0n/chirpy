@@ -87,7 +87,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
             tw`cursor-pointer select-none relative py-2 pl-8 pr-4`,
           ]}
         >
-          <span css={[selected ? tw`font-semibold` : tw`font-normal`, tw`block truncate`]}>
+          <span css={[selected ? tw`font-bold` : tw`font-normal`, tw`block truncate`]}>
             {children}
           </span>
           {selected && (

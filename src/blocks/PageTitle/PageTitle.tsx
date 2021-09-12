@@ -7,12 +7,11 @@ export type PageTitleProps = React.PropsWithChildren<React.ComponentPropsWithout
 
 export function PageTitle({ children, ...restProps }: PageTitleProps): JSX.Element {
   return (
-    <div tw="space-y-3 w-fit" {...restProps}>
-      <Heading as="h2" tw="text-3xl text-gray-600 font-semibold w-fit">
+    <div tw="space-y-4 w-fit" {...restProps}>
+      <Heading as="h1" tw="text-4xl text-gray-600 w-fit leading-none">
         {children}
       </Heading>
       <div tw="h-1 w-1/3 bg-gradient-to-r from-blue-400 to-indigo-400 rounded" />
-      {/* <div tw="h-1 bg-black" /> */}
     </div>
   );
 }

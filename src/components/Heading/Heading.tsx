@@ -11,8 +11,8 @@ export type IHeadingProps = React.ComponentProps<'h1'> & {
 };
 
 const styles: Record<AS, TwStyle> = {
-  h1: tw`text-5xl`,
-  h2: tw`text-4xl`,
+  h1: tw`text-5xl tracking-tight`,
+  h2: tw`text-4xl tracking-tight`,
   h3: tw`text-3xl`,
   h4: tw`text-2xl`,
   h5: tw`text-xl`,
