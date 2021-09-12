@@ -68,14 +68,12 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
 
   return (
     <div className="main-container" tw="py-10 px-2">
+      <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
       <div tw="flex flex-row px-2">
-        <aside tw="flex-1 border-r pr-4 space-y-8">
-          <div tw="space-y-5">
-            <PageTitle>Theme Editor</PageTitle>
-            <SubText>
-              Custom themes is a very simple thing in {process.env.NEXT_PUBLIC_APP_NAME}, click
-              change and save theme.
-            </SubText>
+        <aside tw="flex-1 border-r pr-4 space-y-11">
+          <div tw="space-y-6">
+            <BoldHeading as="h4">Theme Editor</BoldHeading>
+            <SubText>Click to change variants then we will save your theme automatically.</SubText>
           </div>
           <div tw="space-y-4">
             <BoldHeading>Colors</BoldHeading>
@@ -110,10 +108,10 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
           <div tw="space-y-5 mb-4">
             <BoldHeading as="h4">Preview</BoldHeading>
             <SubText>
-              {`Here's a preview of your changes to the Theme. When you set the changes, the entire widget will change with the theme.`}
+              {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
             </SubText>
           </div>
-          <div role="separator" tw="w-20 bg-gray-300 my-5" style={{ height: 1 }} />
+          <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
           <CommentTrees
             comments={comments as any}
             onSubmitReply={() => Promise.resolve()}

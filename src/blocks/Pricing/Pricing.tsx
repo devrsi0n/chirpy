@@ -15,7 +15,7 @@ export type PricingProps = React.PropsWithChildren<{
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} tw="py-8 flex flex-col items-center">
-      <Heading as="h2" tw="font-semibold mb-4">
+      <Heading as="h2" tw="mb-4">
         Pricing Plans
       </Heading>
       <Text tw="text-gray-400 mb-8 mx-6" variant="lg">

@@ -21,10 +21,10 @@ export type LinkProps = React.PropsWithChildren<
 >;
 
 const sizeStyles: Record<Size, TwStyle> = {
-  xs: tw`text-xs font-semibold`,
-  sm: tw`text-sm font-semibold`,
-  md: tw`text-base font-semibold`,
-  lg: tw`text-lg font-semibold`,
+  xs: tw`text-xs`,
+  sm: tw`text-sm`,
+  md: tw`text-base`,
+  lg: tw`text-lg`,
 };
 
 const variantStyles: Record<Variant, TwStyle> = {

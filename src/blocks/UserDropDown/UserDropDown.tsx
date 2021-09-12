@@ -31,7 +31,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
   return (
     <DropDown
       classes={{
-        button: tw`transform translate-x-2`,
+        button: tw`transform translate-x-1.5`,
       }}
       content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}
     >

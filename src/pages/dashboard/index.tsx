@@ -82,7 +82,7 @@ export default function Dashboard(): JSX.Element {
       </Head>
       <div className="main-container">
         <section tw="py-10 space-y-10">
-          <div tw="space-x-2 flex flex-row justify-between items-center">
+          <div tw="space-x-2 flex flex-row justify-between items-start">
             <PageTitle>Dashboard</PageTitle>
             <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
               <PlusCircle size={18} />
