@@ -53,7 +53,7 @@ export const appGlobalStyles = css`
   // https://www.joshwcomeau.com/css/full-bleed/
   .main-container {
     display: grid;
-    grid-template-columns: 1fr min(70ch, calc(100% - 64px)) 1fr;
+    grid-template-columns: 1fr min(75ch, calc(100% - 64px)) 1fr;
     grid-column-gap: 32px;
 
     & > * {
