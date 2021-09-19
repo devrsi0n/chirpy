@@ -62,7 +62,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                 </Button>
               ))}
             </div>
-            <Text tw="py-3 text-gray-400" variant="sm">
+            <Text tw="py-3" size="sm" variant="secondary">
               By clicking the buttons above, you acknowledge that you have read and understood, and
               agree to {process.env.NEXT_PUBLIC_APP_NAME}
               {`'s `}

@@ -68,21 +68,16 @@ export function Tabs({
   return (
     <TabsContext.Provider value={initialValue}>
       <section {...restProps} className={className}>
-        <header tw="flex flex-row items-center justify-between border-b dark:border-gray-700">
-          <nav tw="space-x-1 border-gray-400">
+        <header tw="flex flex-row items-center justify-between border-b">
+          <nav tw="space-x-1">
             {tabs.map((item) => (
               <BaseButton
                 css={[
-                  tw`hover:rounded hover:bg-gray-50 dark:hover:bg-gray-900 border-b-2 p-3`,
+                  tw`hover:rounded hover:bg-gray-100 border-b-2 p-3 border-t-0 border-r-0 border-l-0`,
                   selfValue === item.value
-                    ? tw`text-primary-500 border-primary-500`
+                    ? tw`text-primary-900 border-primary-900`
                     : tw`border-transparent`,
                 ]}
-                style={{
-                  borderTopWidth: 0,
-                  borderLeftWidth: 0,
-                  borderRightWidth: 0,
-                }}
                 // onMouseDown={handleKeyDown}
                 key={item.value}
                 onClick={() => handleClickTab(item)}

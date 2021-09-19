@@ -5,7 +5,7 @@ import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
-type Variant = 'nav' | 'plain' | 'solid';
+type Variant = 'primary' | 'secondary' | 'plain' | 'solid';
 
 export type LinkProps = React.PropsWithChildren<
   NextLinkProps &
@@ -14,7 +14,7 @@ export type LinkProps = React.PropsWithChildren<
       /**
        * Hightlight the link when href match the current url
        */
-      highlightMatch?: boolean;
+      highlightPattern?: RegExp;
       variant?: Variant;
       noUnderline?: boolean;
     }
@@ -28,9 +28,10 @@ const sizeStyles: Record<Size, TwStyle> = {
 };
 
 const variantStyles: Record<Variant, TwStyle> = {
-  nav: tw`text-gray-700 hover:text-black dark:text-gray-200 dark:hover:text-gray-100`,
+  primary: tw`text-gray-1200`,
+  secondary: tw`text-gray-1100`,
   plain: tw``,
-  solid: tw`text-blue-500! hover:text-blue-800! dark:text-blue-200! dark:hover:text-blue-100!`,
+  solid: tw`text-blue-1100 hover:text-blue-1200`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -45,14 +46,14 @@ export function Link(props: LinkProps): JSX.Element {
     passHref = true,
     prefetch,
     className = '',
-    highlightMatch,
-    noUnderline: disableUnderline,
-    variant = 'nav',
+    highlightPattern,
+    noUnderline,
+    variant = 'primary',
     children,
     ...restProps
   } = props;
   const router = useRouter();
-  const isCurrentURL = highlightMatch && router.pathname === href;
+  const highlight = highlightPattern && highlightPattern.test(router.pathname);
   const [isHovering, setIsHovering] = React.useState(false);
   const [target, setTarget] = React.useState(props.target || '_self');
   React.useEffect(() => {
@@ -73,7 +74,7 @@ export function Link(props: LinkProps): JSX.Element {
           css={[
             tw`relative transition duration-150 ease-in-out no-underline! whitespace-nowrap`,
             size && sizeStyles[size],
-            isCurrentURL && tw`font-bold`,
+            highlight && tw`font-bold`,
             variantStyles[variant],
           ]}
           className={className}
@@ -81,12 +82,11 @@ export function Link(props: LinkProps): JSX.Element {
           onMouseLeave={() => setIsHovering(false)}
           target={target}
         >
-          <span>{children}</span>
-
-          {!disableUnderline && variant === 'nav' && (
+          {children}
+          {!noUnderline && ['primary', 'secondary'].includes(variant) && (
             <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
               <m.span
-                tw="absolute inset-0 inline-block bg-gray-900 dark:bg-gray-300"
+                tw="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: isHovering ? 1 : 0, opacity: isHovering ? 1 : 0 }}
                 exit={{ scale: 0, opacity: 0 }}

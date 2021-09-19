@@ -104,7 +104,7 @@ export function CommentCard({
         variants={shakeVariants}
         onAnimationComplete={() => setContainerAnimate('stop')}
         css={[
-          tw`flex flex-row items-start space-x-3 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm`,
+          tw`flex flex-row items-start space-x-3 border rounded shadow-sm`,
           isDeleted ? tw`py-2 pl-4` : tw`pt-4 pb-2 pl-4`,
         ]}
         id={isENVDev ? commentId : undefined}
@@ -119,9 +119,10 @@ export function CommentCard({
                     {name}
                   </Text>
                   <Text
+                    variant="secondary"
                     as="time"
                     title={createdAt}
-                    tw="leading-none cursor-default text-gray-400"
+                    tw="leading-none cursor-default"
                     // @ts-ignore
                     dateTime={createdAt}
                   >
@@ -140,7 +141,7 @@ export function CommentCard({
                           buttonAs="button"
                           content={
                             <div tw="flex flex-row items-center space-x-2">
-                              <Text variant="sm" tw="w-max">
+                              <Text size="sm" tw="w-max text-gray-100">
                                 Are you sure?
                               </Text>
                               <Button size="sm" onClick={handleClickConfirmDelete}>

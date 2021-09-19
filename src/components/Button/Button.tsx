@@ -6,7 +6,7 @@ import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' | 'red' | 'gray';
-type Variant = 'solid' | 'plain' | 'text' /*| 'ghost' */;
+type Variant = 'solid' | 'secondary' | 'text' /*| 'ghost' */;
 
 export type ButtonProps = BaseButtonProps & {
   variant?: Variant;
@@ -28,7 +28,7 @@ export const Button = React.forwardRef(function Button(
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   const {
-    variant = 'plain',
+    variant = 'secondary',
     color = 'gray',
     disabled = false,
     size = 'md',
@@ -67,8 +67,8 @@ export const Button = React.forwardRef(function Button(
       <BaseButton
         {...restProps}
         ref={_ref}
+        tw="focus:outline-none disabled:(opacity-75 cursor-not-allowed) transition"
         css={[
-          tw`transition focus:outline-none disabled:(opacity-75 cursor-not-allowed)`,
           sizeStyles[size],
           ColorVariantStyles[`${variant}-${color}` as VariantColor],
           variant !== 'text' && shadow && tw`shadow-sm`,
@@ -130,7 +130,7 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 }
 
 const sizeStyles: Record<Size, TwStyle> = {
-  sm: tw`py-1 px-2 text-sm`,
+  sm: tw`py-1 px-2 text-sm space-x-1`,
   md: tw`py-2 px-3 text-base`,
   lg: tw`py-3 px-4 text-lg`,
   xl: tw`py-4 px-5 text-xl`,
@@ -143,17 +143,17 @@ type VariantColors = {
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-primary': tw`bg-primary-500 text-white border border-primary-700 hover:bg-primary-700 focus:(outline-none ring-2 ring-offset-2 ring-primary-500)`,
-  'solid-red': tw`bg-red-500 text-white border border-red-700 hover:bg-red-700 focus:(outline-none ring-2 ring-offset-2 ring-red-500)`,
-  'solid-gray': tw`bg-gray-600 text-white border border-gray-700 hover:bg-gray-700 focus:(outline-none ring-2 ring-offset-2 ring-gray-500)`,
+  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus:(outline-none ring-2 ring-offset-2 ring-primary-900)`,
+  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-700 focus:(outline-none ring-2 ring-offset-2 ring-red-900)`,
+  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus:(outline-none ring-2 ring-offset-2 ring-gray-900)`,
 
-  'plain-primary': tw`bg-white text-primary-500 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-primary-500)`,
-  'plain-red': tw`bg-white text-red-500 border border-gray-200 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-red-500)`,
-  'plain-gray': tw`bg-white dark:(bg-transparent text-gray-300 border-gray-700) text-gray-600 border border-gray-200 hover:(bg-gray-50 dark:bg-gray-900) focus:(ring-2 ring-offset-2 ring-gray-500)`,
+  'secondary-primary': tw`bg-primary-300 text-primary-900 hover:bg-primary-400 focus:(ring-2 ring-offset-2 ring-primary-700)`,
+  'secondary-red': tw`bg-gray-300 text-red-900 hover:bg-red-400 focus:(ring-2 ring-offset-2 ring-red-700)`,
+  'secondary-gray': tw`bg-white dark:bg-gray-300 text-gray-1100 hover:(bg-gray-100 dark:bg-gray-400) focus:(ring-2 ring-offset-2 ring-gray-700)`,
 
-  'text-primary': tw`text-primary-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-primary-500)`,
-  'text-red': tw`text-red-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-red-500)`,
-  'text-gray': tw`text-gray-600 hover:bg-gray-50 focus:(ring-2 ring-offset-2 ring-gray-500)`,
+  'text-primary': tw`text-primary-900 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-primary-700)`,
+  'text-red': tw`text-red-900 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-red-700)`,
+  'text-gray': tw`text-gray-1100 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-gray-1100)`,
 };
 
 const expandKeyFrame = keyframes`

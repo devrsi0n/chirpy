@@ -1,11 +1,13 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-type Variant = 'xs' | 'sm' | 'base' | 'lg';
+type Size = 'xs' | 'sm' | 'base' | 'lg';
+type Variant = 'primary' | 'secondary';
 
 export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
     variant?: Variant;
+    size?: Size;
     as?: 'p' | 'span' | 'time' | 'u' | 'strong' | 'em';
     bold?: boolean;
     italic?: boolean;
@@ -14,15 +16,16 @@ export type TextProps = React.PropsWithChildren<
   }
 >;
 
-const variantStyles: Record<Variant, TwStyle> = {
-  xs: tw`text-xs font-medium`,
-  sm: tw`text-sm font-normal`,
-  base: tw`text-base font-normal`,
-  lg: tw`text-lg font-normal`,
+const sizeStyles: Record<Size, TwStyle> = {
+  xs: tw`text-xs`,
+  sm: tw`text-sm`,
+  base: tw`text-base`,
+  lg: tw`text-lg`,
 };
 
 export function Text({
-  variant = 'base',
+  variant = 'primary',
+  size = 'base',
   as: Tag,
   children,
   className = '',
@@ -48,11 +51,12 @@ export function Text({
     <Tag
       {...restProps}
       css={[
-        tw`leading-normal`,
-        variantStyles[variant],
+        tw`leading-normal text-gray-1200`,
+        variant === 'primary' ? tw`text-gray-1200` : tw`text-gray-1100`,
+        sizeStyles[size],
         bold && tw`font-bold`,
         italic && tw`italic`,
-        disabled && tw`text-gray-500`,
+        disabled && tw`text-gray-1100`,
         underline && tw`underline`,
       ]}
       className={className}

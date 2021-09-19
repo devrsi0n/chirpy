@@ -126,7 +126,7 @@ export default function Dashboard(): JSX.Element {
               label="Name"
               errorMessage={errors.name}
               placeholder="hippo"
-              tw="w-full text-gray-600"
+              tw="w-full"
             />
             <TextField
               {...register('domain', {
@@ -141,7 +141,7 @@ export default function Dashboard(): JSX.Element {
               label={
                 <>
                   Domain
-                  <Text tw="text-gray-500" variant="sm">
+                  <Text variant="secondary" size="sm">
                     Associate a domain with this project
                   </Text>
                 </>
@@ -152,14 +152,14 @@ export default function Dashboard(): JSX.Element {
             />
           </form>
           <DialogFooter>
-            <Button variant="plain" onClick={handleCloseDialog} tw="w-full sm:w-auto">
+            <Button onClick={handleCloseDialog} tw="w-full sm:w-auto">
               Cancel
             </Button>
             <Button
               tw="w-full sm:w-auto"
               disabled={hasError || loadingInsertProject}
-              variant="plain"
               color="primary"
+              variant="solid"
               onClick={handleClickSubmit}
             >
               Submit

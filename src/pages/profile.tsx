@@ -7,6 +7,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { PageTitle } from '$/blocks/PageTitle';
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
@@ -90,19 +91,11 @@ export default function Profile(): JSX.Element {
     );
   }
 
-  if (!isSignIn) {
-    return (
-      <ProfileContainer>
-        <div tw="text-gray-500 flex items-center justify-center">Oops, please sign in first.</div>
-      </ProfileContainer>
-    );
-  }
-
   return (
     <ProfileContainer tw="space-y-7">
-      <Heading as="h2">Profile</Heading>
+      <PageTitle>Profile</PageTitle>
       <section tw="space-y-6">
-        <div tw="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-primary-500 mt-1 w-full h-40 rounded-t flex justify-center items-end">
+        <div tw="relative bg-gradient-to-r from-blue-800 to-primary-900 mt-1 w-full h-40 rounded-t flex justify-center items-end">
           {avatar && (
             <Avatar
               src={avatar}
@@ -133,10 +126,10 @@ export default function Profile(): JSX.Element {
                 buttonProps={{ variant: 'text' }}
                 content={
                   <div tw="flex flex-row items-center space-x-2">
-                    <Text variant="sm" tw="w-max">
+                    <Text tw="w-max text-gray-100">
                       Your unsaved content will lost, are you sure?
                     </Text>
-                    <Button size="sm" onClick={handleClickDiscard}>
+                    <Button variant="solid" size="sm" onClick={handleClickDiscard}>
                       Confirm
                     </Button>
                   </div>
@@ -149,6 +142,8 @@ export default function Profile(): JSX.Element {
             <Button
               tw="space-x-1"
               onClick={handleClickButton}
+              variant="solid"
+              color="primary"
               aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
             >
               {isEditMode ? <Save size={16} /> : <Edit2 size={16} />}
@@ -161,7 +156,7 @@ export default function Profile(): JSX.Element {
           <TextField {...register('website')} label="Website" prefixNode="https://" />
         ) : (
           website && (
-            <Link variant="solid" href={website} tw="space-x-2 flex flex-row width[fit-content]">
+            <Link variant="solid" href={website} tw="space-x-2 flex flex-row w-fit">
               <Link2 />
               <span>{website}</span>
             </Link>
@@ -174,7 +169,7 @@ export default function Profile(): JSX.Element {
             <Link
               variant="solid"
               href={`https://twitter.com/${twitterUserName}`}
-              tw="space-x-2 flex flex-row items-center width[fit-content]"
+              tw="space-x-2 flex flex-row items-center w-fit"
             >
               <Twitter size={22} />
               <span>@{twitterUserName}</span>
@@ -185,6 +180,8 @@ export default function Profile(): JSX.Element {
     </ProfileContainer>
   );
 }
+
+Profile.auth = true;
 
 function ProfileContainer({
   children,
