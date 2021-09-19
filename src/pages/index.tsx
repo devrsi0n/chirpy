@@ -1,12 +1,12 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import Head from 'next/head';
 import * as React from 'react';
-import tw, { css } from 'twin.macro';
+import 'twin.macro';
 
 import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
-import { Text } from '$/components/Text/Text';
+import { Text } from '$/components/Text';
 
 function Home(): JSX.Element {
   return (
@@ -15,20 +15,15 @@ function Home(): JSX.Element {
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
       <main tw="min-h-full flex flex-col items-center py-12 space-y-8">
-        <h1 tw="font-black text-center text-gray-800 mt-1 w-full max-w-2xl text-4xl leading-snug">
-          <span
-            tw="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary-500"
-            css={css`
-              ::selection {
-                ${tw`text-gray-800`}
-              }
-            `}
-          >
+        <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
+          <span tw="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-primary-900">
             {strings.heroTitlePoint}
           </span>{' '}
           <span>{strings.heroTitle}</span>
         </h1>
-        <Text tw="text-gray-500 text-center dark:text-gray-400">{strings.heroDescription}</Text>
+        <Text tw="text-center" variant="secondary">
+          {strings.heroDescription}
+        </Text>
         <div tw="flex justify-center items-center space-x-6">
           <Link variant="plain" href="/auth/sign-in">
             <Button
@@ -44,7 +39,7 @@ function Home(): JSX.Element {
               />
             </Button>
           </Link>
-          <Button variant="plain">{strings.callToAction.secondary}</Button>
+          <Button>{strings.callToAction.secondary}</Button>
         </div>
         <Pricing id="pricing" />
       </main>

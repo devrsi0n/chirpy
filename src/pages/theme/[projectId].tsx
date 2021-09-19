@@ -1,8 +1,9 @@
+import * as colors from '@radix-ui/colors';
 import merge from 'lodash/merge';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
+import { useTheme } from 'next-themes';
 import Head from 'next/head';
 import * as React from 'react';
-import colors from 'tailwindcss/colors';
 import tw from 'twin.macro';
 
 import { CommentTrees } from '$/blocks/CommentTrees';
@@ -11,7 +12,8 @@ import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
-import { ThemeProvider, useTheme } from '$/contexts/ThemeProvider';
+import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/ThemeProvider';
+import { translateRadixColor } from '$/contexts/ThemeProvider/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
@@ -23,44 +25,72 @@ import { Theme as ThemeType } from '$/types/theme.type';
 
 export type ThemeProps = StaticProps;
 
-type ColorSeries = typeof colors.red;
-
-const colorOptions: ColorSeries[] = [
-  colors.red,
-  colors.amber,
-  colors.green,
-  colors.blue,
-  colors.indigo,
-  colors.violet,
-  colors.pink,
-];
-
 export default function Theme(props: ThemeProps): JSX.Element {
   return (
     <>
-      <ThemeProvider theme={props.project?.theme as ThemeType}>
+      <WidgetThemeProvider theme={props.project?.theme as ThemeType}>
         <Head>
           <title>Theme Editor</title>
         </Head>
         <ThemeEditor {...props} />
-      </ThemeProvider>
+      </WidgetThemeProvider>
     </>
   );
 }
 
 Theme.auth = true;
 
+type ColorSeries = {
+  light: Record<string, string>;
+  dark: Record<string, string>;
+};
+
+const colorOptions: Record<string, ColorSeries> = {
+  red: {
+    light: translateRadixColor(colors.red),
+    dark: translateRadixColor(colors.redDark),
+  },
+  amber: {
+    light: translateRadixColor(colors.amber),
+    dark: translateRadixColor(colors.amberDark),
+  },
+  green: {
+    light: translateRadixColor(colors.green),
+    dark: translateRadixColor(colors.greenDark),
+  },
+  blue: {
+    light: translateRadixColor(colors.blue),
+    dark: translateRadixColor(colors.blueDark),
+  },
+  indigo: {
+    light: translateRadixColor(colors.indigo),
+    dark: translateRadixColor(colors.indigoDark),
+  },
+  violet: {
+    light: translateRadixColor(colors.violet),
+    dark: translateRadixColor(colors.violetDark),
+  },
+  pink: {
+    light: translateRadixColor(colors.pink),
+    dark: translateRadixColor(colors.pinkDark),
+  },
+};
+
 function ThemeEditor(props: ThemeProps): JSX.Element {
-  const { theme, mergeTheme } = useTheme();
+  const { theme, setTheme } = useWidgetTheme();
+  const { resolvedTheme } = useTheme();
+  const activeTheme: keyof ColorSeries = (resolvedTheme as keyof ColorSeries) || 'light';
   const [updateTheme] = useUpdateThemeMutation();
-  const handClickColorFunction = (color: ColorSeries) => {
+  const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return () => {
-      const newTheme = { colors: { primary: color } };
-      mergeTheme(newTheme);
+      const newTheme = merge({}, theme, {
+        colors: { light: { primary: color.light }, dark: { primary: color.dark } },
+      });
+      setTheme(newTheme);
       updateTheme({
         variables: {
           projectId: props.projectId,
-          theme: merge(theme, newTheme),
+          theme: newTheme,
         },
       });
     };
@@ -69,11 +99,13 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   return (
     <div className="main-container" tw="py-10 px-2">
       <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
-      <div tw="flex flex-row px-2">
+      <div tw="flex flex-row">
         <aside tw="flex-1 border-r pr-4 space-y-11">
           <div tw="space-y-6">
             <BoldHeading as="h4">Theme Editor</BoldHeading>
-            <SubText>Click to change variants then we will save your theme automatically.</SubText>
+            <Text variant="secondary">
+              Click to change variants then we will save your theme automatically.
+            </Text>
           </div>
           <div tw="space-y-4">
             <BoldHeading>Colors</BoldHeading>
@@ -83,12 +115,12 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                 buttonAs={IconButton}
                 content={
                   <ul tw="flex flex-row">
-                    {colorOptions.map((color) => (
-                      <li key={color[500]}>
-                        <IconButton onClick={handClickColorFunction(color)}>
+                    {Object.entries(colorOptions).map(([_, color]) => (
+                      <li key={color[activeTheme][900]}>
+                        <IconButton onClick={handClickPrimaryColorFunction(color)}>
                           <span
                             tw="inline-block w-6 h-6 rounded-full"
-                            style={{ background: color[500] }}
+                            style={{ background: color[activeTheme][900] }}
                           />
                         </IconButton>
                       </li>
@@ -96,20 +128,18 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                   </ul>
                 }
               >
-                <span tw="inline-block w-6 h-6 rounded-full bg-primary-500" />
+                <span tw="inline-block w-6 h-6 rounded-full bg-primary-900" />
               </Popover>
-              <Text tw="px-4 py-2 border border-primary-500 rounded">
-                {theme.colors.primary[500]}
-              </Text>
+              <Text tw="px-2">{theme.colors[activeTheme].primary[900]}</Text>
             </div>
           </div>
         </aside>
         <section tw="flex-2 pl-6">
           <div tw="space-y-5 mb-4">
             <BoldHeading as="h4">Preview</BoldHeading>
-            <SubText>
+            <Text variant="secondary">
               {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
-            </SubText>
+            </Text>
           </div>
           <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
           <CommentTrees
@@ -260,4 +290,3 @@ const comments = [
 ];
 
 const BoldHeading = tw(Heading)`font-bold`;
-const SubText = tw(Text)`text-gray-500`;

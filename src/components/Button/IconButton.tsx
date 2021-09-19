@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { ring } from '$/styles/common';
+
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
 type Size = 'sm' | 'md' | 'lg';
@@ -25,10 +27,7 @@ export const IconButton = React.forwardRef(function IconButton(
     <BaseButton
       ref={ref}
       {...restProps}
-      css={[
-        tw`rounded-full hover:(bg-gray-400 bg-opacity-10) focus-visible:(outline-none ring-2 ring-inset ring-gray-200)`,
-        style,
-      ]}
+      css={[ring, tw`hover:(bg-gray-400) rounded-full text-gray-1100`, style]}
     >
       {children}
     </BaseButton>

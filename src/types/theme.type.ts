@@ -9,7 +9,10 @@ export type Colors = {
 };
 
 export type Theme = {
-  colors: Colors;
+  colors: {
+    light: Colors;
+    dark: Colors;
+  };
 };
 
 export type ColorMode = 'dark' | 'light' | 'system';

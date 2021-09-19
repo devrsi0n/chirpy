@@ -18,15 +18,15 @@ export default function Custom404(): JSX.Element {
       <main tw="py-12 px-4 space-y-8 flex flex-col items-center">
         <div
           css={[
-            tw`flex justify-center text-gray-400 dark:text-gray-500`,
+            tw`flex justify-center text-gray-1000`,
             css`
               --geist-icons-background: white;
             `,
           ]}
         >
-          <div css={[dashedBorder, tw`p-6 border-opacity-30 dark:border-opacity-30`]}>
-            <div css={[dashedBorder, tw`p-5 border-opacity-50 dark:border-opacity-50`]}>
-              <div css={[dashedBorder, tw`p-4 border-opacity-80 dark:border-opacity-80`]}>
+          <div css={[dashedBorder, tw`p-6 border-opacity-30`]}>
+            <div css={[dashedBorder, tw`p-5 border-opacity-50`]}>
+              <div css={[dashedBorder, tw`p-4 border-opacity-80`]}>
                 <div css={[dashedBorder, tw`p-3`]}>
                   <AlertCircleFill size={84} />
                 </div>
@@ -35,7 +35,7 @@ export default function Custom404(): JSX.Element {
           </div>
         </div>
         <Heading>Oops! Page not found</Heading>
-        <Text>We might have encountered some issues...</Text>
+        <Text variant="secondary">We might have encountered some issues...</Text>
         <section tw="space-y-3">
           <Heading as="h5">What could have caused this?</Heading>
           <List variant="unordered" tw="space-y-3">
@@ -48,19 +48,19 @@ export default function Custom404(): JSX.Element {
           <Link href="/" variant="plain">
             <Button
               variant="solid"
-              color="gray"
+              color="primary"
               className="group"
               tw="space-x-1 transition hover:shadow-2xl"
             >
               <span>Back to homepage</span>
             </Button>
           </Link>
-          <Button variant="plain">Learn More</Button>
+          <Button>Learn More</Button>
         </div>
       </main>
     </>
   );
 }
 
-const dashedBorder = tw`rounded-full border border-dashed border-gray-300 dark:border-gray-600`;
-const listMakerStyle = tw`bg-red-400`;
+const dashedBorder = tw`rounded-full border border-dashed`;
+const listMakerStyle = tw`bg-red-900`;

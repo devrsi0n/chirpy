@@ -7,9 +7,11 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.fontSize": 16,
   "cSpell.words": [
+    "blacka",
     "centralus",
     "jsonb",
-    "visx"
+    "visx",
+    "whitea"
   ],
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",

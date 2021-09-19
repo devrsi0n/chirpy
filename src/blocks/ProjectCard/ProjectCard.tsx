@@ -5,7 +5,8 @@ import TrendingUp from '@geist-ui/react-icons/trendingUp';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { Button, IconButton } from '$/components/Button';
+import { BaseButton, Button } from '$/components/Button';
+import { Card } from '$/components/Card';
 import { Dialog, DialogFooter } from '$/components/Dialog';
 import { Divider } from '$/components/Divider';
 import { DropDown, DropDownItem } from '$/components/DropDown';
@@ -61,14 +62,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
   };
 
   return (
-    <section
-      key={project.id}
-      tw="bg-white pt-4 rounded-lg space-y-4"
-      style={{
-        // TODO: Extract boxshadow to tailwindcss config
-        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
-      }}
-    >
+    <Card as="section" key={project.id} tw="pt-4 rounded-lg space-y-4">
       <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2">
         <Heading tw="pl-6 font-bold" as="h3">
           {project.name}
@@ -82,20 +76,31 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           tw="flex flex-row items-center"
         >
           <Link variant="plain" href={`/analytics/${project.id}`}>
-            <IconButton css={grow > 0 ? tw`text-green-600` : tw`text-yellow-600`}>
+            <BaseButton
+              tw="rounded-full p-2"
+              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
+            >
               <span
                 tw="p-2 rounded-full"
-                css={grow > 0 ? tw`bg-green-50` : tw`bg-yellow-50 transform -scale-y-1`}
+                css={
+                  grow > 0
+                    ? tw`bg-green-300 hover:(bg-green-500)`
+                    : tw`bg-yellow-300 hover:(bg-yellow-500) transform -scale-y-1`
+                }
               >
                 <TrendingUp size={18} />
               </span>
-            </IconButton>
+            </BaseButton>
           </Link>
           <div tw="mr-5">
-            <Text variant="sm" bold>
+            <Text size="sm" bold variant="secondary">
               {pageviewsYesterday}
             </Text>
-            <Text variant="xs" css={grow > 0 ? tw`text-green-600` : tw`text-yellow-600`}>
+            <Text
+              size="xs"
+              tw="font-bold"
+              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
+            >
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
           </div>
@@ -112,7 +117,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       </div>
       <div tw="px-6 flex flex-row space-x-2">
         <Link href={`/theme/${project.id}`} variant="plain">
-          <Button tw="" color="primary" shadow={false} size="sm">
+          <Button tw="" color="primary" shadow={false}>
             Theme
           </Button>
         </Link>
@@ -121,12 +126,12 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       {project.pages.length > 0 ? (
         <List tw="px-6 space-y-1.5">
           {project.pages.map((page) => (
-            <List.Item key={page.id} markerStyle={tw`bg-black`}>
+            <List.Item key={page.id} markerStyle={tw`bg-gray-1000`}>
               <Link
                 href={page.url}
                 title={page.title || page.url}
                 variant="plain"
-                tw="transition text-gray-600 hover:text-primary-600 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
+                tw="transition hover:text-primary-1000 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
               >
                 {page.title || page.url}
               </Link>
@@ -134,11 +139,13 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           ))}
         </List>
       ) : (
-        <Text tw="px-6 text-gray-400">No page integrated</Text>
+        <Text tw="px-6" variant="secondary">
+          No page integrated
+        </Text>
       )}
       <Divider />
       <div tw="px-6 pb-4">
-        <Text tw="text-gray-400 leading-none" variant="sm">
+        <Text tw="leading-none" size="sm" variant="secondary">
           Created {dayjs(project.createdAt).fromNow()}
         </Text>
       </div>
@@ -162,7 +169,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           </Button>
         </DialogFooter>
       </Dialog>
-    </section>
+    </Card>
   );
 }
 

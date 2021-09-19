@@ -1,23 +1,37 @@
-import { default as TailwindColors } from 'tailwindcss/colors';
+import * as radixColors from '@radix-ui/colors';
 
 import { Theme } from '../../types/theme.type';
+import { translateRadixColor } from './utilities';
+
+const siteColors = getColors();
 
 export const siteDefaultTheme: Theme = {
-  colors: {
-    primary: TailwindColors.violet,
-  },
+  colors: siteColors,
 };
 
-// function hexToRgbA(hex: string): string {
-//   if (/^#([\dA-Fa-f]{3}){1,2}$/.test(hex)) {
-//     let hexArray = hex.slice(1).split('');
-//     if (hexArray.length === 3) {
-//       hexArray = [hexArray[0], hexArray[0], hexArray[1], hexArray[1], hexArray[2], hexArray[2]];
-//     }
-//     const hexValue = Number.parseInt('0x' + hexArray.join(''), 10);
-//     return (
-//       'rgba(' + [(hexValue >> 16) & 255, (hexValue >> 8) & 255, hexValue & 255].join(',') + ',1)'
-//     );
-//   }
-//   throw new Error('Bad color Hex');
-// }
+export function getColors() {
+  return {
+    light: {
+      primary: translateRadixColor(radixColors.plum),
+      gray: translateRadixColor(radixColors.gray),
+      blue: translateRadixColor(radixColors.blue),
+      green: translateRadixColor(radixColors.green),
+      violet: translateRadixColor(radixColors.violet),
+      yellow: translateRadixColor(radixColors.yellow),
+      red: translateRadixColor(radixColors.red),
+      pink: translateRadixColor(radixColors.pink),
+      bg: radixColors.slate.slate2,
+    },
+    dark: {
+      primary: translateRadixColor(radixColors.plumDark),
+      gray: translateRadixColor(radixColors.mauveDark),
+      blue: translateRadixColor(radixColors.blueDark),
+      green: translateRadixColor(radixColors.greenDark),
+      violet: translateRadixColor(radixColors.violetDark),
+      yellow: translateRadixColor(radixColors.yellowDark),
+      red: translateRadixColor(radixColors.redDark),
+      pink: translateRadixColor(radixColors.pinkDark),
+      bg: radixColors.mauveDark.mauve1,
+    },
+  };
+}

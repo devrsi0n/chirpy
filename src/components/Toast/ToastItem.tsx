@@ -33,16 +33,14 @@ export function ToastItem({
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
-    <section css={[tw`bg-white border py-4 px-6 rounded-md shadow relative`]}>
+    <section css={[tw`bg-gray-300 border py-4 px-6 rounded-md shadow relative`]}>
       <div css={tw`flex flex-row items-start space-x-3 mr-4`}>
         {typeIcon}
         <div css={tw`space-y-2 max-w-lg`}>
           <Heading as="h5" css={tw`leading-none`}>
             {title}
           </Heading>
-          <Text variant="base" css={tw`text-gray-500`}>
-            {description}
-          </Text>
+          <Text variant="secondary">{description}</Text>
         </div>
       </div>
       <IconButton

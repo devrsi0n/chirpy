@@ -108,7 +108,7 @@ function ParentBranch(props: ParentBranchProps): JSX.Element {
             height: ${branchHeight}rem;
             content: '';
             border-left-width: 1px;
-            ${tw`border-gray-200`}
+            ${tw`border-gray-500`}
           }
 
           &:first-of-type:before {

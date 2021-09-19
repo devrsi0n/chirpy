@@ -1,2 +1,2 @@
-export * from './ThemeProvider';
+export * from './WidgetThemeProvider';
 export * from './SiteThemeProvider';

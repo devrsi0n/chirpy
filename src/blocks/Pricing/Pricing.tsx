@@ -18,7 +18,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
       <Heading as="h2" tw="mb-4">
         Pricing Plans
       </Heading>
-      <Text tw="text-gray-400 mb-8 mx-6" variant="lg">
+      <Text tw="mb-8 mx-6" variant="secondary" size="lg">
         Start building for free, then add a site to go live. Account plans unblock additional
         features.
       </Text>
@@ -43,7 +43,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           price="0"
           benefits={[
             <span key="website">
-              <span tw="font-bold text-black">10</span> Websites
+              <span tw="font-bold text-gray-1200">10</span> Websites
             </span>,
             'Privacy-first, No Ads',
             'Basic rich text formatting',
@@ -55,7 +55,8 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             'No branding',
           ]}
           callToAction={{
-            label: 'Buy Pro',
+            // label: 'Buy Pro',
+            label: 'Try It Free',
             buttonProps: {
               color: 'primary',
             },
@@ -86,24 +87,30 @@ function PricingCard({
   priceDescription,
 }: PricingCardProps): JSX.Element {
   return (
-    <div tw="border p-6 rounded shadow hover:shadow-xl transition">
+    <div tw="bg-gray-100 border p-6 rounded shadow hover:shadow-xl transition">
       <Heading as="h5" tw="font-medium mb-4">
         {plan}
       </Heading>
-      <Text tw="mb-8 text-gray-400">All the basics for starting a new community</Text>
-      <Text tw="text-3xl font-bold mb-2">
-        ${price}
-        <span tw="text-gray-300 text-base font-normal">/mo</span>
+      <Text tw="mb-8" variant="secondary">
+        All the basics for starting a new community
       </Text>
-      <Text tw="text-gray-400 mb-8">{priceDescription}&#8203;</Text>
+      <Text tw="text-3xl mb-2">
+        <span tw="font-bold">${price}</span>
+        <Text as="span" variant="secondary" size="base">
+          /mo
+        </Text>
+      </Text>
+      <Text tw="mb-8" variant="secondary">
+        {priceDescription}&#8203;
+      </Text>
       <Link variant="plain" href="/auth/sign-in">
         <Button {...callToAction.buttonProps} variant="solid" tw="w-full mb-8">
           {callToAction.label}
         </Button>
       </Link>
       <Divider tw="-mx-6 max-w-none mb-8" />
-      <Text tw="font-medium text-gray-600 mb-3" variant="sm">{`WHAT'S INCLUDED`}</Text>
-      <List tw="space-y-2 text-gray-400">
+      <Text bold tw="mb-3" variant="secondary">{`WHAT'S INCLUDED`}</Text>
+      <List tw="space-y-2">
         {benefits?.map((benefit, index) => (
           <ListItem key={index}>{benefit}</ListItem>
         ))}

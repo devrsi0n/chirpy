@@ -1,35 +1,49 @@
+// @ts-nocheck
 const defaultTheme = require('tailwindcss/defaultTheme');
-const { lightBlue, ...colors } = require('tailwindcss/colors');
+const radixColors = require('@radix-ui/colors');
+var convert = require('color-convert');
+
+const colors = {
+  // dynamic colors
+  blue: getColorCSSVariables('blue'),
+  green: getColorCSSVariables('green'),
+  gray: getColorCSSVariables('gray'),
+  violet: getColorCSSVariables('violet'),
+  primary: getColorCSSVariables('primary'),
+  yellow: getColorCSSVariables('yellow'),
+  red: getColorCSSVariables('red'),
+  whitea: getColorCSSVariables('whitea'),
+  blacka: getColorCSSVariables('blacka'),
+  pink: getColorCSSVariables('pink'),
+  bg: `var(--tw-colors-bg)`,
+  // static colors
+  'gray-dark': getRadixColor(radixColors.grayDark, 'gray'),
+  white: '#fff',
+  black: '#000',
+  current: 'currentColor',
+  transparent: 'transparent',
+};
 
 module.exports = {
-  // mode: 'jit',
   darkMode: 'class',
-  purge: ['./src/pages/**/*.{ts,tsx}', './src/components/**/*.{ts,tsx}', './src/blocks/**/*.{ts,tsx}'],
+  purge: [
+    './src/pages/**/*.{ts,tsx}',
+    './src/components/**/*.{ts,tsx}',
+    './src/blocks/**/*.{ts,tsx}',
+  ],
   theme: {
+    colors,
     extend: {
       fontFamily: {
         sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
       },
-      colors: {
-        // gray: colors.trueGray,
-        primary: {
-          50: 'var(--tw-colors-primary-50)',
-          100: 'var(--tw-colors-primary-100)',
-          200: 'var(--tw-colors-primary-200)',
-          300: 'var(--tw-colors-primary-300)',
-          400: 'var(--tw-colors-primary-400)',
-          500: 'var(--tw-colors-primary-500)',
-          600: 'var(--tw-colors-primary-600)',
-          700: 'var(--tw-colors-primary-700)',
-          800: 'var(--tw-colors-primary-800)',
-          900: 'var(--tw-colors-primary-900)',
-        },
-        // 50 hsl(210, 20%, 98%)
-        // 100 hsl(220, 14%, 96%)
-        // 200 hsl(220, 13%, 91%)
-        bg: '#F8FAFC',
-      },
       fill: colors,
+      borderColor: (theme) => ({
+        DEFAULT: theme('colors.gray.700', 'currentColor'),
+      }),
+      ringColor: (theme) => ({
+        DEFAULT: theme('colors.gray.700', 'currentColor'),
+      }),
       screens: {
         xs: '375px',
       },
@@ -49,69 +63,28 @@ module.exports = {
         fit: 'fit-content',
       },
     },
-    // typography: (theme) => ({
-    //   light: {
-    //     css: [
-    //       {
-    //         color: theme('colors.gray.400'),
-    //         '[class~="lead"]': {
-    //           color: theme('colors.gray.300'),
-    //         },
-    //         a: {
-    //           color: theme('colors.white'),
-    //         },
-    //         strong: {
-    //           color: theme('colors.white'),
-    //         },
-    //         'ol > li::before': {
-    //           color: theme('colors.gray.400'),
-    //         },
-    //         'ul > li::before': {
-    //           backgroundColor: theme('colors.gray.600'),
-    //         },
-    //         hr: {
-    //           borderColor: theme('colors.gray.200'),
-    //         },
-    //         blockquote: {
-    //           color: theme('colors.gray.200'),
-    //           borderLeftColor: theme('colors.gray.600'),
-    //         },
-    //         h1: {
-    //           color: theme('colors.white'),
-    //         },
-    //         h2: {
-    //           color: theme('colors.white'),
-    //         },
-    //         h3: {
-    //           color: theme('colors.white'),
-    //         },
-    //         h4: {
-    //           color: theme('colors.white'),
-    //         },
-    //         'figure figcaption': {
-    //           color: theme('colors.gray.400'),
-    //         },
-    //         code: {
-    //           color: theme('colors.white'),
-    //         },
-    //         'a code': {
-    //           color: theme('colors.white'),
-    //         },
-    //         pre: {
-    //           color: theme('colors.gray.200'),
-    //           backgroundColor: theme('colors.gray.800'),
-    //         },
-    //         thead: {
-    //           color: theme('colors.white'),
-    //           borderBottomColor: theme('colors.gray.400'),
-    //         },
-    //         'tbody tr': {
-    //           borderBottomColor: theme('colors.gray.600'),
-    //         },
-    //       },
-    //     ],
-    //   },
-    // }),
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [require('./scripts/tailwindcss-typography')],
 };
+
+function getColorCSSVariables(name) {
+  const result = {};
+  for (let i = 1; i <= 12; i++) {
+    result[i * 100] = `var(--tw-colors-${name}-${i * 100})`;
+  }
+  return result;
+}
+
+function getRadixColor(colors, prefix) {
+  const result = {};
+  for (let i = 1; i <= 12; i++) {
+    const color = colors[`${prefix}${i}`];
+    const [, h, s, l] = /hsl\((\d+) ([\d\.]+)\% ([\d\.]+)\%\)/.exec(color);
+    const rgb = convert.hsl
+      .rgb(+h, +s, +l)
+      .map((c) => c.toString(16))
+      .join('');
+    result[i * 100] = `#${rgb}`;
+  }
+  return result;
+}

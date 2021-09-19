@@ -36,20 +36,20 @@ export function Header(): JSX.Element {
             <div tw="flex flex-row items-center space-x-2">
               <Logo />
             </div>
-            <nav tw="w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-200) flex-wrap items-center mb-5 space-x-5">
+            <nav tw="w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-500) flex-wrap items-center mb-5 space-x-5">
               {!isSignIn ? (
-                <Link href="/#pricing" tw="" highlightMatch>
+                <Link href="/#pricing" tw="" highlightPattern={/^\/#pricing/}>
                   Pricing
                 </Link>
               ) : (
-                <Link href="/dashboard" tw="" highlightMatch>
+                <Link href="/dashboard" tw="" highlightPattern={/^\/dashboard/}>
                   Dashboard
                 </Link>
               )}
-              <Link href="/docs/index" tw="" highlightMatch>
+              <Link href="/docs/index" tw="" highlightPattern={/^\/docs/}>
                 Docs
               </Link>
-              <Link href="/blog" tw="" highlightMatch>
+              <Link href="/blog" tw="" highlightPattern={/^\/blog/}>
                 Blog
               </Link>
             </nav>
@@ -62,18 +62,18 @@ export function Header(): JSX.Element {
       <div tw="w-full">
         <nav css={[tw`flex w-full flex-col px-2 pt-2 pb-3 space-y-1`, !showMenu && tw`hidden`]}>
           {isSignIn ? (
-            <Link href="/dashboard" tw="px-3 py-2" highlightMatch>
+            <Link href="/dashboard" tw="px-3 py-2" highlightPattern={/^\/dashboard/}>
               Dashboard
             </Link>
           ) : (
-            <Link href="/#pricing" tw="px-3 py-2" highlightMatch>
+            <Link href="/#pricing" tw="px-3 py-2" highlightPattern={/^\/#pricing/}>
               Pricing
             </Link>
           )}
-          <Link href="/docs/index" tw="px-3 py-2" highlightMatch>
+          <Link href="/docs/index" tw="px-3 py-2" highlightPattern={/^\/docs/}>
             Docs
           </Link>
-          <Link href="/blog" tw="px-3 py-2" highlightMatch>
+          <Link href="/blog" tw="px-3 py-2" highlightPattern={/^\/blog/}>
             Blog
           </Link>
         </nav>

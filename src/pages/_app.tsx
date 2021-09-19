@@ -15,7 +15,7 @@ import { Text } from '$/components/Text';
 import { ToastProvider } from '$/components/Toast';
 import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
-import { SiteThemeProvider, ThemeProvider } from '$/contexts/ThemeProvider';
+import { SiteThemeProvider, WidgetThemeProvider } from '$/contexts/ThemeProvider';
 import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
@@ -71,7 +71,7 @@ type AppLayoutProps = CommonPageProps & {
 
 function AppLayout(props: AppLayoutProps): JSX.Element {
   const { isWidget, children, projectId, layoutProps, theme } = props;
-  const ThemeWrapper = isWidget ? ThemeProvider : React.Fragment;
+  const ThemeWrapper = isWidget ? WidgetThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
   return (
     <ThemeWrapper {...(isWidget && { theme })}>

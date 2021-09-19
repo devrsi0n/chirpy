@@ -39,7 +39,7 @@ export function Select<T>({
           <div css={tw`relative`} className={className}>
             <span css={tw`inline-block w-full rounded-md shadow-sm`}>
               <Listbox.Button
-                css={tw`cursor-default relative w-full rounded-sm border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:(outline-none ring-blue-500 border-primary-300) transition ease-in-out duration-150 sm:text-sm`}
+                css={tw`cursor-default relative w-full rounded-sm border bg-gray-300 pl-3 pr-10 py-2 text-left focus:(outline-none ring-blue-500 border-primary-600) transition ease-in-out duration-150 sm:text-sm`}
               >
                 <span css={tw`block truncate`}>{name || value}</span>
                 <span
@@ -52,10 +52,13 @@ export function Select<T>({
 
             <AnimatePresence>
               {open && (
-                <m.div {...easeInOut} tw="absolute mt-1 w-full rounded-md bg-white shadow-lg z-20">
+                <m.div
+                  {...easeInOut}
+                  tw="absolute mt-1 w-full rounded-md bg-gray-300 shadow-lg z-20"
+                >
                   <Listbox.Options
                     static
-                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-gray-900 ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>
@@ -83,7 +86,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
       {({ selected, active }) => (
         <div
           css={[
-            active ? tw`text-white bg-primary-300` : tw`text-gray-900`,
+            active ? tw`text-gray-200 bg-primary-300` : tw`text-gray-900`,
             tw`cursor-pointer select-none relative py-2 pl-8 pr-4`,
           ]}
         >
@@ -93,7 +96,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
           {selected && (
             <span
               css={[
-                active ? tw`text-white` : tw`text-gray-400`,
+                active ? tw`text-gray-200` : tw`text-gray-400`,
                 tw`absolute inset-y-0 left-0 flex items-center pl-1.5`,
               ]}
             >

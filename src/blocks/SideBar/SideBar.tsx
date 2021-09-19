@@ -7,6 +7,7 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Directory } from '$/server/types/file';
+import { hoverable } from '$/styles/common';
 
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];
@@ -22,7 +23,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
       className={className}
     >
       {title && hasValidDirectories && (
-        <Heading as="h4" tw="font-bold px-1 pb-4">
+        <Heading as="h4" tw="font-bold px-1 pb-4 text-gray-1100">
           {title}
         </Heading>
       )}
@@ -51,8 +52,9 @@ function Directories({ directories }: Pick<SideBarProps, 'directories'>): JSX.El
 function DirectoryItem({ directory: dir }: { directory: Directory }) {
   const router = useRouter();
   const [isOpened, setIsOpened] = React.useState(false);
+  const isActive = isButtonActive(dir, router.asPath);
   const listMarker = dir.route ? (
-    <span css={[tw`rounded-full inline-block w-1.5 h-1.5 mr-3.5 bg-gray-500`]} />
+    <span css={[tw`rounded-full inline-block w-1.5 h-1.5 mr-3.5 bg-current hover:bg-gray-1200`]} />
   ) : (
     <ChevronRight
       size={18}
@@ -65,8 +67,8 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         <Link
           href={dir.route}
           css={[clickableItemStyle, router.asPath === dir.route && activeStyle]}
-          variant="nav"
           noUnderline
+          variant="secondary"
           tw="capitalize"
         >
           {listMarker}
@@ -74,11 +76,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         </Link>
       ) : (
         <button
-          css={[
-            tw`capitalize text-gray-700 hover:(text-black) dark:text-gray-200 dark:hover:text-gray-100`,
-            clickableItemStyle,
-            isButtonActive(dir, router.asPath) && activeStyle,
-          ]}
+          css={[tw`capitalize text-gray-1100`, clickableItemStyle, isActive && activeStyle]}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
           aria-label="Expand children routes"
@@ -98,8 +96,11 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   );
 }
 
-const clickableItemStyle = tw`flex flex-row items-center justify-start px-1.5 py-1 rounded hover:bg-gray-100 transition`;
-const activeStyle = tw`text-black font-bold`;
+const clickableItemStyle = [
+  tw`transition flex flex-row items-center justify-start px-1.5 py-1 rounded`,
+  hoverable,
+];
+const activeStyle = tw`text-gray-1200 font-bold`;
 
 function isButtonActive(dir: Directory, pathname: string) {
   if (dir.route === pathname) {

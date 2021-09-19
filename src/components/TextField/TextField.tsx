@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { border, textInput, textInputError } from '$/styles/common';
+
 export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
   label: React.ReactNode;
   errorMessage?: string;
@@ -25,11 +27,11 @@ export const TextField = React.forwardRef(function TextfieldComponent(
 ): JSX.Element {
   const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
   return (
-    <label css={[tw`flex flex-col text-gray-600 mb-4 px-0.5`, styles?.root]}>
+    <label css={[tw`flex flex-col text-gray-1200 mb-3 px-0.5`, styles?.root]}>
       <LabelWrapper tw="mb-1 leading-6 text-lg">{label}</LabelWrapper>
       <div css={[tw`mb-1`, prefixNode && tw`flex flex-row items-stretch`]}>
         {prefixNode && (
-          <div tw="bg-gray-50 border-t border-b border-l px-3 rounded-l flex flex-row items-center">
+          <div tw="border-t border-b border-l px-3 rounded-l flex flex-row items-center">
             {prefixNode}
           </div>
         )}
@@ -39,15 +41,17 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           ref={ref}
           type={type}
           className={className}
+          tw="px-3 py-2"
           css={[
-            tw`text-gray-600 border border-gray-300 focus:(border-indigo-500 ring-indigo-500)`,
+            textInput,
+            border,
             prefixNode ? tw`flex-1 rounded-r` : tw`rounded`,
-            !!errorMessage && tw`border-red-700`,
+            !!errorMessage && textInputError,
             styles?.input,
           ]}
         />
       </div>
-      <p role="alert" tw="text-red-700 text-sm h-5">
+      <p role="alert" tw="text-red-900 text-sm leading-none h-4">
         {errorMessage}
       </p>
     </label>

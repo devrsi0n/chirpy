@@ -23,7 +23,7 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
         <div tw="min-h-full" className="main-container">
           <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
             <SideBar tw="pt-10" directories={directories} title="Documentation" />
-            <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
+            <article className="prose lg:prose-xl" tw="flex-1 overflow-y-auto">
               <div tw="pt-10">
                 {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
               </div>
