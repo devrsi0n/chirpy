@@ -7,11 +7,11 @@ import { Slate, Editable, withReact } from 'slate-react';
 import tw, { TwStyle } from 'twin.macro';
 
 import { Button } from '$/components/Button';
-import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 import { usePrevious } from '$/hooks/usePrevious';
 import { APP_NAME_LOWERCASE } from '$/lib/constants';
+import { textInput } from '$/styles/common';
 
 import { SignInButton } from '../SignInButton';
 import { Element } from './Element';
@@ -70,19 +70,16 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
   return (
     <RichTextEditorContextProvider readOnly={readOnly}>
       <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section
-          css={[
-            styles?.root,
-            !readOnly &&
-              tw`focus-within:border-gray-400 border border-gray-200 dark:border-gray-700 rounded`,
-          ]}
-        >
+        <section css={[styles?.root, !readOnly && tw`border focus-within:border-gray-800 rounded`]}>
           <Editable
             readOnly={readOnly}
             placeholder={placeholder}
             css={[
-              tw`dark:text-gray-300`,
-              !readOnly && tw`min-height[4em]! resize-y overflow-hidden px-2 pt-2 bg-white rounded`,
+              tw`text-gray-1200`,
+              !readOnly && [
+                tw`min-height[4em]! resize-y overflow-hidden px-2 pt-2 rounded`,
+                textInput,
+              ],
               styles?.editable,
             ]}
             renderElement={Element}
@@ -111,15 +108,11 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
                     onClick={handleSubmitReply}
                     aria-label={isLoading ? 'Posting' : 'Post'}
                   >
-                    {isLoading ? (
-                      <Loader tw="animate-spin text-gray-400 w-5 h-5" />
-                    ) : (
-                      <Send size="14" />
-                    )}
-                    <Text>{'Post'}</Text>
+                    {isLoading ? <Loader tw="animate-spin w-5 h-5" /> : <Send size="14" />}
+                    <span>{'Post'}</span>
                   </Button>
                 ) : (
-                  <SignInButton variant="plain" size="sm" />
+                  <SignInButton size="sm" />
                 )}
               </div>
             </Toolbar>

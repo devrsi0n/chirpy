@@ -135,5 +135,5 @@ const DEFAULT_WIDTH = 40;
 
 type ButtonDimension = { height?: number; width?: number };
 
-const panelBg = [tw`bg-white`, tw`border border-gray-500 border-opacity-10`];
+const panelBg = tw`bg-gray-1200 align-baseline`;
 const panelBorder = tw`rounded-lg`;

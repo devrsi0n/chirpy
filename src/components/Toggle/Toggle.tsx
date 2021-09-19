@@ -31,7 +31,7 @@ export function Toggle({
           style={{
             cursor: 'pointer',
           }}
-          variant="sm"
+          size="sm"
           {...labelProps}
         >
           {label}

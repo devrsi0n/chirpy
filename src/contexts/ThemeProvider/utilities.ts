@@ -5,7 +5,7 @@ type NestedObject = { [key: string]: string | NestedObject };
 /**
  * Support any depth level of nesting objects
  */
-export function getThemeCSSVariables(theme: NestedObject, prefix: string): CSSVariables {
+function getThemeCSSVariables(theme: NestedObject, prefix = '--tw'): CSSVariables {
   const cssVariables: Array<[string, string]> = [];
   for (const [key, value] of Object.entries(theme)) {
     const cssVariableKey = prefix && key ? [prefix, key].join('-') : prefix || key;
@@ -18,4 +18,19 @@ export function getThemeCSSVariables(theme: NestedObject, prefix: string): CSSVa
     }
   }
   return cssVariables;
+}
+
+export function getThemeCSSVariablesString(theme: NestedObject): string {
+  return getThemeCSSVariables(theme)
+    .map(([key, value]) => `${key}: ${value};`)
+    .join('\n');
+}
+
+export function translateRadixColor(color: Record<string, string>) {
+  const result: Record<string, string> = {};
+  for (const [key, value] of Object.entries(color)) {
+    const [, num] = /\w(\d+)/.exec(key)!;
+    result[100 * +num] = value;
+  }
+  return result;
 }

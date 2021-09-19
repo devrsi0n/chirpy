@@ -1,19 +1,17 @@
 import tw, { css, theme } from 'twin.macro';
 
 export const appGlobalStyles = css`
-  ::selection {
-    ${tw`bg-green-200`}
-  }
-
-  input:focus {
-    outline: none;
-  }
-
   html,
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
+  }
+
+  html,
+  body,
+  #__next {
+    height: 100%;
   }
 
   * {
@@ -22,14 +20,13 @@ export const appGlobalStyles = css`
     -webkit-appearance: none;
   }
 
-  button:focus {
-    outline: 0;
+  ::selection {
+    ${tw`bg-green-700 text-white opacity-75`}
   }
 
-  html,
-  body,
-  #__next {
-    height: 100%;
+  input:focus,
+  button:focus {
+    outline: none;
   }
 
   @font-face {
@@ -79,19 +76,5 @@ export const appGlobalStyles = css`
 
   .article > * {
     margin-bottom: ${theme('padding.10')};
-  }
-
-  // Fix twin.macro not working
-  .transform {
-    --tw-translate-x: 0;
-    --tw-translate-y: 0;
-    --tw-rotate: 0;
-    --tw-skew-x: 0;
-    --tw-skew-y: 0;
-    --tw-scale-x: 1;
-    --tw-scale-y: 1;
-    transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y))
-      rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
-      scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   }
 `;

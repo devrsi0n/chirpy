@@ -4,7 +4,7 @@ import ItalicIcon from '@geist-ui/react-icons/italic';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import * as React from 'react';
 import { useSlate } from 'slate-react';
-import tw, { css } from 'twin.macro';
+import tw from 'twin.macro';
 
 import { BaseButtonProps, BaseButton } from '$/components/Button';
 
@@ -27,14 +27,8 @@ export function BaseMarkButton({
   return (
     <BaseButton
       css={[
-        tw`p-1.5 rounded text-gray-500 hover:(bg-primary-50 text-primary-500) transition-all`,
-        isActive &&
-          css`
-            ${tw`text-primary-600`}
-            svg {
-              stroke-width: 2;
-            }
-          `,
+        tw`p-1.5 rounded text-gray-900 hover:(bg-primary-300 text-primary-900) transition-all`,
+        isActive && tw`text-primary-900`,
         readOnly && tw`cursor-not-allowed`,
         className,
       ]}

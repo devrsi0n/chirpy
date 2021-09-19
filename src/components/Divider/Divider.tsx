@@ -47,4 +47,4 @@ export function Divider({ className, style, ...divProps }: DividerProps): JSX.El
   );
 }
 
-const bgStyle = tw`bg-gray-200 dark:bg-gray-700`;
+const bgStyle = tw`bg-gray-600`;

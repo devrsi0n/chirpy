@@ -1,5 +1,4 @@
 import * as React from 'react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { Footer } from '../Footer/Footer';

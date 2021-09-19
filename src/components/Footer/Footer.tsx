@@ -45,19 +45,29 @@ export function Footer(props: FooterProps): JSX.Element {
   return (
     <footer
       {...props}
-      css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-300 dark:border-gray-700 text-gray-500`}
+      css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-500`}
     >
       <nav css={tw`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
-        <Link href="/docs/index">Docs</Link>
-        <Link href="/blog">Blog</Link>
-        <Link href="/pricing">Pricing</Link>
-        <Link href="/terms-of-service">Terms</Link>
-        <Link href="/privacy-policy">Privacy</Link>
+        <Link href="/docs/index" variant="secondary">
+          Docs
+        </Link>
+        <Link href="/blog" variant="secondary">
+          Blog
+        </Link>
+        <Link href="/pricing" variant="secondary">
+          Pricing
+        </Link>
+        <Link href="/terms-of-service" variant="secondary">
+          Terms
+        </Link>
+        <Link href="/privacy-policy" variant="secondary">
+          Privacy
+        </Link>
       </nav>
       <div
         css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-3 flex-row)`}
       >
-        <Text variant="sm" css={tw`text-gray-500`}>
+        <Text variant="secondary" size="sm">
           &copy; 2021 Totalk Labs. All rights reserved.
         </Text>
         {hasMounted && ThemeIcon && theme && (

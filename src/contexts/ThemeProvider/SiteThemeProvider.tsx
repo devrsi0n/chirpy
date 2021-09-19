@@ -1,37 +1,49 @@
+import * as radixColors from '@radix-ui/colors';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Theme } from '$/types/theme.type';
-
-import { siteDefaultTheme } from './siteDefaultTheme';
-import { getThemeCSSVariables } from './utilities';
+import { getColors } from './siteDefaultTheme';
+import { getThemeCSSVariablesString, translateRadixColor } from './utilities';
 
 export type SiteThemeProviderProps = {
   children: React.ReactNode;
 };
 
-const themeVariablePrefix = '--tw';
-
-export const SiteThemeContext = React.createContext<Theme>({ colors: { primary: {} } });
+const colors = getColors();
+const FIXED_COLORS = {
+  whitea: translateRadixColor(radixColors.whiteA),
+  blacka: translateRadixColor(radixColors.blackA),
+};
 
 export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
+  const styles = React.useMemo(() => {
+    const lightTheme = {
+      colors: {
+        ...FIXED_COLORS,
+        ...colors.light,
+      },
+    };
+    const darkTheme = {
+      colors: {
+        ...FIXED_COLORS,
+        ...colors.dark,
+      },
+    };
+    return `body {
+        ${getThemeCSSVariablesString(lightTheme)}
+      }
+    
+       .dark body {
+        ${getThemeCSSVariablesString(darkTheme)}
+      }
+    `;
+  }, []);
   return (
-    <SiteThemeContext.Provider value={siteDefaultTheme}>
+    <>
       <Head>
-        <style>
-          {`:root {
-              ${getThemeCSSVariables(siteDefaultTheme, themeVariablePrefix)
-                .map(([key, value]) => `${key}: ${value};`)
-                .join('\n')}
-            }
-          `}
-        </style>
+        <style>{styles}</style>
       </Head>
       {props.children}
-    </SiteThemeContext.Provider>
+    </>
   );
 }
-
-export const useSiteTheme = () => {
-  return React.useContext(SiteThemeContext);
-};

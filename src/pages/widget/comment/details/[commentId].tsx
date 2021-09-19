@@ -25,8 +25,8 @@ import {
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
+import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';

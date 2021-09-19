@@ -35,7 +35,7 @@ export function CommentBranch({
             &:after {
               transform: translateY(-0.5rem);
               border-left-width: 1px;
-              ${tw`border-gray-200`}
+              ${tw`border-gray-500`}
             }
 
             &:before {

@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { ThemeProvider, useTheme, SiteThemeProvider } from '..';
+import { WidgetThemeProvider, useWidgetTheme, SiteThemeProvider } from '..';
 import { siteDefaultTheme } from '../siteDefaultTheme';
 
 describe('ThemeProvider', () => {
@@ -11,9 +11,9 @@ describe('ThemeProvider', () => {
 
   it('should render the default theme', async () => {
     render(
-      <ThemeProvider>
+      <WidgetThemeProvider>
         <MockChild />
-      </ThemeProvider>,
+      </WidgetThemeProvider>,
     );
     expect(setTheme).toHaveBeenCalledWith(siteDefaultTheme);
   });
@@ -35,14 +35,14 @@ describe('ThemeProvider', () => {
 const setTheme = jest.fn();
 
 function MockChild() {
-  const { theme } = useTheme();
+  const { theme } = useWidgetTheme();
   setTheme(theme);
   return <div>children</div>;
 }
 
 const setSiteTheme = jest.fn();
 function MockSiteChild() {
-  const { theme } = useTheme();
+  const { theme } = useWidgetTheme();
   setSiteTheme(theme);
   return <div>children</div>;
 }
