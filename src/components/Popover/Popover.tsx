@@ -53,13 +53,12 @@ export function Popover({
               <m.div {...easeInOut}>
                 <HeadLessPopover.Panel
                   static
-                  css={[tw`absolute right-0 z-10`, panelBorder]}
+                  css={[tw`absolute right-0 z-10 shadow-2xl`, panelBorder]}
                   style={{
                     ...getPanelStyles(placement, {
                       height: buttonRef.current?.getBoundingClientRect().height,
                       width: buttonRef.current?.getBoundingClientRect().width,
                     }),
-                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.12)',
                   }}
                 >
                   <div

@@ -61,7 +61,7 @@ module.exports = (theme) => ({
           content: 'counter(list-item, var(--list-counter-style, decimal)) "."',
           position: 'absolute',
           fontWeight: '400',
-          color: theme('colors.gray.1000'),
+          color: theme('colors.gray.1100'),
         },
         'ul > li': {
           position: 'relative',

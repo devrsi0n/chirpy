@@ -13,6 +13,7 @@ export function getColors() {
   return {
     light: {
       primary: translateRadixColor(radixColors.plum),
+      plum: translateRadixColor(radixColors.plum),
       gray: translateRadixColor(radixColors.gray),
       blue: translateRadixColor(radixColors.blue),
       green: translateRadixColor(radixColors.green),
@@ -24,6 +25,7 @@ export function getColors() {
     },
     dark: {
       primary: translateRadixColor(radixColors.plumDark),
+      plum: translateRadixColor(radixColors.plumDark),
       gray: translateRadixColor(radixColors.mauveDark),
       blue: translateRadixColor(radixColors.blueDark),
       green: translateRadixColor(radixColors.greenDark),

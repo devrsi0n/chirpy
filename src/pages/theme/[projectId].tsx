@@ -70,6 +70,10 @@ const colorOptions: Record<string, ColorSeries> = {
     light: translateRadixColor(colors.violet),
     dark: translateRadixColor(colors.violetDark),
   },
+  default: {
+    light: translateRadixColor(colors.plum),
+    dark: translateRadixColor(colors.plumDark),
+  },
   pink: {
     light: translateRadixColor(colors.pink),
     dark: translateRadixColor(colors.pinkDark),
