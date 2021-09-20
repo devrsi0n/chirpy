@@ -9,6 +9,7 @@ const colors = {
   green: getColorCSSVariables('green'),
   gray: getColorCSSVariables('gray'),
   violet: getColorCSSVariables('violet'),
+  plum: getColorCSSVariables('plum'),
   primary: getColorCSSVariables('primary'),
   yellow: getColorCSSVariables('yellow'),
   red: getColorCSSVariables('red'),
@@ -24,6 +25,9 @@ const colors = {
   transparent: 'transparent',
 };
 
+/**
+ * @type {import('tailwindcss/tailwind-config').TailwindConfig}
+ */
 module.exports = {
   darkMode: 'class',
   purge: [

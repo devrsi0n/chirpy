@@ -33,7 +33,7 @@ export function ToastItem({
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
-    <section css={[tw`bg-gray-300 border py-4 px-6 rounded-md shadow relative`]}>
+    <section css={[tw`bg-gray-300 border py-4 px-6 rounded shadow relative`]}>
       <div css={tw`flex flex-row items-start space-x-3 mr-4`}>
         {typeIcon}
         <div css={tw`space-y-2 max-w-lg`}>
@@ -58,22 +58,22 @@ export function ToastItem({
 
 const typeIconMap: Record<ToastType, JSX.Element> = {
   success: (
-    <span tw="text-green-500">
+    <span tw="text-green-900">
       <CheckInCircle aria-label="Success toast icon" />
     </span>
   ),
   warning: (
-    <span tw="text-yellow-500">
+    <span tw="text-yellow-900">
       <AlertCircle aria-label="Warning toast icon" />
     </span>
   ),
   error: (
-    <span tw="text-red-500">
+    <span tw="text-red-900">
       <XCircle aria-label="Error toast icon" />
     </span>
   ),
   info: (
-    <span tw="text-blue-500">
+    <span tw="text-blue-900">
       <Info aria-label="Info toast icon" />
     </span>
   ),

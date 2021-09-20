@@ -30,7 +30,7 @@ export function Logo({ size = 'md', noSpacing, className, linkProps }: LogoProps
       href="/"
       aria-label={`Logo of ${process.env.NEXT_PUBLIC_APP_NAME}`}
       variant="plain"
-      tw="text-primary-900"
+      tw="text-plum-900"
       {...linkProps}
     >
       <svg

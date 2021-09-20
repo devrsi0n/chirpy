@@ -70,7 +70,9 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
   return (
     <RichTextEditorContextProvider readOnly={readOnly}>
       <Slate editor={editor} value={value} onChange={handleRTEChange}>
-        <section css={[styles?.root, !readOnly && tw`border focus-within:border-gray-800 rounded`]}>
+        <section
+          css={[styles?.root, !readOnly && tw`border focus-within:border-gray-1000 rounded`]}
+        >
           <Editable
             readOnly={readOnly}
             placeholder={placeholder}

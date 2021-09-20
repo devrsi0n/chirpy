@@ -14,14 +14,7 @@ export type CustomComponentProps<E extends React.ElementType> = PolymorphicCompo
 
 export function Card<E extends React.ElementType>(props: CustomComponentProps<E>): JSX.Element {
   return (
-    <Box
-      css={cardBg}
-      style={{
-        // TODO: Extract boxshadow to tailwindcss config
-        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 5px 10px 0px',
-      }}
-      {...props}
-    />
+    <Box tw="rounded shadow-sm hover:shadow-xl border border-gray-400" css={cardBg} {...props} />
   );
 }
 

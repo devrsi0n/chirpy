@@ -2,6 +2,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { Button, ButtonProps } from '$/components/Button';
+import { Card } from '$/components/Card';
 import { Divider } from '$/components/Divider';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
@@ -87,7 +88,7 @@ function PricingCard({
   priceDescription,
 }: PricingCardProps): JSX.Element {
   return (
-    <div tw="bg-gray-100 border p-6 rounded shadow hover:shadow-xl transition">
+    <Card tw="p-6">
       <Heading as="h5" tw="font-medium mb-4">
         {plan}
       </Heading>
@@ -115,6 +116,6 @@ function PricingCard({
           <ListItem key={index}>{benefit}</ListItem>
         ))}
       </List>
-    </div>
+    </Card>
   );
 }
