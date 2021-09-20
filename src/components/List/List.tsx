@@ -40,7 +40,7 @@ export function ListItem({
 
   return (
     <li {...liProps} tw="text-gray-1100 flex flex-row items-center space-x-2" className={className}>
-      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-gray-900`, markerStyles]}></span>}
+      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-current`, markerStyles]}></span>}
 
       <ChildrenContainer>{children}</ChildrenContainer>
     </li>

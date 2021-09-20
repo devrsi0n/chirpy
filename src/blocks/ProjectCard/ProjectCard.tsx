@@ -62,7 +62,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
   };
 
   return (
-    <Card as="section" key={project.id} tw="pt-4 rounded-lg space-y-4">
+    <Card as="section" key={project.id} tw="pt-4 space-y-4">
       <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2">
         <Heading tw="pl-6 font-bold" as="h3">
           {project.name}
