@@ -104,7 +104,7 @@ function PricingCard({
       <Text tw="mb-8" variant="secondary">
         {priceDescription}&#8203;
       </Text>
-      <Link variant="plain" href="/auth/sign-in">
+      <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
         <Button {...callToAction.buttonProps} variant="solid" tw="w-full mb-8">
           {callToAction.label}
         </Button>

@@ -55,7 +55,7 @@ export function WidgetThemeProvider(props: ThemeProviderProps): JSX.Element {
   return (
     <ThemeContext.Provider value={value}>
       <Head>
-        <style>{styles}</style>
+        <style key="widget-theme">{styles}</style>
       </Head>
       {props.children}
     </ThemeContext.Provider>

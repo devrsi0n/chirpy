@@ -83,7 +83,8 @@ const colorOptions: Record<string, ColorSeries> = {
 function ThemeEditor(props: ThemeProps): JSX.Element {
   const { theme, setTheme } = useWidgetTheme();
   const { resolvedTheme } = useTheme();
-  const activeTheme: keyof ColorSeries = (resolvedTheme as keyof ColorSeries) || 'light';
+  const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system' ? 'light' : resolvedTheme) ||
+    'light') as keyof ColorSeries;
   const [updateTheme] = useUpdateThemeMutation();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return () => {

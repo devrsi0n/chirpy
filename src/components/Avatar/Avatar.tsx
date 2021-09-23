@@ -30,7 +30,7 @@ export function Avatar({
     return (
       <span
         aria-label="An empty image for a user has no avatar"
-        css={[tw`inline-block rounded-full overflow-hidden bg-gray-200`, sizeStyle]}
+        css={[tw`inline-block rounded-full overflow-hidden`, sizeStyle]}
       >
         <svg tw="h-full w-full text-gray-900" fill="currentColor" viewBox="0 0 24 24">
           <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -45,12 +45,11 @@ export function Avatar({
       src={src}
       alt={alt}
       className={className}
-      css={[
-        tw`flex items-center justify-center rounded-full bg-gray-100 select-none ring-2 ring-gray-200`,
-        sizeStyle,
-      ]}
+      css={[bg, tw`flex items-center justify-center rounded-full select-none`, sizeStyle]}
     >
       {children}
     </img>
   );
 }
+
+const bg = tw`bg-grayl-100/60 dark:(bg-grayd-100/30)`;

@@ -27,7 +27,7 @@ export const IconButton = React.forwardRef(function IconButton(
     <BaseButton
       ref={ref}
       {...restProps}
-      css={[ring, tw`hover:(bg-gray-400) rounded-full text-gray-1100`, style]}
+      css={[ring, tw`hover:(bg-gray-400) rounded-full text-gray-900`, style]}
     >
       {children}
     </BaseButton>

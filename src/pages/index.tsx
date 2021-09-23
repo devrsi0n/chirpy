@@ -7,6 +7,7 @@ import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { gradient } from '$/styles/common';
 
 function Home(): JSX.Element {
   return (
@@ -16,7 +17,7 @@ function Home(): JSX.Element {
       </Head>
       <main tw="min-h-full flex flex-col items-center py-12 space-y-8">
         <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
-          <span tw="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-primary-900">
+          <span tw="text-transparent bg-clip-text" css={gradient}>
             {strings.heroTitlePoint}
           </span>{' '}
           <span>{strings.heroTitle}</span>
@@ -25,7 +26,7 @@ function Home(): JSX.Element {
           {strings.heroDescription}
         </Text>
         <div tw="flex justify-center items-center space-x-6">
-          <Link variant="plain" href="/auth/sign-in">
+          <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
             <Button
               variant="solid"
               color="primary"
