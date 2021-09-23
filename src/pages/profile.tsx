@@ -21,6 +21,7 @@ import { useToast } from '$/components/Toast';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
+import { gradient } from '$/styles/common';
 
 type FormFields = {
   name: string;
@@ -95,7 +96,7 @@ export default function Profile(): JSX.Element {
     <ProfileContainer tw="space-y-7">
       <PageTitle>Profile</PageTitle>
       <section tw="space-y-6">
-        <div tw="relative bg-gradient-to-r from-blue-800 to-primary-900 mt-1 w-full h-40 rounded-t flex justify-center items-end">
+        <div tw="relative mt-1 w-full h-40 rounded-t flex justify-center items-end" css={gradient}>
           {avatar && (
             <Avatar
               src={avatar}

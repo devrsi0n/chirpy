@@ -21,6 +21,7 @@ export function CurrentUserProvider({
   const [session, sessionIsLoading] = useSession();
   const [fetchUser, { data, ...restProps }] = useCurrentUserLazyQuery({
     ...apolloBaseOptions,
+    fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   });
 

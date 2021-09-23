@@ -79,7 +79,7 @@ export function Dialog({
                     {showDismissButton && (
                       <IconButton
                         size="sm"
-                        tw="absolute right-1 top-1"
+                        tw="absolute right-1 top-1 bg-gray-300 dark:(bg-gray-600 hover:(bg-gray-700))"
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >

@@ -21,7 +21,7 @@ export const appGlobalStyles = css`
   }
 
   ::selection {
-    ${tw`bg-primary-800 text-white opacity-75`}
+    ${tw`bg-primary-900 text-white`}
   }
 
   input:focus,

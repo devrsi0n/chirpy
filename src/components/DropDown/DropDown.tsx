@@ -7,6 +7,8 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { bluredBg, listHoverable } from '$/styles/common';
+
 import { easeInOut } from '../Animation';
 import { Button, IconButton } from '../Button';
 
@@ -50,8 +52,8 @@ export function DropDown({ content, buttonProps, classes, children }: DropDownPr
                   <Menu.Items
                     static
                     css={[
-                      tw`bg-gray-100 absolute right-0 mt-1 origin-top-right border divide-y divide-gray-700 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
-                      // bluredBg,
+                      tw`absolute right-0 mt-1 origin-top-right border divide-y divide-gray-700 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      bluredBg,
                       classes?.items,
                     ]}
                   >
@@ -87,7 +89,7 @@ export function DropDownItem(props: DropDownItemProps): JSX.Element {
       {
         (/* { active }: ItemRenderPropArg */) => (
           <div
-            css={[itemStyle, !props.disableAutoDismiss && DropDownItemPadding]}
+            css={[listHoverable, itemStyle, !props.disableAutoDismiss && DropDownItemPadding]}
             className={props.className}
           >
             {child}
@@ -100,4 +102,4 @@ export function DropDownItem(props: DropDownItemProps): JSX.Element {
 
 export const DropDownItemPadding = tw`px-6 py-2`;
 
-const itemStyle = tw`transition flex flex-row items-center border-none rounded text-gray-1200 hover:(bg-primary-900 text-white) cursor-pointer w-full text-sm text-right`;
+const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;

@@ -17,6 +17,7 @@ import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
 import { useDeleteProjectByPkMutation } from '$/graphql/generated/project';
 import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
+import { listHoverable } from '$/styles/common';
 import { dayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../IntegrateGuide';
@@ -75,7 +76,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           }
           tw="flex flex-row items-center"
         >
-          <Link variant="plain" href={`/analytics/${project.id}`}>
+          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1}>
             <BaseButton
               tw="rounded-full p-2"
               css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
@@ -116,7 +117,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         </div>
       </div>
       <div tw="px-6 flex flex-row space-x-2">
-        <Link href={`/theme/${project.id}`} variant="plain">
+        <Link href={`/theme/${project.id}`} variant="plain" tabIndex={-1}>
           <Button tw="" color="primary" shadow={false}>
             Theme
           </Button>
@@ -124,18 +125,17 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <IntegrateGuide pid={project.id} />
       </div>
       {project.pages.length > 0 ? (
-        <List tw="px-6 space-y-1.5">
+        <List tw="px-6">
           {project.pages.map((page) => (
-            <List.Item key={page.id} markerStyle={tw`bg-gray-1000`}>
-              <Link
-                href={page.url}
-                title={page.title || page.url}
-                variant="plain"
-                tw="transition hover:text-primary-1000 inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap"
-              >
-                {page.title || page.url}
-              </Link>
-            </List.Item>
+            <Link
+              key={page.id}
+              href={page.url}
+              title={page.title || page.url}
+              variant="plain"
+              tw="inline-block w-72 overflow-ellipsis overflow-hidden whitespace-nowrap -translate-x-2"
+            >
+              <List.Item css={[listHoverable]}>{page.title || page.url}</List.Item>
+            </Link>
           ))}
         </List>
       ) : (

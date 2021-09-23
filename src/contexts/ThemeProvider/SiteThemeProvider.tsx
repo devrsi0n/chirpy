@@ -41,7 +41,7 @@ export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
   return (
     <>
       <Head>
-        <style>{styles}</style>
+        <style key="site-theme">{styles}</style>
       </Head>
       {props.children}
     </>

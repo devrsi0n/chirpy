@@ -7,7 +7,7 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Directory } from '$/server/types/file';
-import { hoverable } from '$/styles/common';
+import { listHoverable } from '$/styles/common';
 
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];
@@ -96,10 +96,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   );
 }
 
-const clickableItemStyle = [
-  tw`transition flex flex-row items-center justify-start px-1.5 py-1 rounded`,
-  hoverable,
-];
+const clickableItemStyle = [tw`transition flex flex-row items-center justify-start`, listHoverable];
 const activeStyle = tw`text-gray-1200 font-bold`;
 
 function isButtonActive(dir: Directory, pathname: string) {
