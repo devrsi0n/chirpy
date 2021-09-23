@@ -63,25 +63,22 @@ export const Button = React.forwardRef(function Button(
     onClick?.(event);
   };
   return (
-    <>
-      <BaseButton
-        {...restProps}
-        ref={_ref}
-        tw="focus:outline-none disabled:(opacity-75 cursor-not-allowed) transition"
-        css={[
-          sizeStyles[size],
-          ColorVariantStyles[`${variant}-${color}` as VariantColor],
-          variant !== 'text' && shadow && tw`shadow-sm`,
-          rounded && tw`rounded-md`,
-        ]}
-        className={className}
-        onClick={clickHandler}
-        disabled={disabled}
-      >
-        {children}
-        {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
-      </BaseButton>
-    </>
+    <BaseButton
+      {...restProps}
+      ref={_ref}
+      css={[
+        sizeStyles[size],
+        ColorVariantStyles[`${variant}-${color}` as VariantColor],
+        variant !== 'text' && shadow && tw`shadow-sm`,
+        rounded && tw`rounded-md`,
+      ]}
+      className={className}
+      onClick={clickHandler}
+      disabled={disabled}
+    >
+      {children}
+      {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
+    </BaseButton>
   );
 });
 
@@ -143,17 +140,17 @@ type VariantColors = {
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus:(outline-none ring-2 ring-offset-2 ring-primary-900)`,
-  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-700 focus:(outline-none ring-2 ring-offset-2 ring-red-900)`,
-  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus:(outline-none ring-2 ring-offset-2 ring-gray-900)`,
+  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus:(ring-primary-1000)`,
+  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-1000 focus:(ring-red-1000)`,
+  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus:(ring-gray-1100)`,
 
-  'secondary-primary': tw`bg-primary-300 text-primary-900 hover:bg-primary-400 focus:(ring-2 ring-offset-2 ring-primary-700)`,
-  'secondary-red': tw`bg-gray-300 text-red-900 hover:bg-red-400 focus:(ring-2 ring-offset-2 ring-red-700)`,
-  'secondary-gray': tw`bg-white dark:bg-gray-300 text-gray-1100 hover:(bg-gray-100 dark:bg-gray-400) focus:(ring-2 ring-offset-2 ring-gray-700)`,
+  'secondary-primary': tw`border border-primary-700 text-primary-900 hover:(border-primary-900 text-primary-1000)`,
+  'secondary-red': tw`border border-red-700 text-red-900 hover:(border-red-900 text-red-1000)`,
+  'secondary-gray': tw`border text-gray-1100 hover:(border-gray-900 text-gray-1200)`,
 
-  'text-primary': tw`text-primary-900 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-primary-700)`,
-  'text-red': tw`text-red-900 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-red-700)`,
-  'text-gray': tw`text-gray-1100 hover:bg-gray-300 focus:(ring-2 ring-offset-2 ring-gray-1100)`,
+  'text-primary': tw`text-primary-900 hover:bg-gray-300`,
+  'text-red': tw`text-red-900 hover:bg-gray-300`,
+  'text-gray': tw`text-gray-1100 hover:bg-gray-300`,
 };
 
 const expandKeyFrame = keyframes`

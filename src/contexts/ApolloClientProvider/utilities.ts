@@ -11,7 +11,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { persistCache, LocalForageWrapper } from 'apollo3-cache-persist';
 import * as localForage from 'localforage';
 
-import { isENVDev, isENVProd } from '$/server/utilities/env';
+import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
 
 export function getApolloClient(
@@ -53,7 +53,7 @@ const createApolloClient = (hasuraToken: string) => {
   }
   if (!cache) {
     cache = new InMemoryCache();
-    if (!ssrMode && isENVProd) {
+    if (!ssrMode) {
       persistCache({
         cache,
         storage: new LocalForageWrapper(localForage) as any,

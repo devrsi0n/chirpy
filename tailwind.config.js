@@ -6,6 +6,7 @@ var convert = require('color-convert');
 const colors = {
   // dynamic colors
   blue: getColorCSSVariables('blue'),
+  indigo: getColorCSSVariables('indigo'),
   green: getColorCSSVariables('green'),
   gray: getColorCSSVariables('gray'),
   violet: getColorCSSVariables('violet'),
@@ -18,7 +19,8 @@ const colors = {
   pink: getColorCSSVariables('pink'),
   bg: `var(--tw-colors-bg)`,
   // static colors
-  'gray-dark': getRadixColor(radixColors.grayDark, 'gray'),
+  'grayd': getRadixColor(radixColors.grayDark, 'gray'),
+  'grayl': getRadixColor(radixColors.gray, 'gray'),
   white: '#fff',
   black: '#000',
   current: 'currentColor',
