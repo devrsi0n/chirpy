@@ -140,9 +140,9 @@ type VariantColors = {
 };
 
 const ColorVariantStyles: VariantColors = {
-  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus:(ring-primary-1000)`,
-  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-1000 focus:(ring-red-1000)`,
-  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus:(ring-gray-1100)`,
+  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:(ring-primary-1000)`,
+  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:(ring-red-1000)`,
+  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus-visible:(ring-gray-1100)`,
 
   'secondary-primary': tw`border border-primary-700 text-primary-900 hover:(border-primary-900 text-primary-1000)`,
   'secondary-red': tw`border border-red-700 text-red-900 hover:(border-red-900 text-red-1000)`,

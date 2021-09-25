@@ -52,11 +52,11 @@ export default function CommentDetailsWidget(
     <CommentContextProvider projectId={props.projectId}>
       <div css={tw`flex flex-row justify-between items-center mb-4`}>
         <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
-          <IconButton size="md" css={tw`transform -translate-x-3`}>
+          <IconButton css={tw`transform translate-x-1`}>
             <ArrowLeft size={20} />
           </IconButton>
         </Link>
-        <Heading as="h4" css={tw`text-gray-600`}>
+        <Heading as="h4">
           <span tw="font-bold">{comment?.user.name}</span>
           <span>{`'s comment details`}</span>
         </Heading>

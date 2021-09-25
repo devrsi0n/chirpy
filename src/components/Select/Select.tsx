@@ -39,7 +39,7 @@ export function Select<T>({
           <div css={tw`relative`} className={className}>
             <span css={tw`inline-block w-full rounded-md shadow-sm`}>
               <Listbox.Button
-                css={tw`cursor-default relative w-full rounded-sm border bg-gray-300 pl-3 pr-10 py-2 text-left focus:(outline-none ring-blue-500 border-primary-600) transition ease-in-out duration-150 sm:text-sm`}
+                css={tw`cursor-default relative w-full rounded-sm border bg-gray-300 pl-3 pr-10 py-2 text-left focus-visible:(outline-none ring-blue-500 border-primary-600) transition ease-in-out duration-150 sm:text-sm`}
               >
                 <span css={tw`block truncate`}>{name || value}</span>
                 <span
@@ -58,7 +58,7 @@ export function Select<T>({
                 >
                   <Listbox.Options
                     static
-                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-gray-900 ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
+                    tw="max-h-60 rounded-sm py-1 text-base ring-1 ring-gray-900 ring-opacity-5 overflow-auto focus-visible:outline-none sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>

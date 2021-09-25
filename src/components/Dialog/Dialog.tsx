@@ -78,8 +78,7 @@ export function Dialog({
                   <div tw="overflow-hidden text-left align-middle">
                     {showDismissButton && (
                       <IconButton
-                        size="sm"
-                        tw="absolute right-1 top-1 bg-gray-300 dark:(bg-gray-600 hover:(bg-gray-700))"
+                        tw="absolute right-3 top-3 bg-gray-300 dark:(bg-gray-600 hover:(bg-gray-700))"
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >

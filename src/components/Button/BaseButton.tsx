@@ -35,9 +35,9 @@ const BaseButton = React.forwardRef(function BaseButton(
     <button
       {...allProps}
       className={className}
-      tw="focus:(outline-none ring-2 ring-offset-2 ring-offset-bg ring-current) disabled:(opacity-75 cursor-not-allowed) transition"
+      tw="focus-visible:(ring-2 ring-offset-2 ring-offset-bg ring-current) disabled:(opacity-75 cursor-not-allowed) transition"
       css={[
-        tw`relative overflow-hidden inline-flex flex-row justify-center items-center select-none outline-none transition duration-150 ease-in-out`,
+        tw`relative overflow-hidden inline-flex flex-row justify-center items-center select-none transition duration-150 ease-in-out`,
       ]}
       onMouseDown={handleMouseDown}
       onClick={onClick}
