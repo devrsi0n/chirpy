@@ -25,9 +25,8 @@ export function Alert(props: AlertProps): JSX.Element {
             typeStyles[props.type],
           ]}
         >
-          <p tw="text-base leading-tight pl-6">{props.children}</p>
+          <p tw="text-base leading-tight pl-6 pr-2">{props.children}</p>
           <IconButton
-            size="sm"
             tw="invisible group-hover:(visible)"
             onClick={() => setHidden(true)}
             aria-label="Dismiss"
@@ -41,5 +40,5 @@ export function Alert(props: AlertProps): JSX.Element {
 }
 
 const typeStyles: Record<AlertType, TwStyle> = {
-  warn: tw`bg-yellow-100 text-yellow-600`,
+  warn: tw`bg-yellow-300 text-yellow-900`,
 };

@@ -65,7 +65,7 @@ export function Footer(props: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-3 flex-row)`}
+        css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-5 flex-row)`}
       >
         <Text variant="secondary" size="sm">
           &copy; 2021 Totalk Labs. All rights reserved.

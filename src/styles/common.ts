@@ -9,7 +9,7 @@ export const bluredBg = css`
   ${cardBg} ${blured}
 `;
 
-export const border = tw`border outline-none focus:(border-primary-900)`;
+export const border = tw`border outline-none focus-visible:(border-primary-900)`;
 
 export const listHoverable = tw`transition px-2 py-1 rounded hover:(bg-primary-900 text-white)`;
 

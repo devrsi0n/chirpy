@@ -23,7 +23,7 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
         {header}
         <AnimatePresence>
           <m.div
-            css={[tw`min-h-full mr-1.5`, styles?.container]}
+            css={[tw`min-h-full mt-1 mr-1`, styles?.container]}
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

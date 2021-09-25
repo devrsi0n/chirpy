@@ -29,12 +29,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const isNav = props.variant === 'Nav';
 
   return (
-    <DropDown
-      classes={{
-        button: tw`transform translate-x-1.5`,
-      }}
-      content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}
-    >
+    <DropDown content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}>
       {name && (
         <div tw="px-6 py-2">
           <Text tw="flex justify-start" bold>
