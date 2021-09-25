@@ -20,5 +20,5 @@ module.exports = {
     '<rootDir>/src/server/graphql/generated/',
   ],
   moduleDirectories: ['node_modules', 'src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!./**/*.stories.{ts,tsx}'],
 };

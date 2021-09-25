@@ -4,9 +4,11 @@ import Info from '@geist-ui/react-icons/info';
 import Dismiss from '@geist-ui/react-icons/x';
 import XCircle from '@geist-ui/react-icons/xCircle';
 import * as React from 'react';
+import { useTimeoutFn } from 'react-use';
 import tw from 'twin.macro';
 
 import { IconButton } from '../Button';
+import { Card } from '../Card';
 import { Heading } from '../Heading';
 import { Text } from '../Text';
 import { Toast, ToastType } from './ToastContext';
@@ -23,57 +25,60 @@ export function ToastItem({
   type,
   onDismiss: onClickDismiss,
 }: ToastProps): JSX.Element {
-  React.useEffect(() => {
-    const timerId = setTimeout(() => {
-      onClickDismiss(id);
-    }, TOAST_DURATION);
-    return () => clearTimeout(timerId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  useTimeoutFn(() => {
+    onClickDismiss(id);
+  }, TOAST_DURATION);
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
-    <section css={[tw`bg-gray-300 border py-4 px-6 rounded shadow relative`]}>
-      <div css={tw`flex flex-row items-start space-x-3 mr-4`}>
-        {typeIcon}
-        <div css={tw`space-y-2 max-w-lg`}>
-          <Heading as="h5" css={tw`leading-none`}>
-            {title}
-          </Heading>
+    <Card as="section" shadow={false} css={[tw`py-4 pl-6 pr-2 shadow relative`]}>
+      <div css={tw`flex flex-row justify-between`}>
+        <div tw="flex flex-row items-center space-x-4 mr-4">
+          {typeIcon}
+          <div css={tw`space-y-2 max-w-lg`}>
+            <Heading as="h5" css={tw`leading-none`}>
+              {title}
+            </Heading>
+          </div>
+        </div>
+        <IconButton
+          css={tw`w-fit h-fit`}
+          onClick={() => onClickDismiss(id)}
+          aria-label="Dismiss"
+          title="Dismiss"
+        >
+          <Dismiss />
+        </IconButton>
+      </div>
+      {description && (
+        <div tw="ml-10 mt-2">
           <Text variant="secondary">{description}</Text>
         </div>
-      </div>
-      <IconButton
-        size="sm"
-        css={tw`absolute top-1 right-1`}
-        onClick={() => onClickDismiss(id)}
-        aria-label="Dismiss"
-        title="Dismiss"
-      >
-        <Dismiss />
-      </IconButton>
-    </section>
+      )}
+    </Card>
   );
 }
 
+const iconSize = tw`w-6`;
+
 const typeIconMap: Record<ToastType, JSX.Element> = {
   success: (
-    <span tw="text-green-900">
+    <span tw="text-green-900" css={iconSize}>
       <CheckInCircle aria-label="Success toast icon" />
     </span>
   ),
   warning: (
-    <span tw="text-yellow-900">
+    <span tw="text-yellow-900" css={iconSize}>
       <AlertCircle aria-label="Warning toast icon" />
     </span>
   ),
   error: (
-    <span tw="text-red-900">
+    <span tw="text-red-900" css={iconSize}>
       <XCircle aria-label="Error toast icon" />
     </span>
   ),
   info: (
-    <span tw="text-blue-900">
+    <span tw="text-blue-900" css={iconSize}>
       <Info aria-label="Info toast icon" />
     </span>
   ),

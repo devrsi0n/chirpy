@@ -67,7 +67,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
       </Head>
-      <div tw="pt-1 pr-1">
+      <div tw="pt-1">
         <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
       </div>
       <PoweredBy />

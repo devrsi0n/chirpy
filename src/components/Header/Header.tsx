@@ -29,7 +29,7 @@ export function Header(): JSX.Element {
       <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         <section tw="flex flex-row items-center justify-between">
           <div tw="flex items-center sm:hidden pl-3">
-            <IconButton size="sm" aria-expanded={false} onClick={handleClickMenu}>
+            <IconButton aria-expanded={false} onClick={handleClickMenu}>
               <span tw="sr-only">Open navigation menu</span>
               <Menu css={[showMenu && tw`hidden`]} />
               <Dismiss css={[!showMenu && tw`hidden`]} />

@@ -68,6 +68,9 @@ module.exports = {
       width: {
         fit: 'fit-content',
       },
+      height: {
+        fit: 'fit-content',
+      },
     },
   },
   plugins: [require('./scripts/tailwindcss-typography')],
