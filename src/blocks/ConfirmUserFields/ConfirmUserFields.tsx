@@ -6,6 +6,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { Button } from '$/components/Button';
+import { Card } from '$/components/Card';
 import { TextField } from '$/components/TextField';
 import { useToast } from '$/components/Toast';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
@@ -70,7 +71,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     router.push('/dashboard');
   });
   return (
-    <form tw="py-6 px-12 w-fit bg-white rounded shadow-md">
+    <Card as="form" tw="py-6 px-12 w-fit rounded shadow-md">
       <TextField
         {...register('email', {
           required: { value: true, message: 'Email is required' },
@@ -125,7 +126,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         )}
         <span>Save</span>
       </Button>
-    </form>
+    </Card>
   );
 }
 

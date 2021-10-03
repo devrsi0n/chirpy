@@ -25,10 +25,10 @@ export function TelemetryProvider({ children, projectId }: TelemetryProviderProp
 
   const recordEvent = React.useCallback(
     (type: string, params: EventRequestBody['params'] = null, url: string = location.href) => {
-      const isLocalHost = /^(localhost|127\.0\.0\.1)/.test(location.hostname);
-      if (isLocalHost) {
-        return;
-      }
+      // const isLocalHost = /^(localhost|127\.0\.0\.1)/.test(location.hostname);
+      // if (isLocalHost) {
+      //   return;
+      // }
       eventsToRecord.push({
         type,
         params,

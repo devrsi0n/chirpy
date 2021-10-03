@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/prefer-module */
 
-/* eslint-disable @typescript-eslint/no-var-requires */
 // @ts-ignore
 const jwt = require('jsonwebtoken');
 

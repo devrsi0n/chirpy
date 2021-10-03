@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
-import Script from 'next/script';
+import Script, { ScriptProps } from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -11,6 +11,7 @@ import { useHasMounted } from '$/hooks/useHasMounted';
 import { APP_NAME_LOWERCASE } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { isENVDev } from '$/server/utilities/env';
 import { CommonPageProps } from '$/types/page.type';
 import { getBannerProps } from '$/utilities/image';
 
@@ -24,7 +25,11 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
-
+  const scriptProps: ScriptProps = {
+    [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT,
+    src: `${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`,
+    strategy: 'lazyOnload' as const,
+  };
   return (
     <>
       <Head>
@@ -42,12 +47,8 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
             </article>
           </section>
-          <div data-totalk-comment="true" tw="my-16"></div>
-          <Script
-            {...{ [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT }}
-            src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment.js`}
-            strategy="lazyOnload"
-          />
+          <div data-totalk-comment="true" tw="my-16" />
+          <Script {...scriptProps} />
         </div>
       </>
     </>

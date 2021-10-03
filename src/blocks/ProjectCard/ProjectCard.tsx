@@ -64,8 +64,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
 
   return (
     <Card as="section" key={project.id} tw="pt-4 space-y-4">
-      <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2">
-        <Heading tw="pl-6 font-bold" as="h3">
+      <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
+        <Heading tw="font-bold" as="h3">
           {project.name}
         </Heading>
         <div
@@ -82,11 +82,11 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
               css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
             >
               <span
-                tw="p-2 rounded-full"
+                tw="p-2 rounded-full border transition"
                 css={
                   grow > 0
-                    ? tw`bg-green-300 hover:(bg-green-500)`
-                    : tw`bg-yellow-300 hover:(bg-yellow-500) transform -scale-y-1`
+                    ? tw`border-green-300 hover:(border-green-500)`
+                    : tw`border-yellow-500 hover:(border-yellow-700) transform -scale-y-1`
                 }
               >
                 <TrendingUp size={18} />
@@ -105,7 +105,14 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
           </div>
-          <DropDown classes={{ root: tw`mr-2` }} content={<MoreVertical size={20} />}>
+          <DropDown
+            classes={{ root: tw`mr-2` }}
+            content={
+              <span tw="p-1">
+                <MoreVertical size={20} />
+              </span>
+            }
+          >
             <DropDownItem
               onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
               tw="space-x-1"
