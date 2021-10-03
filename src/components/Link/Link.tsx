@@ -84,7 +84,7 @@ export function Link(props: LinkProps): JSX.Element {
         >
           {children}
           {!noUnderline && ['primary', 'secondary'].includes(variant) && (
-            <span tw="absolute bottom-0 left-0 inline-block w-full h-0.5 -mb-1 overflow-hidden">
+            <span tw="hidden sm:(inline-block) absolute bottom-0 left-0  w-full h-0.5 -mb-1 overflow-hidden">
               <m.span
                 tw="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}

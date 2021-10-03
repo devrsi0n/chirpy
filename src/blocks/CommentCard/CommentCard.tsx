@@ -104,7 +104,7 @@ export function CommentCard({
         variants={shakeVariants}
         onAnimationComplete={() => setContainerAnimate('stop')}
         css={[
-          tw`flex flex-row items-start space-x-3 border rounded shadow-sm`,
+          tw`flex flex-row items-start space-x-3 border rounded border-gray-500 shadow-sm`,
           isDeleted ? tw`py-2 pl-4` : tw`pt-4 pb-2 pl-4`,
         ]}
         id={isENVDev ? commentId : undefined}

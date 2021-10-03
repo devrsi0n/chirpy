@@ -115,11 +115,11 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
           <div tw="space-y-4">
             <BoldHeading>Colors</BoldHeading>
             <Text>Primary</Text>
-            <div tw="flex flex-row items-center space-x-2 transform -translate-x-2">
+            <div tw="flex flex-row items-center space-x-2">
               <Popover
                 buttonAs={IconButton}
                 content={
-                  <ul tw="flex flex-row">
+                  <ul tw="flex flex-row space-x-3">
                     {Object.entries(colorOptions).map(([_, color]) => (
                       <li key={color[activeTheme][900]}>
                         <IconButton onClick={handClickPrimaryColorFunction(color)}>
@@ -135,7 +135,9 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
               >
                 <span tw="inline-block w-6 h-6 rounded-full bg-primary-900" />
               </Popover>
-              <Text tw="px-2">{theme.colors[activeTheme].primary[900]}</Text>
+              <Text tw="px-2 leading-none mb-2" variant="secondary">
+                {theme.colors[activeTheme].primary[900]}
+              </Text>
             </div>
           </div>
         </aside>
