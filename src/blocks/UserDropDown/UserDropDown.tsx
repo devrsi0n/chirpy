@@ -21,7 +21,7 @@ export type UserDropDownProps = {
 
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
-  const { avatar, name, username } = data;
+  const { avatar, name } = data;
   // const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
   // const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   const handleSignIn = useSignIn();
@@ -68,7 +68,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
         <>
           {isNav && (
             <DropDown.Item>
-              <Link variant="plain" href={`/dashboard/${username}`} css={itemStyle}>
+              <Link variant="plain" href="/dashboard" css={itemStyle}>
                 <Monitor size={14} />
                 <span>Dashboard</span>
               </Link>

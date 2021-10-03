@@ -10,7 +10,7 @@ export const handleInternalFailure: ErrorHandler<NextApiRequest, NextApiResponse
 ) => {
   console.error('internal error', error);
   console.error('query', req.query);
-  // console.error('request env', req.env);
+  console.error('body', req.body);
 
   if (error instanceof ApiError) {
     return res.status(error.httpStatus).send(error.message);

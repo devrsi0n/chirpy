@@ -7,7 +7,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-import { bluredBg, listHoverable } from '$/styles/common';
+import { cardBg, listHoverable } from '$/styles/common';
 
 import { easeInOut } from '../Animation';
 import { Button, IconButton } from '../Button';
@@ -52,8 +52,8 @@ export function DropDown({ content, buttonProps, classes, children }: DropDownPr
                   <Menu.Items
                     static
                     css={[
-                      tw`absolute right-0 mt-1 origin-top-right border divide-y divide-gray-700 rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
-                      bluredBg,
+                      tw`absolute right-0 mt-1 border divide-y rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      cardBg,
                       classes?.items,
                     ]}
                   >

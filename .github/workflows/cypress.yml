@@ -3,7 +3,6 @@ name: cypress
 on: [deployment_status]
 jobs:
   e2e:
-    # only runs this job on successful deploy
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     steps:
@@ -16,3 +15,6 @@ jobs:
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # DEBUG: 'cypress:*'
+          # DEBUG_DEPTH: 9

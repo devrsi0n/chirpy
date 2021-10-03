@@ -19,7 +19,7 @@ export function Layout({ noHeader, noFooter, children, ...restProps }: LayoutPro
       projectId={process.env.NEXT_PUBLIC_COMMENT_PROJECT}
       tw="bg-bg"
       styles={{
-        container: tw`mx-4`,
+        container: tw`md:(mx-4)`,
       }}
     >
       {children}

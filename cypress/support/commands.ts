@@ -24,3 +24,22 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import '@testing-library/cypress/add-commands';
+import { Session } from 'next-auth';
+
+import { jwtBody } from '../fixtures/user';
+
+Cypress.Commands.add('login', () => {
+  cy.intercept('/api/auth/session', (req) => {
+    req.continue((res) => {
+      res.send({
+        body: {
+          ...jwtBody,
+          hasuraToken: Cypress.env('HASURA_TOKEN'),
+        } as Session,
+      });
+    });
+  }).as('session');
+
+  cy.setCookie('next-auth.session-token', Cypress.env('SESSION_TOKEN'));
+  Cypress.Cookies.preserveOnce('next-auth.session-token');
+});
