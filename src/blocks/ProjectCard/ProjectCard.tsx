@@ -68,15 +68,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <Heading tw="font-bold" as="h3">
           {project.name}
         </Heading>
-        <div
-          title={
-            project.pages.length > 0
-              ? 'You already integrated this project into at least one page'
-              : 'No page integrated'
-          }
-          tw="flex flex-row items-center"
-        >
-          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1}>
+        <div tw="flex flex-row items-center">
+          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
             <BaseButton
               tw="rounded-full p-2"
               css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
@@ -89,7 +82,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                     : tw`border-yellow-500 hover:(border-yellow-700) transform -scale-y-1`
                 }
               >
-                <TrendingUp size={18} />
+                <TrendingUp size={24} />
               </span>
             </BaseButton>
           </Link>
@@ -106,7 +99,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             </Text>
           </div>
           <DropDown
-            classes={{ root: tw`mr-2` }}
+            classes={{ root: tw`mr-1` }}
+            buttonProps={{ ariaLabel: 'Show more project options' }}
             content={
               <span tw="p-1">
                 <MoreVertical size={20} />

@@ -1,12 +1,15 @@
-/* eslint-disable unicorn/prefer-module */
+import * as jwt from 'jsonwebtoken';
 
-// @ts-ignore
-const jwt = require('jsonwebtoken');
+type Payload = { userId: string; name: string; email: string };
+type Options = {
+  maxAge: number | string;
+  allowedRoles: string[];
+  defaultRole: string;
+  role: string;
+  hasuraClaims?: Record<string, string>;
+};
 
-/**
- * @type {function({ userId: string; name: string; email: string }, { maxAge: number | string; allowedRoles: string[]; defaultRole: string; role: string; hasuraClaims?: Record<string, string>}): string}
- */
-function createAuthToken(payload, options) {
+function createAuthToken(payload: Payload, options: Options): string {
   const { maxAge, allowedRoles, defaultRole, role, hasuraClaims } = options;
   const jwtClaims = {
     sub: payload.userId,
@@ -27,10 +30,7 @@ function createAuthToken(payload, options) {
   return encodedToken;
 }
 
-/**
- * @type {function (string | object | Buffer, { maxAge: string | number; }): string}
- */
-function createToken(payload, { maxAge }) {
+function createToken(payload: string | object | Buffer, { maxAge }: { maxAge: string | number }) {
   const encodedToken = jwt.sign(payload, process.env.HASH_KEY, {
     algorithm: 'HS256',
     expiresIn: maxAge,
@@ -39,5 +39,4 @@ function createToken(payload, { maxAge }) {
   return encodedToken;
 }
 
-module.exports.createAuthToken = createAuthToken;
-module.exports.createToken = createToken;
+export { createAuthToken, createToken };

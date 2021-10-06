@@ -7,6 +7,7 @@ import { ProjectAnalyticsQuery } from '$/server/graphql/generated/project';
 import { NumberBlock } from './NumberBlock';
 import { ViewChart } from './ViewChart';
 import { getPageViews, getSumOfPageView } from './calculator';
+import { Card } from '$/components/Card';
 
 export type PageViewChartProps = {
   project: ProjectAnalyticsQuery['projectByPk'];
@@ -30,14 +31,14 @@ export function PageViewChart({ project }: PageViewChartProps): JSX.Element {
     return <></>;
   }
   return (
-    <section tw="flex flex-col bg-white shadow-xl rounded p-4 space-y-4">
+    <Card tw="flex flex-col shadow-xl p-4 space-y-4">
       <div tw="flex flex-row items-stretch space-x-6">
         <NumberBlock
           text="Page views"
           value={sumYesterday.pv}
           diffs={getDiffs(sumYesterday.pv, sumTwoDaysAgo.pv)}
         />
-        <div role="separator" tw="bg-gray-200" style={{ width: 1 }} />
+        <div role="separator" tw="bg-gray-700" style={{ width: 1 }} />
         <NumberBlock
           text="Visitors"
           value={sumYesterday.uv}
@@ -49,7 +50,7 @@ export function PageViewChart({ project }: PageViewChartProps): JSX.Element {
           {({ width, height }) => <ViewChart width={width} height={height} pageViews={pageViews} />}
         </ParentSize>
       </div>
-    </section>
+    </Card>
   );
 }
 

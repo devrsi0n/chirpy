@@ -54,7 +54,7 @@ export function Footer(props: FooterProps): JSX.Element {
         <Link href="/blog" variant="secondary">
           Blog
         </Link>
-        <Link href="/pricing" variant="secondary">
+        <Link href="/#pricing" variant="secondary">
           Pricing
         </Link>
         <Link href="/terms-of-service" variant="secondary">
