@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-/* eslint-disable unicorn/prefer-module */
 // ***********************************************************
 // This example plugins/index.ts can be used to load plugins
 //
@@ -11,20 +9,21 @@
 // ***********************************************************
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-require('dotenv').config();
-const { createAuthToken, createToken } = require('../../src/server/utilities/create-token');
+import * as DotEnv from 'dotenv';
 
-const { testUser, jwtBody } = require('../fixtures/user');
+import { createAuthToken, createToken } from '../../src/server/utilities/create-token';
+import { testUser, jwtBody } from '../fixtures/user';
 
-// Must use commonjs in this file or it will not work
-/**
- * @type {Cypress.PluginConfig}
- */
-module.exports = function Plugins(on, config) {
+DotEnv.config();
+
+export default function Plugins(
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions,
+): void | Cypress.ConfigOptions | Promise<Cypress.ConfigOptions> {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   config.env.HASH_KEY = process.env.HASH_KEY;
-  const maxAge = 60 * 60;
+  const maxAge = 24 * 60 * 60;
   config.env.HASURA_TOKEN = createAuthToken(
     {
       userId: String(testUser.id),
@@ -38,7 +37,7 @@ module.exports = function Plugins(on, config) {
       role: 'user',
       hasuraClaims: {
         // Projects with edit permission of the user
-        // 'X-Hasura-Editable-Project-Ids': getPGArray(editableProjectIds),
+        'X-Hasura-Editable-Project-Ids': '{}',
         // 'X-Hasura-Editable-Project-Ids': editableProjectIds,
       },
     },
@@ -46,4 +45,4 @@ module.exports = function Plugins(on, config) {
   config.env.SESSION_TOKEN = createToken(jwtBody, { maxAge });
 
   return config;
-};
+}

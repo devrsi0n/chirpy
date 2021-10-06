@@ -120,9 +120,12 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                 buttonAs={IconButton}
                 content={
                   <ul tw="flex flex-row space-x-3">
-                    {Object.entries(colorOptions).map(([_, color]) => (
+                    {Object.entries(colorOptions).map(([key, color]) => (
                       <li key={color[activeTheme][900]}>
-                        <IconButton onClick={handClickPrimaryColorFunction(color)}>
+                        <IconButton
+                          onClick={handClickPrimaryColorFunction(color)}
+                          aria-label={`Color ${key}`}
+                        >
                           <span
                             tw="inline-block w-6 h-6 rounded-full"
                             style={{ background: color[activeTheme][900] }}
@@ -133,9 +136,12 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                   </ul>
                 }
               >
-                <span tw="inline-block w-6 h-6 rounded-full bg-primary-900" />
+                <span
+                  aria-label="Primary color selector"
+                  tw="inline-block w-6 h-6 rounded-full bg-primary-900"
+                />
               </Popover>
-              <Text tw="px-2 leading-none mb-2" variant="secondary">
+              <Text tw="px-2 leading-none mb-2" variant="secondary" aria-label="Selected color">
                 {theme.colors[activeTheme].primary[900]}
               </Text>
             </div>

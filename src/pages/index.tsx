@@ -40,7 +40,9 @@ function Home(): JSX.Element {
               />
             </Button>
           </Link>
-          <Button>{strings.callToAction.secondary}</Button>
+          <Link variant="plain" href="/docs/index" tabIndex={-1}>
+            <Button>{strings.callToAction.secondary}</Button>
+          </Link>
         </div>
         <Pricing id="pricing" />
       </main>

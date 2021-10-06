@@ -24,16 +24,16 @@ export function NumberBlock({ value, text, diffs }: NumberBlockProps): JSX.Eleme
           <Text tw="text-sm">{diffs * 100}%</Text>
         </div>
       </div>
-      <Text tw="text-gray-400">{text}</Text>
+      <Text variant="secondary">{text}</Text>
     </div>
   );
 }
 
 function getArrowStyles(diffs: number) {
   if (diffs > 0) {
-    return tw`text-green-500`;
+    return tw`text-green-900`;
   } else if (diffs < 0) {
-    return tw`text-yellow-500 transform -scale-y-1`;
+    return tw`text-yellow-900 transform -scale-y-1`;
   }
   return tw`transform rotate-90`;
 }

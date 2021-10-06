@@ -29,9 +29,9 @@ export type DropDownProps = React.PropsWithChildren<{
 
 export function DropDown({ content, buttonProps, classes, children }: DropDownProps): JSX.Element {
   const { shape, ariaLabel } = {
-    ...buttonProps,
     shape: 'circle',
     ariaLabel: 'Click to open the dropdown',
+    ...buttonProps,
   };
   return (
     <div css={[tw`relative inline-block text-left`, classes?.root]}>

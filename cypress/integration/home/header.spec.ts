@@ -34,6 +34,9 @@ describe('Header', () => {
 
     cy.get('header').findByRole('link', { name: 'Blog' }).click();
     cy.url().should('include', '/blog');
+
+    cy.get('header').findByRole('link', { name: 'Logo of Totalk' }).click();
+    cy.url().should('include', '/');
   });
 });
 
