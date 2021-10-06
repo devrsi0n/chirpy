@@ -26,20 +26,25 @@ export default function Dashboard(): JSX.Element {
     data: { id },
   } = useCurrentUser();
 
-  const [fetchUserProjects, { data, loading: loadingProject }] =
-    useUserDashboardProjectsLazyQuery();
-  const handleFetchProjects = React.useCallback(() => {
-    if (!id) return;
-    fetchUserProjects({
-      variables: {
-        id: id!,
-        today: dayjs().toISOString(),
-        yesterday: getStartOfSubtractDate(1),
-        twoDaysAgo: getStartOfSubtractDate(2),
-      },
-    });
-  }, [id, fetchUserProjects]);
-  React.useEffect(handleFetchProjects, [handleFetchProjects]);
+  const [fetchUserProjects, { data, loading: loadingProject }] = useUserDashboardProjectsLazyQuery({
+    fetchPolicy: 'cache-and-network',
+  });
+  const fetchProjects = React.useCallback(
+    (options?: Parameters<typeof fetchUserProjects>[0]) => {
+      if (!id) return;
+      fetchUserProjects({
+        ...options,
+        variables: {
+          id: id!,
+          today: dayjs().toISOString(),
+          yesterday: getStartOfSubtractDate(1),
+          twoDaysAgo: getStartOfSubtractDate(2),
+        },
+      });
+    },
+    [id, fetchUserProjects],
+  );
+  React.useEffect(fetchProjects, [fetchProjects]);
   const { projects } = data?.userByPk || {};
 
   const [insertProjectMutation, { loading: loadingInsertProject }] = useInsertOneProjectMutation();
@@ -69,9 +74,9 @@ export default function Dashboard(): JSX.Element {
           },
         });
         setShowDialog(false);
-        handleFetchProjects();
+        fetchProjects();
       },
-      [insertProjectMutation, id, handleFetchProjects],
+      [insertProjectMutation, id, fetchProjects],
     ),
   );
 
@@ -91,15 +96,13 @@ export default function Dashboard(): JSX.Element {
           </div>
           {projects?.length ? (
             <div tw="flex flex-row">
-              <div tw="space-y-6 flex-1">
+              <ul tw="space-y-6 flex-1" aria-label="Project list">
                 {projects.map((project) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    onDeletedProject={handleFetchProjects}
-                  />
+                  <li key={project.id}>
+                    <ProjectCard project={project} onDeletedProject={fetchProjects} />
+                  </li>
                 ))}
-              </div>
+              </ul>
               <div tw="flex-1" />
             </div>
           ) : loadingProject ? (

@@ -34,7 +34,7 @@ export function ViewChart({ width, height, pageViews }: ViewChartProps): JSX.Ele
   sizeScale.range([yMax, 0]);
   const colorScale = scaleOrdinal<ViewBarType, string>({
     domain: keys,
-    range: [theme`colors.blue.500`, theme`colors.blue.300`],
+    range: [theme`colors.blue.900`, theme`colors.blue.700`],
   });
 
   if (!pageViews) {
@@ -48,7 +48,7 @@ export function ViewChart({ width, height, pageViews }: ViewChartProps): JSX.Ele
             scale={sizeScale}
             width={xMax}
             height={yMax}
-            stroke={theme`colors.gray.200`}
+            stroke={theme`colors.gray.500`}
             numTicks={numTicks}
           />
           <BarStack
@@ -112,6 +112,6 @@ const keys: ViewBarType[] = ['uvBar', 'pvBar'];
 const tickFormat = (hour: string) => (+hour > 12 ? `${+hour - 12}pm` : `${hour}am`);
 
 const numTicks = 6;
-const lineColor = theme`colors.gray.400`;
-const labelColor = theme`colors.gray.500`;
+const lineColor = theme`colors.gray.800`;
+const labelColor = theme`colors.gray.900`;
 const defaultMargin = { top: 20, right: 10, bottom: 26, left: 26 };
