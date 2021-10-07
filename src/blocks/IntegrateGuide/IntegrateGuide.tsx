@@ -17,7 +17,12 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
   const [showDialog, setShowDialog] = React.useState(false);
   return (
     <div>
-      <Button tw="" shadow={false} onClick={() => setShowDialog(true)} aria-label="Integrate guide">
+      <Button
+        tw="px-2 py-1"
+        shadow={false}
+        onClick={() => setShowDialog(true)}
+        aria-label="Integrate guide"
+      >
         Integrate
       </Button>
       <Dialog

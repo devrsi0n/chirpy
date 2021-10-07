@@ -34,7 +34,7 @@ export default function Custom404(): JSX.Element {
             </div>
           </div>
         </div>
-        <Heading>Oops! Page not found</Heading>
+        <Heading tw="font-bold">Oops! Page not found</Heading>
         <Text variant="secondary">We might have encountered some issues...</Text>
         <section tw="space-y-3">
           <Heading as="h5">What could have caused this?</Heading>
