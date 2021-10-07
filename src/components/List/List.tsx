@@ -19,7 +19,7 @@ const variantTags: Record<Variant, 'ul' | 'ol'> = {
 
 export function List({ className, variant = 'unordered', ...restProps }: IListProps): JSX.Element {
   const Tag = variantTags[variant];
-  return <Tag {...restProps} className={className} css={[tw`py-2 list-none`]} />;
+  return <Tag {...restProps} className={className} css={[tw`py-2 list-none flex flex-col`]} />;
 }
 
 List.Item = ListItem;
