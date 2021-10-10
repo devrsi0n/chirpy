@@ -15,7 +15,7 @@ export default function Custom404(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <main tw="py-12 px-4 space-y-8 flex flex-col items-center">
+      <section tw="px-4 space-y-8 flex flex-col items-center">
         <div
           css={[
             tw`flex justify-center text-gray-1000`,
@@ -57,7 +57,7 @@ export default function Custom404(): JSX.Element {
           </Link>
           <Button>Learn More</Button>
         </div>
-      </main>
+      </section>
     </>
   );
 }

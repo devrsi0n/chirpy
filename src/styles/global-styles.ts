@@ -47,21 +47,6 @@ export const appGlobalStyles = css`
     font-named-instance: 'Italic';
   }
 
-  // https://www.joshwcomeau.com/css/full-bleed/
-  .main-container {
-    display: grid;
-    grid-template-columns: 1fr min(75ch, calc(100% - 32px)) 1fr;
-    grid-column-gap: 16px;
-
-    & > * {
-      grid-column: 2;
-    }
-
-    .full-bleed {
-      grid-column: 1 / -1;
-    }
-  }
-
   // Header and footer
   .layout {
     width: clamp(540px, 70ch, 1080px);

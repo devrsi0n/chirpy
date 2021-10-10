@@ -15,7 +15,7 @@ function Home(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <main tw="min-h-full flex flex-col items-center py-12 space-y-8">
+      <section tw="min-h-full flex flex-col items-center space-y-8">
         <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
           <span tw="text-transparent bg-clip-text" css={gradient}>
             {strings.heroTitlePoint}
@@ -45,7 +45,7 @@ function Home(): JSX.Element {
           </Link>
         </div>
         <Pricing id="pricing" />
-      </main>
+      </section>
     </>
   );
 }

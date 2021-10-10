@@ -26,7 +26,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
       <Head>
         <title>Analytics</title>
       </Head>
-      <div tw="py-10" className="main-container">
+      <section>
         <PageTitle tw="pb-6">Analytics</PageTitle>
         <div tw="flex flex-row justify-between pb-4">
           <div tw="flex flex-row items-center space-x-2">
@@ -43,11 +43,11 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
             </Heading>
           </div>
           <div>
-            <Text tw="text-gray-400">{dayjs().format('MM-DD')}</Text>
+            <Text variant="secondary">{dayjs().format('MM-DD')}</Text>
           </div>
         </div>
         <PageViewChart project={props.project} />
-      </div>
+      </section>
     </>
   );
 }

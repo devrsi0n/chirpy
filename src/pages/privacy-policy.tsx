@@ -9,7 +9,7 @@ import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 
 export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <section tw="py-10">
+    <section>
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
