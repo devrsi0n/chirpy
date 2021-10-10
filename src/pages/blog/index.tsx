@@ -23,7 +23,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
         <title>Blog</title>
       </Head>
 
-      <div tw="min-h-full" className="main-container">
+      <div tw="min-h-full">
         <Heading tw="my-10 font-bold">Blog</Heading>
         <section tw="flex flex-row py-10 min-h-full space-x-2">
           {directories.map((dir) => {

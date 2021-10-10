@@ -10,7 +10,7 @@ import { CommonPageProps } from '$/types/page.type';
 
 export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <section tw="py-10">
+    <section>
       <Head>
         <title>{frontMatter.title}</title>
       </Head>
