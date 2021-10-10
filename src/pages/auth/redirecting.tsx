@@ -29,7 +29,7 @@ export default function Redirecting(): JSX.Element {
       <Head>
         <title>Redirecting</title>
       </Head>
-      <Spinner tw="mt-32 justify-center" />
+      <Spinner tw="mt-24 justify-center" />
     </>
   );
 }

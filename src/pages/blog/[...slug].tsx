@@ -35,22 +35,19 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       <Head>
         <title>{frontMatter?.title} - Blog</title>
       </Head>
-      <>
-        <div tw="min-h-full" className="main-container">
-          <section tw="flex flex-row py-10 min-h-full space-x-2">
-            <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
-              {banner && (
-                <div tw="pb-10">
-                  <Image {...banner} layout="responsive" alt="banner" />
-                </div>
-              )}
-              {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
-            </article>
-          </section>
-          <div data-totalk-comment="true" tw="my-16" />
-          <Script {...scriptProps} />
-        </div>
-      </>
+
+      <section tw="flex flex-row space-x-2">
+        <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
+          {banner && (
+            <div tw="pb-10">
+              <Image {...banner} layout="responsive" alt="banner" />
+            </div>
+          )}
+          {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
+        </article>
+      </section>
+      <div data-totalk-comment="true" tw="my-16" />
+      <Script {...scriptProps} />
     </>
   );
 }

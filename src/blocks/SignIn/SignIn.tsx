@@ -7,6 +7,7 @@ import { Alert } from '$/components/Alert';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
+import { Logo } from '$/components/Logo';
 import { Text } from '$/components/Text';
 import { SIGN_IN_ERRORS } from '$/strings';
 
@@ -33,9 +34,12 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       <Head>
         <title>Sign in</title>
       </Head>
-      <div tw="flex flex-row h-full">
+      <div tw="flex flex-row h-full" className="full-bleed">
         <div tw="flex-1 flex flex-col justify-center items-center">
-          <div tw="py-7 mx-20 w-full md:w-96">
+          <div tw="py-7 w-full sm:(mx-2 w-64) md:(w-96)">
+            <div tw="pb-8">
+              <Logo size="lg" noSpacing />
+            </div>
             <div tw="space-y-2">
               <Heading as="h2" tw="font-black mt-5">
                 {title}
@@ -52,13 +56,11 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                       callbackUrl: `${location.origin}/auth/redirecting`,
                     })
                   }
-                  tw="w-full"
+                  tw="w-full px-0 md:(justify-start pl-20)"
                   size="lg"
                 >
                   <option.icon />
-                  <span tw="inline-block ml-2 text-left" style={{ width: '12.5rem' }}>
-                    Sign in with {option.name}
-                  </span>
+                  <span tw="ml-2 text-left">Sign in with {option.name}</span>
                 </Button>
               ))}
             </div>
@@ -71,7 +73,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
             </Text>
           </div>
         </div>
-        <div css={[tw`flex-1 hidden md:block`, bannerStyle]}></div>
+        <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
       </div>
     </>
   );

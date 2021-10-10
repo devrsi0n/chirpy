@@ -196,9 +196,7 @@ function ProfileContainer({
       <Head>
         <title>Profile</title>
       </Head>
-      <main tw="py-10" className={'main-container ' + className}>
-        {children}
-      </main>
+      <section className={className}>{children}</section>
     </>
   );
 }

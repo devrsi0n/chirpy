@@ -85,91 +85,90 @@ export default function Dashboard(): JSX.Element {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <div className="main-container">
-        <section tw="py-10 space-y-10">
-          <div tw="space-x-2 flex flex-row justify-between items-start">
-            <PageTitle>Dashboard</PageTitle>
-            <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
-              <PlusCircle size={18} />
-              <span>New project</span>
-            </Button>
+
+      <section tw="space-y-10">
+        <div tw="space-x-2 flex flex-row justify-between items-start">
+          <PageTitle>Dashboard</PageTitle>
+          <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
+            <PlusCircle size={18} />
+            <span>New project</span>
+          </Button>
+        </div>
+        {projects?.length ? (
+          <div tw="flex flex-row">
+            <ul tw="space-y-6 flex-1" aria-label="Project list">
+              {projects.map((project) => (
+                <li key={project.id}>
+                  <ProjectCard project={project} onDeletedProject={fetchProjects} />
+                </li>
+              ))}
+            </ul>
+            <div tw="flex-1" />
           </div>
-          {projects?.length ? (
-            <div tw="flex flex-row">
-              <ul tw="space-y-6 flex-1" aria-label="Project list">
-                {projects.map((project) => (
-                  <li key={project.id}>
-                    <ProjectCard project={project} onDeletedProject={fetchProjects} />
-                  </li>
-                ))}
-              </ul>
-              <div tw="flex-1" />
-            </div>
-          ) : loadingProject ? (
-            <Spinner />
-          ) : (
-            <div tw="py-6">
-              <Text>No projects</Text>
-            </div>
-          )}
-        </section>
-        <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-          <form tw="flex flex-col w-80">
-            <TextField
-              {...register('name', {
-                required: { value: true, message: 'Name is required' },
-                pattern: {
-                  value: /^\w+$/,
-                  message: `Only word characters are allowed`,
-                },
-                minLength: { value: 3, message: 'At least 3 characters' },
-                maxLength: { value: 16, message: 'At most 16 characters' },
-              })}
-              aria-label="Name of this project"
-              label="Name"
-              errorMessage={errors.name}
-              placeholder="hippo"
-              tw="w-full"
-            />
-            <TextField
-              {...register('domain', {
-                required: { value: true, message: 'Domain is required' },
-                pattern: {
-                  value:
-                    /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
-                  message: 'Invalid domain',
-                },
-              })}
-              aria-label="Associate a domain with this project"
-              label={
-                <>
-                  Domain
-                  <Text variant="secondary" size="sm">
-                    Associate a domain with this project
-                  </Text>
-                </>
-              }
-              errorMessage={errors.domain}
-              placeholder="example.com"
-              tw="w-full"
-            />
-          </form>
-          <DialogFooter>
-            <Button onClick={handleCloseDialog} tw="w-full sm:w-auto">
-              Cancel
-            </Button>
-            <Button
-              tw="w-full sm:w-auto"
-              disabled={hasError || loadingInsertProject}
-              color="primary"
-              variant="solid"
-              onClick={handleClickSubmit}
-            >
-              Submit
-            </Button>
-          </DialogFooter>
-        </Dialog>
-      </div>
+        ) : loadingProject ? (
+          <Spinner />
+        ) : (
+          <div tw="py-6">
+            <Text>No projects</Text>
+          </div>
+        )}
+      </section>
+      <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
+        <form tw="flex flex-col w-80">
+          <TextField
+            {...register('name', {
+              required: { value: true, message: 'Name is required' },
+              pattern: {
+                value: /^\w+$/,
+                message: `Only word characters are allowed`,
+              },
+              minLength: { value: 3, message: 'At least 3 characters' },
+              maxLength: { value: 16, message: 'At most 16 characters' },
+            })}
+            aria-label="Name of this project"
+            label="Name"
+            errorMessage={errors.name}
+            placeholder="hippo"
+            tw="w-full"
+          />
+          <TextField
+            {...register('domain', {
+              required: { value: true, message: 'Domain is required' },
+              pattern: {
+                value:
+                  /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
+                message: 'Invalid domain',
+              },
+            })}
+            aria-label="Associate a domain with this project"
+            label={
+              <>
+                Domain
+                <Text variant="secondary" size="sm">
+                  Associate a domain with this project
+                </Text>
+              </>
+            }
+            errorMessage={errors.domain}
+            placeholder="example.com"
+            tw="w-full"
+          />
+        </form>
+        <DialogFooter>
+          <Button onClick={handleCloseDialog} tw="w-full sm:w-auto">
+            Cancel
+          </Button>
+          <Button
+            tw="w-full sm:w-auto"
+            disabled={hasError || loadingInsertProject}
+            color="primary"
+            variant="solid"
+            onClick={handleClickSubmit}
+          >
+            Submit
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 }

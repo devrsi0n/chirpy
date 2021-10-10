@@ -102,7 +102,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   };
 
   return (
-    <div className="main-container" tw="py-10 px-2">
+    <section tw="px-2">
       <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
       <div tw="flex flex-row">
         <aside tw="flex-1 border-r pr-4 space-y-11">
@@ -162,7 +162,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
           />
         </section>
       </div>
-    </div>
+    </section>
   );
 }
 

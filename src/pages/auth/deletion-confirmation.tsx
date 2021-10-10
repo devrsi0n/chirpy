@@ -11,12 +11,12 @@ function DeletionConfirmation(): JSX.Element {
       <Head>
         <title>Deletion confirmation</title>
       </Head>
-      <main tw="py-12 space-y-8">
+      <div tw="space-y-8">
         <Heading as="h1">
           Thanks, you facebook account was already deleted. Status code{' '}
           {!ssrMode ? new URLSearchParams(location.search).get('code') : ''}
         </Heading>
-      </main>
+      </div>
     </>
   );
 }

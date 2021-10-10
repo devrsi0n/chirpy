@@ -14,7 +14,7 @@ export default function Confirmation(/*props: confirmationProps*/): JSX.Element 
         <title>Confirmation</title>
       </Head>
 
-      <section tw="py-12 flex flex-row items-center justify-center space-x-8">
+      <section tw="flex flex-row items-center justify-center space-x-8">
         <div tw="space-y-3">
           <Heading as="h2" tw="tracking-tight">
             Just fill this form to get started
