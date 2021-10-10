@@ -22,7 +22,7 @@ export function Header(): JSX.Element {
   return (
     <header
       css={[
-        tw`w-full py-3 transition duration-150 shadow-sm sm:(sticky top-0 left-0 z-10) `,
+        tw`w-full py-3 transition duration-150 shadow-sm relative sm:(sticky top-0 left-0 z-10) z-10`,
         bluredBg,
       ]}
     >
