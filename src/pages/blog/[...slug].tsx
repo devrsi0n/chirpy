@@ -28,7 +28,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   const scriptProps: ScriptProps = {
     [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT,
     src: `${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`,
-    strategy: 'lazyOnload' as const,
+    strategy: 'afterInteractive' as const,
   };
   return (
     <>
