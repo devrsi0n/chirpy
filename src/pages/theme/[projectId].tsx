@@ -224,16 +224,20 @@ const comments = [
   {
     __typename: 'Comment',
     id: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
-    content: [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            text: 'Level 1 testing 😍',
-          },
-        ],
-      },
-    ],
+    content: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'Level 1 testing 😍',
+            },
+          ],
+        },
+      ],
+    },
     createdAt: '2021-04-17T01:43:10.581584+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
@@ -249,16 +253,20 @@ const comments = [
       {
         __typename: 'Comment',
         id: '87110a09-9a4b-4f41-8784-6f8512449ddf',
-        content: [
-          {
-            type: 'paragraph',
-            children: [
-              {
-                text: 'Level 2 👀',
-              },
-            ],
-          },
-        ],
+        content: {
+          type: 'doc',
+          content: [
+            {
+              type: 'paragraph',
+              content: [
+                {
+                  type: 'text',
+                  text: 'Level 2 👀',
+                },
+              ],
+            },
+          ],
+        },
         createdAt: '2021-04-17T02:31:51.05373+00:00',
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
         pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
@@ -277,16 +285,20 @@ const comments = [
   {
     __typename: 'Comment',
     id: '7a024861-7dce-4513-9f8a-c9e91d975da4',
-    content: [
-      {
-        type: 'paragraph',
-        children: [
-          {
-            text: 'Ho ho 🗣',
-          },
-        ],
-      },
-    ],
+    content: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'Ho ho 🗣',
+            },
+          ],
+        },
+      ],
+    },
     createdAt: '2021-04-17T02:51:30.517834+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',

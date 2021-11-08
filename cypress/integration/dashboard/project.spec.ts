@@ -1,11 +1,13 @@
 describe('Project', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/dashboard');
     cy.wait('@session');
 
+    cy.intercept('https://hasura.totalk.dev/v1/graphql').as('graphql');
+    cy.wait('@graphql');
     cy.wait(1000);
-    // Delete duplicated project if exist
     cy.get('body').then(($body) => {
+      // Delete duplicated project if exist
       if ($body.find(`[aria-label='Project list']`).length > 0) {
         cy.findByLabelText(/project list/i)
           .get('li')
@@ -38,24 +40,6 @@ describe('Project', () => {
     }).click();
   });
 
-  afterEach(() => {
-    // Delete the project
-    cy.findByLabelText(/project list/i)
-      .get('li')
-      .should('have.length', 1)
-      .first()
-      .findByRole('button', { name: /show more project options/i })
-      .click();
-    cy.findByLabelText(/project list/i)
-      .get('li')
-      .first()
-      .findByRole('menuitem', { name: /delete/i })
-      .click();
-    cy.findByRole('dialog')
-      .findByRole('button', { name: /delete/i })
-      .click();
-  });
-
   it('should show integration doc', () => {
     cy.findByRole('button', {
       name: /integrate guide/i,
@@ -77,6 +61,5 @@ describe('Project', () => {
     );
 
     cy.visit('/dashboard');
-    cy.wait('@session');
   });
 });

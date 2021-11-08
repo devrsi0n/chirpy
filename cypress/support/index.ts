@@ -14,7 +14,12 @@
 // ***********************************************************
 import './commands';
 
-beforeEach(() => {
+before(() => {
   // @ts-ignore
   cy.login();
+  window.indexedDB.deleteDatabase("localforage");
 });
+
+// Cypress.on("window:before:load", win => {
+//   win.indexedDB.deleteDatabase("localforage");
+// });

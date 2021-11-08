@@ -26,6 +26,7 @@ module.exports = {
     'unicorn/prefer-node-protocol': 'off',
     'unicorn/no-abusive-eslint-disable': 'off',
     'unicore/prefer-module': 'off',
+    'unicorn/no-array-for-each': 'off',
 
     'jest/expect-expect': 'off',
   },

@@ -21,7 +21,11 @@ export const appGlobalStyles = css`
   }
 
   ::selection {
-    ${tw`bg-primary-900 text-white`}
+    ${tw`bg-blue-900 text-white`}
+  }
+
+  :focus-visible {
+    outline: none;
   }
 
   input:focus,
