@@ -33,8 +33,8 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           benefits={[
             '1 Website',
             'Privacy-first, No Ads',
-            'Basic rich text formatting',
-            // 'Markdown support',
+            'Rich text formatting',
+            'Markdown support',
             'Third party sign in',
             'Basic analytics',
           ]}
@@ -47,8 +47,8 @@ export function Pricing({ id }: PricingProps): JSX.Element {
               <span tw="font-bold text-gray-1200">10</span> Websites
             </span>,
             'Privacy-first, No Ads',
-            'Basic rich text formatting',
-            // 'Markdown support',
+            'Rich text formatting',
+            'Markdown support',
             'Third party sign in',
             'Basic analytics',
             'Text formatting with image',

@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "incremental": true,
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "checkJs": true,
@@ -21,7 +20,8 @@
     "baseUrl": ".",
     "paths": {
       "$/*": ["src/*"]
-    }
+    },
+    "incremental": true
   },
   "exclude": ["node_modules"],
   "include": [
@@ -31,7 +31,6 @@
     "types/next-auth.d.ts",
     "types/next-env.d.ts",
     "types/node.d.ts",
-    "types/slate.d.ts",
     "types/twin.d.ts",
     "types/unknown-file.d.ts",
     "src/**/*.ts",

@@ -1,5 +1,5 @@
 describe('Index', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.wait('@session');
   });
@@ -8,6 +8,7 @@ describe('Index', () => {
     cy.findAllByRole('button', { name: 'Try It Free' }).should('have.length', 3);
     cy.findAllByRole('button', { name: 'Try It Free' }).first().click();
     cy.url().should('include', '/auth/sign-in');
+    cy.visit('/');
   });
 
   it('learn more', () => {

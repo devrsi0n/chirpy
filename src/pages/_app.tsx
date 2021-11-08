@@ -9,9 +9,9 @@ import { useMountedState } from 'react-use';
 import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
+import { ErrorFallback } from '$/blocks/ErrorFallback';
 import { Layout, WidgetLayout } from '$/components/Layout';
 import { Spinner } from '$/components/Spinner';
-import { Text } from '$/components/Text';
 import { ToastProvider } from '$/components/Toast';
 import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
@@ -102,14 +102,6 @@ function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
   }, [isUser, loading]);
 
   return <>{children}</>;
-}
-
-function ErrorFallback() {
-  return (
-    <div role="alert">
-      <Text>Sorry, something went wrong in our side. Try again later.</Text>
-    </div>
-  );
 }
 
 const loadFeatures = () => import('../utilities/framer-motion-features').then((res) => res.default);

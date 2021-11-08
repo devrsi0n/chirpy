@@ -19,9 +19,9 @@ module.exports = (theme) => ({
           color: theme('colors.gray.900'),
         },
         a: {
-          color: theme('colors.gray.1200'),
-          textDecoration: 'underline',
+          color: theme('colors.blue.900'),
           fontWeight: '500',
+          textDecoration: 'underline',
         },
         strong: {
           color: theme('colors.gray.1200'),
@@ -81,7 +81,7 @@ module.exports = (theme) => ({
           fontStyle: 'italic',
           color: theme('colors.gray.1200'),
           borderLeftWidth: '0.25rem',
-          borderLeftColor: theme('colors.gray.400'),
+          borderLeftColor: theme('colors.gray.600'),
           quotes: '"\\201C""\\201D""\\2018""\\2019"',
         },
         'blockquote p:first-of-type::before': {
@@ -122,14 +122,10 @@ module.exports = (theme) => ({
           color: theme('colors.gray.500'),
         },
         code: {
-          color: theme('colors.gray.1200'),
-          fontWeight: '600',
-        },
-        'code::before': {
-          content: '"`"',
-        },
-        'code::after': {
-          content: '"`"',
+          backgroundColor: theme('colors.pink.300'),
+          color: theme('colors.pink.1100'),
+          padding: `${em(3, 16)} ${em(4, 16)}`,
+          borderRadius: rem(4),
         },
         'a code': {
           color: theme('colors.gray.1200'),
