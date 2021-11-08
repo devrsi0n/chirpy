@@ -1,5 +1,5 @@
 describe('Footer', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.wait('@session');
   });

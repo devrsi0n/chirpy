@@ -37,7 +37,7 @@ describe('CommentCard', () => {
 
   it('should render the text', () => {
     expect(screen.getByText(staticProps.author.name)).toBeInTheDocument();
-    expect(screen.getByText(staticProps.content[0].children[0].text)).toBeInTheDocument();
+    expect(screen.getByText(staticProps.content.content[0].content[0].text)).toBeInTheDocument();
 
     expect((document.querySelector('time') as HTMLTimeElement).dateTime).toBe(
       staticProps.createdAt,
@@ -55,7 +55,7 @@ describe('CommentCard', () => {
       name: 'Reply',
     });
     userEvent.click(replyButton);
-    await waitFor(() => screen.getByRole('textbox'));
+    await waitFor(() => screen.getByLabelText('Reply editor'));
     // const textbox = screen.getByRole('textbox').querySelector('p')!;
     // TODO: figure out why type is not working
     // userEvent.type(textbox, 'This is a testing message');

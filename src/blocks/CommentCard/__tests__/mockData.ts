@@ -6,12 +6,20 @@ export function generateCommentCard(fill: number) {
       name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
-    content: [
-      {
-        type: 'paragraph' as const,
-        children: [{ text: `comment content ${fill}` }],
-      },
-    ],
+    content: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'test data',
+            },
+          ],
+        },
+      ],
+    },
     createdAt: `2021-06-21T14:12:13.813625+00:00`,
     likes: [
       {

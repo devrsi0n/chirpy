@@ -1,7 +1,7 @@
 import { testUser } from '../../fixtures/user';
 
 describe('Header', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
     cy.wait('@session');
   });
@@ -23,6 +23,9 @@ describe('Header', () => {
     clickUserDropDown();
     cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();
     cy.get('header').findByText(testUser.name).should('not.exist');
+
+    cy.visit('/');
+    cy.wait('@session');
   });
 
   it('should show navigation links', () => {

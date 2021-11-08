@@ -45,7 +45,6 @@ export function Link(props: LinkProps): JSX.Element {
     shallow,
     passHref = true,
     prefetch,
-    className = '',
     highlightPattern,
     noUnderline,
     variant = 'primary',
@@ -61,26 +60,27 @@ export function Link(props: LinkProps): JSX.Element {
       setTarget('_blank');
     }
   }, [props.target, href]);
+  const commonProps = {
+    target,
+    ...(target === '_blank' && { rel: 'noopener noreferrer' }),
+    ...restProps,
+  };
 
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
       {variant === 'plain' ? (
-        <a {...restProps} className={className}>
-          {children}
-        </a>
+        <a {...commonProps}>{children}</a>
       ) : (
         <a
-          {...restProps}
+          {...commonProps}
           css={[
             tw`relative transition duration-150 ease-in-out no-underline! whitespace-nowrap`,
             size && sizeStyles[size],
             highlight && tw`font-bold`,
             variantStyles[variant],
           ]}
-          className={className}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
-          target={target}
         >
           {children}
           {!noUnderline && ['primary', 'secondary'].includes(variant) && (

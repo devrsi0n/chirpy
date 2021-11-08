@@ -33,7 +33,10 @@ export function CommentTrees({
       </div>
       <div css={tw`space-y-7`}>
         <div css={tw`space-y-2`}>
-          <RichTextEditor placeholder={`What are your thoughts?`} onSubmit={onSubmitReply} />
+          <RichTextEditor
+            placeholder={`What are your thoughts? (Basic markdown shortcuts supported)`}
+            onSubmit={onSubmitReply}
+          />
         </div>
         <ul>
           {comments?.map((comment: CommentLeafType) => (

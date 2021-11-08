@@ -22,7 +22,7 @@ export function getColors() {
       yellow: translateRadixColor(radixColors.yellow),
       red: translateRadixColor(radixColors.red),
       pink: translateRadixColor(radixColors.pink),
-      bg: radixColors.slate.slate2,
+      bg: radixColors.blue.blue1,
     },
     dark: {
       primary: translateRadixColor(radixColors.plumDark),
@@ -35,7 +35,7 @@ export function getColors() {
       yellow: translateRadixColor(radixColors.yellowDark),
       red: translateRadixColor(radixColors.redDark),
       pink: translateRadixColor(radixColors.pinkDark),
-      bg: radixColors.mauveDark.mauve1,
+      bg: radixColors.indigoDark.indigo1,
     },
   };
 }

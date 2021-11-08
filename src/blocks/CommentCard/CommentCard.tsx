@@ -205,7 +205,7 @@ export function CommentCard({
           {showReplyEditor && (
             <div tw="flex flex-col space-y-2 pr-6">
               <RichTextEditor
-                placeholder={`What are your thoughts?`}
+                placeholder={`What are your thoughts? (Basic markdown shortcuts supported)`}
                 onSubmit={handleSubmitReply}
                 styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
                 isReply

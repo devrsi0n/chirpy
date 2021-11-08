@@ -16,12 +16,20 @@ export function generateCommentFragment(fill: string, depth: number) {
       name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
-    content: [
-      {
-        type: 'paragraph',
-        children: [{ text: `comment content ${fill}` }],
-      },
-    ],
+    content: {
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: `comment content ${fill}`,
+            },
+          ],
+        },
+      ],
+    },
     createdAt: `2021-06-21T14:12:13.813625+00:00`,
     likes: [
       {
@@ -47,11 +55,19 @@ export function getTextsOfComment(comment: CommentLinkedListProps['comment']) {
 
 function getTextOfContent(
   content: {
-    type: string;
-    children: {
-      text: string;
-    }[];
-  }[],
+    type: 'doc',
+    content: [
+      {
+        type: 'paragraph',
+        content: [
+          {
+            type: 'text',
+            text: string,
+          },
+        ],
+      },
+    ],
+  },
 ): string {
-  return content[0].children[0].text;
+  return content.content[0].content[0].text;
 }
