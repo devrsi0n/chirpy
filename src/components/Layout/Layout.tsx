@@ -1,6 +1,6 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import { css, TwStyle } from 'twin.macro';
+import { css, theme, TwStyle } from 'twin.macro';
 
 import { TelemetryProvider } from '$/contexts/TelemetryProvider';
 
@@ -19,7 +19,8 @@ export type LayoutProps = React.PropsWithChildren<{
 export function Layout({ noHeader, noFooter, children, styles }: LayoutProps): JSX.Element {
   return (
     <TelemetryProvider projectId={process.env.NEXT_PUBLIC_COMMENT_PROJECT}>
-      <LayoutWrapper tw="bg-bg">
+      <GradientBackground />
+      <LayoutWrapper>
         {!noHeader && <Header />}
         <AnimatePresence>
           <m.main
@@ -52,5 +53,20 @@ export function Layout({ noHeader, noFooter, children, styles }: LayoutProps): J
         {!noFooter && <Footer tw="mt-auto" />}
       </LayoutWrapper>
     </TelemetryProvider>
+  );
+}
+
+function GradientBackground(): JSX.Element {
+  return (
+    <div
+      tw="absolute inset-0 z-[-1] bg-bg"
+      css={{
+        background: `radial-gradient(circle at center left, ${theme(
+          'colors.primary.400',
+        )}, rgba(255, 255, 255, 0) 15%), radial-gradient(circle at 80% 20%, ${theme(
+          'colors.blue.400',
+        )}, rgba(255, 255, 255, 0) 15%)`,
+      }}
+    />
   );
 }

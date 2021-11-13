@@ -13,13 +13,22 @@ export type PricingProps = React.PropsWithChildren<{
   id?: string;
 }>;
 
+const commonBenefits = [
+  'Privacy-first, No Ads',
+  'Rich text formatting',
+  'Markdown shortcuts',
+  'Third party sign in',
+  'Basic analytics',
+  'Widget customization',
+];
+
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
-    <div id={id} tw="py-8 flex flex-col items-center">
-      <Heading as="h2" tw="mb-4">
+    <div id={id} tw="flex flex-col items-center">
+      <Heading as="h2" tw="mb-4 font-bold">
         Pricing Plans
       </Heading>
-      <Text tw="mb-8 mx-6" variant="secondary" size="lg">
+      <Text tw="mb-8" variant="secondary" size="lg">
         Start building for free, then add a site to go live. Account plans unblock additional
         features.
       </Text>
@@ -30,14 +39,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           callToAction={{
             label: 'Try It Free',
           }}
-          benefits={[
-            '1 Website',
-            'Privacy-first, No Ads',
-            'Rich text formatting',
-            'Markdown support',
-            'Third party sign in',
-            'Basic analytics',
-          ]}
+          benefits={['1 Website', ...commonBenefits]}
         />
         <PricingCard
           plan="Pro"
@@ -46,13 +48,8 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             <span key="website">
               <span tw="font-bold text-gray-1200">10</span> Websites
             </span>,
-            'Privacy-first, No Ads',
-            'Rich text formatting',
-            'Markdown support',
-            'Third party sign in',
-            'Basic analytics',
-            'Text formatting with image',
-            'Widget customization',
+            ...commonBenefits,
+            'Text formatting with image & video',
             'No branding',
           ]}
           callToAction={{

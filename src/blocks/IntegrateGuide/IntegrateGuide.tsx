@@ -30,7 +30,7 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
         show={showDialog}
         title={
           <div>
-            <Heading as="h2" tw="mb-3">
+            <Heading as="h2" tw="mb-3 leading-none">
               Get Started with Totalk Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">
