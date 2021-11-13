@@ -3,6 +3,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { Features } from '$/blocks/Features';
 import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
@@ -15,35 +16,38 @@ function Home(): JSX.Element {
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
-      <section tw="min-h-full flex flex-col items-center space-y-8">
-        <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
-          <span tw="text-transparent bg-clip-text" css={gradient}>
-            {strings.heroTitlePoint}
-          </span>{' '}
-          <span>{strings.heroTitle}</span>
-        </h1>
-        <Text tw="text-center" variant="secondary">
-          {strings.heroDescription}
-        </Text>
-        <div tw="flex justify-center items-center space-x-6">
-          <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-            <Button
-              variant="solid"
-              color="primary"
-              className="group"
-              tw="space-x-1 hover:shadow-2xl"
-            >
-              <span>{strings.callToAction.main}</span>
-              <ArrowRight
-                size="20px"
-                tw="inline-block transition transform group-hover:translate-x-1"
-              />
-            </Button>
-          </Link>
-          <Link variant="plain" href="/docs/index" tabIndex={-1}>
-            <Button>{strings.callToAction.secondary}</Button>
-          </Link>
+      <section tw="min-h-full flex flex-col items-center space-y-24">
+        <div tw="space-y-8">
+          <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
+            <span tw="text-transparent bg-clip-text" css={gradient}>
+              {strings.heroTitlePoint}
+            </span>{' '}
+            <span>{strings.heroTitle}</span>
+          </h1>
+          <Text tw="text-center" variant="secondary">
+            {strings.heroDescription}
+          </Text>
+          <div tw="flex justify-center items-center space-x-6">
+            <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
+              <Button
+                variant="solid"
+                color="primary"
+                className="group"
+                tw="space-x-1 hover:shadow-2xl"
+              >
+                <span>{strings.callToAction.main}</span>
+                <ArrowRight
+                  size="20px"
+                  tw="inline-block transition transform group-hover:translate-x-1"
+                />
+              </Button>
+            </Link>
+            <Link variant="plain" href="/docs/index" tabIndex={-1}>
+              <Button>{strings.callToAction.secondary}</Button>
+            </Link>
+          </div>
         </div>
+        <Features />
         <Pricing id="pricing" />
       </section>
     </>

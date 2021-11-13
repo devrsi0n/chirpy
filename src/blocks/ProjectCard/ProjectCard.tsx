@@ -141,7 +141,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <div>
           <List tw="px-4">
             {pages.map((page) => (
-              <List.Item key={page.id} css={[listHoverable, tw``]}>
+              <List.Item key={page.id} css={[listHoverable]}>
                 <Link
                   href={page.url}
                   title={page.title || page.url}
