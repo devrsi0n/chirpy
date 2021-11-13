@@ -14,7 +14,7 @@ describe('Header', () => {
       .findByRole('link', { name: 'Dashboard' })
       .should('be.visible')
       .click();
-    cy.url().should('include', '/dashboard');
+    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     clickUserDropDown();
     cy.get('header').findByRole('link', { name: 'Profile' }).click();
@@ -30,16 +30,16 @@ describe('Header', () => {
 
   it('should show navigation links', () => {
     cy.get('header').findByRole('link', { name: 'Dashboard' }).click();
-    cy.url().should('include', '/dashboard');
+    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     cy.get('header').findByRole('link', { name: 'Docs' }).click();
-    cy.url().should('include', '/docs');
+    cy.url({ timeout: 60_000 }).should('include', '/docs');
 
     cy.get('header').findByRole('link', { name: 'Blog' }).click();
-    cy.url().should('include', '/blog');
+    cy.url({ timeout: 60_000 }).should('include', '/blog');
 
     cy.get('header').findByRole('link', { name: 'Logo of Totalk' }).click();
-    cy.url().should('include', '/');
+    cy.url({ timeout: 60_000 }).should('include', '/');
   });
 });
 
