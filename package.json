@@ -36,7 +36,7 @@
     ]
   },
   "dependencies": {
-    "@apollo/client": "^3.4.17",
+    "@apollo/client": "3.4.17",
     "@emotion/css": "11.5.0",
     "@emotion/react": "11.5.0",
     "@emotion/server": "11.4.0",
@@ -59,7 +59,7 @@
     "@visx/responsive": "2.4.1",
     "@visx/scale": "2.2.2",
     "@visx/shape": "2.4.0",
-    "apollo3-cache-persist": "^0.13.0",
+    "apollo3-cache-persist": "0.13.0",
     "bufferutil": "4.0.5",
     "canvas-confetti": "1.4.0",
     "cors": "2.8.5",
