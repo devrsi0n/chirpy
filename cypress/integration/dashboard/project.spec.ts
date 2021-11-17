@@ -10,12 +10,12 @@ describe('Project', () => {
       // Delete duplicated project if exist
       if ($body.find(`[aria-label='Project list']`).length > 0) {
         cy.findByLabelText(/project list/i)
-          .get('li')
+          .first()
           .first()
           .findByRole('button', { name: /show more project options/i })
           .click();
         cy.findByLabelText(/project list/i)
-          .get('li')
+          .first()
           .first()
           .findByRole('menuitem', { name: /delete/i })
           .click();

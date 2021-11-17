@@ -18,16 +18,16 @@ function Home(): JSX.Element {
       </Head>
       <section tw="min-h-full flex flex-col items-center space-y-24">
         <div tw="space-y-8">
-          <h1 tw="font-black text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
+          <h1 tw="font-black sm:(text-center) text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
             <span tw="text-transparent bg-clip-text" css={gradient}>
               {strings.heroTitlePoint}
             </span>{' '}
             <span>{strings.heroTitle}</span>
           </h1>
-          <Text tw="text-center" variant="secondary">
+          <Text tw="sm:text-center" variant="secondary">
             {strings.heroDescription}
           </Text>
-          <div tw="flex justify-center items-center space-x-6">
+          <div tw="flex sm:justify-center items-center space-x-6">
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
               <Button
                 variant="solid"

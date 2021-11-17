@@ -25,14 +25,16 @@ export function List({ className, variant = 'unordered', ...restProps }: IListPr
 List.Item = ListItem;
 
 export type IListItemProps = React.ComponentPropsWithoutRef<'li'> & {
-  markerStyle?: TwStyle;
+  styles?: {
+    marker?: TwStyle;
+  };
   noMarker?: boolean;
 };
 
-export function ListItem({
+function ListItem({
   className,
   children,
-  markerStyle: markerStyles,
+  styles = {},
   noMarker,
   ...liProps
 }: IListItemProps): JSX.Element {
@@ -40,7 +42,7 @@ export function ListItem({
 
   return (
     <li {...liProps} tw="text-gray-1100 flex flex-row items-center space-x-2" className={className}>
-      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-current`, markerStyles]}></span>}
+      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-current`, styles.marker]}></span>}
 
       <ChildrenContainer>{children}</ChildrenContainer>
     </li>

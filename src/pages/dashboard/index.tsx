@@ -6,7 +6,7 @@ import 'twin.macro';
 import { PageTitle } from '$/blocks/PageTitle';
 import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
-import { Dialog, DialogFooter } from '$/components/Dialog';
+import { Dialog } from '$/components/Dialog';
 import { Spinner } from '$/components/Spinner';
 import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
@@ -154,7 +154,7 @@ export default function Dashboard(): JSX.Element {
             tw="w-full"
           />
         </form>
-        <DialogFooter>
+        <Dialog.Footer>
           <Button onClick={handleCloseDialog} tw="w-full sm:w-auto">
             Cancel
           </Button>
@@ -167,7 +167,7 @@ export default function Dashboard(): JSX.Element {
           >
             Submit
           </Button>
-        </DialogFooter>
+        </Dialog.Footer>
       </Dialog>
     </>
   );

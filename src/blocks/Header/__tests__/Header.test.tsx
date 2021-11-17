@@ -2,7 +2,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import '$/__tests__/mocks/nextRouter';
 
-import { Header } from '../';
+import { Header } from '..';
 
 Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1920 });
 
