@@ -6,7 +6,7 @@ import tw, { css } from 'twin.macro';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
-import { List, ListItem } from '$/components/List';
+import { List } from '$/components/List';
 import { Text } from '$/components/Text/Text';
 
 export default function Custom404(): JSX.Element {
@@ -39,9 +39,13 @@ export default function Custom404(): JSX.Element {
         <section tw="space-y-3">
           <Heading as="h5">What could have caused this?</Heading>
           <List variant="unordered" tw="space-y-3">
-            <ListItem markerStyle={listMakerStyle}>Something went wrong in our services.</ListItem>
-            <ListItem markerStyle={listMakerStyle}>The page might be removed.</ListItem>
-            <ListItem markerStyle={listMakerStyle}>You might typed the wrong URL.</ListItem>
+            <List.Item styles={{ marker: listMakerStyle }}>
+              Something went wrong in our services.
+            </List.Item>
+            <List.Item styles={{ marker: listMakerStyle }}>The page might be removed.</List.Item>
+            <List.Item styles={{ marker: listMakerStyle }}>
+              You might typed the wrong URL.
+            </List.Item>
           </List>
         </section>
         <div tw="flex justify-center items-center space-x-6">

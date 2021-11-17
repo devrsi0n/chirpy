@@ -6,7 +6,7 @@ import { Card } from '$/components/Card';
 import { Divider } from '$/components/Divider';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
-import { List, ListItem } from '$/components/List';
+import { List } from '$/components/List';
 import { Text } from '$/components/Text';
 
 export type PricingProps = React.PropsWithChildren<{
@@ -25,7 +25,7 @@ const commonBenefits = [
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} tw="flex flex-col items-center">
-      <Heading as="h2" tw="mb-4 font-bold">
+      <Heading as="h2" tw="mb-4 font-bold w-full text-left sm:text-center">
         Pricing Plans
       </Heading>
       <Text tw="mb-8" variant="secondary" size="lg">
@@ -49,11 +49,10 @@ export function Pricing({ id }: PricingProps): JSX.Element {
               <span tw="font-bold text-gray-1200">10</span> Websites
             </span>,
             ...commonBenefits,
-            'Text formatting with image & video',
+            'Comment with image & video',
             'No branding',
           ]}
           callToAction={{
-            // label: 'Buy Pro',
             label: 'Try It Free',
             buttonProps: {
               color: 'primary',
@@ -110,7 +109,7 @@ function PricingCard({
       <Text bold tw="mb-3" variant="secondary">{`WHAT'S INCLUDED`}</Text>
       <List tw="space-y-2">
         {benefits?.map((benefit, index) => (
-          <ListItem key={index}>{benefit}</ListItem>
+          <List.Item key={index}>{benefit}</List.Item>
         ))}
       </List>
     </Card>

@@ -36,17 +36,17 @@ describe('SideBar', () => {
   });
 
   it('should render the texts of top level', () => {
-    expect(screen.getByText(title)).toBeInTheDocument();
-    for (const { title } of directories) {
-      expect(screen.getByText(title)).toBeInTheDocument();
+    screen.getAllByText(title).forEach((text) => expect(text).toBeInTheDocument());
+    for (const { title: _title } of directories) {
+      screen.getAllByText(_title).forEach((text) => expect(text).toBeInTheDocument());
     }
   });
 
   it('should render the child texts after clicking the children', () => {
-    const parentRoute = screen.getByText(directories[0].title);
+    const parentRoute = screen.getAllByText(directories[0].title)[0];
     userEvent.click(parentRoute);
     for (const child of children) {
-      expect(screen.getByText(child.title)).toBeInTheDocument();
+      screen.getAllByText(child.title).forEach((text) => expect(text).toBeInTheDocument());
     }
   });
 });

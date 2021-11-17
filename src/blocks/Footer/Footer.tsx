@@ -6,12 +6,11 @@ import { useTheme } from 'next-themes';
 import * as React from 'react';
 import tw from 'twin.macro';
 
+import { IconButton } from '$/components/Button/IconButton';
+import { Link } from '$/components/Link/Link';
 import { Text } from '$/components/Text';
 import { useHasMounted } from '$/hooks/useHasMounted';
-
-import { ColorMode } from '../../types/theme.type';
-import { IconButton } from '../Button/IconButton';
-import { Link } from '../Link/Link';
+import { ColorMode } from '$/types/theme.type';
 
 const icons: Record<ColorMode, Icon> = {
   system: Settings,

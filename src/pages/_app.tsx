@@ -10,7 +10,7 @@ import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
 import { ErrorFallback } from '$/blocks/ErrorFallback';
-import { Layout, WidgetLayout } from '$/components/Layout';
+import { Layout, WidgetLayout } from '$/blocks/Layout';
 import { Spinner } from '$/components/Spinner';
 import { ToastProvider } from '$/components/Toast';
 import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';

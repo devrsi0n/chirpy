@@ -9,31 +9,57 @@ import { List } from '$/components/List';
 import { Directory } from '$/server/types/file';
 import { listHoverable } from '$/styles/common';
 
+import { SideMenu } from '../SideMenu';
+
 export type SideBarProps = React.PropsWithChildren<{
   directories: Directory[];
   title?: string;
   className?: string;
 }>;
 
+/**
+ * SideBar is used in mobile and desktop views.
+ */
 export function SideBar({ directories, title, className }: SideBarProps) {
   const hasValidDirectories = directories.length > 0;
-  return (
-    <aside
-      tw="w-full flex-shrink-0 md:(w-64 block pb-16) height[calc(100vh - 4rem)] sticky top-16 flex flex-col items-end px-4 isolate overflow-y-auto"
-      className={className}
-    >
+  const header = (
+    <>
       {title && hasValidDirectories && (
         <Heading as="h4" tw="font-bold px-1 pb-4 text-gray-1100">
           {title}
         </Heading>
       )}
-
-      {hasValidDirectories && (
-        <div tw="w-full overflow-y-auto">
-          <Directories directories={directories} />
-        </div>
-      )}
-    </aside>
+    </>
+  );
+  return (
+    <div>
+      <aside
+        tw="w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-end sticky top-16 px-4 isolate overflow-y-auto md:(w-64 pb-16)"
+        className={className}
+      >
+        {header}
+        {hasValidDirectories && (
+          <div tw="w-full overflow-y-auto">
+            <Directories directories={directories} />
+          </div>
+        )}
+      </aside>
+      <aside tw="w-full sm:(hidden)">
+        <SideMenu
+          direction="br"
+          styles={{ items: tw`w-full overflow-y-auto space-y-2 flex-1 pl-6` }}
+        >
+          <SideMenu.Item>{header}</SideMenu.Item>
+          {directories.map((dir) => (
+            <SideMenu.Item key={getId(dir)}>
+              <div tw="flex flex-col items-stretch w-full">
+                <DirectoryItem directory={dir} />
+              </div>
+            </SideMenu.Item>
+          ))}
+        </SideMenu>
+      </aside>
+    </div>
   );
 }
 
@@ -59,6 +85,10 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
     <ChevronRight
       size={18}
       css={[tw`transform transition -ml-1.5 mr-2`, isOpened && tw`rotate-90`]}
+      onClick={(e) => {
+        e.stopPropagation();
+        setIsOpened((prev) => !prev);
+      }}
     />
   );
   return (
@@ -85,7 +115,6 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
           <span>{dir.title}</span>
         </button>
       )}
-
       {dir.children && isOpened && (
         <div tw="flex flex-row items-stretch">
           <div tw="ml-0.5 w-3.5 border-l" />
