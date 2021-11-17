@@ -7,9 +7,9 @@ import tw from 'twin.macro';
 
 import { BaseButton, Button } from '$/components/Button';
 import { Card } from '$/components/Card';
-import { Dialog, DialogFooter } from '$/components/Dialog';
+import { Dialog } from '$/components/Dialog';
 import { Divider } from '$/components/Divider';
-import { DropDown, DropDownItem } from '$/components/DropDown';
+import { DropDown } from '$/components/DropDown';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
@@ -119,13 +119,13 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
               </span>
             }
           >
-            <DropDownItem
+            <DropDown.Item
               onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
               tw="space-x-1"
             >
               <Trash2 size={14} />
               <span>Delete</span>
-            </DropDownItem>
+            </DropDown.Item>
           </DropDown>
         </div>
       </div>
@@ -187,12 +187,12 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <Text>
           All of your project data will be deleted permanently. This action cannot be undone.
         </Text>
-        <DialogFooter>
+        <Dialog.Footer>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button variant="solid" color="red" onClick={handleClickConfirmDelete} disabled={loading}>
             {loading ? <Loader /> : 'Delete'}
           </Button>
-        </DialogFooter>
+        </Dialog.Footer>
       </Dialog>
     </Card>
   );

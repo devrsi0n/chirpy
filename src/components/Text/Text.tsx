@@ -8,7 +8,7 @@ export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
     variant?: Variant;
     size?: Size;
-    as?: 'p' | 'span' | 'time' | 'u' | 'strong' | 'em';
+    as?: 'p' | 'span' | 'time' | 'u' | 'strong' | 'em' | 'small';
     bold?: boolean;
     italic?: boolean;
     underline?: boolean;

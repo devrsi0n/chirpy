@@ -105,13 +105,11 @@ export function Dialog({
   );
 }
 
-type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>>;
+Dialog.Footer = DialogFooter;
 
-export function DialogFooter({
-  className,
-  children,
-  ...restProps
-}: IDialogFooterProps): JSX.Element {
+export type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>>;
+
+function DialogFooter({ className, children, ...restProps }: IDialogFooterProps): JSX.Element {
   return (
     <div
       {...restProps}

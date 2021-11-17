@@ -1,6 +1,6 @@
 import { Session } from 'next-auth';
 
-import { LayoutProps, WidgetLayoutProps } from '$/components/Layout';
+import { LayoutProps, WidgetLayoutProps } from '$/blocks/Layout';
 
 import { Theme } from './theme.type';
 

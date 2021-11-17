@@ -52,7 +52,7 @@ export function Link(props: LinkProps): JSX.Element {
     ...restProps
   } = props;
   const router = useRouter();
-  const highlight = highlightPattern && highlightPattern.test(router.pathname);
+  const highlight = highlightPattern && highlightPattern.test(router.asPath);
   const [isHovering, setIsHovering] = React.useState(false);
   const [target, setTarget] = React.useState(props.target || '_self');
   React.useEffect(() => {

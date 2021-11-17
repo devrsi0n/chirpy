@@ -12,7 +12,6 @@ export interface IPopoverProps {
   children: React.ReactNode;
   content: React.ReactNode;
   buttonProps?: $TsAny;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   buttonAs?: React.ElementType<{}>;
   /**
    * TODO

@@ -7,6 +7,7 @@ import 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Card } from '$/components/Card';
+import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useToast } from '$/components/Toast';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
@@ -104,7 +105,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         label={
           <span>
             Your username
-            <small tw="block text-gray-400 text-sm">Used to at people</small>
+            <Text as="small" variant="secondary" tw="block text-sm">
+              Used to mention people
+            </Text>
           </span>
         }
         errorMessage={errors.username}

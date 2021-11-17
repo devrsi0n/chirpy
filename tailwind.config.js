@@ -19,8 +19,8 @@ const colors = {
   pink: getColorCSSVariables('pink'),
   bg: `var(--tw-colors-bg)`,
   // static colors
-  'grayd': getRadixColor(radixColors.grayDark, 'gray'),
-  'grayl': getRadixColor(radixColors.gray, 'gray'),
+  grayd: getRadixColor(radixColors.grayDark, 'gray'),
+  grayl: getRadixColor(radixColors.gray, 'gray'),
   white: '#fff',
   black: '#000',
   current: 'currentColor',

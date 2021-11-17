@@ -24,13 +24,13 @@ import { Like, LikeAction, ClickLikeActionHandler } from '../LikeAction';
 import { RichTextEditor, RTEValue } from '../RichTextEditor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 
+export type { ClickLikeActionHandler } from '../LikeAction';
+
 export type Author = {
   id: number;
   name?: string | null;
   avatar?: string | null;
 };
-
-export type { ClickLikeActionHandler };
 
 export type CommentCardProps = {
   commentId: string;
@@ -135,7 +135,7 @@ export function CommentCard({
                       classes={{ root: tw`-mt-2 mr-2` }}
                       content={<MoreVertical size={20} />}
                     >
-                      <DropDownItem tw="space-x-1" disableAutoDismiss>
+                      <DropDown.Item tw="space-x-1" disableAutoDismiss>
                         <Popover
                           placement="topEnd"
                           buttonAs="button"
@@ -159,7 +159,7 @@ export function CommentCard({
                             <span tw="ml-1">Delete</span>
                           </div>
                         </Popover>
-                      </DropDownItem>
+                      </DropDown.Item>
                     </DropDown>
                   )}
                 </>
