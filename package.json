@@ -164,7 +164,7 @@
     "tailwindcss": "2.2.19",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "twin.macro": "2.8.1",
-    "typescript": "4.4.4",
+    "typescript": "4.5.2",
     "vite": "2.6.14",
     "whatwg-fetch": "3.6.2"
   },
