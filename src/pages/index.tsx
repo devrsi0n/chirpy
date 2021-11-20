@@ -1,4 +1,5 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
@@ -8,6 +9,7 @@ import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { CommonPageProps } from '$/types/page.type';
 
 function Home(): JSX.Element {
   return (
@@ -54,6 +56,16 @@ function Home(): JSX.Element {
 }
 
 export default Home;
+
+export const getStaticProps: GetStaticProps<CommonPageProps> = async () => {
+  return {
+    props: {
+      layoutProps: {
+        enableBgGradient: true,
+      },
+    },
+  };
+};
 
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
