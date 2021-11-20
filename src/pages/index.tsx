@@ -8,7 +8,6 @@ import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
-import { gradient } from '$/styles/common';
 
 function Home(): JSX.Element {
   return (
@@ -19,7 +18,7 @@ function Home(): JSX.Element {
       <section tw="min-h-full flex flex-col items-center space-y-24">
         <div tw="space-y-8">
           <h1 tw="font-black sm:(text-center) text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
-            <span tw="text-transparent bg-clip-text" css={gradient}>
+            <span tw="text-transparent bg-clip-text bg-gradient-to-r from-primary-900 to-indigo-900">
               {strings.heroTitlePoint}
             </span>{' '}
             <span>{strings.heroTitle}</span>

@@ -5,7 +5,7 @@ import { border, textInput, textInputError } from '$/styles/common';
 
 export type TextfieldProps = React.ComponentPropsWithoutRef<'textarea'> & {
   label: string;
-  classes?: {
+  styles?: {
     root?: string;
     textarea?: string;
   };
@@ -13,17 +13,17 @@ export type TextfieldProps = React.ComponentPropsWithoutRef<'textarea'> & {
 };
 
 export const TextArea = React.forwardRef(function TextArea(
-  { label, className, errorMessage, classes = {}, ...inputProps }: TextfieldProps,
+  { label, className, errorMessage, styles = {}, ...inputProps }: TextfieldProps,
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (
-    <label className={classes.root} css={[tw`flex flex-col text-gray-1200 mb-4`]}>
+    <label className={styles.root} css={[tw`flex flex-col text-gray-1200 mb-4`]}>
       <p tw="mb-1 leading-6 text-lg">{label}</p>
       <textarea
         {...inputProps}
         name={label}
         ref={ref}
-        className={className || classes.textarea}
+        className={className || styles.textarea}
         css={[
           tw`leading-8 px-2 border rounded`,
           textInput,

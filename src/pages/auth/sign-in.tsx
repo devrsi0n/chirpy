@@ -16,8 +16,8 @@ export const getStaticProps: GetStaticProps<CommonPageProps> = async () => {
         styles: {
           container: tw`mx-2 md:(mx-0) py-0`,
         },
-        noFooter: true,
-        noHeader: true,
+        hideFooter: true,
+        hideHeader: true,
       },
     },
   };

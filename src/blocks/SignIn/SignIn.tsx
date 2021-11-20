@@ -38,7 +38,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
         <div tw="flex-1 flex flex-col justify-center items-center">
           <div tw="py-7 w-full sm:(mx-2 w-64) md:(w-96)">
             <div tw="pb-8">
-              <Logo size="lg" noSpacing />
+              <Logo size="lg" hideSpacing />
             </div>
             <div tw="space-y-2">
               <Heading as="h2" tw="font-black mt-5">

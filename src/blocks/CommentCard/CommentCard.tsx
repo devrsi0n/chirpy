@@ -132,7 +132,7 @@ export function CommentCard({
                 <>
                   {userHasModeratePermission && (
                     <DropDown
-                      classes={{ root: tw`-mt-2 mr-2` }}
+                      styles={{ root: tw`-mt-2 mr-2` }}
                       content={<MoreVertical size={20} />}
                     >
                       <DropDown.Item tw="space-x-1" disableAutoDismiss>
