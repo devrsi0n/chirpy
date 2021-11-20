@@ -2,8 +2,8 @@ import Heart from '@geist-ui/react-icons/heart';
 import HeartFill from '@geist-ui/react-icons/heartFill';
 import * as React from 'react';
 
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { ActionButton, ActionButtonProps } from '$/components/Button';
+import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 
 export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
 
@@ -48,7 +48,7 @@ export function LikeAction({
   return (
     <ActionButton
       {...restProps}
-      color="pink"
+      color="primary"
       activated={didLike}
       onClick={handleClickLike}
       icon={<HeartComponent size={20} />}

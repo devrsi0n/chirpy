@@ -20,25 +20,25 @@ export type DropDownProps = React.PropsWithChildren<{
     shape?: Shape;
     ariaLabel?: string;
   };
-  classes?: {
+  styles?: {
     root?: TwStyle;
     button?: TwStyle;
     items?: TwStyle;
   };
 }>;
 
-export function DropDown({ content, buttonProps, classes, children }: DropDownProps): JSX.Element {
+export function DropDown({ content, buttonProps, styles, children }: DropDownProps): JSX.Element {
   const { shape, ariaLabel } = {
     shape: 'circle',
     ariaLabel: 'Click to open the dropdown',
     ...buttonProps,
   };
   return (
-    <div css={[tw`relative inline-block text-left`, classes?.root]}>
+    <div css={[tw`relative inline-block text-left`, styles?.root]}>
       <Menu>
         {({ open }: { open: boolean }) => (
           <>
-            <div css={classes?.button}>
+            <div css={styles?.button}>
               <Menu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
                 {content}
                 {shape === 'square' && (
@@ -54,7 +54,7 @@ export function DropDown({ content, buttonProps, classes, children }: DropDownPr
                     css={[
                       tw`absolute right-0 mt-1 border divide-y rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
                       cardBg,
-                      classes?.items,
+                      styles?.items,
                     ]}
                   >
                     {children}

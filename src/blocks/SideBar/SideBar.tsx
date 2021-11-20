@@ -34,7 +34,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   return (
     <div>
       <aside
-        tw="w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-end sticky top-16 px-4 isolate overflow-y-auto md:(w-64 pb-16)"
+        tw="w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:(w-64 pb-16)"
         className={className}
       >
         {header}
@@ -67,7 +67,7 @@ function Directories({ directories }: Pick<SideBarProps, 'directories'>): JSX.El
   return (
     <List tw="space-y-2 flex-1">
       {directories.map((dir) => (
-        <List.Item key={getId(dir)} noMarker tw="flex flex-col items-stretch w-full">
+        <List.Item key={getId(dir)} hideMarker tw="flex flex-col items-stretch w-full">
           <DirectoryItem directory={dir} />
         </List.Item>
       ))}
@@ -97,7 +97,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         <Link
           href={dir.route}
           css={[clickableItemStyle, router.asPath === dir.route && activeStyle]}
-          noUnderline
+          hideUnderline
           variant="secondary"
           tw="capitalize"
         >

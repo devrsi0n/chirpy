@@ -28,21 +28,21 @@ export type IListItemProps = React.ComponentPropsWithoutRef<'li'> & {
   styles?: {
     marker?: TwStyle;
   };
-  noMarker?: boolean;
+  hideMarker?: boolean;
 };
 
 function ListItem({
   className,
   children,
   styles = {},
-  noMarker,
+  hideMarker,
   ...liProps
 }: IListItemProps): JSX.Element {
   const ChildrenContainer = typeof children === 'string' ? 'span' : React.Fragment;
 
   return (
     <li {...liProps} tw="text-gray-1100 flex flex-row items-center space-x-2" className={className}>
-      {!noMarker && <span css={[tw`rounded-full w-2 h-2 bg-current`, styles.marker]}></span>}
+      {!hideMarker && <span css={[tw`rounded-full w-2 h-2 bg-current`, styles.marker]}></span>}
 
       <ChildrenContainer>{children}</ChildrenContainer>
     </li>

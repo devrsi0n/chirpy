@@ -15,7 +15,7 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
   const { children, projectId } = props;
   return (
     <TelemetryProvider projectId={projectId}>
-      <LayoutWrapper tw="bg-bg min-h-full py-10 mt-1 sm:mr-1.5">
+      <LayoutWrapper tw="min-h-full py-10 mt-1 sm:mr-1.5">
         <AnimatePresence>
           <m.div
             transition={{ duration: 0.35 }}

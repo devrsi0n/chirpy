@@ -12,7 +12,7 @@ import { SideMenu } from '../SideMenu';
 
 export function Header(): JSX.Element {
   const { isSignIn } = useCurrentUser();
-  const styles = tw`pl-[22px]`;
+  const styles = tw`ml-[22px]`;
   return (
     <header
       css={[
@@ -60,22 +60,22 @@ export function Header(): JSX.Element {
             </div>
             <nav
               css={[
-                tw`w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-500) flex-wrap items-center mb-5 space-x-5`,
+                tw`w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-500) flex-wrap items-center mb-5 space-x-8`,
               ]}
             >
               {isSignIn ? (
-                <Link href="/dashboard" css={[styles]} highlightPattern={/^\/dashboard/}>
+                <Link href="/dashboard" highlightPattern={/^\/dashboard/}>
                   Dashboard
                 </Link>
               ) : (
-                <Link href="/#pricing" css={[styles]} highlightPattern={/^\/#pricing/}>
+                <Link href="/#pricing" highlightPattern={/^\/#pricing/}>
                   Pricing
                 </Link>
               )}
-              <Link href="/docs/index" css={[styles]} highlightPattern={/^\/docs/}>
+              <Link href="/docs/index" highlightPattern={/^\/docs/}>
                 Docs
               </Link>
-              <Link href="/blog" css={[styles]} highlightPattern={/^\/blog/}>
+              <Link href="/blog" highlightPattern={/^\/blog/}>
                 Blog
               </Link>
             </nav>
