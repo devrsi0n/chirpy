@@ -32,7 +32,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
         Start building for free, then add a site to go live. Account plans unblock additional
         features.
       </Text>
-      <div tw="flex flex-col space-y-3 md:(flex-row space-x-6 space-y-0)">
+      <div tw="w-full flex flex-col items-start space-y-4 sm:items-center md:(flex-row items-start space-x-6 space-y-0)">
         <PricingCard
           plan="Hobby"
           price="0"
