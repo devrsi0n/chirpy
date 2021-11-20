@@ -84,17 +84,17 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
             <BaseButton
               tw="rounded-full p-2"
-              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
+              css={grow > 0 ? tw`text-green-1000` : tw`text-yellow-900`}
             >
               <span
-                tw="p-2 rounded-full border transition"
+                tw="p-2 rounded-full"
                 css={
                   grow > 0
-                    ? tw`border-green-300 hover:(border-green-500)`
-                    : tw`border-yellow-500 hover:(border-yellow-700) transform -scale-y-1`
+                    ? tw`bg-green-300 hover:(bg-green-400)`
+                    : tw`bg-yellow-300 hover:(bg-yellow-400) transform -scale-y-1`
                 }
               >
-                <TrendingUp size={24} />
+                <TrendingUp size={20} />
               </span>
             </BaseButton>
           </Link>
@@ -105,13 +105,13 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             <Text
               size="xs"
               tw="font-bold"
-              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-900`}
+              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-1000`}
             >
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
           </div>
           <DropDown
-            classes={{ root: tw`mr-1` }}
+            styles={{ root: tw`mr-1` }}
             buttonProps={{ ariaLabel: 'Show more project options' }}
             content={
               <span tw="p-1">

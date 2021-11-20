@@ -6,7 +6,7 @@ import { Link, LinkProps } from '../Link';
 type Size = 'sm' | 'md' | 'lg';
 export type LogoProps = {
   size?: Size;
-  noSpacing?: boolean;
+  hideSpacing?: boolean;
   className?: string;
   linkProps?: Partial<LinkProps>;
 };
@@ -23,7 +23,7 @@ const sizeSpacing: Record<Size, TwStyle> = {
   lg: tw`px-3 py-2`,
 };
 
-export function Logo({ size = 'md', noSpacing, className, linkProps }: LogoProps): JSX.Element {
+export function Logo({ size = 'md', hideSpacing, className, linkProps }: LogoProps): JSX.Element {
   return (
     <Link
       className={className}
@@ -34,7 +34,7 @@ export function Logo({ size = 'md', noSpacing, className, linkProps }: LogoProps
       {...linkProps}
     >
       <svg
-        css={[sizeWidth[size], !noSpacing && sizeSpacing[size]]}
+        css={[sizeWidth[size], !hideSpacing && sizeSpacing[size]]}
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 98 25"

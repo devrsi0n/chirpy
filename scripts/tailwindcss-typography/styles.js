@@ -122,8 +122,8 @@ module.exports = (theme) => ({
           color: theme('colors.gray.500'),
         },
         code: {
-          backgroundColor: theme('colors.pink.300'),
-          color: theme('colors.pink.1100'),
+          backgroundColor: theme('colors.primary.300'),
+          color: theme('colors.primary.1100'),
           padding: `${em(3, 16)} ${em(4, 16)}`,
           borderRadius: rem(4),
         },

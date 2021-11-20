@@ -1,7 +1,7 @@
 // @ts-nocheck
 const defaultTheme = require('tailwindcss/defaultTheme');
 const radixColors = require('@radix-ui/colors');
-var convert = require('color-convert');
+const convert = require('color-convert');
 
 const colors = {
   // dynamic colors

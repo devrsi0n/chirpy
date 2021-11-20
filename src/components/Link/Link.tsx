@@ -16,7 +16,7 @@ export type LinkProps = React.PropsWithChildren<
        */
       highlightPattern?: RegExp;
       variant?: Variant;
-      noUnderline?: boolean;
+      hideUnderline?: boolean;
     }
 >;
 
@@ -46,7 +46,7 @@ export function Link(props: LinkProps): JSX.Element {
     passHref = true,
     prefetch,
     highlightPattern,
-    noUnderline,
+    hideUnderline,
     variant = 'primary',
     children,
     ...restProps
@@ -83,7 +83,7 @@ export function Link(props: LinkProps): JSX.Element {
           onMouseLeave={() => setIsHovering(false)}
         >
           {children}
-          {!noUnderline && ['primary', 'secondary'].includes(variant) && (
+          {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
             <span tw="hidden sm:(inline-block) absolute bottom-0 left-0  w-full h-0.5 -mb-1 overflow-hidden">
               <m.span
                 tw="absolute inset-0 inline-block bg-current"
