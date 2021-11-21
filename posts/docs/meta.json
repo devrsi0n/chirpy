@@ -1,3 +1,10 @@
 {
-  "directories": ["index.mdx", "get-started.mdx", "features/theme.mdx", "api/webhook.mdx", "self-hosted.mdx"]
+  "directories": [
+    "index.mdx",
+    "get-started.mdx",
+    "features/theme.mdx",
+    "features/markdown.mdx",
+    "api/webhook.mdx",
+    "self-hosted.mdx"
+  ]
 }
