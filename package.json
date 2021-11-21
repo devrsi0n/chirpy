@@ -157,7 +157,7 @@
     "msw": "0.35.0",
     "postcss": "8.3.11",
     "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-preset-env": "7.0.0",
+    "postcss-preset-env": "7.0.1",
     "prettier": "2.4.1",
     "simple-git-hooks": "2.7.0",
     "tailwindcss": "2.2.19",
