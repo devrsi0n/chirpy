@@ -132,7 +132,7 @@ module.exports = (theme) => ({
         },
         pre: {
           color: theme('colors.gray.200'),
-          backgroundColor: theme('colors.gray.800'),
+          backgroundColor: theme('colors.gray.1200'),
           overflowX: 'auto',
         },
         'pre code': {

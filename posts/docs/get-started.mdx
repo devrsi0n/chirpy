@@ -4,21 +4,23 @@ title: 'Get started'
 
 # Get started
 
-👏 Welcome to the totalk documentation! Let's get started integrating the widget into your application.
+Totalk comment widget can be integrated in your website easily.
 
-## Installation
+## Usage on any website
 
-## Upgrade guide
+To embed the comment widget on your website, first add the script tag with your project id to the HTML:
 
-- Step A
-- Step B
-- Step C
-- Step D
+```html
+<script
+  defer
+  src="https://totalk.dev/bootstrap/comment.js"
+  data-totalk-pid="<your-project-id>"
+>
+<script>
+```
 
-## Release notes
+Then, add the data-totalk-comment attribute to any HTML element that should render the widget:
 
-### 2021.05.23
-
-### 2021.04.23
-
-### 2021.03.23
+```html
+<div data-totalk-comment>...</div>
+```
