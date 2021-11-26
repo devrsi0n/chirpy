@@ -65,7 +65,7 @@
     "cors": "2.8.5",
     "csstype": "3.0.10",
     "dayjs": "1.10.7",
-    "framer-motion": "5.3.0",
+    "framer-motion": "5.3.3",
     "geoip-database": "1.0.97",
     "github-slugger": "1.4.0",
     "graphql": "15.7.2",
