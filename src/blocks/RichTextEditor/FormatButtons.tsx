@@ -28,7 +28,7 @@ export function BaseMarkButton({
   return (
     <BaseButton
       css={[
-        tw`p-1.5 rounded text-gray-1100 hover:(bg-gray-300 text-gray-1100) transition-all`,
+        tw`p-1.5 rounded text-gray-1100 hover:(bg-primary-400 text-primary-1100) transition-all`,
         isActive && tw`bg-primary-300 text-primary-1000`,
         className,
       ]}
@@ -72,9 +72,9 @@ export type BlockButtonProps = {
 };
 
 const blockMap: Record<BlockButtonFormat, [Icon, string]> = {
-  'bulletList': [List, 'toggleBulletList'],
+  bulletList: [List, 'toggleBulletList'],
   link: [Link2, 'toggleLink'],
-  'blockquote': [IconBlockQuote, 'toggleBlockquote'],
+  blockquote: [IconBlockQuote, 'toggleBlockquote'],
 };
 
 export function BlockButton({ format, editor }: BlockButtonProps): JSX.Element {
@@ -131,9 +131,11 @@ export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
       onChange={handleChange}
       tw="w-36"
     >
-      {
-        headingList.map((item, index) => <Select.Option value={index} key={item}>{item}</Select.Option>)
-      }
+      {headingList.map((item, index) => (
+        <Select.Option value={index} key={item}>
+          {item}
+        </Select.Option>
+      ))}
     </Select>
   );
 }

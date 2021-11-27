@@ -11,9 +11,9 @@ import { Divider } from '$/components/Divider';
 import { DropDown } from '$/components/DropDown';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
-// import { Toggle } from '$/components/Toggle';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useSignIn } from '$/hooks/useSignIn';
+import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type UserDropDownProps = {
   variant: 'Widget' | 'Nav';
@@ -22,8 +22,6 @@ export type UserDropDownProps = {
 export function UserDropDown(props: UserDropDownProps): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
   const { avatar, name } = data;
-  // const [enableSubscribeComment, setEnableSubscribeComment] = React.useState(true);
-  // const [enableSubscribeSite, setEnableSubscribeSite] = React.useState(false);
   const handleSignIn = useSignIn();
   const isWidget = props.variant === 'Widget';
   const isNav = props.variant === 'Nav';
@@ -40,24 +38,7 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
       {isSignIn && <Divider />}
       {isWidget &&
         (isSignIn ? (
-          <>
-            {/* <DropDown.Item>
-              <Toggle
-                label="Subscribe this comment"
-                enabled={enableSubscribeComment}
-                onChange={setEnableSubscribeComment}
-                reverse
-              />
-            </DropDown.Item>
-            <DropDown.Item>
-              <Toggle
-                label="Subscribe site comment"
-                enabled={enableSubscribeSite}
-                onChange={setEnableSubscribeSite}
-                reverse
-              />
-            </DropDown.Item> */}
-          </>
+          <></>
         ) : (
           <DropDown.Item css={itemStyle} onClick={handleSignIn}>
             <LogIn size={14} />
@@ -86,7 +67,13 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
             </Link>
           </DropDown.Item>
           <Divider />
-          <DropDown.Item css={itemStyle} onClick={() => signOut()}>
+          <DropDown.Item
+            css={itemStyle}
+            onClick={() => {
+              localStorage.removeItem(LOG_IN_SUCCESS_KEY);
+              signOut();
+            }}
+          >
             <LogOut size={14} />
             <span tw="w-max">Log out</span>
           </DropDown.Item>

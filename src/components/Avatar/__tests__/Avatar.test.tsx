@@ -17,6 +17,6 @@ describe('Avatar', () => {
 
   it('should render a placeholder if no src', () => {
     render(<Avatar />);
-    expect(screen.getByLabelText(/an empty image for a user has no avatar/i)).toBeTruthy();
+    expect(screen.getByLabelText(/avatar placeholder/i)).toBeTruthy();
   });
 });

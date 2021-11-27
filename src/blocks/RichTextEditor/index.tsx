@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 import * as React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorFallback } from '../ErrorFallback';
 
+import { ErrorFallback } from '../ErrorFallback';
 import type { IRichTextEditorProps } from './RichTextEditor';
 
 const DynamicRichTextEditor = dynamic(

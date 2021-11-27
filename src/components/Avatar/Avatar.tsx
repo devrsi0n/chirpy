@@ -1,3 +1,4 @@
+import User from '@geist-ui/react-icons/user';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
@@ -10,11 +11,11 @@ export type AvatarProps = React.ComponentProps<'img'> &
     className?: string;
   }>;
 
-const sizeStyles: Record<Size, TwStyle> = {
-  sm: tw`w-4 h-4`,
-  md: tw`w-8 h-8`,
-  lg: tw`w-12 h-12`,
-  xl: tw`w-16 h-16`,
+const sizeStyles: Record<Size, [TwStyle, number]> = {
+  sm: [tw`w-4 h-4`, 20],
+  md: [tw`w-8 h-8`, 24],
+  lg: [tw`w-12 h-12`, 28],
+  xl: [tw`w-16 h-16`, 32],
 };
 
 export function Avatar({
@@ -25,18 +26,9 @@ export function Avatar({
   src,
   ...imgProps
 }: AvatarProps): JSX.Element {
-  const sizeStyle = sizeStyles[size];
+  const [sizeStyle, iconSize] = sizeStyles[size];
   if (!src) {
-    return (
-      <span
-        aria-label="An empty image for a user has no avatar"
-        css={[tw`inline-block rounded-full overflow-hidden`, sizeStyle]}
-      >
-        <svg tw="h-full w-full text-gray-900" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      </span>
-    );
+    return <User aria-label="Avatar placeholder" size={iconSize} tw="m-1" />;
   }
 
   return (
