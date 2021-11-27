@@ -12,10 +12,10 @@ describe('Blog post', () => {
     expect(Array.isArray(paths)).toBe(true);
     const staticProps = await getStaticProps({
       params: {
-        slug: ['totalk-1-0-released'],
+        slug: ['open-source'],
       },
     });
     render(<Post {...(staticProps as any).props} />);
-    expect(screen.getByText('Totalk 1.0 released')).toBeTruthy();
+    expect(screen.getByText('Totalk open source')).toBeTruthy();
   });
 });

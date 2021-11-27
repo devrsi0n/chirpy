@@ -1,38 +1,45 @@
-import { RefObject, useEffect, useRef } from 'react';
+import * as React from 'react';
 
-export function useEventListener<T extends HTMLElement = HTMLDivElement>(
-  eventName: keyof WindowEventMap | string, // string to allow custom event
-  handler: (event: Event) => void,
-  element?: RefObject<T>,
-) {
-  // Create a ref that stores handler
-  const savedHandler = useRef<(event: Event) => void>();
+function useEventListener<WE extends keyof WindowEventMap = 'resize'>(
+  eventName: WE,
+  listener: (event: WindowEventMap[WE]) => void,
+  element?: Window,
+): void;
+function useEventListener<HE extends keyof HTMLElementEventMap = 'click'>(
+  eventName: HE,
+  listener: (event: HTMLElementEventMap[HE]) => void,
+  element: React.RefObject<HTMLElement>,
+): void;
+function useEventListener(
+  eventName: string,
+  listener: (event: Event) => void,
+  element?: HTMLElement | Window,
+): void;
 
-  useEffect(() => {
-    // Define the listening target
-    const targetElement: T | Window = element?.current || window;
-    if (!(targetElement && targetElement.addEventListener)) {
+function useEventListener<HE extends keyof HTMLElementEventMap, WE extends keyof WindowEventMap>(
+  eventName: HE | WE | string,
+  listener: (event: HTMLElementEventMap[HE] | WindowEventMap[WE] | Event) => void,
+  element?: HTMLElement | Window | React.RefObject<HTMLElement>,
+): void {
+  const listenerRef =
+    React.useRef<(event: HTMLElementEventMap[HE] | WindowEventMap[WE] | Event) => void>();
+  listenerRef.current = listener;
+
+  React.useEffect(() => {
+    const targetElement: HTMLElement | Window =
+      (element as React.RefObject<HTMLElement>)?.current || (element as HTMLElement) || window;
+    if (!targetElement.addEventListener) {
       return;
     }
 
-    // Update saved handler if necessary
-    if (savedHandler.current !== handler) {
-      savedHandler.current = handler;
-    }
-
-    // Create event listener that calls handler function stored in ref
-    const eventListener = (event: Event) => {
-      // eslint-disable-next-line no-extra-boolean-cast
-      if (!!savedHandler?.current) {
-        savedHandler.current(event);
-      }
-    };
+    const eventListener = (event: HTMLElementEventMap[HE] | WindowEventMap[WE] | Event) =>
+      listenerRef.current?.call(element, event);
 
     targetElement.addEventListener(eventName, eventListener);
-
-    // Remove event listener on cleanup
     return () => {
       targetElement.removeEventListener(eventName, eventListener);
     };
-  }, [eventName, element, handler]);
+  }, [eventName, element]);
 }
+
+export { useEventListener };

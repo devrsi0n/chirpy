@@ -1,14 +1,19 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+import { ssrMode } from '$/utilities/env';
+
 import { useEventListener } from './useEventListener';
 
 type SetValue<S> = Dispatch<SetStateAction<S>>;
 
-export function useLocalStorage<T>(key: string, initialValue: T): [T | undefined, SetValue<T | undefined>, () => void] {
+export function useLocalStorage<T>(
+  key: string,
+  initialValue: T,
+): [T | undefined, SetValue<T | undefined>, () => void] {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = (): T => {
-    if (typeof window === 'undefined') {
+    if (ssrMode) {
       return initialValue;
     }
 
@@ -22,8 +27,8 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T | undefined
   };
 
   const [storedValue, setStoredValue] = useState<T | undefined>(readValue);
-  const customEventKey = `local-storage.${key}`;
-  const setValue: SetValue<T | undefined> = value => {
+  const customEventKey = `local-storage.${key}` as const;
+  const setValue: SetValue<T | undefined> = (value) => {
     if (typeof window == 'undefined') {
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`,
@@ -57,6 +62,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T | undefined
 
   const removeItem = () => {
     window.localStorage.removeItem(key);
+    // eslint-disable-next-line unicorn/no-useless-undefined
     setStoredValue(undefined);
   };
 
@@ -66,7 +72,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T | undefined
 function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === 'undefined' ? undefined : JSON.parse(value ?? '');
-  } catch (error) {
+  } catch {
     console.log('parsing error on', { value });
     return undefined;
   }

@@ -70,7 +70,7 @@ export const getStaticProps: GetStaticProps<CommonPageProps> = async () => {
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
   heroTitle: 'Disqus alternate',
-  heroDescription: 'Access your audience quickly by integrating a modern comment system.',
+  heroDescription: 'Build a better community by integrating a modern comment system.',
   callToAction: {
     main: 'Try It Free',
     secondary: 'Learn More',

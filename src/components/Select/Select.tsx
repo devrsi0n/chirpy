@@ -1,6 +1,5 @@
 import Check from '@geist-ui/react-icons/check';
 import ChevronDownCircleFill from '@geist-ui/react-icons/chevronDownCircleFill';
-import ChevronUpDown from '@geist-ui/react-icons/chevronUpDown';
 import { Listbox } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
@@ -34,7 +33,7 @@ export function Select<T>({
           <div css={tw`relative`} className={className}>
             <span css={tw`inline-block w-full`}>
               <Listbox.Button
-                css={tw`cursor-default relative w-full pl-3 pr-8 py-2 text-left focus-visible:(outline-none ring-primary-700) transition ease-in-out duration-150 border border-transparent rounded hover:(border-gray-600)`}
+                css={tw`cursor-default relative w-full pl-3 pr-8 py-2 text-left focus-visible:(outline-none ring-primary-700) transition ease-in-out duration-150 border border-transparent rounded hover:(border-primary-700)`}
               >
                 <span>{name || value}</span>
                 <span

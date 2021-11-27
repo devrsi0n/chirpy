@@ -8,15 +8,16 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
-import { useConfetti } from '$/hooks/useConfetti';
+import { useCelebration } from '$/hooks/useCelebration';
+import { ssrMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';
 
 // export type WelcomeProps = React.PropsWithChildren<{}>;
 
 export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
-  useConfetti();
+  useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
-  const [isFullFilled, setIsFullFilled] = React.useState(true);
+  const [isFullFilled, setIsFullFilled] = React.useState(ssrMode ? true : isProfileFullFilled());
   React.useEffect(() => {
     if (loading) return;
     if (!hasValidUserProfile(data)) {
@@ -33,12 +34,12 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
       {isFullFilled ? (
         <FullFilled />
       ) : (
-        <section tw="flex flex-row items-center space-x-8">
+        <section tw="flex flex-col items-center space-y-8 md:(flex-row items-center space-y-0 space-x-8)">
           <div tw="space-y-3">
             <Heading as="h2" tw="tracking-tight">
               Welcome on board
             </Heading>
-            <Text>Just fill this form to get started</Text>
+            <Text variant="secondary">Just fill this form to get started</Text>
           </div>
           <ConfirmUserFields />
         </section>
@@ -52,14 +53,30 @@ Welcome.auth = true;
 function FullFilled(): JSX.Element {
   return (
     <section tw="flex flex-col items-center justify-center space-y-12">
-      <Heading as="h2" tw="tracking-tight">
-        Welcome on board
-      </Heading>
-      <Button variant="solid" color="primary">
-        <Link href="/dashboard" variant="plain">
-          Dashboard
-        </Link>
-      </Button>
+      <div tw="text-center space-y-2">
+        <Heading as="h2" tw="tracking-tight">
+          Welcome on board 🎉
+        </Heading>
+        <Text variant="secondary">
+          Feel free to create a project, integrate a widget in your site, or just explore!
+        </Text>
+      </div>
+      <div tw="space-x-4">
+        <Button variant="solid" color="primary">
+          <Link href="/dashboard" variant="plain">
+            Dashboard
+          </Link>
+        </Button>
+        <Button color="gray">
+          <Link href="/docs/index" variant="plain">
+            Docs
+          </Link>
+        </Button>
+      </div>
     </section>
   );
+}
+
+function isProfileFullFilled(): boolean {
+  return new URL(location.href).searchParams.get('invalidProfile') !== 'true';
 }
