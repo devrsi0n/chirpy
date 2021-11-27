@@ -30,7 +30,7 @@ export async function handleGetPage(
   });
   const page = pageResult.data.pages[0];
   const domain = new URL(url as string).hostname;
-  if (domain !== page.project.domain && !isLocalDomain(domain)) {
+  if (domain !== page?.project.domain && !isLocalDomain(domain)) {
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
       error: `Totalk: Wrong domain(${domain}), expected domain(${page.project.domain}), please contact your site administrator`,
@@ -46,11 +46,10 @@ export async function handleGetPage(
       },
     });
     if (!createdPage.data?.insertOnePage) {
-      return res.status(400).json({
+      return res.status(500).json({
         error: 'Create page failed',
       });
     }
-
     return res.json(createdPage.data?.insertOnePage);
   } else if (page.title !== title) {
     const updatePage = await adminApollo.mutate({

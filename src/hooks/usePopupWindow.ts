@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
-import { useStorageListener } from './useStorageListener';
+import { useEventListener } from './useEventListener';
 
 export type usePopupWindowOptions = {
   url: string;
@@ -20,7 +20,7 @@ export function usePopupWindow({
     popupWindow.current = popupCenterWindow(url, '_blank', width, height);
   };
 
-  useStorageListener((event) => {
+  useEventListener('storage', (event) => {
     if (event.key === LOG_IN_SUCCESS_KEY) {
       popupWindow.current?.close();
       popupWindow.current = null;

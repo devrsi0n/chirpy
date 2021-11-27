@@ -4,7 +4,7 @@ import Send from '@geist-ui/react-icons/send';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
-import { useEditor, EditorContent, Extensions } from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';

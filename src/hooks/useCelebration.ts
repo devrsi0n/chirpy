@@ -1,8 +1,12 @@
 import confetti from 'canvas-confetti';
 import * as React from 'react';
 
-export function useConfetti() {
+export function useCelebration(queryParameter: string) {
   React.useEffect(() => {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get(queryParameter) !== 'true') {
+      return;
+    }
     fire(0.25, {
       spread: 26,
       startVelocity: 55,
@@ -25,7 +29,7 @@ export function useConfetti() {
       spread: 120,
       startVelocity: 45,
     });
-  }, []);
+  }, [queryParameter]);
 }
 
 const count = 200;
