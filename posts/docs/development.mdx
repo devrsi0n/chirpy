@@ -16,7 +16,7 @@ Chirpy is built upon Next.js and [Hasura](https://github.com/hasura/graphql-engi
 
 Hasura is used as the data server. To start the data server, run the following command:
 
-```sh
+```shell
 cd <project-root>/hasura
 docker-compose up -d
 ```
@@ -25,7 +25,7 @@ docker-compose up -d
 
 Install [Hasura CLI](https://hasura.io/docs/latest/graphql/core/hasura-cli/install-hasura-cli.html) and run the following command:
 
-```sh
+```shell
 cd <project-root>/hasura
 # Setup the postgres database schema
 hasura migrate apply --up all
@@ -39,7 +39,7 @@ hasura seed apply
 
 Startup a Next.js app with the following command:
 
-```sh
+```shell
 npm install
 npm run dev
 ```
