@@ -1,0 +1,86 @@
+table:
+  name: Project
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteProjects
+    delete_by_pk: deleteProjectByPk
+    insert: insertProjects
+    insert_one: insertOneProject
+    select: projects
+    select_aggregate: projectAggregate
+    select_by_pk: projectByPk
+    update: updateProjects
+    update_by_pk: updateProjectByPk
+object_relationships:
+- name: team
+  using:
+    foreign_key_constraint_on: teamId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
+array_relationships:
+- name: anonymousSession
+  using:
+    foreign_key_constraint_on:
+      column: projectId
+      table:
+        name: AnonymousSession
+        schema: public
+- name: pages
+  using:
+    foreign_key_constraint_on:
+      column: projectId
+      table:
+        name: Page
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - domain
+    - name
+    - teamId
+    - theme
+    - userId
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - id
+    - created_at
+    - updated_at
+    - name
+    - teamId
+    - theme
+    - domain
+    - userId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - theme
+    filter:
+      _and:
+      - _or:
+        - userId:
+            _eq: X-Hasura-User-Id
+      - id:
+          _in: X-Hasura-Editable-Project-Ids
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
+  role: user

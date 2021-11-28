@@ -6,4 +6,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
-module.exports = withPlugins([[withBundleAnalyzer()]]);
+module.exports = withPlugins([
+  [
+    withBundleAnalyzer({
+      swcMinify: true,
+    }),
+  ],
+]);
