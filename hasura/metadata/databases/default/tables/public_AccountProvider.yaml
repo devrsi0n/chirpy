@@ -1,0 +1,16 @@
+table:
+  name: AccountProvider
+  schema: public
+is_enum: true
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    delete: deleteAccountProviders
+    delete_by_pk: deleteAccountProviderByPk
+    insert: insertAccountProviders
+    insert_one: insertOneAccountProvider
+    select: accountProviders
+    select_aggregate: accountProviderAggregate
+    select_by_pk: accountProviderByPk
+    update: updateAccountProviders
+    update_by_pk: updateAccountProviderByPk

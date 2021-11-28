@@ -1,0 +1,16 @@
+table:
+  name: UserType
+  schema: public
+is_enum: true
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    delete: deleteUserTypes
+    delete_by_pk: deleteUserTypeByPk
+    insert: insertUserTypes
+    insert_one: insertOneUserType
+    select: userTypes
+    select_aggregate: userTypeAggregate
+    select_by_pk: userTypeByPk
+    update: updateUserTypes
+    update_by_pk: updateUserTypeByPk

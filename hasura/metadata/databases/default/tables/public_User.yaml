@@ -1,0 +1,84 @@
+table:
+  name: User
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteUsers
+    delete_by_pk: deleteUserByPk
+    insert: insertUsers
+    insert_one: insertOneUser
+    select: users
+    select_aggregate: userAggregate
+    select_by_pk: userByPk
+    update: updateUsers
+    update_by_pk: updateUserByPk
+array_relationships:
+- name: accounts
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Account
+        schema: public
+- name: comments
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Comment
+        schema: public
+- name: likes
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Like
+        schema: public
+- name: members
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Member
+        schema: public
+- name: projects
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Project
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - avatar
+    - bio
+    - created_at
+    - displayName
+    - email
+    - familyName
+    - givenName
+    - id
+    - middleName
+    - twitterUserName
+    - type
+    - updated_at
+    - username
+    - website
+    filter: {}
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - bio
+    - displayName
+    - twitterUserName
+    - website
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: user

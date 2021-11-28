@@ -1,0 +1,45 @@
+table:
+  name: AnonymousSession
+  schema: public
+configuration:
+  custom_column_names: {}
+  custom_name: AnonymousSession
+  custom_root_fields:
+    delete: deleteAnonymousSessions
+    delete_by_pk: deleteAnonymousSessionByPk
+    insert: insertAnonymousSessions
+    insert_one: insertOneAnonymousSession
+    select: anonymousSession
+    select_aggregate: anonymousSessionAggregate
+    select_by_pk: anonymousSessionByPk
+    update: updateAnonymousSessions
+    update_by_pk: updateAnonymousSessionByPk
+object_relationships:
+- name: project
+  using:
+    foreign_key_constraint_on: projectId
+array_relationships:
+- name: events
+  using:
+    foreign_key_constraint_on:
+      column: sessionId
+      table:
+        name: Event
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - browser
+    - country
+    - created_at
+    - device
+    - hostname
+    - id
+    - language
+    - os
+    - projectId
+    - screen
+    - updated_at
+    filter: {}
+  role: user

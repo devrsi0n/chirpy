@@ -1,0 +1,35 @@
+table:
+  name: Like
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteLikes
+    delete_by_pk: deleteLikeByPk
+    insert: insertLikes
+    insert_one: insertOneLike
+    select: likes
+    select_aggregate: likeAggregate
+    select_by_pk: likeByPk
+    update: updateLikes
+    update_by_pk: updateLikeByPk
+object_relationships:
+- name: comment
+  using:
+    foreign_key_constraint_on: commentId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
+select_permissions:
+- permission:
+    columns:
+    - id
+    - created_at
+    - updated_at
+    - commentId
+    - compoundId
+    - userId
+    filter: {}
+  role: user

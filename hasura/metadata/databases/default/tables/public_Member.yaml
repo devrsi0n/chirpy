@@ -1,0 +1,37 @@
+table:
+  name: Member
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteMembers
+    delete_by_pk: deleteMemberByPk
+    insert: insertMembers
+    insert_one: insertOneMember
+    select: members
+    select_aggregate: memberAggregate
+    select_by_pk: memberByPk
+    update: updateMembers
+    update_by_pk: updateMemberByPk
+object_relationships:
+- name: team
+  using:
+    foreign_key_constraint_on: teamId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
+select_permissions:
+- permission:
+    columns:
+    - id
+    - created_at
+    - updated_at
+    - teamId
+    - role
+    - userId
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
+  role: user
