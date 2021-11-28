@@ -1,0 +1,33 @@
+table:
+  name: Event
+  schema: public
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    delete: deleteEvents
+    delete_by_pk: deleteEventByPk
+    insert: insertEvents
+    insert_one: insertOneEvent
+    select: events
+    select_aggregate: eventAggregate
+    select_by_pk: eventByPk
+    update: updateEvents
+    update_by_pk: updateEventByPk
+object_relationships:
+- name: anonymousSession
+  using:
+    foreign_key_constraint_on: sessionId
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - created_at
+    - updated_at
+    - type
+    - url
+    - sessionId
+    - referrer
+    - params
+    filter: {}
+  role: user

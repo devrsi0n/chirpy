@@ -1,0 +1,82 @@
+table:
+  name: Comment
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteComments
+    delete_by_pk: deleteCommentByPk
+    insert: insertComments
+    insert_one: insertOneComment
+    select: comments
+    select_aggregate: commentAggregate
+    select_by_pk: commentByPk
+    update: updateComments
+    update_by_pk: updateCommentByPk
+object_relationships:
+- name: page
+  using:
+    foreign_key_constraint_on: pageId
+- name: parent
+  using:
+    foreign_key_constraint_on: parentId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
+array_relationships:
+- name: likes
+  using:
+    foreign_key_constraint_on:
+      column: commentId
+      table:
+        name: Like
+        schema: public
+- name: replies
+  using:
+    foreign_key_constraint_on:
+      column: parentId
+      table:
+        name: Comment
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - content
+    - depth
+    - pageId
+    - parentId
+    - userId
+    set:
+      userId: x-hasura-User-Id
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - content
+    - created_at
+    - deletedAt
+    - depth
+    - id
+    - pageId
+    - parentId
+    - userId
+    filter: {}
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - deletedAt
+    filter:
+      page:
+        projectId:
+          _in: X-Hasura-Editable-Project-Ids
+    set:
+      userId: x-hasura-User-Id
+  role: user

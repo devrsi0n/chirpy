@@ -8,12 +8,14 @@ import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { authProviders } from '$/server/services/auth';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev, isENVProd } from '$/server/utilities/env';
 import { getPGArray } from '$/server/utilities/get-pgarray';
 
-pg.defaults.ssl = {
-  rejectUnauthorized: false,
-};
+if (isENVProd) {
+  pg.defaults.ssl = {
+    rejectUnauthorized: false,
+  };
+}
 
 export default NextAuth({
   providers: authProviders,

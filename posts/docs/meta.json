@@ -5,6 +5,7 @@
     "features/theme.mdx",
     "features/markdown.mdx",
     "api/webhook.mdx",
+    "development.mdx",
     "self-hosted.mdx"
   ]
 }

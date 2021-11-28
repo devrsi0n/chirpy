@@ -1,0 +1,24 @@
+table:
+  name: Account
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_root_fields:
+    delete: deleteAccounts
+    delete_by_pk: deleteAccountByPk
+    insert: insertAccounts
+    insert_one: insertOneAccount
+    select: accounts
+    select_aggregate: accountAggregate
+    select_by_pk: accountByPk
+    update: updateAccounts
+    update_by_pk: updateAccountByPk
+object_relationships:
+- name: accountProvider
+  using:
+    foreign_key_constraint_on: provider
+- name: user
+  using:
+    foreign_key_constraint_on: userId

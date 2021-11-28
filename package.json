@@ -1,5 +1,5 @@
 {
-  "name": "totalk",
+  "name": "chirpy",
   "private": true,
   "scripts": {
     "dev": "next dev",

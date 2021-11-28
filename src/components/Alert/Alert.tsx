@@ -40,5 +40,5 @@ export function Alert(props: AlertProps): JSX.Element {
 }
 
 const typeStyles: Record<AlertType, TwStyle> = {
-  warn: tw`bg-yellow-300 text-yellow-900`,
+  warn: tw`bg-yellow-300 text-yellow-1100`,
 };

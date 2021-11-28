@@ -1,0 +1,40 @@
+table:
+  name: accounts
+  schema: public
+configuration:
+  custom_column_names:
+    created_at: createdAt
+    updated_at: updatedAt
+  custom_name: Account
+  custom_root_fields:
+    delete: deleteAccounts
+    delete_by_pk: deleteAccountByPk
+    insert: insertAccounts
+    insert_one: insertOneAccount
+    select: accounts
+    select_aggregate: accountAggregate
+    select_by_pk: accountByPk
+    update: updateAccounts
+    update_by_pk: updateAccountByPk
+object_relationships:
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+select_permissions:
+- permission:
+    columns:
+    - id
+    - compound_id
+    - user_id
+    - provider_type
+    - provider_id
+    - provider_account_id
+    - refresh_token
+    - access_token
+    - access_token_expires
+    - created_at
+    - updated_at
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: user
