@@ -97,7 +97,7 @@
     "type-fest": "2.5.3",
     "ua-parser-js": "1.0.2",
     "uuid": "8.3.2",
-    "ws": "8.2.3"
+    "ws": "8.3.0"
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
@@ -133,7 +133,7 @@
     "@types/tailwindcss": "2.2.4",
     "@types/ua-parser-js": "0.7.36",
     "@types/uuid": "8.3.1",
-    "@types/ws": "8.2.0",
+    "@types/ws": "8.2.1",
     "babel-jest": "27.3.1",
     "babel-loader": "8.2.3",
     "babel-plugin-dynamic-import-node": "2.3.3",
