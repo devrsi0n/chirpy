@@ -11,7 +11,7 @@ export const defaultRequest = {
   body: {
     session: {
       projectId,
-      hostname: 'totalk.dev',
+      hostname: 'localhost',
       screen: '2560x1440',
       language: 'en',
     },

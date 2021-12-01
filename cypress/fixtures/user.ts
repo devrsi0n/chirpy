@@ -1,7 +1,7 @@
 export const testUser = {
   id: 8,
   name: 'CypressTest',
-  email: 'cypress.test@totalk.dev',
+  email: 'cypress.test@localhost',
   image: 'https://www.cypress.io/icons/icon-72x72.png',
 };
 
