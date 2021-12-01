@@ -1,20 +1,17 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
-import { TelemetryProvider, TelemetryProviderProps } from '../../contexts/TelemetryProvider';
 import { LayoutWrapper } from './SharedComponents';
 
-export type WidgetLayoutProps = React.PropsWithChildren<
-  Pick<TelemetryProviderProps, 'projectId'> & {
-    className?: string;
-  }
->;
+export type WidgetLayoutProps = React.PropsWithChildren<{
+  className?: string;
+  projectId: string;
+}>;
 
 export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
-  const { children, projectId } = props;
+  const { children } = props;
   return (
-    <TelemetryProvider projectId={projectId}>
+    <>
       <LayoutWrapper tw="min-h-full py-10 mt-1 sm:mr-1.5">
         <AnimatePresence>
           <m.div
@@ -27,6 +24,6 @@ export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
           </m.div>
         </AnimatePresence>
       </LayoutWrapper>
-    </TelemetryProvider>
+    </>
   );
 }
