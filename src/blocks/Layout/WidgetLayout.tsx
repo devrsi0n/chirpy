@@ -1,7 +1,7 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-import { LayoutWrapper } from './SharedComponents';
+import { LayoutWrapper } from './LayoutWrapper';
 
 export type WidgetLayoutProps = React.PropsWithChildren<{
   className?: string;

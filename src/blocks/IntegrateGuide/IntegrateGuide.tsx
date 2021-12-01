@@ -6,12 +6,11 @@ import { Code } from '$/components/Code';
 import { Dialog } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
+import { APP_DOMAIN, APP_NAME, APP_NAME_LOWERCASE } from '$/lib/constants';
 
 export type IntegrateGuideProps = {
   pid: string;
 };
-
-const appNameLowerCase = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
 
 export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
   const [showDialog, setShowDialog] = React.useState(false);
@@ -31,7 +30,7 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
         title={
           <div>
             <Heading as="h2" tw="mb-3 leading-none">
-              Get Started with Totalk Comment
+              Get Started with {APP_NAME} Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">
               Integrate the widget into your website to start engaging with your customer.
@@ -51,13 +50,13 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
               project id to the HTML:
             </Text>
             <Code>
-              {`<script defer src="https://totalk.dev/bootstrap/comment.js" data-${appNameLowerCase}-pid="${pid}"><script>`}
+              {`<script defer src="${APP_DOMAIN}/bootstrap/comment.js" data-${APP_NAME_LOWERCASE}-pid="${pid}"><script>`}
             </Code>
             <Text variant="secondary">
-              Then, add the data-{appNameLowerCase}-comment attribute to any HTML element that
+              Then, add the data-{APP_NAME_LOWERCASE}-comment attribute to any HTML element that
               should render the widget:
             </Text>
-            <Code>{`<div data-${appNameLowerCase}-comment>...</div>`}</Code>
+            <Code>{`<div data-${APP_NAME_LOWERCASE}-comment>...</div>`}</Code>
           </div>
         </div>
       </Dialog>

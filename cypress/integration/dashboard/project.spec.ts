@@ -3,7 +3,7 @@ describe('Project', () => {
     cy.visit('/dashboard');
     cy.wait('@session');
 
-    cy.intercept('https://hasura.totalk.dev/v1/graphql').as('graphql');
+    cy.intercept('/v1/graphql').as('graphql');
     cy.wait('@graphql');
     cy.wait(1000);
     cy.get('body').then(($body) => {
@@ -44,9 +44,9 @@ describe('Project', () => {
     cy.findByRole('button', {
       name: /integrate guide/i,
     }).click();
-    cy.findByRole('dialog', { name: /get started with totalk comment/i }).should('be.visible');
+    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should('be.visible');
     cy.findByRole('button', { name: /dismiss/i }).click();
-    cy.findByRole('dialog', { name: /get started with totalk comment/i }).should('not.exist');
+    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should('not.exist');
   });
 
   it('should active theme', () => {

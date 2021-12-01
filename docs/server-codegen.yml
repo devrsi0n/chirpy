@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - https://hasura.totalk.dev/v1/graphql:
+  - https://hasura.chirpy.dev/v1/graphql:
       headers:
         X-Hasura-Admin-Secret: 'kseNjSD7Z7RP4XKg'
 documents: 'src/server/graphql/*.graphql'

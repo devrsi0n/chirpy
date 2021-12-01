@@ -21,7 +21,7 @@ describe('IntegrateGuide', () => {
     });
     userEvent.click(integrateButton);
     await waitFor(() =>
-      expect(screen.getByText('Get Started with Totalk Comment')).toBeInTheDocument(),
+      expect(screen.getByText(/Get Started with \S+ Comment/)).toBeInTheDocument(),
     );
   });
 });

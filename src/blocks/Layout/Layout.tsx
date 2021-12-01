@@ -4,7 +4,7 @@ import tw, { css, theme, TwStyle } from 'twin.macro';
 
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
-import { LayoutWrapper } from './SharedComponents';
+import { LayoutWrapper } from './LayoutWrapper';
 
 export type LayoutProps = React.PropsWithChildren<{
   hideHeader?: boolean;

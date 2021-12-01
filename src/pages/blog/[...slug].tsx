@@ -46,7 +46,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div data-totalk-comment="true" tw="my-16" />
+      <div {...{ [`data-${APP_NAME_LOWERCASE}-comment`]: 'true' }} tw="my-16" />
       <Script {...scriptProps} />
     </>
   );

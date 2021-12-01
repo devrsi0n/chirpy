@@ -10,6 +10,7 @@ import { IconButton } from '$/components/Button/IconButton';
 import { Link } from '$/components/Link/Link';
 import { Text } from '$/components/Text';
 import { useHasMounted } from '$/hooks/useHasMounted';
+import { APP_NAME } from '$/lib/constants';
 import { ColorMode } from '$/types/theme.type';
 
 const icons: Record<ColorMode, Icon> = {
@@ -67,7 +68,7 @@ export function Footer(props: FooterProps): JSX.Element {
         css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-5 flex-row)`}
       >
         <Text variant="secondary" size="sm">
-          &copy; 2021 Totalk Labs. All rights reserved.
+          &copy; 2021 {APP_NAME} Labs. All rights reserved.
         </Text>
         {hasMounted && ThemeIcon && theme && (
           <IconButton onClick={handleClick} aria-label={`${theme} theme`}>

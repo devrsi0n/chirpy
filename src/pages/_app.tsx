@@ -17,7 +17,7 @@ import { ToastProvider } from '$/components/Toast';
 import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
 import { SiteThemeProvider, WidgetThemeProvider } from '$/contexts/ThemeProvider';
-import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+import { APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
 import { PlausibleEvent } from '$/types/plausible-events.type';
@@ -42,7 +42,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
           <GlobalStyles />
           <Global styles={appGlobalStyles} />
 
-          <NextThemesProvider attribute="class" storageKey="TotalkTheme">
+          <NextThemesProvider attribute="class" storageKey={`${APP_NAME_LOWERCASE}.theme`}>
             <SiteThemeProvider>
               <LazyMotion features={loadFeatures} strict>
                 <SessionGuard>
@@ -85,7 +85,7 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWidget]);
+  }, [isWidget, projectId]);
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
       <LayoutWrapper projectId={projectId!} {...layoutProps}>

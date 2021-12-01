@@ -38,7 +38,9 @@ describe('Header', () => {
     cy.get('header').findByRole('link', { name: 'Blog' }).click();
     cy.url({ timeout: 60_000 }).should('include', '/blog');
 
-    cy.get('header').findByRole('link', { name: 'Logo of Totalk' }).click();
+    cy.get('header')
+      .findByRole('link', { name: /^logo of \S+/ })
+      .click();
     cy.url({ timeout: 60_000 }).should('include', '/');
   });
 });

@@ -33,7 +33,7 @@ export async function handleGetPage(
   if (domain !== page?.project.domain && !isLocalDomain(domain)) {
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
-      error: `Totalk: Wrong domain(${domain}), expected domain(${page.project.domain}), please contact your site administrator`,
+      error: `Wrong domain(${domain}), expected domain(${page.project.domain}), please contact your site administrator`,
     });
   }
   if (!page?.id) {
