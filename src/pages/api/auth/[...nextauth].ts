@@ -57,7 +57,7 @@ export default NextAuth({
           userId,
         },
       });
-      const editableProjectIds = data.projects.map(({ id }) => id);
+      const editableProjectIds = data.projects.map(({ id }: { id: string }) => id);
       session.hasuraToken = createAuthToken(
         {
           userId: jwtPayload.sub!,
