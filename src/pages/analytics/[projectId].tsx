@@ -66,17 +66,17 @@ export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> =
   }
   const { projectId } = params;
   const client = getAdminApollo();
-  const project = (
-    await client.query({
-      query: ProjectAnalyticsDocument,
-      variables: {
-        projectId,
-        today: dayjs().toISOString(),
-        yesterday: getStartOfSubtractDate(1),
-        twoDaysAgo: getStartOfSubtractDate(2),
-      },
-    })
-  ).data.projectByPk;
+  const {
+    data: { projectByPk: project },
+  } = await client.query<ProjectAnalyticsQuery>({
+    query: ProjectAnalyticsDocument,
+    variables: {
+      projectId,
+      today: dayjs().toISOString(),
+      yesterday: getStartOfSubtractDate(1),
+      twoDaysAgo: getStartOfSubtractDate(2),
+    },
+  });
   if (!project) {
     return { notFound: true };
   }
