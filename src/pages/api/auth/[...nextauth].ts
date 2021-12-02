@@ -4,7 +4,7 @@ import pg from 'pg';
 
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { UserProjectsDocument } from '$/server/graphql/generated/project';
+import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
 import { authProviders } from '$/server/services/auth';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
@@ -50,7 +50,7 @@ export default NextAuth({
     async session(session: Session, jwtPayload: JWT) {
       const adminClient = getAdminApollo();
       const userId = +jwtPayload.sub!;
-      const { data } = await adminClient.query({
+      const { data } = await adminClient.query<UserProjectsQuery>({
         fetchPolicy: 'cache-first',
         query: UserProjectsDocument,
         variables: {

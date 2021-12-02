@@ -23,28 +23,3 @@ query userProjects($userId: Int!) {
     id
   }
 }
-
-query projectAnalytics(
-  $projectId: uuid!
-  $today: timestamptz!
-  $yesterday: timestamptz!
-  $twoDaysAgo: timestamptz!
-) {
-  projectByPk(id: $projectId) {
-    id
-    name
-    domain
-    sessionsYesterday: anonymousSession {
-      events(where: { type: { _eq: "pageview" }, created_at: { _gte: $yesterday, _lt: $today } }) {
-        created_at
-      }
-    }
-    sessionsTwoDaysAgo: anonymousSession {
-      events(
-        where: { type: { _eq: "pageview" }, created_at: { _gte: $twoDaysAgo, _lt: $yesterday } }
-      ) {
-        created_at
-      }
-    }
-  }
-}

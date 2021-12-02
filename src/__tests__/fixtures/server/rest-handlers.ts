@@ -10,14 +10,6 @@ afterEach(() => {
 });
 
 export const restHandlers = [
-  rest.post('*/api/event', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        cache: MOCK_CACHE,
-      }),
-    );
-  }),
   rest.get('*/api/page', (req, res, ctx) => {
     return res(
       ctx.status(200),
