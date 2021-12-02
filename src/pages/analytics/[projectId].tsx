@@ -5,7 +5,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { PageTitle } from '$/blocks/PageTitle';
-import { PageViewChart } from '$/blocks/PageViewChart';
+// import { PageViewChart } from '$/blocks/PageViewChart';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
@@ -14,7 +14,7 @@ import {
   ProjectAnalyticsDocument,
   ProjectAnalyticsQuery,
 } from '$/server/graphql/generated/project';
-import { dayjs, getStartOfSubtractDate } from '$/utilities/date';
+import { dayjs } from '$/utilities/date';
 
 export type AnalyticsProps = {
   project: ProjectAnalyticsQuery['projectByPk'];
@@ -46,7 +46,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
             <Text variant="secondary">{dayjs().format('MM-DD')}</Text>
           </div>
         </div>
-        <PageViewChart project={props.project} />
+        {/* <PageViewChart project={props.project} /> */}
       </section>
     </>
   );
@@ -72,9 +72,6 @@ export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> =
     query: ProjectAnalyticsDocument,
     variables: {
       projectId,
-      today: dayjs().toISOString(),
-      yesterday: getStartOfSubtractDate(1),
-      twoDaysAgo: getStartOfSubtractDate(2),
     },
   });
   if (!project) {
