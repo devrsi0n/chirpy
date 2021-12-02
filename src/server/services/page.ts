@@ -3,7 +3,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   InsertOnePageDocument,
+  InsertOnePageMutation,
   PageByUrlDocument,
+  PageByUrlQuery,
   UpdatePagesDocument,
 } from '$/server/graphql/generated/page';
 
@@ -21,7 +23,7 @@ export async function handleGetPage(
     });
   }
   const adminApollo = getAdminApollo();
-  const pageResult = await adminApollo.query({
+  const pageResult = await adminApollo.query<PageByUrlQuery>({
     query: PageByUrlDocument,
     variables: {
       url,
@@ -37,7 +39,7 @@ export async function handleGetPage(
     });
   }
   if (!page?.id) {
-    const createdPage = await adminApollo.mutate({
+    const createdPage = await adminApollo.mutate<InsertOnePageMutation>({
       mutation: InsertOnePageDocument,
       variables: {
         projectId,

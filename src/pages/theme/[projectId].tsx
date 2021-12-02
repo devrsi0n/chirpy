@@ -20,6 +20,7 @@ import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
   AllProjectsDocument,
+  AllProjectsQuery,
 } from '$/server/graphql/generated/project';
 import { Theme as ThemeType } from '$/types/theme.type';
 
@@ -172,11 +173,11 @@ type PathParams = {
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const adminApollo = getAdminApollo();
-  const { projects } = (
-    await adminApollo.query({
-      query: AllProjectsDocument,
-    })
-  ).data;
+  const {
+    data: { projects },
+  } = await adminApollo.query<AllProjectsQuery>({
+    query: AllProjectsDocument,
+  });
 
   const paths: { params: PathParams }[] = projects.map(({ id }) => {
     return {
@@ -203,7 +204,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   const { projectId } = params;
   const adminApollo = getAdminApollo();
-  const pageResult = await adminApollo.query({
+  const pageResult = await adminApollo.query<ThemeProjectByPkQuery>({
     query: ThemeProjectByPkDocument,
     variables: {
       id: projectId,

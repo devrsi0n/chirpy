@@ -24,7 +24,7 @@ import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { PagesDocument } from '$/server/graphql/generated/page';
+import { PagesDocument, PagesQuery } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
@@ -82,11 +82,11 @@ type PathParams = {
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const adminApollo = getAdminApollo();
-  const pages = (
-    await adminApollo.query({
-      query: PagesDocument,
-    })
-  ).data.pages;
+  const {
+    data: { pages },
+  } = await adminApollo.query<PagesQuery>({
+    query: PagesDocument,
+  });
 
   const paths: { params: PathParams }[] = pages.map(({ id }) => {
     return {

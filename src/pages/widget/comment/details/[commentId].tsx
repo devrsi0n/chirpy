@@ -28,7 +28,7 @@ import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { CommentsDocument } from '$/server/graphql/generated/comment';
+import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
@@ -85,11 +85,11 @@ type StaticProps = PathParams &
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const adminApollo = getAdminApollo();
-  const comments = (
-    await adminApollo.query({
-      query: CommentsDocument,
-    })
-  ).data.comments;
+  const {
+    data: { comments },
+  } = await adminApollo.query<CommentsQuery>({
+    query: CommentsDocument,
+  });
   const paths = comments.map(({ id }) => ({
     params: {
       commentId: id,
