@@ -14,7 +14,6 @@ import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsLazyQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
-import { getStartOfSubtractDate, dayjs } from '$/utilities/date';
 
 type FormFields = {
   name: string;
@@ -36,9 +35,6 @@ export default function Dashboard(): JSX.Element {
         ...options,
         variables: {
           id: id!,
-          today: dayjs().toISOString(),
-          yesterday: getStartOfSubtractDate(1),
-          twoDaysAgo: getStartOfSubtractDate(2),
         },
       });
     },

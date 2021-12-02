@@ -23,3 +23,11 @@ query userProjects($userId: Int!) {
     id
   }
 }
+
+query projectAnalytics($projectId: uuid!) {
+  projectByPk(id: $projectId) {
+    id
+    name
+    domain
+  }
+}

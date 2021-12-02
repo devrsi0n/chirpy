@@ -28,9 +28,6 @@ export type ProjectCardProps = {
 };
 
 export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JSX.Element {
-  const pageviewsTwoDaysAgo = getSumPageviews(project.sessionsTwoDaysAgo);
-  const pageviewsYesterday = getSumPageviews(project.sessionsTwoDaysAgo);
-  const grow = (pageviewsYesterday - pageviewsTwoDaysAgo) / pageviewsTwoDaysAgo || 0;
   const [deletingProjectName, setDeletingProject] = React.useState('');
   const [deletingProjectId, setDeletingProjectId] = React.useState('');
   const handleClickDeleteProjectMenu = (id: string, name: string) => {
@@ -81,7 +78,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           {project.name}
         </Heading>
         <div tw="flex flex-row items-center">
-          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
+          {/* <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
             <BaseButton
               tw="rounded-full p-2"
               css={grow > 0 ? tw`text-green-1000` : tw`text-yellow-900`}
@@ -109,7 +106,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             >
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
-          </div>
+          </div>*/}
           <DropDown
             styles={{ root: tw`mr-1` }}
             buttonProps={{ ariaLabel: 'Show more project options' }}
@@ -195,12 +192,5 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         </Dialog.Footer>
       </Dialog>
     </Card>
-  );
-}
-
-function getSumPageviews(sessions: ProjectCardProps['project']['sessionsYesterday']): number {
-  return sessions.reduce(
-    (result, _session) => result + (_session.events_aggregate.aggregate?.count || 0),
-    0,
   );
 }

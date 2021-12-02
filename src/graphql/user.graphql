@@ -34,3 +34,19 @@ mutation updateUserFields($id: Int!, $email: String!, $name: String!, $username:
     id
   }
 }
+
+query userDashboardProjects($id: Int!) {
+  userByPk(id: $id) {
+    id
+    projects {
+      id
+      name
+      createdAt
+      pages {
+        id
+        title
+        url
+      }
+    }
+  }
+}
