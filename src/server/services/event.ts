@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next';
 
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { InsertOneEventDocument } from '$/server/graphql/generated/event';
+import { InsertOneEventDocument, InsertOneEventMutation } from '$/server/graphql/generated/event';
 import { EventResponseBody, EventRequest } from '$/server/types/event';
 import { createToken } from '$/server/utilities/create-token';
 
@@ -13,7 +13,7 @@ export async function handleRecordEvent(
   const { sessionId } = req.session!;
   const adminApollo = getAdminApollo();
 
-  const { data } = await adminApollo.mutate({
+  const { data } = await adminApollo.mutate<InsertOneEventMutation>({
     mutation: InsertOneEventDocument,
     variables: {
       type,

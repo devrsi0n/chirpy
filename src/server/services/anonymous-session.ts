@@ -21,7 +21,7 @@ export async function createAnonymousSession({
   InsertOneAnonymousSessionMutation['insertOneAnonymousSession']
 > {
   const adminApollo = getAdminApollo();
-  const { data } = await adminApollo.mutate({
+  const { data } = await adminApollo.mutate<InsertOneAnonymousSessionMutation>({
     mutation: InsertOneAnonymousSessionDocument,
     variables: {
       id,
@@ -43,7 +43,7 @@ export async function getAnonymousSessionById(
 ): Promise<AnonymousSessionByPkQuery['anonymousSessionByPk'] | null> {
   const adminApollo = getAdminApollo();
   try {
-    const { data } = await adminApollo.query({
+    const { data } = await adminApollo.query<AnonymousSessionByPkQuery>({
       query: AnonymousSessionByPkDocument,
       variables: { id },
     });
