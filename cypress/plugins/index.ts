@@ -14,7 +14,13 @@ import * as DotEnv from 'dotenv';
 import { createAuthToken, createToken } from '../../src/server/utilities/create-token';
 import { testUser, jwtBody } from '../fixtures/user';
 
-DotEnv.config();
+DotEnv.config({
+  path: '.env',
+});
+
+DotEnv.config({
+  path: '.env.test',
+});
 
 export default function Plugins(
   on: Cypress.PluginEvents,
