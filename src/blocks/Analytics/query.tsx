@@ -1,4 +1,5 @@
 import React from 'react';
+import { ValueOf } from 'type-fest';
 
 import { Link } from '$/components/Link';
 
@@ -13,31 +14,33 @@ export type Query = {
   date: Date;
   from: Date | undefined;
   to: Date | undefined;
-  filters: {
-    goal: string | null;
-    props: any;
-    source: string | null;
-    utm_medium: string | null;
-    utm_source: string | null;
-    utm_campaign: string | null;
-    referrer: string | null;
-    screen: string | null;
-    browser: string | null;
-    browser_version: string | null;
-    os: string | null;
-    os_version: string | null;
-    country: string | null;
-    region: string | null;
-    city: string | null;
-    page: string | null;
-    entry_page: string | null;
-    exit_page: string | null;
-  };
+  filters: Filters;
+};
+
+export type Filters = {
+  goal: string | null;
+  props: any;
+  source: string | null;
+  utm_medium: string | null;
+  utm_source: string | null;
+  utm_campaign: string | null;
+  referrer: string | null;
+  screen: string | null;
+  browser: string | null;
+  browser_version: string | null;
+  os: string | null;
+  os_version: string | null;
+  country: string | null;
+  region: string | null;
+  city: string | null;
+  page: string | null;
+  entry_page: string | null;
+  exit_page: string | null;
 };
 
 export function parseQuery(querystring: string, site: Site): Query {
   const q = new URLSearchParams(querystring);
-  let period = q.get('period')!;
+  let period = q.get('period') as typeof PERIODS[number];
   const periodKey = `period__${site.domain}`;
 
   if (PERIODS.includes(period)) {
@@ -50,9 +53,9 @@ export function parseQuery(querystring: string, site: Site): Query {
 
   return {
     period,
-    date: q.get('date') ? parseUTCDate(q.get('date')) : nowForSite(site),
-    from: q.get('from') ? parseUTCDate(q.get('from')) : undefined,
-    to: q.get('to') ? parseUTCDate(q.get('to')) : undefined,
+    date: q.get('date') ? parseUTCDate(q.get('date')!) : nowForSite(site),
+    from: q.get('from') ? parseUTCDate(q.get('from')!) : undefined,
+    to: q.get('to') ? parseUTCDate(q.get('to')!) : undefined,
     filters: {
       goal: q.get('goal'),
       props: JSON.parse(q.get('props')!),
@@ -76,10 +79,13 @@ export function parseQuery(querystring: string, site: Site): Query {
   };
 }
 
-export function appliedFilters(query: Query) {
-  return Object.keys(query.filters)
-    .map((key) => [key, query.filters[key]])
-    .filter(([_key, value]) => !!value);
+export type FilterPair = [keyof Filters, ValueOf<Filters>];
+export type FilterPairArray = Array<FilterPair>;
+
+export function appliedFilters(query: Query): FilterPairArray {
+  return (Object.keys(query.filters) as Array<keyof Filters>)
+    .map((key: keyof Filters) => [key, query.filters[key]])
+    .filter(([_key, value]) => !!value) as FilterPairArray;
 }
 
 function generateHref(data: { [x: string]: string }) {
@@ -95,7 +101,7 @@ function generateHref(data: { [x: string]: string }) {
   return url.href;
 }
 
-export function navigateToQuery(queryFrom, newData) {
+export function navigateToQuery(queryFrom: Query, newData: { [x: string]: string }) {
   // if we update any data that we store in localstorage, make sure going back in history will
   // revert them
   if (newData.period && newData.period !== queryFrom.period) {
@@ -108,27 +114,40 @@ export function navigateToQuery(queryFrom, newData) {
   window.history.pushState({}, '', generateHref(newData));
 }
 
-class QueryLink extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
+interface QueryLinkProps {
+  query: Query;
+  to: any;
+  onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+}
 
-  onClick(e) {
+function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.Element {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigateToQuery(this.props.query, this.props.to);
-    this.props.onClick?.(e);
-  }
-
-  render() {
-    const { to, ...props } = this.props;
-    return <Link disabled {...props} href={generateHref(to)} onClick={this.onClick} />;
-  }
+    navigateToQuery(query, to);
+    onClick?.(e);
+  };
+  return <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} />;
 }
 
 export { QueryLink };
 
-function QueryButton({ query, to, disabled, className, children, onClick }) {
+interface QueryButtonProps {
+  query: Query;
+  to: any;
+  disabled?: boolean;
+  className?: string;
+  children: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+}
+
+function QueryButton({
+  query,
+  to,
+  disabled,
+  className,
+  children,
+  onClick,
+}: QueryButtonProps): JSX.Element {
   return (
     <button
       className={className}
@@ -200,4 +219,4 @@ export const formattedFilters = {
   page: 'Page',
   entry_page: 'Entry Page',
   exit_page: 'Exit Page',
-};
+} as const;

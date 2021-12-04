@@ -1,7 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
-import Flatpickr from 'react-flatpickr';
+import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
 import {
   shiftDays,
@@ -19,7 +19,8 @@ import {
   isBefore,
   isAfter,
 } from './date';
-import { navigateToQuery, QueryLink, QueryButton } from './query';
+import { navigateToQuery, QueryLink, QueryButton, Query } from './query';
+import { Site } from './type';
 
 function renderArrow(query, site, period, prevDate, nextDate) {
   const insertionDate = parseUTCDate(site.insertedAt);
@@ -94,17 +95,19 @@ function DatePickerArrows({ site, query }) {
   return null;
 }
 
-class DatePicker extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleKeydown = this.handleKeydown.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.setCustomDate = this.setCustomDate.bind(this);
-    this.openCalendar = this.openCalendar.bind(this);
-    this.close = this.close.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.state = { mode: 'menu', open: false };
-  }
+interface DatePickerProps {
+  query: Query;
+  site: Site;
+}
+
+interface DatePickerState {
+  mode: string;
+  open: boolean;
+}
+
+class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
+  state = { mode: 'menu', open: false };
+  dropDownNode: HTMLElement;
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
@@ -116,20 +119,20 @@ class DatePicker extends React.Component {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
 
-  handleKeydown(e) {
-    const { query, history } = this.props;
+  handleKeydown = (e) => {
+    const { query, site } = this.props;
 
     if (e.target.tagName === 'INPUT') return true;
     if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing || e.keyCode === 229) return true;
 
-    const newSearch = {
+    const newSearch: any = {
       period: false,
       from: false,
       to: false,
       date: false,
     };
 
-    const insertionDate = parseUTCDate(this.props.site.insertedAt);
+    const insertionDate = parseUTCDate(site.insertedAt);
 
     if (e.key === 'ArrowLeft') {
       const prevDate = formatISO(shiftDays(query.date, -1));
@@ -154,13 +157,13 @@ class DatePicker extends React.Component {
 
       if (
         query.period === 'day' &&
-        !isAfter(parseUTCDate(nextDate), nowForSite(this.props.site), query.period)
+        !isAfter(parseUTCDate(nextDate), nowForSite(site), query.period)
       ) {
         newSearch.period = 'day';
         newSearch.date = nextDate;
       } else if (
         query.period === 'month' &&
-        !isAfter(parseUTCDate(nextMonth), nowForSite(this.props.site), query.period)
+        !isAfter(parseUTCDate(nextMonth), nowForSite(site), query.period)
       ) {
         newSearch.period = 'month';
         newSearch.date = nextMonth;
@@ -181,35 +184,35 @@ class DatePicker extends React.Component {
     ];
 
     if (keys.includes(e.key.toLowerCase())) {
-      navigateToQuery(history, query, {
+      navigateToQuery(query, {
         ...newSearch,
         ...redirects[keys.indexOf(e.key.toLowerCase())],
       });
     } else if (e.key.toLowerCase() === 'c') {
       this.setState({ mode: 'calendar', open: true }, this.openCalendar);
     } else if (newSearch.date) {
-      navigateToQuery(history, query, newSearch);
+      navigateToQuery(query, newSearch);
     }
-  }
+  };
 
-  handleClick(e) {
+  handleClick = (e) => {
     if (this.dropDownNode && this.dropDownNode.contains(e.target)) return;
 
     this.setState({ open: false });
-  }
+  };
 
-  setCustomDate(dates) {
+  setCustomDate: DateTimePickerProps['onChange'] = (dates) => {
     if (dates.length === 2) {
       const [from, to] = dates;
       if (formatISO(from) === formatISO(to)) {
-        navigateToQuery(this.props.history, this.props.query, {
+        navigateToQuery(this.props.query, {
           period: 'day',
           date: formatISO(from),
           from: false,
           to: false,
         });
       } else {
-        navigateToQuery(this.props.history, this.props.query, {
+        navigateToQuery(this.props.query, {
           period: 'custom',
           date: false,
           from: formatISO(from),
@@ -218,9 +221,9 @@ class DatePicker extends React.Component {
       }
       this.close();
     }
-  }
+  };
 
-  timeFrameText() {
+  timeFrameText = () => {
     const { query, site } = this.props;
 
     if (query.period === 'day') {
@@ -251,20 +254,20 @@ class DatePicker extends React.Component {
       return `${formatDayShort(query.from)} - ${formatDayShort(query.to)}`;
     }
     return 'Realtime';
-  }
+  };
 
-  toggle() {
+  toggle = () => {
     const newMode = this.state.mode === 'calendar' && !this.state.open ? 'menu' : this.state.mode;
     this.setState((prevState) => ({ mode: newMode, open: !prevState.open }));
-  }
+  };
 
-  close() {
+  close = () => {
     this.setState({ open: false });
-  }
+  };
 
-  openCalendar() {
+  openCalendar = () => {
     this.calendar && this.calendar.flatpickr.open();
-  }
+  };
 
   renderLink(period, text, opts = {}) {
     const { query, site } = this.props;
@@ -399,7 +402,7 @@ class DatePicker extends React.Component {
             {this.props.leadingText}
             <span className="font-medium">{this.timeFrameText()}</span>
           </span>
-          <ChevronDownIcon className="hidden sm:inline-block h-4 w-4 md:h-5 md:w-5 text-gray-500" />
+          <ChevronDownIcon className="hidden sm:inline-block h-4 w-4 md:h-5 md:w-5 text-gray-900" />
         </div>
 
         <Transition

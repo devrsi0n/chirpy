@@ -1,4 +1,4 @@
-import tw, { css } from 'twin.macro';
+import tw, { css, screen, theme } from 'twin.macro';
 
 export const analyticsStyles = css`
   .feather {
@@ -31,7 +31,7 @@ export const analyticsStyles = css`
     min-height: 436px;
   }
 
-  @screen md {
+  @media (min-width: ${theme`screens.md`}) {
     .stats-item {
       margin-left: 6px;
       margin-right: 6px;
@@ -78,7 +78,7 @@ export const analyticsStyles = css`
   }
 
   .fullwidth-shadow::before {
-    @apply absolute top-0 w-screen h-full bg-gray-50 dark:bg-gray-850;
+    ${tw`absolute top-0 w-screen h-full bg-gray-100 dark:bg-gray-800`}
 
     box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.06);
     content: '';
@@ -96,7 +96,7 @@ export const analyticsStyles = css`
   }
 
   .pagination-link[disabled] {
-    @apply cursor-default bg-gray-100 dark:bg-gray-300 pointer-events-none;
+    ${tw`cursor-default bg-gray-100 dark:bg-gray-300 pointer-events-none`}
   }
 
   @media (max-width: 768px) {
@@ -119,8 +119,6 @@ export const analyticsStyles = css`
       text-decoration-color: #6366f1; /* tailwind's indigo-500 */
     }
   }
-
-  // tooltip
 
   [tooltip] {
     position: relative;

@@ -10,6 +10,8 @@ import { navigateToQuery } from '../../query';
 import MoreLink from '../more-link';
 
 class Countries extends React.Component {
+  private map: Datamap;
+
   constructor(props) {
     super(props);
     this.resizeMap = this.resizeMap.bind(this);
@@ -24,7 +26,6 @@ class Countries extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.query !== prevProps.query) {
-      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({ loading: true, countries: null });
       this.fetchCountries().then(this.drawMap);
     }
@@ -68,7 +69,7 @@ class Countries extends React.Component {
 
   updateCountries() {
     this.fetchCountries().then(() => {
-      this.map.updateChoropleth(this.getDataset(), { reset: true });
+      this.map?.updateChoropleth(this.getDataset(), { reset: true });
     });
   }
 
@@ -81,7 +82,7 @@ class Countries extends React.Component {
   }
 
   resizeMap() {
-    this.map && this.map.resize();
+    this.map?.resize();
   }
 
   drawMap() {
@@ -134,9 +135,9 @@ class Countries extends React.Component {
   geolocationDbNotice() {
     if (this.props.site.selfhosted) {
       return (
-        <span className="text-xs text-gray-500 absolute bottom-4 right-3">
+        <span className="text-xs text-gray-1000 absolute bottom-4 right-3">
           IP Geolocation by{' '}
-          <a target="_blank" href="https://db-ip.com" rel="noreferrer" className="text-indigo-600">
+          <a target="_blank" href="https://db-ip.com" rel="noreferrer" className="text-blue-1000">
             DB-IP
           </a>
         </span>

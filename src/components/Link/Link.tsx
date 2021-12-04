@@ -70,11 +70,16 @@ export function Link({
     ...(target === '_blank' && { rel: 'noopener noreferrer' }),
     ...restProps,
   };
+  const handler = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (disabled) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
       {variant === 'plain' ? (
-        <a {...commonProps} css={disabled && disabledStyle}>
+        <a {...commonProps} css={disabled && disabledStyle} onClick={handler}>
           {children}
         </a>
       ) : (
@@ -89,6 +94,7 @@ export function Link({
           ]}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
+          onClick={handler}
         >
           {children}
           {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
