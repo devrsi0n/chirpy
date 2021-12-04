@@ -9,6 +9,7 @@ import { LayoutWrapper } from './LayoutWrapper';
 export type LayoutProps = React.PropsWithChildren<{
   hideHeader?: boolean;
   hideFooter?: boolean;
+  hideFullBleed?: boolean;
   enableBgGradient?: boolean;
   styles?: {
     container?: TwStyle;
@@ -21,6 +22,7 @@ export function Layout({
   enableBgGradient,
   children,
   styles,
+  hideFullBleed,
 }: LayoutProps): JSX.Element {
   return (
     <LayoutWrapper
@@ -45,19 +47,20 @@ export function Layout({
           tw="min-h-full py-16 md:(mx-4)"
           css={[
             // https://www.joshwcomeau.com/css/full-bleed/
-            css`
-              display: grid;
-              grid-template-columns: 1fr min(75ch, calc(100% - 32px)) 1fr;
-              grid-column-gap: 16px;
+            !hideFullBleed &&
+              css`
+                display: grid;
+                grid-template-columns: 1fr min(75ch, calc(100% - 32px)) 1fr;
+                grid-column-gap: 16px;
 
-              & > * {
-                grid-column: 2;
-              }
+                & > * {
+                  grid-column: 2;
+                }
 
-              & .full-bleed {
-                grid-column: 1 / -1;
-              }
-            `,
+                & .full-bleed {
+                  grid-column: 1 / -1;
+                }
+              `,
             styles?.container,
           ]}
           transition={{ duration: 0.35 }}

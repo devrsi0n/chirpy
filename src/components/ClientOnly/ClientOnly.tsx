@@ -1,14 +1,13 @@
 import * as React from 'react';
 
+import { useHasMounted } from '$/hooks/useHasMounted';
+
 export type ClientOnlyProps = React.PropsWithChildren<{
   //
 }>;
 
 export function ClientOnly({ children }: ClientOnlyProps): JSX.Element {
-  const [hasMounted, setHasMounted] = React.useState(false);
-  React.useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  const hasMounted = useHasMounted();
 
   if (!hasMounted) {
     return <></>;

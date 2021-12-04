@@ -22,6 +22,8 @@ import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
 import { PlausibleEvent } from '$/types/plausible-events.type';
 
+const analyticsDomain = new URL(process.env.NEXT_PUBLIC_APP_URL).host;
+
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
@@ -30,7 +32,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
-      <PlausibleProvider domain={process.env.NEXT_PUBLIC_APP_URL}>
+      <PlausibleProvider domain={analyticsDomain}>
         <AuthProvider
           session={pageProps.session}
           options={{
@@ -88,9 +90,7 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
   }, [isWidget, projectId]);
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
-      <LayoutWrapper projectId={projectId!} {...layoutProps}>
-        {children}
-      </LayoutWrapper>
+      <LayoutWrapper {...layoutProps}>{children}</LayoutWrapper>
     </ThemeWrapper>
   );
 }

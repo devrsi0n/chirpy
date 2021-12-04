@@ -5,6 +5,6 @@ cypress-examples
 scripts
 .next
 .cache
-
+src/blocks/Analytics/
 
 /*.js

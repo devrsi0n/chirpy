@@ -4,17 +4,14 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { Realtime } from '$/blocks/Analytics';
 import { PageTitle } from '$/blocks/PageTitle';
-// import { PageViewChart } from '$/blocks/PageViewChart';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { Text } from '$/components/Text';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   ProjectAnalyticsDocument,
   ProjectAnalyticsQuery,
 } from '$/server/graphql/generated/project';
-import { dayjs } from '$/utilities/date';
+import { CommonPageProps } from '$/types/page.type';
 
 export type AnalyticsProps = {
   project: ProjectAnalyticsQuery['projectByPk'];
@@ -26,27 +23,24 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
       <Head>
         <title>Analytics</title>
       </Head>
-      <section>
+      <section tw="xl:max-width[70rem] mx-auto px-4">
         <PageTitle tw="pb-6">Analytics</PageTitle>
-        <div tw="flex flex-row justify-between pb-4">
-          <div tw="flex flex-row items-center space-x-2">
-            <Link variant="plain" href={`https://${props.project?.domain}`}>
-              <img
-                src={`https://www.google.com/s2/favicons?domain=${props.project?.domain}&sz=64`}
-                width={32}
-                height={32}
-                alt={`Favicon of ${props.project?.domain}`}
-              />
-            </Link>
-            <Heading as="h5" tw="font-bold">
-              {props.project?.domain}
-            </Heading>
-          </div>
-          <div>
-            <Text variant="secondary">{dayjs().format('MM-DD')}</Text>
-          </div>
-        </div>
-        {/* <PageViewChart project={props.project} /> */}
+
+        <Realtime
+          site={{
+            domain: props.project?.domain!,
+            offset: '0',
+            hasGoals: false,
+            insertedAt: props.project?.createdAt!,
+            embedded: true,
+            background: '',
+            selfhosted: true,
+            cities: false,
+          }}
+          stuck={false}
+          loggedIn={true}
+          currentUserRole="owner"
+        />
       </section>
     </>
   );
@@ -58,24 +52,32 @@ type PathParam = {
   projectId: string;
 };
 
-export const getServerSideProps: GetServerSideProps<AnalyticsProps, PathParam> = async ({
-  params,
-}) => {
-  if (!params?.projectId) {
-    return { notFound: true };
-  }
-  const { projectId } = params;
-  const client = getAdminApollo();
-  const {
-    data: { projectByPk: project },
-  } = await client.query<ProjectAnalyticsQuery>({
-    query: ProjectAnalyticsDocument,
-    variables: {
-      projectId,
-    },
-  });
-  if (!project) {
-    return { notFound: true };
-  }
-  return { props: { project, session: await getSession() } };
-};
+export const getServerSideProps: GetServerSideProps<AnalyticsProps & CommonPageProps, PathParam> =
+  async ({ params }) => {
+    if (!params?.projectId) {
+      return { notFound: true };
+    }
+    const { projectId } = params;
+    const client = getAdminApollo();
+    const {
+      data: { projectByPk: project },
+    } = await client.query<ProjectAnalyticsQuery>({
+      query: ProjectAnalyticsDocument,
+      variables: {
+        projectId,
+      },
+    });
+    if (!project) {
+      return { notFound: true };
+    }
+    const session = await getSession();
+    return {
+      props: {
+        project,
+        session: session!,
+        layoutProps: {
+          hideFullBleed: true,
+        },
+      },
+    };
+  };

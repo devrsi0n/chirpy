@@ -5,7 +5,6 @@ import { LayoutWrapper } from './LayoutWrapper';
 
 export type WidgetLayoutProps = React.PropsWithChildren<{
   className?: string;
-  projectId: string;
 }>;
 
 export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {

@@ -13,6 +13,7 @@ const colors = {
   plum: getColorCSSVariables('plum'),
   primary: getColorCSSVariables('primary'),
   yellow: getColorCSSVariables('yellow'),
+  orange: getColorCSSVariables('orange'),
   red: getColorCSSVariables('red'),
   whitea: getColorCSSVariables('whitea'),
   blacka: getColorCSSVariables('blacka'),

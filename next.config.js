@@ -3,30 +3,30 @@
 //   enabled: process.env.ANALYZE === 'true' && process.env.NODE_ENV !== 'development',
 // });
 const { withPlausibleProxy } = require('next-plausible');
-
+const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 module.exports = withPlausibleProxy({
-  customDomain: 'https://analytics.chirpy.dev',
+  customDomain: analyticsDomain,
   trackOutboundLinks: true,
   trackLocalhost: true,
   selfHosted: true,
   enabled: true,
-})({});
+})({
+  async rewrites() {
+    return [
+      {
+        source: '/api/stats/:path*',
+        destination: `${analyticsDomain}/api/stats/:path*`
+      }
+    ]
+  }
+});
 // module.exports = withPlugins([
 //   [
 //     withBundleAnalyzer({
 //       // swcMinify: true,
 //     }),
-//   ],
-//   [
-//     withPlausibleProxy({
-//       customDomain: 'https://analytics.chirpy.dev',
-//       trackOutboundLinks: true,
-//       trackLocalhost: true,
-//       selfHosted: true,
-//       enabled: true,
-//     })(),
 //   ],
 // ]);
