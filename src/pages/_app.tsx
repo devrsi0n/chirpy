@@ -1,6 +1,7 @@
 import { Global } from '@emotion/react';
 import { LazyMotion } from 'framer-motion';
 import { Provider as AuthProvider, signIn, useSession } from 'next-auth/client';
+import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
@@ -20,6 +21,8 @@ import { HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
 
+const analyticsDomain = new URL(process.env.NEXT_PUBLIC_APP_URL).host;
+
 function App({ Component, pageProps }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
@@ -28,37 +31,39 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
-      <AuthProvider
-        session={pageProps.session}
-        options={{
-          // Refresh hasura token before it expires
-          clientMaxAge: HASURA_TOKEN_MAX_AGE - 5 * 60,
-        }}
-      >
-        {/* Tailwindcss global styles */}
-        <GlobalStyles />
-        <Global styles={appGlobalStyles} />
+      <PlausibleProvider domain={analyticsDomain}>
+        <AuthProvider
+          session={pageProps.session}
+          options={{
+            // Refresh hasura token before it expires
+            clientMaxAge: HASURA_TOKEN_MAX_AGE - 5 * 60,
+          }}
+        >
+          {/* Tailwindcss global styles */}
+          <GlobalStyles />
+          <Global styles={appGlobalStyles} />
 
-        <NextThemesProvider attribute="class" storageKey="TotalkTheme">
-          <SiteThemeProvider>
-            <LazyMotion features={loadFeatures} strict>
-              <SessionGuard>
-                <ApolloClientProvider>
-                  <CurrentUserProvider>
-                    <ToastProvider>
-                      <AppLayout {...pageProps}>
-                        <AuthWrapper>
-                          <Component {...pageProps} />
-                        </AuthWrapper>
-                      </AppLayout>
-                    </ToastProvider>
-                  </CurrentUserProvider>
-                </ApolloClientProvider>
-              </SessionGuard>
-            </LazyMotion>
-          </SiteThemeProvider>
-        </NextThemesProvider>
-      </AuthProvider>
+          <NextThemesProvider attribute="class" storageKey="TotalkTheme">
+            <SiteThemeProvider>
+              <LazyMotion features={loadFeatures} strict>
+                <SessionGuard>
+                  <ApolloClientProvider>
+                    <CurrentUserProvider>
+                      <ToastProvider>
+                        <AppLayout {...pageProps}>
+                          <AuthWrapper>
+                            <Component {...pageProps} />
+                          </AuthWrapper>
+                        </AppLayout>
+                      </ToastProvider>
+                    </CurrentUserProvider>
+                  </ApolloClientProvider>
+                </SessionGuard>
+              </LazyMotion>
+            </SiteThemeProvider>
+          </NextThemesProvider>
+        </AuthProvider>
+      </PlausibleProvider>
     </ErrorBoundary>
   );
 }
@@ -70,14 +75,12 @@ type AppLayoutProps = CommonPageProps & {
 };
 
 function AppLayout(props: AppLayoutProps): JSX.Element {
-  const { isWidget, children, projectId, layoutProps, theme } = props;
+  const { isWidget, children, layoutProps, theme } = props;
   const ThemeWrapper = isWidget ? WidgetThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
-      <LayoutWrapper projectId={projectId!} {...layoutProps}>
-        {children}
-      </LayoutWrapper>
+      <LayoutWrapper {...layoutProps}>{children}</LayoutWrapper>
     </ThemeWrapper>
   );
 }

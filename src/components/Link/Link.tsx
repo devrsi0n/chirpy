@@ -17,6 +17,7 @@ export type LinkProps = React.PropsWithChildren<
       highlightPattern?: RegExp;
       variant?: Variant;
       hideUnderline?: boolean;
+      disabled?: true;
     }
 >;
 
@@ -35,31 +36,35 @@ const variantStyles: Record<Variant, TwStyle> = {
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-export function Link(props: LinkProps): JSX.Element {
-  const {
-    size,
-    href,
-    as,
-    replace,
-    scroll,
-    shallow,
-    passHref = true,
-    prefetch,
-    highlightPattern,
-    hideUnderline,
-    variant = 'primary',
-    children,
-    ...restProps
-  } = props;
+export function Link({
+  size,
+  href,
+  as,
+  replace,
+  target: _target,
+  scroll,
+  shallow,
+  passHref = true,
+  prefetch,
+  highlightPattern,
+  hideUnderline,
+  variant = 'primary',
+  children,
+  disabled,
+  ...restProps
+}: LinkProps): JSX.Element {
+  if (disabled) {
+    href = '';
+  }
   const router = useRouter();
   const highlight = highlightPattern && highlightPattern.test(router.asPath);
   const [isHovering, setIsHovering] = React.useState(false);
-  const [target, setTarget] = React.useState(props.target || '_self');
+  const [target, setTarget] = React.useState(_target || '_self');
   React.useEffect(() => {
-    if (!props.target && href.startsWith('http') && !href.startsWith(window.location.origin)) {
+    if (!_target && href.startsWith('http') && !href.startsWith(window.location.origin)) {
       setTarget('_blank');
     }
-  }, [props.target, href]);
+  }, [_target, href]);
   const commonProps = {
     target,
     ...(target === '_blank' && { rel: 'noopener noreferrer' }),
@@ -69,7 +74,9 @@ export function Link(props: LinkProps): JSX.Element {
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
       {variant === 'plain' ? (
-        <a {...commonProps}>{children}</a>
+        <a {...commonProps} css={disabled && disabledStyle}>
+          {children}
+        </a>
       ) : (
         <a
           {...commonProps}
@@ -78,6 +85,7 @@ export function Link(props: LinkProps): JSX.Element {
             size && sizeStyles[size],
             highlight && tw`font-bold`,
             variantStyles[variant],
+            disabled && disabledStyle,
           ]}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
@@ -98,3 +106,5 @@ export function Link(props: LinkProps): JSX.Element {
     </NextLink>
   );
 }
+
+const disabledStyle = tw`hover:cursor-default`;

@@ -17,5 +17,8 @@
   ],
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",
-  "jest.jestCommandLine": "npm run ut --"
+  "jest.jestCommandLine": "npm run ut --",
+  "eslint.workingDirectories": [
+    "./src"
+  ]
 }

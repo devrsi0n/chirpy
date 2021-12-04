@@ -70,7 +70,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
     const newSize = Math.min(pageSize + 5, project.pages.length);
     setPageSize(newSize);
   }
-
+  const grow = 1;
+  const pageviewsYesterday = 100;
   return (
     <Card as="section" key={project.id} tw="pt-4 space-y-4">
       <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
@@ -78,7 +79,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           {project.name}
         </Heading>
         <div tw="flex flex-row items-center">
-          {/* <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
+          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
             <BaseButton
               tw="rounded-full p-2"
               css={grow > 0 ? tw`text-green-1000` : tw`text-yellow-900`}
@@ -106,7 +107,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             >
               {`${grow > 0 ? '+' : ''}${grow * 100}`}%
             </Text>
-          </div>*/}
+          </div>
           <DropDown
             styles={{ root: tw`mr-1` }}
             buttonProps={{ ariaLabel: 'Show more project options' }}

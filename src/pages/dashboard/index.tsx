@@ -23,9 +23,10 @@ type FormFields = {
 export default function Dashboard(): JSX.Element {
   const {
     data: { id },
+    loading: userLoading,
   } = useCurrentUser();
 
-  const [fetchUserProjects, { data, loading: loadingProject }] = useUserDashboardProjectsLazyQuery({
+  const [fetchUserProjects, { data, loading: projectLoading }] = useUserDashboardProjectsLazyQuery({
     fetchPolicy: 'cache-and-network',
   });
   const fetchProjects = React.useCallback(
@@ -87,7 +88,7 @@ export default function Dashboard(): JSX.Element {
           <PageTitle>Dashboard</PageTitle>
           <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
             <PlusCircle size={18} />
-            <span>New project</span>
+            <span>Create project</span>
           </Button>
         </div>
         {projects?.length ? (
@@ -101,7 +102,7 @@ export default function Dashboard(): JSX.Element {
             </ul>
             <div tw="flex-1" />
           </div>
-        ) : loadingProject ? (
+        ) : projectLoading || userLoading ? (
           <Spinner />
         ) : (
           <div tw="py-6">

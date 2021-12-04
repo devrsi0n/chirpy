@@ -29,5 +29,6 @@ query projectAnalytics($projectId: uuid!) {
     id
     name
     domain
+    createdAt
   }
 }
