@@ -60,7 +60,7 @@ export default function Realtime(props: RealtimeProps) {
           loggedIn={this.props.loggedIn}
           currentUserRole={this.props.currentUserRole}
         /> */}
-              <Filters className="flex" site={props.site} query={query} history={window.history} />
+              <Filters className="flex" site={props.site} query={query} />
             </div>
             <Datepicker site={props.site} query={query} />
           </div>

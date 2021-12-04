@@ -7,12 +7,12 @@ import 'twin.macro';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 
-import { appliedFilters, navigateToQuery, formattedFilters, Query } from './query';
+import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
 import { FILTER_GROUPS, formatFilterGroup, filterGroupForFilter } from './stats/modals/filter';
 import { Site } from './type';
 
-function removeFilter(key, history, query) {
-  const newOpts = {
+function removeFilter(key: string, query: any) {
+  const newOpts: any = {
     [key]: false,
   };
   if (key === 'goal') {
@@ -28,23 +28,24 @@ function removeFilter(key, history, query) {
     newOpts.city_name = false;
   }
 
-  navigateToQuery(history, query, newOpts);
+  navigateToQuery(query, newOpts);
 }
 
-function clearAllFilters(history, query) {
+function clearAllFilters(query: Query) {
+  // eslint-disable-next-line unicorn/prefer-object-from-entries
   const newOpts = Object.keys(query.filters).reduce((acc, red) => ({ ...acc, [red]: false }), {});
-  navigateToQuery(history, query, newOpts);
+  navigateToQuery(query, newOpts);
 }
 
-function filterType(val) {
+function filterType(val: string) {
   if (typeof val === 'string' && val.startsWith('!')) {
-    return ['is not', val.substr(1)];
+    return ['is not', val.slice(1)];
   }
 
   return ['is', val];
 }
 
-function filterText(key, rawValue, query) {
+function filterText(key: keyof typeof formattedFilters, rawValue: string, query: Query) {
   const [type, value] = filterType(rawValue);
 
   if (key === 'goal') {
@@ -122,7 +123,7 @@ function filterText(key, rawValue, query) {
   throw new Error(`Unknown filter: ${key}`);
 }
 
-function renderDropdownFilter(site, history, [key, value], query) {
+function renderDropdownFilter(site: Site, [key, value]: FilterPair, query: Query) {
   if (key === 'props') {
     return (
       <Menu.Item key={key}>
@@ -134,7 +135,7 @@ function renderDropdownFilter(site, history, [key, value], query) {
           <strong
             title={`Remove filter: ${formattedFilters[key]}`}
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
-            onClick={() => removeFilter(key, history, query)}
+            onClick={() => removeFilter(key, query)}
           >
             <XIcon className="w-4 h-4" />
           </strong>
@@ -164,7 +165,7 @@ function renderDropdownFilter(site, history, [key, value], query) {
         <strong
           title={`Remove filter: ${formattedFilters[key]}`}
           className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
-          onClick={() => removeFilter(key, history, query)}
+          onClick={() => removeFilter(key, query)}
         >
           <XIcon className="w-4 h-4" />
         </strong>
@@ -173,7 +174,7 @@ function renderDropdownFilter(site, history, [key, value], query) {
   );
 }
 
-function filterDropdownOption(site, option) {
+function filterDropdownOption(site: Site, option: string) {
   return (
     <Menu.Item key={option}>
       {({ active }) => (
@@ -194,11 +195,13 @@ function filterDropdownOption(site, option) {
   );
 }
 
-function DropdownContent({ history, site, query, wrapped }) {
+type DropdownContentProps = Pick<FiltersProps, 'query' | 'site'> & Pick<FiltersState, 'wrapped'>;
+
+function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.Element {
   const [addingFilter, setAddingFilter] = useState(false);
 
   if (wrapped === 0 || addingFilter) {
-    return Object.keys(FILTER_GROUPS).map((option) => filterDropdownOption(site, option));
+    return <>{Object.keys(FILTER_GROUPS).map((option) => filterDropdownOption(site, option))}</>;
   }
 
   return (
@@ -210,11 +213,11 @@ function DropdownContent({ history, site, query, wrapped }) {
       >
         + Add filter
       </Button>
-      {appliedFilters(query).map((filter) => renderDropdownFilter(site, history, filter, query))}
+      {appliedFilters(query).map((filter) => renderDropdownFilter(site, filter, query))}
       <Menu.Item key="clear">
         <div
           className="border-t border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500 hover:cursor-pointer"
-          onClick={() => clearAllFilters(history, query)}
+          onClick={() => clearAllFilters(query)}
         >
           Clear All Filters
         </div>
@@ -229,12 +232,18 @@ export interface FiltersProps {
   query: Query;
 }
 
-class Filters extends React.Component<FiltersProps> {
+interface FiltersState {
+  viewport: number;
+  // 0=unwrapped, 1=waiting to check, 2=wrapped
+  wrapped: 0 | 1 | 2;
+}
+
+class Filters extends React.Component<FiltersProps, FiltersState> {
   constructor(props: FiltersProps) {
     super(props);
 
     this.state = {
-      wrapped: 1, // 0=unwrapped, 1=waiting to check, 2=wrapped
+      wrapped: 1,
       viewport: 1080,
     };
 
@@ -252,7 +261,7 @@ class Filters extends React.Component<FiltersProps> {
     this.rewrapFilters();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: FiltersProps, prevState: FiltersState) {
     const { query } = this.props;
     const { viewport, wrapped } = this.state;
 
@@ -270,18 +279,18 @@ class Filters extends React.Component<FiltersProps> {
   }
 
   componentWillUnmount() {
+    // document.removeEventListener('mousedown', this.handleClick, false);
     document.removeEventListener('keyup', this.handleKeyup);
-    document.removeEventListener('mousedown', this.handleClick, false);
     window.removeEventListener('resize', this.handleResize, false);
   }
 
-  handleKeyup(e) {
-    const { query, history } = this.props;
+  handleKeyup(e: KeyboardEvent) {
+    const { query } = this.props;
 
     if (e.ctrlKey || e.metaKey || e.altKey) return;
 
     if (e.key === 'Escape') {
-      clearAllFilters(history, query);
+      clearAllFilters(query);
     }
   }
 
@@ -291,7 +300,7 @@ class Filters extends React.Component<FiltersProps> {
 
   // Checks if the filter container is wrapping items
   rewrapFilters() {
-    const items = document.getElementById('filters');
+    const items = document.querySelector<HTMLElement>('#filters');
     const { wrapped, viewport } = this.state;
 
     // Always wrap on mobile
@@ -307,19 +316,19 @@ class Filters extends React.Component<FiltersProps> {
       return;
     }
 
-    let prevItem = null;
+    let prevItem: DOMRect | null = null;
 
     // For every filter DOM Node, check if its y value is higher than the previous (this indicates a wrap)
-    [...items.childNodes].forEach((item) => {
+    [...(items.childNodes as unknown as HTMLElement[])].forEach((item) => {
       const currItem = item.getBoundingClientRect();
-      if (prevItem && prevItem.top < currItem.top) {
+      if (prevItem && prevItem?.top < currItem.top) {
         this.setState({ wrapped: 2 });
       }
       prevItem = currItem;
     });
   }
 
-  renderListFilter(history, [key, value], query) {
+  renderListFilter([key, value]: FilterPair, query: Query) {
     return (
       <span
         key={key}
@@ -352,7 +361,7 @@ class Filters extends React.Component<FiltersProps> {
         <span
           title={`Remove filter: ${formattedFilters[key]}`}
           className="flex h-full w-full px-2 cursor-pointer hover:text-indigo-900 text-gray-800 items-center"
-          onClick={() => removeFilter(key, history, query)}
+          onClick={() => removeFilter(key, query)}
         >
           <XIcon className="w-4 h-4" />
         </span>
@@ -382,7 +391,7 @@ class Filters extends React.Component<FiltersProps> {
   }
 
   renderDropDown() {
-    const { history, query, site } = this.props;
+    const { query, site } = this.props;
 
     return (
       <Menu as="div" className="md:relative ml-auto">
@@ -409,15 +418,10 @@ class Filters extends React.Component<FiltersProps> {
                 className="absolute w-full left-0 right-0 md:w-72 md:absolute md:top-auto md:left-auto md:right-0 mt-2 origin-top-right z-10"
               >
                 <div
-                  className="rounded-md shadow-lg  bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
+                  className="rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
                   font-medium text-gray-800 dark:text-gray-200"
                 >
-                  <DropdownContent
-                    history={history}
-                    query={query}
-                    site={site}
-                    wrapped={this.state.wrapped}
-                  />
+                  <DropdownContent query={query} site={site} wrapped={this.state.wrapped} />
                 </div>
               </Menu.Items>
             </Transition>
@@ -428,12 +432,12 @@ class Filters extends React.Component<FiltersProps> {
   }
 
   renderFilterList() {
-    const { history, query } = this.props;
+    const { query } = this.props;
 
     if (this.state.wrapped !== 2) {
       return (
         <div id="filters" className="flex flex-wrap">
-          {appliedFilters(query).map((filter) => this.renderListFilter(history, filter, query))}
+          {appliedFilters(query).map((filter) => this.renderListFilter(filter, query))}
         </div>
       );
     }

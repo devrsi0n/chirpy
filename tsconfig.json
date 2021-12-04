@@ -23,7 +23,7 @@
     },
     "incremental": true
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", ".next"],
   "include": [
     "types/geoip-database.d.ts",
     "types/index.d.ts",
