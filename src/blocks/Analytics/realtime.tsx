@@ -12,6 +12,7 @@ import Pages from './stats/pages';
 import Sources from './stats/sources';
 import VisitorGraph from './stats/visitor-graph';
 import { analyticsStyles } from './styles';
+import { Timer } from './timer';
 import { Site } from './type';
 
 export interface RealtimeProps {
@@ -60,45 +61,23 @@ export default function Realtime(props: RealtimeProps) {
           loggedIn={this.props.loggedIn}
           currentUserRole={this.props.currentUserRole}
         /> */}
-              <Filters className="flex" site={props.site} query={query} />
+              <Filters className="flex" site={props.site} query={query} router={router} />
             </div>
-            <Datepicker site={props.site} query={query} />
+            <Datepicker site={props.site} query={query} router={router} />
           </div>
         </div>
-        <VisitorGraph site={props.site} query={query} timer={timer} />
+        <VisitorGraph site={props.site} query={query} timer={timer} router={router} />
         <div className="items-start justify-between block w-full md:flex">
           <Sources site={props.site} query={query} timer={timer} />
           <Pages site={props.site} query={query} timer={timer} />
         </div>
         <div className="items-start justify-between block w-full md:flex">
-          <Locations site={props.site} query={query} timer={timer} />
-          <Devices site={props.site} query={query} timer={timer} />
+          <Locations router={router} site={props.site} query={query} timer={timer} />
+          <Devices site={props.site} query={query} />
         </div>
 
         {renderConversions()}
       </div>
     </>
   );
-}
-
-const THIRTY_SECONDS = 30_000;
-
-class Timer {
-  listeners: Array<() => void>;
-  intervalId: number;
-
-  constructor() {
-    this.listeners = [];
-    this.intervalId = window.setInterval(this.dispatchTick.bind(this), THIRTY_SECONDS);
-  }
-
-  onTick(listener: () => void) {
-    this.listeners.push(listener);
-  }
-
-  dispatchTick() {
-    for (const listener of this.listeners) {
-      listener();
-    }
-  }
 }

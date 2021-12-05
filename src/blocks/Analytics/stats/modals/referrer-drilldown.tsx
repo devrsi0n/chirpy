@@ -1,20 +1,31 @@
+// @ts-nocheck
 import React from 'react';
 
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
-import { parseQuery, toHuman } from '../../query';
+import { parseQuery, Query, toHuman } from '../../query';
+import { Site } from '../../type';
 import Modal from './modal';
 
-class ReferrerDrilldownModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      query: parseQuery(props.location.search, props.site),
-    };
-  }
+interface ReferrerDrilldownProps {
+  site: Site;
+}
+
+interface ReferrerDrilldownState {
+  loading: boolean;
+  query: Query;
+}
+
+class ReferrerDrilldownModal extends React.Component<
+  ReferrerDrilldownProps,
+  ReferrerDrilldownState
+> {
+  state = {
+    loading: true,
+    query: parseQuery(this.props.location.search, this.props.site),
+  };
 
   componentDidMount() {
     const detailed = this.showExtra();
@@ -57,19 +68,13 @@ class ReferrerDrilldownModal extends React.Component {
   }
 
   formatBounceRate(ref) {
-    if (typeof ref.bounce_rate === 'number') {
-      return ref.bounce_rate + '%';
-    } else {
-      return '-';
-    }
+    return typeof ref.bounce_rate === 'number' ? ref.bounce_rate + '%' : '-';
   }
 
   formatDuration(referrer) {
-    if (typeof referrer.visit_duration === 'number') {
-      return durationFormatter(referrer.visit_duration);
-    } else {
-      return '-';
-    }
+    return typeof referrer.visit_duration === 'number'
+      ? durationFormatter(referrer.visit_duration)
+      : '-';
   }
 
   renderExternalLink(name) {

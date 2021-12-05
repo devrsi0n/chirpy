@@ -1,6 +1,7 @@
 import { Menu, Transition } from '@headlessui/react';
 import { AdjustmentsIcon, PlusIcon, XIcon, PencilIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
+import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 import 'twin.macro';
 
@@ -8,10 +9,15 @@ import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 
 import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
-import { FILTER_GROUPS, formatFilterGroup, filterGroupForFilter } from './stats/modals/filter';
+import {
+  FILTER_GROUPS,
+  formatFilterGroup,
+  filterGroupForFilter,
+  FilterGroupKey,
+} from './stats/modals/filter';
 import { Site } from './type';
 
-function removeFilter(key: string, query: any) {
+function removeFilter(router: NextRouter, key: string, query: any) {
   const newOpts: any = {
     [key]: false,
   };
@@ -28,13 +34,13 @@ function removeFilter(key: string, query: any) {
     newOpts.city_name = false;
   }
 
-  navigateToQuery(query, newOpts);
+  navigateToQuery(router, query, newOpts);
 }
 
-function clearAllFilters(query: Query) {
+function clearAllFilters(router: NextRouter, query: Query) {
   // eslint-disable-next-line unicorn/prefer-object-from-entries
   const newOpts = Object.keys(query.filters).reduce((acc, red) => ({ ...acc, [red]: false }), {});
-  navigateToQuery(query, newOpts);
+  navigateToQuery(router, query, newOpts);
 }
 
 function filterType(val: string) {
@@ -123,7 +129,12 @@ function filterText(key: keyof typeof formattedFilters, rawValue: string, query:
   throw new Error(`Unknown filter: ${key}`);
 }
 
-function renderDropdownFilter(site: Site, [key, value]: FilterPair, query: Query) {
+function renderDropdownFilter(
+  router: NextRouter,
+  site: Site,
+  [key, value]: FilterPair,
+  query: Query,
+) {
   if (key === 'props') {
     return (
       <Menu.Item key={key}>
@@ -135,7 +146,7 @@ function renderDropdownFilter(site: Site, [key, value]: FilterPair, query: Query
           <strong
             title={`Remove filter: ${formattedFilters[key]}`}
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
-            onClick={() => removeFilter(key, query)}
+            onClick={() => removeFilter(router, key, query)}
           >
             <XIcon className="w-4 h-4" />
           </strong>
@@ -165,7 +176,7 @@ function renderDropdownFilter(site: Site, [key, value]: FilterPair, query: Query
         <strong
           title={`Remove filter: ${formattedFilters[key]}`}
           className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
-          onClick={() => removeFilter(key, query)}
+          onClick={() => removeFilter(router, key, query)}
         >
           <XIcon className="w-4 h-4" />
         </strong>
@@ -174,7 +185,7 @@ function renderDropdownFilter(site: Site, [key, value]: FilterPair, query: Query
   );
 }
 
-function filterDropdownOption(site: Site, option: string) {
+function filterDropdownOption(site: Site, option: FilterGroupKey) {
   return (
     <Menu.Item key={option}>
       {({ active }) => (
@@ -199,9 +210,16 @@ type DropdownContentProps = Pick<FiltersProps, 'query' | 'site'> & Pick<FiltersS
 
 function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.Element {
   const [addingFilter, setAddingFilter] = useState(false);
+  const router = useRouter();
 
   if (wrapped === 0 || addingFilter) {
-    return <>{Object.keys(FILTER_GROUPS).map((option) => filterDropdownOption(site, option))}</>;
+    return (
+      <>
+        {(Object.keys(FILTER_GROUPS) as FilterGroupKey[]).map((option: FilterGroupKey) =>
+          filterDropdownOption(site, option),
+        )}
+      </>
+    );
   }
 
   return (
@@ -213,11 +231,11 @@ function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.El
       >
         + Add filter
       </Button>
-      {appliedFilters(query).map((filter) => renderDropdownFilter(site, filter, query))}
+      {appliedFilters(query).map((filter) => renderDropdownFilter(router, site, filter, query))}
       <Menu.Item key="clear">
         <div
           className="border-t border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500 hover:cursor-pointer"
-          onClick={() => clearAllFilters(query)}
+          onClick={() => clearAllFilters(router, query)}
         >
           Clear All Filters
         </div>
@@ -230,6 +248,7 @@ export interface FiltersProps {
   className?: string;
   site: Site;
   query: Query;
+  router: NextRouter;
 }
 
 interface FiltersState {
@@ -285,12 +304,12 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
   }
 
   handleKeyup(e: KeyboardEvent) {
-    const { query } = this.props;
+    const { query, router } = this.props;
 
     if (e.ctrlKey || e.metaKey || e.altKey) return;
 
     if (e.key === 'Escape') {
-      clearAllFilters(query);
+      clearAllFilters(router, query);
     }
   }
 
@@ -361,7 +380,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
         <span
           title={`Remove filter: ${formattedFilters[key]}`}
           className="flex h-full w-full px-2 cursor-pointer hover:text-indigo-900 text-gray-800 items-center"
-          onClick={() => removeFilter(key, query)}
+          onClick={() => removeFilter(this.props.router, key, query)}
         >
           <XIcon className="w-4 h-4" />
         </span>

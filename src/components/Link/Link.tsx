@@ -17,7 +17,7 @@ export type LinkProps = React.PropsWithChildren<
       highlightPattern?: RegExp;
       variant?: Variant;
       hideUnderline?: boolean;
-      disabled?: true;
+      disabled?: boolean;
     }
 >;
 

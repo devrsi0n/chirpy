@@ -1,5 +1,6 @@
+import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
-import { ValueOf } from 'type-fest';
+import { Primitive, ValueOf } from 'type-fest';
 
 import { Link } from '$/components/Link';
 
@@ -88,7 +89,7 @@ export function appliedFilters(query: Query): FilterPairArray {
     .filter(([_key, value]) => !!value) as FilterPairArray;
 }
 
-function generateHref(data: { [x: string]: string }) {
+function generateHref(data: { [x: string]: Primitive }) {
   const url = new URL(window.location.href);
   Object.keys(data).forEach((key) => {
     if (!data[key]) {
@@ -96,34 +97,41 @@ function generateHref(data: { [x: string]: string }) {
       return;
     }
 
-    url.searchParams.set(key, data[key]);
+    url.searchParams.set(key, String(data[key]));
   });
   return url.href;
 }
 
-export function navigateToQuery(queryFrom: Query, newData: { [x: string]: string }) {
+export function navigateToQuery(
+  router: NextRouter,
+  queryFrom: Query,
+  newData: { [x: string]: Primitive },
+) {
   // if we update any data that we store in localstorage, make sure going back in history will
   // revert them
   if (newData.period && newData.period !== queryFrom.period) {
     const url = new URL(window.location.href);
     url.searchParams.set('period', queryFrom.period);
-    window.history.replaceState({}, '', url.href);
+    router.replace(url.href);
   }
 
   // then push the new query to the history
-  window.history.pushState({}, '', generateHref(newData));
+  router.push(generateHref(newData));
 }
 
 interface QueryLinkProps {
   query: Query;
   to: any;
   onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
+  children: React.ReactNode;
+  className?: string;
 }
 
 function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.Element {
+  const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    navigateToQuery(query, to);
+    navigateToQuery(router, query, to);
     onClick?.(e);
   };
   return <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} />;
@@ -132,6 +140,7 @@ function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.El
 export { QueryLink };
 
 interface QueryButtonProps {
+  router: NextRouter;
   query: Query;
   to: any;
   disabled?: boolean;
@@ -141,6 +150,7 @@ interface QueryButtonProps {
 }
 
 function QueryButton({
+  router,
   query,
   to,
   disabled,
@@ -153,9 +163,9 @@ function QueryButton({
       className={className}
       onClick={(event) => {
         event.preventDefault();
-        navigateToQuery(query, to);
+        navigateToQuery(router, query, to);
         onClick?.(event);
-        window.history.pushState({}, '', generateHref(to));
+        router.push(generateHref(to));
       }}
       type="button"
       disabled={disabled}
@@ -220,3 +230,5 @@ export const formattedFilters = {
   entry_page: 'Entry Page',
   exit_page: 'Exit Page',
 } as const;
+
+export type FormattedFilterKey = keyof typeof formattedFilters;

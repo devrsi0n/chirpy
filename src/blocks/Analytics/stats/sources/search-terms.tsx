@@ -5,23 +5,40 @@ import * as api from '../../api';
 import FadeIn from '../../fade-in';
 import numberFormatter from '../../number-formatter';
 import { cardTitle } from '../../styles';
+import { Props } from '../../type';
 import Bar from '../bar';
 import RocketIcon from '../modals/rocket-icon';
 import MoreLink from '../more-link';
 
-export default class SearchTerms extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-  }
+export interface SearchTermsProps extends Props {}
+
+interface SearchTermsState {
+  loading: boolean;
+  notConfigured: boolean;
+  searchTerms: Term[] | null;
+  isAdmin: boolean;
+}
+
+interface Term {
+  name: string;
+  visitors: number;
+}
+
+export default class SearchTerms extends React.Component<SearchTermsProps, SearchTermsState> {
+  state: SearchTermsState = {
+    loading: true,
+    searchTerms: null,
+    isAdmin: false,
+    notConfigured: false,
+  };
 
   componentDidMount() {
     this.fetchSearchTerms();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: SearchTermsProps) {
     if (this.props.query !== prevProps.query) {
-      this.setState({ loading: true, terms: null });
+      this.setState({ loading: true });
       this.fetchSearchTerms();
     }
   }
@@ -42,12 +59,12 @@ export default class SearchTerms extends React.Component {
       );
   }
 
-  renderSearchTerm(term) {
+  renderSearchTerm(term: Term) {
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={term.name}>
         <Bar
           count={term.visitors}
-          all={this.state.searchTerms}
+          all={this.state.searchTerms!}
           className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction="4rem"
         >
@@ -88,7 +105,7 @@ export default class SearchTerms extends React.Component {
           )}
         </div>
       );
-    } else if (this.state.searchTerms.length > 0) {
+    } else if (this.state.searchTerms!.length > 0) {
       const valLabel = this.props.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
 
       return (
@@ -98,7 +115,7 @@ export default class SearchTerms extends React.Component {
             <span>{valLabel}</span>
           </div>
 
-          {this.state.searchTerms.map(this.renderSearchTerm.bind(this))}
+          {this.state.searchTerms!.map((element) => this.renderSearchTerm(element))}
         </React.Fragment>
       );
     } else {

@@ -1,23 +1,35 @@
+// @ts-nocheck
 import React from 'react';
 
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
-import { parseQuery } from '../../query';
+import { parseQuery, Query } from '../../query';
+import { Site } from '../../type';
+import { Page } from '../pages/entry-pages';
 import Modal from './modal';
 
-class EntryPagesModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-      query: parseQuery(props.location.search, props.site),
-      pages: [],
-      page: 1,
-      moreResultsAvailable: false,
-    };
-  }
+interface EntryPagesModalProps {
+  site: Site;
+}
+
+interface EntryPagesModalState {
+  loading: boolean;
+  query: Query;
+  pages: Page[];
+  page: number;
+  moreResultsAvailable: boolean;
+}
+
+class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesModalState> {
+  state: EntryPagesModalState = {
+    loading: true,
+    query: parseQuery(this.props.location.search, this.props.site),
+    pages: [],
+    page: 1,
+    moreResultsAvailable: false,
+  };
 
   componentDidMount() {
     this.loadPages();
@@ -34,7 +46,7 @@ class EntryPagesModal extends React.Component {
       .then((res) =>
         this.setState((state) => ({
           loading: false,
-          pages: state.pages.concat(res),
+          pages: [...state.pages, ...res],
           moreResultsAvailable: res.length === 100,
         })),
       );
@@ -45,7 +57,7 @@ class EntryPagesModal extends React.Component {
     this.setState({ loading: true, page: page + 1 }, this.loadPages.bind(this));
   }
 
-  formatBounceRate(page) {
+  formatBounceRate(page: Page) {
     if (typeof page.bounce_rate === 'number') {
       return `${page.bounce_rate}%`;
     }
@@ -72,7 +84,7 @@ class EntryPagesModal extends React.Component {
     return 'Visitors';
   }
 
-  renderPage(page) {
+  renderPage(page: Page) {
     const query = new URLSearchParams(window.location.search);
     query.set('entry_page', page.name);
 

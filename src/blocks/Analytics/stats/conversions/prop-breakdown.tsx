@@ -4,27 +4,48 @@ import { Link } from '$/components/Link';
 
 import * as api from '../../api';
 import numberFormatter from '../../number-formatter';
+import { Query } from '../../query';
 import * as storage from '../../storage';
+import { BreakDownItem, Goal, Site } from '../../type';
 import Bar from '../bar';
 
 const MOBILE_UPPER_WIDTH = 767;
 const DEFAULT_WIDTH = 1080;
 
 // https://stackoverflow.com/a/43467144
-function isValidHttpUrl(string) {
+function isValidHttpUrl(string: string) {
   let url;
 
   try {
     url = new URL(string);
-  } catch (_) {
+  } catch {
     return false;
   }
 
   return url.protocol === 'http:' || url.protocol === 'https:';
 }
 
-export default class PropertyBreakdown extends React.Component {
-  constructor(props) {
+export interface PropertyBreakdownProps {
+  goal: Goal;
+  query: Query;
+  site: Site;
+}
+
+interface PropertyBreakdownState {
+  viewport: number;
+  loading: boolean;
+  propKey: string;
+  page: number;
+  moreResultsAvailable: boolean;
+  breakdown: BreakDownItem[];
+}
+
+export default class PropertyBreakdown extends React.Component<
+  PropertyBreakdownProps,
+  PropertyBreakdownState
+> {
+  storageKey: string;
+  constructor(props: PropertyBreakdownProps) {
     super(props);
     let propKey = props.goal.prop_names[0];
     this.storageKey = 'goalPropTab__' + props.site.domain + props.goal.name;
@@ -44,8 +65,6 @@ export default class PropertyBreakdown extends React.Component {
       page: 1,
       moreResultsAvailable: false,
     };
-
-    this.handleResize = this.handleResize.bind(this);
   }
 
   componentDidMount() {
@@ -59,9 +78,9 @@ export default class PropertyBreakdown extends React.Component {
     window.removeEventListener('resize', this.handleResize, false);
   }
 
-  handleResize() {
+  handleResize = () => {
     this.setState({ viewport: window.innerWidth });
-  }
+  };
 
   getBarMaxWidth() {
     const { viewport } = this.state;
@@ -81,7 +100,7 @@ export default class PropertyBreakdown extends React.Component {
         .then((res) =>
           this.setState((state) => ({
             loading: false,
-            breakdown: state.breakdown.concat(res),
+            breakdown: [...state.breakdown, ...res],
             moreResultsAvailable: res.length === 100,
           })),
         );
@@ -92,7 +111,7 @@ export default class PropertyBreakdown extends React.Component {
     this.setState({ loading: true, page: this.state.page + 1 }, this.fetchPropBreakdown.bind(this));
   }
 
-  renderUrl(value) {
+  renderUrl(value: BreakDownItem) {
     if (isValidHttpUrl(value.name)) {
       return (
         <a target="_blank" href={value.name} rel="noreferrer" className="hidden group-hover:block">
@@ -110,7 +129,7 @@ export default class PropertyBreakdown extends React.Component {
     return null;
   }
 
-  renderPropContent(value, query) {
+  renderPropContent(value: BreakDownItem, query: URLSearchParams) {
     return (
       <span className="flex px-2 py-1.5 group dark:text-gray-300 relative z-9 break-all">
         <Link
@@ -125,17 +144,17 @@ export default class PropertyBreakdown extends React.Component {
     );
   }
 
-  renderPropValue(value) {
+  renderPropValue(value: BreakDownItem) {
     const query = new URLSearchParams(window.location.search);
     query.set('props', JSON.stringify({ [this.state.propKey]: value.name }));
-    const { viewport } = this.state;
+    const { viewport, breakdown } = this.state;
 
     return (
       <div className="flex items-center justify-between my-2" key={value.name}>
         <Bar
           count={value.unique_conversions}
           plot="unique_conversions"
-          all={this.state.breakdown}
+          all={breakdown}
           className="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={this.getBarMaxWidth()}
         >
@@ -158,13 +177,13 @@ export default class PropertyBreakdown extends React.Component {
     );
   }
 
-  changePropKey(newKey) {
+  changePropKey = (newKey: string) => {
     storage.setItem(this.storageKey, newKey);
     this.setState(
       { propKey: newKey, loading: true, breakdown: [], page: 1, moreResultsAvailable: false },
       this.fetchPropBreakdown,
     );
-  }
+  };
 
   renderLoading() {
     if (this.state.loading) {
@@ -190,7 +209,7 @@ export default class PropertyBreakdown extends React.Component {
     return this.state.breakdown.map((propValue) => this.renderPropValue(propValue));
   }
 
-  renderPill(key) {
+  renderPill = (key: string) => {
     const isActive = this.state.propKey === key;
 
     return isActive ? (
@@ -204,12 +223,12 @@ export default class PropertyBreakdown extends React.Component {
       <li
         key={key}
         className="hover:text-indigo-600 cursor-pointer mr-2"
-        onClick={this.changePropKey.bind(this, key)}
+        onClick={() => this.changePropKey(key)}
       >
         {key}
       </li>
     );
-  }
+  };
 
   render() {
     return (
@@ -219,7 +238,7 @@ export default class PropertyBreakdown extends React.Component {
             Breakdown by:
           </span>
           <ul className="flex flex-wrap font-medium text-xs text-gray-500 dark:text-gray-400 leading-5 pl-1 sm:pl-2">
-            {this.props.goal.prop_names.map(this.renderPill.bind(this))}
+            {this.props.goal.prop_names.map((element) => this.renderPill(element))}
           </ul>
         </div>
         {this.renderBody()}

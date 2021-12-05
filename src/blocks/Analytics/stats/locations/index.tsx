@@ -1,21 +1,24 @@
+import { NextRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
 
 import * as api from '../../api';
 import * as storage from '../../storage';
 import { cardTitle, tabContainer } from '../../styles';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
 import ListReport from '../reports/list';
 import CountriesMap from './map';
 
-function Countries({ query, site }) {
+function Countries({ query, site }: Props) {
   function fetchData() {
     return api.get(apiPath(site, '/countries'), query, { limit: 9 }).then((res) => {
-      return res.map((row) => Object.assign({}, row, { percentage: undefined }));
+      return res.map((row: any) => Object.assign({}, row, { percentage: undefined }));
     });
   }
 
-  function renderIcon(country) {
+  function renderIcon(country: any) {
     return site.cities && <span className="mr-1">{country.flag}</span>;
   }
 
@@ -32,7 +35,11 @@ function Countries({ query, site }) {
   );
 }
 
-function Regions({ query, site }) {
+interface Region {
+  country_flag: string;
+}
+
+function Regions({ query, site }: Props) {
   function fetchData() {
     return api.get(apiPath(site, '/regions'), query, {
       country_name: query.filters.country,
@@ -40,7 +47,7 @@ function Regions({ query, site }) {
     });
   }
 
-  function renderIcon(region) {
+  function renderIcon(region: Region) {
     return <span className="mr-1">{region.country_flag}</span>;
   }
 
@@ -57,7 +64,7 @@ function Regions({ query, site }) {
   );
 }
 
-function Cities({ query, site }) {
+function Cities({ query, site }: Props) {
   function fetchData() {
     return api.get(apiPath(site, '/cities'), query, { limit: 9 });
   }
@@ -80,8 +87,17 @@ const labelFor = {
   cities: 'Cities',
 };
 
-export default class Locations extends React.Component {
-  constructor(props) {
+type Mode = keyof typeof labelFor | 'map';
+interface LocationsProps extends Props {
+  timer: Timer;
+  router: NextRouter;
+}
+interface LocationsState {
+  mode: Mode;
+}
+export default class Locations extends React.Component<LocationsProps, LocationsState> {
+  tabKey: string;
+  constructor(props: LocationsProps) {
     super(props);
     this.tabKey = `geoTab__${props.site.domain}`;
     const storedTab = storage.getItem(this.tabKey);
@@ -90,7 +106,7 @@ export default class Locations extends React.Component {
     };
   }
 
-  setMode(mode) {
+  setMode(mode: Mode) {
     return () => {
       storage.setItem(this.tabKey, mode);
       this.setState({ mode });
@@ -100,22 +116,25 @@ export default class Locations extends React.Component {
   renderContent() {
     switch (this.state.mode) {
       case 'cities':
-        return <Cities site={this.props.site} query={this.props.query} timer={this.props.timer} />;
+        return <Cities site={this.props.site} query={this.props.query} />;
       case 'regions':
-        return <Regions site={this.props.site} query={this.props.query} timer={this.props.timer} />;
+        return <Regions site={this.props.site} query={this.props.query} />;
       case 'countries':
-        return (
-          <Countries site={this.props.site} query={this.props.query} timer={this.props.timer} />
-        );
+        return <Countries site={this.props.site} query={this.props.query} />;
       case 'map':
       default:
         return (
-          <CountriesMap site={this.props.site} query={this.props.query} timer={this.props.timer} />
+          <CountriesMap
+            router={this.props.router}
+            site={this.props.site}
+            query={this.props.query}
+            timer={this.props.timer}
+          />
         );
     }
   }
 
-  renderPill(name, mode) {
+  renderPill(name: string, mode: Mode) {
     const isActive = this.state.mode === mode;
 
     if (isActive) {
@@ -138,6 +157,7 @@ export default class Locations extends React.Component {
       <div className="stats-item flex flex-col w-full mt-6 stats-item--has-header">
         <div className="stats-item-header flex flex-col flex-grow bg-white dark:bg-gray-825 shadow-xl rounded p-4 relative">
           <div className="w-full flex justify-between">
+            {/* @ts-ignore */}
             <h3 css={cardTitle}>{labelFor[this.state.mode] || 'Locations'}</h3>
             <ul css={tabContainer}>
               {this.renderPill('Map', 'map')}

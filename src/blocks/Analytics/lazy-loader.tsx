@@ -1,15 +1,27 @@
 import React from 'react';
 
-export default class extends React.Component {
+interface LazyLoaderProps {
+  onVisible?: () => void;
+  className?: string;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}
+
+export default class LazyLoader extends React.Component<LazyLoaderProps> {
+  observer: IntersectionObserver;
+  element: HTMLElement;
   componentDidMount() {
-    this.observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        this.props.onVisible && this.props.onVisible()
-        this.observer.unobserve(this.element);
-      }
-    }, {
-      threshold: 0
-    });
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.props.onVisible && this.props.onVisible();
+          this.observer.unobserve(this.element);
+        }
+      },
+      {
+        threshold: 0,
+      },
+    );
 
     this.observer.observe(this.element);
   }
@@ -21,7 +33,9 @@ export default class extends React.Component {
   render() {
     return (
       <div
-        ref={(el) => { this.element = el }}
+        ref={(el) => {
+          this.element = el!;
+        }}
         className={this.props.className}
         style={this.props.style}
       >

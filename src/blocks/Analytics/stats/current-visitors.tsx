@@ -4,27 +4,33 @@ import { Link } from '$/components/Link';
 
 import * as api from '../api';
 import { appliedFilters } from '../query';
+import { Timer } from '../timer';
+import { Props } from '../type';
 import * as url from '../url';
 
-export default class CurrentVisitors extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { currentVisitors: null };
-  }
+export interface CurrentVisitorsProps extends Props {
+  timer: Timer;
+}
+
+interface CurrentVisitorsState {
+  currentVisitors: any;
+}
+export default class CurrentVisitors extends React.Component<CurrentVisitorsProps> {
+  state: CurrentVisitorsState = { currentVisitors: null };
 
   componentDidMount() {
     this.updateCount();
-    this.props.timer.onTick(this.updateCount.bind(this));
+    this.props.timer.onTick(this.updateCount);
   }
 
-  updateCount() {
+  updateCount = () => {
     return api
       .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/current-visitors`)
       .then((res) => this.setState({ currentVisitors: res }));
-  }
+  };
 
   render() {
-    if (appliedFilters(this.props.query).length >= 1) {
+    if (appliedFilters(this.props.query).length > 0) {
       return null;
     }
     const { currentVisitors } = this.state;

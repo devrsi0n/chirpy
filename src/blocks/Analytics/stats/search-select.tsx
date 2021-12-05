@@ -5,7 +5,7 @@ import debounce from 'debounce-promise';
 import { useCombobox } from 'downshift';
 import React, { useState, useCallback } from 'react';
 
-function selectInputText(e) {
+function selectInputText(e: { target: { select: () => void } }) {
   e.target.select();
 }
 
@@ -34,11 +34,21 @@ function Spinner() {
   );
 }
 
-export default function SearchSelect(props) {
+interface SearchSelectProps {
+  fetchOptions: (query: string) => Promise<any>;
+  onInput: (value: string) => void;
+  onSelect: (value: any) => void;
+  initialSelectedItem: any;
+  placeholder: string;
+  className?: string;
+  disabled?: boolean;
+}
+
+export default function SearchSelect(props: SearchSelectProps) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  function fetchOptions({ inputValue, isOpen }) {
+  function fetchOptions({ inputValue, isOpen }: { inputValue: string; isOpen: boolean }) {
     setLoading(isOpen);
 
     return props.fetchOptions(inputValue || '').then((loadedItems) => {
@@ -47,6 +57,7 @@ export default function SearchSelect(props) {
     });
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchOptions = useCallback(debounce(fetchOptions, 200), []);
 
   const {
@@ -63,8 +74,9 @@ export default function SearchSelect(props) {
     items,
     itemToString: (item) => (item.hasOwnProperty('name') ? item.name : item),
     onInputValueChange: (changes) => {
+      // @ts-ignore
       debouncedFetchOptions(changes);
-      props.onInput(changes.inputValue);
+      props.onInput(changes.inputValue!);
       if (changes.inputValue === '') {
         props.onSelect({ name: '', code: '' });
       }
@@ -75,12 +87,14 @@ export default function SearchSelect(props) {
     initialSelectedItem: props.initialSelectedItem,
     onIsOpenChange: (state) => {
       if (state.isOpen) {
+        // @ts-ignore
         fetchOptions(state);
       }
     },
   });
 
-  function keydown(e) {
+  const keydown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    // @ts-ignore
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.isComposing || e.keyCode === 229)
       return;
 
@@ -88,7 +102,7 @@ export default function SearchSelect(props) {
       closeMenu();
       e.preventDefault();
     }
-  }
+  };
 
   return (
     <div className="ml-2 relative w-full">
@@ -125,7 +139,7 @@ export default function SearchSelect(props) {
               <li className="text-gray-500 select-none py-2 px-3">Loading options...</li>
             )}
 
-            {items.map((item, index) => (
+            {items.map((item: any, index) => (
               <li
                 className={classNames('cursor-pointer select-none relative py-2 pl-3 pr-9', {
                   'text-white bg-indigo-600': highlightedIndex === index,

@@ -5,40 +5,58 @@ import 'twin.macro';
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
-import { EmptyState } from '../../components/EmptyState';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import { cardTitle } from '../../styles';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
+import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
 import MoreLink from '../more-link';
 
-function LinkOption(props) {
-  if (props.disabled) {
-    return <span {...props}>{props.children}</span>;
-  } else {
-    props = Object.assign({}, props, { className: props.className + ' hover:underline' });
-    return (
-      <Link disabled {...props}>
-        {props.children}
-      </Link>
-    );
-  }
+interface LinkOptionProps {
+  children: React.ReactNode;
+  disabled?: boolean;
+  className?: string;
+  query: URLSearchParams;
 }
 
-export default class Referrers extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-    this.onVisible = this.onVisible.bind(this);
-  }
+function LinkOption({ disabled, children, query, ...restProps }: LinkOptionProps) {
+  const url = new URL(location.origin + location.pathname + '?' + query.toString()).href;
+  return disabled ? (
+    <span {...restProps}>{children}</span>
+  ) : (
+    <Link disabled {...restProps} href={url}>
+      {children}
+    </Link>
+  );
+}
 
-  onVisible() {
+export interface ReferrersProps extends Props {
+  timer: Timer;
+}
+
+export interface Referrer {
+  name: string;
+  visitors: number;
+  conversion_rate: number;
+}
+
+interface ReferrersState {
+  referrers: Referrer[] | null;
+  loading: boolean;
+}
+
+export default class Referrers extends React.Component<ReferrersProps, ReferrersState> {
+  state: ReferrersState = { loading: true, referrers: null };
+
+  onVisible = () => {
     this.fetchReferrers();
     if (this.props.timer) this.props.timer.onTick(this.fetchReferrers.bind(this));
-  }
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ReferrersProps) {
     if (this.props.query !== prevProps.query) {
       this.setState({ loading: true, referrers: null });
       this.fetchReferrers();
@@ -83,7 +101,7 @@ export default class Referrers extends React.Component {
     }
   }
 
-  renderExternalLink(referrer) {
+  renderExternalLink(referrer: Referrer) {
     if (
       this.props.query.filters.source &&
       this.props.query.filters.source !== 'Google' &&
@@ -110,7 +128,7 @@ export default class Referrers extends React.Component {
     return null;
   }
 
-  renderReferrer(referrer) {
+  renderReferrer(referrer: Referrer) {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
     const query = new URLSearchParams(window.location.search);
     query.set('referrer', referrer.name);
@@ -119,14 +137,14 @@ export default class Referrers extends React.Component {
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
           count={referrer.visitors}
-          all={this.state.referrers}
+          all={this.state.referrers!}
           className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 z-9 relative break-all group">
             <LinkOption
               className="block md:truncate dark:text-gray-300"
-              to={{ search: query.toString() }}
+              query={query}
               disabled={referrer.name === 'Direct / None'}
             >
               <img
@@ -162,7 +180,7 @@ export default class Referrers extends React.Component {
   }
 
   renderList() {
-    if (this.state.referrers.length > 0) {
+    if (this.state.referrers!.length > 0) {
       return (
         <div className="flex flex-col flex-grow">
           <div className="flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-500">
@@ -175,7 +193,7 @@ export default class Referrers extends React.Component {
           </div>
 
           <FlipMove className="flex-grow">
-            {this.state.referrers.map(this.renderReferrer.bind(this))}
+            {this.state.referrers!.map(this.renderReferrer.bind(this))}
           </FlipMove>
         </div>
       );

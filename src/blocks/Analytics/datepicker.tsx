@@ -1,5 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
@@ -20,9 +21,18 @@ import {
   isAfter,
 } from './date';
 import { navigateToQuery, QueryLink, QueryButton, Query } from './query';
-import { Site } from './type';
+import { Props, Site } from './type';
 
-function renderArrow(query, site, period, prevDate, nextDate) {
+interface ArrowProps {
+  query: Query;
+  site: Site;
+  period: 'day' | 'month';
+  prevDate: string;
+  nextDate: string;
+}
+
+function RenderArrow({ query, site, period, prevDate, nextDate }: ArrowProps) {
+  const router = useRouter();
   const insertionDate = parseUTCDate(site.insertedAt);
   const disabledLeft = isBefore(parseUTCDate(prevDate), insertionDate, period);
   const disabledRight = isAfter(parseUTCDate(nextDate), nowForSite(site), period);
@@ -37,6 +47,7 @@ function renderArrow(query, site, period, prevDate, nextDate) {
   return (
     <div className="flex rounded shadow bg-white mr-2 sm:mr-4 cursor-pointer dark:bg-gray-800">
       <QueryButton
+        router={router}
         to={{ date: prevDate }}
         query={query}
         className={leftClasses}
@@ -56,6 +67,7 @@ function renderArrow(query, site, period, prevDate, nextDate) {
         </svg>
       </QueryButton>
       <QueryButton
+        router={router}
         to={{ date: nextDate }}
         query={query}
         className={rightClasses}
@@ -78,26 +90,36 @@ function renderArrow(query, site, period, prevDate, nextDate) {
   );
 }
 
-function DatePickerArrows({ site, query }) {
+function DatePickerArrows({ site, query }: Props) {
   if (query.period === 'month') {
     const prevDate = formatISO(shiftMonths(query.date, -1));
     const nextDate = formatISO(shiftMonths(query.date, 1));
 
-    return renderArrow(query, site, 'month', prevDate, nextDate);
+    return (
+      <RenderArrow
+        query={query}
+        site={site}
+        period="month"
+        prevDate={prevDate}
+        nextDate={nextDate}
+      />
+    );
   }
   if (query.period === 'day') {
     const prevDate = formatISO(shiftDays(query.date, -1));
     const nextDate = formatISO(shiftDays(query.date, 1));
 
-    return renderArrow(query, site, 'day', prevDate, nextDate);
+    return (
+      <RenderArrow query={query} site={site} period="day" prevDate={prevDate} nextDate={nextDate} />
+    );
   }
 
   return null;
 }
 
-interface DatePickerProps {
-  query: Query;
-  site: Site;
+interface DatePickerProps extends Props {
+  router: NextRouter;
+  leadingText?: string;
 }
 
 interface DatePickerState {
@@ -108,6 +130,7 @@ interface DatePickerState {
 class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
   state = { mode: 'menu', open: false };
   dropDownNode: HTMLElement;
+  calendar: Flatpickr;
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeydown);
@@ -119,7 +142,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     document.removeEventListener('mousedown', this.handleClick, false);
   }
 
-  handleKeydown = (e) => {
+  handleKeydown = (e: any) => {
     const { query, site } = this.props;
 
     if (e.target.tagName === 'INPUT') return true;
@@ -183,36 +206,39 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
       { date: false, period: '6mo' },
     ];
 
+    const { router } = this.props;
+
     if (keys.includes(e.key.toLowerCase())) {
-      navigateToQuery(query, {
+      navigateToQuery(router, query, {
         ...newSearch,
         ...redirects[keys.indexOf(e.key.toLowerCase())],
       });
     } else if (e.key.toLowerCase() === 'c') {
       this.setState({ mode: 'calendar', open: true }, this.openCalendar);
     } else if (newSearch.date) {
-      navigateToQuery(query, newSearch);
+      navigateToQuery(router, query, newSearch);
     }
   };
 
-  handleClick = (e) => {
+  handleClick = (e: any) => {
     if (this.dropDownNode && this.dropDownNode.contains(e.target)) return;
 
     this.setState({ open: false });
   };
 
   setCustomDate: DateTimePickerProps['onChange'] = (dates) => {
+    const { router, query } = this.props;
     if (dates.length === 2) {
       const [from, to] = dates;
       if (formatISO(from) === formatISO(to)) {
-        navigateToQuery(this.props.query, {
+        navigateToQuery(router, query, {
           period: 'day',
           date: formatISO(from),
           from: false,
           to: false,
         });
       } else {
-        navigateToQuery(this.props.query, {
+        navigateToQuery(router, query, {
           period: 'custom',
           date: false,
           from: formatISO(from),
@@ -251,7 +277,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
       return 'Last 12 months';
     }
     if (query.period === 'custom') {
-      return `${formatDayShort(query.from)} - ${formatDayShort(query.to)}`;
+      return `${formatDayShort(query.from!)} - ${formatDayShort(query.to!)}`;
     }
     return 'Realtime';
   };
@@ -269,7 +295,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     this.calendar && this.calendar.flatpickr.open();
   };
 
-  renderLink(period, text, opts = {}) {
+  renderLink(period: any, text: any, opts: any = {}) {
     const { query, site } = this.props;
     let boldClass;
     if (query.period === 'day' && period === 'day') {
@@ -297,11 +323,12 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
       <QueryLink
         to={{ from: false, to: false, period, ...opts }}
         onClick={this.close}
-        query={this.props.query}
+        query={query}
         className={`${boldClass} px-4 py-2 text-sm leading-tight hover:bg-gray-100 hover:text-gray-900
           dark:hover:bg-gray-900 dark:hover:text-gray-100 flex items-center justify-between`}
       >
         {text}
+        {/* @ts-ignore */}
         <span className="font-normal">{keybinds[text]}</span>
       </QueryLink>
     );
@@ -345,7 +372,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
                 className="px-4 py-2 text-sm leading-tight hover:bg-gray-100
                   dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-gray-100
                   cursor-pointer flex items-center justify-between"
-                tabIndex="0"
+                tabIndex={0}
                 role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
@@ -360,8 +387,8 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
       );
     }
     if (this.state.mode === 'calendar') {
-      const insertionDate = new Date(this.props.site.insertedAt);
-      const dayBeforeCreation = insertionDate - 86400000;
+      const insertionDate = new Date(this.props.site.insertedAt).getTime();
+      const dayBeforeCreation = insertionDate - 86_400_000;
       return (
         <div className="h-0">
           <Flatpickr
@@ -374,7 +401,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
               static: true,
               animate: true,
             }}
-            ref={(calendar) => (this.calendar = calendar)}
+            ref={(calendar) => (this.calendar = calendar!)}
             className="invisible"
             onChange={this.setCustomDate}
           />
@@ -385,14 +412,14 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
   renderPicker() {
     return (
-      <div className="w-20 sm:w-36 md:w-44 md:relative" ref={(node) => (this.dropDownNode = node)}>
+      <div className="w-20 sm:w-36 md:w-44 md:relative" ref={(node) => (this.dropDownNode = node!)}>
         <div
           onClick={this.toggle}
           onKeyPress={this.toggle}
           className="flex items-center justify-between rounded bg-white dark:bg-gray-800 shadow px-2 md:px-3
           py-2 leading-tight cursor-pointer text-xs md:text-sm text-gray-1100
          hover:bg-gray-200 dark:hover:bg-gray-900"
-          tabIndex="0"
+          tabIndex={0}
           role="button"
           aria-haspopup="true"
           aria-expanded="false"

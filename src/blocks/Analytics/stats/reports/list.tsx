@@ -3,31 +3,46 @@ import 'twin.macro';
 
 import { Link } from '$/components/Link';
 
-import { EmptyState } from '../../components/EmptyState';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
+import { Query } from '../../query';
 import { labelContainer } from '../../styles';
+import { Timer } from '../../timer';
+import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
 import MoreLink from '../more-link';
 
-export default class ListReport extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-    this.onVisible = this.onVisible.bind(this);
-  }
+interface ListReportProps {
+  query: Query;
+  timer?: Timer;
+  fetchData: () => Promise<any>;
+  color?: string;
+  tooltipText?: (listItem: any) => string;
+  renderIcon?: (listItem: any) => React.ReactNode;
+  detailsLink?: string;
+  keyLabel: string;
+  filter: { [key: string]: string };
+}
 
-  componentDidUpdate(prevProps) {
+interface ListReportState {
+  loading: boolean;
+  list: any;
+}
+
+export default class ListReport extends React.Component<ListReportProps, ListReportState> {
+  state: ListReportState = { loading: true, list: null };
+
+  componentDidUpdate(prevProps: ListReportProps) {
     if (this.props.query !== prevProps.query) {
       this.fetchData();
     }
   }
 
-  onVisible() {
+  onVisible = () => {
     this.fetchData();
     if (this.props.timer) this.props.timer.onTick(this.fetchData.bind(this));
-  }
+  };
 
   fetchData() {
     this.setState({ loading: true, list: null });
@@ -50,7 +65,7 @@ export default class ListReport extends React.Component {
     return !!this.props.query.filters.goal;
   }
 
-  renderListItem(listItem) {
+  renderListItem(listItem: any) {
     const query = new URLSearchParams(window.location.search);
 
     Object.entries(this.props.filter).forEach(([key, valueKey]) => {
@@ -70,14 +85,14 @@ export default class ListReport extends React.Component {
         >
           <span
             className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all"
-            tooltip={this.props.tooltipText && this.props.tooltipText(listItem)}
+            tooltip={this.props.tooltipText?.(listItem)}
           >
             <Link
               disabled
               className="md:truncate block hover:underline"
               href={`${location.href}?${query.toString()}`}
             >
-              {this.props.renderIcon && this.props.renderIcon(listItem)}
+              {this.props.renderIcon?.(listItem)}
               {this.props.renderIcon && ' '}
               {listItem.name}
             </Link>
@@ -109,7 +124,7 @@ export default class ListReport extends React.Component {
               {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
             </span>
           </div>
-          {this.state.list && this.state.list.map(this.renderListItem.bind(this))}
+          {this.state.list.map((element: any) => this.renderListItem(element))}
         </>
       );
     }

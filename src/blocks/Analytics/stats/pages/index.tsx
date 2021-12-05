@@ -3,6 +3,8 @@ import 'twin.macro';
 
 import * as storage from '../../storage';
 import { cardTitle, tabContainer } from '../../styles';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
 import EntryPages from './entry-pages';
 import ExitPages from './exit-pages';
 import Visits from './pages';
@@ -13,17 +15,22 @@ const labelFor = {
   'exit-pages': 'Exit Pages',
 };
 
-export default class Pages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.tabKey = `pageTab__${props.site.domain}`;
-    const storedTab = storage.getItem(this.tabKey);
-    this.state = {
-      mode: storedTab || 'pages',
-    };
-  }
+export interface PagesProps extends Props {
+  timer: Timer;
+}
 
-  setMode(mode) {
+type Mode = 'pages' | 'entry-pages' | 'exit-pages';
+interface PagesState {
+  mode: Mode;
+}
+
+export default class Pages extends React.Component<PagesProps, PagesState> {
+  tabKey: string = `pageTab__${this.props.site.domain}`;
+  state: PagesState = {
+    mode: storage.getItem(this.tabKey) || 'pages',
+  };
+
+  setMode(mode: Mode) {
     return () => {
       storage.setItem(this.tabKey, mode);
       this.setState({ mode });
@@ -47,7 +54,7 @@ export default class Pages extends React.Component {
   }
 
   // TODO: Extract to `tabs` component
-  renderPill(name, mode) {
+  renderPill(name: string, mode: Mode) {
     const isActive = this.state.mode === mode;
 
     if (isActive) {

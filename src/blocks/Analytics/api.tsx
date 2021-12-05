@@ -1,3 +1,5 @@
+import { Primitive } from 'type-fest';
+
 import { ssrMode } from '$/utilities/env';
 
 import { formatISO } from './date';
@@ -40,7 +42,7 @@ function serializeFilters(filters: Record<string, any>) {
 
 export function serializeQuery(
   query: Partial<Query>,
-  extraQuery: Array<Record<string, string>> = [],
+  extraQuery: Array<Record<string, Primitive>> = [],
 ) {
   const queryObj: Record<string, string> = {};
   if (query.period) {
@@ -69,7 +71,7 @@ export function serializeQuery(
 export function get(
   url: string,
   query: Partial<Query> = {},
-  ...extraQuery: Array<Record<string, string>>
+  ...extraQuery: Array<Record<string, Primitive>>
 ) {
   const headers: Record<string, string> = SHARED_LINK_AUTH
     ? { 'X-Shared-Link-Auth': SHARED_LINK_AUTH }

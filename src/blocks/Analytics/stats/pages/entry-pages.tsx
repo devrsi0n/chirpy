@@ -4,32 +4,51 @@ import FlipMove from 'react-flip-move';
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
-import { EmptyState } from '../../components/EmptyState';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
 import * as url from '../../url';
+import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
 import MoreLink from '../more-link';
 
-export default class EntryPages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-    this.onVisible = this.onVisible.bind(this);
-  }
+interface EntryPagesProps extends Props {
+  timer: Timer;
+}
 
-  componentDidUpdate(prevProps) {
+export interface Page {
+  name: string;
+  unique_entrances: number;
+  conversion_rate: number;
+  unique_exits: number;
+  visitors: number;
+  total_visitors: number;
+  total_entrances: number;
+  visit_duration: number;
+  bounce_rate: number;
+}
+
+interface EntryPagesState {
+  loading: boolean;
+  pages: Page[] | null;
+}
+
+export default class EntryPages extends React.Component<EntryPagesProps, EntryPagesState> {
+  state: EntryPagesState = { loading: true, pages: null };
+
+  componentDidUpdate(prevProps: EntryPagesProps) {
     if (this.props.query !== prevProps.query) {
       this.setState({ loading: true, pages: null });
       this.fetchPages();
     }
   }
 
-  onVisible() {
+  onVisible = () => {
     this.fetchPages();
     if (this.props.timer) this.props.timer.onTick(this.fetchPages.bind(this));
-  }
+  };
 
   showConversionRate() {
     return !!this.props.query.filters.goal;
@@ -53,7 +72,7 @@ export default class EntryPages extends React.Component {
     return 'Unique Entrances';
   }
 
-  renderPage(page) {
+  renderPage(page: Page) {
     const externalLink = url.externalLinkForPage(this.props.site.domain, page.name);
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
@@ -61,7 +80,7 @@ export default class EntryPages extends React.Component {
       <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
         <Bar
           count={page.unique_entrances}
-          all={this.state.pages}
+          all={this.state.pages!}
           plot="unique_entrances"
           className="bg-orange-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={maxWidthDeduction}
@@ -115,7 +134,8 @@ export default class EntryPages extends React.Component {
             </div>
           </div>
 
-          <FlipMove>{this.state.pages.map(this.renderPage.bind(this))}</FlipMove>
+          {/* @ts-ignore */}
+          <FlipMove>{this.state.pages?.map(this.renderPage)}</FlipMove>
         </>
       );
     }
@@ -123,7 +143,7 @@ export default class EntryPages extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, pages } = this.state;
     return (
       <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
         {loading && (
@@ -134,9 +154,7 @@ export default class EntryPages extends React.Component {
         <FadeIn show={!loading} className="flex-grow">
           {this.renderList()}
         </FadeIn>
-        {!loading && (
-          <MoreLink site={this.props.site} list={this.state.pages} endpoint="entry-pages" />
-        )}
+        {!loading && <MoreLink site={this.props.site} list={pages!} endpoint="entry-pages" />}
       </LazyLoader>
     );
   }

@@ -5,33 +5,41 @@ import 'twin.macro';
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
-import { EmptyState } from '../../components/EmptyState';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import { itemBg, labelContainer } from '../../styles';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
 import * as url from '../../url';
+import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
 import MoreLink from '../more-link';
+import { Page } from './entry-pages';
 
-export default class Visits extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-    this.onVisible = this.onVisible.bind(this);
-  }
+export interface VisitsProps extends Props {
+  timer: Timer;
+}
 
-  componentDidUpdate(prevProps) {
+interface VisitsState {
+  loading: boolean;
+  pages: Page[] | null;
+}
+
+export default class Visits extends React.Component<VisitsProps, VisitsState> {
+  state: VisitsState = { loading: true, pages: null };
+
+  componentDidUpdate(prevProps: VisitsProps) {
     if (this.props.query !== prevProps.query) {
       this.setState({ loading: true, pages: null });
       this.fetchPages();
     }
   }
 
-  onVisible() {
+  onVisible = () => {
     this.fetchPages();
     if (this.props.timer) this.props.timer.onTick(this.fetchPages.bind(this));
-  }
+  };
 
   showConversionRate() {
     return !!this.props.query.filters.goal;
@@ -55,7 +63,7 @@ export default class Visits extends React.Component {
     return 'Visitors';
   }
 
-  renderPage(page) {
+  renderPage(page: Page) {
     const externalLink = url.externalLinkForPage(this.props.site.domain, page.name);
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
@@ -63,7 +71,7 @@ export default class Visits extends React.Component {
       <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
         <Bar
           count={page.visitors}
-          all={this.state.pages}
+          all={this.state.pages!}
           css={itemBg}
           maxWidthDeduction={maxWidthDeduction}
         >
@@ -126,7 +134,7 @@ export default class Visits extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, pages } = this.state;
     return (
       <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
         {loading && (
@@ -137,7 +145,7 @@ export default class Visits extends React.Component {
         <FadeIn show={!loading} className="flex-grow">
           {this.renderList()}
         </FadeIn>
-        {!loading && <MoreLink site={this.props.site} list={this.state.pages} endpoint="pages" />}
+        {!loading && <MoreLink site={this.props.site} list={pages!} endpoint="pages" />}
       </LazyLoader>
     );
   }

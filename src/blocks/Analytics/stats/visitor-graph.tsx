@@ -1,20 +1,29 @@
 import Chart from 'chart.js/auto';
+import { NextRouter } from 'next/router';
 import React from 'react';
 
 import * as api from '../api';
 import LazyLoader from '../lazy-loader';
 import numberFormatter, { durationFormatter } from '../number-formatter';
 import { navigateToQuery } from '../query';
+import { Timer } from '../timer';
+import { Props } from '../type';
 
-function buildDataSet(plot, present_index, ctx, label) {
-  var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+function buildDataSet(
+  plot: string,
+  present_index: number,
+  ctx: { createLinearGradient: (arg0: number, arg1: number, arg2: number, arg3: number) => any },
+  label: string,
+) {
+  const gradient = ctx.createLinearGradient(0, 0, 0, 300);
   gradient.addColorStop(0, 'rgba(101,116,205, 0.2)');
   gradient.addColorStop(1, 'rgba(101,116,205, 0)');
 
   if (present_index) {
-    var dashedPart = plot.slice(present_index - 1, present_index + 1);
-    var dashedPlot = new Array(present_index - 1).concat(dashedPart);
+    const dashedPart = plot.slice(present_index - 1, present_index + 1);
+    const dashedPlot = [...Array.from({ length: present_index - 1 }), ...dashedPart];
     for (var i = present_index; i < plot.length; i++) {
+      // @ts-ignore
       plot[i] = undefined;
     }
 
@@ -67,7 +76,7 @@ const MONTHS = [
   'October',
   'November',
   'December',
-];
+] as const;
 
 const MONTHS_ABBREV = [
   'Jan',
@@ -82,54 +91,76 @@ const MONTHS_ABBREV = [
   'Oct',
   'Nov',
   'Dec',
-];
+] as const;
 
 const DAYS_ABBREV = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-function dateFormatter(interval, longForm) {
-  return function (isoDate, _index, _ticks) {
+function dateFormatter(interval: string, longForm?: boolean) {
+  return function (isoDate: string) {
     let date = new Date(isoDate);
 
-    if (interval === 'month') {
-      return MONTHS[date.getUTCMonth()];
-    } else if (interval === 'date') {
-      var day = DAYS_ABBREV[date.getUTCDay()];
-      var date_ = date.getUTCDate();
-      var month = MONTHS_ABBREV[date.getUTCMonth()];
-      return day + ', ' + date_ + ' ' + month;
-    } else if (interval === 'hour') {
-      const parts = isoDate.split(/[^0-9]/);
-      date = new Date(parts[0], parts[1] - 1, parts[2], parts[3], parts[4], parts[5]);
-      var hours = date.getHours(); // Not sure why getUTCHours doesn't work here
-      var ampm = hours >= 12 ? 'pm' : 'am';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      return hours + ampm;
-    } else if (interval === 'minute') {
-      if (longForm) {
-        const minutesAgo = Math.abs(isoDate);
-        return minutesAgo === 1 ? '1 minute ago' : minutesAgo + ' minutes ago';
-      } else {
-        return isoDate + 'm';
+    switch (interval) {
+      case 'month': {
+        return MONTHS[date.getUTCMonth()];
       }
+      case 'date': {
+        var day = DAYS_ABBREV[date.getUTCDay()];
+        var date_ = date.getUTCDate();
+        var month = MONTHS_ABBREV[date.getUTCMonth()];
+        return day + ', ' + date_ + ' ' + month;
+      }
+      case 'hour': {
+        const parts = isoDate.split(/\D/);
+        date = new Date(+parts[0], +parts[1] - 1, +parts[2], +parts[3], +parts[4], +parts[5]);
+        var hours = date.getHours(); // Not sure why getUTCHours doesn't work here
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        return hours + ampm;
+      }
+      case 'minute': {
+        if (longForm) {
+          const minutesAgo = Math.abs(+isoDate);
+          return minutesAgo === 1 ? '1 minute ago' : minutesAgo + ' minutes ago';
+        } else {
+          return isoDate + 'm';
+        }
+      }
+      // No default
     }
   };
 }
 
-class LineGraph extends React.Component {
-  constructor(props) {
-    super(props);
-    this.regenerateChart = this.regenerateChart.bind(this);
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-    this.state = {
-      exported: false,
-    };
-  }
+interface GraphData {
+  interval: string;
+  labels: string[];
+  plot: string;
+  present_index: number;
+  sample_percent: number;
+}
 
-  regenerateChart() {
-    const { graphData } = this.props;
-    this.ctx = document.getElementById('main-graph-canvas').getContext('2d');
-    const label = this.props.query.filters.goal
+interface LineGraphProps extends Props {
+  graphData: GraphData;
+  darkTheme: boolean;
+  router: NextRouter;
+}
+
+interface LineGraphState {
+  exported: boolean;
+}
+
+class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
+  ctx: any;
+  chart: Chart<'line', string, string>;
+
+  state: LineGraphState = {
+    exported: false,
+  };
+
+  regenerateChart = () => {
+    const { graphData, query, darkTheme } = this.props;
+    this.ctx = (document.querySelector('#main-graph-canvas') as HTMLCanvasElement).getContext('2d');
+    const label = query.filters.goal
       ? 'Converted visitors'
       : graphData.interval === 'minute'
       ? 'Pageviews'
@@ -140,6 +171,7 @@ class LineGraph extends React.Component {
       type: 'line',
       data: {
         labels: graphData.labels,
+        // @ts-ignore
         datasets: dataSet,
       },
       options: {
@@ -156,25 +188,34 @@ class LineGraph extends React.Component {
             titleMarginBottom: 8,
             bodySpacing: 6,
             footerMarginTop: 8,
+            // @ts-ignore
             padding: { x: 10, y: 10 },
             multiKeyBackground: 'none',
             callbacks: {
+              // @ts-ignore
               title: function (dataPoints) {
                 const data = dataPoints[0];
                 return dateFormatter(graphData.interval, true)(data.label);
               },
+              // @ts-ignore
               beforeBody: function () {
+                // @ts-ignore
                 this.drawnLabels = {};
               },
+              // @ts-ignore
               label: function (item) {
                 const dataset = item.dataset;
+                // @ts-ignore
                 if (!this.drawnLabels[dataset.label]) {
+                  // @ts-ignore
                   this.drawnLabels[dataset.label] = true;
                   const pluralizedLabel =
+                    // @ts-ignore
                     item.formattedValue === '1' ? dataset.label.slice(0, -1) : dataset.label;
                   return ` ${item.formattedValue} ${pluralizedLabel}`;
                 }
               },
+              // @ts-ignore
               footer: function (_dataPoints) {
                 if (graphData.interval === 'month') {
                   return 'Click to view month';
@@ -193,11 +234,13 @@ class LineGraph extends React.Component {
           y: {
             beginAtZero: true,
             ticks: {
+              // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: this.props.darkTheme ? 'rgb(243, 244, 246)' : undefined,
+              color: darkTheme ? 'rgb(243, 244, 246)' : undefined,
             },
             grid: {
+              // @ts-ignore
               zeroLineColor: 'transparent',
               drawBorder: false,
             },
@@ -207,21 +250,22 @@ class LineGraph extends React.Component {
             ticks: {
               maxTicksLimit: 8,
               callback: function (val, _index, _ticks) {
+                // @ts-ignore
                 return dateFormatter(graphData.interval)(this.getLabelForValue(val));
               },
-              color: this.props.darkTheme ? 'rgb(243, 244, 246)' : undefined,
+              color: darkTheme ? 'rgb(243, 244, 246)' : undefined,
             },
           },
         },
       },
     });
-  }
+  };
 
   componentDidMount() {
     this.chart = this.regenerateChart();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: LineGraphProps) {
     if (this.props.graphData !== prevProps.graphData) {
       const label = this.props.query.filters.goal
         ? 'Converted visitors'
@@ -236,6 +280,7 @@ class LineGraph extends React.Component {
       );
 
       for (let i = 0; i < newDataset[0].data.length; i++) {
+        // @ts-ignore
         this.chart.data.datasets[0].data[i] = newDataset[0].data[i];
       }
 
@@ -248,29 +293,31 @@ class LineGraph extends React.Component {
    * @param {*} chart - The chart instance.
    * @param {*} dimensions - An object containing the new dimensions *of the chart.*
    */
-  updateWindowDimensions(chart, dimensions) {
+  updateWindowDimensions = (chart: any, dimensions: any) => {
     chart.options.scales.x.ticks.maxTicksLimit = dimensions.width < 720 ? 5 : 8;
     chart.options.scales.y.ticks.maxTicksLimit = dimensions.height < 233 ? 3 : 8;
-  }
+  };
 
-  onClick(e) {
+  onClick(e: any) {
+    // @ts-ignore
     const element = this.chart.getElementsAtEventForMode(e, 'index', { intersect: false })[0];
+    // @ts-ignore
     const date = this.chart.data.labels[element.index];
 
     if (this.props.graphData.interval === 'month') {
-      navigateToQuery(this.props.history, this.props.query, {
+      navigateToQuery(this.props.router, this.props.query, {
         period: 'month',
         date,
       });
     } else if (this.props.graphData.interval === 'date') {
-      navigateToQuery(this.props.history, this.props.query, {
+      navigateToQuery(this.props.router, this.props.query, {
         period: 'day',
         date,
       });
     }
   }
 
-  renderComparison(name, comparison) {
+  renderComparison(name: string, comparison: number) {
     const formattedComparison = numberFormatter(Math.abs(comparison));
 
     if (comparison > 0) {
@@ -292,7 +339,7 @@ class LineGraph extends React.Component {
     }
   }
 
-  topStatNumberShort(stat) {
+  topStatNumberShort(stat: any) {
     if (['visit duration', 'time on page'].includes(stat.name.toLowerCase())) {
       return durationFormatter(stat.value);
     } else if (['bounce rate', 'conversion rate'].includes(stat.name.toLowerCase())) {
@@ -302,7 +349,7 @@ class LineGraph extends React.Component {
     }
   }
 
-  topStatTooltip(stat) {
+  topStatTooltip(stat: any) {
     if (typeof stat.value == 'number') {
       let name = stat.name.toLowerCase();
       name = stat.value === 1 ? name.slice(0, -1) : name;
@@ -312,7 +359,8 @@ class LineGraph extends React.Component {
 
   renderTopStats() {
     const { graphData } = this.props;
-    const stats = this.props.graphData.top_stats.map((stat, index) => {
+    // @ts-ignore
+    const stats = graphData.top_stats.map((stat, index) => {
       let border = index > 0 ? 'lg:border-l border-gray-300' : '';
       border = index % 2 === 0 ? border + ' border-r lg:border-r-0' : border;
 
@@ -347,18 +395,19 @@ class LineGraph extends React.Component {
     return stats;
   }
 
-  pollExportReady() {
+  pollExportReady = () => {
     if (document.cookie.includes('exporting')) {
-      setTimeout(this.pollExportReady.bind(this), 1000);
+      setTimeout(this.pollExportReady, 1000);
     } else {
       this.setState({ exported: false });
     }
-  }
+  };
 
   downloadSpinner() {
     this.setState({ exported: true });
+    // eslint-disable-next-line unicorn/no-document-cookie
     document.cookie = 'exporting=';
-    setTimeout(this.pollExportReady.bind(this), 1000);
+    setTimeout(this.pollExportReady, 1000);
   }
 
   downloadLink() {
@@ -423,7 +472,7 @@ class LineGraph extends React.Component {
           className="absolute cursor-pointer -top-8 right-14 lg:-top-20 lg:right-8"
         >
           <svg
-            className="w-4 h-4 text-gray-300 text-gray-700"
+            className="w-4 h-4 text-gray-700"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -464,19 +513,25 @@ class LineGraph extends React.Component {
 
 const LineGraphWithRouter = LineGraph;
 
-export default class VisitorGraph extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-    this.onVisible = this.onVisible.bind(this);
-  }
+interface VisitorGraphProps extends Props {
+  timer: Timer;
+  router: NextRouter;
+}
 
-  onVisible() {
+interface VisitorGraphState {
+  loading: boolean;
+  graphData: GraphData | null;
+}
+
+export default class VisitorGraph extends React.Component<VisitorGraphProps, VisitorGraphState> {
+  state: VisitorGraphState = { loading: true, graphData: null };
+
+  onVisible = () => {
     this.fetchGraphData();
     if (this.props.timer) this.props.timer.onTick(this.fetchGraphData.bind(this));
-  }
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: VisitorGraphProps) {
     if (this.props.query !== prevProps.query) {
       this.setState({ loading: true, graphData: null });
       this.fetchGraphData();
@@ -494,10 +549,11 @@ export default class VisitorGraph extends React.Component {
 
   renderInner() {
     if (this.state.graphData) {
-      const theme = document.querySelector('html').classList.contains('dark') || false;
+      const theme = document.querySelector('html')!.classList.contains('dark') || false;
 
       return (
         <LineGraphWithRouter
+          router={this.props.router}
           graphData={this.state.graphData}
           site={this.props.site}
           query={this.props.query}

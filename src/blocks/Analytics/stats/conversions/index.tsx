@@ -1,13 +1,14 @@
-import Link from 'next/link';
 import React from 'react';
 import 'twin.macro';
+
+import { Link } from '$/components/Link';
 
 import * as api from '../../api';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import { cardTitle, labelContainer } from '../../styles';
-import { Site } from '../../type';
+import { Goal, Site } from '../../type';
 import * as url from '../../url';
 import Bar from '../bar';
 import PropBreakdown from './prop-breakdown';
@@ -21,18 +22,21 @@ export interface ConversionsProps {
   title: string;
 }
 
-export default class Conversions extends React.Component<ConversionsProps> {
-  constructor(props) {
-    super(props);
-    this.htmlNode = React.createRef();
-    this.state = {
-      loading: true,
-      viewport: DEFAULT_WIDTH,
-    };
-    this.onVisible = this.onVisible.bind(this);
+interface ConversionsState {
+  loading: boolean;
+  viewport: number;
+  prevHeight: number | null;
+  goals: Goal[] | null;
+}
 
-    this.handleResize = this.handleResize.bind(this);
-  }
+export default class Conversions extends React.Component<ConversionsProps, ConversionsState> {
+  htmlNode: React.RefObject<any> = React.createRef();
+  state: ConversionsState = {
+    loading: true,
+    viewport: DEFAULT_WIDTH,
+    prevHeight: null,
+    goals: null,
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize, false);
@@ -43,17 +47,17 @@ export default class Conversions extends React.Component<ConversionsProps> {
     window.removeEventListener('resize', this.handleResize, false);
   }
 
-  handleResize() {
+  handleResize = () => {
     this.setState({ viewport: window.innerWidth });
-  }
+  };
 
-  onVisible() {
+  onVisible = () => {
     this.fetchConversions();
-  }
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: ConversionsProps) {
     if (this.props.query !== prevProps.query) {
-      const height = this.htmlNode.current.element.offsetHeight;
+      const height = this.htmlNode.current?.element.offsetHeight;
       this.setState({ loading: true, goals: null, prevHeight: height });
       this.fetchConversions();
     }
@@ -70,7 +74,7 @@ export default class Conversions extends React.Component<ConversionsProps> {
       .then((res) => this.setState({ loading: false, goals: res, prevHeight: null }));
   }
 
-  renderGoalText(goalName) {
+  renderGoalText(goalName: string) {
     return this.props.query.period === 'realtime' ? (
       <span className="block px-2 py-1.5 relative z-9 md:truncate break-all dark:text-gray-200">
         {goalName}
@@ -86,8 +90,8 @@ export default class Conversions extends React.Component<ConversionsProps> {
     );
   }
 
-  renderGoal(goal) {
-    const { viewport } = this.state;
+  renderGoal = (goal: Goal) => {
+    const { viewport, goals } = this.state;
     const renderProps = this.props.query.filters['goal'] == goal.name && goal.prop_names;
 
     return (
@@ -95,7 +99,7 @@ export default class Conversions extends React.Component<ConversionsProps> {
         <div className="flex items-center justify-between my-2">
           <Bar
             count={goal.unique_conversions}
-            all={this.state.goals}
+            all={goals!}
             className="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
             maxWidthDeduction={this.getBarMaxWidth()}
             plot="unique_conversions"
@@ -121,17 +125,17 @@ export default class Conversions extends React.Component<ConversionsProps> {
         )}
       </div>
     );
-  }
+  };
 
   renderInner() {
-    const { viewport } = this.state;
-    if (this.state.loading) {
+    const { viewport, loading, goals } = this.state;
+    if (loading) {
       return (
         <div className="mx-auto my-2 loading">
           <div></div>
         </div>
       );
-    } else if (this.state.goals) {
+    } else if (goals) {
       return (
         <React.Fragment>
           <h3 css={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
@@ -144,7 +148,7 @@ export default class Conversions extends React.Component<ConversionsProps> {
             </div>
           </div>
 
-          {this.state.goals.map(this.renderGoal.bind(this))}
+          {goals.map((element) => this.renderGoal(element))}
         </React.Fragment>
       );
     }

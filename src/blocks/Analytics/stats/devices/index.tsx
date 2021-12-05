@@ -4,10 +4,11 @@ import 'twin.macro';
 import * as api from '../../api';
 import * as storage from '../../storage';
 import { cardTitle, tabContainer } from '../../styles';
+import { Props } from '../../type';
 import * as url from '../../url';
 import ListReport from '../reports/list';
 
-function Browsers({ query, site }) {
+function Browsers({ query, site }: Props) {
   function fetchData() {
     return api.get(url.apiPath(site, '/browsers'), query);
   }
@@ -22,7 +23,7 @@ function Browsers({ query, site }) {
   );
 }
 
-function BrowserVersions({ query, site }) {
+function BrowserVersions({ query, site }: Props) {
   function fetchData() {
     return api.get(url.apiPath(site, '/browser-versions'), query);
   }
@@ -37,7 +38,7 @@ function BrowserVersions({ query, site }) {
   );
 }
 
-function OperatingSystems({ query, site }) {
+function OperatingSystems({ query, site }: Props) {
   function fetchData() {
     return api.get(url.apiPath(site, '/operating-systems'), query);
   }
@@ -52,7 +53,7 @@ function OperatingSystems({ query, site }) {
   );
 }
 
-function OperatingSystemVersions({ query, site }) {
+function OperatingSystemVersions({ query, site }: Props) {
   function fetchData() {
     return api.get(url.apiPath(site, '/operating-system-versions'), query);
   }
@@ -67,17 +68,21 @@ function OperatingSystemVersions({ query, site }) {
   );
 }
 
-function ScreenSizes({ query, site }) {
+interface ScreenSize {
+  name: keyof typeof EXPLANATION;
+}
+
+function renderIcon(screenSize: ScreenSize) {
+  return iconFor(screenSize.name);
+}
+
+function renderTooltipText(screenSize: ScreenSize) {
+  return EXPLANATION[screenSize.name];
+}
+
+function ScreenSizes({ query, site }: Props) {
   function fetchData() {
     return api.get(url.apiPath(site, '/screen-sizes'), query);
-  }
-
-  function renderIcon(screenSize) {
-    return iconFor(screenSize.name);
-  }
-
-  function renderTooltipText(screenSize) {
-    return EXPLANATION[screenSize.name];
   }
 
   return (
@@ -97,87 +102,103 @@ const EXPLANATION = {
   Tablet: '576px to 992px',
   Laptop: '992px to 1440px',
   Desktop: 'above 1440px',
-};
+} as const;
 
-function iconFor(screenSize) {
-  if (screenSize === 'Mobile') {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="-mt-px feather"
-      >
-        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
-        <line x1="12" y1="18" x2="12" y2="18" />
-      </svg>
-    );
-  } else if (screenSize === 'Tablet') {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="-mt-px feather"
-      >
-        <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(180 12 12)" />
-        <line x1="12" y1="18" x2="12" y2="18" />
-      </svg>
-    );
-  } else if (screenSize === 'Laptop') {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="-mt-px feather"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-        <line x1="2" y1="20" x2="22" y2="20" />
-      </svg>
-    );
-  } else if (screenSize === 'Desktop') {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="-mt-px feather"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    );
+function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
+  switch (screenSize) {
+    case 'Mobile': {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="-mt-px feather"
+        >
+          <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+          <line x1="12" y1="18" x2="12" y2="18" />
+        </svg>
+      );
+    }
+    case 'Tablet': {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="-mt-px feather"
+        >
+          <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(180 12 12)" />
+          <line x1="12" y1="18" x2="12" y2="18" />
+        </svg>
+      );
+    }
+    case 'Laptop': {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="-mt-px feather"
+        >
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="2" y1="20" x2="22" y2="20" />
+        </svg>
+      );
+    }
+    case 'Desktop': {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="-mt-px feather"
+        >
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+      );
+    }
+    // No default
   }
 }
 
-export default class Devices extends React.Component {
-  constructor(props) {
+export interface DevicesProps extends Props {
+  //
+}
+
+type Mode = 'size' | 'browser' | 'os' | 'size';
+interface DeviceState {
+  mode: Mode;
+}
+
+export default class Devices extends React.Component<DevicesProps, DeviceState> {
+  tabKey: string;
+  constructor(props: DevicesProps) {
     super(props);
     this.tabKey = `deviceTab__${props.site.domain}`;
     const storedTab = storage.getItem(this.tabKey);
@@ -186,7 +207,7 @@ export default class Devices extends React.Component {
     };
   }
 
-  setMode(mode) {
+  setMode(mode: any) {
     return () => {
       storage.setItem(this.tabKey, mode);
       this.setState({ mode });
@@ -197,43 +218,23 @@ export default class Devices extends React.Component {
     switch (this.state.mode) {
       case 'browser':
         if (this.props.query.filters.browser) {
-          return (
-            <BrowserVersions
-              site={this.props.site}
-              query={this.props.query}
-              timer={this.props.timer}
-            />
-          );
+          return <BrowserVersions site={this.props.site} query={this.props.query} />;
         }
-        return (
-          <Browsers site={this.props.site} query={this.props.query} timer={this.props.timer} />
-        );
+        return <Browsers site={this.props.site} query={this.props.query} />;
       case 'os':
         if (this.props.query.filters.os) {
-          return (
-            <OperatingSystemVersions
-              site={this.props.site}
-              query={this.props.query}
-              timer={this.props.timer}
-            />
-          );
+          return <OperatingSystemVersions site={this.props.site} query={this.props.query} />;
         }
-        return (
-          <OperatingSystems
-            site={this.props.site}
-            query={this.props.query}
-            timer={this.props.timer}
-          />
-        );
+        return <OperatingSystems site={this.props.site} query={this.props.query} />;
       case 'size':
       default:
         return (
-          <ScreenSizes site={this.props.site} query={this.props.query} timer={this.props.timer} />
+          <ScreenSizes site={this.props.site} query={this.props.query} />
         );
     }
   }
 
-  renderPill(name, mode) {
+  renderPill(name: string, mode: Mode) {
     const isActive = this.state.mode === mode;
 
     if (isActive) {

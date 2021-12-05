@@ -1,12 +1,14 @@
+// @ts-nocheck
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
 import React, { Fragment } from 'react';
 
 import * as api from '../../api';
-import SearchSelect from '../../components/search-select';
-import { parseQuery, formattedFilters } from '../../query';
+import { parseQuery, formattedFilters, Query, FormattedFilterKey } from '../../query';
+import { Site } from '../../type';
 import { apiPath, siteBasePath } from '../../url';
+import SearchSelect from '../search-select';
 import Modal from './modal';
 
 export const FILTER_GROUPS = {
@@ -20,9 +22,10 @@ export const FILTER_GROUPS = {
   entry_page: ['entry_page'],
   exit_page: ['exit_page'],
   goal: ['goal'],
-};
-
-function getFormState(filterGroup, query) {
+} as const;
+export type FilterGroupKey = keyof typeof FILTER_GROUPS;
+function getFormState(filterGroup: FilterGroupKey, query: Query) {
+  // eslint-disable-next-line unicorn/prefer-object-from-entries
   return FILTER_GROUPS[filterGroup].reduce((result, filter) => {
     const filterValue = query.filters[filter] || '';
     let filterName = filterValue;
@@ -42,7 +45,7 @@ function getFormState(filterGroup, query) {
   }, {});
 }
 
-function withIndefiniteArticle(word) {
+function withIndefiniteArticle(word: string) {
   if (word.startsWith('UTM')) {
     return `a ${word}`;
   }
@@ -52,7 +55,7 @@ function withIndefiniteArticle(word) {
   return `a ${word}`;
 }
 
-export function formatFilterGroup(filterGroup) {
+export function formatFilterGroup(filterGroup: FilterGroupKey) {
   if (filterGroup === 'utm') {
     return 'UTM tags';
   }
@@ -72,8 +75,18 @@ export function filterGroupForFilter(filter) {
   return map[filter] || filter;
 }
 
-class FilterModal extends React.Component {
-  constructor(props) {
+interface FilterModalProps {
+  site: Site;
+}
+
+interface FilterModalState {
+  query: Query;
+  selectedFilterGroup: FilterGroupKey;
+  formState: { [filter: string]: { name: string; value: string; type: 'is' | 'is_not' } };
+}
+
+class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
+  constructor(props: FilterModalProps) {
     super(props);
     const query = parseQuery(props.location.search, props.site);
     const selectedFilterGroup = this.props.match.params.field || 'page';
@@ -90,11 +103,12 @@ class FilterModal extends React.Component {
     document.removeEventListener('keydown', this.handleKeydown);
   }
 
-  handleKeydown(e) {
+  handleKeydown(e: KeyboardEvent) {
     if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.isComposing || e.keyCode === 229) {
       return;
     }
 
+    // @ts-ignore
     if (e.target.tagName === 'BODY' && e.key === 'Enter') {
       this.handleSubmit();
     }
@@ -124,7 +138,7 @@ class FilterModal extends React.Component {
     this.selectFiltersAndCloseModal(filters);
   }
 
-  onSelect(filterName) {
+  onSelect(filterName: string) {
     if (this.state.selectedFilterGroup !== 'country') {
       return () => {};
     }
@@ -141,7 +155,7 @@ class FilterModal extends React.Component {
     };
   }
 
-  onInput(filterName) {
+  onInput(filterName: string) {
     if (this.state.selectedFilterGroup === 'country') {
       return () => {};
     }
@@ -206,14 +220,14 @@ class FilterModal extends React.Component {
   }
 
   renderFilterInputs() {
-    const groups = FILTER_GROUPS[this.state.selectedFilterGroup].filter((filterName) => {
+    const groups = FILTER_GROUPS[this.state.selectedFilterGroup].filter((filterName: string) => {
       if (['city', 'region'].includes(filterName)) {
         return this.props.site.cities;
       }
       return true;
     });
 
-    return groups.map((filter) => {
+    return groups.map((filter: FormattedFilterKey) => {
       return (
         <div className="mt-4" key={filter}>
           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -236,7 +250,7 @@ class FilterModal extends React.Component {
     });
   }
 
-  renderFilterTypeSelector(filterName) {
+  renderFilterTypeSelector(filterName: string) {
     return (
       <Menu as="div" className="relative inline-block text-left">
         {({ open }) => (

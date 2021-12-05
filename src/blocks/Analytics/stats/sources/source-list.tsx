@@ -5,29 +5,38 @@ import 'twin.macro';
 import { Link } from '$/components/Link';
 
 import * as api from '../../api';
-import { EmptyState } from '../../components/EmptyState';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import * as storage from '../../storage';
 import { cardTitle, labelContainer } from '../../styles';
+import { Timer } from '../../timer';
+import { Props } from '../../type';
 import * as url from '../../url';
+import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
 import MoreLink from '../more-link';
+import { Referrer } from './referrer-list';
 
-class AllSources extends React.Component {
-  constructor(props) {
-    super(props);
-    this.onVisible = this.onVisible.bind(this);
-    this.state = { loading: true };
-  }
+interface AllSourcesProps extends Props {
+  timer: Timer;
+  renderTabs: () => JSX.Element;
+}
 
-  onVisible() {
+interface AllSourcesState {
+  loading: boolean;
+  referrers: Referrer[] | null;
+}
+
+class AllSources extends React.Component<AllSourcesProps> {
+  state: AllSourcesState = { loading: true, referrers: null };
+
+  onVisible = () => {
     this.fetchReferrers();
-    if (this.props.timer) this.props.timer.onTick(this.fetchReferrers.bind(this));
-  }
+    this.props.timer?.onTick(this.fetchReferrers);
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: AllSourcesProps) {
     if (this.props.query !== prevProps.query) {
       this.setState({ loading: true, referrers: null });
       this.fetchReferrers();
@@ -42,22 +51,22 @@ class AllSources extends React.Component {
     return !!this.props.query.filters.goal;
   }
 
-  fetchReferrers() {
+  fetchReferrers = () => {
     api
       .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/sources`, this.props.query, {
         show_noref: this.showNoRef(),
       })
       .then((res) => this.setState({ loading: false, referrers: res }));
-  }
+  };
 
-  renderReferrer(referrer) {
+  renderReferrer(referrer: Referrer) {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
           count={referrer.visitors}
-          all={this.state.referrers}
+          all={this.state.referrers!}
           className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={maxWidthDeduction}
         >
@@ -111,7 +120,7 @@ class AllSources extends React.Component {
         </div>
 
         <FlipMove className="flex-grow">
-          {this.state.referrers.map(this.renderReferrer.bind(this))}
+          {this.state.referrers.map((element) => this.renderReferrer(element))}
         </FlipMove>
         <MoreLink site={this.props.site} list={this.state.referrers} endpoint="sources" />
       </React.Fragment>
@@ -152,20 +161,25 @@ const UTM_TAGS = {
   utm_medium: { label: 'UTM Medium', endpoint: 'utm_mediums' },
   utm_source: { label: 'UTM Source', endpoint: 'utm_sources' },
   utm_campaign: { label: 'UTM Campaign', endpoint: 'utm_campaigns' },
-};
+} as const;
 
-class UTMSources extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: true };
-  }
+type UTMTagKey = keyof typeof UTM_TAGS;
+
+interface UTMSourcesProps extends AllSourcesProps {
+  tab: UTMTagKey;
+}
+
+interface UTMSourcesState extends AllSourcesState {}
+
+class UTMSources extends React.Component<UTMSourcesProps> {
+  state: UTMSourcesState = { loading: true, referrers: null };
 
   componentDidMount() {
     this.fetchReferrers();
-    if (this.props.timer) this.props.timer.onTick(this.fetchReferrers.bind(this));
+    if (this.props.timer) this.props.timer.onTick(this.fetchReferrers);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: UTMSourcesProps) {
     if (this.props.query !== prevProps.query || this.props.tab !== prevProps.tab) {
       this.setState({ loading: true, referrers: null });
       this.fetchReferrers();
@@ -180,7 +194,7 @@ class UTMSources extends React.Component {
     return !!this.props.query.filters.goal;
   }
 
-  fetchReferrers() {
+  fetchReferrers = () => {
     const endpoint = UTM_TAGS[this.props.tab].endpoint;
     api
       .get(
@@ -189,16 +203,16 @@ class UTMSources extends React.Component {
         { show_noref: this.showNoRef() },
       )
       .then((res) => this.setState({ loading: false, referrers: res }));
-  }
+  };
 
-  renderReferrer(referrer) {
+  renderReferrer = (referrer: Referrer) => {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
           count={referrer.visitors}
-          all={this.state.referrers}
+          all={this.state.referrers!}
           className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={maxWidthDeduction}
         >
@@ -222,7 +236,7 @@ class UTMSources extends React.Component {
         )}
       </div>
     );
-  }
+  };
 
   label() {
     if (this.props.query.period === 'realtime') {
@@ -248,7 +262,7 @@ class UTMSources extends React.Component {
         </div>
 
         <FlipMove className="flex-grow">
-          {this.state.referrers.map(this.renderReferrer.bind(this))}
+          {this.state.referrers.map((element) => this.renderReferrer(element))}
         </FlipMove>
         <MoreLink
           site={this.props.site}
@@ -291,24 +305,27 @@ class UTMSources extends React.Component {
   }
 }
 
-export default class SourceList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.tabKey = 'sourceTab__' + props.site.domain;
-    const storedTab = storage.getItem(this.tabKey);
-    this.state = {
-      tab: storedTab || 'all',
-    };
-  }
+type Tab = 'utm_source' | 'utm_medium' | 'utm_campaign' | 'all';
 
-  setTab(tab) {
+interface SourceListProps extends Omit<AllSourcesProps, 'renderTabs'> {}
+interface SourceListState {
+  tab: Tab;
+}
+
+export default class SourceList extends React.Component<SourceListProps, SourceListState> {
+  tabKey: string = 'sourceTab__' + this.props.site.domain;
+  state: SourceListState = {
+    tab: storage.getItem(this.tabKey) || 'all',
+  };
+
+  setTab = (tab: Tab) => {
     return () => {
       storage.setItem(this.tabKey, tab);
       this.setState({ tab });
     };
-  }
+  };
 
-  renderTabs() {
+  renderTabs = () => {
     const activeClass = 'inline-block h-5 text-indigo-900 font-bold active-prop-heading';
     const defaultClass = 'hover:text-indigo-1100 cursor-pointer';
     return (
@@ -339,45 +356,23 @@ export default class SourceList extends React.Component {
         </li>
       </ul>
     );
-  }
+  };
 
   render() {
-    if (this.state.tab === 'all') {
-      return (
-        <AllSources
-          tab={this.state.tab}
-          setTab={this.setTab.bind(this)}
-          renderTabs={this.renderTabs.bind(this)}
-          {...this.props}
-        />
-      );
-    } else if (this.state.tab === 'utm_medium') {
-      return (
-        <UTMSources
-          tab={this.state.tab}
-          setTab={this.setTab.bind(this)}
-          renderTabs={this.renderTabs.bind(this)}
-          {...this.props}
-        />
-      );
-    } else if (this.state.tab === 'utm_source') {
-      return (
-        <UTMSources
-          tab={this.state.tab}
-          setTab={this.setTab.bind(this)}
-          renderTabs={this.renderTabs.bind(this)}
-          {...this.props}
-        />
-      );
-    } else if (this.state.tab === 'utm_campaign') {
-      return (
-        <UTMSources
-          tab={this.state.tab}
-          setTab={this.setTab.bind(this)}
-          renderTabs={this.renderTabs.bind(this)}
-          {...this.props}
-        />
-      );
+    switch (this.state.tab) {
+      case 'all': {
+        return <AllSources {...this.props} renderTabs={this.renderTabs} />;
+      }
+      case 'utm_medium': {
+        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
+      }
+      case 'utm_source': {
+        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
+      }
+      case 'utm_campaign': {
+        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
+      }
+      // No default
     }
   }
 }

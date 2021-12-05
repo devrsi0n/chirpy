@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 import { Link } from '$/components/Link';
@@ -79,29 +80,25 @@ class GoogleKeywordsModal extends React.Component {
         </div>
       );
     } else if (this.state.notConfigured) {
-      if (this.state.isOwner) {
-        return (
-          <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
-            <RocketIcon />
-            <div className="text-lg">The site is not connected to Google Search Keywords</div>
-            <div className="text-lg">Configure the integration to view search terms</div>
-            <a
-              href={`/${encodeURIComponent(this.props.site.domain)}/settings/search-console`}
-              className="button mt-4"
-            >
-              Connect with Google
-            </a>
-          </div>
-        );
-      } else {
-        return (
-          <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
-            <RocketIcon />
-            <div className="text-lg">The site is not connected to Google Search Kewyords</div>
-            <div className="text-lg">Cannot show search terms</div>
-          </div>
-        );
-      }
+      return this.state.isOwner ? (
+        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+          <RocketIcon />
+          <div className="text-lg">The site is not connected to Google Search Keywords</div>
+          <div className="text-lg">Configure the integration to view search terms</div>
+          <a
+            href={`/${encodeURIComponent(this.props.site.domain)}/settings/search-console`}
+            className="button mt-4"
+          >
+            Connect with Google
+          </a>
+        </div>
+      ) : (
+        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+          <RocketIcon />
+          <div className="text-lg">The site is not connected to Google Search Kewyords</div>
+          <div className="text-lg">Cannot show search terms</div>
+        </div>
+      );
     } else if (this.state.searchTerms.length > 0) {
       return (
         <table className="w-max overflow-x-auto md:w-full table-striped table-fixed">

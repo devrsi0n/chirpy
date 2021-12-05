@@ -1,22 +1,31 @@
+// @ts-nocheck
+import { NextRouter } from 'next/router';
 import React from 'react';
 import { createPortal } from 'react-dom';
+
+import { Site } from '../../type';
 
 // This corresponds to the 'md' breakpoint on TailwindCSS.
 const MD_WIDTH = 768;
 // We assume that the dashboard is by default opened on a desktop. This is also a fall-back for when, for any reason, the width is not ascertained.
 const DEFAULT_WIDTH = 1080;
 
-class Modal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      viewport: DEFAULT_WIDTH,
-    };
-    this.node = React.createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.handleKeyup = this.handleKeyup.bind(this);
-    this.handleResize = this.handleResize.bind(this);
-  }
+interface ModalProps {
+  router: NextRouter;
+  site: Site;
+  onClick: () => void;
+  maxWidth: number;
+}
+
+interface ModalState {
+  viewport: number;
+}
+
+class Modal extends React.Component<ModalProps, ModalState> {
+  node: React.RefObject<HTMLDivElement> = React.createRef();
+  state = {
+    viewport: DEFAULT_WIDTH,
+  };
 
   componentDidMount() {
     document.body.style.overflow = 'hidden';
@@ -28,33 +37,36 @@ class Modal extends React.Component {
   }
 
   componentWillUnmount() {
+    // @ts-ignore
     document.body.style.overflow = null;
+    // @ts-ignore
     document.body.style.height = null;
     document.removeEventListener('mousedown', this.handleClickOutside);
     document.removeEventListener('keyup', this.handleKeyup);
     window.removeEventListener('resize', this.handleResize, false);
   }
 
-  handleClickOutside(e) {
-    if (this.node.current.contains(e.target)) {
+  handleClickOutside = (e: MouseEvent) => {
+    // @ts-ignore
+    if (this.node.current?.contains(e.target)) {
       return;
     }
 
     this.close();
-  }
+  };
 
-  handleKeyup(e) {
+  handleKeyup = (e: KeyboardEvent) => {
     if (e.code === 'Escape') {
       this.close();
     }
-  }
+  };
 
-  handleResize() {
+  handleResize = () => {
     this.setState({ viewport: window.innerWidth });
-  }
+  };
 
   close() {
-    this.props.history.push(
+    this.props.router.push(
       `/${encodeURIComponent(this.props.site.domain)}${this.props.location.search}`,
     );
   }
@@ -69,7 +81,7 @@ class Modal extends React.Component {
   getStyle() {
     const { maxWidth } = this.props;
     const { viewport } = this.state;
-    const styleObject = {};
+    const styleObject: any = {};
     if (maxWidth) {
       styleObject.maxWidth = maxWidth;
     } else {
@@ -92,7 +104,7 @@ class Modal extends React.Component {
           </div>
         </div>
       </div>,
-      document.getElementById('modal_root'),
+      document.querySelector('#modal_root')!,
     );
   }
 }

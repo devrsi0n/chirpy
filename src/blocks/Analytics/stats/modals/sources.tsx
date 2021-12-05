@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 
 import { Link } from '$/components/Link';
@@ -75,19 +76,13 @@ class SourcesModal extends React.Component {
   }
 
   formatBounceRate(page) {
-    if (typeof page.bounce_rate === 'number') {
-      return page.bounce_rate + '%';
-    } else {
-      return '-';
-    }
+    return typeof page.bounce_rate === 'number' ? page.bounce_rate + '%' : '-';
   }
 
   formatDuration(source) {
-    if (typeof source.visit_duration === 'number') {
-      return durationFormatter(source.visit_duration);
-    } else {
-      return '-';
-    }
+    return typeof source.visit_duration === 'number'
+      ? durationFormatter(source.visit_duration)
+      : '-';
   }
 
   renderSource(source) {

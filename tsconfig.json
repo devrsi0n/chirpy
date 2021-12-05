@@ -25,14 +25,7 @@
   },
   "exclude": ["node_modules", ".next"],
   "include": [
-    "types/geoip-database.d.ts",
-    "types/index.d.ts",
-    "types/mdx-prism.d.ts",
-    "types/next-auth.d.ts",
-    "types/next-env.d.ts",
-    "types/node.d.ts",
-    "types/twin.d.ts",
-    "types/unknown-file.d.ts",
+    "types/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx"
   ]
