@@ -159,7 +159,7 @@
     "postcss": "8.4.1",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "7.0.1",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
     "simple-git-hooks": "2.7.0",
     "tailwindcss": "2.2.19",
     "tsconfig-paths-webpack-plugin": "3.5.2",
