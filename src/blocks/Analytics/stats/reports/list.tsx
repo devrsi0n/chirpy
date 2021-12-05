@@ -9,7 +9,7 @@ import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import { labelContainer } from '../../styles';
 import { Timer } from '../../timer';
-import { EmptyState } from '../EmptyState';
+import { EmptyState } from '../empty-state';
 import Bar from '../bar';
 import MoreLink from '../more-link';
 

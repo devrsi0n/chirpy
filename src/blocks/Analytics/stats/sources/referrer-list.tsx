@@ -11,8 +11,8 @@ import numberFormatter from '../../number-formatter';
 import { cardTitle } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
-import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
+import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 
 interface LinkOptionProps {
@@ -148,9 +148,12 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
               disabled={referrer.name === 'Direct / None'}
             >
               <img
-                src={`/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 referrerPolicy="no-referrer"
                 className="inline w-4 h-4 mr-2 -mt-px align-middle"
+                alt={`Favorite icon for ${referrer.name}`}
               />
               {referrer.name}
             </LinkOption>

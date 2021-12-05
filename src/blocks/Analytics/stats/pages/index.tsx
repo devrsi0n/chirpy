@@ -5,9 +5,7 @@ import * as storage from '../../storage';
 import { cardTitle, tabContainer } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
-import EntryPages from './entry-pages';
-import ExitPages from './exit-pages';
-import Visits from './pages';
+import { PageRank } from './page-rank';
 
 const labelFor = {
   pages: 'Top Pages',
@@ -41,15 +39,35 @@ export default class Pages extends React.Component<PagesProps, PagesState> {
     switch (this.state.mode) {
       case 'entry-pages':
         return (
-          <EntryPages site={this.props.site} query={this.props.query} timer={this.props.timer} />
+          <PageRank
+            site={this.props.site}
+            query={this.props.query}
+            timer={this.props.timer}
+            apiPath="entry-pages"
+            key="entry-pages"
+          />
         );
       case 'exit-pages':
         return (
-          <ExitPages site={this.props.site} query={this.props.query} timer={this.props.timer} />
+          <PageRank
+            site={this.props.site}
+            query={this.props.query}
+            timer={this.props.timer}
+            apiPath="exit-pages"
+            key="exit-pages"
+          />
         );
       case 'pages':
       default:
-        return <Visits site={this.props.site} query={this.props.query} timer={this.props.timer} />;
+        return (
+          <PageRank
+            site={this.props.site}
+            query={this.props.query}
+            timer={this.props.timer}
+            apiPath="pages"
+            key="pages"
+          />
+        );
     }
   }
 

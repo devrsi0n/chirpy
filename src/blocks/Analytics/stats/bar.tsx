@@ -1,10 +1,10 @@
 import React from 'react';
 
-function barWidth(count: number, all: { [x: string]: any }[], plot: string) {
-  let maxVal = all[0][plot];
+function barWidth(count: number, all: { [x: string]: any }[]) {
+  let maxVal = all[0].count;
 
-  for (const val of all) {
-    if (val > maxVal) maxVal = val[plot];
+  for (const entry of all) {
+    if (entry.count > maxVal) maxVal = entry.count;
   }
 
   return (count / maxVal) * 100;
@@ -13,7 +13,6 @@ function barWidth(count: number, all: { [x: string]: any }[], plot: string) {
 export type BarProps = {
   count: number;
   all: { [x: string]: any }[];
-  plot?: string;
   className?: string;
   maxWidthDeduction: string;
   children: React.ReactNode;
@@ -25,9 +24,8 @@ export default function Bar({
   className,
   maxWidthDeduction,
   children,
-  plot = 'visitors',
 }: BarProps): JSX.Element {
-  const width = barWidth(count, all, plot);
+  const width = barWidth(count, all);
 
   return (
     <div className="w-full relative" style={{ maxWidth: `calc(100% - ${maxWidthDeduction})` }}>

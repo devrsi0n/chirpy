@@ -1,5 +1,10 @@
 import tw, { css, screen, theme } from 'twin.macro';
 
+export const labelContainer = tw`flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-1100`;
+export const cardTitle = tw`font-bold text-gray-1100`;
+export const tabContainer = tw`flex font-medium text-xs text-gray-1100 space-x-2`;
+export const itemBg = tw`bg-orange-200 dark:bg-opacity-5`;
+
 export const analyticsStyles = css`
   .feather {
     height: 1em;
@@ -164,9 +169,59 @@ export const analyticsStyles = css`
   [tooltip]:hover::before {
     opacity: 1;
   }
-`;
 
-export const labelContainer = tw`flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-1100`;
-export const cardTitle = tw`font-bold text-gray-1100`;
-export const tabContainer = tw`flex font-medium text-xs text-gray-1100 space-x-2`;
-export const itemBg = tw`bg-orange-200 dark:bg-opacity-5`;
+  .loading {
+    width: 50px;
+    height: 50px;
+    animation: loaderFadein 0.2s ease-in;
+  }
+
+  .loading.sm {
+    width: 25px;
+    height: 25px;
+  }
+
+  .loading div {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #dae1e7;
+    border-radius: 50%;
+    border-top-color: #606f7b;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+  }
+
+  .dark .loading div {
+    border: 3px solid #606f7b;
+    border-top-color: #dae1e7;
+  }
+
+  .loading.sm div {
+    width: 25px;
+    height: 25px;
+  }
+
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+
+  @keyframes loaderFadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;

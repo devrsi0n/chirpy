@@ -47,7 +47,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
         return response.json();
       })
       .then((sites) => this.setState({ loading: false, sites: sites }))
-      .catch((e) => this.setState({ loading: false, error: e }));
+      .catch((error: Error) => this.setState({ loading: false, error }));
   }
 
   handleClick(e) {
@@ -64,7 +64,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
     if (e.target.tagName === 'INPUT') return true;
     if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing || e.keyCode === 229 || !sites) return;
 
-    const siteNum = parseInt(e.key);
+    const siteNum = Number.parseInt(e.key);
 
     if (
       1 <= siteNum &&
@@ -99,8 +99,11 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       >
         <span>
           <img
-            src={`/favicon/sources/${encodeURIComponent(domain)}`}
+            src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
+              domain,
+            )}`}
             className="inline w-4 mr-2 align-middle"
+            alt={`Favorite icon for ${domain}`}
           />
           <span className="truncate inline-block align-middle max-w-3xs pr-2">{domain}</span>
         </span>
@@ -215,11 +218,13 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           <img
             src={`https://icons.duckduckgo.com/ip3/${this.props.site.domain}.ico`}
             onError={(e) => {
+              // eslint-disable-next-line unicorn/prefer-add-event-listener
               e.target.onerror = null;
               e.target.src = 'https://icons.duckduckgo.com/ip3/placeholder.ico';
             }}
             referrerPolicy="no-referrer"
             className="inline w-4 mr-1 md:mr-2 align-middle"
+            alt={`Icon of ${this.props.site.domain}`}
           />
           <span className="hidden sm:inline-block">{this.props.site.domain}</span>
           {this.renderArrow()}

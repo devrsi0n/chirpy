@@ -13,8 +13,8 @@ import { cardTitle, labelContainer } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import * as url from '../../url';
-import { EmptyState } from '../EmptyState';
 import Bar from '../bar';
+import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 import { Referrer } from './referrer-list';
 
@@ -77,8 +77,11 @@ class AllSources extends React.Component<AllSourcesProps> {
               href={url.setQuery('source', referrer.name)}
             >
               <img
-                src={`/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 className="inline w-4 h-4 mr-2 -mt-px align-middle"
+                alt={`Favorite icon for ${referrer.name}`}
               />
               {referrer.name}
             </Link>
@@ -271,9 +274,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
         />
       </div>
     ) : (
-      <div className="font-medium text-center text-gray-500 mt-44 dark:text-gray-400">
-        No data yet
-      </div>
+      <EmptyState />
     );
   }
 

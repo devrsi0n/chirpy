@@ -6,6 +6,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_HASURA_HTTP_ORIGIN: string;
     NEXT_PUBLIC_HASURA_WS_ORIGIN: string;
     NEXT_PUBLIC_COMMENT_PROJECT: string;
+    NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
 
     DATABASE_URL: string;
     HASH_KEY: string;

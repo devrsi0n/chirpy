@@ -6,16 +6,16 @@ export class Timer {
 
   constructor() {
     this.listeners = [];
-    this.intervalId = window.setInterval(this.dispatchTick.bind(this), THIRTY_SECONDS);
+    this.intervalId = window.setInterval(this.dispatchTick, THIRTY_SECONDS);
   }
 
-  onTick(listener: () => void) {
+  onTick = (listener: () => void) => {
     this.listeners.push(listener);
-  }
+  };
 
-  dispatchTick() {
+  dispatchTick = () => {
     for (const listener of this.listeners) {
       listener();
     }
-  }
+  };
 }
