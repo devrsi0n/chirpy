@@ -126,7 +126,7 @@
     "@types/github-slugger": "1.3.0",
     "@types/jest": "27.0.2",
     "@types/jsonwebtoken": "8.5.6",
-    "@types/node": "14.17.33",
+    "@types/node": "16.11.11",
     "@types/pg": "8.6.1",
     "@types/react": "17.0.36",
     "@types/react-dom": "17.0.11",
@@ -169,7 +169,7 @@
     "whatwg-fetch": "3.6.2"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "babelMacros": {
     "twin": {
