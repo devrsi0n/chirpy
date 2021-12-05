@@ -49,7 +49,7 @@
     "@react-aria/button": "3.3.4",
     "@tailwindcss/typography": "0.4.1",
     "@testing-library/cypress": "8.0.2",
-    "@tiptap/extension-link": "2.0.0-beta.28",
+    "@tiptap/extension-link": "2.0.0-beta.32",
     "@tiptap/extension-placeholder": "2.0.0-beta.44",
     "@tiptap/extension-underline": "2.0.0-beta.21",
     "@tiptap/react": "2.0.0-beta.95",
