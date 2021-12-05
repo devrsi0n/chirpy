@@ -13,6 +13,7 @@ import * as storage from '../../storage';
 import { cardTitle, labelContainer } from '../../styles';
 import * as url from '../../url';
 import Bar from '../bar';
+import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 
 class AllSources extends React.Component {
@@ -68,8 +69,11 @@ class AllSources extends React.Component {
               href={url.setQuery('source', referrer.name)}
             >
               <img
-                src={`/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 className="inline w-4 h-4 mr-2 -mt-px align-middle"
+                alt={`Favorite icon for ${referrer.name}`}
               />
               {referrer.name}
             </Link>
@@ -257,9 +261,7 @@ class UTMSources extends React.Component {
         />
       </div>
     ) : (
-      <div className="font-medium text-center text-gray-500 mt-44 dark:text-gray-400">
-        No data yet
-      </div>
+      <EmptyState />
     );
   }
 

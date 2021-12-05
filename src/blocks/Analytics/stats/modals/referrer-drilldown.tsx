@@ -99,6 +99,7 @@ class ReferrerDrilldownModal extends React.Component {
           src={`https://icons.duckduckgo.com/ip3/${referrer.url}.ico`}
           referrerPolicy="no-referrer"
           className="h-4 w-4 mr-2 inline"
+          alt={`${referrer.name} icon`}
         />
         <Link
           disabled

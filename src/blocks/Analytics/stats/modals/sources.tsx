@@ -104,8 +104,11 @@ class SourcesModal extends React.Component {
       <tr className="text-sm dark:text-gray-200" key={source.name}>
         <td className="p-2">
           <img
-            src={`/favicon/sources/${encodeURIComponent(source.name)}`}
+            src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
+              source.name,
+            )}`}
             className="h-4 w-4 mr-2 align-middle inline"
+            alt={`Favorite icon for ${source.name}`}
           />
           <Link
             disabled
