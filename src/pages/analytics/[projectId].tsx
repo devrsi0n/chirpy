@@ -25,7 +25,6 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
       </Head>
       <section tw="xl:max-width[70rem] mx-auto px-4">
         <PageTitle tw="pb-6">Analytics</PageTitle>
-
         <Realtime
           site={{
             domain: props.project?.domain!,

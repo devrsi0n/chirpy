@@ -213,7 +213,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
       }
     });
 
-    this.props.history.replace({
+    this.props.router.replace({
       pathname: siteBasePath(this.props.site),
       search: queryString.toString(),
     });

@@ -1,5 +1,7 @@
+import ExternalLink from '@geist-ui/react-icons/externalLink';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
+import 'twin.macro';
 
 import { Link } from '$/components/Link';
 import { usePrevious } from '$/hooks/usePrevious';
@@ -12,8 +14,8 @@ import { itemBg } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import * as url from '../../url';
-import { EmptyState } from '../empty-state';
 import Bar from '../bar';
+import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 
 export interface PageRankProps extends Props {
@@ -129,29 +131,17 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   return (
     <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
       <Bar count={page.count} all={pages} css={itemBg} maxWidthDeduction={maxWidthDeduction}>
-        <span className="flex px-2 py-1.5 group dark:text-gray-300 relative break-all z-9">
+        <span className="group" tw="flex px-2 py-1.5 dark:text-gray-300 relative break-all z-10">
           <Link
             href={url.setQuery('entry_page', page.name)}
-            className="md:truncate block hover:underline"
-            disabled
+            className="md:truncate block hover:underline text-gray-1200"
+            variant="plain"
           >
             {page.name}
           </Link>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={externalLink}
-            className="hidden group-hover:block"
-          >
-            <svg
-              className="inline w-4 h-4 ml-1 -mt-1 text-gray-600 dark:text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
-              <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
-            </svg>
-          </a>
+          <Link rel="noreferrer" href={externalLink} tw="hidden group-hover:block text-gray-1200">
+            <ExternalLink size={16} />
+          </Link>
         </span>
       </Bar>
       <span className="font-medium dark:text-gray-200 w-20 text-right">

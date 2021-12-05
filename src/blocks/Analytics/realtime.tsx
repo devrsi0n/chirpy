@@ -1,10 +1,14 @@
 import { Global } from '@emotion/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import 'twin.macro';
+
+import { Heading } from '$/components/Heading';
 
 import Datepicker from './datepicker';
 import Filters from './filters';
 import { parseQuery } from './query';
+import { SiteIcon } from './site-icon';
 import Conversions from './stats/conversions';
 import Devices from './stats/devices';
 import Locations from './stats/locations';
@@ -29,7 +33,7 @@ export default function Realtime(props: RealtimeProps) {
   React.useEffect(() => {
     setQuery(parseQuery(location.search, props.site));
   }, [router.asPath, props.site]);
-  const [timer, setTimer] = React.useState(() => new Timer());
+  const [timer] = React.useState(() => new Timer());
   const navClass = props.site.embedded ? 'relative' : 'sticky';
   const renderConversions = () => {
     if (props.site.hasGoals) {
@@ -56,11 +60,7 @@ export default function Realtime(props: RealtimeProps) {
         >
           <div className="items-center w-full flex">
             <div className="flex items-center w-full">
-              {/* <SiteSwitcher
-          site={this.props.site}
-          loggedIn={this.props.loggedIn}
-          currentUserRole={this.props.currentUserRole}
-        /> */}
+              <SiteHeader site={props.site} />
               <Filters className="flex" site={props.site} query={query} router={router} />
             </div>
             <Datepicker site={props.site} query={query} router={router} />
@@ -79,5 +79,20 @@ export default function Realtime(props: RealtimeProps) {
         {renderConversions()}
       </div>
     </>
+  );
+}
+
+interface SiteHeaderProps {
+  site: Site;
+}
+
+function SiteHeader({ site }: SiteHeaderProps): JSX.Element {
+  return (
+    <section tw="flex flex-row items-center space-x-1">
+      <SiteIcon name={site.domain} domain={site.domain} />
+      <Heading as="h3" tw="text-base font-bold">
+        {site.domain}
+      </Heading>
+    </section>
   );
 }

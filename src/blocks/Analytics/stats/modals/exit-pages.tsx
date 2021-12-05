@@ -35,7 +35,7 @@ class ExitPagesModal extends React.Component {
       .then((res) =>
         this.setState((state) => ({
           loading: false,
-          pages: state.pages.concat(res),
+          pages: [...state.pages, ...res],
           moreResultsAvailable: res.length === 100,
         })),
       );
@@ -46,11 +46,7 @@ class ExitPagesModal extends React.Component {
   }
 
   formatPercentage(number) {
-    if (typeof number === 'number') {
-      return number + '%';
-    } else {
-      return '-';
-    }
+    return typeof number === 'number' ? number + '%' : '-';
   }
 
   showConversionRate() {

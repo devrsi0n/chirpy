@@ -42,7 +42,7 @@ class SourcesModal extends React.Component {
       .then((res) =>
         this.setState({
           loading: false,
-          sources: sources.concat(res),
+          sources: [...sources, ...res],
           moreResultsAvailable: res.length === 100,
         }),
       );

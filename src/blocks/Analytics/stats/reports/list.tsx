@@ -9,8 +9,8 @@ import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import { labelContainer } from '../../styles';
 import { Timer } from '../../timer';
-import { EmptyState } from '../empty-state';
 import Bar from '../bar';
+import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 
 interface ListReportProps {
@@ -73,14 +73,14 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     });
 
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
-    const lightBackground = this.props.color || 'bg-green-50';
+    const lightBackground = this.props.color || '';
 
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={listItem.name}>
         <Bar
           count={listItem.visitors}
           all={this.state.list}
-          className={`${lightBackground} dark:bg-gray-500 dark:bg-opacity-15`}
+          className={`${lightBackground} bg-green-200`}
           maxWidthDeduction={maxWidthDeduction}
         >
           <span

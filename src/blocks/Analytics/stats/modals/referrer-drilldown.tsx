@@ -6,6 +6,7 @@ import { Link } from '$/components/Link';
 import * as api from '../../api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery, Query, toHuman } from '../../query';
+import { SiteIcon } from '../../site-icon';
 import { Site } from '../../type';
 import Modal from './modal';
 
@@ -100,12 +101,7 @@ class ReferrerDrilldownModal extends React.Component<
 
     return (
       <span className="flex group items-center">
-        <img
-          src={`https://icons.duckduckgo.com/ip3/${referrer.url}.ico`}
-          referrerPolicy="no-referrer"
-          className="h-4 w-4 mr-2 inline"
-          alt={`${referrer.name} icon`}
-        />
+        <SiteIcon domain={referrer.url} name={referrer.name} />
         <Link
           disabled
           className="block truncate hover:underline dark:text-gray-200"

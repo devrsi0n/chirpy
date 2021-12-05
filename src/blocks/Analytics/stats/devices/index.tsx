@@ -228,9 +228,7 @@ export default class Devices extends React.Component<DevicesProps, DeviceState> 
         return <OperatingSystems site={this.props.site} query={this.props.query} />;
       case 'size':
       default:
-        return (
-          <ScreenSizes site={this.props.site} query={this.props.query} />
-        );
+        return <ScreenSizes site={this.props.site} query={this.props.query} />;
     }
   }
 

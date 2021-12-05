@@ -321,14 +321,14 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const formattedComparison = numberFormatter(Math.abs(comparison));
 
     if (comparison > 0) {
-      const color = name === 'Bounce rate' ? 'text-red-400' : 'text-green-900';
+      const color = name === 'Bounce rate' ? 'text-red-900' : 'text-green-900';
       return (
         <span className="text-xs dark:text-gray-100">
           <span className={color + ' font-bold'}>&uarr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison < 0) {
-      const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-400';
+      const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-900';
       return (
         <span className="text-xs dark:text-gray-100">
           <span className={color + ' font-bold'}>&darr;</span> {formattedComparison}%
