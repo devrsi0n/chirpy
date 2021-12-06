@@ -102,7 +102,6 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
             all={goals!}
             className="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
             maxWidthDeduction={this.getBarMaxWidth()}
-            plot="unique_conversions"
           >
             {this.renderGoalText(goal.name)}
           </Bar>

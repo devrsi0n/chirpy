@@ -153,7 +153,6 @@ export default class PropertyBreakdown extends React.Component<
       <div className="flex items-center justify-between my-2" key={value.name}>
         <Bar
           count={value.unique_conversions}
-          plot="unique_conversions"
           all={breakdown}
           className="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
           maxWidthDeduction={this.getBarMaxWidth()}
