@@ -36,5 +36,6 @@ mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
 query pages {
   pages {
     id
+    url
   }
 }

@@ -18,9 +18,9 @@ fragment commentContent on Comment {
 }
 
 # Used in pages/widget/comment/[pageId].tsx
-subscription commentTree($pageId: uuid!) {
+subscription commentTree($pageURL: String!) {
   comments(
-    where: { pageId: { _eq: $pageId }, parentId: { _is_null: true } }
+    where: { page: { url: { _eq: $pageURL } }, parentId: { _is_null: true } }
     order_by: { likes_aggregate: { count: desc }, createdAt: asc }
   ) {
     ...commentContent
