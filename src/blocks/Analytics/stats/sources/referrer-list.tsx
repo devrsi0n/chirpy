@@ -8,7 +8,7 @@ import * as api from '../../api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
-import { cardTitle } from '../../styles';
+import { cardTitle, labelContainer } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import Bar from '../bar';
@@ -186,7 +186,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     if (this.state.referrers!.length > 0) {
       return (
         <div className="flex flex-col flex-grow">
-          <div className="flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-500">
+          <div css={labelContainer}>
             <span>Referrer</span>
 
             <div className="text-right">

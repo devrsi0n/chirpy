@@ -114,7 +114,7 @@ class AllSources extends React.Component<AllSourcesProps> {
   renderList() {
     return this.state.referrers && this.state.referrers.length > 0 ? (
       <React.Fragment>
-        <div className="flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-500">
+        <div css={labelContainer}>
           <span>Source</span>
           <div className="text-right">
             <span className="inline-block w-20">{this.label()}</span>

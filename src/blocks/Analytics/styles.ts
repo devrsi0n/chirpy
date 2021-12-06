@@ -1,9 +1,10 @@
-import tw, { css, screen, theme } from 'twin.macro';
+import tw, { css, theme } from 'twin.macro';
 
 export const labelContainer = tw`flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-1100`;
 export const cardTitle = tw`font-bold text-gray-1100`;
 export const tabContainer = tw`flex font-medium text-xs text-gray-1100 space-x-2`;
 export const itemBg = tw`bg-orange-200 dark:bg-opacity-5`;
+
 
 export const analyticsStyles = css`
   .feather {

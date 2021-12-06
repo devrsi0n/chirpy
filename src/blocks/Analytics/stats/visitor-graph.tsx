@@ -1,6 +1,7 @@
 import Chart from 'chart.js/auto';
 import { NextRouter } from 'next/router';
 import React from 'react';
+import 'twin.macro';
 
 import * as api from '../api';
 import LazyLoader from '../lazy-loader';
@@ -566,9 +567,9 @@ export default class VisitorGraph extends React.Component<VisitorGraphProps, Vis
   render() {
     return (
       <LazyLoader onVisible={this.onVisible}>
-        <div className="relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph">
+        <div className="relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph" tw="z-20">
           {this.state.loading && (
-            <div className="graph-inner">
+            <div className="graph-inner" >
               <div className="pt-24 mx-auto loading sm:pt-32 md:pt-48">
                 <div></div>
               </div>
