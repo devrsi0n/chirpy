@@ -10,6 +10,7 @@ import {
 } from '$/server/graphql/generated/page';
 
 import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
+import { ProjectByDomainDocument } from '../graphql/generated/project';
 import { GetPagByUrl } from '../types/page';
 
 export async function handleGetPage(
@@ -33,10 +34,18 @@ export async function handleGetPage(
   const page = pageResult.data.pages[0];
   const domain = new URL(url as string).hostname;
   if (domain !== page?.project.domain && !isLocalDomain(domain)) {
-    return res.status(500).json({
-      code: ERR_UNMATCHED_DOMAIN,
-      error: `Wrong domain(${domain}), expected domain(${page?.project?.domain}), please contact your site administrator`,
+    const projectResult = await adminApollo.query({
+      query: ProjectByDomainDocument,
+      variables: {
+        domain,
+      },
     });
+    if (!projectResult.data.projects[0].id) {
+      return res.status(500).json({
+        code: ERR_UNMATCHED_DOMAIN,
+        error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
+      });
+    }
   }
   if (!page?.id) {
     const createdPage = await adminApollo.mutate<InsertOnePageMutation>({

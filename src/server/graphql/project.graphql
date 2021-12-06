@@ -32,3 +32,12 @@ query projectAnalytics($projectId: uuid!) {
     createdAt
   }
 }
+
+query projectByDomain($domain: String!) {
+  projects(where: { domain: { _eq: $domain } }) {
+    id
+    name
+    domain
+    createdAt
+  }
+}

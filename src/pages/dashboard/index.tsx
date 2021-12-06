@@ -125,7 +125,7 @@ export default function Dashboard(): JSX.Element {
             aria-label="Name of this project"
             label="Name"
             errorMessage={errors.name}
-            placeholder="hippo"
+            placeholder="swift"
             tw="w-full"
           />
           <TextField
