@@ -1,8 +1,8 @@
 // @ts-nocheck
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
-import classNames from 'classnames';
 import React, { Fragment } from 'react';
+import 'twin.macro';
 
 import * as api from '../../api';
 import { parseQuery, formattedFilters, Query, FormattedFilterKey } from '../../query';
@@ -251,6 +251,12 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   renderFilterTypeSelector(filterName: string) {
+    const itemStyles = (active: boolean) => [
+      active
+        ? tw`bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100`
+        : tw`text-gray-700 dark:text-gray-200`,
+      tw`cursor-pointer block px-4 py-2 text-sm`,
+    ]
     return (
       <Menu as="div" className="relative inline-block text-left">
         {({ open }) => (
@@ -284,12 +290,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                     {({ active }) => (
                       <span
                         onClick={() => this.setFilterType(filterName, 'is')}
-                        className={classNames(
-                          active
-                            ? 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100'
-                            : 'text-gray-700 dark:text-gray-200',
-                          'cursor-pointer block px-4 py-2 text-sm',
-                        )}
+                        css={itemStyles(active)}
                       >
                         is
                       </span>
@@ -300,12 +301,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                       {({ active }) => (
                         <span
                           onClick={() => this.setFilterType(filterName, 'is_not')}
-                          className={classNames(
-                            active
-                              ? 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100'
-                              : 'text-gray-700 dark:text-gray-200',
-                            'cursor-pointer block px-4 py-2 text-sm',
-                          )}
+                          css={itemStyles(active)}
                         >
                           is not
                         </span>

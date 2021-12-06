@@ -1,9 +1,9 @@
 /* eslint react/jsx-props-no-spreading: 0 */
 import { ChevronDownIcon } from '@heroicons/react/solid';
-import classNames from 'classnames';
 import debounce from 'debounce-promise';
 import { useCombobox } from 'downshift';
 import React, { useState, useCallback } from 'react';
+import tw from 'twin.macro';
 
 function selectInputText(e: { target: { select: () => void } }) {
   e.target.select();
@@ -116,10 +116,10 @@ export default function SearchSelect(props: SearchSelectProps) {
           onFocus={selectInputText}
           placeholder={props.placeholder}
           type="text"
-          className={classNames(
-            'w-full pr-10 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm rounded-md dark:bg-gray-900 dark:text-gray-300 block',
-            { 'cursor-pointer': inputValue === '' && !isOpen },
-          )}
+          css={[
+            tw`w-full pr-10 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm rounded-md dark:bg-gray-900 dark:text-gray-300 block`,
+            inputValue === '' && !isOpen && tw`cursor-pointer`,
+          ]}
         />
         <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           {!loading && <ChevronDownIcon className="h-4 w-4 text-gray-500" />}
@@ -141,10 +141,12 @@ export default function SearchSelect(props: SearchSelectProps) {
 
             {items.map((item: any, index) => (
               <li
-                className={classNames('cursor-pointer select-none relative py-2 pl-3 pr-9', {
-                  'text-white bg-indigo-600': highlightedIndex === index,
-                  'text-gray-900 dark:text-gray-100': highlightedIndex !== index,
-                })}
+                css={[
+                  tw`cursor-pointer select-none relative py-2 pl-3 pr-9`,
+                  highlightedIndex === index
+                    ? tw`text-white bg-indigo-600`
+                    : tw`text-gray-900 dark:text-gray-100`,
+                ]}
                 key={`${item.name ? item.name : item}`}
                 {...getItemProps({ item, index })}
               >

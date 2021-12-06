@@ -21,10 +21,6 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
     return (
       <Html lang="en">
         <Head>
-          <meta
-            name="google-site-verification"
-            content="koggX1GsLqeXzbQmq-JUcGh2pZHRN3Xy5o_oXNS9nRo"
-          />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
           <link

@@ -1,9 +1,8 @@
 import { Menu, Transition } from '@headlessui/react';
 import { AdjustmentsIcon, PlusIcon, XIcon, PencilIcon } from '@heroicons/react/solid';
-import classNames from 'classnames';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
-import 'twin.macro';
+import tw from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
@@ -192,12 +191,12 @@ function filterDropdownOption(site: Site, option: FilterGroupKey) {
         <Link
           disabled
           href={`/${encodeURIComponent(site.domain)}/filter/${option}${window.location.search}`}
-          className={classNames(
+          css={[
             active
-              ? 'bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100'
-              : 'text-gray-800 dark:text-gray-300',
-            'block px-4 py-2 text-sm font-medium',
-          )}
+              ? tw`bg-gray-100 text-gray-1100`
+              : tw`text-gray-1100`,
+            tw`block px-4 py-2 text-sm font-medium`,
+          ]}
         >
           {formatFilterGroup(option)}
         </Link>
