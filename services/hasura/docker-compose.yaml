@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_PASSWORD: postgrespassword
   graphql-engine:
-    image: fedormelexin/graphql-engine-arm64:v2.0.9
+    image: fedormelexin/graphql-engine-arm64:v2.0.10
     ports:
       - '8080:8080'
     depends_on:
