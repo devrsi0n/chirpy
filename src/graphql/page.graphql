@@ -1,6 +1,7 @@
 query themeOfPage($pageId: uuid!) {
   pageByPk(id: $pageId) {
     id
+    url
     project {
       id
       theme

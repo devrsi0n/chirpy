@@ -8,13 +8,14 @@ export type ThemeOfPageQueryVariables = Types.Exact<{
 }>;
 
 
-export type ThemeOfPageQuery = { __typename?: 'query_root', pageByPk?: { __typename?: 'Page', id: string, project: { __typename?: 'Project', id: string, theme?: any | null | undefined } } | null | undefined };
+export type ThemeOfPageQuery = { __typename?: 'query_root', pageByPk?: { __typename?: 'Page', id: string, url: string, project: { __typename?: 'Project', id: string, theme?: any | null | undefined } } | null | undefined };
 
 
 export const ThemeOfPageDocument = gql`
     query themeOfPage($pageId: uuid!) {
   pageByPk(id: $pageId) {
     id
+    url
     project {
       id
       theme

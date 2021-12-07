@@ -25,10 +25,8 @@ import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
-  PageByUrlDocument,
   PageByUrlOnlyDocument,
   PageByUrlOnlyQuery,
-  PageByUrlQuery,
   PagesDocument,
   PagesQuery,
 } from '$/server/graphql/generated/page';
