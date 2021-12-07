@@ -24,7 +24,14 @@ import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { PagesDocument, PagesQuery } from '$/server/graphql/generated/page';
+import {
+  PageByUrlDocument,
+  PageByUrlOnlyDocument,
+  PageByUrlOnlyQuery,
+  PageByUrlQuery,
+  PagesDocument,
+  PagesQuery,
+} from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
@@ -120,10 +127,18 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
   }
   const { pageURL } = params;
   const adminApollo = getAdminApollo();
+  const pageQuery = await adminApollo.query<PageByUrlOnlyQuery>({
+    query: PageByUrlOnlyDocument,
+    variables: { url: pageURL },
+  });
+  const pageId = pageQuery.data?.pages?.[0]?.id;
+  if (!pageId) {
+    return { notFound: true };
+  }
   const commentTreeSubscription = adminApollo.subscribe<CommentTreeSubscription>({
     query: CommentTreeDocument,
     variables: {
-      pageURL,
+      pageURL: decodeURIComponent(pageURL),
     },
   });
   try {
@@ -142,7 +157,6 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
       return { notFound: true };
     }
     const { comments } = data;
-    const pageId = comments[0].pageId;
     const themeResult = await adminApollo.query<ThemeOfPageQuery>({
       query: ThemeOfPageDocument,
       variables: {

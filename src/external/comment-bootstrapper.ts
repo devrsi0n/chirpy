@@ -76,7 +76,9 @@ export async function comment(): Promise<void> {
   window.document.body.addEventListener('click', () => {
     container.contentWindow?.postMessage(EVENT_CLICK_CONTAINER);
   });
-  container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${page.id}`;
+  container.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${encodeURIComponent(
+    page.url,
+  )}`;
   renderTarget.append(container);
 }
 

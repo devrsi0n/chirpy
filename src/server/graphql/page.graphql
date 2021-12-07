@@ -1,3 +1,4 @@
+# TODO: Merge with `pageByUrlOnly`
 query pageByURL($url: String!, $projectId: uuid!) {
   pages(limit: 1, where: { url: { _eq: $url }, projectId: { _eq: $projectId } }) {
     id
@@ -35,6 +36,13 @@ mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
 # Used in pages/widget/comment/[pageId].tsx
 query pages {
   pages {
+    id
+    url
+  }
+}
+
+query pageByUrlOnly($url: String!) {
+  pages(limit: 1, where: { url: { _eq: $url } }) {
     id
     url
   }
