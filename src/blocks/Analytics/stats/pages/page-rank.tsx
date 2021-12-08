@@ -1,10 +1,13 @@
+import File from '@geist-ui/react-icons/file';
 import ExternalLink from '@geist-ui/react-icons/externalLink';
+import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
 import { Link } from '$/components/Link';
 import { usePrevious } from '$/hooks/usePrevious';
+import { WIDGET_COMMENT_PATH } from '$/lib/constants';
 
 import * as api from '../../api';
 import FadeIn from '../../fade-in';
@@ -18,6 +21,19 @@ import Bar from '../bar';
 import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
 
+export interface Page {
+  name: string;
+  count: number;
+  unique_entrances: number;
+  conversion_rate: number;
+  unique_exits: number;
+  visitors: number;
+  total_visitors: number;
+  total_entrances: number;
+  visit_duration: number;
+  bounce_rate: number;
+}
+
 export interface PageRankProps extends Props {
   timer?: Timer;
   apiPath: 'entry-pages' | 'exit-pages' | 'pages';
@@ -29,7 +45,11 @@ export function PageRank(props: PageRankProps) {
 
   const fetchPages = () => {
     api
-      .get(`/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`, props.query)
+      .get(
+        `/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`,
+        props.site,
+        props.query,
+      )
       .then((res) => {
         setPages(res);
         setLoading(false);
@@ -131,18 +151,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   return (
     <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
       <Bar count={page.count} all={pages} css={itemBg} maxWidthDeduction={maxWidthDeduction}>
-        <span className="group" tw="flex px-2 py-1.5 dark:text-gray-300 relative break-all z-10">
-          <Link
-            href={url.setQuery('entry_page', page.name)}
-            className="md:truncate block hover:underline text-gray-1200"
-            variant="plain"
-          >
-            {page.name}
-          </Link>
-          <Link rel="noreferrer" href={externalLink} tw="hidden group-hover:block text-gray-1200">
-            <ExternalLink size={16} />
-          </Link>
-        </span>
+        <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
       <span className="font-medium dark:text-gray-200 w-20 text-right">
         {numberFormatter(page.count)}
@@ -156,15 +165,36 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   );
 }
 
-export interface Page {
-  name: string;
-  count: number;
-  unique_entrances: number;
-  conversion_rate: number;
-  unique_exits: number;
-  visitors: number;
-  total_visitors: number;
-  total_entrances: number;
-  visit_duration: number;
-  bounce_rate: number;
+function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
+  const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
+  return (
+    <span
+      className="group"
+      tw="flex items-center px-2 py-1.5 relative break-all z-10 space-x-1"
+    >
+      <span
+        {...(isCommentWidget && {
+          tooltip: 'This page contains a comment widget',
+        })}
+      >
+        <Link
+          href={url.setQuery('entry_page', name)}
+          tw="md:truncate hover:underline inline-flex items-center space-x-1 text-gray-1200"
+          variant="plain"
+        >
+          {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
+          <span>{isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}</span>
+        </Link>
+      </span>
+      <Link
+        rel="noreferrer"
+        href={externalLink}
+        tw="hidden group-hover:block text-gray-1200"
+        variant="plain"
+        tooltip='Click to open in a new tab'
+      >
+        <ExternalLink size={16} />
+      </Link>
+    </span>
+  );
 }

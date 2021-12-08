@@ -188,9 +188,14 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         filters: { ...query.filters, ...formFilters, [filter]: null },
       };
 
-      return api.get(apiPath(this.props.site, `/suggestions/${filter}`), updatedQuery, {
-        q: input.trim(),
-      });
+      return api.get(
+        apiPath(this.props.site, `/suggestions/${filter}`),
+        this.props.site,
+        updatedQuery,
+        {
+          q: input.trim(),
+        },
+      );
     };
   }
 
@@ -256,7 +261,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         ? tw`bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100`
         : tw`text-gray-700 dark:text-gray-200`,
       tw`cursor-pointer block px-4 py-2 text-sm`,
-    ]
+    ];
     return (
       <Menu as="div" className="relative inline-block text-left">
         {({ open }) => (

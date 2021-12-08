@@ -439,6 +439,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       } else {
         const endpoint = `/${encodeURIComponent(this.props.site.domain)}/export${api.serializeQuery(
           this.props.query,
+          this.props.site
         )}`;
 
         return (
@@ -541,7 +542,11 @@ export default class VisitorGraph extends React.Component<VisitorGraphProps, Vis
 
   fetchGraphData() {
     api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/main-graph`, this.props.query)
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/main-graph`,
+        this.props.site,
+        this.props.query,
+      )
       .then((res) => {
         this.setState({ loading: false, graphData: res });
         return res;

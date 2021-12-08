@@ -25,7 +25,10 @@ export default class CurrentVisitors extends React.Component<CurrentVisitorsProp
 
   updateCount = () => {
     return api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/current-visitors`)
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/current-visitors`,
+        this.props.site,
+      )
       .then((res) => this.setState({ currentVisitors: res }));
   };
 

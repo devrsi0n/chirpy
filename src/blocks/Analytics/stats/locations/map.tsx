@@ -89,9 +89,14 @@ class Countries extends React.Component<CountriesProps, CountriesState> {
 
   fetchCountries() {
     return api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/countries`, this.props.query, {
-        limit: 300,
-      })
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/countries`,
+        this.props.site,
+        this.props.query,
+        {
+          limit: 300,
+        },
+      )
       .then((res) => this.setState({ loading: false, countries: res }));
   }
 

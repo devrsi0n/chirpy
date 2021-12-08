@@ -70,7 +70,11 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   fetchConversions() {
     api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/conversions`, this.props.query)
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/conversions`,
+        this.props.site,
+        this.props.query,
+      )
       .then((res) => this.setState({ loading: false, goals: res, prevHeight: null }));
   }
 

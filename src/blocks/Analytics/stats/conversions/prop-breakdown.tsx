@@ -94,6 +94,7 @@ export default class PropertyBreakdown extends React.Component<
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/property/${encodeURIComponent(
             this.state.propKey,
           )}`,
+          this.props.site,
           this.props.query,
           { limit: 100, page: this.state.page },
         )

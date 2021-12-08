@@ -10,3 +10,5 @@ export const APP_NAME_LOWERCASE = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase()
 export const APP_DOMAIN = process.env.NEXT_PUBLIC_APP_URL;
 
 export const EVENT_CLICK_CONTAINER = 'EVENT_CLICK_CONTAINER';
+
+export const WIDGET_COMMENT_PATH = '/widget/comment/';

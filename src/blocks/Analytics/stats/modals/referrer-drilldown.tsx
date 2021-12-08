@@ -36,6 +36,7 @@ class ReferrerDrilldownModal extends React.Component<
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${
           this.props.match.params.referrer
         }`,
+        this.props.site,
         this.state.query,
         { limit: 100, detailed },
       )

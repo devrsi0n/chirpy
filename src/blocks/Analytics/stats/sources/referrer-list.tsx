@@ -78,6 +78,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${encodeURIComponent(
             this.props.query.filters.source,
           )}`,
+          this.props.site,
           this.props.query,
           { show_noref: this.showNoRef() },
         )
@@ -87,6 +88,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
       api
         .get(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers`,
+          this.props.site,
           this.props.query,
         )
         .then((res) => this.setState({ loading: false, referrers: res }));
@@ -94,6 +96,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
       api
         .get(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers`,
+          this.props.site,
           this.props.query,
           { show_noref: this.showNoRef() },
         )

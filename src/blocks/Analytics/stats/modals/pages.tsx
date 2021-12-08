@@ -29,11 +29,16 @@ class PagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/pages`, query, {
-        limit: 100,
-        page,
-        detailed,
-      })
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/pages`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+          detailed,
+        },
+      )
       .then((res) =>
         this.setState((state) => ({
           loading: false,

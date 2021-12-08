@@ -23,6 +23,7 @@ class GoogleKeywordsModal extends React.Component {
       api
         .get(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers/Google`,
+          this.props.site,
           this.state.query,
           { limit: 100 },
         )
@@ -39,6 +40,7 @@ class GoogleKeywordsModal extends React.Component {
       api
         .get(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/Google`,
+          this.props.site,
           this.state.query,
           { limit: 100 },
         )

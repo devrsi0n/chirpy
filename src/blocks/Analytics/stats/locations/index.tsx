@@ -13,7 +13,7 @@ import CountriesMap from './map';
 
 function Countries({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/countries'), query, { limit: 9 }).then((res) => {
+    return api.get(apiPath(site, '/countries'), site, query, { limit: 9 }).then((res) => {
       return res.map((row: any) => Object.assign({}, row, { percentage: undefined }));
     });
   }
@@ -41,7 +41,7 @@ interface Region {
 
 function Regions({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/regions'), query, {
+    return api.get(apiPath(site, '/regions'), site, query, {
       country_name: query.filters.country,
       limit: 9,
     });
@@ -66,7 +66,7 @@ function Regions({ query, site }: Props) {
 
 function Cities({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/cities'), query, { limit: 9 });
+    return api.get(apiPath(site, '/cities'), site, query, { limit: 9 });
   }
 
   return (

@@ -53,9 +53,14 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   fetchReferrers = () => {
     api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/sources`, this.props.query, {
-        show_noref: this.showNoRef(),
-      })
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/sources`,
+        this.props.site,
+        this.props.query,
+        {
+          show_noref: this.showNoRef(),
+        },
+      )
       .then((res) => this.setState({ loading: false, referrers: res }));
   };
 
@@ -202,6 +207,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     api
       .get(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/${endpoint}`,
+        this.props.site,
         this.props.query,
         { show_noref: this.showNoRef() },
       )

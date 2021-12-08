@@ -19,7 +19,7 @@ class ModalTable extends React.Component {
 
   componentDidMount() {
     api
-      .get(this.props.endpoint, this.state.query, { limit: 100 })
+      .get(this.props.endpoint, this.props.site, this.state.query, { limit: 100 })
       .then((res) => this.setState({ loading: false, list: res }));
   }
 
