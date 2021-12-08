@@ -24,7 +24,12 @@ import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
 import { getAdminApollo } from '$/server/common/admin-apollo';
-import { PagesDocument, PagesQuery } from '$/server/graphql/generated/page';
+import {
+  PageByUrlOnlyDocument,
+  PageByUrlOnlyQuery,
+  PagesDocument,
+  PagesQuery,
+} from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
@@ -38,14 +43,16 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
+  let pageURL = '';
 
   if (isStaticError(props)) {
     error = props.error!;
   } else {
     pageId = props.pageId;
+    pageURL = props.pageURL;
   }
   const { data } = useCommentTreeSubscription({
-    variables: { pageId },
+    variables: { pageURL },
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
 
@@ -76,7 +83,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
 }
 
 type PathParams = {
-  pageId: string;
+  pageURL: string;
 };
 
 // Get all project then prerender all their page comments
@@ -88,10 +95,10 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
     query: PagesDocument,
   });
 
-  const paths: { params: PathParams }[] = pages.map(({ id }) => {
+  const paths: { params: PathParams }[] = pages.map(({ url }) => {
     return {
       params: {
-        pageId: id,
+        pageURL: url,
       },
     };
   });
@@ -104,6 +111,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 type StaticProps = PathParams &
   CommonWidgetProps & {
     comments: CommentLeafType[];
+    pageId: string;
   };
 type StaticError = {
   error: string;
@@ -112,15 +120,23 @@ type StaticError = {
 export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
-  if (!params?.pageId) {
+  if (!params?.pageURL) {
     return { notFound: true };
   }
-  const { pageId } = params;
+  const { pageURL } = params;
   const adminApollo = getAdminApollo();
+  const pageQuery = await adminApollo.query<PageByUrlOnlyQuery>({
+    query: PageByUrlOnlyDocument,
+    variables: { url: pageURL },
+  });
+  const pageId = pageQuery.data?.pages?.[0]?.id;
+  if (!pageId) {
+    return { notFound: true };
+  }
   const commentTreeSubscription = adminApollo.subscribe<CommentTreeSubscription>({
     query: CommentTreeDocument,
     variables: {
-      pageId,
+      pageURL: decodeURIComponent(pageURL),
     },
   });
   try {
@@ -152,6 +168,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
     return {
       props: {
         comments,
+        pageURL,
         pageId,
         projectId: themeResult.data.pageByPk.project.id,
         theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,

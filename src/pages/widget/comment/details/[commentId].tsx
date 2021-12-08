@@ -33,7 +33,7 @@ import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
 
-// Demo: http://localhost:3000/widget/comment/details/bd15c46c-67e6-424e-a68d-2aa3b9462093
+// TODO: Migrate this page to a dialog widget (for analytics)
 export default function CommentDetailsWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
@@ -51,7 +51,7 @@ export default function CommentDetailsWidget(
   return (
     <CommentContextProvider projectId={props.projectId}>
       <div css={tw`flex flex-row justify-between items-center mb-4`}>
-        <Link href={`/widget/comment/${comment?.pageId}`} variant="plain">
+        <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
           <IconButton css={tw`transform translate-x-1`}>
             <ArrowLeft size={20} />
           </IconButton>
@@ -81,6 +81,7 @@ type PathParams = {
 type StaticProps = PathParams &
   CommonWidgetProps & {
     comment: CommentDetailNode;
+    pageURL: string;
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
@@ -150,7 +151,8 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         projectId: themeResult.data.pageByPk.project.id,
         comment: data.commentByPk,
         commentId,
-        theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
+        pageURL: themeResult.data.pageByPk.url,
+        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
       revalidate: 1,

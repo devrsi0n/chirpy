@@ -6,7 +6,7 @@ const defaultOptions =  {}
 export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> };
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
-  pageId: Types.Scalars['uuid'];
+  pageURL: Types.Scalars['String'];
 }>;
 
 
@@ -57,9 +57,9 @@ export const CommentContentFragmentDoc = gql`
 }
     `;
 export const CommentTreeDocument = gql`
-    subscription commentTree($pageId: uuid!) {
+    subscription commentTree($pageURL: String!) {
   comments(
-    where: {pageId: {_eq: $pageId}, parentId: {_is_null: true}}
+    where: {page: {url: {_eq: $pageURL}}, parentId: {_is_null: true}}
     order_by: {likes_aggregate: {count: desc}, createdAt: asc}
   ) {
     ...commentContent
@@ -85,7 +85,7 @@ export const CommentTreeDocument = gql`
  * @example
  * const { data, loading, error } = useCommentTreeSubscription({
  *   variables: {
- *      pageId: // value for 'pageId'
+ *      pageURL: // value for 'pageURL'
  *   },
  * });
  */
