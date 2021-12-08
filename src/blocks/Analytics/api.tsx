@@ -4,6 +4,8 @@ import { ssrMode } from '$/utilities/env';
 
 import { formatISO } from './date';
 import { Query } from './query';
+import { Site } from './type';
+import { WIDGET_COMMENT_PATH } from '$/lib/constants';
 
 let abortController = ssrMode ? ({} as any) : new AbortController();
 let SHARED_LINK_AUTH: string | null = null;
@@ -16,9 +18,8 @@ class ApiError extends Error {
 }
 
 function serialize(obj: Record<string, any>) {
-  var str = [];
-  /* eslint-disable-next-line no-prototype-builtins */
-  for (var p in obj)
+  const str = [];
+  for (let p in obj)
     if (obj.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
     }
@@ -34,15 +35,19 @@ export function cancelAll() {
   abortController = new AbortController();
 }
 
-function serializeFilters(filters: Record<string, any>) {
+function serializeFilters(filters: Record<string, any> = {}, site: Site) {
   const cleaned: Record<string, any> = {};
   Object.entries(filters).forEach(([key, val]) => (val ? (cleaned[key] = val) : null));
-  return JSON.stringify(cleaned);
+  return JSON.stringify({
+    ...cleaned,
+    page: `${WIDGET_COMMENT_PATH}https://${site.domain}**`,
+  });
 }
 
 export function serializeQuery(
   query: Partial<Query>,
-  extraQuery: Array<Record<string, Primitive>> = [],
+  site: Site,
+  extraSearchParameter: Array<Record<string, Primitive>> = [],
 ) {
   const queryObj: Record<string, string> = {};
   if (query.period) {
@@ -58,27 +63,26 @@ export function serializeQuery(
     queryObj.to = formatISO(query.to);
   }
   if (query.filters) {
-    queryObj.filters = serializeFilters(query.filters);
+    queryObj.filters = serializeFilters(query.filters, site);
   }
   if (SHARED_LINK_AUTH) {
     queryObj.auth = SHARED_LINK_AUTH;
   }
-  Object.assign(queryObj, ...extraQuery);
+  Object.assign(queryObj, ...extraSearchParameter);
 
   return '?' + serialize(queryObj);
 }
 
 export function get(
   url: string,
+  site: Site,
   query: Partial<Query> = {},
-  ...extraQuery: Array<Record<string, Primitive>>
+  ...extraSearchParameter: Array<Record<string, Primitive>>
 ) {
   const headers: Record<string, string> = SHARED_LINK_AUTH
     ? { 'X-Shared-Link-Auth': SHARED_LINK_AUTH }
-    : {
-        Authorization: `Bearer ZUjCQGz8MoiQt40VB-WvzZyV7d_lJSlLBSNxwQYo1DOf0vWfkTisLadB3MsdL2FU`,
-      };
-  url = url + serializeQuery(query, extraQuery);
+    : {};
+  url += serializeQuery(query, site, extraSearchParameter);
   return fetch(url, {
     signal: abortController.signal,
     headers: headers,

@@ -1,3 +1,4 @@
+import { WIDGET_COMMENT_PATH } from '$/lib/constants';
 import { Site } from './type';
 
 export function apiPath(site: Site, path = '') {
@@ -19,6 +20,9 @@ export function setQuery(key: string, value: string) {
 }
 
 export function externalLinkForPage(domain: string, page: string) {
+  if (page.startsWith(WIDGET_COMMENT_PATH)) {
+    return page.slice(WIDGET_COMMENT_PATH.length);
+  }
   const domainURL = new URL(`https://${domain}`);
   return `https://${domainURL.host}${page}`;
 }

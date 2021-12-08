@@ -10,7 +10,7 @@ import ListReport from '../reports/list';
 
 function Browsers({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/browsers'), query);
+    return api.get(url.apiPath(site, '/browsers'), site, query);
   }
 
   return (
@@ -25,7 +25,7 @@ function Browsers({ query, site }: Props) {
 
 function BrowserVersions({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/browser-versions'), query);
+    return api.get(url.apiPath(site, '/browser-versions'), site, query);
   }
 
   return (
@@ -40,7 +40,7 @@ function BrowserVersions({ query, site }: Props) {
 
 function OperatingSystems({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/operating-systems'), query);
+    return api.get(url.apiPath(site, '/operating-systems'), site, query);
   }
 
   return (
@@ -55,7 +55,7 @@ function OperatingSystems({ query, site }: Props) {
 
 function OperatingSystemVersions({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/operating-system-versions'), query);
+    return api.get(url.apiPath(site, '/operating-system-versions'), site, query);
   }
 
   return (
@@ -82,7 +82,7 @@ function renderTooltipText(screenSize: ScreenSize) {
 
 function ScreenSizes({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/screen-sizes'), query);
+    return api.get(url.apiPath(site, '/screen-sizes'), site, query);
   }
 
   return (

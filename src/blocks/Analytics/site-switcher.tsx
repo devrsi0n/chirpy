@@ -39,7 +39,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
   populateSites() {
     if (!this.props.loggedIn) return;
 
-    get('/api/sites')
+    get('/api/sites', this.props.site)
       .then((response) => {
         if (!response.ok) {
           throw response;

@@ -33,7 +33,7 @@ class SourcesModal extends React.Component {
 
     const detailed = this.showExtra();
     api
-      .get(`/api/stats/${encodeURIComponent(site.domain)}/${this.currentFilter()}`, query, {
+      .get(`/api/stats/${encodeURIComponent(site.domain)}/${this.currentFilter()}`, this.props.site, query, {
         limit: 100,
         page,
         detailed,

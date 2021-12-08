@@ -47,6 +47,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
     api
       .get(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/Google`,
+        this.props.site,
         this.props.query,
       )
       .then((res) =>

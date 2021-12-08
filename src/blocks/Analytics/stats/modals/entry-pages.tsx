@@ -39,10 +39,15 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
     const { query, page } = this.state;
 
     api
-      .get(`/api/stats/${encodeURIComponent(this.props.site.domain)}/entry-pages`, query, {
-        limit: 100,
-        page,
-      })
+      .get(
+        `/api/stats/${encodeURIComponent(this.props.site.domain)}/entry-pages`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+        },
+      )
       .then((res) =>
         this.setState((state) => ({
           loading: false,

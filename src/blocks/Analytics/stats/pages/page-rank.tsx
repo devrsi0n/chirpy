@@ -29,7 +29,11 @@ export function PageRank(props: PageRankProps) {
 
   const fetchPages = () => {
     api
-      .get(`/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`, props.query)
+      .get(
+        `/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`,
+        props.site,
+        props.query,
+      )
       .then((res) => {
         setPages(res);
         setLoading(false);
