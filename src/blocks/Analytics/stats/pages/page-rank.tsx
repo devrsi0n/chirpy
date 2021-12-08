@@ -1,4 +1,4 @@
-import File from '@geist-ui/react-icons/File';
+import File from '@geist-ui/react-icons/file';
 import ExternalLink from '@geist-ui/react-icons/externalLink';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import * as React from 'react';
