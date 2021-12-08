@@ -1,3 +1,4 @@
+import File from '@geist-ui/react-icons/File';
 import ExternalLink from '@geist-ui/react-icons/externalLink';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import * as React from 'react';
@@ -150,23 +151,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   return (
     <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
       <Bar count={page.count} all={pages} css={itemBg} maxWidthDeduction={maxWidthDeduction}>
-        <span className="group" tw="flex items-center px-2 py-1.5 dark:text-gray-300 relative break-all z-10">
-          <Link
-            href={url.setQuery('entry_page', page.name)}
-            className="md:truncate block hover:underline text-gray-1200"
-            variant="plain"
-          >
-            <PageName name={page.name} />
-          </Link>
-          <Link
-            rel="noreferrer"
-            href={externalLink}
-            tw="hidden group-hover:block text-gray-1200"
-            variant="plain"
-          >
-            <ExternalLink size={16} />
-          </Link>
-        </span>
+        <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
       <span className="font-medium dark:text-gray-200 w-20 text-right">
         {numberFormatter(page.count)}
@@ -180,14 +165,36 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   );
 }
 
-function PageName({ name }: { name: string }): JSX.Element {
-  if (name.startsWith(WIDGET_COMMENT_PATH)) {
-    return (
-      <span tw="inline-flex items-center space-x-1" tooltip='This page contains a widget'>
-        <MessageSquare size={14} />
-        <span>{name.slice(WIDGET_COMMENT_PATH.length)}</span>
+function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
+  const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
+  return (
+    <span
+      className="group"
+      tw="flex items-center px-2 py-1.5 relative break-all z-10 space-x-1"
+    >
+      <span
+        {...(isCommentWidget && {
+          tooltip: 'This page contains a comment widget',
+        })}
+      >
+        <Link
+          href={url.setQuery('entry_page', name)}
+          tw="md:truncate hover:underline inline-flex items-center space-x-1 text-gray-1200"
+          variant="plain"
+        >
+          {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
+          <span>{isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}</span>
+        </Link>
       </span>
-    );
-  }
-  return <>{name}</>;
+      <Link
+        rel="noreferrer"
+        href={externalLink}
+        tw="hidden group-hover:block text-gray-1200"
+        variant="plain"
+        tooltip='Click to open in a new tab'
+      >
+        <ExternalLink size={16} />
+      </Link>
+    </span>
+  );
 }
