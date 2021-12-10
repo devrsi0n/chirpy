@@ -16,20 +16,19 @@ import MoreLink from '../more-link';
 interface CountriesProps extends Props {
   timer: Timer;
   router: NextRouter;
+  isDarkMode: boolean;
 }
 
 interface CountriesState {
   countries: any[] | null;
-  darkTheme: boolean;
   loading: boolean;
 }
 
-class Countries extends React.Component<CountriesProps, CountriesState> {
+export class CountriesMap extends React.Component<CountriesProps, CountriesState> {
   private map: Datamap;
 
   state = {
     loading: true,
-    darkTheme: document.querySelector('html')!.classList.contains('dark') || false,
     countries: null,
   };
 
@@ -64,9 +63,9 @@ class Countries extends React.Component<CountriesProps, CountriesState> {
       .domain([0, maxValue])
       .range([
         // @ts-ignore
-        this.state.darkTheme ? '#2e3954' : '#f3ebff',
+        this.props.isDarkMode ? '#2e3954' : '#f3ebff',
         // @ts-ignore
-        this.state.darkTheme ? '#6366f1' : '#a779e9',
+        this.props.isDarkMode ? '#6366f1' : '#a779e9',
       ]);
 
     // @ts-ignore
@@ -107,10 +106,10 @@ class Countries extends React.Component<CountriesProps, CountriesState> {
   drawMap = () => {
     const dataset = this.getDataset();
     const label = this.props.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
-    const defaultFill = this.state.darkTheme ? '#2d3747' : '#f8fafc';
-    const highlightFill = this.state.darkTheme ? '#374151' : '#F5F5F5';
-    const borderColor = this.state.darkTheme ? '#1f2937' : '#dae1e7';
-    const highlightBorderColor = this.state.darkTheme ? '#4f46e5' : '#a779e9';
+    const defaultFill = this.props.isDarkMode ? '#2d3747' : '#f8fafc';
+    const highlightFill = this.props.isDarkMode ? '#374151' : '#F5F5F5';
+    const borderColor = this.props.isDarkMode ? '#1f2937' : '#dae1e7';
+    const highlightBorderColor = this.props.isDarkMode ? '#4f46e5' : '#a779e9';
 
     this.map = new Datamap({
       element: document.querySelector('#map-container'),
@@ -197,5 +196,3 @@ class Countries extends React.Component<CountriesProps, CountriesState> {
     );
   }
 }
-
-export default Countries;

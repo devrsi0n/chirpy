@@ -1,12 +1,47 @@
 import React from 'react';
 import 'twin.macro';
 
+import { Tabs } from '$/components/Tabs';
+
 import * as api from '../../api';
-import * as storage from '../../storage';
-import { cardTitle, tabContainer } from '../../styles';
 import { Props } from '../../type';
 import * as url from '../../url';
+import { AnalyticsCard } from '../fine-components';
 import ListReport from '../reports/list';
+
+export interface DevicesProps extends Props {
+  //
+}
+
+export default function Devices(props: DevicesProps): JSX.Element {
+  return (
+    <AnalyticsCard>
+      <Tabs
+        cacheKey="analytics.devices"
+        initialValue="browser"
+        leftItem={<h3 tw="font-bold text-gray-1100">Pages</h3>}
+      >
+        <Tabs.Item label="Size" value="size">
+          <ScreenSizes site={props.site} query={props.query} />
+        </Tabs.Item>
+        <Tabs.Item label="Browser" value="browser">
+          {props.query.filters.browser ? (
+            <BrowserVersions site={props.site} query={props.query} />
+          ) : (
+            <Browsers site={props.site} query={props.query} />
+          )}
+        </Tabs.Item>
+        <Tabs.Item label="OS" value="os">
+          {props.query.filters.os ? (
+            <OperatingSystemVersions site={props.site} query={props.query} />
+          ) : (
+            <OperatingSystems site={props.site} query={props.query} />
+          )}
+        </Tabs.Item>
+      </Tabs>
+    </AnalyticsCard>
+  );
+}
 
 function Browsers({ query, site }: Props) {
   function fetchData() {
@@ -184,87 +219,5 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
       );
     }
     // No default
-  }
-}
-
-export interface DevicesProps extends Props {
-  //
-}
-
-type Mode = 'size' | 'browser' | 'os' | 'size';
-interface DeviceState {
-  mode: Mode;
-}
-
-export default class Devices extends React.Component<DevicesProps, DeviceState> {
-  tabKey: string;
-  constructor(props: DevicesProps) {
-    super(props);
-    this.tabKey = `deviceTab__${props.site.domain}`;
-    const storedTab = storage.getItem(this.tabKey);
-    this.state = {
-      mode: storedTab || 'size',
-    };
-  }
-
-  setMode(mode: any) {
-    return () => {
-      storage.setItem(this.tabKey, mode);
-      this.setState({ mode });
-    };
-  }
-
-  renderContent() {
-    switch (this.state.mode) {
-      case 'browser':
-        if (this.props.query.filters.browser) {
-          return <BrowserVersions site={this.props.site} query={this.props.query} />;
-        }
-        return <Browsers site={this.props.site} query={this.props.query} />;
-      case 'os':
-        if (this.props.query.filters.os) {
-          return <OperatingSystemVersions site={this.props.site} query={this.props.query} />;
-        }
-        return <OperatingSystems site={this.props.site} query={this.props.query} />;
-      case 'size':
-      default:
-        return <ScreenSizes site={this.props.site} query={this.props.query} />;
-    }
-  }
-
-  renderPill(name: string, mode: Mode) {
-    const isActive = this.state.mode === mode;
-
-    if (isActive) {
-      return (
-        <li className="inline-block h-5 font-bold text-indigo-700 active-prop-heading dark:text-indigo-500">
-          {name}
-        </li>
-      );
-    }
-
-    return (
-      <li className="cursor-pointer hover:text-indigo-600" onClick={this.setMode(mode)}>
-        {name}
-      </li>
-    );
-  }
-
-  render() {
-    return (
-      <div className="stats-item flex flex-col mt-6 stats-item--has-header w-full">
-        <div className="stats-item-header flex flex-col flex-grow relative p-4 bg-white rounded shadow-xl dark:bg-gray-825">
-          <div className="flex justify-between w-full">
-            <h3 css={cardTitle}>Devices</h3>
-            <ul css={tabContainer}>
-              {this.renderPill('Size', 'size')}
-              {this.renderPill('Browser', 'browser')}
-              {this.renderPill('OS', 'os')}
-            </ul>
-          </div>
-          {this.renderContent()}
-        </div>
-      </div>
-    );
   }
 }

@@ -7,13 +7,13 @@ import { useEventListener } from './useEventListener';
 type SetValue<S> = Dispatch<SetStateAction<S>>;
 
 export function useLocalStorage<T>(
-  key: string,
   initialValue: T,
+  key?: string,
 ): [T | undefined, SetValue<T | undefined>, () => void] {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = (): T => {
-    if (ssrMode) {
+    if (ssrMode || !key) {
       return initialValue;
     }
 
@@ -29,6 +29,7 @@ export function useLocalStorage<T>(
   const [storedValue, setStoredValue] = useState<T | undefined>(readValue);
   const customEventKey = `local-storage.${key}` as const;
   const setValue: SetValue<T | undefined> = (value) => {
+    if (!key) return;
     if (typeof window == 'undefined') {
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`,
@@ -61,7 +62,9 @@ export function useLocalStorage<T>(
   useEventListener(customEventKey, handleStorageChange);
 
   const removeItem = () => {
-    window.localStorage.removeItem(key);
+    if (key) {
+      window.localStorage.removeItem(key);
+    }
     // eslint-disable-next-line unicorn/no-useless-undefined
     setStoredValue(undefined);
   };

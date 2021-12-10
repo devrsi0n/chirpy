@@ -322,21 +322,21 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const formattedComparison = numberFormatter(Math.abs(comparison));
 
     if (comparison > 0) {
-      const color = name === 'Bounce rate' ? 'text-red-900' : 'text-green-900';
+      const color = name === 'Bounce rate' ? tw`text-red-900` : tw`text-green-900`;
       return (
-        <span className="text-xs dark:text-gray-100">
-          <span className={color + ' font-bold'}>&uarr;</span> {formattedComparison}%
+        <span tw="text-xs text-gray-1200">
+          <span css={[color, tw`font-bold`]}>&uarr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison < 0) {
       const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-900';
       return (
-        <span className="text-xs dark:text-gray-100">
-          <span className={color + ' font-bold'}>&darr;</span> {formattedComparison}%
+        <span tw="text-xs">
+          <span css={[color, tw`font-bold`]}>&darr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison === 0) {
-      return <span className="text-xs text-gray-1000">&#12336; N/A</span>;
+      return <span tw="text-xs text-gray-1100">&#12336; N/A</span>;
     }
   }
 
@@ -362,12 +362,12 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const { graphData } = this.props;
     // @ts-ignore
     const stats = graphData.top_stats.map((stat, index) => {
-      let border = index > 0 ? 'lg:border-l border-gray-300' : '';
+      let border = index > 0 ? 'lg:border-l border-gray-1100' : '';
       border = index % 2 === 0 ? border + ' border-r lg:border-r-0' : border;
 
       return (
         <div className={`px-8 w-1/2 my-4 lg:w-auto ${border}`} key={stat.name}>
-          <div className="text-xs font-bold tracking-wide text-gray-1100 uppercase dark:text-gray-400 whitespace-nowrap">
+          <div tw="text-xs font-bold tracking-wide text-gray-1100 uppercase whitespace-nowrap">
             {stat.name}
           </div>
           <div className="flex items-center justify-between my-1 whitespace-nowrap">
@@ -439,7 +439,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       } else {
         const endpoint = `/${encodeURIComponent(this.props.site.domain)}/export${api.serializeQuery(
           this.props.query,
-          this.props.site
+          this.props.site,
         )}`;
 
         return (

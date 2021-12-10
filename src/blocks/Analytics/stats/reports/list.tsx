@@ -12,6 +12,7 @@ import { Timer } from '../../timer';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
 import MoreLink from '../more-link';
+import { ViewNumber } from '../fine-components';
 
 interface ListReportProps {
   query: Query;
@@ -98,16 +99,16 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
             </Link>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
+        <ViewNumber>
           {numberFormatter(listItem.visitors)}
           {listItem.percentage >= 0 ? (
             <span className="inline-block w-8 text-xs text-right">({listItem.percentage}%)</span>
           ) : null}
-        </span>
+        </ViewNumber>
         {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
+          <ViewNumber>
             {listItem.conversion_rate}%
-          </span>
+          </ViewNumber>
         )}
       </div>
     );

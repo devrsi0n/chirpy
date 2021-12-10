@@ -15,6 +15,7 @@ import { Props } from '../../type';
 import * as url from '../../url';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
+import { ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 import { Referrer } from './referrer-list';
 
@@ -92,14 +93,8 @@ class AllSources extends React.Component<AllSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
-          {numberFormatter(referrer.visitors)}
-        </span>
-        {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
-            {referrer.conversion_rate}%
-          </span>
-        )}
+        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
   }
@@ -235,14 +230,8 @@ class UTMSources extends React.Component<UTMSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
-          {numberFormatter(referrer.visitors)}
-        </span>
-        {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
-            {referrer.conversion_rate}%
-          </span>
-        )}
+        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
   };
