@@ -13,7 +13,6 @@ import * as api from '../../api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
-import { itemBg } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import * as url from '../../url';
@@ -151,7 +150,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 
   return (
     <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
-      <Bar count={page.count} all={pages} css={itemBg} maxWidthDeduction={maxWidthDeduction}>
+      <Bar count={page.count} all={pages} color="orange" maxWidthDeduction={maxWidthDeduction}>
         <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
       <ViewNumber>{numberFormatter(page.count)}</ViewNumber>

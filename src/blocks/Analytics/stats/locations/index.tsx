@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import { NextRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
@@ -10,8 +11,7 @@ import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
 import { AnalyticsCard } from '../fine-components';
 import ListReport from '../reports/list';
-import {CountriesMap} from './countries-map';
-import { useTheme } from 'next-themes';
+import { CountriesMap } from './countries-map';
 
 interface LocationsProps extends Props {
   timer: Timer;
@@ -26,7 +26,7 @@ export default function Locations(props: LocationsProps): JSX.Element {
       <Tabs
         cacheKey="analytics.locations"
         initialValue="map"
-        leftItem={<h3 tw="font-bold text-gray-1100">Pages</h3>}
+        leftItem={<h3 tw="font-bold text-gray-1100">Locations</h3>}
       >
         <Tabs.Item label="Map" value="map">
           <CountriesMap
@@ -74,7 +74,7 @@ function Countries({ query, site }: Props) {
       detailsLink={sitePath(site, '/countries')}
       query={query}
       renderIcon={renderIcon}
-      color="bg-orange-50"
+      color="orange"
     />
   );
 }
@@ -103,7 +103,7 @@ function Regions({ query, site }: Props) {
       detailsLink={sitePath(site, '/regions')}
       query={query}
       renderIcon={renderIcon}
-      color="bg-orange-50"
+      color="orange"
     />
   );
 }
@@ -120,7 +120,7 @@ function Cities({ query, site }: Props) {
       keyLabel="City"
       detailsLink={sitePath(site, '/cities')}
       query={query}
-      color="bg-orange-50"
+      color="orange"
     />
   );
 }

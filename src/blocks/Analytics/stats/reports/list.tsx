@@ -9,16 +9,15 @@ import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import { labelContainer } from '../../styles';
 import { Timer } from '../../timer';
-import Bar from '../bar';
+import Bar, { BarProps } from '../bar';
 import { EmptyState } from '../empty-state';
-import MoreLink from '../more-link';
 import { ViewNumber } from '../fine-components';
+import MoreLink from '../more-link';
 
-interface ListReportProps {
+export interface ListReportProps extends Partial<Pick<BarProps, 'color'>> {
   query: Query;
   timer?: Timer;
   fetchData: () => Promise<any>;
-  color?: string;
   tooltipText?: (listItem: any) => string;
   renderIcon?: (listItem: any) => React.ReactNode;
   detailsLink?: string;
@@ -74,14 +73,13 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     });
 
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
-    const lightBackground = this.props.color || '';
 
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={listItem.name}>
         <Bar
           count={listItem.visitors}
           all={this.state.list}
-          className={`${lightBackground} bg-green-200`}
+          color={this.props.color || 'green'}
           maxWidthDeduction={maxWidthDeduction}
         >
           <span
@@ -105,11 +103,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
             <span className="inline-block w-8 text-xs text-right">({listItem.percentage}%)</span>
           ) : null}
         </ViewNumber>
-        {this.showConversionRate() && (
-          <ViewNumber>
-            {listItem.conversion_rate}%
-          </ViewNumber>
-        )}
+        {this.showConversionRate() && <ViewNumber>{listItem.conversion_rate}%</ViewNumber>}
       </div>
     );
   }

@@ -142,7 +142,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 z-9 relative break-all group">

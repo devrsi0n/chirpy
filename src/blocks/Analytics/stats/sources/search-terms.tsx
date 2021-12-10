@@ -66,7 +66,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
         <Bar
           count={term.visitors}
           all={this.state.searchTerms!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction="4rem"
         >
           <span className="flex px-2 py-1.5 dark:text-gray-300 z-9 relative break-all">

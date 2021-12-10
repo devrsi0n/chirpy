@@ -73,7 +73,7 @@ class AllSources extends React.Component<AllSourcesProps> {
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
@@ -217,7 +217,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
