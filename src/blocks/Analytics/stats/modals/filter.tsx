@@ -5,7 +5,7 @@ import React, { Fragment } from 'react';
 import 'twin.macro';
 
 import * as api from '../../api';
-import { parseQuery, formattedFilters, Query, FormattedFilterKey } from '../../query';
+import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';
 import { Site } from '../../type';
 import { apiPath, siteBasePath } from '../../url';
 import SearchSelect from '../search-select';
@@ -232,7 +232,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
       return true;
     });
 
-    return groups.map((filter: FormattedFilterKey) => {
+    return groups.map((filter: FilterKey) => {
       return (
         <div className="mt-4" key={filter}>
           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">

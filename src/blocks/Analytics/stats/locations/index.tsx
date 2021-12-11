@@ -1,15 +1,59 @@
+import { useTheme } from 'next-themes';
 import { NextRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
 
+import { Tabs } from '$/components/Tabs';
+
 import * as api from '../../api';
-import * as storage from '../../storage';
-import { cardTitle, tabContainer } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
+import { AnalyticsCard } from '../fine-components';
 import ListReport from '../reports/list';
-import CountriesMap from './map';
+import { CountriesMap } from './countries-map';
+
+interface LocationsProps extends Props {
+  timer: Timer;
+  router: NextRouter;
+}
+
+export default function Locations(props: LocationsProps): JSX.Element {
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = resolvedTheme === 'dark';
+  return (
+    <AnalyticsCard>
+      <Tabs
+        cacheKey="analytics.locations"
+        initialValue="map"
+        leftItem={<h3 tw="font-bold text-gray-1100">Locations</h3>}
+      >
+        <Tabs.Item label="Map" value="map">
+          <CountriesMap
+            router={props.router}
+            site={props.site}
+            query={props.query}
+            timer={props.timer}
+            isDarkMode={isDarkMode}
+          />
+        </Tabs.Item>
+        <Tabs.Item label="Countries" value="countries">
+          <Countries site={props.site} query={props.query} />
+        </Tabs.Item>
+        {props.site.cities && (
+          <>
+            <Tabs.Item label="Regions" value="regions">
+              <Regions site={props.site} query={props.query} />
+            </Tabs.Item>
+            <Tabs.Item label="Cities" value="cities">
+              <Cities site={props.site} query={props.query} />
+            </Tabs.Item>
+          </>
+        )}
+      </Tabs>
+    </AnalyticsCard>
+  );
+}
 
 function Countries({ query, site }: Props) {
   function fetchData() {
@@ -30,7 +74,7 @@ function Countries({ query, site }: Props) {
       detailsLink={sitePath(site, '/countries')}
       query={query}
       renderIcon={renderIcon}
-      color="bg-orange-50"
+      color="orange"
     />
   );
 }
@@ -59,7 +103,7 @@ function Regions({ query, site }: Props) {
       detailsLink={sitePath(site, '/regions')}
       query={query}
       renderIcon={renderIcon}
-      color="bg-orange-50"
+      color="orange"
     />
   );
 }
@@ -76,99 +120,7 @@ function Cities({ query, site }: Props) {
       keyLabel="City"
       detailsLink={sitePath(site, '/cities')}
       query={query}
-      color="bg-orange-50"
+      color="orange"
     />
   );
-}
-
-const labelFor = {
-  countries: 'Countries',
-  regions: 'Regions',
-  cities: 'Cities',
-};
-
-type Mode = keyof typeof labelFor | 'map';
-interface LocationsProps extends Props {
-  timer: Timer;
-  router: NextRouter;
-}
-interface LocationsState {
-  mode: Mode;
-}
-export default class Locations extends React.Component<LocationsProps, LocationsState> {
-  tabKey: string;
-  constructor(props: LocationsProps) {
-    super(props);
-    this.tabKey = `geoTab__${props.site.domain}`;
-    const storedTab = storage.getItem(this.tabKey);
-    this.state = {
-      mode: storedTab || 'map',
-    };
-  }
-
-  setMode(mode: Mode) {
-    return () => {
-      storage.setItem(this.tabKey, mode);
-      this.setState({ mode });
-    };
-  }
-
-  renderContent() {
-    switch (this.state.mode) {
-      case 'cities':
-        return <Cities site={this.props.site} query={this.props.query} />;
-      case 'regions':
-        return <Regions site={this.props.site} query={this.props.query} />;
-      case 'countries':
-        return <Countries site={this.props.site} query={this.props.query} />;
-      case 'map':
-      default:
-        return (
-          <CountriesMap
-            router={this.props.router}
-            site={this.props.site}
-            query={this.props.query}
-            timer={this.props.timer}
-          />
-        );
-    }
-  }
-
-  renderPill(name: string, mode: Mode) {
-    const isActive = this.state.mode === mode;
-
-    if (isActive) {
-      return (
-        <li className="inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold active-prop-heading">
-          {name}
-        </li>
-      );
-    }
-
-    return (
-      <li className="hover:text-indigo-600 cursor-pointer" onClick={this.setMode(mode)}>
-        {name}
-      </li>
-    );
-  }
-
-  render() {
-    return (
-      <div className="stats-item flex flex-col w-full mt-6 stats-item--has-header">
-        <div className="stats-item-header flex flex-col flex-grow bg-white dark:bg-gray-825 shadow-xl rounded p-4 relative">
-          <div className="w-full flex justify-between">
-            {/* @ts-ignore */}
-            <h3 css={cardTitle}>{labelFor[this.state.mode] || 'Locations'}</h3>
-            <ul css={tabContainer}>
-              {this.renderPill('Map', 'map')}
-              {this.renderPill('Countries', 'countries')}
-              {this.props.site.cities && this.renderPill('Regions', 'regions')}
-              {this.props.site.cities && this.renderPill('Cities', 'cities')}
-            </ul>
-          </div>
-          {this.renderContent()}
-        </div>
-      </div>
-    );
-  }
 }

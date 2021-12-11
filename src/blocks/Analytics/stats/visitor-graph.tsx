@@ -1,7 +1,8 @@
 import Chart from 'chart.js/auto';
+import { useTheme } from 'next-themes';
 import { NextRouter } from 'next/router';
 import React from 'react';
-import tw from 'twin.macro';
+import tw, { theme } from 'twin.macro';
 
 import * as api from '../api';
 import LazyLoader from '../lazy-loader';
@@ -15,15 +16,21 @@ function buildDataSet(
   present_index: number,
   ctx: { createLinearGradient: (arg0: number, arg1: number, arg2: number, arg3: number) => any },
   label: string,
+  isDarkMode: boolean,
 ) {
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient.addColorStop(0, 'rgba(101,116,205, 0.2)');
-  gradient.addColorStop(1, 'rgba(101,116,205, 0)');
+  gradient.addColorStop(
+    0,
+    isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0.2)' : 'hsla(292, 45.0%, 51.0%, 0.2)',
+  );
+  gradient.addColorStop(1, isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0)' : 'hsla(292, 45.0%, 51.0%, 0)');
+  const borderColor = isDarkMode ? 'hsl(295, 40.4%, 24.7%)' : 'hsl(292, 45.0%, 51.0%)';
+  const pointBackgroundColor = borderColor;
 
   if (present_index) {
     const dashedPart = plot.slice(present_index - 1, present_index + 1);
     const dashedPlot = [...Array.from({ length: present_index - 1 }), ...dashedPart];
-    for (var i = present_index; i < plot.length; i++) {
+    for (let i = present_index; i < plot.length; i++) {
       // @ts-ignore
       plot[i] = undefined;
     }
@@ -33,8 +40,8 @@ function buildDataSet(
         label: label,
         data: plot,
         borderWidth: 3,
-        borderColor: 'rgba(101,116,205)',
-        pointBackgroundColor: 'rgba(101,116,205)',
+        borderColor,
+        pointBackgroundColor,
         backgroundColor: gradient,
         fill: true,
       },
@@ -43,8 +50,8 @@ function buildDataSet(
         data: dashedPlot,
         borderWidth: 3,
         borderDash: [5, 10],
-        borderColor: 'rgba(101,116,205)',
-        pointBackgroundColor: 'rgba(101,116,205)',
+        borderColor,
+        pointBackgroundColor,
         backgroundColor: gradient,
         fill: true,
       },
@@ -55,8 +62,8 @@ function buildDataSet(
         label: label,
         data: plot,
         borderWidth: 3,
-        borderColor: 'rgba(101,116,205)',
-        pointBackgroundColor: 'rgba(101,116,205)',
+        borderColor,
+        pointBackgroundColor,
         backgroundColor: gradient,
         fill: true,
       },
@@ -105,16 +112,16 @@ function dateFormatter(interval: string, longForm?: boolean) {
         return MONTHS[date.getUTCMonth()];
       }
       case 'date': {
-        var day = DAYS_ABBREV[date.getUTCDay()];
-        var date_ = date.getUTCDate();
-        var month = MONTHS_ABBREV[date.getUTCMonth()];
+        const day = DAYS_ABBREV[date.getUTCDay()];
+        const date_ = date.getUTCDate();
+        const month = MONTHS_ABBREV[date.getUTCMonth()];
         return day + ', ' + date_ + ' ' + month;
       }
       case 'hour': {
         const parts = isoDate.split(/\D/);
         date = new Date(+parts[0], +parts[1] - 1, +parts[2], +parts[3], +parts[4], +parts[5]);
-        var hours = date.getHours(); // Not sure why getUTCHours doesn't work here
-        var ampm = hours >= 12 ? 'pm' : 'am';
+        let hours = date.getHours(); // Not sure why getUTCHours doesn't work here
+        const ampm = hours >= 12 ? 'pm' : 'am';
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
         return hours + ampm;
@@ -166,7 +173,13 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       : graphData.interval === 'minute'
       ? 'Pageviews'
       : 'Visitors';
-    const dataSet = buildDataSet(graphData.plot, graphData.present_index, this.ctx, label);
+    const dataSet = buildDataSet(
+      graphData.plot,
+      graphData.present_index,
+      this.ctx,
+      label,
+      this.props.darkTheme,
+    );
 
     return new Chart(this.ctx, {
       type: 'line',
@@ -238,7 +251,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: darkTheme ? 'rgb(243, 244, 246)' : undefined,
+              color: darkTheme ? theme('colors.grayd.1200') : undefined,
             },
             grid: {
               // @ts-ignore
@@ -254,7 +267,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
                 // @ts-ignore
                 return dateFormatter(graphData.interval)(this.getLabelForValue(val));
               },
-              color: darkTheme ? 'rgb(243, 244, 246)' : undefined,
+              color: darkTheme ? theme('colors.grayd.1200') : undefined,
             },
           },
         },
@@ -278,6 +291,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
         this.props.graphData.present_index,
         this.ctx,
         label,
+        this.props.darkTheme,
       );
 
       for (let i = 0; i < newDataset[0].data.length; i++) {
@@ -322,21 +336,21 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const formattedComparison = numberFormatter(Math.abs(comparison));
 
     if (comparison > 0) {
-      const color = name === 'Bounce rate' ? 'text-red-900' : 'text-green-900';
+      const color = name === 'Bounce rate' ? tw`text-red-900` : tw`text-green-900`;
       return (
-        <span className="text-xs dark:text-gray-100">
-          <span className={color + ' font-bold'}>&uarr;</span> {formattedComparison}%
+        <span tw="text-xs text-gray-1200">
+          <span css={[color, tw`font-bold`]}>&uarr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison < 0) {
       const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-900';
       return (
-        <span className="text-xs dark:text-gray-100">
-          <span className={color + ' font-bold'}>&darr;</span> {formattedComparison}%
+        <span tw="text-xs">
+          <span css={[color, tw`font-bold`]}>&darr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison === 0) {
-      return <span className="text-xs text-gray-1000">&#12336; N/A</span>;
+      return <span tw="text-xs text-gray-1100">&#12336; N/A</span>;
     }
   }
 
@@ -362,12 +376,12 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const { graphData } = this.props;
     // @ts-ignore
     const stats = graphData.top_stats.map((stat, index) => {
-      let border = index > 0 ? 'lg:border-l border-gray-300' : '';
+      let border = index > 0 ? 'lg:border-l border-gray-1100' : '';
       border = index % 2 === 0 ? border + ' border-r lg:border-r-0' : border;
 
       return (
         <div className={`px-8 w-1/2 my-4 lg:w-auto ${border}`} key={stat.name}>
-          <div className="text-xs font-bold tracking-wide text-gray-1100 uppercase dark:text-gray-400 whitespace-nowrap">
+          <div tw="text-xs font-bold tracking-wide text-gray-1100 uppercase whitespace-nowrap">
             {stat.name}
           </div>
           <div className="flex items-center justify-between my-1 whitespace-nowrap">
@@ -439,7 +453,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       } else {
         const endpoint = `/${encodeURIComponent(this.props.site.domain)}/export${api.serializeQuery(
           this.props.query,
-          this.props.site
+          this.props.site,
         )}`;
 
         return (
@@ -520,72 +534,57 @@ interface VisitorGraphProps extends Props {
   router: NextRouter;
 }
 
-interface VisitorGraphState {
-  loading: boolean;
-  graphData: GraphData | null;
-}
+export default function VisitorGraph(props: VisitorGraphProps) {
+  const [graphData, setGraphData] = React.useState(null);
+  const [loading, setLoading] = React.useState(true);
+  const { resolvedTheme } = useTheme();
+  const isDarkMode = resolvedTheme === 'dark';
 
-export default class VisitorGraph extends React.Component<VisitorGraphProps, VisitorGraphState> {
-  state: VisitorGraphState = { loading: true, graphData: null };
-
-  onVisible = () => {
-    this.fetchGraphData();
-    if (this.props.timer) this.props.timer.onTick(this.fetchGraphData.bind(this));
+  React.useEffect(() => {
+    setLoading(true);
+    setGraphData(null);
+    fetchGraphData();
+  }, [props.query, isDarkMode]);
+  const onVisible = () => {
+    fetchGraphData();
+    if (props.timer) props.timer.onTick(fetchGraphData);
   };
-
-  componentDidUpdate(prevProps: VisitorGraphProps) {
-    if (this.props.query !== prevProps.query) {
-      this.setState({ loading: true, graphData: null });
-      this.fetchGraphData();
-    }
-  }
-
-  fetchGraphData() {
+  const fetchGraphData = () => {
     api
       .get(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/main-graph`,
-        this.props.site,
-        this.props.query,
+        `/api/stats/${encodeURIComponent(props.site.domain)}/main-graph`,
+        props.site,
+        props.query,
       )
       .then((res) => {
-        this.setState({ loading: false, graphData: res });
+        setLoading(false);
+        setGraphData(res);
         return res;
       });
-  }
-
-  renderInner() {
-    if (this.state.graphData) {
-      const theme = document.querySelector('html')!.classList.contains('dark') || false;
-
-      return (
-        <LineGraphWithRouter
-          router={this.props.router}
-          graphData={this.state.graphData}
-          site={this.props.site}
-          query={this.props.query}
-          darkTheme={theme}
-        />
-      );
-    }
-  }
-
-  render() {
-    return (
-      <LazyLoader onVisible={this.onVisible}>
-        <div
-          className="relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph"
-          css={this.state.loading && tw`z-20`}
-        >
-          {this.state.loading && (
-            <div className="graph-inner">
-              <div className="pt-24 mx-auto loading sm:pt-32 md:pt-48">
-                <div></div>
-              </div>
+  };
+  return (
+    <LazyLoader onVisible={onVisible}>
+      <div
+        className="relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph"
+        css={loading && tw`z-20`}
+      >
+        {loading && (
+          <div className="graph-inner">
+            <div className="pt-24 mx-auto loading sm:pt-32 md:pt-48">
+              <div></div>
             </div>
-          )}
-          {this.renderInner()}
-        </div>
-      </LazyLoader>
-    );
-  }
+          </div>
+        )}
+        {graphData && (
+          <LineGraphWithRouter
+            router={props.router}
+            graphData={graphData}
+            site={props.site}
+            query={props.query}
+            darkTheme={isDarkMode}
+          />
+        )}
+      </div>
+    </LazyLoader>
+  );
 }

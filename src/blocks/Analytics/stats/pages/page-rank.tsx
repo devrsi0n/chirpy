@@ -1,5 +1,5 @@
-import File from '@geist-ui/react-icons/file';
 import ExternalLink from '@geist-ui/react-icons/externalLink';
+import File from '@geist-ui/react-icons/file';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
@@ -13,12 +13,12 @@ import * as api from '../../api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
-import { itemBg } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import * as url from '../../url';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
+import { ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 
 export interface Page {
@@ -150,17 +150,11 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 
   return (
     <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
-      <Bar count={page.count} all={pages} css={itemBg} maxWidthDeduction={maxWidthDeduction}>
+      <Bar count={page.count} all={pages} color="orange" maxWidthDeduction={maxWidthDeduction}>
         <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
-      <span className="font-medium dark:text-gray-200 w-20 text-right">
-        {numberFormatter(page.count)}
-      </span>
-      {showConversionRate && (
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
-          {numberFormatter(page.conversion_rate)}%
-        </span>
-      )}
+      <ViewNumber>{numberFormatter(page.count)}</ViewNumber>
+      {showConversionRate && <ViewNumber>{numberFormatter(page.conversion_rate)}%</ViewNumber>}
     </div>
   );
 }
@@ -168,10 +162,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
   const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
   return (
-    <span
-      className="group"
-      tw="flex items-center px-2 py-1.5 relative break-all z-10 space-x-1"
-    >
+    <span className="group" tw="flex items-center px-2 py-1.5 relative break-all z-10 space-x-1">
       <span
         {...(isCommentWidget && {
           tooltip: 'This page contains a comment widget',
@@ -191,7 +182,7 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
         href={externalLink}
         tw="hidden group-hover:block text-gray-1200"
         variant="plain"
-        tooltip='Click to open in a new tab'
+        tooltip="Click to open in a new tab"
       >
         <ExternalLink size={16} />
       </Link>

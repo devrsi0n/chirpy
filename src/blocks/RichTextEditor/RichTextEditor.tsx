@@ -37,7 +37,7 @@ export interface IRichTextEditorProps extends IBaseProps {
 
 export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const { onSubmit, readOnly, styles, isReply, onClickDismiss, placeholder, initialValue } = props;
-  const [value, setValue, remove] = useLocalStorage('rte-value', initialValue);
+  const [value, setValue, remove] = useLocalStorage(initialValue, 'rte-value');
 
   const { isSignIn } = useCurrentUser();
   const editor = useEditor({

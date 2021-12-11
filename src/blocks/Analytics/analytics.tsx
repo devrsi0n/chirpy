@@ -35,17 +35,6 @@ export default function Realtime(props: RealtimeProps) {
   }, [router.asPath, props.site]);
   const [timer] = React.useState(() => new Timer());
   const navClass = props.site.embedded ? 'relative' : 'sticky';
-  const renderConversions = () => {
-    if (props.site.hasGoals) {
-      return (
-        <div className="items-start justify-between block w-full mt-6 md:flex">
-          <Conversions site={props.site} query={query} title="Goal Conversions (last 30 min)" />
-        </div>
-      );
-    }
-
-    return null;
-  };
   return (
     <>
       <Global styles={analyticsStyles} />
@@ -76,7 +65,11 @@ export default function Realtime(props: RealtimeProps) {
           <Devices site={props.site} query={query} />
         </div>
 
-        {renderConversions()}
+        {props.site.hasGoals && (
+          <div className="items-start justify-between block w-full mt-6 md:flex">
+            <Conversions site={props.site} query={query} title="Goal Conversions (last 30 min)" />
+          </div>
+        )}
       </div>
     </>
   );
@@ -88,7 +81,7 @@ interface SiteHeaderProps {
 
 function SiteHeader({ site }: SiteHeaderProps): JSX.Element {
   return (
-    <section tw="flex flex-row items-center space-x-1">
+    <section tw="flex flex-row items-center space-x-1 mr-4">
       <SiteIcon name={site.domain} domain={site.domain} />
       <Heading as="h3" tw="text-base font-bold">
         {site.domain}

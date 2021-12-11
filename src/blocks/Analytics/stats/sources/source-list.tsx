@@ -3,24 +3,51 @@ import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
 import { Link } from '$/components/Link';
+import { Tabs } from '$/components/Tabs';
 
 import * as api from '../../api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
-import * as storage from '../../storage';
-import { cardTitle, labelContainer } from '../../styles';
+import { labelContainer } from '../../styles';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import * as url from '../../url';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
+import { AnalyticsCard, ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 import { Referrer } from './referrer-list';
 
+interface SourceListProps extends AllSourcesProps {}
+
+export default function SourceList(props: SourceListProps): JSX.Element {
+  return (
+    <AnalyticsCard>
+      <Tabs
+        cacheKey="analytics.source-list"
+        initialValue="all"
+        leftItem={<h3 tw="font-bold text-gray-1100">Top Sources</h3>}
+      >
+        <Tabs.Item label="All" value="all">
+          <AllSources {...props} />
+        </Tabs.Item>
+        <Tabs.Item label="Medium" value="utm_medium">
+          <UTMSources {...props} tab="utm_medium" />
+        </Tabs.Item>
+        <Tabs.Item label="Source" value="utm_source">
+          <UTMSources {...props} tab="utm_source" />
+        </Tabs.Item>
+        <Tabs.Item label="Campaign" value="utm_campaign">
+          <UTMSources {...props} tab="utm_campaign" />
+        </Tabs.Item>
+      </Tabs>
+    </AnalyticsCard>
+  );
+}
+
 interface AllSourcesProps extends Props {
   timer: Timer;
-  renderTabs: () => JSX.Element;
 }
 
 interface AllSourcesState {
@@ -72,7 +99,7 @@ class AllSources extends React.Component<AllSourcesProps> {
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
@@ -92,14 +119,8 @@ class AllSources extends React.Component<AllSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
-          {numberFormatter(referrer.visitors)}
-        </span>
-        {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
-            {referrer.conversion_rate}%
-          </span>
-        )}
+        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
   }
@@ -117,33 +138,32 @@ class AllSources extends React.Component<AllSourcesProps> {
   }
 
   renderList() {
-    return this.state.referrers && this.state.referrers.length > 0 ? (
-      <React.Fragment>
-        <div css={labelContainer}>
-          <span>Source</span>
-          <div className="text-right">
-            <span className="inline-block w-20">{this.label()}</span>
-            {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
-          </div>
-        </div>
-
-        <FlipMove className="flex-grow">
-          {this.state.referrers.map((element) => this.renderReferrer(element))}
-        </FlipMove>
-        <MoreLink site={this.props.site} list={this.state.referrers} endpoint="sources" />
-      </React.Fragment>
-    ) : (
-      <EmptyState />
+    return (
+      <>
+        {this.state.referrers && this.state.referrers.length > 0 ? (
+          <>
+            <div css={labelContainer}>
+              <span>Source</span>
+              <div className="text-right">
+                <span className="inline-block w-20">{this.label()}</span>
+                {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
+              </div>
+            </div>
+            <FlipMove className="flex-grow">
+              {this.state.referrers.map((element) => this.renderReferrer(element))}
+            </FlipMove>
+            <MoreLink site={this.props.site} list={this.state.referrers} endpoint="sources" />
+          </>
+        ) : (
+          <EmptyState />
+        )}
+      </>
     );
   }
 
-  renderContent() {
+  render() {
     return (
       <LazyLoader className="flex flex-col flex-grow" onVisible={this.onVisible}>
-        <div id="sources" className="flex justify-between w-full">
-          <h3 className="font-bold text-gray-1100">Top Sources</h3>
-          {this.props.renderTabs()}
-        </div>
         {this.state.loading && (
           <div className="mx-auto loading mt-44">
             <div></div>
@@ -153,14 +173,6 @@ class AllSources extends React.Component<AllSourcesProps> {
           {this.renderList()}
         </FadeIn>
       </LazyLoader>
-    );
-  }
-
-  render() {
-    return (
-      <div className="relative p-4 bg-white rounded shadow-xl stats-item flex flex-col mt-6 w-full dark:bg-gray-825">
-        {this.renderContent()}
-      </div>
     );
   }
 }
@@ -222,7 +234,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
@@ -235,14 +247,8 @@ class UTMSources extends React.Component<UTMSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200 w-20 text-right">
-          {numberFormatter(referrer.visitors)}
-        </span>
-        {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
-            {referrer.conversion_rate}%
-          </span>
-        )}
+        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
   };
@@ -284,13 +290,9 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     );
   }
 
-  renderContent() {
+  render() {
     return (
-      <React.Fragment>
-        <div className="flex justify-between w-full">
-          <h3 css={cardTitle}>Top Sources</h3>
-          {this.props.renderTabs()}
-        </div>
+      <>
         {this.state.loading && (
           <div className="mx-auto loading mt-44">
             <div></div>
@@ -299,87 +301,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
         <FadeIn show={!this.state.loading} className="flex flex-col flex-grow">
           {this.renderList()}
         </FadeIn>
-      </React.Fragment>
+      </>
     );
-  }
-
-  render() {
-    return (
-      <div className="relative p-4 bg-white rounded shadow-xl stats-item flex flex-col dark:bg-gray-825 mt-6 w-full">
-        {this.renderContent()}
-      </div>
-    );
-  }
-}
-
-type Tab = 'utm_source' | 'utm_medium' | 'utm_campaign' | 'all';
-
-interface SourceListProps extends Omit<AllSourcesProps, 'renderTabs'> {}
-interface SourceListState {
-  tab: Tab;
-}
-
-export default class SourceList extends React.Component<SourceListProps, SourceListState> {
-  tabKey: string = 'sourceTab__' + this.props.site.domain;
-  state: SourceListState = {
-    tab: storage.getItem(this.tabKey) || 'all',
-  };
-
-  setTab = (tab: Tab) => {
-    return () => {
-      storage.setItem(this.tabKey, tab);
-      this.setState({ tab });
-    };
-  };
-
-  renderTabs = () => {
-    const activeClass = 'inline-block h-5 text-indigo-900 font-bold active-prop-heading';
-    const defaultClass = 'hover:text-indigo-1100 cursor-pointer';
-    return (
-      <ul className="flex text-xs font-medium text-gray-1100 space-x-2">
-        <li
-          className={this.state.tab === 'all' ? activeClass : defaultClass}
-          onClick={this.setTab('all')}
-        >
-          All
-        </li>
-        <li
-          className={this.state.tab === 'utm_medium' ? activeClass : defaultClass}
-          onClick={this.setTab('utm_medium')}
-        >
-          Medium
-        </li>
-        <li
-          className={this.state.tab === 'utm_source' ? activeClass : defaultClass}
-          onClick={this.setTab('utm_source')}
-        >
-          Source
-        </li>
-        <li
-          className={this.state.tab === 'utm_campaign' ? activeClass : defaultClass}
-          onClick={this.setTab('utm_campaign')}
-        >
-          Campaign
-        </li>
-      </ul>
-    );
-  };
-
-  render() {
-    switch (this.state.tab) {
-      case 'all': {
-        return <AllSources {...this.props} renderTabs={this.renderTabs} />;
-      }
-      case 'utm_medium': {
-        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
-      }
-      case 'utm_source': {
-        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
-      }
-      case 'utm_campaign': {
-        return <UTMSources tab={this.state.tab} renderTabs={this.renderTabs} {...this.props} />;
-      }
-      // No default
-    }
   }
 }

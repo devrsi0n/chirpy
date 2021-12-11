@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw from 'twin.macro';
 
+import { useLocalStorage } from '$/hooks/useLocalStorage';
+
 import { BaseButton } from '../Button';
 import { TabsConfig, TabsContext, TabsLabelItem } from './TabsContext';
 import { TabsItem } from './TabsItem';
@@ -9,10 +11,11 @@ export type TabProps = React.ComponentProps<'section'> & {
   initialValue?: string;
   value?: string;
   onChange?(value: string): void;
+  cacheKey?: string;
   /**
-   * Render to the right half of tabs header.
+   * Render to the left half of tabs header.
    */
-  rightItems?: React.ReactNode;
+  leftItem?: React.ReactNode;
 };
 
 // TODO: Animation https://codepen.io/devrsi0n/pen/XWKQJoY?editors=0110
@@ -20,12 +23,13 @@ export function Tabs({
   onChange,
   className,
   value,
-  initialValue: userCustomInitialValue,
+  initialValue: customInitialValue,
+  cacheKey,
   children,
-  rightItems,
+  leftItem,
   ...restProps
 }: TabProps): JSX.Element {
-  const [selfValue, setSelfValue] = React.useState<string | undefined>(userCustomInitialValue);
+  const [selfValue, setSelfValue] = useLocalStorage(customInitialValue, cacheKey);
   const [tabs, setTabs] = React.useState<TabsLabelItem[]>([]);
 
   const register = React.useMemo(
@@ -68,17 +72,15 @@ export function Tabs({
   return (
     <TabsContext.Provider value={initialValue}>
       <section {...restProps} className={className}>
-        <header tw="flex flex-row items-center justify-between border-b">
+        <header tw="flex flex-row items-center justify-between">
+          <div>{leftItem}</div>
           <nav tw="space-x-1">
             {tabs.map((item) => (
               <BaseButton
                 css={[
-                  tw`hover:rounded hover:bg-gray-100 border-b-2 p-3 border-t-0 border-r-0 border-l-0`,
-                  selfValue === item.value
-                    ? tw`text-primary-900 border-primary-900`
-                    : tw`border-transparent`,
+                  tw`hover:text-primary-900 p-1 text-xs font-bold text-gray-1100`,
+                  selfValue === item.value ? tw`text-primary-1000 underline` : tw``,
                 ]}
-                // onMouseDown={handleKeyDown}
                 key={item.value}
                 onClick={() => handleClickTab(item)}
               >
@@ -86,7 +88,6 @@ export function Tabs({
               </BaseButton>
             ))}
           </nav>
-          <div>{rightItems}</div>
         </header>
         <div>{children}</div>
       </section>

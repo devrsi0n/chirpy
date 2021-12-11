@@ -13,6 +13,7 @@ import { Timer } from '../../timer';
 import { Props } from '../../type';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
+import { ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 
 interface LinkOptionProps {
@@ -141,7 +142,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         <Bar
           count={referrer.visitors}
           all={this.state.referrers!}
-          className="bg-blue-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
           <span className="flex px-2 py-1.5 z-9 relative break-all group">
@@ -164,11 +165,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
           </span>
         </Bar>
         <span className="font-medium dark:text-gray-200">{numberFormatter(referrer.visitors)}</span>
-        {this.showConversionRate() && (
-          <span className="font-medium dark:text-gray-200 w-20 text-right">
-            {referrer.conversion_rate}%
-          </span>
-        )}
+        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
   }

@@ -3,6 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
+import tw, { styled } from 'twin.macro';
 
 import {
   shiftDays,
@@ -21,6 +22,7 @@ import {
   isAfter,
 } from './date';
 import { navigateToQuery, QueryLink, QueryButton, Query } from './query';
+import { listItem } from './styles';
 import { Props, Site } from './type';
 
 interface ArrowProps {
@@ -324,8 +326,8 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
         to={{ from: false, to: false, period, ...opts }}
         onClick={this.close}
         query={query}
-        className={`${boldClass} px-4 py-2 text-sm leading-tight hover:bg-gray-100 hover:text-gray-900
-          dark:hover:bg-gray-900 dark:hover:text-gray-100 flex items-center justify-between`}
+        className={`${boldClass} `}
+        css={listItem}
       >
         {text}
         {/* @ts-ignore */}
@@ -342,36 +344,34 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
           className="absolute w-full left-0 right-0 md:w-56 md:absolute md:top-auto md:left-auto md:right-0 mt-2 origin-top-right z-10"
         >
           <div
-            className="rounded-md shadow-lg  bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
+            className="rounded-md shadow-lg bg-white dark:bg-gray-500 ring-1 ring-black ring-opacity-5
             font-medium text-gray-800 dark:text-gray-200"
           >
             <div className="py-1">
               {this.renderLink('day', 'Today')}
               {this.renderLink('realtime', 'Realtime')}
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-500"></div>
+            <ListSeparatator />
             <div className="py-1">
               {this.renderLink('7d', 'Last 7 days')}
               {this.renderLink('30d', 'Last 30 days')}
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-500"></div>
+            <ListSeparatator />
             <div className="py-1">
               {this.renderLink('month', 'Month to Date')}
               {this.renderLink('month', 'Last month', { date: lastMonth(this.props.site) })}
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-500"></div>
+            <ListSeparatator />
             <div className="py-1">
               {this.renderLink('6mo', 'Last 6 months')}
               {this.renderLink('12mo', 'Last 12 months')}
             </div>
-            <div className="border-t border-gray-200 dark:border-gray-500"></div>
+            <ListSeparatator />
             <div className="py-1">
               <span
                 onClick={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
                 onKeyPress={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
-                className="px-4 py-2 text-sm leading-tight hover:bg-gray-100
-                  dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-gray-100
-                  cursor-pointer flex items-center justify-between"
+                css={listItem}
                 tabIndex={0}
                 role="button"
                 aria-haspopup="true"
@@ -416,9 +416,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
         <div
           onClick={this.toggle}
           onKeyPress={this.toggle}
-          className="flex items-center justify-between rounded bg-white dark:bg-gray-800 shadow px-2 md:px-3
-          py-2 leading-tight cursor-pointer text-xs md:text-sm text-gray-1100
-         hover:bg-gray-200 dark:hover:bg-gray-900"
+          className="flex items-center justify-between rounded bg-white dark:bg-gray-500 shadow px-2 md:px-3 py-2 leading-tight cursor-pointer text-xs md:text-sm text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-700"
           tabIndex={0}
           role="button"
           aria-haspopup="true"
@@ -448,14 +446,18 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     );
   }
 
+  // TODO: Enable date picker
   render() {
-    return (
-      <div className="flex ml-auto pl-2">
-        <DatePickerArrows site={this.props.site} query={this.props.query} />
-        {this.renderPicker()}
-      </div>
-    );
+    return null;
+    // return (
+    //   <div className="flex ml-auto pl-2">
+    //     <DatePickerArrows site={this.props.site} query={this.props.query} />
+    //     {this.renderPicker()}
+    //   </div>
+    // );
   }
 }
 
 export default DatePicker;
+
+const ListSeparatator = tw.div`border-t border-gray-200 dark:border-gray-900`;

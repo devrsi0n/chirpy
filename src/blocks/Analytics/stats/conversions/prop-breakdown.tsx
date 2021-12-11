@@ -155,7 +155,7 @@ export default class PropertyBreakdown extends React.Component<
         <Bar
           count={value.unique_conversions}
           all={breakdown}
-          className="bg-red-50 dark:bg-gray-500 dark:bg-opacity-15"
+          color="red"
           maxWidthDeduction={this.getBarMaxWidth()}
         >
           {this.renderPropContent(value, query)}
