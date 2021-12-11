@@ -3,6 +3,7 @@ import * as d3 from 'd3';
 import Datamap from 'datamaps';
 import { NextRouter } from 'next/router';
 import React from 'react';
+import tw, { css, theme } from 'twin.macro';
 
 import * as api from '../../api';
 import FadeIn from '../../fade-in';
@@ -33,7 +34,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
   };
 
   componentDidUpdate(prevProps: CountriesProps) {
-    if (this.props.query !== prevProps.query) {
+    if (this.props.query !== prevProps.query || prevProps.isDarkMode !== this.props.isDarkMode) {
       this.setState({ loading: true, countries: null });
       this.fetchCountries().then(this.drawMap);
     }
@@ -44,7 +45,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
   }
 
   onVisible = () => {
-    this.fetchCountries().then(this.drawMap.bind(this));
+    this.fetchCountries().then(this.drawMap);
     window.addEventListener('resize', this.resizeMap);
     if (this.props.timer) this.props.timer.onTick(this.updateCountries.bind(this));
   };
@@ -80,11 +81,11 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
     return dataset;
   };
 
-  updateCountries() {
+  updateCountries = () => {
     this.fetchCountries().then(() => {
       this.map?.updateChoropleth(this.getDataset(), { reset: true });
     });
-  }
+  };
 
   fetchCountries() {
     return api
@@ -109,7 +110,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
     const defaultFill = this.props.isDarkMode ? '#2d3747' : '#f8fafc';
     const highlightFill = this.props.isDarkMode ? '#374151' : '#F5F5F5';
     const borderColor = this.props.isDarkMode ? '#1f2937' : '#dae1e7';
-    const highlightBorderColor = this.props.isDarkMode ? '#4f46e5' : '#a779e9';
+    const highlightBorderColor = this.props.isDarkMode ? theme('colors.primary.700') : theme('colors.primary.900');
 
     this.map = new Datamap({
       element: document.querySelector('#map-container'),
@@ -128,11 +129,11 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
           }
           const pluralizedLabel = data.numberOfThings === 1 ? label.slice(0, -1) : label;
           return [
-            '<div class="hoverinfo dark:bg-gray-800 dark:shadow-gray-850 dark:border-gray-850 dark:text-gray-200">',
+            '<div class="hoverinfo dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">',
             '<strong>',
             geo.properties.name,
             ' </strong>',
-            '<br><strong class="dark:text-indigo-400">',
+            '<br><strong class="dark:text-indigo-800">',
             numberFormatter(data.numberOfThings),
             '</strong> ',
             pluralizedLabel,
