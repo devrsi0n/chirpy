@@ -3,6 +3,7 @@ import tw, { css, theme } from 'twin.macro';
 export const labelContainer = tw`flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-1100`;
 export const cardTitle = tw`font-bold text-gray-1100`;
 export const tabContainer = tw`flex font-medium text-xs text-gray-1100 space-x-2`;
+export const listItem = tw`px-4 py-2 text-sm leading-tight text-gray-1200 hover:bg-gray-300 dark:hover:(bg-gray-700) flex items-center justify-between`;
 
 export const analyticsStyles = css`
   .feather {

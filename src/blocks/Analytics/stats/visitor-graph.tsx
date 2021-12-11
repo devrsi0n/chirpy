@@ -21,10 +21,10 @@ function buildDataSet(
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
   gradient.addColorStop(
     0,
-    isDarkMode ? 'hsl(294, 42.7%, 30.6%, 0.2)' : 'hsla(292, 45.0%, 51.0%, 0.2)',
+    isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0.2)' : 'hsla(292, 45.0%, 51.0%, 0.2)',
   );
-  gradient.addColorStop(1, isDarkMode ? 'hsl(294, 42.7%, 30.6%, 0)' : 'hsla(292, 45.0%, 51.0%, 0)');
-  const borderColor = isDarkMode ? 'hsl(294, 42.7%, 30.6%)' : 'hsl(292, 45.0%, 51.0%)';
+  gradient.addColorStop(1, isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0)' : 'hsla(292, 45.0%, 51.0%, 0)');
+  const borderColor = isDarkMode ? 'hsl(295, 40.4%, 24.7%)' : 'hsl(292, 45.0%, 51.0%)';
   const pointBackgroundColor = borderColor;
 
   if (present_index) {

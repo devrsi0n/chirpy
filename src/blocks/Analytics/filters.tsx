@@ -168,6 +168,7 @@ function renderDropdownFilter(
           }`}
           className="group flex w-full justify-between items-center"
           style={{ width: 'calc(100% - 1.5rem)' }}
+          variant='plain'
         >
           <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
           <PencilIcon className="w-4 h-4 ml-1 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
@@ -351,7 +352,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
       <span
         key={key}
         title={value}
-        className="flex bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 shadow text-sm rounded mr-2 items-center"
+        className="flex bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-300 shadow text-sm rounded mr-2 items-center"
       >
         {key === 'props' ? (
           <span className="flex w-full h-full items-center py-2 pl-3">
@@ -387,25 +388,27 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
     );
   }
 
+  // TODO: Add filter dropdown
   renderDropdownButton() {
-    if (this.state.wrapped === 2) {
-      const filterCount = appliedFilters(this.props.query).length;
-      return (
-        <>
-          <AdjustmentsIcon className="-ml-1 mr-1 h-4 w-4" aria-hidden="true" />
-          {filterCount} Filter{filterCount === 1 ? '' : 's'}
-        </>
-      );
-    }
+    return null;
+    // if (this.state.wrapped === 2) {
+    //   const filterCount = appliedFilters(this.props.query).length;
+    //   return (
+    //     <>
+    //       <AdjustmentsIcon className="-ml-1 mr-1 h-4 w-4" aria-hidden="true" />
+    //       {filterCount} Filter{filterCount === 1 ? '' : 's'}
+    //     </>
+    //   );
+    // }
 
-    return (
-      <>
-        <PlusIcon className="-ml-1 mr-1 h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
-        {/* This would have been a good use-case for JSX! But in the interest of keeping the breakpoint width logic with TailwindCSS, this is a better long-term way to deal with it. */}
-        <span className="sm:hidden">Filter</span>
-        <span className="hidden sm:inline-block">Add filter</span>
-      </>
-    );
+    // return (
+    //   <>
+    //     <PlusIcon className="-ml-1 mr-1 h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
+    //     {/* This would have been a good use-case for JSX! But in the interest of keeping the breakpoint width logic with TailwindCSS, this is a better long-term way to deal with it. */}
+    //     <span className="sm:hidden">Filter</span>
+    //     <span className="hidden sm:inline-block">Add filter</span>
+    //   </>
+    // );
   }
 
   renderDropDown() {

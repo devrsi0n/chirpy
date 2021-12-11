@@ -134,7 +134,7 @@ function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.El
     navigateToQuery(router, query, to);
     onClick?.(e);
   };
-  return <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} />;
+  return <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} variant='plain' />;
 }
 
 export { QueryLink };
@@ -210,9 +210,10 @@ export function eventName(query: Query) {
   return 'pageviews';
 }
 
-export const formattedFilters = {
-  goal: 'Goal',
-  props: 'Goal properties',
+//@ts-ignore
+export const formattedFilters: Record<FilterKey, string> = {
+  // goal: 'Goal',
+  // props: 'Goal properties',
   source: 'Source',
   utm_medium: 'UTM Medium',
   utm_source: 'UTM Source',
@@ -226,9 +227,9 @@ export const formattedFilters = {
   country: 'Country',
   region: 'Region',
   city: 'City',
-  page: 'Page',
+  // page: 'Page',
   entry_page: 'Entry Page',
   exit_page: 'Exit Page',
 } as const;
 
-export type FormattedFilterKey = keyof typeof formattedFilters;
+export type FilterKey = keyof Filters;
