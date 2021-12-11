@@ -29,17 +29,20 @@ export function useLocalStorage<T>(
   const [storedValue, setStoredValue] = useState<T | undefined>(readValue);
   const customEventKey = `local-storage.${key}` as const;
   const setValue: SetValue<T | undefined> = (value) => {
-    if (!key) return;
     if (typeof window == 'undefined') {
       console.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`,
       );
     }
 
-    try {
-      const newValue = value instanceof Function ? value(storedValue) : value;
-      window.localStorage.setItem(key, JSON.stringify(newValue));
+    const newValue = value instanceof Function ? value(storedValue) : value;
+    if (!key) {
+      setStoredValue(newValue);
+      return;
+    }
 
+    try {
+      window.localStorage.setItem(key, JSON.stringify(newValue));
       setStoredValue(newValue);
 
       window.dispatchEvent(new Event(customEventKey));

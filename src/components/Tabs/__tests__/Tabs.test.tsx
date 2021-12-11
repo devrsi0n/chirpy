@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Tabs, TabsItem } from '../';
@@ -34,11 +34,11 @@ describe('Tabs', () => {
     expect(screen.getByText(firstTabText)).toBeInTheDocument();
   });
 
-  it('should render the second tab after clicking the button', () => {
-    const secondTab = screen.getByText(secondLabel);
+  it('should render the second tab after clicking the button', async () => {
+    const secondTab = screen.getByRole('button', { name: secondLabel });
     expect(mockOnChange).not.toHaveBeenCalled();
     userEvent.click(secondTab);
-    expect(screen.getByText(secondTabText)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(secondTabText)).toBeInTheDocument());
     expect(mockOnChange).toHaveBeenCalled();
   });
 });
