@@ -4,8 +4,8 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
 export type InsertOneProjectMutationVariables = Types.Exact<{
-  teamId?: Types.Maybe<Types.Scalars['uuid']>;
-  userId?: Types.Maybe<Types.Scalars['Int']>;
+  teamId?: Types.InputMaybe<Types.Scalars['uuid']>;
+  userId?: Types.InputMaybe<Types.Scalars['Int']>;
   name: Types.Scalars['String'];
   domain: Types.Scalars['String'];
 }>;
@@ -14,7 +14,7 @@ export type InsertOneProjectMutationVariables = Types.Exact<{
 export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: { __typename?: 'Project', id: string, name: string, teamId?: string | null | undefined, userId?: number | null | undefined } | null | undefined };
 
 export type DeleteProjectByPkMutationVariables = Types.Exact<{
-  id?: Types.Maybe<Types.Scalars['uuid']>;
+  id?: Types.InputMaybe<Types.Scalars['uuid']>;
 }>;
 
 
