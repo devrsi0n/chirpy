@@ -21,7 +21,7 @@ export type CommentDetailsSubscription = { __typename?: 'subscription_root', com
 
 export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
-  parentId?: Types.Maybe<Types.Scalars['uuid']>;
+  parentId?: Types.InputMaybe<Types.Scalars['uuid']>;
   pageId: Types.Scalars['uuid'];
   depth: Types.Scalars['Int'];
 }>;

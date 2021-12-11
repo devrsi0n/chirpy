@@ -12,10 +12,10 @@ export type CurrentUserQuery = { __typename?: 'query_root', userByPk?: { __typen
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['Int'];
-  bio?: Types.Maybe<Types.Scalars['String']>;
+  bio?: Types.InputMaybe<Types.Scalars['String']>;
   name: Types.Scalars['String'];
-  twitterUserName?: Types.Maybe<Types.Scalars['String']>;
-  website?: Types.Maybe<Types.Scalars['String']>;
+  twitterUserName?: Types.InputMaybe<Types.Scalars['String']>;
+  website?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 

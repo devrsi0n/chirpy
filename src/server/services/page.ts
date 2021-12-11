@@ -17,7 +17,9 @@ export async function handleGetPage(
   req: NextApiRequest,
   res: NextApiResponse<GetPagByUrl>,
 ): Promise<void> {
-  const { url, projectId, title } = req.query;
+  const { url, projectId, title } = req.query as {
+    [key: string]: string;
+  };
   if (!url || !projectId) {
     return res.status(400).json({
       error: 'Expect valid url and projectId',
