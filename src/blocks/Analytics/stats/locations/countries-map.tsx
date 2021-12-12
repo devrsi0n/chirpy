@@ -5,7 +5,7 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 import tw, { css, theme } from 'twin.macro';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -89,7 +89,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
 
   fetchCountries() {
     return api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/countries`,
         this.props.site,
         this.props.query,

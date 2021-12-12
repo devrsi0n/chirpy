@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -33,7 +33,7 @@ class SourcesModal extends React.Component {
 
     const detailed = this.showExtra();
     api
-      .get(`/api/stats/${encodeURIComponent(site.domain)}/${this.currentFilter()}`, this.props.site, query, {
+      .getStats(`/api/stats/${encodeURIComponent(site.domain)}/${this.currentFilter()}`, this.props.site, query, {
         limit: 100,
         page,
         detailed,

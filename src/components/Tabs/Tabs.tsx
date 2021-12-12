@@ -61,6 +61,7 @@ export function Tabs({
   React.useEffect(() => {
     if (value === undefined) return;
     setSelfValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const handleClickTab = (item: TabsLabelItem) => {

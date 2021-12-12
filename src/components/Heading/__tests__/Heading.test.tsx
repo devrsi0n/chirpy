@@ -16,6 +16,6 @@ describe('Heading', () => {
 
   it('should render heading 2', () => {
     expect(screen.queryByRole('heading')?.textContent).toEqual(text);
-    expect(screen.queryByRole('heading')?.tagName).toEqual('H2');
+    expect(screen.queryByRole('heading')?.tagName).toBe('H2');
   });
 });

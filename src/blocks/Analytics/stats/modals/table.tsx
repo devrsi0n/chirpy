@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -19,7 +19,7 @@ class ModalTable extends React.Component {
 
   componentDidMount() {
     api
-      .get(this.props.endpoint, this.props.site, this.state.query, { limit: 100 })
+      .getStats(this.props.endpoint, this.props.site, this.state.query, { limit: 100 })
       .then((res) => this.setState({ loading: false, list: res }));
   }
 

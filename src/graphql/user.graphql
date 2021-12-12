@@ -41,6 +41,7 @@ query userDashboardProjects($id: Int!) {
     projects {
       id
       name
+      domain
       createdAt
       pages {
         id

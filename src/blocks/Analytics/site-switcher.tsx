@@ -2,7 +2,7 @@
 import { Transition } from '@headlessui/react';
 import React from 'react';
 
-import { get } from './api';
+import { getStats } from './analytics-api';
 import { Site } from './type';
 
 export interface SiteSwitcherProps {
@@ -39,7 +39,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
   populateSites() {
     if (!this.props.loggedIn) return;
 
-    get('/api/sites', this.props.site)
+    getStats('/api/sites', this.props.site)
       .then((response) => {
         if (!response.ok) {
           throw response;

@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/solid';
 import React, { Fragment } from 'react';
 import 'twin.macro';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';
 import { Site } from '../../type';
 import { apiPath, siteBasePath } from '../../url';
@@ -188,7 +188,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         filters: { ...query.filters, ...formFilters, [filter]: null },
       };
 
-      return api.get(
+      return api.getStats(
         apiPath(this.props.site, `/suggestions/${filter}`),
         this.props.site,
         updatedQuery,

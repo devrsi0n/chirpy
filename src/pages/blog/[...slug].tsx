@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
-import Script, { ScriptProps } from 'next/script';
+import Script from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -25,11 +25,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
-  const scriptProps: ScriptProps = {
-    [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT,
-    src: `${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`,
-    strategy: 'afterInteractive' as const,
-  };
+
   return (
     <>
       <Head>
@@ -47,7 +43,12 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
         </article>
       </section>
       <div {...{ [`data-${APP_NAME_LOWERCASE}-comment`]: 'true' }} tw="my-16" />
-      <Script {...scriptProps} />
+      <Script
+        {...{ [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT }}
+        src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`}
+        id={`${APP_NAME_LOWERCASE}-comment-widget-script`}
+        strategy="afterInteractive"
+      />
     </>
   );
 }

@@ -73,7 +73,7 @@ export function serializeQuery(
   return '?' + serialize(queryObj);
 }
 
-export function get(
+export function getStats(
   url: string,
   site: Site,
   query: Partial<Query> = {},

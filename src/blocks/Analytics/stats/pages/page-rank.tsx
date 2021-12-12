@@ -9,7 +9,7 @@ import { Link } from '$/components/Link';
 import { usePrevious } from '$/hooks/usePrevious';
 import { WIDGET_COMMENT_PATH } from '$/lib/constants';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -45,7 +45,7 @@ export function PageRank(props: PageRankProps) {
 
   const fetchPages = () => {
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`,
         props.site,
         props.query,

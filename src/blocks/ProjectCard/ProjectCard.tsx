@@ -1,7 +1,6 @@
 import Loader from '@geist-ui/react-icons/loader';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
-import TrendingUp from '@geist-ui/react-icons/trendingUp';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -21,6 +20,7 @@ import { listHoverable } from '$/styles/common';
 import { dayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../IntegrateGuide';
+import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {
   project: NonNullable<UserDashboardProjectsQuery['userByPk']>['projects'][number];
@@ -54,7 +54,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       console.error(error);
       showToast({
         type: 'error',
-        title: 'Sorry, something wrong in our side, please try again later.',
+        title: 'Sorry, something went wrong in our side, please try again later.',
       });
     }
   };
@@ -70,44 +70,13 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
     const newSize = Math.min(pageSize + 5, project.pages.length);
     setPageSize(newSize);
   }
-  const grow = 1;
-  const pageviewsYesterday = 100;
+
   return (
     <Card as="section" key={project.id} tw="pt-4 space-y-4">
       <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
-        <Heading tw="font-bold" as="h3">
-          {project.name}
-        </Heading>
-        <div tw="flex flex-row items-center">
-          <Link variant="plain" href={`/analytics/${project.id}`} tabIndex={-1} title={'Analytics'}>
-            <BaseButton
-              tw="rounded-full p-2"
-              css={grow > 0 ? tw`text-green-1000` : tw`text-yellow-900`}
-            >
-              <span
-                tw="p-2 rounded-full"
-                css={
-                  grow > 0
-                    ? tw`bg-green-300 hover:(bg-green-400)`
-                    : tw`bg-yellow-300 hover:(bg-yellow-400) transform -scale-y-1`
-                }
-              >
-                <TrendingUp size={20} />
-              </span>
-            </BaseButton>
-          </Link>
-          <div tw="mr-5">
-            <Text size="sm" bold variant="secondary">
-              {pageviewsYesterday}
-            </Text>
-            <Text
-              size="xs"
-              tw="font-bold"
-              css={grow > 0 ? tw`text-green-900` : tw`text-yellow-1000`}
-            >
-              {`${grow > 0 ? '+' : ''}${grow * 100}`}%
-            </Text>
-          </div>
+        <Heading as="h3">{project.name}</Heading>
+        <div tw="flex flex-row items-center space-x-2">
+          <PageViewStats domain={project.domain} />
           <DropDown
             styles={{ root: tw`mr-1` }}
             buttonProps={{ ariaLabel: 'Show more project options' }}
@@ -127,8 +96,11 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           </DropDown>
         </div>
       </div>
+      <Text tw="px-6" variant="secondary">
+        {project.domain}
+      </Text>
       <div tw="px-6 flex flex-row space-x-2">
-        <Link href={`/theme/${project.id}`} variant="plain" tabIndex={-1}>
+        <Link href={`/theme/${project.domain}`} variant="plain" tabIndex={-1}>
           <Button color="primary" shadow={false} tw="px-2 py-1">
             Theme
           </Button>

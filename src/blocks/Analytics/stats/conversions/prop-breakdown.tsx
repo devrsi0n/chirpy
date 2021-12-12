@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import * as storage from '../../storage';
@@ -90,7 +90,7 @@ export default class PropertyBreakdown extends React.Component<
   fetchPropBreakdown() {
     if (this.props.query.filters['goal']) {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/property/${encodeURIComponent(
             this.state.propKey,
           )}`,

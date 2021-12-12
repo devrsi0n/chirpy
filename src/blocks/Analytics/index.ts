@@ -1,6 +1,9 @@
 import dynamic from 'next/dynamic';
 
-const Realtime = dynamic(() => import(/* webpackChunkName: "analytics-realtime"*/ './analytics'), {
-  ssr: false,
-});
-export { Realtime };
+const AnalyticsBlock = dynamic(
+  () => import(/* webpackChunkName: "analytics-block"*/ './analytics'),
+  {
+    ssr: false,
+  },
+);
+export { AnalyticsBlock };

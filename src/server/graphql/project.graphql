@@ -1,11 +1,12 @@
 query allProjects {
   projects {
     id
+    domain
   }
 }
 
-query themeProjectByPk($id: uuid!) {
-  projectByPk(id: $id) {
+query themeProjectByPk($domain: String!) {
+  projects(where: { domain: { _eq: $domain } }) {
     id
     name
     theme
@@ -21,15 +22,6 @@ query projectByPk($id: uuid!) {
 query userProjects($userId: Int!) {
   projects(where: { userId: { _eq: $userId } }) {
     id
-  }
-}
-
-query projectAnalytics($projectId: uuid!) {
-  projectByPk(id: $projectId) {
-    id
-    name
-    domain
-    createdAt
   }
 }
 

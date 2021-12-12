@@ -1,6 +1,0 @@
-{
-  "extends": [
-    "config:base"
-  ],
-  "ignorePaths": ["docs/**", "hasura/**"]
-}

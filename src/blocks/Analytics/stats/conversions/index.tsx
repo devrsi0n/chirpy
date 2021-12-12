@@ -3,7 +3,7 @@ import 'twin.macro';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
@@ -70,7 +70,7 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   fetchConversions() {
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/conversions`,
         this.props.site,
         this.props.query,

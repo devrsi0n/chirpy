@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
 import { parseQuery, toHuman } from '../../query';
 import Modal from './modal';
@@ -21,7 +21,7 @@ class GoogleKeywordsModal extends React.Component {
   componentDidMount() {
     if (this.state.query.filters.goal) {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers/Google`,
           this.props.site,
           this.state.query,
@@ -38,7 +38,7 @@ class GoogleKeywordsModal extends React.Component {
         );
     } else {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/Google`,
           this.props.site,
           this.state.query,
