@@ -4,7 +4,7 @@ import 'twin.macro';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -75,7 +75,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
   fetchReferrers() {
     if (this.props.query.filters.source) {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${encodeURIComponent(
             this.props.query.filters.source,
           )}`,
@@ -87,7 +87,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         .then((referrers) => this.setState({ loading: false, referrers: referrers }));
     } else if (this.props.query.filters.goal) {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers`,
           this.props.site,
           this.props.query,
@@ -95,7 +95,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         .then((res) => this.setState({ loading: false, referrers: res }));
     } else {
       api
-        .get(
+        .getStats(
           `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers`,
           this.props.site,
           this.props.query,

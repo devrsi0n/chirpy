@@ -5,7 +5,7 @@ import 'twin.macro';
 import { Link } from '$/components/Link';
 import { Tabs } from '$/components/Tabs';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -80,7 +80,7 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   fetchReferrers = () => {
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/sources`,
         this.props.site,
         this.props.query,
@@ -217,7 +217,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
   fetchReferrers = () => {
     const endpoint = UTM_TAGS[this.props.tab].endpoint;
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/${endpoint}`,
         this.props.site,
         this.props.query,

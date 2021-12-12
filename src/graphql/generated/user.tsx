@@ -36,7 +36,7 @@ export type UserDashboardProjectsQueryVariables = Types.Exact<{
 }>;
 
 
-export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: number, projects: Array<{ __typename?: 'Project', id: string, name: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title: string, url: string }> }> } | null | undefined };
+export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: number, projects: Array<{ __typename?: 'Project', id: string, name: string, domain: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title: string, url: string }> }> } | null | undefined };
 
 
 export const CurrentUserDocument = gql`
@@ -167,6 +167,7 @@ export const UserDashboardProjectsDocument = gql`
     projects {
       id
       name
+      domain
       createdAt
       pages {
         id

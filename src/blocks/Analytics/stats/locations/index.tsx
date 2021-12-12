@@ -5,7 +5,7 @@ import 'twin.macro';
 
 import { Tabs } from '$/components/Tabs';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
@@ -57,7 +57,7 @@ export default function Locations(props: LocationsProps): JSX.Element {
 
 function Countries({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/countries'), site, query, { limit: 9 }).then((res) => {
+    return api.getStats(apiPath(site, '/countries'), site, query, { limit: 9 }).then((res) => {
       return res.map((row: any) => Object.assign({}, row, { percentage: undefined }));
     });
   }
@@ -85,7 +85,7 @@ interface Region {
 
 function Regions({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/regions'), site, query, {
+    return api.getStats(apiPath(site, '/regions'), site, query, {
       country_name: query.filters.country,
       limit: 9,
     });
@@ -110,7 +110,7 @@ function Regions({ query, site }: Props) {
 
 function Cities({ query, site }: Props) {
   function fetchData() {
-    return api.get(apiPath(site, '/cities'), site, query, { limit: 9 });
+    return api.getStats(apiPath(site, '/cities'), site, query, { limit: 9 });
   }
 
   return (

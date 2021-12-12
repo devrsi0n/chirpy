@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -29,7 +29,7 @@ class PagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/pages`,
         this.props.site,
         query,

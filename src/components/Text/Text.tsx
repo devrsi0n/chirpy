@@ -1,7 +1,7 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-type Size = 'xs' | 'sm' | 'base' | 'lg';
+type Size = 'xs' | 'sm' | 'base' | 'lg' | 'xl';
 type Variant = 'primary' | 'secondary';
 
 export type TextProps = React.PropsWithChildren<
@@ -21,6 +21,7 @@ const sizeStyles: Record<Size, TwStyle> = {
   sm: tw`text-sm`,
   base: tw`text-base`,
   lg: tw`text-lg`,
+  xl: tw`text-xl`,
 };
 
 export function Text({

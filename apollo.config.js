@@ -3,7 +3,7 @@ module.exports = {
     includes: ['./src/**/*.ts'],
     service: {
       name: 'Chirpy',
-      localSchemaFile: './docs/graphql-schema.json',
+      localSchemaFile: './scripts/graphql-codegen/graphql-schema.json',
     },
   },
 };

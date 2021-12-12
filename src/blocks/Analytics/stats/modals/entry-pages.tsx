@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery, Query } from '../../query';
 import { Site } from '../../type';
@@ -39,7 +39,7 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
     const { query, page } = this.state;
 
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/entry-pages`,
         this.props.site,
         query,

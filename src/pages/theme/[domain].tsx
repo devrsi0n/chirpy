@@ -22,6 +22,7 @@ import {
   AllProjectsDocument,
   AllProjectsQuery,
 } from '$/server/graphql/generated/project';
+import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { Theme as ThemeType } from '$/types/theme.type';
 
 export type ThemeProps = StaticProps;
@@ -95,7 +96,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
       setTheme(newTheme);
       updateTheme({
         variables: {
-          projectId: props.projectId,
+          projectId: props.project.id,
           theme: newTheme,
         },
       });
@@ -168,24 +169,11 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
 }
 
 type PathParams = {
-  projectId: string;
+  domain: string;
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const adminApollo = getAdminApollo();
-  const {
-    data: { projects },
-  } = await adminApollo.query<AllProjectsQuery>({
-    query: AllProjectsDocument,
-  });
-
-  const paths: { params: PathParams }[] = projects.map(({ id }) => {
-    return {
-      params: {
-        projectId: id,
-      },
-    };
-  });
+  const paths = await getAllProjectStaticPathsByDomain();
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -193,30 +181,31 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = {
-  project: ThemeProjectByPkQuery['projectByPk'];
-} & PathParams;
+  project: ThemeProjectByPkQuery['projects'][0];
+};
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps>> => {
-  if (!params?.projectId) {
+  if (!params?.domain) {
     return { notFound: true };
   }
-  const { projectId } = params;
+  const { domain } = params;
   const adminApollo = getAdminApollo();
-  const pageResult = await adminApollo.query<ThemeProjectByPkQuery>({
+  const {
+    data: { projects },
+  } = await adminApollo.query<ThemeProjectByPkQuery>({
     query: ThemeProjectByPkDocument,
     variables: {
-      id: projectId,
+      domain,
     },
   });
 
-  if (!pageResult.data?.projectByPk) {
+  if (!projects || !projects[0]) {
     return { notFound: true };
   }
-  const { projectByPk } = pageResult.data;
   return {
-    props: { project: projectByPk, projectId },
+    props: { project: projects[0] },
     revalidate: 1,
   };
 };

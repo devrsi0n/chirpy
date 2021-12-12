@@ -4,7 +4,7 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 import tw, { theme } from 'twin.macro';
 
-import * as api from '../api';
+import * as api from '../analytics-api';
 import LazyLoader from '../lazy-loader';
 import numberFormatter, { durationFormatter } from '../number-formatter';
 import { navigateToQuery } from '../query';
@@ -551,7 +551,7 @@ export default function VisitorGraph(props: VisitorGraphProps) {
   };
   const fetchGraphData = () => {
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(props.site.domain)}/main-graph`,
         props.site,
         props.query,

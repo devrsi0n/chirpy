@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery, Query, toHuman } from '../../query';
 import { SiteIcon } from '../../site-icon';
@@ -32,7 +32,7 @@ class ReferrerDrilldownModal extends React.Component<
     const detailed = this.showExtra();
 
     api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${
           this.props.match.params.referrer
         }`,

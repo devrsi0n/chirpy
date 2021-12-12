@@ -3,7 +3,7 @@ import 'twin.macro';
 
 import { Tabs } from '$/components/Tabs';
 
-import * as api from '../../api';
+import * as api from '../../analytics-api';
 import { Props } from '../../type';
 import * as url from '../../url';
 import { AnalyticsCard } from '../fine-components';
@@ -45,7 +45,7 @@ export default function Devices(props: DevicesProps): JSX.Element {
 
 function Browsers({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/browsers'), site, query);
+    return api.getStats(url.apiPath(site, '/browsers'), site, query);
   }
 
   return (
@@ -60,7 +60,7 @@ function Browsers({ query, site }: Props) {
 
 function BrowserVersions({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/browser-versions'), site, query);
+    return api.getStats(url.apiPath(site, '/browser-versions'), site, query);
   }
 
   return (
@@ -75,7 +75,7 @@ function BrowserVersions({ query, site }: Props) {
 
 function OperatingSystems({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/operating-systems'), site, query);
+    return api.getStats(url.apiPath(site, '/operating-systems'), site, query);
   }
 
   return (
@@ -90,7 +90,7 @@ function OperatingSystems({ query, site }: Props) {
 
 function OperatingSystemVersions({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/operating-system-versions'), site, query);
+    return api.getStats(url.apiPath(site, '/operating-system-versions'), site, query);
   }
 
   return (
@@ -117,7 +117,7 @@ function renderTooltipText(screenSize: ScreenSize) {
 
 function ScreenSizes({ query, site }: Props) {
   function fetchData() {
-    return api.get(url.apiPath(site, '/screen-sizes'), site, query);
+    return api.getStats(url.apiPath(site, '/screen-sizes'), site, query);
   }
 
   return (

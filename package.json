@@ -13,8 +13,8 @@
     "analyze": "ANALYZE=true next build",
     "start": "next start",
     "start:local": "dotenv -e .env.development -- next start",
-    "g:gql": "graphql-codegen --config ./docs/server-codegen.yml && graphql-codegen --config ./docs/client-codegen.yml",
-    "g:gql:watch": "concurrently 'graphql-codegen --watch --config ./docs/server-codegen.yml' 'graphql-codegen --config ./docs/client-codegen.yml --watch'",
+    "g:gql": "graphql-codegen --config ./scripts/graphql-codegen/server-codegen.yml && graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml",
+    "g:gql:watch": "concurrently 'graphql-codegen --watch --config ./scripts/graphql-codegen/server-codegen.yml' 'graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml --watch'",
     "cy:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
     "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run",
     "ut": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
@@ -171,5 +171,10 @@
     "twin": {
       "preset": "emotion"
     }
+  },
+  "renovate": {
+    "extends": [
+      "config:base"
+    ]
   }
 }

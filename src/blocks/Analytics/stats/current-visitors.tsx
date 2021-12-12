@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from '$/components/Link';
 
-import * as api from '../api';
+import * as api from '../analytics-api';
 import { appliedFilters } from '../query';
 import { Timer } from '../timer';
 import { Props } from '../type';
@@ -25,7 +25,7 @@ export default class CurrentVisitors extends React.Component<CurrentVisitorsProp
 
   updateCount = () => {
     return api
-      .get(
+      .getStats(
         `/api/stats/${encodeURIComponent(this.props.site.domain)}/current-visitors`,
         this.props.site,
       )
