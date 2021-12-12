@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
 import * as React from 'react';

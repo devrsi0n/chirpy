@@ -19,8 +19,6 @@ import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
-  AllProjectsDocument,
-  AllProjectsQuery,
 } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { Theme as ThemeType } from '$/types/theme.type';
@@ -167,6 +165,8 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
     </section>
   );
 }
+
+ThemeEditor.auth = true;
 
 type PathParams = {
   domain: string;
