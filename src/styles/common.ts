@@ -19,4 +19,4 @@ export const textInput = tw`placeholder-gray-900 bg-gray-100 dark:bg-gray-400`;
 
 export const textInputError = tw`border-red-700 focus-visible:(border-red-800)`;
 
-export const gradient = tw`bg-gradient-to-r from-primary-800 to-indigo-800`;
+export const gradient = tw`bg-gradient-to-r from-primary-800 to-plum-800`;

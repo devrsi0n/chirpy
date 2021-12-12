@@ -45,7 +45,7 @@
     "@headlessui/react": "1.4.2",
     "@heroicons/react": "1.0.5",
     "@next/bundle-analyzer": "12.0.7",
-    "@radix-ui/colors": "0.1.7",
+    "@radix-ui/colors": "0.1.8",
     "@react-aria/button": "3.3.4",
     "@tailwindcss/typography": "0.4.1",
     "@testing-library/cypress": "8.0.2",

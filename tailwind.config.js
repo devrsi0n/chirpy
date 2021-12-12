@@ -9,7 +9,7 @@ const colors = {
   indigo: getColorCSSVariables('indigo'),
   green: getColorCSSVariables('green'),
   gray: getColorCSSVariables('gray'),
-  violet: getColorCSSVariables('violet'),
+  // violet: getColorCSSVariables('violet'),
   plum: getColorCSSVariables('plum'),
   primary: getColorCSSVariables('primary'),
   yellow: getColorCSSVariables('yellow'),
@@ -112,7 +112,7 @@ function getRadixColor(colors, prefix) {
   const result = {};
   for (let i = 1; i <= 12; i++) {
     const color = colors[`${prefix}${i}`];
-    const [, h, s, l] = /hsl\((\d+) ([\d\.]+)\% ([\d\.]+)\%\)/.exec(color);
+    const [, h, s, l] = /hsl\((\d+) ([\d\.]+)\% ([\d\.]+)\%\)/.exec(color) || [];
     const rgb = convert.hsl
       .rgb(+h, +s, +l)
       .map((c) => c.toString(16))
