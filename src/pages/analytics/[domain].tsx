@@ -4,7 +4,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { Realtime } from '$/blocks/Analytics';
+import { AnalyticsBlock } from '$/blocks/Analytics';
 import { PageTitle } from '$/blocks/PageTitle';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
@@ -23,7 +23,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
       </Head>
       <section tw="xl:max-width[70rem] mx-auto px-4">
         <PageTitle tw="pb-6">Analytics</PageTitle>
-        <Realtime
+        <AnalyticsBlock
           site={{
             domain: props.project?.domain!,
             offset: '0',

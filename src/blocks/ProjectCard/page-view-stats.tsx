@@ -26,7 +26,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
         setPageviews(pv.value);
       }
     });
-  }, []);
+  }, [domain]);
   return (
     <>
       {grow !== null && pageviews !== null && (
