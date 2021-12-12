@@ -110,7 +110,9 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
     const defaultFill = this.props.isDarkMode ? '#2d3747' : '#f8fafc';
     const highlightFill = this.props.isDarkMode ? '#374151' : '#F5F5F5';
     const borderColor = this.props.isDarkMode ? '#1f2937' : '#dae1e7';
-    const highlightBorderColor = this.props.isDarkMode ? theme('colors.primary.700') : theme('colors.primary.900');
+    const highlightBorderColor = this.props.isDarkMode
+      ? theme('colors.primary.700')
+      : theme('colors.primary.900');
 
     this.map = new Datamap({
       element: document.querySelector('#map-container'),

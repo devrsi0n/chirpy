@@ -34,7 +34,7 @@ export function Layout({
               background: `radial-gradient(circle at 5% 50%, ${theme(
                 'colors.primary.400',
               )}, rgba(255, 255, 255, 0) 20%), radial-gradient(circle at 90% 15%, ${theme(
-                'colors.blue.400',
+                'colors.plum.400',
               )}, rgba(255, 255, 255, 0) 20%)`,
             },
           }),

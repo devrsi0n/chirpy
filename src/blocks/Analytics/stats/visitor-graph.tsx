@@ -16,15 +16,11 @@ function buildDataSet(
   present_index: number,
   ctx: { createLinearGradient: (arg0: number, arg1: number, arg2: number, arg3: number) => any },
   label: string,
-  isDarkMode: boolean,
 ) {
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient.addColorStop(
-    0,
-    isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0.2)' : 'hsla(292, 45.0%, 51.0%, 0.2)',
-  );
-  gradient.addColorStop(1, isDarkMode ? 'hsl(295, 40.4%, 24.7%, 0)' : 'hsla(292, 45.0%, 51.0%, 0)');
-  const borderColor = isDarkMode ? 'hsl(295, 40.4%, 24.7%)' : 'hsl(292, 45.0%, 51.0%)';
+  gradient.addColorStop(0, 'hsl(252, 56.0%, 57.5%, 0.2)');
+  gradient.addColorStop(1, 'hsl(252, 56.0%, 57.5%, 0)');
+  const borderColor = 'hsl(252, 56.0%, 57.5%)';
   const pointBackgroundColor = borderColor;
 
   if (present_index) {
@@ -173,13 +169,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       : graphData.interval === 'minute'
       ? 'Pageviews'
       : 'Visitors';
-    const dataSet = buildDataSet(
-      graphData.plot,
-      graphData.present_index,
-      this.ctx,
-      label,
-      this.props.darkTheme,
-    );
+    const dataSet = buildDataSet(graphData.plot, graphData.present_index, this.ctx, label);
 
     return new Chart(this.ctx, {
       type: 'line',
@@ -291,7 +281,6 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
         this.props.graphData.present_index,
         this.ctx,
         label,
-        this.props.darkTheme,
       );
 
       for (let i = 0; i < newDataset[0].data.length; i++) {
@@ -540,16 +529,11 @@ export default function VisitorGraph(props: VisitorGraphProps) {
   const { resolvedTheme } = useTheme();
   const isDarkMode = resolvedTheme === 'dark';
 
-  React.useEffect(() => {
-    setLoading(true);
-    setGraphData(null);
-    fetchGraphData();
-  }, [props.query, isDarkMode]);
   const onVisible = () => {
     fetchGraphData();
     if (props.timer) props.timer.onTick(fetchGraphData);
   };
-  const fetchGraphData = () => {
+  const fetchGraphData = React.useCallback(() => {
     api
       .getStats(
         `/api/stats/${encodeURIComponent(props.site.domain)}/main-graph`,
@@ -561,7 +545,12 @@ export default function VisitorGraph(props: VisitorGraphProps) {
         setGraphData(res);
         return res;
       });
-  };
+  }, [props.site, props.query]);
+  React.useEffect(() => {
+    setLoading(true);
+    setGraphData(null);
+    fetchGraphData();
+  }, [props.query, isDarkMode, fetchGraphData]);
   return (
     <LazyLoader onVisible={onVisible}>
       <div

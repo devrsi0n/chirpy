@@ -21,7 +21,7 @@ export const appGlobalStyles = css`
   }
 
   ::selection {
-    ${tw`bg-blue-900 text-white`}
+    ${tw`bg-plum-900 text-white`}
   }
 
   :focus-visible {

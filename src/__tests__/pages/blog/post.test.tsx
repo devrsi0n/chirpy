@@ -16,6 +16,6 @@ describe('Blog post', () => {
       },
     });
     render(<Post {...(staticProps as any).props} />);
-    expect(screen.getByText(/^\S+ open source/)).toBeTruthy();
+    expect(screen.getByText(/open source/)).toBeTruthy();
   });
 });
