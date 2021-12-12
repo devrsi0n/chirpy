@@ -27,7 +27,7 @@ describe('Project', () => {
 
     // Create project
     cy.findByRole('button', {
-      name: /new project/i,
+      name: /create project/i,
     }).click();
     cy.findByRole('textbox', {
       name: /name of this project/i,

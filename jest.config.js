@@ -5,7 +5,7 @@ module.exports = {
   testMatch: ['**/src/**/*.test.ts?(x)'],
   transform: {
     '\\.[jt]sx?$': 'babel-jest',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/jest/fileTransformer.js',
+    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/scripts/jest/fileTransformer.js',
   },
   moduleNameMapper: {
     '^\\$/(.*)': '<rootDir>/src/$1',
