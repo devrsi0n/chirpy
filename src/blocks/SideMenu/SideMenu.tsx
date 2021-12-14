@@ -1,3 +1,4 @@
+import { Global, css } from '@emotion/react';
 import Menu from '@geist-ui/react-icons/menu';
 import Dismiss from '@geist-ui/react-icons/x';
 import { m, useCycle, Variants } from 'framer-motion';
@@ -63,21 +64,34 @@ export function SideMenu({ children, direction = 'tl', styles }: SideMenuProps):
       },
     };
   }, [direction]);
+  const [didAnimationEnd, setDidAnimationEnd] = React.useState(false);
   return (
     <m.nav
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
       custom={!ssrMode ? document.body.clientHeight : undefined}
-      tw="w-[250px] h-[100vh] fixed top-0 bottom-0"
-      css={[containerStyles]}
+      tw="w-[250px] h-[100vh] absolute sm:fixed top-0 bottom-0"
+      css={[containerStyles, didAnimationEnd && tw`h-auto`]}
       ref={containerRef}
+      onAnimationStart={(definition) => definition === 'open' && setDidAnimationEnd(false)}
+      onAnimationComplete={(definition) => definition === 'closed' && setDidAnimationEnd(true)}
     >
+      <Global
+        styles={
+          isOpen &&
+          css`
+            body {
+              overflow: hidden;
+            }
+          `
+        }
+      />
       <m.div tw="bg-gray-200 absolute inset-0" variants={backgroundVariant} />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>
-        <SideMenuItems css={styles?.items}>{children}</SideMenuItems>
+        <SideMenuItems css={[styles?.items]}>{children}</SideMenuItems>
       </SideMenuContextProvider>
-      <IconButton aria-expanded={isOpen} onClick={() => toggleOpen()} tw="" css={buttonStyles}>
+      <IconButton aria-expanded={isOpen} onClick={() => toggleOpen()} css={buttonStyles}>
         <span tw="sr-only">Open navigation menu</span>
         <Menu css={[isOpen && tw`hidden`]} />
         <Dismiss css={[!isOpen && tw`hidden`]} />
@@ -121,18 +135,19 @@ function SideMenuItems({ children, className }: SideMenuItemsProps): JSX.Element
 
 const itemVariants = {
   open: {
+    display: 'block',
     y: 0,
     opacity: 1,
     transition: {
       y: { stiffness: 1000, velocity: -100 },
     },
-    zIndex: 0,
   },
   closed: {
+    display: 'block',
     y: 50,
     opacity: 0,
     transitionEnd: {
-      zIndex: -1,
+      display: 'none',
     },
     transition: {
       y: { stiffness: 1000 },

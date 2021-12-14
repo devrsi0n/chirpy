@@ -4,6 +4,7 @@ import React from 'react';
 import 'twin.macro';
 
 import { Tabs } from '$/components/Tabs';
+import { useIsDarkMode } from '$/hooks/useIsDarkMode';
 
 import * as api from '../../analytics-api';
 import { Timer } from '../../timer';
@@ -19,8 +20,7 @@ interface LocationsProps extends Props {
 }
 
 export default function Locations(props: LocationsProps): JSX.Element {
-  const { resolvedTheme } = useTheme();
-  const isDarkMode = resolvedTheme === 'dark';
+  const isDarkMode = useIsDarkMode();
   return (
     <AnalyticsCard>
       <Tabs

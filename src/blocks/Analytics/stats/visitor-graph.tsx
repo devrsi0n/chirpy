@@ -4,6 +4,8 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 import tw, { theme } from 'twin.macro';
 
+import { useIsDarkMode } from '$/hooks/useIsDarkMode';
+
 import * as api from '../analytics-api';
 import LazyLoader from '../lazy-loader';
 import numberFormatter, { durationFormatter } from '../number-formatter';
@@ -526,8 +528,7 @@ interface VisitorGraphProps extends Props {
 export default function VisitorGraph(props: VisitorGraphProps) {
   const [graphData, setGraphData] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  const { resolvedTheme } = useTheme();
-  const isDarkMode = resolvedTheme === 'dark';
+  const isDarkMode = useIsDarkMode();
 
   const onVisible = () => {
     fetchGraphData();
