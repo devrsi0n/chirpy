@@ -2,6 +2,8 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { css, theme, TwStyle } from 'twin.macro';
 
+import { useIsDarkMode } from '$/hooks/useIsDarkMode';
+
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import { LayoutWrapper } from './LayoutWrapper';
@@ -24,6 +26,8 @@ export function Layout({
   styles,
   hideFullBleed,
 }: LayoutProps): JSX.Element {
+  const isDarkMode = useIsDarkMode();
+  const gradientColor = isDarkMode ? 'rgba(0, 0, 0, 0)' : 'rgba(255, 255, 255, 0)';
   return (
     <LayoutWrapper
       css={[
@@ -33,9 +37,9 @@ export function Layout({
             '::before': {
               background: `radial-gradient(circle at 5% 50%, ${theme(
                 'colors.primary.400',
-              )}, rgba(255, 255, 255, 0) 20%), radial-gradient(circle at 90% 15%, ${theme(
+              )}, ${gradientColor} 20%), radial-gradient(circle at 90% 15%, ${theme(
                 'colors.plum.400',
-              )}, rgba(255, 255, 255, 0) 20%)`,
+              )}, ${gradientColor} 20%)`,
             },
           }),
         },
