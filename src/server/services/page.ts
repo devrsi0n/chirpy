@@ -17,15 +17,30 @@ export async function handleGetPage(
   req: NextApiRequest,
   res: NextApiResponse<GetPagByUrl>,
 ): Promise<void> {
-  const { url, projectId, title } = req.query as {
+  const { url, domain, title } = req.query as {
     [key: string]: string;
   };
-  if (!url || !projectId) {
+
+  const refererDomain = new URL(url).hostname;
+  if (!url || !domain || (!isLocalDomain(refererDomain) && domain !== refererDomain)) {
     return res.status(400).json({
-      error: 'Expect valid url and projectId',
+      error: `url(${url}) and domain(${domain}) must be matched`,
     });
   }
   const adminApollo = getAdminApollo();
+  const projectResult = await adminApollo.query({
+    query: ProjectByDomainDocument,
+    variables: {
+      domain,
+    },
+  });
+  const projectId = projectResult.data.projects[0]?.id;
+  if (!projectId) {
+    return res.status(500).json({
+      code: ERR_UNMATCHED_DOMAIN,
+      error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
+    });
+  }
   const pageResult = await adminApollo.query<PageByUrlQuery>({
     query: PageByUrlDocument,
     variables: {
@@ -34,21 +49,7 @@ export async function handleGetPage(
     },
   });
   const page = pageResult.data.pages[0];
-  const domain = new URL(url as string).hostname;
-  if (domain !== page?.project.domain && !isLocalDomain(domain)) {
-    const projectResult = await adminApollo.query({
-      query: ProjectByDomainDocument,
-      variables: {
-        domain,
-      },
-    });
-    if (!projectResult.data.projects[0].id) {
-      return res.status(500).json({
-        code: ERR_UNMATCHED_DOMAIN,
-        error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
-      });
-    }
-  }
+
   if (!page?.id) {
     const createdPage = await adminApollo.mutate<InsertOnePageMutation>({
       mutation: InsertOnePageDocument,
@@ -58,7 +59,7 @@ export async function handleGetPage(
         title: title || '',
       },
     });
-    if (!createdPage.data?.insertOnePage) {
+    if (!createdPage.data?.insertOnePage?.id) {
       return res.status(500).json({
         error: 'Create page failed',
       });
