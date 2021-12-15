@@ -7,7 +7,7 @@ export const HASURA_TOKEN_MAX_AGE = 60 * 60;
 
 export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME;
 export const APP_NAME_LOWERCASE = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
-export const APP_DOMAIN = process.env.NEXT_PUBLIC_APP_URL;
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export const EVENT_CLICK_CONTAINER = 'EVENT_CLICK_CONTAINER';
 

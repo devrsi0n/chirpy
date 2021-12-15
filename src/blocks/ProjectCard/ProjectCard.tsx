@@ -105,7 +105,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             Theme
           </Button>
         </Link>
-        <IntegrateGuide pid={project.id} />
+        <IntegrateGuide domain={project.domain} />
       </div>
       {pages.length > 0 ? (
         <div>

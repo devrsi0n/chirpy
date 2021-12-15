@@ -6,7 +6,7 @@ describe('comment', () => {
   beforeEach(() => {
     render(
       <div>
-        <div {...{ [`data-${appName}-pid`]: 'testing-project-id' }} />
+        <div {...{ [`data-${appName}-domain`]: 'test.com' }} />
         <div {...{ [`data-${appName}-comment`]: 'true' }} />
       </div>,
     );
