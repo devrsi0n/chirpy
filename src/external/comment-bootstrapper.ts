@@ -1,4 +1,4 @@
-import { EVENT_CLICK_CONTAINER } from '../lib/constants';
+import { APP_NAME_LOWERCASE, EVENT_CLICK_CONTAINER } from '../lib/constants';
 import { ERR_UNMATCHED_DOMAIN } from '../server/common/error-code';
 import { ResponseError } from '../server/types/error';
 import { GetPagByUrl } from '../server/types/page';
@@ -7,26 +7,27 @@ import { GetPagByUrl } from '../server/types/page';
  * Widget entry for customers, this file should be minimal since this file is a external entry.
  */
 
-export const appName = process.env.NEXT_PUBLIC_APP_NAME.toLowerCase();
-const scriptQuery = `[data-${appName}-pid]`;
-const targetQuery = `[data-${appName}-comment]`;
+export const appName = APP_NAME_LOWERCASE;
+const scriptQuery = `[data-${appName}-domain]`;
+const targetQuery = `[data-${appName}-comment="true"]`;
 
 // User init a page by import a script
-// <script defer src="/widget/comment.js" data-${NEXT_PUBLIC_APP_NAME}-pid="xxxx"><script>
-// Render target: <div data-${NEXT_PUBLIC_APP_NAME}-comment></div>
+// <script defer src="/widget/comment.js" data-${appName}-domain="yourdomain.com"><script>
+// Render target: <div data-${appName}-comment="true"></div>
 export async function comment(): Promise<void> {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);
   if (!script) {
-    console.error(`Can't find the comment script`);
+    console.error(`Can't find the ${appName} script`);
     return Promise.reject();
   }
-  const pid = script.dataset[`${appName}Pid`];
-  if (!pid) {
-    console.error(`Please add the pid in your script`);
+  const domain = script.dataset[`${appName}Domain`];
+  if (!domain) {
+    console.error(`No domain specified`);
     return Promise.reject();
   }
+
   const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
     console.error(`Can't find the render target`);
@@ -34,7 +35,7 @@ export async function comment(): Promise<void> {
   }
   const { origin, pathname } = window.location;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/page?projectId=${pid}&url=${encodeURIComponent(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/page?domain=${domain}&url=${encodeURIComponent(
       origin + pathname,
     )}&title=${encodeURIComponent(window.document.title)}`,
   );

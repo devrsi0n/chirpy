@@ -20,7 +20,6 @@ import { SiteThemeProvider, WidgetThemeProvider } from '$/contexts/ThemeProvider
 import { APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 import { CommonPageProps } from '$/types/page.type';
-import { PlausibleEvent } from '$/types/plausible-events.type';
 
 const analyticsDomain = new URL(process.env.NEXT_PUBLIC_APP_URL).host;
 
@@ -76,18 +75,10 @@ type AppLayoutProps = CommonPageProps & {
 };
 
 function AppLayout(props: AppLayoutProps): JSX.Element {
-  const { isWidget, children, projectId, layoutProps, theme } = props;
+  const { isWidget, children, layoutProps, theme } = props;
   const ThemeWrapper = isWidget ? WidgetThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
-  const plausible = usePlausible();
-  React.useEffect(() => {
-    if (isWidget) {
-      plausible<PlausibleEvent>('WidgetComment', {
-        props: { projectId },
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isWidget, projectId]);
+
   return (
     <ThemeWrapper {...(isWidget && { theme })}>
       <LayoutWrapper {...layoutProps}>{children}</LayoutWrapper>

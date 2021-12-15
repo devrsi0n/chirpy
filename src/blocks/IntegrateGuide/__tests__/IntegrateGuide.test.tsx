@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 
 import { IntegrateGuide } from '../IntegrateGuide';
 
-const pid = 'project-id';
+const domain = 'test.com';
 
 describe('IntegrateGuide', () => {
   beforeEach(() => {
-    render(<IntegrateGuide pid={pid} />);
+    render(<IntegrateGuide domain={domain} />);
   });
 
   afterEach(() => {

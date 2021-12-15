@@ -44,9 +44,8 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       </section>
       <div {...{ [`data-${APP_NAME_LOWERCASE}-comment`]: 'true' }} tw="my-16" />
       <Script
-        {...{ [`data-${APP_NAME_LOWERCASE}-pid`]: process.env.NEXT_PUBLIC_COMMENT_PROJECT }}
+        {...{ [`data-${APP_NAME_LOWERCASE}-domain`]: process.env.NEXT_PUBLIC_COMMENT_DOMAIN }}
         src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`}
-        id={`${APP_NAME_LOWERCASE}-comment-widget-script`}
         strategy="afterInteractive"
       />
     </>

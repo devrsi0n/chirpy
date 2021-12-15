@@ -6,13 +6,13 @@ import { Code } from '$/components/Code';
 import { Dialog } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
-import { APP_DOMAIN, APP_NAME, APP_NAME_LOWERCASE } from '$/lib/constants';
+import { APP_URL, APP_NAME, APP_NAME_LOWERCASE } from '$/lib/constants';
 
 export type IntegrateGuideProps = {
-  pid: string;
+  domain: string;
 };
 
-export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
+export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
   const [showDialog, setShowDialog] = React.useState(false);
   return (
     <div>
@@ -50,13 +50,13 @@ export function IntegrateGuide({ pid }: IntegrateGuideProps): JSX.Element {
               project id to the HTML:
             </Text>
             <Code>
-              {`<script defer src="${APP_DOMAIN}/bootstrap/comment.js" data-${APP_NAME_LOWERCASE}-pid="${pid}"><script>`}
+              {`<script defer src="${APP_URL}/bootstrap/comment.js" data-${APP_NAME_LOWERCASE}-domain="${domain}"><script>`}
             </Code>
             <Text variant="secondary">
               Then, add the data-{APP_NAME_LOWERCASE}-comment attribute to any HTML element that
               should render the widget:
             </Text>
-            <Code>{`<div data-${APP_NAME_LOWERCASE}-comment>...</div>`}</Code>
+            <Code>{`<div data-${APP_NAME_LOWERCASE}-comment="true">...</div>`}</Code>
           </div>
         </div>
       </Dialog>
