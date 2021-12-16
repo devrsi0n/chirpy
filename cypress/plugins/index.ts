@@ -22,6 +22,10 @@ DotEnv.config({
   path: '.env.test',
 });
 
+DotEnv.config({
+  path: '.env.test.local',
+});
+
 export default function Plugins(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,
