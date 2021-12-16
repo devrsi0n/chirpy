@@ -26,8 +26,6 @@ DotEnv.config({
   path: '.env.test.local',
 });
 
-console.log({ HASH_KEY: process.env.HASH_KEY });
-
 export default function Plugins(
   on: Cypress.PluginEvents,
   config: Cypress.PluginConfigOptions,
