@@ -42,6 +42,7 @@ export function CommentTrees({
           {comments?.map((comment: CommentLeafType) => (
             <CommentTree
               key={comment.id}
+              depth={1}
               comment={comment}
               onClickLikeAction={onClickLikeAction}
               onSubmitReply={onSubmitReply}

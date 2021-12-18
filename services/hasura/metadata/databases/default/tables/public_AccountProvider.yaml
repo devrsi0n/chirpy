@@ -14,3 +14,11 @@ configuration:
     select_by_pk: accountProviderByPk
     update: updateAccountProviders
     update_by_pk: updateAccountProviderByPk
+array_relationships:
+- name: Accounts
+  using:
+    foreign_key_constraint_on:
+      column: provider
+      table:
+        name: Account
+        schema: public

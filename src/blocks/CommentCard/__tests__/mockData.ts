@@ -27,6 +27,5 @@ export function generateCommentCard(fill: number) {
         userId: fill,
       },
     ],
-    depth: 1,
   };
 }

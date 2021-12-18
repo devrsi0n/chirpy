@@ -2,9 +2,7 @@ table:
   name: Comment
   schema: public
 configuration:
-  custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+  custom_column_names: {}
   custom_root_fields:
     delete: deleteComments
     delete_by_pk: deleteCommentByPk
@@ -16,15 +14,15 @@ configuration:
     update: updateComments
     update_by_pk: updateCommentByPk
 object_relationships:
+- name: User
+  using:
+    foreign_key_constraint_on: userId
 - name: page
   using:
     foreign_key_constraint_on: pageId
 - name: parent
   using:
     foreign_key_constraint_on: parentId
-- name: user
-  using:
-    foreign_key_constraint_on: userId
 array_relationships:
 - name: likes
   using:
@@ -48,10 +46,8 @@ insert_permissions:
         _eq: X-Hasura-User-Id
     columns:
     - content
-    - depth
     - pageId
     - parentId
-    - userId
     set:
       userId: x-hasura-User-Id
   role: user
@@ -59,14 +55,16 @@ select_permissions:
 - permission:
     columns:
     - content
-    - created_at
+    - createdAt
     - deletedAt
-    - depth
     - id
     - pageId
     - parentId
     - userId
-    filter: {}
+    filter:
+      page:
+        projectId:
+          _in: X-Hasura-Editable-Project-Ids
   role: user
 update_permissions:
 - permission:

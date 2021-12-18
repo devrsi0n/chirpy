@@ -2,7 +2,7 @@ import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
 import Monitor from '@geist-ui/react-icons/monitor';
 import User from '@geist-ui/react-icons/user';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import * as React from 'react';
 import tw from 'twin.macro';
 

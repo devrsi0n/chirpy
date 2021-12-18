@@ -3,27 +3,26 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
-export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> };
+export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> };
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
   pageURL: Types.Scalars['String'];
 }>;
 
 
-export type CommentTreeSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }> };
+export type CommentTreeSubscription = { __typename?: 'subscription_root', comments: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> }>, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> }>, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> }> };
 
 export type CommentDetailsSubscriptionVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
 
-export type CommentDetailsSubscription = { __typename?: 'subscription_root', commentByPk?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> }>, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, depth: number, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> } | null | undefined, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> } | null | undefined, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> } | null | undefined, user: { __typename?: 'User', id: number, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: number }> } | null | undefined };
+export type CommentDetailsSubscription = { __typename?: 'subscription_root', commentByPk?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, replies: Array<{ __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> }>, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, parent?: { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> } | null | undefined, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> } | null | undefined, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> } | null | undefined, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> } | null | undefined };
 
 export type InsertOneCommentMutationVariables = Types.Exact<{
   content: Types.Scalars['jsonb'];
   parentId?: Types.InputMaybe<Types.Scalars['uuid']>;
   pageId: Types.Scalars['uuid'];
-  depth: Types.Scalars['Int'];
 }>;
 
 
@@ -44,7 +43,6 @@ export const CommentContentFragmentDoc = gql`
   deletedAt
   parentId
   pageId
-  depth
   user {
     id
     name
@@ -138,9 +136,9 @@ export function useCommentDetailsSubscription(baseOptions: Apollo.SubscriptionHo
 export type CommentDetailsSubscriptionHookResult = ReturnType<typeof useCommentDetailsSubscription>;
 export type CommentDetailsSubscriptionResult = Apollo.SubscriptionResult<CommentDetailsSubscription>;
 export const InsertOneCommentDocument = gql`
-    mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $depth: Int!) {
+    mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
   insertOneComment(
-    object: {content: $content, parentId: $parentId, pageId: $pageId, depth: $depth}
+    object: {content: $content, parentId: $parentId, pageId: $pageId}
   ) {
     id
   }
@@ -164,7 +162,6 @@ export type InsertOneCommentMutationFn = Apollo.MutationFunction<InsertOneCommen
  *      content: // value for 'content'
  *      parentId: // value for 'parentId'
  *      pageId: // value for 'pageId'
- *      depth: // value for 'depth'
  *   },
  * });
  */

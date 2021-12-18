@@ -1,0 +1,7 @@
+table:
+  name: VerificationToken
+  schema: public
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    select: verificationRequests

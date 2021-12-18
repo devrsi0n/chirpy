@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';

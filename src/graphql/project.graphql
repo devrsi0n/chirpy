@@ -1,5 +1,5 @@
-mutation insertOneProject($teamId: uuid, $userId: Int, $name: String!, $domain: String!) {
-  insertOneProject(object: { teamId: $teamId, userId: $userId, name: $name, domain: $domain }) {
+mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
+  insertOneProject(object: { teamId: $teamId, name: $name, domain: $domain }) {
     id
     name
     teamId

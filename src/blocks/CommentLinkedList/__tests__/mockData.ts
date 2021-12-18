@@ -2,17 +2,17 @@ import { CommentLinkedListProps } from '../CommentLinkedList';
 
 export function generateComment(): CommentLinkedListProps['comment'] {
   return {
-    parent: generateCommentFragment('parent-1', 1),
-    ...generateCommentFragment('1', 2),
-    replies: [generateCommentFragment('sub-1', 3)],
+    parent: generateCommentFragment('parent-1'),
+    ...generateCommentFragment('1'),
+    replies: [generateCommentFragment('sub-1')],
   };
 }
 let counter = 0;
-export function generateCommentFragment(fill: string, depth: number) {
+export function generateCommentFragment(fill: string) {
   return {
     id: `comment-id-${fill}`,
     user: {
-      id: counter++,
+      id: String(counter++),
       name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
@@ -34,10 +34,10 @@ export function generateCommentFragment(fill: string, depth: number) {
     likes: [
       {
         id: `like-id-${fill}`,
-        userId: counter++,
+        userId: String(counter++),
       },
     ],
-    depth,
+
     pageId: `page-id-${fill}`,
     parentId: `parent-id-${fill}`,
   };
@@ -53,21 +53,19 @@ export function getTextsOfComment(comment: CommentLinkedListProps['comment']) {
   };
 }
 
-function getTextOfContent(
-  content: {
-    type: 'doc',
-    content: [
-      {
-        type: 'paragraph',
-        content: [
-          {
-            type: 'text',
-            text: string,
-          },
-        ],
-      },
-    ],
-  },
-): string {
+function getTextOfContent(content: {
+  type: 'doc';
+  content: [
+    {
+      type: 'paragraph';
+      content: [
+        {
+          type: 'text';
+          text: string;
+        },
+      ];
+    },
+  ];
+}): string {
   return content.content[0].content[0].text;
 }

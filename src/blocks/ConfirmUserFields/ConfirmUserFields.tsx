@@ -32,9 +32,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   React.useEffect(() => {
     if (!isLoadingUser && data.id) {
       setFields({
-        email: data.email!,
-        name: data.name!,
-        username: data.username!,
+        email: data.email || '',
+        name: data.name || '',
+        username: data.username || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -106,7 +106,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           <span>
             Your username
             <Text as="small" variant="secondary" tw="block text-sm">
-              Used to mention people
+              Used to be mentioned by people
             </Text>
           </span>
         }

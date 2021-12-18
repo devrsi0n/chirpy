@@ -5,7 +5,6 @@ fragment commentContent on Comment {
   deletedAt
   parentId
   pageId
-  depth
   user {
     id
     name
@@ -52,9 +51,9 @@ subscription commentDetails($id: uuid!) {
   }
 }
 
-mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!, $depth: Int!) {
+mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
   insertOneComment(
-    object: { content: $content, parentId: $parentId, pageId: $pageId, depth: $depth }
+    object: { content: $content, parentId: $parentId, pageId: $pageId}
   ) {
     id
   }

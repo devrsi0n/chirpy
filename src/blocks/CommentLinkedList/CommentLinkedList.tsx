@@ -31,26 +31,30 @@ export function CommentLinkedList({
     }
     setAncestorComments(_parentComments);
   }, [comment]);
+  let depth = 0;
 
   return (
     <div tw="space-y-2">
       <ul tw="space-y-8">
-        {ancestorComments.map((_comment) => (
-          <ParentBranch key={_comment.id}>
-            <CommentCard
-              preventDetailsPage={_comment.id === comment.id}
-              commentId={_comment.id}
-              content={_comment.content as RTEValue}
-              author={_comment.user}
-              likes={_comment.likes}
-              depth={_comment.depth}
-              createdAt={_comment.createdAt}
-              deletedAt={_comment.deletedAt}
-              onSubmitReply={onSubmitReply}
-              onClickLikeAction={onClickLikeAction}
-            />
-          </ParentBranch>
-        ))}
+        {ancestorComments.map((_comment) => {
+          depth += 1;
+          return (
+            <ParentBranch key={_comment.id}>
+              <CommentCard
+                preventDetailsPage={_comment.id === comment.id}
+                commentId={_comment.id}
+                content={_comment.content as RTEValue}
+                author={_comment.user}
+                likes={_comment.likes}
+                depth={depth}
+                createdAt={_comment.createdAt}
+                deletedAt={_comment.deletedAt}
+                onSubmitReply={onSubmitReply}
+                onClickLikeAction={onClickLikeAction}
+              />
+            </ParentBranch>
+          );
+        })}
       </ul>
       <div tw="flex flex-col items-end">
         <ul
@@ -61,14 +65,14 @@ export function CommentLinkedList({
             tw`space-y-2`,
           ]}
         >
-          {comment.replies?.map((reply: $TsFixMe) => (
+          {comment.replies?.map((reply) => (
             <CommentBranch key={reply.id}>
               <CommentCard
                 commentId={reply.id}
                 content={reply.content}
                 author={reply.user}
                 likes={reply.likes}
-                depth={reply.depth}
+                depth={depth + 1}
                 createdAt={reply.createdAt}
                 deletedAt={reply.deletedAt}
                 onClickLikeAction={onClickLikeAction}

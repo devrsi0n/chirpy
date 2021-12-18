@@ -2,9 +2,7 @@ table:
   name: Like
   schema: public
 configuration:
-  custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+  custom_column_names: {}
   custom_root_fields:
     delete: deleteLikes
     delete_by_pk: deleteLikeByPk
@@ -16,20 +14,34 @@ configuration:
     update: updateLikes
     update_by_pk: updateLikeByPk
 object_relationships:
+- name: User
+  using:
+    foreign_key_constraint_on: userId
 - name: comment
   using:
     foreign_key_constraint_on: commentId
-- name: user
-  using:
-    foreign_key_constraint_on: userId
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      userId:
+        _eq: X-Hasura-User-Id
+    columns:
+    - commentId
+    set:
+      userId: x-hasura-User-Id
+  role: user
 select_permissions:
 - permission:
     columns:
-    - id
-    - created_at
-    - updated_at
     - commentId
-    - compoundId
+    - id
     - userId
     filter: {}
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      userId:
+        _eq: X-Hasura-User-Id
   role: user

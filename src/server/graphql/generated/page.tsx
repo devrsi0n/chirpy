@@ -7,7 +7,7 @@ export type PageByUrlQueryVariables = Types.Exact<{
 }>;
 
 
-export type PageByUrlQuery = { __typename?: 'query_root', pages: Array<{ __typename?: 'Page', id: string, url: string, title: string, project: { __typename?: 'Project', domain: string } }> };
+export type PageByUrlQuery = { __typename?: 'query_root', pages: Array<{ __typename?: 'Page', id: string, url: string, title?: string | null | undefined, project: { __typename?: 'Project', domain: string } }> };
 
 export type InsertOnePageMutationVariables = Types.Exact<{
   projectId: Types.Scalars['uuid'];
@@ -16,7 +16,7 @@ export type InsertOnePageMutationVariables = Types.Exact<{
 }>;
 
 
-export type InsertOnePageMutation = { __typename?: 'mutation_root', insertOnePage?: { __typename?: 'Page', id: string, url: string, title: string, project: { __typename?: 'Project', domain: string } } | null | undefined };
+export type InsertOnePageMutation = { __typename?: 'mutation_root', insertOnePage?: { __typename?: 'Page', id: string, url: string, title?: string | null | undefined, project: { __typename?: 'Project', domain: string } } | null | undefined };
 
 export type UpdatePagesMutationVariables = Types.Exact<{
   projectId: Types.Scalars['uuid'];

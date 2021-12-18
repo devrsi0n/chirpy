@@ -27,7 +27,7 @@ import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 export type { ClickLikeActionHandler } from '../LikeAction';
 
 export type Author = {
-  id: number;
+  id: string;
   name?: string | null;
   avatar?: string | null;
 };
@@ -65,7 +65,7 @@ export function CommentCard({
     deleteAComment(commentId);
   };
   const handleSubmitReply = async (replyContent: RTEValue) => {
-    await onSubmitReply(replyContent, commentId, depth);
+    await onSubmitReply(replyContent, commentId);
     setShowReplyEditor(false);
     showToast({
       type: 'success',

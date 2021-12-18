@@ -2,9 +2,7 @@ table:
   name: Team
   schema: public
 configuration:
-  custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+  custom_column_names: {}
   custom_root_fields:
     delete: deleteTeams
     delete_by_pk: deleteTeamByPk
@@ -16,14 +14,14 @@ configuration:
     update: updateTeams
     update_by_pk: updateTeamByPk
 array_relationships:
-- name: members
+- name: Members
   using:
     foreign_key_constraint_on:
       column: teamId
       table:
         name: Member
         schema: public
-- name: projects
+- name: Projects
   using:
     foreign_key_constraint_on:
       column: teamId
@@ -33,13 +31,12 @@ array_relationships:
 select_permissions:
 - permission:
     columns:
+    - createdAt
     - id
-    - created_at
-    - updated_at
     - name
     - uid
     filter:
-      members:
+      Members:
         userId:
           _eq: X-Hasura-User-Id
   role: user

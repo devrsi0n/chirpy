@@ -1,4 +1,4 @@
-node_modules
+**/node_modules/**
 jest
 generated
 cypress-examples
@@ -7,4 +7,4 @@ scripts
 .cache
 src/blocks/Analytics/
 
-/*.js
+*.js

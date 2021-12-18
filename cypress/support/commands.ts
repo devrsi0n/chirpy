@@ -28,7 +28,7 @@ import { Session } from 'next-auth';
 
 import { jwtBody } from '../fixtures/user';
 
-Cypress.Commands.add('login', () => {
+Cypress.Commands.add('login' as any, () => {
   cy.intercept('/api/auth/session', (req) => {
     req.continue((res) => {
       res.send({

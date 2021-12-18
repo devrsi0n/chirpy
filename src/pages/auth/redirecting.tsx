@@ -1,4 +1,4 @@
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -10,7 +10,8 @@ import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
-  const [session] = useSession();
+  const { data: session } = useSession();
+
   const { data, loading } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {

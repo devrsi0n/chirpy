@@ -2,9 +2,7 @@ table:
   name: Page
   schema: public
 configuration:
-  custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+  custom_column_names: {}
   custom_root_fields:
     delete: deletePages
     delete_by_pk: deletePageByPk
@@ -31,8 +29,8 @@ select_permissions:
 - permission:
     columns:
     - id
-    - created_at
-    - updated_at
+    - createdAt
+    - updatedAt
     - url
     - title
     - projectId

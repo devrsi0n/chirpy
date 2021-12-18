@@ -5,13 +5,12 @@ import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
 export type InsertOneProjectMutationVariables = Types.Exact<{
   teamId?: Types.InputMaybe<Types.Scalars['uuid']>;
-  userId?: Types.InputMaybe<Types.Scalars['Int']>;
   name: Types.Scalars['String'];
   domain: Types.Scalars['String'];
 }>;
 
 
-export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: { __typename?: 'Project', id: string, name: string, teamId?: string | null | undefined, userId?: number | null | undefined } | null | undefined };
+export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: { __typename?: 'Project', id: string, name: string, teamId?: string | null | undefined, userId?: string | null | undefined } | null | undefined };
 
 export type DeleteProjectByPkMutationVariables = Types.Exact<{
   id?: Types.InputMaybe<Types.Scalars['uuid']>;
@@ -30,10 +29,8 @@ export type UpdateThemeMutation = { __typename?: 'mutation_root', updateProjectB
 
 
 export const InsertOneProjectDocument = gql`
-    mutation insertOneProject($teamId: uuid, $userId: Int, $name: String!, $domain: String!) {
-  insertOneProject(
-    object: {teamId: $teamId, userId: $userId, name: $name, domain: $domain}
-  ) {
+    mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
+  insertOneProject(object: {teamId: $teamId, name: $name, domain: $domain}) {
     id
     name
     teamId
@@ -57,7 +54,6 @@ export type InsertOneProjectMutationFn = Apollo.MutationFunction<InsertOneProjec
  * const [insertOneProjectMutation, { data, loading, error }] = useInsertOneProjectMutation({
  *   variables: {
  *      teamId: // value for 'teamId'
- *      userId: // value for 'userId'
  *      name: // value for 'name'
  *      domain: // value for 'domain'
  *   },

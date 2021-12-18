@@ -14,3 +14,11 @@ configuration:
     select_by_pk: userTypeByPk
     update: updateUserTypes
     update_by_pk: updateUserTypeByPk
+array_relationships:
+- name: Users
+  using:
+    foreign_key_constraint_on:
+      column: type
+      table:
+        name: User
+        schema: public

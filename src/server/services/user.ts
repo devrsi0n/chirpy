@@ -4,20 +4,20 @@ import { UpdateUserByPkDocument } from '$/server/graphql/generated/user';
 
 import { getAdminApollo } from '../common/admin-apollo';
 
-export type MissingFields = {
-  website: string;
-  bio: string;
-  twitterUserName: string;
-};
-
 export async function fillUserFields(
   user: User,
-  profile: Profile,
-  provider: Provider,
-): Promise<MissingFields> {
-  const client = getAdminApollo();
+  profile?: GitHubProfile,
+  provider?: Provider,
+): Promise<void> {
+  if ((user.username && user.bio && user.website && user.twitterUserName) || !provider) {
+    return;
+  }
   try {
-    const fields = translatorMap[provider](profile);
+    const fields = translatorMap[provider]?.(profile);
+    if (!fields) {
+      return;
+    }
+    const client = getAdminApollo();
     await client.mutate({
       mutation: UpdateUserByPkDocument,
       variables: {
@@ -25,14 +25,10 @@ export async function fillUserFields(
         ...fields,
       },
     });
-    return fields;
+    return;
   } catch (error) {
     console.log('fill user fields failed', error);
-    return {
-      website: '',
-      bio: '',
-      twitterUserName: '',
-    };
+    return;
   }
 }
 
@@ -40,8 +36,12 @@ const translatorMap: Record<Provider, typeof translateGithubProfile> = {
   github: translateGithubProfile,
 };
 
-function translateGithubProfile(profile: Profile) {
+function translateGithubProfile(profile?: GitHubProfile) {
+  if (!profile || (!profile.login && !profile.bio && !profile.blog && !profile.twitter_username)) {
+    return null;
+  }
   return {
+    username: profile.login,
     website: profile.blog,
     bio: profile.bio,
     twitterUserName: profile.twitter_username,
@@ -50,15 +50,18 @@ function translateGithubProfile(profile: Profile) {
 
 type User = {
   name: string;
+  username: string;
   image: string;
   email: string | null;
   emailVerified: boolean | null;
-  id: number;
-  createdAt: string;
-  updatedAt: string;
+  id: string;
+  bio: string;
+  website: string;
+  twitterUserName: string;
 };
 
-interface Profile extends AuthProfile {
+interface GitHubProfile extends AuthProfile {
+  login: string;
   blog: string;
   bio: string;
   twitter_username: string;

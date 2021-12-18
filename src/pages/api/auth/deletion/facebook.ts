@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
-import { DeleteFacebookUserDocument } from '$/server/graphql/generated/user';
+import { DeleteUserDocument } from '$/server/graphql/generated/user';
 
 const handler = getApiHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -18,9 +18,9 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const { user_id: userId } = decodePayload(payload) as DecodedPayload;
   const client = getAdminApollo();
   await client.mutate({
-    mutation: DeleteFacebookUserDocument,
+    mutation: DeleteUserDocument,
     variables: {
-      id: +userId,
+      id: userId,
     },
   });
   const confirmationCode = getConfirmationCode();

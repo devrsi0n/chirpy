@@ -1,6 +1,6 @@
 import Loader from '@geist-ui/react-icons/loader';
 import Lock from '@geist-ui/react-icons/lock';
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
 import 'twin.macro';
 

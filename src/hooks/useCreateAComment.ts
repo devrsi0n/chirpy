@@ -10,7 +10,7 @@ export type useCreateACommentOptions = {
   pageId: string;
 };
 
-export type SubmitHandler = (reply: RTEValue, commentId?: string, depth?: number) => Promise<void>;
+export type SubmitHandler = (reply: RTEValue, commentId?: string) => Promise<void>;
 
 export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitHandler {
   const { isSignIn } = useCurrentUser();
@@ -18,11 +18,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
 
   const { showToast } = useToast();
 
-  const handleSubmitReply: SubmitHandler = async (
-    reply: RTEValue,
-    commentId?: string,
-    depth?: number,
-  ) => {
+  const handleSubmitReply: SubmitHandler = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
       console.error('Navigate to login page');
       return Promise.reject();
@@ -32,7 +28,6 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
         parentId: commentId,
         content: reply as JsonArray,
         pageId,
-        depth: depth ? depth + 1 : 1,
       },
     });
     if (!data?.insertOneComment?.id) {
