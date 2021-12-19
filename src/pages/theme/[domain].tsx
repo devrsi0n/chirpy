@@ -231,7 +231,6 @@ const comments = [
     createdAt: '2021-04-17T01:43:10.581584+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-    depth: 1,
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
@@ -260,7 +259,6 @@ const comments = [
         createdAt: '2021-04-17T02:31:51.05373+00:00',
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
         pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-        depth: 2,
         user: {
           __typename: 'User',
           id: '634da1be-cc04-4719-908e-c642de76e292',
@@ -292,7 +290,6 @@ const comments = [
     createdAt: '2021-04-17T02:51:30.517834+00:00',
     parentId: null,
     pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
-    depth: 1,
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',

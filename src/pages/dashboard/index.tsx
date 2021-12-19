@@ -67,13 +67,12 @@ export default function Dashboard(): JSX.Element {
             // TODO: Team id?
             name: fields.name,
             domain: fields.domain,
-            userId: id,
           },
         });
         setShowDialog(false);
         fetchProjects();
       },
-      [insertProjectMutation, id, fetchProjects],
+      [insertProjectMutation, fetchProjects],
     ),
   );
 

@@ -1,5 +1,5 @@
-mutation insertOneLike($compoundId: String!, $commentId: uuid!) {
-  insertOneLike(object: { commentId: $commentId, compoundId: $compoundId }) {
+mutation insertOneLike($commentId: uuid!) {
+  insertOneLike(object: { commentId: $commentId }) {
     id
   }
 }

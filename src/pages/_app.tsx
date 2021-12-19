@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 import { LazyMotion } from 'framer-motion';
-import { Provider as AuthProvider, signIn, useSession } from 'next-auth/client';
+import { SessionProvider, signIn, useSession } from 'next-auth/react';
 import PlausibleProvider, { usePlausible } from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -23,7 +23,7 @@ import { CommonPageProps } from '$/types/page.type';
 
 const analyticsDomain = new URL(process.env.NEXT_PUBLIC_APP_URL).host;
 
-function App({ Component, pageProps }: AppProps): JSX.Element {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
   }, []);
@@ -32,12 +32,10 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
       <PlausibleProvider domain={analyticsDomain}>
-        <AuthProvider
-          session={pageProps.session}
-          options={{
-            // Refresh hasura token before it expires
-            clientMaxAge: HASURA_TOKEN_MAX_AGE - 5 * 60,
-          }}
+        <SessionProvider
+          session={session}
+          // Refresh hasura token before it expires
+          refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
         >
           {/* Tailwindcss global styles */}
           <GlobalStyles />
@@ -62,7 +60,7 @@ function App({ Component, pageProps }: AppProps): JSX.Element {
               </LazyMotion>
             </SiteThemeProvider>
           </NextThemesProvider>
-        </AuthProvider>
+        </SessionProvider>
       </PlausibleProvider>
     </ErrorBoundary>
   );
@@ -87,7 +85,8 @@ function AppLayout(props: AppLayoutProps): JSX.Element {
 }
 
 function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element {
-  const [, loading] = useSession();
+  const { status } = useSession();
+  const loading = status === 'loading';
   const isMounted = useMountedState();
 
   if (loading && !isMounted) {
@@ -97,7 +96,8 @@ function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element 
 }
 
 function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
   const isUser = !!session?.user;
   React.useEffect(() => {
     if (!loading && !isUser) {

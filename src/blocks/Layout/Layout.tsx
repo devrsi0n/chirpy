@@ -29,7 +29,7 @@ export function Layout({
   return (
     <LayoutWrapper
       css={[
-        enableBgGradient ? tw`before:(absolute inset-0 z-[-1] content-[''])` : tw`bg-bg`,
+        enableBgGradient && tw`before:(absolute inset-0 z-[-1] content-[''])`,
         {
           ...(enableBgGradient && {
             '::before': {

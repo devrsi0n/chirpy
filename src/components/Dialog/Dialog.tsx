@@ -86,7 +86,10 @@ export function Dialog({
                       </IconButton>
                     )}
                     <div tw="flex flex-row justify-between items-start">
-                      <HeadlessDialog.Title as="h2" tw="text-2xl font-bold leading-none">
+                      <HeadlessDialog.Title
+                        as="h2"
+                        tw="text-2xl font-bold leading-none text-gray-1200"
+                      >
                         {title}
                       </HeadlessDialog.Title>
                     </div>

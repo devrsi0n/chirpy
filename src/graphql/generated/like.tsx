@@ -4,7 +4,6 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
 export type InsertOneLikeMutationVariables = Types.Exact<{
-  compoundId: Types.Scalars['String'];
   commentId: Types.Scalars['uuid'];
 }>;
 
@@ -20,8 +19,8 @@ export type DeleteLikeByPkMutation = { __typename?: 'mutation_root', deleteLikeB
 
 
 export const InsertOneLikeDocument = gql`
-    mutation insertOneLike($compoundId: String!, $commentId: uuid!) {
-  insertOneLike(object: {commentId: $commentId, compoundId: $compoundId}) {
+    mutation insertOneLike($commentId: uuid!) {
+  insertOneLike(object: {commentId: $commentId}) {
     id
   }
 }
@@ -41,7 +40,6 @@ export type InsertOneLikeMutationFn = Apollo.MutationFunction<InsertOneLikeMutat
  * @example
  * const [insertOneLikeMutation, { data, loading, error }] = useInsertOneLikeMutation({
  *   variables: {
- *      compoundId: // value for 'compoundId'
  *      commentId: // value for 'commentId'
  *   },
  * });

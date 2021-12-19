@@ -14,14 +14,6 @@ configuration:
     update: updateSessions
     update_by_pk: updateSessionByPk
 object_relationships:
-- name: project
+- name: user
   using:
-    foreign_key_constraint_on: projectId
-array_relationships:
-- name: events
-  using:
-    foreign_key_constraint_on:
-      column: sessionId
-      table:
-        name: Event
-        schema: public
+    foreign_key_constraint_on: userId

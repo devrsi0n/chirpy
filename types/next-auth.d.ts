@@ -7,7 +7,7 @@ declare module 'next-auth' {
   interface Session {
     hasuraToken: string;
     user: {
-      id: number;
+      id: string;
       name: string;
       email: string;
       image: string;

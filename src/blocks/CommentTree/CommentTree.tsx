@@ -10,20 +10,26 @@ import { RTEValue } from '../RichTextEditor';
 
 export type CommentProps = {
   comment: CommentLeafType;
+  depth: number;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**
  * Render a comment with it's replies, like a tree.
  */
-function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps): JSX.Element {
+function CommentTree({
+  comment,
+  depth,
+  onClickLikeAction,
+  onSubmitReply,
+}: CommentProps): JSX.Element {
   return (
-    <CommentBranch hiddenBranch={comment.depth === 1}>
+    <CommentBranch hiddenBranch={depth === 1}>
       <CommentCard
         commentId={comment.id}
         author={comment.user}
         content={comment.content as RTEValue}
         likes={comment.likes}
-        depth={comment.depth}
+        depth={depth}
         createdAt={comment.createdAt}
         deletedAt={comment.deletedAt}
         onClickLikeAction={onClickLikeAction}
@@ -47,6 +53,7 @@ function CommentTree({ comment, onClickLikeAction, onSubmitReply }: CommentProps
                 <CommentTree
                   key={reply.id}
                   comment={reply}
+                  depth={depth + 1}
                   onClickLikeAction={onClickLikeAction}
                   onSubmitReply={onSubmitReply}
                 />

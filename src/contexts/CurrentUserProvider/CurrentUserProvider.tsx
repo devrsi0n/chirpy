@@ -1,5 +1,5 @@
 import { QueryHookOptions } from '@apollo/client';
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import {
@@ -18,7 +18,8 @@ export function CurrentUserProvider({
   apolloBaseOptions,
   children,
 }: CurrentUserProviderProps): JSX.Element {
-  const [session, sessionIsLoading] = useSession();
+  const { data: session, status } = useSession();
+  const sessionIsLoading = status === 'loading';
   const [fetchUser, { data, ...restProps }] = useCurrentUserLazyQuery({
     ...apolloBaseOptions,
     fetchPolicy: 'cache-and-network',
@@ -26,10 +27,10 @@ export function CurrentUserProvider({
   });
 
   const handleFetchUser = React.useCallback(() => {
-    if (typeof session?.user?.id !== 'number') {
+    if (typeof session?.user?.id !== 'string') {
       return;
     }
-    return fetchUser({ variables: { id: session.user.id || -1 } });
+    return fetchUser({ variables: { id: session.user.id } });
   }, [fetchUser, session?.user?.id]);
 
   React.useEffect(() => {
@@ -41,6 +42,7 @@ export function CurrentUserProvider({
       ...restProps,
       loading: sessionIsLoading || restProps.loading,
       data: {
+        ...session?.user,
         ...data?.userByPk,
         editableProjectIds: session?.user.editableProjectIds || [],
       },

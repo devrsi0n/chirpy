@@ -7,24 +7,9 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
-// This function is called when a project is opened or re-opened (e.g. due to
-// the project's config changing)
-import * as DotEnv from 'dotenv';
-
 import { createAuthToken, createToken } from '../../src/server/utilities/create-token';
-import { testUser, jwtBody } from '../fixtures/user';
-
-DotEnv.config({
-  path: '.env',
-});
-
-DotEnv.config({
-  path: '.env.test',
-});
-
-DotEnv.config({
-  path: '.env.test.local',
-});
+import '../fixtures/load-env';
+import { jwtBody, testUser } from '../fixtures/user';
 
 export default function Plugins(
   on: Cypress.PluginEvents,
@@ -36,7 +21,7 @@ export default function Plugins(
   const maxAge = 24 * 60 * 60;
   config.env.HASURA_TOKEN = createAuthToken(
     {
-      userId: String(testUser.id),
+      userId: testUser.id,
       name: testUser.name,
       email: testUser.email,
     },
@@ -53,6 +38,9 @@ export default function Plugins(
     },
   );
   config.env.SESSION_TOKEN = createToken(jwtBody, { maxAge });
+  config.env.TEST_USER_ID = process.env.TEST_USER_ID;
+  config.env.NEXT_PUBLIC_APP_URL = process.env.NEXT_PUBLIC_APP_URL;
+  config.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN;
 
   return config;
 }

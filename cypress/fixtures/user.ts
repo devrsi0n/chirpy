@@ -1,8 +1,9 @@
 export const testUser = {
-  id: +(process.env.TEST_USER_ID || 8),
+  // Used in node and browser contexts
+  id: process.env.TEST_USER_ID || Cypress.env('TEST_USER_ID'),
   name: 'CypressTest',
   email: 'cypress.test@localhost',
-  image: 'https://www.cypress.io/icons/icon-72x72.png',
+  avatar: 'https://www.cypress.io/icons/icon-72x72.png',
 };
 
 export const jwtBody = {

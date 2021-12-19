@@ -1,0 +1,58 @@
+mutation createAccount(
+  $userId: uuid!
+  $provider: String
+  $accessToken: String
+  $expiresAt: timestamptz
+  $idToken: String
+  $oauthToken: String
+  $oauthTokenSecret: String
+  $providerAccountId: String
+  $refreshToken: String
+  $scope: String
+  $sessionState: String
+  $tokenType: String
+  $type: String
+) {
+  insertOneAccount(
+    object: {
+      userId: $userId
+      provider: $provider
+      accessToken: $accessToken
+      expiresAt: $expiresAt
+      idToken: $idToken
+      oauthToken: $oauthToken
+      oauthTokenSecret: $oauthTokenSecret
+      providerAccountId: $providerAccountId
+      refreshToken: $refreshToken
+      scope: $scope
+      sessionState: $sessionState
+      tokenType: $tokenType
+      type: $type
+    }
+  ) {
+    id
+    userId
+    provider
+    accessToken
+    expiresAt
+    idToken
+    oauthToken
+    oauthTokenSecret
+    providerAccountId
+    refreshToken
+    scope
+    sessionState
+    tokenType
+    type
+  }
+}
+
+mutation deleteAccount($provider: String!, $providerAccountId: String!) {
+  deleteAccounts(
+    where: { provider: { _eq: $provider }, providerAccountId: { _eq: $providerAccountId } }
+  ) {
+    returning {
+      id
+    }
+  }
+}

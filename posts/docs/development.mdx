@@ -20,11 +20,15 @@ git clone https://github.com/devrsi0n/chirpy.git
 
 ## Start the data server
 
-Hasura is used as the data server. To start the data server, run the following command:
+Hasura is used as the data server.
+
+First, you need to setup a local docker config file. Copy `services/hasura/docker-compose.yaml` to `services/hasura/docker-compose.local.yaml`. Run `openssl rand -base64 172 | tr -d '\n'` to generate a random token. Copy the token and fill in the `HASURA_GRAPHQL_JWT_SECRET` variable in `services/hasura/docker-compose.local.yaml`.
+
+Then, start a local hasura server, run the following command:
 
 ```bash
 cd <project-root>/services/hasura
-docker-compose up -d
+docker-compose -f docker-compose.local.yaml up -d
 ```
 
 ### Setup the database and schema

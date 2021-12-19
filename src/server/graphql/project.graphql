@@ -19,7 +19,7 @@ query projectByPk($id: uuid!) {
   }
 }
 
-query userProjects($userId: Int!) {
+query userProjects($userId: uuid!) {
   projects(where: { userId: { _eq: $userId } }) {
     id
   }

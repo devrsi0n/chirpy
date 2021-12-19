@@ -4,14 +4,14 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions =  {}
 export type CurrentUserQueryVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
+  id: Types.Scalars['uuid'];
 }>;
 
 
-export type CurrentUserQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: number, email?: string | null | undefined, username?: string | null | undefined, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, website?: string | null | undefined, twitterUserName?: string | null | undefined } | null | undefined };
+export type CurrentUserQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: string, email?: string | null | undefined, username?: string | null | undefined, name?: string | null | undefined, avatar?: string | null | undefined, bio?: string | null | undefined, website?: string | null | undefined, twitterUserName?: string | null | undefined } | null | undefined };
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
+  id: Types.Scalars['uuid'];
   bio?: Types.InputMaybe<Types.Scalars['String']>;
   name: Types.Scalars['String'];
   twitterUserName?: Types.InputMaybe<Types.Scalars['String']>;
@@ -19,28 +19,28 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
 }>;
 
 
-export type UpdateUserByPkMutation = { __typename?: 'mutation_root', updateUserByPk?: { __typename?: 'User', id: number } | null | undefined };
+export type UpdateUserByPkMutation = { __typename?: 'mutation_root', updateUserByPk?: { __typename?: 'User', id: string } | null | undefined };
 
 export type UpdateUserFieldsMutationVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
+  id: Types.Scalars['uuid'];
   email: Types.Scalars['String'];
   name: Types.Scalars['String'];
   username: Types.Scalars['String'];
 }>;
 
 
-export type UpdateUserFieldsMutation = { __typename?: 'mutation_root', updateUserByPk?: { __typename?: 'User', id: number } | null | undefined };
+export type UpdateUserFieldsMutation = { __typename?: 'mutation_root', updateUserByPk?: { __typename?: 'User', id: string } | null | undefined };
 
 export type UserDashboardProjectsQueryVariables = Types.Exact<{
-  id: Types.Scalars['Int'];
+  id: Types.Scalars['uuid'];
 }>;
 
 
-export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: number, projects: Array<{ __typename?: 'Project', id: string, name: string, domain: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title: string, url: string }> }> } | null | undefined };
+export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: string, projects: Array<{ __typename?: 'Project', id: string, name: string, domain: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title?: string | null | undefined, url: string }> }> } | null | undefined };
 
 
 export const CurrentUserDocument = gql`
-    query currentUser($id: Int!) {
+    query currentUser($id: uuid!) {
   userByPk(id: $id) {
     id
     email
@@ -82,7 +82,7 @@ export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const UpdateUserByPkDocument = gql`
-    mutation updateUserByPk($id: Int!, $bio: String, $name: String!, $twitterUserName: String, $website: String) {
+    mutation updateUserByPk($id: uuid!, $bio: String, $name: String!, $twitterUserName: String, $website: String) {
   updateUserByPk(
     pk_columns: {id: $id}
     _set: {bio: $bio, name: $name, twitterUserName: $twitterUserName, website: $website}
@@ -122,7 +122,7 @@ export type UpdateUserByPkMutationHookResult = ReturnType<typeof useUpdateUserBy
 export type UpdateUserByPkMutationResult = Apollo.MutationResult<UpdateUserByPkMutation>;
 export type UpdateUserByPkMutationOptions = Apollo.BaseMutationOptions<UpdateUserByPkMutation, UpdateUserByPkMutationVariables>;
 export const UpdateUserFieldsDocument = gql`
-    mutation updateUserFields($id: Int!, $email: String!, $name: String!, $username: String!) {
+    mutation updateUserFields($id: uuid!, $email: String!, $name: String!, $username: String!) {
   updateUserByPk(
     pk_columns: {id: $id}
     _set: {email: $email, name: $name, username: $username}
@@ -161,7 +161,7 @@ export type UpdateUserFieldsMutationHookResult = ReturnType<typeof useUpdateUser
 export type UpdateUserFieldsMutationResult = Apollo.MutationResult<UpdateUserFieldsMutation>;
 export type UpdateUserFieldsMutationOptions = Apollo.BaseMutationOptions<UpdateUserFieldsMutation, UpdateUserFieldsMutationVariables>;
 export const UserDashboardProjectsDocument = gql`
-    query userDashboardProjects($id: Int!) {
+    query userDashboardProjects($id: uuid!) {
   userByPk(id: $id) {
     id
     projects {

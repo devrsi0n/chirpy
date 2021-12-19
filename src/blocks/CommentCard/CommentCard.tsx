@@ -8,7 +8,7 @@ import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
 import { ActionButton, Button } from '$/components/Button';
-import { DropDown, DropDownItem, DropDownItemPadding } from '$/components/DropDown';
+import { DropDown, DropDownItemPadding } from '$/components/DropDown';
 import { Link } from '$/components/Link';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
@@ -27,7 +27,7 @@ import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 export type { ClickLikeActionHandler } from '../LikeAction';
 
 export type Author = {
-  id: number;
+  id: string;
   name?: string | null;
   avatar?: string | null;
 };
@@ -65,12 +65,16 @@ export function CommentCard({
     deleteAComment(commentId);
   };
   const handleSubmitReply = async (replyContent: RTEValue) => {
-    await onSubmitReply(replyContent, commentId, depth);
-    setShowReplyEditor(false);
-    showToast({
-      type: 'success',
-      title: 'Repied successfully!',
-    });
+    try {
+      await onSubmitReply(replyContent, commentId);
+      setShowReplyEditor(false);
+    } catch (error) {
+      showToast({
+        type: 'error',
+        title: 'Replied failed, try again later',
+      });
+      console.error('Replied failed', error);
+    }
   };
   const handleDimissRTE = () => {
     setShowReplyEditor(false);

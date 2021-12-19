@@ -1,4 +1,4 @@
-query currentUser($id: Int!) {
+query currentUser($id: uuid!) {
   userByPk(id: $id) {
     id
     email
@@ -12,7 +12,7 @@ query currentUser($id: Int!) {
 }
 
 mutation updateUserByPk(
-  $id: Int!
+  $id: uuid!
   $bio: String
   $name: String!
   $twitterUserName: String
@@ -26,7 +26,7 @@ mutation updateUserByPk(
   }
 }
 
-mutation updateUserFields($id: Int!, $email: String!, $name: String!, $username: String!) {
+mutation updateUserFields($id: uuid!, $email: String!, $name: String!, $username: String!) {
   updateUserByPk(
     pk_columns: { id: $id }
     _set: { email: $email, name: $name, username: $username }
@@ -35,7 +35,7 @@ mutation updateUserFields($id: Int!, $email: String!, $name: String!, $username:
   }
 }
 
-query userDashboardProjects($id: Int!) {
+query userDashboardProjects($id: uuid!) {
   userByPk(id: $id) {
     id
     projects {

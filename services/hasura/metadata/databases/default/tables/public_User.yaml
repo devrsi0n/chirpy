@@ -3,8 +3,7 @@ table:
   schema: public
 configuration:
   custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+    image: avatar
   custom_root_fields:
     delete: deleteUsers
     delete_by_pk: deleteUserByPk
@@ -15,6 +14,10 @@ configuration:
     select_by_pk: userByPk
     update: updateUsers
     update_by_pk: updateUserByPk
+object_relationships:
+- name: userType
+  using:
+    foreign_key_constraint_on: type
 array_relationships:
 - name: accounts
   using:
@@ -51,34 +54,46 @@ array_relationships:
       table:
         name: Project
         schema: public
+- name: sessions
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Session
+        schema: public
 select_permissions:
 - permission:
     columns:
-    - avatar
     - bio
-    - created_at
-    - displayName
     - email
-    - familyName
-    - givenName
-    - id
-    - middleName
+    - image
+    - name
     - twitterUserName
     - type
-    - updated_at
     - username
     - website
-    filter: {}
+    - emailVerified
+    - createdAt
+    - updatedAt
+    - id
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
   role: user
 update_permissions:
 - permission:
     check: null
     columns:
     - bio
-    - displayName
+    - email
+    - image
+    - name
     - twitterUserName
+    - username
     - website
     filter:
       id:
         _eq: X-Hasura-User-Id
+    set:
+      id: x-hasura-User-Id
   role: user

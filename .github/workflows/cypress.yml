@@ -17,5 +17,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HASH_KEY: ${{ secrets.HASH_KEY }}
+          TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
+          HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
           # DEBUG: 'cypress:*'
           # DEBUG_DEPTH: 9

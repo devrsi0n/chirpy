@@ -2,9 +2,7 @@ table:
   name: Member
   schema: public
 configuration:
-  custom_column_names:
-    created_at: createdAt
-    updated_at: updatedAt
+  custom_column_names: {}
   custom_root_fields:
     delete: deleteMembers
     delete_by_pk: deleteMemberByPk
@@ -16,18 +14,21 @@ configuration:
     update: updateMembers
     update_by_pk: updateMemberByPk
 object_relationships:
-- name: team
+- name: Role
+  using:
+    foreign_key_constraint_on: role
+- name: Team
   using:
     foreign_key_constraint_on: teamId
-- name: user
+- name: User
   using:
     foreign_key_constraint_on: userId
 select_permissions:
 - permission:
     columns:
     - id
-    - created_at
-    - updated_at
+    - createdAt
+    - updatedAt
     - teamId
     - role
     - userId

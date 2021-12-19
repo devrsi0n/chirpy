@@ -6,6 +6,7 @@ export const appGlobalStyles = css`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
+    ${tw`bg-bg`}
   }
 
   html,

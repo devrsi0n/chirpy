@@ -17,7 +17,8 @@ import { hasValidUserProfile } from '$/utilities/user';
 export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
-  const [isFullFilled, setIsFullFilled] = React.useState(ssrMode ? true : isProfileFullFilled());
+  const [isFullFilled, setIsFullFilled] = React.useState(ssrMode ? true : isProfileFullFilled);
+
   React.useEffect(() => {
     if (loading) return;
     if (!hasValidUserProfile(data)) {
@@ -27,24 +28,12 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <section>
+    <div>
       <Head>
         <title>Welcome</title>
       </Head>
-      {isFullFilled ? (
-        <FullFilled />
-      ) : (
-        <section tw="flex flex-col items-center space-y-8 md:(flex-row items-center space-y-0 space-x-8)">
-          <div tw="space-y-3">
-            <Heading as="h2" tw="tracking-tight">
-              Welcome on board
-            </Heading>
-            <Text variant="secondary">Just fill this form to get started</Text>
-          </div>
-          <ConfirmUserFields />
-        </section>
-      )}
-    </section>
+      {isFullFilled ? <FullFilled /> : <NotFullFilled />}
+    </div>
   );
 }
 
@@ -77,6 +66,20 @@ function FullFilled(): JSX.Element {
   );
 }
 
+function NotFullFilled() {
+  return (
+    <div tw="flex flex-col items-center space-y-8 md:(flex-row items-center space-y-0 space-x-8)">
+      <div tw="space-y-3">
+        <Heading as="h2" tw="tracking-tight">
+          Welcome on board
+        </Heading>
+        <Text variant="secondary">Just fill this form to get started</Text>
+      </div>
+      <ConfirmUserFields />
+    </div>
+  );
+}
+
 function isProfileFullFilled(): boolean {
-  return new URL(location.href).searchParams.get('invalidProfile') !== 'true';
+  return !location.search.includes('invalidProfile=true');
 }
