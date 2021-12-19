@@ -17,15 +17,19 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
   React.useEffect(() => {
     getStats(`/api/stats/${encodeURIComponent(domain)}/main-graph`, { domain } as any, {
       period: '30d',
-    }).then((res: any) => {
-      const pv = (res.top_stats as { change: number; name: string; value: number }[]).find(
-        (s) => s.name === 'Total pageviews',
-      );
-      if (pv) {
-        setGrow(pv.change);
-        setPageviews(pv.value);
-      }
-    });
+    })
+      .then((res: any) => {
+        const pv = (res.top_stats as { change: number; name: string; value: number }[]).find(
+          (s) => s.name === 'Total pageviews',
+        );
+        if (pv) {
+          setGrow(pv.change);
+          setPageviews(pv.value);
+        }
+      })
+      .catch(() => {
+        console.log('No stats data');
+      });
   }, [domain]);
   return (
     <>

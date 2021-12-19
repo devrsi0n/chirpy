@@ -14,7 +14,7 @@ import * as localForage from 'localforage';
 import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
 
-export function getApolloClient(
+export function iniApolloClient(
   hasuraToken = '',
   initialState: any = null,
 ): ApolloClient<NormalizedCacheObject> {

@@ -7,7 +7,7 @@ mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
   }
 }
 
-mutation deleteProjectByPk($id: uuid = "") {
+mutation deleteProjectByPk($id: uuid!) {
   deleteProjectByPk(id: $id) {
     id
   }

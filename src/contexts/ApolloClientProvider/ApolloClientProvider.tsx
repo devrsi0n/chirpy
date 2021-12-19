@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/cli
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
-import { getApolloClient } from './utilities';
+import { iniApolloClient } from './utilities';
 
 export type ApolloClientProviderProps = React.PropsWithChildren<{
   //
@@ -12,13 +12,13 @@ export function ApolloClientProvider({ children }: ApolloClientProviderProps): J
   const { data: session, status } = useSession();
   const loading = status === 'loading';
   const [client, setClient] = React.useState<ApolloClient<NormalizedCacheObject>>(() =>
-    getApolloClient(session?.hasuraToken),
+    iniApolloClient(session?.hasuraToken),
   );
   React.useEffect(() => {
     if (loading || !session?.hasuraToken) {
       return;
     }
-    setClient(getApolloClient(session.hasuraToken));
+    setClient(iniApolloClient(session.hasuraToken));
   }, [session?.hasuraToken, loading]);
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
