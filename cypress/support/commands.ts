@@ -29,7 +29,7 @@ import { Session } from 'next-auth';
 import { jwtBody } from '../fixtures/user';
 
 Cypress.Commands.add('login' as any, () => {
-  cy.intercept('/api/auth/session', (req) => {
+  cy.intercept(`${Cypress.env('NEXT_PUBLIC_APP_URL')}/api/auth/session`, (req) => {
     req.continue((res) => {
       res.send({
         body: {
@@ -40,6 +40,7 @@ Cypress.Commands.add('login' as any, () => {
     });
   }).as('session');
 
+  cy.intercept('/v1/graphql').as('graphql');
   cy.setCookie('next-auth.session-token', Cypress.env('SESSION_TOKEN'));
   Cypress.Cookies.preserveOnce('next-auth.session-token');
 });

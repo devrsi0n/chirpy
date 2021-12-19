@@ -9,17 +9,16 @@ export type ApolloClientProviderProps = React.PropsWithChildren<{
 }>;
 
 export function ApolloClientProvider({ children }: ApolloClientProviderProps): JSX.Element {
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  const { data: session } = useSession();
   const [client, setClient] = React.useState<ApolloClient<NormalizedCacheObject>>(() =>
     iniApolloClient(session?.hasuraToken),
   );
   React.useEffect(() => {
-    if (loading || !session?.hasuraToken) {
+    if (!session?.hasuraToken) {
       return;
     }
     setClient(iniApolloClient(session.hasuraToken));
-  }, [session?.hasuraToken, loading]);
+  }, [session?.hasuraToken]);
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 }

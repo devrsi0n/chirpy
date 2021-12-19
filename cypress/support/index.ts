@@ -12,14 +12,12 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+import '../fixtures/load-env';
 import './commands';
 
+// This module executes in browser context
 before(() => {
   // @ts-ignore
   cy.login();
   window.indexedDB.deleteDatabase('localforage');
 });
-
-// Cypress.on("window:before:load", win => {
-//   win.indexedDB.deleteDatabase("localforage");
-// });

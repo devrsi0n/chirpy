@@ -2,9 +2,9 @@ describe('Project', () => {
   before(() => {
     cy.visit('/dashboard');
     cy.wait('@session');
-
-    cy.intercept('/v1/graphql').as('graphql');
-    cy.wait('@graphql');
+    cy.wait('@graphql', {
+      timeout: 10_000,
+    });
     cy.wait(1000);
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist
