@@ -2,7 +2,8 @@ table:
   name: User
   schema: public
 configuration:
-  custom_column_names: {}
+  custom_column_names:
+    image: avatar
   custom_root_fields:
     delete: deleteUsers
     delete_by_pk: deleteUserByPk
@@ -14,44 +15,51 @@ configuration:
     update: updateUsers
     update_by_pk: updateUserByPk
 object_relationships:
-- name: UserType
+- name: userType
   using:
     foreign_key_constraint_on: type
 array_relationships:
-- name: Accounts
+- name: accounts
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Account
         schema: public
-- name: Comments
+- name: comments
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Comment
         schema: public
-- name: Likes
+- name: likes
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Like
         schema: public
-- name: Members
+- name: members
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Member
         schema: public
-- name: Projects
+- name: projects
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Project
+        schema: public
+- name: sessions
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: Session
         schema: public
 select_permissions:
 - permission:

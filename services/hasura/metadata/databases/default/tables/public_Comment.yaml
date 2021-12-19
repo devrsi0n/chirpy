@@ -14,15 +14,15 @@ configuration:
     update: updateComments
     update_by_pk: updateCommentByPk
 object_relationships:
-- name: User
-  using:
-    foreign_key_constraint_on: userId
 - name: page
   using:
     foreign_key_constraint_on: pageId
 - name: parent
   using:
     foreign_key_constraint_on: parentId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
 array_relationships:
 - name: likes
   using:

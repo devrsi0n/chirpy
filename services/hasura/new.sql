@@ -228,7 +228,7 @@ CREATE TABLE public."Account" (
     "idToken" text,
     "sessionState" text,
     "oauthTokenSecret" text,
-    oauth_token text
+    "oauthToken" text
 );
 
 
@@ -337,6 +337,22 @@ COMMENT ON TABLE public."Role" IS 'User''s role in teams';
 
 
 --
+-- Name: Session; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Session" (
+    id uuid DEFAULT gen_random_uuid() NOT NULL,
+    "createdAt" timestamp with time zone DEFAULT now() NOT NULL,
+    "updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
+    "sessionToken" text NOT NULL,
+    "userId" uuid NOT NULL,
+    expires timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public."Session" OWNER TO postgres;
+
+--
 -- Name: Team; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -361,7 +377,7 @@ CREATE TABLE public."User" (
     "updatedAt" timestamp with time zone DEFAULT now() NOT NULL,
     name text,
     email text,
-    "emailVerified" timestamp without time zone,
+    "emailVerified" timestamp with time zone,
     image text,
     username text,
     type text,
@@ -428,7 +444,7 @@ COPY hdb_catalog.hdb_cron_events (id, trigger_name, scheduled_time, status, trie
 --
 
 COPY hdb_catalog.hdb_metadata (id, metadata, resource_version) FROM stdin;
-1	{"sources":[{"kind":"postgres","name":"default","tables":[{"object_relationships":[{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"table":{"schema":"public","name":"Account"}},{"object_relationships":[{"using":{"foreign_key_constraint_on":"pageId"},"name":"page"},{"using":{"foreign_key_constraint_on":"parentId"},"name":"parent"},{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"table":{"schema":"public","name":"Comment"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"parentId","table":{"schema":"public","name":"Comment"}}},"name":"replies"}]},{"object_relationships":[{"using":{"foreign_key_constraint_on":"commentId"},"name":"comment"},{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"table":{"schema":"public","name":"Like"}},{"object_relationships":[{"using":{"foreign_key_constraint_on":"teamId"},"name":"team"},{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"table":{"schema":"public","name":"Member"}},{"object_relationships":[{"using":{"foreign_key_constraint_on":"projectId"},"name":"project"}],"table":{"schema":"public","name":"Page"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"pageId","table":{"schema":"public","name":"Comment"}}},"name":"comments"}]},{"object_relationships":[{"using":{"foreign_key_constraint_on":"teamId"},"name":"team"},{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"table":{"schema":"public","name":"Project"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"projectId","table":{"schema":"public","name":"Page"}}},"name":"pages"}]},{"is_enum":true,"table":{"schema":"public","name":"Role"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"role","table":{"schema":"public","name":"Member"}}},"name":"members"}]},{"table":{"schema":"public","name":"Team"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"teamId","table":{"schema":"public","name":"Member"}}},"name":"members"},{"using":{"foreign_key_constraint_on":{"column":"teamId","table":{"schema":"public","name":"Project"}}},"name":"projects"}]},{"table":{"schema":"public","name":"User"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Account"}}},"name":"accounts"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Comment"}}},"name":"comments"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Like"}}},"name":"likes"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Member"}}},"name":"members"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Project"}}},"name":"projects"}]},{"is_enum":true,"table":{"schema":"public","name":"UserType"}},{"table":{"schema":"public","name":"VerificationToken"}}],"configuration":{"connection_info":{"use_prepared_statements":true,"database_url":{"from_env":"HASURA_GRAPHQL_DATABASE_URL"},"isolation_level":"read-committed","pool_settings":{"connection_lifetime":600,"retries":1,"idle_timeout":180,"max_connections":22}}}}],"version":3}	78
+1	{"sources":[{"kind":"postgres","name":"default","tables":[{"select_permissions":[{"role":"user","permission":{"columns":["accessToken","expiresAt","id","idToken","oauthTokenSecret","oauthToken","provider","providerAccountId","refreshToken","scope","sessionState","tokenType","type","userId"],"filter":{"userId":{"_eq":"X-Hasura-User-Id"}}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"configuration":{"custom_root_fields":{"insert":"insertAccounts","select_aggregate":"accountAggregate","insert_one":"insertOneAccount","select_by_pk":"accountByPk","select":"accounts","delete":"deleteAccounts","update":"updateAccounts","delete_by_pk":"deleteAccountByPk","update_by_pk":"updateAccountByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Account"}},{"select_permissions":[{"role":"user","permission":{"columns":["content","createdAt","deletedAt","id","pageId","parentId","userId"],"filter":{"page":{"projectId":{"_in":"X-Hasura-Editable-Project-Ids"}}}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"pageId"},"name":"page"},{"using":{"foreign_key_constraint_on":"parentId"},"name":"parent"},{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"insert_permissions":[{"role":"user","permission":{"backend_only":false,"set":{"userId":"x-hasura-User-Id"},"check":{"userId":{"_eq":"X-Hasura-User-Id"}},"columns":["content","pageId","parentId"]}}],"configuration":{"custom_root_fields":{"insert":"insertComments","select_aggregate":"commentAggregate","insert_one":"insertOneComment","select_by_pk":"commentByPk","select":"comments","delete":"deleteComments","update":"updateComments","delete_by_pk":"deleteCommentByPk","update_by_pk":"updateCommentByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Comment"},"update_permissions":[{"role":"user","permission":{"set":{"userId":"x-hasura-User-Id"},"check":null,"columns":["deletedAt"],"filter":{"page":{"projectId":{"_in":"X-Hasura-Editable-Project-Ids"}}}}}],"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"commentId","table":{"schema":"public","name":"Like"}}},"name":"likes"},{"using":{"foreign_key_constraint_on":{"column":"parentId","table":{"schema":"public","name":"Comment"}}},"name":"replies"}]},{"select_permissions":[{"role":"user","permission":{"columns":["commentId","id","userId"],"filter":{}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"userId"},"name":"User"},{"using":{"foreign_key_constraint_on":"commentId"},"name":"comment"}],"insert_permissions":[{"role":"user","permission":{"backend_only":false,"set":{"userId":"x-hasura-User-Id"},"check":{"userId":{"_eq":"X-Hasura-User-Id"}},"columns":["commentId"]}}],"configuration":{"custom_root_fields":{"insert":"insertLikes","select_aggregate":"likeAggregate","insert_one":"insertOneLike","select_by_pk":"likeByPk","select":"likes","delete":"deleteLikes","update":"updateLikes","delete_by_pk":"deleteLikeByPk","update_by_pk":"updateLikeByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Like"},"delete_permissions":[{"role":"user","permission":{"filter":{"userId":{"_eq":"X-Hasura-User-Id"}}}}]},{"select_permissions":[{"role":"user","permission":{"columns":["id","createdAt","updatedAt","teamId","role","userId"],"filter":{"userId":{"_eq":"X-Hasura-User-Id"}}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"role"},"name":"Role"},{"using":{"foreign_key_constraint_on":"teamId"},"name":"Team"},{"using":{"foreign_key_constraint_on":"userId"},"name":"User"}],"configuration":{"custom_root_fields":{"insert":"insertMembers","select_aggregate":"memberAggregate","insert_one":"insertOneMember","select_by_pk":"memberByPk","select":"members","delete":"deleteMembers","update":"updateMembers","delete_by_pk":"deleteMemberByPk","update_by_pk":"updateMemberByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Member"}},{"select_permissions":[{"role":"user","permission":{"columns":["id","createdAt","updatedAt","url","title","projectId"],"filter":{}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"projectId"},"name":"project"}],"configuration":{"custom_root_fields":{"insert":"insertPages","select_aggregate":"pageAggregate","insert_one":"insertOnePage","select_by_pk":"pageByPk","select":"pages","delete":"deletePages","update":"updatePages","delete_by_pk":"deletePageByPk","update_by_pk":"updatePageByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Page"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"pageId","table":{"schema":"public","name":"Comment"}}},"name":"comments"}]},{"select_permissions":[{"role":"user","permission":{"columns":["id","createdAt","updatedAt","name","teamId","theme","domain","userId"],"filter":{"userId":{"_eq":"X-Hasura-User-Id"}}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"teamId"},"name":"Team"},{"using":{"foreign_key_constraint_on":"userId"},"name":"User"}],"insert_permissions":[{"role":"user","permission":{"backend_only":false,"set":{"userId":"x-hasura-User-Id"},"check":{"userId":{"_eq":"X-Hasura-User-Id"}},"columns":["domain","name","teamId","theme"]}}],"configuration":{"custom_root_fields":{"insert":"insertProjects","select_aggregate":"projectAggregate","insert_one":"insertOneProject","select_by_pk":"projectByPk","select":"projects","delete":"deleteProjects","update":"updateProjects","delete_by_pk":"deleteProjectByPk","update_by_pk":"updateProjectByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Project"},"update_permissions":[{"role":"user","permission":{"check":null,"columns":["theme"],"filter":{"_and":[{"userId":{"_eq":"X-Hasura-User-Id"}},{"id":{"_in":"X-Hasura-Editable-Project-Ids"}}]}}}],"delete_permissions":[{"role":"user","permission":{"filter":{"_and":[{"userId":{"_eq":"X-Hasura-User-Id"}},{"id":{"_in":"X-Hasura-Editable-Project-Ids"}}]}}}],"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"projectId","table":{"schema":"public","name":"Page"}}},"name":"pages"}]},{"is_enum":true,"configuration":{"custom_root_fields":{"insert":"insertRoles","select_aggregate":"roleAggregate","insert_one":"insertOneRole","select_by_pk":"roleByPk","select":"roles","delete":"deleteRoles","update":"updateRoles","delete_by_pk":"deleteRoleByPk","update_by_pk":"updateRoleByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Role"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"role","table":{"schema":"public","name":"Member"}}},"name":"members"}]},{"object_relationships":[{"using":{"foreign_key_constraint_on":"userId"},"name":"user"}],"configuration":{"custom_root_fields":{"insert":"insertSessions","select_aggregate":"sessionAggregate","insert_one":"insertOneSession","select_by_pk":"sessionByPk","select":"sessions","delete":"deleteSessions","update":"updateSessions","delete_by_pk":"deleteSessionByPk","update_by_pk":"updateSessionByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Session"}},{"select_permissions":[{"role":"user","permission":{"columns":["createdAt","id","name","uid"],"filter":{"Members":{"userId":{"_eq":"X-Hasura-User-Id"}}}}}],"configuration":{"custom_root_fields":{"insert":"insertTeams","select_aggregate":"teamAggregate","insert_one":"insertOneTeam","select_by_pk":"teamByPk","select":"teams","delete":"deleteTeams","update":"updateTeams","delete_by_pk":"deleteTeamByPk","update_by_pk":"updateTeamByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"Team"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"teamId","table":{"schema":"public","name":"Member"}}},"name":"Members"},{"using":{"foreign_key_constraint_on":{"column":"teamId","table":{"schema":"public","name":"Project"}}},"name":"Projects"}]},{"select_permissions":[{"role":"user","permission":{"columns":["bio","email","image","name","twitterUserName","type","username","website","emailVerified","createdAt","updatedAt","id"],"filter":{"id":{"_eq":"X-Hasura-User-Id"}}}}],"object_relationships":[{"using":{"foreign_key_constraint_on":"type"},"name":"userType"}],"configuration":{"custom_root_fields":{"insert":"insertUsers","select_aggregate":"userAggregate","insert_one":"insertOneUser","select_by_pk":"userByPk","select":"users","delete":"deleteUsers","update":"updateUsers","delete_by_pk":"deleteUserByPk","update_by_pk":"updateUserByPk"},"custom_column_names":{"image":"avatar"}},"table":{"schema":"public","name":"User"},"update_permissions":[{"role":"user","permission":{"set":{"id":"x-hasura-User-Id"},"check":null,"columns":["bio","email","image","name","twitterUserName","username","website"],"filter":{"id":{"_eq":"X-Hasura-User-Id"}}}}],"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Account"}}},"name":"accounts"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Comment"}}},"name":"comments"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Like"}}},"name":"likes"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Member"}}},"name":"members"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Project"}}},"name":"projects"},{"using":{"foreign_key_constraint_on":{"column":"userId","table":{"schema":"public","name":"Session"}}},"name":"sessions"}]},{"is_enum":true,"configuration":{"custom_root_fields":{"insert":"insertUserTypes","select_aggregate":"userTypeAggregate","insert_one":"insertOneUserType","select_by_pk":"userTypeByPk","select":"userTypes","delete":"deleteUserTypes","update":"updateUserTypes","delete_by_pk":"deleteUserTypeByPk","update_by_pk":"updateUserTypeByPk"},"custom_column_names":{}},"table":{"schema":"public","name":"UserType"},"array_relationships":[{"using":{"foreign_key_constraint_on":{"column":"type","table":{"schema":"public","name":"User"}}},"name":"Users"}]},{"configuration":{"custom_root_fields":{"select":"verificationRequests"},"custom_column_names":{}},"table":{"schema":"public","name":"VerificationToken"}}],"configuration":{"connection_info":{"use_prepared_statements":true,"database_url":{"from_env":"HASURA_GRAPHQL_DATABASE_URL"},"isolation_level":"read-committed","pool_settings":{"connection_lifetime":600,"retries":1,"idle_timeout":180,"max_connections":22}}}}],"version":3}	130
 \.
 
 
@@ -453,7 +469,7 @@ COPY hdb_catalog.hdb_scheduled_events (id, webhook_conf, scheduled_time, retry_c
 --
 
 COPY hdb_catalog.hdb_schema_notifications (id, notification, resource_version, instance_id, updated_at) FROM stdin;
-1	{"metadata":false,"remote_schemas":[],"sources":["default"]}	78	fa47c436-26bc-4093-9eaa-b3bc7e74bca5	2021-12-08 13:09:11.508184+00
+1	{"metadata":false,"remote_schemas":[],"sources":["default"]}	130	f7bf01d6-e94e-4e3e-af14-85aaf30ecec9	2021-12-08 13:09:11.508184+00
 \.
 
 
@@ -462,7 +478,7 @@ COPY hdb_catalog.hdb_schema_notifications (id, notification, resource_version, i
 --
 
 COPY hdb_catalog.hdb_version (hasura_uuid, version, upgraded_on, cli_state, console_state) FROM stdin;
-628cac8f-3cfc-45cb-974f-cc3b0ffbce4f	47	2021-12-08 13:07:32.100654+00	{"settings": {"migration_mode": "true"}, "migrations": {"default": {"1638093427459": false}}, "isStateCopyCompleted": true}	{"console_notifications": {"admin": {"date": "2021-12-18T02:29:31.620Z", "read": "default", "showBadge": false}}, "telemetryNotificationShown": true, "disablePreReleaseUpdateNotifications": true}
+628cac8f-3cfc-45cb-974f-cc3b0ffbce4f	47	2021-12-08 13:07:32.100654+00	{"settings": {"migration_mode": "true"}, "migrations": {"default": {"1638093427459": false}}, "isStateCopyCompleted": true}	{"console_notifications": {"admin": {"date": "2021-12-18T12:33:46.456Z", "read": "default", "showBadge": false}}, "telemetryNotificationShown": true, "disablePreReleaseUpdateNotifications": true}
 \.
 
 
@@ -470,7 +486,8 @@ COPY hdb_catalog.hdb_version (hasura_uuid, version, upgraded_on, cli_state, cons
 -- Data for Name: Account; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public."Account" (id, "userId", type, provider, "providerAccountId", "refreshToken", "accessToken", "expiresAt", "tokenType", scope, "idToken", "sessionState", "oauthTokenSecret", oauth_token) FROM stdin;
+COPY public."Account" (id, "userId", type, provider, "providerAccountId", "refreshToken", "accessToken", "expiresAt", "tokenType", scope, "idToken", "sessionState", "oauthTokenSecret", "oauthToken") FROM stdin;
+814a4733-df8d-48d2-a077-84a4ac5b91ff	057eb503-75ad-4d2f-be3a-9d9675734d47	oauth	github	7880675	\N	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	\N	bearer	read:user,user:email	\N	\N	\N	\N
 \.
 
 
@@ -525,6 +542,14 @@ manager	Manager of a team
 
 
 --
+-- Data for Name: Session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Session" (id, "createdAt", "updatedAt", "sessionToken", "userId", expires) FROM stdin;
+\.
+
+
+--
 -- Data for Name: Team; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -537,6 +562,7 @@ COPY public."Team" (id, "createdAt", "updatedAt", name, uid) FROM stdin;
 --
 
 COPY public."User" (id, "createdAt", "updatedAt", name, email, "emailVerified", image, username, type, bio, website, "twitterUserName") FROM stdin;
+057eb503-75ad-4d2f-be3a-9d9675734d47	2021-12-18 12:24:41.488482+00	2021-12-18 14:26:09.908693+00	Qing	devrsi0n@gmail.com	\N	https://avatars.githubusercontent.com/u/7880675?v=4	devrsi0n	\N	Software Engineer	http://devrsi0n.com/	devrsi0n
 \.
 
 
@@ -729,6 +755,22 @@ ALTER TABLE ONLY public."Role"
 
 
 --
+-- Name: Session Session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Session"
+    ADD CONSTRAINT "Session_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Session Session_sessionToken_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Session"
+    ADD CONSTRAINT "Session_sessionToken_key" UNIQUE ("sessionToken");
+
+
+--
 -- Name: Team Team_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -898,6 +940,20 @@ COMMENT ON TRIGGER "set_public_Project_updatedAt" ON public."Project" IS 'trigge
 
 
 --
+-- Name: Session set_public_Session_updatedAt; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER "set_public_Session_updatedAt" BEFORE UPDATE ON public."Session" FOR EACH ROW EXECUTE FUNCTION public."set_current_timestamp_updatedAt"();
+
+
+--
+-- Name: TRIGGER "set_public_Session_updatedAt" ON "Session"; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON TRIGGER "set_public_Session_updatedAt" ON public."Session" IS 'trigger to set value of column "updatedAt" to current timestamp on row update';
+
+
+--
 -- Name: Team set_public_Team_updatedAt; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1035,6 +1091,14 @@ ALTER TABLE ONLY public."Project"
 
 ALTER TABLE ONLY public."Project"
     ADD CONSTRAINT "Project_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."User"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: Session Session_userId_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Session"
+    ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES public."User"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
