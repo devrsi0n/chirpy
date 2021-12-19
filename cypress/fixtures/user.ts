@@ -1,5 +1,5 @@
 export const testUser = {
-  id: +(process.env.TEST_USER_ID || 8),
+  id: process.env.TEST_USER_ID,
   name: 'CypressTest',
   email: 'cypress.test@localhost',
   image: 'https://www.cypress.io/icons/icon-72x72.png',
