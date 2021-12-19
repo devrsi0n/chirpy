@@ -13,7 +13,7 @@ export type InsertOneProjectMutationVariables = Types.Exact<{
 export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: { __typename?: 'Project', id: string, name: string, teamId?: string | null | undefined, userId?: string | null | undefined } | null | undefined };
 
 export type DeleteProjectByPkMutationVariables = Types.Exact<{
-  id?: Types.InputMaybe<Types.Scalars['uuid']>;
+  id: Types.Scalars['uuid'];
 }>;
 
 
@@ -67,7 +67,7 @@ export type InsertOneProjectMutationHookResult = ReturnType<typeof useInsertOneP
 export type InsertOneProjectMutationResult = Apollo.MutationResult<InsertOneProjectMutation>;
 export type InsertOneProjectMutationOptions = Apollo.BaseMutationOptions<InsertOneProjectMutation, InsertOneProjectMutationVariables>;
 export const DeleteProjectByPkDocument = gql`
-    mutation deleteProjectByPk($id: uuid = "") {
+    mutation deleteProjectByPk($id: uuid!) {
   deleteProjectByPk(id: $id) {
     id
   }
