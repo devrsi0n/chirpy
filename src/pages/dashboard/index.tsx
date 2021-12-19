@@ -72,7 +72,7 @@ export default function Dashboard(): JSX.Element {
         setShowDialog(false);
         fetchProjects();
       },
-      [insertProjectMutation, id, fetchProjects],
+      [insertProjectMutation, fetchProjects],
     ),
   );
 

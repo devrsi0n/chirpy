@@ -8,8 +8,8 @@ declare namespace NodeJS {
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
 
-    DATABASE_URL: string;
     HASH_KEY: string;
+    HASH_ALGORITHM: string;
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     GITHUB_CLIENT_ID: string;

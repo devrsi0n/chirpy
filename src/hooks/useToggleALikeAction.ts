@@ -36,8 +36,6 @@ export function useToggleALikeAction(): ToggleLieAction {
         const { data } = await insertOneLike({
           variables: {
             commentId,
-            // userId: currentUserId,
-            compoundId: `${currentUserId}:${commentId}`,
           },
         });
         if (!data?.insertOneLike?.id) {

@@ -3,7 +3,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-const REQUEST_TIMEOUT = 300_000;
+const REQUEST_TIMEOUT = 10_000;
 
 export const authProviders = [
   GitHubProvider({
