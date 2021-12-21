@@ -30,11 +30,6 @@ export default function Plugins(
       allowedRoles: ['user'],
       defaultRole: 'user',
       role: 'user',
-      hasuraClaims: {
-        // Projects with edit permission of the user
-        'X-Hasura-Editable-Project-Ids': '{}',
-        // 'X-Hasura-Editable-Project-Ids': editableProjectIds,
-      },
     },
   );
   config.env.SESSION_TOKEN = createToken(jwtBody, { maxAge });

@@ -8,7 +8,6 @@ import { authProviders } from '$/server/services/auth-providers';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { isENVDev } from '$/server/utilities/env';
-import { getPGArray } from '$/server/utilities/get-pgarray';
 
 export default NextAuth({
   providers: authProviders,
@@ -62,10 +61,6 @@ export default NextAuth({
           allowedRoles: ['user'],
           defaultRole: 'user',
           role: 'user',
-          hasuraClaims: {
-            // Projects with edit permission of the user
-            'X-Hasura-Editable-Project-Ids': getPGArray(editableProjectIds),
-          },
         },
       );
       if (session.user) {
