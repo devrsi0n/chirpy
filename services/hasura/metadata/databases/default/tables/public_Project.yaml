@@ -63,18 +63,12 @@ update_permissions:
     columns:
     - theme
     filter:
-      _and:
-      - userId:
-          _eq: X-Hasura-User-Id
-      - id:
-          _in: X-Hasura-Editable-Project-Ids
+      userId:
+        _eq: X-Hasura-User-Id
   role: user
 delete_permissions:
 - permission:
     filter:
-      _and:
-      - userId:
-          _eq: X-Hasura-User-Id
-      - id:
-          _in: X-Hasura-Editable-Project-Ids
+      userId:
+        _eq: X-Hasura-User-Id
   role: user

@@ -61,10 +61,7 @@ select_permissions:
     - pageId
     - parentId
     - userId
-    filter:
-      page:
-        projectId:
-          _in: X-Hasura-Editable-Project-Ids
+    filter: {}
   role: user
 update_permissions:
 - permission:
@@ -73,8 +70,9 @@ update_permissions:
     - deletedAt
     filter:
       page:
-        projectId:
-          _in: X-Hasura-Editable-Project-Ids
+        project:
+          userId:
+            _eq: X-Hasura-User-Id
     set:
       userId: x-hasura-User-Id
   role: user
