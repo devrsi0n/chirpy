@@ -52,11 +52,16 @@ export function Header(): JSX.Element {
                   Blog
                 </Link>
               </SideMenu.Item>
+              <SideMenu.Item>
+                <Link size="lg" href="https://github.com/devrsi0n/chirpy" css={[styles]}>
+                  GitHub
+                </Link>
+              </SideMenu.Item>
             </SideMenu>
           </div>
           <div tw="flex flex-row sm:(items-stretch justify-start)">
             <div tw="flex flex-row items-center space-x-2">
-              <Logo />
+              <Logo showBadge />
             </div>
             <nav
               css={[
@@ -78,6 +83,7 @@ export function Header(): JSX.Element {
               <Link href="/blog" highlightPattern={/^\/blog/}>
                 Blog
               </Link>
+              <Link href="https://github.com/devrsi0n/chirpy">GitHub</Link>
             </nav>
           </div>
           <div tw="flex">

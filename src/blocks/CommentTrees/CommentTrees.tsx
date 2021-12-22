@@ -15,12 +15,14 @@ export type CommentTreesProps = {
   comments: CommentLeafType[];
   onSubmitReply: SubmitHandler;
   onClickLikeAction: ToggleLieAction;
+  rtePlaceholder?: string;
 };
 
 export function CommentTrees({
   comments,
   onSubmitReply,
   onClickLikeAction,
+  rtePlaceholder,
 }: CommentTreesProps): JSX.Element {
   const commentCount = getCommentCount(comments);
   return (
@@ -34,7 +36,9 @@ export function CommentTrees({
       <div css={tw`space-y-7`}>
         <div css={tw`space-y-2`}>
           <RichTextEditor
-            placeholder={`What are your thoughts? (Basic markdown shortcuts supported)`}
+            placeholder={
+              rtePlaceholder || `What are your thoughts? (Basic markdown shortcuts supported)`
+            }
             onSubmit={onSubmitReply}
           />
         </div>

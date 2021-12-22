@@ -1,3 +1,4 @@
+import LifeBuoy from '@geist-ui/react-icons/lifeBuoy';
 import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
 import Monitor from '@geist-ui/react-icons/monitor';
@@ -45,6 +46,12 @@ export function UserDropDown(props: UserDropDownProps): JSX.Element {
             <p tw="w-max">Sign in</p>
           </DropDown.Item>
         ))}
+      <DropDown.Item>
+        <Link variant="plain" href="https://github.com/devrsi0n/chirpy/issues/new" css={itemStyle}>
+          <LifeBuoy size={14} />
+          <span>Feedback</span>
+        </Link>
+      </DropDown.Item>
       {isSignIn && (
         <>
           {isNav && (

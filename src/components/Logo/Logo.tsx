@@ -1,6 +1,7 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { Badge } from '../Badge';
 import { Link, LinkProps } from '../Link';
 
 type Size = 'sm' | 'md' | 'lg';
@@ -9,6 +10,7 @@ export type LogoProps = {
   hideSpacing?: boolean;
   className?: string;
   linkProps?: Partial<LinkProps>;
+  showBadge?: boolean;
 };
 
 const sizeWidth: Record<Size, TwStyle> = {
@@ -23,16 +25,23 @@ const sizeSpacing: Record<Size, TwStyle> = {
   lg: tw`px-3 py-2`,
 };
 
-export function Logo({ size = 'md', hideSpacing, className, linkProps }: LogoProps): JSX.Element {
+export function Logo({
+  size = 'md',
+  hideSpacing,
+  className,
+  linkProps,
+  showBadge,
+}: LogoProps): JSX.Element {
   return (
     <Link
       className={className}
       href="/"
       aria-label={`Logo of ${process.env.NEXT_PUBLIC_APP_NAME}`}
       variant="plain"
-      tw="text-primary-900"
+      tw="text-primary-900 relative"
       {...linkProps}
     >
+      {showBadge && <Badge tw="absolute -right-2 -top-3 leading-none">Beta</Badge>}
       {/* Source Sans Pro, font weight 600 */}
       <svg
         css={[sizeWidth[size], !hideSpacing && sizeSpacing[size]]}

@@ -141,7 +141,12 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                   tw="inline-block w-6 h-6 rounded-full bg-primary-900"
                 />
               </Popover>
-              <Text tw="px-2 leading-none mb-2" variant="secondary" aria-label="Selected color">
+              <Text
+                tw="px-2 leading-none mb-2"
+                variant="secondary"
+                aria-label="Selected color"
+                size="sm"
+              >
                 {theme.colors[activeTheme].primary[900]}
               </Text>
             </div>
@@ -159,6 +164,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             comments={comments as any}
             onSubmitReply={() => Promise.resolve()}
             onClickLikeAction={() => Promise.resolve()}
+            rtePlaceholder="Preview"
           />
         </section>
       </div>
@@ -222,7 +228,7 @@ const comments = [
           content: [
             {
               type: 'text',
-              text: 'Level 1 testing 😍',
+              text: 'Your article is 100% gorgeous 😍',
             },
           ],
         },
@@ -234,8 +240,8 @@ const comments = [
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
-      name: 'devrsi0n',
-      avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
+      name: 'Jane',
+      avatar: '/images/avatars/female-1.jpeg',
     },
     likes: [],
     replies: [
@@ -250,7 +256,7 @@ const comments = [
               content: [
                 {
                   type: 'text',
-                  text: 'Level 2 👀',
+                  text: `Can't agree more!`,
                 },
               ],
             },
@@ -262,8 +268,8 @@ const comments = [
         user: {
           __typename: 'User',
           id: '634da1be-cc04-4719-908e-c642de76e292',
-          name: 'devrsi0n',
-          avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
+          name: 'Dianne',
+          avatar: '/images/avatars/female-2.jpeg',
         },
         likes: [],
         replies: [],
@@ -281,7 +287,7 @@ const comments = [
           content: [
             {
               type: 'text',
-              text: 'Ho ho 🗣',
+              text: 'Interesting, thanks for sharing.',
             },
           ],
         },
@@ -294,7 +300,7 @@ const comments = [
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
       name: 'devrsi0n',
-      avatar: 'https://avatars.githubusercontent.com/u/7880675?v=4',
+      avatar: '/images/avatars/male-1.jpeg',
     },
     likes: [],
     replies: [],
