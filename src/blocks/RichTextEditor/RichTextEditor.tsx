@@ -81,11 +81,11 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
         editor={editor}
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
-        tw="text-gray-1200 max-w-full! py-4 [.placeholder:first-child::before]:(content-[attr(data-placeholder)] text-gray-1000 float-left pointer-events-none h-0)"
+        tw="text-gray-1200 max-w-full! [.placeholder:first-child::before]:(content-[attr(data-placeholder)] text-gray-1000 float-left pointer-events-none h-0)"
         className="prose"
         css={[
           !readOnly && [
-            tw`min-height[4em]! resize-y overflow-hidden px-2 pt-2 rounded`,
+            tw`min-height[4em]! resize-y overflow-hidden px-2 rounded`,
             textInput,
             cardBg,
           ],
