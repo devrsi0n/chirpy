@@ -72,7 +72,7 @@ export const strings = {
   heroTitle: 'Disqus alternate',
   heroDescription: 'Build a better community by integrating a modern comment system.',
   callToAction: {
-    main: 'Try It Free',
+    main: 'Get Early Access',
     secondary: 'Learn More',
   },
 };

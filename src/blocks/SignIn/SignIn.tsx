@@ -69,7 +69,8 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
               agree to {process.env.NEXT_PUBLIC_APP_NAME}
               {`'s `}
               <Link href="/terms-of-service">Terms of Service</Link> and{' '}
-              <Link href="/privacy-policy">Privacy Policy</Link>.
+              <Link href="/privacy-policy">Privacy Policy</Link> and you may lose your data during
+              the beta phase.
             </Text>
           </div>
         </div>
