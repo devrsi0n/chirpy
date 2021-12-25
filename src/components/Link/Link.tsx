@@ -29,7 +29,7 @@ const sizeStyles: Record<Size, TwStyle> = {
 };
 
 const variantStyles: Record<Variant, TwStyle> = {
-  primary: tw`text-gray-1200`,
+  primary: tw`text-gray-1200 whitespace-nowrap`,
   secondary: tw`text-gray-1100`,
   plain: tw``,
   solid: tw`text-blue-1100 hover:text-blue-1200`,
@@ -86,7 +86,7 @@ export function Link({
         <a
           {...commonProps}
           css={[
-            tw`relative transition duration-150 ease-in-out no-underline! whitespace-nowrap`,
+            tw`relative transition duration-150 ease-in-out no-underline!`,
             size && sizeStyles[size],
             highlight && tw`font-bold`,
             variantStyles[variant],
