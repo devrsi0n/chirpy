@@ -1,6 +1,12 @@
 # Chirpy
 
-Chirpy is a easy to customize and privacy friendly comment system.
+Chirpy is a privacy friendly and easy to customize comment system.
+
+## Features
+
+- Privacy friendly
+- Customizable
+- Performant
 
 ## Contribution
 

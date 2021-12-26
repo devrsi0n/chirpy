@@ -8,7 +8,6 @@ import 'twin.macro';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
 import { useHasMounted } from '$/hooks/useHasMounted';
-import { APP_NAME_LOWERCASE } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { isENVDev } from '$/server/utilities/env';
@@ -42,11 +41,11 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div {...{ [`data-${APP_NAME_LOWERCASE}-comment`]: 'true' }} tw="my-16" />
+      <div data-chirpy-comment tw="my-16" />
       <Script
-        {...{ [`data-${APP_NAME_LOWERCASE}-domain`]: process.env.NEXT_PUBLIC_COMMENT_DOMAIN }}
         src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`}
         strategy="afterInteractive"
+        data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
     </>
   );

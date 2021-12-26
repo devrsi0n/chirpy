@@ -50,13 +50,13 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
               project id to the HTML:
             </Text>
             <Code>
-              {`<script defer src="${APP_URL}/bootstrap/comment.js" data-${APP_NAME_LOWERCASE}-domain="${domain}"><script>`}
+              {`<script defer src="${APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"><script>`}
             </Code>
             <Text variant="secondary">
-              Then, add the data-{APP_NAME_LOWERCASE}-comment attribute to any HTML element that
-              should render the widget:
+              Then, add the data-chirpy-comment attribute to any HTML element that should render the
+              widget:
             </Text>
-            <Code>{`<div data-${APP_NAME_LOWERCASE}-comment="true">...</div>`}</Code>
+            <Code>{`<div data-chirpy-comment="true">...</div>`}</Code>
           </div>
         </div>
       </Dialog>

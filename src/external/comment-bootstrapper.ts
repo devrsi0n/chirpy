@@ -8,12 +8,12 @@ import { GetPagByUrl } from '../server/types/page';
  */
 
 export const appName = APP_NAME_LOWERCASE;
-const scriptQuery = `[data-${appName}-domain]`;
-const targetQuery = `[data-${appName}-comment="true"]`;
+const scriptQuery = `[data-chirpy-domain]`;
+const targetQuery = `[data-chirpy-comment="true"]`;
 
 // User init a page by import a script
-// <script defer src="/widget/comment.js" data-${appName}-domain="yourdomain.com"><script>
-// Render target: <div data-${appName}-comment="true"></div>
+// <script defer src="/widget/comment.js" data-chirpy-domain="yourdomain.com"><script>
+// Render target: <div data-chirpy-comment="true"></div>
 export async function comment(): Promise<void> {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
