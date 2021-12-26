@@ -5,8 +5,35 @@ banner: '/images/blog/open-source/banner.jpeg?width=640&height=427'
 
 # Open source
 
-We're so excited to announce that Chirpy is a open source project now. 🚀
+We're so excited to announce that Chirpy has been open-sourced now. 🚀
 
-Chirpy is a privacy friendly and customizable Disqus alternate. With Chirpy you can access your audience quickly and build a better community.
+Chirpy is a privacy friendly and customizable [Disqus](https://disqus.com) alternate. With Chirpy you can access your audience quickly and build a better community.
 
-We're working hard to add more features to make it easily to use. You can check our GitHub repo for issues or discussion. Please feel free to contribute!
+## Motivation
+
+You may wonder why build a Disqus alternate in 2021, well, here are our anwsers:
+
+[Disqus shared the personal data of tens of millions of users without them or the websites knowing about it](https://twitter.com/martingund/status/1207327648093003777) 😡.
+
+![Disqus privacy](/images/blog/open-source/disqus-1.jpeg)
+![Disqus privacy](/images/blog/open-source/disqus-2.jpeg)
+
+ Disqus also encumbers your website's performance: [Disqus makes 76 HTTP Requests per load](https://supunkavinda.blog/disqus) 😱.
+ 
+![Disqus performance](/images/blog/open-source/disqus-perf.png)
+
+ And you can find a ton of [privacy](https://www.google.com.hk/search?q=disqus+privacy&oq=disqus+privacy) and [performance](https://www.google.com.hk/search?q=disqus+performance) related issues of Disqus if you google it.
+
+## Solution
+
+To avoid privacy issues like Disqus has, we chose our tech stacks carefully, and we prefer to use self-hosted versions of other services that we don't implement them ourself. e.g., for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid share your and your customer's data with third party companies. Plausible is a [open-source](https://github.com/plausible/analytics/) and [privacy friendly](https://plausible.io/privacy-focused-web-analytics) software as well, so you don't need a cookie consent banner because of using our services.
+
+For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/), we generated comment pages during the build process, thus your user will see the UI immediatelly instead of loading a bunch of JS & CSS and API calls to render the UI, it can be very solw on mobile devices.
+
+## Currently state
+
+Currently, we're in the public beta phase, it means basic features should be work, like social sign-in, create a project, integrate it in your website, comment and reply with rich-text-formating & markdown shortcuts, like a comment, etc. Please be noted: you may lose your data if there're some hard conflicts we can't migrate our database easily, but that should be rare.
+
+## End
+
+We're working hard to add more features to make it easilier to use, stay tuned! You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. You're welcome to contribute to this project. 🙌

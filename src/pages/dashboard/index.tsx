@@ -75,6 +75,7 @@ export default function Dashboard(): JSX.Element {
       [insertProjectMutation, fetchProjects],
     ),
   );
+  const disableCreation = (projects?.length || 0) > 0;
 
   return (
     <>
@@ -85,7 +86,13 @@ export default function Dashboard(): JSX.Element {
       <section tw="space-y-10">
         <div tw="space-x-2 flex flex-row justify-between items-start">
           <PageTitle>Dashboard</PageTitle>
-          <Button onClick={handleCreateProject} variant="solid" color="primary" tw="space-x-1">
+          <Button
+            onClick={handleCreateProject}
+            variant="solid"
+            color="primary"
+            tw="space-x-1"
+            disabled={disableCreation}
+          >
             <PlusCircle size={18} />
             <span>Create project</span>
           </Button>
