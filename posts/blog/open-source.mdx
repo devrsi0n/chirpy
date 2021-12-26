@@ -11,14 +11,16 @@ Chirpy is a privacy-friendly and customizable [Disqus](https://disqus.com) alter
 
 ## Motivation
 
-You may wonder why build a Disqus alternate in 2021, well, here are our anwsers:
+You may wonder why build a Disqus alternate in 2021, well, here are our answers:
 
 [Disqus shared the personal data of tens of millions of users without them or the websites knowing about it](https://twitter.com/martingund/status/1207327648093003777) 😡.
 
 ![Disqus privacy](/images/blog/open-source/disqus-1.jpeg)
 ![Disqus privacy](/images/blog/open-source/disqus-2.jpeg)
 
- Disqus also encumbers your website's performance: [Disqus makes 76 HTTP Requests per load](https://supunkavinda.blog/disqus) 😱.
+And [Disqus facing $3M fine in Norway for tracking users without consent](https://techcrunch.com/2021/05/05/disqus-facing-3m-fine-in-norway-for-tracking-users-without-consent/)
+
+Disqus also encumbers your website's performance: [Disqus makes 76 HTTP Requests per load](https://supunkavinda.blog/disqus) 😱.
  
 ![Disqus performance](/images/blog/open-source/disqus-perf.png)
 
@@ -26,14 +28,14 @@ You may wonder why build a Disqus alternate in 2021, well, here are our anwsers:
 
 ## Solution
 
-To avoid privacy issues like Disqus has, we chose our tech stacks carefully, and we prefer to use self-hosted versions of other services that we don't implement them ourself. e.g., for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid share your and your customer's data with third party companies. Plausible is a [open-source](https://github.com/plausible/analytics/) and [privacy friendly](https://plausible.io/privacy-focused-web-analytics) software as well, so you don't need a cookie consent banner because of using our services. We also plan to provide a self-host solution if you have privacy concern or just want to keep the data in your server.
+To avoid privacy issues as Disqus has, we chose our tech stacks carefully, and we prefer to use self-hosted versions of other services that we don't implement ourselves. e.g., for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid sharing your and your customer's data with third-party companies. Plausible is an [open-source](https://github.com/plausible/analytics/) and [privacy-friendly](https://plausible.io/privacy-focused-web-analytics) software as well, so you don't need a cookie consent banner because of using our services. We also plan to provide a self-host solution if you have privacy concerns or just want to keep the data on your server.
 
-For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/), we generated comment pages during the build process, thus your user will see the UI immediatelly instead of loading a bunch of JS & CSS and API calls to render the UI, it can be very solw on mobile devices.
+For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/), we generated comment pages during the build process, thus your user will see the UI immediately instead of loading a bunch of JS & CSS and API calls to render the UI, it can be very slow on mobile devices.
 
-## Currently state
+## Current state
 
-Currently, we're in the public beta phase, it means basic features should be work, like social sign-in, create a project, integrate it in your website, comment and reply with rich-text-formating & markdown shortcuts, like a comment, etc. Please note: you may lose your data if there're some hard conflicts we can't migrate our database easily, but that should be rare.
+Currently, we're in the public beta phase, which means basic features should be working, like social sign-in, creating a project, integrating it in your website, commenting, and replying with rich-text-formating & markdown shortcuts, like a comment, etc. Please note: you may lose your data if there're some hard conflicts we can't migrate our database easily, but that should be rare.
 
 ## End
 
-We're working hard to add more features to make it easilier to use, stay tuned! You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. You're welcome to contribute to this project. 🙌
+We're working hard to add more features to make it easier to use, stay tuned! You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. You're welcome to contribute to this project. 🙌
