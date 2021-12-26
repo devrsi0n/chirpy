@@ -1,5 +1,7 @@
 # Chirpy
 
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
+
 <!-- ![Vercel](https://vercelbadge.vercel.app/api/devrsi0n/chirpy) -->
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
