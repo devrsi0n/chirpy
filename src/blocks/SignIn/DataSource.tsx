@@ -13,10 +13,11 @@ export const authOptions: AuthOption[] = [
     name: 'Google',
     icon: getLogoComponent(GoogleLogo, 'google', 26),
   },
-  {
-    name: 'Facebook',
-    icon: getLogoComponent(FacebookLogo, 'facebook', 24),
-  },
+  // TODO: add back facebook login once we can delete user account.
+  // {
+  //   name: 'Facebook',
+  //   icon: getLogoComponent(FacebookLogo, 'facebook', 24),
+  // },
   {
     name: 'Twitter',
     icon: getLogoComponent(TwitterLogo, 'twitter', 24),
