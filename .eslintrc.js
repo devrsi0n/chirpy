@@ -13,7 +13,7 @@ module.exports = {
     'prettier/prettier': 'warn',
 
     '@next/next/no-img-element': 'off',
-    '@next/next/inline-script-id': 'off',
+    // '@next/next/inline-script-id': 'off',
 
     // '@emotion/jsx-import': 'error',
     '@emotion/pkg-renaming': 'error',
