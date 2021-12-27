@@ -4,6 +4,7 @@
     "get-started.mdx",
     "features/theme.mdx",
     "features/markdown.mdx",
+    "features/analytics.mdx",
     "api/webhook.mdx",
     "development.mdx",
     "self-hosted.mdx"
