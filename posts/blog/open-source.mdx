@@ -1,5 +1,5 @@
 ---
-title: 'Chirpy open source'
+title: 'Open source'
 banner: '/images/blog/open-source/banner.jpeg?width=640&height=427'
 ---
 
@@ -7,35 +7,53 @@ banner: '/images/blog/open-source/banner.jpeg?width=640&height=427'
 
 We're so excited to announce that Chirpy has been open-sourced now. 🚀
 
-Chirpy is a privacy-friendly and customizable [Disqus](https://disqus.com) alternate. With Chirpy you can access your audience quickly and build a better community.
+## TL;DR
+
+Chirpy is a **privacy-friendly** and **customizable** [Disqus](https://disqus.com/) alternate. With Chirpy, you can reach your audience quickly and build a better community. Check out [GitHub repo](https://github.com/devrsi0n/chirpy) to learn how it works.
 
 ## Motivation
 
-You may wonder why build a Disqus alternate in 2021, well, here are our answers:
+You may wonder why building a Disqus alternate in 2021. Well, here are the answers:
 
-[Disqus shared the personal data of tens of millions of users without them or the websites knowing about it](https://twitter.com/martingund/status/1207327648093003777) 😡.
+[Disqus shared the personal data of tens of millions of users without them or the websites knowing about it.](https://twitter.com/martingund/status/1207327648093003777) 😡
 
-![Disqus privacy](/images/blog/open-source/disqus-1.jpeg)
-![Disqus privacy](/images/blog/open-source/disqus-2.jpeg)
+![Disqus privacy 1](https://chirpy.dev/images/blog/open-source/disqus-1.jpeg)
+![Disqus privacy 2](https://chirpy.dev/images/blog/open-source/disqus-2.jpeg)
 
 And [Disqus facing $3M fine in Norway for tracking users without consent](https://techcrunch.com/2021/05/05/disqus-facing-3m-fine-in-norway-for-tracking-users-without-consent/)
 
-Disqus also encumbers your website's performance: [Disqus makes 76 HTTP Requests per load](https://supunkavinda.blog/disqus) 😱.
- 
-![Disqus performance](/images/blog/open-source/disqus-perf.png)
+Disqus also encumbers your website's **performance**: [Disqus makes 76 HTTP Requests per load.](https://supunkavinda.blog/disqus) 😱
 
- And you can find a ton of [privacy](https://www.google.com.hk/search?q=disqus+privacy&oq=disqus+privacy) and [performance](https://www.google.com.hk/search?q=disqus+performance) related issues of Disqus if you google it.
+![Disqus performance](https://chirpy.dev/images/blog/open-source/disqus-perf.png)
+
+You can find a ton of [privacy](https://www.google.com.hk/search?q=disqus+privacy&oq=disqus+privacy) and [performance](https://www.google.com.hk/search?q=disqus+performance) related issues of Disqus if you google it.
 
 ## Solution
 
-To avoid privacy issues as Disqus has, we chose our tech stacks carefully, and we prefer to use self-hosted versions of other services that we don't implement ourselves. e.g., for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid sharing your and your customer's data with third-party companies. Plausible is an [open-source](https://github.com/plausible/analytics/) and [privacy-friendly](https://plausible.io/privacy-focused-web-analytics) software as well, so you don't need a cookie consent banner because of using our services. We also plan to provide a self-host solution if you have privacy concerns or just want to keep the data on your server.
+### Privacy
 
-For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/), we generated comment pages during the build process, thus your user will see the UI immediately instead of loading a bunch of JS & CSS and API calls to render the UI, it can be very slow on mobile devices.
+To avoid such privacy issues, we chose our business model with privacy-friendly in mind. First, we'll be honest: money is necessary for keeping the project development going. A price is always exacted for what free services bestow. You see Ads or you lose privacy. We choose a transparent pricing model — You pay, and you get the service. Nothing more.
+
+We also chose our tech stacks carefully, and we prefer to use self-hosted versions of third-party services. For example, for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid sharing your customer's data with third-party companies. Plausible is an [open-source](https://github.com/plausible/analytics/) and [privacy-friendly](https://plausible.io/privacy-focused-web-analytics) software as well, we have the same privacy goal.
+
+### Performance
+
+For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/). We generate comment pages during the build process, so your users will see the UI immediately instead of loading a bunch of JavaScript & CSS and API calls to render the UI. The performance boost is even more noticeable on slow mobile devices.
 
 ## Current state
 
-Currently, we're in the public beta phase, which means basic features should be working, like social sign-in, creating a project, integrating it in your website, commenting, and replying with rich-text-formating & markdown shortcuts, like a comment, etc. Please note: you may lose your data if there're some hard conflicts we can't migrate our database easily, but that should be rare.
+Currently, we're in the public beta phase, so basic features should work:
+
+- Social login
+- Create a new project
+- Integrate into your existing website
+- Customize the widget styles
+- Comment with rich text formatting and markdown shortcuts
+- Like a comment
+- More to come!
+
+Please note: you may lose your data if there're some hard conflicts during migratings of our database, but that should be rare.
 
 ## End
 
-We're working hard to add more features to make it easier to use, stay tuned! You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. You're welcome to contribute to this project. 🙌
+Please feel free to try our services! We're working hard to add more features to make it easier to use, stay tuned! You can also check [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. You're welcome to contribute to this project. 🙌
