@@ -6,19 +6,19 @@
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
 
-## Features
+## Key features
 
 - 🔒 Privacy friendly
 - ⚡️ Reasonably fast
-- 🎨 Customizable
-- ✍️ Markdown shortcuts
-- 📈 Analytics
+- 🎨 Customizable widget
+- ✍️ Markdown shortcuts & Rich Text Formatting
+- 📈 Widget analytics
 
 ## Tech stacks
 
 - [Next.js](https://github.com/vercel/next.js)
-- [Hasura/graphql-engine](https://github.com/hasura/graphql-engine)
-- [tailwindcss/twin.macro](https://github.com/ben-rogerson/twin.macro)
+- [GraphQL](https://graphql.org/) & [Hasura/graphql-engine](https://github.com/hasura/graphql-engine) & [Apollo Client](https://github.com/apollographql/apollo-client)
+- [tailwindcss](https://tailwindcss.com/) & [twin.macro](https://github.com/ben-rogerson/twin.macro)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [Plausible](https://github.com/plausible/analytics)
 
@@ -30,6 +30,14 @@ You're welcome to contribute to this project.
 
 ## [Self-hosted](https://chirpy.dev/docs//self-hosted)
 
+## Roadmap
+
+We're trying out best to make Chirpy General Available first. Here are the blocking features:
+
+- Email notification
+- Email login without password
+- Account plan
+
 ## License
 
-The Apache License
+The Apache License.
