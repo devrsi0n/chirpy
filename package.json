@@ -37,8 +37,8 @@
   },
   "dependencies": {
     "@apollo/client": "3.4.17",
-    "@emotion/css": "11.5.0",
-    "@emotion/react": "11.7.0",
+    "@emotion/css": "11.7.1",
+    "@emotion/react": "11.7.1",
     "@emotion/server": "11.4.0",
     "@emotion/styled": "11.6.0",
     "@geist-ui/react-icons": "1.0.1",
@@ -64,9 +64,9 @@
     "datamaps": "0.5.9",
     "dayjs": "1.10.7",
     "debounce-promise": "^3.1.2",
-    "framer-motion": "5.4.5",
+    "framer-motion": "5.5.5",
     "github-slugger": "1.4.0",
-    "graphql": "16.1.0",
+    "graphql": "16.2.0",
     "gray-matter": "4.0.3",
     "jsonwebtoken": "8.5.1",
     "localforage": "1.10.0",
@@ -92,11 +92,11 @@
     "superjson": "1.8.0",
     "type-fest": "2.8.0",
     "uuid": "8.3.2",
-    "ws": "8.3.0"
+    "ws": "8.4.0"
   },
   "devDependencies": {
     "@babel/core": "7.16.5",
-    "@emotion/babel-plugin": "11.3.0",
+    "@emotion/babel-plugin": "11.7.2",
     "@emotion/eslint-plugin": "11.7.0",
     "@graphql-codegen/cli": "2.3.0",
     "@graphql-codegen/introspection": "2.1.0",
@@ -135,7 +135,7 @@
     "babel-plugin-dynamic-import-node": "2.3.3",
     "babel-plugin-macros": "3.1.0",
     "color-convert": "2.0.1",
-    "concurrently": "6.4.0",
+    "concurrently": "6.5.1",
     "cypress": "9.2.0",
     "dotenv": "10.0.0",
     "dotenv-cli": "4.1.1",
@@ -143,7 +143,7 @@
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
     "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-jest": "25.3.0",
+    "eslint-plugin-jest": "25.3.2",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-unicorn": "39.0.0",
     "identity-obj-proxy": "3.0.0",
@@ -160,7 +160,7 @@
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "twin.macro": "2.8.2",
     "typescript": "4.5.4",
-    "vite": "2.7.7",
+    "vite": "2.7.8",
     "whatwg-fetch": "3.6.2"
   },
   "engines": {
