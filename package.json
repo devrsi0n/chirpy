@@ -160,7 +160,7 @@
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "twin.macro": "2.8.2",
     "typescript": "4.5.4",
-    "vite": "2.7.8",
+    "vite": "2.7.10",
     "whatwg-fetch": "3.6.2"
   },
   "engines": {
