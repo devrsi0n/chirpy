@@ -46,8 +46,9 @@ export function SideBar({ directories, title, className }: SideBarProps) {
       </aside>
       <aside tw="w-full sm:(hidden)">
         <SideMenu
-          direction="br"
+          position="br"
           styles={{ items: tw`w-full overflow-y-auto space-y-2 flex-1 pl-6` }}
+          fixed
         >
           <SideMenu.Item>{header}</SideMenu.Item>
           {directories.map((dir) => (
