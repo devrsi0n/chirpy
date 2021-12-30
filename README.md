@@ -4,6 +4,8 @@
 
 <!-- ![Vercel](https://vercelbadge.vercel.app/api/devrsi0n/chirpy) -->
 
+<img src="public/images/marketing/preview.png" width="350"></img>
+
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
 
 ## Key features
