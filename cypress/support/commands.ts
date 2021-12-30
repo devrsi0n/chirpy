@@ -29,7 +29,7 @@ import { Session } from 'next-auth';
 import { jwtBody } from '../fixtures/user';
 
 Cypress.Commands.add('login' as any, () => {
-  cy.intercept(`${Cypress.env('NEXT_PUBLIC_APP_URL')}/api/auth/session`, (req) => {
+  cy.intercept(`/api/auth/session`, (req) => {
     req.continue((res) => {
       res.send({
         body: {
