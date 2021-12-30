@@ -96,7 +96,7 @@ export default function Profile(): JSX.Element {
     <ProfileContainer tw="space-y-7">
       <PageTitle>Profile</PageTitle>
       <section tw="space-y-6">
-        <div tw="relative mt-1 w-full h-40 rounded-t flex justify-center items-end" css={gradient}>
+        <div tw="relative mt-1 w-full h-40 rounded-t flex justify-center items-end bg-gradient-to-r from-primary-900 to-plum-900">
           {avatar && (
             <Avatar
               src={avatar}

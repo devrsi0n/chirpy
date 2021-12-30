@@ -34,8 +34,6 @@ export default function Plugins(
   );
   config.env.SESSION_TOKEN = createToken(jwtBody, { maxAge });
   config.env.TEST_USER_ID = process.env.TEST_USER_ID;
-  config.env.NEXT_PUBLIC_APP_URL = process.env.NEXT_PUBLIC_APP_URL;
-  config.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN;
 
   return config;
 }
