@@ -12,11 +12,12 @@ import { ssrMode } from '$/utilities/env';
 import { SideMenuContextProvider, useSideMenuContext } from './SideMenuContext';
 
 export type SideMenuProps = {
-  direction?: 'tl' | 'br';
+  position?: 'tl' | 'br';
   styles?: {
     items?: TwStyle;
   };
   children: React.ReactNode;
+  fixed?: boolean;
 };
 
 const circlePosStyle = {
@@ -38,12 +39,12 @@ const navVariants: Variants = {
 /**
  * SideMenu is a toggle menu on mobile views.
  */
-export function SideMenu({ children, direction = 'tl', styles }: SideMenuProps): JSX.Element {
+export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuProps): JSX.Element {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useClickOutside(() => isOpen && toggleOpen(0));
-  const [containerStyles, buttonStyles] = posStyles[direction];
+  const [containerStyles, buttonStyles] = posStyles[position];
   const backgroundVariant = React.useMemo(() => {
-    const pos = circlePosStyle[direction];
+    const pos = circlePosStyle[position];
     return {
       open: (height = 1000) => ({
         clipPath: `circle(${height * 2 + 200}px at ${pos})`,
@@ -63,19 +64,23 @@ export function SideMenu({ children, direction = 'tl', styles }: SideMenuProps):
         },
       },
     };
-  }, [direction]);
-  const [didAnimationEnd, setDidAnimationEnd] = React.useState(false);
+  }, [position]);
+  const [isAnimationEnd, setIsAnimationEnd] = React.useState(false);
   return (
     <m.nav
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
       custom={!ssrMode ? document.body.clientHeight : undefined}
-      tw="w-[250px] h-[100vh] absolute sm:fixed top-0 bottom-0"
-      css={[containerStyles, didAnimationEnd && tw`h-auto`]}
+      tw="w-[250px] h-[100vh] top-0 bottom-0 isolate"
+      css={[
+        containerStyles,
+        isAnimationEnd && tw`h-auto`,
+        fixed ? tw`fixed` : tw`absolute sm:fixed`,
+      ]}
       ref={containerRef}
-      onAnimationStart={(definition) => definition === 'open' && setDidAnimationEnd(false)}
-      onAnimationComplete={(definition) => definition === 'closed' && setDidAnimationEnd(true)}
+      onAnimationStart={(definition) => definition === 'open' && setIsAnimationEnd(false)}
+      onAnimationComplete={(definition) => definition === 'closed' && setIsAnimationEnd(true)}
     >
       <Global
         styles={
@@ -87,11 +92,20 @@ export function SideMenu({ children, direction = 'tl', styles }: SideMenuProps):
           `
         }
       />
-      <m.div tw="bg-gray-200 absolute inset-0" variants={backgroundVariant} />
+      <m.div
+        tw="bg-gray-200 absolute inset-0"
+        css={isAnimationEnd && tw`hidden`}
+        variants={backgroundVariant}
+      />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>
         <SideMenuItems css={[styles?.items]}>{children}</SideMenuItems>
       </SideMenuContextProvider>
-      <IconButton aria-expanded={isOpen} onClick={() => toggleOpen()} css={buttonStyles}>
+      <IconButton
+        aria-expanded={isOpen}
+        onClick={() => toggleOpen()}
+        css={buttonStyles}
+        tw="bg-gray-100"
+      >
         <span tw="sr-only">Open navigation menu</span>
         <Menu css={[isOpen && tw`hidden`]} />
         <Dismiss css={[!isOpen && tw`hidden`]} />
