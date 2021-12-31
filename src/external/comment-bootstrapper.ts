@@ -87,5 +87,3 @@ function isResponseError(res: GetPagByUrl): res is ResponseError {
 }
 
 const getIframeId = (id: string) => `chirpy-${id}`;
-
-export { APP_NAME_LOWERCASE as appName } from '../lib/constants';

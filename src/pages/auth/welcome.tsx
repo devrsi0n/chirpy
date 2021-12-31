@@ -9,6 +9,7 @@ import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useCelebration } from '$/hooks/useCelebration';
+import { APP_NAME } from '$/lib/constants';
 import { ssrMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';
 
@@ -30,7 +31,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Welcome</title>
+        <title>Welcome - {APP_NAME}</title>
       </Head>
       {isFullFilled ? <FullFilled /> : <NotFullFilled />}
     </div>

@@ -8,9 +8,6 @@ import './mocks/mockUseCurrentUser';
 import { cleanEvents } from './mocks/nextRouter';
 
 DotEnv.config({
-  path: '.env',
-});
-DotEnv.config({
   path: '.env.test',
 });
 

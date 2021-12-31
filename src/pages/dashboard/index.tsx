@@ -14,6 +14,7 @@ import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsLazyQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
+import { APP_NAME } from '$/lib/constants';
 
 type FormFields = {
   name: string;
@@ -22,7 +23,7 @@ type FormFields = {
 
 export default function Dashboard(): JSX.Element {
   const {
-    data: { id },
+    data: { id, name },
     loading: userLoading,
   } = useCurrentUser();
 
@@ -80,7 +81,9 @@ export default function Dashboard(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Dashboard</title>
+        <title>
+          {name} - {APP_NAME} dashboard
+        </title>
       </Head>
 
       <section tw="space-y-10">

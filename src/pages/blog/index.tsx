@@ -6,6 +6,7 @@ import 'twin.macro';
 import { Heading } from '$/components/Heading';
 import { Image } from '$/components/Image';
 import { Link } from '$/components/Link';
+import { APP_NAME } from '$/lib/constants';
 import { getDirectories } from '$/server/mdx/files';
 import { Directory } from '$/server/types/file';
 import { getBannerProps } from '$/utilities/image';
@@ -20,7 +21,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>{APP_NAME} blog</title>
       </Head>
 
       <div tw="min-h-full">

@@ -10,7 +10,6 @@ module.exports = {
     port: 3001,
   },
   define: {
-    'process.env.NEXT_PUBLIC_APP_NAME': JSON.stringify(process.env.NEXT_PUBLIC_APP_NAME),
     'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(process.env.NEXT_PUBLIC_APP_URL),
   },
 };

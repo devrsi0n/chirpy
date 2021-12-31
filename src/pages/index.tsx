@@ -9,13 +9,14 @@ import { Pricing } from '$/blocks/Pricing';
 import { Button } from '$/components/Button';
 import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
+import { APP_NAME } from '$/lib/constants';
 import { CommonPageProps } from '$/types/page.type';
 
 function Home(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
+        <title>{APP_NAME}</title>
       </Head>
       <section tw="min-h-full flex flex-col items-center space-y-24">
         <div tw="space-y-8">

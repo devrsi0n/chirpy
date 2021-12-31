@@ -7,6 +7,7 @@ import {
   InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
+import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';
@@ -27,6 +28,7 @@ import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page'
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { APP_NAME } from '$/lib/constants';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
@@ -49,29 +51,34 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <CommentContextProvider projectId={props.projectId}>
-      <div css={tw`flex flex-row justify-between items-center mb-4`}>
-        <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
-          <IconButton css={tw`transform translate-x-1`}>
-            <ArrowLeft size={20} />
-          </IconButton>
-        </Link>
-        <Heading as="h4">
-          <span tw="font-bold">{comment?.user.name}</span>
-          <span>{`'s comment details`}</span>
-        </Heading>
-        <UserDropDown variant="Widget" />
-      </div>
-      {comment?.id && (
-        <CommentLinkedList
-          key={comment!.id}
-          comment={comment!}
-          onClickLikeAction={handleClickLikeAction}
-          onSubmitReply={handleSubmitReply}
-        />
-      )}
-      <PoweredBy />
-    </CommentContextProvider>
+    <>
+      <Head>
+        <title>{APP_NAME} comment details</title>
+      </Head>
+      <CommentContextProvider projectId={props.projectId}>
+        <div css={tw`flex flex-row justify-between items-center mb-4`}>
+          <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
+            <IconButton css={tw`transform translate-x-1`}>
+              <ArrowLeft size={20} />
+            </IconButton>
+          </Link>
+          <Heading as="h4">
+            <span tw="font-bold">{comment?.user.name}</span>
+            <span>{`'s comment details`}</span>
+          </Heading>
+          <UserDropDown variant="Widget" />
+        </div>
+        {comment?.id && (
+          <CommentLinkedList
+            key={comment!.id}
+            comment={comment!}
+            onClickLikeAction={handleClickLikeAction}
+            onSubmitReply={handleSubmitReply}
+          />
+        )}
+        <PoweredBy />
+      </CommentContextProvider>
+    </>
   );
 }
 type PathParams = {

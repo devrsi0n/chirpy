@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import connect, { ErrorHandler } from 'next-connect';
 
+import { APP_NAME } from '$/lib/constants';
+
 import { ApiError } from './error';
 
 export const handleInternalFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (
@@ -16,7 +18,7 @@ export const handleInternalFailure: ErrorHandler<NextApiRequest, NextApiResponse
     return res.status(error.httpStatus).send(error.message);
   }
 
-  res.status(500).end(`${process.env.NEXT_PUBLIC_APP_NAME} error: ${error.toString()}`);
+  res.status(500).end(`${APP_NAME} error: ${error.toString()}`);
 };
 
 export const getApiHandler = () =>

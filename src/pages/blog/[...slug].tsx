@@ -8,6 +8,7 @@ import 'twin.macro';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
 import { useHasMounted } from '$/hooks/useHasMounted';
+import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { isENVDev } from '$/server/utilities/env';
@@ -28,7 +29,9 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   return (
     <>
       <Head>
-        <title>{frontMatter?.title} - Blog</title>
+        <title>
+          {frontMatter?.title} - {APP_NAME} blog
+        </title>
       </Head>
 
       <section tw="flex flex-row space-x-2">
