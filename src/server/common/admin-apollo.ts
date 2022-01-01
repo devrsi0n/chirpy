@@ -38,12 +38,13 @@ const getWSLink = () => {
   });
 };
 
-let apolloClient: ApolloClient<NormalizedCacheObject>;
-
 /**
  * Only used by service, never use it in client.
  */
 export function getAdminApollo(): ApolloClient<NormalizedCacheObject> {
+  if (global.adminApollo) {
+    return global.adminApollo;
+  }
   const link = split(
     ({ query }) => {
       const definition = getMainDefinition(query);
@@ -52,14 +53,17 @@ export function getAdminApollo(): ApolloClient<NormalizedCacheObject> {
     getWSLink(),
     getHttpLink(),
   );
-  if (apolloClient) {
-    return apolloClient;
-  }
 
-  apolloClient = new ApolloClient({
+  global.adminApollo = new ApolloClient({
     link,
     cache: new InMemoryCache(),
     ssrMode: true,
+    defaultOptions: {
+      query: {
+        // Only rely on network as there are some race conditions with serverless functions
+        fetchPolicy: 'network-only',
+      },
+    },
   });
-  return apolloClient;
+  return global.adminApollo;
 }
