@@ -21,6 +21,17 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
     return (
       <Html lang="en">
         <Head>
+          <meta name="title" content="Chirpy" />
+          <meta
+            name="description"
+            content="Chirpy is a privacy-friendly, customizable 
+and open-source Disqus alternate."
+          />
+          <meta name="copyright" content="Chirpy Labs" />
+          <meta
+            name="keywords"
+            content="comment system, privacy-friendly, customizable, open-source"
+          />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
           <link

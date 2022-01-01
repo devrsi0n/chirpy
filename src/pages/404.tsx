@@ -8,12 +8,13 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
 import { Text } from '$/components/Text/Text';
+import { APP_NAME } from '$/lib/constants';
 
 export default function Custom404(): JSX.Element {
   return (
     <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
+        <title>404 - {APP_NAME}</title>
       </Head>
       <section tw="px-4 space-y-8 flex flex-col items-center">
         <div

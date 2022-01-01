@@ -6,7 +6,7 @@ import 'twin.macro';
 
 import { Spinner } from '$/components/Spinner';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
-import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
@@ -34,7 +34,7 @@ export default function Redirecting(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Redirecting</title>
+        <title>Redirecting - {APP_NAME}</title>
       </Head>
       <Spinner tw="mt-24 justify-center" />
     </>

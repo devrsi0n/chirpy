@@ -23,6 +23,7 @@ import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page'
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { APP_NAME } from '$/lib/constants';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   PageByUrlOnlyDocument,
@@ -70,15 +71,20 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <CommentContextProvider projectId={props.projectId}>
+    <>
       <Head>
-        <title>{process.env.NEXT_PUBLIC_APP_NAME} Comment</title>
+        <title>{APP_NAME} comments</title>
       </Head>
-      <div tw="pt-1">
-        <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
-      </div>
-      <PoweredBy />
-    </CommentContextProvider>
+      <CommentContextProvider projectId={props.projectId}>
+        <Head>
+          <title>{APP_NAME} Comment</title>
+        </Head>
+        <div tw="pt-1">
+          <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
+        </div>
+        <PoweredBy />
+      </CommentContextProvider>
+    </>
   );
 }
 

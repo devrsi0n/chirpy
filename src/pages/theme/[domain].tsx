@@ -15,6 +15,7 @@ import { Text } from '$/components/Text';
 import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/ThemeProvider';
 import { translateRadixColor } from '$/contexts/ThemeProvider/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
+import { APP_NAME } from '$/lib/constants';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   ThemeProjectByPkDocument,
@@ -102,73 +103,80 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   };
 
   return (
-    <section tw="px-2">
-      <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
-      <div tw="flex flex-row">
-        <aside tw="flex-1 border-r pr-4 space-y-11">
-          <div tw="space-y-6">
-            <BoldHeading as="h4">Theme Editor</BoldHeading>
-            <Text variant="secondary">
-              Click to change variants then we will save your theme automatically.
-            </Text>
-          </div>
-          <div tw="space-y-4">
-            <BoldHeading>Colors</BoldHeading>
-            <Text>Primary</Text>
-            <div tw="flex flex-row items-center space-x-2">
-              <Popover
-                buttonAs={IconButton}
-                content={
-                  <ul tw="flex flex-row space-x-3">
-                    {Object.entries(colorOptions).map(([key, color]) => (
-                      <li key={color[activeTheme][900]}>
-                        <IconButton
-                          onClick={handClickPrimaryColorFunction(color)}
-                          aria-label={`Color ${key}`}
-                        >
-                          <span
-                            tw="inline-block w-6 h-6 rounded-full"
-                            style={{ background: color[activeTheme][900] }}
-                          />
-                        </IconButton>
-                      </li>
-                    ))}
-                  </ul>
-                }
-              >
-                <span
-                  aria-label="Primary color selector"
-                  tw="inline-block w-6 h-6 rounded-full bg-primary-900"
-                />
-              </Popover>
-              <Text
-                tw="px-2 leading-none mb-2"
-                variant="secondary"
-                aria-label="Selected color"
-                size="sm"
-              >
-                {theme.colors[activeTheme].primary[900]}
+    <>
+      <Head>
+        <title>
+          {props.project?.name} - {APP_NAME} theme editor
+        </title>
+      </Head>
+      <section tw="px-2">
+        <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
+        <div tw="flex flex-row">
+          <aside tw="flex-1 border-r pr-4 space-y-11">
+            <div tw="space-y-6">
+              <BoldHeading as="h4">Theme Editor</BoldHeading>
+              <Text variant="secondary">
+                Click to change variants then we will save your theme automatically.
               </Text>
             </div>
-          </div>
-        </aside>
-        <section tw="flex-2 pl-6">
-          <div tw="space-y-5 mb-4">
-            <BoldHeading as="h4">Preview</BoldHeading>
-            <Text variant="secondary">
-              {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
-            </Text>
-          </div>
-          <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
-          <CommentTrees
-            comments={comments as any}
-            onSubmitReply={() => Promise.resolve()}
-            onClickLikeAction={() => Promise.resolve()}
-            rtePlaceholder="Preview"
-          />
-        </section>
-      </div>
-    </section>
+            <div tw="space-y-4">
+              <BoldHeading>Colors</BoldHeading>
+              <Text>Primary</Text>
+              <div tw="flex flex-row items-center space-x-2">
+                <Popover
+                  buttonAs={IconButton}
+                  content={
+                    <ul tw="flex flex-row space-x-3">
+                      {Object.entries(colorOptions).map(([key, color]) => (
+                        <li key={color[activeTheme][900]}>
+                          <IconButton
+                            onClick={handClickPrimaryColorFunction(color)}
+                            aria-label={`Color ${key}`}
+                          >
+                            <span
+                              tw="inline-block w-6 h-6 rounded-full"
+                              style={{ background: color[activeTheme][900] }}
+                            />
+                          </IconButton>
+                        </li>
+                      ))}
+                    </ul>
+                  }
+                >
+                  <span
+                    aria-label="Primary color selector"
+                    tw="inline-block w-6 h-6 rounded-full bg-primary-900"
+                  />
+                </Popover>
+                <Text
+                  tw="px-2 leading-none mb-2"
+                  variant="secondary"
+                  aria-label="Selected color"
+                  size="sm"
+                >
+                  {theme.colors[activeTheme].primary[900]}
+                </Text>
+              </div>
+            </div>
+          </aside>
+          <section tw="flex-2 pl-6">
+            <div tw="space-y-5 mb-4">
+              <BoldHeading as="h4">Preview</BoldHeading>
+              <Text variant="secondary">
+                {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
+              </Text>
+            </div>
+            <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
+            <CommentTrees
+              comments={comments as any}
+              onSubmitReply={() => Promise.resolve()}
+              onClickLikeAction={() => Promise.resolve()}
+              rtePlaceholder="Preview"
+            />
+          </section>
+        </div>
+      </section>
+    </>
   );
 }
 

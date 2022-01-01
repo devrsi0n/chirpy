@@ -24,7 +24,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     },
   });
   const confirmationCode = getConfirmationCode();
-  const url = `${process.env.NEXT_PUBLIC_APP_URL}/auth/deletion-confirmation?code=${confirmationCode}`;
+  const url = `${process.env.NEXT_PUBLIC_APP_URL}/auth/delete-confirmation?code=${confirmationCode}`;
   // Facebook requires the JSON to be non-quoted and formatted like this, so we need to create the JSON by hand:
   res.setHeader('Content-Type', 'application/json');
   res.send(`{ url: '${url}', confirmation_code: '${confirmationCode}' }`);

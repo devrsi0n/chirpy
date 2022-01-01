@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { APP_NAME } from '$/lib/constants';
+
 import { Badge } from '../Badge';
 import { Link, LinkProps } from '../Link';
 
@@ -36,7 +38,7 @@ export function Logo({
     <Link
       className={className}
       href="/"
-      aria-label={`Logo of ${process.env.NEXT_PUBLIC_APP_NAME}`}
+      aria-label={`Logo of ${APP_NAME}`}
       variant="plain"
       tw="text-primary-900 relative"
       {...linkProps}

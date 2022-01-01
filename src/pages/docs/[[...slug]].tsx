@@ -6,6 +6,7 @@ import 'twin.macro';
 
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { SideBar, SideBarProps } from '$/blocks/SideBar';
+import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { CommonPageProps } from '$/types/page.type';
@@ -17,7 +18,9 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
   return (
     <>
       <Head>
-        <title>{frontMatter?.title} - Docs</title>
+        <title>
+          {frontMatter?.title} - {APP_NAME} docs
+        </title>
       </Head>
 
       <div tw="min-h-full">

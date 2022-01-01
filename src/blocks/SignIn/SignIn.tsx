@@ -9,6 +9,7 @@ import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { Logo } from '$/components/Logo';
 import { Text } from '$/components/Text';
+import { APP_NAME } from '$/lib/constants';
 import { SIGN_IN_ERRORS } from '$/strings';
 
 import { authOptions } from './DataSource';
@@ -30,52 +31,47 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
   }, []);
   const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
-    <>
-      <Head>
-        <title>Sign in</title>
-      </Head>
-      <div tw="flex flex-row h-full" className="full-bleed">
-        <div tw="flex-1 flex flex-col justify-center items-center">
-          <div tw="py-7 w-full sm:(mx-2 w-64) md:(w-96)">
-            <div tw="pb-8">
-              <Logo size="lg" hideSpacing />
-            </div>
-            <div tw="space-y-2">
-              <Heading as="h2" tw="font-black mt-5">
-                {title}
-              </Heading>
-              {subtitle}
-            </div>
-            <div tw="space-y-2 mt-8">
-              {error && <Alert type="warn">{error}</Alert>}
-              {authOptions.map((option) => (
-                <Button
-                  key={option.name}
-                  onClick={() =>
-                    signIn(option.name.toLowerCase(), {
-                      callbackUrl: `${location.origin}/auth/redirecting`,
-                    })
-                  }
-                  tw="w-full px-0 md:(justify-start pl-20)"
-                  size="lg"
-                >
-                  <option.icon />
-                  <span tw="ml-2 text-left">Sign in with {option.name}</span>
-                </Button>
-              ))}
-            </div>
-            <Text tw="py-3" size="sm" variant="secondary">
-              By clicking the buttons above, you acknowledge that you have read and understood, and
-              agree to {process.env.NEXT_PUBLIC_APP_NAME}
-              {`'s `}
-              <Link href="/terms-of-service">Terms of Service</Link> and{' '}
-              <Link href="/privacy-policy">Privacy Policy</Link>.
-            </Text>
+    <div tw="flex flex-row h-full" className="full-bleed">
+      <div tw="flex-1 flex flex-col justify-center items-center">
+        <div tw="py-7 w-full sm:(mx-2 w-64) md:(w-96)">
+          <div tw="pb-8">
+            <Logo size="lg" hideSpacing />
           </div>
+          <div tw="space-y-2">
+            <Heading as="h2" tw="font-black mt-5">
+              {title}
+            </Heading>
+            {subtitle}
+          </div>
+          <div tw="space-y-2 mt-8">
+            {error && <Alert type="warn">{error}</Alert>}
+            {authOptions.map((option) => (
+              <Button
+                key={option.name}
+                onClick={() =>
+                  signIn(option.name.toLowerCase(), {
+                    callbackUrl: `${location.origin}/auth/redirecting`,
+                  })
+                }
+                tw="w-full px-0 md:(justify-start pl-20)"
+                size="lg"
+              >
+                <option.icon />
+                <span tw="ml-2 text-left">Sign in with {option.name}</span>
+              </Button>
+            ))}
+          </div>
+          <Text tw="py-3" size="sm" variant="secondary">
+            By clicking the buttons above, you acknowledge that you have read and understood, and
+            agree to {APP_NAME}
+            {`'s `}
+            <Link href="/terms-of-service">Terms of Service</Link> and{' '}
+            <Link href="/privacy-policy">Privacy Policy</Link>.
+          </Text>
         </div>
-        <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
       </div>
-    </>
+      <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
+    </div>
   );
 }
 

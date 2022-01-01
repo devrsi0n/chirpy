@@ -1,13 +1,13 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { appName, comment } from '../comment-bootstrapper';
+import { comment } from '../comment-bootstrapper';
 
 describe('comment', () => {
   beforeEach(() => {
     render(
       <div>
-        <div {...{ [`data-${appName}-domain`]: 'test.com' }} />
-        <div {...{ [`data-${appName}-comment`]: 'true' }} />
+        <div {...{ [`data-chirpy-domain`]: 'test.com' }} />
+        <div {...{ [`data-chirpy-comment`]: 'true' }} />
       </div>,
     );
   });
