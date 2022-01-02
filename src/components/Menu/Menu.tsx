@@ -2,7 +2,7 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
-import { Menu } from '@headlessui/react';
+import { Menu as HeadlessMenu } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
@@ -14,7 +14,7 @@ import { Button, IconButton } from '../Button';
 
 export type Shape = 'circle' | 'square';
 
-export type DropDownProps = React.PropsWithChildren<{
+export type MenuProps = React.PropsWithChildren<{
   content: React.ReactNode;
   buttonProps?: {
     shape?: Shape;
@@ -27,29 +27,32 @@ export type DropDownProps = React.PropsWithChildren<{
   };
 }>;
 
-export function DropDown({ content, buttonProps, styles, children }: DropDownProps): JSX.Element {
+export function Menu({ content, buttonProps, styles, children }: MenuProps): JSX.Element {
   const { shape, ariaLabel } = {
     shape: 'circle',
-    ariaLabel: 'Click to open the dropdown',
+    ariaLabel: 'click to open the menu',
     ...buttonProps,
   };
   return (
     <div css={[tw`relative inline-block text-left`, styles?.root]}>
-      <Menu>
+      <HeadlessMenu>
         {({ open }: { open: boolean }) => (
           <>
             <div css={styles?.button}>
-              <Menu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
+              <HeadlessMenu.Button
+                as={shape === 'circle' ? IconButton : Button}
+                aria-label={ariaLabel}
+              >
                 {content}
                 {shape === 'square' && (
                   <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />
                 )}
-              </Menu.Button>
+              </HeadlessMenu.Button>
             </div>
             <AnimatePresence>
               {open && (
                 <m.div {...easeInOut}>
-                  <Menu.Items
+                  <HeadlessMenu.Items
                     static
                     css={[
                       tw`absolute right-0 mt-1 border divide-y rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
@@ -58,48 +61,48 @@ export function DropDown({ content, buttonProps, styles, children }: DropDownPro
                     ]}
                   >
                     {children}
-                  </Menu.Items>
+                  </HeadlessMenu.Items>
                 </m.div>
               )}
             </AnimatePresence>
           </>
         )}
-      </Menu>
+      </HeadlessMenu>
     </div>
   );
 }
 
-DropDown.Item = DropDownItem;
+Menu.Item = MenuItem;
 
-export type DropDownItemProps = React.PropsWithChildren<
+export type MenuItemProps = React.PropsWithChildren<
   {
     className?: string;
     disableAutoDismiss?: boolean;
-  } & Pick<React.ComponentProps<typeof Menu.Item>, 'onClick'>
+  } & Pick<React.ComponentProps<typeof HeadlessMenu.Item>, 'onClick'>
 >;
 
-export function DropDownItem(props: DropDownItemProps): JSX.Element {
+export function MenuItem(props: MenuItemProps): JSX.Element {
   const child = props.disableAutoDismiss ? (
     <div onClick={(e) => props.disableAutoDismiss && e.stopPropagation()}>{props.children}</div>
   ) : (
     props.children
   );
   return (
-    <Menu.Item onClick={props.onClick}>
+    <HeadlessMenu.Item onClick={props.onClick}>
       {
         (/* { active }: ItemRenderPropArg */) => (
           <div
-            css={[listHoverable, itemStyle, !props.disableAutoDismiss && DropDownItemPadding]}
+            css={[listHoverable, itemStyle, !props.disableAutoDismiss && MenuItemPadding]}
             className={props.className}
           >
             {child}
           </div>
         )
       }
-    </Menu.Item>
+    </HeadlessMenu.Item>
   );
 }
 
-export const DropDownItemPadding = tw`px-6 py-2`;
+export const MenuItemPadding = tw`px-6 py-2`;
 
 const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;

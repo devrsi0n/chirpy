@@ -8,10 +8,10 @@ import { BaseButton, Button } from '$/components/Button';
 import { Card } from '$/components/Card';
 import { Dialog } from '$/components/Dialog';
 import { Divider } from '$/components/Divider';
-import { DropDown } from '$/components/DropDown';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
 import { List } from '$/components/List';
+import { Menu } from '$/components/Menu';
 import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
 import { useDeleteProjectByPkMutation } from '$/graphql/generated/project';
@@ -77,7 +77,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <Heading as="h3">{project.name}</Heading>
         <div tw="flex flex-row items-center space-x-2">
           <PageViewStats domain={project.domain} />
-          <DropDown
+          <Menu
             styles={{ root: tw`mr-1` }}
             buttonProps={{ ariaLabel: 'Show more project options' }}
             content={
@@ -86,14 +86,14 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
               </span>
             }
           >
-            <DropDown.Item
+            <Menu.Item
               onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
               tw="space-x-1"
             >
               <Trash2 size={14} />
               <span>Delete</span>
-            </DropDown.Item>
-          </DropDown>
+            </Menu.Item>
+          </Menu>
         </div>
       </div>
       <Text tw="px-6" variant="secondary">

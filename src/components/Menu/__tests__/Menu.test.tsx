@@ -2,9 +2,9 @@ import { render, screen, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 
-import { DropDown } from '../DropDown';
+import { Menu } from '../Menu';
 
-describe('DropDownMenu', () => {
+describe('Menu', () => {
   afterEach(() => {
     jest.clearAllMocks();
     cleanup();
@@ -16,10 +16,10 @@ describe('DropDownMenu', () => {
     const item2Text = 'item 2';
     const mockHandleClickItem1 = jest.fn();
     render(
-      <DropDown content={<span>{contentText}</span>}>
-        <DropDown.Item onClick={mockHandleClickItem1}>{item1Text}</DropDown.Item>
-        <DropDown.Item>{item2Text}</DropDown.Item>
-      </DropDown>,
+      <Menu content={<span>{contentText}</span>}>
+        <Menu.Item onClick={mockHandleClickItem1}>{item1Text}</Menu.Item>
+        <Menu.Item>{item2Text}</Menu.Item>
+      </Menu>,
     );
     const button = screen.getByText(contentText);
     expect(button).toBeTruthy();

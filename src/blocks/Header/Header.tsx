@@ -2,7 +2,7 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { SignInButton } from '$/blocks/SignInButton';
-import { UserDropDown } from '$/blocks/UserDropDown';
+import { UserMenu } from '$/blocks/UserMenu';
 import { Link } from '$/components/Link';
 import { Logo } from '$/components/Logo';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
@@ -86,9 +86,7 @@ export function Header(): JSX.Element {
               <Link href="https://github.com/devrsi0n/chirpy">GitHub</Link>
             </nav>
           </div>
-          <div tw="flex">
-            {isSignIn ? <UserDropDown variant="Nav" /> : <SignInButton inPageNav />}
-          </div>
+          <div tw="flex">{isSignIn ? <UserMenu variant="Nav" /> : <SignInButton inPageNav />}</div>
         </section>
       </div>
     </header>

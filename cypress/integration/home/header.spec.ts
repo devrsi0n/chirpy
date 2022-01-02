@@ -7,7 +7,7 @@ describe('Header', () => {
   });
 
   it('should show user drop down', () => {
-    clickUserDropDown();
+    clickUserMenu();
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
       .findByRole('menu')
@@ -16,11 +16,11 @@ describe('Header', () => {
       .click();
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
-    clickUserDropDown();
+    clickUserMenu();
     cy.get('header').findByRole('link', { name: 'Profile' }).click();
     cy.url().should('include', '/profile');
 
-    clickUserDropDown();
+    clickUserMenu();
     cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();
     cy.get('header').findByText(testUser.name).should('not.exist');
 
@@ -45,7 +45,7 @@ describe('Header', () => {
   });
 });
 
-function clickUserDropDown() {
+function clickUserMenu() {
   cy.get('header')
     .findByRole('img', {
       name: `The avatar of ${testUser.name}`,

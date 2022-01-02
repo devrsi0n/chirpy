@@ -14,7 +14,7 @@ import tw from 'twin.macro';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { PoweredBy } from '$/blocks/PoweredBy';
-import { UserDropDown } from '$/blocks/UserDropDown';
+import { UserMenu } from '$/blocks/UserMenu';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
@@ -66,7 +66,7 @@ export default function CommentDetailsWidget(
             <span tw="font-bold">{comment?.user.name}</span>
             <span>{`'s comment details`}</span>
           </Heading>
-          <UserDropDown variant="Widget" />
+          <UserMenu variant="Widget" />
         </div>
         {comment?.id && (
           <CommentLinkedList
