@@ -9,7 +9,7 @@ import { getCommentCount } from '$/utilities/get-comment-count';
 
 import { CommentTree } from '../CommentTree';
 import { RichTextEditor } from '../RichTextEditor';
-import { UserDropDown } from '../UserDropDown';
+import { UserMenu } from '../UserMenu';
 
 export type CommentTreesProps = {
   comments: CommentLeafType[];
@@ -31,7 +31,7 @@ export function CommentTrees({
         <Heading as="h3" tw="text-2xl">
           {formatTitle(commentCount)}
         </Heading>
-        <UserDropDown variant="Widget" />
+        <UserMenu variant="Widget" />
       </div>
       <div css={tw`space-y-7`}>
         <div css={tw`space-y-2`}>

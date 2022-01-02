@@ -25,14 +25,14 @@ function broadcastPageHeight(): void {
 
 function handleMessage(event: MessageEvent): void {
   if (event.data === EVENT_CLICK_CONTAINER) {
-    unexpandedDropdown('[id^="headlessui-menu-button"]');
-    unexpandedDropdown('[id^="headlessui-listbox-button"]');
+    unexpandedMenu('[id^="headlessui-menu-button"]');
+    unexpandedMenu('[id^="headlessui-listbox-button"]');
   }
 }
 
-// Click dropdown to close it even
+// Click Menu to close it even
 // user clicks on the out side of iframe
-function unexpandedDropdown(selectors: string): void {
+function unexpandedMenu(selectors: string): void {
   const elements = window.document.querySelectorAll<HTMLDivElement>(selectors);
   for (const element of elements) {
     if (element.getAttribute('aria-expanded') === 'true') {

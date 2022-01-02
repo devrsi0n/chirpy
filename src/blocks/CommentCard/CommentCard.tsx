@@ -8,8 +8,8 @@ import tw from 'twin.macro';
 
 import { Avatar } from '$/components/Avatar';
 import { ActionButton, Button } from '$/components/Button';
-import { DropDown, DropDownItemPadding } from '$/components/DropDown';
 import { Link } from '$/components/Link';
+import { Menu, MenuItemPadding } from '$/components/Menu';
 import { Popover } from '$/components/Popover';
 import { Text } from '$/components/Text';
 import { useToast } from '$/components/Toast';
@@ -135,11 +135,8 @@ export function CommentCard({
                 </div>
                 <>
                   {userHasModeratePermission && (
-                    <DropDown
-                      styles={{ root: tw`-mt-2 mr-2` }}
-                      content={<MoreVertical size={20} />}
-                    >
-                      <DropDown.Item tw="space-x-1" disableAutoDismiss>
+                    <Menu styles={{ root: tw`-mt-2 mr-2` }} content={<MoreVertical size={20} />}>
+                      <Menu.Item tw="space-x-1" disableAutoDismiss>
                         <Popover
                           placement="topEnd"
                           buttonAs="button"
@@ -158,13 +155,13 @@ export function CommentCard({
                             </div>
                           }
                         >
-                          <div css={[tw`flex flex-row items-center`, DropDownItemPadding]}>
+                          <div css={[tw`flex flex-row items-center`, MenuItemPadding]}>
                             <Trash2 size={16} />
                             <span tw="ml-1">Delete</span>
                           </div>
                         </Popover>
-                      </DropDown.Item>
-                    </DropDown>
+                      </Menu.Item>
+                    </Menu>
                   )}
                 </>
               </>

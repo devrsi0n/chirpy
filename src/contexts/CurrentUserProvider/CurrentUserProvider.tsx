@@ -27,10 +27,8 @@ export function CurrentUserProvider({
   });
 
   const handleFetchUser = React.useCallback(() => {
-    if (typeof session?.user?.id !== 'string') {
-      return;
-    }
-    return fetchUser({ variables: { id: session.user.id } });
+    // Don't check the id here to fix refreshing token after signing out issue
+    return fetchUser({ variables: { id: session?.user?.id! } });
   }, [fetchUser, session?.user?.id]);
 
   React.useEffect(() => {

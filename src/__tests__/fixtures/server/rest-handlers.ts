@@ -45,4 +45,22 @@ export const restHandlers = [
       }),
     );
   }),
+  rest.get('*/api/stats/*/main-graph', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        interval: 'date',
+        labels: ['2022-01-02'],
+        plot: [2],
+        present_index: 30,
+        sample_percent: 100,
+        top_stats: [
+          { change: 100, name: 'Unique visitors', value: 62 },
+          { change: 100, name: 'Total pageviews', value: 212 },
+          { change: null, name: 'Bounce rate', value: 66 },
+          { change: 100, name: 'Visit duration', value: 356 },
+        ],
+      }),
+    );
+  }),
 ];

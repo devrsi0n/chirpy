@@ -68,7 +68,7 @@ export function Footer(props: FooterProps): JSX.Element {
         css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-5 flex-row)`}
       >
         <Text variant="secondary" size="sm">
-          &copy; 2021 {APP_NAME} Labs. All rights reserved.
+          &copy; {new Date().getFullYear()} {APP_NAME} Labs. All rights reserved.
         </Text>
         {hasMounted && ThemeIcon && theme && (
           <IconButton onClick={handleClick} aria-label={`${theme} theme`}>
