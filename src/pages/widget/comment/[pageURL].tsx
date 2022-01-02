@@ -178,7 +178,6 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         pageId,
         projectId: themeResult.data.pageByPk.project.id,
         theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
-        isWidget: true,
       },
       revalidate: 1,
     };

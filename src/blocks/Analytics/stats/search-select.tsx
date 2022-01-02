@@ -1,5 +1,5 @@
 /* eslint react/jsx-props-no-spreading: 0 */
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import debounce from 'debounce-promise';
 import { useCombobox } from 'downshift';
 import React, { useState, useCallback } from 'react';

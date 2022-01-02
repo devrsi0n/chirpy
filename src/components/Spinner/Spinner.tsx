@@ -1,4 +1,4 @@
-import { Loader } from '@geist-ui/react-icons';
+import Loader from '@geist-ui/react-icons/loader';
 import * as React from 'react';
 import 'twin.macro';
 

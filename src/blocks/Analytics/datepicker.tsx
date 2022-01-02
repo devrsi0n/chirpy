@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 
 import {
   shiftDays,

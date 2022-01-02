@@ -61,7 +61,7 @@ export function getAdminApollo(): ApolloClient<NormalizedCacheObject> {
     defaultOptions: {
       query: {
         // Only rely on network as there are some race conditions with serverless functions
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'no-cache',
       },
     },
   });

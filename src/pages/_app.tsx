@@ -4,6 +4,7 @@ import { SessionProvider, signIn, useSession } from 'next-auth/react';
 import PlausibleProvider, { usePlausible } from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { useMountedState } from 'react-use';
@@ -73,7 +74,9 @@ type AppLayoutProps = CommonPageProps & {
 };
 
 function AppLayout(props: AppLayoutProps): JSX.Element {
-  const { isWidget, children, layoutProps, theme } = props;
+  const { children, layoutProps, theme } = props;
+  const router = useRouter();
+  const isWidget = router.pathname.startsWith('/widget/');
   const ThemeWrapper = isWidget ? WidgetThemeProvider : React.Fragment;
   const LayoutWrapper = isWidget ? WidgetLayout : Layout;
 

@@ -1,5 +1,6 @@
+import PencilIcon from '@geist-ui/react-icons/edit2';
+import XIcon from '@geist-ui/react-icons/x';
 import { Menu, Transition } from '@headlessui/react';
-import { AdjustmentsIcon, PlusIcon, XIcon, PencilIcon } from '@heroicons/react/solid';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 import tw from 'twin.macro';
@@ -168,7 +169,7 @@ function renderDropdownFilter(
           }`}
           className="group flex w-full justify-between items-center"
           style={{ width: 'calc(100% - 1.5rem)' }}
-          variant='plain'
+          variant="plain"
         >
           <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
           <PencilIcon className="w-4 h-4 ml-1 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
@@ -193,9 +194,7 @@ function filterDropdownOption(site: Site, option: FilterGroupKey) {
           disabled
           href={`/${encodeURIComponent(site.domain)}/filter/${option}${window.location.search}`}
           css={[
-            active
-              ? tw`bg-gray-100 text-gray-1100`
-              : tw`text-gray-1100`,
+            active ? tw`bg-gray-100 text-gray-1100` : tw`text-gray-1100`,
             tw`block px-4 py-2 text-sm font-medium`,
           ]}
         >
