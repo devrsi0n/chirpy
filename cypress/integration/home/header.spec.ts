@@ -6,7 +6,7 @@ describe('Header', () => {
     cy.wait('@session');
   });
 
-  it('should show user drop down', () => {
+  it('should show user menu', () => {
     clickUserMenu();
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
