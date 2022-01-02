@@ -6,7 +6,6 @@
     "features/markdown.mdx",
     "features/analytics.mdx",
     "api/webhook.mdx",
-    "development.mdx",
     "self-hosted.mdx"
   ]
 }

@@ -1,7 +1,9 @@
+import { waitSession } from '../utils';
+
 describe('Footer', () => {
   before(() => {
     cy.visit('/');
-    cy.wait('@session');
+    waitSession();
   });
 
   it('navigation links', () => {
