@@ -307,7 +307,7 @@ const comments = [
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
-      name: 'devrsi0n',
+      name: 'William',
       avatar: '/images/avatars/male-1.jpeg',
     },
     likes: [],
