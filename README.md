@@ -32,9 +32,7 @@
 
 ## Contribution
 
-You're welcome to contribute to this project.
-
-## [Development](https://chirpy.dev/docs/development)
+You're welcome to contribute to this project. Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
 ## [Self-hosted](https://chirpy.dev/docs//self-hosted)
 

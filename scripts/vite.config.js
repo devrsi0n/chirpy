@@ -1,5 +1,4 @@
-require('dotenv').config({ path: `.env` });
-require('dotenv').config({ path: `.env.development` });
+require('dotenv').config({ path: `.env.local` });
 
 module.exports = {
   root: 'src/external',

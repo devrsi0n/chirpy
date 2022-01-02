@@ -8,7 +8,7 @@ import './mocks/mockUseCurrentUser';
 import { cleanEvents } from './mocks/nextRouter';
 
 DotEnv.config({
-  path: '.env.test',
+  path: '.env.local',
 });
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));

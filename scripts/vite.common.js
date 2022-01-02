@@ -1,5 +1,4 @@
 const path = require('path');
-require('dotenv').config({ path: `.env.production` });
 
 module.exports = {
   root: 'public',

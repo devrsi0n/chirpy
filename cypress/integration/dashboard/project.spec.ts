@@ -1,10 +1,10 @@
+import { waitGraphql, waitSession } from '../utils';
+
 describe('Project', () => {
   before(() => {
     cy.visit('/dashboard');
-    cy.wait('@session');
-    cy.wait('@graphql', {
-      timeout: 10_000,
-    });
+    waitSession();
+    waitGraphql();
     cy.wait(1000);
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist

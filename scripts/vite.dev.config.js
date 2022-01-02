@@ -1,4 +1,4 @@
-require('dotenv').config({ path: `.env.development` });
+require('dotenv').config({ path: `.env.local` });
 
 const common = require('./vite.common')
 module.exports = {

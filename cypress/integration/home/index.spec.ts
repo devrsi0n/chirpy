@@ -1,7 +1,9 @@
+import { waitSession } from '../utils';
+
 describe('Index', () => {
   before(() => {
     cy.visit('/');
-    cy.wait('@session');
+    waitSession();
   });
 
   it('main call to actions', () => {

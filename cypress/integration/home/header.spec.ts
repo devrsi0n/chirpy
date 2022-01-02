@@ -1,9 +1,10 @@
 import { testUser } from '../../fixtures/user';
+import { waitSession } from '../utils';
 
 describe('Header', () => {
   before(() => {
     cy.visit('/');
-    cy.wait('@session');
+    waitSession();
   });
 
   it('should show user menu', () => {

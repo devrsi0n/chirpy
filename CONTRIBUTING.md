@@ -1,10 +1,12 @@
----
-title: 'Development'
----
+# Contributing
 
-# Development
+First off, thanks for taking the time to contribute! 🙌
 
-You're welcome to contribute to this project.
+## Code of Conduct
+
+This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code.
+
+## Developing
 
 Chirpy is built upon [Next.js](https://nextjs.org) and [Hasura](https://github.com/hasura/graphql-engine). To run this project locally, you'll need to install the following:
 
@@ -12,13 +14,12 @@ Chirpy is built upon [Next.js](https://nextjs.org) and [Hasura](https://github.c
 - Docker Compose
 - [nodejs 14+](https://nodejs.org) & npm@6
 
-## Clone the repository
+### Fork and clone
 
-```bash
-git clone https://github.com/devrsi0n/chirpy.git
-```
+[Fork](https://help.github.com/articles/fork-a-repo/) this repository to your
+own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device.
 
-## Start the data server
+### Start the data server
 
 Hasura is used as the data server.
 
@@ -47,11 +48,38 @@ hasura seed apply
 hasura metadata apply
 ```
 
-## Setup the frontend
+### Setup the frontend
 
-Startup a Next.js app with the following command:
+Start a Next.js app with the following command:
 
 ```bash
 npm install
 npm run dev
+```
+
+### Setup environment variables
+
+Copy `.env-template` to `.env.local` and fill all blank variables with your own values.
+
+## Linting
+
+```bash
+npm run lint
+```
+
+## Building
+
+Build the project locally, with:
+
+```bash
+npm run build:local
+```
+
+## Testing
+
+```bash
+# For unit tests
+npm run ut
+# For e2e tests
+npm run cy:open
 ```
