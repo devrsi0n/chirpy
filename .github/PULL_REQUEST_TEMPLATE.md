@@ -24,7 +24,7 @@
 
 ## Checklist
 
-- [] Unit tests and integration tests passed
-- [] No reduction in test coverage
-- [] Documentation is up to date (if appropriate)
-- [] Related issues linked using fixes #number
+- [ ] Unit tests and integration tests passed
+- [ ] No reduction in test coverage
+- [ ] Documentation is up to date (if appropriate)
+- [ ] Related issues linked using fixes #number
