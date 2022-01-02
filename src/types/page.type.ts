@@ -15,6 +15,5 @@ export type CommonPageProps = {
 export type CommonWidgetProps = {
   projectId: string;
   theme?: Theme;
-  isWidget?: boolean;
   session?: Session;
 };

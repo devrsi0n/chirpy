@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import React, { Fragment } from 'react';
 import 'twin.macro';
 

@@ -116,7 +116,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                   href={page.url}
                   title={page.title || page.url}
                   variant="plain"
-                  tw="inline-block overflow-ellipsis overflow-hidden whitespace-nowrap"
+                  tw="inline-block max-w-xs overflow-ellipsis overflow-hidden whitespace-nowrap"
                 >
                   {page.title || page.url}
                 </Link>

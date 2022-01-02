@@ -160,7 +160,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         commentId,
         pageURL: themeResult.data.pageByPk.url,
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
-        isWidget: true,
       },
       revalidate: 1,
     };
