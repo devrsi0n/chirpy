@@ -45,9 +45,13 @@ describe('dashboard', () => {
   });
 
   it('should render the texts', () => {
-    expect(screen.getByText('Dashboard')).toBeTruthy();
+    expect(
+      screen.getByRole('heading', {
+        name: 'Dashboard',
+      }),
+    ).toBeTruthy();
     expect(screen.getByText(project.name)).toBeTruthy();
-    expect(screen.getByText(project.pages[0].title)).toBeTruthy();
+    expect(screen.getByText(project.pages[0].title!)).toBeTruthy();
     expect(screen.getByText(/^Created \w+/)).toBeTruthy();
   });
 
