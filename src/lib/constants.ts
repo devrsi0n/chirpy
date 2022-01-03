@@ -12,3 +12,5 @@ export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 export const EVENT_CLICK_CONTAINER = 'EVENT_CLICK_CONTAINER';
 
 export const WIDGET_COMMENT_PATH = '/widget/comment/';
+
+export const ANALYTICS_DOMAIN = new URL(APP_URL).host;

@@ -15,10 +15,8 @@ import { Spinner } from '$/components/Spinner';
 import { ToastProvider } from '$/components/Toast';
 import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
-import { APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
-
-const analyticsDomain = new URL(process.env.NEXT_PUBLIC_APP_URL).host;
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
@@ -28,7 +26,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
-      <PlausibleProvider domain={analyticsDomain}>
+      <PlausibleProvider domain={ANALYTICS_DOMAIN}>
         <SessionProvider
           session={session}
           // Refresh hasura token before it expires

@@ -44,7 +44,7 @@ describe('dashboard', () => {
     jest.clearAllMocks();
   });
 
-  it('should render the texts', () => {
+  it('should render the texts', async () => {
     expect(
       screen.getByRole('heading', {
         name: 'Dashboard',
@@ -53,6 +53,7 @@ describe('dashboard', () => {
     expect(screen.getByText(project.name)).toBeTruthy();
     expect(screen.getByText(project.pages[0].title!)).toBeTruthy();
     expect(screen.getByText(/^Created \w+/)).toBeTruthy();
+    await waitFor(() => expect(screen.getByLabelText('Page views').textContent).toBe('212'));
   });
 
   it('should delete the project', async () => {
