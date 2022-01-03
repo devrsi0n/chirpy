@@ -7,6 +7,7 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { CommentTrees } from '$/blocks/CommentTrees';
+import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
 import { IconButton } from '$/components/Button';
 import { Heading } from '$/components/Heading';
@@ -26,20 +27,23 @@ import { Theme as ThemeType } from '$/types/theme.type';
 
 export type ThemeProps = StaticProps;
 
-export default function Theme(props: ThemeProps): JSX.Element {
+export default function ThemePage(props: ThemeProps): JSX.Element {
   return (
-    <>
-      <WidgetThemeProvider theme={props.project?.theme as ThemeType}>
-        <Head>
-          <title>Theme Editor</title>
-        </Head>
+    <SiteLayout>
+      <Head>
+        <title>
+          {props.project?.name} - {APP_NAME} theme editor
+        </title>
+      </Head>
+      {/* TODO: Extract WidgetThemeProvider to CommentWidgetPreview since it's affect all styles inside ThemeEditor */}
+      <WidgetThemeProvider widgetTheme={props.project?.theme as ThemeType}>
         <ThemeEditor {...props} />
       </WidgetThemeProvider>
-    </>
+    </SiteLayout>
   );
 }
 
-Theme.auth = true;
+ThemePage.auth = true;
 
 type ColorSeries = {
   light: Record<string, string>;
@@ -82,17 +86,17 @@ const colorOptions: Record<string, ColorSeries> = {
 };
 
 function ThemeEditor(props: ThemeProps): JSX.Element {
-  const { theme, setTheme } = useWidgetTheme();
+  const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
   const { resolvedTheme } = useTheme();
   const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system' ? 'light' : resolvedTheme) ||
     'light') as keyof ColorSeries;
   const [updateTheme] = useUpdateThemeMutation();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return () => {
-      const newTheme = merge({}, theme, {
+      const newTheme = merge({}, widgetTheme, {
         colors: { light: { primary: color.light }, dark: { primary: color.dark } },
       });
-      setTheme(newTheme);
+      setWidgetTheme(newTheme);
       updateTheme({
         variables: {
           projectId: props.project.id,
@@ -103,80 +107,74 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   };
 
   return (
-    <>
-      <Head>
-        <title>
-          {props.project?.name} - {APP_NAME} theme editor
-        </title>
-      </Head>
-      <section tw="px-2">
-        <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
-        <div tw="flex flex-row">
-          <aside tw="flex-1 border-r pr-4 space-y-11">
-            <div tw="space-y-6">
-              <BoldHeading as="h4">Theme Editor</BoldHeading>
-              <Text variant="secondary">
-                Click to change variants then we will save your theme automatically.
+    <section tw="px-2">
+      <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
+      <div tw="flex flex-row">
+        <aside tw="flex-1 border-r pr-4 space-y-11">
+          <div tw="space-y-6">
+            <BoldHeading as="h4">Theme Editor</BoldHeading>
+            <Text variant="secondary">
+              Click to change variants then we will save your theme automatically.
+            </Text>
+          </div>
+          <div tw="space-y-4">
+            <BoldHeading>Colors</BoldHeading>
+            <Text>Primary</Text>
+            <div tw="flex flex-row items-center space-x-2">
+              <Popover
+                buttonAs={IconButton}
+                content={
+                  <ul tw="flex flex-row space-x-3">
+                    {Object.entries(colorOptions).map(([key, color]) => (
+                      <li key={color[activeTheme][900]}>
+                        <IconButton
+                          onClick={handClickPrimaryColorFunction(color)}
+                          aria-label={`Color ${key}`}
+                        >
+                          <span
+                            tw="inline-block w-6 h-6 rounded-full"
+                            style={{ background: color[activeTheme][900] }}
+                          />
+                        </IconButton>
+                      </li>
+                    ))}
+                  </ul>
+                }
+              >
+                <span
+                  aria-label="Primary color selector"
+                  tw="inline-block w-6 h-6 rounded-full bg-primary-900"
+                />
+              </Popover>
+              <Text
+                tw="px-2 leading-none mb-2"
+                variant="secondary"
+                aria-label="Selected color"
+                size="sm"
+              >
+                {widgetTheme?.colors[activeTheme].primary[900] ||
+                  siteTheme.colors[activeTheme].primary[900]}
               </Text>
             </div>
-            <div tw="space-y-4">
-              <BoldHeading>Colors</BoldHeading>
-              <Text>Primary</Text>
-              <div tw="flex flex-row items-center space-x-2">
-                <Popover
-                  buttonAs={IconButton}
-                  content={
-                    <ul tw="flex flex-row space-x-3">
-                      {Object.entries(colorOptions).map(([key, color]) => (
-                        <li key={color[activeTheme][900]}>
-                          <IconButton
-                            onClick={handClickPrimaryColorFunction(color)}
-                            aria-label={`Color ${key}`}
-                          >
-                            <span
-                              tw="inline-block w-6 h-6 rounded-full"
-                              style={{ background: color[activeTheme][900] }}
-                            />
-                          </IconButton>
-                        </li>
-                      ))}
-                    </ul>
-                  }
-                >
-                  <span
-                    aria-label="Primary color selector"
-                    tw="inline-block w-6 h-6 rounded-full bg-primary-900"
-                  />
-                </Popover>
-                <Text
-                  tw="px-2 leading-none mb-2"
-                  variant="secondary"
-                  aria-label="Selected color"
-                  size="sm"
-                >
-                  {theme.colors[activeTheme].primary[900]}
-                </Text>
-              </div>
-            </div>
-          </aside>
-          <section tw="flex-2 pl-6">
-            <div tw="space-y-5 mb-4">
-              <BoldHeading as="h4">Preview</BoldHeading>
-              <Text variant="secondary">
-                {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
-              </Text>
-            </div>
-            <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
-            <CommentTrees
-              comments={comments as any}
-              onSubmitReply={() => Promise.resolve()}
-              onClickLikeAction={() => Promise.resolve()}
-              rtePlaceholder="Preview"
-            />
-          </section>
-        </div>
-      </section>
-    </>
+          </div>
+        </aside>
+        <section tw="flex-2 pl-6">
+          <div tw="space-y-5 mb-4">
+            <BoldHeading as="h4">Preview</BoldHeading>
+            <Text variant="secondary">
+              {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
+            </Text>
+          </div>
+          <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
+          <CommentTrees
+            comments={comments as any}
+            onSubmitReply={() => Promise.resolve()}
+            onClickLikeAction={() => Promise.resolve()}
+            rtePlaceholder="Preview"
+          />
+        </section>
+      </div>
+    </section>
   );
 }
 

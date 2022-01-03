@@ -3,6 +3,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
@@ -12,7 +13,7 @@ import { APP_NAME } from '$/lib/constants';
 
 export default function Custom404(): JSX.Element {
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>404 - {APP_NAME}</title>
       </Head>
@@ -63,7 +64,7 @@ export default function Custom404(): JSX.Element {
           <Button>Learn More</Button>
         </div>
       </section>
-    </>
+    </SiteLayout>
   );
 }
 

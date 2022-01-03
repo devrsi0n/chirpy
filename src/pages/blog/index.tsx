@@ -3,6 +3,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { Heading } from '$/components/Heading';
 import { Image } from '$/components/Image';
 import { Link } from '$/components/Link';
@@ -19,7 +20,7 @@ export type BlogHomeProps = {
 
 export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>{APP_NAME} blog</title>
       </Head>
@@ -40,7 +41,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
           })}
         </section>
       </div>
-    </>
+    </SiteLayout>
   );
 }
 

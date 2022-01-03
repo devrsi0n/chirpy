@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { Spinner } from '$/components/Spinner';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
@@ -32,12 +33,12 @@ export default function Redirecting(): JSX.Element {
     }, 1000);
   }, [session?.isNewUser, router, data, loading]);
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>Redirecting - {APP_NAME}</title>
       </Head>
       <Spinner tw="mt-24 justify-center" />
-    </>
+    </SiteLayout>
   );
 }
 

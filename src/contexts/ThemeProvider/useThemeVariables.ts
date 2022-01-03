@@ -1,37 +1,50 @@
 import * as radixColors from '@radix-ui/colors';
 import * as React from 'react';
 
-import { siteDefaultTheme } from './siteDefaultTheme';
+import { Theme } from '$/types/theme.type';
+
+import { siteTheme } from './siteTheme';
 import { getThemeCSSVariablesString, translateRadixColor } from './utilities';
 
-const colors = siteDefaultTheme.colors;
+const siteColors = siteTheme.colors;
 const FIXED_COLORS = {
   whitea: translateRadixColor(radixColors.whiteA),
   blacka: translateRadixColor(radixColors.blackA),
 };
 
-export function useSiteTheme() {
+export type Selectors = {
+  light: string;
+  dark: string;
+};
+
+export function useThemeVariables(theme?: Theme, selectors?: Selectors) {
+  const { light, dark } = {
+    light: ':root',
+    dark: ':root.dark',
+    ...selectors,
+  };
   const styles = React.useMemo(() => {
     const lightTheme = {
       colors: {
         ...FIXED_COLORS,
-        ...colors.light,
+        ...siteColors.light,
+        ...theme?.colors.light,
       },
     };
     const darkTheme = {
       colors: {
-        ...FIXED_COLORS,
-        ...colors.dark,
+        ...siteColors.dark,
+        ...theme?.colors.dark,
       },
     };
-    return `body {
+    return `${light} {
         ${getThemeCSSVariablesString(lightTheme)}
       }
     
-       .dark body {
+       ${dark} {
         ${getThemeCSSVariablesString(darkTheme)}
       }
     `;
-  }, []);
+  }, [theme, light, dark]);
   return { styles };
 }

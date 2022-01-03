@@ -5,6 +5,7 @@ import Script from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { Image } from '$/components/Image';
 import { useHasMounted } from '$/hooks/useHasMounted';
@@ -27,7 +28,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   }, [frontMatter?.banner, hasMounted]);
 
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>
           {frontMatter?.title} - {APP_NAME} blog
@@ -50,7 +51,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
         strategy="afterInteractive"
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
-    </>
+    </SiteLayout>
   );
 }
 

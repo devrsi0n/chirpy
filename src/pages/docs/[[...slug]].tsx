@@ -4,6 +4,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { MDXComponents } from '$/blocks/MDXComponents';
 import { SideBar, SideBarProps } from '$/blocks/SideBar';
 import { APP_NAME } from '$/lib/constants';
@@ -16,7 +17,7 @@ const CONTAINER_FOLDER = 'docs';
 
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>
           {frontMatter?.title} - {APP_NAME} docs
@@ -33,7 +34,7 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
           </article>
         </section>
       </div>
-    </>
+    </SiteLayout>
   );
 }
 

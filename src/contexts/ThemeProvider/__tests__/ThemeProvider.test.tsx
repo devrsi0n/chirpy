@@ -1,7 +1,7 @@
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 
 import { WidgetThemeProvider, useWidgetTheme, SiteThemeProvider } from '..';
-import { siteDefaultTheme } from '../siteDefaultTheme';
+import { siteTheme } from '../siteTheme';
 
 describe('ThemeProvider', () => {
   afterEach(() => {
@@ -15,7 +15,7 @@ describe('ThemeProvider', () => {
         <MockChild />
       </WidgetThemeProvider>,
     );
-    expect(setTheme).toHaveBeenCalledWith(siteDefaultTheme);
+    expect(setTheme).toHaveBeenCalledWith(siteTheme);
   });
 
   it('should render the default site theme', async () => {
@@ -24,25 +24,18 @@ describe('ThemeProvider', () => {
         <MockSiteChild />
       </SiteThemeProvider>,
     );
-    expect(setSiteTheme).toHaveBeenCalledWith(
-      expect.objectContaining({
-        colors: expect.any(Object),
-      }),
-    );
+    expect(screen.getByLabelText(siteLabel)).toBeInTheDocument();
   });
 });
 
 const setTheme = jest.fn();
 
 function MockChild() {
-  const { theme } = useWidgetTheme();
-  setTheme(theme);
+  const { siteTheme: defaultTheme } = useWidgetTheme();
+  setTheme(defaultTheme);
   return <div>children</div>;
 }
-
-const setSiteTheme = jest.fn();
+const siteLabel = 'site-theme-child';
 function MockSiteChild() {
-  const { theme } = useWidgetTheme();
-  setSiteTheme(theme);
-  return <div>children</div>;
+  return <div aria-label={siteLabel}>site them child</div>;
 }

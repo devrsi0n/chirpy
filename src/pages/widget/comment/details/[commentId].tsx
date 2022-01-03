@@ -13,6 +13,7 @@ import superjson from 'superjson';
 import tw from 'twin.macro';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
+import { WidgetLayout } from '$/blocks/Layout';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { UserMenu } from '$/blocks/UserMenu';
 import { IconButton } from '$/components/Button';
@@ -51,7 +52,7 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <>
+    <WidgetLayout widgetTheme={props.theme}>
       <Head>
         <title>{APP_NAME} comment details</title>
       </Head>
@@ -78,7 +79,7 @@ export default function CommentDetailsWidget(
         )}
         <PoweredBy />
       </CommentContextProvider>
-    </>
+    </WidgetLayout>
   );
 }
 type PathParams = {

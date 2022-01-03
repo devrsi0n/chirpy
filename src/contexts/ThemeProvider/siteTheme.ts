@@ -5,7 +5,7 @@ import { translateRadixColor } from './utilities';
 
 const siteColors = getColors();
 
-export const siteDefaultTheme: Theme = {
+export const siteTheme: Theme = {
   colors: siteColors,
 };
 

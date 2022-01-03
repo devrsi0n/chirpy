@@ -7,6 +7,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
 import { Avatar } from '$/components/Avatar';
 import { Button } from '$/components/Button';
@@ -22,7 +23,6 @@ import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
 import { APP_NAME } from '$/lib/constants';
-import { gradient } from '$/styles/common';
 
 type FormFields = {
   name: string;
@@ -94,7 +94,7 @@ export default function Profile(): JSX.Element {
   }
 
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>
           {name} - {APP_NAME} profile
@@ -187,7 +187,7 @@ export default function Profile(): JSX.Element {
           )}
         </section>
       </ProfileContainer>
-    </>
+    </SiteLayout>
   );
 }
 
@@ -200,12 +200,5 @@ function ProfileContainer({
   children: React.ReactNode;
   className?: string;
 }): JSX.Element {
-  return (
-    <>
-      <Head>
-        <title>Profile</title>
-      </Head>
-      <section className={className}>{children}</section>
-    </>
-  );
+  return <section className={className}>{children}</section>;
 }
