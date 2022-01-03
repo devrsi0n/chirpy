@@ -13,7 +13,7 @@ import { Link } from '$/components/Link';
 import { Menu } from '$/components/Menu';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
-import { useSignIn } from '$/hooks/useSignIn';
+import { useSignInWindow } from '$/hooks/useSignInWindow';
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type UserMenuProps = {
@@ -23,7 +23,7 @@ export type UserMenuProps = {
 export function UserMenu(props: UserMenuProps): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
   const { avatar, name } = data;
-  const handleSignIn = useSignIn();
+  const handleSignIn = useSignInWindow();
   const isWidget = props.variant === 'Widget';
   const isNav = props.variant === 'Nav';
 
@@ -47,7 +47,11 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           </Menu.Item>
         ))}
       <Menu.Item>
-        <Link variant="plain" href="https://github.com/devrsi0n/chirpy/issues/new" css={itemStyle}>
+        <Link
+          variant="plain"
+          href="https://github.com/devrsi0n/chirpy/issues/new/choose"
+          css={itemStyle}
+        >
           <LifeBuoy size={14} />
           <span>Feedback</span>
         </Link>

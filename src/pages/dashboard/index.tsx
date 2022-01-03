@@ -3,6 +3,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
 import { ProjectCard } from '$/blocks/ProjectCard';
 import { Button } from '$/components/Button';
@@ -79,7 +80,7 @@ export default function Dashboard(): JSX.Element {
   const disableCreation = (projects?.length || 0) > 0;
 
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>
           {name} - {APP_NAME} dashboard
@@ -175,7 +176,7 @@ export default function Dashboard(): JSX.Element {
           </Button>
         </Dialog.Footer>
       </Dialog>
-    </>
+    </SiteLayout>
   );
 }
 

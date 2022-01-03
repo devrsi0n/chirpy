@@ -12,6 +12,7 @@ import superjson from 'superjson';
 import 'twin.macro';
 
 import { CommentTrees } from '$/blocks/CommentTrees';
+import { WidgetLayout } from '$/blocks/Layout';
 import { PoweredBy } from '$/blocks/PoweredBy';
 import { CommentContextProvider } from '$/contexts/CommentContext';
 import {
@@ -41,7 +42,7 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
  * Comment tree widget for a page
  * @param props
  */
-export default function CommentPageWidget(props: PageCommentProps): JSX.Element {
+export default function CommentWidgetPage(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
   let pageURL = '';
@@ -71,7 +72,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
   }
 
   return (
-    <>
+    <WidgetLayout widgetTheme={props.theme}>
       <Head>
         <title>{APP_NAME} comments</title>
       </Head>
@@ -84,7 +85,7 @@ export default function CommentPageWidget(props: PageCommentProps): JSX.Element 
         </div>
         <PoweredBy />
       </CommentContextProvider>
-    </>
+    </WidgetLayout>
   );
 }
 

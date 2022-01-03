@@ -3,6 +3,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { ConfirmUserFields } from '$/blocks/ConfirmUserFields';
+import { SiteLayout } from '$/blocks/Layout';
 import { Button } from '$/components/Button';
 import { Heading } from '$/components/Heading';
 import { Link } from '$/components/Link';
@@ -29,12 +30,12 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <div>
+    <SiteLayout>
       <Head>
         <title>Welcome - {APP_NAME}</title>
       </Head>
       {isFullFilled ? <FullFilled /> : <NotFullFilled />}
-    </div>
+    </SiteLayout>
   );
 }
 

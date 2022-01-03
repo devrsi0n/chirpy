@@ -2,13 +2,14 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
+import { SiteLayout } from '$/blocks/Layout';
 import { Heading } from '$/components/Heading';
 import { APP_NAME } from '$/lib/constants';
 import { ssrMode } from '$/utilities/env';
 
 function DeleteConfirmation(): JSX.Element {
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>Delete confirmation - {APP_NAME}</title>
       </Head>
@@ -18,7 +19,7 @@ function DeleteConfirmation(): JSX.Element {
           {!ssrMode ? new URLSearchParams(location.search).get('code') : ''}
         </Heading>
       </div>
-    </>
+    </SiteLayout>
   );
 }
 

@@ -6,7 +6,7 @@ import { Code } from '$/components/Code';
 import { Dialog } from '$/components/Dialog';
 import { Heading } from '$/components/Heading';
 import { Text } from '$/components/Text';
-import { APP_URL, APP_NAME, APP_NAME_LOWERCASE } from '$/lib/constants';
+import { APP_URL, APP_NAME } from '$/lib/constants';
 
 export type IntegrateGuideProps = {
   domain: string;

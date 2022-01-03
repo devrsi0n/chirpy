@@ -1,29 +1,30 @@
+import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 import { useEventListener } from './useEventListener';
 
-export type usePopupWindowOptions = {
-  url: string;
+export type useSignInWindowOptions = {
   width?: number;
   height?: number;
 };
 
-export function usePopupWindow({
-  url,
+export function useSignInWindow({
   width = 480,
   height = 760,
-}: usePopupWindowOptions): () => void {
+}: useSignInWindowOptions = {}): () => void {
   const popupWindow = React.useRef<Window | null>(null);
   const handleClickSignIn = () => {
-    popupWindow.current = popupCenterWindow(url, '_blank', width, height);
+    popupWindow.current = popupCenterWindow('/auth/sign-in', '_blank', width, height);
   };
 
   useEventListener('storage', (event) => {
     if (event.key === LOG_IN_SUCCESS_KEY) {
       popupWindow.current?.close();
       popupWindow.current = null;
+      // Force to refresh session
+      getSession();
     }
   });
 

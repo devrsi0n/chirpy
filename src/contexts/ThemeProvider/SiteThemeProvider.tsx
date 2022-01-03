@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import { useSiteTheme } from './useSiteTheme';
+import { useThemeVariables } from './useThemeVariables';
 
 export type SiteThemeProviderProps = {
   children: React.ReactNode;
 };
 
 export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
-  const { styles } = useSiteTheme();
+  const { styles } = useThemeVariables();
 
   return (
     <>

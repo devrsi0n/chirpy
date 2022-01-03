@@ -5,6 +5,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { AnalyticsBlock } from '$/blocks/Analytics';
+import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
 import { getAdminApollo } from '$/server/common/admin-apollo';
 import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
@@ -17,7 +18,7 @@ export type AnalyticsProps = {
 
 export default function Analytics(props: AnalyticsProps): JSX.Element {
   return (
-    <>
+    <SiteLayout>
       <Head>
         <title>Analytics</title>
       </Head>
@@ -39,7 +40,7 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
           currentUserRole="owner"
         />
       </section>
-    </>
+    </SiteLayout>
   );
 }
 

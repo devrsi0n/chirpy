@@ -19,24 +19,24 @@ export type Query = {
 };
 
 export type Filters = {
-  goal: string | null;
-  props: any;
-  source: string | null;
-  utm_medium: string | null;
-  utm_source: string | null;
-  utm_campaign: string | null;
-  referrer: string | null;
-  screen: string | null;
-  browser: string | null;
-  browser_version: string | null;
-  os: string | null;
-  os_version: string | null;
-  country: string | null;
-  region: string | null;
-  city: string | null;
-  page: string | null;
-  entry_page: string | null;
-  exit_page: string | null;
+  goal?: string | null;
+  props?: any;
+  source?: string | null;
+  utm_medium?: string | null;
+  utm_source?: string | null;
+  utm_campaign?: string | null;
+  referrer?: string | null;
+  screen?: string | null;
+  browser?: string | null;
+  browser_version?: string | null;
+  os?: string | null;
+  os_version?: string | null;
+  country?: string | null;
+  region?: string | null;
+  city?: string | null;
+  page?: string | null;
+  entry_page?: string | null;
+  exit_page?: string | null;
 };
 
 export function parseQuery(querystring: string, site: Site): Query {
@@ -134,7 +134,9 @@ function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.El
     navigateToQuery(router, query, to);
     onClick?.(e);
   };
-  return <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} variant='plain' />;
+  return (
+    <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} variant="plain" />
+  );
 }
 
 export { QueryLink };
