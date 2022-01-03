@@ -6,7 +6,7 @@ import 'twin.macro';
 
 import { Button, ButtonProps } from '$/components/Button';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
-import { useSignIn } from '$/hooks/useSignIn';
+import { useSignInWindow } from '$/hooks/useSignInWindow';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;
@@ -18,7 +18,7 @@ export function SignInButton({
   ...restProps
 }: SignInButtonProps): JSX.Element {
   const { loading: signInLoading } = useCurrentUser();
-  const handleSignIn = useSignIn();
+  const handleSignIn = useSignInWindow();
   return (
     <Button
       color="primary"
