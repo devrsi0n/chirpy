@@ -73,5 +73,6 @@ describe('dashboard', () => {
     userEvent.click(deleteButton);
     expect(mockDeleteProject).toHaveBeenCalled();
     await waitFor(() => expect(screen.queryByText(/Delete the project/)).toBeFalsy());
+    await waitFor(() => expect(screen.getByLabelText('Page views').textContent).toBe('212'));
   });
 });
