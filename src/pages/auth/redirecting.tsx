@@ -12,7 +12,7 @@ import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const { data, loading } = useCurrentUser();
   const router = useRouter();
@@ -20,15 +20,19 @@ export default function Redirecting(): JSX.Element {
     if (data.id) {
       localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
     }
-  }, [router, data.id, loading]);
-  useTimeout(() => {
+    if (status === 'loading' || loading) {
+      return;
+    }
     if (session?.isNewUser) {
       router.push('/auth/welcome?isNewUser=true');
     } else if (!hasValidUserProfile(data)) {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
       router.push('/dashboard');
-    } else {
+    }
+  }, [router, session?.isNewUser, data]);
+  useTimeout(() => {
+    if (!data.id) {
       router.push(`/500?message=${encodeURIComponent('User sign-in timeout after 30 seconds')}`);
     }
   }, 30_000);
