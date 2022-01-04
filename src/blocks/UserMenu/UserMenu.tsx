@@ -14,7 +14,7 @@ import { Menu } from '$/components/Menu';
 import { Text } from '$/components/Text';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useSignInWindow } from '$/hooks/useSignInWindow';
-import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';
@@ -47,11 +47,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           </Menu.Item>
         ))}
       <Menu.Item>
-        <Link
-          variant="plain"
-          href="https://github.com/devrsi0n/chirpy/issues/new/choose"
-          css={itemStyle}
-        >
+        <Link variant="plain" href={FEEDBACK_LINK} css={itemStyle}>
           <LifeBuoy size={14} />
           <span>Feedback</span>
         </Link>

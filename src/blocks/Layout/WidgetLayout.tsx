@@ -10,6 +10,11 @@ export type WidgetLayoutProps = {
   className?: string;
 } & WidgetThemeProviderProps;
 
+/**
+ * `WidgetLayout` provides theme and container styles.
+ * Do not use it in _app.tsx and render it with `SiteLayout`
+ * conditionally, it will increase bundle size on widgets
+ */
 export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
   const { children, widgetTheme } = props;
   return (

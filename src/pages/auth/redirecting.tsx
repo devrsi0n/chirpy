@@ -7,6 +7,7 @@ import 'twin.macro';
 import { SiteLayout } from '$/blocks/Layout';
 import { Spinner } from '$/components/Spinner';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
+import useTimeout from '$/hooks/useTimeout';
 import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
@@ -22,16 +23,18 @@ export default function Redirecting(): JSX.Element {
     if (data.id) {
       localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
     }
-    setTimeout(() => {
-      if (session?.isNewUser) {
-        router.push('/auth/welcome?isNewUser=true');
-      } else if (!hasValidUserProfile(data)) {
-        router.push('/auth/welcome?invalidProfile=true');
-      } else {
-        router.push('/dashboard');
-      }
-    }, 1000);
   }, [session?.isNewUser, router, data, loading]);
+  useTimeout(() => {
+    if (session?.isNewUser) {
+      router.push('/auth/welcome?isNewUser=true');
+    } else if (!hasValidUserProfile(data)) {
+      router.push('/auth/welcome?invalidProfile=true');
+    } else if (data.id) {
+      router.push('/dashboard');
+    } else {
+      router.push(`/500?message=${encodeURIComponent('User sign-in timeout after 30 seconds')}`);
+    }
+  }, 30_000);
   return (
     <SiteLayout>
       <Head>
