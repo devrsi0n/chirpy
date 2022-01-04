@@ -17,13 +17,10 @@ export default function Redirecting(): JSX.Element {
   const { data, loading } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {
-    if (loading) {
-      return;
-    }
     if (data.id) {
       localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
     }
-  }, [session?.isNewUser, router, data, loading]);
+  }, [router, data.id, loading]);
   useTimeout(() => {
     if (session?.isNewUser) {
       router.push('/auth/welcome?isNewUser=true');
