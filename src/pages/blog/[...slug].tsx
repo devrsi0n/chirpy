@@ -48,7 +48,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       <div data-chirpy-comment tw="my-16" />
       <Script
         src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`}
-        strategy="beforeInteractive"
+        strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
     </SiteLayout>
