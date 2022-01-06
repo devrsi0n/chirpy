@@ -5,7 +5,8 @@ describe('Project', () => {
     cy.visit('/dashboard');
     waitSession();
     waitGraphql();
-    cy.wait(1000);
+
+    waitForSpinnerToDisappear();
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist
       if ($body.find(`[aria-label='Project list']`).length > 0) {
@@ -22,6 +23,7 @@ describe('Project', () => {
         cy.findByRole('dialog')
           .findByRole('button', { name: /delete/i })
           .click();
+        waitGraphql();
       }
     });
 
@@ -38,6 +40,7 @@ describe('Project', () => {
     cy.findByRole('button', {
       name: /submit/i,
     }).click();
+    waitForSpinnerToDisappear();
   });
 
   it('should show integration doc', () => {
@@ -63,3 +66,6 @@ describe('Project', () => {
     cy.visit('/dashboard');
   });
 });
+
+const waitForSpinnerToDisappear = () =>
+  cy.get(`[aria-label="Loading data"]`, { timeout: 10_000 }).should('not.exist');
