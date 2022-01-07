@@ -1,4 +1,4 @@
-name: "Next.js Bundle Analysis"
+name: 'Next.js Bundle Analysis'
 
 on:
   pull_request:
@@ -21,7 +21,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v1
         with:
-          node-version: "14.x"
+          node-version: '14.x'
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
@@ -39,6 +39,16 @@ jobs:
       - name: Build next.js app
         # change this if your site requires a custom build command
         run: ./node_modules/.bin/next build
+        env:
+          HASH_KEY: ${{ secrets.HASH_KEY }}
+          HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+          NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+          NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
+          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          NEXT_PUBLIC_COMMENT_DOMAIN: ${{ secrets.NEXT_PUBLIC_COMMENT_DOMAIN }}
+          NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_HTTP_ORIGIN }}
+          NEXT_PUBLIC_HASURA_WS_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_WS_ORIGIN }}
 
       # Here's the first place where next-bundle-analysis' own script is used
       # This step pulls the raw bundle stats for the current bundle
@@ -92,7 +102,7 @@ jobs:
         id: fc
         with:
           issue-number: ${{ github.event.number }}
-          body-includes: "<!-- __NEXTJS_BUNDLE -->"
+          body-includes: '<!-- __NEXTJS_BUNDLE -->'
 
       - name: Create Comment
         uses: peter-evans/create-or-update-comment@v1.4.4
