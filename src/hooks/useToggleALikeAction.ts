@@ -13,8 +13,8 @@ export function useToggleALikeAction(): ToggleLieAction {
   const {
     data: { id: currentUserId },
   } = useCurrentUser();
-  const [insertOneLike] = useInsertOneLikeMutation();
-  const [deleteLikeByPk] = useDeleteLikeByPkMutation();
+  const [{}, insertOneLike] = useInsertOneLikeMutation();
+  const [{}, deleteLikeByPk] = useDeleteLikeByPkMutation();
 
   const { showToast } = useToast();
 
@@ -24,9 +24,7 @@ export function useToggleALikeAction(): ToggleLieAction {
     }
     if (isLiked) {
       const { data } = await deleteLikeByPk({
-        variables: {
-          id: likeId,
-        },
+        id: likeId,
       });
       if (!data?.deleteLikeByPk?.id) {
         console.error(`Can't delete the like, id ${likeId}`);
@@ -34,9 +32,7 @@ export function useToggleALikeAction(): ToggleLieAction {
     } else {
       try {
         const { data } = await insertOneLike({
-          variables: {
-            commentId,
-          },
+          commentId,
         });
         if (!data?.insertOneLike?.id) {
           showToast({

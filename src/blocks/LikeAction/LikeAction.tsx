@@ -48,7 +48,7 @@ export function LikeAction({
   return (
     <ActionButton
       {...restProps}
-      color="primary"
+      color="pink"
       activated={didLike}
       onClick={handleClickLike}
       icon={<HeartComponent size={20} />}

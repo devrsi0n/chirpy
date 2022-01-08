@@ -1,4 +1,3 @@
-import { FetchResult } from '@apollo/client';
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import {
   GetStaticProps,
@@ -11,6 +10,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';
+import { OperationResult } from 'urql';
+import { pipe, subscribe } from 'wonka';
 
 import { CommentLinkedList } from '$/blocks/CommentLinkedList';
 import { WidgetLayout } from '$/blocks/Layout';
@@ -29,12 +30,13 @@ import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page'
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
-import { getAdminApollo } from '$/server/common/admin-apollo';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentDetailNode } from '$/types/widget';
+import { ssrMode } from '$/utilities/env';
 
 // TODO: Migrate this page to a dialog widget (for analytics)
 export default function CommentDetailsWidget(
@@ -43,8 +45,9 @@ export default function CommentDetailsWidget(
   const handleSubmitReply = useCreateAComment({ pageId: props.comment?.pageId || '' });
 
   const handleClickLikeAction = useToggleALikeAction();
-  const { data } = useCommentDetailsSubscription({
+  const [{ data }] = useCommentDetailsSubscription({
     variables: { id: props.commentId },
+    pause: ssrMode,
   });
 
   useWidgetSideEffects();
@@ -93,17 +96,14 @@ type StaticProps = PathParams &
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const adminApollo = getAdminApollo();
-  const {
-    data: { comments },
-  } = await adminApollo.query<CommentsQuery>({
-    query: CommentsDocument,
-  });
-  const paths = comments.map(({ id }) => ({
-    params: {
-      commentId: id,
-    },
-  }));
+  const client = getAdminGqlClient();
+  const { data } = await client.query<CommentsQuery>(CommentsDocument).toPromise();
+  const paths =
+    data?.comments.map(({ id }) => ({
+      params: {
+        commentId: id,
+      },
+    })) || [];
   return {
     paths,
     fallback: true,
@@ -117,24 +117,18 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { commentId } = params;
-  const adminApollo = getAdminApollo();
+  const client = getAdminGqlClient();
 
-  const commentDetailsSubscription = adminApollo.subscribe<CommentDetailsSubscription>({
-    query: CommentDetailsDocument,
-    variables: {
-      id: commentId,
-    },
-  });
   try {
-    const { data } = await new Promise<FetchResult<CommentDetailsSubscription>>(
+    const { data } = await new Promise<OperationResult<CommentDetailsSubscription>>(
       (resolve, reject) => {
-        commentDetailsSubscription.subscribe(
-          (value) => {
-            resolve(value);
-          },
-          (error) => {
-            reject(error);
-          },
+        // @ts-ignore
+        const { unsubscribe } = pipe<OperationResult<CommentDetailsSubscription>>(
+          client.subscription(CommentDetailsDocument, { id: commentId }),
+          subscribe((result) => {
+            console.log(result);
+            resolve(result);
+          }),
         );
       },
     );
@@ -143,13 +137,12 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       return { notFound: true };
     }
 
-    const themeResult = await adminApollo.query<ThemeOfPageQuery>({
-      query: ThemeOfPageDocument,
-      variables: {
+    const themeResult = await client
+      .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
         pageId: data.commentByPk.pageId,
-      },
-    });
-    if (!themeResult.data.pageByPk) {
+      })
+      .toPromise();
+    if (!themeResult.data?.pageByPk) {
       console.error(`Can't find page info`);
       return { notFound: true };
     }

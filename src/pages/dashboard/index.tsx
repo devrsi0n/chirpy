@@ -13,9 +13,10 @@ import { Text } from '$/components/Text';
 import { TextField } from '$/components/TextField';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
-import { useUserDashboardProjectsLazyQuery } from '$/graphql/generated/user';
+import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/useForm';
 import { APP_NAME } from '$/lib/constants';
+import { isENVProd } from '$/server/utilities/env';
 
 type FormFields = {
   name: string;
@@ -28,25 +29,23 @@ export default function Dashboard(): JSX.Element {
     loading: userLoading,
   } = useCurrentUser();
 
-  const [fetchUserProjects, { data, loading: projectLoading }] = useUserDashboardProjectsLazyQuery({
-    fetchPolicy: 'cache-and-network',
+  const [{ data, fetching: projectLoading }, fetchUserProjects] = useUserDashboardProjectsQuery({
+    variables: {
+      id: id!,
+    },
   });
   const fetchProjects = React.useCallback(
     (options?: Parameters<typeof fetchUserProjects>[0]) => {
       if (!id) return;
       fetchUserProjects({
         ...options,
-        variables: {
-          id: id!,
-        },
       });
     },
     [id, fetchUserProjects],
   );
-  React.useEffect(fetchProjects, [fetchProjects]);
   const { projects } = data?.userByPk || {};
 
-  const [insertProjectMutation, { loading: loadingInsertProject }] = useInsertOneProjectMutation();
+  const [{ fetching: loadingInsertProject }, insertProjectMutation] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -65,11 +64,9 @@ export default function Dashboard(): JSX.Element {
     React.useCallback(
       async (fields): Promise<void> => {
         await insertProjectMutation({
-          variables: {
-            // TODO: Team id?
-            name: fields.name,
-            domain: fields.domain,
-          },
+          // TODO: Team id?
+          name: fields.name,
+          domain: fields.domain,
         });
         setShowDialog(false);
         fetchProjects();
@@ -77,7 +74,7 @@ export default function Dashboard(): JSX.Element {
       [insertProjectMutation, fetchProjects],
     ),
   );
-  const disableCreation = (projects?.length || 0) > 0;
+  const disableCreation = isENVProd && (projects?.length || 0) > 0;
 
   return (
     <SiteLayout>
@@ -167,12 +164,12 @@ export default function Dashboard(): JSX.Element {
           </Button>
           <Button
             tw="w-full sm:w-auto"
-            disabled={hasError || loadingInsertProject}
+            disabled={hasError}
             color="primary"
             variant="solid"
             onClick={handleClickSubmit}
           >
-            Submit
+            Create
           </Button>
         </Dialog.Footer>
       </Dialog>

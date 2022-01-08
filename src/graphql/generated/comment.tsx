@@ -1,8 +1,8 @@
 import * as Types from './types';
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+import gql from 'graphql-tag';
+import * as Urql from 'urql';
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type CommentContentFragment = { __typename?: 'Comment', id: string, content: any, createdAt: string, deletedAt?: string | null | undefined, parentId?: string | null | undefined, pageId: string, user: { __typename?: 'User', id: string, name?: string | null | undefined, avatar?: string | null | undefined }, likes: Array<{ __typename?: 'Like', id: string, userId: string }> };
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
@@ -71,28 +71,9 @@ export const CommentTreeDocument = gql`
 }
     ${CommentContentFragmentDoc}`;
 
-/**
- * __useCommentTreeSubscription__
- *
- * To run a query within a React component, call `useCommentTreeSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCommentTreeSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCommentTreeSubscription({
- *   variables: {
- *      pageURL: // value for 'pageURL'
- *   },
- * });
- */
-export function useCommentTreeSubscription(baseOptions: Apollo.SubscriptionHookOptions<CommentTreeSubscription, CommentTreeSubscriptionVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<CommentTreeSubscription, CommentTreeSubscriptionVariables>(CommentTreeDocument, options);
-      }
-export type CommentTreeSubscriptionHookResult = ReturnType<typeof useCommentTreeSubscription>;
-export type CommentTreeSubscriptionResult = Apollo.SubscriptionResult<CommentTreeSubscription>;
+export function useCommentTreeSubscription<TData = CommentTreeSubscription>(options: Omit<Urql.UseSubscriptionArgs<CommentTreeSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<CommentTreeSubscription, TData>) {
+  return Urql.useSubscription<CommentTreeSubscription, TData, CommentTreeSubscriptionVariables>({ query: CommentTreeDocument, ...options }, handler);
+};
 export const CommentDetailsDocument = gql`
     subscription commentDetails($id: uuid!) {
   commentByPk(id: $id) {
@@ -113,28 +94,9 @@ export const CommentDetailsDocument = gql`
 }
     ${CommentContentFragmentDoc}`;
 
-/**
- * __useCommentDetailsSubscription__
- *
- * To run a query within a React component, call `useCommentDetailsSubscription` and pass it any options that fit your needs.
- * When your component renders, `useCommentDetailsSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCommentDetailsSubscription({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useCommentDetailsSubscription(baseOptions: Apollo.SubscriptionHookOptions<CommentDetailsSubscription, CommentDetailsSubscriptionVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<CommentDetailsSubscription, CommentDetailsSubscriptionVariables>(CommentDetailsDocument, options);
-      }
-export type CommentDetailsSubscriptionHookResult = ReturnType<typeof useCommentDetailsSubscription>;
-export type CommentDetailsSubscriptionResult = Apollo.SubscriptionResult<CommentDetailsSubscription>;
+export function useCommentDetailsSubscription<TData = CommentDetailsSubscription>(options: Omit<Urql.UseSubscriptionArgs<CommentDetailsSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<CommentDetailsSubscription, TData>) {
+  return Urql.useSubscription<CommentDetailsSubscription, TData, CommentDetailsSubscriptionVariables>({ query: CommentDetailsDocument, ...options }, handler);
+};
 export const InsertOneCommentDocument = gql`
     mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
   insertOneComment(
@@ -144,34 +106,10 @@ export const InsertOneCommentDocument = gql`
   }
 }
     `;
-export type InsertOneCommentMutationFn = Apollo.MutationFunction<InsertOneCommentMutation, InsertOneCommentMutationVariables>;
 
-/**
- * __useInsertOneCommentMutation__
- *
- * To run a mutation, you first call `useInsertOneCommentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useInsertOneCommentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [insertOneCommentMutation, { data, loading, error }] = useInsertOneCommentMutation({
- *   variables: {
- *      content: // value for 'content'
- *      parentId: // value for 'parentId'
- *      pageId: // value for 'pageId'
- *   },
- * });
- */
-export function useInsertOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<InsertOneCommentMutation, InsertOneCommentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertOneCommentMutation, InsertOneCommentMutationVariables>(InsertOneCommentDocument, options);
-      }
-export type InsertOneCommentMutationHookResult = ReturnType<typeof useInsertOneCommentMutation>;
-export type InsertOneCommentMutationResult = Apollo.MutationResult<InsertOneCommentMutation>;
-export type InsertOneCommentMutationOptions = Apollo.BaseMutationOptions<InsertOneCommentMutation, InsertOneCommentMutationVariables>;
+export function useInsertOneCommentMutation() {
+  return Urql.useMutation<InsertOneCommentMutation, InsertOneCommentMutationVariables>(InsertOneCommentDocument);
+};
 export const DeleteOneCommentDocument = gql`
     mutation deleteOneComment($id: uuid!) {
   updateCommentByPk(pk_columns: {id: $id}, _set: {deletedAt: "now()"}) {
@@ -179,29 +117,7 @@ export const DeleteOneCommentDocument = gql`
   }
 }
     `;
-export type DeleteOneCommentMutationFn = Apollo.MutationFunction<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>;
 
-/**
- * __useDeleteOneCommentMutation__
- *
- * To run a mutation, you first call `useDeleteOneCommentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteOneCommentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteOneCommentMutation, { data, loading, error }] = useDeleteOneCommentMutation({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useDeleteOneCommentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>(DeleteOneCommentDocument, options);
-      }
-export type DeleteOneCommentMutationHookResult = ReturnType<typeof useDeleteOneCommentMutation>;
-export type DeleteOneCommentMutationResult = Apollo.MutationResult<DeleteOneCommentMutation>;
-export type DeleteOneCommentMutationOptions = Apollo.BaseMutationOptions<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>;
+export function useDeleteOneCommentMutation() {
+  return Urql.useMutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>(DeleteOneCommentDocument);
+};

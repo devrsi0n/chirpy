@@ -1,7 +1,7 @@
-import NextAuth, { CookieOption, CookiesOptions } from 'next-auth';
+import NextAuth, { CookiesOptions } from 'next-auth';
 
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { getAdminApollo } from '$/server/common/admin-apollo';
 import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth-adapter';
 import { authProviders } from '$/server/services/auth-providers';
@@ -40,16 +40,14 @@ export default NextAuth({
       };
     },
     async session({ session, token }) {
-      const adminClient = getAdminApollo();
+      const client = getAdminGqlClient();
       const userId = token.sub!;
-      const { data } = await adminClient.query<UserProjectsQuery>({
-        fetchPolicy: 'cache-first',
-        query: UserProjectsDocument,
-        variables: {
+      const { data } = await client
+        .query<UserProjectsQuery>(UserProjectsDocument, {
           userId,
-        },
-      });
-      const editableProjectIds = data.projects.map(({ id }: { id: string }) => id);
+        })
+        .toPromise();
+      const editableProjectIds = data?.projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,

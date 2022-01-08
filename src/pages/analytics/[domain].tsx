@@ -7,7 +7,7 @@ import 'twin.macro';
 import { AnalyticsBlock } from '$/blocks/Analytics';
 import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
-import { getAdminApollo } from '$/server/common/admin-apollo';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { CommonPageProps } from '$/types/page.type';
@@ -63,22 +63,19 @@ export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, Pa
     return { notFound: true };
   }
   const { domain } = params;
-  const client = getAdminApollo();
-  const {
-    data: { projects },
-  } = await client.query<ProjectByDomainQuery>({
-    query: ProjectByDomainDocument,
-    variables: {
+  const client = getAdminGqlClient();
+  const { data } = await client
+    .query<ProjectByDomainQuery>(ProjectByDomainDocument, {
       domain,
-    },
-  });
-  if (!projects || !projects[0]) {
+    })
+    .toPromise();
+  if (!data?.projects?.[0]) {
     return { notFound: true };
   }
   const session = await getSession();
   return {
     props: {
-      project: projects[0],
+      project: data.projects[0],
       session: session!,
       layoutProps: {
         hideFullBleed: true,

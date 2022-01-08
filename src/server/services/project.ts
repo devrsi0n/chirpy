@@ -1,4 +1,4 @@
-import { getAdminApollo } from '$/server/common/admin-apollo';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   AllProjectsDocument,
   AllProjectsQuery,
@@ -6,14 +6,13 @@ import {
 } from '$/server/graphql/generated/project';
 
 export async function getProjectById(id: string) {
-  const adminApollo = getAdminApollo();
+  const adminApollo = getAdminGqlClient();
   try {
-    const { data } = await adminApollo.query({
-      query: ProjectByPkDocument,
-      variables: {
+    const { data } = await adminApollo
+      .query(ProjectByPkDocument, {
         id,
-      },
-    });
+      })
+      .toPromise();
     return data?.projectByPk;
   } catch (error) {
     console.warn(`query project by id error: ${error}`);
@@ -24,18 +23,16 @@ export async function getProjectById(id: string) {
 export type AllProjectStaticPathParams = { params: { domain: string } }[];
 
 export async function getAllProjectStaticPathsByDomain(): Promise<AllProjectStaticPathParams> {
-  const adminApollo = getAdminApollo();
-  const {
-    data: { projects },
-  } = await adminApollo.query<AllProjectsQuery>({
-    query: AllProjectsDocument,
-  });
+  const client = getAdminGqlClient();
+  const { data } = await client.query<AllProjectsQuery>(AllProjectsDocument).toPromise();
 
-  return projects.map(({ domain }) => {
-    return {
-      params: {
-        domain,
-      },
-    };
-  });
+  return (
+    data?.projects.map(({ domain }) => {
+      return {
+        params: {
+          domain,
+        },
+      };
+    }) || []
+  );
 }
