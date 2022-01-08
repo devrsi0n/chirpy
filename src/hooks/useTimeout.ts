@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-function useTimeout(callback: () => void, delay: number | null) {
+export function useTimeout(callback: () => void, delay: number | null) {
   const savedCallback = React.useRef(callback);
 
   React.useEffect(() => {
@@ -19,5 +19,3 @@ function useTimeout(callback: () => void, delay: number | null) {
     return () => clearTimeout(id);
   }, [delay]);
 }
-
-export default useTimeout;

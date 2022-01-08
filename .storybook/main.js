@@ -22,5 +22,5 @@ module.exports = {
     ...options,
     ...babel,
   }),
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-postcss'],
 };

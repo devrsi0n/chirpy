@@ -1,4 +1,3 @@
-// @refresh reset
 import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import Link from '@tiptap/extension-link';
@@ -13,6 +12,7 @@ import { Button } from '$/components/Button';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
 import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
 import { useLocalStorage } from '$/hooks/useLocalStorage';
+import { usePrevious } from '$/hooks/usePrevious';
 import { cardBg, textInput } from '$/styles/common';
 
 import { SignInButton } from '../SignInButton';
@@ -61,6 +61,11 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
       setValue(newVal);
     },
   });
+  React.useEffect(() => {
+    if (initialValue) {
+      editor?.commands.setContent(initialValue!);
+    }
+  }, [initialValue, editor]);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const isUnmountingRef = useIsUnmountingRef();

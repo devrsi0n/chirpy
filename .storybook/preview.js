@@ -2,12 +2,12 @@ import { Global } from '@emotion/react';
 import * as React from 'react';
 import { GlobalStyles } from 'twin.macro';
 
-import { useSiteTheme } from '$/contexts/ThemeProvider/useSiteTheme';
+import { useThemeVariables } from '$/contexts/ThemeProvider/useThemeVariables';
 import { appGlobalStyles } from '$/styles/global-styles';
 
 export const decorators = [
   (Story) => {
-    const { styles } = useSiteTheme();
+    const { styles } = useThemeVariables();
     return <>
       <GlobalStyles />
       <Global styles={appGlobalStyles} />
