@@ -148,7 +148,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         const { unsubscribe } = pipe<OperationResult<CommentTreeSubscription>>(
           client.subscription(CommentTreeDocument, { pageURL }),
           subscribe((result) => {
-            console.log(result);
+            // console.log(result);
             resolve(result);
           }),
         );

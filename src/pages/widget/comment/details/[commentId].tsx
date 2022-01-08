@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         const { unsubscribe } = pipe<OperationResult<CommentDetailsSubscription>>(
           client.subscription(CommentDetailsDocument, { id: commentId }),
           subscribe((result) => {
-            console.log(result);
+            // console.log(result);
             resolve(result);
           }),
         );
