@@ -10,9 +10,8 @@ import tw, { TwStyle } from 'twin.macro';
 
 import { Button } from '$/components/Button';
 import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
-import { useIsUnmountingRef } from '$/hooks/useIsUnmountingRef';
+import { useIsUnmounting } from '$/hooks/useIsUnmounting';
 import { useLocalStorage } from '$/hooks/useLocalStorage';
-import { usePrevious } from '$/hooks/usePrevious';
 import { cardBg, textInput } from '$/styles/common';
 
 import { SignInButton } from '../SignInButton';
@@ -68,7 +67,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
   }, [initialValue, editor]);
 
   const [isLoading, setIsLoading] = React.useState(false);
-  const isUnmountingRef = useIsUnmountingRef();
+  const isUnmountingRef = useIsUnmounting();
   const handleSubmitReply = async () => {
     setIsLoading(true);
     await onSubmit?.(value);

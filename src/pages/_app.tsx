@@ -6,7 +6,6 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { useMountedState } from 'react-use';
 import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
@@ -15,6 +14,7 @@ import { Spinner } from '$/components/Spinner';
 import { ToastProvider } from '$/components/Toast';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
 import { GQLClientProvider } from '$/contexts/GQLClientProvider';
+import { useIsUnmounting } from '$/hooks/useIsUnmounting';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
@@ -62,7 +62,7 @@ export default App;
 function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element {
   const { status } = useSession();
   const loading = status === 'loading';
-  const isMounted = useMountedState();
+  const isMounted = useIsUnmounting();
 
   if (loading && !isMounted) {
     return <Spinner tw="mt-32 justify-center" />;
