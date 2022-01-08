@@ -9,8 +9,7 @@ import Dashboard from '$/pages/dashboard/index';
 import { pageRender } from '../fixtures/page-render';
 
 const mockFetchUserProject = jest.fn();
-jest.spyOn(userModule, 'useUserDashboardProjectsLazyQuery').mockReturnValue([
-  mockFetchUserProject,
+jest.spyOn(userModule, 'useUserDashboardProjectsQuery').mockReturnValue([
   {
     data: {
       userByPk: {
@@ -18,21 +17,22 @@ jest.spyOn(userModule, 'useUserDashboardProjectsLazyQuery').mockReturnValue([
       },
     },
   } as any,
+  mockFetchUserProject,
 ]);
 
 const mockInsertProject = jest.fn();
 jest.spyOn(projectModule, 'useInsertOneProjectMutation').mockReturnValue([
-  mockInsertProject,
   {
     loading: false,
   } as any,
+  mockInsertProject,
 ]);
 const mockDeleteProject = jest.fn();
 jest.spyOn(projectModule, 'useDeleteProjectByPkMutation').mockReturnValue([
-  mockDeleteProject,
   {
     loading: false,
   } as any,
+  mockDeleteProject,
 ]);
 
 describe('dashboard', () => {

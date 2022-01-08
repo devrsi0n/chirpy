@@ -10,8 +10,6 @@ const mockUpdateUser = jest.fn();
 jest.mock('../../../graphql/generated/user', () => ({
   ...jest.requireActual('../../../graphql/generated/user'),
   useUpdateUserFieldsMutation: () => [
-    mockUpdateUser,
-    // @ts-ignore
     {
       data: {
         updateUserByPk: {
@@ -19,8 +17,9 @@ jest.mock('../../../graphql/generated/user', () => ({
           id: 1,
         },
       },
-      loading: false,
+      fetching: false,
     },
+    mockUpdateUser,
   ],
 }));
 
@@ -64,12 +63,10 @@ describe('Welcome', () => {
     userEvent.click(saveButton);
     await waitFor(() =>
       expect(mockUpdateUser).toHaveBeenCalledWith({
-        variables: {
-          id: 'user-id-1',
-          email,
-          name: displayName,
-          username: userName,
-        },
+        id: 'user-id-1',
+        email,
+        name: displayName,
+        username: userName,
       }),
     );
 
