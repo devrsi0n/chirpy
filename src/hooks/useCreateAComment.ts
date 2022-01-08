@@ -14,21 +14,19 @@ export type SubmitHandler = (reply: RTEValue, commentId?: string) => Promise<voi
 
 export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitHandler {
   const { isSignIn } = useCurrentUser();
-  const [insertOneComment] = useInsertOneCommentMutation();
+  const [{}, insertOneComment] = useInsertOneCommentMutation();
 
   const { showToast } = useToast();
 
   const handleSubmitReply: SubmitHandler = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
       console.error('Navigate to login page');
-      return Promise.reject();
+      throw undefined;
     }
     const { data } = await insertOneComment({
-      variables: {
-        parentId: commentId,
-        content: reply as JsonArray,
-        pageId,
-      },
+      parentId: commentId,
+      content: reply as JsonArray,
+      pageId,
     });
     if (!data?.insertOneComment?.id) {
       showToast({

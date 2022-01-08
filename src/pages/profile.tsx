@@ -40,7 +40,7 @@ export default function Profile(): JSX.Element {
   } = useCurrentUser();
 
   const [isEditMode, setIsEditMode] = React.useState(false);
-  const [updateUserByPk] = useUpdateUserByPkMutation();
+  const [{}, updateUserByPk] = useUpdateUserByPkMutation();
 
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
@@ -55,13 +55,11 @@ export default function Profile(): JSX.Element {
     if (isEditMode) {
       try {
         await updateUserByPk({
-          variables: {
-            id: id!,
-            name: fields.name,
-            bio: fields.bio,
-            website: fields.website,
-            twitterUserName: fields.twitter,
-          },
+          id: id!,
+          name: fields.name,
+          bio: fields.bio,
+          website: fields.website,
+          twitterUserName: fields.twitter,
         });
         refetchData?.();
         showToast({

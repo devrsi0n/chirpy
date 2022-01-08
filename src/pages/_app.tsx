@@ -13,8 +13,8 @@ import { GlobalStyles } from 'twin.macro';
 import { ErrorFallback } from '$/blocks/ErrorFallback';
 import { Spinner } from '$/components/Spinner';
 import { ToastProvider } from '$/components/Toast';
-import { ApolloClientProvider } from '$/contexts/ApolloClientProvider';
 import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
+import { GQLClientProvider } from '$/contexts/GQLClientProvider';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
@@ -39,7 +39,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
           <NextThemesProvider attribute="class" storageKey={`${APP_NAME_LOWERCASE}.theme`}>
             <LazyMotion features={loadFeatures} strict>
               <SessionGuard>
-                <ApolloClientProvider>
+                <GQLClientProvider>
                   <CurrentUserProvider>
                     <ToastProvider>
                       <AuthWrapper>
@@ -47,7 +47,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
                       </AuthWrapper>
                     </ToastProvider>
                   </CurrentUserProvider>
-                </ApolloClientProvider>
+                </GQLClientProvider>
               </SessionGuard>
             </LazyMotion>
           </NextThemesProvider>

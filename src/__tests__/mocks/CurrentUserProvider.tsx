@@ -36,16 +36,16 @@ export const mockUserData = {
   editableProjectIds: EDITABLE_PROJECT_IDS,
 };
 
-jest.spyOn(userModule, 'useCurrentUserLazyQuery').mockReturnValue([
-  jest.fn(),
+jest.spyOn(userModule, 'useCurrentUserQuery').mockReturnValue([
   {
     data: {
       // @ts-ignore
       userByPk: mockUserData,
     },
-    loading: false,
-    refetch: jest.fn(),
+    fetching: false,
+    stale: false,
   },
+  jest.fn(),
 ]);
 
 export function MockCurrentUserProvider({ children }: MockCurrentUserProviderProps): JSX.Element {

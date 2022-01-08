@@ -16,8 +16,8 @@ import { Text } from '$/components/Text';
 import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/ThemeProvider';
 import { translateRadixColor } from '$/contexts/ThemeProvider/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
-import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
@@ -90,7 +90,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   const { resolvedTheme } = useTheme();
   const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system' ? 'light' : resolvedTheme) ||
     'light') as keyof ColorSeries;
-  const [updateTheme] = useUpdateThemeMutation();
+  const [{}, updateTheme] = useUpdateThemeMutation();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return () => {
       const newTheme = merge({}, widgetTheme, {
@@ -98,10 +98,8 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
       });
       setWidgetTheme(newTheme);
       updateTheme({
-        variables: {
-          projectId: props.project.id,
-          theme: newTheme,
-        },
+        projectId: props.project.id,
+        theme: newTheme,
       });
     };
   };
@@ -203,21 +201,18 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { domain } = params;
-  const adminApollo = getAdminApollo();
-  const {
-    data: { projects },
-  } = await adminApollo.query<ThemeProjectByPkQuery>({
-    query: ThemeProjectByPkDocument,
-    variables: {
+  const client = getAdminGqlClient();
+  const { data } = await client
+    .query<ThemeProjectByPkQuery>(ThemeProjectByPkDocument, {
       domain,
-    },
-  });
+    })
+    .toPromise();
 
-  if (!projects || !projects[0]) {
+  if (!data?.projects || !data?.projects[0]) {
     return { notFound: true };
   }
   return {
-    props: { project: projects[0] },
+    props: { project: data.projects[0] },
     revalidate: 1,
   };
 };

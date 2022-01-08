@@ -10,12 +10,12 @@ export type CommentContextProviderProps = React.PropsWithChildren<
 >;
 
 export function CommentContextProvider(props: CommentContextProviderProps) {
-  const [deleteOneComment] = useDeleteOneCommentMutation();
+  const [{}, deleteOneComment] = useDeleteOneCommentMutation();
   const { showToast } = useToast();
   const deleteAComment = React.useCallback(
     async (commentId: string) => {
       try {
-        await deleteOneComment({ variables: { id: commentId } });
+        await deleteOneComment({ id: commentId });
         showToast({
           type: 'success',
           title: 'Deleted successfully!',

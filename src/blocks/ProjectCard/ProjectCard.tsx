@@ -38,14 +38,12 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
     setDeletingProjectId('');
     setDeletingProject('');
   };
-  const [deleteProjectByPkMutation, { loading }] = useDeleteProjectByPkMutation();
+  const [{ fetching: loading }, deleteProjectByPkMutation] = useDeleteProjectByPkMutation();
   const { showToast } = useToast();
   const handleClickConfirmDelete = async () => {
     try {
       await deleteProjectByPkMutation({
-        variables: {
-          id: deletingProjectId,
-        },
+        id: deletingProjectId,
       });
       setDeletingProjectId('');
       setDeletingProject('');

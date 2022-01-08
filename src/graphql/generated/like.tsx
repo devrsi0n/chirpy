@@ -1,8 +1,8 @@
 import * as Types from './types';
 
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
-const defaultOptions =  {}
+import gql from 'graphql-tag';
+import * as Urql from 'urql';
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type InsertOneLikeMutationVariables = Types.Exact<{
   commentId: Types.Scalars['uuid'];
 }>;
@@ -25,32 +25,10 @@ export const InsertOneLikeDocument = gql`
   }
 }
     `;
-export type InsertOneLikeMutationFn = Apollo.MutationFunction<InsertOneLikeMutation, InsertOneLikeMutationVariables>;
 
-/**
- * __useInsertOneLikeMutation__
- *
- * To run a mutation, you first call `useInsertOneLikeMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useInsertOneLikeMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [insertOneLikeMutation, { data, loading, error }] = useInsertOneLikeMutation({
- *   variables: {
- *      commentId: // value for 'commentId'
- *   },
- * });
- */
-export function useInsertOneLikeMutation(baseOptions?: Apollo.MutationHookOptions<InsertOneLikeMutation, InsertOneLikeMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<InsertOneLikeMutation, InsertOneLikeMutationVariables>(InsertOneLikeDocument, options);
-      }
-export type InsertOneLikeMutationHookResult = ReturnType<typeof useInsertOneLikeMutation>;
-export type InsertOneLikeMutationResult = Apollo.MutationResult<InsertOneLikeMutation>;
-export type InsertOneLikeMutationOptions = Apollo.BaseMutationOptions<InsertOneLikeMutation, InsertOneLikeMutationVariables>;
+export function useInsertOneLikeMutation() {
+  return Urql.useMutation<InsertOneLikeMutation, InsertOneLikeMutationVariables>(InsertOneLikeDocument);
+};
 export const DeleteLikeByPkDocument = gql`
     mutation deleteLikeByPk($id: uuid!) {
   deleteLikeByPk(id: $id) {
@@ -58,29 +36,7 @@ export const DeleteLikeByPkDocument = gql`
   }
 }
     `;
-export type DeleteLikeByPkMutationFn = Apollo.MutationFunction<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>;
 
-/**
- * __useDeleteLikeByPkMutation__
- *
- * To run a mutation, you first call `useDeleteLikeByPkMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteLikeByPkMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteLikeByPkMutation, { data, loading, error }] = useDeleteLikeByPkMutation({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useDeleteLikeByPkMutation(baseOptions?: Apollo.MutationHookOptions<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>(DeleteLikeByPkDocument, options);
-      }
-export type DeleteLikeByPkMutationHookResult = ReturnType<typeof useDeleteLikeByPkMutation>;
-export type DeleteLikeByPkMutationResult = Apollo.MutationResult<DeleteLikeByPkMutation>;
-export type DeleteLikeByPkMutationOptions = Apollo.BaseMutationOptions<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>;
+export function useDeleteLikeByPkMutation() {
+  return Urql.useMutation<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>(DeleteLikeByPkDocument);
+};

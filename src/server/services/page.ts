@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAdminApollo } from '$/server/common/admin-apollo';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   InsertOnePageDocument,
   InsertOnePageMutation,
@@ -27,38 +27,35 @@ export async function handleGetPage(
       error: `url(${url}) and domain(${domain}) must be matched`,
     });
   }
-  const adminApollo = getAdminApollo();
-  const projectResult = await adminApollo.query({
-    query: ProjectByDomainDocument,
-    variables: {
+  const client = getAdminGqlClient();
+  const projectResult = await client
+    .query(ProjectByDomainDocument, {
       domain,
-    },
-  });
-  const projectId = projectResult.data.projects[0]?.id;
+    })
+    .toPromise();
+  const projectId = projectResult.data?.projects[0]?.id;
   if (!projectId) {
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
     });
   }
-  const pageResult = await adminApollo.query<PageByUrlQuery>({
-    query: PageByUrlDocument,
-    variables: {
+  const pageResult = await client
+    .query<PageByUrlQuery>(PageByUrlDocument, {
       url,
       projectId,
-    },
-  });
-  const page = pageResult.data.pages[0];
+    })
+    .toPromise();
+  const page = pageResult.data?.pages[0];
 
   if (!page?.id) {
-    const createdPage = await adminApollo.mutate<InsertOnePageMutation>({
-      mutation: InsertOnePageDocument,
-      variables: {
+    const createdPage = await client
+      .mutation<InsertOnePageMutation>(InsertOnePageDocument, {
         projectId,
         url,
         title: title || '',
-      },
-    });
+      })
+      .toPromise();
     if (!createdPage.data?.insertOnePage?.id) {
       return res.status(500).json({
         error: 'Create page failed',
@@ -66,14 +63,13 @@ export async function handleGetPage(
     }
     return res.json(createdPage.data?.insertOnePage);
   } else if (page.title !== title) {
-    const updatePage = await adminApollo.mutate({
-      mutation: UpdatePagesDocument,
-      variables: {
+    const updatePage = await client
+      .mutation(UpdatePagesDocument, {
         projectId,
         url,
         title: title || '',
-      },
-    });
+      })
+      .toPromise();
     if (
       updatePage.data?.updatePages?.affected_rows !== 1 ||
       !updatePage.data.updatePages?.returning[0].id

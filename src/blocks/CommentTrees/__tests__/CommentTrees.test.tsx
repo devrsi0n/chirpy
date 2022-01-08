@@ -11,12 +11,12 @@ const mockOnSubmitReply = jest.fn();
 const mockOnClickLikeAction = jest.fn();
 const mockComments = [
   {
-    ...generateCommentFragment('1', 1),
-    replies: [generateCommentFragment('sub-1', 2)],
+    ...generateCommentFragment('1'),
+    replies: [generateCommentFragment('sub-1')],
   },
   {
-    ...generateCommentFragment('2', 1),
-    replies: [generateCommentFragment('sub-2', 2)],
+    ...generateCommentFragment('2'),
+    replies: [generateCommentFragment('sub-2')],
   },
 ];
 

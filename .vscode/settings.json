@@ -6,7 +6,7 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "editor.fontSize": 16,
-  "cSpell.words": ["blacka", "centralus", "grayd", "grayl", "jsonb", "visx", "whitea"],
+  "cSpell.words": ["blacka", "centralus", "grayd", "grayl", "jsonb", "visx", "whitea", "wonka"],
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",
   "jest.jestCommandLine": "npm run ut --",

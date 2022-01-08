@@ -39,7 +39,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoadingUser]);
-  const [updateUser, { loading }] = useUpdateUserFieldsMutation();
+  const [{ fetching: loading }, updateUser] = useUpdateUserFieldsMutation();
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
   const { showToast } = useToast();
@@ -47,12 +47,10 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     if (!data.id || isSaved) return;
     try {
       await updateUser({
-        variables: {
-          id: data.id,
-          email: fields.email,
-          name: fields.name,
-          username: fields.username,
-        },
+        id: data.id,
+        email: fields.email,
+        name: fields.name,
+        username: fields.username,
       });
     } catch (error: any) {
       if (/duplicate key.+users_username_key/.test(error.message)) {

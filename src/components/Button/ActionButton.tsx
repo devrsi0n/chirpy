@@ -3,7 +3,7 @@ import tw, { TwStyle } from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from './BaseButton';
 
-type Color = 'primary' | 'blue' | 'green';
+type Color = 'pink' | 'blue' | 'green';
 
 export type ActionButtonProps = BaseButtonProps & {
   icon: React.ReactNode;
@@ -11,8 +11,8 @@ export type ActionButtonProps = BaseButtonProps & {
   activated?: boolean;
 };
 
-const colorStyleFunctions: Record<Color, typeof getPrimaryClassName> = {
-  primary: getPrimaryClassName,
+const colorStyleFunctions: Record<Color, typeof getPinkClassName> = {
+  pink: getPinkClassName,
   blue: getBlueClassName,
   green: getGreenClassName,
 };
@@ -41,14 +41,14 @@ export function ActionButton({
   );
 }
 
-function getPrimaryClassName(activated: boolean | undefined): {
+function getPinkClassName(activated: boolean | undefined): {
   iconStyle: TwStyle[];
   childStyle: TwStyle;
 } {
-  const textStyle = activated ? tw`text-primary-900` : tw`group-hover:text-primary-900`;
+  const textStyle = activated ? tw`text-pink-900` : tw`group-hover:text-pink-900`;
   return {
-    iconStyle: [textStyle, tw`group-hover:bg-primary-300`],
-    childStyle: tw`group-hover:text-primary-900`,
+    iconStyle: [textStyle, tw`group-hover:bg-pink-300`],
+    childStyle: tw`group-hover:text-pink-900`,
   };
 }
 

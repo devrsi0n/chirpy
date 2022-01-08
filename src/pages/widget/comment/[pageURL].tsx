@@ -1,4 +1,3 @@
-import { FetchResult } from '@apollo/client';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -10,6 +9,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import 'twin.macro';
+import { OperationResult } from 'urql';
+import { pipe, subscribe } from 'wonka';
 
 import { CommentTrees } from '$/blocks/CommentTrees';
 import { WidgetLayout } from '$/blocks/Layout';
@@ -18,14 +19,15 @@ import { CommentContextProvider } from '$/contexts/CommentContext';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
+  CommentTreeSubscriptionVariables,
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/useCreateAComment';
 import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
 import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
-import { getAdminApollo } from '$/server/common/admin-apollo';
 import {
   PageByUrlOnlyDocument,
   PageByUrlOnlyQuery,
@@ -35,6 +37,7 @@ import {
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
+import { ssrMode } from '$/utilities/env';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -53,8 +56,9 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
     pageId = props.pageId;
     pageURL = props.pageURL;
   }
-  const { data } = useCommentTreeSubscription({
+  const [{ data }] = useCommentTreeSubscription({
     variables: { pageURL },
+    pause: ssrMode,
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
 
@@ -95,20 +99,17 @@ type PathParams = {
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const adminApollo = getAdminApollo();
-  const {
-    data: { pages },
-  } = await adminApollo.query<PagesQuery>({
-    query: PagesDocument,
-  });
+  const client = getAdminGqlClient();
+  const { data } = await client.query<PagesQuery>(PagesDocument).toPromise();
 
-  const paths: { params: PathParams }[] = pages.map(({ url }) => {
-    return {
-      params: {
-        pageURL: url,
-      },
-    };
-  });
+  const paths: { params: PathParams }[] =
+    data?.pages.map(({ url }) => {
+      return {
+        params: {
+          pageURL: url,
+        },
+      };
+    }) || [];
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
@@ -131,44 +132,39 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
     return { notFound: true };
   }
   const { pageURL } = params;
-  const adminApollo = getAdminApollo();
-  const pageQuery = await adminApollo.query<PageByUrlOnlyQuery>({
-    query: PageByUrlOnlyDocument,
-    variables: { url: pageURL },
-  });
+  const client = getAdminGqlClient();
+  const pageQuery = await client
+    .query<PageByUrlOnlyQuery>(PageByUrlOnlyDocument, { url: pageURL })
+    .toPromise();
   const pageId = pageQuery.data?.pages?.[0]?.id;
   if (!pageId) {
     return { notFound: true };
   }
-  const commentTreeSubscription = adminApollo.subscribe<CommentTreeSubscription>({
-    query: CommentTreeDocument,
-    variables: {
-      pageURL: decodeURIComponent(pageURL),
-    },
-  });
+
   try {
-    const { data } = await new Promise<FetchResult<CommentTreeSubscription>>((resolve, reject) => {
-      commentTreeSubscription.subscribe(
-        (value) => {
-          resolve(value);
-        },
-        (error) => {
-          reject(error);
-        },
-      );
-    });
+    const { data } = await new Promise<OperationResult<CommentTreeSubscription>>(
+      (resolve, reject) => {
+        // @ts-ignore
+        const { unsubscribe } = pipe<OperationResult<CommentTreeSubscription>>(
+          client.subscription(CommentTreeDocument, { pageURL }),
+          subscribe((result) => {
+            // console.log(result);
+            resolve(result);
+          }),
+        );
+      },
+    );
 
     if (!data?.comments) {
       return { notFound: true };
     }
     const { comments } = data;
-    const themeResult = await adminApollo.query<ThemeOfPageQuery>({
-      query: ThemeOfPageDocument,
-      variables: {
+    const themeResult = await client
+      .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
         pageId,
-      },
-    });
-    if (!themeResult?.data.pageByPk) {
+      })
+      .toPromise();
+    if (!themeResult?.data?.pageByPk) {
       console.error(`Can't find theme info`);
       return { notFound: true };
     }
@@ -178,7 +174,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         pageURL,
         pageId,
         projectId: themeResult.data.pageByPk.project.id,
-        theme: (themeResult.data.pageByPk?.project.theme as Theme) || null,
+        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
       },
       revalidate: 1,
     };

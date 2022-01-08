@@ -15,7 +15,7 @@ generates:
       extension: .tsx
     plugins:
       - typescript-operations
-      - typescript-react-apollo
+      - typescript-urql
 config:
   withComponents: false
   withHooks: true
