@@ -2,7 +2,7 @@
 
 [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Apollo-GraphQL](https://img.shields.io/badge/-ApolloGraphQL-311C87?style=for-the-badge&logo=apollo-graphql)](https://www.apollographql.com/)
+[![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org)
 [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)](https://www.cypress.io/)
 [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
@@ -25,7 +25,7 @@
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Next.js](https://github.com/vercel/next.js)
-- [GraphQL](https://graphql.org/) & [Hasura/graphql-engine](https://github.com/hasura/graphql-engine) & [Apollo Client](https://github.com/apollographql/apollo-client)
+- [GraphQL](https://graphql.org/) & [Hasura/graphql-engine](https://github.com/hasura/graphql-engine)
 - [tailwindcss](https://tailwindcss.com/) & [twin.macro](https://github.com/ben-rogerson/twin.macro)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [Plausible](https://github.com/plausible/analytics)
