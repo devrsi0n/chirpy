@@ -34,8 +34,8 @@ export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Elemen
     [widgetTheme],
   );
   const { styles } = useThemeVariables(widgetTheme, {
-    light: '.widget',
-    dark: '.dark .widget',
+    light: 'body',
+    dark: '.dark body',
   });
 
   return (
@@ -43,8 +43,7 @@ export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Elemen
       <Head>
         <style key="widget-theme">{styles}</style>
       </Head>
-      {/* Wrap children with a specified class name to limit the scope, useful in theme page */}
-      <div className="widget">{props.children}</div>
+      {props.children}
     </WidgetThemeContext.Provider>
   );
 }

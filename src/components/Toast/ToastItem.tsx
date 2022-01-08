@@ -4,8 +4,9 @@ import Info from '@geist-ui/react-icons/info';
 import Dismiss from '@geist-ui/react-icons/x';
 import XCircle from '@geist-ui/react-icons/xCircle';
 import * as React from 'react';
-import { useTimeoutFn } from 'react-use';
 import tw from 'twin.macro';
+
+import { useTimeout } from '$/hooks/useTimeout';
 
 import { IconButton } from '../Button';
 import { Card } from '../Card';
@@ -18,16 +19,10 @@ export type ToastProps = React.PropsWithChildren<Toast> & {
 };
 export const TOAST_DURATION = 10_000;
 
-export function ToastItem({
-  id,
-  title,
-  description,
-  type,
-  onDismiss: onClickDismiss,
-}: ToastProps): JSX.Element {
-  useTimeoutFn(() => {
-    onClickDismiss(id);
-  }, TOAST_DURATION);
+export function ToastItem({ id, title, description, type, onDismiss }: ToastProps): JSX.Element {
+  // useTimeout(() => {
+  //   onDismiss(id);
+  // }, TOAST_DURATION);
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
@@ -43,7 +38,7 @@ export function ToastItem({
         </div>
         <IconButton
           css={tw`w-fit h-fit`}
-          onClick={() => onClickDismiss(id)}
+          onClick={() => onDismiss(id)}
           aria-label="Dismiss"
           title="Dismiss"
         >
