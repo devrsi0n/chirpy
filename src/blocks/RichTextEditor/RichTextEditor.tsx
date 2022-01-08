@@ -62,7 +62,7 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
   });
   React.useEffect(() => {
     if (initialValue) {
-      editor?.commands.setContent(initialValue!);
+      editor?.commands.setContent(initialValue);
     }
   }, [initialValue, editor]);
 
