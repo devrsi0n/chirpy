@@ -14,6 +14,7 @@ import {
 import {
   CreateUserDocument,
   CreateUserMutation,
+  CreateUserMutationVariables,
   DeleteUserDocument,
   UpdateUserProfileByEmailDocument,
   UpdateUserProfileByEmailMutationVariables,
@@ -28,11 +29,14 @@ export function nextAuthAdapter(): Adapter {
   return {
     // @ts-expect-error
     async createUser(user: AdapterUser) {
-      const { data } = await client
-        .mutation(CreateUserDocument, translateAdapterUserToQueryVairables(user))
+      const result = await client
+        .mutation<CreateUserMutation, CreateUserMutationVariables>(
+          CreateUserDocument,
+          translateAdapterUserToQueryVairables(user),
+        )
         .toPromise();
 
-      return translateUserToAdapterUser(data?.insertOneUser);
+      return translateUserToAdapterUser(result.data?.insertOneUser);
     },
     async getUser(id) {
       const { data } = await client
@@ -174,9 +178,10 @@ function translateUserToAdapterUser(user: CreateUserMutation['insertOneUser']): 
 function translateAdapterUserToQueryVairables(
   adapterUser: AdapterUser,
 ): NonNullable<CreateUserMutation['insertOneUser']> {
+  const { image, ...rest } = adapterUser;
   return {
-    ...adapterUser,
-    avatar: adapterUser.image,
+    ...rest,
+    avatar: image,
     emailVerified: adapterUser.emailVerified?.toISOString(),
   };
 }
