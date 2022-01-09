@@ -9,10 +9,11 @@ export type AuthOption = {
 };
 
 export const authOptions: AuthOption[] = [
-  {
-    name: 'Google',
-    icon: getLogoComponent(GoogleLogo, 'google', 26),
-  },
+  // TODO: Apply google sign in verification
+  // {
+  //   name: 'Google',
+  //   icon: getLogoComponent(GoogleLogo, 'google', 26),
+  // },
   // TODO: add back facebook login once we can delete user account.
   // {
   //   name: 'Facebook',
