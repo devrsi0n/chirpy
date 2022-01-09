@@ -1,5 +1,5 @@
 import { testUser } from '../../fixtures/user';
-import { waitSession } from '../utils';
+import { waitSession } from '../../fixtures/utils';
 
 describe('Header', () => {
   before(() => {

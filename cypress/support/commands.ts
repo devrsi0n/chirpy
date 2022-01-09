@@ -26,9 +26,13 @@
 import '@testing-library/cypress/add-commands';
 import { Session } from 'next-auth';
 
+import { defaultCookies } from '../../src/server/utilities/default-cookies';
 import { jwtBody } from '../fixtures/user';
 
-Cypress.Commands.add('login' as any, () => {
+const cookieOptions = defaultCookies(Cypress.config().baseUrl.startsWith('https')).sessionToken;
+const cookieName = cookieOptions.name;
+
+Cypress.Commands.add('login', () => {
   cy.intercept(`/api/auth/session`, (req) => {
     req.continue((res) => {
       res.send({
@@ -41,6 +45,11 @@ Cypress.Commands.add('login' as any, () => {
   }).as('session');
 
   cy.intercept('/v1/graphql').as('graphql');
-  cy.setCookie('next-auth.session-token', Cypress.env('SESSION_TOKEN'));
-  Cypress.Cookies.preserveOnce('next-auth.session-token');
+
+  cy.setCookie(cookieName, Cypress.env('SESSION_TOKEN'), {
+    httpOnly: cookieOptions.options.httpOnly,
+    secure: cookieOptions.options.secure,
+    sameSite: cookieOptions.options.sameSite as 'lax',
+  });
+  Cypress.Cookies.preserveOnce(cookieName);
 });

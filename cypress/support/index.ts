@@ -12,12 +12,20 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+/// <reference types="cypress" />
 import '../fixtures/load-env';
 import './commands';
 
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      login(): void;
+    }
+  }
+}
+
 // This module executes in browser context
+// NOTE: This hook only run once when clicking `Run x integration specs` button on Cypress GUI
 before(() => {
-  // @ts-ignore
   cy.login();
-  window.indexedDB.deleteDatabase('localforage');
 });

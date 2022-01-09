@@ -71,14 +71,13 @@ function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element 
 }
 
 function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  const { status } = useSession();
 
   React.useEffect(() => {
-    if (!loading && !session?.user) {
+    if (status === 'unauthenticated') {
       signIn();
     }
-  }, [session, loading]);
+  }, [status]);
 
   return <>{children}</>;
 }
