@@ -1,4 +1,4 @@
-import { waitGraphql, waitSession } from '../utils';
+import { waitGraphql, waitSession } from '../../fixtures/utils';
 
 describe('Project', () => {
   before(() => {
@@ -38,7 +38,7 @@ describe('Project', () => {
       name: /associate a domain with this project/i,
     }).type('foobar.com');
     cy.findByRole('button', {
-      name: /submit/i,
+      name: /^create$/i,
     }).click();
     waitForSpinnerToDisappear();
   });

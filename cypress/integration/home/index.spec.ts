@@ -1,4 +1,4 @@
-import { waitSession } from '../utils';
+import { waitSession } from '../../fixtures/utils';
 
 describe('Index', () => {
   before(() => {
