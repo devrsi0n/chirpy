@@ -20,8 +20,4 @@ declare namespace NodeJS {
     FACEBOOK_APP_ID: string;
     FACEBOOK_APP_SECRET: string;
   }
-
-  interface Global {
-    adminApollo: ApolloClient;
-  }
 }

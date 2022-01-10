@@ -6,9 +6,9 @@ import {
 } from '$/server/graphql/generated/project';
 
 export async function getProjectById(id: string) {
-  const adminApollo = getAdminGqlClient();
+  const client = getAdminGqlClient();
   try {
-    const { data } = await adminApollo
+    const { data } = await client
       .query(ProjectByPkDocument, {
         id,
       })
