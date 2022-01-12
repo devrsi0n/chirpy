@@ -5,6 +5,7 @@ import React from 'react';
 import tw, { theme } from 'twin.macro';
 
 import { useIsDarkMode } from '$/hooks/useIsDarkMode';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../analytics-api';
 import LazyLoader from '../lazy-loader';
@@ -536,11 +537,7 @@ export default function VisitorGraph(props: VisitorGraphProps) {
   };
   const fetchGraphData = React.useCallback(() => {
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(props.site.domain)}/main-graph`,
-        props.site,
-        props.query,
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/main-graph`, props.site, props.query)
       .then((res) => {
         setLoading(false);
         setGraphData(res);

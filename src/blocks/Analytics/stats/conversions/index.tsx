@@ -2,6 +2,7 @@ import React from 'react';
 import 'twin.macro';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import LazyLoader from '../../lazy-loader';
@@ -70,11 +71,7 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   fetchConversions() {
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/conversions`,
-        this.props.site,
-        this.props.query,
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/conversions`, this.props.site, this.props.query)
       .then((res) => this.setState({ loading: false, goals: res, prevHeight: null }));
   }
 

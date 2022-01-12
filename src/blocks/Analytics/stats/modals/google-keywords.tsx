@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
@@ -22,7 +23,7 @@ class GoogleKeywordsModal extends React.Component {
     if (this.state.query.filters.goal) {
       api
         .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers/Google`,
+          `/api/stats/${ANALYTICS_DOMAIN}/goal/referrers/Google`,
           this.props.site,
           this.state.query,
           { limit: 100 },
@@ -39,7 +40,7 @@ class GoogleKeywordsModal extends React.Component {
     } else {
       api
         .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/Google`,
+          `/api/stats/${ANALYTICS_DOMAIN}/referrers/Google`,
           this.props.site,
           this.state.query,
           { limit: 100 },

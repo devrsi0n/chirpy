@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
@@ -91,9 +92,7 @@ export default class PropertyBreakdown extends React.Component<
     if (this.props.query.filters['goal']) {
       api
         .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/property/${encodeURIComponent(
-            this.state.propKey,
-          )}`,
+          `/api/stats/${ANALYTICS_DOMAIN}/property/${encodeURIComponent(this.state.propKey)}`,
           this.props.site,
           this.props.query,
           { limit: 100, page: this.state.page },

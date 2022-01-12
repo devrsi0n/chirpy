@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
@@ -29,16 +30,11 @@ class PagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/pages`,
-        this.props.site,
-        query,
-        {
-          limit: 100,
-          page,
-          detailed,
-        },
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/pages`, this.props.site, query, {
+        limit: 100,
+        page,
+        detailed,
+      })
       .then((res) =>
         this.setState((state) => ({
           loading: false,

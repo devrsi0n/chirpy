@@ -34,7 +34,7 @@
 
 You're welcome to contribute to this project. Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-## [Self-hosted](https://chirpy.dev/docs//self-hosted)
+## [Self-hosted](https://chirpy.dev/docs/self-hosted)
 
 ## Roadmap
 

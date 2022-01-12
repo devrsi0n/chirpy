@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
@@ -40,7 +41,7 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
 
     api
       .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/entry-pages`,
+        `/api/stats/${ANALYTICS_DOMAIN}/entry-pages`,
         this.props.site,
         query,
         {

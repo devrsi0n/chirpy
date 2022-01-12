@@ -4,6 +4,7 @@ import 'twin.macro';
 
 import { Link } from '$/components/Link';
 import { Tabs } from '$/components/Tabs';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
@@ -80,14 +81,9 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   fetchReferrers = () => {
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/sources`,
-        this.props.site,
-        this.props.query,
-        {
-          show_noref: this.showNoRef(),
-        },
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/sources`, this.props.site, this.props.query, {
+        show_noref: this.showNoRef(),
+      })
       .then((res) => this.setState({ loading: false, referrers: res }));
   };
 
@@ -217,12 +213,9 @@ class UTMSources extends React.Component<UTMSourcesProps> {
   fetchReferrers = () => {
     const endpoint = UTM_TAGS[this.props.tab].endpoint;
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/${endpoint}`,
-        this.props.site,
-        this.props.query,
-        { show_noref: this.showNoRef() },
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${endpoint}`, this.props.site, this.props.query, {
+        show_noref: this.showNoRef(),
+      })
       .then((res) => this.setState({ loading: false, referrers: res }));
   };
 

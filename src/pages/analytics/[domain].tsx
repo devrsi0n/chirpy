@@ -18,7 +18,7 @@ export type AnalyticsProps = {
 
 export default function Analytics(props: AnalyticsProps): JSX.Element {
   return (
-    <SiteLayout>
+    <SiteLayout hideFullBleed>
       <Head>
         <title>Analytics</title>
       </Head>
@@ -77,9 +77,6 @@ export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, Pa
     props: {
       project: data.projects[0],
       session: session!,
-      layoutProps: {
-        hideFullBleed: true,
-      },
     },
     revalidate: 1,
   };

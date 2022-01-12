@@ -1,6 +1,8 @@
 import React from 'react';
 import 'twin.macro';
 
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
+
 import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
 import numberFormatter from '../../number-formatter';
@@ -46,7 +48,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
   fetchSearchTerms() {
     api
       .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/Google`,
+        `/api/stats/${ANALYTICS_DOMAIN}/referrers/Google`,
         this.props.site,
         this.props.query,
       )

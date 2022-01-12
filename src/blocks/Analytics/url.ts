@@ -1,12 +1,12 @@
-import { WIDGET_COMMENT_PATH } from '$/lib/constants';
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
 import { Site } from './type';
 
 export function apiPath(site: Site, path = '') {
-  return `/api/stats/${encodeURIComponent(site.domain)}${path}`;
+  return `/api/stats/${ANALYTICS_DOMAIN}${path}`;
 }
 
 export function siteBasePath(site: Site, path = '') {
-  return `/${encodeURIComponent(site.domain)}${path}`;
+  return `/${ANALYTICS_DOMAIN}${path}`;
 }
 
 export function sitePath(site: Site, path = '') {
