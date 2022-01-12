@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
@@ -33,7 +34,7 @@ class SourcesModal extends React.Component {
 
     const detailed = this.showExtra();
     api
-      .getStats(`/api/stats/${encodeURIComponent(site.domain)}/${this.currentFilter()}`, this.props.site, query, {
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${this.currentFilter()}`, this.props.site, query, {
         limit: 100,
         page,
         detailed,

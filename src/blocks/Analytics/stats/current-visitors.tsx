@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../analytics-api';
 import { appliedFilters } from '../query';
@@ -25,10 +26,7 @@ export default class CurrentVisitors extends React.Component<CurrentVisitorsProp
 
   updateCount = () => {
     return api
-      .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/current-visitors`,
-        this.props.site,
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/current-visitors`, this.props.site)
       .then((res) => this.setState({ currentVisitors: res }));
   };
 

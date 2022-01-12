@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
@@ -33,9 +34,7 @@ class ReferrerDrilldownModal extends React.Component<
 
     api
       .getStats(
-        `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${
-          this.props.match.params.referrer
-        }`,
+        `/api/stats/${ANALYTICS_DOMAIN}/referrers/${this.props.match.params.referrer}`,
         this.props.site,
         this.state.query,
         { limit: 100, detailed },

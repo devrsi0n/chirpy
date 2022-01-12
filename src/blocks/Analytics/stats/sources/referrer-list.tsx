@@ -3,6 +3,7 @@ import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
@@ -76,7 +77,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     if (this.props.query.filters.source) {
       api
         .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers/${encodeURIComponent(
+          `/api/stats/${ANALYTICS_DOMAIN}/referrers/${encodeURIComponent(
             this.props.query.filters.source,
           )}`,
           this.props.site,
@@ -88,19 +89,16 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     } else if (this.props.query.filters.goal) {
       api
         .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/goal/referrers`,
+          `/api/stats/${ANALYTICS_DOMAIN}/goal/referrers`,
           this.props.site,
           this.props.query,
         )
         .then((res) => this.setState({ loading: false, referrers: res }));
     } else {
       api
-        .getStats(
-          `/api/stats/${encodeURIComponent(this.props.site.domain)}/referrers`,
-          this.props.site,
-          this.props.query,
-          { show_noref: this.showNoRef() },
-        )
+        .getStats(`/api/stats/${ANALYTICS_DOMAIN}/referrers`, this.props.site, this.props.query, {
+          show_noref: this.showNoRef(),
+        })
         .then((res) => this.setState({ loading: false, referrers: res }));
     }
   }

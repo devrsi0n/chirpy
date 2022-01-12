@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { Link } from '$/components/Link';
+import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';
@@ -28,7 +29,7 @@ class ExitPagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .getStats(`/api/stats/${encodeURIComponent(this.props.site.domain)}/exit-pages`, this.props.site, query, {
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/exit-pages`, this.props.site, query, {
         limit: 100,
         page,
       })

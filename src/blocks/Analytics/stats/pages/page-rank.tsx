@@ -7,7 +7,7 @@ import 'twin.macro';
 
 import { Link } from '$/components/Link';
 import { usePrevious } from '$/hooks/usePrevious';
-import { WIDGET_COMMENT_PATH } from '$/lib/constants';
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
 import FadeIn from '../../fade-in';
@@ -45,11 +45,7 @@ export function PageRank(props: PageRankProps) {
 
   const fetchPages = () => {
     api
-      .getStats(
-        `/api/stats/${encodeURIComponent(props.site.domain)}/${props.apiPath}`,
-        props.site,
-        props.query,
-      )
+      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${props.apiPath}`, props.site, props.query)
       .then((res) => {
         setPages(res);
         setLoading(false);
