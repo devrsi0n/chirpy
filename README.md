@@ -11,13 +11,13 @@
 
 <img src="public/images/marketing/preview.png" width="350"></img>
 
-👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
+👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
 
 ## Key features
 
 - 🔒 Privacy friendly
-- ⚡️ Reasonably fast
 - 🎨 Customizable widget
+- ⚡️ Reasonably fast
 - ✍️ Markdown shortcuts & Rich Text Formatting
 - 📈 Widget analytics
 
@@ -40,9 +40,10 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 
 We're working hard to make Chirpy General Available first. Here are the blocking features:
 
-- Email notification
-- Email login without password
+- Notifications
 - Account plan
+- Payment
+- Email login without password
 
 ## Hosting platforms
 
