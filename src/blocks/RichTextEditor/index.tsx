@@ -5,7 +5,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from '../ErrorFallback';
 import type { IRichTextEditorProps } from './RichTextEditor';
 
-const DynamicRichTextEditor = dynamic(
+const LazyRichTextEditor = dynamic(
   () => import(/* webpackChunkName: "rich-text-editor"*/ './RichTextEditor'),
   {
     ssr: false,
@@ -18,7 +18,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   }, []);
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
-      <DynamicRichTextEditor {...props} />
+      <LazyRichTextEditor {...props} />
     </ErrorBoundary>
   );
 }
