@@ -18,7 +18,7 @@ export type LayoutProps = React.PropsWithChildren<{
   };
 }>;
 
-export function SiteLayout({
+export default function SiteLayout({
   hideHeader,
   hideFooter,
   enableBgGradient,

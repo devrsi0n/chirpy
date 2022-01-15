@@ -1,2 +1,2 @@
-export * from './SiteLayout';
+export { default as SiteLayout } from './SiteLayout';
 export * from './WidgetLayout';
