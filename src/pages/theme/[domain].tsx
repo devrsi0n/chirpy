@@ -27,6 +27,8 @@ import { Theme as ThemeType } from '$/types/theme.type';
 
 export type ThemeProps = StaticProps;
 
+const THEME_WIDGET_CLS = 'theme-widget';
+
 export default function ThemePage(props: ThemeProps): JSX.Element {
   return (
     <SiteLayout>
@@ -35,8 +37,10 @@ export default function ThemePage(props: ThemeProps): JSX.Element {
           {props.project?.name} - {APP_NAME} theme editor
         </title>
       </Head>
-      {/* TODO: Extract WidgetThemeProvider to CommentWidgetPreview since it's affect all styles inside ThemeEditor */}
-      <WidgetThemeProvider widgetTheme={props.project?.theme as ThemeType}>
+      <WidgetThemeProvider
+        widgetTheme={props.project?.theme as ThemeType}
+        selector={`.${THEME_WIDGET_CLS}`}
+      >
         <ThemeEditor {...props} />
       </WidgetThemeProvider>
     </SiteLayout>
@@ -164,12 +168,14 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             </Text>
           </div>
           <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
-          <CommentTrees
-            comments={comments as any}
-            onSubmitReply={() => Promise.resolve()}
-            onClickLikeAction={() => Promise.resolve()}
-            rtePlaceholder="Preview"
-          />
+          <div className={THEME_WIDGET_CLS}>
+            <CommentTrees
+              comments={comments as any}
+              onSubmitReply={() => Promise.resolve()}
+              onClickLikeAction={() => Promise.resolve()}
+              rtePlaceholder="Preview"
+            />
+          </div>
         </section>
       </div>
     </section>

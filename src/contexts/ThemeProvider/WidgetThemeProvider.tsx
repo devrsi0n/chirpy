@@ -9,6 +9,7 @@ import { useThemeVariables } from './useThemeVariables';
 export type WidgetThemeProviderProps = {
   children: React.ReactNode;
   widgetTheme?: Theme;
+  selector?: string;
 };
 
 export type WidgetThemeContextType = {
@@ -33,9 +34,10 @@ export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Elemen
     }),
     [widgetTheme],
   );
+  const selector = props.selector || 'body';
   const { styles } = useThemeVariables(widgetTheme, {
-    light: 'body',
-    dark: '.dark body',
+    light: `${selector}`,
+    dark: `.dark ${selector}`,
   });
 
   return (
