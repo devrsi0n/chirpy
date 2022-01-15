@@ -15,13 +15,13 @@ const contents: FeatureProps[] = [
   },
   {
     heading: 'Privacy friendly',
-    content: `Privacy at next level. We even built a custom telemetry system to avoid share your and your customer's data with third party companies.`,
+    content: `Privacy at next level. We even built a custom telemetry system to avoid sharing your and your customer's data with third party companies.`,
     icon: Lock,
   },
   {
     heading: 'Open source',
     content:
-      'Our source code is available and accessible on GitHub, you can read it, run it and inspect it to verify that our actions match with our promises.',
+      'Our source code is available and accessible on GitHub. You can read it, run it and inspect it to verify that our actions match with our promises.',
     icon: Code,
   },
 ];
