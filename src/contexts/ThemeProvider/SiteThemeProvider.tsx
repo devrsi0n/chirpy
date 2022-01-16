@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import * as React from 'react';
+import { theme } from 'twin.macro';
 
 import { useThemeVariables } from './useThemeVariables';
 
@@ -14,6 +15,12 @@ export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
     <>
       <Head>
         <style key="site-theme">{styles}</style>
+        <style key="site-background">{`
+          html,
+          body {
+            background: ${theme('colors.bg')};
+          }
+        `}</style>
       </Head>
       {props.children}
     </>
