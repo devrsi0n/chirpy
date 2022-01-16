@@ -36,11 +36,9 @@ Cypress.Commands.add('login', () => {
   cy.intercept(`/api/auth/session`, (req) => {
     // Just return the response from test, not need to reach the server
     req.reply({
-      body: {
-        ...jwtBody,
-        hasuraToken: Cypress.env('HASURA_TOKEN'),
-      } as Session,
-    });
+      ...jwtBody,
+      hasuraToken: Cypress.env('HASURA_TOKEN'),
+    } as Session);
   }).as('session');
 
   cy.intercept('/v1/graphql').as('graphql');
