@@ -31,7 +31,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions): SubmitH
     if (!data?.insertOneComment?.id) {
       showToast({
         type: 'error',
-        title: `Sever didn't respond, please try again later.`,
+        title: `Server didn't respond, please try again later.`,
       });
       console.error(`Can't insert a comment, parentId ${commentId}`);
     }
