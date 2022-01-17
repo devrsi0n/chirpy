@@ -40,14 +40,14 @@ export function useToggleALikeAction(): ToggleLieAction {
         if (!data?.insertOneLike?.id) {
           showToast({
             type: 'error',
-            title: `Sever didn't respond, please try again later.`,
+            title: `Server didn't respond, please try again later.`,
           });
           console.error(`Can't create a like action`);
         }
       } catch (error) {
         showToast({
           type: 'error',
-          title: `Sever didn't respond, please try again later.`,
+          title: `Server didn't respond, please try again later.`,
         });
         // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
         // when a user click the like button again during this API processing
