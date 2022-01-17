@@ -16,6 +16,11 @@ module.exports = {
         configFile: path.resolve(__dirname, '../tsconfig.json'),
       }),
     );
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    });
     return config;
   },
   babel: (options) => ({
