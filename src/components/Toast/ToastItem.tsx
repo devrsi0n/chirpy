@@ -20,9 +20,9 @@ export type ToastProps = React.PropsWithChildren<Toast> & {
 export const TOAST_DURATION = 10_000;
 
 export function ToastItem({ id, title, description, type, onDismiss }: ToastProps): JSX.Element {
-  // useTimeout(() => {
-  //   onDismiss(id);
-  // }, TOAST_DURATION);
+  useTimeout(() => {
+    onDismiss(id);
+  }, TOAST_DURATION);
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
