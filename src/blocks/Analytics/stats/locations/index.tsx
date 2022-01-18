@@ -1,4 +1,3 @@
-import { useTheme } from 'next-themes';
 import { NextRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
@@ -57,9 +56,7 @@ export default function Locations(props: LocationsProps): JSX.Element {
 
 function Countries({ query, site }: Props) {
   function fetchData() {
-    return api.getStats(apiPath(site, '/countries'), site, query, { limit: 9 }).then((res) => {
-      return res.map((row: any) => Object.assign({}, row, { percentage: undefined }));
-    });
+    return api.getStats(apiPath(site, '/countries'), site, query, { limit: 9 });
   }
 
   function renderIcon(country: any) {

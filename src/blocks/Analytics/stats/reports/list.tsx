@@ -25,9 +25,11 @@ export interface ListReportProps extends Partial<Pick<BarProps, 'color'>> {
   filter: { [key: string]: string };
 }
 
+type ListReportItem = { count: number; name: string; percentage: number | undefined };
+
 interface ListReportState {
   loading: boolean;
-  list: any;
+  list: ListReportItem[] | null;
 }
 
 export default class ListReport extends React.Component<ListReportProps, ListReportState> {
@@ -65,10 +67,11 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     return !!this.props.query.filters.goal;
   }
 
-  renderListItem(listItem: any) {
+  renderListItem(listItem: ListReportItem) {
     const query = new URLSearchParams(window.location.search);
 
     Object.entries(this.props.filter).forEach(([key, valueKey]) => {
+      // @ts-ignore
       query.set(key, listItem[valueKey]);
     });
 
@@ -77,8 +80,8 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={listItem.name}>
         <Bar
-          count={listItem.visitors}
-          all={this.state.list}
+          count={listItem.count}
+          all={this.state.list!}
           color={this.props.color || 'green'}
           maxWidthDeduction={maxWidthDeduction}
         >
@@ -98,11 +101,12 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
           </span>
         </Bar>
         <ViewNumber>
-          {numberFormatter(listItem.visitors)}
-          {listItem.percentage >= 0 ? (
+          {numberFormatter(listItem.count)}
+          {(listItem.percentage || 0) >= 0 && (
             <span className="inline-block w-8 text-xs text-right">({listItem.percentage}%)</span>
-          ) : null}
+          )}
         </ViewNumber>
+        {/* @ts-ignore */}
         {this.showConversionRate() && <ViewNumber>{listItem.conversion_rate}%</ViewNumber>}
       </div>
     );
@@ -119,7 +123,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
               {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
             </span>
           </div>
-          {this.state.list.map((element: any) => this.renderListItem(element))}
+          {this.state.list.map((item: any) => this.renderListItem(item))}
         </>
       );
     }
@@ -139,7 +143,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
           {this.renderList()}
         </FadeIn>
         {this.props.detailsLink && !this.state.loading && (
-          <MoreLink url={this.props.detailsLink} list={this.state.list} />
+          <MoreLink url={this.props.detailsLink} list={this.state.list!} />
         )}
       </LazyLoader>
     );
