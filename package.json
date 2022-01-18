@@ -28,6 +28,9 @@
   },
   "lint-staged": {
     "*.{json,md,scss,css}": [
+      "prettier --write"
+    ],
+    "*.graphql": [
       "prettier --write",
       "npm run g:gql"
     ],
