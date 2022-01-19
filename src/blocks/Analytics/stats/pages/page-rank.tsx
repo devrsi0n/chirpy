@@ -117,16 +117,18 @@ function List(props: ListProps) {
         </div>
 
         <FlipMove>
-          {props.pages?.map((page) => (
-            <Page
-              key={page.name}
-              page={page}
-              showConversionRate={showConversionRate()}
-              pages={props.pages}
-              site={props.site}
-              query={props.query}
-            />
-          ))}
+          <div>
+            {props.pages?.map((page) => (
+              <Page
+                key={page.name}
+                page={page}
+                showConversionRate={showConversionRate()}
+                pages={props.pages}
+                site={props.site}
+                query={props.query}
+              />
+            ))}
+          </div>
         </FlipMove>
       </>
     );

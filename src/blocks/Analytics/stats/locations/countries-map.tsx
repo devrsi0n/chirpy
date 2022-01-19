@@ -22,15 +22,21 @@ interface CountriesProps extends Props {
   isDarkMode: boolean;
 }
 
+interface CountryItem {
+  count: number;
+  name: string;
+  percentage: number;
+}
+
 interface CountriesState {
-  countries: any[] | null;
+  countries: CountryItem[] | null;
   loading: boolean;
 }
 
 export class CountriesMap extends React.Component<CountriesProps, CountriesState> {
   private map: Datamap;
 
-  state = {
+  state: CountriesState = {
     loading: true,
     countries: null,
   };
@@ -49,16 +55,16 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
   onVisible = () => {
     this.fetchCountries().then(this.drawMap);
     window.addEventListener('resize', this.resizeMap);
-    if (this.props.timer) this.props.timer.onTick(this.updateCountries.bind(this));
+    this.props.timer.onTick(this.updateCountries.bind(this));
   };
 
   getDataset = () => {
-    const dataset = {};
+    const dataset: Record<string, any> = {};
 
-    // @ts-ignore
-    const onlyValues = this.state.countries?.map(function (obj: any) {
-      return obj.visitors;
-    });
+    const onlyValues =
+      this.state.countries?.map(function (obj: CountryItem) {
+        return obj.count;
+      }) || [];
     const maxValue = Math.max.apply(null, onlyValues);
 
     const paletteScale = d3.scale
@@ -71,12 +77,10 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
         this.props.isDarkMode ? '#6366f1' : '#a779e9',
       ]);
 
-    // @ts-ignore
-    this.state.countries?.forEach(function (item) {
-      // @ts-ignore
-      dataset[item.code] = {
-        numberOfThings: item.visitors,
-        fillColor: paletteScale(item.visitors),
+    this.state.countries?.forEach((item) => {
+      dataset[item.name] = {
+        numberOfThings: item.count,
+        fillColor: paletteScale(item.count),
       };
     });
 
