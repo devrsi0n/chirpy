@@ -40,6 +40,10 @@ Cypress.Commands.add('login', () => {
       hasuraToken: Cypress.env('HASURA_TOKEN'),
     } as Session);
   }).as('session');
+  cy.intercept(`/api/auth/signout`, (req) => {
+    Cypress.automation('clear:cookie', { name: cookieName });
+    req.reply({});
+  });
 
   cy.intercept('/v1/graphql').as('graphql');
 

@@ -160,7 +160,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
   const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
   return (
-    <span className="group" tw="flex items-center px-2 py-1.5 relative break-all z-10 space-x-1">
+    <span className="group" tw="flex items-center px-2 py-1.5 relative break-all space-x-1">
       <span
         {...(isCommentWidget && {
           tooltip: 'This page contains a comment widget',
@@ -168,17 +168,18 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
       >
         <Link
           href={url.setQuery('entry_page', name)}
-          tw="md:truncate hover:underline inline-flex items-center space-x-1 text-gray-1200"
+          tw=" hover:underline inline-flex items-center space-x-1 text-gray-1200"
           variant="plain"
         >
           {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
-          <span>{isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}</span>
+          <span tw="max-w-sm md:truncate">
+            {isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}
+          </span>
         </Link>
       </span>
       <Link
-        rel="noreferrer"
         href={externalLink}
-        tw="hidden group-hover:block text-gray-1200"
+        tw="invisible group-hover:visible text-gray-1200"
         variant="plain"
         tooltip="Click to open in a new tab"
       >
