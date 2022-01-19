@@ -41,7 +41,7 @@ export interface ReferrersProps extends Props {
 
 export interface Referrer {
   name: string;
-  visitors: number;
+  count: number;
   conversion_rate: number;
 }
 
@@ -138,7 +138,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
-          count={referrer.visitors}
+          count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
@@ -162,7 +162,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
             {this.renderExternalLink(referrer)}
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200">{numberFormatter(referrer.visitors)}</span>
+        <span className="font-medium dark:text-gray-200">{numberFormatter(referrer.count)}</span>
         {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );

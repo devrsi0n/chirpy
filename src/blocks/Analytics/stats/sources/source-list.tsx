@@ -93,7 +93,7 @@ class AllSources extends React.Component<AllSourcesProps> {
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
-          count={referrer.visitors}
+          count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
@@ -115,7 +115,7 @@ class AllSources extends React.Component<AllSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        <ViewNumber>{numberFormatter(referrer.count)}</ViewNumber>
         {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
@@ -225,7 +225,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     return (
       <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
         <Bar
-          count={referrer.visitors}
+          count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
@@ -240,7 +240,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
             </Link>
           </span>
         </Bar>
-        <ViewNumber>{numberFormatter(referrer.visitors)}</ViewNumber>
+        <ViewNumber>{numberFormatter(referrer.count)}</ViewNumber>
         {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
       </div>
     );
