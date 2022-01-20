@@ -10,7 +10,7 @@ const colors = {
   indigo: getColorCSSVariables('indigo'),
   green: getColorCSSVariables('green'),
   gray: getColorCSSVariables('gray'),
-  // violet: getColorCSSVariables('violet'),
+  violet: getColorCSSVariables('violet'),
   plum: getColorCSSVariables('plum'),
   primary: getColorCSSVariables('primary'),
   yellow: getColorCSSVariables('yellow'),

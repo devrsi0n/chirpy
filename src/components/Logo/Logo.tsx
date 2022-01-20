@@ -40,7 +40,7 @@ export function Logo({
       href="/"
       aria-label={`Logo of ${APP_NAME}`}
       variant="plain"
-      tw="text-primary-900 relative"
+      tw="text-violet-900 relative"
       {...linkProps}
     >
       {showBadge && <Badge tw="absolute -right-2 -top-3 leading-none">Beta</Badge>}
