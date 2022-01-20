@@ -8,7 +8,7 @@ export type LayoutWrapperProps = {
 
 export function LayoutWrapper({ children, className }: LayoutWrapperProps): JSX.Element {
   return (
-    <div css={[tw`min-h-full font-sans text-gray-1000`]} className={className}>
+    <div css={[tw`min-h-full font-sans text-gray-1000 flex flex-col`]} className={className}>
       {children}
     </div>
   );
