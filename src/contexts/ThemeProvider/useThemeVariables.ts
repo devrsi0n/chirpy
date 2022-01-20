@@ -37,11 +37,11 @@ export function useThemeVariables(theme?: Theme, selectors?: Selectors) {
         ...theme?.colors.dark,
       },
     };
-    return `${light} {
+    return `${light}, ::before, ::after {
         ${getThemeCSSVariablesString(lightTheme)}
       }
     
-       ${dark} {
+       ${dark}, .dark ::before, .dark ::after {
         ${getThemeCSSVariablesString(darkTheme)}
       }
     `;

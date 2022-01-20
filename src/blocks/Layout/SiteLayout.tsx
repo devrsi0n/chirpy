@@ -32,7 +32,7 @@ export default function SiteLayout({
     <SiteThemeProvider>
       <LayoutWrapper
         css={[
-          enableBgGradient && tw`before:(absolute inset-0 z-[-1] content-[''])`,
+          enableBgGradient && tw`before:(absolute inset-0 content-[''])`,
           {
             ...(enableBgGradient && {
               '::before': {

@@ -18,7 +18,7 @@ const commonBenefits = [
   'Rich text formatting',
   'Markdown shortcuts',
   'Third party sign in',
-  'Basic analytics',
+  'Advanced analytics',
   'Widget customization',
 ];
 
@@ -49,7 +49,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
               <span tw="font-bold text-gray-1200">10</span> Websites
             </span>,
             ...commonBenefits,
-            'Comment with image & video',
+            'Comment with image',
             'No branding',
           ]}
           callToAction={{
