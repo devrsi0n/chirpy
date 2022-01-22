@@ -56,7 +56,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
               Then, add the data-chirpy-comment attribute to any HTML element that should render the
               widget:
             </Text>
-            <Code>{`<div data-chirpy-comment="true">...</div>`}</Code>
+            <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
           </div>
         </div>
       </Dialog>
