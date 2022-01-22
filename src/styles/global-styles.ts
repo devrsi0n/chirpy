@@ -18,6 +18,7 @@ export const appGlobalStyles = css`
     text-rendering: optimizeLegibility;
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: none;
+    outline: none;
   }
 
   ::selection {

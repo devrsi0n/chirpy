@@ -23,7 +23,7 @@
 - [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 - [![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)](https://www.cypress.io/)
 - [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
-- [Hasura](https://github.com/hasura/graphql-engine)
+- <a href="https://github.com/hasura/graphql-engine"><img width="70px" src="https://graphql-engine-cdn.hasura.io/img/powered_by_hasura_primary_lightbg.svg" /></a>
 - [twin.macro](https://github.com/ben-rogerson/twin.macro)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [Plausible](https://github.com/plausible/analytics)
@@ -48,6 +48,11 @@ We're working hard to make Chirpy General Available first. Here are the blocking
 [![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=chirpy.dev)
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=92c5af253f6a&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+
+## Design system
+
+- Colors comes from [radix color](https://www.radix-ui.com/colors)
+- Home hero section inspired by [stitches](https://stitches.dev/)
 
 ## License
 

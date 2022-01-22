@@ -9,13 +9,13 @@ import { Text } from '$/components/Text';
 
 const contents: FeatureProps[] = [
   {
-    heading: 'Theme',
-    content: 'You can customize widgets styles to match your design system easily. ✨',
+    heading: 'Easy customization',
+    content: 'You can customize widget styles to match your design system easily. ✨',
     icon: Figma,
   },
   {
-    heading: 'Privacy friendly',
-    content: `Privacy at next level. We even built a custom telemetry system to avoid sharing your and your customer's data with third party companies.`,
+    heading: 'Privacy at next level',
+    content: `We'll never track you, sell your data or show Ads. We even built a custom telemetry system to avoid sharing your and your customer's data with third party companies.`,
     icon: Lock,
   },
   {
