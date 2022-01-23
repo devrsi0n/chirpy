@@ -15,6 +15,19 @@
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 
+## Roadmap
+
+We're working hard to make Chirpy General Available first. Here are the blocking features:
+
+- Notifications
+- Account plan
+- Payment
+- Email login without password
+
+## Self-hosted
+
+You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need a server to install, run and maintain a Chirpy instance.
+
 ## Tech stacks
 
 - [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -32,19 +45,6 @@
 ## Contribution
 
 You're welcome to contribute to this project. Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
-
-## Self-hosted
-
-You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need a server to install, run and maintain a Chirpy instance.
-
-## Roadmap
-
-We're working hard to make Chirpy General Available first. Here are the blocking features:
-
-- Notifications
-- Account plan
-- Payment
-- Email login without password
 
 ## Hosting platforms
 
