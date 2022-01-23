@@ -7,7 +7,7 @@
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
 
-## Key features
+## ✨ Key features
 
 - 🔒 Privacy friendly
 - 🎨 [Customizable widget](https://chirpy.dev/docs/features/theme)
@@ -15,7 +15,7 @@
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 
-## Roadmap
+## 🧭 Roadmap
 
 We're working hard to make Chirpy General Available first. Here are the blocking features:
 
@@ -24,11 +24,11 @@ We're working hard to make Chirpy General Available first. Here are the blocking
 - Payment
 - Email login without password
 
-## Self-hosted
+## 📀 Self-hosted
 
 You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need a server to install, run and maintain a Chirpy instance.
 
-## Tech stacks
+## 🍡 Tech stacks
 
 - [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 - [![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -42,21 +42,21 @@ You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chi
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [Plausible](https://github.com/plausible/analytics)
 
-## Contribution
+## 🥇 Contribution
 
 You're welcome to contribute to this project. Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-## Hosting platforms
+## 🚀 Hosting platforms
 
 [![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=chirpy.dev)
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=92c5af253f6a&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
-## Design system
+## 💅 Design system
 
 - Colors comes from [radix color](https://www.radix-ui.com/colors)
 - Home hero section inspired by [stitches](https://stitches.dev/)
 
-## License
+## ⚖️ License
 
 The Apache License.
