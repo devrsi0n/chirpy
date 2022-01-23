@@ -15,7 +15,7 @@ const contents: FeatureProps[] = [
   },
   {
     heading: 'Privacy at next level',
-    content: `We never track you, sell your data or show Ads. We even built a custom telemetry system to avoid sharing your and your customer's data with a third-party.`,
+    content: `We never track you, sell your data or show Ads. We even built a custom telemetry system to avoid sharing your data with a third-party.`,
     icon: Lock,
   },
   {
