@@ -5,9 +5,9 @@ import Script from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { MDXComponents } from '$/blocks/MDXComponents';
-import { Image } from '$/components/Image';
+import { SiteLayout } from '$/blocks/layout';
+import { MDXComponents } from '$/blocks/mdx-components';
+import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/useHasMounted';
 import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';

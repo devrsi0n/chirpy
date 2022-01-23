@@ -5,8 +5,8 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { AnalyticsBlock } from '$/blocks/analytics';
-import { SiteLayout } from '$/blocks/Layout';
-import { PageTitle } from '$/blocks/PageTitle';
+import { SiteLayout } from '$/blocks/layout';
+import { PageTitle } from '$/blocks/page-title';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';

@@ -1,7 +1,7 @@
-import { useToast } from '$/components/Toast';
+import { useToast } from '$/components/toast';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
 
-import { useCurrentUser } from '../contexts/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '../contexts/current-user-provider/useCurrentUser';
 import { useSignInWindow } from './useSignInWindow';
 
 export type ToggleLieAction = (

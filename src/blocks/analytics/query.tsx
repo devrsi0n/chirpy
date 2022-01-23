@@ -2,7 +2,7 @@ import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
 import { Primitive, ValueOf } from 'type-fest';
 
-import { Link } from '$/components/Link';
+import { Link } from '$/components/link';
 
 import { formatDay, formatMonthYYYY, nowForSite, parseUTCDate } from './date';
 import * as storage from './storage';

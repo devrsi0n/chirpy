@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
 
-import { Heading } from '$/components/Heading';
+import { Heading } from '$/components/heading';
 
 import Datepicker from './datepicker';
 import Filters from './filters';

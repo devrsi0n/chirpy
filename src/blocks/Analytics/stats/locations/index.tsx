@@ -2,7 +2,7 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 import 'twin.macro';
 
-import { Tabs } from '$/components/Tabs';
+import { Tabs } from '$/components/tabs';
 import { useIsDarkMode } from '$/hooks/useIsDarkMode';
 
 import * as api from '../../analytics-api';

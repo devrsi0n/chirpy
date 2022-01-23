@@ -4,8 +4,8 @@ import 'intersection-observer';
 import 'whatwg-fetch';
 
 import { server } from './fixtures/server';
-import './mocks/mockUseCurrentUser';
-import { cleanEvents } from './mocks/nextRouter';
+import './mocks/mock-use-current-user';
+import { cleanEvents } from './mocks/next-router';
 
 DotEnv.config({
   path: '.env.local',

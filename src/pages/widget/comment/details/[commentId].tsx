@@ -13,14 +13,14 @@ import tw from 'twin.macro';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentLinkedList } from '$/blocks/CommentLinkedList';
-import { WidgetLayout } from '$/blocks/Layout';
-import { PoweredBy } from '$/blocks/PoweredBy';
-import { UserMenu } from '$/blocks/UserMenu';
-import { IconButton } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { CommentContextProvider } from '$/contexts/CommentContext';
+import { CommentLinkedList } from '$/blocks/comment-linked-list';
+import { WidgetLayout } from '$/blocks/layout';
+import { PoweredBy } from '$/blocks/powered-by';
+import { UserMenu } from '$/blocks/user-menu';
+import { IconButton } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
+import { CommentContextProvider } from '$/contexts/momment-context';
 import {
   CommentDetailsDocument,
   CommentDetailsSubscription,

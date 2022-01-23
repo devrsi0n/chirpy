@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from 'react';
 
-import { Link } from '$/components/Link';
+import { Link } from '$/components/link';
 
 import * as api from '../../analytics-api';
 import numberFormatter from '../../number-formatter';

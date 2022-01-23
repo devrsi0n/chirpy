@@ -5,7 +5,7 @@ import * as React from 'react';
 import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
-import { Link } from '$/components/Link';
+import { Link } from '$/components/link';
 import { usePrevious } from '$/hooks/usePrevious';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
 

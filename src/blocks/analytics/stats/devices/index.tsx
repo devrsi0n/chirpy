@@ -1,7 +1,7 @@
 import React from 'react';
 import 'twin.macro';
 
-import { Tabs } from '$/components/Tabs';
+import { Tabs } from '$/components/tabs';
 
 import * as api from '../../analytics-api';
 import { Props } from '../../type';

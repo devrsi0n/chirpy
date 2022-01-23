@@ -1,7 +1,7 @@
 import React from 'react';
 import 'twin.macro';
 
-import { Link } from '$/components/Link';
+import { Link } from '$/components/link';
 
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';

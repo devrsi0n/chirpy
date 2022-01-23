@@ -5,8 +5,8 @@ import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 import tw from 'twin.macro';
 
-import { Button } from '$/components/Button';
-import { Link } from '$/components/Link';
+import { Button } from '$/components/button';
+import { Link } from '$/components/link';
 
 import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
 import {

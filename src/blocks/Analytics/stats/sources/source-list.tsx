@@ -2,8 +2,8 @@ import React from 'react';
 import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
-import { Link } from '$/components/Link';
-import { Tabs } from '$/components/Tabs';
+import { Link } from '$/components/link';
+import { Tabs } from '$/components/tabs';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';

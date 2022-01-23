@@ -2,8 +2,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { Heading } from '$/components/Heading';
+import { SiteLayout } from '$/blocks/layout';
+import { Heading } from '$/components/heading';
 import { APP_NAME } from '$/lib/constants';
 import { ssrMode } from '$/utilities/env';
 
