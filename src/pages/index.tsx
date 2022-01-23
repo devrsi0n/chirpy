@@ -3,12 +3,12 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { Features } from '$/blocks/Features';
-import { SiteLayout } from '$/blocks/Layout';
-import { Pricing } from '$/blocks/Pricing';
-import { Button } from '$/components/Button';
-import { Link } from '$/components/Link';
-import { Text } from '$/components/Text';
+import { Features } from '$/blocks/features';
+import { SiteLayout } from '$/blocks/layout';
+import { Pricing } from '$/blocks/pricing';
+import { Button } from '$/components/button';
+import { Link } from '$/components/link';
+import { Text } from '$/components/text';
 import { APP_NAME } from '$/lib/constants';
 
 function Home(): JSX.Element {

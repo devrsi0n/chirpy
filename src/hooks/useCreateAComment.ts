@@ -1,10 +1,10 @@
 import { JsonArray } from 'type-fest';
 
-import { RTEValue } from '$/blocks/RichTextEditor';
-import { useToast } from '$/components/Toast';
+import { RTEValue } from '$/blocks/rich-text-editor';
+import { useToast } from '$/components/toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
 
-import { useCurrentUser } from '../contexts/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '../contexts/current-user-provider/useCurrentUser';
 
 export type useCreateACommentOptions = {
   pageId: string;

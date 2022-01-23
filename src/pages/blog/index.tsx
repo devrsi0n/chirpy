@@ -3,10 +3,10 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { Heading } from '$/components/Heading';
-import { Image } from '$/components/Image';
-import { Link } from '$/components/Link';
+import { SiteLayout } from '$/blocks/layout';
+import { Heading } from '$/components/heading';
+import { Image } from '$/components/image';
+import { Link } from '$/components/link';
 import { APP_NAME } from '$/lib/constants';
 import { getDirectories } from '$/server/mdx/files';
 import { Directory } from '$/server/types/file';

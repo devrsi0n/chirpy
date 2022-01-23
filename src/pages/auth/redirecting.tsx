@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { Spinner } from '$/components/Spinner';
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
+import { SiteLayout } from '$/blocks/layout';
+import { Spinner } from '$/components/spinner';
+import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
 import { useTimeout } from '$/hooks/useTimeout';
 import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';

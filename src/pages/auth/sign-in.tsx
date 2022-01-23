@@ -2,8 +2,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { SignIn } from '$/blocks/SignIn';
+import { SiteLayout } from '$/blocks/layout';
+import { SignIn } from '$/blocks/sign-in';
 import { APP_NAME } from '$/lib/constants';
 
 export default function SignInPage(): JSX.Element {

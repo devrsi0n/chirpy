@@ -12,10 +12,10 @@ import 'twin.macro';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentTrees } from '$/blocks/CommentTrees';
-import { WidgetLayout } from '$/blocks/Layout';
-import { PoweredBy } from '$/blocks/PoweredBy';
-import { CommentContextProvider } from '$/contexts/CommentContext';
+import { CommentTrees } from '$/blocks/comment-trees';
+import { WidgetLayout } from '$/blocks/layout';
+import { PoweredBy } from '$/blocks/powered-by';
+import { CommentContextProvider } from '$/contexts/momment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,

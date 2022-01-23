@@ -2,10 +2,10 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import { render as reactRender } from '@testing-library/react';
 
-import { ToastProvider } from '$/components/Toast';
+import { ToastProvider } from '$/components/toast';
 
-import '../mocks/mockUseSession';
-import '../mocks/nextRouter';
+import '../mocks/mock-use-session';
+import '../mocks/next-router';
 
 // Disable emotion warning
 const emotionCache = createCache({ key: 'emotion-key' });

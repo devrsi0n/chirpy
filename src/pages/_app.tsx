@@ -9,12 +9,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
-import { ErrorFallback } from '$/blocks/ErrorFallback';
-import { LazySiteLayout } from '$/blocks/Layout/LazySiteLayout';
-import { Spinner } from '$/components/Spinner';
-import { ToastProvider } from '$/components/Toast';
-import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
-import { GQLClientProvider } from '$/contexts/GQLClientProvider';
+import { ErrorFallback } from '$/blocks/error-fallback';
+import { LazySiteLayout } from '$/blocks/layout/lazy-site-layout';
+import { Spinner } from '$/components/spinner';
+import { ToastProvider } from '$/components/toast';
+import { CurrentUserProvider } from '$/contexts/current-user-provider';
+import { GQLClientProvider } from '$/contexts/gql-client-provider';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
