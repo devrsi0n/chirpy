@@ -177,7 +177,7 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
-      revalidate: 1,
+      revalidate: 60,
     };
   } catch (error) {
     console.error(superjson.stringify(error));
