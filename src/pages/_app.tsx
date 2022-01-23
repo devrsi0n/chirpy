@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 import { LazyMotion } from 'framer-motion';
-import { SessionProvider, signIn, useSession } from 'next-auth/react';
+import { SessionProvider, useSession } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -9,26 +9,25 @@ import { ErrorBoundary } from 'react-error-boundary';
 import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
-import { ErrorFallback } from '$/blocks/ErrorFallback';
-import { Spinner } from '$/components/Spinner';
-import { ToastProvider } from '$/components/Toast';
-import { CurrentUserProvider } from '$/contexts/CurrentUserProvider';
-import { GQLClientProvider } from '$/contexts/GQLClientProvider';
-import { useIsUnmounting } from '$/hooks/useIsUnmounting';
+import { ErrorFallback } from '$/blocks/error-fallback';
+import { LazySiteLayout } from '$/blocks/layout/lazy-site-layout';
+import { Spinner } from '$/components/spinner';
+import { ToastProvider } from '$/components/toast';
+import { CurrentUserProvider } from '$/contexts/current-user-provider';
+import { GQLClientProvider } from '$/contexts/gql-client-provider';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
+function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
   }, []);
-  const AuthWrapper = (Component as any).auth ? AuthGuard : React.Fragment;
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback} onError={handleError}>
       <PlausibleProvider domain={ANALYTICS_DOMAIN}>
         <SessionProvider
-          session={session}
+          {...(session && { session })}
           // Refresh hasura token before it expires
           refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
         >
@@ -38,17 +37,19 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
 
           <NextThemesProvider attribute="class" storageKey={`${APP_NAME_LOWERCASE}.theme`}>
             <LazyMotion features={loadFeatures} strict>
-              <SessionGuard>
-                <GQLClientProvider>
-                  <CurrentUserProvider>
-                    <ToastProvider>
-                      <AuthWrapper>
+              <GQLClientProvider>
+                <CurrentUserProvider>
+                  <ToastProvider>
+                    {(Component as any).auth ? (
+                      <AuthGuard isWidget={isWidget}>
                         <Component {...pageProps} />
-                      </AuthWrapper>
-                    </ToastProvider>
-                  </CurrentUserProvider>
-                </GQLClientProvider>
-              </SessionGuard>
+                      </AuthGuard>
+                    ) : (
+                      <Component {...pageProps} />
+                    )}
+                  </ToastProvider>
+                </CurrentUserProvider>
+              </GQLClientProvider>
             </LazyMotion>
           </NextThemesProvider>
         </SessionProvider>
@@ -59,27 +60,26 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
 
 export default App;
 
-function SessionGuard({ children }: { children: React.ReactNode }): JSX.Element {
-  const { status } = useSession();
-  const loading = status === 'loading';
-  const isMounted = useIsUnmounting();
+type AuthGuardProps = {
+  isWidget: true | undefined;
+  children: React.ReactNode;
+};
 
-  if (loading && !isMounted) {
-    return <Spinner tw="mt-32 justify-center" />;
+function AuthGuard({ children, isWidget }: AuthGuardProps): JSX.Element {
+  // Redirect user to sign-in page if no session available
+  const { data: session } = useSession({ required: true });
+  const hasUser = !!session?.user;
+
+  if (hasUser) {
+    return <>{children}</>;
   }
-  return <>{children}</>;
-}
-
-function AuthGuard({ children }: { children: React.ReactNode }): JSX.Element {
-  const { status } = useSession();
-
-  React.useEffect(() => {
-    if (status === 'unauthenticated') {
-      signIn();
-    }
-  }, [status]);
-
-  return <>{children}</>;
+  // Only wrap spinner with Layout on non-widget scenarios
+  const Wrapper = isWidget ? React.Fragment : LazySiteLayout;
+  return (
+    <Wrapper>
+      <Spinner tw="mt-32 justify-center" />
+    </Wrapper>
+  );
 }
 
 const loadFeatures = () => import('../utilities/framer-motion-features').then((res) => res.default);

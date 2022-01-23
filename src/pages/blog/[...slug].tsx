@@ -5,9 +5,9 @@ import Script from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { MDXComponents } from '$/blocks/MDXComponents';
-import { Image } from '$/components/Image';
+import { SiteLayout } from '$/blocks/layout';
+import { MDXComponents } from '$/blocks/mdx-components';
+import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/useHasMounted';
 import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
@@ -47,7 +47,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       </section>
       <div data-chirpy-comment tw="my-16" />
       <Script
-        src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment${isENVDev ? '-dev' : ''}.js`}
+        src={`${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment.js`}
         strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />

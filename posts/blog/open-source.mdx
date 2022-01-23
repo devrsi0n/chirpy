@@ -3,17 +3,28 @@ title: 'Open source'
 banner: '/images/blog/open-source/banner.jpeg?width=640&height=427'
 ---
 
-# Open source
+# Open sourcing Chirpy
 
 We're so excited to announce that Chirpy has been open-sourced now. 🚀
 
-## TL;DR
+## TL;DR 🙈
 
-Chirpy is a **privacy-friendly** and **customizable** [Disqus](https://disqus.com/) alternate. With Chirpy, you can reach your audience quickly and build a better community. Check out [GitHub repo](https://github.com/devrsi0n/chirpy) to learn how it works.
+Chirpy is a **privacy-friendly** and **customizable** [Disqus](https://disqus.com/) alternate. With Chirpy, you can reach your audience quickly and build a better community. Check out our [GitHub repo](https://github.com/devrsi0n/chirpy) to learn how it works.
 
-## Motivation
+## Preview 👀
 
-You may wonder why building a Disqus alternate in 2022. Well, here are the answers:
+The comment widget supports Rich Text Editing and [Markdown Shortcuts](/docs/features/markdown) 📝:
+![Comment widget](/images/marketing/preview.png)
+
+Theme editor 🎨:
+![Theme editor page](/images/blog/open-source/theme.png)
+
+Widget analytics 📈:
+![Analytics page](/images/blog/open-source/analytics.png)
+
+## Motivation 🤔
+
+You may wonder why we build a Disqus alternate in 2022. Well, here are the answers:
 
 [Disqus shared the personal data of tens of millions of users without them or the websites knowing about it.](https://twitter.com/martingund/status/1207327648093003777) 😡
 
@@ -28,33 +39,58 @@ Disqus also encumbers your website's **performance**: [Disqus makes 76 HTTP Requ
 
 You can find a ton of [privacy](https://www.google.com.hk/search?q=disqus+privacy&oq=disqus+privacy) and [performance](https://www.google.com.hk/search?q=disqus+performance) related issues of Disqus if you google it.
 
-## Solution
+## Solution 💡
 
-### Privacy
+### Privacy 🔐
 
 To avoid such privacy issues, we chose our business model with privacy-friendly in mind. First, we'll be honest: money is necessary for keeping the project development going. A price is always exacted for what free services bestow. You see Ads or you lose privacy. We choose a transparent pricing model — You pay, and you get the service. Nothing more.
 
 We also chose our tech stacks carefully, and we prefer to use self-hosted versions of third-party services. For example, for analytics, we self-hosted a [plausible](https://plausible.io/) instance to avoid sharing your customer's data with third-party companies. Plausible is an [open-source](https://github.com/plausible/analytics/) and [privacy-friendly](https://plausible.io/privacy-focused-web-analytics) software as well, we have the same privacy goal.
 
-### Performance
+### Performance 🚀
 
-For performance issues, we built our services with modern frontend technologies, e.g. [Next.js](https://nextjs.org/). We generate comment pages during the build process, so your users will see the UI immediately instead of loading a bunch of JavaScript & CSS and API calls to render the UI. The performance boost is even more noticeable on slow mobile devices.
+For performance issues, we built our services with modern technologies, e.g. [Next.js](https://nextjs.org/). We generate comment pages during the building process, so user will see the UI immediately instead of waiting for a bunch of JavaScript & CSS and API calls to render the UI. The performance boost is even more noticeable on slow mobile devices.
 
-## Current state
+## Tech stacks 🛠
 
-Currently, we're in the public beta phase, so basic features should work:
+We choose modern tech stacks with privacy and performance in mind:
+
+Language: <a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" style={{ display: "inline-block", margin: 0 }} /></a>
+
+Full-stack framework: <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" style={{ display: "inline-block", margin: 0 }} /></a>
+
+Data server: <a href="https://graphql.org"><img src="https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white" alt="GraphQL" style={{ display: "inline-block", margin: 0 }} /></a> <a href="https://github.com/hasura/graphql-engine"><img width="70px" src="https://graphql-engine-cdn.hasura.io/img/powered_by_hasura_primary_lightbg.svg" style={{ display: "inline-block", margin: 0 }} /></a>
+
+API client: [urql](https://github.com/FormidableLabs/urql)
+
+Authentication: [next-auth](https://github.com/nextauthjs/next-auth)
+
+Style: <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="TailwindCSS" style={{ display: "inline-block", margin: 0 }} /></a> [twin.macro](https://github.com/ben-rogerson/twin.macro)
+
+Testing: <a href="https://www.cypress.io/"><img src="https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e" alt="Cypress" style={{ display: "inline-block", margin: 0 }} /></a> <a href="https://jestjs.io/"><img src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white" alt="Jest" style={{ display: "inline-block", margin: 0 }} /></a>
+
+Analytics: [Plausible](https://github.com/plausible/analytics)
+
+## Current state 🤟
+
+Currently, we're in the public beta phase, all basic features should work, e.g.
 
 - Social login
-- Create a new project
-- Integrate into your existing website
-- [Customize the widget styles](http://chirpy.dev/docs/features/theme)
+- Create a project and integrate a widget into your website
 - Comment with Rich Text Formatting and [markdown shortcuts](http://chirpy.dev/docs/features/markdown)
-- Like a comment
-- View widget [analytics](http://chirpy.dev/docs/features/analytics)
+- Comment moderation
+- [Widget customization](http://chirpy.dev/docs/features/theme)
+- [Widget analytics](http://chirpy.dev/docs/features/analytics)
 - More to come!
 
 Please note: you may lose your data if there're some hard conflicts during our database migration, but that should be rare.
 
-## End
+## Community 🏘
 
-Please feel free to try our services! We're working hard to add more features to make it easier to use, stay tuned! You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. Of course,contributions are welcome! 🙌
+The community is at the core of how we build chirpy. Community members are at best a channel for evangelism. We want to empower you to participate directly in the creation of Chirpy ecosystems. Chirpy only get more accomplished and pleasing as the communities around it grow, enabling a broader range of audiences and use cases.
+
+Chirpy is available on [GitHub](https://github.com/devrsi0n/chirpy), it has been released under the [Apache-2.0 License](https://github.com/devrsi0n/chirpy/blob/main/LICENSE) that lets you inspect, modify, and re-purpose it as you would like. You can also check our [GitHub repo](https://github.com/devrsi0n/chirpy) for roadmaps or discussions. Of course, contributions are welcome! 🙌
+
+## Conclusion 🥳
+
+Please feel free to try [our services](https://chirpy.dev/)! We're working hard to add more features to make it easier to use, stay tuned!

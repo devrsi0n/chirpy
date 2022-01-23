@@ -4,9 +4,9 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { MDXComponents } from '$/blocks/MDXComponents';
-import { SideBar, SideBarProps } from '$/blocks/SideBar';
+import { SiteLayout } from '$/blocks/layout';
+import { MDXComponents } from '$/blocks/mdx-components';
+import { SideBar, SideBarProps } from '$/blocks/side-bar';
 import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';

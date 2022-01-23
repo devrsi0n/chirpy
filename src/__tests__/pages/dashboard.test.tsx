@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { project } from '$/__tests__/mocks/mockProjectData';
+import { project } from '$/__tests__/mocks/mock-project-data';
 import * as projectModule from '$/graphql/generated/project';
 import * as userModule from '$/graphql/generated/user';
 import Dashboard from '$/pages/dashboard/index';

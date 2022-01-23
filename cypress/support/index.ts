@@ -29,3 +29,7 @@ declare global {
 before(() => {
   cy.login();
 });
+
+beforeEach(() => {
+  cy.login();
+});

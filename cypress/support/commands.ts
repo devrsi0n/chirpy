@@ -34,15 +34,16 @@ const cookieName = cookieOptions.name;
 
 Cypress.Commands.add('login', () => {
   cy.intercept(`/api/auth/session`, (req) => {
-    req.continue((res) => {
-      res.send({
-        body: {
-          ...jwtBody,
-          hasuraToken: Cypress.env('HASURA_TOKEN'),
-        } as Session,
-      });
-    });
+    // Just return the response from test, not need to reach the server
+    req.reply({
+      ...jwtBody,
+      hasuraToken: Cypress.env('HASURA_TOKEN'),
+    } as Session);
   }).as('session');
+  cy.intercept(`/api/auth/signout`, (req) => {
+    Cypress.automation('clear:cookie', { name: cookieName });
+    req.reply({});
+  });
 
   cy.intercept('/v1/graphql').as('graphql');
 

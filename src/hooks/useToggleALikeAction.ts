@@ -1,7 +1,8 @@
-import { useToast } from '$/components/Toast';
+import { useToast } from '$/components/toast';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
 
-import { useCurrentUser } from '../contexts/CurrentUserProvider/useCurrentUser';
+import { useCurrentUser } from '../contexts/current-user-provider/useCurrentUser';
+import { useSignInWindow } from './useSignInWindow';
 
 export type ToggleLieAction = (
   isLiked: boolean,
@@ -17,10 +18,12 @@ export function useToggleALikeAction(): ToggleLieAction {
   const [{}, deleteLikeByPk] = useDeleteLikeByPkMutation();
 
   const { showToast } = useToast();
+  const handleSignIn = useSignInWindow();
 
   const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
-      // throw new Error('Login first');
+      handleSignIn();
+      return;
     }
     if (isLiked) {
       const { data } = await deleteLikeByPk({
@@ -37,14 +40,14 @@ export function useToggleALikeAction(): ToggleLieAction {
         if (!data?.insertOneLike?.id) {
           showToast({
             type: 'error',
-            title: `Sever didn't respond, please try again later.`,
+            title: `Server didn't respond, please try again later.`,
           });
           console.error(`Can't create a like action`);
         }
       } catch (error) {
         showToast({
           type: 'error',
-          title: `Sever didn't respond, please try again later.`,
+          title: `Server didn't respond, please try again later.`,
         });
         // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
         // when a user click the like button again during this API processing

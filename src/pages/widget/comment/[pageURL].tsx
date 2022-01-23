@@ -12,10 +12,10 @@ import 'twin.macro';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentTrees } from '$/blocks/CommentTrees';
-import { WidgetLayout } from '$/blocks/Layout';
-import { PoweredBy } from '$/blocks/PoweredBy';
-import { CommentContextProvider } from '$/contexts/CommentContext';
+import { CommentTrees } from '$/blocks/comment-trees';
+import { WidgetLayout } from '$/blocks/layout';
+import { PoweredBy } from '$/blocks/powered-by';
+import { CommentContextProvider } from '$/contexts/momment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
@@ -175,8 +175,9 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         pageId,
         projectId: themeResult.data.pageByPk.project.id,
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
+        isWidget: true,
       },
-      revalidate: 1,
+      revalidate: 60,
     };
   } catch (error) {
     console.error(superjson.stringify(error));
