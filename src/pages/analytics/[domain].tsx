@@ -4,7 +4,7 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { AnalyticsBlock } from '$/blocks/Analytics';
+import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/Layout';
 import { PageTitle } from '$/blocks/PageTitle';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';

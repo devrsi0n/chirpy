@@ -6,7 +6,7 @@ import { Link } from '$/components/Link';
 import { Text } from '$/components/Text';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
-import { getStats } from '../Analytics/analytics-api';
+import { getStats } from '../analytics/analytics-api';
 
 export type PageViewStatsProps = {
   domain: string;

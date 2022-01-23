@@ -2,7 +2,7 @@ import { cleanup, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '$/__tests__/fixtures/page-render';
-import { EDITABLE_PROJECT_IDS } from '$/__tests__/mocks/editableProjectIds';
+import { EDITABLE_PROJECT_IDS } from '$/__tests__/mocks/editable-project-ids';
 import * as CommentContext from '$/contexts/CommentContext/CommentContextProvider';
 
 import { CommentCard } from '../';

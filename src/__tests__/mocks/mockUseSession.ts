@@ -1,6 +1,6 @@
 import * as AuthClient from 'next-auth/react';
 
-import { EDITABLE_PROJECT_IDS } from './editableProjectIds';
+import { EDITABLE_PROJECT_IDS } from './editable-project-ids';
 
 const mockUseSession = jest.spyOn(AuthClient, 'useSession');
 
