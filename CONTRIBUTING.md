@@ -19,7 +19,21 @@ Chirpy is built upon [Next.js](https://nextjs.org) and [Hasura](https://github.c
 [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your
 own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device.
 
-### Start the data server
+### Frontend
+
+If you only want to make UI changes, you can skip the back-end setup and do:
+
+```bash
+npm install
+# Copy .env-template to .env.local without any modification
+cp .env-template .env.local
+# See your changes in Storybook
+npm run sb
+```
+
+### Backend
+
+#### Start the data server
 
 Hasura is used as the data server.
 
@@ -32,7 +46,7 @@ cd <project-root>/services/hasura
 docker-compose -f docker-compose.local.yaml up -d
 ```
 
-### Set up the database and schema
+#### Set up the database and schema
 
 Make sure you're using a separate terminal (e.g. `iTerm2`) not a VSCode terminal, because there're some environment variable issues when using them together.
 
@@ -48,16 +62,7 @@ hasura seed apply
 hasura metadata apply
 ```
 
-### Set up the frontend
-
-Start a Next.js app with the following command:
-
-```bash
-npm install
-npm run dev
-```
-
-### Set up environment variables
+#### Set up environment variables
 
 Copy `.env-template` to `.env.local` and fill all blank variables with your own values.
 
