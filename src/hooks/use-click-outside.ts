@@ -6,6 +6,7 @@ export function useClickOutside(callback: () => void): React.RefObject<HTMLEleme
   callbackRef.current = callback;
 
   React.useEffect(() => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping
     const listener = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
         callbackRef.current();

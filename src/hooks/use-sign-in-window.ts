@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
-import { useEventListener } from './useEventListener';
+import { useEventListener } from './use-event-listener';
 
 export type useSignInWindowOptions = {
   width?: number;

@@ -2,7 +2,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import 'twin.macro';
 
-import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-provider';
+import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
 
 import { LayoutWrapper } from './layout-wrapper';
 

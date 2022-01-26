@@ -9,7 +9,7 @@ import tw from 'twin.macro';
 import { IconButton } from '$/components/button/icon-button';
 import { Link } from '$/components/link/link';
 import { Text } from '$/components/text';
-import { useHasMounted } from '$/hooks/useHasMounted';
+import { useHasMounted } from '$/hooks/use-has-mounted';
 import { APP_NAME } from '$/lib/constants';
 import { ColorMode } from '$/types/theme.type';
 

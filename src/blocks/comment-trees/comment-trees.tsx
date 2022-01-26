@@ -2,8 +2,8 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Heading } from '$/components/heading';
-import { SubmitHandler } from '$/hooks/useCreateAComment';
-import { ToggleLieAction } from '$/hooks/useToggleALikeAction';
+import { SubmitHandler } from '$/hooks/use-create-a-comment';
+import { ToggleLieAction } from '$/hooks/use-toggle-a-like-action';
 import { CommentLeafType } from '$/types/widget';
 import { getCommentCount } from '$/utilities/get-comment-count';
 

@@ -6,7 +6,7 @@ import FlipMove from 'react-flip-move';
 import 'twin.macro';
 
 import { Link } from '$/components/link';
-import { usePrevious } from '$/hooks/usePrevious';
+import { usePrevious } from '$/hooks/use-previous';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
 
 import * as api from '../../analytics-api';

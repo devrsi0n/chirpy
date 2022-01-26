@@ -9,9 +9,9 @@ import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 import { Button } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
-import { useIsUnmounting } from '$/hooks/useIsUnmounting';
-import { useLocalStorage } from '$/hooks/useLocalStorage';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useIsUnmounting } from '$/hooks/use-is-unmounting';
+import { useLocalStorage } from '$/hooks/use-local-storage';
 import { cardBg, textInput } from '$/styles/common';
 
 import { SignInButton } from '../sign-in-button';

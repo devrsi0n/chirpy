@@ -5,7 +5,7 @@ import { SignInButton } from '$/blocks/sign-in-button';
 import { UserMenu } from '$/blocks/user-menu';
 import { Link } from '$/components/link';
 import { Logo } from '$/components/logo';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { bluredBg } from '$/styles/common';
 
 import { SideMenu } from '../side-menu';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CurrentUserProvider } from '$/contexts/current-user-provider';
+import { CurrentUserProvider } from '$/contexts/current-user-context';
 
 import * as userModule from '../../graphql/generated/user';
 import { EDITABLE_PROJECT_IDS } from './editable-project-ids';

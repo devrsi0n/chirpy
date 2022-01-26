@@ -5,8 +5,8 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { Button, ButtonProps } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
-import { useSignInWindow } from '$/hooks/useSignInWindow';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useSignInWindow } from '$/hooks/use-sign-in-window';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;

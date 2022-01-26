@@ -8,7 +8,7 @@ import 'twin.macro';
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { Image } from '$/components/image';
-import { useHasMounted } from '$/hooks/useHasMounted';
+import { useHasMounted } from '$/hooks/use-has-mounted';
 import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';

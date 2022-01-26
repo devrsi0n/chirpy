@@ -6,8 +6,8 @@ import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
-import { useTimeout } from '$/hooks/useTimeout';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useTimeout } from '$/hooks/use-timeout';
 import { APP_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 

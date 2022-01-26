@@ -36,7 +36,7 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
       script.addEventListener('error', setAttributeFromEvent);
     } else {
       // Grab existing script status from attribute and set to state.
-      setStatus(script.getAttribute('data-status') as Status);
+      setStatus(script.dataset.status as Status);
     }
 
     // Script event handler to update status in state
@@ -56,7 +56,7 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
         script.removeEventListener('error', setStateFromEvent);
       }
     };
-  }, [src]);
+  }, [dataset, src]);
 
   return status;
 }

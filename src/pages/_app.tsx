@@ -13,8 +13,8 @@ import { ErrorFallback } from '$/blocks/error-fallback';
 import { LazySiteLayout } from '$/blocks/layout/lazy-site-layout';
 import { Spinner } from '$/components/spinner';
 import { ToastProvider } from '$/components/toast';
-import { CurrentUserProvider } from '$/contexts/current-user-provider';
-import { GQLClientProvider } from '$/contexts/gql-client-provider';
+import { CurrentUserProvider } from '$/contexts/current-user-context';
+import { GQLClientProvider } from '$/contexts/gql-client-context';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
