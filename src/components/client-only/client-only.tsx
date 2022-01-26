@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useHasMounted } from '$/hooks/useHasMounted';
+import { useHasMounted } from '$/hooks/use-has-mounted';
 
 export type ClientOnlyProps = React.PropsWithChildren<{
   //

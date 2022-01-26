@@ -42,6 +42,7 @@ async function* getFileStructures(
 export async function getDirectories(subFolder: string, routePrefix: string): Promise<Directory[]> {
   const directories: Directory[] = [];
   const metaPath = path.join(POST_ROOT, subFolder, 'meta.json');
+  // eslint-disable-next-line unicorn/prefer-json-parse-buffer
   const metaContent = await fs.readFile(metaPath, 'utf8');
   const { directories: orderedDirectories } = JSON.parse(metaContent) as { directories: string[] };
   for (const dirRelativePath of orderedDirectories) {

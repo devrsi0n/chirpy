@@ -33,6 +33,7 @@ module.exports = {
     'unicorn/no-abusive-eslint-disable': 'off',
     'unicore/prefer-module': 'off',
     'unicorn/no-array-for-each': 'off',
+    'unicorn/prefer-json-parse-buffer': 'off',
 
     'jest/expect-expect': 'off',
   },

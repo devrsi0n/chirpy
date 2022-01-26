@@ -2,7 +2,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw, { css, theme, TwStyle } from 'twin.macro';
 
-import { SiteThemeProvider } from '$/contexts/theme-provider';
+import { SiteThemeProvider } from '$/contexts/theme-context';
 
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';

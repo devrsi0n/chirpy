@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { ssrMode } from '$/utilities/env';
 
-import { useEventListener } from './useEventListener';
+import { useEventListener } from './use-event-listener';
 
 type SetValue<S> = Dispatch<SetStateAction<S>>;
 

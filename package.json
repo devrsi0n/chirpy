@@ -19,7 +19,7 @@
     "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run",
     "ut": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
     "ut:coverage": "DEBUG_PRINT_LIMIT=10000 jest --silent=false --coverage",
-    "lint": "next lint",
+    "lint": "eslint ./",
     "sb": "start-storybook -p 6006",
     "build-sb": "build-storybook"
   },

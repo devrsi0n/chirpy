@@ -15,7 +15,7 @@ import { pipe, subscribe } from 'wonka';
 import { CommentTrees } from '$/blocks/comment-trees';
 import { WidgetLayout } from '$/blocks/layout';
 import { PoweredBy } from '$/blocks/powered-by';
-import { CommentContextProvider } from '$/contexts/momment-context';
+import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
@@ -23,9 +23,9 @@ import {
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
-import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { useCreateAComment } from '$/hooks/use-create-a-comment';
+import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
+import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
 import {

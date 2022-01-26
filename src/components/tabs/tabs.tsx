@@ -1,7 +1,7 @@
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useLocalStorage } from '$/hooks/useLocalStorage';
+import { useLocalStorage } from '$/hooks/use-local-storage';
 
 import { BaseButton } from '../button';
 import { TabsConfig, TabsContext, TabsLabelItem } from './tabs-context';

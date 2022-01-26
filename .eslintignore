@@ -1,10 +1,9 @@
-**/node_modules/**
-jest
+node_modules
 generated
-cypress-examples
-scripts
-.next
-.cache
-src/blocks/Analytics/
+
+/scripts
+/.next
+/.cache
+/src/blocks/analytics
 
 *.js

@@ -4,7 +4,7 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 import tw, { theme } from 'twin.macro';
 
-import { useIsDarkMode } from '$/hooks/useIsDarkMode';
+import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../analytics-api';

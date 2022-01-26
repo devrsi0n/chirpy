@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '$/__tests__/fixtures/page-render';
 import { EDITABLE_PROJECT_IDS } from '$/__tests__/mocks/editable-project-ids';
-import * as CommentContext from '$/contexts/momment-context/comment-context-provider';
+import * as CommentContext from '$/contexts/comment-context/comment-context-provider';
 
 import { CommentCard } from '..';
 import { generateCommentCard } from './mock-data';
