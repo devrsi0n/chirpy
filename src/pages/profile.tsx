@@ -19,7 +19,7 @@ import { Text } from '$/components/text';
 import { TextArea } from '$/components/text-area';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { APP_NAME } from '$/lib/constants';

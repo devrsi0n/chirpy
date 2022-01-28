@@ -13,13 +13,13 @@ import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { SubmitHandler } from '$/hooks/useCreateAComment';
+import { SubmitHandler } from '$/hooks/use-create-a-comment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
-import { useCommentContext } from '../../contexts/momment-context';
-import { useCurrentUser } from '../../contexts/current-user-provider/useCurrentUser';
+import { useCommentContext } from '../../contexts/comment-context';
+import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
 import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';

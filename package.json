@@ -19,7 +19,7 @@
     "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run",
     "ut": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
     "ut:coverage": "DEBUG_PRINT_LIMIT=10000 jest --silent=false --coverage",
-    "lint": "next lint",
+    "lint": "eslint ./",
     "sb": "start-storybook -p 6006",
     "build-sb": "build-storybook"
   },
@@ -156,8 +156,8 @@
     "tailwindcss": "2.2.19",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "twin.macro": "2.8.2",
-    "typescript": "4.5.4",
-    "vite": "2.7.12",
+    "typescript": "4.5.5",
+    "vite": "2.7.13",
     "whatwg-fetch": "3.6.2"
   },
   "engines": {

@@ -3,7 +3,7 @@ import HeartFill from '@geist-ui/react-icons/heartFill';
 import * as React from 'react';
 
 import { ActionButton, ActionButtonProps } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 
 export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
 

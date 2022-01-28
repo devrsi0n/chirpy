@@ -6,7 +6,7 @@ import XCircle from '@geist-ui/react-icons/xCircle';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { useTimeout } from '$/hooks/useTimeout';
+import { useTimeout } from '$/hooks/use-timeout';
 
 import { IconButton } from '../button';
 import { Card } from '../card';

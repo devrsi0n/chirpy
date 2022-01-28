@@ -18,19 +18,16 @@ export async function comment(): Promise<void> {
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);
   if (!script) {
-    console.error(`Can't find the chirpy script`);
-    return Promise.reject();
+    throw new Error(`Can't find the chirpy script`);
   }
   const domain = script.dataset['chirpyDomain'];
   if (!domain) {
-    console.error(`No domain specified`);
-    return Promise.reject();
+    throw new Error(`No domain specified`);
   }
 
   const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
-    console.error(`Can't find the render target`);
-    return Promise.reject();
+    throw new Error(`Can't find the render target`);
   }
   const { origin, pathname } = window.location;
   const res = await fetch(

@@ -3,7 +3,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import tw from 'twin.macro';
 
-import { usePortal } from '$/hooks/usePortal';
+import { usePortal } from '$/hooks/use-portal';
 
 import { Toast } from './toast-context';
 import { ToastItem } from './toast-item';

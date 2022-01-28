@@ -12,8 +12,8 @@ import { Divider } from '$/components/divider';
 import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
-import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
-import { useSignInWindow } from '$/hooks/useSignInWindow';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useSignInWindow } from '$/hooks/use-sign-in-window';
 import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type UserMenuProps = {

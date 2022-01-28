@@ -6,7 +6,7 @@ import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
 import { IconButton } from '$/components/button';
-import { useClickOutside } from '$/hooks/useClickOutside';
+import { useClickOutside } from '$/hooks/use-click-outside';
 import { ssrMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
