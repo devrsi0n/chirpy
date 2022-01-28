@@ -16856,26 +16856,14 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "admin",
-            "description": "Site administrator",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "anonymous",
-            "description": "Anonymous widget vsisitor",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "free",
-            "description": null,
+            "description": "Free user",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
             "name": "pro",
-            "description": "Paid user",
+            "description": "pro",
             "isDeprecated": false,
             "deprecationReason": null
           }

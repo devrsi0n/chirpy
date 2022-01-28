@@ -2407,12 +2407,9 @@ export enum UserType_Constraint {
 }
 
 export enum UserType_Enum {
-  /** Site administrator */
-  Admin = 'admin',
-  /** Anonymous widget vsisitor */
-  Anonymous = 'anonymous',
+  /** Free user */
   Free = 'free',
-  /** Paid user */
+  /** pro */
   Pro = 'pro'
 }
 
