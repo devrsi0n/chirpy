@@ -90,6 +90,7 @@
     "superjson": "1.8.0",
     "type-fest": "2.11.0",
     "urql": "2.0.6",
+    "web-push": "^3.4.5",
     "wonka": "4.0.15",
     "ws": "8.4.2"
   },
@@ -127,6 +128,7 @@
     "@types/react-flatpickr": "3.8.5",
     "@types/requestidlecallback": "0.3.4",
     "@types/tailwindcss": "2.2.4",
+    "@types/web-push": "^3.3.2",
     "@types/ws": "8.2.2",
     "babel-jest": "27.4.6",
     "babel-loader": "8.2.3",

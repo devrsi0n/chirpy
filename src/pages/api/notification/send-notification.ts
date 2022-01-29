@@ -1,7 +1,7 @@
 import { getApiHandler } from '$/server/common/api-handler';
-import { registerDevice } from '$/server/services/notification';
+import { sendNotification } from '$/server/services/notification';
 
 const handler = getApiHandler();
-handler.post(registerDevice);
+handler.get(sendNotification);
 
 export default handler;

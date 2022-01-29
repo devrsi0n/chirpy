@@ -1031,6 +1031,187 @@ export enum Member_Update_Column {
   UserId = 'userId'
 }
 
+/**
+ * Registered subscriptions for notification
+ *
+ *
+ * columns and relationships of "NotificationSubscription"
+ *
+ */
+export type NotificationSubscription = {
+  __typename?: 'NotificationSubscription';
+  createdAt: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  subscription: Scalars['jsonb'];
+  /** An object relationship */
+  user: User;
+  userId: Scalars['uuid'];
+};
+
+
+/**
+ * Registered subscriptions for notification
+ *
+ *
+ * columns and relationships of "NotificationSubscription"
+ *
+ */
+export type NotificationSubscriptionSubscriptionArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregated selection of "NotificationSubscription" */
+export type NotificationSubscription_Aggregate = {
+  __typename?: 'NotificationSubscription_aggregate';
+  aggregate?: Maybe<NotificationSubscription_Aggregate_Fields>;
+  nodes: Array<NotificationSubscription>;
+};
+
+/** aggregate fields of "NotificationSubscription" */
+export type NotificationSubscription_Aggregate_Fields = {
+  __typename?: 'NotificationSubscription_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<NotificationSubscription_Max_Fields>;
+  min?: Maybe<NotificationSubscription_Min_Fields>;
+};
+
+
+/** aggregate fields of "NotificationSubscription" */
+export type NotificationSubscription_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type NotificationSubscription_Append_Input = {
+  subscription?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** Boolean expression to filter rows from the table "NotificationSubscription". All fields are combined with a logical 'AND'. */
+export type NotificationSubscription_Bool_Exp = {
+  _and?: InputMaybe<Array<NotificationSubscription_Bool_Exp>>;
+  _not?: InputMaybe<NotificationSubscription_Bool_Exp>;
+  _or?: InputMaybe<Array<NotificationSubscription_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  subscription?: InputMaybe<Jsonb_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "NotificationSubscription" */
+export enum NotificationSubscription_Constraint {
+  /** unique or primary key constraint */
+  NotificationSubscriptionPkey = 'NotificationSubscription_pkey'
+}
+
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type NotificationSubscription_Delete_At_Path_Input = {
+  subscription?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type NotificationSubscription_Delete_Elem_Input = {
+  subscription?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type NotificationSubscription_Delete_Key_Input = {
+  subscription?: InputMaybe<Scalars['String']>;
+};
+
+/** input type for inserting data into table "NotificationSubscription" */
+export type NotificationSubscription_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  subscription?: InputMaybe<Scalars['jsonb']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type NotificationSubscription_Max_Fields = {
+  __typename?: 'NotificationSubscription_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** aggregate min on columns */
+export type NotificationSubscription_Min_Fields = {
+  __typename?: 'NotificationSubscription_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** response of any mutation on the table "NotificationSubscription" */
+export type NotificationSubscription_Mutation_Response = {
+  __typename?: 'NotificationSubscription_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<NotificationSubscription>;
+};
+
+/** on conflict condition type for table "NotificationSubscription" */
+export type NotificationSubscription_On_Conflict = {
+  constraint: NotificationSubscription_Constraint;
+  update_columns?: Array<NotificationSubscription_Update_Column>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "NotificationSubscription". */
+export type NotificationSubscription_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  subscription?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: NotificationSubscription */
+export type NotificationSubscription_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type NotificationSubscription_Prepend_Input = {
+  subscription?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** select columns of table "NotificationSubscription" */
+export enum NotificationSubscription_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Subscription = 'subscription',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "NotificationSubscription" */
+export type NotificationSubscription_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  subscription?: InputMaybe<Scalars['jsonb']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** update columns of table "NotificationSubscription" */
+export enum NotificationSubscription_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Subscription = 'subscription',
+  /** column name */
+  UserId = 'userId'
+}
+
 /** columns and relationships of "Page" */
 export type Page = {
   __typename?: 'Page';
@@ -2962,6 +3143,10 @@ export type Mutation_Root = {
   deleteMemberByPk?: Maybe<Member>;
   /** delete data from the table: "Member" */
   deleteMembers?: Maybe<Member_Mutation_Response>;
+  /** delete single row from the table: "NotificationSubscription" */
+  deleteNotificationSubscriptionByPk?: Maybe<NotificationSubscription>;
+  /** delete data from the table: "NotificationSubscription" */
+  deleteNotificationSubscriptions?: Maybe<NotificationSubscription_Mutation_Response>;
   /** delete single row from the table: "Page" */
   deletePageByPk?: Maybe<Page>;
   /** delete data from the table: "Page" */
@@ -3002,6 +3187,8 @@ export type Mutation_Root = {
   insertLikes?: Maybe<Like_Mutation_Response>;
   /** insert data into the table: "Member" */
   insertMembers?: Maybe<Member_Mutation_Response>;
+  /** insert data into the table: "NotificationSubscription" */
+  insertNotificationSubscriptions?: Maybe<NotificationSubscription_Mutation_Response>;
   /** insert a single row into the table: "Account" */
   insertOneAccount?: Maybe<Account>;
   /** insert a single row into the table: "Comment" */
@@ -3010,6 +3197,8 @@ export type Mutation_Root = {
   insertOneLike?: Maybe<Like>;
   /** insert a single row into the table: "Member" */
   insertOneMember?: Maybe<Member>;
+  /** insert a single row into the table: "NotificationSubscription" */
+  insertOneNotificationSubscription?: Maybe<NotificationSubscription>;
   /** insert a single row into the table: "Page" */
   insertOnePage?: Maybe<Page>;
   /** insert a single row into the table: "Project" */
@@ -3058,6 +3247,10 @@ export type Mutation_Root = {
   updateMemberByPk?: Maybe<Member>;
   /** update data of the table: "Member" */
   updateMembers?: Maybe<Member_Mutation_Response>;
+  /** update single row of the table: "NotificationSubscription" */
+  updateNotificationSubscriptionByPk?: Maybe<NotificationSubscription>;
+  /** update data of the table: "NotificationSubscription" */
+  updateNotificationSubscriptions?: Maybe<NotificationSubscription_Mutation_Response>;
   /** update single row of the table: "Page" */
   updatePageByPk?: Maybe<Page>;
   /** update data of the table: "Page" */
@@ -3138,6 +3331,18 @@ export type Mutation_RootDeleteMemberByPkArgs = {
 /** mutation root */
 export type Mutation_RootDeleteMembersArgs = {
   where: Member_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteNotificationSubscriptionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteNotificationSubscriptionsArgs = {
+  where: NotificationSubscription_Bool_Exp;
 };
 
 
@@ -3266,6 +3471,13 @@ export type Mutation_RootInsertMembersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsertNotificationSubscriptionsArgs = {
+  objects: Array<NotificationSubscription_Insert_Input>;
+  on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsertOneAccountArgs = {
   object: Account_Insert_Input;
   on_conflict?: InputMaybe<Account_On_Conflict>;
@@ -3290,6 +3502,13 @@ export type Mutation_RootInsertOneLikeArgs = {
 export type Mutation_RootInsertOneMemberArgs = {
   object: Member_Insert_Input;
   on_conflict?: InputMaybe<Member_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertOneNotificationSubscriptionArgs = {
+  object: NotificationSubscription_Insert_Input;
+  on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
 };
 
 
@@ -3472,6 +3691,30 @@ export type Mutation_RootUpdateMembersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdateNotificationSubscriptionByPkArgs = {
+  _append?: InputMaybe<NotificationSubscription_Append_Input>;
+  _delete_at_path?: InputMaybe<NotificationSubscription_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<NotificationSubscription_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<NotificationSubscription_Delete_Key_Input>;
+  _prepend?: InputMaybe<NotificationSubscription_Prepend_Input>;
+  _set?: InputMaybe<NotificationSubscription_Set_Input>;
+  pk_columns: NotificationSubscription_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateNotificationSubscriptionsArgs = {
+  _append?: InputMaybe<NotificationSubscription_Append_Input>;
+  _delete_at_path?: InputMaybe<NotificationSubscription_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<NotificationSubscription_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<NotificationSubscription_Delete_Key_Input>;
+  _prepend?: InputMaybe<NotificationSubscription_Prepend_Input>;
+  _set?: InputMaybe<NotificationSubscription_Set_Input>;
+  where: NotificationSubscription_Bool_Exp;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdatePageByPkArgs = {
   _set?: InputMaybe<Page_Set_Input>;
   pk_columns: Page_Pk_Columns_Input;
@@ -3638,6 +3881,12 @@ export type Query_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
+  /** fetch aggregated fields from the table: "NotificationSubscription" */
+  notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
+  /** fetch data from the table: "NotificationSubscription" using primary key columns */
+  notificationSubscriptionByPk?: Maybe<NotificationSubscription>;
+  /** fetch data from the table: "NotificationSubscription" */
+  notificationSubscriptions: Array<NotificationSubscription>;
   /** fetch aggregated fields from the table: "Page" */
   pageAggregate: Page_Aggregate;
   /** fetch data from the table: "Page" using primary key columns */
@@ -3788,6 +4037,29 @@ export type Query_RootMembersArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationSubscriptionAggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationSubscriptionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Query_RootNotificationSubscriptionsArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
 
@@ -3990,6 +4262,12 @@ export type Subscription_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
+  /** fetch aggregated fields from the table: "NotificationSubscription" */
+  notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
+  /** fetch data from the table: "NotificationSubscription" using primary key columns */
+  notificationSubscriptionByPk?: Maybe<NotificationSubscription>;
+  /** fetch data from the table: "NotificationSubscription" */
+  notificationSubscriptions: Array<NotificationSubscription>;
   /** fetch aggregated fields from the table: "Page" */
   pageAggregate: Page_Aggregate;
   /** fetch data from the table: "Page" using primary key columns */
@@ -4140,6 +4418,29 @@ export type Subscription_RootMembersArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationSubscriptionAggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationSubscriptionByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type Subscription_RootNotificationSubscriptionsArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
 

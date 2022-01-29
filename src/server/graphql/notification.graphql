@@ -1,0 +1,12 @@
+mutation insertOneNotificationSubscription($userId: uuid!, $subscription: jsonb!) {
+  insertOneNotificationSubscription(object: { userId: $userId, subscription: $subscription }) {
+    id
+  }
+}
+
+query notificationSubscriptionsByUserId($userId: uuid!) {
+  notificationSubscriptions(where: { userId: { _eq: $userId } }) {
+    id
+    subscription
+  }
+}
