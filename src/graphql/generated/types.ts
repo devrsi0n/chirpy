@@ -317,6 +317,19 @@ export enum Account_Update_Column {
   UserId = 'userId'
 }
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']>;
+  _gt?: InputMaybe<Scalars['Boolean']>;
+  _gte?: InputMaybe<Scalars['Boolean']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['Boolean']>;
+  _lte?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<Scalars['Boolean']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']>>;
+};
+
 /** columns and relationships of "Comment" */
 export type Comment = {
   __typename?: 'Comment';
@@ -1031,6 +1044,191 @@ export enum Member_Update_Column {
   UserId = 'userId'
 }
 
+/** columns and relationships of "NotificationMessage" */
+export type NotificationMessage = {
+  __typename?: 'NotificationMessage';
+  createdAt: Scalars['timestamptz'];
+  deletedAt: Scalars['timestamptz'];
+  id: Scalars['uuid'];
+  /** An object relationship */
+  notificationType: NotificationType;
+  read: Scalars['Boolean'];
+  recipient: Scalars['uuid'];
+  triggeredBy?: Maybe<Scalars['uuid']>;
+  type: NotificationType_Enum;
+  url?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  user: User;
+};
+
+/** aggregated selection of "NotificationMessage" */
+export type NotificationMessage_Aggregate = {
+  __typename?: 'NotificationMessage_aggregate';
+  aggregate?: Maybe<NotificationMessage_Aggregate_Fields>;
+  nodes: Array<NotificationMessage>;
+};
+
+/** aggregate fields of "NotificationMessage" */
+export type NotificationMessage_Aggregate_Fields = {
+  __typename?: 'NotificationMessage_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<NotificationMessage_Max_Fields>;
+  min?: Maybe<NotificationMessage_Min_Fields>;
+};
+
+
+/** aggregate fields of "NotificationMessage" */
+export type NotificationMessage_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "NotificationMessage". All fields are combined with a logical 'AND'. */
+export type NotificationMessage_Bool_Exp = {
+  _and?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
+  _not?: InputMaybe<NotificationMessage_Bool_Exp>;
+  _or?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  notificationType?: InputMaybe<NotificationType_Bool_Exp>;
+  read?: InputMaybe<Boolean_Comparison_Exp>;
+  recipient?: InputMaybe<Uuid_Comparison_Exp>;
+  triggeredBy?: InputMaybe<Uuid_Comparison_Exp>;
+  type?: InputMaybe<NotificationType_Enum_Comparison_Exp>;
+  url?: InputMaybe<String_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
+};
+
+/** unique or primary key constraints on table "NotificationMessage" */
+export enum NotificationMessage_Constraint {
+  /** unique or primary key constraint */
+  NotificationMessagePkey = 'NotificationMessage_pkey'
+}
+
+/** input type for inserting data into table "NotificationMessage" */
+export type NotificationMessage_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  notificationType?: InputMaybe<NotificationType_Obj_Rel_Insert_Input>;
+  read?: InputMaybe<Scalars['Boolean']>;
+  recipient?: InputMaybe<Scalars['uuid']>;
+  triggeredBy?: InputMaybe<Scalars['uuid']>;
+  type?: InputMaybe<NotificationType_Enum>;
+  url?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
+};
+
+/** aggregate max on columns */
+export type NotificationMessage_Max_Fields = {
+  __typename?: 'NotificationMessage_max_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  recipient?: Maybe<Scalars['uuid']>;
+  triggeredBy?: Maybe<Scalars['uuid']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type NotificationMessage_Min_Fields = {
+  __typename?: 'NotificationMessage_min_fields';
+  createdAt?: Maybe<Scalars['timestamptz']>;
+  deletedAt?: Maybe<Scalars['timestamptz']>;
+  id?: Maybe<Scalars['uuid']>;
+  recipient?: Maybe<Scalars['uuid']>;
+  triggeredBy?: Maybe<Scalars['uuid']>;
+  url?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "NotificationMessage" */
+export type NotificationMessage_Mutation_Response = {
+  __typename?: 'NotificationMessage_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<NotificationMessage>;
+};
+
+/** on conflict condition type for table "NotificationMessage" */
+export type NotificationMessage_On_Conflict = {
+  constraint: NotificationMessage_Constraint;
+  update_columns?: Array<NotificationMessage_Update_Column>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "NotificationMessage". */
+export type NotificationMessage_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  deletedAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  notificationType?: InputMaybe<NotificationType_Order_By>;
+  read?: InputMaybe<Order_By>;
+  recipient?: InputMaybe<Order_By>;
+  triggeredBy?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
+};
+
+/** primary key columns input for table: NotificationMessage */
+export type NotificationMessage_Pk_Columns_Input = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "NotificationMessage" */
+export enum NotificationMessage_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  DeletedAt = 'deletedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Read = 'read',
+  /** column name */
+  Recipient = 'recipient',
+  /** column name */
+  TriggeredBy = 'triggeredBy',
+  /** column name */
+  Type = 'type',
+  /** column name */
+  Url = 'url'
+}
+
+/** input type for updating data in table "NotificationMessage" */
+export type NotificationMessage_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  read?: InputMaybe<Scalars['Boolean']>;
+  recipient?: InputMaybe<Scalars['uuid']>;
+  triggeredBy?: InputMaybe<Scalars['uuid']>;
+  type?: InputMaybe<NotificationType_Enum>;
+  url?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "NotificationMessage" */
+export enum NotificationMessage_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  DeletedAt = 'deletedAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Read = 'read',
+  /** column name */
+  Recipient = 'recipient',
+  /** column name */
+  TriggeredBy = 'triggeredBy',
+  /** column name */
+  Type = 'type',
+  /** column name */
+  Url = 'url'
+}
+
 /**
  * Registered subscriptions for notification
  *
@@ -1210,6 +1408,146 @@ export enum NotificationSubscription_Update_Column {
   Subscription = 'subscription',
   /** column name */
   UserId = 'userId'
+}
+
+/** columns and relationships of "NotificationType" */
+export type NotificationType = {
+  __typename?: 'NotificationType';
+  comment: Scalars['String'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "NotificationType" */
+export type NotificationType_Aggregate = {
+  __typename?: 'NotificationType_aggregate';
+  aggregate?: Maybe<NotificationType_Aggregate_Fields>;
+  nodes: Array<NotificationType>;
+};
+
+/** aggregate fields of "NotificationType" */
+export type NotificationType_Aggregate_Fields = {
+  __typename?: 'NotificationType_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<NotificationType_Max_Fields>;
+  min?: Maybe<NotificationType_Min_Fields>;
+};
+
+
+/** aggregate fields of "NotificationType" */
+export type NotificationType_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<NotificationType_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "NotificationType". All fields are combined with a logical 'AND'. */
+export type NotificationType_Bool_Exp = {
+  _and?: InputMaybe<Array<NotificationType_Bool_Exp>>;
+  _not?: InputMaybe<NotificationType_Bool_Exp>;
+  _or?: InputMaybe<Array<NotificationType_Bool_Exp>>;
+  comment?: InputMaybe<String_Comparison_Exp>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "NotificationType" */
+export enum NotificationType_Constraint {
+  /** unique or primary key constraint */
+  NotificationTypePkey = 'NotificationType_pkey'
+}
+
+export enum NotificationType_Enum {
+  /** Comment deleted by moderator */
+  CommentDeleted = 'CommentDeleted',
+  /** Received a comment */
+  ReceivedAComment = 'ReceivedAComment',
+  /** Received a like */
+  ReceivedALike = 'ReceivedALike',
+  /** Received a reply */
+  ReceivedAReply = 'ReceivedAReply'
+}
+
+/** Boolean expression to compare columns of type "NotificationType_enum". All fields are combined with logical 'AND'. */
+export type NotificationType_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<NotificationType_Enum>;
+  _in?: InputMaybe<Array<NotificationType_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<NotificationType_Enum>;
+  _nin?: InputMaybe<Array<NotificationType_Enum>>;
+};
+
+/** input type for inserting data into table "NotificationType" */
+export type NotificationType_Insert_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type NotificationType_Max_Fields = {
+  __typename?: 'NotificationType_max_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type NotificationType_Min_Fields = {
+  __typename?: 'NotificationType_min_fields';
+  comment?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "NotificationType" */
+export type NotificationType_Mutation_Response = {
+  __typename?: 'NotificationType_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<NotificationType>;
+};
+
+/** input type for inserting object relation for remote table "NotificationType" */
+export type NotificationType_Obj_Rel_Insert_Input = {
+  data: NotificationType_Insert_Input;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<NotificationType_On_Conflict>;
+};
+
+/** on conflict condition type for table "NotificationType" */
+export type NotificationType_On_Conflict = {
+  constraint: NotificationType_Constraint;
+  update_columns?: Array<NotificationType_Update_Column>;
+  where?: InputMaybe<NotificationType_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "NotificationType". */
+export type NotificationType_Order_By = {
+  comment?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: NotificationType */
+export type NotificationType_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "NotificationType" */
+export enum NotificationType_Select_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "NotificationType" */
+export type NotificationType_Set_Input = {
+  comment?: InputMaybe<Scalars['String']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "NotificationType" */
+export enum NotificationType_Update_Column {
+  /** column name */
+  Comment = 'comment',
+  /** column name */
+  Value = 'value'
 }
 
 /** columns and relationships of "Page" */
@@ -3143,6 +3481,10 @@ export type Mutation_Root = {
   deleteMemberByPk?: Maybe<Member>;
   /** delete data from the table: "Member" */
   deleteMembers?: Maybe<Member_Mutation_Response>;
+  /** delete single row from the table: "NotificationMessage" */
+  deleteNotificationMessageByPk?: Maybe<NotificationMessage>;
+  /** delete data from the table: "NotificationMessage" */
+  deleteNotificationMessages?: Maybe<NotificationMessage_Mutation_Response>;
   /** delete single row from the table: "NotificationSubscription" */
   deleteNotificationSubscriptionByPk?: Maybe<NotificationSubscription>;
   /** delete data from the table: "NotificationSubscription" */
@@ -3175,6 +3517,10 @@ export type Mutation_Root = {
   deleteUserTypes?: Maybe<UserType_Mutation_Response>;
   /** delete data from the table: "User" */
   deleteUsers?: Maybe<User_Mutation_Response>;
+  /** delete data from the table: "NotificationType" */
+  delete_NotificationType?: Maybe<NotificationType_Mutation_Response>;
+  /** delete single row from the table: "NotificationType" */
+  delete_NotificationType_by_pk?: Maybe<NotificationType>;
   /** delete data from the table: "VerificationToken" */
   delete_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
   /** delete single row from the table: "VerificationToken" */
@@ -3187,6 +3533,8 @@ export type Mutation_Root = {
   insertLikes?: Maybe<Like_Mutation_Response>;
   /** insert data into the table: "Member" */
   insertMembers?: Maybe<Member_Mutation_Response>;
+  /** insert data into the table: "NotificationMessage" */
+  insertNotificationMessages?: Maybe<NotificationMessage_Mutation_Response>;
   /** insert data into the table: "NotificationSubscription" */
   insertNotificationSubscriptions?: Maybe<NotificationSubscription_Mutation_Response>;
   /** insert a single row into the table: "Account" */
@@ -3197,6 +3545,8 @@ export type Mutation_Root = {
   insertOneLike?: Maybe<Like>;
   /** insert a single row into the table: "Member" */
   insertOneMember?: Maybe<Member>;
+  /** insert a single row into the table: "NotificationMessage" */
+  insertOneNotificationMessage?: Maybe<NotificationMessage>;
   /** insert a single row into the table: "NotificationSubscription" */
   insertOneNotificationSubscription?: Maybe<NotificationSubscription>;
   /** insert a single row into the table: "Page" */
@@ -3227,6 +3577,10 @@ export type Mutation_Root = {
   insertUserTypes?: Maybe<UserType_Mutation_Response>;
   /** insert data into the table: "User" */
   insertUsers?: Maybe<User_Mutation_Response>;
+  /** insert data into the table: "NotificationType" */
+  insert_NotificationType?: Maybe<NotificationType_Mutation_Response>;
+  /** insert a single row into the table: "NotificationType" */
+  insert_NotificationType_one?: Maybe<NotificationType>;
   /** insert data into the table: "VerificationToken" */
   insert_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
   /** insert a single row into the table: "VerificationToken" */
@@ -3247,6 +3601,10 @@ export type Mutation_Root = {
   updateMemberByPk?: Maybe<Member>;
   /** update data of the table: "Member" */
   updateMembers?: Maybe<Member_Mutation_Response>;
+  /** update single row of the table: "NotificationMessage" */
+  updateNotificationMessageByPk?: Maybe<NotificationMessage>;
+  /** update data of the table: "NotificationMessage" */
+  updateNotificationMessages?: Maybe<NotificationMessage_Mutation_Response>;
   /** update single row of the table: "NotificationSubscription" */
   updateNotificationSubscriptionByPk?: Maybe<NotificationSubscription>;
   /** update data of the table: "NotificationSubscription" */
@@ -3279,6 +3637,10 @@ export type Mutation_Root = {
   updateUserTypes?: Maybe<UserType_Mutation_Response>;
   /** update data of the table: "User" */
   updateUsers?: Maybe<User_Mutation_Response>;
+  /** update data of the table: "NotificationType" */
+  update_NotificationType?: Maybe<NotificationType_Mutation_Response>;
+  /** update single row of the table: "NotificationType" */
+  update_NotificationType_by_pk?: Maybe<NotificationType>;
   /** update data of the table: "VerificationToken" */
   update_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
   /** update single row of the table: "VerificationToken" */
@@ -3331,6 +3693,18 @@ export type Mutation_RootDeleteMemberByPkArgs = {
 /** mutation root */
 export type Mutation_RootDeleteMembersArgs = {
   where: Member_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteNotificationMessageByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDeleteNotificationMessagesArgs = {
+  where: NotificationMessage_Bool_Exp;
 };
 
 
@@ -3431,6 +3805,18 @@ export type Mutation_RootDeleteUsersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_NotificationTypeArgs = {
+  where: NotificationType_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_NotificationType_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_VerificationTokenArgs = {
   where: VerificationToken_Bool_Exp;
 };
@@ -3471,6 +3857,13 @@ export type Mutation_RootInsertMembersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsertNotificationMessagesArgs = {
+  objects: Array<NotificationMessage_Insert_Input>;
+  on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsertNotificationSubscriptionsArgs = {
   objects: Array<NotificationSubscription_Insert_Input>;
   on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
@@ -3502,6 +3895,13 @@ export type Mutation_RootInsertOneLikeArgs = {
 export type Mutation_RootInsertOneMemberArgs = {
   object: Member_Insert_Input;
   on_conflict?: InputMaybe<Member_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsertOneNotificationMessageArgs = {
+  object: NotificationMessage_Insert_Input;
+  on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
 };
 
 
@@ -3611,6 +4011,20 @@ export type Mutation_RootInsertUsersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_NotificationTypeArgs = {
+  objects: Array<NotificationType_Insert_Input>;
+  on_conflict?: InputMaybe<NotificationType_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_NotificationType_OneArgs = {
+  object: NotificationType_Insert_Input;
+  on_conflict?: InputMaybe<NotificationType_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_VerificationTokenArgs = {
   objects: Array<VerificationToken_Insert_Input>;
   on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
@@ -3687,6 +4101,20 @@ export type Mutation_RootUpdateMemberByPkArgs = {
 export type Mutation_RootUpdateMembersArgs = {
   _set?: InputMaybe<Member_Set_Input>;
   where: Member_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateNotificationMessageByPkArgs = {
+  _set?: InputMaybe<NotificationMessage_Set_Input>;
+  pk_columns: NotificationMessage_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdateNotificationMessagesArgs = {
+  _set?: InputMaybe<NotificationMessage_Set_Input>;
+  where: NotificationMessage_Bool_Exp;
 };
 
 
@@ -3823,6 +4251,20 @@ export type Mutation_RootUpdateUsersArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_NotificationTypeArgs = {
+  _set?: InputMaybe<NotificationType_Set_Input>;
+  where: NotificationType_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_NotificationType_By_PkArgs = {
+  _set?: InputMaybe<NotificationType_Set_Input>;
+  pk_columns: NotificationType_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_VerificationTokenArgs = {
   _set?: InputMaybe<VerificationToken_Set_Input>;
   where: VerificationToken_Bool_Exp;
@@ -3853,6 +4295,12 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "NotificationType" */
+  NotificationType: Array<NotificationType>;
+  /** fetch aggregated fields from the table: "NotificationType" */
+  NotificationType_aggregate: NotificationType_Aggregate;
+  /** fetch data from the table: "NotificationType" using primary key columns */
+  NotificationType_by_pk?: Maybe<NotificationType>;
   /** fetch aggregated fields from the table: "VerificationToken" */
   VerificationToken_aggregate: VerificationToken_Aggregate;
   /** fetch data from the table: "VerificationToken" using primary key columns */
@@ -3881,6 +4329,12 @@ export type Query_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
+  /** fetch data from the table: "NotificationMessage" */
+  notificationMessages: Array<NotificationMessage>;
+  /** fetch aggregated fields from the table: "NotificationMessage" */
+  notificationMessagesAggregate: NotificationMessage_Aggregate;
+  /** fetch data from the table: "NotificationMessage" using primary key columns */
+  notificationMessagesByPk?: Maybe<NotificationMessage>;
   /** fetch aggregated fields from the table: "NotificationSubscription" */
   notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
   /** fetch data from the table: "NotificationSubscription" using primary key columns */
@@ -3931,6 +4385,29 @@ export type Query_Root = {
   users: Array<User>;
   /** fetch data from the table: "VerificationToken" */
   verificationRequests: Array<VerificationToken>;
+};
+
+
+export type Query_RootNotificationTypeArgs = {
+  distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationType_Order_By>>;
+  where?: InputMaybe<NotificationType_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationType_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationType_Order_By>>;
+  where?: InputMaybe<NotificationType_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationType_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -4037,6 +4514,29 @@ export type Query_RootMembersArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationMessagesArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationMessagesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+export type Query_RootNotificationMessagesByPkArgs = {
+  id: Scalars['uuid'];
 };
 
 
@@ -4234,6 +4734,12 @@ export type Query_RootVerificationRequestsArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "NotificationType" */
+  NotificationType: Array<NotificationType>;
+  /** fetch aggregated fields from the table: "NotificationType" */
+  NotificationType_aggregate: NotificationType_Aggregate;
+  /** fetch data from the table: "NotificationType" using primary key columns */
+  NotificationType_by_pk?: Maybe<NotificationType>;
   /** fetch aggregated fields from the table: "VerificationToken" */
   VerificationToken_aggregate: VerificationToken_Aggregate;
   /** fetch data from the table: "VerificationToken" using primary key columns */
@@ -4262,6 +4768,12 @@ export type Subscription_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
+  /** fetch data from the table: "NotificationMessage" */
+  notificationMessages: Array<NotificationMessage>;
+  /** fetch aggregated fields from the table: "NotificationMessage" */
+  notificationMessagesAggregate: NotificationMessage_Aggregate;
+  /** fetch data from the table: "NotificationMessage" using primary key columns */
+  notificationMessagesByPk?: Maybe<NotificationMessage>;
   /** fetch aggregated fields from the table: "NotificationSubscription" */
   notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
   /** fetch data from the table: "NotificationSubscription" using primary key columns */
@@ -4312,6 +4824,29 @@ export type Subscription_Root = {
   users: Array<User>;
   /** fetch data from the table: "VerificationToken" */
   verificationRequests: Array<VerificationToken>;
+};
+
+
+export type Subscription_RootNotificationTypeArgs = {
+  distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationType_Order_By>>;
+  where?: InputMaybe<NotificationType_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationType_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationType_Order_By>>;
+  where?: InputMaybe<NotificationType_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationType_By_PkArgs = {
+  value: Scalars['String'];
 };
 
 
@@ -4418,6 +4953,29 @@ export type Subscription_RootMembersArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationMessagesArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationMessagesAggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+export type Subscription_RootNotificationMessagesByPkArgs = {
+  id: Scalars['uuid'];
 };
 
 

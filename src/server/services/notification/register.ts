@@ -8,10 +8,9 @@ import {
   InsertOneNotificationSubscriptionDocument,
   InsertOneNotificationSubscriptionMutation,
   InsertOneNotificationSubscriptionMutationVariables,
-  NotificationSubscriptionsByUserIdDocument,
-} from '../graphql/generated/notification';
-import { badRequest, unauthorized } from '../utilities/response';
-import { isValidHttpUrl } from '../utilities/url';
+} from '../../graphql/generated/notification';
+import { badRequest, unauthorized } from '../../utilities/response';
+import { isValidHttpUrl } from '../../utilities/url';
 
 const client = getAdminGqlClient();
 
@@ -39,45 +38,6 @@ export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{
   res.json({
     message: 'ok',
   });
-  res.end();
-}
-
-const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
-  vapidDetails: {
-    // TODO: update it with Chirpy official email
-    subject: 'mailto:example@yourdomain.org',
-    publicKey: process.env.NEXT_PUBLIC_VAPID,
-    privateKey: process.env.PRIVATE_VAPID,
-  },
-  ...(process.env.PROXY && { proxy: process.env.PROXY }),
-};
-
-export async function sendNotification(req: NextApiRequest, res: NextApiResponse<{}>) {
-  if (typeof req.query.userId !== 'string') {
-    badRequest(res, 'Missing userId');
-    return;
-  }
-  const { data } = await client
-    .query(NotificationSubscriptionsByUserIdDocument, {
-      userId: req.query.userId,
-    })
-    .toPromise();
-  if (
-    !data ||
-    !Array.isArray(data?.notificationSubscriptions) ||
-    data?.notificationSubscriptions.length === 0
-  ) {
-    badRequest(res, 'No subscriptions found');
-    return;
-  }
-  const { notificationSubscriptions } = data;
-  // console.log('sending notification', { data });
-  await Promise.allSettled(
-    notificationSubscriptions.map((subs) =>
-      webpush.sendNotification(subs.subscription, 'testing message', WEB_PUSH_OPTIONS),
-    ),
-  );
-
   res.end();
 }
 

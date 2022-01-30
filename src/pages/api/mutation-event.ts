@@ -1,7 +1,8 @@
 import { getApiHandler } from '$/server/common/api-handler';
-import { sendNotification } from '$/server/services/notification';
+import { handleMutationEvent } from '$/server/services/mutation-event';
 
 const handler = getApiHandler();
-handler.get(sendNotification);
+
+handler.post(handleMutationEvent);
 
 export default handler;
