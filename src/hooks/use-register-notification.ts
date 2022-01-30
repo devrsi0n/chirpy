@@ -1,10 +1,11 @@
 import * as React from 'react';
 
+import { isBrowser } from '$/utilities/env';
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
 export function useRegisterNotification() {
   React.useEffect(() => {
-    if ('serviceWorker' in navigator) {
+    if (isBrowser && 'serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/worker.js').then((registration) => {
           registration.pushManager

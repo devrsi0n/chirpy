@@ -3,3 +3,14 @@ query comments {
     id
   }
 }
+
+query siteOwnerByCommentId($commentId: uuid!) {
+  commentByPk(id: $commentId) {
+    page {
+      url
+      project {
+        userId
+      }
+    }
+  }
+}

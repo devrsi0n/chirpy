@@ -7545,6 +7545,22 @@
           },
           {
             "name": "recipient",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recipientId",
             "description": null,
             "args": [],
             "type": {
@@ -7561,6 +7577,18 @@
           },
           {
             "name": "triggeredBy",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "triggeredById",
             "description": null,
             "args": [],
             "type": {
@@ -7595,22 +7623,6 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "user",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7875,6 +7887,18 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recipientId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
               "name": "uuid_comparison_exp",
               "ofType": null
             },
@@ -7884,6 +7908,18 @@
           },
           {
             "name": "triggeredBy",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "triggeredById",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
@@ -7912,18 +7948,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "user",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8022,6 +8046,18 @@
             "name": "recipient",
             "description": null,
             "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recipientId",
+            "description": null,
+            "type": {
               "kind": "SCALAR",
               "name": "uuid",
               "ofType": null
@@ -8032,6 +8068,18 @@
           },
           {
             "name": "triggeredBy",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "triggeredById",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8060,18 +8108,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "user",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -8125,7 +8161,7 @@
             "deprecationReason": null
           },
           {
-            "name": "recipient",
+            "name": "recipientId",
             "description": null,
             "args": [],
             "type": {
@@ -8137,7 +8173,7 @@
             "deprecationReason": null
           },
           {
-            "name": "triggeredBy",
+            "name": "triggeredById",
             "description": null,
             "args": [],
             "type": {
@@ -8208,7 +8244,7 @@
             "deprecationReason": null
           },
           {
-            "name": "recipient",
+            "name": "recipientId",
             "description": null,
             "args": [],
             "type": {
@@ -8220,7 +8256,7 @@
             "deprecationReason": null
           },
           {
-            "name": "triggeredBy",
+            "name": "triggeredById",
             "description": null,
             "args": [],
             "type": {
@@ -8433,6 +8469,18 @@
             "name": "recipient",
             "description": null,
             "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "recipientId",
+            "description": null,
+            "type": {
               "kind": "ENUM",
               "name": "order_by",
               "ofType": null
@@ -8443,6 +8491,18 @@
           },
           {
             "name": "triggeredBy",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "triggeredById",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -8471,18 +8531,6 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "user",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -8554,13 +8602,13 @@
             "deprecationReason": null
           },
           {
-            "name": "recipient",
+            "name": "recipientId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "triggeredBy",
+            "name": "triggeredById",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -8635,7 +8683,7 @@
             "deprecationReason": null
           },
           {
-            "name": "recipient",
+            "name": "recipientId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8647,7 +8695,7 @@
             "deprecationReason": null
           },
           {
-            "name": "triggeredBy",
+            "name": "triggeredById",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8720,13 +8768,13 @@
             "deprecationReason": null
           },
           {
-            "name": "recipient",
+            "name": "recipientId",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "triggeredBy",
+            "name": "triggeredById",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

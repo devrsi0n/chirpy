@@ -1053,12 +1053,14 @@ export type NotificationMessage = {
   /** An object relationship */
   notificationType: NotificationType;
   read: Scalars['Boolean'];
-  recipient: Scalars['uuid'];
-  triggeredBy?: Maybe<Scalars['uuid']>;
+  /** An object relationship */
+  recipient: User;
+  recipientId: Scalars['uuid'];
+  /** An object relationship */
+  triggeredBy?: Maybe<User>;
+  triggeredById?: Maybe<Scalars['uuid']>;
   type: NotificationType_Enum;
   url?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  user: User;
 };
 
 /** aggregated selection of "NotificationMessage" */
@@ -1093,11 +1095,12 @@ export type NotificationMessage_Bool_Exp = {
   id?: InputMaybe<Uuid_Comparison_Exp>;
   notificationType?: InputMaybe<NotificationType_Bool_Exp>;
   read?: InputMaybe<Boolean_Comparison_Exp>;
-  recipient?: InputMaybe<Uuid_Comparison_Exp>;
-  triggeredBy?: InputMaybe<Uuid_Comparison_Exp>;
+  recipient?: InputMaybe<User_Bool_Exp>;
+  recipientId?: InputMaybe<Uuid_Comparison_Exp>;
+  triggeredBy?: InputMaybe<User_Bool_Exp>;
+  triggeredById?: InputMaybe<Uuid_Comparison_Exp>;
   type?: InputMaybe<NotificationType_Enum_Comparison_Exp>;
   url?: InputMaybe<String_Comparison_Exp>;
-  user?: InputMaybe<User_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "NotificationMessage" */
@@ -1113,11 +1116,12 @@ export type NotificationMessage_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   notificationType?: InputMaybe<NotificationType_Obj_Rel_Insert_Input>;
   read?: InputMaybe<Scalars['Boolean']>;
-  recipient?: InputMaybe<Scalars['uuid']>;
-  triggeredBy?: InputMaybe<Scalars['uuid']>;
+  recipient?: InputMaybe<User_Obj_Rel_Insert_Input>;
+  recipientId?: InputMaybe<Scalars['uuid']>;
+  triggeredBy?: InputMaybe<User_Obj_Rel_Insert_Input>;
+  triggeredById?: InputMaybe<Scalars['uuid']>;
   type?: InputMaybe<NotificationType_Enum>;
   url?: InputMaybe<Scalars['String']>;
-  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -1126,8 +1130,8 @@ export type NotificationMessage_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  recipient?: Maybe<Scalars['uuid']>;
-  triggeredBy?: Maybe<Scalars['uuid']>;
+  recipientId?: Maybe<Scalars['uuid']>;
+  triggeredById?: Maybe<Scalars['uuid']>;
   url?: Maybe<Scalars['String']>;
 };
 
@@ -1137,8 +1141,8 @@ export type NotificationMessage_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
-  recipient?: Maybe<Scalars['uuid']>;
-  triggeredBy?: Maybe<Scalars['uuid']>;
+  recipientId?: Maybe<Scalars['uuid']>;
+  triggeredById?: Maybe<Scalars['uuid']>;
   url?: Maybe<Scalars['String']>;
 };
 
@@ -1165,11 +1169,12 @@ export type NotificationMessage_Order_By = {
   id?: InputMaybe<Order_By>;
   notificationType?: InputMaybe<NotificationType_Order_By>;
   read?: InputMaybe<Order_By>;
-  recipient?: InputMaybe<Order_By>;
-  triggeredBy?: InputMaybe<Order_By>;
+  recipient?: InputMaybe<User_Order_By>;
+  recipientId?: InputMaybe<Order_By>;
+  triggeredBy?: InputMaybe<User_Order_By>;
+  triggeredById?: InputMaybe<Order_By>;
   type?: InputMaybe<Order_By>;
   url?: InputMaybe<Order_By>;
-  user?: InputMaybe<User_Order_By>;
 };
 
 /** primary key columns input for table: NotificationMessage */
@@ -1188,9 +1193,9 @@ export enum NotificationMessage_Select_Column {
   /** column name */
   Read = 'read',
   /** column name */
-  Recipient = 'recipient',
+  RecipientId = 'recipientId',
   /** column name */
-  TriggeredBy = 'triggeredBy',
+  TriggeredById = 'triggeredById',
   /** column name */
   Type = 'type',
   /** column name */
@@ -1203,8 +1208,8 @@ export type NotificationMessage_Set_Input = {
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   read?: InputMaybe<Scalars['Boolean']>;
-  recipient?: InputMaybe<Scalars['uuid']>;
-  triggeredBy?: InputMaybe<Scalars['uuid']>;
+  recipientId?: InputMaybe<Scalars['uuid']>;
+  triggeredById?: InputMaybe<Scalars['uuid']>;
   type?: InputMaybe<NotificationType_Enum>;
   url?: InputMaybe<Scalars['String']>;
 };
@@ -1220,9 +1225,9 @@ export enum NotificationMessage_Update_Column {
   /** column name */
   Read = 'read',
   /** column name */
-  Recipient = 'recipient',
+  RecipientId = 'recipientId',
   /** column name */
-  TriggeredBy = 'triggeredBy',
+  TriggeredById = 'triggeredById',
   /** column name */
   Type = 'type',
   /** column name */
