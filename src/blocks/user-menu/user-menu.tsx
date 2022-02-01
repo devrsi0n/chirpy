@@ -8,7 +8,6 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
-import { Divider } from '$/components/divider';
 import { Link, LinkProps } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
@@ -36,7 +35,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           </Text>
         </div>
       )}
-      {isSignIn && <Divider />}
+      {isSignIn && <Menu.Divider />}
       {isWidget &&
         (isSignIn ? (
           <></>
@@ -67,7 +66,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             <User size={14} />
             <span>Profile</span>
           </Menu.Item>
-          <Divider />
+          <Menu.Divider />
           <Menu.Item
             css={itemStyle}
             onClick={() => {
@@ -90,4 +89,4 @@ function MenuLink(props: LinkProps): JSX.Element {
   return <Link {...props} css={itemStyle} />;
 }
 
-const itemStyle = tw`flex flex-row justify-start items-center space-x-1`;
+const itemStyle = tw`justify-start space-x-1`;

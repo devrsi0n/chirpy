@@ -12,6 +12,7 @@ import { cardBg, listHoverable } from '$/styles/common';
 import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';
+import { Divider } from '../divider';
 
 export type Shape = 'circle' | 'square';
 
@@ -56,7 +57,7 @@ export function Menu({ content, buttonProps, styles, children }: MenuProps): JSX
                   <HeadlessMenu.Items
                     static
                     css={[
-                      tw`absolute right-0 mt-1 border divide-y rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      tw`absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
                       cardBg,
                       styles?.items,
                     ]}
@@ -100,7 +101,7 @@ export function MenuItem({
         (/* { active }: ItemRenderPropArg */) => (
           <Box
             as={as}
-            css={[listHoverable, itemStyle, !disableAutoDismiss && MenuItemPadding]}
+            css={[listHoverable, itemStyle, spacingItem, !disableAutoDismiss && MenuItemPadding]}
             {...asProps}
           >
             {child}
@@ -114,3 +115,11 @@ export function MenuItem({
 export const MenuItemPadding = tw`px-6 py-2`;
 
 const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
+
+Menu.Divider = MenuDivider;
+
+function MenuDivider(): JSX.Element {
+  return <Divider />;
+}
+
+const spacingItem = tw`mt-1`;

@@ -12,7 +12,7 @@ describe('Header', () => {
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
       .findByRole('menu')
-      .findByRole('link', { name: 'Dashboard' })
+      .findByRole('menuitem', { name: 'Dashboard' })
       .should('be.visible')
       .click();
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
