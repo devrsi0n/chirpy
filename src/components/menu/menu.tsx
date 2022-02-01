@@ -10,7 +10,9 @@ import tw, { TwStyle } from 'twin.macro';
 import { cardBg, listHoverable } from '$/styles/common';
 
 import { easeInOut } from '../animation';
+import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';
+import { Divider } from '../divider';
 
 export type Shape = 'circle' | 'square';
 
@@ -55,7 +57,7 @@ export function Menu({ content, buttonProps, styles, children }: MenuProps): JSX
                   <HeadlessMenu.Items
                     static
                     css={[
-                      tw`absolute right-0 mt-1 border divide-y rounded-md shadow-lg outline-none space-y-1 p-1 z-30`,
+                      tw`absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
                       cardBg,
                       styles?.items,
                     ]}
@@ -76,27 +78,34 @@ Menu.Item = MenuItem;
 
 export type MenuItemProps = React.PropsWithChildren<
   {
-    className?: string;
     disableAutoDismiss?: boolean;
   } & Pick<React.ComponentProps<typeof HeadlessMenu.Item>, 'onClick'>
->;
+> &
+  BoxProps;
 
-export function MenuItem(props: MenuItemProps): JSX.Element {
-  const child = props.disableAutoDismiss ? (
-    <div onClick={(e) => props.disableAutoDismiss && e.stopPropagation()}>{props.children}</div>
+export function MenuItem({
+  as,
+  children,
+  disableAutoDismiss,
+  onClick,
+  ...asProps
+}: MenuItemProps): JSX.Element {
+  const child = disableAutoDismiss ? (
+    <div onClick={(e) => disableAutoDismiss && e.stopPropagation()}>{children}</div>
   ) : (
-    props.children
+    children
   );
   return (
-    <HeadlessMenu.Item onClick={props.onClick}>
+    <HeadlessMenu.Item onClick={onClick}>
       {
         (/* { active }: ItemRenderPropArg */) => (
-          <div
-            css={[listHoverable, itemStyle, !props.disableAutoDismiss && MenuItemPadding]}
-            className={props.className}
+          <Box
+            as={as}
+            css={[listHoverable, itemStyle, spacingItem, !disableAutoDismiss && MenuItemPadding]}
+            {...asProps}
           >
             {child}
-          </div>
+          </Box>
         )
       }
     </HeadlessMenu.Item>
@@ -106,3 +115,11 @@ export function MenuItem(props: MenuItemProps): JSX.Element {
 export const MenuItemPadding = tw`px-6 py-2`;
 
 const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
+
+Menu.Divider = MenuDivider;
+
+function MenuDivider(): JSX.Element {
+  return <Divider />;
+}
+
+const spacingItem = tw`mt-1`;

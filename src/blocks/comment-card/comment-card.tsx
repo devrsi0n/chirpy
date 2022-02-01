@@ -126,7 +126,6 @@ export function CommentCard({
                   as="time"
                   title={createdAt}
                   tw="leading-none cursor-default"
-                  // @ts-ignore
                   dateTime={createdAt}
                 >
                   {dayjs(createdAt).fromNow()}

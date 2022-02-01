@@ -8,8 +8,7 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
-import { Divider } from '$/components/divider';
-import { Link } from '$/components/link';
+import { Link, LinkProps } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
@@ -36,7 +35,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           </Text>
         </div>
       )}
-      {isSignIn && <Divider />}
+      {isSignIn && <Menu.Divider />}
       {isWidget &&
         (isSignIn ? (
           <></>
@@ -46,34 +45,28 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             <p tw="w-max">Sign in</p>
           </Menu.Item>
         ))}
-      <Menu.Item>
-        <Link variant="plain" href={FEEDBACK_LINK} css={itemStyle}>
-          <LifeBuoy size={14} />
-          <span>Feedback</span>
-        </Link>
+      <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
+        <LifeBuoy size={14} />
+        <span>Feedback</span>
       </Menu.Item>
       {isSignIn && (
         <>
           {isNav && (
-            <Menu.Item>
-              <Link variant="plain" href="/dashboard" css={itemStyle}>
-                <Monitor size={14} />
-                <span>Dashboard</span>
-              </Link>
+            <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
+              <Monitor size={14} />
+              <span>Dashboard</span>
             </Menu.Item>
           )}
-          <Menu.Item>
-            <Link
-              variant="plain"
-              href="/profile"
-              css={itemStyle}
-              target={isWidget ? '_blank' : undefined}
-            >
-              <User size={14} />
-              <span>Profile</span>
-            </Link>
+          <Menu.Item
+            as={MenuLink}
+            variant="plain"
+            href="/profile"
+            target={isWidget ? '_blank' : undefined}
+          >
+            <User size={14} />
+            <span>Profile</span>
           </Menu.Item>
-          <Divider />
+          <Menu.Divider />
           <Menu.Item
             css={itemStyle}
             onClick={() => {
@@ -92,4 +85,8 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   );
 }
 
-const itemStyle = tw`flex flex-row justify-start items-center space-x-1`;
+function MenuLink(props: LinkProps): JSX.Element {
+  return <Link {...props} css={itemStyle} />;
+}
+
+const itemStyle = tw`justify-start space-x-1`;
