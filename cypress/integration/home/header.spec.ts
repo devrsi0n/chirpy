@@ -18,7 +18,7 @@ describe('Header', () => {
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     clickUserMenu();
-    cy.get('header').findByRole('link', { name: 'Profile' }).click();
+    cy.get('header').findByRole('menuitem', { name: 'Profile' }).click();
     cy.url().should('include', '/profile');
 
     clickUserMenu();
