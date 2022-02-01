@@ -2,7 +2,7 @@ import { testUser } from '../../fixtures/user';
 import { waitSession } from '../../fixtures/utils';
 
 describe('Header', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
     waitSession();
   });
@@ -24,9 +24,6 @@ describe('Header', () => {
     clickUserMenu();
     cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();
     cy.get('header').findByText(testUser.name).should('not.exist');
-
-    cy.visit('/');
-    cy.wait('@session');
   });
 
   it('should show navigation links', () => {
