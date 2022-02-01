@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { Box, BoxProps } from '../box';
+
 type Size = 'xs' | 'sm' | 'base' | 'lg' | 'xl';
 type Variant = 'primary' | 'secondary';
 
@@ -8,13 +10,13 @@ export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
     variant?: Variant;
     size?: Size;
-    as?: 'p' | 'span' | 'time' | 'u' | 'strong' | 'em' | 'small';
     bold?: boolean;
     italic?: boolean;
     underline?: boolean;
     disabled?: boolean;
   }
->;
+> &
+  BoxProps;
 
 const sizeStyles: Record<Size, TwStyle> = {
   xs: tw`text-xs`,
@@ -49,7 +51,8 @@ export function Text({
   }
 
   return (
-    <Tag
+    <Box
+      as={Tag}
       {...restProps}
       css={[
         tw`leading-normal text-gray-1200`,
@@ -63,6 +66,6 @@ export function Text({
       className={className}
     >
       {children}
-    </Tag>
+    </Box>
   );
 }

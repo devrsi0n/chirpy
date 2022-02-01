@@ -10,6 +10,7 @@ import tw, { TwStyle } from 'twin.macro';
 import { cardBg, listHoverable } from '$/styles/common';
 
 import { easeInOut } from '../animation';
+import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';
 
 export type Shape = 'circle' | 'square';
@@ -76,27 +77,34 @@ Menu.Item = MenuItem;
 
 export type MenuItemProps = React.PropsWithChildren<
   {
-    className?: string;
     disableAutoDismiss?: boolean;
   } & Pick<React.ComponentProps<typeof HeadlessMenu.Item>, 'onClick'>
->;
+> &
+  BoxProps;
 
-export function MenuItem(props: MenuItemProps): JSX.Element {
-  const child = props.disableAutoDismiss ? (
-    <div onClick={(e) => props.disableAutoDismiss && e.stopPropagation()}>{props.children}</div>
+export function MenuItem({
+  as,
+  children,
+  disableAutoDismiss,
+  onClick,
+  ...asProps
+}: MenuItemProps): JSX.Element {
+  const child = disableAutoDismiss ? (
+    <div onClick={(e) => disableAutoDismiss && e.stopPropagation()}>{children}</div>
   ) : (
-    props.children
+    children
   );
   return (
-    <HeadlessMenu.Item onClick={props.onClick}>
+    <HeadlessMenu.Item onClick={onClick}>
       {
         (/* { active }: ItemRenderPropArg */) => (
-          <div
-            css={[listHoverable, itemStyle, !props.disableAutoDismiss && MenuItemPadding]}
-            className={props.className}
+          <Box
+            as={as}
+            css={[listHoverable, itemStyle, !disableAutoDismiss && MenuItemPadding]}
+            {...asProps}
           >
             {child}
-          </div>
+          </Box>
         )
       }
     </HeadlessMenu.Item>
