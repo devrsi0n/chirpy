@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { RichTextEditor } from '..';
+import { default as RichTextEditor } from '../rich-text-editor';
 
 export default {
   title: 'Blocks',
