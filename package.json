@@ -149,7 +149,7 @@
     "jest": "27.4.7",
     "lint-staged": "12.3.3",
     "msw": "0.35.0",
-    "postcss": "8.4.5",
+    "postcss": "8.4.6",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "7.2.3",
     "prettier": "2.5.1",
