@@ -95,12 +95,11 @@ export type Account_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Account" */
-export enum Account_Constraint {
+export type Account_Constraint =
   /** unique or primary key constraint */
-  AccountPkey = 'Account_pkey',
+  | 'Account_pkey'
   /** unique or primary key constraint */
-  AccountProviderAccountIdProviderKey = 'Account_providerAccountId_provider_key'
-}
+  | 'Account_providerAccountId_provider_key';
 
 /** input type for inserting data into table "Account" */
 export type Account_Insert_Input = {
@@ -236,36 +235,35 @@ export type Account_Pk_Columns_Input = {
 };
 
 /** select columns of table "Account" */
-export enum Account_Select_Column {
+export type Account_Select_Column =
   /** column name */
-  AccessToken = 'accessToken',
+  | 'accessToken'
   /** column name */
-  ExpiresAt = 'expiresAt',
+  | 'expiresAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  IdToken = 'idToken',
+  | 'idToken'
   /** column name */
-  OauthToken = 'oauthToken',
+  | 'oauthToken'
   /** column name */
-  OauthTokenSecret = 'oauthTokenSecret',
+  | 'oauthTokenSecret'
   /** column name */
-  Provider = 'provider',
+  | 'provider'
   /** column name */
-  ProviderAccountId = 'providerAccountId',
+  | 'providerAccountId'
   /** column name */
-  RefreshToken = 'refreshToken',
+  | 'refreshToken'
   /** column name */
-  Scope = 'scope',
+  | 'scope'
   /** column name */
-  SessionState = 'sessionState',
+  | 'sessionState'
   /** column name */
-  TokenType = 'tokenType',
+  | 'tokenType'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Account" */
 export type Account_Set_Input = {
@@ -286,36 +284,35 @@ export type Account_Set_Input = {
 };
 
 /** update columns of table "Account" */
-export enum Account_Update_Column {
+export type Account_Update_Column =
   /** column name */
-  AccessToken = 'accessToken',
+  | 'accessToken'
   /** column name */
-  ExpiresAt = 'expiresAt',
+  | 'expiresAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  IdToken = 'idToken',
+  | 'idToken'
   /** column name */
-  OauthToken = 'oauthToken',
+  | 'oauthToken'
   /** column name */
-  OauthTokenSecret = 'oauthTokenSecret',
+  | 'oauthTokenSecret'
   /** column name */
-  Provider = 'provider',
+  | 'provider'
   /** column name */
-  ProviderAccountId = 'providerAccountId',
+  | 'providerAccountId'
   /** column name */
-  RefreshToken = 'refreshToken',
+  | 'refreshToken'
   /** column name */
-  Scope = 'scope',
+  | 'scope'
   /** column name */
-  SessionState = 'sessionState',
+  | 'sessionState'
   /** column name */
-  TokenType = 'tokenType',
+  | 'tokenType'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type Boolean_Comparison_Exp = {
@@ -465,10 +462,9 @@ export type Comment_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Comment" */
-export enum Comment_Constraint {
+export type Comment_Constraint =
   /** unique or primary key constraint */
-  CommentPkey = 'Comment_pkey'
-}
+  | 'Comment_pkey';
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Comment_Delete_At_Path_Input = {
@@ -599,24 +595,23 @@ export type Comment_Prepend_Input = {
 };
 
 /** select columns of table "Comment" */
-export enum Comment_Select_Column {
+export type Comment_Select_Column =
   /** column name */
-  Content = 'content',
+  | 'content'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  DeletedAt = 'deletedAt',
+  | 'deletedAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  PageId = 'pageId',
+  | 'pageId'
   /** column name */
-  ParentId = 'parentId',
+  | 'parentId'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Comment" */
 export type Comment_Set_Input = {
@@ -631,24 +626,23 @@ export type Comment_Set_Input = {
 };
 
 /** update columns of table "Comment" */
-export enum Comment_Update_Column {
+export type Comment_Update_Column =
   /** column name */
-  Content = 'content',
+  | 'content'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  DeletedAt = 'deletedAt',
+  | 'deletedAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  PageId = 'pageId',
+  | 'pageId'
   /** column name */
-  ParentId = 'parentId',
+  | 'parentId'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** columns and relationships of "Like" */
 export type Like = {
@@ -715,12 +709,11 @@ export type Like_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Like" */
-export enum Like_Constraint {
+export type Like_Constraint =
   /** unique or primary key constraint */
-  LikeCommentIdUserIdKey = 'Like_commentId_userId_key',
+  | 'Like_commentId_userId_key'
   /** unique or primary key constraint */
-  LikePkey = 'Like_pkey'
-}
+  | 'Like_pkey';
 
 /** input type for inserting data into table "Like" */
 export type Like_Insert_Input = {
@@ -804,18 +797,17 @@ export type Like_Pk_Columns_Input = {
 };
 
 /** select columns of table "Like" */
-export enum Like_Select_Column {
+export type Like_Select_Column =
   /** column name */
-  CommentId = 'commentId',
+  | 'commentId'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Like" */
 export type Like_Set_Input = {
@@ -827,18 +819,17 @@ export type Like_Set_Input = {
 };
 
 /** update columns of table "Like" */
-export enum Like_Update_Column {
+export type Like_Update_Column =
   /** column name */
-  CommentId = 'commentId',
+  | 'commentId'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** columns and relationships of "Member" */
 export type Member = {
@@ -910,12 +901,11 @@ export type Member_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Member" */
-export enum Member_Constraint {
+export type Member_Constraint =
   /** unique or primary key constraint */
-  MemberPkey = 'Member_pkey',
+  | 'Member_pkey'
   /** unique or primary key constraint */
-  MemberTeamIdUserIdKey = 'Member_teamId_userId_key'
-}
+  | 'Member_teamId_userId_key';
 
 /** input type for inserting data into table "Member" */
 export type Member_Insert_Input = {
@@ -1003,20 +993,19 @@ export type Member_Pk_Columns_Input = {
 };
 
 /** select columns of table "Member" */
-export enum Member_Select_Column {
+export type Member_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Role = 'role',
+  | 'role'
   /** column name */
-  TeamId = 'teamId',
+  | 'teamId'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Member" */
 export type Member_Set_Input = {
@@ -1029,20 +1018,19 @@ export type Member_Set_Input = {
 };
 
 /** update columns of table "Member" */
-export enum Member_Update_Column {
+export type Member_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Role = 'role',
+  | 'role'
   /** column name */
-  TeamId = 'teamId',
+  | 'teamId'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** columns and relationships of "NotificationMessage" */
 export type NotificationMessage = {
@@ -1104,10 +1092,9 @@ export type NotificationMessage_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "NotificationMessage" */
-export enum NotificationMessage_Constraint {
+export type NotificationMessage_Constraint =
   /** unique or primary key constraint */
-  NotificationMessagePkey = 'NotificationMessage_pkey'
-}
+  | 'NotificationMessage_pkey';
 
 /** input type for inserting data into table "NotificationMessage" */
 export type NotificationMessage_Insert_Input = {
@@ -1183,24 +1170,23 @@ export type NotificationMessage_Pk_Columns_Input = {
 };
 
 /** select columns of table "NotificationMessage" */
-export enum NotificationMessage_Select_Column {
+export type NotificationMessage_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  DeletedAt = 'deletedAt',
+  | 'deletedAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Read = 'read',
+  | 'read'
   /** column name */
-  RecipientId = 'recipientId',
+  | 'recipientId'
   /** column name */
-  TriggeredById = 'triggeredById',
+  | 'triggeredById'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  Url = 'url'
-}
+  | 'url';
 
 /** input type for updating data in table "NotificationMessage" */
 export type NotificationMessage_Set_Input = {
@@ -1215,24 +1201,23 @@ export type NotificationMessage_Set_Input = {
 };
 
 /** update columns of table "NotificationMessage" */
-export enum NotificationMessage_Update_Column {
+export type NotificationMessage_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  DeletedAt = 'deletedAt',
+  | 'deletedAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Read = 'read',
+  | 'read'
   /** column name */
-  RecipientId = 'recipientId',
+  | 'recipientId'
   /** column name */
-  TriggeredById = 'triggeredById',
+  | 'triggeredById'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  Url = 'url'
-}
+  | 'url';
 
 /**
  * Registered subscriptions for notification
@@ -1303,10 +1288,11 @@ export type NotificationSubscription_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "NotificationSubscription" */
-export enum NotificationSubscription_Constraint {
+export type NotificationSubscription_Constraint =
   /** unique or primary key constraint */
-  NotificationSubscriptionPkey = 'NotificationSubscription_pkey'
-}
+  | 'NotificationSubscription_pkey'
+  /** unique or primary key constraint */
+  | 'NotificationSubscription_subscription_key';
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type NotificationSubscription_Delete_At_Path_Input = {
@@ -1384,16 +1370,15 @@ export type NotificationSubscription_Prepend_Input = {
 };
 
 /** select columns of table "NotificationSubscription" */
-export enum NotificationSubscription_Select_Column {
+export type NotificationSubscription_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Subscription = 'subscription',
+  | 'subscription'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "NotificationSubscription" */
 export type NotificationSubscription_Set_Input = {
@@ -1404,16 +1389,15 @@ export type NotificationSubscription_Set_Input = {
 };
 
 /** update columns of table "NotificationSubscription" */
-export enum NotificationSubscription_Update_Column {
+export type NotificationSubscription_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Subscription = 'subscription',
+  | 'subscription'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** columns and relationships of "NotificationType" */
 export type NotificationType = {
@@ -1454,21 +1438,19 @@ export type NotificationType_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "NotificationType" */
-export enum NotificationType_Constraint {
+export type NotificationType_Constraint =
   /** unique or primary key constraint */
-  NotificationTypePkey = 'NotificationType_pkey'
-}
+  | 'NotificationType_pkey';
 
-export enum NotificationType_Enum {
+export type NotificationType_Enum =
   /** Comment deleted by moderator */
-  CommentDeleted = 'CommentDeleted',
+  | 'CommentDeleted'
   /** Received a comment */
-  ReceivedAComment = 'ReceivedAComment',
+  | 'ReceivedAComment'
   /** Received a like */
-  ReceivedALike = 'ReceivedALike',
+  | 'ReceivedALike'
   /** Received a reply */
-  ReceivedAReply = 'ReceivedAReply'
-}
+  | 'ReceivedAReply';
 
 /** Boolean expression to compare columns of type "NotificationType_enum". All fields are combined with logical 'AND'. */
 export type NotificationType_Enum_Comparison_Exp = {
@@ -1534,12 +1516,11 @@ export type NotificationType_Pk_Columns_Input = {
 };
 
 /** select columns of table "NotificationType" */
-export enum NotificationType_Select_Column {
+export type NotificationType_Select_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** input type for updating data in table "NotificationType" */
 export type NotificationType_Set_Input = {
@@ -1548,12 +1529,11 @@ export type NotificationType_Set_Input = {
 };
 
 /** update columns of table "NotificationType" */
-export enum NotificationType_Update_Column {
+export type NotificationType_Update_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** columns and relationships of "Page" */
 export type Page = {
@@ -1644,12 +1624,11 @@ export type Page_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Page" */
-export enum Page_Constraint {
+export type Page_Constraint =
   /** unique or primary key constraint */
-  PagePkey = 'Page_pkey',
+  | 'Page_pkey'
   /** unique or primary key constraint */
-  PageUrlKey = 'Page_url_key'
-}
+  | 'Page_url_key';
 
 /** input type for inserting data into table "Page" */
 export type Page_Insert_Input = {
@@ -1746,20 +1725,19 @@ export type Page_Pk_Columns_Input = {
 };
 
 /** select columns of table "Page" */
-export enum Page_Select_Column {
+export type Page_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  ProjectId = 'projectId',
+  | 'projectId'
   /** column name */
-  Title = 'title',
+  | 'title'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  Url = 'url'
-}
+  | 'url';
 
 /** input type for updating data in table "Page" */
 export type Page_Set_Input = {
@@ -1772,20 +1750,19 @@ export type Page_Set_Input = {
 };
 
 /** update columns of table "Page" */
-export enum Page_Update_Column {
+export type Page_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  ProjectId = 'projectId',
+  | 'projectId'
   /** column name */
-  Title = 'title',
+  | 'title'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  Url = 'url'
-}
+  | 'url';
 
 /** columns and relationships of "Project" */
 export type Project = {
@@ -1894,12 +1871,11 @@ export type Project_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Project" */
-export enum Project_Constraint {
+export type Project_Constraint =
   /** unique or primary key constraint */
-  ProjectDomainKey = 'Project_domain_key',
+  | 'Project_domain_key'
   /** unique or primary key constraint */
-  ProjectPkey = 'Project_pkey'
-}
+  | 'Project_pkey';
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Project_Delete_At_Path_Input = {
@@ -2026,24 +2002,23 @@ export type Project_Prepend_Input = {
 };
 
 /** select columns of table "Project" */
-export enum Project_Select_Column {
+export type Project_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Domain = 'domain',
+  | 'domain'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  TeamId = 'teamId',
+  | 'teamId'
   /** column name */
-  Theme = 'theme',
+  | 'theme'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Project" */
 export type Project_Set_Input = {
@@ -2058,24 +2033,23 @@ export type Project_Set_Input = {
 };
 
 /** update columns of table "Project" */
-export enum Project_Update_Column {
+export type Project_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Domain = 'domain',
+  | 'domain'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  TeamId = 'teamId',
+  | 'teamId'
   /** column name */
-  Theme = 'theme',
+  | 'theme'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /**
  * User's role in teams
@@ -2159,17 +2133,15 @@ export type Role_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Role" */
-export enum Role_Constraint {
+export type Role_Constraint =
   /** unique or primary key constraint */
-  RolePkey = 'Role_pkey'
-}
+  | 'Role_pkey';
 
-export enum Role_Enum {
+export type Role_Enum =
   /** Manager of a team */
-  Manager = 'manager',
+  | 'manager'
   /** Normal user */
-  User = 'user'
-}
+  | 'user';
 
 /** Boolean expression to compare columns of type "Role_enum". All fields are combined with logical 'AND'. */
 export type Role_Enum_Comparison_Exp = {
@@ -2237,12 +2209,11 @@ export type Role_Pk_Columns_Input = {
 };
 
 /** select columns of table "Role" */
-export enum Role_Select_Column {
+export type Role_Select_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** input type for updating data in table "Role" */
 export type Role_Set_Input = {
@@ -2251,12 +2222,11 @@ export type Role_Set_Input = {
 };
 
 /** update columns of table "Role" */
-export enum Role_Update_Column {
+export type Role_Update_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** columns and relationships of "Session" */
 export type Session = {
@@ -2322,12 +2292,11 @@ export type Session_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Session" */
-export enum Session_Constraint {
+export type Session_Constraint =
   /** unique or primary key constraint */
-  SessionPkey = 'Session_pkey',
+  | 'Session_pkey'
   /** unique or primary key constraint */
-  SessionSessionTokenKey = 'Session_sessionToken_key'
-}
+  | 'Session_sessionToken_key';
 
 /** input type for inserting data into table "Session" */
 export type Session_Insert_Input = {
@@ -2415,20 +2384,19 @@ export type Session_Pk_Columns_Input = {
 };
 
 /** select columns of table "Session" */
-export enum Session_Select_Column {
+export type Session_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Expires = 'expires',
+  | 'expires'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  SessionToken = 'sessionToken',
+  | 'sessionToken'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** input type for updating data in table "Session" */
 export type Session_Set_Input = {
@@ -2441,20 +2409,19 @@ export type Session_Set_Input = {
 };
 
 /** update columns of table "Session" */
-export enum Session_Update_Column {
+export type Session_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Expires = 'expires',
+  | 'expires'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  SessionToken = 'sessionToken',
+  | 'sessionToken'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  UserId = 'userId'
-}
+  | 'userId';
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
@@ -2584,12 +2551,11 @@ export type Team_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "Team" */
-export enum Team_Constraint {
+export type Team_Constraint =
   /** unique or primary key constraint */
-  TeamPkey = 'Team_pkey',
+  | 'Team_pkey'
   /** unique or primary key constraint */
-  TeamUidKey = 'Team_uid_key'
-}
+  | 'Team_uid_key';
 
 /** input type for inserting data into table "Team" */
 export type Team_Insert_Input = {
@@ -2662,18 +2628,17 @@ export type Team_Pk_Columns_Input = {
 };
 
 /** select columns of table "Team" */
-export enum Team_Select_Column {
+export type Team_Select_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  Uid = 'uid',
+  | 'uid'
   /** column name */
-  UpdatedAt = 'updatedAt'
-}
+  | 'updatedAt';
 
 /** input type for updating data in table "Team" */
 export type Team_Set_Input = {
@@ -2685,18 +2650,17 @@ export type Team_Set_Input = {
 };
 
 /** update columns of table "Team" */
-export enum Team_Update_Column {
+export type Team_Update_Column =
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  Uid = 'uid',
+  | 'uid'
   /** column name */
-  UpdatedAt = 'updatedAt'
-}
+  | 'updatedAt';
 
 /** columns and relationships of "User" */
 export type User = {
@@ -2925,20 +2889,18 @@ export type UserType_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "UserType" */
-export enum UserType_Constraint {
+export type UserType_Constraint =
   /** unique or primary key constraint */
-  UserTypePkey = 'UserType_pkey'
-}
+  | 'UserType_pkey';
 
-export enum UserType_Enum {
+export type UserType_Enum =
   /** Site administrator */
-  Admin = 'admin',
+  | 'admin'
   /** Anonymous widget vsisitor */
-  Anonymous = 'anonymous',
-  Free = 'free',
+  | 'anonymous'
+  | 'free'
   /** Paid user */
-  Pro = 'pro'
-}
+  | 'pro';
 
 /** Boolean expression to compare columns of type "UserType_enum". All fields are combined with logical 'AND'. */
 export type UserType_Enum_Comparison_Exp = {
@@ -3006,12 +2968,11 @@ export type UserType_Pk_Columns_Input = {
 };
 
 /** select columns of table "UserType" */
-export enum UserType_Select_Column {
+export type UserType_Select_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** input type for updating data in table "UserType" */
 export type UserType_Set_Input = {
@@ -3020,12 +2981,11 @@ export type UserType_Set_Input = {
 };
 
 /** update columns of table "UserType" */
-export enum UserType_Update_Column {
+export type UserType_Update_Column =
   /** column name */
-  Comment = 'comment',
+  | 'comment'
   /** column name */
-  Value = 'value'
-}
+  | 'value';
 
 /** aggregated selection of "User" */
 export type User_Aggregate = {
@@ -3090,14 +3050,13 @@ export type User_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "User" */
-export enum User_Constraint {
+export type User_Constraint =
   /** unique or primary key constraint */
-  UserEmailKey = 'User_email_key',
+  | 'User_email_key'
   /** unique or primary key constraint */
-  UserPkey = 'User_pkey',
+  | 'User_pkey'
   /** unique or primary key constraint */
-  UserUsernameKey = 'User_username_key'
-}
+  | 'User_username_key';
 
 /** input type for inserting data into table "User" */
 export type User_Insert_Input = {
@@ -3236,32 +3195,31 @@ export type User_Pk_Columns_Input = {
 };
 
 /** select columns of table "User" */
-export enum User_Select_Column {
+export type User_Select_Column =
   /** column name */
-  Avatar = 'avatar',
+  | 'avatar'
   /** column name */
-  Bio = 'bio',
+  | 'bio'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Email = 'email',
+  | 'email'
   /** column name */
-  EmailVerified = 'emailVerified',
+  | 'emailVerified'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  TwitterUserName = 'twitterUserName',
+  | 'twitterUserName'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  Username = 'username',
+  | 'username'
   /** column name */
-  Website = 'website'
-}
+  | 'website';
 
 /** input type for updating data in table "User" */
 export type User_Set_Input = {
@@ -3280,32 +3238,31 @@ export type User_Set_Input = {
 };
 
 /** update columns of table "User" */
-export enum User_Update_Column {
+export type User_Update_Column =
   /** column name */
-  Avatar = 'avatar',
+  | 'avatar'
   /** column name */
-  Bio = 'bio',
+  | 'bio'
   /** column name */
-  CreatedAt = 'createdAt',
+  | 'createdAt'
   /** column name */
-  Email = 'email',
+  | 'email'
   /** column name */
-  EmailVerified = 'emailVerified',
+  | 'emailVerified'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Name = 'name',
+  | 'name'
   /** column name */
-  TwitterUserName = 'twitterUserName',
+  | 'twitterUserName'
   /** column name */
-  Type = 'type',
+  | 'type'
   /** column name */
-  UpdatedAt = 'updatedAt',
+  | 'updatedAt'
   /** column name */
-  Username = 'username',
+  | 'username'
   /** column name */
-  Website = 'website'
-}
+  | 'website';
 
 /** columns and relationships of "VerificationToken" */
 export type VerificationToken = {
@@ -3350,12 +3307,11 @@ export type VerificationToken_Bool_Exp = {
 };
 
 /** unique or primary key constraints on table "VerificationToken" */
-export enum VerificationToken_Constraint {
+export type VerificationToken_Constraint =
   /** unique or primary key constraint */
-  VerificationTokenIdentifierTokenKey = 'VerificationToken_identifier_token_key',
+  | 'VerificationToken_identifier_token_key'
   /** unique or primary key constraint */
-  VerificationTokenPkey = 'VerificationToken_pkey'
-}
+  | 'VerificationToken_pkey';
 
 /** input type for inserting data into table "VerificationToken" */
 export type VerificationToken_Insert_Input = {
@@ -3413,16 +3369,15 @@ export type VerificationToken_Pk_Columns_Input = {
 };
 
 /** select columns of table "VerificationToken" */
-export enum VerificationToken_Select_Column {
+export type VerificationToken_Select_Column =
   /** column name */
-  Expires = 'expires',
+  | 'expires'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Identifier = 'identifier',
+  | 'identifier'
   /** column name */
-  Token = 'token'
-}
+  | 'token';
 
 /** input type for updating data in table "VerificationToken" */
 export type VerificationToken_Set_Input = {
@@ -3433,16 +3388,15 @@ export type VerificationToken_Set_Input = {
 };
 
 /** update columns of table "VerificationToken" */
-export enum VerificationToken_Update_Column {
+export type VerificationToken_Update_Column =
   /** column name */
-  Expires = 'expires',
+  | 'expires'
   /** column name */
-  Id = 'id',
+  | 'id'
   /** column name */
-  Identifier = 'identifier',
+  | 'identifier'
   /** column name */
-  Token = 'token'
-}
+  | 'token';
 
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
@@ -4283,20 +4237,19 @@ export type Mutation_RootUpdate_VerificationToken_By_PkArgs = {
 };
 
 /** column ordering options */
-export enum Order_By {
+export type Order_By =
   /** in ascending order, nulls last */
-  Asc = 'asc',
+  | 'asc'
   /** in ascending order, nulls first */
-  AscNullsFirst = 'asc_nulls_first',
+  | 'asc_nulls_first'
   /** in ascending order, nulls last */
-  AscNullsLast = 'asc_nulls_last',
+  | 'asc_nulls_last'
   /** in descending order, nulls first */
-  Desc = 'desc',
+  | 'desc'
   /** in descending order, nulls first */
-  DescNullsFirst = 'desc_nulls_first',
+  | 'desc_nulls_first'
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last'
-}
+  | 'desc_nulls_last';
 
 export type Query_Root = {
   __typename?: 'query_root';

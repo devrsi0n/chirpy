@@ -2,12 +2,20 @@ import webpush, { PushSubscription } from 'web-push';
 
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { NotificationSubscriptionsByUserIdDocument } from '$/server/graphql/generated/notification';
+import {
+  NotificationSubscriptionsByUserIdDocument,
+  DeleteNotificationSubscriptionDocument,
+  NotificationSubscriptionsByUserIdQuery,
+} from '$/server/graphql/generated/notification';
 
 export type NotificationPayload = {
   recipientId: string;
   type: NotificationType_Enum;
   triggeredById: string;
+  triggeredBy: {
+    id: string;
+    name: string;
+  };
   url?: string;
 };
 
@@ -29,8 +37,25 @@ export async function sendNotification(payload: NotificationPayload) {
   const { notificationSubscriptions } = data;
   // console.log('sending notification', { data });
   await Promise.allSettled(
-    notificationSubscriptions.map((subs: { subscription: PushSubscription }) =>
-      webpush.sendNotification(subs.subscription, JSON.stringify(payload), WEB_PUSH_OPTIONS),
+    notificationSubscriptions.map(
+      (subs: NotificationSubscriptionsByUserIdQuery['notificationSubscriptions'][number]) =>
+        webpush
+          .sendNotification(subs.subscription, JSON.stringify(payload), WEB_PUSH_OPTIONS)
+          .then((error) => {
+            if (error.statusCode === 410 || error.statusCode === 404) {
+              console.error('Subscription has expired or is no longer valid:', error);
+              return client
+                .mutation<{ deleteNotificationSubscription: boolean }, { id: string }>(
+                  DeleteNotificationSubscriptionDocument,
+                  {
+                    id: subs.id,
+                  },
+                )
+                .toPromise();
+            }
+            console.log('webpush error', error);
+            throw error;
+          }),
     ),
   );
 }

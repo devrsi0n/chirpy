@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { NotificationType_Enum } from '$/graphql/generated/types';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 
 import { SiteOwnerByCommentIdDocument } from '../graphql/generated/comment';
@@ -26,14 +25,21 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
         commentId,
       })
       .toPromise();
-    const ownerId = data?.commentByPk?.page.project.userId;
+    if (!data || !data.commentByPk) {
+      throw new Error('No site owner found');
+    }
+    const ownerId = data.commentByPk.page.project.userId;
     if (!ownerId) {
       throw new Error(`Can't find the owner of the comment (${commentId})`);
     }
     const payload: NotificationPayload = {
       recipientId: ownerId,
-      type: NotificationType_Enum.ReceivedAComment,
+      type: 'ReceivedAComment',
       triggeredById: event.data.new.userId,
+      triggeredBy: {
+        ...data.commentByPk.user,
+        name: data.commentByPk.user.name!,
+      },
       url: data.commentByPk?.page.url,
     };
     await Promise.all([

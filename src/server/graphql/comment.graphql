@@ -12,5 +12,9 @@ query siteOwnerByCommentId($commentId: uuid!) {
         userId
       }
     }
+    user {
+      id
+      name
+    }
   }
 }
