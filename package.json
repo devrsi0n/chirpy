@@ -96,7 +96,7 @@
     "ws": "8.4.2"
   },
   "devDependencies": {
-    "@babel/core": "7.16.12",
+    "@babel/core": "7.17.0",
     "@emotion/babel-plugin": "11.7.2",
     "@emotion/eslint-plugin": "11.7.0",
     "@graphql-codegen/cli": "2.4.0",
