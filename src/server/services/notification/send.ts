@@ -16,7 +16,7 @@ export type NotificationPayload = {
     id: string;
     name: string;
   };
-  url?: string;
+  url: string;
 };
 
 export async function sendNotification(payload: NotificationPayload) {

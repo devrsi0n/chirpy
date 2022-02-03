@@ -40,7 +40,7 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
         ...data.commentByPk.user,
         name: data.commentByPk.user.name!,
       },
-      url: data.commentByPk?.page.url,
+      url: data.commentByPk.page.url,
     };
     await Promise.all([
       client.mutation(InsertOneNotificationMessageDocument, payload).toPromise(),

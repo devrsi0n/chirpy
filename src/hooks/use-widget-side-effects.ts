@@ -36,10 +36,9 @@ function handleMessage(event: MessageEvent): void {
 
 // Close Menu when user clicks on the out side of iframe
 function unexpandedMenu(selectors: string): void {
-  const elements = window.document.querySelectorAll<HTMLDivElement>(selectors);
-  for (const element of elements) {
+  window.document.querySelectorAll<HTMLDivElement>(selectors).forEach((element) => {
     if (element.getAttribute('aria-expanded') === 'true') {
       element.click();
     }
-  }
+  });
 }

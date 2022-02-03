@@ -6,13 +6,9 @@ import { WebSocket, ClientOptions } from 'ws';
 import { getGqlClientOptions } from './gql-client';
 
 class ChirpyWebSocket extends WebSocket {
-  constructor(
-    address: string | URL,
-    protocols?: string | string[] | undefined,
-    options?: ClientOptions | ClientRequestArgs | undefined,
-  ) {
-    super(address, protocols, {
-      ...options,
+  constructor(...args: ConstructorParameters<typeof WebSocket>) {
+    super(args[0], args[1], {
+      ...args[2],
       headers: ADMIN_HEADERS,
     });
   }
