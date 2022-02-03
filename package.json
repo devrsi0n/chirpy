@@ -171,8 +171,18 @@
   },
   "renovate": {
     "extends": [
-      "config:base"
-    ]
+      "config:base",
+      ":rebaseStalePrs"
+    ],
+    "packageRules": [
+      {
+        "matchPackagePatterns": "^@tiptap/",
+        "groupName": [
+          "Tiptap packages"
+        ]
+      }
+    ],
+    "labels": "📦 package"
   },
   "nextBundleAnalysis": {
     "budget": 256000,
