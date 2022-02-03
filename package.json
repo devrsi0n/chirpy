@@ -88,7 +88,9 @@
     "rehype": "12.0.0",
     "super-tiny-icons": "0.4.0",
     "superjson": "1.8.0",
+    "tailwindcss": "2.2.19",
     "type-fest": "2.11.0",
+    "twin.macro": "2.8.2",
     "urql": "2.0.6",
     "wonka": "4.0.15",
     "ws": "8.4.2"
@@ -154,9 +156,7 @@
     "postcss-preset-env": "7.2.3",
     "prettier": "2.5.1",
     "simple-git-hooks": "2.7.0",
-    "tailwindcss": "2.2.19",
     "tsconfig-paths-webpack-plugin": "3.5.2",
-    "twin.macro": "2.8.2",
     "typescript": "4.5.5",
     "vite": "2.7.13",
     "whatwg-fetch": "3.6.2"
@@ -180,6 +180,19 @@
         "groupName": [
           "Tiptap packages"
         ]
+      },
+      {
+        "matchDepTypes": [
+          "devDependencies"
+        ],
+        "prPriority": -1
+      },
+      {
+        "matchPackagePatterns": [
+          "^react",
+          "^next"
+        ],
+        "prPriority": 5
       }
     ],
     "labels": [
