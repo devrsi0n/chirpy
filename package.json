@@ -182,7 +182,9 @@
         ]
       }
     ],
-    "labels": "📦 package"
+    "labels": [
+      "📦 package"
+    ]
   },
   "nextBundleAnalysis": {
     "budget": 256000,
