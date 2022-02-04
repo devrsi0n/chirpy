@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
-import webpush, { PushSubscription } from 'web-push';
+import { PushSubscription } from 'web-push';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 

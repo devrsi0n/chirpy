@@ -29,5 +29,7 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
       HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS512","key":"<your token>"}'
       HASURA_GRAPHQL_EVENT_URL: 'http://host.docker.internal:3000/api/mutation-event'
+      # Custom env
+      HASURA_EVENT_SECRET: myeventsecretkey
 volumes:
   db_data:

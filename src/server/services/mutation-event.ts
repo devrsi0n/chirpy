@@ -1,9 +1,11 @@
+import { Content, JSONContent } from '@tiptap/react';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 
 import { SiteOwnerByCommentIdDocument } from '../graphql/generated/comment';
 import { InsertOneNotificationMessageDocument } from '../graphql/generated/notification-message';
+import { unauthorized } from '../utilities/response';
 import { NotificationPayload, sendNotification } from './notification/send';
 
 const client = getAdminGqlClient();
@@ -12,7 +14,9 @@ const client = getAdminGqlClient();
  * Handle mutation event trigger by hasura. Send notifications and emails to subscribers.
  */
 export async function handleMutationEvent(req: NextApiRequest, res: NextApiResponse<{}>) {
-  // console.log('handleMutationEvent body', JSON.stringify(req.body, null, 2));
+  if (req.headers['hasura_event_secret'] !== process.env.HASURA_EVENT_SECRET) {
+    return unauthorized(res);
+  }
   const payload = req.body as EventPayload;
   const { event, table } = payload;
 
@@ -41,6 +45,7 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
         name: data.commentByPk.user.name!,
       },
       url: data.commentByPk.page.url,
+      body: getTextFromTipTapDoc(event.data.new.content),
     };
     await Promise.all([
       client.mutation(InsertOneNotificationMessageDocument, payload).toPromise(),
@@ -48,6 +53,25 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
     ]);
   }
   res.end();
+}
+
+function getTextFromTipTapDoc(doc: JSONContent): string {
+  let text = '';
+  const stack: JSONContent[] = [doc];
+  while (stack.length > 0) {
+    const node = stack.pop()!;
+    if (node.whiteSpace) {
+      text += ' ';
+    }
+    text += node.text || '';
+    if (node?.content) {
+      node.content[node.content.length - 1].whiteSpace = true;
+      for (let i = node.content.length - 1; i >= 0; i--) {
+        stack.push(node.content[i]);
+      }
+    }
+  }
+  return text.replace(/\s{2,}/g, ' ').trim();
 }
 
 /**
@@ -65,18 +89,45 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
         "createdAt": "2022-01-30T08:30:27.331922+00:00",
         "pageId": "1d6bfbbe-e45b-45ae-983b-d2b7f33666b2",
         "content": {
+          "type": "doc",
           "content": [
             {
+              "type": "paragraph",
               "content": [
                 {
-                  "text": "test",
+                  "text": "asdf",
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ]
+                },
+                {
+                  "text": " asdf therthy",
                   "type": "text"
                 }
-              ],
-              "type": "paragraph"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "text": "ty34 ",
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "underline"
+                    }
+                  ]
+                },
+                {
+                  "text": "srfg",
+                  "type": "text"
+                }
+              ]
             }
-          ],
-          "type": "doc"
+          ]
         },
         "userId": "057eb503-75ad-4d2f-be3a-9d9675734d47",
         "id": "c94f9fb0-bd57-43d0-94a2-b3e666669bf0",

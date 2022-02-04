@@ -11,6 +11,7 @@ declare namespace NodeJS {
     HASH_ALGORITHM: string;
     NEXTAUTH_URL: string;
     HASURA_ADMIN_SECRET: string;
+    HASURA_EVENT_SECRET: string;
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;

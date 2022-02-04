@@ -18,6 +18,7 @@ sw.addEventListener('push', (event: PushEvent) => {
       requireInteraction: isENVDev,
       icon: '/favicon.png',
       data: message,
+      body: `"${message.body}"`,
     }),
   );
 });
@@ -58,8 +59,8 @@ function openOrFocusWindow(url: string): Promise<void | WindowClient | null> {
 }
 
 const titleMap: Record<NotificationType_Enum, string> = {
-  ReceivedAComment: 'You have a comment from ',
-  ReceivedAReply: 'You have a reply from ',
-  ReceivedALike: 'You have a like from ',
+  ReceivedAComment: 'New comment from ',
+  ReceivedAReply: 'New reply from ',
+  ReceivedALike: 'New like from ',
   CommentDeleted: 'Your comment was deleted by ',
 };
