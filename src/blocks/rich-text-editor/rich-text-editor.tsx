@@ -1,3 +1,4 @@
+// @refresh reset
 import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import Link from '@tiptap/extension-link';
@@ -12,6 +13,7 @@ import { Button } from '$/components/button';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useIsUnmounting } from '$/hooks/use-is-unmounting';
 import { useLocalStorage } from '$/hooks/use-local-storage';
+import { useRegisterNotification } from '$/hooks/use-register-notification';
 import { cardBg, textInput } from '$/styles/common';
 
 import { SignInButton } from '../sign-in-button';
@@ -34,7 +36,7 @@ export interface IRichTextEditorProps extends IBaseProps {
   placeholder?: string;
 }
 
-export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
+export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const { onSubmit, readOnly, styles, isReply, onClickDismiss, placeholder, initialValue } = props;
   const [value, setValue, remove] = useLocalStorage(initialValue, 'rte-value');
 
@@ -68,7 +70,9 @@ export default function RichTextEditor(props: IRichTextEditorProps): JSX.Element
 
   const [isLoading, setIsLoading] = React.useState(false);
   const isUnmountingRef = useIsUnmounting();
+  const { registerNotification } = useRegisterNotification();
   const handleSubmitReply = async () => {
+    await registerNotification();
     setIsLoading(true);
     await onSubmit?.(value);
     if (isUnmountingRef.current) {

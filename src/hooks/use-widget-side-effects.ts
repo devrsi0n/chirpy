@@ -2,11 +2,7 @@ import * as React from 'react';
 
 import { EVENT_CLICK_CONTAINER } from '$/lib/constants';
 
-import { useRegisterNotification } from './use-register-notification';
-
 export function useWidgetSideEffects(): void {
-  useRegisterNotification();
-
   React.useEffect(() => {
     broadcastPageHeight();
     const observer = new MutationObserver(broadcastPageHeight);
