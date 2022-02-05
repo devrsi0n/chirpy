@@ -11,7 +11,6 @@ import {
 export type NotificationPayload = {
   recipientId: string;
   type: NotificationType_Enum;
-  triggeredById: string;
   triggeredBy: {
     id: string;
     name: string;

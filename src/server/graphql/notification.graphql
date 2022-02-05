@@ -20,8 +20,8 @@ mutation deleteNotificationSubscriptionByPk($id: uuid!) {
 mutation insertOneNotificationMessage(
   $recipientId: uuid!
   $type: NotificationType_enum!
-  $triggeredById: uuid
-  $url: String
+  $triggeredById: uuid!
+  $url: String!
 ) {
   insertOneNotificationMessage(
     object: { recipientId: $recipientId, triggeredById: $triggeredById, type: $type, url: $url }

@@ -40,15 +40,15 @@ sw.addEventListener('install', (e) =>
 
 // Fix browser refresh button doesn't refresh the service worker
 sw.addEventListener('fetch', (e) => {
-  console.log('fetch', e.request);
+  // console.log('fetch', e.request);
   e.respondWith(
     (async () => {
-      const matchClients = await sw.clients.matchAll();
       if (
         e.request.mode === 'navigate' &&
         e.request.method === 'GET' &&
         sw.registration.waiting &&
-        matchClients.length < 2
+        // eslint-disable-next-line unicorn/no-await-expression-member
+        (await sw.clients.matchAll()).length < 2
       ) {
         sw.registration.waiting.postMessage('skipWaiting');
         return new Response('', { headers: { Refresh: '0' } });

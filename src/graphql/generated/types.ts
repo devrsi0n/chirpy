@@ -1045,10 +1045,10 @@ export type NotificationMessage = {
   recipient: User;
   recipientId: Scalars['uuid'];
   /** An object relationship */
-  triggeredBy?: Maybe<User>;
-  triggeredById?: Maybe<Scalars['uuid']>;
+  triggeredBy: User;
+  triggeredById: Scalars['uuid'];
   type: NotificationType_Enum;
-  url?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
 };
 
 /** aggregated selection of "NotificationMessage" */
@@ -1071,6 +1071,20 @@ export type NotificationMessage_Aggregate_Fields = {
 export type NotificationMessage_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<NotificationMessage_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "NotificationMessage" */
+export type NotificationMessage_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<NotificationMessage_Max_Order_By>;
+  min?: InputMaybe<NotificationMessage_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "NotificationMessage" */
+export type NotificationMessage_Arr_Rel_Insert_Input = {
+  data: Array<NotificationMessage_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "NotificationMessage". All fields are combined with a logical 'AND'. */
@@ -1122,6 +1136,16 @@ export type NotificationMessage_Max_Fields = {
   url?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "NotificationMessage" */
+export type NotificationMessage_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  deletedAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipientId?: InputMaybe<Order_By>;
+  triggeredById?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type NotificationMessage_Min_Fields = {
   __typename?: 'NotificationMessage_min_fields';
@@ -1131,6 +1155,16 @@ export type NotificationMessage_Min_Fields = {
   recipientId?: Maybe<Scalars['uuid']>;
   triggeredById?: Maybe<Scalars['uuid']>;
   url?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "NotificationMessage" */
+export type NotificationMessage_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  deletedAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  recipientId?: InputMaybe<Order_By>;
+  triggeredById?: InputMaybe<Order_By>;
+  url?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "NotificationMessage" */
@@ -1270,9 +1304,23 @@ export type NotificationSubscription_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "NotificationSubscription" */
+export type NotificationSubscription_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<NotificationSubscription_Max_Order_By>;
+  min?: InputMaybe<NotificationSubscription_Min_Order_By>;
+};
+
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type NotificationSubscription_Append_Input = {
   subscription?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "NotificationSubscription" */
+export type NotificationSubscription_Arr_Rel_Insert_Input = {
+  data: Array<NotificationSubscription_Insert_Input>;
+  /** on conflict condition */
+  on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "NotificationSubscription". All fields are combined with a logical 'AND'. */
@@ -1326,12 +1374,26 @@ export type NotificationSubscription_Max_Fields = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "NotificationSubscription" */
+export type NotificationSubscription_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type NotificationSubscription_Min_Fields = {
   __typename?: 'NotificationSubscription_min_fields';
   createdAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "NotificationSubscription" */
+export type NotificationSubscription_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "NotificationSubscription" */
@@ -1403,7 +1465,31 @@ export type NotificationSubscription_Update_Column =
 export type NotificationType = {
   __typename?: 'NotificationType';
   comment: Scalars['String'];
+  /** An array relationship */
+  notificationMessages: Array<NotificationMessage>;
+  /** An aggregate relationship */
+  notificationMessages_aggregate: NotificationMessage_Aggregate;
   value: Scalars['String'];
+};
+
+
+/** columns and relationships of "NotificationType" */
+export type NotificationTypeNotificationMessagesArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+/** columns and relationships of "NotificationType" */
+export type NotificationTypeNotificationMessages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
 
 /** aggregated selection of "NotificationType" */
@@ -1434,6 +1520,7 @@ export type NotificationType_Bool_Exp = {
   _not?: InputMaybe<NotificationType_Bool_Exp>;
   _or?: InputMaybe<Array<NotificationType_Bool_Exp>>;
   comment?: InputMaybe<String_Comparison_Exp>;
+  notificationMessages?: InputMaybe<NotificationMessage_Bool_Exp>;
   value?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1464,6 +1551,7 @@ export type NotificationType_Enum_Comparison_Exp = {
 /** input type for inserting data into table "NotificationType" */
 export type NotificationType_Insert_Input = {
   comment?: InputMaybe<Scalars['String']>;
+  notificationMessages?: InputMaybe<NotificationMessage_Arr_Rel_Insert_Input>;
   value?: InputMaybe<Scalars['String']>;
 };
 
@@ -1507,6 +1595,7 @@ export type NotificationType_On_Conflict = {
 /** Ordering options when selecting data from "NotificationType". */
 export type NotificationType_Order_By = {
   comment?: InputMaybe<Order_By>;
+  notificationMessages_aggregate?: InputMaybe<NotificationMessage_Aggregate_Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
@@ -2688,14 +2777,26 @@ export type User = {
   /** An aggregate relationship */
   members_aggregate: Member_Aggregate;
   name?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  notificationSubscriptions: Array<NotificationSubscription>;
+  /** An aggregate relationship */
+  notificationSubscriptions_aggregate: NotificationSubscription_Aggregate;
   /** fetch data from the table: "Project" */
   projects: Array<Project>;
   /** An aggregate relationship */
   projects_aggregate: Project_Aggregate;
   /** An array relationship */
+  recipientNotificationMessages: Array<NotificationMessage>;
+  /** An aggregate relationship */
+  recipientNotificationMessages_aggregate: NotificationMessage_Aggregate;
+  /** An array relationship */
   sessions: Array<Session>;
   /** An aggregate relationship */
   sessions_aggregate: Session_Aggregate;
+  /** An array relationship */
+  triggeredNotificationMessages: Array<NotificationMessage>;
+  /** An aggregate relationship */
+  triggeredNotificationMessages_aggregate: NotificationMessage_Aggregate;
   twitterUserName?: Maybe<Scalars['String']>;
   type?: Maybe<UserType_Enum>;
   updatedAt: Scalars['timestamptz'];
@@ -2787,6 +2888,26 @@ export type UserMembers_AggregateArgs = {
 
 
 /** columns and relationships of "User" */
+export type UserNotificationSubscriptionsArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
+export type UserNotificationSubscriptions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
+  where?: InputMaybe<NotificationSubscription_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
 export type UserProjectsArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2807,6 +2928,26 @@ export type UserProjects_AggregateArgs = {
 
 
 /** columns and relationships of "User" */
+export type UserRecipientNotificationMessagesArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
+export type UserRecipientNotificationMessages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
 export type UserSessionsArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2823,6 +2964,26 @@ export type UserSessions_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Session_Order_By>>;
   where?: InputMaybe<Session_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
+export type UserTriggeredNotificationMessagesArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
+};
+
+
+/** columns and relationships of "User" */
+export type UserTriggeredNotificationMessages_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
+  where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
 
 /** columns and relationships of "UserType" */
@@ -3039,8 +3200,11 @@ export type User_Bool_Exp = {
   likes?: InputMaybe<Like_Bool_Exp>;
   members?: InputMaybe<Member_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  notificationSubscriptions?: InputMaybe<NotificationSubscription_Bool_Exp>;
   projects?: InputMaybe<Project_Bool_Exp>;
+  recipientNotificationMessages?: InputMaybe<NotificationMessage_Bool_Exp>;
   sessions?: InputMaybe<Session_Bool_Exp>;
+  triggeredNotificationMessages?: InputMaybe<NotificationMessage_Bool_Exp>;
   twitterUserName?: InputMaybe<String_Comparison_Exp>;
   type?: InputMaybe<UserType_Enum_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -3071,8 +3235,11 @@ export type User_Insert_Input = {
   likes?: InputMaybe<Like_Arr_Rel_Insert_Input>;
   members?: InputMaybe<Member_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
+  notificationSubscriptions?: InputMaybe<NotificationSubscription_Arr_Rel_Insert_Input>;
   projects?: InputMaybe<Project_Arr_Rel_Insert_Input>;
+  recipientNotificationMessages?: InputMaybe<NotificationMessage_Arr_Rel_Insert_Input>;
   sessions?: InputMaybe<Session_Arr_Rel_Insert_Input>;
+  triggeredNotificationMessages?: InputMaybe<NotificationMessage_Arr_Rel_Insert_Input>;
   twitterUserName?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<UserType_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -3179,8 +3346,11 @@ export type User_Order_By = {
   likes_aggregate?: InputMaybe<Like_Aggregate_Order_By>;
   members_aggregate?: InputMaybe<Member_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
+  notificationSubscriptions_aggregate?: InputMaybe<NotificationSubscription_Aggregate_Order_By>;
   projects_aggregate?: InputMaybe<Project_Aggregate_Order_By>;
+  recipientNotificationMessages_aggregate?: InputMaybe<NotificationMessage_Aggregate_Order_By>;
   sessions_aggregate?: InputMaybe<Session_Aggregate_Order_By>;
+  triggeredNotificationMessages_aggregate?: InputMaybe<NotificationMessage_Aggregate_Order_By>;
   twitterUserName?: InputMaybe<Order_By>;
   type?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
@@ -4287,7 +4457,7 @@ export type Query_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
-  /** fetch data from the table: "NotificationMessage" */
+  /** An array relationship */
   notificationMessages: Array<NotificationMessage>;
   /** fetch aggregated fields from the table: "NotificationMessage" */
   notificationMessagesAggregate: NotificationMessage_Aggregate;
@@ -4297,7 +4467,7 @@ export type Query_Root = {
   notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
   /** fetch data from the table: "NotificationSubscription" using primary key columns */
   notificationSubscriptionByPk?: Maybe<NotificationSubscription>;
-  /** fetch data from the table: "NotificationSubscription" */
+  /** An array relationship */
   notificationSubscriptions: Array<NotificationSubscription>;
   /** fetch aggregated fields from the table: "Page" */
   pageAggregate: Page_Aggregate;
@@ -4726,7 +4896,7 @@ export type Subscription_Root = {
   memberByPk?: Maybe<Member>;
   /** An array relationship */
   members: Array<Member>;
-  /** fetch data from the table: "NotificationMessage" */
+  /** An array relationship */
   notificationMessages: Array<NotificationMessage>;
   /** fetch aggregated fields from the table: "NotificationMessage" */
   notificationMessagesAggregate: NotificationMessage_Aggregate;
@@ -4736,7 +4906,7 @@ export type Subscription_Root = {
   notificationSubscriptionAggregate: NotificationSubscription_Aggregate;
   /** fetch data from the table: "NotificationSubscription" using primary key columns */
   notificationSubscriptionByPk?: Maybe<NotificationSubscription>;
-  /** fetch data from the table: "NotificationSubscription" */
+  /** An array relationship */
   notificationSubscriptions: Array<NotificationSubscription>;
   /** fetch aggregated fields from the table: "Page" */
   pageAggregate: Page_Aggregate;

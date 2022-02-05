@@ -4,13 +4,29 @@ query comments {
   }
 }
 
+# Find the owner from a triggered comment
 query siteOwnerByCommentId($commentId: uuid!) {
   commentByPk(id: $commentId) {
     page {
+      id
       url
       project {
         userId
       }
+    }
+    user {
+      id
+      name
+    }
+  }
+}
+
+# Find the the author from a comment id
+query authorByCommentId($commentId: uuid!) {
+  commentByPk(id: $commentId) {
+    page {
+      id
+      url
     }
     user {
       id
