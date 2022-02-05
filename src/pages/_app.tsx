@@ -40,8 +40,8 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
             <LazyMotion features={loadFeatures} strict>
               <GQLClientProvider>
                 <CurrentUserProvider>
-                  <NotificationProvider>
-                    <ToastProvider>
+                  <ToastProvider>
+                    <NotificationProvider>
                       {(Component as any).auth ? (
                         <AuthGuard isWidget={isWidget}>
                           <Component {...pageProps} />
@@ -49,8 +49,8 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
                       ) : (
                         <Component {...pageProps} />
                       )}
-                    </ToastProvider>
-                  </NotificationProvider>
+                    </NotificationProvider>
+                  </ToastProvider>
                 </CurrentUserProvider>
               </GQLClientProvider>
             </LazyMotion>

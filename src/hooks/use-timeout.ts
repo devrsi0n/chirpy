@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+/**
+ * @param callback
+ * @param delay Delay time in milliseconds, null for not enabled
+ */
 export function useTimeout(callback: () => void, delay: number | null) {
   const savedCallback = React.useRef(callback);
 

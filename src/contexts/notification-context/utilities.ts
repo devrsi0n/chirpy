@@ -1,9 +1,7 @@
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
 export function registerNotificationSubscription(): Promise<Response> {
-  if (!('serviceWorker' in navigator)) {
-    throw new Error('Service worker not supported');
-  }
+  checkServiceWorkerCompatibility();
   // It's safe to register the service worker multiply times
   return navigator.serviceWorker
     .register('/sw.js')
@@ -37,6 +35,12 @@ export function registerNotificationSubscription(): Promise<Response> {
       console.error('Service worker registration failed', error);
       throw error;
     });
+}
+
+export function checkServiceWorkerCompatibility() {
+  if (!('serviceWorker' in navigator)) {
+    throw new Error('Service worker not supported');
+  }
 }
 
 export function checkNotificationCompatibility() {

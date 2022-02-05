@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { useReloadWhenSwChange } from './use-reload-when-sw-change';
 import {
   askNotificationPermission,
   checkNotificationCompatibility,
@@ -54,6 +55,8 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useReloadWhenSwChange();
 
   return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 }

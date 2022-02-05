@@ -1,20 +1,34 @@
 import * as React from 'react';
 
 export type ToastType = 'success' | 'warning' | 'error' | 'info';
-export type Toast = {
+
+export interface IToastAction {
+  label: string;
+  onClick: () => void;
+}
+
+export interface IToast {
   id: string;
   title: string;
   type?: ToastType;
   description?: string;
-};
-export type ShowToastProps = Omit<Toast, 'id'>;
-export type ToastContextType = {
-  toasts: Toast[];
-  showToast: (props: ShowToastProps) => void;
-  setToasts: React.Dispatch<React.SetStateAction<Toast[]>>;
-};
+  /**
+   * Toast will not be dismissed automatically.
+   * @default false
+   */
+  persistent?: boolean;
+  action?: IToastAction;
+}
 
-export const ToastContext = React.createContext<ToastContextType>({
+export type ShowToastProps = Omit<IToast, 'id'>;
+
+export interface IToastContextType {
+  toasts: IToast[];
+  showToast: (props: ShowToastProps) => void;
+  setToasts: React.Dispatch<React.SetStateAction<IToast[]>>;
+}
+
+export const ToastContext = React.createContext<IToastContextType>({
   toasts: [],
   showToast: () => null,
   setToasts: () => null,
