@@ -49,7 +49,7 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     checkNotificationCompatibility();
     // Register the service worker on first load
     if (!didRegister && Notification.permission === 'granted') {
-      // Only register once in whole page
+      // Only register once on whole page
       registerNotificationSubscription().then(() => setDidRegister(true));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

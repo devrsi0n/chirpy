@@ -11,8 +11,8 @@ query notificationSubscriptionsByUserId($userId: uuid!) {
   }
 }
 
-mutation deleteNotificationSubscription($id: uuid!) {
-  deleteNotificationMessageByPk(id: $id) {
+mutation deleteNotificationSubscriptionByPk($id: uuid!) {
+  deleteNotificationSubscriptionByPk(id: $id) {
     id
   }
 }
