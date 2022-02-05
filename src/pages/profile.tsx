@@ -133,10 +133,8 @@ export default function Profile(): JSX.Element {
                   buttonProps={{ variant: 'text' }}
                   content={
                     <div tw="flex flex-row items-center space-x-2">
-                      <Text tw="w-max text-gray-100">
-                        Your unsaved content will lost, are you sure?
-                      </Text>
-                      <Button variant="solid" size="sm" onClick={handleClickDiscard}>
+                      <Text tw="w-max">Your unsaved content will lost, are you sure?</Text>
+                      <Button size="sm" onClick={handleClickDiscard}>
                         Confirm
                       </Button>
                     </div>

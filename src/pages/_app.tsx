@@ -15,6 +15,7 @@ import { Spinner } from '$/components/spinner';
 import { ToastProvider } from '$/components/toast';
 import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
+import { NotificationProvider } from '$/contexts/notification-context';
 import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
@@ -39,15 +40,17 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
             <LazyMotion features={loadFeatures} strict>
               <GQLClientProvider>
                 <CurrentUserProvider>
-                  <ToastProvider>
-                    {(Component as any).auth ? (
-                      <AuthGuard isWidget={isWidget}>
+                  <NotificationProvider>
+                    <ToastProvider>
+                      {(Component as any).auth ? (
+                        <AuthGuard isWidget={isWidget}>
+                          <Component {...pageProps} />
+                        </AuthGuard>
+                      ) : (
                         <Component {...pageProps} />
-                      </AuthGuard>
-                    ) : (
-                      <Component {...pageProps} />
-                    )}
-                  </ToastProvider>
+                      )}
+                    </ToastProvider>
+                  </NotificationProvider>
                 </CurrentUserProvider>
               </GQLClientProvider>
             </LazyMotion>

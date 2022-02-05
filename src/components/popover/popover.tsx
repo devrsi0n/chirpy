@@ -1,4 +1,4 @@
-import { Popover as HeadLessPopover } from '@headlessui/react';
+import { Popover as HeadlessPopover } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import tw from 'twin.macro';
@@ -40,17 +40,17 @@ export function Popover({
   };
 
   return (
-    <HeadLessPopover tw="relative">
+    <HeadlessPopover tw="relative">
       {({ open }) => (
         <>
-          <HeadLessPopover.Button {...buttonProps} as={buttonAs || Button} ref={buttonRef}>
+          <HeadlessPopover.Button {...buttonProps} as={buttonAs || Button} ref={buttonRef}>
             {children}
-          </HeadLessPopover.Button>
+          </HeadlessPopover.Button>
 
           <AnimatePresence>
             {open && (
               <m.div {...easeInOut}>
-                <HeadLessPopover.Panel
+                <HeadlessPopover.Panel
                   static
                   css={[tw`absolute right-0 z-10 shadow-2xl`, panelBorder]}
                   style={{
@@ -64,8 +64,6 @@ export function Popover({
                     css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder]}
                     onClick={handleClickPanel}
                     onKeyDown={handleClickPanel}
-                    role="button"
-                    tabIndex={0}
                   >
                     {content}
                   </div>
@@ -80,13 +78,13 @@ export function Popover({
                       buttonRef.current?.getBoundingClientRect().width,
                     )}
                   />
-                </HeadLessPopover.Panel>
+                </HeadlessPopover.Panel>
               </m.div>
             )}
           </AnimatePresence>
         </>
       )}
-    </HeadLessPopover>
+    </HeadlessPopover>
   );
 }
 
@@ -133,5 +131,5 @@ const DEFAULT_WIDTH = 40;
 
 type ButtonDimension = { height?: number; width?: number };
 
-const panelBg = tw`bg-gray-1200 align-baseline`;
+const panelBg = tw`bg-gray-100 align-baseline`;
 const panelBorder = tw`rounded-lg`;

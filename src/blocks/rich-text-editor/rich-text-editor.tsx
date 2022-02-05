@@ -1,6 +1,3 @@
-// @refresh reset
-import Loader from '@geist-ui/react-icons/loader';
-import Send from '@geist-ui/react-icons/send';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
@@ -9,14 +6,11 @@ import StarterKit from '@tiptap/starter-kit';
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
-import { Button } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useIsUnmounting } from '$/hooks/use-is-unmounting';
 import { useLocalStorage } from '$/hooks/use-local-storage';
-import { useRegisterNotification } from '$/hooks/use-register-notification';
 import { cardBg, textInput } from '$/styles/common';
 
-import { SignInButton } from '../sign-in-button';
+import { MainButton } from './main-button';
 import { Toolbar } from './toolbar';
 import { RTEValue } from './type';
 
@@ -40,7 +34,6 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const { onSubmit, readOnly, styles, isReply, onClickDismiss, placeholder, initialValue } = props;
   const [value, setValue, remove] = useLocalStorage(initialValue, 'rte-value');
 
-  const { isSignIn } = useCurrentUser();
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -64,15 +57,14 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   });
   React.useEffect(() => {
     if (initialValue) {
-      editor?.commands.setContent(initialValue);
+      editor?.commands?.setContent(initialValue);
     }
   }, [initialValue, editor]);
 
   const [isLoading, setIsLoading] = React.useState(false);
   const isUnmountingRef = useIsUnmounting();
-  const { registerNotification } = useRegisterNotification();
+
   const handleSubmitReply = async () => {
-    await registerNotification();
     setIsLoading(true);
     await onSubmit?.(value);
     if (isUnmountingRef.current) {
@@ -80,7 +72,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
     }
     setIsLoading(false);
     remove();
-    editor?.commands.clearContent();
+    editor?.commands?.clearContent();
   };
 
   return (
@@ -102,28 +94,13 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
       />
       {!readOnly && editor && (
         <Toolbar tw="flex flex-row justify-between" editor={editor}>
-          <div tw="flex flex-row justify-end space-x-2">
-            {isReply && (
-              <Button variant="text" size="sm" onClick={onClickDismiss}>
-                Cancel
-              </Button>
-            )}
-            {isSignIn ? (
-              <Button
-                size="sm"
-                variant="solid"
-                color="primary"
-                disabled={isLoading}
-                onClick={handleSubmitReply}
-                aria-label={isLoading ? 'Posting' : 'Post'}
-              >
-                {isLoading ? <Loader tw="animate-spin w-5 h-5" /> : <Send size="14" />}
-                <span>{'Post'}</span>
-              </Button>
-            ) : (
-              <SignInButton size="sm" />
-            )}
-          </div>
+          <MainButton
+            disabled={editor.isEmpty}
+            isLoading={isLoading}
+            isReply={isReply}
+            onClickSubmit={handleSubmitReply}
+            onClickDismiss={onClickDismiss}
+          />
         </Toolbar>
       )}
     </section>

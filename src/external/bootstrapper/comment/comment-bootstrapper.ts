@@ -18,7 +18,9 @@ export async function comment(): Promise<void> {
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);
   if (!script) {
-    throw new Error(`Can't find the chirpy script`);
+    throw new Error(
+      `Can't find the chirpy domain, did you forget to add ${scriptQuery} to your script?`,
+    );
   }
   const domain = script.dataset['chirpyDomain'];
   if (!domain) {
@@ -27,7 +29,7 @@ export async function comment(): Promise<void> {
 
   const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
-    throw new Error(`Can't find the render target`);
+    throw new Error(`Can't find the render target, did you forget to add ${targetQuery}?`);
   }
   const { origin, pathname } = window.location;
   const res = await fetch(
