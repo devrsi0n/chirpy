@@ -1,13 +1,10 @@
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 
-import {
-  AuthorByCommentIdDocument,
-  SiteOwnerByTriggerCommentIdDocument,
-} from '../../graphql/generated/comment';
+import { SiteOwnerByTriggerCommentIdDocument } from '../../graphql/generated/comment';
 import { InsertOneNotificationMessageDocument } from '../../graphql/generated/notification';
 import { NotificationPayload, sendNotification } from '../notification/send';
 import { EventComment, EventPayload } from './event-type';
-import { getTextFromRteDoc } from './utilities';
+import { getAuthorByCommentId, getTextFromRteDoc } from './utilities';
 
 const client = getAdminGqlClient();
 
@@ -55,15 +52,10 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
     const parentCommentId = event.data.new.parentId;
     if (parentCommentId && parentCommentId !== triggeredById && parentCommentId !== ownerId) {
       // Notify the parent comment author that a reply has been added
-      const { data: parentData } = await client
-        .query(AuthorByCommentIdDocument, {
-          commentId: parentCommentId,
-        })
-        .toPromise();
-      if (parentData?.commentByPk && parentData?.commentByPk?.author.id !== ownerId) {
-        const { author } = parentData.commentByPk;
+      const parentData = await getAuthorByCommentId(parentCommentId);
+      if (parentData.author.id !== ownerId) {
         notificationPayloads.push({
-          recipientId: author.id,
+          recipientId: parentData.author.id,
           type: 'ReceivedAReply',
           triggeredBy,
           url,

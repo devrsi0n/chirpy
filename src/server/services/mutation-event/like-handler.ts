@@ -6,6 +6,7 @@ import {
 } from '$/server/graphql/generated/notification';
 
 import { EventLike, EventPayload } from './event-type';
+import { getAuthorByCommentId } from './utilities';
 
 const client = getAdminGqlClient();
 
@@ -43,17 +44,15 @@ export async function getLikeEventNotifications(eventBody: EventPayload): Promis
       throw new Error(`Can't create the notification message for the like (${like.id})`);
     }
   } else if (event.op === 'DELETE') {
-    // Delete the message
     const likeId = event.data.old.id;
-    // TODO: Find the recipient via user query since the like was deleted
-    const recipientData = await getRecipientByLikeId(likeId);
+    const authorData = await getAuthorByCommentId(event.data.old.commentId);
     const { data: deleteMessageData, error } = await client
       .mutation(DeleteNotificationMessageDocument, {
-        recipientId: recipientData.comment.recipient.id,
-        triggeredById: recipientData.triggeredBy.id,
+        recipientId: authorData.author.id,
+        triggeredById: event.data.old.userId,
         type: 'ReceivedALike',
         contextId: likeId,
-        url: recipientData.comment.page.url,
+        url: authorData.page.url,
       })
       .toPromise();
     if (error) {
@@ -69,7 +68,7 @@ export async function getLikeEventNotifications(eventBody: EventPayload): Promis
 async function getRecipientByLikeId(likeId: string) {
   const { data } = await client
     .query(RecipientByLikeIdDocument, {
-      likeId: likeId,
+      likeId,
     })
     .toPromise();
   if (!data?.likeByPk?.comment) {

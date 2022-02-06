@@ -1,5 +1,8 @@
 import { JSONContent } from '@tiptap/react';
 
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { AuthorByCommentIdDocument } from '$/server/graphql/generated/comment';
+
 export function getTextFromRteDoc(doc: JSONContent): string {
   let text = '';
   const stack: JSONContent[] = [doc];
@@ -17,4 +20,18 @@ export function getTextFromRteDoc(doc: JSONContent): string {
     }
   }
   return text.replace(/\s{2,}/g, ' ').trim();
+}
+
+const client = getAdminGqlClient();
+
+export async function getAuthorByCommentId(commentId: string) {
+  const { data } = await client
+    .query(AuthorByCommentIdDocument, {
+      commentId,
+    })
+    .toPromise();
+  if (!data?.commentByPk) {
+    throw new Error(`Can't find the author of the comment (${commentId})`);
+  }
+  return data.commentByPk;
 }
