@@ -648,13 +648,13 @@ export type Comment_Update_Column =
 export type Like = {
   __typename?: 'Like';
   /** An object relationship */
-  User: User;
-  /** An object relationship */
   comment: Comment;
   commentId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
   updatedAt: Scalars['timestamptz'];
+  /** An object relationship */
+  user: User;
   userId: Scalars['uuid'];
 };
 
@@ -696,7 +696,6 @@ export type Like_Arr_Rel_Insert_Input = {
 
 /** Boolean expression to filter rows from the table "Like". All fields are combined with a logical 'AND'. */
 export type Like_Bool_Exp = {
-  User?: InputMaybe<User_Bool_Exp>;
   _and?: InputMaybe<Array<Like_Bool_Exp>>;
   _not?: InputMaybe<Like_Bool_Exp>;
   _or?: InputMaybe<Array<Like_Bool_Exp>>;
@@ -705,6 +704,7 @@ export type Like_Bool_Exp = {
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -717,12 +717,12 @@ export type Like_Constraint =
 
 /** input type for inserting data into table "Like" */
 export type Like_Insert_Input = {
-  User?: InputMaybe<User_Obj_Rel_Insert_Input>;
   comment?: InputMaybe<Comment_Obj_Rel_Insert_Input>;
   commentId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -782,12 +782,12 @@ export type Like_On_Conflict = {
 
 /** Ordering options when selecting data from "Like". */
 export type Like_Order_By = {
-  User?: InputMaybe<User_Order_By>;
   comment?: InputMaybe<Comment_Order_By>;
   commentId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -1035,8 +1035,10 @@ export type Member_Update_Column =
 /** columns and relationships of "NotificationMessage" */
 export type NotificationMessage = {
   __typename?: 'NotificationMessage';
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
-  deletedAt: Scalars['timestamptz'];
+  deletedAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   /** An object relationship */
   notificationType: NotificationType;
@@ -1092,6 +1094,7 @@ export type NotificationMessage_Bool_Exp = {
   _and?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
   _not?: InputMaybe<NotificationMessage_Bool_Exp>;
   _or?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
+  contextId?: InputMaybe<Uuid_Comparison_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -1108,10 +1111,14 @@ export type NotificationMessage_Bool_Exp = {
 /** unique or primary key constraints on table "NotificationMessage" */
 export type NotificationMessage_Constraint =
   /** unique or primary key constraint */
-  | 'NotificationMessage_pkey';
+  | 'NotificationMessage_pkey'
+  /** unique or primary key constraint */
+  | 'NotificationMessage_type_recipientId_url_triggeredById_contextI';
 
 /** input type for inserting data into table "NotificationMessage" */
 export type NotificationMessage_Insert_Input = {
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1128,6 +1135,8 @@ export type NotificationMessage_Insert_Input = {
 /** aggregate max on columns */
 export type NotificationMessage_Max_Fields = {
   __typename?: 'NotificationMessage_max_fields';
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
@@ -1138,6 +1147,8 @@ export type NotificationMessage_Max_Fields = {
 
 /** order by max() on columns of table "NotificationMessage" */
 export type NotificationMessage_Max_Order_By = {
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1149,6 +1160,8 @@ export type NotificationMessage_Max_Order_By = {
 /** aggregate min on columns */
 export type NotificationMessage_Min_Fields = {
   __typename?: 'NotificationMessage_min_fields';
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
@@ -1159,6 +1172,8 @@ export type NotificationMessage_Min_Fields = {
 
 /** order by min() on columns of table "NotificationMessage" */
 export type NotificationMessage_Min_Order_By = {
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1185,6 +1200,7 @@ export type NotificationMessage_On_Conflict = {
 
 /** Ordering options when selecting data from "NotificationMessage". */
 export type NotificationMessage_Order_By = {
+  contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -1206,6 +1222,8 @@ export type NotificationMessage_Pk_Columns_Input = {
 /** select columns of table "NotificationMessage" */
 export type NotificationMessage_Select_Column =
   /** column name */
+  | 'contextId'
+  /** column name */
   | 'createdAt'
   /** column name */
   | 'deletedAt'
@@ -1224,6 +1242,8 @@ export type NotificationMessage_Select_Column =
 
 /** input type for updating data in table "NotificationMessage" */
 export type NotificationMessage_Set_Input = {
+  /** Triggered entity's id, e.g. CommentId or LikeId */
+  contextId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1236,6 +1256,8 @@ export type NotificationMessage_Set_Input = {
 
 /** update columns of table "NotificationMessage" */
 export type NotificationMessage_Update_Column =
+  /** column name */
+  | 'contextId'
   /** column name */
   | 'createdAt'
   /** column name */

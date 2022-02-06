@@ -5,30 +5,30 @@ query comments {
 }
 
 # Find the owner from a triggered comment
-query siteOwnerByCommentId($commentId: uuid!) {
+query siteOwnerByTriggerCommentId($commentId: uuid!) {
   commentByPk(id: $commentId) {
     page {
       id
       url
       project {
-        userId
+        ownerId: userId
       }
     }
-    user {
+    triggeredBy: user {
       id
       name
     }
   }
 }
 
-# Find the the author from a comment id
+# Find the the author from a parent comment id
 query authorByCommentId($commentId: uuid!) {
   commentByPk(id: $commentId) {
     page {
       id
       url
     }
-    user {
+    author: user {
       id
       name
     }

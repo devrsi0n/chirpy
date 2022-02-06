@@ -4764,22 +4764,6 @@
         "description": "columns and relationships of \"Like\"",
         "fields": [
           {
-            "name": "User",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "comment",
             "description": "An object relationship",
             "args": [],
@@ -4853,6 +4837,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "timestamptz",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
                 "ofType": null
               }
             },
@@ -5113,18 +5113,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "_and",
             "description": null,
             "type": {
@@ -5237,6 +5225,18 @@
             "deprecationReason": null
           },
           {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "userId",
             "description": null,
             "type": {
@@ -5282,18 +5282,6 @@
         "description": "input type for inserting data into table \"Like\"",
         "fields": null,
         "inputFields": [
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_obj_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "comment",
             "description": null,
@@ -5348,6 +5336,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -5776,18 +5776,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "comment",
             "description": null,
             "type": {
@@ -5841,6 +5829,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -7464,6 +7464,22 @@
         "description": "columns and relationships of \"NotificationMessage\"",
         "fields": [
           {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "uuid",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -7484,13 +7500,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -7929,6 +7941,18 @@
             "deprecationReason": null
           },
           {
+            "name": "contextId",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "uuid_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -8078,6 +8102,12 @@
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "NotificationMessage_type_recipientId_url_triggeredById_contextI",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null
@@ -8088,6 +8118,18 @@
         "description": "input type for inserting data into table \"NotificationMessage\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": null,
@@ -8231,6 +8273,18 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -8315,6 +8369,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -8396,6 +8462,18 @@
         "name": "NotificationMessage_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": null,
@@ -8480,6 +8558,18 @@
         "description": "order by min() on columns of table \"NotificationMessage\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": null,
@@ -8678,6 +8768,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "contextId",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -8850,6 +8952,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "contextId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
@@ -8906,6 +9014,18 @@
         "description": "input type for updating data in table \"NotificationMessage\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "contextId",
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "type": {
+              "kind": "SCALAR",
+              "name": "uuid",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": null,
@@ -9015,6 +9135,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "contextId",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "createdAt",
             "description": "column name",

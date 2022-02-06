@@ -21,11 +21,39 @@ mutation insertOneNotificationMessage(
   $recipientId: uuid!
   $type: NotificationType_enum!
   $triggeredById: uuid!
+  $contextId: uuid!
   $url: String!
 ) {
   insertOneNotificationMessage(
-    object: { recipientId: $recipientId, triggeredById: $triggeredById, type: $type, url: $url }
+    object: {
+      recipientId: $recipientId
+      triggeredById: $triggeredById
+      type: $type
+      url: $url
+      contextId: $contextId
+      read: false
+    }
   ) {
     id
+  }
+}
+
+mutation deleteNotificationMessage(
+  $recipientId: uuid!
+  $type: NotificationType_enum!
+  $triggeredById: uuid!
+  $contextId: uuid!
+  $url: String!
+) {
+  deleteNotificationMessages(
+    where: {
+      recipientId: { _eq: $recipientId }
+      triggeredById: { _eq: $triggeredById }
+      type: { _eq: $type }
+      url: { _eq: $url }
+      contextId: { _eq: $contextId }
+    }
+  ) {
+    affected_rows
   }
 }

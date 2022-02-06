@@ -1,3 +1,5 @@
+export type EventPayload = EventLike | EventComment;
+
 /**
  * @example
  * ```
@@ -82,13 +84,60 @@
 }
  * ```
  */
-export type EventPayload = {
+
+export type EventLike = {
   event: {
     session_variables: {
       'x-hasura-role': string;
       'x-hasura-user-id': string;
     };
-    op: 'INSERT';
+
+    trace_context: {
+      trace_id: string;
+      span_id: string;
+    };
+  };
+  created_at: string;
+  id: string;
+  delivery_info: {
+    max_retries: number;
+    current_retry: number;
+  };
+  trigger: {
+    name: 'Like';
+  };
+  table: {
+    schema: 'public';
+    name: 'Like';
+  };
+} & (
+  | {
+      event: {
+        op: 'INSERT';
+        data: {
+          old: null;
+          new: Like;
+        };
+      };
+    }
+  | {
+      event: {
+        op: 'DELETE';
+        data: {
+          old: Like;
+          new: null;
+        };
+      };
+    }
+);
+
+export interface EventComment {
+  event: {
+    session_variables: {
+      'x-hasura-role': string;
+      'x-hasura-user-id': string;
+    };
+    op: 'INSERT' | 'UPDATE';
     data: {
       old: Comment | null;
       new: Comment;
@@ -111,7 +160,7 @@ export type EventPayload = {
     schema: 'public';
     name: 'Comment';
   };
-};
+}
 
 interface Comment {
   createdAt: string;
@@ -131,4 +180,12 @@ interface Comment {
   updatedAt: string;
   deletedAt: string | null;
   parentId: string | null;
+}
+
+interface Like {
+  createdAt: string;
+  userId: string;
+  id: string;
+  updatedAt: string;
+  commentId: string;
 }
