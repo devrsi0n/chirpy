@@ -11,7 +11,7 @@ import { Dialog } from '$/components/dialog';
 import { Spinner } from '$/components/spinner';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-provider/useCurrentUser';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
@@ -34,6 +34,7 @@ export default function Dashboard(): JSX.Element {
       id: id!,
     },
   });
+
   const fetchProjects = React.useCallback(
     (options?: Parameters<typeof fetchUserProjects>[0]) => {
       if (!id) return;
