@@ -4,6 +4,7 @@ import { GlobalStyles } from 'twin.macro';
 
 import { useThemeVariables } from '$/contexts/ThemeProvider/useThemeVariables';
 import { appGlobalStyles } from '$/styles/global-styles';
+import 'tailwindcss/tailwind.css';
 
 export const decorators = [
   (Story) => {

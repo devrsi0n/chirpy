@@ -4,8 +4,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { MDXComponents } from '$/blocks/MDXComponents';
+import { SiteLayout } from '$/blocks/layout';
+import { MDXComponents } from '$/blocks/mdx-components';
 import { APP_NAME } from '$/lib/constants';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 

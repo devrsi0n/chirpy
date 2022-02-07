@@ -12,6 +12,5 @@ public/bootstrap/*.js.map
 public/bootstrap/*.js
 cypress/screenshots/
 cypress/videos/
-cypress-examples/
 
 docker-compose.local.yaml

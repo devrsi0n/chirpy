@@ -3,12 +3,12 @@ import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { Button } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { List } from '$/components/List';
-import { Text } from '$/components/Text/Text';
+import { SiteLayout } from '$/blocks/layout';
+import { Button } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
+import { List } from '$/components/list';
+import { Text } from '$/components/text/text';
 import { APP_NAME } from '$/lib/constants';
 
 export default function Custom404(): JSX.Element {

@@ -3,18 +3,18 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { PageTitle } from '$/blocks/PageTitle';
-import { ProjectCard } from '$/blocks/ProjectCard';
-import { Button } from '$/components/Button';
-import { Dialog } from '$/components/Dialog';
-import { Spinner } from '$/components/Spinner';
-import { Text } from '$/components/Text';
-import { TextField } from '$/components/TextField';
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
+import { SiteLayout } from '$/blocks/layout';
+import { PageTitle } from '$/blocks/page-title';
+import { ProjectCard } from '$/blocks/project-card';
+import { Button } from '$/components/button';
+import { Dialog } from '$/components/dialog';
+import { Spinner } from '$/components/spinner';
+import { Text } from '$/components/text';
+import { TextField } from '$/components/text-field';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
-import { useForm } from '$/hooks/useForm';
+import { useForm } from '$/hooks/use-form';
 import { APP_NAME } from '$/lib/constants';
 import { isENVProd } from '$/server/utilities/env';
 

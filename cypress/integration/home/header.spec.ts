@@ -2,7 +2,7 @@ import { testUser } from '../../fixtures/user';
 import { waitSession } from '../../fixtures/utils';
 
 describe('Header', () => {
-  before(() => {
+  beforeEach(() => {
     cy.visit('/');
     waitSession();
   });
@@ -12,21 +12,18 @@ describe('Header', () => {
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
       .findByRole('menu')
-      .findByRole('link', { name: 'Dashboard' })
+      .findByRole('menuitem', { name: 'Dashboard' })
       .should('be.visible')
       .click();
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     clickUserMenu();
-    cy.get('header').findByRole('link', { name: 'Profile' }).click();
+    cy.get('header').findByRole('menuitem', { name: 'Profile' }).click();
     cy.url().should('include', '/profile');
 
     clickUserMenu();
     cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();
     cy.get('header').findByText(testUser.name).should('not.exist');
-
-    cy.visit('/');
-    cy.wait('@session');
   });
 
   it('should show navigation links', () => {

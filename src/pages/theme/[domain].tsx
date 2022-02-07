@@ -6,15 +6,15 @@ import Head from 'next/head';
 import * as React from 'react';
 import tw from 'twin.macro';
 
-import { CommentTrees } from '$/blocks/CommentTrees';
-import { SiteLayout } from '$/blocks/Layout';
-import { PageTitle } from '$/blocks/PageTitle';
-import { IconButton } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Popover } from '$/components/Popover';
-import { Text } from '$/components/Text';
-import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/ThemeProvider';
-import { translateRadixColor } from '$/contexts/ThemeProvider/utilities';
+import { CommentTrees } from '$/blocks/comment-trees';
+import { SiteLayout } from '$/blocks/layout';
+import { PageTitle } from '$/blocks/page-title';
+import { IconButton } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Popover } from '$/components/popover';
+import { Text } from '$/components/text';
+import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/theme-context';
+import { translateRadixColor } from '$/contexts/theme-context/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
@@ -27,6 +27,8 @@ import { Theme as ThemeType } from '$/types/theme.type';
 
 export type ThemeProps = StaticProps;
 
+const THEME_WIDGET_CLS = 'theme-widget';
+
 export default function ThemePage(props: ThemeProps): JSX.Element {
   return (
     <SiteLayout>
@@ -35,8 +37,10 @@ export default function ThemePage(props: ThemeProps): JSX.Element {
           {props.project?.name} - {APP_NAME} theme editor
         </title>
       </Head>
-      {/* TODO: Extract WidgetThemeProvider to CommentWidgetPreview since it's affect all styles inside ThemeEditor */}
-      <WidgetThemeProvider widgetTheme={props.project?.theme as ThemeType}>
+      <WidgetThemeProvider
+        widgetTheme={props.project?.theme as ThemeType}
+        selector={`.${THEME_WIDGET_CLS}`}
+      >
         <ThemeEditor {...props} />
       </WidgetThemeProvider>
     </SiteLayout>
@@ -164,12 +168,14 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             </Text>
           </div>
           <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
-          <CommentTrees
-            comments={comments as any}
-            onSubmitReply={() => Promise.resolve()}
-            onClickLikeAction={() => Promise.resolve()}
-            rtePlaceholder="Preview"
-          />
+          <div className={THEME_WIDGET_CLS}>
+            <CommentTrees
+              comments={comments as any}
+              onSubmitReply={() => Promise.resolve()}
+              onClickLikeAction={() => Promise.resolve()}
+              rtePlaceholder="Preview"
+            />
+          </div>
         </section>
       </div>
     </section>

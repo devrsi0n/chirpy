@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { Button } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { Text } from '$/components/Text/Text';
+import { SiteLayout } from '$/blocks/layout';
+import { Button } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
+import { Text } from '$/components/text/text';
 import { APP_NAME, FEEDBACK_LINK } from '$/lib/constants';
 
 export default function Custom500(): JSX.Element {

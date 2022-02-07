@@ -7,21 +7,21 @@ import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
-import { SiteLayout } from '$/blocks/Layout';
-import { PageTitle } from '$/blocks/PageTitle';
-import { Avatar } from '$/components/Avatar';
-import { Button } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { Popover } from '$/components/Popover';
-import { Spinner } from '$/components/Spinner';
-import { Text } from '$/components/Text';
-import { TextArea } from '$/components/TextArea';
-import { TextField } from '$/components/TextField';
-import { useToast } from '$/components/Toast';
-import { useCurrentUser } from '$/contexts/CurrentUserProvider/useCurrentUser';
+import { SiteLayout } from '$/blocks/layout';
+import { PageTitle } from '$/blocks/page-title';
+import { Avatar } from '$/components/avatar';
+import { Button } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
+import { Popover } from '$/components/popover';
+import { Spinner } from '$/components/spinner';
+import { Text } from '$/components/text';
+import { TextArea } from '$/components/text-area';
+import { TextField } from '$/components/text-field';
+import { useToast } from '$/components/toast';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
-import { useForm } from '$/hooks/useForm';
+import { useForm } from '$/hooks/use-form';
 import { APP_NAME } from '$/lib/constants';
 
 type FormFields = {

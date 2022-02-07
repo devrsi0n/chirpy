@@ -13,23 +13,23 @@ import tw from 'twin.macro';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentLinkedList } from '$/blocks/CommentLinkedList';
-import { WidgetLayout } from '$/blocks/Layout';
-import { PoweredBy } from '$/blocks/PoweredBy';
-import { UserMenu } from '$/blocks/UserMenu';
-import { IconButton } from '$/components/Button';
-import { Heading } from '$/components/Heading';
-import { Link } from '$/components/Link';
-import { CommentContextProvider } from '$/contexts/CommentContext';
+import { CommentLinkedList } from '$/blocks/comment-linked-list';
+import { WidgetLayout } from '$/blocks/layout';
+import { PoweredBy } from '$/blocks/powered-by';
+import { UserMenu } from '$/blocks/user-menu';
+import { IconButton } from '$/components/button';
+import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
+import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentDetailsDocument,
   CommentDetailsSubscription,
   useCommentDetailsSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { useCreateAComment } from '$/hooks/useCreateAComment';
-import { useToggleALikeAction } from '$/hooks/useToggleALikeAction';
-import { useWidgetSideEffects } from '$/hooks/useWidgetSideEffects';
+import { useCreateAComment } from '$/hooks/use-create-a-comment';
+import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
+import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { APP_NAME } from '$/lib/constants';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
@@ -154,8 +154,9 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         commentId,
         pageURL: themeResult.data.pageByPk.url,
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
+        isWidget: true,
       },
-      revalidate: 1,
+      revalidate: 60,
     };
   } catch (error) {
     console.error(superjson.stringify(error));
