@@ -1,5 +1,34 @@
 export type EventPayload = EventLike | EventComment;
 
+export type EventOP<T extends Like | Comment> =
+  | {
+      event: {
+        op: 'INSERT';
+        data: {
+          old: null;
+          new: T;
+        };
+      };
+    }
+  | {
+      event: {
+        op: 'DELETE';
+        data: {
+          old: T;
+          new: null;
+        };
+      };
+    }
+  | {
+      event: {
+        op: 'UPDATE';
+        data: {
+          old: T;
+          new: T;
+        };
+      };
+    };
+
 /**
  * @example
  * ```
@@ -110,38 +139,15 @@ export type EventLike = {
     schema: 'public';
     name: 'Like';
   };
-} & (
-  | {
-      event: {
-        op: 'INSERT';
-        data: {
-          old: null;
-          new: Like;
-        };
-      };
-    }
-  | {
-      event: {
-        op: 'DELETE';
-        data: {
-          old: Like;
-          new: null;
-        };
-      };
-    }
-);
+} & EventOP<Like>;
 
-export interface EventComment {
+export type EventComment = {
   event: {
     session_variables: {
       'x-hasura-role': string;
       'x-hasura-user-id': string;
     };
-    op: 'INSERT' | 'UPDATE';
-    data: {
-      old: Comment | null;
-      new: Comment;
-    };
+
     trace_context: {
       trace_id: string;
       span_id: string;
@@ -160,7 +166,7 @@ export interface EventComment {
     schema: 'public';
     name: 'Comment';
   };
-}
+} & EventOP<Comment>;
 
 interface Comment {
   createdAt: string;

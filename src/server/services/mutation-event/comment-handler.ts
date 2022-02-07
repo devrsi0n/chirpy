@@ -1,10 +1,12 @@
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { getAuthorByCommentId } from '$/server/gql/comment';
+import { getUserByPk } from '$/server/gql/user';
 
+import { createOneNotificationMessage } from '../../gql/notification';
 import { SiteOwnerByTriggerCommentIdDocument } from '../../graphql/generated/comment';
-import { InsertOneNotificationMessageDocument } from '../../graphql/generated/notification';
 import { NotificationPayload, sendNotification } from '../notification/send';
 import { EventComment, EventPayload } from './event-type';
-import { getAuthorByCommentId, getTextFromRteDoc } from './utilities';
+import { getTextFromRteDoc } from './utilities';
 
 const client = getAdminGqlClient();
 
@@ -16,11 +18,11 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
   if (!isEventComment(eventBody)) {
     return;
   }
+  const notificationPayloads: (NotificationPayload & { contextId: string })[] = [];
   const { event } = eventBody;
   if (event.op === 'INSERT') {
     const commentId = event.data.new.id;
     const body = getTextFromRteDoc(event.data.new.content);
-    const notificationPayloads: NotificationPayload[] = [];
 
     const { data: siteOwnerData } = await client
       .query(SiteOwnerByTriggerCommentIdDocument, {
@@ -46,6 +48,7 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
         triggeredBy,
         url,
         body,
+        contextId: commentId,
       });
     }
 
@@ -60,27 +63,47 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
           triggeredBy,
           url,
           body,
+          contextId: commentId,
         });
       }
     }
-
-    await Promise.allSettled(
-      notificationPayloads.reduce((previous, payload) => {
-        previous.push(
-          client
-            .mutation(InsertOneNotificationMessageDocument, {
-              ...payload,
-              triggeredById,
-              contextId: commentId,
-            })
-            .toPromise(),
-          sendNotification(payload),
-        );
-        return previous;
-      }, [] as Promise<any>[]),
-    );
+  } else if (event.op === 'UPDATE') {
+    const { old: oldComment, new: newComment } = event.data;
+    if (!oldComment.deletedAt && newComment.deletedAt) {
+      // Delete the existing notification
+      const triggeredById = event.session_variables['x-hasura-user-id'];
+      const [authorData, triggeredBy] = await Promise.all([
+        getAuthorByCommentId(newComment.id),
+        getUserByPk(triggeredById),
+      ]);
+      notificationPayloads.push({
+        recipientId: authorData.author.id,
+        triggeredBy: {
+          id: triggeredById,
+          name: triggeredBy.name || '',
+        },
+        type: 'CommentDeleted',
+        url: authorData.page.url,
+        body: getTextFromRteDoc(newComment.content),
+        contextId: newComment.id,
+      });
+    }
   }
-  // TODO: Delete the notification message if the comment deleted
+  await Promise.allSettled(
+    notificationPayloads.reduce((previous, { contextId, ...payload }) => {
+      previous.push(
+        createOneNotificationMessage({
+          recipientId: payload.recipientId,
+          type: payload.type,
+          url: payload.url,
+          triggeredById: payload.triggeredBy.id,
+          contextId: contextId,
+        }),
+        sendNotification(payload),
+      );
+      return previous;
+    }, [] as Promise<any>[]),
+  );
   return;
 }
 

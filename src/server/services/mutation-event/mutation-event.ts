@@ -15,9 +15,9 @@ export async function handleMutationEvent(req: NextApiRequest, res: NextApiRespo
 
   const eventBody = req.body as EventPayload;
 
-  // await Promise.allSettled([
-  await getCommentEventNotifications(eventBody),
-    await getLikeEventNotifications(eventBody),
-    // ]);
-    res.end();
+  await Promise.allSettled([
+    getCommentEventNotifications(eventBody),
+    getLikeEventNotifications(eventBody),
+  ]);
+  res.end();
 }
