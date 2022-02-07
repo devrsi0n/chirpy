@@ -12,6 +12,11 @@ export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;
 };
 
+const handleSessionAndSignIn = () => {
+  sessionStorage.setItem('prevPath', location.pathname);
+  signIn();
+};
+
 export function SignInButton({
   variant = 'solid',
   inPageNav,
@@ -23,7 +28,7 @@ export function SignInButton({
     <Button
       color="primary"
       variant={variant}
-      onClick={() => (!inPageNav ? handleSignIn() : signIn())}
+      onClick={() => (!inPageNav ? handleSignIn() : handleSessionAndSignIn())}
       {...restProps}
     >
       <span tw="inline-flex flex-row items-center space-x-1">

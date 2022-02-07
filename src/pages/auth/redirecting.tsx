@@ -28,7 +28,8 @@ export default function Redirecting(): JSX.Element {
     } else if (!hasValidUserProfile(data)) {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
-      router.push('/dashboard');
+      const prevPath = sessionStorage.getItem('prevPath');
+      router.push(prevPath || '/dashboard');
     }
   }, [router, session?.isNewUser, data, status, loading]);
   useTimeout(() => {
