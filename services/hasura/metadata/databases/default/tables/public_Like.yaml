@@ -14,12 +14,12 @@ configuration:
     update: updateLikes
     update_by_pk: updateLikeByPk
 object_relationships:
-- name: User
-  using:
-    foreign_key_constraint_on: userId
 - name: comment
   using:
     foreign_key_constraint_on: commentId
+- name: user
+  using:
+    foreign_key_constraint_on: userId
 insert_permissions:
 - permission:
     backend_only: false
@@ -45,3 +45,19 @@ delete_permissions:
       userId:
         _eq: X-Hasura-User-Id
   role: user
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: false
+    insert:
+      columns: "*"
+  headers:
+  - name: HASURA_EVENT_SECRET
+    value_from_env: HASURA_EVENT_SECRET
+  name: Like
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook_from_env: HASURA_GRAPHQL_EVENT_URL

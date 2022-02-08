@@ -25,12 +25,12 @@ export async function createOneNotificationMessage(
 export async function deleteNotificationMessage(
   variables: DeleteNotificationMessageMutationVariables,
 ) {
-  const { data: deleteMessageData, error } = await client
-    .mutation(DeleteNotificationMessageDocument, variables)
-    .toPromise();
-  if (error || !deleteMessageData?.deleteNotificationMessages?.affected_rows) {
+  const result = await client.mutation(DeleteNotificationMessageDocument, variables).toPromise();
+  const { data, error } = result;
+  if (error || !data?.deleteNotificationMessages?.affected_rows) {
     throw new Error(
       `Can't delete the notification message for the contextId (${variables.contextId}), error: ${error}`,
     );
   }
+  return data.deleteNotificationMessages;
 }

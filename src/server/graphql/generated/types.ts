@@ -1101,9 +1101,9 @@ export type NotificationMessage_Bool_Exp = {
 /** unique or primary key constraints on table "NotificationMessage" */
 export type NotificationMessage_Constraint =
   /** unique or primary key constraint */
-  | 'NotificationMessage_pkey'
+  | 'NotificationMessage_contextId_type_recipientId_triggeredById_ke'
   /** unique or primary key constraint */
-  | 'NotificationMessage_type_recipientId_url_triggeredById_contextI';
+  | 'NotificationMessage_pkey';
 
 /** input type for inserting data into table "NotificationMessage" */
 export type NotificationMessage_Insert_Input = {

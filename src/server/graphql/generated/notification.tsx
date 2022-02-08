@@ -61,7 +61,6 @@ export type DeleteNotificationMessageMutationVariables = Types.Exact<{
   type: Types.NotificationType_Enum;
   triggeredById: Types.Scalars['uuid'];
   contextId: Types.Scalars['uuid'];
-  url: Types.Scalars['String'];
 }>;
 
 export type DeleteNotificationMessageMutation = {
@@ -393,14 +392,6 @@ export const DeleteNotificationMessageDocument = {
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
           },
         },
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          },
-        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -459,20 +450,6 @@ export const DeleteNotificationMessageDocument = {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
                             value: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'url' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
                           },
                         ],
                       },

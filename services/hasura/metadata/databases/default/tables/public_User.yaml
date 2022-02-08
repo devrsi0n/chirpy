@@ -47,6 +47,13 @@ array_relationships:
       table:
         name: Member
         schema: public
+- name: notificationSubscriptions
+  using:
+    foreign_key_constraint_on:
+      column: userId
+      table:
+        name: NotificationSubscription
+        schema: public
 - name: projects
   using:
     foreign_key_constraint_on:
@@ -54,12 +61,26 @@ array_relationships:
       table:
         name: Project
         schema: public
+- name: recipientNotificationMessages
+  using:
+    foreign_key_constraint_on:
+      column: recipientId
+      table:
+        name: NotificationMessage
+        schema: public
 - name: sessions
   using:
     foreign_key_constraint_on:
       column: userId
       table:
         name: Session
+        schema: public
+- name: triggeredNotificationMessages
+  using:
+    foreign_key_constraint_on:
+      column: triggeredById
+      table:
+        name: NotificationMessage
         schema: public
 select_permissions:
 - permission:
@@ -92,6 +113,4 @@ update_permissions:
     filter:
       id:
         _eq: X-Hasura-User-Id
-    set:
-      id: x-hasura-User-Id
   role: user

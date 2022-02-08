@@ -8098,13 +8098,13 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "NotificationMessage_pkey",
+            "name": "NotificationMessage_contextId_type_recipientId_triggeredById_ke",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "NotificationMessage_type_recipientId_url_triggeredById_contextI",
+            "name": "NotificationMessage_pkey",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
