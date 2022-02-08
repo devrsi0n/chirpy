@@ -33,6 +33,9 @@
     "*.{json,md,scss,css}": [
       "prettier --write"
     ],
+    "**/generated/**/*.{ts,tsx}": [
+      "prettier --write"
+    ],
     "*.graphql": [
       "prettier --write",
       "npm run g:gql"

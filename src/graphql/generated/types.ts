@@ -51,7 +51,6 @@ export type Account_Aggregate_Fields = {
   min?: Maybe<Account_Min_Fields>;
 };
 
-
 /** aggregate fields of "Account" */
 export type Account_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Account_Select_Column>>;
@@ -354,12 +353,10 @@ export type Comment = {
   userId: Scalars['uuid'];
 };
 
-
 /** columns and relationships of "Comment" */
 export type CommentContentArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
-
 
 /** columns and relationships of "Comment" */
 export type CommentLikesArgs = {
@@ -370,7 +367,6 @@ export type CommentLikesArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 /** columns and relationships of "Comment" */
 export type CommentLikes_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
@@ -380,7 +376,6 @@ export type CommentLikes_AggregateArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 /** columns and relationships of "Comment" */
 export type CommentRepliesArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
@@ -389,7 +384,6 @@ export type CommentRepliesArgs = {
   order_by?: InputMaybe<Array<Comment_Order_By>>;
   where?: InputMaybe<Comment_Bool_Exp>;
 };
-
 
 /** columns and relationships of "Comment" */
 export type CommentReplies_AggregateArgs = {
@@ -414,7 +408,6 @@ export type Comment_Aggregate_Fields = {
   max?: Maybe<Comment_Max_Fields>;
   min?: Maybe<Comment_Min_Fields>;
 };
-
 
 /** aggregate fields of "Comment" */
 export type Comment_Aggregate_FieldsCountArgs = {
@@ -464,7 +457,7 @@ export type Comment_Bool_Exp = {
 /** unique or primary key constraints on table "Comment" */
 export type Comment_Constraint =
   /** unique or primary key constraint */
-  | 'Comment_pkey';
+  'Comment_pkey';
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Comment_Delete_At_Path_Input = {
@@ -673,7 +666,6 @@ export type Like_Aggregate_Fields = {
   min?: Maybe<Like_Min_Fields>;
 };
 
-
 /** aggregate fields of "Like" */
 export type Like_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Like_Select_Column>>;
@@ -862,7 +854,6 @@ export type Member_Aggregate_Fields = {
   max?: Maybe<Member_Max_Fields>;
   min?: Maybe<Member_Min_Fields>;
 };
-
 
 /** aggregate fields of "Member" */
 export type Member_Aggregate_FieldsCountArgs = {
@@ -1067,7 +1058,6 @@ export type NotificationMessage_Aggregate_Fields = {
   max?: Maybe<NotificationMessage_Max_Fields>;
   min?: Maybe<NotificationMessage_Min_Fields>;
 };
-
 
 /** aggregate fields of "NotificationMessage" */
 export type NotificationMessage_Aggregate_FieldsCountArgs = {
@@ -1292,7 +1282,6 @@ export type NotificationSubscription = {
   userId: Scalars['uuid'];
 };
 
-
 /**
  * Registered subscriptions for notification
  *
@@ -1318,7 +1307,6 @@ export type NotificationSubscription_Aggregate_Fields = {
   max?: Maybe<NotificationSubscription_Max_Fields>;
   min?: Maybe<NotificationSubscription_Min_Fields>;
 };
-
 
 /** aggregate fields of "NotificationSubscription" */
 export type NotificationSubscription_Aggregate_FieldsCountArgs = {
@@ -1494,7 +1482,6 @@ export type NotificationType = {
   value: Scalars['String'];
 };
 
-
 /** columns and relationships of "NotificationType" */
 export type NotificationTypeNotificationMessagesArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
@@ -1503,7 +1490,6 @@ export type NotificationTypeNotificationMessagesArgs = {
   order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
-
 
 /** columns and relationships of "NotificationType" */
 export type NotificationTypeNotificationMessages_AggregateArgs = {
@@ -1529,7 +1515,6 @@ export type NotificationType_Aggregate_Fields = {
   min?: Maybe<NotificationType_Min_Fields>;
 };
 
-
 /** aggregate fields of "NotificationType" */
 export type NotificationType_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<NotificationType_Select_Column>>;
@@ -1549,7 +1534,7 @@ export type NotificationType_Bool_Exp = {
 /** unique or primary key constraints on table "NotificationType" */
 export type NotificationType_Constraint =
   /** unique or primary key constraint */
-  | 'NotificationType_pkey';
+  'NotificationType_pkey';
 
 export type NotificationType_Enum =
   /** Comment deleted by moderator */
@@ -1663,7 +1648,6 @@ export type Page = {
   url: Scalars['String'];
 };
 
-
 /** columns and relationships of "Page" */
 export type PageCommentsArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
@@ -1672,7 +1656,6 @@ export type PageCommentsArgs = {
   order_by?: InputMaybe<Array<Comment_Order_By>>;
   where?: InputMaybe<Comment_Bool_Exp>;
 };
-
 
 /** columns and relationships of "Page" */
 export type PageComments_AggregateArgs = {
@@ -1697,7 +1680,6 @@ export type Page_Aggregate_Fields = {
   max?: Maybe<Page_Max_Fields>;
   min?: Maybe<Page_Min_Fields>;
 };
-
 
 /** aggregate fields of "Page" */
 export type Page_Aggregate_FieldsCountArgs = {
@@ -1896,7 +1878,6 @@ export type Project = {
   userId?: Maybe<Scalars['uuid']>;
 };
 
-
 /** columns and relationships of "Project" */
 export type ProjectPagesArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
@@ -1906,7 +1887,6 @@ export type ProjectPagesArgs = {
   where?: InputMaybe<Page_Bool_Exp>;
 };
 
-
 /** columns and relationships of "Project" */
 export type ProjectPages_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
@@ -1915,7 +1895,6 @@ export type ProjectPages_AggregateArgs = {
   order_by?: InputMaybe<Array<Page_Order_By>>;
   where?: InputMaybe<Page_Bool_Exp>;
 };
-
 
 /** columns and relationships of "Project" */
 export type ProjectThemeArgs = {
@@ -1936,7 +1915,6 @@ export type Project_Aggregate_Fields = {
   max?: Maybe<Project_Max_Fields>;
   min?: Maybe<Project_Min_Fields>;
 };
-
 
 /** aggregate fields of "Project" */
 export type Project_Aggregate_FieldsCountArgs = {
@@ -2179,7 +2157,6 @@ export type Role = {
   value: Scalars['String'];
 };
 
-
 /**
  * User's role in teams
  *
@@ -2194,7 +2171,6 @@ export type RoleMembersArgs = {
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
-
 
 /**
  * User's role in teams
@@ -2226,7 +2202,6 @@ export type Role_Aggregate_Fields = {
   min?: Maybe<Role_Min_Fields>;
 };
 
-
 /** aggregate fields of "Role" */
 export type Role_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Role_Select_Column>>;
@@ -2246,7 +2221,7 @@ export type Role_Bool_Exp = {
 /** unique or primary key constraints on table "Role" */
 export type Role_Constraint =
   /** unique or primary key constraint */
-  | 'Role_pkey';
+  'Role_pkey';
 
 export type Role_Enum =
   /** Manager of a team */
@@ -2366,7 +2341,6 @@ export type Session_Aggregate_Fields = {
   max?: Maybe<Session_Max_Fields>;
   min?: Maybe<Session_Min_Fields>;
 };
-
 
 /** aggregate fields of "Session" */
 export type Session_Aggregate_FieldsCountArgs = {
@@ -2585,7 +2559,6 @@ export type Team = {
   updatedAt: Scalars['timestamptz'];
 };
 
-
 /** columns and relationships of "Team" */
 export type TeamMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -2594,7 +2567,6 @@ export type TeamMembersArgs = {
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
-
 
 /** columns and relationships of "Team" */
 export type TeamMembers_AggregateArgs = {
@@ -2605,7 +2577,6 @@ export type TeamMembers_AggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 /** columns and relationships of "Team" */
 export type TeamProjectsArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
@@ -2614,7 +2585,6 @@ export type TeamProjectsArgs = {
   order_by?: InputMaybe<Array<Project_Order_By>>;
   where?: InputMaybe<Project_Bool_Exp>;
 };
-
 
 /** columns and relationships of "Team" */
 export type TeamProjects_AggregateArgs = {
@@ -2639,7 +2609,6 @@ export type Team_Aggregate_Fields = {
   max?: Maybe<Team_Max_Fields>;
   min?: Maybe<Team_Min_Fields>;
 };
-
 
 /** aggregate fields of "Team" */
 export type Team_Aggregate_FieldsCountArgs = {
@@ -2828,7 +2797,6 @@ export type User = {
   website?: Maybe<Scalars['String']>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserAccountsArgs = {
   distinct_on?: InputMaybe<Array<Account_Select_Column>>;
@@ -2837,7 +2805,6 @@ export type UserAccountsArgs = {
   order_by?: InputMaybe<Array<Account_Order_By>>;
   where?: InputMaybe<Account_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserAccounts_AggregateArgs = {
@@ -2848,7 +2815,6 @@ export type UserAccounts_AggregateArgs = {
   where?: InputMaybe<Account_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserCommentsArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
@@ -2857,7 +2823,6 @@ export type UserCommentsArgs = {
   order_by?: InputMaybe<Array<Comment_Order_By>>;
   where?: InputMaybe<Comment_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserComments_AggregateArgs = {
@@ -2868,7 +2833,6 @@ export type UserComments_AggregateArgs = {
   where?: InputMaybe<Comment_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserLikesArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
@@ -2877,7 +2841,6 @@ export type UserLikesArgs = {
   order_by?: InputMaybe<Array<Like_Order_By>>;
   where?: InputMaybe<Like_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserLikes_AggregateArgs = {
@@ -2888,7 +2851,6 @@ export type UserLikes_AggregateArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -2897,7 +2859,6 @@ export type UserMembersArgs = {
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserMembers_AggregateArgs = {
@@ -2908,7 +2869,6 @@ export type UserMembers_AggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserNotificationSubscriptionsArgs = {
   distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
@@ -2917,7 +2877,6 @@ export type UserNotificationSubscriptionsArgs = {
   order_by?: InputMaybe<Array<NotificationSubscription_Order_By>>;
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserNotificationSubscriptions_AggregateArgs = {
@@ -2928,7 +2887,6 @@ export type UserNotificationSubscriptions_AggregateArgs = {
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserProjectsArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
@@ -2937,7 +2895,6 @@ export type UserProjectsArgs = {
   order_by?: InputMaybe<Array<Project_Order_By>>;
   where?: InputMaybe<Project_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserProjects_AggregateArgs = {
@@ -2948,7 +2905,6 @@ export type UserProjects_AggregateArgs = {
   where?: InputMaybe<Project_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserRecipientNotificationMessagesArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
@@ -2957,7 +2913,6 @@ export type UserRecipientNotificationMessagesArgs = {
   order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserRecipientNotificationMessages_AggregateArgs = {
@@ -2968,7 +2923,6 @@ export type UserRecipientNotificationMessages_AggregateArgs = {
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserSessionsArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
@@ -2977,7 +2931,6 @@ export type UserSessionsArgs = {
   order_by?: InputMaybe<Array<Session_Order_By>>;
   where?: InputMaybe<Session_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserSessions_AggregateArgs = {
@@ -2988,7 +2941,6 @@ export type UserSessions_AggregateArgs = {
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
-
 /** columns and relationships of "User" */
 export type UserTriggeredNotificationMessagesArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
@@ -2997,7 +2949,6 @@ export type UserTriggeredNotificationMessagesArgs = {
   order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
-
 
 /** columns and relationships of "User" */
 export type UserTriggeredNotificationMessages_AggregateArgs = {
@@ -3019,7 +2970,6 @@ export type UserType = {
   value: Scalars['String'];
 };
 
-
 /** columns and relationships of "UserType" */
 export type UserTypeUsersArgs = {
   distinct_on?: InputMaybe<Array<User_Select_Column>>;
@@ -3028,7 +2978,6 @@ export type UserTypeUsersArgs = {
   order_by?: InputMaybe<Array<User_Order_By>>;
   where?: InputMaybe<User_Bool_Exp>;
 };
-
 
 /** columns and relationships of "UserType" */
 export type UserTypeUsers_AggregateArgs = {
@@ -3054,7 +3003,6 @@ export type UserType_Aggregate_Fields = {
   min?: Maybe<UserType_Min_Fields>;
 };
 
-
 /** aggregate fields of "UserType" */
 export type UserType_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<UserType_Select_Column>>;
@@ -3074,7 +3022,7 @@ export type UserType_Bool_Exp = {
 /** unique or primary key constraints on table "UserType" */
 export type UserType_Constraint =
   /** unique or primary key constraint */
-  | 'UserType_pkey';
+  'UserType_pkey';
 
 export type UserType_Enum =
   /** Site administrator */
@@ -3184,7 +3132,6 @@ export type User_Aggregate_Fields = {
   max?: Maybe<User_Max_Fields>;
   min?: Maybe<User_Min_Fields>;
 };
-
 
 /** aggregate fields of "User" */
 export type User_Aggregate_FieldsCountArgs = {
@@ -3479,7 +3426,6 @@ export type VerificationToken_Aggregate_Fields = {
   max?: Maybe<VerificationToken_Max_Fields>;
   min?: Maybe<VerificationToken_Min_Fields>;
 };
-
 
 /** aggregate fields of "VerificationToken" */
 export type VerificationToken_Aggregate_FieldsCountArgs = {
@@ -3798,186 +3744,155 @@ export type Mutation_Root = {
   update_VerificationToken_by_pk?: Maybe<VerificationToken>;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteAccountByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteAccountsArgs = {
   where: Account_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteCommentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteCommentsArgs = {
   where: Comment_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteLikeByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteLikesArgs = {
   where: Like_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteMemberByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteMembersArgs = {
   where: Member_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteNotificationMessageByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteNotificationMessagesArgs = {
   where: NotificationMessage_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteNotificationSubscriptionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteNotificationSubscriptionsArgs = {
   where: NotificationSubscription_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeletePageByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeletePagesArgs = {
   where: Page_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteProjectByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteProjectsArgs = {
   where: Project_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteRoleByPkArgs = {
   value: Scalars['String'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteRolesArgs = {
   where: Role_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteSessionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteSessionsArgs = {
   where: Session_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteTeamByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteTeamsArgs = {
   where: Team_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteUserByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteUserTypeByPkArgs = {
   value: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDeleteUserTypesArgs = {
   where: UserType_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDeleteUsersArgs = {
   where: User_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_NotificationTypeArgs = {
   where: NotificationType_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootDelete_NotificationType_By_PkArgs = {
   value: Scalars['String'];
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_VerificationTokenArgs = {
   where: VerificationToken_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootDelete_VerificationToken_By_PkArgs = {
   id: Scalars['uuid'];
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertAccountsArgs = {
@@ -3985,13 +3900,11 @@ export type Mutation_RootInsertAccountsArgs = {
   on_conflict?: InputMaybe<Account_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertCommentsArgs = {
   objects: Array<Comment_Insert_Input>;
   on_conflict?: InputMaybe<Comment_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertLikesArgs = {
@@ -3999,13 +3912,11 @@ export type Mutation_RootInsertLikesArgs = {
   on_conflict?: InputMaybe<Like_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertMembersArgs = {
   objects: Array<Member_Insert_Input>;
   on_conflict?: InputMaybe<Member_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertNotificationMessagesArgs = {
@@ -4013,13 +3924,11 @@ export type Mutation_RootInsertNotificationMessagesArgs = {
   on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertNotificationSubscriptionsArgs = {
   objects: Array<NotificationSubscription_Insert_Input>;
   on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneAccountArgs = {
@@ -4027,13 +3936,11 @@ export type Mutation_RootInsertOneAccountArgs = {
   on_conflict?: InputMaybe<Account_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneCommentArgs = {
   object: Comment_Insert_Input;
   on_conflict?: InputMaybe<Comment_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneLikeArgs = {
@@ -4041,13 +3948,11 @@ export type Mutation_RootInsertOneLikeArgs = {
   on_conflict?: InputMaybe<Like_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneMemberArgs = {
   object: Member_Insert_Input;
   on_conflict?: InputMaybe<Member_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneNotificationMessageArgs = {
@@ -4055,13 +3960,11 @@ export type Mutation_RootInsertOneNotificationMessageArgs = {
   on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneNotificationSubscriptionArgs = {
   object: NotificationSubscription_Insert_Input;
   on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOnePageArgs = {
@@ -4069,13 +3972,11 @@ export type Mutation_RootInsertOnePageArgs = {
   on_conflict?: InputMaybe<Page_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneProjectArgs = {
   object: Project_Insert_Input;
   on_conflict?: InputMaybe<Project_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneRoleArgs = {
@@ -4083,13 +3984,11 @@ export type Mutation_RootInsertOneRoleArgs = {
   on_conflict?: InputMaybe<Role_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneSessionArgs = {
   object: Session_Insert_Input;
   on_conflict?: InputMaybe<Session_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneTeamArgs = {
@@ -4097,13 +3996,11 @@ export type Mutation_RootInsertOneTeamArgs = {
   on_conflict?: InputMaybe<Team_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertOneUserArgs = {
   object: User_Insert_Input;
   on_conflict?: InputMaybe<User_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertOneUserTypeArgs = {
@@ -4111,13 +4008,11 @@ export type Mutation_RootInsertOneUserTypeArgs = {
   on_conflict?: InputMaybe<UserType_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertPagesArgs = {
   objects: Array<Page_Insert_Input>;
   on_conflict?: InputMaybe<Page_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertProjectsArgs = {
@@ -4125,13 +4020,11 @@ export type Mutation_RootInsertProjectsArgs = {
   on_conflict?: InputMaybe<Project_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertRolesArgs = {
   objects: Array<Role_Insert_Input>;
   on_conflict?: InputMaybe<Role_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertSessionsArgs = {
@@ -4139,13 +4032,11 @@ export type Mutation_RootInsertSessionsArgs = {
   on_conflict?: InputMaybe<Session_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertTeamsArgs = {
   objects: Array<Team_Insert_Input>;
   on_conflict?: InputMaybe<Team_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsertUserTypesArgs = {
@@ -4153,13 +4044,11 @@ export type Mutation_RootInsertUserTypesArgs = {
   on_conflict?: InputMaybe<UserType_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsertUsersArgs = {
   objects: Array<User_Insert_Input>;
   on_conflict?: InputMaybe<User_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_NotificationTypeArgs = {
@@ -4167,13 +4056,11 @@ export type Mutation_RootInsert_NotificationTypeArgs = {
   on_conflict?: InputMaybe<NotificationType_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_NotificationType_OneArgs = {
   object: NotificationType_Insert_Input;
   on_conflict?: InputMaybe<NotificationType_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootInsert_VerificationTokenArgs = {
@@ -4181,13 +4068,11 @@ export type Mutation_RootInsert_VerificationTokenArgs = {
   on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
 };
 
-
 /** mutation root */
 export type Mutation_RootInsert_VerificationToken_OneArgs = {
   object: VerificationToken_Insert_Input;
   on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateAccountByPkArgs = {
@@ -4195,13 +4080,11 @@ export type Mutation_RootUpdateAccountByPkArgs = {
   pk_columns: Account_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateAccountsArgs = {
   _set?: InputMaybe<Account_Set_Input>;
   where: Account_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateCommentByPkArgs = {
@@ -4214,7 +4097,6 @@ export type Mutation_RootUpdateCommentByPkArgs = {
   pk_columns: Comment_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateCommentsArgs = {
   _append?: InputMaybe<Comment_Append_Input>;
@@ -4226,13 +4108,11 @@ export type Mutation_RootUpdateCommentsArgs = {
   where: Comment_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateLikeByPkArgs = {
   _set?: InputMaybe<Like_Set_Input>;
   pk_columns: Like_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateLikesArgs = {
@@ -4240,13 +4120,11 @@ export type Mutation_RootUpdateLikesArgs = {
   where: Like_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateMemberByPkArgs = {
   _set?: InputMaybe<Member_Set_Input>;
   pk_columns: Member_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateMembersArgs = {
@@ -4254,20 +4132,17 @@ export type Mutation_RootUpdateMembersArgs = {
   where: Member_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateNotificationMessageByPkArgs = {
   _set?: InputMaybe<NotificationMessage_Set_Input>;
   pk_columns: NotificationMessage_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateNotificationMessagesArgs = {
   _set?: InputMaybe<NotificationMessage_Set_Input>;
   where: NotificationMessage_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateNotificationSubscriptionByPkArgs = {
@@ -4280,7 +4155,6 @@ export type Mutation_RootUpdateNotificationSubscriptionByPkArgs = {
   pk_columns: NotificationSubscription_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateNotificationSubscriptionsArgs = {
   _append?: InputMaybe<NotificationSubscription_Append_Input>;
@@ -4292,20 +4166,17 @@ export type Mutation_RootUpdateNotificationSubscriptionsArgs = {
   where: NotificationSubscription_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePageByPkArgs = {
   _set?: InputMaybe<Page_Set_Input>;
   pk_columns: Page_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdatePagesArgs = {
   _set?: InputMaybe<Page_Set_Input>;
   where: Page_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateProjectByPkArgs = {
@@ -4318,7 +4189,6 @@ export type Mutation_RootUpdateProjectByPkArgs = {
   pk_columns: Project_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateProjectsArgs = {
   _append?: InputMaybe<Project_Append_Input>;
@@ -4330,13 +4200,11 @@ export type Mutation_RootUpdateProjectsArgs = {
   where: Project_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateRoleByPkArgs = {
   _set?: InputMaybe<Role_Set_Input>;
   pk_columns: Role_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateRolesArgs = {
@@ -4344,13 +4212,11 @@ export type Mutation_RootUpdateRolesArgs = {
   where: Role_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateSessionByPkArgs = {
   _set?: InputMaybe<Session_Set_Input>;
   pk_columns: Session_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateSessionsArgs = {
@@ -4358,13 +4224,11 @@ export type Mutation_RootUpdateSessionsArgs = {
   where: Session_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateTeamByPkArgs = {
   _set?: InputMaybe<Team_Set_Input>;
   pk_columns: Team_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateTeamsArgs = {
@@ -4372,13 +4236,11 @@ export type Mutation_RootUpdateTeamsArgs = {
   where: Team_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateUserByPkArgs = {
   _set?: InputMaybe<User_Set_Input>;
   pk_columns: User_Pk_Columns_Input;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateUserTypeByPkArgs = {
@@ -4386,13 +4248,11 @@ export type Mutation_RootUpdateUserTypeByPkArgs = {
   pk_columns: UserType_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdateUserTypesArgs = {
   _set?: InputMaybe<UserType_Set_Input>;
   where: UserType_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdateUsersArgs = {
@@ -4400,13 +4260,11 @@ export type Mutation_RootUpdateUsersArgs = {
   where: User_Bool_Exp;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_NotificationTypeArgs = {
   _set?: InputMaybe<NotificationType_Set_Input>;
   where: NotificationType_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_NotificationType_By_PkArgs = {
@@ -4414,13 +4272,11 @@ export type Mutation_RootUpdate_NotificationType_By_PkArgs = {
   pk_columns: NotificationType_Pk_Columns_Input;
 };
 
-
 /** mutation root */
 export type Mutation_RootUpdate_VerificationTokenArgs = {
   _set?: InputMaybe<VerificationToken_Set_Input>;
   where: VerificationToken_Bool_Exp;
 };
-
 
 /** mutation root */
 export type Mutation_RootUpdate_VerificationToken_By_PkArgs = {
@@ -4537,7 +4393,6 @@ export type Query_Root = {
   verificationRequests: Array<VerificationToken>;
 };
 
-
 export type Query_RootNotificationTypeArgs = {
   distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4545,7 +4400,6 @@ export type Query_RootNotificationTypeArgs = {
   order_by?: InputMaybe<Array<NotificationType_Order_By>>;
   where?: InputMaybe<NotificationType_Bool_Exp>;
 };
-
 
 export type Query_RootNotificationType_AggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
@@ -4555,11 +4409,9 @@ export type Query_RootNotificationType_AggregateArgs = {
   where?: InputMaybe<NotificationType_Bool_Exp>;
 };
 
-
 export type Query_RootNotificationType_By_PkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Query_RootVerificationToken_AggregateArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
@@ -4569,11 +4421,9 @@ export type Query_RootVerificationToken_AggregateArgs = {
   where?: InputMaybe<VerificationToken_Bool_Exp>;
 };
 
-
 export type Query_RootVerificationToken_By_PkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootAccountAggregateArgs = {
   distinct_on?: InputMaybe<Array<Account_Select_Column>>;
@@ -4583,11 +4433,9 @@ export type Query_RootAccountAggregateArgs = {
   where?: InputMaybe<Account_Bool_Exp>;
 };
 
-
 export type Query_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootAccountsArgs = {
   distinct_on?: InputMaybe<Array<Account_Select_Column>>;
@@ -4597,7 +4445,6 @@ export type Query_RootAccountsArgs = {
   where?: InputMaybe<Account_Bool_Exp>;
 };
 
-
 export type Query_RootCommentAggregateArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4606,11 +4453,9 @@ export type Query_RootCommentAggregateArgs = {
   where?: InputMaybe<Comment_Bool_Exp>;
 };
 
-
 export type Query_RootCommentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootCommentsArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
@@ -4620,7 +4465,6 @@ export type Query_RootCommentsArgs = {
   where?: InputMaybe<Comment_Bool_Exp>;
 };
 
-
 export type Query_RootLikeAggregateArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4629,11 +4473,9 @@ export type Query_RootLikeAggregateArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 export type Query_RootLikeByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootLikesArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
@@ -4643,7 +4485,6 @@ export type Query_RootLikesArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 export type Query_RootMemberAggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4652,11 +4493,9 @@ export type Query_RootMemberAggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 export type Query_RootMemberByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -4666,7 +4505,6 @@ export type Query_RootMembersArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 export type Query_RootNotificationMessagesArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4674,7 +4512,6 @@ export type Query_RootNotificationMessagesArgs = {
   order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
-
 
 export type Query_RootNotificationMessagesAggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
@@ -4684,11 +4521,9 @@ export type Query_RootNotificationMessagesAggregateArgs = {
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
 
-
 export type Query_RootNotificationMessagesByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootNotificationSubscriptionAggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
@@ -4698,11 +4533,9 @@ export type Query_RootNotificationSubscriptionAggregateArgs = {
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
-
 export type Query_RootNotificationSubscriptionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootNotificationSubscriptionsArgs = {
   distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
@@ -4712,7 +4545,6 @@ export type Query_RootNotificationSubscriptionsArgs = {
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
-
 export type Query_RootPageAggregateArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4721,11 +4553,9 @@ export type Query_RootPageAggregateArgs = {
   where?: InputMaybe<Page_Bool_Exp>;
 };
 
-
 export type Query_RootPageByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootPagesArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
@@ -4735,7 +4565,6 @@ export type Query_RootPagesArgs = {
   where?: InputMaybe<Page_Bool_Exp>;
 };
 
-
 export type Query_RootProjectAggregateArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4744,11 +4573,9 @@ export type Query_RootProjectAggregateArgs = {
   where?: InputMaybe<Project_Bool_Exp>;
 };
 
-
 export type Query_RootProjectByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootProjectsArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
@@ -4758,7 +4585,6 @@ export type Query_RootProjectsArgs = {
   where?: InputMaybe<Project_Bool_Exp>;
 };
 
-
 export type Query_RootRoleAggregateArgs = {
   distinct_on?: InputMaybe<Array<Role_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4767,11 +4593,9 @@ export type Query_RootRoleAggregateArgs = {
   where?: InputMaybe<Role_Bool_Exp>;
 };
 
-
 export type Query_RootRoleByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Query_RootRolesArgs = {
   distinct_on?: InputMaybe<Array<Role_Select_Column>>;
@@ -4781,7 +4605,6 @@ export type Query_RootRolesArgs = {
   where?: InputMaybe<Role_Bool_Exp>;
 };
 
-
 export type Query_RootSessionAggregateArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4790,11 +4613,9 @@ export type Query_RootSessionAggregateArgs = {
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
-
 export type Query_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootSessionsArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
@@ -4804,7 +4625,6 @@ export type Query_RootSessionsArgs = {
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
-
 export type Query_RootTeamAggregateArgs = {
   distinct_on?: InputMaybe<Array<Team_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4813,11 +4633,9 @@ export type Query_RootTeamAggregateArgs = {
   where?: InputMaybe<Team_Bool_Exp>;
 };
 
-
 export type Query_RootTeamByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootTeamsArgs = {
   distinct_on?: InputMaybe<Array<Team_Select_Column>>;
@@ -4827,7 +4645,6 @@ export type Query_RootTeamsArgs = {
   where?: InputMaybe<Team_Bool_Exp>;
 };
 
-
 export type Query_RootUserAggregateArgs = {
   distinct_on?: InputMaybe<Array<User_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4836,11 +4653,9 @@ export type Query_RootUserAggregateArgs = {
   where?: InputMaybe<User_Bool_Exp>;
 };
 
-
 export type Query_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Query_RootUserTypeAggregateArgs = {
   distinct_on?: InputMaybe<Array<UserType_Select_Column>>;
@@ -4850,11 +4665,9 @@ export type Query_RootUserTypeAggregateArgs = {
   where?: InputMaybe<UserType_Bool_Exp>;
 };
 
-
 export type Query_RootUserTypeByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Query_RootUserTypesArgs = {
   distinct_on?: InputMaybe<Array<UserType_Select_Column>>;
@@ -4864,7 +4677,6 @@ export type Query_RootUserTypesArgs = {
   where?: InputMaybe<UserType_Bool_Exp>;
 };
 
-
 export type Query_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<User_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4872,7 +4684,6 @@ export type Query_RootUsersArgs = {
   order_by?: InputMaybe<Array<User_Order_By>>;
   where?: InputMaybe<User_Bool_Exp>;
 };
-
 
 export type Query_RootVerificationRequestsArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
@@ -4976,7 +4787,6 @@ export type Subscription_Root = {
   verificationRequests: Array<VerificationToken>;
 };
 
-
 export type Subscription_RootNotificationTypeArgs = {
   distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4984,7 +4794,6 @@ export type Subscription_RootNotificationTypeArgs = {
   order_by?: InputMaybe<Array<NotificationType_Order_By>>;
   where?: InputMaybe<NotificationType_Bool_Exp>;
 };
-
 
 export type Subscription_RootNotificationType_AggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationType_Select_Column>>;
@@ -4994,11 +4803,9 @@ export type Subscription_RootNotificationType_AggregateArgs = {
   where?: InputMaybe<NotificationType_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotificationType_By_PkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Subscription_RootVerificationToken_AggregateArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
@@ -5008,11 +4815,9 @@ export type Subscription_RootVerificationToken_AggregateArgs = {
   where?: InputMaybe<VerificationToken_Bool_Exp>;
 };
 
-
 export type Subscription_RootVerificationToken_By_PkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootAccountAggregateArgs = {
   distinct_on?: InputMaybe<Array<Account_Select_Column>>;
@@ -5022,11 +4827,9 @@ export type Subscription_RootAccountAggregateArgs = {
   where?: InputMaybe<Account_Bool_Exp>;
 };
 
-
 export type Subscription_RootAccountByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootAccountsArgs = {
   distinct_on?: InputMaybe<Array<Account_Select_Column>>;
@@ -5036,7 +4839,6 @@ export type Subscription_RootAccountsArgs = {
   where?: InputMaybe<Account_Bool_Exp>;
 };
 
-
 export type Subscription_RootCommentAggregateArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5045,11 +4847,9 @@ export type Subscription_RootCommentAggregateArgs = {
   where?: InputMaybe<Comment_Bool_Exp>;
 };
 
-
 export type Subscription_RootCommentByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootCommentsArgs = {
   distinct_on?: InputMaybe<Array<Comment_Select_Column>>;
@@ -5059,7 +4859,6 @@ export type Subscription_RootCommentsArgs = {
   where?: InputMaybe<Comment_Bool_Exp>;
 };
 
-
 export type Subscription_RootLikeAggregateArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5068,11 +4867,9 @@ export type Subscription_RootLikeAggregateArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 export type Subscription_RootLikeByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootLikesArgs = {
   distinct_on?: InputMaybe<Array<Like_Select_Column>>;
@@ -5082,7 +4879,6 @@ export type Subscription_RootLikesArgs = {
   where?: InputMaybe<Like_Bool_Exp>;
 };
 
-
 export type Subscription_RootMemberAggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5091,11 +4887,9 @@ export type Subscription_RootMemberAggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 export type Subscription_RootMemberByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -5105,7 +4899,6 @@ export type Subscription_RootMembersArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotificationMessagesArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5113,7 +4906,6 @@ export type Subscription_RootNotificationMessagesArgs = {
   order_by?: InputMaybe<Array<NotificationMessage_Order_By>>;
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
-
 
 export type Subscription_RootNotificationMessagesAggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationMessage_Select_Column>>;
@@ -5123,11 +4915,9 @@ export type Subscription_RootNotificationMessagesAggregateArgs = {
   where?: InputMaybe<NotificationMessage_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotificationMessagesByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootNotificationSubscriptionAggregateArgs = {
   distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
@@ -5137,11 +4927,9 @@ export type Subscription_RootNotificationSubscriptionAggregateArgs = {
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
-
 export type Subscription_RootNotificationSubscriptionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootNotificationSubscriptionsArgs = {
   distinct_on?: InputMaybe<Array<NotificationSubscription_Select_Column>>;
@@ -5151,7 +4939,6 @@ export type Subscription_RootNotificationSubscriptionsArgs = {
   where?: InputMaybe<NotificationSubscription_Bool_Exp>;
 };
 
-
 export type Subscription_RootPageAggregateArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5160,11 +4947,9 @@ export type Subscription_RootPageAggregateArgs = {
   where?: InputMaybe<Page_Bool_Exp>;
 };
 
-
 export type Subscription_RootPageByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootPagesArgs = {
   distinct_on?: InputMaybe<Array<Page_Select_Column>>;
@@ -5174,7 +4959,6 @@ export type Subscription_RootPagesArgs = {
   where?: InputMaybe<Page_Bool_Exp>;
 };
 
-
 export type Subscription_RootProjectAggregateArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5183,11 +4967,9 @@ export type Subscription_RootProjectAggregateArgs = {
   where?: InputMaybe<Project_Bool_Exp>;
 };
 
-
 export type Subscription_RootProjectByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootProjectsArgs = {
   distinct_on?: InputMaybe<Array<Project_Select_Column>>;
@@ -5197,7 +4979,6 @@ export type Subscription_RootProjectsArgs = {
   where?: InputMaybe<Project_Bool_Exp>;
 };
 
-
 export type Subscription_RootRoleAggregateArgs = {
   distinct_on?: InputMaybe<Array<Role_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5206,11 +4987,9 @@ export type Subscription_RootRoleAggregateArgs = {
   where?: InputMaybe<Role_Bool_Exp>;
 };
 
-
 export type Subscription_RootRoleByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Subscription_RootRolesArgs = {
   distinct_on?: InputMaybe<Array<Role_Select_Column>>;
@@ -5220,7 +4999,6 @@ export type Subscription_RootRolesArgs = {
   where?: InputMaybe<Role_Bool_Exp>;
 };
 
-
 export type Subscription_RootSessionAggregateArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5229,11 +5007,9 @@ export type Subscription_RootSessionAggregateArgs = {
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
-
 export type Subscription_RootSessionByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootSessionsArgs = {
   distinct_on?: InputMaybe<Array<Session_Select_Column>>;
@@ -5243,7 +5019,6 @@ export type Subscription_RootSessionsArgs = {
   where?: InputMaybe<Session_Bool_Exp>;
 };
 
-
 export type Subscription_RootTeamAggregateArgs = {
   distinct_on?: InputMaybe<Array<Team_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5252,11 +5027,9 @@ export type Subscription_RootTeamAggregateArgs = {
   where?: InputMaybe<Team_Bool_Exp>;
 };
 
-
 export type Subscription_RootTeamByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootTeamsArgs = {
   distinct_on?: InputMaybe<Array<Team_Select_Column>>;
@@ -5266,7 +5039,6 @@ export type Subscription_RootTeamsArgs = {
   where?: InputMaybe<Team_Bool_Exp>;
 };
 
-
 export type Subscription_RootUserAggregateArgs = {
   distinct_on?: InputMaybe<Array<User_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5275,11 +5047,9 @@ export type Subscription_RootUserAggregateArgs = {
   where?: InputMaybe<User_Bool_Exp>;
 };
 
-
 export type Subscription_RootUserByPkArgs = {
   id: Scalars['uuid'];
 };
-
 
 export type Subscription_RootUserTypeAggregateArgs = {
   distinct_on?: InputMaybe<Array<UserType_Select_Column>>;
@@ -5289,11 +5059,9 @@ export type Subscription_RootUserTypeAggregateArgs = {
   where?: InputMaybe<UserType_Bool_Exp>;
 };
 
-
 export type Subscription_RootUserTypeByPkArgs = {
   value: Scalars['String'];
 };
-
 
 export type Subscription_RootUserTypesArgs = {
   distinct_on?: InputMaybe<Array<UserType_Select_Column>>;
@@ -5303,7 +5071,6 @@ export type Subscription_RootUserTypesArgs = {
   where?: InputMaybe<UserType_Bool_Exp>;
 };
 
-
 export type Subscription_RootUsersArgs = {
   distinct_on?: InputMaybe<Array<User_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5311,7 +5078,6 @@ export type Subscription_RootUsersArgs = {
   order_by?: InputMaybe<Array<User_Order_By>>;
   where?: InputMaybe<User_Bool_Exp>;
 };
-
 
 export type Subscription_RootVerificationRequestsArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;

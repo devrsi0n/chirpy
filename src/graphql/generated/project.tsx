@@ -1,7 +1,8 @@
-import * as Types from './types';
-
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
+
+import * as Types from './types';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type InsertOneProjectMutationVariables = Types.Exact<{
   teamId?: Types.InputMaybe<Types.Scalars['uuid']>;
@@ -9,58 +10,76 @@ export type InsertOneProjectMutationVariables = Types.Exact<{
   domain: Types.Scalars['String'];
 }>;
 
-
-export type InsertOneProjectMutation = { __typename?: 'mutation_root', insertOneProject?: { __typename?: 'Project', id: string, name: string, teamId?: string | null | undefined, userId?: string | null | undefined } | null | undefined };
+export type InsertOneProjectMutation = {
+  __typename?: 'mutation_root';
+  insertOneProject?:
+    | {
+        __typename?: 'Project';
+        id: string;
+        name: string;
+        teamId?: string | null | undefined;
+        userId?: string | null | undefined;
+      }
+    | null
+    | undefined;
+};
 
 export type DeleteProjectByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
-
-export type DeleteProjectByPkMutation = { __typename?: 'mutation_root', deleteProjectByPk?: { __typename?: 'Project', id: string } | null | undefined };
+export type DeleteProjectByPkMutation = {
+  __typename?: 'mutation_root';
+  deleteProjectByPk?: { __typename?: 'Project'; id: string } | null | undefined;
+};
 
 export type UpdateThemeMutationVariables = Types.Exact<{
   projectId: Types.Scalars['uuid'];
   theme: Types.Scalars['jsonb'];
 }>;
 
-
-export type UpdateThemeMutation = { __typename?: 'mutation_root', updateProjectByPk?: { __typename?: 'Project', id: string } | null | undefined };
-
+export type UpdateThemeMutation = {
+  __typename?: 'mutation_root';
+  updateProjectByPk?: { __typename?: 'Project'; id: string } | null | undefined;
+};
 
 export const InsertOneProjectDocument = gql`
-    mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
-  insertOneProject(object: {teamId: $teamId, name: $name, domain: $domain}) {
-    id
-    name
-    teamId
-    userId
+  mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
+    insertOneProject(object: { teamId: $teamId, name: $name, domain: $domain }) {
+      id
+      name
+      teamId
+      userId
+    }
   }
-}
-    `;
+`;
 
 export function useInsertOneProjectMutation() {
-  return Urql.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(InsertOneProjectDocument);
-};
-export const DeleteProjectByPkDocument = gql`
-    mutation deleteProjectByPk($id: uuid!) {
-  deleteProjectByPk(id: $id) {
-    id
-  }
+  return Urql.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(
+    InsertOneProjectDocument,
+  );
 }
-    `;
+export const DeleteProjectByPkDocument = gql`
+  mutation deleteProjectByPk($id: uuid!) {
+    deleteProjectByPk(id: $id) {
+      id
+    }
+  }
+`;
 
 export function useDeleteProjectByPkMutation() {
-  return Urql.useMutation<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>(DeleteProjectByPkDocument);
-};
-export const UpdateThemeDocument = gql`
-    mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
-  updateProjectByPk(pk_columns: {id: $projectId}, _set: {theme: $theme}) {
-    id
-  }
+  return Urql.useMutation<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>(
+    DeleteProjectByPkDocument,
+  );
 }
-    `;
+export const UpdateThemeDocument = gql`
+  mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
+    updateProjectByPk(pk_columns: { id: $projectId }, _set: { theme: $theme }) {
+      id
+    }
+  }
+`;
 
 export function useUpdateThemeMutation() {
   return Urql.useMutation<UpdateThemeMutation, UpdateThemeMutationVariables>(UpdateThemeDocument);
-};
+}
