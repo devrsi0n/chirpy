@@ -98,6 +98,7 @@ export function Table<T>({
                       return (
                         // eslint-disable-next-line
                         <td
+                          // onClick={() => console.log(cell)}
                           {...cell.getCellProps()}
                           tw="px-5 py-5 border-b border-gray-200 bg-white text-sm text-black"
                         >

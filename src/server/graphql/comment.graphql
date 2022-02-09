@@ -3,3 +3,11 @@ query comments {
     id
   }
 }
+
+query commentList {
+  comments {
+    id
+    content
+    parentId
+  }
+}

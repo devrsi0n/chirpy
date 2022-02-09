@@ -1,54 +1,61 @@
 import Search from '@geist-ui/react-icons/search';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Button } from '$/components/button';
+import { Dialog } from '$/components/dialog';
 import { Table } from '$/components/table';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
-import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { APP_ADMIN_NAME } from '$/lib/constants';
+import { getComment } from '$/server/services/comment';
 
-const columns = [
-  {
-    Header: 'id',
-    accessor: 'id',
-  },
-  {
-    Header: 'name',
-    accessor: 'name',
-  },
-  {
-    Header: 'domain',
-    accessor: 'domain',
-  },
-  {
-    Header: 'createdAt',
-    accessor: 'createdAt',
-  },
-];
+type rowProps = {
+  id?: string;
+  parentId?: string;
+  content?: {};
+};
 
-export default function Admin() {
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-  const [pageCount, setPageCount] = React.useState(0);
+export default function Admin(props: StaticProps) {
+  console.log('propspropsprops', props);
+  const comments = props.comments || [];
+  const [data, setData] = useState([...comments]);
+  const [loading, setLoading] = useState(false);
+  const [pageCount, setPageCount] = useState(0);
+  const [showDialog, setShowDialog] = useState(false);
   const fetchIdRef = React.useRef(0);
 
-  const {
-    data: { id, name },
-  } = useCurrentUser();
+  const handleClick = (info: rowProps) => {
+    console.log(info);
+    setShowDialog(true);
+  };
 
-  const [{ data: dataList, fetching: projectLoading }, fetchUserProjects] =
-    useUserDashboardProjectsQuery({
-      variables: {
-        id: id!,
+  const columns = React.useMemo(() => {
+    return [
+      {
+        Header: 'id',
+        accessor: 'id',
       },
-    });
-
-  const { projects = [] } = dataList?.userByPk || {};
-
-  console.log('projects', projects);
+      {
+        Header: 'parentId',
+        accessor: 'parentId',
+      },
+      {
+        Header: 'content',
+        accessor: ({ content }) => <span>{content?.text}</span>,
+      },
+      {
+        Header: 'Edit',
+        accessor: 'edit',
+        Cell: ({ cell }) => (
+          <Button variant="text" color="primary" onClick={() => handleClick(cell.row.values)}>
+            edit
+          </Button>
+        ),
+      },
+    ];
+  }, []);
 
   const fetchData = React.useCallback(({ pageSize, pageIndex }) => {
     const fetchId = ++fetchIdRef.current;
@@ -58,8 +65,8 @@ export default function Admin() {
       if (fetchId === fetchIdRef.current) {
         const startRow = pageSize * pageIndex;
         const endRow = startRow + pageSize;
-        setData(projects?.slice(startRow, endRow));
-        setPageCount(Math.ceil(projects.length / pageSize));
+        setData(comments?.slice(startRow, endRow));
+        setPageCount(Math.ceil(comments.length / pageSize));
         setLoading(false);
       }
     }, 1000);
@@ -68,6 +75,10 @@ export default function Admin() {
   const handleSearch = () => {
     console.log('sdjssfsdf');
   };
+
+  const handleCloseDialog = React.useCallback(() => {
+    setShowDialog(false);
+  }, []);
 
   return (
     <SiteLayout hideFullBleed>
@@ -101,6 +112,21 @@ export default function Admin() {
           pagination
         />
       </div>
+      <Dialog show={showDialog} title="" onClose={handleCloseDialog}>
+        this is a demo dialog
+      </Dialog>
     </SiteLayout>
   );
 }
+
+type StaticProps = {
+  comments: [];
+};
+
+export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+  const comments = await getComment();
+
+  return {
+    props: { comments },
+  };
+};
