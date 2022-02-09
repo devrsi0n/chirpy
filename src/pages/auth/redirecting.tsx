@@ -23,14 +23,12 @@ export default function Redirecting(): JSX.Element {
     if (status === 'loading' || loading) {
       return;
     }
-    if (session?.isNewUser) {
-      router.push('/auth/welcome?isNewUser=true');
-    } else if (!hasValidUserProfile(data)) {
+    if (!hasValidUserProfile(data)) {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
       router.push('/dashboard');
     }
-  }, [router, session?.isNewUser, data, status, loading]);
+  }, [router, data, status, loading]);
   useTimeout(() => {
     if (!data.id) {
       router.push(`/500?message=${encodeURIComponent('User sign-in timeout after 30 seconds')}`);

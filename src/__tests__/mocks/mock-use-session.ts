@@ -14,7 +14,6 @@ mockUseSession.mockReturnValue({
       image: '',
       editableProjectIds: EDITABLE_PROJECT_IDS,
     },
-    isNewUser: true,
   } as any,
   status: 'authenticated',
 });
