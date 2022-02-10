@@ -40,7 +40,6 @@ export async function getLikeEventNotifications(eventBody: EventPayload): Promis
       triggeredById: event.data.old.userId,
       type: 'ReceivedALike',
       contextId: likeId,
-      url: authorData.page.url,
     });
   }
   return;
