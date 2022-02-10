@@ -59,6 +59,8 @@ export function Popover({
                       width: buttonRef.current?.getBoundingClientRect().width,
                     }),
                   }}
+                  role="region"
+                  aria-label="Popover panel"
                 >
                   <div
                     css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder]}

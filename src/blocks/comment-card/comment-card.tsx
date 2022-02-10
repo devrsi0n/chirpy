@@ -143,8 +143,8 @@ export function CommentCard({
                             <Text size="sm" tw="w-max">
                               Are you sure?
                             </Text>
-                            <Button size="sm" onClick={handleClickConfirmDelete}>
-                              Confirm
+                            <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
+                              Delete
                             </Button>
                           </div>
                         }
