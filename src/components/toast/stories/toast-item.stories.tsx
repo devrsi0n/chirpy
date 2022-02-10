@@ -32,6 +32,17 @@ Info.args = {
   type: 'info',
 };
 
+export const Action = Template.bind({});
+Action.args = {
+  id: 'action',
+  title: 'New version available',
+  action: {
+    label: 'Refresh',
+    onClick: () => alert('Action clicked'),
+  },
+  type: 'info',
+};
+
 export const Warning = Template.bind({});
 Warning.args = {
   id: 'Warning',

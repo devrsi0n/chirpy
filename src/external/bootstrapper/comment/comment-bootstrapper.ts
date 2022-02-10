@@ -1,7 +1,7 @@
-import { EVENT_CLICK_CONTAINER } from '../lib/constants';
-import { ERR_UNMATCHED_DOMAIN } from '../server/common/error-code';
-import { ResponseError } from '../server/types/error';
-import { GetPagByUrl } from '../server/types/page';
+import { EVENT_CLICK_CONTAINER } from '../../../lib/constants';
+import { ERR_UNMATCHED_DOMAIN } from '../../../server/common/error-code';
+import { ResponseError } from '../../../server/types/error';
+import { GetPagByUrl } from '../../../server/types/page';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.
@@ -18,7 +18,9 @@ export async function comment(): Promise<void> {
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);
   if (!script) {
-    throw new Error(`Can't find the chirpy script`);
+    throw new Error(
+      `Can't find the chirpy domain, did you forget to add ${scriptQuery} to your script?`,
+    );
   }
   const domain = script.dataset['chirpyDomain'];
   if (!domain) {
@@ -27,7 +29,7 @@ export async function comment(): Promise<void> {
 
   const renderTarget: HTMLElement | null = window.document.querySelector(targetQuery);
   if (!renderTarget) {
-    throw new Error(`Can't find the render target`);
+    throw new Error(`Can't find the render target, did you forget to add ${targetQuery}?`);
   }
   const { origin, pathname } = window.location;
   const res = await fetch(

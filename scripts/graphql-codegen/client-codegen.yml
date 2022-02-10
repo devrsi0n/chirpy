@@ -7,6 +7,8 @@ generates:
   src/graphql/generated/types.ts:
     plugins:
       - typescript
+    config:
+      enumsAsTypes: true
   src/graphql:
     preset: near-operation-file
     presetConfig:

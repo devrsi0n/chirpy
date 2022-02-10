@@ -10,7 +10,5 @@
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",
   "jest.jestCommandLine": "npm run ut --",
-  "eslint.workingDirectories": ["./src"],
-  "eslint.alwaysShowStatus": true,
   "svg.preview.background": "white"
 }
