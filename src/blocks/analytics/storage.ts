@@ -7,9 +7,9 @@ const memStore: any = {};
 // https://stackoverflow.com/a/16427747
 function testLocalStorageAvailability() {
   try {
-    const testItem = 'test';
-    localStorage.setItem(testItem, testItem);
-    localStorage.removeItem(testItem);
+    const TEST_ITEM = 'TEST_ITEM';
+    localStorage.setItem(TEST_ITEM, TEST_ITEM);
+    localStorage.removeItem(TEST_ITEM);
     return true;
   } catch {
     return false;
