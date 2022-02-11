@@ -8,7 +8,7 @@ import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useTimeout } from '$/hooks/use-timeout';
-import { APP_NAME, PREV_PATH, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { APP_NAME, CALLBACK_URL, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
@@ -28,8 +28,8 @@ export default function Redirecting(): JSX.Element {
     } else if (!hasValidUserProfile(data)) {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
-      const prevPath = sessionStorage.getItem(PREV_PATH);
-      router.push(prevPath || '/dashboard');
+      const callbackUrl = sessionStorage.getItem(CALLBACK_URL);
+      router.push(callbackUrl || '/dashboard');
     }
   }, [router, session?.isNewUser, data, status, loading]);
   useTimeout(() => {

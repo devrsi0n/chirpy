@@ -7,14 +7,14 @@ import 'twin.macro';
 import { Button, ButtonProps } from '$/components/button';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { PREV_PATH } from '$/lib/constants';
+import { CALLBACK_URL } from '$/lib/constants';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;
 };
 
 const handleSessionAndSignIn = () => {
-  sessionStorage.setItem(PREV_PATH, location.pathname);
+  sessionStorage.setItem(CALLBACK_URL, location.pathname);
   signIn();
 };
 
