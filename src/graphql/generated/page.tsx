@@ -1,29 +1,41 @@
-import * as Types from './types';
-
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
+
+import * as Types from './types';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type ThemeOfPageQueryVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];
 }>;
 
-
-export type ThemeOfPageQuery = { __typename?: 'query_root', pageByPk?: { __typename?: 'Page', id: string, url: string, project: { __typename?: 'Project', id: string, theme?: any | null | undefined } } | null | undefined };
-
+export type ThemeOfPageQuery = {
+  __typename?: 'query_root';
+  pageByPk?:
+    | {
+        __typename?: 'Page';
+        id: string;
+        url: string;
+        project: { __typename?: 'Project'; id: string; theme?: any | null | undefined };
+      }
+    | null
+    | undefined;
+};
 
 export const ThemeOfPageDocument = gql`
-    query themeOfPage($pageId: uuid!) {
-  pageByPk(id: $pageId) {
-    id
-    url
-    project {
+  query themeOfPage($pageId: uuid!) {
+    pageByPk(id: $pageId) {
       id
-      theme
+      url
+      project {
+        id
+        theme
+      }
     }
   }
-}
-    `;
+`;
 
-export function useThemeOfPageQuery(options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'> = {}) {
+export function useThemeOfPageQuery(
+  options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'> = {},
+) {
   return Urql.useQuery<ThemeOfPageQuery>({ query: ThemeOfPageDocument, ...options });
-};
+}

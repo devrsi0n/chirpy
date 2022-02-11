@@ -3,3 +3,34 @@ query comments {
     id
   }
 }
+
+# Find the owner from a triggered comment
+query siteOwnerByTriggerCommentId($commentId: uuid!) {
+  commentByPk(id: $commentId) {
+    page {
+      id
+      url
+      project {
+        ownerId: userId
+      }
+    }
+    triggeredBy: user {
+      id
+      name
+    }
+  }
+}
+
+# Find the the author from a parent comment id
+query authorByCommentId($commentId: uuid!) {
+  commentByPk(id: $commentId) {
+    page {
+      id
+      url
+    }
+    author: user {
+      id
+      name
+    }
+  }
+}

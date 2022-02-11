@@ -140,15 +140,11 @@ export function CommentCard({
                         buttonAs="button"
                         content={
                           <div tw="flex flex-row items-center space-x-2">
-                            <Text size="sm" tw="w-max text-gray-100">
+                            <Text size="sm" tw="w-max">
                               Are you sure?
                             </Text>
-                            <Button
-                              size="sm"
-                              onClick={handleClickConfirmDelete}
-                              tw="text-gray-100!"
-                            >
-                              Confirm
+                            <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
+                              Delete
                             </Button>
                           </div>
                         }

@@ -8,26 +8,37 @@ import tw from 'twin.macro';
 
 import { useTimeout } from '$/hooks/use-timeout';
 
-import { IconButton } from '../button';
+import { IconButton, Button } from '../button';
 import { Card } from '../card';
 import { Heading } from '../heading';
 import { Text } from '../text';
-import { Toast, ToastType } from './toast-context';
+import { IToast, ToastType } from './toast-context';
 
-export type ToastProps = React.PropsWithChildren<Toast> & {
+export type ToastProps = React.PropsWithChildren<IToast> & {
   onDismiss: (id: string) => void;
 };
 export const TOAST_DURATION = 10_000;
 
-export function ToastItem({ id, title, description, type, onDismiss }: ToastProps): JSX.Element {
-  useTimeout(() => {
-    onDismiss(id);
-  }, TOAST_DURATION);
+export function ToastItem({
+  id,
+  title,
+  description,
+  type,
+  onDismiss,
+  persistent,
+  action,
+}: ToastProps): JSX.Element {
+  useTimeout(
+    () => {
+      onDismiss(id);
+    },
+    !persistent ? TOAST_DURATION : null,
+  );
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
-    <Card as="section" shadow={false} css={[tw`py-4 pl-6 pr-2 shadow relative`]}>
-      <div css={tw`flex flex-row justify-between`}>
+    <Card as="section" css={[tw`py-4 pl-6 pr-2 shadow-lg relative`]}>
+      <div css={tw`flex flex-row justify-between items-center`}>
         <div tw="flex flex-row items-center space-x-4 mr-4">
           {typeIcon}
           <div css={tw`space-y-2 max-w-lg`}>
@@ -36,8 +47,22 @@ export function ToastItem({ id, title, description, type, onDismiss }: ToastProp
             </Heading>
           </div>
         </div>
+        {action && (
+          <Button
+            size="sm"
+            variant="solid"
+            color="primary"
+            tw="ml-4"
+            onClick={() => {
+              action.onClick();
+              onDismiss(id);
+            }}
+          >
+            {action.label}
+          </Button>
+        )}
         <IconButton
-          css={tw`w-fit h-fit`}
+          css={tw`w-fit h-fit ml-4`}
           onClick={() => onDismiss(id)}
           aria-label="Dismiss"
           title="Dismiss"

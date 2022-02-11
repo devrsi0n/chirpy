@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { comment } from '../comment-bootstrapper';
+import { comment } from '../bootstrapper/comment/comment-bootstrapper';
 
 describe('comment', () => {
   beforeEach(() => {

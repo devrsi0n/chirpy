@@ -5,7 +5,7 @@ import tw from 'twin.macro';
 
 import { usePortal } from '$/hooks/use-portal';
 
-import { Toast } from './toast-context';
+import { IToast } from './toast-context';
 import { ToastItem } from './toast-item';
 import { useToast } from './use-toast';
 
@@ -18,7 +18,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
 
   const portal = usePortal('basic');
   const handleDismiss = React.useCallback((id: string) => {
-    setToasts((prev: Toast[]) => prev.filter((toast) => toast.id !== id));
+    setToasts((prev: IToast[]) => prev.filter((toast) => toast.id !== id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

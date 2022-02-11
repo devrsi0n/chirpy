@@ -52,9 +52,7 @@ subscription commentDetails($id: uuid!) {
 }
 
 mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
-  insertOneComment(
-    object: { content: $content, parentId: $parentId, pageId: $pageId}
-  ) {
+  insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
     id
   }
 }

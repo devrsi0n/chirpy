@@ -19,7 +19,6 @@ import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
-  CommentTreeSubscriptionVariables,
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
@@ -81,9 +80,6 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
         <title>{APP_NAME} comments</title>
       </Head>
       <CommentContextProvider projectId={props.projectId}>
-        <Head>
-          <title>{APP_NAME} Comment</title>
-        </Head>
         <div tw="pt-1">
           <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
         </div>
