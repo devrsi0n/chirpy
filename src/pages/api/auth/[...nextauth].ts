@@ -21,7 +21,7 @@ export default NextAuth({
   },
   pages: {
     signIn: '/auth/sign-in',
-    newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in (leave the property out if not of interest)
+    newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
     // error: '/auth/error', // Error code passed in query string as ?error=
   },
   callbacks: {
