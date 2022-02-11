@@ -179,8 +179,7 @@
   },
   "renovate": {
     "extends": [
-      "config:base",
-      ":rebaseStalePrs"
+      "config:base"
     ],
     "packageRules": [
       {
