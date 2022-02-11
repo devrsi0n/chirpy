@@ -1,56 +1,56 @@
 import Search from '@geist-ui/react-icons/search';
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import 'twin.macro';
+import tw from 'twin.macro';
 
+import { CommentTree } from '$/blocks/comment-tree';
 import { SiteLayout } from '$/blocks/layout';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
+import { Heading } from '$/components/heading';
 import { Table } from '$/components/table';
 import { APP_ADMIN_NAME } from '$/lib/constants';
+import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { getComment } from '$/server/services/comment';
-
-type rowProps = {
-  id?: string;
-  parentId?: string;
-  content?: {};
-};
+import { CommentLeafType } from '$/types/widget';
 
 export default function Admin(props: StaticProps) {
   console.log('propspropsprops', props);
-  const comments = props.comments || [];
-  const [data, setData] = useState([...comments]);
+  const commentList = props.commentList || [];
+  const [data, setData] = useState([...commentList]);
   const [loading, setLoading] = useState(false);
   const [pageCount, setPageCount] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
-  const fetchIdRef = React.useRef(0);
+  const fetchIdRef = useRef(0);
+  const [comments, setComments] = useState([]);
 
-  const handleClick = (info: rowProps) => {
-    console.log(info);
+  const handleClick = (rowProps: CommentContentFragment) => {
+    console.log(rowProps);
     setShowDialog(true);
+    setComments([rowProps]);
   };
 
   const columns = React.useMemo(() => {
     return [
       {
-        Header: 'id',
+        Header: 'comment_id',
         accessor: 'id',
       },
       {
-        Header: 'parentId',
-        accessor: 'parentId',
+        Header: 'user',
+        accessor: ({ user }) => <span>{user?.name}</span>,
       },
       {
-        Header: 'content',
-        accessor: ({ content }) => <span>{content?.text}</span>,
+        Header: 'createdAt',
+        accessor: 'createdAt',
       },
       {
-        Header: 'Edit',
-        accessor: 'edit',
-        Cell: ({ cell }) => (
-          <Button variant="text" color="primary" onClick={() => handleClick(cell.row.values)}>
-            edit
+        Header: 'comments',
+        accessor: (rowProps) => (
+          <Button variant="text" color="primary" onClick={() => handleClick(rowProps)}>
+            detail
           </Button>
         ),
       },
@@ -65,8 +65,8 @@ export default function Admin(props: StaticProps) {
       if (fetchId === fetchIdRef.current) {
         const startRow = pageSize * pageIndex;
         const endRow = startRow + pageSize;
-        setData(comments?.slice(startRow, endRow));
-        setPageCount(Math.ceil(comments.length / pageSize));
+        setData(commentList?.slice(startRow, endRow));
+        setPageCount(Math.ceil(commentList.length / pageSize));
         setLoading(false);
       }
     }, 1000);
@@ -76,17 +76,13 @@ export default function Admin(props: StaticProps) {
     console.log('sdjssfsdf');
   };
 
-  const handleCloseDialog = React.useCallback(() => {
-    setShowDialog(false);
-  }, []);
-
   return (
     <SiteLayout hideFullBleed>
       <Head>
         <title>{APP_ADMIN_NAME}</title>
       </Head>
       <div tw="px-24">
-        <div tw="bg-white rounded-md w-full">
+        <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
           <div tw="flex items-center justify-start space-x-4">
             <div tw="flex bg-gray-200 items-center p-2 rounded-md border-solid border-2">
               <input
@@ -112,21 +108,47 @@ export default function Admin(props: StaticProps) {
           pagination
         />
       </div>
-      <Dialog show={showDialog} title="" onClose={handleCloseDialog}>
-        this is a demo dialog
+      <Dialog
+        showDismissButton
+        show={showDialog}
+        title={
+          <div tw="w-5/6">
+            <Heading as="h2" tw="mb-3">
+              Comments
+            </Heading>
+          </div>
+        }
+        onClose={() => setShowDialog(false)}
+        styles={{ content: tw`max-w-2xl sm:(px-14 py-10)` }}
+      >
+        <div tw="">
+          <div tw="space-y-2">
+            <ul tw="min-w-full">
+              {comments?.map((comment: CommentLeafType) => (
+                <CommentTree
+                  key={comment.id}
+                  depth={1}
+                  comment={comment}
+                  // onClickLikeAction={onClickLikeAction}
+                  // onSubmitReply={onSubmitReply}
+                />
+              ))}
+            </ul>
+          </div>
+        </div>
       </Dialog>
     </SiteLayout>
   );
 }
 
 type StaticProps = {
-  comments: [];
+  commentList: [];
 };
 
 export const getStaticProps: GetStaticProps<StaticProps> = async () => {
-  const comments = await getComment();
+  const commentList = await getComment();
 
   return {
-    props: { comments },
+    props: { commentList },
   };
 };

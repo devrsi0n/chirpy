@@ -82,7 +82,6 @@ export function Table<T>({
                       tw="px-5 py-3 border-b-2 border-gray-200 bg-primary-900 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
                     >
                       {column.render('Header')}
-                      {/* <span>{column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}</span> */}
                     </th>
                   ))}
                 </tr>
@@ -100,7 +99,7 @@ export function Table<T>({
                         <td
                           // onClick={() => console.log(cell)}
                           {...cell.getCellProps()}
-                          tw="px-5 py-5 border-b border-gray-200 bg-white text-sm text-black"
+                          tw="px-5 py-5 border-b border-gray-200 bg-white dark:(bg-grayd-300) text-sm text-black"
                         >
                           <div>{cell.render('Cell')}</div>
                         </td>

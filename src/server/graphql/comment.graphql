@@ -1,3 +1,21 @@
+fragment commentContent on Comment {
+  id
+  content
+  createdAt
+  deletedAt
+  parentId
+  pageId
+  user {
+    id
+    name
+    avatar
+  }
+  likes {
+    id
+    userId
+  }
+}
+
 query comments {
   comments {
     id
@@ -5,9 +23,13 @@ query comments {
 }
 
 query commentList {
-  comments {
-    id
-    content
-    parentId
+  comments(order_by: { createdAt: asc }) {
+    ...commentContent
+    replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+      ...commentContent
+      replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        ...commentContent
+      }
+    }
   }
 }
