@@ -21,6 +21,8 @@ export default NextAuth({
   },
   pages: {
     signIn: '/auth/sign-in',
+    newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
+    // error: '/auth/error', // Error code passed in query string as ?error=
   },
   callbacks: {
     /**
@@ -28,16 +30,14 @@ export default NextAuth({
      * @param user User object (only available on sign in)
      * @param account Provider account (only available on sign in)
      * @param profile Provider profile (only available on sign in)
-     * @param isNewUser True if new user (only available on sign in)
      * @return JSON Web Token that will be saved
      */
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
         await fillUserFields(user as any, profile as any, account?.provider as any);
       }
       return {
         ...token,
-        isNewUser: !!isNewUser,
       };
     },
     async session({ session, token }) {

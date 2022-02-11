@@ -13,6 +13,5 @@ declare module 'next-auth' {
       image: string;
       editableProjectIds: string[];
     };
-    isNewUser: boolean;
   }
 }
