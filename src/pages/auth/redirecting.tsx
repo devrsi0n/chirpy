@@ -29,6 +29,7 @@ export default function Redirecting(): JSX.Element {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
       const callbackUrl = sessionStorage.getItem(CALLBACK_URL);
+      sessionStorage.removeItem(CALLBACK_URL);
       router.push(callbackUrl || '/dashboard');
     }
   }, [router, session?.isNewUser, data, status, loading]);
