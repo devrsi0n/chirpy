@@ -6,7 +6,7 @@ import { BaseButton, BaseButtonProps } from './base-button';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' | 'red' | 'gray';
-type Variant = 'solid' | 'secondary' | 'text' /*| 'ghost' */;
+type Variant = 'solid' | 'default' | 'text' /*| 'ghost' */;
 
 export type ButtonProps = BaseButtonProps & {
   variant?: Variant;
@@ -28,7 +28,7 @@ export const Button = React.forwardRef(function Button(
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   const {
-    variant = 'secondary',
+    variant = 'default',
     color = 'gray',
     disabled = false,
     size = 'md',
@@ -135,18 +135,16 @@ const sizeStyles: Record<Size, TwStyle> = {
 
 type VariantColor = `${Variant}-${Color}`;
 
-type VariantColors = {
-  [index in VariantColor]: TwStyle;
-};
+type VariantColors = Record<VariantColor, TwStyle>;
 
 const ColorVariantStyles: VariantColors = {
   'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:(ring-primary-1000)`,
   'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:(ring-red-1000)`,
   'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus-visible:(ring-gray-1100)`,
 
-  'secondary-primary': tw`border border-primary-700 text-primary-900 hover:(border-primary-900 text-primary-1000)`,
-  'secondary-red': tw`border border-red-700 text-red-900 hover:(border-red-900 text-red-1000)`,
-  'secondary-gray': tw`border text-gray-1100 hover:(border-gray-900 text-gray-1200)`,
+  'default-primary': tw`border border-primary-700 text-primary-900 hover:(border-primary-900 text-primary-1000)`,
+  'default-red': tw`border border-red-700 text-red-900 hover:(border-red-900 text-red-1000)`,
+  'default-gray': tw`border text-gray-1100 hover:(border-gray-900 text-gray-1200)`,
 
   'text-primary': tw`text-primary-900 hover:bg-gray-300`,
   'text-red': tw`text-red-900 hover:bg-gray-300`,
