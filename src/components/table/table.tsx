@@ -9,6 +9,7 @@ import 'twin.macro';
 import { Button } from '$/components/button';
 import { Select } from '$/components/select';
 import { Text } from '$/components/text';
+import { PAGE_SIZE_OPTIONS } from '$/lib/constants';
 
 export type TableProps<T> = {
   columns: T[];
@@ -20,13 +21,10 @@ export type TableProps<T> = {
   pagination?: boolean;
 };
 
-const PAGE_NUMS = [10, 20, 30, 40, 50];
-
 export function Table<T>({
   columns,
   data,
   fetchData,
-  loading,
   pagination = false,
   pageCount: controlledPageCount,
 }: TableProps<T>) {
@@ -44,28 +42,22 @@ export function Table<T>({
     nextPage,
     previousPage,
     setPageSize,
-    // Get the state from the instance
     state: { pageIndex, pageSize },
   } = useTable(
     {
       columns,
       data,
-      initialState: { pageIndex: 0 }, // Pass our hoisted table state
-      manualPagination: true, // Tell the usePagination
-      // hook that we'll handle our own data fetching
-      // This means we'll also have to provide our own
-      // pageCount.
+      initialState: { pageIndex: 0 },
+      manualPagination: true,
       pageCount: controlledPageCount,
     },
     usePagination,
   );
 
-  // Listen for changes in pagination and use the state to fetch our new data
   useEffect(() => {
     fetchData({ pageIndex, pageSize });
   }, [fetchData, pageIndex, pageSize]);
 
-  // Render the UI for your table
   return (
     <>
       <div tw="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -97,7 +89,6 @@ export function Table<T>({
                       return (
                         // eslint-disable-next-line
                         <td
-                          // onClick={() => console.log(cell)}
                           {...cell.getCellProps()}
                           tw="px-5 py-5 border-b border-gray-200 bg-white dark:(bg-grayd-300) text-sm text-black"
                         >
@@ -174,7 +165,7 @@ export function Table<T>({
               setPageSize(Number(value));
             }}
           >
-            {PAGE_NUMS.map((pageSize) => (
+            {PAGE_SIZE_OPTIONS.map((pageSize) => (
               <Select.Option key={pageSize} value={pageSize}>
                 Show {pageSize}
               </Select.Option>

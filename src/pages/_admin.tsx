@@ -7,17 +7,16 @@ import tw from 'twin.macro';
 
 import { CommentTree } from '$/blocks/comment-tree';
 import { SiteLayout } from '$/blocks/layout';
+import { Table } from '$/components/Table';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
 import { Heading } from '$/components/heading';
-import { Table } from '$/components/table';
 import { APP_ADMIN_NAME } from '$/lib/constants';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { getComment } from '$/server/services/comment';
 import { CommentLeafType } from '$/types/widget';
 
 export default function Admin(props: StaticProps) {
-  console.log('propspropsprops', props);
   const commentList = props.commentList || [];
   const [data, setData] = useState([...commentList]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +26,6 @@ export default function Admin(props: StaticProps) {
   const [comments, setComments] = useState([]);
 
   const handleClick = (rowProps: CommentContentFragment) => {
-    console.log(rowProps);
     setShowDialog(true);
     setComments([rowProps]);
   };
@@ -70,10 +68,12 @@ export default function Admin(props: StaticProps) {
         setLoading(false);
       }
     }, 1000);
+    // eslint-disable-next-line
   }, []);
 
+  // eslint-disable-next-line
   const handleSearch = () => {
-    console.log('sdjssfsdf');
+    console.log('test');
   };
 
   return (
@@ -84,10 +84,10 @@ export default function Admin(props: StaticProps) {
       <div tw="px-24">
         <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
           <div tw="flex items-center justify-start space-x-4">
-            <div tw="flex bg-gray-200 items-center p-2 rounded-md border-solid border-2">
+            <div tw="flex bg-gray-400 items-center p-2 rounded-md border-solid">
               <input
-                tw="w-64 ml-1 block bg-gray-200 outline-none"
-                type="text"
+                tw="w-64 ml-1 block text-black bg-gray-400 placeholder-gray-800 outline-none"
+                type="search"
                 name=""
                 id=""
                 placeholder="search"
@@ -129,8 +129,8 @@ export default function Admin(props: StaticProps) {
                   key={comment.id}
                   depth={1}
                   comment={comment}
-                  // onClickLikeAction={onClickLikeAction}
-                  // onSubmitReply={onSubmitReply}
+                  onClickLikeAction={() => {}}
+                  // onSubmitReply={() => console.log(123)}
                 />
               ))}
             </ul>
