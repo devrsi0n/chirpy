@@ -28,7 +28,7 @@ export function MainButton({
   disabled,
 }: IMainButtonProps): JSX.Element {
   const { isSignIn } = useCurrentUser();
-  const { registerNotification, didRegister } = useNotificationContext();
+  const { registerNotification, didRegister, didDeny } = useNotificationContext();
   const handleClickSubmit = async () => {
     await registerNotification();
     onClickSubmit();
@@ -54,7 +54,7 @@ export function MainButton({
         </Button>
       )}
       {isSignIn ? (
-        didRegister ? (
+        didRegister || didDeny ? (
           <Button {...postButtonProps} onClick={onClickSubmit}>
             {buttonChildren}
           </Button>
@@ -71,7 +71,7 @@ export function MainButton({
                 </Text>
                 <div tw="mt-5 space-x-2">
                   <Button size="sm" color="gray" onClick={onClickSubmit}>
-                    No, thanks
+                    Ask next time
                   </Button>
                   <Button size="sm" variant="solid" color="primary" onClick={handleClickSubmit}>
                     Sure
