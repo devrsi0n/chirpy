@@ -43,7 +43,7 @@ export function MainButton({
   const buttonChildren = (
     <>
       {isLoading ? <Loader tw="animate-spin w-5 h-5" /> : <Send size="14" />}
-      <span>{'Post'}</span>
+      <span>Post</span>
     </>
   );
   return (
