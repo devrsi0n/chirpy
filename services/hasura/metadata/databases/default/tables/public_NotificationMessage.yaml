@@ -1,0 +1,25 @@
+table:
+  name: NotificationMessage
+  schema: public
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    delete: deleteNotificationMessages
+    delete_by_pk: deleteNotificationMessageByPk
+    insert: insertNotificationMessages
+    insert_one: insertOneNotificationMessage
+    select: notificationMessages
+    select_aggregate: notificationMessagesAggregate
+    select_by_pk: notificationMessagesByPk
+    update: updateNotificationMessages
+    update_by_pk: updateNotificationMessageByPk
+object_relationships:
+- name: notificationType
+  using:
+    foreign_key_constraint_on: type
+- name: recipient
+  using:
+    foreign_key_constraint_on: recipientId
+- name: triggeredBy
+  using:
+    foreign_key_constraint_on: triggeredById

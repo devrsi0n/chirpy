@@ -3,6 +3,7 @@ import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 
+import { getUserByPk } from '../gql/user';
 import { CreateAccountDocument, DeleteAccountDocument } from '../graphql/generated/account';
 import {
   CreateSessionDocument,
@@ -21,8 +22,9 @@ import {
   UpdateUserProfileByPkDocument,
   UserByAccountDocument,
   UserByEmailDocument,
-  UserByPkDocument,
 } from '../graphql/generated/user';
+
+// TODO: Extract all urql call to `server/gql`
 
 export function nextAuthAdapter(): Adapter {
   const client = getAdminGqlClient();
@@ -39,13 +41,9 @@ export function nextAuthAdapter(): Adapter {
       return translateUserToAdapterUser(result.data?.insertOneUser);
     },
     async getUser(id) {
-      const { data } = await client
-        .query(UserByPkDocument, {
-          id,
-        })
-        .toPromise();
+      const data = await getUserByPk(id);
 
-      return translateUserToAdapterUser(data?.userByPk);
+      return translateUserToAdapterUser(data);
     },
     async getUserByEmail(email) {
       const { data } = await client

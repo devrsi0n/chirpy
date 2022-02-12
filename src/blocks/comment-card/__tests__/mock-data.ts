@@ -2,7 +2,7 @@ export function generateCommentCard(fill: number) {
   return {
     commentId: `comment-id-${fill}`,
     author: {
-      id: fill,
+      id: fill.toString(),
       name: `author-name-${fill}`,
       avatar: `author-avatar-${fill}`,
     },
@@ -24,7 +24,7 @@ export function generateCommentCard(fill: number) {
     likes: [
       {
         id: `like-id-${fill}`,
-        userId: fill,
+        userId: fill.toString(),
       },
     ],
   };

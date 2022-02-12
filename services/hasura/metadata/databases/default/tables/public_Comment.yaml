@@ -73,6 +73,20 @@ update_permissions:
         project:
           userId:
             _eq: X-Hasura-User-Id
-    set:
-      userId: x-hasura-User-Id
   role: user
+event_triggers:
+- definition:
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns: "*"
+  headers:
+  - name: HASURA_EVENT_SECRET
+    value_from_env: HASURA_EVENT_SECRET
+  name: Comment
+  retry_conf:
+    interval_sec: 10
+    num_retries: 3
+    timeout_sec: 60
+  webhook_from_env: HASURA_GRAPHQL_EVENT_URL

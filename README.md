@@ -14,12 +14,13 @@
 - ⚡️ Reasonably fast
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
+- 🪄 Realtime updated comments
 
 ## 🧭 Roadmap
 
 We're working hard to make Chirpy General Available first. Here are the blocking features:
 
-- Notifications
+- [Notifications](https://github.com/devrsi0n/chirpy/issues/134)
 - Account plan
 - Payment
 - Email login without password

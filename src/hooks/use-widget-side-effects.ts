@@ -25,18 +25,17 @@ function broadcastPageHeight(): void {
 
 function handleMessage(event: MessageEvent): void {
   if (event.data === EVENT_CLICK_CONTAINER) {
-    unexpandedMenu('[id^="headlessui-menu-button"]');
-    unexpandedMenu('[id^="headlessui-listbox-button"]');
+    unexpandedPopup('[id^="headlessui-menu-button"]');
+    unexpandedPopup('[id^="headlessui-listbox-button"]');
+    unexpandedPopup('[id^="headlessui-popover-button"]');
   }
 }
 
-// Click Menu to close it even
-// user clicks on the out side of iframe
-function unexpandedMenu(selectors: string): void {
-  const elements = window.document.querySelectorAll<HTMLDivElement>(selectors);
-  for (const element of elements) {
+// Close popup when user clicks on the out side of iframe
+function unexpandedPopup(selectors: string): void {
+  window.document.querySelectorAll<HTMLDivElement>(selectors).forEach((element) => {
     if (element.getAttribute('aria-expanded') === 'true') {
       element.click();
     }
-  }
+  });
 }

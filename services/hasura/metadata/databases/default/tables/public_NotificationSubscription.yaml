@@ -1,0 +1,19 @@
+table:
+  name: NotificationSubscription
+  schema: public
+configuration:
+  custom_column_names: {}
+  custom_root_fields:
+    delete: deleteNotificationSubscriptions
+    delete_by_pk: deleteNotificationSubscriptionByPk
+    insert: insertNotificationSubscriptions
+    insert_one: insertOneNotificationSubscription
+    select: notificationSubscriptions
+    select_aggregate: notificationSubscriptionAggregate
+    select_by_pk: notificationSubscriptionByPk
+    update: updateNotificationSubscriptions
+    update_by_pk: updateNotificationSubscriptionByPk
+object_relationships:
+- name: user
+  using:
+    foreign_key_constraint_on: userId

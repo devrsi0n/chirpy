@@ -13,7 +13,7 @@ import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
 import { ProjectByDomainDocument } from '../graphql/generated/project';
 import { GetPagByUrl } from '../types/page';
 
-export async function handleGetPage(
+export async function getPage(
   req: NextApiRequest,
   res: NextApiResponse<GetPagByUrl>,
 ): Promise<void> {

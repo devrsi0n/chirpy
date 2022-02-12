@@ -1,13 +1,13 @@
 import Cors from 'cors';
 
 import { getApiHandler } from '$/server/common/api-handler';
-import { handleGetPage } from '$/server/services/page';
+import { getPage } from '$/server/services/page';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'OPTIONS'],
 });
 const handler = getApiHandler();
 handler.use(cors);
-handler.get(handleGetPage);
+handler.get(getPage);
 
 export default handler;

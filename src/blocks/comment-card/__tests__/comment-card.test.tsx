@@ -24,6 +24,7 @@ describe('CommentCard', () => {
     pageRender(
       <CommentCard
         {...staticProps}
+        depth={1}
         onClickLikeAction={mockHandleClickLikeAction}
         onSubmitReply={mockHandleSubmitReply}
       ></CommentCard>,
@@ -77,15 +78,13 @@ describe('CommentCard', () => {
     userEvent.click(deleteButton);
     await waitFor(() =>
       screen.getAllByRole('button', {
-        name: /confirm/i,
+        name: /delete/i,
       }),
     );
-    const confirmWrapper = screen.getByRole('button', {
-      name: /are you sure\? confirm/i,
-    });
+    const confirmWrapper = screen.getByLabelText(/popover panel/i);
 
     const confirmButton = within(confirmWrapper).getByRole('button', {
-      name: /confirm/i,
+      name: /delete/i,
     });
     userEvent.click(confirmButton);
     await waitFor(() => expect(mockDeleteAComment).toHaveBeenCalled());
