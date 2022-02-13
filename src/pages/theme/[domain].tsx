@@ -2,7 +2,6 @@ import * as colors from '@radix-ui/colors';
 import merge from 'lodash/merge';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { useTheme } from 'next-themes';
-import Head from 'next/head';
 import * as React from 'react';
 import tw from 'twin.macro';
 
@@ -17,7 +16,6 @@ import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/theme-context';
 import { translateRadixColor } from '$/contexts/theme-context/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { APP_NAME } from '$/lib/constants';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
@@ -31,12 +29,7 @@ const THEME_WIDGET_CLS = 'theme-widget';
 
 export default function ThemePage(props: ThemeProps): JSX.Element {
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {props.project?.name} - {APP_NAME} theme editor
-        </title>
-      </Head>
+    <SiteLayout title={props.project?.name || 'Theme'}>
       <WidgetThemeProvider
         widgetTheme={props.project?.theme as ThemeType}
         selector={`.${THEME_WIDGET_CLS}`}

@@ -92,13 +92,7 @@ export default function Profile(): JSX.Element {
   }
 
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {name} - {APP_NAME} profile
-        </title>
-      </Head>
-
+    <SiteLayout title={name || 'Profile'}>
       <ProfileContainer tw="space-y-7">
         <PageTitle>Profile</PageTitle>
         <section tw="space-y-6">

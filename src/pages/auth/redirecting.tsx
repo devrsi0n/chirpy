@@ -1,5 +1,4 @@
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
@@ -8,7 +7,7 @@ import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useTimeout } from '$/hooks/use-timeout';
-import { APP_NAME, CALLBACK_URL, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { CALLBACK_URL, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
@@ -37,10 +36,7 @@ export default function Redirecting(): JSX.Element {
     }
   }, 30_000);
   return (
-    <SiteLayout>
-      <Head>
-        <title>Redirecting - {APP_NAME}</title>
-      </Head>
+    <SiteLayout title="Redirecting">
       <Spinner tw="mt-24 justify-center" />
     </SiteLayout>
   );

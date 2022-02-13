@@ -77,13 +77,7 @@ export default function Dashboard(): JSX.Element {
   const disableCreation = isENVProd && (projects?.length || 0) > 0;
 
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {name} - {APP_NAME} dashboard
-        </title>
-      </Head>
-
+    <SiteLayout title="Dashboard">
       <section tw="space-y-10">
         <div tw="space-x-2 flex flex-row justify-between items-start">
           <PageTitle>Dashboard</PageTitle>

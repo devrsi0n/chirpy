@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import 'twin.macro';
@@ -8,16 +7,13 @@ import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text/text';
-import { APP_NAME, FEEDBACK_LINK } from '$/lib/constants';
+import { FEEDBACK_LINK } from '$/lib/constants';
 
 export default function Custom500(): JSX.Element {
   const { query } = useRouter();
   const message = query['message'] || `We might have encountered some issues in our services...`;
   return (
-    <SiteLayout>
-      <Head>
-        <title>500 - {APP_NAME}</title>
-      </Head>
+    <SiteLayout title="500">
       <section tw="px-4 space-y-8 flex flex-col items-center">
         <Heading tw="font-bold">Oops! Something went wrong</Heading>
         <Text variant="secondary">{message}</Text>

@@ -1,13 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { SideBar, SideBarProps } from '$/blocks/side-bar';
-import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { CommonPageProps } from '$/types/page.type';
@@ -17,13 +15,7 @@ const CONTAINER_FOLDER = 'docs';
 
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {frontMatter?.title} - {APP_NAME} docs
-        </title>
-      </Head>
-
+    <SiteLayout title={frontMatter?.title}>
       <div tw="min-h-full">
         <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
           <SideBar tw="pt-10" directories={directories} title="Documentation" />
