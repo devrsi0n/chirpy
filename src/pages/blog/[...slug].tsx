@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
-import Head from 'next/head';
 import Script from 'next/script';
 import * as React from 'react';
 import 'twin.macro';
@@ -9,7 +8,6 @@ import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/use-has-mounted';
-import { APP_NAME } from '$/lib/constants';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { isENVDev } from '$/server/utilities/env';
@@ -28,13 +26,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   }, [frontMatter?.banner, hasMounted]);
 
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {frontMatter?.title} - {APP_NAME} blog
-        </title>
-      </Head>
-
+    <SiteLayout title={frontMatter?.title || 'Blog'}>
       <section tw="flex flex-row space-x-2">
         <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
           {banner && (

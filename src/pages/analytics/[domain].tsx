@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getSession } from 'next-auth/react';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -18,10 +17,7 @@ export type AnalyticsProps = {
 
 export default function Analytics(props: AnalyticsProps): JSX.Element {
   return (
-    <SiteLayout hideFullBleed>
-      <Head>
-        <title>Analytics</title>
-      </Head>
+    <SiteLayout hideFullBleed title="Analytics">
       <section tw="xl:max-width[70rem] mx-auto px-4">
         <PageTitle tw="pb-6">Analytics</PageTitle>
         <AnalyticsBlock

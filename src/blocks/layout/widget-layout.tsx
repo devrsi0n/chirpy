@@ -4,22 +4,22 @@ import 'twin.macro';
 
 import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
 
-import { LayoutWrapper } from './layout-wrapper';
+import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
 
 export type WidgetLayoutProps = {
   className?: string;
-} & WidgetThemeProviderProps;
+} & WidgetThemeProviderProps &
+  Pick<LayoutWrapperProps, 'title'>;
 
 /**
  * `WidgetLayout` provides theme and container styles.
  * Do not use it in _app.tsx and render it with `SiteLayout`
  * conditionally, it will increase bundle size on widgets
  */
-export function WidgetLayout(props: WidgetLayoutProps): JSX.Element {
-  const { children, widgetTheme } = props;
+export function WidgetLayout({ title, children, widgetTheme }: WidgetLayoutProps): JSX.Element {
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
-      <LayoutWrapper tw="min-h-full py-10 sm:mr-1">
+      <LayoutWrapper title={title} tw="min-h-full py-10 sm:mr-1">
         <AnimatePresence>
           <m.div
             transition={{ duration: 0.35 }}

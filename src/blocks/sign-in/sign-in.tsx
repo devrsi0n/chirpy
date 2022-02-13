@@ -1,5 +1,4 @@
 import { signIn } from 'next-auth/react';
-import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
@@ -9,7 +8,6 @@ import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { Logo } from '$/components/logo';
 import { Text } from '$/components/text';
-import { APP_NAME } from '$/lib/constants';
 import { SIGN_IN_ERRORS } from '$/strings';
 
 import { authOptions } from './data-source';
@@ -63,7 +61,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
           </div>
           <Text tw="py-3" size="sm" variant="secondary">
             By clicking the buttons above, you acknowledge that you have read and understood, and
-            agree to {APP_NAME}
+            agree to Chirpy
             {`'s `}
             <Link href="/terms-of-service">Terms of Service</Link> and{' '}
             <Link href="/privacy-policy">Privacy Policy</Link>.

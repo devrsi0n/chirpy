@@ -1,5 +1,4 @@
 import AlertCircleFill from '@geist-ui/react-icons/alertCircleFill';
-import Head from 'next/head';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
@@ -9,14 +8,10 @@ import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Text } from '$/components/text/text';
-import { APP_NAME } from '$/lib/constants';
 
 export default function Custom404(): JSX.Element {
   return (
-    <SiteLayout>
-      <Head>
-        <title>404 - {APP_NAME}</title>
-      </Head>
+    <SiteLayout title="404">
       <section tw="px-4 space-y-8 flex flex-col items-center">
         <div
           css={[

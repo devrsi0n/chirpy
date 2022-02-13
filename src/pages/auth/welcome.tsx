@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -10,7 +9,6 @@ import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useCelebration } from '$/hooks/use-celebration';
-import { APP_NAME } from '$/lib/constants';
 import { ssrMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';
 
@@ -30,12 +28,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <SiteLayout>
-      <Head>
-        <title>Welcome - {APP_NAME}</title>
-      </Head>
-      {isFullFilled ? <FullFilled /> : <NotFullFilled />}
-    </SiteLayout>
+    <SiteLayout title="Welcome">{isFullFilled ? <FullFilled /> : <NotFullFilled />}</SiteLayout>
   );
 }
 

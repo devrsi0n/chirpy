@@ -1,5 +1,4 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -9,14 +8,10 @@ import { Pricing } from '$/blocks/pricing';
 import { Button } from '$/components/button';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
-import { APP_NAME } from '$/lib/constants';
 
 function Home(): JSX.Element {
   return (
-    <SiteLayout enableBgGradient>
-      <Head>
-        <title>{APP_NAME}</title>
-      </Head>
+    <SiteLayout enableBgGradient title="">
       <section tw="min-h-full flex flex-col items-center space-y-24">
         <div tw="space-y-8">
           <h1 tw="font-black sm:(text-center) text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
