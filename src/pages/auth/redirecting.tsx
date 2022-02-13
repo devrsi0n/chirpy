@@ -7,11 +7,11 @@ import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useTimeout } from '$/hooks/use-timeout';
-import { CALLBACK_URL, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { CALLBACK_URL_KEY, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
-  const { data: session, status } = useSession();
+  const { status } = useSession();
 
   const { data, loading } = useCurrentUser();
   const router = useRouter();
@@ -25,8 +25,8 @@ export default function Redirecting(): JSX.Element {
     if (!hasValidUserProfile(data)) {
       router.push('/auth/welcome?invalidProfile=true');
     } else if (data.id) {
-      const callbackUrl = sessionStorage.getItem(CALLBACK_URL);
-      sessionStorage.removeItem(CALLBACK_URL);
+      const callbackUrl = sessionStorage.getItem(CALLBACK_URL_KEY);
+      sessionStorage.removeItem(CALLBACK_URL_KEY);
       router.push(callbackUrl || '/dashboard');
     }
   }, [router, data, status, loading]);

@@ -10,7 +10,7 @@ import { CommonPageProps } from '$/types/page.type';
 
 export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <SiteLayout title={frontMatter.title}>
+    <SiteLayout title={frontMatter.title || 'Terms of service'}>
       <section>
         <article tw="mx-auto prose lg:prose-xl">
           <MDXRemote {...mdxSource} components={MDXComponents} />

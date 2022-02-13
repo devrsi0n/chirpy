@@ -15,7 +15,7 @@ const CONTAINER_FOLDER = 'docs';
 
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
   return (
-    <SiteLayout title={frontMatter?.title}>
+    <SiteLayout title={frontMatter?.title || 'Docs'}>
       <div tw="min-h-full">
         <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
           <SideBar tw="pt-10" directories={directories} title="Documentation" />

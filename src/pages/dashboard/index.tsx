@@ -1,5 +1,4 @@
 import PlusCircle from '@geist-ui/react-icons/plusCircle';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -15,7 +14,6 @@ import { useCurrentUser } from '$/contexts/current-user-context/use-current-user
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
-import { APP_NAME } from '$/lib/constants';
 import { isENVProd } from '$/server/utilities/env';
 
 type FormFields = {

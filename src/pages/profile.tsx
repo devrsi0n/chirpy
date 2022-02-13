@@ -3,7 +3,6 @@ import Link2 from '@geist-ui/react-icons/link2';
 import Save from '@geist-ui/react-icons/save';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import Twitter from '@geist-ui/react-icons/twitter';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -22,7 +21,6 @@ import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
-import { APP_NAME } from '$/lib/constants';
 
 type FormFields = {
   name: string;

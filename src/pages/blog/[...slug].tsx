@@ -26,7 +26,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   }, [frontMatter?.banner, hasMounted]);
 
   return (
-    <SiteLayout title={frontMatter?.title}>
+    <SiteLayout title={frontMatter?.title || 'Blog'}>
       <section tw="flex flex-row space-x-2">
         <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
           {banner && (

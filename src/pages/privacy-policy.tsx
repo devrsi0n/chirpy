@@ -9,7 +9,7 @@ import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 
 export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (
-    <SiteLayout title={frontMatter.title}>
+    <SiteLayout title={frontMatter.title || 'Privacy policy'}>
       <section>
         <article tw="mx-auto prose lg:prose-xl py-16">
           <MDXRemote {...mdxSource} components={MDXComponents} />

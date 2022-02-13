@@ -8,7 +8,6 @@ import { Pricing } from '$/blocks/pricing';
 import { Button } from '$/components/button';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
-import { APP_NAME } from '$/lib/constants';
 
 function Home(): JSX.Element {
   return (

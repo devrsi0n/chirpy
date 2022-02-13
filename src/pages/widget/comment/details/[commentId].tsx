@@ -31,7 +31,6 @@ import { useCreateAComment } from '$/hooks/use-create-a-comment';
 import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
 import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { APP_NAME } from '$/lib/constants';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
@@ -55,10 +54,7 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <WidgetLayout widgetTheme={props.theme}>
-      <Head>
-        <title>{APP_NAME} comment details</title>
-      </Head>
+    <WidgetLayout widgetTheme={props.theme} title="Comment details">
       <CommentContextProvider projectId={props.projectId}>
         <div css={tw`flex flex-row justify-between items-center mb-4`}>
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
