@@ -41,6 +41,7 @@ You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chi
 - [twin.macro](https://github.com/ben-rogerson/twin.macro)
 - [urql](https://github.com/FormidableLabs/urql)
 - [next-auth](https://github.com/nextauthjs/next-auth)
+- [tiptap](https://tiptap.dev)
 - [Plausible](https://github.com/plausible/analytics)
 
 ## 🥇 Contribution
