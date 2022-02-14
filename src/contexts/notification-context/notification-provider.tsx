@@ -11,12 +11,14 @@ export interface INotificationContext {
   didRegister: boolean;
   setDidRegister: React.Dispatch<React.SetStateAction<boolean>>;
   registerNotification: () => Promise<void>;
+  didDeny: boolean;
 }
 
 const NotificationContext = React.createContext<INotificationContext>({
   didRegister: false,
   setDidRegister: () => {},
   registerNotification: () => Promise.resolve(),
+  didDeny: false,
 });
 
 export interface INotificationProviderProps {
@@ -25,11 +27,15 @@ export interface INotificationProviderProps {
 
 export function NotificationProvider({ children }: INotificationProviderProps) {
   const [didRegister, setDidRegister] = React.useState(false);
+  const [didDeny, setDidDeny] = React.useState(false);
   const registerNotification = React.useCallback(async (): Promise<void> => {
     if (Notification.permission === 'denied') {
       return console.log('Notification permission denied');
     } else if (Notification.permission === 'default') {
       const permission = await askNotificationPermission();
+      if (permission === 'denied') {
+        setDidDeny(true);
+      }
       if (permission === 'denied' || permission === 'default') {
         return console.log(`User didn't grant notification permission`);
       }
@@ -43,8 +49,9 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
       didRegister,
       setDidRegister,
       registerNotification,
+      didDeny,
     }),
-    [didRegister, registerNotification],
+    [didRegister, registerNotification, didDeny],
   );
   React.useEffect(() => {
     checkNotificationCompatibility();

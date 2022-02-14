@@ -6,7 +6,7 @@ import { SiteThemeProvider } from '$/contexts/theme-context';
 
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
-import { LayoutWrapper } from './layout-wrapper';
+import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
 
 export type LayoutProps = React.PropsWithChildren<{
   hideHeader?: boolean;
@@ -16,9 +16,11 @@ export type LayoutProps = React.PropsWithChildren<{
   styles?: {
     container?: TwStyle;
   };
-}>;
+}> &
+  Pick<LayoutWrapperProps, 'title'>;
 
 export default function SiteLayout({
+  title,
   hideHeader,
   hideFooter,
   enableBgGradient,
@@ -31,6 +33,7 @@ export default function SiteLayout({
   return (
     <SiteThemeProvider>
       <LayoutWrapper
+        title={title}
         css={[
           enableBgGradient && tw`before:(absolute inset-0 content-[''])`,
           {
