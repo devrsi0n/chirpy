@@ -3,16 +3,10 @@ import { getSession } from 'next-auth/react';
 import { PushSubscription } from 'web-push';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { createOneNotificationSubscription } from '$/server/gql/notification';
 
-import {
-  InsertOneNotificationSubscriptionDocument,
-  InsertOneNotificationSubscriptionMutation,
-  InsertOneNotificationSubscriptionMutationVariables,
-} from '../../graphql/generated/notification';
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';
-
-const client = getAdminGqlClient();
 
 export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{}>) {
   const session = await getSession({ req });
@@ -26,15 +20,10 @@ export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{
     return;
   }
   // console.log('saving subscription', subscription);
-  await client
-    .mutation<
-      InsertOneNotificationSubscriptionMutation,
-      InsertOneNotificationSubscriptionMutationVariables
-    >(InsertOneNotificationSubscriptionDocument, {
-      userId: session.user.id,
-      subscription,
-    })
-    .toPromise();
+  await createOneNotificationSubscription({
+    userId: session.user.id,
+    subscription,
+  });
   res.json({
     message: 'ok',
   });

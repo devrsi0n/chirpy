@@ -5,6 +5,11 @@ import {
   InsertOneNotificationMessageDocument,
   InsertOneNotificationMessageMutationVariables,
 } from '$/server/graphql/generated/notification';
+import {
+  InsertOneNotificationSubscriptionDocument,
+  InsertOneNotificationSubscriptionMutation,
+  InsertOneNotificationSubscriptionMutationVariables,
+} from '$/server/graphql/generated/notification';
 
 const client = getAdminGqlClient();
 
@@ -33,4 +38,17 @@ export async function deleteNotificationMessage(
     );
   }
   return data.deleteNotificationMessages;
+}
+
+export async function createOneNotificationSubscription(
+  variables: InsertOneNotificationSubscriptionMutationVariables,
+) {
+  const { error, data } = await client
+    .mutation(InsertOneNotificationSubscriptionDocument, variables)
+    .toPromise();
+  // It's ok if there're a duplicated, just ignore it
+  if (error && !error.message.startsWith('[GraphQL] Uniqueness violation')) {
+    throw new Error(`Create a notification subscription failed), error: ${error}`);
+  }
+  return data?.insertOneNotificationSubscription;
 }
