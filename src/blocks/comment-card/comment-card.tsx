@@ -99,6 +99,7 @@ export function CommentCard({
   const { data } = useCurrentUser();
   const isDeleted = !!deletedAt;
   const rteContent = isDeleted ? PLACEHOLDER_OF_DELETED_COMMENT : content;
+  console.log('content', content);
   const userHasModeratePermission = data?.editableProjectIds?.includes(projectId);
 
   return (

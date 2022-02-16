@@ -1,13 +1,13 @@
 import Search from '@geist-ui/react-icons/search';
-import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
 import { CommentTree } from '$/blocks/comment-tree';
 import { SiteLayout } from '$/blocks/layout';
 import { Table } from '$/components/Table';
+import { Avatar } from '$/components/avatar';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
 import { Heading } from '$/components/heading';
@@ -15,15 +15,20 @@ import { APP_ADMIN_NAME } from '$/lib/constants';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { getComment } from '$/server/services/comment';
 import { CommentLeafType } from '$/types/widget';
+import { dayjs } from '$/utilities/date';
+
+type StaticProps = {
+  commentList: [];
+};
 
 export default function Admin(props: StaticProps) {
   const commentList = props.commentList || [];
-  const [data, setData] = useState([...commentList]);
-  const [loading, setLoading] = useState(false);
-  const [pageCount, setPageCount] = useState(0);
-  const [showDialog, setShowDialog] = useState(false);
-  const fetchIdRef = useRef(0);
-  const [comments, setComments] = useState([]);
+  const [data, setData] = React.useState([...commentList]);
+  const [loading, setLoading] = React.useState(false);
+  const [pageCount, setPageCount] = React.useState(0);
+  const [showDialog, setShowDialog] = React.useState(false);
+  const fetchIdRef = React.useRef(0);
+  const [comments, setComments] = React.useState<CommentContentFragment[]>([]);
 
   const handleClick = (rowProps: CommentContentFragment) => {
     setShowDialog(true);
@@ -33,22 +38,28 @@ export default function Admin(props: StaticProps) {
   const columns = React.useMemo(() => {
     return [
       {
+        Header: 'user',
+        accessor: (rowProps: CommentContentFragment) => (
+          <div tw="cursor-pointer">
+            <Avatar onClick={() => handleClick(rowProps)} src={rowProps?.user?.avatar!} />
+            <p tw="mt-1">{rowProps?.user?.name}</p>
+          </div>
+        ),
+      },
+      {
         Header: 'comment_id',
         accessor: 'id',
       },
       {
-        Header: 'user',
-        accessor: ({ user }) => <span>{user?.name}</span>,
-      },
-      {
-        Header: 'createdAt',
-        accessor: 'createdAt',
+        Header: 'creation_time',
+        accessor: ({ createdAt }: CommentContentFragment) =>
+          createdAt && dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss'),
       },
       {
         Header: 'comments',
-        accessor: (rowProps) => (
-          <Button variant="text" color="primary" onClick={() => handleClick(rowProps)}>
-            detail
+        accessor: (rowProps: CommentContentFragment) => (
+          <Button variant="text" color="red" onClick={() => handleClick(rowProps)}>
+            Delete
           </Button>
         ),
       },
@@ -124,12 +135,12 @@ export default function Admin(props: StaticProps) {
         <div tw="">
           <div tw="space-y-2">
             <ul tw="min-w-full">
-              {comments?.map((comment: CommentLeafType) => (
+              {comments?.map((comment: Partial<CommentLeafType>) => (
                 <CommentTree
                   key={comment.id}
                   depth={1}
                   comment={comment}
-                  onClickLikeAction={() => {}}
+                  // onClickLikeAction={() => {}}
                   // onSubmitReply={() => console.log(123)}
                 />
               ))}
@@ -141,11 +152,7 @@ export default function Admin(props: StaticProps) {
   );
 }
 
-type StaticProps = {
-  commentList: [];
-};
-
-export const getStaticProps: GetStaticProps<StaticProps> = async () => {
+export const getStaticProps = async () => {
   const commentList = await getComment();
 
   return {
