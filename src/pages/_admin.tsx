@@ -1,6 +1,7 @@
 import Search from '@geist-ui/react-icons/search';
+import Trash2 from '@geist-ui/react-icons/trash2';
 import Head from 'next/head';
-import React from 'react';
+import React, { useCallback } from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
@@ -11,6 +12,9 @@ import { Avatar } from '$/components/avatar';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
 import { Heading } from '$/components/heading';
+import { Popover } from '$/components/popover';
+import { Text } from '$/components/text';
+import { useDeleteUser } from '$/hooks/use-delete-user';
 import { APP_ADMIN_NAME } from '$/lib/constants';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { getComment } from '$/server/services/comment';
@@ -29,11 +33,32 @@ export default function Admin(props: StaticProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const fetchIdRef = React.useRef(0);
   const [comments, setComments] = React.useState<CommentContentFragment[]>([]);
+  const deleteOneUser = useDeleteUser();
 
   const handleClick = (rowProps: CommentContentFragment) => {
+    console.log('rowProps', rowProps);
     setShowDialog(true);
     setComments([rowProps]);
   };
+
+  const handleDeleteUser = async ({ user: { id } }: CommentContentFragment) => {
+    // deleteOneUser(id);
+    console.log('iiiiiiiiiiid', id);
+  };
+
+  const commentsDetail = useCallback((comments: []): string => {
+    let commentsAll = '';
+    const getEveryComments = (comments: []) => {
+      comments.map((comment: any) => {
+        return !!comment.text
+          ? (commentsAll = `${commentsAll}\n${comment.text}`)
+          : getEveryComments(comment.content);
+      });
+    };
+    getEveryComments(comments);
+
+    return commentsAll;
+  }, []);
 
   const columns = React.useMemo(() => {
     return [
@@ -56,11 +81,31 @@ export default function Admin(props: StaticProps) {
           createdAt && dayjs(createdAt).format('YYYY-MM-DD HH:mm:ss'),
       },
       {
-        Header: 'comments',
+        Header: 'comment',
+        accessor: ({ comment }: CommentContentFragment) => commentsDetail(comment),
+      },
+      {
+        Header: 'operation',
         accessor: (rowProps: CommentContentFragment) => (
-          <Button variant="text" color="red" onClick={() => handleClick(rowProps)}>
-            Delete
-          </Button>
+          <Popover
+            placement="topEnd"
+            buttonAs="button"
+            content={
+              <div tw="flex flex-row items-center space-x-2">
+                <Text size="sm" tw="w-max text-gray-100">
+                  Are you sure to delete this user?
+                </Text>
+                <Button variant="text" color="red" onClick={() => handleDeleteUser(rowProps)}>
+                  Delete
+                </Button>
+              </div>
+            }
+          >
+            <div css={[tw`flex flex-row items-center`]}>
+              <Trash2 size={16} />
+              <span tw="ml-1">Delete</span>
+            </div>
+          </Popover>
         ),
       },
     ];
@@ -124,7 +169,7 @@ export default function Admin(props: StaticProps) {
         show={showDialog}
         title={
           <div tw="w-5/6">
-            <Heading as="h2" tw="mb-3">
+            <Heading as="h2" tw="mb-3 mr-8">
               Comments
             </Heading>
           </div>
@@ -132,20 +177,18 @@ export default function Admin(props: StaticProps) {
         onClose={() => setShowDialog(false)}
         styles={{ content: tw`max-w-2xl sm:(px-14 py-10)` }}
       >
-        <div tw="">
-          <div tw="space-y-2">
-            <ul tw="min-w-full">
-              {comments?.map((comment: Partial<CommentLeafType>) => (
-                <CommentTree
-                  key={comment.id}
-                  depth={1}
-                  comment={comment}
-                  // onClickLikeAction={() => {}}
-                  // onSubmitReply={() => console.log(123)}
-                />
-              ))}
-            </ul>
-          </div>
+        <div tw="space-y-2">
+          <ul>
+            {comments?.map((comment: Partial<CommentLeafType>) => (
+              <CommentTree
+                key={comment.id}
+                depth={1}
+                comment={comment as any}
+                onSubmitReply={() => Promise.resolve()}
+                onClickLikeAction={() => Promise.resolve()}
+              />
+            ))}
+          </ul>
         </div>
       </Dialog>
     </SiteLayout>

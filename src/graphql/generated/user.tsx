@@ -38,6 +38,13 @@ export type UserDashboardProjectsQueryVariables = Types.Exact<{
 
 export type UserDashboardProjectsQuery = { __typename?: 'query_root', userByPk?: { __typename?: 'User', id: string, projects: Array<{ __typename?: 'Project', id: string, name: string, domain: string, createdAt: string, pages: Array<{ __typename?: 'Page', id: string, title?: string | null | undefined, url: string }> }> } | null | undefined };
 
+export type DeleteUserMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+
+export type DeleteUserMutation = { __typename?: 'mutation_root', deleteUserByPk?: { __typename?: 'User', id: string } | null | undefined };
+
 
 export const CurrentUserDocument = gql`
     query currentUser($id: uuid!) {
@@ -106,4 +113,15 @@ export const UserDashboardProjectsDocument = gql`
 
 export function useUserDashboardProjectsQuery(options: Omit<Urql.UseQueryArgs<UserDashboardProjectsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<UserDashboardProjectsQuery>({ query: UserDashboardProjectsDocument, ...options });
+};
+export const DeleteUserDocument = gql`
+    mutation deleteUser($id: uuid!) {
+  deleteUserByPk(id: $id) {
+    id
+  }
+}
+    `;
+
+export function useDeleteUserMutation() {
+  return Urql.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument);
 };

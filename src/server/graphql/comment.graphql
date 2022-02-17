@@ -1,6 +1,7 @@
 fragment commentContent on Comment {
   id
   content
+  comment: content(path: "content")
   createdAt
   deletedAt
   parentId

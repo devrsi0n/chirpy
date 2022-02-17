@@ -40,6 +40,7 @@ export type CommentCardProps = {
   deletedAt?: string | null;
   likes: Like[];
   depth: number;
+  comment?: [];
   preventDetailsPage?: boolean;
   onSubmitReply: SubmitHandler;
   onClickLikeAction: ClickLikeActionHandler;
@@ -49,6 +50,7 @@ export function CommentCard({
   commentId,
   author,
   content,
+  comment,
   depth,
   createdAt,
   likes,
@@ -99,7 +101,6 @@ export function CommentCard({
   const { data } = useCurrentUser();
   const isDeleted = !!deletedAt;
   const rteContent = isDeleted ? PLACEHOLDER_OF_DELETED_COMMENT : content;
-  console.log('content', content);
   const userHasModeratePermission = data?.editableProjectIds?.includes(projectId);
 
   return (
@@ -170,7 +171,7 @@ export function CommentCard({
         <div tw="mt-1 mb-1.5">
           <RichTextEditor initialValue={rteContent} readOnly />
         </div>
-        {!isDeleted && (
+        {!isDeleted && comment && (
           <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
             <LikeAction
               aria-label="Like"

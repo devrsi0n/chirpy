@@ -641,13 +641,13 @@ export enum Comment_Update_Column {
 export type Like = {
   __typename?: 'Like';
   /** An object relationship */
-  User: User;
-  /** An object relationship */
   comment: Comment;
   commentId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
   updatedAt: Scalars['timestamptz'];
+  /** An object relationship */
+  user: User;
   userId: Scalars['uuid'];
 };
 
@@ -689,7 +689,6 @@ export type Like_Arr_Rel_Insert_Input = {
 
 /** Boolean expression to filter rows from the table "Like". All fields are combined with a logical 'AND'. */
 export type Like_Bool_Exp = {
-  User?: InputMaybe<User_Bool_Exp>;
   _and?: InputMaybe<Array<Like_Bool_Exp>>;
   _not?: InputMaybe<Like_Bool_Exp>;
   _or?: InputMaybe<Array<Like_Bool_Exp>>;
@@ -698,6 +697,7 @@ export type Like_Bool_Exp = {
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  user?: InputMaybe<User_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -711,12 +711,12 @@ export enum Like_Constraint {
 
 /** input type for inserting data into table "Like" */
 export type Like_Insert_Input = {
-  User?: InputMaybe<User_Obj_Rel_Insert_Input>;
   comment?: InputMaybe<Comment_Obj_Rel_Insert_Input>;
   commentId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  user?: InputMaybe<User_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -776,12 +776,12 @@ export type Like_On_Conflict = {
 
 /** Ordering options when selecting data from "Like". */
 export type Like_Order_By = {
-  User?: InputMaybe<User_Order_By>;
   comment?: InputMaybe<Comment_Order_By>;
   commentId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
+  user?: InputMaybe<User_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
