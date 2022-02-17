@@ -1,0 +1,36 @@
+name: Hasura CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - prod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Staging
+        if: ${{ github.ref_name == 'main' }}
+        uses: GavinRay97/hasura-ci-cd-action@v1.3
+        with:
+          PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
+          HASURA_CLI_VERSION: v2.1.1
+          HASURA_ENDPOINT: https://hasura-staging.chirpy.dev
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+          # If you want to disable either migrations or regression tests, make sure to remove them completely
+          # The script only checks for their presence, not their value
+          HASURA_MIGRATIONS_ENABLED: true
+          HASURA_SEEDS_ENABLED: true
+
+      - name: Prod
+        if: ${{ github.ref_name == 'prod' }}
+        uses: GavinRay97/hasura-ci-cd-action@v1.3
+        with:
+          PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
+          HASURA_CLI_VERSION: v2.1.1
+          HASURA_ENDPOINT: https://hasura.chirpy.dev
+          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
+          HASURA_MIGRATIONS_ENABLED: true
+          HASURA_SEEDS_ENABLED: true

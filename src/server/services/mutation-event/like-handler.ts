@@ -1,11 +1,8 @@
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { getAuthorByCommentId } from '$/server/gql/comment';
 import { getRecipientByLikeId } from '$/server/gql/like';
 
 import { createOneNotificationMessage, deleteNotificationMessage } from '../../gql/notification';
 import { EventLike, EventPayload } from './event-type';
-
-const client = getAdminGqlClient();
 
 /**
  * Get notification payloads for a like event.
