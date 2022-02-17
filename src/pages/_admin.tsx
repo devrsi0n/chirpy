@@ -1,6 +1,5 @@
 import Search from '@geist-ui/react-icons/search';
 import Trash2 from '@geist-ui/react-icons/trash2';
-import Head from 'next/head';
 import React, { useCallback } from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
@@ -15,7 +14,6 @@ import { Heading } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useDeleteUser } from '$/hooks/use-delete-user';
-import { APP_ADMIN_NAME } from '$/lib/constants';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { getComment } from '$/server/services/comment';
 import { CommentLeafType } from '$/types/widget';
@@ -36,14 +34,12 @@ export default function Admin(props: StaticProps) {
   const deleteOneUser = useDeleteUser();
 
   const handleClick = (rowProps: CommentContentFragment) => {
-    console.log('rowProps', rowProps);
     setShowDialog(true);
     setComments([rowProps]);
   };
 
   const handleDeleteUser = async ({ user: { id } }: CommentContentFragment) => {
-    // deleteOneUser(id);
-    console.log('iiiiiiiiiiid', id);
+    deleteOneUser(id);
   };
 
   const commentsDetail = useCallback((comments: []): string => {
@@ -133,10 +129,7 @@ export default function Admin(props: StaticProps) {
   };
 
   return (
-    <SiteLayout hideFullBleed>
-      <Head>
-        <title>{APP_ADMIN_NAME}</title>
-      </Head>
+    <SiteLayout hideFullBleed title="Admin">
       <div tw="px-24">
         <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
           <div tw="flex items-center justify-start space-x-4">

@@ -15,7 +15,8 @@ import { Spinner } from '$/components/spinner';
 import { ToastProvider } from '$/components/toast';
 import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
-import { ANALYTICS_DOMAIN, APP_NAME_LOWERCASE, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+import { NotificationProvider } from '$/contexts/notification-context';
+import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
 function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppProps): JSX.Element {
@@ -35,18 +36,20 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
           <GlobalStyles />
           <Global styles={appGlobalStyles} />
 
-          <NextThemesProvider attribute="class" storageKey={`${APP_NAME_LOWERCASE}.theme`}>
+          <NextThemesProvider attribute="class" storageKey="chirpy.theme">
             <LazyMotion features={loadFeatures} strict>
               <GQLClientProvider>
                 <CurrentUserProvider>
                   <ToastProvider>
-                    {(Component as any).auth ? (
-                      <AuthGuard isWidget={isWidget}>
+                    <NotificationProvider>
+                      {(Component as any).auth ? (
+                        <AuthGuard isWidget={isWidget}>
+                          <Component {...pageProps} />
+                        </AuthGuard>
+                      ) : (
                         <Component {...pageProps} />
-                      </AuthGuard>
-                    ) : (
-                      <Component {...pageProps} />
-                    )}
+                      )}
+                    </NotificationProvider>
                   </ToastProvider>
                 </CurrentUserProvider>
               </GQLClientProvider>
@@ -74,9 +77,9 @@ function AuthGuard({ children, isWidget }: AuthGuardProps): JSX.Element {
     return <>{children}</>;
   }
   // Only wrap spinner with Layout on non-widget scenarios
-  const Wrapper = isWidget ? React.Fragment : LazySiteLayout;
+  const Wrapper = isWidget ? 'div' : LazySiteLayout;
   return (
-    <Wrapper>
+    <Wrapper title="Loading">
       <Spinner tw="mt-32 justify-center" />
     </Wrapper>
   );

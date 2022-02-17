@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { isBrowser } from '$/utilities/is-browser';
+import { isBrowser } from '$/utilities/env';
 
 const createElement = (id: string): HTMLElement => {
   const el = document.createElement('div');
@@ -14,7 +14,7 @@ export const usePortal = (
 ): HTMLElement | null => {
   const id = `notification-${selectId}`;
   const [elSnapshot, setElSnapshot] = React.useState<HTMLElement | null>(() =>
-    isBrowser() ? createElement(id) : null,
+    isBrowser ? createElement(id) : null,
   );
 
   React.useEffect(() => {

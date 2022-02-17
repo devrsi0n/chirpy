@@ -6,7 +6,7 @@ import { Code } from '$/components/code';
 import { Dialog } from '$/components/dialog';
 import { Heading } from '$/components/heading';
 import { Text } from '$/components/text';
-import { APP_URL, APP_NAME } from '$/lib/constants';
+import { APP_URL } from '$/lib/constants';
 
 export type IntegrateGuideProps = {
   domain: string;
@@ -30,7 +30,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         title={
           <div>
             <Heading as="h2" tw="mb-3 leading-none">
-              Get Started with {APP_NAME} Comment
+              Get Started with Chirpy Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">
               Integrate the widget into your website to start engaging with your customer.

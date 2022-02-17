@@ -1,5 +1,4 @@
 import PlusCircle from '@geist-ui/react-icons/plusCircle';
-import Head from 'next/head';
 import * as React from 'react';
 import 'twin.macro';
 
@@ -15,7 +14,6 @@ import { useCurrentUser } from '$/contexts/current-user-context/use-current-user
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
-import { APP_NAME } from '$/lib/constants';
 import { isENVProd } from '$/server/utilities/env';
 
 type FormFields = {
@@ -78,13 +76,7 @@ export default function Dashboard(): JSX.Element {
   const disableCreation = isENVProd && (projects?.length || 0) > 0;
 
   return (
-    <SiteLayout>
-      <Head>
-        <title>
-          {name} - {APP_NAME} dashboard
-        </title>
-      </Head>
-
+    <SiteLayout title="Dashboard">
       <section tw="space-y-10">
         <div tw="space-x-2 flex flex-row justify-between items-start">
           <PageTitle>Dashboard</PageTitle>
