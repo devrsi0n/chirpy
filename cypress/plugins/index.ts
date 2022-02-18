@@ -17,7 +17,7 @@ export default function Plugins(
 ): void | Cypress.ConfigOptions | Promise<Cypress.ConfigOptions> {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  config.env.HASH_KEY = process.env.HASH_KEY;
+  config.env.NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
   const maxAge = 24 * 60 * 60;
   config.env.HASURA_TOKEN = createAuthToken(
     {

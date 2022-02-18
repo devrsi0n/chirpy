@@ -6,7 +6,6 @@ import {
   InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
-import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';

@@ -31,11 +31,11 @@ function createAuthToken(payload: Payload, options: Options): string {
 }
 
 function createToken(payload: string | object | Buffer, { maxAge }: { maxAge: string | number }) {
-  const encodedToken = jwt.sign(payload, process.env.HASH_KEY, {
+  const encodedToken = jwt.sign(payload, process.env.NEXTAUTH_SECRET, {
     algorithm: process.env.HASH_ALGORITHM as jwt.Algorithm,
     expiresIn: maxAge,
   });
-  // console.log({ payload, key: process.env.HASH_KEY });
+  // console.log({ payload, key: process.env.NEXTAUTH_SECRET });
   return encodedToken;
 }
 

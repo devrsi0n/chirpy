@@ -35,7 +35,7 @@ npm run sb
 
 Hasura is used as the data server.
 
-First, you need to set up a local docker config file. Copy `services/hasura/docker-compose.yaml` to `services/hasura/docker-compose.local.yaml`. Run `openssl rand -base64 172 | tr -d '\n'` to generate a random token. Copy the token and fill the `HASURA_GRAPHQL_JWT_SECRET` variable in `services/hasura/docker-compose.local.yaml`.
+First, you need to set up a local docker config file. Copy `services/hasura/docker-compose.example.yaml` to `services/hasura/docker-compose.local.yaml`. Run `openssl rand -base64 172 | tr -d '\n'` to generate a random token. Copy the token and fill the `HASURA_GRAPHQL_JWT_SECRET` variable in `services/hasura/docker-compose.local.yaml`.
 
 Then, start a local hasura server, run the following command:
 

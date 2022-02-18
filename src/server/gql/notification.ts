@@ -7,7 +7,6 @@ import {
 } from '$/server/graphql/generated/notification';
 import {
   InsertOneNotificationSubscriptionDocument,
-  InsertOneNotificationSubscriptionMutation,
   InsertOneNotificationSubscriptionMutationVariables,
 } from '$/server/graphql/generated/notification';
 

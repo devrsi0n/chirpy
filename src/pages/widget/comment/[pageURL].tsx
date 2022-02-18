@@ -5,7 +5,6 @@ import {
   GetStaticPropsContext,
   GetStaticPaths,
 } from 'next';
-import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import 'twin.macro';

@@ -40,7 +40,7 @@ jobs:
         # change this if your site requires a custom build command
         run: ./node_modules/.bin/next build
         env:
-          HASH_KEY: ${{ secrets.HASH_KEY }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
           HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
