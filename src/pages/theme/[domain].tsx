@@ -175,8 +175,6 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   );
 }
 
-ThemeEditor.auth = true;
-
 type PathParams = {
   domain: string;
 };

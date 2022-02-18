@@ -41,5 +41,3 @@ export default function Redirecting(): JSX.Element {
     </SiteLayout>
   );
 }
-
-Redirecting.auth = true;
