@@ -10,15 +10,12 @@ export type ThemeOfPageQueryVariables = Types.Exact<{
 
 export type ThemeOfPageQuery = {
   __typename?: 'query_root';
-  pageByPk?:
-    | {
-        __typename?: 'Page';
-        id: string;
-        url: string;
-        project: { __typename?: 'Project'; id: string; theme?: any | null | undefined };
-      }
-    | null
-    | undefined;
+  pageByPk?: {
+    __typename?: 'Page';
+    id: string;
+    url: string;
+    project: { __typename?: 'Project'; id: string; theme?: any | null };
+  } | null;
 };
 
 export const ThemeOfPageDocument = gql`
@@ -35,7 +32,7 @@ export const ThemeOfPageDocument = gql`
 `;
 
 export function useThemeOfPageQuery(
-  options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'> = {},
+  options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<ThemeOfPageQuery>({ query: ThemeOfPageDocument, ...options });
 }

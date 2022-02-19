@@ -10,20 +10,17 @@ export type CurrentUserQueryVariables = Types.Exact<{
 
 export type CurrentUserQuery = {
   __typename?: 'query_root';
-  userByPk?:
-    | {
-        __typename?: 'User';
-        id: string;
-        email?: string | null | undefined;
-        username?: string | null | undefined;
-        name?: string | null | undefined;
-        avatar?: string | null | undefined;
-        bio?: string | null | undefined;
-        website?: string | null | undefined;
-        twitterUserName?: string | null | undefined;
-      }
-    | null
-    | undefined;
+  userByPk?: {
+    __typename?: 'User';
+    id: string;
+    email?: string | null;
+    username?: string | null;
+    name?: string | null;
+    avatar?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
+  } | null;
 };
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
@@ -36,7 +33,7 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
 
 export type UpdateUserByPkMutation = {
   __typename?: 'mutation_root';
-  updateUserByPk?: { __typename?: 'User'; id: string } | null | undefined;
+  updateUserByPk?: { __typename?: 'User'; id: string } | null;
 };
 
 export type UpdateUserFieldsMutationVariables = Types.Exact<{
@@ -48,7 +45,7 @@ export type UpdateUserFieldsMutationVariables = Types.Exact<{
 
 export type UpdateUserFieldsMutation = {
   __typename?: 'mutation_root';
-  updateUserByPk?: { __typename?: 'User'; id: string } | null | undefined;
+  updateUserByPk?: { __typename?: 'User'; id: string } | null;
 };
 
 export type UserDashboardProjectsQueryVariables = Types.Exact<{
@@ -57,26 +54,18 @@ export type UserDashboardProjectsQueryVariables = Types.Exact<{
 
 export type UserDashboardProjectsQuery = {
   __typename?: 'query_root';
-  userByPk?:
-    | {
-        __typename?: 'User';
-        id: string;
-        projects: Array<{
-          __typename?: 'Project';
-          id: string;
-          name: string;
-          domain: string;
-          createdAt: string;
-          pages: Array<{
-            __typename?: 'Page';
-            id: string;
-            title?: string | null | undefined;
-            url: string;
-          }>;
-        }>;
-      }
-    | null
-    | undefined;
+  userByPk?: {
+    __typename?: 'User';
+    id: string;
+    projects: Array<{
+      __typename?: 'Project';
+      id: string;
+      name: string;
+      domain: string;
+      createdAt: string;
+      pages: Array<{ __typename?: 'Page'; id: string; title?: string | null; url: string }>;
+    }>;
+  } | null;
 };
 
 export const CurrentUserDocument = gql`
@@ -95,7 +84,7 @@ export const CurrentUserDocument = gql`
 `;
 
 export function useCurrentUserQuery(
-  options: Omit<Urql.UseQueryArgs<CurrentUserQueryVariables>, 'query'> = {},
+  options: Omit<Urql.UseQueryArgs<CurrentUserQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<CurrentUserQuery>({ query: CurrentUserDocument, ...options });
 }
@@ -157,7 +146,7 @@ export const UserDashboardProjectsDocument = gql`
 `;
 
 export function useUserDashboardProjectsQuery(
-  options: Omit<Urql.UseQueryArgs<UserDashboardProjectsQueryVariables>, 'query'> = {},
+  options: Omit<Urql.UseQueryArgs<UserDashboardProjectsQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<UserDashboardProjectsQuery>({
     query: UserDashboardProjectsDocument,

@@ -13,7 +13,7 @@ export type PageByUrlQuery = {
     __typename?: 'Page';
     id: string;
     url: string;
-    title?: string | null | undefined;
+    title?: string | null;
     project: { __typename?: 'Project'; domain: string };
   }>;
 };
@@ -26,16 +26,13 @@ export type InsertOnePageMutationVariables = Types.Exact<{
 
 export type InsertOnePageMutation = {
   __typename?: 'mutation_root';
-  insertOnePage?:
-    | {
-        __typename?: 'Page';
-        id: string;
-        url: string;
-        title?: string | null | undefined;
-        project: { __typename?: 'Project'; domain: string };
-      }
-    | null
-    | undefined;
+  insertOnePage?: {
+    __typename?: 'Page';
+    id: string;
+    url: string;
+    title?: string | null;
+    project: { __typename?: 'Project'; domain: string };
+  } | null;
 };
 
 export type UpdatePagesMutationVariables = Types.Exact<{
@@ -46,14 +43,11 @@ export type UpdatePagesMutationVariables = Types.Exact<{
 
 export type UpdatePagesMutation = {
   __typename?: 'mutation_root';
-  updatePages?:
-    | {
-        __typename?: 'Page_mutation_response';
-        affected_rows: number;
-        returning: Array<{ __typename?: 'Page'; id: string }>;
-      }
-    | null
-    | undefined;
+  updatePages?: {
+    __typename?: 'Page_mutation_response';
+    affected_rows: number;
+    returning: Array<{ __typename?: 'Page'; id: string }>;
+  } | null;
 };
 
 export type PagesQueryVariables = Types.Exact<{ [key: string]: never }>;
