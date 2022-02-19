@@ -189,6 +189,12 @@
         ]
       },
       {
+        "matchPackagePatterns": "^dotenv",
+        "groupName": [
+          "Dotenv packages"
+        ]
+      },
+      {
         "matchDepTypes": [
           "devDependencies"
         ],
