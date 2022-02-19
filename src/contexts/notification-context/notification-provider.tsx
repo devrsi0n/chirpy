@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { useCurrentUser } from '../current-user-context/use-current-user';
 import { useReloadWhenSwChange } from './use-reload-when-sw-change';
 import {
   askNotificationPermission,
@@ -28,7 +29,11 @@ export interface INotificationProviderProps {
 export function NotificationProvider({ children }: INotificationProviderProps) {
   const [didRegister, setDidRegister] = React.useState(false);
   const [didDeny, setDidDeny] = React.useState(false);
+  const { isSignIn } = useCurrentUser();
   const registerNotification = React.useCallback(async (): Promise<void> => {
+    if (!isSignIn) {
+      return;
+    }
     if (Notification.permission === 'denied') {
       return console.log('Notification permission denied');
     } else if (Notification.permission === 'default') {
@@ -43,7 +48,7 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
 
     // We don't want to wait here for registering the service worker, we only need to wait for permission check
     registerNotificationSubscription().then(() => setDidRegister(true));
-  }, []);
+  }, [isSignIn]);
   const value = React.useMemo(
     () => ({
       didRegister,
