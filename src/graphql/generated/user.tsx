@@ -68,6 +68,15 @@ export type UserDashboardProjectsQuery = {
   } | null;
 };
 
+export type DeleteUserMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type DeleteUserMutation = {
+  __typename?: 'mutation_root';
+  deleteUserByPk?: { __typename?: 'User'; id: string } | null;
+};
+
 export const CurrentUserDocument = gql`
   query currentUser($id: uuid!) {
     userByPk(id: $id) {
@@ -152,4 +161,15 @@ export function useUserDashboardProjectsQuery(
     query: UserDashboardProjectsDocument,
     ...options,
   });
+}
+export const DeleteUserDocument = gql`
+  mutation deleteUser($id: uuid!) {
+    deleteUserByPk(id: $id) {
+      id
+    }
+  }
+`;
+
+export function useDeleteUserMutation() {
+  return Urql.useMutation<DeleteUserMutation, DeleteUserMutationVariables>(DeleteUserDocument);
 }

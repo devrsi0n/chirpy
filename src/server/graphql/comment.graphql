@@ -1,3 +1,22 @@
+fragment commentContent on Comment {
+  id
+  content
+  comment: content(path: "content")
+  createdAt
+  deletedAt
+  parentId
+  pageId
+  user {
+    id
+    name
+    avatar
+  }
+  likes {
+    id
+    userId
+  }
+}
+
 query comments {
   comments {
     id
@@ -31,6 +50,18 @@ query authorByCommentId($commentId: uuid!) {
     author: user {
       id
       name
+    }
+  }
+}
+
+query commentList($limit: Int!, $offset: Int!) {
+  comments(limit: $limit, offset: $offset) {
+    ...commentContent
+    replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+      ...commentContent
+      replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        ...commentContent
+      }
     }
   }
 }
