@@ -12,16 +12,13 @@ export type InsertOneProjectMutationVariables = Types.Exact<{
 
 export type InsertOneProjectMutation = {
   __typename?: 'mutation_root';
-  insertOneProject?:
-    | {
-        __typename?: 'Project';
-        id: string;
-        name: string;
-        teamId?: string | null | undefined;
-        userId?: string | null | undefined;
-      }
-    | null
-    | undefined;
+  insertOneProject?: {
+    __typename?: 'Project';
+    id: string;
+    name: string;
+    teamId?: string | null;
+    userId?: string | null;
+  } | null;
 };
 
 export type DeleteProjectByPkMutationVariables = Types.Exact<{
@@ -30,7 +27,7 @@ export type DeleteProjectByPkMutationVariables = Types.Exact<{
 
 export type DeleteProjectByPkMutation = {
   __typename?: 'mutation_root';
-  deleteProjectByPk?: { __typename?: 'Project'; id: string } | null | undefined;
+  deleteProjectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
 export type UpdateThemeMutationVariables = Types.Exact<{
@@ -40,7 +37,7 @@ export type UpdateThemeMutationVariables = Types.Exact<{
 
 export type UpdateThemeMutation = {
   __typename?: 'mutation_root';
-  updateProjectByPk?: { __typename?: 'Project'; id: string } | null | undefined;
+  updateProjectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
 export const InsertOneProjectDocument = gql`

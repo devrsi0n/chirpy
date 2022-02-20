@@ -10,10 +10,13 @@ export type CreateSessionMutationVariables = Types.Exact<{
 
 export type CreateSessionMutation = {
   __typename?: 'mutation_root';
-  insertOneSession?:
-    | { __typename?: 'Session'; id: string; expires: string; sessionToken: string; userId: string }
-    | null
-    | undefined;
+  insertOneSession?: {
+    __typename?: 'Session';
+    id: string;
+    expires: string;
+    sessionToken: string;
+    userId: string;
+  } | null;
 };
 
 export type SessionAndUserQueryVariables = Types.Exact<{
@@ -31,9 +34,9 @@ export type SessionAndUserQuery = {
     user: {
       __typename?: 'User';
       id: string;
-      email?: string | null | undefined;
-      name?: string | null | undefined;
-      avatar?: string | null | undefined;
+      email?: string | null;
+      name?: string | null;
+      avatar?: string | null;
     };
   }>;
 };
@@ -46,19 +49,16 @@ export type UpdateSessionMutationVariables = Types.Exact<{
 
 export type UpdateSessionMutation = {
   __typename?: 'mutation_root';
-  updateSessions?:
-    | {
-        __typename?: 'Session_mutation_response';
-        returning: Array<{
-          __typename?: 'Session';
-          id: string;
-          expires: string;
-          sessionToken: string;
-          userId: string;
-        }>;
-      }
-    | null
-    | undefined;
+  updateSessions?: {
+    __typename?: 'Session_mutation_response';
+    returning: Array<{
+      __typename?: 'Session';
+      id: string;
+      expires: string;
+      sessionToken: string;
+      userId: string;
+    }>;
+  } | null;
 };
 
 export type DeleteSessionMutationVariables = Types.Exact<{
@@ -67,19 +67,16 @@ export type DeleteSessionMutationVariables = Types.Exact<{
 
 export type DeleteSessionMutation = {
   __typename?: 'mutation_root';
-  deleteSessions?:
-    | {
-        __typename?: 'Session_mutation_response';
-        returning: Array<{
-          __typename?: 'Session';
-          id: string;
-          expires: string;
-          sessionToken: string;
-          userId: string;
-        }>;
-      }
-    | null
-    | undefined;
+  deleteSessions?: {
+    __typename?: 'Session_mutation_response';
+    returning: Array<{
+      __typename?: 'Session';
+      id: string;
+      expires: string;
+      sessionToken: string;
+      userId: string;
+    }>;
+  } | null;
 };
 
 export const CreateSessionDocument = {

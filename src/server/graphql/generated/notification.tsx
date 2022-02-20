@@ -9,10 +9,10 @@ export type InsertOneNotificationSubscriptionMutationVariables = Types.Exact<{
 
 export type InsertOneNotificationSubscriptionMutation = {
   __typename?: 'mutation_root';
-  insertOneNotificationSubscription?:
-    | { __typename?: 'NotificationSubscription'; id: string }
-    | null
-    | undefined;
+  insertOneNotificationSubscription?: {
+    __typename?: 'NotificationSubscription';
+    id: string;
+  } | null;
 };
 
 export type NotificationSubscriptionsByUserIdQueryVariables = Types.Exact<{
@@ -34,10 +34,10 @@ export type DeleteNotificationSubscriptionByPkMutationVariables = Types.Exact<{
 
 export type DeleteNotificationSubscriptionByPkMutation = {
   __typename?: 'mutation_root';
-  deleteNotificationSubscriptionByPk?:
-    | { __typename?: 'NotificationSubscription'; id: string }
-    | null
-    | undefined;
+  deleteNotificationSubscriptionByPk?: {
+    __typename?: 'NotificationSubscription';
+    id: string;
+  } | null;
 };
 
 export type InsertOneNotificationMessageMutationVariables = Types.Exact<{
@@ -50,10 +50,7 @@ export type InsertOneNotificationMessageMutationVariables = Types.Exact<{
 
 export type InsertOneNotificationMessageMutation = {
   __typename?: 'mutation_root';
-  insertOneNotificationMessage?:
-    | { __typename?: 'NotificationMessage'; id: string }
-    | null
-    | undefined;
+  insertOneNotificationMessage?: { __typename?: 'NotificationMessage'; id: string } | null;
 };
 
 export type DeleteNotificationMessageMutationVariables = Types.Exact<{
@@ -65,10 +62,10 @@ export type DeleteNotificationMessageMutationVariables = Types.Exact<{
 
 export type DeleteNotificationMessageMutation = {
   __typename?: 'mutation_root';
-  deleteNotificationMessages?:
-    | { __typename?: 'NotificationMessage_mutation_response'; affected_rows: number }
-    | null
-    | undefined;
+  deleteNotificationMessages?: {
+    __typename?: 'NotificationMessage_mutation_response';
+    affected_rows: number;
+  } | null;
 };
 
 export const InsertOneNotificationSubscriptionDocument = {

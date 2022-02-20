@@ -5,14 +5,14 @@ import * as Types from './types';
 export type AdapterUserFragment = {
   __typename?: 'User';
   id: string;
-  name?: string | null | undefined;
-  avatar?: string | null | undefined;
-  email?: string | null | undefined;
-  emailVerified?: string | null | undefined;
-  username?: string | null | undefined;
-  bio?: string | null | undefined;
-  website?: string | null | undefined;
-  twitterUserName?: string | null | undefined;
+  name?: string | null;
+  avatar?: string | null;
+  email?: string | null;
+  emailVerified?: string | null;
+  username?: string | null;
+  bio?: string | null;
+  website?: string | null;
+  twitterUserName?: string | null;
 };
 
 export type UpdateUserByPkMutationVariables = Types.Exact<{
@@ -25,7 +25,7 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
 
 export type UpdateUserByPkMutation = {
   __typename?: 'mutation_root';
-  updateUserByPk?: { __typename?: 'User'; id: string } | null | undefined;
+  updateUserByPk?: { __typename?: 'User'; id: string } | null;
 };
 
 export type UpdateUserProfileByPkMutationVariables = Types.Exact<{
@@ -38,21 +38,18 @@ export type UpdateUserProfileByPkMutationVariables = Types.Exact<{
 
 export type UpdateUserProfileByPkMutation = {
   __typename?: 'mutation_root';
-  updateUserByPk?:
-    | {
-        __typename?: 'User';
-        id: string;
-        name?: string | null | undefined;
-        avatar?: string | null | undefined;
-        email?: string | null | undefined;
-        emailVerified?: string | null | undefined;
-        username?: string | null | undefined;
-        bio?: string | null | undefined;
-        website?: string | null | undefined;
-        twitterUserName?: string | null | undefined;
-      }
-    | null
-    | undefined;
+  updateUserByPk?: {
+    __typename?: 'User';
+    id: string;
+    name?: string | null;
+    avatar?: string | null;
+    email?: string | null;
+    emailVerified?: string | null;
+    username?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
+  } | null;
 };
 
 export type UpdateUserProfileByEmailMutationVariables = Types.Exact<{
@@ -64,24 +61,21 @@ export type UpdateUserProfileByEmailMutationVariables = Types.Exact<{
 
 export type UpdateUserProfileByEmailMutation = {
   __typename?: 'mutation_root';
-  updateUsers?:
-    | {
-        __typename?: 'User_mutation_response';
-        returning: Array<{
-          __typename?: 'User';
-          id: string;
-          name?: string | null | undefined;
-          avatar?: string | null | undefined;
-          email?: string | null | undefined;
-          emailVerified?: string | null | undefined;
-          username?: string | null | undefined;
-          bio?: string | null | undefined;
-          website?: string | null | undefined;
-          twitterUserName?: string | null | undefined;
-        }>;
-      }
-    | null
-    | undefined;
+  updateUsers?: {
+    __typename?: 'User_mutation_response';
+    returning: Array<{
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      avatar?: string | null;
+      email?: string | null;
+      emailVerified?: string | null;
+      username?: string | null;
+      bio?: string | null;
+      website?: string | null;
+      twitterUserName?: string | null;
+    }>;
+  } | null;
 };
 
 export type UserByPkQueryVariables = Types.Exact<{
@@ -90,21 +84,18 @@ export type UserByPkQueryVariables = Types.Exact<{
 
 export type UserByPkQuery = {
   __typename?: 'query_root';
-  userByPk?:
-    | {
-        __typename?: 'User';
-        id: string;
-        email?: string | null | undefined;
-        username?: string | null | undefined;
-        type?: Types.UserType_Enum | null | undefined;
-        avatar?: string | null | undefined;
-        name?: string | null | undefined;
-        emailVerified?: string | null | undefined;
-        updatedAt: string;
-        createdAt: string;
-      }
-    | null
-    | undefined;
+  userByPk?: {
+    __typename?: 'User';
+    id: string;
+    email?: string | null;
+    username?: string | null;
+    type?: Types.UserType_Enum | null;
+    avatar?: string | null;
+    name?: string | null;
+    emailVerified?: string | null;
+    updatedAt: string;
+    createdAt: string;
+  } | null;
 };
 
 export type UserByEmailQueryVariables = Types.Exact<{
@@ -116,14 +107,14 @@ export type UserByEmailQuery = {
   users: Array<{
     __typename?: 'User';
     id: string;
-    name?: string | null | undefined;
-    avatar?: string | null | undefined;
-    email?: string | null | undefined;
-    emailVerified?: string | null | undefined;
-    username?: string | null | undefined;
-    bio?: string | null | undefined;
-    website?: string | null | undefined;
-    twitterUserName?: string | null | undefined;
+    name?: string | null;
+    avatar?: string | null;
+    email?: string | null;
+    emailVerified?: string | null;
+    username?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
   }>;
 };
 
@@ -137,14 +128,14 @@ export type UserByAccountQuery = {
   users: Array<{
     __typename?: 'User';
     id: string;
-    name?: string | null | undefined;
-    avatar?: string | null | undefined;
-    email?: string | null | undefined;
-    emailVerified?: string | null | undefined;
-    username?: string | null | undefined;
-    bio?: string | null | undefined;
-    website?: string | null | undefined;
-    twitterUserName?: string | null | undefined;
+    name?: string | null;
+    avatar?: string | null;
+    email?: string | null;
+    emailVerified?: string | null;
+    username?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
   }>;
 };
 
@@ -152,7 +143,7 @@ export type AllUsersQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type AllUsersQuery = {
   __typename?: 'query_root';
-  users: Array<{ __typename?: 'User'; username?: string | null | undefined }>;
+  users: Array<{ __typename?: 'User'; username?: string | null }>;
 };
 
 export type DeleteUserMutationVariables = Types.Exact<{
@@ -161,7 +152,7 @@ export type DeleteUserMutationVariables = Types.Exact<{
 
 export type DeleteUserMutation = {
   __typename?: 'mutation_root';
-  deleteUserByPk?: { __typename?: 'User'; id: string } | null | undefined;
+  deleteUserByPk?: { __typename?: 'User'; id: string } | null;
 };
 
 export type CreateUserMutationVariables = Types.Exact<{
@@ -173,21 +164,18 @@ export type CreateUserMutationVariables = Types.Exact<{
 
 export type CreateUserMutation = {
   __typename?: 'mutation_root';
-  insertOneUser?:
-    | {
-        __typename?: 'User';
-        id: string;
-        name?: string | null | undefined;
-        avatar?: string | null | undefined;
-        email?: string | null | undefined;
-        emailVerified?: string | null | undefined;
-        username?: string | null | undefined;
-        bio?: string | null | undefined;
-        website?: string | null | undefined;
-        twitterUserName?: string | null | undefined;
-      }
-    | null
-    | undefined;
+  insertOneUser?: {
+    __typename?: 'User';
+    id: string;
+    name?: string | null;
+    avatar?: string | null;
+    email?: string | null;
+    emailVerified?: string | null;
+    username?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
+  } | null;
 };
 
 export const AdapterUserFragmentDoc = {
