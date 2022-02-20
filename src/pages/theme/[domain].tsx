@@ -40,8 +40,6 @@ export default function ThemePage(props: ThemeProps): JSX.Element {
   );
 }
 
-ThemePage.auth = true;
-
 type ColorSeries = {
   light: Record<string, string>;
   dark: Record<string, string>;
@@ -174,8 +172,6 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
     </section>
   );
 }
-
-ThemeEditor.auth = true;
 
 type PathParams = {
   domain: string;

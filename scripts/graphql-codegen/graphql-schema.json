@@ -8098,13 +8098,13 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "NotificationMessage_contextId_type_recipientId_triggeredById_ke",
+            "name": "NotificationMessage_pkey",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "NotificationMessage_pkey",
+            "name": "NotificationMessage_type_triggeredById_contextId_recipientI_key",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -9195,20 +9195,16 @@
       {
         "kind": "OBJECT",
         "name": "NotificationSubscription",
-        "description": "Registered subscriptions for notification\n\n\ncolumns and relationships of \"NotificationSubscription\"\n",
+        "description": "columns and relationships of \"NotificationSubscription\"",
         "fields": [
           {
             "name": "createdAt",
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21549,7 +21545,7 @@
           },
           {
             "name": "free",
-            "description": null,
+            "description": "Free user",
             "isDeprecated": false,
             "deprecationReason": null
           },

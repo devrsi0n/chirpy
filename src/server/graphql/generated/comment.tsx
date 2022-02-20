@@ -15,19 +15,16 @@ export type SiteOwnerByTriggerCommentIdQueryVariables = Types.Exact<{
 
 export type SiteOwnerByTriggerCommentIdQuery = {
   __typename?: 'query_root';
-  commentByPk?:
-    | {
-        __typename?: 'Comment';
-        page: {
-          __typename?: 'Page';
-          id: string;
-          url: string;
-          project: { __typename?: 'Project'; ownerId?: string | null | undefined };
-        };
-        triggeredBy: { __typename?: 'User'; id: string; name?: string | null | undefined };
-      }
-    | null
-    | undefined;
+  commentByPk?: {
+    __typename?: 'Comment';
+    page: {
+      __typename?: 'Page';
+      id: string;
+      url: string;
+      project: { __typename?: 'Project'; ownerId?: string | null };
+    };
+    triggeredBy: { __typename?: 'User'; id: string; name?: string | null };
+  } | null;
 };
 
 export type AuthorByCommentIdQueryVariables = Types.Exact<{
@@ -36,14 +33,11 @@ export type AuthorByCommentIdQueryVariables = Types.Exact<{
 
 export type AuthorByCommentIdQuery = {
   __typename?: 'query_root';
-  commentByPk?:
-    | {
-        __typename?: 'Comment';
-        page: { __typename?: 'Page'; id: string; url: string };
-        author: { __typename?: 'User'; id: string; name?: string | null | undefined };
-      }
-    | null
-    | undefined;
+  commentByPk?: {
+    __typename?: 'Comment';
+    page: { __typename?: 'Page'; id: string; url: string };
+    author: { __typename?: 'User'; id: string; name?: string | null };
+  } | null;
 };
 
 export const CommentsDocument = {

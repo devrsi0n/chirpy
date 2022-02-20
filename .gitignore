@@ -13,5 +13,5 @@ public/bootstrap/*.js
 cypress/screenshots/
 cypress/videos/
 
-docker-compose.local.yaml
+docker-compose.yaml
 public/sw.js*

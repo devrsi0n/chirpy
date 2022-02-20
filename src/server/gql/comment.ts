@@ -17,6 +17,7 @@ export async function getAuthorByCommentId(commentId: string) {
   }
   return data.commentByPk;
 }
+
 export async function getSiteOwnerByTriggeredCommentId(commentId: string) {
   const { data, error } = await client
     .query(SiteOwnerByTriggerCommentIdDocument, {

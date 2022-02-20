@@ -10,7 +10,7 @@ export type InsertOneLikeMutationVariables = Types.Exact<{
 
 export type InsertOneLikeMutation = {
   __typename?: 'mutation_root';
-  insertOneLike?: { __typename?: 'Like'; id: string } | null | undefined;
+  insertOneLike?: { __typename?: 'Like'; id: string } | null;
 };
 
 export type DeleteLikeByPkMutationVariables = Types.Exact<{
@@ -19,7 +19,7 @@ export type DeleteLikeByPkMutationVariables = Types.Exact<{
 
 export type DeleteLikeByPkMutation = {
   __typename?: 'mutation_root';
-  deleteLikeByPk?: { __typename?: 'Like'; id: string } | null | undefined;
+  deleteLikeByPk?: { __typename?: 'Like'; id: string } | null;
 };
 
 export const InsertOneLikeDocument = gql`

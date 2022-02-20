@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { PushSubscription } from 'web-push';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { createOneNotificationSubscription } from '$/server/gql/notification';
 
 import { badRequest, unauthorized } from '../../utilities/response';

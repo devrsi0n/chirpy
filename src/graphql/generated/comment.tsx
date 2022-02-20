@@ -9,15 +9,10 @@ export type CommentContentFragment = {
   id: string;
   content: any;
   createdAt: string;
-  deletedAt?: string | null | undefined;
-  parentId?: string | null | undefined;
+  deletedAt?: string | null;
+  parentId?: string | null;
   pageId: string;
-  user: {
-    __typename?: 'User';
-    id: string;
-    name?: string | null | undefined;
-    avatar?: string | null | undefined;
-  };
+  user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
   likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
 };
 
@@ -32,47 +27,32 @@ export type CommentTreeSubscription = {
     id: string;
     content: any;
     createdAt: string;
-    deletedAt?: string | null | undefined;
-    parentId?: string | null | undefined;
+    deletedAt?: string | null;
+    parentId?: string | null;
     pageId: string;
     replies: Array<{
       __typename?: 'Comment';
       id: string;
       content: any;
       createdAt: string;
-      deletedAt?: string | null | undefined;
-      parentId?: string | null | undefined;
+      deletedAt?: string | null;
+      parentId?: string | null;
       pageId: string;
       replies: Array<{
         __typename?: 'Comment';
         id: string;
         content: any;
         createdAt: string;
-        deletedAt?: string | null | undefined;
-        parentId?: string | null | undefined;
+        deletedAt?: string | null;
+        parentId?: string | null;
         pageId: string;
-        user: {
-          __typename?: 'User';
-          id: string;
-          name?: string | null | undefined;
-          avatar?: string | null | undefined;
-        };
+        user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       }>;
-      user: {
-        __typename?: 'User';
-        id: string;
-        name?: string | null | undefined;
-        avatar?: string | null | undefined;
-      };
+      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     }>;
-    user: {
-      __typename?: 'User';
-      id: string;
-      name?: string | null | undefined;
-      avatar?: string | null | undefined;
-    };
+    user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
   }>;
 };
@@ -83,98 +63,61 @@ export type CommentDetailsSubscriptionVariables = Types.Exact<{
 
 export type CommentDetailsSubscription = {
   __typename?: 'subscription_root';
-  commentByPk?:
-    | {
+  commentByPk?: {
+    __typename?: 'Comment';
+    id: string;
+    content: any;
+    createdAt: string;
+    deletedAt?: string | null;
+    parentId?: string | null;
+    pageId: string;
+    replies: Array<{
+      __typename?: 'Comment';
+      id: string;
+      content: any;
+      createdAt: string;
+      deletedAt?: string | null;
+      parentId?: string | null;
+      pageId: string;
+      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+    }>;
+    parent?: {
+      __typename?: 'Comment';
+      id: string;
+      content: any;
+      createdAt: string;
+      deletedAt?: string | null;
+      parentId?: string | null;
+      pageId: string;
+      parent?: {
         __typename?: 'Comment';
         id: string;
         content: any;
         createdAt: string;
-        deletedAt?: string | null | undefined;
-        parentId?: string | null | undefined;
+        deletedAt?: string | null;
+        parentId?: string | null;
         pageId: string;
-        replies: Array<{
+        parent?: {
           __typename?: 'Comment';
           id: string;
           content: any;
           createdAt: string;
-          deletedAt?: string | null | undefined;
-          parentId?: string | null | undefined;
+          deletedAt?: string | null;
+          parentId?: string | null;
           pageId: string;
-          user: {
-            __typename?: 'User';
-            id: string;
-            name?: string | null | undefined;
-            avatar?: string | null | undefined;
-          };
+          user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
-        }>;
-        parent?:
-          | {
-              __typename?: 'Comment';
-              id: string;
-              content: any;
-              createdAt: string;
-              deletedAt?: string | null | undefined;
-              parentId?: string | null | undefined;
-              pageId: string;
-              parent?:
-                | {
-                    __typename?: 'Comment';
-                    id: string;
-                    content: any;
-                    createdAt: string;
-                    deletedAt?: string | null | undefined;
-                    parentId?: string | null | undefined;
-                    pageId: string;
-                    parent?:
-                      | {
-                          __typename?: 'Comment';
-                          id: string;
-                          content: any;
-                          createdAt: string;
-                          deletedAt?: string | null | undefined;
-                          parentId?: string | null | undefined;
-                          pageId: string;
-                          user: {
-                            __typename?: 'User';
-                            id: string;
-                            name?: string | null | undefined;
-                            avatar?: string | null | undefined;
-                          };
-                          likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
-                        }
-                      | null
-                      | undefined;
-                    user: {
-                      __typename?: 'User';
-                      id: string;
-                      name?: string | null | undefined;
-                      avatar?: string | null | undefined;
-                    };
-                    likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
-                  }
-                | null
-                | undefined;
-              user: {
-                __typename?: 'User';
-                id: string;
-                name?: string | null | undefined;
-                avatar?: string | null | undefined;
-              };
-              likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
-            }
-          | null
-          | undefined;
-        user: {
-          __typename?: 'User';
-          id: string;
-          name?: string | null | undefined;
-          avatar?: string | null | undefined;
-        };
+        } | null;
+        user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
-      }
-    | null
-    | undefined;
+      } | null;
+      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+    } | null;
+    user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+    likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+  } | null;
 };
 
 export type InsertOneCommentMutationVariables = Types.Exact<{
@@ -185,7 +128,7 @@ export type InsertOneCommentMutationVariables = Types.Exact<{
 
 export type InsertOneCommentMutation = {
   __typename?: 'mutation_root';
-  insertOneComment?: { __typename?: 'Comment'; id: string } | null | undefined;
+  insertOneComment?: { __typename?: 'Comment'; id: string } | null;
 };
 
 export type DeleteOneCommentMutationVariables = Types.Exact<{
@@ -194,7 +137,7 @@ export type DeleteOneCommentMutationVariables = Types.Exact<{
 
 export type DeleteOneCommentMutation = {
   __typename?: 'mutation_root';
-  updateCommentByPk?: { __typename?: 'Comment'; id: string } | null | undefined;
+  updateCommentByPk?: { __typename?: 'Comment'; id: string } | null;
 };
 
 export const CommentContentFragmentDoc = gql`

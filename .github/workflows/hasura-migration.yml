@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Staging
         if: ${{ github.ref_name == 'main' }}
-        uses: GavinRay97/hasura-ci-cd-action@v1.3
+        uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
           HASURA_CLI_VERSION: v2.1.1
@@ -26,7 +26,7 @@ jobs:
 
       - name: Prod
         if: ${{ github.ref_name == 'prod' }}
-        uses: GavinRay97/hasura-ci-cd-action@v1.3
+        uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
           HASURA_CLI_VERSION: v2.1.1

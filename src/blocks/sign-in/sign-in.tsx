@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/react';
+import { signIn, SignInResponse } from 'next-auth/react';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
@@ -8,7 +8,10 @@ import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { Logo } from '$/components/logo';
 import { Text } from '$/components/text';
+import { TextField } from '$/components/text-field';
+import { useForm } from '$/hooks/use-form';
 import { SIGN_IN_ERRORS } from '$/strings';
+import { getHostEnv } from '$/utilities/env';
 
 import { authOptions } from './data-source';
 
@@ -66,9 +69,44 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
             <Link href="/terms-of-service">Terms of Service</Link> and{' '}
             <Link href="/privacy-policy">Privacy Policy</Link>.
           </Text>
+          <CredentialsSignInForm />
         </div>
       </div>
       <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
+    </div>
+  );
+}
+
+function CredentialsSignInForm(): JSX.Element {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      username: '',
+      password: '',
+    },
+  });
+  const [showForm, setShowForm] = React.useState(false);
+  React.useEffect(() => {
+    if (['staging', 'preview', 'localhost'].includes(getHostEnv())) {
+      setShowForm(true);
+    }
+  }, []);
+  const handleClickSubmit = handleSubmit(async (fields) => {
+    await signIn('credentials', {
+      // redirect: false,
+      callbackUrl: '/dashboard',
+      ...fields,
+    });
+  });
+  if (!showForm) {
+    return <></>;
+  }
+  return (
+    <div>
+      <TextField {...register('username')} type="text" label="Username" tw="w-full"></TextField>
+      <TextField {...register('password')} type="password" label="Password" tw="w-full"></TextField>
+      <Button type="submit" onClick={handleClickSubmit} tw="w-full">
+        Submit
+      </Button>
     </div>
   );
 }

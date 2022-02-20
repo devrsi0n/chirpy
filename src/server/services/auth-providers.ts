@@ -1,7 +1,10 @@
+import CredentialsProvider from 'next-auth/providers/credentials';
 import facebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
+
+import { getHostEnv } from '$/utilities/env';
 
 import { isENVProd } from '../utilities/env';
 
@@ -36,4 +39,31 @@ export const authProviders = [
       timeout: REQUEST_TIMEOUT,
     },
   }),
+  // Only allow the credential provider if not in production
+  ...(['staging', 'preview', 'localhost'].includes(getHostEnv(process.env.NEXTAUTH_URL!))
+    ? [
+        CredentialsProvider({
+          name: 'Credentials for test only',
+          credentials: {
+            username: { label: 'Username', type: 'text', placeholder: 'User name' },
+            password: { label: 'Password', type: 'password' },
+          },
+          async authorize(credentials, req) {
+            if (
+              credentials?.username === process.env.TEST_USER_ID &&
+              credentials?.password === process.env.HASURA_EVENT_SECRET
+            ) {
+              // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
+              return {
+                id: '6c0a23ae-885a-4630-946f-e694dff6f446',
+                name: 'cypresstest',
+                email: 'cypress.test@localhost',
+                image: 'https://www.cypress.io/icons/icon-72x72.png',
+              };
+            }
+            return null;
+          },
+        }),
+      ]
+    : []),
 ];

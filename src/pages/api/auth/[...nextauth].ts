@@ -16,9 +16,6 @@ export default NextAuth({
     strategy: 'jwt',
     maxAge: SESSION_MAX_AGE,
   },
-  jwt: {
-    secret: process.env.HASH_KEY,
-  },
   pages: {
     signIn: '/auth/sign-in',
     newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
@@ -78,6 +75,5 @@ export default NextAuth({
   },
   cookies: defaultCookies(process.env.NEXTAUTH_URL.startsWith('https://')),
   adapter: nextAuthAdapter(),
-  secret: process.env.HASH_KEY,
   debug: isENVDev,
 });

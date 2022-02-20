@@ -1101,9 +1101,9 @@ export type NotificationMessage_Bool_Exp = {
 /** unique or primary key constraints on table "NotificationMessage" */
 export type NotificationMessage_Constraint =
   /** unique or primary key constraint */
-  | 'NotificationMessage_contextId_type_recipientId_triggeredById_ke'
+  | 'NotificationMessage_pkey'
   /** unique or primary key constraint */
-  | 'NotificationMessage_pkey';
+  | 'NotificationMessage_type_triggeredById_contextId_recipientI_key';
 
 /** input type for inserting data into table "NotificationMessage" */
 export type NotificationMessage_Insert_Input = {
@@ -1265,16 +1265,10 @@ export type NotificationMessage_Update_Column =
   /** column name */
   | 'url';
 
-/**
- * Registered subscriptions for notification
- *
- *
- * columns and relationships of "NotificationSubscription"
- *
- */
+/** columns and relationships of "NotificationSubscription" */
 export type NotificationSubscription = {
   __typename?: 'NotificationSubscription';
-  createdAt: Scalars['timestamptz'];
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   subscription: Scalars['jsonb'];
   /** An object relationship */
@@ -1282,13 +1276,7 @@ export type NotificationSubscription = {
   userId: Scalars['uuid'];
 };
 
-/**
- * Registered subscriptions for notification
- *
- *
- * columns and relationships of "NotificationSubscription"
- *
- */
+/** columns and relationships of "NotificationSubscription" */
 export type NotificationSubscriptionSubscriptionArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -3029,6 +3017,7 @@ export type UserType_Enum =
   | 'admin'
   /** Anonymous widget vsisitor */
   | 'anonymous'
+  /** Free user */
   | 'free'
   /** Paid user */
   | 'pro';

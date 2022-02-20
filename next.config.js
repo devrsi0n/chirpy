@@ -22,6 +22,7 @@ module.exports = withPlugins(
     ],
   ],
   {
+    swcMinify: true,
     async rewrites() {
       return [
         {

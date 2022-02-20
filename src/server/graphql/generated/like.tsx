@@ -8,18 +8,15 @@ export type RecipientByLikeIdQueryVariables = Types.Exact<{
 
 export type RecipientByLikeIdQuery = {
   __typename?: 'query_root';
-  likeByPk?:
-    | {
-        __typename?: 'Like';
-        comment: {
-          __typename?: 'Comment';
-          page: { __typename?: 'Page'; id: string; url: string };
-          recipient: { __typename?: 'User'; id: string; name?: string | null | undefined };
-        };
-        triggeredBy: { __typename?: 'User'; id: string; name?: string | null | undefined };
-      }
-    | null
-    | undefined;
+  likeByPk?: {
+    __typename?: 'Like';
+    comment: {
+      __typename?: 'Comment';
+      page: { __typename?: 'Page'; id: string; url: string };
+      recipient: { __typename?: 'User'; id: string; name?: string | null };
+    };
+    triggeredBy: { __typename?: 'User'; id: string; name?: string | null };
+  } | null;
 };
 
 export const RecipientByLikeIdDocument = {

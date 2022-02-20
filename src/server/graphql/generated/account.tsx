@@ -20,26 +20,23 @@ export type CreateAccountMutationVariables = Types.Exact<{
 
 export type CreateAccountMutation = {
   __typename?: 'mutation_root';
-  insertOneAccount?:
-    | {
-        __typename?: 'Account';
-        id: string;
-        userId: string;
-        provider: string;
-        accessToken?: string | null | undefined;
-        expiresAt?: string | null | undefined;
-        idToken?: string | null | undefined;
-        oauthToken?: string | null | undefined;
-        oauthTokenSecret?: string | null | undefined;
-        providerAccountId: string;
-        refreshToken?: string | null | undefined;
-        scope?: string | null | undefined;
-        sessionState?: string | null | undefined;
-        tokenType?: string | null | undefined;
-        type: string;
-      }
-    | null
-    | undefined;
+  insertOneAccount?: {
+    __typename?: 'Account';
+    id: string;
+    userId: string;
+    provider: string;
+    accessToken?: string | null;
+    expiresAt?: string | null;
+    idToken?: string | null;
+    oauthToken?: string | null;
+    oauthTokenSecret?: string | null;
+    providerAccountId: string;
+    refreshToken?: string | null;
+    scope?: string | null;
+    sessionState?: string | null;
+    tokenType?: string | null;
+    type: string;
+  } | null;
 };
 
 export type DeleteAccountMutationVariables = Types.Exact<{
@@ -49,13 +46,10 @@ export type DeleteAccountMutationVariables = Types.Exact<{
 
 export type DeleteAccountMutation = {
   __typename?: 'mutation_root';
-  deleteAccounts?:
-    | {
-        __typename?: 'Account_mutation_response';
-        returning: Array<{ __typename?: 'Account'; id: string }>;
-      }
-    | null
-    | undefined;
+  deleteAccounts?: {
+    __typename?: 'Account_mutation_response';
+    returning: Array<{ __typename?: 'Account'; id: string }>;
+  } | null;
 };
 
 export const CreateAccountDocument = {

@@ -24,33 +24,16 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import '@testing-library/cypress/add-commands';
-import { Session } from 'next-auth';
 
-import { defaultCookies } from '../../src/server/utilities/default-cookies';
-import { jwtBody } from '../fixtures/user';
-
-const cookieOptions = defaultCookies(Cypress.config().baseUrl.startsWith('https')).sessionToken;
-const cookieName = cookieOptions.name;
+import { waitGraphql } from '../fixtures/utils';
 
 Cypress.Commands.add('login', () => {
-  cy.intercept(`/api/auth/session`, (req) => {
-    // Just return the response from test, not need to reach the server
-    req.reply({
-      ...jwtBody,
-      hasuraToken: Cypress.env('HASURA_TOKEN'),
-    } as Session);
-  }).as('session');
-  cy.intercept(`/api/auth/signout`, (req) => {
-    Cypress.automation('clear:cookie', { name: cookieName });
-    req.reply({});
-  });
-
   cy.intercept('/v1/graphql').as('graphql');
 
-  cy.setCookie(cookieName, Cypress.env('SESSION_TOKEN'), {
-    httpOnly: cookieOptions.options.httpOnly,
-    secure: cookieOptions.options.secure,
-    sameSite: cookieOptions.options.sameSite as 'lax',
-  });
-  Cypress.Cookies.preserveOnce(cookieName);
+  cy.visit('/auth/sign-in');
+  cy.get('input[name=username]').type(Cypress.env('TEST_USER_ID'));
+  cy.get('input[name=password]').type(`${Cypress.env('HASURA_EVENT_SECRET')}`);
+  cy.get('button[type=submit]').click();
+  cy.wait(3000);
+  waitGraphql();
 });

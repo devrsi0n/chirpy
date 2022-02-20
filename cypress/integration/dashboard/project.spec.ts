@@ -1,10 +1,8 @@
-import { waitGraphql, waitSession } from '../../fixtures/utils';
+import { waitGraphql } from '../../fixtures/utils';
 
 describe('Project', () => {
   before(() => {
-    cy.visit('/dashboard');
-    waitSession();
-    waitGraphql();
+    cy.login();
 
     waitForSpinnerToDisappear();
     cy.get('body').then(($body) => {
@@ -54,7 +52,7 @@ describe('Project', () => {
 
   it('should active theme', () => {
     cy.findByRole('link', { name: /theme/i }).click();
-    cy.url({ timeout: 60_000 }).should('include', '/theme');
+    cy.url({ timeout: 60_000 }).should('include', '/theme/foobar.com');
     cy.findByLabelText(/primary color selector/i).click();
     cy.findByRole('button', { name: /color green/i }).click();
     cy.findByRole('button', { name: /post/i }).should(

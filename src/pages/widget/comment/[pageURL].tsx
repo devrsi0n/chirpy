@@ -5,7 +5,6 @@ import {
   GetStaticPropsContext,
   GetStaticPaths,
 } from 'next';
-import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import 'twin.macro';
@@ -169,7 +168,6 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
-      revalidate: 60,
     };
   } catch (error) {
     console.error(superjson.stringify(error));

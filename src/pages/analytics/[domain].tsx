@@ -40,8 +40,6 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
   );
 }
 
-Analytics.auth = true;
-
 type PathParams = {
   domain: string;
 };

@@ -15,12 +15,7 @@ export type ThemeProjectByPkQueryVariables = Types.Exact<{
 
 export type ThemeProjectByPkQuery = {
   __typename?: 'query_root';
-  projects: Array<{
-    __typename?: 'Project';
-    id: string;
-    name: string;
-    theme?: any | null | undefined;
-  }>;
+  projects: Array<{ __typename?: 'Project'; id: string; name: string; theme?: any | null }>;
 };
 
 export type ProjectByPkQueryVariables = Types.Exact<{
@@ -29,7 +24,7 @@ export type ProjectByPkQueryVariables = Types.Exact<{
 
 export type ProjectByPkQuery = {
   __typename?: 'query_root';
-  projectByPk?: { __typename?: 'Project'; id: string } | null | undefined;
+  projectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
 export type UserProjectsQueryVariables = Types.Exact<{

@@ -32,8 +32,6 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   );
 }
 
-Welcome.auth = true;
-
 function FullFilled(): JSX.Element {
   return (
     <section tw="flex flex-col items-center justify-center space-y-12">

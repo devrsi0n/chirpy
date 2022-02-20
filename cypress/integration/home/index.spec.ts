@@ -1,9 +1,6 @@
-import { waitSession } from '../../fixtures/utils';
-
 describe('Index', () => {
   before(() => {
     cy.visit('/');
-    waitSession();
   });
 
   it('main call to actions', () => {
