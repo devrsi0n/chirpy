@@ -14,3 +14,5 @@ export const WIDGET_COMMENT_PATH = '/widget/comment/';
 export const ANALYTICS_DOMAIN = 'chirpy.dev';
 
 export const FEEDBACK_LINK = 'https://github.com/devrsi0n/chirpy/issues/new/choose';
+
+export const PAGE_SIZE_OPTIONS = [10, 20, 30, 40, 50];
