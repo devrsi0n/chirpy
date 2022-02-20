@@ -18,6 +18,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
-          HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
+          HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
           # DEBUG: 'cypress:*'
           # DEBUG_DEPTH: 9

@@ -41,6 +41,7 @@ jobs:
         run: ./node_modules/.bin/next build
         env:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
           HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
           HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
