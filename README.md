@@ -3,9 +3,11 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
 [![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 
-<img src="public/images/marketing/preview.png" width="350"></img>
+<img src="public/images/marketing/github.png" width="800"></img>
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
+
+Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 
 ## ✨ Key features
 
@@ -15,6 +17,7 @@
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 - 🪄 Realtime updated comments
+- 📱 Mobile friendly
 
 ## 🧭 Roadmap
 
