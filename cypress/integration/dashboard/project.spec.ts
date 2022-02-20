@@ -1,9 +1,7 @@
-import { waitGraphql, waitSession } from '../../fixtures/utils';
+import { waitGraphql } from '../../fixtures/utils';
 
 describe('Project', () => {
   before(() => {
-    cy.visit('/dashboard');
-    waitSession();
     waitGraphql();
 
     waitForSpinnerToDisappear();

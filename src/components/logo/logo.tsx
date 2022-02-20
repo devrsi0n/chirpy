@@ -1,6 +1,8 @@
 import * as React from 'react';
 import tw, { TwStyle } from 'twin.macro';
 
+import { getHostEnv } from '$/utilities/env';
+
 import { Badge } from '../badge';
 import { Link, LinkProps } from '../link';
 
@@ -58,15 +60,11 @@ export function Logo({
 }
 
 function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
-  const [domain, setDomain] = React.useState('');
+  const [badge, setBadge] = React.useState('Beta');
   React.useEffect(() => {
-    const host = window.location.hostname;
-    if (host.startsWith('staging.')) {
-      setDomain('staging');
-    } else if (host.endsWith('vercel.app')) {
-      setDomain('preview');
-    } else if (host === 'localhost') {
-      setDomain('localhost');
+    const host = getHostEnv();
+    if (['staging', 'preview', 'localhost'].includes(host)) {
+      setBadge(host);
     }
   }, []);
 
@@ -76,13 +74,13 @@ function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
   return (
     <Badge
       css={posStyle}
-      {...(domain && {
+      {...(badge && {
         variant: 'solid',
         color: 'blue',
         css: [posStyle, tw`-right-3`],
       })}
     >
-      {domain || 'Beta'}
+      {badge}
     </Badge>
   );
 }
