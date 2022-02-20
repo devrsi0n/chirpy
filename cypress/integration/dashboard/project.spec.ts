@@ -3,7 +3,6 @@ import { waitGraphql } from '../../fixtures/utils';
 describe('Project', () => {
   before(() => {
     cy.login();
-    waitGraphql();
 
     waitForSpinnerToDisappear();
     cy.get('body').then(($body) => {

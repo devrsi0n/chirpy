@@ -30,8 +30,8 @@ declare global {
 //   cy.login();
 // });
 
-beforeEach(() => {
-  Cypress.Cookies.preserveOnce('next-auth.session-token');
+Cypress.Cookies.defaults({
+  preserve: ['next-auth.session-token', 'next-auth.callback-url', 'next-auth.csrf-token'],
 });
 
 Cypress.on('uncaught:exception', (err, runnable) => {

@@ -1,12 +1,11 @@
 import { testUser } from '../../fixtures/user';
 
 describe('Header', () => {
-  before(() => {
-    cy.login();
-  });
-
   beforeEach(() => {
-    cy.visit('/');
+    cy.login();
+    cy.visit('/', {
+      timeout: 60_000,
+    });
   });
 
   it('should show user menu', () => {
