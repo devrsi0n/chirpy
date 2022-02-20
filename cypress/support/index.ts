@@ -26,12 +26,12 @@ declare global {
 
 // This module executes in browser context
 // NOTE: This hook only run once when clicking `Run x integration specs` button on Cypress GUI
-before(() => {
-  cy.login();
-});
+// before(() => {
+//   cy.login();
+// });
 
 beforeEach(() => {
-  cy.login();
+  Cypress.Cookies.preserveOnce('next-auth.session-token');
 });
 
 Cypress.on('uncaught:exception', (err, runnable) => {

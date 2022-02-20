@@ -1,6 +1,10 @@
 import { testUser } from '../../fixtures/user';
 
 describe('Header', () => {
+  before(() => {
+    cy.login();
+  });
+
   beforeEach(() => {
     cy.visit('/');
   });

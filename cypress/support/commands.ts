@@ -27,7 +27,7 @@ import '@testing-library/cypress/add-commands';
 
 Cypress.Commands.add('login', () => {
   cy.intercept('/v1/graphql').as('graphql');
-
+  console.log('cookies', document.cookie);
   cy.visit('/auth/sign-in');
   cy.get('input[name=username]').type(Cypress.env('TEST_USER_ID'));
   cy.get('input[name=password]').type(`${Cypress.env('HASURA_EVENT_SECRET')}`);
