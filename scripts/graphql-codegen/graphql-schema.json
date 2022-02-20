@@ -7465,7 +7465,7 @@
         "fields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -8120,7 +8120,7 @@
         "inputFields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
@@ -8274,7 +8274,7 @@
         "fields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8370,7 +8370,7 @@
         "inputFields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -8464,7 +8464,7 @@
         "fields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8560,7 +8560,7 @@
         "inputFields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -9016,7 +9016,7 @@
         "inputFields": [
           {
             "name": "contextId",
-            "description": "Triggered entity's id, e.g. CommentId or LikeId",
+            "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
