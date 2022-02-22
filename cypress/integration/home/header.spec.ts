@@ -1,14 +1,11 @@
 import { testUser } from '../../fixtures/user';
 
 describe('Header', () => {
-  beforeEach(() => {
-    cy.login();
-    cy.visit('/', {
-      timeout: 60_000,
-    });
-  });
-
   it('should show user menu', () => {
+    cy.login();
+    loadHomePage();
+    cy.get('header').findByRole('link', { name: 'Dashboard' }).click();
+    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
     clickUserMenu();
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
@@ -28,8 +25,7 @@ describe('Header', () => {
   });
 
   it('should show navigation links', () => {
-    cy.get('header').findByRole('link', { name: 'Dashboard' }).click();
-    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
+    loadHomePage();
 
     cy.get('header').findByRole('link', { name: 'Docs' }).click();
     cy.url({ timeout: 60_000 }).should('include', '/docs');
@@ -43,6 +39,13 @@ describe('Header', () => {
     cy.url({ timeout: 60_000 }).should('include', '/');
   });
 });
+
+function loadHomePage() {
+  cy.visit('/', {
+    timeout: 60_000,
+  });
+  cy.get('[aria-label="Logo of Chirpy"]', { timeout: 60_000 }).should('be.visible');
+}
 
 function clickUserMenu() {
   cy.get('header')
