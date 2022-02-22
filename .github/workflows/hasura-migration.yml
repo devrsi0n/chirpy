@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Staging
-        if: ${{ github.ref_name == 'main' }}
+        # Only run it when the PR target branch is 'main'
+        if: ${{ github.base_ref == 'main' }}
         uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
@@ -25,7 +26,7 @@ jobs:
           HASURA_SEEDS_ENABLED: true
 
       - name: Prod
-        if: ${{ github.ref_name == 'prod' }}
+        if: ${{ github.base_ref == 'prod' }}
         uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura

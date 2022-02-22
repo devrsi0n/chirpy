@@ -34,6 +34,6 @@ Cypress.Commands.add('login', () => {
   cy.get('input[name=username]').type(Cypress.env('TEST_USER_ID'));
   cy.get('input[name=password]').type(`${Cypress.env('HASURA_EVENT_SECRET')}`);
   cy.get('button[type=submit]').click();
-  cy.wait(3000);
+  cy.wait(1000);
   waitGraphql();
 });
