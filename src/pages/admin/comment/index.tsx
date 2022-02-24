@@ -1,6 +1,7 @@
 import Search from '@geist-ui/react-icons/search';
 import Trash2 from '@geist-ui/react-icons/trash2';
-import React, { useCallback, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import * as React from 'react';
 import 'twin.macro';
 import tw from 'twin.macro';
 
@@ -13,34 +14,33 @@ import { Heading } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Table } from '$/components/table';
 import { Text } from '$/components/text';
+import { useCommentOfPageQuery } from '$/graphql/generated/comment';
 import { useDeleteUser } from '$/hooks/use-delete-user';
-import { getComment } from '$/server/gql/comment';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { CommentLeafType } from '$/types/widget';
 import { dayjs } from '$/utilities/date';
 
-type StaticProps = {
-  commentList: [];
-};
-
-type fetchDateProps = {
-  limit: number;
-  offset: number;
-};
-
 const handleSearch = () => {
-  console.log('test');
+  console.log('handle search');
 };
 
-export default function Admin(props: StaticProps) {
-  const commentList = props.commentList || [];
-  const [data, setData] = React.useState([...commentList]);
-  const [loading, setLoading] = React.useState(false);
-  const [pageCount, setPageCount] = React.useState(0);
+export default function Comment() {
   const [showDialog, setShowDialog] = React.useState(false);
   const [comments, setComments] = React.useState<CommentContentFragment[]>([]);
   const deleteOneUser = useDeleteUser();
-  const [pageParams, setPageParams] = React.useState({ limit: 10, offset: 10 });
+
+  const router = useRouter();
+  const {
+    query: { pageId },
+  } = router;
+
+  const [{ data, fetching: loading }, fetchComment] = useCommentOfPageQuery({
+    variables: {
+      pageId,
+      offset: 10,
+      limit: 10,
+    },
+  });
 
   const handleClick = (rowProps: CommentContentFragment) => {
     setShowDialog(true);
@@ -51,22 +51,7 @@ export default function Admin(props: StaticProps) {
     deleteOneUser(id);
   };
 
-  React.useEffect(() => {
-    const fetchData = (params: fetchDateProps) => {
-      fetch('/api/comment', {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ ...params }),
-      }).then((res) => {
-        console.log('........................', res);
-      });
-    };
-    fetchData(pageParams);
-  }, []);
-
-  const commentsDetail = useCallback((comments: []): string => {
+  const commentsDetail = React.useCallback((comments: []): string => {
     let commentsAll = '';
     const getEveryComments = (comments: []) => {
       comments?.map((comment: any) => {
@@ -133,7 +118,7 @@ export default function Admin(props: StaticProps) {
   }, []);
 
   return (
-    <SiteLayout hideFullBleed title="Admin">
+    <SiteLayout hideFullBleed title="Admin comments">
       <div tw="px-24">
         <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
           <div tw="flex items-center justify-start space-x-4">
@@ -154,10 +139,10 @@ export default function Admin(props: StaticProps) {
         </div>
         <Table
           columns={columns}
-          data={data}
+          data={data?.comments || []}
           fetchData={() => {}}
           loading={loading}
-          pageCount={pageCount}
+          // pageCount={}
           pagination
         />
       </div>
@@ -191,11 +176,3 @@ export default function Admin(props: StaticProps) {
     </SiteLayout>
   );
 }
-
-export const getStaticProps = async () => {
-  const commentList = await getComment(10, 0);
-
-  return {
-    props: { commentList },
-  };
-};

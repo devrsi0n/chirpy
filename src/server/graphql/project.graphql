@@ -33,3 +33,16 @@ query projectByDomain($domain: String!) {
     createdAt
   }
 }
+
+query domainOfProjects($domain: String) {
+  projects(where: { domain: { _eq: $domain } }) {
+    id
+    pages {
+      id
+      url
+      title
+    }
+    domain
+    name
+  }
+}
