@@ -51,6 +51,21 @@ export type ProjectByDomainQuery = {
   }>;
 };
 
+export type DomainOfProjectsQueryVariables = Types.Exact<{
+  domain?: Types.InputMaybe<Types.Scalars['String']>;
+}>;
+
+export type DomainOfProjectsQuery = {
+  __typename?: 'query_root';
+  projects: Array<{
+    __typename?: 'Project';
+    id: string;
+    domain: string;
+    name: string;
+    pages: Array<{ __typename?: 'Page'; id: string; url: string; title?: string | null }>;
+  }>;
+};
+
 export const AllProjectsDocument = {
   kind: 'Document',
   definitions: [
@@ -300,3 +315,74 @@ export const ProjectByDomainDocument = {
     },
   ],
 } as unknown as DocumentNode<ProjectByDomainQuery, ProjectByDomainQueryVariables>;
+export const DomainOfProjectsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'domainOfProjects' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'projects' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'domain' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_eq' },
+                            value: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pages' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                    ],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'domain' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DomainOfProjectsQuery, DomainOfProjectsQueryVariables>;

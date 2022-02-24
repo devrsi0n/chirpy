@@ -62,3 +62,18 @@ mutation deleteOneComment($id: uuid!) {
     id
   }
 }
+
+query commentOfPage($pageId: uuid, $limit: Int, $offset: Int) {
+  comments(where: { pageId: { _eq: $pageId } }, limit: $limit, offset: $offset) {
+    comment: content(path: "content")
+    ...commentContent
+    replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+      comment: content(path: "content")
+      ...commentContent
+      replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        comment: content(path: "content")
+        ...commentContent
+      }
+    }
+  }
+}
