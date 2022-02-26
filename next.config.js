@@ -1,8 +1,11 @@
 const { withPlugins } = require('next-compose-plugins');
+const useAnalysis = process.env.ANALYZE === 'true';
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true' && process.env.NODE_ENV !== 'development',
+  enabled: useAnalysis && process.env.NODE_ENV !== 'development',
 });
 const { withPlausibleProxy } = require('next-plausible');
+const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
+
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
 
 /**
@@ -30,6 +33,15 @@ module.exports = withPlugins(
           destination: `${analyticsDomain}/api/stats/:path*`,
         },
       ];
+    },
+    webpack: function (config, options) {
+      const { dev, isServer } = options;
+
+      if (useAnalysis && !dev && !isServer) {
+        config.plugins.push(new RelativeCiAgentWebpackPlugin());
+      }
+
+      return config;
     },
   },
 );
