@@ -32,7 +32,7 @@ describe('Header', () => {
 
     clickUserMenu();
     cy.get('header').findByRole('menuitem', { name: 'Profile' }).click();
-    cy.url().should('include', '/profile');
+    cy.url({ timeout: 60_000 }).should('include', '/profile');
 
     clickUserMenu();
     cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();

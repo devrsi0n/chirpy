@@ -34,6 +34,19 @@ module.exports = withPlugins(
         },
       ];
     },
+    async headers() {
+      return [
+        {
+          source: '/widget/(.*)',
+          headers: [
+            {
+              key: 'Access-Control-Allow-Origin',
+              value: '*',
+            },
+          ],
+        },
+      ];
+    },
     webpack: function (config, options) {
       const { dev, isServer } = options;
 
