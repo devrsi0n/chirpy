@@ -15,6 +15,8 @@ declare namespace NodeJS {
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;
+    EMAIL_API_KEY: string;
+
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     GITHUB_CLIENT_ID: string;
