@@ -9,14 +9,14 @@ import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
 import { List } from '$/components/list';
 import { Text } from '$/components/text';
-import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
+import { DomainOfProjectsQuery } from '$/server/graphql/generated/project';
 import { listHoverable } from '$/styles/common';
 
-export type ProjectCardProps = {
-  project: NonNullable<UserDashboardProjectsQuery['userByPk']>['projects'][number];
+type AdminCardProps = {
+  project: DomainOfProjectsQuery['projects'][number];
 };
 
-export function AdminCard({ project }: ProjectCardProps): JSX.Element {
+export function AdminCard({ project }: AdminCardProps): JSX.Element {
   const [pageSize, setPageSize] = React.useState(5);
   const pages = project.pages.slice(0, pageSize);
   const showExpandBtn = project.pages.length > 5;
