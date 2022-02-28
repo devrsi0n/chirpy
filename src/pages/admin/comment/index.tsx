@@ -36,8 +36,8 @@ export default function Comment() {
 
   const [{ data, fetching: loading }, fetchComment] = useCommentOfPageQuery({
     variables: {
-      pageId,
-      offset: 10,
+      pageId: pageId + '',
+      offset: 0,
       limit: 10,
     },
   });
@@ -117,35 +117,43 @@ export default function Comment() {
     // eslint-disable-next-line
   }, []);
 
+  const hasComment = !!data?.comments?.length;
+
   return (
-    <SiteLayout hideFullBleed title="Admin comments">
-      <div tw="px-24">
-        <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
-          <div tw="flex items-center justify-start space-x-4">
-            <div tw="flex bg-gray-400 items-center p-2 rounded-md border-solid">
-              <input
-                tw="w-64 ml-1 block text-black bg-gray-400 placeholder-gray-800 outline-none"
-                type="search"
-                name=""
-                id=""
-                placeholder="search"
-              />
+    <SiteLayout hideFooter hideFullBleed={hasComment} title="Admin comments">
+      {hasComment ? (
+        <div tw="px-24">
+          <div tw="bg-white rounded-md w-full dark:(bg-grayd-300)">
+            <div tw="flex items-center justify-start space-x-4">
+              <div tw="flex bg-gray-400 items-center p-2 rounded-md border-solid">
+                <input
+                  tw="w-64 ml-1 block text-black bg-gray-400 placeholder-gray-800 outline-none"
+                  type="search"
+                  name=""
+                  id=""
+                  placeholder="search"
+                />
+              </div>
+              <Button onClick={handleSearch} variant="solid" color="primary">
+                <Search />
+                <span>Search</span>
+              </Button>
             </div>
-            <Button onClick={handleSearch} variant="solid" color="primary">
-              <Search />
-              <span>Search</span>
-            </Button>
           </div>
+          <Table
+            columns={columns}
+            data={data?.comments || []}
+            fetchData={() => {}}
+            loading={loading}
+            // pageCount={}
+            pagination
+          />
         </div>
-        <Table
-          columns={columns}
-          data={data?.comments || []}
-          fetchData={() => {}}
-          loading={loading}
-          // pageCount={}
-          pagination
-        />
-      </div>
+      ) : (
+        <div tw="py-6">
+          <Text>No Comment</Text>
+        </div>
+      )}
       <Dialog
         showDismissButton
         show={showDialog}
