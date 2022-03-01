@@ -70,6 +70,7 @@
     "datamaps": "0.5.9",
     "dayjs": "1.10.8",
     "debounce-promise": "3.1.2",
+    "eta": "1.12.3",
     "framer-motion": "6.2.8",
     "github-slugger": "1.4.0",
     "graphql": "16.3.0",
