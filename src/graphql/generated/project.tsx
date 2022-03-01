@@ -40,6 +40,19 @@ export type UpdateThemeMutation = {
   updateProjectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
+export type AllProjectsQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type AllProjectsQuery = {
+  __typename?: 'query_root';
+  projects: Array<{
+    __typename?: 'Project';
+    id: string;
+    domain: string;
+    name: string;
+    User?: { __typename?: 'User'; avatar?: string | null; id: string } | null;
+  }>;
+};
+
 export const InsertOneProjectDocument = gql`
   mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
     insertOneProject(object: { teamId: $teamId, name: $name, domain: $domain }) {
@@ -79,4 +92,23 @@ export const UpdateThemeDocument = gql`
 
 export function useUpdateThemeMutation() {
   return Urql.useMutation<UpdateThemeMutation, UpdateThemeMutationVariables>(UpdateThemeDocument);
+}
+export const AllProjectsDocument = gql`
+  query allProjects {
+    projects {
+      id
+      domain
+      name
+      User {
+        avatar
+        id
+      }
+    }
+  }
+`;
+
+export function useAllProjectsQuery(
+  options?: Omit<Urql.UseQueryArgs<AllProjectsQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<AllProjectsQuery>({ query: AllProjectsDocument, ...options });
 }

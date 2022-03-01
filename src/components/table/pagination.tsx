@@ -1,6 +1,6 @@
 import ChevronLeft from '@geist-ui/react-icons/chevronLeft';
 import ChevronRight from '@geist-ui/react-icons/chevronRight';
-import React, { useEffect } from 'react';
+import * as React from 'react';
 import 'twin.macro';
 
 import { Button } from '$/components/button';
@@ -8,7 +8,7 @@ import { Select } from '$/components/select';
 import { PAGE_SIZE_OPTIONS } from '$/lib/constants';
 
 type PaginationProps = {
-  pageSize: number;
+  pageSize?: number;
   next: boolean;
   params: {
     offset: number;

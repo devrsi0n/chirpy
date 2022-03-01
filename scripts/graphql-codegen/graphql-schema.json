@@ -15528,6 +15528,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "admin",
+            "description": "Have all permissions",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "manager",
             "description": "Manager of a team",
             "isDeprecated": false,

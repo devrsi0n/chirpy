@@ -2205,6 +2205,8 @@ export type Role_Constraint =
   'Role_pkey';
 
 export type Role_Enum =
+  /** Have all permissions */
+  | 'admin'
   /** Manager of a team */
   | 'manager'
   /** Normal user */
