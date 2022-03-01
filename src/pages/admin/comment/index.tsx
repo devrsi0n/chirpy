@@ -2,7 +2,6 @@ import Search from '@geist-ui/react-icons/search';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import 'twin.macro';
 import tw from 'twin.macro';
 
 import { CommentTree } from '$/blocks/comment-tree';

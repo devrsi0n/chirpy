@@ -12,7 +12,7 @@ import {
 } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 
-export default function Admin({ projects }: StaticProps): JSX.Element {
+export default function Domain({ projects }: StaticProps): JSX.Element {
   return (
     <SiteLayout title="Admin">
       {projects?.length ? (

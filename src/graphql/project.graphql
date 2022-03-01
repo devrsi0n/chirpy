@@ -18,3 +18,15 @@ mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
     id
   }
 }
+
+query allProjects {
+  projects {
+    id
+    domain
+    name
+    User {
+      avatar
+      id
+    }
+  }
+}
