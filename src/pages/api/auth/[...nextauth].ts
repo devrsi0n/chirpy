@@ -5,6 +5,7 @@ import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
 import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth-adapter';
 import { authProviders } from '$/server/services/auth-providers';
+import { sendWelcomeLetter } from '$/server/services/email/send-welcome-letter';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
@@ -71,6 +72,19 @@ export default NextAuth({
         return false;
       }
       return true;
+    },
+  },
+  events: {
+    async createUser({ user }) {
+      if (!user || !user.name || !user.email) {
+        return console.error('Create a user without valid email or name', user);
+      }
+      await sendWelcomeLetter({
+        to: {
+          name: user.name,
+          email: user.email,
+        },
+      });
     },
   },
   cookies: defaultCookies(process.env.NEXTAUTH_URL.startsWith('https://')),

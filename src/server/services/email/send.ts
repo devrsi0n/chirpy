@@ -1,4 +1,4 @@
-import SibApiV3Sdk from '@sendinblue/client';
+import * as SibApiV3Sdk from '@sendinblue/client';
 
 const sibApi = new SibApiV3Sdk.TransactionalEmailsApi();
 
@@ -13,15 +13,25 @@ export type EmailType = 'welcome' | 'notification';
 
 export interface EmailOptions {
   subject: string;
-  to: MailPerson[];
+  to: MailPerson;
   type: EmailType;
+  /**
+   * Email content, support html
+   */
   content: string;
 }
 
 export async function sendEmail({ subject, to, type, content }: EmailOptions) {
+  console.log('Send email', {
+    subject,
+    to,
+    type,
+    content,
+  });
   const email = new SibApiV3Sdk.SendSmtpEmail();
   email.subject = subject;
-  email.to = to;
+  // We can only send to 1 person or we can't fill multiply parameters with 1 template
+  email.to = [to];
   email.sender = senders[type];
   email.htmlContent = content;
   email.tags = [type];
@@ -30,7 +40,7 @@ export async function sendEmail({ subject, to, type, content }: EmailOptions) {
 
 const senders: Record<EmailType, MailPerson> = {
   welcome: {
-    name: 'Chirpy hello',
+    name: 'Chirpy',
     email: 'hello@chirpy.dev',
   },
   notification: {
