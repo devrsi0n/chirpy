@@ -3603,14 +3603,14 @@ export type Mutation_Root = {
   deleteUserTypes?: Maybe<UserType_Mutation_Response>;
   /** delete data from the table: "User" */
   deleteUsers?: Maybe<User_Mutation_Response>;
+  /** delete single row from the table: "VerificationToken" */
+  deleteVerificationTokenByPk?: Maybe<VerificationToken>;
+  /** delete data from the table: "VerificationToken" */
+  deleteVerificationTokens?: Maybe<VerificationToken_Mutation_Response>;
   /** delete data from the table: "NotificationType" */
   delete_NotificationType?: Maybe<NotificationType_Mutation_Response>;
   /** delete single row from the table: "NotificationType" */
   delete_NotificationType_by_pk?: Maybe<NotificationType>;
-  /** delete data from the table: "VerificationToken" */
-  delete_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
-  /** delete single row from the table: "VerificationToken" */
-  delete_VerificationToken_by_pk?: Maybe<VerificationToken>;
   /** insert data into the table: "Account" */
   insertAccounts?: Maybe<Account_Mutation_Response>;
   /** insert data into the table: "Comment" */
@@ -3649,6 +3649,8 @@ export type Mutation_Root = {
   insertOneUser?: Maybe<User>;
   /** insert a single row into the table: "UserType" */
   insertOneUserType?: Maybe<UserType>;
+  /** insert a single row into the table: "VerificationToken" */
+  insertOneVerificationToken?: Maybe<VerificationToken>;
   /** insert data into the table: "Page" */
   insertPages?: Maybe<Page_Mutation_Response>;
   /** insert data into the table: "Project" */
@@ -3663,14 +3665,12 @@ export type Mutation_Root = {
   insertUserTypes?: Maybe<UserType_Mutation_Response>;
   /** insert data into the table: "User" */
   insertUsers?: Maybe<User_Mutation_Response>;
+  /** insert data into the table: "VerificationToken" */
+  insertVerificationTokens?: Maybe<VerificationToken_Mutation_Response>;
   /** insert data into the table: "NotificationType" */
   insert_NotificationType?: Maybe<NotificationType_Mutation_Response>;
   /** insert a single row into the table: "NotificationType" */
   insert_NotificationType_one?: Maybe<NotificationType>;
-  /** insert data into the table: "VerificationToken" */
-  insert_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
-  /** insert a single row into the table: "VerificationToken" */
-  insert_VerificationToken_one?: Maybe<VerificationToken>;
   /** update single row of the table: "Account" */
   updateAccountByPk?: Maybe<Account>;
   /** update data of the table: "Account" */
@@ -3723,14 +3723,14 @@ export type Mutation_Root = {
   updateUserTypes?: Maybe<UserType_Mutation_Response>;
   /** update data of the table: "User" */
   updateUsers?: Maybe<User_Mutation_Response>;
+  /** update single row of the table: "VerificationToken" */
+  updateVerificationTokenByPk?: Maybe<VerificationToken>;
+  /** update data of the table: "VerificationToken" */
+  updateVerificationTokens?: Maybe<VerificationToken_Mutation_Response>;
   /** update data of the table: "NotificationType" */
   update_NotificationType?: Maybe<NotificationType_Mutation_Response>;
   /** update single row of the table: "NotificationType" */
   update_NotificationType_by_pk?: Maybe<NotificationType>;
-  /** update data of the table: "VerificationToken" */
-  update_VerificationToken?: Maybe<VerificationToken_Mutation_Response>;
-  /** update single row of the table: "VerificationToken" */
-  update_VerificationToken_by_pk?: Maybe<VerificationToken>;
 };
 
 /** mutation root */
@@ -3864,6 +3864,16 @@ export type Mutation_RootDeleteUsersArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootDeleteVerificationTokenByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+/** mutation root */
+export type Mutation_RootDeleteVerificationTokensArgs = {
+  where: VerificationToken_Bool_Exp;
+};
+
+/** mutation root */
 export type Mutation_RootDelete_NotificationTypeArgs = {
   where: NotificationType_Bool_Exp;
 };
@@ -3871,16 +3881,6 @@ export type Mutation_RootDelete_NotificationTypeArgs = {
 /** mutation root */
 export type Mutation_RootDelete_NotificationType_By_PkArgs = {
   value: Scalars['String'];
-};
-
-/** mutation root */
-export type Mutation_RootDelete_VerificationTokenArgs = {
-  where: VerificationToken_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootDelete_VerificationToken_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 /** mutation root */
@@ -3998,6 +3998,12 @@ export type Mutation_RootInsertOneUserTypeArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsertOneVerificationTokenArgs = {
+  object: VerificationToken_Insert_Input;
+  on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsertPagesArgs = {
   objects: Array<Page_Insert_Input>;
   on_conflict?: InputMaybe<Page_On_Conflict>;
@@ -4040,6 +4046,12 @@ export type Mutation_RootInsertUsersArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootInsertVerificationTokensArgs = {
+  objects: Array<VerificationToken_Insert_Input>;
+  on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
+};
+
+/** mutation root */
 export type Mutation_RootInsert_NotificationTypeArgs = {
   objects: Array<NotificationType_Insert_Input>;
   on_conflict?: InputMaybe<NotificationType_On_Conflict>;
@@ -4049,18 +4061,6 @@ export type Mutation_RootInsert_NotificationTypeArgs = {
 export type Mutation_RootInsert_NotificationType_OneArgs = {
   object: NotificationType_Insert_Input;
   on_conflict?: InputMaybe<NotificationType_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_VerificationTokenArgs = {
-  objects: Array<VerificationToken_Insert_Input>;
-  on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
-};
-
-/** mutation root */
-export type Mutation_RootInsert_VerificationToken_OneArgs = {
-  object: VerificationToken_Insert_Input;
-  on_conflict?: InputMaybe<VerificationToken_On_Conflict>;
 };
 
 /** mutation root */
@@ -4250,6 +4250,18 @@ export type Mutation_RootUpdateUsersArgs = {
 };
 
 /** mutation root */
+export type Mutation_RootUpdateVerificationTokenByPkArgs = {
+  _set?: InputMaybe<VerificationToken_Set_Input>;
+  pk_columns: VerificationToken_Pk_Columns_Input;
+};
+
+/** mutation root */
+export type Mutation_RootUpdateVerificationTokensArgs = {
+  _set?: InputMaybe<VerificationToken_Set_Input>;
+  where: VerificationToken_Bool_Exp;
+};
+
+/** mutation root */
 export type Mutation_RootUpdate_NotificationTypeArgs = {
   _set?: InputMaybe<NotificationType_Set_Input>;
   where: NotificationType_Bool_Exp;
@@ -4259,18 +4271,6 @@ export type Mutation_RootUpdate_NotificationTypeArgs = {
 export type Mutation_RootUpdate_NotificationType_By_PkArgs = {
   _set?: InputMaybe<NotificationType_Set_Input>;
   pk_columns: NotificationType_Pk_Columns_Input;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_VerificationTokenArgs = {
-  _set?: InputMaybe<VerificationToken_Set_Input>;
-  where: VerificationToken_Bool_Exp;
-};
-
-/** mutation root */
-export type Mutation_RootUpdate_VerificationToken_By_PkArgs = {
-  _set?: InputMaybe<VerificationToken_Set_Input>;
-  pk_columns: VerificationToken_Pk_Columns_Input;
 };
 
 /** column ordering options */
@@ -4296,10 +4296,6 @@ export type Query_Root = {
   NotificationType_aggregate: NotificationType_Aggregate;
   /** fetch data from the table: "NotificationType" using primary key columns */
   NotificationType_by_pk?: Maybe<NotificationType>;
-  /** fetch aggregated fields from the table: "VerificationToken" */
-  VerificationToken_aggregate: VerificationToken_Aggregate;
-  /** fetch data from the table: "VerificationToken" using primary key columns */
-  VerificationToken_by_pk?: Maybe<VerificationToken>;
   /** fetch aggregated fields from the table: "Account" */
   accountAggregate: Account_Aggregate;
   /** fetch data from the table: "Account" using primary key columns */
@@ -4378,8 +4374,12 @@ export type Query_Root = {
   userTypes: Array<UserType>;
   /** fetch data from the table: "User" */
   users: Array<User>;
+  /** fetch aggregated fields from the table: "VerificationToken" */
+  verificationTokenAggregate: VerificationToken_Aggregate;
+  /** fetch data from the table: "VerificationToken" using primary key columns */
+  verificationTokenByPk?: Maybe<VerificationToken>;
   /** fetch data from the table: "VerificationToken" */
-  verificationRequests: Array<VerificationToken>;
+  verificationTokens: Array<VerificationToken>;
 };
 
 export type Query_RootNotificationTypeArgs = {
@@ -4400,18 +4400,6 @@ export type Query_RootNotificationType_AggregateArgs = {
 
 export type Query_RootNotificationType_By_PkArgs = {
   value: Scalars['String'];
-};
-
-export type Query_RootVerificationToken_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<VerificationToken_Order_By>>;
-  where?: InputMaybe<VerificationToken_Bool_Exp>;
-};
-
-export type Query_RootVerificationToken_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 export type Query_RootAccountAggregateArgs = {
@@ -4674,7 +4662,19 @@ export type Query_RootUsersArgs = {
   where?: InputMaybe<User_Bool_Exp>;
 };
 
-export type Query_RootVerificationRequestsArgs = {
+export type Query_RootVerificationTokenAggregateArgs = {
+  distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<VerificationToken_Order_By>>;
+  where?: InputMaybe<VerificationToken_Bool_Exp>;
+};
+
+export type Query_RootVerificationTokenByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Query_RootVerificationTokensArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4690,10 +4690,6 @@ export type Subscription_Root = {
   NotificationType_aggregate: NotificationType_Aggregate;
   /** fetch data from the table: "NotificationType" using primary key columns */
   NotificationType_by_pk?: Maybe<NotificationType>;
-  /** fetch aggregated fields from the table: "VerificationToken" */
-  VerificationToken_aggregate: VerificationToken_Aggregate;
-  /** fetch data from the table: "VerificationToken" using primary key columns */
-  VerificationToken_by_pk?: Maybe<VerificationToken>;
   /** fetch aggregated fields from the table: "Account" */
   accountAggregate: Account_Aggregate;
   /** fetch data from the table: "Account" using primary key columns */
@@ -4772,8 +4768,12 @@ export type Subscription_Root = {
   userTypes: Array<UserType>;
   /** fetch data from the table: "User" */
   users: Array<User>;
+  /** fetch aggregated fields from the table: "VerificationToken" */
+  verificationTokenAggregate: VerificationToken_Aggregate;
+  /** fetch data from the table: "VerificationToken" using primary key columns */
+  verificationTokenByPk?: Maybe<VerificationToken>;
   /** fetch data from the table: "VerificationToken" */
-  verificationRequests: Array<VerificationToken>;
+  verificationTokens: Array<VerificationToken>;
 };
 
 export type Subscription_RootNotificationTypeArgs = {
@@ -4794,18 +4794,6 @@ export type Subscription_RootNotificationType_AggregateArgs = {
 
 export type Subscription_RootNotificationType_By_PkArgs = {
   value: Scalars['String'];
-};
-
-export type Subscription_RootVerificationToken_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<VerificationToken_Order_By>>;
-  where?: InputMaybe<VerificationToken_Bool_Exp>;
-};
-
-export type Subscription_RootVerificationToken_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 export type Subscription_RootAccountAggregateArgs = {
@@ -5068,7 +5056,19 @@ export type Subscription_RootUsersArgs = {
   where?: InputMaybe<User_Bool_Exp>;
 };
 
-export type Subscription_RootVerificationRequestsArgs = {
+export type Subscription_RootVerificationTokenAggregateArgs = {
+  distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<VerificationToken_Order_By>>;
+  where?: InputMaybe<VerificationToken_Bool_Exp>;
+};
+
+export type Subscription_RootVerificationTokenByPkArgs = {
+  id: Scalars['uuid'];
+};
+
+export type Subscription_RootVerificationTokensArgs = {
   distinct_on?: InputMaybe<Array<VerificationToken_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;

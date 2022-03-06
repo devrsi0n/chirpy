@@ -1,0 +1,22 @@
+mutation insertOneVerificationToken($identifier: String!, $token: String!, $expires: timestamptz!) {
+  insertOneVerificationToken(
+    object: { identifier: $identifier, token: $token, expires: $expires }
+  ) {
+    id
+    identifier
+    token
+    expires
+  }
+}
+
+mutation deleteVerificationToken($identifier: String!, $token: String!) {
+  deleteVerificationTokens(where: { identifier: { _eq: $identifier }, token: { _eq: $token } }) {
+    returning {
+      id
+      identifier
+      token
+      expires
+    }
+    affected_rows
+  }
+}

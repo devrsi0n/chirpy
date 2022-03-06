@@ -1,4 +1,5 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
+import EmailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
@@ -6,9 +7,10 @@ import twitterProvider from 'next-auth/providers/twitter';
 
 import { getHostEnv } from '$/utilities/env';
 
-import { isENVProd } from '../utilities/env';
+import { isENVProd } from '../../utilities/env';
+import { sendVerificationRequest } from '../email/send-emails';
 
-const REQUEST_TIMEOUT = isENVProd ? 10_000 : 30_000;
+const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
 
 export const authProviders = [
   GitHubProvider({
@@ -62,6 +64,19 @@ export const authProviders = [
               };
             }
             return null;
+          },
+        }),
+        EmailProvider({
+          server: process.env.EMAIL_SERVER,
+          from: process.env.EMAIL_FROM,
+          async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
+            await sendVerificationRequest({
+              to: {
+                email,
+                name: email,
+              },
+              url,
+            });
           },
         }),
       ]

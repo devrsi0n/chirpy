@@ -1,4 +1,4 @@
-import { signIn, SignInResponse } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
 import tw, { css } from 'twin.macro';
 
@@ -28,6 +28,12 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
     const error = new URLSearchParams(location.search).get('error') as SignInErrorKeys | null;
     if (error) {
       setErrorType(error);
+    }
+  }, []);
+  const [isProd, setIsProd] = React.useState(true);
+  React.useEffect(() => {
+    if (getHostEnv() !== 'prod') {
+      setIsProd(false);
     }
   }, []);
   const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
@@ -62,6 +68,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
               </Button>
             ))}
           </div>
+          {!isProd && <EmailSignIn />}
           <Text tw="py-3" size="sm" variant="secondary">
             By clicking the buttons above, you acknowledge that you have read and understood, and
             agree to Chirpy
@@ -69,10 +76,29 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
             <Link href="/terms-of-service">Terms of Service</Link> and{' '}
             <Link href="/privacy-policy">Privacy Policy</Link>.
           </Text>
-          <CredentialsSignInForm />
+          {!isProd && <CredentialsSignInForm />}
         </div>
       </div>
       <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
+    </div>
+  );
+}
+
+function EmailSignIn(): JSX.Element {
+  const [email, setEmail] = React.useState('');
+  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setEmail(event.target.value);
+  };
+  const handleSubmit = () => {
+    signIn('email', {
+      callbackUrl: `${location.origin}/auth/redirecting`,
+      email,
+    });
+  };
+  return (
+    <div>
+      <TextField name="Email" type="text" label="Email" onChange={handleEmailChange} tw="w-full" />
+      <Button onClick={handleSubmit}>Submit</Button>
     </div>
   );
 }
@@ -84,12 +110,7 @@ function CredentialsSignInForm(): JSX.Element {
       password: '',
     },
   });
-  const [showForm, setShowForm] = React.useState(false);
-  React.useEffect(() => {
-    if (['staging', 'preview', 'localhost'].includes(getHostEnv())) {
-      setShowForm(true);
-    }
-  }, []);
+
   const handleClickSubmit = handleSubmit(async (fields) => {
     await signIn('credentials', {
       // redirect: false,
@@ -97,13 +118,10 @@ function CredentialsSignInForm(): JSX.Element {
       ...fields,
     });
   });
-  if (!showForm) {
-    return <></>;
-  }
   return (
     <div>
-      <TextField {...register('username')} type="text" label="Username" tw="w-full"></TextField>
-      <TextField {...register('password')} type="password" label="Password" tw="w-full"></TextField>
+      <TextField {...register('username')} type="text" label="Username" tw="w-full" />
+      <TextField {...register('password')} type="password" label="Password" tw="w-full" />
       <Button type="submit" onClick={handleClickSubmit} tw="w-full">
         Submit
       </Button>
