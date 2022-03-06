@@ -171,6 +171,10 @@ export function nextAuthAdapter(): Adapter {
     },
     async useVerificationToken({ identifier, token }) {
       const { returning } = await deleteVerificationToken({ identifier, token });
+      if (!returning[0]) {
+        // The token has been used/deleted
+        return null;
+      }
       const { id: _, ...verificationToken } = returning[0];
       return {
         ...verificationToken,

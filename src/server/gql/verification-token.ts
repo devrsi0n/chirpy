@@ -34,5 +34,6 @@ export async function deleteVerificationToken(variables: DeleteVerificationToken
   if (!data?.deleteVerificationTokens) {
     throw new Error(`Delete verification token failed, data: ${data}`);
   }
+  // console.log(`Delete verification token success, data: ${JSON.stringify(data, null, 2)}`);
   return data.deleteVerificationTokens;
 }

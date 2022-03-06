@@ -111,7 +111,8 @@ function CredentialsSignInForm(): JSX.Element {
     },
   });
 
-  const handleClickSubmit = handleSubmit(async (fields) => {
+  const handleClickSubmit = handleSubmit(async (fields, event) => {
+    event.preventDefault();
     await signIn('credentials', {
       // redirect: false,
       callbackUrl: '/dashboard',
@@ -119,13 +120,13 @@ function CredentialsSignInForm(): JSX.Element {
     });
   });
   return (
-    <div>
+    <form onSubmit={handleClickSubmit}>
       <TextField {...register('username')} type="text" label="Username" tw="w-full" />
       <TextField {...register('password')} type="password" label="Password" tw="w-full" />
-      <Button type="submit" onClick={handleClickSubmit} tw="w-full">
+      <Button type="submit" tw="w-full">
         Submit
       </Button>
-    </div>
+    </form>
   );
 }
 
