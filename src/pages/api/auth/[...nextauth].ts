@@ -1,8 +1,7 @@
 import NextAuth from 'next-auth';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
+import { getAuthUserByPk } from '$/server/gql/user';
 import { nextAuthAdapter } from '$/server/services/auth-adapter';
 import { authProviders } from '$/server/services/auth-providers';
 import { fillUserFields } from '$/server/services/user';
@@ -33,19 +32,18 @@ export default NextAuth({
       if (user) {
         await fillUserFields(user as any, profile as any, account?.provider as any);
       }
+      const { projects, type } = await getAuthUserByPk(token.sub!);
+      const editableProjectIds = projects.map(({ id }: { id: string }) => id);
+
       return {
         ...token,
+        editableProjectIds,
+        type,
       };
     },
     async session({ session, token }) {
-      const client = getAdminGqlClient();
+      console.log('session', { session, token });
       const userId = token.sub!;
-      const { data } = await client
-        .query<UserProjectsQuery>(UserProjectsDocument, {
-          userId,
-        })
-        .toPromise();
-      const editableProjectIds = data?.projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,
@@ -60,8 +58,11 @@ export default NextAuth({
         },
       );
       if (session.user) {
-        session.user.id = userId;
-        session.user.editableProjectIds = editableProjectIds;
+        session.user = {
+          ...session.user,
+          id: userId,
+          ...token,
+        };
       }
       return session;
     },

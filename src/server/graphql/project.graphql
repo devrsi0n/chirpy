@@ -19,12 +19,6 @@ query projectByPk($id: uuid!) {
   }
 }
 
-query userProjects($userId: uuid!) {
-  projects(where: { userId: { _eq: $userId } }) {
-    id
-  }
-}
-
 query projectByDomain($domain: String!) {
   projects(where: { domain: { _eq: $domain } }) {
     id

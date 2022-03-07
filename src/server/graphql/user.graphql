@@ -104,3 +104,12 @@ mutation createUser($name: String, $email: String, $emailVerified: timestamptz, 
     ...adapterUser
   }
 }
+
+query authUser($id: uuid!) {
+  userByPk(id: $id) {
+    projects {
+      id
+    }
+    type
+  }
+}

@@ -27,15 +27,6 @@ export type ProjectByPkQuery = {
   projectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
-export type UserProjectsQueryVariables = Types.Exact<{
-  userId: Types.Scalars['uuid'];
-}>;
-
-export type UserProjectsQuery = {
-  __typename?: 'query_root';
-  projects: Array<{ __typename?: 'Project'; id: string }>;
-};
-
 export type ProjectByDomainQueryVariables = Types.Exact<{
   domain: Types.Scalars['String'];
 }>;
@@ -194,64 +185,6 @@ export const ProjectByPkDocument = {
     },
   ],
 } as unknown as DocumentNode<ProjectByPkQuery, ProjectByPkQueryVariables>;
-export const UserProjectsDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'userProjects' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
-          type: {
-            kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'projects' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'where' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'userId' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<UserProjectsQuery, UserProjectsQueryVariables>;
 export const ProjectByDomainDocument = {
   kind: 'Document',
   definitions: [
