@@ -54,7 +54,7 @@
     "@next/bundle-analyzer": "12.1.0",
     "@radix-ui/colors": "0.1.8",
     "@react-aria/button": "3.4.2",
-    "@tailwindcss/typography": "0.4.1",
+    "@tailwindcss/typography": "0.5.2",
     "@testing-library/cypress": "8.0.2",
     "@tiptap/extension-link": "2.0.0-beta.36",
     "@tiptap/extension-placeholder": "2.0.0-beta.48",
