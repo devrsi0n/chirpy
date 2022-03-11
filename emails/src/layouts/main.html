@@ -1,0 +1,95 @@
+<!DOCTYPE {{{ page.doctype || 'html' }}}>
+<html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
+  <head>
+    <meta charset="{{ page.charset || 'utf-8' }}" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <!--[if mso]>
+      <noscript>
+        <xml>
+          <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+          </o:OfficeDocumentSettings>
+        </xml>
+      </noscript>
+      <style>
+        td,
+        th,
+        div,
+        p,
+        a,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-family: 'Segoe UI', sans-serif;
+          mso-line-height-rule: exactly;
+        }
+      </style>
+    <![endif]-->
+    <if condition="page.title">
+      <title>{{{ page.title }}}</title>
+    </if>
+    <if condition="page.css">
+      <style>
+        {{{ page.css }}}
+      </style>
+    </if>
+    <block name="head"></block>
+  </head>
+  <body class="{{ page.bodyClass }}">
+    <if condition="page.preheader">
+      <div class="hidden">
+        {{{ page.preheader }}}&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj; &#160;&#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &zwnj; &#160;&#847; &#847; &#847; &#847; &#847;
+      </div>
+    </if>
+    <div
+      role="article"
+      aria-roledescription="email"
+      aria-label="{{{ page.title || '' }}}"
+      lang="{{ page.language || 'en' }}"
+    >
+      <block name="template"></block>
+    </div>
+    <table class="w-600 sm:w-full" align="center">
+      <tr>
+        <td class="h-48"></td>
+      </tr>
+      <tr>
+        <td class="text-center text-gray-600 text-base px-24">
+          <p class="m-0 italic">Chirpy, a privacy-friendly and customizable Disqus alternate.</p>
+          <p class="cursor-default">
+            <a
+              href="https://chirpy.dev/docs/index"
+              class="text-blue-500 no-underline hover:underline"
+              >Docs</a
+            >
+            &bull;
+            <a
+              href="https://github.com/devrsi0n/chirpy"
+              class="text-blue-500 no-underline hover:underline"
+              >Github</a
+            >
+            &bull;
+            <a href="https://chirpy.dev/blog" class="text-blue-500 no-underline hover:underline"
+              >Blog</a
+            >
+          </p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
