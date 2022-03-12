@@ -1,6 +1,6 @@
 import { Global } from '@emotion/react';
 import { LazyMotion } from 'framer-motion';
-import { SessionProvider, useSession } from 'next-auth/react';
+import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -10,8 +10,6 @@ import 'tailwindcss/tailwind.css';
 import { GlobalStyles } from 'twin.macro';
 
 import { ErrorFallback } from '$/blocks/error-fallback';
-import { LazySiteLayout } from '$/blocks/layout/lazy-site-layout';
-import { Spinner } from '$/components/spinner';
 import { ToastProvider } from '$/components/toast';
 import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
@@ -42,13 +40,7 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
                 <CurrentUserProvider>
                   <ToastProvider>
                     <NotificationProvider>
-                      {(Component as any).auth ? (
-                        <AuthGuard isWidget={isWidget}>
-                          <Component {...pageProps} />
-                        </AuthGuard>
-                      ) : (
-                        <Component {...pageProps} />
-                      )}
+                      <Component {...pageProps} />
                     </NotificationProvider>
                   </ToastProvider>
                 </CurrentUserProvider>
@@ -62,27 +54,5 @@ function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppP
 }
 
 export default App;
-
-type AuthGuardProps = {
-  isWidget: true | undefined;
-  children: React.ReactNode;
-};
-
-function AuthGuard({ children, isWidget }: AuthGuardProps): JSX.Element {
-  // Redirect user to sign-in page if no session available
-  const { data: session } = useSession({ required: true });
-  const hasUser = !!session?.user;
-
-  if (hasUser) {
-    return <>{children}</>;
-  }
-  // Only wrap spinner with Layout on non-widget scenarios
-  const Wrapper = isWidget ? 'div' : LazySiteLayout;
-  return (
-    <Wrapper title="Loading">
-      <Spinner tw="mt-32 justify-center" />
-    </Wrapper>
-  );
-}
 
 const loadFeatures = () => import('../utilities/framer-motion-features').then((res) => res.default);

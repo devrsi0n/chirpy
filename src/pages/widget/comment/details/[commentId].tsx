@@ -6,7 +6,6 @@ import {
   InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
-import Head from 'next/head';
 import * as React from 'react';
 import superjson from 'superjson';
 import tw from 'twin.macro';
@@ -93,7 +92,10 @@ type StaticProps = PathParams &
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const client = getAdminGqlClient();
-  const { data } = await client.query<CommentsQuery>(CommentsDocument).toPromise();
+  const { data, error } = await client.query<CommentsQuery>(CommentsDocument).toPromise();
+  if (error) {
+    console.error(`Can't find the comments, error: ${error}`);
+  }
   const paths =
     data?.comments.map(({ id }) => ({
       params: {
@@ -152,7 +154,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
         theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
-      revalidate: 60,
+      revalidate: 600,
     };
   } catch (error) {
     console.error(superjson.stringify(error));

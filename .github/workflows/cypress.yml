@@ -16,8 +16,8 @@ jobs:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          HASH_KEY: ${{ secrets.HASH_KEY }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
-          HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
+          HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
           # DEBUG: 'cypress:*'
           # DEBUG_DEPTH: 9

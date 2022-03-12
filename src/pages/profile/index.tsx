@@ -179,8 +179,6 @@ export default function Profile(): JSX.Element {
   );
 }
 
-Profile.auth = true;
-
 function ProfileContainer({
   children,
   className,

@@ -168,5 +168,3 @@ export default function Dashboard(): JSX.Element {
     </SiteLayout>
   );
 }
-
-Dashboard.auth = true;

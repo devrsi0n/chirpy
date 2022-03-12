@@ -1,5 +1,8 @@
+import { NextApiResponse } from 'next';
+
 import { getAuthorByCommentId, getSiteOwnerByTriggeredCommentId } from '$/server/gql/comment';
 import { getUserByPk } from '$/server/gql/user';
+import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
 import { createOneNotificationMessage, deleteNotificationMessage } from '../../gql/notification';
 import { NotificationPayload, sendNotification } from '../notification/send';
@@ -7,13 +10,18 @@ import { EventComment, EventPayload } from './event-type';
 import { getTextFromRteDoc } from './utilities';
 
 /**
- * Get notification payloads for a comment event.
+ * Handle hasura comment event, send web notification, trigger revalidation of the comment page.
+ * TODO: Send emails
  * @param eventBody
  */
-export async function getCommentEventNotifications(eventBody: EventPayload): Promise<void> {
+export async function handleCommentEvent(
+  eventBody: EventPayload,
+  res: NextApiResponse,
+): Promise<void> {
   if (!isEventComment(eventBody)) {
     return;
   }
+  const promises = [];
   const notificationPayloads: (NotificationPayload & { contextId: string })[] = [];
   const { event } = eventBody;
   if (event.op === 'INSERT') {
@@ -21,6 +29,9 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
     const body = getTextFromRteDoc(event.data.new.content);
 
     const siteOwnerData = await getSiteOwnerByTriggeredCommentId(commentId);
+    const url = siteOwnerData.page.url;
+    promises.push(revalidateCommentWidget(url, res));
+
     const ownerId = siteOwnerData.page.project.ownerId;
     if (!ownerId) {
       throw new Error(`Can't find the owner of the comment (${commentId})`);
@@ -30,7 +41,6 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
       id: triggeredById,
       name: siteOwnerData.triggeredBy.name || '',
     };
-    const url = siteOwnerData.page.url;
     if (ownerId !== triggeredById) {
       // Notify the owner of the site that a comment has been added
       notificationPayloads.push({
@@ -98,6 +108,9 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
         getAuthorByCommentId(newComment.id),
         getUserByPk(triggeredById),
       ]);
+      const { url } = authorData.page;
+      promises.push(revalidateCommentWidget(url, res));
+
       const recipientId = authorData.author.id;
       if (recipientId !== triggeredById) {
         notificationPayloads.push({
@@ -107,28 +120,29 @@ export async function getCommentEventNotifications(eventBody: EventPayload): Pro
             name: triggeredBy.name || '',
           },
           type: 'CommentDeleted',
-          url: authorData.page.url,
+          url,
           body: getTextFromRteDoc(newComment.content),
           contextId,
         });
       }
     }
   }
-  await Promise.allSettled(
-    notificationPayloads.reduce((previous, { contextId, ...payload }) => {
+  await Promise.allSettled([
+    ...promises,
+    ...notificationPayloads.reduce((previous, { contextId, ...payload }) => {
       previous.push(
         createOneNotificationMessage({
           recipientId: payload.recipientId,
           type: payload.type,
           url: payload.url,
           triggeredById: payload.triggeredBy.id,
-          contextId: contextId,
+          contextId,
         }),
         sendNotification(payload),
       );
       return previous;
     }, [] as Promise<any>[]),
-  );
+  ]);
   return;
 }
 
