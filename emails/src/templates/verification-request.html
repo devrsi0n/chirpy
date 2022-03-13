@@ -1,6 +1,6 @@
 ---
-title: 'Confirm your email address'
-preheader: 'Please confirm your email address in order to activate your account'
+title: 'Verification request'
+preheader: 'Please confirm your sign in verification request'
 bodyClass: bg-gray-100
 ---
 
@@ -10,13 +10,6 @@ bodyClass: bg-gray-100
       <tr>
         <td align="center" class="bg-gray-100">
           <table class="w-600 sm:w-full">
-            <tr>
-              <td class="p-48 sm:py-32 sm:px-24 text-center">
-                <a href="https://maizzle.com">
-                  <img src="images/logo.png" width="100" alt="Chirpy's logo" />
-                </a>
-              </td>
-            </tr>
             <tr>
               <td align="center" class="sm:px-24">
                 <table class="w-full">
@@ -51,17 +44,11 @@ bodyClass: bg-gray-100
                           [endif]-->
                         </a>
                       </div>
-                      <table class="w-full">
-                        <tr>
-                          <td class="py-32">
-                            <div class="bg-gray-200 h-px leading-px">&zwnj;</div>
-                          </td>
-                        </tr>
-                      </table>
+                      <component src="src/components/divider.html" ></component>
                       <p class="m-0 mb-16">
                         If you did not request this email you can safely ignore it.
                       </p>
-                      <p class="m-0 mb-16">Thanks, <br />The Chirpy Team</p>
+                      <component src="src/components/thanks.html"></component>
                     </td>
                   </tr>
                 </table>
