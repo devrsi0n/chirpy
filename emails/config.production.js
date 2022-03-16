@@ -8,15 +8,16 @@
 | specify the options that are changing.
 |
 */
+const path = require('path');
 
 module.exports = {
   build: {
     templates: {
       destination: {
-        path: 'build_production',
+        path: path.resolve(__dirname, '../src/server/services/email/templates'),
       },
     },
   },
   inlineCSS: true,
   removeUnusedCSS: true,
-}
+};

@@ -1,7 +1,9 @@
 import * as eta from 'eta';
-import path from 'path';
 
 import { EmailOptions, sendEmail } from './send';
+import notificationTemplate from './templates/notification.html';
+import verificationRequest from './templates/verification-request.html';
+import welcomeTemplate from './templates/welcome.html';
 import { EmailType } from './types';
 
 export type SendEmailOptions = Pick<SendEmailWithTemplateOptions, 'to'>;
@@ -44,11 +46,7 @@ async function sendEmailWithTemplate({
   subject,
   templateParams,
 }: SendEmailWithTemplateOptions) {
-  const content = await eta.renderFile(
-    // eslint-disable-next-line unicorn/prefer-module
-    path.resolve(process.cwd(), `templates/${type}.html`),
-    templateParams,
-  )!;
+  const content = await eta.render(TEMPLATE_MAP[type], templateParams)!;
   await sendEmail({
     subject,
     to,
@@ -56,3 +54,9 @@ async function sendEmailWithTemplate({
     content,
   });
 }
+
+const TEMPLATE_MAP: Record<EmailType, string> = {
+  welcome: welcomeTemplate,
+  'verification-request': verificationRequest,
+  notification: notificationTemplate,
+};
