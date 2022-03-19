@@ -49,10 +49,8 @@ export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<
     };
   };
 
-  const handleSubmit = (
-    onSubmit: (data: T, event: React.FormEvent<HTMLFormElement>) => Promise<void>,
-  ) => {
-    const _onSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmit = <E>(onSubmit: (data: T, event: E) => Promise<void>) => {
+    const onSubmitWrapper: (e: E) => Promise<void> = async (e) => {
       for (const [name, validator] of validatorMapRef.current.entries()) {
         if (!isValid(name, validator)) {
           return;
@@ -61,7 +59,7 @@ export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<
       await onSubmit(fields, e);
       setFields(defaultValues);
     };
-    return _onSubmit;
+    return onSubmitWrapper;
   };
 
   const hasError = React.useMemo(

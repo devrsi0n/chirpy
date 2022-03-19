@@ -111,14 +111,16 @@ function CredentialsSignInForm(): JSX.Element {
     },
   });
 
-  const handleClickSubmit = handleSubmit(async (fields, event) => {
-    event.preventDefault();
-    await signIn('credentials', {
-      // redirect: false,
-      callbackUrl: '/dashboard',
-      ...fields,
-    });
-  });
+  const handleClickSubmit = handleSubmit<React.FormEvent<HTMLFormElement>>(
+    async (fields, event) => {
+      event.preventDefault();
+      await signIn('credentials', {
+        // redirect: false,
+        callbackUrl: '/dashboard',
+        ...fields,
+      });
+    },
+  );
   return (
     <form onSubmit={handleClickSubmit}>
       <TextField {...register('username')} type="text" label="Username" tw="w-full" />
