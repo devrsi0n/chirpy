@@ -1,26 +1,16 @@
-import { NotificationType_Enum } from '$/graphql/generated/types';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { NotificationSubscriptionsByUserIdDocument } from '$/server/graphql/generated/notification';
 
 import { pushWebNotification } from './push-web-notification';
-
-export type NotificationPayload = {
-  recipientId: string;
-  type: NotificationType_Enum;
-  triggeredBy: {
-    id: string;
-    name: string;
-  };
-  url: string;
-  body: string;
-};
+import { sendNotificationViaEmail } from './send-notification-via-email';
+import { NotificationPayload } from './types';
 
 const client = getAdminGqlClient();
 
 export async function sendNotification(payload: NotificationPayload) {
   const { data } = await client
     .query(NotificationSubscriptionsByUserIdDocument, {
-      userId: payload.recipientId,
+      userId: payload.recipient.id,
     })
     .toPromise();
 
@@ -33,6 +23,8 @@ export async function sendNotification(payload: NotificationPayload) {
     return;
   }
   const { notificationSubscriptions } = data;
-  // console.log('sending notification', { data });
-  await Promise.allSettled(notificationSubscriptions.map(pushWebNotification(payload)));
+  await Promise.allSettled([
+    ...notificationSubscriptions.map(pushWebNotification(payload)),
+    sendNotificationViaEmail(payload),
+  ]);
 }

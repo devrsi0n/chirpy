@@ -18,8 +18,11 @@ bodyClass: bg-gray-100
                       class="bg-white text-gray-800 text-base text-left p-48 sm:px-24 leading-24 rounded"
                     >
                       <p>Hello <strong><%= it.userName %></strong>,</p>
+                      <a href="<%= it.url %>" class="m-0 mb-24">
+                        <%= it.title %>
+                      </a>
                       <p class="m-0 mb-24">
-                        <%= it.message %>
+                        "<%= it.body %>"
                       </p>
                       <component src="src/components/divider.html"></component>
                       <component src="src/components/thanks-team.html"></component>

@@ -11,12 +11,18 @@ query siteOwnerByTriggerCommentId($commentId: uuid!) {
       id
       url
       project {
-        ownerId: userId
+        owner: user {
+          id
+          name
+          email
+          username
+        }
       }
     }
     triggeredBy: user {
       id
       name
+      username
     }
   }
 }
@@ -31,6 +37,8 @@ query authorByCommentId($commentId: uuid!) {
     author: user {
       id
       name
+      username
+      email
     }
   }
 }

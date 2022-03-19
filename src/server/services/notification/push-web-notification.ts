@@ -1,13 +1,17 @@
 import webpush from 'web-push';
 
+import { NotificationType_Enum } from '$/graphql/generated/types';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   DeleteNotificationSubscriptionByPkDocument,
   NotificationSubscriptionsByUserIdQuery,
 } from '$/server/graphql/generated/notification';
 
-import { NotificationPayload } from './send';
-import { getWebNotificationPayload } from './utilities';
+import { NotificationPayload } from './types';
+
+export type WebNotificationPayload = {
+  title: string;
+} & Pick<NotificationPayload, 'body' | 'url'>;
 
 const client = getAdminGqlClient();
 
@@ -38,7 +42,7 @@ export function pushWebNotification(payload: NotificationPayload) {
             .toPromise();
           console.log('Deleted subscription', resp);
         } catch (error) {
-          console.log('Error deleting subscription', error);
+          console.error('Error deleting subscription', error);
         }
       }
 
@@ -55,4 +59,24 @@ const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
     privateKey: process.env.PRIVATE_VAPID,
   },
   ...(process.env.PROXY && { proxy: process.env.PROXY }),
+};
+
+export function getWebNotificationPayload(payload: NotificationPayload) {
+  const webNotificationPayload: WebNotificationPayload = {
+    title: getTitle(payload),
+    body: payload.body,
+    url: payload.url,
+  };
+  return webNotificationPayload;
+}
+
+export function getTitle(message: Pick<NotificationPayload, 'type' | 'triggeredBy'>): string {
+  return titleMap[message.type] + message.triggeredBy.name;
+}
+
+const titleMap: Record<NotificationType_Enum, string> = {
+  ReceivedAComment: 'New comment from ',
+  ReceivedAReply: 'New reply from ',
+  ReceivedALike: 'New like from ',
+  CommentDeleted: 'Your comment was deleted by ',
 };

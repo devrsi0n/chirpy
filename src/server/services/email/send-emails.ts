@@ -33,6 +33,32 @@ export async function sendVerificationRequest({ to, url }: SendVerificationReque
     },
   });
 }
+export type SendNotificationEmailOptions = SendEmailOptions & {
+  url: string;
+  title: string;
+  body: string;
+  userName: string;
+};
+export async function sendNotificationEmail({
+  to,
+  url,
+  title,
+  body,
+  userName,
+}: SendNotificationEmailOptions) {
+  await sendEmailWithTemplate({
+    to,
+    type: 'notification',
+    subject: 'Chirpy notifications',
+    templateParams: {
+      url,
+      email: to.email,
+      title,
+      body,
+      userName,
+    },
+  });
+}
 
 export type SendEmailWithTemplateOptions = Pick<EmailOptions, 'to'> & {
   type: EmailType;

@@ -6066,38 +6066,6 @@
             "deprecationReason": null
           },
           {
-            "name": "Team",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Team",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -6146,6 +6114,22 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Team",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "args": [],
@@ -6171,6 +6155,22 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "timestamptz",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
                 "ofType": null
               }
             },
@@ -6443,30 +6443,6 @@
             "deprecationReason": null
           },
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "_and",
             "description": null,
             "type": {
@@ -6555,6 +6531,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -6572,6 +6560,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "timestamptz_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -6637,30 +6637,6 @@
             "deprecationReason": null
           },
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_obj_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_obj_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -6697,6 +6673,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -6714,6 +6702,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -7154,30 +7154,6 @@
             "deprecationReason": null
           },
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -7214,6 +7190,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -7231,6 +7219,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -13046,30 +13046,6 @@
         "description": "columns and relationships of \"Project\"",
         "fields": [
           {
-            "name": "Team",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Team",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -13328,6 +13304,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Team",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "args": [],
@@ -13376,6 +13364,18 @@
                 "name": "timestamptz",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -13653,30 +13653,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "_and",
             "description": null,
             "type": {
@@ -13789,6 +13765,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -13818,6 +13806,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "timestamptz_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -13948,30 +13948,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_obj_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_obj_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -14032,6 +14008,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -14061,6 +14049,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -14624,30 +14624,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Team",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "User",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -14708,6 +14684,18 @@
             "deprecationReason": null
           },
           {
+            "name": "team",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Team_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "teamId",
             "description": null,
             "type": {
@@ -14737,6 +14725,18 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -17679,7 +17679,39 @@
         "description": "columns and relationships of \"Team\"",
         "fields": [
           {
-            "name": "Members",
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "timestamptz",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "uuid",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "members",
             "description": "An array relationship",
             "args": [
               {
@@ -17780,7 +17812,7 @@
             "deprecationReason": null
           },
           {
-            "name": "Members_aggregate",
+            "name": "members_aggregate",
             "description": "An aggregate relationship",
             "args": [
               {
@@ -17873,8 +17905,24 @@
             "deprecationReason": null
           },
           {
-            "name": "Projects",
-            "description": "An array relationship",
+            "name": "name",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": "fetch data from the table: \"Project\"",
             "args": [
               {
                 "name": "distinct_on",
@@ -17974,7 +18022,7 @@
             "deprecationReason": null
           },
           {
-            "name": "Projects_aggregate",
+            "name": "projects_aggregate",
             "description": "An aggregate relationship",
             "args": [
               {
@@ -18060,54 +18108,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Project_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "createdAt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "id",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "uuid",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -18286,30 +18286,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Members",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Member_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Project_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "_and",
             "description": null,
             "type": {
@@ -18386,11 +18362,35 @@
             "deprecationReason": null
           },
           {
+            "name": "members",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Member_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Project_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -18456,30 +18456,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Members",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Member_arr_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Projects",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Project_arr_rel_insert_input",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -18504,11 +18480,35 @@
             "deprecationReason": null
           },
           {
+            "name": "members",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Member_arr_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Project_arr_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -18846,30 +18846,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Members_aggregate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Member_aggregate_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "Projects_aggregate",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Project_aggregate_order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -18894,11 +18870,35 @@
             "deprecationReason": null
           },
           {
+            "name": "members_aggregate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Member_aggregate_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "name",
             "description": null,
             "type": {
               "kind": "ENUM",
               "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "projects_aggregate",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Project_aggregate_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -21045,7 +21045,23 @@
         "description": "columns and relationships of \"UserType\"",
         "fields": [
           {
-            "name": "Users",
+            "name": "comment",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "users",
             "description": "An array relationship",
             "args": [
               {
@@ -21146,7 +21162,7 @@
             "deprecationReason": null
           },
           {
-            "name": "Users_aggregate",
+            "name": "users_aggregate",
             "description": "An aggregate relationship",
             "args": [
               {
@@ -21232,22 +21248,6 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "User_aggregate",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "comment",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -21414,18 +21414,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Users",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_bool_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "_and",
             "description": null,
             "type": {
@@ -21483,6 +21471,18 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "users",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "User_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -21652,11 +21652,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Users",
+            "name": "comment",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_arr_rel_insert_input",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -21664,11 +21664,11 @@
             "deprecationReason": null
           },
           {
-            "name": "comment",
+            "name": "users",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
+              "kind": "INPUT_OBJECT",
+              "name": "User_arr_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -21922,11 +21922,11 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "Users_aggregate",
+            "name": "comment",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "User_aggregate_order_by",
+              "kind": "ENUM",
+              "name": "order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -21934,11 +21934,11 @@
             "deprecationReason": null
           },
           {
-            "name": "comment",
+            "name": "users_aggregate",
             "description": null,
             "type": {
-              "kind": "ENUM",
-              "name": "order_by",
+              "kind": "INPUT_OBJECT",
+              "name": "User_aggregate_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -33144,7 +33144,7 @@
           },
           {
             "name": "users",
-            "description": "fetch data from the table: \"User\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",
@@ -36500,7 +36500,7 @@
           },
           {
             "name": "users",
-            "description": "fetch data from the table: \"User\"",
+            "description": "An array relationship",
             "args": [
               {
                 "name": "distinct_on",

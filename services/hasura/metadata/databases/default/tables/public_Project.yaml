@@ -14,10 +14,10 @@ configuration:
     update: updateProjects
     update_by_pk: updateProjectByPk
 object_relationships:
-- name: Team
+- name: team
   using:
     foreign_key_constraint_on: teamId
-- name: User
+- name: user
   using:
     foreign_key_constraint_on: userId
 array_relationships:
