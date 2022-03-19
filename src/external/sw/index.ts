@@ -1,8 +1,9 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="esnext" />
 /// <reference lib="WebWorker" />
-import type { NotificationPayload } from '../../server/services/notification/send';
-import { getTitle, openOrFocusWindow } from './utilities';
+import type { WebNotificationPayload } from '$/server/services/notification/push-web-notification';
+
+import { openOrFocusWindow } from './utilities';
 
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
@@ -10,10 +11,10 @@ sw.addEventListener('push', (event: PushEvent) => {
   if (sw.Notification?.permission !== 'granted' || !event.data) {
     return;
   }
-  const message: NotificationPayload = event.data.json();
+  const message: WebNotificationPayload = event.data.json();
   // console.log('Push message received:', message);
   event.waitUntil(
-    sw.registration.showNotification(getTitle(message), {
+    sw.registration.showNotification(message.title, {
       requireInteraction: true,
       icon: '/favicon.png',
       data: message,
@@ -25,7 +26,7 @@ sw.addEventListener('push', (event: PushEvent) => {
 
 sw.addEventListener('notificationclick', (event: NotificationEvent) => {
   const clickedNotification = event.notification;
-  const data: NotificationPayload = event.notification.data;
+  const data: WebNotificationPayload = event.notification.data;
   clickedNotification.close();
 
   const promiseChain = openOrFocusWindow(data.url);

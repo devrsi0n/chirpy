@@ -2,16 +2,21 @@ import { camelCase, isArray, transform, isObject } from 'lodash';
 import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import {
+  deleteVerificationToken,
+  insertOneVerificationToken,
+} from '$/server/gql/verification-token';
+import { InsertOneVerificationTokenDocument } from '$/server/graphql/generated/verification-token';
 
-import { getUserByPk } from '../gql/user';
-import { CreateAccountDocument, DeleteAccountDocument } from '../graphql/generated/account';
+import { getUserByPk } from '../../gql/user';
+import { CreateAccountDocument, DeleteAccountDocument } from '../../graphql/generated/account';
 import {
   CreateSessionDocument,
   CreateSessionMutation,
   DeleteSessionDocument,
   SessionAndUserDocument,
   UpdateSessionDocument,
-} from '../graphql/generated/session';
+} from '../../graphql/generated/session';
 import {
   CreateUserDocument,
   CreateUserMutation,
@@ -22,7 +27,7 @@ import {
   UpdateUserProfileByPkDocument,
   UserByAccountDocument,
   UserByEmailDocument,
-} from '../graphql/generated/user';
+} from '../../graphql/generated/user';
 
 // TODO: Extract all urql call to `server/gql`
 
@@ -153,12 +158,29 @@ export function nextAuthAdapter(): Adapter {
         .toPromise();
       return translateGQLSessionToAdapterSession(data?.deleteSessions?.returning[0]);
     },
-    // async createVerificationToken({ identifier, expires, token }) {
-    //   return;
-    // },
-    // async useVerificationToken({ identifier, token }) {
-    //   return;
-    // },
+    async createVerificationToken({ identifier, expires, token }) {
+      const { id: _, ...verificationToken } = await insertOneVerificationToken({
+        identifier,
+        expires: expires.toDateString(),
+        token,
+      });
+      return {
+        ...verificationToken,
+        expires: new Date(verificationToken.expires),
+      };
+    },
+    async useVerificationToken({ identifier, token }) {
+      const { returning } = await deleteVerificationToken({ identifier, token });
+      if (!returning[0]) {
+        // The token has been used/deleted
+        return null;
+      }
+      const { id: _, ...verificationToken } = returning[0];
+      return {
+        ...verificationToken,
+        expires: new Date(verificationToken.expires),
+      };
+    },
   };
 }
 

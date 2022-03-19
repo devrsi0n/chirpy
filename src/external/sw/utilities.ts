@@ -1,8 +1,6 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="esnext" />
 /// <reference lib="WebWorker" />
-import type { NotificationType_Enum } from '../../server/graphql/generated/types';
-import { NotificationPayload } from '../../server/services/notification/send';
 
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
 
@@ -31,14 +29,3 @@ export function openOrFocusWindow(url: string): Promise<void | WindowClient | nu
       return matchingClient ? matchingClient.focus() : sw.clients.openWindow(urlToOpen);
     });
 }
-
-export function getTitle(message: NotificationPayload): string {
-  return titleMap[message.type] + message.triggeredBy.name;
-}
-
-const titleMap: Record<NotificationType_Enum, string> = {
-  ReceivedAComment: 'New comment from ',
-  ReceivedAReply: 'New reply from ',
-  ReceivedALike: 'New like from ',
-  CommentDeleted: 'Your comment was deleted by ',
-};

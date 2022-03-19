@@ -43,7 +43,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
   const { showToast } = useToast();
-  const handleCLickSubmit = handleSubmit(async (fields) => {
+  const handleClickSubmit = handleSubmit<React.MouseEvent<HTMLButtonElement>>(async (fields) => {
     if (!data.id || isSaved) return;
     try {
       await updateUser({
@@ -112,7 +112,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       />
       <Button
         tw="space-x-1 w-full"
-        onClick={handleCLickSubmit}
+        onClick={handleClickSubmit}
         disabled={hasError || loading}
         aria-label="Save"
         variant="solid"

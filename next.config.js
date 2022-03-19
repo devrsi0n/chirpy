@@ -53,7 +53,10 @@ module.exports = withPlugins(
       if (useAnalysis && !dev && !isServer) {
         config.plugins.push(new RelativeCiAgentWebpackPlugin());
       }
-
+      config.module.rules.push({
+        test: /\.html$/,
+        loader: 'html-loader',
+      });
       return config;
     },
   },

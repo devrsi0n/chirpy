@@ -21,9 +21,23 @@ export type SiteOwnerByTriggerCommentIdQuery = {
       __typename?: 'Page';
       id: string;
       url: string;
-      project: { __typename?: 'Project'; ownerId?: string | null };
+      project: {
+        __typename?: 'Project';
+        owner?: {
+          __typename?: 'User';
+          id: string;
+          name?: string | null;
+          email?: string | null;
+          username?: string | null;
+        } | null;
+      };
     };
-    triggeredBy: { __typename?: 'User'; id: string; name?: string | null };
+    triggeredBy: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      username?: string | null;
+    };
   } | null;
 };
 
@@ -36,7 +50,13 @@ export type AuthorByCommentIdQuery = {
   commentByPk?: {
     __typename?: 'Comment';
     page: { __typename?: 'Page'; id: string; url: string };
-    author: { __typename?: 'User'; id: string; name?: string | null };
+    author: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      username?: string | null;
+      email?: string | null;
+    };
   } | null;
 };
 
@@ -112,8 +132,17 @@ export const SiteOwnerByTriggerCommentIdDocument = {
                           selections: [
                             {
                               kind: 'Field',
-                              alias: { kind: 'Name', value: 'ownerId' },
-                              name: { kind: 'Name', value: 'userId' },
+                              alias: { kind: 'Name', value: 'owner' },
+                              name: { kind: 'Name', value: 'user' },
+                              selectionSet: {
+                                kind: 'SelectionSet',
+                                selections: [
+                                  { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                                  { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                                  { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                                  { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                                ],
+                              },
                             },
                           ],
                         },
@@ -130,6 +159,7 @@ export const SiteOwnerByTriggerCommentIdDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'username' } },
                     ],
                   },
                 },
@@ -197,6 +227,8 @@ export const AuthorByCommentIdDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                     ],
                   },
                 },
