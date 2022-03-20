@@ -8,6 +8,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
 
     NEXTAUTH_SECRET: string;
+    NEXTAUTH_URL: string;
     HASH_ALGORITHM: string;
     NEXTAUTH_URL: string;
     HASURA_ADMIN_SECRET: string;

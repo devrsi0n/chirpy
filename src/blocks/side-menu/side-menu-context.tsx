@@ -5,7 +5,9 @@ export type SideMenuContextType = {
 };
 
 const SideMenuContext = React.createContext<SideMenuContextType>({
-  onClickMenuItem: () => {},
+  onClickMenuItem: () => {
+    //
+  },
 });
 
 export type SideMenuContextProviderProps = {

@@ -34,7 +34,7 @@ Cypress.Cookies.defaults({
   preserve: ['next-auth.session-token', 'next-auth.callback-url', 'next-auth.csrf-token'],
 });
 
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on('uncaught:exception', () => {
   // returning false here prevents Cypress from
   // failing the test
   return false;

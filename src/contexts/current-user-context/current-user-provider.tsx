@@ -17,7 +17,7 @@ export function CurrentUserProvider({
   const sessionIsLoading = status === 'loading';
   const [{ data, ...restProps }, refetchData] = useCurrentUserQuery({
     ...gqlOptions,
-    variables: { id: session?.user?.id! },
+    variables: { id: session?.user?.id || '-1' },
   });
 
   const value = React.useMemo<CurrentUserContextType>(() => {

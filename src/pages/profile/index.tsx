@@ -53,7 +53,7 @@ export default function Profile(): JSX.Element {
     if (isEditMode) {
       try {
         await updateUserByPk({
-          id: id!,
+          id: id || '-1',
           name: fields.name,
           bio: fields.bio,
           website: fields.website,

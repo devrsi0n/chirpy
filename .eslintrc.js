@@ -1,15 +1,27 @@
 module.exports = {
   root: true,
-  plugins: ['prettier', 'unicorn', '@emotion', 'jest'],
+  plugins: ['@typescript-eslint', 'prettier', 'unicorn', '@emotion', 'jest'],
   extends: [
+    'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
-    'next',
     'next/core-web-vitals',
     'plugin:prettier/recommended',
   ],
   rules: {
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-namespace': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
+
     'prettier/prettier': 'warn',
 
     '@next/next/no-img-element': 'off',

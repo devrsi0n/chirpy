@@ -17,7 +17,9 @@ export interface INotificationContext {
 
 const NotificationContext = React.createContext<INotificationContext>({
   didRegister: false,
-  setDidRegister: () => {},
+  setDidRegister: () => {
+    //
+  },
   registerNotification: () => Promise.resolve(),
   didDeny: false,
 });

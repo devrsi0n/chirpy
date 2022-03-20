@@ -15,9 +15,10 @@ query sessionAndUser($sessionToken: String!) {
     userId
     user {
       id
-      email
       name
       avatar
+      email
+      emailVerified
     }
   }
 }

@@ -42,7 +42,7 @@ export const authProviders = [
     },
   }),
   // Only allow the credential provider if not in production
-  ...(['staging', 'preview', 'localhost'].includes(getHostEnv(process.env.NEXTAUTH_URL!))
+  ...(['staging', 'preview', 'localhost'].includes(getHostEnv(process.env.NEXTAUTH_URL))
     ? [
         CredentialsProvider({
           name: 'Credentials for test only',
@@ -50,7 +50,7 @@ export const authProviders = [
             username: { label: 'Username', type: 'text', placeholder: 'User name' },
             password: { label: 'Password', type: 'password' },
           },
-          async authorize(credentials, req) {
+          async authorize(credentials /*req*/) {
             if (
               credentials?.username === process.env.TEST_USER_ID &&
               credentials?.password === process.env.HASURA_EVENT_SECRET
@@ -69,7 +69,7 @@ export const authProviders = [
         EmailProvider({
           server: process.env.EMAIL_SERVER,
           from: process.env.EMAIL_FROM,
-          async sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
+          async sendVerificationRequest({ identifier: email, url /*provider: { server, from }*/ }) {
             await sendVerificationRequest({
               to: {
                 email,
