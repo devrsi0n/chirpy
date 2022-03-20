@@ -69,8 +69,8 @@ export default function CommentDetailsWidget(
         </div>
         {comment?.id && (
           <CommentLinkedList
-            key={comment!.id}
-            comment={comment!}
+            key={comment.id}
+            comment={comment}
             onClickLikeAction={handleClickLikeAction}
             onSubmitReply={handleSubmitReply}
           />
@@ -119,9 +119,9 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
 
   try {
     const { data } = await new Promise<OperationResult<CommentDetailsSubscription>>(
-      (resolve, reject) => {
+      (resolve /*reject*/) => {
         // @ts-ignore
-        const { unsubscribe } = pipe<OperationResult<CommentDetailsSubscription>>(
+        /*const { unsubscribe } = */ pipe<OperationResult<CommentDetailsSubscription>>(
           client.subscription(CommentDetailsDocument, { id: commentId }),
           subscribe((result) => {
             // console.log(result);

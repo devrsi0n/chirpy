@@ -23,10 +23,13 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
         <Heading tw="my-10 font-bold">Blog</Heading>
         <section tw="flex flex-row py-10 min-h-full space-x-2">
           {directories.map((dir) => {
-            const bannerProps = getBannerProps(dir.banner!);
+            if (!dir.route) {
+              return <></>;
+            }
+            const bannerProps = getBannerProps(dir.banner);
             return (
               <article key={dir.route}>
-                <Link href={dir.route!} variant="plain">
+                <Link href={dir.route} variant="plain">
                   {bannerProps && <Image {...bannerProps} alt="Banner" />}
                   <Heading as="h4">{dir.title}</Heading>
                 </Link>

@@ -134,9 +134,9 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
 
   try {
     const { data } = await new Promise<OperationResult<CommentTreeSubscription>>(
-      (resolve, reject) => {
+      (resolve /*reject*/) => {
         // @ts-ignore
-        const { unsubscribe } = pipe<OperationResult<CommentTreeSubscription>>(
+        /*const { unsubscribe } = */ pipe<OperationResult<CommentTreeSubscription>>(
           client.subscription(CommentTreeDocument, { pageURL }),
           subscribe((result) => {
             // console.log(result);

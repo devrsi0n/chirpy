@@ -143,6 +143,7 @@
     "@types/tailwindcss": "2.2.4",
     "@types/web-push": "3.3.2",
     "@types/ws": "8.5.2",
+    "@typescript-eslint/eslint-plugin": "5.15.0",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.3",
     "babel-plugin-dynamic-import-node": "2.3.3",

@@ -12,7 +12,7 @@ export interface IPopoverProps {
   children: React.ReactNode;
   content: React.ReactNode;
   buttonProps?: $TsAny;
-  buttonAs?: React.ElementType<{}>;
+  buttonAs?: React.ElementType<Record<string, unknown>>;
   /**
    * TODO
    */

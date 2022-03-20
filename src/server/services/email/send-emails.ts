@@ -72,7 +72,10 @@ async function sendEmailWithTemplate({
   subject,
   templateParams,
 }: SendEmailWithTemplateOptions) {
-  const content = await eta.render(TEMPLATE_MAP[type], templateParams)!;
+  const content = await eta.render(TEMPLATE_MAP[type], templateParams);
+  if (!content) {
+    throw new Error(`Can't find template for ${type}`);
+  }
   await sendEmail({
     subject,
     to,

@@ -1,7 +1,6 @@
-import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
-import { ClientRequestArgs } from 'http';
+import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
-import { WebSocket, ClientOptions } from 'ws';
+import { WebSocket } from 'ws';
 
 import { getGqlClientOptions } from './gql-client';
 

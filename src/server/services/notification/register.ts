@@ -7,9 +7,12 @@ import { createOneNotificationSubscription } from '$/server/gql/notification';
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';
 
-export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{}>) {
+export async function registerDevice(
+  req: NextApiRequest,
+  res: NextApiResponse<Record<string, unknown>>,
+) {
   const session = await getSession({ req });
-  if (!session?.user.id) {
+  if (!session?.user?.id) {
     unauthorized(res);
     return;
   }

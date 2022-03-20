@@ -27,7 +27,7 @@ export function pushWebNotification(payload: NotificationPayload) {
       );
     } catch (error) {
       console.log('webpush error', JSON.stringify(error, null, 2));
-      let err: any = error;
+      const err: any = error;
       if (
         err.statusCode === 410 ||
         err.statusCode === 404 ||

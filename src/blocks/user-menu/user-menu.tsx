@@ -27,7 +27,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   const isNav = props.variant === 'Nav';
 
   return (
-    <Menu content={<Avatar src={avatar!} alt={`The avatar of ${name}`} />}>
+    <Menu content={<Avatar src={avatar} alt={`The avatar of ${name}`} />}>
       {name && (
         <div tw="px-6 py-2">
           <Text tw="flex justify-start" bold>

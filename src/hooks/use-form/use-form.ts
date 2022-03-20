@@ -63,7 +63,7 @@ export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<
   };
 
   const hasError = React.useMemo(
-    () => Object.values(errors).some((val) => val!.length > 0),
+    () => Object.values(errors).some((val) => (val?.length || 0) > 0),
     [errors],
   );
 

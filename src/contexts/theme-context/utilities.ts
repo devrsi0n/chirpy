@@ -29,7 +29,7 @@ export function getThemeCSSVariablesString(theme: NestedObject): string {
 export function translateRadixColor(color: Record<string, string>) {
   const result: Record<string, string> = {};
   for (const [key, value] of Object.entries(color)) {
-    const [, num] = /\w(\d+)/.exec(key)!;
+    const [, num] = /\w(\d+)/.exec(key) || [];
     result[100 * +num] = value;
   }
   return result;

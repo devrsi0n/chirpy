@@ -1,22 +1,19 @@
 import { camelCase, isArray, transform, isObject } from 'lodash';
 import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { gqlMutate, gqlQuery } from '$/server/common/gql';
 import {
-  deleteVerificationToken,
-  insertOneVerificationToken,
-} from '$/server/gql/verification-token';
-import { InsertOneVerificationTokenDocument } from '$/server/graphql/generated/verification-token';
-
-import { getUserByPk } from '../../gql/user';
-import { CreateAccountDocument, DeleteAccountDocument } from '../../graphql/generated/account';
+  CreateAccountDocument,
+  CreateAccountMutationVariables,
+  DeleteAccountDocument,
+} from '$/server/graphql/generated/account';
 import {
   CreateSessionDocument,
   CreateSessionMutation,
   DeleteSessionDocument,
   SessionAndUserDocument,
   UpdateSessionDocument,
-} from '../../graphql/generated/session';
+} from '$/server/graphql/generated/session';
 import {
   CreateUserDocument,
   CreateUserMutation,
@@ -25,25 +22,27 @@ import {
   UpdateUserProfileByEmailDocument,
   UpdateUserProfileByEmailMutationVariables,
   UpdateUserProfileByPkDocument,
+  UpdateUserProfileByPkMutationVariables,
   UserByAccountDocument,
   UserByEmailDocument,
-} from '../../graphql/generated/user';
+} from '$/server/graphql/generated/user';
+import {
+  DeleteVerificationTokenDocument,
+  InsertOneVerificationTokenDocument,
+} from '$/server/graphql/generated/verification-token';
 
-// TODO: Extract all urql call to `server/gql`
+import { getUserByPk } from '../../gql/user';
 
 export function nextAuthAdapter(): Adapter {
-  const client = getAdminGqlClient();
   return {
-    // @ts-expect-error
-    async createUser(user: AdapterUser) {
-      const result = await client
-        .mutation<CreateUserMutation, CreateUserMutationVariables>(
-          CreateUserDocument,
-          translateAdapterUserToQueryVairables(user),
-        )
-        .toPromise();
+    async createUser(user: Omit<AdapterUser, 'id'>) {
+      const data = await gqlQuery(
+        CreateUserDocument,
+        translateAdapterUserToQueryVairables(user) as CreateUserMutationVariables,
+        'insertOneUser',
+      );
 
-      return translateUserToAdapterUser(result.data?.insertOneUser);
+      return translateUserToAdapterUser(data);
     },
     async getUser(id) {
       const data = await getUserByPk(id);
@@ -51,126 +50,148 @@ export function nextAuthAdapter(): Adapter {
       return translateUserToAdapterUser(data);
     },
     async getUserByEmail(email) {
-      const { data } = await client
-        .query(UserByEmailDocument, {
+      const data = await gqlQuery(
+        UserByEmailDocument,
+        {
           email,
-        })
-        .toPromise();
-      return translateUserToAdapterUser(data?.users[0]);
+        },
+        'users',
+      );
+      return translateUserToAdapterUser(data[0]);
     },
     async getUserByAccount({ provider, providerAccountId }) {
-      const { data } = await client
-        .query(UserByAccountDocument, {
+      const users = await gqlQuery(
+        UserByAccountDocument,
+        {
           provider: provider,
           providerAccountId: providerAccountId,
-        })
-        .toPromise();
-
-      return translateUserToAdapterUser(data?.users[0]);
+        },
+        'users',
+      );
+      return translateUserToAdapterUser(users[0]);
     },
     async updateUser(user) {
       if (user.id) {
-        const { data } = await client
-          .mutation(
-            UpdateUserProfileByPkDocument,
-            translateAdapterUserToQueryVairables(user as AdapterUser),
-          )
-          .toPromise();
-        return translateUserToAdapterUser(data?.updateUserByPk)!;
+        const data = await gqlMutate(
+          UpdateUserProfileByPkDocument,
+          translateAdapterUserToQueryVairables(user) as UpdateUserProfileByPkMutationVariables,
+          'updateUserByPk',
+        );
+        return translateUserToAdapterUser(data);
       } else if (user.email) {
-        const { data } = await client
-          .mutation(
-            UpdateUserProfileByEmailDocument,
-            translateAdapterUserToQueryVairables(
-              user as AdapterUser,
-            ) as UpdateUserProfileByEmailMutationVariables,
-          )
-          .toPromise();
-        return translateUserToAdapterUser(data?.updateUsers?.returning[0])!;
+        const data = await gqlMutate(
+          UpdateUserProfileByEmailDocument,
+          translateAdapterUserToQueryVairables(user) as UpdateUserProfileByEmailMutationVariables,
+          'updateUsers',
+        );
+        return translateUserToAdapterUser(data.returning[0]);
       }
       throw new Error('User id or email is missing');
     },
     async deleteUser(userId) {
-      const { data } = await client
-        .mutation(DeleteUserDocument, {
+      const data = await gqlMutate(
+        DeleteUserDocument,
+        {
           id: userId,
-        })
-        .toPromise();
-      return translateUserToAdapterUser(data?.deleteUserByPk);
+        },
+        'deleteUserByPk',
+      );
+      return translateUserToAdapterUser(data);
     },
-    // @ts-expect-error
     async linkAccount(account) {
-      const { data } = await client
-        .mutation(CreateAccountDocument, {
+      await gqlMutate(
+        CreateAccountDocument,
+        {
           ...camelize(account),
           expiresAt: account.expires_at ? new Date(account.expires_at) : null,
-        } as any)
-        .toPromise();
-      return data?.insertOneAccount!;
+        } as CreateAccountMutationVariables,
+        'insertOneAccount',
+      );
     },
-    // @ts-expect-error
     async unlinkAccount({ provider, providerAccountId }) {
-      const { data } = await client
-        .mutation(DeleteAccountDocument, {
+      await gqlMutate(
+        DeleteAccountDocument,
+        {
           provider: provider,
           providerAccountId,
-        })
-        .toPromise();
-      return data?.deleteAccounts?.returning[0]!;
+        },
+        'deleteAccounts',
+      );
     },
-
     async createSession({ sessionToken, userId, expires }) {
-      const { data } = await client
-        .mutation(CreateSessionDocument, {
+      const data = await gqlMutate(
+        CreateSessionDocument,
+        {
           sessionToken,
           userId,
           expires: expires.toISOString(),
-        })
-        .toPromise();
-      return translateGQLSessionToAdapterSession(data?.insertOneSession!);
+        },
+        'insertOneSession',
+      );
+      return translateGQLSessionToAdapterSession(data);
     },
-    // @ts-expect-error
     async getSessionAndUser(sessionToken) {
-      const { data } = await client
-        .query(SessionAndUserDocument, {
+      const data = await gqlMutate(
+        SessionAndUserDocument,
+        {
           sessionToken,
-        })
-        .toPromise();
+        },
+        'sessions',
+      );
+      const { user, ...session } = data[0];
       return {
-        session: translateGQLSessionToAdapterSession(data?.sessions[0]),
-        user: data?.sessions[0].user,
+        session: {
+          ...session,
+          expires: new Date(session.expires),
+        },
+        user: {
+          ...user,
+          emailVerified: user.emailVerified ? new Date(user.emailVerified) : null,
+        },
       };
     },
     async updateSession(session) {
-      const { data } = await client
-        .mutation(UpdateSessionDocument, {
+      const data = await gqlMutate(
+        UpdateSessionDocument,
+        {
           ...session,
           expires: session.expires ? session.expires.toDateString() : undefined,
-        })
-        .toPromise();
-      return translateGQLSessionToAdapterSession(data?.updateSessions?.returning[0]);
+        },
+        'updateSessions',
+      );
+      return translateGQLSessionToAdapterSession(data.returning[0]);
     },
     async deleteSession(sessionToken) {
-      const { data } = await client
-        .mutation(DeleteSessionDocument, {
+      const data = await gqlMutate(
+        DeleteSessionDocument,
+        {
           sessionToken,
-        })
-        .toPromise();
-      return translateGQLSessionToAdapterSession(data?.deleteSessions?.returning[0]);
+        },
+        'deleteSessions',
+      );
+      return translateGQLSessionToAdapterSession(data.returning[0]);
     },
     async createVerificationToken({ identifier, expires, token }) {
-      const { id: _, ...verificationToken } = await insertOneVerificationToken({
-        identifier,
-        expires: expires.toDateString(),
-        token,
-      });
+      const { id: _, ...verificationToken } = await gqlMutate(
+        InsertOneVerificationTokenDocument,
+        {
+          identifier,
+          expires: expires.toDateString(),
+          token,
+        },
+        'insertOneVerificationToken',
+      );
       return {
         ...verificationToken,
         expires: new Date(verificationToken.expires),
       };
     },
     async useVerificationToken({ identifier, token }) {
-      const { returning } = await deleteVerificationToken({ identifier, token });
+      const { returning } = await gqlMutate(
+        DeleteVerificationTokenDocument,
+        { identifier, token },
+        'deleteVerificationTokens',
+      );
       if (!returning[0]) {
         // The token has been used/deleted
         return null;
@@ -184,10 +205,9 @@ export function nextAuthAdapter(): Adapter {
   };
 }
 
-function translateUserToAdapterUser(user: CreateUserMutation['insertOneUser']): AdapterUser | null {
-  if (!user?.id) {
-    return null;
-  }
+function translateUserToAdapterUser(
+  user: NonNullable<CreateUserMutation['insertOneUser']>,
+): AdapterUser {
   return {
     ...user,
     image: user.avatar,
@@ -195,14 +215,24 @@ function translateUserToAdapterUser(user: CreateUserMutation['insertOneUser']): 
   };
 }
 
-function translateAdapterUserToQueryVairables(
-  adapterUser: AdapterUser,
-): NonNullable<CreateUserMutation['insertOneUser']> {
-  const { image, ...rest } = adapterUser;
+function translateAdapterUserToQueryVairables<U extends Partial<AdapterUser>>(
+  user: U,
+): Omit<U, 'image'> & {
+  avatar?: U['image'];
+  emailVerified?: string;
+} {
+  const { image, emailVerified, ...rest } = user;
   return {
     ...rest,
-    avatar: image,
-    emailVerified: adapterUser.emailVerified?.toISOString(),
+    ...(typeof image === 'string' && {
+      avatar: image,
+    }),
+    ...(emailVerified && {
+      emailVerified: emailVerified.toISOString(),
+    }),
+  } as Omit<U, 'image'> & {
+    avatar?: U['image'];
+    emailVerified?: string;
   };
 }
 
@@ -221,7 +251,6 @@ function translateGQLSessionToAdapterSession(
   }
   return {
     ...session,
-    // @ts-expect-error
-    expires: session.expires ? new Date(session.expires) : null,
+    expires: new Date(session.expires),
   };
 }
