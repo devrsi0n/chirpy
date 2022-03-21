@@ -14,14 +14,27 @@ import { useDeleteUser } from '$/hooks/use-delete-user';
 
 type projectRowProps = AllProjectsQuery['projects'][number];
 
+type PagiProps = {
+  limit: number;
+  offset: number;
+};
+
 export default function Admin(): JSX.Element {
-  const [{ data, fetching: projectLoading }, fetchProjects] = useAllProjectsQuery();
+  const [params, setParams] = React.useState({ limit: 10, offset: 0 });
+
+  const [{ data, fetching: projectLoading }, fetchProjects] = useAllProjectsQuery({
+    variables: { ...params },
+  });
   const projects = data?.projects || [];
   const deleteOneUser = useDeleteUser();
 
   const handleDeleteUser = async ({ User: { id } }: projectRowProps) => {
     deleteOneUser(id);
   };
+
+  React.useEffect(() => {
+    fetchProjects({ ...params });
+  }, [params]);
 
   const columns = React.useMemo(() => {
     return [
@@ -80,9 +93,13 @@ export default function Admin(): JSX.Element {
         <Table
           columns={columns}
           data={projects}
+          next={projects.length}
           fetchData={() => {}}
           loading={projectLoading}
           pagination
+          paginationChange={({ limit, offset }: PagiProps) => {
+            setParams({ limit, offset });
+          }}
         />
       ) : (
         <Text>No Project</Text>

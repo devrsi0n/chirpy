@@ -30,7 +30,7 @@ export default function TablePagination({
       <Button
         tw="mr-2"
         size="sm"
-        color="primary"
+        color="gray"
         variant="solid"
         onClick={() => onPageChange(1)}
         disabled={params.offset === 0}
@@ -40,7 +40,7 @@ export default function TablePagination({
       <Button
         tw="border-r-2 rounded-r-none"
         size="sm"
-        color="primary"
+        color="gray"
         variant="solid"
         onClick={() => onPageChange('p')}
         disabled={params.offset === 0}
@@ -52,7 +52,7 @@ export default function TablePagination({
         tw="rounded-l-none"
         variant="solid"
         size="sm"
-        color="primary"
+        color="gray"
         onClick={() => onPageChange('n')}
         disabled={!next}
       >
@@ -60,12 +60,16 @@ export default function TablePagination({
         <ChevronRight />
       </Button>
       <Select
-        tw="ml-2 w-28 text-white bg-primary-900 rounded-md"
+        tw="ml-2 w-28 text-white bg-gray-900 rounded-md"
         value={pageSize}
         onChange={onSizeChange}
       >
         {PAGE_SIZE_OPTIONS.map((pageSize) => (
-          <Select.Option key={pageSize} value={pageSize}>
+          <Select.Option
+            css={[`tw:text-red-200 hover:(bg-gray-900 text-white)`]}
+            key={pageSize}
+            value={pageSize}
+          >
             Show {pageSize}
           </Select.Option>
         ))}

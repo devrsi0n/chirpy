@@ -40,7 +40,10 @@ export type UpdateThemeMutation = {
   updateProjectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
-export type AllProjectsQueryVariables = Types.Exact<{ [key: string]: never }>;
+export type AllProjectsQueryVariables = Types.Exact<{
+  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']>;
+}>;
 
 export type AllProjectsQuery = {
   __typename?: 'query_root';
@@ -94,8 +97,8 @@ export function useUpdateThemeMutation() {
   return Urql.useMutation<UpdateThemeMutation, UpdateThemeMutationVariables>(UpdateThemeDocument);
 }
 export const AllProjectsDocument = gql`
-  query allProjects {
-    projects {
+  query allProjects($limit: Int, $offset: Int) {
+    projects(limit: $limit, offset: $offset) {
       id
       domain
       name

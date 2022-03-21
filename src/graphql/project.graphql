@@ -19,8 +19,8 @@ mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
   }
 }
 
-query allProjects {
-  projects {
+query allProjects($limit: Int, $offset: Int) {
+  projects(limit: $limit, offset: $offset) {
     id
     domain
     name
