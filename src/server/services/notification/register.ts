@@ -2,7 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { PushSubscription } from 'web-push';
 
-import { createOneNotificationSubscription } from '$/server/gql/notification';
+import { gqlMutate } from '$/server/common/gql';
+import {
+  InsertOneNotificationSubscriptionDocument,
+  InsertOneNotificationSubscriptionMutationVariables,
+} from '$/server/graphql/generated/notification';
 
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';
@@ -30,6 +34,16 @@ export async function registerDevice(
     message: 'ok',
   });
   res.end();
+}
+
+function createOneNotificationSubscription(
+  variables: InsertOneNotificationSubscriptionMutationVariables,
+) {
+  return gqlMutate(
+    InsertOneNotificationSubscriptionDocument,
+    variables,
+    'insertOneNotificationSubscription',
+  );
 }
 
 function isValidSubscription(subscription: PushSubscription) {

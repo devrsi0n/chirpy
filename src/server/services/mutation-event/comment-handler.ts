@@ -1,18 +1,22 @@
 import { NextApiResponse } from 'next';
 
-import { getAuthorByCommentId, getSiteOwnerByTriggeredCommentId } from '$/server/gql/comment';
-import { getUserByPk } from '$/server/gql/user';
+import { gqlQuery } from '$/server/common/gql';
+import { SiteOwnerByTriggerCommentIdDocument } from '$/server/graphql/generated/comment';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
-import { createOneNotificationMessage, deleteNotificationMessage } from '../../gql/notification';
 import { sendNotification } from '../notification/send';
 import { NotificationPayload } from '../notification/types';
 import { EventComment, EventPayload } from './event-type';
-import { getTextFromRteDoc } from './utilities';
+import {
+  createOneNotificationMessage,
+  deleteNotificationMessage,
+  getAuthorByCommentId,
+  getTextFromRteDoc,
+  getUserByPk,
+} from './utilities';
 
 /**
  * Handle hasura comment event, send web notification, trigger revalidation of the comment page.
- * TODO: Send emails
  * @param eventBody
  */
 export async function handleCommentEvent(
@@ -158,6 +162,16 @@ export async function handleCommentEvent(
     }, [] as Promise<any>[]),
   ]);
   return;
+}
+
+export async function getSiteOwnerByTriggeredCommentId(commentId: string) {
+  return gqlQuery(
+    SiteOwnerByTriggerCommentIdDocument,
+    {
+      commentId,
+    },
+    'commentByPk',
+  );
 }
 
 function isEventComment(eventBody: EventPayload): eventBody is EventComment {
