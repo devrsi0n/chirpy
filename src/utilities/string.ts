@@ -6,7 +6,10 @@ export function urlBase64ToUint8Array(base64String: string): Uint8Array {
   const outputArray = new Uint8Array(rawData.length);
 
   for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.codePointAt(i)!;
+    const codePoint = rawData.codePointAt(i);
+    if (codePoint) {
+      outputArray[i] = codePoint;
+    }
   }
   return outputArray;
 }
