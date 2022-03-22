@@ -6,6 +6,6 @@
     "dev": "maizzle serve"
   },
   "dependencies": {
-    "@maizzle/framework": "^3.7.3"
+    "@maizzle/framework": "3.7.3"
   }
 }
