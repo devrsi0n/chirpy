@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@emotion/css": "11.7.1",
-    "@emotion/react": "11.8.1",
+    "@emotion/react": "11.8.2",
     "@emotion/server": "11.4.0",
     "@emotion/styled": "11.8.1",
     "@geist-ui/react-icons": "1.0.1",
