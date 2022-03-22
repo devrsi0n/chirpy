@@ -31,7 +31,7 @@ import {
   InsertOneVerificationTokenDocument,
 } from '$/server/graphql/generated/verification-token';
 
-import { getUserByPk } from '../../gql/user';
+import { getUserByPk } from '../mutation-event/utilities';
 
 export function nextAuthAdapter(): Adapter {
   return {
