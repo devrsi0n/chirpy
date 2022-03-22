@@ -40,7 +40,10 @@ export default NextAuth({
     },
     async session({ session, token }) {
       const client = getAdminGqlClient();
-      const userId = token.sub!;
+      const userId = token.sub;
+      if (!userId) {
+        throw new Error(`Expect valid user id`);
+      }
       const { data } = await client
         .query<UserProjectsQuery>(UserProjectsDocument, {
           userId,
@@ -50,8 +53,8 @@ export default NextAuth({
       session.hasuraToken = createAuthToken(
         {
           userId: userId,
-          name: token.name!,
-          email: token.email!,
+          name: token.name || '',
+          email: token.email || '',
         },
         {
           maxAge: HASURA_TOKEN_MAX_AGE,

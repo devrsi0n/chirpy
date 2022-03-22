@@ -48,7 +48,7 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
   let pageURL = '';
 
   if (isStaticError(props)) {
-    error = props.error!;
+    error = props.error;
   } else {
     pageId = props.pageId;
     pageURL = props.pageURL;

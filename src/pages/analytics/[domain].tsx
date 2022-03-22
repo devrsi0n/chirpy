@@ -22,10 +22,10 @@ export default function Analytics(props: AnalyticsProps): JSX.Element {
         <PageTitle tw="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{
-            domain: props.project?.domain!,
+            domain: props.project.domain,
             offset: '0',
             hasGoals: false,
-            insertedAt: props.project?.createdAt!,
+            insertedAt: props.project.createdAt,
             embedded: true,
             background: '',
             selfhosted: true,
@@ -67,10 +67,13 @@ export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, Pa
     return { notFound: true };
   }
   const session = await getSession();
+  if (!session) {
+    throw new Error(`Can't find the session for domain ${domain}`);
+  }
   return {
     props: {
       project: data.projects[0],
-      session: session!,
+      session: session,
     },
     revalidate: 1,
   };
