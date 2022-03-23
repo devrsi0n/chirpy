@@ -11,7 +11,7 @@ import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { CommonPageProps } from '$/types/page.type';
 
 export type AnalyticsProps = {
-  project: ProjectByDomainQuery['projects'][0];
+  project: ProjectByDomainQuery['projects'][number];
 };
 
 export default function Analytics({ project }: AnalyticsProps): JSX.Element {
@@ -21,10 +21,10 @@ export default function Analytics({ project }: AnalyticsProps): JSX.Element {
         <PageTitle tw="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{
-            domain: project.domain,
+            domain: project?.domain,
             offset: '0',
             hasGoals: false,
-            insertedAt: project.createdAt,
+            insertedAt: project?.createdAt,
             embedded: true,
             background: '',
             selfhosted: true,
@@ -63,14 +63,15 @@ export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, Pa
     },
     'projects',
   );
-  if (!projects?.[0]) {
+  const [project] = projects;
+  if (!project.domain) {
     return { notFound: true };
   }
 
   return {
     props: {
-      project: projects[0],
+      project: project,
     },
-    revalidate: 1,
+    revalidate: 60 * 60,
   };
 };
