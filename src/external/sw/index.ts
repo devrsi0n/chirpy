@@ -34,10 +34,11 @@ sw.addEventListener('notificationclick', (event: NotificationEvent) => {
 });
 
 // https://redfin.engineering/how-to-fix-the-refresh-button-when-using-service-workers-a8e27af6df68
-const v = '1';
-sw.addEventListener('install', (e) =>
-  e.waitUntil(caches.open(v).then((cache) => cache.addAll(['/']))),
-);
+const CACHE_ID = '2';
+sw.addEventListener('install', (e) => {
+  // Make sure complete success or total failure, with nothing between
+  e.waitUntil(caches.open(CACHE_ID).then((cache) => cache.addAll(['/'])));
+});
 
 // Fix browser refresh button doesn't refresh the service worker
 sw.addEventListener('fetch', (e) => {
@@ -64,7 +65,7 @@ sw.addEventListener('activate', (e) => {
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key != v) return caches.delete(key);
+          if (key != CACHE_ID) return caches.delete(key);
         }),
       );
     }),
