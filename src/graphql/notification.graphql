@@ -1,0 +1,18 @@
+query currentNotificationMessages($userId: uuid!) {
+  notificationMessages(where: { recipientId: { _eq: $userId } }) {
+    id
+    recipient {
+      id
+      name
+      avatar
+    }
+    type
+    url
+    triggeredBy {
+      id
+      name
+      avatar
+    }
+    read
+  }
+}
