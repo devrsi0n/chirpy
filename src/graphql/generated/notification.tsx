@@ -16,6 +16,7 @@ export type CurrentNotificationMessagesQuery = {
     type: Types.NotificationType_Enum;
     url: string;
     read: boolean;
+    createdAt: string;
     recipient: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
     triggeredBy: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
   }>;
@@ -38,6 +39,7 @@ export const CurrentNotificationMessagesDocument = gql`
         avatar
       }
       read
+      createdAt
     }
   }
 `;

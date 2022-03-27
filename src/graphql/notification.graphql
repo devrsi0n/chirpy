@@ -14,5 +14,6 @@ query currentNotificationMessages($userId: uuid!) {
       avatar
     }
     read
+    createdAt
   }
 }

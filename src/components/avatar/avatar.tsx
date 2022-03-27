@@ -4,7 +4,7 @@ import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
-export type AvatarProps = React.ComponentProps<'img'> &
+export type AvatarProps = Omit<React.ComponentProps<'img'>, 'src'> &
   React.PropsWithChildren<{
     src?: string | null;
     size?: Size;
