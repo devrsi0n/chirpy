@@ -8,6 +8,7 @@ import { Logo } from '$/components/logo';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { bluredBg } from '$/styles/common';
 
+import { NotificationHub } from '../notification-hub';
 import { SideMenu } from '../side-menu';
 
 export function Header(): JSX.Element {
@@ -86,7 +87,16 @@ export function Header(): JSX.Element {
               <Link href="https://github.com/devrsi0n/chirpy">GitHub</Link>
             </nav>
           </div>
-          <div tw="flex">{isSignIn ? <UserMenu variant="Nav" /> : <SignInButton inPageNav />}</div>
+          <div tw="flex">
+            {isSignIn ? (
+              <>
+                <NotificationHub />
+                <UserMenu variant="Nav" />
+              </>
+            ) : (
+              <SignInButton inPageNav />
+            )}
+          </div>
         </section>
       </div>
     </header>

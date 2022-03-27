@@ -23,3 +23,18 @@ object_relationships:
 - name: triggeredBy
   using:
     foreign_key_constraint_on: triggeredById
+select_permissions:
+- permission:
+    columns:
+    - contextId
+    - createdAt
+    - id
+    - read
+    - recipientId
+    - triggeredById
+    - type
+    - url
+    filter:
+      recipientId:
+        _eq: X-Hasura-User-Id
+  role: user

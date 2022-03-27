@@ -6,7 +6,7 @@ import tw from 'twin.macro';
 import { easeInOut } from '../animation';
 import { Button } from '../button';
 
-export type Placement = 'top' | 'topEnd';
+export type Placement = 'top' | 'topEnd' | 'bottom';
 
 export interface IPopoverProps {
   children: React.ReactNode;
@@ -123,6 +123,11 @@ function getBeakStyles(placement: Placement, width = DEFAULT_WIDTH): React.CSSPr
       return {
         bottom,
         right: `${width / 2}px`,
+      };
+    case 'bottom':
+      return {
+        top: 0,
+        right: 'calc(50% - 8px)',
       };
     default:
       return {};
