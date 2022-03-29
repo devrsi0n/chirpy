@@ -1,7 +1,7 @@
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
@@ -22,6 +22,9 @@ export interface IPopoverProps {
    * @default true
    */
   autoClose?: boolean;
+  styles?: {
+    panel?: TwStyle;
+  };
 }
 
 export function Popover({
@@ -31,6 +34,7 @@ export function Popover({
   children,
   content,
   placement = 'top',
+  styles,
 }: IPopoverProps): JSX.Element {
   const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
   const handleClickPanel = () => {
@@ -66,7 +70,7 @@ export function Popover({
                   aria-label="Popover panel"
                 >
                   <div
-                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder]}
+                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder, styles?.panel]}
                     onClick={handleClickPanel}
                     onKeyDown={handleClickPanel}
                   >

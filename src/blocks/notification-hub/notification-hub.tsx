@@ -1,10 +1,12 @@
 import Bell from '@geist-ui/react-icons/bell';
 import * as React from 'react';
 import 'twin.macro';
+import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
@@ -23,16 +25,23 @@ export function NotificationHub(): JSX.Element {
     <div tw="flex flex-row items-center mr-4">
       <Popover
         placement="bottomEnd"
+        styles={{
+          panel: tw`px-0`,
+        }}
         content={
-          <div tw="py-3 space-y-5 w-max">
-            <Heading as="h4" tw="font-bold">
+          <div tw="space-y-5 w-max">
+            <Heading as="h4" tw="font-bold px-5">
               Notifications
             </Heading>
             {(data?.notificationMessages.length || 0) > 0 ? (
-              <ul tw="space-y-3">
+              <ul tw="">
                 {data?.notificationMessages.map((msg, index) => (
-                  <li key={msg.id} tw="px-2">
-                    <div tw="flex flex-row items-start space-x-2 mb-2">
+                  <li key={msg.id} tw="px-5 pt-3" css={[!msg.read && tw`bg-gray-300`]}>
+                    <Link
+                      href={msg.url}
+                      variant="plain"
+                      tw="flex flex-row items-start space-x-2 mb-2"
+                    >
                       <Avatar src={msg.triggeredBy.avatar} />
                       <div>
                         <Text tw="flex flex-row space-x-1.5 leading-none">
@@ -50,7 +59,7 @@ export function NotificationHub(): JSX.Element {
                         </Text>
                         {msg.content && <Text tw="max-w-[15rem] mt-2">{msg.content}</Text>}
                       </div>
-                    </div>
+                    </Link>
                     {index < data?.notificationMessages.length - 1 && <Divider />}
                   </li>
                 ))}
