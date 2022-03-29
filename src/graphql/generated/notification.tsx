@@ -25,7 +25,7 @@ export type CurrentNotificationMessagesQuery = {
 
 export const CurrentNotificationMessagesDocument = gql`
   query currentNotificationMessages($userId: uuid!) {
-    notificationMessages(where: { recipientId: { _eq: $userId } }) {
+    notificationMessages(where: { recipientId: { _eq: $userId } }, order_by: { createdAt: desc }) {
       id
       recipient {
         id
