@@ -1026,6 +1026,8 @@ export type Member_Update_Column =
 /** columns and relationships of "NotificationMessage" */
 export type NotificationMessage = {
   __typename?: 'NotificationMessage';
+  /** Content of message, e.g. comment content */
+  content?: Maybe<Scalars['String']>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
@@ -1084,6 +1086,7 @@ export type NotificationMessage_Bool_Exp = {
   _and?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
   _not?: InputMaybe<NotificationMessage_Bool_Exp>;
   _or?: InputMaybe<Array<NotificationMessage_Bool_Exp>>;
+  content?: InputMaybe<String_Comparison_Exp>;
   contextId?: InputMaybe<Uuid_Comparison_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1107,6 +1110,8 @@ export type NotificationMessage_Constraint =
 
 /** input type for inserting data into table "NotificationMessage" */
 export type NotificationMessage_Insert_Input = {
+  /** Content of message, e.g. comment content */
+  content?: InputMaybe<Scalars['String']>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
@@ -1125,6 +1130,8 @@ export type NotificationMessage_Insert_Input = {
 /** aggregate max on columns */
 export type NotificationMessage_Max_Fields = {
   __typename?: 'NotificationMessage_max_fields';
+  /** Content of message, e.g. comment content */
+  content?: Maybe<Scalars['String']>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1137,6 +1144,8 @@ export type NotificationMessage_Max_Fields = {
 
 /** order by max() on columns of table "NotificationMessage" */
 export type NotificationMessage_Max_Order_By = {
+  /** Content of message, e.g. comment content */
+  content?: InputMaybe<Order_By>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
@@ -1150,6 +1159,8 @@ export type NotificationMessage_Max_Order_By = {
 /** aggregate min on columns */
 export type NotificationMessage_Min_Fields = {
   __typename?: 'NotificationMessage_min_fields';
+  /** Content of message, e.g. comment content */
+  content?: Maybe<Scalars['String']>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
@@ -1162,6 +1173,8 @@ export type NotificationMessage_Min_Fields = {
 
 /** order by min() on columns of table "NotificationMessage" */
 export type NotificationMessage_Min_Order_By = {
+  /** Content of message, e.g. comment content */
+  content?: InputMaybe<Order_By>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
@@ -1190,6 +1203,7 @@ export type NotificationMessage_On_Conflict = {
 
 /** Ordering options when selecting data from "NotificationMessage". */
 export type NotificationMessage_Order_By = {
+  content?: InputMaybe<Order_By>;
   contextId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
@@ -1212,6 +1226,8 @@ export type NotificationMessage_Pk_Columns_Input = {
 /** select columns of table "NotificationMessage" */
 export type NotificationMessage_Select_Column =
   /** column name */
+  | 'content'
+  /** column name */
   | 'contextId'
   /** column name */
   | 'createdAt'
@@ -1232,6 +1248,8 @@ export type NotificationMessage_Select_Column =
 
 /** input type for updating data in table "NotificationMessage" */
 export type NotificationMessage_Set_Input = {
+  /** Content of message, e.g. comment content */
+  content?: InputMaybe<Scalars['String']>;
   /** Triggered entity's id, e.g. CommentId or LikeId */
   contextId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
@@ -1246,6 +1264,8 @@ export type NotificationMessage_Set_Input = {
 
 /** update columns of table "NotificationMessage" */
 export type NotificationMessage_Update_Column =
+  /** column name */
+  | 'content'
   /** column name */
   | 'contextId'
   /** column name */

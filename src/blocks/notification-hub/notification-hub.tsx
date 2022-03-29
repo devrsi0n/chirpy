@@ -3,6 +3,7 @@ import * as React from 'react';
 import 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
+import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
@@ -11,11 +12,7 @@ import { useCurrentNotificationMessagesQuery } from '$/graphql/generated/notific
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { dayjs } from '$/utilities/date';
 
-export type INotificationHubProps = {
-  // children: React.ReactElement;
-};
-
-export function NotificationHub(props: INotificationHubProps): JSX.Element {
+export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
   const [{ data }] = useCurrentNotificationMessagesQuery({
     variables: {
@@ -27,34 +24,39 @@ export function NotificationHub(props: INotificationHubProps): JSX.Element {
       <Popover
         placement="bottomEnd"
         content={
-          <div tw="p-3 space-y-3">
-            <Heading as="h4" tw="">
+          <div tw="py-3 space-y-5 w-max">
+            <Heading as="h4" tw="font-bold">
               Notifications
             </Heading>
             {(data?.notificationMessages.length || 0) > 0 ? (
-              data?.notificationMessages.map((msg) => (
-                <div key={msg.id} tw="flex flex-row items-center space-x-2">
-                  <Avatar src={msg.triggeredBy.avatar} />
-                  <div>
-                    <Text tw="flex flex-row">
-                      <span>{msg.triggeredBy.name}</span>
-                      <span>{titleMap[msg.type]}</span>
-                    </Text>
-                    <Text
-                      variant="secondary"
-                      as="time"
-                      size="xs"
-                      title={msg.createdAt}
-                      tw="block leading-none cursor-default"
-                      dateTime={msg.createdAt}
-                    >
-                      {dayjs(msg.createdAt).fromNow()}
-                    </Text>
-                  </div>
-                </div>
-              ))
+              <ul tw="space-y-3">
+                {data?.notificationMessages.map((msg, index) => (
+                  <li key={msg.id} tw="px-2">
+                    <div tw="flex flex-row items-start space-x-2 mb-2">
+                      <Avatar src={msg.triggeredBy.avatar} />
+                      <div>
+                        <Text tw="flex flex-row space-x-1.5 leading-none">
+                          <span tw="font-bold">{msg.triggeredBy.name}</span>
+                          <span>{titleMap[msg.type]}</span>
+                        </Text>
+                        <Text
+                          variant="secondary"
+                          as="time"
+                          size="xs"
+                          tw="block leading-none cursor-default mt-1"
+                          dateTime={msg.createdAt}
+                        >
+                          {dayjs(msg.createdAt).fromNow()}
+                        </Text>
+                        {msg.content && <Text tw="max-w-[15rem] mt-2">{msg.content}</Text>}
+                      </div>
+                    </div>
+                    {index < data?.notificationMessages.length - 1 && <Divider />}
+                  </li>
+                ))}
+              </ul>
             ) : (
-              <div>No messages</div>
+              <Text>No messages</Text>
             )}
           </div>
         }

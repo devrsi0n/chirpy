@@ -23,6 +23,7 @@ mutation insertOneNotificationMessage(
   $triggeredById: uuid!
   $contextId: uuid!
   $url: String!
+  $content: String
 ) {
   insertOneNotificationMessage(
     object: {
@@ -31,6 +32,7 @@ mutation insertOneNotificationMessage(
       type: $type
       url: $url
       contextId: $contextId
+      content: $content
       read: false
     }
   ) {

@@ -57,7 +57,7 @@ export function Popover({
               <m.div {...easeInOut}>
                 <HeadlessPopover.Panel
                   static
-                  css={[tw`absolute right-0 z-10 shadow-2xl`, panelBorder]}
+                  css={[tw`absolute right-0 z-10 shadow-2xl isolate`, panelBorder]}
                   style={getPanelStyles(placement, {
                     height: buttonRef.current?.getBoundingClientRect().height,
                     width: buttonRef.current?.getBoundingClientRect().width,
