@@ -26,6 +26,7 @@ object_relationships:
 select_permissions:
 - permission:
     columns:
+    - content
     - contextId
     - createdAt
     - id

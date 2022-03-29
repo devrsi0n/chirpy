@@ -7464,6 +7464,18 @@
         "description": "columns and relationships of \"NotificationMessage\"",
         "fields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "args": [],
@@ -7941,6 +7953,18 @@
             "deprecationReason": null
           },
           {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": null,
             "type": {
@@ -8119,6 +8143,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
@@ -8273,6 +8309,18 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "args": [],
@@ -8369,6 +8417,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
@@ -8462,6 +8522,18 @@
         "name": "NotificationMessage_min_fields",
         "description": "aggregate min on columns",
         "fields": [
+          {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
@@ -8558,6 +8630,18 @@
         "description": "order by min() on columns of table \"NotificationMessage\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
@@ -8768,6 +8852,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": null,
             "type": {
@@ -8952,6 +9048,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "content",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "column name",
             "isDeprecated": false,
@@ -9014,6 +9116,18 @@
         "description": "input type for updating data in table \"NotificationMessage\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "contextId",
             "description": "Triggered entity's id, e.g. CommentId or LikeId",
@@ -9135,6 +9249,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "content",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "contextId",
             "description": "column name",

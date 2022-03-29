@@ -155,6 +155,7 @@ export async function handleCommentEvent(
           url: payload.url,
           triggeredById: payload.triggeredBy.id,
           contextId,
+          content: payload.body,
         }),
         sendNotification(payload),
       );

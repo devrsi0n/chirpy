@@ -46,6 +46,7 @@ export type InsertOneNotificationMessageMutationVariables = Types.Exact<{
   triggeredById: Types.Scalars['uuid'];
   contextId: Types.Scalars['uuid'];
   url: Types.Scalars['String'];
+  content?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 export type InsertOneNotificationMessageMutation = {
@@ -288,6 +289,11 @@ export const InsertOneNotificationMessageDocument = {
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
           },
         },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'content' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
       ],
       selectionSet: {
         kind: 'SelectionSet',
@@ -326,6 +332,11 @@ export const InsertOneNotificationMessageDocument = {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'contextId' },
                       value: { kind: 'Variable', name: { kind: 'Name', value: 'contextId' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'content' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'content' } },
                     },
                     {
                       kind: 'ObjectField',
