@@ -1,6 +1,6 @@
 import { extractCritical } from '@emotion/server';
 import Document, {
-  Html,
+  HTML,
   Head,
   Main,
   NextScript,
@@ -19,7 +19,7 @@ class MyDocument extends Document<ReturnType<typeof extractCritical>> {
 
   render(): JSX.Element {
     return (
-      <Html lang="en">
+      <HTML lang="en">
         <Head>
           <meta name="title" content="Chirpy" />
           <meta
@@ -49,7 +49,7 @@ and open-source Disqus alternate."
           <Main />
           <NextScript />
         </body>
-      </Html>
+      </HTML>
     );
   }
 }
