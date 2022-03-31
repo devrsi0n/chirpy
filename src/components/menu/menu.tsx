@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
 import { Menu as HeadlessMenu } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
+import tw from 'twin.macro';
 
 import { cardBg, listHoverable } from '$/styles/common';
 
@@ -17,56 +15,30 @@ import { Divider } from '../divider';
 export type Shape = 'circle' | 'square';
 
 export type MenuProps = React.PropsWithChildren<{
-  content: React.ReactNode;
-  buttonProps?: {
-    shape?: Shape;
-    ariaLabel?: string;
-  };
-  styles?: {
-    root?: TwStyle;
-    button?: TwStyle;
-    items?: TwStyle;
-  };
+  className?: string;
 }>;
 
-export function Menu({ content, buttonProps, styles, children }: MenuProps): JSX.Element {
-  const { shape, ariaLabel } = {
-    shape: 'circle',
-    ariaLabel: 'click to open the menu',
-    ...buttonProps,
-  };
+export function Menu({ className, children }: MenuProps): JSX.Element {
+  const childrenArray = React.Children.toArray(children);
+  if (childrenArray.length !== 2) {
+    throw new Error('Menu should have exactly two children');
+  }
+  const items = childrenArray.find(
+    (element) => (element as React.ReactElement).type === MenuItems,
+  ) as React.ReactElement | undefined;
+  const button = childrenArray.find(
+    (element) => (element as React.ReactElement).type === MenuButton,
+  ) as React.ReactElement | undefined;
+  if (!items || !button) {
+    throw new Error('Menu children should be a Menu.Items and a Menu.Button');
+  }
   return (
-    <div css={[tw`relative inline-block text-left`, styles?.root]}>
+    <div css={[tw`relative inline-block text-left`]} className={className}>
       <HeadlessMenu>
         {({ open }: { open: boolean }) => (
           <>
-            <div css={styles?.button}>
-              <HeadlessMenu.Button
-                as={shape === 'circle' ? IconButton : Button}
-                aria-label={ariaLabel}
-              >
-                {content}
-                {shape === 'square' && (
-                  <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />
-                )}
-              </HeadlessMenu.Button>
-            </div>
-            <AnimatePresence>
-              {open && (
-                <m.div {...easeInOut}>
-                  <HeadlessMenu.Items
-                    static
-                    css={[
-                      tw`absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
-                      cardBg,
-                      styles?.items,
-                    ]}
-                  >
-                    {children}
-                  </HeadlessMenu.Items>
-                </m.div>
-              )}
-            </AnimatePresence>
+            {React.cloneElement(button, { open })}
+            {React.cloneElement(items, { open })}
           </>
         )}
       </HeadlessMenu>
@@ -74,7 +46,64 @@ export function Menu({ content, buttonProps, styles, children }: MenuProps): JSX
   );
 }
 
+Menu.Button = MenuButton;
+Menu.Items = MenuItems;
 Menu.Item = MenuItem;
+Menu.Divider = Divider;
+
+export type MenuButtonProps = {
+  children: React.ReactNode;
+  shape?: Shape;
+  className?: string;
+  ariaLabel?: string;
+  open?: boolean;
+};
+
+function MenuButton({
+  shape = 'circle',
+  ariaLabel = 'click to open the menu',
+  className,
+  open,
+  children,
+}: MenuButtonProps): JSX.Element {
+  return (
+    <div className={className}>
+      <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
+        {children}
+        {shape === 'square' && (
+          <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />
+        )}
+      </HeadlessMenu.Button>
+    </div>
+  );
+}
+
+export type MenuItemsProps = {
+  children: React.ReactNode;
+  open?: boolean;
+  className?: string;
+};
+
+function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
+  return (
+    <AnimatePresence>
+      {open && (
+        <m.div {...easeInOut}>
+          <HeadlessMenu.Items
+            static
+            css={[
+              tw`absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
+              cardBg,
+            ]}
+            className={className}
+          >
+            {children}
+          </HeadlessMenu.Items>
+        </m.div>
+      )}
+    </AnimatePresence>
+  );
+}
 
 export type MenuItemProps = React.PropsWithChildren<
   {
@@ -83,7 +112,7 @@ export type MenuItemProps = React.PropsWithChildren<
 > &
   BoxProps;
 
-export function MenuItem({
+function MenuItem({
   as,
   children,
   disableAutoDismiss,
@@ -115,11 +144,5 @@ export function MenuItem({
 export const MenuItemPadding = tw`px-6 py-2`;
 
 const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
-
-Menu.Divider = MenuDivider;
-
-function MenuDivider(): JSX.Element {
-  return <Divider />;
-}
 
 const spacingItem = tw`mt-1`;

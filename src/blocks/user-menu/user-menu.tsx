@@ -27,60 +27,65 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   const isNav = props.variant === 'Nav';
 
   return (
-    <Menu content={<Avatar src={avatar || ''} alt={`The avatar of ${name}`} />}>
-      {name && (
-        <div tw="px-6 py-2">
-          <Text tw="flex justify-start" bold>
-            {name}
-          </Text>
-        </div>
-      )}
-      {isSignIn && <Menu.Divider />}
-      {isWidget &&
-        (isSignIn ? (
-          <></>
-        ) : (
-          <Menu.Item css={itemStyle} onClick={handleSignIn}>
-            <LogIn size={14} />
-            <p tw="w-max">Sign in</p>
-          </Menu.Item>
-        ))}
-      <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
-        <LifeBuoy size={14} />
-        <span>Feedback</span>
-      </Menu.Item>
-      {isSignIn && (
-        <>
-          {isNav && (
-            <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
-              <Monitor size={14} />
-              <span>Dashboard</span>
+    <Menu>
+      <Menu.Button>
+        <Avatar src={avatar || ''} alt={`The avatar of ${name}`} />
+      </Menu.Button>
+      <Menu.Items>
+        {name && (
+          <div tw="px-6 py-2">
+            <Text tw="flex justify-start" bold>
+              {name}
+            </Text>
+          </div>
+        )}
+        {isSignIn && <Menu.Divider />}
+        {isWidget &&
+          (isSignIn ? (
+            <></>
+          ) : (
+            <Menu.Item css={itemStyle} onClick={handleSignIn}>
+              <LogIn size={14} />
+              <p tw="w-max">Sign in</p>
             </Menu.Item>
-          )}
-          <Menu.Item
-            as={MenuLink}
-            variant="plain"
-            href="/profile"
-            target={isWidget ? '_blank' : undefined}
-          >
-            <User size={14} />
-            <span>Profile</span>
-          </Menu.Item>
-          <Menu.Divider />
-          <Menu.Item
-            css={itemStyle}
-            onClick={() => {
-              localStorage.removeItem(LOG_IN_SUCCESS_KEY);
-              signOut({
-                redirect: !isWidget,
-              });
-            }}
-          >
-            <LogOut size={14} />
-            <span tw="w-max">Log out</span>
-          </Menu.Item>
-        </>
-      )}
+          ))}
+        <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
+          <LifeBuoy size={14} />
+          <span>Feedback</span>
+        </Menu.Item>
+        {isSignIn && (
+          <>
+            {isNav && (
+              <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
+                <Monitor size={14} />
+                <span>Dashboard</span>
+              </Menu.Item>
+            )}
+            <Menu.Item
+              as={MenuLink}
+              variant="plain"
+              href="/profile"
+              target={isWidget ? '_blank' : undefined}
+            >
+              <User size={14} />
+              <span>Profile</span>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item
+              css={itemStyle}
+              onClick={() => {
+                localStorage.removeItem(LOG_IN_SUCCESS_KEY);
+                signOut({
+                  redirect: !isWidget,
+                });
+              }}
+            >
+              <LogOut size={14} />
+              <span tw="w-max">Log out</span>
+            </Menu.Item>
+          </>
+        )}
+      </Menu.Items>
     </Menu>
   );
 }

@@ -133,28 +133,33 @@ export function CommentCard({
               </div>
               <>
                 {userHasModeratePermission && (
-                  <Menu styles={{ root: tw`-mt-2 mr-2` }} content={<MoreVertical size={20} />}>
-                    <Menu.Item tw="space-x-1" disableAutoDismiss>
-                      <Popover
-                        placement="topEnd"
-                        buttonAs="button"
-                        content={
-                          <div tw="flex flex-row items-center space-x-2">
-                            <Text size="sm" tw="w-max">
-                              Are you sure?
-                            </Text>
-                            <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
-                              Delete
-                            </Button>
+                  <Menu tw="-mt-2 mr-2">
+                    <Menu.Button>
+                      <MoreVertical size={20} />
+                    </Menu.Button>
+                    <Menu.Items>
+                      <Menu.Item tw="space-x-1" disableAutoDismiss>
+                        <Popover
+                          placement="topEnd"
+                          buttonAs="button"
+                          content={
+                            <div tw="flex flex-row items-center space-x-2">
+                              <Text size="sm" tw="w-max">
+                                Are you sure?
+                              </Text>
+                              <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
+                                Delete
+                              </Button>
+                            </div>
+                          }
+                        >
+                          <div css={[tw`flex flex-row items-center`, MenuItemPadding]}>
+                            <Trash2 size={16} />
+                            <span tw="ml-1">Delete</span>
                           </div>
-                        }
-                      >
-                        <div css={[tw`flex flex-row items-center`, MenuItemPadding]}>
-                          <Trash2 size={16} />
-                          <span tw="ml-1">Delete</span>
-                        </div>
-                      </Popover>
-                    </Menu.Item>
+                        </Popover>
+                      </Menu.Item>
+                    </Menu.Items>
                   </Menu>
                 )}
               </>
