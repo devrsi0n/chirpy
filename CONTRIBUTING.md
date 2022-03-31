@@ -46,7 +46,7 @@ docker-compose -f docker-compose.local.yaml up -d
 
 ### Set up the database and schema
 
-Make sure you're using a separate terminal (e.g. `iTerm2`) not a VSCode terminal, because there're some environment variable issues when using them together.
+Make sure you're using a separate terminal (e.g. `iTerm2`) not a VS Code terminal, because there're some environment variable issues when using them together.
 
 Install [Hasura CLI](https://hasura.io/docs/latest/graphql/core/hasura-cli/install-hasura-cli.html) and run the following command:
 
