@@ -23,10 +23,10 @@ export function NotificationHub(): JSX.Element {
     },
   });
   return (
-    <div tw="flex flex-row items-center mr-4">
+    <div tw="flex flex-row justify-center items-center mr-4">
       <Menu>
-        <Menu.Button>
-          <Bell size={20} />
+        <Menu.Button className={styles.menuButton}>
+          <Bell size={22} />
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>
           <Heading as="h4" tw="font-bold px-5 pb-3">
