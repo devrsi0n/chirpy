@@ -11,7 +11,7 @@ export const bluredBg = css`
 
 export const border = tw`border outline-none focus-visible:(border-primary-900)`;
 
-export const listHoverable = tw`transition px-2 py-1 rounded hover:(bg-primary-900 text-white)`;
+export const listHoverable = tw`transition px-2 py-1 rounded hover:(bg-primary-400 text-primary-1100)`;
 
 export const ring = tw`focus-visible:(outline-none ring-2 ring-offset-bg ring-offset-2 ring-primary-700)`;
 
