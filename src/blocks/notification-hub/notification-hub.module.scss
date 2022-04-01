@@ -1,3 +1,11 @@
 .menuItems {
+  // TODO: Move it to JSX once we removed emotion
   @apply py-5 w-max #{!important};
+}
+
+.menuButton {
+  @apply flex justify-center items-center;
+  & > button {
+    @apply p-1;
+  }
 }
