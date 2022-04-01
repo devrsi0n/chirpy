@@ -3,6 +3,7 @@ import * as React from 'react';
 import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
+import { Badge } from '$/components/badge';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
@@ -27,6 +28,7 @@ export function NotificationHub(): JSX.Element {
       <Menu>
         <Menu.Button className={styles.menuButton}>
           <Bell size={22} />
+          <Badge tw="bg-red-900 absolute top-1 right-1" />
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>
           <Heading as="h4" tw="font-bold px-5 pb-3">
