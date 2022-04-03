@@ -16,7 +16,7 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 - ⚡️ Reasonably fast
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
-- 🪄 Realtime updated comments
+- 🪄 Real-time comments
 - 📱 Mobile friendly
 
 ## 🧭 Roadmap

@@ -123,14 +123,9 @@ export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
       instance.toggleHeading({ level: value }).run();
     }
   };
-  const value = getActiveBlockFormat(editor)!;
+  const value = getActiveBlockFormat(editor) || 0;
   return (
-    <Select<HeadingValue>
-      value={value}
-      name={headingList[value || 0]}
-      onChange={handleChange}
-      tw="w-36"
-    >
+    <Select<HeadingValue> value={value} name={headingList[value]} onChange={handleChange} tw="w-36">
       {headingList.map((item, index) => (
         <Select.Option value={index} key={item}>
           {item}

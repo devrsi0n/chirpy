@@ -2,14 +2,21 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { PushSubscription } from 'web-push';
 
-import { createOneNotificationSubscription } from '$/server/gql/notification';
+import { gqlMutate } from '$/server/common/gql';
+import {
+  InsertOneNotificationSubscriptionDocument,
+  InsertOneNotificationSubscriptionMutationVariables,
+} from '$/server/graphql/generated/notification';
 
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';
 
-export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{}>) {
+export async function registerDevice(
+  req: NextApiRequest,
+  res: NextApiResponse<Record<string, unknown>>,
+) {
   const session = await getSession({ req });
-  if (!session?.user.id) {
+  if (!session?.user?.id) {
     unauthorized(res);
     return;
   }
@@ -27,6 +34,16 @@ export async function registerDevice(req: NextApiRequest, res: NextApiResponse<{
     message: 'ok',
   });
   res.end();
+}
+
+function createOneNotificationSubscription(
+  variables: InsertOneNotificationSubscriptionMutationVariables,
+) {
+  return gqlMutate(
+    InsertOneNotificationSubscriptionDocument,
+    variables,
+    'insertOneNotificationSubscription',
+  );
 }
 
 function isValidSubscription(subscription: PushSubscription) {

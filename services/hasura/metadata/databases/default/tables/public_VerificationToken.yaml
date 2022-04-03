@@ -4,4 +4,12 @@ table:
 configuration:
   custom_column_names: {}
   custom_root_fields:
-    select: verificationRequests
+    delete: deleteVerificationTokens
+    delete_by_pk: deleteVerificationTokenByPk
+    insert: insertVerificationTokens
+    insert_one: insertOneVerificationToken
+    select: verificationTokens
+    select_aggregate: verificationTokenAggregate
+    select_by_pk: verificationTokenByPk
+    update: updateVerificationTokens
+    update_by_pk: updateVerificationTokenByPk

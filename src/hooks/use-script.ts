@@ -29,6 +29,7 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
       // Store status in attribute on script
       // This can be read by other instances of this hook
       const setAttributeFromEvent = (event: Event) => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         script!.dataset.status = getStatus(event);
       };
 

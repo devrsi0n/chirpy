@@ -34,9 +34,10 @@ export type SessionAndUserQuery = {
     user: {
       __typename?: 'User';
       id: string;
-      email?: string | null;
       name?: string | null;
       avatar?: string | null;
+      email?: string | null;
+      emailVerified?: string | null;
     };
   }>;
 };
@@ -221,9 +222,10 @@ export const SessionAndUserDocument = {
                     kind: 'SelectionSet',
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'emailVerified' } },
                     ],
                   },
                 },

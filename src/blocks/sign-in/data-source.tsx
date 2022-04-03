@@ -1,7 +1,8 @@
-import FacebookLogo from 'super-tiny-icons/images/svg/facebook.svg';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
-import GoogleLogo from 'super-tiny-icons/images/svg/google.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
+
+// import FacebookLogo from 'super-tiny-icons/images/svg/facebook.svg';
+// import GoogleLogo from 'super-tiny-icons/images/svg/google.svg';
 
 export type AuthOption = {
   name: string;

@@ -1,11 +1,15 @@
 import { NextApiResponse } from 'next';
 
-import { getAuthorByCommentId } from '$/server/gql/comment';
-import { getRecipientByLikeId } from '$/server/gql/like';
+import { gqlQuery } from '$/server/common/gql';
+import { RecipientByLikeIdDocument } from '$/server/graphql/generated/like';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
-import { createOneNotificationMessage, deleteNotificationMessage } from '../../gql/notification';
 import { EventLike, EventPayload } from './event-type';
+import {
+  createOneNotificationMessage,
+  deleteNotificationMessage,
+  getAuthorByCommentId,
+} from './utilities';
 
 /**
  * Handle hasura like event, trigger revalidation of the comment page.
@@ -54,6 +58,16 @@ export async function handleLikeEvent(
   }
   await Promise.allSettled(promises);
   return;
+}
+
+export function getRecipientByLikeId(likeId: string) {
+  return gqlQuery(
+    RecipientByLikeIdDocument,
+    {
+      likeId,
+    },
+    'likeByPk',
+  );
 }
 
 function isEventLike(eventBody: EventPayload): eventBody is EventLike {

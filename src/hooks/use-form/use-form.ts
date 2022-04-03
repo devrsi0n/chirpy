@@ -49,20 +49,21 @@ export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<
     };
   };
 
-  const handleSubmit = (onSubmit: (data: T) => Promise<void>) => {
-    return async () => {
+  const handleSubmit = <E>(onSubmit: (data: T, event: E) => Promise<void>) => {
+    const onSubmitWrapper: (e: E) => Promise<void> = async (e) => {
       for (const [name, validator] of validatorMapRef.current.entries()) {
         if (!isValid(name, validator)) {
           return;
         }
       }
-      await onSubmit(fields);
+      await onSubmit(fields, e);
       setFields(defaultValues);
     };
+    return onSubmitWrapper;
   };
 
   const hasError = React.useMemo(
-    () => Object.values(errors).some((val) => val!.length > 0),
+    () => Object.values(errors).some((val) => (val?.length || 0) > 0),
     [errors],
   );
 

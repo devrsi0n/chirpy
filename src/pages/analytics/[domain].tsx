@@ -1,31 +1,30 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getSession } from 'next-auth/react';
 import * as React from 'react';
 import 'twin.macro';
 
 import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { gqlQuery } from '$/server/common/gql';
 import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { CommonPageProps } from '$/types/page.type';
 
 export type AnalyticsProps = {
-  project: ProjectByDomainQuery['projects'][0];
+  project: ProjectByDomainQuery['projects'][number];
 };
 
-export default function Analytics(props: AnalyticsProps): JSX.Element {
+export default function Analytics({ project }: AnalyticsProps): JSX.Element {
   return (
     <SiteLayout hideFullBleed title="Analytics">
       <section tw="xl:max-width[70rem] mx-auto px-4">
         <PageTitle tw="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{
-            domain: props.project?.domain!,
+            domain: project?.domain,
             offset: '0',
             hasGoals: false,
-            insertedAt: props.project?.createdAt!,
+            insertedAt: project?.createdAt,
             embedded: true,
             background: '',
             selfhosted: true,
@@ -57,21 +56,22 @@ export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, Pa
     return { notFound: true };
   }
   const { domain } = params;
-  const client = getAdminGqlClient();
-  const { data } = await client
-    .query<ProjectByDomainQuery>(ProjectByDomainDocument, {
+  const projects = await gqlQuery(
+    ProjectByDomainDocument,
+    {
       domain,
-    })
-    .toPromise();
-  if (!data?.projects?.[0]) {
+    },
+    'projects',
+  );
+  const [project] = projects;
+  if (!project.domain) {
     return { notFound: true };
   }
-  const session = await getSession();
+
   return {
     props: {
-      project: data.projects[0],
-      session: session!,
+      project: project,
     },
-    revalidate: 1,
+    revalidate: 60 * 60,
   };
 };

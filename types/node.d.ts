@@ -8,6 +8,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
 
     NEXTAUTH_SECRET: string;
+    NEXTAUTH_URL: string;
     HASH_ALGORITHM: string;
     NEXTAUTH_URL: string;
     HASURA_ADMIN_SECRET: string;
@@ -15,6 +16,8 @@ declare namespace NodeJS {
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;
+    EMAIL_API_KEY: string;
+
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     GITHUB_CLIENT_ID: string;

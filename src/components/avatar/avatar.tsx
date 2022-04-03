@@ -6,7 +6,7 @@ type Size = 'sm' | 'md' | 'lg' | 'xl';
 
 export type AvatarProps = React.ComponentProps<'img'> &
   React.PropsWithChildren<{
-    src?: string;
+    src?: string | null;
     size?: Size;
     className?: string;
   }>;

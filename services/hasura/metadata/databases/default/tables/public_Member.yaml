@@ -17,10 +17,10 @@ object_relationships:
 - name: Role
   using:
     foreign_key_constraint_on: role
-- name: Team
+- name: team
   using:
     foreign_key_constraint_on: teamId
-- name: User
+- name: user
   using:
     foreign_key_constraint_on: userId
 select_permissions:

@@ -17,7 +17,7 @@ import { NotificationProvider } from '$/contexts/notification-context';
 import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 import { appGlobalStyles } from '$/styles/global-styles';
 
-function App({ Component, pageProps: { session, isWidget, ...pageProps } }: AppProps): JSX.Element {
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
   const handleError = React.useCallback((error: Error, info: { componentStack: string }) => {
     console.log({ error, info });
   }, []);

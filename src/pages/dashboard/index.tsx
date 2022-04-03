@@ -23,13 +23,13 @@ type FormFields = {
 
 export default function Dashboard(): JSX.Element {
   const {
-    data: { id, name },
+    data: { id },
     loading: userLoading,
   } = useCurrentUser();
 
   const [{ data, fetching: projectLoading }, fetchUserProjects] = useUserDashboardProjectsQuery({
     variables: {
-      id: id!,
+      id: id || '-1',
     },
   });
   const fetchProjects = React.useCallback(
@@ -43,7 +43,7 @@ export default function Dashboard(): JSX.Element {
   );
   const { projects } = data?.userByPk || {};
 
-  const [{ fetching: loadingInsertProject }, insertProjectMutation] = useInsertOneProjectMutation();
+  const [{}, insertProjectMutation] = useInsertOneProjectMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);

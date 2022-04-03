@@ -1,9 +1,11 @@
 import NextAuth from 'next-auth';
 
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { getAuthUserByPk } from '$/server/gql/user';
-import { nextAuthAdapter } from '$/server/services/auth-adapter';
-import { authProviders } from '$/server/services/auth-providers';
+import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
+import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
+import { authProviders } from '$/server/services/auth/auth-providers';
+import { sendWelcomeLetter } from '$/server/services/email/send-emails';
 import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
@@ -32,23 +34,27 @@ export default NextAuth({
       if (user) {
         await fillUserFields(user as any, profile as any, account?.provider as any);
       }
-      const { projects, type } = await getAuthUserByPk(token.sub!);
-      const editableProjectIds = projects.map(({ id }: { id: string }) => id);
-
       return {
         ...token,
-        editableProjectIds,
-        type,
       };
     },
     async session({ session, token }) {
-      console.log('session', { session, token });
-      const userId = token.sub!;
+      const client = getAdminGqlClient();
+      const userId = token.sub;
+      if (!userId) {
+        throw new Error(`Expect valid user id`);
+      }
+      const { data } = await client
+        .query<UserProjectsQuery>(UserProjectsDocument, {
+          userId,
+        })
+        .toPromise();
+      const editableProjectIds = data?.projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,
-          name: token.name!,
-          email: token.email!,
+          name: token.name || '',
+          email: token.email || '',
         },
         {
           maxAge: HASURA_TOKEN_MAX_AGE,
@@ -58,11 +64,8 @@ export default NextAuth({
         },
       );
       if (session.user) {
-        session.user = {
-          ...session.user,
-          id: userId,
-          ...token,
-        };
+        session.user.id = userId;
+        session.user.editableProjectIds = editableProjectIds;
       }
       return session;
     },
@@ -72,6 +75,19 @@ export default NextAuth({
         return false;
       }
       return true;
+    },
+  },
+  events: {
+    async createUser({ user }) {
+      if (!user.email) {
+        return console.error('Create a user without valid email', user);
+      }
+      await sendWelcomeLetter({
+        to: {
+          name: user.name || user.email,
+          email: user.email,
+        },
+      });
     },
   },
   cookies: defaultCookies(process.env.NEXTAUTH_URL.startsWith('https://')),

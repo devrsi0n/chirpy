@@ -14,14 +14,14 @@ configuration:
     update: updateTeams
     update_by_pk: updateTeamByPk
 array_relationships:
-- name: Members
+- name: members
   using:
     foreign_key_constraint_on:
       column: teamId
       table:
         name: Member
         schema: public
-- name: Projects
+- name: projects
   using:
     foreign_key_constraint_on:
       column: teamId
@@ -36,7 +36,7 @@ select_permissions:
     - name
     - uid
     filter:
-      Members:
+      members:
         userId:
           _eq: X-Hasura-User-Id
   role: user

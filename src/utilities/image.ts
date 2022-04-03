@@ -6,8 +6,8 @@ export type BannerProps = {
   height: string;
 };
 
-export function getBannerProps(banner: string): BannerProps | null {
-  if (ssrMode) {
+export function getBannerProps(banner?: string): BannerProps | null {
+  if (ssrMode || !banner) {
     return null;
   }
   const url = new URL(banner, window.location.origin);

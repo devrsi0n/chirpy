@@ -48,7 +48,7 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
   let pageURL = '';
 
   if (isStaticError(props)) {
-    error = props.error!;
+    error = props.error;
   } else {
     pageId = props.pageId;
     pageURL = props.pageURL;
@@ -134,9 +134,9 @@ export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParam
 
   try {
     const { data } = await new Promise<OperationResult<CommentTreeSubscription>>(
-      (resolve, reject) => {
+      (resolve /*reject*/) => {
         // @ts-ignore
-        const { unsubscribe } = pipe<OperationResult<CommentTreeSubscription>>(
+        /*const { unsubscribe } = */ pipe<OperationResult<CommentTreeSubscription>>(
           client.subscription(CommentTreeDocument, { pageURL }),
           subscribe((result) => {
             // console.log(result);

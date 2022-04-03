@@ -4,7 +4,7 @@ import { useToast } from '$/components/toast';
 
 import { checkServiceWorkerCompatibility } from './utilities';
 
-export interface IUseReloadWhenSwChangeOptions {}
+// export interface IUseReloadWhenSwChangeOptions {}
 
 export function useReloadWhenSwChange() {
   const { showToast } = useToast();

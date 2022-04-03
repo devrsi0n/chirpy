@@ -1,17 +1,22 @@
 import { NextApiResponse } from 'next';
 
-import { getAuthorByCommentId, getSiteOwnerByTriggeredCommentId } from '$/server/gql/comment';
-import { getUserByPk } from '$/server/gql/user';
+import { gqlQuery } from '$/server/common/gql';
+import { SiteOwnerByTriggerCommentIdDocument } from '$/server/graphql/generated/comment';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
-import { createOneNotificationMessage, deleteNotificationMessage } from '../../gql/notification';
-import { NotificationPayload, sendNotification } from '../notification/send';
+import { sendNotification } from '../notification/send';
+import { NotificationPayload } from '../notification/types';
 import { EventComment, EventPayload } from './event-type';
-import { getTextFromRteDoc } from './utilities';
+import {
+  createOneNotificationMessage,
+  deleteNotificationMessage,
+  getAuthorByCommentId,
+  getTextFromRteDoc,
+  getUserByPk,
+} from './utilities';
 
 /**
  * Handle hasura comment event, send web notification, trigger revalidation of the comment page.
- * TODO: Send emails
  * @param eventBody
  */
 export async function handleCommentEvent(
@@ -32,19 +37,24 @@ export async function handleCommentEvent(
     const url = siteOwnerData.page.url;
     promises.push(revalidateCommentWidget(url, res));
 
-    const ownerId = siteOwnerData.page.project.ownerId;
-    if (!ownerId) {
+    const owner = siteOwnerData.page.project.owner;
+    if (!owner?.id) {
       throw new Error(`Can't find the owner of the comment (${commentId})`);
     }
+    const ownerId = owner.id;
     const triggeredById = event.data.new.userId;
     const triggeredBy = {
       id: triggeredById,
-      name: siteOwnerData.triggeredBy.name || '',
+      name: siteOwnerData.triggeredBy.name || siteOwnerData.triggeredBy.username || 'Unnamed',
     };
-    if (ownerId !== triggeredById) {
+    if (owner.id !== triggeredById) {
       // Notify the owner of the site that a comment has been added
       notificationPayloads.push({
-        recipientId: ownerId,
+        recipient: {
+          id: ownerId,
+          email: owner.email,
+          name: owner.name || owner.username || 'Unnamed',
+        },
         type: 'ReceivedAComment',
         triggeredBy,
         url,
@@ -60,7 +70,11 @@ export async function handleCommentEvent(
       const recipientId = parentData.author.id;
       if (recipientId !== ownerId && recipientId !== triggeredById) {
         notificationPayloads.push({
-          recipientId,
+          recipient: {
+            id: recipientId,
+            email: parentData.author.email,
+            name: parentData.author.name || parentData.author.username || 'Unnamed',
+          },
           type: 'ReceivedAReply',
           triggeredBy,
           url,
@@ -74,7 +88,7 @@ export async function handleCommentEvent(
     if (!oldComment.deletedAt && newComment.deletedAt) {
       // Delete the existing notification sent to the owner of site
       const siteOwnerData = await getSiteOwnerByTriggeredCommentId(newComment.id);
-      const ownerId = siteOwnerData.page.project.ownerId;
+      const ownerId = siteOwnerData.page.project.owner?.id;
       if (!ownerId) {
         throw new Error(`Can't find the owner of the comment (${newComment.id})`);
       }
@@ -114,7 +128,11 @@ export async function handleCommentEvent(
       const recipientId = authorData.author.id;
       if (recipientId !== triggeredById) {
         notificationPayloads.push({
-          recipientId: authorData.author.id,
+          recipient: {
+            id: recipientId,
+            email: authorData.author.email,
+            name: authorData.author.name || authorData.author.username || 'Unnamed',
+          },
           triggeredBy: {
             id: triggeredById,
             name: triggeredBy.name || '',
@@ -132,7 +150,7 @@ export async function handleCommentEvent(
     ...notificationPayloads.reduce((previous, { contextId, ...payload }) => {
       previous.push(
         createOneNotificationMessage({
-          recipientId: payload.recipientId,
+          recipientId: payload.recipient.id,
           type: payload.type,
           url: payload.url,
           triggeredById: payload.triggeredBy.id,
@@ -144,6 +162,16 @@ export async function handleCommentEvent(
     }, [] as Promise<any>[]),
   ]);
   return;
+}
+
+export async function getSiteOwnerByTriggeredCommentId(commentId: string) {
+  return gqlQuery(
+    SiteOwnerByTriggerCommentIdDocument,
+    {
+      commentId,
+    },
+    'commentByPk',
+  );
 }
 
 function isEventComment(eventBody: EventPayload): eventBody is EventComment {

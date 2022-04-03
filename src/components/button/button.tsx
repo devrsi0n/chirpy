@@ -19,7 +19,7 @@ export type ButtonProps = BaseButtonProps & {
    * @default true
    */
   rounded?: boolean;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 // TODO: extract drip animation to the base button
