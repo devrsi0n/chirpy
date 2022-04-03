@@ -52,7 +52,7 @@ export type AllProjectsQuery = {
     id: string;
     domain: string;
     name: string;
-    User?: { __typename?: 'User'; avatar?: string | null; id: string } | null;
+    user?: { __typename?: 'User'; avatar?: string | null; id: string } | null;
   }>;
 };
 
@@ -102,7 +102,7 @@ export const AllProjectsDocument = gql`
       id
       domain
       name
-      User {
+      user {
         avatar
         id
       }

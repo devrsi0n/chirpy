@@ -24,7 +24,7 @@ query allProjects($limit: Int, $offset: Int) {
     id
     domain
     name
-    User {
+    user {
       avatar
       id
     }

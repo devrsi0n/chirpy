@@ -77,3 +77,9 @@ query commentOfPage($pageId: uuid, $limit: Int, $offset: Int) {
     }
   }
 }
+
+mutation deleteCommentByPk($id: uuid!) {
+  deleteCommentByPk(id: $id) {
+    id
+  }
+}

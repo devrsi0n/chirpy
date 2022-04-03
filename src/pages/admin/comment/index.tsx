@@ -14,7 +14,7 @@ import { Popover } from '$/components/popover';
 import { Table } from '$/components/table';
 import { Text } from '$/components/text';
 import { useCommentOfPageQuery } from '$/graphql/generated/comment';
-import { useDeleteUser } from '$/hooks/use-delete-user';
+import { useDeleteCommentByPkMutation } from '$/graphql/generated/comment';
 import { CommentContentFragment } from '$/server/graphql/generated/comment';
 import { CommentLeafType } from '$/types/widget';
 import { dayjs } from '$/utilities/date';
@@ -26,7 +26,7 @@ const handleSearch = () => {
 export default function Comment() {
   const [showDialog, setShowDialog] = React.useState(false);
   const [comments, setComments] = React.useState<CommentContentFragment[]>([]);
-  const deleteOneUser = useDeleteUser();
+  const [{}, deleteComment] = useDeleteCommentByPkMutation();
 
   const router = useRouter();
   const {
@@ -46,8 +46,8 @@ export default function Comment() {
     setComments([rowProps]);
   };
 
-  const handleDeleteUser = async ({ user: { id } }: CommentContentFragment) => {
-    deleteOneUser(id);
+  const handleDeleteUser = async ({ id }) => {
+    deleteComment({ id });
   };
 
   const commentsDetail = React.useCallback((comments: []): string => {
@@ -94,12 +94,13 @@ export default function Comment() {
           <Popover
             placement="topEnd"
             buttonAs="button"
+            tw="bg-black"
             content={
               <div tw="flex flex-row items-center space-x-2">
-                <Text size="sm" tw="w-max text-black">
-                  Are you sure to delete this user?
+                <Text size="sm" tw="w-max">
+                  Are you sure to delete this comments?
                 </Text>
-                <Button variant="text" color="red" onClick={() => handleDeleteUser(rowProps)}>
+                <Button size="sm" color="red" onClick={() => handleDeleteUser(rowProps)}>
                   confirm
                 </Button>
               </div>

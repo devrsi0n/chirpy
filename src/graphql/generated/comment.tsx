@@ -186,6 +186,15 @@ export type CommentOfPageQuery = {
   }>;
 };
 
+export type DeleteCommentByPkMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type DeleteCommentByPkMutation = {
+  __typename?: 'mutation_root';
+  deleteCommentByPk?: { __typename?: 'Comment'; id: string } | null;
+};
+
 export const CommentContentFragmentDoc = gql`
   fragment commentContent on Comment {
     id
@@ -311,4 +320,17 @@ export function useCommentOfPageQuery(
   options?: Omit<Urql.UseQueryArgs<CommentOfPageQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<CommentOfPageQuery>({ query: CommentOfPageDocument, ...options });
+}
+export const DeleteCommentByPkDocument = gql`
+  mutation deleteCommentByPk($id: uuid!) {
+    deleteCommentByPk(id: $id) {
+      id
+    }
+  }
+`;
+
+export function useDeleteCommentByPkMutation() {
+  return Urql.useMutation<DeleteCommentByPkMutation, DeleteCommentByPkMutationVariables>(
+    DeleteCommentByPkDocument,
+  );
 }

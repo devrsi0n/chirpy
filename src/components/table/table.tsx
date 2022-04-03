@@ -85,7 +85,7 @@ export function Table<T>({
                     // eslint-disable-next-line
                     <th
                       {...column.getHeaderProps()}
-                      tw="px-5 py-5 border-b-2 border-gray-900 bg-gray-900 text-left text-xs font-semibold text-gray-100 uppercase tracking-wider"
+                      tw="px-4 py-4 border-b-2 border-gray-600 bg-gray-600 text-left text-xs font-semibold dark:text-white text-black uppercase tracking-wider"
                     >
                       {column.render('Header')}
                     </th>
@@ -100,12 +100,12 @@ export function Table<T>({
                   // eslint-disable-next-line
                   <tr
                     {...row.getRowProps()}
-                    tw="bg-white dark:(bg-grayd-300) text-sm text-black hover:bg-gray-200 dark:hover:bg-gray-600"
+                    tw="bg-white dark:(bg-gray-100 text-white) text-sm text-black hover:bg-gray-200 dark:hover:bg-gray-600"
                   >
                     {row.cells.map((cell) => {
                       return (
                         // eslint-disable-next-line
-                        <td {...cell.getCellProps()} tw="px-5 py-3 border-b border-gray-200">
+                        <td {...cell.getCellProps()} tw="px-4 py-2 border-b border-gray-200">
                           <div>{cell.render('Cell')}</div>
                         </td>
                       );
