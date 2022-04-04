@@ -210,7 +210,7 @@ function translateUserToAdapterUser(
 ): AdapterUser {
   return {
     ...user,
-    image: user.avatar,
+    image: user?.avatar,
     emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : null,
   };
 }
