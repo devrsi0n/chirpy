@@ -1,4 +1,4 @@
-query currentNotificationMessages($userId: uuid!) {
+subscription currentNotificationMessages($userId: uuid!) {
   notificationMessages(where: { recipientId: { _eq: $userId } }, order_by: { createdAt: desc }) {
     id
     recipient {
