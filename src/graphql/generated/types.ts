@@ -1358,7 +1358,7 @@ export type NotificationSubscription_Constraint =
   /** unique or primary key constraint */
   | 'NotificationSubscription_pkey'
   /** unique or primary key constraint */
-  | 'NotificationSubscription_subscription_key';
+  | 'NotificationSubscription_subscription_userId_key';
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type NotificationSubscription_Delete_At_Path_Input = {

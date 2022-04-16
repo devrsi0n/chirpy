@@ -13,7 +13,7 @@ import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
-import { useCurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
+import { useCurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { dayjs } from '$/utilities/date';
 
@@ -21,7 +21,7 @@ import styles from './notification-hub.module.scss';
 
 export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
-  const [{ data }] = useCurrentNotificationMessagesQuery({
+  const [{ data }] = useCurrentNotificationMessagesSubscription({
     variables: {
       userId: userData.id || '-1',
     },
@@ -35,7 +35,7 @@ export function NotificationHub(): JSX.Element {
           {hasUnreadNotifications && <Badge tw="bg-red-900 absolute top-1 right-1" />}
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>
-          <Heading as="h4" tw="font-bold px-5 pb-3">
+          <Heading as="h4" tw="font-bold px-5 py-3">
             Notifications
           </Heading>
           {data?.notificationMessages?.length || 0 > 0 ? (
@@ -82,8 +82,8 @@ export function NotificationHub(): JSX.Element {
               ))}
             </div>
           ) : (
-            <Text variant="secondary" tw="mx-5">
-              No messages
+            <Text variant="secondary" tw="mx-5 pb-2">
+              No messages yet
             </Text>
           )}
         </Menu.Items>
@@ -108,6 +108,6 @@ const ICON_SIZE = 24;
 const ICON_MAP: Record<NotificationType_Enum, JSX.Element> = {
   ReceivedAComment: <MessageSquare size={ICON_SIZE} tw="transform -scale-x-1 text-blue-900!" />,
   ReceivedAReply: <MessageSquare size={ICON_SIZE} tw="transform -scale-x-1 text-blue-900!" />,
-  ReceivedALike: <HeartFill size={ICON_SIZE} tw="text-pink-900" />,
+  ReceivedALike: <HeartFill size={ICON_SIZE} tw="text-pink-900!" />,
   CommentDeleted: <XSquare size={ICON_SIZE} />,
 };
