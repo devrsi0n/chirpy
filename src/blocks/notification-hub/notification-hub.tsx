@@ -69,7 +69,7 @@ export function NotificationHub(): JSX.Element {
                         {dayjs(msg.createdAt).fromNow()}
                       </NotificationText>
                       {msg.content && (
-                        <NotificationText tw="max-w-[15rem] mt-2 italic">
+                        <NotificationText tw="max-w-[15rem] mt-2" variant="secondary">
                           {msg.content}
                         </NotificationText>
                       )}

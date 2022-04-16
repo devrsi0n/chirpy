@@ -1,6 +1,8 @@
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
-export function registerNotificationSubscription(): Promise<Response> {
+const NOTIFICATION_DID_REGISTER_KEY = 'chirpy.notification-subscription.did-register';
+
+export function registerNotificationSubscription(): Promise<Response | undefined> {
   checkServiceWorkerCompatibility();
   // It's safe to register the service worker multiply times
   return navigator.serviceWorker
@@ -20,7 +22,9 @@ export function registerNotificationSubscription(): Promise<Response> {
           });
         })
         .then((subscription) => {
-          console.log('subscription', subscription);
+          if (sessionStorage.getItem(NOTIFICATION_DID_REGISTER_KEY)) {
+            return;
+          }
           // Save the subscription details to server
           return fetch('/api/notification/register-device', {
             method: 'POST',
@@ -28,6 +32,9 @@ export function registerNotificationSubscription(): Promise<Response> {
               'Content-type': 'application/json',
             },
             body: JSON.stringify({ subscription }),
+          }).then((rsp) => {
+            sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
+            return rsp;
           });
         });
     })

@@ -25,11 +25,17 @@ export async function registerDevice(
     badRequest(res, 'Invalid subscription');
     return;
   }
-  // console.log('saving subscription', subscription);
-  await createOneNotificationSubscription({
-    userId: session.user.id,
-    subscription,
-  });
+  try {
+    await createOneNotificationSubscription({
+      userId: session.user.id,
+      subscription,
+    });
+  } catch (error) {
+    // Ignore duplicated registration
+    if (!(error as Error).message.includes('Uniqueness violation')) {
+      throw error;
+    }
+  }
   res.json({
     message: 'ok',
   });
