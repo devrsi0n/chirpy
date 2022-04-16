@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 
