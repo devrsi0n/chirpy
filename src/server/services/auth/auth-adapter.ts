@@ -36,7 +36,7 @@ import { getUserByPk } from '../mutation-event/utilities';
 export function nextAuthAdapter(): Adapter {
   return {
     async createUser(user: Omit<AdapterUser, 'id'>) {
-      const data = await gqlQuery(
+      const data = await gqlMutate(
         CreateUserDocument,
         translateAdapterUserToQueryVairables(user) as CreateUserMutationVariables,
         'insertOneUser',
@@ -131,7 +131,7 @@ export function nextAuthAdapter(): Adapter {
       return translateGQLSessionToAdapterSession(data);
     },
     async getSessionAndUser(sessionToken) {
-      const data = await gqlMutate(
+      const data = await gqlQuery(
         SessionAndUserDocument,
         {
           sessionToken,
@@ -205,9 +205,14 @@ export function nextAuthAdapter(): Adapter {
   };
 }
 
+function translateUserToAdapterUser(user: null | undefined): null;
 function translateUserToAdapterUser(
   user: NonNullable<CreateUserMutation['insertOneUser']>,
-): AdapterUser {
+): AdapterUser;
+function translateUserToAdapterUser(user: CreateUserMutation['insertOneUser']): AdapterUser | null {
+  if (!user) {
+    return null;
+  }
   return {
     ...user,
     image: user?.avatar,
