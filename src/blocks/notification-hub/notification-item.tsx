@@ -65,6 +65,7 @@ export function NotificationItem({
                 e.stopPropagation();
               }}
               ref={deleteButtonRef}
+              aria-label="Delete the notification message"
             >
               <X size={22} />
             </button>
