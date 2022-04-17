@@ -1,4 +1,5 @@
 import { Global } from '@emotion/react';
+import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
 import 'tailwindcss/tailwind.css';
@@ -9,6 +10,7 @@ import { loadFeatures } from '$/pages/_app';
 import { appGlobalStyles } from '$/styles/global-styles';
 
 export const decorators = [
+  urqlDecorator,
   (Story) => {
     const { styles } = useThemeVariables();
     return (

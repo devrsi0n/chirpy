@@ -88,6 +88,7 @@ export function NotificationItem({
               tw="max-w-[15rem] mt-2 truncate"
               variant="secondary"
               title={message.content}
+              aria-label="Comment content"
             >
               {message.content}
             </NotificationText>

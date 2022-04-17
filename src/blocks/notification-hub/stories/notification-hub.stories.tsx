@@ -1,11 +1,9 @@
-import { addDecorator, ComponentMeta, ComponentStory } from '@storybook/react';
-import { urqlDecorator } from '@urql/storybook-addon';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { screen, userEvent } from '@storybook/testing-library';
 import { getOperationName, Operation } from 'urql';
 
 import { NotificationHub } from '../notification-hub';
 import { messages } from './mock-data';
-
-addDecorator(urqlDecorator);
 
 type NotificationHubType = typeof NotificationHub;
 export default {
@@ -19,8 +17,8 @@ const Template: ComponentStory<NotificationHubType> = (args) => (
   </div>
 );
 
-export const Unread = Template.bind({});
-Unread.parameters = {
+export const Default = Template.bind({});
+Default.parameters = {
   urql: (op: Operation) => {
     const query = getOperationName(op.query);
     console.log({ op, subscription: query });
@@ -31,4 +29,8 @@ Unread.parameters = {
     }
     return { data: {} };
   },
+};
+Default.play = async () => {
+  const notificationButton = screen.getByLabelText('click to open the menu');
+  await userEvent.click(notificationButton);
 };

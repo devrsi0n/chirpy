@@ -8,9 +8,7 @@ module.exports = {
     builder: 'webpack5',
   },
   stories: [
-    // '../stories/**/*.stories.mdx',
     '../src/**/*.stories.mdx',
-    // '../stories/**/*.stories.@(ts|tsx)',
     '../src/**/*.stories.@(ts|tsx)',
   ],
   webpackFinal: (config) => {
@@ -35,5 +33,7 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     'storybook-addon-next',
+    '@storybook/addon-interactions',
   ],
+  actions: { argTypesRegex: '^on.*' }
 };
