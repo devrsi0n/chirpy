@@ -48,3 +48,9 @@ update_permissions:
       recipientId:
         _eq: X-Hasura-User-Id
   role: user
+delete_permissions:
+- permission:
+    filter:
+      recipientId:
+        _eq: X-Hasura-User-Id
+  role: user

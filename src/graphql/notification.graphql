@@ -27,3 +27,9 @@ mutation haveReadANotification($messageId: uuid!) {
     id
   }
 }
+
+mutation deleteNotificationMessage($messageId: uuid!) {
+  deleteNotificationMessageByPk(id: $messageId) {
+    id
+  }
+}

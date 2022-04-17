@@ -1,5 +1,6 @@
 import HeartFill from '@geist-ui/react-icons/heartFill';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
+import X from '@geist-ui/react-icons/x';
 import XSquare from '@geist-ui/react-icons/xSquare';
 import * as React from 'react';
 import tw from 'twin.macro';
@@ -21,6 +22,7 @@ export type INotificationItemProps = {
   length: number;
   message: CurrentNotificationMessagesSubscription['notificationMessages'][number];
   onClickCapture: (messageId: string) => void;
+  onClickDelete: (messageId: string) => void;
 };
 
 export function NotificationItem({
@@ -28,31 +30,53 @@ export function NotificationItem({
   message,
   length,
   onClickCapture,
+  onClickDelete,
 }: INotificationItemProps): JSX.Element {
+  const deleteButtonRef = React.useRef<HTMLButtonElement>(null);
   return (
     <Menu.Item
       key={message.id}
       tw="px-5 pt-3 pb-0 mt-0 rounded-none hover:(rounded) flex-col items-start text-left"
       css={[!message.read && tw`bg-gray-200`]}
-      onClickCapture={(): void => onClickCapture(message.id)}
+      onClickCapture={(e: any): void => {
+        console.log({ e });
+        if (deleteButtonRef.current?.contains(e.target)) {
+          e.preventDefault();
+          return;
+        }
+        onClickCapture(message.id);
+      }}
     >
       <Link
         href={message.url}
         variant="plain"
-        tw="flex flex-row items-start space-x-2 mb-2"
+        tw="w-full flex flex-row items-start space-x-2 mb-2"
         className="group"
       >
         {ICON_MAP[message.type]}
-        <div>
-          <Avatar src={message.triggeredBy.avatar} tw="mb-2" />
+        <div tw="flex-1">
+          <div tw="flex flex-row justify-between">
+            <Avatar src={message.triggeredBy.avatar} tw="mb-2" />
+            <button
+              type="button"
+              tw="hidden group-hover:(inline) hover:(bg-primary-600) rounded-full h-fit p-1"
+              onClick={(e) => {
+                onClickDelete(message.id);
+                e.stopPropagation();
+              }}
+              ref={deleteButtonRef}
+            >
+              <X size={22} />
+            </button>
+          </div>
           <NotificationText tw="flex flex-row space-x-1.5 leading-none">
-            <span tw="font-bold">{message.triggeredBy.name}</span>
+            <span tw="font-bold max-w-[8rem] truncate">{message.triggeredBy.name}</span>
             <span>{TITLE_MAP[message.type]}</span>
           </NotificationText>
           <NotificationText
             variant="secondary"
             as="time"
-            size="xs"
+            size="sm"
             tw="block leading-none cursor-default mt-1"
             dateTime={message.createdAt}
           >

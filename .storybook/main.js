@@ -3,6 +3,10 @@ const path = require('path');
 const babel = require('../.babelrc');
 
 module.exports = {
+  framework: '@storybook/react',
+  core: {
+    builder: 'webpack5',
+  },
   stories: [
     // '../stories/**/*.stories.mdx',
     '../src/**/*.stories.mdx',
@@ -27,5 +31,9 @@ module.exports = {
     ...options,
     ...babel,
   }),
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-postcss'],
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    'storybook-addon-next',
+  ],
 };

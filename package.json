@@ -23,8 +23,8 @@
     "ut": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
     "ut:coverage": "DEBUG_PRINT_LIMIT=10000 jest --silent=false --coverage",
     "lint": "eslint ./",
-    "sb": "start-storybook -p 6006",
-    "build-sb": "build-storybook"
+    "sb": "start-storybook -p 6006 -s ./public",
+    "build-sb": "build-storybook -s ./public"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
@@ -62,7 +62,6 @@
     "@tiptap/extension-underline": "2.0.0-beta.23",
     "@tiptap/react": "2.0.0-beta.108",
     "@tiptap/starter-kit": "2.0.0-beta.183",
-    "@urql/devtools": "2.0.3",
     "canvas-confetti": "1.5.1",
     "chart.js": "3.6.2",
     "cors": "2.8.5",
@@ -124,6 +123,8 @@
     "@storybook/addon-essentials": "6.4.19",
     "@storybook/addon-links": "6.4.19",
     "@storybook/addon-postcss": "2.0.0",
+    "@storybook/builder-webpack5": "6.4.22",
+    "@storybook/manager-webpack5": "6.4.22",
     "@storybook/react": "6.4.19",
     "@testing-library/jest-dom": "5.16.2",
     "@testing-library/react": "12.1.4",
@@ -145,6 +146,8 @@
     "@types/web-push": "3.3.2",
     "@types/ws": "8.5.2",
     "@typescript-eslint/eslint-plugin": "5.15.0",
+    "@urql/devtools": "2.0.3",
+    "@urql/storybook-addon": "1.0.8",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.4",
     "babel-plugin-dynamic-import-node": "2.3.3",
@@ -160,6 +163,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-jest": "26.1.1",
     "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-storybook": "0.5.10",
     "eslint-plugin-unicorn": "41.0.0",
     "identity-obj-proxy": "3.0.0",
     "intersection-observer": "0.12.0",
@@ -171,10 +175,13 @@
     "postcss-preset-env": "7.4.2",
     "prettier": "2.5.1",
     "sass": "1.49.10",
+    "sass-loader": "12.6.0",
     "simple-git-hooks": "2.7.0",
+    "storybook-addon-next": "1.6.2",
     "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "4.6.3",
     "vite": "2.8.6",
+    "webpack": "5.72.0",
     "whatwg-fetch": "3.6.2"
   },
   "engines": {
