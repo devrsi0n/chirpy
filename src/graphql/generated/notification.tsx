@@ -34,7 +34,10 @@ export type HaveReadANotificationMutation = {
 
 export const CurrentNotificationMessagesDocument = gql`
   subscription currentNotificationMessages($userId: uuid!) {
-    notificationMessages(where: { recipientId: { _eq: $userId } }, order_by: { createdAt: desc }) {
+    notificationMessages(
+      where: { recipientId: { _eq: $userId } }
+      order_by: { createdAt: desc, read: asc }
+    ) {
       id
       recipient {
         id

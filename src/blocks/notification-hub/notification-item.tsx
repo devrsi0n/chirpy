@@ -59,7 +59,12 @@ export function NotificationItem({
             {dayjs(message.createdAt).fromNow()}
           </NotificationText>
           {message.content && (
-            <NotificationText tw="max-w-[15rem] mt-2" variant="secondary">
+            <NotificationText
+              size="sm"
+              tw="max-w-[15rem] mt-2 truncate"
+              variant="secondary"
+              title={message.content}
+            >
               {message.content}
             </NotificationText>
           )}
@@ -82,10 +87,23 @@ const TITLE_MAP: Record<NotificationType_Enum, string> = {
 };
 
 const ICON_SIZE = 24;
+const COMMENT_ICON = (
+  <span tw="text-blue-900 group-hover:(text-primary-900)">
+    <MessageSquare size={ICON_SIZE} tw="transform -scale-x-1" />
+  </span>
+);
 
 const ICON_MAP: Record<NotificationType_Enum, JSX.Element> = {
-  ReceivedAComment: <MessageSquare size={ICON_SIZE} tw="transform -scale-x-1 text-blue-900!" />,
-  ReceivedAReply: <MessageSquare size={ICON_SIZE} tw="transform -scale-x-1 text-blue-900!" />,
-  ReceivedALike: <HeartFill size={ICON_SIZE} tw="text-pink-900!" />,
-  CommentDeleted: <XSquare size={ICON_SIZE} />,
+  ReceivedAComment: COMMENT_ICON,
+  ReceivedAReply: COMMENT_ICON,
+  ReceivedALike: (
+    <span tw="text-pink-900 group-hover:(text-primary-900)">
+      <HeartFill size={ICON_SIZE} />
+    </span>
+  ),
+  CommentDeleted: (
+    <span tw="text-gray-900 group-hover:(text-primary-900)">
+      <XSquare size={ICON_SIZE} />
+    </span>
+  ),
 };
