@@ -1,3 +1,4 @@
+import { devtoolsExchange } from '@urql/devtools';
 import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
 import {
   createClient,
@@ -6,7 +7,10 @@ import {
   subscriptionExchange,
   ClientOptions,
   RequestPolicy,
+  Exchange,
 } from 'urql';
+
+import { isENVDev } from '$/server/utilities/env';
 
 // export function withGqlClient(
 //   getClientConfig?: NextUrqlClientConfig,
@@ -31,30 +35,34 @@ export function getGqlClientOptions(
   requestPolicy: RequestPolicy = 'cache-and-network',
   wsClient?: WsClient,
 ): ClientOptions {
+  const exchanges: Exchange[] = [
+    ...defaultExchanges,
+    subscriptionExchange({
+      forwardSubscription: (operation) => ({
+        subscribe: (sink) => {
+          const _wsClient =
+            wsClient ||
+            createWSClient({
+              url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
+              connectionParams: () => {
+                return {
+                  headers,
+                };
+              },
+            });
+          return {
+            unsubscribe: _wsClient.subscribe(operation, sink),
+          };
+        },
+      }),
+    }),
+  ];
+  if (isENVDev) {
+    exchanges.unshift(devtoolsExchange);
+  }
   return {
     url: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
-    exchanges: [
-      ...defaultExchanges,
-      subscriptionExchange({
-        forwardSubscription: (operation) => ({
-          subscribe: (sink) => {
-            const _wsClient =
-              wsClient ||
-              createWSClient({
-                url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
-                connectionParams: () => {
-                  return {
-                    headers,
-                  };
-                },
-              });
-            return {
-              unsubscribe: _wsClient.subscribe(operation, sink),
-            };
-          },
-        }),
-      }),
-    ],
+    exchanges,
     fetchOptions: {
       headers,
     },

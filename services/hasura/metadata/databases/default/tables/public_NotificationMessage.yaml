@@ -39,3 +39,12 @@ select_permissions:
       recipientId:
         _eq: X-Hasura-User-Id
   role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - read
+    filter:
+      recipientId:
+        _eq: X-Hasura-User-Id
+  role: user

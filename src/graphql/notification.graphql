@@ -18,3 +18,9 @@ subscription currentNotificationMessages($userId: uuid!) {
     createdAt
   }
 }
+
+mutation haveReadANotification($messageId: uuid!) {
+  updateNotificationMessageByPk(pk_columns: { id: $messageId }, _set: { read: true }) {
+    id
+  }
+}
