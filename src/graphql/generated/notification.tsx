@@ -32,6 +32,15 @@ export type HaveReadANotificationMutation = {
   updateNotificationMessageByPk?: { __typename?: 'NotificationMessage'; id: string } | null;
 };
 
+export type DeleteNotificationMessageMutationVariables = Types.Exact<{
+  messageId: Types.Scalars['uuid'];
+}>;
+
+export type DeleteNotificationMessageMutation = {
+  __typename?: 'mutation_root';
+  deleteNotificationMessageByPk?: { __typename?: 'NotificationMessage'; id: string } | null;
+};
+
 export const CurrentNotificationMessagesDocument = gql`
   subscription currentNotificationMessages($userId: uuid!) {
     notificationMessages(
@@ -85,4 +94,18 @@ export function useHaveReadANotificationMutation() {
   return Urql.useMutation<HaveReadANotificationMutation, HaveReadANotificationMutationVariables>(
     HaveReadANotificationDocument,
   );
+}
+export const DeleteNotificationMessageDocument = gql`
+  mutation deleteNotificationMessage($messageId: uuid!) {
+    deleteNotificationMessageByPk(id: $messageId) {
+      id
+    }
+  }
+`;
+
+export function useDeleteNotificationMessageMutation() {
+  return Urql.useMutation<
+    DeleteNotificationMessageMutation,
+    DeleteNotificationMessageMutationVariables
+  >(DeleteNotificationMessageDocument);
 }

@@ -9,6 +9,7 @@ import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import {
   useCurrentNotificationMessagesSubscription,
+  useDeleteNotificationMessageMutation,
   useHaveReadANotificationMutation,
 } from '$/graphql/generated/notification';
 
@@ -23,6 +24,7 @@ export function NotificationHub(): JSX.Element {
     },
   });
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
+  const [{}, deleteNotificationMessage] = useDeleteNotificationMessageMutation();
   const hasUnreadNotifications = data?.notificationMessages.some((msg) => !msg.read);
   return (
     <div tw="flex flex-row justify-center items-center mr-4">
@@ -44,6 +46,7 @@ export function NotificationHub(): JSX.Element {
                   index={index}
                   length={data?.notificationMessages.length}
                   onClickCapture={(messageId) => haveReadANotification({ messageId })}
+                  onClickDelete={(messageId) => deleteNotificationMessage({ messageId })}
                 />
               ))}
             </div>
