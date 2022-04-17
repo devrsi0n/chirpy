@@ -23,6 +23,15 @@ export type CurrentNotificationMessagesSubscription = {
   }>;
 };
 
+export type HaveReadANotificationMutationVariables = Types.Exact<{
+  messageId: Types.Scalars['uuid'];
+}>;
+
+export type HaveReadANotificationMutation = {
+  __typename?: 'mutation_root';
+  updateNotificationMessageByPk?: { __typename?: 'NotificationMessage'; id: string } | null;
+};
+
 export const CurrentNotificationMessagesDocument = gql`
   subscription currentNotificationMessages($userId: uuid!) {
     notificationMessages(where: { recipientId: { _eq: $userId } }, order_by: { createdAt: desc }) {
@@ -60,4 +69,17 @@ export function useCurrentNotificationMessagesSubscription<
     TData,
     CurrentNotificationMessagesSubscriptionVariables
   >({ query: CurrentNotificationMessagesDocument, ...options }, handler);
+}
+export const HaveReadANotificationDocument = gql`
+  mutation haveReadANotification($messageId: uuid!) {
+    updateNotificationMessageByPk(pk_columns: { id: $messageId }, _set: { read: true }) {
+      id
+    }
+  }
+`;
+
+export function useHaveReadANotificationMutation() {
+  return Urql.useMutation<HaveReadANotificationMutation, HaveReadANotificationMutationVariables>(
+    HaveReadANotificationDocument,
+  );
 }
