@@ -11,7 +11,7 @@ export default {
   component: NotificationHub,
 } as ComponentMeta<NotificationHubType>;
 
-const Template: ComponentStory<NotificationHubType> = (args) => (
+const Template: ComponentStory<NotificationHubType> = (args: any) => (
   <div>
     <NotificationHub {...args} />
   </div>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Global } from '@emotion/react';
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
