@@ -48,9 +48,9 @@ export function Popover({
       {({ open }) => (
         <>
           <HeadlessPopover.Button
-            {...buttonProps}
             variant="text"
             as={buttonAs || Button}
+            {...buttonProps}
             ref={buttonRef}
           >
             {children}
