@@ -130,7 +130,7 @@
     "@storybook/testing-library": "0.0.9",
     "@storybook/testing-react": "1.2.4",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "12.1.4",
+    "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "13.5.0",
     "@trivago/prettier-plugin-sort-imports": "3.2.0",
     "@types/canvas-confetti": "1.4.2",
