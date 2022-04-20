@@ -39,7 +39,6 @@ export function NotificationItem({
       tw="px-5 pt-3 pb-0 mt-0 rounded-none hover:(rounded) flex-col items-start text-left"
       css={[!message.read && tw`bg-gray-200`]}
       onClickCapture={(e: any): void => {
-        console.log({ e });
         if (deleteButtonRef.current?.contains(e.target)) {
           e.preventDefault();
           return;
