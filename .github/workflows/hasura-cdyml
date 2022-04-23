@@ -1,3 +1,4 @@
+# Disabled for now
 name: Hasura CI/CD
 
 on:
