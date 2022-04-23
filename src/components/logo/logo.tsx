@@ -60,21 +60,23 @@ export function Logo({
 }
 
 function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
-  const [badge, setBadge] = React.useState('Beta');
+  const [badge, setBadge] = React.useState('');
   React.useEffect(() => {
     const host = getHostEnv();
     if (['staging', 'preview', 'localhost'].includes(host)) {
       setBadge(host);
+    } else if (host === 'prod') {
+      setBadge('Beta');
     }
   }, []);
 
-  if (!showBadge) {
+  if (!showBadge || !badge) {
     return <></>;
   }
   return (
     <Badge
       css={posStyle}
-      {...(badge && {
+      {...(badge !== 'Beta' && {
         variant: 'solid',
         color: 'blue',
         css: [posStyle, tw`-right-3`],

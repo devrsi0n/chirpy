@@ -1,0 +1,35 @@
+subscription currentNotificationMessages($userId: uuid!) {
+  notificationMessages(
+    where: { recipientId: { _eq: $userId } }
+    order_by: { createdAt: desc, read: asc }
+  ) {
+    id
+    recipient {
+      id
+      name
+      avatar
+    }
+    type
+    url
+    triggeredBy {
+      id
+      name
+      avatar
+    }
+    content
+    read
+    createdAt
+  }
+}
+
+mutation haveReadANotification($messageId: uuid!) {
+  updateNotificationMessageByPk(pk_columns: { id: $messageId }, _set: { read: true }) {
+    id
+  }
+}
+
+mutation deleteNotificationMessage($messageId: uuid!) {
+  deleteNotificationMessageByPk(id: $messageId) {
+    id
+  }
+}

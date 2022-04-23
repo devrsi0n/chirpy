@@ -55,4 +55,5 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
 
 export default App;
 
-const loadFeatures = () => import('../utilities/framer-motion-features').then((res) => res.default);
+export const loadFeatures = () =>
+  import('../utilities/framer-motion-features').then((res) => res.default);

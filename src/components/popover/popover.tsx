@@ -1,12 +1,12 @@
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw from 'twin.macro';
+import tw, { TwStyle } from 'twin.macro';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
 
-export type Placement = 'top' | 'topEnd';
+export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 
 export interface IPopoverProps {
   children: React.ReactNode;
@@ -22,6 +22,9 @@ export interface IPopoverProps {
    * @default true
    */
   autoClose?: boolean;
+  styles?: {
+    panel?: TwStyle;
+  };
 }
 
 export function Popover({
@@ -31,6 +34,7 @@ export function Popover({
   children,
   content,
   placement = 'top',
+  styles,
 }: IPopoverProps): JSX.Element {
   const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
   const handleClickPanel = () => {
@@ -43,7 +47,12 @@ export function Popover({
     <HeadlessPopover tw="relative">
       {({ open }) => (
         <>
-          <HeadlessPopover.Button {...buttonProps} as={buttonAs || Button} ref={buttonRef}>
+          <HeadlessPopover.Button
+            variant="text"
+            as={buttonAs || Button}
+            {...buttonProps}
+            ref={buttonRef}
+          >
             {children}
           </HeadlessPopover.Button>
 
@@ -52,18 +61,16 @@ export function Popover({
               <m.div {...easeInOut}>
                 <HeadlessPopover.Panel
                   static
-                  css={[tw`absolute right-0 z-10 shadow-2xl`, panelBorder]}
-                  style={{
-                    ...getPanelStyles(placement, {
-                      height: buttonRef.current?.getBoundingClientRect().height,
-                      width: buttonRef.current?.getBoundingClientRect().width,
-                    }),
-                  }}
+                  css={[tw`absolute right-0 z-10 shadow-2xl isolate`, panelBorder]}
+                  style={getPanelStyles(placement, {
+                    height: buttonRef.current?.getBoundingClientRect().height,
+                    width: buttonRef.current?.getBoundingClientRect().width,
+                  })}
                   role="region"
                   aria-label="Popover panel"
                 >
                   <div
-                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder]}
+                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder, styles?.panel]}
                     onClick={handleClickPanel}
                     onKeyDown={handleClickPanel}
                   >
@@ -95,6 +102,8 @@ function getPanelStyles(
   { width, height }: ButtonDimension,
 ): React.CSSProperties {
   const bottom = (height || 40) + 16;
+  const top = (height || 40) + 16;
+
   switch (placement) {
     case 'top':
       return {
@@ -104,6 +113,11 @@ function getPanelStyles(
     case 'topEnd':
       return {
         bottom,
+        right: 0,
+      };
+    case 'bottomEnd':
+      return {
+        top,
         right: 0,
       };
     default:
@@ -122,6 +136,11 @@ function getBeakStyles(placement: Placement, width = DEFAULT_WIDTH): React.CSSPr
     case 'topEnd':
       return {
         bottom,
+        right: `${width / 2}px`,
+      };
+    case 'bottomEnd':
+      return {
+        top: '-8px',
         right: `${width / 2}px`,
       };
     default:

@@ -16,9 +16,14 @@ describe('Menu', () => {
     const item2Text = 'item 2';
     const mockHandleClickItem1 = jest.fn();
     render(
-      <Menu content={<span>{contentText}</span>}>
-        <Menu.Item onClick={mockHandleClickItem1}>{item1Text}</Menu.Item>
-        <Menu.Item>{item2Text}</Menu.Item>
+      <Menu>
+        <Menu.Button>
+          <span>{contentText}</span>
+        </Menu.Button>
+        <Menu.Items>
+          <Menu.Item onClick={mockHandleClickItem1}>{item1Text}</Menu.Item>
+          <Menu.Item>{item2Text}</Menu.Item>
+        </Menu.Items>
       </Menu>,
     );
     const button = screen.getByText(contentText);

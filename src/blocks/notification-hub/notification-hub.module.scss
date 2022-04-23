@@ -1,0 +1,9 @@
+.menuItems {
+}
+
+.menuButton {
+  @apply flex justify-center items-center;
+  & > button {
+    @apply p-1;
+  }
+}

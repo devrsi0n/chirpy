@@ -11,6 +11,7 @@ import tw from 'twin.macro';
 
 import { BaseButtonProps, BaseButton } from '$/components/button';
 import { Select } from '$/components/select';
+import { listHoverableColor } from '$/styles/common';
 
 type InlineFormat = 'bold' | 'italic' | 'underline' | 'code';
 
@@ -28,7 +29,8 @@ export function BaseMarkButton({
   return (
     <BaseButton
       css={[
-        tw`p-1.5 rounded text-gray-1100 hover:(bg-primary-400 text-primary-1100) transition-all`,
+        tw`p-1.5 rounded text-gray-1100`,
+        listHoverableColor,
         isActive && tw`bg-primary-300 text-primary-1000`,
         className,
       ]}

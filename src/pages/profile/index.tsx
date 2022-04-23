@@ -122,7 +122,6 @@ export default function Profile(): JSX.Element {
             <div tw="flex flex-row space-x-2">
               {isEditMode && (
                 <Popover
-                  buttonProps={{ variant: 'text' }}
                   content={
                     <div tw="flex flex-row items-center space-x-2">
                       <Text tw="w-max">Your unsaved content will lost, are you sure?</Text>

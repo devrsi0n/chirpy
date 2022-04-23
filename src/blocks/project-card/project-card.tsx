@@ -2,7 +2,7 @@ import Loader from '@geist-ui/react-icons/loader';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import * as React from 'react';
-import tw from 'twin.macro';
+import 'twin.macro';
 
 import { BaseButton, Button } from '$/components/button';
 import { Card } from '$/components/card';
@@ -75,22 +75,21 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <Heading as="h3">{project.name}</Heading>
         <div tw="flex flex-row items-center space-x-2">
           <PageViewStats domain={project.domain} />
-          <Menu
-            styles={{ root: tw`mr-1` }}
-            buttonProps={{ ariaLabel: 'Show more project options' }}
-            content={
+          <Menu tw="mr-1">
+            <Menu.Button ariaLabel="Show more project options">
               <span tw="p-1">
                 <MoreVertical size={20} />
               </span>
-            }
-          >
-            <Menu.Item
-              onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
-              tw="space-x-1"
-            >
-              <Trash2 size={14} />
-              <span>Delete</span>
-            </Menu.Item>
+            </Menu.Button>
+            <Menu.Items>
+              <Menu.Item
+                onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
+                tw="space-x-1"
+              >
+                <Trash2 size={14} />
+                <span>Delete</span>
+              </Menu.Item>
+            </Menu.Items>
           </Menu>
         </div>
       </div>

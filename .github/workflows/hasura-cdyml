@@ -1,3 +1,4 @@
+# Disabled for now
 name: Hasura CI/CD
 
 on:
@@ -11,9 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+
       - name: Staging
         # Only run it when the PR target branch is 'main'
-        if: ${{ github.base_ref == 'main' }}
+        if: ${{ env.GITHUB_REF_SLUG == 'main' }}
         uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura
@@ -26,7 +31,7 @@ jobs:
           HASURA_SEEDS_ENABLED: true
 
       - name: Prod
-        if: ${{ github.base_ref == 'prod' }}
+        if: ${{ env.GITHUB_REF_SLUG == 'prod' }}
         uses: GavinRay97/hasura-ci-cd-action@master
         with:
           PATH_TO_HASURA_PROJECT_ROOT: ./services/hasura

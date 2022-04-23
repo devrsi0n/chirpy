@@ -48,9 +48,13 @@ function loadHomePage() {
 }
 
 function clickUserMenu() {
-  cy.get('header')
-    .findByRole('img', {
-      name: `The avatar of ${testUser.name}`,
-    })
-    .click();
+  const userImage = cy.get('header').findByRole('img', {
+    name: `The avatar of ${testUser.name}`,
+  });
+  userImage.parent().then((elem) => {
+    // Only click the menu if it's unexpanded
+    if (elem.attr('aria-expanded') === 'false') {
+      userImage.click();
+    }
+  });
 }

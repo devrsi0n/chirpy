@@ -8,6 +8,7 @@ module.exports = {
     'plugin:jest/style',
     'next/core-web-vitals',
     'plugin:prettier/recommended',
+    'plugin:storybook/recommended',
   ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
@@ -28,9 +29,9 @@ module.exports = {
 
     // '@emotion/jsx-import': 'error',
     '@emotion/pkg-renaming': 'error',
+
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
-
     'unicorn/filename-case': [
       'error',
       {
@@ -38,6 +39,7 @@ module.exports = {
         ignore: [/^\[.+\]\.tsx?$/],
       },
     ],
+
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-null': 'off',
     'unicorn/prevent-abbreviations': 'off',

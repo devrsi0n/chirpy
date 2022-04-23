@@ -7464,8 +7464,20 @@
         "description": "columns and relationships of \"NotificationMessage\"",
         "fields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -7941,6 +7953,18 @@
             "deprecationReason": null
           },
           {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "String_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": null,
             "type": {
@@ -8119,8 +8143,20 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
@@ -8273,8 +8309,20 @@
         "description": "aggregate max on columns",
         "fields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8369,8 +8417,20 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -8463,8 +8523,20 @@
         "description": "aggregate min on columns",
         "fields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "args": [],
             "type": {
               "kind": "SCALAR",
@@ -8559,8 +8631,20 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
               "kind": "ENUM",
               "name": "order_by",
@@ -8768,6 +8852,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": null,
             "type": {
@@ -8952,6 +9048,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "content",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "column name",
             "isDeprecated": false,
@@ -9015,8 +9117,20 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "content",
+            "description": "Content of message, e.g. comment content",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
-            "description": null,
+            "description": "Triggered entity's id, e.g. CommentId or LikeId",
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
@@ -9136,6 +9250,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "content",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "contextId",
             "description": "column name",
             "isDeprecated": false,
@@ -9202,13 +9322,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -9682,7 +9798,7 @@
             "deprecationReason": null
           },
           {
-            "name": "NotificationSubscription_subscription_key",
+            "name": "NotificationSubscription_subscription_userId_key",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -15527,12 +15643,6 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
-          {
-            "name": "admin",
-            "description": "Have all permissions",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "manager",
             "description": "Manager of a team",
