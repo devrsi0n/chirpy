@@ -1,12 +1,11 @@
-// import { Link } from '$/components/link';
-import Link from 'next/link';
 import * as React from 'react';
-import tw from 'twin.macro';
+import 'twin.macro';
 
 import { BaseButton } from '$/components/button';
 import { Card } from '$/components/card';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
+import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Text } from '$/components/text';
 import { DomainOfProjectsQuery } from '$/server/graphql/generated/project';
@@ -44,7 +43,7 @@ export function AdminCard({ project }: AdminCardProps): JSX.Element {
             {pages.map((page) => (
               <List.Item key={page.id} css={[listHoverable]}>
                 <Link
-                  href={{ pathname: `/admin/comment`, query: { pageId: page.id } }}
+                  href={`/admin/comment?pageId${page.id}`}
                   title={page.title || page.url}
                   variant="plain"
                   tw="inline-block max-w-xs overflow-ellipsis overflow-hidden whitespace-nowrap"
