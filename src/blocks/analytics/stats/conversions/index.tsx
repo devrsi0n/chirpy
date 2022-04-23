@@ -1,5 +1,5 @@
 import React from 'react';
-import 'twin.macro';
+
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
@@ -138,8 +138,8 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
     } else if (goals) {
       return (
         <React.Fragment>
-          <h3 css={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
-          <div css={labelContainer}>
+          <h3 className={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
+          <div className={labelContainer}>
             <span>Goal</span>
             <div className="text-right">
               <span className="inline-block w-20">Uniques</span>

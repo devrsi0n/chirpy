@@ -16,5 +16,5 @@ export function TabsItem({ children, value, label, disabled }: TabsItemProps): J
     register?.({ value, label, disabled: !!disabled });
   }, [value, label, disabled, register]);
 
-  return <>{isActive && <div tw="py-1">{children}</div>}</>;
+  return <>{isActive && <div className="py-1">{children}</div>}</>;
 }

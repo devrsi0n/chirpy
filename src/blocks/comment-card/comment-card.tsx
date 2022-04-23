@@ -2,9 +2,9 @@ import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
+import clsx from 'clsx';
 import { m, Variants } from 'framer-motion';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button } from '$/components/button';
@@ -106,26 +106,26 @@ export function CommentCard({
       animate={containerAnimate}
       variants={shakeVariants}
       onAnimationComplete={() => setContainerAnimate('stop')}
-      css={[
-        tw`flex flex-row items-start space-x-3 border rounded border-gray-500 shadow-sm`,
-        isDeleted ? tw`py-2 pl-4` : tw`pt-4 pb-2 pl-4`,
-      ]}
+      className={clsx([
+        `flex flex-row items-start space-x-3 border rounded border-gray-500 shadow-sm`,
+        isDeleted ? `py-2 pl-4` : `pt-4 pb-2 pl-4`,
+      ])}
       id={isENVDev ? commentId : undefined}
     >
       {!isDeleted && <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />}
-      <div tw="flex-1">
-        <div tw="flex flex-row items-start justify-between">
+      <div className="flex-1">
+        <div className="flex flex-row items-start justify-between">
           {!isDeleted && (
             <>
-              <div tw="flex flex-row items-start space-x-4">
-                <Text bold tw="leading-none">
+              <div className="flex flex-row items-start space-x-4">
+                <Text bold className="leading-none">
                   {name}
                 </Text>
                 <Text
                   variant="secondary"
                   as="time"
                   title={createdAt}
-                  tw="leading-none cursor-default"
+                  className="leading-none cursor-default"
                   dateTime={createdAt}
                 >
                   {dayjs(createdAt).fromNow()}
@@ -133,18 +133,18 @@ export function CommentCard({
               </div>
               <>
                 {userHasModeratePermission && (
-                  <Menu tw="-mt-2 mr-2">
+                  <Menu className="-mt-2 mr-2">
                     <Menu.Button>
                       <MoreVertical size={20} />
                     </Menu.Button>
                     <Menu.Items>
-                      <Menu.Item tw="space-x-1" disableAutoDismiss>
+                      <Menu.Item className="space-x-1" disableAutoDismiss>
                         <Popover
                           placement="topEnd"
                           buttonAs="button"
                           content={
-                            <div tw="flex flex-row items-center space-x-2">
-                              <Text size="sm" tw="w-max">
+                            <div className="flex flex-row items-center space-x-2">
+                              <Text size="sm" className="w-max">
                                 Are you sure?
                               </Text>
                               <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
@@ -153,9 +153,9 @@ export function CommentCard({
                             </div>
                           }
                         >
-                          <div css={[tw`flex flex-row items-center`, MenuItemPadding]}>
+                          <div className={clsx([`flex flex-row items-center`, MenuItemPadding])}>
                             <Trash2 size={16} />
-                            <span tw="ml-1">Delete</span>
+                            <span className="ml-1">Delete</span>
                           </div>
                         </Popover>
                       </Menu.Item>
@@ -166,11 +166,11 @@ export function CommentCard({
             </>
           )}
         </div>
-        <div tw="mt-1 mb-1.5">
+        <div className="mt-1 mb-1.5">
           <RichTextEditor initialValue={rteContent} readOnly />
         </div>
         {!isDeleted && (
-          <div tw="flex flex-row items-center space-x-6 transform -translate-x-2">
+          <div className="flex flex-row items-center space-x-6 -translate-x-2">
             <LikeAction
               aria-label="Like"
               likes={likes}
@@ -181,7 +181,7 @@ export function CommentCard({
               aria-label="Reply"
               color="blue"
               disabled={disabledReply}
-              icon={<MessageSquare size={20} tw="transform -scale-x-1" />}
+              icon={<MessageSquare size={20} className="-scale-x-1" />}
               onClick={handlePressReply}
             />
             <Link
@@ -203,11 +203,11 @@ export function CommentCard({
           </div>
         )}
         {showReplyEditor && (
-          <div tw="flex flex-col space-y-2 pr-6">
+          <div className="flex flex-col space-y-2 pr-6">
             <RichTextEditor
               placeholder={`What are your thoughts? (Basic markdown shortcuts supported)`}
               onSubmit={handleSubmitReply}
-              styles={{ editable: tw`bg-white`, root: tw`mt-2` }}
+              styles={{ editable: `bg-white`, root: `mt-2` }}
               isReply
               onClickDismiss={handleDimissRTE}
             />

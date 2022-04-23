@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { SignInButton } from '$/blocks/sign-in-button';
 import { UserMenu } from '$/blocks/user-menu';
@@ -13,24 +13,24 @@ import { SideMenu } from '../side-menu';
 
 export function Header(): JSX.Element {
   const { isSignIn } = useCurrentUser();
-  const styles = tw`ml-[22px]`;
+  const styles = `ml-[22px]`;
   return (
     <header
-      css={[
-        tw`w-full py-3 transition duration-150 shadow-sm relative sm:(sticky top-0 left-0) z-20`,
+      className={clsx(
+        `w-full py-3 transition duration-150 shadow-sm relative sm:sticky sm:top-0 sm:left-0 z-20`,
         bluredBg,
-      ]}
+      )}
     >
-      <div tw="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <section tw="flex flex-row items-center justify-between">
-          <div tw="flex items-center sm:hidden pl-3">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <section className="flex flex-row items-center justify-between">
+          <div className="flex items-center sm:hidden pl-3">
             <SideMenu>
               {isSignIn ? (
                 <SideMenu.Item>
                   <Link
                     size="lg"
                     href="/dashboard"
-                    css={[styles]}
+                    className={styles}
                     highlightPattern={/^\/dashboard/}
                   >
                     Dashboard
@@ -38,36 +38,39 @@ export function Header(): JSX.Element {
                 </SideMenu.Item>
               ) : (
                 <SideMenu.Item>
-                  <Link size="lg" href="/#pricing" css={[styles]} highlightPattern={/^\/#pricing/}>
+                  <Link
+                    size="lg"
+                    href="/#pricing"
+                    className={styles}
+                    highlightPattern={/^\/#pricing/}
+                  >
                     Pricing
                   </Link>
                 </SideMenu.Item>
               )}
               <SideMenu.Item>
-                <Link size="lg" href="/docs/index" css={[styles]} highlightPattern={/^\/docs/}>
+                <Link size="lg" href="/docs/index" className={styles} highlightPattern={/^\/docs/}>
                   Docs
                 </Link>
               </SideMenu.Item>
               <SideMenu.Item>
-                <Link size="lg" href="/blog" css={[styles]} highlightPattern={/^\/blog/}>
+                <Link size="lg" href="/blog" className={styles} highlightPattern={/^\/blog/}>
                   Blog
                 </Link>
               </SideMenu.Item>
               <SideMenu.Item>
-                <Link size="lg" href="https://github.com/devrsi0n/chirpy" css={[styles]}>
+                <Link size="lg" href="https://github.com/devrsi0n/chirpy" className={styles}>
                   GitHub
                 </Link>
               </SideMenu.Item>
             </SideMenu>
           </div>
-          <div tw="flex flex-row sm:(items-stretch justify-start)">
-            <div tw="flex flex-row items-center space-x-2">
+          <div className="flex flex-row sm:items-stretch sm:justify-start">
+            <div className="flex flex-row items-center space-x-2">
               <Logo showBadge />
             </div>
             <nav
-              css={[
-                tw`w-full hidden sm:(flex mb-0 pl-8 ml-8 border-l border-gray-500) flex-wrap items-center mb-5 space-x-8`,
-              ]}
+              className={`w-full hidden sm:flex sm:mb-0 sm:pl-8 sm:ml-8 sm:border-l sm:border-gray-500 flex-wrap items-center mb-5 space-x-8`}
             >
               {isSignIn ? (
                 <Link href="/dashboard" highlightPattern={/^\/dashboard/}>
@@ -87,7 +90,7 @@ export function Header(): JSX.Element {
               <Link href="https://github.com/devrsi0n/chirpy">GitHub</Link>
             </nav>
           </div>
-          <div tw="flex">
+          <div className="flex">
             {isSignIn ? (
               <>
                 <NotificationHub />

@@ -1,6 +1,6 @@
 import React from 'react';
 import FlipMove from 'react-flip-move';
-import 'twin.macro';
+
 
 import { Link } from '$/components/link';
 import { Tabs } from '$/components/tabs';
@@ -28,7 +28,7 @@ export default function SourceList(props: SourceListProps): JSX.Element {
       <Tabs
         cacheKey="analytics.source-list"
         initialValue="all"
-        leftItem={<h3 tw="font-bold text-gray-1100">Top Sources</h3>}
+        leftItem={<h3 className="font-bold text-gray-1100">Top Sources</h3>}
       >
         <Tabs.Item label="All" value="all">
           <AllSources {...props} />
@@ -138,7 +138,7 @@ class AllSources extends React.Component<AllSourcesProps> {
       <>
         {this.state.referrers && this.state.referrers.length > 0 ? (
           <>
-            <div css={labelContainer}>
+            <div className={labelContainer}>
               <span>Source</span>
               <div className="text-right">
                 <span className="inline-block w-20">{this.label()}</span>
@@ -261,7 +261,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
   renderList() {
     return this.state.referrers && this.state.referrers.length > 0 ? (
       <div className="flex flex-col flex-grow">
-        <div css={labelContainer}>
+        <div className={labelContainer}>
           <span>{UTM_TAGS[this.props.tab].label}</span>
           <div className="text-right">
             <span className="inline-block w-20">{this.label()}</span>

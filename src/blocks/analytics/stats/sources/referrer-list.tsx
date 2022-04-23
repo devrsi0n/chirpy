@@ -1,6 +1,6 @@
 import React from 'react';
 import FlipMove from 'react-flip-move';
-import 'twin.macro';
+
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
@@ -184,9 +184,8 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     if (this.state.referrers!.length > 0) {
       return (
         <div className="flex flex-col flex-grow">
-          <div css={labelContainer}>
+          <div className={labelContainer}>
             <span>Referrer</span>
-
             <div className="text-right">
               <span className="inline-block w-20">{this.label()}</span>
               {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
@@ -221,7 +220,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     return (
       <div className="relative p-4 bg-white rounded shadow-xl stats-item flex flex-col dark:bg-gray-825 mt-6 w-full">
         <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
-          <h3 css={cardTitle}>Top Referrers</h3>
+          <h3 className={cardTitle}>Top Referrers</h3>
           {this.state.loading && (
             <div className="mx-auto loading mt-44">
               <div></div>

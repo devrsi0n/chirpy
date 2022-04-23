@@ -3,8 +3,8 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { useIsUnmounting } from '$/hooks/use-is-unmounting';
 import { useLocalStorage } from '$/hooks/use-local-storage';
@@ -17,8 +17,8 @@ import { RTEValue } from './type';
 interface IBaseProps {
   onSubmit?: (value: RTEValue) => Promise<void>;
   styles?: {
-    root?: TwStyle;
-    editable?: TwStyle;
+    root?: string;
+    editable?: string;
   };
   readOnly?: boolean;
   isReply?: boolean;
@@ -76,24 +76,23 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   };
 
   return (
-    <section css={[styles?.root, !readOnly && tw`border border-gray-500 rounded`]}>
+    <section className={clsx(styles?.root, !readOnly && `border border-gray-500 rounded`)}>
       <EditorContent
         editor={editor}
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
-        tw="text-gray-1200 max-w-full! [.placeholder:first-child::before]:(content-[attr(data-placeholder)] text-gray-1000 float-left pointer-events-none h-0)"
-        className="prose"
-        css={[
+        className={clsx(
+          'prose text-gray-1200 max-w-full! [.placeholder:first-child::before]:(content-[attr(data-placeholder)] text-gray-1000 float-left pointer-events-none h-0)',
           !readOnly && [
-            tw`min-height[4em]! resize-y overflow-hidden px-2 rounded`,
+            `min-height[4em]! resize-y overflow-hidden px-2 rounded`,
             textInput,
             cardBg,
           ],
           styles?.editable,
-        ]}
+        )}
       />
       {!readOnly && editor && (
-        <Toolbar tw="flex flex-row justify-between" editor={editor}>
+        <Toolbar className="flex flex-row justify-between" editor={editor}>
           <MainButton
             disabled={editor.isEmpty}
             isLoading={isLoading}

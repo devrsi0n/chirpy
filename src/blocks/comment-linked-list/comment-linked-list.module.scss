@@ -1,0 +1,26 @@
+.commentList {
+  width: calc(100% - theme('spacing.16'));
+}
+
+$branchWidth: '2.4rem';
+$branchHeight: '2.0rem';
+
+.branch {
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: -$branchHeight;
+    left: branchWidth;
+    display: block;
+    width: branchWidth;
+    height: branchHeight;
+    content: '';
+    border-left-width: 1px;
+    @apply border-gray-500;
+  }
+
+  &:first-of-type:before {
+    display: none;
+  }
+}

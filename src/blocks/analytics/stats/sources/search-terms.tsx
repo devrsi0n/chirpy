@@ -1,5 +1,5 @@
 import React from 'react';
-import 'twin.macro';
+
 
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
@@ -147,7 +147,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
     if (this.state.searchTerms) {
       return (
         <React.Fragment>
-          <h3 css={cardTitle}>Search Terms</h3>
+          <h3 className={cardTitle}>Search Terms</h3>
           {this.renderList()}
           <MoreLink
             site={this.props.site}

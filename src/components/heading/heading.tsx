@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 export type AS = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
@@ -10,19 +10,19 @@ export type IHeadingProps = React.ComponentProps<'h1'> & {
   as?: AS;
 };
 
-const styles: Record<AS, TwStyle> = {
-  h1: tw`text-5xl tracking-tight`,
-  h2: tw`text-4xl tracking-tight`,
-  h3: tw`text-3xl tracking-tight`,
-  h4: tw`text-2xl`,
-  h5: tw`text-xl`,
-  h6: tw`text-lg`,
+const styles: Record<AS, string> = {
+  h1: `text-5xl tracking-tight`,
+  h2: `text-4xl tracking-tight`,
+  h3: `text-3xl tracking-tight`,
+  h4: `text-2xl`,
+  h5: `text-xl`,
+  h6: `text-lg`,
 };
 
 export function Heading(props: IHeadingProps): JSX.Element {
-  const { as: Component = 'h3', className = '', ...restProps } = props;
+  const { as: Component = 'h3', className, ...restProps } = props;
 
   return (
-    <Component {...restProps} css={[tw`text-gray-1200`, styles[Component]]} className={className} />
+    <Component {...restProps} className={clsx(`text-gray-1200`, styles[Component], className)} />
   );
 }

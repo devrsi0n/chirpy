@@ -1,6 +1,6 @@
 import PlusCircle from '@geist-ui/react-icons/plusCircle';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
@@ -76,14 +76,14 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <SiteLayout title="Dashboard">
-      <section tw="space-y-10">
-        <div tw="space-x-2 flex flex-row justify-between items-start">
+      <section className="space-y-10">
+        <div className="space-x-2 flex flex-row justify-between items-start">
           <PageTitle>Dashboard</PageTitle>
           <Button
             onClick={handleCreateProject}
             variant="solid"
             color="primary"
-            tw="space-x-1"
+            className="space-x-1"
             disabled={disableCreation}
           >
             <PlusCircle size={18} />
@@ -91,26 +91,26 @@ export default function Dashboard(): JSX.Element {
           </Button>
         </div>
         {projects?.length ? (
-          <div tw="flex flex-row">
-            <ul tw="space-y-6 flex-1" aria-label="Project list">
+          <div className="flex flex-row">
+            <ul className="space-y-6 flex-1" aria-label="Project list">
               {projects.map((project) => (
                 <li key={project.id}>
                   <ProjectCard project={project} onDeletedProject={fetchProjects} />
                 </li>
               ))}
             </ul>
-            <div tw="flex-1" />
+            <div className="flex-1" />
           </div>
         ) : projectLoading || userLoading ? (
           <Spinner />
         ) : (
-          <div tw="py-6">
+          <div className="py-6">
             <Text>No projects</Text>
           </div>
         )}
       </section>
       <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-        <form tw="flex flex-col w-80">
+        <form className="flex flex-col w-80">
           <TextField
             {...register('name', {
               required: { value: true, message: 'Name is required' },
@@ -125,7 +125,7 @@ export default function Dashboard(): JSX.Element {
             label="Name"
             errorMessage={errors.name}
             placeholder="swift"
-            tw="w-full"
+            className="w-full"
           />
           <TextField
             {...register('domain', {
@@ -147,15 +147,15 @@ export default function Dashboard(): JSX.Element {
             }
             errorMessage={errors.domain}
             placeholder="example.com"
-            tw="w-full"
+            className="w-full"
           />
         </form>
         <Dialog.Footer>
-          <Button onClick={handleCloseDialog} tw="w-full sm:w-auto">
+          <Button onClick={handleCloseDialog} className="w-full sm:w-auto">
             Cancel
           </Button>
           <Button
-            tw="w-full sm:w-auto"
+            className="w-full sm:w-auto"
             disabled={hasError}
             color="primary"
             variant="solid"

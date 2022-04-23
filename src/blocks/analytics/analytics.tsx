@@ -1,10 +1,9 @@
-import { Global } from '@emotion/react';
 import { useRouter } from 'next/router';
-import React from 'react';
-import 'twin.macro';
+import * as React from 'react';
 
 import { Heading } from '$/components/heading';
 
+import './analytics.scss';
 import Datepicker from './datepicker';
 import Filters from './filters';
 import { parseQuery } from './query';
@@ -15,7 +14,6 @@ import Locations from './stats/locations';
 import Pages from './stats/pages';
 import Sources from './stats/sources';
 import VisitorGraph from './stats/visitor-graph';
-import { analyticsStyles } from './styles';
 import { Timer } from './timer';
 import { Site } from './type';
 
@@ -37,7 +35,6 @@ export default function Realtime(props: RealtimeProps) {
   const navClass = props.site.embedded ? 'relative' : 'sticky';
   return (
     <>
-      <Global styles={analyticsStyles} />
       <div className="mb-12">
         <div id="stats-container-top"></div>
         <div
@@ -81,9 +78,9 @@ interface SiteHeaderProps {
 
 function SiteHeader({ site }: SiteHeaderProps): JSX.Element {
   return (
-    <section tw="flex flex-row items-center space-x-1 mr-4">
+    <section className="flex flex-row items-center space-x-1 mr-4">
       <SiteIcon name={site.domain} domain={site.domain} />
-      <Heading as="h3" tw="text-base font-bold">
+      <Heading as="h3" className="text-base font-bold">
         {site.domain}
       </Heading>
     </section>

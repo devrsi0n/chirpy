@@ -2,7 +2,7 @@ import Loader from '@geist-ui/react-icons/loader';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { BaseButton, Button } from '$/components/button';
 import { Card } from '$/components/card';
@@ -70,21 +70,21 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
   }
 
   return (
-    <Card as="section" key={project.id} tw="pt-4 space-y-4">
-      <div tw="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
+    <Card as="section" key={project.id} className="pt-4 space-y-4">
+      <div className="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
         <Heading as="h3">{project.name}</Heading>
-        <div tw="flex flex-row items-center space-x-2">
+        <div className="flex flex-row items-center space-x-2">
           <PageViewStats domain={project.domain} />
-          <Menu tw="mr-1">
+          <Menu className="mr-1">
             <Menu.Button ariaLabel="Show more project options">
-              <span tw="p-1">
+              <span className="p-1">
                 <MoreVertical size={20} />
               </span>
             </Menu.Button>
             <Menu.Items>
               <Menu.Item
                 onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
-                tw="space-x-1"
+                className="space-x-1"
               >
                 <Trash2 size={14} />
                 <span>Delete</span>
@@ -93,12 +93,12 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           </Menu>
         </div>
       </div>
-      <Text tw="px-6" variant="secondary">
+      <Text className="px-6" variant="secondary">
         {project.domain}
       </Text>
-      <div tw="px-6 flex flex-row space-x-2">
+      <div className="px-6 flex flex-row space-x-2">
         <Link href={`/theme/${project.domain}`} variant="plain" tabIndex={-1}>
-          <Button color="primary" shadow={false} tw="px-2 py-1">
+          <Button color="primary" shadow={false} className="px-2 py-1">
             Theme
           </Button>
         </Link>
@@ -106,14 +106,14 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       </div>
       {pages.length > 0 ? (
         <div>
-          <List tw="px-4">
+          <List className="px-4">
             {pages.map((page) => (
-              <List.Item key={page.id} css={[listHoverable]}>
+              <List.Item key={page.id} className={listHoverable}>
                 <Link
                   href={page.url}
                   title={page.title || page.url}
                   variant="plain"
-                  tw="inline-block max-w-xs overflow-ellipsis overflow-hidden whitespace-nowrap"
+                  className="inline-block max-w-xs overflow-ellipsis overflow-hidden whitespace-nowrap"
                 >
                   {page.title || page.url}
                 </Link>
@@ -124,20 +124,20 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             <BaseButton
               aria-expanded={isExpanded}
               onClick={handleClickExpand}
-              tw="text-primary-900 hover:(bg-primary-900 text-white) rounded px-2 py-1 ml-4"
+              className="text-primary-900 hover:bg-primary-900 hover:text-white rounded px-2 py-1 ml-4"
             >
               {!isExpanded ? 'Show more' : 'Show less'}
             </BaseButton>
           )}
         </div>
       ) : (
-        <Text tw="px-6" variant="secondary">
+        <Text className="px-6" variant="secondary">
           No page integrated
         </Text>
       )}
       <Divider />
-      <div tw="px-6 pb-4">
-        <Text tw="leading-none" size="sm" variant="secondary">
+      <div className="px-6 pb-4">
+        <Text className="leading-none" size="sm" variant="secondary">
           Created {dayjs(project.createdAt).fromNow()}
         </Text>
       </div>
@@ -145,7 +145,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         type="Alert"
         title={
           <>
-            Delete the project <span tw="font-bold">{deletingProjectName}</span>
+            Delete the project <span className="font-bold">{deletingProjectName}</span>
           </>
         }
         show={!!deletingProjectName}

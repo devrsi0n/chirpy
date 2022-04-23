@@ -8,7 +8,7 @@ import {
 } from 'next';
 import * as React from 'react';
 import superjson from 'superjson';
-import tw from 'twin.macro';
+
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
@@ -55,14 +55,14 @@ export default function CommentDetailsWidget(
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment details">
       <CommentContextProvider projectId={props.projectId}>
-        <div css={tw`flex flex-row justify-between items-center mb-4`}>
+        <div className="flex flex-row justify-between items-center mb-4">
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
-            <IconButton css={tw`transform translate-x-1`}>
+            <IconButton className="translate-x-1">
               <ArrowLeft size={20} />
             </IconButton>
           </Link>
           <Heading as="h4">
-            <span tw="font-bold">{comment?.user.name}</span>
+            <span className="font-bold">{comment?.user.name}</span>
             <span>{`'s comment details`}</span>
           </Heading>
           <UserMenu variant="Widget" />

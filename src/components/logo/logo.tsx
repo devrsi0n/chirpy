@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { getHostEnv } from '$/utilities/env';
 
@@ -15,16 +15,16 @@ export type LogoProps = {
   showBadge?: boolean;
 };
 
-const sizeWidth: Record<Size, TwStyle> = {
-  sm: tw`w-16`,
-  md: tw`w-24`,
-  lg: tw`w-32`,
+const sizeWidth: Record<Size, string> = {
+  sm: `w-16`,
+  md: `w-24`,
+  lg: `w-32`,
 };
 
-const sizeSpacing: Record<Size, TwStyle> = {
-  sm: tw`px-1`,
-  md: tw`px-2 py-1`,
-  lg: tw`px-3 py-2`,
+const sizeSpacing: Record<Size, string> = {
+  sm: `px-1`,
+  md: `px-2 py-1`,
+  lg: `px-3 py-2`,
 };
 
 export function Logo({
@@ -36,17 +36,16 @@ export function Logo({
 }: LogoProps): JSX.Element {
   return (
     <Link
-      className={className}
       href="/"
       aria-label="Logo of Chirpy"
       variant="plain"
-      tw="text-violet-900 relative"
+      className={clsx('text-violet-900 relative', className)}
       {...linkProps}
     >
       <LogoBadge showBadge={showBadge} />
       {/* Source Sans Pro, font weight 600 */}
       <svg
-        css={[sizeWidth[size], !hideSpacing && sizeSpacing[size]]}
+        className={clsx(sizeWidth[size], !hideSpacing && sizeSpacing[size])}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 282 91"
       >
@@ -70,21 +69,19 @@ function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
     }
   }, []);
 
+  const useBlueBg = badge !== 'Beta';
   if (!showBadge || !badge) {
     return <></>;
   }
   return (
     <Badge
-      css={posStyle}
-      {...(badge !== 'Beta' && {
+      className={clsx(`absolute -right-2 -top-3 leading-none`, useBlueBg && `-right-3`)}
+      {...(useBlueBg && {
         variant: 'solid',
         color: 'blue',
-        css: [posStyle, tw`-right-3`],
       })}
     >
       {badge}
     </Badge>
   );
 }
-
-const posStyle = tw`absolute -right-2 -top-3 leading-none`;

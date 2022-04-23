@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from './base-button';
 
@@ -23,6 +23,7 @@ export function ActionButton({
   color,
   activated,
   disabled,
+  className,
   ...restProps
 }: ActionButtonProps): JSX.Element {
   const Icon = icon;
@@ -30,46 +31,49 @@ export function ActionButton({
   return (
     <BaseButton
       {...restProps}
-      className="group"
-      css={[tw`flex flex-row items-center text-gray-1100`, disabled && tw`text-gray-900`]}
+      className={clsx(
+        'group flex flex-row items-center text-gray-1100',
+        disabled && `text-gray-900`,
+        className,
+      )}
     >
-      <span css={[tw`rounded-full p-2 group-hover:bg-opacity-10`, !disabled && iconStyle]}>
+      <span className={clsx(`rounded-full p-2 group-hover:bg-opacity-10`, !disabled && iconStyle)}>
         {Icon}
       </span>
-      {children && <span css={!disabled && childStyle}>{children}</span>}
+      {children && <span className={clsx(!disabled && childStyle)}>{children}</span>}
     </BaseButton>
   );
 }
 
 function getPinkClassName(activated: boolean | undefined): {
-  iconStyle: TwStyle[];
-  childStyle: TwStyle;
+  iconStyle: string;
+  childStyle: string;
 } {
-  const textStyle = activated ? tw`text-pink-900` : tw`group-hover:text-pink-900`;
+  const textStyle = activated ? `text-pink-900` : `group-hover:text-pink-900`;
   return {
-    iconStyle: [textStyle, tw`group-hover:bg-pink-300`],
-    childStyle: tw`group-hover:text-pink-900`,
+    iconStyle: clsx(textStyle, `group-hover:bg-pink-300`),
+    childStyle: `group-hover:text-pink-900`,
   };
 }
 
 function getBlueClassName(activated: boolean | undefined): {
-  iconStyle: TwStyle[];
-  childStyle: TwStyle;
+  iconStyle: string;
+  childStyle: string;
 } {
-  const textStyle = activated ? tw`text-blue-900` : tw`group-hover:text-blue-900`;
+  const textStyle = activated ? `text-blue-900` : `group-hover:text-blue-900`;
   return {
-    iconStyle: [textStyle, tw`group-hover:bg-blue-300`],
-    childStyle: tw`group-hover:text-blue-900`,
+    iconStyle: clsx(textStyle, `group-hover:bg-blue-300`),
+    childStyle: `group-hover:text-blue-900`,
   };
 }
 
 function getGreenClassName(activated: boolean | undefined): {
-  iconStyle: TwStyle[];
-  childStyle: TwStyle;
+  iconStyle: string;
+  childStyle: string;
 } {
-  const textStyle = activated ? tw`text-green-900` : tw`group-hover:text-green-900`;
+  const textStyle = activated ? `text-green-900` : `group-hover:text-green-900`;
   return {
-    iconStyle: [textStyle, tw`group-hover:bg-green-300`],
-    childStyle: tw`group-hover:text-green-900`,
+    iconStyle: clsx(textStyle, `group-hover:bg-green-300`),
+    childStyle: `group-hover:text-green-900`,
   };
 }

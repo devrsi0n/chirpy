@@ -1,5 +1,5 @@
 import React from 'react';
-import 'twin.macro';
+
 
 import { Tabs } from '$/components/tabs';
 
@@ -19,7 +19,7 @@ export default function Devices(props: DevicesProps): JSX.Element {
       <Tabs
         cacheKey="analytics.devices"
         initialValue="browser"
-        leftItem={<h3 tw="font-bold text-gray-1100">Devices</h3>}
+        leftItem={<h3 className="font-bold text-gray-1100">Devices</h3>}
       >
         <Tabs.Item label="Size" value="size">
           <ScreenSizes site={props.site} query={props.query} />

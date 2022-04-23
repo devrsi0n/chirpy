@@ -1,6 +1,5 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import * as React from 'react';
-import 'twin.macro';
 
 import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
@@ -12,29 +11,24 @@ import { Text } from '$/components/text';
 function Home(): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="">
-      <section tw="min-h-full flex flex-col items-center space-y-24">
-        <div tw="space-y-8">
-          <h1 tw="font-black sm:(text-center) text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
-            <span tw="text-transparent bg-clip-text bg-gradient-to-r from-primary-900 to-plum-900 inline-block">
+      <section className="min-h-full flex flex-col items-center space-y-24">
+        <div className="space-y-8">
+          <h1 className="font-black sm:text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-900 to-plum-900 inline-block">
               {strings.heroTitlePoint}
             </span>{' '}
             <span>{strings.heroTitle}</span>
           </h1>
-          <Text tw="sm:text-center" variant="secondary">
+          <Text className="sm:text-center" variant="secondary">
             {strings.heroDescription}
           </Text>
-          <div tw="flex sm:justify-center items-center space-x-6">
+          <div className="flex sm:justify-center items-center space-x-6">
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-              <Button
-                variant="solid"
-                color="primary"
-                className="group"
-                tw="space-x-1 hover:shadow-2xl"
-              >
+              <Button variant="solid" color="primary" className="group space-x-1 hover:shadow-2xl">
                 <span>{strings.callToAction.main}</span>
                 <ArrowRight
                   size="20px"
-                  tw="inline-block transition transform group-hover:translate-x-1"
+                  className="inline-block transition group-hover:translate-x-1"
                 />
               </Button>
             </Link>

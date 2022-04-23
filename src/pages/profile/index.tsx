@@ -4,7 +4,7 @@ import Save from '@geist-ui/react-icons/save';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import Twitter from '@geist-ui/react-icons/twitter';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
@@ -84,27 +84,27 @@ export default function Profile(): JSX.Element {
   if (!isSignIn && loading) {
     return (
       <ProfileContainer>
-        <Spinner tw="justify-center mt-20" />
+        <Spinner className="justify-center mt-20" />
       </ProfileContainer>
     );
   }
 
   return (
     <SiteLayout title={name || 'Profile'}>
-      <ProfileContainer tw="space-y-7">
+      <ProfileContainer className="space-y-7">
         <PageTitle>Profile</PageTitle>
-        <section tw="space-y-6">
-          <div tw="relative mt-1 w-full h-40 rounded-t flex justify-center items-end bg-gradient-to-r from-primary-900 to-plum-900">
+        <section className="space-y-6">
+          <div className="relative mt-1 w-full h-40 rounded-t flex justify-center items-end bg-gradient-to-r from-primary-900 to-plum-900">
             {avatar && (
               <Avatar
                 src={avatar}
                 size="xl"
-                tw="absolute transform translate-y-1/2"
+                className="absolute translate-y-1/2"
                 alt={`Avatar of ${name}`}
               />
             )}
           </div>
-          <div tw="pt-4 flex flex-row justify-between items-start">
+          <div className="pt-4 flex flex-row justify-between items-start">
             <div>
               {isEditMode ? (
                 <TextField
@@ -119,12 +119,12 @@ export default function Profile(): JSX.Element {
               )}
               {username && <Text title="Username, can't edit">@{username}</Text>}
             </div>
-            <div tw="flex flex-row space-x-2">
+            <div className="flex flex-row space-x-2">
               {isEditMode && (
                 <Popover
                   content={
-                    <div tw="flex flex-row items-center space-x-2">
-                      <Text tw="w-max">Your unsaved content will lost, are you sure?</Text>
+                    <div className="flex flex-row items-center space-x-2">
+                      <Text className="w-max">Your unsaved content will lost, are you sure?</Text>
                       <Button size="sm" onClick={handleClickDiscard}>
                         Confirm
                       </Button>
@@ -132,11 +132,11 @@ export default function Profile(): JSX.Element {
                   }
                 >
                   <Trash2 size={16} />
-                  <span tw="ml-1">Discard</span>
+                  <span className="ml-1">Discard</span>
                 </Popover>
               )}
               <Button
-                tw="space-x-1"
+                className="space-x-1"
                 onClick={handleClickButton}
                 variant="solid"
                 color="primary"
@@ -152,7 +152,7 @@ export default function Profile(): JSX.Element {
             <TextField {...register('website')} label="Website" prefixNode="https://" />
           ) : (
             website && (
-              <Link variant="solid" href={website} tw="space-x-2 flex flex-row w-fit">
+              <Link variant="solid" href={website} className="space-x-2 flex flex-row w-fit">
                 <Link2 />
                 <span>{website}</span>
               </Link>
@@ -165,7 +165,7 @@ export default function Profile(): JSX.Element {
               <Link
                 variant="solid"
                 href={`https://twitter.com/${twitterUserName}`}
-                tw="space-x-2 flex flex-row items-center w-fit"
+                className="space-x-2 flex flex-row items-center w-fit"
               >
                 <Twitter size={22} />
                 <span>@{twitterUserName}</span>

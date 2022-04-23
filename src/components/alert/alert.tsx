@@ -1,6 +1,6 @@
 import X from '@geist-ui/react-icons/x';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { IconButton } from '../button';
 
@@ -19,15 +19,14 @@ export function Alert(props: AlertProps): JSX.Element {
         <div />
       ) : (
         <div
-          className="group"
-          css={[
-            tw`flex flex-row justify-center items-center py-2 px-4 rounded space-x-2`,
+          className={clsx(
+            'group flex flex-row justify-center items-center py-2 px-4 rounded space-x-2',
             typeStyles[props.type],
-          ]}
+          )}
         >
-          <p tw="text-base leading-tight pl-6 pr-2">{props.children}</p>
+          <p className="text-base leading-tight pl-6 pr-2">{props.children}</p>
           <IconButton
-            tw="invisible group-hover:(visible)"
+            className="invisible group-hover:visible"
             onClick={() => setHidden(true)}
             aria-label="Dismiss"
           >
@@ -39,6 +38,6 @@ export function Alert(props: AlertProps): JSX.Element {
   );
 }
 
-const typeStyles: Record<AlertType, TwStyle> = {
-  warn: tw`bg-yellow-300 text-yellow-1100`,
+const typeStyles: Record<AlertType, string> = {
+  warn: `bg-yellow-300 text-yellow-1100`,
 };

@@ -6,8 +6,8 @@ import Link2 from '@geist-ui/react-icons/link2';
 import List from '@geist-ui/react-icons/list';
 import UnderlineIcon from '@geist-ui/react-icons/underline';
 import { Editor } from '@tiptap/react';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { BaseButtonProps, BaseButton } from '$/components/button';
 import { Select } from '$/components/select';
@@ -28,12 +28,12 @@ export function BaseMarkButton({
 }: BaseRTEButtonProps): JSX.Element {
   return (
     <BaseButton
-      css={[
-        tw`p-1.5 rounded text-gray-1100`,
+      className={clsx(
+        `p-1.5 rounded text-gray-1100`,
         listHoverableColor,
-        isActive && tw`bg-primary-300 text-primary-1000`,
+        isActive && `bg-primary-300 text-primary-1000`,
         className,
-      ]}
+      )}
       {...restProps}
     >
       {children}
@@ -127,7 +127,12 @@ export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
   };
   const value = getActiveBlockFormat(editor) || 0;
   return (
-    <Select<HeadingValue> value={value} name={headingList[value]} onChange={handleChange} tw="w-36">
+    <Select<HeadingValue>
+      value={value}
+      name={headingList[value]}
+      onChange={handleChange}
+      className="w-36"
+    >
       {headingList.map((item, index) => (
         <Select.Option value={index} key={item}>
           {item}

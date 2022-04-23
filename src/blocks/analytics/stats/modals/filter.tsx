@@ -1,8 +1,8 @@
 // @ts-nocheck
-import { Menu, Transition } from '@headlessui/react';
 import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
+import { Menu, Transition } from '@headlessui/react';
+import clsx from 'clsx';
 import React, { Fragment } from 'react';
-import 'twin.macro';
 
 import * as api from '../../analytics-api';
 import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';
@@ -256,12 +256,13 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   renderFilterTypeSelector(filterName: string) {
-    const itemStyles = (active: boolean) => [
-      active
-        ? tw`bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100`
-        : tw`text-gray-700 dark:text-gray-200`,
-      tw`cursor-pointer block px-4 py-2 text-sm`,
-    ];
+    const itemStyles = (active: boolean) =>
+      clsx(
+        active
+          ? `bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100`
+          : `text-gray-700 dark:text-gray-200`,
+        `cursor-pointer block px-4 py-2 text-sm`,
+      );
     return (
       <Menu as="div" className="relative inline-block text-left">
         {({ open }) => (
@@ -280,11 +281,11 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
               show={open}
               as={Fragment}
               enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
               leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
             >
               <Menu.Items
                 static
@@ -295,7 +296,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                     {({ active }) => (
                       <span
                         onClick={() => this.setFilterType(filterName, 'is')}
-                        css={itemStyles(active)}
+                        className={itemStyles(active)}
                       >
                         is
                       </span>
@@ -306,7 +307,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                       {({ active }) => (
                         <span
                           onClick={() => this.setFilterType(filterName, 'is_not')}
-                          css={itemStyles(active)}
+                          className={itemStyles(active)}
                         >
                           is not
                         </span>

@@ -1,8 +1,7 @@
 import Chart from 'chart.js/auto';
-import { useTheme } from 'next-themes';
+import clsx from 'clsx';
 import { NextRouter } from 'next/router';
 import React from 'react';
-import tw, { theme } from 'twin.macro';
 
 import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
@@ -328,21 +327,21 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
     const formattedComparison = numberFormatter(Math.abs(comparison));
 
     if (comparison > 0) {
-      const color = name === 'Bounce rate' ? tw`text-red-900` : tw`text-green-900`;
+      const color = name === 'Bounce rate' ? `text-red-900` : `text-green-900`;
       return (
-        <span tw="text-xs text-gray-1200">
-          <span css={[color, tw`font-bold`]}>&uarr;</span> {formattedComparison}%
+        <span className="text-xs text-gray-1200">
+          <span className={clsx(color, `font-bold`)}>&uarr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison < 0) {
       const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-900';
       return (
-        <span tw="text-xs">
-          <span css={[color, tw`font-bold`]}>&darr;</span> {formattedComparison}%
+        <span className="text-xs">
+          <span className={clsx(color, `font-bold`)}>&darr;</span> {formattedComparison}%
         </span>
       );
     } else if (comparison === 0) {
-      return <span tw="text-xs text-gray-1100">&#12336; N/A</span>;
+      return <span className="text-xs text-gray-1100">&#12336; N/A</span>;
     }
   }
 
@@ -373,7 +372,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
 
       return (
         <div className={`px-8 w-1/2 my-4 lg:w-auto ${border}`} key={stat.name}>
-          <div tw="text-xs font-bold tracking-wide text-gray-1100 uppercase whitespace-nowrap">
+          <div className="text-xs font-bold tracking-wide text-gray-1100 uppercase whitespace-nowrap">
             {stat.name}
           </div>
           <div className="flex items-center justify-between my-1 whitespace-nowrap">
@@ -552,8 +551,10 @@ export default function VisitorGraph(props: VisitorGraphProps) {
   return (
     <LazyLoader onVisible={onVisible}>
       <div
-        className="relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph"
-        css={loading && tw`z-20`}
+        className={clsx(
+          'relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph',
+          loading && `z-20`,
+        )}
       >
         {loading && (
           <div className="graph-inner">

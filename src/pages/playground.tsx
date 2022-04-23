@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
@@ -10,7 +10,7 @@ export default function PlayGround(): JSX.Element {
   return (
     <SiteLayout title="Playground">
       <PageTitle>Playground</PageTitle>
-      <div data-chirpy-comment tw="my-16" />
+      <div data-chirpy-comment className="my-16" />
       <Script
         src="/bootstrap/comment.js"
         strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}

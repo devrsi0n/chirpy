@@ -1,5 +1,4 @@
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Button } from '$/components/button';
 import { Code } from '$/components/code';
@@ -17,7 +16,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
   return (
     <div>
       <Button
-        tw="px-2 py-1"
+        className="px-2 py-1"
         shadow={false}
         onClick={() => setShowDialog(true)}
         aria-label="Integrate guide"
@@ -29,7 +28,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         show={showDialog}
         title={
           <div>
-            <Heading as="h2" tw="mb-3 leading-none">
+            <Heading as="h2" className="mb-3 leading-none">
               Get Started with Chirpy Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">
@@ -38,13 +37,13 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
           </div>
         }
         onClose={() => setShowDialog(false)}
-        styles={{ content: tw`max-w-2xl sm:(px-14 py-10)` }}
+        styles={{ content: `max-w-2xl sm:(px-14 py-10)` }}
       >
-        <div tw="">
-          <Heading as="h3" tw="mb-3">
+        <div className="">
+          <Heading as="h3" className="mb-3">
             Usage on any website
           </Heading>
-          <div tw="space-y-2">
+          <div className="space-y-2">
             <Text variant="secondary">
               To embed the comment widget on your website, first add the script tag with your
               project id to the HTML:

@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import 'twin.macro';
+
 
 import { Logo } from '../logo';
 
@@ -11,7 +11,7 @@ export default {
 
 const Template: ComponentStory<LogoType> = (args: any) => {
   return (
-    <div tw="flex flex-row justify-center">
+    <div className="flex flex-row justify-center">
       <Logo {...args} />
     </div>
   );

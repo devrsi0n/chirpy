@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
@@ -37,7 +37,7 @@ export default function Redirecting(): JSX.Element {
   }, 30_000);
   return (
     <SiteLayout title="Redirecting">
-      <Spinner tw="mt-24 justify-center" />
+      <Spinner className="mt-24 justify-center" />
     </SiteLayout>
   );
 }

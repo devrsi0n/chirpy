@@ -1,5 +1,4 @@
 import * as React from 'react';
-import 'twin.macro';
 
 import { ConfirmUserFields } from '$/blocks/confirm-user-fields';
 import { SiteLayout } from '$/blocks/layout';
@@ -34,16 +33,16 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
 
 function FullFilled(): JSX.Element {
   return (
-    <section tw="flex flex-col items-center justify-center space-y-12">
-      <div tw="text-center space-y-2">
-        <Heading as="h2" tw="tracking-tight">
+    <section className="flex flex-col items-center justify-center space-y-12">
+      <div className="text-center space-y-2">
+        <Heading as="h2" className="tracking-tight">
           Welcome on board 🎉
         </Heading>
         <Text variant="secondary">
           Feel free to create a project, integrate a widget in your site, or just explore!
         </Text>
       </div>
-      <div tw="space-x-4">
+      <div className="space-x-4">
         <Button variant="solid" color="primary">
           <Link href="/dashboard" variant="plain">
             Dashboard
@@ -61,9 +60,9 @@ function FullFilled(): JSX.Element {
 
 function NotFullFilled() {
   return (
-    <div tw="flex flex-col items-center space-y-8 md:(flex-row items-center space-y-0 space-x-8)">
-      <div tw="space-y-3">
-        <Heading as="h2" tw="tracking-tight">
+    <div className="flex flex-col items-center space-y-8 md:flex-row md:items-center md:space-y-0 md:space-x-8">
+      <div className="space-y-3">
+        <Heading as="h2" className="tracking-tight">
           Welcome on board
         </Heading>
         <Text variant="secondary">Just fill this form to get started</Text>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Heading } from '$/components/heading';
 import { SubmitHandler } from '$/hooks/use-create-a-comment';
@@ -26,15 +25,15 @@ export function CommentTrees({
 }: CommentTreesProps): JSX.Element {
   const commentCount = getCommentCount(comments);
   return (
-    <div css={tw`space-y-4`}>
-      <div tw="flex flex-row justify-between items-center">
-        <Heading as="h3" tw="text-2xl">
+    <div className="space-y-4">
+      <div className="flex flex-row justify-between items-center">
+        <Heading as="h3" className="text-2xl">
           {formatTitle(commentCount)}
         </Heading>
         <UserMenu variant="Widget" />
       </div>
-      <div css={tw`space-y-7`}>
-        <div css={tw`space-y-2`}>
+      <div className="space-y-7">
+        <div className="space-y-2">
           <RichTextEditor
             placeholder={
               rtePlaceholder || `What are your thoughts? (Basic markdown shortcuts supported)`

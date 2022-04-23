@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { useLocalStorage } from '$/hooks/use-local-storage';
 
@@ -73,15 +73,15 @@ export function Tabs({
   return (
     <TabsContext.Provider value={initialValue}>
       <section {...restProps} className={className}>
-        <header tw="flex flex-row items-center justify-between">
+        <header className="flex flex-row items-center justify-between">
           <div>{leftItem}</div>
-          <nav tw="space-x-1">
+          <nav className="space-x-1">
             {tabs.map((item) => (
               <BaseButton
-                css={[
-                  tw`hover:text-primary-900 p-1 text-xs font-bold text-gray-1100`,
-                  selfValue === item.value ? tw`text-primary-1000 underline` : tw``,
-                ]}
+                className={clsx(
+                  `hover:text-primary-900 p-1 text-xs font-bold text-gray-1100`,
+                  selfValue === item.value && `text-primary-1000 underline`,
+                )}
                 key={item.value}
                 onClick={() => handleClickTab(item)}
               >

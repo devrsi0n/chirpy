@@ -1,5 +1,5 @@
 import React from 'react';
-import 'twin.macro';
+
 
 import { Link } from '$/components/link';
 
@@ -116,7 +116,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     if (this.state.list && this.state.list.length > 0) {
       return (
         <>
-          <div css={labelContainer}>
+          <div className={labelContainer}>
             <span>{this.props.keyLabel}</span>
             <span className="text-right">
               <span className="inline-block w-20">{this.label()}</span>

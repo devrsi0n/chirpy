@@ -1,15 +1,15 @@
 import * as colors from '@radix-ui/colors';
+import clsx from 'clsx';
 import merge from 'lodash/merge';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { CommentTrees } from '$/blocks/comment-trees';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { IconButton } from '$/components/button';
-import { Heading } from '$/components/heading';
+import { Heading, IHeadingProps } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { WidgetThemeProvider, useWidgetTheme } from '$/contexts/theme-context';
@@ -100,24 +100,24 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
   };
 
   return (
-    <section tw="px-2">
-      <PageTitle tw="mb-10">Theme of {props.project?.name}</PageTitle>
-      <div tw="flex flex-row">
-        <aside tw="flex-1 border-r pr-4 space-y-11">
-          <div tw="space-y-6">
+    <section className="px-2">
+      <PageTitle className="mb-10">Theme of {props.project?.name}</PageTitle>
+      <div className="flex flex-row">
+        <aside className="flex-1 border-r pr-4 space-y-11">
+          <div className="space-y-6">
             <BoldHeading as="h4">Theme Editor</BoldHeading>
             <Text variant="secondary">
               Click to change variants then we will save your theme automatically.
             </Text>
           </div>
-          <div tw="space-y-4">
+          <div className="space-y-4">
             <BoldHeading>Colors</BoldHeading>
             <Text>Primary</Text>
-            <div tw="flex flex-row items-center space-x-2">
+            <div className="flex flex-row items-center space-x-2">
               <Popover
                 buttonAs={IconButton}
                 content={
-                  <ul tw="flex flex-row space-x-3">
+                  <ul className="flex flex-row space-x-3">
                     {Object.entries(colorOptions).map(([key, color]) => (
                       <li key={color[activeTheme][900]}>
                         <IconButton
@@ -125,7 +125,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                           aria-label={`Color ${key}`}
                         >
                           <span
-                            tw="inline-block w-6 h-6 rounded-full"
+                            className="inline-block w-6 h-6 rounded-full"
                             style={{ background: color[activeTheme][900] }}
                           />
                         </IconButton>
@@ -136,11 +136,11 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
               >
                 <span
                   aria-label="Primary color selector"
-                  tw="inline-block w-6 h-6 rounded-full bg-primary-900"
+                  className="inline-block w-6 h-6 rounded-full bg-primary-900"
                 />
               </Popover>
               <Text
-                tw="px-2 leading-none mb-2"
+                className="px-2 leading-none mb-2"
                 variant="secondary"
                 aria-label="Selected color"
                 size="sm"
@@ -151,14 +151,14 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
             </div>
           </div>
         </aside>
-        <section tw="flex-2 pl-6">
-          <div tw="space-y-5 mb-4">
+        <section className="flex-2 pl-6">
+          <div className="space-y-5 mb-4">
             <BoldHeading as="h4">Preview</BoldHeading>
             <Text variant="secondary">
               {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
             </Text>
           </div>
-          <div role="separator" tw="w-20 bg-gray-300 my-5 height[1px]" />
+          <div role="separator" className="w-20 bg-gray-300 my-5 height[1px]" />
           <div className={THEME_WIDGET_CLS}>
             <CommentTrees
               comments={comments as any}
@@ -303,4 +303,6 @@ const comments = [
   },
 ];
 
-const BoldHeading = tw(Heading)`font-bold`;
+const BoldHeading = ({ className, ...restProps }: IHeadingProps) => (
+  <Heading {...restProps} className={clsx('font-bold', className)} />
+);

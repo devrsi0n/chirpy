@@ -3,9 +3,9 @@ import LogIn from '@geist-ui/react-icons/logIn';
 import LogOut from '@geist-ui/react-icons/logOut';
 import Monitor from '@geist-ui/react-icons/monitor';
 import User from '@geist-ui/react-icons/user';
+import clsx from 'clsx';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Avatar } from '$/components/avatar';
 import { Link, LinkProps } from '$/components/link';
@@ -33,8 +33,8 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
       </Menu.Button>
       <Menu.Items>
         {name && (
-          <div tw="px-6 py-2">
-            <Text tw="flex justify-start" bold>
+          <div className="px-6 py-2">
+            <Text className="flex justify-start" bold>
               {name}
             </Text>
           </div>
@@ -44,9 +44,9 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           (isSignIn ? (
             <></>
           ) : (
-            <Menu.Item css={itemStyle} onClick={handleSignIn}>
+            <Menu.Item className={itemStyle} onClick={handleSignIn}>
               <LogIn size={14} />
-              <p tw="w-max">Sign in</p>
+              <p className="w-max">Sign in</p>
             </Menu.Item>
           ))}
         <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
@@ -72,7 +72,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item
-              css={itemStyle}
+              className={itemStyle}
               onClick={() => {
                 localStorage.removeItem(LOG_IN_SUCCESS_KEY);
                 signOut({
@@ -81,7 +81,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               }}
             >
               <LogOut size={14} />
-              <span tw="w-max">Log out</span>
+              <span className="w-max">Log out</span>
             </Menu.Item>
           </>
         )}
@@ -90,8 +90,8 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   );
 }
 
-function MenuLink(props: LinkProps): JSX.Element {
-  return <Link {...props} css={itemStyle} />;
+function MenuLink({ className, ...restProps }: LinkProps): JSX.Element {
+  return <Link {...restProps} className={clsx(itemStyle, className)} />;
 }
 
-const itemStyle = tw`justify-start space-x-1`;
+const itemStyle = `justify-start space-x-1`;

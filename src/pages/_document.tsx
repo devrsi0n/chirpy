@@ -1,4 +1,3 @@
-import { extractCritical } from '@emotion/server';
 import Document, {
   Html,
   Head,
@@ -7,14 +6,12 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
-import 'twin.macro';
 
-class MyDocument extends Document<ReturnType<typeof extractCritical>> {
+class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
     const initialProps = await Document.getInitialProps(ctx);
     const page = await ctx.renderPage();
-    const styles = extractCritical(page.html);
-    return { ...initialProps, ...page, ...styles };
+    return { ...initialProps, ...page };
   }
 
   render(): JSX.Element {
@@ -39,10 +36,6 @@ and open-source Disqus alternate."
             href="/fonts/Inter/Inter-roman.var.woff2"
             as="font"
             crossOrigin="anonymous"
-          />
-          <style
-            data-emotion-css={this.props.ids.join(' ')}
-            dangerouslySetInnerHTML={{ __html: this.props.css }}
           />
         </Head>
         <body>

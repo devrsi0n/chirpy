@@ -3,7 +3,7 @@ import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { Button } from '$/components/button';
 import { Card } from '$/components/card';
@@ -70,7 +70,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     router.push('/dashboard');
   });
   return (
-    <Card as="form" tw="py-6 px-12 w-fit rounded shadow-md">
+    <Card as="form" className="py-6 px-12 w-fit rounded shadow-md">
       <TextField
         {...register('email', {
           required: { value: true, message: 'Email is required' },
@@ -103,7 +103,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         label={
           <span>
             Your username
-            <Text as="small" variant="secondary" tw="block text-sm">
+            <Text as="small" variant="secondary" className="block text-sm">
               Used to be mentioned by people
             </Text>
           </span>
@@ -111,7 +111,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.username}
       />
       <Button
-        tw="space-x-1 w-full"
+        className="space-x-1 w-full"
         onClick={handleClickSubmit}
         disabled={hasError || loading}
         aria-label="Save"
@@ -121,7 +121,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {isSaved ? (
           <Check size={20} />
         ) : loading ? (
-          <Loader tw="animate-spin text-gray-400" size={20} />
+          <Loader className="animate-spin text-gray-400" size={20} />
         ) : (
           <Send size={20} />
         )}

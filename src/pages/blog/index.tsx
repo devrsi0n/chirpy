@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 import * as React from 'react';
-import 'twin.macro';
+
 
 import { SiteLayout } from '$/blocks/layout';
 import { Heading } from '$/components/heading';
@@ -19,9 +19,9 @@ export type BlogHomeProps = {
 export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
   return (
     <SiteLayout title="Blog">
-      <div tw="min-h-full">
-        <Heading tw="my-10 font-bold">Blog</Heading>
-        <section tw="flex flex-row py-10 min-h-full space-x-2">
+      <div className="min-h-full">
+        <Heading className="my-10 font-bold">Blog</Heading>
+        <section className="flex flex-row py-10 min-h-full space-x-2">
           {directories.map((dir) => {
             if (!dir.route) {
               return <></>;

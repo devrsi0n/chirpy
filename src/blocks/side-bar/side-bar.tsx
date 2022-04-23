@@ -1,7 +1,7 @@
 import ChevronRight from '@geist-ui/react-icons/chevronRight';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
@@ -25,7 +25,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   const header = (
     <>
       {title && hasValidDirectories && (
-        <Heading as="h4" tw="font-bold px-1 pb-4 text-gray-1100">
+        <Heading as="h4" className="font-bold px-1 pb-4 text-gray-1100">
           {title}
         </Heading>
       )}
@@ -34,26 +34,28 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   return (
     <div>
       <aside
-        tw="w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:(w-64 pb-16)"
-        className={className}
+        className={clsx(
+          'w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:(w-64 pb-16)',
+          className,
+        )}
       >
         {header}
         {hasValidDirectories && (
-          <div tw="w-full overflow-y-auto">
+          <div className="w-full overflow-y-auto">
             <Directories directories={directories} />
           </div>
         )}
       </aside>
-      <aside tw="w-full sm:(hidden)">
+      <aside className="w-full sm:hidden">
         <SideMenu
           position="br"
-          styles={{ items: tw`w-full overflow-y-auto space-y-2 flex-1 pl-6` }}
+          styles={{ items: `w-full overflow-y-auto space-y-2 flex-1 pl-6` }}
           fixed
         >
           <SideMenu.Item>{header}</SideMenu.Item>
           {directories.map((dir) => (
             <SideMenu.Item key={getId(dir)}>
-              <div tw="flex flex-col items-stretch w-full">
+              <div className="flex flex-col items-stretch w-full">
                 <DirectoryItem directory={dir} />
               </div>
             </SideMenu.Item>
@@ -66,9 +68,9 @@ export function SideBar({ directories, title, className }: SideBarProps) {
 
 function Directories({ directories }: Pick<SideBarProps, 'directories'>): JSX.Element {
   return (
-    <List tw="space-y-2 flex-1">
+    <List className="space-y-2 flex-1">
       {directories.map((dir) => (
-        <List.Item key={getId(dir)} hideMarker tw="flex flex-col items-stretch w-full">
+        <List.Item key={getId(dir)} hideMarker className="flex flex-col items-stretch w-full">
           <DirectoryItem directory={dir} />
         </List.Item>
       ))}
@@ -81,11 +83,11 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   const [isOpened, setIsOpened] = React.useState(false);
   const isActive = isButtonActive(dir, router.asPath);
   const listMarker = dir.route ? (
-    <span css={[tw`rounded-full inline-block w-1.5 h-1.5 mr-3.5 bg-current hover:bg-gray-1200`]} />
+    <span className="rounded-full inline-block w-1.5 h-1.5 mr-3.5 bg-current hover:bg-gray-1200" />
   ) : (
     <ChevronRight
       size={18}
-      css={[tw`transform transition -ml-1.5 mr-2`, isOpened && tw`rotate-90`]}
+      className={clsx(`transition -ml-1.5 mr-2`, isOpened && `rotate-90`)}
       onClick={(e) => {
         e.stopPropagation();
         setIsOpened((prev) => !prev);
@@ -97,17 +99,24 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
       {dir.route ? (
         <Link
           href={dir.route}
-          css={[clickableItemStyle, router.asPath === dir.route && activeStyle]}
+          className={clsx(
+            'capitalize',
+            clickableItemStyle,
+            router.asPath === dir.route && activeStyle,
+          )}
           hideUnderline
           variant="secondary"
-          tw="capitalize"
         >
           {listMarker}
           <span>{dir.title}</span>
         </Link>
       ) : (
         <button
-          css={[tw`capitalize text-gray-1100`, clickableItemStyle, isActive && activeStyle]}
+          className={clsx(
+            `capitalize text-gray-1100`,
+            clickableItemStyle,
+            isActive && activeStyle,
+          )}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
           aria-label="Expand children routes"
@@ -117,8 +126,8 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         </button>
       )}
       {dir.children && isOpened && (
-        <div tw="flex flex-row items-stretch">
-          <div tw="ml-0.5 w-3.5 border-l" />
+        <div className="flex flex-row items-stretch">
+          <div className="ml-0.5 w-3.5 border-l" />
           <Directories directories={dir.children} />
         </div>
       )}
@@ -126,8 +135,8 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   );
 }
 
-const clickableItemStyle = [tw`transition flex flex-row items-center justify-start`, listHoverable];
-const activeStyle = tw`text-gray-1200 font-bold`;
+const clickableItemStyle = [`transition flex flex-row items-center justify-start`, listHoverable];
+const activeStyle = `text-gray-1200 font-bold`;
 
 function isButtonActive(dir: Directory, pathname: string) {
   if (dir.route === pathname) {

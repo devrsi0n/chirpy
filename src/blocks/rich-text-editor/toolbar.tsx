@@ -1,6 +1,6 @@
 import { Editor } from '@tiptap/react';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Divider } from '$/components/divider';
 import { cardBg } from '$/styles/common';
@@ -13,14 +13,18 @@ export type ToolbarProps = React.PropsWithChildren<
   }
 >;
 
-export function Toolbar({ editor, children, ...divProps }: ToolbarProps): JSX.Element {
+export function Toolbar({ editor, children, className, ...divProps }: ToolbarProps): JSX.Element {
   return (
     <div
-      css={[tw`px-1 py-2 leading-none border-t border-gray-500 rounded-b`, cardBg]}
+      className={clsx(
+        `px-1 py-2 leading-none border-t border-gray-500 rounded-b`,
+        cardBg,
+        className,
+      )}
       {...divProps}
     >
-      <div tw="space-x-1 flex flex-row items-center">
-        <div tw="hidden xs:(flex flex-row space-x-1)">
+      <div className="space-x-1 flex flex-row items-center">
+        <div className="hidden xs:flex xs:flex-row xs:space-x-1">
           <HeadingButton editor={editor} />
           <Divider vertical />
         </div>
@@ -28,7 +32,7 @@ export function Toolbar({ editor, children, ...divProps }: ToolbarProps): JSX.El
         <MarkButton editor={editor} format="italic" />
         <MarkButton editor={editor} format="underline" />
         <MarkButton editor={editor} format="code" />
-        <div tw="hidden sm:(flex flex-row space-x-1)">
+        <div className="hidden sm:flex sm:flex-row sm:space-x-1">
           <Divider vertical />
           <BlockButton editor={editor} format="link" />
           <BlockButton editor={editor} format="bulletList" />

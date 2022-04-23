@@ -1,6 +1,5 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import { css, theme } from 'twin.macro';
 
 import { CommentLeafType } from '$/types/widget';
 
@@ -35,10 +34,10 @@ function CommentTree({
         onClickLikeAction={onClickLikeAction}
         onSubmitReply={onSubmitReply}
       />
-      <div tw="flex flex-col items-end">
+      <div className="flex flex-col items-end">
         <ul
-          css={css`
-            width: calc(100% - ${theme('spacing.16')});
+          className={`
+            w-[calc(100% - theme('spacing.16'))];
           `}
         >
           <AnimatePresence>

@@ -1,5 +1,5 @@
 import React from 'react';
-import 'twin.macro';
+
 
 import { Tabs } from '$/components/tabs';
 
@@ -18,7 +18,7 @@ export default function Pages(props: PagesProps): JSX.Element {
       <Tabs
         cacheKey="analytics.pages"
         initialValue="entry-pages"
-        leftItem={<h3 tw="font-bold text-gray-1100">Pages</h3>}
+        leftItem={<h3 className="font-bold text-gray-1100">Pages</h3>}
       >
         <Tabs.Item label="Entry Pages" value="entry-pages">
           <PageRank

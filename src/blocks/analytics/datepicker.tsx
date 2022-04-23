@@ -1,9 +1,9 @@
-import { Transition } from '@headlessui/react';
 import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
+import { Transition } from '@headlessui/react';
+import clsx from 'clsx';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
-import tw from 'twin.macro';
 
 import {
   shiftDays,
@@ -326,8 +326,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
         to={{ from: false, to: false, period, ...opts }}
         onClick={this.close}
         query={query}
-        className={`${boldClass} `}
-        css={listItem}
+        className={clsx(boldClass, listItem)}
       >
         {text}
         {/* @ts-ignore */}
@@ -371,7 +370,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
               <span
                 onClick={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
                 onKeyPress={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
-                css={listItem}
+                className={listItem}
                 tabIndex={0}
                 role="button"
                 aria-haspopup="true"
@@ -434,11 +433,11 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
           show={this.state.open}
           as={Fragment}
           enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
           leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
         >
           {this.renderDropDownContent()}
         </Transition>
@@ -460,4 +459,11 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
 export default DatePicker;
 
-const ListSeparatator = tw.div`border-t border-gray-200 dark:border-gray-900`;
+function ListSeparatator({ className, ...restProps }: React.ComponentProps<'div'>): JSX.Element {
+  return (
+    <div
+      {...restProps}
+      className={clsx('border-t border-gray-200 dark:border-gray-900', className)}
+    />
+  );
+}

@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
-import tw, { css } from 'twin.macro';
 
 import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
@@ -38,19 +38,19 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
   }, []);
   const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
-    <div tw="flex flex-row h-full" className="full-bleed">
-      <div tw="flex-1 flex flex-col justify-center items-center">
-        <div tw="py-7 w-full sm:(mx-2 w-64) md:(w-96)">
-          <div tw="pb-8">
+    <div className="flex flex-row h-full full-bleed">
+      <div className="flex-1 flex flex-col justify-center items-center">
+        <div className="py-7 w-full sm:mx-2 sm:w-64 md:w-96">
+          <div className="pb-8">
             <Logo size="lg" hideSpacing />
           </div>
-          <div tw="space-y-2">
-            <Heading as="h2" tw="font-black mt-5">
+          <div className="space-y-2">
+            <Heading as="h2" className="font-black mt-5">
               {title}
             </Heading>
             {subtitle}
           </div>
-          <div tw="space-y-2 mt-8">
+          <div className="space-y-2 mt-8">
             {error && <Alert type="warn">{error}</Alert>}
             {authOptions.map((option) => (
               <Button
@@ -60,16 +60,16 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                     callbackUrl: `${location.origin}/auth/redirecting`,
                   })
                 }
-                tw="w-full px-0 md:(justify-start pl-20)"
+                className="w-full px-0 md:justify-start md:pl-20"
                 size="lg"
               >
                 <option.icon />
-                <span tw="ml-2 text-left">Sign in with {option.name}</span>
+                <span className="ml-2 text-left">Sign in with {option.name}</span>
               </Button>
             ))}
           </div>
           {!isProd && <EmailSignIn />}
-          <Text tw="py-3" size="sm" variant="secondary">
+          <Text className="py-3" size="sm" variant="secondary">
             By clicking the buttons above, you acknowledge that you have read and understood, and
             agree to Chirpy
             {`'s `}
@@ -79,7 +79,11 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
           {!isProd && <CredentialsSignInForm />}
         </div>
       </div>
-      <div css={[tw`flex-1 hidden sm:block`, bannerStyle]}></div>
+      <div
+        className={clsx(
+          `flex-1 hidden sm:block w-full h-[100vh] min-h-[200px] bg-[url('/images/sign-in/banner.jpg')_center_no-repeat] bg-cover`,
+        )}
+      ></div>
     </div>
   );
 }
@@ -97,7 +101,13 @@ function EmailSignIn(): JSX.Element {
   };
   return (
     <div>
-      <TextField name="Email" type="text" label="Email" onChange={handleEmailChange} tw="w-full" />
+      <TextField
+        name="Email"
+        type="text"
+        label="Email"
+        onChange={handleEmailChange}
+        className="w-full"
+      />
       <Button onClick={handleSubmit}>Submit</Button>
     </div>
   );
@@ -123,19 +133,11 @@ function CredentialsSignInForm(): JSX.Element {
   );
   return (
     <form onSubmit={handleClickSubmit}>
-      <TextField {...register('username')} type="text" label="Username" tw="w-full" />
-      <TextField {...register('password')} type="password" label="Password" tw="w-full" />
-      <Button type="submit" tw="w-full">
+      <TextField {...register('username')} type="text" label="Username" className="w-full" />
+      <TextField {...register('password')} type="password" label="Password" className="w-full" />
+      <Button type="submit" className="w-full">
         Submit
       </Button>
     </form>
   );
 }
-
-const bannerStyle = css`
-  width: 100%;
-  height: 100vh;
-  min-height: 200px;
-  background: url('/images/sign-in/banner.jpg') center no-repeat;
-  background-size: cover;
-`;
