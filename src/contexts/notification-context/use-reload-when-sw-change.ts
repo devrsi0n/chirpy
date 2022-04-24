@@ -9,7 +9,9 @@ import { checkServiceWorkerCompatibility } from './utilities';
 export function useReloadWhenSwChange() {
   const { showToast } = useToast();
   React.useEffect(() => {
-    checkServiceWorkerCompatibility();
+    if (!checkServiceWorkerCompatibility()) {
+      return;
+    }
 
     let refreshing = false;
     // When the user asks to refresh the UI, we'll need to reload the window
@@ -22,7 +24,9 @@ export function useReloadWhenSwChange() {
   }, []);
 
   React.useEffect(() => {
-    checkServiceWorkerCompatibility();
+    if (!checkServiceWorkerCompatibility()) {
+      return;
+    }
 
     navigator.serviceWorker.register('/sw.js').then((registration) => {
       // Track updates to the Service Worker.
@@ -33,7 +37,7 @@ export function useReloadWhenSwChange() {
       }
       registration.update();
 
-      onNewServiceWorker(registration, () => {
+      handleNewServiceWorker(registration, () => {
         showToast({
           type: 'info',
           title: 'New version available',
@@ -56,7 +60,7 @@ export function useReloadWhenSwChange() {
   }, [showToast]);
 }
 
-function onNewServiceWorker(registration: ServiceWorkerRegistration, callback: () => void) {
+function handleNewServiceWorker(registration: ServiceWorkerRegistration, callback: () => void) {
   if (registration.waiting) {
     // SW is waiting to activate. Can occur if multiple clients open and
     // one of the clients is refreshed.

@@ -61,12 +61,15 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     [didRegister, registerNotification, didDeny],
   );
   React.useEffect(() => {
-    checkNotificationCompatibility();
+    if (!checkNotificationCompatibility()) {
+      return;
+    }
     // Register the service worker on first load
     if (!didRegister && Notification.permission === 'granted') {
       // Only register once on whole page
       registerNotificationSubscription().then(() => setDidRegister(true));
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
