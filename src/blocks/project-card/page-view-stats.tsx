@@ -43,9 +43,9 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
           tabIndex={-1}
           tooltip={'PV of last 7 days, click to view analytics details'}
           aria-label={'View analytics'}
-          className="flex flex-row items-end space-x-1"
+          className="!flex flex-row items-end space-x-1"
         >
-          <Text size="xl" className="leading-none" aria-label="Page views">
+          <Text size="xl" className="!leading-none" aria-label="Page views">
             {pageviews}
           </Text>
           <span

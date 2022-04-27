@@ -1,7 +1,6 @@
 import Bell from '@geist-ui/react-icons/bell';
 import * as React from 'react';
 
-
 import { Badge } from '$/components/badge';
 import { Heading } from '$/components/heading';
 import { Menu } from '$/components/menu';
@@ -31,7 +30,7 @@ export function NotificationHub(): JSX.Element {
       <Menu>
         <Menu.Button className={styles.menuButton}>
           <Bell size={22} />
-          {hasUnreadNotifications && <Badge className="bg-red-900 absolute top-1 right-1" />}
+          {hasUnreadNotifications && <Badge className="!bg-red-900 absolute top-1 right-1" />}
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>
           <Heading as="h4" className="font-bold px-5 py-3">

@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  plugins: ['@typescript-eslint', 'prettier', 'unicorn', '@emotion', 'jest'],
+  plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
@@ -26,9 +26,6 @@ module.exports = {
     'prettier/prettier': 'warn',
 
     '@next/next/no-img-element': 'off',
-
-    // '@emotion/jsx-import': 'error',
-    '@emotion/pkg-renaming': 'error',
 
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',

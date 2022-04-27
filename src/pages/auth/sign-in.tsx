@@ -8,7 +8,7 @@ export default function SignInPage(): JSX.Element {
     <SiteLayout
       title="Sign in"
       styles={{
-        container: `mx-2 md:(mx-0) py-0`,
+        container: `mx-2 md:mx-0 py-0`,
       }}
       hideFooter
       hideHeader

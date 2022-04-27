@@ -7,15 +7,15 @@ export const bluredBg = `
   ${cardBg} ${blured}
 `;
 
-export const border = `border outline-none focus-visible:(border-primary-900)`;
+export const border = `border outline-none focus-visible:border-primary-900`;
 
-export const listHoverableColor = `transition hover:(bg-primary-400 text-primary-1100)`;
-export const listHoverable = ` px-2 py-1 rounded ${listHoverableColor}`;
+export const listHoverableColor = `transition hover:bg-primary-400 hover:text-primary-1100`;
+export const listHoverable = `px-2 py-1 rounded ${listHoverableColor}`;
 
-export const ring = `focus-visible:(outline-none ring-2 ring-offset-bg ring-offset-2 ring-primary-700)`;
+export const ring = `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-bg focus-visible:ring-offset-2 focus-visible:ring-primary-700`;
 
 export const textInput = `placeholder-gray-900 bg-gray-100 dark:bg-gray-400`;
 
-export const textInputError = `border-red-700 focus-visible:(border-red-800)`;
+export const textInputError = `border-red-700 focus-visible:border-red-800`;
 
 export const gradient = `bg-gradient-to-r from-primary-800 to-plum-800`;

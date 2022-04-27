@@ -67,7 +67,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        className={`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-5 flex-row)`}
+        className={`flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-5 xs:flex-row`}
       >
         <Text variant="secondary" size="sm">
           &copy; {new Date().getFullYear()} Chirpy Labs. All rights reserved.

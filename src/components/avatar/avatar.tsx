@@ -48,4 +48,4 @@ export function Avatar({
   );
 }
 
-const bg = `bg-grayl-100/60 dark:(bg-grayd-100/30)`;
+const bg = `bg-grayl-100/60 dark:bg-grayd-100/30`;

@@ -116,6 +116,7 @@ function MenuItem({
   children,
   disableAutoDismiss,
   onClick,
+  className,
   ...asProps
 }: MenuItemProps): JSX.Element {
   const child = disableAutoDismiss ? (
@@ -134,6 +135,7 @@ function MenuItem({
               itemStyle,
               spacingItem,
               !disableAutoDismiss && MenuItemPadding,
+              className,
             )}
             {...asProps}
           >

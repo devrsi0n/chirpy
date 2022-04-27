@@ -63,7 +63,7 @@ export function Dialog({
               <div className="inline-block shadow-md relative">
                 <div
                   className={clsx(
-                    `max-w-lg flex flex-row px-6 pt-4 pb-0 sm:(px-8 pt-6 pb-0) space-x-4`,
+                    `max-w-lg flex flex-row px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 space-x-4`,
                     cardBg,
                     !footer ? `rounded-xl` : `rounded-t-xl`,
                     styles.content,

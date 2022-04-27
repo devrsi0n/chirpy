@@ -37,7 +37,7 @@ export function NotificationItem({
     <Menu.Item
       key={message.id}
       className={clsx(
-        'px-5 pt-3 pb-0 mt-0 rounded-none hover:(rounded) flex-col items-start text-left',
+        'px-5 pt-3 pb-0 mt-0 rounded-none hover:rounded flex-col items-start !text-left',
         !message.read && `bg-gray-200`,
       )}
       onClickCapture={(e: any): void => {
