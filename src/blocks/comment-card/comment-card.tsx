@@ -106,10 +106,10 @@ export function CommentCard({
       animate={containerAnimate}
       variants={shakeVariants}
       onAnimationComplete={() => setContainerAnimate('stop')}
-      className={clsx([
+      className={clsx(
         `flex flex-row items-start space-x-3 border rounded border-gray-500 shadow-sm`,
         isDeleted ? `py-2 pl-4` : `pt-4 pb-2 pl-4`,
-      ])}
+      )}
       id={isENVDev ? commentId : undefined}
     >
       {!isDeleted && <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />}
@@ -153,7 +153,7 @@ export function CommentCard({
                             </div>
                           }
                         >
-                          <div className={clsx([`flex flex-row items-center`, MenuItemPadding])}>
+                          <div className={clsx(`flex flex-row items-center`, MenuItemPadding)}>
                             <Trash2 size={16} />
                             <span className="ml-1">Delete</span>
                           </div>
@@ -205,7 +205,7 @@ export function CommentCard({
         {showReplyEditor && (
           <div className="flex flex-col space-y-2 pr-6">
             <RichTextEditor
-              placeholder={`What are your thoughts? (Basic markdown shortcuts supported)`}
+              placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
               onSubmit={handleSubmitReply}
               styles={{ editable: `bg-white`, root: `mt-2` }}
               isReply

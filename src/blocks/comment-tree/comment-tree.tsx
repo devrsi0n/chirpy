@@ -6,6 +6,7 @@ import { CommentLeafType } from '$/types/widget';
 import { CommentBranch } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
+import treeStyles from './comment-tree.module.scss';
 
 export type CommentProps = {
   comment: CommentLeafType;
@@ -35,11 +36,7 @@ function CommentTree({
         onSubmitReply={onSubmitReply}
       />
       <div className="flex flex-col items-end">
-        <ul
-          className={`
-            w-[calc(100% - theme('spacing.16'))];
-          `}
-        >
+        <ul className={treeStyles.commentList}>
           <AnimatePresence>
             {comment.replies?.map((reply: $TsFixMe) => (
               <m.div

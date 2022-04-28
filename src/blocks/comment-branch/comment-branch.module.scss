@@ -11,7 +11,7 @@
   &:before {
     position: absolute;
     top: 0;
-    left: -var(--comment-branch-width);
+    left: calc(-1 * var(--comment-branch-width));
     display: block;
     width: var(--comment-branch-width);
     height: var(--comment-branch-height);
