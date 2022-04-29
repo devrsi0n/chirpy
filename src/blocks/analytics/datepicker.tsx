@@ -5,6 +5,7 @@ import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
+import styles from './analytics.module.scss';
 import {
   shiftDays,
   shiftMonths,
@@ -56,7 +57,7 @@ function RenderArrow({ query, site, period, prevDate, nextDate }: ArrowProps) {
         disabled={disabledLeft}
       >
         <svg
-          className="feather h-4 w-4"
+          className={clsx('h-4 w-4', styles.feather)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"
@@ -76,7 +77,7 @@ function RenderArrow({ query, site, period, prevDate, nextDate }: ArrowProps) {
         disabled={disabledRight}
       >
         <svg
-          className="feather h-4 w-4"
+          className={clsx('h-4 w-4', styles.feather)}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="none"

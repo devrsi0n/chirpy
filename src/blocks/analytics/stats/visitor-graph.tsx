@@ -7,6 +7,7 @@ import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../analytics-api';
+import styles from '../analytics.module.scss';
 import LazyLoader from '../lazy-loader';
 import numberFormatter, { durationFormatter } from '../number-formatter';
 import { navigateToQuery } from '../query';
@@ -450,7 +451,10 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
         return (
           <a href={endpoint} download onClick={this.downloadSpinner.bind(this)}>
             <svg
-              className="absolute w-4 h-5 text-gray-700 feather dark:text-gray-300 -top-8 right-8"
+              className={clsx(
+                'absolute w-4 h-5 text-gray-700 dark:text-gray-300 -top-8 right-8',
+                styles.feather,
+              )}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"

@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
 
-import './analytics.scss';
+import styles from './analytics.module.scss';
 import Datepicker from './datepicker';
 import Filters from './filters';
 import { parseQuery } from './query';
@@ -38,11 +39,13 @@ export default function Realtime(props: RealtimeProps) {
       <div className="mb-12">
         <div id="stats-container-top"></div>
         <div
-          className={`${navClass} top-0 sm:py-3 py-2 z-10 ${
-            props.stuck && !props.site.embedded
-              ? 'fullwidth-shadow bg-gray-50 dark:bg-gray-850'
-              : ''
-          }`}
+          className={clsx(
+            'top-0 sm:py-3 py-2 z-10',
+            navClass,
+            props.stuck &&
+              !props.site.embedded &&
+              clsx(styles['fullwidth-shadow'], 'bg-gray-50 dark:bg-gray-850'),
+          )}
         >
           <div className="items-center w-full flex">
             <div className="flex items-center w-full">

@@ -1,9 +1,11 @@
 // @ts-nocheck
+import clsx from 'clsx';
 import React from 'react';
 
 import { Link } from '$/components/link';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import numberFormatter from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -73,7 +75,13 @@ class ModalTable extends React.Component {
 
           <div className="my-4 border-b border-gray-300 dark:border-gray-500"></div>
           <main className="modal__content">
-            <table className="w-max overflow-x-auto md:w-full table-striped table-fixed">
+            <table
+              className={clsx(
+                'w-max overflow-x-auto md:w-full',
+                styles['table-striped'],
+                styles['table-fixed'],
+              )}
+            >
               <thead>
                 <tr>
                   <th

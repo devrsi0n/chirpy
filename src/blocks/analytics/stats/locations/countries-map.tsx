@@ -4,10 +4,10 @@ import Datamap from 'datamaps';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -112,8 +112,8 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
     const highlightFill = this.props.isDarkMode ? '#374151' : '#F5F5F5';
     const borderColor = this.props.isDarkMode ? '#1f2937' : '#dae1e7';
     const highlightBorderColor = this.props.isDarkMode
-      ? theme('colors.primary.700')
-      : theme('colors.primary.900');
+      ? `var(--tw-colors-primary-700)`
+      : `var(--tw-colors-primary-900)`;
 
     this.map = new Datamap({
       element: document.querySelector('#map-container'),
@@ -132,7 +132,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
           }
           const pluralizedLabel = data.numberOfThings === 1 ? label.slice(0, -1) : label;
           return [
-            '<div class="hoverinfo dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">',
+            `<div class="${styles['hoverinfo']} dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">`,
             '<strong>',
             geo.properties.name,
             ' </strong>',

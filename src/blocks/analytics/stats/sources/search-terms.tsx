@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import React from 'react';
-
 
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import numberFormatter from '../../number-formatter';
 import { cardTitle } from '../../styles';
@@ -161,7 +162,12 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
 
   render() {
     return (
-      <div className="stats-item flex flex-col relative bg-white dark:bg-gray-825 shadow-xl rounded p-4 mt-6 w-full">
+      <div
+        className={clsx(
+          'flex flex-col relative bg-white dark:bg-gray-825 shadow-xl rounded p-4 mt-6 w-full',
+          styles['stats-item'],
+        )}
+      >
         {this.state.loading && (
           <div className="loading mt-44 mx-auto">
             <div></div>
