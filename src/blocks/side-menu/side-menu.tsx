@@ -9,7 +9,6 @@ import { useClickOutside } from '$/hooks/use-click-outside';
 import { ssrMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
-import styles from './side-menu.module.scss';
 
 export type SideMenuProps = {
   position?: 'tl' | 'br';
@@ -66,6 +65,15 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
     };
   }, [position]);
   const [isAnimationEnd, setIsAnimationEnd] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.removeProperty('overflow');
+    }
+  }, [isOpen]);
+
   return (
     <m.nav
       initial={false}
@@ -77,7 +85,6 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
         containerStyles,
         isAnimationEnd && `h-auto`,
         fixed ? `fixed` : `absolute sm:fixed`,
-        isOpen && styles.frozeScroll,
       )}
       ref={containerRef}
       onAnimationStart={(definition) => definition === 'open' && setIsAnimationEnd(false)}
