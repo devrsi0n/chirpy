@@ -4,7 +4,6 @@ import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
-import 'tailwindcss/tailwind.css';
 
 import { ToastProvider } from '$/components/toast';
 import { CurrentUserProvider } from '$/contexts/current-user-context';

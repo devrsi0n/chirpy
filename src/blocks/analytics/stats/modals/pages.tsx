@@ -133,7 +133,7 @@ class PagesModal extends React.Component {
   renderLoading() {
     if (this.state.loading) {
       return (
-        <div className="loading my-16 mx-auto">
+        <div className={clsx('my-16 mx-auto', styles.loading)}>
           <div></div>
         </div>
       );

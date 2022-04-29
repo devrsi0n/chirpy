@@ -244,7 +244,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: darkTheme ? theme('colors.grayd.1200') : undefined,
+              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
             },
             grid: {
               // @ts-ignore
@@ -260,7 +260,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
                 // @ts-ignore
                 return dateFormatter(graphData.interval)(this.getLabelForValue(val));
               },
-              color: darkTheme ? theme('colors.grayd.1200') : undefined,
+              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
             },
           },
         },
@@ -562,7 +562,7 @@ export default function VisitorGraph(props: VisitorGraphProps) {
       >
         {loading && (
           <div className="graph-inner">
-            <div className="pt-24 mx-auto loading sm:pt-32 md:pt-48">
+            <div className={clsx('pt-24 mx-auto sm:pt-32 md:pt-48', styles.loading)}>
               <div></div>
             </div>
           </div>

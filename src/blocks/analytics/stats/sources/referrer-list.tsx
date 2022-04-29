@@ -228,7 +228,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
           <h3 className={cardTitle}>Top Referrers</h3>
           {this.state.loading && (
-            <div className="mx-auto loading mt-44">
+            <div className={clsx('mt-44 mx-auto', styles.loading)}>
               <div></div>
             </div>
           )}

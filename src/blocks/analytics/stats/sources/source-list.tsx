@@ -1,12 +1,13 @@
+import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
-
 
 import { Link } from '$/components/link';
 import { Tabs } from '$/components/tabs';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -287,7 +288,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     return (
       <>
         {this.state.loading && (
-          <div className="mx-auto loading mt-44">
+          <div className={clsx('mt-44 mx-auto', styles.loading)}>
             <div></div>
           </div>
         )}

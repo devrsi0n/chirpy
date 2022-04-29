@@ -161,7 +161,7 @@ class ReferrerDrilldownModal extends React.Component<
   renderBody() {
     if (this.state.loading) {
       return (
-        <div className="loading mt-32 mx-auto">
+        <div className={clsx('mt-32  mx-auto', styles.loading)}>
           <div></div>
         </div>
       );

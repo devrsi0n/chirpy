@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import * as d3 from 'd3';
 // @ts-ignore
 import Datamap from 'datamaps';
@@ -132,7 +133,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
           }
           const pluralizedLabel = data.numberOfThings === 1 ? label.slice(0, -1) : label;
           return [
-            `<div class="${styles['hoverinfo']} dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">`,
+            `<div class="${styles['hoverinfo']} bg-gray-100 dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">`,
             '<strong>',
             geo.properties.name,
             ' </strong>',
@@ -191,7 +192,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
     return (
       <LazyLoader onVisible={this.onVisible}>
         {this.state.loading && (
-          <div className="mx-auto my-32 loading">
+          <div className={clsx('mx-auto my-32', styles.loading)}>
             <div></div>
           </div>
         )}

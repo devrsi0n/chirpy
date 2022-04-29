@@ -169,7 +169,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
         )}
       >
         {this.state.loading && (
-          <div className="loading mt-44 mx-auto">
+          <div className={clsx('mt-44 mx-auto', styles.loading)}>
             <div></div>
           </div>
         )}

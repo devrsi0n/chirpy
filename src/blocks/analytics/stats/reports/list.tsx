@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import React from 'react';
-
 
 import { Link } from '$/components/link';
 
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -135,7 +136,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     return (
       <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
         {this.state.loading && (
-          <div className="mx-auto loading mt-44">
+          <div className={clsx('mt-44 mx-auto', styles.loading)}>
             <div></div>
           </div>
         )}

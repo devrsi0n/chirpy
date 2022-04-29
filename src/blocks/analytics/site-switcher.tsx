@@ -147,7 +147,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
     if (this.state.loading) {
       return (
         <div className="px-4 py-6">
-          <div className="loading sm mx-auto">
+          <div className={clsx('mx-auto', styles.loading, styles.sm)}>
             <div></div>
           </div>
         </div>

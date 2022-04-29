@@ -154,7 +154,7 @@ class GoogleKeywordsModal extends React.Component {
 
   renderBody() {
     return this.state.loading ? (
-      <div className="loading mt-32 mx-auto">
+      <div className={clsx('mt-32 mx-auto', styles.loading)}>
         <div></div>
       </div>
     ) : (
