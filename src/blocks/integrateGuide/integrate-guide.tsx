@@ -37,7 +37,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
           </div>
         }
         onClose={() => setShowDialog(false)}
-        styles={{ content: `max-w-2xl sm:px-14 sm:py-10` }}
+        styles={{ content: `!max-w-2xl sm:!px-14 sm:!py-10` }}
       >
         <div className="">
           <Heading as="h3" className="mb-3">

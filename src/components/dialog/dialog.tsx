@@ -79,7 +79,7 @@ export function Dialog({
                   <div className="overflow-hidden text-left align-middle">
                     {showDismissButton && (
                       <IconButton
-                        className="p-0.5 absolute right-3 top-3 bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700"
+                        className="p-0.5 !absolute right-3 top-3 bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700"
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >
