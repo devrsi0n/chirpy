@@ -4,21 +4,30 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   testMatch: ['**/src/**/*.test.ts?(x)'],
   transform: {
-    '\\.[jt]sx?$': 'babel-jest',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/scripts/jest/fileTransformer.js',
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
+    // '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/scripts/jest/fileTransformer.js',
   },
   moduleNameMapper: {
+    // Handle CSS imports (with CSS modules)
+    // https://jestjs.io/docs/webpack#mocking-css-modules
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+
+    // Handle CSS imports (without CSS modules)
+    '^.+\\.(css|sass|scss)$': '<rootDir>/scripts/jest/style-mock.js',
+
+    // Handle image imports
+    // https://jestjs.io/docs/webpack#handling-static-assets
+    '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/scripts/jest/file-mock.js`,
+
+    // Handle aliases
     '^\\$/(.*)': '<rootDir>/src/$1',
-    '\\.(css|less|sass|scss|svg)$': 'identity-obj-proxy',
   },
-  coveragePathIgnorePatterns: [
-    'node_modules',
-    '<rootDir>/src/__tests__/',
-    '<rootDir>/src/types/',
-    '<rootDir>/src/server/types/',
-    '<rootDir>/src/graphql/generated/',
-    '<rootDir>/src/server/graphql/generated/',
-  ],
+  transformIgnorePatterns: ['/node_modules/', '^.+\\.module\\.(css|sass|scss)$'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   moduleDirectories: ['node_modules', 'src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!./**/*.stories.{ts,tsx}'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '!./**/*.stories.{ts,tsx}',
+    '!**/node_modules/**',
+  ],
 };

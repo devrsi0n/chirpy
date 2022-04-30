@@ -2,11 +2,10 @@
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
-import 'tailwindcss/tailwind.css';
 
-import { useThemeVariables } from '$/contexts/theme-context/use-theme-variables';
-import { loadFeatures } from '$/pages/_app';
-import '$/styles/global-styles';
+import { useThemeVariables } from '../src/contexts/theme-context/use-theme-variables';
+import { loadFeatures } from '../src/pages/_app';
+import '../src/styles/global-styles.scss';
 
 export const decorators = [
   urqlDecorator,
