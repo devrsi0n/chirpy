@@ -1,6 +1,6 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
-const babel = require('../.babelrc');
+// const babel = require('../.babelrc');
 
 module.exports = {
   framework: '@storybook/react',
@@ -25,10 +25,10 @@ module.exports = {
     });
     return config;
   },
-  babel: (options) => ({
-    ...options,
-    ...babel,
-  }),
+  // babel: (options) => ({
+  //   ...options,
+  //   ...babel,
+  // }),
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
