@@ -4,7 +4,6 @@ import Send from '@geist-ui/react-icons/send';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-
 import { Button } from '$/components/button';
 import { Card } from '$/components/card';
 import { Text } from '$/components/text';

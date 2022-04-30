@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { Heading } from '$/components/heading';
 import { Image } from '$/components/image';

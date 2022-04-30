@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as React from 'react';
 
-
 import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';

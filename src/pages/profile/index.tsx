@@ -5,7 +5,6 @@ import Trash2 from '@geist-ui/react-icons/trash2';
 import Twitter from '@geist-ui/react-icons/twitter';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { Avatar } from '$/components/avatar';

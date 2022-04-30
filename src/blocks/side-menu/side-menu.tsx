@@ -6,6 +6,7 @@ import * as React from 'react';
 
 import { IconButton } from '$/components/button';
 import { useClickOutside } from '$/hooks/use-click-outside';
+import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { ssrMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
@@ -66,7 +67,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
   }, [position]);
   const [isAnimationEnd, setIsAnimationEnd] = React.useState(false);
 
-  React.useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -113,8 +114,8 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
 SideMenu.Item = SideMenuItem;
 
 const posStyles = {
-  tl: [`left-0`, `absolute top-[18px] left-[18px]`],
-  br: [`right-0`, `fixed bottom-[18px] right-[18px]`],
+  tl: [`left-0`, `!absolute top-[18px] left-[18px]`],
+  br: [`right-0`, `!fixed bottom-[18px] right-[18px]`],
 };
 
 type SideMenuItemsProps = {

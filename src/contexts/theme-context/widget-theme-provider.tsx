@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-
 import { Theme } from '$/types/theme.type';
 
 import { siteTheme } from './site-theme';

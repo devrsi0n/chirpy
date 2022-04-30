@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-
 import { Logo } from '../logo';
 
 type LogoType = typeof Logo;

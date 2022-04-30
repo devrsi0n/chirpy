@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';

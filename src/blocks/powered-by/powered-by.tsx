@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-
 import { Logo } from '$/components/logo';
 import { Text } from '$/components/text';
 

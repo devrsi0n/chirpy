@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';

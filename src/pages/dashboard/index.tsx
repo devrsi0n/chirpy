@@ -1,7 +1,6 @@
 import PlusCircle from '@geist-ui/react-icons/plusCircle';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { ProjectCard } from '$/blocks/project-card';

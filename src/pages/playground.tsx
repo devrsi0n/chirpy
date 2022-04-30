@@ -1,7 +1,6 @@
 import Script from 'next/script';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { isENVDev } from '$/server/utilities/env';

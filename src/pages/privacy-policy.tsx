@@ -2,7 +2,6 @@ import { GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';

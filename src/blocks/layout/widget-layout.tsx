@@ -1,7 +1,6 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-
 import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
 
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';

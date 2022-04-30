@@ -3,7 +3,6 @@ import { MDXRemote } from 'next-mdx-remote';
 import Script from 'next/script';
 import * as React from 'react';
 
-
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { Image } from '$/components/image';

@@ -7,7 +7,6 @@ import {
 } from 'next';
 import * as React from 'react';
 import superjson from 'superjson';
-
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
