@@ -1,10 +1,11 @@
+import clsx from 'clsx';
 import React from 'react';
-import 'twin.macro';
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
@@ -131,15 +132,15 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
     const { viewport, loading, goals } = this.state;
     if (loading) {
       return (
-        <div className="mx-auto my-2 loading">
+        <div className={clsx('my-2 mx-auto', styles.loading)}>
           <div></div>
         </div>
       );
     } else if (goals) {
       return (
         <React.Fragment>
-          <h3 css={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
-          <div css={labelContainer}>
+          <h3 className={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
+          <div className={labelContainer}>
             <span>Goal</span>
             <div className="text-right">
               <span className="inline-block w-20">Uniques</span>

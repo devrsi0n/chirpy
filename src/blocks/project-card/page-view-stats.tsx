@@ -1,6 +1,6 @@
 import ArrowUp from '@geist-ui/react-icons/arrowUp';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
@@ -43,17 +43,19 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
           tabIndex={-1}
           tooltip={'PV of last 7 days, click to view analytics details'}
           aria-label={'View analytics'}
-          tw="flex flex-row items-end space-x-1"
+          className="!flex flex-row items-end space-x-1"
         >
-          <Text size="xl" tw="leading-none" aria-label="Page views">
+          <Text size="xl" className="!leading-none" aria-label="Page views">
             {pageviews}
           </Text>
           <span
-            tw="flex flex-row items-end"
-            css={grow > 0 ? tw`text-green-900` : tw`text-yellow-1000`}
+            className={clsx(
+              'flex flex-row items-end',
+              grow > 0 ? `text-green-900` : `text-yellow-1000`,
+            )}
           >
-            <ArrowUp size={14} css={[grow <= 0 && tw`transform rotate-180`]} />
-            <Text size="xs" tw="leading-none" style={{ color: 'inherit' }}>
+            <ArrowUp size={14} className={clsx(grow <= 0 && `rotate-180`)} />
+            <Text size="xs" className="leading-none" style={{ color: 'inherit' }}>
               {`${100}`}%
             </Text>
           </span>

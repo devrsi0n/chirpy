@@ -1,15 +1,16 @@
 import ExternalLink from '@geist-ui/react-icons/externalLink';
 import File from '@geist-ui/react-icons/file';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
+import clsx from 'clsx';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
-import 'twin.macro';
 
 import { Link } from '$/components/link';
 import { usePrevious } from '$/hooks/use-previous';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -68,7 +69,7 @@ export function PageRank(props: PageRankProps) {
   return (
     <LazyLoader onVisible={onVisible} className="flex flex-col flex-grow">
       {loading && (
-        <div className="mx-auto loading mt-44">
+        <div className={clsx('mt-44 mx-auto', styles.loading)}>
           <div></div>
         </div>
       )}
@@ -160,7 +161,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
   const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
   return (
-    <span className="group" tw="flex items-center px-2 py-1.5 relative break-all space-x-1">
+    <span className="group flex items-center px-2 py-1.5 relative break-all space-x-1">
       <span
         {...(isCommentWidget && {
           tooltip: 'This page contains a comment widget',
@@ -168,18 +169,18 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
       >
         <Link
           href={url.setQuery('entry_page', name)}
-          tw=" hover:underline inline-flex items-center space-x-1 text-gray-1200"
+          className=" hover:underline inline-flex items-center space-x-1 text-gray-1200"
           variant="plain"
         >
           {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
-          <span tw="max-w-sm md:truncate">
+          <span className="max-w-sm md:truncate">
             {isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}
           </span>
         </Link>
       </span>
       <Link
         href={externalLink}
-        tw="invisible group-hover:visible text-gray-1200"
+        className="invisible group-hover:visible text-gray-1200"
         variant="plain"
         tooltip="Click to open in a new tab"
       >

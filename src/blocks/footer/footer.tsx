@@ -2,9 +2,9 @@ import type { Icon } from '@geist-ui/react-icons';
 import Moon from '@geist-ui/react-icons/moon';
 import Settings from '@geist-ui/react-icons/settings';
 import Sun from '@geist-ui/react-icons/sun';
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { IconButton } from '$/components/button/icon-button';
 import { Link } from '$/components/link/link';
@@ -20,7 +20,7 @@ const icons: Record<ColorMode, Icon> = {
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
 
-export function Footer(props: FooterProps): JSX.Element {
+export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
   const { theme, setTheme } = useTheme();
   const hasMounted = useHasMounted();
   const handleClick = () => {
@@ -43,10 +43,13 @@ export function Footer(props: FooterProps): JSX.Element {
   const ThemeIcon = icons[(theme as ColorMode) || 'system'];
   return (
     <footer
-      {...props}
-      css={tw`w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-500`}
+      {...restProps}
+      className={clsx(
+        `w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-500`,
+        className,
+      )}
     >
-      <nav css={tw`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
+      <nav className={`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
         <Link href="/docs/index" variant="secondary">
           Docs
         </Link>
@@ -64,7 +67,7 @@ export function Footer(props: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        css={tw`flex flex-col items-center justify-center w-full space-y-2 xs:(space-y-0 space-x-5 flex-row)`}
+        className={`flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-5 xs:flex-row`}
       >
         <Text variant="secondary" size="sm">
           &copy; {new Date().getFullYear()} Chirpy Labs. All rights reserved.

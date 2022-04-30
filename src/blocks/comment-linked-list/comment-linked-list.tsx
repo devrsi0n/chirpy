@@ -1,11 +1,12 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { css, theme } from 'twin.macro';
 
 import { CommentDetailNode } from '$/types/widget';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
+import styles from './comment-linked-list.module.scss';
 
 export type Comment = NonNullable<CommentDetailNode>;
 
@@ -34,8 +35,8 @@ export function CommentLinkedList({
   let depth = 0;
 
   return (
-    <div tw="space-y-2">
-      <ul tw="space-y-8">
+    <div className="space-y-2">
+      <ul className="space-y-8">
         {ancestorComments.map((_comment) => {
           depth += 1;
           return (
@@ -56,15 +57,8 @@ export function CommentLinkedList({
           );
         })}
       </ul>
-      <div tw="flex flex-col items-end">
-        <ul
-          css={[
-            css`
-              width: calc(100% - ${theme('spacing.16')});
-            `,
-            tw`space-y-2`,
-          ]}
-        >
+      <div className="flex flex-col items-end">
+        <ul className={clsx(styles.commentList, `space-y-2`)}>
           {comment.replies?.map((reply) => (
             <CommentBranch key={reply.id}>
               <CommentCard
@@ -89,37 +83,8 @@ export function CommentLinkedList({
 const MemoCommentLinkedList = React.memo(CommentLinkedList);
 export { MemoCommentLinkedList };
 
-const branchWidth = '2.4rem';
-const branchHeight = '2.0';
-
 type ParentBranchProps = React.ComponentPropsWithoutRef<'li'>;
 
-function ParentBranch(props: ParentBranchProps): JSX.Element {
-  return (
-    <li
-      {...props}
-      css={[
-        tw`space-y-8`,
-        css`
-          position: relative;
-
-          &:before {
-            position: absolute;
-            top: -${branchHeight}rem;
-            left: ${branchWidth};
-            display: block;
-            width: ${branchWidth};
-            height: ${branchHeight}rem;
-            content: '';
-            border-left-width: 1px;
-            ${tw`border-gray-500`}
-          }
-
-          &:first-of-type:before {
-            display: none;
-          }
-        `,
-      ]}
-    />
-  );
+function ParentBranch({ className, ...liProps }: ParentBranchProps): JSX.Element {
+  return <li {...liProps} className={clsx(`space-y-8`, styles.branch, className)} />;
 }

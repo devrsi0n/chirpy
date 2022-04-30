@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as React from 'react';
-import 'twin.macro';
 
 import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
@@ -17,8 +16,8 @@ export type AnalyticsProps = {
 export default function Analytics({ project }: AnalyticsProps): JSX.Element {
   return (
     <SiteLayout hideFullBleed title="Analytics">
-      <section tw="xl:max-width[70rem] mx-auto px-4">
-        <PageTitle tw="pb-6">Analytics</PageTitle>
+      <section className="xl:max-width[70rem] mx-auto px-4">
+        <PageTitle className="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{
             domain: project?.domain,

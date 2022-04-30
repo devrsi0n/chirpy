@@ -34,10 +34,8 @@ const colors = {
  */
 module.exports = {
   darkMode: 'class',
-  purge: [
-    './src/pages/**/*.{ts,tsx}',
-    './src/components/**/*.{ts,tsx}',
-    './src/blocks/**/*.{ts,tsx}',
+  content: [
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
     colors,

@@ -1,24 +1,25 @@
-module.exports = {
+const nextJest = require('next/jest');
+
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: './',
+});
+
+const customJestConfig = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/__tests__/jest.setup.ts'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx'],
   testMatch: ['**/src/**/*.test.ts?(x)'],
-  transform: {
-    '\\.[jt]sx?$': 'babel-jest',
-    '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/scripts/jest/fileTransformer.js',
-  },
   moduleNameMapper: {
-    '^\\$/(.*)': '<rootDir>/src/$1',
-    '\\.(css|less|sass|scss|svg)$': 'identity-obj-proxy',
+    '^\\$/(.*)$': '<rootDir>/src/$1',
   },
-  coveragePathIgnorePatterns: [
-    'node_modules',
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
     '<rootDir>/src/__tests__/',
-    '<rootDir>/src/types/',
-    '<rootDir>/src/server/types/',
-    '<rootDir>/src/graphql/generated/',
-    '<rootDir>/src/server/graphql/generated/',
+    '!./**/*.stories.{ts,tsx}',
+    '!./**/types/',
+    '!./**/generated/',
   ],
-  moduleDirectories: ['node_modules', 'src'],
-  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}', '!./**/*.stories.{ts,tsx}'],
 };
+
+module.exports = createJestConfig(customJestConfig);

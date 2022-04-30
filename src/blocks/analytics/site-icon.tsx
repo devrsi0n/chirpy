@@ -1,4 +1,4 @@
-import 'twin.macro';
+
 
 export interface SiteIconProps {
   name: string;
@@ -9,7 +9,7 @@ export function SiteIcon({ domain, name }: SiteIconProps) {
     <img
       src={`https://icons.duckduckgo.com/ip3/${domain}.ico`}
       referrerPolicy="no-referrer"
-      tw="h-4 w-4 mr-2 inline"
+      className="h-4 w-4 mr-2 inline"
       alt={`Site icon of ${name}`}
     />
   );

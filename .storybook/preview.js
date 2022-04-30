@@ -1,26 +1,21 @@
-// @ts-nocheck
-import { Global } from '@emotion/react';
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
-import 'tailwindcss/tailwind.css';
-import { GlobalStyles } from 'twin.macro';
 
-import { useThemeVariables } from '$/contexts/theme-context/use-theme-variables';
-import { loadFeatures } from '$/pages/_app';
-import { appGlobalStyles } from '$/styles/global-styles';
+import { useThemeVariables } from '../src/contexts/theme-context/use-theme-variables';
+import { loadFeatures } from '../src/pages/_app';
+import '../src/styles/global-styles.scss';
 
 export const decorators = [
   urqlDecorator,
+  // @ts-ignore
   (Story) => {
     const { styles } = useThemeVariables();
     return (
       <>
-        <GlobalStyles />
-        <Global styles={appGlobalStyles} />
         <style>{styles}</style>
         <LazyMotion features={loadFeatures}>
-          <div tw="bg-bg h-screen pt-10">
+          <div className="bg-bg h-screen pt-10">
             <Story />
           </div>
         </LazyMotion>

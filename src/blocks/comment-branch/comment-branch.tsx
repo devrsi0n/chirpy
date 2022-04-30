@@ -1,4 +1,7 @@
-import tw, { css } from 'twin.macro';
+import clsx from 'clsx';
+import * as React from 'react';
+
+import styles from './comment-branch.module.scss';
 
 const defaultWidth = 1.2;
 const defaultHeight = 3.2;
@@ -19,51 +22,19 @@ export function CommentBranch({
   width = defaultWidth,
   height = defaultHeight,
   hiddenBranch,
+  className,
   ...restProps
 }: CommentBranchProps): JSX.Element {
   return (
     <li
       {...restProps}
-      css={[
-        tw`space-y-2`,
-
-        !hiddenBranch &&
-          css`
-            position: relative;
-
-            &:before,
-            &:after {
-              transform: translateY(-0.5rem);
-              border-left-width: 1px;
-              ${tw`border-gray-500`}
-            }
-
-            &:before {
-              position: absolute;
-              top: 0;
-              left: -${width}rem;
-              display: block;
-              width: ${width}rem;
-              height: ${height}rem;
-              content: '';
-              border-bottom-width: 1px;
-              border-bottom-left-radius: 8px;
-            }
-
-            &:after {
-              position: absolute;
-              top: ${height - 0.3}rem;
-              bottom: -0.5rem;
-              left: -${width}rem;
-              display: block;
-              content: '';
-            }
-
-            &:last-child:after {
-              display: none;
-            }
-          `,
-      ]}
+      className={clsx(`space-y-2`, !hiddenBranch && styles.commentBranch, className)}
+      style={
+        {
+          '--comment-branch-width': `${width}rem`,
+          '--comment-branch-height': `${height}rem`,
+        } as React.CSSProperties
+      }
     />
   );
 }

@@ -1,6 +1,6 @@
 import { NextRouter } from 'next/router';
 import React from 'react';
-import 'twin.macro';
+
 
 import { Tabs } from '$/components/tabs';
 import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
@@ -25,7 +25,7 @@ export default function Locations(props: LocationsProps): JSX.Element {
       <Tabs
         cacheKey="analytics.locations"
         initialValue="map"
-        leftItem={<h3 tw="font-bold text-gray-1100">Locations</h3>}
+        leftItem={<h3 className="font-bold text-gray-1100">Locations</h3>}
       >
         <Tabs.Item label="Map" value="map">
           <CountriesMap

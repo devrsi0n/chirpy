@@ -1,0 +1,27 @@
+$gradientColor: 'rgba(255, 255, 255, 0)';
+$ellipse: '25%';
+
+.layoutWrapper {
+  &::before {
+    background: radial-gradient(
+        circle at 5% 50%,
+        theme('colors.primary.400'),
+        $gradientColor $ellipse
+      ),
+      radial-gradient(circle at 90% 15%, theme('colors.plum.400'), $gradientColor $ellipse);
+  }
+}
+
+.layoutMain {
+  display: grid;
+  grid-template-columns: 1fr min(75ch, calc(100% - 32px)) 1fr;
+  grid-column-gap: 16px;
+
+  & > * {
+    grid-column: 2;
+  }
+
+  & :global(.full-bleed) {
+    grid-column: 1 / -1;
+  }
+}

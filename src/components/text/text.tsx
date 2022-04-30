@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { Box, BoxProps } from '../box';
 
@@ -18,12 +18,12 @@ export type TextProps = React.PropsWithChildren<
 > &
   BoxProps;
 
-const sizeStyles: Record<Size, TwStyle> = {
-  xs: tw`text-xs`,
-  sm: tw`text-sm`,
-  base: tw`text-base`,
-  lg: tw`text-lg`,
-  xl: tw`text-xl`,
+const sizeStyles: Record<Size, string> = {
+  xs: `text-xs`,
+  sm: `text-sm`,
+  base: `text-base`,
+  lg: `text-lg`,
+  xl: `text-xl`,
 };
 
 export function Text({
@@ -31,7 +31,7 @@ export function Text({
   size = 'base',
   as: Tag,
   children,
-  className = '',
+  className,
   bold,
   italic,
   underline,
@@ -54,16 +54,16 @@ export function Text({
     <Box
       as={Tag}
       {...restProps}
-      css={[
-        tw`leading-normal text-gray-1200`,
-        variant === 'primary' ? tw`text-gray-1200` : tw`text-gray-1100`,
+      className={clsx(
+        `leading-normal text-gray-1200`,
+        variant === 'primary' ? `text-gray-1200` : `text-gray-1100`,
         sizeStyles[size],
-        bold && tw`font-bold`,
-        italic && tw`italic`,
-        disabled && tw`text-gray-1100`,
-        underline && tw`underline`,
-      ]}
-      className={className}
+        bold && `font-bold`,
+        italic && `italic`,
+        disabled && `text-gray-1100`,
+        underline && `underline`,
+        className,
+      )}
     >
       {children}
     </Box>

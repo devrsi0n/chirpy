@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { border, textInput, textInputError } from '$/styles/common';
 
@@ -17,25 +17,25 @@ export const TextArea = React.forwardRef(function TextArea(
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (
-    <label className={styles.root} css={[tw`flex flex-col text-gray-1200 mb-4`]}>
-      <p tw="mb-1 leading-6 text-lg">{label}</p>
+    <label className={clsx('flex flex-col text-gray-1200 mb-4', styles.root)}>
+      <p className="mb-1 leading-6 text-lg">{label}</p>
       <textarea
         {...inputProps}
         name={label}
         ref={ref}
-        className={className || styles.textarea}
-        css={[
-          tw`leading-8 px-2 border rounded`,
+        className={clsx(
+          `leading-8 px-2 border rounded`,
           textInput,
           border,
           !!errorMessage && textInputError,
-        ]}
+          className || styles.textarea,
+        )}
         style={{
           minHeight: '4.5em',
         }}
       />
       {errorMessage && (
-        <p role="alert" tw="text-red-700 text-xs">
+        <p role="alert" className="text-red-700 text-xs">
           {errorMessage}
         </p>
       )}

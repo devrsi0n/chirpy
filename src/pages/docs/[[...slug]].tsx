@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
-import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
@@ -16,11 +15,11 @@ const CONTAINER_FOLDER = 'docs';
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
   return (
     <SiteLayout title={frontMatter?.title || 'Docs'}>
-      <div tw="min-h-full">
-        <section tw="flex flex-row min-h-full space-x-4 -my-2.5">
-          <SideBar tw="pt-10" directories={directories} title="Documentation" />
-          <article className="prose lg:prose-xl" tw="flex-1 overflow-y-auto">
-            <div tw="pt-10">
+      <div className="min-h-full">
+        <section className="flex flex-row min-h-full space-x-4 -my-2.5">
+          <SideBar className="pt-10" directories={directories} title="Documentation" />
+          <article className="flex-1 overflow-y-auto prose lg:prose-xl">
+            <div className="pt-10">
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
             </div>
           </article>

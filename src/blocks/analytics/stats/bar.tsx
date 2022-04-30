@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 export type BarColor = 'orange' | 'green' | 'red' | 'blue';
 
@@ -23,8 +23,7 @@ export default function Bar({
   return (
     <div className="w-full relative" style={{ maxWidth: `calc(100% - ${maxWidthDeduction})` }}>
       <div
-        tw="absolute inset-0 h-full dark:bg-grayd-900/25"
-        css={colorMap[color]}
+        className={clsx('absolute inset-0 h-full dark:bg-grayd-900/25', colorMap[color])}
         style={{ width: `${width}%` }}
       ></div>
       {children}
@@ -32,11 +31,11 @@ export default function Bar({
   );
 }
 
-const colorMap: Record<BarColor, TwStyle> = {
-  orange: tw`bg-orange-200`,
-  green: tw`bg-green-200`,
-  red: tw`bg-red-200`,
-  blue: tw`bg-blue-200`,
+const colorMap: Record<BarColor, string> = {
+  orange: `bg-orange-200`,
+  green: `bg-green-200`,
+  red: `bg-red-200`,
+  blue: `bg-blue-200`,
 };
 
 function barWidth(count: number, all: { [x: string]: any }[]) {

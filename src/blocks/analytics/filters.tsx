@@ -3,7 +3,7 @@ import XIcon from '@geist-ui/react-icons/x';
 import { Menu, Transition } from '@headlessui/react';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
-import tw from 'twin.macro';
+import clsx from 'clsx';
 
 import { Button } from '$/components/button';
 import { Link } from '$/components/link';
@@ -193,10 +193,10 @@ function filterDropdownOption(site: Site, option: FilterGroupKey) {
         <Link
           disabled
           href={`/${encodeURIComponent(site.domain)}/filter/${option}${window.location.search}`}
-          css={[
-            active ? tw`bg-gray-100 text-gray-1100` : tw`text-gray-1100`,
-            tw`block px-4 py-2 text-sm font-medium`,
-          ]}
+          className={clsx(
+            active ? `bg-gray-100 text-gray-1100` : `text-gray-1100`,
+            `block px-4 py-2 text-sm font-medium`,
+          )}
         >
           {formatFilterGroup(option)}
         </Link>
@@ -225,7 +225,7 @@ function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.El
     <>
       <Button
         variant="text"
-        tw="border-b border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500"
+        className="border-b border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500"
         onClick={() => setAddingFilter(true)}
       >
         + Add filter
@@ -418,7 +418,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
         {({ open }) => (
           <>
             <div>
-              <Menu.Button tw="flex items-center text-xs md:text-sm font-medium leading-tight px-3 py-2 cursor-pointer ml-auto text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-900 rounded">
+              <Menu.Button className="flex items-center text-xs md:text-sm font-medium leading-tight px-3 py-2 cursor-pointer ml-auto text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-900 rounded">
                 {this.renderDropdownButton()}
               </Menu.Button>
             </div>
@@ -427,11 +427,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
               show={open}
               as={Fragment}
               enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
               leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
             >
               <Menu.Items
                 static

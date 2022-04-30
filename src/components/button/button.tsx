@@ -1,8 +1,8 @@
-import { keyframes } from '@emotion/react';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { css, TwStyle } from 'twin.macro';
 
 import { BaseButton, BaseButtonProps } from './base-button';
+import styles from './button.module.scss';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' | 'red' | 'gray';
@@ -32,7 +32,7 @@ export const Button = React.forwardRef(function Button(
     color = 'gray',
     disabled = false,
     size = 'md',
-    className = '',
+    className,
     shadow = true,
     rounded = 'true',
     onClick,
@@ -66,13 +66,13 @@ export const Button = React.forwardRef(function Button(
     <BaseButton
       {...restProps}
       ref={_ref}
-      css={[
+      className={clsx(
         sizeStyles[size],
+        className,
         ColorVariantStyles[`${variant}-${color}` as VariantColor],
-        variant !== 'text' && shadow && tw`shadow-sm`,
-        rounded && tw`rounded-md`,
-      ]}
-      className={className}
+        variant !== 'text' && shadow && `shadow-sm`,
+        rounded && `rounded-md`,
+      )}
       onClick={clickHandler}
       disabled={disabled}
     >
@@ -102,22 +102,16 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   });
 
   return (
-    <div ref={dripRef} css={[tw`absolute top-0 bottom-0 left-0 right-0`]}>
+    <div ref={dripRef} className="absolute top-0 bottom-0 left-0 right-0">
       <svg
         width="20"
         height="20"
         viewBox="0 0 20 20"
         style={{ top, left }}
-        css={[
-          tw`absolute w-4 h-4`,
-          css`
-            animation: ${expandKeyFrame} 350ms ease-in;
-            animation-fill-mode: forwards;
-          `,
-        ]}
+        className={clsx(`absolute w-4 h-4`, styles.expand)}
       >
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-          <g tw="fill-gray-300">
+          <g className="fill-gray-300">
             <rect width="100%" height="100%" rx="10" />
           </g>
         </g>
@@ -126,44 +120,27 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   );
 }
 
-const sizeStyles: Record<Size, TwStyle> = {
-  sm: tw`py-1 px-2 text-sm space-x-1`,
-  md: tw`py-2 px-3 text-base`,
-  lg: tw`py-3 px-4 text-lg`,
-  xl: tw`py-4 px-5 text-xl`,
+const sizeStyles: Record<Size, string> = {
+  sm: `py-1 px-2 text-sm space-x-1`,
+  md: `py-2 px-3 text-base`,
+  lg: `py-3 px-4 text-lg`,
+  xl: `py-4 px-5 text-xl`,
 };
 
 type VariantColor = `${Variant}-${Color}`;
 
-type VariantColors = Record<VariantColor, TwStyle>;
+type VariantColors = Record<VariantColor, string>;
 
 const ColorVariantStyles: VariantColors = {
-  'solid-primary': tw`bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:(ring-primary-1000)`,
-  'solid-red': tw`bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:(ring-red-1000)`,
-  'solid-gray': tw`bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus-visible:(ring-gray-1100)`,
+  'solid-primary': `bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:ring-primary-1000`,
+  'solid-red': `bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:ring-red-1000`,
+  'solid-gray': `bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus-visible:ring-gray-1100`,
 
-  'default-primary': tw`border border-primary-700 text-primary-900 hover:(border-primary-900 text-primary-1000)`,
-  'default-red': tw`border border-red-700 text-red-900 hover:(border-red-900 text-red-1000)`,
-  'default-gray': tw`border text-gray-1100 hover:(border-gray-900 text-gray-1200)`,
+  'default-primary': `border border-primary-700 text-primary-900 hover:border-primary-900 text-primary-1000`,
+  'default-red': `border border-red-700 text-red-900 hover:border-red-900 text-red-1000`,
+  'default-gray': `border text-gray-1100 hover:border-gray-900 text-gray-1200`,
 
-  'text-primary': tw`text-primary-900 hover:bg-gray-300`,
-  'text-red': tw`text-red-900 hover:bg-gray-300`,
-  'text-gray': tw`text-gray-1100 hover:bg-gray-300`,
+  'text-primary': `text-primary-900 hover:bg-gray-300`,
+  'text-red': `text-red-900 hover:bg-gray-300`,
+  'text-gray': `text-gray-1100 hover:bg-gray-300`,
 };
-
-const expandKeyFrame = keyframes`
-  0% {
-    opacity: 0;
-    transform: scale(1);
-  }
-  30% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(28);
-    opacity: 0;
-  }
-`;

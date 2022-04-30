@@ -147,7 +147,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
     if (this.state.loading) {
       return (
         <div className="px-4 py-6">
-          <div className="loading sm mx-auto">
+          <div className={clsx('mx-auto', styles.loading, styles.sm)}>
             <div></div>
           </div>
         </div>
@@ -232,10 +232,10 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
 
         <Transition
           show={this.state.open}
-          enter="transition ease-out duration-100 transform"
+          enter="transition ease-out duration-100"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
-          leave="transition ease-in duration-75 transform"
+          leave="transition ease-in duration-75"
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >

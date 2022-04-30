@@ -1,11 +1,12 @@
+import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
-import 'twin.macro';
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -184,9 +185,8 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     if (this.state.referrers!.length > 0) {
       return (
         <div className="flex flex-col flex-grow">
-          <div css={labelContainer}>
+          <div className={labelContainer}>
             <span>Referrer</span>
-
             <div className="text-right">
               <span className="inline-block w-20">{this.label()}</span>
               {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
@@ -219,11 +219,16 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
 
   render() {
     return (
-      <div className="relative p-4 bg-white rounded shadow-xl stats-item flex flex-col dark:bg-gray-825 mt-6 w-full">
+      <div
+        className={clsx(
+          'relative p-4 bg-white rounded shadow-xl flex flex-col dark:bg-gray-825 mt-6 w-full',
+          styles['stats-item'],
+        )}
+      >
         <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
-          <h3 css={cardTitle}>Top Referrers</h3>
+          <h3 className={cardTitle}>Top Referrers</h3>
           {this.state.loading && (
-            <div className="mx-auto loading mt-44">
+            <div className={clsx('mt-44 mx-auto', styles.loading)}>
               <div></div>
             </div>
           )}

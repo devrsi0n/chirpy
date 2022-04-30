@@ -1,7 +1,7 @@
+import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import tw from 'twin.macro';
 
 import { usePortal } from '$/hooks/use-portal';
 
@@ -26,7 +26,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
     return <></>;
   }
   return ReactDOM.createPortal(
-    <ul css={tw`fixed right-4 bottom-8 space-y-2 flex flex-col items-end`}>
+    <ul className={clsx(`fixed right-4 bottom-8 space-y-2 flex flex-col items-end`)}>
       <AnimatePresence>
         {toasts.map((toast) => (
           <m.li

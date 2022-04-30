@@ -1,10 +1,12 @@
 // @ts-nocheck
+import clsx from 'clsx';
 import React from 'react';
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -131,7 +133,7 @@ class PagesModal extends React.Component {
   renderLoading() {
     if (this.state.loading) {
       return (
-        <div className="loading my-16 mx-auto">
+        <div className={clsx('my-16 mx-auto', styles.loading)}>
           <div></div>
         </div>
       );
@@ -154,7 +156,13 @@ class PagesModal extends React.Component {
 
           <div className="my-4 border-b border-gray-300"></div>
           <main className="modal__content">
-            <table className="w-max overflow-x-auto md:w-full table-striped table-fixed">
+            <table
+              className={clsx(
+                'w-max overflow-x-auto md:w-full',
+                styles['table-striped'],
+                styles['table-fixed'],
+              )}
+            >
               <thead>
                 <tr>
                   <th

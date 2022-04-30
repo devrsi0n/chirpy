@@ -34,7 +34,7 @@ sw.addEventListener('notificationclick', (event: NotificationEvent) => {
 });
 
 // https://redfin.engineering/how-to-fix-the-refresh-button-when-using-service-workers-a8e27af6df68
-const CACHE_ID = '2';
+const CACHE_ID = process.env.SW_CACHE_ID;
 sw.addEventListener('install', (e) => {
   // Make sure complete success or total failure, with nothing between
   e.waitUntil(caches.open(CACHE_ID).then((cache) => cache.addAll(['/'])));

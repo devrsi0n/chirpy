@@ -2,7 +2,6 @@ import type { Icon } from '@geist-ui/react-icons';
 import Code from '@geist-ui/react-icons/code';
 import Figma from '@geist-ui/react-icons/figma';
 import Lock from '@geist-ui/react-icons/lock';
-import 'twin.macro';
 
 import { Heading } from '$/components/heading';
 import { Text } from '$/components/text';
@@ -28,9 +27,9 @@ const contents: FeatureProps[] = [
 
 export function Features(): JSX.Element {
   return (
-    <ul tw="flex flex-col items-start space-y-12 sm:( flex-row justify-between space-x-6 space-y-0 max-w-full px-0)">
+    <ul className="flex flex-col items-start space-y-12 sm:flex-row sm:justify-between sm:space-x-6 sm:space-y-0 sm:max-w-full sm:px-0">
       {contents.map((item) => (
-        <li tw="sm:flex-1" key={item.heading}>
+        <li className="sm:flex-1" key={item.heading}>
           <Feature {...item} />
         </li>
       ))}
@@ -46,12 +45,12 @@ type FeatureProps = {
 function Feature(props: FeatureProps): JSX.Element {
   const Icon = props.icon;
   return (
-    <section tw="flex flex-row space-x-4 sm:(flex-col space-x-0)">
-      <div tw="h-fit w-fit bg-primary-300 inline-block p-3 rounded-full text-primary-1000 mb-4">
+    <section className="flex flex-row space-x-4 sm:flex-col sm:space-x-0">
+      <div className="h-fit w-fit bg-primary-300 inline-block p-3 rounded-full text-primary-1000 mb-4">
         <Icon size={26} />
       </div>
       <div>
-        <Heading as="h4" tw="font-semibold mb-3">
+        <Heading as="h4" className="font-semibold mb-3">
           {props.heading}
         </Heading>
         <Text variant="secondary">{props.content}</Text>

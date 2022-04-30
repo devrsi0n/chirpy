@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import * as React from 'react';
-import 'twin.macro';
 
 import { Theme } from '$/types/theme.type';
 

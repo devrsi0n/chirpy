@@ -1,6 +1,6 @@
 import User from '@geist-ui/react-icons/user';
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -11,16 +11,16 @@ export type AvatarProps = Omit<React.ComponentProps<'img'>, 'src'> &
     className?: string;
   }>;
 
-const sizeStyles: Record<Size, [TwStyle, number]> = {
-  sm: [tw`w-4 h-4`, 20],
-  md: [tw`w-8 h-8`, 24],
-  lg: [tw`w-12 h-12`, 28],
-  xl: [tw`w-16 h-16`, 32],
+const sizeStyles: Record<Size, [string, number]> = {
+  sm: [`w-4 h-4`, 20],
+  md: [`w-8 h-8`, 24],
+  lg: [`w-12 h-12`, 28],
+  xl: [`w-16 h-16`, 32],
 };
 
 export function Avatar({
   size = 'md',
-  className = '',
+  className,
   alt = 'Avatar',
   children,
   src,
@@ -28,7 +28,7 @@ export function Avatar({
 }: AvatarProps): JSX.Element {
   const [sizeStyle, iconSize] = sizeStyles[size];
   if (!src) {
-    return <User aria-label="Avatar placeholder" size={iconSize} tw="m-1" />;
+    return <User aria-label="Avatar placeholder" size={iconSize} className="m-1" />;
   }
 
   return (
@@ -36,12 +36,16 @@ export function Avatar({
       {...imgProps}
       src={src}
       alt={alt}
-      className={className}
-      css={[bg, tw`flex items-center justify-center rounded-full select-none`, sizeStyle]}
+      className={clsx(
+        bg,
+        `flex items-center justify-center rounded-full select-none`,
+        sizeStyle,
+        className,
+      )}
     >
       {children}
     </img>
   );
 }
 
-const bg = tw`bg-grayl-100/60 dark:(bg-grayd-100/30)`;
+const bg = `bg-grayl-100/60 dark:bg-grayd-100/30`;

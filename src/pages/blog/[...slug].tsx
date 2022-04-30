@@ -2,7 +2,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import Script from 'next/script';
 import * as React from 'react';
-import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
@@ -27,17 +26,17 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
 
   return (
     <SiteLayout title={frontMatter?.title || 'Blog'}>
-      <section tw="flex flex-row space-x-2">
-        <article tw="prose lg:prose-xl flex-1 overflow-y-auto">
+      <section className="flex flex-row space-x-2">
+        <article className="prose lg:prose-xl flex-1 overflow-y-auto">
           {banner && (
-            <div tw="pb-10">
+            <div className="pb-10">
               <Image {...banner} layout="responsive" alt="banner" />
             </div>
           )}
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div data-chirpy-comment tw="my-16" />
+      <div data-chirpy-comment className="my-16" />
       <Script
         src="/bootstrap/comment.js"
         strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}

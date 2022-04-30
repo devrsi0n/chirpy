@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import 'twin.macro';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Button } from '$/components/button';
@@ -14,17 +13,16 @@ export default function Custom500(): JSX.Element {
   const message = query['message'] || `We might have encountered some issues in our services...`;
   return (
     <SiteLayout title="500">
-      <section tw="px-4 space-y-8 flex flex-col items-center">
-        <Heading tw="font-bold">Oops! Something went wrong</Heading>
+      <section className="px-4 space-y-8 flex flex-col items-center">
+        <Heading className="font-bold">Oops! Something went wrong</Heading>
         <Text variant="secondary">{message}</Text>
 
-        <div tw="flex justify-center items-center space-x-6">
+        <div className="flex justify-center items-center space-x-6">
           <Link href="/" variant="plain">
             <Button
               variant="solid"
               color="primary"
-              className="group"
-              tw="space-x-1 transition hover:shadow-2xl"
+              className="group space-x-1 transition hover:shadow-2xl"
             >
               <span>Back to homepage</span>
             </Button>

@@ -1,7 +1,6 @@
 import Loader from '@geist-ui/react-icons/loader';
 import Send from '@geist-ui/react-icons/send';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { Button, ButtonProps } from '$/components/button';
 import { Heading } from '$/components/heading';
@@ -42,12 +41,12 @@ export function MainButton({
   };
   const buttonChildren = (
     <>
-      {isLoading ? <Loader tw="animate-spin w-5 h-5" /> : <Send size="14" />}
+      {isLoading ? <Loader className="animate-spin w-5 h-5" /> : <Send size="14" />}
       <span>Post</span>
     </>
   );
   return (
-    <div tw="flex flex-row justify-end space-x-2">
+    <div className="flex flex-row justify-end space-x-2">
       {isReply && (
         <Button variant="text" size="sm" onClick={onClickDismiss}>
           Cancel
@@ -62,14 +61,14 @@ export function MainButton({
           <Popover
             placement="topEnd"
             content={
-              <section tw="w-64">
-                <Heading as="h5" tw="font-bold">
+              <section className="w-64">
+                <Heading as="h5" className="font-bold">
                   Get notification for replies
                 </Heading>
-                <Text size="sm" tw="mt-2" variant="secondary">
+                <Text size="sm" className="mt-2" variant="secondary">
                   Get a push notification if there is a reply to your comment
                 </Text>
-                <div tw="mt-5 space-x-2">
+                <div className="mt-5 space-x-2">
                   <Button size="sm" color="gray" onClick={onClickSubmit}>
                     Ask next time
                   </Button>
@@ -79,7 +78,7 @@ export function MainButton({
                 </div>
               </section>
             }
-            buttonProps={{ ...postButtonProps, css: tw`py-[7px]` }}
+            buttonProps={{ ...postButtonProps, className: `py-[7px]` }}
           >
             {buttonChildren}
           </Popover>

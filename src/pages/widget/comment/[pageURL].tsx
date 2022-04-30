@@ -7,7 +7,6 @@ import {
 } from 'next';
 import * as React from 'react';
 import superjson from 'superjson';
-import 'twin.macro';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
@@ -75,7 +74,7 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
       <CommentContextProvider projectId={props.projectId}>
-        <div tw="pt-1">
+        <div className="pt-1">
           <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
         </div>
         <PoweredBy />

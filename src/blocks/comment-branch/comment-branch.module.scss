@@ -1,0 +1,35 @@
+.commentBranch {
+  position: relative;
+
+  &:before,
+  &:after {
+    transform: translateY(-0.5rem);
+    border-left-width: 1px;
+    @apply border-gray-500;
+  }
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: calc(-1 * var(--comment-branch-width));
+    display: block;
+    width: var(--comment-branch-width);
+    height: var(--comment-branch-height);
+    content: '';
+    border-bottom-width: 1px;
+    border-bottom-left-radius: 8px;
+  }
+
+  &:after {
+    position: absolute;
+    top: calc(var(--comment-branch-height) - 0.3rem);
+    bottom: -0.5rem;
+    left: -var(--comment-branch-width);
+    display: block;
+    content: '';
+  }
+
+  &:last-child:after {
+    display: none;
+  }
+}

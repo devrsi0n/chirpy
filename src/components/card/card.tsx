@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { cardBg } from '$/styles/common';
 
@@ -19,11 +19,17 @@ export type CustomComponentProps<E extends React.ElementType> = PolymorphicCompo
 
 export function Card<E extends React.ElementType>({
   shadow = true,
+  className,
   ...restProps
 }: CustomComponentProps<E>): JSX.Element {
   return (
     <Box
-      css={[cardBg, tw`rounded border border-gray-400`, shadow && tw`shadow-sm hover:shadow-xl`]}
+      className={clsx(
+        cardBg,
+        `rounded border border-gray-400`,
+        shadow && `shadow-sm hover:shadow-xl`,
+        className,
+      )}
       {...restProps}
     />
   );

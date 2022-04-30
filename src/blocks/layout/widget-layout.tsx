@@ -1,6 +1,5 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import 'twin.macro';
 
 import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
 
@@ -19,7 +18,7 @@ export type WidgetLayoutProps = {
 export function WidgetLayout({ title, children, widgetTheme }: WidgetLayoutProps): JSX.Element {
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
-      <LayoutWrapper title={title} tw="min-h-full py-10 sm:mr-1">
+      <LayoutWrapper title={title} className="min-h-full py-10 sm:mr-1">
         <AnimatePresence>
           <m.div
             transition={{ duration: 0.35 }}

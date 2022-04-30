@@ -1,9 +1,11 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import numberFormatter from '../../number-formatter';
 import { Query } from '../../query';
 import * as storage from '../../storage';
@@ -188,7 +190,7 @@ export default class PropertyBreakdown extends React.Component<
     if (this.state.loading) {
       return (
         <div className="px-4 py-2">
-          <div className="loading sm mx-auto">
+          <div className={clsx('mx-auto', styles.loading, styles.sm)}>
             <div></div>
           </div>
         </div>

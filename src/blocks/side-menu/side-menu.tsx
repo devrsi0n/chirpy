@@ -1,12 +1,12 @@
-import { Global, css } from '@emotion/react';
 import Menu from '@geist-ui/react-icons/menu';
 import Dismiss from '@geist-ui/react-icons/x';
+import clsx from 'clsx';
 import { m, useCycle, Variants } from 'framer-motion';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { IconButton } from '$/components/button';
 import { useClickOutside } from '$/hooks/use-click-outside';
+import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { ssrMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
@@ -14,7 +14,7 @@ import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context
 export type SideMenuProps = {
   position?: 'tl' | 'br';
   styles?: {
-    items?: TwStyle;
+    items?: string;
   };
   children: React.ReactNode;
   fixed?: boolean;
@@ -66,49 +66,46 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
     };
   }, [position]);
   const [isAnimationEnd, setIsAnimationEnd] = React.useState(false);
+
+  useIsomorphicLayoutEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.removeProperty('overflow');
+    }
+  }, [isOpen]);
+
   return (
     <m.nav
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
       custom={!ssrMode ? document.body.clientHeight : undefined}
-      tw="w-[250px] h-[100vh] top-0 bottom-0 isolate"
-      css={[
+      className={clsx(
+        'w-[250px] h-[100vh] top-0 bottom-0 isolate',
         containerStyles,
-        isAnimationEnd && tw`h-auto`,
-        fixed ? tw`fixed` : tw`absolute sm:fixed`,
-      ]}
+        isAnimationEnd && `h-auto`,
+        fixed ? `fixed` : `absolute sm:fixed`,
+      )}
       ref={containerRef}
       onAnimationStart={(definition) => definition === 'open' && setIsAnimationEnd(false)}
       onAnimationComplete={(definition) => definition === 'closed' && setIsAnimationEnd(true)}
     >
-      <Global
-        styles={
-          isOpen &&
-          css`
-            body {
-              overflow: hidden;
-            }
-          `
-        }
-      />
       <m.div
-        tw="bg-gray-200 absolute inset-0"
-        css={isAnimationEnd && tw`hidden`}
+        className={clsx('bg-gray-200 absolute inset-0', isAnimationEnd && `hidden`)}
         variants={backgroundVariant}
       />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>
-        <SideMenuItems css={[styles?.items]}>{children}</SideMenuItems>
+        <SideMenuItems className={styles?.items}>{children}</SideMenuItems>
       </SideMenuContextProvider>
       <IconButton
         aria-expanded={isOpen}
         onClick={() => toggleOpen()}
-        css={buttonStyles}
-        tw="bg-gray-100"
+        className={clsx('bg-gray-100', buttonStyles)}
       >
-        <span tw="sr-only">Open navigation menu</span>
-        <Menu css={[isOpen && tw`hidden`]} />
-        <Dismiss css={[!isOpen && tw`hidden`]} />
+        <span className="sr-only">Open navigation menu</span>
+        <Menu className={clsx(isOpen && `hidden`)} />
+        <Dismiss className={clsx(!isOpen && `hidden`)} />
       </IconButton>
     </m.nav>
   );
@@ -117,8 +114,8 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
 SideMenu.Item = SideMenuItem;
 
 const posStyles = {
-  tl: [tw`left-0`, tw`absolute top-[18px] left-[18px]`],
-  br: [tw`right-0`, tw`fixed bottom-[18px] right-[18px]`],
+  tl: [`left-0`, `!absolute top-[18px] left-[18px]`],
+  br: [`right-0`, `!fixed bottom-[18px] right-[18px]`],
 };
 
 type SideMenuItemsProps = {
@@ -138,9 +135,8 @@ const itemsVariants: Variants = {
 function SideMenuItems({ children, className }: SideMenuItemsProps): JSX.Element {
   return (
     <m.ul
-      css={[tw`flex flex-col absolute top-[75px] space-y-4`]}
+      className={clsx('flex flex-col absolute top-[75px] space-y-4', className)}
       variants={itemsVariants}
-      className={className}
     >
       {children}
     </m.ul>

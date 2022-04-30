@@ -1,6 +1,6 @@
+import clsx from 'clsx';
 import Head from 'next/head';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 export type LayoutWrapperProps = {
   title: string;
@@ -17,7 +17,7 @@ export function LayoutWrapper({ title, children, className }: LayoutWrapperProps
           {title.length > 0 ? '・' : ''}Chirpy
         </title>
       </Head>
-      <div css={[tw`min-h-full font-sans text-gray-1000 flex flex-col`]} className={className}>
+      <div className={clsx(`min-h-full font-sans text-gray-1000 flex flex-col`, className)}>
         {children}
       </div>
     </>

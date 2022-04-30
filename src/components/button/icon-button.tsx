@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { ring } from '$/styles/common';
 
@@ -10,14 +10,18 @@ export type IconButtonProps = BaseButtonProps & {
 };
 
 export const IconButton = React.forwardRef(function IconButton(
-  { children, ...restProps }: IconButtonProps,
+  { children, className, ...restProps }: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   return (
     <BaseButton
       ref={ref}
       {...restProps}
-      css={[ring, tw`hover:(bg-gray-400 ring-4 ring-gray-400) rounded-full text-gray-900`]}
+      className={clsx(
+        ring,
+        `hover:bg-gray-400 hover:ring-4 hover:ring-gray-400 rounded-full text-gray-900`,
+        className,
+      )}
     >
       {children}
     </BaseButton>

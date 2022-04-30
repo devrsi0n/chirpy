@@ -1,8 +1,8 @@
+import clsx from 'clsx';
 import { m } from 'framer-motion';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 type Variant = 'primary' | 'secondary' | 'plain' | 'solid';
@@ -21,18 +21,18 @@ export type LinkProps = React.PropsWithChildren<
     }
 >;
 
-const sizeStyles: Record<Size, TwStyle> = {
-  xs: tw`text-xs`,
-  sm: tw`text-sm`,
-  md: tw`text-base`,
-  lg: tw`text-lg`,
+const sizeStyles: Record<Size, string> = {
+  xs: `text-xs`,
+  sm: `text-sm`,
+  md: `text-base`,
+  lg: `text-lg`,
 };
 
-const variantStyles: Record<Variant, TwStyle> = {
-  primary: tw`text-gray-1200 whitespace-nowrap`,
-  secondary: tw`text-gray-1100`,
-  plain: tw``,
-  solid: tw`text-blue-1100 hover:text-blue-1200`,
+const variantStyles: Record<Variant, string> = {
+  primary: `text-gray-1200 whitespace-nowrap`,
+  secondary: `text-gray-1100`,
+  plain: ``,
+  solid: `text-blue-1100 hover:text-blue-1200`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -49,6 +49,7 @@ export function Link({
   highlightPattern,
   hideUnderline,
   variant = 'primary',
+  className,
   children,
   disabled,
   ...restProps
@@ -79,28 +80,33 @@ export function Link({
   return (
     <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
       {variant === 'plain' ? (
-        <a {...commonProps} css={disabled && disabledStyle} onClick={handler}>
+        <a
+          {...commonProps}
+          className={clsx(disabled && disabledStyle, className)}
+          onClick={handler}
+        >
           {children}
         </a>
       ) : (
         <a
           {...commonProps}
-          css={[
-            tw`relative transition duration-150 ease-in-out no-underline!`,
+          className={clsx(
+            `relative transition duration-150 ease-in-out !no-underline`,
             size && sizeStyles[size],
-            highlight && tw`font-bold`,
+            highlight && `font-bold`,
             variantStyles[variant],
             disabled && disabledStyle,
-          ]}
+            className,
+          )}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onClick={handler}
         >
           {children}
           {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
-            <span tw="hidden sm:(inline-block) absolute bottom-0 left-0  w-full h-0.5 -mb-1 overflow-hidden">
+            <span className="hidden sm:inline-block absolute bottom-0 left-0  w-full h-0.5 -mb-1 overflow-hidden">
               <m.span
-                tw="absolute inset-0 inline-block bg-current"
+                className="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: isHovering ? 1 : 0, opacity: isHovering ? 1 : 0 }}
                 exit={{ scale: 0, opacity: 0 }}
@@ -113,4 +119,4 @@ export function Link({
   );
 }
 
-const disabledStyle = tw`hover:cursor-default`;
+const disabledStyle = `hover:cursor-default`;

@@ -1,9 +1,10 @@
+import clsx from 'clsx';
 import React from 'react';
-import 'twin.macro';
 
 import { Tabs } from '$/components/tabs';
 
 import * as api from '../../analytics-api';
+import styles from '../../analytics.module.scss';
 import { Props } from '../../type';
 import * as url from '../../url';
 import { AnalyticsCard } from '../fine-components';
@@ -19,7 +20,7 @@ export default function Devices(props: DevicesProps): JSX.Element {
       <Tabs
         cacheKey="analytics.devices"
         initialValue="browser"
-        leftItem={<h3 tw="font-bold text-gray-1100">Devices</h3>}
+        leftItem={<h3 className="font-bold text-gray-1100">Devices</h3>}
       >
         <Tabs.Item label="Size" value="size">
           <ScreenSizes site={props.site} query={props.query} />
@@ -153,7 +154,7 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="-mt-px feather"
+          className={clsx('-mt-px', styles.feather)}
         >
           <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
           <line x1="12" y1="18" x2="12" y2="18" />
@@ -172,7 +173,7 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="-mt-px feather"
+          className={clsx('-mt-px', styles.feather)}
         >
           <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(180 12 12)" />
           <line x1="12" y1="18" x2="12" y2="18" />
@@ -191,7 +192,7 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="-mt-px feather"
+          className={clsx('-mt-px', styles.feather)}
         >
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
           <line x1="2" y1="20" x2="22" y2="20" />
@@ -210,7 +211,7 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="-mt-px feather"
+          className={clsx('-mt-px', styles.feather)}
         >
           <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
           <line x1="8" y1="21" x2="16" y2="21" />

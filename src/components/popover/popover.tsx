@@ -1,7 +1,7 @@
 import { Popover as HeadlessPopover } from '@headlessui/react';
+import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
@@ -23,7 +23,7 @@ export interface IPopoverProps {
    */
   autoClose?: boolean;
   styles?: {
-    panel?: TwStyle;
+    panel?: string;
   };
 }
 
@@ -44,7 +44,7 @@ export function Popover({
   };
 
   return (
-    <HeadlessPopover tw="relative">
+    <HeadlessPopover className="relative">
       {({ open }) => (
         <>
           <HeadlessPopover.Button
@@ -61,7 +61,7 @@ export function Popover({
               <m.div {...easeInOut}>
                 <HeadlessPopover.Panel
                   static
-                  css={[tw`absolute right-0 z-10 shadow-2xl isolate`, panelBorder]}
+                  className={clsx(`absolute right-0 z-10 shadow-2xl isolate`, panelBorder)}
                   style={getPanelStyles(placement, {
                     height: buttonRef.current?.getBoundingClientRect().height,
                     width: buttonRef.current?.getBoundingClientRect().width,
@@ -70,18 +70,19 @@ export function Popover({
                   aria-label="Popover panel"
                 >
                   <div
-                    css={[tw`relative py-3 px-5 rounded-lg`, panelBg, panelBorder, styles?.panel]}
+                    className={clsx(
+                      `relative py-3 px-5 rounded-lg`,
+                      panelBg,
+                      panelBorder,
+                      styles?.panel,
+                    )}
                     onClick={handleClickPanel}
                     onKeyDown={handleClickPanel}
                   >
                     {content}
                   </div>
                   <div
-                    css={[
-                      tw`absolute h-4 w-4 transform rotate-45`,
-                      panelBg,
-                      tw`border-t-0 border-l-0`,
-                    ]}
+                    className={clsx(`absolute h-4 w-4 rotate-45`, panelBg, `border-t-0 border-l-0`)}
                     style={getBeakStyles(
                       placement,
                       buttonRef.current?.getBoundingClientRect().width,
@@ -152,5 +153,5 @@ const DEFAULT_WIDTH = 40;
 
 type ButtonDimension = { height?: number; width?: number };
 
-const panelBg = tw`bg-gray-100 align-baseline`;
-const panelBorder = tw`rounded-lg`;
+const panelBg = `bg-gray-100 align-baseline`;
+const panelBorder = `rounded-lg`;

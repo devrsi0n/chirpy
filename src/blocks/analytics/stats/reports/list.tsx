@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import React from 'react';
-import 'twin.macro';
 
 import { Link } from '$/components/link';
 
+import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
 import LazyLoader from '../../lazy-loader';
 import numberFormatter from '../../number-formatter';
@@ -116,7 +117,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     if (this.state.list && this.state.list.length > 0) {
       return (
         <>
-          <div css={labelContainer}>
+          <div className={labelContainer}>
             <span>{this.props.keyLabel}</span>
             <span className="text-right">
               <span className="inline-block w-20">{this.label()}</span>
@@ -135,7 +136,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     return (
       <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
         {this.state.loading && (
-          <div className="mx-auto loading mt-44">
+          <div className={clsx('mt-44 mx-auto', styles.loading)}>
             <div></div>
           </div>
         )}

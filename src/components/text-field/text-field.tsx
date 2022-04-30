@@ -1,5 +1,5 @@
+import clsx from 'clsx';
 import * as React from 'react';
-import tw, { TwStyle } from 'twin.macro';
 
 import { border, textInput, textInputError } from '$/styles/common';
 
@@ -7,8 +7,8 @@ export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
   label: React.ReactNode;
   errorMessage?: string;
   styles?: {
-    root?: TwStyle;
-    input?: TwStyle;
+    root?: string;
+    input?: string;
   };
   prefixNode?: React.ReactNode;
 };
@@ -27,11 +27,11 @@ export const TextField = React.forwardRef(function TextfieldComponent(
 ): JSX.Element {
   const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
   return (
-    <label css={[tw`flex flex-col text-gray-1200 mb-3 px-0.5`, styles?.root]}>
-      <LabelWrapper tw="mb-1 leading-6 text-lg">{label}</LabelWrapper>
-      <div css={[tw`mb-1`, prefixNode && tw`flex flex-row items-stretch`]}>
+    <label className={clsx(`flex flex-col text-gray-1200 mb-3 px-0.5`, styles?.root)}>
+      <LabelWrapper className="mb-1 leading-6 text-lg">{label}</LabelWrapper>
+      <div className={clsx(`mb-1`, prefixNode && `flex flex-row items-stretch`)}>
         {prefixNode && (
-          <div tw="border-t border-b border-l px-3 rounded-l flex flex-row items-center">
+          <div className="border-t border-b border-l px-3 rounded-l flex flex-row items-center">
             {prefixNode}
           </div>
         )}
@@ -40,18 +40,18 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           {...inputProps}
           ref={ref}
           type={type}
-          className={className}
-          tw="px-3 py-2"
-          css={[
+          className={clsx(
+            'px-3 py-2',
             textInput,
             border,
-            prefixNode ? tw`flex-1 rounded-r` : tw`rounded`,
+            prefixNode ? `flex-1 rounded-r` : `rounded`,
             !!errorMessage && textInputError,
             styles?.input,
-          ]}
+            className,
+          )}
         />
       </div>
-      <p role="alert" tw="text-red-900 text-sm leading-none h-4">
+      <p role="alert" className="text-red-900 text-sm leading-none h-4">
         {errorMessage}
       </p>
     </label>

@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
 import ChevronDown from '@geist-ui/react-icons/chevronDown';
 import { Menu as HeadlessMenu } from '@headlessui/react';
+import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
-import tw from 'twin.macro';
 
 import { cardBg, listHoverable } from '$/styles/common';
 
@@ -33,7 +32,7 @@ export function Menu({ className, children }: MenuProps): JSX.Element {
     throw new Error('Menu children should be a Menu.Items and a Menu.Button');
   }
   return (
-    <div css={[tw`relative inline-block text-left`]} className={className}>
+    <div className={clsx('relative inline-block text-left', className)}>
       <HeadlessMenu>
         {({ open }: { open: boolean }) => (
           <>
@@ -71,7 +70,7 @@ function MenuButton({
       <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
         {children}
         {shape === 'square' && (
-          <ChevronDown css={[tw`w-5 h-5 ml-2 -mr-1 transform`, open && tw`rotate-180`]} />
+          <ChevronDown className={clsx(`w-5 h-5 ml-2 -mr-1`, open && `rotate-180`)} />
         )}
       </HeadlessMenu.Button>
     </div>
@@ -91,11 +90,11 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
         <m.div {...easeInOut}>
           <HeadlessMenu.Items
             static
-            css={[
-              tw`absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
+            className={clsx(
+              `absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
               cardBg,
-            ]}
-            className={className}
+              className,
+            )}
           >
             {children}
           </HeadlessMenu.Items>
@@ -117,6 +116,7 @@ function MenuItem({
   children,
   disableAutoDismiss,
   onClick,
+  className,
   ...asProps
 }: MenuItemProps): JSX.Element {
   const child = disableAutoDismiss ? (
@@ -130,7 +130,13 @@ function MenuItem({
         (/* { active }: ItemRenderPropArg */) => (
           <Box
             as={as}
-            css={[listHoverable, itemStyle, spacingItem, !disableAutoDismiss && MenuItemPadding]}
+            className={clsx(
+              listHoverable,
+              itemStyle,
+              spacingItem,
+              !disableAutoDismiss && MenuItemPadding,
+              className,
+            )}
             {...asProps}
           >
             {child}
@@ -141,8 +147,8 @@ function MenuItem({
   );
 }
 
-export const MenuItemPadding = tw`px-6 py-2`;
+export const MenuItemPadding = `px-6 py-2`;
 
-const itemStyle = tw`transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
+const itemStyle = `transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
 
-const spacingItem = tw`mt-1`;
+const spacingItem = `mt-1`;
