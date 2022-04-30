@@ -91,7 +91,7 @@ export function Link({
         <a
           {...commonProps}
           className={clsx(
-            `relative transition duration-150 ease-in-out no-underline!`,
+            `relative transition duration-150 ease-in-out !no-underline`,
             size && sizeStyles[size],
             highlight && `font-bold`,
             variantStyles[variant],

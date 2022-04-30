@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
@@ -9,13 +8,14 @@ import '../src/styles/global-styles.scss';
 
 export const decorators = [
   urqlDecorator,
+  // @ts-ignore
   (Story) => {
     const { styles } = useThemeVariables();
     return (
       <>
         <style>{styles}</style>
         <LazyMotion features={loadFeatures}>
-          <div tw="bg-bg h-screen pt-10">
+          <div className="bg-bg h-screen pt-10">
             <Story />
           </div>
         </LazyMotion>

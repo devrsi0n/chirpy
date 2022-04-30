@@ -11,7 +11,6 @@ import { useLocalStorage } from '$/hooks/use-local-storage';
 import { cardBg, textInput } from '$/styles/common';
 
 import { MainButton } from './main-button';
-import rteStyles from './rich-text-editor.module.scss';
 import { Toolbar } from './toolbar';
 import { RTEValue } from './type';
 
@@ -46,7 +45,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
       }),
       Placeholder.configure({
         placeholder,
-        emptyEditorClass: 'placeholder',
+        emptyEditorClass: 'rtePlaceholder',
       }),
     ],
     editable: !readOnly,
@@ -83,13 +82,8 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
-          'prose text-gray-1200 max-w-full!',
-          rteStyles.placeholder,
-          !readOnly && [
-            `min-height[4em]! resize-y overflow-hidden px-2 rounded`,
-            textInput,
-            cardBg,
-          ],
+          'prose text-gray-1200 !max-w-full',
+          !readOnly && [`!min-h-[4em] resize-y overflow-hidden px-2 rounded`, textInput, cardBg],
           styles?.editable,
         )}
       />

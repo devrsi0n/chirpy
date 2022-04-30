@@ -112,3 +112,8 @@ button:focus {
 [tooltip]:hover::before {
   opacity: 1;
 }
+
+.rtePlaceholder:first-child::before {
+  content: attr(data-placeholder);
+  @apply text-gray-1000 float-left pointer-events-none h-0;
+}

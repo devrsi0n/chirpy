@@ -41,4 +41,6 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
 export default App;
 
 export const loadFeatures = () =>
-  import('../utilities/framer-motion-features').then((res) => res.default);
+  import(
+    /* webpackChunkName: "framer-motion-features"*/ '../utilities/framer-motion-features'
+  ).then((res) => res.default);

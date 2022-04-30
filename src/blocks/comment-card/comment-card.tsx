@@ -192,6 +192,7 @@ export function CommentCard({
                   ? 'The details of this comment'
                   : `This is already the current comment's detail page`
               }
+              className="flex justify-center"
             >
               <ActionButton
                 color="green"
