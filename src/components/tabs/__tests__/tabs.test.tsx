@@ -37,7 +37,7 @@ describe('Tabs', () => {
   it('should render the second tab after clicking the button', async () => {
     const secondTab = screen.getByRole('button', { name: secondLabel });
     expect(mockOnChange).not.toHaveBeenCalled();
-    userEvent.click(secondTab);
+    await userEvent.click(secondTab);
     await waitFor(() => expect(screen.getByText(secondTabText)).toBeInTheDocument());
     expect(mockOnChange).toHaveBeenCalled();
   });

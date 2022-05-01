@@ -17,11 +17,11 @@ describe('Toast', () => {
     return cleanup();
   });
 
-  it('should render toast after clicking the button', () => {
+  it('should render toast after clicking the button', async () => {
     const button = screen.getByRole('button', {
       name: buttonLabel,
     });
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(screen.getByText(toastTitle)).toBeInTheDocument();
   });
 });

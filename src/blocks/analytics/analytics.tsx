@@ -25,7 +25,7 @@ export interface RealtimeProps {
   currentUserRole: 'owner' | 'admin' | 'public';
 }
 
-export default function Realtime(props: RealtimeProps) {
+export function RealtimeAnalytics(props: RealtimeProps) {
   const [query, setQuery] = React.useState(() => parseQuery(window.location.search, props.site));
   const router = useRouter();
 

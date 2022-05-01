@@ -50,17 +50,17 @@ describe('Welcome', () => {
   it('should call api with filled fields', async () => {
     const email = 'email@test.com';
     const emailInput = screen.getByRole('textbox', { name: /your email/i });
-    userEvent.type(emailInput, email);
+    await userEvent.type(emailInput, email);
     const displayName = 'Test name';
     const displayNameInput = screen.getByLabelText(/your dispaly name/i);
-    userEvent.type(displayNameInput, displayName);
+    await userEvent.type(displayNameInput, displayName);
     const userNameInput = screen.getByRole('textbox', { name: /your username/i });
     const userName = 'testuser';
-    userEvent.type(userNameInput, userName);
+    await userEvent.type(userNameInput, userName);
     const saveButton = screen.getByRole('button', {
       name: /save/i,
     });
-    userEvent.click(saveButton);
+    await userEvent.click(saveButton);
     await waitFor(() =>
       expect(mockUpdateUser).toHaveBeenCalledWith({
         id: 'user-id-1',

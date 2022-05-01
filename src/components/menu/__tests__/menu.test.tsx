@@ -29,11 +29,11 @@ describe('Menu', () => {
     const button = screen.getByText(contentText);
     expect(button).toBeTruthy();
 
-    userEvent.click(button);
+    await userEvent.click(button);
     await waitFor(() => expect(screen.queryByText(item1Text)).toBeInTheDocument());
     expect(screen.getByText(item2Text)).toBeInTheDocument();
 
-    userEvent.click(screen.getByText(item1Text));
+    await userEvent.click(screen.getByText(item1Text));
     expect(mockHandleClickItem1).toHaveBeenCalledTimes(1);
   });
 });

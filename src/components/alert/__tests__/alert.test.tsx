@@ -15,9 +15,9 @@ describe('Alert', () => {
     return cleanup();
   });
 
-  it('should render the text', () => {
+  it('should render the text', async () => {
     expect(screen.getByText(text)).toBeInTheDocument();
-    userEvent.click(screen.getByLabelText('Dismiss'));
+    await userEvent.click(screen.getByLabelText('Dismiss'));
     expect(screen.queryByText(text)).toBeFalsy();
   });
 });

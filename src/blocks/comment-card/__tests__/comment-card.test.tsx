@@ -45,9 +45,9 @@ describe('CommentCard', () => {
     );
   });
 
-  it('should call the handler when clicking the like button', () => {
+  it('should call the handler when clicking the like button', async () => {
     const likeButton = screen.getByLabelText('Like');
-    userEvent.click(likeButton);
+    await userEvent.click(likeButton);
     expect(mockHandleClickLikeAction).toHaveBeenCalledWith(false, '', staticProps.commentId);
   });
 
@@ -55,7 +55,7 @@ describe('CommentCard', () => {
     const replyButton = screen.getByRole('button', {
       name: 'Reply',
     });
-    userEvent.click(replyButton);
+    await userEvent.click(replyButton);
     await waitFor(() => screen.getByLabelText('Reply editor'));
     // const textbox = screen.getByRole('textbox').querySelector('p')!;
     // TODO: figure out why type is not working
@@ -71,11 +71,11 @@ describe('CommentCard', () => {
     const menu = screen.getByRole('button', {
       name: /click to open the menu/i,
     });
-    userEvent.click(menu);
+    await userEvent.click(menu);
     const deleteButton = screen.getByRole('button', {
       name: 'Delete',
     });
-    userEvent.click(deleteButton);
+    await userEvent.click(deleteButton);
     await waitFor(() =>
       screen.getAllByRole('button', {
         name: /delete/i,
@@ -86,7 +86,7 @@ describe('CommentCard', () => {
     const confirmButton = within(confirmWrapper).getByRole('button', {
       name: /delete/i,
     });
-    userEvent.click(confirmButton);
+    await userEvent.click(confirmButton);
     await waitFor(() => expect(mockDeleteAComment).toHaveBeenCalled());
   });
 });
