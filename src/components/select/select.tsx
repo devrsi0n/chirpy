@@ -18,7 +18,7 @@ export type SelectProps<T> = React.PropsWithChildren<{
   className?: string;
 }>;
 
-export function Select<T>({
+export function Select<T extends string | number = string>({
   name,
   value,
   children,

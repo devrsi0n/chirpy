@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as React from 'react';
 
-import { RealtimeAnalytics } from '$/blocks/analytics';
+import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { gqlQuery } from '$/server/common/gql';
@@ -18,7 +18,7 @@ export default function Analytics({ project }: AnalyticsProps): JSX.Element {
     <SiteLayout hideFullBleed title="Analytics">
       <section className="xl:max-width[70rem] mx-auto px-4">
         <PageTitle className="pb-6">Analytics</PageTitle>
-        <RealtimeAnalytics
+        <AnalyticsBlock
           site={{
             domain: project?.domain,
             offset: '0',
