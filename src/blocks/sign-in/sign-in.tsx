@@ -14,6 +14,7 @@ import { SIGN_IN_ERRORS } from '$/strings';
 import { getHostEnv } from '$/utilities/env';
 
 import { authOptions } from './data-source';
+import styles from './sign-in.module.scss';
 
 export type SignInProps = React.PropsWithChildren<{
   title: string;
@@ -81,7 +82,8 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       </div>
       <div
         className={clsx(
-          `flex-1 hidden sm:block w-full h-[100vh] min-h-[200px] bg-[url('/images/sign-in/banner.jpg')_center_no-repeat] bg-cover`,
+          `flex-1 hidden sm:block w-full h-[100vh] min-h-[200px] bg-cover`,
+          styles.mainImage,
         )}
       ></div>
     </div>

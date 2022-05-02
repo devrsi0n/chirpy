@@ -14,21 +14,21 @@ describe('UserMenu', () => {
 
   describe('Variant Nav', () => {
     it('should render user display name after clicking the button with nav variant', async () => {
-      renderMenu('Nav');
+      await renderMenu('Nav');
       await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
     });
   });
 
   describe('Variant Widget', () => {
     it('should render user display name after clicking the button', async () => {
-      renderMenu('Widget');
+      await renderMenu('Widget');
       await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
     });
   });
 });
 
-function renderMenu(variant: UserMenuProps['variant']) {
+async function renderMenu(variant: UserMenuProps['variant']) {
   pageRender(<UserMenu variant={variant} />);
   const menuButton = screen.getByLabelText(/click to open the menu/i);
-  userEvent.click(menuButton);
+  await userEvent.click(menuButton);
 }

@@ -12,6 +12,7 @@ export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JS
     <SiteLayout title={frontMatter.title || 'Terms of service'}>
       <section>
         <article className="mx-auto prose lg:prose-xl">
+          {/* @ts-ignore */}
           <MDXRemote {...mdxSource} components={MDXComponents} />
         </article>
       </section>

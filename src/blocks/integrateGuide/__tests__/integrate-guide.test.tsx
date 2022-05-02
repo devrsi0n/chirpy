@@ -19,7 +19,7 @@ describe('IntegrateGuide', () => {
     const integrateButton = screen.getByRole('button', {
       name: /integrate guide/i,
     });
-    userEvent.click(integrateButton);
+    await userEvent.click(integrateButton);
     await waitFor(() =>
       expect(screen.getByText(/Get Started with \S+ Comment/)).toBeInTheDocument(),
     );

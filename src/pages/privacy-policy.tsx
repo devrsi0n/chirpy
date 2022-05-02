@@ -11,6 +11,7 @@ export default function PrivacyPolicy({ mdxSource, frontMatter }: MDXProps): JSX
     <SiteLayout title={frontMatter.title || 'Privacy policy'}>
       <section>
         <article className="mx-auto prose lg:prose-xl py-16">
+          {/* @ts-ignore */}
           <MDXRemote {...mdxSource} components={MDXComponents} />
         </article>
       </section>

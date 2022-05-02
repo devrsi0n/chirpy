@@ -60,17 +60,17 @@ describe('dashboard', () => {
     const menu = screen.getByRole('button', {
       name: /show more project options/i,
     });
-    userEvent.click(menu);
+    await userEvent.click(menu);
     const deleteOption = screen.getByRole('menuitem', {
       name: /delete/i,
     });
     expect(deleteOption).toBeTruthy();
-    userEvent.click(deleteOption);
+    await userEvent.click(deleteOption);
     const deleteButton = screen.getByRole('button', {
       name: /delete/i,
     });
     expect(deleteButton).toBeTruthy();
-    userEvent.click(deleteButton);
+    await userEvent.click(deleteButton);
     expect(mockDeleteProject).toHaveBeenCalled();
     await waitFor(() => expect(screen.queryByText(/Delete the project/)).toBeFalsy());
     await waitFor(() => expect(screen.getByLabelText('Page views').textContent).toBe('212'));

@@ -20,6 +20,7 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
           <SideBar className="pt-10" directories={directories} title="Documentation" />
           <article className="flex-1 overflow-y-auto prose lg:prose-xl">
             <div className="pt-10">
+              {/* @ts-ignore */}
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
             </div>
           </article>

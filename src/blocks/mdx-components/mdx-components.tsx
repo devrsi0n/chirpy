@@ -5,12 +5,12 @@ const MDXComponents = {
 };
 
 type MDXLinkProps = {
-  children: React.ReactNode;
-  href: string;
+  children?: React.ReactNode;
+  href?: string;
 };
 function MDXLink(props: MDXLinkProps): JSX.Element {
   return (
-    <Link href={props.href} variant="solid">
+    <Link href={props.href || ''} variant="solid">
       {props.children}
     </Link>
   );

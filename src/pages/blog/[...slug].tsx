@@ -33,6 +33,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
               <Image {...banner} layout="responsive" alt="banner" />
             </div>
           )}
+          {/* @ts-ignore */}
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>

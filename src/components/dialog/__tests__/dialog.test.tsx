@@ -27,11 +27,11 @@ describe('Dialog', () => {
     expect(screen.queryByText(content)).toBeTruthy();
   });
 
-  it('should dismiss the dialog if click the dismiss button', () => {
+  it('should dismiss the dialog if click the dismiss button', async () => {
     mockShouldShowDialog.mockReturnValue(true);
     renderComponent();
     expect(mockHandleClose).not.toHaveBeenCalled();
-    userEvent.click(screen.getByLabelText('Dismiss'));
+    await userEvent.click(screen.getByLabelText('Dismiss'));
     expect(mockHandleClose).toHaveBeenCalled();
   });
 });

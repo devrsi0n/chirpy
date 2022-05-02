@@ -1,0 +1,15 @@
+diff --git a/node_modules/react-flip-move/typings/react-flip-move.d.ts b/node_modules/react-flip-move/typings/react-flip-move.d.ts
+index 6e8a1b8..e0bed3d 100644
+--- a/node_modules/react-flip-move/typings/react-flip-move.d.ts
++++ b/node_modules/react-flip-move/typings/react-flip-move.d.ts
+@@ -26,6 +26,10 @@ declare namespace FlipMove {
+     type AnimationProp = AnimationPreset | Animation | boolean;
+ 
+     interface FlipMoveProps {
++        /**
++           * The children to animate. Each child must have a unique key to work correctly.
++           */
++        children?: React.ReactNode;
+         className?: string;
+ 
+         /**

@@ -42,9 +42,9 @@ describe('SideBar', () => {
     }
   });
 
-  it('should render the child texts after clicking the children', () => {
+  it('should render the child texts after clicking the children', async () => {
     const parentRoute = screen.getAllByText(directories[0].title)[0];
-    userEvent.click(parentRoute);
+    await userEvent.click(parentRoute);
     for (const child of children) {
       screen.getAllByText(child.title).forEach((text) => expect(text).toBeInTheDocument());
     }

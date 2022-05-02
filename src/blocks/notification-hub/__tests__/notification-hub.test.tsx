@@ -15,7 +15,7 @@ describe('NotificationHub', () => {
   });
 
   it('should render the messages', async () => {
-    renderDefaultNotificationHub();
+    await renderDefaultNotificationHub();
     expect(screen.getAllByAltText('Avatar')).toHaveLength(3);
     expect(screen.getAllByLabelText('Comment content')).toHaveLength(2);
   });
@@ -25,9 +25,9 @@ describe('NotificationHub', () => {
     jest
       .spyOn(notificationModule, 'useHaveReadANotificationMutation')
       .mockReturnValue([{} as any, haveReadANotification]);
-    renderDefaultNotificationHub();
+    await renderDefaultNotificationHub();
 
-    userEvent.click(screen.getAllByAltText('Avatar')[0]);
+    await userEvent.click(screen.getAllByAltText('Avatar')[0]);
     expect(haveReadANotification).toHaveBeenCalledTimes(1);
   });
 
@@ -36,15 +36,15 @@ describe('NotificationHub', () => {
     jest
       .spyOn(notificationModule, 'useDeleteNotificationMessageMutation')
       .mockReturnValue([{} as any, deleteNotificationMessage]);
-    renderDefaultNotificationHub();
+    await renderDefaultNotificationHub();
 
-    userEvent.click(screen.getAllByLabelText('Delete the notification message')[0]);
+    await userEvent.click(screen.getAllByLabelText('Delete the notification message')[0]);
     expect(deleteNotificationMessage).toHaveBeenCalledTimes(1);
   });
 });
 
-function renderDefaultNotificationHub() {
+async function renderDefaultNotificationHub() {
   render(<Default />);
   const notificationButton = screen.getByLabelText('click to open the menu');
-  userEvent.click(notificationButton);
+  await userEvent.click(notificationButton);
 }

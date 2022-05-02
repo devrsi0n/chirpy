@@ -54,7 +54,7 @@ function clickUserMenu() {
   userImage.parent().then((elem) => {
     // Only click the menu if it's unexpanded
     if (elem.attr('aria-expanded') === 'false') {
-      userImage.click();
+      elem.click();
     }
   });
 }

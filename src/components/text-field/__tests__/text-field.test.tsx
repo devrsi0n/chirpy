@@ -12,15 +12,15 @@ describe('TextField', () => {
     return cleanup();
   });
 
-  it('should render the default value and changed value', () => {
+  it('should render the default value and changed value', async () => {
     render(<TextField label={label} defaultValue={defaultValue} />);
 
     const textField = screen.getByLabelText(label) as HTMLInputElement;
     expect(textField.value).toBe(defaultValue);
 
     const newText = 'This is a very long testing text';
-    userEvent.clear(textField);
-    userEvent.type(textField, newText);
+    await userEvent.clear(textField);
+    await userEvent.type(textField, newText);
     expect(textField.value).toBe(newText);
   });
 
