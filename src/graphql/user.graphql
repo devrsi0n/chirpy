@@ -51,3 +51,9 @@ query userDashboardProjects($id: uuid!) {
     }
   }
 }
+
+mutation deleteUser($id: uuid!) {
+  deleteUserByPk(id: $id) {
+    id
+  }
+}

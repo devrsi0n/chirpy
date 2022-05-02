@@ -140,6 +140,61 @@ export type DeleteOneCommentMutation = {
   updateCommentByPk?: { __typename?: 'Comment'; id: string } | null;
 };
 
+export type CommentOfPageQueryVariables = Types.Exact<{
+  pageId?: Types.InputMaybe<Types.Scalars['uuid']>;
+  limit?: Types.InputMaybe<Types.Scalars['Int']>;
+  offset?: Types.InputMaybe<Types.Scalars['Int']>;
+}>;
+
+export type CommentOfPageQuery = {
+  __typename?: 'query_root';
+  comments: Array<{
+    __typename?: 'Comment';
+    id: string;
+    content: any;
+    createdAt: string;
+    deletedAt?: string | null;
+    parentId?: string | null;
+    pageId: string;
+    comment: any;
+    replies: Array<{
+      __typename?: 'Comment';
+      id: string;
+      content: any;
+      createdAt: string;
+      deletedAt?: string | null;
+      parentId?: string | null;
+      pageId: string;
+      comment: any;
+      replies: Array<{
+        __typename?: 'Comment';
+        id: string;
+        content: any;
+        createdAt: string;
+        deletedAt?: string | null;
+        parentId?: string | null;
+        pageId: string;
+        comment: any;
+        user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+        likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+      }>;
+      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+    }>;
+    user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+    likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+  }>;
+};
+
+export type DeleteCommentByPkMutationVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type DeleteCommentByPkMutation = {
+  __typename?: 'mutation_root';
+  deleteCommentByPk?: { __typename?: 'Comment'; id: string } | null;
+};
+
 export const CommentContentFragmentDoc = gql`
   fragment commentContent on Comment {
     id
@@ -241,5 +296,41 @@ export const DeleteOneCommentDocument = gql`
 export function useDeleteOneCommentMutation() {
   return Urql.useMutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>(
     DeleteOneCommentDocument,
+  );
+}
+export const CommentOfPageDocument = gql`
+  query commentOfPage($pageId: uuid, $limit: Int, $offset: Int) {
+    comments(where: { pageId: { _eq: $pageId } }, limit: $limit, offset: $offset) {
+      comment: content(path: "content")
+      ...commentContent
+      replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        comment: content(path: "content")
+        ...commentContent
+        replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+          comment: content(path: "content")
+          ...commentContent
+        }
+      }
+    }
+  }
+  ${CommentContentFragmentDoc}
+`;
+
+export function useCommentOfPageQuery(
+  options?: Omit<Urql.UseQueryArgs<CommentOfPageQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<CommentOfPageQuery>({ query: CommentOfPageDocument, ...options });
+}
+export const DeleteCommentByPkDocument = gql`
+  mutation deleteCommentByPk($id: uuid!) {
+    deleteCommentByPk(id: $id) {
+      id
+    }
+  }
+`;
+
+export function useDeleteCommentByPkMutation() {
+  return Urql.useMutation<DeleteCommentByPkMutation, DeleteCommentByPkMutationVariables>(
+    DeleteCommentByPkDocument,
   );
 }

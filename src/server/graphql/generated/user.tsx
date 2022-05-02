@@ -178,6 +178,19 @@ export type CreateUserMutation = {
   } | null;
 };
 
+export type AuthUserQueryVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type AuthUserQuery = {
+  __typename?: 'query_root';
+  userByPk?: {
+    __typename?: 'User';
+    type?: Types.UserType_Enum | null;
+    projects: Array<{ __typename?: 'Project'; id: string }>;
+  } | null;
+};
+
 export const AdapterUserFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -867,3 +880,53 @@ export const CreateUserDocument = {
     ...AdapterUserFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<CreateUserMutation, CreateUserMutationVariables>;
+export const AuthUserDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'authUser' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'userByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'projects' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'type' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<AuthUserQuery, AuthUserQueryVariables>;
