@@ -76,7 +76,7 @@ export default function Dashboard(): JSX.Element {
   return (
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
-        <div className="space-x-2 flex flex-row justify-between items-start">
+        <div className="flex flex-col items-start sm:flex-row sm:justify-between space-y-5 sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
           <Button
             onClick={handleCreateProject}
