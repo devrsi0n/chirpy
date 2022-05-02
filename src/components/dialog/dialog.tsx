@@ -55,12 +55,10 @@ export function Dialog({
         >
           <div className="min-h-full px-4 flex justify-center items-center">
             <m.div {...easeInOutOpacity} className="fixed inset-0">
-              <HeadlessDialog.Overlay
-                className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)}
-              />
+              <div className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)} />
             </m.div>
             <m.div {...easeInOut}>
-              <div className="inline-block shadow-md relative">
+              <HeadlessDialog.Panel className="inline-block shadow-md relative">
                 <div
                   className={clsx(
                     `max-w-lg flex flex-row px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 space-x-4`,
@@ -100,7 +98,7 @@ export function Dialog({
                   </div>
                 </div>
                 {footer}
-              </div>
+              </HeadlessDialog.Panel>
             </m.div>
           </div>
         </HeadlessDialog>
