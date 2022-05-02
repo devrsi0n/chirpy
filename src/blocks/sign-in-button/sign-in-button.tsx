@@ -32,7 +32,11 @@ export function SignInButton({
       {...restProps}
     >
       <span className="inline-flex flex-row items-center space-x-1">
-        {signInLoading ? <Loader className="animate-spin w-5 h-5" /> : <Lock size="14" />}
+        {signInLoading ? (
+          <Loader aria-label="Signing in" className="animate-spin w-5 h-5" />
+        ) : (
+          <Lock size="14" />
+        )}
         <span>Sign in</span>
       </span>
     </Button>
