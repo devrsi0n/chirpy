@@ -29,7 +29,7 @@ export async function sendEmail({ subject, to, type, content }: EmailOptions) {
   email.sender = senders[type];
   email.htmlContent = content;
   email.tags = [type];
-  console.log('Send email', JSON.stringify(email, null, 2));
+  // console.log('Send email', JSON.stringify(email, null, 2));
   await sibApi.sendTransacEmail(email);
 }
 

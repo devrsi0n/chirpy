@@ -65,7 +65,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       },
     };
   }, [position]);
-  const [isAnimationEnd, setIsAnimationEnd] = React.useState(false);
+  const [isAnimationEnd, setIsAnimationEnd] = React.useState(true);
 
   useIsomorphicLayoutEffect(() => {
     if (isOpen) {
@@ -92,7 +92,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       onAnimationComplete={(definition) => definition === 'closed' && setIsAnimationEnd(true)}
     >
       <m.div
-        className={clsx('bg-gray-200 absolute inset-0', isAnimationEnd && `hidden`)}
+        className={clsx('bg-gray-200 absolute inset-0', isAnimationEnd && `!hidden`)}
         variants={backgroundVariant}
       />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>

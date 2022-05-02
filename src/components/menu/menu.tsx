@@ -104,11 +104,10 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
   );
 }
 
-export type MenuItemProps = React.PropsWithChildren<
-  {
-    disableAutoDismiss?: boolean;
-  } & Pick<React.ComponentProps<typeof HeadlessMenu.Item>, 'onClick'>
-> &
+export type MenuItemProps = React.PropsWithChildren<{
+  disableAutoDismiss?: boolean;
+  onClick?: () => void;
+}> &
   BoxProps;
 
 function MenuItem({
@@ -125,11 +124,12 @@ function MenuItem({
     children
   );
   return (
-    <HeadlessMenu.Item onClick={onClick}>
+    <HeadlessMenu.Item>
       {
         (/* { active }: ItemRenderPropArg */) => (
           <Box
             as={as}
+            onClick={onClick}
             className={clsx(
               listHoverable,
               itemStyle,

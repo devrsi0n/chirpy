@@ -35,7 +35,7 @@ function FullFilled(): JSX.Element {
   return (
     <section className="flex flex-col items-center justify-center space-y-12">
       <div className="text-center space-y-2">
-        <Heading as="h2" className="tracking-tight">
+        <Heading as="h2" className="!tracking-tight">
           Welcome on board 🎉
         </Heading>
         <Text variant="secondary">
@@ -62,7 +62,7 @@ function NotFullFilled() {
   return (
     <div className="flex flex-col items-center space-y-8 md:flex-row md:items-center md:space-y-0 md:space-x-8">
       <div className="space-y-3">
-        <Heading as="h2" className="tracking-tight">
+        <Heading as="h2" className="!tracking-tight">
           Welcome on board
         </Heading>
         <Text variant="secondary">Just fill this form to get started</Text>

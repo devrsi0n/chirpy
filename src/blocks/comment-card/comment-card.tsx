@@ -118,14 +118,14 @@ export function CommentCard({
           {!isDeleted && (
             <>
               <div className="flex flex-row items-start space-x-4">
-                <Text bold className="leading-none">
+                <Text bold className="!leading-none">
                   {name}
                 </Text>
                 <Text
                   variant="secondary"
                   as="time"
                   title={createdAt}
-                  className="leading-none cursor-default"
+                  className="!leading-none cursor-default"
                   dateTime={createdAt}
                 >
                   {dayjs(createdAt).fromNow()}

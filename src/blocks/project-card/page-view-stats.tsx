@@ -55,7 +55,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
             )}
           >
             <ArrowUp size={14} className={clsx(grow <= 0 && `rotate-180`)} />
-            <Text size="xs" className="leading-none" style={{ color: 'inherit' }}>
+            <Text size="xs" className="!leading-none" style={{ color: 'inherit' }}>
               {`${100}`}%
             </Text>
           </span>
