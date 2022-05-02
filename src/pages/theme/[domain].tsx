@@ -140,7 +140,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
                 />
               </Popover>
               <Text
-                className="px-2 leading-none mb-2"
+                className="px-2 !leading-none mb-2"
                 variant="secondary"
                 aria-label="Selected color"
                 size="sm"
@@ -158,7 +158,7 @@ function ThemeEditor(props: ThemeProps): JSX.Element {
               {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
             </Text>
           </div>
-          <div role="separator" className="w-20 bg-gray-300 my-5 height[1px]" />
+          <div role="separator" className="w-20 bg-gray-300 my-5 h-[1px]" />
           <div className={THEME_WIDGET_CLS}>
             <CommentTrees
               comments={comments as any}

@@ -63,4 +63,4 @@ export default function Custom404(): JSX.Element {
 }
 
 const dashedBorder = `rounded-full border border-dashed`;
-const listMakerStyle = `bg-red-900`;
+const listMakerStyle = `!bg-red-900`;

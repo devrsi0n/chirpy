@@ -83,7 +83,7 @@ function SiteHeader({ site }: SiteHeaderProps): JSX.Element {
   return (
     <section className="flex flex-row items-center space-x-1 mr-4">
       <SiteIcon name={site.domain} domain={site.domain} />
-      <Heading as="h3" className="text-base font-bold">
+      <Heading as="h3" className="!text-base font-bold">
         {site.domain}
       </Heading>
     </section>

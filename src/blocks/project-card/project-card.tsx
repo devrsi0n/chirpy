@@ -112,7 +112,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                   href={page.url}
                   title={page.title || page.url}
                   variant="plain"
-                  className="inline-block max-w-xs overflow-ellipsis overflow-hidden whitespace-nowrap"
+                  className="inline-block max-w-xs text-ellipsis overflow-hidden whitespace-nowrap"
                 >
                   {page.title || page.url}
                 </Link>
@@ -136,7 +136,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       )}
       <Divider />
       <div className="px-6 pb-4">
-        <Text className="leading-none" size="sm" variant="secondary">
+        <Text className="!leading-none" size="sm" variant="secondary">
           Created {dayjs(project.createdAt).fromNow()}
         </Text>
       </div>

@@ -27,7 +27,7 @@ export function CommentTrees({
   return (
     <div className="space-y-4">
       <div className="flex flex-row justify-between items-center">
-        <Heading as="h3" className="text-2xl">
+        <Heading as="h3" className="!text-2xl">
           {formatTitle(commentCount)}
         </Heading>
         <UserMenu variant="Widget" />
@@ -35,9 +35,7 @@ export function CommentTrees({
       <div className="space-y-7">
         <div className="space-y-2">
           <RichTextEditor
-            placeholder={
-              rtePlaceholder || `What are your thoughts? (Basic markdown shortcuts supported)`
-            }
+            placeholder={rtePlaceholder || `What are your thoughts? (Markdown shortcuts supported)`}
             onSubmit={onSubmitReply}
           />
         </div>

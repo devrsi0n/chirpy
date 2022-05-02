@@ -35,7 +35,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
     <div>
       <aside
         className={clsx(
-          'w-full height[calc(100vh - 4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:w-64 md:pb-16',
+          'w-full h-[calc(100vh-4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:w-64 md:pb-16',
           className,
         )}
       >

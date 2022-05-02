@@ -28,7 +28,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         show={showDialog}
         title={
           <div>
-            <Heading as="h2" className="mb-3 leading-none">
+            <Heading as="h2" className="mb-3 !leading-none">
               Get Started with Chirpy Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">

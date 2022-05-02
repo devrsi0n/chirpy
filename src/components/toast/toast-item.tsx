@@ -42,7 +42,7 @@ export function ToastItem({
         <div className="flex flex-row items-center space-x-4 mr-4">
           {typeIcon}
           <div className={`space-y-2 max-w-lg`}>
-            <Heading as="h5" className={`leading-none`}>
+            <Heading as="h5" className={`!leading-none`}>
               {title}
             </Heading>
           </div>
