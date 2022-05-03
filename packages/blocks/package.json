@@ -10,11 +10,15 @@
     "@chirpy/contexts": "workspace:*",
     "@chirpy/graphql": "workspace:*",
     "@chirpy/styles": "workspace:*",
+    "@chirpy/hooks": "workspace:*",
+    "@chirpy/utilities": "workspace:*",
     "clsx": "1.1.1",
     "chart.js": "3.7.1",
+    "dayjs": "1.11.1",
     "d3": "3.5.17",
     "datamaps": "0.5.9",
-    "downshift": "6.1.7"
+    "downshift": "6.1.7",
+    "framer-motion": "6.3.3"
   },
   "devDependencies": {
     "@geist-ui/react-icons": "1.0.1",

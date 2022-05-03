@@ -3,7 +3,7 @@ import React from 'react';
 import FlipMove from 'react-flip-move';
 
 import { Link } from '@chirpy/components';
-import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { ANALYTICS_DOMAIN } from '@chirpy/utilities';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

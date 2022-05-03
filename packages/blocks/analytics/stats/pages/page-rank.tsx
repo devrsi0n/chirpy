@@ -6,8 +6,8 @@ import * as React from 'react';
 import FlipMove from 'react-flip-move';
 
 import { Link } from '@chirpy/components';
-import { usePrevious } from '$/hooks/use-previous';
-import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
+import { usePrevious } from '@chirpy/hooks';
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '@chirpy/utilities';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

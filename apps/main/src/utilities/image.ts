@@ -1,4 +1,4 @@
-import { ssrMode } from './env';
+import { ssrMode } from '../../../../packages/utilities/env';
 
 export type BannerProps = {
   src: string;

@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
-import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { useIsDarkMode } from '@chirpy/hooks';
+import { ANALYTICS_DOMAIN } from '@chirpy/utilities';
 
 import * as api from '../analytics-api';
 import styles from '../analytics.module.scss';

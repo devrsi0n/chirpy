@@ -1,0 +1,11 @@
+{
+  "name": "@chirpy/utilities",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

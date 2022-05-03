@@ -1,5 +1,7 @@
-export const ssrMode = typeof window === 'undefined';
+export const isENVProd = process.env.NODE_ENV === 'production';
+export const isENVDev = process.env.NODE_ENV === 'development';
 
+export const ssrMode = typeof window === 'undefined';
 export const isBrowser = !ssrMode;
 
 export function getHostEnv(url = window.location.href) {

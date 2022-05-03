@@ -19,7 +19,7 @@ import { TextField } from '@chirpy/components';
 import { useToast } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
 import { useUpdateUserByPkMutation } from '@chirpy/graphql/generated/user';
-import { useForm } from '$/hooks/use-form';
+import { useForm } from '@chirpy/hooks';
 
 type FormFields = {
   name: string;

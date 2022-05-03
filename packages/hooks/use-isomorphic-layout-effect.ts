@@ -1,7 +1,6 @@
 import * as React from 'react';
-
-import { ssrMode } from '$/utilities/env';
+import { ssrMode } from '@chirpy/utilities';
 
 const useIsomorphicLayoutEffect = ssrMode ? React.useEffect : React.useLayoutEffect;
 
-export default useIsomorphicLayoutEffect;
+export { useIsomorphicLayoutEffect };

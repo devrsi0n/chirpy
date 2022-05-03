@@ -1,4 +1,4 @@
-import { EVENT_CLICK_CONTAINER } from '../../../lib/constants';
+import { EVENT_CLICK_CONTAINER } from '@chirpy/utilities/constants';
 import { ERR_UNMATCHED_DOMAIN } from '../../../server/common/error-code';
 import { ResponseError } from '../../../server/types/error';
 import { GetPagByUrl } from '../../../server/types/page';

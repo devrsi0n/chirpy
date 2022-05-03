@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { Link } from '@chirpy/components';
 import { Text } from '@chirpy/components';
-import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { ANALYTICS_DOMAIN } from '@chirpy/utilities';
 
 import { getStats } from '../analytics/analytics-api';
 

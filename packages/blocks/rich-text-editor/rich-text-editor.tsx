@@ -6,8 +6,8 @@ import StarterKit from '@tiptap/starter-kit';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { useIsUnmounting } from '$/hooks/use-is-unmounting';
-import { useLocalStorage } from '$/hooks/use-local-storage';
+import { useIsUnmounting } from '@chirpy/hooks';
+import { useLocalStorage } from '@chirpy/hooks';
 import { cardBg, textInput } from '@chirpy/styles/common';
 
 import { MainButton } from './main-button';

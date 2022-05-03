@@ -5,7 +5,7 @@ import { Code } from '@chirpy/components';
 import { Dialog } from '@chirpy/components';
 import { Heading } from '@chirpy/components';
 import { Text } from '@chirpy/components';
-import { APP_URL } from '$/lib/constants';
+import { APP_URL } from '@chirpy/utilities';
 
 export type IntegrateGuideProps = {
   domain: string;

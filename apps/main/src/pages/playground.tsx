@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { SiteLayout } from '@chirpy/blocks';
 import { PageTitle } from '@chirpy/blocks';
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev } from '@chirpy/utilities';
 
 export default function PlayGround(): JSX.Element {
   return (

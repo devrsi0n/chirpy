@@ -1,4 +1,4 @@
-import { urlBase64ToUint8Array } from '$/utilities/string';
+import { urlBase64ToUint8Array } from '../utilities/string';
 
 const NOTIFICATION_DID_REGISTER_KEY = 'chirpy.notification-subscription.did-register';
 

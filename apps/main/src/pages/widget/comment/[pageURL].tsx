@@ -20,9 +20,9 @@ import {
   useCommentTreeSubscription,
 } from '@chirpy/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '@chirpy/graphql/generated/page';
-import { useCreateAComment } from '$/hooks/use-create-a-comment';
-import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
-import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
+import { useCreateAComment } from '@chirpy/hooks';
+import { useToggleALikeAction } from '@chirpy/hooks';
+import { useWidgetSideEffects } from '@chirpy/hooks';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   PageByUrlOnlyDocument,
@@ -33,7 +33,7 @@ import {
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
-import { ssrMode } from '$/utilities/env';
+import { ssrMode } from '@chirpy/utilities';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 

@@ -5,8 +5,8 @@ import * as React from 'react';
 
 import { Button, ButtonProps } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { CALLBACK_URL_KEY } from '$/lib/constants';
+import { useSignInWindow } from '@chirpy/hooks';
+import { CALLBACK_URL_KEY } from '@chirpy/utilities';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;

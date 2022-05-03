@@ -12,8 +12,8 @@ import { Link, LinkProps } from '@chirpy/components';
 import { Menu } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { useSignInWindow } from '@chirpy/hooks';
+import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY } from '@chirpy/utilities';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';

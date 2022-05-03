@@ -10,8 +10,8 @@ import { Text } from '@chirpy/components';
 import { TextField } from '@chirpy/components';
 import { useToast } from '@chirpy/components';
 import { useUpdateUserFieldsMutation } from '@chirpy/graphql/generated/user';
-import { useForm } from '$/hooks/use-form';
-import { sleep } from '$/utilities/time';
+import { useForm } from '@chirpy/hooks';
+import { sleep } from '../utilities/time';
 
 import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
 

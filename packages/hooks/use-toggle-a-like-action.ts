@@ -1,7 +1,7 @@
 import { useToast } from '@chirpy/components';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '@chirpy/graphql/generated/like';
 
-import { useCurrentUser } from '@chirpy/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '@chirpy/contexts';
 import { useSignInWindow } from './use-sign-in-window';
 
 export type ToggleLieAction = (

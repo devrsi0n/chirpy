@@ -11,6 +11,8 @@ const withTM = require('next-transpile-modules')([
   '@chirpy/contexts',
   '@chirpy/graphql',
   '@chirpy/styles',
+  '@chirpy/hooks',
+  '@chirpy/utilities',
 ]);
 
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;

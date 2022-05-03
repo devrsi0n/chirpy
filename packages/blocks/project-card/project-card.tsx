@@ -16,7 +16,7 @@ import { useToast } from '@chirpy/components';
 import { useDeleteProjectByPkMutation } from '@chirpy/graphql/generated/project';
 import { UserDashboardProjectsQuery } from '@chirpy/graphql/generated/user';
 import { listHoverable } from '@chirpy/styles/common';
-import { dayjs } from '$/utilities/date';
+import { dayjs } from '../utilities/date';
 
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';

@@ -7,7 +7,7 @@ import { Heading } from '@chirpy/components';
 import { Link } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useCelebration } from '$/hooks/use-celebration';
+import { useCelebration } from '@chirpy/hooks';
 import { ssrMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';
 

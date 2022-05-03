@@ -6,7 +6,7 @@ import { Button } from '@chirpy/components';
 import { Heading } from '@chirpy/components';
 import { Link } from '@chirpy/components';
 import { Text } from '@chirpy/components';
-import { FEEDBACK_LINK } from '$/lib/constants';
+import { FEEDBACK_LINK } from '@chirpy/utilities';
 
 export default function Custom500(): JSX.Element {
   const { query } = useRouter();

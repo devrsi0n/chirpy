@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useHasMounted } from '$/hooks/use-has-mounted';
+import { useHasMounted } from '@chirpy/hooks';
 
 export type ClientOnlyProps = React.PropsWithChildren<{
   //

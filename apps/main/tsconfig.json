@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "checkJs": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -19,11 +23,16 @@
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
-      "$/*": ["src/*"]
+      "$/*": [
+        "src/*"
+      ]
     },
     "incremental": true
   },
-  "exclude": ["node_modules", ".next"],
+  "exclude": [
+    "node_modules",
+    ".next"
+  ],
   "include": [
     "types/**/*.d.ts",
     "src/**/*.ts",

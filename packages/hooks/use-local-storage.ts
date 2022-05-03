@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { ssrMode } from '$/utilities/env';
+import { ssrMode } from '@chirpy/utilities';
 
 import { useEventListener } from './use-event-listener';
 

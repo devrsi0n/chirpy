@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { getHostEnv } from '$/utilities/env';
+import { getHostEnv } from '@chirpy/utilities';
 
 import { Badge } from '../badge';
 import { Link, LinkProps } from '../link';

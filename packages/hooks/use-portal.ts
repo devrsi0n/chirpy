@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { isBrowser } from '$/utilities/env';
+import { isBrowser } from '@chirpy/utilities';
 
 const createElement = (id: string): HTMLElement => {
   const el = document.createElement('div');

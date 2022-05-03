@@ -5,9 +5,9 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-import { getHostEnv } from '$/utilities/env';
+import { getHostEnv } from '@chirpy/utilities';
 
-import { isENVProd } from '../../utilities/env';
+import { isENVProd } from '@chirpy/utilities';
 import { sendVerificationRequest } from '../email/send-emails';
 
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;

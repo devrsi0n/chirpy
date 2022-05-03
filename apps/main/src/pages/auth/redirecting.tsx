@@ -5,8 +5,8 @@ import * as React from 'react';
 import { SiteLayout } from '@chirpy/blocks';
 import { Spinner } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useTimeout } from '$/hooks/use-timeout';
-import { CALLBACK_URL_KEY, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { useTimeout } from '@chirpy/hooks';
+import { CALLBACK_URL_KEY, LOG_IN_SUCCESS_KEY } from '@chirpy/utilities';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {

@@ -10,7 +10,7 @@ import {
   Exchange,
 } from 'urql';
 
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev } from '@chirpy/utilities';
 
 // export function withGqlClient(
 //   getClientConfig?: NextUrqlClientConfig,

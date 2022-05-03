@@ -9,7 +9,7 @@ import * as React from 'react';
 import { IconButton } from '@chirpy/components';
 import { Link } from '@chirpy/components';
 import { Text } from '@chirpy/components';
-import { useHasMounted } from '$/hooks/use-has-mounted';
+import { useHasMounted } from '@chirpy/hooks';
 import { ColorMode } from '$/types/theme.type';
 
 const icons: Record<ColorMode, Icon> = {

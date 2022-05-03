@@ -5,7 +5,7 @@ import Datamap from 'datamaps';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { ANALYTICS_DOMAIN } from '@chirpy/utilities';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

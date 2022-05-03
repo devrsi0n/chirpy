@@ -5,9 +5,9 @@ import { m, useCycle, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { IconButton } from '@chirpy/components';
-import { useClickOutside } from '$/hooks/use-click-outside';
-import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
-import { ssrMode } from '$/utilities/env';
+import { useClickOutside } from '@chirpy/hooks';
+import {useIsomorphicLayoutEffect} from '@chirpy/hooks';
+import { ssrMode } from '@chirpy/utilities';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
 

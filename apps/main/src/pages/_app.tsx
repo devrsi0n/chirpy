@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import { ToastProvider } from '@chirpy/components';
 import { CurrentUserProvider, GQLClientProvider, NotificationProvider } from '@chirpy/contexts';
-import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy/utilities';
 import '@chirpy/styles/global-styles.scss';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {

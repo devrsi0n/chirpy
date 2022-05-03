@@ -3,17 +3,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:both": "concurrently 'next dev' 'npm run dev:comment'",
+    "dev:both": "concurrently 'next dev' 'pnpm run dev:comment'",
     "dev:comment": "vite --config scripts/vite/comment.config.js",
-    "dev:sw": "VITE_DEBUG=true npm run build:sw",
+    "dev:sw": "VITE_DEBUG=true pnpm run build:sw",
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "build": "concurrently 'next build' 'npm run build:comment' 'npm run build:sw'",
+    "build": "concurrently 'next build' 'pnpm run build:comment' 'pnpm run build:sw'",
     "build:comment": "vite build --config scripts/vite/comment.config.js",
     "build:sw": "vite build --config scripts/vite/sw.config.js",
-    "build:comment:dev": "VITE_DEBUG=true npm run build:comment",
-    "build:sw:dev": "VITE_DEBUG=true npm run build:sw",
-    "build:local": "dotenv -e .env.local -- concurrently 'next build' 'npm run build:comment:dev' 'npm run build:sw:dev'",
-    "analyze": "ANALYZE=true npm run build:local",
+    "build:comment:dev": "VITE_DEBUG=true pnpm run build:comment",
+    "build:sw:dev": "VITE_DEBUG=true pnpm run build:sw",
+    "build:local": "dotenv -e .env.local -- concurrently 'next build' 'pnpm run build:comment:dev' 'pnpm run build:sw:dev'",
+    "analyze": "ANALYZE=true pnpm run build:local",
     "start": "next start",
     "start:local": "dotenv -e .env.local -- next start",
     "postinstall": "patch-package",
@@ -39,7 +39,7 @@
     ],
     "*.graphql": [
       "prettier --write",
-      "npm run g:gql"
+      "pnpm run g:gql"
     ],
     "*.{ts,tsx,js}": [
       "eslint --fix"
@@ -59,14 +59,9 @@
     "@tiptap/extension-underline": "2.0.0-beta.23",
     "@tiptap/react": "2.0.0-beta.109",
     "@tiptap/starter-kit": "2.0.0-beta.184",
-    "canvas-confetti": "1.5.1",
-    "chart.js": "3.7.1",
     "clsx": "1.1.1",
     "cors": "2.8.5",
     "csstype": "3.0.11",
-    "d3": "3.5.17",
-    "datamaps": "0.5.9",
-    "dayjs": "1.11.1",
     "debounce-promise": "3.1.2",
     "eta": "1.12.3",
     "framer-motion": "6.3.3",

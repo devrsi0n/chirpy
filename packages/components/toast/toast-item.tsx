@@ -6,7 +6,7 @@ import XCircle from '@geist-ui/react-icons/xCircle';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { useTimeout } from '$/hooks/use-timeout';
+import { useTimeout } from '@chirpy/hooks';
 
 import { IconButton, Button } from '../button';
 import { Card } from '../card';
