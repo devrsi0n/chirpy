@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import * as React from 'react';
 
-import { Theme } from '$/types/theme.type';
+import { Theme } from '@chirpy/types';
 
 import { siteTheme } from './site-theme';
 import { useThemeVariables } from './use-theme-variables';

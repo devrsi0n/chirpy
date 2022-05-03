@@ -10,7 +10,7 @@ import { Logo } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { TextField } from '@chirpy/components';
 import { useForm } from '@chirpy/hooks';
-import { SIGN_IN_ERRORS } from '$/strings';
+import { SIGN_IN_ERRORS } from './strings';
 import { getHostEnv } from '@chirpy/utilities';
 
 import { authOptions } from './data-source';

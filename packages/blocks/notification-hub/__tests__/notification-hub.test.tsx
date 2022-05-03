@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/testing-react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import * as notificationModule from '@chirpy/graphql/generated/notification';
+import * as notificationModule from '@chirpy/client-graphql/generated/notification';
 
 import * as stories from '../stories/notification-hub.stories';
 

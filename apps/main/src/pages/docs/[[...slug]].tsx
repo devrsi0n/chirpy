@@ -7,7 +7,7 @@ import { MDXComponents } from '@chirpy/blocks';
 import { SideBar, SideBarProps } from '@chirpy/blocks';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from '@chirpy/types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';

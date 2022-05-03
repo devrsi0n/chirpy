@@ -10,8 +10,8 @@ import { Divider } from '@chirpy/components';
 import { Link } from '@chirpy/components';
 import { Menu } from '@chirpy/components';
 import { Text, TextProps } from '@chirpy/components';
-import { CurrentNotificationMessagesSubscription } from '@chirpy/graphql/generated/notification';
-import { NotificationType_Enum } from '@chirpy/graphql/generated/types';
+import { CurrentNotificationMessagesSubscription } from '@chirpy/client-graphql/generated/notification';
+import { NotificationType_Enum } from '@chirpy/client-graphql/generated/types';
 import { dayjs } from '../utilities/date';
 
 export type INotificationItemProps = {

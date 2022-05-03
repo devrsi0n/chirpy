@@ -1,0 +1,16 @@
+{
+  "name": "@chirpy/types",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "dependencies": {
+    "@chirpy/client-graphql": "workspace:*",
+    "@chirpy/server-graphql": "workspace:*",
+    "csstype": "3.0.11"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}

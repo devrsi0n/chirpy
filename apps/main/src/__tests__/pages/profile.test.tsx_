@@ -7,8 +7,8 @@ import { mockUserData } from '../mocks/CurrentUserProvider';
 
 const mockUpdateUser = jest.fn();
 
-jest.mock('../../graphql/generated/user', () => ({
-  ...jest.requireActual('../../graphql/generated/user'),
+jest.mock('@chirpy/server-graphql/generated/user', () => ({
+  ...jest.requireActual('@chirpy/server-graphql/generated/user'),
   useUpdateUserByPkMutation: () => [
     mockUpdateUser,
     {

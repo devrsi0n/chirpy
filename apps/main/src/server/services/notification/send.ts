@@ -1,9 +1,9 @@
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { NotificationSubscriptionsByUserIdDocument } from '$/server/graphql/generated/notification';
+import { NotificationSubscriptionsByUserIdDocument } from '@chirpy/server-graphql/generated/notification';
 
 import { pushWebNotification } from './push-web-notification';
 import { sendNotificationViaEmail } from './send-notification-via-email';
-import { NotificationPayload } from './types';
+import { NotificationPayload } from '@chirpy/types';
 
 const client = getAdminGqlClient();
 

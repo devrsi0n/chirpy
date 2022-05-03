@@ -18,7 +18,7 @@ import { TextArea } from '@chirpy/components';
 import { TextField } from '@chirpy/components';
 import { useToast } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useUpdateUserByPkMutation } from '@chirpy/graphql/generated/user';
+import { useUpdateUserByPkMutation } from '@chirpy/client-graphql/generated/user';
 import { useForm } from '@chirpy/hooks';
 
 type FormFields = {

@@ -1,17 +1,13 @@
 import webpush from 'web-push';
 
-import { NotificationType_Enum } from '@chirpy/graphql/generated/types';
+import { NotificationType_Enum } from '@chirpy/client-graphql/generated/types';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   DeleteNotificationSubscriptionByPkDocument,
   NotificationSubscriptionsByUserIdQuery,
-} from '$/server/graphql/generated/notification';
+} from '@chirpy/server-graphql/generated/notification';
 
-import { NotificationPayload } from './types';
-
-export type WebNotificationPayload = {
-  title: string;
-} & Pick<NotificationPayload, 'body' | 'url'>;
+import { NotificationPayload, WebNotificationPayload } from '@chirpy/types';
 
 const client = getAdminGqlClient();
 

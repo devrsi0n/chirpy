@@ -10,8 +10,8 @@ import { Spinner } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { TextField } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
-import { useInsertOneProjectMutation } from '@chirpy/graphql/generated/project';
-import { useUserDashboardProjectsQuery } from '@chirpy/graphql/generated/user';
+import { useInsertOneProjectMutation } from '@chirpy/client-graphql/generated/project';
+import { useUserDashboardProjectsQuery } from '@chirpy/client-graphql/generated/user';
 import { useForm } from '@chirpy/hooks';
 import { isENVProd } from '@chirpy/utilities';
 

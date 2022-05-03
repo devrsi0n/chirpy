@@ -7,7 +7,10 @@
   "license": "MIT",
   "dependencies": {
     "@chirpy/components": "workspace:*",
-    "@chirpy/graphql": "workspace:*"
+    "@chirpy/utilities": "workspace:*",
+    "@chirpy/hooks": "workspace:*",
+    "@chirpy/types": "workspace:*",
+    "@chirpy/client-graphql": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "18.0.8",

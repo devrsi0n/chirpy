@@ -1,0 +1,24 @@
+{
+  "name": "@chirpy/jest",
+  "version": "0.0.0",
+  "main": "./jest.config.js",
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "@chirpy/storybook": "workspace:*",
+    "@chirpy/components": "workspace:*",
+    "@chirpy/utilities": "workspace:*",
+    "@storybook/testing-react": "1.2.4",
+    "jest": "28.0.3",
+    "jest-environment-jsdom": "28.0.2",
+    "msw": "0.39.2"
+  },
+  "devDependencies": {
+    "next": "12.1.5",
+    "react": "18.1.0",
+    "@types/react": "18.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

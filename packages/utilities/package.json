@@ -4,6 +4,9 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "sideEffects": false,
+  "dependencies": {
+    "@urql/devtools": "2.0.3"
+  },
   "license": "MIT",
   "publishConfig": {
     "access": "public"

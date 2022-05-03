@@ -1,12 +1,12 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { project } from '$/__tests__/mocks/mock-project-data';
-import * as projectModule from '@chirpy/graphql/generated/project';
-import * as userModule from '@chirpy/graphql/generated/user';
+import { project } from '@chirpy/jest/mocks/mock-project-data';
+import * as projectModule from '@chirpy/client-graphql/generated/project';
+import * as userModule from '@chirpy/client-graphql/generated/user';
 import Dashboard from '$/pages/dashboard/index';
 
-import { pageRender } from '../fixtures/page-render';
+import { pageRender } from '@chirpy/jest/fixtures/page-render';
 
 const mockFetchUserProject = jest.fn();
 jest.spyOn(userModule, 'useUserDashboardProjectsQuery').mockReturnValue([

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { CommentDetailNode } from '$/types/widget';
+import { CommentDetailNode } from '@chirpy/types';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';

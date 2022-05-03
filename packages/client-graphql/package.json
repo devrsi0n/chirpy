@@ -1,0 +1,30 @@
+{
+  "name": "@chirpy/client-graphql",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "build": "graphql-codegen",
+    "watch": "graphql-codegen --watch"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "urql": "2.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/near-operation-file-preset": "2.2.9",
+    "@graphql-codegen/typed-document-node": "2.2.8",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-codegen/typescript-urql": "3.5.7",
+    "@graphql-typed-document-node/core": "3.1.1",
+    "react": "18.1.0",
+    "@types/react": "18.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

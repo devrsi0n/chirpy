@@ -5,23 +5,17 @@ import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsRe
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import { CommentTrees } from '@chirpy/blocks';
-import { SiteLayout } from '@chirpy/blocks';
-import { PageTitle } from '@chirpy/blocks';
-import { IconButton } from '@chirpy/components';
-import { Heading, IHeadingProps } from '@chirpy/components';
-import { Popover } from '@chirpy/components';
-import { Text } from '@chirpy/components';
-import { WidgetThemeProvider, useWidgetTheme } from '@chirpy/contexts';
-import { translateRadixColor } from '@chirpy/contexts';
-import { useUpdateThemeMutation } from '@chirpy/graphql/generated/project';
+import { CommentTrees, SiteLayout, PageTitle } from '@chirpy/blocks';
+import { IconButton, Heading, IHeadingProps, Popover, Text } from '@chirpy/components';
+import { WidgetThemeProvider, useWidgetTheme, translateRadixColor } from '@chirpy/contexts';
+import { useUpdateThemeMutation } from '@chirpy/client-graphql/generated/project';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
-} from '$/server/graphql/generated/project';
+} from '@chirpy/server-graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { Theme as ThemeType } from '$/types/theme.type';
+import { Theme as ThemeType } from '@chirpy/types';
 
 export type ThemeProps = StaticProps;
 

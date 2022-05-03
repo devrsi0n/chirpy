@@ -1,7 +1,7 @@
-import { NotificationType_Enum } from '@chirpy/graphql/generated/types';
+import { NotificationType_Enum } from '@chirpy/client-graphql/generated/types';
 
 import { sendNotificationEmail } from '../email/send-emails';
-import { NotificationPayload } from './types';
+import { NotificationPayload } from '@chirpy/types';
 
 export async function sendNotificationViaEmail(payload: NotificationPayload) {
   if (!payload.recipient.email) {

@@ -9,7 +9,7 @@ import { Card } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { TextField } from '@chirpy/components';
 import { useToast } from '@chirpy/components';
-import { useUpdateUserFieldsMutation } from '@chirpy/graphql/generated/user';
+import { useUpdateUserFieldsMutation } from '@chirpy/client-graphql/generated/user';
 import { useForm } from '@chirpy/hooks';
 import { sleep } from '../utilities/time';
 

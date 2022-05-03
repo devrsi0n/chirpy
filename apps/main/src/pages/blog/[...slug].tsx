@@ -10,7 +10,7 @@ import { useHasMounted } from '@chirpy/hooks';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
 import { isENVDev } from '@chirpy/utilities';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from '@chirpy/types';
 import { getBannerProps } from '../../utilities/image';
 
 type BlogProps = MDXProps;

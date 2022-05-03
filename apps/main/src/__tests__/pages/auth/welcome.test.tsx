@@ -1,14 +1,14 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pageRender } from '$/__tests__/fixtures/page-render';
-import { setMockedUser } from '$/__tests__/mocks/mock-use-current-user';
-import { mockNextRouter } from '$/__tests__/mocks/next-router';
+import { pageRender } from '@chirpy/jest/fixtures/page-render';
+import { setMockedUser } from '@chirpy/jest/mocks/mock-use-current-user';
+import { mockNextRouter } from '@chirpy/jest/mocks/next-router';
 import Welcome from '$/pages/auth/welcome';
 
 const mockUpdateUser = jest.fn();
-jest.mock('../../../graphql/generated/user', () => ({
-  ...jest.requireActual('../../../graphql/generated/user'),
+jest.mock('@chirpy/client-graphql/generated/user', () => ({
+  ...jest.requireActual('@chirpy/client-graphql/generated/user'),
   useUpdateUserFieldsMutation: () => [
     {
       data: {

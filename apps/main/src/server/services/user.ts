@@ -1,7 +1,7 @@
 import { Profile as AuthProfile } from 'next-auth';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { UpdateUserByPkDocument } from '$/server/graphql/generated/user';
+import { UpdateUserByPkDocument } from '@chirpy/server-graphql/generated/user';
 
 export async function fillUserFields(
   user: User,

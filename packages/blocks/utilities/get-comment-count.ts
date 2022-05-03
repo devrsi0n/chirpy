@@ -1,4 +1,4 @@
-import { CommentTreeSubscription } from '@chirpy/graphql/generated/comment';
+import { CommentTreeSubscription } from '@chirpy/client-graphql/generated/comment';
 
 export function getCommentCount(comments: CommentTreeSubscription['comments']): number {
   let counter = 0;

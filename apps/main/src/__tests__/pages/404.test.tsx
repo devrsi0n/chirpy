@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import Page404 from '../../pages/404';
-import { pageRender } from '../fixtures/page-render';
+import Page404 from '$/pages/404';
+import { pageRender } from '@chirpy/jest/fixtures/page-render';
 
 describe('Index page', () => {
   beforeEach(() => {

@@ -10,7 +10,7 @@ import {
   useCurrentNotificationMessagesSubscription,
   useDeleteNotificationMessageMutation,
   useHaveReadANotificationMutation,
-} from '@chirpy/graphql/generated/notification';
+} from '@chirpy/client-graphql/generated/notification';
 
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';

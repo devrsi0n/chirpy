@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { useToast } from '@chirpy/components';
-import { useDeleteOneCommentMutation } from '@chirpy/graphql/generated/comment';
+import { useDeleteOneCommentMutation } from '@chirpy/client-graphql/generated/comment';
 
 import { CommentContextType, CommentContext } from './comment-context';
 

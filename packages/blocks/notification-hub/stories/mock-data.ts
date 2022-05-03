@@ -1,4 +1,4 @@
-import { CurrentNotificationMessagesSubscription } from '@chirpy/graphql/generated/notification';
+import { CurrentNotificationMessagesSubscription } from '@chirpy/client-graphql/generated/notification';
 
 export const messages: CurrentNotificationMessagesSubscription = {
   notificationMessages: [

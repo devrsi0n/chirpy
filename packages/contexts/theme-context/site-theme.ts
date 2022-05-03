@@ -1,6 +1,6 @@
 import * as radixColors from '@radix-ui/colors';
 
-import { Theme } from '../../../apps/main/src/types/theme.type';
+import { Theme } from '../../types/theme.type';
 import { translateRadixColor } from './utilities';
 
 const siteColors = getColors();

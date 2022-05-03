@@ -5,7 +5,7 @@ import * as React from 'react';
 import { SiteLayout } from '@chirpy/blocks';
 import { MDXComponents } from '@chirpy/blocks';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from '@chirpy/types';
 
 export default function TermsOfService({ mdxSource, frontMatter }: MDXProps): JSX.Element {
   return (

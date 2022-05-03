@@ -10,7 +10,7 @@ import { IconButton } from '@chirpy/components';
 import { Link } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { useHasMounted } from '@chirpy/hooks';
-import { ColorMode } from '$/types/theme.type';
+import { ColorMode } from '@chirpy/types';
 
 const icons: Record<ColorMode, Icon> = {
   system: Settings,

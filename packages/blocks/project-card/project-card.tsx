@@ -13,8 +13,8 @@ import { List } from '@chirpy/components';
 import { Menu } from '@chirpy/components';
 import { Text } from '@chirpy/components';
 import { useToast } from '@chirpy/components';
-import { useDeleteProjectByPkMutation } from '@chirpy/graphql/generated/project';
-import { UserDashboardProjectsQuery } from '@chirpy/graphql/generated/user';
+import { useDeleteProjectByPkMutation } from '@chirpy/client-graphql/generated/project';
+import { UserDashboardProjectsQuery } from '@chirpy/client-graphql/generated/user';
 import { listHoverable } from '@chirpy/styles/common';
 import { dayjs } from '../utilities/date';
 

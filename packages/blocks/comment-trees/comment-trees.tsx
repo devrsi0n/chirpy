@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Heading } from '@chirpy/components';
 import { SubmitHandler } from '@chirpy/hooks';
 import { ToggleLieAction } from '@chirpy/hooks';
-import { CommentLeafType } from '$/types/widget';
+import { CommentLeafType } from '@chirpy/types';
 import { getCommentCount } from '../utilities/get-comment-count';
 
 import { CommentTree } from '../comment-tree';

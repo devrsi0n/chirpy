@@ -1,14 +1,14 @@
 import { JSONContent } from '@tiptap/react';
 
 import { gqlMutate, gqlQuery } from '$/server/common/gql';
-import { AuthorByCommentIdDocument } from '$/server/graphql/generated/comment';
+import { AuthorByCommentIdDocument } from '@chirpy/server-graphql/generated/comment';
 import {
   DeleteNotificationMessageDocument,
   DeleteNotificationMessageMutationVariables,
   InsertOneNotificationMessageDocument,
   InsertOneNotificationMessageMutationVariables,
-} from '$/server/graphql/generated/notification';
-import { UserByPkDocument } from '$/server/graphql/generated/user';
+} from '@chirpy/server-graphql/generated/notification';
+import { UserByPkDocument } from '@chirpy/server-graphql/generated/user';
 
 export function getTextFromRteDoc(doc: JSONContent): string {
   let text = '';

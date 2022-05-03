@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
-import { useCurrentUserQuery } from '@chirpy/graphql/generated/user';
+import { useCurrentUserQuery } from '@chirpy/client-graphql/generated/user';
 
 import { CurrentUserContext, CurrentUserContextType } from './current-user-context';
 

@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import * as React from 'react';
 import { Provider } from 'urql';
 
-import { createGqlClient } from '$/lib/gql-client';
+import { createGqlClient } from '@chirpy/utilities';
 
 export type GqlClientProviderProps = React.PropsWithChildren<{
   //

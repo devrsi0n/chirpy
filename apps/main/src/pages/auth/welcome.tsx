@@ -1,14 +1,10 @@
 import * as React from 'react';
 
-import { ConfirmUserFields } from '@chirpy/blocks';
-import { SiteLayout } from '@chirpy/blocks';
-import { Button } from '@chirpy/components';
-import { Heading } from '@chirpy/components';
-import { Link } from '@chirpy/components';
-import { Text } from '@chirpy/components';
+import { ConfirmUserFields, SiteLayout } from '@chirpy/blocks';
+import { Button, Heading, Link, Text } from '@chirpy/components';
 import { useCurrentUser } from '@chirpy/contexts';
 import { useCelebration } from '@chirpy/hooks';
-import { ssrMode } from '$/utilities/env';
+import { ssrMode } from '@chirpy/utilities';
 import { hasValidUserProfile } from '$/utilities/user';
 
 // export type WelcomeProps = React.PropsWithChildren<{}>;

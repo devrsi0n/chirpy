@@ -10,18 +10,15 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentTrees } from '@chirpy/blocks';
-import { WidgetLayout } from '@chirpy/blocks';
-import { PoweredBy } from '@chirpy/blocks';
+import { CommentTrees, WidgetLayout, PoweredBy } from '@chirpy/blocks';
 import { CommentContextProvider } from '@chirpy/contexts';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
   useCommentTreeSubscription,
-} from '@chirpy/graphql/generated/comment';
-import { ThemeOfPageDocument, ThemeOfPageQuery } from '@chirpy/graphql/generated/page';
-import { useCreateAComment } from '@chirpy/hooks';
-import { useToggleALikeAction } from '@chirpy/hooks';
+} from '@chirpy/client-graphql/generated/comment';
+import { ThemeOfPageDocument, ThemeOfPageQuery } from '@chirpy/client-graphql/generated/page';
+import { useCreateAComment, useToggleALikeAction } from '@chirpy/contexts';
 import { useWidgetSideEffects } from '@chirpy/hooks';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
@@ -29,10 +26,8 @@ import {
   PageByUrlOnlyQuery,
   PagesDocument,
   PagesQuery,
-} from '$/server/graphql/generated/page';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentLeafType } from '$/types/widget';
+} from '@chirpy/server-graphql/generated/page';
+import { CommonWidgetProps, Theme, CommentLeafType } from '@chirpy/types';
 import { ssrMode } from '@chirpy/utilities';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;

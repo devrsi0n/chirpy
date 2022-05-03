@@ -11,29 +11,23 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentLinkedList } from '@chirpy/blocks';
-import { WidgetLayout } from '@chirpy/blocks';
-import { PoweredBy } from '@chirpy/blocks';
-import { UserMenu } from '@chirpy/blocks';
-import { IconButton } from '@chirpy/components';
-import { Heading } from '@chirpy/components';
-import { Link } from '@chirpy/components';
+import { CommentLinkedList, WidgetLayout, PoweredBy, UserMenu } from '@chirpy/blocks';
+import { IconButton, Heading, Link } from '@chirpy/components';
 import { CommentContextProvider } from '@chirpy/contexts';
 import {
   CommentDetailsDocument,
   CommentDetailsSubscription,
   useCommentDetailsSubscription,
-} from '@chirpy/graphql/generated/comment';
-import { ThemeOfPageDocument, ThemeOfPageQuery } from '@chirpy/graphql/generated/page';
-import { useCreateAComment } from '@chirpy/hooks';
-import { useToggleALikeAction } from '@chirpy/hooks';
+} from '@chirpy/client-graphql/generated/comment';
+import { ThemeOfPageDocument, ThemeOfPageQuery } from '@chirpy/client-graphql/generated/page';
+import { useCreateAComment, useToggleALikeAction } from '@chirpy/contexts';
 import { useWidgetSideEffects } from '@chirpy/hooks';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentDetailNode } from '$/types/widget';
-import { ssrMode } from '$/utilities/env';
+import { CommentsDocument, CommentsQuery } from '@chirpy/server-graphql/generated/comment';
+import { CommonWidgetProps } from '@chirpy/types';
+import { Theme } from '@chirpy/types';
+import { CommentDetailNode } from '@chirpy/types';
+import { ssrMode } from '@chirpy/utilities';
 
 // TODO: Migrate this page to a dialog widget (for analytics)
 export default function CommentDetailsWidget(

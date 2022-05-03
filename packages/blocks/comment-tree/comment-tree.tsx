@@ -1,7 +1,7 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-import { CommentLeafType } from '$/types/widget';
+import { CommentLeafType } from '@chirpy/types';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';

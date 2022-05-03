@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '@chirpy/utilities';
-import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
+import { UserProjectsDocument, UserProjectsQuery } from '@chirpy/server-graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';

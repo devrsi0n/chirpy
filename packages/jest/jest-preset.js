@@ -1,0 +1,29 @@
+const nextJest = require('next/jest');
+const path = require('path');
+
+const createJestConfig = nextJest({
+  // Provide the path to load next.config.js and .env files in your test environment
+  dir: './',
+});
+
+const customJestConfig = {
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: [
+    path.resolve(__dirname, './__tests__/jest.setup.ts'),
+    path.resolve(__dirname, './set-env.js'),
+  ],
+  testMatch: ['**/src/**/*.test.ts?(x)'],
+  moduleNameMapper: {
+    '^\\$/(.*)$': '<rootDir>/src/$1',
+  },
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts,tsx}',
+    '<rootDir>/src/__tests__/',
+    '!./**/*.stories.{ts,tsx}',
+    '!./**/types/',
+    '!./**/generated/',
+  ],
+};
+
+module.exports = createJestConfig(customJestConfig);

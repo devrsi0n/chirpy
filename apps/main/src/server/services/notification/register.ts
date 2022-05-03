@@ -6,7 +6,7 @@ import { gqlMutate } from '$/server/common/gql';
 import {
   InsertOneNotificationSubscriptionDocument,
   InsertOneNotificationSubscriptionMutationVariables,
-} from '$/server/graphql/generated/notification';
+} from '@chirpy/server-graphql/generated/notification';
 
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';

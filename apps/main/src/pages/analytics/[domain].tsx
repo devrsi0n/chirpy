@@ -5,9 +5,9 @@ import { AnalyticsBlock } from '@chirpy/blocks';
 import { SiteLayout } from '@chirpy/blocks';
 import { PageTitle } from '@chirpy/blocks';
 import { gqlQuery } from '$/server/common/gql';
-import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
+import { ProjectByDomainDocument, ProjectByDomainQuery } from '@chirpy/server-graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from '@chirpy/types';
 
 export type AnalyticsProps = {
   project: ProjectByDomainQuery['projects'][number];

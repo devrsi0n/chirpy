@@ -6,9 +6,7 @@
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "@chirpy/contexts": "workspace:*",
-    "@chirpy/graphql": "workspace:*",
-    "@chirpy/components": "workspace:*",
+    "@chirpy/client-graphql": "workspace:*",
     "@chirpy/utilities": "workspace:*",
     "canvas-confetti": "1.5.1"
   },

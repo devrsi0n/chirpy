@@ -7,11 +7,11 @@ import {
   PageByUrlDocument,
   PageByUrlQuery,
   UpdatePagesDocument,
-} from '$/server/graphql/generated/page';
+} from '@chirpy/server-graphql/generated/page';
 
-import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
-import { ProjectByDomainDocument } from '../graphql/generated/project';
-import { GetPagByUrl } from '../types/page';
+import { ERR_UNMATCHED_DOMAIN } from '@chirpy/utilities';
+import { ProjectByDomainDocument } from '@chirpy/server-graphql/generated/project';
+import { GetPagByUrl } from '@chirpy/types';
 
 export async function getPage(
   req: NextApiRequest,

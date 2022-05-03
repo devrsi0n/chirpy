@@ -8,6 +8,7 @@
   "dependencies": {
     "@chirpy/styles": "workspace:*",
     "@chirpy/utilities": "workspace:*",
+    "@chirpy/hooks": "workspace:*",
     "@geist-ui/react-icons": "1.0.1",
     "clsx": "1.1.1",
     "framer-motion": "6.3.3"

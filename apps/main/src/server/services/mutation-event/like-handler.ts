@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next';
 
 import { gqlQuery } from '$/server/common/gql';
-import { RecipientByLikeIdDocument } from '$/server/graphql/generated/like';
+import { RecipientByLikeIdDocument } from '@chirpy/server-graphql/generated/like';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
 import { EventLike, EventPayload } from './event-type';

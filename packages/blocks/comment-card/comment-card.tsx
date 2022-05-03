@@ -18,8 +18,7 @@ import {
   useToast,
 } from '@chirpy/components';
 import { SubmitHandler } from '@chirpy/hooks';
-import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
-import { isENVDev } from '@chirpy/utilities';
+import { isENVDev, COMMENT_TREE_MAX_DEPTH } from '@chirpy/utilities';
 import { dayjs } from '../utilities/date';
 
 import { useCommentContext } from '../../contexts/comment-context';

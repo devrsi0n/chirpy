@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import Index, { strings } from '../../pages/index';
-import { pageRender } from '../fixtures/page-render';
+import Index, { strings } from '$/pages/index';
+import { pageRender } from '@chirpy/jest/fixtures/page-render';
 
 describe('Index page', () => {
   beforeEach(() => {

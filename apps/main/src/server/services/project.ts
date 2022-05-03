@@ -1,5 +1,5 @@
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { AllProjectsDocument, AllProjectsQuery } from '$/server/graphql/generated/project';
+import { AllProjectsDocument, AllProjectsQuery } from '@chirpy/server-graphql/generated/project';
 
 export type AllProjectStaticPathParams = { params: { domain: string } }[];
 

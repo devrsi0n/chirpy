@@ -1,0 +1,15 @@
+{
+  "name": "@chirpy/cypress",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "cypress": "9.2.0",
+    "whatwg-fetch": "3.6.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

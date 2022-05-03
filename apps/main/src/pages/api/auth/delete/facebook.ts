@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
-import { DeleteUserDocument } from '$/server/graphql/generated/user';
+import { DeleteUserDocument } from '@chirpy/server-graphql/generated/user';
 
 const handler = getApiHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {

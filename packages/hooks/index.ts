@@ -1,7 +1,6 @@
 export * from './use-form';
 export * from './use-celebration';
 export * from './use-click-outside';
-export * from './use-create-a-comment';
 export * from './use-event-listener';
 export * from './use-has-mounted';
 export * from './use-is-dark-mode';
@@ -14,5 +13,4 @@ export * from './use-refresh-server-props';
 export * from './use-script';
 export * from './use-sign-in-window';
 export * from './use-timeout';
-export * from './use-toggle-a-like-action';
 export * from './use-widget-side-effects';

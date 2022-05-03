@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useCurrentUserQuery } from '@chirpy/graphql/generated/user';
+import { useCurrentUserQuery } from '@chirpy/client-graphql/generated/user';
 
 type UserQueryResultType = ReturnType<typeof useCurrentUserQuery>;
 type UserQueryDataType = NonNullable<UserQueryResultType[0]['data']>;

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { SiteLayout } from '@chirpy/blocks';
 import { Heading } from '@chirpy/components';
-import { ssrMode } from '$/utilities/env';
+import { ssrMode } from '@chirpy/utilities';
 
 function DeleteConfirmation(): JSX.Element {
   return (

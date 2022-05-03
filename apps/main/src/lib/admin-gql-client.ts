@@ -2,7 +2,7 @@ import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
-import { getGqlClientOptions } from './gql-client';
+import { getGqlClientOptions } from '@chirpy/utilities';
 
 class ChirpyWebSocket extends WebSocket {
   constructor(...args: ConstructorParameters<typeof WebSocket>) {

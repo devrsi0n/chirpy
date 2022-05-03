@@ -8,10 +8,11 @@
   "dependencies": {
     "@chirpy/components": "workspace:*",
     "@chirpy/contexts": "workspace:*",
-    "@chirpy/graphql": "workspace:*",
+    "@chirpy/client-graphql": "workspace:*",
     "@chirpy/styles": "workspace:*",
     "@chirpy/hooks": "workspace:*",
     "@chirpy/utilities": "workspace:*",
+    "@chirpy/types": "workspace:*",
     "clsx": "1.1.1",
     "chart.js": "3.7.1",
     "dayjs": "1.11.1",

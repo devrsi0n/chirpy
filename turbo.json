@@ -4,15 +4,20 @@
   "pipeline": {
     "build": {
       "dependsOn": [
-        "^build"
+        "^build",
+        "$NEXT_PUBLIC_HASURA_HTTP_ORIGIN",
+        "$NEXT_PUBLIC_APP_URL",
+        "$NEXT_PUBLIC_COMMENT_DOMAIN",
+        "$NEXTAUTH_SECRET",
+        "$HASURA_ADMIN_SECRET",
+        "$HASURA_EVENT_SECRET",
+        "$NEXT_PUBLIC_ANALYTICS_DOMAIN"
       ],
-      // note: output globs are relative to each package's `package.json`
-      // (and not the monorepo root)
       "outputs": [
         ".next/**"
       ]
     },
-    "test": {
+    "ut": {
       "dependsOn": [
         "^build"
       ],
