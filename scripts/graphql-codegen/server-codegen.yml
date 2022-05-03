@@ -3,14 +3,14 @@ schema:
   - http://127.0.0.1:8080/v1/graphql:
       headers:
         X-Hasura-Admin-Secret: 'myadminsecretkey'
-documents: 'src/server/graphql/*.graphql'
+documents: 'apps/main/src/server/graphql/*.graphql'
 generates:
-  src/server/graphql/generated/types.ts:
+  apps/main/src/server/graphql/generated/types.ts:
     plugins:
       - typescript
     config:
       enumsAsTypes: true
-  src/server/graphql:
+  apps/main/src/server/graphql:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts

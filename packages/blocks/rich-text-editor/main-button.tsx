@@ -1,0 +1,91 @@
+import Loader from '@geist-ui/react-icons/loader';
+import Send from '@geist-ui/react-icons/send';
+import * as React from 'react';
+
+import { Button, ButtonProps } from '@chirpy/components';
+import { Heading } from '@chirpy/components';
+import { Popover } from '@chirpy/components';
+import { Text } from '@chirpy/components';
+import { useCurrentUser } from '@chirpy/contexts';
+import { useNotificationContext } from '@chirpy/contexts';
+
+import { SignInButton } from '../sign-in-button';
+
+export interface IMainButtonProps {
+  disabled?: boolean;
+  isReply?: boolean;
+  onClickDismiss?: () => void;
+  isLoading: boolean;
+  onClickSubmit: () => void;
+}
+
+export function MainButton({
+  isReply,
+  isLoading,
+  onClickDismiss,
+  onClickSubmit,
+  disabled,
+}: IMainButtonProps): JSX.Element {
+  const { isSignIn } = useCurrentUser();
+  const { registerNotification, didRegister, didDeny } = useNotificationContext();
+  const handleClickSubmit = async () => {
+    await registerNotification();
+    onClickSubmit();
+  };
+  const postButtonProps: Partial<ButtonProps> = {
+    size: 'sm',
+    variant: 'solid',
+    color: 'primary',
+    disabled: isLoading || disabled,
+    'aria-label': isLoading ? 'Posting' : 'Post',
+  };
+  const buttonChildren = (
+    <>
+      {isLoading ? <Loader className="animate-spin w-5 h-5" /> : <Send size="14" />}
+      <span>Post</span>
+    </>
+  );
+  return (
+    <div className="flex flex-row justify-end space-x-2">
+      {isReply && (
+        <Button variant="text" size="sm" onClick={onClickDismiss}>
+          Cancel
+        </Button>
+      )}
+      {isSignIn ? (
+        didRegister || didDeny ? (
+          <Button {...postButtonProps} onClick={onClickSubmit}>
+            {buttonChildren}
+          </Button>
+        ) : (
+          <Popover
+            placement="topEnd"
+            content={
+              <section className="w-64">
+                <Heading as="h5" className="font-bold">
+                  Get notification for replies
+                </Heading>
+                <Text size="sm" className="mt-2" variant="secondary">
+                  Get a push notification if there is a reply to your comment
+                </Text>
+                <div className="mt-5 space-x-2">
+                  <Button size="sm" color="gray" onClick={onClickSubmit}>
+                    Ask next time
+                  </Button>
+                  <Button size="sm" variant="solid" color="primary" onClick={handleClickSubmit}>
+                    Sure
+                  </Button>
+                </div>
+              </section>
+            }
+            buttonProps={{ ...postButtonProps, className: `py-[7px]` }}
+          >
+            {buttonChildren}
+          </Popover>
+        )
+      ) : (
+        <SignInButton size="sm" />
+      )}
+    </div>
+  );
+}

@@ -2,14 +2,14 @@ overwrite: true
 schema:
   - ./scripts/graphql-codegen/graphql-schema.json
 documents:
-  - 'src/graphql/*.graphql'
+  - 'packages/graphql/*.graphql'
 generates:
-  src/graphql/generated/types.ts:
+  packages/graphql/generated/types.ts:
     plugins:
       - typescript
     config:
       enumsAsTypes: true
-  src/graphql:
+  packages/graphql:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts

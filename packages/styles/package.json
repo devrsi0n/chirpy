@@ -1,0 +1,15 @@
+{
+  "name": "@chirpy/styles",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "clsx": "1.1.1",
+    "graphql-tag": "2.12.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -8,6 +8,7 @@ out/
 .envproduction
 .vercel
 .cache
+.turbo
 public/bootstrap/*.js.map
 public/bootstrap/*.js
 cypress/screenshots/

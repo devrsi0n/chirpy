@@ -1,0 +1,36 @@
+overwrite: true
+schema:
+  - http://127.0.0.1:8080/v1/graphql:
+      headers:
+        X-Hasura-Admin-Secret: 'myadminsecretkey'
+documents: 'src/server/graphql/*.graphql'
+generates:
+  src/server/graphql/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsTypes: true
+  src/server/graphql:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./generated/types.ts
+      folder: generated
+      extension: .tsx
+    plugins:
+      - typescript-operations
+      - typed-document-node
+  ./scripts/graphql-codegen/graphql-schema.json:
+    plugins:
+      - 'introspection'
+config:
+  # avoidOptionals: true
+  # immutableTypes: true
+  # maybeValue: T | null | undefined
+  # constEnums: true
+  scalars:
+    jsonb: 'any'
+    timestamptz: string
+    uuid: string
+hooks:
+  afterAllFileWrite:
+    - prettier --write

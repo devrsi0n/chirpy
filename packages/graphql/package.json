@@ -1,0 +1,18 @@
+{
+  "name": "@chirpy/graphql",
+  "version": "0.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {
+    "urql": "2.2.0"
+  },
+  "devDependencies": {
+    "react": "18.1.0",
+    "@types/react": "18.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

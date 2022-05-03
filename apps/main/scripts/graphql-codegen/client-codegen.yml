@@ -1,0 +1,34 @@
+overwrite: true
+schema:
+  - ./scripts/graphql-codegen/graphql-schema.json
+documents:
+  - 'src/graphql/*.graphql'
+generates:
+  src/graphql/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      enumsAsTypes: true
+  src/graphql:
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: ./generated/types.ts
+      folder: generated
+      extension: .tsx
+    plugins:
+      - typescript-operations
+      - typescript-urql
+config:
+  withComponents: false
+  withHooks: true
+  # avoidOptionals: true
+  # immutableTypes: true
+  # maybeValue: T | null | undefined
+  # constEnums: true
+  scalars:
+    jsonb: 'any'
+    timestamptz: string
+    uuid: string
+hooks:
+  afterAllFileWrite:
+    - prettier --write
