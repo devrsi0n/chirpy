@@ -6,8 +6,7 @@
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "cypress": "9.2.0",
-    "whatwg-fetch": "3.6.2"
+    "cypress": "9.2.0"
   },
   "publishConfig": {
     "access": "public"

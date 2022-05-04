@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "VITE_DEBUG=true vite",
     "build": "vite build",
-    "build:local": "VITE_DEBUG=true vite build"
+    "build:local": "dotenv -e ../main/.env.local vite build"
   },
   "sideEffects": false,
   "license": "MIT",

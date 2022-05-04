@@ -48,4 +48,12 @@ module.exports = {
 
     'jest/expect-expect': 'off',
   },
+  "overrides": [
+    {
+      files: ["*.test.@(ts,tsx)", "*.spec.@(ts,tsx)"],
+      rules: {
+        "@typescript-eslint/no-non-null-assertion": "off",
+      }
+    }
+  ]
 };

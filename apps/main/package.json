@@ -1,24 +1,16 @@
 {
   "name": "@chirpy/main-app",
-  "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:both": "concurrently 'next dev' 'npm run dev:comment'",
-    "dev:comment": "vite --config scripts/vite/comment.config.js",
-    
     "debug": "NODE_OPTIONS='--inspect' next dev",
-    "build": "concurrently 'next build' 'npm run build:comment' 'npm run build:sw'",
-    "build:comment": "vite build --config scripts/vite/comment.config.js",
-    "build:comment:dev": "VITE_DEBUG=true npm run build:comment",
-    "build:local": "dotenv -e .env.local -- concurrently 'next build' 'npm run build:comment:dev' 'npm run build:sw:dev'",
+    "build": "next build",
+    "build:local": "dotenv -e .env.local next build",
     "analyze": "ANALYZE=true npm run build:local",
     "start": "next start",
     "start:local": "dotenv -e .env.local -- next start",
     "postinstall": "patch-package",
-    "g:gql": "graphql-codegen --config ./scripts/graphql-codegen/server-codegen.yml && graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml",
-    "g:gql:watch": "concurrently 'graphql-codegen --watch --config ./scripts/graphql-codegen/server-codegen.yml' 'graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml --watch'",
-    "ut": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
-    "ut:coverage": "DEBUG_PRINT_LIMIT=10000 jest --silent=false --coverage",
+    "ut": "DEBUG_PRINT_LIMIT=9999 jest --silent=false",
+    "ut:coverage": "DEBUG_PRINT_LIMIT=9999 jest --silent=false --coverage",
     "lint": "eslint ./"
   },
   "dependencies": {
@@ -41,11 +33,6 @@
     "@sendinblue/client": "3.1.0",
     "@tailwindcss/typography": "0.4.1",
     "@testing-library/cypress": "8.0.2",
-    "@tiptap/extension-link": "2.0.0-beta.37",
-    "@tiptap/extension-placeholder": "2.0.0-beta.48",
-    "@tiptap/extension-underline": "2.0.0-beta.23",
-    "@tiptap/react": "2.0.0-beta.109",
-    "@tiptap/starter-kit": "2.0.0-beta.184",
     "clsx": "1.1.1",
     "cors": "2.8.5",
     "debounce-promise": "3.1.2",
@@ -87,14 +74,6 @@
     "ws": "8.6.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "2.6.2",
-    "@graphql-codegen/introspection": "2.1.1",
-    "@graphql-codegen/near-operation-file-preset": "2.2.9",
-    "@graphql-codegen/typed-document-node": "2.2.8",
-    "@graphql-codegen/typescript": "2.4.8",
-    "@graphql-codegen/typescript-operations": "2.3.5",
-    "@graphql-codegen/typescript-urql": "3.5.7",
-    "@graphql-typed-document-node/core": "3.1.1",
     "@relative-ci/agent": "3.1.2",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.1.1",
@@ -115,9 +94,7 @@
     "@types/tailwindcss": "3.0.10",
     "@types/web-push": "3.3.2",
     "@types/ws": "8.5.3",
-    "@urql/storybook-addon": "1.0.8",
     "color-convert": "2.0.1",
-    "concurrently": "7.1.0",
     "cypress": "9.2.0",
     "dotenv": "16.0.0",
     "dotenv-cli": "5.1.0",
@@ -134,12 +111,8 @@
     "sass": "1.51.0",
     "sass-loader": "12.6.0",
     "simple-git-hooks": "2.7.0",
-    "storybook-addon-next": "1.6.2",
     "tsconfig-paths-webpack-plugin": "3.5.2",
-    "turbo": "^1.2.6",
     "typescript": "4.6.4",
-    
-    "webpack": "5.72.0",
     "whatwg-fetch": "3.6.2"
   },
   "jest": {

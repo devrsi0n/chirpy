@@ -1,9 +1,8 @@
 node_modules
 generated
 
-/scripts
-/.next
-/.cache
-/src/blocks/analytics
+.next
+.cache
+/packages/blocks/analytics
 
 *.js

@@ -18,6 +18,14 @@
     "@storybook/react": "6.4.22",
     "@storybook/testing-library": "0.0.11",
     "@storybook/testing-react": "1.2.4",
+    "@urql/storybook-addon": "1.0.8",
+    "storybook-addon-next": "1.6.2",
+    "css-loader": "6.7.1",
+    "next": "12.1.5",
+    "postcss-loader": "6.2.1",
+    "style-loader": "3.3.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
     "webpack": "5.72.0"
   },
   "publishConfig": {

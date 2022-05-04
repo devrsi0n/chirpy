@@ -1,6 +1,6 @@
-import { EVENT_CLICK_CONTAINER , ERR_UNMATCHED_DOMAIN } from '@chirpy/utilities';
+import { EVENT_CLICK_CONTAINER, ERR_UNMATCHED_DOMAIN } from '@chirpy/utilities';
 import { ResponseError } from '@chirpy/types';
-import { GetPagByUrl } from '@chirpy/types/page';
+import { GetPagByUrl } from '@chirpy/types';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.

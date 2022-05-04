@@ -17,7 +17,9 @@
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-operations": "2.3.5",
     "@graphql-codegen/typescript-urql": "3.5.7",
-    "@graphql-typed-document-node/core": "3.1.1"
+    "@graphql-typed-document-node/core": "3.1.1",
+    "graphql": "16.4.0",
+    "graphql-tag": "2.12.6"
   },
   "publishConfig": {
     "access": "public"

@@ -6,8 +6,7 @@
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "clsx": "1.1.1",
-    "graphql-tag": "2.12.6"
+    "clsx": "1.1.1"
   },
   "publishConfig": {
     "access": "public"

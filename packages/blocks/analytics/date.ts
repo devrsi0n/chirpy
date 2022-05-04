@@ -53,7 +53,7 @@ export function formatDayShort(date: Date) {
 }
 
 export function parseUTCDate(dateString: string) {
-  var date = new Date(dateString);
+  const date = new Date(dateString);
   return new Date(date.getTime() + date.getTimezoneOffset() * 60_000);
 }
 
