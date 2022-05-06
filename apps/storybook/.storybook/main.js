@@ -6,7 +6,7 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  stories: ['../@(apps|packages)/**/*.stories.@(ts|tsx)'],
+  stories: ['../../@(apps|packages)/**/*.stories.@(ts|tsx)'],
   webpackFinal: (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(
@@ -27,7 +27,7 @@ module.exports = {
     {
       name: 'storybook-addon-next',
       options: {
-        nextConfigPath: path.resolve(__dirname, '../apps/main/next.config.js'),
+        nextConfigPath: path.resolve(__dirname, '../../main/next.config.js'),
       },
     },
     '@storybook/addon-interactions',

@@ -4,10 +4,10 @@ import DotEnv from 'dotenv';
 import 'intersection-observer';
 import 'whatwg-fetch';
 
-import * as globalStorybookConfig from '@chirpy/storybook/.storybook/preview';
-import { server } from './fixtures/server';
-import './mocks/mock-use-current-user';
-import { cleanEvents } from './mocks/next-router';
+import * as globalStorybookConfig from '../storybook/.storybook/preview';
+import { server } from '@chirpy/jest/fixtures/server';
+import './src/__tests__/mocks/mock-use-current-user';
+import { cleanEvents } from './src/__tests__/mocks/next-router';
 
 DotEnv.config({
   path: '.env.local',

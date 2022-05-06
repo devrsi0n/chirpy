@@ -17,14 +17,15 @@ import {
   Text,
   useToast,
 } from '@chirpy/components';
-import { SubmitHandler } from '@chirpy/hooks';
+import { SubmitHandler } from '@chirpy/contexts';
 import { isENVDev, COMMENT_TREE_MAX_DEPTH } from '@chirpy/utilities';
 import { dayjs } from '../utilities/date';
 
-import { useCommentContext } from '../../contexts/comment-context';
-import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
+import { useCommentContext } from '@chirpy/contexts';
+import { useCurrentUser } from '@chirpy/contexts';
 import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
-import { RichTextEditor, RTEValue } from '../rich-text-editor';
+import { RichTextEditor } from '../rich-text-editor';
+import { RTEValue } from '@chirpy/types';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 
 export type { ClickLikeActionHandler } from '../like-action';

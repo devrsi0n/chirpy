@@ -13,14 +13,10 @@
         "$HASURA_EVENT_SECRET",
         "$NEXT_PUBLIC_ANALYTICS_DOMAIN"
       ],
-      "outputs": [
-        ".next/**"
-      ]
+      "outputs": [".next/**"]
     },
     "ut": {
-      "dependsOn": [
-        "^build"
-      ],
+      "dependsOn": [],
       "outputs": []
     },
     "lint": {

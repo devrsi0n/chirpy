@@ -10,6 +10,7 @@
     "build-sb": "build-storybook -s ../../apps/main/public"
   },
   "dependencies": {
+    "@chirpy/contexts": "workspace:*",
     "@storybook/addon-essentials": "6.4.22",
     "@storybook/addon-interactions": "6.4.22",
     "@storybook/addon-links": "6.4.22",
@@ -17,15 +18,16 @@
     "@storybook/manager-webpack5": "6.4.22",
     "@storybook/react": "6.4.22",
     "@storybook/testing-library": "0.0.11",
-    "@storybook/testing-react": "1.2.4",
     "@urql/storybook-addon": "1.0.8",
     "storybook-addon-next": "1.6.2",
     "css-loader": "6.7.1",
+    "framer-motion": "6.3.3",
     "next": "12.1.5",
     "postcss-loader": "6.2.1",
     "style-loader": "3.3.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
     "webpack": "5.72.0"
   },
   "publishConfig": {

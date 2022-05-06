@@ -1,13 +1,6 @@
 import EventEmitter from 'events';
 import { NextRouter } from 'next/router';
 
-jest.mock('next/router', () => ({
-  ...jest.requireActual('next/router'),
-  useRouter() {
-    return mockNextRouter;
-  },
-}));
-
 const emitter = new EventEmitter();
 
 export const mockNextRouter: NextRouter = {
@@ -32,5 +25,12 @@ export const mockNextRouter: NextRouter = {
   isReady: true,
   isPreview: false,
 };
+
+jest.mock('next/router', () => ({
+  ...jest.requireActual('next/router'),
+  useRouter() {
+    return mockNextRouter;
+  },
+}));
 
 export const cleanEvents = () => emitter.removeAllListeners();

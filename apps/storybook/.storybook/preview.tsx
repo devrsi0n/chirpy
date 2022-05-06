@@ -2,8 +2,8 @@ import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
 
-import { useThemeVariables } from '../packages/contexts';
-import { loadFeatures } from '../apps/main/src/pages/_app';
+import { useThemeVariables } from '@chirpy/contexts';
+import { loadFeatures } from '../../main/src/pages/_app';
 // import '@chirpy/styles/global-styles.scss';
 
 export const decorators = [

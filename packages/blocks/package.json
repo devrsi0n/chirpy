@@ -4,6 +4,9 @@
   "main": "./index.ts",
   "types": "./index.ts",
   "sideEffects": false,
+  "scripts": {
+    "ut": "jest"
+  },
   "license": "MIT",
   "dependencies": {
     "@chirpy/components": "workspace:*",
@@ -26,11 +29,13 @@
     "downshift": "6.1.7"
   },
   "devDependencies": {
+    "@chirpy/jest": "workspace:*",
     "@geist-ui/react-icons": "1.0.1",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",
     "clsx": "1.1.1",
     "framer-motion": "6.3.3",
+    "jest": "28.0.3",
     "next": "12.1.5",
     "react": "18.1.0",
     "react-dom": "18.1.0"

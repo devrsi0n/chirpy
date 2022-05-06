@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { project } from '@chirpy/jest/mocks/mock-project-data';
+import { project } from '$/__tests__/mocks/mock-project-data';
 import * as projectModule from '@chirpy/client-graphql/generated/project';
 import * as userModule from '@chirpy/client-graphql/generated/user';
 import Dashboard from '$/pages/dashboard/index';

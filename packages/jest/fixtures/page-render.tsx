@@ -4,8 +4,8 @@ import { Provider } from 'urql';
 import { ToastProvider } from '@chirpy/components';
 import { createGqlClient } from '@chirpy/utilities';
 
-import '../mocks/mock-use-session';
-import '../mocks/next-router';
+import '../../../apps/main/src/__tests__/mocks/mock-use-session';
+import '../../../apps/main/src/__tests__/mocks/next-router';
 
 export function pageRender(ui: React.ReactElement) {
   return reactRender(ui, {

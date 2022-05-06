@@ -13,7 +13,7 @@ import { useUpdateUserFieldsMutation } from '@chirpy/client-graphql/generated/us
 import { useForm } from '@chirpy/hooks';
 import { sleep } from '../utilities/time';
 
-import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '@chirpy/contexts';
 
 export type ConfirmUserFieldsProps = {
   //

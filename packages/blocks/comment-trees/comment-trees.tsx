@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { Heading } from '@chirpy/components';
-import { SubmitHandler } from '@chirpy/hooks';
-import { ToggleLieAction } from '@chirpy/hooks';
+import { SubmitHandler } from '@chirpy/contexts';
+import { ToggleLieAction } from '@chirpy/contexts';
 import { CommentLeafType } from '@chirpy/types';
 import { getCommentCount } from '../utilities/get-comment-count';
 

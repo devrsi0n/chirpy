@@ -1,6 +1,6 @@
 import { CurrentUserContextType, UserData } from '@chirpy/contexts';
 
-import * as useCurrentUserModule from '@chirpy/contexts';
+import * as useCurrentUserModule from '@chirpy/contexts/src/current-user-context/use-current-user';
 import { mockUserData } from './current-user-provider';
 
 export const mockRefetch = jest.fn();

@@ -1,21 +1,22 @@
 {
   "name": "@chirpy/jest",
   "version": "0.0.0",
-  "main": "./jest.config.js",
+  "main": "./jest-preset.js",
   "sideEffects": false,
   "license": "MIT",
   "dependencies": {
-    "@chirpy/storybook": "workspace:*",
     "@chirpy/components": "workspace:*",
     "@chirpy/utilities": "workspace:*",
-    "@storybook/testing-react": "1.2.4",
     "jest": "28.0.3",
+    "intersection-observer": "0.12.0",
+    "@testing-library/jest-dom": "5.16.4",
     "jest-environment-jsdom": "28.0.2",
     "msw": "0.39.2",
     "whatwg-fetch": "3.6.2"
   },
   "devDependencies": {
     "@types/react": "18.0.8",
+    "dotenv": "16.0.0",
     "next": "12.1.5",
     "react": "18.1.0",
     "react-dom": "18.1.0"
