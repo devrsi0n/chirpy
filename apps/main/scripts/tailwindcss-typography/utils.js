@@ -1,4 +1,4 @@
-const isPlainObject = require('lodash/isplainobject')
+const isPlainObject = require('lodash/isPlainobject')
 
 module.exports = {
   isUsableColor(color, values) {

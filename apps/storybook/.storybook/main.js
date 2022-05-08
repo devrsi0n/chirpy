@@ -6,12 +6,12 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|tsx)'],
+  stories: ['../../main/src/**/*.stories.mdx', '../../main/src/**/*.stories.@(ts|tsx)'],
   webpackFinal: (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, '../tsconfig.json'),
+        configFile: path.resolve(__dirname, '../../main/tsconfig.json'),
       }),
     );
     config.module.rules.push({
@@ -24,7 +24,12 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    'storybook-addon-next',
+    {
+      name: 'storybook-addon-next',
+      options: {
+        nextConfigPath: path.resolve(__dirname, '../../main/next.config.js')
+      }
+    },
     '@storybook/addon-interactions',
   ],
   actions: { argTypesRegex: '^on.*' },
