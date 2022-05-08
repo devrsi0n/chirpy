@@ -6,7 +6,7 @@
     "build": "vite build",
     "build:local": "dotenv -e ../main/.env.local vite build"
   },
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "devDependencies": {
     "@chirpy/tsconfigs": "workspace:*",
     "dotenv": "16.0.0",

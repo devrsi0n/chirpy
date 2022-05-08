@@ -80,9 +80,5 @@
       "📦 package"
     ]
   },
-  "nextBundleAnalysis": {
-    "budget": 256000,
-    "budgetPercentIncreaseRed": 10,
-    "showDetails": true
-  }
+  "license": "Apache License 2.0"
 }
