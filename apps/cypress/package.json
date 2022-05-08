@@ -1,0 +1,19 @@
+{
+  "name": "@chirpy/cypress",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "cy:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
+    "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run"
+  },
+  "sideEffects": false,
+  "license": "MIT",
+  "devDependencies": {
+    "@testing-library/cypress": "8.0.2",
+    "@types/node": "14.18.12",
+    "dotenv": "16.0.0",
+    "dotenv-cli": "5.1.0",
+    "dotenv-expand": "8.0.3",
+    "cypress": "9.2.0"
+  }
+}

@@ -8,9 +8,7 @@
       "type": "node",
       "request": "attach",
       "name": "Next.js debug",
-      "skipFiles": [
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["<node_internals>/**"],
       "port": 9229
     },
     {
@@ -21,14 +19,8 @@
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true,
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npm",
-      "args": [
-        "run",
-        "ut",
-        "--",
-        "--runInBand",
-        "--watchAll=false"
-      ]
+      "runtimeExecutable": "pnpm",
+      "args": ["run", "ut", "--", "--runInBand", "--watchAll=false"]
     }
   ]
 }
