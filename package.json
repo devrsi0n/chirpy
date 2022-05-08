@@ -19,6 +19,7 @@
     ],
     "*.graphql": [
       "prettier --write",
+      "cd apps/main",
       "npm run g:gql"
     ],
     "*.{ts,tsx,js}": [
