@@ -2,9 +2,9 @@ import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import * as React from 'react';
 
-import { useThemeVariables } from '../src/contexts/theme-context/use-theme-variables';
-import { loadFeatures } from '../src/pages/_app';
-import '../src/styles/global-styles.scss';
+import { useThemeVariables } from '../../main/src/contexts/theme-context/use-theme-variables';
+import { loadFeatures } from '../../main/src/pages/_app';
+import '../../main/src/styles/global-styles.scss';
 
 export const decorators = [
   urqlDecorator,
