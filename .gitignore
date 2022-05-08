@@ -10,8 +10,8 @@ out/
 .cache
 **/public/bootstrap/*.js.map
 **/public/bootstrap/*.js
-cypress/screenshots/
-cypress/videos/
+**/cypress/screenshots/
+**/cypress/videos/
 
 docker-compose.yaml
 .npmrc

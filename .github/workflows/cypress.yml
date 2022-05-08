@@ -36,7 +36,7 @@ jobs:
         with:
           record: true
           install: false
-          working-directory: apps/cypress
+          working-directory: apps/e2e
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
