@@ -8,11 +8,6 @@ on:
       - prod
   workflow_dispatch:
 
-defaults:
-  run:
-    # change this if your nextjs app does not live at the root of the repo
-    working-directory: ./
-
 jobs:
   analyze:
     runs-on: ubuntu-latest
@@ -24,11 +19,31 @@ jobs:
         with:
           node-version: '14.x'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: ^6.32.11
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: pnpm install
 
       - name: Build next.js app
         run: ./node_modules/.bin/next build
+        working-directory: ./apps/main
         env:
           ANALYZE: true
           RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
