@@ -1,22 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@chirpy/tsconfigs/base.json",
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "checkJs": true,
-    "allowJs": true,
-    "skipLibCheck": true,
-    "alwaysStrict": true,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "$/*": ["src/*"]
@@ -24,9 +9,5 @@
     "incremental": true
   },
   "exclude": ["node_modules", ".next"],
-  "include": [
-    "types/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ]
+  "include": ["types/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
 }
