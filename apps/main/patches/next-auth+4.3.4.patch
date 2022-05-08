@@ -13,8 +13,8 @@ index 77161bd..d900eff 100644
 -  if (provider.httpOptions) _openidClient.custom.setHttpOptionsDefaults(provider.httpOptions);
 +  let httpOptions = {};
 +  if (provider.httpOptions) httpOptions = { ...provider.httpOptions };
-+  if (process.env.http_proxy) {
-+    let agent = new HttpsProxyAgent(process.env.http_proxy);
++  if (process.env.PROXY) {
++    let agent = new HttpsProxyAgent(process.env.PROXY);
 +    httpOptions.agent = agent;
 +  }
 +  _openidClient.custom.setHttpOptionsDefaults(httpOptions);

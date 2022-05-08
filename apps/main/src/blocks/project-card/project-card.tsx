@@ -18,7 +18,7 @@ import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { listHoverable } from '$/styles/common';
 import { dayjs } from '$/utilities/date';
 
-import { IntegrateGuide } from '../integrateGuide';
+import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {
