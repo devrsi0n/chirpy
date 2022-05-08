@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-module */
 module.exports = {
   plugins: [
     'postcss-flexbugs-fixes',
