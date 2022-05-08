@@ -1,7 +1,7 @@
-import { EVENT_CLICK_CONTAINER } from '../../../lib/constants';
-import { ERR_UNMATCHED_DOMAIN } from '../../../server/common/error-code';
-import { ResponseError } from '../../../server/types/error';
-import { GetPagByUrl } from '../../../server/types/page';
+import { EVENT_CLICK_CONTAINER } from '../../main/src/lib/constants';
+import { ERR_UNMATCHED_DOMAIN } from '../../main/src/server/common/error-code';
+import { ResponseError } from '../../main/src/server/types/error';
+import { GetPagByUrl } from '../../main/src/server/types/page';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.

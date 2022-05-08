@@ -10,7 +10,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(({ command }) => {
   const isDev = command === 'serve' || !!process.env.VITE_DEBUG;
   if (isDev) {
-    dotenv.config({ path: `.env.local` });
+    dotenv.config({ path: path.resolve(__dirname, `../main/.env.local`) });
   }
 
   const define = {
@@ -24,12 +24,12 @@ export default defineConfig(({ command }) => {
     root: 'public',
     build: {
       lib: {
-        entry: path.resolve(__dirname, '../../src/external/sw/index.ts'),
+        entry: path.resolve(__dirname, './src/index.ts'),
         name: 'sw',
         fileName: () => 'sw.js',
         formats: ['umd'],
       },
-      outDir: path.resolve(__dirname, '../../public/'),
+      outDir: path.resolve(__dirname, '../main/public/'),
       ...(process.env.VITE_DEBUG && {
         minify: false,
         sourcemap: true,

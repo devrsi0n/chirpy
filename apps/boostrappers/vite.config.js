@@ -7,7 +7,7 @@ import { defineConfig } from 'vite';
  */
 export default defineConfig(({ command }) => {
   if (command === 'serve' || process.env.VITE_DEBUG) {
-    dotenv.config({ path: `.env.local` });
+    dotenv.config({ path: `../main/.env.local` });
   }
 
   const define = {
@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
 
   if (command === 'serve') {
     return {
-      root: 'src/external/bootstrapper/comment',
+      root: './',
       server: {
         hmr: {
           host: 'localhost',
@@ -31,12 +31,12 @@ export default defineConfig(({ command }) => {
     root: 'public',
     build: {
       lib: {
-        entry: path.resolve(__dirname, '../../src/external/bootstrapper/comment/index.ts'),
+        entry: path.resolve(__dirname, 'src/index.ts'),
         name: 'comment',
         fileName: () => 'comment.js',
         formats: ['umd'],
       },
-      outDir: path.resolve(__dirname, '../../public/bootstrap'),
+      outDir: path.resolve(__dirname, '../main/public/bootstrap'),
       ...(process.env.VITE_DEBUG && {
         minify: false,
         sourcemap: true,

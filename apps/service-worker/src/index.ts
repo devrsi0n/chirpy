@@ -1,7 +1,7 @@
 /// <reference no-default-lib="true"/>
 /// <reference lib="esnext" />
 /// <reference lib="WebWorker" />
-import type { WebNotificationPayload } from '$/server/services/notification/push-web-notification';
+import type { WebNotificationPayload } from '../../main/src/server/services/notification/push-web-notification';
 
 import { openOrFocusWindow } from './utilities';
 

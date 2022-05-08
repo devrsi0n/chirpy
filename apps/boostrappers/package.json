@@ -1,0 +1,22 @@
+{
+  "name": "@chirpy/boostrappers",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "VITE_DEBUG=true vite",
+    "build": "vite build",
+    "build:local": "dotenv -e ../main/.env.local vite build",
+    "test": "jest --silent=false"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "16.0.0",
+    "dotenv-cli": "5.1.0",
+    "dotenv-expand": "8.0.3",
+    "jest": "28.0.3",
+    "vite": "2.9.6"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
