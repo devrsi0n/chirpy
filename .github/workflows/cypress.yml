@@ -27,12 +27,15 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+      
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run Cypress 🌲
         uses: cypress-io/github-action@v2
         with:
           record: true
-          install-command: pnpm install
+          install: false
           working-directory: apps/cypress
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
