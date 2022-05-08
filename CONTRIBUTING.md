@@ -92,7 +92,7 @@ pnpm run build:local
 
 ```bash
 # For unit tests
-pnpm run ut
+pnpm run test
 # For e2e tests
 pnpm run cy:open
 ```
