@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@chirpy/tsconfigs/base.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"]
+}

@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
       - main
+
+defaults:
+  run:
+    working-directory: ./apps/main
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,7 +21,6 @@ jobs:
 
       - uses: artiomtr/jest-coverage-report-action@v1.3
         with:
-          working-directory: ./apps/main
           package-manager: pnpm
           threshold: 26
           github_token: ${{ secrets.GITHUB_TOKEN }}

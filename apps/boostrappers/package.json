@@ -10,11 +10,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@chirpy/tsconfigs": "workspace:*",
     "dotenv": "16.0.0",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "jest": "28.0.3",
-    "vite": "2.9.6"
+    "vite": "2.9.6",
+    "typescript": "4.6.4"
   },
   "publishConfig": {
     "access": "public"
