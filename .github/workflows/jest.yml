@@ -14,11 +14,33 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+      
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.1.0
+        with:
+          version: ^6.32.11
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
 
       - uses: artiomtr/jest-coverage-report-action@v2
         with:
+          skip-step:: install
           working-directory: ./apps/main
-          package-manager: pnpm
           threshold: 26
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: npx jest --silent=false --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
