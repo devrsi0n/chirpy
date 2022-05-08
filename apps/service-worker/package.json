@@ -14,8 +14,5 @@
     "dotenv-expand": "8.0.3",
     "vite": "2.9.6",
     "typescript": "4.6.4"
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }

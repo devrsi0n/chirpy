@@ -12,7 +12,7 @@ Chirpy is built upon [Next.js](https://nextjs.org) and [Hasura](https://github.c
 
 - [Docker](https://docs.docker.com/get-docker)
 - Docker Compose
-- [nodejs 14+](https://nodejs.org) & npm@6
+- [nodejs 14+](https://nodejs.org) & [pnpm@6](https://pnpm.io/)
 
 ### Fork and clone
 
@@ -24,11 +24,12 @@ own GitHub account and then [clone](https://help.github.com/articles/cloning-a-r
 If you only want to make UI changes, you can skip the back-end setup and do:
 
 ```bash
-npm install
+pnpm install
 # Copy .env-template to .env.local without any modification
 cp .env-template .env.local
 # See your changes in Storybook
-npm run sb
+cd apps/main
+pnpm run sb
 ```
 
 ### Start the data server
@@ -65,8 +66,8 @@ hasura metadata apply
 Start a Next.js app with the following command:
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ### Set up environment variables
@@ -76,7 +77,7 @@ Copy `.env-template` to `.env.local` and fill all blank variables with your own 
 ## Linting
 
 ```bash
-npm run lint
+pnpm run lint
 ```
 
 ## Building
@@ -84,14 +85,14 @@ npm run lint
 Build the project locally, with:
 
 ```bash
-npm run build:local
+pnpm run build:local
 ```
 
 ## Testing
 
 ```bash
 # For unit tests
-npm run ut
+pnpm run ut
 # For e2e tests
-npm run cy:open
+pnpm run cy:open
 ```
