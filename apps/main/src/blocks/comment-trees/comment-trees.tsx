@@ -9,6 +9,7 @@ import { getCommentCount } from '$/utilities/get-comment-count';
 import { CommentTree } from '../comment-tree';
 import { RichTextEditor } from '../rich-text-editor';
 import { UserMenu } from '../user-menu';
+import { NotificationHub } from '../notification-hub';
 
 export type CommentTreesProps = {
   comments: CommentLeafType[];
@@ -30,7 +31,10 @@ export function CommentTrees({
         <Heading as="h3" className="!text-2xl">
           {formatTitle(commentCount)}
         </Heading>
-        <UserMenu variant="Widget" />
+        <div className="flex flex-row">
+          <NotificationHub />
+          <UserMenu variant="Widget" />
+        </div>
       </div>
       <div className="space-y-7">
         <div className="space-y-2">
