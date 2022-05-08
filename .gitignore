@@ -8,11 +8,11 @@ out/
 .envproduction
 .vercel
 .cache
-public/bootstrap/*.js.map
-public/bootstrap/*.js
+**/public/bootstrap/*.js.map
+**/public/bootstrap/*.js
+**/public/sw.js*
 cypress/screenshots/
 cypress/videos/
 
 docker-compose.yaml
-public/sw.js*
 .npmrc
