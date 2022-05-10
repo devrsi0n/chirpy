@@ -39,6 +39,7 @@ jobs:
 
       - uses: artiomtr/jest-coverage-report-action@v2
         with:
+          annotations: none
           package-manager: pnpm
           skip-step: install
           working-directory: ./apps/main
