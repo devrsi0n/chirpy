@@ -67,7 +67,7 @@ export type Account_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "Account" */
 export type Account_Arr_Rel_Insert_Input = {
   data: Array<Account_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Account_On_Conflict>;
 };
 
@@ -202,7 +202,7 @@ export type Account_Mutation_Response = {
   returning: Array<Account>;
 };
 
-/** on conflict condition type for table "Account" */
+/** on_conflict condition type for table "Account" */
 export type Account_On_Conflict = {
   constraint: Account_Constraint;
   update_columns?: Array<Account_Update_Column>;
@@ -430,7 +430,7 @@ export type Comment_Append_Input = {
 /** input type for inserting array relation for remote table "Comment" */
 export type Comment_Arr_Rel_Insert_Input = {
   data: Array<Comment_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Comment_On_Conflict>;
 };
 
@@ -549,11 +549,11 @@ export type Comment_Mutation_Response = {
 /** input type for inserting object relation for remote table "Comment" */
 export type Comment_Obj_Rel_Insert_Input = {
   data: Comment_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Comment_On_Conflict>;
 };
 
-/** on conflict condition type for table "Comment" */
+/** on_conflict condition type for table "Comment" */
 export type Comment_On_Conflict = {
   constraint: Comment_Constraint;
   update_columns?: Array<Comment_Update_Column>;
@@ -682,7 +682,7 @@ export type Like_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "Like" */
 export type Like_Arr_Rel_Insert_Input = {
   data: Array<Like_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Like_On_Conflict>;
 };
 
@@ -765,7 +765,7 @@ export type Like_Mutation_Response = {
   returning: Array<Like>;
 };
 
-/** on conflict condition type for table "Like" */
+/** on_conflict condition type for table "Like" */
 export type Like_On_Conflict = {
   constraint: Like_Constraint;
   update_columns?: Array<Like_Update_Column>;
@@ -871,7 +871,7 @@ export type Member_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "Member" */
 export type Member_Arr_Rel_Insert_Input = {
   data: Array<Member_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Member_On_Conflict>;
 };
 
@@ -958,7 +958,7 @@ export type Member_Mutation_Response = {
   returning: Array<Member>;
 };
 
-/** on conflict condition type for table "Member" */
+/** on_conflict condition type for table "Member" */
 export type Member_On_Conflict = {
   constraint: Member_Constraint;
   update_columns?: Array<Member_Update_Column>;
@@ -1077,7 +1077,7 @@ export type NotificationMessage_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "NotificationMessage" */
 export type NotificationMessage_Arr_Rel_Insert_Input = {
   data: Array<NotificationMessage_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<NotificationMessage_On_Conflict>;
 };
 
@@ -1194,7 +1194,7 @@ export type NotificationMessage_Mutation_Response = {
   returning: Array<NotificationMessage>;
 };
 
-/** on conflict condition type for table "NotificationMessage" */
+/** on_conflict condition type for table "NotificationMessage" */
 export type NotificationMessage_On_Conflict = {
   constraint: NotificationMessage_Constraint;
   update_columns?: Array<NotificationMessage_Update_Column>;
@@ -1288,7 +1288,7 @@ export type NotificationMessage_Update_Column =
 /** columns and relationships of "NotificationSubscription" */
 export type NotificationSubscription = {
   __typename?: 'NotificationSubscription';
-  createdAt?: Maybe<Scalars['timestamptz']>;
+  createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
   subscription: Scalars['jsonb'];
   /** An object relationship */
@@ -1337,7 +1337,7 @@ export type NotificationSubscription_Append_Input = {
 /** input type for inserting array relation for remote table "NotificationSubscription" */
 export type NotificationSubscription_Arr_Rel_Insert_Input = {
   data: Array<NotificationSubscription_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<NotificationSubscription_On_Conflict>;
 };
 
@@ -1423,7 +1423,7 @@ export type NotificationSubscription_Mutation_Response = {
   returning: Array<NotificationSubscription>;
 };
 
-/** on conflict condition type for table "NotificationSubscription" */
+/** on_conflict condition type for table "NotificationSubscription" */
 export type NotificationSubscription_On_Conflict = {
   constraint: NotificationSubscription_Constraint;
   update_columns?: Array<NotificationSubscription_Update_Column>;
@@ -1596,11 +1596,11 @@ export type NotificationType_Mutation_Response = {
 /** input type for inserting object relation for remote table "NotificationType" */
 export type NotificationType_Obj_Rel_Insert_Input = {
   data: NotificationType_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<NotificationType_On_Conflict>;
 };
 
-/** on conflict condition type for table "NotificationType" */
+/** on_conflict condition type for table "NotificationType" */
 export type NotificationType_On_Conflict = {
   constraint: NotificationType_Constraint;
   update_columns?: Array<NotificationType_Update_Column>;
@@ -1705,7 +1705,7 @@ export type Page_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "Page" */
 export type Page_Arr_Rel_Insert_Input = {
   data: Array<Page_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Page_On_Conflict>;
 };
 
@@ -1797,11 +1797,11 @@ export type Page_Mutation_Response = {
 /** input type for inserting object relation for remote table "Page" */
 export type Page_Obj_Rel_Insert_Input = {
   data: Page_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Page_On_Conflict>;
 };
 
-/** on conflict condition type for table "Page" */
+/** on_conflict condition type for table "Page" */
 export type Page_On_Conflict = {
   constraint: Page_Constraint;
   update_columns?: Array<Page_Update_Column>;
@@ -1945,7 +1945,7 @@ export type Project_Append_Input = {
 /** input type for inserting array relation for remote table "Project" */
 export type Project_Arr_Rel_Insert_Input = {
   data: Array<Project_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Project_On_Conflict>;
 };
 
@@ -2062,11 +2062,11 @@ export type Project_Mutation_Response = {
 /** input type for inserting object relation for remote table "Project" */
 export type Project_Obj_Rel_Insert_Input = {
   data: Project_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Project_On_Conflict>;
 };
 
-/** on conflict condition type for table "Project" */
+/** on_conflict condition type for table "Project" */
 export type Project_On_Conflict = {
   constraint: Project_Constraint;
   update_columns?: Array<Project_Update_Column>;
@@ -2148,13 +2148,7 @@ export type Project_Update_Column =
   /** column name */
   | 'userId';
 
-/**
- * User's role in teams
- *
- *
- * columns and relationships of "Role"
- *
- */
+/** User's role in teams */
 export type Role = {
   __typename?: 'Role';
   comment?: Maybe<Scalars['String']>;
@@ -2165,13 +2159,7 @@ export type Role = {
   value: Scalars['String'];
 };
 
-/**
- * User's role in teams
- *
- *
- * columns and relationships of "Role"
- *
- */
+/** User's role in teams */
 export type RoleMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2180,13 +2168,7 @@ export type RoleMembersArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-/**
- * User's role in teams
- *
- *
- * columns and relationships of "Role"
- *
- */
+/** User's role in teams */
 export type RoleMembers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2279,11 +2261,11 @@ export type Role_Mutation_Response = {
 /** input type for inserting object relation for remote table "Role" */
 export type Role_Obj_Rel_Insert_Input = {
   data: Role_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Role_On_Conflict>;
 };
 
-/** on conflict condition type for table "Role" */
+/** on_conflict condition type for table "Role" */
 export type Role_On_Conflict = {
   constraint: Role_Constraint;
   update_columns?: Array<Role_Update_Column>;
@@ -2366,7 +2348,7 @@ export type Session_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "Session" */
 export type Session_Arr_Rel_Insert_Input = {
   data: Array<Session_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Session_On_Conflict>;
 };
 
@@ -2453,7 +2435,7 @@ export type Session_Mutation_Response = {
   returning: Array<Session>;
 };
 
-/** on conflict condition type for table "Session" */
+/** on_conflict condition type for table "Session" */
 export type Session_On_Conflict = {
   constraint: Session_Constraint;
   update_columns?: Array<Session_Update_Column>;
@@ -2559,7 +2541,7 @@ export type Team = {
   /** An aggregate relationship */
   members_aggregate: Member_Aggregate;
   name: Scalars['String'];
-  /** fetch data from the table: "Project" */
+  /** An array relationship */
   projects: Array<Project>;
   /** An aggregate relationship */
   projects_aggregate: Project_Aggregate;
@@ -2688,11 +2670,11 @@ export type Team_Mutation_Response = {
 /** input type for inserting object relation for remote table "Team" */
 export type Team_Obj_Rel_Insert_Input = {
   data: Team_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<Team_On_Conflict>;
 };
 
-/** on conflict condition type for table "Team" */
+/** on_conflict condition type for table "Team" */
 export type Team_On_Conflict = {
   constraint: Team_Constraint;
   update_columns?: Array<Team_Update_Column>;
@@ -2780,7 +2762,7 @@ export type User = {
   notificationSubscriptions: Array<NotificationSubscription>;
   /** An aggregate relationship */
   notificationSubscriptions_aggregate: NotificationSubscription_Aggregate;
-  /** fetch data from the table: "Project" */
+  /** An array relationship */
   projects: Array<Project>;
   /** An aggregate relationship */
   projects_aggregate: Project_Aggregate;
@@ -3084,11 +3066,11 @@ export type UserType_Mutation_Response = {
 /** input type for inserting object relation for remote table "UserType" */
 export type UserType_Obj_Rel_Insert_Input = {
   data: UserType_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<UserType_On_Conflict>;
 };
 
-/** on conflict condition type for table "UserType" */
+/** on_conflict condition type for table "UserType" */
 export type UserType_On_Conflict = {
   constraint: UserType_Constraint;
   update_columns?: Array<UserType_Update_Column>;
@@ -3158,7 +3140,7 @@ export type User_Aggregate_Order_By = {
 /** input type for inserting array relation for remote table "User" */
 export type User_Arr_Rel_Insert_Input = {
   data: Array<User_Insert_Input>;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<User_On_Conflict>;
 };
 
@@ -3300,11 +3282,11 @@ export type User_Mutation_Response = {
 /** input type for inserting object relation for remote table "User" */
 export type User_Obj_Rel_Insert_Input = {
   data: User_Insert_Input;
-  /** on conflict condition */
+  /** upsert condition */
   on_conflict?: InputMaybe<User_On_Conflict>;
 };
 
-/** on conflict condition type for table "User" */
+/** on_conflict condition type for table "User" */
 export type User_On_Conflict = {
   constraint: User_Constraint;
   update_columns?: Array<User_Update_Column>;
@@ -3495,7 +3477,7 @@ export type VerificationToken_Mutation_Response = {
   returning: Array<VerificationToken>;
 };
 
-/** on conflict condition type for table "VerificationToken" */
+/** on_conflict condition type for table "VerificationToken" */
 export type VerificationToken_On_Conflict = {
   constraint: VerificationToken_Constraint;
   update_columns?: Array<VerificationToken_Update_Column>;
@@ -3545,8 +3527,13 @@ export type VerificationToken_Update_Column =
   /** column name */
   | 'token';
 
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
 /** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
 export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
   /** is the column contained in the given json value */
   _contained_in?: InputMaybe<Scalars['jsonb']>;
   /** does the column contain the given json value at the top level */
@@ -4362,7 +4349,7 @@ export type Query_Root = {
   projectAggregate: Project_Aggregate;
   /** fetch data from the table: "Project" using primary key columns */
   projectByPk?: Maybe<Project>;
-  /** fetch data from the table: "Project" */
+  /** An array relationship */
   projects: Array<Project>;
   /** fetch aggregated fields from the table: "Role" */
   roleAggregate: Role_Aggregate;
@@ -4756,7 +4743,7 @@ export type Subscription_Root = {
   projectAggregate: Project_Aggregate;
   /** fetch data from the table: "Project" using primary key columns */
   projectByPk?: Maybe<Project>;
-  /** fetch data from the table: "Project" */
+  /** An array relationship */
   projects: Array<Project>;
   /** fetch aggregated fields from the table: "Role" */
   roleAggregate: Role_Aggregate;

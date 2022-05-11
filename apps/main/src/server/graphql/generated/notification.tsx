@@ -1,7 +1,6 @@
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-
 import * as Types from './types';
 
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type InsertOneNotificationSubscriptionMutationVariables = Types.Exact<{
   userId: Types.Scalars['uuid'];
   subscription: Types.Scalars['jsonb'];

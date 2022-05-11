@@ -14,6 +14,13 @@
     },
     "dev": {
       "cache": false
+    },
+    "build:local": {
+      "cache": false
+    },
+    "g:gql": {
+      "inputs": ["src/**/*.graphql"],
+      "cache": false
     }
   }
 }
