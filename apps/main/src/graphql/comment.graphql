@@ -27,6 +27,9 @@ subscription commentTree($pageURL: String!) {
       ...commentContent
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
         ...commentContent
+        replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+          ...commentContent
+        }
       }
     }
   }

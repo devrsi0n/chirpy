@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@trivago/prettier-plugin-sort-imports': 3.2.0
       '@typescript-eslint/eslint-plugin': 5.22.0
       '@typescript-eslint/parser': 5.22.0
       eslint: 8.14.0
@@ -22,6 +23,7 @@ importers:
       turbo: 1.2.8
       typescript: 4.6.4
     devDependencies:
+      '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
       '@typescript-eslint/eslint-plugin': 5.22.0_5b52bb1e77494a9627aef8db6adb10bc
       '@typescript-eslint/parser': 5.22.0_eslint@8.14.0+typescript@4.6.4
       eslint: 8.14.0
@@ -129,7 +131,6 @@ importers:
       '@tiptap/extension-underline': 2.0.0-beta.23
       '@tiptap/react': 2.0.0-beta.109
       '@tiptap/starter-kit': 2.0.0-beta.184
-      '@trivago/prettier-plugin-sort-imports': 3.2.0
       '@types/canvas-confetti': 1.4.2
       '@types/cors': 2.8.12
       '@types/debounce-promise': 3.1.4
@@ -284,7 +285,6 @@ importers:
       '@testing-library/jest-dom': 5.16.4
       '@testing-library/react': 13.1.1_react-dom@18.1.0+react@18.1.0
       '@testing-library/user-event': 14.1.1
-      '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
       '@types/canvas-confetti': 1.4.2
       '@types/cors': 2.8.12
       '@types/debounce-promise': 3.1.4
@@ -441,14 +441,14 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.16.7
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.17.10
       '@babel/helper-compilation-targets': 7.17.10_@babel+core@7.13.10
       '@babel/helper-module-transforms': 7.17.7
       '@babel/helpers': 7.17.9
-      '@babel/parser': 7.14.6
+      '@babel/parser': 7.17.10
       '@babel/template': 7.16.7
-      '@babel/traverse': 7.13.0
-      '@babel/types': 7.13.0
+      '@babel/traverse': 7.17.10
+      '@babel/types': 7.17.10
       convert-source-map: 1.8.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -508,7 +508,7 @@ packages:
   /@babel/generator/7.13.9:
     resolution: {integrity: sha512-mHOOmY0Axl/JCTkxTU6Lf5sWOg/v8nUa+Xkt4zMTftX0wqmb6Sh7J8gvcehBw7q0AhrhAR+FDacKjCZ2X8K+Sw==}
     dependencies:
-      '@babel/types': 7.13.0
+      '@babel/types': 7.17.10
       jsesc: 2.5.2
       source-map: 0.5.7
     dev: true
@@ -1970,11 +1970,11 @@ packages:
     resolution: {integrity: sha512-xys5xi5JEhzC3RzEmSGrs/b3pJW/o87SypZ+G/PhaE7uqVQNv/jlmVIBXuoh5atqQ434LfXV+sf23Oxj0bchJQ==}
     dependencies:
       '@babel/code-frame': 7.16.7
-      '@babel/generator': 7.13.9
+      '@babel/generator': 7.17.10
       '@babel/helper-function-name': 7.17.9
       '@babel/helper-split-export-declaration': 7.16.7
-      '@babel/parser': 7.14.6
-      '@babel/types': 7.13.0
+      '@babel/parser': 7.17.10
+      '@babel/types': 7.17.10
       debug: 4.3.4
       globals: 11.12.0
       lodash: 4.17.21

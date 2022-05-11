@@ -1,8 +1,7 @@
-import gql from 'graphql-tag';
-import * as Urql from 'urql';
-
 import * as Types from './types';
 
+import gql from 'graphql-tag';
+import * as Urql from 'urql';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type CommentContentFragment = {
   __typename?: 'Comment';
@@ -46,6 +45,17 @@ export type CommentTreeSubscription = {
         deletedAt?: string | null;
         parentId?: string | null;
         pageId: string;
+        replies: Array<{
+          __typename?: 'Comment';
+          id: string;
+          content: any;
+          createdAt: string;
+          deletedAt?: string | null;
+          parentId?: string | null;
+          pageId: string;
+          user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+          likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
+        }>;
         user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       }>;
@@ -170,6 +180,9 @@ export const CommentTreeDocument = gql`
         ...commentContent
         replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
           ...commentContent
+          replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+            ...commentContent
+          }
         }
       }
     }
