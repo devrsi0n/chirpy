@@ -198,7 +198,7 @@ importers:
       rehype: 12.0.1
       sass: 1.51.0
       super-tiny-icons: 0.4.0
-      superjson: 1.9.0
+      superjson: 1.9.1
       tailwindcss: 3.0.24
       type-fest: 2.12.2
       typescript: 4.6.4
@@ -262,7 +262,7 @@ importers:
       reading-time: 1.5.0
       rehype: 12.0.1
       super-tiny-icons: 0.4.0
-      superjson: 1.9.0
+      superjson: 1.9.1
       tailwindcss: 3.0.24
       type-fest: 2.12.2
       urql: 2.2.0_graphql@16.4.0+react@18.1.0
@@ -6239,7 +6239,6 @@ packages:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
       '@types/node': 14.18.12
-    dev: false
 
   /@types/lodash/4.14.182:
     resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
@@ -6407,7 +6406,6 @@ packages:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
       '@types/node': 14.18.12
-    dev: false
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
@@ -7916,6 +7914,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     optional: true
@@ -11312,6 +11311,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     optional: true
 
   /fill-range/4.0.0:
@@ -12023,6 +12023,8 @@ packages:
     dependencies:
       '@sindresorhus/is': 0.14.0
       '@szmarczak/http-timer': 1.1.2
+      '@types/keyv': 3.1.4
+      '@types/responselike': 1.0.0
       cacheable-request: 6.1.0
       decompress-response: 3.3.0
       duplexer3: 0.1.4
@@ -15391,6 +15393,7 @@ packages:
 
   /nan/2.15.0:
     resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
+    requiresBuild: true
     optional: true
 
   /nanoid/3.3.4:
@@ -19881,8 +19884,8 @@ packages:
       opencollective-postinstall: 2.0.3
     dev: false
 
-  /superjson/1.9.0:
-    resolution: {integrity: sha512-QINRsBDH2qiLUKEjTfZTP2xH7s9CvzyFrv8b/XclCnmC6W7J7Y1vk8ApKtmSgWz+IzWvp5JbZJhc0uGR++kdyw==}
+  /superjson/1.9.1:
+    resolution: {integrity: sha512-oT3HA2nPKlU1+5taFgz/HDy+GEaY+CWEbLzaRJVD4gZ7zMVVC4GDNFdgvAZt6/VuIk6D2R7RtPAiCHwmdzlMmg==}
     engines: {node: '>=10'}
     dependencies:
       copy-anything: 3.0.2
