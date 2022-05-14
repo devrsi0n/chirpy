@@ -1,9 +1,8 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@chirpy/tsconfigs/base.json",
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["es6", "dom"],
-    "allowSyntheticDefaultImports": true,
     "types": ["cypress", "@testing-library/cypress", "node"]
   },
-  "include": ["**/*.ts"]
+  "include": ["./cypress/**/*.ts"]
 }

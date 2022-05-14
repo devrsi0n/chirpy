@@ -1,6 +1,8 @@
 import * as DotEnv from 'dotenv';
+import * as path from 'path';
 
 DotEnv.config({
-  path: '../../../main/.env.local',
+  // eslint-disable-next-line unicorn/prefer-module
+  path: path.resolve(__dirname, '../../../main/.env.local'),
   debug: true,
 });
