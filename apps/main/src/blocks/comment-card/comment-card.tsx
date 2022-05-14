@@ -133,7 +133,7 @@ export function CommentCard({
               </div>
               <>
                 {userHasModeratePermission && (
-                  <Menu className="-mt-2 mr-2">
+                  <Menu className="mr-3">
                     <Menu.Button>
                       <MoreVertical size={20} />
                     </Menu.Button>
@@ -177,13 +177,14 @@ export function CommentCard({
               commentId={commentId}
               onClickLikeAction={onClickLikeAction}
             />
-            <ActionButton
-              aria-label="Reply"
-              color="blue"
-              disabled={disabledReply}
-              icon={<MessageSquare size={20} className="-scale-x-1" />}
-              onClick={handlePressReply}
-            />
+            <span onClick={handlePressReply} className="flex justify-center">
+              <ActionButton
+                aria-label="Reply"
+                color="blue"
+                disabled={disabledReply}
+                icon={<MessageSquare size={20} className="-scale-x-1" />}
+              />
+            </span>
             <Link
               href={!preventDetailsPage ? detailsURL : ''}
               variant="plain"
