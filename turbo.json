@@ -27,6 +27,12 @@
       ],
       "outputs": [".next/**"]
     },
+    "@chirpy/service-worker#build": {
+      "cache": false
+    },
+    "@chirpy/bootstrappers#build": {
+      "cache": false
+    },
     "build:local": {
       "cache": false
     },
