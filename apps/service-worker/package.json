@@ -1,7 +1,7 @@
 {
   "name": "@chirpy/service-worker",
   "version": "0.0.0",
-  "private": true,
+  "main": "./src/index.ts",
   "scripts": {
     "build": "vite build",
     "build:local": "dotenv -e ../main/.env.local vite build"
