@@ -15,6 +15,18 @@
     "dev": {
       "cache": false
     },
+    "@chirpy/main-app#build": {
+      "dependsOn": [
+        "^build",
+        "$NEXT_PUBLIC_APP_URL",
+        "$NEXT_PUBLIC_HASURA_HTTP_ORIGIN",
+        "$NEXTAUTH_SECRET",
+        "$EMAIL_API_KEY",
+        "$HASURA_ADMIN_SECRET",
+        "$HASURA_EVENT_SECRET",
+        "$NEXT_PUBLIC_VAPID"
+      ]
+    },
     "build:local": {
       "cache": false
     },
@@ -22,5 +34,6 @@
       "inputs": ["src/**/*.graphql"],
       "cache": false
     }
-  }
+  },
+  "globalDependencies": ["$GITHUB_TOKEN", "tsconfig.json", ".env.*"]
 }
