@@ -10,7 +10,7 @@
     "@maizzle/framework": "3.7.3",
     "@maizzle/cli": "1.4.0",
     "autoprefixer": "10.4.7",
-    "glob": "8.0.1",
+    "glob": "7.1.6",
     "postcss": "8.4.13",
     "tailwindcss": "2.2.19"
   },
