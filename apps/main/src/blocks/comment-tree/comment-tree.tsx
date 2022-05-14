@@ -24,7 +24,14 @@ function CommentTree({
   commentBranchProps,
 }: CommentProps): JSX.Element {
   return (
-    <CommentBranch {...commentBranchProps} hiddenBranch={depth === 1}>
+    <CommentBranch
+      key={comment.id}
+      // layout
+      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, y: 50, scale: 0.3 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      hiddenBranch={depth === 1}
+    >
       <CommentCard
         commentId={comment.id}
         author={comment.user}
@@ -38,23 +45,15 @@ function CommentTree({
       />
       <div className="flex flex-col items-end">
         <ul className="w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)]">
-          <AnimatePresence>
-            {comment.replies?.map((reply: $TsFixMe) => (
-              <CommentTree
-                key={reply.id}
-                comment={reply}
-                depth={depth + 1}
-                onClickLikeAction={onClickLikeAction}
-                onSubmitReply={onSubmitReply}
-                commentBranchProps={{
-                  layout: true,
-                  transition: { duration: 0.2 },
-                  initial: { opacity: 0, y: 50, scale: 0.3 },
-                  animate: { opacity: 1, y: 0, scale: 1 },
-                }}
-              />
-            ))}
-          </AnimatePresence>
+          {comment.replies?.map((reply: $TsFixMe) => (
+            <CommentTree
+              key={reply.id}
+              comment={reply}
+              depth={depth + 1}
+              onClickLikeAction={onClickLikeAction}
+              onSubmitReply={onSubmitReply}
+            />
+          ))}
         </ul>
       </div>
     </CommentBranch>

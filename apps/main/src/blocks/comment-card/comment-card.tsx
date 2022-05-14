@@ -23,6 +23,7 @@ import { useCurrentUser } from '../../contexts/current-user-context/use-current-
 import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
+import { LinkProps } from '$/components/link';
 
 export type { ClickLikeActionHandler } from '../like-action';
 
@@ -82,7 +83,7 @@ export function CommentCard({
   const detailsURL = `/widget/comment/details/${commentId}`;
   const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
 
-  const handleClickLinkAction: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleClickLinkAction: React.MouseEventHandler<HTMLElement> = (e) => {
     if (preventDetailsPage) {
       e.preventDefault();
       setContainerAnimate('shake');
@@ -176,32 +177,26 @@ export function CommentCard({
               likes={likes}
               commentId={commentId}
               onClickLikeAction={onClickLikeAction}
+              title="Like this comment"
             />
             <span onClick={handlePressReply} className="flex justify-center">
               <ActionButton
                 aria-label="Reply"
                 color="blue"
                 disabled={disabledReply}
+                title={
+                  disabledReply
+                    ? 'You have reached the maximum depth of replies'
+                    : 'Reply to this comment'
+                }
                 icon={<MessageSquare size={20} className="-scale-x-1" />}
               />
             </span>
-            <Link
-              href={!preventDetailsPage ? detailsURL : ''}
-              variant="plain"
-              title={
-                !preventDetailsPage
-                  ? 'The details of this comment'
-                  : `This is already the current comment's detail page`
-              }
-              className="flex justify-center"
-            >
-              <ActionButton
-                color="green"
-                icon={<Info size={20} />}
-                disabled={preventDetailsPage}
-                onClick={handleClickLinkAction}
-              />
-            </Link>
+            <DetailLinkButton
+              preventLink={preventDetailsPage}
+              href={detailsURL}
+              onClick={handleClickLinkAction}
+            />
           </div>
         )}
         {showReplyEditor && (
@@ -217,6 +212,39 @@ export function CommentCard({
         )}
       </div>
     </m.article>
+  );
+}
+
+type DetailLinkButtonProps = {
+  preventLink?: boolean;
+} & Pick<LinkProps, 'href' | 'onClick'>;
+
+function DetailLinkButton({ preventLink, href, onClick }: DetailLinkButtonProps): JSX.Element {
+  const childButton = (
+    <ActionButton
+      color="green"
+      icon={<Info size={20} />}
+      disabled={preventLink}
+      onClick={onClick}
+      title={
+        preventLink
+          ? `This is already the current comment's detail page`
+          : 'The details of this comment'
+      }
+    />
+  );
+
+  if (preventLink) {
+    return (
+      <span className="flex justify-center" onClick={onClick}>
+        {childButton}
+      </span>
+    );
+  }
+  return (
+    <Link href={href} variant="plain" className="flex justify-center">
+      {childButton}
+    </Link>
   );
 }
 
