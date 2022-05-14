@@ -7,7 +7,7 @@ import { m, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
-import { ActionButton, Button } from '$/components/button';
+import { ActionButton, Button, ButtonProps } from '$/components/button';
 import { Link } from '$/components/link';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
@@ -217,7 +217,8 @@ export function CommentCard({
 
 type DetailLinkButtonProps = {
   preventLink?: boolean;
-} & Pick<LinkProps, 'href' | 'onClick'>;
+} & Pick<LinkProps, 'href'> &
+  Pick<ButtonProps, 'onClick'>;
 
 function DetailLinkButton({ preventLink, href, onClick }: DetailLinkButtonProps): JSX.Element {
   const childButton = (
