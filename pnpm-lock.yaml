@@ -42,7 +42,7 @@ importers:
       turbo: 1.2.8
       typescript: 4.6.4
 
-  apps/boostrappers:
+  apps/bootstrappers:
     specifiers:
       '@chirpy/tsconfigs': workspace:*
       '@testing-library/react': 13.1.1
@@ -106,6 +106,9 @@ importers:
 
   apps/main:
     specifiers:
+      '@chirpy/bootstrappers': workspace:*
+      '@chirpy/emails': workspace:*
+      '@chirpy/service-worker': workspace:*
       '@chirpy/tsconfigs': workspace:*
       '@geist-ui/react-icons': 1.0.1
       '@graphql-codegen/cli': 2.6.2
@@ -278,6 +281,9 @@ importers:
       wonka: 4.0.15
       ws: 8.6.0
     devDependencies:
+      '@chirpy/bootstrappers': link:../bootstrappers
+      '@chirpy/emails': link:../emails
+      '@chirpy/service-worker': link:../service-worker
       '@chirpy/tsconfigs': link:../../packages/tsconfigs
       '@graphql-codegen/cli': 2.6.2_ftpo62y2ul2geicvo7ggqifxpq
       '@graphql-codegen/introspection': 2.1.1_graphql@16.4.0

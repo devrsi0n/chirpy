@@ -1,7 +1,7 @@
 {
-  "name": "@chirpy/boostrappers",
+  "name": "@chirpy/bootstrappers",
   "version": "0.0.0",
-  "private": true,
+  "main": "./src/index.ts",
   "scripts": {
     "dev": "VITE_DEBUG=true vite",
     "build": "vite build",

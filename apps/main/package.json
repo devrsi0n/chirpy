@@ -81,6 +81,9 @@
   },
   "devDependencies": {
     "@chirpy/tsconfigs": "workspace:*",
+    "@chirpy/bootstrappers": "workspace:*",
+    "@chirpy/service-worker": "workspace:*",
+    "@chirpy/emails": "workspace:*",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/near-operation-file-preset": "2.2.9",
