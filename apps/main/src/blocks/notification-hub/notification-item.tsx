@@ -13,6 +13,7 @@ import { Text, TextProps } from '$/components/text';
 import { CurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { dayjs } from '$/utilities/date';
+import { useIsWidget } from '$/hooks/use-is-widget';
 
 export type INotificationItemProps = {
   index: number;
@@ -33,6 +34,7 @@ export function NotificationItem({
   onClickDelete,
 }: INotificationItemProps): JSX.Element {
   const deleteButtonRef = React.useRef<HTMLButtonElement>(null);
+  const isWidget = useIsWidget();
   return (
     <Menu.Item
       key={message.id}
@@ -52,6 +54,7 @@ export function NotificationItem({
         href={message.url}
         variant="plain"
         className="group w-full flex flex-row items-start space-x-2 mb-2"
+        target={isWidget ? '_blank' : '_self'}
       >
         {ICON_MAP[message.type]}
         <div className="flex-1">
