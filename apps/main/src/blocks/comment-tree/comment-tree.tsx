@@ -3,14 +3,14 @@ import * as React from 'react';
 
 import { CommentLeafType } from '$/types/widget';
 
-import { CommentBranch } from '../comment-branch';
+import { CommentBranch, CommentBranchProps } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
-import treeStyles from './comment-tree.module.scss';
 
 export type CommentProps = {
   comment: CommentLeafType;
   depth: number;
+  commentBranchProps?: CommentBranchProps;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**
@@ -21,9 +21,10 @@ function CommentTree({
   depth,
   onClickLikeAction,
   onSubmitReply,
+  commentBranchProps,
 }: CommentProps): JSX.Element {
   return (
-    <CommentBranch hiddenBranch={depth === 1}>
+    <CommentBranch {...commentBranchProps} hiddenBranch={depth === 1}>
       <CommentCard
         commentId={comment.id}
         author={comment.user}
@@ -36,24 +37,22 @@ function CommentTree({
         onSubmitReply={onSubmitReply}
       />
       <div className="flex flex-col items-end">
-        <ul className={treeStyles.commentList}>
+        <ul className="w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)]">
           <AnimatePresence>
             {comment.replies?.map((reply: $TsFixMe) => (
-              <m.div
+              <CommentTree
                 key={reply.id}
-                layout
-                transition={{ duration: 0.2 }}
-                initial={{ opacity: 0, y: 50, scale: 0.3 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-              >
-                <CommentTree
-                  key={reply.id}
-                  comment={reply}
-                  depth={depth + 1}
-                  onClickLikeAction={onClickLikeAction}
-                  onSubmitReply={onSubmitReply}
-                />
-              </m.div>
+                comment={reply}
+                depth={depth + 1}
+                onClickLikeAction={onClickLikeAction}
+                onSubmitReply={onSubmitReply}
+                commentBranchProps={{
+                  layout: true,
+                  transition: { duration: 0.2 },
+                  initial: { opacity: 0, y: 50, scale: 0.3 },
+                  animate: { opacity: 1, y: 0, scale: 1 },
+                }}
+              />
             ))}
           </AnimatePresence>
         </ul>

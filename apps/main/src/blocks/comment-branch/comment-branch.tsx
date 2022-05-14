@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { m, MotionProps } from 'framer-motion';
 import * as React from 'react';
 
 import styles from './comment-branch.module.scss';
 
-const defaultWidth = 1.2;
-const defaultHeight = 3.2;
+const DEFAULT_WIDTH = 1.2;
+const DEFAULT_HEIGHT = 3.2;
+
 export type CommentBranchProps = {
   hiddenBranch?: boolean;
   /**
@@ -15,18 +17,19 @@ export type CommentBranchProps = {
    * rem
    */
   height?: number;
-} & React.ComponentPropsWithoutRef<'li'>;
+} & React.ComponentPropsWithoutRef<'li'> &
+  MotionProps;
 
 // https://codepen.io/rno1d/pen/VaaBxz
 export function CommentBranch({
-  width = defaultWidth,
-  height = defaultHeight,
+  width = DEFAULT_WIDTH,
+  height = DEFAULT_HEIGHT,
   hiddenBranch,
   className,
   ...restProps
 }: CommentBranchProps): JSX.Element {
   return (
-    <li
+    <m.li
       {...restProps}
       className={clsx(`space-y-2`, !hiddenBranch && styles.commentBranch, className)}
       style={

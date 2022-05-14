@@ -43,7 +43,7 @@ export function CommentTrees({
             onSubmit={onSubmitReply}
           />
         </div>
-        <ul>
+        <ul className="space-y-5">
           {comments?.map((comment: CommentLeafType) => (
             <CommentTree
               key={comment.id}

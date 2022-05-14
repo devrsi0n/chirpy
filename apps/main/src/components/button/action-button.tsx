@@ -32,10 +32,10 @@ export function ActionButton({
     <BaseButton
       {...restProps}
       className={clsx(
-        'group flex flex-row items-center text-gray-1100',
-        disabled && `text-gray-900`,
+        'group flex flex-row items-center text-gray-1100 disabled:text-gray-900',
         className,
       )}
+      disabled={disabled}
     >
       <span className={clsx(`rounded-full p-2 group-hover:bg-opacity-10`, !disabled && iconStyle)}>
         {Icon}
