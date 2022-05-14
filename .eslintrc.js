@@ -26,9 +26,11 @@ module.exports = {
     'prettier/prettier': 'warn',
 
     '@next/next/no-img-element': 'off',
+    '@next/next/no-html-link-for-pages': ['error', 'apps/main/src/pages/'],
 
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+
     'unicorn/filename-case': [
       'error',
       {
@@ -36,15 +38,15 @@ module.exports = {
         ignore: [/^\[.+\]\.tsx?$/],
       },
     ],
-
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-null': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/prefer-node-protocol': 'off',
-    'unicorn/no-abusive-eslint-disable': 'off',
     'unicore/prefer-module': 'off',
+    'unicorn/no-abusive-eslint-disable': 'off',
     'unicorn/no-array-for-each': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
+    'unicorn/import-style': 'off',
 
     'jest/expect-expect': 'off',
   },

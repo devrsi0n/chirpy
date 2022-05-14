@@ -8,7 +8,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{json,md,scss,css}": [
+    "*.{json,md,scss,js}": [
       "prettier --write"
     ],
     "**/generated/**/*.{ts,tsx}": [
@@ -18,7 +18,7 @@
       "prettier --write",
       "cd apps/main && pnpm run g:gql"
     ],
-    "*.{ts,tsx,js}": [
+    "*.{ts,tsx}": [
       "eslint --fix"
     ]
   },
