@@ -3,8 +3,7 @@
   "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**"]
+      "dependsOn": ["^build"]
     },
     "test": {
       "outputs": []
@@ -25,7 +24,8 @@
         "$HASURA_ADMIN_SECRET",
         "$HASURA_EVENT_SECRET",
         "$NEXT_PUBLIC_VAPID"
-      ]
+      ],
+      "outputs": [".next/**"]
     },
     "build:local": {
       "cache": false
