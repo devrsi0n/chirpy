@@ -45,7 +45,7 @@ importers:
   apps/bootstrappers:
     specifiers:
       '@chirpy/tsconfigs': workspace:*
-      '@testing-library/react': 13.1.1
+      '@testing-library/react': 13.2.0
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.3
       dotenv: 16.0.0
@@ -58,7 +58,7 @@ importers:
       vite: 2.9.9
     devDependencies:
       '@chirpy/tsconfigs': link:../../packages/tsconfigs
-      '@testing-library/react': 13.1.1_ef5jwxihqo6n7gxfmzogljlgcm
+      '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.3
       dotenv: 16.0.0
@@ -131,7 +131,7 @@ importers:
       '@storybook/testing-react': 1.2.4
       '@tailwindcss/typography': 0.4.1
       '@testing-library/jest-dom': 5.16.4
-      '@testing-library/react': 13.1.1
+      '@testing-library/react': 13.2.0
       '@testing-library/user-event': 14.1.1
       '@tiptap/core': 2.0.0-beta.175
       '@tiptap/extension-link': 2.0.0-beta.37
@@ -299,7 +299,7 @@ importers:
       '@relative-ci/agent': 3.1.2
       '@storybook/testing-react': 1.2.4_cruib6ngadnc2qx23eb7xoucgy
       '@testing-library/jest-dom': 5.16.4
-      '@testing-library/react': 13.1.1_ef5jwxihqo6n7gxfmzogljlgcm
+      '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@testing-library/user-event': 14.1.1
       '@types/canvas-confetti': 1.4.2
       '@types/cors': 2.8.12
@@ -6094,8 +6094,8 @@ packages:
       redent: 3.0.0
     dev: true
 
-  /@testing-library/react/13.1.1_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-8mirlAa0OKaUvnqnZF6MdAh2tReYA2KtWVw1PKvaF5EcCZqgK5pl8iF+3uW90JdG5Ua2c2c2E2wtLdaug3dsVg==}
+  /@testing-library/react/13.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-Bprbz/SZVONCJy5f7hcihNCv313IJXdYiv0nSJklIs1SQCIHHNlnGNkosSXnGZTmesyGIcBGNppYhXcc11pb7g==}
     engines: {node: '>=12'}
     peerDependencies:
       react: ^18.0.0 || 18
