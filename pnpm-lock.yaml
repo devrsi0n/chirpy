@@ -204,7 +204,7 @@ importers:
       react: 18.1.0
       react-dom: 18.1.0
       react-error-boundary: 3.1.4
-      react-flatpickr: 3.10.11
+      react-flatpickr: 3.10.12
       react-flip-move: 3.0.4
       reading-time: 1.5.0
       rehype: 12.0.1
@@ -271,7 +271,7 @@ importers:
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       react-error-boundary: 3.1.4_react@18.1.0
-      react-flatpickr: 3.10.11_react@18.1.0
+      react-flatpickr: 3.10.12_react@18.1.0
       react-flip-move: 3.0.4_ef5jwxihqo6n7gxfmzogljlgcm
       reading-time: 1.5.0
       rehype: 12.0.1
@@ -19121,8 +19121,8 @@ packages:
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
 
-  /react-flatpickr/3.10.11_react@18.1.0:
-    resolution: {integrity: sha512-iHDSpV32QZYFreQzFunMQ/9jZ7AI7V5LNBeBCcgpbr6EDqPEwnRDDikxfGyfz8yOoXdIzD40ZBAJnGFPdongtw==}
+  /react-flatpickr/3.10.12_react@18.1.0:
+    resolution: {integrity: sha512-NYhUg3QE9K1QpHXLxR7HuWldnNbVWa6lgiZBlWu0HDsX3IWs/hVJ5q1JzM0/CNLJmm2blUEdudHwbyBNezynBg==}
     peerDependencies:
       react: '>=16, <=18 || 18'
     dependencies:
