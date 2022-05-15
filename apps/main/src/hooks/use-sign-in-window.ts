@@ -20,7 +20,7 @@ export function useSignInWindow({
   };
 
   useEventListener('storage', (event) => {
-    if (event.key === LOG_IN_SUCCESS_KEY) {
+    if (event.key === LOG_IN_SUCCESS_KEY && event.newValue === 'true') {
       popupWindow.current?.close();
       popupWindow.current = null;
       // Force to refresh session

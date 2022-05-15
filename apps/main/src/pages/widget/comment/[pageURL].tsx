@@ -22,7 +22,6 @@ import {
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/use-create-a-comment';
 import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
-import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   PageByUrlOnlyDocument,
@@ -57,8 +56,6 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
     pause: ssrMode,
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
-
-  useWidgetSideEffects();
 
   const onSubmitReply = useCreateAComment({ pageId });
   const onClickLikeAction = useToggleALikeAction();

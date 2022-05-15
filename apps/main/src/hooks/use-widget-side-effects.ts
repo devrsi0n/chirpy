@@ -2,6 +2,9 @@ import * as React from 'react';
 
 import { EVENT_CLICK_CONTAINER } from '$/lib/constants';
 
+/**
+ * Register widget events
+ */
 export function useWidgetSideEffects(): void {
   React.useEffect(() => {
     broadcastPageHeight();
