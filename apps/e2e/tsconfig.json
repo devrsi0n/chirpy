@@ -3,6 +3,7 @@
   "extends": "@chirpy/tsconfigs/base.json",
   "compilerOptions": {
     "target": "es6",
+    "module": "commonjs",
     "types": ["cypress", "@testing-library/cypress", "node"]
   },
   "include": ["./cypress/**/*.ts"]
