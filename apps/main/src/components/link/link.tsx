@@ -36,24 +36,27 @@ const variantStyles: Record<Variant, string> = {
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-export function Link({
-  size,
-  href,
-  as,
-  replace,
-  target: _target,
-  scroll,
-  shallow,
-  passHref = true,
-  prefetch,
-  highlightPattern,
-  hideUnderline,
-  variant = 'primary',
-  className,
-  children,
-  disabled,
-  ...restProps
-}: LinkProps): JSX.Element {
+export const Link = React.forwardRef(function Link(
+  {
+    size,
+    href,
+    as,
+    replace,
+    target: _target,
+    scroll,
+    shallow,
+    passHref = true,
+    prefetch,
+    highlightPattern,
+    hideUnderline,
+    variant = 'primary',
+    className,
+    children,
+    disabled,
+    ...restProps
+  }: LinkProps,
+  ref: React.Ref<HTMLAnchorElement>,
+): JSX.Element {
   if (disabled) {
     href = '';
   }
@@ -84,6 +87,7 @@ export function Link({
           {...commonProps}
           className={clsx(disabled && disabledStyle, className)}
           onClick={handler}
+          ref={ref}
         >
           {children}
         </a>
@@ -101,6 +105,7 @@ export function Link({
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onClick={handler}
+          ref={ref}
         >
           {children}
           {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
@@ -117,6 +122,6 @@ export function Link({
       )}
     </NextLink>
   );
-}
+});
 
 const disabledStyle = `hover:cursor-default`;
