@@ -3,9 +3,19 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
 [![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 
-<img src="apps/main/public/images/marketing/github.png" width="800"></img>
+<img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
+
+<details>
+    <summary>More screenshots</summary>
+    <img src="apps/main/public/images/blog/open-source/theme.png" width="800" alt="Widget theme" >
+    <img src="apps/main/public/images/blog/open-source/analytics.png" width="800" alt="Widget analytics" >
+    <img src="apps/main/public/images/docs/features/theme/dashboard.png" width="800" alt="Project dashboard" >
+    <img src="apps/main/public/images/docs/get-started/integration-guide.png" width="800" alt="Widget integration guide" >
+</details>
+
+<br>
 
 Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 
@@ -15,15 +25,16 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 - 🎨 [Customizable widget](https://chirpy.dev/docs/features/theme)
 - ⚡️ Reasonably fast
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
-- 📈 [Widget analytics](https://chirpy.dev/docs/features/analytics)
+- 📊 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 - 🪄 Real-time comments
 - 📱 Mobile friendly
+- 🔔 Email & Web notifications
 
 ## 🧭 Roadmap
 
 We're working hard to make Chirpy General Available first. Here are the blocking features:
 
-- [Notifications](https://github.com/devrsi0n/chirpy/issues/134)
+- ~~[Notifications](https://github.com/devrsi0n/chirpy/issues/134)~~
 - Account plan
 - Payment
 - Email login without password

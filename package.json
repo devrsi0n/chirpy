@@ -99,6 +99,13 @@
           "^next"
         ],
         "prPriority": 5
+      },
+      {
+        "matchPackagePatterns": [
+          "github-releases",
+          "github-tags"
+        ],
+        "prPriority": -1
       }
     ],
     "labels": [
