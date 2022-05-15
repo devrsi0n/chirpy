@@ -14,8 +14,6 @@
     "dotenv": "16.0.0",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
-    "cypress": "9.6.1",
-    "eslint": "8.14.0",
-    "eslint-config-chirpy": "workspace:*"
+    "cypress": "9.6.1"
   }
 }
