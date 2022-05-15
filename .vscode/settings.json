@@ -23,5 +23,6 @@
   "tailwindcss.preferVariantWithParentheses": true,
   "jestrunner.configPath": "jest.config.js",
   "jest.jestCommandLine": "npm run test --",
-  "svg.preview.background": "white"
+  "svg.preview.background": "white",
+  "tailwindCSS.experimental.configFile": "apps/main/tailwind.config.js"
 }

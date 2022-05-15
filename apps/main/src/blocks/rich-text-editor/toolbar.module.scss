@@ -1,0 +1,19 @@
+.headingButtonGroup {
+  display: none;
+
+  @media (min-width: 420px) {
+    & {
+      @apply flex flex-row space-x-1;
+    }
+  }
+}
+
+.blockButtonGroup {
+  display: none;
+
+  @media (min-width: 542px) {
+    & {
+      @apply flex flex-row space-x-1;
+    }
+  }
+}

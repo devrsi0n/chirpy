@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { Divider } from '$/components/divider';
 import { cardBg } from '$/styles/common';
+import styles from './toolbar.module.scss';
 
 import { MarkButton, HeadingButton, BlockButton } from './format-buttons';
 
@@ -24,7 +25,7 @@ export function Toolbar({ editor, children, className, ...divProps }: ToolbarPro
       {...divProps}
     >
       <div className="space-x-1 flex flex-row items-center">
-        <div className="hidden xs:flex xs:flex-row xs:space-x-1">
+        <div className={styles.headingButtonGroup}>
           <HeadingButton editor={editor} />
           <Divider vertical />
         </div>
@@ -32,7 +33,7 @@ export function Toolbar({ editor, children, className, ...divProps }: ToolbarPro
         <MarkButton editor={editor} format="italic" />
         <MarkButton editor={editor} format="underline" />
         <MarkButton editor={editor} format="code" />
-        <div className="hidden sm:flex sm:flex-row sm:space-x-1">
+        <div className={styles.blockButtonGroup}>
           <Divider vertical />
           <BlockButton editor={editor} format="link" />
           <BlockButton editor={editor} format="bulletList" />
