@@ -27,7 +27,6 @@ import {
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { useCreateAComment } from '$/hooks/use-create-a-comment';
 import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
-import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
@@ -46,8 +45,6 @@ export default function CommentDetailsWidget(
     variables: { id: props.commentId },
     pause: ssrMode,
   });
-
-  useWidgetSideEffects();
 
   const comment = data?.commentByPk || props.comment;
 

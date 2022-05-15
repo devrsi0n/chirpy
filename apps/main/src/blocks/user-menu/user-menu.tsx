@@ -13,7 +13,7 @@ import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { FEEDBACK_LINK, GRAPHQL_CACHE_DB_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';
@@ -73,11 +73,12 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             <Menu.Divider />
             <Menu.Item
               className={itemStyle}
-              onClick={() => {
-                localStorage.removeItem(LOG_IN_SUCCESS_KEY);
-                signOut({
+              onClick={async () => {
+                await signOut({
                   redirect: !isWidget,
                 });
+                localStorage.removeItem(LOG_IN_SUCCESS_KEY);
+                indexedDB.deleteDatabase(GRAPHQL_CACHE_DB_NAME);
               }}
             >
               <LogOut size={14} />

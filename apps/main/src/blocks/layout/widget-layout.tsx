@@ -4,6 +4,7 @@ import * as React from 'react';
 import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
 
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
+import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 
 export type WidgetLayoutProps = {
   className?: string;
@@ -16,6 +17,7 @@ export type WidgetLayoutProps = {
  * conditionally, it will increase bundle size on widgets
  */
 export function WidgetLayout({ title, children, widgetTheme }: WidgetLayoutProps): JSX.Element {
+  useWidgetSideEffects();
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
       <LayoutWrapper title={title} className="min-h-full py-10 sm:mr-1">

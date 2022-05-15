@@ -16,10 +16,11 @@ import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage';
 
 import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
+import { GRAPHQL_CACHE_DB_NAME } from './constants';
 
 const getOfflineExchange = () => {
   const storage = makeDefaultStorage({
-    idbName: 'graphcache-v1', // The name of the IndexedDB database
+    idbName: GRAPHQL_CACHE_DB_NAME, // The name of the IndexedDB database
     maxAge: 7, // The maximum age of the persisted data in days
   });
   return offlineExchange({
