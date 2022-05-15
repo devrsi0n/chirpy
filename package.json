@@ -45,11 +45,35 @@
   "engines": {
     "node": "16.x"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/core",
+        "webpack",
+        "@testing-library/dom",
+        "@urql/core",
+        "@storybook/addons",
+        "@storybook/client-api",
+        "@storybook/preview-web",
+        "@geist-ui/react",
+        "typescript",
+        "graphql"
+      ],
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18",
+        "graphql": "16",
+        "glob": "8",
+        "core-js": "3"
+      }
+    }
+  },
   "renovate": {
     "extends": [
       "config:base",
       "docker:disable"
     ],
+    "prConcurrentLimit": 15,
     "packageRules": [
       {
         "matchPackagePatterns": "^@tiptap/",
@@ -67,7 +91,7 @@
         "matchDepTypes": [
           "devDependencies"
         ],
-        "prPriority": -1
+        "prPriority": 1
       },
       {
         "matchPackagePatterns": [
