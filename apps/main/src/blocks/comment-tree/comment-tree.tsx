@@ -1,16 +1,14 @@
-import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { CommentLeafType } from '$/types/widget';
 
-import { CommentBranch, CommentBranchProps } from '../comment-branch';
+import { CommentBranch } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
 
 export type CommentProps = {
   comment: CommentLeafType;
   depth: number;
-  commentBranchProps?: CommentBranchProps;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**
@@ -21,12 +19,10 @@ function CommentTree({
   depth,
   onClickLikeAction,
   onSubmitReply,
-  commentBranchProps,
 }: CommentProps): JSX.Element {
   return (
     <CommentBranch
       key={comment.id}
-      // layout
       transition={{ duration: 0.2 }}
       initial={{ opacity: 0, y: 50, scale: 0.3 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
