@@ -1,14 +1,14 @@
 .commentBranch {
   position: relative;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     transform: translateY(-0.5rem);
     border-left-width: 1px;
     @apply border-gray-500;
   }
 
-  &:before {
+  &::before {
     position: absolute;
     top: 0;
     left: calc(-1 * var(--comment-branch-width));
@@ -20,16 +20,16 @@
     border-bottom-left-radius: 8px;
   }
 
-  &:after {
+  &::after {
     position: absolute;
     top: calc(var(--comment-branch-height) - 0.3rem);
     bottom: -0.5rem;
-    left: -var(--comment-branch-width);
+    left: calc(-1 * var(--comment-branch-width));
     display: block;
     content: '';
   }
 
-  &:last-child:after {
+  &:last-child::after {
     display: none;
   }
 }

@@ -1,5 +1,6 @@
 {
-  "private": true,
+  "name": "@chirpy/emails",
+  "main": "./config.js",
   "scripts": {
     "build:local": "maizzle build",
     "build": "maizzle build production",
@@ -10,6 +11,8 @@
     "@maizzle/cli": "1.4.0",
     "autoprefixer": "10.4.7",
     "glob": "8.0.1",
+    "postcss": "8.4.13",
     "tailwindcss": "2.2.19"
-  }
+  },
+  "license": "Apache License 2.0"
 }

@@ -3,7 +3,7 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
 [![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 
-<img src="public/images/marketing/github.png" width="800"></img>
+<img src="apps/main/public/images/marketing/github.png" width="800"></img>
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
 

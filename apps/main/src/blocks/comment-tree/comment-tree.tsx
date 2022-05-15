@@ -3,14 +3,14 @@ import * as React from 'react';
 
 import { CommentLeafType } from '$/types/widget';
 
-import { CommentBranch } from '../comment-branch';
+import { CommentBranch, CommentBranchProps } from '../comment-branch';
 import { CommentCard, CommentCardProps } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
-import treeStyles from './comment-tree.module.scss';
 
 export type CommentProps = {
   comment: CommentLeafType;
   depth: number;
+  commentBranchProps?: CommentBranchProps;
 } & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
 
 /**
@@ -21,9 +21,17 @@ function CommentTree({
   depth,
   onClickLikeAction,
   onSubmitReply,
+  commentBranchProps,
 }: CommentProps): JSX.Element {
   return (
-    <CommentBranch hiddenBranch={depth === 1}>
+    <CommentBranch
+      key={comment.id}
+      // layout
+      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, y: 50, scale: 0.3 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      hiddenBranch={depth === 1}
+    >
       <CommentCard
         commentId={comment.id}
         author={comment.user}
@@ -36,26 +44,16 @@ function CommentTree({
         onSubmitReply={onSubmitReply}
       />
       <div className="flex flex-col items-end">
-        <ul className={treeStyles.commentList}>
-          <AnimatePresence>
-            {comment.replies?.map((reply: $TsFixMe) => (
-              <m.div
-                key={reply.id}
-                layout
-                transition={{ duration: 0.2 }}
-                initial={{ opacity: 0, y: 50, scale: 0.3 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-              >
-                <CommentTree
-                  key={reply.id}
-                  comment={reply}
-                  depth={depth + 1}
-                  onClickLikeAction={onClickLikeAction}
-                  onSubmitReply={onSubmitReply}
-                />
-              </m.div>
-            ))}
-          </AnimatePresence>
+        <ul className="w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)]">
+          {comment.replies?.map((reply: $TsFixMe) => (
+            <CommentTree
+              key={reply.id}
+              comment={reply}
+              depth={depth + 1}
+              onClickLikeAction={onClickLikeAction}
+              onSubmitReply={onSubmitReply}
+            />
+          ))}
         </ul>
       </div>
     </CommentBranch>

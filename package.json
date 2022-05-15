@@ -8,7 +8,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.{json,md,scss,css}": [
+    "*.{json,md,scss,js}": [
       "prettier --write"
     ],
     "**/generated/**/*.{ts,tsx}": [
@@ -16,16 +16,16 @@
     ],
     "*.graphql": [
       "prettier --write",
-      "cd apps/main",
-      "pnpm run g:gql"
+      "cd apps/main && pnpm run g:gql"
     ],
-    "*.{ts,tsx,js}": [
+    "*.{ts,tsx}": [
       "eslint --fix"
     ]
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
+    "@trivago/prettier-plugin-sort-imports": "3.2.0",
     "eslint": "8.14.0",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.5.0",
@@ -45,11 +45,35 @@
   "engines": {
     "node": "16.x"
   },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/core",
+        "webpack",
+        "@testing-library/dom",
+        "@urql/core",
+        "@storybook/addons",
+        "@storybook/client-api",
+        "@storybook/preview-web",
+        "@geist-ui/react",
+        "typescript",
+        "graphql"
+      ],
+      "allowedVersions": {
+        "react": "18",
+        "react-dom": "18",
+        "graphql": "16",
+        "glob": "8",
+        "core-js": "3"
+      }
+    }
+  },
   "renovate": {
     "extends": [
       "config:base",
       "docker:disable"
     ],
+    "prConcurrentLimit": 15,
     "packageRules": [
       {
         "matchPackagePatterns": "^@tiptap/",
@@ -67,7 +91,7 @@
         "matchDepTypes": [
           "devDependencies"
         ],
-        "prPriority": -1
+        "prPriority": 1
       },
       {
         "matchPackagePatterns": [

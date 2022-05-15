@@ -3,8 +3,7 @@
   "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**"]
+      "dependsOn": ["^build"]
     },
     "test": {
       "outputs": []
@@ -14,6 +13,33 @@
     },
     "dev": {
       "cache": false
+    },
+    "@chirpy/main-app#build": {
+      "dependsOn": [
+        "^build",
+        "$NEXT_PUBLIC_APP_URL",
+        "$NEXT_PUBLIC_HASURA_HTTP_ORIGIN",
+        "$NEXTAUTH_SECRET",
+        "$EMAIL_API_KEY",
+        "$HASURA_ADMIN_SECRET",
+        "$HASURA_EVENT_SECRET",
+        "$NEXT_PUBLIC_VAPID"
+      ],
+      "outputs": [".next/**"]
+    },
+    "@chirpy/service-worker#build": {
+      "cache": false
+    },
+    "@chirpy/bootstrappers#build": {
+      "cache": false
+    },
+    "build:local": {
+      "cache": false
+    },
+    "g:gql": {
+      "inputs": ["src/**/*.graphql"],
+      "cache": false
     }
-  }
+  },
+  "globalDependencies": ["$GITHUB_TOKEN", "tsconfig.json", ".env.*"]
 }

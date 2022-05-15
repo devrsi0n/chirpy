@@ -2,25 +2,25 @@
   width: calc(100% - theme('spacing.16'));
 }
 
-$branchWidth: '2.4rem';
-$branchHeight: '2.0rem';
+$branchWidth: 2.4rem;
+$branchHeight: 2rem;
 
 .branch {
   position: relative;
 
-  &:before {
+  &::before {
     position: absolute;
     top: -$branchHeight;
-    left: branchWidth;
+    left: $branchWidth;
     display: block;
-    width: branchWidth;
-    height: branchHeight;
+    width: $branchWidth;
+    height: $branchHeight;
     content: '';
     border-left-width: 1px;
     @apply border-gray-500;
   }
 
-  &:first-of-type:before {
+  &:first-of-type::before {
     display: none;
   }
 }

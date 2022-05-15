@@ -10,6 +10,7 @@ import { CommentTree } from '../comment-tree';
 import { RichTextEditor } from '../rich-text-editor';
 import { UserMenu } from '../user-menu';
 import { NotificationHub } from '../notification-hub';
+import { AnimatePresence } from 'framer-motion';
 
 export type CommentTreesProps = {
   comments: CommentLeafType[];
@@ -43,16 +44,18 @@ export function CommentTrees({
             onSubmit={onSubmitReply}
           />
         </div>
-        <ul>
-          {comments?.map((comment: CommentLeafType) => (
-            <CommentTree
-              key={comment.id}
-              depth={1}
-              comment={comment}
-              onClickLikeAction={onClickLikeAction}
-              onSubmitReply={onSubmitReply}
-            />
-          ))}
+        <ul className="space-y-5">
+          <AnimatePresence>
+            {comments?.map((comment: CommentLeafType) => (
+              <CommentTree
+                key={comment.id}
+                depth={1}
+                comment={comment}
+                onClickLikeAction={onClickLikeAction}
+                onSubmitReply={onSubmitReply}
+              />
+            ))}
+          </AnimatePresence>
         </ul>
       </div>
     </div>
