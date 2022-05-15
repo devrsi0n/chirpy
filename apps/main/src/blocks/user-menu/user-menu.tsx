@@ -90,8 +90,11 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   );
 }
 
-function MenuLink({ className, ...restProps }: LinkProps): JSX.Element {
-  return <Link {...restProps} className={clsx(itemStyle, className)} />;
-}
+const MenuLink = React.forwardRef(function MenuLink(
+  { className, ...restProps }: LinkProps,
+  ref: React.Ref<HTMLAnchorElement>,
+): JSX.Element {
+  return <Link ref={ref} {...restProps} className={clsx(itemStyle, className)} />;
+});
 
 const itemStyle = `justify-start space-x-1`;

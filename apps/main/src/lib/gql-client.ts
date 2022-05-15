@@ -3,28 +3,29 @@ import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
 import {
   createClient,
   Client,
-  defaultExchanges,
   subscriptionExchange,
   ClientOptions,
   RequestPolicy,
   Exchange,
+  dedupExchange,
+  fetchExchange,
+  cacheExchange,
 } from 'urql';
+import { offlineExchange } from '@urql/exchange-graphcache';
+import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage';
 
 import { isENVDev } from '$/server/utilities/env';
+import { ssrMode } from '$/utilities/env';
 
-// export function withGqlClient(
-//   getClientConfig?: NextUrqlClientConfig,
-//   options?: WithUrqlClientOptions | undefined,
-// ) {
-
-//   return withUrqlClient(
-//     (ssrExchange: SSRExchange, ctx?: NextPageContext) => ({
-//       ...getGqlClientOptions(getHeaders()),
-//       ...getClientConfig?.(ssrExchange, ctx),
-//     }),
-//     { ssr: false, ...options },
-//   );
-// }
+const getOfflineExchange = () => {
+  const storage = makeDefaultStorage({
+    idbName: 'graphcache-v1', // The name of the IndexedDB database
+    maxAge: 7, // The maximum age of the persisted data in days
+  });
+  return offlineExchange({
+    storage,
+  });
+};
 
 export function createGqlClient(hasuraToken = ''): Client {
   return createClient(getGqlClientOptions(getHeaders(hasuraToken)));
@@ -36,7 +37,9 @@ export function getGqlClientOptions(
   wsClient?: WsClient,
 ): ClientOptions {
   const exchanges: Exchange[] = [
-    ...defaultExchanges,
+    dedupExchange,
+    ssrMode ? cacheExchange : getOfflineExchange(),
+    fetchExchange,
     subscriptionExchange({
       forwardSubscription: (operation) => ({
         subscribe: (sink) => {
