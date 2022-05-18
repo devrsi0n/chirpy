@@ -2,7 +2,7 @@
 }
 
 .menuButton {
-  @apply flex justify-center items-center;
+  @apply flex items-center justify-center;
   & > button {
     @apply p-1;
   }

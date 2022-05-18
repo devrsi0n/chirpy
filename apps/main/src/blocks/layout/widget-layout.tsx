@@ -2,9 +2,9 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
+import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
-import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 
 export type WidgetLayoutProps = {
   className?: string;

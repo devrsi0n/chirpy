@@ -1,6 +1,7 @@
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
 import * as Types from './types';
 
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type RecipientByLikeIdQueryVariables = Types.Exact<{
   likeId: Types.Scalars['uuid'];
 }>;

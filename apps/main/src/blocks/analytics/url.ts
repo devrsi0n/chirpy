@@ -1,4 +1,5 @@
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
+
 import { Site } from './type';
 
 export function apiPath(site: Site, path = '') {

@@ -8,7 +8,12 @@ export type CardProps = React.PropsWithChildren<{}>;
 export function AnalyticsCard(props: CardProps): JSX.Element {
   return (
     <div className={clsx('flex flex-col mt-6 stats-item--has-header w-full', styles['stats-item'])}>
-      <div className={clsx("flex flex-col flex-grow relative p-4 bg-white rounded shadow-xl dark:bg-gray-825", styles['stats-item-header'])}>
+      <div
+        className={clsx(
+          'flex flex-col flex-grow relative p-4 bg-white rounded shadow-xl dark:bg-gray-825',
+          styles['stats-item-header'],
+        )}
+      >
         {props.children}
       </div>
     </div>

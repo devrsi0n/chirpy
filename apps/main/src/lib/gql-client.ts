@@ -1,4 +1,6 @@
 import { devtoolsExchange } from '@urql/devtools';
+import { offlineExchange } from '@urql/exchange-graphcache';
+import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage';
 import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
 import {
   createClient,
@@ -11,11 +13,10 @@ import {
   fetchExchange,
   cacheExchange,
 } from 'urql';
-import { offlineExchange } from '@urql/exchange-graphcache';
-import { makeDefaultStorage } from '@urql/exchange-graphcache/default-storage';
 
 import { isENVDev } from '$/server/utilities/env';
 import { ssrMode } from '$/utilities/env';
+
 import { GRAPHQL_CACHE_DB_NAME } from './constants';
 
 const getOfflineExchange = () => {

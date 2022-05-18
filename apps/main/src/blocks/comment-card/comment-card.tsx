@@ -9,6 +9,7 @@ import * as React from 'react';
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button, ButtonProps } from '$/components/button';
 import { Link } from '$/components/link';
+import { LinkProps } from '$/components/link';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
@@ -23,7 +24,6 @@ import { useCurrentUser } from '../../contexts/current-user-context/use-current-
 import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
-import { LinkProps } from '$/components/link';
 
 export type { ClickLikeActionHandler } from '../like-action';
 

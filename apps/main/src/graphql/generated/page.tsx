@@ -1,7 +1,8 @@
-import * as Types from './types';
-
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
+
+import * as Types from './types';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type ThemeOfPageQueryVariables = Types.Exact<{
   pageId: Types.Scalars['uuid'];

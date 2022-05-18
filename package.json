@@ -23,7 +23,7 @@
     ]
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "3.2.0",
+    "@chirpy/prettier-config": "workspace:*",
     "eslint": "8.15.0",
     "eslint-config-chirpy": "workspace:*",
     "simple-git-hooks": "2.7.0",

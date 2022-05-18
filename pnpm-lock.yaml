@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@trivago/prettier-plugin-sort-imports': 3.2.0
+      '@chirpy/prettier-config': workspace:*
       eslint: 8.15.0
       eslint-config-chirpy: workspace:*
       lint-staged: 12.4.1
@@ -12,7 +12,7 @@ importers:
       simple-git-hooks: 2.7.0
       turbo: 1.2.9
     devDependencies:
-      '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
+      '@chirpy/prettier-config': link:packages/prettier-config-chirpy
       eslint: 8.15.0
       eslint-config-chirpy: link:packages/eslint-config-chirpy
       lint-staged: 12.4.1
@@ -61,8 +61,6 @@ importers:
       dotenv: 16.0.0
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
-      eslint: 8.14.0
-      eslint-config-chirpy: workspace:*
     devDependencies:
       '@chirpy/tsconfigs': link:../../packages/tsconfigs
       '@testing-library/cypress': 8.0.2_cypress@9.6.1
@@ -71,8 +69,6 @@ importers:
       dotenv: 16.0.0
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
-      eslint: 8.14.0
-      eslint-config-chirpy: link:../../packages/eslint-config-chirpy
 
   apps/emails:
     specifiers:
@@ -413,7 +409,7 @@ importers:
 
   packages/eslint-config-chirpy:
     specifiers:
-      '@trivago/prettier-plugin-sort-imports': 3.2.0
+      '@chirpy/prettier-config': workspace:*
       '@typescript-eslint/eslint-plugin': 5.22.0
       '@typescript-eslint/parser': 5.22.0
       eslint: 8.14.0
@@ -429,7 +425,7 @@ importers:
       react-dom: 18.1.0
       typescript: 4.6.4
     dependencies:
-      '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
+      '@chirpy/prettier-config': link:../prettier-config-chirpy
       '@typescript-eslint/eslint-plugin': 5.22.0_lnjlwhtxjffjmj5o7dnwvwyqxq
       '@typescript-eslint/parser': 5.22.0_t725usgvqspm5woeqpaxbfp2qu
       eslint-config-next: 12.1.5_ldpv3uesskyaguxpaa56hbtpeu
@@ -445,6 +441,17 @@ importers:
       typescript: 4.6.4
     devDependencies:
       eslint: 8.14.0
+
+  packages/prettier-config-chirpy:
+    specifiers:
+      '@trivago/prettier-plugin-sort-imports': 3.2.0
+      prettier: 2.6.2
+      prettier-plugin-tailwindcss: 0.1.11
+    dependencies:
+      '@trivago/prettier-plugin-sort-imports': 3.2.0_prettier@2.6.2
+      prettier-plugin-tailwindcss: 0.1.11_prettier@2.6.2
+    devDependencies:
+      prettier: 2.6.2
 
   packages/tsconfigs:
     specifiers: {}
@@ -513,6 +520,7 @@ packages:
       source-map: 0.5.7
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@babel/core/7.17.10:
     resolution: {integrity: sha512-liKoppandF3ZcBnIYFjfSDHZLKdLHGJRkoWtG8zQyGJBQfIYobpnVGI5+pLBNtS6psFLDzyq8+h5HiVljW9PNA==}
@@ -542,6 +550,7 @@ packages:
       '@babel/types': 7.17.10
       jsesc: 2.5.2
       source-map: 0.5.7
+    dev: false
 
   /@babel/generator/7.17.10:
     resolution: {integrity: sha512-46MJZZo9y3o4kmhBVc7zW7i8dtR1oIK/sdO5NcfcZRhTGYi+KKJRtHNgsU6c4VUcJmUNV/LQdebD/9Dlv4K+Tg==}
@@ -578,6 +587,7 @@ packages:
       '@babel/helper-validator-option': 7.16.7
       browserslist: 4.20.3
       semver: 6.3.0
+    dev: false
 
   /@babel/helper-compilation-targets/7.17.10_@babel+core@7.17.10:
     resolution: {integrity: sha512-gh3RxjWbauw/dFiU/7whjd0qN9K6nPJMqe6+Er7rOavFh0CQUSwhAE3IcTho2rywPJFxej6TUUHDkWcYI6gGqQ==}
@@ -815,6 +825,7 @@ packages:
     hasBin: true
     dependencies:
       '@babel/types': 7.17.10
+    dev: false
 
   /@babel/parser/7.17.10:
     resolution: {integrity: sha512-n2Q6i+fnJqzOaq2VkdXxy2TCPCWQZHiCo0XqmrCvDWcZQKRyZzYi4Z0yxlBuN0w+r2ZHmre+Q087DSrw3pbJDQ==}
@@ -2213,6 +2224,7 @@ packages:
       lodash: 4.17.21
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@babel/traverse/7.17.10:
     resolution: {integrity: sha512-VmbrTHQteIdUUQNTb+zE12SHS/xQVIShmBPhlNP12hD5poF2pbITW1Z4172d03HegaQWhLffdkRJYtAzp0AGcw==}
@@ -2237,6 +2249,7 @@ packages:
       '@babel/helper-validator-identifier': 7.16.7
       lodash: 4.17.21
       to-fast-properties: 2.0.0
+    dev: false
 
   /@babel/types/7.17.10:
     resolution: {integrity: sha512-9O26jG0mBYfGkUYCYZRnBwbVLd1UZOICEr2Em6InB6jVfsAv1GKgwXHmrSg+WFWDmeKTA6vyTZiN8tCSM5Oo3A==}
@@ -6440,6 +6453,7 @@ packages:
       prettier: 2.6.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@types/aria-query/4.2.2:
     resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
@@ -14220,6 +14234,7 @@ packages:
 
   /javascript-natural-sort/0.7.1:
     resolution: {integrity: sha1-+eIwPUUH9tdDVac2ZNFED7Wg71k=}
+    dev: false
 
   /jest-changed-files/28.0.2:
     resolution: {integrity: sha512-QX9u+5I2s54ZnGoMEjiM2WeBvJR2J7w/8ZUmH2um/WLAuGAYFQcsVXY9+1YL6k0H/AGUdH8pXUAv6erDqEsvIA==}
@@ -18055,6 +18070,15 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       fast-diff: 1.2.0
+    dev: false
+
+  /prettier-plugin-tailwindcss/0.1.11_prettier@2.6.2:
+    resolution: {integrity: sha512-a28+1jvpIZQdZ/W97wOXb6VqI762MKE/TxMMuibMEHhyYsSxQA8Ek30KObd5kJI2HF1ldtSYprFayXJXi3pz8Q==}
+    engines: {node: '>=12.17.0'}
+    peerDependencies:
+      prettier: '>=2.2.0'
+    dependencies:
+      prettier: 2.6.2
     dev: false
 
   /prettier/2.3.0:

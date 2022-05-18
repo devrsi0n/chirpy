@@ -1,18 +1,20 @@
+import * as colors from '@radix-ui/colors';
+import clsx from 'clsx';
+import merge from 'lodash/merge';
+import { useTheme } from 'next-themes';
+
 import { CommentTrees } from '$/blocks/comment-trees';
 import { PageTitle } from '$/blocks/page-title';
 import { IconButton } from '$/components/button';
+import { Heading, IHeadingProps } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
-import { useUpdateThemeMutation } from '$/graphql/generated/project';
-import { useTheme } from 'next-themes';
-import merge from 'lodash/merge';
 import { useWidgetTheme } from '$/contexts/theme-context';
 import { translateRadixColor } from '$/contexts/theme-context/utilities';
-import * as colors from '@radix-ui/colors';
-import { Heading, IHeadingProps } from '$/components/heading';
+import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { ThemeProjectByPkQuery } from '$/server/graphql/generated/project';
+
 import { previewComments } from './preview-data';
-import clsx from 'clsx';
 
 type ColorSeries = {
   light: Record<string, string>;

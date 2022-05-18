@@ -1,0 +1,12 @@
+{
+  "name": "@chirpy/prettier-config",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "dependencies": {
+    "@trivago/prettier-plugin-sort-imports": "3.2.0",
+    "prettier-plugin-tailwindcss": "0.1.11"
+  },
+  "devDependencies": {
+    "prettier": "2.6.2"
+  }
+}
