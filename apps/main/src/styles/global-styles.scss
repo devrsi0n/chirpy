@@ -115,5 +115,5 @@ button:focus {
 
 .rtePlaceholder:first-child::before {
   content: attr(data-placeholder);
-  @apply text-gray-1000 float-left pointer-events-none h-0;
+  @apply pointer-events-none float-left h-0 text-gray-1000;
 }

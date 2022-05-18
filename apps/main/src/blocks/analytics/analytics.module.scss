@@ -76,7 +76,7 @@
 }
 
 .fullwidth-shadow::before {
-  @apply absolute top-0 w-screen h-full bg-gray-100 dark:bg-gray-800;
+  @apply absolute top-0 h-full w-screen bg-gray-100 dark:bg-gray-800;
 
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.06);
   content: '';
@@ -94,7 +94,7 @@
 // }
 
 .pagination-link[disabled] {
-  @apply cursor-default bg-gray-100 dark:bg-gray-300 pointer-events-none;
+  @apply pointer-events-none cursor-default bg-gray-100 dark:bg-gray-300;
 }
 
 @media (max-width: 768px) {

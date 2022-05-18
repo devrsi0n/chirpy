@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { Tabs } from '$/components/tabs';
 
 import { Timer } from '../../timer';

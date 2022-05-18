@@ -1,6 +1,4 @@
 const path = require('path');
-const fs = require('fs');
-const prettierConfig = JSON.parse(fs.readFileSync('./.prettierrc', 'utf8'));
 
 module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
@@ -31,7 +29,7 @@ module.exports = {
       },
     ],
 
-    'prettier/prettier': ['warn', prettierConfig],
+    'prettier/prettier': ['warn', require('@chirpy/prettier-config')],
 
     '@next/next/no-img-element': 'off',
     '@next/next/no-html-link-for-pages': ['error', 'apps/main/src/pages/'],

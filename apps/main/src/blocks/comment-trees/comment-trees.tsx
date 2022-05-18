@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
@@ -7,10 +8,9 @@ import { CommentLeafType } from '$/types/widget';
 import { getCommentCount } from '$/utilities/get-comment-count';
 
 import { CommentTree } from '../comment-tree';
+import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';
 import { UserMenu } from '../user-menu';
-import { NotificationHub } from '../notification-hub';
-import { AnimatePresence } from 'framer-motion';
 
 export type CommentTreesProps = {
   comments: CommentLeafType[];

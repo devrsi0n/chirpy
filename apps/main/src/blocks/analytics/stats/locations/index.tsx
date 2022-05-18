@@ -1,7 +1,6 @@
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-
 import { Tabs } from '$/components/tabs';
 import { useIsDarkMode } from '$/hooks/use-is-dark-mode';
 

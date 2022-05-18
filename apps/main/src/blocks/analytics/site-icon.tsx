@@ -1,5 +1,3 @@
-
-
 export interface SiteIconProps {
   name: string;
   domain: string;

@@ -4,9 +4,9 @@ import * as React from 'react';
 
 import { Divider } from '$/components/divider';
 import { cardBg } from '$/styles/common';
-import styles from './toolbar.module.scss';
 
 import { MarkButton, HeadingButton, BlockButton } from './format-buttons';
+import styles from './toolbar.module.scss';
 
 export type ToolbarProps = React.PropsWithChildren<
   React.ComponentProps<'div'> & {

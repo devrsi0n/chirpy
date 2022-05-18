@@ -1,9 +1,0 @@
-{
-  "$schema": "http://json.schemastore.org/prettierrc",
-  "singleQuote": true,
-  "printWidth": 100,
-  "trailingComma": "all",
-  "endOfLine": "lf",
-  "importOrder": ["^\\$/(.*)$", "^[./]"],
-  "importOrderSeparation": true
-}

@@ -1,8 +1,8 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
-
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
+import { ThemeEditor, THEME_WIDGET_CLS } from '$/blocks/theme-editor';
 import { WidgetThemeProvider } from '$/contexts/theme-context';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
@@ -11,7 +11,6 @@ import {
 } from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { Theme as ThemeType } from '$/types/theme.type';
-import { ThemeEditor, THEME_WIDGET_CLS } from '$/blocks/theme-editor';
 
 export type ThemeProps = StaticProps;
 

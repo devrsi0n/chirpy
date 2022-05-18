@@ -12,8 +12,8 @@ import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';
 import { CurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
 import { NotificationType_Enum } from '$/graphql/generated/types';
-import { dayjs } from '$/utilities/date';
 import { useIsWidget } from '$/hooks/use-is-widget';
+import { dayjs } from '$/utilities/date';
 
 export type INotificationItemProps = {
   index: number;
