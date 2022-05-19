@@ -117,7 +117,7 @@
     "@urql/storybook-addon": "1.0.8",
     "@storybook/testing-react": "1.2.4",
     "color-convert": "2.0.1",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.14.0",

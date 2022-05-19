@@ -14,7 +14,7 @@
     "@testing-library/react": "13.2.0",
     "@types/react": "18.0.9",
     "@types/react-dom": "18.0.3",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.14.0",

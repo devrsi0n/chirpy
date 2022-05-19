@@ -32,7 +32,7 @@ importers:
       '@testing-library/react': 13.2.0
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.3
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
@@ -47,7 +47,7 @@ importers:
       '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.3
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
@@ -64,7 +64,7 @@ importers:
       '@testing-library/cypress': 8.0.2
       '@types/node': 16.11.35
       cypress: 9.6.1
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       typescript: 4.6.4
@@ -73,7 +73,7 @@ importers:
       '@testing-library/cypress': 8.0.2_cypress@9.6.1
       '@types/node': 16.11.35
       cypress: 9.6.1
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       typescript: 4.6.4
@@ -158,7 +158,7 @@ importers:
       datamaps: 0.5.9
       dayjs: 1.11.1
       debounce-promise: 3.1.2
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       downshift: 6.1.7
@@ -312,7 +312,7 @@ importers:
       '@urql/devtools': 2.0.3_graphql@16.4.0
       '@urql/storybook-addon': 1.0.8_ggmigukqhqw6ekjbdfzumiqfna
       color-convert: 2.0.1
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
@@ -332,7 +332,7 @@ importers:
   apps/service-worker:
     specifiers:
       '@chirpy/tsconfigs': workspace:*
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
@@ -341,7 +341,7 @@ importers:
       vite: 2.9.9
     devDependencies:
       '@chirpy/tsconfigs': link:../../packages/tsconfigs
-      dotenv: 16.0.0
+      dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
