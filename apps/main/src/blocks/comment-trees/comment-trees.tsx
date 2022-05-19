@@ -28,7 +28,7 @@ export function CommentTrees({
   const commentCount = getCommentCount(comments);
   return (
     <div className="space-y-4">
-      <div className="flex flex-row justify-between items-center">
+      <div className="flex flex-row items-center justify-between">
         <Heading as="h3" className="!text-2xl">
           {formatTitle(commentCount)}
         </Heading>

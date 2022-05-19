@@ -12,7 +12,7 @@ function selectInputText(e: { target: { select: () => void } }) {
 function Spinner() {
   return (
     <svg
-      className="animate-spin h-4 w-4 text-indigo-500"
+      className="h-4 w-4 animate-spin text-indigo-500"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ export default function SearchSelect(props: SearchSelectProps) {
   };
 
   return (
-    <div className="ml-2 relative w-full">
+    <div className="relative ml-2 w-full">
       <div
         className="relative rounded-md shadow-sm"
         {...getToggleButtonProps()}
@@ -117,34 +117,34 @@ export default function SearchSelect(props: SearchSelectProps) {
           placeholder={props.placeholder}
           type="text"
           className={clsx(
-            `w-full pr-10 border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm rounded-md dark:bg-gray-900 dark:text-gray-300 block`,
+            `focus:outline-none block w-full rounded-md border-gray-300 pr-10 text-sm hover:border-gray-400 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-200`,
             inputValue === '' && !isOpen && `cursor-pointer`,
           )}
         />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           {!loading && <ChevronDownIcon className="h-4 w-4 text-gray-500" />}
           {loading && <Spinner />}
         </div>
       </div>
       <div {...getMenuProps()}>
         {isOpen && (
-          <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-900 shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
+          <ul className="focus:outline-none absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-900 sm:text-sm">
             {!loading && items.length === 0 && (
-              <li className="text-gray-500 select-none py-2 px-3">
+              <li className="select-none py-2 px-3 text-gray-500">
                 No matches found in the current dashboard. Try selecting a different time range or
                 searching for something different
               </li>
             )}
             {loading && items.length === 0 && (
-              <li className="text-gray-500 select-none py-2 px-3">Loading options...</li>
+              <li className="select-none py-2 px-3 text-gray-500">Loading options...</li>
             )}
 
             {items.map((item: any, index) => (
               <li
                 className={clsx(
-                  `cursor-pointer select-none relative py-2 pl-3 pr-9`,
+                  `relative cursor-pointer select-none py-2 pl-3 pr-9`,
                   highlightedIndex === index
-                    ? `text-white bg-indigo-600`
+                    ? `bg-indigo-600 text-white`
                     : `text-gray-900 dark:text-gray-100`,
                 )}
                 key={`${item.name ? item.name : item}`}

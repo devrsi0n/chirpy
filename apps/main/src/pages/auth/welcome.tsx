@@ -34,7 +34,7 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
 function FullFilled(): JSX.Element {
   return (
     <section className="flex flex-col items-center justify-center space-y-12">
-      <div className="text-center space-y-2">
+      <div className="space-y-2 text-center">
         <Heading as="h2" className="!tracking-tight">
           Welcome on board 🎉
         </Heading>

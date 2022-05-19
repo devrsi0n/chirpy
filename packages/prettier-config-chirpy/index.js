@@ -1,15 +1,8 @@
 const path = require('path');
+const commonConfig = require('./common.config');
 
 module.exports = {
-  plugins: [
-    require('prettier-plugin-tailwindcss'),
-    require('@trivago/prettier-plugin-sort-imports'),
-  ],
+  ...commonConfig,
+  plugins: [require('prettier-plugin-tailwindcss')],
   tailwindConfig: path.resolve(__dirname, '../../apps/main/tailwind.config.js'),
-  singleQuote: true,
-  printWidth: 100,
-  trailingComma: 'all',
-  endOfLine: 'lf',
-  importOrder: ['^\\$/(.*)$', '^[./]'],
-  importOrderSeparation: true,
 };

@@ -108,7 +108,7 @@ export function CommentCard({
       variants={shakeVariants}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
-        `flex flex-row items-start space-x-3 border rounded border-gray-500 shadow-sm`,
+        `flex flex-row items-start space-x-3 rounded border border-gray-500 shadow-sm`,
         isDeleted ? `py-2 pl-4` : `pt-4 pb-2 pl-4`,
       )}
       id={isENVDev ? commentId : undefined}
@@ -126,7 +126,7 @@ export function CommentCard({
                   variant="secondary"
                   as="time"
                   title={createdAt}
-                  className="!leading-none cursor-default"
+                  className="cursor-default !leading-none"
                   dateTime={createdAt}
                 >
                   {dayjs(createdAt).fromNow()}
@@ -171,7 +171,7 @@ export function CommentCard({
           <RichTextEditor initialValue={rteContent} readOnly />
         </div>
         {!isDeleted && (
-          <div className="flex flex-row items-center space-x-6 -translate-x-2">
+          <div className="flex -translate-x-2 flex-row items-center space-x-6">
             <LikeAction
               aria-label="Like"
               likes={likes}

@@ -158,7 +158,7 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
   geolocationDbNotice() {
     if (this.props.site.selfhosted) {
       return (
-        <span className="text-xs text-gray-1000 absolute bottom-4 right-3">
+        <span className="absolute bottom-4 right-3 text-xs text-gray-1000">
           IP Geolocation by{' '}
           <a target="_blank" href="https://db-ip.com" rel="noreferrer" className="text-blue-1000">
             DB-IP

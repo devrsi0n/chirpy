@@ -67,9 +67,9 @@ export function PageRank(props: PageRankProps) {
   };
 
   return (
-    <LazyLoader onVisible={onVisible} className="flex flex-col flex-grow">
+    <LazyLoader onVisible={onVisible} className="flex flex-grow flex-col">
       {loading && (
-        <div className={clsx('mt-44 mx-auto', styles.loading)}>
+        <div className={clsx('mx-auto mt-44', styles.loading)}>
           <div></div>
         </div>
       )}
@@ -109,10 +109,10 @@ function List(props: ListProps) {
   if (props.pages?.length > 0) {
     return (
       <>
-        <div className="flex items-center justify-between mt-3 mb-2 text-xs font-bold tracking-wide text-gray-1100">
+        <div className="mt-3 mb-2 flex items-center justify-between text-xs font-bold tracking-wide text-gray-1100">
           <span>Page url</span>
           <div className="text-right">
-            <span className="inline-block w-30">{label()}</span>
+            <span className="w-30 inline-block">{label()}</span>
             {showConversionRate() && <span className="inline-block w-20">CR</span>}
           </div>
         </div>
@@ -148,7 +148,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   const maxWidthDeduction = showConversionRate ? '10rem' : '5rem';
 
   return (
-    <div className="flex items-center justify-between my-1 text-sm" key={page.name}>
+    <div className="my-1 flex items-center justify-between text-sm" key={page.name}>
       <Bar count={page.count} all={pages} color="orange" maxWidthDeduction={maxWidthDeduction}>
         <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
@@ -161,7 +161,7 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
 function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
   const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
   return (
-    <span className="group flex items-center px-2 py-1.5 relative break-all space-x-1">
+    <span className="group relative flex items-center space-x-1 break-all px-2 py-1.5">
       <span
         {...(isCommentWidget && {
           tooltip: 'This page contains a comment widget',
@@ -169,7 +169,7 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
       >
         <Link
           href={url.setQuery('entry_page', name)}
-          className=" hover:underline inline-flex items-center space-x-1 text-gray-1200"
+          className=" inline-flex items-center space-x-1 text-gray-1200 hover:underline"
           variant="plain"
         >
           {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
@@ -180,7 +180,7 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
       </span>
       <Link
         href={externalLink}
-        className="invisible group-hover:visible text-gray-1200"
+        className="invisible text-gray-1200 group-hover:visible"
         variant="plain"
         tooltip="Click to open in a new tab"
       >

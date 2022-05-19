@@ -81,36 +81,36 @@ class PagesModal extends React.Component {
           <Link
             disabled
             href={`/${encodeURIComponent(this.props.site.domain)}?${query.toString()}`}
-            className="hover:underline block truncate"
+            className="block truncate hover:underline"
           >
             {page.name}
           </Link>
         </td>
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {page.total_visitors}
           </td>
         )}
-        <td className="p-2 w-32 font-medium" align="right">
+        <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(page.visitors)}
         </td>
         {this.showPageviews() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(page.pageviews)}
           </td>
         )}
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatBounceRate(page)}
           </td>
         )}
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {timeOnPage}
           </td>
         )}
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {page.conversion_rate}%
           </td>
         )}
@@ -139,7 +139,7 @@ class PagesModal extends React.Component {
       );
     } else if (this.state.moreResultsAvailable) {
       return (
-        <div className="w-full text-center my-4">
+        <div className="my-4 w-full text-center">
           <button onClick={this.loadMore.bind(this)} type="button" className="button">
             Load more
           </button>
@@ -166,28 +166,28 @@ class PagesModal extends React.Component {
               <thead>
                 <tr>
                   <th
-                    className="p-2 w-48 md:w-56 lg:w-1/3 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 md:w-56 lg:w-1/3"
                     align="left"
                   >
                     Page url
                   </th>
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Total visitors
                     </th>
                   )}
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     {this.label()}
                   </th>
                   {this.showPageviews() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Pageviews
@@ -195,7 +195,7 @@ class PagesModal extends React.Component {
                   )}
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Bounce rate
@@ -203,7 +203,7 @@ class PagesModal extends React.Component {
                   )}
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Time on Page
@@ -211,7 +211,7 @@ class PagesModal extends React.Component {
                   )}
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       CR

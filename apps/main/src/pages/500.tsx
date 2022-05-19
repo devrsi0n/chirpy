@@ -13,11 +13,11 @@ export default function Custom500(): JSX.Element {
   const message = query['message'] || `We might have encountered some issues in our services...`;
   return (
     <SiteLayout title="500">
-      <section className="px-4 space-y-8 flex flex-col items-center">
+      <section className="flex flex-col items-center space-y-8 px-4">
         <Heading className="font-bold">Oops! Something went wrong</Heading>
         <Text variant="secondary">{message}</Text>
 
-        <div className="flex justify-center items-center space-x-6">
+        <div className="flex items-center justify-center space-x-6">
           <Link href="/" variant="plain">
             <Button
               variant="solid"

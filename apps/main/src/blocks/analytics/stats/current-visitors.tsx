@@ -41,10 +41,10 @@ export default class CurrentVisitors extends React.Component<CurrentVisitorsProp
         <Link
           href={url.setQuery('period', 'realtime')}
           disabled
-          className="block ml-1 md:ml-2 mr-auto text-xs md:text-sm font-bold text-gray-1000"
+          className="ml-1 mr-auto block text-xs font-bold text-gray-1000 md:ml-2 md:text-sm"
         >
           <svg
-            className="inline w-2 mr-1 md:mr-2 text-green-500 fill-current"
+            className="mr-1 inline w-2 fill-current text-green-500 md:mr-2"
             viewBox="0 0 16 16"
             xmlns="http://www.w3.org/2000/svg"
           >

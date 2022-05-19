@@ -16,7 +16,7 @@ export function Divider({ vertical, className, ...divProps }: DividerProps): JSX
   return (
     <div
       role="separator"
-      className={clsx(`w-auto max-w-full relative`, styles.divider, className)}
+      className={clsx(`relative w-auto max-w-full`, styles.divider, className)}
       {...divProps}
     />
   );

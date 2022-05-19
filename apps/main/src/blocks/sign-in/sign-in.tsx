@@ -39,19 +39,19 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
   }, []);
   const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
-    <div className="flex flex-row h-full full-bleed">
-      <div className="flex-1 flex flex-col justify-center items-center">
-        <div className="py-7 w-full sm:mx-2 sm:w-64 md:w-96">
+    <div className="full-bleed flex h-full flex-row">
+      <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="w-full py-7 sm:mx-2 sm:w-64 md:w-96">
           <div className="pb-8">
             <Logo size="lg" hideSpacing />
           </div>
           <div className="space-y-2">
-            <Heading as="h2" className="font-black mt-5">
+            <Heading as="h2" className="mt-5 font-black">
               {title}
             </Heading>
             {subtitle}
           </div>
-          <div className="space-y-2 mt-8">
+          <div className="mt-8 space-y-2">
             {error && <Alert type="warn">{error}</Alert>}
             {authOptions.map((option) => (
               <Button
@@ -82,7 +82,7 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       </div>
       <div
         className={clsx(
-          `flex-1 hidden sm:block w-full h-[100vh] min-h-[200px] bg-cover`,
+          `hidden h-[100vh] min-h-[200px] w-full flex-1 bg-cover sm:block`,
           styles.mainImage,
         )}
       ></div>

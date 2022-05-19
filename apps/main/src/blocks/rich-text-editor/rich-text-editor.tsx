@@ -76,14 +76,14 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   };
 
   return (
-    <section className={clsx(styles?.root, !readOnly && `border border-gray-500 rounded`)}>
+    <section className={clsx(styles?.root, !readOnly && `rounded border border-gray-500`)}>
       <EditorContent
         editor={editor}
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
-          'prose text-gray-1200 !max-w-full',
-          !readOnly && [`!min-h-[4em] resize-y overflow-hidden px-2 rounded`, textInput, cardBg],
+          'prose !max-w-full text-gray-1200',
+          !readOnly && [`!min-h-[4em] resize-y overflow-hidden rounded px-2`, textInput, cardBg],
           styles?.editable,
         )}
       />

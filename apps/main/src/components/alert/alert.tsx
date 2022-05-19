@@ -20,11 +20,11 @@ export function Alert(props: AlertProps): JSX.Element {
       ) : (
         <div
           className={clsx(
-            'group flex flex-row justify-center items-center py-2 px-4 rounded space-x-2',
+            'group flex flex-row items-center justify-center space-x-2 rounded py-2 px-4',
             typeStyles[props.type],
           )}
         >
-          <p className="text-base leading-tight pl-6 pr-2">{props.children}</p>
+          <p className="pl-6 pr-2 text-base leading-tight">{props.children}</p>
           <IconButton
             className="invisible group-hover:visible"
             onClick={() => setHidden(true)}

@@ -49,10 +49,10 @@ class ModalTable extends React.Component {
             {tableItem.name}
           </Link>
         </td>
-        <td className="p-2 w-32 font-medium" align="right">
+        <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(tableItem.visitors)}
           {tableItem.percentage >= 0 && (
-            <span className="inline-block text-xs w-8 text-right">({tableItem.percentage}%)</span>
+            <span className="inline-block w-8 text-right text-xs">({tableItem.percentage}%)</span>
           )}
         </td>
       </tr>
@@ -62,7 +62,7 @@ class ModalTable extends React.Component {
   renderBody() {
     if (this.state.loading) {
       return (
-        <div className={clsx('mt-32 mx-auto', styles.loading)}>
+        <div className={clsx('mx-auto mt-32', styles.loading)}>
           <div></div>
         </div>
       );
@@ -85,14 +85,14 @@ class ModalTable extends React.Component {
               <thead>
                 <tr>
                   <th
-                    className="p-2 w-48 lg:w-1/2 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 lg:w-1/2"
                     align="left"
                   >
                     {this.props.keyLabel}
                   </th>
                   <th
                     // eslint-disable-next-line max-len
-                    className="p-2 w-32 lg:w-1/2 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 lg:w-1/2"
                     align="right"
                   >
                     {this.label()}

@@ -118,7 +118,7 @@ export default class PropertyBreakdown extends React.Component<
       return (
         <a target="_blank" href={value.name} rel="noreferrer" className="hidden group-hover:block">
           <svg
-            className="inline h-4 w-4 ml-1 -mt-1 text-gray-600 dark:text-gray-400"
+            className="ml-1 -mt-1 inline h-4 w-4 text-gray-600 dark:text-gray-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -133,11 +133,11 @@ export default class PropertyBreakdown extends React.Component<
 
   renderPropContent(value: BreakDownItem, query: URLSearchParams) {
     return (
-      <span className="flex px-2 py-1.5 group dark:text-gray-300 relative z-9 break-all">
+      <span className="group relative z-9 flex break-all px-2 py-1.5 dark:text-gray-300">
         <Link
           disabled
           href={window.location.pathname + '?' + query.toString()}
-          className="md:truncate hover:underline block"
+          className="block hover:underline md:truncate"
         >
           {value.name}
         </Link>
@@ -152,7 +152,7 @@ export default class PropertyBreakdown extends React.Component<
     const { viewport, breakdown } = this.state;
 
     return (
-      <div className="flex items-center justify-between my-2" key={value.name}>
+      <div className="my-2 flex items-center justify-between" key={value.name}>
         <Bar
           count={value.unique_conversions}
           all={breakdown}
@@ -162,15 +162,15 @@ export default class PropertyBreakdown extends React.Component<
           {this.renderPropContent(value, query)}
         </Bar>
         <div className="dark:text-gray-200">
-          <span className="font-medium inline-block w-20 text-right">
+          <span className="inline-block w-20 text-right font-medium">
             {numberFormatter(value.unique_conversions)}
           </span>
           {viewport > MOBILE_UPPER_WIDTH ? (
-            <span className="font-medium inline-block w-20 text-right">
+            <span className="inline-block w-20 text-right font-medium">
               {numberFormatter(value.total_conversions)}
             </span>
           ) : null}
-          <span className="font-medium inline-block w-20 text-right">
+          <span className="inline-block w-20 text-right font-medium">
             {numberFormatter(value.conversion_rate)}%
           </span>
         </div>
@@ -197,7 +197,7 @@ export default class PropertyBreakdown extends React.Component<
       );
     } else if (this.state.moreResultsAvailable) {
       return (
-        <div className="w-full text-center my-4">
+        <div className="my-4 w-full text-center">
           <button onClick={this.loadMore.bind(this)} type="button" className="button">
             Load more
           </button>
@@ -216,14 +216,14 @@ export default class PropertyBreakdown extends React.Component<
     return isActive ? (
       <li
         key={key}
-        className="inline-block h-5 text-indigo-700 dark:text-indigo-500 font-bold mr-2 active-prop-heading"
+        className="active-prop-heading mr-2 inline-block h-5 font-bold text-indigo-700 dark:text-indigo-500"
       >
         {key}
       </li>
     ) : (
       <li
         key={key}
-        className="hover:text-indigo-600 cursor-pointer mr-2"
+        className="mr-2 cursor-pointer hover:text-indigo-600"
         onClick={() => this.changePropKey(key)}
       >
         {key}
@@ -233,12 +233,12 @@ export default class PropertyBreakdown extends React.Component<
 
   render() {
     return (
-      <div className="w-full pl-3 sm:pl-6 mt-4">
-        <div className="flex-col sm:flex-row flex items-center pb-1">
-          <span className="text-xs font-bold text-gray-600 dark:text-gray-300 self-start sm:self-auto mb-1 sm:mb-0">
+      <div className="mt-4 w-full pl-3 sm:pl-6">
+        <div className="flex flex-col items-center pb-1 sm:flex-row">
+          <span className="mb-1 self-start text-xs font-bold text-gray-600 dark:text-gray-300 sm:mb-0 sm:self-auto">
             Breakdown by:
           </span>
-          <ul className="flex flex-wrap font-medium text-xs text-gray-500 dark:text-gray-400 leading-5 pl-1 sm:pl-2">
+          <ul className="flex flex-wrap pl-1 text-xs font-medium leading-5 text-gray-500 dark:text-gray-400 sm:pl-2">
             {this.props.goal.prop_names.map((element) => this.renderPill(element))}
           </ul>
         </div>

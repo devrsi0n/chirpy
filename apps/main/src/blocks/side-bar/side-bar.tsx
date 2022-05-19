@@ -25,7 +25,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   const header = (
     <>
       {title && hasValidDirectories && (
-        <Heading as="h4" className="font-bold px-1 pb-4 text-gray-1100">
+        <Heading as="h4" className="px-1 pb-4 font-bold text-gray-1100">
           {title}
         </Heading>
       )}
@@ -35,7 +35,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
     <div>
       <aside
         className={clsx(
-          'w-full h-[calc(100vh-4rem)] hidden sm:flex flex-shrink-0 flex-col items-start sticky top-16 px-4 isolate overflow-y-auto md:w-64 md:pb-16',
+          'sticky top-16 isolate hidden h-[calc(100vh-4rem)] w-full flex-shrink-0 flex-col items-start overflow-y-auto px-4 sm:flex md:w-64 md:pb-16',
           className,
         )}
       >
@@ -55,7 +55,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
           <SideMenu.Item>{header}</SideMenu.Item>
           {directories.map((dir) => (
             <SideMenu.Item key={getId(dir)}>
-              <div className="flex flex-col items-stretch w-full">
+              <div className="flex w-full flex-col items-stretch">
                 <DirectoryItem directory={dir} />
               </div>
             </SideMenu.Item>
@@ -68,9 +68,9 @@ export function SideBar({ directories, title, className }: SideBarProps) {
 
 function Directories({ directories }: Pick<SideBarProps, 'directories'>): JSX.Element {
   return (
-    <List className="space-y-2 flex-1">
+    <List className="flex-1 space-y-2">
       {directories.map((dir) => (
-        <List.Item key={getId(dir)} hideMarker className="flex flex-col items-stretch w-full">
+        <List.Item key={getId(dir)} hideMarker className="flex w-full flex-col items-stretch">
           <DirectoryItem directory={dir} />
         </List.Item>
       ))}
@@ -83,11 +83,11 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   const [isOpened, setIsOpened] = React.useState(false);
   const isActive = isButtonActive(dir, router.asPath);
   const listMarker = dir.route ? (
-    <span className="rounded-full inline-block w-1.5 h-1.5 mr-3.5 bg-current hover:bg-gray-1200" />
+    <span className="mr-3.5 inline-block h-1.5 w-1.5 rounded-full bg-current hover:bg-gray-1200" />
   ) : (
     <ChevronRight
       size={18}
-      className={clsx(`transition -ml-1.5 mr-2`, isOpened && `rotate-90`)}
+      className={clsx(`-ml-1.5 mr-2 transition`, isOpened && `rotate-90`)}
       onClick={(e) => {
         e.stopPropagation();
         setIsOpened((prev) => !prev);

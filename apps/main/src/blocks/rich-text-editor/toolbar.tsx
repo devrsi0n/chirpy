@@ -18,13 +18,13 @@ export function Toolbar({ editor, children, className, ...divProps }: ToolbarPro
   return (
     <div
       className={clsx(
-        `px-1 py-2 leading-none border-t border-gray-500 rounded-b`,
+        `rounded-b border-t border-gray-500 px-1 py-2 leading-none`,
         cardBg,
         className,
       )}
       {...divProps}
     >
-      <div className="space-x-1 flex flex-row items-center">
+      <div className="flex flex-row items-center space-x-1">
         <div className={styles.headingButtonGroup}>
           <HeadingButton editor={editor} />
           <Divider vertical />

@@ -17,7 +17,7 @@ export function LayoutWrapper({ title, children, className }: LayoutWrapperProps
           {title.length > 0 ? '・' : ''}Chirpy
         </title>
       </Head>
-      <div className={clsx(`min-h-full font-sans text-gray-1000 flex flex-col`, className)}>
+      <div className={clsx(`flex min-h-full flex-col font-sans text-gray-1000`, className)}>
         {children}
       </div>
     </>

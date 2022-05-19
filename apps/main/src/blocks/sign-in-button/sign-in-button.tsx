@@ -33,7 +33,7 @@ export function SignInButton({
     >
       <span className="inline-flex flex-row items-center space-x-1">
         {signInLoading ? (
-          <Loader aria-label="Signing in" className="animate-spin w-5 h-5" />
+          <Loader aria-label="Signing in" className="h-5 w-5 animate-spin" />
         ) : (
           <Lock size="14" />
         )}

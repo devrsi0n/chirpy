@@ -7,7 +7,7 @@ export function Code({ children, className, ...preProps }: CodeProps): JSX.Eleme
   return (
     <pre
       className={clsx(
-        'py-6 px-3 bg-gray-300 text-gray-1200 rounded-sm whitespace-pre-wrap',
+        'whitespace-pre-wrap rounded-sm bg-gray-300 py-6 px-3 text-gray-1200',
         className,
       )}
       {...preProps}

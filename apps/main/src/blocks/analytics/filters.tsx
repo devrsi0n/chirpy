@@ -139,7 +139,7 @@ function renderDropdownFilter(
     return (
       <Menu.Item key={key}>
         <div
-          className="px-4 sm:py-2 py-3 text-sm leading-tight flex items-center justify-between"
+          className="flex items-center justify-between px-4 py-3 text-sm leading-tight sm:py-2"
           key={key + value}
         >
           <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
@@ -148,7 +148,7 @@ function renderDropdownFilter(
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
             onClick={() => removeFilter(router, key, query)}
           >
-            <XIcon className="w-4 h-4" />
+            <XIcon className="h-4 w-4" />
           </strong>
         </div>
       </Menu.Item>
@@ -158,7 +158,7 @@ function renderDropdownFilter(
   return (
     <Menu.Item key={key}>
       <div
-        className="px-3 md:px-4 sm:py-2 py-3 text-sm leading-tight flex items-center justify-between"
+        className="flex items-center justify-between px-3 py-3 text-sm leading-tight sm:py-2 md:px-4"
         key={key + value}
       >
         <Link
@@ -167,19 +167,19 @@ function renderDropdownFilter(
           href={`/${encodeURIComponent(site.domain)}/filter/${filterGroupForFilter(key)}${
             window.location.search
           }`}
-          className="group flex w-full justify-between items-center"
+          className="group flex w-full items-center justify-between"
           style={{ width: 'calc(100% - 1.5rem)' }}
           variant="plain"
         >
           <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
-          <PencilIcon className="w-4 h-4 ml-1 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
+          <PencilIcon className="ml-1 h-4 w-4 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
         </Link>
         <strong
           title={`Remove filter: ${formattedFilters[key]}`}
           className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
           onClick={() => removeFilter(router, key, query)}
         >
-          <XIcon className="w-4 h-4" />
+          <XIcon className="h-4 w-4" />
         </strong>
       </div>
     </Menu.Item>
@@ -225,7 +225,7 @@ function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.El
     <>
       <Button
         variant="text"
-        className="border-b border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500"
+        className="border-b border-gray-200 px-4 py-3 text-sm leading-tight hover:text-indigo-700 dark:border-gray-500 dark:hover:text-indigo-500 sm:py-2"
         onClick={() => setAddingFilter(true)}
       >
         + Add filter
@@ -233,7 +233,7 @@ function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.El
       {appliedFilters(query).map((filter) => renderDropdownFilter(router, site, filter, query))}
       <Menu.Item key="clear">
         <div
-          className="border-t border-gray-200 dark:border-gray-500 px-4 sm:py-2 py-3 text-sm leading-tight hover:text-indigo-700 dark:hover:text-indigo-500 hover:cursor-pointer"
+          className="border-t border-gray-200 px-4 py-3 text-sm leading-tight hover:cursor-pointer hover:text-indigo-700 dark:border-gray-500 dark:hover:text-indigo-500 sm:py-2"
           onClick={() => clearAllFilters(router, query)}
         >
           Clear All Filters
@@ -351,11 +351,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
       <span
         key={key}
         title={value}
-        className="flex bg-white dark:bg-gray-600 text-gray-700 dark:text-gray-300 shadow text-sm rounded mr-2 items-center"
+        className="mr-2 flex items-center rounded bg-white text-sm text-gray-700 shadow dark:bg-gray-600 dark:text-gray-300"
       >
         {key === 'props' ? (
-          <span className="flex w-full h-full items-center py-2 pl-3">
-            <span className="inline-block max-w-2xs md:max-w-xs truncate">
+          <span className="flex h-full w-full items-center py-2 pl-3">
+            <span className="inline-block max-w-2xs truncate md:max-w-xs">
               {filterText(key, value, query)}
             </span>
           </span>
@@ -364,13 +364,13 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
             <Link
               disabled
               title={`Edit filter: ${formattedFilters[key]}`}
-              className="flex w-full h-full items-center py-2 pl-3 text-gray-1200"
+              className="flex h-full w-full items-center py-2 pl-3 text-gray-1200"
               href={`/${encodeURIComponent(this.props.site.domain)}/filter/${filterGroupForFilter(
                 key,
               )}${window.location.search}`}
               variant="plain"
             >
-              <span className="inline-block max-w-2xs md:max-w-xs truncate">
+              <span className="inline-block max-w-2xs truncate md:max-w-xs">
                 {filterText(key, value, query)}
               </span>
             </Link>
@@ -378,10 +378,10 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
         )}
         <span
           title={`Remove filter: ${formattedFilters[key]}`}
-          className="flex h-full w-full px-2 cursor-pointer hover:text-indigo-900 text-gray-800 items-center"
+          className="flex h-full w-full cursor-pointer items-center px-2 text-gray-800 hover:text-indigo-900"
           onClick={() => removeFilter(this.props.router, key, query)}
         >
-          <XIcon className="w-4 h-4" />
+          <XIcon className="h-4 w-4" />
         </span>
       </span>
     );
@@ -414,11 +414,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
     const { query, site } = this.props;
 
     return (
-      <Menu as="div" className="md:relative ml-auto">
+      <Menu as="div" className="ml-auto md:relative">
         {({ open }) => (
           <>
             <div>
-              <Menu.Button className="flex items-center text-xs md:text-sm font-medium leading-tight px-3 py-2 cursor-pointer ml-auto text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-900 rounded">
+              <Menu.Button className="ml-auto flex cursor-pointer items-center rounded px-3 py-2 text-xs font-medium leading-tight text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-900 md:text-sm">
                 {this.renderDropdownButton()}
               </Menu.Button>
             </div>
@@ -435,11 +435,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
             >
               <Menu.Items
                 static
-                className="absolute w-full left-0 right-0 md:w-72 md:absolute md:top-auto md:left-auto md:right-0 mt-2 origin-top-right z-10"
+                className="absolute left-0 right-0 z-10 mt-2 w-full origin-top-right md:absolute md:top-auto md:left-auto md:right-0 md:w-72"
               >
                 <div
-                  className="rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5
-                  font-medium text-gray-800 dark:text-gray-200"
+                  className="rounded-md bg-white font-medium text-gray-800 shadow-lg ring-1 ring-black
+                  ring-opacity-5 dark:bg-gray-800 dark:text-gray-200"
                 >
                   <DropdownContent query={query} site={site} wrapped={this.state.wrapped} />
                 </div>

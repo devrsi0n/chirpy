@@ -26,18 +26,18 @@ export function NotificationHub(): JSX.Element {
   const [{}, deleteNotificationMessage] = useDeleteNotificationMessageMutation();
   const hasUnreadNotifications = data?.notificationMessages.some((msg) => !msg.read);
   return (
-    <div className="flex flex-row justify-center items-center mr-4">
+    <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
         <Menu.Button className={styles.menuButton}>
           <Bell size={22} />
-          {hasUnreadNotifications && <Badge className="!bg-red-900 absolute top-1 right-1" />}
+          {hasUnreadNotifications && <Badge className="absolute top-1 right-1 !bg-red-900" />}
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>
-          <Heading as="h4" className="font-bold px-5 py-3">
+          <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
           {data?.notificationMessages?.length || 0 > 0 ? (
-            <div className="w-max max-h-96 overflow-y-auto">
+            <div className="max-h-96 w-max overflow-y-auto">
               {data?.notificationMessages.map((msg, index) => (
                 <NotificationItem
                   key={msg.id}

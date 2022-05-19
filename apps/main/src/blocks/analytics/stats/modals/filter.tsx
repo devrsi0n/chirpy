@@ -238,7 +238,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
           <div className="text-sm font-medium text-gray-700 dark:text-gray-300">
             {formattedFilters[filter]}
           </div>
-          <div className="flex items-start mt-1">
+          <div className="mt-1 flex items-start">
             {this.renderFilterTypeSelector(filter)}
 
             <SearchSelect
@@ -268,7 +268,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         {({ open }) => (
           <>
             <div className="w-24">
-              <Menu.Button className="inline-flex justify-between items-center w-full rounded-md border border-gray-300 dark:border-gray-500 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-850 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 dark:focus:ring-offset-gray-900 focus:ring-indigo-500">
+              <Menu.Button className="hover:bg-gray-50 focus:outline-none inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
                 {this.selectedFilterType(filterName)}
                 <ChevronDownIcon
                   className="-mr-2 ml-2 h-4 w-4 text-gray-500 dark:text-gray-400"
@@ -289,7 +289,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
             >
               <Menu.Items
                 static
-                className="z-10 origin-top-left absolute left-0 mt-2 w-24 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                className="focus:outline-none absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800"
               >
                 <div className="py-1">
                   <Menu.Item>
@@ -348,7 +348,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
               {showClear && (
                 <button
                   type="button"
-                  className="ml-2 button px-4 flex bg-red-500 dark:bg-red-500 hover:bg-red-600 dark:hover:bg-red-700 items-center"
+                  className="button ml-2 flex items-center bg-red-500 px-4 hover:bg-red-600 dark:bg-red-500 dark:hover:bg-red-700"
                   onClick={() => {
                     const updatedFilters = FILTER_GROUPS[selectedFilterGroup].map((filterName) => ({
                       filter: filterName,
@@ -358,7 +358,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                   }}
                 >
                   <svg
-                    className="w-4 h-4 mr-2"
+                    className="mr-2 h-4 w-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

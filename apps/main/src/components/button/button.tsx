@@ -108,7 +108,7 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
         height="20"
         viewBox="0 0 20 20"
         style={{ top, left }}
-        className={clsx(`absolute w-4 h-4`, styles.expand)}
+        className={clsx(`absolute h-4 w-4`, styles.expand)}
       >
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g className="fill-gray-300">

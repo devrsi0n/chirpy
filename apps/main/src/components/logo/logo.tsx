@@ -39,7 +39,7 @@ export function Logo({
       href="/"
       aria-label="Logo of Chirpy"
       variant="plain"
-      className={clsx('text-violet-900 relative', className)}
+      className={clsx('relative text-violet-900', className)}
       {...linkProps}
     >
       <LogoBadge showBadge={showBadge} />

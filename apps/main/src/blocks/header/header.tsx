@@ -17,13 +17,13 @@ export function Header(): JSX.Element {
   return (
     <header
       className={clsx(
-        `w-full py-3 transition duration-150 shadow-sm relative sm:sticky sm:top-0 sm:left-0 z-20`,
+        `relative z-20 w-full py-3 shadow-sm transition duration-150 sm:sticky sm:top-0 sm:left-0`,
         bluredBg,
       )}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <section className="flex flex-row items-center justify-between">
-          <div className="flex items-center sm:hidden pl-3">
+          <div className="flex items-center pl-3 sm:hidden">
             <SideMenu>
               {isSignIn ? (
                 <SideMenu.Item>
@@ -70,7 +70,7 @@ export function Header(): JSX.Element {
               <Logo showBadge />
             </div>
             <nav
-              className={`w-full hidden sm:flex sm:mb-0 sm:pl-8 sm:ml-8 sm:border-l sm:border-gray-500 flex-wrap items-center mb-5 space-x-8`}
+              className={`mb-5 hidden w-full flex-wrap items-center space-x-8 sm:mb-0 sm:ml-8 sm:flex sm:border-l sm:border-gray-500 sm:pl-8`}
             >
               {isSignIn ? (
                 <Link href="/dashboard" highlightPattern={/^\/dashboard/}>

@@ -6,12 +6,12 @@
 */
 
 body {
-  @apply m-0 p-0 w-full;
+  @apply m-0 w-full p-0;
   word-break: break-word;
   -webkit-font-smoothing: antialiased;
 }
 
 img {
-  @apply max-w-full leading-full align-middle;
+  @apply leading-full max-w-full align-middle;
   border: 0;
 }

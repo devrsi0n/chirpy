@@ -82,7 +82,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       animate={isOpen ? 'open' : 'closed'}
       custom={!ssrMode ? document.body.clientHeight : undefined}
       className={clsx(
-        'w-[250px] h-[100vh] top-0 bottom-0 isolate',
+        'top-0 bottom-0 isolate h-[100vh] w-[250px]',
         containerStyles,
         isAnimationEnd && `h-auto`,
         fixed ? `fixed` : `absolute sm:fixed`,
@@ -92,7 +92,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       onAnimationComplete={(definition) => definition === 'closed' && setIsAnimationEnd(true)}
     >
       <m.div
-        className={clsx('bg-gray-200 absolute inset-0', isAnimationEnd && `!hidden`)}
+        className={clsx('absolute inset-0 bg-gray-200', isAnimationEnd && `!hidden`)}
         variants={backgroundVariant}
       />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>
@@ -135,7 +135,7 @@ const itemsVariants: Variants = {
 function SideMenuItems({ children, className }: SideMenuItemsProps): JSX.Element {
   return (
     <m.ul
-      className={clsx('flex flex-col absolute top-[75px] space-y-4', className)}
+      className={clsx('absolute top-[75px] flex flex-col space-y-4', className)}
       variants={itemsVariants}
     >
       {children}

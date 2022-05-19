@@ -18,7 +18,7 @@ export function Badge({
 }: BadgeProps): JSX.Element {
   return (
     <span
-      className={clsx(`p-1 rounded text-xs`, variantColorStyles[`${variant}-${color}`], className)}
+      className={clsx(`rounded p-1 text-xs`, variantColorStyles[`${variant}-${color}`], className)}
     >
       {children}
     </span>

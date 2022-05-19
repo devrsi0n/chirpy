@@ -2,7 +2,6 @@
 /// <reference lib="esnext" />
 /// <reference lib="WebWorker" />
 import type { WebNotificationPayload } from '../../main/src/server/services/notification/push-web-notification';
-
 import { openOrFocusWindow } from './utilities';
 
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;

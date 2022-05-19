@@ -20,7 +20,7 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
     <SiteLayout title="Blog">
       <div className="min-h-full">
         <Heading className="my-10 font-bold">Blog</Heading>
-        <section className="flex flex-row py-10 min-h-full space-x-2">
+        <section className="flex min-h-full flex-row space-x-2 py-10">
           {directories.map((dir) => {
             if (!dir.route) {
               return <></>;

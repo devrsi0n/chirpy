@@ -76,7 +76,7 @@ export default function Dashboard(): JSX.Element {
   return (
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
-        <div className="flex flex-col items-start sm:flex-row sm:justify-between space-y-5 sm:space-x-2 sm:space-y-0">
+        <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
           <Button
             onClick={handleCreateProject}
@@ -91,7 +91,7 @@ export default function Dashboard(): JSX.Element {
         </div>
         {projects?.length ? (
           <div className="flex flex-row">
-            <ul className="space-y-6 flex-1" aria-label="Project list">
+            <ul className="flex-1 space-y-6" aria-label="Project list">
               {projects.map((project) => (
                 <li key={project.id}>
                   <ProjectCard project={project} onDeletedProject={fetchProjects} />
@@ -109,7 +109,7 @@ export default function Dashboard(): JSX.Element {
         )}
       </section>
       <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-        <form className="flex flex-col w-80">
+        <form className="flex w-80 flex-col">
           <TextField
             {...register('name', {
               required: { value: true, message: 'Name is required' },

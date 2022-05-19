@@ -27,7 +27,7 @@ const contents: FeatureProps[] = [
 
 export function Features(): JSX.Element {
   return (
-    <ul className="flex flex-col items-start space-y-12 sm:flex-row sm:justify-between sm:space-x-6 sm:space-y-0 sm:max-w-full sm:px-0">
+    <ul className="flex flex-col items-start space-y-12 sm:max-w-full sm:flex-row sm:justify-between sm:space-x-6 sm:space-y-0 sm:px-0">
       {contents.map((item) => (
         <li className="sm:flex-1" key={item.heading}>
           <Feature {...item} />
@@ -46,11 +46,11 @@ function Feature(props: FeatureProps): JSX.Element {
   const Icon = props.icon;
   return (
     <section className="flex flex-row space-x-4 sm:flex-col sm:space-x-0">
-      <div className="h-fit w-fit bg-primary-300 inline-block p-3 rounded-full text-primary-1000 mb-4">
+      <div className="mb-4 inline-block h-fit w-fit rounded-full bg-primary-300 p-3 text-primary-1000">
         <Icon size={26} />
       </div>
       <div>
-        <Heading as="h4" className="font-semibold mb-3">
+        <Heading as="h4" className="mb-3 font-semibold">
           {props.heading}
         </Heading>
         <Text variant="secondary">{props.content}</Text>

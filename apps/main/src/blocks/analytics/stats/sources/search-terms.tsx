@@ -65,15 +65,15 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
 
   renderSearchTerm(term: Term) {
     return (
-      <div className="flex items-center justify-between my-1 text-sm" key={term.name}>
+      <div className="my-1 flex items-center justify-between text-sm" key={term.name}>
         <Bar
           count={term.visitors}
           all={this.state.searchTerms!}
           color="blue"
           maxWidthDeduction="4rem"
         >
-          <span className="flex px-2 py-1.5 dark:text-gray-300 z-9 relative break-all">
-            <span className="md:truncate block">{term.name}</span>
+          <span className="relative z-9 flex break-all px-2 py-1.5 dark:text-gray-300">
+            <span className="block md:truncate">{term.name}</span>
           </span>
         </Bar>
         <span className="font-medium dark:text-gray-200">{numberFormatter(term.visitors)}</span>
@@ -84,7 +84,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
   renderList() {
     if (this.props.query.filters.goal) {
       return (
-        <div className="text-center text-gray-700 dark:text-gray-300 text-sm mt-20">
+        <div className="mt-20 text-center text-sm text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div>
             Sorry, we cannot show which keywords converted best for goal{' '}
@@ -95,7 +95,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
       );
     } else if (this.state.notConfigured) {
       return (
-        <div className="text-center text-gray-700 dark:text-gray-300 text-sm mt-20">
+        <div className="mt-20 text-center text-sm text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div>The site is not connected to Google Search Keywords</div>
           <div>Cannot show search terms</div>
@@ -114,7 +114,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
 
       return (
         <React.Fragment>
-          <div className="flex items-center mt-3 mb-2 justify-between text-gray-500 dark:text-gray-400 text-xs font-bold tracking-wide">
+          <div className="mt-3 mb-2 flex items-center justify-between text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400">
             <span>Search term</span>
             <span>{valLabel}</span>
           </div>
@@ -124,7 +124,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
       );
     } else {
       return (
-        <div className="text-center text-gray-700 dark:text-gray-300 text-sm mt-20">
+        <div className="mt-20 text-center text-sm text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div>Could not find any search terms for this period</div>
           <div>Google Search Console data is sampled and delayed by 24-36h</div>
@@ -134,7 +134,7 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
               href="https://docs.plausible.io/google-search-console-integration/#i-dont-see-google-search-query-data-in-my-dashboard"
               target="_blank"
               rel="noreferrer"
-              className="hover:underline text-indigo-700 dark:text-indigo-500"
+              className="text-indigo-700 hover:underline dark:text-indigo-500"
             >
               our documentation
             </a>
@@ -164,12 +164,12 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
     return (
       <div
         className={clsx(
-          'flex flex-col relative bg-white dark:bg-gray-825 shadow-xl rounded p-4 mt-6 w-full',
+          'relative mt-6 flex w-full flex-col rounded bg-white p-4 shadow-xl dark:bg-gray-825',
           styles['stats-item'],
         )}
       >
         {this.state.loading && (
-          <div className={clsx('mt-44 mx-auto', styles.loading)}>
+          <div className={clsx('mx-auto mt-44', styles.loading)}>
             <div></div>
           </div>
         )}

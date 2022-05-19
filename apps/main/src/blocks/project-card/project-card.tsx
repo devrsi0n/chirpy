@@ -69,8 +69,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
   }
 
   return (
-    <Card as="section" key={project.id} className="pt-4 space-y-4">
-      <div className="flex justify-between flex-nowrap flex-row items-center space-x-2 pl-6 pr-3">
+    <Card as="section" key={project.id} className="space-y-4 pt-4">
+      <div className="flex flex-row flex-nowrap items-center justify-between space-x-2 pl-6 pr-3">
         <Heading as="h3">{project.name}</Heading>
         <div className="flex flex-row items-center space-x-2">
           <PageViewStats domain={project.domain} />
@@ -95,7 +95,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       <Text className="px-6" variant="secondary">
         {project.domain}
       </Text>
-      <div className="px-6 flex flex-row space-x-2">
+      <div className="flex flex-row space-x-2 px-6">
         <Link href={`/theme/${project.domain}`} variant="plain" tabIndex={-1}>
           <Button color="primary" shadow={false} className="px-2 py-1">
             Theme
@@ -112,7 +112,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                   href={page.url}
                   title={page.title || page.url}
                   variant="plain"
-                  className="inline-block max-w-xs text-ellipsis overflow-hidden whitespace-nowrap"
+                  className="inline-block max-w-xs overflow-hidden text-ellipsis whitespace-nowrap"
                 >
                   {page.title || page.url}
                 </Link>
@@ -123,7 +123,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             <BaseButton
               aria-expanded={isExpanded}
               onClick={handleClickExpand}
-              className="text-primary-900 hover:bg-primary-900 hover:text-white rounded px-2 py-1 ml-4"
+              className="ml-4 rounded px-2 py-1 text-primary-900 hover:bg-primary-900 hover:text-white"
             >
               {!isExpanded ? 'Show more' : 'Show less'}
             </BaseButton>

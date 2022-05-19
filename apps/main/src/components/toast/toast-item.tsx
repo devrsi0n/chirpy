@@ -37,11 +37,11 @@ export function ToastItem({
 
   const typeIcon = type ? typeIconMap[type] : null;
   return (
-    <Card as="section" className="py-4 pl-6 pr-2 shadow-lg relative">
-      <div className={clsx(`flex flex-row justify-between items-center`)}>
-        <div className="flex flex-row items-center space-x-4 mr-4">
+    <Card as="section" className="relative py-4 pl-6 pr-2 shadow-lg">
+      <div className={clsx(`flex flex-row items-center justify-between`)}>
+        <div className="mr-4 flex flex-row items-center space-x-4">
           {typeIcon}
-          <div className={`space-y-2 max-w-lg`}>
+          <div className={`max-w-lg space-y-2`}>
             <Heading as="h5" className={`!leading-none`}>
               {title}
             </Heading>
@@ -62,7 +62,7 @@ export function ToastItem({
           </Button>
         )}
         <IconButton
-          className={`w-fit h-fit ml-4`}
+          className={`ml-4 h-fit w-fit`}
           onClick={() => onDismiss(id)}
           aria-label="Dismiss"
           title="Dismiss"

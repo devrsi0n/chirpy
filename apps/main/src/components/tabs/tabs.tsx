@@ -79,7 +79,7 @@ export function Tabs({
             {tabs.map((item) => (
               <BaseButton
                 className={clsx(
-                  `hover:text-primary-900 p-1 text-xs font-bold text-gray-1100`,
+                  `p-1 text-xs font-bold text-gray-1100 hover:text-primary-900`,
                   selfValue === item.value && `text-primary-1000 underline`,
                 )}
                 key={item.value}

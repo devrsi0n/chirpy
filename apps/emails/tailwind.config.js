@@ -2,7 +2,7 @@ module.exports = {
   mode: 'jit',
   theme: {
     screens: {
-      sm: {max: '600px'},
+      sm: { max: '600px' },
     },
     extend: {
       spacing: {
@@ -98,19 +98,19 @@ module.exports = {
         '8xl': '96px',
         '9xl': '128px',
       },
-      inset: theme => ({
+      inset: (theme) => ({
         ...theme('spacing'),
       }),
-      letterSpacing: theme => ({
+      letterSpacing: (theme) => ({
         ...theme('spacing'),
       }),
-      lineHeight: theme => ({
+      lineHeight: (theme) => ({
         ...theme('spacing'),
       }),
-      maxHeight: theme => ({
+      maxHeight: (theme) => ({
         ...theme('spacing'),
       }),
-      maxWidth: theme => ({
+      maxWidth: (theme) => ({
         ...theme('spacing'),
         xs: '160px',
         sm: '192px',
@@ -124,10 +124,10 @@ module.exports = {
         '6xl': '576px',
         '7xl': '640px',
       }),
-      minHeight: theme => ({
+      minHeight: (theme) => ({
         ...theme('spacing'),
       }),
-      minWidth: theme => ({
+      minWidth: (theme) => ({
         ...theme('spacing'),
       }),
     },
@@ -140,4 +140,4 @@ module.exports = {
     placeholderOpacity: false,
     textOpacity: false,
   },
-}
+};
