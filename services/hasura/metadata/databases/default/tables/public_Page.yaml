@@ -14,25 +14,25 @@ configuration:
     update: updatePages
     update_by_pk: updatePageByPk
 object_relationships:
-- name: project
-  using:
-    foreign_key_constraint_on: projectId
+  - name: project
+    using:
+      foreign_key_constraint_on: projectId
 array_relationships:
-- name: comments
-  using:
-    foreign_key_constraint_on:
-      column: pageId
-      table:
-        name: Comment
-        schema: public
+  - name: comments
+    using:
+      foreign_key_constraint_on:
+        column: pageId
+        table:
+          name: Comment
+          schema: public
 select_permissions:
-- permission:
-    columns:
-    - id
-    - createdAt
-    - updatedAt
-    - url
-    - title
-    - projectId
-    filter: {}
-  role: user
+  - permission:
+      columns:
+        - id
+        - createdAt
+        - updatedAt
+        - url
+        - title
+        - projectId
+      filter: {}
+    role: user

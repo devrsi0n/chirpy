@@ -15,10 +15,10 @@ configuration:
     update: updateRoles
     update_by_pk: updateRoleByPk
 array_relationships:
-- name: members
-  using:
-    foreign_key_constraint_on:
-      column: role
-      table:
-        name: Member
-        schema: public
+  - name: members
+    using:
+      foreign_key_constraint_on:
+        column: role
+        table:
+          name: Member
+          schema: public

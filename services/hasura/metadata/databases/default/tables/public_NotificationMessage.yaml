@@ -14,43 +14,43 @@ configuration:
     update: updateNotificationMessages
     update_by_pk: updateNotificationMessageByPk
 object_relationships:
-- name: notificationType
-  using:
-    foreign_key_constraint_on: type
-- name: recipient
-  using:
-    foreign_key_constraint_on: recipientId
-- name: triggeredBy
-  using:
-    foreign_key_constraint_on: triggeredById
+  - name: notificationType
+    using:
+      foreign_key_constraint_on: type
+  - name: recipient
+    using:
+      foreign_key_constraint_on: recipientId
+  - name: triggeredBy
+    using:
+      foreign_key_constraint_on: triggeredById
 select_permissions:
-- permission:
-    columns:
-    - content
-    - contextId
-    - createdAt
-    - id
-    - read
-    - recipientId
-    - triggeredById
-    - type
-    - url
-    filter:
-      recipientId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      columns:
+        - content
+        - contextId
+        - createdAt
+        - id
+        - read
+        - recipientId
+        - triggeredById
+        - type
+        - url
+      filter:
+        recipientId:
+          _eq: X-Hasura-User-Id
+    role: user
 update_permissions:
-- permission:
-    check: null
-    columns:
-    - read
-    filter:
-      recipientId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      check: null
+      columns:
+        - read
+      filter:
+        recipientId:
+          _eq: X-Hasura-User-Id
+    role: user
 delete_permissions:
-- permission:
-    filter:
-      recipientId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      filter:
+        recipientId:
+          _eq: X-Hasura-User-Id
+    role: user

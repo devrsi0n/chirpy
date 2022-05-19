@@ -15,10 +15,10 @@ configuration:
     update: updateUserTypes
     update_by_pk: updateUserTypeByPk
 array_relationships:
-- name: users
-  using:
-    foreign_key_constraint_on:
-      column: type
-      table:
-        name: User
-        schema: public
+  - name: users
+    using:
+      foreign_key_constraint_on:
+        column: type
+        table:
+          name: User
+          schema: public

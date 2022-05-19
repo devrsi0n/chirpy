@@ -15,10 +15,10 @@ configuration:
     update: updateAccountProviders
     update_by_pk: updateAccountProviderByPk
 array_relationships:
-- name: Accounts
-  using:
-    foreign_key_constraint_on:
-      column: provider
-      table:
-        name: Account
-        schema: public
+  - name: Accounts
+    using:
+      foreign_key_constraint_on:
+        column: provider
+        table:
+          name: Account
+          schema: public
