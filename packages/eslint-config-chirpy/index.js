@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',
       {
@@ -46,13 +47,13 @@ module.exports = {
     ],
     'unicorn/no-array-reduce': 'off',
     'unicorn/no-null': 'off',
+    'unicorn/no-abusive-eslint-disable': 'off',
+    'unicorn/no-array-for-each': 'off',
+    'unicorn/import-style': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/prefer-node-protocol': 'off',
     'unicore/prefer-module': 'off',
-    'unicorn/no-abusive-eslint-disable': 'off',
-    'unicorn/no-array-for-each': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
-    'unicorn/import-style': 'off',
 
     'jest/expect-expect': 'off',
   },
