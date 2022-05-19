@@ -44,5 +44,5 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
           HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
-          DEBUG: 'cypress:*'
-          DEBUG_DEPTH: 9
+          # DEBUG: 'cypress:*'
+          # DEBUG_DEPTH: 9
