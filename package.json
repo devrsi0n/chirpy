@@ -4,23 +4,8 @@
   "scripts": {
     "lint": "eslint ./"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
-  },
-  "lint-staged": {
-    "*.{json,md,scss,js}": [
-      "prettier --write"
-    ],
-    "**/generated/**/*.{ts,tsx}": [
-      "prettier --write"
-    ],
-    "*.graphql": [
-      "prettier --write",
-      "cd apps/main && pnpm run g:gql"
-    ],
-    "*.{ts,tsx}": [
-      "eslint --fix"
-    ]
+  "engines": {
+    "node": "16.x"
   },
   "devDependencies": {
     "@chirpy/prettier-config": "workspace:*",
@@ -31,9 +16,10 @@
     "lint-staged": "12.4.1",
     "turbo": "1.2.9"
   },
-  "engines": {
-    "node": "16.x"
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
   },
+  "prettier": "@chirpy/prettier-config",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [

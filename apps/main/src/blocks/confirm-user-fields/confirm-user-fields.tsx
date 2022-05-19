@@ -69,7 +69,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     router.push('/dashboard');
   });
   return (
-    <Card as="form" className="py-6 px-12 w-fit rounded shadow-md">
+    <Card as="form" className="w-fit rounded py-6 px-12 shadow-md">
       <TextField
         {...register('email', {
           required: { value: true, message: 'Email is required' },
@@ -110,7 +110,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.username}
       />
       <Button
-        className="space-x-1 w-full"
+        className="w-full space-x-1"
         onClick={handleClickSubmit}
         disabled={hasError || loading}
         aria-label="Save"

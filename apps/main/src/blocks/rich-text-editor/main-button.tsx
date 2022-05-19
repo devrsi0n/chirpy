@@ -41,7 +41,7 @@ export function MainButton({
   };
   const buttonChildren = (
     <>
-      {isLoading ? <Loader className="animate-spin w-5 h-5" /> : <Send size="14" />}
+      {isLoading ? <Loader className="h-5 w-5 animate-spin" /> : <Send size="14" />}
       <span>Post</span>
     </>
   );

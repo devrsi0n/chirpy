@@ -61,7 +61,7 @@ export function Popover({
               <m.div {...easeInOut}>
                 <HeadlessPopover.Panel
                   static
-                  className={clsx(`absolute right-0 z-10 shadow-2xl isolate`, panelBorder)}
+                  className={clsx(`absolute right-0 isolate z-10 shadow-2xl`, panelBorder)}
                   style={getPanelStyles(placement, {
                     height: buttonRef.current?.getBoundingClientRect().height,
                     width: buttonRef.current?.getBoundingClientRect().width,
@@ -71,7 +71,7 @@ export function Popover({
                 >
                   <div
                     className={clsx(
-                      `relative py-3 px-5 rounded-lg`,
+                      `relative rounded-lg py-3 px-5`,
                       panelBg,
                       panelBorder,
                       styles?.panel,

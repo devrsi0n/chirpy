@@ -79,7 +79,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="flex items-center justify-between my-1 text-sm" key={listItem.name}>
+      <div className="my-1 flex items-center justify-between text-sm" key={listItem.name}>
         <Bar
           count={listItem.count}
           all={this.state.list!}
@@ -87,12 +87,12 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
           maxWidthDeduction={maxWidthDeduction}
         >
           <span
-            className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all"
+            className="relative z-9 flex break-all px-2 py-1.5 dark:text-gray-300"
             tooltip={this.props.tooltipText?.(listItem)}
           >
             <Link
               disabled
-              className="md:truncate block hover:underline"
+              className="block hover:underline md:truncate"
               href={`${location.href}?${query.toString()}`}
             >
               {this.props.renderIcon?.(listItem)}
@@ -104,7 +104,7 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
         <ViewNumber>
           {numberFormatter(listItem.count)}
           {(listItem.percentage || 0) >= 0 && (
-            <span className="inline-block w-8 text-xs text-right">({listItem.percentage}%)</span>
+            <span className="inline-block w-8 text-right text-xs">({listItem.percentage}%)</span>
           )}
         </ViewNumber>
         {/* @ts-ignore */}
@@ -134,9 +134,9 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
 
   render() {
     return (
-      <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
+      <LazyLoader onVisible={this.onVisible} className="flex flex-grow flex-col">
         {this.state.loading && (
-          <div className={clsx('mt-44 mx-auto', styles.loading)}>
+          <div className={clsx('mx-auto mt-44', styles.loading)}>
             <div></div>
           </div>
         )}

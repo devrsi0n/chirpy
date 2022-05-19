@@ -17,14 +17,14 @@ export const TextArea = React.forwardRef(function TextArea(
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (
-    <label className={clsx('flex flex-col text-gray-1200 mb-4', styles.root)}>
-      <p className="mb-1 leading-6 text-lg">{label}</p>
+    <label className={clsx('mb-4 flex flex-col text-gray-1200', styles.root)}>
+      <p className="mb-1 text-lg leading-6">{label}</p>
       <textarea
         {...inputProps}
         name={label}
         ref={ref}
         className={clsx(
-          `leading-8 px-2 border rounded`,
+          `rounded border px-2 leading-8`,
           textInput,
           border,
           !!errorMessage && textInputError,
@@ -35,7 +35,7 @@ export const TextArea = React.forwardRef(function TextArea(
         }}
       />
       {errorMessage && (
-        <p role="alert" className="text-red-700 text-xs">
+        <p role="alert" className="text-xs text-red-700">
           {errorMessage}
         </p>
       )}

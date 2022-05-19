@@ -12,7 +12,7 @@ import { Text } from '$/components/text/text';
 export default function Custom404(): JSX.Element {
   return (
     <SiteLayout title="404">
-      <section className="px-4 space-y-8 flex flex-col items-center">
+      <section className="flex flex-col items-center space-y-8 px-4 ">
         <div
           className={`flex justify-center text-gray-1000`}
           style={
@@ -21,9 +21,9 @@ export default function Custom404(): JSX.Element {
             } as React.CSSProperties
           }
         >
-          <div className={clsx(dashedBorder, `p-6 border-opacity-30`)}>
-            <div className={clsx(dashedBorder, `p-5 border-opacity-50`)}>
-              <div className={clsx(dashedBorder, `p-4 border-opacity-80`)}>
+          <div className={clsx(dashedBorder, `border-opacity-30 p-6`)}>
+            <div className={clsx(dashedBorder, `border-opacity-50 p-5`)}>
+              <div className={clsx(dashedBorder, `border-opacity-80 p-4`)}>
                 <div className={clsx(dashedBorder, `p-3`)}>
                   <AlertCircleFill size={84} />
                 </div>
@@ -45,7 +45,7 @@ export default function Custom404(): JSX.Element {
             </List.Item>
           </List>
         </section>
-        <div className="flex justify-center items-center space-x-6">
+        <div className="flex items-center justify-center space-x-6">
           <Link href="/" variant="plain">
             <Button
               variant="solid"

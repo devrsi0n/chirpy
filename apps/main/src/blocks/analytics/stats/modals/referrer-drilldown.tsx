@@ -85,7 +85,7 @@ class ReferrerDrilldownModal extends React.Component<
       return (
         <a target="_blank" href={'//' + name} rel="noreferrer" className="hidden group-hover:block">
           <svg
-            className="inline h-4 w-4 ml-1 -mt-1 text-gray-600 dark:text-gray-400"
+            className="ml-1 -mt-1 inline h-4 w-4 text-gray-600 dark:text-gray-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -102,7 +102,7 @@ class ReferrerDrilldownModal extends React.Component<
     query.set('referrer', referrer.name);
 
     return (
-      <span className="flex group items-center">
+      <span className="group flex items-center">
         <SiteIcon domain={referrer.url} name={referrer.name} />
         <Link
           disabled
@@ -122,25 +122,25 @@ class ReferrerDrilldownModal extends React.Component<
       <tr className="text-sm dark:text-gray-200" key={referrer.name}>
         <td className="p-2">{this.renderReferrerName(referrer)}</td>
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(referrer.total_visitors)}
           </td>
         )}
-        <td className="p-2 w-32 font-medium" align="right">
+        <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(referrer.visitors)}
         </td>
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatBounceRate(referrer)}
           </td>
         )}
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatDuration(referrer)}
           </td>
         )}
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {referrer.conversion_rate}%
           </td>
         )}
@@ -151,7 +151,7 @@ class ReferrerDrilldownModal extends React.Component<
   renderGoalText() {
     if (this.state.query.filters.goal) {
       return (
-        <h1 className="text-xl font-semibold text-gray-500 dark:text-gray-300 leading-none">
+        <h1 className="text-xl font-semibold leading-none text-gray-500 dark:text-gray-300">
           completed {this.state.query.filters.goal}
         </h1>
       );
@@ -161,7 +161,7 @@ class ReferrerDrilldownModal extends React.Component<
   renderBody() {
     if (this.state.loading) {
       return (
-        <div className={clsx('mt-32  mx-auto', styles.loading)}>
+        <div className={clsx('mx-auto  mt-32', styles.loading)}>
           <div></div>
         </div>
       );
@@ -172,7 +172,7 @@ class ReferrerDrilldownModal extends React.Component<
 
           <div className="my-4 border-b border-gray-300 dark:border-gray-500"></div>
           <main className="modal__content mt-0">
-            <h1 className="text-xl font-semibold mb-0 leading-none dark:text-gray-200">
+            <h1 className="mb-0 text-xl font-semibold leading-none dark:text-gray-200">
               {this.state.totalVisitors} visitors from{' '}
               {decodeURIComponent(this.props.match.params.referrer)}
               <br /> {toHuman(this.state.query)}
@@ -181,7 +181,7 @@ class ReferrerDrilldownModal extends React.Component<
 
             <table
               className={clsx(
-                'w-max overflow-x-auto md:w-full mt-4',
+                'mt-4 w-max overflow-x-auto md:w-full',
                 styles['table-striped'],
                 styles['table-fixed'],
               )}
@@ -189,28 +189,28 @@ class ReferrerDrilldownModal extends React.Component<
               <thead>
                 <tr>
                   <th
-                    className="p-2 w-48 md:w-56 lg:w-1/3 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 md:w-56 lg:w-1/3"
                     align="left"
                   >
                     Referrer
                   </th>
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Total visitors
                     </th>
                   )}
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     {this.label()}
                   </th>
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Bounce rate
@@ -218,7 +218,7 @@ class ReferrerDrilldownModal extends React.Component<
                   )}
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Visit duration
@@ -226,7 +226,7 @@ class ReferrerDrilldownModal extends React.Component<
                   )}
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       CR

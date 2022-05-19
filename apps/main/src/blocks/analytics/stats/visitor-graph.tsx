@@ -372,13 +372,13 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       border = index % 2 === 0 ? border + ' border-r lg:border-r-0' : border;
 
       return (
-        <div className={`px-8 w-1/2 my-4 lg:w-auto ${border}`} key={stat.name}>
-          <div className="text-xs font-bold tracking-wide text-gray-1100 uppercase whitespace-nowrap">
+        <div className={`my-4 w-1/2 px-8 lg:w-auto ${border}`} key={stat.name}>
+          <div className="whitespace-nowrap text-xs font-bold uppercase tracking-wide text-gray-1100">
             {stat.name}
           </div>
-          <div className="flex items-center justify-between my-1 whitespace-nowrap">
+          <div className="my-1 flex items-center justify-between whitespace-nowrap">
             <strong
-              className="mr-4 text-xl md:text-2xl text-gray-1200"
+              className="mr-4 text-xl text-gray-1200 md:text-2xl"
               tooltip={this.topStatTooltip(stat)}
             >
               {this.topStatNumberShort(stat)}
@@ -393,7 +393,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       stats.push(
         <div
           key="dot"
-          className="block pulsating-circle"
+          className="pulsating-circle block"
           style={{ left: '125px', top: '52px' }}
         ></div>,
       );
@@ -422,7 +422,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       if (this.state.exported) {
         return (
           <svg
-            className="animate-spin h-4 w-4 text-indigo-500 absolute -top-8 right-8"
+            className="absolute -top-8 right-8 h-4 w-4 animate-spin text-indigo-500"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -452,7 +452,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
           <a href={endpoint} download onClick={this.downloadSpinner.bind(this)}>
             <svg
               className={clsx(
-                'absolute w-4 h-5 text-gray-700 dark:text-gray-300 -top-8 right-8',
+                'absolute -top-8 right-8 h-5 w-4 text-gray-700 dark:text-gray-300',
                 styles.feather,
               )}
               xmlns="http://www.w3.org/2000/svg"
@@ -480,10 +480,10 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       return (
         <div
           tooltip={`Stats based on a ${samplePercent}% sample of all visitors`}
-          className="absolute cursor-pointer -top-8 right-14 lg:-top-20 lg:right-8"
+          className="absolute -top-8 right-14 cursor-pointer lg:-top-20 lg:right-8"
         >
           <svg
-            className="w-4 h-4 text-gray-700"
+            className="h-4 w-4 text-gray-700"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -556,13 +556,13 @@ export default function VisitorGraph(props: VisitorGraphProps) {
     <LazyLoader onVisible={onVisible}>
       <div
         className={clsx(
-          'relative w-full bg-white rounded shadow-xl dark:bg-gray-825 main-graph',
+          'main-graph relative w-full rounded bg-white shadow-xl dark:bg-gray-825',
           loading && `z-20`,
         )}
       >
         {loading && (
           <div className="graph-inner">
-            <div className={clsx('pt-24 mx-auto sm:pt-32 md:pt-48', styles.loading)}>
+            <div className={clsx('mx-auto pt-24 sm:pt-32 md:pt-48', styles.loading)}>
               <div></div>
             </div>
           </div>

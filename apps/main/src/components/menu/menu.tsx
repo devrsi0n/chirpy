@@ -70,7 +70,7 @@ function MenuButton({
       <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
         {children}
         {shape === 'square' && (
-          <ChevronDown className={clsx(`w-5 h-5 ml-2 -mr-1`, open && `rotate-180`)} />
+          <ChevronDown className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
         )}
       </HeadlessMenu.Button>
     </div>
@@ -91,7 +91,7 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
           <HeadlessMenu.Items
             static
             className={clsx(
-              `absolute right-0 mt-1 border rounded-md shadow-lg outline-none p-1 z-30`,
+              `outline-none absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg`,
               cardBg,
               className,
             )}

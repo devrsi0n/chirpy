@@ -63,8 +63,8 @@ class GoogleKeywordsModal extends React.Component {
     return (
       <React.Fragment key={term.name}>
         <tr className="text-sm dark:text-gray-200" key={term.name}>
-          <td className="p-2 truncate">{term.name}</td>
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="truncate p-2">{term.name}</td>
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(term.visitors)}
           </td>
         </tr>
@@ -75,7 +75,7 @@ class GoogleKeywordsModal extends React.Component {
   renderKeywords() {
     if (this.state.query.filters.goal) {
       return (
-        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+        <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div className="text-lg">
             Sorry, we cannot show which keywords converted best for goal{' '}
@@ -86,7 +86,7 @@ class GoogleKeywordsModal extends React.Component {
       );
     } else if (this.state.notConfigured) {
       return this.state.isOwner ? (
-        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+        <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div className="text-lg">The site is not connected to Google Search Keywords</div>
           <div className="text-lg">Configure the integration to view search terms</div>
@@ -98,7 +98,7 @@ class GoogleKeywordsModal extends React.Component {
           </a>
         </div>
       ) : (
-        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+        <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div className="text-lg">The site is not connected to Google Search Kewyords</div>
           <div className="text-lg">Cannot show search terms</div>
@@ -116,13 +116,13 @@ class GoogleKeywordsModal extends React.Component {
           <thead>
             <tr>
               <th
-                className="p-2 w-48 md:w-56 lg:w-1/3 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 md:w-56 lg:w-1/3"
                 align="left"
               >
                 Search Term
               </th>
               <th
-                className="p-2 w-32 lg:w-1/2 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 lg:w-1/2"
                 align="right"
               >
                 Visitors
@@ -134,7 +134,7 @@ class GoogleKeywordsModal extends React.Component {
       );
     } else {
       return (
-        <div className="text-center text-gray-700 dark:text-gray-300 mt-6">
+        <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
           <div className="text-lg">Could not find any search terms for this period</div>
         </div>
@@ -145,7 +145,7 @@ class GoogleKeywordsModal extends React.Component {
   renderGoalText() {
     if (this.state.query.filters.goal) {
       return (
-        <h1 className="text-xl font-semibold text-gray-500 dark:text-gray-200 leading-none">
+        <h1 className="text-xl font-semibold leading-none text-gray-500 dark:text-gray-200">
           completed {this.state.query.filters.goal}
         </h1>
       );
@@ -154,7 +154,7 @@ class GoogleKeywordsModal extends React.Component {
 
   renderBody() {
     return this.state.loading ? (
-      <div className={clsx('mt-32 mx-auto', styles.loading)}>
+      <div className={clsx('mx-auto mt-32', styles.loading)}>
         <div></div>
       </div>
     ) : (
@@ -162,14 +162,14 @@ class GoogleKeywordsModal extends React.Component {
         <Link
           disabled
           href={`/${encodeURIComponent(this.props.site.domain)}/referrers${window.location.search}`}
-          className="font-bold text-gray-700 dark:text-gray-200 hover:underline"
+          className="font-bold text-gray-700 hover:underline dark:text-gray-200"
         >
           ← All referrers
         </Link>
 
         <div className="my-4 border-b border-gray-300 dark:border-gray-500"></div>
         <main className="modal__content">
-          <h1 className="text-xl font-semibold mb-0 leading-none dark:text-gray-200">
+          <h1 className="mb-0 text-xl font-semibold leading-none dark:text-gray-200">
             {this.state.totalVisitors} visitors from Google
             <br />
             {toHuman(this.state.query)}

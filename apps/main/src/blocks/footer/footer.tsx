@@ -45,11 +45,11 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
     <footer
       {...restProps}
       className={clsx(
-        `w-full flex flex-col items-start justify-between py-10 my-10 space-y-5 transition duration-150 border-t border-gray-500`,
+        `my-10 flex w-full flex-col items-start justify-between space-y-5 border-t border-gray-500 py-10 transition duration-150`,
         className,
       )}
     >
-      <nav className={`flex flex-row flex-wrap justify-center w-full space-x-6 leading-8`}>
+      <nav className={`flex w-full flex-row flex-wrap justify-center space-x-6 leading-8`}>
         <Link href="/docs/index" variant="secondary">
           Docs
         </Link>
@@ -67,7 +67,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        className={`flex flex-col items-center justify-center w-full space-y-2 xs:space-y-0 xs:space-x-5 xs:flex-row`}
+        className={`flex w-full flex-col items-center justify-center space-y-2 xs:flex-row xs:space-y-0 xs:space-x-5`}
       >
         <Text variant="secondary" size="sm">
           &copy; {new Date().getFullYear()} Chirpy Labs. All rights reserved.

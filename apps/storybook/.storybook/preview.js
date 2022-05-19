@@ -15,7 +15,7 @@ export const decorators = [
       <>
         <style>{styles}</style>
         <LazyMotion features={loadFeatures}>
-          <div className="bg-bg h-screen pt-10">
+          <div className="h-screen bg-bg pt-10">
             <Story />
           </div>
         </LazyMotion>

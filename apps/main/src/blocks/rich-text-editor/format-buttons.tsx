@@ -29,7 +29,7 @@ export function BaseMarkButton({
   return (
     <BaseButton
       className={clsx(
-        `p-1.5 rounded text-gray-1100`,
+        `rounded p-1.5 text-gray-1100`,
         listHoverableColor,
         isActive && `bg-primary-300 text-primary-1000`,
         className,

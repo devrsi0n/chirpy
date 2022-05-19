@@ -92,24 +92,24 @@ class AllSources extends React.Component<AllSourcesProps> {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
+      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
-          <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
+          <span className="relative z-9 flex break-all px-2 py-1.5 dark:text-gray-300">
             <Link
               disabled
-              className="md:truncate block hover:underline"
+              className="block hover:underline md:truncate"
               href={url.setQuery('source', referrer.name)}
             >
               <img
                 src={`${
                   process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
                 }/favicon/sources/${encodeURIComponent(referrer.name)}`}
-                className="inline w-4 h-4 mr-2 -mt-px align-middle"
+                className="mr-2 -mt-px inline h-4 w-4 align-middle"
                 alt={`Favorite icon for ${referrer.name}`}
               />
               {referrer.name}
@@ -160,13 +160,13 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   render() {
     return (
-      <LazyLoader className="flex flex-col flex-grow" onVisible={this.onVisible}>
+      <LazyLoader className="flex flex-grow flex-col" onVisible={this.onVisible}>
         {this.state.loading && (
-          <div className="mx-auto loading mt-44">
+          <div className="loading mx-auto mt-44">
             <div></div>
           </div>
         )}
-        <FadeIn show={!this.state.loading} className="flex flex-col flex-grow">
+        <FadeIn show={!this.state.loading} className="flex flex-grow flex-col">
           {this.renderList()}
         </FadeIn>
       </LazyLoader>
@@ -224,17 +224,17 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
+      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
-          <span className="flex px-2 py-1.5 dark:text-gray-300 relative z-9 break-all">
+          <span className="relative z-9 flex break-all px-2 py-1.5 dark:text-gray-300">
             <Link
               disabled
-              className="md:truncate block hover:underline"
+              className="block hover:underline md:truncate"
               href={url.setQuery(this.props.tab, referrer.name)}
             >
               {referrer.name}
@@ -261,7 +261,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
 
   renderList() {
     return this.state.referrers && this.state.referrers.length > 0 ? (
-      <div className="flex flex-col flex-grow">
+      <div className="flex flex-grow flex-col">
         <div className={labelContainer}>
           <span>{UTM_TAGS[this.props.tab].label}</span>
           <div className="text-right">
@@ -288,11 +288,11 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     return (
       <>
         {this.state.loading && (
-          <div className={clsx('mt-44 mx-auto', styles.loading)}>
+          <div className={clsx('mx-auto mt-44', styles.loading)}>
             <div></div>
           </div>
         )}
-        <FadeIn show={!this.state.loading} className="flex flex-col flex-grow">
+        <FadeIn show={!this.state.loading} className="flex flex-grow flex-col">
           {this.renderList()}
         </FadeIn>
       </>

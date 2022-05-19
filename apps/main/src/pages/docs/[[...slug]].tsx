@@ -16,9 +16,9 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
   return (
     <SiteLayout title={frontMatter?.title || 'Docs'}>
       <div className="min-h-full">
-        <section className="flex flex-row min-h-full space-x-4 -my-2.5">
+        <section className="-my-2.5 flex min-h-full flex-row space-x-4">
           <SideBar className="pt-10" directories={directories} title="Documentation" />
-          <article className="flex-1 overflow-y-auto prose lg:prose-xl">
+          <article className="prose flex-1 overflow-y-auto lg:prose-xl">
             <div className="pt-10">
               {/* @ts-ignore */}
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}

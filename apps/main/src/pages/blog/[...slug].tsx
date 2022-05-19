@@ -27,7 +27,7 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
   return (
     <SiteLayout title={frontMatter?.title || 'Blog'}>
       <section className="flex flex-row space-x-2">
-        <article className="prose lg:prose-xl flex-1 overflow-y-auto">
+        <article className="prose flex-1 overflow-y-auto lg:prose-xl">
           {banner && (
             <div className="pb-10">
               <Image {...banner} layout="responsive" alt="banner" />

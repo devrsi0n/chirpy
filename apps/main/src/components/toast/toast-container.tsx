@@ -26,7 +26,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
     return <></>;
   }
   return ReactDOM.createPortal(
-    <ul className={clsx(`fixed right-4 bottom-8 space-y-2 flex flex-col items-end`)}>
+    <ul className={clsx(`fixed right-4 bottom-8 flex flex-col items-end space-y-2`)}>
       <AnimatePresence>
         {toasts.map((toast) => (
           <m.li

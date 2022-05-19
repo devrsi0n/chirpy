@@ -48,7 +48,7 @@ function RenderArrow({ query, site, period, prevDate, nextDate }: ArrowProps) {
     disabledRight ? 'bg-gray-300 dark:bg-gray-950' : 'hover:bg-gray-100 dark:hover:bg-gray-900'
   }`;
   return (
-    <div className="flex rounded shadow bg-white mr-2 sm:mr-4 cursor-pointer dark:bg-gray-800">
+    <div className="mr-2 flex cursor-pointer rounded bg-white shadow dark:bg-gray-800 sm:mr-4">
       <QueryButton
         router={router}
         to={{ date: prevDate }}
@@ -341,11 +341,11 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
       return (
         <div
           id="datemenu"
-          className="absolute w-full left-0 right-0 md:w-56 md:absolute md:top-auto md:left-auto md:right-0 mt-2 origin-top-right z-10"
+          className="absolute left-0 right-0 z-10 mt-2 w-full origin-top-right md:absolute md:top-auto md:left-auto md:right-0 md:w-56"
         >
           <div
-            className="rounded-md shadow-lg bg-white dark:bg-gray-500 ring-1 ring-black ring-opacity-5
-            font-medium text-gray-800 dark:text-gray-200"
+            className="rounded-md bg-white font-medium text-gray-800 shadow-lg ring-1 ring-black
+            ring-opacity-5 dark:bg-gray-500 dark:text-gray-200"
           >
             <div className="py-1">
               {this.renderLink('day', 'Today')}
@@ -412,22 +412,22 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
   renderPicker() {
     return (
-      <div className="w-20 sm:w-36 md:w-44 md:relative" ref={(node) => (this.dropDownNode = node!)}>
+      <div className="w-20 sm:w-36 md:relative md:w-44" ref={(node) => (this.dropDownNode = node!)}>
         <div
           onClick={this.toggle}
           onKeyPress={this.toggle}
-          className="flex items-center justify-between rounded bg-white dark:bg-gray-500 shadow px-2 md:px-3 py-2 leading-tight cursor-pointer text-xs md:text-sm text-gray-1100 hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="flex cursor-pointer items-center justify-between rounded bg-white px-2 py-2 text-xs leading-tight text-gray-1100 shadow hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-700 md:px-3 md:text-sm"
           tabIndex={0}
           role="button"
           aria-haspopup="true"
           aria-expanded="false"
           aria-controls="datemenu"
         >
-          <span className="truncate mr-1 md:mr-2">
+          <span className="mr-1 truncate md:mr-2">
             {this.props.leadingText}
             <span className="font-medium">{this.timeFrameText()}</span>
           </span>
-          <ChevronDownIcon className="hidden sm:inline-block h-4 w-4 md:h-5 md:w-5 text-gray-900" />
+          <ChevronDownIcon className="hidden h-4 w-4 text-gray-900 sm:inline-block md:h-5 md:w-5" />
         </div>
 
         <Transition

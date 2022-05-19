@@ -88,25 +88,25 @@ class ExitPagesModal extends React.Component {
           </Link>
         </td>
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(page.total_visitors)}
           </td>
         )}
-        <td className="p-2 w-32 font-medium" align="right">
+        <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(page.unique_exits)}
         </td>
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(page.total_exits)}
           </td>
         )}
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatPercentage(page.exit_rate)}
           </td>
         )}
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(page.conversion_rate)}%
           </td>
         )}
@@ -123,7 +123,7 @@ class ExitPagesModal extends React.Component {
       );
     } else if (this.state.moreResultsAvailable) {
       return (
-        <div className="w-full text-center my-4">
+        <div className="my-4 w-full text-center">
           <button onClick={this.loadMore.bind(this)} type="button" className="button">
             Load more
           </button>
@@ -150,28 +150,28 @@ class ExitPagesModal extends React.Component {
               <thead>
                 <tr>
                   <th
-                    className="p-2 w-48 md:w-56 lg:w-1/3 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 md:w-56 lg:w-1/3"
                     align="left"
                   >
                     Page url
                   </th>
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Total Visitors{' '}
                     </th>
                   )}
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     {this.label()}
                   </th>
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Total Exits
@@ -179,7 +179,7 @@ class ExitPagesModal extends React.Component {
                   )}
                   {this.showExtra() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       Exit Rate
@@ -187,7 +187,7 @@ class ExitPagesModal extends React.Component {
                   )}
                   {this.showConversionRate() && (
                     <th
-                      className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                      className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                       align="right"
                     >
                       CR

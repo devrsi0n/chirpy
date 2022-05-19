@@ -31,17 +31,17 @@ export function Select<T extends string | number = string>({
       {({ open }) => (
         <div className="text-gray-1100">
           {label && (
-            <Listbox.Label className={`block text-sm font-bold mb-1`}>{label}</Listbox.Label>
+            <Listbox.Label className={`mb-1 block text-sm font-bold`}>{label}</Listbox.Label>
           )}
           <div className={clsx(`relative`, className)}>
             <span className={`inline-block w-full`}>
               <Listbox.Button
-                className={`cursor-default relative w-full pl-3 pr-8 py-2 text-left focus-visible:outline-none focus-visible:ring-primary-700 transition ease-in-out duration-150 border border-transparent rounded hover:border-primary-700`}
+                className={`focus-visible:outline-none relative w-full cursor-default rounded border border-transparent py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`}
               >
                 <span>{name || value}</span>
                 <span
                   className={clsx(
-                    'absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none text-gray-300',
+                    'pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300',
                     styles.icon,
                   )}
                 >
@@ -53,11 +53,11 @@ export function Select<T extends string | number = string>({
               {open && (
                 <m.div
                   {...easeInOut}
-                  className={clsx('absolute mt-1 w-full rounded-md shadow-lg z-20', cardBg)}
+                  className={clsx('absolute z-20 mt-1 w-full rounded-md shadow-lg', cardBg)}
                 >
                   <Listbox.Options
                     static
-                    className="max-h-60 rounded-sm py-1 px-0.5 text-base border border-gray-400 overscroll-contain overflow-auto focus-visible:outline-none sm:text-sm"
+                    className="focus-visible:outline-none max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>
@@ -86,7 +86,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
         <div
           className={clsx(
             active && listHoverable,
-            `text-gray-1100 cursor-pointer select-none relative py-2 pl-7 pr-4`,
+            `relative cursor-pointer select-none py-2 pl-7 pr-4 text-gray-1100`,
           )}
         >
           <span className="block">{children}</span>

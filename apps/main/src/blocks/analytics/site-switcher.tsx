@@ -95,17 +95,17 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       <a
         href={domain === this.props.site.domain ? '' : `/${encodeURIComponent(domain)}`}
         key={domain}
-        className={`flex items-center justify-between truncate px-4 py-2 md:text-sm leading-5 text-gray-700 dark:text-gray-300 ${extraClass}`}
+        className={`flex items-center justify-between truncate px-4 py-2 leading-5 text-gray-700 dark:text-gray-300 md:text-sm ${extraClass}`}
       >
         <span>
           <img
             src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
               domain,
             )}`}
-            className="inline w-4 mr-2 align-middle"
+            className="mr-2 inline w-4 align-middle"
             alt={`Favorite icon for ${domain}`}
           />
-          <span className="truncate inline-block align-middle max-w-3xs pr-2">{domain}</span>
+          <span className="inline-block max-w-3xs truncate pr-2 align-middle">{domain}</span>
         </span>
         {index < 9 && <span>{index + 1}</span>}
       </a>
@@ -119,11 +119,11 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           <div className="py-1">
             <a
               href={`/${encodeURIComponent(this.props.site.domain)}/settings`}
-              className="group flex items-center px-4 py-2 md:text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-900 dark:focus:text-gray-100"
+              className="focus:outline-none group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
               role="menuitem"
             >
               <svg
-                className="mr-2 h-4 w-4 text-gray-500 dark:text-gray-200 group-hover:text-gray-600 dark:group-hover:text-gray-400 group-focus:text-gray-500 dark:group-focus:text-gray-200"
+                className="mr-2 h-4 w-4 text-gray-500 group-hover:text-gray-600 group-focus:text-gray-500 dark:text-gray-200 dark:group-hover:text-gray-400 dark:group-focus:text-gray-200"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -165,11 +165,11 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           <div className="py-1">
             <a
               href="/sites/new"
-              className="group flex items-center px-4 py-2 md:text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-900 dark:focus:text-gray-100"
+              className="focus:outline-none group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
               role="menuitem"
             >
               <svg
-                className="mr-2 h-4 w-4 text-gray-500 dark:text-gray-200 group-hover:text-gray-600 dark:group-hover:text-gray-400 group-focus:text-gray-500 dark:group-focus:text-gray-200"
+                className="mr-2 h-4 w-4 text-gray-500 group-hover:text-gray-600 group-focus:text-gray-500 dark:text-gray-200 dark:group-hover:text-gray-400 dark:group-focus:text-gray-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 20 20"
@@ -193,7 +193,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
   renderArrow() {
     if (this.props.loggedIn) {
       return (
-        <svg className="-mr-1 ml-1 md:ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <svg className="-mr-1 ml-1 h-5 w-5 md:ml-2" viewBox="0 0 20 20" fill="currentColor">
           <path
             fillRule="evenodd"
             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -210,10 +210,10 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       : 'cursor-default';
 
     return (
-      <div className="relative inline-block text-left mr-2 sm:mr-4">
+      <div className="relative mr-2 inline-block text-left sm:mr-4">
         <button
           onClick={this.toggle.bind(this)}
-          className={`inline-flex items-center md:text-lg w-full rounded-md py-2 leading-5 font-bold text-gray-700 dark:text-gray-300 focus:outline-none transition ease-in-out duration-150 ${hoverClass}`}
+          className={`focus:outline-none inline-flex w-full items-center rounded-md py-2 font-bold leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 md:text-lg ${hoverClass}`}
         >
           <img
             src={`https://icons.duckduckgo.com/ip3/${this.props.site.domain}.ico`}
@@ -223,7 +223,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
               e.target.src = 'https://icons.duckduckgo.com/ip3/placeholder.ico';
             }}
             referrerPolicy="no-referrer"
-            className="inline w-4 mr-1 md:mr-2 align-middle"
+            className="mr-1 inline w-4 align-middle md:mr-2"
             alt={`Icon of ${this.props.site.domain}`}
           />
           <span className="hidden sm:inline-block">{this.props.site.domain}</span>
@@ -240,10 +240,10 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           leaveTo="opacity-0 scale-95"
         >
           <div
-            className="origin-top-left absolute left-0 mt-2 w-64 rounded-md shadow-lg"
+            className="absolute left-0 mt-2 w-64 origin-top-left rounded-md shadow-lg"
             ref={(node) => (this.dropDownNode = node)}
           >
-            <div className="rounded-md bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+            <div className="rounded-md bg-white ring-1 ring-black ring-opacity-5 dark:bg-gray-800">
               {this.renderDropdown()}
             </div>
           </div>

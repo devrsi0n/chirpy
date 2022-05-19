@@ -24,14 +24,14 @@ const commonBenefits = [
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} className="flex flex-col items-center">
-      <Heading as="h2" className="mb-4 font-bold w-full text-left sm:text-center">
+      <Heading as="h2" className="mb-4 w-full text-left font-bold sm:text-center">
         Pricing Plans
       </Heading>
       <Text className="mb-8" variant="secondary" size="lg">
         Start building for free, then add a site to go live. Account plans unblock additional
         features.
       </Text>
-      <div className="w-full flex flex-col items-start space-y-4 sm:items-center md:flex-row md:items-start md:space-x-6 md:space-y-0">
+      <div className="flex w-full flex-col items-start space-y-4 sm:items-center md:flex-row md:items-start md:space-x-6 md:space-y-0">
         <PricingCard
           plan="Hobby"
           price="0"
@@ -84,13 +84,13 @@ function PricingCard({
 }: PricingCardProps): JSX.Element {
   return (
     <Card className="p-6">
-      <Heading as="h5" className="font-medium mb-4">
+      <Heading as="h5" className="mb-4 font-medium">
         {plan}
       </Heading>
       <Text className="mb-8" variant="secondary">
         All the basics for starting a new community
       </Text>
-      <Text className="text-3xl mb-2">
+      <Text className="mb-2 text-3xl">
         <span className="font-bold">${price}</span>
         <Text as="span" variant="secondary" size="base">
           /mo
@@ -100,11 +100,11 @@ function PricingCard({
         {priceDescription}&#8203;
       </Text>
       <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-        <Button {...callToAction.buttonProps} variant="solid" className="w-full mb-8">
+        <Button {...callToAction.buttonProps} variant="solid" className="mb-8 w-full">
           {callToAction.label}
         </Button>
       </Link>
-      <Divider className="-mx-6 max-w-none mb-8" />
+      <Divider className="-mx-6 mb-8 max-w-none" />
       <Text bold className="mb-3" variant="secondary">{`WHAT'S INCLUDED`}</Text>
       <List className="space-y-2">
         {benefits?.map((benefit, index) => (

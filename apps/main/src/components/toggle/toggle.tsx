@@ -49,14 +49,14 @@ export function Toggle({
         onMouseDown={handleMoudDown}
         className={clsx(
           enabled ? `bg-primary-500` : `bg-gray-300 dark:bg-gray-600`,
-          `relative inline-flex flex-shrink-0 h-4 w-8 transition-colors duration-200 ease-in-out border-2 border-transparent rounded-full cursor-pointer focus-visible:outline-none focus-visible:ring`,
+          `focus-visible:outline-none relative inline-flex h-4 w-8 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:ring`,
         )}
       >
         {({ checked }) => (
           <span
             className={clsx(
               checked ? `translate-x-4` : `translate-x-0`,
-              `inline-block w-3 h-3 transition duration-200 ease-in-out bg-white rounded-full`,
+              `inline-block h-3 w-3 rounded-full bg-white transition duration-200 ease-in-out`,
             )}
           />
         )}
@@ -70,7 +70,7 @@ export function Toggle({
   );
 
   return (
-    <Switch.Group as="div" className="w-full flex items-center space-x-4">
+    <Switch.Group as="div" className="flex w-full items-center space-x-4">
       {memoElements}
     </Switch.Group>
   );

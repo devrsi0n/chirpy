@@ -39,7 +39,7 @@ export function NotificationItem({
     <Menu.Item
       key={message.id}
       className={clsx(
-        'px-5 pt-3 pb-0 mt-0 rounded-none hover:rounded flex-col items-start !text-left',
+        'mt-0 flex-col items-start rounded-none px-5 pt-3 pb-0 !text-left hover:rounded',
         !message.read && `bg-gray-200`,
       )}
       onClickCapture={(e: any): void => {
@@ -53,7 +53,7 @@ export function NotificationItem({
       <Link
         href={message.url}
         variant="plain"
-        className="group w-full flex flex-row items-start space-x-2 mb-2"
+        className="group mb-2 flex w-full flex-row items-start space-x-2"
         target={isWidget ? '_blank' : '_self'}
       >
         {ICON_MAP[message.type]}
@@ -62,7 +62,7 @@ export function NotificationItem({
             <Avatar src={message.triggeredBy.avatar} className="mb-2" />
             <button
               type="button"
-              className="hidden group-hover:inline hover:bg-primary-600 rounded-full h-fit p-1"
+              className="hidden h-fit rounded-full p-1 hover:bg-primary-600 group-hover:inline"
               onClick={(e) => {
                 onClickDelete(message.id);
                 e.stopPropagation();
@@ -74,14 +74,14 @@ export function NotificationItem({
             </button>
           </div>
           <NotificationText className="flex flex-row space-x-1.5 leading-none">
-            <span className="font-bold max-w-[8rem] truncate">{message.triggeredBy.name}</span>
+            <span className="max-w-[8rem] truncate font-bold">{message.triggeredBy.name}</span>
             <span>{TITLE_MAP[message.type]}</span>
           </NotificationText>
           <NotificationText
             variant="secondary"
             as="time"
             size="sm"
-            className="block leading-none cursor-default mt-1"
+            className="mt-1 block cursor-default leading-none"
             dateTime={message.createdAt}
           >
             {dayjs(message.createdAt).fromNow()}
@@ -89,7 +89,7 @@ export function NotificationItem({
           {message.content && (
             <NotificationText
               size="sm"
-              className="max-w-[15rem] mt-2 truncate"
+              className="mt-2 max-w-[15rem] truncate"
               variant="secondary"
               title={message.content}
               aria-label="Comment content"

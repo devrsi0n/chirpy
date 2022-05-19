@@ -95,7 +95,7 @@ export const Link = React.forwardRef(function Link(
         <a
           {...commonProps}
           className={clsx(
-            `relative transition duration-150 ease-in-out !no-underline`,
+            `relative !no-underline transition duration-150 ease-in-out`,
             size && sizeStyles[size],
             highlight && `font-bold`,
             variantStyles[variant],
@@ -109,7 +109,7 @@ export const Link = React.forwardRef(function Link(
         >
           {children}
           {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
-            <span className="hidden sm:inline-block absolute bottom-0 left-0  w-full h-0.5 -mb-1 overflow-hidden">
+            <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
               <m.span
                 className="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}

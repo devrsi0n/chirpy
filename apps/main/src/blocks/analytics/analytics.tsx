@@ -40,15 +40,15 @@ export default function Realtime(props: RealtimeProps) {
         <div id="stats-container-top"></div>
         <div
           className={clsx(
-            'top-0 sm:py-3 py-2 z-10',
+            'top-0 z-10 py-2 sm:py-3',
             navClass,
             props.stuck &&
               !props.site.embedded &&
               clsx(styles['fullwidth-shadow'], 'bg-gray-50 dark:bg-gray-850'),
           )}
         >
-          <div className="items-center w-full flex">
-            <div className="flex items-center w-full">
+          <div className="flex w-full items-center">
+            <div className="flex w-full items-center">
               <SiteHeader site={props.site} />
               <Filters className="flex" site={props.site} query={query} router={router} />
             </div>
@@ -56,17 +56,17 @@ export default function Realtime(props: RealtimeProps) {
           </div>
         </div>
         <VisitorGraph site={props.site} query={query} timer={timer} router={router} />
-        <div className="items-start justify-between block w-full md:flex">
+        <div className="block w-full items-start justify-between md:flex">
           <Sources site={props.site} query={query} timer={timer} />
           <Pages site={props.site} query={query} timer={timer} />
         </div>
-        <div className="items-start justify-between block w-full md:flex">
+        <div className="block w-full items-start justify-between md:flex">
           <Locations router={router} site={props.site} query={query} timer={timer} />
           <Devices site={props.site} query={query} />
         </div>
 
         {props.site.hasGoals && (
-          <div className="items-start justify-between block w-full mt-6 md:flex">
+          <div className="mt-6 block w-full items-start justify-between md:flex">
             <Conversions site={props.site} query={query} title="Goal Conversions (last 30 min)" />
           </div>
         )}
@@ -81,7 +81,7 @@ interface SiteHeaderProps {
 
 function SiteHeader({ site }: SiteHeaderProps): JSX.Element {
   return (
-    <section className="flex flex-row items-center space-x-1 mr-4">
+    <section className="mr-4 flex flex-row items-center space-x-1">
       <SiteIcon name={site.domain} domain={site.domain} />
       <Heading as="h3" className="!text-base font-bold">
         {site.domain}

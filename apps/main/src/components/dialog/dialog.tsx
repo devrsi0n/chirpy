@@ -53,22 +53,22 @@ export function Dialog({
           onClose={onClose}
           static
         >
-          <div className="min-h-full px-4 flex justify-center items-center">
+          <div className="flex min-h-full items-center justify-center px-4">
             <m.div {...easeInOutOpacity} className="fixed inset-0">
               <div className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)} />
             </m.div>
             <m.div {...easeInOut}>
-              <HeadlessDialog.Panel className="inline-block shadow-md relative">
+              <HeadlessDialog.Panel className="relative inline-block shadow-md">
                 <div
                   className={clsx(
-                    `max-w-lg flex flex-row px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 space-x-4`,
+                    `flex max-w-lg flex-row space-x-4 px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0`,
                     cardBg,
                     !footer ? `rounded-xl` : `rounded-t-xl`,
                     styles.content,
                   )}
                 >
                   {type === 'Alert' && (
-                    <div className="bg-red-300 h-full rounded-full">
+                    <div className="h-full rounded-full bg-red-300">
                       <div className="p-2 text-red-900">
                         <AlertTriangle size={24} />
                       </div>
@@ -77,14 +77,14 @@ export function Dialog({
                   <div className="overflow-hidden text-left align-middle">
                     {showDismissButton && (
                       <IconButton
-                        className="p-0.5 !absolute right-3 top-3 bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700"
+                        className="!absolute right-3 top-3 bg-gray-300 p-0.5 dark:bg-gray-600 dark:hover:bg-gray-700"
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >
                         <Dismiss />
                       </IconButton>
                     )}
-                    <div className="flex flex-row justify-between items-start">
+                    <div className="flex flex-row items-start justify-between">
                       <HeadlessDialog.Title
                         as="h2"
                         className="text-2xl font-bold leading-none text-gray-1200"
@@ -116,7 +116,7 @@ function DialogFooter({ className, children, ...restProps }: IDialogFooterProps)
     <div
       {...restProps}
       className={clsx(
-        'px-6 pt-4 pb-6 space-y-2 space-x-0 sm:px-8 sm:space-y-0 sm:space-x-4 sm:flex sm:flex-row sm:justify-end rounded-b-xl',
+        'space-y-2 space-x-0 rounded-b-xl px-6 pt-4 pb-6 sm:flex sm:flex-row sm:justify-end sm:space-y-0 sm:space-x-4 sm:px-8',
         cardBg,
         className,
       )}

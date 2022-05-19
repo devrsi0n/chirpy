@@ -51,7 +51,7 @@ export default function CommentDetailsWidget(
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment details">
       <CommentContextProvider projectId={props.projectId}>
-        <div className="flex flex-row justify-between items-center mb-4">
+        <div className="mb-4 flex flex-row items-center justify-between">
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
             <IconButton className="translate-x-1">
               <ArrowLeft size={20} />

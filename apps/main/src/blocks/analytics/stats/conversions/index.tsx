@@ -78,14 +78,14 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   renderGoalText(goalName: string) {
     return this.props.query.period === 'realtime' ? (
-      <span className="block px-2 py-1.5 relative z-9 md:truncate break-all dark:text-gray-200">
+      <span className="relative z-9 block break-all px-2 py-1.5 dark:text-gray-200 md:truncate">
         {goalName}
       </span>
     ) : (
       <Link
         disabled
         href={url.setQuery('goal', goalName)}
-        className="block px-2 py-1.5 hover:underline relative z-9 break-all lg:truncate dark:text-gray-200"
+        className="relative z-9 block break-all px-2 py-1.5 hover:underline dark:text-gray-200 lg:truncate"
       >
         {goalName}
       </Link>
@@ -98,7 +98,7 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
     return (
       <div className="my-2 text-sm" key={goal.name}>
-        <div className="flex items-center justify-between my-2">
+        <div className="my-2 flex items-center justify-between">
           <Bar
             count={goal.unique_conversions}
             all={goals!}
@@ -108,15 +108,15 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
             {this.renderGoalText(goal.name)}
           </Bar>
           <div className="dark:text-gray-200">
-            <span className="inline-block w-20 font-medium text-right">
+            <span className="inline-block w-20 text-right font-medium">
               {numberFormatter(goal.unique_conversions)}
             </span>
             {viewport > MOBILE_UPPER_WIDTH && (
-              <span className="inline-block w-20 font-medium text-right">
+              <span className="inline-block w-20 text-right font-medium">
                 {numberFormatter(goal.total_conversions)}
               </span>
             )}
-            <span className="inline-block w-20 font-medium text-right">
+            <span className="inline-block w-20 text-right font-medium">
               {goal.conversion_rate}%
             </span>
           </div>
@@ -158,7 +158,7 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
   render() {
     return (
       <LazyLoader
-        className="w-full p-4 bg-white rounded shadow-xl dark:bg-gray-825"
+        className="w-full rounded bg-white p-4 shadow-xl dark:bg-gray-825"
         style={{ minHeight: '132px', height: this.state.prevHeight ?? 'auto' }}
         onVisible={this.onVisible}
         ref={this.htmlNode}

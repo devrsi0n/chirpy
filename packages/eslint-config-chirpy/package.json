@@ -20,5 +20,6 @@
   },
   "devDependencies": {
     "eslint": "8.14.0"
-  }
+  },
+  "license": "Apache License 2.0"
 }

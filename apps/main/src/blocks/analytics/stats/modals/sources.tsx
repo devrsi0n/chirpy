@@ -105,7 +105,7 @@ class SourcesModal extends React.Component {
             src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
               source.name,
             )}`}
-            className="h-4 w-4 mr-2 align-middle inline"
+            className="mr-2 inline h-4 w-4 align-middle"
             alt={`Favorite icon for ${source.name}`}
           />
           <Link
@@ -117,25 +117,25 @@ class SourcesModal extends React.Component {
           </Link>
         </td>
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {numberFormatter(source.total_visitors)}
           </td>
         )}
-        <td className="p-2 w-32 font-medium" align="right">
+        <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(source.visitors)}
         </td>
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatBounceRate(source)}
           </td>
         )}
         {this.showExtra() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {this.formatDuration(source)}
           </td>
         )}
         {this.showConversionRate() && (
-          <td className="p-2 w-32 font-medium" align="right">
+          <td className="w-32 p-2 font-medium" align="right">
             {source.conversion_rate}%
           </td>
         )}
@@ -164,11 +164,11 @@ class SourcesModal extends React.Component {
       );
     } else if (this.state.moreResultsAvailable) {
       return (
-        <div className="w-full text-center my-4">
+        <div className="my-4 w-full text-center">
           <button
             onClick={this.loadMore.bind(this)}
             type="button"
-            className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring active:bg-indigo-700 transition ease-in-out duration-150"
+            className="focus:outline-none inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:ring active:bg-indigo-700"
           >
             Load more
           </button>
@@ -199,28 +199,28 @@ class SourcesModal extends React.Component {
             <thead>
               <tr>
                 <th
-                  className="p-2 w-48 md:w-56 lg:w-1/3 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                  className="w-48 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400 md:w-56 lg:w-1/3"
                   align="left"
                 >
                   Source
                 </th>
                 {this.showConversionRate() && (
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     Total visitors
                   </th>
                 )}
                 <th
-                  className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                  className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                   align="right"
                 >
                   {this.label()}
                 </th>
                 {this.showExtra() && (
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     Bounce rate
@@ -228,7 +228,7 @@ class SourcesModal extends React.Component {
                 )}
                 {this.showExtra() && (
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     Visit duration
@@ -236,7 +236,7 @@ class SourcesModal extends React.Component {
                 )}
                 {this.showConversionRate() && (
                   <th
-                    className="p-2 w-32 text-xs tracking-wide font-bold text-gray-500 dark:text-gray-400"
+                    className="w-32 p-2 text-xs font-bold tracking-wide text-gray-500 dark:text-gray-400"
                     align="right"
                   >
                     CR

@@ -118,7 +118,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
           className="hidden group-hover:block"
         >
           <svg
-            className="inline w-4 h-4 ml-1 -mt-1 text-gray-600 dark:text-gray-400"
+            className="ml-1 -mt-1 inline h-4 w-4 text-gray-600 dark:text-gray-400"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -137,16 +137,16 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     query.set('referrer', referrer.name);
 
     return (
-      <div className="flex items-center justify-between my-1 text-sm" key={referrer.name}>
+      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
           color="blue"
           maxWidthDeduction={maxWidthDeduction}
         >
-          <span className="flex px-2 py-1.5 z-9 relative break-all group">
+          <span className="group relative z-9 flex break-all px-2 py-1.5">
             <LinkOption
-              className="block md:truncate dark:text-gray-300"
+              className="block dark:text-gray-300 md:truncate"
               query={query}
               disabled={referrer.name === 'Direct / None'}
             >
@@ -155,7 +155,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
                   process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
                 }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 referrerPolicy="no-referrer"
-                className="inline w-4 h-4 mr-2 -mt-px align-middle"
+                className="mr-2 -mt-px inline h-4 w-4 align-middle"
                 alt={`Favorite icon for ${referrer.name}`}
               />
               {referrer.name}
@@ -184,7 +184,7 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
   renderList() {
     if (this.state.referrers!.length > 0) {
       return (
-        <div className="flex flex-col flex-grow">
+        <div className="flex flex-grow flex-col">
           <div className={labelContainer}>
             <span>Referrer</span>
             <div className="text-right">
@@ -221,14 +221,14 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     return (
       <div
         className={clsx(
-          'relative p-4 bg-white rounded shadow-xl flex flex-col dark:bg-gray-825 mt-6 w-full',
+          'relative mt-6 flex w-full flex-col rounded bg-white p-4 shadow-xl dark:bg-gray-825',
           styles['stats-item'],
         )}
       >
-        <LazyLoader onVisible={this.onVisible} className="flex flex-col flex-grow">
+        <LazyLoader onVisible={this.onVisible} className="flex flex-grow flex-col">
           <h3 className={cardTitle}>Top Referrers</h3>
           {this.state.loading && (
-            <div className={clsx('mt-44 mx-auto', styles.loading)}>
+            <div className={clsx('mx-auto mt-44', styles.loading)}>
               <div></div>
             </div>
           )}

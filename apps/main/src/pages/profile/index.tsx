@@ -83,7 +83,7 @@ export default function Profile(): JSX.Element {
   if (!isSignIn && loading) {
     return (
       <ProfileContainer>
-        <Spinner className="justify-center mt-20" />
+        <Spinner className="mt-20 justify-center" />
       </ProfileContainer>
     );
   }
@@ -93,7 +93,7 @@ export default function Profile(): JSX.Element {
       <ProfileContainer className="space-y-7">
         <PageTitle>Profile</PageTitle>
         <section className="space-y-6">
-          <div className="relative mt-1 w-full h-40 rounded-t flex justify-center items-end bg-gradient-to-r from-primary-900 to-plum-900">
+          <div className="relative mt-1 flex h-40 w-full items-end justify-center rounded-t bg-gradient-to-r from-primary-900 to-plum-900">
             {avatar && (
               <Avatar
                 src={avatar}
@@ -103,7 +103,7 @@ export default function Profile(): JSX.Element {
               />
             )}
           </div>
-          <div className="pt-4 flex flex-row justify-between items-start">
+          <div className="flex flex-row items-start justify-between pt-4">
             <div>
               {isEditMode ? (
                 <TextField
@@ -151,7 +151,7 @@ export default function Profile(): JSX.Element {
             <TextField {...register('website')} label="Website" prefixNode="https://" />
           ) : (
             website && (
-              <Link variant="solid" href={website} className="space-x-2 flex flex-row w-fit">
+              <Link variant="solid" href={website} className="flex w-fit flex-row space-x-2">
                 <Link2 />
                 <span>{website}</span>
               </Link>
@@ -164,7 +164,7 @@ export default function Profile(): JSX.Element {
               <Link
                 variant="solid"
                 href={`https://twitter.com/${twitterUserName}`}
-                className="space-x-2 flex flex-row items-center w-fit"
+                className="flex w-fit flex-row items-center space-x-2"
               >
                 <Twitter size={22} />
                 <span>@{twitterUserName}</span>

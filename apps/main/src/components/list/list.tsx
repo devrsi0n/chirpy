@@ -19,7 +19,7 @@ const variantTags: Record<Variant, 'ul' | 'ol'> = {
 
 export function List({ className, variant = 'unordered', ...restProps }: IListProps): JSX.Element {
   const Tag = variantTags[variant];
-  return <Tag {...restProps} className={clsx(`py-2 list-none flex flex-col`, className)} />;
+  return <Tag {...restProps} className={clsx(`flex list-none flex-col py-2`, className)} />;
 }
 
 List.Item = ListItem;
@@ -43,10 +43,10 @@ function ListItem({
   return (
     <li
       {...liProps}
-      className={clsx('text-gray-1100 flex flex-row items-center space-x-2', className)}
+      className={clsx('flex flex-row items-center space-x-2 text-gray-1100', className)}
     >
       {!hideMarker && (
-        <span className={clsx(`rounded-full w-2 h-2 bg-current`, styles.marker)}></span>
+        <span className={clsx(`h-2 w-2 rounded-full bg-current`, styles.marker)}></span>
       )}
 
       <ChildrenContainer>{children}</ChildrenContainer>

@@ -11,10 +11,10 @@ import { Text } from '$/components/text';
 function Home(): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="">
-      <section className="min-h-full flex flex-col items-center space-y-24">
+      <section className="flex min-h-full flex-col items-center space-y-24">
         <div className="space-y-8">
-          <h1 className="font-black sm:text-center text-gray-1200 mt-1 w-full max-w-2xl text-4xl leading-snug">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-900 to-plum-900 inline-block">
+          <h1 className="mt-1 w-full max-w-2xl text-4xl font-black leading-snug text-gray-1200 sm:text-center">
+            <span className="inline-block bg-gradient-to-r from-primary-900 to-plum-900 bg-clip-text text-transparent">
               {strings.heroTitlePoint}
             </span>{' '}
             <span>{strings.heroTitle}</span>
@@ -22,7 +22,7 @@ function Home(): JSX.Element {
           <Text className="sm:text-center" variant="secondary">
             {strings.heroDescription}
           </Text>
-          <div className="flex sm:justify-center items-center space-x-6">
+          <div className="flex items-center space-x-6 sm:justify-center">
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
               <Button variant="solid" color="primary" className="group space-x-1 hover:shadow-2xl">
                 <span>{strings.callToAction.main}</span>

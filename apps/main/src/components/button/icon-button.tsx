@@ -19,7 +19,7 @@ export const IconButton = React.forwardRef(function IconButton(
       {...restProps}
       className={clsx(
         ring,
-        `hover:bg-gray-400 hover:ring-4 hover:ring-gray-400 rounded-full text-gray-900`,
+        `rounded-full text-gray-900 hover:bg-gray-400 hover:ring-4 hover:ring-gray-400`,
         className,
       )}
     >
