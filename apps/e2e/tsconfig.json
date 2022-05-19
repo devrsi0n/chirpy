@@ -1,9 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@chirpy/tsconfigs/base.json",
   "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
     "types": ["cypress", "@testing-library/cypress", "node"]
   },
   "include": ["./cypress/**/*.ts"]
