@@ -8,7 +8,10 @@ importers:
       eslint: 8.15.0
       eslint-config-chirpy: workspace:*
       lint-staged: 12.4.1
+      next: 12.1.5
       prettier: 2.6.2
+      react: 18.1.0
+      react-dom: 18.1.0
       simple-git-hooks: 2.7.0
       turbo: 1.2.9
     devDependencies:
@@ -16,7 +19,10 @@ importers:
       eslint: 8.15.0
       eslint-config-chirpy: link:packages/eslint-config-chirpy
       lint-staged: 12.4.1
+      next: 12.1.5_ef5jwxihqo6n7gxfmzogljlgcm
       prettier: 2.6.2
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
       simple-git-hooks: 2.7.0
       turbo: 1.2.9
 
@@ -15964,7 +15970,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
-    dev: false
 
   /next/12.1.5_f4f3p4qosjzyjuuwwqkhysggrq:
     resolution: {integrity: sha512-YGHDpyfgCfnT5GZObsKepmRnne7Kzp7nGrac07dikhutWQug7hHg85/+sPJ4ZW5Q2pDkb+n0FnmLkmd44htIJQ==}
@@ -20194,7 +20199,6 @@ packages:
         optional: true
     dependencies:
       react: 18.1.0
-    dev: false
 
   /styled-jsx/5.0.1_vm2wkhzl5f5eyl7hfuywll6uzq:
     resolution: {integrity: sha512-+PIZ/6Uk40mphiQJJI1202b+/dYeTVd9ZnMPR80pgiWbjIwvN2zIp4r9et0BgqBuShh48I0gttPlAXA7WVvBxw==}
