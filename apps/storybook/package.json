@@ -26,7 +26,7 @@
     "next": "12.1.5",
     "postcss": "8.4.13",
     "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-preset-env": "7.4.4",
+    "postcss-preset-env": "7.6.0",
     "postcss-loader": "6.2.1",
     "sass": "1.51.0",
     "sass-loader": "12.6.0",
