@@ -15,102 +15,102 @@ configuration:
     update: updateUsers
     update_by_pk: updateUserByPk
 object_relationships:
-- name: userType
-  using:
-    foreign_key_constraint_on: type
+  - name: userType
+    using:
+      foreign_key_constraint_on: type
 array_relationships:
-- name: accounts
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Account
-        schema: public
-- name: comments
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Comment
-        schema: public
-- name: likes
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Like
-        schema: public
-- name: members
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Member
-        schema: public
-- name: notificationSubscriptions
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: NotificationSubscription
-        schema: public
-- name: projects
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Project
-        schema: public
-- name: recipientNotificationMessages
-  using:
-    foreign_key_constraint_on:
-      column: recipientId
-      table:
-        name: NotificationMessage
-        schema: public
-- name: sessions
-  using:
-    foreign_key_constraint_on:
-      column: userId
-      table:
-        name: Session
-        schema: public
-- name: triggeredNotificationMessages
-  using:
-    foreign_key_constraint_on:
-      column: triggeredById
-      table:
-        name: NotificationMessage
-        schema: public
+  - name: accounts
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Account
+          schema: public
+  - name: comments
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Comment
+          schema: public
+  - name: likes
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Like
+          schema: public
+  - name: members
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Member
+          schema: public
+  - name: notificationSubscriptions
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: NotificationSubscription
+          schema: public
+  - name: projects
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Project
+          schema: public
+  - name: recipientNotificationMessages
+    using:
+      foreign_key_constraint_on:
+        column: recipientId
+        table:
+          name: NotificationMessage
+          schema: public
+  - name: sessions
+    using:
+      foreign_key_constraint_on:
+        column: userId
+        table:
+          name: Session
+          schema: public
+  - name: triggeredNotificationMessages
+    using:
+      foreign_key_constraint_on:
+        column: triggeredById
+        table:
+          name: NotificationMessage
+          schema: public
 select_permissions:
-- permission:
-    columns:
-    - bio
-    - email
-    - image
-    - name
-    - twitterUserName
-    - type
-    - username
-    - website
-    - emailVerified
-    - createdAt
-    - updatedAt
-    - id
-    filter: {}
-  role: user
+  - permission:
+      columns:
+        - bio
+        - email
+        - image
+        - name
+        - twitterUserName
+        - type
+        - username
+        - website
+        - emailVerified
+        - createdAt
+        - updatedAt
+        - id
+      filter: {}
+    role: user
 update_permissions:
-- permission:
-    check: null
-    columns:
-    - bio
-    - email
-    - image
-    - name
-    - twitterUserName
-    - username
-    - website
-    filter:
-      id:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      check: null
+      columns:
+        - bio
+        - email
+        - image
+        - name
+        - twitterUserName
+        - username
+        - website
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: user

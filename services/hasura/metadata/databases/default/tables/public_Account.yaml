@@ -14,27 +14,27 @@ configuration:
     update: updateAccounts
     update_by_pk: updateAccountByPk
 object_relationships:
-- name: user
-  using:
-    foreign_key_constraint_on: userId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 select_permissions:
-- permission:
-    columns:
-    - accessToken
-    - expiresAt
-    - id
-    - idToken
-    - oauthTokenSecret
-    - oauthToken
-    - provider
-    - providerAccountId
-    - refreshToken
-    - scope
-    - sessionState
-    - tokenType
-    - type
-    - userId
-    filter:
-      userId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      columns:
+        - accessToken
+        - expiresAt
+        - id
+        - idToken
+        - oauthTokenSecret
+        - oauthToken
+        - provider
+        - providerAccountId
+        - refreshToken
+        - scope
+        - sessionState
+        - tokenType
+        - type
+        - userId
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+    role: user

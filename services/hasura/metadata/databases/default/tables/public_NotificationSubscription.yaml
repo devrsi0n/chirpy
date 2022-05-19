@@ -14,6 +14,6 @@ configuration:
     update: updateNotificationSubscriptions
     update_by_pk: updateNotificationSubscriptionByPk
 object_relationships:
-- name: user
-  using:
-    foreign_key_constraint_on: userId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId

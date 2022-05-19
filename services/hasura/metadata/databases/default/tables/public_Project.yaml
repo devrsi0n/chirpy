@@ -14,61 +14,61 @@ configuration:
     update: updateProjects
     update_by_pk: updateProjectByPk
 object_relationships:
-- name: team
-  using:
-    foreign_key_constraint_on: teamId
-- name: user
-  using:
-    foreign_key_constraint_on: userId
+  - name: team
+    using:
+      foreign_key_constraint_on: teamId
+  - name: user
+    using:
+      foreign_key_constraint_on: userId
 array_relationships:
-- name: pages
-  using:
-    foreign_key_constraint_on:
-      column: projectId
-      table:
-        name: Page
-        schema: public
+  - name: pages
+    using:
+      foreign_key_constraint_on:
+        column: projectId
+        table:
+          name: Page
+          schema: public
 insert_permissions:
-- permission:
-    backend_only: false
-    check:
-      userId:
-        _eq: X-Hasura-User-Id
-    columns:
-    - domain
-    - name
-    - teamId
-    - theme
-    set:
-      userId: x-hasura-User-Id
-  role: user
+  - permission:
+      backend_only: false
+      check:
+        userId:
+          _eq: X-Hasura-User-Id
+      columns:
+        - domain
+        - name
+        - teamId
+        - theme
+      set:
+        userId: x-hasura-User-Id
+    role: user
 select_permissions:
-- permission:
-    columns:
-    - id
-    - createdAt
-    - updatedAt
-    - name
-    - teamId
-    - theme
-    - domain
-    - userId
-    filter:
-      userId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      columns:
+        - id
+        - createdAt
+        - updatedAt
+        - name
+        - teamId
+        - theme
+        - domain
+        - userId
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+    role: user
 update_permissions:
-- permission:
-    check: null
-    columns:
-    - theme
-    filter:
-      userId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      check: null
+      columns:
+        - theme
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+    role: user
 delete_permissions:
-- permission:
-    filter:
-      userId:
-        _eq: X-Hasura-User-Id
-  role: user
+  - permission:
+      filter:
+        userId:
+          _eq: X-Hasura-User-Id
+    role: user
