@@ -44,6 +44,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: './apps/main'
+          skip: '@(renovate/**|dependabot/**)'
 
       - name: Publish to Chromatic and auto accept changes
         if: github.ref == 'refs/heads/main'
