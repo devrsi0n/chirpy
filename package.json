@@ -5,7 +5,7 @@
     "lint": "eslint ./",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "turbo run build --filter=docs^... && changeset publish"
+    "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish"
   },
   "engines": {
     "node": "16.x"
