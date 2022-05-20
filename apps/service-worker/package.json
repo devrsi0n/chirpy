@@ -1,6 +1,6 @@
 {
-  "name": "@chirpy/service-worker",
-  "version": "0.0.0",
+  "name": "@chirpy-dev/service-worker",
+  "private": true,
   "main": "./src/index.ts",
   "scripts": {
     "build": "vite build",
@@ -8,7 +8,7 @@
   },
   "license": "Apache License 2.0",
   "devDependencies": {
-    "@chirpy/tsconfigs": "workspace:*",
+    "@chirpy-dev/tsconfigs": "workspace:*",
     "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",

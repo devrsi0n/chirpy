@@ -14,7 +14,7 @@
     "dev": {
       "cache": false
     },
-    "@chirpy/main-app#build": {
+    "@chirpy-dev/main-app#build": {
       "dependsOn": [
         "^build",
         "$NEXT_PUBLIC_APP_URL",
@@ -27,10 +27,10 @@
       ],
       "outputs": [".next/**"]
     },
-    "@chirpy/service-worker#build": {
+    "@chirpy-dev/service-worker#build": {
       "cache": false
     },
-    "@chirpy/bootstrappers#build": {
+    "@chirpy-dev/bootstrappers#build": {
       "cache": false
     },
     "build:local": {

@@ -1,5 +1,5 @@
 {
-  "name": "@chirpy/main-app",
+  "name": "@chirpy-dev/main-app",
   "version": "0.0.1",
   "license": "Apache License 2.0",
   "scripts": {
@@ -85,10 +85,10 @@
   },
   "devDependencies": {
     "@babel/core": "7.17.12",
-    "@chirpy/bootstrappers": "workspace:*",
-    "@chirpy/emails": "workspace:*",
-    "@chirpy/service-worker": "workspace:*",
-    "@chirpy/tsconfigs": "workspace:*",
+    "@chirpy-dev/bootstrappers": "workspace:*",
+    "@chirpy-dev/emails": "workspace:*",
+    "@chirpy-dev/service-worker": "workspace:*",
+    "@chirpy-dev/tsconfigs": "workspace:*",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/introspection": "2.1.1",
     "@graphql-codegen/near-operation-file-preset": "2.2.12",
@@ -163,5 +163,8 @@
   },
   "engines": {
     "node": "16.x"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
