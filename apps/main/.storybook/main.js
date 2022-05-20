@@ -4,14 +4,17 @@ const path = require('path');
 module.exports = {
   framework: '@storybook/react',
   core: {
-    builder: 'webpack5',
+    builder: {
+      name: 'webpack5',
+      lazyCompilation: true,
+    },
   },
-  stories: ['../../main/src/**/*.stories.mdx', '../../main/src/**/*.stories.@(ts|tsx)'],
+  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|tsx)'],
   webpackFinal: (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
     config.resolve.plugins.push(
       new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, '../../main/tsconfig.json'),
+        configFile: path.resolve(__dirname, '../tsconfig.json'),
       }),
     );
     config.module.rules.push({
@@ -27,7 +30,7 @@ module.exports = {
     {
       name: 'storybook-addon-next',
       options: {
-        nextConfigPath: path.resolve(__dirname, '../../main/next.config.js'),
+        nextConfigPath: path.resolve(__dirname, '../next.config.js'),
       },
     },
     '@storybook/addon-interactions',

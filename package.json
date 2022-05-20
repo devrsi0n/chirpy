@@ -66,12 +66,6 @@
         ]
       },
       {
-        "matchDepTypes": [
-          "devDependencies"
-        ],
-        "prPriority": 1
-      },
-      {
         "matchPackagePatterns": [
           "^react",
           "^next"
@@ -79,9 +73,22 @@
         "prPriority": 5
       },
       {
+        "matchDepTypes": [
+          "dependencies"
+        ],
+        "prPriority": 2
+      },
+      {
+        "matchDepTypes": [
+          "devDependencies"
+        ],
+        "prPriority": 1
+      },
+      {
         "matchPackagePatterns": [
           "github-releases",
-          "github-tags"
+          "github-tags",
+          "^@types/"
         ],
         "prPriority": -1
       }
