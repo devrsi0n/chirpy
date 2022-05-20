@@ -2,6 +2,14 @@ const { build } = require('vite');
 const path = require('path');
 const { getDefine } = require('./get-define');
 
+/**
+ * @type {import('vite').InlineConfig}
+ */
+const commonConfig = {
+  configFile: false,
+  define: getDefine(),
+};
+
 const commonBuildConfig = {
   ...(process.env.VITE_DEBUG && {
     minify: false,
@@ -10,7 +18,7 @@ const commonBuildConfig = {
 };
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('vite').InlineConfig}
  */
 const publicConfig = {
   build: {
@@ -23,11 +31,11 @@ const publicConfig = {
     outDir: path.resolve(__dirname, '../../main/public/bootstrap'),
     ...commonBuildConfig,
   },
-  define: getDefine(),
+  ...commonConfig,
 };
 
 /**
- * @type {import('vite').UserConfig}
+ * @type {import('vite').InlineConfig}
  */
 const libConfig = {
   build: {
@@ -35,12 +43,12 @@ const libConfig = {
       entry: path.resolve(__dirname, '../src/lib/index.ts'),
       name: 'comment',
       fileName: () => 'index.js',
-      formats: ['commonjs'],
+      formats: ['cjs'],
     },
     outDir: path.resolve(__dirname, '../dist'),
     ...commonBuildConfig,
   },
-  define: getDefine(),
+  ...commonConfig,
 };
 
 (async function buildComment() {

@@ -1,7 +1,7 @@
 import { EVENT_CLICK_CONTAINER } from '../../../main/src/lib/constants';
 import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
-import { ResponseError } from '../../../main/src/server/types/error';
-import { GetPagByUrl } from '../../../main/src/server/types/page';
+import type { ResponseError } from '../../../main/src/server/types/error';
+import type { GetPagByUrl } from '../../../main/src/server/types/page';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.
@@ -13,7 +13,7 @@ const targetQuery = `[data-chirpy-comment="true"]`;
 // User init a page by import a script
 // <script defer src="/widget/comment.js" data-chirpy-domain="yourdomain.com"><script>
 // Render target: <div data-chirpy-comment="true"></div>
-export async function comment(): Promise<void> {
+export async function initCommentWidget(): Promise<void> {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = window.document.querySelector(scriptQuery);

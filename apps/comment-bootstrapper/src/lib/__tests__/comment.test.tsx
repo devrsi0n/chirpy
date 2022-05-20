@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { comment } from '../comment-bootstrapper';
+import { initCommentWidget } from '../comment-bootstrapper';
 
 describe('comment', () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('comment', () => {
   });
 
   it('should render a iframe', async () => {
-    await comment();
+    await initCommentWidget();
     const iframe = document.querySelector('iframe');
     expect(iframe).toBeTruthy();
   });

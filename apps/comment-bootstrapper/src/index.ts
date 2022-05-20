@@ -1,9 +1,9 @@
-import { comment } from './lib/comment-bootstrapper';
+import { initCommentWidget } from './lib/comment-bootstrapper';
 
 const win = window as any;
 if (win && !win.$chirpyDisableAutoInjection) {
-  comment();
+  initCommentWidget();
   win.$chirpy = {
-    comment,
+    initCommentWidget,
   };
 }
