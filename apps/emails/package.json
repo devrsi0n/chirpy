@@ -1,5 +1,6 @@
 {
-  "name": "@chirpy/emails",
+  "name": "@chirpy-dev/emails",
+  "private": true,
   "main": "./config.js",
   "scripts": {
     "build:local": "maizzle build",

@@ -2,13 +2,17 @@
   "name": "chirpy",
   "private": true,
   "scripts": {
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish"
   },
   "engines": {
     "node": "16.x"
   },
   "devDependencies": {
-    "@chirpy/prettier-config": "workspace:*",
+    "@chirpy-dev/prettier-config": "workspace:*",
+    "@changesets/cli": "2.22.0",
     "eslint": "8.15.0",
     "eslint-config-chirpy": "workspace:*",
     "simple-git-hooks": "2.7.0",
@@ -22,7 +26,7 @@
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
   },
-  "prettier": "@chirpy/prettier-config",
+  "prettier": "@chirpy-dev/prettier-config",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [

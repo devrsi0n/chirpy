@@ -1,5 +1,5 @@
 {
-  "name": "@chirpy/prettier-config",
+  "name": "@chirpy-dev/prettier-config",
   "version": "0.0.1",
   "main": "./index.js",
   "dependencies": {

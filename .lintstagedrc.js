@@ -4,7 +4,7 @@ module.exports = {
   '*.graphql': ['prettier --write', 'cd apps/main && pnpm run g:gql'],
   '*.{ts,tsx}': (filenames) => {
     const prettierSortImportsConfigPath = require.resolve(
-      '@chirpy/prettier-config/sort-imports.config',
+      '@chirpy-dev/prettier-config/sort-imports.config',
     );
     return [
       // We run @trivago/prettier-plugin-sort-imports before prettier-plugin-tailwindcss (included in eslint)
