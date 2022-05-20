@@ -1,5 +1,6 @@
 node_modules
 coverage
+dist
 *.log
 .DS_Store
 .next
