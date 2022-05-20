@@ -156,7 +156,7 @@ importers:
       csstype: 3.0.11
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.1
+      dayjs: 1.11.2
       debounce-promise: 3.1.2
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
@@ -236,7 +236,7 @@ importers:
       csstype: 3.0.11
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.1
+      dayjs: 1.11.2
       debounce-promise: 3.1.2
       downshift: 6.1.7_react@18.1.0
       eta: 1.12.3
@@ -10373,13 +10373,8 @@ packages:
   /date-fns/1.30.1:
     resolution: {integrity: sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==}
 
-  /dayjs/1.11.1:
-    resolution: {integrity: sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA==}
-    dev: false
-
   /dayjs/1.11.2:
     resolution: {integrity: sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==}
-    dev: true
 
   /debounce-promise/3.1.2:
     resolution: {integrity: sha512-rZHcgBkbYavBeD9ej6sP56XfG53d51CD4dnaw989YX/nZ/ZJfgRx/9ePKmTNiUiyQvh4mtrMoS3OAWW+yoYtpg==}
