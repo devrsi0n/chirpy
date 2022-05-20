@@ -35,6 +35,11 @@ export async function getPage(
     .toPromise();
   const projectId = projectResult.data?.projects[0]?.id;
   if (!projectId) {
+    console.log({
+      domain,
+      url,
+      projectId,
+    });
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,

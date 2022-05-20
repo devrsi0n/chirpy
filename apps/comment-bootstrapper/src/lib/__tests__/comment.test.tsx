@@ -20,6 +20,6 @@ describe('comment', () => {
   it('should render a iframe', async () => {
     await comment();
     const iframe = document.querySelector('iframe');
-    expect(iframe).toBeInTheDocument();
+    expect(iframe).toBeTruthy();
   });
 });
