@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/emails",
-  "private": true,
+  "version": "0.0.1",
   "main": "./config.js",
   "scripts": {
     "build:local": "maizzle build",
@@ -15,5 +15,8 @@
     "postcss": "8.4.13",
     "tailwindcss": "2.2.19"
   },
-  "license": "Apache License 2.0"
+  "license": "Apache License 2.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }

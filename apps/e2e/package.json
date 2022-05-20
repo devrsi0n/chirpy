@@ -1,7 +1,6 @@
 {
   "name": "@chirpy-dev/e2e",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "cy:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
     "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run"
@@ -18,5 +17,8 @@
     "eslint": "8.14.0",
     "eslint-config-chirpy": "workspace:*",
     "typescript": "4.6.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
