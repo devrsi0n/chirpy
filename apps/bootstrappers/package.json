@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/bootstrappers",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "./src/index.ts",
   "scripts": {
     "dev": "VITE_DEBUG=true vite",
