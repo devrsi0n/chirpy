@@ -9,7 +9,7 @@
   "license": "Apache License 2.0",
   "devDependencies": {
     "@chirpy/tsconfigs": "workspace:*",
-    "dotenv": "16.0.0",
+    "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.14.0",
