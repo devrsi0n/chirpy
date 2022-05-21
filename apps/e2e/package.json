@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/e2e",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "cy:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
     "cy:run": "CYPRESS_BASE_URL=http://localhost:3000 cypress run"
