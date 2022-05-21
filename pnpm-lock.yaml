@@ -93,14 +93,14 @@ importers:
       '@maizzle/cli': 1.4.0
       '@maizzle/framework': 3.7.3
       autoprefixer: 10.4.7
-      glob: 8.0.1
+      glob: 8.0.3
       postcss: 8.4.14
       tailwindcss: 2.2.19
     dependencies:
       '@maizzle/cli': 1.4.0
-      '@maizzle/framework': 3.7.3_ih3wlsjbplzkkcgykbfcnqbotm
+      '@maizzle/framework': 3.7.3_ytpcj3pormqwlcqyb7cll7uaxy
       autoprefixer: 10.4.7_postcss@8.4.14
-      glob: 8.0.1
+      glob: 8.0.3
       postcss: 8.4.14
       tailwindcss: 2.2.19_ugi4xkrfysqkt4c4y6hkyfj344
 
@@ -3843,7 +3843,7 @@ packages:
       - zenObservable
     dev: false
 
-  /@maizzle/framework/3.7.3_ih3wlsjbplzkkcgykbfcnqbotm:
+  /@maizzle/framework/3.7.3_ytpcj3pormqwlcqyb7cll7uaxy:
     resolution: {integrity: sha512-ceh5mnQQGcJjjtxOWiJW5NfjZn3b+3NJ3fjoraMMn1x5boWCI6cLX5Y1XIye2Y8AeA8rjygyiFPqBN+6Mju6dA==}
     engines: {node: '>=12.13.0'}
     dependencies:
@@ -3852,7 +3852,7 @@ packages:
       email-comb: 5.2.1
       front-matter: 4.0.2
       fs-extra: 10.1.0
-      glob-promise: 4.2.2_glob@8.0.1
+      glob-promise: 4.2.2_glob@8.0.3
       html-crush: 4.2.0
       juice: 8.0.0
       lodash: 4.17.21
@@ -12681,14 +12681,14 @@ packages:
       glob: 7.2.0
     dev: true
 
-  /glob-promise/4.2.2_glob@8.0.1:
+  /glob-promise/4.2.2_glob@8.0.3:
     resolution: {integrity: sha512-xcUzJ8NWN5bktoTIX7eOclO1Npxd/dyVqUJxlLIDasT4C7KZyqlPIwkdJ0Ypiy3p2ZKahTjK4M9uC3sNSfNMzw==}
     engines: {node: '>=12'}
     peerDependencies:
       glob: ^7.1.6 || 8
     dependencies:
       '@types/glob': 7.2.0
-      glob: 8.0.1
+      glob: 8.0.3
     dev: false
 
   /glob-to-regexp/0.3.0:
@@ -12720,8 +12720,8 @@ packages:
       once: 1.4.0
       path-is-absolute: 1.0.1
 
-  /glob/8.0.1:
-    resolution: {integrity: sha512-cF7FYZZ47YzmCu7dDy50xSRRfO3ErRfrXuLZcNIuyiJEco0XSrGtuilG19L5xp3NcwTx7Gn+X6Tv3fmsUPTbow==}
+  /glob/8.0.3:
+    resolution: {integrity: sha512-ull455NHSHI/Y1FqGaaYFaLGkNMMJbavMrEGFXG/PGrg6y7sutWHUHrz6gy6WEBH6akM1M414dWKCNs+IhKdiQ==}
     engines: {node: '>=12'}
     dependencies:
       fs.realpath: 1.0.0
@@ -12729,7 +12729,6 @@ packages:
       inherits: 2.0.4
       minimatch: 5.0.1
       once: 1.4.0
-      path-is-absolute: 1.0.1
     dev: false
 
   /global-dirs/2.1.0:
@@ -18244,15 +18243,6 @@ packages:
     dependencies:
       picocolors: 0.2.1
       source-map: 0.6.1
-
-  /postcss/8.4.13:
-    resolution: {integrity: sha512-jtL6eTBrza5MPzy8oJLFuUscHDXTV5KcLlqAWHl5q5WYRfnNRGSmOZmOZ1T6Gy7A99mOZfqungmZMpMmCVJ8ZA==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.4
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: true
 
   /postcss/8.4.14:
     resolution: {integrity: sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==}
