@@ -13,6 +13,7 @@
   "devDependencies": {
     "@chirpy-dev/prettier-config": "workspace:*",
     "@changesets/cli": "2.22.0",
+    "@changesets/changelog-github": "0.4.4",
     "eslint": "8.15.0",
     "@chirpy-dev/eslint-config": "workspace:*",
     "simple-git-hooks": "2.7.0",
@@ -30,16 +31,12 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "@babel/core",
-        "webpack",
         "@testing-library/dom",
         "@urql/core",
         "@storybook/addons",
         "@storybook/client-api",
         "@storybook/preview-web",
-        "@geist-ui/react",
-        "typescript",
-        "graphql"
+        "@geist-ui/react"
       ],
       "allowedVersions": {
         "react": "18",
