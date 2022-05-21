@@ -403,7 +403,7 @@ importers:
       eslint: 8.14.0
       eslint-config-next: 12.1.5
       eslint-config-prettier: 8.5.0
-      eslint-plugin-jest: 26.1.5
+      eslint-plugin-jest: 26.2.2
       eslint-plugin-prettier: 4.0.0
       eslint-plugin-storybook: 0.5.11
       eslint-plugin-unicorn: 42.0.0
@@ -418,7 +418,7 @@ importers:
       '@typescript-eslint/parser': 5.22.0_t725usgvqspm5woeqpaxbfp2qu
       eslint-config-next: 12.1.5_ldpv3uesskyaguxpaa56hbtpeu
       eslint-config-prettier: 8.5.0_eslint@8.14.0
-      eslint-plugin-jest: 26.1.5_rlpazuwa65tlndzjygmyw3fv34
+      eslint-plugin-jest: 26.2.2_rlpazuwa65tlndzjygmyw3fv34
       eslint-plugin-prettier: 4.0.0_mzpligoj26dazigcet37nxg2zy
       eslint-plugin-storybook: 0.5.11_t725usgvqspm5woeqpaxbfp2qu
       eslint-plugin-unicorn: 42.0.0_eslint@8.14.0
@@ -11357,8 +11357,8 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-plugin-jest/26.1.5_rlpazuwa65tlndzjygmyw3fv34:
-    resolution: {integrity: sha512-su89aDuljL9bTjEufTXmKUMSFe2kZUL9bi7+woq+C2ukHZordhtfPm4Vg+tdioHBaKf8v3/FXW9uV0ksqhYGFw==}
+  /eslint-plugin-jest/26.2.2_rlpazuwa65tlndzjygmyw3fv34:
+    resolution: {integrity: sha512-etSFZ8VIFX470aA6kTqDPhIq7YWe0tjBcboFNV3WeiC18PJ/AVonGhuTwlmuz2fBkH8FJHA7JQ4k7GsQIj1Gew==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.0.0
@@ -18244,15 +18244,6 @@ packages:
     dependencies:
       picocolors: 0.2.1
       source-map: 0.6.1
-
-  /postcss/8.4.13:
-    resolution: {integrity: sha512-jtL6eTBrza5MPzy8oJLFuUscHDXTV5KcLlqAWHl5q5WYRfnNRGSmOZmOZ1T6Gy7A99mOZfqungmZMpMmCVJ8ZA==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.3.4
-      picocolors: 1.0.0
-      source-map-js: 1.0.2
-    dev: true
 
   /postcss/8.4.14:
     resolution: {integrity: sha512-E398TUmfAYFPBSdzgeieK2Y1+1cpdxJx8yXbK/m57nRhKSmk1GB2tO4lbLBtlkfPQTDKfe4Xqv1ASWPpayPEig==}
