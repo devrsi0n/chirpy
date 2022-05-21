@@ -199,7 +199,7 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       mdx-prism: 0.3.4
-      msw: 0.39.2
+      msw: 0.40.2
       next: 12.1.5
       next-auth: 4.3.4
       next-compose-plugins: 2.2.1
@@ -359,7 +359,7 @@ importers:
       intersection-observer: 0.12.0
       jest: 28.1.0_@types+node@16.11.36
       jest-environment-jsdom: 28.1.0
-      msw: 0.39.2
+      msw: 0.40.2_typescript@4.6.4
       postcss: 8.4.14
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.14
       postcss-loader: 6.2.1_xvg4ntyrrwt57qzvggqcbeozu4
@@ -16503,11 +16503,16 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw/0.39.2:
-    resolution: {integrity: sha512-ju/HpqQpE4/qCxZ23t5Gaau0KREn4QuFzdG28nP1EpidMrymMJuIvNd32+2uGTGG031PMwrC41YW7vCxHOwyHA==}
+  /msw/0.40.2_typescript@4.6.4:
+    resolution: {integrity: sha512-8MymevYPIniUhk3W/xxWmhaMAeZHD9uhI37fik31i4JSToDhPWFg9hO6v/8IfTEPCD2Y1r4npDUxHmNbIeaOsg==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
+    peerDependencies:
+      typescript: '>= 4.2.x <= 4.6.x'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
     dependencies:
       '@mswjs/cookies': 0.2.1
       '@mswjs/interceptors': 0.15.1
@@ -16527,6 +16532,7 @@ packages:
       statuses: 2.0.1
       strict-event-emitter: 0.2.4
       type-fest: 1.4.0
+      typescript: 4.6.4
       yargs: 17.4.1
     transitivePeerDependencies:
       - encoding
