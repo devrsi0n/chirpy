@@ -39,17 +39,10 @@ jobs:
         run: pnpm install
 
       - name: Publish to Chromatic
-        if: github.ref != 'refs/heads/main'
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: './apps/main'
-          skip: '@(renovate/**|dependabot/**)'
-
-      - name: Publish to Chromatic and auto accept changes
-        if: github.ref == 'refs/heads/main'
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: './apps/main'
-          autoAcceptChanges: true # 👈 Option to accept all changes
+          exitZeroOnChanges: true
+          autoAcceptChanges: "main"
+          skip: 'renovate/**'

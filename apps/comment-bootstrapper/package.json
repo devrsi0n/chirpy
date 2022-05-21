@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/comment-bootstrapper",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "main": "./dist/index.js",
   "scripts": {
     "dev": " vite",
