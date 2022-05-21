@@ -173,7 +173,7 @@ importers:
       color-convert: 2.0.1
       cors: 2.8.5
       css-loader: 6.7.1
-      csstype: 3.0.11
+      csstype: 3.1.0
       d3: 3.5.17
       datamaps: 0.5.9
       dayjs: 1.11.2
@@ -260,7 +260,7 @@ importers:
       chart.js: 3.7.1
       clsx: 1.1.1
       cors: 2.8.5
-      csstype: 3.0.11
+      csstype: 3.1.0
       d3: 3.5.17
       datamaps: 0.5.9
       dayjs: 1.11.2
@@ -9972,6 +9972,11 @@ packages:
 
   /csstype/3.0.11:
     resolution: {integrity: sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==}
+    dev: true
+
+  /csstype/3.1.0:
+    resolution: {integrity: sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==}
+    dev: false
 
   /csv-generate/3.4.3:
     resolution: {integrity: sha512-w/T+rqR0vwvHqWs/1ZyMDWtHHSJaN06klRqJXBEpDJaM/+dZkso0OKh1VcuuYvK3XM53KysVNq8Ko/epCK8wOw==}
