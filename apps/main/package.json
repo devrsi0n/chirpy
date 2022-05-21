@@ -135,7 +135,7 @@
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.14.0",
-    "eslint-config-chirpy": "workspace:*",
+    "@chirpy-dev/eslint-config": "workspace:*",
     "fake-indexeddb": "3.1.7",
     "framer-motion": "6.3.3",
     "intersection-observer": "0.12.0",

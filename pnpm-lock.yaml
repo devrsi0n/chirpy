@@ -5,9 +5,9 @@ importers:
   .:
     specifiers:
       '@changesets/cli': 2.22.0
+      '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/prettier-config': workspace:*
       eslint: 8.15.0
-      eslint-config-chirpy: workspace:*
       lint-staged: 12.4.1
       next: 12.1.5
       prettier: 2.6.2
@@ -17,9 +17,9 @@ importers:
       turbo: 1.2.9
     devDependencies:
       '@changesets/cli': 2.22.0
+      '@chirpy-dev/eslint-config': link:packages/eslint-config-chirpy
       '@chirpy-dev/prettier-config': link:packages/prettier-config-chirpy
       eslint: 8.15.0
-      eslint-config-chirpy: link:packages/eslint-config-chirpy
       lint-staged: 12.4.1
       next: 12.1.5_ef5jwxihqo6n7gxfmzogljlgcm
       prettier: 2.6.2
@@ -30,6 +30,7 @@ importers:
 
   apps/comment-bootstrapper:
     specifiers:
+      '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@testing-library/react': 13.2.0
       '@types/jest': 27.5.1
@@ -40,13 +41,13 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: workspace:*
       jest: 28.1.0
       react: 18.1.0
       react-dom: 18.1.0
       typescript: 4.6.4
       vite: 2.9.9
     devDependencies:
+      '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@types/jest': 27.5.1
@@ -57,7 +58,6 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: link:../../packages/eslint-config-chirpy
       jest: 28.1.0_@types+node@16.11.35
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
@@ -66,6 +66,7 @@ importers:
 
   apps/e2e:
     specifiers:
+      '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@testing-library/cypress': 8.0.2
       '@types/node': 16.11.36
@@ -74,9 +75,9 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: workspace:*
       typescript: 4.6.4
     dependencies:
+      '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       '@testing-library/cypress': 8.0.2_cypress@9.6.1
       '@types/node': 16.11.36
@@ -85,7 +86,6 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: link:../../packages/eslint-config-chirpy
       typescript: 4.6.4
 
   apps/emails:
@@ -109,6 +109,7 @@ importers:
       '@babel/core': 7.17.12
       '@chirpy-dev/comment-bootstrapper': workspace:*
       '@chirpy-dev/emails': workspace:*
+      '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@geist-ui/react-icons': 1.0.1
@@ -183,7 +184,6 @@ importers:
       dotenv-expand: 8.0.3
       downshift: 6.1.7
       eslint: 8.14.0
-      eslint-config-chirpy: workspace:*
       eta: 1.12.3
       fake-indexeddb: 3.1.7
       framer-motion: 6.3.3
@@ -306,6 +306,7 @@ importers:
       '@babel/core': 7.17.12
       '@chirpy-dev/comment-bootstrapper': link:../comment-bootstrapper
       '@chirpy-dev/emails': link:../emails
+      '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/service-worker': link:../service-worker
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       '@graphql-codegen/cli': 2.6.2_tkndpn5uvtcaskrch4htb5kcpy
@@ -354,7 +355,6 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: link:../../packages/eslint-config-chirpy
       fake-indexeddb: 3.1.7
       intersection-observer: 0.12.0
       jest: 28.1.0_@types+node@16.11.36
@@ -377,21 +377,21 @@ importers:
 
   apps/service-worker:
     specifiers:
+      '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: workspace:*
       typescript: 4.6.4
       vite: 2.9.9
     devDependencies:
+      '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.14.0
-      eslint-config-chirpy: link:../../packages/eslint-config-chirpy
       typescript: 4.6.4
       vite: 2.9.9
 

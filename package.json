@@ -14,7 +14,7 @@
     "@chirpy-dev/prettier-config": "workspace:*",
     "@changesets/cli": "2.22.0",
     "eslint": "8.15.0",
-    "eslint-config-chirpy": "workspace:*",
+    "@chirpy-dev/eslint-config": "workspace:*",
     "simple-git-hooks": "2.7.0",
     "prettier": "2.6.2",
     "next": "12.1.5",

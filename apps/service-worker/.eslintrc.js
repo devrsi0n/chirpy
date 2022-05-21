@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['chirpy'],
+  extends: ['@chirpy-dev'],
 };

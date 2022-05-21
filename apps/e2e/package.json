@@ -15,7 +15,7 @@
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.14.0",
-    "eslint-config-chirpy": "workspace:*",
+    "@chirpy-dev/eslint-config": "workspace:*",
     "typescript": "4.6.4"
   },
   "publishConfig": {

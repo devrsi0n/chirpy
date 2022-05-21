@@ -1,6 +1,6 @@
 {
-  "name": "eslint-config-chirpy",
-  "version": "0.0.1",
+  "name": "@chirpy-dev/eslint-config",
+  "version": "0.0.0",
   "main": "./index.js",
   "dependencies": {
     "@chirpy-dev/prettier-config": "workspace:*",
@@ -20,6 +20,9 @@
   },
   "devDependencies": {
     "eslint": "8.14.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "license": "Apache License 2.0"
 }
