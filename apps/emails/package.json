@@ -12,7 +12,7 @@
     "@maizzle/cli": "1.4.0",
     "autoprefixer": "10.4.7",
     "glob": "8.0.1",
-    "postcss": "8.4.13",
+    "postcss": "8.4.14",
     "tailwindcss": "2.2.19"
   },
   "license": "Apache License 2.0",
