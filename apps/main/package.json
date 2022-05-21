@@ -134,7 +134,7 @@
     "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
-    "eslint": "8.14.0",
+    "eslint": "8.16.0",
     "@chirpy-dev/eslint-config": "workspace:*",
     "fake-indexeddb": "3.1.7",
     "framer-motion": "6.3.3",
