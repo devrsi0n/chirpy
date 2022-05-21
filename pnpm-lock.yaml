@@ -407,7 +407,7 @@ importers:
       eslint-config-prettier: 8.5.0
       eslint-plugin-jest: 26.2.2
       eslint-plugin-prettier: 4.0.0
-      eslint-plugin-storybook: 0.5.11
+      eslint-plugin-storybook: 0.5.12
       eslint-plugin-unicorn: 42.0.0
       next: 12.1.5
       prettier: 2.6.2
@@ -422,7 +422,7 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.16.0
       eslint-plugin-jest: 26.2.2_sxl36gmklty2fozvfwqadbk7ku
       eslint-plugin-prettier: 4.0.0_j7rsahgqtkecno6yauhsgsglf4
-      eslint-plugin-storybook: 0.5.11_utdtartgf6fqqgkivzeynh76la
+      eslint-plugin-storybook: 0.5.12_utdtartgf6fqqgkivzeynh76la
       eslint-plugin-unicorn: 42.0.0_eslint@8.16.0
       next: 12.1.5_ef5jwxihqo6n7gxfmzogljlgcm
       prettier: 2.6.2
@@ -11120,8 +11120,8 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: false
 
-  /eslint-plugin-storybook/0.5.11_utdtartgf6fqqgkivzeynh76la:
-    resolution: {integrity: sha512-uNQn9zjH/+UiFxRC4hd69DnxOu4RoRbr76+yc3Bp/vIEo/n2K+NdQGh3zK9JLdMoctFAbzMfoKi9FQbZVZsCvQ==}
+  /eslint-plugin-storybook/0.5.12_utdtartgf6fqqgkivzeynh76la:
+    resolution: {integrity: sha512-ojuNKnrZFrQpm5N5Lp8UR0VEn4HtLjlNn6nxQAYlmTsEXNigtId1XPuMbXAsvFcEmv3RTb5l+9tZgkhSURfACg==}
     engines: {node: 12.x || 14.x || >= 16}
     peerDependencies:
       eslint: '>=6'
