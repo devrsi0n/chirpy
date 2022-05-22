@@ -2,7 +2,7 @@
   "name": "chirpy",
   "private": true,
   "scripts": {
-    "lint": "eslint ./",
+    "lint": "eslint --fix ./",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish"

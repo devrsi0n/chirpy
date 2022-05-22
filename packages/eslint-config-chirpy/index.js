@@ -42,7 +42,7 @@ module.exports = {
       'error',
       {
         case: 'kebabCase',
-        ignore: [/^\[.+\]\.tsx?$/],
+        ignore: [/^\[.+]\.tsx?$/],
       },
     ],
     'unicorn/no-array-reduce': 'off',
@@ -52,7 +52,7 @@ module.exports = {
     'unicorn/import-style': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/prefer-node-protocol': 'off',
-    'unicore/prefer-module': 'off',
+    'unicorn/prefer-module': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
 
     'jest/expect-expect': 'off',

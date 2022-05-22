@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export function useIsUnmounting(): React.MutableRefObject<boolean> {
+export function useIsUnmountingRef(): React.MutableRefObject<boolean> {
   const isUnmountingRef = React.useRef(false);
   React.useEffect(() => {
     return () => {

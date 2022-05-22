@@ -3,35 +3,55 @@ import Send from '@geist-ui/react-icons/send';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { Popover } from '$/components/popover';
-import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useNotificationContext } from '$/contexts/notification-context';
+import { useAsync } from '$/hooks/use-async';
+import type { IToxicText } from '$/server/services/content-classifier/toxic-text';
+import { getTextFromRteValue } from '$/utilities/isomorphic/text';
 
-import { SignInButton } from '../sign-in-button';
+import { SignInButton } from '../../sign-in-button';
+import { RTEValue } from '../type';
+import { AskNotificationPermissionPopover } from './ask-notification-permission-panel';
+import { ToxicTextPopover } from './toxic-text-popover';
 
 export interface IMainButtonProps {
   disabled?: boolean;
   isReply?: boolean;
   onClickDismiss?: () => void;
-  isLoading: boolean;
-  onClickSubmit: () => void;
+  rteValue: RTEValue;
+  onClickSubmit: () => Promise<void>;
 }
 
 export function MainButton({
   isReply,
-  isLoading,
   onClickDismiss,
   onClickSubmit,
   disabled,
+  rteValue,
 }: IMainButtonProps): JSX.Element {
   const { isSignIn } = useCurrentUser();
+  const {
+    status,
+    execute: handleCheckToxicTextBeforeSubmit,
+    data,
+  } = useAsync(async () => {
+    const resp = await fetch(
+      `/api/content-classifier/toxic-text?text=${getTextFromRteValue(rteValue)}`,
+    );
+
+    const toxicText: IToxicText = await resp.json();
+    if (toxicText.matchedLabels.length === 0) {
+      await onClickSubmit();
+    }
+    return toxicText.matchedLabels;
+  });
+
   const { registerNotification, didRegister, didDeny } = useNotificationContext();
-  const handleClickSubmit = async () => {
+  const handleCheckNotificationBeforeSubmit = async () => {
     await registerNotification();
-    onClickSubmit();
+    await handleCheckToxicTextBeforeSubmit();
   };
+  const isLoading = status === 'pending';
   const postButtonProps: Partial<ButtonProps> = {
     size: 'sm',
     variant: 'solid',
@@ -54,34 +74,21 @@ export function MainButton({
       )}
       {isSignIn ? (
         didRegister || didDeny ? (
-          <Button {...postButtonProps} onClick={onClickSubmit}>
+          <ToxicTextPopover
+            {...postButtonProps}
+            onClickOK={handleCheckToxicTextBeforeSubmit}
+            toxicLabels={data}
+          >
             {buttonChildren}
-          </Button>
+          </ToxicTextPopover>
         ) : (
-          <Popover
-            placement="topEnd"
-            content={
-              <section className="w-64">
-                <Heading as="h5" className="font-bold">
-                  Get notification for replies
-                </Heading>
-                <Text size="sm" className="mt-2" variant="secondary">
-                  Get a push notification if there is a reply to your comment
-                </Text>
-                <div className="mt-5 space-x-2">
-                  <Button size="sm" color="gray" onClick={onClickSubmit}>
-                    Ask next time
-                  </Button>
-                  <Button size="sm" variant="solid" color="primary" onClick={handleClickSubmit}>
-                    Sure
-                  </Button>
-                </div>
-              </section>
-            }
+          <AskNotificationPermissionPopover
+            onClickAskNextTime={handleCheckToxicTextBeforeSubmit}
+            onClickSure={handleCheckNotificationBeforeSubmit}
             buttonProps={{ ...postButtonProps, className: `py-[7px]` }}
           >
             {buttonChildren}
-          </Popover>
+          </AskNotificationPermissionPopover>
         )
       ) : (
         <SignInButton size="sm" />
