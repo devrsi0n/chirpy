@@ -10,11 +10,33 @@ import { bluredOverlay, cardBg } from '$/styles/common';
 import { easeInOut, easeInOutOpacity } from '../animation';
 import { IconButton } from '../button';
 
+type Size = 'sm' | 'base';
+const SIZE_STYLES: Record<
+  Size,
+  {
+    content: string;
+    title: string;
+    footer: string;
+  }
+> = {
+  sm: {
+    content: 'px-3 pt-2 pb-0 max-w-sm',
+    title: 'text-xl font-bold leading-none',
+    footer: 'px-3 pt-2 pb-3',
+  },
+  base: {
+    content: 'px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 max-w-lg',
+    title: 'text-2xl font-bold leading-none',
+    footer: 'px-6 pt-4 pb-6 sm:px-8',
+  },
+};
+
 export type DialogProps = React.PropsWithChildren<{
   show: boolean;
   title: React.ReactNode;
   styles?: {
     root?: string;
+    panel?: string;
     content?: string;
     overlay?: string;
   };
@@ -23,7 +45,8 @@ export type DialogProps = React.PropsWithChildren<{
    */
   showDismissButton?: boolean;
   onClose: (value: boolean) => void;
-  type?: 'Alert';
+  type?: 'alert' | 'default';
+  size?: Size;
 }>;
 
 export function Dialog({
@@ -33,17 +56,19 @@ export function Dialog({
   onClose,
   styles = {},
   showDismissButton,
-  type,
+  type = 'default',
+  size = 'base',
 }: DialogProps): JSX.Element {
   let footer: React.ReactElement | null = null;
   const otherChildren: React.ReactElement[] = [];
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child) && (child as any).type.displayName === 'DialogFooter') {
-      footer = child as React.ReactElement;
+      footer = React.cloneElement(child as React.ReactElement, { size });
     } else {
       otherChildren.push(child as React.ReactElement);
     }
   });
+  const sizeStyles = SIZE_STYLES[size];
   return (
     <AnimatePresence>
       {show && (
@@ -58,16 +83,19 @@ export function Dialog({
               <div className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)} />
             </m.div>
             <m.div {...easeInOut}>
-              <HeadlessDialog.Panel className="relative inline-block shadow-md">
+              <HeadlessDialog.Panel
+                className={clsx('relative inline-block shadow-md', styles.panel)}
+              >
                 <div
                   className={clsx(
-                    `flex max-w-lg flex-row space-x-4 px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0`,
+                    `flex flex-row space-x-4`,
                     cardBg,
+                    sizeStyles.content,
                     !footer ? `rounded-xl` : `rounded-t-xl`,
                     styles.content,
                   )}
                 >
-                  {type === 'Alert' && (
+                  {type === 'alert' && (
                     <div className="h-full rounded-full bg-red-300">
                       <div className="p-2 text-red-900">
                         <AlertTriangle size={24} />
@@ -86,14 +114,14 @@ export function Dialog({
                     )}
                     <div className="flex flex-row items-start justify-between">
                       <HeadlessDialog.Title
-                        as="h2"
-                        className="text-2xl font-bold leading-none text-gray-1200"
+                        as="h1"
+                        className={clsx('text-gray-1200', sizeStyles.title)}
                       >
                         {title}
                       </HeadlessDialog.Title>
                     </div>
                     <div className="mt-4">
-                      <div className="text-sm">{otherChildren}</div>
+                      <div className="text-sm text-gray-1100">{otherChildren}</div>
                     </div>
                   </div>
                 </div>
@@ -109,15 +137,22 @@ export function Dialog({
 
 Dialog.Footer = DialogFooter;
 
-export type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>>;
+export type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>> &
+  Pick<DialogProps, 'size'>;
 
-function DialogFooter({ className, children, ...restProps }: IDialogFooterProps): JSX.Element {
+function DialogFooter({
+  className,
+  children,
+  size = 'base',
+  ...restProps
+}: IDialogFooterProps): JSX.Element {
   return (
     <div
       {...restProps}
       className={clsx(
-        'space-y-2 space-x-0 rounded-b-xl px-6 pt-4 pb-6 sm:flex sm:flex-row sm:justify-end sm:space-y-0 sm:space-x-4 sm:px-8',
+        'space-y-2 space-x-0 rounded-b-xl sm:flex sm:flex-row sm:justify-end sm:space-y-0 sm:space-x-4',
         cardBg,
+        SIZE_STYLES[size].footer,
         className,
       )}
     >

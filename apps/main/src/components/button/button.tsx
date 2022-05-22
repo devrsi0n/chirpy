@@ -121,7 +121,7 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 }
 
 const sizeStyles: Record<Size, string> = {
-  sm: `py-1 px-2 text-sm space-x-1`,
+  sm: `py-1 px-2.5 text-sm space-x-1`,
   md: `py-2 px-3 text-base`,
   lg: `py-3 px-4 text-lg`,
   xl: `py-4 px-5 text-xl`,

@@ -1,18 +1,7 @@
-import * as toxicity from '@tensorflow-models/toxicity';
 import '@tensorflow/tfjs';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const MIN_PREDICTION_CONFIDENCE = 0.9;
-
-const modelPromise = toxicity.load(MIN_PREDICTION_CONFIDENCE, [
-  'toxicity',
-  'severe_toxicity',
-  `identity_attack`,
-  `insult`,
-  `threat`,
-  `sexual_explicit`,
-  `obscene`,
-]);
+import { getToxicModel } from '$/server/common/api-handler';
 
 export interface IToxicText {
   matchedLabels: string[];
@@ -25,7 +14,7 @@ export async function checkToxicText(
   const { text } = req.query as {
     [key: string]: string;
   };
-  const model = await modelPromise;
+  const model = await getToxicModel();
   const result = await model.classify(text);
   const resp: IToxicText = result.reduce(
     (prev, item) => {

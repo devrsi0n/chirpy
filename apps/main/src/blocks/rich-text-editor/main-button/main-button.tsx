@@ -11,8 +11,8 @@ import { getTextFromRteValue } from '$/utilities/isomorphic/text';
 
 import { SignInButton } from '../../sign-in-button';
 import { RTEValue } from '../type';
-import { AskNotificationPermissionPopover } from './ask-notification-permission-panel';
-import { ToxicTextPopover } from './toxic-text-popover';
+import { AskNotificationPermissionPopover } from './ask-notification-permission-popover';
+import { ToxicTextDialog } from './toxic-text-dialog';
 
 export interface IMainButtonProps {
   disabled?: boolean;
@@ -33,7 +33,8 @@ export function MainButton({
   const {
     status,
     execute: handleCheckToxicTextBeforeSubmit,
-    data,
+    data: toxicLabels,
+    reset,
   } = useAsync(async () => {
     const resp = await fetch(
       `/api/content-classifier/toxic-text?text=${getTextFromRteValue(rteValue)}`,
@@ -51,6 +52,7 @@ export function MainButton({
     await registerNotification();
     await handleCheckToxicTextBeforeSubmit();
   };
+  const [askNextTime, setAskNextTime] = React.useState(false);
   const isLoading = status === 'pending';
   const postButtonProps: Partial<ButtonProps> = {
     size: 'sm',
@@ -73,19 +75,26 @@ export function MainButton({
         </Button>
       )}
       {isSignIn ? (
-        didRegister || didDeny ? (
-          <ToxicTextPopover
-            {...postButtonProps}
-            onClickOK={handleCheckToxicTextBeforeSubmit}
-            toxicLabels={data}
+        didRegister || didDeny || askNextTime ? (
+          <ToxicTextDialog
+            buttonProps={postButtonProps}
+            onClickSubmit={handleCheckToxicTextBeforeSubmit}
+            onClickAckToxicComment={reset}
+            toxicLabels={toxicLabels}
           >
             {buttonChildren}
-          </ToxicTextPopover>
+          </ToxicTextDialog>
         ) : (
           <AskNotificationPermissionPopover
-            onClickAskNextTime={handleCheckToxicTextBeforeSubmit}
-            onClickSure={handleCheckNotificationBeforeSubmit}
-            buttonProps={{ ...postButtonProps, className: `py-[7px]` }}
+            onClickAskNextTime={() => {
+              setAskNextTime(true);
+              handleCheckToxicTextBeforeSubmit();
+            }}
+            onClickSure={() => {
+              setAskNextTime(false);
+              handleCheckNotificationBeforeSubmit();
+            }}
+            buttonProps={postButtonProps}
           >
             {buttonChildren}
           </AskNotificationPermissionPopover>

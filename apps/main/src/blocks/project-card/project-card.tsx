@@ -141,7 +141,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         </Text>
       </div>
       <Dialog
-        type="Alert"
+        type="alert"
         title={
           <>
             Delete the project <span className="font-bold">{deletingProjectName}</span>

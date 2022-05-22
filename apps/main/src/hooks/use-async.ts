@@ -40,5 +40,11 @@ export function useAsync<T, E = Error>(asyncFunction: () => Promise<T>, immediat
     }
   }, [execute, immediate]);
 
-  return { execute, status, data, error };
+  const reset = React.useCallback(() => {
+    setStatus('idle');
+    setData(null);
+    setError(null);
+  }, []);
+
+  return { execute, status, data, error, reset };
 }
