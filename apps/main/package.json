@@ -150,7 +150,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "require-from-string": "2.0.2",
-    "resolve-url-loader": "4.0.0",
+    "resolve-url-loader": "5.0.0",
     "sass": "1.52.1",
     "sass-loader": "12.6.0",
     "storybook-addon-next": "1.6.2",
