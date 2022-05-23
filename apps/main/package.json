@@ -6,14 +6,14 @@
     "chromatic": "chromatic --exit-zero-on-changes",
     "analyze": "ANALYZE=true pnpm run build:local",
     "build": "next build",
-    "build-sb": "build-storybook -s ./public",
+    "build-sb": "build-storybook",
     "build:local": "dotenv -e .env.local -- next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",
     "g:gql": "graphql-codegen --config ./scripts/graphql-codegen/server-codegen.yml && graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml",
     "g:gql:watch": "concurrently 'graphql-codegen --watch --config ./scripts/graphql-codegen/server-codegen.yml' 'graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml --watch'",
     "postinstall": "patch-package",
-    "sb": "start-storybook -p 6006 -s ./public",
+    "sb": "start-storybook -p 6006",
     "start": "next start",
     "start:local": "dotenv -e .env.local -- next start",
     "test": "DEBUG_PRINT_LIMIT=10000 jest --silent=false",
@@ -147,6 +147,7 @@
     "jest": "28.1.0",
     "jest-environment-jsdom": "28.1.0",
     "msw": "0.41.0",
+    "msw-storybook-addon": "1.6.3",
     "next": "12.1.5",
     "postcss": "8.4.14",
     "postcss-flexbugs-fixes": "5.0.2",
@@ -171,5 +172,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
