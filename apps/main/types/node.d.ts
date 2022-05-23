@@ -1,5 +1,3 @@
-import * as toxicity from '@tensorflow-models/toxicity';
-
 declare namespace NodeJS {
   interface ProcessEnv {
     // Additional environment variables
@@ -29,9 +27,4 @@ declare namespace NodeJS {
     FACEBOOK_APP_ID: string;
     FACEBOOK_APP_SECRET: string;
   }
-}
-
-declare global {
-  // eslint-disable-next-line no-var
-  declare var toxicModelPromise: Promise<toxicity.ToxicityClassifier>;
 }

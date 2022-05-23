@@ -17,17 +17,20 @@ const SIZE_STYLES: Record<
     content: string;
     title: string;
     footer: string;
+    icon: number;
   }
 > = {
   sm: {
-    content: 'px-3 pt-2 pb-0 max-w-sm',
+    content: 'px-4 pt-4 pb-0 max-w-sm',
     title: 'text-xl font-bold leading-none',
-    footer: 'px-3 pt-2 pb-3',
+    footer: 'px-4 pt-2 pb-4',
+    icon: 20,
   },
   base: {
     content: 'px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 max-w-lg',
     title: 'text-2xl font-bold leading-none',
     footer: 'px-6 pt-4 pb-6 sm:px-8',
+    icon: 24,
   },
 };
 
@@ -98,7 +101,7 @@ export function Dialog({
                   {type === 'alert' && (
                     <div className="h-full rounded-full bg-red-300">
                       <div className="p-2 text-red-900">
-                        <AlertTriangle size={24} />
+                        <AlertTriangle size={sizeStyles.icon} />
                       </div>
                     </div>
                   )}

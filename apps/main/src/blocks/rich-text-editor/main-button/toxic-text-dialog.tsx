@@ -37,12 +37,12 @@ export function ToxicTextDialog({
         onClose={() => setShow(false)}
         styles={{
           overlay: 'backdrop-blur-none bg-transparent',
-          panel: '!shadow-lg border border-gray-500 rounded-lg',
+          panel: '!shadow-2xl border border-gray-500 rounded-lg',
         }}
       >
         <p>
-          Your comment contains <strong>{_toxicLabels.join(', ')}</strong> words. You must remove
-          them before posting.
+          Your comment contains<strong className="px-1">{_toxicLabels.join(', ')}</strong>sentences.
+          You must remove them before posting.
         </p>
         <Dialog.Footer>
           <Button

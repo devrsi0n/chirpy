@@ -1,4 +1,4 @@
-import '@tensorflow/tfjs';
+import '@tensorflow/tfjs-node';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { getToxicModel } from '$/server/common/api-handler';

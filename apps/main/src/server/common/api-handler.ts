@@ -1,5 +1,7 @@
+// prettier-ignore-start
 import * as toxicity from '@tensorflow-models/toxicity';
-import '@tensorflow/tfjs';
+import '@tensorflow/tfjs-node';
+// prettier-ignore-end
 import { NextApiRequest, NextApiResponse } from 'next';
 import connect, { ErrorHandler } from 'next-connect';
 
