@@ -1,4 +1,4 @@
-import '@tensorflow/tfjs-node';
+import '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
