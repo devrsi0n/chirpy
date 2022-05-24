@@ -8,6 +8,7 @@ import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
 import { useThemeVariables } from '$/contexts/theme-context/use-theme-variables';
 import { loadFeatures } from '$/pages/_app';
+
 import '$/styles/global-styles.scss';
 
 import { sbGqlHandlers } from './msw/gql-handlers';

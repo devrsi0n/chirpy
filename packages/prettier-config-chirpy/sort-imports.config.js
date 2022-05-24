@@ -4,7 +4,7 @@ const commonConfig = require('./common.config');
 // we can only run 1 of them per time.
 module.exports = {
   ...commonConfig,
-  plugins: [require('@trivago/prettier-plugin-sort-imports')],
+  plugins: [require('@ianvs/prettier-plugin-sort-imports')],
   importOrder: ['^\\$/(.*)$', '^[./]'],
   importOrderSeparation: true,
 };

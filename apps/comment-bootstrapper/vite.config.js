@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+
 import { getDefine } from './scripts/get-define';
 
 export default defineConfig(({ command }) => {
