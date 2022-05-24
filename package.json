@@ -36,7 +36,8 @@
         "@storybook/addons",
         "@storybook/client-api",
         "@storybook/preview-web",
-        "@geist-ui/react"
+        "@geist-ui/react",
+        "seedrandom"
       ],
       "allowedVersions": {
         "react": "18",

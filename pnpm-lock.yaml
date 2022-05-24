@@ -232,7 +232,6 @@ importers:
       resolve-url-loader: 5.0.0
       sass: 1.52.1
       sass-loader: 13.0.0
-      seedrandom: 2.4.4
       storybook-addon-next: 1.6.2
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
@@ -260,7 +259,7 @@ importers:
       '@tensorflow-models/toxicity': 1.2.2_ce7e77rhh6oipcy6kxvkentnmi
       '@tensorflow/tfjs-converter': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-core': 3.18.0
-      '@tensorflow/tfjs-node': 3.18.0_seedrandom@2.4.4
+      '@tensorflow/tfjs-node': 3.18.0
       '@tiptap/core': 2.0.0-beta.176
       '@tiptap/extension-link': 2.0.0-beta.38_bdtxrwlxmejxwkiihhzxvcfcve
       '@tiptap/extension-placeholder': 2.0.0-beta.48_bdtxrwlxmejxwkiihhzxvcfcve
@@ -306,7 +305,6 @@ importers:
       react-flip-move: 3.0.4_ef5jwxihqo6n7gxfmzogljlgcm
       reading-time: 1.5.0
       rehype: 12.0.1
-      seedrandom: 2.4.4
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
       tailwindcss: 3.0.24
@@ -5829,16 +5827,18 @@ packages:
       - encoding
     dev: false
 
-  /@tensorflow/tfjs-data/3.18.0_aizv5xj4rqxpinnowhko4o6wki:
+  /@tensorflow/tfjs-data/3.18.0_br26fteayl44zj43fz4bazb7oq:
     resolution: {integrity: sha512-s43vISJh8K/UN2E2zGRhtj/Kyn8dr4ll8EQkapwzm7fGO9afXCnMsTp6rkZq3fFXouCYA2k1B/j7JssIDr50+w==}
     peerDependencies:
       '@tensorflow/tfjs-core': 3.18.0 || 3
       seedrandom: ~2.4.3
+    peerDependenciesMeta:
+      seedrandom:
+        optional: true
     dependencies:
       '@tensorflow/tfjs-core': 3.18.0
       '@types/node-fetch': 2.6.1
       node-fetch: 2.6.7
-      seedrandom: 2.4.4
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -5851,13 +5851,13 @@ packages:
       '@tensorflow/tfjs-core': 3.18.0
     dev: false
 
-  /@tensorflow/tfjs-node/3.18.0_seedrandom@2.4.4:
+  /@tensorflow/tfjs-node/3.18.0:
     resolution: {integrity: sha512-jW6bFKO6hH4tGvlijvpcIbCRRa6vDZ2xIIbEO7qZ17s0QOMPBGjDLyQGUaSQ00uog0Rid/sdZNpiueDqB0ZGbA==}
     engines: {node: '>=8.11.0'}
     requiresBuild: true
     dependencies:
       '@mapbox/node-pre-gyp': 1.0.4
-      '@tensorflow/tfjs': 3.18.0_seedrandom@2.4.4
+      '@tensorflow/tfjs': 3.18.0
       adm-zip: 0.5.9
       google-protobuf: 3.20.1
       https-proxy-agent: 2.2.4
@@ -5870,7 +5870,7 @@ packages:
       - supports-color
     dev: false
 
-  /@tensorflow/tfjs/3.18.0_seedrandom@2.4.4:
+  /@tensorflow/tfjs/3.18.0:
     resolution: {integrity: sha512-mOzz4jJdgIpqFS7EHndVuxrQnLUDVIKGyTqOPTYps89fZwcOFfTVxi4BHemDNQpqlVE8IaGh9UUxVXpjgPY5+Q==}
     hasBin: true
     dependencies:
@@ -5878,7 +5878,7 @@ packages:
       '@tensorflow/tfjs-backend-webgl': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-converter': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-core': 3.18.0
-      '@tensorflow/tfjs-data': 3.18.0_aizv5xj4rqxpinnowhko4o6wki
+      '@tensorflow/tfjs-data': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-layers': 3.18.0_br26fteayl44zj43fz4bazb7oq
       argparse: 1.0.10
       chalk: 4.1.2
@@ -19827,10 +19827,6 @@ packages:
 
   /seedrandom/2.4.3:
     resolution: {integrity: sha1-JDhQTa0zkXMUv/GKxNeU8W1qrsw=}
-    dev: false
-
-  /seedrandom/2.4.4:
-    resolution: {integrity: sha512-9A+PDmgm+2du77B5i0Ip2cxOqqHjgNxnBgglxLcX78A2D6c2rTo61z4jnVABpF4cKeDMDG+cmXXvdnqse2VqMA==}
     dev: false
 
   /select/1.1.2:
