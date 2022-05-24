@@ -268,7 +268,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         {({ open }) => (
           <>
             <div className="w-24">
-              <Menu.Button className="hover:bg-gray-50 focus:outline-none inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
+              <Menu.Button className="hover:bg-gray-50 inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
                 {this.selectedFilterType(filterName)}
                 <ChevronDownIcon
                   className="-mr-2 ml-2 h-4 w-4 text-gray-500 dark:text-gray-400"
@@ -289,7 +289,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
             >
               <Menu.Items
                 static
-                className="focus:outline-none absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-800"
+                className="absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
               >
                 <div className="py-1">
                   <Menu.Item>

@@ -11,6 +11,8 @@ export interface IToxicTextDialogProps {
   toxicLabels: string[] | null;
 }
 
+const DEFAULT_LABELS: string[] = [];
+
 export function ToxicTextDialog({
   onClickSubmit,
   onClickAckToxicComment,
@@ -18,7 +20,7 @@ export function ToxicTextDialog({
   children,
   toxicLabels,
 }: IToxicTextDialogProps): JSX.Element {
-  const _toxicLabels = toxicLabels || [];
+  const _toxicLabels = toxicLabels || DEFAULT_LABELS;
   const [show, setShow] = React.useState(_toxicLabels.length > 0);
   React.useEffect(() => {
     setShow(_toxicLabels.length > 0);

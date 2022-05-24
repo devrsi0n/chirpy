@@ -3,4 +3,5 @@ node_modules
 **/.next
 **/blocks/analytics
 **/public
+dist
 vite.config.js

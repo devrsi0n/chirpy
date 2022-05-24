@@ -49,7 +49,7 @@ export function Toggle({
         onMouseDown={handleMoudDown}
         className={clsx(
           enabled ? `bg-primary-500` : `bg-gray-300 dark:bg-gray-600`,
-          `focus-visible:outline-none relative inline-flex h-4 w-8 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:ring`,
+          `relative inline-flex h-4 w-8 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring`,
         )}
       >
         {({ checked }) => (

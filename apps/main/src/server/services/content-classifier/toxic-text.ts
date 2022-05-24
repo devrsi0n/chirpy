@@ -1,7 +1,26 @@
 import '@tensorflow/tfjs-node';
+import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getToxicModel } from '$/server/common/api-handler';
+const MIN_PREDICTION_CONFIDENCE = 0.9;
+
+export function getToxicModel() {
+  const toxicModelPromise = toxicity.load(MIN_PREDICTION_CONFIDENCE, [
+    'toxicity',
+    'severe_toxicity',
+    `identity_attack`,
+    `insult`,
+    `threat`,
+    `sexual_explicit`,
+    `obscene`,
+  ]);
+
+  // Save the ref to the global env to avoid reload the models between severless calls
+  if (!global.toxicModelPromise) {
+    global.toxicModelPromise = toxicModelPromise;
+  }
+  return global.toxicModelPromise;
+}
 
 export interface IToxicText {
   matchedLabels: string[];
