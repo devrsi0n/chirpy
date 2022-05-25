@@ -6,7 +6,7 @@ import { Button, ButtonProps } from '$/components/button';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useNotificationContext } from '$/contexts/notification-context';
 import { useAsync } from '$/hooks/use-async';
-import type { IToxicText } from '$/server/services/content-classifier/toxic-text';
+import type { ICheckToxicText } from '$/server/services/content-classifier/toxic-text';
 import { getTextFromRteValue } from '$/utilities/isomorphic/text';
 
 import { SignInButton } from '../../sign-in-button';
@@ -40,7 +40,7 @@ export function MainButton({
       `/api/content-classifier/toxic-text?text=${getTextFromRteValue(rteValue)}`,
     );
 
-    const toxicText: IToxicText = await resp.json();
+    const toxicText: ICheckToxicText = await resp.json();
     if (toxicText.matchedLabels.length === 0) {
       await onClickSubmit();
     }

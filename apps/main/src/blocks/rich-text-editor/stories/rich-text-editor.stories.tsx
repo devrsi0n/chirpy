@@ -1,4 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { rest } from 'msw';
+
+import { ICheckToxicText } from '$/server/services/content-classifier/toxic-text';
 
 import { RichTextEditor } from '../rich-text-editor';
 
@@ -10,6 +13,19 @@ export default {
 const Template: ComponentStory<typeof RichTextEditor> = (args) => <RichTextEditor {...args} />;
 
 export const Default = Template.bind({});
-
-export const MainButton = Template.bind({});
-MainButton.decorators;
+Default.parameters = {
+  msw: {
+    handlers: {
+      toxic: [
+        rest.get('*/api/content-classifier/toxic-text', (req, res, ctx) => {
+          return res(
+            ctx.status(200),
+            ctx.json<ICheckToxicText>({
+              matchedLabels: [],
+            }),
+          );
+        }),
+      ],
+    },
+  },
+};
