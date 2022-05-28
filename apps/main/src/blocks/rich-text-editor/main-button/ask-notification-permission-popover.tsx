@@ -37,7 +37,7 @@ export function AskNotificationPermissionPopover({
           </div>
         </section>
       }
-      buttonProps={{ ...buttonProps, className: `py-[7px]` }}
+      buttonProps={{ ...buttonProps, className: `!py-2` }}
     >
       {children}
     </Popover>

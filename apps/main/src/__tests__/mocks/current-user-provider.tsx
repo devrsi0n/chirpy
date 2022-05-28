@@ -3,6 +3,7 @@ import * as React from 'react';
 import { CurrentUserProvider } from '$/contexts/current-user-context';
 
 import * as userModule from '../../graphql/generated/user';
+import { mockUserData } from './data/user';
 
 export type MockCurrentUserProviderProps = React.PropsWithChildren<{
   //

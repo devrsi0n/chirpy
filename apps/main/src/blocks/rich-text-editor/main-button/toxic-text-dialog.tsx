@@ -28,7 +28,7 @@ export function ToxicTextDialog({
 
   return (
     <>
-      <Button {...buttonProps} className={`py-[7px]`} onClick={onClickSubmit}>
+      <Button {...buttonProps} className={`!py-[7px]`} onClick={onClickSubmit}>
         {children}
       </Button>
       <Dialog

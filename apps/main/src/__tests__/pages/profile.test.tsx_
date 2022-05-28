@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import Profile from '../../pages/profile';
 import { pageRender } from '../fixtures/page-render';
-import { mockUserData } from '../mocks/CurrentUserProvider';
+import { mockUserData } from '../mocks/data/user';
 
 const mockUpdateUser = jest.fn();
 
