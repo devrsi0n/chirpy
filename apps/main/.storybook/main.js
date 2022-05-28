@@ -26,7 +26,6 @@ module.exports = {
     return config;
   },
   addons: [
-    '@storybook/addon-links',
     '@storybook/addon-essentials',
     {
       name: 'storybook-addon-next',
@@ -37,4 +36,7 @@ module.exports = {
     '@storybook/addon-interactions',
   ],
   actions: { argTypesRegex: '^on.*' },
+  features: {
+    interactionsDebugger: true,
+  },
 };

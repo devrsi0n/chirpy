@@ -5,10 +5,11 @@ import userEvent from '@testing-library/user-event';
 import * as stories from '../stories/rich-text-editor.stories';
 
 const { Default } = composeStories(stories);
+const mockOnSubmit = jest.fn();
 
 describe('rich-text-editor', () => {
   beforeEach(() => {
-    render(<Default />);
+    render(<Default onSubmit={mockOnSubmit} />);
   });
 
   afterEach(() => {
@@ -17,10 +18,23 @@ describe('rich-text-editor', () => {
 
   it('should post the text', async () => {
     const inputField = screen.getByRole('textbox');
-    await userEvent.type(inputField, 'This is a testing text');
+    const testText = 'This is a testing text';
+    await userEvent.type(inputField, testText);
     const postButton = screen.getByRole('button', {
       name: 'Post',
     });
-    expect(postButton).toBeTruthy();
+    await userEvent.click(postButton);
+    // await waitFor(() => {
+    //   expect(getAskNextTimeButton()).toBeTruthy();
+    // }, {
+    //   timeout: 1000
+    // });
+    // await userEvent.click(getAskNextTimeButton());
+    // expect(mockOnSubmit).toHaveBeenCalledWith(testText);
   });
 });
+
+const getAskNextTimeButton = () =>
+  screen.getByRole('button', {
+    name: 'Ask next time',
+  });

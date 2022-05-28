@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { screen, userEvent } from '@storybook/testing-library';
+import { userEvent, within } from '@storybook/testing-library';
 import { getOperationName, Operation } from 'urql';
 
 import { NotificationHub } from '../notification-hub';
@@ -30,7 +30,8 @@ Default.parameters = {
     return { data: {} };
   },
 };
-Default.play = async () => {
-  const notificationButton = screen.getByLabelText('click to open the menu');
+Default.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  const notificationButton = canvas.getByLabelText('click to open the menu');
   await userEvent.click(notificationButton);
 };
