@@ -117,7 +117,7 @@ export default function SearchSelect(props: SearchSelectProps) {
           placeholder={props.placeholder}
           type="text"
           className={clsx(
-            `focus:outline-none block w-full rounded-md border-gray-300 pr-10 text-sm hover:border-gray-400 focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-200`,
+            `block w-full rounded-md border-gray-300 pr-10 text-sm hover:border-gray-400 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-200`,
             inputValue === '' && !isOpen && `cursor-pointer`,
           )}
         />
@@ -128,7 +128,7 @@ export default function SearchSelect(props: SearchSelectProps) {
       </div>
       <div {...getMenuProps()}>
         {isOpen && (
-          <ul className="focus:outline-none absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 dark:bg-gray-900 sm:text-sm">
+          <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 sm:text-sm">
             {!loading && items.length === 0 && (
               <li className="select-none py-2 px-3 text-gray-500">
                 No matches found in the current dashboard. Try selecting a different time range or

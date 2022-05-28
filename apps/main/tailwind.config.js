@@ -34,7 +34,7 @@ const colors = {
  */
 module.exports = {
   darkMode: 'class',
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
   theme: {
     colors,
     extend: {
@@ -124,7 +124,7 @@ function getRadixColor(colors, prefix) {
   const result = {};
   for (let i = 1; i <= 12; i++) {
     const color = colors[`${prefix}${i}`];
-    const [, h, s, l] = /hsl\((\d+), ([\d\.]+)\%, ([\d\.]+)\%\)/.exec(color);
+    const [, h, s, l] = /hsl\((\d+), ([\d.]+)%, ([\d.]+)%\)/.exec(color);
     const rgb = convert.hsl
       .rgb(+h, +s, +l)
       .map((c) => c.toString(16))

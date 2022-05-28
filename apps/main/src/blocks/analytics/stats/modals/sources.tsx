@@ -168,7 +168,7 @@ class SourcesModal extends React.Component {
           <button
             onClick={this.loadMore.bind(this)}
             type="button"
-            className="focus:outline-none inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:ring active:bg-indigo-700"
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:outline-none focus:ring active:bg-indigo-700"
           >
             Load more
           </button>

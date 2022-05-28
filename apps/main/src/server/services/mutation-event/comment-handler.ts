@@ -3,6 +3,7 @@ import { NextApiResponse } from 'next';
 import { gqlQuery } from '$/server/common/gql';
 import { SiteOwnerByTriggerCommentIdDocument } from '$/server/graphql/generated/comment';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
+import { getTextFromRteDoc } from '$/utilities/isomorphic/text';
 
 import { sendNotification } from '../notification/send';
 import { NotificationPayload } from '../notification/types';
@@ -11,7 +12,6 @@ import {
   createOneNotificationMessage,
   deleteNotificationMessage,
   getAuthorByCommentId,
-  getTextFromRteDoc,
   getUserByPk,
 } from './utilities';
 

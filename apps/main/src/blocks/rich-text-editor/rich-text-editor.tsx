@@ -6,7 +6,6 @@ import StarterKit from '@tiptap/starter-kit';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { useIsUnmounting } from '$/hooks/use-is-unmounting';
 import { useLocalStorage } from '$/hooks/use-local-storage';
 import { cardBg, textInput } from '$/styles/common';
 
@@ -61,16 +60,8 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
     }
   }, [initialValue, editor]);
 
-  const [isLoading, setIsLoading] = React.useState(false);
-  const isUnmountingRef = useIsUnmounting();
-
   const handleSubmitReply = async () => {
-    setIsLoading(true);
     await onSubmit?.(value);
-    if (isUnmountingRef.current) {
-      return;
-    }
-    setIsLoading(false);
     remove();
     editor?.commands?.clearContent();
   };
@@ -90,8 +81,8 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
       {!readOnly && editor && (
         <Toolbar className="flex flex-row justify-between" editor={editor}>
           <MainButton
+            rteValue={value}
             disabled={editor.isEmpty}
-            isLoading={isLoading}
             isReply={isReply}
             onClickSubmit={handleSubmitReply}
             onClickDismiss={onClickDismiss}

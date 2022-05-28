@@ -2,5 +2,6 @@ node_modules
 **/generated
 **/.next
 **/blocks/analytics
-
-*.js
+**/public
+dist
+vite.config.js

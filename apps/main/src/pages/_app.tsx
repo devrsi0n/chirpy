@@ -11,6 +11,7 @@ import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
 import { NotificationProvider } from '$/contexts/notification-context';
 import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+
 import '$/styles/global-styles.scss';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
