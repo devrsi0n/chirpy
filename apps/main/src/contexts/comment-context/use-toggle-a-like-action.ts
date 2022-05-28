@@ -1,16 +1,11 @@
 import { useToast } from '$/components/toast';
+import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
+import { useSignInWindow } from '$/hooks/use-sign-in-window';
 
-import { useCurrentUser } from '../contexts/current-user-context/use-current-user';
-import { useSignInWindow } from './use-sign-in-window';
+export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;
 
-export type ToggleLieAction = (
-  isLiked: boolean,
-  likeId: string,
-  commentId: string,
-) => Promise<void>;
-
-export function useToggleALikeAction(): ToggleLieAction {
+export function useToggleALikeAction() {
   const {
     data: { id: currentUserId },
   } = useCurrentUser();
@@ -20,7 +15,7 @@ export function useToggleALikeAction(): ToggleLieAction {
   const { showToast } = useToast();
   const handleSignIn = useSignInWindow();
 
-  const handleClickLikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
+  const toggleALikeAction = async (isLiked: boolean, likeId: string, commentId: string) => {
     if (!currentUserId) {
       handleSignIn();
       return;
@@ -57,5 +52,5 @@ export function useToggleALikeAction(): ToggleLieAction {
     }
   };
 
-  return handleClickLikeAction;
+  return toggleALikeAction;
 }

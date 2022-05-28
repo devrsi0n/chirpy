@@ -20,8 +20,6 @@ import {
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { useCreateAComment } from '$/hooks/use-create-a-comment';
-import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   PageByUrlOnlyDocument,
@@ -57,9 +55,6 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
 
-  const onSubmitReply = useCreateAComment({ pageId });
-  const onClickLikeAction = useToggleALikeAction();
-
   if (error) {
     return <p>{error}</p>;
   }
@@ -70,9 +65,9 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider projectId={props.projectId}>
+      <CommentContextProvider projectId={props.projectId} pageId={pageId}>
         <div className="pt-1">
-          <CommentTrees {...{ comments, onSubmitReply, onClickLikeAction }} />
+          <CommentTrees comments={comments} />
         </div>
         <PoweredBy />
       </CommentContextProvider>

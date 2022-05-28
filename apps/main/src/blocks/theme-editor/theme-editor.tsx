@@ -2,8 +2,8 @@ import * as colors from '@radix-ui/colors';
 import clsx from 'clsx';
 import merge from 'lodash/merge';
 import { useTheme } from 'next-themes';
+import * as React from 'react';
 
-import { CommentTrees } from '$/blocks/comment-trees';
 import { PageTitle } from '$/blocks/page-title';
 import { IconButton } from '$/components/button';
 import { Heading, IHeadingProps } from '$/components/heading';
@@ -14,7 +14,7 @@ import { translateRadixColor } from '$/contexts/theme-context/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { ThemeProjectByPkQuery } from '$/server/graphql/generated/project';
 
-import { previewComments } from './preview-data';
+import { CommentWidgetPreview } from '../comment-widget-preview';
 
 type ColorSeries = {
   light: Record<string, string>;
@@ -142,18 +142,13 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             </Text>
           </div>
           <div role="separator" className="my-5 h-[1px] w-20 bg-gray-300" />
-
-          <CommentTrees
-            comments={previewComments as any}
-            onSubmitReply={() => Promise.resolve()}
-            onClickLikeAction={() => Promise.resolve()}
-            rtePlaceholder="Preview"
-          />
+          <CommentWidgetPreview />
         </section>
       </div>
     </section>
   );
 }
+
 const BoldHeading = ({ className, ...restProps }: IHeadingProps) => (
   <Heading {...restProps} className={clsx('font-bold', className)} />
 );

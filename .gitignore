@@ -17,3 +17,4 @@ out/
 
 docker-compose.yaml
 .npmrc
+mockServiceWorker.js

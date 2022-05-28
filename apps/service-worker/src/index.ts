@@ -64,7 +64,7 @@ sw.addEventListener('activate', (e) => {
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key != CACHE_ID) return caches.delete(key);
+          if (key !== CACHE_ID) return caches.delete(key);
         }),
       );
     }),

@@ -14,7 +14,7 @@ import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { SubmitHandler } from '$/hooks/use-create-a-comment';
+import { UseCreateAComment } from '$/contexts/comment-context/use-create-a-comment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
@@ -42,8 +42,6 @@ export type CommentCardProps = {
   likes: Like[];
   depth: number;
   preventDetailsPage?: boolean;
-  onSubmitReply: SubmitHandler;
-  onClickLikeAction: ClickLikeActionHandler;
 };
 
 export function CommentCard({
@@ -55,19 +53,18 @@ export function CommentCard({
   likes,
   preventDetailsPage,
   deletedAt,
-  onSubmitReply,
-  onClickLikeAction,
 }: CommentCardProps): JSX.Element {
   const { avatar, name } = author;
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-  const { projectId, deleteAComment } = useCommentContext();
+  const { projectId, deleteAComment, createAComment } = useCommentContext();
   const { showToast } = useToast();
   const handleClickConfirmDelete = () => {
     deleteAComment(commentId);
   };
+
   const handleSubmitReply = async (replyContent: RTEValue) => {
     try {
-      await onSubmitReply(replyContent, commentId);
+      await createAComment(replyContent, commentId);
       setShowReplyEditor(false);
     } catch (error) {
       showToast({
@@ -176,7 +173,6 @@ export function CommentCard({
               aria-label="Like"
               likes={likes}
               commentId={commentId}
-              onClickLikeAction={onClickLikeAction}
               title="Like this comment"
             />
             <span onClick={handlePressReply} className="flex justify-center">
