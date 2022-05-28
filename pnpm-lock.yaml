@@ -174,7 +174,7 @@ importers:
       '@urql/storybook-addon': 1.0.8
       babel-loader: 8.2.5
       canvas-confetti: 1.5.1
-      chart.js: 3.7.1
+      chart.js: 3.8.0
       chromatic: 6.5.4
       clsx: 1.1.1
       color-convert: 2.0.1
@@ -269,7 +269,7 @@ importers:
       '@tiptap/starter-kit': 2.0.0-beta.185
       '@urql/exchange-graphcache': 4.4.0_graphql@16.5.0
       canvas-confetti: 1.5.1
-      chart.js: 3.7.1
+      chart.js: 3.8.0
       clsx: 1.1.1
       cors: 2.8.5
       csstype: 3.1.0
@@ -8782,8 +8782,8 @@ packages:
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}
 
-  /chart.js/3.7.1:
-    resolution: {integrity: sha512-8knRegQLFnPQAheZV8MjxIXc5gQEfDFD897BJgv/klO/vtIyFFmgMXrNfgrXpbTr/XbTturxRgxIXx/Y+ASJBA==}
+  /chart.js/3.8.0:
+    resolution: {integrity: sha512-cr8xhrXjLIXVLOBZPkBZVF6NDeiVIrPLHcMhnON7UufudL+CNeRrD+wpYanswlm8NpudMdrt3CHoLMQMxJhHRg==}
     dev: false
 
   /check-more-types/2.24.0:
