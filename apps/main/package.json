@@ -86,7 +86,7 @@
     "urql": "2.2.0",
     "web-push": "3.4.5",
     "wonka": "4.0.15",
-    "ws": "8.6.0"
+    "ws": "8.7.0"
   },
   "devDependencies": {
     "@babel/core": "7.17.12",
