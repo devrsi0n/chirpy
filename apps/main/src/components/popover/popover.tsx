@@ -1,3 +1,4 @@
+import AlertTriangle from '@geist-ui/react-icons/alertTriangle';
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -8,7 +9,28 @@ import { Button } from '../button';
 
 export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 
-export interface IPopoverProps {
+export interface IPopoverProps extends Omit<IPopoverContentProps, 'open'> {
+  /**
+   * Control the panel visibility.
+   * @default false Auto show/hide the panel
+   */
+  open?: boolean;
+}
+
+export function Popover({ open, ...contentProps }: IPopoverProps): JSX.Element {
+  return (
+    <HeadlessPopover className="relative">
+      {typeof open === 'boolean' ? (
+        <PopoverContent {...contentProps} open={open} />
+      ) : (
+        ({ open }) => <PopoverContent {...contentProps} open={open} />
+      )}
+    </HeadlessPopover>
+  );
+}
+
+interface IPopoverContentProps {
+  open: boolean;
   children: React.ReactNode;
   content: React.ReactNode;
   buttonProps?: $TsAny;
@@ -24,10 +46,12 @@ export interface IPopoverProps {
   autoClose?: boolean;
   styles?: {
     panel?: string;
+    icon?: string;
   };
+  type?: 'alert' | 'default';
 }
 
-export function Popover({
+function PopoverContent({
   autoClose = true,
   buttonProps,
   buttonAs,
@@ -35,50 +59,56 @@ export function Popover({
   content,
   placement = 'top',
   styles,
-}: IPopoverProps): JSX.Element {
+  open,
+  type,
+}: IPopoverContentProps): JSX.Element {
   const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
-  const handleClickPanel = () => {
-    if (autoClose) {
-      buttonRef.current?.click();
-    }
-  };
-
   return (
-    <HeadlessPopover className="relative">
-      {({ open }) => (
-        <>
-          <HeadlessPopover.Button
-            variant="text"
-            as={buttonAs || Button}
-            {...buttonProps}
-            ref={buttonRef}
-          >
-            {children}
-          </HeadlessPopover.Button>
+    <>
+      <HeadlessPopover.Button
+        variant="text"
+        as={buttonAs || Button}
+        {...buttonProps}
+        ref={buttonRef}
+      >
+        {children}
+      </HeadlessPopover.Button>
 
-          <AnimatePresence>
-            {open && (
-              <m.div {...easeInOut}>
-                <HeadlessPopover.Panel
-                  static
-                  className={clsx(`absolute right-0 isolate z-10 shadow-2xl`, panelBorder)}
-                  style={getPanelStyles(placement, {
-                    height: buttonRef.current?.getBoundingClientRect().height,
-                    width: buttonRef.current?.getBoundingClientRect().width,
-                  })}
-                  role="region"
-                  aria-label="Popover panel"
-                >
+      <AnimatePresence>
+        {open && (
+          <m.div {...easeInOut}>
+            <HeadlessPopover.Panel
+              static
+              className={clsx(
+                `absolute right-0 isolate z-10 border border-gray-400 shadow-2xl`,
+                panelBorder,
+              )}
+              style={getPanelStyles(placement, {
+                height: buttonRef.current?.getBoundingClientRect().height,
+                width: buttonRef.current?.getBoundingClientRect().width,
+              })}
+              role="region"
+              aria-label="Popover panel"
+            >
+              {({ close }) => (
+                <>
                   <div
                     className={clsx(
-                      `relative rounded-lg py-3 px-5`,
+                      `relative flex space-x-4 rounded-lg py-3 px-5`,
                       panelBg,
                       panelBorder,
                       styles?.panel,
                     )}
-                    onClick={handleClickPanel}
-                    onKeyDown={handleClickPanel}
+                    // onClick={() => autoClose && close()}
+                    onKeyDown={() => autoClose && close()}
                   >
+                    {type === 'alert' && (
+                      <div className="hidden h-full rounded-full bg-red-300 xs:block">
+                        <div className={clsx('p-2 text-red-900', styles?.icon)}>
+                          <AlertTriangle />
+                        </div>
+                      </div>
+                    )}
                     {content}
                   </div>
                   <div
@@ -88,13 +118,13 @@ export function Popover({
                       buttonRef.current?.getBoundingClientRect().width,
                     )}
                   />
-                </HeadlessPopover.Panel>
-              </m.div>
-            )}
-          </AnimatePresence>
-        </>
-      )}
-    </HeadlessPopover>
+                </>
+              )}
+            </HeadlessPopover.Panel>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
