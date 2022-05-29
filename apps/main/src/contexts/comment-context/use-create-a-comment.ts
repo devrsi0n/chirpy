@@ -15,7 +15,6 @@ export type UseCreateAComment = ReturnType<typeof useCreateAComment>;
 export function useCreateAComment({ pageId }: useCreateACommentOptions) {
   const { isSignIn } = useCurrentUser();
   const [{}, insertOneComment] = useInsertOneCommentMutation();
-
   const { showToast } = useToast();
 
   const createAComment = async (reply: RTEValue, commentId?: string) => {

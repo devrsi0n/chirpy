@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { CommentContextType, CommentContext } from './comment-context';
@@ -13,6 +14,13 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
   const createAComment = useCreateAComment({ pageId: props.pageId });
   const deleteAComment = useDeleteAComment();
   const toggleALikeAction = useToggleALikeAction();
+  const router = useRouter();
+  const onClickCommentTimeline = React.useCallback(
+    (href: string) => {
+      router.push(href);
+    },
+    [router],
+  );
   const value: CommentContextType = React.useMemo(
     () => ({
       projectId: props.projectId,
@@ -20,8 +28,16 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
       createAComment,
       deleteAComment,
       toggleALikeAction,
+      onClickCommentTimeline,
     }),
-    [props.projectId, props.pageId, createAComment, deleteAComment, toggleALikeAction],
+    [
+      props.projectId,
+      props.pageId,
+      createAComment,
+      deleteAComment,
+      toggleALikeAction,
+      onClickCommentTimeline,
+    ],
   );
 
   return <CommentContext.Provider value={value}>{props.children}</CommentContext.Provider>;

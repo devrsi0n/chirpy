@@ -1,4 +1,3 @@
-import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
@@ -7,9 +6,7 @@ import { m, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
-import { ActionButton, Button, ButtonProps } from '$/components/button';
-import { Link } from '$/components/link';
-import { LinkProps } from '$/components/link';
+import { ActionButton, Button } from '$/components/button';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
@@ -23,6 +20,7 @@ import { useCurrentUser } from '../../contexts/current-user-context/use-current-
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
+import { TimelineLinkButton } from './timeline-link-button';
 
 export type { ClickLikeActionHandler } from '../like-action';
 
@@ -191,7 +189,7 @@ export function CommentCard({
               />
             </span>
             <TimelineLinkButton
-              preventLink={disableTimelineButton}
+              disabled={disableTimelineButton}
               href={timelineURL}
               onClick={handleClickLinkAction}
             />
@@ -210,38 +208,6 @@ export function CommentCard({
         )}
       </div>
     </m.article>
-  );
-}
-
-type TimelineLinkButtonProps = {
-  preventLink?: boolean;
-} & Pick<LinkProps, 'href'> &
-  Pick<ButtonProps, 'onClick'>;
-
-function TimelineLinkButton({ preventLink, href, onClick }: TimelineLinkButtonProps): JSX.Element {
-  const childButton = (
-    <ActionButton
-      color="green"
-      icon={<Info size={20} />}
-      disabled={preventLink}
-      onClick={onClick}
-      title={
-        preventLink ? `This is already the current comment's timeline` : `This comment's timeline`
-      }
-    />
-  );
-
-  if (preventLink) {
-    return (
-      <span className="flex justify-center" onClick={onClick}>
-        {childButton}
-      </span>
-    );
-  }
-  return (
-    <Link href={href} variant="plain" className="flex justify-center">
-      {childButton}
-    </Link>
   );
 }
 
