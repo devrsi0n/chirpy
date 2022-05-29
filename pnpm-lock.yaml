@@ -232,7 +232,7 @@ importers:
       resolve-url-loader: 5.0.0
       sass: 1.52.1
       sass-loader: 13.0.0
-      storybook-addon-next: 1.6.4
+      storybook-addon-next: 1.6.6
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
@@ -380,7 +380,7 @@ importers:
       resolve-url-loader: 5.0.0
       sass: 1.52.1
       sass-loader: 13.0.0_sass@1.52.1+webpack@5.72.1
-      storybook-addon-next: 1.6.4_jr2xzlvkjvmp7kqzbgj2sk2s6i
+      storybook-addon-next: 1.6.6_jr2xzlvkjvmp7kqzbgj2sk2s6i
       style-loader: 3.3.1_webpack@5.72.1
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.6.4
@@ -20233,8 +20233,8 @@ packages:
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
 
-  /storybook-addon-next/1.6.4_jr2xzlvkjvmp7kqzbgj2sk2s6i:
-    resolution: {integrity: sha512-EYMDJqs6mB8VMfNfYE5i0pISIxo91lMT8A+5KM50S9vl1owjKEqeCHF5R4+hiN6E9B/6jsMfzhYW2XScr9FXVA==}
+  /storybook-addon-next/1.6.6_jr2xzlvkjvmp7kqzbgj2sk2s6i:
+    resolution: {integrity: sha512-HbGY7DM+qW925rgladudF2PJK+Iq06bRTPseGn6qXnIgC9L/FvBzI1UvDcguYMYWUOzGCbFl11DpHcU/pE1KkQ==}
     peerDependencies:
       '@storybook/addon-actions': ^6.0.0
       next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0
@@ -20245,7 +20245,7 @@ packages:
         optional: true
     dependencies:
       '@storybook/addon-actions': 6.5.5_ef5jwxihqo6n7gxfmzogljlgcm
-      '@storybook/addons': 6.5.3_ef5jwxihqo6n7gxfmzogljlgcm
+      '@storybook/addons': 6.5.5_ef5jwxihqo6n7gxfmzogljlgcm
       image-size: 1.0.1
       loader-utils: 3.2.0
       next: 12.1.5_bjd5gsm3taggffzj2wycnjyryi
@@ -20255,6 +20255,7 @@ packages:
       resolve-url-loader: 5.0.0
       sass-loader: 12.6.0_sass@1.52.1+webpack@5.72.1
       semver: 7.3.7
+      tsconfig-paths: 4.0.0
       tsconfig-paths-webpack-plugin: 3.5.2
     transitivePeerDependencies:
       - fibers
@@ -21291,6 +21292,14 @@ packages:
       json5: 1.0.1
       minimist: 1.2.6
       strip-bom: 3.0.0
+
+  /tsconfig-paths/4.0.0:
+    resolution: {integrity: sha512-SLBg2GBKlR6bVtMgJJlud/o3waplKtL7skmLkExomIiaAtLGtVsoXIqP3SYdjbcH9lq/KVv7pMZeCBpLYOit6Q==}
+    dependencies:
+      json5: 2.2.1
+      minimist: 1.2.6
+      strip-bom: 3.0.0
+    dev: true
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
