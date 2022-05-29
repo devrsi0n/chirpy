@@ -102,7 +102,7 @@ function findCommentById(comments: CommentLeafType[], id: string): CommentLeafTy
     if (comment.id === id) {
       return comment;
     }
-    return findCommentById(comment.replies, id);
+    return findCommentById(comment.replies as CommentLeafType[], id);
   }
   return null;
 }
@@ -114,7 +114,7 @@ function deleteACommentById(comments: CommentLeafType[], id: string): CommentLea
       continue;
     }
     if (comment.replies.length > 0) {
-      comment.replies = deleteACommentById(comment.replies, id);
+      comment.replies = deleteACommentById(comment.replies as CommentLeafType[], id);
     }
     newComments.push(comment);
   }
