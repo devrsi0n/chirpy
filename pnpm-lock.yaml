@@ -245,7 +245,7 @@ importers:
       webpack: 5.72.1
       whatwg-fetch: 3.6.2
       wonka: 4.0.15
-      ws: 8.6.0
+      ws: 8.7.0
     dependencies:
       '@geist-ui/react-icons': 1.0.1_react@18.1.0
       '@headlessui/react': 1.6.1_ef5jwxihqo6n7gxfmzogljlgcm
@@ -313,7 +313,7 @@ importers:
       urql: 2.2.0_7oyq4t3ocdziwagw7zfqg4youi
       web-push: 3.4.5
       wonka: 4.0.15
-      ws: 8.6.0
+      ws: 8.7.0
     devDependencies:
       '@babel/core': 7.17.12
       '@chirpy-dev/comment-bootstrapper': link:../comment-bootstrapper
@@ -3041,12 +3041,12 @@ packages:
       extract-files: 11.0.0
       graphql: 16.5.0
       graphql-ws: 5.8.2_graphql@16.5.0
-      isomorphic-ws: 4.0.1_ws@8.6.0
+      isomorphic-ws: 4.0.1_ws@8.7.0
       meros: 1.2.0_@types+node@16.11.36
       sync-fetch: 0.3.1
       tslib: 2.4.0
       value-or-promise: 1.0.11
-      ws: 8.6.0
+      ws: 8.7.0
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
@@ -4983,7 +4983,7 @@ packages:
       util-deprecate: 1.0.2
       watchpack: 2.3.1
       webpack: 4.46.0
-      ws: 8.6.0
+      ws: 8.7.0
       x-default-browser: 0.4.0
     transitivePeerDependencies:
       - '@storybook/mdx2-csf'
@@ -13991,12 +13991,12 @@ packages:
       - encoding
     dev: true
 
-  /isomorphic-ws/4.0.1_ws@8.6.0:
+  /isomorphic-ws/4.0.1_ws@8.7.0:
     resolution: {integrity: sha512-BhBvN2MBpWTaSHdWRb/bwdZJ1WaehQ2L1KngkCkfLUGF0mAWAT1sQUQacEmQ0jXkFw/czDXPNQSL5u2/Krsz1w==}
     peerDependencies:
       ws: '*'
     dependencies:
-      ws: 8.6.0
+      ws: 8.7.0
     dev: true
 
   /isstream/0.1.2:
@@ -14757,7 +14757,7 @@ packages:
       whatwg-encoding: 2.0.0
       whatwg-mimetype: 3.0.0
       whatwg-url: 10.0.0
-      ws: 8.6.0
+      ws: 8.7.0
       xml-name-validator: 4.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -22578,8 +22578,8 @@ packages:
         optional: true
     dev: false
 
-  /ws/8.6.0:
-    resolution: {integrity: sha512-AzmM3aH3gk0aX7/rZLYvjdvZooofDu3fFOzGqcSnQ1tOcTWwhM/o+q++E8mAyVVIyUdajrkzWUGftaVSDLn1bw==}
+  /ws/8.7.0:
+    resolution: {integrity: sha512-c2gsP0PRwcLFzUiA8Mkr37/MI7ilIlHQxaEAtd0uNMbVMoy8puJyafRlm0bV9MbGSabUPeLrRRaqIBcFcA2Pqg==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
