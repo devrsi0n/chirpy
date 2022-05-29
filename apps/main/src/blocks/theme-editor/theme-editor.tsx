@@ -98,6 +98,9 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             <div className="flex flex-row items-center space-x-2">
               <Popover
                 buttonAs={IconButton}
+                buttonProps={{
+                  'aria-label': 'Click to expanded the color picker',
+                }}
                 content={
                   <ul className="flex flex-row space-x-3">
                     {Object.entries(colorOptions).map(([key, color]) => (
