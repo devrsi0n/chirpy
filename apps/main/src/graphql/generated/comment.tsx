@@ -68,11 +68,11 @@ export type CommentTreeSubscription = {
   }>;
 };
 
-export type CommentDetailsSubscriptionVariables = Types.Exact<{
+export type CommentTimelineSubscriptionVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
 }>;
 
-export type CommentDetailsSubscription = {
+export type CommentTimelineSubscription = {
   __typename?: 'subscription_root';
   commentByPk?: {
     __typename?: 'Comment';
@@ -200,8 +200,8 @@ export function useCommentTreeSubscription<TData = CommentTreeSubscription>(
     handler,
   );
 }
-export const CommentDetailsDocument = gql`
-  subscription commentDetails($id: uuid!) {
+export const CommentTimelineDocument = gql`
+  subscription commentTimeline($id: uuid!) {
     commentByPk(id: $id) {
       ...commentContent
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
@@ -221,15 +221,15 @@ export const CommentDetailsDocument = gql`
   ${CommentContentFragmentDoc}
 `;
 
-export function useCommentDetailsSubscription<TData = CommentDetailsSubscription>(
-  options: Omit<Urql.UseSubscriptionArgs<CommentDetailsSubscriptionVariables>, 'query'> = {},
-  handler?: Urql.SubscriptionHandler<CommentDetailsSubscription, TData>,
+export function useCommentTimelineSubscription<TData = CommentTimelineSubscription>(
+  options: Omit<Urql.UseSubscriptionArgs<CommentTimelineSubscriptionVariables>, 'query'> = {},
+  handler?: Urql.SubscriptionHandler<CommentTimelineSubscription, TData>,
 ) {
   return Urql.useSubscription<
-    CommentDetailsSubscription,
+    CommentTimelineSubscription,
     TData,
-    CommentDetailsSubscriptionVariables
-  >({ query: CommentDetailsDocument, ...options }, handler);
+    CommentTimelineSubscriptionVariables
+  >({ query: CommentTimelineDocument, ...options }, handler);
 }
 export const InsertOneCommentDocument = gql`
   mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {

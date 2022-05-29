@@ -1,23 +1,23 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { CommentDetailNode } from '$/types/widget';
+import { CommentTimelineNode } from '$/types/widget';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
 import styles from './comment-linked-list.module.scss';
 
-export type Comment = NonNullable<CommentDetailNode>;
+export type Comment = NonNullable<CommentTimelineNode>;
 
-export type CommentLinkedListProps = {
+export type CommentTimelineProps = {
   comment: Comment;
 };
 
 /**
- * Render a comment with it's ancestor and descendant, like a linked list.
+ * Render a comment with it's ancestor and descendant, like a comment timeline.
  */
-export function CommentLinkedList({ comment }: CommentLinkedListProps): JSX.Element {
+export function CommentTimeline({ comment }: CommentTimelineProps): JSX.Element {
   const [ancestorComments, setAncestorComments] = React.useState<Comment[]>([]);
   React.useEffect(() => {
     let currComment: $TsAny = comment;
@@ -38,7 +38,7 @@ export function CommentLinkedList({ comment }: CommentLinkedListProps): JSX.Elem
           return (
             <ParentBranch key={_comment.id}>
               <CommentCard
-                preventDetailsPage={_comment.id === comment.id}
+                disableTimelineButton={_comment.id === comment.id}
                 commentId={_comment.id}
                 content={_comment.content as RTEValue}
                 author={_comment.user}
@@ -72,7 +72,7 @@ export function CommentLinkedList({ comment }: CommentLinkedListProps): JSX.Elem
   );
 }
 
-const MemoCommentLinkedList = React.memo(CommentLinkedList);
+const MemoCommentLinkedList = React.memo(CommentTimeline);
 export { MemoCommentLinkedList };
 
 type ParentBranchProps = React.ComponentPropsWithoutRef<'li'>;

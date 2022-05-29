@@ -14,14 +14,13 @@ import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { UseCreateAComment } from '$/contexts/comment-context/use-create-a-comment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
 import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
-import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
+import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 
@@ -41,7 +40,10 @@ export type CommentCardProps = {
   deletedAt?: string | null;
   likes: Like[];
   depth: number;
-  preventDetailsPage?: boolean;
+  /**
+   * Disable the timeline button, avoid navigate to the same page
+   */
+  disableTimelineButton?: boolean;
 };
 
 export function CommentCard({
@@ -51,7 +53,7 @@ export function CommentCard({
   depth,
   createdAt,
   likes,
-  preventDetailsPage,
+  disableTimelineButton,
   deletedAt,
 }: CommentCardProps): JSX.Element {
   const { avatar, name } = author;
@@ -77,11 +79,11 @@ export function CommentCard({
   const handleDimissRTE = () => {
     setShowReplyEditor(false);
   };
-  const detailsURL = `/widget/comment/details/${commentId}`;
+  const timelineURL = `/widget/comment/timeline/${commentId}`;
   const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
 
   const handleClickLinkAction: React.MouseEventHandler<HTMLElement> = (e) => {
-    if (preventDetailsPage) {
+    if (disableTimelineButton) {
       e.preventDefault();
       setContainerAnimate('shake');
     }
@@ -188,9 +190,9 @@ export function CommentCard({
                 icon={<MessageSquare size={20} className="-scale-x-1" />}
               />
             </span>
-            <DetailLinkButton
-              preventLink={preventDetailsPage}
-              href={detailsURL}
+            <TimelineLinkButton
+              preventLink={disableTimelineButton}
+              href={timelineURL}
               onClick={handleClickLinkAction}
             />
           </div>
@@ -211,12 +213,12 @@ export function CommentCard({
   );
 }
 
-type DetailLinkButtonProps = {
+type TimelineLinkButtonProps = {
   preventLink?: boolean;
 } & Pick<LinkProps, 'href'> &
   Pick<ButtonProps, 'onClick'>;
 
-function DetailLinkButton({ preventLink, href, onClick }: DetailLinkButtonProps): JSX.Element {
+function TimelineLinkButton({ preventLink, href, onClick }: TimelineLinkButtonProps): JSX.Element {
   const childButton = (
     <ActionButton
       color="green"
@@ -224,9 +226,7 @@ function DetailLinkButton({ preventLink, href, onClick }: DetailLinkButtonProps)
       disabled={preventLink}
       onClick={onClick}
       title={
-        preventLink
-          ? `This is already the current comment's detail page`
-          : 'The details of this comment'
+        preventLink ? `This is already the current comment's timeline` : `This comment's timeline`
       }
     />
   );

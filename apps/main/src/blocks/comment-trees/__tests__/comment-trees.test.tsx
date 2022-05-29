@@ -3,12 +3,20 @@ import { cleanup, render, screen } from '@testing-library/react';
 import {
   generateCommentFragment,
   getTextsOfComment,
-} from '$/blocks/comment-linked-list/__tests__/mock-data';
+} from '$/blocks/comment-timeline/__tests__/mock-data';
+import * as CommentContext from '$/contexts/comment-context/comment-context-provider';
 
 import { CommentTrees } from '..';
 
 const mockOnSubmitReply = jest.fn();
 const mockOnClickLikeAction = jest.fn();
+jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
+  pageId: 'a-page-id',
+  projectId: 'a-project-id',
+  deleteAComment: jest.fn(),
+  toggleALikeAction: mockOnClickLikeAction,
+  createAComment: mockOnSubmitReply,
+}));
 const mockComments = [
   {
     ...generateCommentFragment('1'),
@@ -22,13 +30,7 @@ const mockComments = [
 
 describe('CommentTrees', () => {
   beforeEach(() => {
-    render(
-      <CommentTrees
-        comments={mockComments as any}
-        onSubmitReply={mockOnSubmitReply}
-        onClickLikeAction={mockOnClickLikeAction}
-      />,
-    );
+    render(<CommentTrees comments={mockComments as any} />);
   });
 
   afterEach(() => {
