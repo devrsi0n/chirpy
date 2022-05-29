@@ -1,6 +1,11 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.0.0/schema.json",
-  "changelog": ["@changesets/changelog-github", "devrsi0n/chirpy"],
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "devrsi0n/chirpy"
+    }
+  ],
   "commit": false,
   "fixed": [],
   "linked": [],
