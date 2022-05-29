@@ -85,6 +85,7 @@ export function CommentWidgetPreview(): JSX.Element {
   const onClickCommentTimeline = React.useCallback(() => {
     showToast({
       title: `You clicked a comment's timeline`,
+      type: 'info',
     });
   }, [showToast]);
   const commentContext: CommentContextType = React.useMemo(

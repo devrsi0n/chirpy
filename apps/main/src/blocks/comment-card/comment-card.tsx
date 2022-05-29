@@ -2,9 +2,10 @@ import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import clsx from 'clsx';
-import { m, Variants } from 'framer-motion';
+import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
 
+import { easeInOut } from '$/components/animation';
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button } from '$/components/button';
 import { Menu, MenuItemPadding } from '$/components/menu';
@@ -195,17 +196,19 @@ export function CommentCard({
             />
           </div>
         )}
-        {showReplyEditor && (
-          <div className="flex flex-col space-y-2 pr-6">
-            <RichTextEditor
-              placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
-              onSubmit={handleSubmitReply}
-              styles={{ editable: `bg-white`, root: `mt-2` }}
-              isReply
-              onClickDismiss={handleDimissRTE}
-            />
-          </div>
-        )}
+        <AnimatePresence>
+          {showReplyEditor && (
+            <m.div {...easeInOut} className="flex flex-col space-y-2 pr-6">
+              <RichTextEditor
+                placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
+                onSubmit={handleSubmitReply}
+                styles={{ editable: `bg-white`, root: `mt-2` }}
+                isReply
+                onClickDismiss={handleDimissRTE}
+              />
+            </m.div>
+          )}
+        </AnimatePresence>
       </div>
     </m.article>
   );

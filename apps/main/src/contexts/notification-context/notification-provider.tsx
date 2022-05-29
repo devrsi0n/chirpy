@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { asyncNoop, noop } from '$/utilities/isomorphic/function';
+
 import { useCurrentUser } from '../current-user-context/use-current-user';
 import { useReloadWhenSwChange } from './use-reload-when-sw-change';
 import {
@@ -17,10 +19,8 @@ export interface INotificationContext {
 
 const NotificationContext = React.createContext<INotificationContext>({
   didRegister: false,
-  setDidRegister: () => {
-    //
-  },
-  registerNotification: () => Promise.resolve(),
+  setDidRegister: noop,
+  registerNotification: asyncNoop,
   didDeny: false,
 });
 

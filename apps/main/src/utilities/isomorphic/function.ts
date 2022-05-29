@@ -1,7 +1,7 @@
 export function noop() {
-  //
+  return;
 }
 
-export function asyncNoop(): Promise<void> {
-  return Promise.resolve();
+export async function asyncNoop(): Promise<void> {
+  return;
 }

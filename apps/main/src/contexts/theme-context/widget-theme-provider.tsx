@@ -2,6 +2,7 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { Theme } from '$/types/theme.type';
+import { noop } from '$/utilities/isomorphic/function';
 
 import { siteTheme } from './site-theme';
 import { useThemeVariables } from './use-theme-variables';
@@ -21,7 +22,7 @@ export type WidgetThemeContextType = {
 export const WidgetThemeContext = React.createContext<WidgetThemeContextType>({
   siteTheme,
   widgetTheme: undefined,
-  setWidgetTheme: () => null,
+  setWidgetTheme: noop,
 });
 
 export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Element {
