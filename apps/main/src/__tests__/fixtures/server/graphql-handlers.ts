@@ -3,7 +3,7 @@ import { graphql } from 'msw';
 const localGraphQL = graphql.link('*/v1/graphql');
 
 export const graphqlHandlers = [
-  localGraphQL.query('userByPk', (req, res, ctx) => {
+  localGraphQL.query('currentUser', (req, res, ctx) => {
     const { id } = req.variables;
     return res(
       ctx.data({

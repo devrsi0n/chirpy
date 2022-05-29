@@ -12,7 +12,7 @@ import { getTextFromRteValue } from '$/utilities/isomorphic/text';
 import { SignInButton } from '../../sign-in-button';
 import { RTEValue } from '../type';
 import { AskNotificationPermissionPopover } from './ask-notification-permission-popover';
-import { ToxicTextDialog } from './toxic-text-dialog';
+import { ToxicTextPopover } from './toxic-text-popover';
 
 export interface IMainButtonProps {
   disabled?: boolean;
@@ -76,14 +76,14 @@ export function MainButton({
       )}
       {isSignIn ? (
         didRegister || didDeny || askNextTime ? (
-          <ToxicTextDialog
+          <ToxicTextPopover
             buttonProps={postButtonProps}
             onClickSubmit={handleCheckToxicTextBeforeSubmit}
             onClickAckToxicComment={reset}
             toxicLabels={toxicLabels}
           >
             {buttonChildren}
-          </ToxicTextDialog>
+          </ToxicTextPopover>
         ) : (
           <AskNotificationPermissionPopover
             onClickAskNextTime={() => {

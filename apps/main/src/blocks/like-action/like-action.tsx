@@ -3,6 +3,7 @@ import HeartFill from '@geist-ui/react-icons/heartFill';
 import * as React from 'react';
 
 import { ActionButton, ActionButtonProps } from '$/components/button';
+import { useCommentContext } from '$/contexts/comment-context';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 
 export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
@@ -16,18 +17,13 @@ export type LikeActionProps = React.PropsWithChildren<
   {
     likes: Like[];
     commentId: string;
-    onClickLikeAction: ClickLikeActionHandler;
   } & Omit<ActionButtonProps, 'icon' | 'color' | 'onClick'>
 >;
 
 // TODO: Animation
-export function LikeAction({
-  likes = [],
-  commentId,
-  onClickLikeAction,
-  ...restProps
-}: LikeActionProps): JSX.Element {
+export function LikeAction({ likes = [], commentId, ...restProps }: LikeActionProps): JSX.Element {
   const { data } = useCurrentUser();
+  const { toggleALikeAction } = useCommentContext();
   const currentUserId = data?.id;
   let likedId = '';
   const didLike =
@@ -41,7 +37,7 @@ export function LikeAction({
     });
 
   const handleClickLike = () => {
-    onClickLikeAction(didLike, likedId, commentId);
+    toggleALikeAction(didLike, likedId, commentId);
   };
 
   const HeartComponent = didLike ? HeartFill : Heart;

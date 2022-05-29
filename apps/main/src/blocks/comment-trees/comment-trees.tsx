@@ -2,8 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
-import { SubmitHandler } from '$/hooks/use-create-a-comment';
-import { ToggleLieAction } from '$/hooks/use-toggle-a-like-action';
+import { useCommentContext } from '$/contexts/comment-context';
 import { CommentLeafType } from '$/types/widget';
 import { getCommentCount } from '$/utilities/get-comment-count';
 
@@ -14,17 +13,11 @@ import { UserMenu } from '../user-menu';
 
 export type CommentTreesProps = {
   comments: CommentLeafType[];
-  onSubmitReply: SubmitHandler;
-  onClickLikeAction: ToggleLieAction;
   rtePlaceholder?: string;
 };
 
-export function CommentTrees({
-  comments,
-  onSubmitReply,
-  onClickLikeAction,
-  rtePlaceholder,
-}: CommentTreesProps): JSX.Element {
+export function CommentTrees({ comments, rtePlaceholder }: CommentTreesProps): JSX.Element {
+  const { createAComment } = useCommentContext();
   const commentCount = getCommentCount(comments);
   return (
     <div className="space-y-4">
@@ -41,19 +34,13 @@ export function CommentTrees({
         <div className="space-y-2">
           <RichTextEditor
             placeholder={rtePlaceholder || `What are your thoughts? (Markdown shortcuts supported)`}
-            onSubmit={onSubmitReply}
+            onSubmit={createAComment}
           />
         </div>
         <ul className="space-y-5">
           <AnimatePresence>
             {comments?.map((comment: CommentLeafType) => (
-              <CommentTree
-                key={comment.id}
-                depth={1}
-                comment={comment}
-                onClickLikeAction={onClickLikeAction}
-                onSubmitReply={onSubmitReply}
-              />
+              <CommentTree key={comment.id} depth={1} comment={comment} />
             ))}
           </AnimatePresence>
         </ul>

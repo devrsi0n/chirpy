@@ -20,7 +20,7 @@ export function WidgetLayout({ title, children, widgetTheme }: WidgetLayoutProps
   useWidgetSideEffects();
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
-      <LayoutWrapper title={title} className="min-h-full py-10 sm:mr-1">
+      <LayoutWrapper title={title} className="min-h-full pt-14 pb-10 sm:mr-1">
         <AnimatePresence>
           <m.div
             transition={{ duration: 0.35 }}

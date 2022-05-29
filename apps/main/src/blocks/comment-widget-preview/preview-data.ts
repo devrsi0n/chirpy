@@ -1,4 +1,7 @@
-export const previewComments = [
+export const PAGE_ID = 'b5a16120-593c-492f-ad94-e14d247485f3';
+export const PROJECT_ID = '3c5d2d41-e2df-4b31-98f8-6e471acab461';
+
+export const PREVIEW_COMMENTS = [
   {
     __typename: 'Comment',
     id: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
@@ -18,7 +21,7 @@ export const previewComments = [
     },
     createdAt: '2021-04-17T01:43:10.581584+00:00',
     parentId: null,
-    pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
+    pageId: PAGE_ID,
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',
@@ -46,7 +49,7 @@ export const previewComments = [
         },
         createdAt: '2021-04-17T02:31:51.05373+00:00',
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
-        pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
+        pageId: PAGE_ID,
         user: {
           __typename: 'User',
           id: '634da1be-cc04-4719-908e-c642de76e292',
@@ -77,7 +80,7 @@ export const previewComments = [
     },
     createdAt: '2021-04-17T02:51:30.517834+00:00',
     parentId: null,
-    pageId: 'b5a16120-593c-492f-ad94-e14d247485f3',
+    pageId: PAGE_ID,
     user: {
       __typename: 'User',
       id: '634da1be-cc04-4719-908e-c642de76e292',

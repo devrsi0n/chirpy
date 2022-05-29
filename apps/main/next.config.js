@@ -25,6 +25,11 @@ module.exports = withPlugins(
     ],
   ],
   {
+    experimental: {
+      scrollRestoration: true,
+      legacyBrowsers: false,
+      browsersListForSwc: true,
+    },
     swcMinify: true,
     async rewrites() {
       return [

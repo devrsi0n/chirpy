@@ -3,23 +3,18 @@ import * as React from 'react';
 import { CommentLeafType } from '$/types/widget';
 
 import { CommentBranch } from '../comment-branch';
-import { CommentCard, CommentCardProps } from '../comment-card';
+import { CommentCard } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
 
 export type CommentProps = {
   comment: CommentLeafType;
   depth: number;
-} & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
+};
 
 /**
  * Render a comment with it's replies, like a tree.
  */
-function CommentTree({
-  comment,
-  depth,
-  onClickLikeAction,
-  onSubmitReply,
-}: CommentProps): JSX.Element {
+function CommentTree({ comment, depth }: CommentProps): JSX.Element {
   return (
     <CommentBranch
       key={comment.id}
@@ -36,19 +31,11 @@ function CommentTree({
         depth={depth}
         createdAt={comment.createdAt}
         deletedAt={comment.deletedAt}
-        onClickLikeAction={onClickLikeAction}
-        onSubmitReply={onSubmitReply}
       />
       <div className="flex flex-col items-end">
         <ul className="w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)]">
           {comment.replies?.map((reply: $TsFixMe) => (
-            <CommentTree
-              key={reply.id}
-              comment={reply}
-              depth={depth + 1}
-              onClickLikeAction={onClickLikeAction}
-              onSubmitReply={onSubmitReply}
-            />
+            <CommentTree key={reply.id} comment={reply} depth={depth + 1} />
           ))}
         </ul>
       </div>

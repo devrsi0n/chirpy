@@ -10,8 +10,11 @@ import { generateCommentCard } from './mock-data';
 
 const mockDeleteAComment = jest.fn();
 jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
+  pageId: 'a-page-id',
   projectId: EDITABLE_PROJECT_IDS[0],
   deleteAComment: mockDeleteAComment,
+  toggleALikeAction: mockHandleClickLikeAction,
+  createAComment: mockHandleSubmitReply,
 }));
 
 const mockHandleSubmitReply = jest.fn().mockResolvedValue(null);
@@ -21,14 +24,7 @@ const staticProps = generateCommentCard(1);
 
 describe('CommentCard', () => {
   beforeEach(() => {
-    pageRender(
-      <CommentCard
-        {...staticProps}
-        depth={1}
-        onClickLikeAction={mockHandleClickLikeAction}
-        onSubmitReply={mockHandleSubmitReply}
-      ></CommentCard>,
-    );
+    pageRender(<CommentCard {...staticProps} depth={1}></CommentCard>);
   });
 
   afterEach(() => {

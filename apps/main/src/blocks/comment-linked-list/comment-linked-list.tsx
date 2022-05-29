@@ -4,7 +4,7 @@ import * as React from 'react';
 import { CommentDetailNode } from '$/types/widget';
 
 import { CommentBranch } from '../comment-branch';
-import { CommentCard, CommentCardProps } from '../comment-card';
+import { CommentCard } from '../comment-card';
 import { RTEValue } from '../rich-text-editor';
 import styles from './comment-linked-list.module.scss';
 
@@ -12,16 +12,12 @@ export type Comment = NonNullable<CommentDetailNode>;
 
 export type CommentLinkedListProps = {
   comment: Comment;
-} & Pick<CommentCardProps, 'onSubmitReply' | 'onClickLikeAction'>;
+};
 
 /**
  * Render a comment with it's ancestor and descendant, like a linked list.
  */
-export function CommentLinkedList({
-  comment,
-  onSubmitReply,
-  onClickLikeAction,
-}: CommentLinkedListProps): JSX.Element {
+export function CommentLinkedList({ comment }: CommentLinkedListProps): JSX.Element {
   const [ancestorComments, setAncestorComments] = React.useState<Comment[]>([]);
   React.useEffect(() => {
     let currComment: $TsAny = comment;
@@ -50,8 +46,6 @@ export function CommentLinkedList({
                 depth={depth}
                 createdAt={_comment.createdAt}
                 deletedAt={_comment.deletedAt}
-                onSubmitReply={onSubmitReply}
-                onClickLikeAction={onClickLikeAction}
               />
             </ParentBranch>
           );
@@ -69,8 +63,6 @@ export function CommentLinkedList({
                 depth={depth + 1}
                 createdAt={reply.createdAt}
                 deletedAt={reply.deletedAt}
-                onClickLikeAction={onClickLikeAction}
-                onSubmitReply={onSubmitReply}
               />
             </CommentBranch>
           ))}

@@ -25,8 +25,6 @@ import {
   useCommentDetailsSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { useCreateAComment } from '$/hooks/use-create-a-comment';
-import { useToggleALikeAction } from '$/hooks/use-toggle-a-like-action';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
@@ -38,9 +36,6 @@ import { ssrMode } from '$/utilities/env';
 export default function CommentDetailsWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
-  const handleSubmitReply = useCreateAComment({ pageId: props.comment?.pageId || '' });
-
-  const handleClickLikeAction = useToggleALikeAction();
   const [{ data }] = useCommentDetailsSubscription({
     variables: { id: props.commentId },
     pause: ssrMode,
@@ -50,7 +45,7 @@ export default function CommentDetailsWidget(
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment details">
-      <CommentContextProvider projectId={props.projectId}>
+      <CommentContextProvider projectId={props.projectId} pageId={comment?.pageId || ''}>
         <div className="mb-4 flex flex-row items-center justify-between">
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
             <IconButton className="translate-x-1">
@@ -63,14 +58,7 @@ export default function CommentDetailsWidget(
           </Heading>
           <UserMenu variant="Widget" />
         </div>
-        {comment?.id && (
-          <CommentLinkedList
-            key={comment.id}
-            comment={comment}
-            onClickLikeAction={handleClickLikeAction}
-            onSubmitReply={handleSubmitReply}
-          />
-        )}
+        {comment?.id && <CommentLinkedList key={comment.id} comment={comment} />}
         <PoweredBy />
       </CommentContextProvider>
     </WidgetLayout>
