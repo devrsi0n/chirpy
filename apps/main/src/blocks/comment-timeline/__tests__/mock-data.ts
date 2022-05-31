@@ -1,6 +1,6 @@
-import { CommentLinkedListProps } from '../comment-linked-list';
+import { CommentTimelineProps } from '../comment-timeline';
 
-export function generateComment(): CommentLinkedListProps['comment'] {
+export function generateComment(): CommentTimelineProps['comment'] {
   return {
     parent: generateCommentFragment('parent-1'),
     ...generateCommentFragment('1'),
@@ -43,7 +43,7 @@ export function generateCommentFragment(fill: string) {
   };
 }
 
-export function getTextsOfComment(comment: CommentLinkedListProps['comment']) {
+export function getTextsOfComment(comment: CommentTimelineProps['comment']) {
   return {
     parent: {
       text: comment.parent ? getTextOfContent(comment.parent.content as any) : '',

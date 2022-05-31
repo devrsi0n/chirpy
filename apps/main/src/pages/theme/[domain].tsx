@@ -16,7 +16,12 @@ export type ThemeProps = StaticProps;
 
 export default function ThemePage(props: ThemeProps): JSX.Element {
   return (
-    <SiteLayout title={props.project?.name || 'Theme'}>
+    <SiteLayout
+      title={props.project?.name || 'Theme'}
+      styles={{
+        container: `!grid-cols-[1fr_min(105ch,calc(100%-32px))_1fr]`,
+      }}
+    >
       <WidgetThemeProvider
         widgetTheme={props.project?.theme as ThemeType}
         selector={`.${THEME_WIDGET_CLS}`}

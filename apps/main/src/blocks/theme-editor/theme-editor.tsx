@@ -1,4 +1,3 @@
-import * as colors from '@radix-ui/colors';
 import clsx from 'clsx';
 import merge from 'lodash/merge';
 import { useTheme } from 'next-themes';
@@ -10,51 +9,11 @@ import { Heading, IHeadingProps } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useWidgetTheme } from '$/contexts/theme-context';
-import { translateRadixColor } from '$/contexts/theme-context/utilities';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { ThemeProjectByPkQuery } from '$/server/graphql/generated/project';
 
 import { CommentWidgetPreview } from '../comment-widget-preview';
-
-type ColorSeries = {
-  light: Record<string, string>;
-  dark: Record<string, string>;
-};
-
-const colorOptions: Record<string, ColorSeries> = {
-  red: {
-    light: translateRadixColor(colors.red),
-    dark: translateRadixColor(colors.redDark),
-  },
-  amber: {
-    light: translateRadixColor(colors.amber),
-    dark: translateRadixColor(colors.amberDark),
-  },
-  green: {
-    light: translateRadixColor(colors.green),
-    dark: translateRadixColor(colors.greenDark),
-  },
-  blue: {
-    light: translateRadixColor(colors.blue),
-    dark: translateRadixColor(colors.blueDark),
-  },
-  indigo: {
-    light: translateRadixColor(colors.indigo),
-    dark: translateRadixColor(colors.indigoDark),
-  },
-  violet: {
-    light: translateRadixColor(colors.violet),
-    dark: translateRadixColor(colors.violetDark),
-  },
-  default: {
-    light: translateRadixColor(colors.plum),
-    dark: translateRadixColor(colors.plumDark),
-  },
-  pink: {
-    light: translateRadixColor(colors.pink),
-    dark: translateRadixColor(colors.pinkDark),
-  },
-};
+import { ColorSeries, colorOptions } from './colors';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 

@@ -2,7 +2,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 
 import * as Types from './types';
 
-export type CommentsQueryVariables = Types.Exact<{ [key: string]: never }>;
+export type CommentsQueryVariables = Types.Exact<{
+  newerThan: Types.Scalars['timestamptz'];
+}>;
 
 export type CommentsQuery = {
   __typename?: 'query_root';
@@ -67,12 +69,47 @@ export const CommentsDocument = {
       kind: 'OperationDefinition',
       operation: 'query',
       name: { kind: 'Name', value: 'comments' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'newerThan' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'comments' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'createdAt' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_gt' },
+                            value: { kind: 'Variable', name: { kind: 'Name', value: 'newerThan' } },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],

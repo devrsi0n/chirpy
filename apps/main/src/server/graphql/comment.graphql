@@ -1,5 +1,5 @@
-query comments {
-  comments {
+query comments($newerThan: timestamptz!) {
+  comments(where: { createdAt: { _gt: $newerThan } }) {
     id
   }
 }

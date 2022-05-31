@@ -36,7 +36,7 @@ subscription commentTree($pageURL: String!) {
 }
 
 # Query ancestors and children
-subscription commentDetails($id: uuid!) {
+subscription commentTimeline($id: uuid!) {
   commentByPk(id: $id) {
     ...commentContent
     replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {

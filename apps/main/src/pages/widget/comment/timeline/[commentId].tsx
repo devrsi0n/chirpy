@@ -1,4 +1,5 @@
 import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
+import dayjs from 'dayjs';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -11,7 +12,7 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentLinkedList } from '$/blocks/comment-linked-list';
+import { CommentTimeline } from '$/blocks/comment-timeline';
 import { WidgetLayout } from '$/blocks/layout';
 import { PoweredBy } from '$/blocks/powered-by';
 import { UserMenu } from '$/blocks/user-menu';
@@ -20,23 +21,22 @@ import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import {
-  CommentDetailsDocument,
-  CommentDetailsSubscription,
-  useCommentDetailsSubscription,
+  CommentTimelineDocument,
+  CommentTimelineSubscription,
+  useCommentTimelineSubscription,
 } from '$/graphql/generated/comment';
 import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
-import { CommentDetailNode } from '$/types/widget';
+import { CommentTimelineNode } from '$/types/widget';
 import { ssrMode } from '$/utilities/env';
 
-// TODO: Migrate this page to a dialog widget (for analytics)
-export default function CommentDetailsWidget(
+export default function CommentTimelineWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
-  const [{ data }] = useCommentDetailsSubscription({
+  const [{ data }] = useCommentTimelineSubscription({
     variables: { id: props.commentId },
     pause: ssrMode,
   });
@@ -44,9 +44,10 @@ export default function CommentDetailsWidget(
   const comment = data?.commentByPk || props.comment;
 
   return (
-    <WidgetLayout widgetTheme={props.theme} title="Comment details">
+    <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
       <CommentContextProvider projectId={props.projectId} pageId={comment?.pageId || ''}>
         <div className="mb-4 flex flex-row items-center justify-between">
+          {/* Can't use history.back() here in case user open this page individual */}
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
             <IconButton className="translate-x-1">
               <ArrowLeft size={20} />
@@ -54,11 +55,11 @@ export default function CommentDetailsWidget(
           </Link>
           <Heading as="h4">
             <span className="font-bold">{comment?.user.name}</span>
-            <span>{`'s comment details`}</span>
+            <span>{`'s comment timeline`}</span>
           </Heading>
           <UserMenu variant="Widget" />
         </div>
-        {comment?.id && <CommentLinkedList key={comment.id} comment={comment} />}
+        {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
         <PoweredBy />
       </CommentContextProvider>
     </WidgetLayout>
@@ -70,13 +71,17 @@ type PathParams = {
 
 type StaticProps = PathParams &
   CommonWidgetProps & {
-    comment: CommentDetailNode;
+    comment: CommentTimelineNode;
     pageURL: string;
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const client = getAdminGqlClient();
-  const { data, error } = await client.query<CommentsQuery>(CommentsDocument).toPromise();
+  const { data, error } = await client
+    .query<CommentsQuery>(CommentsDocument, {
+      newerThan: dayjs().subtract(1, 'day').toISOString(),
+    })
+    .toPromise();
   if (error) {
     console.error(`Can't find the comments, error: ${error}`);
   }
@@ -88,7 +93,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
     })) || [];
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
@@ -102,11 +107,11 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   const client = getAdminGqlClient();
 
   try {
-    const { data } = await new Promise<OperationResult<CommentDetailsSubscription>>(
+    const { data } = await new Promise<OperationResult<CommentTimelineSubscription>>(
       (resolve /*reject*/) => {
         // @ts-ignore
-        /*const { unsubscribe } = */ pipe<OperationResult<CommentDetailsSubscription>>(
-          client.subscription(CommentDetailsDocument, { id: commentId }),
+        /*const { unsubscribe } = */ pipe<OperationResult<CommentTimelineSubscription>>(
+          client.subscription(CommentTimelineDocument, { id: commentId }),
           subscribe((result) => {
             // console.log(result);
             resolve(result);

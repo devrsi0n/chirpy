@@ -12,7 +12,7 @@ describe('Header', () => {
 
     cy.get('header')
       .findByRole('link', { name: /^logo of \S+/i })
-      .click();
+      .click({ force: true });
     cy.url({ timeout: 60_000 }).should('include', '/');
   });
 
@@ -27,7 +27,7 @@ describe('Header', () => {
       .findByRole('menu')
       .findByRole('menuitem', { name: 'Dashboard' })
       .should('be.visible')
-      .click();
+      .click({ force: true });
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     clickUserMenu();

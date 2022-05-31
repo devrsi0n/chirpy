@@ -1,29 +1,27 @@
-import Info from '@geist-ui/react-icons/info';
 import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import MoreVertical from '@geist-ui/react-icons/moreVertical';
 import Trash2 from '@geist-ui/react-icons/trash2';
 import clsx from 'clsx';
-import { m, Variants } from 'framer-motion';
+import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
 
+import { easeInOut } from '$/components/animation';
 import { Avatar } from '$/components/avatar';
-import { ActionButton, Button, ButtonProps } from '$/components/button';
-import { Link } from '$/components/link';
-import { LinkProps } from '$/components/link';
+import { ActionButton, Button } from '$/components/button';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { UseCreateAComment } from '$/contexts/comment-context/use-create-a-comment';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
 import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
-import { Like, LikeAction, ClickLikeActionHandler } from '../like-action';
+import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
+import { TimelineLinkButton } from './timeline-link-button';
 
 export type { ClickLikeActionHandler } from '../like-action';
 
@@ -41,7 +39,10 @@ export type CommentCardProps = {
   deletedAt?: string | null;
   likes: Like[];
   depth: number;
-  preventDetailsPage?: boolean;
+  /**
+   * Disable the timeline button, avoid navigate to the same page
+   */
+  disableTimelineButton?: boolean;
 };
 
 export function CommentCard({
@@ -51,7 +52,7 @@ export function CommentCard({
   depth,
   createdAt,
   likes,
-  preventDetailsPage,
+  disableTimelineButton,
   deletedAt,
 }: CommentCardProps): JSX.Element {
   const { avatar, name } = author;
@@ -77,11 +78,11 @@ export function CommentCard({
   const handleDimissRTE = () => {
     setShowReplyEditor(false);
   };
-  const detailsURL = `/widget/comment/details/${commentId}`;
+  const timelineURL = `/widget/comment/timeline/${commentId}`;
   const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
 
   const handleClickLinkAction: React.MouseEventHandler<HTMLElement> = (e) => {
-    if (preventDetailsPage) {
+    if (disableTimelineButton) {
       e.preventDefault();
       setContainerAnimate('shake');
     }
@@ -188,60 +189,28 @@ export function CommentCard({
                 icon={<MessageSquare size={20} className="-scale-x-1" />}
               />
             </span>
-            <DetailLinkButton
-              preventLink={preventDetailsPage}
-              href={detailsURL}
+            <TimelineLinkButton
+              disabled={disableTimelineButton}
+              href={timelineURL}
               onClick={handleClickLinkAction}
             />
           </div>
         )}
-        {showReplyEditor && (
-          <div className="flex flex-col space-y-2 pr-6">
-            <RichTextEditor
-              placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
-              onSubmit={handleSubmitReply}
-              styles={{ editable: `bg-white`, root: `mt-2` }}
-              isReply
-              onClickDismiss={handleDimissRTE}
-            />
-          </div>
-        )}
+        <AnimatePresence>
+          {showReplyEditor && (
+            <m.div {...easeInOut} className="flex flex-col space-y-2 pr-6">
+              <RichTextEditor
+                placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
+                onSubmit={handleSubmitReply}
+                styles={{ editable: `bg-white`, root: `mt-2` }}
+                isReply
+                onClickDismiss={handleDimissRTE}
+              />
+            </m.div>
+          )}
+        </AnimatePresence>
       </div>
     </m.article>
-  );
-}
-
-type DetailLinkButtonProps = {
-  preventLink?: boolean;
-} & Pick<LinkProps, 'href'> &
-  Pick<ButtonProps, 'onClick'>;
-
-function DetailLinkButton({ preventLink, href, onClick }: DetailLinkButtonProps): JSX.Element {
-  const childButton = (
-    <ActionButton
-      color="green"
-      icon={<Info size={20} />}
-      disabled={preventLink}
-      onClick={onClick}
-      title={
-        preventLink
-          ? `This is already the current comment's detail page`
-          : 'The details of this comment'
-      }
-    />
-  );
-
-  if (preventLink) {
-    return (
-      <span className="flex justify-center" onClick={onClick}>
-        {childButton}
-      </span>
-    );
-  }
-  return (
-    <Link href={href} variant="plain" className="flex justify-center">
-      {childButton}
-    </Link>
   );
 }
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { useToast } from '$/components/toast';
 import {
   CommentContext,
   CommentContextType,
@@ -80,6 +81,13 @@ export function CommentWidgetPreview(): JSX.Element {
     },
     [data.id],
   );
+  const { showToast } = useToast();
+  const onClickCommentTimeline = React.useCallback(() => {
+    showToast({
+      title: `You clicked a comment's timeline`,
+      type: 'info',
+    });
+  }, [showToast]);
   const commentContext: CommentContextType = React.useMemo(
     () => ({
       pageId: PAGE_ID,
@@ -87,8 +95,9 @@ export function CommentWidgetPreview(): JSX.Element {
       createAComment,
       deleteAComment,
       toggleALikeAction,
+      onClickCommentTimeline,
     }),
-    [createAComment, deleteAComment, toggleALikeAction],
+    [createAComment, deleteAComment, toggleALikeAction, onClickCommentTimeline],
   );
   return (
     <CommentContext.Provider value={commentContext}>
@@ -97,25 +106,35 @@ export function CommentWidgetPreview(): JSX.Element {
   );
 }
 
-function findCommentById(comments: CommentLeafType[], id: string): CommentLeafType | null {
+function findCommentById(comments: CommentLeafType[], id: string): CommentLeafType | undefined {
+  return findCommentByIdInternal(comments, id)[0];
+}
+
+function findCommentByIdInternal(
+  comments: CommentLeafType[],
+  id: string,
+  result: CommentLeafType[] = [],
+): CommentLeafType[] {
   for (const comment of comments) {
     if (comment.id === id) {
-      return comment;
+      result.push(comment);
+      break;
+    } else {
+      findCommentByIdInternal(comment.replies as CommentLeafType[], id, result);
     }
-    return findCommentById(comment.replies as CommentLeafType[], id);
   }
-  return null;
+  return result;
 }
 
 function deleteACommentById(comments: CommentLeafType[], id: string): CommentLeafType[] {
   const newComments: CommentLeafType[] = [];
   for (const comment of comments) {
     if (comment.id === id) {
-      continue;
+      comment.deletedAt = new Date().toISOString();
     }
-    if (comment.replies.length > 0) {
-      comment.replies = deleteACommentById(comment.replies as CommentLeafType[], id);
-    }
+
+    comment.replies = deleteACommentById(comment.replies as CommentLeafType[], id);
+
     newComments.push(comment);
   }
   return newComments;

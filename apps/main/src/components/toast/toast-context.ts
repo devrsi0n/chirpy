@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { noop } from '$/utilities/isomorphic/function';
+
 export type ToastType = 'success' | 'warning' | 'error' | 'info';
 
 export interface IToastAction {
@@ -30,6 +32,6 @@ export interface IToastContextType {
 
 export const ToastContext = React.createContext<IToastContextType>({
   toasts: [],
-  showToast: () => null,
-  setToasts: () => null,
+  showToast: noop,
+  setToasts: noop,
 });
