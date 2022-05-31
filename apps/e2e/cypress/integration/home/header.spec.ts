@@ -12,7 +12,7 @@ describe('Header', () => {
 
     cy.get('header')
       .findByRole('link', { name: /^logo of \S+/i })
-      .click();
+      .click({ force: true });
     cy.url({ timeout: 60_000 }).should('include', '/');
   });
 
