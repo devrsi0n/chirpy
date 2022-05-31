@@ -123,7 +123,7 @@ importers:
       '@graphql-codegen/typescript-operations': 2.4.0
       '@graphql-codegen/typescript-urql': 3.5.10
       '@graphql-typed-document-node/core': 3.1.1
-      '@headlessui/react': 1.6.1
+      '@headlessui/react': 1.6.4
       '@next/bundle-analyzer': 12.1.5
       '@radix-ui/colors': 0.1.8
       '@react-aria/button': 3.4.3
@@ -248,7 +248,7 @@ importers:
       ws: 8.7.0
     dependencies:
       '@geist-ui/react-icons': 1.0.1_react@18.1.0
-      '@headlessui/react': 1.6.1_ef5jwxihqo6n7gxfmzogljlgcm
+      '@headlessui/react': 1.6.4_ef5jwxihqo6n7gxfmzogljlgcm
       '@next/bundle-analyzer': 12.1.5
       '@radix-ui/colors': 0.1.8
       '@react-aria/button': 3.4.3_react@18.1.0
@@ -3083,8 +3083,8 @@ packages:
     dependencies:
       graphql: 16.5.0
 
-  /@headlessui/react/1.6.1_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-gMd6uIs1U4Oz718Z5gFoV0o/vD43/4zvbyiJN9Dt7PK9Ubxn+TmJwTmYwyNJc5KxxU1t0CmgTNgwZX9+4NjCnQ==}
+  /@headlessui/react/1.6.4_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-0yqz1scwbFtwljmbbKjXsSGl5ABEYNICVHZnMCWo0UtOZodo2Tpu94uOVgCRjRZ77l2WcTi2S0uidINDvG7lsA==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^16 || ^17 || ^18 || 18
