@@ -205,7 +205,7 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       mdx-prism: 0.3.4
-      msw: 0.41.0
+      msw: 0.42.0
       msw-storybook-addon: 1.6.3
       next: 12.1.5
       next-auth: 4.3.4
@@ -370,8 +370,8 @@ importers:
       intersection-observer: 0.12.0
       jest: 28.1.0_@types+node@16.11.36
       jest-environment-jsdom: 28.1.0
-      msw: 0.41.0_typescript@4.6.4
-      msw-storybook-addon: 1.6.3_66xaigxoi4m3heob6ljqgug2py
+      msw: 0.42.0_typescript@4.6.4
+      msw-storybook-addon: 1.6.3_lyxhb6azqu2mn5lfogah34p3zi
       postcss: 8.4.14
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.14
       postcss-loader: 7.0.0_xvg4ntyrrwt57qzvggqcbeozu4
@@ -3570,8 +3570,8 @@ packages:
       set-cookie-parser: 2.4.8
     dev: true
 
-  /@mswjs/interceptors/0.15.1:
-    resolution: {integrity: sha512-D5B+ZJNlfvBm6ZctAfRBdNJdCHYAe2Ix4My5qfbHV5WH+3lkt3mmsjiWJzEh5ZwGDauzY487TldI275If7DJVw==}
+  /@mswjs/interceptors/0.16.4:
+    resolution: {integrity: sha512-McPKUFlZNS/wo+OAor15k0fv2skK+EdWl9CEcdxAqsN4vKajlxCxDU4B5W/pn1y0TJPSAOmxR6LYFe/8esePrg==}
     engines: {node: '>=14'}
     dependencies:
       '@open-draft/until': 1.0.3
@@ -16044,32 +16044,32 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw-storybook-addon/1.6.3_66xaigxoi4m3heob6ljqgug2py:
+  /msw-storybook-addon/1.6.3_lyxhb6azqu2mn5lfogah34p3zi:
     resolution: {integrity: sha512-Ps80WdRmXsmenoTwfrgKMNpQD8INUUFyUFyZOecx8QjuqSlL++UYrLaGyACXN2goOn+/VS6rb0ZapbjrasPClg==}
     peerDependencies:
       msw: '>=0.35.0 <1.0.0'
     dependencies:
       '@storybook/addons': 6.5.3_ef5jwxihqo6n7gxfmzogljlgcm
       is-node-process: 1.0.1
-      msw: 0.41.0_typescript@4.6.4
+      msw: 0.42.0_typescript@4.6.4
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /msw/0.41.0_typescript@4.6.4:
-    resolution: {integrity: sha512-l6AmpuYq96/iiG1KZ4ZPLd8nlDfj7aD0eIbW+4IjfXgqY7lZgYfYJPCULo5hD0eOn0oMg8lZFXHCwrIuLA+PoA==}
+  /msw/0.42.0_typescript@4.6.4:
+    resolution: {integrity: sha512-vB9rzgiGHoQGfkKpp3QZHxobzfuuQOJk+0bff0wtbK8k3P3CaUSt8bCwvExours682AY4mUfTjIkCsxy0JoS3w==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     peerDependencies:
-      typescript: '>= 4.2.x <= 4.6.x'
+      typescript: '>= 4.2.x <= 4.7.x'
     peerDependenciesMeta:
       typescript:
         optional: true
     dependencies:
       '@mswjs/cookies': 0.2.1
-      '@mswjs/interceptors': 0.15.1
+      '@mswjs/interceptors': 0.16.4
       '@open-draft/until': 1.0.3
       '@types/cookie': 0.4.1
       '@types/js-levenshtein': 1.1.1
@@ -16082,6 +16082,7 @@ packages:
       is-node-process: 1.0.1
       js-levenshtein: 1.1.6
       node-fetch: 2.6.7
+      outvariant: 1.3.0
       path-to-regexp: 6.2.1
       statuses: 2.0.1
       strict-event-emitter: 0.2.4
