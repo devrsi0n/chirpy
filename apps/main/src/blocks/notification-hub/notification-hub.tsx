@@ -50,7 +50,10 @@ export function NotificationHub(): JSX.Element {
               ))}
             </div>
           ) : (
-            <Text variant="secondary" className="mx-5 pb-2">
+            <Text
+              variant="secondary"
+              className="mx-5 mb-2 w-40 rounded border border-dashed py-2 px-4 pb-2"
+            >
               No messages yet
             </Text>
           )}

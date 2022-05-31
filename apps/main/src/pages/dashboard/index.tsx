@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
-import { ProjectCard } from '$/blocks/project-card';
+import { EmptyProjectCard, ProjectCard } from '$/blocks/project-card';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
 import { Spinner } from '$/components/spinner';
@@ -104,7 +104,7 @@ export default function Dashboard(): JSX.Element {
           <Spinner />
         ) : (
           <div className="py-6">
-            <Text>No projects</Text>
+            <EmptyProjectCard />
           </div>
         )}
       </section>
