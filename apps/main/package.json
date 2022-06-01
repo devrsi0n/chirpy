@@ -40,7 +40,7 @@
     "@tiptap/extension-underline": "2.0.0-beta.23",
     "@tiptap/react": "2.0.0-beta.109",
     "@tiptap/starter-kit": "2.0.0-beta.185",
-    "@urql/exchange-graphcache": "4.4.0",
+    "@urql/exchange-graphcache": "4.4.2",
     "canvas-confetti": "1.5.1",
     "chart.js": "3.8.0",
     "clsx": "1.1.1",
