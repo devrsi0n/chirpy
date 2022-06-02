@@ -25,7 +25,7 @@
     "@next/bundle-analyzer": "12.1.5",
     "@radix-ui/colors": "0.1.8",
     "@react-aria/button": "3.5.0",
-    "@react-types/button": "3.4.5",
+    "@react-types/button": "3.5.0",
     "@sendinblue/client": "3.1.0",
     "@storybook/jest": "0.0.10",
     "@storybook/testing-library": "0.0.11",
