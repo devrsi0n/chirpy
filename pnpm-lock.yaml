@@ -34,7 +34,7 @@ importers:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
-      '@testing-library/react': 13.2.0
+      '@testing-library/react': 13.3.0
       '@types/jest': 27.5.1
       '@types/node': 16.11.35
       '@types/react': 18.0.9
@@ -51,7 +51,7 @@ importers:
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
-      '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
+      '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@types/jest': 27.5.1
       '@types/node': 16.11.35
       '@types/react': 18.0.9
@@ -145,7 +145,7 @@ importers:
       '@tensorflow/tfjs-converter': 3.18.0
       '@tensorflow/tfjs-core': 3.18.0
       '@testing-library/jest-dom': 5.16.4
-      '@testing-library/react': 13.2.0
+      '@testing-library/react': 13.3.0
       '@testing-library/user-event': 14.1.1
       '@tiptap/core': 2.0.0-beta.176
       '@tiptap/extension-link': 2.0.0-beta.38
@@ -338,7 +338,7 @@ importers:
       '@storybook/react': 6.5.6_mwhvws75fwdfuyay4eh2eunrx4
       '@storybook/testing-react': 1.3.0_ybpdw4jw443jzd7brjkyna6jea
       '@testing-library/jest-dom': 5.16.4
-      '@testing-library/react': 13.2.0_ef5jwxihqo6n7gxfmzogljlgcm
+      '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
       '@testing-library/user-event': 14.1.1
       '@types/canvas-confetti': 1.4.2
       '@types/cors': 2.8.12
@@ -5940,8 +5940,8 @@ packages:
       lodash: 4.17.21
       redent: 3.0.0
 
-  /@testing-library/react/13.2.0_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-Bprbz/SZVONCJy5f7hcihNCv313IJXdYiv0nSJklIs1SQCIHHNlnGNkosSXnGZTmesyGIcBGNppYhXcc11pb7g==}
+  /@testing-library/react/13.3.0_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-DB79aA426+deFgGSjnf5grczDPiL4taK3hFaa+M5q7q20Kcve9eQottOG5kZ74KEr55v0tU2CQormSSDK87zYQ==}
     engines: {node: '>=12'}
     peerDependencies:
       react: ^18.0.0 || 18
