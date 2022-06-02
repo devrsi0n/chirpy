@@ -175,7 +175,7 @@ importers:
       babel-loader: 8.2.5
       canvas-confetti: 1.5.1
       chart.js: 3.8.0
-      chromatic: 6.5.4
+      chromatic: 6.5.6
       clsx: 1.1.1
       color-convert: 2.0.1
       cors: 2.8.5
@@ -359,7 +359,7 @@ importers:
       '@urql/devtools': 2.0.3_graphql@16.5.0
       '@urql/storybook-addon': 1.0.8_qsbbt4gpdu7zwyfnxsdn2dml6u
       babel-loader: 8.2.5_72ctybzk7ntig5kqkayinqycte
-      chromatic: 6.5.4
+      chromatic: 6.5.6
       color-convert: 2.0.1
       css-loader: 6.7.1_webpack@5.72.1
       dotenv: 16.0.1
@@ -9038,8 +9038,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /chromatic/6.5.4:
-    resolution: {integrity: sha512-/yunI/+rdc56C6x0IhpPmdfK/DRMOvQ2hoNyAe6uuU9rdWRoAH72lYatr2NcpdsOdHGOcV5DKgIaKgVdPfUk1w==}
+  /chromatic/6.5.6:
+    resolution: {integrity: sha512-kXuqh3I9NZQYDR7ov5jvGatFVymkkb8fLOPFTg7XyKhAFv3qRlwR/c5Nsz5LpfuXrPAZfPVrNL7l2SROrDP96A==}
     hasBin: true
     dev: true
 
