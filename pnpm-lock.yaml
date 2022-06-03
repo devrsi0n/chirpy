@@ -14,7 +14,7 @@ importers:
       prettier: 2.6.2
       react: 18.1.0
       react-dom: 18.1.0
-      simple-git-hooks: 2.7.0
+      simple-git-hooks: 2.8.0
       turbo: 1.2.11
     devDependencies:
       '@changesets/changelog-github': 0.4.4
@@ -27,7 +27,7 @@ importers:
       prettier: 2.6.2
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
-      simple-git-hooks: 2.7.0
+      simple-git-hooks: 2.8.0
       turbo: 1.2.11
 
   apps/comment-bootstrapper:
@@ -20025,8 +20025,8 @@ packages:
     resolution: {integrity: sha1-HdrOSYF5j5O9gzlzgD2A1S6TrWo=}
     dev: true
 
-  /simple-git-hooks/2.7.0:
-    resolution: {integrity: sha512-nQe6ASMO9zn5/htIrU37xEIHGr9E6wikXelLbOeTcfsX2O++DHaVug7RSQoq+kO7DvZTH37WA5gW49hN9HTDmQ==}
+  /simple-git-hooks/2.8.0:
+    resolution: {integrity: sha512-ocmZQORwa6x9mxg+gVIAp5o4wXiWOHGXyrDBA0+UxGKIEKOyFtL4LWNKkP/2ornQPdlnlDGDteVeYP5FjhIoWA==}
     hasBin: true
     requiresBuild: true
     dev: true

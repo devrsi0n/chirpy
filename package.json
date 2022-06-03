@@ -16,7 +16,7 @@
     "@changesets/changelog-github": "0.4.4",
     "eslint": "8.16.0",
     "@chirpy-dev/eslint-config": "workspace:*",
-    "simple-git-hooks": "2.7.0",
+    "simple-git-hooks": "2.8.0",
     "prettier": "2.6.2",
     "next": "12.1.5",
     "lint-staged": "12.5.0",
