@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "./index.js",
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "3.2.0",
+    "@ianvs/prettier-plugin-sort-imports": "3.4.2",
     "prettier-plugin-tailwindcss": "0.1.11"
   },
   "devDependencies": {
