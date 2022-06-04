@@ -1,5 +1,11 @@
 # @chirpy-dev/main-app
 
+## 0.2.1
+
+### Patch Changes
+
+- [#372](https://github.com/devrsi0n/chirpy/pull/372) [`afeadea`](https://github.com/devrsi0n/chirpy/commit/afeadea65d80dc955cb5c5cf286bebdb89ab8d45) Thanks [@devrsi0n](https://github.com/devrsi0n)! - fix(analytics): max width
+
 ## 0.2.0
 
 ### Minor Changes
