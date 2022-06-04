@@ -35,7 +35,7 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@testing-library/react': 13.3.0
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
       '@types/node': 16.11.35
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.4
@@ -52,7 +52,7 @@ importers:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       '@testing-library/react': 13.3.0_ef5jwxihqo6n7gxfmzogljlgcm
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
       '@types/node': 16.11.35
       '@types/react': 18.0.9
       '@types/react-dom': 18.0.4
@@ -158,7 +158,7 @@ importers:
       '@types/d3': 3.5.47
       '@types/debounce-promise': 3.1.4
       '@types/github-slugger': 1.3.0
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
       '@types/jsonwebtoken': 8.5.8
       '@types/lodash': 4.14.182
       '@types/node': 16.11.36
@@ -345,7 +345,7 @@ importers:
       '@types/d3': 3.5.47
       '@types/debounce-promise': 3.1.4
       '@types/github-slugger': 1.3.0
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
       '@types/jsonwebtoken': 8.5.8
       '@types/lodash': 4.14.182
       '@types/node': 16.11.36
@@ -5309,7 +5309,7 @@ packages:
   /@storybook/expect/27.5.2-0:
     resolution: {integrity: sha512-cP99mhWN/JeCp7VSIiymvj5tmuMY050iFohvp8Zq+kewKsBSZ6/qpTJAGCCZk6pneTcp4S0Fm5BSqyxzbyJ3gw==}
     dependencies:
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
     dev: false
 
   /@storybook/instrumenter/6.4.22_ef5jwxihqo6n7gxfmzogljlgcm:
@@ -6524,8 +6524,8 @@ packages:
     dependencies:
       '@types/istanbul-lib-report': 3.0.0
 
-  /@types/jest/27.5.1:
-    resolution: {integrity: sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ==}
+  /@types/jest/27.5.2:
+    resolution: {integrity: sha512-mpT8LJJ4CMeeahobofYWIjFo0xonRS/HfxnVEPMPFSQdGUt1uHCnoPT7Zhb+sjDU2wz0oKV0OLUR0WzrHNgfeA==}
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
@@ -6809,7 +6809,7 @@ packages:
   /@types/testing-library__jest-dom/5.14.3:
     resolution: {integrity: sha512-oKZe+Mf4ioWlMuzVBaXQ9WDnEm1+umLx0InILg+yvZVBBDmzV5KfZyLrCvadtWcx8+916jLmHafcmqqffl+iIw==}
     dependencies:
-      '@types/jest': 27.5.1
+      '@types/jest': 27.5.2
 
   /@types/tough-cookie/4.0.2:
     resolution: {integrity: sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==}
