@@ -70,7 +70,7 @@ importers:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
-      '@testing-library/cypress': 8.0.2
+      '@testing-library/cypress': 8.0.3
       '@types/node': 16.11.36
       cypress: 9.7.0
       dotenv: 16.0.1
@@ -81,7 +81,7 @@ importers:
     dependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
-      '@testing-library/cypress': 8.0.2_cypress@9.7.0
+      '@testing-library/cypress': 8.0.3_cypress@9.7.0
       '@types/node': 16.11.36
       cypress: 9.7.0
       dotenv: 16.0.1
@@ -6045,11 +6045,11 @@ packages:
       - seedrandom
     dev: false
 
-  /@testing-library/cypress/8.0.2_cypress@9.7.0:
-    resolution: {integrity: sha512-KVdm7n37sg/A4e3wKMD4zUl0NpzzVhx06V9Tf0hZHZ7nrZ4yFva6Zwg2EFF1VzHkEfN/ahUzRtT1qiW+vuWnJw==}
+  /@testing-library/cypress/8.0.3_cypress@9.7.0:
+    resolution: {integrity: sha512-nY2YaSbmuPo5k6kL0iLj/pGPPfka3iwb3kpTx8QN/vOCns92Saz9wfACqB8FJzcR7+lfA4d5HUOWqmTddBzczg==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
-      cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      cypress: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
     dependencies:
       '@babel/runtime': 7.17.9
       '@testing-library/dom': 8.13.0
