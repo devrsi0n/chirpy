@@ -1,5 +1,5 @@
 ---
-'@chirpy-dev/main-app': minor
+'@chirpy-dev/main-app': patch
 ---
 
 fix(analytics): max width
