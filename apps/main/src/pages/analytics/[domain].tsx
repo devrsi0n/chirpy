@@ -16,7 +16,7 @@ export type AnalyticsProps = {
 export default function Analytics({ project }: AnalyticsProps): JSX.Element {
   return (
     <SiteLayout hideFullBleed title="Analytics">
-      <section className="xl:max-width[70rem] mx-auto px-4">
+      <section className="mx-auto px-4 xl:max-w-6xl">
         <PageTitle className="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{

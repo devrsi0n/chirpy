@@ -52,7 +52,7 @@ export function NotificationHub(): JSX.Element {
           ) : (
             <Text
               variant="secondary"
-              className="mx-5 mb-2 w-40 rounded border border-dashed py-2 px-4 pb-2"
+              className="mx-5 mb-2 w-max rounded border border-dashed py-2 px-4 pb-2"
             >
               No messages yet
             </Text>
