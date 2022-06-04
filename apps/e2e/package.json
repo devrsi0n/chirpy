@@ -9,7 +9,7 @@
   "dependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@testing-library/cypress": "8.0.3",
-    "@types/node": "16.11.36",
+    "@types/node": "16.11.38",
     "cypress": "9.7.0",
     "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
