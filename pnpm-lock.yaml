@@ -230,7 +230,7 @@ importers:
       rehype: 12.0.1
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
-      sass: 1.52.1
+      sass: 1.52.2
       sass-loader: 13.0.0
       storybook-addon-next: 1.6.6
       style-loader: 3.3.1
@@ -289,7 +289,7 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       mdx-prism: 0.3.4
-      next: 12.1.5_4lr7wgrejdc22b7ck6oq24c2o4
+      next: 12.1.5_7eal7btsozhlq6p7vkkqmzby7i
       next-auth: 4.3.4_fjiey3hvuybpahqq24lnfrfkk4
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
@@ -378,9 +378,9 @@ importers:
       postcss-preset-env: 7.7.0_postcss@8.4.14
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
-      sass: 1.52.1
-      sass-loader: 13.0.0_sass@1.52.1+webpack@5.72.1
-      storybook-addon-next: 1.6.6_iumrqx5jto53vr75kanummilvu
+      sass: 1.52.2
+      sass-loader: 13.0.0_sass@1.52.2+webpack@5.72.1
+      storybook-addon-next: 1.6.6_rdpqq2c2owntvontwurdnu3fvy
       style-loader: 3.3.1_webpack@5.72.1
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.2
@@ -13567,7 +13567,7 @@ packages:
     dev: true
 
   /immutable/3.7.6:
-    resolution: {integrity: sha1-E7TTyxK++hVIKib+Gy665kAHHks=}
+    resolution: {integrity: sha512-AizQPcaofEtO11RZhPPHBOJRdo/20MKQF9mBLnVkBoyHi1/zXK8fzVdnEpSV9gxqtnh6Qomfp3F0xT5qP/vThw==}
     engines: {node: '>=0.8.0'}
     dev: true
 
@@ -16488,7 +16488,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.1.5_4lr7wgrejdc22b7ck6oq24c2o4
+      next: 12.1.5_7eal7btsozhlq6p7vkkqmzby7i
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: false
@@ -16500,7 +16500,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.1.5_4lr7wgrejdc22b7ck6oq24c2o4
+      next: 12.1.5_7eal7btsozhlq6p7vkkqmzby7i
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: false
@@ -16516,7 +16516,7 @@ packages:
       urql: 2.2.0_7oyq4t3ocdziwagw7zfqg4youi
     dev: false
 
-  /next/12.1.5_4lr7wgrejdc22b7ck6oq24c2o4:
+  /next/12.1.5_7eal7btsozhlq6p7vkkqmzby7i:
     resolution: {integrity: sha512-YGHDpyfgCfnT5GZObsKepmRnne7Kzp7nGrac07dikhutWQug7hHg85/+sPJ4ZW5Q2pDkb+n0FnmLkmd44htIJQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
@@ -16539,7 +16539,7 @@ packages:
       postcss: 8.4.5
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
-      sass: 1.52.1
+      sass: 1.52.2
       styled-jsx: 5.0.1_7dyza7lwefzwx6jyet74qauufm
     optionalDependencies:
       '@next/swc-android-arm-eabi': 12.1.5
@@ -19830,7 +19830,7 @@ packages:
       - supports-color
     dev: true
 
-  /sass-loader/12.6.0_sass@1.52.1+webpack@5.72.1:
+  /sass-loader/12.6.0_sass@1.52.2+webpack@5.72.1:
     resolution: {integrity: sha512-oLTaH0YCtX4cfnJZxKSLAyglED0naiYfNG1iXfU5w1LNZ+ukoA5DtyDIN5zmKVZwYNJP4KRc5Y3hkWga+7tYfA==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
@@ -19851,11 +19851,11 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.52.1
+      sass: 1.52.2
       webpack: 5.72.1
     dev: true
 
-  /sass-loader/13.0.0_sass@1.52.1+webpack@5.72.1:
+  /sass-loader/13.0.0_sass@1.52.2+webpack@5.72.1:
     resolution: {integrity: sha512-IHCFecI+rbPvXE2zO/mqdVFe8MU7ElGrwga9hh2H65Ru4iaBJAMRteum1c4Gsxi9Cq1FOtTEDd6+/AEYuQDM4Q==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -19876,12 +19876,12 @@ packages:
     dependencies:
       klona: 2.0.5
       neo-async: 2.6.2
-      sass: 1.52.1
+      sass: 1.52.2
       webpack: 5.72.1
     dev: true
 
-  /sass/1.52.1:
-    resolution: {integrity: sha512-fSzYTbr7z8oQnVJ3Acp9hV80dM1fkMN7mSD/25mpcct9F7FPBMOI8krEYALgU1aZoqGhQNhTPsuSmxjnIvAm4Q==}
+  /sass/1.52.2:
+    resolution: {integrity: sha512-mfHB2VSeFS7sZlPv9YohB9GB7yWIgQNTGniQwfQ04EoQN0wsQEv7SwpCwy/x48Af+Z3vDeFXz+iuXM3HK/phZQ==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     dependencies:
@@ -20595,7 +20595,7 @@ packages:
   /store2/2.13.2:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
 
-  /storybook-addon-next/1.6.6_iumrqx5jto53vr75kanummilvu:
+  /storybook-addon-next/1.6.6_rdpqq2c2owntvontwurdnu3fvy:
     resolution: {integrity: sha512-HbGY7DM+qW925rgladudF2PJK+Iq06bRTPseGn6qXnIgC9L/FvBzI1UvDcguYMYWUOzGCbFl11DpHcU/pE1KkQ==}
     peerDependencies:
       '@storybook/addon-actions': ^6.0.0
@@ -20610,12 +20610,12 @@ packages:
       '@storybook/addons': 6.5.5_ef5jwxihqo6n7gxfmzogljlgcm
       image-size: 1.0.1
       loader-utils: 3.2.0
-      next: 12.1.5_4lr7wgrejdc22b7ck6oq24c2o4
+      next: 12.1.5_7eal7btsozhlq6p7vkkqmzby7i
       postcss-loader: 6.2.1_xvg4ntyrrwt57qzvggqcbeozu4
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
       resolve-url-loader: 5.0.0
-      sass-loader: 12.6.0_sass@1.52.1+webpack@5.72.1
+      sass-loader: 12.6.0_sass@1.52.2+webpack@5.72.1
       semver: 7.3.7
       tsconfig-paths: 4.0.0
       tsconfig-paths-webpack-plugin: 3.5.2
