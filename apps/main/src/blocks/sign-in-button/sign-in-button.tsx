@@ -1,9 +1,8 @@
-import Loader from '@geist-ui/react-icons/loader';
-import Lock from '@geist-ui/react-icons/lock';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '$/components/button';
+import { Loader, Lock } from '$/components/icons';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
 import { CALLBACK_URL_KEY } from '$/lib/constants';

@@ -1,15 +1,18 @@
-import type { Icon } from '@geist-ui/react-icons';
-import BoldIcon from '@geist-ui/react-icons/bold';
-import CodeIcon from '@geist-ui/react-icons/code';
-import ItalicIcon from '@geist-ui/react-icons/italic';
-import Link2 from '@geist-ui/react-icons/link2';
-import List from '@geist-ui/react-icons/list';
-import UnderlineIcon from '@geist-ui/react-icons/underline';
 import { Editor } from '@tiptap/react';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { BaseButtonProps, BaseButton } from '$/components/button';
+import {
+  BoldIcon,
+  CodeIcon,
+  IconBlockQuote,
+  ItalicIcon,
+  Link2,
+  List,
+  UnderlineIcon,
+  Icon,
+} from '$/components/icons';
 import { Select } from '$/components/select';
 import { listHoverableColor } from '$/styles/common';
 
@@ -149,29 +152,4 @@ function getActiveBlockFormat(editor: Editor): HeadingValue | undefined {
       level === 0 ? editor.isActive('paragraph') : editor.isActive('heading', { level });
     if (isActive) return level;
   }
-}
-
-function IconBlockQuote({ size }: React.ComponentPropsWithoutRef<Icon>) {
-  return (
-    <svg stroke="currentColor" fill="none" viewBox="0 0 24 24" width={size} height={size}>
-      <circle r="3" strokeWidth="2" cx="7" cy="9.5"></circle>
-      <line
-        strokeWidth="2"
-        x1="7"
-        y1="17.5"
-        x2="9.78107"
-        y2="10.62500"
-        strokeLinecap="round"
-      ></line>
-      <circle r="3" strokeWidth="2" cx="17" cy="9.5"></circle>
-      <line
-        strokeWidth="2"
-        x1="17"
-        y1="17.5"
-        x2="19.78107"
-        y2="10.62500"
-        strokeLinecap="round"
-      ></line>
-    </svg>
-  );
 }

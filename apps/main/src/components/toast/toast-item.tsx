@@ -1,8 +1,3 @@
-import AlertCircle from '@geist-ui/react-icons/alertCircle';
-import CheckInCircle from '@geist-ui/react-icons/checkInCircle';
-import Info from '@geist-ui/react-icons/info';
-import Dismiss from '@geist-ui/react-icons/x';
-import XCircle from '@geist-ui/react-icons/xCircle';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -11,6 +6,7 @@ import { useTimeout } from '$/hooks/use-timeout';
 import { IconButton, Button } from '../button';
 import { Card } from '../card';
 import { Heading } from '../heading';
+import { CheckInCircle, X, AlertCircle, XCircle, Info } from '../icons';
 import { Text } from '../text';
 import { IToast, ToastType } from './toast-context';
 
@@ -67,7 +63,7 @@ export function ToastItem({
           aria-label="Dismiss"
           title="Dismiss"
         >
-          <Dismiss />
+          <X />
         </IconButton>
       </div>
       {description && (

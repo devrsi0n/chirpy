@@ -1,6 +1,7 @@
-import Loader from '@geist-ui/react-icons/loader';
 import clsx from 'clsx';
 import * as React from 'react';
+
+import { Loader } from '../icons';
 
 export type SpinnerProps = React.PropsWithChildren<{
   className?: string;

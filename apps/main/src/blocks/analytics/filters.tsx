@@ -1,11 +1,10 @@
-import PencilIcon from '@geist-ui/react-icons/edit2';
-import XIcon from '@geist-ui/react-icons/x';
 import { Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 
 import { Button } from '$/components/button';
+import { PencilIcon, X } from '$/components/icons';
 import { Link } from '$/components/link';
 
 import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
@@ -148,7 +147,7 @@ function renderDropdownFilter(
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
             onClick={() => removeFilter(router, key, query)}
           >
-            <XIcon className="h-4 w-4" />
+            <X className="h-4 w-4" />
           </strong>
         </div>
       </Menu.Item>
@@ -179,7 +178,7 @@ function renderDropdownFilter(
           className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
           onClick={() => removeFilter(router, key, query)}
         >
-          <XIcon className="h-4 w-4" />
+          <X className="h-4 w-4" />
         </strong>
       </div>
     </Menu.Item>
@@ -381,7 +380,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
           className="flex h-full w-full cursor-pointer items-center px-2 text-gray-800 hover:text-indigo-900"
           onClick={() => removeFilter(this.props.router, key, query)}
         >
-          <XIcon className="h-4 w-4" />
+          <X className="h-4 w-4" />
         </span>
       </span>
     );

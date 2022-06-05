@@ -1,6 +1,3 @@
-import MessageSquare from '@geist-ui/react-icons/messageSquare';
-import MoreVertical from '@geist-ui/react-icons/moreVertical';
-import Trash2 from '@geist-ui/react-icons/trash2';
 import clsx from 'clsx';
 import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
@@ -8,11 +5,12 @@ import * as React from 'react';
 import { easeInOut } from '$/components/animation';
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button } from '$/components/button';
+import { MessageSquare, MoreVertical, Trash2 } from '$/components/icons';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
+import { COMMENT_TREE_MAX_DEPTH } from '$/lib/constants';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 

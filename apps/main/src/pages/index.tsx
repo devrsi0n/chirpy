@@ -1,4 +1,3 @@
-import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import * as React from 'react';
 
 import { HomeCommentWidgetPreview } from '$/blocks/comment-widget-preview';
@@ -6,6 +5,7 @@ import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
 import { Pricing } from '$/blocks/pricing';
 import { Button } from '$/components/button';
+import { ArrowRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 

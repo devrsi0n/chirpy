@@ -1,11 +1,9 @@
-import Check from '@geist-ui/react-icons/check';
-import Loader from '@geist-ui/react-icons/loader';
-import Send from '@geist-ui/react-icons/send';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Button } from '$/components/button';
 import { Card } from '$/components/card';
+import { Check, Loader, Send } from '$/components/icons';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';

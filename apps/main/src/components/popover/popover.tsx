@@ -1,4 +1,3 @@
-import AlertTriangle from '@geist-ui/react-icons/alertTriangle';
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -6,6 +5,7 @@ import * as React from 'react';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
+import { AlertTriangle } from '../icons';
 
 export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 

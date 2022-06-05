@@ -1,9 +1,5 @@
-import type { Icon } from '@geist-ui/react-icons';
-import Code from '@geist-ui/react-icons/code';
-import Figma from '@geist-ui/react-icons/figma';
-import Lock from '@geist-ui/react-icons/lock';
-
 import { Heading } from '$/components/heading';
+import { Code, Figma, Lock, Icon } from '$/components/icons';
 import { Text } from '$/components/text';
 
 const contents: FeatureProps[] = [

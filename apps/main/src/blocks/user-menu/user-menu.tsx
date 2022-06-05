@@ -1,13 +1,9 @@
-import LifeBuoy from '@geist-ui/react-icons/lifeBuoy';
-import LogIn from '@geist-ui/react-icons/logIn';
-import LogOut from '@geist-ui/react-icons/logOut';
-import Monitor from '@geist-ui/react-icons/monitor';
-import User from '@geist-ui/react-icons/user';
 import clsx from 'clsx';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
+import { LifeBuoy, LogIn, LogOut, Monitor, User } from '$/components/icons';
 import { Link, LinkProps } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';

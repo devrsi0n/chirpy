@@ -1,7 +1,7 @@
-import ArrowUp from '@geist-ui/react-icons/arrowUp';
 import clsx from 'clsx';
 import * as React from 'react';
 
+import { ArrowUp } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';

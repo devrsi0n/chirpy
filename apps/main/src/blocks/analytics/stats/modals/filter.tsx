@@ -1,8 +1,9 @@
 // @ts-nocheck
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import { Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import React, { Fragment } from 'react';
+
+import { ChevronDownIcon } from '$/components/icons';
 
 import * as api from '../../analytics-api';
 import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';

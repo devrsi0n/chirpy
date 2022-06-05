@@ -1,6 +1,3 @@
-import Loader from '@geist-ui/react-icons/loader';
-import MoreVertical from '@geist-ui/react-icons/moreVertical';
-import Trash2 from '@geist-ui/react-icons/trash2';
 import * as React from 'react';
 
 import { BaseButton, Button } from '$/components/button';
@@ -8,6 +5,7 @@ import { Card } from '$/components/card';
 import { Dialog } from '$/components/dialog';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
+import { Loader, MoreVertical, Trash2 } from '$/components/icons';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Menu } from '$/components/menu';

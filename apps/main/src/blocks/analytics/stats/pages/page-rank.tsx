@@ -1,10 +1,8 @@
-import ExternalLink from '@geist-ui/react-icons/externalLink';
-import File from '@geist-ui/react-icons/file';
-import MessageSquare from '@geist-ui/react-icons/messageSquare';
 import clsx from 'clsx';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
 
+import { MessageSquare, File, ExternalLink } from '$/components/icons';
 import { Link } from '$/components/link';
 import { usePrevious } from '$/hooks/use-previous';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';

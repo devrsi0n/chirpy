@@ -1,5 +1,3 @@
-import AlertTriangle from '@geist-ui/react-icons/alertTriangle';
-import Dismiss from '@geist-ui/react-icons/x';
 import { Dialog as HeadlessDialog } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -9,6 +7,7 @@ import { bluredOverlay, cardBg } from '$/styles/common';
 
 import { easeInOut, easeInOutOpacity } from '../animation';
 import { IconButton } from '../button';
+import { AlertTriangle, X } from '../icons';
 
 type Size = 'sm' | 'base';
 const SIZE_STYLES: Record<
@@ -112,7 +111,7 @@ export function Dialog({
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >
-                        <Dismiss />
+                        <X />
                       </IconButton>
                     )}
                     <div className="flex flex-row items-start justify-between">

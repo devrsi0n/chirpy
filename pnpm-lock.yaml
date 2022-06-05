@@ -114,7 +114,7 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
-      '@geist-ui/react-icons': 1.0.1
+      '@geist-ui/icons': 1.0.2
       '@graphql-codegen/cli': 2.6.2
       '@graphql-codegen/introspection': 2.1.1
       '@graphql-codegen/near-operation-file-preset': 2.2.12
@@ -247,7 +247,7 @@ importers:
       wonka: 4.0.15
       ws: 8.7.0
     dependencies:
-      '@geist-ui/react-icons': 1.0.1_react@18.1.0
+      '@geist-ui/icons': 1.0.2_react@18.1.0
       '@headlessui/react': 1.6.4_ef5jwxihqo6n7gxfmzogljlgcm
       '@next/bundle-analyzer': 12.1.5
       '@radix-ui/colors': 0.1.8
@@ -2709,14 +2709,11 @@ packages:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
     dev: true
 
-  /@geist-ui/react-icons/1.0.1_react@18.1.0:
-    resolution: {integrity: sha512-/phre1NwXT0Mrxcq3yb+KksJ16/ykptgxI7+jh5pmDZfxnIMPlBWFBGDK0yw96oi752Wuo24X6+tkWjVe/g5Bg==}
+  /@geist-ui/icons/1.0.2_react@18.1.0:
+    resolution: {integrity: sha512-Npfa0NW6fQ31qw/+iMPWbs1hAcJ/3FqBjSLYgEfITDqy/3TJFpFKeVyK04AC/hTmYTsdNruVYczqPNcham5FOQ==}
     peerDependencies:
-      '@geist-ui/react': '>=1.0.0'
+      '@geist-ui/core': '>=1.0.0'
       react: '>=16.13.0 || 18'
-    peerDependenciesMeta:
-      '@geist-ui/react':
-        optional: true
     dependencies:
       react: 18.1.0
     dev: false

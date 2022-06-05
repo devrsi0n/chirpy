@@ -1,12 +1,9 @@
-import type { Icon } from '@geist-ui/react-icons';
-import Moon from '@geist-ui/react-icons/moon';
-import Settings from '@geist-ui/react-icons/settings';
-import Sun from '@geist-ui/react-icons/sun';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
 import { IconButton } from '$/components/button/icon-button';
+import { Moon, Settings, Sun, Icon } from '$/components/icons';
 import { Link } from '$/components/link/link';
 import { Text } from '$/components/text';
 import { useHasMounted } from '$/hooks/use-has-mounted';

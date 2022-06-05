@@ -1,9 +1,10 @@
 /* eslint react/jsx-props-no-spreading: 0 */
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
 import { useCombobox } from 'downshift';
 import React, { useState, useCallback } from 'react';
+
+import { ChevronDownIcon } from '$/components/icons';
 
 function selectInputText(e: { target: { select: () => void } }) {
   e.target.select();

@@ -1,8 +1,3 @@
-import Edit2 from '@geist-ui/react-icons/edit2';
-import Link2 from '@geist-ui/react-icons/link2';
-import Save from '@geist-ui/react-icons/save';
-import Trash2 from '@geist-ui/react-icons/trash2';
-import Twitter from '@geist-ui/react-icons/twitter';
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
@@ -10,6 +5,7 @@ import { PageTitle } from '$/blocks/page-title';
 import { Avatar } from '$/components/avatar';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
+import { Edit2, Link2, Save, Trash2, Twitter } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Popover } from '$/components/popover';
 import { Spinner } from '$/components/spinner';

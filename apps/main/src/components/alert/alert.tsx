@@ -1,8 +1,8 @@
-import X from '@geist-ui/react-icons/x';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { IconButton } from '../button';
+import { X } from '../icons';
 
 export type AlertType = 'warn';
 

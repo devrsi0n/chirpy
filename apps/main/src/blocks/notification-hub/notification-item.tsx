@@ -1,12 +1,9 @@
-import HeartFill from '@geist-ui/react-icons/heartFill';
-import MessageSquare from '@geist-ui/react-icons/messageSquare';
-import X from '@geist-ui/react-icons/x';
-import XSquare from '@geist-ui/react-icons/xSquare';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
 import { Divider } from '$/components/divider';
+import { HeartFill, MessageSquare, X, XSquare } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';

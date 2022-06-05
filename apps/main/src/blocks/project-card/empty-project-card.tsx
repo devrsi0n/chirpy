@@ -1,7 +1,7 @@
-import FolderPlus from '@geist-ui/react-icons/folderPlus';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
+import { FolderPlus } from '$/components/icons';
 import { Text } from '$/components/text';
 
 export function EmptyProjectCard(): JSX.Element {

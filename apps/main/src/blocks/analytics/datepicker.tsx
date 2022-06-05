@@ -1,9 +1,10 @@
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import { Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
+
+import { ChevronDownIcon } from '$/components/icons';
 
 import styles from './analytics.module.scss';
 import {

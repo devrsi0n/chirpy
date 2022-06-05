@@ -1,7 +1,7 @@
-import Info from '@geist-ui/react-icons/info';
 import * as React from 'react';
 
 import { ActionButton, ButtonProps } from '$/components/button';
+import { Info } from '$/components/icons';
 import { useCommentContext } from '$/contexts/comment-context';
 
 type TimelineLinkButtonProps = {

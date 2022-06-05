@@ -1,8 +1,8 @@
-import Bell from '@geist-ui/react-icons/bell';
 import * as React from 'react';
 
 import { Badge } from '$/components/badge';
 import { Heading } from '$/components/heading';
+import { Bell } from '$/components/icons';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';

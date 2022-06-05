@@ -1,4 +1,3 @@
-import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import dayjs from 'dayjs';
 import {
   GetStaticProps,
@@ -18,6 +17,7 @@ import { PoweredBy } from '$/blocks/powered-by';
 import { UserMenu } from '$/blocks/user-menu';
 import { IconButton } from '$/components/button';
 import { Heading } from '$/components/heading';
+import { ArrowLeft } from '$/components/icons';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import {

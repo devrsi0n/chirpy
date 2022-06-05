@@ -1,8 +1,7 @@
-import Loader from '@geist-ui/react-icons/loader';
-import Send from '@geist-ui/react-icons/send';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '$/components/button';
+import { Loader, Send } from '$/components/icons';
 import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
 import { useNotificationContext } from '$/contexts/notification-context';
 import { useAsync } from '$/hooks/use-async';

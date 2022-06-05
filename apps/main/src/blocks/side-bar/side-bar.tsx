@@ -1,9 +1,9 @@
-import ChevronRight from '@geist-ui/react-icons/chevronRight';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
+import { ChevronRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Directory } from '$/server/types/file';

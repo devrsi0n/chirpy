@@ -1,5 +1,3 @@
-import Check from '@geist-ui/react-icons/check';
-import ChevronDownCircleFill from '@geist-ui/react-icons/chevronDownCircleFill';
 import { Listbox } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -8,6 +6,7 @@ import * as React from 'react';
 import { listHoverable, cardBg } from '$/styles/common';
 
 import { easeInOut } from '../animation';
+import { Check, ChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';
 
 export type SelectProps<T> = React.PropsWithChildren<{

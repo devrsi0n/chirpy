@@ -1,6 +1,7 @@
-import User from '@geist-ui/react-icons/user';
 import clsx from 'clsx';
 import * as React from 'react';
+
+import { User } from '../icons';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
