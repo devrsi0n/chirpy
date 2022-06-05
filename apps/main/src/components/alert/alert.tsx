@@ -1,8 +1,8 @@
-import X from '@geist-ui/react-icons/x';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { IconButton } from '../button';
+import { IconX } from '../icons';
 
 export type AlertType = 'warn';
 
@@ -30,7 +30,7 @@ export function Alert(props: AlertProps): JSX.Element {
             onClick={() => setHidden(true)}
             aria-label="Dismiss"
           >
-            <X size={18} />
+            <IconX size={18} />
           </IconButton>
         </div>
       )}

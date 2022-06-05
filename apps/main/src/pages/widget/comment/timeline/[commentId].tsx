@@ -1,4 +1,3 @@
-import ArrowLeft from '@geist-ui/react-icons/arrowLeft';
 import dayjs from 'dayjs';
 import {
   GetStaticProps,
@@ -18,6 +17,7 @@ import { PoweredBy } from '$/blocks/powered-by';
 import { UserMenu } from '$/blocks/user-menu';
 import { IconButton } from '$/components/button';
 import { Heading } from '$/components/heading';
+import { IconArrowLeft } from '$/components/icons';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import {
@@ -31,14 +31,14 @@ import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comm
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentTimelineNode } from '$/types/widget';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 export default function CommentTimelineWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
   const [{ data }] = useCommentTimelineSubscription({
     variables: { id: props.commentId },
-    pause: ssrMode,
+    pause: isSSRMode,
   });
 
   const comment = data?.commentByPk || props.comment;
@@ -50,7 +50,7 @@ export default function CommentTimelineWidget(
           {/* Can't use history.back() here in case user open this page individual */}
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
             <IconButton className="translate-x-1">
-              <ArrowLeft size={20} />
+              <IconArrowLeft size={20} />
             </IconButton>
           </Link>
           <Heading as="h4">

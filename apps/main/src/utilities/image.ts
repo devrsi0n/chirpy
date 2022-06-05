@@ -1,4 +1,4 @@
-import { ssrMode } from './env';
+import { isSSRMode } from './env';
 
 export type BannerProps = {
   src: string;
@@ -7,7 +7,7 @@ export type BannerProps = {
 };
 
 export function getBannerProps(banner?: string): BannerProps | null {
-  if (ssrMode || !banner) {
+  if (isSSRMode || !banner) {
     return null;
   }
   const url = new URL(banner, window.location.origin);

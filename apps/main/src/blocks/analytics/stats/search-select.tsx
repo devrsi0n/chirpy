@@ -1,9 +1,10 @@
 /* eslint react/jsx-props-no-spreading: 0 */
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
 import { useCombobox } from 'downshift';
 import React, { useState, useCallback } from 'react';
+
+import { IconChevronDown } from '$/components/icons';
 
 function selectInputText(e: { target: { select: () => void } }) {
   e.target.select();
@@ -122,7 +123,7 @@ export default function SearchSelect(props: SearchSelectProps) {
           )}
         />
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          {!loading && <ChevronDownIcon className="h-4 w-4 text-gray-500" />}
+          {!loading && <IconChevronDown className="h-4 w-4 text-gray-500" />}
           {loading && <Spinner />}
         </div>
       </div>

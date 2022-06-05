@@ -1,4 +1,3 @@
-import AlertTriangle from '@geist-ui/react-icons/alertTriangle';
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -6,6 +5,7 @@ import * as React from 'react';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
+import { IconAlertTriangle } from '../icons';
 
 export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 
@@ -105,7 +105,7 @@ function PopoverContent({
                     {type === 'alert' && (
                       <div className="hidden h-full rounded-full bg-red-300 xs:block">
                         <div className={clsx('p-2 text-red-900', styles?.icon)}>
-                          <AlertTriangle />
+                          <IconAlertTriangle />
                         </div>
                       </div>
                     )}

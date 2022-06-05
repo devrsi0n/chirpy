@@ -1,10 +1,9 @@
-import Loader from '@geist-ui/react-icons/loader';
-import Lock from '@geist-ui/react-icons/lock';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { IconLoader, IconLock } from '$/components/icons';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
 import { CALLBACK_URL_KEY } from '$/lib/constants';
 
@@ -33,9 +32,9 @@ export function SignInButton({
     >
       <span className="inline-flex flex-row items-center space-x-1">
         {signInLoading ? (
-          <Loader aria-label="Signing in" className="h-5 w-5 animate-spin" />
+          <IconLoader aria-label="Signing in" className="h-5 w-5 animate-spin" />
         ) : (
-          <Lock size="14" />
+          <IconLock size="14" />
         )}
         <span>Sign in</span>
       </span>

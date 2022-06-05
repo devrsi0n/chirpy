@@ -1,5 +1,5 @@
 import { useToast } from '$/components/toast';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useDeleteLikeByPkMutation, useInsertOneLikeMutation } from '$/graphql/generated/like';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
 

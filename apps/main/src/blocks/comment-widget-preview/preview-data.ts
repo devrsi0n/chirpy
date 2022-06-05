@@ -1,7 +1,17 @@
+import { CommentLeafType } from '$/types/widget';
+import { dayjs } from '$/utilities/date';
+
 export const PAGE_ID = 'b5a16120-593c-492f-ad94-e14d247485f3';
 export const PROJECT_ID = '3c5d2d41-e2df-4b31-98f8-6e471acab461';
 
-export const PREVIEW_COMMENTS = [
+const UserJane = {
+  __typename: 'User' as const,
+  id: '634da1be-cc04-4719-908e-c642de76e292',
+  name: 'Jane',
+  avatar: '/images/avatars/female-1.jpeg',
+};
+
+export const PREVIEW_COMMENTS: CommentLeafType[] = [
   {
     __typename: 'Comment',
     id: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
@@ -19,15 +29,10 @@ export const PREVIEW_COMMENTS = [
         },
       ],
     },
-    createdAt: '2021-04-17T01:43:10.581584+00:00',
+    createdAt: dayjs().subtract(50, 'hours').toISOString(),
     parentId: null,
     pageId: PAGE_ID,
-    user: {
-      __typename: 'User',
-      id: '634da1be-cc04-4719-908e-c642de76e292',
-      name: 'Jane',
-      avatar: '/images/avatars/female-1.jpeg',
-    },
+    user: UserJane,
     likes: [],
     replies: [
       {
@@ -47,7 +52,7 @@ export const PREVIEW_COMMENTS = [
             },
           ],
         },
-        createdAt: '2021-04-17T02:31:51.05373+00:00',
+        createdAt: dayjs().subtract(49, 'hours').toISOString(),
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
         pageId: PAGE_ID,
         user: {
@@ -56,7 +61,12 @@ export const PREVIEW_COMMENTS = [
           name: 'Dianne',
           avatar: '/images/avatars/female-2.jpeg',
         },
-        likes: [],
+        likes: [
+          {
+            id: 'dd4812a5-031f-4534-8713-be586927081f',
+            userId: UserJane.id,
+          },
+        ],
         replies: [],
       },
     ],
@@ -78,7 +88,7 @@ export const PREVIEW_COMMENTS = [
         },
       ],
     },
-    createdAt: '2021-04-17T02:51:30.517834+00:00',
+    createdAt: dayjs().subtract(25, 'hours').toISOString(),
     parentId: null,
     pageId: PAGE_ID,
     user: {

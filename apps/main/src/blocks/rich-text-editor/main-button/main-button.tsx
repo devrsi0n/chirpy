@@ -1,9 +1,8 @@
-import Loader from '@geist-ui/react-icons/loader';
-import Send from '@geist-ui/react-icons/send';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '$/components/button';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { IconLoader, IconSend } from '$/components/icons';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useNotificationContext } from '$/contexts/notification-context';
 import { useAsync } from '$/hooks/use-async';
 import type { ICheckToxicText } from '$/server/services/content-classifier/toxic-text';
@@ -63,7 +62,7 @@ export function MainButton({
   };
   const buttonChildren = (
     <>
-      {isLoading ? <Loader className="h-5 w-5 animate-spin" /> : <Send size="14" />}
+      {isLoading ? <IconLoader className="h-5 w-5 animate-spin" /> : <IconSend size="14" />}
       <span>Post</span>
     </>
   );

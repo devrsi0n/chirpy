@@ -16,3 +16,5 @@ export const ANALYTICS_DOMAIN = 'chirpy.dev';
 export const FEEDBACK_LINK = 'https://github.com/devrsi0n/chirpy/issues/new/choose';
 
 export const GRAPHQL_CACHE_DB_NAME = 'graphcache-v1';
+
+export const COMMENT_TREE_MAX_DEPTH = 4;

@@ -1,8 +1,9 @@
 // @ts-nocheck
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import { Menu, Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import React, { Fragment } from 'react';
+
+import { IconChevronDown } from '$/components/icons';
 
 import * as api from '../../analytics-api';
 import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';
@@ -270,7 +271,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
             <div className="w-24">
               <Menu.Button className="hover:bg-gray-50 inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
                 {this.selectedFilterType(filterName)}
-                <ChevronDownIcon
+                <IconChevronDown
                   className="-mr-2 ml-2 h-4 w-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                 />

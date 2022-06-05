@@ -1,13 +1,12 @@
-import Menu from '@geist-ui/react-icons/menu';
-import Dismiss from '@geist-ui/react-icons/x';
 import clsx from 'clsx';
 import { m, useCycle, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { IconButton } from '$/components/button';
+import { IconMenu, IconX } from '$/components/icons';
 import { useClickOutside } from '$/hooks/use-click-outside';
 import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
 
@@ -80,7 +79,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
-      custom={!ssrMode ? document.body.clientHeight : undefined}
+      custom={!isSSRMode ? document.body.clientHeight : undefined}
       className={clsx(
         'top-0 bottom-0 isolate h-[100vh] w-[250px]',
         containerStyles,
@@ -104,8 +103,8 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
         className={clsx('bg-gray-100', buttonStyles)}
       >
         <span className="sr-only">Open navigation menu</span>
-        <Menu className={clsx(isOpen && `hidden`)} />
-        <Dismiss className={clsx(!isOpen && `hidden`)} />
+        <IconMenu className={clsx(isOpen && `hidden`)} />
+        <IconX className={clsx(!isOpen && `hidden`)} />
       </IconButton>
     </m.nav>
   );

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { asyncNoop, noop } from '$/utilities/isomorphic/function';
 
-import { useCurrentUser } from '../current-user-context/use-current-user';
+import { useCurrentUser } from '../current-user-context';
 import { useReloadWhenSwChange } from './use-reload-when-sw-change';
 import {
   askNotificationPermission,
@@ -17,7 +17,7 @@ export interface INotificationContext {
   didDeny: boolean;
 }
 
-const NotificationContext = React.createContext<INotificationContext>({
+export const NotificationContext = React.createContext<INotificationContext>({
   didRegister: false,
   setDidRegister: noop,
   registerNotification: asyncNoop,

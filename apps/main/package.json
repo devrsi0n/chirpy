@@ -20,7 +20,7 @@
     "test:coverage": "DEBUG_PRINT_LIMIT=99999 jest --silent=false --coverage"
   },
   "dependencies": {
-    "@geist-ui/react-icons": "1.0.1",
+    "@geist-ui/icons": "1.0.2",
     "@headlessui/react": "1.6.4",
     "@next/bundle-analyzer": "12.1.5",
     "@radix-ui/colors": "0.1.8",

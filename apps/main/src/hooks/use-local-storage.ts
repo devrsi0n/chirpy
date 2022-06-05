@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 import { useEventListener } from './use-event-listener';
 
@@ -13,7 +13,7 @@ export function useLocalStorage<T>(
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = (): T => {
-    if (ssrMode || !key) {
+    if (isSSRMode || !key) {
       return initialValue;
     }
 

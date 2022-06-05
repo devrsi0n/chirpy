@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useTimeout } from '$/hooks/use-timeout';
 import { CALLBACK_URL_KEY, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';

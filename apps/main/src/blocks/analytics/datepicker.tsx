@@ -1,9 +1,10 @@
-import ChevronDownIcon from '@geist-ui/react-icons/chevronDown';
 import { Transition } from '@headlessui/react';
 import clsx from 'clsx';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
+
+import { IconChevronDown } from '$/components/icons';
 
 import styles from './analytics.module.scss';
 import {
@@ -427,7 +428,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
             {this.props.leadingText}
             <span className="font-medium">{this.timeFrameText()}</span>
           </span>
-          <ChevronDownIcon className="hidden h-4 w-4 text-gray-900 sm:inline-block md:h-5 md:w-5" />
+          <IconChevronDown className="hidden h-4 w-4 text-gray-900 sm:inline-block md:h-5 md:w-5" />
         </div>
 
         <Transition

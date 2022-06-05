@@ -1,13 +1,13 @@
-import AlertCircleFill from '@geist-ui/react-icons/alertCircleFill';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
+import { IconAlertCircleFill } from '$/components/icons';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
-import { Text } from '$/components/text/text';
+import { Text } from '$/components/text';
 
 export default function Custom404(): JSX.Element {
   return (
@@ -25,7 +25,7 @@ export default function Custom404(): JSX.Element {
             <div className={clsx(dashedBorder, `border-opacity-50 p-5`)}>
               <div className={clsx(dashedBorder, `border-opacity-80 p-4`)}>
                 <div className={clsx(dashedBorder, `p-3`)}>
-                  <AlertCircleFill size={84} />
+                  <IconAlertCircleFill size={84} />
                 </div>
               </div>
             </div>

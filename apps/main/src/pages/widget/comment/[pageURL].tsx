@@ -30,7 +30,7 @@ import {
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -51,7 +51,7 @@ export default function CommentWidgetPage(props: PageCommentProps): JSX.Element 
   }
   const [{ data }] = useCommentTreeSubscription({
     variables: { pageURL },
-    pause: ssrMode,
+    pause: isSSRMode,
   });
   const comments = data?.comments || (isStaticError(props) ? [] : props.comments || []);
 

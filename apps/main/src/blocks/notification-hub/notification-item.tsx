@@ -1,12 +1,9 @@
-import HeartFill from '@geist-ui/react-icons/heartFill';
-import MessageSquare from '@geist-ui/react-icons/messageSquare';
-import X from '@geist-ui/react-icons/x';
-import XSquare from '@geist-ui/react-icons/xSquare';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
 import { Divider } from '$/components/divider';
+import { IconHeartFill, IconMessageSquare, IconX, IconXSquare } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';
@@ -70,7 +67,7 @@ export function NotificationItem({
               ref={deleteButtonRef}
               aria-label="Delete the notification message"
             >
-              <X size={22} />
+              <IconX size={22} />
             </button>
           </div>
           <NotificationText className="flex flex-row space-x-1.5 leading-none">
@@ -118,7 +115,7 @@ const TITLE_MAP: Record<NotificationType_Enum, string> = {
 const ICON_SIZE = 24;
 const COMMENT_ICON = (
   <span className="text-blue-900 group-hover:text-primary-900">
-    <MessageSquare size={ICON_SIZE} className="-scale-x-1" />
+    <IconMessageSquare size={ICON_SIZE} className="-scale-x-1" />
   </span>
 );
 
@@ -127,12 +124,12 @@ const ICON_MAP: Record<NotificationType_Enum, JSX.Element> = {
   ReceivedAReply: COMMENT_ICON,
   ReceivedALike: (
     <span className="text-pink-900 group-hover:text-primary-900">
-      <HeartFill size={ICON_SIZE} />
+      <IconHeartFill size={ICON_SIZE} />
     </span>
   ),
   CommentDeleted: (
     <span className="text-gray-900 group-hover:text-primary-900">
-      <XSquare size={ICON_SIZE} />
+      <IconXSquare size={ICON_SIZE} />
     </span>
   ),
 };

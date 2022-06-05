@@ -1,10 +1,11 @@
-import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import * as React from 'react';
 
+import { HomeCommentWidgetPreview } from '$/blocks/comment-widget-preview';
 import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
 import { Pricing } from '$/blocks/pricing';
 import { Button } from '$/components/button';
+import { IconArrowRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 
@@ -26,7 +27,7 @@ function Home(): JSX.Element {
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
               <Button variant="solid" color="primary" className="group space-x-1 hover:shadow-2xl">
                 <span>{strings.callToAction.main}</span>
-                <ArrowRight
+                <IconArrowRight
                   size="20px"
                   className="inline-block transition group-hover:translate-x-1"
                 />
@@ -38,6 +39,7 @@ function Home(): JSX.Element {
           </div>
         </div>
         <Features />
+        <HomeCommentWidgetPreview />
         <Pricing id="pricing" />
       </section>
     </SiteLayout>

@@ -1,6 +1,7 @@
-import User from '@geist-ui/react-icons/user';
 import clsx from 'clsx';
 import * as React from 'react';
+
+import { IconUser } from '../icons';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
@@ -28,7 +29,7 @@ export function Avatar({
 }: AvatarProps): JSX.Element {
   const [sizeStyle, iconSize] = sizeStyles[size];
   if (!src) {
-    return <User aria-label="Avatar placeholder" size={iconSize} className="m-1" />;
+    return <IconUser aria-label="Avatar placeholder" size={iconSize} className="m-1" />;
   }
 
   return (

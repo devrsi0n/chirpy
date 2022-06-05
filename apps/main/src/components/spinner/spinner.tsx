@@ -1,6 +1,7 @@
-import Loader from '@geist-ui/react-icons/loader';
 import clsx from 'clsx';
 import * as React from 'react';
+
+import { IconLoader } from '../icons';
 
 export type SpinnerProps = React.PropsWithChildren<{
   className?: string;
@@ -13,7 +14,7 @@ export function Spinner(props: SpinnerProps): JSX.Element {
       aria-label="Loading data"
     >
       <span className="animate-spin">
-        <Loader />
+        <IconLoader />
       </span>
       <span>{props.children || `Loading`}</span>
     </div>

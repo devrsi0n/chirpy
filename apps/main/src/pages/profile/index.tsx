@@ -1,8 +1,3 @@
-import Edit2 from '@geist-ui/react-icons/edit2';
-import Link2 from '@geist-ui/react-icons/link2';
-import Save from '@geist-ui/react-icons/save';
-import Trash2 from '@geist-ui/react-icons/trash2';
-import Twitter from '@geist-ui/react-icons/twitter';
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
@@ -10,6 +5,7 @@ import { PageTitle } from '$/blocks/page-title';
 import { Avatar } from '$/components/avatar';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
+import { IconEdit2, IconLink2, IconSave, IconTrash2, IconTwitter } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Popover } from '$/components/popover';
 import { Spinner } from '$/components/spinner';
@@ -17,7 +13,7 @@ import { Text } from '$/components/text';
 import { TextArea } from '$/components/text-area';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 
@@ -130,7 +126,7 @@ export default function Profile(): JSX.Element {
                     </div>
                   }
                 >
-                  <Trash2 size={16} />
+                  <IconTrash2 size={16} />
                   <span className="ml-1">Discard</span>
                 </Popover>
               )}
@@ -141,7 +137,7 @@ export default function Profile(): JSX.Element {
                 color="primary"
                 aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
               >
-                {isEditMode ? <Save size={16} /> : <Edit2 size={16} />}
+                {isEditMode ? <IconSave size={16} /> : <IconEdit2 size={16} />}
                 <span>{isEditMode ? 'Save' : 'Edit'}</span>
               </Button>
             </div>
@@ -152,7 +148,7 @@ export default function Profile(): JSX.Element {
           ) : (
             website && (
               <Link variant="solid" href={website} className="flex w-fit flex-row space-x-2">
-                <Link2 />
+                <IconLink2 />
                 <span>{website}</span>
               </Link>
             )
@@ -166,7 +162,7 @@ export default function Profile(): JSX.Element {
                 href={`https://twitter.com/${twitterUserName}`}
                 className="flex w-fit flex-row items-center space-x-2"
               >
-                <Twitter size={22} />
+                <IconTwitter size={22} />
                 <span>@{twitterUserName}</span>
               </Link>
             )

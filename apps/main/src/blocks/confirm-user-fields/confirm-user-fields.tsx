@@ -1,19 +1,16 @@
-import Check from '@geist-ui/react-icons/check';
-import Loader from '@geist-ui/react-icons/loader';
-import Send from '@geist-ui/react-icons/send';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Button } from '$/components/button';
 import { Card } from '$/components/card';
+import { IconCheck, IconLoader, IconSend } from '$/components/icons';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { sleep } from '$/utilities/time';
-
-import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
 
 export type ConfirmUserFieldsProps = {
   //
@@ -118,11 +115,11 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         color="primary"
       >
         {isSaved ? (
-          <Check size={20} />
+          <IconCheck size={20} />
         ) : loading ? (
-          <Loader className="animate-spin text-gray-400" size={20} />
+          <IconLoader className="animate-spin text-gray-400" size={20} />
         ) : (
-          <Send size={20} />
+          <IconSend size={20} />
         )}
         <span>Save</span>
       </Button>

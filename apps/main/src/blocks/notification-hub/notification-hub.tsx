@@ -1,11 +1,11 @@
-import Bell from '@geist-ui/react-icons/bell';
 import * as React from 'react';
 
 import { Badge } from '$/components/badge';
 import { Heading } from '$/components/heading';
+import { IconBell } from '$/components/icons';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import {
   useCurrentNotificationMessagesSubscription,
   useDeleteNotificationMessageMutation,
@@ -29,7 +29,7 @@ export function NotificationHub(): JSX.Element {
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
         <Menu.Button className={styles.menuButton}>
-          <Bell size={22} />
+          <IconBell size={22} />
           {hasUnreadNotifications && <Badge className="absolute top-1 right-1 !bg-red-900" />}
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>

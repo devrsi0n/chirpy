@@ -1,4 +1,3 @@
-import ChevronDown from '@geist-ui/react-icons/chevronDown';
 import { Menu as HeadlessMenu } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -10,6 +9,7 @@ import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';
 import { Divider } from '../divider';
+import { IconChevronDown } from '../icons';
 
 export type Shape = 'circle' | 'square';
 
@@ -70,7 +70,7 @@ function MenuButton({
       <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
         {children}
         {shape === 'square' && (
-          <ChevronDown className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
+          <IconChevronDown className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
         )}
       </HeadlessMenu.Button>
     </div>
@@ -91,7 +91,7 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
           <HeadlessMenu.Items
             static
             className={clsx(
-              `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg outline-none`,
+              `outline-none absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg`,
               cardBg,
               className,
             )}

@@ -1,6 +1,3 @@
-import MessageSquare from '@geist-ui/react-icons/messageSquare';
-import MoreVertical from '@geist-ui/react-icons/moreVertical';
-import Trash2 from '@geist-ui/react-icons/trash2';
 import clsx from 'clsx';
 import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
@@ -8,16 +5,17 @@ import * as React from 'react';
 import { easeInOut } from '$/components/animation';
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button } from '$/components/button';
+import { IconMessageSquare, IconMoreVertical, IconTrash2 } from '$/components/icons';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
-import { COMMENT_TREE_MAX_DEPTH } from '$/lib/configurations';
+import { useCommentContext } from '$/contexts/comment-context';
+import { useCurrentUser } from '$/contexts/current-user-context';
+import { COMMENT_TREE_MAX_DEPTH } from '$/lib/constants';
 import { isENVDev } from '$/server/utilities/env';
 import { dayjs } from '$/utilities/date';
 
-import { useCommentContext } from '../../contexts/comment-context';
-import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
 import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
@@ -134,7 +132,7 @@ export function CommentCard({
                 {userHasModeratePermission && (
                   <Menu className="mr-3">
                     <Menu.Button>
-                      <MoreVertical size={20} />
+                      <IconMoreVertical size={20} />
                     </Menu.Button>
                     <Menu.Items>
                       <Menu.Item className="space-x-1" disableAutoDismiss>
@@ -153,7 +151,7 @@ export function CommentCard({
                           }
                         >
                           <div className={clsx(`flex flex-row items-center`, MenuItemPadding)}>
-                            <Trash2 size={16} />
+                            <IconTrash2 size={16} />
                             <span className="ml-1">Delete</span>
                           </div>
                         </Popover>
@@ -186,7 +184,7 @@ export function CommentCard({
                     ? 'You have reached the maximum depth of replies'
                     : 'Reply to this comment'
                 }
-                icon={<MessageSquare size={20} className="-scale-x-1" />}
+                icon={<IconMessageSquare size={20} className="-scale-x-1" />}
               />
             </span>
             <TimelineLinkButton

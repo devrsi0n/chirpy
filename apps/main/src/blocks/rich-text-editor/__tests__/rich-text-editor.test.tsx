@@ -34,7 +34,7 @@ describe('rich-text-editor', () => {
   });
 });
 
-const getAskNextTimeButton = () =>
-  screen.getByRole('button', {
-    name: 'Ask next time',
-  });
+// const getAskNextTimeButton = () =>
+//   screen.getByRole('button', {
+//     name: 'Ask next time',
+//   });

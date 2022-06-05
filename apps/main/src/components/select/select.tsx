@@ -1,5 +1,3 @@
-import Check from '@geist-ui/react-icons/check';
-import ChevronDownCircleFill from '@geist-ui/react-icons/chevronDownCircleFill';
 import { Listbox } from '@headlessui/react';
 import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
@@ -8,6 +6,7 @@ import * as React from 'react';
 import { listHoverable, cardBg } from '$/styles/common';
 
 import { easeInOut } from '../animation';
+import { IconCheck, IconChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';
 
 export type SelectProps<T> = React.PropsWithChildren<{
@@ -36,7 +35,7 @@ export function Select<T extends string | number = string>({
           <div className={clsx(`relative`, className)}>
             <span className={`inline-block w-full`}>
               <Listbox.Button
-                className={`relative w-full cursor-default rounded border border-transparent py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:outline-none focus-visible:ring-primary-700`}
+                className={`focus-visible:outline-none relative w-full cursor-default rounded border border-transparent py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`}
               >
                 <span>{name || value}</span>
                 <span
@@ -45,7 +44,7 @@ export function Select<T extends string | number = string>({
                     styles.icon,
                   )}
                 >
-                  <ChevronDownCircleFill size={18} />
+                  <IconChevronDownCircleFill size={18} />
                 </span>
               </Listbox.Button>
             </span>
@@ -57,7 +56,7 @@ export function Select<T extends string | number = string>({
                 >
                   <Listbox.Options
                     static
-                    className="max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
+                    className="focus-visible:outline-none max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>
@@ -97,7 +96,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
                 `absolute inset-y-0 left-0 flex items-center pl-1.5`,
               )}
             >
-              <Check size={16} />
+              <IconCheck size={16} />
             </span>
           )}
         </div>
