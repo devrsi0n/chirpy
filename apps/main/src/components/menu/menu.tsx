@@ -91,7 +91,7 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
           <HeadlessMenu.Items
             static
             className={clsx(
-              `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg outline-none`,
+              `outline-none absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg`,
               cardBg,
               className,
             )}

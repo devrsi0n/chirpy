@@ -1,5 +1,4 @@
 import FolderPlus from '@geist-ui/react-icons/folderPlus';
-import clsx from 'clsx';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';

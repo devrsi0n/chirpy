@@ -47,10 +47,10 @@ Default.parameters = {
 
 Default.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
-  const getAskNextTimeButton = () =>
-    canvas.getByRole('button', {
-      name: 'Ask next time',
-    });
+  // const getAskNextTimeButton = () =>
+  //   canvas.getByRole('button', {
+  //     name: 'Ask next time',
+  //   });
   const inputField = canvas.getByRole('textbox');
   const testText = 'This is a testing text';
   await userEvent.type(inputField, testText);

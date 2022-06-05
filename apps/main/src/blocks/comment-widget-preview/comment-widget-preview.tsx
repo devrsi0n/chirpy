@@ -13,12 +13,28 @@ import { CommentLeafType } from '$/types/widget';
 
 import { CommentTrees } from '../comment-trees';
 import { RTEValue } from '../rich-text-editor';
+import { PredefinedCurrentUser } from './predefined-current-user';
+import { PredefinedNotification } from './predefined-notification';
 import { PAGE_ID, PREVIEW_COMMENTS, PROJECT_ID } from './preview-data';
 
+export interface CommentWidgetPreviewProps extends Pick<CommentContextType, 'hideCommentTimeline'> {
+  rtePlaceholder?: string;
+}
+
 /**
- * Comment widget preview, used by theme editor
+ * Comment widget preview, used by theme editor and home page
  */
-export function CommentWidgetPreview(): JSX.Element {
+export function CommentWidgetPreview(props: CommentWidgetPreviewProps): JSX.Element {
+  return (
+    <PredefinedCurrentUser>
+      <PredefinedNotification>
+        <CommentWidgetPreviewInternal {...props} />
+      </PredefinedNotification>
+    </PredefinedCurrentUser>
+  );
+}
+
+function CommentWidgetPreviewInternal(props: CommentWidgetPreviewProps): JSX.Element {
   const { data } = useCurrentUser();
   const [previewComments, setPreviewComments] = React.useState<CommentLeafType[]>(
     PREVIEW_COMMENTS as CommentLeafType[],
@@ -96,12 +112,19 @@ export function CommentWidgetPreview(): JSX.Element {
       deleteAComment,
       toggleALikeAction,
       onClickCommentTimeline,
+      ...(props.hideCommentTimeline && { hideCommentTimeline: true }),
     }),
-    [createAComment, deleteAComment, toggleALikeAction, onClickCommentTimeline],
+    [
+      createAComment,
+      deleteAComment,
+      toggleALikeAction,
+      onClickCommentTimeline,
+      props.hideCommentTimeline,
+    ],
   );
   return (
     <CommentContext.Provider value={commentContext}>
-      <CommentTrees comments={previewComments} rtePlaceholder="Preview" />
+      <CommentTrees comments={previewComments} rtePlaceholder={props.rtePlaceholder || 'Preview'} />
     </CommentContext.Provider>
   );
 }

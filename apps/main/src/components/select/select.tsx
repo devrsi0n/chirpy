@@ -36,7 +36,7 @@ export function Select<T extends string | number = string>({
           <div className={clsx(`relative`, className)}>
             <span className={`inline-block w-full`}>
               <Listbox.Button
-                className={`relative w-full cursor-default rounded border border-transparent py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:outline-none focus-visible:ring-primary-700`}
+                className={`focus-visible:outline-none relative w-full cursor-default rounded border border-transparent py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`}
               >
                 <span>{name || value}</span>
                 <span
@@ -57,7 +57,7 @@ export function Select<T extends string | number = string>({
                 >
                   <Listbox.Options
                     static
-                    className="max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
+                    className="focus-visible:outline-none max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>

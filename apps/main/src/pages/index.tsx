@@ -1,6 +1,7 @@
 import ArrowRight from '@geist-ui/react-icons/arrowRight';
 import * as React from 'react';
 
+import { HomeCommentWidgetPreview } from '$/blocks/comment-widget-preview';
 import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
 import { Pricing } from '$/blocks/pricing';
@@ -38,6 +39,7 @@ function Home(): JSX.Element {
           </div>
         </div>
         <Features />
+        <HomeCommentWidgetPreview />
         <Pricing id="pricing" />
       </section>
     </SiteLayout>

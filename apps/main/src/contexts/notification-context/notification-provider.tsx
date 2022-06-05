@@ -17,7 +17,7 @@ export interface INotificationContext {
   didDeny: boolean;
 }
 
-const NotificationContext = React.createContext<INotificationContext>({
+export const NotificationContext = React.createContext<INotificationContext>({
   didRegister: false,
   setDidRegister: noop,
   registerNotification: asyncNoop,

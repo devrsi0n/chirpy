@@ -13,7 +13,10 @@ export function TimelineLinkButton({
   href,
   onClick,
 }: TimelineLinkButtonProps): JSX.Element {
-  const { onClickCommentTimeline } = useCommentContext();
+  const { onClickCommentTimeline, hideCommentTimeline } = useCommentContext();
+  if (hideCommentTimeline) {
+    return <></>;
+  }
   return (
     <span
       onClick={(e) => {
