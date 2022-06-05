@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { SiteThemeProvider } from '$/contexts/theme-context';
@@ -39,22 +38,16 @@ export default function SiteLayout({
         )}
       >
         {!hideHeader && <Header />}
-        <AnimatePresence>
-          <m.main
-            className={clsx(
-              'min-h-full py-16 md:mx-4',
-              // https://www.joshwcomeau.com/css/full-bleed/
-              !hideFullBleed && cssstyles.layoutMain,
-              styles?.container,
-            )}
-            transition={{ duration: 0.35 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {children}
-          </m.main>
-        </AnimatePresence>
+        <main
+          className={clsx(
+            'min-h-full py-16 md:mx-4',
+            // https://www.joshwcomeau.com/css/full-bleed/
+            !hideFullBleed && cssstyles.layoutMain,
+            styles?.container,
+          )}
+        >
+          {children}
+        </main>
         {!hideFooter && <Footer className="mt-auto" />}
       </LayoutWrapper>
     </SiteThemeProvider>

@@ -8,23 +8,21 @@ export type PredefinedNotificationProps = {
 };
 
 /**
- * Provide existing or mocked notification context
+ * Provide predefined notification context
  * @param props
  * @returns
  */
 export function PredefinedNotification(props: PredefinedNotificationProps): JSX.Element {
-  const originalContext = React.useContext(NotificationContext);
-  const notificationContext: INotificationContext = React.useMemo(() => {
-    if (originalContext) {
-      return originalContext;
-    }
-    return {
+  const notificationContext: INotificationContext = React.useMemo(
+    () => ({
       registerNotification: asyncNoop,
       didRegister: true,
       didDeny: false,
       setDidRegister: noop,
-    };
-  }, [originalContext]);
+    }),
+    [],
+  );
+
   return (
     <NotificationContext.Provider value={notificationContext}>
       {props.children}
