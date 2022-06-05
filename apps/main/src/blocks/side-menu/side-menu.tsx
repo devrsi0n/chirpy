@@ -3,7 +3,7 @@ import { m, useCycle, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { IconButton } from '$/components/button';
-import { Menu, X } from '$/components/icons';
+import { IconMenu, IconX } from '$/components/icons';
 import { useClickOutside } from '$/hooks/use-click-outside';
 import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { ssrMode } from '$/utilities/env';
@@ -103,8 +103,8 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
         className={clsx('bg-gray-100', buttonStyles)}
       >
         <span className="sr-only">Open navigation menu</span>
-        <Menu className={clsx(isOpen && `hidden`)} />
-        <X className={clsx(!isOpen && `hidden`)} />
+        <IconMenu className={clsx(isOpen && `hidden`)} />
+        <IconX className={clsx(!isOpen && `hidden`)} />
       </IconButton>
     </m.nav>
   );

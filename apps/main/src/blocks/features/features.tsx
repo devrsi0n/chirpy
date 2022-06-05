@@ -1,23 +1,23 @@
 import { Heading } from '$/components/heading';
-import { Code, Figma, Lock, Icon } from '$/components/icons';
+import { IconCode, IconFigma, IconLock, Icon } from '$/components/icons';
 import { Text } from '$/components/text';
 
 const contents: FeatureProps[] = [
   {
     heading: 'Easy customization',
     content: 'You can customize widget styles to match your design system easily. ✨',
-    icon: Figma,
+    icon: IconFigma,
   },
   {
     heading: 'Privacy at next level',
     content: `We never track you, sell your data or show Ads. We even built a custom telemetry system to avoid sharing your data with a third-party.`,
-    icon: Lock,
+    icon: IconLock,
   },
   {
     heading: 'Open source',
     content:
       'Our source code is available and accessible on GitHub. You can read it, run it and inspect it to verify that our actions match with our promises.',
-    icon: Code,
+    icon: IconCode,
   },
 ];
 

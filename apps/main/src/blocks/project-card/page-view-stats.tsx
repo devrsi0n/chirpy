@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { ArrowUp } from '$/components/icons';
+import { IconArrowUp } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
@@ -54,7 +54,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
               grow > 0 ? `text-green-900` : `text-yellow-1000`,
             )}
           >
-            <ArrowUp size={14} className={clsx(grow <= 0 && `rotate-180`)} />
+            <IconArrowUp size={14} className={clsx(grow <= 0 && `rotate-180`)} />
             <Text size="xs" className="!leading-none" style={{ color: 'inherit' }}>
               {`${100}`}%
             </Text>

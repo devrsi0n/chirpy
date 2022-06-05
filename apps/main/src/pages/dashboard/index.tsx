@@ -5,11 +5,11 @@ import { PageTitle } from '$/blocks/page-title';
 import { EmptyProjectCard, ProjectCard } from '$/blocks/project-card';
 import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
-import { PlusCircle } from '$/components/icons';
+import { IconPlusCircle } from '$/components/icons';
 import { Spinner } from '$/components/spinner';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
@@ -85,7 +85,7 @@ export default function Dashboard(): JSX.Element {
             className="space-x-1"
             disabled={disableCreation}
           >
-            <PlusCircle size={18} />
+            <IconPlusCircle size={18} />
             <span>Create project</span>
           </Button>
         </div>

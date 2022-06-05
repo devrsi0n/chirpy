@@ -5,7 +5,7 @@ import { Card } from '$/components/card';
 import { Dialog } from '$/components/dialog';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
-import { Loader, MoreVertical, Trash2 } from '$/components/icons';
+import { IconLoader, IconMoreVertical, IconTrash2 } from '$/components/icons';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Menu } from '$/components/menu';
@@ -75,7 +75,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
           <Menu className="mr-1">
             <Menu.Button ariaLabel="Show more project options">
               <span className="p-1">
-                <MoreVertical size={20} />
+                <IconMoreVertical size={20} />
               </span>
             </Menu.Button>
             <Menu.Items>
@@ -83,7 +83,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
                 onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
                 className="space-x-1"
               >
-                <Trash2 size={14} />
+                <IconTrash2 size={14} />
                 <span>Delete</span>
               </Menu.Item>
             </Menu.Items>
@@ -154,7 +154,7 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         <Dialog.Footer>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button variant="solid" color="red" onClick={handleClickConfirmDelete} disabled={loading}>
-            {loading ? <Loader /> : 'Delete'}
+            {loading ? <IconLoader /> : 'Delete'}
           </Button>
         </Dialog.Footer>
       </Dialog>

@@ -4,13 +4,13 @@ import * as React from 'react';
 
 import { BaseButtonProps, BaseButton } from '$/components/button';
 import {
-  BoldIcon,
-  CodeIcon,
+  IconBold,
+  IconCode,
   IconBlockQuote,
-  ItalicIcon,
-  Link2,
-  List,
-  UnderlineIcon,
+  IconItalic,
+  IconLink2,
+  IconList,
+  IconUnderline,
   Icon,
 } from '$/components/icons';
 import { Select } from '$/components/select';
@@ -45,10 +45,10 @@ export function BaseMarkButton({
 }
 
 const markIconMap: Record<InlineFormat, Icon> = {
-  bold: BoldIcon,
-  italic: ItalicIcon,
-  underline: UnderlineIcon,
-  code: CodeIcon,
+  bold: IconBold,
+  italic: IconItalic,
+  underline: IconUnderline,
+  code: IconCode,
 };
 
 export type MarkButtonProps = {
@@ -77,8 +77,8 @@ export type BlockButtonProps = {
 };
 
 const blockMap: Record<BlockButtonFormat, [Icon, string]> = {
-  bulletList: [List, 'toggleBulletList'],
-  link: [Link2, 'toggleLink'],
+  bulletList: [IconList, 'toggleBulletList'],
+  link: [IconLink2, 'toggleLink'],
   blockquote: [IconBlockQuote, 'toggleBlockquote'],
 };
 

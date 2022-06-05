@@ -3,13 +3,13 @@ import { signOut } from 'next-auth/react';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
-import { LifeBuoy, LogIn, LogOut, Monitor, User } from '$/components/icons';
+import { IconLifeBuoy, IconLogIn, IconLogOut, IconMonitor, IconUser } from '$/components/icons';
 import { Link, LinkProps } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { FEEDBACK_LINK, GRAPHQL_CACHE_DB_NAME, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY, GRAPHQL_CACHE_DB_NAME } from '$/lib/constants';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';
@@ -41,19 +41,19 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             <></>
           ) : (
             <Menu.Item className={itemStyle} onClick={handleSignIn}>
-              <LogIn size={14} />
+              <IconLogIn size={14} />
               <p className="w-max">Sign in</p>
             </Menu.Item>
           ))}
         <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
-          <LifeBuoy size={14} />
+          <IconLifeBuoy size={14} />
           <span>Feedback</span>
         </Menu.Item>
         {isSignIn && (
           <>
             {isNav && (
               <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
-                <Monitor size={14} />
+                <IconMonitor size={14} />
                 <span>Dashboard</span>
               </Menu.Item>
             )}
@@ -63,7 +63,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               href="/profile"
               target={isWidget ? '_blank' : undefined}
             >
-              <User size={14} />
+              <IconUser size={14} />
               <span>Profile</span>
             </Menu.Item>
             <Menu.Divider />
@@ -77,7 +77,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
                 indexedDB.deleteDatabase(GRAPHQL_CACHE_DB_NAME);
               }}
             >
-              <LogOut size={14} />
+              <IconLogOut size={14} />
               <span className="w-max">Log out</span>
             </Menu.Item>
           </>

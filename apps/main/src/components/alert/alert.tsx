@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { IconButton } from '../button';
-import { X } from '../icons';
+import { IconX } from '../icons';
 
 export type AlertType = 'warn';
 
@@ -30,7 +30,7 @@ export function Alert(props: AlertProps): JSX.Element {
             onClick={() => setHidden(true)}
             aria-label="Dismiss"
           >
-            <X size={18} />
+            <IconX size={18} />
           </IconButton>
         </div>
       )}

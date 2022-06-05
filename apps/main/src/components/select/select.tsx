@@ -6,7 +6,7 @@ import * as React from 'react';
 import { listHoverable, cardBg } from '$/styles/common';
 
 import { easeInOut } from '../animation';
-import { Check, ChevronDownCircleFill } from '../icons';
+import { IconCheck, IconChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';
 
 export type SelectProps<T> = React.PropsWithChildren<{
@@ -44,7 +44,7 @@ export function Select<T extends string | number = string>({
                     styles.icon,
                   )}
                 >
-                  <ChevronDownCircleFill size={18} />
+                  <IconChevronDownCircleFill size={18} />
                 </span>
               </Listbox.Button>
             </span>
@@ -96,7 +96,7 @@ function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element
                 `absolute inset-y-0 left-0 flex items-center pl-1.5`,
               )}
             >
-              <Check size={16} />
+              <IconCheck size={16} />
             </span>
           )}
         </div>

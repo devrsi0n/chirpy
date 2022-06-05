@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ActionButton, ButtonProps } from '$/components/button';
-import { Info } from '$/components/icons';
+import { IconInfo } from '$/components/icons';
 import { useCommentContext } from '$/contexts/comment-context';
 
 type TimelineLinkButtonProps = {
@@ -30,7 +30,7 @@ export function TimelineLinkButton({
     >
       <ActionButton
         color="green"
-        icon={<Info size={20} />}
+        icon={<IconInfo size={20} />}
         disabled={disabled}
         title={
           disabled ? `This is already the current comment's timeline` : `This comment's timeline`

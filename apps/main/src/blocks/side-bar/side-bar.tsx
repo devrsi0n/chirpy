@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Heading } from '$/components/heading';
-import { ChevronRight } from '$/components/icons';
+import { IconChevronRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
 import { Directory } from '$/server/types/file';
@@ -85,7 +85,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   const listMarker = dir.route ? (
     <span className="mr-3.5 inline-block h-1.5 w-1.5 rounded-full bg-current hover:bg-gray-1200" />
   ) : (
-    <ChevronRight
+    <IconChevronRight
       size={18}
       className={clsx(`-ml-1.5 mr-2 transition`, isOpened && `rotate-90`)}
       onClick={(e) => {

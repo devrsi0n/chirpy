@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
 
-import { MessageSquare, File, ExternalLink } from '$/components/icons';
+import { IconMessageSquare, IconFile, IconExternalLink } from '$/components/icons';
 import { Link } from '$/components/link';
 import { usePrevious } from '$/hooks/use-previous';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
@@ -170,7 +170,7 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
           className=" inline-flex items-center space-x-1 text-gray-1200 hover:underline"
           variant="plain"
         >
-          {isCommentWidget ? <MessageSquare size={14} /> : <File size={14} />}
+          {isCommentWidget ? <IconMessageSquare size={14} /> : <IconFile size={14} />}
           <span className="max-w-sm md:truncate">
             {isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}
           </span>
@@ -182,7 +182,7 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
         variant="plain"
         tooltip="Click to open in a new tab"
       >
-        <ExternalLink size={16} />
+        <IconExternalLink size={16} />
       </Link>
     </span>
   );

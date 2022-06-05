@@ -6,7 +6,7 @@ import { useTimeout } from '$/hooks/use-timeout';
 import { IconButton, Button } from '../button';
 import { Card } from '../card';
 import { Heading } from '../heading';
-import { CheckInCircle, X, AlertCircle, XCircle, Info } from '../icons';
+import { IconCheckInCircle, IconX, IconAlertCircle, IconXCircle, IconInfo } from '../icons';
 import { Text } from '../text';
 import { IToast, ToastType } from './toast-context';
 
@@ -63,7 +63,7 @@ export function ToastItem({
           aria-label="Dismiss"
           title="Dismiss"
         >
-          <X />
+          <IconX />
         </IconButton>
       </div>
       {description && (
@@ -80,22 +80,22 @@ const iconSize = `w-6`;
 const typeIconMap: Record<ToastType, JSX.Element> = {
   success: (
     <span className={clsx('text-green-900', iconSize)}>
-      <CheckInCircle aria-label="Success toast icon" />
+      <IconCheckInCircle aria-label="Success toast icon" />
     </span>
   ),
   warning: (
     <span className={clsx('text-yellow-900', iconSize)}>
-      <AlertCircle aria-label="Warning toast icon" />
+      <IconAlertCircle aria-label="Warning toast icon" />
     </span>
   ),
   error: (
     <span className={clsx('text-red-900', iconSize)}>
-      <XCircle aria-label="Error toast icon" />
+      <IconXCircle aria-label="Error toast icon" />
     </span>
   ),
   info: (
     <span className={clsx('text-blue-900', iconSize)}>
-      <Info aria-label="Info toast icon" />
+      <IconInfo aria-label="Info toast icon" />
     </span>
   ),
 };

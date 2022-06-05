@@ -4,7 +4,7 @@ import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 
 import { Button } from '$/components/button';
-import { PencilIcon, X } from '$/components/icons';
+import { IconEdit2, IconX } from '$/components/icons';
 import { Link } from '$/components/link';
 
 import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
@@ -147,7 +147,7 @@ function renderDropdownFilter(
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
             onClick={() => removeFilter(router, key, query)}
           >
-            <X className="h-4 w-4" />
+            <IconX className="h-4 w-4" />
           </strong>
         </div>
       </Menu.Item>
@@ -171,14 +171,14 @@ function renderDropdownFilter(
           variant="plain"
         >
           <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
-          <PencilIcon className="ml-1 h-4 w-4 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
+          <IconEdit2 className="ml-1 h-4 w-4 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
         </Link>
         <strong
           title={`Remove filter: ${formattedFilters[key]}`}
           className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
           onClick={() => removeFilter(router, key, query)}
         >
-          <X className="h-4 w-4" />
+          <IconX className="h-4 w-4" />
         </strong>
       </div>
     </Menu.Item>
@@ -380,7 +380,7 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
           className="flex h-full w-full cursor-pointer items-center px-2 text-gray-800 hover:text-indigo-900"
           onClick={() => removeFilter(this.props.router, key, query)}
         >
-          <X className="h-4 w-4" />
+          <IconX className="h-4 w-4" />
         </span>
       </span>
     );

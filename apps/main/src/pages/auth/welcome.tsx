@@ -6,7 +6,7 @@ import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { useCelebration } from '$/hooks/use-celebration';
 import { ssrMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';

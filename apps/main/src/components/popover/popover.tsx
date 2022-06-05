@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import { easeInOut } from '../animation';
 import { Button } from '../button';
-import { AlertTriangle } from '../icons';
+import { IconAlertTriangle } from '../icons';
 
 export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 
@@ -105,7 +105,7 @@ function PopoverContent({
                     {type === 'alert' && (
                       <div className="hidden h-full rounded-full bg-red-300 xs:block">
                         <div className={clsx('p-2 text-red-900', styles?.icon)}>
-                          <AlertTriangle />
+                          <IconAlertTriangle />
                         </div>
                       </div>
                     )}

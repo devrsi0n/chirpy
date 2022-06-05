@@ -3,16 +3,16 @@ import { useTheme } from 'next-themes';
 import * as React from 'react';
 
 import { IconButton } from '$/components/button/icon-button';
-import { Moon, Settings, Sun, Icon } from '$/components/icons';
+import { IconMoon, IconSettings, IconSun, Icon } from '$/components/icons';
 import { Link } from '$/components/link/link';
 import { Text } from '$/components/text';
 import { useHasMounted } from '$/hooks/use-has-mounted';
 import { ColorMode } from '$/types/theme.type';
 
 const icons: Record<ColorMode, Icon> = {
-  system: Settings,
-  light: Sun,
-  dark: Moon,
+  system: IconSettings,
+  light: IconSun,
+  dark: IconMoon,
 };
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;

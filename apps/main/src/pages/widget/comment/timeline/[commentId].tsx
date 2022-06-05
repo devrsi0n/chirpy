@@ -17,7 +17,7 @@ import { PoweredBy } from '$/blocks/powered-by';
 import { UserMenu } from '$/blocks/user-menu';
 import { IconButton } from '$/components/button';
 import { Heading } from '$/components/heading';
-import { ArrowLeft } from '$/components/icons';
+import { IconArrowLeft } from '$/components/icons';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import {
@@ -50,7 +50,7 @@ export default function CommentTimelineWidget(
           {/* Can't use history.back() here in case user open this page individual */}
           <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
             <IconButton className="translate-x-1">
-              <ArrowLeft size={20} />
+              <IconArrowLeft size={20} />
             </IconButton>
           </Link>
           <Heading as="h4">

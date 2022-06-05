@@ -7,7 +7,7 @@ import { bluredOverlay, cardBg } from '$/styles/common';
 
 import { easeInOut, easeInOutOpacity } from '../animation';
 import { IconButton } from '../button';
-import { AlertTriangle, X } from '../icons';
+import { IconAlertTriangle, IconX } from '../icons';
 
 type Size = 'sm' | 'base';
 const SIZE_STYLES: Record<
@@ -100,7 +100,7 @@ export function Dialog({
                   {type === 'alert' && (
                     <div className="h-full rounded-full bg-red-300">
                       <div className="p-2 text-red-900">
-                        <AlertTriangle size={sizeStyles.icon} />
+                        <IconAlertTriangle size={sizeStyles.icon} />
                       </div>
                     </div>
                   )}
@@ -111,7 +111,7 @@ export function Dialog({
                         onClick={() => onClose(true)}
                         aria-label="Dismiss"
                       >
-                        <X />
+                        <IconX />
                       </IconButton>
                     )}
                     <div className="flex flex-row items-start justify-between">

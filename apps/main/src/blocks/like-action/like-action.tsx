@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import { ActionButton, ActionButtonProps } from '$/components/button';
-import { Heart, HeartFill } from '$/components/icons';
+import { IconHeart, IconHeartFill } from '$/components/icons';
 import { useCommentContext } from '$/contexts/comment-context';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 
 export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
 
@@ -39,7 +39,7 @@ export function LikeAction({ likes = [], commentId, ...restProps }: LikeActionPr
     toggleALikeAction(didLike, likedId, commentId);
   };
 
-  const HeartComponent = didLike ? HeartFill : Heart;
+  const HeartComponent = didLike ? IconHeartFill : IconHeart;
   return (
     <ActionButton
       {...restProps}

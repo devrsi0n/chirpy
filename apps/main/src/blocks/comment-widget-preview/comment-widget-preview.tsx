@@ -8,7 +8,7 @@ import {
   UseDeleteAComment,
   UseToggleALikeAction,
 } from '$/contexts/comment-context';
-import { useCurrentUser } from '$/contexts/current-user-context/use-current-user';
+import { useCurrentUser } from '$/contexts/current-user-context';
 import { CommentLeafType } from '$/types/widget';
 
 import { CommentTrees } from '../comment-trees';

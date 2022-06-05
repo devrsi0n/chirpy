@@ -9,7 +9,7 @@ import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';
 import { Divider } from '../divider';
-import { ChevronDownIcon } from '../icons';
+import { IconChevronDown } from '../icons';
 
 export type Shape = 'circle' | 'square';
 
@@ -70,7 +70,7 @@ function MenuButton({
       <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
         {children}
         {shape === 'square' && (
-          <ChevronDownIcon className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
+          <IconChevronDown className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
         )}
       </HeadlessMenu.Button>
     </div>
