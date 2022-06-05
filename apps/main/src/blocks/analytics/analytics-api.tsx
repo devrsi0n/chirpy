@@ -1,13 +1,13 @@
 import { Primitive } from 'type-fest';
 
 import { WIDGET_COMMENT_PATH } from '$/lib/constants';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 import { formatISO } from './date';
 import { Query } from './query';
 import { Site } from './type';
 
-let abortController = ssrMode ? ({} as any) : new AbortController();
+let abortController = isSSRMode ? ({} as any) : new AbortController();
 let SHARED_LINK_AUTH: string | null = null;
 
 class ApiError extends Error {

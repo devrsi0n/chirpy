@@ -1,6 +1,6 @@
-export const ssrMode = typeof window === 'undefined';
+export const isSSRMode = typeof window === 'undefined';
 
-export const isBrowser = !ssrMode;
+export const isBrowser = !isSSRMode;
 
 export function getHostEnv(url = window.location.href) {
   const host = new URL(url).hostname;

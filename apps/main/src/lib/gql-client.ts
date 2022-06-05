@@ -15,7 +15,7 @@ import {
 } from 'urql';
 
 import { isENVDev } from '$/server/utilities/env';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 import { GRAPHQL_CACHE_DB_NAME } from './constants';
 
@@ -40,7 +40,7 @@ export function getGqlClientOptions(
 ): ClientOptions {
   const exchanges: Exchange[] = [
     dedupExchange,
-    ssrMode ? cacheExchange : getOfflineExchange(),
+    isSSRMode ? cacheExchange : getOfflineExchange(),
     fetchExchange,
     subscriptionExchange({
       forwardSubscription: (operation) => ({

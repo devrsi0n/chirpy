@@ -6,7 +6,7 @@ import { IconButton } from '$/components/button';
 import { IconMenu, IconX } from '$/components/icons';
 import { useClickOutside } from '$/hooks/use-click-outside';
 import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
 
@@ -79,7 +79,7 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
-      custom={!ssrMode ? document.body.clientHeight : undefined}
+      custom={!isSSRMode ? document.body.clientHeight : undefined}
       className={clsx(
         'top-0 bottom-0 isolate h-[100vh] w-[250px]',
         containerStyles,

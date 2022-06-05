@@ -31,14 +31,14 @@ import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comm
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentTimelineNode } from '$/types/widget';
-import { ssrMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/env';
 
 export default function CommentTimelineWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ): JSX.Element {
   const [{ data }] = useCommentTimelineSubscription({
     variables: { id: props.commentId },
-    pause: ssrMode,
+    pause: isSSRMode,
   });
 
   const comment = data?.commentByPk || props.comment;
