@@ -38,7 +38,7 @@ importers:
       '@types/jest': 28.1.1
       '@types/node': 16.11.38
       '@types/react': 18.0.11
-      '@types/react-dom': 18.0.4
+      '@types/react-dom': 18.0.5
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
@@ -55,7 +55,7 @@ importers:
       '@types/jest': 28.1.1
       '@types/node': 16.11.38
       '@types/react': 18.0.11
-      '@types/react-dom': 18.0.4
+      '@types/react-dom': 18.0.5
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
@@ -163,7 +163,7 @@ importers:
       '@types/lodash': 4.14.182
       '@types/node': 16.11.38
       '@types/react': 18.0.11
-      '@types/react-dom': 18.0.4
+      '@types/react-dom': 18.0.5
       '@types/react-flatpickr': 3.8.6
       '@types/requestidlecallback': 0.3.4
       '@types/tailwindcss': 3.0.10
@@ -350,7 +350,7 @@ importers:
       '@types/lodash': 4.14.182
       '@types/node': 16.11.38
       '@types/react': 18.0.11
-      '@types/react-dom': 18.0.4
+      '@types/react-dom': 18.0.5
       '@types/react-flatpickr': 3.8.6
       '@types/requestidlecallback': 0.3.4
       '@types/tailwindcss': 3.0.10
@@ -6092,7 +6092,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.17.9
       '@testing-library/dom': 8.13.0
-      '@types/react-dom': 18.0.4
+      '@types/react-dom': 18.0.5
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: true
@@ -6727,8 +6727,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/react-dom/18.0.4:
-    resolution: {integrity: sha512-FgTtbqPOCI3dzZPZoC2T/sx3L34qxy99ITWn4eoSA95qPyXDMH0ALoAqUp49ITniiJFsXUVBtalh/KffMpg21Q==}
+  /@types/react-dom/18.0.5:
+    resolution: {integrity: sha512-OWPWTUrY/NIrjsAPkAk1wW9LZeIjSvkXRhclsFO8CZcZGCOg2G0YZy4ft+rOyYxy8B7ui5iZzi9OkDebZ7/QSA==}
     dependencies:
       '@types/react': 18.0.11
     dev: true
