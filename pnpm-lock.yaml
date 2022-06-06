@@ -183,7 +183,7 @@ importers:
       csstype: 3.1.0
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.2
+      dayjs: 1.11.3
       debounce-promise: 3.1.2
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
@@ -275,7 +275,7 @@ importers:
       csstype: 3.1.0
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.2
+      dayjs: 1.11.3
       debounce-promise: 3.1.2
       downshift: 6.1.7_react@18.1.0
       eta: 1.12.3
@@ -2714,6 +2714,9 @@ packages:
     peerDependencies:
       '@geist-ui/core': '>=1.0.0'
       react: '>=16.13.0 || 18'
+    peerDependenciesMeta:
+      '@geist-ui/core':
+        optional: true
     dependencies:
       react: 18.1.0
     dev: false
@@ -10071,6 +10074,10 @@ packages:
 
   /dayjs/1.11.2:
     resolution: {integrity: sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw==}
+    dev: false
+
+  /dayjs/1.11.3:
+    resolution: {integrity: sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==}
     dev: false
 
   /debounce-promise/3.1.2:
