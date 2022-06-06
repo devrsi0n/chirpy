@@ -139,7 +139,7 @@
     "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
-    "eslint": "8.16.0",
+    "eslint": "8.17.0",
     "fake-indexeddb": "3.1.7",
     "framer-motion": "6.3.10",
     "intersection-observer": "0.12.0",
