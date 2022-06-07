@@ -1,12 +1,9 @@
-import { useButton } from '@react-aria/button';
-import { AriaButtonProps } from '@react-types/button';
 import clsx from 'clsx';
 import * as React from 'react';
 
-export type BaseButtonProps = AriaButtonProps &
-  Omit<React.ComponentPropsWithRef<'button'>, keyof AriaButtonProps>;
+export type BaseButtonProps = React.ComponentPropsWithRef<'button'>;
 
-const BaseButton = React.forwardRef(function BaseButton(
+export const BaseButton = React.forwardRef(function BaseButton(
   { type = 'button', children, className, onClick, onMouseDown, ...restProps }: BaseButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
@@ -18,16 +15,8 @@ const BaseButton = React.forwardRef(function BaseButton(
     },
     [onMouseDown],
   );
-  const defaultRef = React.useRef<HTMLButtonElement>();
-  const _ref: React.RefObject<HTMLButtonElement> = (ref ||
-    defaultRef) as React.RefObject<HTMLButtonElement>;
-  const props = {
-    type,
-    ...restProps,
-  };
-  const { buttonProps } = useButton(props, _ref);
   const allProps = {
-    ...buttonProps,
+    type,
     ...restProps,
   };
 
@@ -40,11 +29,9 @@ const BaseButton = React.forwardRef(function BaseButton(
       )}
       onMouseDown={handleMouseDown}
       onClick={onClick}
-      ref={_ref}
+      ref={ref}
     >
       {children}
     </button>
   );
 });
-
-export { BaseButton };
