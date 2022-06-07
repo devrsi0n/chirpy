@@ -125,7 +125,7 @@
     "@types/node": "16.11.38",
     "@types/react": "18.0.11",
     "@types/react-dom": "18.0.5",
-    "@types/react-flatpickr": "3.8.6",
+    "@types/react-flatpickr": "3.8.7",
     "@types/requestidlecallback": "0.3.4",
     "@types/tailwindcss": "3.0.10",
     "@types/web-push": "3.3.2",

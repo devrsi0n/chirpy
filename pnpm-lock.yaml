@@ -164,7 +164,7 @@ importers:
       '@types/node': 16.11.38
       '@types/react': 18.0.11
       '@types/react-dom': 18.0.5
-      '@types/react-flatpickr': 3.8.6
+      '@types/react-flatpickr': 3.8.7
       '@types/requestidlecallback': 0.3.4
       '@types/tailwindcss': 3.0.10
       '@types/web-push': 3.3.2
@@ -351,7 +351,7 @@ importers:
       '@types/node': 16.11.38
       '@types/react': 18.0.11
       '@types/react-dom': 18.0.5
-      '@types/react-flatpickr': 3.8.6
+      '@types/react-flatpickr': 3.8.7
       '@types/requestidlecallback': 0.3.4
       '@types/tailwindcss': 3.0.10
       '@types/web-push': 3.3.2
@@ -6733,8 +6733,8 @@ packages:
       '@types/react': 18.0.11
     dev: true
 
-  /@types/react-flatpickr/3.8.6:
-    resolution: {integrity: sha512-EhlqO1P0jnlTyYMHgaXRcuWxBqdVtmepl5j9FxoZS8jBxyx1z6AN8K4/WyYS4ijiMsBNDGyagjRXQbAfgvao4w==}
+  /@types/react-flatpickr/3.8.7:
+    resolution: {integrity: sha512-sIRN1WxcVjPjlYdqhDqWjdznFIb21Z1ab0prETuzW6j/xpOXMDCBI6/xtxTgaWF0hhKTqO7U1RRbaxbjyS3e5w==}
     dependencies:
       '@types/react': 18.0.11
       flatpickr: 4.6.13
