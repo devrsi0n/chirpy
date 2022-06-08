@@ -1,5 +1,11 @@
 # @chirpy-dev/main-app
 
+## 0.3.0
+
+### Minor Changes
+
+- [#382](https://github.com/devrsi0n/chirpy/pull/382) [`e0a8726`](https://github.com/devrsi0n/chirpy/commit/e0a87265ea31e9434288f9b4de2fe680e5c00b60) Thanks [@devrsi0n](https://github.com/devrsi0n)! - Add the comment widget preview to home page
+
 ## 0.2.1
 
 ### Patch Changes

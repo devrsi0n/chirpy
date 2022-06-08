@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/main-app",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "Apache License 2.0",
   "scripts": {
     "chromatic": "chromatic --exit-zero-on-changes",
