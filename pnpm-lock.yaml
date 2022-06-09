@@ -210,7 +210,7 @@ importers:
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8
-      next-plausible: 3.1.9
+      next-plausible: 3.2.0
       next-themes: 0.2.0
       next-urql: 3.3.2
       nodemailer: 6.7.4
@@ -290,7 +290,7 @@ importers:
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_ef5jwxihqo6n7gxfmzogljlgcm
-      next-plausible: 3.1.9_iw2ijl5yq2m4rs4sgxacncq4yu
+      next-plausible: 3.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
       next-themes: 0.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
       next-urql: 3.3.2_react@18.1.0+urql@2.2.0
       nodemailer: 6.7.4
@@ -16218,8 +16218,8 @@ packages:
       - supports-color
     dev: false
 
-  /next-plausible/3.1.9_iw2ijl5yq2m4rs4sgxacncq4yu:
-    resolution: {integrity: sha512-6Ro6lVnuXAtqbbBQfuKuu0cpZHWWvJWbOE1G+Rx6i42T6lLYtbQzbu09Cutv3vc/wD/4ySHzJkuTnxsqnlArGA==}
+  /next-plausible/3.2.0_iw2ijl5yq2m4rs4sgxacncq4yu:
+    resolution: {integrity: sha512-OlYcLXBG3kKd/fKMpm8SZ5IkUKSFm1/8t7cv6e5bewIqlpdZpdWuSrjbdJpbmutb2KPLXHzilKp09zmDGjy9KQ==}
     peerDependencies:
       next: ^11.1.0 || ^12.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
