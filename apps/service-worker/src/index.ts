@@ -36,7 +36,7 @@ sw.addEventListener('notificationclick', (event: NotificationEvent) => {
 const CACHE_ID = process.env.SW_CACHE_ID;
 sw.addEventListener('install', (e) => {
   // Make sure complete success or total failure, with nothing between
-  e.waitUntil(caches.open(CACHE_ID).then((cache) => cache.addAll(['/'])));
+  e.waitUntil(caches.open(CACHE_ID).then((cache) => cache.addAll([])));
 });
 
 // Fix browser refresh button doesn't refresh the service worker
@@ -44,12 +44,12 @@ sw.addEventListener('fetch', (e) => {
   // console.log('fetch', e.request);
   e.respondWith(
     (async () => {
+      const matchAllClients = await sw.clients.matchAll();
       if (
         e.request.mode === 'navigate' &&
         e.request.method === 'GET' &&
         sw.registration.waiting &&
-        // eslint-disable-next-line unicorn/no-await-expression-member
-        (await sw.clients.matchAll()).length < 2
+        matchAllClients.length < 2
       ) {
         sw.registration.waiting.postMessage('skipWaiting');
         return new Response('', { headers: { Refresh: '0' } });
