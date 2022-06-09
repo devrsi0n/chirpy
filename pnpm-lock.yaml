@@ -189,7 +189,7 @@ importers:
       downshift: 6.1.7
       eslint: 8.17.0
       eta: 1.12.3
-      fake-indexeddb: 3.1.7
+      fake-indexeddb: 3.1.8
       framer-motion: 6.3.10
       github-slugger: 1.4.0
       graphql: 16.5.0
@@ -362,7 +362,7 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.17.0
-      fake-indexeddb: 3.1.7
+      fake-indexeddb: 3.1.8
       intersection-observer: 0.12.0
       jest: 28.1.0_@types+node@16.11.38
       jest-environment-jsdom: 28.1.0
@@ -11696,8 +11696,8 @@ packages:
     engines: {'0': node >=0.6.0}
     dev: false
 
-  /fake-indexeddb/3.1.7:
-    resolution: {integrity: sha512-CUGeCzCOVjmeKi2C0pcvSh6NDU6uQIaS+7YyR++tO/atJJujkBYVhDvfePdz/U8bD33BMVWirsr1MKczfAqbjA==}
+  /fake-indexeddb/3.1.8:
+    resolution: {integrity: sha512-7umIgcdnDfNcjw0ZaoD6yR2BflngKmPsyzZC+sV2fdttwz5bH6B6CCaNzzD+MURfRg8pvr/aL0trfNx65FLiDg==}
     dependencies:
       realistic-structured-clone: 2.0.4
     dev: true
