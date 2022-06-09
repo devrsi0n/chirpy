@@ -4,8 +4,8 @@
   "main": "./index.js",
   "dependencies": {
     "@chirpy-dev/prettier-config": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "5.27.0",
-    "@typescript-eslint/parser": "5.27.0",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-jest": "26.5.3",
