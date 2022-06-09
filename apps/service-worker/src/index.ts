@@ -36,7 +36,12 @@ sw.addEventListener('notificationclick', (event: NotificationEvent) => {
 const CACHE_ID = process.env.SW_CACHE_ID;
 sw.addEventListener('install', (e) => {
   // Make sure complete success or total failure, with nothing between
-  e.waitUntil(caches.open(CACHE_ID).then((cache) => cache.addAll([])));
+  e.waitUntil(
+    caches.open(CACHE_ID).then(
+      // Don't cache anything since we only want to use web push notification
+      (cache) => cache.addAll([]),
+    ),
+  );
 });
 
 // Fix browser refresh button doesn't refresh the service worker
