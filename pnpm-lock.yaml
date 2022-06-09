@@ -168,7 +168,7 @@ importers:
       '@types/web-push': 3.3.2
       '@types/ws': 8.5.3
       '@urql/devtools': 2.0.3
-      '@urql/exchange-graphcache': 4.4.2
+      '@urql/exchange-graphcache': 4.4.3
       '@urql/storybook-addon': 1.0.8
       babel-loader: 8.2.5
       canvas-confetti: 1.5.1
@@ -263,7 +263,7 @@ importers:
       '@tiptap/extension-underline': 2.0.0-beta.23_bdtxrwlxmejxwkiihhzxvcfcve
       '@tiptap/react': 2.0.0-beta.109_v3u5vl2qvzglw5dw4grn5aawxa
       '@tiptap/starter-kit': 2.0.0-beta.185
-      '@urql/exchange-graphcache': 4.4.2_graphql@16.5.0
+      '@urql/exchange-graphcache': 4.4.3_graphql@16.5.0
       canvas-confetti: 1.5.1
       chart.js: 3.8.0
       clsx: 1.1.1
@@ -7136,8 +7136,8 @@ packages:
       wonka: 4.0.15
     dev: true
 
-  /@urql/exchange-graphcache/4.4.2_graphql@16.5.0:
-    resolution: {integrity: sha512-EyWH9//iLIjzmqZvRuPVi7K3PuHz2vVEzsHuKAMF4A3too6usg5G7+bt+yAe1wUKA1ksgYEP6iXTcoGKt+tgYQ==}
+  /@urql/exchange-graphcache/4.4.3_graphql@16.5.0:
+    resolution: {integrity: sha512-EPXRCzq929RjVDym4NP4mO6bsyGE6J1JzUxE9vpm04VjZtK90Ag4bgftFdkHsMHh4ydvokLKQjCRVqGxKEBnEg==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
     dependencies:
