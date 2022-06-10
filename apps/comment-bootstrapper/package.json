@@ -22,7 +22,7 @@
     "eslint": "8.17.0",
     "@chirpy-dev/eslint-config": "workspace:*",
     "jest": "28.1.0",
-    "vite": "2.9.9",
+    "vite": "2.9.12",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "typescript": "4.7.3"
