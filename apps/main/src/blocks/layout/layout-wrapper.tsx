@@ -14,10 +14,10 @@ export function LayoutWrapper({ title, children, className }: LayoutWrapperProps
       <Head>
         <title>
           {title}
-          {title.length > 0 ? '・' : ''}Chirpy
+          {title ? '・' : ''}Chirpy
         </title>
       </Head>
-      <div className={clsx(`flex min-h-full flex-col font-sans text-gray-1000`, className)}>
+      <div className={clsx(`flex min-h-full flex-col font-sans text-gray-1100`, className)}>
         {children}
       </div>
     </>

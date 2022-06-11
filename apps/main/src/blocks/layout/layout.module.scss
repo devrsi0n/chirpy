@@ -3,12 +3,13 @@ $ellipse: 25%;
 
 .layoutWrapper {
   &::before {
+    z-index: -1;
     background: radial-gradient(
         circle at 5% 50%,
-        theme('colors.primary.400'),
+        theme('colors.primary.400'/1),
         $gradientColor $ellipse
       ),
-      radial-gradient(circle at 90% 15%, theme('colors.plum.400'), $gradientColor $ellipse);
+      radial-gradient(circle at 90% 15%, theme('colors.plum.400'/1), $gradientColor $ellipse);
   }
 }
 

@@ -108,7 +108,7 @@ export const Link = React.forwardRef(function Link(
           ref={ref}
         >
           {children}
-          {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
+          {!hideUnderline && ['primary', 'secondary', 'solid'].includes(variant) && (
             <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
               <m.span
                 className="absolute inset-0 inline-block bg-current"
