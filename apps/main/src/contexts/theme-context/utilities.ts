@@ -27,21 +27,18 @@ function getThemeCSSVariables(theme: NestedObject, prefix = '--tw'): CSSVariable
 }
 
 /**
- * Unwrap hsl color to numbers, e.g. hsl(252, 56.0%, 57.5%) -> 252deg, 56.0%, 57.5%
+ * Unwrap hsl color to numbers, e.g. hsl(252 56.0% 57.5%) -> 252deg 56.0% 57.5%
  * Used by css variables
  * @param color
  */
 function translateColor(color: string) {
   const [, hsl] = /hsl\((.+)\)/.exec(color) || [];
   if (hsl) {
-    return hsl.replace(/,/g, '').replace(/\d+\W/, (match) => {
-      return match.replace(' ', 'deg ');
-    });
+    return hsl.replace(/,/g, '');
   }
   const [, hsla] = /hsla\((.+)\)/.exec(color) || [];
-  return hsla.replace(/\d+,\W/, (match) => {
-    return match.replace(', ', 'deg, ');
-  });
+  // legacy color format, e.g. hsla(252, 56.0%, 57.5%, 0.75)
+  return hsla;
 }
 
 /**
