@@ -4,4 +4,4 @@ node_modules
 **/blocks/analytics
 **/public
 dist
-vite.config.js
+*.js

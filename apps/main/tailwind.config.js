@@ -1,3 +1,4 @@
+// @ts-nocheck
 const defaultTheme = require('tailwindcss/defaultTheme');
 const radixColors = require('@radix-ui/colors');
 const convert = require('color-convert');
