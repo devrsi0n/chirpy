@@ -1,5 +1,5 @@
 import { CommentLeafType } from '$/types/widget';
-import { dayjs } from '$/utilities/date';
+import dayjs from 'dayjs';
 
 export const PAGE_ID = 'b5a16120-593c-492f-ad94-e14d247485f3';
 export const PROJECT_ID = '3c5d2d41-e2df-4b31-98f8-6e471acab461';
@@ -10,6 +10,8 @@ const UserJane = {
   name: 'Jane',
   avatar: '/images/avatars/female-1.jpeg',
 };
+
+const dateTime = dayjs().millisecond(0).second(0).minute(41);
 
 export const PREVIEW_COMMENTS: CommentLeafType[] = [
   {
@@ -29,7 +31,7 @@ export const PREVIEW_COMMENTS: CommentLeafType[] = [
         },
       ],
     },
-    createdAt: dayjs().subtract(50, 'hours').toISOString(),
+    createdAt: dateTime.subtract(50, 'hours').toISOString(),
     parentId: null,
     pageId: PAGE_ID,
     user: UserJane,
@@ -52,7 +54,7 @@ export const PREVIEW_COMMENTS: CommentLeafType[] = [
             },
           ],
         },
-        createdAt: dayjs().subtract(49, 'hours').toISOString(),
+        createdAt: dateTime.subtract(49, 'hours').toISOString(),
         parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
         pageId: PAGE_ID,
         user: {
@@ -88,7 +90,7 @@ export const PREVIEW_COMMENTS: CommentLeafType[] = [
         },
       ],
     },
-    createdAt: dayjs().subtract(25, 'hours').toISOString(),
+    createdAt: dateTime.subtract(25, 'hours').toISOString(),
     parentId: null,
     pageId: PAGE_ID,
     user: {
