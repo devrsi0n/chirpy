@@ -31,7 +31,7 @@ export function NotificationHub(): JSX.Element {
         <Menu.Button className={styles.menuButton}>
           <IconBell size={22} />
           {hasUnreadNotifications && (
-            <Badge className="absolute top-1 right-1 !bg-red-900 ring ring-gray-100" />
+            <Badge className="absolute top-1 right-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
         <Menu.Items className={styles.menuItems}>

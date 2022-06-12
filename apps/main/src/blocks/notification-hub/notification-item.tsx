@@ -59,7 +59,7 @@ export function NotificationItem({
             <Avatar src={message.triggeredBy.avatar} className="mb-2" />
             <button
               type="button"
-              className="hidden h-fit translate-x-3 rounded-full p-0.5 hover:bg-primary-600 group-hover:inline"
+              className="hidden h-fit translate-x-3 -translate-y-1 rounded-full p-0.5 hover:bg-primary-600 group-hover:inline"
               onClick={(e) => {
                 onClickDelete(message.id);
                 e.stopPropagation();
