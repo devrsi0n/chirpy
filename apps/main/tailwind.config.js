@@ -16,10 +16,10 @@ const colors = {
   yellow: getColorCSSVariables('yellow'),
   orange: getColorCSSVariables('orange'),
   red: getColorCSSVariables('red'),
-  whitea: getColorCSSVariables('whitea'),
-  blacka: getColorCSSVariables('blacka'),
+  whitea: getColorCSSVariables('whitea', false),
+  blacka: getColorCSSVariables('blacka', false),
   pink: getColorCSSVariables('pink'),
-  bg: `var(--tw-colors-bg)`,
+  bg: `hsl(var(--tw-colors-bg) / <alpha-value>)`,
   // static colors
   grayd: getRadixColor(radixColors.grayDark, 'gray'),
   grayl: getRadixColor(radixColors.gray, 'gray'),
@@ -29,9 +29,15 @@ const colors = {
   transparent: 'transparent',
 };
 
-/**
- * @type {import('tailwindcss/tailwind-config').TailwindConfig}
- */
+const round = (num) =>
+  num
+    .toFixed(7)
+    .replace(/(\.\d+?)0+$/, '$1')
+    .replace(/\.0$/, '');
+const rem = (px) => `${round(px / 16)}rem`;
+const em = (px, base) => `${round(px / base)}em`;
+
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
@@ -66,10 +72,10 @@ module.exports = {
       },
       fill: colors,
       borderColor: (theme) => ({
-        DEFAULT: theme('colors.gray.700', 'currentColor'),
+        DEFAULT: theme('colors.gray.700/1', 'currentColor'),
       }),
       ringColor: (theme) => ({
-        DEFAULT: theme('colors.gray.700', 'currentColor'),
+        DEFAULT: theme('colors.gray.700/1', 'currentColor'),
       }),
       screens: {
         xs: '375px',
@@ -92,10 +98,57 @@ module.exports = {
       height: {
         fit: 'fit-content',
       },
+      typography: ({ theme }) => {
+        // Fix build error
+        theme = theme || (() => {});
+        return {
+          DEFAULT: {
+            css: {
+              '--tw-prose-body': theme('colors.gray[1100]/1'),
+              '--tw-prose-headings': theme('colors.gray[1200]/1'),
+              '--tw-prose-lead': theme('colors.gray[1000]/1'),
+              '--tw-prose-links': theme('colors.gray[1200]/1'),
+              '--tw-prose-bold': theme('colors.gray[1200]/1'),
+              '--tw-prose-counters': theme('colors.gray[[900]]/1'),
+              '--tw-prose-bullets': theme('colors.gray[900]/1'),
+              '--tw-prose-hr': theme('colors.gray[600]/1'),
+              '--tw-prose-quotes': theme('colors.gray[1200]/1'),
+              '--tw-prose-quote-borders': theme('colors.gray[600]/1'),
+              '--tw-prose-captions': theme('colors.gray[1000]/1'),
+              '--tw-prose-code': theme('colors.pink[1100]/1'),
+              '--tw-prose-pre-code': theme('colors.gray[100]/1'),
+              '--tw-prose-pre-bg': theme('colors.gray[1200]/1'),
+              '--tw-prose-th-borders': theme('colors.gray[600]/1'),
+              '--tw-prose-td-borders': theme('colors.gray[200]/1'),
+              '--tw-prose-invert-body': theme('colors.gray[200]/1'),
+              '--tw-prose-invert-headings': theme('colors.white'),
+              '--tw-prose-invert-lead': theme('colors.gray[600]/1'),
+              '--tw-prose-invert-links': theme('colors.white'),
+              '--tw-prose-invert-bold': theme('colors.white'),
+              '--tw-prose-invert-counters': theme('colors.gray[700]/1'),
+              '--tw-prose-invert-bullets': theme('colors.gray[[900]]/1'),
+              '--tw-prose-invert-hr': theme('colors.gray[1000]/1'),
+              '--tw-prose-invert-quotes': theme('colors.gray[100]/1'),
+              '--tw-prose-invert-quote-borders': theme('colors.gray[1000]/1'),
+              '--tw-prose-invert-captions': theme('colors.gray[700]/1'),
+              '--tw-prose-invert-code': theme('colors.white'),
+              '--tw-prose-invert-pre-code': theme('colors.gray[600]/1'),
+              '--tw-prose-invert-pre-bg': 'rgb(0 0 0 / 50%)',
+              '--tw-prose-invert-th-borders': theme('colors.gray[[900]]/1'),
+              '--tw-prose-invert-td-borders': theme('colors.gray[1000]/1'),
+              code: {
+                color: 'var(--tw-prose-code)',
+                borderRadius: rem(4),
+                fontWeight: 'normal',
+              },
+            },
+          },
+        };
+      },
     },
   },
   plugins: [
-    require('./scripts/tailwindcss-typography'),
+    require('@tailwindcss/typography'),
     plugin(function ({ addVariant, e, postcss }) {
       addVariant('firefox', ({ container, separator }) => {
         const isFirefoxRule = postcss.atRule({
@@ -112,10 +165,12 @@ module.exports = {
   ],
 };
 
-function getColorCSSVariables(name) {
+function getColorCSSVariables(name, modernAlpha = true) {
   const result = {};
   for (let i = 1; i <= 12; i++) {
-    result[i * 100] = `var(--tw-colors-${name}-${i * 100})`;
+    result[i * 100] = `${modernAlpha ? 'hsl' : 'hsla'}(var(--tw-colors-${name}-${i * 100})${
+      modernAlpha ? ' / <alpha-value>' : ''
+    })`;
   }
   return result;
 }

@@ -29,6 +29,7 @@ export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Elemen
   const [widgetTheme, setWidgetTheme] = React.useState<Theme | undefined>(props.widgetTheme);
   const value = React.useMemo<WidgetThemeContextType>(
     () => ({
+      // We need to add site theme here as SiteThemeProvider won't be added to a widget
       siteTheme,
       widgetTheme,
       setWidgetTheme,

@@ -59,7 +59,7 @@ export function NotificationItem({
             <Avatar src={message.triggeredBy.avatar} className="mb-2" />
             <button
               type="button"
-              className="hidden h-fit rounded-full p-1 hover:bg-primary-600 group-hover:inline"
+              className="hidden h-fit translate-x-3 -translate-y-1 rounded-full p-0.5 hover:bg-primary-600 group-hover:inline"
               onClick={(e) => {
                 onClickDelete(message.id);
                 e.stopPropagation();
@@ -67,7 +67,7 @@ export function NotificationItem({
               ref={deleteButtonRef}
               aria-label="Delete the notification message"
             >
-              <IconX size={22} />
+              <IconX size={18} />
             </button>
           </div>
           <NotificationText className="flex flex-row space-x-1.5 leading-none">

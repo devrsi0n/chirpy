@@ -1,3 +1,4 @@
+import { Provider } from 'next-auth/providers';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import EmailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
@@ -12,7 +13,7 @@ import { sendVerificationRequest } from '../email/send-emails';
 
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
 
-export const authProviders = [
+export const authProviders: Provider[] = [
   GitHubProvider({
     clientId: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
