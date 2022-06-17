@@ -237,7 +237,7 @@ importers:
       tsconfig-paths-webpack-plugin: 3.5.2
       type-fest: 2.13.0
       typescript: 4.7.3
-      urql: 2.2.0
+      urql: 2.2.2
       web-push: 3.4.5
       webpack: 5.73.0
       whatwg-fetch: 3.6.2
@@ -287,7 +287,7 @@ importers:
       next-mdx-remote: 3.0.8_ef5jwxihqo6n7gxfmzogljlgcm
       next-plausible: 3.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
       next-themes: 0.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
-      next-urql: 3.3.2_react@18.1.0+urql@2.2.0
+      next-urql: 3.3.2_react@18.1.0+urql@2.2.2
       nodemailer: 6.7.4
       patch-package: 6.4.7
       react: 18.1.0
@@ -300,7 +300,7 @@ importers:
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
       type-fest: 2.13.0
-      urql: 2.2.0_7oyq4t3ocdziwagw7zfqg4youi
+      urql: 2.2.2_7oyq4t3ocdziwagw7zfqg4youi
       web-push: 3.4.5
       wonka: 4.0.15
       ws: 8.7.0
@@ -16274,7 +16274,7 @@ packages:
       react-dom: 18.1.0_react@18.1.0
     dev: false
 
-  /next-urql/3.3.2_react@18.1.0+urql@2.2.0:
+  /next-urql/3.3.2_react@18.1.0+urql@2.2.2:
     resolution: {integrity: sha512-oXQHCFU0R3pIwXWtDqZDYOjKcD7SlNP7aove9YuukgKuItdtIR9CRUgo3qMOD5dSQ3wBBGfQ8zR6XtzqV5WiGg==}
     peerDependencies:
       react: '>=16.8.0 || 18'
@@ -16282,7 +16282,7 @@ packages:
     dependencies:
       react: 18.1.0
       react-ssr-prepass: 1.5.0_react@18.1.0
-      urql: 2.2.0_7oyq4t3ocdziwagw7zfqg4youi
+      urql: 2.2.2_7oyq4t3ocdziwagw7zfqg4youi
     dev: false
 
   /next/12.1.5_7eal7btsozhlq6p7vkkqmzby7i:
@@ -21966,8 +21966,8 @@ packages:
     resolution: {integrity: sha512-RtuPeMy7c1UrHwproMZN9gN6kiZ0SvJwRaEzwZY0j9MypEkFqyBaKv176jvlPtg58Zh36bOkS0NFABXMHvvGCA==}
     dev: false
 
-  /urql/2.2.0_7oyq4t3ocdziwagw7zfqg4youi:
-    resolution: {integrity: sha512-36wnWqDrpXqhwT5r2/qRSZXhb7Y4sXA0nLlYEd3uLgvfIdOA8kUaPdfTujzfrvfCcfiVVFxhzqVAhc8r17NMwQ==}
+  /urql/2.2.2_7oyq4t3ocdziwagw7zfqg4youi:
+    resolution: {integrity: sha512-jaVhDxWS2gfJLWWupFXtRkTCuGeRX+b9v19PU6TnKIJ7VP+xyrgpNHghHcTBGo58F+rxvCXVNEvSvdlKFMiHhg==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
       react: '>= 16.8.0 || 18'
