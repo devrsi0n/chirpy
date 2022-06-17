@@ -195,7 +195,7 @@ importers:
       graphql-tag: 2.12.6
       graphql-ws: 5.8.1
       gray-matter: 4.0.3
-      html-loader: 3.1.0
+      html-loader: 3.1.2
       intersection-observer: 0.12.0
       jest: 28.1.0
       jest-environment-jsdom: 28.1.0
@@ -276,7 +276,7 @@ importers:
       graphql-tag: 2.12.6_graphql@16.5.0
       graphql-ws: 5.8.1_graphql@16.5.0
       gray-matter: 4.0.3
-      html-loader: 3.1.0_webpack@5.73.0
+      html-loader: 3.1.2_webpack@5.73.0
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       mdx-prism: 0.3.4
@@ -13098,8 +13098,8 @@ packages:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
     dev: true
 
-  /html-loader/3.1.0_webpack@5.73.0:
-    resolution: {integrity: sha512-ycMYFRiCF7YANcLDNP72kh3Po5pTcH+bROzdDwh00iVOAY/BwvpuZ1BKPziQ35Dk9D+UD84VGX1Lu/H4HpO4fw==}
+  /html-loader/3.1.2_webpack@5.73.0:
+    resolution: {integrity: sha512-9WQlLiAV5N9fCna4MUmBW/ifaUbuFZ2r7IZmtXzhyfyi4zgPEjXsmsYCKs+yT873MzRj+f1WMjuAiPNA7C6Tcw==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
@@ -15445,7 +15445,7 @@ packages:
     dev: false
 
   /lodash.sortby/4.7.0:
-    resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
+    resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
 
   /lodash.startcase/4.4.0:
     resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
@@ -19134,7 +19134,7 @@ packages:
     dev: false
 
   /relateurl/0.2.7:
-    resolution: {integrity: sha1-VNvzd+UUQKypCkzSdGANP/LYiKk=}
+    resolution: {integrity: sha512-G08Dxvm4iDN3MLM0EsP62EDV9IuhXPR6blNz6Utcp7zyV3tr4HVNINt6MpaRWbxoOHT3Q7YN2P+jaHX8vUbgog==}
     engines: {node: '>= 0.10'}
 
   /relay-runtime/12.0.0:
@@ -21263,7 +21263,7 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
   /tr46/1.0.1:
-    resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
+    resolution: {integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==}
     dependencies:
       punycode: 2.1.1
 
