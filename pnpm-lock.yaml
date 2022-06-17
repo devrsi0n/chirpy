@@ -135,7 +135,7 @@ importers:
       '@storybook/jest': 0.0.10
       '@storybook/manager-webpack5': 6.5.8
       '@storybook/react': 6.5.8
-      '@storybook/testing-library': 0.0.11
+      '@storybook/testing-library': 0.0.13
       '@storybook/testing-react': 1.3.0
       '@tailwindcss/typography': 0.5.2
       '@tensorflow-models/toxicity': 1.2.2
@@ -328,7 +328,7 @@ importers:
       '@storybook/jest': 0.0.10_ef5jwxihqo6n7gxfmzogljlgcm
       '@storybook/manager-webpack5': 6.5.8_bxmn6y3pweymjo6ekelj24wybq
       '@storybook/react': 6.5.8_bbtgdsswxej36iqannxwzn66rm
-      '@storybook/testing-library': 0.0.11_ef5jwxihqo6n7gxfmzogljlgcm
+      '@storybook/testing-library': 0.0.13_ef5jwxihqo6n7gxfmzogljlgcm
       '@storybook/testing-react': 1.3.0_jikhluqkmb2d6qw7mbkkpufzeu
       '@tailwindcss/typography': 0.5.2_tailwindcss@3.1.2
       '@testing-library/jest-dom': 5.16.4
@@ -5629,8 +5629,8 @@ packages:
       - webpack-command
     dev: true
 
-  /@storybook/testing-library/0.0.11_ef5jwxihqo6n7gxfmzogljlgcm:
-    resolution: {integrity: sha512-8KbKx3s1e+uF3oWlPdyXRpZa6xtCsCHtXh1nCTisMA6P5YcSDaCg59NXIOVIQCAwKvjRomlqMJH8JL1WyOzeVg==}
+  /@storybook/testing-library/0.0.13_ef5jwxihqo6n7gxfmzogljlgcm:
+    resolution: {integrity: sha512-vRMeIGer4EjJkTgI8sQyK9W431ekPWYCWL//OmSDJ64IT3h7FnW7Xg6p+eqM3oII98/O5pcya5049GxnjaPtxw==}
     dependencies:
       '@storybook/client-logger': 6.5.8
       '@storybook/instrumenter': 6.5.8_ef5jwxihqo6n7gxfmzogljlgcm
