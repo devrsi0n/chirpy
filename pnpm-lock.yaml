@@ -238,7 +238,7 @@ importers:
       type-fest: 2.13.0
       typescript: 4.7.3
       urql: 2.2.2
-      web-push: 3.4.5
+      web-push: 3.5.0
       webpack: 5.73.0
       whatwg-fetch: 3.6.2
       wonka: 4.0.15
@@ -301,7 +301,7 @@ importers:
       superjson: 1.9.1
       type-fest: 2.13.0
       urql: 2.2.2_7oyq4t3ocdziwagw7zfqg4youi
-      web-push: 3.4.5
+      web-push: 3.5.0
       wonka: 4.0.15
       ws: 8.7.0
     devDependencies:
@@ -22209,8 +22209,8 @@ packages:
     resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
     dev: false
 
-  /web-push/3.4.5:
-    resolution: {integrity: sha512-2njbTqZ6Q7ZqqK14YpK1GGmaZs3NmuGYF5b7abCXulUIWFSlSYcZ3NBJQRFcMiQDceD7vQknb8FUuvI1F7Qe/g==}
+  /web-push/3.5.0:
+    resolution: {integrity: sha512-JC0V9hzKTqlDYJ+LTZUXtW7B175qwwaqzbbMSWDxHWxZvd3xY0C2rcotMGDavub2nAAFw+sXTsqR65/KY2A5AQ==}
     engines: {node: '>= 6'}
     hasBin: true
     dependencies:
