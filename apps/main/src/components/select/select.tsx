@@ -9,13 +9,21 @@ import { easeInOut } from '../animation';
 import { IconCheck, IconChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';
 
+export type SelectVariant = 'borderless' | 'default';
+
 export type SelectProps<T> = React.PropsWithChildren<{
   name?: string;
   value: T;
   onChange(value: T): void;
   label?: string;
   className?: string;
+  variant?: SelectVariant;
 }>;
+
+const VARIANT_CLASSES: Record<SelectVariant, string> = {
+  borderless: 'border border-transparent',
+  default: 'border',
+};
 
 export function Select<T extends string | number = string>({
   name,
@@ -24,6 +32,7 @@ export function Select<T extends string | number = string>({
   onChange,
   label,
   className,
+  variant = 'default',
 }: SelectProps<T>): JSX.Element {
   return (
     <Listbox value={value} onChange={onChange}>
@@ -35,7 +44,10 @@ export function Select<T extends string | number = string>({
           <div className={clsx(`relative`, className)}>
             <span className={`inline-block w-full`}>
               <Listbox.Button
-                className={`focus-visible:outline-none relative w-full cursor-default rounded border py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`}
+                className={clsx(
+                  `focus-visible:outline-none relative w-full cursor-default rounded py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`,
+                  VARIANT_CLASSES[variant],
+                )}
               >
                 <span>{name || value}</span>
                 <span
