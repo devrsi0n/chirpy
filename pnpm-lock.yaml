@@ -202,7 +202,7 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       mdx-prism: 0.3.4
-      msw: 0.42.0
+      msw: 0.42.1
       msw-storybook-addon: 1.6.3
       next: 12.1.5
       next-auth: 4.3.4
@@ -363,8 +363,8 @@ importers:
       intersection-observer: 0.12.0
       jest: 28.1.0_@types+node@16.11.38
       jest-environment-jsdom: 28.1.0
-      msw: 0.42.0_typescript@4.7.3
-      msw-storybook-addon: 1.6.3_lyxhb6azqu2mn5lfogah34p3zi
+      msw: 0.42.1_typescript@4.7.3
+      msw-storybook-addon: 1.6.3_alnxswcp7nrl4lpaeuzwt76ceq
       postcss: 8.4.14
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.14
       postcss-loader: 7.0.0_mepnsno3xmng6eyses4tepu7bu
@@ -16081,21 +16081,21 @@ packages:
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  /msw-storybook-addon/1.6.3_lyxhb6azqu2mn5lfogah34p3zi:
+  /msw-storybook-addon/1.6.3_alnxswcp7nrl4lpaeuzwt76ceq:
     resolution: {integrity: sha512-Ps80WdRmXsmenoTwfrgKMNpQD8INUUFyUFyZOecx8QjuqSlL++UYrLaGyACXN2goOn+/VS6rb0ZapbjrasPClg==}
     peerDependencies:
       msw: '>=0.35.0 <1.0.0'
     dependencies:
       '@storybook/addons': 6.5.3_ef5jwxihqo6n7gxfmzogljlgcm
       is-node-process: 1.0.1
-      msw: 0.42.0_typescript@4.7.3
+      msw: 0.42.1_typescript@4.7.3
     transitivePeerDependencies:
       - react
       - react-dom
     dev: true
 
-  /msw/0.42.0_typescript@4.7.3:
-    resolution: {integrity: sha512-vB9rzgiGHoQGfkKpp3QZHxobzfuuQOJk+0bff0wtbK8k3P3CaUSt8bCwvExours682AY4mUfTjIkCsxy0JoS3w==}
+  /msw/0.42.1_typescript@4.7.3:
+    resolution: {integrity: sha512-LZZuz7VddL45gCBgfBWHyXj6a4W7OTJY0mZPoipJ3P/xwbuJwrtwB3IJrWlqBM8aink/eTKlRxwzmtIAwCj5yQ==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
