@@ -211,7 +211,7 @@ importers:
       next-mdx-remote: 3.0.8
       next-plausible: 3.2.0
       next-themes: 0.2.0
-      next-urql: 3.3.2
+      next-urql: 3.3.3
       nodemailer: 6.7.4
       patch-package: 6.4.7
       postcss: 8.4.14
@@ -287,7 +287,7 @@ importers:
       next-mdx-remote: 3.0.8_ef5jwxihqo6n7gxfmzogljlgcm
       next-plausible: 3.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
       next-themes: 0.2.0_iw2ijl5yq2m4rs4sgxacncq4yu
-      next-urql: 3.3.2_react@18.1.0+urql@2.2.2
+      next-urql: 3.3.3_react@18.1.0+urql@2.2.2
       nodemailer: 6.7.4
       patch-package: 6.4.7
       react: 18.1.0
@@ -16264,8 +16264,8 @@ packages:
       react-dom: 18.1.0_react@18.1.0
     dev: false
 
-  /next-urql/3.3.2_react@18.1.0+urql@2.2.2:
-    resolution: {integrity: sha512-oXQHCFU0R3pIwXWtDqZDYOjKcD7SlNP7aove9YuukgKuItdtIR9CRUgo3qMOD5dSQ3wBBGfQ8zR6XtzqV5WiGg==}
+  /next-urql/3.3.3_react@18.1.0+urql@2.2.2:
+    resolution: {integrity: sha512-mKdpbvxW7FifHjupRKNjE1YuZxhLF+GlN/y1sARcUSEdrCv10dRkFGQl03p4UpWtdggCyZ5lOVBBaQGW7UNfiQ==}
     peerDependencies:
       react: '>=16.8.0 || 18'
       urql: ^2.0.0
