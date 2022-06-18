@@ -10,11 +10,13 @@ import { ToastProvider } from '$/components/toast';
 import { CurrentUserProvider } from '$/contexts/current-user-context';
 import { GQLClientProvider } from '$/contexts/gql-client-context';
 import { NotificationProvider } from '$/contexts/notification-context';
+import { useIsWidget } from '$/hooks/use-is-widget';
 import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 
 import '$/styles/global-styles.scss';
 
 function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
+  const isWidget = useIsWidget();
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
       <SessionProvider
@@ -22,7 +24,11 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
         // Refresh hasura token before it expires
         refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
       >
-        <NextThemesProvider attribute="class" storageKey="chirpy.theme">
+        <NextThemesProvider
+          attribute="class"
+          // Widget and app themes are different
+          storageKey={isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'}
+        >
           <LazyMotion features={loadFeatures} strict>
             <GQLClientProvider>
               <CurrentUserProvider>
