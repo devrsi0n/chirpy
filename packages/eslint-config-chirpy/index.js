@@ -1,12 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
+  plugins: ['@typescript-eslint', 'prettier', 'unicorn'],
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
+
     'next/core-web-vitals',
     'plugin:prettier/recommended',
     'plugin:storybook/recommended',
@@ -55,7 +54,13 @@ module.exports = {
     'unicorn/prefer-node-protocol': 'off',
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
-
-    'jest/expect-expect': 'off',
   },
+  overrides: [
+    {
+      files: ['*.test.ts', '*.test.tsx'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
+      rules: { 'jest/expect-expect': 'off' },
+    },
+  ],
 };

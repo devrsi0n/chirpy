@@ -5,5 +5,5 @@
     "target": "es6",
     "types": ["cypress", "@testing-library/cypress", "node"]
   },
-  "include": ["./cypress/**/*.ts"]
+  "include": ["./**/*.ts"]
 }
