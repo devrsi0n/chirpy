@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "sameSite": "Lax",
+      "name": "next-auth.csrf-token",
+      "value": "f5c8af640c4d41f1d98cdfcf2084d6a1f05306cc676efc1b3fef6b0a4fc992ae%7Ca9fa63b70c741b44e6955b90a6dd9df063c2279e03ea1a29ff5bd4603d7210f1",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false
+    },
+    {
+      "sameSite": "Lax",
+      "name": "next-auth.callback-url",
+      "value": "http%3A%2F%2Flocalhost%3A3000",
+      "domain": "localhost",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://localhost:3000",
+      "localStorage": [
+        {
+          "name": "nextauth.message",
+          "value": "{\"event\":\"session\",\"data\":{\"trigger\":\"getSession\"},\"timestamp\":1655533259}"
+        }
+      ]
+    }
+  ]
+}

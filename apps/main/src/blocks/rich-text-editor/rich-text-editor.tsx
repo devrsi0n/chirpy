@@ -70,7 +70,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
     <section className={clsx(styles?.root, !readOnly && `rounded border border-gray-500`)}>
       <EditorContent
         editor={editor}
-        role="textbox"
+        role={readOnly ? 'article' : 'textbox'}
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
           'prose !max-w-full text-gray-1200',

@@ -70,6 +70,7 @@ importers:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@playwright/test': 1.22.2
       '@testing-library/cypress': 8.0.3
       '@types/node': 16.11.38
       cypress: 9.7.0
@@ -89,6 +90,8 @@ importers:
       dotenv-expand: 8.0.3
       eslint: 8.17.0
       typescript: 4.7.3
+    devDependencies:
+      '@playwright/test': 1.22.2
 
   apps/emails:
     specifiers:
@@ -3935,6 +3938,15 @@ packages:
   /@panva/hkdf/1.0.2:
     resolution: {integrity: sha512-MSAs9t3Go7GUkMhpKC44T58DJ5KGk2vBo+h1cqQeqlMfdGkxaVB78ZWpv9gYi/g2fa4sopag9gJsNvS8XGgWJA==}
     dev: false
+
+  /@playwright/test/1.22.2:
+    resolution: {integrity: sha512-cCl96BEBGPtptFz7C2FOSN3PrTnJ3rPpENe+gYCMx4GNNDlN4tmo2D89y13feGKTMMAIVrXfSQ/UmaQKLy1XLA==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@types/node': 16.11.38
+      playwright-core: 1.22.2
+    dev: true
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.6_eendcc7yb7wvjts2k2c4t47dxi:
     resolution: {integrity: sha512-IIWxofIYt/AbMwoeBgj+O2aAXLrlCQVg+A4a2zfpXFNHgP8o8rvi3v+oe5t787Lj+KXlKOh8BAiUp9bhuELXhg==}
@@ -17362,6 +17374,12 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       find-up: 5.0.0
+
+  /playwright-core/1.22.2:
+    resolution: {integrity: sha512-w/hc/Ld0RM4pmsNeE6aL/fPNWw8BWit2tg+TfqJ3+p59c6s3B6C8mXvXrIPmfQEobkcFDc+4KirNzOQ+uBSP1Q==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /pluralize/8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
