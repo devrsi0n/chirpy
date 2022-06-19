@@ -3,7 +3,9 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeAutolinkHeadings, {
+  Options as AutolinkHeadingsOptions,
+} from 'rehype-autolink-headings';
 import rehypePrettyCode, { Options } from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
@@ -24,13 +26,13 @@ export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
   const { data, content } = await getFrontMatters(path.join(POST_ROOT, `${slug}.mdx`));
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [
-        // require('remark-autolink-headings'),
-        // require('remark-slug'),
-        // require('remark-code-titles')
+      rehypePlugins: [
+        [rehypePrettyCode, PRETTY_CODE_OPTIONS],
+        // @ts-ignore
+        rehypeSlug,
+        // @ts-ignore
+        [rehypeAutolinkHeadings, AUTO_LINK_HEADINGS_OPTIONS],
       ],
-      // @ts-ignore
-      rehypePlugins: [[rehypePrettyCode, PRETTY_CODE_OPTIONS], rehypeSlug, rehypeAutolinkHeadings],
     },
   });
 
@@ -82,4 +84,8 @@ const PRETTY_CODE_OPTIONS: Partial<Options> = {
   onVisitHighlightedWord(node) {
     node.properties.className = ['word'];
   },
+};
+
+const AUTO_LINK_HEADINGS_OPTIONS: Partial<AutolinkHeadingsOptions> = {
+  behavior: 'append',
 };

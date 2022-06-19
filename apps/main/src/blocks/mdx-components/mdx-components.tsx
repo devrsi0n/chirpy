@@ -28,10 +28,8 @@ interface PreProps {
 
 function Pre({ children, className, ...restProps }: PreProps): JSX.Element {
   return (
-    // <div className="not-prose">
     <pre {...restProps} className={clsx(styles.blockPre, className)}>
       {children}
     </pre>
-    // </div>
   );
 }
