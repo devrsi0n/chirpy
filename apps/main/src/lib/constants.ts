@@ -8,6 +8,7 @@ export const HASURA_TOKEN_MAX_AGE = 60 * 60;
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export const EVENT_CLICK_CONTAINER = 'EVENT_CLICK_CONTAINER';
+export const EVENT_CHANGE_THEME = 'EVENT_CHANGE_THEME';
 
 export const WIDGET_COMMENT_PATH = '/widget/comment/';
 

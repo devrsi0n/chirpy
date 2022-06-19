@@ -22,7 +22,11 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
         // Refresh hasura token before it expires
         refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
       >
-        <NextThemesProvider attribute="class" storageKey="chirpy.theme">
+        <NextThemesProvider
+          attribute="class"
+          // Widget and app themes are different
+          storageKey={pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'}
+        >
           <LazyMotion features={loadFeatures} strict>
             <GQLClientProvider>
               <CurrentUserProvider>
