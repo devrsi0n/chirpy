@@ -1,0 +1,40 @@
+---
+title: 'Dark mode'
+---
+
+# Dark mode
+
+Chirpy supports dark mode out of box, you can control the dark mode of a widget as your needs.
+
+## Usage
+
+Add a `data-chirpy-theme` property to the rendering element.
+
+```html
+<div data-chirpy-comment="true" data-chirpy-theme="system"></div>
+```
+
+If you don't understand where to put this script, please go through the [Get started](/docs/get-started) first.
+
+## Options
+
+There're 3 options you can control:
+
+- "light"
+- "dark"
+- "system" (Auto detect the operating system's theme setting)
+
+## Dynamic control
+
+You can change the theme by setting a new `data-chirpy-theme` value, Chirpy will detect the change and update the UI immediately.
+
+```html
+<!-- Initial rendering -->
+<div data-chirpy-comment="true" data-chirpy-theme="system"></div>
+<!-- Change it later according to your user's action on your site -->
+<div data-chirpy-comment="true" data-chirpy-theme="dark"></div>
+```
+
+## Playground
+
+You can try it on our [playground](/play).

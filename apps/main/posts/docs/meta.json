@@ -3,6 +3,7 @@
     "index.mdx",
     "get-started.mdx",
     "features/theme.mdx",
+    "features/dark-mode.mdx",
     "features/markdown.mdx",
     "features/analytics.mdx",
     "api/webhook.mdx",

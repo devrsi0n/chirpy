@@ -20,7 +20,7 @@ Fill the form with a name and the domain of your site.
 
 ## Follow the integration guide
 
-Click the `integrate` button on the project card:
+Click the `Integrate` button on the project card:
 
 ![project card](/images/docs/get-started/project-card.png)
 
@@ -28,4 +28,22 @@ Follow the integration guide on the dialog.
 
 ![integration guide](/images/docs/get-started/integration-guide.png)
 
-Please note: you can only embed the widget on website pages that you just input, their domain must be exactly the same. For example, you can't embed the widget on `a.example.com` if you create a project with domain `example.com`.
+⚠️ Note: you can only embed the widget on website pages that you just input, their domain must be exactly the same. For example, you can't embed the widget on `a.example.com` if you create a project with domain `example.com`.
+
+<details>
+  <summary>Integration guide</summary>
+  <h3>Usage on any website</h3>
+  <p>
+    To embed the comment widget on your website, first add the script tag with your project id to
+    the HTML:
+  </p>
+  <pre>
+    <code>{`<script defer src="http://chirpy.dev/bootstrap/comment.js" data-chirpy-domain="<your-domain>"></script>`}</code>
+  </pre>
+  <p>
+    Then, add the data-chirpy-comment attribute to any HTML element that should render the widget:
+  </p>
+  <pre>
+    <code>{`<div data-chirpy-comment="true"></div>`}</code>
+  </pre>
+</details>
