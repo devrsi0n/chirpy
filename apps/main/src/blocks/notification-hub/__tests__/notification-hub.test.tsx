@@ -1,7 +1,8 @@
 import { composeStories } from '@storybook/testing-react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { pageRender } from '$/__tests__/fixtures/page-render';
 import * as notificationModule from '$/graphql/generated/notification';
 
 import * as stories from '../stories/notification-hub.stories';
@@ -44,7 +45,7 @@ describe('NotificationHub', () => {
 });
 
 async function renderDefaultNotificationHub() {
-  render(<Default />);
+  pageRender(<Default />);
   const notificationButton = screen.getByLabelText('click to open the menu');
   await userEvent.click(notificationButton);
 }
