@@ -1,9 +1,11 @@
 import { promises as fs } from 'fs';
-import mdxPrism from 'mdx-prism';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrettyCode, { Options } from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
 
 import { POST_ROOT } from '../common/constants';
 import { getFrontMatters } from './front-matter';
@@ -27,7 +29,8 @@ export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
         // require('remark-slug'),
         // require('remark-code-titles')
       ],
-      rehypePlugins: [mdxPrism],
+      // @ts-ignore
+      rehypePlugins: [[rehypePrettyCode, PRETTY_CODE_OPTIONS], rehypeSlug, rehypeAutolinkHeadings],
     },
   });
 
@@ -61,3 +64,22 @@ export async function getAllFilesFrontMatter(subFolder: string): Promise<FrontMa
     }),
   );
 }
+
+const PRETTY_CODE_OPTIONS: Partial<Options> = {
+  // Use one of Shiki's packaged themes
+  theme: 'dracula',
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }];
+    }
+  },
+  // Feel free to add classNames that suit your docs
+  onVisitHighlightedLine(node) {
+    node.properties.className.push('highlighted');
+  },
+  onVisitHighlightedWord(node) {
+    node.properties.className = ['word'];
+  },
+};

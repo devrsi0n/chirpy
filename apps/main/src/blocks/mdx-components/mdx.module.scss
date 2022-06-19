@@ -1,0 +1,18 @@
+.blockPre {
+  & > code {
+    display: grid;
+    counter-reset: line;
+
+    & > :global(.line)::before {
+      counter-increment: line;
+      content: counter(line);
+
+      /* Other styling */
+      display: inline-block;
+      width: 1rem;
+      margin-right: 2rem;
+      text-align: right;
+      @apply text-gray-1100;
+    }
+  }
+}
