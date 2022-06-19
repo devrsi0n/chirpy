@@ -119,7 +119,7 @@
     "@types/jest": "28.1.2",
     "@types/jsonwebtoken": "8.5.8",
     "@types/lodash": "4.14.182",
-    "@types/node": "16.11.38",
+    "@types/node": "16.11.41",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",
     "@types/react-flatpickr": "3.8.7",
