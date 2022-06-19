@@ -141,6 +141,13 @@ module.exports = {
                 borderRadius: rem(4),
                 fontWeight: 'normal',
               },
+              pre: {
+                // Reset colors as we already have a theme highlighter
+                color: '',
+                backgroundColor: '',
+                overflowX: 'auto',
+                fontWeight: '400',
+              },
             },
           },
         };

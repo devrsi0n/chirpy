@@ -117,3 +117,48 @@ button:focus {
   content: attr(data-placeholder);
   @apply pointer-events-none float-left h-0 text-gray-1000;
 }
+
+// Fix tailwind typography conflicts pretty-code background
+[data-rehype-pretty-code-fragment] {
+  background-color: #282a36;
+  border-radius: 0.375rem;
+}
+
+.icon.icon-link {
+  background-image: url(/images/docs/link.svg);
+  background-size: cover;
+  width: 14px;
+  height: 14px;
+  display: none;
+  margin-left: 6px;
+
+  // Hide underline animation
+  & ~ span {
+    display: none;
+  }
+
+  h1 & {
+    width: 20px;
+    height: 20px;
+  }
+  h2 & {
+    width: 16px;
+    height: 16px;
+  }
+  h3 & {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+// Show icon when hovering on headings
+h1:hover,
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover {
+  & > a > .icon.icon-link {
+    display: inline-block;
+  }
+}

@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 
+import { Footer } from '$/blocks/footer';
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { SideBar, SideBarProps } from '$/blocks/side-bar';
@@ -14,16 +15,24 @@ const CONTAINER_FOLDER = 'docs';
 
 export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
   return (
-    <SiteLayout title={frontMatter?.title || 'Docs'}>
-      <div className="min-h-full">
-        <section className="-my-2.5 flex min-h-full flex-row space-x-4">
+    <SiteLayout
+      title={frontMatter?.title || 'Docs'}
+      hideFullBleed
+      hideFooter
+      styles={{
+        container: 'py-0',
+      }}
+    >
+      <div className="flex min-h-full flex-col">
+        <section className="flex min-h-full w-full flex-1 flex-row space-x-4">
           <SideBar className="pt-10" directories={directories} title="Documentation" />
-          <article className="prose flex-1 overflow-y-auto lg:prose-xl">
-            <div className="pt-10">
+          <div className="flex-1">
+            <article className="prose mx-auto overflow-x-hidden pt-10">
               {/* @ts-ignore */}
               {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
-            </div>
-          </article>
+            </article>
+            <Footer />
+          </div>
         </section>
       </div>
     </SiteLayout>

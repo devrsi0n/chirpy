@@ -1,9 +1,13 @@
 import { promises as fs } from 'fs';
-import mdxPrism from 'mdx-prism';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
+import rehypeAutolinkHeadings, {
+  Options as AutolinkHeadingsOptions,
+} from 'rehype-autolink-headings';
+import rehypePrettyCode, { Options } from 'rehype-pretty-code';
+import rehypeSlug from 'rehype-slug';
 
 import { POST_ROOT } from '../common/constants';
 import { getFrontMatters } from './front-matter';
@@ -22,12 +26,13 @@ export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
   const { data, content } = await getFrontMatters(path.join(POST_ROOT, `${slug}.mdx`));
   const mdxSource = await serialize(content, {
     mdxOptions: {
-      remarkPlugins: [
-        // require('remark-autolink-headings'),
-        // require('remark-slug'),
-        // require('remark-code-titles')
+      rehypePlugins: [
+        [rehypePrettyCode, PRETTY_CODE_OPTIONS],
+        // @ts-ignore
+        rehypeSlug,
+        // @ts-ignore
+        [rehypeAutolinkHeadings, AUTO_LINK_HEADINGS_OPTIONS],
       ],
-      rehypePlugins: [mdxPrism],
     },
   });
 
@@ -61,3 +66,26 @@ export async function getAllFilesFrontMatter(subFolder: string): Promise<FrontMa
     }),
   );
 }
+
+const PRETTY_CODE_OPTIONS: Partial<Options> = {
+  // Use one of Shiki's packaged themes
+  theme: 'dracula',
+  onVisitLine(node) {
+    // Prevent lines from collapsing in `display: grid` mode, and
+    // allow empty lines to be copy/pasted
+    if (node.children.length === 0) {
+      node.children = [{ type: 'text', value: ' ' }];
+    }
+  },
+  // Feel free to add classNames that suit your docs
+  onVisitHighlightedLine(node) {
+    node.properties.className.push('highlighted');
+  },
+  onVisitHighlightedWord(node) {
+    node.properties.className = ['word'];
+  },
+};
+
+const AUTO_LINK_HEADINGS_OPTIONS: Partial<AutolinkHeadingsOptions> = {
+  behavior: 'append',
+};

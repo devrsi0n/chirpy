@@ -1,7 +1,12 @@
+import clsx from 'clsx';
+
 import { Link } from '$/components/link';
 
-const MDXComponents = {
+import styles from './mdx.module.scss';
+
+export const MDXComponents = {
   a: MDXLink,
+  pre: Pre,
 };
 
 type MDXLinkProps = {
@@ -16,4 +21,15 @@ function MDXLink(props: MDXLinkProps): JSX.Element {
   );
 }
 
-export { MDXComponents };
+interface PreProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+function Pre({ children, className, ...restProps }: PreProps): JSX.Element {
+  return (
+    <pre {...restProps} className={clsx(styles.blockPre, className)}>
+      {children}
+    </pre>
+  );
+}
