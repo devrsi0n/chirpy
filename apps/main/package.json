@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@geist-ui/icons": "1.0.2",
-    "@headlessui/react": "1.6.4",
+    "@headlessui/react": "1.6.5",
     "@radix-ui/colors": "0.1.8",
     "@sendinblue/client": "3.2.1",
     "@tensorflow-models/toxicity": "1.2.2",
