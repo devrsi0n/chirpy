@@ -12,7 +12,6 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-/// <reference types="cypress" />
 import '../fixtures/load-env';
 import './commands';
 
