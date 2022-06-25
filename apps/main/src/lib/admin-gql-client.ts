@@ -2,7 +2,8 @@ import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
-import { getGqlClientOptions } from './gql-client';
+import { ADMIN_HEADERS } from './constants';
+import { getGqlClientOptions, IGqlClientOptions, SSRExchange } from './gql-client';
 
 class ChirpyWebSocket extends WebSocket {
   constructor(...args: ConstructorParameters<typeof WebSocket>) {
@@ -14,18 +15,27 @@ class ChirpyWebSocket extends WebSocket {
 }
 
 export function getAdminGqlClient(): Client {
-  return createClient(
-    getGqlClientOptions(
-      ADMIN_HEADERS,
-      'network-only',
-      createWSClient({
-        url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
-        webSocketImpl: ChirpyWebSocket,
-      }),
-    ),
-  );
+  return createClient(getAdminGqlClientOptions().clientOptions);
 }
 
-const ADMIN_HEADERS = {
-  'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-};
+export interface IAdminGqlClientWithSsrExchange {
+  client: Client;
+  ssrExchange: SSRExchange;
+}
+
+export function getAdminGqlClientWithSsrExchange(): IAdminGqlClientWithSsrExchange {
+  const { clientOptions, ssrExchange } = getAdminGqlClientOptions();
+  return {
+    client: createClient(clientOptions),
+    ssrExchange,
+  };
+}
+
+export function getAdminGqlClientOptions(): IGqlClientOptions {
+  return getGqlClientOptions(ADMIN_HEADERS, 'network-only', {
+    wsClient: createWSClient({
+      url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
+      webSocketImpl: ChirpyWebSocket,
+    }),
+  });
+}

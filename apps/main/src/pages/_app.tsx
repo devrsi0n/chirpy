@@ -14,7 +14,10 @@ import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 
 import '$/styles/global-styles.scss';
 
-function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX.Element {
+function App({
+  Component,
+  pageProps: { session, urqlState, ...pageProps },
+}: AppProps): JSX.Element {
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
       <SessionProvider
@@ -28,7 +31,7 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps): JSX
           storageKey={pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'}
         >
           <LazyMotion features={loadFeatures} strict>
-            <GQLClientProvider>
+            <GQLClientProvider urqlState={urqlState}>
               <CurrentUserProvider>
                 <ToastProvider>
                   <NotificationProvider>

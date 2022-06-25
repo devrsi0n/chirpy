@@ -9,7 +9,6 @@ import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/use-has-mounted';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { isENVDev } from '$/server/utilities/env';
 import { CommonPageProps } from '$/types/page.type';
 import { getBannerProps } from '$/utilities/image';
 
@@ -40,7 +39,6 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
       <div data-chirpy-comment className="my-16" />
       <Script
         src="/bootstrap/comment.js"
-        strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
     </SiteLayout>

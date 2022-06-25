@@ -8,3 +8,17 @@ query themeOfPage($pageId: uuid!) {
     }
   }
 }
+
+query themeOfComment($commentId: uuid!) {
+  commentByPk(id: $commentId) {
+    id
+    page {
+      id
+      url
+      project {
+        id
+        theme
+      }
+    }
+  }
+}

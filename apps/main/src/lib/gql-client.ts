@@ -12,12 +12,16 @@ import {
   dedupExchange,
   fetchExchange,
   cacheExchange,
+  ssrExchange,
 } from 'urql';
 
 import { isENVDev } from '$/server/utilities/env';
 import { isSSRMode } from '$/utilities/env';
 
 import { GRAPHQL_CACHE_DB_NAME } from './constants';
+
+export type SSRExchange = ReturnType<typeof ssrExchange>;
+export type SSRData = ReturnType<ReturnType<typeof ssrExchange>['extractData']>;
 
 const getOfflineExchange = () => {
   const storage = makeDefaultStorage({
@@ -29,18 +33,32 @@ const getOfflineExchange = () => {
   });
 };
 
-export function createGqlClient(hasuraToken = ''): Client {
-  return createClient(getGqlClientOptions(getHeaders(hasuraToken)));
+export function createGqlClient(hasuraToken = '', ssrInitState?: SSRData): Client {
+  return createClient(
+    getGqlClientOptions(getGqlClientHeaders(hasuraToken), undefined, { ssrInitState })
+      .clientOptions,
+  );
+}
+
+export interface IGqlClientOptions {
+  clientOptions: ClientOptions;
+  ssrExchange: SSRExchange;
 }
 
 export function getGqlClientOptions(
   headers: Record<string, string>,
   requestPolicy: RequestPolicy = 'cache-and-network',
-  wsClient?: WsClient,
-): ClientOptions {
+  { ssrInitState, wsClient }: { ssrInitState?: SSRData; wsClient?: WsClient } = {},
+): IGqlClientOptions {
+  const _ssrExchange = ssrExchange({
+    isClient: !isSSRMode,
+    initialState: ssrInitState,
+    staleWhileRevalidate: true,
+  });
   const exchanges: Exchange[] = [
     dedupExchange,
     isSSRMode ? cacheExchange : getOfflineExchange(),
+    _ssrExchange,
     fetchExchange,
     subscriptionExchange({
       forwardSubscription: (operation) => ({
@@ -66,16 +84,19 @@ export function getGqlClientOptions(
     exchanges.unshift(devtoolsExchange);
   }
   return {
-    url: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
-    exchanges,
-    fetchOptions: {
-      headers,
+    clientOptions: {
+      url: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
+      exchanges,
+      fetchOptions: {
+        headers,
+      },
+      requestPolicy,
     },
-    requestPolicy,
+    ssrExchange: _ssrExchange,
   };
 }
 
-function getHeaders(hasuraToken: string) {
+export function getGqlClientHeaders(hasuraToken: string) {
   return {
     authorization: `Bearer ${hasuraToken}`,
   };
