@@ -6,7 +6,9 @@
     "features/dark-mode.mdx",
     "features/markdown.mdx",
     "features/analytics.mdx",
-    "api/webhook.mdx",
+    "features/anti-toxic-comment.mdx",
+    "features/moderate.mdx",
+    "API/webhook.mdx",
     "self-hosted.mdx"
   ]
 }
