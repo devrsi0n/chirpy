@@ -150,7 +150,7 @@
     "postcss": "8.4.14",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-loader": "7.0.0",
-    "postcss-preset-env": "7.7.1",
+    "postcss-preset-env": "7.7.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "require-from-string": "2.0.2",
