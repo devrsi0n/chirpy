@@ -7,9 +7,9 @@ import {
   GetStaticPropsResult,
 } from 'next';
 import * as React from 'react';
+import ssrPrepass from 'react-ssr-prepass';
 import superjson from 'superjson';
-import { OperationResult } from 'urql';
-import { pipe, subscribe } from 'wonka';
+import { Provider } from 'urql';
 
 import { CommentTimeline } from '$/blocks/comment-timeline';
 import { WidgetLayout } from '$/blocks/layout';
@@ -20,17 +20,12 @@ import { Heading } from '$/components/heading';
 import { IconArrowLeft } from '$/components/icons';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
-import {
-  CommentTimelineDocument,
-  CommentTimelineSubscription,
-  useCommentTimelineSubscription,
-} from '$/graphql/generated/comment';
-import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { useCommentTimelineSubscription } from '$/graphql/generated/comment';
+import { ThemeOfCommentDocument, ThemeOfCommentQuery } from '$/graphql/generated/page';
+import { getAdminGqlClient, getAdminGqlClientWithSsrExchange } from '$/lib/admin-gql-client';
 import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
-import { CommentTimelineNode } from '$/types/widget';
 import { isSSRMode } from '$/utilities/env';
 
 export default function CommentTimelineWidget(
@@ -41,7 +36,7 @@ export default function CommentTimelineWidget(
     pause: isSSRMode,
   });
 
-  const comment = data?.commentByPk || props.comment;
+  const comment = data?.commentByPk;
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
@@ -71,12 +66,12 @@ type PathParams = {
 
 type StaticProps = PathParams &
   CommonWidgetProps & {
-    comment: CommentTimelineNode;
     pageURL: string;
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const client = getAdminGqlClient();
+  // Only query a small set of comments to avoid too long build time
   const { data, error } = await client
     .query<CommentsQuery>(CommentsDocument, {
       newerThan: dayjs().subtract(1, 'day').toISOString(),
@@ -104,46 +99,37 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { commentId } = params;
-  const client = getAdminGqlClient();
+  const { client, ssrExchange } = getAdminGqlClientWithSsrExchange();
 
   try {
-    const { data } = await new Promise<OperationResult<CommentTimelineSubscription>>(
-      (resolve /*reject*/) => {
-        // @ts-ignore
-        /*const { unsubscribe } = */ pipe<OperationResult<CommentTimelineSubscription>>(
-          client.subscription(CommentTimelineDocument, { id: commentId }),
-          subscribe((result) => {
-            // console.log(result);
-            resolve(result);
-          }),
-        );
-      },
-    );
-
-    if (!data?.commentByPk) {
-      return { notFound: true };
-    }
-
     const themeResult = await client
-      .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
-        pageId: data.commentByPk.pageId,
+      .query<ThemeOfCommentQuery>(ThemeOfCommentDocument, {
+        commentId,
       })
       .toPromise();
-    if (!themeResult.data?.pageByPk) {
-      console.error(`Can't find page info`);
+    if (!themeResult.data?.commentByPk) {
+      console.error(`Can't find comment theme info`);
       return { notFound: true };
     }
+    const commonProps = {
+      projectId: themeResult.data.commentByPk.page.project.id,
+      commentId,
+      pageURL: themeResult.data.commentByPk.page.url,
+      theme: (themeResult.data.commentByPk.page.project.theme as Theme) || null,
+      isWidget: true as const,
+    };
+
+    await ssrPrepass(
+      <Provider value={client}>
+        <CommentTimelineWidget {...commonProps} />
+      </Provider>,
+    );
 
     return {
       props: {
-        projectId: themeResult.data.pageByPk.project.id,
-        comment: data.commentByPk,
-        commentId,
-        pageURL: themeResult.data.pageByPk.url,
-        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
-        isWidget: true,
+        ...commonProps,
+        urqlState: ssrExchange.extractData(),
       },
-      revalidate: 600,
     };
   } catch (error) {
     console.error(superjson.stringify(error));

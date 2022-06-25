@@ -18,6 +18,24 @@ export type ThemeOfPageQuery = {
   } | null;
 };
 
+export type ThemeOfCommentQueryVariables = Types.Exact<{
+  commentId: Types.Scalars['uuid'];
+}>;
+
+export type ThemeOfCommentQuery = {
+  __typename?: 'query_root';
+  commentByPk?: {
+    __typename?: 'Comment';
+    id: string;
+    page: {
+      __typename?: 'Page';
+      id: string;
+      url: string;
+      project: { __typename?: 'Project'; id: string; theme?: any | null };
+    };
+  } | null;
+};
+
 export const ThemeOfPageDocument = gql`
   query themeOfPage($pageId: uuid!) {
     pageByPk(id: $pageId) {
@@ -35,4 +53,25 @@ export function useThemeOfPageQuery(
   options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'>,
 ) {
   return Urql.useQuery<ThemeOfPageQuery>({ query: ThemeOfPageDocument, ...options });
+}
+export const ThemeOfCommentDocument = gql`
+  query themeOfComment($commentId: uuid!) {
+    commentByPk(id: $commentId) {
+      id
+      page {
+        id
+        url
+        project {
+          id
+          theme
+        }
+      }
+    }
+  }
+`;
+
+export function useThemeOfCommentQuery(
+  options: Omit<Urql.UseQueryArgs<ThemeOfCommentQueryVariables>, 'query'>,
+) {
+  return Urql.useQuery<ThemeOfCommentQuery>({ query: ThemeOfCommentDocument, ...options });
 }
