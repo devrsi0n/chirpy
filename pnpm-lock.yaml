@@ -189,7 +189,7 @@ importers:
       eslint: 8.18.0
       eta: 1.12.3
       fake-indexeddb: 3.1.8
-      framer-motion: 6.3.13
+      framer-motion: 6.3.15
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6
@@ -273,7 +273,7 @@ importers:
       debounce-promise: 3.1.2
       downshift: 6.1.7_react@18.2.0
       eta: 1.12.3
-      framer-motion: 6.3.13_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 6.3.15_biqbaboplfbrettd7655fr4n2y
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6_graphql@16.5.0
@@ -11913,8 +11913,8 @@ packages:
       map-cache: 0.2.2
     dev: true
 
-  /framer-motion/6.3.13_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-z6UIxENuqa9bh/xE1fit7IUT+07TKSp81TE+C0DDBe9ly4bdEafpZUbcDZxNiN6UBU5hYdEY7rKhk+X1JlIkhg==}
+  /framer-motion/6.3.15_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-tqyEaYfr+7p3rnMcMzdVxWoHLsAfpz7bk6xZljndSEfafQ0BfwlZ/CeFZkEETRFr16w/LxfDKBVhinU66ucDYw==}
     peerDependencies:
       react: '>=16.8 || ^17.0.0 || ^18.0.0 || 18'
       react-dom: '>=16.8 || ^17.0.0 || ^18.0.0 || 18'
