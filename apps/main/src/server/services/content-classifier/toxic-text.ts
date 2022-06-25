@@ -37,7 +37,7 @@ export async function checkToxicText(
   const model = await getToxicModel();
   const result = await model.classify(text);
   const resp: ICheckToxicText = result.reduce(
-    (prev, item) => {
+    (prev: ICheckToxicText, item) => {
       if (item.results.some((r) => r.match)) {
         prev.matchedLabels.push(item.label.split('_').join(' '));
       }
