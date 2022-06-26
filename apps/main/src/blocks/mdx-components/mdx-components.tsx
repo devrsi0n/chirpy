@@ -4,10 +4,10 @@ import { Link } from '$/components/link';
 
 import styles from './mdx.module.scss';
 
-export const MDXComponents = {
+export const MDXComponents: Record<string, React.ReactNode> = {
   a: MDXLink,
   pre: Pre,
-};
+} as unknown as Record<string, React.ReactNode>;
 
 type MDXLinkProps = {
   children?: React.ReactNode;

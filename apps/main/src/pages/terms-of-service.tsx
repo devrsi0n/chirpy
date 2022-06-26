@@ -15,7 +15,6 @@ export default function TermsOfService({
     <SiteLayout title={frontMatter.title || 'Terms of service'}>
       <section>
         <article className="prose mx-auto lg:prose-xl">
-          {/* @ts-ignore */}
           <MDXRemote {...mdxSource} components={MDXComponents} />
         </article>
       </section>

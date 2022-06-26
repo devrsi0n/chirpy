@@ -35,7 +35,6 @@ export default function Blog({
               <Image {...banner} layout="responsive" alt="banner" />
             </div>
           )}
-          {/* @ts-ignore */}
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>

@@ -14,7 +14,6 @@ export default function PrivacyPolicy({
     <SiteLayout title={frontMatter.title || 'Privacy policy'}>
       <section>
         <article className="prose mx-auto py-16 lg:prose-xl">
-          {/* @ts-ignore */}
           <MDXRemote {...mdxSource} components={MDXComponents} />
         </article>
       </section>

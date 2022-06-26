@@ -36,7 +36,6 @@ export default function Docs({
           />
           <div className="flex-1">
             <article className="prose mx-auto overflow-x-hidden pt-10">
-              {/* @ts-ignore */}
               {mdxSource && (
                 <MDXRemote {...mdxSource} components={MDXComponents} />
               )}
