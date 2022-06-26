@@ -44,9 +44,9 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        className={`flex w-full flex-col items-center justify-center space-y-2 xs:flex-row xs:space-y-0 xs:space-x-5`}
+        className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5`}
       >
-        <Text variant="secondary" size="sm">
+        <Text variant="secondary" size="sm" className="px-2 sm:px-0">
           &copy; {new Date().getFullYear()} Chirpy Information Technology LLC.
           All rights reserved.
         </Text>
