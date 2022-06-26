@@ -13,4 +13,5 @@ export interface TabsConfig {
 
 export const TabsContext = React.createContext<TabsConfig>({});
 
-export const useTabsContext = (): TabsConfig => React.useContext<TabsConfig>(TabsContext);
+export const useTabsContext = (): TabsConfig =>
+  React.useContext<TabsConfig>(TabsContext);

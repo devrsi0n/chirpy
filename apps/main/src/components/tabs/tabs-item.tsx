@@ -8,9 +8,17 @@ export type TabsItemProps = React.PropsWithChildren<{
   disabled?: boolean;
 }>;
 
-export function TabsItem({ children, value, label, disabled }: TabsItemProps): JSX.Element {
+export function TabsItem({
+  children,
+  value,
+  label,
+  disabled,
+}: TabsItemProps): JSX.Element {
   const { register, currentValue } = useTabsContext();
-  const isActive = React.useMemo(() => currentValue === value, [currentValue, value]);
+  const isActive = React.useMemo(
+    () => currentValue === value,
+    [currentValue, value],
+  );
 
   React.useEffect(() => {
     register?.({ value, label, disabled: !!disabled });

@@ -21,11 +21,21 @@ export function getAuthorByCommentId(commentId: string) {
 export function createOneNotificationMessage(
   variables: InsertOneNotificationMessageMutationVariables,
 ) {
-  return gqlMutate(InsertOneNotificationMessageDocument, variables, 'insertOneNotificationMessage');
+  return gqlMutate(
+    InsertOneNotificationMessageDocument,
+    variables,
+    'insertOneNotificationMessage',
+  );
 }
 
-export function deleteNotificationMessage(variables: DeleteNotificationMessageMutationVariables) {
-  return gqlMutate(DeleteNotificationMessageDocument, variables, 'deleteNotificationMessages');
+export function deleteNotificationMessage(
+  variables: DeleteNotificationMessageMutationVariables,
+) {
+  return gqlMutate(
+    DeleteNotificationMessageDocument,
+    variables,
+    'deleteNotificationMessages',
+  );
 }
 
 export function getUserByPk(id: string) {

@@ -3,7 +3,8 @@ import { Heading } from '$/components/heading';
 import { IPopoverProps, Popover } from '$/components/popover';
 import { Text } from '$/components/text';
 
-export interface IAskNotificationPermissionPopoverProps extends Pick<IPopoverProps, 'buttonProps'> {
+export interface IAskNotificationPermissionPopoverProps
+  extends Pick<IPopoverProps, 'buttonProps'> {
   onClickAskNextTime: () => void;
   onClickSure: () => void;
   children: React.ReactNode;
@@ -31,7 +32,12 @@ export function AskNotificationPermissionPopover({
             <Button size="sm" color="gray" onClick={onClickAskNextTime}>
               Ask next time
             </Button>
-            <Button size="sm" variant="solid" color="primary" onClick={onClickSure}>
+            <Button
+              size="sm"
+              variant="solid"
+              color="primary"
+              onClick={onClickSure}
+            >
               Sure
             </Button>
           </div>

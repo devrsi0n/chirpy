@@ -75,7 +75,10 @@ function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
   }
   return (
     <Badge
-      className={clsx(`absolute -right-2 -top-3 leading-none`, useBlueBg && `-right-3`)}
+      className={clsx(
+        `absolute -right-2 -top-3 leading-none`,
+        useBlueBg && `-right-3`,
+      )}
       {...(useBlueBg && {
         variant: 'solid',
         color: 'blue',

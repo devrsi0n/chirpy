@@ -32,14 +32,18 @@ export default function Custom404(): JSX.Element {
           </div>
         </div>
         <Heading className="font-bold">Oops! Page not found</Heading>
-        <Text variant="secondary">We might have encountered some issues...</Text>
+        <Text variant="secondary">
+          We might have encountered some issues...
+        </Text>
         <section className="space-y-3">
           <Heading as="h5">What could have caused this?</Heading>
           <List variant="unordered" className="space-y-3">
             <List.Item styles={{ marker: listMakerStyle }}>
               Something went wrong in our services.
             </List.Item>
-            <List.Item styles={{ marker: listMakerStyle }}>The page might be removed.</List.Item>
+            <List.Item styles={{ marker: listMakerStyle }}>
+              The page might be removed.
+            </List.Item>
             <List.Item styles={{ marker: listMakerStyle }}>
               You might typed the wrong URL.
             </List.Item>

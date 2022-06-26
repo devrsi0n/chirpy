@@ -26,7 +26,13 @@ describe('TextField', () => {
 
   it('should render the error message', () => {
     const errorMessage = 'This is an error message';
-    render(<TextField label={label} defaultValue={defaultValue} errorMessage={errorMessage} />);
+    render(
+      <TextField
+        label={label}
+        defaultValue={defaultValue}
+        errorMessage={errorMessage}
+      />,
+    );
     expect(screen.getByText(errorMessage)).toBeTruthy();
   });
 });

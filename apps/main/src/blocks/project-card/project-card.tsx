@@ -20,11 +20,16 @@ import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {
-  project: NonNullable<UserDashboardProjectsQuery['userByPk']>['projects'][number];
+  project: NonNullable<
+    UserDashboardProjectsQuery['userByPk']
+  >['projects'][number];
   onDeletedProject: () => void;
 };
 
-export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JSX.Element {
+export function ProjectCard({
+  project,
+  onDeletedProject,
+}: ProjectCardProps): JSX.Element {
   const [deletingProjectName, setDeletingProject] = React.useState('');
   const [deletingProjectId, setDeletingProjectId] = React.useState('');
   const handleClickDeleteProjectMenu = (id: string, name: string) => {
@@ -35,7 +40,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
     setDeletingProjectId('');
     setDeletingProject('');
   };
-  const [{ fetching: loading }, deleteProjectByPkMutation] = useDeleteProjectByPkMutation();
+  const [{ fetching: loading }, deleteProjectByPkMutation] =
+    useDeleteProjectByPkMutation();
   const { showToast } = useToast();
   const handleClickConfirmDelete = async () => {
     try {
@@ -49,7 +55,8 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
       console.error(error);
       showToast({
         type: 'error',
-        title: 'Sorry, something went wrong in our side, please try again later.',
+        title:
+          'Sorry, something went wrong in our side, please try again later.',
       });
     }
   };
@@ -80,7 +87,9 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
             </Menu.Button>
             <Menu.Items>
               <Menu.Item
-                onClick={() => handleClickDeleteProjectMenu(project.id, project.name)}
+                onClick={() =>
+                  handleClickDeleteProjectMenu(project.id, project.name)
+                }
                 className="space-x-1"
               >
                 <IconTrash2 size={14} />
@@ -149,11 +158,17 @@ export function ProjectCard({ project, onDeletedProject }: ProjectCardProps): JS
         onClose={handleCloseDialog}
       >
         <Text>
-          All of your project data will be deleted permanently. This action cannot be undone.
+          All of your project data will be deleted permanently. This action
+          cannot be undone.
         </Text>
         <Dialog.Footer>
           <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button variant="solid" color="red" onClick={handleClickConfirmDelete} disabled={loading}>
+          <Button
+            variant="solid"
+            color="red"
+            onClick={handleClickConfirmDelete}
+            disabled={loading}
+          >
             {loading ? <IconLoader /> : 'Delete'}
           </Button>
         </Dialog.Footer>

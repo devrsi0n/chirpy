@@ -3,11 +3,10 @@ import connect, { ErrorHandler } from 'next-connect';
 
 import { ApiError } from './error';
 
-export const handleInternalFailure: ErrorHandler<NextApiRequest, NextApiResponse> = (
-  error,
-  req,
-  res,
-) => {
+export const handleInternalFailure: ErrorHandler<
+  NextApiRequest,
+  NextApiResponse
+> = (error, req, res) => {
   console.error('internal error', error);
   console.error('query', req.query);
   console.error('body', req.body);

@@ -5,7 +5,13 @@ import { PageTitle } from '$/blocks/page-title';
 import { Avatar } from '$/components/avatar';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
-import { IconEdit2, IconLink2, IconSave, IconTrash2, IconTwitter } from '$/components/icons';
+import {
+  IconEdit2,
+  IconLink2,
+  IconSave,
+  IconTrash2,
+  IconTwitter,
+} from '$/components/icons';
 import { Link } from '$/components/link';
 import { Popover } from '$/components/popover';
 import { Spinner } from '$/components/spinner';
@@ -64,7 +70,8 @@ export default function Profile(): JSX.Element {
         console.error(error);
         showToast({
           type: 'error',
-          title: 'Sorry, something wrong happened in our side, please try again later.',
+          title:
+            'Sorry, something wrong happened in our side, please try again later.',
         });
       }
     } else {
@@ -112,14 +119,18 @@ export default function Profile(): JSX.Element {
               ) : (
                 name && <Heading as="h4">{name}</Heading>
               )}
-              {username && <Text title="Username, can't edit">@{username}</Text>}
+              {username && (
+                <Text title="Username, can't edit">@{username}</Text>
+              )}
             </div>
             <div className="flex flex-row space-x-2">
               {isEditMode && (
                 <Popover
                   content={
                     <div className="flex flex-row items-center space-x-2">
-                      <Text className="w-max">Your unsaved content will lost, are you sure?</Text>
+                      <Text className="w-max">
+                        Your unsaved content will lost, are you sure?
+                      </Text>
                       <Button size="sm" onClick={handleClickDiscard}>
                         Confirm
                       </Button>
@@ -142,19 +153,35 @@ export default function Profile(): JSX.Element {
               </Button>
             </div>
           </div>
-          {isEditMode ? <TextArea {...register('bio')} label="Bio" /> : bio && <Text>{bio}</Text>}
           {isEditMode ? (
-            <TextField {...register('website')} label="Website" prefixNode="https://" />
+            <TextArea {...register('bio')} label="Bio" />
+          ) : (
+            bio && <Text>{bio}</Text>
+          )}
+          {isEditMode ? (
+            <TextField
+              {...register('website')}
+              label="Website"
+              prefixNode="https://"
+            />
           ) : (
             website && (
-              <Link variant="solid" href={website} className="flex w-fit flex-row space-x-2">
+              <Link
+                variant="solid"
+                href={website}
+                className="flex w-fit flex-row space-x-2"
+              >
                 <IconLink2 />
                 <span>{website}</span>
               </Link>
             )
           )}
           {isEditMode ? (
-            <TextField {...register('twitter')} label="Twitter" prefixNode="https://twitter.com/" />
+            <TextField
+              {...register('twitter')}
+              label="Twitter"
+              prefixNode="https://twitter.com/"
+            />
           ) : (
             twitterUserName && (
               <Link

@@ -65,7 +65,11 @@ export const Link = React.forwardRef(function Link(
   const [isHovering, setIsHovering] = React.useState(false);
   const [target, setTarget] = React.useState(_target || '_self');
   React.useEffect(() => {
-    if (!_target && href.startsWith('http') && !href.startsWith(window.location.origin)) {
+    if (
+      !_target &&
+      href.startsWith('http') &&
+      !href.startsWith(window.location.origin)
+    ) {
       setTarget('_blank');
     }
   }, [_target, href]);
@@ -108,16 +112,20 @@ export const Link = React.forwardRef(function Link(
           ref={ref}
         >
           {children}
-          {!hideUnderline && ['primary', 'secondary', 'solid'].includes(variant) && (
-            <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
-              <m.span
-                className="absolute inset-0 inline-block bg-current"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: isHovering ? 1 : 0, opacity: isHovering ? 1 : 0 }}
-                exit={{ scale: 0, opacity: 0 }}
-              />
-            </span>
-          )}
+          {!hideUnderline &&
+            ['primary', 'secondary', 'solid'].includes(variant) && (
+              <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
+                <m.span
+                  className="absolute inset-0 inline-block bg-current"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{
+                    scale: isHovering ? 1 : 0,
+                    opacity: isHovering ? 1 : 0,
+                  }}
+                  exit={{ scale: 0, opacity: 0 }}
+                />
+              </span>
+            )}
         </a>
       )}
     </NextLink>

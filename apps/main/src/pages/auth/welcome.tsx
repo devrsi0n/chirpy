@@ -16,7 +16,9 @@ import { hasValidUserProfile } from '$/utilities/user';
 export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
-  const [isFullFilled, setIsFullFilled] = React.useState(isSSRMode ? true : isProfileFullFilled);
+  const [isFullFilled, setIsFullFilled] = React.useState(
+    isSSRMode ? true : isProfileFullFilled,
+  );
 
   React.useEffect(() => {
     if (loading) return;
@@ -27,7 +29,9 @@ export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <SiteLayout title="Welcome">{isFullFilled ? <FullFilled /> : <NotFullFilled />}</SiteLayout>
+    <SiteLayout title="Welcome">
+      {isFullFilled ? <FullFilled /> : <NotFullFilled />}
+    </SiteLayout>
   );
 }
 
@@ -39,7 +43,8 @@ function FullFilled(): JSX.Element {
           Welcome on board 🎉
         </Heading>
         <Text variant="secondary">
-          Feel free to create a project, integrate a widget in your site, or just explore!
+          Feel free to create a project, integrate a widget in your site, or
+          just explore!
         </Text>
       </div>
       <div className="space-x-4">

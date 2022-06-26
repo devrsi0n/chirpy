@@ -2,7 +2,10 @@ import NextAuth from 'next-auth';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { UserProjectsDocument, UserProjectsQuery } from '$/server/graphql/generated/project';
+import {
+  UserProjectsDocument,
+  UserProjectsQuery,
+} from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';
@@ -32,7 +35,11 @@ export default NextAuth({
      */
     async jwt({ token, user, account, profile }) {
       if (user) {
-        await fillUserFields(user as any, profile as any, account?.provider as any);
+        await fillUserFields(
+          user as any,
+          profile as any,
+          account?.provider as any,
+        );
       }
       return {
         ...token,
@@ -49,7 +56,8 @@ export default NextAuth({
           userId,
         })
         .toPromise();
-      const editableProjectIds = data?.projects.map(({ id }: { id: string }) => id) || [];
+      const editableProjectIds =
+        data?.projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,

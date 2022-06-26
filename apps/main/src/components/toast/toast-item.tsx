@@ -6,7 +6,13 @@ import { useTimeout } from '$/hooks/use-timeout';
 import { IconButton, Button } from '../button';
 import { Card } from '../card';
 import { Heading } from '../heading';
-import { IconCheckInCircle, IconX, IconAlertCircle, IconXCircle, IconInfo } from '../icons';
+import {
+  IconCheckInCircle,
+  IconX,
+  IconAlertCircle,
+  IconXCircle,
+  IconInfo,
+} from '../icons';
 import { Text } from '../text';
 import { IToast, ToastType } from './toast-context';
 

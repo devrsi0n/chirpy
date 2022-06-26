@@ -13,6 +13,9 @@ export async function handleMutationEvent(
 ) {
   const eventBody = req.body as EventPayload;
 
-  await Promise.allSettled([handleCommentEvent(eventBody, res), handleLikeEvent(eventBody, res)]);
+  await Promise.allSettled([
+    handleCommentEvent(eventBody, res),
+    handleLikeEvent(eventBody, res),
+  ]);
   res.end();
 }

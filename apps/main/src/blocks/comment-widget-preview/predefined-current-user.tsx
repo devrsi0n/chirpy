@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { CurrentUserContext, CurrentUserContextType } from '$/contexts/current-user-context';
+import {
+  CurrentUserContext,
+  CurrentUserContextType,
+} from '$/contexts/current-user-context';
 
 export type PredefinedCurrentUserProps = {
   children: React.ReactNode;
@@ -11,26 +14,32 @@ export type PredefinedCurrentUserProps = {
  * @param props
  * @returns
  */
-export function PredefinedCurrentUser(props: PredefinedCurrentUserProps): JSX.Element {
+export function PredefinedCurrentUser(
+  props: PredefinedCurrentUserProps,
+): JSX.Element {
   const originalContext = React.useContext(CurrentUserContext);
-  const [currentUser, setCurrentUser] = React.useState<CurrentUserContextType>(() => ({
-    loading: false,
-    isSignIn: true,
-    data: {
-      editableProjectIds: [],
-      id: 'ffad5f9c-0c28-4c9b-a652-b21a2a42949b',
-      username: 'michael',
-      email: 'michael@chirpy.dev',
-      name: 'Michael',
-      avatar: '/images/avatars/male-2.jpeg',
-    },
-  }));
+  const [currentUser, setCurrentUser] = React.useState<CurrentUserContextType>(
+    () => ({
+      loading: false,
+      isSignIn: true,
+      data: {
+        editableProjectIds: [],
+        id: 'ffad5f9c-0c28-4c9b-a652-b21a2a42949b',
+        username: 'michael',
+        email: 'michael@chirpy.dev',
+        name: 'Michael',
+        avatar: '/images/avatars/male-2.jpeg',
+      },
+    }),
+  );
   React.useEffect(() => {
     if (originalContext.data.id) {
       setCurrentUser(originalContext);
     }
   }, [originalContext]);
   return (
-    <CurrentUserContext.Provider value={currentUser}>{props.children}</CurrentUserContext.Provider>
+    <CurrentUserContext.Provider value={currentUser}>
+      {props.children}
+    </CurrentUserContext.Provider>
   );
 }

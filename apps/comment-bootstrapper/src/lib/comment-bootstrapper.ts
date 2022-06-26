@@ -17,7 +17,8 @@ const QUERY_RENDER_TARGET = `[data-chirpy-comment="true"]`;
 export async function initCommentWidget(): Promise<void> {
   // Get page url and init this page with a correct iframe
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
-  const script: HTMLScriptElement | null = window.document.querySelector(QUERY_SCRIPT);
+  const script: HTMLScriptElement | null =
+    window.document.querySelector(QUERY_SCRIPT);
   if (!script) {
     throw new Error(
       `Can't find the chirpy domain, did you forget to add ${QUERY_SCRIPT} to your script?`,
@@ -28,13 +29,18 @@ export async function initCommentWidget(): Promise<void> {
     throw new Error(`No domain specified`);
   }
 
-  const renderTarget: HTMLElement | null = window.document.querySelector(QUERY_RENDER_TARGET);
+  const renderTarget: HTMLElement | null =
+    window.document.querySelector(QUERY_RENDER_TARGET);
   if (!renderTarget) {
-    throw new Error(`Can't find the render target, did you forget to add ${QUERY_RENDER_TARGET}?`);
+    throw new Error(
+      `Can't find the render target, did you forget to add ${QUERY_RENDER_TARGET}?`,
+    );
   }
   const { origin, pathname } = window.location;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_URL}/api/page?domain=${domain}&url=${encodeURIComponent(
+    `${
+      process.env.NEXT_PUBLIC_APP_URL
+    }/api/page?domain=${domain}&url=${encodeURIComponent(
       origin + pathname,
     )}&title=${encodeURIComponent(window.document.title)}`,
   );
@@ -77,7 +83,9 @@ export async function initCommentWidget(): Promise<void> {
   window.document.body.addEventListener('click', () => {
     iframe.contentWindow?.postMessage(EVENT_CLICK_CONTAINER);
   });
-  iframe.src = `${process.env.NEXT_PUBLIC_APP_URL}/widget/comment/${encodeURIComponent(page.url)}`;
+  iframe.src = `${
+    process.env.NEXT_PUBLIC_APP_URL
+  }/widget/comment/${encodeURIComponent(page.url)}`;
   observeThemeAttributeChange(iframe, renderTarget);
   renderTarget.append(iframe);
 }

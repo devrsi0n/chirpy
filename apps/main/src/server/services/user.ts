@@ -8,7 +8,10 @@ export async function fillUserFields(
   profile?: GitHubProfile,
   provider?: Provider,
 ): Promise<void> {
-  if ((user.username && user.bio && user.website && user.twitterUserName) || !provider) {
+  if (
+    (user.username && user.bio && user.website && user.twitterUserName) ||
+    !provider
+  ) {
     return;
   }
   try {
@@ -35,7 +38,13 @@ const translatorMap: Record<Provider, typeof translateGithubProfile> = {
 };
 
 function translateGithubProfile(profile?: GitHubProfile) {
-  if (!profile || (!profile.login && !profile.bio && !profile.blog && !profile.twitter_username)) {
+  if (
+    !profile ||
+    (!profile.login &&
+      !profile.bio &&
+      !profile.blog &&
+      !profile.twitter_username)
+  ) {
     return null;
   }
   return {

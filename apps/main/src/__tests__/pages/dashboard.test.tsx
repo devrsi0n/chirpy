@@ -53,7 +53,9 @@ describe('dashboard', () => {
     expect(screen.getByText(project.name)).toBeTruthy();
     expect(screen.getByText(project.pages[0].title!)).toBeTruthy();
     expect(screen.getByText(/^Created \w+/)).toBeTruthy();
-    await waitFor(() => expect(screen.getByLabelText('Page views').textContent).toBe('212'));
+    await waitFor(() =>
+      expect(screen.getByLabelText('Page views').textContent).toBe('212'),
+    );
   });
 
   it('should delete the project', async () => {
@@ -72,7 +74,11 @@ describe('dashboard', () => {
     expect(deleteButton).toBeTruthy();
     await userEvent.click(deleteButton);
     expect(mockDeleteProject).toHaveBeenCalled();
-    await waitFor(() => expect(screen.queryByText(/Delete the project/)).toBeFalsy());
-    await waitFor(() => expect(screen.getByLabelText('Page views').textContent).toBe('212'));
+    await waitFor(() =>
+      expect(screen.queryByText(/Delete the project/)).toBeFalsy(),
+    );
+    await waitFor(() =>
+      expect(screen.getByLabelText('Page views').textContent).toBe('212'),
+    );
   });
 });

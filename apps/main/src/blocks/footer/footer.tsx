@@ -46,7 +46,9 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         className,
       )}
     >
-      <nav className={`flex w-full flex-row flex-wrap justify-center space-x-6 leading-8`}>
+      <nav
+        className={`flex w-full flex-row flex-wrap justify-center space-x-6 leading-8`}
+      >
         <Link href="/docs/index" variant="secondary">
           Docs
         </Link>

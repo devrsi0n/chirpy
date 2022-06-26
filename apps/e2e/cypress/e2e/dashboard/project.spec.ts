@@ -45,9 +45,13 @@ describe('Project', () => {
     cy.findByRole('button', {
       name: /integrate guide/i,
     }).click();
-    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should('be.visible');
+    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should(
+      'be.visible',
+    );
     cy.findByRole('button', { name: /dismiss/i }).click();
-    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should('not.exist');
+    cy.findByRole('dialog', { name: /get started with \S+ comment/i }).should(
+      'not.exist',
+    );
   });
 
   it('should active theme', () => {
@@ -66,4 +70,6 @@ describe('Project', () => {
 });
 
 const waitForSpinnerToDisappear = () =>
-  cy.get(`[aria-label="Loading data"]`, { timeout: 10_000 }).should('not.exist');
+  cy
+    .get(`[aria-label="Loading data"]`, { timeout: 10_000 })
+    .should('not.exist');

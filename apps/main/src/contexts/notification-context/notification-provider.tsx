@@ -75,13 +75,19 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
 
   useReloadWhenSwChange();
 
-  return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
+  return (
+    <NotificationContext.Provider value={value}>
+      {children}
+    </NotificationContext.Provider>
+  );
 }
 
 export function useNotificationContext() {
   const context = React.useContext(NotificationContext);
   if (!context) {
-    throw new Error('useNotificationContext must be used within a NotificationContext');
+    throw new Error(
+      'useNotificationContext must be used within a NotificationContext',
+    );
   }
   return context;
 }

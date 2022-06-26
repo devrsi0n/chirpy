@@ -8,7 +8,9 @@ const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis;
  * Focus on the existing tab or open a new one.
  * @param url
  */
-export function openOrFocusWindow(url: string): Promise<void | WindowClient | null> {
+export function openOrFocusWindow(
+  url: string,
+): Promise<void | WindowClient | null> {
   const urlToOpen = new URL(url, sw.location.origin).href;
 
   return sw.clients
@@ -26,6 +28,8 @@ export function openOrFocusWindow(url: string): Promise<void | WindowClient | nu
         }
       }
 
-      return matchingClient ? matchingClient.focus() : sw.clients.openWindow(urlToOpen);
+      return matchingClient
+        ? matchingClient.focus()
+        : sw.clients.openWindow(urlToOpen);
     });
 }

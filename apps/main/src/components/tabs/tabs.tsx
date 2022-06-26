@@ -29,7 +29,10 @@ export function Tabs({
   leftItem,
   ...restProps
 }: TabProps): JSX.Element {
-  const [selfValue, setSelfValue] = useLocalStorage(customInitialValue, cacheKey);
+  const [selfValue, setSelfValue] = useLocalStorage(
+    customInitialValue,
+    cacheKey,
+  );
   const [tabs, setTabs] = React.useState<TabsLabelItem[]>([]);
 
   const register = React.useMemo(

@@ -12,7 +12,8 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   console.log('Validating signature', {
     signedRequest,
   });
-  const [signature, payload] = getSignatureAndPayloadFromSignedRequest(signedRequest);
+  const [signature, payload] =
+    getSignatureAndPayloadFromSignedRequest(signedRequest);
   validateSignature(signature, payload);
 
   const { user_id: userId } = decodePayload(payload) as DecodedPayload;
@@ -87,7 +88,9 @@ function base64Decode(str: string, encoding: BufferEncoding = 'utf8') {
 }
 
 function unescape(str: string) {
-  return (str + '==='.slice((str.length + 3) % 4)).replace(/-/g, '+').replace(/_/g, '/');
+  return (str + '==='.slice((str.length + 3) % 4))
+    .replace(/-/g, '+')
+    .replace(/_/g, '/');
 }
 
 export default handler;

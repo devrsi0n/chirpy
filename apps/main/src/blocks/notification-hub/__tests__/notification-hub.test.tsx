@@ -39,7 +39,9 @@ describe('NotificationHub', () => {
       .mockReturnValue([{} as any, deleteNotificationMessage]);
     await renderDefaultNotificationHub();
 
-    await userEvent.click(screen.getAllByLabelText('Delete the notification message')[0]);
+    await userEvent.click(
+      screen.getAllByLabelText('Delete the notification message')[0],
+    );
     expect(deleteNotificationMessage).toHaveBeenCalledTimes(1);
   });
 });

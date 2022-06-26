@@ -7,7 +7,9 @@ export default {
   component: ToastItem,
 } as ComponentMeta<typeof ToastItem>;
 
-const Template: ComponentStory<typeof ToastItem> = (args) => <ToastItem {...args} />;
+const Template: ComponentStory<typeof ToastItem> = (args) => (
+  <ToastItem {...args} />
+);
 
 export const TitleOnly = Template.bind({});
 TitleOnly.args = {

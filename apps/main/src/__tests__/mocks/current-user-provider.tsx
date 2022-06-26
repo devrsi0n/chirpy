@@ -21,6 +21,8 @@ jest.spyOn(userModule, 'useCurrentUserQuery').mockReturnValue([
   jest.fn(),
 ]);
 
-export function MockCurrentUserProvider({ children }: MockCurrentUserProviderProps): JSX.Element {
+export function MockCurrentUserProvider({
+  children,
+}: MockCurrentUserProviderProps): JSX.Element {
   return <CurrentUserProvider>{children}</CurrentUserProvider>;
 }

@@ -17,7 +17,9 @@ export type CommentTimelineProps = {
 /**
  * Render a comment with it's ancestor and descendant, like a comment timeline.
  */
-export function CommentTimeline({ comment }: CommentTimelineProps): JSX.Element {
+export function CommentTimeline({
+  comment,
+}: CommentTimelineProps): JSX.Element {
   const [ancestorComments, setAncestorComments] = React.useState<Comment[]>([]);
   React.useEffect(() => {
     let currComment: $TsAny = comment;
@@ -77,6 +79,11 @@ export { MemoCommentLinkedList };
 
 type ParentBranchProps = React.ComponentPropsWithoutRef<'li'>;
 
-function ParentBranch({ className, ...liProps }: ParentBranchProps): JSX.Element {
-  return <li {...liProps} className={clsx(`space-y-8`, styles.branch, className)} />;
+function ParentBranch({
+  className,
+  ...liProps
+}: ParentBranchProps): JSX.Element {
+  return (
+    <li {...liProps} className={clsx(`space-y-8`, styles.branch, className)} />
+  );
 }

@@ -1,7 +1,10 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-import { WidgetThemeProvider, WidgetThemeProviderProps } from '$/contexts/theme-context';
+import {
+  WidgetThemeProvider,
+  WidgetThemeProviderProps,
+} from '$/contexts/theme-context';
 import { useWidgetSideEffects } from '$/hooks/use-widget-side-effects';
 
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
@@ -16,7 +19,11 @@ export type WidgetLayoutProps = {
  * Do not use it in _app.tsx and render it with `SiteLayout`
  * conditionally, it will increase bundle size on widgets
  */
-export function WidgetLayout({ title, children, widgetTheme }: WidgetLayoutProps): JSX.Element {
+export function WidgetLayout({
+  title,
+  children,
+  widgetTheme,
+}: WidgetLayoutProps): JSX.Element {
   useWidgetSideEffects();
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>

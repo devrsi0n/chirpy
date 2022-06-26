@@ -26,7 +26,11 @@ export default function PlayGround(): JSX.Element {
           <Select.Option value="system">System</Select.Option>
         </Select>
       </div>
-      <div data-chirpy-comment data-chirpy-theme={selectedTheme} className="my-16" />
+      <div
+        data-chirpy-comment
+        data-chirpy-theme={selectedTheme}
+        className="my-16"
+      />
       <Script
         src="/bootstrap/comment.js"
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}

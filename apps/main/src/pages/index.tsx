@@ -25,7 +25,11 @@ function Home(): JSX.Element {
           </Text>
           <div className="flex items-center space-x-6 sm:justify-center">
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-              <Button variant="solid" color="primary" className="group space-x-1 hover:shadow-2xl">
+              <Button
+                variant="solid"
+                color="primary"
+                className="group space-x-1 hover:shadow-2xl"
+              >
                 <span>{strings.callToAction.main}</span>
                 <IconArrowRight
                   size="20px"
@@ -51,7 +55,8 @@ export default Home;
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
   heroTitle: 'Disqus alternate',
-  heroDescription: 'Build a better community by integrating a modern comment system.',
+  heroDescription:
+    'Build a better community by integrating a modern comment system.',
   callToAction: {
     main: 'Get Early Access',
     secondary: 'Learn More',

@@ -33,6 +33,8 @@ export const authOptions: AuthOption[] = [
 
 function getLogoComponent(data: StaticImageData, brand: string, size: number) {
   return function Logo() {
-    return <img src={data.src} width={size} height={size} alt={`Logo of ${brand}`} />;
+    return (
+      <img src={data.src} width={size} height={size} alt={`Logo of ${brand}`} />
+    );
   };
 }

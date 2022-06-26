@@ -37,10 +37,17 @@ export function ActionButton({
       )}
       disabled={disabled}
     >
-      <span className={clsx(`rounded-full p-2 group-hover:bg-opacity-10`, !disabled && iconStyle)}>
+      <span
+        className={clsx(
+          `rounded-full p-2 group-hover:bg-opacity-10`,
+          !disabled && iconStyle,
+        )}
+      >
         {Icon}
       </span>
-      {children && <span className={clsx(!disabled && childStyle)}>{children}</span>}
+      {children && (
+        <span className={clsx(!disabled && childStyle)}>{children}</span>
+      )}
     </BaseButton>
   );
 }

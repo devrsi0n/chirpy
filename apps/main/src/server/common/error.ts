@@ -10,7 +10,11 @@ export class ApiError extends BaseError {
   public readonly httpStatus: HttpStatus;
   public readonly extraData?: Record<string, string>;
 
-  constructor(httpStatus: HttpStatus, message: string, extraData?: Record<string, string>) {
+  constructor(
+    httpStatus: HttpStatus,
+    message: string,
+    extraData?: Record<string, string>,
+  ) {
     super(message);
     this.httpStatus = httpStatus;
     this.extraData = extraData;

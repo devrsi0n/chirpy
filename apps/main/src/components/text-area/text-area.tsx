@@ -13,7 +13,13 @@ export type TextfieldProps = React.ComponentPropsWithoutRef<'textarea'> & {
 };
 
 export const TextArea = React.forwardRef(function TextArea(
-  { label, className, errorMessage, styles = {}, ...inputProps }: TextfieldProps,
+  {
+    label,
+    className,
+    errorMessage,
+    styles = {},
+    ...inputProps
+  }: TextfieldProps,
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (

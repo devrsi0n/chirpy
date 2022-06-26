@@ -42,7 +42,10 @@ export default function BlogHome({ directories }: BlogHomeProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
-  const directories = await getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`);
+  const directories = await getDirectories(
+    CONTAINER_FOLDER,
+    `/${CONTAINER_FOLDER}`,
+  );
   return {
     props: {
       directories,

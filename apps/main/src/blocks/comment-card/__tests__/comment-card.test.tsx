@@ -34,7 +34,9 @@ describe('CommentCard', () => {
 
   it('should render the text', () => {
     expect(screen.getByText(staticProps.author.name)).toBeInTheDocument();
-    expect(screen.getByText(staticProps.content.content[0].content[0].text)).toBeInTheDocument();
+    expect(
+      screen.getByText(staticProps.content.content[0].content[0].text),
+    ).toBeInTheDocument();
 
     expect((document.querySelector('time') as HTMLTimeElement).dateTime).toBe(
       staticProps.createdAt,
@@ -44,7 +46,11 @@ describe('CommentCard', () => {
   it('should call the handler when clicking the like button', async () => {
     const likeButton = screen.getByLabelText('Like');
     await userEvent.click(likeButton);
-    expect(mockHandleClickLikeAction).toHaveBeenCalledWith(false, '', staticProps.commentId);
+    expect(mockHandleClickLikeAction).toHaveBeenCalledWith(
+      false,
+      '',
+      staticProps.commentId,
+    );
   });
 
   it('should call the handler when clicking the reply button', async () => {

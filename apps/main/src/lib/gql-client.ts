@@ -33,10 +33,14 @@ const getOfflineExchange = () => {
   });
 };
 
-export function createGqlClient(hasuraToken = '', ssrInitState?: SSRData): Client {
+export function createGqlClient(
+  hasuraToken = '',
+  ssrInitState?: SSRData,
+): Client {
   return createClient(
-    getGqlClientOptions(getGqlClientHeaders(hasuraToken), undefined, { ssrInitState })
-      .clientOptions,
+    getGqlClientOptions(getGqlClientHeaders(hasuraToken), undefined, {
+      ssrInitState,
+    }).clientOptions,
   );
 }
 
@@ -48,7 +52,10 @@ export interface IGqlClientOptions {
 export function getGqlClientOptions(
   headers: Record<string, string>,
   requestPolicy: RequestPolicy = 'cache-and-network',
-  { ssrInitState, wsClient }: { ssrInitState?: SSRData; wsClient?: WsClient } = {},
+  {
+    ssrInitState,
+    wsClient,
+  }: { ssrInitState?: SSRData; wsClient?: WsClient } = {},
 ): IGqlClientOptions {
   const _ssrExchange = ssrExchange({
     isClient: !isSSRMode,

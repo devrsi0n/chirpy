@@ -67,10 +67,15 @@ function MenuButton({
 }: MenuButtonProps): JSX.Element {
   return (
     <div className={className}>
-      <HeadlessMenu.Button as={shape === 'circle' ? IconButton : Button} aria-label={ariaLabel}>
+      <HeadlessMenu.Button
+        as={shape === 'circle' ? IconButton : Button}
+        aria-label={ariaLabel}
+      >
         {children}
         {shape === 'square' && (
-          <IconChevronDown className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)} />
+          <IconChevronDown
+            className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)}
+          />
         )}
       </HeadlessMenu.Button>
     </div>
@@ -119,7 +124,9 @@ function MenuItem({
   ...asProps
 }: MenuItemProps): JSX.Element {
   const child = disableAutoDismiss ? (
-    <div onClick={(e) => disableAutoDismiss && e.stopPropagation()}>{children}</div>
+    <div onClick={(e) => disableAutoDismiss && e.stopPropagation()}>
+      {children}
+    </div>
   ) : (
     children
   );

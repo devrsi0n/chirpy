@@ -7,10 +7,18 @@ export type DividerProps = React.ComponentPropsWithoutRef<'div'> & {
   vertical?: boolean;
 };
 
-export function Divider({ vertical, className, ...divProps }: DividerProps): JSX.Element {
+export function Divider({
+  vertical,
+  className,
+  ...divProps
+}: DividerProps): JSX.Element {
   if (vertical) {
     return (
-      <div role="separator" {...divProps} className={clsx('w-[1px]', 'bg-gray-500', className)} />
+      <div
+        role="separator"
+        {...divProps}
+        className={clsx('w-[1px]', 'bg-gray-500', className)}
+      />
     );
   }
   return (

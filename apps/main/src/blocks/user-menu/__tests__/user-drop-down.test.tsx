@@ -15,14 +15,18 @@ describe('UserMenu', () => {
   describe('Variant Nav', () => {
     it('should render user display name after clicking the button with nav variant', async () => {
       await renderMenu('Nav');
-      await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
+      await waitFor(() =>
+        expect(screen.getByText(mockUserData.name)).toBeInTheDocument(),
+      );
     });
   });
 
   describe('Variant Widget', () => {
     it('should render user display name after clicking the button', async () => {
       await renderMenu('Widget');
-      await waitFor(() => expect(screen.getByText(mockUserData.name)).toBeInTheDocument());
+      await waitFor(() =>
+        expect(screen.getByText(mockUserData.name)).toBeInTheDocument(),
+      );
     });
   });
 });

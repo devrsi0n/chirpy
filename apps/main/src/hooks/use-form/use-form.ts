@@ -17,12 +17,18 @@ export type FormError<T> = {
 
 export type ValidatorItem = Map<string, Validator>;
 
-export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<T>) {
+export function useForm<T extends FieldValue>({
+  defaultValues,
+}: UseFormOptions<T>) {
   const [fields, setFields] = React.useState<T>(defaultValues || {});
 
   const [errors, setErrors] = React.useState<FormError<T>>({});
   const validatorMapRef = React.useRef<ValidatorItem>(new Map());
-  const isValid = (name: string, validator: Validator, value: string = fields[name]): boolean => {
+  const isValid = (
+    name: string,
+    validator: Validator,
+    value: string = fields[name],
+  ): boolean => {
     const errorMessage = validate(validator, value);
     if (errorMessage !== errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: errorMessage }));
@@ -34,7 +40,9 @@ export function useForm<T extends FieldValue>({ defaultValues }: UseFormOptions<
     if (validator) {
       validatorMapRef.current.set(name, validator);
     }
-    const onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
+    const onChange: React.ChangeEventHandler<
+      HTMLInputElement | HTMLTextAreaElement
+    > = (e) => {
       const { value } = e.target;
       setFields((prev) => ({ ...prev, [name]: value }));
       if (validator) {

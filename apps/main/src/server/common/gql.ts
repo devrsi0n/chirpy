@@ -42,7 +42,9 @@ export async function gqlMutate<
   variables: Variables,
   path: Path,
 ): Promise<NonNullable<Data[Path]>> {
-  const { data, error } = await client.mutation(mutation, variables).toPromise();
+  const { data, error } = await client
+    .mutation(mutation, variables)
+    .toPromise();
   if (!data || !data[path] || error) {
     throw new Error(`GQL mutation error, error: ${error}, data: ${data}`);
   }

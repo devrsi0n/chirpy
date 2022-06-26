@@ -30,7 +30,9 @@ describe('Menu', () => {
     expect(button).toBeTruthy();
 
     await userEvent.click(button);
-    await waitFor(() => expect(screen.queryByText(item1Text)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.queryByText(item1Text)).toBeInTheDocument(),
+    );
     expect(screen.getByText(item2Text)).toBeInTheDocument();
 
     await userEvent.click(screen.getByText(item1Text));

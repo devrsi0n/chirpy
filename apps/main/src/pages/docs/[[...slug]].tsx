@@ -13,7 +13,11 @@ import { CommonPageProps } from '$/types/page.type';
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
 
-export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsProps): JSX.Element {
+export default function Docs({
+  mdxSource,
+  frontMatter,
+  directories = [],
+}: DocsProps): JSX.Element {
   return (
     <SiteLayout
       title={frontMatter?.title || 'Docs'}
@@ -25,11 +29,17 @@ export default function Docs({ mdxSource, frontMatter, directories = [] }: DocsP
     >
       <div className="flex min-h-full flex-col">
         <section className="flex min-h-full w-full flex-1 flex-row space-x-4">
-          <SideBar className="pt-10" directories={directories} title="Documentation" />
+          <SideBar
+            className="pt-10"
+            directories={directories}
+            title="Documentation"
+          />
           <div className="flex-1">
             <article className="prose mx-auto overflow-x-hidden pt-10">
               {/* @ts-ignore */}
-              {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
+              {mdxSource && (
+                <MDXRemote {...mdxSource} components={MDXComponents} />
+              )}
             </article>
             <Footer />
           </div>
@@ -56,7 +66,9 @@ export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
   return payload;
 };
 
-export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
+  params,
+}) => {
   if (!params?.slug) {
     return { notFound: true };
   }

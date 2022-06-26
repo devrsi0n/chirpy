@@ -23,7 +23,9 @@ export type MDXProps = {
 };
 
 export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
-  const { data, content } = await getFrontMatters(path.join(POST_ROOT, `${slug}.mdx`));
+  const { data, content } = await getFrontMatters(
+    path.join(POST_ROOT, `${slug}.mdx`),
+  );
   const mdxSource = await serialize(content, {
     mdxOptions: {
       rehypePlugins: [
@@ -52,12 +54,16 @@ export type FrontMatterData = {
   [key: string]: $TsAny;
 };
 
-export async function getAllFilesFrontMatter(subFolder: string): Promise<FrontMatterData[]> {
+export async function getAllFilesFrontMatter(
+  subFolder: string,
+): Promise<FrontMatterData[]> {
   const files = await fs.readdir(path.join(POST_ROOT, subFolder));
 
   return Promise.all(
     files.map(async (postSlug: string) => {
-      const { data } = await getFrontMatters(path.join(POST_ROOT, subFolder, postSlug));
+      const { data } = await getFrontMatters(
+        path.join(POST_ROOT, subFolder, postSlug),
+      );
 
       return {
         ...data,

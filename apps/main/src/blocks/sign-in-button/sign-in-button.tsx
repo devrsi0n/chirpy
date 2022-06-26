@@ -32,7 +32,10 @@ export function SignInButton({
     >
       <span className="inline-flex flex-row items-center space-x-1">
         {signInLoading ? (
-          <IconLoader aria-label="Signing in" className="h-5 w-5 animate-spin" />
+          <IconLoader
+            aria-label="Signing in"
+            className="h-5 w-5 animate-spin"
+          />
         ) : (
           <IconLock size="14" />
         )}

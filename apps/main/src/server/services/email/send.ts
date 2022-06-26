@@ -4,7 +4,10 @@ import { EmailType } from './types';
 
 const sibApi = new SibApiV3Sdk.TransactionalEmailsApi();
 
-sibApi.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, process.env.EMAIL_API_KEY);
+sibApi.setApiKey(
+  SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey,
+  process.env.EMAIL_API_KEY,
+);
 
 export interface MailPerson {
   email: string;

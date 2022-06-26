@@ -27,7 +27,8 @@ export async function handleCommentEvent(
     return;
   }
   const promises = [];
-  const notificationPayloads: (NotificationPayload & { contextId: string })[] = [];
+  const notificationPayloads: (NotificationPayload & { contextId: string })[] =
+    [];
   const { event } = eventBody;
   if (event.op === 'INSERT') {
     const commentId = event.data.new.id;
@@ -45,7 +46,10 @@ export async function handleCommentEvent(
     const triggeredById = event.data.new.userId;
     const triggeredBy = {
       id: triggeredById,
-      name: siteOwnerData.triggeredBy.name || siteOwnerData.triggeredBy.username || 'Unnamed',
+      name:
+        siteOwnerData.triggeredBy.name ||
+        siteOwnerData.triggeredBy.username ||
+        'Unnamed',
     };
     if (owner.id !== triggeredById) {
       // Notify the owner of the site that a comment has been added
@@ -73,7 +77,8 @@ export async function handleCommentEvent(
           recipient: {
             id: recipientId,
             email: parentData.author.email,
-            name: parentData.author.name || parentData.author.username || 'Unnamed',
+            name:
+              parentData.author.name || parentData.author.username || 'Unnamed',
           },
           type: 'ReceivedAReply',
           triggeredBy,
@@ -87,10 +92,14 @@ export async function handleCommentEvent(
     const { old: oldComment, new: newComment } = event.data;
     if (!oldComment.deletedAt && newComment.deletedAt) {
       // Delete the existing notification sent to the owner of site
-      const siteOwnerData = await getSiteOwnerByTriggeredCommentId(newComment.id);
+      const siteOwnerData = await getSiteOwnerByTriggeredCommentId(
+        newComment.id,
+      );
       const ownerId = siteOwnerData.page.project.owner?.id;
       if (!ownerId) {
-        throw new Error(`Can't find the owner of the comment (${newComment.id})`);
+        throw new Error(
+          `Can't find the owner of the comment (${newComment.id})`,
+        );
       }
       const contextId = newComment.id;
       // Sync with `INSERT` logic
@@ -131,7 +140,8 @@ export async function handleCommentEvent(
           recipient: {
             id: recipientId,
             email: authorData.author.email,
-            name: authorData.author.name || authorData.author.username || 'Unnamed',
+            name:
+              authorData.author.name || authorData.author.username || 'Unnamed',
           },
           triggeredBy: {
             id: triggeredById,

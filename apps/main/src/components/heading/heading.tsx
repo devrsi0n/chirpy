@@ -23,6 +23,9 @@ export function Heading(props: IHeadingProps): JSX.Element {
   const { as: Component = 'h3', className, ...restProps } = props;
 
   return (
-    <Component {...restProps} className={clsx(`text-gray-1200`, styles[Component], className)} />
+    <Component
+      {...restProps}
+      className={clsx(`text-gray-1200`, styles[Component], className)}
+    />
   );
 }

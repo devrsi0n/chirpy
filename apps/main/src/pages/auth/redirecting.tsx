@@ -31,7 +31,11 @@ export default function Redirecting(): JSX.Element {
   }, [router, data, status, loading]);
   useTimeout(() => {
     if (!data.id) {
-      router.push(`/500?message=${encodeURIComponent('User sign-in timeout after 30 seconds')}`);
+      router.push(
+        `/500?message=${encodeURIComponent(
+          'User sign-in timeout after 30 seconds',
+        )}`,
+      );
     }
   }, 30_000);
   return (

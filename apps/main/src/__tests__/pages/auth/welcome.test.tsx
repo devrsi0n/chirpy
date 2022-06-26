@@ -54,7 +54,9 @@ describe('Welcome', () => {
     const displayName = 'Test name';
     const displayNameInput = screen.getByLabelText(/your dispaly name/i);
     await userEvent.type(displayNameInput, displayName);
-    const userNameInput = screen.getByRole('textbox', { name: /your username/i });
+    const userNameInput = screen.getByRole('textbox', {
+      name: /your username/i,
+    });
     const userName = 'testuser';
     await userEvent.type(userNameInput, userName);
     const saveButton = screen.getByRole('button', {
@@ -70,8 +72,11 @@ describe('Welcome', () => {
       }),
     );
 
-    await waitFor(() => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'), {
-      timeout: 3000,
-    });
+    await waitFor(
+      () => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'),
+      {
+        timeout: 3000,
+      },
+    );
   });
 });

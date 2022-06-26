@@ -24,9 +24,13 @@ export type SignInProps = React.PropsWithChildren<{
 type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
 
 export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
-  const [errorType, setErrorType] = React.useState<SignInErrorKeys | undefined>();
+  const [errorType, setErrorType] = React.useState<
+    SignInErrorKeys | undefined
+  >();
   React.useEffect(() => {
-    const error = new URLSearchParams(location.search).get('error') as SignInErrorKeys | null;
+    const error = new URLSearchParams(location.search).get(
+      'error',
+    ) as SignInErrorKeys | null;
     if (error) {
       setErrorType(error);
     }
@@ -37,7 +41,8 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
       setIsProd(false);
     }
   }, []);
-  const error = errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
+  const error =
+    errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex flex-1 flex-col items-center justify-center">
@@ -65,14 +70,16 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
                 size="lg"
               >
                 <option.icon />
-                <span className="ml-2 text-left">Sign in with {option.name}</span>
+                <span className="ml-2 text-left">
+                  Sign in with {option.name}
+                </span>
               </Button>
             ))}
           </div>
           {!isProd && <EmailSignIn />}
           <Text className="py-3" size="sm" variant="secondary">
-            By clicking the buttons above, you acknowledge that you have read and understood, and
-            agree to Chirpy
+            By clicking the buttons above, you acknowledge that you have read
+            and understood, and agree to Chirpy
             {`'s `}
             <Link href="/terms-of-service">Terms of Service</Link> and{' '}
             <Link href="/privacy-policy">Privacy Policy</Link>.
@@ -92,7 +99,9 @@ export function SignIn({ title, subtitle }: SignInProps): JSX.Element {
 
 function EmailSignIn(): JSX.Element {
   const [email, setEmail] = React.useState('');
-  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleEmailChange: React.ChangeEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     setEmail(event.target.value);
   };
   const handleSubmit = () => {
@@ -135,8 +144,18 @@ function CredentialsSignInForm(): JSX.Element {
   );
   return (
     <form onSubmit={handleClickSubmit}>
-      <TextField {...register('username')} type="text" label="Username" className="w-full" />
-      <TextField {...register('password')} type="password" label="Password" className="w-full" />
+      <TextField
+        {...register('username')}
+        type="text"
+        label="Username"
+        className="w-full"
+      />
+      <TextField
+        {...register('password')}
+        type="password"
+        label="Password"
+        className="w-full"
+      />
       <Button type="submit" className="w-full">
         Submit
       </Button>

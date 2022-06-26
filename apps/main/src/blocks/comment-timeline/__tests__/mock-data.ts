@@ -46,10 +46,14 @@ export function generateCommentFragment(fill: string) {
 export function getTextsOfComment(comment: CommentTimelineProps['comment']) {
   return {
     parent: {
-      text: comment.parent ? getTextOfContent(comment.parent.content as any) : '',
+      text: comment.parent
+        ? getTextOfContent(comment.parent.content as any)
+        : '',
     },
     text: getTextOfContent(comment.content as any),
-    replies: comment.replies.map((reply) => getTextOfContent(reply.content as any)),
+    replies: comment.replies.map((reply) =>
+      getTextOfContent(reply.content as any),
+    ),
   };
 }
 

@@ -8,7 +8,10 @@ import { useClickOutside } from '$/hooks/use-click-outside';
 import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { isSSRMode } from '$/utilities/env';
 
-import { SideMenuContextProvider, useSideMenuContext } from './side-menu-context';
+import {
+  SideMenuContextProvider,
+  useSideMenuContext,
+} from './side-menu-context';
 
 export type SideMenuProps = {
   position?: 'tl' | 'br';
@@ -38,7 +41,12 @@ const navVariants: Variants = {
 /**
  * SideMenu is a toggle menu on mobile views.
  */
-export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuProps): JSX.Element {
+export function SideMenu({
+  children,
+  position = 'tl',
+  styles,
+  fixed,
+}: SideMenuProps): JSX.Element {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useClickOutside(() => isOpen && toggleOpen(0));
   const [containerStyles, buttonStyles] = posStyles[position];
@@ -87,11 +95,18 @@ export function SideMenu({ children, position = 'tl', styles, fixed }: SideMenuP
         fixed ? `fixed` : `absolute sm:fixed`,
       )}
       ref={containerRef}
-      onAnimationStart={(definition) => definition === 'open' && setIsAnimationEnd(false)}
-      onAnimationComplete={(definition) => definition === 'closed' && setIsAnimationEnd(true)}
+      onAnimationStart={(definition) =>
+        definition === 'open' && setIsAnimationEnd(false)
+      }
+      onAnimationComplete={(definition) =>
+        definition === 'closed' && setIsAnimationEnd(true)
+      }
     >
       <m.div
-        className={clsx('absolute inset-0 bg-gray-200', isAnimationEnd && `!hidden`)}
+        className={clsx(
+          'absolute inset-0 bg-gray-200',
+          isAnimationEnd && `!hidden`,
+        )}
         variants={backgroundVariant}
       />
       <SideMenuContextProvider onClickMenuItem={() => toggleOpen(0)}>
@@ -131,7 +146,10 @@ const itemsVariants: Variants = {
   },
 };
 
-function SideMenuItems({ children, className }: SideMenuItemsProps): JSX.Element {
+function SideMenuItems({
+  children,
+  className,
+}: SideMenuItemsProps): JSX.Element {
   return (
     <m.ul
       className={clsx('absolute top-[75px] flex flex-col space-y-4', className)}

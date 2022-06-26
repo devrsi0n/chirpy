@@ -27,9 +27,13 @@ export const TextField = React.forwardRef(function TextfieldComponent(
 ): JSX.Element {
   const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
   return (
-    <label className={clsx(`mb-3 flex flex-col px-0.5 text-gray-1200`, styles?.root)}>
+    <label
+      className={clsx(`mb-3 flex flex-col px-0.5 text-gray-1200`, styles?.root)}
+    >
       <LabelWrapper className="mb-1 text-lg leading-6">{label}</LabelWrapper>
-      <div className={clsx(`mb-1`, prefixNode && `flex flex-row items-stretch`)}>
+      <div
+        className={clsx(`mb-1`, prefixNode && `flex flex-row items-stretch`)}
+      >
         {prefixNode && (
           <div className="flex flex-row items-center rounded-l border-t border-b border-l px-3">
             {prefixNode}

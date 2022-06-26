@@ -24,13 +24,17 @@ export type ThemeEditorProps = {
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
   const { resolvedTheme } = useTheme();
-  const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system' ? 'light' : resolvedTheme) ||
-    'light') as keyof ColorSeries;
+  const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system'
+    ? 'light'
+    : resolvedTheme) || 'light') as keyof ColorSeries;
   const [{}, updateTheme] = useUpdateThemeMutation();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return () => {
       const newTheme = merge({}, widgetTheme, {
-        colors: { light: { primary: color.light }, dark: { primary: color.dark } },
+        colors: {
+          light: { primary: color.light },
+          dark: { primary: color.dark },
+        },
       });
       setWidgetTheme(newTheme);
       updateTheme({
@@ -48,7 +52,8 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
           <div className="space-y-6">
             <BoldHeading as="h4">Theme Editor</BoldHeading>
             <Text variant="secondary">
-              Click to change variants then we will save your theme automatically.
+              Click to change variants then we will save your theme
+              automatically.
             </Text>
           </div>
           <div className="space-y-4">

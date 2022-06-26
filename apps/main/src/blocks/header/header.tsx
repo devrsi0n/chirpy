@@ -49,17 +49,31 @@ export function Header(): JSX.Element {
                 </SideMenu.Item>
               )}
               <SideMenu.Item>
-                <Link size="lg" href="/docs/index" className={styles} highlightPattern={/^\/docs/}>
+                <Link
+                  size="lg"
+                  href="/docs/index"
+                  className={styles}
+                  highlightPattern={/^\/docs/}
+                >
                   Docs
                 </Link>
               </SideMenu.Item>
               <SideMenu.Item>
-                <Link size="lg" href="/blog" className={styles} highlightPattern={/^\/blog/}>
+                <Link
+                  size="lg"
+                  href="/blog"
+                  className={styles}
+                  highlightPattern={/^\/blog/}
+                >
                   Blog
                 </Link>
               </SideMenu.Item>
               <SideMenu.Item>
-                <Link size="lg" href="https://github.com/devrsi0n/chirpy" className={styles}>
+                <Link
+                  size="lg"
+                  href="https://github.com/devrsi0n/chirpy"
+                  className={styles}
+                >
                   GitHub
                 </Link>
               </SideMenu.Item>

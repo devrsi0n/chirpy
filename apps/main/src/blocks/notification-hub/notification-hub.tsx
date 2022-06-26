@@ -23,8 +23,11 @@ export function NotificationHub(): JSX.Element {
     },
   });
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
-  const [{}, deleteNotificationMessage] = useDeleteNotificationMessageMutation();
-  const hasUnreadNotifications = data?.notificationMessages.some((msg) => !msg.read);
+  const [{}, deleteNotificationMessage] =
+    useDeleteNotificationMessageMutation();
+  const hasUnreadNotifications = data?.notificationMessages.some(
+    (msg) => !msg.read,
+  );
   return (
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
@@ -46,8 +49,12 @@ export function NotificationHub(): JSX.Element {
                   message={msg}
                   index={index}
                   length={data?.notificationMessages.length}
-                  onClickCapture={(messageId) => haveReadANotification({ messageId })}
-                  onClickDelete={(messageId) => deleteNotificationMessage({ messageId })}
+                  onClickCapture={(messageId) =>
+                    haveReadANotification({ messageId })
+                  }
+                  onClickDelete={(messageId) =>
+                    deleteNotificationMessage({ messageId })
+                  }
                 />
               ))}
             </div>

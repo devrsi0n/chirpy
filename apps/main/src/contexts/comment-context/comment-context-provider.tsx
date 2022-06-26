@@ -40,13 +40,19 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
     ],
   );
 
-  return <CommentContext.Provider value={value}>{props.children}</CommentContext.Provider>;
+  return (
+    <CommentContext.Provider value={value}>
+      {props.children}
+    </CommentContext.Provider>
+  );
 }
 
 export function useCommentContext() {
   const context = React.useContext(CommentContext);
   if (!context) {
-    throw new Error('useCommentContext must be used within a CommentContextProvider');
+    throw new Error(
+      'useCommentContext must be used within a CommentContextProvider',
+    );
   }
   return context;
 }

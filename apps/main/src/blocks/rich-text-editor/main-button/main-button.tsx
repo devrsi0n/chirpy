@@ -36,7 +36,9 @@ export function MainButton({
     reset,
   } = useAsync(async () => {
     const resp = await fetch(
-      `/api/content-classifier/toxic-text?text=${getTextFromRteValue(rteValue)}`,
+      `/api/content-classifier/toxic-text?text=${getTextFromRteValue(
+        rteValue,
+      )}`,
     );
 
     const toxicText: ICheckToxicText = await resp.json();
@@ -46,7 +48,8 @@ export function MainButton({
     return toxicText.matchedLabels;
   });
 
-  const { registerNotification, didRegister, didDeny } = useNotificationContext();
+  const { registerNotification, didRegister, didDeny } =
+    useNotificationContext();
   const handleCheckNotificationBeforeSubmit = async () => {
     await registerNotification();
     await handleCheckToxicTextBeforeSubmit();
@@ -62,7 +65,11 @@ export function MainButton({
   };
   const buttonChildren = (
     <>
-      {isLoading ? <IconLoader className="h-5 w-5 animate-spin" /> : <IconSend size="14" />}
+      {isLoading ? (
+        <IconLoader className="h-5 w-5 animate-spin" />
+      ) : (
+        <IconSend size="14" />
+      )}
       <span>Post</span>
     </>
   );

@@ -60,7 +60,10 @@ export function useReloadWhenSwChange() {
   }, [showToast]);
 }
 
-function handleNewServiceWorker(registration: ServiceWorkerRegistration, callback: () => void) {
+function handleNewServiceWorker(
+  registration: ServiceWorkerRegistration,
+  callback: () => void,
+) {
   if (registration.waiting) {
     // SW is waiting to activate. Can occur if multiple clients open and
     // one of the clients is refreshed.

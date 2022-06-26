@@ -31,11 +31,16 @@ describe('Header', () => {
     cy.url({ timeout: 60_000 }).should('include', '/dashboard');
 
     clickUserMenu();
-    cy.get('header').findByRole('menuitem', { name: 'Profile' }).click({ force: true });
+    cy.get('header')
+      .findByRole('menuitem', { name: 'Profile' })
+      .click({ force: true });
     cy.url({ timeout: 60_000 }).should('include', '/profile');
 
     clickUserMenu();
-    cy.get('header').findByRole('menuitem', { name: 'Log out' }).should('be.visible').click();
+    cy.get('header')
+      .findByRole('menuitem', { name: 'Log out' })
+      .should('be.visible')
+      .click();
     cy.get('header').findByText(testUser.name).should('not.exist');
   });
 });
@@ -44,7 +49,9 @@ function loadHomePage() {
   cy.visit('/', {
     timeout: 60_000,
   });
-  cy.get('[aria-label="Logo of Chirpy"]', { timeout: 60_000 }).should('be.visible');
+  cy.get('[aria-label="Logo of Chirpy"]', { timeout: 60_000 }).should(
+    'be.visible',
+  );
 }
 
 function clickUserMenu() {

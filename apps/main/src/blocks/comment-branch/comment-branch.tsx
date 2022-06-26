@@ -31,7 +31,11 @@ export function CommentBranch({
   return (
     <m.li
       {...restProps}
-      className={clsx(`space-y-2`, !hiddenBranch && styles.commentBranch, className)}
+      className={clsx(
+        `space-y-2`,
+        !hiddenBranch && styles.commentBranch,
+        className,
+      )}
       style={
         {
           '--comment-branch-width': `${width}rem`,

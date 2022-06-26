@@ -5,7 +5,9 @@ jest.mock('fs', () => ({
   promises: {
     readFile: jest
       .fn()
-      .mockResolvedValue(`---\ntitle: 'Get started'\n---\n\n# Get started\n\nAccess api.\n`),
+      .mockResolvedValue(
+        `---\ntitle: 'Get started'\n---\n\n# Get started\n\nAccess api.\n`,
+      ),
   },
 }));
 

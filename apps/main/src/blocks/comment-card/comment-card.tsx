@@ -5,7 +5,11 @@ import * as React from 'react';
 import { easeInOut } from '$/components/animation';
 import { Avatar } from '$/components/avatar';
 import { ActionButton, Button } from '$/components/button';
-import { IconMessageSquare, IconMoreVertical, IconTrash2 } from '$/components/icons';
+import {
+  IconMessageSquare,
+  IconMoreVertical,
+  IconTrash2,
+} from '$/components/icons';
 import { Menu, MenuItemPadding } from '$/components/menu';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
@@ -18,7 +22,6 @@ import { dayjs } from '$/utilities/date';
 
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
-import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 import { DeletedComment } from './deleted-comment';
 import { TimelineLinkButton } from './timeline-link-button';
 
@@ -78,7 +81,9 @@ export function CommentCard({
     setShowReplyEditor(false);
   };
   const timelineURL = `/widget/comment/timeline/${commentId}`;
-  const [containerAnimate, setContainerAnimate] = React.useState<'shake' | 'stop'>('stop');
+  const [containerAnimate, setContainerAnimate] = React.useState<
+    'shake' | 'stop'
+  >('stop');
 
   const handleClickLinkAction: React.MouseEventHandler<HTMLElement> = (e) => {
     if (disableTimelineButton) {
@@ -96,7 +101,8 @@ export function CommentCard({
   }, [disabledReply]);
   const { data } = useCurrentUser();
   const isDeleted = !!deletedAt;
-  const userHasModeratePermission = data?.editableProjectIds?.includes(projectId);
+  const userHasModeratePermission =
+    data?.editableProjectIds?.includes(projectId);
 
   if (isDeleted) {
     return <DeletedComment />;
@@ -144,13 +150,22 @@ export function CommentCard({
                           <Text size="sm" className="w-max">
                             Are you sure?
                           </Text>
-                          <Button size="sm" color="red" onClick={handleClickConfirmDelete}>
+                          <Button
+                            size="sm"
+                            color="red"
+                            onClick={handleClickConfirmDelete}
+                          >
                             Delete
                           </Button>
                         </div>
                       }
                     >
-                      <div className={clsx(`flex flex-row items-center`, MenuItemPadding)}>
+                      <div
+                        className={clsx(
+                          `flex flex-row items-center`,
+                          MenuItemPadding,
+                        )}
+                      >
                         <IconTrash2 size={16} />
                         <span className="ml-1">Delete</span>
                       </div>
