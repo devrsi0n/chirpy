@@ -2,42 +2,20 @@ import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import { IconButton } from '$/components/button/icon-button';
-import { IconMoon, IconSettings, IconSun, Icon } from '$/components/icons';
+import { ClientOnly } from '$/components/client-only';
+import { IconMoon, IconSettings, IconSun } from '$/components/icons';
 import { Link } from '$/components/link/link';
+import { Select } from '$/components/select';
 import { Text } from '$/components/text';
-import { useHasMounted } from '$/hooks/use-has-mounted';
-import { ColorMode } from '$/types/theme.type';
-
-const icons: Record<ColorMode, Icon> = {
-  system: IconSettings,
-  light: IconSun,
-  dark: IconMoon,
-};
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
 
 export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
   const { theme, setTheme } = useTheme();
-  const hasMounted = useHasMounted();
-  const handleClick = () => {
-    switch (theme) {
-      case 'system': {
-        setTheme('dark');
-        break;
-      }
-      case 'dark': {
-        setTheme('light');
-        break;
-      }
-      case 'light': {
-        setTheme('system');
-        break;
-      }
-    }
+  const handleChange = (value: string) => {
+    setTheme(value);
   };
 
-  const ThemeIcon = icons[(theme as ColorMode) || 'system'];
   return (
     <footer
       {...restProps}
@@ -69,13 +47,30 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         className={`flex w-full flex-col items-center justify-center space-y-2 xs:flex-row xs:space-y-0 xs:space-x-5`}
       >
         <Text variant="secondary" size="sm">
-          &copy; {new Date().getFullYear()} Chirpy Labs. All rights reserved.
+          &copy; {new Date().getFullYear()} Chirpy Information Technology LLC.
+          All rights reserved.
         </Text>
-        {hasMounted && ThemeIcon && theme && (
-          <IconButton onClick={handleClick} aria-label={`${theme} theme`}>
-            <ThemeIcon size={18} />
-          </IconButton>
-        )}
+        <ClientOnly>
+          <Select
+            value={theme || 'system'}
+            onChange={handleChange}
+            className="w-32"
+            placement="top"
+          >
+            <Select.Option value="light">
+              <IconSun size={16} />
+              <span>Light</span>
+            </Select.Option>
+            <Select.Option value="dark">
+              <IconMoon size={16} />
+              <span>Dark</span>
+            </Select.Option>
+            <Select.Option value="system">
+              <IconSettings size={16} />
+              <span>System</span>
+            </Select.Option>
+          </Select>
+        </ClientOnly>
       </div>
     </footer>
   );

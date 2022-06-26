@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
+import { useTheme } from 'next-themes';
 import Script from 'next/script';
 import * as React from 'react';
 
@@ -25,6 +26,7 @@ export default function Blog({
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
+  const { theme } = useTheme();
 
   return (
     <SiteLayout title={frontMatter?.title || 'Blog'}>
@@ -38,7 +40,11 @@ export default function Blog({
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div data-chirpy-comment className="my-16" />
+      <div
+        data-chirpy-comment
+        data-chirpy-theme={theme || 'system'}
+        className="my-16"
+      />
       <Script
         src="/bootstrap/comment.js"
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}

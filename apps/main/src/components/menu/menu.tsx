@@ -17,19 +17,25 @@ export type MenuProps = React.PropsWithChildren<{
   className?: string;
 }>;
 
+const ERROR = new Error(
+  'Menu children only accept a Menu.Items and a Menu.Button',
+);
+
 export function Menu({ className, children }: MenuProps): JSX.Element {
-  const childrenArray = React.Children.toArray(children);
+  const childrenArray = React.Children.toArray(
+    children,
+  ) as React.ReactElement[];
   if (childrenArray.length !== 2) {
-    throw new Error('Menu should have exactly two children');
+    throw ERROR;
   }
-  const items = childrenArray.find(
-    (element) => (element as React.ReactElement).type === MenuItems,
-  ) as React.ReactElement | undefined;
+  const items = childrenArray.find((element) => element.type === MenuItems) as
+    | React.ReactElement
+    | undefined;
   const button = childrenArray.find(
-    (element) => (element as React.ReactElement).type === MenuButton,
+    (element) => element.type === MenuButton,
   ) as React.ReactElement | undefined;
   if (!items || !button) {
-    throw new Error('Menu children should be a Menu.Items and a Menu.Button');
+    throw ERROR;
   }
   return (
     <div className={clsx('relative inline-block text-left', className)}>
