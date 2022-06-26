@@ -38,7 +38,12 @@ describe('Dialog', () => {
 
 function renderComponent() {
   render(
-    <Dialog title={title} show={mockShouldShowDialog()} onClose={mockHandleClose} showDismissButton>
+    <Dialog
+      title={title}
+      show={mockShouldShowDialog()}
+      onClose={mockHandleClose}
+      showDismissButton
+    >
       {content}
     </Dialog>,
   );

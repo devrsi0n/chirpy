@@ -20,7 +20,9 @@ export default {
   },
 } as ComponentMeta<typeof RichTextEditor>;
 
-const Template: ComponentStory<typeof RichTextEditor> = (args) => <RichTextEditor {...args} />;
+const Template: ComponentStory<typeof RichTextEditor> = (args) => (
+  <RichTextEditor {...args} />
+);
 
 export const Default = Template.bind({});
 

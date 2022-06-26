@@ -16,7 +16,9 @@ jest.mock('fs', () => ({
           }),
         );
       }
-      return Promise.resolve(`---\ntitle: '${filename}'\n---\n\n#${filename}\n\n${filename}.\n`);
+      return Promise.resolve(
+        `---\ntitle: '${filename}'\n---\n\n#${filename}\n\n${filename}.\n`,
+      );
     }),
   },
 }));

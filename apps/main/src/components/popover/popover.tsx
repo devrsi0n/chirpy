@@ -112,7 +112,11 @@ function PopoverContent({
                     {content}
                   </div>
                   <div
-                    className={clsx(`absolute h-4 w-4 rotate-45`, panelBg, `border-t-0 border-l-0`)}
+                    className={clsx(
+                      `absolute h-4 w-4 rotate-45`,
+                      panelBg,
+                      `border-t-0 border-l-0`,
+                    )}
                     style={getBeakStyles(
                       placement,
                       buttonRef.current?.getBoundingClientRect().width,
@@ -156,7 +160,10 @@ function getPanelStyles(
   }
 }
 
-function getBeakStyles(placement: Placement, width = DEFAULT_WIDTH): React.CSSProperties {
+function getBeakStyles(
+  placement: Placement,
+  width = DEFAULT_WIDTH,
+): React.CSSProperties {
   const bottom = '-8px';
   switch (placement) {
     case 'top':

@@ -28,13 +28,19 @@ export function SideMenuContextProvider({
     [],
   );
 
-  return <SideMenuContext.Provider value={value}>{children}</SideMenuContext.Provider>;
+  return (
+    <SideMenuContext.Provider value={value}>
+      {children}
+    </SideMenuContext.Provider>
+  );
 }
 
 export function useSideMenuContext(): SideMenuContextType {
   const context = React.useContext(SideMenuContext);
   if (!context) {
-    throw new Error('useSideMenuContext must be used within a SideMenuContextProvider');
+    throw new Error(
+      'useSideMenuContext must be used within a SideMenuContextProvider',
+    );
   }
   return context;
 }

@@ -38,7 +38,9 @@ export function nextAuthAdapter(): Adapter {
     async createUser(user: Omit<AdapterUser, 'id'>) {
       const data = await gqlMutate(
         CreateUserDocument,
-        translateAdapterUserToQueryVairables(user) as CreateUserMutationVariables,
+        translateAdapterUserToQueryVairables(
+          user,
+        ) as CreateUserMutationVariables,
         'insertOneUser',
       );
 
@@ -74,14 +76,18 @@ export function nextAuthAdapter(): Adapter {
       if (user.id) {
         const data = await gqlMutate(
           UpdateUserProfileByPkDocument,
-          translateAdapterUserToQueryVairables(user) as UpdateUserProfileByPkMutationVariables,
+          translateAdapterUserToQueryVairables(
+            user,
+          ) as UpdateUserProfileByPkMutationVariables,
           'updateUserByPk',
         );
         return translateUserToAdapterUser(data);
       } else if (user.email) {
         const data = await gqlMutate(
           UpdateUserProfileByEmailDocument,
-          translateAdapterUserToQueryVairables(user) as UpdateUserProfileByEmailMutationVariables,
+          translateAdapterUserToQueryVairables(
+            user,
+          ) as UpdateUserProfileByEmailMutationVariables,
           'updateUsers',
         );
         return translateUserToAdapterUser(data.returning[0]);
@@ -146,7 +152,9 @@ export function nextAuthAdapter(): Adapter {
         },
         user: {
           ...user,
-          emailVerified: user.emailVerified ? new Date(user.emailVerified) : null,
+          emailVerified: user.emailVerified
+            ? new Date(user.emailVerified)
+            : null,
         },
       };
     },
@@ -209,7 +217,9 @@ function translateUserToAdapterUser(user: null | undefined): null;
 function translateUserToAdapterUser(
   user: NonNullable<CreateUserMutation['insertOneUser']>,
 ): AdapterUser;
-function translateUserToAdapterUser(user: CreateUserMutation['insertOneUser']): AdapterUser | null {
+function translateUserToAdapterUser(
+  user: CreateUserMutation['insertOneUser'],
+): AdapterUser | null {
   if (!user) {
     return null;
   }
@@ -242,10 +252,15 @@ function translateAdapterUserToQueryVairables<U extends Partial<AdapterUser>>(
 }
 
 function camelize(obj: Record<string, unknown>) {
-  return transform(obj, (result: Record<string, unknown>, value: unknown, key: string, target) => {
-    const camelKey = isArray(target) ? key : camelCase(key);
-    result[camelKey] = isObject(value) ? camelize(value as Record<string, unknown>) : value;
-  });
+  return transform(
+    obj,
+    (result: Record<string, unknown>, value: unknown, key: string, target) => {
+      const camelKey = isArray(target) ? key : camelCase(key);
+      result[camelKey] = isObject(value)
+        ? camelize(value as Record<string, unknown>)
+        : value;
+    },
+  );
 }
 
 function translateGQLSessionToAdapterSession(

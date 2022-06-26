@@ -5,7 +5,11 @@ import { IconHeart, IconHeartFill } from '$/components/icons';
 import { useCommentContext } from '$/contexts/comment-context';
 import { useCurrentUser } from '$/contexts/current-user-context';
 
-export type ClickLikeActionHandler = (didLike: boolean, likeId: string, commentId: string) => void;
+export type ClickLikeActionHandler = (
+  didLike: boolean,
+  likeId: string,
+  commentId: string,
+) => void;
 
 export type Like = {
   id: string;
@@ -20,7 +24,11 @@ export type LikeActionProps = React.PropsWithChildren<
 >;
 
 // TODO: Animation
-export function LikeAction({ likes = [], commentId, ...restProps }: LikeActionProps): JSX.Element {
+export function LikeAction({
+  likes = [],
+  commentId,
+  ...restProps
+}: LikeActionProps): JSX.Element {
   const { data } = useCurrentUser();
   const { toggleALikeAction } = useCommentContext();
   const currentUserId = data?.id;

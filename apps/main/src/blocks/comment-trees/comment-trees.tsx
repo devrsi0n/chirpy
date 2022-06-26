@@ -16,7 +16,10 @@ export type CommentTreesProps = {
   rtePlaceholder?: string;
 };
 
-export function CommentTrees({ comments, rtePlaceholder }: CommentTreesProps): JSX.Element {
+export function CommentTrees({
+  comments,
+  rtePlaceholder,
+}: CommentTreesProps): JSX.Element {
   const { createAComment } = useCommentContext();
   const commentCount = getCommentCount(comments);
   return (
@@ -33,7 +36,10 @@ export function CommentTrees({ comments, rtePlaceholder }: CommentTreesProps): J
       <div className="space-y-7">
         <div className="space-y-2">
           <RichTextEditor
-            placeholder={rtePlaceholder || `What are your thoughts? (Markdown shortcuts supported)`}
+            placeholder={
+              rtePlaceholder ||
+              `What are your thoughts? (Markdown shortcuts supported)`
+            }
             onSubmit={createAComment}
           />
         </div>

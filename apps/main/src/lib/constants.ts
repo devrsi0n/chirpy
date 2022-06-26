@@ -14,7 +14,8 @@ export const WIDGET_COMMENT_PATH = '/widget/comment/';
 
 export const ANALYTICS_DOMAIN = 'chirpy.dev';
 
-export const FEEDBACK_LINK = 'https://github.com/devrsi0n/chirpy/issues/new/choose';
+export const FEEDBACK_LINK =
+  'https://github.com/devrsi0n/chirpy/issues/new/choose';
 
 export const GRAPHQL_CACHE_DB_NAME = 'graphcache-v1';
 

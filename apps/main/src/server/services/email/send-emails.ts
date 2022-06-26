@@ -22,7 +22,10 @@ export async function sendWelcomeLetter({ to }: SendEmailOptions) {
 export type SendVerificationRequestOptions = SendEmailOptions & {
   url: string;
 };
-export async function sendVerificationRequest({ to, url }: SendVerificationRequestOptions) {
+export async function sendVerificationRequest({
+  to,
+  url,
+}: SendVerificationRequestOptions) {
   await sendEmailWithTemplate({
     to,
     type: 'verification-request',

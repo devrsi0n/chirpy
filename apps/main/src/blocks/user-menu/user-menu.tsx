@@ -3,13 +3,23 @@ import { signOut } from 'next-auth/react';
 import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
-import { IconLifeBuoy, IconLogIn, IconLogOut, IconMonitor, IconUser } from '$/components/icons';
+import {
+  IconLifeBuoy,
+  IconLogIn,
+  IconLogOut,
+  IconMonitor,
+  IconUser,
+} from '$/components/icons';
 import { Link, LinkProps } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
-import { FEEDBACK_LINK, LOG_IN_SUCCESS_KEY, GRAPHQL_CACHE_DB_NAME } from '$/lib/constants';
+import {
+  FEEDBACK_LINK,
+  LOG_IN_SUCCESS_KEY,
+  GRAPHQL_CACHE_DB_NAME,
+} from '$/lib/constants';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';
@@ -91,7 +101,9 @@ const MenuLink = React.forwardRef(function MenuLink(
   { className, ...restProps }: LinkProps,
   ref: React.Ref<HTMLAnchorElement>,
 ): JSX.Element {
-  return <Link ref={ref} {...restProps} className={clsx(itemStyle, className)} />;
+  return (
+    <Link ref={ref} {...restProps} className={clsx(itemStyle, className)} />
+  );
 });
 
 const itemStyle = `justify-start space-x-1`;

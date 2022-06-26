@@ -12,10 +12,8 @@ type CustomComponentOwnProps = {
   shadow?: boolean;
 };
 
-export type CustomComponentProps<E extends React.ElementType> = PolymorphicComponentProps<
-  E,
-  CustomComponentOwnProps
->;
+export type CustomComponentProps<E extends React.ElementType> =
+  PolymorphicComponentProps<E, CustomComponentOwnProps>;
 
 export function Card<E extends React.ElementType>({
   shadow = true,

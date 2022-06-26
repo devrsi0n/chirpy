@@ -29,7 +29,13 @@ export function Avatar({
 }: AvatarProps): JSX.Element {
   const [sizeStyle, iconSize] = sizeStyles[size];
   if (!src) {
-    return <IconUser aria-label="Avatar placeholder" size={iconSize} className="m-1" />;
+    return (
+      <IconUser
+        aria-label="Avatar placeholder"
+        size={iconSize}
+        className="m-1"
+      />
+    );
   }
 
   return (

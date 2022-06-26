@@ -5,7 +5,8 @@ import { Text } from '$/components/text';
 const contents: FeatureProps[] = [
   {
     heading: 'Easy customization',
-    content: 'You can customize widget styles to match your design system easily. ✨',
+    content:
+      'You can customize widget styles to match your design system easily. ✨',
     icon: IconFigma,
   },
   {

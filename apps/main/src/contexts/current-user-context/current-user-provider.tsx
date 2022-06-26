@@ -3,7 +3,10 @@ import * as React from 'react';
 
 import { useCurrentUserQuery } from '$/graphql/generated/user';
 
-import { CurrentUserContext, CurrentUserContextType } from './current-user-context';
+import {
+  CurrentUserContext,
+  CurrentUserContextType,
+} from './current-user-context';
 
 export type CurrentUserProviderProps = React.PropsWithChildren<{
   gqlOptions?: Parameters<typeof useCurrentUserQuery>[0];
@@ -34,5 +37,9 @@ export function CurrentUserProvider({
     };
   }, [data?.userByPk, restProps, refetchData, session, sessionIsLoading]);
 
-  return <CurrentUserContext.Provider value={value}>{children}</CurrentUserContext.Provider>;
+  return (
+    <CurrentUserContext.Provider value={value}>
+      {children}
+    </CurrentUserContext.Provider>
+  );
 }

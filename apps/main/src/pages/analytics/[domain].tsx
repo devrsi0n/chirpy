@@ -5,7 +5,10 @@ import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { gqlQuery } from '$/server/common/gql';
-import { ProjectByDomainDocument, ProjectByDomainQuery } from '$/server/graphql/generated/project';
+import {
+  ProjectByDomainDocument,
+  ProjectByDomainQuery,
+} from '$/server/graphql/generated/project';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { CommonPageProps } from '$/types/page.type';
 
@@ -48,9 +51,10 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: true };
 };
 
-export const getStaticProps: GetStaticProps<AnalyticsProps & CommonPageProps, PathParams> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<
+  AnalyticsProps & CommonPageProps,
+  PathParams
+> = async ({ params }) => {
   if (!params?.domain) {
     return { notFound: true };
   }

@@ -4,7 +4,11 @@ import '$/__tests__/mocks/next-router';
 
 import { Header } from '..';
 
-Object.defineProperty(window, 'innerWidth', { writable: true, configurable: true, value: 1920 });
+Object.defineProperty(window, 'innerWidth', {
+  writable: true,
+  configurable: true,
+  value: 1920,
+});
 
 describe('Header', () => {
   beforeEach(() => {

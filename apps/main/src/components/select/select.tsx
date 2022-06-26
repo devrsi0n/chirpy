@@ -39,7 +39,9 @@ export function Select<T extends string | number = string>({
       {({ open }) => (
         <div className="text-gray-1100">
           {label && (
-            <Listbox.Label className={`mb-1 block text-sm font-bold`}>{label}</Listbox.Label>
+            <Listbox.Label className={`mb-1 block text-sm font-bold`}>
+              {label}
+            </Listbox.Label>
           )}
           <div className={clsx(`relative`, className)}>
             <span className={`inline-block w-full`}>
@@ -64,7 +66,10 @@ export function Select<T extends string | number = string>({
               {open && (
                 <m.div
                   {...easeInOut}
-                  className={clsx('absolute z-20 mt-1 w-full rounded-md shadow-lg', cardBg)}
+                  className={clsx(
+                    'absolute z-20 mt-1 w-full rounded-md shadow-lg',
+                    cardBg,
+                  )}
                 >
                   <Listbox.Options
                     static
@@ -89,7 +94,10 @@ type SelectOptionProps<T> = {
   value: T;
 };
 
-function SelectOption<T>({ value, children }: SelectOptionProps<T>): JSX.Element {
+function SelectOption<T>({
+  value,
+  children,
+}: SelectOptionProps<T>): JSX.Element {
   return (
     <Listbox.Option key={String(value)} value={value as $TsFixMe}>
       {/* active includes hover event */}

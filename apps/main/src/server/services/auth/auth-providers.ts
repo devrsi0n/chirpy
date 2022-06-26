@@ -43,12 +43,18 @@ export const authProviders: Provider[] = [
     },
   }),
   // Only allow the credential provider if not in production
-  ...(['staging', 'preview', 'localhost'].includes(getHostEnv(process.env.NEXTAUTH_URL))
+  ...(['staging', 'preview', 'localhost'].includes(
+    getHostEnv(process.env.NEXTAUTH_URL),
+  )
     ? [
         CredentialsProvider({
           name: 'Credentials for test only',
           credentials: {
-            username: { label: 'Username', type: 'text', placeholder: 'User name' },
+            username: {
+              label: 'Username',
+              type: 'text',
+              placeholder: 'User name',
+            },
             password: { label: 'Password', type: 'password' },
           },
           async authorize(credentials /*req*/) {
@@ -70,7 +76,10 @@ export const authProviders: Provider[] = [
         EmailProvider({
           server: process.env.EMAIL_SERVER,
           from: process.env.EMAIL_FROM,
-          async sendVerificationRequest({ identifier: email, url /*provider: { server, from }*/ }) {
+          async sendVerificationRequest({
+            identifier: email,
+            url /*provider: { server, from }*/,
+          }) {
             await sendVerificationRequest({
               to: {
                 email,

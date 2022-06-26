@@ -150,7 +150,9 @@ function getActiveBlockFormat(editor: Editor): HeadingValue | undefined {
   for (const index of Object.keys(headingList)) {
     const level = +index as HeadingValue;
     const isActive =
-      level === 0 ? editor.isActive('paragraph') : editor.isActive('heading', { level });
+      level === 0
+        ? editor.isActive('paragraph')
+        : editor.isActive('heading', { level });
     if (isActive) return level;
   }
 }

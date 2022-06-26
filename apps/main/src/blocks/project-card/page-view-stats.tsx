@@ -22,9 +22,9 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
       filters: {},
     })
       .then((res: any) => {
-        const pv = (res.top_stats as { change: number; name: string; value: number }[]).find(
-          (s) => s.name === 'Total pageviews',
-        );
+        const pv = (
+          res.top_stats as { change: number; name: string; value: number }[]
+        ).find((s) => s.name === 'Total pageviews');
         if (pv) {
           setGrow(pv.change);
           setPageviews(pv.value);
@@ -54,8 +54,15 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
               grow > 0 ? `text-green-900` : `text-yellow-1000`,
             )}
           >
-            <IconArrowUp size={14} className={clsx(grow <= 0 && `rotate-180`)} />
-            <Text size="xs" className="!leading-none" style={{ color: 'inherit' }}>
+            <IconArrowUp
+              size={14}
+              className={clsx(grow <= 0 && `rotate-180`)}
+            />
+            <Text
+              size="xs"
+              className="!leading-none"
+              style={{ color: 'inherit' }}
+            >
               {`${100}`}%
             </Text>
           </span>

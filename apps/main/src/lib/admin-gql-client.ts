@@ -3,7 +3,11 @@ import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
 import { ADMIN_HEADERS } from './constants';
-import { getGqlClientOptions, IGqlClientOptions, SSRExchange } from './gql-client';
+import {
+  getGqlClientOptions,
+  IGqlClientOptions,
+  SSRExchange,
+} from './gql-client';
 
 class ChirpyWebSocket extends WebSocket {
   constructor(...args: ConstructorParameters<typeof WebSocket>) {

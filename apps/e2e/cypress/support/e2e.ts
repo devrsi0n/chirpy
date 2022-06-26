@@ -31,7 +31,11 @@ declare global {
 // });
 
 Cypress.Cookies.defaults({
-  preserve: ['next-auth.session-token', 'next-auth.callback-url', 'next-auth.csrf-token'],
+  preserve: [
+    'next-auth.session-token',
+    'next-auth.callback-url',
+    'next-auth.csrf-token',
+  ],
 });
 
 Cypress.on('uncaught:exception', () => {

@@ -30,7 +30,10 @@ function createAuthToken(payload: Payload, options: Options): string {
   return encodedToken;
 }
 
-function createToken(payload: string | object | Buffer, { maxAge }: { maxAge: string | number }) {
+function createToken(
+  payload: string | object | Buffer,
+  { maxAge }: { maxAge: string | number },
+) {
   const encodedToken = jwt.sign(payload, process.env.NEXTAUTH_SECRET, {
     algorithm: process.env.HASH_ALGORITHM as jwt.Algorithm,
     expiresIn: maxAge,

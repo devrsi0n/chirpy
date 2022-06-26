@@ -8,6 +8,7 @@ export const SIGN_IN_ERRORS = {
   OAuthAccountNotLinked:
     'To confirm your identity, sign in with the same account you used originally.',
   EmailSignin: 'Check your email inbox.',
-  CredentialsSignin: 'Sign in failed. Check the details you provided are correct.',
+  CredentialsSignin:
+    'Sign in failed. Check the details you provided are correct.',
   Default: 'Unable to sign in.',
 };

@@ -1,4 +1,9 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, GetStaticPropsResult } from 'next';
+import {
+  GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+} from 'next';
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
@@ -50,7 +55,9 @@ type StaticProps = {
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
-}: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps>> => {
+}: GetStaticPropsContext<PathParams>): Promise<
+  GetStaticPropsResult<StaticProps>
+> => {
   if (!params?.domain) {
     return { notFound: true };
   }

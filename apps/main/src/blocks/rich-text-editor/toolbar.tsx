@@ -14,7 +14,12 @@ export type ToolbarProps = React.PropsWithChildren<
   }
 >;
 
-export function Toolbar({ editor, children, className, ...divProps }: ToolbarProps): JSX.Element {
+export function Toolbar({
+  editor,
+  children,
+  className,
+  ...divProps
+}: ToolbarProps): JSX.Element {
   return (
     <div
       className={clsx(

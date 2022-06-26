@@ -28,7 +28,9 @@ function App({
         <NextThemesProvider
           attribute="class"
           // Widget and app themes are different
-          storageKey={pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'}
+          storageKey={
+            pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'
+          }
         >
           <LazyMotion features={loadFeatures} strict>
             <GQLClientProvider urqlState={urqlState}>

@@ -30,7 +30,15 @@ export interface IRichTextEditorProps extends IBaseProps {
 }
 
 export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
-  const { onSubmit, readOnly, styles, isReply, onClickDismiss, placeholder, initialValue } = props;
+  const {
+    onSubmit,
+    readOnly,
+    styles,
+    isReply,
+    onClickDismiss,
+    placeholder,
+    initialValue,
+  } = props;
   const [value, setValue, remove] = useLocalStorage(initialValue, 'rte-value');
 
   const editor = useEditor({
@@ -67,14 +75,23 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   };
 
   return (
-    <section className={clsx(styles?.root, !readOnly && `rounded border border-gray-500`)}>
+    <section
+      className={clsx(
+        styles?.root,
+        !readOnly && `rounded border border-gray-500`,
+      )}
+    >
       <EditorContent
         editor={editor}
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
           'prose !max-w-full text-gray-1200',
-          !readOnly && [`!min-h-[4em] resize-y overflow-hidden rounded px-2`, textInput, cardBg],
+          !readOnly && [
+            `!min-h-[4em] resize-y overflow-hidden rounded px-2`,
+            textInput,
+            cardBg,
+          ],
           styles?.editable,
         )}
       />

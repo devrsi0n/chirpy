@@ -10,7 +10,10 @@ export type SpinnerProps = React.PropsWithChildren<{
 export function Spinner(props: SpinnerProps): JSX.Element {
   return (
     <div
-      className={clsx('flex flex-row space-x-1 text-gray-1100', props.className)}
+      className={clsx(
+        'flex flex-row space-x-1 text-gray-1100',
+        props.className,
+      )}
       aria-label="Loading data"
     >
       <span className="animate-spin">

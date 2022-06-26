@@ -15,7 +15,10 @@ import { getBannerProps } from '$/utilities/image';
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';
 
-export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element {
+export default function Blog({
+  mdxSource,
+  frontMatter,
+}: BlogProps): JSX.Element {
   const hasMounted = useHasMounted();
   const banner = React.useMemo(() => {
     if (frontMatter?.banner && hasMounted) {
@@ -32,7 +35,6 @@ export default function Blog({ mdxSource, frontMatter }: BlogProps): JSX.Element
               <Image {...banner} layout="responsive" alt="banner" />
             </div>
           )}
-          {/* @ts-ignore */}
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
@@ -62,9 +64,10 @@ export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
   return payload;
 };
 
-export const getStaticProps: GetStaticProps<BlogProps & CommonPageProps, PathParam> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<
+  BlogProps & CommonPageProps,
+  PathParam
+> = async ({ params }) => {
   if (!params?.slug) {
     return { notFound: true };
   }

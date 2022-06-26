@@ -24,12 +24,15 @@ const commonBenefits = [
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} className="flex flex-col items-center">
-      <Heading as="h2" className="mb-4 w-full text-left font-bold sm:text-center">
+      <Heading
+        as="h2"
+        className="mb-4 w-full text-left font-bold sm:text-center"
+      >
         Pricing Plans
       </Heading>
       <Text className="mb-8" variant="secondary" size="lg">
-        Start building for free, then add a site to go live. Account plans unblock additional
-        features.
+        Start building for free, then add a site to go live. Account plans
+        unblock additional features.
       </Text>
       <div className="flex w-full flex-col items-start space-y-4 sm:items-center md:flex-row md:items-start md:space-x-6 md:space-y-0">
         <PricingCard
@@ -100,7 +103,11 @@ function PricingCard({
         {priceDescription}&#8203;
       </Text>
       <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-        <Button {...callToAction.buttonProps} variant="solid" className="mb-8 w-full">
+        <Button
+          {...callToAction.buttonProps}
+          variant="solid"
+          className="mb-8 w-full"
+        >
           {callToAction.label}
         </Button>
       </Link>

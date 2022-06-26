@@ -17,9 +17,18 @@ const variantTags: Record<Variant, 'ul' | 'ol'> = {
   unordered: 'ul',
 };
 
-export function List({ className, variant = 'unordered', ...restProps }: IListProps): JSX.Element {
+export function List({
+  className,
+  variant = 'unordered',
+  ...restProps
+}: IListProps): JSX.Element {
   const Tag = variantTags[variant];
-  return <Tag {...restProps} className={clsx(`flex list-none flex-col py-2`, className)} />;
+  return (
+    <Tag
+      {...restProps}
+      className={clsx(`flex list-none flex-col py-2`, className)}
+    />
+  );
 }
 
 List.Item = ListItem;
@@ -38,15 +47,21 @@ function ListItem({
   hideMarker,
   ...liProps
 }: IListItemProps): JSX.Element {
-  const ChildrenContainer = typeof children === 'string' ? 'span' : React.Fragment;
+  const ChildrenContainer =
+    typeof children === 'string' ? 'span' : React.Fragment;
 
   return (
     <li
       {...liProps}
-      className={clsx('flex flex-row items-center space-x-2 text-gray-1100', className)}
+      className={clsx(
+        'flex flex-row items-center space-x-2 text-gray-1100',
+        className,
+      )}
     >
       {!hideMarker && (
-        <span className={clsx(`h-2 w-2 rounded-full bg-current`, styles.marker)}></span>
+        <span
+          className={clsx(`h-2 w-2 rounded-full bg-current`, styles.marker)}
+        ></span>
       )}
 
       <ChildrenContainer>{children}</ChildrenContainer>

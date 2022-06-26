@@ -33,7 +33,8 @@ export default function SiteLayout({
       <LayoutWrapper
         title={title}
         className={clsx(
-          enableBgGradient && `before:absolute before:inset-0 before:content-['']`,
+          enableBgGradient &&
+            `before:absolute before:inset-0 before:content-['']`,
           enableBgGradient && cssstyles.layoutWrapper,
         )}
       >

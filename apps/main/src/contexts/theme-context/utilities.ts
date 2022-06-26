@@ -11,10 +11,14 @@ export function getThemeCSSVariablesString(theme: NestedObject): string {
 /**
  * Support any depth level of nesting objects
  */
-function getThemeCSSVariables(theme: NestedObject, prefix = '--tw'): CSSVariables {
+function getThemeCSSVariables(
+  theme: NestedObject,
+  prefix = '--tw',
+): CSSVariables {
   const cssVariables: Array<[string, string]> = [];
   for (const [key, value] of Object.entries(theme)) {
-    const cssVariableKey = prefix && key ? [prefix, key].join('-') : prefix || key;
+    const cssVariableKey =
+      prefix && key ? [prefix, key].join('-') : prefix || key;
     if (typeof value === 'string') {
       cssVariables.push([cssVariableKey, translateColor(value)]);
     } else if (typeof value === 'object' && value) {

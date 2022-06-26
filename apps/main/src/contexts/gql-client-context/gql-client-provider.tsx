@@ -8,7 +8,10 @@ export type GqlClientProviderProps = React.PropsWithChildren<{
   urqlState?: SSRData;
 }>;
 
-export function GQLClientProvider({ children, urqlState }: GqlClientProviderProps): JSX.Element {
+export function GQLClientProvider({
+  children,
+  urqlState,
+}: GqlClientProviderProps): JSX.Element {
   const { data: session } = useSession();
   const [client, setClient] = React.useState(() =>
     createGqlClient(session?.hasuraToken, urqlState),

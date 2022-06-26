@@ -3,7 +3,12 @@ import * as React from 'react';
 
 import { Avatar } from '$/components/avatar';
 import { Divider } from '$/components/divider';
-import { IconHeartFill, IconMessageSquare, IconX, IconXSquare } from '$/components/icons';
+import {
+  IconHeartFill,
+  IconMessageSquare,
+  IconX,
+  IconXSquare,
+} from '$/components/icons';
 import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';
@@ -71,7 +76,9 @@ export function NotificationItem({
             </button>
           </div>
           <NotificationText className="flex flex-row space-x-1.5 leading-none">
-            <span className="max-w-[8rem] truncate font-bold">{message.triggeredBy.name}</span>
+            <span className="max-w-[8rem] truncate font-bold">
+              {message.triggeredBy.name}
+            </span>
             <span>{TITLE_MAP[message.type]}</span>
           </NotificationText>
           <NotificationText
@@ -96,13 +103,20 @@ export function NotificationItem({
           )}
         </div>
       </Link>
-      {index < length - 1 && <Divider className="w-full group-hover:bg-primary-400" />}
+      {index < length - 1 && (
+        <Divider className="w-full group-hover:bg-primary-400" />
+      )}
     </Menu.Item>
   );
 }
 
 function NotificationText({ className, ...restProps }: TextProps): JSX.Element {
-  return <Text {...restProps} className={clsx('group-hover:text-primary-1100', className)} />;
+  return (
+    <Text
+      {...restProps}
+      className={clsx('group-hover:text-primary-1100', className)}
+    />
+  );
 }
 
 const TITLE_MAP: Record<NotificationType_Enum, string> = {

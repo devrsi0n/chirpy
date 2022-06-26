@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import { INotificationContext, NotificationContext } from '$/contexts/notification-context';
+import {
+  INotificationContext,
+  NotificationContext,
+} from '$/contexts/notification-context';
 import { asyncNoop, noop } from '$/utilities/isomorphic/function';
 
 export type PredefinedNotificationProps = {
@@ -12,7 +15,9 @@ export type PredefinedNotificationProps = {
  * @param props
  * @returns
  */
-export function PredefinedNotification(props: PredefinedNotificationProps): JSX.Element {
+export function PredefinedNotification(
+  props: PredefinedNotificationProps,
+): JSX.Element {
   const notificationContext: INotificationContext = React.useMemo(
     () => ({
       registerNotification: asyncNoop,

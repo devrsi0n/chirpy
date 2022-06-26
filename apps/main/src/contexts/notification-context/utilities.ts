@@ -1,6 +1,7 @@
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
-const NOTIFICATION_DID_REGISTER_KEY = 'chirpy.notification-subscription.did-register';
+const NOTIFICATION_DID_REGISTER_KEY =
+  'chirpy.notification-subscription.did-register';
 
 export function registerNotificationSubscription(): Promise<Response | void> {
   if (!checkServiceWorkerCompatibility()) {

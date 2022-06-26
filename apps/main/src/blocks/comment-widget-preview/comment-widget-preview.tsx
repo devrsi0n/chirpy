@@ -17,14 +17,17 @@ import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';
 import { PAGE_ID, PREVIEW_COMMENTS, PROJECT_ID } from './preview-data';
 
-export interface CommentWidgetPreviewProps extends Pick<CommentContextType, 'hideCommentTimeline'> {
+export interface CommentWidgetPreviewProps
+  extends Pick<CommentContextType, 'hideCommentTimeline'> {
   rtePlaceholder?: string;
 }
 
 /**
  * Comment widget preview, used by theme editor and home page
  */
-export function CommentWidgetPreview(props: CommentWidgetPreviewProps): JSX.Element {
+export function CommentWidgetPreview(
+  props: CommentWidgetPreviewProps,
+): JSX.Element {
   return (
     <PredefinedCurrentUser>
       <PredefinedNotification>
@@ -34,11 +37,13 @@ export function CommentWidgetPreview(props: CommentWidgetPreviewProps): JSX.Elem
   );
 }
 
-function CommentWidgetPreviewInternal(props: CommentWidgetPreviewProps): JSX.Element {
+function CommentWidgetPreviewInternal(
+  props: CommentWidgetPreviewProps,
+): JSX.Element {
   const { data } = useCurrentUser();
-  const [previewComments, setPreviewComments] = React.useState<CommentLeafType[]>(
-    PREVIEW_COMMENTS as CommentLeafType[],
-  );
+  const [previewComments, setPreviewComments] = React.useState<
+    CommentLeafType[]
+  >(PREVIEW_COMMENTS as CommentLeafType[]);
   const createAComment: UseCreateAComment = React.useCallback(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {
@@ -72,12 +77,15 @@ function CommentWidgetPreviewInternal(props: CommentWidgetPreviewProps): JSX.Ele
     [data],
   );
 
-  const deleteAComment: UseDeleteAComment = React.useCallback(async (commentId: string) => {
-    setPreviewComments((prevData) => {
-      return deleteACommentById(prevData, commentId);
-    });
-    return;
-  }, []);
+  const deleteAComment: UseDeleteAComment = React.useCallback(
+    async (commentId: string) => {
+      setPreviewComments((prevData) => {
+        return deleteACommentById(prevData, commentId);
+      });
+      return;
+    },
+    [],
+  );
 
   const toggleALikeAction: UseToggleALikeAction = React.useCallback(
     async (isLiked: boolean, likeId: string, commentId: string) => {
@@ -124,12 +132,18 @@ function CommentWidgetPreviewInternal(props: CommentWidgetPreviewProps): JSX.Ele
   );
   return (
     <CommentContext.Provider value={commentContext}>
-      <CommentTrees comments={previewComments} rtePlaceholder={props.rtePlaceholder || 'Preview'} />
+      <CommentTrees
+        comments={previewComments}
+        rtePlaceholder={props.rtePlaceholder || 'Preview'}
+      />
     </CommentContext.Provider>
   );
 }
 
-function findCommentById(comments: CommentLeafType[], id: string): CommentLeafType | undefined {
+function findCommentById(
+  comments: CommentLeafType[],
+  id: string,
+): CommentLeafType | undefined {
   return findCommentByIdInternal(comments, id)[0];
 }
 
@@ -149,14 +163,20 @@ function findCommentByIdInternal(
   return result;
 }
 
-function deleteACommentById(comments: CommentLeafType[], id: string): CommentLeafType[] {
+function deleteACommentById(
+  comments: CommentLeafType[],
+  id: string,
+): CommentLeafType[] {
   const newComments: CommentLeafType[] = [];
   for (const comment of comments) {
     if (comment.id === id) {
       comment.deletedAt = new Date().toISOString();
     }
 
-    comment.replies = deleteACommentById(comment.replies as CommentLeafType[], id);
+    comment.replies = deleteACommentById(
+      comment.replies as CommentLeafType[],
+      id,
+    );
 
     newComments.push(comment);
   }

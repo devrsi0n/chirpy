@@ -20,7 +20,9 @@ export async function sendNotificationViaEmail(payload: NotificationPayload) {
   });
 }
 
-export function getTitle(message: Pick<NotificationPayload, 'type' | 'triggeredBy'>): string {
+export function getTitle(
+  message: Pick<NotificationPayload, 'type' | 'triggeredBy'>,
+): string {
   return titleMap[message.type] + message.triggeredBy.name;
 }
 

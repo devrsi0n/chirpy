@@ -25,7 +25,9 @@ describe('CommentLinkedList', () => {
 
   it('should render the comments', async () => {
     const { parent, text, replies } = getTextsOfComment(mockComment);
-    await waitFor(() => expect(screen.getByText(parent.text)).toBeInTheDocument());
+    await waitFor(() =>
+      expect(screen.getByText(parent.text)).toBeInTheDocument(),
+    );
     expect(screen.getByText(text)).toBeInTheDocument();
     for (const reply of replies) {
       expect(screen.getByText(reply)).toBeInTheDocument();

@@ -4,7 +4,14 @@ import * as React from 'react';
 export type BaseButtonProps = React.ComponentPropsWithRef<'button'>;
 
 export const BaseButton = React.forwardRef(function BaseButton(
-  { type = 'button', children, className, onClick, onMouseDown, ...restProps }: BaseButtonProps,
+  {
+    type = 'button',
+    children,
+    className,
+    onClick,
+    onMouseDown,
+    ...restProps
+  }: BaseButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   const handleMouseDown = React.useCallback(

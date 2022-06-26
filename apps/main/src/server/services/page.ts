@@ -22,7 +22,11 @@ export async function getPage(
   };
 
   const refererDomain = new URL(url).hostname;
-  if (!url || !domain || (!isLocalDomain(refererDomain) && domain !== refererDomain)) {
+  if (
+    !url ||
+    !domain ||
+    (!isLocalDomain(refererDomain) && domain !== refererDomain)
+  ) {
     return res.status(400).json({
       error: `url(${url}) and domain(${domain}) must be matched`,
     });
@@ -83,4 +87,5 @@ export async function getPage(
   res.json(page);
 }
 
-const isLocalDomain = (domain: string) => ['localhost', '127.0.0.1'].includes(domain);
+const isLocalDomain = (domain: string) =>
+  ['localhost', '127.0.0.1'].includes(domain);

@@ -1,13 +1,8 @@
-import clsx from 'clsx';
 import * as React from 'react';
 
 import { Link } from '$/components/link';
 
-export type DeletedCommentProps = {
-  // children: React.ReactNode;
-};
-
-export function DeletedComment(props: DeletedCommentProps): JSX.Element {
+export function DeletedComment(): JSX.Element {
   return (
     <div className="">
       <Link

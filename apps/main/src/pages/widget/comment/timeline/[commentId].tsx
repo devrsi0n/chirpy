@@ -21,9 +21,18 @@ import { IconArrowLeft } from '$/components/icons';
 import { Link } from '$/components/link';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import { useCommentTimelineSubscription } from '$/graphql/generated/comment';
-import { ThemeOfCommentDocument, ThemeOfCommentQuery } from '$/graphql/generated/page';
-import { getAdminGqlClient, getAdminGqlClientWithSsrExchange } from '$/lib/admin-gql-client';
-import { CommentsDocument, CommentsQuery } from '$/server/graphql/generated/comment';
+import {
+  ThemeOfCommentDocument,
+  ThemeOfCommentQuery,
+} from '$/graphql/generated/page';
+import {
+  getAdminGqlClient,
+  getAdminGqlClientWithSsrExchange,
+} from '$/lib/admin-gql-client';
+import {
+  CommentsDocument,
+  CommentsQuery,
+} from '$/server/graphql/generated/comment';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { isSSRMode } from '$/utilities/env';
@@ -40,10 +49,16 @@ export default function CommentTimelineWidget(
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider projectId={props.projectId} pageId={comment?.pageId || ''}>
+      <CommentContextProvider
+        projectId={props.projectId}
+        pageId={comment?.pageId || ''}
+      >
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
-          <Link href={`/widget/comment/${encodeURIComponent(props.pageURL)}`} variant="plain">
+          <Link
+            href={`/widget/comment/${encodeURIComponent(props.pageURL)}`}
+            variant="plain"
+          >
             <IconButton className="translate-x-1">
               <IconArrowLeft size={20} />
             </IconButton>
@@ -94,7 +109,9 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
-}: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps>> => {
+}: GetStaticPropsContext<PathParams>): Promise<
+  GetStaticPropsResult<StaticProps>
+> => {
   if (!params?.commentId) {
     return { notFound: true };
   }

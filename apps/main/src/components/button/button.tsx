@@ -77,7 +77,9 @@ export const Button = React.forwardRef(function Button(
       disabled={disabled}
     >
       {children}
-      {dripShow && <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />}
+      {dripShow && (
+        <ButtonDrip x={dripX} y={dripY} onCompleted={onDripCompleted} />
+      )}
     </BaseButton>
   );
 });

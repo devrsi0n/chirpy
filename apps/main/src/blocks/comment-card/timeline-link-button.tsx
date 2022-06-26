@@ -33,7 +33,9 @@ export function TimelineLinkButton({
         icon={<IconInfo size={20} />}
         disabled={disabled}
         title={
-          disabled ? `This is already the current comment's timeline` : `This comment's timeline`
+          disabled
+            ? `This is already the current comment's timeline`
+            : `This comment's timeline`
         }
       />
     </span>

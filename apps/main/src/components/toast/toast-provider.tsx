@@ -16,7 +16,10 @@ export function ToastProvider({ children }: ToastProviderProps): JSX.Element {
     setToasts((prev) => [...prev, toast]);
   }, []);
 
-  const contextValue = React.useMemo(() => ({ toasts, showToast, setToasts }), [toasts, showToast]);
+  const contextValue = React.useMemo(
+    () => ({ toasts, showToast, setToasts }),
+    [toasts, showToast],
+  );
 
   return (
     <ToastContext.Provider value={contextValue}>

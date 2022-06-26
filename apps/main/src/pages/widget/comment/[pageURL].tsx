@@ -15,8 +15,14 @@ import { WidgetLayout } from '$/blocks/layout';
 import { PoweredBy } from '$/blocks/powered-by';
 import { CommentContextProvider } from '$/contexts/comment-context';
 import { useCommentTreeSubscription } from '$/graphql/generated/comment';
-import { ThemeOfPageDocument, ThemeOfPageQuery } from '$/graphql/generated/page';
-import { getAdminGqlClient, getAdminGqlClientWithSsrExchange } from '$/lib/admin-gql-client';
+import {
+  ThemeOfPageDocument,
+  ThemeOfPageQuery,
+} from '$/graphql/generated/page';
+import {
+  getAdminGqlClient,
+  getAdminGqlClientWithSsrExchange,
+} from '$/lib/admin-gql-client';
 import {
   PageByUrlOnlyDocument,
   PageByUrlOnlyQuery,
@@ -33,7 +39,9 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
  * Comment tree widget for a page
  * @param props
  */
-export default function CommentWidgetPage(props: PageCommentProps): JSX.Element {
+export default function CommentWidgetPage(
+  props: PageCommentProps,
+): JSX.Element {
   let error = '';
   let pageId = '';
   let pageURL = '';
@@ -101,9 +109,14 @@ type StaticError = {
   error: string;
 };
 
-export const getStaticProps: GetStaticProps<StaticProps | StaticError, PathParams> = async ({
+export const getStaticProps: GetStaticProps<
+  StaticProps | StaticError,
+  PathParams
+> = async ({
   params,
-}: GetStaticPropsContext<PathParams>): Promise<GetStaticPropsResult<StaticProps | StaticError>> => {
+}: GetStaticPropsContext<PathParams>): Promise<
+  GetStaticPropsResult<StaticProps | StaticError>
+> => {
   if (!params?.pageURL) {
     return { notFound: true };
   }

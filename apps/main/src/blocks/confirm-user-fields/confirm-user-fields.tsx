@@ -18,13 +18,14 @@ export type ConfirmUserFieldsProps = {
 
 export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
   const { data, loading: isLoadingUser } = useCurrentUser();
-  const { register, errors, hasError, handleSubmit, setError, setFields } = useForm<FormFields>({
-    defaultValues: {
-      email: data.email || '',
-      name: data.name || '',
-      username: data.username || '',
-    },
-  });
+  const { register, errors, hasError, handleSubmit, setError, setFields } =
+    useForm<FormFields>({
+      defaultValues: {
+        email: data.email || '',
+        name: data.name || '',
+        username: data.username || '',
+      },
+    });
   React.useEffect(() => {
     if (!isLoadingUser && data.id) {
       setFields({
@@ -39,32 +40,34 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
   const { showToast } = useToast();
-  const handleClickSubmit = handleSubmit<React.MouseEvent<HTMLButtonElement>>(async (fields) => {
-    if (!data.id || isSaved) return;
-    try {
-      await updateUser({
-        id: data.id,
-        email: fields.email,
-        name: fields.name,
-        username: fields.username,
-      });
-    } catch (error: any) {
-      if (/duplicate key.+users_username_key/.test(error.message)) {
-        setError('username', 'Username already taken');
-      } else if (/duplicate key.+users_email_key/.test(error.message)) {
-        setError('email', 'Email already taken');
-      } else {
-        showToast({
-          type: 'error',
-          title: 'Somethingwent wrong, please try again later.',
+  const handleClickSubmit = handleSubmit<React.MouseEvent<HTMLButtonElement>>(
+    async (fields) => {
+      if (!data.id || isSaved) return;
+      try {
+        await updateUser({
+          id: data.id,
+          email: fields.email,
+          name: fields.name,
+          username: fields.username,
         });
+      } catch (error: any) {
+        if (/duplicate key.+users_username_key/.test(error.message)) {
+          setError('username', 'Username already taken');
+        } else if (/duplicate key.+users_email_key/.test(error.message)) {
+          setError('email', 'Email already taken');
+        } else {
+          showToast({
+            type: 'error',
+            title: 'Somethingwent wrong, please try again later.',
+          });
+        }
+        return;
       }
-      return;
-    }
-    setIsSaved(true);
-    await sleep(1);
-    router.push('/dashboard');
-  });
+      setIsSaved(true);
+      await sleep(1);
+      router.push('/dashboard');
+    },
+  );
   return (
     <Card as="form" className="w-fit rounded py-6 px-12 shadow-md">
       <TextField

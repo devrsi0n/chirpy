@@ -46,17 +46,27 @@ export function ToxicTextPopover({
               Toxic comment
             </Heading>
             <Text size="sm" className="mt-2" variant="secondary">
-              Your comment contains<strong className="px-1">{_toxicLabels.join(', ')}</strong>
+              Your comment contains
+              <strong className="px-1">{_toxicLabels.join(', ')}</strong>
               sentences. You must remove them before posting.
             </Text>
             <div className="mt-5 flex justify-end">
-              <Button size="sm" variant="solid" color="primary" onClick={handleClickOk}>
+              <Button
+                size="sm"
+                variant="solid"
+                color="primary"
+                onClick={handleClickOk}
+              >
                 {`OK`}
               </Button>
             </div>
           </section>
         }
-        buttonProps={{ ...buttonProps, className: `!py-2`, onClick: onClickSubmit }}
+        buttonProps={{
+          ...buttonProps,
+          className: `!py-2`,
+          onClick: onClickSubmit,
+        }}
       >
         {children}
       </Popover>

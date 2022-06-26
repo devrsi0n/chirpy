@@ -8,7 +8,10 @@ export function observeThemeAttributeChange(
 ): void {
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
-      if (mutation.type === 'attributes' && mutation.attributeName === ATTR_THEME) {
+      if (
+        mutation.type === 'attributes' &&
+        mutation.attributeName === ATTR_THEME
+      ) {
         iframe.contentWindow?.postMessage({
           name: EVENT_CHANGE_THEME,
           value: (mutation.target as HTMLElement).getAttribute(ATTR_THEME),

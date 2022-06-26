@@ -26,11 +26,12 @@ export default function Dashboard(): JSX.Element {
     loading: userLoading,
   } = useCurrentUser();
 
-  const [{ data, fetching: projectLoading }, fetchUserProjects] = useUserDashboardProjectsQuery({
-    variables: {
-      id: id || '-1',
-    },
-  });
+  const [{ data, fetching: projectLoading }, fetchUserProjects] =
+    useUserDashboardProjectsQuery({
+      variables: {
+        id: id || '-1',
+      },
+    });
   const fetchProjects = React.useCallback(
     (options?: Parameters<typeof fetchUserProjects>[0]) => {
       if (!id) return;
@@ -94,7 +95,10 @@ export default function Dashboard(): JSX.Element {
             <ul className="flex-1 space-y-6" aria-label="Project list">
               {projects.map((project) => (
                 <li key={project.id}>
-                  <ProjectCard project={project} onDeletedProject={fetchProjects} />
+                  <ProjectCard
+                    project={project}
+                    onDeletedProject={fetchProjects}
+                  />
                 </li>
               ))}
             </ul>

@@ -64,7 +64,10 @@ export function Dialog({
   let footer: React.ReactElement | null = null;
   const otherChildren: React.ReactElement[] = [];
   React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child) && (child as any).type.displayName === 'DialogFooter') {
+    if (
+      React.isValidElement(child) &&
+      (child as any).type.displayName === 'DialogFooter'
+    ) {
       footer = React.cloneElement(child as React.ReactElement, { size });
     } else {
       otherChildren.push(child as React.ReactElement);
@@ -82,11 +85,16 @@ export function Dialog({
         >
           <div className="flex min-h-full items-center justify-center px-4">
             <m.div {...easeInOutOpacity} className="fixed inset-0">
-              <div className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)} />
+              <div
+                className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)}
+              />
             </m.div>
             <m.div {...easeInOut}>
               <HeadlessDialog.Panel
-                className={clsx('relative inline-block shadow-md', styles.panel)}
+                className={clsx(
+                  'relative inline-block shadow-md',
+                  styles.panel,
+                )}
               >
                 <div
                   className={clsx(
@@ -123,7 +131,9 @@ export function Dialog({
                       </HeadlessDialog.Title>
                     </div>
                     <div className="mt-4">
-                      <div className="text-sm text-gray-1100">{otherChildren}</div>
+                      <div className="text-sm text-gray-1100">
+                        {otherChildren}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -139,7 +149,9 @@ export function Dialog({
 
 Dialog.Footer = DialogFooter;
 
-export type IDialogFooterProps = React.PropsWithChildren<React.ComponentProps<'div'>> &
+export type IDialogFooterProps = React.PropsWithChildren<
+  React.ComponentProps<'div'>
+> &
   Pick<DialogProps, 'size'>;
 
 function DialogFooter({

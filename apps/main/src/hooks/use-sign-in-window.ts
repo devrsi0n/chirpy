@@ -16,7 +16,12 @@ export function useSignInWindow({
 }: useSignInWindowOptions = {}): () => void {
   const popupWindow = React.useRef<Window | null>(null);
   const handleClickSignIn = () => {
-    popupWindow.current = popupCenterWindow('/auth/sign-in', '_blank', width, height);
+    popupWindow.current = popupCenterWindow(
+      '/auth/sign-in',
+      '_blank',
+      width,
+      height,
+    );
   };
 
   useEventListener('storage', (event) => {
@@ -46,7 +51,8 @@ function popupCenterWindow(
   const screenX = window.screenX || window.screenLeft;
   const screenY = window.screenY || window.screenTop;
   const outerWidth = window.outerWidth || document.documentElement.clientWidth;
-  const outerHeight = window.outerHeight || document.documentElement.clientHeight - 22;
+  const outerHeight =
+    window.outerHeight || document.documentElement.clientHeight - 22;
   const targetWidth = isMobile ? 0 : width;
   const targetHeight = isMobile ? 0 : height;
   const V = screenX < 0 ? window.screen.width + screenX : screenX;

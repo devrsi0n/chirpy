@@ -25,8 +25,12 @@ export const WidgetThemeContext = React.createContext<WidgetThemeContextType>({
   setWidgetTheme: noop,
 });
 
-export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Element {
-  const [widgetTheme, setWidgetTheme] = React.useState<Theme | undefined>(props.widgetTheme);
+export function WidgetThemeProvider(
+  props: WidgetThemeProviderProps,
+): JSX.Element {
+  const [widgetTheme, setWidgetTheme] = React.useState<Theme | undefined>(
+    props.widgetTheme,
+  );
   const value = React.useMemo<WidgetThemeContextType>(
     () => ({
       // We need to add site theme here as SiteThemeProvider won't be added to a widget
@@ -55,7 +59,9 @@ export function WidgetThemeProvider(props: WidgetThemeProviderProps): JSX.Elemen
 export const useWidgetTheme = () => {
   const context = React.useContext(WidgetThemeContext);
   if (!context) {
-    throw new Error(`'useWidgetTheme' must be used within a WidgetThemeProvider`);
+    throw new Error(
+      `'useWidgetTheme' must be used within a WidgetThemeProvider`,
+    );
   }
   return context;
 };

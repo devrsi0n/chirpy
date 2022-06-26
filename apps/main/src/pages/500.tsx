@@ -10,7 +10,9 @@ import { FEEDBACK_LINK } from '$/lib/constants';
 
 export default function Custom500(): JSX.Element {
   const { query } = useRouter();
-  const message = query['message'] || `We might have encountered some issues in our services...`;
+  const message =
+    query['message'] ||
+    `We might have encountered some issues in our services...`;
   return (
     <SiteLayout title="500">
       <section className="flex flex-col items-center space-y-8 px-4">

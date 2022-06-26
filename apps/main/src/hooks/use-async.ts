@@ -8,8 +8,13 @@ import { useMountedPromise } from './use-mounted-promise';
  * @param immediate Call the function immediately
  * @returns
  */
-export function useAsync<T, E = Error>(asyncFunction: () => Promise<T>, immediate = false) {
-  const [status, setStatus] = React.useState<'idle' | 'pending' | 'success' | 'error'>('idle');
+export function useAsync<T, E = Error>(
+  asyncFunction: () => Promise<T>,
+  immediate = false,
+) {
+  const [status, setStatus] = React.useState<
+    'idle' | 'pending' | 'success' | 'error'
+  >('idle');
   const [data, setData] = React.useState<T | null>(null);
   const [error, setError] = React.useState<E | null>(null);
 

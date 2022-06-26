@@ -32,7 +32,8 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
               Get Started with Chirpy Comment
             </Heading>
             <Text as="p" size="lg" variant="secondary">
-              Integrate the widget into your website to start engaging with your customer.
+              Integrate the widget into your website to start engaging with your
+              customer.
             </Text>
           </div>
         }
@@ -45,15 +46,15 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
           </Heading>
           <div className="space-y-2">
             <Text variant="secondary">
-              To embed the comment widget on your website, first add the script tag with your
-              project id to the HTML:
+              To embed the comment widget on your website, first add the script
+              tag with your project id to the HTML:
             </Text>
             <Code>
               {`<script defer src="${APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
             </Code>
             <Text variant="secondary">
-              Then, add the data-chirpy-comment attribute to any HTML element that should render the
-              widget:
+              Then, add the data-chirpy-comment attribute to any HTML element
+              that should render the widget:
             </Text>
             <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
           </div>

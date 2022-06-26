@@ -66,11 +66,17 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   );
 }
 
-function Directories({ directories }: Pick<SideBarProps, 'directories'>): JSX.Element {
+function Directories({
+  directories,
+}: Pick<SideBarProps, 'directories'>): JSX.Element {
   return (
     <List className="flex-1 space-y-2">
       {directories.map((dir) => (
-        <List.Item key={getId(dir)} hideMarker className="flex w-full flex-col items-stretch">
+        <List.Item
+          key={getId(dir)}
+          hideMarker
+          className="flex w-full flex-col items-stretch"
+        >
           <DirectoryItem directory={dir} />
         </List.Item>
       ))}
@@ -112,7 +118,11 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         </Link>
       ) : (
         <button
-          className={clsx(`capitalize text-gray-1100`, clickableItemStyle, isActive && activeStyle)}
+          className={clsx(
+            `capitalize text-gray-1100`,
+            clickableItemStyle,
+            isActive && activeStyle,
+          )}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
           aria-label="Expand children routes"
@@ -131,7 +141,10 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
   );
 }
 
-const clickableItemStyle = [`transition flex flex-row items-center justify-start`, listHoverable];
+const clickableItemStyle = [
+  `transition flex flex-row items-center justify-start`,
+  listHoverable,
+];
 const activeStyle = `text-gray-1200 font-bold`;
 
 function isButtonActive(dir: Directory, pathname: string) {
