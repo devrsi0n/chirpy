@@ -19,6 +19,7 @@ export type SelectProps<T> = React.PropsWithChildren<{
   className?: string;
   variant?: SelectVariant;
   placement?: SelectPlacement;
+  'aria-label'?: string;
 }>;
 
 const VARIANT_CLASSES: Record<SelectVariant, string> = {
@@ -31,22 +32,26 @@ const PLACEMENT_CLASSES: Record<SelectPlacement, string> = {
   bottom: '',
 };
 
-export function Select<T extends string | number = string>({
-  name,
-  value,
-  children,
-  onChange,
-  label,
-  className,
-  variant = 'default',
-  placement = 'bottom',
-}: SelectProps<T>): JSX.Element {
+export function Select<T extends string | number = string>(
+  props: SelectProps<T>,
+): JSX.Element {
+  const {
+    name,
+    value,
+    children,
+    onChange,
+    label,
+    className,
+    variant = 'default',
+    placement = 'bottom',
+  } = props;
   const childrenArray = React.Children.toArray(
     children,
   ) as React.ReactElement[];
   // Find the selected option's children element
-  const selectedOption = childrenArray.find((elm) => elm.props.value === value)
-    ?.props.children;
+  const selectedOptionChildren = childrenArray.find(
+    (elm) => elm.props.value === value,
+  )?.props.children;
   return (
     <Listbox value={value} onChange={onChange}>
       {({ open }) => (
@@ -63,9 +68,10 @@ export function Select<T extends string | number = string>({
                   `focus-visible:outline-none relative w-full cursor-default rounded py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:ring-primary-700`,
                   VARIANT_CLASSES[variant],
                 )}
+                aria-label={props['aria-label']}
               >
                 <span className={childrenWrapper}>
-                  {selectedOption || name || value}
+                  {selectedOptionChildren || name || value}
                 </span>
                 <span
                   className={clsx(

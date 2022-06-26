@@ -56,6 +56,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
             onChange={handleChange}
             className="w-32"
             placement="top"
+            aria-label="Mode selector"
           >
             <Select.Option value="light">
               <IconSun size={16} />
