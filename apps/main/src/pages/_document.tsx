@@ -26,7 +26,7 @@ class MyDocument extends Document {
             content="Chirpy is a privacy-friendly, customizable 
 and open-source Disqus alternate."
           />
-          <meta name="copyright" content="Chirpy Labs" />
+          <meta name="copyright" content="Chirpy Information Technology LLC" />
           <meta
             name="keywords"
             content="comment system, privacy-friendly, customizable, open-source"

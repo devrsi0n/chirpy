@@ -5,6 +5,7 @@ import * as React from 'react';
 import { IconButton } from '$/components/button';
 import { IconMenu, IconX } from '$/components/icons';
 import { useClickOutside } from '$/hooks/use-click-outside';
+import { useFrozeBodyScroll } from '$/hooks/use-froze-scroll';
 import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { isSSRMode } from '$/utilities/env';
 
@@ -74,13 +75,7 @@ export function SideMenu({
   }, [position]);
   const [isAnimationEnd, setIsAnimationEnd] = React.useState(true);
 
-  useIsomorphicLayoutEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.removeProperty('overflow');
-    }
-  }, [isOpen]);
+  useFrozeBodyScroll(isOpen);
 
   return (
     <m.nav
