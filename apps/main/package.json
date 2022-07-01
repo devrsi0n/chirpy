@@ -131,7 +131,7 @@
     "@urql/devtools": "2.0.3",
     "@urql/storybook-addon": "1.0.9",
     "babel-loader": "8.2.5",
-    "chromatic": "6.6.2",
+    "chromatic": "6.7.0",
     "color-convert": "2.0.1",
     "css-loader": "6.7.1",
     "dotenv": "16.0.1",
