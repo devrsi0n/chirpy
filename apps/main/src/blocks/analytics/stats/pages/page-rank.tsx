@@ -2,7 +2,11 @@ import clsx from 'clsx';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
 
-import { IconMessageSquare, IconFile, IconExternalLink } from '$/components/icons';
+import {
+  IconMessageSquare,
+  IconFile,
+  IconExternalLink,
+} from '$/components/icons';
 import { Link } from '$/components/link';
 import { usePrevious } from '$/hooks/use-previous';
 import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '$/lib/constants';
@@ -44,7 +48,11 @@ export function PageRank(props: PageRankProps) {
 
   const fetchPages = () => {
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${props.apiPath}`, props.site, props.query)
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/${props.apiPath}`,
+        props.site,
+        props.query,
+      )
       .then((res) => {
         setPages(res);
         setLoading(false);
@@ -72,9 +80,16 @@ export function PageRank(props: PageRankProps) {
         </div>
       )}
       <FadeIn show={!loading} className="flex-grow">
-        <List pages={pages} query={props.query} apiPath={props.apiPath} site={props.site} />
+        <List
+          pages={pages}
+          query={props.query}
+          apiPath={props.apiPath}
+          site={props.site}
+        />
       </FadeIn>
-      {!loading && <MoreLink site={props.site} list={pages!} endpoint="pages" />}
+      {!loading && (
+        <MoreLink site={props.site} list={pages!} endpoint="pages" />
+      )}
     </LazyLoader>
   );
 }
@@ -111,10 +126,13 @@ function List(props: ListProps) {
           <span>Page url</span>
           <div className="text-right">
             <span className="w-30 inline-block">{label()}</span>
-            {showConversionRate() && <span className="inline-block w-20">CR</span>}
+            {showConversionRate() && (
+              <span className="inline-block w-20">CR</span>
+            )}
           </div>
         </div>
 
+        {/* @ts-ignore */}
         <FlipMove>
           <div>
             {props.pages?.map((page) => (
@@ -146,17 +164,33 @@ function Page({ page, site, pages, showConversionRate }: PageProps) {
   const maxWidthDeduction = showConversionRate ? '10rem' : '5rem';
 
   return (
-    <div className="my-1 flex items-center justify-between text-sm" key={page.name}>
-      <Bar count={page.count} all={pages} color="orange" maxWidthDeduction={maxWidthDeduction}>
+    <div
+      className="my-1 flex items-center justify-between text-sm"
+      key={page.name}
+    >
+      <Bar
+        count={page.count}
+        all={pages}
+        color="orange"
+        maxWidthDeduction={maxWidthDeduction}
+      >
         <PageLink name={page.name} externalLink={externalLink} />
       </Bar>
       <ViewNumber>{numberFormatter(page.count)}</ViewNumber>
-      {showConversionRate && <ViewNumber>{numberFormatter(page.conversion_rate)}%</ViewNumber>}
+      {showConversionRate && (
+        <ViewNumber>{numberFormatter(page.conversion_rate)}%</ViewNumber>
+      )}
     </div>
   );
 }
 
-function PageLink({ name, externalLink }: { name: string; externalLink: string }): JSX.Element {
+function PageLink({
+  name,
+  externalLink,
+}: {
+  name: string;
+  externalLink: string;
+}): JSX.Element {
   const isCommentWidget = name.startsWith(WIDGET_COMMENT_PATH);
   return (
     <span className="group relative flex items-center space-x-1 break-all px-2 py-1.5">
@@ -170,7 +204,11 @@ function PageLink({ name, externalLink }: { name: string; externalLink: string }
           className=" inline-flex items-center space-x-1 text-gray-1200 hover:underline"
           variant="plain"
         >
-          {isCommentWidget ? <IconMessageSquare size={14} /> : <IconFile size={14} />}
+          {isCommentWidget ? (
+            <IconMessageSquare size={14} />
+          ) : (
+            <IconFile size={14} />
+          )}
           <span className="max-w-sm md:truncate">
             {isCommentWidget ? name.slice(WIDGET_COMMENT_PATH.length) : name}
           </span>

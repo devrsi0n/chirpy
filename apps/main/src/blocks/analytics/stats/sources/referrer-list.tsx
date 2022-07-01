@@ -25,8 +25,15 @@ interface LinkOptionProps {
   query: URLSearchParams;
 }
 
-function LinkOption({ disabled, children, query, ...restProps }: LinkOptionProps) {
-  const url = new URL(location.origin + location.pathname + '?' + query.toString()).href;
+function LinkOption({
+  disabled,
+  children,
+  query,
+  ...restProps
+}: LinkOptionProps) {
+  const url = new URL(
+    location.origin + location.pathname + '?' + query.toString(),
+  ).href;
   return disabled ? (
     <span {...restProps}>{children}</span>
   ) : (
@@ -51,12 +58,16 @@ interface ReferrersState {
   loading: boolean;
 }
 
-export default class Referrers extends React.Component<ReferrersProps, ReferrersState> {
+export default class Referrers extends React.Component<
+  ReferrersProps,
+  ReferrersState
+> {
   state: ReferrersState = { loading: true, referrers: null };
 
   onVisible = () => {
     this.fetchReferrers();
-    if (this.props.timer) this.props.timer.onTick(this.fetchReferrers.bind(this));
+    if (this.props.timer)
+      this.props.timer.onTick(this.fetchReferrers.bind(this));
   };
 
   componentDidUpdate(prevProps: ReferrersProps) {
@@ -86,7 +97,9 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
           { show_noref: this.showNoRef() },
         )
         .then((res) => res.search_terms || res.referrers)
-        .then((referrers) => this.setState({ loading: false, referrers: referrers }));
+        .then((referrers) =>
+          this.setState({ loading: false, referrers: referrers }),
+        );
     } else if (this.props.query.filters.goal) {
       api
         .getStats(
@@ -97,9 +110,14 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
         .then((res) => this.setState({ loading: false, referrers: res }));
     } else {
       api
-        .getStats(`/api/stats/${ANALYTICS_DOMAIN}/referrers`, this.props.site, this.props.query, {
-          show_noref: this.showNoRef(),
-        })
+        .getStats(
+          `/api/stats/${ANALYTICS_DOMAIN}/referrers`,
+          this.props.site,
+          this.props.query,
+          {
+            show_noref: this.showNoRef(),
+          },
+        )
         .then((res) => this.setState({ loading: false, referrers: res }));
     }
   }
@@ -137,7 +155,10 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
     query.set('referrer', referrer.name);
 
     return (
-      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
+      <div
+        className="my-1 flex items-center justify-between text-sm"
+        key={referrer.name}
+      >
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
@@ -163,8 +184,12 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
             {this.renderExternalLink(referrer)}
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200">{numberFormatter(referrer.count)}</span>
-        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
+        <span className="font-medium dark:text-gray-200">
+          {numberFormatter(referrer.count)}
+        </span>
+        {this.showConversionRate() && (
+          <ViewNumber>{referrer.conversion_rate}%</ViewNumber>
+        )}
       </div>
     );
   }
@@ -189,10 +214,12 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
             <span>Referrer</span>
             <div className="text-right">
               <span className="inline-block w-20">{this.label()}</span>
-              {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
+              {this.showConversionRate() && (
+                <span className="inline-block w-20">CR</span>
+              )}
             </div>
           </div>
-
+          {/* @ts-ignore */}
           <FlipMove className="flex-grow">
             {this.state.referrers!.map(this.renderReferrer.bind(this))}
           </FlipMove>
@@ -225,7 +252,10 @@ export default class Referrers extends React.Component<ReferrersProps, Referrers
           styles['stats-item'],
         )}
       >
-        <LazyLoader onVisible={this.onVisible} className="flex flex-grow flex-col">
+        <LazyLoader
+          onVisible={this.onVisible}
+          className="flex flex-grow flex-col"
+        >
           <h3 className={cardTitle}>Top Referrers</h3>
           {this.state.loading && (
             <div className={clsx('mx-auto mt-44', styles.loading)}>
