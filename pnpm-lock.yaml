@@ -215,7 +215,7 @@ importers:
       next-mdx-remote: 3.0.8
       next-plausible: 3.2.0
       next-themes: 0.2.0
-      nodemailer: 6.7.5
+      nodemailer: 6.7.6
       postcss: 8.4.14
       postcss-flexbugs-fixes: 5.0.2
       postcss-loader: 7.0.0
@@ -288,13 +288,13 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       next: 12.2.0_vw6lqu5akgozotmk76o25gzoxq
-      next-auth: 4.7.0_sefvxjser5il3hykbaod5kfmre
+      next-auth: 4.7.0_ibk74344frpbgai2qebyob7ezi
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.2.0_24lkarzjpo3wcmj2o6qyrkug4y
       next-themes: 0.2.0_24lkarzjpo3wcmj2o6qyrkug4y
-      nodemailer: 6.7.5
+      nodemailer: 6.7.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
@@ -15497,7 +15497,7 @@ packages:
       type-fest: 0.4.1
     dev: false
 
-  /next-auth/4.7.0_sefvxjser5il3hykbaod5kfmre:
+  /next-auth/4.7.0_ibk74344frpbgai2qebyob7ezi:
     resolution: {integrity: sha512-boXSIzHvCyNq1Jthi24LLnx12iKBsqsMxUKm5qq9alkfhVMeIRUR/wKP0FPSGc1s9WcGXMS3NmKQfADCEb0wow==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
@@ -15512,7 +15512,7 @@ packages:
       '@panva/hkdf': 1.0.2
       cookie: 0.4.2
       jose: 4.8.3
-      nodemailer: 6.7.5
+      nodemailer: 6.7.6
       oauth: 0.9.15
       openid-client: 5.1.7
       preact: 10.8.2
@@ -15735,8 +15735,8 @@ packages:
   /node-releases/2.0.5:
     resolution: {integrity: sha512-U9h1NLROZTq9uE1SNffn6WuPDg8icmi3ns4rEl/oTfIle4iLjTliCzgTsbaIFMq/Xn078/lfY/BL0GWZ+psK4Q==}
 
-  /nodemailer/6.7.5:
-    resolution: {integrity: sha512-6VtMpwhsrixq1HDYSBBHvW0GwiWawE75dS3oal48VqRhUvKJNnKnJo2RI/bCVQubj1vgrgscMNW4DHaD6xtMCg==}
+  /nodemailer/6.7.6:
+    resolution: {integrity: sha512-/6KF/umU7r7X21Y648/yiRLrgkfz0dmpyuo4BfgYWIpnT/jCbkPTvegMfxCsDAu+O810p2L1BGXieMTPp3nJVA==}
     engines: {node: '>=6.0.0'}
     dev: false
 
