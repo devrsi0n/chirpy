@@ -97,14 +97,14 @@ importers:
 
   apps/emails:
     specifiers:
-      '@maizzle/cli': 1.4.0
+      '@maizzle/cli': 1.5.1
       '@maizzle/framework': 3.7.3
       autoprefixer: 10.4.7
       glob: 8.0.3
       postcss: 8.4.14
       tailwindcss: 2.2.19
     dependencies:
-      '@maizzle/cli': 1.4.0
+      '@maizzle/cli': 1.5.1
       '@maizzle/framework': 3.7.3_ytpcj3pormqwlcqyb7cll7uaxy
       autoprefixer: 10.4.7_postcss@8.4.14
       glob: 8.0.3
@@ -3470,14 +3470,14 @@ packages:
       '@jridgewell/resolve-uri': 3.0.8
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@maizzle/cli/1.4.0:
-    resolution: {integrity: sha512-bZ5/Z/NV2dti6JVyTsRch+c0ophe765lYofEqQfUU8EghytdmeL+QmKY5Ez2bUcNyq446kwB26sWon/zKikimQ==}
+  /@maizzle/cli/1.5.1:
+    resolution: {integrity: sha512-8Ya5A0yeEHcgCDJTKdRG4Z0EMxH/eZiDJ5lCYj3j2JcgEp1RA/RSMcNkXpIEe6+CczmhE+h1xwa+51YZWaU6Uw==}
     hasBin: true
     dependencies:
       chalk: 4.1.2
-      commander: 7.2.0
+      commander: 9.3.0
       execa: 5.1.1
-      fs-extra: 9.1.0
+      fs-extra: 10.1.0
       import-cwd: 3.0.0
       inquirer: 8.2.4
       np: 7.6.2
@@ -7694,6 +7694,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -8697,11 +8698,6 @@ packages:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
     engines: {node: '>= 6'}
 
-  /commander/7.2.0:
-    resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
-    engines: {node: '>= 10'}
-    dev: false
-
   /commander/8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
     engines: {node: '>= 12'}
@@ -8709,7 +8705,6 @@ packages:
   /commander/9.3.0:
     resolution: {integrity: sha512-hv95iU5uXPbK83mjrJKuZyFM/LBAoCV/XhVGkS5Je6tl7sxr6A0ITMw5WoRV46/UaJ46Nllm3Xt7IaJhXTIkzw==}
     engines: {node: ^12.20.0 || >=14}
-    dev: true
 
   /common-path-prefix/3.0.0:
     resolution: {integrity: sha512-QE33hToZseCH3jS0qN96O/bSh3kaw/h+Tq7ngyY9eWDUnTlTNUyqfqvCXioLe5Na5jFsL78ra/wuBU4iuEgd4w==}
@@ -11259,6 +11254,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -15438,7 +15434,7 @@ packages:
     dev: true
 
   /mute-stream/0.0.7:
-    resolution: {integrity: sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=}
+    resolution: {integrity: sha512-r65nCZhrbXXb6dXOACihYApHw2Q6pV0M3V0PSxd74N0+D8nzAdEAITq2oAjA1jVnKI+tGvEBUpqiMh0+rW6zDQ==}
     dev: false
 
   /mute-stream/0.0.8:
@@ -15446,6 +15442,7 @@ packages:
 
   /nan/2.16.0:
     resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+    requiresBuild: true
     dev: true
     optional: true
 
