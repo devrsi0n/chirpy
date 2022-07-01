@@ -48,6 +48,9 @@
         "@tensorflow/tfjs-core": "3",
         "@tensorflow/tfjs-converter": "3"
       }
+    },
+    "patchedDependencies": {
+      "react-flip-move@3.0.4": "patches/react-flip-move@3.0.4.patch"
     }
   },
   "renovate": {

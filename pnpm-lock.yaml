@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  react-flip-move@3.0.4:
+    hash: 4vqqtxpblx3txl6pkcft5ke2i4
+    path: patches/react-flip-move@3.0.4.patch
+
 importers:
 
   .:
@@ -294,7 +299,7 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
       react-flatpickr: 3.10.12_react@18.2.0
-      react-flip-move: 3.0.4_biqbaboplfbrettd7655fr4n2y
+      react-flip-move: 3.0.4_4vqqtxpblx3txl6pkcft5ke2i4_biqbaboplfbrettd7655fr4n2y
       react-is: 18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
       reading-time: 1.5.0
@@ -18341,7 +18346,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-flip-move/3.0.4_biqbaboplfbrettd7655fr4n2y:
+  /react-flip-move/3.0.4_4vqqtxpblx3txl6pkcft5ke2i4_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-HyUVv9g3t/BS7Yz9HgrtYSWyRNdR2F81nkj+C5iRY675AwlqCLB5JU9mnZWg0cdVz7IM4iquoyZx70vzZv3Z8Q==}
     peerDependencies:
       react: '>=16.3.x || 18'
@@ -18350,6 +18355,7 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
+    patched: true
 
   /react-inspector/5.1.1_react@18.2.0:
     resolution: {integrity: sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==}
