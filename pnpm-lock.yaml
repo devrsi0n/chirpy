@@ -235,7 +235,7 @@ importers:
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
       sass: 1.53.0
-      sass-loader: 13.0.0
+      sass-loader: 13.0.2
       shiki: 0.10.1
       storybook-addon-next: 1.6.6
       style-loader: 3.3.1
@@ -383,7 +383,7 @@ importers:
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
       sass: 1.53.0
-      sass-loader: 13.0.0_sass@1.53.0+webpack@5.73.0
+      sass-loader: 13.0.2_sass@1.53.0+webpack@5.73.0
       storybook-addon-next: 1.6.6_qvgzujx7tye53mp2fh7ylzl5lm
       style-loader: 3.3.1_webpack@5.73.0
       tailwindcss: 3.1.2
@@ -18912,8 +18912,8 @@ packages:
       webpack: 5.73.0
     dev: true
 
-  /sass-loader/13.0.0_sass@1.53.0+webpack@5.73.0:
-    resolution: {integrity: sha512-IHCFecI+rbPvXE2zO/mqdVFe8MU7ElGrwga9hh2H65Ru4iaBJAMRteum1c4Gsxi9Cq1FOtTEDd6+/AEYuQDM4Q==}
+  /sass-loader/13.0.2_sass@1.53.0+webpack@5.73.0:
+    resolution: {integrity: sha512-BbiqbVmbfJaWVeOOAu2o7DhYWtcNmTfvroVgFXa6k2hHheMxNAeDHLNoDy/Q5aoaVlz0LH+MbMktKwm9vN/j8Q==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       fibers: '>= 3.1.0'
