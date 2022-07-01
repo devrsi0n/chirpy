@@ -77,7 +77,7 @@ importers:
       '@chirpy-dev/tsconfigs': workspace:*
       '@testing-library/cypress': 8.0.3
       '@types/node': 16.11.41
-      cypress: 10.2.0
+      cypress: 10.3.0
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
@@ -86,9 +86,9 @@ importers:
     dependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
-      '@testing-library/cypress': 8.0.3_cypress@10.2.0
+      '@testing-library/cypress': 8.0.3_cypress@10.3.0
       '@types/node': 16.11.41
-      cypress: 10.2.0
+      cypress: 10.3.0
       dotenv: 16.0.1
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
@@ -5533,7 +5533,7 @@ packages:
       - seedrandom
     dev: false
 
-  /@testing-library/cypress/8.0.3_cypress@10.2.0:
+  /@testing-library/cypress/8.0.3_cypress@10.3.0:
     resolution: {integrity: sha512-nY2YaSbmuPo5k6kL0iLj/pGPPfka3iwb3kpTx8QN/vOCns92Saz9wfACqB8FJzcR7+lfA4d5HUOWqmTddBzczg==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -5541,7 +5541,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.18.6
       '@testing-library/dom': 8.14.0
-      cypress: 10.2.0
+      cypress: 10.3.0
     dev: false
 
   /@testing-library/dom/8.14.0:
@@ -6292,7 +6292,7 @@ packages:
     resolution: {integrity: sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==}
     requiresBuild: true
     dependencies:
-      '@types/node': 16.11.41
+      '@types/node': 18.0.0
     dev: false
     optional: true
 
@@ -7694,6 +7694,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -8911,7 +8912,7 @@ packages:
     requiresBuild: true
 
   /core-util-is/1.0.2:
-    resolution: {integrity: sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=}
+    resolution: {integrity: sha512-3lqz5YjWTYnW6dlDa5TLaTCcShfar1e40rmcJVwCBJC6mWlFuj0eCHIElmG1g5kyuJ/GD+8Wn4FFCcz4gJPfaQ==}
     dev: false
 
   /core-util-is/1.0.3:
@@ -9275,8 +9276,8 @@ packages:
     resolution: {integrity: sha512-NJGVKPS81XejHcLhaLJS7plab0fK3slPh11mESeeDq2W4ZI5kUKK/LRRdVDvjJseojbPB7ZwjnyOybg3Igea/A==}
     dev: true
 
-  /cypress/10.2.0:
-    resolution: {integrity: sha512-+i9lY5ENlfi2mJwsggzR+XASOIgMd7S/Gd3/13NCpv596n3YSplMAueBTIxNLcxDpTcIksp+9pM3UaDrJDpFqA==}
+  /cypress/10.3.0:
+    resolution: {integrity: sha512-txkQWKzvBVnWdCuKs5Xc08gjpO89W2Dom2wpZgT9zWZT5jXxqPIxqP/NC1YArtkpmp3fN5HW8aDjYBizHLUFvg==}
     engines: {node: '>=12.0.0'}
     hasBin: true
     requiresBuild: true
@@ -11259,6 +11260,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -15446,6 +15448,7 @@ packages:
 
   /nan/2.16.0:
     resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -17766,7 +17769,7 @@ packages:
     dev: true
 
   /proxy-from-env/1.0.0:
-    resolution: {integrity: sha1-M8UDmPcOp+uW0h97gXYwpVeRx+4=}
+    resolution: {integrity: sha512-F2JHgJQ1iqwnHDcQjVBsq3n/uoaFL+iPW/eAeL7kVxy/2RrWaN4WroKjjvbsoRtv0ftelNyC01bjRhn/bhcf4A==}
     dev: false
 
   /prr/1.0.1:
@@ -21376,7 +21379,7 @@ packages:
     engines: {node: '>= 0.8'}
 
   /verror/1.10.0:
-    resolution: {integrity: sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA=}
+    resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
     engines: {'0': node >=0.6.0}
     dependencies:
       assert-plus: 1.0.0
