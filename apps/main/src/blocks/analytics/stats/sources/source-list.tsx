@@ -82,9 +82,14 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   fetchReferrers = () => {
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/sources`, this.props.site, this.props.query, {
-        show_noref: this.showNoRef(),
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/sources`,
+        this.props.site,
+        this.props.query,
+        {
+          show_noref: this.showNoRef(),
+        },
+      )
       .then((res) => this.setState({ loading: false, referrers: res }));
   };
 
@@ -92,7 +97,10 @@ class AllSources extends React.Component<AllSourcesProps> {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
+      <div
+        className="my-1 flex items-center justify-between text-sm"
+        key={referrer.name}
+      >
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
@@ -117,7 +125,9 @@ class AllSources extends React.Component<AllSourcesProps> {
           </span>
         </Bar>
         <ViewNumber>{numberFormatter(referrer.count)}</ViewNumber>
-        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
+        {this.showConversionRate() && (
+          <ViewNumber>{referrer.conversion_rate}%</ViewNumber>
+        )}
       </div>
     );
   }
@@ -143,13 +153,22 @@ class AllSources extends React.Component<AllSourcesProps> {
               <span>Source</span>
               <div className="text-right">
                 <span className="inline-block w-20">{this.label()}</span>
-                {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
+                {this.showConversionRate() && (
+                  <span className="inline-block w-20">CR</span>
+                )}
               </div>
             </div>
+            {/* @ts-ignore */}
             <FlipMove className="flex-grow">
-              {this.state.referrers.map((element) => this.renderReferrer(element))}
+              {this.state.referrers.map((element) =>
+                this.renderReferrer(element),
+              )}
             </FlipMove>
-            <MoreLink site={this.props.site} list={this.state.referrers} endpoint="sources" />
+            <MoreLink
+              site={this.props.site}
+              list={this.state.referrers}
+              endpoint="sources"
+            />
           </>
         ) : (
           <EmptyState />
@@ -160,7 +179,10 @@ class AllSources extends React.Component<AllSourcesProps> {
 
   render() {
     return (
-      <LazyLoader className="flex flex-grow flex-col" onVisible={this.onVisible}>
+      <LazyLoader
+        className="flex flex-grow flex-col"
+        onVisible={this.onVisible}
+      >
         {this.state.loading && (
           <div className="loading mx-auto mt-44">
             <div></div>
@@ -197,7 +219,10 @@ class UTMSources extends React.Component<UTMSourcesProps> {
   }
 
   componentDidUpdate(prevProps: UTMSourcesProps) {
-    if (this.props.query !== prevProps.query || this.props.tab !== prevProps.tab) {
+    if (
+      this.props.query !== prevProps.query ||
+      this.props.tab !== prevProps.tab
+    ) {
       this.setState({ loading: true, referrers: null });
       this.fetchReferrers();
     }
@@ -214,9 +239,14 @@ class UTMSources extends React.Component<UTMSourcesProps> {
   fetchReferrers = () => {
     const endpoint = UTM_TAGS[this.props.tab].endpoint;
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${endpoint}`, this.props.site, this.props.query, {
-        show_noref: this.showNoRef(),
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/${endpoint}`,
+        this.props.site,
+        this.props.query,
+        {
+          show_noref: this.showNoRef(),
+        },
+      )
       .then((res) => this.setState({ loading: false, referrers: res }));
   };
 
@@ -224,7 +254,10 @@ class UTMSources extends React.Component<UTMSourcesProps> {
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="my-1 flex items-center justify-between text-sm" key={referrer.name}>
+      <div
+        className="my-1 flex items-center justify-between text-sm"
+        key={referrer.name}
+      >
         <Bar
           count={referrer.count}
           all={this.state.referrers!}
@@ -242,7 +275,9 @@ class UTMSources extends React.Component<UTMSourcesProps> {
           </span>
         </Bar>
         <ViewNumber>{numberFormatter(referrer.count)}</ViewNumber>
-        {this.showConversionRate() && <ViewNumber>{referrer.conversion_rate}%</ViewNumber>}
+        {this.showConversionRate() && (
+          <ViewNumber>{referrer.conversion_rate}%</ViewNumber>
+        )}
       </div>
     );
   };
@@ -266,10 +301,12 @@ class UTMSources extends React.Component<UTMSourcesProps> {
           <span>{UTM_TAGS[this.props.tab].label}</span>
           <div className="text-right">
             <span className="inline-block w-20">{this.label()}</span>
-            {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
+            {this.showConversionRate() && (
+              <span className="inline-block w-20">CR</span>
+            )}
           </div>
         </div>
-
+        {/* @ts-ignore */}
         <FlipMove className="flex-grow">
           {this.state.referrers.map((element) => this.renderReferrer(element))}
         </FlipMove>
