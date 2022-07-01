@@ -223,7 +223,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       react-error-boundary: 3.1.4
-      react-flatpickr: 3.10.12
+      react-flatpickr: 3.10.13
       react-flip-move: 3.0.4
       react-is: 18.2.0
       react-ssr-prepass: 1.5.0
@@ -298,7 +298,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
-      react-flatpickr: 3.10.12_react@18.2.0
+      react-flatpickr: 3.10.13_react@18.2.0
       react-flip-move: 3.0.4_4vqqtxpblx3txl6pkcft5ke2i4_biqbaboplfbrettd7655fr4n2y
       react-is: 18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
@@ -18107,8 +18107,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-flatpickr/3.10.12_react@18.2.0:
-    resolution: {integrity: sha512-NYhUg3QE9K1QpHXLxR7HuWldnNbVWa6lgiZBlWu0HDsX3IWs/hVJ5q1JzM0/CNLJmm2blUEdudHwbyBNezynBg==}
+  /react-flatpickr/3.10.13_react@18.2.0:
+    resolution: {integrity: sha512-4m+K1K8jhvRFI8J/AHmQfA5hLALzhebEtEK8mLevXjX24MV3u502crzBn+EGFIBOfNUtrL5PId9FsGwgtuz/og==}
     peerDependencies:
       react: '>=16, <=18 || 18'
     dependencies:
