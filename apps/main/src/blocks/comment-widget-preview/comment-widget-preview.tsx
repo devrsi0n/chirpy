@@ -15,11 +15,12 @@ import { CommentTrees } from '../comment-trees';
 import { RTEValue } from '../rich-text-editor';
 import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';
-import { PAGE_ID, PREVIEW_COMMENTS, PROJECT_ID } from './preview-data';
+import { getPreviewComments, PAGE_ID, PROJECT_ID } from './preview-data';
 
 export interface CommentWidgetPreviewProps
   extends Pick<CommentContextType, 'hideCommentTimeline'> {
   rtePlaceholder?: string;
+  buildDate: string;
 }
 
 /**
@@ -43,7 +44,7 @@ function CommentWidgetPreviewInternal(
   const { data } = useCurrentUser();
   const [previewComments, setPreviewComments] = React.useState<
     CommentLeafType[]
-  >(PREVIEW_COMMENTS as CommentLeafType[]);
+  >(() => getPreviewComments(props.buildDate));
   const createAComment: UseCreateAComment = React.useCallback(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {

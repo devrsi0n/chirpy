@@ -1,6 +1,10 @@
+import { GetStaticProps } from 'next';
 import * as React from 'react';
 
-import { HomeCommentWidgetPreview } from '$/blocks/comment-widget-preview';
+import {
+  HomeCommentWidgetPreview,
+  HomeCommentWidgetPreviewProps,
+} from '$/blocks/comment-widget-preview';
 import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
 import { Pricing } from '$/blocks/pricing';
@@ -9,7 +13,9 @@ import { IconArrowRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 
-function Home(): JSX.Element {
+type HomeProps = HomeCommentWidgetPreviewProps;
+
+export default function Home({ buildDate }: HomeProps): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="">
       <section className="flex min-h-full flex-col items-center space-y-24">
@@ -43,14 +49,22 @@ function Home(): JSX.Element {
           </div>
         </div>
         <Features />
-        <HomeCommentWidgetPreview />
+        <HomeCommentWidgetPreview buildDate={buildDate} />
         <Pricing id="pricing" />
       </section>
     </SiteLayout>
   );
 }
 
-export default Home;
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  return {
+    props: {
+      // We need a fixed date to fix SSR hydration mismatch error.
+      // Used by predefined comments in comment-widget-preview
+      buildDate: new Date().toISOString(),
+    },
+  };
+};
 
 export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
