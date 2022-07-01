@@ -235,7 +235,7 @@ importers:
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
       sass: 1.53.0
-      sass-loader: 13.0.0
+      sass-loader: 13.0.2
       shiki: 0.10.1
       storybook-addon-next: 1.6.6
       style-loader: 3.3.1
@@ -383,7 +383,7 @@ importers:
       require-from-string: 2.0.2
       resolve-url-loader: 5.0.0
       sass: 1.53.0
-      sass-loader: 13.0.0_sass@1.53.0+webpack@5.73.0
+      sass-loader: 13.0.2_sass@1.53.0+webpack@5.73.0
       storybook-addon-next: 1.6.6_qvgzujx7tye53mp2fh7ylzl5lm
       style-loader: 3.3.1_webpack@5.73.0
       tailwindcss: 3.1.2
@@ -7694,6 +7694,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
@@ -11259,6 +11260,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -15446,6 +15448,7 @@ packages:
 
   /nan/2.16.0:
     resolution: {integrity: sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -18870,8 +18873,8 @@ packages:
       webpack: 5.73.0
     dev: true
 
-  /sass-loader/13.0.0_sass@1.53.0+webpack@5.73.0:
-    resolution: {integrity: sha512-IHCFecI+rbPvXE2zO/mqdVFe8MU7ElGrwga9hh2H65Ru4iaBJAMRteum1c4Gsxi9Cq1FOtTEDd6+/AEYuQDM4Q==}
+  /sass-loader/13.0.2_sass@1.53.0+webpack@5.73.0:
+    resolution: {integrity: sha512-BbiqbVmbfJaWVeOOAu2o7DhYWtcNmTfvroVgFXa6k2hHheMxNAeDHLNoDy/Q5aoaVlz0LH+MbMktKwm9vN/j8Q==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       fibers: '>= 3.1.0'
