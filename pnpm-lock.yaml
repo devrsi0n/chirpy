@@ -198,7 +198,7 @@ importers:
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6
-      graphql-ws: 5.9.0
+      graphql-ws: 5.9.1
       gray-matter: 4.0.3
       html-loader: 3.1.2
       intersection-observer: 0.12.2
@@ -282,7 +282,7 @@ importers:
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6_graphql@16.5.0
-      graphql-ws: 5.9.0_graphql@16.5.0
+      graphql-ws: 5.9.1_graphql@16.5.0
       gray-matter: 4.0.3
       html-loader: 3.1.2_webpack@5.73.0
       jsonwebtoken: 8.5.1
@@ -3069,7 +3069,7 @@ packages:
       dset: 3.1.2
       extract-files: 11.0.0
       graphql: 16.5.0
-      graphql-ws: 5.9.0_graphql@16.5.0
+      graphql-ws: 5.9.1_graphql@16.5.0
       isomorphic-ws: 5.0.0_ws@8.8.0
       meros: 1.2.0_@types+node@16.11.41
       sync-fetch: 0.4.1
@@ -12074,8 +12074,8 @@ packages:
       graphql: 16.5.0
       tslib: 2.4.0
 
-  /graphql-ws/5.9.0_graphql@16.5.0:
-    resolution: {integrity: sha512-CXv0l0nI1bgChwl4Rm+BqNOAKwL/C9T2N8RfmTkhQ38YLFdUXCi2WNW4oFp8BJP+t75nCLzjHHgR04sP1oF02w==}
+  /graphql-ws/5.9.1_graphql@16.5.0:
+    resolution: {integrity: sha512-mL/SWGBwIT9Meq0NlfS55yXXTOeWPMbK7bZBEZhFu46bcGk1coTx2Sdtzxdk+9yHWngD+Fk1PZDWaAutQa9tpw==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: '>=0.11 <=16 || 16'
