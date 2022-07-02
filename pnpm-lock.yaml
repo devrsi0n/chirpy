@@ -120,7 +120,7 @@ importers:
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@geist-ui/icons': 1.0.2
-      '@graphql-codegen/cli': 2.6.2
+      '@graphql-codegen/cli': 2.6.4
       '@graphql-codegen/introspection': 2.1.1
       '@graphql-codegen/near-operation-file-preset': 2.2.14
       '@graphql-codegen/typed-document-node': 2.2.13
@@ -322,7 +322,7 @@ importers:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/service-worker': link:../service-worker
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
-      '@graphql-codegen/cli': 2.6.2_fvj2l2crifdntnfxzj7zonpxvm
+      '@graphql-codegen/cli': 2.6.4_fvj2l2crifdntnfxzj7zonpxvm
       '@graphql-codegen/introspection': 2.1.1_graphql@16.5.0
       '@graphql-codegen/near-operation-file-preset': 2.2.14_graphql@16.5.0
       '@graphql-codegen/typed-document-node': 2.2.13_graphql@16.5.0
@@ -2618,8 +2618,8 @@ packages:
       tslib: 2.3.1
     dev: true
 
-  /@graphql-codegen/cli/2.6.2_fvj2l2crifdntnfxzj7zonpxvm:
-    resolution: {integrity: sha512-UO75msoVgvLEvfjCezM09cQQqp32+mR8Ma1ACsBpr7nroFvHbgcu2ulx1cMovg4sxDBCsvd9Eq/xOOMpARUxtw==}
+  /@graphql-codegen/cli/2.6.4_fvj2l2crifdntnfxzj7zonpxvm:
+    resolution: {integrity: sha512-VNK5l4lRXOs3uueKkN4YKhO7ZldXaPw/6dZo4BnAzH2ip9XDroNJ0n+ESkbhSBd1bH6wVk3iCIzBfJOnfcsAcg==}
     hasBin: true
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
@@ -2643,10 +2643,7 @@ packages:
       common-tags: 1.8.2
       cosmiconfig: 7.0.1
       debounce: 1.2.1
-      dependency-graph: 0.11.0
       detect-indent: 6.1.0
-      glob: 7.2.3
-      globby: 11.1.0
       graphql: 16.5.0
       graphql-config: 4.3.1_fvj2l2crifdntnfxzj7zonpxvm
       inquirer: 8.2.4
@@ -2656,12 +2653,9 @@ packages:
       listr: 0.14.3
       listr-update-renderer: 0.5.0_listr@0.14.3
       log-symbols: 4.1.0
-      minimatch: 4.2.1
       mkdirp: 1.0.4
       string-env-interpolation: 1.0.1
       ts-log: 2.2.4
-      tslib: 2.3.1
-      valid-url: 1.0.9
       wrap-ansi: 7.0.0
       yaml: 1.10.2
       yargs: 17.5.1
@@ -21391,10 +21385,6 @@ packages:
     resolution: {integrity: sha512-jOWVmzVceKlVVdwjNSenT4PbGghU0SBIizAev8ofZVgivk/TVHXSbNL8LP6M3spZvkR9/QolkyJavGSX5Cs0UA==}
     engines: {node: '>=10'}
     dev: false
-
-  /valid-url/1.0.9:
-    resolution: {integrity: sha512-QQDsV8OnSf5Uc30CKSwG9lnhMPe6exHtTXLRYX8uMwKENy640pU+2BgBL0LRbDh/eYRahNCS7aewCx0wf3NYVA==}
-    dev: true
 
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
