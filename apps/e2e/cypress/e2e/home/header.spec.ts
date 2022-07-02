@@ -40,7 +40,7 @@ describe('Header', () => {
     cy.get('header')
       .findByRole('menuitem', { name: 'Log out' })
       .should('be.visible')
-      .click();
+      .click({ force: true });
     cy.get('header').findByText(testUser.name).should('not.exist');
   });
 });
