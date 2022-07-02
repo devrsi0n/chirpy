@@ -423,7 +423,7 @@ importers:
       eslint-plugin-jest: 26.5.3
       eslint-plugin-prettier: 4.0.0
       eslint-plugin-storybook: 0.5.12
-      eslint-plugin-unicorn: 42.0.0
+      eslint-plugin-unicorn: 43.0.0
       next: 12.2.0
       prettier: 2.7.1
       react: 18.2.0
@@ -438,7 +438,7 @@ importers:
       eslint-plugin-jest: 26.5.3_44zngjtdyhbqvf4iebeao3dile
       eslint-plugin-prettier: 4.0.0_xu6ewijrtliw5q5lksq5uixwby
       eslint-plugin-storybook: 0.5.12_b5e7v2qnwxfo6hmiq56u52mz3e
-      eslint-plugin-unicorn: 42.0.0_eslint@8.18.0
+      eslint-plugin-unicorn: 43.0.0_eslint@8.18.0
       next: 12.2.0_biqbaboplfbrettd7655fr4n2y
       prettier: 2.7.1
       react: 18.2.0
@@ -10703,11 +10703,11 @@ packages:
       - typescript
     dev: false
 
-  /eslint-plugin-unicorn/42.0.0_eslint@8.18.0:
-    resolution: {integrity: sha512-ixBsbhgWuxVaNlPTT8AyfJMlhyC5flCJFjyK3oKE8TRrwBnaHvUbuIkCM1lqg8ryYrFStL/T557zfKzX4GKSlg==}
-    engines: {node: '>=12'}
+  /eslint-plugin-unicorn/43.0.0_eslint@8.18.0:
+    resolution: {integrity: sha512-Z/6HX8yry+zAjo4jHHTAbe1rfniox7qgmCReGBfTc/CVgotfScaMCc4dtSSTHlJ+7Yix5o6LPXzwwpuGGFricg==}
+    engines: {node: '>=14.18'}
     peerDependencies:
-      eslint: '>=8.8.0'
+      eslint: '>=8.18.0'
     dependencies:
       '@babel/helper-validator-identifier': 7.18.6
       ci-info: 3.3.2
