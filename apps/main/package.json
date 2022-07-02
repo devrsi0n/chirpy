@@ -84,7 +84,7 @@
     "ws": "8.8.0"
   },
   "devDependencies": {
-    "@babel/core": "7.18.5",
+    "@babel/core": "7.18.6",
     "@chirpy-dev/comment-bootstrapper": "workspace:*",
     "@chirpy-dev/emails": "workspace:*",
     "@chirpy-dev/eslint-config": "workspace:*",
