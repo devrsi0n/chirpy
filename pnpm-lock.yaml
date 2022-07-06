@@ -215,7 +215,9 @@ importers:
       next-mdx-remote: 3.0.8
       next-plausible: 3.2.0
       next-themes: 0.2.0
-      nodemailer: 6.7.6
+      next-urql: 3.3.3
+      nodemailer: 6.7.5
+      patch-package: 6.4.7
       postcss: 8.4.14
       postcss-flexbugs-fixes: 5.0.2
       postcss-loader: 7.0.0
@@ -225,8 +227,6 @@ importers:
       react-error-boundary: 3.1.4
       react-flatpickr: 3.10.13
       react-flip-move: 3.0.4
-      react-is: 18.2.0
-      react-ssr-prepass: 1.5.0
       reading-time: 1.5.0
       rehype: 12.0.1
       rehype-autolink-headings: 6.1.1
@@ -292,16 +292,16 @@ importers:
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
-      next-plausible: 3.2.0_24lkarzjpo3wcmj2o6qyrkug4y
-      next-themes: 0.2.0_24lkarzjpo3wcmj2o6qyrkug4y
-      nodemailer: 6.7.6
+      next-plausible: 3.2.0_6mmgkiec7xkk52mcpbx2dejfl4
+      next-themes: 0.2.0_6mmgkiec7xkk52mcpbx2dejfl4
+      next-urql: 3.3.3_react@18.2.0+urql@2.2.2
+      nodemailer: 6.7.5
+      patch-package: 6.4.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 3.1.4_react@18.2.0
-      react-flatpickr: 3.10.13_react@18.2.0
-      react-flip-move: 3.0.4_4vqqtxpblx3txl6pkcft5ke2i4_biqbaboplfbrettd7655fr4n2y
-      react-is: 18.2.0
-      react-ssr-prepass: 1.5.0_react@18.2.0
+      react-flatpickr: 3.10.12_react@18.2.0
+      react-flip-move: 3.0.4_biqbaboplfbrettd7655fr4n2y
       reading-time: 1.5.0
       rehype: 12.0.1
       rehype-autolink-headings: 6.1.1
@@ -15470,8 +15470,19 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /next/12.2.0_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-B4j7D3SHYopLYx6/Ark0fenwIar9tEaZZFAaxmKjgcMMexhVJzB3jt7X+6wcdXPPMeUD6r09weUtnDpjox/vIA==}
+  /next-urql/3.3.3_react@18.2.0+urql@2.2.2:
+    resolution: {integrity: sha512-mKdpbvxW7FifHjupRKNjE1YuZxhLF+GlN/y1sARcUSEdrCv10dRkFGQl03p4UpWtdggCyZ5lOVBBaQGW7UNfiQ==}
+    peerDependencies:
+      react: '>=16.8.0 || 18'
+      urql: ^2.0.0
+    dependencies:
+      react: 18.2.0
+      react-ssr-prepass: 1.5.0_react@18.2.0
+      urql: 2.2.2_aez2jvt6lsvokp3l4ousdbdxf4
+    dev: false
+
+  /next/12.1.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-YGHDpyfgCfnT5GZObsKepmRnne7Kzp7nGrac07dikhutWQug7hHg85/+sPJ4ZW5Q2pDkb+n0FnmLkmd44htIJQ==}
     engines: {node: '>=12.22.0'}
     hasBin: true
     peerDependencies:
@@ -18006,6 +18017,7 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: true
 
   /react-merge-refs/1.1.0:
     resolution: {integrity: sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==}

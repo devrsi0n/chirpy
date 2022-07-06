@@ -5,6 +5,7 @@ import * as React from 'react';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { Text } from '$/components/text';
+import { isENVDev } from '$/server/utilities/env';
 
 export default function PlayGround(): JSX.Element {
   const { theme } = useTheme();
@@ -21,6 +22,7 @@ export default function PlayGround(): JSX.Element {
       />
       <Script
         src="/bootstrap/comment.js"
+        strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
     </SiteLayout>
