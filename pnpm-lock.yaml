@@ -4,6 +4,9 @@ patchedDependencies:
   react-flip-move@3.0.4:
     hash: 4vqqtxpblx3txl6pkcft5ke2i4
     path: patches/react-flip-move@3.0.4.patch
+  next-auth@4.8.0:
+    hash: prelgh56i36eapmqth22xuxwqe
+    path: patches/next-auth@4.8.0.patch
 
 importers:
 
@@ -201,6 +204,7 @@ importers:
       graphql-ws: 5.9.1
       gray-matter: 4.0.3
       html-loader: 3.1.2
+      https-proxy-agent: 5.0.1
       intersection-observer: 0.12.2
       jest: 28.1.2
       jest-environment-jsdom: 28.1.2
@@ -209,7 +213,7 @@ importers:
       msw: 0.42.1
       msw-storybook-addon: 1.6.3
       next: 12.2.0
-      next-auth: 4.7.0
+      next-auth: 4.8.0
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8
@@ -285,10 +289,11 @@ importers:
       graphql-ws: 5.9.1_graphql@16.5.0
       gray-matter: 4.0.3
       html-loader: 3.1.2_webpack@5.73.0
+      https-proxy-agent: 5.0.1
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       next: 12.2.0_zazhvxb5wdpfvem7m5mnvhb45a
-      next-auth: 4.7.0_ibk74344frpbgai2qebyob7ezi
+      next-auth: 4.8.0_prelgh56i36eapmqth22xuxwqe_ibk74344frpbgai2qebyob7ezi
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
@@ -15395,8 +15400,8 @@ packages:
       type-fest: 0.4.1
     dev: false
 
-  /next-auth/4.7.0_ibk74344frpbgai2qebyob7ezi:
-    resolution: {integrity: sha512-boXSIzHvCyNq1Jthi24LLnx12iKBsqsMxUKm5qq9alkfhVMeIRUR/wKP0FPSGc1s9WcGXMS3NmKQfADCEb0wow==}
+  /next-auth/4.8.0_prelgh56i36eapmqth22xuxwqe_ibk74344frpbgai2qebyob7ezi:
+    resolution: {integrity: sha512-7vN7akNsAEqV8w1cqZf71UFYw18zy/N5y3xEQz2k3Rju34n7z3+cwdNjGS0FVCoKi/s1wiN27z9ruwlOwiQNsg==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
       nodemailer: ^6.6.5
@@ -15419,6 +15424,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       uuid: 8.3.2
     dev: false
+    patched: true
 
   /next-compose-plugins/2.2.1:
     resolution: {integrity: sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==}
