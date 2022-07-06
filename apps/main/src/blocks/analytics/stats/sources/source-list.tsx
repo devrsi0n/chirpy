@@ -158,6 +158,7 @@ class AllSources extends React.Component<AllSourcesProps> {
                 )}
               </div>
             </div>
+            {/* @ts-ignore */}
             <FlipMove className="flex-grow">
               {this.state.referrers.map((element) =>
                 this.renderReferrer(element),
@@ -305,7 +306,7 @@ class UTMSources extends React.Component<UTMSourcesProps> {
             )}
           </div>
         </div>
-
+        {/* @ts-ignore */}
         <FlipMove className="flex-grow">
           {this.state.referrers.map((element) => this.renderReferrer(element))}
         </FlipMove>

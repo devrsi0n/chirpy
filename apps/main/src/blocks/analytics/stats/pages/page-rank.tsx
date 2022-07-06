@@ -132,6 +132,7 @@ function List(props: ListProps) {
           </div>
         </div>
 
+        {/* @ts-ignore */}
         <FlipMove>
           <div>
             {props.pages?.map((page) => (

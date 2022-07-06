@@ -1,5 +1,6 @@
+import dayjs from 'dayjs';
+
 import { CommentLeafType } from '$/types/widget';
-import { dayjs } from '$/utilities/date';
 
 export const PAGE_ID = 'b5a16120-593c-492f-ad94-e14d247485f3';
 export const PROJECT_ID = '3c5d2d41-e2df-4b31-98f8-6e471acab461';
@@ -11,93 +12,96 @@ const UserJane = {
   avatar: '/images/avatars/female-1.jpeg',
 };
 
-export const PREVIEW_COMMENTS: CommentLeafType[] = [
-  {
-    __typename: 'Comment',
-    id: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
-    content: {
-      type: 'doc',
-      content: [
-        {
-          type: 'paragraph',
-          content: [
-            {
-              type: 'text',
-              text: 'Your article is 100% gorgeous 😍',
-            },
-          ],
-        },
-      ],
-    },
-    createdAt: dayjs().subtract(50, 'hours').toISOString(),
-    parentId: null,
-    pageId: PAGE_ID,
-    user: UserJane,
-    likes: [],
-    replies: [
-      {
-        __typename: 'Comment',
-        id: '87110a09-9a4b-4f41-8784-6f8512449ddf',
-        content: {
-          type: 'doc',
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                {
-                  type: 'text',
-                  text: `Can't agree more!`,
-                },
-              ],
-            },
-          ],
-        },
-        createdAt: dayjs().subtract(49, 'hours').toISOString(),
-        parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
-        pageId: PAGE_ID,
-        user: {
-          __typename: 'User',
-          id: '634da1be-cc04-4719-908e-c642de76e292',
-          name: 'Dianne',
-          avatar: '/images/avatars/female-2.jpeg',
-        },
-        likes: [
+export const getPreviewComments = (date: string): CommentLeafType[] => {
+  const dateTime = dayjs(date);
+  return [
+    {
+      __typename: 'Comment',
+      id: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
+      content: {
+        type: 'doc',
+        content: [
           {
-            id: 'dd4812a5-031f-4534-8713-be586927081f',
-            userId: UserJane.id,
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: 'Your article is 100% gorgeous 😍',
+              },
+            ],
           },
         ],
-        replies: [],
       },
-    ],
-  },
-  {
-    __typename: 'Comment',
-    id: '7a024861-7dce-4513-9f8a-c9e91d975da4',
-    content: {
-      type: 'doc',
-      content: [
+      createdAt: dateTime.subtract(50, 'hours').toISOString(),
+      parentId: null,
+      pageId: PAGE_ID,
+      user: UserJane,
+      likes: [],
+      replies: [
         {
-          type: 'paragraph',
-          content: [
+          __typename: 'Comment',
+          id: '87110a09-9a4b-4f41-8784-6f8512449ddf',
+          content: {
+            type: 'doc',
+            content: [
+              {
+                type: 'paragraph',
+                content: [
+                  {
+                    type: 'text',
+                    text: `Can't agree more!`,
+                  },
+                ],
+              },
+            ],
+          },
+          createdAt: dateTime.subtract(49, 'hours').toISOString(),
+          parentId: '4f5f8d1f-ed42-44ff-a4cd-f7b51af55e1f',
+          pageId: PAGE_ID,
+          user: {
+            __typename: 'User',
+            id: '634da1be-cc04-4719-908e-c642de76e292',
+            name: 'Dianne',
+            avatar: '/images/avatars/female-2.jpeg',
+          },
+          likes: [
             {
-              type: 'text',
-              text: 'Interesting, thanks for sharing.',
+              id: 'dd4812a5-031f-4534-8713-be586927081f',
+              userId: UserJane.id,
             },
           ],
+          replies: [],
         },
       ],
     },
-    createdAt: dayjs().subtract(25, 'hours').toISOString(),
-    parentId: null,
-    pageId: PAGE_ID,
-    user: {
-      __typename: 'User',
-      id: '634da1be-cc04-4719-908e-c642de76e292',
-      name: 'William',
-      avatar: '/images/avatars/male-1.jpeg',
+    {
+      __typename: 'Comment',
+      id: '7a024861-7dce-4513-9f8a-c9e91d975da4',
+      content: {
+        type: 'doc',
+        content: [
+          {
+            type: 'paragraph',
+            content: [
+              {
+                type: 'text',
+                text: 'Interesting, thanks for sharing.',
+              },
+            ],
+          },
+        ],
+      },
+      createdAt: dateTime.subtract(25, 'hours').toISOString(),
+      parentId: null,
+      pageId: PAGE_ID,
+      user: {
+        __typename: 'User',
+        id: '634da1be-cc04-4719-908e-c642de76e292',
+        name: 'William',
+        avatar: '/images/avatars/male-1.jpeg',
+      },
+      likes: [],
+      replies: [],
     },
-    likes: [],
-    replies: [],
-  },
-];
+  ];
+};

@@ -272,7 +272,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
+              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
             },
             grid: {
               // @ts-ignore
@@ -290,7 +290,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
                   this.getLabelForValue(val),
                 );
               },
-              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
+              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
             },
           },
         },

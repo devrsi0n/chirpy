@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import { setGlobalConfig } from '@storybook/testing-react';
 
 import '@testing-library/jest-dom';
@@ -28,7 +29,7 @@ afterAll(() => {
   server.close();
 });
 
-// eslint-disable-next-line unicorn/consistent-function-scoping
+/* eslint-disable unicorn/consistent-function-scoping */
 jest.mock('next/dynamic', () => (func: () => Promise<any>) => {
   let component: any = null;
   func().then((module: any) => {
@@ -39,3 +40,7 @@ jest.mock('next/dynamic', () => (func: () => Promise<any>) => {
   DynamicComponent.preload = jest.fn();
   return DynamicComponent;
 });
+
+jest.mock('rehype-pretty-code', () => () => null);
+jest.mock('rehype-autolink-headings', () => () => null);
+jest.mock('rehype-slug', () => () => null);
