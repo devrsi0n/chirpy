@@ -17,6 +17,7 @@ import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
+  CommentTreeSubscriptionVariables,
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
 import {
@@ -138,9 +139,12 @@ export const getStaticProps: GetStaticProps<
     const { data } = await new Promise<
       OperationResult<CommentTreeSubscription>
     >((resolve /*reject*/) => {
-      // @ts-ignore
-      /*const { unsubscribe } = */ pipe<
-        OperationResult<CommentTreeSubscription>
+      pipe<
+        OperationResult<
+          CommentTreeSubscription,
+          CommentTreeSubscriptionVariables
+        >,
+        any
       >(
         client.subscription(CommentTreeDocument, { pageURL }),
         subscribe((result) => {

@@ -124,10 +124,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     const { data } = await new Promise<
       OperationResult<CommentTimelineSubscription>
     >((resolve /*reject*/) => {
-      // @ts-ignore
-      /*const { unsubscribe } = */ pipe<
-        OperationResult<CommentTimelineSubscription>
-      >(
+      pipe<OperationResult<CommentTimelineSubscription>, any>(
         client.subscription(CommentTimelineDocument, { id: commentId }),
         subscribe((result) => {
           // console.log(result);
