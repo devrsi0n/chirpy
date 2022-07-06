@@ -1,6 +1,6 @@
 import { graphql } from 'msw';
 
-const localGraphQL = graphql.link('*/graphql');
+const localGraphQL = graphql.link('*/v1/graphql');
 
 export const graphqlHandlers = [
   localGraphQL.query('currentUser', (req, res, ctx) => {

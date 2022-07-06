@@ -1,7 +1,6 @@
-import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import { EVENT_CHANGE_THEME, EVENT_CLICK_CONTAINER } from '$/lib/constants';
+import { EVENT_CLICK_CONTAINER } from '$/lib/constants';
 
 /**
  * Register widget events
@@ -20,26 +19,23 @@ export function useWidgetSideEffects(): void {
     };
   }, []);
 
-  const { setTheme } = useTheme();
   React.useEffect(() => {
-    function handleMessage(event: MessageEvent): void {
-      if (event.data === EVENT_CLICK_CONTAINER) {
-        unexpandedPopup('[id^="headlessui-menu-button"]');
-        unexpandedPopup('[id^="headlessui-listbox-button"]');
-        unexpandedPopup('[id^="headlessui-popover-button"]');
-      } else if (event.data.name === EVENT_CHANGE_THEME) {
-        setTheme(event.data.value);
-      }
-    }
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
 
 function broadcastPageHeight(): void {
   const newHeight: number = document.body.scrollHeight;
   window.parent.postMessage({ height: newHeight }, '*');
+}
+
+function handleMessage(event: MessageEvent): void {
+  if (event.data === EVENT_CLICK_CONTAINER) {
+    unexpandedPopup('[id^="headlessui-menu-button"]');
+    unexpandedPopup('[id^="headlessui-listbox-button"]');
+    unexpandedPopup('[id^="headlessui-popover-button"]');
+  }
 }
 
 // Close popup when user clicks on the out side of iframe

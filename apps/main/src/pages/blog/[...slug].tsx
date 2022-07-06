@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
-import { useTheme } from 'next-themes';
 import Script from 'next/script';
 import * as React from 'react';
 
@@ -10,6 +9,7 @@ import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/use-has-mounted';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { isENVDev } from '$/server/utilities/env';
 import { CommonPageProps } from '$/types/page.type';
 import { getBannerProps } from '$/utilities/image';
 
@@ -26,27 +26,24 @@ export default function Blog({
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
-  const { theme } = useTheme();
 
   return (
     <SiteLayout title={frontMatter?.title || 'Blog'}>
       <section className="flex flex-row space-x-2">
-        <article className="prose flex-1 overflow-y-auto">
+        <article className="prose flex-1 overflow-y-auto lg:prose-xl">
           {banner && (
             <div className="pb-10">
               <Image {...banner} layout="responsive" alt="banner" />
             </div>
           )}
+          {/* @ts-ignore */}
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div
-        data-chirpy-comment
-        data-chirpy-theme={theme || 'system'}
-        className="my-16"
-      />
+      <div data-chirpy-comment className="my-16" />
       <Script
         src="/bootstrap/comment.js"
+        strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
         data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
       />
     </SiteLayout>

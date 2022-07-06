@@ -12,17 +12,14 @@ import { useWidgetTheme } from '$/contexts/theme-context';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
 import { ThemeProjectByPkQuery } from '$/server/graphql/generated/project';
 
-import {
-  CommentWidgetPreview,
-  CommentWidgetPreviewProps,
-} from '../comment-widget-preview';
+import { CommentWidgetPreview } from '../comment-widget-preview';
 import { ColorSeries, colorOptions } from './colors';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
 export type ThemeEditorProps = {
   project: ThemeProjectByPkQuery['projects'][number];
-} & Pick<CommentWidgetPreviewProps, 'buildDate'>;
+};
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
@@ -112,7 +109,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             </Text>
           </div>
           <div role="separator" className="my-5 h-[1px] w-20 bg-gray-300" />
-          <CommentWidgetPreview buildDate={props.buildDate} />
+          <CommentWidgetPreview />
         </section>
       </div>
     </section>

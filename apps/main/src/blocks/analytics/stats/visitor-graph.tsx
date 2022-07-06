@@ -17,7 +17,14 @@ import { Props } from '../type';
 function buildDataSet(
   plot: string,
   present_index: number,
-  ctx: { createLinearGradient: (arg0: number, arg1: number, arg2: number, arg3: number) => any },
+  ctx: {
+    createLinearGradient: (
+      arg0: number,
+      arg1: number,
+      arg2: number,
+      arg3: number,
+    ) => any;
+  },
   label: string,
 ) {
   const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -28,7 +35,10 @@ function buildDataSet(
 
   if (present_index) {
     const dashedPart = plot.slice(present_index - 1, present_index + 1);
-    const dashedPlot = [...Array.from({ length: present_index - 1 }), ...dashedPart];
+    const dashedPlot = [
+      ...Array.from({ length: present_index - 1 }),
+      ...dashedPart,
+    ];
     for (let i = present_index; i < plot.length; i++) {
       // @ts-ignore
       plot[i] = undefined;
@@ -118,7 +128,14 @@ function dateFormatter(interval: string, longForm?: boolean) {
       }
       case 'hour': {
         const parts = isoDate.split(/\D/);
-        date = new Date(+parts[0], +parts[1] - 1, +parts[2], +parts[3], +parts[4], +parts[5]);
+        date = new Date(
+          +parts[0],
+          +parts[1] - 1,
+          +parts[2],
+          +parts[3],
+          +parts[4],
+          +parts[5],
+        );
         let hours = date.getHours(); // Not sure why getUTCHours doesn't work here
         const ampm = hours >= 12 ? 'pm' : 'am';
         hours = hours % 12;
@@ -128,7 +145,9 @@ function dateFormatter(interval: string, longForm?: boolean) {
       case 'minute': {
         if (longForm) {
           const minutesAgo = Math.abs(+isoDate);
-          return minutesAgo === 1 ? '1 minute ago' : minutesAgo + ' minutes ago';
+          return minutesAgo === 1
+            ? '1 minute ago'
+            : minutesAgo + ' minutes ago';
         } else {
           return isoDate + 'm';
         }
@@ -166,13 +185,20 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
 
   regenerateChart = () => {
     const { graphData, query, darkTheme } = this.props;
-    this.ctx = (document.querySelector('#main-graph-canvas') as HTMLCanvasElement).getContext('2d');
+    this.ctx = (
+      document.querySelector('#main-graph-canvas') as HTMLCanvasElement
+    ).getContext('2d');
     const label = query.filters.goal
       ? 'Converted visitors'
       : graphData.interval === 'minute'
       ? 'Pageviews'
       : 'Visitors';
-    const dataSet = buildDataSet(graphData.plot, graphData.present_index, this.ctx, label);
+    const dataSet = buildDataSet(
+      graphData.plot,
+      graphData.present_index,
+      this.ctx,
+      label,
+    );
 
     return new Chart(this.ctx, {
       type: 'line',
@@ -218,7 +244,9 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
                   this.drawnLabels[dataset.label] = true;
                   const pluralizedLabel =
                     // @ts-ignore
-                    item.formattedValue === '1' ? dataset.label.slice(0, -1) : dataset.label;
+                    item.formattedValue === '1'
+                      ? dataset.label.slice(0, -1)
+                      : dataset.label;
                   return ` ${item.formattedValue} ${pluralizedLabel}`;
                 }
               },
@@ -244,7 +272,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
+              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
             },
             grid: {
               // @ts-ignore
@@ -258,9 +286,11 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               maxTicksLimit: 8,
               callback: function (val, _index, _ticks) {
                 // @ts-ignore
-                return dateFormatter(graphData.interval)(this.getLabelForValue(val));
+                return dateFormatter(graphData.interval)(
+                  this.getLabelForValue(val),
+                );
               },
-              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
+              color: darkTheme ? `var(--tw-colors-grayd-1200)` : undefined,
             },
           },
         },
@@ -302,12 +332,15 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
    */
   updateWindowDimensions = (chart: any, dimensions: any) => {
     chart.options.scales.x.ticks.maxTicksLimit = dimensions.width < 720 ? 5 : 8;
-    chart.options.scales.y.ticks.maxTicksLimit = dimensions.height < 233 ? 3 : 8;
+    chart.options.scales.y.ticks.maxTicksLimit =
+      dimensions.height < 233 ? 3 : 8;
   };
 
   onClick(e: any) {
     // @ts-ignore
-    const element = this.chart.getElementsAtEventForMode(e, 'index', { intersect: false })[0];
+    const element = this.chart.getElementsAtEventForMode(e, 'index', {
+      intersect: false,
+    })[0];
     // @ts-ignore
     const date = this.chart.data.labels[element.index];
 
@@ -331,14 +364,16 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       const color = name === 'Bounce rate' ? `text-red-900` : `text-green-900`;
       return (
         <span className="text-xs text-gray-1200">
-          <span className={clsx(color, `font-bold`)}>&uarr;</span> {formattedComparison}%
+          <span className={clsx(color, `font-bold`)}>&uarr;</span>{' '}
+          {formattedComparison}%
         </span>
       );
     } else if (comparison < 0) {
       const color = name === 'Bounce rate' ? 'text-green-900' : 'text-red-900';
       return (
         <span className="text-xs">
-          <span className={clsx(color, `font-bold`)}>&darr;</span> {formattedComparison}%
+          <span className={clsx(color, `font-bold`)}>&darr;</span>{' '}
+          {formattedComparison}%
         </span>
       );
     } else if (comparison === 0) {
@@ -349,7 +384,9 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
   topStatNumberShort(stat: any) {
     if (['visit duration', 'time on page'].includes(stat.name.toLowerCase())) {
       return durationFormatter(stat.value);
-    } else if (['bounce rate', 'conversion rate'].includes(stat.name.toLowerCase())) {
+    } else if (
+      ['bounce rate', 'conversion rate'].includes(stat.name.toLowerCase())
+    ) {
       return stat.value + '%';
     } else {
       return numberFormatter(stat.value);
@@ -443,10 +480,9 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
           </svg>
         );
       } else {
-        const endpoint = `/${encodeURIComponent(this.props.site.domain)}/export${api.serializeQuery(
-          this.props.query,
-          this.props.site,
-        )}`;
+        const endpoint = `/${encodeURIComponent(
+          this.props.site.domain,
+        )}/export${api.serializeQuery(this.props.query, this.props.site)}`;
 
         return (
           <a href={endpoint} download onClick={this.downloadSpinner.bind(this)}>
@@ -502,7 +538,8 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
   }
 
   render() {
-    const extraClass = this.props.graphData.interval === 'hour' ? '' : 'cursor-pointer';
+    const extraClass =
+      this.props.graphData.interval === 'hour' ? '' : 'cursor-pointer';
 
     return (
       <div className="graph-inner">
@@ -540,7 +577,11 @@ export default function VisitorGraph(props: VisitorGraphProps) {
   };
   const fetchGraphData = React.useCallback(() => {
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/main-graph`, props.site, props.query)
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/main-graph`,
+        props.site,
+        props.query,
+      )
       .then((res) => {
         setLoading(false);
         setGraphData(res);
@@ -562,7 +603,12 @@ export default function VisitorGraph(props: VisitorGraphProps) {
       >
         {loading && (
           <div className="graph-inner">
-            <div className={clsx('mx-auto pt-24 sm:pt-32 md:pt-48', styles.loading)}>
+            <div
+              className={clsx(
+                'mx-auto pt-24 sm:pt-32 md:pt-48',
+                styles.loading,
+              )}
+            >
               <div></div>
             </div>
           </div>

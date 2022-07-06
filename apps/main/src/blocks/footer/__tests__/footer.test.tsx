@@ -39,8 +39,7 @@ describe('Footer', () => {
 
   it('should call setTheme when click on icon button', async () => {
     expect(mockSetTheme).not.toHaveBeenCalled();
-    await userEvent.click(screen.getByLabelText('Mode selector'));
-    await userEvent.click(screen.getByText('Dark'));
+    await userEvent.click(screen.getByLabelText('light theme'));
     expect(mockSetTheme).toHaveBeenCalled();
   });
 });

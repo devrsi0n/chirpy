@@ -22,7 +22,7 @@ import { dayjs } from '$/utilities/date';
 
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
-import { DeletedComment } from './deleted-comment';
+import { PLACEHOLDER_OF_DELETED_COMMENT } from './config';
 import { TimelineLinkButton } from './timeline-link-button';
 
 export type { ClickLikeActionHandler } from '../like-action';
@@ -101,110 +101,117 @@ export function CommentCard({
   }, [disabledReply]);
   const { data } = useCurrentUser();
   const isDeleted = !!deletedAt;
+  const rteContent = isDeleted ? PLACEHOLDER_OF_DELETED_COMMENT : content;
   const userHasModeratePermission =
     data?.editableProjectIds?.includes(projectId);
 
-  if (isDeleted) {
-    return <DeletedComment />;
-  }
   return (
     <m.article
       animate={containerAnimate}
       variants={shakeVariants}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
-        `flex flex-row items-start space-x-3 rounded border border-gray-500 pt-4 pb-2 pl-4 shadow-sm`,
+        `flex flex-row items-start space-x-3 rounded border border-gray-500 shadow-sm`,
+        isDeleted ? `py-2 pl-4` : `pt-4 pb-2 pl-4`,
       )}
       id={isENVDev ? commentId : undefined}
     >
-      <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+      {!isDeleted && (
+        <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+      )}
       <div className="flex-1">
         <div className="flex flex-row items-start justify-between">
-          <div className="flex flex-row items-start space-x-4">
-            <Text bold className="!leading-none">
-              {name}
-            </Text>
-            <Text
-              variant="secondary"
-              as="time"
-              title={createdAt}
-              className="cursor-default !leading-none"
-              dateTime={createdAt}
-            >
-              {dayjs(createdAt).fromNow()}
-            </Text>
-          </div>
-          <>
-            {userHasModeratePermission && (
-              <Menu className="mr-3">
-                <Menu.Button>
-                  <IconMoreVertical size={20} />
-                </Menu.Button>
-                <Menu.Items>
-                  <Menu.Item className="space-x-1" disableAutoDismiss>
-                    <Popover
-                      placement="topEnd"
-                      buttonAs="button"
-                      content={
-                        <div className="flex flex-row items-center space-x-2">
-                          <Text size="sm" className="w-max">
-                            Are you sure?
-                          </Text>
-                          <Button
-                            size="sm"
-                            color="red"
-                            onClick={handleClickConfirmDelete}
+          {!isDeleted && (
+            <>
+              <div className="flex flex-row items-start space-x-4">
+                <Text bold className="!leading-none">
+                  {name}
+                </Text>
+                <Text
+                  variant="secondary"
+                  as="time"
+                  title={createdAt}
+                  className="cursor-default !leading-none"
+                  dateTime={createdAt}
+                >
+                  {dayjs(createdAt).fromNow()}
+                </Text>
+              </div>
+              <>
+                {userHasModeratePermission && (
+                  <Menu className="mr-3">
+                    <Menu.Button>
+                      <IconMoreVertical size={20} />
+                    </Menu.Button>
+                    <Menu.Items>
+                      <Menu.Item className="space-x-1" disableAutoDismiss>
+                        <Popover
+                          placement="topEnd"
+                          buttonAs="button"
+                          content={
+                            <div className="flex flex-row items-center space-x-2">
+                              <Text size="sm" className="w-max">
+                                Are you sure?
+                              </Text>
+                              <Button
+                                size="sm"
+                                color="red"
+                                onClick={handleClickConfirmDelete}
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          }
+                        >
+                          <div
+                            className={clsx(
+                              `flex flex-row items-center`,
+                              MenuItemPadding,
+                            )}
                           >
-                            Delete
-                          </Button>
-                        </div>
-                      }
-                    >
-                      <div
-                        className={clsx(
-                          `flex flex-row items-center`,
-                          MenuItemPadding,
-                        )}
-                      >
-                        <IconTrash2 size={16} />
-                        <span className="ml-1">Delete</span>
-                      </div>
-                    </Popover>
-                  </Menu.Item>
-                </Menu.Items>
-              </Menu>
-            )}
-          </>
+                            <IconTrash2 size={16} />
+                            <span className="ml-1">Delete</span>
+                          </div>
+                        </Popover>
+                      </Menu.Item>
+                    </Menu.Items>
+                  </Menu>
+                )}
+              </>
+            </>
+          )}
         </div>
         <div className="mt-1 mb-1.5">
-          <RichTextEditor initialValue={content} readOnly />
+          <RichTextEditor initialValue={rteContent} readOnly />
         </div>
-        <div className="flex -translate-x-2 flex-row items-center space-x-6">
-          <LikeAction
-            aria-label="Like"
-            likes={likes}
-            commentId={commentId}
-            title="Like this comment"
-          />
-          <span onClick={handlePressReply} className="flex justify-center">
-            <ActionButton
-              aria-label="Reply"
-              color="blue"
-              disabled={disabledReply}
-              title={
-                disabledReply
-                  ? 'You have reached the maximum depth of replies'
-                  : 'Reply to this comment'
-              }
-              icon={<IconMessageSquare size={20} className="-scale-x-1" />}
+        {!isDeleted && (
+          <div className="flex -translate-x-2 flex-row items-center space-x-6">
+            <LikeAction
+              aria-label="Like"
+              likes={likes}
+              commentId={commentId}
+              title="Like this comment"
             />
-          </span>
-          <TimelineLinkButton
-            disabled={disableTimelineButton}
-            href={timelineURL}
-            onClick={handleClickLinkAction}
-          />
-        </div>
+            <span onClick={handlePressReply} className="flex justify-center">
+              <ActionButton
+                aria-label="Reply"
+                color="blue"
+                disabled={disabledReply}
+                title={
+                  disabledReply
+                    ? 'You have reached the maximum depth of replies'
+                    : 'Reply to this comment'
+                }
+                icon={<IconMessageSquare size={20} className="-scale-x-1" />}
+              />
+            </span>
+            <TimelineLinkButton
+              disabled={disableTimelineButton}
+              href={timelineURL}
+              onClick={handleClickLinkAction}
+            />
+          </div>
+        )}
         <AnimatePresence>
           {showReplyEditor && (
             <m.div {...easeInOut} className="flex flex-col space-y-2 pr-6">

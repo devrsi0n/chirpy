@@ -2,19 +2,14 @@ import * as React from 'react';
 
 import { IconArrow } from '$/components/icons';
 
-import {
-  CommentWidgetPreview,
-  CommentWidgetPreviewProps,
-} from './comment-widget-preview';
+import { CommentWidgetPreview } from './comment-widget-preview';
 
-export type HomeCommentWidgetPreviewProps = Pick<
-  CommentWidgetPreviewProps,
-  'buildDate'
->;
+// export type HomeCommentWidgetPreviewProps = {
+//   children: React.ReactNode;
 
-export function HomeCommentWidgetPreview({
-  buildDate,
-}: HomeCommentWidgetPreviewProps): JSX.Element {
+// };
+
+export function HomeCommentWidgetPreview(): JSX.Element {
   return (
     <div className="w-full">
       <div className="flex translate-y-6 flex-col items-center text-gray-1100">
@@ -27,7 +22,6 @@ export function HomeCommentWidgetPreview({
         <CommentWidgetPreview
           hideCommentTimeline
           rtePlaceholder="Comment widget (Markdown shortcuts supported)"
-          buildDate={buildDate}
         />
       </div>
     </div>

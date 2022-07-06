@@ -7,11 +7,7 @@ import {
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
-import {
-  ThemeEditor,
-  ThemeEditorProps,
-  THEME_WIDGET_CLS,
-} from '$/blocks/theme-editor';
+import { ThemeEditor, THEME_WIDGET_CLS } from '$/blocks/theme-editor';
 import { WidgetThemeProvider } from '$/contexts/theme-context';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
@@ -55,7 +51,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 type StaticProps = {
   project: ThemeProjectByPkQuery['projects'][0];
-} & Pick<ThemeEditorProps, 'buildDate'>;
+};
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
@@ -77,7 +73,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   return {
-    props: { project: data.projects[0], buildDate: new Date().toISOString() },
+    props: { project: data.projects[0] },
     revalidate: 1,
   };
 };

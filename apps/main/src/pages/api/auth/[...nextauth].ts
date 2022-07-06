@@ -1,4 +1,4 @@
-import NextAuth, { CookiesOptions, PagesOptions } from 'next-auth';
+import NextAuth from 'next-auth';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
@@ -14,23 +14,17 @@ import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
 import { isENVDev } from '$/server/utilities/env';
 
-export const nextAuthPage: Partial<PagesOptions> = {
-  signIn: '/auth/sign-in',
-  newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
-  // error: '/auth/error', // Error code passed in query string as ?error=
-};
-
-export const nextAuthCookie: Partial<CookiesOptions> = defaultCookies(
-  process.env.NEXTAUTH_URL.startsWith('https://'),
-);
-
 export default NextAuth({
   providers: authProviders,
   session: {
     strategy: 'jwt',
     maxAge: SESSION_MAX_AGE,
   },
-  pages: nextAuthPage,
+  pages: {
+    signIn: '/auth/sign-in',
+    newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
+    // error: '/auth/error', // Error code passed in query string as ?error=
+  },
   callbacks: {
     /**
      * @param token Decrypted JSON Web Token
@@ -104,7 +98,7 @@ export default NextAuth({
       });
     },
   },
-  cookies: nextAuthCookie,
+  cookies: defaultCookies(process.env.NEXTAUTH_URL.startsWith('https://')),
   adapter: nextAuthAdapter(),
   debug: isENVDev,
 });

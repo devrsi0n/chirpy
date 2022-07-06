@@ -1,10 +1,10 @@
 import { withAuth } from 'next-auth/middleware';
 
-import { nextAuthCookie, nextAuthPage } from './pages/api/auth/[...nextauth]';
+// import { nextAuthCookie, nextAuthPage } from './pages/api/auth/[...nextauth]';
 
 export default withAuth({
-  pages: nextAuthPage,
-  cookies: nextAuthCookie,
+  // pages: nextAuthPage,
+  // cookies: nextAuthCookie,
   callbacks: {
     authorized: ({ token, req }) => {
       if (req.nextUrl.pathname.includes('/api/mutation-event')) {

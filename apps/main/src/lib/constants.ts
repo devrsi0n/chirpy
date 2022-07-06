@@ -8,7 +8,6 @@ export const HASURA_TOKEN_MAX_AGE = 60 * 60;
 export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
 
 export const EVENT_CLICK_CONTAINER = 'EVENT_CLICK_CONTAINER';
-export const EVENT_CHANGE_THEME = 'EVENT_CHANGE_THEME';
 
 export const WIDGET_COMMENT_PATH = '/widget/comment/';
 
@@ -20,6 +19,3 @@ export const FEEDBACK_LINK =
 export const GRAPHQL_CACHE_DB_NAME = 'graphcache-v1';
 
 export const COMMENT_TREE_MAX_DEPTH = 4;
-export const ADMIN_HEADERS = {
-  'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-};

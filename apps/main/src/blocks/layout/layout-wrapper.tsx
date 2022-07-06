@@ -16,11 +16,14 @@ export function LayoutWrapper({
   return (
     <>
       <Head>
-        <title>{title ? `${title}・Chirpy` : 'Chirpy'}</title>
+        <title>
+          {title}
+          {title.length > 0 ? '・' : ''}Chirpy
+        </title>
       </Head>
       <div
         className={clsx(
-          `flex min-h-full flex-col font-sans text-gray-1100`,
+          `flex min-h-full flex-col font-sans text-gray-1000`,
           className,
         )}
       >

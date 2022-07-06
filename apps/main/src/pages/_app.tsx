@@ -16,7 +16,7 @@ import '$/styles/global-styles.scss';
 
 function App({
   Component,
-  pageProps: { session, urqlState, ...pageProps },
+  pageProps: { session, ...pageProps },
 }: AppProps): JSX.Element {
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
@@ -25,15 +25,9 @@ function App({
         // Refresh hasura token before it expires
         refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
       >
-        <NextThemesProvider
-          attribute="class"
-          // Widget and app themes are different
-          storageKey={
-            pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'
-          }
-        >
+        <NextThemesProvider attribute="class" storageKey="chirpy.theme">
           <LazyMotion features={loadFeatures} strict>
-            <GQLClientProvider urqlState={urqlState}>
+            <GQLClientProvider>
               <CurrentUserProvider>
                 <ToastProvider>
                   <NotificationProvider>

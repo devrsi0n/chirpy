@@ -14,9 +14,7 @@ jest.spyOn(nextThemesModule, 'useTheme').mockReturnValue({
 
 describe('ThemeEditor', () => {
   beforeEach(() => {
-    render(
-      <ThemeEditor project={PROJECT} buildDate={new Date().toISOString()} />,
-    );
+    render(<ThemeEditor project={PROJECT} />);
   });
 
   afterEach(() => {

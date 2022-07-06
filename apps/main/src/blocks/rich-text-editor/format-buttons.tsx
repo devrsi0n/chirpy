@@ -135,7 +135,6 @@ export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
       name={headingList[value]}
       onChange={handleChange}
       className="w-36"
-      variant="borderless"
     >
       {headingList.map((item, index) => (
         <Select.Option value={index} key={item}>

@@ -219,7 +219,7 @@ export default class Referrers extends React.Component<
               )}
             </div>
           </div>
-          {/* @ts-ignore */}
+
           <FlipMove className="flex-grow">
             {this.state.referrers!.map(this.renderReferrer.bind(this))}
           </FlipMove>

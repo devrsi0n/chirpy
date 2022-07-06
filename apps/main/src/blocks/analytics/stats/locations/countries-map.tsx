@@ -34,7 +34,10 @@ interface CountriesState {
   loading: boolean;
 }
 
-export class CountriesMap extends React.Component<CountriesProps, CountriesState> {
+export class CountriesMap extends React.Component<
+  CountriesProps,
+  CountriesState
+> {
   private map: Datamap;
 
   state: CountriesState = {
@@ -43,7 +46,10 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
   };
 
   componentDidUpdate(prevProps: CountriesProps) {
-    if (this.props.query !== prevProps.query || prevProps.isDarkMode !== this.props.isDarkMode) {
+    if (
+      this.props.query !== prevProps.query ||
+      prevProps.isDarkMode !== this.props.isDarkMode
+    ) {
       this.setState({ loading: true, countries: null });
       this.fetchCountries().then(this.drawMap);
     }
@@ -96,9 +102,14 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
 
   fetchCountries() {
     return api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/countries`, this.props.site, this.props.query, {
-        limit: 300,
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/countries`,
+        this.props.site,
+        this.props.query,
+        {
+          limit: 300,
+        },
+      )
       .then((res) => this.setState({ loading: false, countries: res }));
   }
 
@@ -108,13 +119,14 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
 
   drawMap = () => {
     const dataset = this.getDataset();
-    const label = this.props.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
+    const label =
+      this.props.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
     const defaultFill = this.props.isDarkMode ? '#2d3747' : '#f8fafc';
     const highlightFill = this.props.isDarkMode ? '#374151' : '#F5F5F5';
     const borderColor = this.props.isDarkMode ? '#1f2937' : '#dae1e7';
     const highlightBorderColor = this.props.isDarkMode
-      ? `hsl(var(--tw-colors-primary-700))`
-      : `hsl(var(--tw-colors-primary-900))`;
+      ? `var(--tw-colors-primary-700)`
+      : `var(--tw-colors-primary-900)`;
 
     this.map = new Datamap({
       element: document.querySelector('#map-container'),
@@ -131,7 +143,8 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
           if (!data) {
             return null;
           }
-          const pluralizedLabel = data.numberOfThings === 1 ? label.slice(0, -1) : label;
+          const pluralizedLabel =
+            data.numberOfThings === 1 ? label.slice(0, -1) : label;
           return [
             `<div class="${styles['hoverinfo']} bg-gray-100 dark:bg-gray-850 dark:shadow-gray-850 dark:border-gray-850 dark:text-grayd-1100">`,
             '<strong>',
@@ -146,11 +159,13 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
         },
       },
       done: (datamap: Datamap) => {
-        datamap.svg.selectAll('.datamaps-subunit').on('click', (geography: any) => {
-          navigateToQuery(this.props.router, this.props.query, {
-            country: geography.id,
+        datamap.svg
+          .selectAll('.datamaps-subunit')
+          .on('click', (geography: any) => {
+            navigateToQuery(this.props.router, this.props.query, {
+              country: geography.id,
+            });
           });
-        });
       },
     });
   };
@@ -160,7 +175,12 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
       return (
         <span className="absolute bottom-4 right-3 text-xs text-gray-1000">
           IP Geolocation by{' '}
-          <a target="_blank" href="https://db-ip.com" rel="noreferrer" className="text-blue-1000">
+          <a
+            target="_blank"
+            href="https://db-ip.com"
+            rel="noreferrer"
+            className="text-blue-1000"
+          >
             DB-IP
           </a>
         </span>
@@ -179,7 +199,11 @@ export class CountriesMap extends React.Component<CountriesProps, CountriesState
             style={{ width: '100%', maxWidth: '475px', height: '335px' }}
             id="map-container"
           ></div>
-          <MoreLink site={this.props.site} list={this.state.countries} endpoint="countries" />
+          <MoreLink
+            site={this.props.site}
+            list={this.state.countries}
+            endpoint="countries"
+          />
           {this.geolocationDbNotice()}
         </>
       );
