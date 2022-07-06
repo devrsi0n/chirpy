@@ -20,6 +20,3 @@ export const FEEDBACK_LINK =
 export const GRAPHQL_CACHE_DB_NAME = 'graphcache-v1';
 
 export const COMMENT_TREE_MAX_DEPTH = 4;
-export const ADMIN_HEADERS = {
-  'x-hasura-admin-secret': process.env.HASURA_ADMIN_SECRET,
-};

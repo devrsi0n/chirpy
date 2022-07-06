@@ -16,7 +16,7 @@ import '$/styles/global-styles.scss';
 
 function App({
   Component,
-  pageProps: { session, urqlState, ...pageProps },
+  pageProps: { session, ...pageProps },
 }: AppProps): JSX.Element {
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
@@ -33,7 +33,7 @@ function App({
           }
         >
           <LazyMotion features={loadFeatures} strict>
-            <GQLClientProvider urqlState={urqlState}>
+            <GQLClientProvider>
               <CurrentUserProvider>
                 <ToastProvider>
                   <NotificationProvider>

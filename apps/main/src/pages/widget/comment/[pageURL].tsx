@@ -6,23 +6,25 @@ import {
   GetStaticPaths,
 } from 'next';
 import * as React from 'react';
-import ssrPrepass from 'react-ssr-prepass';
 import superjson from 'superjson';
-import { Provider } from 'urql';
+import { OperationResult } from 'urql';
+import { pipe, subscribe } from 'wonka';
 
 import { CommentTrees } from '$/blocks/comment-trees';
 import { WidgetLayout } from '$/blocks/layout';
 import { PoweredBy } from '$/blocks/powered-by';
 import { CommentContextProvider } from '$/contexts/comment-context';
-import { useCommentTreeSubscription } from '$/graphql/generated/comment';
+import {
+  CommentTreeDocument,
+  CommentTreeSubscription,
+  CommentTreeSubscriptionVariables,
+  useCommentTreeSubscription,
+} from '$/graphql/generated/comment';
 import {
   ThemeOfPageDocument,
   ThemeOfPageQuery,
 } from '$/graphql/generated/page';
-import {
-  getAdminGqlClient,
-  getAdminGqlClientWithSsrExchange,
-} from '$/lib/admin-gql-client';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   PageByUrlOnlyDocument,
   PageByUrlOnlyQuery,
@@ -31,6 +33,7 @@ import {
 } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
+import { CommentLeafType } from '$/types/widget';
 import { isSSRMode } from '$/utilities/env';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
@@ -56,7 +59,8 @@ export default function CommentWidgetPage(
     variables: { pageURL },
     pause: isSSRMode,
   });
-  const comments = data?.comments || [];
+  const comments =
+    data?.comments || (isStaticError(props) ? [] : props.comments || []);
 
   if (error) {
     return <p>{error}</p>;
@@ -103,6 +107,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 type StaticProps = PathParams &
   CommonWidgetProps & {
+    comments: CommentLeafType[];
     pageId: string;
   };
 type StaticError = {
@@ -121,7 +126,7 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const { pageURL } = params;
-  const { client, ssrExchange } = getAdminGqlClientWithSsrExchange();
+  const client = getAdminGqlClient();
   const pageQuery = await client
     .query<PageByUrlOnlyQuery>(PageByUrlOnlyDocument, { url: pageURL })
     .toPromise();
@@ -131,6 +136,28 @@ export const getStaticProps: GetStaticProps<
   }
 
   try {
+    const { data } = await new Promise<
+      OperationResult<CommentTreeSubscription>
+    >((resolve /*reject*/) => {
+      pipe<
+        OperationResult<
+          CommentTreeSubscription,
+          CommentTreeSubscriptionVariables
+        >,
+        any
+      >(
+        client.subscription(CommentTreeDocument, { pageURL }),
+        subscribe((result) => {
+          // console.log(result);
+          resolve(result);
+        }),
+      );
+    });
+
+    if (!data?.comments) {
+      return { notFound: true };
+    }
+    const { comments } = data;
     const themeResult = await client
       .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
         pageId,
@@ -140,29 +167,14 @@ export const getStaticProps: GetStaticProps<
       console.error(`Can't find theme info`);
       return { notFound: true };
     }
-    const commonProps = {
-      pageURL,
-      pageId,
-      projectId: themeResult.data.pageByPk.project.id,
-      theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
-      isWidget: true as const,
-    };
-    /*
-     * Pre-render component to get the SSR data,
-     * can't use `next-urql` here because we're using
-     * custom urql client which can't be reset in `next-urql`
-     */
-    await ssrPrepass(
-      <Provider value={client}>
-        <CommentWidgetPage {...commonProps} />
-      </Provider>,
-    );
-
     return {
       props: {
-        ...commonProps,
-        // Pass the SSR data to the client urql client, it's used by `gql-client-provider.tsx`.
-        urqlState: ssrExchange.extractData(),
+        comments,
+        pageURL,
+        pageId,
+        projectId: themeResult.data.pageByPk.project.id,
+        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
+        isWidget: true,
       },
     };
   } catch (error) {
