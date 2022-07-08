@@ -55,7 +55,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       typescript: 4.7.4
-      vite: 2.9.12
+      vite: 2.9.14
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
@@ -72,7 +72,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       typescript: 4.7.4
-      vite: 2.9.12
+      vite: 2.9.14
 
   apps/e2e:
     specifiers:
@@ -412,7 +412,7 @@ importers:
       dotenv-expand: 8.0.3
       eslint: 8.18.0
       typescript: 4.7.4
-      vite: 2.9.12
+      vite: 2.9.14
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config-chirpy
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
@@ -421,7 +421,7 @@ importers:
       dotenv-expand: 8.0.3
       eslint: 8.18.0
       typescript: 4.7.4
-      vite: 2.9.12
+      vite: 2.9.14
 
   packages/eslint-config-chirpy:
     specifiers:
@@ -21458,8 +21458,8 @@ packages:
       vfile-message: 3.1.2
     dev: false
 
-  /vite/2.9.12:
-    resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}
+  /vite/2.9.14:
+    resolution: {integrity: sha512-P/UCjSpSMcE54r4mPak55hWAZPlyfS369svib/gpmz8/01L822lMPOJ/RYW6tLCe1RPvMvOsJ17erf55bKp4Hw==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
