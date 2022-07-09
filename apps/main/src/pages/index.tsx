@@ -5,6 +5,7 @@ import {
   HomeCommentWidgetPreview,
   HomeCommentWidgetPreviewProps,
 } from '$/blocks/comment-widget-preview';
+import { FAQs } from '$/blocks/faqs';
 import { Features } from '$/blocks/features';
 import { SiteLayout } from '$/blocks/layout';
 import { Pricing } from '$/blocks/pricing';
@@ -51,6 +52,7 @@ export default function Home({ buildDate }: HomeProps): JSX.Element {
         <Features />
         <HomeCommentWidgetPreview buildDate={buildDate} />
         <Pricing id="pricing" />
+        <FAQs />
       </section>
     </SiteLayout>
   );
