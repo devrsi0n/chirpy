@@ -4,11 +4,22 @@ import * as React from 'react';
 import { Box, BoxProps } from '../box';
 
 type Size = 'xs' | 'sm' | 'base' | 'lg' | 'xl';
-type Variant = 'primary' | 'secondary';
+export type Variant = 'main' | 'secondary';
+export type Color = 'primary' | 'gray';
 
 export type TextProps = React.PropsWithChildren<
   React.ComponentProps<'p'> & {
+    /**
+     * @default 'main'
+     */
     variant?: Variant;
+    /**
+     * @default 'gray'
+     */
+    color?: Color;
+    /**
+     * @default 'base'
+     */
     size?: Size;
     bold?: boolean;
     italic?: boolean;
@@ -25,9 +36,16 @@ const sizeStyles: Record<Size, string> = {
   lg: `text-lg`,
   xl: `text-xl`,
 };
+const colorVariantStyles: Record<`${Color}-${Variant}`, string> = {
+  'gray-main': 'text-gray-1200',
+  'gray-secondary': 'text-gray-1100',
+  'primary-main': `text-primary-900`,
+  'primary-secondary': 'text-primary-800',
+};
 
 export function Text({
-  variant = 'primary',
+  variant = 'main',
+  color = 'gray',
   size = 'base',
   as: Tag,
   children,
@@ -55,8 +73,8 @@ export function Text({
       as={Tag}
       {...restProps}
       className={clsx(
-        `leading-normal text-gray-1200`,
-        variant === 'primary' ? `text-gray-1200` : `text-gray-1100`,
+        `leading-normal`,
+        colorVariantStyles[`${color}-${variant}`],
         sizeStyles[size],
         bold && `font-bold`,
         italic && `italic`,

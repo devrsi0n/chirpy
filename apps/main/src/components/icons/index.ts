@@ -1,7 +1,13 @@
 export * from './icon-arrow';
 export * from './icon-block-quote';
 export * from './types';
+export * from './feature-icon';
+
 export type { Icon } from '@geist-ui/icons';
+
+export { default as CornerLeftDown } from '@geist-ui/icons/cornerLeftDown';
+export { default as Chrome } from '@geist-ui/icons/chrome';
+export { default as Repeat } from '@geist-ui/icons/repeat';
 export { default as IconArrowLeft } from '@geist-ui/icons/arrowLeft';
 export { default as IconAlertCircleFill } from '@geist-ui/icons/alertCircleFill';
 export { default as IconX } from '@geist-ui/icons/x';
