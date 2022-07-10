@@ -13,7 +13,7 @@ export type PricingProps = React.PropsWithChildren<{
   id?: string;
 }>;
 
-const commonBenefits = [
+const COMMON_BENEFITS = [
   'Privacy-first, No Ads',
   'Rich text formatting',
   'Markdown shortcuts',
@@ -37,7 +37,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           callToAction={{
             label: 'Try It Free',
           }}
-          benefits={['1 Website', ...commonBenefits]}
+          benefits={['1 Website', ...COMMON_BENEFITS]}
         />
         <PricingCard
           plan="Pro"
@@ -46,7 +46,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             <span key="website">
               <span className="font-bold text-gray-1200">10</span> Websites
             </span>,
-            ...commonBenefits,
+            ...COMMON_BENEFITS,
             'Comment with image',
             'No branding',
           ]}
