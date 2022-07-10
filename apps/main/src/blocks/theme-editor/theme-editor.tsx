@@ -63,12 +63,17 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             <BoldHeading>Colors</BoldHeading>
             <Text>Primary</Text>
             <div className="flex flex-row items-center space-x-2">
-              <Popover
-                buttonAs={IconButton}
-                buttonProps={{
-                  'aria-label': 'Click to expanded the color picker',
-                }}
-                content={
+              <Popover>
+                <Popover.Button
+                  as={IconButton}
+                  aria-label="Click to expanded the color picker"
+                >
+                  <span
+                    aria-label="Primary color selector"
+                    className="inline-block h-6 w-6 rounded-full bg-primary-900"
+                  />
+                </Popover.Button>
+                <Popover.Panel>
                   <ul className="flex flex-row space-x-3">
                     {Object.entries(colorOptions).map(([key, color]) => (
                       <li key={color[activeTheme][900]}>
@@ -84,12 +89,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
                       </li>
                     ))}
                   </ul>
-                }
-              >
-                <span
-                  aria-label="Primary color selector"
-                  className="inline-block h-6 w-6 rounded-full bg-primary-900"
-                />
+                </Popover.Panel>
               </Popover>
               <Text
                 className="mb-2 px-2 !leading-none"

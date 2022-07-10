@@ -151,6 +151,7 @@ importers:
       '@testing-library/react': 13.3.0
       '@testing-library/user-event': 14.2.1
       '@tiptap/core': 2.0.0-beta.181
+      '@tiptap/extension-image': 2.0.0-beta.30
       '@tiptap/extension-link': 2.0.0-beta.43
       '@tiptap/extension-placeholder': 2.0.0-beta.53
       '@tiptap/extension-underline': 2.0.0-beta.25
@@ -261,6 +262,7 @@ importers:
       '@tensorflow/tfjs-converter': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-core': 3.18.0
       '@tiptap/core': 2.0.0-beta.181
+      '@tiptap/extension-image': 2.0.0-beta.30_o5tsmp445vozplpzqkrs3pmjeq
       '@tiptap/extension-link': 2.0.0-beta.43_o5tsmp445vozplpzqkrs3pmjeq
       '@tiptap/extension-placeholder': 2.0.0-beta.53_o5tsmp445vozplpzqkrs3pmjeq
       '@tiptap/extension-underline': 2.0.0-beta.25_o5tsmp445vozplpzqkrs3pmjeq
@@ -5601,6 +5603,14 @@ packages:
     dependencies:
       '@tiptap/core': 2.0.0-beta.181
       prosemirror-state: 1.4.1
+    dev: false
+
+  /@tiptap/extension-image/2.0.0-beta.30_o5tsmp445vozplpzqkrs3pmjeq:
+    resolution: {integrity: sha512-VhEmgiKkZMiKR7hbpJgIlIUS/QNjSGI5ER7mKDAbuV1IB5yb6nGjZ6o3Exrr2/CaTaW5hQarBC1z2Xgdu05EGg==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0-beta.1
+    dependencies:
+      '@tiptap/core': 2.0.0-beta.181
     dev: false
 
   /@tiptap/extension-italic/2.0.0-beta.28_o5tsmp445vozplpzqkrs3pmjeq:

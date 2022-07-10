@@ -5,11 +5,12 @@ export * from './feature-icon';
 
 export type { Icon } from '@geist-ui/icons';
 
-export { default as Cloud } from '@geist-ui/icons/cloud';
-export { default as CreditCard } from '@geist-ui/icons/creditCard';
-export { default as CornerLeftDown } from '@geist-ui/icons/cornerLeftDown';
-export { default as Chrome } from '@geist-ui/icons/chrome';
-export { default as Repeat } from '@geist-ui/icons/repeat';
+export { default as IconCloud } from '@geist-ui/icons/cloud';
+export { default as IconImage } from '@geist-ui/icons/image';
+export { default as IconCreditCard } from '@geist-ui/icons/creditCard';
+export { default as IconCornerLeftDown } from '@geist-ui/icons/cornerLeftDown';
+export { default as IconChrome } from '@geist-ui/icons/chrome';
+export { default as IconRepeat } from '@geist-ui/icons/repeat';
 export { default as IconArrowLeft } from '@geist-ui/icons/arrowLeft';
 export { default as IconAlertCircleFill } from '@geist-ui/icons/alertCircleFill';
 export { default as IconX } from '@geist-ui/icons/x';

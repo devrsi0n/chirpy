@@ -1,10 +1,10 @@
 import {
-  Chrome,
-  Cloud,
-  CornerLeftDown,
-  CreditCard,
+  IconChrome,
+  IconCloud,
+  IconCornerLeftDown,
+  IconCreditCard,
   IconHeart,
-  Repeat,
+  IconRepeat,
 } from '$/components/icons';
 import { Link } from '$/components/link';
 
@@ -25,12 +25,12 @@ export const FAQ_LIST: FAQItem[] = [
     title: 'Can I change my plan later?',
     description:
       'Of course. Our pricing scales with your company. Chat to our friendly team to find a solution that works for you.',
-    icon: <Repeat />,
+    icon: <IconRepeat />,
   },
   {
     title: `What's your refund policy?`,
     description: `We understand that things change. You can cancel your plan at any time and we'll refund you the difference already paid.`,
-    icon: <CornerLeftDown />,
+    icon: <IconCornerLeftDown />,
   },
   {
     title: `What browsers do you support?`,
@@ -42,7 +42,7 @@ export const FAQ_LIST: FAQItem[] = [
         <span>{`We don't support Internet Explorer.`}</span>
       </span>
     ),
-    icon: <Chrome />,
+    icon: <IconChrome />,
   },
   {
     title: `What payment methods do you support?`,
@@ -56,7 +56,7 @@ export const FAQ_LIST: FAQItem[] = [
         </Link>
       </span>
     ),
-    icon: <CreditCard />,
+    icon: <IconCreditCard />,
   },
   {
     title: `Can Chirpy be self-hosted?`,
@@ -66,6 +66,6 @@ export const FAQ_LIST: FAQItem[] = [
         <Link href="https://chirpy.dev/docs/self-hosted">More details</Link>
       </span>
     ),
-    icon: <Cloud />,
+    icon: <IconCloud />,
   },
 ];
