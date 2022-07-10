@@ -23,7 +23,7 @@ export function HomeCommentWidgetPreview({
         </p>
         <IconArrow />
       </div>
-      <div className="w-full rounded-lg border border-gray-300 p-4">
+      <div className="w-full rounded-lg border border-gray-300 bg-gray-0 p-4">
         <CommentWidgetPreview
           hideCommentTimeline
           rtePlaceholder="Comment widget (Markdown shortcuts supported)"

@@ -1,12 +1,12 @@
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
-import { IPopoverProps, Popover } from '$/components/popover';
+import { Popover, IPopoverButtonProps } from '$/components/popover';
 import { Text } from '$/components/text';
 
-export interface IAskNotificationPermissionPopoverProps
-  extends Pick<IPopoverProps, 'buttonProps'> {
+export interface IAskNotificationPermissionPopoverProps {
   onClickAskNextTime: () => void;
   onClickSure: () => void;
+  buttonProps: IPopoverButtonProps;
   children: React.ReactNode;
 }
 
@@ -17,10 +17,11 @@ export function AskNotificationPermissionPopover({
   children,
 }: IAskNotificationPermissionPopoverProps): JSX.Element {
   return (
-    <Popover
-      autoClose={false}
-      placement="topEnd"
-      content={
+    <Popover>
+      <Popover.Button {...buttonProps} className="!py-2">
+        {children}
+      </Popover.Button>
+      <Popover.Panel autoClose={false} placement="topEnd">
         <section className="w-64">
           <Heading as="h5" className="font-bold">
             Get notification for replies
@@ -42,10 +43,7 @@ export function AskNotificationPermissionPopover({
             </Button>
           </div>
         </section>
-      }
-      buttonProps={{ ...buttonProps, className: `!py-2` }}
-    >
-      {children}
+      </Popover.Panel>
     </Popover>
   );
 }

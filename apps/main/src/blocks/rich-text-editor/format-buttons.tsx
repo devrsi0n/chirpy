@@ -8,7 +8,6 @@ import {
   IconCode,
   IconBlockQuote,
   IconItalic,
-  IconLink2,
   IconList,
   IconUnderline,
   Icon,
@@ -23,12 +22,10 @@ export type BaseRTEButtonProps = {
   children?: React.ReactNode;
 } & BaseButtonProps;
 
-export function BaseMarkButton({
-  className,
-  isActive,
-  children,
-  ...restProps
-}: BaseRTEButtonProps): JSX.Element {
+export const BaseMarkButton = React.forwardRef(function BaseMarkButton(
+  { className, isActive, children, ...restProps }: BaseRTEButtonProps,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+): JSX.Element {
   return (
     <BaseButton
       className={clsx(
@@ -38,11 +35,12 @@ export function BaseMarkButton({
         className,
       )}
       {...restProps}
+      ref={ref}
     >
       {children}
     </BaseButton>
   );
-}
+});
 
 const markIconMap: Record<InlineFormat, Icon> = {
   bold: IconBold,
@@ -70,7 +68,7 @@ export function MarkButton({ format, editor }: MarkButtonProps): JSX.Element {
   );
 }
 
-type BlockButtonFormat = 'bulletList' | 'link' | 'blockquote';
+type BlockButtonFormat = 'bulletList' | 'blockquote';
 export type BlockButtonProps = {
   format: BlockButtonFormat;
   editor: Editor;
@@ -78,7 +76,6 @@ export type BlockButtonProps = {
 
 const blockMap: Record<BlockButtonFormat, [Icon, string]> = {
   bulletList: [IconList, 'toggleBulletList'],
-  link: [IconLink2, 'toggleLink'],
   blockquote: [IconBlockQuote, 'toggleBlockquote'],
 };
 
@@ -88,14 +85,7 @@ export function BlockButton({ format, editor }: BlockButtonProps): JSX.Element {
     <BaseMarkButton
       isActive={editor.isActive(format)}
       onClick={() => {
-        const instance = editor.chain().focus();
-        if (format === 'link') {
-          const url = window.prompt('Enter the URL of the link:');
-          if (!url) return;
-          instance.toggleLink({ href: url }).run();
-          return;
-        }
-        instance[methodName as 'toggleBulletList']().run();
+        editor.chain().focus()[methodName as 'toggleBulletList']().run();
       }}
     >
       <Icon size={20} />

@@ -1,3 +1,4 @@
+import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
 import Underline from '@tiptap/extension-underline';
@@ -54,6 +55,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         placeholder,
         emptyEditorClass: 'rtePlaceholder',
       }),
+      Image,
     ],
     editable: !readOnly,
     content: initialValue || value,
