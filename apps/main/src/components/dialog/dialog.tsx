@@ -66,7 +66,7 @@ export function Dialog({
   React.Children.forEach(children, (child) => {
     if (
       React.isValidElement(child) &&
-      (child as any).type.displayName === 'DialogFooter'
+      (child as React.ReactElement).type === DialogFooter
     ) {
       footer = React.cloneElement(child as React.ReactElement, { size });
     } else {
@@ -174,5 +174,3 @@ function DialogFooter({
     </div>
   );
 }
-
-DialogFooter.displayName = 'DialogFooter';

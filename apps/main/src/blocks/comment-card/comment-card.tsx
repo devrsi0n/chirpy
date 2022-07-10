@@ -142,10 +142,8 @@ export function CommentCard({
                 </Menu.Button>
                 <Menu.Items>
                   <Menu.Item className="space-x-1" disableAutoDismiss>
-                    <Popover
-                      placement="topEnd"
-                      buttonAs="button"
-                      content={
+                    <Popover>
+                      <Popover.Panel placement="topEnd">
                         <div className="flex flex-row items-center space-x-2">
                           <Text size="sm" className="w-max">
                             Are you sure?
@@ -158,17 +156,18 @@ export function CommentCard({
                             Delete
                           </Button>
                         </div>
-                      }
-                    >
-                      <div
-                        className={clsx(
-                          `flex flex-row items-center`,
-                          MenuItemPadding,
-                        )}
-                      >
-                        <IconTrash2 size={16} />
-                        <span className="ml-1">Delete</span>
-                      </div>
+                      </Popover.Panel>
+                      <Popover.Button as="button">
+                        <div
+                          className={clsx(
+                            `flex flex-row items-center`,
+                            MenuItemPadding,
+                          )}
+                        >
+                          <IconTrash2 size={16} />
+                          <span className="ml-1">Delete</span>
+                        </div>
+                      </Popover.Button>
                     </Popover>
                   </Menu.Item>
                 </Menu.Items>

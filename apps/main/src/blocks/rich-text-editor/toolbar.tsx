@@ -3,9 +3,11 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { Divider } from '$/components/divider';
+import { IconImage, IconLink2 } from '$/components/icons';
 import { cardBg } from '$/styles/common';
 
 import { MarkButton, HeadingButton, BlockButton } from './format-buttons';
+import { RTEPopoverButton } from './rte-popover-button';
 import styles from './toolbar.module.scss';
 
 export type ToolbarProps = React.PropsWithChildren<
@@ -40,7 +42,24 @@ export function Toolbar({
         <MarkButton editor={editor} format="code" />
         <div className={styles.blockButtonGroup}>
           <Divider vertical />
-          <BlockButton editor={editor} format="link" />
+          <RTEPopoverButton
+            label="Image url"
+            onClickGo={(url: string) => {
+              if (!url) return;
+              editor.chain().focus().setImage({ src: url }).run();
+            }}
+          >
+            <IconImage size={20} />
+          </RTEPopoverButton>
+          <RTEPopoverButton
+            label="URL"
+            onClickGo={(url: string) => {
+              if (!url) return;
+              editor.chain().focus().toggleLink({ href: url }).run();
+            }}
+          >
+            <IconLink2 size={20} />
+          </RTEPopoverButton>
           <BlockButton editor={editor} format="bulletList" />
           <BlockButton editor={editor} format="blockquote" />
         </div>

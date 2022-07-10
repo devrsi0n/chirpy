@@ -34,42 +34,36 @@ export function ToxicTextPopover({
   };
 
   return (
-    <>
-      <Popover
-        open={show}
-        autoClose={false}
-        placement="topEnd"
-        type="alert"
-        content={
-          <section className="w-64">
-            <Heading as="h5" className="font-bold">
-              Toxic comment
-            </Heading>
-            <Text size="sm" className="mt-2" variant="secondary">
-              Your comment contains
-              <strong className="px-1">{_toxicLabels.join(', ')}</strong>
-              sentences. You must remove them before posting.
-            </Text>
-            <div className="mt-5 flex justify-end">
-              <Button
-                size="sm"
-                variant="solid"
-                color="primary"
-                onClick={handleClickOk}
-              >
-                {`OK`}
-              </Button>
-            </div>
-          </section>
-        }
-        buttonProps={{
-          ...buttonProps,
-          className: `!py-2`,
-          onClick: onClickSubmit,
-        }}
+    <Popover open={show}>
+      <Popover.Button
+        {...buttonProps}
+        className="!py-2"
+        onClick={onClickSubmit}
       >
         {children}
-      </Popover>
-    </>
+      </Popover.Button>
+      <Popover.Panel autoClose={false} placement="topEnd" type="alert">
+        <section className="w-64">
+          <Heading as="h5" className="font-bold">
+            Toxic comment
+          </Heading>
+          <Text size="sm" className="mt-2" variant="secondary">
+            Your comment contains
+            <strong className="px-1">{_toxicLabels.join(', ')}</strong>
+            sentences. You must remove them before posting.
+          </Text>
+          <div className="mt-5 flex justify-end">
+            <Button
+              size="sm"
+              variant="solid"
+              color="primary"
+              onClick={handleClickOk}
+            >
+              {`OK`}
+            </Button>
+          </div>
+        </section>
+      </Popover.Panel>
+    </Popover>
   );
 }
