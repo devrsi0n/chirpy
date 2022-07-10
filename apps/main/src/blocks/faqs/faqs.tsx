@@ -26,7 +26,7 @@ export function FAQs(): JSX.Element {
         ))}
         <div className="col-span-full mt-8 flex flex-col rounded-lg bg-white px-5 py-8 dark:bg-black lg:flex-row lg:items-start lg:justify-between lg:p-8">
           <div className="sm:0 mb-6">
-            <Heading as="h5" className="mb-2">
+            <Heading as="h5" className="mb-2 font-semibold">
               Still have questions?
             </Heading>
             <Text
