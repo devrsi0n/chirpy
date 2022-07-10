@@ -1,4 +1,21 @@
-import * as colors from '@radix-ui/colors';
+import {
+  amber,
+  amberDark,
+  blue,
+  blueDark,
+  green,
+  greenDark,
+  indigo,
+  indigoDark,
+  pink,
+  pinkDark,
+  plum,
+  plumDark,
+  red,
+  redDark,
+  violet,
+  violetDark,
+} from '@radix-ui/colors';
 
 import { translateRadixColor } from '$/contexts/theme-context/utilities';
 
@@ -8,35 +25,35 @@ export type ColorSeries = {
 };
 export const colorOptions: Record<string, ColorSeries> = {
   red: {
-    light: translateRadixColor(colors.red),
-    dark: translateRadixColor(colors.redDark),
+    light: translateRadixColor(red),
+    dark: translateRadixColor(redDark),
   },
   amber: {
-    light: translateRadixColor(colors.amber),
-    dark: translateRadixColor(colors.amberDark),
+    light: translateRadixColor(amber),
+    dark: translateRadixColor(amberDark),
   },
   green: {
-    light: translateRadixColor(colors.green),
-    dark: translateRadixColor(colors.greenDark),
+    light: translateRadixColor(green),
+    dark: translateRadixColor(greenDark),
   },
   blue: {
-    light: translateRadixColor(colors.blue),
-    dark: translateRadixColor(colors.blueDark),
+    light: translateRadixColor(blue),
+    dark: translateRadixColor(blueDark),
   },
   indigo: {
-    light: translateRadixColor(colors.indigo),
-    dark: translateRadixColor(colors.indigoDark),
+    light: translateRadixColor(indigo),
+    dark: translateRadixColor(indigoDark),
   },
   violet: {
-    light: translateRadixColor(colors.violet),
-    dark: translateRadixColor(colors.violetDark),
+    light: translateRadixColor(violet),
+    dark: translateRadixColor(violetDark),
   },
   default: {
-    light: translateRadixColor(colors.plum),
-    dark: translateRadixColor(colors.plumDark),
+    light: translateRadixColor(plum),
+    dark: translateRadixColor(plumDark),
   },
   pink: {
-    light: translateRadixColor(colors.pink),
-    dark: translateRadixColor(colors.pinkDark),
+    light: translateRadixColor(pink),
+    dark: translateRadixColor(pinkDark),
   },
 };

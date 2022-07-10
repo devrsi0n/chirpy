@@ -1,6 +1,6 @@
 export const bluredOverlay = `bg-blacka-400 dark:bg-whitea-400 backdrop-blur-sm`;
 
-export const cardBg = `bg-white dark:bg-grayd-300`;
+export const cardBg = `bg-gray-0`;
 
 export const blured = `bg-opacity-75 dark:bg-opacity-70 backdrop-blur-xl backdrop-saturate-150`;
 export const bluredBg = `

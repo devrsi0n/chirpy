@@ -1,4 +1,4 @@
-import * as radixColors from '@radix-ui/colors';
+import { whiteA, blackA } from '@radix-ui/colors';
 import * as React from 'react';
 
 import { Theme } from '$/types/theme.type';
@@ -8,8 +8,8 @@ import { getThemeCSSVariablesString, translateRadixColor } from './utilities';
 
 const siteColors = siteTheme.colors;
 const FIXED_COLORS = {
-  whitea: translateRadixColor(radixColors.whiteA),
-  blacka: translateRadixColor(radixColors.blackA),
+  whitea: translateRadixColor(whiteA),
+  blacka: translateRadixColor(blackA),
 };
 
 export type Selectors = {
