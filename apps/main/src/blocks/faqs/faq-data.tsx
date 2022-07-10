@@ -1,4 +1,12 @@
-import { Chrome, CornerLeftDown, IconHeart, Repeat } from '$/components/icons';
+import {
+  Chrome,
+  Cloud,
+  CornerLeftDown,
+  CreditCard,
+  IconHeart,
+  Repeat,
+} from '$/components/icons';
+import { Link } from '$/components/link';
 
 type FAQItem = {
   title: string;
@@ -28,12 +36,36 @@ export const FAQ_LIST: FAQItem[] = [
     title: `What browsers do you support?`,
     description: (
       <span>
-        Chirpy are designed to work in the latest, stable releases of all major
+        Chirpy is designed to work in the modern, recent releases of all major
         browsers, including Chrome, Firefox, Safari, and Edge.
         <br />
-        <span>{`We don't support Internet Explorer 11.`}</span>
+        <span>{`We don't support Internet Explorer.`}</span>
       </span>
     ),
     icon: <Chrome />,
+  },
+  {
+    title: `What payment methods do you support?`,
+    description: (
+      <span>
+        Our payment is provided by{' '}
+        <Link href="https://www.paddle.com/">Paddle</Link>. We accept all major
+        credit, debit cards, PayPal, Google Pay, and Apple Pay.{' '}
+        <Link href="https://www.paddle.com/help/start/intro-to-paddle/which-payment-methods-do-you-support">
+          More details
+        </Link>
+      </span>
+    ),
+    icon: <CreditCard />,
+  },
+  {
+    title: `Can Chirpy be self-hosted?`,
+    description: (
+      <span>
+        {`Yes, it is. It's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience. `}
+        <Link href="https://chirpy.dev/docs/self-hosted">More details</Link>
+      </span>
+    ),
+    icon: <Cloud />,
   },
 ];

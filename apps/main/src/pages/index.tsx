@@ -18,19 +18,19 @@ type HomeProps = HomeCommentWidgetPreviewProps;
 
 export default function Home({ buildDate }: HomeProps): JSX.Element {
   return (
-    <SiteLayout enableBgGradient title="">
+    <SiteLayout enableBgGradient title="" hideFullBleed>
       <section className="flex min-h-full flex-col items-center space-y-24">
         <div className="space-y-8">
-          <h1 className="mt-1 w-full max-w-2xl text-4xl font-black leading-snug text-gray-1200 sm:text-center">
+          <h1 className="mt-1 w-full max-w-2xl text-center text-4xl font-black leading-snug text-gray-1200">
             <span className="inline-block bg-gradient-to-r from-primary-900 to-plum-900 bg-clip-text text-transparent">
               {strings.heroTitlePoint}
             </span>{' '}
             <span>{strings.heroTitle}</span>
           </h1>
-          <Text className="sm:text-center" variant="secondary">
+          <Text className="text-center" variant="secondary">
             {strings.heroDescription}
           </Text>
-          <div className="flex items-center space-x-6 sm:justify-center">
+          <div className="flex items-center justify-center space-x-6">
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
               <Button
                 variant="solid"
@@ -50,7 +50,9 @@ export default function Home({ buildDate }: HomeProps): JSX.Element {
           </div>
         </div>
         <Features />
-        <HomeCommentWidgetPreview buildDate={buildDate} />
+        <div className="w-[min(75ch,calc(100%-32px))]">
+          <HomeCommentWidgetPreview buildDate={buildDate} />
+        </div>
         <Pricing id="pricing" />
         <FAQs />
       </section>

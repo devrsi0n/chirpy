@@ -23,18 +23,15 @@ const commonBenefits = [
 
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
-    <div id={id} className="flex flex-col items-center">
-      <Heading
-        as="h2"
-        className="mb-4 w-full text-left font-bold sm:text-center"
-      >
+    <div id={id} className="flex flex-col items-center px-8">
+      <Heading as="h2" className="mb-4 w-full text-left text-center font-bold">
         Pricing Plans
       </Heading>
       <Text className="mb-8" variant="secondary" size="lg">
         Start building for free, then add a site to go live. Account plans
         unblock additional features.
       </Text>
-      <div className="flex w-full flex-col items-start space-y-4 sm:items-center md:flex-row md:items-start md:space-x-6 md:space-y-0">
+      <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-start md:space-x-6 md:space-y-0">
         <PricingCard
           plan="Hobby"
           price="0"
