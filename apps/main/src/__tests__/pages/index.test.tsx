@@ -5,7 +5,7 @@ import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {
   beforeEach(() => {
-    pageRender(<Index />);
+    pageRender(<Index buildDate={new Date().toISOString()} />);
   });
 
   afterEach(() => {
@@ -18,6 +18,6 @@ describe('Index page', () => {
   });
 
   it('should render the pricing', () => {
-    expect(screen.getByText('Pricing Plans')).toBeInTheDocument();
+    expect(screen.getByText('Simple, transparent pricing')).toBeInTheDocument();
   });
 });
