@@ -9,7 +9,8 @@ const colors = {
   blue: getColorCSSVariables('blue'),
   indigo: getColorCSSVariables('indigo'),
   green: getColorCSSVariables('green'),
-  gray: getColorCSSVariables('gray'),
+  gray: getColorCSSVariables('gray', true, 0),
+
   violet: getColorCSSVariables('violet'),
   plum: getColorCSSVariables('plum'),
   primary: getColorCSSVariables('primary'),
@@ -165,17 +166,21 @@ module.exports = {
         isFirefoxRule.append(container.nodes);
         container.append(isFirefoxRule);
         isFirefoxRule.walkRules((rule) => {
-          rule.selector = `.${e(`firefox${separator}${rule.selector.slice(1)}`)}`;
+          rule.selector = `.${e(
+            `firefox${separator}${rule.selector.slice(1)}`,
+          )}`;
         });
       });
     }),
   ],
 };
 
-function getColorCSSVariables(name, modernAlpha = true) {
+function getColorCSSVariables(name, modernAlpha = true, startAt = 1) {
   const result = {};
-  for (let i = 1; i <= 12; i++) {
-    result[i * 100] = `${modernAlpha ? 'hsl' : 'hsla'}(var(--tw-colors-${name}-${i * 100})${
+  for (let i = startAt; i <= 12; i++) {
+    result[i * 100] = `${
+      modernAlpha ? 'hsl' : 'hsla'
+    }(var(--tw-colors-${name}-${i * 100})${
       modernAlpha ? ' / <alpha-value>' : ''
     })`;
   }
