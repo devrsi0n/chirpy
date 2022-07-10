@@ -24,7 +24,7 @@ const contents: FeatureProps[] = [
 
 export function Features(): JSX.Element {
   return (
-    <ul className="grid gap-8 lg:grid-cols-2 lg:gap-10 2xl:grid-cols-3">
+    <ul className="grid gap-8 lg:grid-cols-2 lg:gap-10">
       {contents.map((item) => (
         <li className="" key={item.heading}>
           <Feature {...item} />

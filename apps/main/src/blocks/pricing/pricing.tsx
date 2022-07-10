@@ -6,6 +6,7 @@ import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { List } from '$/components/list';
+import { SectionHeader } from '$/components/section-header';
 import { Text } from '$/components/text';
 
 export type PricingProps = React.PropsWithChildren<{
@@ -24,13 +25,11 @@ const commonBenefits = [
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
     <div id={id} className="flex flex-col items-center px-8">
-      <Heading as="h2" className="mb-4 w-full text-left text-center font-bold">
-        Pricing Plans
-      </Heading>
-      <Text className="mb-8" variant="secondary" size="lg">
-        Start building for free, then add a site to go live. Account plans
-        unblock additional features.
-      </Text>
+      <SectionHeader
+        label="Pricing"
+        title="Simple, transparent pricing"
+        description="Simple, transparent pricing that grows with you. Try a free plan, and upgrade at anytime."
+      />
       <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-start md:space-x-6 md:space-y-0">
         <PricingCard
           plan="Hobby"
@@ -52,7 +51,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
             'No branding',
           ]}
           callToAction={{
-            label: 'Try It Free',
+            label: 'Get started',
             buttonProps: {
               color: 'primary',
             },
