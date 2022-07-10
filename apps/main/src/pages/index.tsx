@@ -54,7 +54,7 @@ export default function Home({ buildDate }: HomeProps): JSX.Element {
           <HomeCommentWidgetPreview buildDate={buildDate} />
         </div>
         <Pricing id="pricing" />
-        <FAQs />
+        <FAQs id="faqs" />
       </section>
     </SiteLayout>
   );
