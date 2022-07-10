@@ -30,7 +30,7 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 - 📱 Mobile friendly
 - 🔔 Email & Web notifications
 - 🤐 [Anti toxic comment](https://chirpy.dev/docs/features/anti-toxic-comment)
-- 💬 [Comment moderation](https://chirpy.dev/docs/features/moderation) -->
+- 💬 [Comment moderation](https://chirpy.dev/docs/features/moderation)
 
 ## 🧭 Roadmap
 
