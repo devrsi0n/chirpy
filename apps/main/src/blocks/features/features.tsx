@@ -24,9 +24,9 @@ const contents: FeatureProps[] = [
 
 export function Features(): JSX.Element {
   return (
-    <ul className="flex flex-col items-start space-y-12 sm:max-w-full sm:flex-row sm:justify-between sm:space-x-6 sm:space-y-0 sm:px-0">
+    <ul className="grid gap-8 lg:grid-cols-2 lg:gap-10 2xl:grid-cols-3">
       {contents.map((item) => (
-        <li className="sm:flex-1" key={item.heading}>
+        <li className="" key={item.heading}>
           <Feature {...item} />
         </li>
       ))}
@@ -50,7 +50,9 @@ function Feature(props: FeatureProps): JSX.Element {
         <Heading as="h4" className="mb-3 font-semibold">
           {props.heading}
         </Heading>
-        <Text variant="secondary">{props.content}</Text>
+        <Text variant="secondary" className="max-w-sm">
+          {props.content}
+        </Text>
       </div>
     </section>
   );

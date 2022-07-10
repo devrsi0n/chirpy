@@ -5,6 +5,8 @@ export * from './feature-icon';
 
 export type { Icon } from '@geist-ui/icons';
 
+export { default as Cloud } from '@geist-ui/icons/cloud';
+export { default as CreditCard } from '@geist-ui/icons/creditCard';
 export { default as CornerLeftDown } from '@geist-ui/icons/cornerLeftDown';
 export { default as Chrome } from '@geist-ui/icons/chrome';
 export { default as Repeat } from '@geist-ui/icons/repeat';
