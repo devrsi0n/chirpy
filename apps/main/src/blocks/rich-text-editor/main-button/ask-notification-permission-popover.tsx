@@ -6,7 +6,7 @@ import { Text } from '$/components/text';
 export interface IAskNotificationPermissionPopoverProps {
   onClickAskNextTime: () => void;
   onClickSure: () => void;
-  buttonProps: IPopoverButtonProps;
+  buttonProps: Omit<IPopoverButtonProps, 'children'>;
   children: React.ReactNode;
 }
 

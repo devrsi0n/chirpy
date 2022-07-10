@@ -125,8 +125,12 @@ export default function Profile(): JSX.Element {
             </div>
             <div className="flex flex-row space-x-2">
               {isEditMode && (
-                <Popover
-                  content={
+                <Popover>
+                  <Popover.Button>
+                    <IconTrash2 size={16} />
+                    <span className="ml-1">Discard</span>
+                  </Popover.Button>
+                  <Popover.Panel>
                     <div className="flex flex-row items-center space-x-2">
                       <Text className="w-max">
                         Your unsaved content will lost, are you sure?
@@ -135,10 +139,7 @@ export default function Profile(): JSX.Element {
                         Confirm
                       </Button>
                     </div>
-                  }
-                >
-                  <IconTrash2 size={16} />
-                  <span className="ml-1">Discard</span>
+                  </Popover.Panel>
                 </Popover>
               )}
               <Button
