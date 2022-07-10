@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
+import { SectionHeader } from '$/components/section-header';
 import { Text } from '$/components/text';
 
 import { FAQ } from './faq';
@@ -11,18 +12,12 @@ import { FAQ_LIST } from './faq-data';
 export function FAQs(): JSX.Element {
   return (
     <section className="flex w-full flex-col items-center">
-      <div>
-        <Text color="primary" className="mb-3 text-center font-semibold">
-          FAQs
-        </Text>
-        <Heading as="h2" className="mb-6 text-center text-5xl font-semibold">
-          Ask us anything
-        </Heading>
-        <Text variant="secondary" className="mb-24 text-center">
-          Need something cleared up? Here are our most frequently asked
-          questions.
-        </Text>
-      </div>
+      <SectionHeader
+        label="FAQs"
+        title="Ask us anything"
+        description="Need something cleared up? Here are our most frequently asked
+          questions."
+      />
       <article className="mt-10 grid gap-8 lg:grid-cols-2 lg:gap-10 2xl:grid-cols-3">
         {FAQ_LIST.map(({ title, description, icon }) => (
           <FAQ title={title} description={description} key={title}>
