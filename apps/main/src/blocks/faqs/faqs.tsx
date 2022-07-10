@@ -9,9 +9,13 @@ import { Text } from '$/components/text';
 import { FAQ } from './faq';
 import { FAQ_LIST } from './faq-data';
 
-export function FAQs(): JSX.Element {
+export interface IFAQsProps {
+  id: string;
+}
+
+export function FAQs({ id }: IFAQsProps): JSX.Element {
   return (
-    <section className="flex w-full flex-col items-center">
+    <section className="flex w-full flex-col items-center" id={id}>
       <SectionHeader
         label="FAQs"
         title="Ask us anything"
