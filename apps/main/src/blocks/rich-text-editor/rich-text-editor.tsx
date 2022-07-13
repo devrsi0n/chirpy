@@ -1,3 +1,4 @@
+// @refresh reset
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -8,7 +9,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { useLocalStorage } from '$/hooks/use-local-storage';
-import { cardBg, textInput } from '$/styles/common';
+import { textInput } from '$/styles/common';
 
 import { MainButton } from './main-button';
 import { Toolbar } from './toolbar';
@@ -55,7 +56,11 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         placeholder,
         emptyEditorClass: 'rtePlaceholder',
       }),
-      Image,
+      Image.configure({
+        HTMLAttributes: {
+          class: 'object-cover',
+        },
+      }),
     ],
     editable: !readOnly,
     content: initialValue || value,
@@ -88,11 +93,10 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
-          'prose !max-w-full text-gray-1200',
+          'prose !max-w-full pr-2 text-gray-1200',
           !readOnly && [
-            `!min-h-[4em] resize-y overflow-hidden rounded px-2`,
+            `!min-h-[4em] resize-y overflow-hidden rounded pl-2`,
             textInput,
-            cardBg,
           ],
           styles?.editable,
         )}

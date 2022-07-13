@@ -37,7 +37,7 @@ export function getColors() {
       primary: translateRadixColor(violet),
       plum: translateRadixColor(plum),
       gray: {
-        0: '	hsl(0, 0%, 100%)',
+        0: 'hsl(0, 0%, 100%)',
         ...translateRadixColor(gray),
       },
       blue: translateRadixColor(blue),
@@ -48,7 +48,7 @@ export function getColors() {
       orange: translateRadixColor(orange),
       red: translateRadixColor(red),
       pink: translateRadixColor(pink),
-      bg: gray.gray2,
+      bg: gray.gray1,
     },
     dark: {
       primary: translateRadixColor(violetDark),
@@ -65,7 +65,7 @@ export function getColors() {
       orange: translateRadixColor(orangeDark),
       red: translateRadixColor(redDark),
       pink: translateRadixColor(pinkDark),
-      bg: grayDark.gray2,
+      bg: grayDark.gray1,
     },
   };
 }
