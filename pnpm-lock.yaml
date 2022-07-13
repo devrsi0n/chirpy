@@ -245,7 +245,7 @@ importers:
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
-      tailwindcss: 3.1.2
+      tailwindcss: 3.1.6
       tsconfig-paths-webpack-plugin: 3.5.2
       type-fest: 2.15.1
       typescript: 4.7.4
@@ -346,7 +346,7 @@ importers:
       '@storybook/react': 6.5.9_mqwqb6erz6uqj4p45xc7ea4lfi
       '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/testing-react': 1.3.0_za4wzpqzku43ewvak7n22w3ahu
-      '@tailwindcss/typography': 0.5.2_tailwindcss@3.1.2
+      '@tailwindcss/typography': 0.5.2_tailwindcss@3.1.6
       '@testing-library/jest-dom': 5.16.4
       '@testing-library/react': 13.3.0_biqbaboplfbrettd7655fr4n2y
       '@testing-library/user-event': 14.2.1
@@ -391,7 +391,7 @@ importers:
       sass-loader: 13.0.2_sass@1.53.0+webpack@5.73.0
       storybook-addon-next: 1.6.6_7ax4sfkz4ofyn4jhflircdjpkm
       style-loader: 3.3.1_webpack@5.73.0
-      tailwindcss: 3.1.2
+      tailwindcss: 3.1.6
       tsconfig-paths-webpack-plugin: 3.5.2
       typescript: 4.7.4
       webpack: 5.73.0
@@ -5271,7 +5271,7 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@tailwindcss/typography/0.5.2_tailwindcss@3.1.2:
+  /@tailwindcss/typography/0.5.2_tailwindcss@3.1.6:
     resolution: {integrity: sha512-coq8DBABRPFcVhVIk6IbKyyHUt7YTEC/C992tatFB+yEx5WGBQrCgsSFjxHUr8AWXphWckadVJbominEduYBqw==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1 || insiders'
@@ -5279,7 +5279,7 @@ packages:
       lodash.castarray: 4.4.0
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
-      tailwindcss: 3.1.2
+      tailwindcss: 3.1.6
     dev: true
 
   /@tensorflow-models/toxicity/1.2.2_ce7e77rhh6oipcy6kxvkentnmi:
@@ -20184,8 +20184,8 @@ packages:
       - ts-node
     dev: false
 
-  /tailwindcss/3.1.2:
-    resolution: {integrity: sha512-yJ6L5s1U5AeS5g7HHy212zdQfjwD426FBfm59pet/JsyneuZuD4C2W7PpJEg4ppisiB21uLqtNagv8KXury3+Q==}
+  /tailwindcss/3.1.6:
+    resolution: {integrity: sha512-7skAOY56erZAFQssT1xkpk+kWt2NrO45kORlxFPXUt3CiGsVPhH1smuH5XoDH6sGPXLyBv+zgCKA2HWBsgCytg==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     dependencies:
