@@ -241,7 +241,7 @@ importers:
       sass: 1.53.0
       sass-loader: 13.0.2
       shiki: 0.10.1
-      storybook-addon-next: 1.6.6
+      storybook-addon-next: 1.6.7
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
@@ -389,7 +389,7 @@ importers:
       resolve-url-loader: 5.0.0
       sass: 1.53.0
       sass-loader: 13.0.2_sass@1.53.0+webpack@5.73.0
-      storybook-addon-next: 1.6.6_7ax4sfkz4ofyn4jhflircdjpkm
+      storybook-addon-next: 1.6.7_7ax4sfkz4ofyn4jhflircdjpkm
       style-loader: 3.3.1_webpack@5.73.0
       tailwindcss: 3.1.6
       tsconfig-paths-webpack-plugin: 3.5.2
@@ -19577,8 +19577,8 @@ packages:
     resolution: {integrity: sha512-CMtO2Uneg3SAz/d6fZ/6qbqqQHi2ynq6/KzMD/26gTkiEShCcpqFfTHgOxsE0egAq6SX3FmN4CeSqn8BzXQkJg==}
     dev: true
 
-  /storybook-addon-next/1.6.6_7ax4sfkz4ofyn4jhflircdjpkm:
-    resolution: {integrity: sha512-HbGY7DM+qW925rgladudF2PJK+Iq06bRTPseGn6qXnIgC9L/FvBzI1UvDcguYMYWUOzGCbFl11DpHcU/pE1KkQ==}
+  /storybook-addon-next/1.6.7_7ax4sfkz4ofyn4jhflircdjpkm:
+    resolution: {integrity: sha512-ltnHboGekSr6+UWv3MNl+0GaOyIWjTHN8Z5rc2te3bB1gq46W6JEML4XVNflFdANhKvVHayAxMOr7oeT3LMc2Q==}
     peerDependencies:
       '@storybook/addon-actions': ^6.0.0
       next: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0
