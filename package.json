@@ -50,7 +50,8 @@
       }
     },
     "patchedDependencies": {
-      "react-flip-move@3.0.4": "patches/react-flip-move@3.0.4.patch"
+      "react-flip-move@3.0.4": "patches/react-flip-move@3.0.4.patch",
+      "next-auth@4.9.0": "patches/next-auth@4.9.0.patch"
     }
   },
   "renovate": {
@@ -58,7 +59,7 @@
       "config:base",
       "docker:disable"
     ],
-    "prConcurrentLimit": 15,
+    "prConcurrentLimit": 5,
     "packageRules": [
       {
         "matchPackagePatterns": "^@tiptap/",

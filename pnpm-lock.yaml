@@ -4,6 +4,9 @@ patchedDependencies:
   react-flip-move@3.0.4:
     hash: 4vqqtxpblx3txl6pkcft5ke2i4
     path: patches/react-flip-move@3.0.4.patch
+  next-auth@4.9.0:
+    hash: 6zcrdkmcpfrjs46byl4ik3opiq
+    path: patches/next-auth@4.9.0.patch
 
 importers:
 
@@ -290,7 +293,7 @@ importers:
       jsonwebtoken: 8.5.1
       lodash: 4.17.21
       next: 12.2.2_zazhvxb5wdpfvem7m5mnvhb45a
-      next-auth: 4.9.0_sefvxjser5il3hykbaod5kfmre
+      next-auth: 4.9.0_6zcrdkmcpfrjs46byl4ik3opiq_sefvxjser5il3hykbaod5kfmre
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
@@ -15427,7 +15430,7 @@ packages:
       type-fest: 0.4.1
     dev: false
 
-  /next-auth/4.9.0_sefvxjser5il3hykbaod5kfmre:
+  /next-auth/4.9.0_6zcrdkmcpfrjs46byl4ik3opiq_sefvxjser5il3hykbaod5kfmre:
     resolution: {integrity: sha512-/4S5dFeyNg2nXlD7g/Sh5A4WZWnUMDpEf8x/x+gzmAf5cAY2SjDM6sLk9u4XRmsndsxQpIMWDw03sUTAD+Yzog==}
     engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0}
     peerDependencies:
@@ -15451,6 +15454,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
       uuid: 8.3.2
     dev: false
+    patched: true
 
   /next-compose-plugins/2.2.1:
     resolution: {integrity: sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==}

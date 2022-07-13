@@ -6,19 +6,17 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const MIN_PREDICTION_CONFIDENCE = 0.9;
 
 export function getToxicModel() {
-  const toxicModelPromise = toxicity.load(MIN_PREDICTION_CONFIDENCE, [
-    'toxicity',
-    'severe_toxicity',
-    `identity_attack`,
-    `insult`,
-    `threat`,
-    `sexual_explicit`,
-    `obscene`,
-  ]);
-
   // Save the ref to the global env to avoid reload the models between severless calls
   if (!global.toxicModelPromise) {
-    global.toxicModelPromise = toxicModelPromise;
+    global.toxicModelPromise = toxicity.load(MIN_PREDICTION_CONFIDENCE, [
+      'toxicity',
+      'severe_toxicity',
+      `identity_attack`,
+      `insult`,
+      `threat`,
+      `sexual_explicit`,
+      `obscene`,
+    ]);
   }
   return global.toxicModelPromise;
 }
@@ -43,7 +41,7 @@ export async function checkToxicText(
       }
       return prev;
     },
-    { matchedLabels: [] } as ICheckToxicText,
-  );
+    { matchedLabels: [] },
+  ) as ICheckToxicText;
   res.status(200).json(resp);
 }

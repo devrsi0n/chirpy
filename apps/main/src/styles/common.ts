@@ -14,7 +14,7 @@ export const listHoverable = `px-2 py-1 rounded ${listHoverableColor}`;
 
 export const ring = `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-bg focus-visible:ring-offset-2 focus-visible:ring-primary-700`;
 
-export const textInput = `placeholder-gray-900 bg-gray-100 dark:bg-gray-400`;
+export const textInput = `placeholder-gray-900 bg-gray-0`;
 
 export const textInputError = `border-red-700 focus-visible:border-red-800`;
 

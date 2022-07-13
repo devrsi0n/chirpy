@@ -40,7 +40,7 @@ export function useThemeVariables(theme?: Theme, selectors?: Selectors) {
     return `${light}, ::before, ::after {
         ${getThemeCSSVariablesString(lightTheme)}
       }
-    
+
        ${dark}, .dark ::before, .dark ::after {
         ${getThemeCSSVariablesString(darkTheme)}
       }
