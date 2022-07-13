@@ -7,7 +7,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-  @apply bg-bg;
+
+  &.site {
+    @apply bg-bg;
+  }
 }
 
 html,
