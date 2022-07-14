@@ -198,7 +198,7 @@ importers:
       eslint: 8.18.0
       eta: 1.12.3
       fake-indexeddb: 3.1.8
-      framer-motion: 6.3.15
+      framer-motion: 6.5.1
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6
@@ -283,7 +283,7 @@ importers:
       debounce-promise: 3.1.2
       downshift: 6.1.7_react@18.2.0
       eta: 1.12.3
-      framer-motion: 6.3.15_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
       github-slugger: 1.4.0
       graphql: 16.5.0
       graphql-tag: 2.12.6_graphql@16.5.0
@@ -3454,6 +3454,53 @@ packages:
 
   /@mdx-js/util/1.6.22:
     resolution: {integrity: sha512-H1rQc1ZOHANWBvPcW+JpGwr+juXSxM8Q8YCkm3GhZd8REu1fHR3z99CErO1p9pkcfcxZnMdIZdIsXkOHY0NilA==}
+
+  /@motionone/animation/10.12.0:
+    resolution: {integrity: sha512-SCWkVjMChQwA4Cnt1pdmhCi0OC4cAR+rqsskNEqmbgfG59zmn50TfOP6vgqjkYbaSZXXLeEb03Mez362jIEHRg==}
+    dependencies:
+      '@motionone/easing': 10.12.0
+      '@motionone/types': 10.12.0
+      '@motionone/utils': 10.12.0
+      tslib: 2.4.0
+    dev: false
+
+  /@motionone/dom/10.12.0:
+    resolution: {integrity: sha512-UdPTtLMAktHiqV0atOczNYyDd/d8Cf5fFsd1tua03PqTwwCe/6lwhLSQ8a7TbnQ5SN0gm44N1slBfj+ORIhrqw==}
+    dependencies:
+      '@motionone/animation': 10.12.0
+      '@motionone/generators': 10.12.0
+      '@motionone/types': 10.12.0
+      '@motionone/utils': 10.12.0
+      hey-listen: 1.0.8
+      tslib: 2.4.0
+    dev: false
+
+  /@motionone/easing/10.12.0:
+    resolution: {integrity: sha512-kdwcn1ja/0//BBHRElX3In1yfqMEhqUoL3G0njDan8R+gfPy3DanyuCtio4VruHQ1m3XN3LcrqavbClzcGo7IA==}
+    dependencies:
+      '@motionone/utils': 10.12.0
+      tslib: 2.4.0
+    dev: false
+
+  /@motionone/generators/10.12.0:
+    resolution: {integrity: sha512-QM8/ndOve80HLXImChwW8ogrEM/8m9xzZEl2Ci2ep1uGLAQ+ADiwzKtl11inGESrxiFDrUdD12WXacCn+y172Q==}
+    dependencies:
+      '@motionone/types': 10.12.0
+      '@motionone/utils': 10.12.0
+      tslib: 2.4.0
+    dev: false
+
+  /@motionone/types/10.12.0:
+    resolution: {integrity: sha512-D9k7ijkAT6JJOCMUVn9IgJqWolp7N3oBbWRQTIRGGO41Bmr/JzLv4GzAb00PvkYAzZX+BpnSTKqXI19zrSjC5w==}
+    dev: false
+
+  /@motionone/utils/10.12.0:
+    resolution: {integrity: sha512-2g3tCqYYwb/tgzCDRbILbD5edXJB45HV51NbnhwKVOOl0PhFraRDtehzLKo9wLHdaTnO/IjVn6cHQsw6RjdolA==}
+    dependencies:
+      '@motionone/types': 10.12.0
+      hey-listen: 1.0.8
+      tslib: 2.4.0
+    dev: false
 
   /@mrmlnc/readdir-enhanced/2.2.1:
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -11473,12 +11520,13 @@ packages:
       map-cache: 0.2.2
     dev: true
 
-  /framer-motion/6.3.15_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-tqyEaYfr+7p3rnMcMzdVxWoHLsAfpz7bk6xZljndSEfafQ0BfwlZ/CeFZkEETRFr16w/LxfDKBVhinU66ucDYw==}
+  /framer-motion/6.5.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw==}
     peerDependencies:
       react: '>=16.8 || ^17.0.0 || ^18.0.0 || 18'
       react-dom: '>=16.8 || ^17.0.0 || ^18.0.0 || 18'
     dependencies:
+      '@motionone/dom': 10.12.0
       framesync: 6.0.1
       hey-listen: 1.0.8
       popmotion: 11.0.3
