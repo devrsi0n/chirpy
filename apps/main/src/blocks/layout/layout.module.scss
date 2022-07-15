@@ -6,12 +6,12 @@ $ellipse: 25%;
     z-index: 0;
     background: radial-gradient(
         circle at 5% 50%,
-        theme('colors.primary.400'/1),
+        theme('colors.primary.400'),
         $gradientColor $ellipse
       ),
       radial-gradient(
         circle at 90% 15%,
-        theme('colors.plum.400'/1),
+        theme('colors.plum.400'),
         $gradientColor $ellipse
       );
   }
