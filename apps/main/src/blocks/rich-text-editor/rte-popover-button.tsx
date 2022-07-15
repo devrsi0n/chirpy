@@ -1,8 +1,6 @@
-import { Editor } from '@tiptap/react';
 import * as React from 'react';
 
 import { Button } from '$/components/button';
-import { IconImage } from '$/components/icons';
 import { Popover } from '$/components/popover';
 import { TextField } from '$/components/text-field';
 
