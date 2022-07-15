@@ -10,7 +10,7 @@
   "fixed": [],
   "linked": [],
   "access": "public",
-  "baseBranch": "main",
+  "baseBranch": "prod",
   "updateInternalDependencies": "patch",
   "ignore": []
 }
