@@ -210,7 +210,7 @@ export function CommentCard({
               <RichTextEditor
                 placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
                 onSubmit={handleSubmitReply}
-                styles={{ editable: ``, root: `mt-2` }}
+                styles={{ root: `mt-2` }}
                 isReply
                 onClickDismiss={handleDimissRTE}
               />
