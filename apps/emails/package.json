@@ -8,12 +8,15 @@
     "dev": "maizzle serve"
   },
   "dependencies": {
-    "@maizzle/framework": "3.7.3",
-    "@maizzle/cli": "1.4.0",
+    "@maizzle/cli": "1.5.1",
+    "@maizzle/framework": "4.0.2",
     "autoprefixer": "10.4.7",
     "glob": "8.0.3",
     "postcss": "8.4.14",
-    "tailwindcss": "2.2.19"
+    "tailwindcss": "3.1.6",
+    "tailwindcss-box-shadow": "1.0.0",
+    "tailwindcss-email-variants": "2.0.0",
+    "tailwindcss-mso": "1.2.0"
   },
   "license": "Apache License 2.0",
   "publishConfig": {

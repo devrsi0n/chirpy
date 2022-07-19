@@ -9,17 +9,17 @@ bodyClass: bg-gray-100
     <table class="w-full font-sans">
       <tr>
         <td align="center" class="bg-gray-100">
-          <table class="w-600 sm:w-full">
+          <table class="w-[600px] sm:w-full">
             <tr>
-              <td align="center" class="sm:px-24">
+              <td align="center" class="sm:px-6">
                 <table class="w-full">
                   <tr>
                     <td
-                      class="leading-24 rounded bg-white p-48 text-left text-base text-gray-800 sm:px-24"
+                      class="leading-6 rounded bg-white p-12 text-left text-base text-gray-800 sm:px-6"
                     >
                       <p>Hello <strong><%= it.userName %></strong>,</p>
-                      <a href="<%= it.url %>" class="m-0 mb-24"> <%= it.title %> </a>
-                      <p class="m-0 mb-24">"<%= it.body %>"</p>
+                      <a href="<%= it.url %>" class="m-0 mb-6"> <%= it.title %> :</a>
+                      <p class="m-0 mb-6">"<%= it.body %>"</p>
                       <component src="src/components/divider.html"></component>
                       <component src="src/components/thanks-team.html"></component>
                     </td>
