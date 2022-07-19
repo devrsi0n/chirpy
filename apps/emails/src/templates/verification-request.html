@@ -9,24 +9,24 @@ bodyClass: bg-gray-100
     <table class="w-full font-sans">
       <tr>
         <td align="center" class="bg-gray-100">
-          <table class="w-600 sm:w-full">
+          <table class="w-[600px] sm:w-full">
             <tr>
-              <td align="center" class="sm:px-24">
+              <td align="center" class="sm:px-6">
                 <table class="w-full">
                   <tr>
                     <td
-                      class="leading-24 rounded bg-white p-48 text-left text-base text-gray-800 sm:px-24"
+                      class="leading-6 rounded bg-white p-12 text-left text-base text-gray-800 sm:px-6"
                     >
-                      <p class="sm:leading-32 m-0 mb-24 text-2xl font-semibold text-black">
+                      <p class="sm:leading-8 m-0 mb-6 text-2xl font-semibold text-black">
                         Sign in as <strong><%= it.email %></strong>
                       </p>
-                      <p class="m-0 mb-24">
+                      <p class="m-0 mb-6">
                         Please confirm your sign in request by clicking the button below:
                       </p>
                       <div class="leading-full">
                         <a
                           href="<%= it.url %>"
-                          class="inline-block rounded bg-blue-500 py-16 px-24 text-center text-base font-semibold text-white no-underline hover:bg-blue-600"
+                          class="inline-block rounded bg-blue-500 py-4 px-6 text-center text-base font-semibold text-white no-underline hover:bg-blue-600"
                         >
                           <!--[if mso
                             ]><i
@@ -45,7 +45,7 @@ bodyClass: bg-gray-100
                         </a>
                       </div>
                       <component src="src/components/divider.html"></component>
-                      <p class="m-0 mb-16">
+                      <p class="m-0 mb-4">
                         If you did not request this email you can safely ignore it.
                       </p>
                       <component src="src/components/thanks.html"></component>
