@@ -144,7 +144,7 @@
     "intersection-observer": "0.12.2",
     "jest": "28.1.2",
     "jest-environment-jsdom": "28.1.2",
-    "msw": "0.42.1",
+    "msw": "0.44.2",
     "msw-storybook-addon": "1.6.3",
     "next": "12.1.5",
     "postcss": "8.4.14",
