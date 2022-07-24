@@ -107,7 +107,7 @@ export default function Profile(): JSX.Element {
             )}
           </div>
           <div className="flex flex-row items-start justify-between pt-4">
-            <div>
+            <div className="space-y-4">
               {isEditMode ? (
                 <TextField
                   {...register('name', {

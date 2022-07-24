@@ -64,7 +64,7 @@ export const authProviders: Provider[] = [
             ) {
               // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
               return {
-                id: '6c0a23ae-885a-4630-946f-e694dff6f446',
+                id: credentials?.username,
                 name: 'cypresstest',
                 email: 'cypress.test@localhost',
                 image: 'https://www.cypress.io/icons/icon-72x72.png',
