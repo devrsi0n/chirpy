@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
-import { SignIn } from '$/blocks/sign-in';
+import { SignInForm } from '$/blocks/sign-in-form';
 
 export default function SignInPage(): JSX.Element {
   return (
@@ -13,7 +13,10 @@ export default function SignInPage(): JSX.Element {
       hideFooter
       hideHeader
     >
-      <SignIn title="Welcome 👋" />
+      <SignInForm
+        title="Sign in"
+        subtitle="👋 Welcome! Please enter your details."
+      />
     </SiteLayout>
   );
 }

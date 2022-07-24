@@ -46,10 +46,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
       <div
         className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5`}
       >
-        <Text variant="secondary" size="sm" className="px-2 sm:px-0">
-          &copy; {new Date().getFullYear()} Chirpy Information Technology LLC.
-          All rights reserved.
-        </Text>
+        <CompanyRight />
         <ClientOnly>
           <Select
             value={theme || 'system'}
@@ -74,5 +71,14 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         </ClientOnly>
       </div>
     </footer>
+  );
+}
+
+export function CompanyRight() {
+  return (
+    <Text variant="secondary" size="sm" className="px-2 sm:px-0">
+      &copy; {new Date().getFullYear()} Chirpy Information Technology LLC. All
+      rights reserved.
+    </Text>
   );
 }

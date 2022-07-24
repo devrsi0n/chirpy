@@ -1,7 +1,10 @@
 import clsx from 'clsx';
+import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { border, textInput, textInputError } from '$/styles/common';
+
+import { easeInOutOpacity } from '../animation';
 
 export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
   label: React.ReactNode;
@@ -28,9 +31,9 @@ export const TextField = React.forwardRef(function TextfieldComponent(
   const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
   return (
     <label
-      className={clsx(`mb-3 flex flex-col px-0.5 text-gray-1200`, styles?.root)}
+      className={clsx(`flex flex-col px-0.5 text-gray-1200`, styles?.root)}
     >
-      <LabelWrapper className="mb-1 text-lg leading-6">{label}</LabelWrapper>
+      <LabelWrapper className="text-lg leading-6">{label}</LabelWrapper>
       <div
         className={clsx(`mb-1`, prefixNode && `flex flex-row items-stretch`)}
       >
@@ -55,9 +58,17 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           )}
         />
       </div>
-      <p role="alert" className="h-4 text-sm leading-none text-red-900">
-        {errorMessage}
-      </p>
+      <AnimatePresence>
+        {errorMessage && (
+          <m.p
+            {...easeInOutOpacity}
+            role="alert"
+            className="mt-1.5 text-sm leading-none text-red-900"
+          >
+            {errorMessage}
+          </m.p>
+        )}
+      </AnimatePresence>
     </label>
   );
 });
