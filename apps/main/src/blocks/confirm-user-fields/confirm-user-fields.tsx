@@ -69,7 +69,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     },
   );
   return (
-    <Card as="form" className="w-fit rounded py-6 px-12 shadow-md">
+    <Card as="form" className="w-fit space-y-4 rounded py-6 px-12 shadow-md">
       <TextField
         {...register('email', {
           required: { value: true, message: 'Email is required' },
