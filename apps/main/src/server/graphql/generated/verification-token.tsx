@@ -49,26 +49,44 @@ export const InsertOneVerificationTokenDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'identifier' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'identifier' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'token' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'token' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'expires' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'timestamptz' },
+            },
           },
         },
       ],
@@ -88,17 +106,26 @@ export const InsertOneVerificationTokenDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'identifier' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'identifier' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'identifier' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'token' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'token' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'token' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'expires' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
                     },
                   ],
                 },
@@ -132,18 +159,30 @@ export const DeleteVerificationTokenDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'identifier' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'identifier' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'token' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'token' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -186,7 +225,10 @@ export const DeleteVerificationTokenDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'token' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'token' },
+                            },
                           },
                         ],
                       },
@@ -205,13 +247,22 @@ export const DeleteVerificationTokenDocument = {
                     kind: 'SelectionSet',
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'identifier' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'identifier' },
+                      },
                       { kind: 'Field', name: { kind: 'Name', value: 'token' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'expires' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
                     ],
                   },
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'affected_rows' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'affected_rows' },
+                },
               ],
             },
           },

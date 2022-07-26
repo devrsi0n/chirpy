@@ -23,7 +23,7 @@ export default NextAuth({
   pages: {
     signIn: '/auth/sign-in',
     newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: '/auth/sign-in', // Error code passed in query string as ?error=
   },
   callbacks: {
     /**
@@ -88,7 +88,7 @@ export default NextAuth({
   events: {
     async createUser({ user }) {
       if (!user.email) {
-        return console.error('Create a user without valid email', user);
+        return console.info('Create a anonymous user');
       }
       await sendWelcomeLetter({
         to: {

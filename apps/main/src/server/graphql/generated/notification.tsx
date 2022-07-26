@@ -51,7 +51,10 @@ export type InsertOneNotificationMessageMutationVariables = Types.Exact<{
 
 export type InsertOneNotificationMessageMutation = {
   __typename?: 'mutation_root';
-  insertOneNotificationMessage?: { __typename?: 'NotificationMessage'; id: string } | null;
+  insertOneNotificationMessage?: {
+    __typename?: 'NotificationMessage';
+    id: string;
+  } | null;
 };
 
 export type DeleteNotificationMessageMutationVariables = Types.Exact<{
@@ -79,7 +82,10 @@ export const InsertOneNotificationSubscriptionDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -87,7 +93,10 @@ export const InsertOneNotificationSubscriptionDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'subscription' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'subscription' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'jsonb' } },
@@ -110,12 +119,18 @@ export const InsertOneNotificationSubscriptionDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'userId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'subscription' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'subscription' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'subscription' },
+                      },
                     },
                   ],
                 },
@@ -123,7 +138,9 @@ export const InsertOneNotificationSubscriptionDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -144,7 +161,10 @@ export const NotificationSubscriptionsByUserIdDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -173,7 +193,10 @@ export const NotificationSubscriptionsByUserIdDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'userId' },
+                            },
                           },
                         ],
                       },
@@ -186,7 +209,10 @@ export const NotificationSubscriptionsByUserIdDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'subscription' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'subscription' },
+                },
               ],
             },
           },
@@ -225,12 +251,17 @@ export const DeleteNotificationSubscriptionByPkDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -251,7 +282,10 @@ export const InsertOneNotificationMessageDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'recipientId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'recipientId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -262,12 +296,18 @@ export const InsertOneNotificationMessageDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'NotificationType_enum' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'NotificationType_enum' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'triggeredById' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'triggeredById' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -275,7 +315,10 @@ export const InsertOneNotificationMessageDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'contextId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'contextId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -286,12 +329,18 @@ export const InsertOneNotificationMessageDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'content' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'content' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
       ],
@@ -311,32 +360,50 @@ export const InsertOneNotificationMessageDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'recipientId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'recipientId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'recipientId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'triggeredById' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'triggeredById' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'triggeredById' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'type' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'type' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'url' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'url' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'contextId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'contextId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'contextId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'content' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'content' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'content' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
@@ -349,7 +416,9 @@ export const InsertOneNotificationMessageDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -370,7 +439,10 @@ export const DeleteNotificationMessageDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'recipientId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'recipientId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -381,12 +453,18 @@ export const DeleteNotificationMessageDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'NotificationType_enum' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'NotificationType_enum' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'triggeredById' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'triggeredById' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -394,7 +472,10 @@ export const DeleteNotificationMessageDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'contextId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'contextId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -457,7 +538,10 @@ export const DeleteNotificationMessageDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'type' },
+                            },
                           },
                         ],
                       },
@@ -471,7 +555,10 @@ export const DeleteNotificationMessageDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'contextId' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'contextId' },
+                            },
                           },
                         ],
                       },
@@ -482,7 +569,12 @@ export const DeleteNotificationMessageDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'affected_rows' } }],
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'affected_rows' },
+                },
+              ],
             },
           },
         ],
