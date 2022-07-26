@@ -10,7 +10,7 @@ import { useForm } from '$/hooks/use-form';
 export function AnonymousUserSignIn(): JSX.Element {
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
-      username: '',
+      name: '',
     },
   });
   const handleClickSubmit = handleSubmit<React.FormEvent<HTMLFormElement>>(
@@ -27,18 +27,18 @@ export function AnonymousUserSignIn(): JSX.Element {
   return (
     <form onSubmit={handleClickSubmit} className="space-y-4">
       <TextField
-        {...register('username', {
+        {...register('name', {
           pattern: {
-            value: /^\w{3,32}$/,
+            value: /^[\w ]{3,32}$/,
             message:
-              'Username can only have alphabet, number or _, and it must be 3-32 characters long',
+              'Name can only have alphabet, number, _ or empty space, and it must be 3-32 characters long',
           },
         })}
-        errorMessage={errors?.username}
+        errorMessage={errors?.name}
         type="text"
-        label="Username"
+        label="Name"
         className="w-full"
-        placeholder="tonystark"
+        placeholder="Tony"
       />
       <Button type="submit" variant="solid" color="primary" className="w-full">
         Continue as anonymous user

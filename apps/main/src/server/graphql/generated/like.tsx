@@ -29,7 +29,10 @@ export const RecipientByLikeIdDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'likeId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'likeId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -46,7 +49,10 @@ export const RecipientByLikeIdDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'likeId' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'likeId' },
+                },
               },
             ],
             selectionSet: {
@@ -64,8 +70,14 @@ export const RecipientByLikeIdDocument = {
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'url' },
+                            },
                           ],
                         },
                       },
@@ -76,8 +88,14 @@ export const RecipientByLikeIdDocument = {
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
-                            { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                            { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'id' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'name' },
+                            },
                           ],
                         },
                       },
@@ -103,4 +121,7 @@ export const RecipientByLikeIdDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<RecipientByLikeIdQuery, RecipientByLikeIdQueryVariables>;
+} as unknown as DocumentNode<
+  RecipientByLikeIdQuery,
+  RecipientByLikeIdQueryVariables
+>;

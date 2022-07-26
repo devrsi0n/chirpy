@@ -62,7 +62,10 @@ export const CreateAccountDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -70,57 +73,93 @@ export const CreateAccountDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'provider' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'provider' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'accessToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'accessToken' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'expiresAt' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'expiresAt' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'timestamptz' },
+          },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'idToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'idToken' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'oauthToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'oauthToken' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'oauthTokenSecret' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'oauthTokenSecret' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'providerAccountId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'providerAccountId' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'refreshToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'refreshToken' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'scope' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'scope' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sessionState' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sessionState' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'tokenType' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'tokenType' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
@@ -145,32 +184,50 @@ export const CreateAccountDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'userId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'provider' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'provider' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'provider' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'accessToken' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'accessToken' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'accessToken' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'expiresAt' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'expiresAt' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'expiresAt' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'idToken' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'idToken' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'idToken' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'oauthToken' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'oauthToken' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'oauthToken' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
@@ -191,27 +248,42 @@ export const CreateAccountDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'refreshToken' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'refreshToken' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'refreshToken' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'scope' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'scope' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'scope' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'sessionState' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'sessionState' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'sessionState' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'tokenType' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'tokenType' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'tokenType' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'type' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'type' },
+                      },
                     },
                   ],
                 },
@@ -227,11 +299,23 @@ export const CreateAccountDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'expiresAt' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'idToken' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'oauthToken' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'oauthTokenSecret' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'providerAccountId' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'refreshToken' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'oauthTokenSecret' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'providerAccountId' },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'refreshToken' },
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'scope' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'sessionState' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sessionState' },
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'tokenType' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'type' } },
               ],
@@ -241,7 +325,10 @@ export const CreateAccountDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<CreateAccountMutation, CreateAccountMutationVariables>;
+} as unknown as DocumentNode<
+  CreateAccountMutation,
+  CreateAccountMutationVariables
+>;
 export const DeleteAccountDocument = {
   kind: 'Document',
   definitions: [
@@ -252,18 +339,30 @@ export const DeleteAccountDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'provider' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'provider' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'providerAccountId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'providerAccountId' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -289,7 +388,10 @@ export const DeleteAccountDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'provider' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'provider' },
+                            },
                           },
                         ],
                       },
@@ -305,7 +407,10 @@ export const DeleteAccountDocument = {
                             name: { kind: 'Name', value: '_eq' },
                             value: {
                               kind: 'Variable',
-                              name: { kind: 'Name', value: 'providerAccountId' },
+                              name: {
+                                kind: 'Name',
+                                value: 'providerAccountId',
+                              },
                             },
                           },
                         ],
@@ -323,7 +428,9 @@ export const DeleteAccountDocument = {
                   name: { kind: 'Name', value: 'returning' },
                   selectionSet: {
                     kind: 'SelectionSet',
-                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
                   },
                 },
               ],
@@ -333,4 +440,7 @@ export const DeleteAccountDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<DeleteAccountMutation, DeleteAccountMutationVariables>;
+} as unknown as DocumentNode<
+  DeleteAccountMutation,
+  DeleteAccountMutationVariables
+>;
