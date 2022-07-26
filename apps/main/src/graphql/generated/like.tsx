@@ -31,9 +31,10 @@ export const InsertOneLikeDocument = gql`
 `;
 
 export function useInsertOneLikeMutation() {
-  return Urql.useMutation<InsertOneLikeMutation, InsertOneLikeMutationVariables>(
-    InsertOneLikeDocument,
-  );
+  return Urql.useMutation<
+    InsertOneLikeMutation,
+    InsertOneLikeMutationVariables
+  >(InsertOneLikeDocument);
 }
 export const DeleteLikeByPkDocument = gql`
   mutation deleteLikeByPk($id: uuid!) {
@@ -44,7 +45,8 @@ export const DeleteLikeByPkDocument = gql`
 `;
 
 export function useDeleteLikeByPkMutation() {
-  return Urql.useMutation<DeleteLikeByPkMutation, DeleteLikeByPkMutationVariables>(
-    DeleteLikeByPkDocument,
-  );
+  return Urql.useMutation<
+    DeleteLikeByPkMutation,
+    DeleteLikeByPkMutationVariables
+  >(DeleteLikeByPkDocument);
 }

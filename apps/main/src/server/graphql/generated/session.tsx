@@ -90,23 +90,38 @@ export const CreateSessionDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sessionToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sessionToken' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'expires' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'timestamptz' },
+            },
           },
         },
       ],
@@ -126,17 +141,26 @@ export const CreateSessionDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'userId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'sessionToken' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'sessionToken' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'sessionToken' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'expires' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
                     },
                   ],
                 },
@@ -147,7 +171,10 @@ export const CreateSessionDocument = {
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'expires' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'sessionToken' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sessionToken' },
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'userId' } },
               ],
             },
@@ -156,7 +183,10 @@ export const CreateSessionDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<CreateSessionMutation, CreateSessionMutationVariables>;
+} as unknown as DocumentNode<
+  CreateSessionMutation,
+  CreateSessionMutationVariables
+>;
 export const SessionAndUserDocument = {
   kind: 'Document',
   definitions: [
@@ -167,10 +197,16 @@ export const SessionAndUserDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sessionToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sessionToken' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -213,7 +249,10 @@ export const SessionAndUserDocument = {
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'expires' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'sessionToken' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'sessionToken' },
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'userId' } },
                 {
                   kind: 'Field',
@@ -223,9 +262,15 @@ export const SessionAndUserDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
                       { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'emailVerified' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'emailVerified' },
+                      },
                     ],
                   },
                 },
@@ -247,21 +292,36 @@ export const UpdateSessionDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sessionToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sessionToken' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'expires' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'timestamptz' },
+          },
         },
       ],
       selectionSet: {
@@ -306,12 +366,18 @@ export const UpdateSessionDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'userId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'expires' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'expires' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
                     },
                   ],
                 },
@@ -327,9 +393,18 @@ export const UpdateSessionDocument = {
                     kind: 'SelectionSet',
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'expires' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'sessionToken' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'userId' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sessionToken' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     ],
                   },
                 },
@@ -340,7 +415,10 @@ export const UpdateSessionDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<UpdateSessionMutation, UpdateSessionMutationVariables>;
+} as unknown as DocumentNode<
+  UpdateSessionMutation,
+  UpdateSessionMutationVariables
+>;
 export const DeleteSessionDocument = {
   kind: 'Document',
   definitions: [
@@ -351,10 +429,16 @@ export const DeleteSessionDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'sessionToken' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sessionToken' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -402,9 +486,18 @@ export const DeleteSessionDocument = {
                     kind: 'SelectionSet',
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'expires' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'sessionToken' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'userId' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'expires' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'sessionToken' },
+                      },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'userId' },
+                      },
                     ],
                   },
                 },
@@ -415,4 +508,7 @@ export const DeleteSessionDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<DeleteSessionMutation, DeleteSessionMutationVariables>;
+} as unknown as DocumentNode<
+  DeleteSessionMutation,
+  DeleteSessionMutationVariables
+>;

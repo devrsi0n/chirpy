@@ -15,7 +15,12 @@ export type ThemeProjectByPkQueryVariables = Types.Exact<{
 
 export type ThemeProjectByPkQuery = {
   __typename?: 'query_root';
-  projects: Array<{ __typename?: 'Project'; id: string; name: string; theme?: any | null }>;
+  projects: Array<{
+    __typename?: 'Project';
+    id: string;
+    name: string;
+    theme?: any | null;
+  }>;
 };
 
 export type ProjectByPkQueryVariables = Types.Exact<{
@@ -87,10 +92,16 @@ export const ThemeProjectByPkDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'domain' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -116,7 +127,10 @@ export const ThemeProjectByPkDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'domain' },
+                            },
                           },
                         ],
                       },
@@ -138,7 +152,10 @@ export const ThemeProjectByPkDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<ThemeProjectByPkQuery, ThemeProjectByPkQueryVariables>;
+} as unknown as DocumentNode<
+  ThemeProjectByPkQuery,
+  ThemeProjectByPkQueryVariables
+>;
 export const ProjectByPkDocument = {
   kind: 'Document',
   definitions: [
@@ -166,12 +183,17 @@ export const ProjectByPkDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -189,7 +211,10 @@ export const UserProjectsDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'userId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -218,7 +243,10 @@ export const UserProjectsDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'userId' },
+                            },
                           },
                         ],
                       },
@@ -229,7 +257,9 @@ export const UserProjectsDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -247,10 +277,16 @@ export const ProjectByDomainDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'domain' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -276,7 +312,10 @@ export const ProjectByDomainDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'domain' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'domain' },
+                            },
                           },
                         ],
                       },
@@ -299,4 +338,7 @@ export const ProjectByDomainDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<ProjectByDomainQuery, ProjectByDomainQueryVariables>;
+} as unknown as DocumentNode<
+  ProjectByDomainQuery,
+  ProjectByDomainQueryVariables
+>;

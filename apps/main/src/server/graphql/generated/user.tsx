@@ -6,10 +6,11 @@ export type AdapterUserFragment = {
   __typename?: 'User';
   id: string;
   name?: string | null;
+  username?: string | null;
   avatar?: string | null;
   email?: string | null;
   emailVerified?: string | null;
-  username?: string | null;
+  type?: Types.UserType_Enum | null;
   bio?: string | null;
   website?: string | null;
   twitterUserName?: string | null;
@@ -42,10 +43,11 @@ export type UpdateUserProfileByPkMutation = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
     avatar?: string | null;
     email?: string | null;
     emailVerified?: string | null;
-    username?: string | null;
+    type?: Types.UserType_Enum | null;
     bio?: string | null;
     website?: string | null;
     twitterUserName?: string | null;
@@ -67,10 +69,11 @@ export type UpdateUserProfileByEmailMutation = {
       __typename?: 'User';
       id: string;
       name?: string | null;
+      username?: string | null;
       avatar?: string | null;
       email?: string | null;
       emailVerified?: string | null;
-      username?: string | null;
+      type?: Types.UserType_Enum | null;
       bio?: string | null;
       website?: string | null;
       twitterUserName?: string | null;
@@ -108,10 +111,11 @@ export type UserByEmailQuery = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
     avatar?: string | null;
     email?: string | null;
     emailVerified?: string | null;
-    username?: string | null;
+    type?: Types.UserType_Enum | null;
     bio?: string | null;
     website?: string | null;
     twitterUserName?: string | null;
@@ -129,10 +133,11 @@ export type UserByAccountQuery = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
     avatar?: string | null;
     email?: string | null;
     emailVerified?: string | null;
-    username?: string | null;
+    type?: Types.UserType_Enum | null;
     bio?: string | null;
     website?: string | null;
     twitterUserName?: string | null;
@@ -157,9 +162,11 @@ export type DeleteUserMutation = {
 
 export type CreateUserMutationVariables = Types.Exact<{
   name?: Types.InputMaybe<Types.Scalars['String']>;
+  username?: Types.InputMaybe<Types.Scalars['String']>;
   email?: Types.InputMaybe<Types.Scalars['String']>;
   emailVerified?: Types.InputMaybe<Types.Scalars['timestamptz']>;
   avatar?: Types.InputMaybe<Types.Scalars['String']>;
+  type?: Types.InputMaybe<Types.UserType_Enum>;
 }>;
 
 export type CreateUserMutation = {
@@ -168,10 +175,11 @@ export type CreateUserMutation = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
     avatar?: string | null;
     email?: string | null;
     emailVerified?: string | null;
-    username?: string | null;
+    type?: Types.UserType_Enum | null;
     bio?: string | null;
     website?: string | null;
     twitterUserName?: string | null;
@@ -184,16 +192,20 @@ export const AdapterUserFragmentDoc = {
     {
       kind: 'FragmentDefinition',
       name: { kind: 'Name', value: 'adapterUser' },
-      typeCondition: { kind: 'NamedType', name: { kind: 'Name', value: 'User' } },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'User' },
+      },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'username' } },
           { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
           { kind: 'Field', name: { kind: 'Name', value: 'emailVerified' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'type' } },
           { kind: 'Field', name: { kind: 'Name', value: 'bio' } },
           { kind: 'Field', name: { kind: 'Name', value: 'website' } },
           { kind: 'Field', name: { kind: 'Name', value: 'twitterUserName' } },
@@ -220,7 +232,10 @@ export const UpdateUserByPkDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'username' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'username' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
@@ -231,13 +246,19 @@ export const UpdateUserByPkDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'website' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'website' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
           defaultValue: { kind: 'StringValue', value: '', block: false },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'twitterUserName' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'twitterUserName' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
           defaultValue: { kind: 'StringValue', value: '', block: false },
         },
@@ -258,7 +279,10 @@ export const UpdateUserByPkDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'id' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'id' },
+                      },
                     },
                   ],
                 },
@@ -272,22 +296,34 @@ export const UpdateUserByPkDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'username' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'username' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'username' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'bio' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'bio' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'bio' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'website' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'website' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'website' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'twitterUserName' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'twitterUserName' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'twitterUserName' },
+                      },
                     },
                   ],
                 },
@@ -295,14 +331,19 @@ export const UpdateUserByPkDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
       },
     },
   ],
-} as unknown as DocumentNode<UpdateUserByPkMutation, UpdateUserByPkMutationVariables>;
+} as unknown as DocumentNode<
+  UpdateUserByPkMutation,
+  UpdateUserByPkMutationVariables
+>;
 export const UpdateUserProfileByPkDocument = {
   kind: 'Document',
   definitions: [
@@ -326,18 +367,30 @@ export const UpdateUserProfileByPkDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'avatar' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'emailVerified' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'timestamptz' },
+          },
         },
       ],
       selectionSet: {
@@ -356,7 +409,10 @@ export const UpdateUserProfileByPkDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'id' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'id' },
+                      },
                     },
                   ],
                 },
@@ -370,22 +426,34 @@ export const UpdateUserProfileByPkDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'name' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'name' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'email' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'email' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'avatar' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'emailVerified' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'emailVerified' },
+                      },
                     },
                   ],
                 },
@@ -394,7 +462,10 @@ export const UpdateUserProfileByPkDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'FragmentSpread', name: { kind: 'Name', value: 'adapterUser' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'adapterUser' },
+                },
               ],
             },
           },
@@ -403,7 +474,10 @@ export const UpdateUserProfileByPkDocument = {
     },
     ...AdapterUserFragmentDoc.definitions,
   ],
-} as unknown as DocumentNode<UpdateUserProfileByPkMutation, UpdateUserProfileByPkMutationVariables>;
+} as unknown as DocumentNode<
+  UpdateUserProfileByPkMutation,
+  UpdateUserProfileByPkMutationVariables
+>;
 export const UpdateUserProfileByEmailDocument = {
   kind: 'Document',
   definitions: [
@@ -414,10 +488,16 @@ export const UpdateUserProfileByEmailDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
@@ -427,13 +507,22 @@ export const UpdateUserProfileByEmailDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'avatar' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'emailVerified' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'timestamptz' },
+          },
         },
       ],
       selectionSet: {
@@ -458,7 +547,10 @@ export const UpdateUserProfileByEmailDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'email' },
+                            },
                           },
                         ],
                       },
@@ -475,17 +567,26 @@ export const UpdateUserProfileByEmailDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'name' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'name' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'avatar' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'emailVerified' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'emailVerified' },
+                      },
                     },
                   ],
                 },
@@ -500,7 +601,10 @@ export const UpdateUserProfileByEmailDocument = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
-                      { kind: 'FragmentSpread', name: { kind: 'Name', value: 'adapterUser' } },
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'adapterUser' },
+                      },
                     ],
                   },
                 },
@@ -543,7 +647,10 @@ export const UserByPkDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
               },
             ],
             selectionSet: {
@@ -555,7 +662,10 @@ export const UserByPkDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'type' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'emailVerified' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'emailVerified' },
+                },
                 { kind: 'Field', name: { kind: 'Name', value: 'updatedAt' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
               ],
@@ -576,10 +686,16 @@ export const UserByEmailDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -605,7 +721,10 @@ export const UserByEmailDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'email' },
+                            },
                           },
                         ],
                       },
@@ -617,7 +736,10 @@ export const UserByEmailDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'FragmentSpread', name: { kind: 'Name', value: 'adapterUser' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'adapterUser' },
+                },
               ],
             },
           },
@@ -637,18 +759,30 @@ export const UserByAccountDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'provider' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'provider' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'providerAccountId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'providerAccountId' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -699,7 +833,10 @@ export const UserByAccountDocument = {
                                   name: { kind: 'Name', value: '_eq' },
                                   value: {
                                     kind: 'Variable',
-                                    name: { kind: 'Name', value: 'providerAccountId' },
+                                    name: {
+                                      kind: 'Name',
+                                      value: 'providerAccountId',
+                                    },
                                   },
                                 },
                               ],
@@ -715,7 +852,10 @@ export const UserByAccountDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'FragmentSpread', name: { kind: 'Name', value: 'adapterUser' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'adapterUser' },
+                },
               ],
             },
           },
@@ -740,7 +880,9 @@ export const AllUsersDocument = {
             name: { kind: 'Name', value: 'users' },
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'username' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+              ],
             },
           },
         ],
@@ -775,12 +917,17 @@ export const DeleteUserDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
               },
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -803,18 +950,46 @@ export const CreateUserDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'username' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'emailVerified' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'timestamptz' },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'avatar' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'type' } },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'UserType_enum' },
+          },
         },
       ],
       selectionSet: {
@@ -833,22 +1008,50 @@ export const CreateUserDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'name' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'name' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'username' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'username' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'email' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'email' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'emailVerified' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'emailVerified' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'emailVerified' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'avatar' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'avatar' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'avatar' },
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'type' },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'type' },
+                      },
                     },
                   ],
                 },
@@ -857,7 +1060,10 @@ export const CreateUserDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'FragmentSpread', name: { kind: 'Name', value: 'adapterUser' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'adapterUser' },
+                },
               ],
             },
           },

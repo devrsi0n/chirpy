@@ -1,10 +1,11 @@
 fragment adapterUser on User {
   id
   name
+  username
   avatar
   email
   emailVerified
-  username
+  type
   bio
   website
   twitterUserName
@@ -19,7 +20,12 @@ mutation updateUserByPk(
 ) {
   updateUserByPk(
     pk_columns: { id: $id }
-    _set: { username: $username, bio: $bio, website: $website, twitterUserName: $twitterUserName }
+    _set: {
+      username: $username
+      bio: $bio
+      website: $website
+      twitterUserName: $twitterUserName
+    }
   ) {
     id
   }
@@ -34,7 +40,12 @@ mutation updateUserProfileByPk(
 ) {
   updateUserByPk(
     pk_columns: { id: $id }
-    _set: { name: $name, email: $email, avatar: $avatar, emailVerified: $emailVerified }
+    _set: {
+      name: $name
+      email: $email
+      avatar: $avatar
+      emailVerified: $emailVerified
+    }
   ) {
     ...adapterUser
   }
@@ -78,7 +89,10 @@ query userByEmail($email: String!) {
 query userByAccount($provider: String!, $providerAccountId: String!) {
   users(
     where: {
-      accounts: { provider: { _eq: $provider }, providerAccountId: { _eq: $providerAccountId } }
+      accounts: {
+        provider: { _eq: $provider }
+        providerAccountId: { _eq: $providerAccountId }
+      }
     }
   ) {
     ...adapterUser
@@ -97,9 +111,23 @@ mutation deleteUser($id: uuid!) {
   }
 }
 
-mutation createUser($name: String, $email: String, $emailVerified: timestamptz, $avatar: String) {
+mutation createUser(
+  $name: String
+  $username: String
+  $email: String
+  $emailVerified: timestamptz
+  $avatar: String
+  $type: UserType_enum
+) {
   insertOneUser(
-    object: { name: $name, email: $email, emailVerified: $emailVerified, avatar: $avatar }
+    object: {
+      name: $name
+      username: $username
+      email: $email
+      emailVerified: $emailVerified
+      avatar: $avatar
+      type: $type
+    }
   ) {
     ...adapterUser
   }

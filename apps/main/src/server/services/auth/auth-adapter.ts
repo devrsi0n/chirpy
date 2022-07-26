@@ -33,17 +33,22 @@ import {
 
 import { getUserByPk } from '../mutation-event/utilities';
 
+export async function createUser(user: Omit<AdapterUser, 'id'>) {
+  const data = await gqlMutate(
+    CreateUserDocument,
+    translateAdapterUserToQueryVairables({
+      ...user,
+      type: user.email ? 'free' : 'anonymous',
+    }) as CreateUserMutationVariables,
+    'insertOneUser',
+  );
+  return data;
+}
+
 export function nextAuthAdapter(): Adapter {
   return {
     async createUser(user: Omit<AdapterUser, 'id'>) {
-      const data = await gqlMutate(
-        CreateUserDocument,
-        translateAdapterUserToQueryVairables(
-          user,
-        ) as CreateUserMutationVariables,
-        'insertOneUser',
-      );
-
+      const data = await createUser(user);
       return translateUserToAdapterUser(data);
     },
     async getUser(id) {

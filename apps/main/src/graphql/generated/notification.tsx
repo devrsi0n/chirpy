@@ -18,8 +18,18 @@ export type CurrentNotificationMessagesSubscription = {
     content?: string | null;
     read: boolean;
     createdAt: string;
-    recipient: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
-    triggeredBy: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+    recipient: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      avatar?: string | null;
+    };
+    triggeredBy: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      avatar?: string | null;
+    };
   }>;
 };
 
@@ -29,7 +39,10 @@ export type HaveReadANotificationMutationVariables = Types.Exact<{
 
 export type HaveReadANotificationMutation = {
   __typename?: 'mutation_root';
-  updateNotificationMessageByPk?: { __typename?: 'NotificationMessage'; id: string } | null;
+  updateNotificationMessageByPk?: {
+    __typename?: 'NotificationMessage';
+    id: string;
+  } | null;
 };
 
 export type DeleteNotificationMessageMutationVariables = Types.Exact<{
@@ -38,7 +51,10 @@ export type DeleteNotificationMessageMutationVariables = Types.Exact<{
 
 export type DeleteNotificationMessageMutation = {
   __typename?: 'mutation_root';
-  deleteNotificationMessageByPk?: { __typename?: 'NotificationMessage'; id: string } | null;
+  deleteNotificationMessageByPk?: {
+    __typename?: 'NotificationMessage';
+    id: string;
+  } | null;
 };
 
 export const CurrentNotificationMessagesDocument = gql`
@@ -74,7 +90,10 @@ export function useCurrentNotificationMessagesSubscription<
     Urql.UseSubscriptionArgs<CurrentNotificationMessagesSubscriptionVariables>,
     'query'
   > = {},
-  handler?: Urql.SubscriptionHandler<CurrentNotificationMessagesSubscription, TData>,
+  handler?: Urql.SubscriptionHandler<
+    CurrentNotificationMessagesSubscription,
+    TData
+  >,
 ) {
   return Urql.useSubscription<
     CurrentNotificationMessagesSubscription,
@@ -84,16 +103,20 @@ export function useCurrentNotificationMessagesSubscription<
 }
 export const HaveReadANotificationDocument = gql`
   mutation haveReadANotification($messageId: uuid!) {
-    updateNotificationMessageByPk(pk_columns: { id: $messageId }, _set: { read: true }) {
+    updateNotificationMessageByPk(
+      pk_columns: { id: $messageId }
+      _set: { read: true }
+    ) {
       id
     }
   }
 `;
 
 export function useHaveReadANotificationMutation() {
-  return Urql.useMutation<HaveReadANotificationMutation, HaveReadANotificationMutationVariables>(
-    HaveReadANotificationDocument,
-  );
+  return Urql.useMutation<
+    HaveReadANotificationMutation,
+    HaveReadANotificationMutationVariables
+  >(HaveReadANotificationDocument);
 }
 export const DeleteNotificationMessageDocument = gql`
   mutation deleteNotificationMessage($messageId: uuid!) {
