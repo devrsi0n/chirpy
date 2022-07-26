@@ -72,10 +72,16 @@ export const CommentsDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'newerThan' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'newerThan' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'timestamptz' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'timestamptz' },
+            },
           },
         },
       ],
@@ -101,7 +107,10 @@ export const CommentsDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_gt' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'newerThan' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'newerThan' },
+                            },
                           },
                         ],
                       },
@@ -112,7 +121,9 @@ export const CommentsDocument = {
             ],
             selectionSet: {
               kind: 'SelectionSet',
-              selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
             },
           },
         ],
@@ -130,7 +141,10 @@ export const SiteOwnerByTriggerCommentIdDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'commentId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'commentId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -147,7 +161,10 @@ export const SiteOwnerByTriggerCommentIdDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'commentId' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'commentId' },
+                },
               },
             ],
             selectionSet: {
@@ -174,10 +191,22 @@ export const SiteOwnerByTriggerCommentIdDocument = {
                               selectionSet: {
                                 kind: 'SelectionSet',
                                 selections: [
-                                  { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                                  { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                                  { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                                  { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'id' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'name' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'email' },
+                                  },
+                                  {
+                                    kind: 'Field',
+                                    name: { kind: 'Name', value: 'username' },
+                                  },
                                 ],
                               },
                             },
@@ -196,7 +225,10 @@ export const SiteOwnerByTriggerCommentIdDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'username' },
+                      },
                     ],
                   },
                 },
@@ -221,7 +253,10 @@ export const AuthorByCommentIdDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'commentId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'commentId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -238,7 +273,10 @@ export const AuthorByCommentIdDocument = {
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'commentId' } },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'commentId' },
+                },
               },
             ],
             selectionSet: {
@@ -264,7 +302,10 @@ export const AuthorByCommentIdDocument = {
                     selections: [
                       { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'username' },
+                      },
                       { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                     ],
                   },
@@ -276,4 +317,7 @@ export const AuthorByCommentIdDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<AuthorByCommentIdQuery, AuthorByCommentIdQueryVariables>;
+} as unknown as DocumentNode<
+  AuthorByCommentIdQuery,
+  AuthorByCommentIdQueryVariables
+>;

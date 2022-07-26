@@ -10,6 +10,8 @@ import { getHostEnv } from '$/utilities/env';
 
 import { isENVProd } from '../../utilities/env';
 import { sendVerificationRequest } from '../email/send-emails';
+import { createUser } from './auth-adapter';
+import { generateUsername } from './utilities';
 
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
 
@@ -48,27 +50,33 @@ export const authProviders: Provider[] = [
   )
     ? [
         CredentialsProvider({
-          name: 'Credentials for test only',
+          name: 'Anonymous',
           credentials: {
-            username: {
-              label: 'Username',
+            name: {
+              label: 'Name',
               type: 'text',
-              placeholder: 'User name',
+              placeholder: 'Name',
             },
-            password: { label: 'Password', type: 'password' },
           },
           async authorize(credentials /*req*/) {
-            if (
-              credentials?.username === process.env.TEST_USER_ID &&
-              credentials?.password === process.env.HASURA_EVENT_SECRET
-            ) {
+            if (credentials?.name === process.env.TEST_USER_ID) {
               // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
               return {
-                id: credentials?.username,
+                id: credentials?.name,
                 name: 'cypresstest',
                 email: 'cypress.test@localhost',
                 image: 'https://www.cypress.io/icons/icon-72x72.png',
               };
+            }
+            if (credentials?.name) {
+              // Always create a user with the provided name,
+              // and generate a unique username based on the name
+              const user = await createUser({
+                username: generateUsername(credentials.name),
+                name: credentials.name,
+              });
+
+              return user;
             }
             return null;
           },
