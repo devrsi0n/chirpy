@@ -38,7 +38,7 @@ export function AnonymousUserSignIn(): JSX.Element {
         type="text"
         label="Name"
         className="w-full"
-        placeholder="Tony"
+        placeholder="James Smith"
       />
       <Button type="submit" variant="solid" color="primary" className="w-full">
         Continue as anonymous user
