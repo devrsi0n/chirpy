@@ -29,9 +29,9 @@ export function AnonymousUserSignIn(): JSX.Element {
       <TextField
         {...register('name', {
           pattern: {
-            value: /^[\w ]{3,32}$/,
+            value: /^[\w ]{3,24}$/,
             message:
-              'Name can only have alphabet, number, _ or empty space, and it must be 3-32 characters long',
+              'Name can only have alphabet, number, _ or empty space, and it must be 3-24 characters long',
           },
         })}
         errorMessage={errors?.name}
