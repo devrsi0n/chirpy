@@ -39,14 +39,11 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
     errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
   return (
     <div className="full-bleed flex h-full flex-row">
-      <div className="flex flex-1 flex-col items-center justify-center">
-        <div className="absolute top-8 left-8">
+      <div className="flex h-full flex-1 flex-col items-center ">
+        <div className="mt-8 ml-8 self-start justify-self-end">
           <Logo size="lg" hideSpacing />
         </div>
-        <div className="absolute bottom-8 left-8">
-          <CompanyRight />
-        </div>
-        <div className="w-full space-y-8 py-7 sm:mx-2 sm:w-64 md:w-96">
+        <div className="flex h-full w-full flex-col justify-center space-y-8 py-7 sm:mx-2 sm:w-64 md:w-96">
           <div className="space-y-3">
             <Heading as="h2" className="mt-5 font-bold">
               {title}
@@ -84,6 +81,9 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
             {' and '}
             <Link href="/privacy-policy">Privacy Policy</Link>.
           </Text>
+        </div>
+        <div className="mb-8 ml-8 self-start justify-self-end">
+          <CompanyRight />
         </div>
       </div>
       <div
