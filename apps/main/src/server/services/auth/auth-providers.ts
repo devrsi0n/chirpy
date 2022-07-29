@@ -69,11 +69,11 @@ export const authProviders: Provider[] = [
               };
             }
             if (credentials?.name) {
-              // Always create a user with the provided name,
-              // and generate a unique username based on the name
+              const name = credentials.name.trim();
+              // Always create a new user with the provided name
               const user = await createUser({
-                username: generateUsername(credentials.name),
-                name: credentials.name,
+                username: generateUsername(name),
+                name,
               });
 
               return user;

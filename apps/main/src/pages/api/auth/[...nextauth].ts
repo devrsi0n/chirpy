@@ -88,7 +88,7 @@ export default NextAuth({
   events: {
     async createUser({ user }) {
       if (!user.email) {
-        return console.info('Create a anonymous user');
+        return console.info('Create an anonymous user');
       }
       await sendWelcomeLetter({
         to: {
