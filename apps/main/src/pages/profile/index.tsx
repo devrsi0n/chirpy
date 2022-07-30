@@ -22,9 +22,11 @@ import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
+import { EMAIL_REGEXP } from '$/utilities/validator';
 
 type FormFields = {
   name: string;
+  email: string;
   bio: string;
   website: string;
   twitter: string;
@@ -34,7 +36,18 @@ export default function Profile(): JSX.Element {
   const {
     isSignIn,
     loading,
-    data: { id, avatar, name, username, bio, website, twitterUserName },
+    data: {
+      id,
+      avatar,
+      name,
+      username,
+      email,
+      type,
+      emailVerified,
+      bio,
+      website,
+      twitterUserName,
+    },
     refetchData,
   } = useCurrentUser();
 
@@ -44,6 +57,7 @@ export default function Profile(): JSX.Element {
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
       name: name || '',
+      email: email || '',
       bio: bio || '',
       website: website || '',
       twitter: twitterUserName || '',
@@ -52,28 +66,38 @@ export default function Profile(): JSX.Element {
   const { showToast } = useToast();
   const handleClickButton = handleSubmit(async (fields) => {
     if (isEditMode) {
-      try {
-        await updateUserByPk({
-          id: id || '-1',
-          name: fields.name,
-          bio: fields.bio,
-          website: fields.website,
-          twitterUserName: fields.twitter,
-        });
-        refetchData?.();
-        showToast({
-          type: 'success',
-          title: 'Profile saved!',
-        });
-        setIsEditMode(false);
-      } catch (error) {
+      const { error } = await updateUserByPk({
+        id: id || '-1',
+        name: fields.name,
+        email: fields.email,
+        bio: fields.bio,
+        website: fields.website,
+        twitterUserName: fields.twitter,
+      });
+      if (error) {
         console.error(error);
-        showToast({
-          type: 'error',
-          title:
-            'Sorry, something wrong happened in our side, please try again later.',
-        });
+        if (error.message.includes(`unique constraint \"User_email_key\"`)) {
+          showToast({
+            type: 'error',
+            title: `${fields.email} is in use`,
+            description:
+              'The email address you entered is already in use. Please try another one.',
+          });
+        } else {
+          showToast({
+            type: 'error',
+            title:
+              'Sorry, something wrong happened in our side, please try again later.',
+          });
+        }
+        return;
       }
+      refetchData?.();
+      showToast({
+        type: 'success',
+        title: 'Profile saved!',
+      });
+      setIsEditMode(false);
     } else {
       setIsEditMode(true);
     }
@@ -122,6 +146,35 @@ export default function Profile(): JSX.Element {
               {username && (
                 <Text title="Username, can't edit">@{username}</Text>
               )}
+              {/* We only allow no email or unverified anonymous user to edit the email */}
+              {isEditMode &&
+              (!email || (type === 'anonymous' && !emailVerified)) ? (
+                <TextField
+                  {...register('email', {
+                    pattern: {
+                      value: EMAIL_REGEXP,
+                      message: `Invalid email address`,
+                    },
+                  })}
+                  label="Email"
+                  errorMessage={errors.email}
+                  hintText={
+                    'You need to sign-in with this email address to verify it after saving'
+                  }
+                />
+              ) : (
+                email && (
+                  <div>
+                    <Text>{email}</Text>
+                    {type === 'anonymous' && !emailVerified && (
+                      <Text variant="secondary" size="sm" className="mt-1.5">
+                        This email address is unverified, you need to sign-in
+                        with this email address to verify it
+                      </Text>
+                    )}
+                  </div>
+                )
+              )}
             </div>
             <div className="flex flex-row space-x-2">
               {isEditMode && (
@@ -157,7 +210,7 @@ export default function Profile(): JSX.Element {
           {isEditMode ? (
             <TextArea {...register('bio')} label="Bio" />
           ) : (
-            bio && <Text>{bio}</Text>
+            bio && <Text variant="secondary">{bio}</Text>
           )}
           {isEditMode ? (
             <TextField

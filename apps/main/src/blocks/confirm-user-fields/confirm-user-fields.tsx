@@ -11,6 +11,7 @@ import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { sleep } from '$/utilities/time';
+import { EMAIL_REGEXP } from '$/utilities/validator';
 
 export type ConfirmUserFieldsProps = {
   //
@@ -74,8 +75,8 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {...register('email', {
           required: { value: true, message: 'Email is required' },
           pattern: {
-            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            message: `Invalid email`,
+            value: EMAIL_REGEXP,
+            message: `Invalid email address`,
           },
         })}
         type="email"
