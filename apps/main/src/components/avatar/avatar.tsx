@@ -45,7 +45,7 @@ export function Avatar({
       alt={alt}
       className={clsx(
         bg,
-        `flex select-none items-center justify-center rounded-full`,
+        `flex select-none items-center justify-center rounded-full ring ring-white`,
         sizeStyle,
         className,
       )}

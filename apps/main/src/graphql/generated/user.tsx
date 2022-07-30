@@ -14,6 +14,8 @@ export type CurrentUserQuery = {
     __typename?: 'User';
     id: string;
     email?: string | null;
+    type?: Types.UserType_Enum | null;
+    emailVerified?: string | null;
     username?: string | null;
     name?: string | null;
     avatar?: string | null;
@@ -27,6 +29,7 @@ export type UpdateUserByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
   bio?: Types.InputMaybe<Types.Scalars['String']>;
   name: Types.Scalars['String'];
+  email?: Types.InputMaybe<Types.Scalars['String']>;
   twitterUserName?: Types.InputMaybe<Types.Scalars['String']>;
   website?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
@@ -78,6 +81,8 @@ export const CurrentUserDocument = gql`
     userByPk(id: $id) {
       id
       email
+      type
+      emailVerified
       username
       name
       avatar
@@ -101,6 +106,7 @@ export const UpdateUserByPkDocument = gql`
     $id: uuid!
     $bio: String
     $name: String!
+    $email: String
     $twitterUserName: String
     $website: String
   ) {
@@ -109,6 +115,7 @@ export const UpdateUserByPkDocument = gql`
       _set: {
         bio: $bio
         name: $name
+        email: $email
         twitterUserName: $twitterUserName
         website: $website
       }
