@@ -9,7 +9,7 @@ import twitterProvider from 'next-auth/providers/twitter';
 import { getHostEnv } from '$/utilities/env';
 
 import { isENVProd } from '../../utilities/env';
-import { sendVerificationRequest } from '../email/send-emails';
+import { sendVerificationEmail } from '../email/send-emails';
 import { createUser } from './auth-adapter';
 import { generateUsername } from './utilities';
 
@@ -88,7 +88,7 @@ export const authProviders: Provider[] = [
             identifier: email,
             url /*provider: { server, from }*/,
           }) {
-            await sendVerificationRequest({
+            await sendVerificationEmail({
               to: {
                 email,
                 name: email,
