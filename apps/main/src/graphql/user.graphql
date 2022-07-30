@@ -2,6 +2,8 @@ query currentUser($id: uuid!) {
   userByPk(id: $id) {
     id
     email
+    type
+    emailVerified
     username
     name
     avatar
@@ -15,18 +17,30 @@ mutation updateUserByPk(
   $id: uuid!
   $bio: String
   $name: String!
+  $email: String
   $twitterUserName: String
   $website: String
 ) {
   updateUserByPk(
     pk_columns: { id: $id }
-    _set: { bio: $bio, name: $name, twitterUserName: $twitterUserName, website: $website }
+    _set: {
+      bio: $bio
+      name: $name
+      email: $email
+      twitterUserName: $twitterUserName
+      website: $website
+    }
   ) {
     id
   }
 }
 
-mutation updateUserFields($id: uuid!, $email: String!, $name: String!, $username: String!) {
+mutation updateUserFields(
+  $id: uuid!
+  $email: String!
+  $name: String!
+  $username: String!
+) {
   updateUserByPk(
     pk_columns: { id: $id }
     _set: { email: $email, name: $name, username: $username }

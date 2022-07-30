@@ -5,6 +5,7 @@ import * as React from 'react';
 import { border, textInput, textInputError } from '$/styles/common';
 
 import { easeInOutOpacity } from '../animation';
+import { Text } from '../text/text';
 
 export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
   label: React.ReactNode;
@@ -14,6 +15,7 @@ export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
     input?: string;
   };
   prefixNode?: React.ReactNode;
+  hintText?: string;
 };
 
 export const TextField = React.forwardRef(function TextfieldComponent(
@@ -24,6 +26,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
     className,
     errorMessage,
     prefixNode,
+    hintText,
     ...inputProps
   }: TextfieldProps,
   ref: React.Ref<HTMLInputElement>,
@@ -56,6 +59,11 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           )}
         />
       </div>
+      {hintText && (
+        <Text variant="secondary" size="sm" className="mt-1.5">
+          {hintText}
+        </Text>
+      )}
       <AnimatePresence>
         {errorMessage && (
           <m.p
