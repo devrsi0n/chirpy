@@ -36,7 +36,7 @@ const round = (num) =>
     .replace(/(\.\d+?)0+$/, '$1')
     .replace(/\.0$/, '');
 const rem = (px) => `${round(px / 16)}rem`;
-const em = (px, base) => `${round(px / base)}em`;
+// const em = (px, base) => `${round(px / base)}em`;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -44,6 +44,19 @@ module.exports = {
   content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
   theme: {
     colors,
+    boxShadow: {
+      // TODO: Use css variable to fix dark mode
+      xs: '0px 1px 2px rgba(16, 24, 40, 0.05)',
+      sm: '0px 1px 3px rgba(16, 24, 40, 0.1), 0px 1px 2px rgba(16, 24, 40, 0.06)',
+      md: '0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06)',
+      DEFAULT:
+        '0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06)',
+      lg: '0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)',
+      xl: '0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03)',
+      '2xl': '0px 24px 48px -12px rgba(16, 24, 40, 0.18)',
+      '3xl': '0px 32px 64px -12px rgba(16, 24, 40, 0.14)',
+      none: '0 0 #0000',
+    },
     extend: {
       // For analytics
       colors: {
@@ -99,6 +112,7 @@ module.exports = {
       height: {
         fit: 'fit-content',
       },
+
       typography: ({ theme }) => {
         // Fix build error
         theme = theme || (() => {});

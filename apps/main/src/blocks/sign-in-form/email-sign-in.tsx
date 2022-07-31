@@ -6,18 +6,20 @@ import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useForm } from '$/hooks/use-form';
-import { Toggle } from '$/components/toggle';
 
-export function AnonymousUserSignIn(): JSX.Element {
+/**
+ * Email sign-in
+ */
+export function EmailSignIn(): JSX.Element {
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
-      name: '',
+      email: '',
     },
   });
   const handleClickSubmit = handleSubmit<React.FormEvent<HTMLFormElement>>(
     async (fields, event) => {
       event.preventDefault();
-      await signIn('credentials', {
+      await signIn('email', {
         // redirect: false,
         callbackUrl: '/dashboard',
         ...fields,
@@ -28,18 +30,18 @@ export function AnonymousUserSignIn(): JSX.Element {
   return (
     <form onSubmit={handleClickSubmit} className="space-y-4">
       <TextField
-        {...register('name', {
+        {...register('email', {
           pattern: {
             value: /^[\w ]{3,24}$/,
             message:
               'Name can only have alphabet, number, _ or empty space, and it must be 3-24 characters long',
           },
         })}
-        errorMessage={errors?.name}
+        errorMessage={errors?.email}
         type="text"
-        label="Name"
+        label="Email"
         className="w-full"
-        placeholder="James Smith"
+        placeholder="james@example.com"
       />
       <Button type="submit" variant="solid" color="primary" className="w-full">
         Continue as anonymous user
@@ -52,7 +54,6 @@ export function AnonymousUserSignIn(): JSX.Element {
         </Link>
         .
       </Text>
-      
     </form>
   );
 }
