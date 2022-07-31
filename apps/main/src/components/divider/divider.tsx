@@ -61,7 +61,7 @@ export function Divider({
 
 function DividerText({ children }: { children?: React.ReactNode }) {
   return (
-    <Text as="span" variant="secondary" className="px-2">
+    <Text as="span" variant="secondary" className="px-2" size="sm">
       {children}
     </Text>
   );
