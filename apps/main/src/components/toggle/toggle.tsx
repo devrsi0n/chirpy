@@ -7,13 +7,13 @@ import { Text, TextProps } from '../text';
 export type ToggleProps = {
   label: string;
   labelProps?: TextProps;
-  enabled: boolean;
+  checked: boolean;
   onChange(checked: boolean): void;
   reverse?: boolean;
 };
 
 export function Toggle({
-  enabled,
+  checked,
   label,
   labelProps,
   onChange,
@@ -44,25 +44,25 @@ export function Toggle({
     () => (
       <Switch
         key="switch"
-        checked={enabled}
+        checked={checked}
         onChange={onChange}
         onMouseDown={handleMoudDown}
         className={clsx(
-          enabled ? `bg-primary-500` : `bg-gray-300 dark:bg-gray-600`,
-          `focus-visible:outline-none relative inline-flex h-4 w-8 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:ring`,
+          checked ? `bg-primary-500` : `bg-gray-300 dark:bg-gray-600`,
+          `relative inline-flex h-4 w-8 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring`,
         )}
       >
         {({ checked }) => (
           <span
             className={clsx(
               checked ? `translate-x-4` : `translate-x-0`,
-              `inline-block h-3 w-3 rounded-full bg-white transition duration-200 ease-in-out`,
+              `inline-block h-3 w-3 rounded-full bg-white shadow-sm transition duration-200 ease-in-out`,
             )}
           />
         )}
       </Switch>
     ),
-    [enabled, onChange, handleMoudDown],
+    [checked, onChange, handleMoudDown],
   );
   const memoElements = React.useMemo(
     () => (reverse ? [memoSwitch, memoLabel] : [memoLabel, memoSwitch]),
