@@ -1,14 +1,16 @@
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
+import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useForm } from '$/hooks/use-form';
-import { Toggle } from '$/components/toggle';
 
-export function AnonymousUserSignIn(): JSX.Element {
+import { SignInProps } from './types';
+
+export function AnonymousUserSignIn({ error }: SignInProps): JSX.Element {
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       name: '',
@@ -18,7 +20,6 @@ export function AnonymousUserSignIn(): JSX.Element {
     async (fields, event) => {
       event.preventDefault();
       await signIn('credentials', {
-        // redirect: false,
         callbackUrl: '/dashboard',
         ...fields,
       });
@@ -41,9 +42,17 @@ export function AnonymousUserSignIn(): JSX.Element {
         className="w-full"
         placeholder="James Smith"
       />
-      <Button type="submit" variant="solid" color="primary" className="w-full">
-        Continue as anonymous user
-      </Button>
+      <div>
+        {error && <Alert type="warn">{error}</Alert>}
+        <Button
+          type="submit"
+          variant="solid"
+          color="primary"
+          className="w-full"
+        >
+          Continue as anonymous user
+        </Button>
+      </div>
       <Text size="sm" variant="secondary">
         You can connect an email later, or stay anonymous as long as you like.
         Learn more about{' '}
@@ -52,7 +61,6 @@ export function AnonymousUserSignIn(): JSX.Element {
         </Link>
         .
       </Text>
-      
     </form>
   );
 }

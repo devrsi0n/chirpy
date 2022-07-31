@@ -2,21 +2,20 @@ import clsx from 'clsx';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { Logo } from '$/components/logo';
 import { Text } from '$/components/text';
+import { Toggle } from '$/components/toggle';
 import { SIGN_IN_ERRORS } from '$/strings';
 
 import { CompanyRight } from '../footer';
 import { AnonymousUserSignIn } from './anonymous-user-sign-in';
 import { authOptions } from './data-source';
-import styles from './sign-in-form.module.scss';
-import { Toggle } from '$/components/toggle';
 import { EmailSignIn } from './email-sign-in';
+import styles from './sign-in-form.module.scss';
 
 export type SignInFormProps = React.PropsWithChildren<{
   title: string;
@@ -44,7 +43,7 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex h-full flex-1 flex-col items-center ">
-        <div className="mt-8 ml-8 self-start justify-self-end">
+        <div className="mt-8 ml-0 self-start justify-self-end sm:ml-8">
           <Logo size="lg" hideSpacing />
         </div>
         <div className="flex h-full w-full flex-col justify-center space-y-8 py-7 sm:mx-2 sm:w-64 md:w-96">
@@ -55,17 +54,21 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
             <Text variant="secondary">{subtitle}</Text>
           </div>
           <div className="space-y-6">
-            {error && <Alert type="warn">{error}</Alert>}
             <div>
-              {isAnonymous ? <AnonymousUserSignIn /> : <EmailSignIn />}
+              {isAnonymous ? (
+                <AnonymousUserSignIn error={error} />
+              ) : (
+                <EmailSignIn error={error} />
+              )}
               <Toggle
                 checked={isAnonymous}
                 onChange={(value) => setIsAnonymous(value)}
                 label="Anonymous"
                 reverse
+                className="mt-5"
+                hintText="Turn off to sign in with your email if you want to sign-in with another browser later"
               />
             </div>
-
             <Divider variant="text">OR</Divider>
             <div className="space-y-3">
               {authOptions.map((option) => (
@@ -95,7 +98,7 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
             <Link href="/privacy-policy">Privacy Policy</Link>.
           </Text>
         </div>
-        <div className="mb-8 ml-8 self-start justify-self-end">
+        <div className="mb-8 ml-0 self-start justify-self-end sm:ml-8">
           <CompanyRight />
         </div>
       </div>
