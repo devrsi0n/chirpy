@@ -15,6 +15,8 @@ import { CompanyRight } from '../footer';
 import { AnonymousUserSignIn } from './anonymous-user-sign-in';
 import { authOptions } from './data-source';
 import styles from './sign-in-form.module.scss';
+import { Toggle } from '$/components/toggle';
+import { EmailSignIn } from './email-sign-in';
 
 export type SignInFormProps = React.PropsWithChildren<{
   title: string;
@@ -37,6 +39,8 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
   }, []);
   const error =
     errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
+
+  const [isAnonymous, setIsAnonymous] = React.useState(true);
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex h-full flex-1 flex-col items-center ">
@@ -52,7 +56,16 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
           </div>
           <div className="space-y-6">
             {error && <Alert type="warn">{error}</Alert>}
-            <AnonymousUserSignIn />
+            <div>
+              {isAnonymous ? <AnonymousUserSignIn /> : <EmailSignIn />}
+              <Toggle
+                checked={isAnonymous}
+                onChange={(value) => setIsAnonymous(value)}
+                label="Anonymous"
+                reverse
+              />
+            </div>
+
             <Divider variant="text">OR</Divider>
             <div className="space-y-3">
               {authOptions.map((option) => (
