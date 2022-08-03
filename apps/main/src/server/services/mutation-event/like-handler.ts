@@ -1,6 +1,6 @@
 import { NextApiResponse } from 'next';
 
-import { gqlQuery } from '$/server/common/gql';
+import { query } from '$/server/common/gql';
 import { RecipientByLikeIdDocument } from '$/server/graphql/generated/like';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
 
@@ -61,7 +61,7 @@ export async function handleLikeEvent(
 }
 
 export function getRecipientByLikeId(likeId: string) {
-  return gqlQuery(
+  return query(
     RecipientByLikeIdDocument,
     {
       likeId,

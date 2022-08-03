@@ -13,7 +13,7 @@ import {
   THEME_WIDGET_CLS,
 } from '$/blocks/theme-editor';
 import { WidgetThemeProvider } from '$/contexts/theme-context';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { query } from '$/server/common/gql';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
@@ -66,18 +66,19 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { domain } = params;
-  const client = getAdminGqlClient();
-  const { data } = await client
-    .query<ThemeProjectByPkQuery>(ThemeProjectByPkDocument, {
+  const projects = await query(
+    ThemeProjectByPkDocument,
+    {
       domain,
-    })
-    .toPromise();
+    },
+    'projects',
+  );
 
-  if (!data?.projects || !data?.projects[0]) {
+  if (!projects || !projects[0]) {
     return { notFound: true };
   }
   return {
-    props: { project: data.projects[0], buildDate: new Date().toISOString() },
+    props: { project: projects[0], buildDate: new Date().toISOString() },
     revalidate: 1,
   };
 };
