@@ -11,7 +11,7 @@ const client = getAdminGqlClient();
  * @param variables Query variables
  * @param path Data path of the result data, e.g. `insertOneUser`
  */
-export async function gqlQuery<
+export async function query<
   Data extends AnyObject = AnyObject,
   Variables extends AnyObject = AnyObject,
   Path extends keyof Data = keyof Data,
@@ -33,7 +33,7 @@ export async function gqlQuery<
  * @param variables Mutation variables
  * @param path Data path of the result data, e.g. `insertOneUser`
  */
-export async function gqlMutate<
+export async function mutate<
   Data extends AnyObject = AnyObject,
   Variables extends AnyObject = AnyObject,
   Path extends keyof Data = keyof Data,
