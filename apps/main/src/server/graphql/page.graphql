@@ -27,6 +27,7 @@ mutation insertOnePage($projectId: uuid!, $title: String!, $url: String!) {
 mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
   updatePages(
     where: { url: { _eq: $url }, projectId: { _eq: $projectId } }
+    # Make sure all fields are filled if we add more fields here
     _set: { title: $title }
   ) {
     returning {

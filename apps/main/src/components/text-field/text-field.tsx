@@ -32,6 +32,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
   ref: React.Ref<HTMLInputElement>,
 ): JSX.Element {
   const LabelWrapper = typeof label === 'string' ? 'p' : 'div';
+  const { disabled } = inputProps;
   return (
     <label
       className={clsx(`flex flex-col px-0.5 text-gray-1200`, styles?.root)}
@@ -52,6 +53,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           type={type}
           className={clsx(
             'px-3 py-2',
+            disabled && `bg-gray-300 text-gray-1100`,
             textInput,
             border,
             prefixNode ? `flex-1 rounded-r` : `rounded`,

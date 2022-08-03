@@ -27,7 +27,9 @@ subscription commentTree($pageURL: String!) {
       ...commentContent
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
         ...commentContent
-        replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        replies(
+          order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+        ) {
           ...commentContent
         }
       }
@@ -55,13 +57,19 @@ subscription commentTimeline($id: uuid!) {
 }
 
 mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
-  insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
+  insertOneComment(
+    object: { content: $content, parentId: $parentId, pageId: $pageId }
+  ) {
     id
   }
 }
 
 mutation deleteOneComment($id: uuid!) {
-  updateCommentByPk(pk_columns: { id: $id }, _set: { deletedAt: "now()" }) {
+  updateCommentByPk(
+    pk_columns: { id: $id }
+    # Make sure all fields are filled if we add more fields here
+    _set: { deletedAt: "now()" }
+  ) {
     id
   }
 }

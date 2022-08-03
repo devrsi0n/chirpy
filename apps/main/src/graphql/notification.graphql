@@ -23,7 +23,11 @@ subscription currentNotificationMessages($userId: uuid!) {
 }
 
 mutation haveReadANotification($messageId: uuid!) {
-  updateNotificationMessageByPk(pk_columns: { id: $messageId }, _set: { read: true }) {
+  updateNotificationMessageByPk(
+    pk_columns: { id: $messageId }
+    # Make sure all fields are filled if we add more fields here
+    _set: { read: true }
+  ) {
     id
   }
 }
