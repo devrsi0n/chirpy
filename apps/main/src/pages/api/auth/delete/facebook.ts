@@ -1,9 +1,9 @@
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
+import { mutate } from '$/server/common/gql';
 import { DeleteUserDocument } from '$/server/graphql/generated/user';
 
 const handler = getApiHandler();
@@ -17,12 +17,13 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   validateSignature(signature, payload);
 
   const { user_id: userId } = decodePayload(payload) as DecodedPayload;
-  const client = getAdminGqlClient();
-  await client
-    .mutation(DeleteUserDocument, {
+  await mutate(
+    DeleteUserDocument,
+    {
       id: userId,
-    })
-    .toPromise();
+    },
+    'deleteUserByPk',
+  );
   const confirmationCode = getConfirmationCode();
   const url = `${process.env.NEXT_PUBLIC_APP_URL}/auth/delete-confirmation?code=${confirmationCode}`;
   // Facebook requires the JSON to be non-quoted and formatted like this, so we need to create the JSON by hand:

@@ -1,11 +1,8 @@
 import NextAuth from 'next-auth';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import {
-  UserProjectsDocument,
-  UserProjectsQuery,
-} from '$/server/graphql/generated/project';
+import { query } from '$/server/common/gql';
+import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';
@@ -46,18 +43,19 @@ export default NextAuth({
       };
     },
     async session({ session, token }) {
-      const client = getAdminGqlClient();
       const userId = token.sub;
       if (!userId) {
         throw new Error(`Expect valid user id`);
       }
-      const { data } = await client
-        .query<UserProjectsQuery>(UserProjectsDocument, {
+      const projects = await query(
+        UserProjectsDocument,
+        {
           userId,
-        })
-        .toPromise();
+        },
+        'projects',
+      );
       const editableProjectIds =
-        data?.projects.map(({ id }: { id: string }) => id) || [];
+        projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,

@@ -1,6 +1,9 @@
 # TODO: Merge with `pageByUrlOnly`
 query pageByURL($url: String!, $projectId: uuid!) {
-  pages(limit: 1, where: { url: { _eq: $url }, projectId: { _eq: $projectId } }) {
+  pages(
+    limit: 1
+    where: { url: { _eq: $url }, projectId: { _eq: $projectId } }
+  ) {
     id
     url
     title
@@ -45,5 +48,16 @@ query pageByUrlOnly($url: String!) {
   pages(limit: 1, where: { url: { _eq: $url } }) {
     id
     url
+  }
+}
+
+query themeOfPage($pageId: uuid!) {
+  pageByPk(id: $pageId) {
+    id
+    url
+    project {
+      id
+      theme
+    }
   }
 }

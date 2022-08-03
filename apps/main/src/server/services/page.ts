@@ -1,15 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import {
   InsertOnePageDocument,
-  InsertOnePageMutation,
   PageByUrlDocument,
-  PageByUrlQuery,
   UpdatePagesDocument,
 } from '$/server/graphql/generated/page';
 
 import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
+import { mutate, query } from '../common/gql';
 import { ProjectByDomainDocument } from '../graphql/generated/project';
 import { GetPagByUrl } from '../types/page';
 
@@ -31,53 +29,59 @@ export async function getPage(
       error: `url(${url}) and domain(${domain}) must be matched`,
     });
   }
-  const client = getAdminGqlClient();
-  const projectResult = await client
-    .query(ProjectByDomainDocument, {
+  const projects = await query(
+    ProjectByDomainDocument,
+    {
       domain,
-    })
-    .toPromise();
-  const projectId = projectResult.data?.projects[0]?.id;
+    },
+    'projects',
+  );
+  const projectId = projects[0]?.id;
   if (!projectId) {
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
     });
   }
-  const pageResult = await client
-    .query<PageByUrlQuery>(PageByUrlDocument, {
+  const pages = await query(
+    PageByUrlDocument,
+    {
       url,
       projectId,
-    })
-    .toPromise();
-  const page = pageResult.data?.pages[0];
+    },
+    'pages',
+  );
+  const page = pages[0];
 
   if (!page?.id) {
-    const createdPage = await client
-      .mutation<InsertOnePageMutation>(InsertOnePageDocument, {
+    const insertOnePage = await mutate(
+      InsertOnePageDocument,
+      {
         projectId,
         url,
         title: title || '',
-      })
-      .toPromise();
-    if (!createdPage.data?.insertOnePage?.id) {
+      },
+      'insertOnePage',
+    );
+
+    if (!insertOnePage?.id) {
       return res.status(500).json({
         error: 'Create page failed',
       });
     }
-    return res.json(createdPage.data?.insertOnePage);
+    return res.json(insertOnePage);
   } else if (page.title !== title) {
-    const updatePage = await client
-      .mutation(UpdatePagesDocument, {
+    const updatePages = await mutate(
+      UpdatePagesDocument,
+      {
         projectId,
         url,
         title: title || '',
-      })
-      .toPromise();
-    if (
-      updatePage.data?.updatePages?.affected_rows !== 1 ||
-      !updatePage.data.updatePages?.returning[0].id
-    ) {
+      },
+      'updatePages',
+    );
+
+    if (updatePages?.affected_rows !== 1 || !updatePages?.returning[0].id) {
       return res.status(500).json({
         error: 'Update page error',
       });

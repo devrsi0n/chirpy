@@ -1,4 +1,4 @@
-import { gqlMutate, gqlQuery } from '$/server/common/gql';
+import { mutate, query } from '$/server/common/gql';
 import { AuthorByCommentIdDocument } from '$/server/graphql/generated/comment';
 import {
   DeleteNotificationMessageDocument,
@@ -9,7 +9,7 @@ import {
 import { UserByPkDocument } from '$/server/graphql/generated/user';
 
 export function getAuthorByCommentId(commentId: string) {
-  return gqlQuery(
+  return query(
     AuthorByCommentIdDocument,
     {
       commentId,
@@ -21,7 +21,7 @@ export function getAuthorByCommentId(commentId: string) {
 export function createOneNotificationMessage(
   variables: InsertOneNotificationMessageMutationVariables,
 ) {
-  return gqlMutate(
+  return mutate(
     InsertOneNotificationMessageDocument,
     variables,
     'insertOneNotificationMessage',
@@ -31,7 +31,7 @@ export function createOneNotificationMessage(
 export function deleteNotificationMessage(
   variables: DeleteNotificationMessageMutationVariables,
 ) {
-  return gqlMutate(
+  return mutate(
     DeleteNotificationMessageDocument,
     variables,
     'deleteNotificationMessages',
@@ -39,7 +39,7 @@ export function deleteNotificationMessage(
 }
 
 export function getUserByPk(id: string) {
-  return gqlQuery(
+  return query(
     UserByPkDocument,
     {
       id,

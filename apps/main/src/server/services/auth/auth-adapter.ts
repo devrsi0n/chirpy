@@ -1,7 +1,7 @@
 import { camelCase, isArray, transform, isObject } from 'lodash';
 import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
 
-import { gqlMutate, gqlQuery } from '$/server/common/gql';
+import { mutate, query } from '$/server/common/gql';
 import {
   CreateAccountDocument,
   CreateAccountMutationVariables,
@@ -45,7 +45,7 @@ export async function createUser(user: Omit<AdapterUser, 'id'>) {
         generateUsername((user.email as string).split('@').shift() || '')
       : null);
   const name = (user.name as string | null) ?? username;
-  const data = await gqlMutate(
+  const data = await mutate(
     CreateUserDocument,
     translateAdapterUserToQueryVairables({
       ...user,
@@ -70,7 +70,7 @@ export function nextAuthAdapter(): Adapter {
       return translateUserToAdapterUser(data);
     },
     async getUserByEmail(email) {
-      const data = await gqlQuery(
+      const data = await query(
         UserByEmailDocument,
         {
           email,
@@ -80,7 +80,7 @@ export function nextAuthAdapter(): Adapter {
       return translateUserToAdapterUser(data[0]);
     },
     async getUserByAccount({ provider, providerAccountId }) {
-      const users = await gqlQuery(
+      const users = await query(
         UserByAccountDocument,
         {
           provider: provider,
@@ -92,14 +92,14 @@ export function nextAuthAdapter(): Adapter {
     },
     async updateUser(user) {
       if (user.id) {
-        const { __typename, ...existsUer } = await gqlQuery(
+        const { __typename, ...existsUer } = await query(
           UserByPkBeforeUpdateDocument,
           {
             id: user.id,
           },
           'userByPk',
         );
-        const data = await gqlMutate(
+        const data = await mutate(
           UpdateUserProfileByPkDocument,
           {
             // Add the existing user data to the update,
@@ -111,7 +111,7 @@ export function nextAuthAdapter(): Adapter {
         );
         return translateUserToAdapterUser(data);
       } else if (user.email) {
-        const data = await gqlMutate(
+        const data = await mutate(
           UpdateUserProfileByEmailDocument,
           translateAdapterUserToQueryVairables(
             user,
@@ -123,7 +123,7 @@ export function nextAuthAdapter(): Adapter {
       throw new Error('User id or email is missing');
     },
     async deleteUser(userId) {
-      const data = await gqlMutate(
+      const data = await mutate(
         DeleteUserDocument,
         {
           id: userId,
@@ -133,7 +133,7 @@ export function nextAuthAdapter(): Adapter {
       return translateUserToAdapterUser(data);
     },
     async linkAccount(account) {
-      await gqlMutate(
+      await mutate(
         CreateAccountDocument,
         {
           ...camelize(account),
@@ -143,7 +143,7 @@ export function nextAuthAdapter(): Adapter {
       );
     },
     async unlinkAccount({ provider, providerAccountId }) {
-      await gqlMutate(
+      await mutate(
         DeleteAccountDocument,
         {
           provider: provider,
@@ -153,7 +153,7 @@ export function nextAuthAdapter(): Adapter {
       );
     },
     async createSession({ sessionToken, userId, expires }) {
-      const data = await gqlMutate(
+      const data = await mutate(
         CreateSessionDocument,
         {
           sessionToken,
@@ -165,7 +165,7 @@ export function nextAuthAdapter(): Adapter {
       return translateGQLSessionToAdapterSession(data);
     },
     async getSessionAndUser(sessionToken) {
-      const data = await gqlQuery(
+      const data = await query(
         SessionAndUserDocument,
         {
           sessionToken,
@@ -187,7 +187,7 @@ export function nextAuthAdapter(): Adapter {
       };
     },
     async updateSession(session) {
-      const data = await gqlMutate(
+      const data = await mutate(
         UpdateSessionDocument,
         {
           ...session,
@@ -198,7 +198,7 @@ export function nextAuthAdapter(): Adapter {
       return translateGQLSessionToAdapterSession(data.returning[0]);
     },
     async deleteSession(sessionToken) {
-      const data = await gqlMutate(
+      const data = await mutate(
         DeleteSessionDocument,
         {
           sessionToken,
@@ -208,7 +208,7 @@ export function nextAuthAdapter(): Adapter {
       return translateGQLSessionToAdapterSession(data.returning[0]);
     },
     async createVerificationToken({ identifier, expires, token }) {
-      const { id: _, ...verificationToken } = await gqlMutate(
+      const { id: _, ...verificationToken } = await mutate(
         InsertOneVerificationTokenDocument,
         {
           identifier,
@@ -223,7 +223,7 @@ export function nextAuthAdapter(): Adapter {
       };
     },
     async useVerificationToken({ identifier, token }) {
-      const { returning } = await gqlMutate(
+      const { returning } = await mutate(
         DeleteVerificationTokenDocument,
         { identifier, token },
         'deleteVerificationTokens',

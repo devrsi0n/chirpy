@@ -1,22 +1,14 @@
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import {
-  AllProjectsDocument,
-  AllProjectsQuery,
-} from '$/server/graphql/generated/project';
+import { AllProjectsDocument } from '$/server/graphql/generated/project';
+
+import { query } from '../common/gql';
 
 export type AllProjectStaticPathParams = { params: { domain: string } }[];
 
 export async function getAllProjectStaticPathsByDomain(): Promise<AllProjectStaticPathParams> {
-  const client = getAdminGqlClient();
-  const { data, error } = await client
-    .query<AllProjectsQuery>(AllProjectsDocument)
-    .toPromise();
-  if (error) {
-    throw new Error(`Can't query all projects, error: ${error}`);
-  }
+  const projects = await query(AllProjectsDocument, {}, 'projects');
 
   return (
-    data?.projects.map(({ domain }) => {
+    projects.map(({ domain }) => {
       return {
         params: {
           domain,
