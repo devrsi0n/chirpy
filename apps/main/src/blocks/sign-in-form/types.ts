@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export type SignInProps = {
-  error?: string;
+  children?: React.ReactNode;
 };

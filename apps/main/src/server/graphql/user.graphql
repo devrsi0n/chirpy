@@ -31,6 +31,7 @@ mutation updateUserByPk(
   }
 }
 
+# Use it with userByPkBeforeUpdate
 mutation updateUserProfileByPk(
   $id: uuid!
   $name: String
@@ -50,6 +51,19 @@ mutation updateUserProfileByPk(
     ...adapterUser
   }
 }
+
+# We must fill the existing user fields before updating it
+# as hasura will set it to null if there are missing fields
+query userByPkBeforeUpdate($id: uuid!) {
+  userByPk(id: $id) {
+    id
+    name
+    email
+    avatar
+    emailVerified
+  }
+}
+
 mutation updateUserProfileByEmail(
   $email: String!
   $name: String
