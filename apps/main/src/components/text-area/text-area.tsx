@@ -24,7 +24,7 @@ export const TextArea = React.forwardRef(function TextArea(
 ): JSX.Element {
   return (
     <label className={clsx('mb-4 flex flex-col text-gray-1200', styles.root)}>
-      <p className="mb-1 text-lg leading-6">{label}</p>
+      <p className="mb-1 text-lg font-semibold leading-6">{label}</p>
       <textarea
         {...inputProps}
         name={label}
