@@ -1,8 +1,11 @@
 import { Profile as AuthProfile } from 'next-auth';
 
-import { UpdateUserByPkDocument } from '$/server/graphql/generated/user';
+import {
+  UpdateUserByPkDocument,
+  UserBeforeUpdateDocument,
+} from '$/server/graphql/generated/user';
 
-import { mutate } from '../common/gql';
+import { mutate, query } from '../common/gql';
 
 export async function fillUserFields(
   user: User,
@@ -20,18 +23,27 @@ export async function fillUserFields(
     if (!fields) {
       return;
     }
+    const { __typename, ...existsUser } = await query(
+      UserBeforeUpdateDocument,
+      {
+        id: user.id,
+      },
+      'userByPk',
+    );
     await mutate(
       UpdateUserByPkDocument,
       {
-        id: user.id,
+        // Preset the existing fields or they'll be reset
+        ...existsUser,
         ...fields,
+        id: user.id,
       },
       'updateUserByPk',
     );
 
     return;
   } catch (error) {
-    console.log('fill user fields failed', error);
+    console.error('fill user fields failed', error);
     return;
   }
 }

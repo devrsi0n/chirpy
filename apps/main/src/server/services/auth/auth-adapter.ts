@@ -24,9 +24,9 @@ import {
   UpdateUserProfileByPkDocument,
   UpdateUserProfileByPkMutationVariables,
   UserByAccountDocument,
+  UserByEmailBeforeUpdateDocument,
   UserByEmailDocument,
   UserByPkBeforeUpdateDocument,
-  UserByPkDocument,
 } from '$/server/graphql/generated/user';
 import {
   DeleteVerificationTokenDocument,
@@ -103,7 +103,7 @@ export function nextAuthAdapter(): Adapter {
           UpdateUserProfileByPkDocument,
           {
             // Add the existing user data to the update,
-            // or it'll reset empty fields
+            // or it'll reset non-existing fields
             ...existsUer,
             ...translateAdapterUserToQueryVairables(user),
           } as UpdateUserProfileByPkMutationVariables,
@@ -111,11 +111,23 @@ export function nextAuthAdapter(): Adapter {
         );
         return translateUserToAdapterUser(data);
       } else if (user.email) {
+        const [{ __typename, ...existsUer }] = await query(
+          UserByEmailBeforeUpdateDocument,
+          {
+            email: user.email,
+          },
+          'users',
+        );
         const data = await mutate(
           UpdateUserProfileByEmailDocument,
-          translateAdapterUserToQueryVairables(
-            user,
-          ) as UpdateUserProfileByEmailMutationVariables,
+          {
+            // Add the existing user data to the update,
+            // or it'll reset non-existing fields
+            ...existsUer,
+            ...(translateAdapterUserToQueryVairables(
+              user,
+            ) as UpdateUserProfileByEmailMutationVariables),
+          },
           'updateUsers',
         );
         return translateUserToAdapterUser(data.returning[0]);
@@ -187,11 +199,20 @@ export function nextAuthAdapter(): Adapter {
       };
     },
     async updateSession(session) {
+      const { userId, sessionToken, expires } = session;
+      if (!userId || !expires) {
+        throw new Error(
+          `Session expires or userId is missing, session: ${JSON.stringify(
+            session,
+          )}`,
+        );
+      }
       const data = await mutate(
         UpdateSessionDocument,
         {
-          ...session,
-          expires: session.expires ? session.expires.toDateString() : undefined,
+          userId,
+          sessionToken,
+          expires: expires.toDateString(),
         },
         'updateSessions',
       );

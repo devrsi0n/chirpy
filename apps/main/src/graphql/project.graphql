@@ -14,7 +14,11 @@ mutation deleteProjectByPk($id: uuid!) {
 }
 
 mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
-  updateProjectByPk(pk_columns: { id: $projectId }, _set: { theme: $theme }) {
+  updateProjectByPk(
+    pk_columns: { id: $projectId }
+    # Make sure all fields are filled if we add more fields here
+    _set: { theme: $theme }
+  ) {
     id
   }
 }

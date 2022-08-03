@@ -6,7 +6,6 @@ import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';
-import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
 import { isENVDev } from '$/server/utilities/env';
@@ -30,14 +29,15 @@ export default NextAuth({
      * @param profile Provider profile (only available on sign in)
      * @return JSON Web Token that will be saved
      */
-    async jwt({ token, user, account, profile }) {
-      if (user) {
-        await fillUserFields(
-          user as any,
-          profile as any,
-          account?.provider as any,
-        );
-      }
+    async jwt({ token /* user  account, profile */ }) {
+      // TODO: Ask user to fill these fields, don't fill them automatically
+      //if (user) {
+      // await fillUserFields(
+      //   user as any,
+      //   profile as any,
+      //   account?.provider as any,
+      // );
+      //}
       return {
         ...token,
       };

@@ -29,10 +29,25 @@ export type UpdateUserByPkMutation = {
   updateUserByPk?: { __typename?: 'User'; id: string } | null;
 };
 
+export type UserBeforeUpdateQueryVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type UserBeforeUpdateQuery = {
+  __typename?: 'query_root';
+  userByPk?: {
+    __typename?: 'User';
+    username?: string | null;
+    bio?: string | null;
+    website?: string | null;
+    twitterUserName?: string | null;
+  } | null;
+};
+
 export type UpdateUserProfileByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
-  name?: Types.InputMaybe<Types.Scalars['String']>;
   email?: Types.InputMaybe<Types.Scalars['String']>;
+  name?: Types.InputMaybe<Types.Scalars['String']>;
   avatar?: Types.InputMaybe<Types.Scalars['String']>;
   emailVerified?: Types.InputMaybe<Types.Scalars['timestamptz']>;
 }>;
@@ -63,8 +78,8 @@ export type UserByPkBeforeUpdateQuery = {
   userByPk?: {
     __typename?: 'User';
     id: string;
-    name?: string | null;
     email?: string | null;
+    name?: string | null;
     avatar?: string | null;
     emailVerified?: string | null;
   } | null;
@@ -95,6 +110,22 @@ export type UpdateUserProfileByEmailMutation = {
       twitterUserName?: string | null;
     }>;
   } | null;
+};
+
+export type UserByEmailBeforeUpdateQueryVariables = Types.Exact<{
+  email: Types.Scalars['String'];
+}>;
+
+export type UserByEmailBeforeUpdateQuery = {
+  __typename?: 'query_root';
+  users: Array<{
+    __typename?: 'User';
+    id: string;
+    name?: string | null;
+    email?: string | null;
+    avatar?: string | null;
+    emailVerified?: string | null;
+  }>;
 };
 
 export type UserByPkQueryVariables = Types.Exact<{
@@ -258,7 +289,6 @@ export const UpdateUserByPkDocument = {
           kind: 'VariableDefinition',
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'bio' } },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: { kind: 'StringValue', value: '', block: false },
         },
         {
           kind: 'VariableDefinition',
@@ -267,7 +297,6 @@ export const UpdateUserByPkDocument = {
             name: { kind: 'Name', value: 'website' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: { kind: 'StringValue', value: '', block: false },
         },
         {
           kind: 'VariableDefinition',
@@ -276,7 +305,6 @@ export const UpdateUserByPkDocument = {
             name: { kind: 'Name', value: 'twitterUserName' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: { kind: 'StringValue', value: '', block: false },
         },
       ],
       selectionSet: {
@@ -360,6 +388,60 @@ export const UpdateUserByPkDocument = {
   UpdateUserByPkMutation,
   UpdateUserByPkMutationVariables
 >;
+export const UserBeforeUpdateDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'userBeforeUpdate' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'userByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'bio' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'website' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'twitterUserName' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UserBeforeUpdateQuery,
+  UserBeforeUpdateQueryVariables
+>;
 export const UpdateUserProfileByPkDocument = {
   kind: 'Document',
   definitions: [
@@ -378,15 +460,15 @@ export const UpdateUserProfileByPkDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-        },
-        {
-          kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
             name: { kind: 'Name', value: 'email' },
           },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
         {
@@ -531,8 +613,8 @@ export const UserByPkBeforeUpdateDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
                 {
                   kind: 'Field',
@@ -690,6 +772,85 @@ export const UpdateUserProfileByEmailDocument = {
 } as unknown as DocumentNode<
   UpdateUserProfileByEmailMutation,
   UpdateUserProfileByEmailMutationVariables
+>;
+export const UserByEmailBeforeUpdateDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'userByEmailBeforeUpdate' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'email' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'users' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'email' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_eq' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'email' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'emailVerified' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  UserByEmailBeforeUpdateQuery,
+  UserByEmailBeforeUpdateQueryVariables
 >;
 export const UserByPkDocument = {
   kind: 'Document',

@@ -44,8 +44,8 @@ export type SessionAndUserQuery = {
 
 export type UpdateSessionMutationVariables = Types.Exact<{
   sessionToken: Types.Scalars['String'];
-  userId?: Types.InputMaybe<Types.Scalars['uuid']>;
-  expires?: Types.InputMaybe<Types.Scalars['timestamptz']>;
+  userId: Types.Scalars['uuid'];
+  expires: Types.Scalars['timestamptz'];
 }>;
 
 export type UpdateSessionMutation = {
@@ -310,7 +310,10 @@ export const UpdateSessionDocument = {
             kind: 'Variable',
             name: { kind: 'Name', value: 'userId' },
           },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
         },
         {
           kind: 'VariableDefinition',
@@ -319,8 +322,11 @@ export const UpdateSessionDocument = {
             name: { kind: 'Name', value: 'expires' },
           },
           type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'timestamptz' },
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'timestamptz' },
+            },
           },
         },
       ],

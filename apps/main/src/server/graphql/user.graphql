@@ -11,12 +11,13 @@ fragment adapterUser on User {
   twitterUserName
 }
 
+# Use it with userBeforeUpdate
 mutation updateUserByPk(
   $id: uuid!
   $username: String
-  $bio: String = ""
-  $website: String = ""
-  $twitterUserName: String = ""
+  $bio: String
+  $website: String
+  $twitterUserName: String
 ) {
   updateUserByPk(
     pk_columns: { id: $id }
@@ -31,11 +32,20 @@ mutation updateUserByPk(
   }
 }
 
+query userBeforeUpdate($id: uuid!) {
+  userByPk(id: $id) {
+    username
+    bio
+    website
+    twitterUserName
+  }
+}
+
 # Use it with userByPkBeforeUpdate
 mutation updateUserProfileByPk(
   $id: uuid!
-  $name: String
   $email: String
+  $name: String
   $avatar: String
   $emailVerified: timestamptz
 ) {
@@ -57,13 +67,14 @@ mutation updateUserProfileByPk(
 query userByPkBeforeUpdate($id: uuid!) {
   userByPk(id: $id) {
     id
-    name
     email
+    name
     avatar
     emailVerified
   }
 }
 
+# Use it with userByEmailBeforeUpdate
 mutation updateUserProfileByEmail(
   $email: String!
   $name: String
@@ -77,6 +88,16 @@ mutation updateUserProfileByEmail(
     returning {
       ...adapterUser
     }
+  }
+}
+
+query userByEmailBeforeUpdate($email: String!) {
+  users(where: { email: { _eq: $email } }) {
+    id
+    name
+    email
+    avatar
+    emailVerified
   }
 }
 
