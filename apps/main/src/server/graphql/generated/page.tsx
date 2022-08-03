@@ -66,6 +66,20 @@ export type PageByUrlOnlyQuery = {
   pages: Array<{ __typename?: 'Page'; id: string; url: string }>;
 };
 
+export type ThemeOfPageQueryVariables = Types.Exact<{
+  pageId: Types.Scalars['uuid'];
+}>;
+
+export type ThemeOfPageQuery = {
+  __typename?: 'query_root';
+  pageByPk?: {
+    __typename?: 'Page';
+    id: string;
+    url: string;
+    project: { __typename?: 'Project'; id: string; theme?: any | null };
+  } | null;
+};
+
 export const PageByUrlDocument = {
   kind: 'Document',
   definitions: [
@@ -532,3 +546,63 @@ export const PageByUrlOnlyDocument = {
     },
   ],
 } as unknown as DocumentNode<PageByUrlOnlyQuery, PageByUrlOnlyQueryVariables>;
+export const ThemeOfPageDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'themeOfPage' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pageId' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'pageByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'pageId' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'project' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'theme' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ThemeOfPageQuery, ThemeOfPageQueryVariables>;

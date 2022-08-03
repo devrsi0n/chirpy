@@ -1,7 +1,8 @@
 import { Profile as AuthProfile } from 'next-auth';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { UpdateUserByPkDocument } from '$/server/graphql/generated/user';
+
+import { mutate } from '../common/gql';
 
 export async function fillUserFields(
   user: User,
@@ -19,13 +20,15 @@ export async function fillUserFields(
     if (!fields) {
       return;
     }
-    const client = getAdminGqlClient();
-    await client
-      .mutation(UpdateUserByPkDocument, {
+    await mutate(
+      UpdateUserByPkDocument,
+      {
         id: user.id,
         ...fields,
-      })
-      .toPromise();
+      },
+      'updateUserByPk',
+    );
+
     return;
   } catch (error) {
     console.log('fill user fields failed', error);
