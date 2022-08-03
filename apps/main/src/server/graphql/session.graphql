@@ -1,5 +1,11 @@
-mutation createSession($userId: uuid, $sessionToken: String!, $expires: timestamptz!) {
-  insertOneSession(object: { userId: $userId, sessionToken: $sessionToken, expires: $expires }) {
+mutation createSession(
+  $userId: uuid
+  $sessionToken: String!
+  $expires: timestamptz!
+) {
+  insertOneSession(
+    object: { userId: $userId, sessionToken: $sessionToken, expires: $expires }
+  ) {
     id
     expires
     sessionToken
@@ -23,7 +29,11 @@ query sessionAndUser($sessionToken: String!) {
   }
 }
 
-mutation updateSession($sessionToken: String!, $userId: uuid, $expires: timestamptz) {
+mutation updateSession(
+  $sessionToken: String!
+  $userId: uuid!
+  $expires: timestamptz!
+) {
   updateSessions(
     where: { sessionToken: { _eq: $sessionToken } }
     _set: { userId: $userId, expires: $expires }

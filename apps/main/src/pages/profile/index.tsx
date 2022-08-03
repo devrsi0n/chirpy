@@ -165,7 +165,7 @@ export default function Profile(): JSX.Element {
               ) : (
                 email && (
                   <div>
-                    <Text>{email}</Text>
+                    <Text title="Email, can't edit it">{email}</Text>
                     {type === 'anonymous' && !emailVerified && (
                       <Text variant="secondary" size="sm" className="mt-1.5">
                         This email address is unverified, you need to sign-in
