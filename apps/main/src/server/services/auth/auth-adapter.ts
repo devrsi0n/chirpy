@@ -25,6 +25,8 @@ import {
   UpdateUserProfileByPkMutationVariables,
   UserByAccountDocument,
   UserByEmailDocument,
+  UserByPkBeforeUpdateDocument,
+  UserByPkDocument,
 } from '$/server/graphql/generated/user';
 import {
   DeleteVerificationTokenDocument,
@@ -32,12 +34,23 @@ import {
 } from '$/server/graphql/generated/verification-token';
 
 import { getUserByPk } from '../mutation-event/utilities';
+import { generateUsername } from './utilities';
 
 export async function createUser(user: Omit<AdapterUser, 'id'>) {
+  // Fill missing username & name with email
+  const username =
+    (user.username as string | null) ??
+    (user.email
+      ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        generateUsername((user.email as string).split('@').shift() || '')
+      : null);
+  const name = (user.name as string | null) ?? username;
   const data = await gqlMutate(
     CreateUserDocument,
     translateAdapterUserToQueryVairables({
       ...user,
+      username,
+      name,
       type: user.email ? 'free' : 'anonymous',
     }) as CreateUserMutationVariables,
     'insertOneUser',
@@ -47,7 +60,7 @@ export async function createUser(user: Omit<AdapterUser, 'id'>) {
 
 export function nextAuthAdapter(): Adapter {
   return {
-    async createUser(user: Omit<AdapterUser, 'id'>) {
+    async createUser(user) {
       const data = await createUser(user);
       return translateUserToAdapterUser(data);
     },
@@ -79,11 +92,21 @@ export function nextAuthAdapter(): Adapter {
     },
     async updateUser(user) {
       if (user.id) {
+        const { __typename, ...existsUer } = await gqlQuery(
+          UserByPkBeforeUpdateDocument,
+          {
+            id: user.id,
+          },
+          'userByPk',
+        );
         const data = await gqlMutate(
           UpdateUserProfileByPkDocument,
-          translateAdapterUserToQueryVairables(
-            user,
-          ) as UpdateUserProfileByPkMutationVariables,
+          {
+            // Add the existing user data to the update,
+            // or it'll reset empty fields
+            ...existsUer,
+            ...translateAdapterUserToQueryVairables(user),
+          } as UpdateUserProfileByPkMutationVariables,
           'updateUserByPk',
         );
         return translateUserToAdapterUser(data);

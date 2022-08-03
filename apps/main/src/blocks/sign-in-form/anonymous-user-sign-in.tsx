@@ -1,7 +1,6 @@
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
@@ -10,7 +9,7 @@ import { useForm } from '$/hooks/use-form';
 
 import { SignInProps } from './types';
 
-export function AnonymousUserSignIn({ error }: SignInProps): JSX.Element {
+export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       name: '',
@@ -43,7 +42,7 @@ export function AnonymousUserSignIn({ error }: SignInProps): JSX.Element {
         placeholder="James Smith"
       />
       <div>
-        {error && <Alert type="warn">{error}</Alert>}
+        {children}
         <Button
           type="submit"
           variant="solid"

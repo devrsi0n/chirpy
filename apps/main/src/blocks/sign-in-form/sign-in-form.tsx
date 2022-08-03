@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
+import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
 import { Divider } from '$/components/divider';
 import { Heading } from '$/components/heading';
@@ -25,9 +26,9 @@ export type SignInFormProps = React.PropsWithChildren<{
 type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
 
 export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
-  const [errorType, setErrorType] = React.useState<
-    SignInErrorKeys | undefined
-  >();
+  const [errorType, setErrorType] = React.useState<SignInErrorKeys | null>(
+    null,
+  );
   React.useEffect(() => {
     const error = new URLSearchParams(location.search).get(
       'error',
@@ -40,6 +41,19 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
     errorType && (SIGN_IN_ERRORS[errorType] ?? SIGN_IN_ERRORS.Default);
 
   const [isAnonymous, setIsAnonymous] = React.useState(true);
+  const alert = React.useMemo(
+    () =>
+      error && (
+        <Alert
+          key="alert"
+          onClickDismiss={() => setErrorType(null)}
+          type="warn"
+        >
+          {error}
+        </Alert>
+      ),
+    [error],
+  );
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex h-full flex-1 flex-col items-center ">
@@ -56,16 +70,16 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
           <div className="space-y-6">
             <div>
               {isAnonymous ? (
-                <AnonymousUserSignIn error={error} />
+                <AnonymousUserSignIn>{alert}</AnonymousUserSignIn>
               ) : (
-                <EmailSignIn error={error} />
+                <EmailSignIn>{alert}</EmailSignIn>
               )}
               <Toggle
                 checked={isAnonymous}
                 onChange={(value) => setIsAnonymous(value)}
                 label="Anonymous"
                 reverse
-                className="mt-5"
+                className="mt-6"
                 hintText="Turn off to sign in with your email if you want to sign-in with another browser later"
               />
             </div>

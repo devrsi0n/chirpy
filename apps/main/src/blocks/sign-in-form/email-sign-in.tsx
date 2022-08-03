@@ -1,7 +1,6 @@
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Alert } from '$/components/alert';
 import { Button } from '$/components/button';
 import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
@@ -13,7 +12,7 @@ import { SignInProps } from './types';
 /**
  * Email/magic link sign-in
  */
-export function EmailSignIn({ error }: SignInProps): JSX.Element {
+export function EmailSignIn({ children }: SignInProps): JSX.Element {
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
       email: '',
@@ -24,6 +23,7 @@ export function EmailSignIn({ error }: SignInProps): JSX.Element {
       event.preventDefault();
       await signIn('email', {
         ...fields,
+        callbackUrl: '/dashboard',
       });
     },
   );
@@ -44,7 +44,7 @@ export function EmailSignIn({ error }: SignInProps): JSX.Element {
         placeholder="james@example.com"
       />
       <div>
-        {error && <Alert type="warn">{error}</Alert>}
+        {children}
         <Button
           type="submit"
           variant="solid"
@@ -56,7 +56,7 @@ export function EmailSignIn({ error }: SignInProps): JSX.Element {
       </div>
       <Text size="sm" variant="secondary">
         You can sign-in without password by using a temporary Access Code sent
-        to your email.
+        to your email instead.
       </Text>
     </form>
   );
