@@ -113,7 +113,7 @@ export default function Dashboard(): JSX.Element {
         )}
       </section>
       <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-        <form className="flex w-80 flex-col">
+        <form className="flex w-80 flex-col space-y-4">
           <TextField
             {...register('name', {
               required: { value: true, message: 'Name is required' },

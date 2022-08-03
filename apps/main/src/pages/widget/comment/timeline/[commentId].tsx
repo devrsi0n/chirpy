@@ -25,15 +25,10 @@ import {
   CommentTimelineSubscription,
   useCommentTimelineSubscription,
 } from '$/graphql/generated/comment';
-import {
-  ThemeOfPageDocument,
-  ThemeOfPageQuery,
-} from '$/graphql/generated/page';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import {
-  CommentsDocument,
-  CommentsQuery,
-} from '$/server/graphql/generated/comment';
+import { query } from '$/server/common/gql';
+import { CommentsDocument } from '$/server/graphql/generated/comment';
+import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentTimelineNode } from '$/types/widget';
@@ -88,17 +83,16 @@ type StaticProps = PathParams &
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const client = getAdminGqlClient();
-  const { data, error } = await client
-    .query<CommentsQuery>(CommentsDocument, {
+  const comments = await query(
+    CommentsDocument,
+    {
       newerThan: dayjs().subtract(1, 'day').toISOString(),
-    })
-    .toPromise();
-  if (error) {
-    console.error(`Can't find the comments, error: ${error}`);
-  }
+    },
+    'comments',
+  );
+
   const paths =
-    data?.comments.map(({ id }) => ({
+    comments.map(({ id }) => ({
       params: {
         commentId: id,
       },
@@ -109,6 +103,8 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   };
 };
 
+const client = getAdminGqlClient();
+
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<
@@ -118,7 +114,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { commentId } = params;
-  const client = getAdminGqlClient();
 
   try {
     const { data } = await new Promise<
@@ -137,23 +132,25 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       return { notFound: true };
     }
 
-    const themeResult = await client
-      .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
+    const pageByPk = await query(
+      ThemeOfPageDocument,
+      {
         pageId: data.commentByPk.pageId,
-      })
-      .toPromise();
-    if (!themeResult.data?.pageByPk) {
+      },
+      'pageByPk',
+    );
+    if (!pageByPk) {
       console.error(`Can't find page info`);
       return { notFound: true };
     }
 
     return {
       props: {
-        projectId: themeResult.data.pageByPk.project.id,
+        projectId: pageByPk.project.id,
         comment: data.commentByPk,
         commentId,
-        pageURL: themeResult.data.pageByPk.url,
-        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
+        pageURL: pageByPk.url,
+        theme: (pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
       revalidate: 600,

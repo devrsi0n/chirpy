@@ -4,7 +4,7 @@ import * as React from 'react';
 import { AnalyticsBlock } from '$/blocks/analytics';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
-import { gqlQuery } from '$/server/common/gql';
+import { query } from '$/server/common/gql';
 import {
   ProjectByDomainDocument,
   ProjectByDomainQuery,
@@ -59,7 +59,7 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const { domain } = params;
-  const projects = await gqlQuery(
+  const projects = await query(
     ProjectByDomainDocument,
     {
       domain,

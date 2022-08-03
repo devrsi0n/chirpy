@@ -20,6 +20,7 @@ import {
   orangeDark,
   redDark,
   pinkDark,
+  slateDark,
 } from '@radix-ui/colors';
 
 import { Theme } from '../../types/theme.type';
@@ -65,7 +66,7 @@ export function getColors() {
       orange: translateRadixColor(orangeDark),
       red: translateRadixColor(redDark),
       pink: translateRadixColor(pinkDark),
-      bg: grayDark.gray1,
+      bg: slateDark.slate1,
     },
   };
 }

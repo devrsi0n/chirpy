@@ -27,7 +27,7 @@ export type UserMenuProps = {
 
 export function UserMenu(props: UserMenuProps): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
-  const { avatar, name } = data;
+  const { avatar, name, email } = data;
   const handleSignIn = useSignInWindow();
   const isWidget = props.variant === 'Widget';
   const isNav = props.variant === 'Nav';
@@ -35,14 +35,23 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   return (
     <Menu>
       <Menu.Button>
-        <Avatar src={avatar || ''} alt={`The avatar of ${name}`} />
+        <Avatar src={avatar || ''} {...(name && { alt: name })} />
       </Menu.Button>
-      <Menu.Items>
+      <Menu.Items className="">
         {name && (
-          <div className="px-6 py-2">
-            <Text className="flex justify-start" bold>
+          <div className="mx-6 py-2">
+            <Text className="w-36 text-left line-clamp-2" bold>
               {name}
             </Text>
+            {email && (
+              <Text
+                variant="secondary"
+                className="w-36 break-words text-left line-clamp-2"
+                size="sm"
+              >
+                {email}
+              </Text>
+            )}
           </div>
         )}
         {isSignIn && <Menu.Divider />}

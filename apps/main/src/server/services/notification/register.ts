@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { PushSubscription } from 'web-push';
 
-import { gqlMutate } from '$/server/common/gql';
+import { mutate } from '$/server/common/gql';
 import {
   InsertOneNotificationSubscriptionDocument,
   InsertOneNotificationSubscriptionMutationVariables,
@@ -45,7 +45,7 @@ export async function registerDevice(
 function createOneNotificationSubscription(
   variables: InsertOneNotificationSubscriptionMutationVariables,
 ) {
-  return gqlMutate(
+  return mutate(
     InsertOneNotificationSubscriptionDocument,
     variables,
     'insertOneNotificationSubscription',

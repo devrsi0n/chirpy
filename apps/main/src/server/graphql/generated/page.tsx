@@ -66,6 +66,20 @@ export type PageByUrlOnlyQuery = {
   pages: Array<{ __typename?: 'Page'; id: string; url: string }>;
 };
 
+export type ThemeOfPageQueryVariables = Types.Exact<{
+  pageId: Types.Scalars['uuid'];
+}>;
+
+export type ThemeOfPageQuery = {
+  __typename?: 'query_root';
+  pageByPk?: {
+    __typename?: 'Page';
+    id: string;
+    url: string;
+    project: { __typename?: 'Project'; id: string; theme?: any | null };
+  } | null;
+};
+
 export const PageByUrlDocument = {
   kind: 'Document',
   definitions: [
@@ -79,12 +93,18 @@ export const PageByUrlDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'projectId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -118,7 +138,10 @@ export const PageByUrlDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'url' },
+                            },
                           },
                         ],
                       },
@@ -132,7 +155,10 @@ export const PageByUrlDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'projectId' },
+                            },
                           },
                         ],
                       },
@@ -152,7 +178,12 @@ export const PageByUrlDocument = {
                   name: { kind: 'Name', value: 'project' },
                   selectionSet: {
                     kind: 'SelectionSet',
-                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'domain' } }],
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'domain' },
+                      },
+                    ],
                   },
                 },
               ],
@@ -173,7 +204,10 @@ export const InsertOnePageDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'projectId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -181,10 +215,16 @@ export const InsertOnePageDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'title' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
@@ -192,7 +232,10 @@ export const InsertOnePageDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -212,17 +255,26 @@ export const InsertOnePageDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'projectId' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'projectId' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'title' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'title' },
+                      },
                     },
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'url' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'url' },
+                      },
                     },
                   ],
                 },
@@ -239,7 +291,12 @@ export const InsertOnePageDocument = {
                   name: { kind: 'Name', value: 'project' },
                   selectionSet: {
                     kind: 'SelectionSet',
-                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'domain' } }],
+                    selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'domain' },
+                      },
+                    ],
                   },
                 },
               ],
@@ -249,7 +306,10 @@ export const InsertOnePageDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<InsertOnePageMutation, InsertOnePageMutationVariables>;
+} as unknown as DocumentNode<
+  InsertOnePageMutation,
+  InsertOnePageMutationVariables
+>;
 export const UpdatePagesDocument = {
   kind: 'Document',
   definitions: [
@@ -260,7 +320,10 @@ export const UpdatePagesDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'projectId' },
+          },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
@@ -268,10 +331,16 @@ export const UpdatePagesDocument = {
         },
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'title' },
+          },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
         {
@@ -279,7 +348,10 @@ export const UpdatePagesDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -305,7 +377,10 @@ export const UpdatePagesDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'url' },
+                            },
                           },
                         ],
                       },
@@ -319,7 +394,10 @@ export const UpdatePagesDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'projectId' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'projectId' },
+                            },
                           },
                         ],
                       },
@@ -336,7 +414,10 @@ export const UpdatePagesDocument = {
                     {
                       kind: 'ObjectField',
                       name: { kind: 'Name', value: 'title' },
-                      value: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+                      value: {
+                        kind: 'Variable',
+                        name: { kind: 'Name', value: 'title' },
+                      },
                     },
                   ],
                 },
@@ -350,10 +431,15 @@ export const UpdatePagesDocument = {
                   name: { kind: 'Name', value: 'returning' },
                   selectionSet: {
                     kind: 'SelectionSet',
-                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                    ],
                   },
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'affected_rows' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'affected_rows' },
+                },
               ],
             },
           },
@@ -401,7 +487,10 @@ export const PageByUrlOnlyDocument = {
           variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
           type: {
             kind: 'NonNullType',
-            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
           },
         },
       ],
@@ -432,7 +521,10 @@ export const PageByUrlOnlyDocument = {
                           {
                             kind: 'ObjectField',
                             name: { kind: 'Name', value: '_eq' },
-                            value: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'url' },
+                            },
                           },
                         ],
                       },
@@ -454,3 +546,63 @@ export const PageByUrlOnlyDocument = {
     },
   ],
 } as unknown as DocumentNode<PageByUrlOnlyQuery, PageByUrlOnlyQueryVariables>;
+export const ThemeOfPageDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'themeOfPage' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'pageId' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'pageByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'pageId' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'project' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'theme' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ThemeOfPageQuery, ThemeOfPageQueryVariables>;

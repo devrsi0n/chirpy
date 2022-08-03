@@ -1,15 +1,11 @@
 import NextAuth from 'next-auth';
 
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import {
-  UserProjectsDocument,
-  UserProjectsQuery,
-} from '$/server/graphql/generated/project';
+import { query } from '$/server/common/gql';
+import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';
-import { fillUserFields } from '$/server/services/user';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
 import { isENVDev } from '$/server/utilities/env';
@@ -23,7 +19,7 @@ export default NextAuth({
   pages: {
     signIn: '/auth/sign-in',
     newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: '/auth/sign-in', // Error code passed in query string as ?error=
   },
   callbacks: {
     /**
@@ -33,31 +29,33 @@ export default NextAuth({
      * @param profile Provider profile (only available on sign in)
      * @return JSON Web Token that will be saved
      */
-    async jwt({ token, user, account, profile }) {
-      if (user) {
-        await fillUserFields(
-          user as any,
-          profile as any,
-          account?.provider as any,
-        );
-      }
+    async jwt({ token /* user  account, profile */ }) {
+      // TODO: Ask user to fill these fields, don't fill them automatically
+      //if (user) {
+      // await fillUserFields(
+      //   user as any,
+      //   profile as any,
+      //   account?.provider as any,
+      // );
+      //}
       return {
         ...token,
       };
     },
     async session({ session, token }) {
-      const client = getAdminGqlClient();
       const userId = token.sub;
       if (!userId) {
         throw new Error(`Expect valid user id`);
       }
-      const { data } = await client
-        .query<UserProjectsQuery>(UserProjectsDocument, {
+      const projects = await query(
+        UserProjectsDocument,
+        {
           userId,
-        })
-        .toPromise();
+        },
+        'projects',
+      );
       const editableProjectIds =
-        data?.projects.map(({ id }: { id: string }) => id) || [];
+        projects.map(({ id }: { id: string }) => id) || [];
       session.hasuraToken = createAuthToken(
         {
           userId: userId,
@@ -88,7 +86,7 @@ export default NextAuth({
   events: {
     async createUser({ user }) {
       if (!user.email) {
-        return console.error('Create a user without valid email', user);
+        return console.info('Create an anonymous user');
       }
       await sendWelcomeLetter({
         to: {

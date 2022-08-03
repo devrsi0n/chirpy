@@ -42,7 +42,9 @@ export type UpdateThemeMutation = {
 
 export const InsertOneProjectDocument = gql`
   mutation insertOneProject($teamId: uuid, $name: String!, $domain: String!) {
-    insertOneProject(object: { teamId: $teamId, name: $name, domain: $domain }) {
+    insertOneProject(
+      object: { teamId: $teamId, name: $name, domain: $domain }
+    ) {
       id
       name
       teamId
@@ -52,9 +54,10 @@ export const InsertOneProjectDocument = gql`
 `;
 
 export function useInsertOneProjectMutation() {
-  return Urql.useMutation<InsertOneProjectMutation, InsertOneProjectMutationVariables>(
-    InsertOneProjectDocument,
-  );
+  return Urql.useMutation<
+    InsertOneProjectMutation,
+    InsertOneProjectMutationVariables
+  >(InsertOneProjectDocument);
 }
 export const DeleteProjectByPkDocument = gql`
   mutation deleteProjectByPk($id: uuid!) {
@@ -65,9 +68,10 @@ export const DeleteProjectByPkDocument = gql`
 `;
 
 export function useDeleteProjectByPkMutation() {
-  return Urql.useMutation<DeleteProjectByPkMutation, DeleteProjectByPkMutationVariables>(
-    DeleteProjectByPkDocument,
-  );
+  return Urql.useMutation<
+    DeleteProjectByPkMutation,
+    DeleteProjectByPkMutationVariables
+  >(DeleteProjectByPkDocument);
 }
 export const UpdateThemeDocument = gql`
   mutation updateTheme($projectId: uuid!, $theme: jsonb!) {
@@ -78,5 +82,7 @@ export const UpdateThemeDocument = gql`
 `;
 
 export function useUpdateThemeMutation() {
-  return Urql.useMutation<UpdateThemeMutation, UpdateThemeMutationVariables>(UpdateThemeDocument);
+  return Urql.useMutation<UpdateThemeMutation, UpdateThemeMutationVariables>(
+    UpdateThemeDocument,
+  );
 }

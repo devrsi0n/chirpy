@@ -20,16 +20,12 @@ import {
   CommentTreeSubscriptionVariables,
   useCommentTreeSubscription,
 } from '$/graphql/generated/comment';
-import {
-  ThemeOfPageDocument,
-  ThemeOfPageQuery,
-} from '$/graphql/generated/page';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { query } from '$/server/common/gql';
+import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
 import {
   PageByUrlOnlyDocument,
-  PageByUrlOnlyQuery,
   PagesDocument,
-  PagesQuery,
 } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
@@ -86,13 +82,14 @@ type PathParams = {
   pageURL: string;
 };
 
+const client = getAdminGqlClient();
+
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const client = getAdminGqlClient();
-  const { data } = await client.query<PagesQuery>(PagesDocument).toPromise();
+  const pages = await query(PagesDocument, {}, 'pages');
 
   const paths: { params: PathParams }[] =
-    data?.pages.map(({ url }) => {
+    pages.map(({ url }) => {
       return {
         params: {
           pageURL: url,
@@ -126,11 +123,8 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const { pageURL } = params;
-  const client = getAdminGqlClient();
-  const pageQuery = await client
-    .query<PageByUrlOnlyQuery>(PageByUrlOnlyDocument, { url: pageURL })
-    .toPromise();
-  const pageId = pageQuery.data?.pages?.[0]?.id;
+  const pages = await query(PageByUrlOnlyDocument, { url: pageURL }, 'pages');
+  const pageId = pages?.[0]?.id;
   if (!pageId) {
     return { notFound: true };
   }
@@ -158,12 +152,14 @@ export const getStaticProps: GetStaticProps<
       return { notFound: true };
     }
     const { comments } = data;
-    const themeResult = await client
-      .query<ThemeOfPageQuery>(ThemeOfPageDocument, {
+    const pageByPk = await query(
+      ThemeOfPageDocument,
+      {
         pageId,
-      })
-      .toPromise();
-    if (!themeResult?.data?.pageByPk) {
+      },
+      'pageByPk',
+    );
+    if (!pageByPk) {
       console.error(`Can't find theme info`);
       return { notFound: true };
     }
@@ -172,8 +168,8 @@ export const getStaticProps: GetStaticProps<
         comments,
         pageURL,
         pageId,
-        projectId: themeResult.data.pageByPk.project.id,
-        theme: (themeResult.data.pageByPk.project.theme as Theme) || null,
+        projectId: pageByPk.project.id,
+        theme: (pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
     };

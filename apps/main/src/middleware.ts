@@ -10,7 +10,8 @@ export default withAuth({
           process.env.HASURA_EVENT_SECRET
         );
       }
-      return !!token?.email;
+      // Anonymous user doesn't have an email address
+      return !!(token?.email || token?.name);
     },
   },
 });

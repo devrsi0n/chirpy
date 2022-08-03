@@ -19,13 +19,13 @@ export async function sendWelcomeLetter({ to }: SendEmailOptions) {
   });
 }
 
-export type SendVerificationRequestOptions = SendEmailOptions & {
+export type SendVerificationEmailOptions = SendEmailOptions & {
   url: string;
 };
-export async function sendVerificationRequest({
+export async function sendVerificationEmail({
   to,
   url,
-}: SendVerificationRequestOptions) {
+}: SendVerificationEmailOptions) {
   await sendEmailWithTemplate({
     to,
     type: 'verification-request',
@@ -36,6 +36,7 @@ export async function sendVerificationRequest({
     },
   });
 }
+
 export type SendNotificationEmailOptions = SendEmailOptions & {
   url: string;
   title: string;

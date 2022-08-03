@@ -1,7 +1,7 @@
 import webpush from 'web-push';
 
 import { NotificationType_Enum } from '$/graphql/generated/types';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { mutate } from '$/server/common/gql';
 import {
   DeleteNotificationSubscriptionByPkDocument,
   NotificationSubscriptionsByUserIdQuery,
@@ -12,8 +12,6 @@ import { NotificationPayload } from './types';
 export type WebNotificationPayload = {
   title: string;
 } & Pick<NotificationPayload, 'body' | 'url'>;
-
-const client = getAdminGqlClient();
 
 export function pushWebNotification(payload: NotificationPayload) {
   return async (
@@ -35,12 +33,17 @@ export function pushWebNotification(payload: NotificationPayload) {
       ) {
         console.error('Subscription has expired or is no longer valid:', error);
         try {
-          const resp = await client
-            .mutation(DeleteNotificationSubscriptionByPkDocument, {
+          const deleteNotificationSubscriptionByPk = await mutate(
+            DeleteNotificationSubscriptionByPkDocument,
+            {
               id: sub.id,
-            })
-            .toPromise();
-          console.log('Deleted subscription', resp);
+            },
+            'deleteNotificationSubscriptionByPk',
+          );
+          console.log(
+            'Deleted subscription',
+            deleteNotificationSubscriptionByPk,
+          );
         } catch (error) {
           console.error('Error deleting subscription', error);
         }
@@ -53,8 +56,7 @@ export function pushWebNotification(payload: NotificationPayload) {
 
 const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
   vapidDetails: {
-    // TODO: update it with Chirpy official email
-    subject: 'mailto:example@yourdomain.org',
+    subject: 'mailto:support@chirpy.dev',
     publicKey: process.env.NEXT_PUBLIC_VAPID,
     privateKey: process.env.PRIVATE_VAPID,
   },

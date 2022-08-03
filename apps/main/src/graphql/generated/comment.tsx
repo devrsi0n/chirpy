@@ -12,7 +12,12 @@ export type CommentContentFragment = {
   deletedAt?: string | null;
   parentId?: string | null;
   pageId: string;
-  user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+  user: {
+    __typename?: 'User';
+    id: string;
+    name?: string | null;
+    avatar?: string | null;
+  };
   likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
 };
 
@@ -54,16 +59,36 @@ export type CommentTreeSubscription = {
           deletedAt?: string | null;
           parentId?: string | null;
           pageId: string;
-          user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+          user: {
+            __typename?: 'User';
+            id: string;
+            name?: string | null;
+            avatar?: string | null;
+          };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
         }>;
-        user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+        user: {
+          __typename?: 'User';
+          id: string;
+          name?: string | null;
+          avatar?: string | null;
+        };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       }>;
-      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      user: {
+        __typename?: 'User';
+        id: string;
+        name?: string | null;
+        avatar?: string | null;
+      };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     }>;
-    user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+    user: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      avatar?: string | null;
+    };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
   }>;
 };
@@ -90,7 +115,12 @@ export type CommentTimelineSubscription = {
       deletedAt?: string | null;
       parentId?: string | null;
       pageId: string;
-      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      user: {
+        __typename?: 'User';
+        id: string;
+        name?: string | null;
+        avatar?: string | null;
+      };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     }>;
     parent?: {
@@ -117,16 +147,36 @@ export type CommentTimelineSubscription = {
           deletedAt?: string | null;
           parentId?: string | null;
           pageId: string;
-          user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+          user: {
+            __typename?: 'User';
+            id: string;
+            name?: string | null;
+            avatar?: string | null;
+          };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
         } | null;
-        user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+        user: {
+          __typename?: 'User';
+          id: string;
+          name?: string | null;
+          avatar?: string | null;
+        };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       } | null;
-      user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+      user: {
+        __typename?: 'User';
+        id: string;
+        name?: string | null;
+        avatar?: string | null;
+      };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     } | null;
-    user: { __typename?: 'User'; id: string; name?: string | null; avatar?: string | null };
+    user: {
+      __typename?: 'User';
+      id: string;
+      name?: string | null;
+      avatar?: string | null;
+    };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
   } | null;
 };
@@ -179,9 +229,13 @@ export const CommentTreeDocument = gql`
       ...commentContent
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
         ...commentContent
-        replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+        replies(
+          order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+        ) {
           ...commentContent
-          replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
+          replies(
+            order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+          ) {
             ...commentContent
           }
         }
@@ -192,13 +246,17 @@ export const CommentTreeDocument = gql`
 `;
 
 export function useCommentTreeSubscription<TData = CommentTreeSubscription>(
-  options: Omit<Urql.UseSubscriptionArgs<CommentTreeSubscriptionVariables>, 'query'> = {},
+  options: Omit<
+    Urql.UseSubscriptionArgs<CommentTreeSubscriptionVariables>,
+    'query'
+  > = {},
   handler?: Urql.SubscriptionHandler<CommentTreeSubscription, TData>,
 ) {
-  return Urql.useSubscription<CommentTreeSubscription, TData, CommentTreeSubscriptionVariables>(
-    { query: CommentTreeDocument, ...options },
-    handler,
-  );
+  return Urql.useSubscription<
+    CommentTreeSubscription,
+    TData,
+    CommentTreeSubscriptionVariables
+  >({ query: CommentTreeDocument, ...options }, handler);
 }
 export const CommentTimelineDocument = gql`
   subscription commentTimeline($id: uuid!) {
@@ -221,8 +279,13 @@ export const CommentTimelineDocument = gql`
   ${CommentContentFragmentDoc}
 `;
 
-export function useCommentTimelineSubscription<TData = CommentTimelineSubscription>(
-  options: Omit<Urql.UseSubscriptionArgs<CommentTimelineSubscriptionVariables>, 'query'> = {},
+export function useCommentTimelineSubscription<
+  TData = CommentTimelineSubscription,
+>(
+  options: Omit<
+    Urql.UseSubscriptionArgs<CommentTimelineSubscriptionVariables>,
+    'query'
+  > = {},
   handler?: Urql.SubscriptionHandler<CommentTimelineSubscription, TData>,
 ) {
   return Urql.useSubscription<
@@ -233,16 +296,19 @@ export function useCommentTimelineSubscription<TData = CommentTimelineSubscripti
 }
 export const InsertOneCommentDocument = gql`
   mutation insertOneComment($content: jsonb!, $parentId: uuid, $pageId: uuid!) {
-    insertOneComment(object: { content: $content, parentId: $parentId, pageId: $pageId }) {
+    insertOneComment(
+      object: { content: $content, parentId: $parentId, pageId: $pageId }
+    ) {
       id
     }
   }
 `;
 
 export function useInsertOneCommentMutation() {
-  return Urql.useMutation<InsertOneCommentMutation, InsertOneCommentMutationVariables>(
-    InsertOneCommentDocument,
-  );
+  return Urql.useMutation<
+    InsertOneCommentMutation,
+    InsertOneCommentMutationVariables
+  >(InsertOneCommentDocument);
 }
 export const DeleteOneCommentDocument = gql`
   mutation deleteOneComment($id: uuid!) {
@@ -253,7 +319,8 @@ export const DeleteOneCommentDocument = gql`
 `;
 
 export function useDeleteOneCommentMutation() {
-  return Urql.useMutation<DeleteOneCommentMutation, DeleteOneCommentMutationVariables>(
-    DeleteOneCommentDocument,
-  );
+  return Urql.useMutation<
+    DeleteOneCommentMutation,
+    DeleteOneCommentMutationVariables
+  >(DeleteOneCommentDocument);
 }
