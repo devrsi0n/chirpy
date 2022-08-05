@@ -203,7 +203,7 @@ importers:
       downshift: 6.1.7
       eslint: 8.21.0
       eta: 1.12.3
-      fake-indexeddb: 3.1.8
+      fake-indexeddb: 4.0.0
       framer-motion: 6.5.1
       github-slugger: 1.4.0
       graphql: 16.5.0
@@ -381,7 +381,7 @@ importers:
       dotenv-cli: 5.1.0
       dotenv-expand: 8.0.3
       eslint: 8.21.0
-      fake-indexeddb: 3.1.8
+      fake-indexeddb: 4.0.0
       intersection-observer: 0.12.2
       jest: 28.1.2_@types+node@16.11.45
       jest-environment-jsdom: 28.1.2
@@ -11143,10 +11143,10 @@ packages:
     engines: {'0': node >=0.6.0}
     dev: false
 
-  /fake-indexeddb/3.1.8:
-    resolution: {integrity: sha512-7umIgcdnDfNcjw0ZaoD6yR2BflngKmPsyzZC+sV2fdttwz5bH6B6CCaNzzD+MURfRg8pvr/aL0trfNx65FLiDg==}
+  /fake-indexeddb/4.0.0:
+    resolution: {integrity: sha512-oCfWSJ/qvQn1XPZ8SHX6kY3zr1t+bN7faZ/lltGY0SBGhFOPXnWf0+pbO/MOAgfMx6khC2gK3S/bvAgQpuQHDQ==}
     dependencies:
-      realistic-structured-clone: 2.0.4
+      realistic-structured-clone: 3.0.0
     dev: true
 
   /falafel/2.2.5:
@@ -18323,10 +18323,9 @@ packages:
     resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
     dev: false
 
-  /realistic-structured-clone/2.0.4:
-    resolution: {integrity: sha512-lItAdBIFHUSe6fgztHPtmmWqKUgs+qhcYLi3wTRUl4OTB3Vb8aBVSjGfQZUvkmJCKoX3K9Wf7kyLp/F/208+7A==}
+  /realistic-structured-clone/3.0.0:
+    resolution: {integrity: sha512-rOjh4nuWkAqf9PWu6JVpOWD4ndI+JHfgiZeMmujYcPi+fvILUu7g6l26TC1K5aBIp34nV+jE1cDO75EKOfHC5Q==}
     dependencies:
-      core-js: 3.23.3
       domexception: 1.0.1
       typeson: 6.1.0
       typeson-registry: 1.0.0-alpha.39
