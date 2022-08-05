@@ -141,7 +141,7 @@
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
     "eslint": "8.21.0",
-    "fake-indexeddb": "3.1.8",
+    "fake-indexeddb": "4.0.0",
     "framer-motion": "6.5.1",
     "intersection-observer": "0.12.2",
     "jest": "28.1.2",
