@@ -17,7 +17,7 @@ export function useSignInWindow({
   const popupWindow = React.useRef<Window | null>(null);
   const handleClickSignIn = () => {
     popupWindow.current = popupCenterWindow(
-      '/auth/sign-in',
+      '/auth/sign-in?allowAnonymous=true',
       '_blank',
       width,
       height,

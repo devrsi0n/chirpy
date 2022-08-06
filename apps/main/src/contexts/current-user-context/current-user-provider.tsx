@@ -26,7 +26,7 @@ export function CurrentUserProvider({
   const value = React.useMemo<CurrentUserContextType>(() => {
     return {
       ...restProps,
-      loading: sessionIsLoading || restProps.fetching,
+      loading: sessionIsLoading,
       data: {
         ...session?.user,
         ...data?.userByPk,
