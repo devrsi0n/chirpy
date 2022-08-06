@@ -4,7 +4,6 @@ import * as React from 'react';
 
 import { Divider } from '$/components/divider';
 import { IconImage, IconLink2 } from '$/components/icons';
-import { cardBg } from '$/styles/common';
 
 import { MarkButton, HeadingButton, BlockButton } from './format-buttons';
 import { RTEPopoverButton } from './rte-popover-button';
@@ -26,7 +25,6 @@ export function Toolbar({
     <div
       className={clsx(
         `rounded-b border-t border-gray-500 px-1 py-2 leading-none`,
-        cardBg,
         className,
       )}
       {...divProps}

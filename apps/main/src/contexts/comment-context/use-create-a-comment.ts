@@ -19,7 +19,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions) {
 
   const createAComment = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
-      console.error('Navigate to login page');
+      console.error('Navigate to sign-in page');
       throw undefined;
     }
     const { data } = await insertOneComment({
