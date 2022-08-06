@@ -55,8 +55,8 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
       <Text size="sm" variant="secondary">
         You can connect an email later, or stay anonymous as long as you like.
         Learn more about{' '}
-        <Link href="/docs/features/privacy-friendly#anonymous-login">
-          anonymous login
+        <Link href="/docs/features/privacy-friendly#anonymous-sign-in">
+          anonymous sign-in
         </Link>
         .
       </Text>
