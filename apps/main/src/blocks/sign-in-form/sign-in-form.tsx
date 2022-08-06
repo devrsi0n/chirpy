@@ -21,11 +21,19 @@ import styles from './sign-in-form.module.scss';
 export type SignInFormProps = React.PropsWithChildren<{
   title: string;
   subtitle?: string;
+  /**
+   * @default false allow anonymous sign-in
+   */
+  allowAnonymous?: boolean;
 }>;
 
 type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
 
-export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
+export function SignInForm({
+  title,
+  subtitle,
+  allowAnonymous,
+}: SignInFormProps): JSX.Element {
   const [errorType, setErrorType] = React.useState<SignInErrorKeys | null>(
     null,
   );
@@ -69,19 +77,21 @@ export function SignInForm({ title, subtitle }: SignInFormProps): JSX.Element {
           </div>
           <div className="space-y-6">
             <div>
-              {isAnonymous ? (
+              {allowAnonymous && isAnonymous ? (
                 <AnonymousUserSignIn>{alert}</AnonymousUserSignIn>
               ) : (
                 <EmailSignIn>{alert}</EmailSignIn>
               )}
-              <Toggle
-                checked={isAnonymous}
-                onChange={(value) => setIsAnonymous(value)}
-                label="Anonymous"
-                reverse
-                className="mt-6"
-                hintText="Turn off to sign in with your email if you want to sign-in with another browser later"
-              />
+              {allowAnonymous && (
+                <Toggle
+                  checked={isAnonymous}
+                  onChange={(value) => setIsAnonymous(value)}
+                  label="Anonymous"
+                  reverse
+                  className="mt-6"
+                  hintText="Turn off to sign in with your email if you want to sign-in with another browser later."
+                />
+              )}
             </div>
             <Divider variant="text">OR</Divider>
             <div className="space-y-3">

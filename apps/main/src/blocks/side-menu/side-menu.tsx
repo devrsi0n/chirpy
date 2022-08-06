@@ -6,7 +6,6 @@ import { IconButton } from '$/components/button';
 import { IconMenu, IconX } from '$/components/icons';
 import { useClickOutside } from '$/hooks/use-click-outside';
 import { useFrozeBodyScroll } from '$/hooks/use-froze-scroll';
-import useIsomorphicLayoutEffect from '$/hooks/use-isomorphic-layout-effect';
 import { isSSRMode } from '$/utilities/env';
 
 import {
