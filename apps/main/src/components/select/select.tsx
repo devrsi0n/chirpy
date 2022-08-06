@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-import { listHoverable, cardBg } from '$/styles/common';
+import { listHoverable, bluredBg } from '$/styles/common';
 
 import { easeInOut } from '../animation';
 import { IconCheck, IconChevronDownCircleFill } from '../icons';
@@ -89,13 +89,13 @@ export function Select<T extends string | number = string>(
                   {...easeInOut}
                   className={clsx(
                     'absolute z-20 mt-1 w-full rounded-md shadow-lg',
-                    cardBg,
+                    bluredBg,
                     PLACEMENT_CLASSES[placement],
                   )}
                 >
                   <Listbox.Options
                     static
-                    className="max-h-60 overflow-auto overscroll-contain rounded-sm border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
+                    className="max-h-60 overflow-auto overscroll-contain rounded border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>

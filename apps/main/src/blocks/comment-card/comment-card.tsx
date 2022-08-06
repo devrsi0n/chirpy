@@ -113,7 +113,7 @@ export function CommentCard({
       variants={shakeVariants}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
-        `flex flex-row items-start space-x-3 rounded border border-gray-500 pt-4 pb-2 pl-4 shadow-sm`,
+        `flex flex-row items-start space-x-3 rounded border border-gray-500 pt-4 pb-2 pl-4 shadow-xs`,
       )}
       id={isENVDev ? commentId : undefined}
     >

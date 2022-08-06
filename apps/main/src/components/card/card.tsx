@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { cardBg } from '$/styles/common';
+import { bluredBg } from '$/styles/common';
 
 import { PolymorphicComponentProps, Box } from '../box';
 
@@ -23,9 +23,9 @@ export function Card<E extends React.ElementType>({
   return (
     <Box
       className={clsx(
-        cardBg,
+        bluredBg,
         `rounded border border-gray-400`,
-        shadow && `shadow-sm hover:shadow-xl`,
+        shadow && `shadow-xs hover:shadow-lg`,
         className,
       )}
       {...restProps}

@@ -132,6 +132,7 @@
     "@types/ws": "8.5.3",
     "@urql/devtools": "2.0.3",
     "@urql/storybook-addon": "1.0.9",
+    "avvvatars-react": "^0.4.2",
     "babel-loader": "8.2.5",
     "chromatic": "6.7.0",
     "color-convert": "2.0.1",

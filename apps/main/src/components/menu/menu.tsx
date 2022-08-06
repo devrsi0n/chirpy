@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
-import { cardBg, listHoverable } from '$/styles/common';
+import { bluredBg, listHoverable } from '$/styles/common';
 
 import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
@@ -102,8 +102,10 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
           <HeadlessMenu.Items
             static
             className={clsx(
-              `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-lg outline-none`,
-              cardBg,
+              `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-md outline-none`,
+              bluredBg,
+
+              // 'before:[z-index=-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
               className,
             )}
           >

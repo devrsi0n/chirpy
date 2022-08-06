@@ -28,7 +28,7 @@ const SIZE_STYLES: Record<
   base: {
     content: 'px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 max-w-lg',
     title: 'text-2xl font-bold leading-none',
-    footer: 'px-6 pt-4 pb-6 sm:px-8',
+    footer: 'px-0 py-6',
     icon: 24,
   },
 };
@@ -91,14 +91,11 @@ export function Dialog({
             </m.div>
             <m.div {...easeInOut}>
               <HeadlessDialog.Panel
-                className={clsx(
-                  'relative inline-block shadow-md',
-                  styles.panel,
-                )}
+                className={clsx('relative inline-block ', styles.panel)}
               >
                 <div
                   className={clsx(
-                    `flex flex-row space-x-4`,
+                    `flex flex-row space-x-4 shadow-xl`,
                     cardBg,
                     sizeStyles.content,
                     !footer ? `rounded-xl` : `rounded-t-xl`,
