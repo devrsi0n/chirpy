@@ -7,7 +7,13 @@ import { Button } from '$/components/button';
 import { IconEdit2, IconX } from '$/components/icons';
 import { Link } from '$/components/link';
 
-import { appliedFilters, navigateToQuery, formattedFilters, Query, FilterPair } from './query';
+import {
+  appliedFilters,
+  navigateToQuery,
+  formattedFilters,
+  Query,
+  FilterPair,
+} from './query';
 import {
   FILTER_GROUPS,
   formatFilterGroup,
@@ -38,7 +44,10 @@ function removeFilter(router: NextRouter, key: string, query: any) {
 
 function clearAllFilters(router: NextRouter, query: Query) {
   // eslint-disable-next-line unicorn/prefer-object-from-entries
-  const newOpts = Object.keys(query.filters).reduce((acc, red) => ({ ...acc, [red]: false }), {});
+  const newOpts = Object.keys(query.filters).reduce(
+    (acc, red) => ({ ...acc, [red]: false }),
+    {},
+  );
   navigateToQuery(router, query, newOpts);
 }
 
@@ -50,7 +59,11 @@ function filterType(val: string) {
   return ['is', val];
 }
 
-function filterText(key: keyof typeof formattedFilters, rawValue: string, query: Query) {
+function filterText(
+  key: keyof typeof formattedFilters,
+  rawValue: string,
+  query: Query,
+) {
   const [type, value] = filterType(rawValue);
 
   if (key === 'goal') {
@@ -70,7 +83,9 @@ function filterText(key: keyof typeof formattedFilters, rawValue: string, query:
     );
   }
   if (key === 'browser_version') {
-    const browserName = query.filters.browser ? query.filters.browser : 'Browser';
+    const browserName = query.filters.browser
+      ? query.filters.browser
+      : 'Browser';
     return (
       <>
         {browserName}.Version {type} <strong>{value}</strong>
@@ -141,7 +156,9 @@ function renderDropdownFilter(
           className="flex items-center justify-between px-4 py-3 text-sm leading-tight sm:py-2"
           key={key + value}
         >
-          <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
+          <span className="inline-block w-full truncate">
+            {filterText(key, value, query)}
+          </span>
           <strong
             title={`Remove filter: ${formattedFilters[key]}`}
             className="ml-2 cursor-pointer hover:text-indigo-700 dark:hover:text-indigo-500"
@@ -163,14 +180,16 @@ function renderDropdownFilter(
         <Link
           disabled
           title={`Edit filter: ${formattedFilters[key]}`}
-          href={`/${encodeURIComponent(site.domain)}/filter/${filterGroupForFilter(key)}${
-            window.location.search
-          }`}
+          href={`/${encodeURIComponent(
+            site.domain,
+          )}/filter/${filterGroupForFilter(key)}${window.location.search}`}
           className="group flex w-full items-center justify-between"
           style={{ width: 'calc(100% - 1.5rem)' }}
           variant="plain"
         >
-          <span className="inline-block w-full truncate">{filterText(key, value, query)}</span>
+          <span className="inline-block w-full truncate">
+            {filterText(key, value, query)}
+          </span>
           <IconEdit2 className="ml-1 h-4 w-4 cursor-pointer group-hover:text-indigo-700 dark:group-hover:text-indigo-500" />
         </Link>
         <strong
@@ -191,7 +210,9 @@ function filterDropdownOption(site: Site, option: FilterGroupKey) {
       {({ active }) => (
         <Link
           disabled
-          href={`/${encodeURIComponent(site.domain)}/filter/${option}${window.location.search}`}
+          href={`/${encodeURIComponent(site.domain)}/filter/${option}${
+            window.location.search
+          }`}
           className={clsx(
             active ? `bg-gray-100 text-gray-1100` : `text-gray-1100`,
             `block px-4 py-2 text-sm font-medium`,
@@ -204,17 +225,22 @@ function filterDropdownOption(site: Site, option: FilterGroupKey) {
   );
 }
 
-type DropdownContentProps = Pick<FiltersProps, 'query' | 'site'> & Pick<FiltersState, 'wrapped'>;
+type DropdownContentProps = Pick<FiltersProps, 'query' | 'site'> &
+  Pick<FiltersState, 'wrapped'>;
 
-function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.Element {
+function DropdownContent({
+  site,
+  query,
+  wrapped,
+}: DropdownContentProps): JSX.Element {
   const [addingFilter, setAddingFilter] = useState(false);
   const router = useRouter();
 
   if (wrapped === 0 || addingFilter) {
     return (
       <>
-        {(Object.keys(FILTER_GROUPS) as FilterGroupKey[]).map((option: FilterGroupKey) =>
-          filterDropdownOption(site, option),
+        {(Object.keys(FILTER_GROUPS) as FilterGroupKey[]).map(
+          (option: FilterGroupKey) => filterDropdownOption(site, option),
         )}
       </>
     );
@@ -229,7 +255,9 @@ function DropdownContent({ site, query, wrapped }: DropdownContentProps): JSX.El
       >
         + Add filter
       </Button>
-      {appliedFilters(query).map((filter) => renderDropdownFilter(router, site, filter, query))}
+      {appliedFilters(query).map((filter) =>
+        renderDropdownFilter(router, site, filter, query),
+      )}
       <Menu.Item key="clear">
         <div
           className="border-t border-gray-200 px-4 py-3 text-sm leading-tight hover:cursor-pointer hover:text-indigo-700 dark:border-gray-500 dark:hover:text-indigo-500 sm:py-2"
@@ -329,7 +357,11 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
     this.setState({ wrapped: 0 });
 
     // Don't rewrap if we're already properly wrapped, there are no DOM children, or there is only filter
-    if (wrapped !== 1 || !items || appliedFilters(this.props.query).length === 1) {
+    if (
+      wrapped !== 1 ||
+      !items ||
+      appliedFilters(this.props.query).length === 1
+    ) {
       return;
     }
 
@@ -364,9 +396,9 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
               disabled
               title={`Edit filter: ${formattedFilters[key]}`}
               className="flex h-full w-full items-center py-2 pl-3 text-gray-1200"
-              href={`/${encodeURIComponent(this.props.site.domain)}/filter/${filterGroupForFilter(
-                key,
-              )}${window.location.search}`}
+              href={`/${encodeURIComponent(
+                this.props.site.domain,
+              )}/filter/${filterGroupForFilter(key)}${window.location.search}`}
               variant="plain"
             >
               <span className="inline-block max-w-2xs truncate md:max-w-xs">
@@ -437,10 +469,14 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
                 className="absolute left-0 right-0 z-10 mt-2 w-full origin-top-right md:absolute md:top-auto md:left-auto md:right-0 md:w-72"
               >
                 <div
-                  className="rounded-md bg-white font-medium text-gray-800 shadow-lg ring-1 ring-black
+                  className="rounded-md bg-white font-medium text-gray-800 shadow-md ring-1 ring-black
                   ring-opacity-5 dark:bg-gray-800 dark:text-gray-200"
                 >
-                  <DropdownContent query={query} site={site} wrapped={this.state.wrapped} />
+                  <DropdownContent
+                    query={query}
+                    site={site}
+                    wrapped={this.state.wrapped}
+                  />
                 </div>
               </Menu.Items>
             </Transition>
@@ -456,7 +492,9 @@ class Filters extends React.Component<FiltersProps, FiltersState> {
     if (this.state.wrapped !== 2) {
       return (
         <div id="filters" className="flex flex-wrap">
-          {appliedFilters(query).map((filter) => this.renderListFilter(filter, query))}
+          {appliedFilters(query).map((filter) =>
+            this.renderListFilter(filter, query),
+          )}
         </div>
       );
     }

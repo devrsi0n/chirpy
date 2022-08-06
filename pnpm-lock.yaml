@@ -185,6 +185,7 @@ importers:
       '@urql/devtools': 2.0.3
       '@urql/exchange-graphcache': 4.4.3
       '@urql/storybook-addon': 1.0.9
+      avvvatars-react: ^0.4.2
       babel-loader: 8.2.5
       canvas-confetti: 1.5.1
       chart.js: 3.8.0
@@ -375,6 +376,7 @@ importers:
       '@types/ws': 8.5.3
       '@urql/devtools': 2.0.3_graphql@16.5.0
       '@urql/storybook-addon': 1.0.9_phmus7xcbidy3raesi6r6zwaqe
+      avvvatars-react: 0.4.2_vt6aeitzauirmcdhimiad2yjxy
       babel-loader: 8.2.5_fswvdo7jykdwhfxrdcvghfn6pa
       chromatic: 6.7.0
       color-convert: 2.0.1
@@ -7690,6 +7692,19 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
+  /avvvatars-react/0.4.2_vt6aeitzauirmcdhimiad2yjxy:
+    resolution: {integrity: sha512-D/bnSM+P6pQi71dFeFVqQsqmv+ct5XG7uO2lvJoiksALpXLd6kPgpRR1SUQxFZJkJNrkmg0NPgbhIgJgOsDYRQ==}
+    peerDependencies:
+      react: '>= 16 || 18'
+      react-dom: '>= 16 || 18'
+    dependencies:
+      goober: 2.1.10_csstype@3.1.0
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    transitivePeerDependencies:
+      - csstype
+    dev: true
+
   /aws-sign2/0.7.0:
     resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==}
     dev: false
@@ -12334,6 +12349,14 @@ packages:
       slash: 2.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /goober/2.1.10_csstype@3.1.0:
+    resolution: {integrity: sha512-7PpuQMH10jaTWm33sQgBQvz45pHR8N4l3Cu3WMGEWmHShAcTuuP7I+5/DwKo39fwti5A80WAjvqgz6SSlgWmGA==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.0
     dev: true
 
   /got/10.7.0:

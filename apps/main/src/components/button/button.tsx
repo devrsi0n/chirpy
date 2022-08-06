@@ -70,7 +70,7 @@ export const Button = React.forwardRef(function Button(
         sizeStyles[size],
         className,
         ColorVariantStyles[`${variant}-${color}` as VariantColor],
-        variant !== 'text' && shadow && `shadow-sm`,
+        variant !== 'text' && shadow && `shadow-xs`,
         rounded && `rounded-md`,
       )}
       onClick={clickHandler}

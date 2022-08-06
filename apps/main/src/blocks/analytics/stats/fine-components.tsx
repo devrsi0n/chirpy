@@ -7,10 +7,15 @@ export type CardProps = React.PropsWithChildren<{}>;
 
 export function AnalyticsCard(props: CardProps): JSX.Element {
   return (
-    <div className={clsx('stats-item--has-header mt-6 flex w-full flex-col', styles['stats-item'])}>
+    <div
+      className={clsx(
+        'stats-item--has-header mt-6 flex w-full flex-col',
+        styles['stats-item'],
+      )}
+    >
       <div
         className={clsx(
-          'relative flex flex-grow flex-col rounded bg-white p-4 shadow-xl dark:bg-gray-825',
+          'relative flex flex-grow flex-col rounded bg-white p-4 shadow-lg dark:bg-gray-825',
           styles['stats-item-header'],
         )}
       >
@@ -21,5 +26,7 @@ export function AnalyticsCard(props: CardProps): JSX.Element {
 }
 
 export const ViewNumber = (props: React.PropsWithChildren<{}>) => (
-  <span className="w-20 text-right font-medium text-gray-1200">{props.children}</span>
+  <span className="w-20 text-right font-medium text-gray-1200">
+    {props.children}
+  </span>
 );

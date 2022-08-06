@@ -35,7 +35,7 @@ export default function Home({ buildDate }: HomeProps): JSX.Element {
               <Button
                 variant="solid"
                 color="primary"
-                className="group space-x-1 hover:shadow-2xl"
+                className="group space-x-1 hover:shadow-xl"
               >
                 <span>{strings.callToAction.main}</span>
                 <IconArrowRight

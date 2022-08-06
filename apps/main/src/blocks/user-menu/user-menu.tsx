@@ -35,7 +35,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
   return (
     <Menu>
       <Menu.Button>
-        <Avatar src={avatar || ''} {...(name && { alt: name })} />
+        <Avatar src={avatar || ''} {...(name && { alt: name })} {...data} />
       </Menu.Button>
       <Menu.Items className="">
         {name && (
