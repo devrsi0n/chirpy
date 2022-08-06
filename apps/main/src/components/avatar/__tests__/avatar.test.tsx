@@ -16,7 +16,7 @@ describe('Avatar', () => {
   });
 
   it('should render a placeholder if no src', () => {
-    render(<Avatar />);
+    render(<Avatar alt="avatar placeholder" />);
     expect(screen.getByLabelText(/avatar placeholder/i)).toBeTruthy();
   });
 });
