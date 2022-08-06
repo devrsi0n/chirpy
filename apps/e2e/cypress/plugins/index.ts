@@ -16,7 +16,10 @@ export default function Plugins(
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 
-  config.env.TEST_USER_ID = process.env.TEST_USER_ID;
+  config.env.TEST_USER_ID = process.env.TEST_USER_ID?.replace(/-/g, '').slice(
+    0,
+    23,
+  );
   config.env.HASURA_EVENT_SECRET = process.env.HASURA_EVENT_SECRET;
 
   return config;

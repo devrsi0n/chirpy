@@ -60,10 +60,13 @@ export const authProviders: Provider[] = [
             },
           },
           async authorize(credentials /*req*/) {
-            if (credentials?.name === process.env.TEST_USER_ID) {
+            if (
+              credentials?.name ===
+              process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23)
+            ) {
               // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
               return {
-                id: credentials?.name,
+                id: process.env.TEST_USER_ID,
                 name: 'cypresstest',
                 email: 'cypress.test@localhost',
                 image: 'https://www.cypress.io/icons/icon-72x72.png',

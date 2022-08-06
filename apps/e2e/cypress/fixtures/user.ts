@@ -1,7 +1,7 @@
 export const testUser = {
   // Used in node and browser contexts
   id:
-    process.env.TEST_USER_ID ||
+    process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23) ||
     // @ts-ignore
     ('Cypress' in global ? global.Cypress.env('TEST_USER_ID') : 'invalid-id'),
   name: 'CypressTest',
