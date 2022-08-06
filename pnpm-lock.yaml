@@ -185,7 +185,7 @@ importers:
       '@urql/devtools': 2.0.3
       '@urql/exchange-graphcache': 4.4.3
       '@urql/storybook-addon': 1.0.9
-      avvvatars-react: ^0.4.2
+      avvvatars-react: 0.4.2
       babel-loader: 8.2.5
       canvas-confetti: 1.5.1
       chart.js: 3.8.0
@@ -280,6 +280,7 @@ importers:
       '@tiptap/react': 2.0.0-beta.114_b7cpfzdww2wxjdqheg7veprq6i
       '@tiptap/starter-kit': 2.0.0-beta.191
       '@urql/exchange-graphcache': 4.4.3_graphql@16.5.0
+      avvvatars-react: 0.4.2_vt6aeitzauirmcdhimiad2yjxy
       canvas-confetti: 1.5.1
       chart.js: 3.8.0
       clsx: 1.1.1
@@ -376,7 +377,6 @@ importers:
       '@types/ws': 8.5.3
       '@urql/devtools': 2.0.3_graphql@16.5.0
       '@urql/storybook-addon': 1.0.9_phmus7xcbidy3raesi6r6zwaqe
-      avvvatars-react: 0.4.2_vt6aeitzauirmcdhimiad2yjxy
       babel-loader: 8.2.5_fswvdo7jykdwhfxrdcvghfn6pa
       chromatic: 6.7.0
       color-convert: 2.0.1
@@ -7703,7 +7703,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     transitivePeerDependencies:
       - csstype
-    dev: true
+    dev: false
 
   /aws-sign2/0.7.0:
     resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==}
@@ -12357,7 +12357,7 @@ packages:
       csstype: ^3.0.10
     dependencies:
       csstype: 3.1.0
-    dev: true
+    dev: false
 
   /got/10.7.0:
     resolution: {integrity: sha512-aWTDeNw9g+XqEZNcTjMMZSy7B7yE9toWOFYip7ofFTLleJhvZwUxxTxkTpKvF+p1SAA4VHmuEy7PiHTHyq8tJg==}
