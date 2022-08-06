@@ -31,7 +31,10 @@ interface ConversionsState {
   goals: Goal[] | null;
 }
 
-export default class Conversions extends React.Component<ConversionsProps, ConversionsState> {
+export default class Conversions extends React.Component<
+  ConversionsProps,
+  ConversionsState
+> {
   htmlNode: React.RefObject<any> = React.createRef();
   state: ConversionsState = {
     loading: true,
@@ -72,8 +75,14 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   fetchConversions() {
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/conversions`, this.props.site, this.props.query)
-      .then((res) => this.setState({ loading: false, goals: res, prevHeight: null }));
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/conversions`,
+        this.props.site,
+        this.props.query,
+      )
+      .then((res) =>
+        this.setState({ loading: false, goals: res, prevHeight: null }),
+      );
   }
 
   renderGoalText(goalName: string) {
@@ -94,7 +103,8 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
 
   renderGoal = (goal: Goal) => {
     const { viewport, goals } = this.state;
-    const renderProps = this.props.query.filters['goal'] == goal.name && goal.prop_names;
+    const renderProps =
+      this.props.query.filters['goal'] == goal.name && goal.prop_names;
 
     return (
       <div className="my-2 text-sm" key={goal.name}>
@@ -122,7 +132,11 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
           </div>
         </div>
         {renderProps && (
-          <PropBreakdown site={this.props.site} query={this.props.query} goal={goal} />
+          <PropBreakdown
+            site={this.props.site}
+            query={this.props.query}
+            goal={goal}
+          />
         )}
       </div>
     );
@@ -139,12 +153,16 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
     } else if (goals) {
       return (
         <React.Fragment>
-          <h3 className={cardTitle}>{this.props.title || 'Goal Conversions'}</h3>
+          <h3 className={cardTitle}>
+            {this.props.title || 'Goal Conversions'}
+          </h3>
           <div className={labelContainer}>
             <span>Goal</span>
             <div className="text-right">
               <span className="inline-block w-20">Uniques</span>
-              {viewport > MOBILE_UPPER_WIDTH && <span className="inline-block w-20">Total</span>}
+              {viewport > MOBILE_UPPER_WIDTH && (
+                <span className="inline-block w-20">Total</span>
+              )}
               <span className="inline-block w-20">CR</span>
             </div>
           </div>
@@ -158,7 +176,7 @@ export default class Conversions extends React.Component<ConversionsProps, Conve
   render() {
     return (
       <LazyLoader
-        className="w-full rounded bg-white p-4 shadow-xl dark:bg-gray-825"
+        className="w-full rounded bg-white p-4 shadow-lg dark:bg-gray-825"
         style={{ minHeight: '132px', height: this.state.prevHeight ?? 'auto' }}
         onVisible={this.onVisible}
         ref={this.htmlNode}

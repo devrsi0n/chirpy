@@ -39,14 +39,22 @@ function RenderArrow({ query, site, period, prevDate, nextDate }: ArrowProps) {
   const router = useRouter();
   const insertionDate = parseUTCDate(site.insertedAt);
   const disabledLeft = isBefore(parseUTCDate(prevDate), insertionDate, period);
-  const disabledRight = isAfter(parseUTCDate(nextDate), nowForSite(site), period);
+  const disabledRight = isAfter(
+    parseUTCDate(nextDate),
+    nowForSite(site),
+    period,
+  );
 
   const leftClasses = `flex items-center px-1 sm:px-2 border-r border-gray-300 rounded-l
       dark:border-gray-500 dark:text-gray-100 ${
-        disabledLeft ? 'bg-gray-300 dark:bg-gray-950' : 'hover:bg-gray-100 dark:hover:bg-gray-900'
+        disabledLeft
+          ? 'bg-gray-300 dark:bg-gray-950'
+          : 'hover:bg-gray-100 dark:hover:bg-gray-900'
       }`;
   const rightClasses = `flex items-center px-1 sm:px-2 rounded-r dark:text-gray-100 ${
-    disabledRight ? 'bg-gray-300 dark:bg-gray-950' : 'hover:bg-gray-100 dark:hover:bg-gray-900'
+    disabledRight
+      ? 'bg-gray-300 dark:bg-gray-950'
+      : 'hover:bg-gray-100 dark:hover:bg-gray-900'
   }`;
   return (
     <div className="mr-2 flex cursor-pointer rounded bg-white shadow dark:bg-gray-800 sm:mr-4">
@@ -114,7 +122,13 @@ function DatePickerArrows({ site, query }: Props) {
     const nextDate = formatISO(shiftDays(query.date, 1));
 
     return (
-      <RenderArrow query={query} site={site} period="day" prevDate={prevDate} nextDate={nextDate} />
+      <RenderArrow
+        query={query}
+        site={site}
+        period="day"
+        prevDate={prevDate}
+        nextDate={nextDate}
+      />
     );
   }
 
@@ -150,7 +164,14 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     const { query, site } = this.props;
 
     if (e.target.tagName === 'INPUT') return true;
-    if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing || e.keyCode === 229) return true;
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      e.altKey ||
+      e.isComposing ||
+      e.keyCode === 229
+    )
+      return true;
 
     const newSearch: any = {
       period: false,
@@ -287,7 +308,10 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
   };
 
   toggle = () => {
-    const newMode = this.state.mode === 'calendar' && !this.state.open ? 'menu' : this.state.mode;
+    const newMode =
+      this.state.mode === 'calendar' && !this.state.open
+        ? 'menu'
+        : this.state.mode;
     this.setState((prevState) => ({ mode: newMode, open: !prevState.open }));
   };
 
@@ -345,7 +369,7 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
           className="absolute left-0 right-0 z-10 mt-2 w-full origin-top-right md:absolute md:top-auto md:left-auto md:right-0 md:w-56"
         >
           <div
-            className="rounded-md bg-white font-medium text-gray-800 shadow-lg ring-1 ring-black
+            className="rounded-md bg-white font-medium text-gray-800 shadow-md ring-1 ring-black
             ring-opacity-5 dark:bg-gray-500 dark:text-gray-200"
           >
             <div className="py-1">
@@ -360,7 +384,9 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
             <ListSeparatator />
             <div className="py-1">
               {this.renderLink('month', 'Month to Date')}
-              {this.renderLink('month', 'Last month', { date: lastMonth(this.props.site) })}
+              {this.renderLink('month', 'Last month', {
+                date: lastMonth(this.props.site),
+              })}
             </div>
             <ListSeparatator />
             <div className="py-1">
@@ -370,8 +396,12 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
             <ListSeparatator />
             <div className="py-1">
               <span
-                onClick={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
-                onKeyPress={() => this.setState({ mode: 'calendar' }, this.openCalendar)}
+                onClick={() =>
+                  this.setState({ mode: 'calendar' }, this.openCalendar)
+                }
+                onKeyPress={() =>
+                  this.setState({ mode: 'calendar' }, this.openCalendar)
+                }
                 className={listItem}
                 tabIndex={0}
                 role="button"
@@ -413,7 +443,10 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
   renderPicker() {
     return (
-      <div className="w-20 sm:w-36 md:relative md:w-44" ref={(node) => (this.dropDownNode = node!)}>
+      <div
+        className="w-20 sm:w-36 md:relative md:w-44"
+        ref={(node) => (this.dropDownNode = node!)}
+      >
         <div
           onClick={this.toggle}
           onKeyPress={this.toggle}
@@ -461,11 +494,17 @@ class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
 
 export default DatePicker;
 
-function ListSeparatator({ className, ...restProps }: React.ComponentProps<'div'>): JSX.Element {
+function ListSeparatator({
+  className,
+  ...restProps
+}: React.ComponentProps<'div'>): JSX.Element {
   return (
     <div
       {...restProps}
-      className={clsx('border-t border-gray-200 dark:border-gray-900', className)}
+      className={clsx(
+        'border-t border-gray-200 dark:border-gray-900',
+        className,
+      )}
     />
   );
 }

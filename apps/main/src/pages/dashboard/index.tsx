@@ -139,15 +139,8 @@ export default function Dashboard(): JSX.Element {
                 message: 'Invalid domain',
               },
             })}
-            aria-label="Associate a domain with this project"
-            label={
-              <>
-                Domain
-                <Text variant="secondary" size="sm">
-                  Associate a domain with this project
-                </Text>
-              </>
-            }
+            label="Domain"
+            hintText="Associate a domain with this project"
             errorMessage={errors.domain}
             placeholder="example.com"
             className="w-full"

@@ -6,7 +6,6 @@ import { UserMenu } from '$/blocks/user-menu';
 import { Link } from '$/components/link';
 import { Logo } from '$/components/logo';
 import { useCurrentUser } from '$/contexts/current-user-context';
-import { bluredBg } from '$/styles/common';
 
 import { NotificationHub } from '../notification-hub';
 import { SideMenu } from '../side-menu';
@@ -17,8 +16,9 @@ export function Header(): JSX.Element {
   return (
     <header
       className={clsx(
-        `relative z-20 w-full py-3 shadow-sm transition duration-150 sm:sticky sm:top-0 sm:left-0`,
-        bluredBg,
+        `relative z-20 w-full py-3 shadow-xs transition duration-150 sm:sticky sm:top-0 sm:left-0`,
+        // Can't use the normal backdrop-filter here as it'll cause nested blur elements not working in chrome.
+        'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
       )}
     >
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">

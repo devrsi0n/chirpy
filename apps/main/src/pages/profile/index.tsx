@@ -121,12 +121,13 @@ export default function Profile(): JSX.Element {
         <PageTitle>Profile</PageTitle>
         <section className="space-y-6">
           <div className="relative mt-1 flex h-40 w-full items-end justify-center rounded-t bg-gradient-to-r from-primary-900 to-plum-900">
-            {avatar && (
+            {(avatar || name || username || email) && (
               <Avatar
                 src={avatar}
                 size="xl"
                 className="absolute translate-y-1/2"
                 {...(name && { alt: name })}
+                {...{ name, username, email }}
               />
             )}
           </div>

@@ -34,15 +34,21 @@ function getFormState(filterGroup: FilterGroupKey, query: Query) {
     const type = filterValue[0] === '!' ? 'is_not' : 'is';
 
     if (filter === 'country' && filterValue !== '') {
-      filterName = new URLSearchParams(window.location.search).get('country_name');
+      filterName = new URLSearchParams(window.location.search).get(
+        'country_name',
+      );
     }
     if (filter === 'region' && filterValue !== '') {
-      filterName = new URLSearchParams(window.location.search).get('region_name');
+      filterName = new URLSearchParams(window.location.search).get(
+        'region_name',
+      );
     }
     if (filter === 'city' && filterValue !== '') {
       filterName = new URLSearchParams(window.location.search).get('city_name');
     }
-    return Object.assign(result, { [filter]: { name: filterName, value: filterValue, type } });
+    return Object.assign(result, {
+      [filter]: { name: filterName, value: filterValue, type },
+    });
   }, {});
 }
 
@@ -50,7 +56,11 @@ function withIndefiniteArticle(word: string) {
   if (word.startsWith('UTM')) {
     return `a ${word}`;
   }
-  if (['a', 'e', 'i', 'o', 'u'].some((vowel) => word.toLowerCase().startsWith(vowel))) {
+  if (
+    ['a', 'e', 'i', 'o', 'u'].some((vowel) =>
+      word.toLowerCase().startsWith(vowel),
+    )
+  ) {
     return `an ${word}`;
   }
   return `a ${word}`;
@@ -64,14 +74,17 @@ export function formatFilterGroup(filterGroup: FilterGroupKey) {
 }
 
 export function filterGroupForFilter(filter) {
-  const map = Object.entries(FILTER_GROUPS).reduce((filterToGroupMap, [group, filtersInGroup]) => {
-    const filtersToAdd = {};
-    filtersInGroup.forEach((filterInGroup) => {
-      filtersToAdd[filterInGroup] = group;
-    });
+  const map = Object.entries(FILTER_GROUPS).reduce(
+    (filterToGroupMap, [group, filtersInGroup]) => {
+      const filtersToAdd = {};
+      filtersInGroup.forEach((filterInGroup) => {
+        filtersToAdd[filterInGroup] = group;
+      });
 
-    return { ...filterToGroupMap, ...filtersToAdd };
-  }, {});
+      return { ...filterToGroupMap, ...filtersToAdd };
+    },
+    {},
+  );
 
   return map[filter] || filter;
 }
@@ -83,7 +96,9 @@ interface FilterModalProps {
 interface FilterModalState {
   query: Query;
   selectedFilterGroup: FilterGroupKey;
-  formState: { [filter: string]: { name: string; value: string; type: 'is' | 'is_not' } };
+  formState: {
+    [filter: string]: { name: string; value: string; type: 'is' | 'is_not' };
+  };
 }
 
 class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
@@ -105,7 +120,14 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   handleKeydown(e: KeyboardEvent) {
-    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.isComposing || e.keyCode === 229) {
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      e.shiftKey ||
+      e.altKey ||
+      e.isComposing ||
+      e.keyCode === 229
+    ) {
       return;
     }
 
@@ -118,23 +140,27 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   handleSubmit() {
     const { formState } = this.state;
 
-    const filters = Object.entries(formState).reduce((res, [filterKey, { type, value, name }]) => {
-      if (filterKey === 'country') {
-        res.push({ filter: 'country_name', value: name });
-      }
-      if (filterKey === 'region') {
-        res.push({ filter: 'region_name', value: name });
-      }
-      if (filterKey === 'city') {
-        res.push({ filter: 'city_name', value: name });
-      }
+    const filters = Object.entries(formState).reduce(
+      (res, [filterKey, { type, value, name }]) => {
+        if (filterKey === 'country') {
+          res.push({ filter: 'country_name', value: name });
+        }
+        if (filterKey === 'region') {
+          res.push({ filter: 'region_name', value: name });
+        }
+        if (filterKey === 'city') {
+          res.push({ filter: 'city_name', value: name });
+        }
 
-      let finalFilterValue = value;
-      finalFilterValue = (type === 'is_not' ? '!' : '') + finalFilterValue.trim();
+        let finalFilterValue = value;
+        finalFilterValue =
+          (type === 'is_not' ? '!' : '') + finalFilterValue.trim();
 
-      res.push({ filter: filterKey, value: finalFilterValue });
-      return res;
-    }, []);
+        res.push({ filter: filterKey, value: finalFilterValue });
+        return res;
+      },
+      [],
+    );
 
     this.selectFiltersAndCloseModal(filters);
   }
@@ -164,7 +190,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
     return (value) => {
       this.setState((prevState) => ({
         formState: Object.assign(prevState.formState, {
-          [filterName]: Object.assign(prevState.formState[filterName], { value }),
+          [filterName]: Object.assign(prevState.formState[filterName], {
+            value,
+          }),
         }),
       }));
     };
@@ -173,7 +201,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   setFilterType(filterName, newType) {
     this.setState((prevState) => ({
       formState: Object.assign(prevState.formState, {
-        [filterName]: Object.assign(prevState.formState[filterName], { type: newType }),
+        [filterName]: Object.assign(prevState.formState[filterName], {
+          type: newType,
+        }),
       }),
     }));
   }
@@ -205,7 +235,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   isDisabled() {
-    return Object.entries(this.state.formState).every(([_key, { value: val }]) => !val);
+    return Object.entries(this.state.formState).every(
+      ([_key, { value: val }]) => !val,
+    );
   }
 
   selectFiltersAndCloseModal(filters) {
@@ -226,12 +258,14 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   renderFilterInputs() {
-    const groups = FILTER_GROUPS[this.state.selectedFilterGroup].filter((filterName: string) => {
-      if (['city', 'region'].includes(filterName)) {
-        return this.props.site.cities;
-      }
-      return true;
-    });
+    const groups = FILTER_GROUPS[this.state.selectedFilterGroup].filter(
+      (filterName: string) => {
+        if (['city', 'region'].includes(filterName)) {
+          return this.props.site.cities;
+        }
+        return true;
+      },
+    );
 
     return groups.map((filter: FilterKey) => {
       return (
@@ -248,7 +282,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
               initialSelectedItem={this.state.formState[filter]}
               onInput={this.onInput(filter)}
               onSelect={this.onSelect(filter)}
-              placeholder={`Select ${withIndefiniteArticle(formattedFilters[filter])}`}
+              placeholder={`Select ${withIndefiniteArticle(
+                formattedFilters[filter],
+              )}`}
             />
           </div>
         </div>
@@ -269,7 +305,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
         {({ open }) => (
           <>
             <div className="w-24">
-              <Menu.Button className="hover:bg-gray-50 inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
+              <Menu.Button className="hover:bg-gray-50 inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-xs focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100 dark:border-gray-500 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-850 dark:focus:ring-offset-gray-900">
                 {this.selectedFilterType(filterName)}
                 <IconChevronDown
                   className="-mr-2 ml-2 h-4 w-4 text-gray-500 dark:text-gray-400"
@@ -290,7 +326,7 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
             >
               <Menu.Items
                 static
-                className="absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                className="absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
               >
                 <div className="py-1">
                   <Menu.Item>
@@ -307,7 +343,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                     <Menu.Item>
                       {({ active }) => (
                         <span
-                          onClick={() => this.setFilterType(filterName, 'is_not')}
+                          onClick={() =>
+                            this.setFilterType(filterName, 'is_not')
+                          }
                           className={itemStyles(active)}
                         >
                           is not
@@ -338,11 +376,19 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
 
         <div className="mt-4 border-b border-gray-300"></div>
         <main className="modal__content">
-          <form className="flex flex-col" id="filter-form" onSubmit={this.handleSubmit.bind(this)}>
+          <form
+            className="flex flex-col"
+            id="filter-form"
+            onSubmit={this.handleSubmit.bind(this)}
+          >
             {this.renderFilterInputs()}
 
             <div className="mt-6 flex items-center justify-start">
-              <button type="submit" className="button" disabled={this.isDisabled()}>
+              <button
+                type="submit"
+                className="button"
+                disabled={this.isDisabled()}
+              >
                 Save Filter
               </button>
 
@@ -351,7 +397,9 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                   type="button"
                   className="button ml-2 flex items-center bg-red-500 px-4 hover:bg-red-600 dark:bg-red-500 dark:hover:bg-red-700"
                   onClick={() => {
-                    const updatedFilters = FILTER_GROUPS[selectedFilterGroup].map((filterName) => ({
+                    const updatedFilters = FILTER_GROUPS[
+                      selectedFilterGroup
+                    ].map((filterName) => ({
                       filter: filterName,
                       value: null,
                     }));
@@ -372,7 +420,8 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     ></path>
                   </svg>
-                  Remove filter{FILTER_GROUPS[selectedFilterGroup].length > 1 ? 's' : ''}
+                  Remove filter
+                  {FILTER_GROUPS[selectedFilterGroup].length > 1 ? 's' : ''}
                 </button>
               )}
             </div>
@@ -384,7 +433,11 @@ class FilterModal extends React.Component<FilterModalProps, FilterModalState> {
   }
 
   renderHints() {
-    if (['page', 'entry_page', 'exit_page'].includes(this.state.selectedFilterGroup)) {
+    if (
+      ['page', 'entry_page', 'exit_page'].includes(
+        this.state.selectedFilterGroup,
+      )
+    ) {
       return (
         <p className="mt-6 text-xs text-gray-500">
           Hint: You can use double asterisks to match any character e.g. /blog**
