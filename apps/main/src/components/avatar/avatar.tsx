@@ -40,9 +40,10 @@ export function Avatar({
       <IconUser
         size={iconSize * 0.75}
         className={clsx('m-1 rounded-full', ring, className)}
+        aria-label={alt}
       />
     );
-    const customAvatarValue = email || name || username;
+    const customAvatarValue = name || username || email;
     if (customAvatarValue) {
       return (
         <DeferredCustomAvatar
