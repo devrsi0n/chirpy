@@ -30,9 +30,8 @@ import { waitGraphql } from '../fixtures/utils';
 Cypress.Commands.add('login', () => {
   cy.intercept('/v1/graphql').as('graphql');
 
-  cy.visit('/auth/sign-in');
-  cy.get('input[name=username]').type(Cypress.env('TEST_USER_ID'));
-  cy.get('input[name=password]').type(`${Cypress.env('HASURA_EVENT_SECRET')}`);
+  cy.visit('/auth/sign-in?allowAnonymous=true');
+  cy.get('input[name=name]').type(Cypress.env('TEST_USER_ID'));
   cy.get('button[type=submit]').click();
   cy.wait(1000);
   waitGraphql();
