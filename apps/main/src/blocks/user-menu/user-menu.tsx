@@ -64,7 +64,12 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               <p className="w-max">Sign in</p>
             </Menu.Item>
           ))}
-        <Menu.Item as={MenuLink} variant="plain" href={FEEDBACK_LINK}>
+        <Menu.Item
+          as={MenuLink}
+          variant="plain"
+          target="_blank"
+          href={FEEDBACK_LINK}
+        >
           <IconLifeBuoy size={14} />
           <span>Feedback</span>
         </Menu.Item>

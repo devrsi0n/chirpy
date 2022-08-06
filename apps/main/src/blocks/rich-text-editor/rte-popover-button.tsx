@@ -24,7 +24,7 @@ export function RTEPopoverButton({
       <Popover.Panel
         autoClose={false}
         styles={{
-          panel: 'flex flex-row items-center',
+          panel: 'flex flex-row items-end',
         }}
       >
         <TextField
@@ -40,6 +40,7 @@ export function RTEPopoverButton({
             onClickGo(value);
             setValue('');
           }}
+          className="mb-1.5"
         >
           Go
         </Button>

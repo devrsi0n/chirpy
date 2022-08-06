@@ -25,8 +25,8 @@ export function Divider({
   ...divProps
 }: DividerProps): JSX.Element {
   const _className = vertical
-    ? clsx('w-[1px]', 'bg-gray-500')
-    : clsx(`relative w-auto max-w-full`, styles.divider);
+    ? clsx('w-[1px] mx-1', 'bg-gray-500')
+    : clsx(`relative w-auto max-w-full my-1`, styles.divider);
   if (!children) {
     return (
       <div

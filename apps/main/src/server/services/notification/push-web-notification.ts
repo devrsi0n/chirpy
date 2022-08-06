@@ -1,6 +1,7 @@
 import webpush from 'web-push';
 
 import { NotificationType_Enum } from '$/graphql/generated/types';
+import { FEEDBACK_LINK } from '$/lib/constants';
 import { mutate } from '$/server/common/gql';
 import {
   DeleteNotificationSubscriptionByPkDocument,
@@ -56,7 +57,7 @@ export function pushWebNotification(payload: NotificationPayload) {
 
 const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
   vapidDetails: {
-    subject: 'mailto:support@chirpy.dev',
+    subject: FEEDBACK_LINK,
     publicKey: process.env.NEXT_PUBLIC_VAPID,
     privateKey: process.env.PRIVATE_VAPID,
   },

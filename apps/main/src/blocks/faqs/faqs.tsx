@@ -5,6 +5,7 @@ import { Heading } from '$/components/heading';
 import { Link } from '$/components/link';
 import { SectionHeader } from '$/components/section-header';
 import { Text } from '$/components/text';
+import { FEEDBACK_LINK } from '$/lib/constants';
 
 import { FAQ } from './faq';
 import { FAQ_LIST } from './faq-data';
@@ -38,11 +39,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
               className="max-w-xs md:max-w-full"
             >{`Can't find the answer you're looking for? Please chat to our friendly team.`}</Text>
           </div>
-          <Link
-            variant="plain"
-            href={`mailto:support@chirpy.dev`}
-            target="_blank"
-          >
+          <Link variant="plain" href={FEEDBACK_LINK} target="_blank">
             <Button variant="solid" color="primary">
               Get in touch
             </Button>
