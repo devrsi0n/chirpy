@@ -104,8 +104,6 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
             className={clsx(
               `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-md outline-none`,
               bluredBg,
-
-              // 'before:[z-index=-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
               className,
             )}
           >

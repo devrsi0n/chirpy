@@ -6,6 +6,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
+import { SESSION_MAX_AGE } from '$/lib/constants';
 import { getHostEnv } from '$/utilities/env';
 
 import { isENVProd } from '../../utilities/env';
@@ -84,6 +85,7 @@ export const authProviders: Provider[] = [
         EmailProvider({
           server: process.env.EMAIL_SERVER,
           from: process.env.EMAIL_FROM,
+          maxAge: SESSION_MAX_AGE,
           async sendVerificationRequest({
             identifier: email,
             url /*provider: { server, from }*/,

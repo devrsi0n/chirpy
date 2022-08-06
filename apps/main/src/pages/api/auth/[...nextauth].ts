@@ -20,6 +20,7 @@ export default NextAuth({
     signIn: '/auth/sign-in',
     newUser: '/auth/welcome?isNewUser=true', // New users will be directed here on first sign in
     error: '/auth/sign-in', // Error code passed in query string as ?error=
+    verifyRequest: '/auth/verify-request',
   },
   callbacks: {
     /**
