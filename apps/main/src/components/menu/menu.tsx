@@ -146,7 +146,6 @@ function MenuItem({
             className={clsx(
               listHoverable,
               itemStyle,
-              spacingItem,
               !disableAutoDismiss && MenuItemPadding,
               className,
             )}
@@ -163,5 +162,3 @@ function MenuItem({
 export const MenuItemPadding = `px-6 py-2`;
 
 const itemStyle = `transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
-
-const spacingItem = `mt-1`;

@@ -39,7 +39,7 @@ We're working hard to make Chirpy General Available first. Here are the blocking
 - ~~[Notifications](https://github.com/devrsi0n/chirpy/issues/134)~~
 - Account plan
 - Payment
-- Email login without password
+- Email sign-in without password
 
 ## 📀 Self-hosted
 

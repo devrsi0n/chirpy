@@ -129,8 +129,8 @@ button:focus {
 }
 
 .icon.icon-link {
-  background-image: url(/images/docs/link.svg);
-  background-size: cover;
+  @apply bg-gray-1200;
+  mask-image: url(/images/docs/link.svg);
   width: 14px;
   height: 14px;
   display: none;
