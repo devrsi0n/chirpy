@@ -1,16 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
-import { useTheme } from 'next-themes';
-import Script from 'next/script';
 import * as React from 'react';
 
+import { CommentWidget } from '$/blocks/comment-widget';
 import { SiteLayout } from '$/blocks/layout';
 import { MDXComponents } from '$/blocks/mdx-components';
 import { Image } from '$/components/image';
 import { useHasMounted } from '$/hooks/use-has-mounted';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { isENVDev } from '$/server/utilities/env';
 import { CommonPageProps } from '$/types/page.type';
 import { getBannerProps } from '$/utilities/image';
 
@@ -27,7 +25,6 @@ export default function Blog({
       return getBannerProps(frontMatter.banner);
     }
   }, [frontMatter?.banner, hasMounted]);
-  const { theme } = useTheme();
 
   return (
     <SiteLayout title={frontMatter?.title || 'Blog'}>
@@ -41,16 +38,7 @@ export default function Blog({
           {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
         </article>
       </section>
-      <div
-        data-chirpy-comment
-        data-chirpy-theme={theme || 'system'}
-        className="my-16"
-      />
-      <Script
-        src="/bootstrap/comment.js"
-        strategy={isENVDev ? 'afterInteractive' : 'beforeInteractive'}
-        data-chirpy-domain={process.env.NEXT_PUBLIC_COMMENT_DOMAIN}
-      />
+      <CommentWidget />
     </SiteLayout>
   );
 }

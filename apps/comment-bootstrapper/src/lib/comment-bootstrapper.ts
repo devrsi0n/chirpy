@@ -2,7 +2,10 @@ import { EVENT_CLICK_CONTAINER } from '../../../main/src/lib/constants';
 import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
 import type { ResponseError } from '../../../main/src/server/types/error';
 import type { GetPagByUrl } from '../../../main/src/server/types/page';
-import { observeThemeAttributeChange } from './theme-observer';
+import {
+  observeAndBroadcastThemeChange,
+  observeWidgetLoadedEvent,
+} from './theme-observer';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.
@@ -83,10 +86,11 @@ export async function initCommentWidget(): Promise<void> {
   window.document.body.addEventListener('click', () => {
     iframe.contentWindow?.postMessage(EVENT_CLICK_CONTAINER);
   });
+  observeWidgetLoadedEvent(iframe);
   iframe.src = `${
     process.env.NEXT_PUBLIC_APP_URL
   }/widget/comment/${encodeURIComponent(page.url)}`;
-  observeThemeAttributeChange(iframe, renderTarget);
+  observeAndBroadcastThemeChange(iframe, renderTarget);
   renderTarget.append(iframe);
 }
 

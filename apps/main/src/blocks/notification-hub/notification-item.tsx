@@ -42,7 +42,7 @@ export function NotificationItem({
       key={message.id}
       className={clsx(
         'mt-0 flex-col items-start rounded-none px-5 pt-3 pb-0 !text-left hover:rounded',
-        !message.read && `bg-gray-200`,
+        !message.read && `bg-gray-600/30`,
       )}
       onClickCapture={(e: any): void => {
         if (deleteButtonRef.current?.contains(e.target)) {
