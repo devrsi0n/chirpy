@@ -1,5 +1,6 @@
 import { Heading } from '$/components/heading';
 import { IconCode, IconFigma, IconLock, Icon } from '$/components/icons';
+import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 
 const contents: FeatureProps[] = [
@@ -11,7 +12,18 @@ const contents: FeatureProps[] = [
   },
   {
     heading: 'Privacy at next level',
-    content: `We never track you, sell your data or show Ads. We even built a custom telemetry system to avoid sharing your data with a third-party.`,
+    content: (
+      <>
+        <span>
+          You only need minimal info to get started, you can sign-in as an
+          anonymous user or sign-in with email/magic link or social login
+          providers. We never track you or sell your data.
+        </span>
+        <Link className="ml-2" href="/docs/features/privacy-friendly">
+          Learn more about privacy
+        </Link>
+      </>
+    ),
     icon: IconLock,
   },
   {
@@ -36,7 +48,7 @@ export function Features(): JSX.Element {
 
 type FeatureProps = {
   heading: string;
-  content: string;
+  content: React.ReactNode;
   icon: Icon;
 };
 function Feature(props: FeatureProps): JSX.Element {
