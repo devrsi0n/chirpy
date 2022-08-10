@@ -1,7 +1,11 @@
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import { EVENT_CHANGE_THEME, EVENT_CLICK_CONTAINER } from '$/lib/constants';
+import {
+  EVENT_CHANGE_THEME,
+  EVENT_CLICK_CONTAINER,
+  EVENT_WIDGET_LOADED,
+} from '$/lib/constants';
 
 /**
  * Register widget events
@@ -11,7 +15,7 @@ export function useWidgetSideEffects(): void {
     broadcastPageHeight();
     const observer = new MutationObserver(broadcastPageHeight);
     observer.observe(window.document.body, {
-      attributes: false,
+      attributes: true,
       childList: true,
       subtree: true,
     });
@@ -20,9 +24,15 @@ export function useWidgetSideEffects(): void {
     };
   }, []);
 
+  React.useEffect(() => {
+    window.postMessage(EVENT_WIDGET_LOADED);
+  }, []);
+
   const { setTheme } = useTheme();
+
   React.useEffect(() => {
     function handleMessage(event: MessageEvent): void {
+      console.log(event.data);
       if (event.data === EVENT_CLICK_CONTAINER) {
         unexpandedPopup('[id^="headlessui-menu-button"]');
         unexpandedPopup('[id^="headlessui-listbox-button"]');
