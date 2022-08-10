@@ -17,7 +17,7 @@ import { useCurrentUser } from '$/contexts/current-user-context';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
 import {
   FEEDBACK_LINK,
-  SESSION_IN_SUCCESS_KEY,
+  SIGN_IN_SUCCESS_KEY,
   GRAPHQL_CACHE_DB_NAME,
 } from '$/lib/constants';
 
@@ -103,7 +103,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
                 await signOut({
                   redirect: !isWidget,
                 });
-                localStorage.removeItem(SESSION_IN_SUCCESS_KEY);
+                localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
                 indexedDB.deleteDatabase(GRAPHQL_CACHE_DB_NAME);
               }}
             >
