@@ -6,7 +6,7 @@ import { SiteLayout } from '$/blocks/layout';
 import { Spinner } from '$/components/spinner';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useTimeout } from '$/hooks/use-timeout';
-import { CALLBACK_URL_KEY, LOG_IN_SUCCESS_KEY } from '$/lib/constants';
+import { CALLBACK_URL_KEY, SESSION_IN_SUCCESS_KEY } from '$/lib/constants';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {
@@ -16,7 +16,7 @@ export default function Redirecting(): JSX.Element {
   const router = useRouter();
   React.useEffect(() => {
     if (data.id) {
-      localStorage.setItem(LOG_IN_SUCCESS_KEY, 'true');
+      localStorage.setItem(SESSION_IN_SUCCESS_KEY, 'true');
     }
     if (status === 'loading' || loading) {
       return;
