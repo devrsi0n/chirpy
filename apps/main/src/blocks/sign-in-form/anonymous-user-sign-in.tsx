@@ -19,8 +19,8 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
     async (fields, event) => {
       event.preventDefault();
       await signIn('credentials', {
-        callbackUrl: '/dashboard',
         ...fields,
+        callbackUrl: `${location.origin}/auth/redirecting`,
       });
     },
   );
