@@ -32,7 +32,6 @@ export function useWidgetSideEffects(): void {
 
   React.useEffect(() => {
     function handleMessage(event: MessageEvent): void {
-      console.log(event.data);
       if (event.data === EVENT_CLICK_CONTAINER) {
         unexpandedPopup('[id^="headlessui-menu-button"]');
         unexpandedPopup('[id^="headlessui-listbox-button"]');
