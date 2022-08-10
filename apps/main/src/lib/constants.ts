@@ -1,4 +1,4 @@
-export const SESSION_IN_SUCCESS_KEY = 'sign-in.success';
+export const SIGN_IN_SUCCESS_KEY = 'sign-in.success';
 export const CALLBACK_URL_KEY = 'callback.url';
 
 // 30 days
