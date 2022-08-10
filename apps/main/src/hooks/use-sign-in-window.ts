@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
-import { SESSION_IN_SUCCESS_KEY } from '$/lib/constants';
+import { SIGN_IN_SUCCESS_KEY } from '$/lib/constants';
 
 import { useEventListener } from './use-event-listener';
 
@@ -25,7 +25,7 @@ export function useSignInWindow({
   };
 
   useEventListener('storage', (event) => {
-    if (event.key === SESSION_IN_SUCCESS_KEY && event.newValue === 'true') {
+    if (event.key === SIGN_IN_SUCCESS_KEY && event.newValue === 'true') {
       popupWindow.current?.close();
       popupWindow.current = null;
       // Force to refresh session
