@@ -24,7 +24,7 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
       event.preventDefault();
       await signIn('email', {
         ...fields,
-        callbackUrl: '/dashboard',
+        callbackUrl: `${location.origin}/auth/redirecting`,
       });
     },
   );
