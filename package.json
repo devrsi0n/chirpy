@@ -51,7 +51,7 @@
     },
     "patchedDependencies": {
       "react-flip-move@3.0.4": "patches/react-flip-move@3.0.4.patch",
-      "next-auth@4.9.0": "patches/next-auth@4.9.0.patch"
+      "next-auth@4.10.3": "patches/next-auth@4.10.3.patch"
     }
   },
   "renovate": {
