@@ -1,4 +1,4 @@
-fragment commentContent on Comment {
+fragment commentItem on Comment {
   id
   content
   createdAt
@@ -8,6 +8,8 @@ fragment commentContent on Comment {
   user {
     id
     name
+    username
+    email
     avatar
   }
   likes {
@@ -22,15 +24,15 @@ subscription commentTree($pageURL: String!) {
     where: { page: { url: { _eq: $pageURL } }, parentId: { _is_null: true } }
     order_by: { likes_aggregate: { count: desc }, createdAt: asc }
   ) {
-    ...commentContent
+    ...commentItem
     replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
-      ...commentContent
+      ...commentItem
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
-        ...commentContent
+        ...commentItem
         replies(
           order_by: { likes_aggregate: { count: desc }, createdAt: asc }
         ) {
-          ...commentContent
+          ...commentItem
         }
       }
     }
@@ -40,16 +42,16 @@ subscription commentTree($pageURL: String!) {
 # Query ancestors and children
 subscription commentTimeline($id: uuid!) {
   commentByPk(id: $id) {
-    ...commentContent
+    ...commentItem
     replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
-      ...commentContent
+      ...commentItem
     }
     parent {
-      ...commentContent
+      ...commentItem
       parent {
-        ...commentContent
+        ...commentItem
         parent {
-          ...commentContent
+          ...commentItem
         }
       }
     }

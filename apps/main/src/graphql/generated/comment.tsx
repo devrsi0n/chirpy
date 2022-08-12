@@ -4,7 +4,7 @@ import * as Urql from 'urql';
 import * as Types from './types';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type CommentContentFragment = {
+export type CommentItemFragment = {
   __typename?: 'Comment';
   id: string;
   content: any;
@@ -16,6 +16,8 @@ export type CommentContentFragment = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
+    email?: string | null;
     avatar?: string | null;
   };
   likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -63,6 +65,8 @@ export type CommentTreeSubscription = {
             __typename?: 'User';
             id: string;
             name?: string | null;
+            username?: string | null;
+            email?: string | null;
             avatar?: string | null;
           };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -71,6 +75,8 @@ export type CommentTreeSubscription = {
           __typename?: 'User';
           id: string;
           name?: string | null;
+          username?: string | null;
+          email?: string | null;
           avatar?: string | null;
         };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -79,6 +85,8 @@ export type CommentTreeSubscription = {
         __typename?: 'User';
         id: string;
         name?: string | null;
+        username?: string | null;
+        email?: string | null;
         avatar?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -87,6 +95,8 @@ export type CommentTreeSubscription = {
       __typename?: 'User';
       id: string;
       name?: string | null;
+      username?: string | null;
+      email?: string | null;
       avatar?: string | null;
     };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -119,6 +129,8 @@ export type CommentTimelineSubscription = {
         __typename?: 'User';
         id: string;
         name?: string | null;
+        username?: string | null;
+        email?: string | null;
         avatar?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -151,6 +163,8 @@ export type CommentTimelineSubscription = {
             __typename?: 'User';
             id: string;
             name?: string | null;
+            username?: string | null;
+            email?: string | null;
             avatar?: string | null;
           };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -159,6 +173,8 @@ export type CommentTimelineSubscription = {
           __typename?: 'User';
           id: string;
           name?: string | null;
+          username?: string | null;
+          email?: string | null;
           avatar?: string | null;
         };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -167,6 +183,8 @@ export type CommentTimelineSubscription = {
         __typename?: 'User';
         id: string;
         name?: string | null;
+        username?: string | null;
+        email?: string | null;
         avatar?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -175,6 +193,8 @@ export type CommentTimelineSubscription = {
       __typename?: 'User';
       id: string;
       name?: string | null;
+      username?: string | null;
+      email?: string | null;
       avatar?: string | null;
     };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
@@ -201,8 +221,8 @@ export type DeleteOneCommentMutation = {
   updateCommentByPk?: { __typename?: 'Comment'; id: string } | null;
 };
 
-export const CommentContentFragmentDoc = gql`
-  fragment commentContent on Comment {
+export const CommentItemFragmentDoc = gql`
+  fragment commentItem on Comment {
     id
     content
     createdAt
@@ -212,6 +232,8 @@ export const CommentContentFragmentDoc = gql`
     user {
       id
       name
+      username
+      email
       avatar
     }
     likes {
@@ -226,23 +248,23 @@ export const CommentTreeDocument = gql`
       where: { page: { url: { _eq: $pageURL } }, parentId: { _is_null: true } }
       order_by: { likes_aggregate: { count: desc }, createdAt: asc }
     ) {
-      ...commentContent
+      ...commentItem
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
-        ...commentContent
+        ...commentItem
         replies(
           order_by: { likes_aggregate: { count: desc }, createdAt: asc }
         ) {
-          ...commentContent
+          ...commentItem
           replies(
             order_by: { likes_aggregate: { count: desc }, createdAt: asc }
           ) {
-            ...commentContent
+            ...commentItem
           }
         }
       }
     }
   }
-  ${CommentContentFragmentDoc}
+  ${CommentItemFragmentDoc}
 `;
 
 export function useCommentTreeSubscription<TData = CommentTreeSubscription>(
@@ -261,22 +283,22 @@ export function useCommentTreeSubscription<TData = CommentTreeSubscription>(
 export const CommentTimelineDocument = gql`
   subscription commentTimeline($id: uuid!) {
     commentByPk(id: $id) {
-      ...commentContent
+      ...commentItem
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
-        ...commentContent
+        ...commentItem
       }
       parent {
-        ...commentContent
+        ...commentItem
         parent {
-          ...commentContent
+          ...commentItem
           parent {
-            ...commentContent
+            ...commentItem
           }
         }
       }
     }
   }
-  ${CommentContentFragmentDoc}
+  ${CommentItemFragmentDoc}
 `;
 
 export function useCommentTimelineSubscription<

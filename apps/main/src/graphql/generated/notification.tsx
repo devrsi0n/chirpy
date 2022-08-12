@@ -22,12 +22,16 @@ export type CurrentNotificationMessagesSubscription = {
       __typename?: 'User';
       id: string;
       name?: string | null;
+      username?: string | null;
+      email?: string | null;
       avatar?: string | null;
     };
     triggeredBy: {
       __typename?: 'User';
       id: string;
       name?: string | null;
+      username?: string | null;
+      email?: string | null;
       avatar?: string | null;
     };
   }>;
@@ -67,6 +71,8 @@ export const CurrentNotificationMessagesDocument = gql`
       recipient {
         id
         name
+        username
+        email
         avatar
       }
       type
@@ -74,6 +80,8 @@ export const CurrentNotificationMessagesDocument = gql`
       triggeredBy {
         id
         name
+        username
+        email
         avatar
       }
       content

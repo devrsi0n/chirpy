@@ -18,6 +18,7 @@ import { useCommentContext } from '$/contexts/comment-context';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/constants';
 import { isENVDev } from '$/server/utilities/env';
+import { CommentLeafType } from '$/types/widget';
 import { dayjs } from '$/utilities/date';
 
 import { Like, LikeAction } from '../like-action';
@@ -27,11 +28,7 @@ import { TimelineLinkButton } from './timeline-link-button';
 
 export type { ClickLikeActionHandler } from '../like-action';
 
-export type Author = {
-  id: string;
-  name?: string | null;
-  avatar?: string | null;
-};
+export type Author = CommentLeafType['user'];
 
 export type CommentCardProps = {
   commentId: string;
@@ -57,7 +54,7 @@ export function CommentCard({
   disableTimelineButton,
   deletedAt,
 }: CommentCardProps): JSX.Element {
-  const { avatar, name } = author;
+  const { avatar, name, username, email } = author;
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
   const { projectId, deleteAComment, createAComment } = useCommentContext();
   const { showToast } = useToast();
@@ -117,7 +114,14 @@ export function CommentCard({
       )}
       id={isENVDev ? commentId : undefined}
     >
-      <Avatar size="lg" src={avatar ?? ''} alt={`User ${name}'s avatar`} />
+      <Avatar
+        size="lg"
+        src={avatar}
+        alt={`${name}'s avatar`}
+        email={email}
+        name={name}
+        username={username}
+      />
       <div className="flex-1">
         <div className="flex flex-row items-start justify-between">
           <div className="flex flex-row items-start space-x-4">
