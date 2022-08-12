@@ -11,7 +11,12 @@ export type MoreLinkProps = {
   list: any[];
 };
 
-export default function MoreLink({ url, site, list, endpoint }: MoreLinkProps): JSX.Element | null {
+export default function MoreLink({
+  url,
+  site,
+  list,
+  endpoint,
+}: MoreLinkProps): JSX.Element | null {
   // if (list.length > 0) {
   //   return (
   //     <div className="text-center w-full py-3 md:pb-3 md:pt-0 md:absolute md:bottom-0 md:left-0">

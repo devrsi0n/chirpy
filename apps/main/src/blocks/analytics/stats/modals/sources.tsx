@@ -36,12 +36,17 @@ class SourcesModal extends React.Component {
 
     const detailed = this.showExtra();
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/${this.currentFilter()}`, this.props.site, query, {
-        limit: 100,
-        page,
-        detailed,
-        show_noref: true,
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/${this.currentFilter()}`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+          detailed,
+          show_noref: true,
+        },
+      )
       .then((res) =>
         this.setState({
           loading: false,
@@ -57,7 +62,10 @@ class SourcesModal extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-      this.setState({ sources: [], loading: true }, this.loadSources.bind(this));
+      this.setState(
+        { sources: [], loading: true },
+        this.loadSources.bind(this),
+      );
     }
   }
 
@@ -67,7 +75,9 @@ class SourcesModal extends React.Component {
   }
 
   showExtra() {
-    return this.state.query.period !== 'realtime' && !this.state.query.filters.goal;
+    return (
+      this.state.query.period !== 'realtime' && !this.state.query.filters.goal
+    );
   }
 
   showConversionRate() {
@@ -75,7 +85,10 @@ class SourcesModal extends React.Component {
   }
 
   loadMore() {
-    this.setState({ loading: true, page: this.state.page + 1 }, this.loadSources.bind(this));
+    this.setState(
+      { loading: true, page: this.state.page + 1 },
+      this.loadSources.bind(this),
+    );
   }
 
   formatBounceRate(page) {
@@ -102,16 +115,21 @@ class SourcesModal extends React.Component {
       <tr className="text-sm dark:text-gray-200" key={source.name}>
         <td className="p-2">
           <img
-            src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
-              source.name,
-            )}`}
+            src={`${
+              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+            }/favicon/sources/${encodeURIComponent(source.name)}`}
             className="mr-2 inline h-4 w-4 align-middle"
             alt={`Favorite icon for ${source.name}`}
           />
           <Link
             disabled
             className="hover:underline"
-            href={'/' + encodeURIComponent(this.props.site.domain) + '?' + query.toString()}
+            href={
+              '/' +
+              encodeURIComponent(this.props.site.domain) +
+              '?' +
+              query.toString()
+            }
           >
             {source.name}
           </Link>
@@ -244,7 +262,9 @@ class SourcesModal extends React.Component {
                 )}
               </tr>
             </thead>
-            <tbody>{this.state.sources.map(this.renderSource.bind(this))}</tbody>
+            <tbody>
+              {this.state.sources.map(this.renderSource.bind(this))}
+            </tbody>
           </table>
         </main>
 

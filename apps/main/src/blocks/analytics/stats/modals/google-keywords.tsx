@@ -88,10 +88,16 @@ class GoogleKeywordsModal extends React.Component {
       return this.state.isOwner ? (
         <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
-          <div className="text-lg">The site is not connected to Google Search Keywords</div>
-          <div className="text-lg">Configure the integration to view search terms</div>
+          <div className="text-lg">
+            The site is not connected to Google Search Keywords
+          </div>
+          <div className="text-lg">
+            Configure the integration to view search terms
+          </div>
           <a
-            href={`/${encodeURIComponent(this.props.site.domain)}/settings/search-console`}
+            href={`/${encodeURIComponent(
+              this.props.site.domain,
+            )}/settings/search-console`}
             className="button mt-4"
           >
             Connect with Google
@@ -100,7 +106,9 @@ class GoogleKeywordsModal extends React.Component {
       ) : (
         <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
-          <div className="text-lg">The site is not connected to Google Search Kewyords</div>
+          <div className="text-lg">
+            The site is not connected to Google Search Kewyords
+          </div>
           <div className="text-lg">Cannot show search terms</div>
         </div>
       );
@@ -129,14 +137,18 @@ class GoogleKeywordsModal extends React.Component {
               </th>
             </tr>
           </thead>
-          <tbody>{this.state.searchTerms.map(this.renderTerm.bind(this))}</tbody>
+          <tbody>
+            {this.state.searchTerms.map(this.renderTerm.bind(this))}
+          </tbody>
         </table>
       );
     } else {
       return (
         <div className="mt-6 text-center text-gray-700 dark:text-gray-300">
           <RocketIcon />
-          <div className="text-lg">Could not find any search terms for this period</div>
+          <div className="text-lg">
+            Could not find any search terms for this period
+          </div>
         </div>
       );
     }
@@ -161,7 +173,9 @@ class GoogleKeywordsModal extends React.Component {
       <React.Fragment>
         <Link
           disabled
-          href={`/${encodeURIComponent(this.props.site.domain)}/referrers${window.location.search}`}
+          href={`/${encodeURIComponent(this.props.site.domain)}/referrers${
+            window.location.search
+          }`}
           className="font-bold text-gray-700 hover:underline dark:text-gray-200"
         >
           ← All referrers

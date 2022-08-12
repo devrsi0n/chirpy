@@ -27,5 +27,7 @@ export function setItem(key: string, value: string) {
 }
 
 export function getItem(key: string) {
-  return isLocalStorageAvailable ? window.localStorage.getItem(key) : memStore[key];
+  return isLocalStorageAvailable
+    ? window.localStorage.getItem(key)
+    : memStore[key];
 }

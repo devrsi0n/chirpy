@@ -91,7 +91,11 @@ function OperatingSystems({ query, site }: Props) {
 
 function OperatingSystemVersions({ query, site }: Props) {
   function fetchData() {
-    return api.getStats(url.apiPath(site, '/operating-system-versions'), site, query);
+    return api.getStats(
+      url.apiPath(site, '/operating-system-versions'),
+      site,
+      query,
+    );
   }
 
   return (
@@ -175,7 +179,15 @@ function iconFor(screenSize: 'Mobile' | 'Tablet' | 'Laptop' | 'Desktop') {
           strokeLinejoin="round"
           className={clsx('-mt-px', styles.feather)}
         >
-          <rect x="4" y="2" width="16" height="20" rx="2" ry="2" transform="rotate(180 12 12)" />
+          <rect
+            x="4"
+            y="2"
+            width="16"
+            height="20"
+            rx="2"
+            ry="2"
+            transform="rotate(180 12 12)"
+          />
           <line x1="12" y1="18" x2="12" y2="18" />
         </svg>
       );

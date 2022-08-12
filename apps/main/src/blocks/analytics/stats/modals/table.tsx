@@ -21,12 +21,16 @@ class ModalTable extends React.Component {
 
   componentDidMount() {
     api
-      .getStats(this.props.endpoint, this.props.site, this.state.query, { limit: 100 })
+      .getStats(this.props.endpoint, this.props.site, this.state.query, {
+        limit: 100,
+      })
       .then((res) => this.setState({ loading: false, list: res }));
   }
 
   label() {
-    return this.state.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
+    return this.state.query.period === 'realtime'
+      ? 'Current visitors'
+      : 'Visitors';
   }
 
   renderTableItem(tableItem) {
@@ -42,7 +46,11 @@ class ModalTable extends React.Component {
           <Link
             disabled
             className="hover:underline"
-            href={`/${encodeURIComponent(this.props.site.domain)}` + '?' + query.toString()}
+            href={
+              `/${encodeURIComponent(this.props.site.domain)}` +
+              '?' +
+              query.toString()
+            }
           >
             {this.props.renderIcon && this.props.renderIcon(tableItem)}
             {this.props.renderIcon && ' '}
@@ -52,7 +60,9 @@ class ModalTable extends React.Component {
         <td className="w-32 p-2 font-medium" align="right">
           {numberFormatter(tableItem.visitors)}
           {tableItem.percentage >= 0 && (
-            <span className="inline-block w-8 text-right text-xs">({tableItem.percentage}%)</span>
+            <span className="inline-block w-8 text-right text-xs">
+              ({tableItem.percentage}%)
+            </span>
           )}
         </td>
       </tr>
@@ -71,7 +81,9 @@ class ModalTable extends React.Component {
     if (this.state.list) {
       return (
         <>
-          <h1 className="text-xl font-bold dark:text-gray-100">{this.props.title}</h1>
+          <h1 className="text-xl font-bold dark:text-gray-100">
+            {this.props.title}
+          </h1>
 
           <div className="my-4 border-b border-gray-300 dark:border-gray-500"></div>
           <main className="modal__content">
@@ -99,7 +111,9 @@ class ModalTable extends React.Component {
                   </th>
                 </tr>
               </thead>
-              <tbody>{this.state.list.map(this.renderTableItem.bind(this))}</tbody>
+              <tbody>
+                {this.state.list.map(this.renderTableItem.bind(this))}
+              </tbody>
             </table>
           </main>
         </>

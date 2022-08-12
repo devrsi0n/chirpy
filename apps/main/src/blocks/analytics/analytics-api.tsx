@@ -19,7 +19,7 @@ class ApiError extends Error {
 
 function serialize(obj: Record<string, any>) {
   const str = [];
-  for (let p in obj)
+  for (const p in obj)
     if (obj.hasOwnProperty(p)) {
       str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
     }
@@ -37,7 +37,9 @@ export function cancelAll() {
 
 function serializeFilters(filters: Record<string, any> = {}, site: Site) {
   const cleaned: Record<string, any> = {};
-  Object.entries(filters).forEach(([key, val]) => (val ? (cleaned[key] = val) : null));
+  Object.entries(filters).forEach(([key, val]) =>
+    val ? (cleaned[key] = val) : null,
+  );
   return JSON.stringify({
     ...cleaned,
     page: `${WIDGET_COMMENT_PATH}https://${site.domain}**`,

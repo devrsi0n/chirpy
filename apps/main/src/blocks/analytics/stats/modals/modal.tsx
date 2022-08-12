@@ -67,7 +67,9 @@ class Modal extends React.Component<ModalProps, ModalState> {
 
   close() {
     this.props.router.push(
-      `/${encodeURIComponent(this.props.site.domain)}${this.props.location.search}`,
+      `/${encodeURIComponent(this.props.site.domain)}${
+        this.props.location.search
+      }`,
     );
   }
 

@@ -26,7 +26,9 @@ export interface RealtimeProps {
 }
 
 export default function Realtime(props: RealtimeProps) {
-  const [query, setQuery] = React.useState(() => parseQuery(window.location.search, props.site));
+  const [query, setQuery] = React.useState(() =>
+    parseQuery(window.location.search, props.site),
+  );
   const router = useRouter();
 
   React.useEffect(() => {
@@ -50,24 +52,43 @@ export default function Realtime(props: RealtimeProps) {
           <div className="flex w-full items-center">
             <div className="flex w-full items-center">
               <SiteHeader site={props.site} />
-              <Filters className="flex" site={props.site} query={query} router={router} />
+              <Filters
+                className="flex"
+                site={props.site}
+                query={query}
+                router={router}
+              />
             </div>
             <Datepicker site={props.site} query={query} router={router} />
           </div>
         </div>
-        <VisitorGraph site={props.site} query={query} timer={timer} router={router} />
+        <VisitorGraph
+          site={props.site}
+          query={query}
+          timer={timer}
+          router={router}
+        />
         <div className="block w-full items-start justify-between md:flex">
           <Sources site={props.site} query={query} timer={timer} />
           <Pages site={props.site} query={query} timer={timer} />
         </div>
         <div className="block w-full items-start justify-between md:flex">
-          <Locations router={router} site={props.site} query={query} timer={timer} />
+          <Locations
+            router={router}
+            site={props.site}
+            query={query}
+            timer={timer}
+          />
           <Devices site={props.site} query={query} />
         </div>
 
         {props.site.hasGoals && (
           <div className="mt-6 block w-full items-start justify-between md:flex">
-            <Conversions site={props.site} query={query} title="Goal Conversions (last 30 min)" />
+            <Conversions
+              site={props.site}
+              query={query}
+              title="Goal Conversions (last 30 min)"
+            />
           </div>
         )}
       </div>

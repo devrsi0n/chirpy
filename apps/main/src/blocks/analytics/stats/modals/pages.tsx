@@ -32,11 +32,16 @@ class PagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/pages`, this.props.site, query, {
-        limit: 100,
-        page,
-        detailed,
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/pages`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+          detailed,
+        },
+      )
       .then((res) =>
         this.setState((state) => ({
           loading: false,
@@ -47,11 +52,16 @@ class PagesModal extends React.Component {
   }
 
   loadMore() {
-    this.setState({ loading: true, page: this.state.page + 1 }, this.loadPages.bind(this));
+    this.setState(
+      { loading: true, page: this.state.page + 1 },
+      this.loadPages.bind(this),
+    );
   }
 
   showExtra() {
-    return this.state.query.period !== 'realtime' && !this.state.query.filters.goal;
+    return (
+      this.state.query.period !== 'realtime' && !this.state.query.filters.goal
+    );
   }
 
   showPageviews() {
@@ -72,7 +82,9 @@ class PagesModal extends React.Component {
 
   renderPage(page) {
     const query = new URLSearchParams(window.location.search);
-    const timeOnPage = page['time_on_page'] ? durationFormatter(page['time_on_page']) : '-';
+    const timeOnPage = page['time_on_page']
+      ? durationFormatter(page['time_on_page'])
+      : '-';
     query.set('page', page.name);
 
     return (
@@ -80,7 +92,9 @@ class PagesModal extends React.Component {
         <td className="p-2">
           <Link
             disabled
-            href={`/${encodeURIComponent(this.props.site.domain)}?${query.toString()}`}
+            href={`/${encodeURIComponent(
+              this.props.site.domain,
+            )}?${query.toString()}`}
             className="block truncate hover:underline"
           >
             {page.name}
@@ -140,7 +154,11 @@ class PagesModal extends React.Component {
     } else if (this.state.moreResultsAvailable) {
       return (
         <div className="my-4 w-full text-center">
-          <button onClick={this.loadMore.bind(this)} type="button" className="button">
+          <button
+            onClick={this.loadMore.bind(this)}
+            type="button"
+            className="button"
+          >
             Load more
           </button>
         </div>

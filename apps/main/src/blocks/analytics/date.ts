@@ -2,7 +2,9 @@ import { Site } from './type';
 
 // https://stackoverflow.com/a/50130338
 export function formatISO(date: Date) {
-  return new Date(date.getTime() - date.getTimezoneOffset() * 60_000).toISOString().split('T')[0];
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60_000)
+    .toISOString()
+    .split('T')[0];
 }
 
 export function shiftMonths(date: Date, months: number) {
@@ -53,7 +55,7 @@ export function formatDayShort(date: Date) {
 }
 
 export function parseUTCDate(dateString: string) {
-  var date = new Date(dateString);
+  const date = new Date(dateString);
   return new Date(date.getTime() + date.getTimezoneOffset() * 60_000);
 }
 

@@ -27,7 +27,10 @@ interface Term {
   visitors: number;
 }
 
-export default class SearchTerms extends React.Component<SearchTermsProps, SearchTermsState> {
+export default class SearchTerms extends React.Component<
+  SearchTermsProps,
+  SearchTermsState
+> {
   state: SearchTermsState = {
     loading: true,
     searchTerms: null,
@@ -65,7 +68,10 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
 
   renderSearchTerm(term: Term) {
     return (
-      <div className="my-1 flex items-center justify-between text-sm" key={term.name}>
+      <div
+        className="my-1 flex items-center justify-between text-sm"
+        key={term.name}
+      >
         <Bar
           count={term.visitors}
           all={this.state.searchTerms!}
@@ -76,7 +82,9 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
             <span className="block md:truncate">{term.name}</span>
           </span>
         </Bar>
-        <span className="font-medium dark:text-gray-200">{numberFormatter(term.visitors)}</span>
+        <span className="font-medium dark:text-gray-200">
+          {numberFormatter(term.visitors)}
+        </span>
       </div>
     );
   }
@@ -101,7 +109,9 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
           <div>Cannot show search terms</div>
           {this.state.isAdmin && (
             <a
-              href={`/${encodeURIComponent(this.props.site.domain)}/settings/search-console`}
+              href={`/${encodeURIComponent(
+                this.props.site.domain,
+              )}/settings/search-console`}
               className="button mt-4"
             >
               Connect with Google
@@ -110,7 +120,10 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
         </div>
       );
     } else if (this.state.searchTerms!.length > 0) {
-      const valLabel = this.props.query.period === 'realtime' ? 'Current visitors' : 'Visitors';
+      const valLabel =
+        this.props.query.period === 'realtime'
+          ? 'Current visitors'
+          : 'Visitors';
 
       return (
         <React.Fragment>
@@ -119,7 +132,9 @@ export default class SearchTerms extends React.Component<SearchTermsProps, Searc
             <span>{valLabel}</span>
           </div>
 
-          {this.state.searchTerms!.map((element) => this.renderSearchTerm(element))}
+          {this.state.searchTerms!.map((element) =>
+            this.renderSearchTerm(element),
+          )}
         </React.Fragment>
       );
     } else {

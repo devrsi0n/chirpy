@@ -94,7 +94,9 @@ export default class PropertyBreakdown extends React.Component<
     if (this.props.query.filters['goal']) {
       api
         .getStats(
-          `/api/stats/${ANALYTICS_DOMAIN}/property/${encodeURIComponent(this.state.propKey)}`,
+          `/api/stats/${ANALYTICS_DOMAIN}/property/${encodeURIComponent(
+            this.state.propKey,
+          )}`,
           this.props.site,
           this.props.query,
           { limit: 100, page: this.state.page },
@@ -110,13 +112,21 @@ export default class PropertyBreakdown extends React.Component<
   }
 
   loadMore() {
-    this.setState({ loading: true, page: this.state.page + 1 }, this.fetchPropBreakdown.bind(this));
+    this.setState(
+      { loading: true, page: this.state.page + 1 },
+      this.fetchPropBreakdown.bind(this),
+    );
   }
 
   renderUrl(value: BreakDownItem) {
     if (isValidHttpUrl(value.name)) {
       return (
-        <a target="_blank" href={value.name} rel="noreferrer" className="hidden group-hover:block">
+        <a
+          target="_blank"
+          href={value.name}
+          rel="noreferrer"
+          className="hidden group-hover:block"
+        >
           <svg
             className="ml-1 -mt-1 inline h-4 w-4 text-gray-600 dark:text-gray-400"
             fill="currentColor"
@@ -181,7 +191,13 @@ export default class PropertyBreakdown extends React.Component<
   changePropKey = (newKey: string) => {
     storage.setItem(this.storageKey, newKey);
     this.setState(
-      { propKey: newKey, loading: true, breakdown: [], page: 1, moreResultsAvailable: false },
+      {
+        propKey: newKey,
+        loading: true,
+        breakdown: [],
+        page: 1,
+        moreResultsAvailable: false,
+      },
       this.fetchPropBreakdown,
     );
   };
@@ -198,7 +214,11 @@ export default class PropertyBreakdown extends React.Component<
     } else if (this.state.moreResultsAvailable) {
       return (
         <div className="my-4 w-full text-center">
-          <button onClick={this.loadMore.bind(this)} type="button" className="button">
+          <button
+            onClick={this.loadMore.bind(this)}
+            type="button"
+            className="button"
+          >
             Load more
           </button>
         </div>
@@ -207,7 +227,9 @@ export default class PropertyBreakdown extends React.Component<
   }
 
   renderBody() {
-    return this.state.breakdown.map((propValue) => this.renderPropValue(propValue));
+    return this.state.breakdown.map((propValue) =>
+      this.renderPropValue(propValue),
+    );
   }
 
   renderPill = (key: string) => {
@@ -239,7 +261,9 @@ export default class PropertyBreakdown extends React.Component<
             Breakdown by:
           </span>
           <ul className="flex flex-wrap pl-1 text-xs font-medium leading-5 text-gray-500 dark:text-gray-400 sm:pl-2">
-            {this.props.goal.prop_names.map((element) => this.renderPill(element))}
+            {this.props.goal.prop_names.map((element) =>
+              this.renderPill(element),
+            )}
           </ul>
         </div>
         {this.renderBody()}

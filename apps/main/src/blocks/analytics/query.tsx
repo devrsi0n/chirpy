@@ -8,7 +8,16 @@ import { formatDay, formatMonthYYYY, nowForSite, parseUTCDate } from './date';
 import * as storage from './storage';
 import { Site } from './type';
 
-const PERIODS = ['realtime', 'day', 'month', '7d', '30d', '6mo', '12mo', 'custom'] as const;
+const PERIODS = [
+  'realtime',
+  'day',
+  'month',
+  '7d',
+  '30d',
+  '6mo',
+  '12mo',
+  'custom',
+] as const;
 
 export type Query = {
   period: string;
@@ -45,7 +54,8 @@ export function parseQuery(querystring: string, site: Site): Query {
   const periodKey = `period__${site.domain}`;
 
   if (PERIODS.includes(period)) {
-    if (period !== 'custom' && period !== 'realtime') storage.setItem(periodKey, period);
+    if (period !== 'custom' && period !== 'realtime')
+      storage.setItem(periodKey, period);
   } else if (storage.getItem(periodKey)) {
     period = storage.getItem(periodKey);
   } else {
@@ -127,7 +137,12 @@ interface QueryLinkProps {
   className?: string;
 }
 
-function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.Element {
+function QueryLink({
+  query,
+  to,
+  onClick,
+  ...restProps
+}: QueryLinkProps): JSX.Element {
   const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -135,7 +150,13 @@ function QueryLink({ query, to, onClick, ...restProps }: QueryLinkProps): JSX.El
     onClick?.(e);
   };
   return (
-    <Link disabled {...restProps} href={generateHref(to)} onClick={handleClick} variant="plain" />
+    <Link
+      disabled
+      {...restProps}
+      href={generateHref(to)}
+      onClick={handleClick}
+      variant="plain"
+    />
   );
 }
 

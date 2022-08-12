@@ -75,7 +75,7 @@ function filterText(
   }
   if (key === 'props') {
     const [metaKey, metaValue] = Object.entries(value)[0];
-    const eventName = query.filters.goal ? query.filters.goal : 'event';
+    const eventName = query.filters.goal || 'event';
     return (
       <>
         {eventName}.{metaKey} is <strong>{metaValue}</strong>
@@ -93,7 +93,7 @@ function filterText(
     );
   }
   if (key === 'os_version') {
-    const osName = query.filters.os ? query.filters.os : 'OS';
+    const osName = query.filters.os || 'OS';
     return (
       <>
         {osName}.Version {type} <strong>{value}</strong>

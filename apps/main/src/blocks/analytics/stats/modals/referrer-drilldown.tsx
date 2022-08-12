@@ -51,7 +51,9 @@ class ReferrerDrilldownModal extends React.Component<
   }
 
   showExtra() {
-    return this.state.query.period !== 'realtime' && !this.state.query.filters.goal;
+    return (
+      this.state.query.period !== 'realtime' && !this.state.query.filters.goal
+    );
   }
 
   showConversionRate() {
@@ -83,7 +85,12 @@ class ReferrerDrilldownModal extends React.Component<
   renderExternalLink(name) {
     if (name !== 'Direct / None') {
       return (
-        <a target="_blank" href={'//' + name} rel="noreferrer" className="hidden group-hover:block">
+        <a
+          target="_blank"
+          href={'//' + name}
+          rel="noreferrer"
+          className="hidden group-hover:block"
+        >
           <svg
             className="ml-1 -mt-1 inline h-4 w-4 text-gray-600 dark:text-gray-400"
             fill="currentColor"
@@ -168,7 +175,9 @@ class ReferrerDrilldownModal extends React.Component<
     } else if (this.state.referrers) {
       return (
         <React.Fragment>
-          <h1 className="text-xl font-bold dark:text-gray-100">Referrer drilldown</h1>
+          <h1 className="text-xl font-bold dark:text-gray-100">
+            Referrer drilldown
+          </h1>
 
           <div className="my-4 border-b border-gray-300 dark:border-gray-500"></div>
           <main className="modal__content mt-0">
@@ -234,7 +243,9 @@ class ReferrerDrilldownModal extends React.Component<
                   )}
                 </tr>
               </thead>
-              <tbody>{this.state.referrers.map(this.renderReferrer.bind(this))}</tbody>
+              <tbody>
+                {this.state.referrers.map(this.renderReferrer.bind(this))}
+              </tbody>
             </table>
           </main>
         </React.Fragment>
