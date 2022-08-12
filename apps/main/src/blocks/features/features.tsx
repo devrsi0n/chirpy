@@ -17,10 +17,10 @@ const contents: FeatureProps[] = [
         <span>
           You only need minimal info to get started, you can sign-in as an
           anonymous user or sign-in with email/magic link or social login
-          providers. We never track you or sell your data.
+          providers. We never track you or sell your data. Learn more about
         </span>
-        <Link className="ml-2" href="/docs/features/privacy-friendly">
-          Learn more about privacy
+        <Link className="ml-1" href="/docs/features/privacy-friendly">
+          privacy.
         </Link>
       </>
     ),
