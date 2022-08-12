@@ -7,6 +7,7 @@ const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
+const isProd = process.env.NODE_ENV === 'production';
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
@@ -50,6 +51,40 @@ module.exports = withPlugins(
             },
           ],
         },
+        ...(isProd
+          ? [
+              {
+                source: '/_next/static/(.*)',
+                locale: false,
+                headers: [
+                  {
+                    key: 'Cache-Control',
+                    value: 'public, max-age=31536000, immutable',
+                  },
+                ],
+              },
+              {
+                source: '/fonts/(.*)',
+                locale: false,
+                headers: [
+                  {
+                    key: 'Cache-Control',
+                    value: 'public, max-age=31536000, immutable',
+                  },
+                ],
+              },
+              {
+                source: '/videos/(.*)',
+                locale: false,
+                headers: [
+                  {
+                    key: 'Cache-Control',
+                    value: 'public, max-age=31536000, immutable',
+                  },
+                ],
+              },
+            ]
+          : []),
       ];
     },
     webpack: function (config, options) {

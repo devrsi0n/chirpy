@@ -44,7 +44,8 @@ export function Avatar({
         aria-label={alt}
       />
     );
-    const customAvatarValue = name || username || email;
+    // Keep this order to reduce name collision
+    const customAvatarValue = username || email || name;
     if (customAvatarValue) {
       return (
         <DeferredCustomAvatar

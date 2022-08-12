@@ -32,7 +32,7 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
           pattern: {
             value: /^[\w ]{3,24}$/,
             message:
-              'Name can only have alphabet, number, _ or empty space, and it must be 3-24 characters long',
+              'Name can only have alphabets, numbers, _ or empty spaces, and it must be 3-24 characters long',
           },
         })}
         errorMessage={errors?.name}
