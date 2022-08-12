@@ -31,10 +31,15 @@ class ExitPagesModal extends React.Component {
     const { query, page } = this.state;
 
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/exit-pages`, this.props.site, query, {
-        limit: 100,
-        page,
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/exit-pages`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+        },
+      )
       .then((res) =>
         this.setState((state) => ({
           loading: false,
@@ -45,7 +50,10 @@ class ExitPagesModal extends React.Component {
   }
 
   loadMore() {
-    this.setState({ loading: true, page: this.state.page + 1 }, this.loadPages.bind(this));
+    this.setState(
+      { loading: true, page: this.state.page + 1 },
+      this.loadPages.bind(this),
+    );
   }
 
   formatPercentage(number) {
@@ -81,7 +89,9 @@ class ExitPagesModal extends React.Component {
         <td className="p-2">
           <Link
             disabled
-            href={`/${encodeURIComponent(this.props.site.domain)}?${query.toString()}`}
+            href={`/${encodeURIComponent(
+              this.props.site.domain,
+            )}?${query.toString()}`}
             className="hover:underline"
           >
             {page.name}
@@ -124,7 +134,11 @@ class ExitPagesModal extends React.Component {
     } else if (this.state.moreResultsAvailable) {
       return (
         <div className="my-4 w-full text-center">
-          <button onClick={this.loadMore.bind(this)} type="button" className="button">
+          <button
+            onClick={this.loadMore.bind(this)}
+            type="button"
+            className="button"
+          >
             Load more
           </button>
         </div>

@@ -11,7 +11,12 @@ interface FadeInProps {
 
 export default function FadeIn({ className, show, children }: FadeInProps) {
   return (
-    <div className={clsx(show ? styles['fade-enter-active'] : styles['fade-enter'], className)}>
+    <div
+      className={clsx(
+        show ? styles['fade-enter-active'] : styles['fade-enter'],
+        className,
+      )}
+    >
       {children}
     </div>
   );

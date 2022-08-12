@@ -49,7 +49,13 @@ export default function SearchSelect(props: SearchSelectProps) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  function fetchOptions({ inputValue, isOpen }: { inputValue: string; isOpen: boolean }) {
+  function fetchOptions({
+    inputValue,
+    isOpen,
+  }: {
+    inputValue: string;
+    isOpen: boolean;
+  }) {
     setLoading(isOpen);
 
     return props.fetchOptions(inputValue || '').then((loadedItems) => {
@@ -95,8 +101,15 @@ export default function SearchSelect(props: SearchSelectProps) {
   });
 
   const keydown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
-    // @ts-ignore
-    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.isComposing || e.keyCode === 229)
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      e.shiftKey ||
+      e.altKey ||
+      // @ts-ignore
+      e.isComposing ||
+      e.keyCode === 229
+    )
       return;
 
     if (e.key === 'Enter' && isOpen && highlightedIndex === -1) {
@@ -132,12 +145,14 @@ export default function SearchSelect(props: SearchSelectProps) {
           <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 sm:text-sm">
             {!loading && items.length === 0 && (
               <li className="select-none py-2 px-3 text-gray-500">
-                No matches found in the current dashboard. Try selecting a different time range or
-                searching for something different
+                No matches found in the current dashboard. Try selecting a
+                different time range or searching for something different
               </li>
             )}
             {loading && items.length === 0 && (
-              <li className="select-none py-2 px-3 text-gray-500">Loading options...</li>
+              <li className="select-none py-2 px-3 text-gray-500">
+                Loading options...
+              </li>
             )}
 
             {items.map((item: any, index) => (

@@ -21,9 +21,15 @@ export default function Bar({
   const width = barWidth(count, all);
 
   return (
-    <div className="relative w-full" style={{ maxWidth: `calc(100% - ${maxWidthDeduction})` }}>
+    <div
+      className="relative w-full"
+      style={{ maxWidth: `calc(100% - ${maxWidthDeduction})` }}
+    >
       <div
-        className={clsx('absolute inset-0 h-full dark:bg-grayd-900/25', colorMap[color])}
+        className={clsx(
+          'absolute inset-0 h-full dark:bg-grayd-900/25',
+          colorMap[color],
+        )}
         style={{ width: `${width}%` }}
       ></div>
       {children}

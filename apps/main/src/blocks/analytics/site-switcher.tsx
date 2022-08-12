@@ -62,7 +62,15 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
     const { sites } = this.state;
 
     if (e.target.tagName === 'INPUT') return true;
-    if (e.ctrlKey || e.metaKey || e.altKey || e.isComposing || e.keyCode === 229 || !sites) return;
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      e.altKey ||
+      e.isComposing ||
+      e.keyCode === 229 ||
+      !sites
+    )
+      return;
 
     const siteNum = Number.parseInt(e.key);
 
@@ -93,19 +101,25 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
         : 'hover:bg-gray-100 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-900 dark:focus:text-gray-100';
     return (
       <a
-        href={domain === this.props.site.domain ? '' : `/${encodeURIComponent(domain)}`}
+        href={
+          domain === this.props.site.domain
+            ? ''
+            : `/${encodeURIComponent(domain)}`
+        }
         key={domain}
         className={`flex items-center justify-between truncate px-4 py-2 leading-5 text-gray-700 dark:text-gray-300 md:text-sm ${extraClass}`}
       >
         <span>
           <img
-            src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(
-              domain,
-            )}`}
+            src={`${
+              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+            }/favicon/sources/${encodeURIComponent(domain)}`}
             className="mr-2 inline w-4 align-middle"
             alt={`Favorite icon for ${domain}`}
           />
-          <span className="inline-block max-w-3xs truncate pr-2 align-middle">{domain}</span>
+          <span className="inline-block max-w-3xs truncate pr-2 align-middle">
+            {domain}
+          </span>
         </span>
         {index < 9 && <span>{index + 1}</span>}
       </a>
@@ -154,13 +168,17 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       );
     } else if (this.state.error) {
       return (
-        <div className="mx-auto px-4 py-6 dark:text-gray-100">Something went wrong, try again</div>
+        <div className="mx-auto px-4 py-6 dark:text-gray-100">
+          Something went wrong, try again
+        </div>
       );
     } else {
       return (
         <React.Fragment>
           {this.renderSettingsLink()}
-          <div className="py-1">{this.state.sites.map(this.renderSiteLink.bind(this))}</div>
+          <div className="py-1">
+            {this.state.sites.map(this.renderSiteLink.bind(this))}
+          </div>
           <div className="border-t border-gray-200 dark:border-gray-500"></div>
           <div className="py-1">
             <a
@@ -193,7 +211,11 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
   renderArrow() {
     if (this.props.loggedIn) {
       return (
-        <svg className="-mr-1 ml-1 h-5 w-5 md:ml-2" viewBox="0 0 20 20" fill="currentColor">
+        <svg
+          className="-mr-1 ml-1 h-5 w-5 md:ml-2"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
           <path
             fillRule="evenodd"
             d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -226,7 +248,9 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
             className="mr-1 inline w-4 align-middle md:mr-2"
             alt={`Icon of ${this.props.site.domain}`}
           />
-          <span className="hidden sm:inline-block">{this.props.site.domain}</span>
+          <span className="hidden sm:inline-block">
+            {this.props.site.domain}
+          </span>
           {this.renderArrow()}
         </button>
 

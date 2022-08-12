@@ -26,14 +26,21 @@ export interface ListReportProps extends Partial<Pick<BarProps, 'color'>> {
   filter: { [key: string]: string };
 }
 
-type ListReportItem = { count: number; name: string; percentage: number | undefined };
+type ListReportItem = {
+  count: number;
+  name: string;
+  percentage: number | undefined;
+};
 
 interface ListReportState {
   loading: boolean;
   list: ListReportItem[] | null;
 }
 
-export default class ListReport extends React.Component<ListReportProps, ListReportState> {
+export default class ListReport extends React.Component<
+  ListReportProps,
+  ListReportState
+> {
   state: ListReportState = { loading: true, list: null };
 
   componentDidUpdate(prevProps: ListReportProps) {
@@ -49,7 +56,9 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
 
   fetchData() {
     this.setState({ loading: true, list: null });
-    this.props.fetchData().then((res) => this.setState({ loading: false, list: res }));
+    this.props
+      .fetchData()
+      .then((res) => this.setState({ loading: false, list: res }));
   }
 
   label() {
@@ -79,7 +88,10 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
     const maxWidthDeduction = this.showConversionRate() ? '10rem' : '5rem';
 
     return (
-      <div className="my-1 flex items-center justify-between text-sm" key={listItem.name}>
+      <div
+        className="my-1 flex items-center justify-between text-sm"
+        key={listItem.name}
+      >
         <Bar
           count={listItem.count}
           all={this.state.list!}
@@ -104,11 +116,15 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
         <ViewNumber>
           {numberFormatter(listItem.count)}
           {(listItem.percentage || 0) >= 0 && (
-            <span className="inline-block w-8 text-right text-xs">({listItem.percentage}%)</span>
+            <span className="inline-block w-8 text-right text-xs">
+              ({listItem.percentage}%)
+            </span>
           )}
         </ViewNumber>
-        {/* @ts-ignore */}
-        {this.showConversionRate() && <ViewNumber>{listItem.conversion_rate}%</ViewNumber>}
+        {this.showConversionRate() && (
+          /* @ts-ignore */
+          <ViewNumber>{listItem.conversion_rate}%</ViewNumber>
+        )}
       </div>
     );
   }
@@ -121,7 +137,9 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
             <span>{this.props.keyLabel}</span>
             <span className="text-right">
               <span className="inline-block w-20">{this.label()}</span>
-              {this.showConversionRate() && <span className="inline-block w-20">CR</span>}
+              {this.showConversionRate() && (
+                <span className="inline-block w-20">CR</span>
+              )}
             </span>
           </div>
           {this.state.list.map((item: any) => this.renderListItem(item))}
@@ -134,7 +152,10 @@ export default class ListReport extends React.Component<ListReportProps, ListRep
 
   render() {
     return (
-      <LazyLoader onVisible={this.onVisible} className="flex flex-grow flex-col">
+      <LazyLoader
+        onVisible={this.onVisible}
+        className="flex flex-grow flex-col"
+      >
         {this.state.loading && (
           <div className={clsx('mx-auto mt-44', styles.loading)}>
             <div></div>

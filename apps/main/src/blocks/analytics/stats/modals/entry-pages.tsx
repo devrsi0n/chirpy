@@ -25,7 +25,10 @@ interface EntryPagesModalState {
   moreResultsAvailable: boolean;
 }
 
-class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesModalState> {
+class EntryPagesModal extends React.Component<
+  EntryPagesModalProps,
+  EntryPagesModalState
+> {
   state: EntryPagesModalState = {
     loading: true,
     query: parseQuery(this.props.location.search, this.props.site),
@@ -42,10 +45,15 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
     const { query, page } = this.state;
 
     api
-      .getStats(`/api/stats/${ANALYTICS_DOMAIN}/entry-pages`, this.props.site, query, {
-        limit: 100,
-        page,
-      })
+      .getStats(
+        `/api/stats/${ANALYTICS_DOMAIN}/entry-pages`,
+        this.props.site,
+        query,
+        {
+          limit: 100,
+          page,
+        },
+      )
       .then((res) =>
         this.setState((state) => ({
           loading: false,
@@ -95,7 +103,9 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
       <tr className="text-sm dark:text-gray-200" key={page.name}>
         <td className="p-2">
           <Link
-            href={`/${encodeURIComponent(this.props.site.domain)}?${query.toString()}`}
+            href={`/${encodeURIComponent(
+              this.props.site.domain,
+            )}?${query.toString()}`}
             className="hover:underline"
             disabled
           >
@@ -139,7 +149,11 @@ class EntryPagesModal extends React.Component<EntryPagesModalProps, EntryPagesMo
     } else if (this.state.moreResultsAvailable) {
       return (
         <div className="my-4 w-full text-center">
-          <button onClick={this.loadMore.bind(this)} type="button" className="button">
+          <button
+            onClick={this.loadMore.bind(this)}
+            type="button"
+            className="button"
+          >
             Load more
           </button>
         </div>
