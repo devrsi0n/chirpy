@@ -7,7 +7,6 @@ import { Button } from '$/components/button';
 import { Dialog } from '$/components/dialog';
 import { IconPlusCircle } from '$/components/icons';
 import { Spinner } from '$/components/spinner';
-import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useInsertOneProjectMutation } from '$/graphql/generated/project';

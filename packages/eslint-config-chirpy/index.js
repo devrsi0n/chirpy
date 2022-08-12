@@ -58,4 +58,13 @@ module.exports = {
 
     'jest/expect-expect': 'off',
   },
+  overrides: [
+    {
+      files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx'],
+      rules: {
+        'react/display-name': 'off',
+        'unicorn/prefer-event-target': 'off',
+      },
+    },
+  ],
 };
