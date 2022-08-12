@@ -6,14 +6,14 @@ import { DeferredCustomAvatar } from './custom-avatar';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl';
 
-export type AvatarProps = Omit<React.ComponentProps<'img'>, 'src'> &
+export type AvatarProps = Omit<React.ComponentProps<'img'>, 'src' | 'alt'> &
   React.PropsWithChildren<{
-    src?: string | null;
+    src: string | null | undefined;
+    email: string | null | undefined;
+    name: string | null | undefined;
+    username: string | null | undefined;
+    alt: string | null | undefined;
     size?: Size;
-    className?: string;
-    email?: string | null;
-    name?: string | null;
-    username?: string | null;
   }>;
 
 const sizeStyles: Record<Size, [string, number]> = {
@@ -26,7 +26,7 @@ const sizeStyles: Record<Size, [string, number]> = {
 export function Avatar({
   size = 'md',
   className,
-  alt = 'Avatar',
+  alt,
   children,
   src,
   email,
@@ -34,6 +34,7 @@ export function Avatar({
   username,
   ...imgProps
 }: AvatarProps): JSX.Element {
+  alt ||= 'Default avatar';
   const [sizeStyle, iconSize] = sizeStyles[size];
   if (!src) {
     const placeholder = (

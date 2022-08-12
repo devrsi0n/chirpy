@@ -61,7 +61,14 @@ export function NotificationItem({
         {ICON_MAP[message.type]}
         <div className="flex-1">
           <div className="flex flex-row justify-between">
-            <Avatar src={message.triggeredBy.avatar} className="mb-2" />
+            <Avatar
+              src={message.triggeredBy.avatar}
+              alt={`${message.triggeredBy.name}'s avatar`}
+              email={message.triggeredBy.email}
+              name={message.triggeredBy.name}
+              username={message.triggeredBy.username}
+              className="mb-2"
+            />
             <button
               type="button"
               className="hidden h-fit translate-x-3 -translate-y-1 rounded-full p-0.5 hover:bg-primary-600 group-hover:inline"

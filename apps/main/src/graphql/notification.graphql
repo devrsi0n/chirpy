@@ -7,6 +7,8 @@ subscription currentNotificationMessages($userId: uuid!) {
     recipient {
       id
       name
+      username
+      email
       avatar
     }
     type
@@ -14,6 +16,8 @@ subscription currentNotificationMessages($userId: uuid!) {
     triggeredBy {
       id
       name
+      username
+      email
       avatar
     }
     content

@@ -3,6 +3,8 @@ import '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { isENVDev } from '$/server/utilities/env';
+
 const MIN_PREDICTION_CONFIDENCE = 0.9;
 
 export function getToxicModel() {
@@ -29,6 +31,12 @@ export async function checkToxicText(
   req: NextApiRequest,
   res: NextApiResponse<ICheckToxicText>,
 ): Promise<void> {
+  if (isENVDev) {
+    // We can't load @tensorflow/tfjs due to network issues
+    return res.status(200).json({
+      matchedLabels: [],
+    });
+  }
   const { text } = req.query as {
     [key: string]: string;
   };
@@ -41,7 +49,7 @@ export async function checkToxicText(
       }
       return prev;
     },
-    { matchedLabels: [] },
+    { matchedLabels: [] } as ICheckToxicText,
   ) as ICheckToxicText;
   res.status(200).json(resp);
 }

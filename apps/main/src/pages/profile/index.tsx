@@ -126,8 +126,10 @@ export default function Profile(): JSX.Element {
                 src={avatar}
                 size="xl"
                 className="absolute translate-y-1/2"
-                {...(name && { alt: name })}
-                {...{ name, username, email }}
+                alt={`${name}'s avatar`}
+                email={email}
+                name={name}
+                username={username}
               />
             )}
           </div>
