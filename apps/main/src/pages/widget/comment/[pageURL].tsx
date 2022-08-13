@@ -172,6 +172,7 @@ export const getStaticProps: GetStaticProps<
         theme: (pageByPk.project.theme as Theme) || null,
         isWidget: true,
       },
+      revalidate: 5 * 60,
     };
   } catch (error) {
     console.error(superjson.stringify(error));

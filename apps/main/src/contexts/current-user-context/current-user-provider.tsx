@@ -2,10 +2,12 @@ import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { useCurrentUserQuery } from '$/graphql/generated/user';
+import { useHasMounted } from '$/hooks/use-has-mounted';
 
 import {
   CurrentUserContext,
   CurrentUserContextType,
+  EMPTY_CURRENT_USER_CONTEXT,
 } from './current-user-context';
 
 export type CurrentUserProviderProps = React.PropsWithChildren<{
@@ -23,8 +25,13 @@ export function CurrentUserProvider({
     // @ts-ignore
     variables: { id: session?.user?.id },
   });
-
+  const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
+    if (!hasMounted) {
+      // Return empty data on client side, to fix the hydration mismatch issue
+      return EMPTY_CURRENT_USER_CONTEXT;
+    }
+
     // Reset data if session is invalid
     const _data: CurrentUserContextType['data'] = session?.user.id
       ? {

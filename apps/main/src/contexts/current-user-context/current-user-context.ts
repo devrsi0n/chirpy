@@ -20,8 +20,12 @@ export type CurrentUserContextType = UserQueryState & {
   };
 };
 
-export const CurrentUserContext = React.createContext<CurrentUserContextType>({
+export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
   isSignIn: false,
   data: {},
   loading: false,
-});
+};
+
+export const CurrentUserContext = React.createContext<CurrentUserContextType>(
+  EMPTY_CURRENT_USER_CONTEXT,
+);
