@@ -24,12 +24,14 @@ export function useSignInWindow({
     );
   };
 
-  useEventListener('storage', (event) => {
+  useEventListener('storage', async (event) => {
     if (event.key === SIGN_IN_SUCCESS_KEY && event.newValue === 'true') {
       popupWindow.current?.close();
       popupWindow.current = null;
       // Force to refresh session
-      getSession();
+      await getSession();
+      // TODO: we must reload to fix graphql request didn't trigger
+      location.reload();
     }
   });
 

@@ -28,7 +28,7 @@ const SIZE_STYLES: Record<
   base: {
     content: 'px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 max-w-lg',
     title: 'text-2xl font-bold leading-none',
-    footer: 'px-0 py-6',
+    footer: 'px-6 pt-4 pb-6 xs:px-0',
     icon: 24,
   },
 };
