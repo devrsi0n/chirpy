@@ -112,39 +112,41 @@ export default function Dashboard(): JSX.Element {
         )}
       </section>
       <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-        <form className="flex w-80 flex-col space-y-4">
-          <TextField
-            {...register('name', {
-              required: { value: true, message: 'Name is required' },
-              pattern: {
-                value: /^\w+$/,
-                message: `Only word characters are allowed`,
-              },
-              minLength: { value: 3, message: 'At least 3 characters' },
-              maxLength: { value: 16, message: 'At most 16 characters' },
-            })}
-            aria-label="Name of this project"
-            label="Name"
-            errorMessage={errors.name}
-            placeholder="swift"
-            className="w-full"
-          />
-          <TextField
-            {...register('domain', {
-              required: { value: true, message: 'Domain is required' },
-              pattern: {
-                value:
-                  /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
-                message: 'Invalid domain',
-              },
-            })}
-            label="Domain"
-            hintText="Associate a domain with this project"
-            errorMessage={errors.domain}
-            placeholder="example.com"
-            className="w-full"
-          />
-        </form>
+        <Dialog.Body>
+          <form className="flex w-80 flex-col space-y-4">
+            <TextField
+              {...register('name', {
+                required: { value: true, message: 'Name is required' },
+                pattern: {
+                  value: /^\w+$/,
+                  message: `Only word characters are allowed`,
+                },
+                minLength: { value: 3, message: 'At least 3 characters' },
+                maxLength: { value: 16, message: 'At most 16 characters' },
+              })}
+              aria-label="Name of this project"
+              label="Name"
+              errorMessage={errors.name}
+              placeholder="swift"
+              className="w-full"
+            />
+            <TextField
+              {...register('domain', {
+                required: { value: true, message: 'Domain is required' },
+                pattern: {
+                  value:
+                    /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
+                  message: 'Invalid domain',
+                },
+              })}
+              label="Domain"
+              hintText="Associate a domain with this project"
+              errorMessage={errors.domain}
+              placeholder="example.com"
+              className="w-full"
+            />
+          </form>
+        </Dialog.Body>
         <Dialog.Footer>
           <Button onClick={handleCloseDialog} className="w-full sm:w-auto">
             Cancel

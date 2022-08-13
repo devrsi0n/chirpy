@@ -157,10 +157,12 @@ export function ProjectCard({
         show={!!deletingProjectName}
         onClose={handleCloseDialog}
       >
-        <Text>
-          All of your project data will be deleted permanently. This action
-          cannot be undone.
-        </Text>
+        <Dialog.Body>
+          <Text>
+            All of your project data will be deleted permanently. This action
+            cannot be undone.
+          </Text>
+        </Dialog.Body>
         <Dialog.Footer>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button

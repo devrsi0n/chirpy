@@ -40,25 +40,27 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         onClose={() => setShowDialog(false)}
         styles={{ content: `!max-w-2xl sm:!px-14 sm:!py-10` }}
       >
-        <div className="">
-          <Heading as="h3" className="mb-3">
-            Usage on any website
-          </Heading>
-          <div className="space-y-2">
-            <Text variant="secondary">
-              To embed the comment widget on your website, first add the script
-              tag with your project id to the HTML:
-            </Text>
-            <Code>
-              {`<script defer src="${APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
-            </Code>
-            <Text variant="secondary">
-              Then, add the data-chirpy-comment attribute to any HTML element
-              that should render the widget:
-            </Text>
-            <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
+        <Dialog.Body>
+          <div className="">
+            <Heading as="h3" className="mb-3">
+              Usage on any website
+            </Heading>
+            <div className="space-y-2">
+              <Text variant="secondary">
+                To embed the comment widget on your website, first add the
+                script tag with your project id to the HTML:
+              </Text>
+              <Code>
+                {`<script defer src="${APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
+              </Code>
+              <Text variant="secondary">
+                Then, add the data-chirpy-comment attribute to any HTML element
+                that should render the widget:
+              </Text>
+              <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
+            </div>
           </div>
-        </div>
+        </Dialog.Body>
       </Dialog>
     </div>
   );

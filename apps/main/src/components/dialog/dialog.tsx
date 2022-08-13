@@ -28,12 +28,17 @@ const SIZE_STYLES: Record<
   base: {
     content: 'px-6 pt-4 pb-0 sm:px-8 sm:pt-6 sm:pb-0 max-w-lg',
     title: 'text-2xl font-bold leading-none',
-    footer: 'px-6 pt-4 pb-6 xs:px-0',
+    footer: 'px-6 pt-4 pb-6 sm:px-8',
     icon: 24,
   },
 };
 
-export type DialogProps = React.PropsWithChildren<{
+export type DialogChild =
+  | React.ReactElement<DialogBodyProps>
+  | React.ReactElement<DialogFooterProps>;
+
+export type DialogProps = {
+  children: DialogChild | DialogChild[];
   show: boolean;
   title: React.ReactNode;
   styles?: {
@@ -49,7 +54,7 @@ export type DialogProps = React.PropsWithChildren<{
   onClose: (value: boolean) => void;
   type?: 'alert' | 'default';
   size?: Size;
-}>;
+};
 
 export function Dialog({
   title,
@@ -61,18 +66,13 @@ export function Dialog({
   type = 'default',
   size = 'base',
 }: DialogProps): JSX.Element {
-  let footer: React.ReactElement | null = null;
-  const otherChildren: React.ReactElement[] = [];
-  React.Children.forEach(children, (child) => {
-    if (
-      React.isValidElement(child) &&
-      (child as React.ReactElement).type === DialogFooter
-    ) {
-      footer = React.cloneElement(child as React.ReactElement, { size });
-    } else {
-      otherChildren.push(child as React.ReactElement);
-    }
-  });
+  const childArray = React.Children.toArray(children);
+  const footer = childArray.find(
+    (child) => (child as React.ReactElement).type === DialogFooter,
+  );
+  const body = childArray.find(
+    (child) => (child as React.ReactElement).type === DialogBody,
+  );
   const sizeStyles = SIZE_STYLES[size];
   return (
     <AnimatePresence>
@@ -127,14 +127,11 @@ export function Dialog({
                         {title}
                       </HeadlessDialog.Title>
                     </div>
-                    <div className="mt-4">
-                      <div className="text-sm text-gray-1100">
-                        {otherChildren}
-                      </div>
-                    </div>
+                    {body}
                   </div>
                 </div>
-                {footer}
+                {footer &&
+                  React.cloneElement(footer as React.ReactElement, { size })}
               </HeadlessDialog.Panel>
             </m.div>
           </div>
@@ -145,8 +142,25 @@ export function Dialog({
 }
 
 Dialog.Footer = DialogFooter;
+Dialog.Body = DialogBody;
 
-export type IDialogFooterProps = React.PropsWithChildren<
+export type DialogBodyProps = React.PropsWithChildren<
+  React.ComponentProps<'div'>
+>;
+
+function DialogBody({
+  children,
+  className,
+  ...divProps
+}: DialogBodyProps): JSX.Element {
+  return (
+    <div {...divProps} className={clsx('mt-4', className)}>
+      <div className="text-sm text-gray-1100">{children}</div>
+    </div>
+  );
+}
+
+export type DialogFooterProps = React.PropsWithChildren<
   React.ComponentProps<'div'>
 > &
   Pick<DialogProps, 'size'>;
@@ -156,7 +170,7 @@ function DialogFooter({
   children,
   size = 'base',
   ...restProps
-}: IDialogFooterProps): JSX.Element {
+}: DialogFooterProps): JSX.Element {
   return (
     <div
       {...restProps}

@@ -44,7 +44,7 @@ function renderComponent() {
       onClose={mockHandleClose}
       showDismissButton
     >
-      {content}
+      <Dialog.Body>{content}</Dialog.Body>
     </Dialog>,
   );
 }
