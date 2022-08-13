@@ -5,7 +5,7 @@ export async function revalidateCommentWidget(
   res: NextApiResponse,
 ) {
   await Promise.allSettled([
-    res.revalidate(`/widget/comment/${pageURL}`),
+    res.revalidate(`/widget/comment/${encodeURIComponent(pageURL)}`),
     // TODO: Revalidate the timeline page
     // res.unstable_revalidate(`/widget/comment/timeline/${pageURL}`),
   ]);
