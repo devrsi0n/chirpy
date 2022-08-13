@@ -257,7 +257,7 @@ importers:
       tsconfig-paths-webpack-plugin: 3.5.2
       type-fest: 2.15.1
       typescript: 4.7.4
-      urql: 2.2.2
+      urql: 2.2.3
       web-push: 3.5.0
       webpack: 5.73.0
       whatwg-fetch: 3.6.2
@@ -308,7 +308,7 @@ importers:
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.2.0_3xcjr4wz26biff45sz3jtokgje
       next-themes: 0.2.0_3xcjr4wz26biff45sz3jtokgje
-      next-urql: 3.3.3_react@18.2.0+urql@2.2.2
+      next-urql: 3.3.3_react@18.2.0+urql@2.2.3
       nodemailer: 6.7.7
       patch-package: 6.4.7
       react: 18.2.0
@@ -325,7 +325,7 @@ importers:
       super-tiny-icons: 0.4.0
       superjson: 1.9.1
       type-fest: 2.15.1
-      urql: 2.2.2_aez2jvt6lsvokp3l4ousdbdxf4
+      urql: 2.2.3_aez2jvt6lsvokp3l4ousdbdxf4
       web-push: 3.5.0
       wonka: 4.0.15
       ws: 8.8.0
@@ -6807,6 +6807,16 @@ packages:
 
   /@urql/core/2.5.0_graphql@16.5.0:
     resolution: {integrity: sha512-xXdcgb0H3nNTP4OfC+5T3CHJ0iz7Jj0QQYSYhN/hvKrzFnisPz2n6WXmvsHmMXk5bJHsr39kx4eOHcpsJuyCew==}
+    peerDependencies:
+      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
+    dependencies:
+      '@graphql-typed-document-node/core': 3.1.1_graphql@16.5.0
+      graphql: 16.5.0
+      wonka: 4.0.15
+    dev: false
+
+  /@urql/core/2.6.1_graphql@16.5.0:
+    resolution: {integrity: sha512-gYrEHy3tViJhwIhauK6MIf2Qp09QTsgNHZRd0n71rS+hF6gdwjspf1oKljl4m25+272cJF7fPjBUGmjaiEr7Kg==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
     dependencies:
@@ -16008,7 +16018,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /next-urql/3.3.3_react@18.2.0+urql@2.2.2:
+  /next-urql/3.3.3_react@18.2.0+urql@2.2.3:
     resolution: {integrity: sha512-mKdpbvxW7FifHjupRKNjE1YuZxhLF+GlN/y1sARcUSEdrCv10dRkFGQl03p4UpWtdggCyZ5lOVBBaQGW7UNfiQ==}
     peerDependencies:
       react: '>=16.8.0 || 18'
@@ -16016,7 +16026,7 @@ packages:
     dependencies:
       react: 18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
-      urql: 2.2.2_aez2jvt6lsvokp3l4ousdbdxf4
+      urql: 2.2.3_aez2jvt6lsvokp3l4ousdbdxf4
     dev: false
 
   /next/12.2.5_biqbaboplfbrettd7655fr4n2y:
@@ -21681,13 +21691,13 @@ packages:
     resolution: {integrity: sha512-RtuPeMy7c1UrHwproMZN9gN6kiZ0SvJwRaEzwZY0j9MypEkFqyBaKv176jvlPtg58Zh36bOkS0NFABXMHvvGCA==}
     dev: false
 
-  /urql/2.2.2_aez2jvt6lsvokp3l4ousdbdxf4:
-    resolution: {integrity: sha512-jaVhDxWS2gfJLWWupFXtRkTCuGeRX+b9v19PU6TnKIJ7VP+xyrgpNHghHcTBGo58F+rxvCXVNEvSvdlKFMiHhg==}
+  /urql/2.2.3_aez2jvt6lsvokp3l4ousdbdxf4:
+    resolution: {integrity: sha512-XMkSYJKW9s4ZlbSuxcUz3fTBIykOn0sGileRXQeyZpaRBXJPVz5saSY05k7jdefNxShZtTI+/nr7PYUWQertfg==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
       react: '>= 16.8.0 || 18'
     dependencies:
-      '@urql/core': 2.5.0_graphql@16.5.0
+      '@urql/core': 2.6.1_graphql@16.5.0
       graphql: 16.5.0
       react: 18.2.0
       wonka: 4.0.15

@@ -20,20 +20,25 @@ export function CurrentUserProvider({
   const sessionIsLoading = status === 'loading';
   const [{ data, ...restProps }, refetchData] = useCurrentUserQuery({
     ...gqlOptions,
-    variables: { id: session?.user?.id || '-1' },
+    // @ts-ignore
+    variables: { id: session?.user?.id },
   });
 
   const value = React.useMemo<CurrentUserContextType>(() => {
+    // Reset data if session is invalid
+    const _data: CurrentUserContextType['data'] = session?.user.id
+      ? {
+          ...session?.user,
+          ...data?.userByPk,
+          editableProjectIds: session?.user.editableProjectIds || [],
+        }
+      : {};
     return {
       ...restProps,
       loading: sessionIsLoading,
-      data: {
-        ...session?.user,
-        ...data?.userByPk,
-        editableProjectIds: session?.user.editableProjectIds || [],
-      },
+      data: _data,
       refetchData,
-      isSignIn: !!data?.userByPk?.id,
+      isSignIn: !!_data.id,
     };
   }, [data?.userByPk, restProps, refetchData, session, sessionIsLoading]);
 

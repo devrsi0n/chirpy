@@ -17,10 +17,7 @@ export function GQLClientProvider({
     createGqlClient(session?.hasuraToken),
   );
   React.useEffect(() => {
-    if (!session?.hasuraToken) {
-      return;
-    }
-    setClient(createGqlClient(session.hasuraToken));
+    setClient(createGqlClient(session?.hasuraToken));
   }, [session?.hasuraToken]);
 
   return <Provider value={client}>{children}</Provider>;
