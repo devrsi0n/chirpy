@@ -13,6 +13,9 @@
     <img src="apps/main/public/images/blog/open-source/analytics.png" width="800" alt="Widget analytics" >
     <img src="apps/main/public/images/docs/features/theme/dashboard.png" width="800" alt="Project dashboard" >
     <img src="apps/main/public/images/docs/get-started/integration-guide.png" width="800" alt="Widget integration guide" >
+    <img src="apps/main/public/images/docs/features/privacy-friendly/anonymous-sign-in.png" width="800" alt="Anonymous sign-in" >
+    <img src="apps/main/public/images/docs/features/notifications/site-notification.png" width="800" alt="Site notification" >
+    <img src="apps/main/public/images/docs/features/anti-toxic-comment/example.png" width="800" alt="Anti toxic comment" >
 </details>
 
 <br>
@@ -28,9 +31,11 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 - 📊 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 - 🪄 Real-time comments
 - 📱 Mobile friendly
-- 🔔 Email & Web notifications
+- 🔔 [Email & Web push notifications](https://chirpy.dev/docs/features/notifications)
 - 🤐 [Anti toxic comment](https://chirpy.dev/docs/features/anti-toxic-comment)
 - 💬 [Comment moderation](https://chirpy.dev/docs/features/moderation)
+- 🎭 [Anonymous sign-in](https://chirpy.dev/docs/features/privacy-friendly#anonymous-sign-in)
+- 📬 [Email/magic link sign-in](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)
 
 ## 🧭 Roadmap
 
@@ -39,7 +44,7 @@ We're working hard to make Chirpy General Available first. Here are the blocking
 - ~~[Notifications](https://github.com/devrsi0n/chirpy/issues/134)~~
 - Account plan
 - Payment
-- Email sign-in without password
+- ~~[Email sign-in without password](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)~~
 
 ## 📀 Self-hosted
 
