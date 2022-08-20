@@ -1,0 +1,29 @@
+name: Stellate
+on:
+  push:
+    branches:
+      - main
+      - prod
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Push stellate schema on staging
+        if: ${{ env.GITHUB_REF_SLUG == 'main' }}
+        run: cd ./apps/main && npx stellate push schema --env staging
+        env:
+          STELLATE_TOKEN: ${{ secrets.STELLATE_TOKEN }}
+
+      - name: Push stellate schema on prod
+        if: ${{ env.GITHUB_REF_SLUG == 'prod' }}
+        run: npx stellate push schema
+        env:
+          STELLATE_TOKEN: ${{ secrets.STELLATE_TOKEN }}

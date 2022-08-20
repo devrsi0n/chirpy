@@ -13,12 +13,10 @@ export function GQLClientProvider({
   children,
 }: GqlClientProviderProps): JSX.Element {
   const { data: session } = useSession();
-  const [client, setClient] = React.useState(() =>
-    createGqlClient(session?.hasuraToken),
+  const client = React.useMemo(
+    () => createGqlClient(session?.hasuraToken),
+    [session?.hasuraToken],
   );
-  React.useEffect(() => {
-    setClient(createGqlClient(session?.hasuraToken));
-  }, [session?.hasuraToken]);
 
   return <Provider value={client}>{children}</Provider>;
 }
