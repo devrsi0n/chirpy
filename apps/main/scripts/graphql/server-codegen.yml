@@ -19,7 +19,7 @@ generates:
     plugins:
       - typescript-operations
       - typed-document-node
-  ./scripts/graphql-codegen/graphql-schema.json:
+  ./scripts/graphql/graphql-schema.json:
     plugins:
       - 'introspection'
 config:

@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - ./scripts/graphql-codegen/graphql-schema.json
+  - ./scripts/graphql/graphql-schema.json
 documents:
   - 'src/graphql/*.graphql'
 generates:
