@@ -8,6 +8,16 @@ import * as CommentContext from '$/contexts/comment-context/comment-context-prov
 import { CommentCard } from '..';
 import { generateCommentCard } from './mock-data';
 
+jest.mock('$/contexts/comment-context/comment-context-provider', () => {
+  return {
+    // Make exported object configurable
+    __esModule: true,
+    ...jest.requireActual(
+      '$/contexts/comment-context/comment-context-provider',
+    ),
+  };
+});
+
 const mockDeleteAComment = jest.fn();
 jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
   pageId: 'a-page-id',
@@ -15,6 +25,7 @@ jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
   deleteAComment: mockDeleteAComment,
   toggleALikeAction: mockHandleClickLikeAction,
   createAComment: mockHandleSubmitReply,
+  onClickCommentTimeline: jest.fn(),
 }));
 
 const mockHandleSubmitReply = jest.fn().mockResolvedValue(null);

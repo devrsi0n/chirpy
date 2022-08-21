@@ -10,13 +10,13 @@
     "build:local": "dotenv -e .env.local -- next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",
-    "g:gql": "graphql-codegen --config ./scripts/graphql-codegen/server-codegen.yml && graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml",
-    "g:gql:watch": "concurrently 'graphql-codegen --watch --config ./scripts/graphql-codegen/server-codegen.yml' 'graphql-codegen --config ./scripts/graphql-codegen/client-codegen.yml --watch'",
+    "g:gql": "zx ./scripts/graphql/gql-gen.mjs",
+    "g:gql:watch": "GQL_WATCH=true pnpm run g:gql",
     "sb": "start-storybook -p 6006",
     "start": "next start",
     "start:local": "dotenv -e .env.local -- next start",
-    "test": "DEBUG_PRINT_LIMIT=99999 jest --silent=false",
-    "test:coverage": "DEBUG_PRINT_LIMIT=99999 jest --silent=false --coverage"
+    "test": "DEBUG_PRINT_LIMIT=999999 jest --silent=false",
+    "test:coverage": "DEBUG_PRINT_LIMIT=999999 jest --silent=false --coverage"
   },
   "dependencies": {
     "@geist-ui/icons": "1.0.2",
@@ -111,7 +111,7 @@
     "@storybook/react": "6.5.9",
     "@storybook/testing-library": "0.0.13",
     "@storybook/testing-react": "1.3.0",
-    "@tailwindcss/line-clamp": "^0.4.0",
+    "@tailwindcss/line-clamp": "0.4.0",
     "@tailwindcss/typography": "0.5.4",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -143,6 +143,7 @@
     "eslint": "8.21.0",
     "fake-indexeddb": "4.0.0",
     "framer-motion": "6.5.1",
+    "graphqurl": "1.0.1",
     "intersection-observer": "0.12.2",
     "jest": "28.1.2",
     "jest-environment-jsdom": "28.1.2",
@@ -158,13 +159,14 @@
     "resolve-url-loader": "5.0.0",
     "sass": "1.53.0",
     "sass-loader": "13.0.2",
+    "stellate": "1.16.0",
     "storybook-addon-next": "1.6.7",
     "style-loader": "3.3.1",
     "tailwindcss": "3.1.6",
-    "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "4.7.4",
     "webpack": "5.73.0",
-    "whatwg-fetch": "3.6.2"
+    "whatwg-fetch": "3.6.2",
+    "zx": "7.0.8"
   },
   "engines": {
     "node": "16.x"

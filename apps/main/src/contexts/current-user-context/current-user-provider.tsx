@@ -22,13 +22,12 @@ export function CurrentUserProvider({
   const sessionIsLoading = status === 'loading';
   const [{ data, ...restProps }, refetchData] = useCurrentUserQuery({
     ...gqlOptions,
-    // @ts-ignore
-    variables: { id: session?.user?.id },
+    variables: { id: session?.user?.id || '-1' },
   });
   const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
     if (!hasMounted) {
-      // Return empty data on client side, to fix the hydration mismatch issue
+      // Only return valid date on client side to fix the hydration mismatch issue
       return EMPTY_CURRENT_USER_CONTEXT;
     }
 
@@ -47,7 +46,14 @@ export function CurrentUserProvider({
       refetchData,
       isSignIn: !!_data.id,
     };
-  }, [data?.userByPk, restProps, refetchData, session, sessionIsLoading]);
+  }, [
+    data?.userByPk,
+    restProps,
+    refetchData,
+    session,
+    sessionIsLoading,
+    hasMounted,
+  ]);
 
   return (
     <CurrentUserContext.Provider value={value}>

@@ -1,15 +1,16 @@
 overwrite: true
 schema:
-  - ./scripts/graphql-codegen/graphql-schema.json
-documents:
-  - 'src/graphql/*.graphql'
+  - http://127.0.0.1:8080/v1/graphql:
+      headers:
+        X-Hasura-Admin-Secret: 'myadminsecretkey'
+documents: 'src/server/graphql/*.graphql'
 generates:
-  src/graphql/generated/types.ts:
+  src/server/graphql/generated/types.ts:
     plugins:
       - typescript
     config:
       enumsAsTypes: true
-  src/graphql:
+  src/server/graphql:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts
@@ -17,10 +18,11 @@ generates:
       extension: .tsx
     plugins:
       - typescript-operations
-      - typescript-urql
+      - typed-document-node
+  ./scripts/graphql/graphql-schema.json:
+    plugins:
+      - 'introspection'
 config:
-  withComponents: false
-  withHooks: true
   # avoidOptionals: true
   # immutableTypes: true
   # maybeValue: T | null | undefined

@@ -30,8 +30,6 @@ export function useSignInWindow({
       popupWindow.current = null;
       // Force to refresh session
       await getSession();
-      // TODO: we must reload to fix graphql request didn't trigger
-      location.reload();
     }
   });
 

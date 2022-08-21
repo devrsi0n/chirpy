@@ -7,6 +7,14 @@ import * as notificationModule from '$/graphql/generated/notification';
 
 import * as stories from '../stories/notification-hub.stories';
 
+jest.mock('$/graphql/generated/notification', () => {
+  return {
+    // Make exported object configable
+    __esModule: true,
+    ...jest.requireActual('$/graphql/generated/notification'),
+  };
+});
+
 const { Default } = composeStories(stories);
 
 // Run storybook to see the UI visually
@@ -17,7 +25,7 @@ describe('NotificationHub', () => {
 
   it('should render the messages', async () => {
     await renderDefaultNotificationHub();
-    expect(screen.getAllByAltText('Avatar')).toHaveLength(3);
+    expect(screen.getAllByAltText(/avatar/)).toHaveLength(3);
     expect(screen.getAllByLabelText('Comment content')).toHaveLength(2);
   });
 
@@ -28,7 +36,7 @@ describe('NotificationHub', () => {
       .mockReturnValue([{} as any, haveReadANotification]);
     await renderDefaultNotificationHub();
 
-    await userEvent.click(screen.getAllByAltText('Avatar')[0]);
+    await userEvent.click(screen.getAllByAltText(/avatar/)[0]);
     expect(haveReadANotification).toHaveBeenCalledTimes(1);
   });
 

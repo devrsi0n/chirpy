@@ -8,6 +8,16 @@ import * as CommentContext from '$/contexts/comment-context/comment-context-prov
 
 import { CommentTrees } from '..';
 
+jest.mock('$/contexts/comment-context/comment-context-provider', () => {
+  return {
+    // Make exported object configable
+    __esModule: true,
+    ...jest.requireActual(
+      '$/contexts/comment-context/comment-context-provider',
+    ),
+  };
+});
+
 const mockOnSubmitReply = jest.fn();
 const mockOnClickLikeAction = jest.fn();
 jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
@@ -16,6 +26,7 @@ jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
   deleteAComment: jest.fn(),
   toggleALikeAction: mockOnClickLikeAction,
   createAComment: mockOnSubmitReply,
+  onClickCommentTimeline: jest.fn(),
 }));
 const mockComments = [
   {
