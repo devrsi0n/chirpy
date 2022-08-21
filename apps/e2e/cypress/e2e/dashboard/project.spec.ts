@@ -3,7 +3,7 @@ import { waitGraphql } from '../../fixtures/utils';
 describe('Project', () => {
   before(() => {
     cy.login();
-
+    cy.visit('/dashboard');
     waitForSpinnerToDisappear();
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist

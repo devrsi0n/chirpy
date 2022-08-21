@@ -4,6 +4,7 @@ import { WebSocket } from 'ws';
 
 import { getGqlClientOptions } from './gql-client';
 
+// Server WS client
 class ChirpyWebSocket extends WebSocket {
   constructor(...args: ConstructorParameters<typeof WebSocket>) {
     super(args[0], args[1], {
@@ -19,7 +20,7 @@ export function getAdminGqlClient(): Client {
       ADMIN_HEADERS,
       'network-only',
       createWSClient({
-        url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
+        url: process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
         webSocketImpl: ChirpyWebSocket,
       }),
     ),

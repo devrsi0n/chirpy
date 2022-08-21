@@ -31,7 +31,7 @@ export function getGqlClientOptions(
           const _wsClient =
             wsClient ||
             createWSClient({
-              url: `${process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN}/v1/graphql`,
+              url: process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
               connectionParams: () => {
                 return {
                   headers,
@@ -49,7 +49,7 @@ export function getGqlClientOptions(
     exchanges.unshift(devtoolsExchange as any);
   }
   return {
-    url: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
+    url: process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN,
     exchanges,
     fetchOptions: {
       headers,
