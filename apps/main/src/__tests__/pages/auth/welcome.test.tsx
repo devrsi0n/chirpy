@@ -2,26 +2,34 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '$/__tests__/fixtures/page-render';
-import { setMockedUser } from '$/__tests__/mocks/mock-use-current-user';
+import { setMockedUser } from '$/__tests__/fixtures/page-render';
 import { mockNextRouter } from '$/__tests__/mocks/next-router';
+import * as UserModule from '$/graphql/generated/user';
 import Welcome from '$/pages/auth/welcome';
 
-const mockUpdateUser = jest.fn();
-jest.mock('../../../graphql/generated/user', () => ({
-  ...jest.requireActual('../../../graphql/generated/user'),
-  useUpdateUserFieldsMutation: () => [
+const mockUpdateUser = jest.fn().mockImplementation(() => {
+  console.log('called mockUpdateUser');
+});
+jest.mock('$/graphql/generated/user', () => ({
+  // Make exported object configurable
+  __esModule: true,
+  ...jest.requireActual('$/graphql/generated/user'),
+}));
+
+jest.spyOn(UserModule, 'useUpdateUserFieldsMutation').mockImplementation(() => {
+  return [
     {
       data: {
         updateUserByPk: {
           __typename: 'User',
-          id: 1,
+          id: '1',
         },
       },
       fetching: false,
-    },
+    } as any,
     mockUpdateUser,
-  ],
-}));
+  ];
+});
 
 setMockedUser({
   email: '',
@@ -63,13 +71,17 @@ describe('Welcome', () => {
       name: /save/i,
     });
     await userEvent.click(saveButton);
-    await waitFor(() =>
-      expect(mockUpdateUser).toHaveBeenCalledWith({
-        id: 'user-id-1',
-        email,
-        name: displayName,
-        username: userName,
-      }),
+    await waitFor(
+      () =>
+        expect(mockUpdateUser).toHaveBeenCalledWith({
+          id: 'user-id-1',
+          email,
+          name: displayName,
+          username: userName,
+        }),
+      {
+        timeout: 1000,
+      },
     );
 
     await waitFor(

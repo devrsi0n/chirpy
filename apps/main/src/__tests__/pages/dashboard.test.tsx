@@ -8,6 +8,21 @@ import Dashboard from '$/pages/dashboard/index';
 
 import { pageRender } from '../fixtures/page-render';
 
+jest.mock('$/graphql/generated/project', () => {
+  return {
+    // Make exported object configable
+    __esModule: true,
+    ...jest.requireActual('$/graphql/generated/project'),
+  };
+});
+jest.mock('$/graphql/generated/user', () => {
+  return {
+    // Make exported object configable
+    __esModule: true,
+    ...jest.requireActual('$/graphql/generated/user'),
+  };
+});
+
 const mockFetchUserProject = jest.fn();
 jest.spyOn(userModule, 'useUserDashboardProjectsQuery').mockReturnValue([
   {
