@@ -23,7 +23,6 @@ export function getGqlClientOptions(
   wsClient?: WsClient,
 ): ClientOptions {
   const exchanges: Exchange[] = [
-    ...(isENVDev ? [devtoolsExchange] : []),
     dedupExchange,
     fetchExchange,
     subscriptionExchange({
@@ -46,6 +45,9 @@ export function getGqlClientOptions(
       }),
     }),
   ];
+  if (isENVDev) {
+    exchanges.unshift(devtoolsExchange as any);
+  }
   return {
     url: `${process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN}/v1/graphql`,
     exchanges,

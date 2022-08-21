@@ -3,7 +3,7 @@
   "extends": "@chirpy-dev/tsconfigs/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "types": ["jest", "node"],
     "paths": {
       "$/*": ["src/*"]
     }
