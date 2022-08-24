@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { log } from 'next-axiom';
 import connect, { ErrorHandler } from 'next-connect';
 
 import { ApiError } from './error';
@@ -7,9 +8,9 @@ export const handleInternalFailure: ErrorHandler<
   NextApiRequest,
   NextApiResponse
 > = (error, req, res) => {
-  console.error('internal error', error);
-  console.error('query', req.query);
-  console.error('body', req.body);
+  log.error('internal error', error);
+  log.error('query', req.query);
+  log.error('body', req.body);
 
   if (error instanceof ApiError) {
     return res.status(error.httpStatus).send(error.message);

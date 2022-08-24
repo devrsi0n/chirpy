@@ -3,7 +3,6 @@ import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
-import { NextWebVitalsMetric } from 'next/app';
 import * as React from 'react';
 
 import { ToastProvider } from '$/components/toast';
@@ -51,24 +50,7 @@ function App({
 
 export default App;
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  const url = process.env.NEXT_PUBLIC_AXIOM_INGEST_ENDPOINT;
-
-  if (!url) {
-    return;
-  }
-
-  const body = JSON.stringify({
-    route: window.__NEXT_DATA__.page,
-    ...metric,
-  });
-
-  if (navigator.sendBeacon) {
-    navigator.sendBeacon(url, body);
-  } else {
-    fetch(url, { body, method: 'POST', keepalive: true });
-  }
-}
+export { reportWebVitals } from 'next-axiom';
 
 export const loadFeatures = () =>
   import(

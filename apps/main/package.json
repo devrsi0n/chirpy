@@ -58,6 +58,7 @@
     "lodash": "4.17.21",
     "next": "12.2.5",
     "next-auth": "4.10.3",
+    "next-axiom": "^0.13.0",
     "next-compose-plugins": "2.2.1",
     "next-connect": "0.12.2",
     "next-mdx-remote": "3.0.8",

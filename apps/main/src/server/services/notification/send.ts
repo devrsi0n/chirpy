@@ -1,3 +1,5 @@
+import { log } from 'next-axiom';
+
 import { query } from '$/server/common/gql';
 import { NotificationSubscriptionsByUserIdDocument } from '$/server/graphql/generated/notification';
 
@@ -18,7 +20,7 @@ export async function sendNotification(payload: NotificationPayload) {
     !Array.isArray(notificationSubscriptions) ||
     notificationSubscriptions.length === 0
   ) {
-    console.error('No subscriptions found');
+    log.error('No subscriptions found');
     return;
   }
   await Promise.allSettled([
