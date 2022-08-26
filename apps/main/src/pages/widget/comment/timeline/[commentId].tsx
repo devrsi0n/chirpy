@@ -6,6 +6,7 @@ import {
   InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
+import { log } from 'next-axiom';
 import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
@@ -122,7 +123,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       pipe<OperationResult<CommentTimelineSubscription>, any>(
         client.subscription(CommentTimelineDocument, { id: commentId }),
         subscribe((result) => {
-          // console.log(result);
+          // log.debug(result);
           resolve(result);
         }),
       );
@@ -140,7 +141,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       'pageByPk',
     );
     if (!pageByPk) {
-      console.error(`Can't find page info`);
+      log.error(`Can't find page info`);
       return { notFound: true };
     }
 
@@ -156,7 +157,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       revalidate: 600,
     };
   } catch (error) {
-    console.error(superjson.stringify(error));
+    log.error(superjson.stringify(error));
     return { notFound: true };
   }
 };

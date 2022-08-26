@@ -5,6 +5,7 @@ import { IconArrowUp } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { logger } from '$/lib/logger';
 
 import { getStats } from '../analytics/analytics-api';
 
@@ -31,7 +32,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
         }
       })
       .catch(() => {
-        console.log('No stats data');
+        logger.debug('No stats data');
       });
   }, [domain]);
   return (

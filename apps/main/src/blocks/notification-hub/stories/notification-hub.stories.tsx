@@ -39,7 +39,7 @@ Default.play = async ({ canvasElement }) => {
 function getUrqlParameter(data: CurrentNotificationMessagesSubscription) {
   return (op: Operation) => {
     const query = getOperationName(op.query);
-    // console.log({ op, subscription: query });
+    // logger.debug({ op, subscription: query });
     if (query === 'currentNotificationMessages') {
       return {
         data,

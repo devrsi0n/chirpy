@@ -67,7 +67,7 @@ export const getStaticProps: GetStaticProps<
   if (!params?.slug) {
     return { notFound: true };
   }
-  // console.log({ slug: params.slug });
+  // log.debug({ slug: params.slug });
   const [mdxProps, directories] = await Promise.all([
     getMDXPropsBySlug([CONTAINER_FOLDER, ...params.slug].join('/')),
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),

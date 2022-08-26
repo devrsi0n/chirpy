@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth';
-import { withAxiom } from 'next-axiom';
+import { log, withAxiom } from 'next-axiom';
 
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
 import { query } from '$/server/common/gql';
@@ -89,7 +89,7 @@ export default withAxiom(
     events: {
       async createUser({ user }) {
         if (!user.email) {
-          return console.info('Create an anonymous user');
+          return log.info('Create an anonymous user');
         }
         await sendWelcomeLetter({
           to: {

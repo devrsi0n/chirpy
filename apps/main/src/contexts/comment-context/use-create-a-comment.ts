@@ -3,6 +3,7 @@ import { JsonArray } from 'type-fest';
 import { RTEValue } from '$/blocks/rich-text-editor';
 import { useToast } from '$/components/toast';
 import { useInsertOneCommentMutation } from '$/graphql/generated/comment';
+import { logger } from '$/lib/logger';
 
 import { useCurrentUser } from '../current-user-context';
 
@@ -19,7 +20,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions) {
 
   const createAComment = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
-      console.error('Navigate to sign-in page');
+      logger.error('Navigate to sign-in page');
       throw undefined;
     }
     const { data } = await insertOneComment({
@@ -32,7 +33,7 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions) {
         type: 'error',
         title: `Server didn't respond, please try again later.`,
       });
-      console.error(`Can't insert a comment, parentId ${commentId}`);
+      logger.error(`Can't insert a comment, parentId ${commentId}`);
     }
   };
   return createAComment;

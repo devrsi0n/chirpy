@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { logger } from '$/lib/logger';
 import { asyncNoop, noop } from '$/utilities/isomorphic/function';
 
 import { useCurrentUser } from '../current-user-context';
@@ -37,14 +38,14 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
       return;
     }
     if (Notification.permission === 'denied') {
-      return console.log('Notification permission denied');
+      return logger.debug('Notification permission denied');
     } else if (Notification.permission === 'default') {
       const permission = await askNotificationPermission();
       if (permission === 'denied') {
         setDidDeny(true);
       }
       if (permission === 'denied' || permission === 'default') {
-        return console.log(`User didn't grant notification permission`);
+        return logger.debug(`User didn't grant notification permission`);
       }
     }
 

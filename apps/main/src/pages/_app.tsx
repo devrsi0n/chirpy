@@ -50,7 +50,7 @@ function App({
 
 export default App;
 
-export { reportWebVitals } from 'next-axiom';
+export { reportWebVitals } from 'next-axiom/dist/webVitals';
 
 export const loadFeatures = () =>
   import(

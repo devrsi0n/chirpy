@@ -21,7 +21,7 @@ export async function handleLikeEvent(
   eventBody: EventPayload,
   res: NextApiResponse,
 ): Promise<void> {
-  // console.log(JSON.stringify(eventBody, null, 2));
+  // log.debug(JSON.stringify(eventBody, null, 2));
   if (!isEventLike(eventBody)) {
     return;
   }

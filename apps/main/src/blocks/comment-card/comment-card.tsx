@@ -17,6 +17,7 @@ import { useToast } from '$/components/toast';
 import { useCommentContext } from '$/contexts/comment-context';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { COMMENT_TREE_MAX_DEPTH } from '$/lib/constants';
+import { logger } from '$/lib/logger';
 import { isENVDev } from '$/server/utilities/env';
 import { CommentLeafType } from '$/types/widget';
 import { dayjs } from '$/utilities/date';
@@ -71,7 +72,7 @@ export function CommentCard({
         type: 'error',
         title: 'Replied failed, try again later',
       });
-      console.error('Replied failed', error);
+      logger.error('Replied failed', error);
     }
   };
   const handleDimissRTE = () => {
