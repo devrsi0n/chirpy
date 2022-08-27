@@ -18,7 +18,7 @@ export type CurrentUserQuery = {
     emailVerified?: string | null;
     username?: string | null;
     name?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     bio?: string | null;
     website?: string | null;
     twitterUserName?: string | null;
@@ -85,7 +85,7 @@ export const CurrentUserDocument = gql`
       emailVerified
       username
       name
-      avatar
+      image
       bio
       website
       twitterUserName

@@ -1,18 +1,19 @@
 table:
-  name: Project
   schema: public
+  name: Project
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteProjects
-    delete_by_pk: deleteProjectByPk
     insert: insertProjects
-    insert_one: insertOneProject
-    select: projects
     select_aggregate: projectAggregate
+    insert_one: insertOneProject
     select_by_pk: projectByPk
+    select: projects
+    delete: deleteProjects
     update: updateProjects
+    delete_by_pk: deleteProjectByPk
     update_by_pk: updateProjectByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: team
     using:
@@ -26,24 +27,25 @@ array_relationships:
       foreign_key_constraint_on:
         column: projectId
         table:
-          name: Page
           schema: public
+          name: Page
 insert_permissions:
-  - permission:
-      backend_only: false
+  - role: user
+    permission:
       check:
         userId:
           _eq: X-Hasura-User-Id
+      set:
+        userId: x-hasura-User-Id
       columns:
         - domain
         - name
         - teamId
         - theme
-      set:
-        userId: x-hasura-User-Id
-    role: user
+      backend_only: false
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - id
         - createdAt
@@ -56,19 +58,18 @@ select_permissions:
       filter:
         userId:
           _eq: X-Hasura-User-Id
-    role: user
 update_permissions:
-  - permission:
-      check: null
+  - role: user
+    permission:
       columns:
         - theme
       filter:
         userId:
           _eq: X-Hasura-User-Id
-    role: user
+      check: null
 delete_permissions:
-  - permission:
+  - role: user
+    permission:
       filter:
         userId:
           _eq: X-Hasura-User-Id
-    role: user

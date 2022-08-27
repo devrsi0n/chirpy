@@ -274,29 +274,21 @@ function translateUserToAdapterUser(
   }
   return {
     ...user,
-    image: user?.avatar,
     emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : null,
   };
 }
 
 function translateAdapterUserToQueryVairables<U extends Partial<AdapterUser>>(
   user: U,
-): Omit<U, 'image'> & {
-  avatar?: U['image'];
+): Omit<U, 'emailVerified'> & {
   emailVerified?: string;
 } {
-  const { image, emailVerified, ...rest } = user;
+  const { emailVerified, ...rest } = user;
   return {
     ...rest,
-    ...(typeof image === 'string' && {
-      avatar: image,
-    }),
     ...(emailVerified && {
       emailVerified: emailVerified.toISOString(),
     }),
-  } as Omit<U, 'image'> & {
-    avatar?: U['image'];
-    emailVerified?: string;
   };
 }
 

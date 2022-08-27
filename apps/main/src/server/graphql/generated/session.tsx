@@ -35,7 +35,8 @@ export type SessionAndUserQuery = {
       __typename?: 'User';
       id: string;
       name?: string | null;
-      avatar?: string | null;
+      username?: string | null;
+      image?: string | null;
       email?: string | null;
       emailVerified?: string | null;
     };
@@ -264,8 +265,9 @@ export const SessionAndUserDocument = {
                       { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                       {
                         kind: 'Field',
-                        name: { kind: 'Name', value: 'avatar' },
+                        name: { kind: 'Name', value: 'username' },
                       },
+                      { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                       {
                         kind: 'Field',

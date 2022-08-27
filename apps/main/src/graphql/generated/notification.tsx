@@ -24,7 +24,7 @@ export type CurrentNotificationMessagesSubscription = {
       name?: string | null;
       username?: string | null;
       email?: string | null;
-      avatar?: string | null;
+      image?: string | null;
     };
     triggeredBy: {
       __typename?: 'User';
@@ -32,7 +32,7 @@ export type CurrentNotificationMessagesSubscription = {
       name?: string | null;
       username?: string | null;
       email?: string | null;
-      avatar?: string | null;
+      image?: string | null;
     };
   }>;
 };
@@ -73,7 +73,7 @@ export const CurrentNotificationMessagesDocument = gql`
         name
         username
         email
-        avatar
+        image
       }
       type
       url
@@ -82,7 +82,7 @@ export const CurrentNotificationMessagesDocument = gql`
         name
         username
         email
-        avatar
+        image
       }
       content
       read

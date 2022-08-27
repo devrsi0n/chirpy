@@ -28,7 +28,7 @@ export function PredefinedCurrentUser(
         username: 'michael',
         email: 'michael@chirpy.dev',
         name: 'Michael',
-        avatar: '/images/avatars/male-2.jpeg',
+        image: '/images/avatars/male-2.jpeg',
       },
     }),
   );

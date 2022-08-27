@@ -2745,7 +2745,6 @@ export type User = {
   accounts: Array<Account>;
   /** An aggregate relationship */
   accounts_aggregate: Account_Aggregate;
-  avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   /** An array relationship */
   comments: Array<Comment>;
@@ -2755,6 +2754,8 @@ export type User = {
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
+  /** User profile avatar */
+  image?: Maybe<Scalars['String']>;
   /** An array relationship */
   likes: Array<Like>;
   /** An aggregate relationship */
@@ -3156,13 +3157,13 @@ export type User_Bool_Exp = {
   _not?: InputMaybe<User_Bool_Exp>;
   _or?: InputMaybe<Array<User_Bool_Exp>>;
   accounts?: InputMaybe<Account_Bool_Exp>;
-  avatar?: InputMaybe<String_Comparison_Exp>;
   bio?: InputMaybe<String_Comparison_Exp>;
   comments?: InputMaybe<Comment_Bool_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   emailVerified?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  image?: InputMaybe<String_Comparison_Exp>;
   likes?: InputMaybe<Like_Bool_Exp>;
   members?: InputMaybe<Member_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -3191,13 +3192,14 @@ export type User_Constraint =
 /** input type for inserting data into table "User" */
 export type User_Insert_Input = {
   accounts?: InputMaybe<Account_Arr_Rel_Insert_Input>;
-  avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
   comments?: InputMaybe<Comment_Arr_Rel_Insert_Input>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   email?: InputMaybe<Scalars['String']>;
   emailVerified?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
+  /** User profile avatar */
+  image?: InputMaybe<Scalars['String']>;
   likes?: InputMaybe<Like_Arr_Rel_Insert_Input>;
   members?: InputMaybe<Member_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
@@ -3217,12 +3219,13 @@ export type User_Insert_Input = {
 /** aggregate max on columns */
 export type User_Max_Fields = {
   __typename?: 'User_max_fields';
-  avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  /** User profile avatar */
+  image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   twitterUserName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -3232,12 +3235,13 @@ export type User_Max_Fields = {
 
 /** order by max() on columns of table "User" */
 export type User_Max_Order_By = {
-  avatar?: InputMaybe<Order_By>;
   bio?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   emailVerified?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** User profile avatar */
+  image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   twitterUserName?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
@@ -3248,12 +3252,13 @@ export type User_Max_Order_By = {
 /** aggregate min on columns */
 export type User_Min_Fields = {
   __typename?: 'User_min_fields';
-  avatar?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   email?: Maybe<Scalars['String']>;
   emailVerified?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
+  /** User profile avatar */
+  image?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   twitterUserName?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
@@ -3263,12 +3268,13 @@ export type User_Min_Fields = {
 
 /** order by min() on columns of table "User" */
 export type User_Min_Order_By = {
-  avatar?: InputMaybe<Order_By>;
   bio?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   emailVerified?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  /** User profile avatar */
+  image?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
   twitterUserName?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
@@ -3302,13 +3308,13 @@ export type User_On_Conflict = {
 /** Ordering options when selecting data from "User". */
 export type User_Order_By = {
   accounts_aggregate?: InputMaybe<Account_Aggregate_Order_By>;
-  avatar?: InputMaybe<Order_By>;
   bio?: InputMaybe<Order_By>;
   comments_aggregate?: InputMaybe<Comment_Aggregate_Order_By>;
   createdAt?: InputMaybe<Order_By>;
   email?: InputMaybe<Order_By>;
   emailVerified?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  image?: InputMaybe<Order_By>;
   likes_aggregate?: InputMaybe<Like_Aggregate_Order_By>;
   members_aggregate?: InputMaybe<Member_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
@@ -3333,8 +3339,6 @@ export type User_Pk_Columns_Input = {
 /** select columns of table "User" */
 export type User_Select_Column =
   /** column name */
-  | 'avatar'
-  /** column name */
   | 'bio'
   /** column name */
   | 'createdAt'
@@ -3344,6 +3348,8 @@ export type User_Select_Column =
   | 'emailVerified'
   /** column name */
   | 'id'
+  /** column name */
+  | 'image'
   /** column name */
   | 'name'
   /** column name */
@@ -3359,12 +3365,13 @@ export type User_Select_Column =
 
 /** input type for updating data in table "User" */
 export type User_Set_Input = {
-  avatar?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   email?: InputMaybe<Scalars['String']>;
   emailVerified?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['uuid']>;
+  /** User profile avatar */
+  image?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   twitterUserName?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<UserType_Enum>;
@@ -3376,8 +3383,6 @@ export type User_Set_Input = {
 /** update columns of table "User" */
 export type User_Update_Column =
   /** column name */
-  | 'avatar'
-  /** column name */
   | 'bio'
   /** column name */
   | 'createdAt'
@@ -3387,6 +3392,8 @@ export type User_Update_Column =
   | 'emailVerified'
   /** column name */
   | 'id'
+  /** column name */
+  | 'image'
   /** column name */
   | 'name'
   /** column name */

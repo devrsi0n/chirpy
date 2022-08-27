@@ -1,15 +1,16 @@
 table:
-  name: VerificationToken
   schema: public
+  name: VerificationToken
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteVerificationTokens
-    delete_by_pk: deleteVerificationTokenByPk
     insert: insertVerificationTokens
-    insert_one: insertOneVerificationToken
-    select: verificationTokens
     select_aggregate: verificationTokenAggregate
+    insert_one: insertOneVerificationToken
     select_by_pk: verificationTokenByPk
+    select: verificationTokens
+    delete: deleteVerificationTokens
     update: updateVerificationTokens
+    delete_by_pk: deleteVerificationTokenByPk
     update_by_pk: updateVerificationTokenByPk
+  column_config: {}
+  custom_column_names: {}

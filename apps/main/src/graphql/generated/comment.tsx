@@ -18,7 +18,7 @@ export type CommentItemFragment = {
     name?: string | null;
     username?: string | null;
     email?: string | null;
-    avatar?: string | null;
+    image?: string | null;
   };
   likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
 };
@@ -67,7 +67,7 @@ export type CommentTreeSubscription = {
             name?: string | null;
             username?: string | null;
             email?: string | null;
-            avatar?: string | null;
+            image?: string | null;
           };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
         }>;
@@ -77,7 +77,7 @@ export type CommentTreeSubscription = {
           name?: string | null;
           username?: string | null;
           email?: string | null;
-          avatar?: string | null;
+          image?: string | null;
         };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       }>;
@@ -87,7 +87,7 @@ export type CommentTreeSubscription = {
         name?: string | null;
         username?: string | null;
         email?: string | null;
-        avatar?: string | null;
+        image?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     }>;
@@ -97,7 +97,7 @@ export type CommentTreeSubscription = {
       name?: string | null;
       username?: string | null;
       email?: string | null;
-      avatar?: string | null;
+      image?: string | null;
     };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
   }>;
@@ -131,7 +131,7 @@ export type CommentTimelineSubscription = {
         name?: string | null;
         username?: string | null;
         email?: string | null;
-        avatar?: string | null;
+        image?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     }>;
@@ -165,7 +165,7 @@ export type CommentTimelineSubscription = {
             name?: string | null;
             username?: string | null;
             email?: string | null;
-            avatar?: string | null;
+            image?: string | null;
           };
           likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
         } | null;
@@ -175,7 +175,7 @@ export type CommentTimelineSubscription = {
           name?: string | null;
           username?: string | null;
           email?: string | null;
-          avatar?: string | null;
+          image?: string | null;
         };
         likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
       } | null;
@@ -185,7 +185,7 @@ export type CommentTimelineSubscription = {
         name?: string | null;
         username?: string | null;
         email?: string | null;
-        avatar?: string | null;
+        image?: string | null;
       };
       likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
     } | null;
@@ -195,7 +195,7 @@ export type CommentTimelineSubscription = {
       name?: string | null;
       username?: string | null;
       email?: string | null;
-      avatar?: string | null;
+      image?: string | null;
     };
     likes: Array<{ __typename?: 'Like'; id: string; userId: string }>;
   } | null;
@@ -234,7 +234,7 @@ export const CommentItemFragmentDoc = gql`
       name
       username
       email
-      avatar
+      image
     }
     likes {
       id

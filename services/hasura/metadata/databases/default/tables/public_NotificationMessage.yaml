@@ -1,18 +1,19 @@
 table:
-  name: NotificationMessage
   schema: public
+  name: NotificationMessage
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteNotificationMessages
-    delete_by_pk: deleteNotificationMessageByPk
     insert: insertNotificationMessages
-    insert_one: insertOneNotificationMessage
-    select: notificationMessages
     select_aggregate: notificationMessagesAggregate
+    insert_one: insertOneNotificationMessage
     select_by_pk: notificationMessagesByPk
+    select: notificationMessages
+    delete: deleteNotificationMessages
     update: updateNotificationMessages
+    delete_by_pk: deleteNotificationMessageByPk
     update_by_pk: updateNotificationMessageByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: notificationType
     using:
@@ -24,7 +25,8 @@ object_relationships:
     using:
       foreign_key_constraint_on: triggeredById
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - content
         - contextId
@@ -38,19 +40,18 @@ select_permissions:
       filter:
         recipientId:
           _eq: X-Hasura-User-Id
-    role: user
 update_permissions:
-  - permission:
-      check: null
+  - role: user
+    permission:
       columns:
         - read
       filter:
         recipientId:
           _eq: X-Hasura-User-Id
-    role: user
+      check: null
 delete_permissions:
-  - permission:
+  - role: user
+    permission:
       filter:
         recipientId:
           _eq: X-Hasura-User-Id
-    role: user

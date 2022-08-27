@@ -1,35 +1,37 @@
 table:
-  name: Team
   schema: public
+  name: Team
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteTeams
-    delete_by_pk: deleteTeamByPk
     insert: insertTeams
-    insert_one: insertOneTeam
-    select: teams
     select_aggregate: teamAggregate
+    insert_one: insertOneTeam
     select_by_pk: teamByPk
+    select: teams
+    delete: deleteTeams
     update: updateTeams
+    delete_by_pk: deleteTeamByPk
     update_by_pk: updateTeamByPk
+  column_config: {}
+  custom_column_names: {}
 array_relationships:
   - name: members
     using:
       foreign_key_constraint_on:
         column: teamId
         table:
-          name: Member
           schema: public
+          name: Member
   - name: projects
     using:
       foreign_key_constraint_on:
         column: teamId
         table:
-          name: Project
           schema: public
+          name: Project
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - createdAt
         - id
@@ -39,4 +41,3 @@ select_permissions:
         members:
           userId:
             _eq: X-Hasura-User-Id
-    role: user
