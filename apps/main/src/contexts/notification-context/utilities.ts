@@ -36,10 +36,14 @@ export function registerNotificationSubscription(): Promise<Response | void> {
               'Content-type': 'application/json',
             },
             body: JSON.stringify({ subscription }),
-          }).then((rsp) => {
-            sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
-            return rsp;
-          });
+          })
+            .then((rsp) => {
+              sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
+              return rsp;
+            })
+            .catch((error) => {
+              logger.warn('Register notification subscription', error);
+            });
         });
     })
     .catch((error) => {
