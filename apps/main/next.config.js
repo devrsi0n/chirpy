@@ -5,6 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
+const { withAxiom } = require('next-axiom');
 
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
 const isProd = process.env.NODE_ENV === 'production';
@@ -14,6 +15,7 @@ const isProd = process.env.NODE_ENV === 'production';
  **/
 module.exports = withPlugins(
   [
+    [withAxiom],
     [withBundleAnalyzer],
     [
       withPlausibleProxy({

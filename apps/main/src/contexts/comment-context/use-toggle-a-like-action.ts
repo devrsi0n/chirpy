@@ -5,6 +5,7 @@ import {
   useInsertOneLikeMutation,
 } from '$/graphql/generated/like';
 import { useSignInWindow } from '$/hooks/use-sign-in-window';
+import { logger } from '$/lib/logger';
 
 export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;
 
@@ -32,7 +33,7 @@ export function useToggleALikeAction() {
         id: likeId,
       });
       if (!data?.deleteLikeByPk?.id) {
-        console.error(`Can't delete the like, id ${likeId}`);
+        logger.error(`Can't delete the like, id ${likeId}`);
       }
     } else {
       try {
@@ -44,7 +45,7 @@ export function useToggleALikeAction() {
             type: 'error',
             title: `Server didn't respond, please try again later.`,
           });
-          console.error(`Can't create a like action`);
+          logger.error(`Can't create a like action`);
         }
       } catch (error) {
         showToast({
@@ -54,7 +55,7 @@ export function useToggleALikeAction() {
         // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
         // when a user click the like button again during this API processing
         // TODO: Refresh UI immediately, call APIs in the background
-        console.error(error);
+        logger.error('Insert a like', error);
       }
     }
   };

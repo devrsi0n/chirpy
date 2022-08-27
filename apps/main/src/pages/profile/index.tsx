@@ -22,6 +22,7 @@ import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
+import { logger } from '$/lib/logger';
 import { EMAIL_REGEXP } from '$/utilities/validator';
 
 type FormFields = {
@@ -75,7 +76,7 @@ export default function Profile(): JSX.Element {
         twitterUserName: fields.twitter,
       });
       if (error) {
-        console.error(error);
+        logger.error('Update user profile failed', error);
         if (error.message.includes(`unique constraint \"User_email_key\"`)) {
           showToast({
             type: 'error',

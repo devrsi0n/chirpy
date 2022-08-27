@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { log, withAxiom } from 'next-axiom';
 
 import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
@@ -9,7 +10,7 @@ import { DeleteUserDocument } from '$/server/graphql/generated/user';
 const handler = getApiHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const signedRequest = req.body.signed_request;
-  console.log('Validating signature', {
+  log.debug('Validating signature', {
     signedRequest,
   });
   const [signature, payload] =
@@ -94,4 +95,4 @@ function unescape(str: string) {
     .replace(/_/g, '/');
 }
 
-export default handler;
+export default withAxiom(handler);

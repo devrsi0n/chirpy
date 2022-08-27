@@ -38,7 +38,7 @@ function createToken(
     algorithm: process.env.HASH_ALGORITHM as jwt.Algorithm,
     expiresIn: maxAge,
   });
-  // console.log({ payload, key: process.env.NEXTAUTH_SECRET });
+  // log.debug({ payload, key: process.env.NEXTAUTH_SECRET });
   return encodedToken;
 }
 

@@ -1,3 +1,4 @@
+import { logger } from '$/lib/logger';
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
 const NOTIFICATION_DID_REGISTER_KEY =
@@ -35,14 +36,18 @@ export function registerNotificationSubscription(): Promise<Response | void> {
               'Content-type': 'application/json',
             },
             body: JSON.stringify({ subscription }),
-          }).then((rsp) => {
-            sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
-            return rsp;
-          });
+          })
+            .then((rsp) => {
+              sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
+              return rsp;
+            })
+            .catch((error) => {
+              logger.warn('Register notification subscription', error);
+            });
         });
     })
     .catch((error) => {
-      console.error('Service worker registration failed', error);
+      logger.error('Service worker registration failed', error);
       throw error;
     });
 }
@@ -51,7 +56,7 @@ const SERVICE_WORKER_ERROR = 'Service worker not supported';
 export function checkServiceWorkerCompatibility(): boolean {
   const supported = 'serviceWorker' in navigator;
   if (!supported) {
-    console.error(SERVICE_WORKER_ERROR);
+    logger.error(SERVICE_WORKER_ERROR);
   }
   return supported;
 }
@@ -60,7 +65,7 @@ const NOTIFICATION_ERROR = 'This browser does not support notifications.';
 export function checkNotificationCompatibility(): boolean {
   const supported = 'Notification' in window;
   if (!supported) {
-    console.error(NOTIFICATION_ERROR);
+    logger.error(NOTIFICATION_ERROR);
   }
   return supported;
 }

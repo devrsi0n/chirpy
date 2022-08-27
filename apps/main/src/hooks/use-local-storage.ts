@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+import { logger } from '$/lib/logger';
 import { isSSRMode } from '$/utilities/env';
 
 import { useEventListener } from './use-event-listener';
@@ -21,7 +22,7 @@ export function useLocalStorage<T>(
       const item = window.localStorage.getItem(key);
       return item ? (parseJSON(item) as T) : initialValue;
     } catch (error) {
-      console.warn(`Error reading localStorage key “${key}”:`, error);
+      logger.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
     }
   };
@@ -30,7 +31,7 @@ export function useLocalStorage<T>(
   const customEventKey = `local-storage.${key}` as const;
   const setValue: SetValue<T | undefined> = (value) => {
     if (typeof window == 'undefined') {
-      console.warn(
+      logger.warn(
         `Tried setting localStorage key “${key}” even though environment is not a client`,
       );
     }
@@ -47,7 +48,7 @@ export function useLocalStorage<T>(
 
       window.dispatchEvent(new Event(customEventKey));
     } catch (error) {
-      console.warn(`Error setting localStorage key “${key}”:`, error);
+      logger.warn(`Error setting localStorage key “${key}”:`, error);
     }
   };
 
@@ -79,7 +80,7 @@ function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === 'undefined' ? undefined : JSON.parse(value ?? '');
   } catch {
-    console.log('parsing error on', { value });
+    logger.warn('parsing error on', { value });
     return undefined;
   }
 }

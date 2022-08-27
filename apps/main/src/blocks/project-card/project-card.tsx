@@ -13,6 +13,7 @@ import { Text } from '$/components/text';
 import { useToast } from '$/components/toast';
 import { useDeleteProjectByPkMutation } from '$/graphql/generated/project';
 import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
+import { logger } from '$/lib/logger';
 import { listHoverable } from '$/styles/common';
 import { dayjs } from '$/utilities/date';
 
@@ -52,7 +53,7 @@ export function ProjectCard({
       setDeletingProject('');
       onDeletedProject();
     } catch (error) {
-      console.error(error);
+      logger.error('Delete project failed', error);
       showToast({
         type: 'error',
         title:

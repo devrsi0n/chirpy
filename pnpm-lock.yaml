@@ -223,6 +223,7 @@ importers:
       msw-storybook-addon: 1.6.3
       next: 12.2.5
       next-auth: 4.10.3
+      next-axiom: 0.13.0
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8
@@ -305,6 +306,7 @@ importers:
       lodash: 4.17.21
       next: 12.2.5_zazhvxb5wdpfvem7m5mnvhb45a
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_mnimnj2pdeccz5uivmdmoly3tq
+      next-axiom: 0.13.0_next@12.2.5
       next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
@@ -16777,6 +16779,16 @@ packages:
     dev: false
     patched: true
 
+  /next-axiom/0.13.0_next@12.2.5:
+    resolution: {integrity: sha512-yWNsTd2abreXa9KBYeAhhVCsTFClZI37jUG0c+CfkENxl51EpSVlY+dWSA8hGJQtXWOXKs6yeW1PaiVr2NU1rw==}
+    engines: {node: '>=15'}
+    peerDependencies:
+      next: ^12.1.4
+    dependencies:
+      next: 12.2.5_zazhvxb5wdpfvem7m5mnvhb45a
+      whatwg-fetch: 3.6.2
+    dev: false
+
   /next-compose-plugins/2.2.1:
     resolution: {integrity: sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==}
     dev: false
@@ -23186,7 +23198,6 @@ packages:
 
   /whatwg-fetch/3.6.2:
     resolution: {integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==}
-    dev: true
 
   /whatwg-mimetype/3.0.0:
     resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}

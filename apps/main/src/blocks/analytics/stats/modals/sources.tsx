@@ -109,7 +109,7 @@ class SourcesModal extends React.Component {
     if (filter === 'utm_sources') query.set('utm_source', source.name);
     if (filter === 'utm_campaigns') query.set('utm_campaign', source.name);
 
-    // console.log(source);
+    // logger.debug(source);
 
     return (
       <tr className="text-sm dark:text-gray-200" key={source.name}>

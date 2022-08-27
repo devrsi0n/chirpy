@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { useToast } from '$/components/toast';
+import { logger } from '$/lib/logger';
 
 import { checkServiceWorkerCompatibility } from './utilities';
 
@@ -18,7 +19,7 @@ export function useReloadWhenSwChange() {
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (refreshing) return; // prevent infinite refresh loop when we use "Update on Reload" in DevTool
       refreshing = true;
-      console.log('Controller loaded');
+      logger.debug('Controller loaded');
       window.location.reload();
     });
   }, []);

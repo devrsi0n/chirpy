@@ -5,10 +5,11 @@ import { pageRender } from '$/__tests__/fixtures/page-render';
 import { setMockedUser } from '$/__tests__/fixtures/page-render';
 import { mockNextRouter } from '$/__tests__/mocks/next-router';
 import * as UserModule from '$/graphql/generated/user';
+import { logger } from '$/lib/logger';
 import Welcome from '$/pages/auth/welcome';
 
 const mockUpdateUser = jest.fn().mockImplementation(() => {
-  console.log('called mockUpdateUser');
+  logger.debug('called mockUpdateUser');
 });
 jest.mock('$/graphql/generated/user', () => ({
   // Make exported object configurable

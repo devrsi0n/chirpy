@@ -1,4 +1,5 @@
 import { Profile as AuthProfile } from 'next-auth';
+import { log } from 'next-axiom';
 
 import {
   UpdateUserByPkDocument,
@@ -43,7 +44,7 @@ export async function fillUserFields(
 
     return;
   } catch (error) {
-    console.error('fill user fields failed', error);
+    log.error('fill user fields failed', error);
     return;
   }
 }

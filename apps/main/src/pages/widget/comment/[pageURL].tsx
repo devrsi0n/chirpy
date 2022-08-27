@@ -5,6 +5,7 @@ import {
   GetStaticPropsContext,
   GetStaticPaths,
 } from 'next';
+import { log } from 'next-axiom';
 import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
@@ -142,7 +143,7 @@ export const getStaticProps: GetStaticProps<
       >(
         client.subscription(CommentTreeDocument, { pageURL }),
         subscribe((result) => {
-          // console.log(result);
+          // log.debug(result);
           resolve(result);
         }),
       );
@@ -160,7 +161,7 @@ export const getStaticProps: GetStaticProps<
       'pageByPk',
     );
     if (!pageByPk) {
-      console.error(`Can't find theme info`);
+      log.error(`Can't find theme info`);
       return { notFound: true };
     }
     return {
@@ -175,7 +176,7 @@ export const getStaticProps: GetStaticProps<
       revalidate: 5 * 60,
     };
   } catch (error) {
-    console.error(superjson.stringify(error));
+    log.error(superjson.stringify(error));
     return { notFound: true };
   }
 };
