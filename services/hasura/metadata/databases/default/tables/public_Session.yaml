@@ -1,18 +1,19 @@
 table:
-  name: Session
   schema: public
+  name: Session
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteSessions
-    delete_by_pk: deleteSessionByPk
     insert: insertSessions
-    insert_one: insertOneSession
-    select: sessions
     select_aggregate: sessionAggregate
+    insert_one: insertOneSession
     select_by_pk: sessionByPk
+    select: sessions
+    delete: deleteSessions
     update: updateSessions
+    delete_by_pk: deleteSessionByPk
     update_by_pk: updateSessionByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: user
     using:

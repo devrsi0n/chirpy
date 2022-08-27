@@ -4,7 +4,6 @@ import * as React from 'react';
 import { Button } from '$/components/button';
 import { Card } from '$/components/card';
 import { IconCheck, IconLoader, IconSend } from '$/components/icons';
-import { Text } from '$/components/text';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context';
@@ -72,6 +71,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   return (
     <Card as="form" className="w-fit space-y-4 rounded py-6 px-12 shadow-md">
       <TextField
+        className="w-full"
         {...register('email', {
           required: { value: true, message: 'Email is required' },
           pattern: {
@@ -84,6 +84,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.email}
       />
       <TextField
+        className="w-full"
         {...register('name', {
           required: { value: true, message: 'Dispaly name is required' },
         })}
@@ -91,6 +92,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.name}
       />
       <TextField
+        className="w-full"
         {...register('username', {
           required: { value: true, message: 'ID is required' },
           pattern: {
@@ -100,14 +102,8 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           minLength: { value: 3, message: 'At least 3 characters' },
           maxLength: { value: 16, message: 'At most 16 characters' },
         })}
-        label={
-          <span>
-            Your username
-            <Text as="small" variant="secondary" className="block text-sm">
-              Used to be mentioned by people
-            </Text>
-          </span>
-        }
+        label="Your username"
+        hintText="Used to be mentioned in comments"
         errorMessage={errors.username}
       />
       <Button

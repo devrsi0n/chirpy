@@ -10,19 +10,18 @@ import {
   EMPTY_CURRENT_USER_CONTEXT,
 } from './current-user-context';
 
-export type CurrentUserProviderProps = React.PropsWithChildren<{
-  gqlOptions?: Parameters<typeof useCurrentUserQuery>[0];
-}>;
+export type CurrentUserProviderProps = {
+  children: React.ReactNode;
+};
 
 export function CurrentUserProvider({
-  gqlOptions,
   children,
 }: CurrentUserProviderProps): JSX.Element {
   const { data: session, status } = useSession();
   const sessionIsLoading = status === 'loading';
-  const [{ data, ...restProps }, refetchData] = useCurrentUserQuery({
-    ...gqlOptions,
-    variables: { id: session?.user?.id || '-1' },
+  const [{ data: queryData, fetching }, refetchData] = useCurrentUserQuery({
+    variables: { id: session?.user.id || '-1' },
+    pause: true,
   });
   const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
@@ -30,29 +29,27 @@ export function CurrentUserProvider({
       // Only return valid date on client side to fix the hydration mismatch issue
       return EMPTY_CURRENT_USER_CONTEXT;
     }
-
     // Reset data if session is invalid
     const _data: CurrentUserContextType['data'] = session?.user.id
       ? {
           ...session?.user,
-          ...data?.userByPk,
+          ...queryData?.userByPk,
           editableProjectIds: session?.user.editableProjectIds || [],
         }
       : {};
     return {
-      ...restProps,
-      loading: sessionIsLoading,
       data: _data,
-      refetchData,
+      loading: sessionIsLoading || fetching,
       isSignIn: !!_data.id,
+      refetchData,
     };
   }, [
-    data?.userByPk,
-    restProps,
-    refetchData,
     session,
     sessionIsLoading,
     hasMounted,
+    refetchData,
+    fetching,
+    queryData?.userByPk,
   ]);
 
   return (

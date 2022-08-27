@@ -1,18 +1,19 @@
 table:
-  name: Page
   schema: public
+  name: Page
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deletePages
-    delete_by_pk: deletePageByPk
     insert: insertPages
-    insert_one: insertOnePage
-    select: pages
     select_aggregate: pageAggregate
+    insert_one: insertOnePage
     select_by_pk: pageByPk
+    select: pages
+    delete: deletePages
     update: updatePages
+    delete_by_pk: deletePageByPk
     update_by_pk: updatePageByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: project
     using:
@@ -23,10 +24,11 @@ array_relationships:
       foreign_key_constraint_on:
         column: pageId
         table:
-          name: Comment
           schema: public
+          name: Comment
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - id
         - createdAt
@@ -35,4 +37,3 @@ select_permissions:
         - title
         - projectId
       filter: {}
-    role: user

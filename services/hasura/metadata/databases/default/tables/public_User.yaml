@@ -1,19 +1,19 @@
 table:
-  name: User
   schema: public
+  name: User
 configuration:
-  custom_column_names:
-    image: avatar
   custom_root_fields:
-    delete: deleteUsers
-    delete_by_pk: deleteUserByPk
     insert: insertUsers
-    insert_one: insertOneUser
-    select: users
     select_aggregate: userAggregate
+    insert_one: insertOneUser
     select_by_pk: userByPk
+    select: users
+    delete: deleteUsers
     update: updateUsers
+    delete_by_pk: deleteUserByPk
     update_by_pk: updateUserByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: userType
     using:
@@ -24,66 +24,67 @@ array_relationships:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Account
           schema: public
+          name: Account
   - name: comments
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Comment
           schema: public
+          name: Comment
   - name: likes
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Like
           schema: public
+          name: Like
   - name: members
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Member
           schema: public
+          name: Member
   - name: notificationSubscriptions
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: NotificationSubscription
           schema: public
+          name: NotificationSubscription
   - name: projects
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Project
           schema: public
+          name: Project
   - name: recipientNotificationMessages
     using:
       foreign_key_constraint_on:
         column: recipientId
         table:
-          name: NotificationMessage
           schema: public
+          name: NotificationMessage
   - name: sessions
     using:
       foreign_key_constraint_on:
         column: userId
         table:
-          name: Session
           schema: public
+          name: Session
   - name: triggeredNotificationMessages
     using:
       foreign_key_constraint_on:
         column: triggeredById
         table:
-          name: NotificationMessage
           schema: public
+          name: NotificationMessage
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - bio
         - email
@@ -98,10 +99,9 @@ select_permissions:
         - updatedAt
         - id
       filter: {}
-    role: user
 update_permissions:
-  - permission:
-      check: null
+  - role: user
+    permission:
       columns:
         - bio
         - email
@@ -113,4 +113,4 @@ update_permissions:
       filter:
         id:
           _eq: X-Hasura-User-Id
-    role: user
+      check: null

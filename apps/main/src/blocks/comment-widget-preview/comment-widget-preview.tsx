@@ -56,7 +56,7 @@ function CommentWidgetPreviewInternal(
         user: {
           id: data.id || '',
           name: data.name || '',
-          avatar: data.avatar || '',
+          image: data.image || '',
         },
         replies: [],
         likes: [],

@@ -4199,7 +4199,6 @@ type User {
     """
     where: Account_bool_exp
   ): Account_aggregate!
-  avatar: String
   bio: String
 
   """
@@ -4265,6 +4264,11 @@ type User {
   email: String
   emailVerified: timestamptz
   id: uuid!
+
+  """
+  User profile avatar
+  """
+  image: String
 
   """
   An array relationship
@@ -4999,13 +5003,13 @@ input User_bool_exp {
   _not: User_bool_exp
   _or: [User_bool_exp!]
   accounts: Account_bool_exp
-  avatar: String_comparison_exp
   bio: String_comparison_exp
   comments: Comment_bool_exp
   createdAt: timestamptz_comparison_exp
   email: String_comparison_exp
   emailVerified: timestamptz_comparison_exp
   id: uuid_comparison_exp
+  image: String_comparison_exp
   likes: Like_bool_exp
   members: Member_bool_exp
   name: String_comparison_exp
@@ -5047,13 +5051,17 @@ input type for inserting data into table "User"
 """
 input User_insert_input {
   accounts: Account_arr_rel_insert_input
-  avatar: String
   bio: String
   comments: Comment_arr_rel_insert_input
   createdAt: timestamptz
   email: String
   emailVerified: timestamptz
   id: uuid
+
+  """
+  User profile avatar
+  """
+  image: String
   likes: Like_arr_rel_insert_input
   members: Member_arr_rel_insert_input
   name: String
@@ -5074,12 +5082,16 @@ input User_insert_input {
 aggregate max on columns
 """
 type User_max_fields {
-  avatar: String
   bio: String
   createdAt: timestamptz
   email: String
   emailVerified: timestamptz
   id: uuid
+
+  """
+  User profile avatar
+  """
+  image: String
   name: String
   twitterUserName: String
   updatedAt: timestamptz
@@ -5091,12 +5103,16 @@ type User_max_fields {
 order by max() on columns of table "User"
 """
 input User_max_order_by {
-  avatar: order_by
   bio: order_by
   createdAt: order_by
   email: order_by
   emailVerified: order_by
   id: order_by
+
+  """
+  User profile avatar
+  """
+  image: order_by
   name: order_by
   twitterUserName: order_by
   updatedAt: order_by
@@ -5108,12 +5124,16 @@ input User_max_order_by {
 aggregate min on columns
 """
 type User_min_fields {
-  avatar: String
   bio: String
   createdAt: timestamptz
   email: String
   emailVerified: timestamptz
   id: uuid
+
+  """
+  User profile avatar
+  """
+  image: String
   name: String
   twitterUserName: String
   updatedAt: timestamptz
@@ -5125,12 +5145,16 @@ type User_min_fields {
 order by min() on columns of table "User"
 """
 input User_min_order_by {
-  avatar: order_by
   bio: order_by
   createdAt: order_by
   email: order_by
   emailVerified: order_by
   id: order_by
+
+  """
+  User profile avatar
+  """
+  image: order_by
   name: order_by
   twitterUserName: order_by
   updatedAt: order_by
@@ -5179,13 +5203,13 @@ Ordering options when selecting data from "User".
 """
 input User_order_by {
   accounts_aggregate: Account_aggregate_order_by
-  avatar: order_by
   bio: order_by
   comments_aggregate: Comment_aggregate_order_by
   createdAt: order_by
   email: order_by
   emailVerified: order_by
   id: order_by
+  image: order_by
   likes_aggregate: Like_aggregate_order_by
   members_aggregate: Member_aggregate_order_by
   name: order_by
@@ -5216,11 +5240,6 @@ enum User_select_column {
   """
   column name
   """
-  avatar
-
-  """
-  column name
-  """
   bio
 
   """
@@ -5242,6 +5261,11 @@ enum User_select_column {
   column name
   """
   id
+
+  """
+  column name
+  """
+  image
 
   """
   column name
@@ -5278,12 +5302,16 @@ enum User_select_column {
 input type for updating data in table "User"
 """
 input User_set_input {
-  avatar: String
   bio: String
   createdAt: timestamptz
   email: String
   emailVerified: timestamptz
   id: uuid
+
+  """
+  User profile avatar
+  """
+  image: String
   name: String
   twitterUserName: String
   type: UserType_enum
@@ -5296,11 +5324,6 @@ input User_set_input {
 update columns of table "User"
 """
 enum User_update_column {
-  """
-  column name
-  """
-  avatar
-
   """
   column name
   """
@@ -5325,6 +5348,11 @@ enum User_update_column {
   column name
   """
   id
+
+  """
+  column name
+  """
+  image
 
   """
   column name

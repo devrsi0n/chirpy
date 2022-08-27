@@ -22,7 +22,8 @@ query sessionAndUser($sessionToken: String!) {
     user {
       id
       name
-      avatar
+      username
+      image
       email
       emailVerified
     }

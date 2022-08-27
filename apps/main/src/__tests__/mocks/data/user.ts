@@ -5,7 +5,7 @@ export const mockUserData = {
   username: 'username-1',
   email: 'user@example.com',
   name: 'user display name',
-  avatar: 'https://avatars.com/1.jpg',
+  image: 'https://avatars.com/1.jpg',
   bio: 'this is a testing bio',
   website: 'https://www.example.com',
   twitterUserName: 'test',

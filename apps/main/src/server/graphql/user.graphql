@@ -2,7 +2,7 @@ fragment adapterUser on User {
   id
   name
   username
-  avatar
+  image
   email
   emailVerified
   type
@@ -46,7 +46,7 @@ mutation updateUserProfileByPk(
   $id: uuid!
   $email: String
   $name: String
-  $avatar: String
+  $image: String
   $emailVerified: timestamptz
 ) {
   updateUserByPk(
@@ -54,7 +54,7 @@ mutation updateUserProfileByPk(
     _set: {
       name: $name
       email: $email
-      avatar: $avatar
+      image: $image
       emailVerified: $emailVerified
     }
   ) {
@@ -69,7 +69,7 @@ query userByPkBeforeUpdate($id: uuid!) {
     id
     email
     name
-    avatar
+    image
     emailVerified
   }
 }
@@ -78,12 +78,12 @@ query userByPkBeforeUpdate($id: uuid!) {
 mutation updateUserProfileByEmail(
   $email: String!
   $name: String
-  $avatar: String
+  $image: String
   $emailVerified: timestamptz
 ) {
   updateUsers(
     where: { email: { _eq: $email } }
-    _set: { name: $name, avatar: $avatar, emailVerified: $emailVerified }
+    _set: { name: $name, image: $image, emailVerified: $emailVerified }
   ) {
     returning {
       ...adapterUser
@@ -96,7 +96,7 @@ query userByEmailBeforeUpdate($email: String!) {
     id
     name
     email
-    avatar
+    image
     emailVerified
   }
 }
@@ -107,7 +107,7 @@ query userByPk($id: uuid!) {
     email
     username
     type
-    avatar
+    image
     name
     emailVerified
     updatedAt
@@ -151,7 +151,7 @@ mutation createUser(
   $username: String
   $email: String
   $emailVerified: timestamptz
-  $avatar: String
+  $image: String
   $type: UserType_enum
 ) {
   insertOneUser(
@@ -160,7 +160,7 @@ mutation createUser(
       username: $username
       email: $email
       emailVerified: $emailVerified
-      avatar: $avatar
+      image: $image
       type: $type
     }
   ) {

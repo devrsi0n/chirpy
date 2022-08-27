@@ -20,7 +20,10 @@ import { TextArea } from '$/components/text-area';
 import { TextField } from '$/components/text-field';
 import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context';
-import { useUpdateUserByPkMutation } from '$/graphql/generated/user';
+import {
+  useCurrentUserQuery,
+  useUpdateUserByPkMutation,
+} from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { logger } from '$/lib/logger';
 import { EMAIL_REGEXP } from '$/utilities/validator';
@@ -34,24 +37,22 @@ type FormFields = {
 };
 
 export default function Profile(): JSX.Element {
+  const { data: currentUser, isSignIn, refetchData } = useCurrentUser();
+  const [{ data, fetching }] = useCurrentUserQuery({
+    variables: { id: currentUser.id || '-1' },
+  });
   const {
-    isSignIn,
-    loading,
-    data: {
-      id,
-      avatar,
-      name,
-      username,
-      email,
-      type,
-      emailVerified,
-      bio,
-      website,
-      twitterUserName,
-    },
-    refetchData,
-  } = useCurrentUser();
-
+    name,
+    email,
+    bio,
+    website,
+    twitterUserName,
+    id,
+    image,
+    username,
+    emailVerified,
+    type,
+  } = data?.userByPk || {};
   const [isEditMode, setIsEditMode] = React.useState(false);
   const [{}, updateUserByPk] = useUpdateUserByPkMutation();
 
@@ -94,10 +95,6 @@ export default function Profile(): JSX.Element {
         return;
       }
       refetchData?.();
-      showToast({
-        type: 'success',
-        title: 'Profile saved!',
-      });
       setIsEditMode(false);
     } else {
       setIsEditMode(true);
@@ -108,7 +105,7 @@ export default function Profile(): JSX.Element {
     setIsEditMode(false);
   };
 
-  if (!isSignIn && loading) {
+  if (!isSignIn && fetching) {
     return (
       <ProfileContainer>
         <Spinner className="mt-20 justify-center" />
@@ -122,9 +119,9 @@ export default function Profile(): JSX.Element {
         <PageTitle>Profile</PageTitle>
         <section className="space-y-6">
           <div className="relative mt-1 flex h-40 w-full items-end justify-center rounded-t bg-gradient-to-r from-primary-900 to-plum-900">
-            {(avatar || name || username || email) && (
+            {(image || name || username || email) && (
               <Avatar
-                src={avatar}
+                src={image}
                 size="xl"
                 className="absolute translate-y-1/2"
                 alt={`${name}'s avatar`}

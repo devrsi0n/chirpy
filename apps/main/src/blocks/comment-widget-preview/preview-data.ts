@@ -9,7 +9,7 @@ const UserJane = {
   __typename: 'User' as const,
   id: '634da1be-cc04-4719-908e-c642de76e292',
   name: 'Jane',
-  avatar: '/images/avatars/female-1.jpeg',
+  image: '/images/avatars/female-1.jpeg',
 };
 
 export const getPreviewComments = (date: string): CommentLeafType[] => {
@@ -62,7 +62,7 @@ export const getPreviewComments = (date: string): CommentLeafType[] => {
             __typename: 'User',
             id: '634da1be-cc04-4719-908e-c642de76e292',
             name: 'Dianne',
-            avatar: '/images/avatars/female-2.jpeg',
+            image: '/images/avatars/female-2.jpeg',
           },
           likes: [
             {
@@ -98,7 +98,7 @@ export const getPreviewComments = (date: string): CommentLeafType[] => {
         __typename: 'User',
         id: '634da1be-cc04-4719-908e-c642de76e292',
         name: 'William',
-        avatar: '/images/avatars/male-1.jpeg',
+        image: '/images/avatars/male-1.jpeg',
       },
       likes: [],
       replies: [],

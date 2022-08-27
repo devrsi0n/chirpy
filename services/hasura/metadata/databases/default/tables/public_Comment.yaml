@@ -1,18 +1,19 @@
 table:
-  name: Comment
   schema: public
+  name: Comment
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteComments
-    delete_by_pk: deleteCommentByPk
     insert: insertComments
-    insert_one: insertOneComment
-    select: comments
     select_aggregate: commentAggregate
+    insert_one: insertOneComment
     select_by_pk: commentByPk
+    select: comments
+    delete: deleteComments
     update: updateComments
+    delete_by_pk: deleteCommentByPk
     update_by_pk: updateCommentByPk
+  column_config: {}
+  custom_column_names: {}
 object_relationships:
   - name: page
     using:
@@ -29,30 +30,31 @@ array_relationships:
       foreign_key_constraint_on:
         column: commentId
         table:
-          name: Like
           schema: public
+          name: Like
   - name: replies
     using:
       foreign_key_constraint_on:
         column: parentId
         table:
-          name: Comment
           schema: public
+          name: Comment
 insert_permissions:
-  - permission:
-      backend_only: false
+  - role: user
+    permission:
       check:
         userId:
           _eq: X-Hasura-User-Id
+      set:
+        userId: x-hasura-User-Id
       columns:
         - content
         - pageId
         - parentId
-      set:
-        userId: x-hasura-User-Id
-    role: user
+      backend_only: false
 select_permissions:
-  - permission:
+  - role: user
+    permission:
       columns:
         - content
         - createdAt
@@ -62,10 +64,9 @@ select_permissions:
         - parentId
         - userId
       filter: {}
-    role: user
 update_permissions:
-  - permission:
-      check: null
+  - role: user
+    permission:
       columns:
         - deletedAt
       filter:
@@ -73,20 +74,20 @@ update_permissions:
           project:
             userId:
               _eq: X-Hasura-User-Id
-    role: user
+      check: null
 event_triggers:
-  - definition:
+  - name: Comment
+    definition:
       enable_manual: false
       insert:
         columns: '*'
       update:
         columns: '*'
+    retry_conf:
+      num_retries: 3
+      interval_sec: 10
+      timeout_sec: 60
+    webhook_from_env: HASURA_GRAPHQL_EVENT_URL
     headers:
       - name: HASURA_EVENT_SECRET
         value_from_env: HASURA_EVENT_SECRET
-    name: Comment
-    retry_conf:
-      interval_sec: 10
-      num_retries: 3
-      timeout_sec: 60
-    webhook_from_env: HASURA_GRAPHQL_EVENT_URL

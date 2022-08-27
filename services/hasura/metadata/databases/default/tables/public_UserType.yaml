@@ -1,24 +1,25 @@
 table:
-  name: UserType
   schema: public
+  name: UserType
 is_enum: true
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteUserTypes
-    delete_by_pk: deleteUserTypeByPk
     insert: insertUserTypes
-    insert_one: insertOneUserType
-    select: userTypes
     select_aggregate: userTypeAggregate
+    insert_one: insertOneUserType
     select_by_pk: userTypeByPk
+    select: userTypes
+    delete: deleteUserTypes
     update: updateUserTypes
+    delete_by_pk: deleteUserTypeByPk
     update_by_pk: updateUserTypeByPk
+  column_config: {}
+  custom_column_names: {}
 array_relationships:
   - name: users
     using:
       foreign_key_constraint_on:
         column: type
         table:
-          name: User
           schema: public
+          name: User

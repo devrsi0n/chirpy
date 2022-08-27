@@ -9,7 +9,7 @@ subscription currentNotificationMessages($userId: uuid!) {
       name
       username
       email
-      avatar
+      image
     }
     type
     url
@@ -18,7 +18,7 @@ subscription currentNotificationMessages($userId: uuid!) {
       name
       username
       email
-      avatar
+      image
     }
     content
     read

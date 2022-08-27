@@ -62,7 +62,7 @@ export function NotificationItem({
         <div className="flex-1">
           <div className="flex flex-row justify-between">
             <Avatar
-              src={message.triggeredBy.avatar}
+              src={message.triggeredBy.image}
               alt={`${message.triggeredBy.name}'s avatar`}
               email={message.triggeredBy.email}
               name={message.triggeredBy.name}

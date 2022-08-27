@@ -1,24 +1,25 @@
 table:
-  name: Role
   schema: public
+  name: Role
 is_enum: true
 configuration:
-  custom_column_names: {}
   custom_root_fields:
-    delete: deleteRoles
-    delete_by_pk: deleteRoleByPk
     insert: insertRoles
-    insert_one: insertOneRole
-    select: roles
     select_aggregate: roleAggregate
+    insert_one: insertOneRole
     select_by_pk: roleByPk
+    select: roles
+    delete: deleteRoles
     update: updateRoles
+    delete_by_pk: deleteRoleByPk
     update_by_pk: updateRoleByPk
+  column_config: {}
+  custom_column_names: {}
 array_relationships:
   - name: members
     using:
       foreign_key_constraint_on:
         column: role
         table:
-          name: Member
           schema: public
+          name: Member

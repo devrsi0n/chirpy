@@ -55,7 +55,7 @@ export function CommentCard({
   disableTimelineButton,
   deletedAt,
 }: CommentCardProps): JSX.Element {
-  const { avatar, name, username, email } = author;
+  const { image, name, username, email } = author;
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
   const { projectId, deleteAComment, createAComment } = useCommentContext();
   const { showToast } = useToast();
@@ -117,7 +117,7 @@ export function CommentCard({
     >
       <Avatar
         size="lg"
-        src={avatar}
+        src={image}
         alt={`${name}'s avatar`}
         email={email}
         name={name}

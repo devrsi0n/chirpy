@@ -4,7 +4,7 @@ export function generateCommentCard(fill: number) {
     author: {
       id: fill.toString(),
       name: `author-name-${fill}`,
-      avatar: `author-avatar-${fill}`,
+      image: `author-avatar-${fill}`,
     },
     content: {
       type: 'doc',

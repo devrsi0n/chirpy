@@ -7,7 +7,7 @@ export type AdapterUserFragment = {
   id: string;
   name?: string | null;
   username?: string | null;
-  avatar?: string | null;
+  image?: string | null;
   email?: string | null;
   emailVerified?: string | null;
   type?: Types.UserType_Enum | null;
@@ -48,7 +48,7 @@ export type UpdateUserProfileByPkMutationVariables = Types.Exact<{
   id: Types.Scalars['uuid'];
   email?: Types.InputMaybe<Types.Scalars['String']>;
   name?: Types.InputMaybe<Types.Scalars['String']>;
-  avatar?: Types.InputMaybe<Types.Scalars['String']>;
+  image?: Types.InputMaybe<Types.Scalars['String']>;
   emailVerified?: Types.InputMaybe<Types.Scalars['timestamptz']>;
 }>;
 
@@ -59,7 +59,7 @@ export type UpdateUserProfileByPkMutation = {
     id: string;
     name?: string | null;
     username?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     email?: string | null;
     emailVerified?: string | null;
     type?: Types.UserType_Enum | null;
@@ -80,7 +80,7 @@ export type UserByPkBeforeUpdateQuery = {
     id: string;
     email?: string | null;
     name?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     emailVerified?: string | null;
   } | null;
 };
@@ -88,7 +88,7 @@ export type UserByPkBeforeUpdateQuery = {
 export type UpdateUserProfileByEmailMutationVariables = Types.Exact<{
   email: Types.Scalars['String'];
   name?: Types.InputMaybe<Types.Scalars['String']>;
-  avatar?: Types.InputMaybe<Types.Scalars['String']>;
+  image?: Types.InputMaybe<Types.Scalars['String']>;
   emailVerified?: Types.InputMaybe<Types.Scalars['timestamptz']>;
 }>;
 
@@ -101,7 +101,7 @@ export type UpdateUserProfileByEmailMutation = {
       id: string;
       name?: string | null;
       username?: string | null;
-      avatar?: string | null;
+      image?: string | null;
       email?: string | null;
       emailVerified?: string | null;
       type?: Types.UserType_Enum | null;
@@ -123,7 +123,7 @@ export type UserByEmailBeforeUpdateQuery = {
     id: string;
     name?: string | null;
     email?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     emailVerified?: string | null;
   }>;
 };
@@ -140,7 +140,7 @@ export type UserByPkQuery = {
     email?: string | null;
     username?: string | null;
     type?: Types.UserType_Enum | null;
-    avatar?: string | null;
+    image?: string | null;
     name?: string | null;
     emailVerified?: string | null;
     updatedAt: string;
@@ -159,7 +159,7 @@ export type UserByEmailQuery = {
     id: string;
     name?: string | null;
     username?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     email?: string | null;
     emailVerified?: string | null;
     type?: Types.UserType_Enum | null;
@@ -181,7 +181,7 @@ export type UserByAccountQuery = {
     id: string;
     name?: string | null;
     username?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     email?: string | null;
     emailVerified?: string | null;
     type?: Types.UserType_Enum | null;
@@ -212,7 +212,7 @@ export type CreateUserMutationVariables = Types.Exact<{
   username?: Types.InputMaybe<Types.Scalars['String']>;
   email?: Types.InputMaybe<Types.Scalars['String']>;
   emailVerified?: Types.InputMaybe<Types.Scalars['timestamptz']>;
-  avatar?: Types.InputMaybe<Types.Scalars['String']>;
+  image?: Types.InputMaybe<Types.Scalars['String']>;
   type?: Types.InputMaybe<Types.UserType_Enum>;
 }>;
 
@@ -223,7 +223,7 @@ export type CreateUserMutation = {
     id: string;
     name?: string | null;
     username?: string | null;
-    avatar?: string | null;
+    image?: string | null;
     email?: string | null;
     emailVerified?: string | null;
     type?: Types.UserType_Enum | null;
@@ -249,7 +249,7 @@ export const AdapterUserFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'username' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'image' } },
           { kind: 'Field', name: { kind: 'Name', value: 'email' } },
           { kind: 'Field', name: { kind: 'Name', value: 'emailVerified' } },
           { kind: 'Field', name: { kind: 'Name', value: 'type' } },
@@ -475,7 +475,7 @@ export const UpdateUserProfileByPkDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'avatar' },
+            name: { kind: 'Name', value: 'image' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
@@ -539,10 +539,10 @@ export const UpdateUserProfileByPkDocument = {
                     },
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'avatar' },
+                      name: { kind: 'Name', value: 'image' },
                       value: {
                         kind: 'Variable',
-                        name: { kind: 'Name', value: 'avatar' },
+                        name: { kind: 'Name', value: 'image' },
                       },
                     },
                     {
@@ -615,7 +615,7 @@ export const UserByPkBeforeUpdateDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'emailVerified' },
@@ -662,7 +662,7 @@ export const UpdateUserProfileByEmailDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'avatar' },
+            name: { kind: 'Name', value: 'image' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
@@ -727,10 +727,10 @@ export const UpdateUserProfileByEmailDocument = {
                     },
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'avatar' },
+                      name: { kind: 'Name', value: 'image' },
                       value: {
                         kind: 'Variable',
-                        name: { kind: 'Name', value: 'avatar' },
+                        name: { kind: 'Name', value: 'image' },
                       },
                     },
                     {
@@ -836,7 +836,7 @@ export const UserByEmailBeforeUpdateDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'emailVerified' },
@@ -892,7 +892,7 @@ export const UserByPkDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'username' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'type' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'avatar' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 {
                   kind: 'Field',
@@ -1211,7 +1211,7 @@ export const CreateUserDocument = {
           kind: 'VariableDefinition',
           variable: {
             kind: 'Variable',
-            name: { kind: 'Name', value: 'avatar' },
+            name: { kind: 'Name', value: 'image' },
           },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
@@ -1271,10 +1271,10 @@ export const CreateUserDocument = {
                     },
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'avatar' },
+                      name: { kind: 'Name', value: 'image' },
                       value: {
                         kind: 'Variable',
-                        name: { kind: 'Name', value: 'avatar' },
+                        name: { kind: 'Name', value: 'image' },
                       },
                     },
                     {

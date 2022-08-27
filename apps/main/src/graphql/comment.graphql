@@ -10,7 +10,7 @@ fragment commentItem on Comment {
     name
     username
     email
-    avatar
+    image
   }
   likes {
     id

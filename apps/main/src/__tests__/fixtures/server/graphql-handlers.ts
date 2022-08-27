@@ -13,7 +13,7 @@ export const graphqlHandlers = [
           email: 'email@test.com',
           username: 'testusername',
           name: 'Test user',
-          avatar: 'https://avater.test',
+          image: 'https://avater.test',
           bio: 'This is a bio for testing',
           website: 'https://test.com',
           twitterUserName: 'twittertest',

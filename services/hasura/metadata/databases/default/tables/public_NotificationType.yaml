@@ -1,6 +1,6 @@
 table:
-  name: NotificationType
   schema: public
+  name: NotificationType
 is_enum: true
 array_relationships:
   - name: notificationMessages
@@ -8,5 +8,5 @@ array_relationships:
       foreign_key_constraint_on:
         column: type
         table:
-          name: NotificationMessage
           schema: public
+          name: NotificationMessage
