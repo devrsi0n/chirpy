@@ -1,6 +1,6 @@
-import { CurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
+import { CurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
 
-export const messages: CurrentNotificationMessagesSubscription = {
+export const messages: CurrentNotificationMessagesQuery = {
   notificationMessages: [
     {
       id: '1',

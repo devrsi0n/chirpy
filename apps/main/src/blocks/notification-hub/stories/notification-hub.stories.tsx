@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { getOperationName, Operation } from 'urql';
 
-import { CurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
+import { CurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
 
 import { NotificationHub } from '../notification-hub';
 import { messages } from './mock-data';
@@ -23,7 +23,7 @@ export const Empty = Template.bind({});
 Empty.parameters = {
   urql: getUrqlParameter({
     notificationMessages: [],
-  } as CurrentNotificationMessagesSubscription),
+  } as CurrentNotificationMessagesQuery),
 };
 
 export const Default = Template.bind({});
@@ -36,7 +36,7 @@ Default.play = async ({ canvasElement }) => {
   await userEvent.click(notificationButton);
 };
 
-function getUrqlParameter(data: CurrentNotificationMessagesSubscription) {
+function getUrqlParameter(data: CurrentNotificationMessagesQuery) {
   return (op: Operation) => {
     const query = getOperationName(op.query);
     // logger.debug({ op, subscription: query });

@@ -4,12 +4,12 @@ import * as Urql from 'urql';
 import * as Types from './types';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-export type CurrentNotificationMessagesSubscriptionVariables = Types.Exact<{
+export type CurrentNotificationMessagesQueryVariables = Types.Exact<{
   userId: Types.Scalars['uuid'];
 }>;
 
-export type CurrentNotificationMessagesSubscription = {
-  __typename?: 'subscription_root';
+export type CurrentNotificationMessagesQuery = {
+  __typename?: 'query_root';
   notificationMessages: Array<{
     __typename?: 'NotificationMessage';
     id: string;
@@ -62,7 +62,7 @@ export type DeleteNotificationMessageMutation = {
 };
 
 export const CurrentNotificationMessagesDocument = gql`
-  subscription currentNotificationMessages($userId: uuid!) {
+  query currentNotificationMessages($userId: uuid!) {
     notificationMessages(
       where: { recipientId: { _eq: $userId } }
       order_by: { createdAt: desc, read: asc }
@@ -91,23 +91,16 @@ export const CurrentNotificationMessagesDocument = gql`
   }
 `;
 
-export function useCurrentNotificationMessagesSubscription<
-  TData = CurrentNotificationMessagesSubscription,
->(
+export function useCurrentNotificationMessagesQuery(
   options: Omit<
-    Urql.UseSubscriptionArgs<CurrentNotificationMessagesSubscriptionVariables>,
+    Urql.UseQueryArgs<CurrentNotificationMessagesQueryVariables>,
     'query'
-  > = {},
-  handler?: Urql.SubscriptionHandler<
-    CurrentNotificationMessagesSubscription,
-    TData
   >,
 ) {
-  return Urql.useSubscription<
-    CurrentNotificationMessagesSubscription,
-    TData,
-    CurrentNotificationMessagesSubscriptionVariables
-  >({ query: CurrentNotificationMessagesDocument, ...options }, handler);
+  return Urql.useQuery<CurrentNotificationMessagesQuery>({
+    query: CurrentNotificationMessagesDocument,
+    ...options,
+  });
 }
 export const HaveReadANotificationDocument = gql`
   mutation haveReadANotification($messageId: uuid!) {

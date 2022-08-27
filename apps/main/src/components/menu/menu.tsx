@@ -62,6 +62,7 @@ export type MenuButtonProps = {
   className?: string;
   ariaLabel?: string;
   open?: boolean;
+  onClick?(open?: boolean): void;
 };
 
 function MenuButton({
@@ -69,6 +70,7 @@ function MenuButton({
   ariaLabel = 'click to open the menu',
   className,
   open,
+  onClick,
   children,
 }: MenuButtonProps): JSX.Element {
   return (
@@ -76,6 +78,7 @@ function MenuButton({
       <HeadlessMenu.Button
         as={shape === 'circle' ? IconButton : Button}
         aria-label={ariaLabel}
+        onClick={() => onClick?.(open)}
       >
         {children}
         {shape === 'square' && (
