@@ -30,6 +30,7 @@ export default function Dashboard(): JSX.Element {
       variables: {
         id: id || '-1',
       },
+      pause: !id,
     });
   const fetchProjects = React.useCallback(
     (options?: Parameters<typeof fetchUserProjects>[0]) => {

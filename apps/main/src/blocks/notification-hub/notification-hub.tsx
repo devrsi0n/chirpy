@@ -21,6 +21,7 @@ export function NotificationHub(): JSX.Element {
     variables: {
       userId: userData.id || '-1',
     },
+    pause: !userData.id,
   });
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
   const [{}, deleteNotificationMessage] =
@@ -33,7 +34,7 @@ export function NotificationHub(): JSX.Element {
       <Menu>
         <Menu.Button
           className={styles.menuButton}
-          // Refetch when open the menu items
+          // Refetch when opening the menu
           onClick={(open) => !open && refetchNotification()}
         >
           <IconBell size={22} />
