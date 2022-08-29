@@ -1,4 +1,5 @@
 import { devtoolsExchange } from '@urql/devtools';
+import { refocusExchange } from '@urql/exchange-refocus';
 import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
 import {
   createClient,
@@ -12,6 +13,7 @@ import {
 } from 'urql';
 
 import { isENVDev } from '$/server/utilities/env';
+import { isBrowser } from '$/utilities/env';
 
 export function createGqlClient(hasuraToken = ''): Client {
   return createClient(getGqlClientOptions(getHeaders(hasuraToken)));
@@ -24,6 +26,7 @@ export function getGqlClientOptions(
 ): ClientOptions {
   const exchanges: Exchange[] = [
     dedupExchange,
+    ...(isBrowser ? [refocusExchange()] : []),
     fetchExchange,
     subscriptionExchange({
       forwardSubscription: (operation) => ({

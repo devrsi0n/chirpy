@@ -12,7 +12,7 @@ import {
 import { Link } from '$/components/link';
 import { Menu } from '$/components/menu';
 import { Text, TextProps } from '$/components/text';
-import { CurrentNotificationMessagesSubscription } from '$/graphql/generated/notification';
+import { CurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { useIsWidget } from '$/hooks/use-is-widget';
 import { dayjs } from '$/utilities/date';
@@ -23,7 +23,7 @@ export type INotificationItemProps = {
    * Message array total length
    */
   length: number;
-  message: CurrentNotificationMessagesSubscription['notificationMessages'][number];
+  message: CurrentNotificationMessagesQuery['notificationMessages'][number];
   onClickCapture: (messageId: string) => void;
   onClickDelete: (messageId: string) => void;
 };

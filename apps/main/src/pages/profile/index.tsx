@@ -40,6 +40,7 @@ export default function Profile(): JSX.Element {
   const { data: currentUser, isSignIn, refetchData } = useCurrentUser();
   const [{ data, fetching }] = useCurrentUserQuery({
     variables: { id: currentUser.id || '-1' },
+    pause: !currentUser.id,
   });
   const {
     name,

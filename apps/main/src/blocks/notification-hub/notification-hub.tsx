@@ -7,7 +7,7 @@ import { Menu } from '$/components/menu';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import {
-  useCurrentNotificationMessagesSubscription,
+  useCurrentNotificationMessagesQuery,
   useDeleteNotificationMessageMutation,
   useHaveReadANotificationMutation,
 } from '$/graphql/generated/notification';
@@ -17,10 +17,11 @@ import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
-  const [{ data }] = useCurrentNotificationMessagesSubscription({
+  const [{ data }, refetchNotification] = useCurrentNotificationMessagesQuery({
     variables: {
       userId: userData.id || '-1',
     },
+    pause: !userData.id,
   });
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
   const [{}, deleteNotificationMessage] =
@@ -31,7 +32,11 @@ export function NotificationHub(): JSX.Element {
   return (
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
-        <Menu.Button className={styles.menuButton}>
+        <Menu.Button
+          className={styles.menuButton}
+          // Refetch when opening the menu
+          onClick={(open) => !open && refetchNotification()}
+        >
           <IconBell size={22} />
           {hasUnreadNotifications && (
             <Badge className="absolute top-1 right-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
