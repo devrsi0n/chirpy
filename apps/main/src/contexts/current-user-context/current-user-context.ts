@@ -17,7 +17,7 @@ export type CurrentUserContextType = {
 export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
   isSignIn: false,
   data: {},
-  loading: false,
+  loading: true,
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>(

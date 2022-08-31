@@ -45,6 +45,7 @@ function CommentWidgetPreviewInternal(
   const [previewComments, setPreviewComments] = React.useState<
     CommentLeafType[]
   >(() => getPreviewComments(props.buildDate));
+
   const createAComment: UseCreateAComment = React.useCallback(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {

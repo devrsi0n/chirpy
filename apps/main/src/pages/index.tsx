@@ -13,6 +13,7 @@ import { Button } from '$/components/button';
 import { IconArrowRight } from '$/components/icons';
 import { Link } from '$/components/link';
 import { Text } from '$/components/text';
+import { isENVDev } from '$/server/utilities/env';
 
 type HomeProps = HomeCommentWidgetPreviewProps;
 
@@ -61,12 +62,14 @@ export default function Home({ buildDate }: HomeProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const buildDate = new Date().toISOString();
   return {
     props: {
       // We need a fixed date to fix SSR hydration mismatch error.
       // Used by predefined comments in comment-widget-preview
-      buildDate: new Date().toISOString(),
+      buildDate,
     },
+    revalidate: isENVDev ? 1 : 2 * 24 * 60 * 60,
   };
 };
 
