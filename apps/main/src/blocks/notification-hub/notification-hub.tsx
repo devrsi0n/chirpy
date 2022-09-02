@@ -4,6 +4,7 @@ import { Badge } from '$/components/badge';
 import { Heading } from '$/components/heading';
 import { IconBell } from '$/components/icons';
 import { Menu } from '$/components/menu';
+import { Spinner } from '$/components/spinner';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import {
@@ -17,12 +18,13 @@ import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
-  const [{ data }, refetchNotification] = useCurrentNotificationMessagesQuery({
-    variables: {
-      userId: userData.id || '-1',
-    },
-    pause: !userData.id,
-  });
+  const [{ data, fetching: isFetchingNotification }, refetchNotification] =
+    useCurrentNotificationMessagesQuery({
+      variables: {
+        userId: userData.id || '-1',
+      },
+      pause: !userData.id,
+    });
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
   const [{}, deleteNotificationMessage] =
     useDeleteNotificationMessageMutation();
@@ -46,6 +48,9 @@ export function NotificationHub(): JSX.Element {
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
+          {isFetchingNotification && (
+            <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
+          )}
           {data?.notificationMessages?.length || 0 > 0 ? (
             <div className="max-h-96 w-max overflow-y-auto">
               {data?.notificationMessages.map((msg, index) => (
@@ -57,9 +62,10 @@ export function NotificationHub(): JSX.Element {
                   onClickCapture={(messageId) =>
                     haveReadANotification({ messageId })
                   }
-                  onClickDelete={(messageId) =>
-                    deleteNotificationMessage({ messageId })
-                  }
+                  onClickDelete={async (messageId) => {
+                    await deleteNotificationMessage({ messageId });
+                    refetchNotification();
+                  }}
                 />
               ))}
             </div>
