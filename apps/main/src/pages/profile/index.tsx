@@ -26,6 +26,7 @@ import {
 } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { logger } from '$/lib/logger';
+import { getCacheByPassFetchOptions } from '$/utilities/cache';
 import { EMAIL_REGEXP } from '$/utilities/validator';
 
 type FormFields = {
@@ -95,7 +96,9 @@ export default function Profile(): JSX.Element {
         }
         return;
       }
-      refetchData?.();
+      refetchData?.({
+        fetchOptions: getCacheByPassFetchOptions(),
+      });
       setIsEditMode(false);
     } else {
       setIsEditMode(true);

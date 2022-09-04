@@ -12,13 +12,14 @@ import {
   useDeleteNotificationMessageMutation,
   useHaveReadANotificationMutation,
 } from '$/graphql/generated/notification';
+import { getCacheByPassFetchOptions } from '$/utilities/cache';
 
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
-  const [{ data, fetching: isFetchingNotification }, refetchNotification] =
+  const [{ data, fetching }, refetchNotification] =
     useCurrentNotificationMessagesQuery({
       variables: {
         userId: userData.id || '-1',
@@ -48,7 +49,7 @@ export function NotificationHub(): JSX.Element {
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
-          {isFetchingNotification && (
+          {fetching && (
             <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
           )}
           {data?.notificationMessages?.length || 0 > 0 ? (
@@ -64,7 +65,9 @@ export function NotificationHub(): JSX.Element {
                   }
                   onClickDelete={async (messageId) => {
                     await deleteNotificationMessage({ messageId });
-                    refetchNotification();
+                    refetchNotification({
+                      fetchOptions: getCacheByPassFetchOptions(),
+                    });
                   }}
                 />
               ))}

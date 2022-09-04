@@ -9,6 +9,7 @@ import { useToast } from '$/components/toast';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
+import { getCacheByPassFetchOptions } from '$/utilities/cache';
 import { sleep } from '$/utilities/time';
 import { EMAIL_REGEXP } from '$/utilities/validator';
 
@@ -50,7 +51,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           name: fields.name,
           username: fields.username,
         });
-        refetchData?.();
+        refetchData?.({
+          fetchOptions: getCacheByPassFetchOptions(),
+        });
       } catch (error: any) {
         if (/duplicate key.+users_username_key/.test(error.message)) {
           setError('username', 'Username already taken');
