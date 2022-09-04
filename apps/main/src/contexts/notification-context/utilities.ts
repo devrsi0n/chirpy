@@ -12,6 +12,10 @@ export function registerNotificationSubscription(): Promise<Response | void> {
   return navigator.serviceWorker
     .register('/sw.js')
     .then((registration) => {
+      if (!registration.pushManager) {
+        // Not supported
+        return;
+      }
       return registration.pushManager
         .getSubscription()
         .then((subscription) => {
