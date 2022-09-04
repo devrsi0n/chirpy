@@ -58,13 +58,13 @@ describe('Welcome', () => {
 
   it('should call api with filled fields', async () => {
     const email = 'email@test.com';
-    const emailInput = screen.getByRole('textbox', { name: /your email/i });
+    const emailInput = screen.getByRole('textbox', { name: /email/i });
     await userEvent.type(emailInput, email);
     const displayName = 'Test name';
-    const displayNameInput = screen.getByLabelText(/your dispaly name/i);
+    const displayNameInput = screen.getByLabelText(/dispaly name/i);
     await userEvent.type(displayNameInput, displayName);
     const userNameInput = screen.getByRole('textbox', {
-      name: /your username/i,
+      name: /username/i,
     });
     const userName = 'testuser';
     await userEvent.type(userNameInput, userName);
