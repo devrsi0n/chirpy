@@ -8,7 +8,6 @@ import { Link } from '$/components/link';
 import { Text } from '$/components/text';
 import { useCurrentUser } from '$/contexts/current-user-context';
 import { useCelebration } from '$/hooks/use-celebration';
-import { isSSRMode } from '$/utilities/env';
 import { hasValidUserProfile } from '$/utilities/user';
 
 // export type WelcomeProps = React.PropsWithChildren<{}>;
@@ -16,9 +15,10 @@ import { hasValidUserProfile } from '$/utilities/user';
 export default function Welcome(/*props: WelcomeProps*/): JSX.Element {
   useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
-  const [isFullFilled, setIsFullFilled] = React.useState(
-    isSSRMode ? true : isProfileFullFilled,
-  );
+  const [isFullFilled, setIsFullFilled] = React.useState(false);
+  React.useEffect(() => {
+    setIsFullFilled(isProfileFullFilled());
+  }, []);
 
   React.useEffect(() => {
     if (loading) return;

@@ -17,7 +17,7 @@ export type ConfirmUserFieldsProps = {
 };
 
 export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
-  const { data, loading: isLoadingUser } = useCurrentUser();
+  const { data, loading: isLoadingUser, refetchData } = useCurrentUser();
   const { register, errors, hasError, handleSubmit, setError, setFields } =
     useForm<FormFields>({
       defaultValues: {
@@ -50,6 +50,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           name: fields.name,
           username: fields.username,
         });
+        refetchData?.();
       } catch (error: any) {
         if (/duplicate key.+users_username_key/.test(error.message)) {
           setError('username', 'Username already taken');
@@ -80,7 +81,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           },
         })}
         type="email"
-        label="Your email"
+        label="Email"
         errorMessage={errors.email}
       />
       <TextField
@@ -88,7 +89,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {...register('name', {
           required: { value: true, message: 'Dispaly name is required' },
         })}
-        label="Your dispaly name"
+        label="Dispaly name"
         errorMessage={errors.name}
       />
       <TextField
@@ -102,7 +103,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           minLength: { value: 3, message: 'At least 3 characters' },
           maxLength: { value: 16, message: 'At most 16 characters' },
         })}
-        label="Your username"
+        label="Username"
         hintText="Used to be mentioned in comments"
         errorMessage={errors.username}
       />

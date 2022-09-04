@@ -8,7 +8,7 @@
       "name": "Next.js: debug server-side",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run dev",
+      "command": "npm run debug",
       "cwd": "${workspaceFolder}/apps/main"
     },
     {

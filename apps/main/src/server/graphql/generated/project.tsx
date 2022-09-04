@@ -39,6 +39,14 @@ export type UserProjectsQueryVariables = Types.Exact<{
 export type UserProjectsQuery = {
   __typename?: 'query_root';
   projects: Array<{ __typename?: 'Project'; id: string }>;
+  userByPk?: {
+    __typename?: 'User';
+    id: string;
+    email?: string | null;
+    username?: string | null;
+    image?: string | null;
+    name?: string | null;
+  } | null;
 };
 
 export type ProjectByDomainQueryVariables = Types.Exact<{
@@ -259,6 +267,30 @@ export const UserProjectsDocument = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'userByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'userId' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'image' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
               ],
             },
           },
