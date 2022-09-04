@@ -3,7 +3,6 @@ import { log, withAxiom } from 'next-axiom';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { query } from '$/server/common/gql';
 import { UserProjectsDocument } from '$/server/graphql/generated/project';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
