@@ -56,7 +56,7 @@ function loadHomePage() {
 
 function clickUserMenu() {
   const userImage = cy.get('header').findByRole('img', {
-    name: new RegExp(testUser.name),
+    name: new RegExp(`${testUser.name}'s avatar`, 'i'),
   });
   userImage.parent().then((elem) => {
     // Only click the menu if it's unexpanded

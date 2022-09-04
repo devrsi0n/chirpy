@@ -17,7 +17,7 @@ module.exports = {
     },
   },
   rules: {
-    'no-console': 'error',
+    'no-console': 'warn',
 
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-namespace': 'off',

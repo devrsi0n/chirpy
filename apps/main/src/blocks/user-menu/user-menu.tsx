@@ -37,7 +37,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
       <Menu.Button>
         <Avatar
           src={image}
-          alt={`${name}'s avatar`}
+          alt={`${name || username}'s avatar`}
           email={email}
           name={name}
           username={username}

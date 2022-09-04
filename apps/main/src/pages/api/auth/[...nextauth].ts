@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth';
 import { log, withAxiom } from 'next-axiom';
 
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
 import { query } from '$/server/common/gql';
 import { UserProjectsDocument } from '$/server/graphql/generated/project';
@@ -10,6 +11,8 @@ import { sendWelcomeLetter } from '$/server/services/email/send-emails';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
 import { isENVDev } from '$/server/utilities/env';
+
+const client = getAdminGqlClient();
 
 export default withAxiom(
   NextAuth({
@@ -50,15 +53,17 @@ export default withAxiom(
         if (!userId) {
           throw new Error(`Expect valid user id`);
         }
-        const projects = await query(
-          UserProjectsDocument,
-          {
+        const { data, error } = await client
+          .query(UserProjectsDocument, {
             userId,
-          },
-          'projects',
+          })
+          .toPromise();
+        if (!data || error) {
+          throw new Error(`GQL query error, error: ${error}, data: ${data}`);
+        }
+        const editableProjectIds = data.projects.map(
+          ({ id }: { id: string }) => id,
         );
-        const editableProjectIds =
-          projects.map(({ id }: { id: string }) => id) || [];
         session.hasuraToken = createAuthToken(
           {
             userId: userId,
@@ -72,10 +77,15 @@ export default withAxiom(
             role: 'user',
           },
         );
-        if (session.user) {
-          session.user.id = userId;
-          session.user.editableProjectIds = editableProjectIds;
-        }
+        // Extra properties should be added here, jwt only save a small set of data due to cookie size limitation
+        session.user = {
+          name: session.user.name || data.userByPk?.name || '',
+          username: session.user.username || data.userByPk?.username || '',
+          email: session.user.email || data.userByPk?.email || '',
+          image: session.user.image || data.userByPk?.image || '',
+          id: userId,
+          editableProjectIds,
+        };
         return session;
       },
       async signIn({ account, profile }) {

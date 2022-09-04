@@ -4,6 +4,8 @@ import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { useHasMounted } from '$/hooks/use-has-mounted';
+
 type Size = 'xs' | 'sm' | 'md' | 'lg';
 type Variant = 'primary' | 'secondary' | 'plain' | 'solid';
 
@@ -61,7 +63,9 @@ export const Link = React.forwardRef(function Link(
     href = '';
   }
   const router = useRouter();
-  const highlight = highlightPattern && highlightPattern.test(router.asPath);
+  const mounted = useHasMounted();
+  // highlight only apply on client
+  const highlight = mounted && highlightPattern?.test(router.asPath);
   const [isHovering, setIsHovering] = React.useState(false);
   const [target, setTarget] = React.useState(_target || '_self');
   React.useEffect(() => {

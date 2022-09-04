@@ -7,6 +7,8 @@ import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
 import { SESSION_MAX_AGE } from '$/lib/constants';
+import { query } from '$/server/common/gql';
+import { UserByPkDocument } from '$/server/graphql/generated/user';
 
 import { isENVProd } from '../../utilities/env';
 import { sendVerificationEmail } from '../email/send-emails';
@@ -57,15 +59,17 @@ export const authProviders: Provider[] = [
     async authorize(credentials /*req*/) {
       if (
         credentials?.name ===
-        process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23)
+        process.env.TEST_USER_ID.replace(/-/g, '').slice(0, 23)
       ) {
         // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
-        return {
-          id: process.env.TEST_USER_ID,
-          name: 'cypresstest',
-          email: 'cypress.test@localhost',
-          image: 'https://www.cypress.io/icons/icon-72x72.png',
-        };
+        const user = await query(
+          UserByPkDocument,
+          {
+            id: process.env.TEST_USER_ID,
+          },
+          'userByPk',
+        );
+        return user;
       }
       if (credentials?.name) {
         const name = credentials.name.trim();

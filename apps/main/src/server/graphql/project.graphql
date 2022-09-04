@@ -23,6 +23,13 @@ query userProjects($userId: uuid!) {
   projects(where: { userId: { _eq: $userId } }) {
     id
   }
+  userByPk(id: $userId) {
+    id
+    email
+    username
+    image
+    name
+  }
 }
 
 query projectByDomain($domain: String!) {

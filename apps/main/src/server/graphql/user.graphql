@@ -69,6 +69,7 @@ query userByPkBeforeUpdate($id: uuid!) {
     id
     email
     name
+    username
     image
     emailVerified
   }
@@ -95,6 +96,7 @@ query userByEmailBeforeUpdate($email: String!) {
   users(where: { email: { _eq: $email } }) {
     id
     name
+    username
     email
     image
     emailVerified

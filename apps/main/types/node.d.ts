@@ -26,5 +26,7 @@ declare namespace NodeJS {
     TWITTER_CONSUMER_SECRET: string;
     FACEBOOK_APP_ID: string;
     FACEBOOK_APP_SECRET: string;
+
+    TEST_USER_ID: string;
   }
 }

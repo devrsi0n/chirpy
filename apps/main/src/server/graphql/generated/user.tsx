@@ -80,6 +80,7 @@ export type UserByPkBeforeUpdateQuery = {
     id: string;
     email?: string | null;
     name?: string | null;
+    username?: string | null;
     image?: string | null;
     emailVerified?: string | null;
   } | null;
@@ -122,6 +123,7 @@ export type UserByEmailBeforeUpdateQuery = {
     __typename?: 'User';
     id: string;
     name?: string | null;
+    username?: string | null;
     email?: string | null;
     image?: string | null;
     emailVerified?: string | null;
@@ -615,6 +617,7 @@ export const UserByPkBeforeUpdateDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 {
                   kind: 'Field',
@@ -835,6 +838,7 @@ export const UserByEmailBeforeUpdateDocument = {
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'username' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'image' } },
                 {
