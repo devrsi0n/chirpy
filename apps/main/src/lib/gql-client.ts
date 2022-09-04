@@ -16,7 +16,7 @@ import { isENVDev } from '$/server/utilities/env';
 import { isBrowser } from '$/utilities/env';
 
 export function createGqlClient(hasuraToken = ''): Client {
-  return createClient(getGqlClientOptions(getHeaders(hasuraToken)));
+  return createClient(getGqlClientOptions(getAuthHeaders(hasuraToken)));
 }
 
 export function getGqlClientOptions(
@@ -61,7 +61,7 @@ export function getGqlClientOptions(
   };
 }
 
-function getHeaders(hasuraToken: string) {
+export function getAuthHeaders(hasuraToken: string) {
   return {
     authorization: `Bearer ${hasuraToken}`,
   };

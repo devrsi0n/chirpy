@@ -7,7 +7,7 @@ import { Nullable } from '$/types/utilities.type';
 export type UserData = Nullable<Session['user']>;
 
 export type CurrentUserContextType = {
-  refetchData?: (opts?: Partial<OperationContext> | undefined) => void;
+  refetchUser?: (opts?: Partial<OperationContext> | undefined) => void;
   loading: boolean;
   isSignIn: boolean;
   data: UserData & {

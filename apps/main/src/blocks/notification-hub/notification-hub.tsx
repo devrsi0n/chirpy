@@ -12,7 +12,7 @@ import {
   useDeleteNotificationMessageMutation,
   useHaveReadANotificationMutation,
 } from '$/graphql/generated/notification';
-import { getCacheByPassFetchOptions } from '$/utilities/cache';
+import { useBypassCacheRefetch } from '$/hooks/use-bypass-cache-refetch';
 
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
@@ -26,6 +26,7 @@ export function NotificationHub(): JSX.Element {
       },
       pause: !userData.id,
     });
+  const refetchWithoutCache = useBypassCacheRefetch(refetchNotification);
   const [{}, haveReadANotification] = useHaveReadANotificationMutation();
   const [{}, deleteNotificationMessage] =
     useDeleteNotificationMessageMutation();
@@ -65,9 +66,7 @@ export function NotificationHub(): JSX.Element {
                   }
                   onClickDelete={async (messageId) => {
                     await deleteNotificationMessage({ messageId });
-                    refetchNotification({
-                      fetchOptions: getCacheByPassFetchOptions(),
-                    });
+                    refetchWithoutCache();
                   }}
                 />
               ))}

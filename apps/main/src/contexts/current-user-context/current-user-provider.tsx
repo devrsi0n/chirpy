@@ -19,7 +19,7 @@ export function CurrentUserProvider({
 }: CurrentUserProviderProps): JSX.Element {
   const { data: session, status } = useSession();
   const sessionIsLoading = status === 'loading';
-  const [{ data: queryData, fetching }, refetchData] = useCurrentUserQuery({
+  const [{ data: queryData, fetching }, refetchUser] = useCurrentUserQuery({
     variables: { id: session?.user.id || '-1' },
     pause: true,
   });
@@ -41,13 +41,13 @@ export function CurrentUserProvider({
       data: _data,
       loading: sessionIsLoading || fetching,
       isSignIn: !!_data.id,
-      refetchData,
+      refetchUser,
     };
   }, [
     session,
     sessionIsLoading,
     hasMounted,
-    refetchData,
+    refetchUser,
     fetching,
     queryData?.userByPk,
   ]);

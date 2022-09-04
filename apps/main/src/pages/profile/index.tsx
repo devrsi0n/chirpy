@@ -24,9 +24,9 @@ import {
   useCurrentUserQuery,
   useUpdateUserByPkMutation,
 } from '$/graphql/generated/user';
+import { useBypassCacheRefetch } from '$/hooks/use-bypass-cache-refetch';
 import { useForm } from '$/hooks/use-form';
 import { logger } from '$/lib/logger';
-import { getCacheByPassFetchOptions } from '$/utilities/cache';
 import { EMAIL_REGEXP } from '$/utilities/validator';
 
 type FormFields = {
@@ -38,7 +38,8 @@ type FormFields = {
 };
 
 export default function Profile(): JSX.Element {
-  const { data: currentUser, isSignIn, refetchData } = useCurrentUser();
+  const { data: currentUser, isSignIn, refetchUser } = useCurrentUser();
+  const refetchWithoutCache = useBypassCacheRefetch(refetchUser);
   const [{ data, fetching }] = useCurrentUserQuery({
     variables: { id: currentUser.id || '-1' },
     pause: !currentUser.id,
@@ -96,9 +97,7 @@ export default function Profile(): JSX.Element {
         }
         return;
       }
-      refetchData?.({
-        fetchOptions: getCacheByPassFetchOptions(),
-      });
+      refetchWithoutCache();
       setIsEditMode(false);
     } else {
       setIsEditMode(true);
