@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { log, withAxiom } from 'next-axiom';
+import { log } from 'next-axiom';
 
 import { getApiHandler } from '$/server/common/api-handler';
 import { ApiError } from '$/server/common/error';
@@ -95,4 +95,4 @@ function unescape(str: string) {
     .replace(/_/g, '/');
 }
 
-export default withAxiom(handler);
+export default handler;

@@ -1,9 +1,7 @@
-import { withAxiom } from 'next-axiom';
-
 import { getApiHandler } from '$/server/common/api-handler';
 import { checkToxicText } from '$/server/services/content-classifier/toxic-text';
 
 const handler = getApiHandler();
 handler.get(checkToxicText);
 
-export default withAxiom(handler);
+export default handler;
