@@ -16,6 +16,7 @@ export interface INotificationContext {
   setDidRegister: React.Dispatch<React.SetStateAction<boolean>>;
   registerNotification: () => Promise<void>;
   didDeny: boolean;
+  supportNotification: boolean;
 }
 
 export const NotificationContext = React.createContext<INotificationContext>({
@@ -23,6 +24,7 @@ export const NotificationContext = React.createContext<INotificationContext>({
   setDidRegister: noop,
   registerNotification: asyncNoop,
   didDeny: false,
+  supportNotification: false,
 });
 
 export interface INotificationProviderProps {
@@ -32,6 +34,13 @@ export interface INotificationProviderProps {
 export function NotificationProvider({ children }: INotificationProviderProps) {
   const [didRegister, setDidRegister] = React.useState(false);
   const [didDeny, setDidDeny] = React.useState(false);
+  const [supportNotification, setSupportNotification] = React.useState(false);
+  React.useEffect(() => {
+    if (checkNotificationCompatibility()) {
+      setSupportNotification(true);
+    }
+  }, []);
+
   const { isSignIn } = useCurrentUser();
   const registerNotification = React.useCallback(async (): Promise<void> => {
     if (!isSignIn) {
@@ -58,8 +67,9 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
       setDidRegister,
       registerNotification,
       didDeny,
+      supportNotification,
     }),
-    [didRegister, registerNotification, didDeny],
+    [didRegister, registerNotification, didDeny, supportNotification],
   );
   React.useEffect(() => {
     if (!checkNotificationCompatibility()) {

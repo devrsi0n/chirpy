@@ -4,8 +4,8 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { easeInOut } from '../animation';
-import { PopoverButton } from './popover-button';
-import { PopoverPanel } from './popover-panel';
+import { IPopoverButtonProps, PopoverButton } from './popover-button';
+import { IPopoverPanelProps, PopoverPanel } from './popover-panel';
 
 export interface IPopoverProps extends Omit<IPopoverContentProps, 'open'> {
   /**
@@ -35,40 +35,35 @@ export function Popover({
 Popover.Button = PopoverButton;
 Popover.Panel = PopoverPanel;
 
+export type PopoverChild =
+  | React.ReactElement<IPopoverButtonProps>
+  | React.ReactElement<IPopoverPanelProps>;
+
 export interface IPopoverContentProps {
   open: boolean;
-  children: React.ReactNode;
+  children: PopoverChild[];
 }
-
-const ERROR = new Error(
-  `Popover children only accept a Popover.Panel and a Popover.Button`,
-);
 
 function PopoverContent({ children, open }: IPopoverContentProps): JSX.Element {
   const childrenArray = React.Children.toArray(
     children,
   ) as React.ReactElement[];
-  if (childrenArray.length !== 2) {
-    throw ERROR;
-  }
   const panel = childrenArray.find((element) => element.type === PopoverPanel);
   const button = childrenArray.find(
     (element) => element.type === PopoverButton,
   );
-  if (!panel || !button) {
-    throw ERROR;
-  }
 
   const buttonRef: React.RefObject<HTMLButtonElement> = React.useRef(null);
   return (
     <>
-      {React.cloneElement(button, { ref: buttonRef })}
+      {button && React.cloneElement(button, { ref: buttonRef })}
       <AnimatePresence>
         {open && (
           <m.div {...easeInOut}>
-            {React.cloneElement(panel, {
-              buttonRect: buttonRef.current?.getBoundingClientRect(),
-            })}
+            {panel &&
+              React.cloneElement(panel, {
+                buttonRect: buttonRef.current?.getBoundingClientRect(),
+              })}
           </m.div>
         )}
       </AnimatePresence>

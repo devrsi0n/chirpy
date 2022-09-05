@@ -48,7 +48,7 @@ export function MainButton({
     return toxicText.matchedLabels;
   });
 
-  const { registerNotification, didRegister, didDeny } =
+  const { registerNotification, didRegister, didDeny, supportNotification } =
     useNotificationContext();
   const handleCheckNotificationBeforeSubmit = async () => {
     await registerNotification();
@@ -81,7 +81,7 @@ export function MainButton({
         </Button>
       )}
       {isSignIn ? (
-        didRegister || didDeny || askNextTime ? (
+        !supportNotification || didRegister || didDeny || askNextTime ? (
           <ToxicTextPopover
             buttonProps={postButtonProps}
             onClickSubmit={handleCheckToxicTextBeforeSubmit}

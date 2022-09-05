@@ -66,6 +66,7 @@ export function checkServiceWorkerCompatibility(): boolean {
 }
 
 const NOTIFICATION_ERROR = 'This browser does not support notifications.';
+
 export function checkNotificationCompatibility(): boolean {
   const supported = 'Notification' in window;
   if (!supported) {

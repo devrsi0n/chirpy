@@ -60,7 +60,7 @@ export default function Dashboard(): JSX.Element {
   });
   const handleClickSubmit = handleSubmit(
     React.useCallback(
-      async (fields): Promise<void> => {
+      async (fields, _event: unknown): Promise<void> => {
         await insertProjectMutation({
           // TODO: Team id?
           name: fields.name,

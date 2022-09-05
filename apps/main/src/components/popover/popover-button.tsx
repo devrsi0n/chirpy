@@ -6,6 +6,7 @@ import { Button, ButtonProps } from '../button';
 export interface IPopoverButtonProps extends ButtonProps {
   as?: React.ElementType<Record<string, unknown>>;
 }
+
 export const PopoverButton = React.forwardRef(function PopoverButton(
   { as, children, ...buttonProps }: IPopoverButtonProps,
   ref,

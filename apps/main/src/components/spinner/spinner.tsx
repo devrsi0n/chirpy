@@ -16,9 +16,7 @@ export function Spinner(props: SpinnerProps): JSX.Element {
       )}
       aria-label="Loading data"
     >
-      <span className="animate-spin">
-        <IconLoader />
-      </span>
+      <IconLoader className="animate-spin" />
       <span>{props.children || `Loading`}</span>
     </div>
   );
