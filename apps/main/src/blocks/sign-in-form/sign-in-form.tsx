@@ -56,9 +56,10 @@ export function SignInForm({
           key="alert"
           onClickDismiss={() => setErrorType(null)}
           type="warn"
-        >
-          {error}
-        </Alert>
+          title={error}
+          className="mb-1 !space-x-2 py-2 px-4"
+          align="center"
+        />
       ),
     [error],
   );
