@@ -17,6 +17,7 @@ export default function PlayGround(): JSX.Element {
             title="Feel free to play around"
             content="We remove stale comments every 24hours automatically."
             onClickDismiss={() => setShowAlert(false)}
+            hideDismissButton
           />
         )}
       </div>

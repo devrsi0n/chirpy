@@ -57,7 +57,12 @@ export function SignInForm({
           onClickDismiss={() => setErrorType(null)}
           type="warn"
           title={error}
-          className="mb-1 !space-x-2 py-2 px-4"
+          styles={{
+            root: 'mb-1 py-2 px-4',
+            // Force row direction
+            container: '!space-x-2 !flex-row !space-y-0',
+            dismissButton: 'mt-0.5',
+          }}
           align="center"
         />
       ),

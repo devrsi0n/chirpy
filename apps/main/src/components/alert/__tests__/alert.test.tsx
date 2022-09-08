@@ -6,7 +6,7 @@ const text = 'This is a test alert';
 
 describe('Alert', () => {
   beforeEach(() => {
-    render(<Alert type="warn">{text}</Alert>);
+    render(<Alert type="warn" title={text} />);
   });
 
   afterEach(() => {

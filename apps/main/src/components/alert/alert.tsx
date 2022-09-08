@@ -14,37 +14,53 @@ export type AlertProps = {
   content?: string;
   onClickDismiss?: () => void;
   align?: AlertAlign;
-  className?: string;
+  hideDismissButton?: true;
+  styles?: {
+    root?: string;
+    container?: string;
+    dismissButton?: string;
+  };
 };
 
 export function Alert(props: AlertProps): JSX.Element {
   const [style, Icon, iconButtonColor] = TYPE_STYLES[props.type];
   return (
-    <div
+    <section
       className={clsx(
-        'group relative flex flex-row items-start  space-x-3 rounded border p-4',
-        props.align === 'center' ? 'justify-center' : 'justify-start',
+        'group relative flex w-full flex-row items-start justify-between rounded border p-4',
         style,
-        props.className,
+        props.styles?.root,
       )}
     >
-      <Icon size={20} className="" />
-      <div className="">
-        <h4 className="text-base font-semibold leading-tight">{props.title}</h4>
-        {props.content && <p className="mt-1">{props.content}</p>}
-      </div>
-      <IconButton
+      <div
         className={clsx(
-          'invisible !absolute right-4  group-hover:visible',
-          props.content && 'top-4',
+          'flex flex-1 flex-col items-start space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3',
+          props.align === 'center' ? 'justify-center' : 'justify-start',
+          props.styles?.container,
         )}
-        onClick={props.onClickDismiss}
-        aria-label="Dismiss"
-        color={iconButtonColor}
       >
-        <IconX size={18} />
-      </IconButton>
-    </div>
+        <Icon size={20} className="" />
+        <div className="">
+          <h4 className="text-base font-semibold leading-tight">
+            {props.title}
+          </h4>
+          {props.content && <p className="mt-1">{props.content}</p>}
+        </div>
+      </div>
+      {!props.hideDismissButton && (
+        <IconButton
+          className={clsx(
+            'invisible group-hover:visible',
+            props.styles?.dismissButton,
+          )}
+          onClick={props.onClickDismiss}
+          aria-label="Dismiss"
+          color={iconButtonColor}
+        >
+          <IconX size={18} />
+        </IconButton>
+      )}
+    </section>
   );
 }
 
