@@ -18,8 +18,8 @@ DotEnv.config({
 
 setGlobalConfig(globalStorybookConfig);
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
-afterEach(() => server.resetHandlers());
+beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
+// afterEach(() => server.resetHandlers());
 afterAll(() => {
   cleanEvents();
   server.close();

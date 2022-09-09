@@ -15,7 +15,7 @@ import { sbGqlHandlers } from './msw/gql-handlers';
 import { sbRestHandlers } from './msw/rest-handlers';
 
 initialize({
-  onUnhandledRequest: 'warn',
+  onUnhandledRequest: 'bypass',
 });
 
 export const decorators = [

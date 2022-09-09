@@ -10,6 +10,7 @@ import { useCurrentUser } from '$/contexts/current-user-context';
 import { useUpdateUserFieldsMutation } from '$/graphql/generated/user';
 import { useBypassCacheRefetch } from '$/hooks/use-bypass-cache-refetch';
 import { useForm } from '$/hooks/use-form';
+import { logger } from '$/lib/logger';
 import { sleep } from '$/utilities/time';
 import { EMAIL_REGEXP } from '$/utilities/validator';
 
@@ -18,12 +19,8 @@ export type ConfirmUserFieldsProps = {
 };
 
 export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
-  const {
-    data,
-    loading: isLoadingUser,
-    refetchUser: refetchData,
-  } = useCurrentUser();
-  const refetchWithoutCache = useBypassCacheRefetch(refetchData);
+  const { data, loading: isLoadingUser, refetchUser } = useCurrentUser();
+  const refetchWithoutCache = useBypassCacheRefetch(refetchUser);
   const { register, errors, hasError, handleSubmit, setError, setFields } =
     useForm<FormFields>({
       defaultValues: {
@@ -58,6 +55,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         });
         refetchWithoutCache();
       } catch (error: any) {
+        logger.debug(`Update user fields failed: ${error}`);
         if (/duplicate key.+users_username_key/.test(error.message)) {
           setError('username', 'Username already taken');
         } else if (/duplicate key.+users_email_key/.test(error.message)) {

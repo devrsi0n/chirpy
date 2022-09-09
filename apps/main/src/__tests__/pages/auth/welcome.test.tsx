@@ -10,6 +10,7 @@ import Welcome from '$/pages/auth/welcome';
 
 const mockUpdateUser = jest.fn().mockImplementation(() => {
   logger.debug('called mockUpdateUser');
+  return Promise.resolve();
 });
 jest.mock('$/graphql/generated/user', () => ({
   // Make exported object configurable
@@ -88,7 +89,7 @@ describe('Welcome', () => {
     await waitFor(
       () => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'),
       {
-        timeout: 3000,
+        timeout: 4000,
       },
     );
   });
