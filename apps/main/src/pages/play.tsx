@@ -53,6 +53,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   log.debug('DeleteStaleComments, affected rows:', data.affected_rows);
   return {
     revalidate: 60 * 60,
+    // We only need it to trigger periodicity tasks, no need props
     props: {},
   };
 };

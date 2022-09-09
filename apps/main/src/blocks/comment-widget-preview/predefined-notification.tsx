@@ -21,9 +21,10 @@ export function PredefinedNotification(
   const notificationContext: INotificationContext = React.useMemo(
     () => ({
       registerNotification: asyncNoop,
-      didRegister: true,
+      didRegister: false,
       didDeny: false,
       setDidRegister: noop,
+      supportNotification: false,
     }),
     [],
   );
