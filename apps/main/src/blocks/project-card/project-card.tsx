@@ -15,7 +15,7 @@ import { useDeleteProjectByPkMutation } from '$/graphql/generated/project';
 import { UserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { logger } from '$/lib/logger';
 import { listHoverable } from '$/styles/common';
-import { dayjs } from '$/utilities/date';
+import { cpDayjs } from '$/utilities/date';
 
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
@@ -145,7 +145,7 @@ export function ProjectCard({
       <Divider />
       <div className="px-6 pb-4">
         <Text className="!leading-none" size="sm" variant="secondary">
-          Created {dayjs(project.createdAt).fromNow()}
+          Created {cpDayjs(project.createdAt).fromNow()}
         </Text>
       </div>
       <Dialog

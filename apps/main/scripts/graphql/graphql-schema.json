@@ -9322,13 +9322,9 @@
             "description": null,
             "args": [],
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "timestamptz",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "timestamptz",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null

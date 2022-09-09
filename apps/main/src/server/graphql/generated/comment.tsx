@@ -1,7 +1,6 @@
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-
 import * as Types from './types';
 
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type CommentsQueryVariables = Types.Exact<{
   newerThan: Types.Scalars['timestamptz'];
 }>;
@@ -59,6 +58,19 @@ export type AuthorByCommentIdQuery = {
       username?: string | null;
       email?: string | null;
     };
+  } | null;
+};
+
+export type DeleteStaleCommentsMutationVariables = Types.Exact<{
+  beforeDate: Types.Scalars['timestamptz'];
+  url: Types.Scalars['String'];
+}>;
+
+export type DeleteStaleCommentsMutation = {
+  __typename?: 'mutation_root';
+  deleteComments?: {
+    __typename?: 'Comment_mutation_response';
+    affected_rows: number;
   } | null;
 };
 
@@ -320,4 +332,116 @@ export const AuthorByCommentIdDocument = {
 } as unknown as DocumentNode<
   AuthorByCommentIdQuery,
   AuthorByCommentIdQueryVariables
+>;
+export const DeleteStaleCommentsDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'deleteStaleComments' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'beforeDate' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'timestamptz' },
+            },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'url' } },
+          type: {
+            kind: 'NonNullType',
+            type: {
+              kind: 'NamedType',
+              name: { kind: 'Name', value: 'String' },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'deleteComments' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'where' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'createdAt' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: '_lt' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'beforeDate' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'page' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'url' },
+                            value: {
+                              kind: 'ObjectValue',
+                              fields: [
+                                {
+                                  kind: 'ObjectField',
+                                  name: { kind: 'Name', value: '_eq' },
+                                  value: {
+                                    kind: 'Variable',
+                                    name: { kind: 'Name', value: 'url' },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'affected_rows' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  DeleteStaleCommentsMutation,
+  DeleteStaleCommentsMutationVariables
 >;

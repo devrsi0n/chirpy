@@ -42,3 +42,11 @@ query authorByCommentId($commentId: uuid!) {
     }
   }
 }
+
+mutation deleteStaleComments($beforeDate: timestamptz!, $url: String!) {
+  deleteComments(
+    where: { createdAt: { _lt: $beforeDate }, page: { url: { _eq: $url } } }
+  ) {
+    affected_rows
+  }
+}
