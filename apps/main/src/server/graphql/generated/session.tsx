@@ -1,7 +1,6 @@
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
-
 import * as Types from './types';
 
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type CreateSessionMutationVariables = Types.Exact<{
   userId?: Types.InputMaybe<Types.Scalars['uuid']>;
   sessionToken: Types.Scalars['String'];

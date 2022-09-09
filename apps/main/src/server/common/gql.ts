@@ -1,4 +1,5 @@
 import { DocumentNode } from 'graphql';
+import { log } from 'next-axiom';
 import { TypedDocumentNode } from 'urql';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
@@ -22,7 +23,9 @@ export async function query<
 ): Promise<NonNullable<Data[Path]>> {
   const { data, error } = await client.query(query, variables).toPromise();
   if (!data || !data[path] || error) {
-    throw new Error(`GQL query error, error: ${error}, data: ${data}`);
+    const message = `GQL query error, error: ${error}, data: ${data}`;
+    log.error(message);
+    throw new Error(message);
   }
   return data[path] as NonNullable<Data[Path]>;
 }
@@ -46,7 +49,9 @@ export async function mutate<
     .mutation(mutation, variables)
     .toPromise();
   if (!data || !data[path] || error) {
-    throw new Error(`GQL mutation error, error: ${error}, data: ${data}`);
+    const message = `GQL mutation error, error: ${error}, data: ${data}`;
+    log.error(message);
+    throw new Error(message);
   }
   return data[path] as NonNullable<Data[Path]>;
 }

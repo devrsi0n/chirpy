@@ -5,12 +5,17 @@ import { ring } from '$/styles/common';
 
 import { BaseButton, BaseButtonProps } from './base-button';
 
+export type IconButtonColor = 'gray' | 'primary' | 'green' | 'yellow' | 'red';
 export type IconButtonProps = BaseButtonProps & {
   children?: React.ReactNode;
+  /**
+   * @default gray
+   */
+  color?: IconButtonColor;
 };
 
 export const IconButton = React.forwardRef(function IconButton(
-  { children, className, ...restProps }: IconButtonProps,
+  { children, className, color = 'gray', ...restProps }: IconButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   return (
@@ -19,7 +24,8 @@ export const IconButton = React.forwardRef(function IconButton(
       {...restProps}
       className={clsx(
         ring,
-        `rounded-full text-gray-900 hover:bg-gray-400 hover:ring-4 hover:ring-gray-400`,
+        `rounded-full hover:ring-4`,
+        COLOR_STYLES[color],
         className,
       )}
     >
@@ -27,3 +33,11 @@ export const IconButton = React.forwardRef(function IconButton(
     </BaseButton>
   );
 });
+
+const COLOR_STYLES: Record<IconButtonColor, string> = {
+  gray: 'text-gray-1100 hover:bg-gray-400 hover:ring-gray-400',
+  primary: 'text-primary-1100 hover:bg-primary-400 hover:ring-primary-400',
+  green: 'text-green-1100 hover:bg-green-400 hover:ring-green-400',
+  yellow: 'text-yellow-1100 hover:bg-yellow-400 hover:ring-yellow-400',
+  red: 'text-red-1100 hover:bg-red-400 hover:ring-red-400',
+};

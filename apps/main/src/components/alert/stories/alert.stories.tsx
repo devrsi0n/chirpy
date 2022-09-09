@@ -11,6 +11,7 @@ const Template: ComponentStory<typeof Alert> = (args) => <Alert {...args} />;
 
 export const Warn = Template.bind({});
 Warn.args = {
-  children: 'Warn',
+  title: 'Warning',
+  content: 'This is a warning alert',
   type: 'warn',
 };

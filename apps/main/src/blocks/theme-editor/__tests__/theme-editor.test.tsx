@@ -1,5 +1,7 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import * as nextThemesModule from 'next-themes';
+
+import { pageRender } from '$/__tests__/fixtures/page-render';
 
 import { ThemeEditor } from '../';
 
@@ -14,7 +16,7 @@ jest.spyOn(nextThemesModule, 'useTheme').mockReturnValue({
 
 describe('ThemeEditor', () => {
   beforeEach(() => {
-    render(
+    pageRender(
       <ThemeEditor project={PROJECT} buildDate={new Date().toISOString()} />,
     );
   });

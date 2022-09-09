@@ -1294,7 +1294,7 @@ export type NotificationMessage_Update_Column =
 /** columns and relationships of "NotificationSubscription" */
 export type NotificationSubscription = {
   __typename?: 'NotificationSubscription';
-  createdAt: Scalars['timestamptz'];
+  createdAt?: Maybe<Scalars['timestamptz']>;
   id: Scalars['uuid'];
   subscription: Scalars['jsonb'];
   /** An object relationship */

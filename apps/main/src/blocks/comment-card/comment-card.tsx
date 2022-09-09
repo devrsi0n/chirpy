@@ -20,7 +20,7 @@ import { COMMENT_TREE_MAX_DEPTH } from '$/lib/constants';
 import { logger } from '$/lib/logger';
 import { isENVDev } from '$/server/utilities/env';
 import { CommentLeafType } from '$/types/widget';
-import { dayjs } from '$/utilities/date';
+import { cpDayjs } from '$/utilities/date';
 
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor, RTEValue } from '../rich-text-editor';
@@ -136,7 +136,7 @@ export function CommentCard({
               className="cursor-default !leading-none"
               dateTime={createdAt}
             >
-              {dayjs(createdAt).fromNow()}
+              {cpDayjs(createdAt).fromNow()}
             </Text>
           </div>
           <>

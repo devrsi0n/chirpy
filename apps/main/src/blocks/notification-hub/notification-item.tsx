@@ -15,7 +15,7 @@ import { Text, TextProps } from '$/components/text';
 import { CurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
 import { NotificationType_Enum } from '$/graphql/generated/types';
 import { useIsWidget } from '$/hooks/use-is-widget';
-import { dayjs } from '$/utilities/date';
+import { cpDayjs } from '$/utilities/date';
 
 export type INotificationItemProps = {
   index: number;
@@ -95,7 +95,7 @@ export function NotificationItem({
             className="mt-1 block cursor-default leading-none"
             dateTime={message.createdAt}
           >
-            {dayjs(message.createdAt).fromNow()}
+            {cpDayjs(message.createdAt).fromNow()}
           </NotificationText>
           {message.content && (
             <NotificationText

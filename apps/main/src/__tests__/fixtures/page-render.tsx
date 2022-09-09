@@ -11,12 +11,12 @@ import { CurrentUserContext, UserData } from '$/contexts/current-user-context';
 
 import { mockUserData } from '../mocks/data/user';
 
-const mockRefetch = jest.fn();
+export const mockRefetchUser = jest.fn();
 const DEFAULT_USER_DATA = {
   data: mockUserData,
   isSignIn: true,
   loading: false,
-  refetch: mockRefetch,
+  refetchUser: mockRefetchUser,
 };
 
 const getMockedUser = jest.fn().mockReturnValue(DEFAULT_USER_DATA);

@@ -1,5 +1,6 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 
+import { pageRender } from '$/__tests__/fixtures/page-render';
 import {
   generateCommentFragment,
   getTextsOfComment,
@@ -41,7 +42,7 @@ const mockComments = [
 
 describe('CommentTrees', () => {
   beforeEach(() => {
-    render(<CommentTrees comments={mockComments as any} />);
+    pageRender(<CommentTrees comments={mockComments as any} />);
   });
 
   afterEach(() => {
