@@ -28,6 +28,7 @@ module.exports = withPlugins(
     ],
   ],
   {
+    productionBrowserSourceMaps: process.env.VERCEL_ENV !== 'production',
     experimental: {
       scrollRestoration: true,
       legacyBrowsers: false,
