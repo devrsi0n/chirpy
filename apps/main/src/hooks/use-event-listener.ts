@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { logger } from '$/lib/logger';
+
 function useEventListener<WE extends keyof WindowEventMap = 'resize'>(
   eventName: WE,
   listener: (event: WindowEventMap[WE]) => void,
@@ -38,6 +40,9 @@ function useEventListener<
       (element as HTMLElement) ||
       window;
     if (!targetElement.addEventListener) {
+      logger.warn(
+        `Can't find add event listner(${listenerRef.current}) for element ${element}`,
+      );
       return;
     }
 

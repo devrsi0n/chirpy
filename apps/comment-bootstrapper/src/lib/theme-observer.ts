@@ -33,15 +33,13 @@ let isWidgetLoaded = false;
 const pendingEvents: { name: string; value: string }[] = [];
 
 export function observeWidgetLoadedEvent(iframe: HTMLIFrameElement) {
-  iframe.addEventListener('load', () => {
-    iframe.contentWindow?.addEventListener('message', (e) => {
-      if (e.data === EVENT_WIDGET_LOADED) {
-        isWidgetLoaded = true;
-        pendingEvents.forEach((e) => {
-          iframe.contentWindow?.postMessage(e);
-        });
-      }
-    });
+  window.addEventListener('message', (e) => {
+    if (e.data === EVENT_WIDGET_LOADED) {
+      isWidgetLoaded = true;
+      pendingEvents.forEach((e) => {
+        iframe.contentWindow?.postMessage(e);
+      });
+    }
   });
 }
 

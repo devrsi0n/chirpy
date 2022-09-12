@@ -25,7 +25,7 @@ export function useWidgetSideEffects(): void {
   }, []);
 
   React.useEffect(() => {
-    window.postMessage(EVENT_WIDGET_LOADED, '*');
+    sendMessageToParentPage(EVENT_WIDGET_LOADED);
   }, []);
 
   const { setTheme } = useTheme();
@@ -48,7 +48,7 @@ export function useWidgetSideEffects(): void {
 
 function broadcastPageHeight(): void {
   const newHeight: number = document.body.scrollHeight;
-  window.parent.postMessage({ height: newHeight }, '*');
+  sendMessageToParentPage({ height: newHeight });
 }
 
 // Close popup when user clicks on the out side of iframe
@@ -60,4 +60,8 @@ function unexpandedPopup(selectors: string): void {
         element.click();
       }
     });
+}
+
+function sendMessageToParentPage(data: $TsAny) {
+  window.parent.postMessage(data, '*');
 }
