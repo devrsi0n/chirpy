@@ -25,7 +25,7 @@ export function useWidgetSideEffects(): void {
   }, []);
 
   React.useEffect(() => {
-    window.postMessage(EVENT_WIDGET_LOADED);
+    window.postMessage(EVENT_WIDGET_LOADED, '*');
   }, []);
 
   const { setTheme } = useTheme();
