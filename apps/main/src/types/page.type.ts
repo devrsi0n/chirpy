@@ -15,3 +15,5 @@ export type CommonWidgetProps = {
   session?: Session;
   isWidget: true;
 };
+
+export type PageProps = CommonPageProps | CommonWidgetProps;

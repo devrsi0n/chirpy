@@ -13,10 +13,12 @@ import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
 
 import '$/styles/global-styles.scss';
 
+import { CommonWidgetProps, PageProps } from '$/types/page.type';
+
 function App({
   Component,
   pageProps: { session, ...pageProps },
-}: AppProps): JSX.Element {
+}: AppProps<PageProps>): JSX.Element {
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
       <SessionProvider
@@ -28,7 +30,9 @@ function App({
           attribute="class"
           // Widget and app themes are different
           storageKey={
-            pageProps.isWidget ? 'chirpy.widget.theme' : 'chirpy.theme'
+            (pageProps as CommonWidgetProps).isWidget
+              ? 'chirpy.widget.theme'
+              : 'chirpy.theme'
           }
         >
           <LazyMotion features={loadFeatures} strict>
