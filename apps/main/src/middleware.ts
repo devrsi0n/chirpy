@@ -27,5 +27,6 @@ export const config = {
     '/theme/:path*',
     '/api/mutation-event',
     '/api/notification',
+    '/api/revalidate/widgets',
   ],
 };

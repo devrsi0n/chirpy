@@ -2,12 +2,12 @@ import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
 
-import { getApiHandler } from '$/server/common/api-handler';
-import { ApiError } from '$/server/common/error';
+import { APIError } from '$/server/common/api-error';
+import { getAPIHandler } from '$/server/common/api-handler';
 import { mutate } from '$/server/common/gql';
 import { DeleteUserDocument } from '$/server/graphql/generated/user';
 
-const handler = getApiHandler();
+const handler = getAPIHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const signedRequest = req.body.signed_request;
   log.debug('Validating signature', {
@@ -43,7 +43,7 @@ type DecodedPayload = {
 function getSignatureAndPayloadFromSignedRequest(signedRequest: string) {
   const [encodedSignature, payload] = signedRequest.split('.', 2);
   if (!encodedSignature || !payload) {
-    throw new ApiError(400, 'Signed request has invalid format');
+    throw new APIError(400, 'Signed request has invalid format');
   }
   const signature = decodeSignature(encodedSignature);
   return [signature, payload];
@@ -54,7 +54,7 @@ function validateSignature(actualSignature: string, payload: string) {
   // For some reason, the actual signature always has a '=' appended
   const actualSignatureWithEqualsSign = actualSignature + '=';
   if (actualSignatureWithEqualsSign !== expectedSignature) {
-    throw new ApiError(401, 'Invalid signature');
+    throw new APIError(401, 'Invalid signature');
   }
 }
 
@@ -67,7 +67,7 @@ function decodePayload(payload: string) {
   try {
     return JSON.parse(bodyJson);
   } catch {
-    throw new ApiError(400, 'Signed request has invalid json');
+    throw new APIError(400, 'Signed request has invalid json');
   }
 }
 

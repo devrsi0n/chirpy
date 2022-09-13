@@ -31,6 +31,19 @@ export type ProjectByPkQuery = {
   projectByPk?: { __typename?: 'Project'; id: string } | null;
 };
 
+export type PageUrLsOfProjectQueryVariables = Types.Exact<{
+  id: Types.Scalars['uuid'];
+}>;
+
+export type PageUrLsOfProjectQuery = {
+  __typename?: 'query_root';
+  projectByPk?: {
+    __typename?: 'Project';
+    id: string;
+    pages: Array<{ __typename?: 'Page'; id: string; url: string }>;
+  } | null;
+};
+
 export type UserProjectsQueryVariables = Types.Exact<{
   userId: Types.Scalars['uuid'];
 }>;
@@ -208,6 +221,65 @@ export const ProjectByPkDocument = {
     },
   ],
 } as unknown as DocumentNode<ProjectByPkQuery, ProjectByPkQueryVariables>;
+export const PageUrLsOfProjectDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'pageURLsOfProject' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'uuid' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'projectByPk' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'id' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'pages' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  PageUrLsOfProjectQuery,
+  PageUrLsOfProjectQueryVariables
+>;
 export const UserProjectsDocument = {
   kind: 'Document',
   definitions: [

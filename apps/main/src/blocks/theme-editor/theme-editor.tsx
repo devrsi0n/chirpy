@@ -4,6 +4,7 @@ import { useTheme } from 'next-themes';
 import * as React from 'react';
 
 import { PageTitle } from '$/blocks/page-title';
+import { Alert } from '$/components/alert';
 import { IconButton } from '$/components/button';
 import { Heading, IHeadingProps } from '$/components/heading';
 import { Popover } from '$/components/popover';
@@ -17,6 +18,7 @@ import {
   CommentWidgetPreviewProps,
 } from '../comment-widget-preview';
 import { ColorSeries, colorOptions } from './colors';
+import { revalidateProjectPages } from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
@@ -44,6 +46,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         projectId: props.project.id,
         theme: newTheme,
       });
+      revalidateProjectPages(props.project.id);
     };
   };
 
@@ -110,6 +113,11 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             <Text variant="secondary">
               {`Here's a preview of your changes to the theme. When you set the changes, the entire widget will change with the theme.`}
             </Text>
+            <Alert
+              type="warn"
+              title="Note"
+              content="Your online widgets will be refreshed in 1 or 2 minutes after saving."
+            />
           </div>
           <div role="separator" className="my-5 h-[1px] w-20 bg-gray-300" />
           <CommentWidgetPreview buildDate={props.buildDate} />

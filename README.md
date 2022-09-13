@@ -2,6 +2,7 @@
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
 [![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
+[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
 
 <img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
