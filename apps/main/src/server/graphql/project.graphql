@@ -10,6 +10,7 @@ query themeProjectByPk($domain: String!) {
     id
     name
     theme
+    domain
   }
 }
 

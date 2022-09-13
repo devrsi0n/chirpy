@@ -9,8 +9,10 @@ import { IconButton } from '$/components/button';
 import { Heading, IHeadingProps } from '$/components/heading';
 import { Popover } from '$/components/popover';
 import { Text } from '$/components/text';
+import { useToast } from '$/components/toast';
 import { useWidgetTheme } from '$/contexts/theme-context';
 import { useUpdateThemeMutation } from '$/graphql/generated/project';
+import { logger } from '$/lib/logger';
 import { ThemeProjectByPkQuery } from '$/server/graphql/generated/project';
 
 import {
@@ -33,8 +35,9 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
     ? 'light'
     : resolvedTheme) || 'light') as keyof ColorSeries;
   const [{}, updateTheme] = useUpdateThemeMutation();
+  const { showToast } = useToast();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
-    return () => {
+    return async () => {
       const newTheme = merge({}, widgetTheme, {
         colors: {
           light: { primary: color.light },
@@ -42,11 +45,23 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         },
       });
       setWidgetTheme(newTheme);
-      updateTheme({
+      await updateTheme({
         projectId: props.project.id,
         theme: newTheme,
       });
-      revalidateProjectPages(props.project.id);
+      try {
+        await revalidateProjectPages(props.project.id, props.project.domain);
+        showToast({
+          type: 'info',
+          title: 'Theme has been saved',
+        });
+      } catch (error) {
+        logger.warn(`Revalidate theme pages failed`, error);
+        showToast({
+          type: 'error',
+          title: 'Save theme failed',
+        });
+      }
     };
   };
 

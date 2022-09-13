@@ -79,6 +79,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   return {
     props: { project: projects[0], buildDate: new Date().toISOString() },
-    revalidate: 1,
+    revalidate: 60 * 60,
   };
 };
