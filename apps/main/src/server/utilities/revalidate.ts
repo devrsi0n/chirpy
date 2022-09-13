@@ -1,12 +1,14 @@
 import { NextApiResponse } from 'next';
 
-export async function revalidateCommentWidget(
-  pageURL: string,
+export async function revalidateCommentWidgets(
+  pageURLs: string[],
   res: NextApiResponse,
 ) {
-  await Promise.allSettled([
-    res.revalidate(`/widget/comment/${encodeURIComponent(pageURL)}`),
-    // TODO: Revalidate the timeline page
-    // res.unstable_revalidate(`/widget/comment/timeline/${pageURL}`),
-  ]);
+  await Promise.allSettled(
+    pageURLs.map((url) => revalidateCommentWidget(url, res)),
+  );
+}
+
+export function revalidateCommentWidget(pageURL: string, res: NextApiResponse) {
+  return res.revalidate(`/widget/comment/${encodeURIComponent(pageURL)}`);
 }

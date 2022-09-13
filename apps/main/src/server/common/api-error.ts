@@ -6,7 +6,7 @@ export class BaseError extends Error {
   }
 }
 
-export class ApiError extends BaseError {
+export class APIError extends BaseError {
   public readonly httpStatus: HttpStatus;
   public readonly extraData?: Record<string, string>;
 

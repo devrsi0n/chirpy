@@ -19,6 +19,17 @@ query projectByPk($id: uuid!) {
   }
 }
 
+# Get all page URLs of a project
+query pageURLsOfProject($id: uuid!) {
+  projectByPk(id: $id) {
+    id
+    pages {
+      id
+      url
+    }
+  }
+}
+
 query userProjects($userId: uuid!) {
   projects(where: { userId: { _eq: $userId } }) {
     id
