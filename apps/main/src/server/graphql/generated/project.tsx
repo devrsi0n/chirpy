@@ -19,6 +19,7 @@ export type ThemeProjectByPkQuery = {
     id: string;
     name: string;
     theme?: any | null;
+    domain: string;
   }>;
 };
 
@@ -165,6 +166,7 @@ export const ThemeProjectByPkDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'name' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'theme' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'domain' } },
               ],
             },
           },

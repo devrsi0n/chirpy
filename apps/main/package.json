@@ -35,7 +35,7 @@
     "@tiptap/react": "2.0.0-beta.194",
     "@tiptap/starter-kit": "2.0.0-beta.194",
     "@urql/exchange-graphcache": "5.0.1",
-    "@urql/exchange-refocus": "^1.0.0",
+    "@urql/exchange-refocus": "1.0.0",
     "avvvatars-react": "0.4.2",
     "canvas-confetti": "1.5.1",
     "chart.js": "3.8.0",

@@ -8,7 +8,7 @@ const defaultValue = 'text field default value';
 
 describe('TextField', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

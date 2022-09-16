@@ -7,6 +7,7 @@ import DotEnv from 'dotenv';
 import 'fake-indexeddb/auto';
 import 'intersection-observer';
 import 'whatwg-fetch';
+import './mocks/mock-framer-motion';
 
 import * as globalStorybookConfig from '../../.storybook/preview';
 import { server } from './fixtures/server';
@@ -18,7 +19,7 @@ DotEnv.config({
 
 setGlobalConfig(globalStorybookConfig);
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
+beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
 // afterEach(() => server.resetHandlers());
 afterAll(() => {
   cleanEvents();

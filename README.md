@@ -6,7 +6,7 @@
 
 <img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
-👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Read our [open source](https://chirpy.dev/blog/open-source) announcement.
+👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Try it now: [Playground](https://chirpy.dev/play).
 
 <details>
     <summary>More screenshots</summary>
