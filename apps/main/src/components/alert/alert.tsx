@@ -8,19 +8,25 @@ export type AlertType = 'warn' | 'info' | 'success';
 
 export type AlertAlign = 'center' | 'left';
 
+type HideButtonProps = {
+  hideDismissButton: true;
+};
+
+type OnClickProps = {
+  onClickDismiss: () => void;
+};
+
 export type AlertProps = {
   type: AlertType;
   title: string;
   content?: string;
-  onClickDismiss?: () => void;
   align?: AlertAlign;
-  hideDismissButton?: true;
   styles?: {
     root?: string;
     container?: string;
     dismissButton?: string;
   };
-};
+} & (HideButtonProps | OnClickProps);
 
 export function Alert(props: AlertProps): JSX.Element {
   const [style, Icon, iconButtonColor] = TYPE_STYLES[props.type];
@@ -47,13 +53,13 @@ export function Alert(props: AlertProps): JSX.Element {
           {props.content && <p className="mt-1">{props.content}</p>}
         </div>
       </div>
-      {!props.hideDismissButton && (
+      {!(props as HideButtonProps).hideDismissButton && (
         <IconButton
           className={clsx(
             'invisible group-hover:visible',
             props.styles?.dismissButton,
           )}
-          onClick={props.onClickDismiss}
+          onClick={(props as OnClickProps).onClickDismiss}
           aria-label="Dismiss"
           color={iconButtonColor}
         >

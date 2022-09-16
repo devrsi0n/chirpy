@@ -45,18 +45,18 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         },
       });
       setWidgetTheme(newTheme);
-      await updateTheme({
-        projectId: props.project.id,
-        theme: newTheme,
-      });
       try {
+        await updateTheme({
+          projectId: props.project.id,
+          theme: newTheme,
+        });
         await revalidateProjectPages(props.project.id, props.project.domain);
         showToast({
           type: 'info',
           title: 'Theme has been saved',
         });
       } catch (error) {
-        logger.warn(`Revalidate theme pages failed`, error);
+        logger.warn(`Save theme pages failed`, error);
         showToast({
           type: 'error',
           title: 'Save theme failed',
@@ -132,6 +132,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
               type="warn"
               title="Note"
               content="Your online widgets will be refreshed in 1 or 2 minutes after saving."
+              hideDismissButton
             />
           </div>
           <div role="separator" className="my-5 h-[1px] w-20 bg-gray-300" />
