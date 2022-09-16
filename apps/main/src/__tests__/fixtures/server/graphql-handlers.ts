@@ -1,9 +1,7 @@
 import { graphql } from 'msw';
 
-const localGraphQL = graphql.link('*/graphql');
-
 export const graphqlHandlers = [
-  localGraphQL.query('currentUser', (req, res, ctx) => {
+  graphql.query('currentUser', (req, res, ctx) => {
     const { id } = req.variables;
     return res(
       ctx.data({
@@ -21,7 +19,7 @@ export const graphqlHandlers = [
       }),
     );
   }),
-  localGraphQL.query('currentNotificationMessages', (req, res, ctx) => {
+  graphql.query('currentNotificationMessages', (req, res, ctx) => {
     return res(
       ctx.data({
         notificationMessages: [
@@ -51,7 +49,7 @@ export const graphqlHandlers = [
       }),
     );
   }),
-  localGraphQL.query('pageByURL', (req, res, ctx) => {
+  graphql.query('pageByURL', (req, res, ctx) => {
     const { url, title } = req.variables;
     return res(
       ctx.data({
@@ -69,7 +67,7 @@ export const graphqlHandlers = [
       }),
     );
   }),
-  localGraphQL.mutation('updateUserFields', (req, res, ctx) => {
+  graphql.mutation('updateUserFields', (req, res, ctx) => {
     return res(
       ctx.data({
         updateUserByPk: {

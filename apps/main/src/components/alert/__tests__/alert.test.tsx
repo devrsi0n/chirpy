@@ -6,11 +6,11 @@ const text = 'This is a test alert';
 
 describe('Alert', () => {
   beforeEach(() => {
-    render(<Alert type="warn" title={text} />);
+    render(<Alert type="warn" title={text} hideDismissButton />);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
     return cleanup();
   });
 

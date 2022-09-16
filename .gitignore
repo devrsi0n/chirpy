@@ -17,5 +17,4 @@ out/
 storybook-static/
 
 docker-compose.yaml
-.npmrc
 mockServiceWorker.js

@@ -15086,7 +15086,7 @@ packages:
       jest-runtime: 28.1.2
       jest-snapshot: 28.1.2
       jest-util: 28.1.1
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
       slash: 3.0.0
       stack-utils: 2.0.5
       throat: 6.0.1
@@ -15154,7 +15154,7 @@ packages:
       jest-validate: 28.1.1
       micromatch: 4.0.5
       parse-json: 5.2.0
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
       slash: 3.0.0
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -15193,21 +15193,11 @@ packages:
       jest-validate: 28.1.1
       micromatch: 4.0.5
       parse-json: 5.2.0
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
       slash: 3.0.0
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /jest-diff/28.1.1:
-    resolution: {integrity: sha512-/MUUxeR2fHbqHoMMiffe/Afm+U8U4olFRJ0hiVG2lZatPJcnGxx292ustVu7bULhjV65IYMxRdploAKLbcrsyg==}
-    engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
-    dependencies:
-      chalk: 4.1.2
-      diff-sequences: 28.1.1
-      jest-get-type: 28.0.2
-      pretty-format: 28.1.1
     dev: true
 
   /jest-diff/28.1.3:
@@ -15235,7 +15225,7 @@ packages:
       chalk: 4.1.2
       jest-get-type: 28.0.2
       jest-util: 28.1.1
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
     dev: true
 
   /jest-environment-jsdom/28.1.2:
@@ -15321,7 +15311,7 @@ packages:
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
       jest-get-type: 28.0.2
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
     dev: true
 
   /jest-matcher-utils/28.1.1:
@@ -15329,9 +15319,9 @@ packages:
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     dependencies:
       chalk: 4.1.2
-      jest-diff: 28.1.1
+      jest-diff: 28.1.3
       jest-get-type: 28.0.2
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
     dev: true
 
   /jest-matcher-utils/28.1.3:
@@ -15354,7 +15344,7 @@ packages:
       chalk: 4.1.2
       graceful-fs: 4.2.10
       micromatch: 4.0.5
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
       slash: 3.0.0
       stack-utils: 2.0.5
     dev: true
@@ -15522,14 +15512,14 @@ packages:
       chalk: 4.1.2
       expect: 28.1.1
       graceful-fs: 4.2.10
-      jest-diff: 28.1.1
+      jest-diff: 28.1.3
       jest-get-type: 28.0.2
       jest-haste-map: 28.1.1
       jest-matcher-utils: 28.1.1
       jest-message-util: 28.1.1
       jest-util: 28.1.1
       natural-compare: 1.4.0
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
       semver: 7.3.7
     transitivePeerDependencies:
       - supports-color
@@ -15580,7 +15570,7 @@ packages:
       chalk: 4.1.2
       jest-get-type: 28.0.2
       leven: 3.1.0
-      pretty-format: 28.1.1
+      pretty-format: 28.1.3
     dev: true
 
   /jest-watcher/28.1.1:
