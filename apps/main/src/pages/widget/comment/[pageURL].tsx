@@ -26,7 +26,7 @@ import { query } from '$/server/common/gql';
 import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
 import {
   PageByUrlOnlyDocument,
-  PagesDocument,
+  FreshPagesDocument,
 } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
@@ -87,10 +87,16 @@ const client = getAdminGqlClient();
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  const pages = await query(PagesDocument, {}, 'pages');
+  const freshPages = await query(
+    FreshPagesDocument,
+    {
+      limit: 50,
+    },
+    'pages',
+  );
 
   const paths: { params: PathParams }[] =
-    pages.map(({ url }) => {
+    freshPages.map(({ url }) => {
       return {
         params: {
           pageURL: url,

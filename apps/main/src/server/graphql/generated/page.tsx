@@ -49,11 +49,18 @@ export type UpdatePagesMutation = {
   } | null;
 };
 
-export type PagesQueryVariables = Types.Exact<{ [key: string]: never }>;
+export type FreshPagesQueryVariables = Types.Exact<{
+  limit: Types.Scalars['Int'];
+}>;
 
-export type PagesQuery = {
+export type FreshPagesQuery = {
   __typename?: 'query_root';
-  pages: Array<{ __typename?: 'Page'; id: string; url: string }>;
+  pages: Array<{
+    __typename?: 'Page';
+    id: string;
+    url: string;
+    createdAt: string;
+  }>;
 };
 
 export type PageByUrlOnlyQueryVariables = Types.Exact<{
@@ -447,24 +454,62 @@ export const UpdatePagesDocument = {
     },
   ],
 } as unknown as DocumentNode<UpdatePagesMutation, UpdatePagesMutationVariables>;
-export const PagesDocument = {
+export const FreshPagesDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'pages' },
+      name: { kind: 'Name', value: 'freshPages' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'limit' },
+          },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } },
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'pages' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'order_by' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'createdAt' },
+                      value: { kind: 'EnumValue', value: 'desc' },
+                    },
+                  ],
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'limit' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'limit' },
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'createdAt' } },
               ],
             },
           },
@@ -472,7 +517,7 @@ export const PagesDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<PagesQuery, PagesQueryVariables>;
+} as unknown as DocumentNode<FreshPagesQuery, FreshPagesQueryVariables>;
 export const PageByUrlOnlyDocument = {
   kind: 'Document',
   definitions: [

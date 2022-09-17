@@ -37,11 +37,12 @@ mutation updatePages($projectId: uuid!, $title: String!, $url: String!) {
   }
 }
 
-# Used in pages/widget/comment/[pageId].tsx
-query pages {
-  pages {
+# Used in pages/widget/comment/[pageURL].tsx
+query freshPages($limit: Int!) {
+  pages(order_by: { createdAt: desc }, limit: $limit) {
     id
     url
+    createdAt
   }
 }
 
