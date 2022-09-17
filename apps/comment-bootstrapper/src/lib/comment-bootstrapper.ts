@@ -6,6 +6,7 @@ import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,
 } from './theme-observer';
+import { sendMessageToIframe } from './utilities';
 
 /*
  * Widget entry for customers, this file should be minimal since this file is a external entry.
@@ -84,7 +85,7 @@ export async function initCommentWidget(): Promise<void> {
     false,
   );
   window.document.body.addEventListener('click', () => {
-    iframe.contentWindow?.postMessage(EVENT_CLICK_CONTAINER);
+    sendMessageToIframe(iframe, EVENT_CLICK_CONTAINER);
   });
   observeWidgetLoadedEvent(iframe);
   iframe.src = `${

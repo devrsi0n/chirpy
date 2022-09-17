@@ -2,6 +2,7 @@ import {
   EVENT_CHANGE_THEME,
   EVENT_WIDGET_LOADED,
 } from '../../../main/src/lib/constants';
+import { sendMessageToIframe } from './utilities';
 
 const ATTR_THEME = 'data-chirpy-theme';
 
@@ -36,8 +37,8 @@ export function observeWidgetLoadedEvent(iframe: HTMLIFrameElement) {
   window.addEventListener('message', (e) => {
     if (e.data === EVENT_WIDGET_LOADED) {
       isWidgetLoaded = true;
-      pendingEvents.forEach((e) => {
-        iframe.contentWindow?.postMessage(e);
+      pendingEvents.forEach((evt) => {
+        sendMessageToIframe(iframe, evt);
       });
     }
   });
@@ -61,7 +62,7 @@ function postThemeMessage(
     value,
   };
   if (isWidgetLoaded) {
-    iframe.contentWindow?.postMessage(eventData);
+    sendMessageToIframe(iframe, eventData);
   } else {
     pendingEvents.push(eventData);
   }
