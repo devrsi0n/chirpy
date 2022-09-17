@@ -90,7 +90,7 @@ export async function initCommentWidget(): Promise<void> {
   observeWidgetLoadedEvent(iframe);
   iframe.src = `${
     process.env.NEXT_PUBLIC_APP_URL
-  }/widget/comment/${encodeURIComponent(page.url)}`;
+  }/widget/comment/${encodeURIComponent(page.url)}?referrer=${location.origin}`;
   observeAndBroadcastThemeChange(iframe, renderTarget);
   renderTarget.append(iframe);
 }

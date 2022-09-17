@@ -7,6 +7,8 @@ import {
   EVENT_WIDGET_LOADED,
 } from '$/lib/constants';
 
+import { useEventListener } from './use-event-listener';
+
 /**
  * Register widget events
  */
@@ -34,23 +36,15 @@ export function useWidgetSideEffects(): void {
 
   const { setTheme } = useTheme();
 
-  React.useEffect(() => {
-    function handleMessage(event: MessageEvent): void {
-      if (event.origin !== getProjectOrigin()) {
-        return;
-      }
-      if (event.data === EVENT_CLICK_CONTAINER) {
-        unexpandedPopup('[id^="headlessui-menu-button"]');
-        unexpandedPopup('[id^="headlessui-listbox-button"]');
-        unexpandedPopup('[id^="headlessui-popover-button"]');
-      } else if (event.data.name === EVENT_CHANGE_THEME) {
-        setTheme(event.data.value);
-      }
+  useEventListener('message', (event) => {
+    if (event.data === EVENT_CLICK_CONTAINER) {
+      unexpandedPopup('[id^="headlessui-menu-button"]');
+      unexpandedPopup('[id^="headlessui-listbox-button"]');
+      unexpandedPopup('[id^="headlessui-popover-button"]');
+    } else if (event.data.name === EVENT_CHANGE_THEME) {
+      setTheme(event.data.value);
     }
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 }
 
 // Close popup when user clicks on the out side of iframe
@@ -69,4 +63,4 @@ function sendMessageToParentPage(data: $TsAny, projectOrigin: string) {
 }
 
 const getProjectOrigin = () =>
-  document.referrer ? new URL(document.referrer).origin : '*';
+  new URL(location.href).searchParams.get('referrer') || '*';

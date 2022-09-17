@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "./dist/index.js",
   "scripts": {
-    "dev": " vite",
+    "dev": "vite",
     "build": "node ./scripts/build.js",
     "build:debug": "VITE_DEBUG=true pnpm build",
     "test": "jest --silent=false"

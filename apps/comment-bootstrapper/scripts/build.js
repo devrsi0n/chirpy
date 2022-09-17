@@ -22,6 +22,7 @@ const commonBuildConfig = {
  */
 const publicConfig = {
   build: {
+    watch: !!process.env.VITE_DEBUG,
     lib: {
       entry: path.resolve(__dirname, '../src/index.ts'),
       name: 'comment',
