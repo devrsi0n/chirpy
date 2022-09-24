@@ -1,12 +1,13 @@
 {
   "name": "@chirpy-dev/main-app",
   "version": "0.3.0",
-  "license": "Apache License 2.0",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "chromatic": "chromatic --exit-zero-on-changes",
     "analyze": "ANALYZE=true pnpm run build:local",
     "build": "next build",
-    "build-sb": "build-storybook",
+    "build:docker": "next build",
+    "build:sb": "build-storybook",
     "build:local": "dotenv -e .env.local -- next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",

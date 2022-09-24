@@ -8,7 +8,7 @@
     "build:debug": "VITE_DEBUG=true pnpm build",
     "test": "jest --silent=false"
   },
-  "license": "Apache License 2.0",
+  "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",

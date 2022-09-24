@@ -28,6 +28,9 @@ module.exports = withPlugins(
     ],
   ],
   {
+    ...(process.env.DOCKER && {
+      output: 'standalone',
+    }),
     productionBrowserSourceMaps: process.env.VERCEL_ENV !== 'production',
     experimental: {
       scrollRestoration: true,

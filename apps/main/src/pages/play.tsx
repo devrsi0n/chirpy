@@ -6,6 +6,7 @@ import { CommentWidget } from '$/blocks/comment-widget';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { Alert } from '$/components/alert';
+import { APP_URL } from '$/lib/constants';
 import { mutate } from '$/server/common/gql';
 import { DeleteStaleCommentsDocument } from '$/server/graphql/generated/comment';
 import { isENVDev } from '$/server/utilities/env';
@@ -46,7 +47,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
     DeleteStaleCommentsDocument,
     {
       beforeDate,
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/play`,
+      url: `${APP_URL}/play`,
     },
     'deleteComments',
   );

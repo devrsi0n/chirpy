@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { getHostEnv } from '$/utilities/env';
+import { getHostEnv } from '$/utilities/isomorphic/env';
 
 import { Badge } from '../badge';
 import { Link, LinkProps } from '../link';

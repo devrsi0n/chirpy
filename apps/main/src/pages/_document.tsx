@@ -39,6 +39,9 @@ and open-source Disqus alternate."
             as="font"
             crossOrigin="anonymous"
           />
+          {/* We use it to load public environment vairables because we need dynamic values for docker */}
+          {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+          {process.env.DOCKER && <script src="/__env.js" />}
         </Head>
         <body>
           <Main />

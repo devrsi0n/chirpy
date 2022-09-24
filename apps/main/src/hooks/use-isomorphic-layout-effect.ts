@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 const useIsomorphicLayoutEffect = isSSRMode
   ? React.useEffect

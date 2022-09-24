@@ -2,6 +2,8 @@ import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
+import { getPublicEnvVar } from '$/utilities/isomorphic/env';
+
 import { getGqlClientOptions } from './gql-client';
 
 // Server WS client
@@ -20,7 +22,10 @@ export function getAdminGqlClient(): Client {
       ADMIN_HEADERS,
       'network-only',
       createWSClient({
-        url: process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
+        url: getPublicEnvVar(
+          'NEXT_PUBLIC_HASURA_WS_ORIGIN',
+          process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
+        ),
         webSocketImpl: ChirpyWebSocket,
       }),
     ),
