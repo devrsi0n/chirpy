@@ -4,24 +4,37 @@ services:
   chirpy:
     image: devrsi0n/chirpy
     environment:
-      # Your hasura GraphQL HTTP endpoint, e.g. https://hasura.chirpy.dev/v1/graphql
+      # Your Hasura GraphQL HTTP endpoint, e.g. https://hasura.chirpy.dev/v1/graphql
       NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
-      # Your hasura GraphQL WebScoket endpoint, e.g. wss://hasura.chirpy.dev/v1/graphql
+      # Your Hasura GraphQL WebScoket endpoint, e.g. wss://hasura.chirpy.dev/v1/graphql
       NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
       # Your app's public URL, e.g. https://chirpy.dev
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      # Used by web push notifications, use `npx web-push generate-vapid-keys` to generate 1 pair, paste public key here
       NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
-      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
-      NEXTAUTH_URL: ${NEXTAUTH_URL}
-      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
-      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
-      HASH_ALGORITHM: ${HASH_ALGORITHM}
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      # Paste the generated private key here
       PRIVATE_VAPID: ${PRIVATE_VAPID}
+      # Your Plausible domain
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      # Nextauth url, it's same as NEXT_PUBLIC_APP_URL usually
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      # Nextauth JWT secret, you can generate one by running `openssl rand -base64 24 | tr -d '\n' ; echo`
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      # Hasura server admin secret, used by Next.js APIs, find it in your Hasura docker-compose.yml file
+      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      # Your Hasura event secret, we need events to trigger notifications, find it in your Hasura docker-compose.yml file
+      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
+      # Hasura JWT algorithm, e.g. hs512, RS512. Find it in your Hasura docker-compose.yml file
+      HASH_ALGORITHM: ${HASH_ALGORITHM}
+      # Optional,used by email notification/welcome letter. Only support sendinblue.com currently.
       EMAIL_API_KEY: ${EMAIL_API_KEY}
+      # Optional, GitHub auth id, apply an app here: https://github.com/settings/apps/new
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      # The paired secret
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      # Optional, Twitter auth key, apply an app here: https://developer.twitter.com/en/portal/apps/new
       TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
+      # The paired secret
       TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
     restart: always
     ports:

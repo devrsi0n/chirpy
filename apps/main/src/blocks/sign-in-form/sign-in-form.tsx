@@ -14,9 +14,9 @@ import { SIGN_IN_ERRORS } from '$/strings';
 
 import { CompanyRight } from '../footer';
 import { AnonymousUserSignIn } from './anonymous-user-sign-in';
-import { authOptions } from './data-source';
 import { EmailSignIn } from './email-sign-in';
 import styles from './sign-in-form.module.scss';
+import { useSocialAuthOptions } from './use-social-auth-options';
 
 export type SignInFormProps = React.PropsWithChildren<{
   title: string;
@@ -68,6 +68,7 @@ export function SignInForm({
       ),
     [error],
   );
+  const authOptions = useSocialAuthOptions();
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex h-full flex-1 flex-col items-center ">
@@ -99,26 +100,30 @@ export function SignInForm({
                 />
               )}
             </div>
-            <Divider variant="text">OR</Divider>
-            <div className="space-y-3">
-              {authOptions.map((option) => (
-                <Button
-                  key={option.name}
-                  onClick={() =>
-                    signIn(option.name.toLowerCase(), {
-                      callbackUrl: `${location.origin}/auth/redirecting`,
-                    })
-                  }
-                  className="w-full px-0 md:justify-start md:pl-20"
-                  size="lg"
-                >
-                  <option.icon />
-                  <span className="ml-2 text-left">
-                    Sign in with {option.name}
-                  </span>
-                </Button>
-              ))}
-            </div>
+            {authOptions && (
+              <>
+                <Divider variant="text">OR</Divider>
+                <div className="space-y-3">
+                  {authOptions?.map((option) => (
+                    <Button
+                      key={option.name}
+                      onClick={() =>
+                        signIn(option.name.toLowerCase(), {
+                          callbackUrl: `${location.origin}/auth/redirecting`,
+                        })
+                      }
+                      className="w-full px-0 md:justify-start md:pl-20"
+                      size="lg"
+                    >
+                      <option.icon />
+                      <span className="ml-2 text-left">
+                        Sign in with {option.name}
+                      </span>
+                    </Button>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
           <Text className="py-3" size="sm" variant="secondary">
             {`By clicking the buttons above, you acknowledge that you have read

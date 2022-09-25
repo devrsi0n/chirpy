@@ -18,34 +18,38 @@ import { generateUsername } from './utilities';
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
 
 export const authProviders: Provider[] = [
-  GitHubProvider({
-    clientId: process.env.GITHUB_CLIENT_ID,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    httpOptions: {
-      timeout: REQUEST_TIMEOUT,
-    },
-  }),
-  GoogleProvider({
-    clientId: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    httpOptions: {
-      timeout: REQUEST_TIMEOUT,
-    },
-  }),
-  twitterProvider({
-    clientId: process.env.TWITTER_CONSUMER_KEY,
-    clientSecret: process.env.TWITTER_CONSUMER_SECRET,
-    httpOptions: {
-      timeout: REQUEST_TIMEOUT,
-    },
-  }),
-  facebookProvider({
-    clientId: process.env.FACEBOOK_APP_ID,
-    clientSecret: process.env.FACEBOOK_APP_SECRET,
-    httpOptions: {
-      timeout: REQUEST_TIMEOUT,
-    },
-  }),
+  process.env.GITHUB_CLIENT_ID &&
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      httpOptions: {
+        timeout: REQUEST_TIMEOUT,
+      },
+    }),
+  process.env.GOOGLE_CLIENT_ID &&
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      httpOptions: {
+        timeout: REQUEST_TIMEOUT,
+      },
+    }),
+  process.env.TWITTER_CONSUMER_KEY &&
+    twitterProvider({
+      clientId: process.env.TWITTER_CONSUMER_KEY,
+      clientSecret: process.env.TWITTER_CONSUMER_SECRET,
+      httpOptions: {
+        timeout: REQUEST_TIMEOUT,
+      },
+    }),
+  process.env.FACEBOOK_APP_ID &&
+    facebookProvider({
+      clientId: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      httpOptions: {
+        timeout: REQUEST_TIMEOUT,
+      },
+    }),
 
   CredentialsProvider({
     name: 'Anonymous',
@@ -59,7 +63,7 @@ export const authProviders: Provider[] = [
     async authorize(credentials /*req*/) {
       if (
         credentials?.name ===
-        process.env.TEST_USER_ID.replace(/-/g, '').slice(0, 23)
+        process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23)
       ) {
         // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
         const user = await query(
@@ -101,4 +105,4 @@ export const authProviders: Provider[] = [
       });
     },
   }),
-];
+].filter((p) => !!p) as Provider[];

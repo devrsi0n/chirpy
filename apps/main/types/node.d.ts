@@ -28,5 +28,6 @@ declare namespace NodeJS {
     FACEBOOK_APP_SECRET: string;
 
     TEST_USER_ID: string;
+    DOCKER: string;
   }
 }
