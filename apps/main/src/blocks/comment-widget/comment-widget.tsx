@@ -3,7 +3,7 @@ import Script from 'next/script';
 import * as React from 'react';
 
 import { ClientOnly } from '$/components/client-only';
-import { getPublicEnvVar } from '$/utilities/isomorphic/env';
+import { APP_URL } from '$/lib/constants';
 
 export function CommentWidget(): JSX.Element {
   const { resolvedTheme } = useTheme();
@@ -17,10 +17,7 @@ export function CommentWidget(): JSX.Element {
       <Script
         src="/bootstrap/comment.js"
         strategy={'afterInteractive'}
-        data-chirpy-domain={getPublicEnvVar(
-          'NEXT_PUBLIC_COMMENT_DOMAIN',
-          process.env.NEXT_PUBLIC_COMMENT_DOMAIN,
-        )}
+        data-chirpy-domain={new URL(APP_URL).hostname}
       />
     </ClientOnly>
   );

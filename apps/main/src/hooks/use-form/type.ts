@@ -1,10 +1,12 @@
+export type ValidatorPatternChecker = (value: string) => boolean;
+
 export type Validator = {
   required?: {
     value: boolean;
     message: string;
   };
   pattern?: {
-    value: RegExp;
+    value: RegExp | ValidatorPatternChecker;
     message: string;
   };
   maxLength?: {

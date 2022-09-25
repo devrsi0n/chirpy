@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
   const beforeDate = cpDayjs()
-    .subtract(1, isENVDev ? 'second' : 'day')
+    .subtract(1, isENVDev ? 'hour' : 'day')
     .toISOString();
   const data = await mutate(
     DeleteStaleCommentsDocument,

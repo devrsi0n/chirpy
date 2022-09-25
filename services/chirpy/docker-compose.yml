@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  chirpy:
+    image: devrsi0n/chirpy
+    environment:
+      # Your hasura GraphQL HTTP endpoint, e.g. https://hasura.chirpy.dev/v1/graphql
+      NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      # Your hasura GraphQL WebScoket endpoint, e.g. wss://hasura.chirpy.dev/v1/graphql
+      NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      # Your app's public URL, e.g. https://chirpy.dev
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
+      HASH_ALGORITHM: ${HASH_ALGORITHM}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      PRIVATE_VAPID: ${PRIVATE_VAPID}
+      EMAIL_API_KEY: ${EMAIL_API_KEY}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
+      TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
+    restart: always
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    # networks:
+    #   - my_network
+
+  # Add more containers below (nginx, postgres, etc.)
+
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+# networks:
+#   my_network:
+#     external: true
