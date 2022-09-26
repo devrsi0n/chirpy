@@ -5,11 +5,9 @@ import { pageRender } from '$/__tests__/fixtures/page-render';
 import { setMockedUser } from '$/__tests__/fixtures/page-render';
 import { mockNextRouter } from '$/__tests__/mocks/next-router';
 import * as UserModule from '$/graphql/generated/user';
-import { logger } from '$/lib/logger';
 import Welcome from '$/pages/auth/welcome';
 
 const mockUpdateUser = jest.fn().mockImplementation(() => {
-  logger.debug('called mockUpdateUser');
   return Promise.resolve();
 });
 jest.mock('$/graphql/generated/user', () => ({

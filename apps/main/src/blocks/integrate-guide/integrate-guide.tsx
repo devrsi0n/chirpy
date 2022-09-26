@@ -5,7 +5,7 @@ import { Code } from '$/components/code';
 import { Dialog } from '$/components/dialog';
 import { Heading } from '$/components/heading';
 import { Text } from '$/components/text';
-import { APP_URL } from '$/lib/constants';
+import { getAppURL } from '$/utilities/isomorphic/env';
 
 export type IntegrateGuideProps = {
   domain: string;
@@ -51,7 +51,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
                 script tag with your project id to the HTML:
               </Text>
               <Code>
-                {`<script defer src="${APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
+                {`<script defer src="${getAppURL()}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
               </Code>
               <Text variant="secondary">
                 Then, add the data-chirpy-comment attribute to any HTML element

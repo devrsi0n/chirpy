@@ -41,3 +41,6 @@ export function getPublicEnvVar<E extends `NEXT_PUBLIC_${string}`>(
 
   return process.env[key] === "''" ? '' : process.env[key] || '';
 }
+
+export const getAppURL = () =>
+  getPublicEnvVar('NEXT_PUBLIC_APP_URL', process.env.NEXT_PUBLIC_APP_URL);

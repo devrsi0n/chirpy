@@ -6,11 +6,11 @@ import { CommentWidget } from '$/blocks/comment-widget';
 import { SiteLayout } from '$/blocks/layout';
 import { PageTitle } from '$/blocks/page-title';
 import { Alert } from '$/components/alert';
-import { APP_URL } from '$/lib/constants';
 import { mutate } from '$/server/common/gql';
 import { DeleteStaleCommentsDocument } from '$/server/graphql/generated/comment';
 import { isENVDev } from '$/server/utilities/env';
 import { cpDayjs } from '$/utilities/date';
+import { getAppURL } from '$/utilities/isomorphic/env';
 
 export default function PlayGround(): JSX.Element {
   const [showAlert, setShowAlert] = React.useState(true);
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
     DeleteStaleCommentsDocument,
     {
       beforeDate,
-      url: `${APP_URL}/play`,
+      url: `${getAppURL()}/play`,
     },
     'deleteComments',
   );

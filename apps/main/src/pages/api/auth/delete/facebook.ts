@@ -2,11 +2,11 @@ import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
 
-import { APP_URL } from '$/lib/constants';
 import { APIError } from '$/server/common/api-error';
 import { getAPIHandler } from '$/server/common/api-handler';
 import { mutate } from '$/server/common/gql';
 import { DeleteUserDocument } from '$/server/graphql/generated/user';
+import { getAppURL } from '$/utilities/isomorphic/env';
 
 const handler = getAPIHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -27,7 +27,7 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
     'deleteUserByPk',
   );
   const confirmationCode = getConfirmationCode();
-  const url = `${APP_URL}/auth/delete-confirmation?code=${confirmationCode}`;
+  const url = `${getAppURL()}/auth/delete-confirmation?code=${confirmationCode}`;
   // Facebook requires the JSON to be non-quoted and formatted like this, so we need to create the JSON by hand:
   res.setHeader('Content-Type', 'application/json');
   res.send(`{ url: '${url}', confirmation_code: '${confirmationCode}' }`);

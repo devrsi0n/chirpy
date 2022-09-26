@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint --fix ./",
+    "test": "turbo run test --filter=@chirpy-dev/main-app...",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish",
@@ -20,7 +21,7 @@
     "@chirpy-dev/prettier-config": "workspace:*",
     "eslint": "8.23.0",
     "lint-staged": "13.0.3",
-    "next": "12.3.0",
+    "next": "12.3.1",
     "prettier": "2.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",

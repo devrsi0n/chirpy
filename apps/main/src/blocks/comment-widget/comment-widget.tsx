@@ -3,7 +3,7 @@ import Script from 'next/script';
 import * as React from 'react';
 
 import { ClientOnly } from '$/components/client-only';
-import { APP_URL } from '$/lib/constants';
+import { getAppURL } from '$/utilities/isomorphic/env';
 
 export function CommentWidget(): JSX.Element {
   const { resolvedTheme } = useTheme();
@@ -17,7 +17,7 @@ export function CommentWidget(): JSX.Element {
       <Script
         src="/bootstrap/comment.js"
         strategy={'afterInteractive'}
-        data-chirpy-domain={new URL(APP_URL).hostname}
+        data-chirpy-domain={new URL(getAppURL()).hostname}
       />
     </ClientOnly>
   );

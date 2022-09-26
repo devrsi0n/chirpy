@@ -30,6 +30,48 @@ export const restHandlers = [
       }),
     );
   }),
+  rest.get('/api/auth/providers', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        github: {
+          id: 'github',
+          name: 'GitHub',
+          type: 'oauth',
+          signinUrl: 'http://localhost:3000/api/auth/signin/github',
+          callbackUrl: 'http://localhost:3000/api/auth/callback/github',
+        },
+        google: {
+          id: 'google',
+          name: 'Google',
+          type: 'oauth',
+          signinUrl: 'http://localhost:3000/api/auth/signin/google',
+          callbackUrl: 'http://localhost:3000/api/auth/callback/google',
+        },
+        twitter: {
+          id: 'twitter',
+          name: 'Twitter (Legacy)',
+          type: 'oauth',
+          signinUrl: 'http://localhost:3000/api/auth/signin/twitter',
+          callbackUrl: 'http://localhost:3000/api/auth/callback/twitter',
+        },
+        credentials: {
+          id: 'credentials',
+          name: 'Anonymous',
+          type: 'credentials',
+          signinUrl: 'http://localhost:3000/api/auth/signin/credentials',
+          callbackUrl: 'http://localhost:3000/api/auth/callback/credentials',
+        },
+        email: {
+          id: 'email',
+          name: 'Email',
+          type: 'email',
+          signinUrl: 'http://localhost:3000/api/auth/signin/email',
+          callbackUrl: 'http://localhost:3000/api/auth/callback/email',
+        },
+      }),
+    );
+  }),
   rest.get('*/api/auth/session', (req, res, ctx) => {
     return res(
       ctx.status(200),
