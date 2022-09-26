@@ -30,10 +30,10 @@ describe('Project', () => {
       name: /create project/i,
     }).click();
     cy.findByRole('textbox', {
-      name: /name of this project/i,
+      name: /name/i,
     }).type('Foo');
     cy.findByRole('textbox', {
-      name: /associate a domain with this project/i,
+      name: /domain/i,
     }).type('foobar.com');
     cy.findByRole('button', {
       name: /^create$/i,
