@@ -1,11 +1,11 @@
-import { composeStories } from '@storybook/testing-react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '$/__tests__/fixtures/page-render';
 import * as notificationModule from '$/graphql/generated/notification';
 
-import * as stories from '../stories/notification-hub.stories';
+import { NotificationHub } from '../notification-hub';
+import { messages } from '../stories/mock-data';
 
 jest.mock('$/graphql/generated/notification', () => {
   return {
@@ -15,7 +15,12 @@ jest.mock('$/graphql/generated/notification', () => {
   };
 });
 
-const { Default } = composeStories(stories);
+jest
+  .spyOn(notificationModule, 'useCurrentNotificationMessagesQuery')
+  .mockReturnValue([
+    { data: messages, fetching: false, stale: false },
+    jest.fn(),
+  ]);
 
 // Run storybook to see the UI visually
 describe('NotificationHub', () => {
@@ -55,7 +60,7 @@ describe('NotificationHub', () => {
 });
 
 async function renderDefaultNotificationHub() {
-  pageRender(<Default />);
+  pageRender(<NotificationHub />);
   const notificationButton = screen.getByLabelText('click to open the menu');
   await userEvent.click(notificationButton);
 }
