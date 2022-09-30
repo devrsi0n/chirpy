@@ -1,10 +1,10 @@
 import { waitGraphql } from '../../fixtures/utils';
 
 describe('Project', () => {
-  before(() => {
+  beforeEach(() => {
     cy.login();
     cy.visit('/dashboard');
-    waitForSpinnerToDisappear();
+    waitForProjectCardAppear();
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist
       if ($body.find(`[aria-label='Project list']`).length > 0) {
@@ -38,7 +38,7 @@ describe('Project', () => {
     cy.findByRole('button', {
       name: /^create$/i,
     }).click();
-    waitForSpinnerToDisappear();
+    waitForProjectCardAppear();
   });
 
   it('should show integration doc', () => {
@@ -69,7 +69,7 @@ describe('Project', () => {
   });
 });
 
-const waitForSpinnerToDisappear = () =>
+const waitForProjectCardAppear = () =>
   cy
-    .get(`[aria-label="Loading data"]`, { timeout: 10_000 })
-    .should('not.exist');
+    .findByRole('button', { name: /theme/i, timeout: 10_000 })
+    .should('be.visible');
