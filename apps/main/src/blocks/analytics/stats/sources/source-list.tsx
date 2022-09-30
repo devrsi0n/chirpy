@@ -5,6 +5,7 @@ import FlipMove from 'react-flip-move';
 import { Link } from '$/components/link';
 import { Tabs } from '$/components/tabs';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { getPublicEnvVar } from '$/utilities/isomorphic/env';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
@@ -114,9 +115,10 @@ class AllSources extends React.Component<AllSourcesProps> {
               href={url.setQuery('source', referrer.name)}
             >
               <img
-                src={`${
-                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
-                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${getPublicEnvVar(
+                  'NEXT_PUBLIC_ANALYTICS_DOMAIN',
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
+                )}/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 className="mr-2 -mt-px inline h-4 w-4 align-middle"
                 alt={`Favorite icon for ${referrer.name}`}
               />

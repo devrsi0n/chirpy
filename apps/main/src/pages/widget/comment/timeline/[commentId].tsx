@@ -33,7 +33,7 @@ import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentTimelineNode } from '$/types/widget';
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 export default function CommentTimelineWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,

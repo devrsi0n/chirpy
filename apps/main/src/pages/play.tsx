@@ -10,6 +10,7 @@ import { mutate } from '$/server/common/gql';
 import { DeleteStaleCommentsDocument } from '$/server/graphql/generated/comment';
 import { isENVDev } from '$/server/utilities/env';
 import { cpDayjs } from '$/utilities/date';
+import { getAppURL } from '$/utilities/isomorphic/env';
 
 export default function PlayGround(): JSX.Element {
   const [showAlert, setShowAlert] = React.useState(true);
@@ -40,13 +41,13 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
   const beforeDate = cpDayjs()
-    .subtract(1, isENVDev ? 'second' : 'day')
+    .subtract(1, isENVDev ? 'hour' : 'day')
     .toISOString();
   const data = await mutate(
     DeleteStaleCommentsDocument,
     {
       beforeDate,
-      url: `${process.env.NEXT_PUBLIC_APP_URL}/play`,
+      url: `${getAppURL()}/play`,
     },
     'deleteComments',
   );

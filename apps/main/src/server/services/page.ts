@@ -65,6 +65,7 @@ export async function getPage(
     );
 
     if (!insertOnePage?.id) {
+      // TODO: Handle duplicated pages
       return res.status(500).json({
         error: 'Create page failed',
       });

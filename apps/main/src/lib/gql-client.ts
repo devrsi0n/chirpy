@@ -13,7 +13,7 @@ import {
 } from 'urql';
 
 import { isENVDev } from '$/server/utilities/env';
-import { isBrowser } from '$/utilities/env';
+import { getPublicEnvVar, isBrowser } from '$/utilities/isomorphic/env';
 
 export function createGqlClient(hasuraToken = ''): Client {
   return createClient(getGqlClientOptions(getAuthHeaders(hasuraToken)));
@@ -34,7 +34,10 @@ export function getGqlClientOptions(
           const _wsClient =
             wsClient ||
             createWSClient({
-              url: process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
+              url: getPublicEnvVar(
+                'NEXT_PUBLIC_HASURA_WS_ORIGIN',
+                process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN,
+              ),
               connectionParams: () => {
                 return {
                   headers,
@@ -52,7 +55,10 @@ export function getGqlClientOptions(
     exchanges.unshift(devtoolsExchange as any);
   }
   return {
-    url: process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN,
+    url: getPublicEnvVar(
+      'NEXT_PUBLIC_HASURA_HTTP_ORIGIN',
+      process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN,
+    ),
     exchanges,
     fetchOptions: {
       headers,

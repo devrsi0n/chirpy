@@ -4,6 +4,19 @@ title: 'Self hosted'
 
 # Self-hosted
 
-Currently, we're working hard to make our services stable and feature-rich, you can go through the [Developing](https://github.com/devrsi0n/chirpy/blob/main/CONTRIBUTING.md#Developing) guide to figure out how to host chirpy yourself.
+You can run Chirpy on your server, it's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience.
 
-We'll polish this document once we're Generally Available.
+Chirpy is designed to be self-hosted with [Docker](https://www.docker.com/), although you don't have to be a Docker expert to use our self-hosted version, but you should have basic knowledge of command-line, Docker and Linux to setup your own Chirpy instance.
+
+> If you have issues or questions with the self-hosted version, you can reach out to us on our [GitHub discussions](https://github.com/devrsi0n/chirpy/discussions).
+
+## Version management
+Chirpy follows [semantic versioning](https://semver.org/): MAJOR.MINOR.PATCH
+
+You can find available Plausible versions on DockerHub. The default latest tag refers to the latest stable release tag.
+
+Version changes are documented in our [GitHub release](https://github.com/devrsi0n/chirpy/releases). Please note that database/graphql schema changes require running migrations when you're upgrading.
+
+## Requirements
+
+You need a server (a virtual or physical machine) with Docker pre-installed. If your server doesn't come with Docker, you can follow [this docs](https://docs.docker.com/desktop/install/linux-install/) to install it.

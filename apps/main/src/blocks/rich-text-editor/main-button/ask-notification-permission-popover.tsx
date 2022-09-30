@@ -4,7 +4,6 @@ import { Button } from '$/components/button';
 import { Heading } from '$/components/heading';
 import { Popover, IPopoverButtonProps } from '$/components/popover';
 import { Text } from '$/components/text';
-import { checkNotificationCompatibility } from '$/contexts/notification-context/utilities';
 
 export interface IAskNotificationPermissionPopoverProps {
   onClickAskNextTime: () => void;

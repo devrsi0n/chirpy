@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { SiteLayout } from '$/blocks/layout';
 import { Heading } from '$/components/heading';
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 function DeleteConfirmation(): JSX.Element {
   return (

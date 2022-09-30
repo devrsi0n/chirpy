@@ -1,4 +1,5 @@
 import { logger } from '$/lib/logger';
+import { getPublicEnvVar } from '$/utilities/isomorphic/env';
 import { urlBase64ToUint8Array } from '$/utilities/string';
 
 const NOTIFICATION_DID_REGISTER_KEY =
@@ -22,7 +23,9 @@ export function registerNotificationSubscription(): Promise<Response | void> {
           if (subscription) {
             return subscription;
           }
-          const vapidKey = urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID);
+          const vapidKey = urlBase64ToUint8Array(
+            getPublicEnvVar('NEXT_PUBLIC_VAPID', process.env.NEXT_PUBLIC_VAPID),
+          );
           return registration.pushManager.subscribe({
             // This means all push events will result in a notification
             userVisibleOnly: true,

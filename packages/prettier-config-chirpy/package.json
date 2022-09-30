@@ -9,7 +9,7 @@
   "devDependencies": {
     "prettier": "2.7.1"
   },
-  "license": "Apache License 2.0",
+  "license": "AGPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   }

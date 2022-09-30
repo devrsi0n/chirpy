@@ -5,8 +5,6 @@ export const CALLBACK_URL_KEY = 'callback.url';
 export const SESSION_MAX_AGE = 30 * 24 * 60 * 60;
 export const HASURA_TOKEN_MAX_AGE = 60 * 60;
 
-export const APP_URL = process.env.NEXT_PUBLIC_APP_URL;
-
 const EVENT_PREFIX = 'CP_EVENT_';
 
 export const EVENT_CLICK_CONTAINER = `${EVENT_PREFIX}CLICK_CONTAINER`;

@@ -25,7 +25,7 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 
 ## ✨ Key features
 
-- 🔒 Privacy friendly
+- 🔒 Privacy-friendly
 - 🎨 [Customizable widget](https://chirpy.dev/docs/features/theme)
 - ⚡️ Reasonably fast
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
@@ -33,7 +33,7 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 - 🪄 Real-time comments
 - 📱 Mobile friendly
 - 🔔 [Email & Web push notifications](https://chirpy.dev/docs/features/notifications)
-- 🤐 [Anti toxic comment](https://chirpy.dev/docs/features/anti-toxic-comment)
+- 🤐 [Anti-toxic comment](https://chirpy.dev/docs/features/anti-toxic-comment)
 - 💬 [Comment moderation](https://chirpy.dev/docs/features/moderation)
 - 🎭 [Anonymous sign-in](https://chirpy.dev/docs/features/privacy-friendly#anonymous-sign-in)
 - 📬 [Email/magic link sign-in](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)
@@ -77,9 +77,9 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 
 ## 💅 Design system
 
-- Colors comes from [radix color](https://www.radix-ui.com/colors)
-- Home hero section inspired by [stitches](https://stitches.dev/)
+- Colors come from [radix](https://www.radix-ui.com/colors) color](https://www.radix-ui.com/colors)
+- Home hero section is inspired by [stitches](https://stitches.dev/)](https://stitches.dev/)
 
 ## ⚖️ License
 
-The Apache License.
+AGPL 3.0

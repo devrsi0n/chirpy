@@ -13,6 +13,7 @@ import { useInsertOneProjectMutation } from '$/graphql/generated/project';
 import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
 import { useForm } from '$/hooks/use-form';
 import { isENVProd } from '$/server/utilities/env';
+import { isValidDomain } from '$/utilities/validator';
 
 type FormFields = {
   name: string;
@@ -135,13 +136,12 @@ export default function Dashboard(): JSX.Element {
               {...register('domain', {
                 required: { value: true, message: 'Domain is required' },
                 pattern: {
-                  value:
-                    /^((?!-))(xn--)?[\da-z][\d_a-z-]{0,61}[\da-z]{0,1}\.(xn--)?([\da-z\-]{1,61}|[\da-z-]{1,30}\.[a-z]{2,})$/,
+                  value: isValidDomain,
                   message: 'Invalid domain',
                 },
               })}
               label="Domain"
-              hintText="Associate a domain with this project"
+              hintText="Associate your domain with this project"
               errorMessage={errors.domain}
               placeholder="example.com"
               className="w-full"

@@ -1,7 +1,7 @@
 import { Primitive } from 'type-fest';
 
 import { WIDGET_COMMENT_PATH } from '$/lib/constants';
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 import { formatISO } from './date';
 import { Query } from './query';

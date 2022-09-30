@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Link } from '$/components/link';
 import { ANALYTICS_DOMAIN } from '$/lib/constants';
+import { getPublicEnvVar } from '$/utilities/isomorphic/env';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
@@ -115,9 +116,10 @@ class SourcesModal extends React.Component {
       <tr className="text-sm dark:text-gray-200" key={source.name}>
         <td className="p-2">
           <img
-            src={`${
-              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
-            }/favicon/sources/${encodeURIComponent(source.name)}`}
+            src={`${getPublicEnvVar(
+              'NEXT_PUBLIC_ANALYTICS_DOMAIN',
+              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
+            )}/favicon/sources/${encodeURIComponent(source.name)}`}
             className="mr-2 inline h-4 w-4 align-middle"
             alt={`Favorite icon for ${source.name}`}
           />
@@ -186,7 +188,7 @@ class SourcesModal extends React.Component {
           <button
             onClick={this.loadMore.bind(this)}
             type="button"
-            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:outline-none focus:ring active:bg-indigo-700"
+            className="focus:outline-none inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:ring active:bg-indigo-700"
           >
             Load more
           </button>

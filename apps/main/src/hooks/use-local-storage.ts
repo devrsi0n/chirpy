@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { logger } from '$/lib/logger';
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 import { useEventListener } from './use-event-listener';
 

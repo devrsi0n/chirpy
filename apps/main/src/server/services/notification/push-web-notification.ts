@@ -8,6 +8,7 @@ import {
   DeleteNotificationSubscriptionByPkDocument,
   NotificationSubscriptionsByUserIdQuery,
 } from '$/server/graphql/generated/notification';
+import { getPublicEnvVar } from '$/utilities/isomorphic/env';
 
 import { NotificationPayload } from './types';
 
@@ -56,7 +57,10 @@ export function pushWebNotification(payload: NotificationPayload) {
 const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
   vapidDetails: {
     subject: FEEDBACK_LINK,
-    publicKey: process.env.NEXT_PUBLIC_VAPID,
+    publicKey: getPublicEnvVar(
+      'NEXT_PUBLIC_VAPID',
+      process.env.NEXT_PUBLIC_VAPID,
+    ),
     privateKey: process.env.PRIVATE_VAPID,
   },
   ...(process.env.PROXY && { proxy: process.env.PROXY }),

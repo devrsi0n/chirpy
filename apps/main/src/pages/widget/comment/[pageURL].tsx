@@ -31,7 +31,7 @@ import {
 import { CommonWidgetProps } from '$/types/page.type';
 import { Theme } from '$/types/theme.type';
 import { CommentLeafType } from '$/types/widget';
-import { isSSRMode } from '$/utilities/env';
+import { isSSRMode } from '$/utilities/isomorphic/env';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
