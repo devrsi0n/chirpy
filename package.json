@@ -7,8 +7,8 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish",
-    "build:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
-    "start:local": "dotenv -e ./apps/main/.env.local docker compose up",
+    "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
+    "start:docker:local": "dotenv -e ./apps/main/.env.local docker compose up",
     "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i"
   },
   "engines": {

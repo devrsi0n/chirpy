@@ -1,5 +1,6 @@
 version: '3'
 
+# Test docker build
 services:
   chirpy-main:
     container_name: chirpy-main
@@ -7,26 +8,28 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
+      # Don't put any sensitive key to build-args, as they'll be exposed to build history, https://github.com/docker/build-push-action/blob/master/docs/advanced/secrets.md
       args:
-        NEXT_PUBLIC_HASURA_HTTP_ORIGIN: http://host.docker.internal:8080/v1/graphql
-        NEXT_PUBLIC_HASURA_WS_ORIGIN: ws://host.docker.internal:8080/v1/graphql
-        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
-        NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
+        NEXT_PUBLIC_APP_URL: http://localhost:3000
         NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
-        NEXTAUTH_URL: ${NEXTAUTH_URL}
-        HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
-        HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
-        HASH_ALGORITHM: ${HASH_ALGORITHM}
-        NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
-        PRIVATE_VAPID: ${PRIVATE_VAPID}
-        EMAIL_API_KEY: ${EMAIL_API_KEY}
-        GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
-        GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
-        TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
-        TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
+        NEXTAUTH_URL: http://localhost:3000
     environment:
       NEXT_PUBLIC_HASURA_HTTP_ORIGIN: http://127.0.0.1:8080/v1/graphql
       NEXT_PUBLIC_HASURA_WS_ORIGIN: ws://127.0.0.1:8080/v1/graphql
+      NEXT_PUBLIC_APP_URL: http://localhost:3000
+      NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      NEXTAUTH_URL: http://localhost:3000
+      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
+      HASH_ALGORITHM: ${HASH_ALGORITHM}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      PRIVATE_VAPID: ${PRIVATE_VAPID}
+      EMAIL_API_KEY: ${EMAIL_API_KEY}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
+      TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
     restart: always
     ports:
       - 3000:3000
@@ -34,8 +37,6 @@ services:
       - 'host.docker.internal:host-gateway'
     # networks:
     #   - my_network
-
-  # Add more containers below (nginx, postgres, etc.)
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname

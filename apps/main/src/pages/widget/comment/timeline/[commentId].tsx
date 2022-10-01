@@ -84,6 +84,12 @@ type StaticProps = PathParams &
   };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+  if (process.env.DOCKER) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
   const comments = await query(
     CommentsDocument,
     {

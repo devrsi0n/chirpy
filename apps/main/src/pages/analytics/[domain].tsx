@@ -46,9 +46,16 @@ type PathParams = {
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+  if (process.env.DOCKER) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+  // TODO: only generated a subset of analytics pages
   const paths = await getAllProjectStaticPathsByDomain();
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps<

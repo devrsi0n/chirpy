@@ -22,7 +22,11 @@ export default function PlayGround(): JSX.Element {
           <Alert
             type="info"
             title="Feel free to play around"
-            content="We remove stale comments every 24 hours automatically."
+            content={
+              process.env.DOCKER
+                ? `We don't remove comment automatically`
+                : 'We remove stale comments every 24 hours automatically.'
+            }
             onClickDismiss={() => setShowAlert(false)}
             hideDismissButton
           />
@@ -40,6 +44,11 @@ type StaticProps = {
 export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
+  if (process.env.DOCKER) {
+    return {
+      props: {},
+    };
+  }
   const beforeDate = cpDayjs()
     .subtract(1, isENVDev ? 'hour' : 'day')
     .toISOString();

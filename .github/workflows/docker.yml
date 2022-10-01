@@ -16,6 +16,12 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v3
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Extract meta
         id: builder-meta
         uses: docker/metadata-action@v4
@@ -41,20 +47,10 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.builder-meta.outputs.tags }}
           labels: ${{ steps.builder-meta.outputs.labels }}
-          build-args:
-            NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_HTTP_ORIGIN }}
-            NEXT_PUBLIC_HASURA_WS_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_HTTP_ORIGIN }}
-            NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-            NEXT_PUBLIC_VAPID: ${{ secrets.NEXT_PUBLIC_VAPID }}
-            NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
-            NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
-            HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
-            HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
-            HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
-            NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-            PRIVATE_VAPID: ${{ secrets.PRIVATE_VAPID }}
-            EMAIL_API_KEY: ${{ secrets.EMAIL_API_KEY }}
-            GITHUB_CLIENT_ID: ${{ secrets.GITHUB_CLIENT_ID }}
-            GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
-            TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
-            TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          cache-from: type=registry,ref=devrsi0n/chirpy:buildcache
+          cache-to: type=registry,ref=devrsi0n/chirpy:buildcache,mode=max
+          # Don't put any sensitive key to build-args, as they'll be exposed to build history
+          build-args: |
+            NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+            NEXT_PUBLIC_ANALYTICS_DOMAIN=${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
+            NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}

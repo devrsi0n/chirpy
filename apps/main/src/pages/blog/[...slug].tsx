@@ -48,16 +48,21 @@ type PathParam = {
 };
 
 export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
+  if (process.env.DOCKER) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
   const fileStructures = await getAllFileStructures(CONTAINER_FOLDER);
-  const payload = {
+  return {
     paths: fileStructures.map((f) => ({
       params: {
         slug: [...(f.ancestors || []), f.slug].filter(Boolean),
       },
     })),
-    fallback: true,
+    fallback: 'blocking',
   };
-  return payload;
 };
 
 export const getStaticProps: GetStaticProps<

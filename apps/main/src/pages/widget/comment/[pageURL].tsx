@@ -87,6 +87,12 @@ const client = getAdminGqlClient();
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+  if (process.env.DOCKER) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
   const freshPages = await query(
     FreshPagesDocument,
     {
@@ -106,7 +112,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 type StaticProps = PathParams &

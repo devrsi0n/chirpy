@@ -46,11 +46,16 @@ type PathParams = {
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
+  if (process.env.DOCKER) {
+    return {
+      paths: [],
+      fallback: 'blocking',
+    };
+  }
+  // TODO: only generated a subset of theme pages to improve build perf
   const paths = await getAllProjectStaticPathsByDomain();
 
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 type StaticProps = {
