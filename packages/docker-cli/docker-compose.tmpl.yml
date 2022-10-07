@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  chirpy:
+    image: devrsi0n/chirpy
+    environment:
+      # Your Hasura GraphQL HTTP endpoint, e.g. https://<your-domain>:8080/v1/graphql
+      NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      # Your Hasura GraphQL WebScoket endpoint, e.g. wss://<your-domain>:8080/v1/graphql
+      NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      # Your app's public URL, e.g. https://<your-domain>
+      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+      # Used by web push notifications, use `npx web-push generate-vapid-keys` to generate 1 pair, paste the public key here, past the private key to PRIVATE_VAPID
+      NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
+      # Paste the generated private key here
+      PRIVATE_VAPID: ${PRIVATE_VAPID}
+      # Your Plausible server's domain
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      # Nextauth url, it's same as NEXT_PUBLIC_APP_URL usually
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+      NEXTAUTH_SECRET: <your-hasura-jwt-token>
+      HASURA_ADMIN_SECRET: <your-hasura-admin-secret>
+      HASURA_EVENT_SECRET: <your-hasura-event-secret>
+      # Hasura JWT algorithm, e.g. HS512, RS512. Sync it with Hasura HASURA_GRAPHQL_JWT_SECRET type
+      HASH_ALGORITHM: HS512
+      # Optional, used by email notification/welcome letter. Only support sendinblue.com currently. PRs welcome!
+      EMAIL_API_KEY: ${EMAIL_API_KEY}
+      # Optional, GitHub auth id, apply an app here: https://github.com/settings/apps/new
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      # The paired secret
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      # Optional, Twitter auth key, apply an app here: https://developer.twitter.com/en/portal/apps/new
+      TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
+      # The paired secret
+      TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
+    restart: always
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+  caddy:
+    image: caddy/caddy
+    depends_on:
+    - "graphql-engine"
+    restart: always
+    ports:
+    - "80:80"
+    - "443:443"
+    - "8080:8080"
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile
+    - caddy_certs:/root/.caddy
+volumes:
+  caddy_certs:
