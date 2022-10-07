@@ -10,16 +10,22 @@ const cwd = process.cwd();
 void (async function (): Promise<void> {
   const domain = await question(`What's your domain of this host?`);
 
-  const dc = await parseYaml('docker-compose.tmpl.yml');
+  const dc = await parseYaml('./docker-compose.tmpl.yml');
 
   // Download the repo and rename it to chirpy
   await $`curl -L https://github.com/devrsi0n/chirpy/archive/main.tar.gz | tar -xz && mv chirpy-main chirpy`;
 
-  await fs.move(path.resolve(cwd, './chirpy/services/hasura'), cwd, {
-    overwrite: true,
-  });
+  await fs.move(
+    path.resolve(cwd, './chirpy/services/hasura'),
+    path.resolve(cwd, 'hasura'),
+    {
+      overwrite: true,
+    },
+  );
   await fs.remove(path.resolve(cwd, './chirpy'));
-  const hasuraDc = await parseYaml('./hasura/docker-compose.example.yml');
+  const hasuraDc = await parseYaml(
+    path.resolve(cwd, './hasura/docker-compose.example.yml'),
+  );
   dc.services = { ...dc.services, ...hasuraDc.services };
   dc.volumes = { ...dc.volumes, ...hasuraDc.volumes };
 
@@ -28,7 +34,9 @@ void (async function (): Promise<void> {
   dc.services['graphql-engine'].environment.HASURA_GRAPHQL_ADMIN_SECRET =
     hasuraAdminSecret;
   dc.services.chirpy.environment.HASURA_ADMIN_SECRET = hasuraAdminSecret;
-  const hasuraConfig = await parseYaml('./hasura/config.yml');
+  const hasuraConfig = await parseYaml(
+    path.resolve(cwd, './hasura/config.yml'),
+  );
   hasuraConfig.admin_secret = hasuraAdminSecret;
   await $`echo '${JSON.stringify(hasuraConfig)}' > ./hasura/config.yml`;
 

@@ -1,6 +1,6 @@
 {
   "name": "chirpy-docker-cli",
-  "version": "0.0.8",
+  "version": "0.0.12",
   "description": "Bootstraps a Chirpy docker server with ease",
   "bin": "index.ts",
   "scripts": {
