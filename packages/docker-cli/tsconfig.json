@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
-      "ES2017"
+      "es2021"
     ],
     "types": [
       "node"
@@ -19,7 +19,6 @@
   "ts-node": {
     "transpileOnly": true,
     "files": true,
-    "esm": true,
     "compilerOptions": {}
   }
 }

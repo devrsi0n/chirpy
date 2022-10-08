@@ -42,6 +42,7 @@ services:
     image: caddy/caddy
     depends_on:
     - "graphql-engine"
+    - "chirpy"
     restart: always
     ports:
     - "80:80"

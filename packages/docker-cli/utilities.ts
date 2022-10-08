@@ -9,11 +9,15 @@ export async function parseYaml(filePath: string) {
       filePath.startsWith('./') || filePath.startsWith('../')
         ? path.resolve(__dirname, filePath)
         : filePath,
-      'utf8',
+      'utf8'
     ),
   );
 }
 
 export function getRandomString(byteSize: number) {
   return crypto.randomBytes(byteSize).toString('hex');
+}
+
+export function getCWDPath(...paths: string[]) {
+  return path.resolve(process.cwd(), ...paths);
 }

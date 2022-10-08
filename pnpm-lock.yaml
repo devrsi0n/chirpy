@@ -434,6 +434,7 @@ importers:
   packages/docker-cli:
     specifiers:
       '@types/node': 16.11.45
+      '@types/web-push': 3.3.2
       ts-node: 10.9.1
       typescript: 4.8.3
       web-push: 3.5.0
@@ -441,6 +442,7 @@ importers:
       zx: 4.3.0
     dependencies:
       '@types/node': 16.11.45
+      '@types/web-push': 3.3.2
       ts-node: 10.9.1_opejj26qye37waeyxx2qzwfycy
       typescript: 4.8.3
       web-push: 3.5.0
@@ -7383,7 +7385,6 @@ packages:
     resolution: {integrity: sha512-JxWGVL/m7mWTIg4mRYO+A6s0jPmBkr4iJr39DqJpRJAc+jrPiEe1/asmkwerzRon8ZZDxaZJpsxpv0Z18Wo9gw==}
     dependencies:
       '@types/node': 18.7.16
-    dev: true
 
   /@types/webgl-ext/0.0.30:
     resolution: {integrity: sha512-LKVgNmBxN0BbljJrVUwkxwRYqzsAEPcZOe6S2T6ZaBDIrFp0qu4FNlpc5sM1tGbXUYFgdVQIoeLk1Y1UoblyEg==}
