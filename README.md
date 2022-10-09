@@ -77,8 +77,8 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 
 ## 💅 Design system
 
-- Colors come from [radix](https://www.radix-ui.com/colors) color](https://www.radix-ui.com/colors)
-- Home hero section is inspired by [stitches](https://stitches.dev/)](https://stitches.dev/)
+- Colors come from [radix color](https://www.radix-ui.com/colors)
+- Home hero section is inspired by [stitches](https://stitches.dev/)
 
 ## ⚖️ License
 
