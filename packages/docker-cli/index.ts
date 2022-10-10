@@ -10,21 +10,21 @@ void (async function (): Promise<void> {
     await generateFiles(domain);
     console.log(`✅ Generate files done`);
   } catch (error) {
-    console.log(chalk.red(`❌ Generate files failed`));
-    throw error;
+    console.log(chalk.red(`❌ Generate files failed`, error));
+    process.exit(1);
   }
   try {
     await $`docker-compose up -d`;
     console.log(`✅ Start docker containers done`);
   } catch (error) {
-    console.log(chalk.red(`❌ Start docker containers failed`));
-    throw error;
+    console.log(chalk.red(`❌ Start docker containers failed`, error));
+    process.exit(1);
   }
   try {
     await setupHasura();
     console.log(`✅ Setup hasura done`);
   } catch (error) {
-    console.log(chalk.red(`❌ Setup hasura failed`));
-    throw error;
+    console.log(chalk.red(`❌ Setup hasura failed`, error));
+    process.exit(1);
   }
 })();

@@ -7,8 +7,8 @@ export async function generateFiles(domain: string) {
   const dc = await parseYaml('./docker-compose.tmpl.yml');
   dc.services.chirpy.environment.NEXT_PUBLIC_APP_URL = `https://${domain}`;
   dc.services.chirpy.environment.NEXTAUTH_URL = `https://${domain}`;
-  dc.services.chirpy.environment.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = `https://${domain}:8080`;
-  dc.services.chirpy.environment.NEXT_PUBLIC_HASURA_WS_ORIGIN = `wss://${domain}:8080`;
+  dc.services.chirpy.environment.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = `https://${domain}:8000/v1/graphql`;
+  dc.services.chirpy.environment.NEXT_PUBLIC_HASURA_WS_ORIGIN = `wss://${domain}:8000/v1/graphql`;
 
   // Download the repo and rename it to chirpy
   await $`curl -L https://github.com/devrsi0n/chirpy/archive/main.tar.gz | tar -xz && mv chirpy-main chirpy`;
@@ -34,6 +34,7 @@ export async function generateFiles(domain: string) {
   dc.services.chirpy.environment.HASURA_ADMIN_SECRET = hasuraAdminSecret;
   const hasuraConfig = await parseYaml(getCWDPath('./hasura/config.yaml'));
   hasuraConfig.admin_secret = hasuraAdminSecret;
+  hasuraConfig.endpoint = `https://${domain}:8000`;
   await fs.writeFile(
     getCWDPath('./hasura/config.yaml'),
     YAML.stringify(hasuraConfig),
@@ -43,7 +44,7 @@ export async function generateFiles(domain: string) {
   const hasuraJwtSecret = getRandomString(129);
   dc.services[
     'graphql-engine'
-  ].environment.HASURA_GRAPHQL_JWT_SECRET = `'{"type":"HS512","key":"${hasuraJwtSecret}"}'`;
+  ].environment.HASURA_GRAPHQL_JWT_SECRET = `{"type":"HS512","key":"${hasuraJwtSecret}"}`;
   dc.services.chirpy.environment.NEXTAUTH_SECRET = hasuraJwtSecret;
 
   // Setup hasura event secret
@@ -60,7 +61,7 @@ export async function generateFiles(domain: string) {
   // Setup Caddy
   let caddy = await fs.readFile(
     path.resolve(__dirname, './Caddyfile.tmpl'),
-    'utf8',
+    'utf8'
   );
   caddy = caddy.replaceAll('<your-domain>', domain);
   await fs.writeFile(getCWDPath('./Caddyfile'), caddy);
