@@ -7,7 +7,7 @@ services:
       # Your Hasura GraphQL HTTP endpoint, e.g. https://<your-domain>:8080/v1/graphql
       NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
       # Your Hasura GraphQL WebScoket endpoint, e.g. wss://<your-domain>:8080/v1/graphql
-      NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_WS_ORIGIN}
       # Your app's public URL, e.g. https://<your-domain>
       NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
       # Used by web push notifications, use `npx web-push generate-vapid-keys` to generate 1 pair, paste the public key here, past the private key to PRIVATE_VAPID
@@ -18,9 +18,9 @@ services:
       NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
       # Nextauth url, it's same as NEXT_PUBLIC_APP_URL usually
       NEXTAUTH_URL: ${NEXTAUTH_URL}
-      NEXTAUTH_SECRET: <your-hasura-jwt-token>
-      HASURA_ADMIN_SECRET: <your-hasura-admin-secret>
-      HASURA_EVENT_SECRET: <your-hasura-event-secret>
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
+      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
       # Hasura JWT algorithm, e.g. HS512, RS512. Sync it with Hasura HASURA_GRAPHQL_JWT_SECRET type
       HASH_ALGORITHM: HS512
       # Optional, used by email notification/welcome letter. Only support sendinblue.com currently. PRs welcome!
@@ -41,13 +41,11 @@ services:
   caddy:
     image: caddy/caddy
     depends_on:
-    - "graphql-engine"
     - "chirpy"
     restart: always
     ports:
     - "80:80"
     - "443:443"
-    - "8000:8000"
     volumes:
     - ./Caddyfile:/etc/caddy/Caddyfile
     - caddy_certs:/root/.caddy

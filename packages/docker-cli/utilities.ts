@@ -3,15 +3,8 @@ import crypto from 'crypto';
 import YAML from 'yaml';
 import path from 'path';
 
-export async function parseYaml(filePath: string) {
-  return YAML.parse(
-    await fs.readFile(
-      filePath.startsWith('./') || filePath.startsWith('../')
-        ? path.resolve(__dirname, filePath)
-        : filePath,
-      'utf8'
-    ),
-  );
+export async function parseYaml(cwdRelativePath: string) {
+  return YAML.parse(await readCWDFile(cwdRelativePath));
 }
 
 export function getRandomString(byteSize: number) {
@@ -20,4 +13,36 @@ export function getRandomString(byteSize: number) {
 
 export function getCWDPath(...paths: string[]) {
   return path.resolve(process.cwd(), ...paths);
+}
+
+export function readCWDFile(cwdRelativePath: string) {
+  return fs.readFile(getCWDPath(cwdRelativePath), 'utf8');
+}
+
+export function writeCWDFile(cwdRelativePath: string, data: any) {
+  return fs.writeFile(getCWDPath(cwdRelativePath), data, 'utf8');
+}
+
+export function moveCWDFile(src: string, dest: string, options?: MoveOptions) {
+  return fs.move(getCWDPath(src), getCWDPath(dest), {
+    overwrite: true,
+    ...options,
+  });
+}
+export function removeCWDFile(cwdRelativePath: string) {
+  return fs.remove(getCWDPath(cwdRelativePath));
+}
+
+export function isValidDomain(domain: string): boolean {
+  try {
+    const url = new URL(`https://${domain}`);
+    return url.hostname === domain;
+  } catch {
+    return false;
+  }
+}
+
+interface MoveOptions {
+  overwrite?: boolean | undefined;
+  limit?: number | undefined;
 }

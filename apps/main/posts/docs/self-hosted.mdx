@@ -8,9 +8,10 @@ You can run Chirpy on your server, it's exactly the same product as our Cloud so
 
 Chirpy is designed to be self-hosted with [Docker](https://www.docker.com/), although you don't have to be a Docker expert to use our self-hosted version, but you should have basic knowledge of command-line, Docker and Linux to setup your own Chirpy instance.
 
-> If you have issues or questions with the self-hosted version, you can reach out to us on our [GitHub discussions](https://github.com/devrsi0n/chirpy/discussions).
+> If you have issues or questions with the self-hosted version, you can reach out to our community support on our [GitHub discussions](https://github.com/devrsi0n/chirpy/discussions).
 
 ## Version management
+
 Chirpy follows [semantic versioning](https://semver.org/): MAJOR.MINOR.PATCH
 
 You can find available Plausible versions on DockerHub. The default latest tag refers to the latest stable release tag.
@@ -19,4 +20,34 @@ Version changes are documented in our [GitHub release](https://github.com/devrsi
 
 ## Requirements
 
-You need a server (a virtual or physical machine) with Docker pre-installed. If your server doesn't come with Docker, you can follow [this docs](https://docs.docker.com/desktop/install/linux-install/) to install it.
+### Hardware
+
+You need 2 Linux servers (virtual or physical machines) to host Chirpy server, and Hasura data server. Chirpy server needs at least **1GB RAM, 1 CPU core and 5GB storage**, while Hasura server needs **1GB RAM, 1 CPU core and 10GB storage**.
+
+We've tested this on a minimal spec [digitalocean](https://m.do.co/c/92c5af253f6a)(affiliate link) droplet but any hosting provider works.
+
+### Softwares
+
+Your need a server to **generate** and run docker containers, thus you need these softwares installed on your server:
+
+- Docker@20.10.18 & Docker Compose@1.27.4, follow [this docs](https://docs.docker.com/desktop/install/linux-install/) to install
+- Nodejs@16.17.1, npm@6+, follow the [nvm](https://github.com/nvm-sh/nvm#install--update-script) doc to install
+
+The other server must have Docker & Docker Compose installed, but it doesn't need the other softwares(e.g. Nodejs).
+
+### Domains
+
+You need 2 domains point to your servers before you start, e.g. you can add a A record to your Vercel Domains:
+![Vercel DNS](/images/docs/self-hosted/vercel-dns.png)
+
+Our main domain is `chirpy.dev`, thus we can visit our website at `https://test.chirpy.dev` later.
+
+Other DNS providers have similar settings, you can find the docs on their website.
+
+## Installation
+
+Run following commands to generate docker compose and configurations files:
+
+```bash
+npx @chirpy-dev/docker-cli init <your-chirpy-domain> <your-hasura-domain>
+```
