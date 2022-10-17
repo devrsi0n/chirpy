@@ -8,7 +8,6 @@ import {
   moveCWDFile,
   writeCWDFile,
   removeCWDFile,
-  isValidDomain,
 } from './utilities';
 
 export async function generateFiles(
@@ -61,10 +60,13 @@ export async function generateFiles(
   chirpyDCFile.replaceAll('${PRIVATE_VAPID}', vapidKeys.privateKey);
 
   // Setup Caddy
-  let caddy = await readCWDFile('./chirpy/Caddyfile.tmpl');
-  caddy = caddy.replaceAll('<your-domain>', chirpyDomain);
-  await writeCWDFile('./chirpy/Caddyfile', caddy);
-
+  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.tmpl');
+  chirpyCaddy = chirpyCaddy.replaceAll('<your-domain>', chirpyDomain);
+  await writeCWDFile('./chirpy/Caddyfile', chirpyCaddy);
   await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCFile);
+
+  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.tmpl');
+  hasuraCaddy = hasuraCaddy.replaceAll('<your-domain>', hasuraDomain);
+  await writeCWDFile('./hasura/Caddyfile', hasuraCaddy);
   await writeCWDFile('./hasura/docker-compose.yml', hasuraDCFile);
 }
