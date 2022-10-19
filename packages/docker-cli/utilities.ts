@@ -20,7 +20,9 @@ export function readCWDFile(cwdRelativePath: string) {
 }
 
 export function writeCWDFile(cwdRelativePath: string, data: any) {
-  return fs.writeFile(getCWDPath(cwdRelativePath), data, 'utf8');
+  return fs.writeFile(getCWDPath(cwdRelativePath), data, {
+    encoding: 'utf8',
+  });
 }
 
 export function moveCWDFile(src: string, dest: string, options?: MoveOptions) {

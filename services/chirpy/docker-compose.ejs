@@ -5,22 +5,22 @@ services:
     image: devrsi0n/chirpy
     environment:
       # Your Hasura GraphQL HTTP endpoint, e.g. https://<your-domain>:8080/v1/graphql
-      NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}
+      NEXT_PUBLIC_HASURA_HTTP_ORIGIN: <%= it.NEXT_PUBLIC_HASURA_HTTP_ORIGIN %>
       # Your Hasura GraphQL WebScoket endpoint, e.g. wss://<your-domain>:8080/v1/graphql
-      NEXT_PUBLIC_HASURA_WS_ORIGIN: ${NEXT_PUBLIC_HASURA_WS_ORIGIN}
+      NEXT_PUBLIC_HASURA_WS_ORIGIN: <%= it.NEXT_PUBLIC_HASURA_WS_ORIGIN %>}
       # Your app's public URL, e.g. https://<your-domain>
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
-      # Used by web push notifications, use `npx web-push generate-vapid-keys` to generate 1 pair, paste the public key here, past the private key to PRIVATE_VAPID
-      NEXT_PUBLIC_VAPID: ${NEXT_PUBLIC_VAPID}
+      NEXT_PUBLIC_APP_URL: <%= it.NEXT_PUBLIC_APP_URL %>}
+      # Used by web push notifications, use 'npx web-push generate-vapid-keys' to generate 1 pair, paste the public key here, past the private key to PRIVATE_VAPID
+      NEXT_PUBLIC_VAPID: <%= it.NEXT_PUBLIC_VAPID %>}
       # Paste the generated private key here
-      PRIVATE_VAPID: ${PRIVATE_VAPID}
+      PRIVATE_VAPID: <%= it.PRIVATE_VAPID %>}
       # Your Plausible server's domain
-      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: <%= it.NEXT_PUBLIC_ANALYTICS_DOMAIN %>}
       # Nextauth url, it's same as NEXT_PUBLIC_APP_URL usually
-      NEXTAUTH_URL: ${NEXTAUTH_URL}
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
-      HASURA_ADMIN_SECRET: ${HASURA_ADMIN_SECRET}
-      HASURA_EVENT_SECRET: ${HASURA_EVENT_SECRET}
+      NEXTAUTH_URL: <%= it.NEXTAUTH_URL %>}
+      NEXTAUTH_SECRET: <%= it.NEXTAUTH_SECRET %>}
+      HASURA_ADMIN_SECRET: <%= it.HASURA_ADMIN_SECRET %>}
+      HASURA_EVENT_SECRET: <%= it.HASURA_EVENT_SECRET %>}
       # Hasura JWT algorithm, e.g. HS512, RS512. Sync it with Hasura HASURA_GRAPHQL_JWT_SECRET type
       HASH_ALGORITHM: HS512
       # Optional, used by email notification/welcome letter. Only support sendinblue.com currently. PRs welcome!

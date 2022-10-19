@@ -7,8 +7,14 @@ import { setupHasura } from './setup-hasura';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { isValidDomain } from './utilities';
+import { logDebug, logError } from './log';
 
 const parser = yargs(hideBin(process.argv))
+  .option('verbose', {
+    alias: 'v',
+    type: 'boolean',
+    description: 'Run with verbose logging',
+  })
   .command(
     'init [chirpy-domain] [hasura-domain]',
     'initialize the Chirpy docker compose and configurations files',
@@ -36,10 +42,17 @@ const parser = yargs(hideBin(process.argv))
         );
       }
       try {
-        await generateFiles(chirpyDomain, hasuraDomain);
+        logDebug(
+          argv.verbose,
+          `Chirpy domain: ${chirpyDomain}, Hasura domain: ${hasuraDomain}`,
+        );
+
+        await generateFiles(chirpyDomain, hasuraDomain, {
+          verbose: argv.verbose,
+        });
         console.log(`✅ Generate files done`);
       } catch (error) {
-        console.log(chalk.red(`❌ Generate files failed`, error));
+        logError(`Generate files failed`, error);
         throw error;
       }
     },
@@ -58,11 +71,7 @@ const parser = yargs(hideBin(process.argv))
       }
     },
   )
-  .option('verbose', {
-    alias: 'v',
-    type: 'boolean',
-    description: 'Run with verbose logging',
-  })
+
   .strict()
   .help();
 

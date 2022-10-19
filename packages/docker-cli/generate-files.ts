@@ -1,5 +1,7 @@
 import { $ } from 'zx';
 import * as webPush from 'web-push';
+import Yaml from 'yaml';
+import eta from 'eta';
 import {
   parseYaml,
   getRandomString,
@@ -9,64 +11,72 @@ import {
   writeCWDFile,
   removeCWDFile,
 } from './utilities';
+import { logDebug } from './log';
+
+type Options = {
+  verbose?: boolean;
+};
 
 export async function generateFiles(
   chirpyDomain: string,
   hasuraDomain: string,
+  { verbose }: Options,
 ): Promise<void> {
-  // Download the repo and rename it to chirpy
+  // Download the repo
   await $`curl -L https://github.com/devrsi0n/chirpy/archive/main.tar.gz | tar -xz`;
 
-  await moveCWDFile('./chirpy/services/hasura', './hasura');
-  await moveCWDFile('./chirpy/services/chirpy', './chirpy');
+  await moveCWDFile('./chirpy-main/services/hasura', './hasura');
+  await moveCWDFile('./chirpy-main/services/chirpy', './chirpy');
   await removeCWDFile('./chirpy-main');
-  const chirpyDCFile = await readCWDFile('./chirpy/docker-compose.tmpl.yml');
+  const chirpyDCFile = await readCWDFile('./chirpy/docker-compose.ejs');
+  logDebug(verbose, 'Chirpy docker compose file: ', chirpyDCFile);
 
   const chirpyURL = `https://${chirpyDomain}`;
-  chirpyDCFile.replaceAll('${NEXT_PUBLIC_APP_URL}', chirpyURL);
-  chirpyDCFile.replaceAll('${NEXTAUTH_URL}', `https://${chirpyDomain}`);
-  chirpyDCFile.replaceAll(
-    '${NEXT_PUBLIC_HASURA_HTTP_ORIGIN}',
-    `https://${hasuraDomain}:8000/v1/graphql`,
-  );
-  chirpyDCFile.replaceAll(
-    '${NEXT_PUBLIC_HASURA_WS_ORIGIN}',
-    `wss://${hasuraDomain}:8000/v1/graphql`,
-  );
-
-  // Setup hasura admin secret
   const hasuraAdminSecret = getRandomString(32);
-  chirpyDCFile.replaceAll('${HASURA_GRAPHQL_ADMIN_SECRET}', hasuraAdminSecret);
-  chirpyDCFile.replaceAll('${HASURA_ADMIN_SECRET}', hasuraAdminSecret);
+  chirpyDCFile.replaceAll('${}\n', `${hasuraAdminSecret}\n`);
   const hasuraConfig = await parseYaml(getCWDPath('./hasura/config.yaml'));
   hasuraConfig.admin_secret = hasuraAdminSecret;
   hasuraConfig.endpoint = `https://${hasuraDomain}:8000`;
-  await writeCWDFile('./hasura/config.yaml', hasuraConfig);
+  await writeCWDFile('./hasura/config.yaml', Yaml.stringify(hasuraConfig));
 
-  const hasuraDCFile = await readCWDFile('./hasura/docker-compose.example.yml');
-  // Setup hasura jwt secret
+  const hasuraDCFile = await readCWDFile('./hasura/docker-compose.ejs');
+
   const hasuraJwtSecret = getRandomString(129);
-  hasuraDCFile.replaceAll('${HASURA_GRAPHQL_JWT_SECRET}', hasuraJwtSecret);
-  chirpyDCFile.replaceAll('${NEXTAUTH_SECRET}', hasuraJwtSecret);
 
-  // Setup hasura event secret
   const hasuraEventSecret = getRandomString(32);
-  chirpyDCFile.replaceAll('${HASURA_EVENT_SECRET}', hasuraEventSecret);
-  hasuraDCFile.replaceAll('${HASURA_EVENT_SECRET}', hasuraEventSecret);
 
-  // Setup web-push keys
   const vapidKeys = webPush.generateVAPIDKeys();
-  chirpyDCFile.replaceAll('${NEXT_PUBLIC_VAPID}', vapidKeys.publicKey);
-  chirpyDCFile.replaceAll('${PRIVATE_VAPID}', vapidKeys.privateKey);
 
-  // Setup Caddy
-  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.tmpl');
-  chirpyCaddy = chirpyCaddy.replaceAll('<your-domain>', chirpyDomain);
-  await writeCWDFile('./chirpy/Caddyfile', chirpyCaddy);
-  await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCFile);
+  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.ejs');
+  const chirpyCaddyResult = await eta.render(chirpyCaddy, {
+    domain: chirpyDomain,
+  });
+  await writeCWDFile('./chirpy/Caddyfile', chirpyCaddyResult);
+  const chirpyDCResult = await eta.render(chirpyDCFile, {
+    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: `https://${hasuraDomain}:8000/v1/graphql`,
+    NEXT_PUBLIC_APP_URL: chirpyURL,
+    NEXTAUTH_URL: chirpyURL,
+    NEXT_PUBLIC_HASURA_WS_ORIGIN: `wss://${hasuraDomain}:8000/v1/graphql`,
+    HASURA_ADMIN_SECRET: hasuraAdminSecret,
+    NEXTAUTH_SECRET: hasuraJwtSecret,
+    HASURA_EVENT_SECRET: hasuraEventSecret,
+    NEXT_PUBLIC_VAPID: vapidKeys.publicKey,
+    PRIVATE_VAPID: vapidKeys.privateKey,
+  });
+  logDebug(verbose, 'Chirpy docker compose content', chirpyDCResult);
+  await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCResult);
 
-  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.tmpl');
-  hasuraCaddy = hasuraCaddy.replaceAll('<your-domain>', hasuraDomain);
-  await writeCWDFile('./hasura/Caddyfile', hasuraCaddy);
-  await writeCWDFile('./hasura/docker-compose.yml', hasuraDCFile);
+  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.ejs');
+  const hasuraCaddyResult = eta.render(hasuraCaddy, {
+    domain: hasuraDomain,
+  });
+  const hasuraDCResult = await eta.render(hasuraDCFile, {
+    HASURA_GRAPHQL_ADMIN_SECRET: hasuraAdminSecret,
+    HASURA_GRAPHQL_JWT_SECRET: hasuraJwtSecret,
+    HASURA_EVENT_SECRET: hasuraEventSecret,
+  });
+  await writeCWDFile('./hasura/Caddyfile', hasuraCaddyResult);
+
+  logDebug(verbose, 'Hasura docker compose content', hasuraDCResult);
+  await writeCWDFile('./hasura/docker-compose.yml', hasuraDCResult);
 }
