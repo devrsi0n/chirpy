@@ -44,3 +44,4 @@ services:
       - caddy_certs:/root/.caddy
 volumes:
   db_data:
+  caddy_certs:
