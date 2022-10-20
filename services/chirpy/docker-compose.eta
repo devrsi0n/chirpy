@@ -41,13 +41,13 @@ services:
   caddy:
     image: caddy/caddy
     depends_on:
-    - "chirpy"
+      - 'chirpy'
     restart: always
     ports:
-    - "80:80"
-    - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
-    - ./Caddyfile:/etc/caddy/Caddyfile
-    - caddy_certs:/root/.caddy
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_certs:/root/.caddy
 volumes:
   caddy_certs:
