@@ -28,7 +28,7 @@ export async function generateFiles(
   await moveCWDFile('./chirpy-main/services/hasura', './hasura');
   await moveCWDFile('./chirpy-main/services/chirpy', './chirpy');
   await removeCWDFile('./chirpy-main');
-  const chirpyDCFile = await readCWDFile('./chirpy/docker-compose.ejs');
+  const chirpyDCFile = await readCWDFile('./chirpy/docker-compose.eta');
   logDebug(verbose, 'Chirpy docker compose file: ', chirpyDCFile);
 
   const chirpyURL = `https://${chirpyDomain}`;
@@ -38,7 +38,7 @@ export async function generateFiles(
   hasuraConfig.endpoint = `https://${hasuraDomain}:8000`;
   await writeCWDFile('./hasura/config.yaml', Yaml.stringify(hasuraConfig));
 
-  const hasuraDCFile = await readCWDFile('./hasura/docker-compose.ejs');
+  const hasuraDCFile = await readCWDFile('./hasura/docker-compose.eta');
 
   const hasuraJwtSecret = getRandomString(129);
 
@@ -46,7 +46,7 @@ export async function generateFiles(
 
   const vapidKeys = webPush.generateVAPIDKeys();
 
-  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.ejs');
+  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.eta');
   const chirpyCaddyResult = await eta.render(chirpyCaddy, {
     domain: chirpyDomain,
   });
@@ -65,7 +65,7 @@ export async function generateFiles(
   logDebug(verbose, 'Chirpy docker compose content', chirpyDCResult);
   await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCResult);
 
-  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.ejs');
+  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.eta');
   const hasuraCaddyResult = eta.render(hasuraCaddy, {
     domain: hasuraDomain,
   });

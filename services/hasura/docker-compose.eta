@@ -26,10 +26,10 @@ services:
       ## enable debugging mode. It is recommended to disable this in production
       HASURA_GRAPHQL_DEV_MODE: 'false'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
-      HASURA_GRAPHQL_ADMIN_SECRET: <%= it.HASURA_GRAPHQL_ADMIN_SECRET %>
-      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS512","key":"<%= it.HASURA_GRAPHQL_JWT_SECRET %>"}'
-      HASURA_GRAPHQL_EVENT_URL: <%= it.HASURA_GRAPHQL_EVENT_URL %>/api/mutation-event
+      HASURA_GRAPHQL_ADMIN_SECRET: <%~ it.HASURA_GRAPHQL_ADMIN_SECRET %>
+      HASURA_GRAPHQL_JWT_SECRET: '{"type":"HS512","key":"<%~ it.HASURA_GRAPHQL_JWT_SECRET %>"}'
+      HASURA_GRAPHQL_EVENT_URL: <%~ it.HASURA_GRAPHQL_EVENT_URL %>/api/mutation-event
       # Custom env
-      HASURA_EVENT_SECRET: <%= it.HASURA_EVENT_SECRET %>
+      HASURA_EVENT_SECRET: <%~ it.HASURA_EVENT_SECRET %>
 volumes:
   db_data:
