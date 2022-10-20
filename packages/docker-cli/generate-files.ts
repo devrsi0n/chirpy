@@ -17,6 +17,10 @@ type Options = {
   verbose?: boolean;
 };
 
+eta.configure({
+  autoTrim: false,
+});
+
 export async function generateFiles(
   chirpyDomain: string,
   hasuraDomain: string,
@@ -35,15 +39,13 @@ export async function generateFiles(
   const hasuraAdminSecret = getRandomString(32);
   const hasuraConfig = await parseYaml(getCWDPath('./hasura/config.yaml'));
   hasuraConfig.admin_secret = hasuraAdminSecret;
-  hasuraConfig.endpoint = `https://${hasuraDomain}:8000`;
+  hasuraConfig.endpoint = `https://${hasuraDomain}`;
   await writeCWDFile('./hasura/config.yaml', Yaml.stringify(hasuraConfig));
 
   const hasuraDCFile = await readCWDFile('./hasura/docker-compose.eta');
 
   const hasuraJwtSecret = getRandomString(129);
-
   const hasuraEventSecret = getRandomString(32);
-
   const vapidKeys = webPush.generateVAPIDKeys();
 
   let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.eta');
@@ -52,8 +54,8 @@ export async function generateFiles(
   });
   await writeCWDFile('./chirpy/Caddyfile', chirpyCaddyResult);
   const chirpyDCResult = await eta.render(chirpyDCFile, {
-    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: `https://${hasuraDomain}:8000/v1/graphql`,
-    NEXT_PUBLIC_HASURA_WS_ORIGIN: `wss://${hasuraDomain}:8000/v1/graphql`,
+    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: `https://${hasuraDomain}/v1/graphql`,
+    NEXT_PUBLIC_HASURA_WS_ORIGIN: `wss://${hasuraDomain}/v1/graphql`,
     NEXT_PUBLIC_APP_URL: chirpyURL,
     NEXT_PUBLIC_VAPID: vapidKeys.publicKey,
     PRIVATE_VAPID: vapidKeys.privateKey,

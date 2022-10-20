@@ -31,5 +31,16 @@ services:
       HASURA_GRAPHQL_EVENT_URL: <%~ it.HASURA_GRAPHQL_EVENT_URL %>/api/mutation-event
       # Custom env
       HASURA_EVENT_SECRET: <%~ it.HASURA_EVENT_SECRET %>
+  caddy:
+    image: caddy/caddy
+    depends_on:
+    - "graphql-engine"
+    restart: always
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile
+    - caddy_certs:/root/.caddy
 volumes:
   db_data:

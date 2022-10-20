@@ -4,9 +4,9 @@ services:
   chirpy:
     image: devrsi0n/chirpy
     environment:
-      # Your Hasura GraphQL HTTP endpoint, e.g. https://<your-domain>:8080/v1/graphql
+      # Your Hasura GraphQL HTTP endpoint, e.g. https://<your-domain>/v1/graphql
       NEXT_PUBLIC_HASURA_HTTP_ORIGIN: <%~ it.NEXT_PUBLIC_HASURA_HTTP_ORIGIN %>
-      # Your Hasura GraphQL WebScoket endpoint, e.g. wss://<your-domain>:8080/v1/graphql
+      # Your Hasura GraphQL WebScoket endpoint, e.g. wss://<your-domain>/v1/graphql
       NEXT_PUBLIC_HASURA_WS_ORIGIN: <%~ it.NEXT_PUBLIC_HASURA_WS_ORIGIN %>
       # Your app's public URL, e.g. https://<your-domain>
       NEXT_PUBLIC_APP_URL: <%~ it.NEXT_PUBLIC_APP_URL %>
