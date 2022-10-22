@@ -1,4 +1,4 @@
-# Chirpy | [简体中文](./README-zh.md)
+# Chirpy
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
 [![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
@@ -6,10 +6,10 @@
 
 <img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
-👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Try it now: [Playground](https://chirpy.dev/play).
+👋 [Chirpy](https://chirpy.dev) 是一个注重隐私保护和定制化的评论系统, 支持 docker 部署。在这里体验： [Playground](https://chirpy.dev/play).
 
 <details>
-    <summary>More screenshots</summary>
+    <summary>更多截图</summary>
     <img src="apps/main/public/images/blog/open-source/theme.png" width="800" alt="Widget theme" >
     <img src="apps/main/public/images/blog/open-source/analytics.png" width="800" alt="Widget analytics" >
     <img src="apps/main/public/images/docs/features/theme/dashboard.png" width="800" alt="Project dashboard" >
@@ -21,35 +21,35 @@
 
 <br>
 
-Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
+喜欢我们的产品？ 请务必给 Chirpy 一个 ⭐，非常感谢 🙏。
 
-## ✨ Key features
+## ✨ 关键特性
 
-- 🔒 Privacy-friendly
-- 🎨 [Customizable widget](https://chirpy.dev/docs/features/theme)
-- ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
-- 📊 [Widget analytics](https://chirpy.dev/docs/features/analytics)
-- 🪄 Real-time comments
-- 📱 Mobile friendly
-- 🔔 [Email & Web push notifications](https://chirpy.dev/docs/features/notifications)
-- 🤐 [Anti-toxic comment](https://chirpy.dev/docs/features/anti-toxic-comment)
-- 💬 [Comment moderation](https://chirpy.dev/docs/features/moderation)
-- 🎭 [Anonymous sign-in](https://chirpy.dev/docs/features/privacy-friendly#anonymous-sign-in)
-- 📬 [Email/magic link sign-in](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)
+- 🔒 注重隐私保护
+- 🎨 [支持组件 UI 定制](https://chirpy.dev/docs/features/theme)
+- ✍️ 富文本编辑 & [Markdown](https://chirpy.dev/docs/features/markdown)
+- 📊 [组件统计](https://chirpy.dev/docs/features/analytics)
+- 🪄 实时评论
+- 📱 适配移动端设计
+- 🔔 [邮件和 Web 推送通知](https://chirpy.dev/docs/features/notifications)
+- 🤐 [自动过滤有毒评论](https://chirpy.dev/docs/features/anti-toxic-comment)
+- 💬 [评论管理](https://chirpy.dev/docs/features/moderation)
+- 🎭 [匿名登陆](https://chirpy.dev/docs/features/privacy-friendly#anonymous-sign-in)
+- 📬 [Email 登陆](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)
 
-## 🧭 Roadmap
+## 🧭 产品路线
 
-Although Chirpy is ready to serve you and your users, we're working hard to add more features:
+尽管 Chirpy 已经可以服务您和您的客户，我们正在努力开发更多功能来满足您的需求：
 
-- More custom options
-- Account plan
-- Payment
+- 更多 UI 定制项
+- 更多账户计划
+- 支付
 
-## 📀 Self-hosted
+## 📀 自托管
 
-You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need 2 servers to install, run and maintain a Chirpy instance.
+你可以 [自托管](https://chirpy.dev/docs/self-hosted) Chirpy 实例。 它和我们的云服务是相等的。请知悉，你需要至少2个服务器和2个域名来安装和运行多个服务端软件。
 
-## 🍡 Tech stacks
+## 🍡 技术栈
 
 - [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 - [![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -63,11 +63,11 @@ You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chi
 - [tiptap](https://tiptap.dev)
 - [Plausible](https://github.com/plausible/analytics)
 
-## 🥇 Contribution
+## 🥇 开源贡献
 
-You're welcome to contribute to this project. Please follow the [CONTRIBUTING](CONTRIBUTING.md) guide.
+我们非常欢迎你参与贡献本项目， 请参考 [贡献](CONTRIBUTING.md) 指南。
 
-## 🚀 Hosting platforms
+## 🚀 部署平台
 
 [![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=chirpy.dev)
 
@@ -75,11 +75,11 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 
 [![Stellate](https://stellate.co/badge.svg)](https://stellate.co/?ref=powered-by)
 
-## 💅 Design system
+## 💅 设计系统
 
-- Colors come from [radix color](https://www.radix-ui.com/colors)
-- Home hero section is inspired by [stitches](https://stitches.dev/)
+- 本产品颜色参考了 [radix color](https://www.radix-ui.com/colors)
+- 首页参考了 [stitches](https://stitches.dev/)
 
-## ⚖️ License
+## ⚖️ 许可证
 
 AGPL 3.0
