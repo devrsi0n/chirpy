@@ -27,7 +27,6 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 
 - 🔒 Privacy-friendly
 - 🎨 [Customizable widget](https://chirpy.dev/docs/features/theme)
-- ⚡️ Reasonably fast
 - ✍️ Rich Text Formatting & [Markdown shortcuts](https://chirpy.dev/docs/features/markdown)
 - 📊 [Widget analytics](https://chirpy.dev/docs/features/analytics)
 - 🪄 Real-time comments
@@ -40,12 +39,11 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 
 ## 🧭 Roadmap
 
-We're working hard to make Chirpy General Available first. Here are the blocking features:
+Although Chirpy is ready to serve you and your users, we're working hard to add more features:
 
-- ~~[Notifications](https://github.com/devrsi0n/chirpy/issues/134)~~
+- More custom options
 - Account plan
 - Payment
-- ~~[Email sign-in without password](https://chirpy.dev/docs/features/privacy-friendly#email-sign-in)~~
 
 ## 📀 Self-hosted
 
@@ -74,6 +72,8 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 [![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=chirpy.dev)
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=92c5af253f6a&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
+
+[![Stellate](https://stellate.co/badge.svg)](https://stellate.co/?ref=powered-by)
 
 ## 💅 Design system
 
