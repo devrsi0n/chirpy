@@ -14,7 +14,7 @@ Chirpy is designed to be self-hosted with [Docker](https://www.docker.com/), alt
 
 Chirpy follows [semantic versioning](https://semver.org/): MAJOR.MINOR.PATCH
 
-You can find available Plausible versions on DockerHub. The default latest tag refers to the latest stable release tag.
+You can find available Chirpy versions on DockerHub. The default latest tag refers to the latest stable release tag.
 
 Version changes are documented in our [GitHub release](https://github.com/devrsi0n/chirpy/releases). Please note that database/graphql schema changes require running migrations when you're upgrading.
 
@@ -22,32 +22,110 @@ Version changes are documented in our [GitHub release](https://github.com/devrsi
 
 ### Hardware
 
-You need 2 Linux servers (virtual or physical machines) to host Chirpy server, and Hasura data server. Chirpy server needs at least **1GB RAM, 1 CPU core and 5GB storage**, while Hasura server needs **1GB RAM, 1 CPU core and 10GB storage**.
+You need **2 Linux servers** (virtual or physical machines) to host Chirpy app server, and Hasura data server. Chirpy server needs at least **1GB RAM, 1 CPU core, and 10GB storage**, while Hasura server needs **1GB RAM, 1 CPU core, and 20GB storage**.
 
-We've tested this on a minimal spec [digitalocean](https://m.do.co/c/92c5af253f6a)(affiliate link) droplet but any hosting provider works.
+We've tested this on 2 minimal spec [DigitalOcean](https://m.do.co/c/92c5af253f6a)(affiliate link) droplets but any hosting provider works.
 
 ### Softwares
 
-Your need a server to **generate** and run docker containers, thus you need these softwares installed on your server:
+You need to **generate** all files on Hasura server and run docker containers, thus you need these softwares installed on your Hasura server:
 
 - Docker@20.10.18 & Docker Compose@1.27.4, follow [this docs](https://docs.docker.com/desktop/install/linux-install/) to install
 - Nodejs@16.17.1, npm@6+, follow the [nvm](https://github.com/nvm-sh/nvm#install--update-script) doc to install
 
-The other server must have Docker & Docker Compose installed, but it doesn't need the other softwares(e.g. Nodejs).
+The Chirpy server must have Docker & Docker Compose installed, but it doesn't need the other software(e.g. Nodejs).
 
 ### Domains
 
-You need 2 domains point to your servers before you start, e.g. you can add a A record to your Vercel Domains:
+You need **2 domains** pointing to your servers before you start, one for Chirpy app, and the other one for Hasura.
+
+For example: you can add a `A record` to your Vercel Domains:
 ![Vercel DNS](/images/docs/self-hosted/vercel-dns.png)
 
-Our main domain is `chirpy.dev`, thus we can visit our website at `https://test.chirpy.dev` later.
+Our main domain is `chirpy.dev`, thus we can visit our website at `https://test.chirpy.dev` once we have our servers running. Note: Save the server/ip -> domain map, and run correct commands on correct servers, or your servers may not work.
 
 Other DNS providers have similar settings, you can find the docs on their website.
 
-## Installation
+## Setup Hasura server
 
-Run following commands to generate docker compose and configurations files:
+On your Hasura server run the following commands to generate docker compose and configurations files, run a Hasura server and migrate Hasura database/metadata:
 
 ```bash
 npx @chirpy-dev/docker-cli init <your-chirpy-domain> <your-hasura-domain>
+```
+
+You can visit `<your-hasura-domain>` to check if the server is running.
+
+After the initialization, you can find these 2 sub-folders in your current folder, like this:
+
+```txt
+.
+├── chirpy
+│   ├── Caddyfile
+│   └── docker-compose.yml
+└── hasura
+    ├── Caddyfile
+    ├── config.yaml
+    ├── docker-compose.yml
+    ├── metadata
+    │   └── <files>
+    ├── migrations
+    │   └── <files>
+    └── seeds
+        └── <files>
+```
+
+You need to copy `./chirpy/*` files to Chirpy server. You can copy 2 files manually or use command like [scp](https://superuser.com/questions/345347/how-to-copy-a-file-between-two-linux-machines).
+
+## Setup Chirpy server
+
+`cd` to the folder that saves the docker file, and run the following commands to start a docker container:
+
+```base
+docker compose up -d
+```
+You can visit `<your-chirpy-domain>` to check if the server is running.
+
+## Add more config to Chirpy
+
+You may find there are some unset configurations in Chirpy's `docker-compose.yml`, you can tweak them manually to suit your needs.
+
+```yaml
+version: '3'
+services:
+  chirpy:
+    image: devrsi0n/chirpy
+    environment:
+      # ... omit preset variables
+
+      # Optional, your Plausible server's domain
+      NEXT_PUBLIC_ANALYTICS_DOMAIN: ${NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      # Optional, used by email notification/welcome letter. Only support sendinblue.com currently. PRs welcome!
+      EMAIL_API_KEY: ${EMAIL_API_KEY}
+      # Optional, GitHub auth id, apply an app here: https://github.com/settings/apps/new
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
+      # The paired secret
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
+      # Optional, Twitter auth key, apply an app here: https://developer.twitter.com/en/portal/apps/new
+      TWITTER_CONSUMER_KEY: ${TWITTER_CONSUMER_KEY}
+      # The paired secret
+      TWITTER_CONSUMER_SECRET: ${TWITTER_CONSUMER_SECRET}
+    restart: always
+    ports:
+      - 3000:3000
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+  caddy:
+    image: caddy/caddy
+    depends_on:
+      - 'chirpy'
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_certs:/root/.caddy
+volumes:
+  caddy_certs:
 ```
