@@ -1,15 +1,15 @@
 import { $ } from 'zx';
-import * as webPush from 'web-push';
+
 import Yaml from 'yaml';
 import * as eta from 'eta';
 import {
   parseYaml,
-  getRandomString,
   getCWDPath,
   readCWDFile,
   moveCWDFile,
   writeCWDFile,
   removeCWDFile,
+  generateSecreats,
 } from './utilities';
 import { logDebug } from './log';
 
@@ -41,17 +41,18 @@ export async function generateFiles(
   logDebug(verbose, 'Chirpy docker compose file: ', chirpyDCFile);
 
   const chirpyURL = `https://${chirpyDomain}`;
-  const hasuraAdminSecret = getRandomString(32);
-  const hasuraConfig = await parseYaml(getCWDPath('./hasura/config.yaml'));
-  hasuraConfig.admin_secret = hasuraAdminSecret;
-  hasuraConfig.endpoint = `https://${hasuraDomain}`;
-  await writeCWDFile('./hasura/config.yaml', Yaml.stringify(hasuraConfig));
+  const { hasuraAdminSecret, hasuraEventSecret, hasuraJwtSecret, vapidKeys } =
+    generateSecreats();
+  const hasuraConfig = await readCWDFile('./hasura/config.eta');
+  await writeCWDFile(
+    './hasura/config.yaml',
+    await eta.render(hasuraConfig, {
+      admin_secret: hasuraAdminSecret,
+      endpoint: `https://${hasuraDomain}`,
+    }),
+  );
 
   const hasuraDCFile = await readCWDFile(HASURA_DC_TMPL_PATH);
-
-  const hasuraJwtSecret = getRandomString(129);
-  const hasuraEventSecret = getRandomString(32);
-  const vapidKeys = webPush.generateVAPIDKeys();
 
   let chirpyCaddy = await readCWDFile(CHIRPY_CADDY_TMPL_PATH);
   const chirpyCaddyResult = await eta.render(chirpyCaddy, {
