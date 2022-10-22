@@ -1,10 +1,7 @@
 import { $ } from 'zx';
 
-import Yaml from 'yaml';
 import * as eta from 'eta';
 import {
-  parseYaml,
-  getCWDPath,
   readCWDFile,
   moveCWDFile,
   writeCWDFile,
@@ -25,6 +22,7 @@ const CHIRPY_DC_TMPL_PATH = './chirpy/docker-compose.eta';
 const CHIRPY_CADDY_TMPL_PATH = './chirpy/Caddyfile.eta';
 const HASURA_DC_TMPL_PATH = './hasura/docker-compose.eta';
 const HASURA_CADDY_TMPL_PATH = './hasura/Caddyfile.eta';
+const HASURA_CONFIG_TMPL_PATH = './hasura/config.eta';
 
 export async function generateFiles(
   chirpyDomain: string,
@@ -43,7 +41,7 @@ export async function generateFiles(
   const chirpyURL = `https://${chirpyDomain}`;
   const { hasuraAdminSecret, hasuraEventSecret, hasuraJwtSecret, vapidKeys } =
     generateSecreats();
-  const hasuraConfig = await readCWDFile('./hasura/config.eta');
+  const hasuraConfig = await readCWDFile(HASURA_CONFIG_TMPL_PATH);
   await writeCWDFile(
     './hasura/config.yaml',
     await eta.render(hasuraConfig, {
@@ -93,6 +91,7 @@ export async function generateFiles(
       CHIRPY_CADDY_TMPL_PATH,
       HASURA_DC_TMPL_PATH,
       HASURA_CADDY_TMPL_PATH,
+      HASURA_CONFIG_TMPL_PATH,
     ].map((_path) => removeCWDFile(_path)),
   );
 }

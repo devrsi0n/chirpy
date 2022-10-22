@@ -67,6 +67,6 @@ const hasuraURL = 'http://localhost:8080';
   cd(`../../services/hasura/`);
   await $`docker-compose up -d`;
   logDebug(true, '⌛️ Waiting for Hasura server');
-  await sleep(5000);
+  await sleep(10000);
   await setupHasura();
 })();
