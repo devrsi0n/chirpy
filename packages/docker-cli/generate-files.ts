@@ -21,6 +21,11 @@ eta.configure({
   autoTrim: false,
 });
 
+const CHIRPY_DC_TMPL_PATH = './chirpy/docker-compose.eta';
+const CHIRPY_CADDY_TMPL_PATH = './chirpy/Caddyfile.eta';
+const HASURA_DC_TMPL_PATH = './hasura/docker-compose.eta';
+const HASURA_CADDY_TMPL_PATH = './hasura/Caddyfile.eta';
+
 export async function generateFiles(
   chirpyDomain: string,
   hasuraDomain: string,
@@ -32,7 +37,7 @@ export async function generateFiles(
   await moveCWDFile('./chirpy-main/services/hasura', './hasura');
   await moveCWDFile('./chirpy-main/services/chirpy', './chirpy');
   await removeCWDFile('./chirpy-main');
-  const chirpyDCFile = await readCWDFile('./chirpy/docker-compose.eta');
+  const chirpyDCFile = await readCWDFile(CHIRPY_DC_TMPL_PATH);
   logDebug(verbose, 'Chirpy docker compose file: ', chirpyDCFile);
 
   const chirpyURL = `https://${chirpyDomain}`;
@@ -42,13 +47,13 @@ export async function generateFiles(
   hasuraConfig.endpoint = `https://${hasuraDomain}`;
   await writeCWDFile('./hasura/config.yaml', Yaml.stringify(hasuraConfig));
 
-  const hasuraDCFile = await readCWDFile('./hasura/docker-compose.eta');
+  const hasuraDCFile = await readCWDFile(HASURA_DC_TMPL_PATH);
 
   const hasuraJwtSecret = getRandomString(129);
   const hasuraEventSecret = getRandomString(32);
   const vapidKeys = webPush.generateVAPIDKeys();
 
-  let chirpyCaddy = await readCWDFile('./chirpy/Caddyfile.eta');
+  let chirpyCaddy = await readCWDFile(CHIRPY_CADDY_TMPL_PATH);
   const chirpyCaddyResult = await eta.render(chirpyCaddy, {
     domain: chirpyDomain,
   });
@@ -67,7 +72,7 @@ export async function generateFiles(
   logDebug(verbose, 'Chirpy docker compose content', chirpyDCResult);
   await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCResult);
 
-  let hasuraCaddy = await readCWDFile('./hasura/Caddyfile.eta');
+  let hasuraCaddy = await readCWDFile(HASURA_CADDY_TMPL_PATH);
   const hasuraCaddyResult = eta.render(hasuraCaddy, {
     domain: hasuraDomain,
   });
@@ -78,7 +83,15 @@ export async function generateFiles(
     HASURA_GRAPHQL_EVENT_URL: chirpyURL,
   });
   await writeCWDFile('./hasura/Caddyfile', hasuraCaddyResult);
-
   logDebug(verbose, 'Hasura docker compose content', hasuraDCResult);
   await writeCWDFile('./hasura/docker-compose.yml', hasuraDCResult);
+
+  await Promise.all(
+    [
+      CHIRPY_DC_TMPL_PATH,
+      CHIRPY_CADDY_TMPL_PATH,
+      HASURA_DC_TMPL_PATH,
+      HASURA_CADDY_TMPL_PATH,
+    ].map((_path) => removeCWDFile(_path)),
+  );
 }

@@ -1,6 +1,6 @@
 import { chalk } from 'zx';
 
-export function logError(message: string, error: any): void {
+export function logError(message: string, error?: any): void {
   console.error(chalk.redBright(`❌ ${message}`, error));
 }
 

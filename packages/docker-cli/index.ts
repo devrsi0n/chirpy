@@ -6,7 +6,7 @@ import { setupHasura } from './setup-hasura';
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { isValidDomain } from './utilities';
+import { doesPathExist, isValidDomain } from './utilities';
 import { logDebug, logError } from './log';
 
 const parser = yargs(hideBin(process.argv))
@@ -62,6 +62,10 @@ const parser = yargs(hideBin(process.argv))
     'migrate the Hasura instance, including migrate and seen the Postgres database, apply Hasura metadata',
     () => {},
     async () => {
+      if (!doesPathExist('./config.yaml')) {
+        logError('You must run "migrate" command in hasura metadata folder');
+        return;
+      }
       try {
         await setupHasura();
         console.log(`✅ Hasura migrate done`);
@@ -71,11 +75,10 @@ const parser = yargs(hideBin(process.argv))
       }
     },
   )
-
   .strict()
   .help();
 
 (async () => {
   const argv = await parser.argv;
-  argv.a;
+  argv.verbose;
 })();

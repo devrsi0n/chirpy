@@ -31,8 +31,13 @@ export function moveCWDFile(src: string, dest: string, options?: MoveOptions) {
     ...options,
   });
 }
+
 export function removeCWDFile(cwdRelativePath: string) {
   return fs.remove(getCWDPath(cwdRelativePath));
+}
+
+export function doesPathExist(cwdRelativePath: string) {
+  return fs.pathExists(getCWDPath(cwdRelativePath));
 }
 
 export function isValidDomain(domain: string): boolean {
