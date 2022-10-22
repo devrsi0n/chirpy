@@ -47,7 +47,7 @@ Although Chirpy is ready to serve you and your users, we're working hard to add 
 
 ## 📀 Self-hosted
 
-You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need 2 servers to install, run and maintain a Chirpy instance.
+You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need 2 servers and 2 domains to install, run and maintain multiple instances.
 
 ## 🍡 Tech stacks
 

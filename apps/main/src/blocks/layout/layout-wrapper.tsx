@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 export type LayoutWrapperProps = {
@@ -13,10 +14,12 @@ export function LayoutWrapper({
   children,
   className,
 }: LayoutWrapperProps): JSX.Element {
+  const router = useRouter();
   return (
     <>
       <Head>
         <title>{title ? `${title}・Chirpy` : 'Chirpy'}</title>
+        <link rel="canonical" href={`https://chirpy.dev${router.asPath}`} />
       </Head>
       <div
         className={clsx(

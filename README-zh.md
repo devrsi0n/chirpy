@@ -21,7 +21,7 @@
 
 <br>
 
-喜欢我们的产品？ 请务必给 Chirpy 一个 ⭐，非常感谢 🙏。
+喜欢我们的产品？ 请务必给 Chirpy 一个 ⭐，这对我们帮助非常大，非常感谢 🙏。
 
 ## ✨ 关键特性
 
@@ -47,7 +47,7 @@
 
 ## 📀 自托管
 
-你可以 [自托管](https://chirpy.dev/docs/self-hosted) Chirpy 实例。 它和我们的云服务是相等的。请知悉，你需要至少2个服务器和2个域名来安装和运行多个服务端软件。
+你可以[自托管](https://chirpy.dev/docs/self-hosted) Chirpy 实例。 它和我们的云服务是相同的。请知悉，你需要至少2个服务器和2个域名来安装和运行多个服务端软件。
 
 ## 🍡 技术栈
 
@@ -65,7 +65,7 @@
 
 ## 🥇 开源贡献
 
-我们非常欢迎你参与贡献本项目， 请参考 [贡献](CONTRIBUTING.md) 指南。
+我们非常欢迎你参与贡献本项目， 请参考[贡献](CONTRIBUTING.md) 指南。
 
 ## 🚀 部署平台
 
@@ -77,8 +77,8 @@
 
 ## 💅 设计系统
 
-- 本产品颜色参考了 [radix color](https://www.radix-ui.com/colors)
-- 首页参考了 [stitches](https://stitches.dev/)
+- 本产品颜色参考了[radix color](https://www.radix-ui.com/colors)
+- 首页参考了[stitches](https://stitches.dev/)
 
 ## ⚖️ 许可证
 
