@@ -1,12 +1,9 @@
 import { GetStaticProps } from 'next';
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Heading } from '$/components/heading';
-import { Image } from '$/components/image';
-import { Link } from '$/components/link';
+import { SiteLayout, Heading, Image, Link } from 'ui';
 import { getDirectories } from '$/server/mdx/files';
-import { Directory } from '$/server/types/file';
+import { Directory } from 'types';
 import { getBannerProps } from '$/utilities/image';
 
 const CONTAINER_FOLDER = 'blog';

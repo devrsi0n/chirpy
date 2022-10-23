@@ -2,8 +2,8 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { project } from '$/__tests__/mocks/mock-project-data';
-import * as projectModule from '$/graphql/generated/project';
-import * as userModule from '$/graphql/generated/user';
+import * as projectModule from '@chirpy-dev/graphql';
+import * as userModule from '@chirpy-dev/graphql';
 import Dashboard from '$/pages/dashboard/index';
 
 import { pageRender } from '../fixtures/page-render';

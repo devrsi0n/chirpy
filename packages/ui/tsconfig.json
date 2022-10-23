@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@chirpy-dev/tsconfigs/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["jest", "node"] 
+  },
+  "exclude": ["node_modules", ".next"],
+  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+}

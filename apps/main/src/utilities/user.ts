@@ -1,4 +1,4 @@
-import { UserData } from '$/contexts/current-user-context/current-user-context';
+import { UserData } from 'ui';
 
 export function hasValidUserProfile(data: UserData): boolean {
   return !!(data.name && data.username);

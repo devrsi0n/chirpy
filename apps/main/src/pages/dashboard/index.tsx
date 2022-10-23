@@ -1,19 +1,24 @@
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
-import { EmptyProjectCard, ProjectCard } from '$/blocks/project-card';
-import { Button } from '$/components/button';
-import { Dialog } from '$/components/dialog';
-import { IconPlusCircle } from '$/components/icons';
-import { Spinner } from '$/components/spinner';
-import { TextField } from '$/components/text-field';
-import { useCurrentUser } from '$/contexts/current-user-context';
-import { useInsertOneProjectMutation } from '$/graphql/generated/project';
-import { useUserDashboardProjectsQuery } from '$/graphql/generated/user';
-import { useForm } from '$/hooks/use-form';
-import { isENVProd } from '$/server/utilities/env';
-import { isValidDomain } from '$/utilities/validator';
+import {
+  SiteLayout,
+  PageTitle,
+  EmptyProjectCard,
+  ProjectCard,
+  Button,
+  Dialog,
+  IconPlusCircle,
+  Spinner,
+  TextField,
+  useCurrentUser,
+} from 'ui';
+import {
+  useInsertOneProjectMutation,
+  useUserDashboardProjectsQuery,
+} from '@chirpy-dev/graphql';
+import { useForm } from 'ui';
+import { isENVProd } from 'utils';
+import { isValidDomain } from 'ui';
 
 type FormFields = {
   name: string;

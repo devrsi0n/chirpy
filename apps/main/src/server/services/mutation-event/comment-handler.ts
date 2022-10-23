@@ -1,9 +1,9 @@
 import { NextApiResponse } from 'next';
 
 import { query } from '$/server/common/gql';
-import { SiteOwnerByTriggerCommentIdDocument } from '$/server/graphql/generated/comment';
+import { SiteOwnerByTriggerCommentIdDocument } from '@chirpy-dev/graphql';
 import { revalidateCommentWidget } from '$/server/utilities/revalidate';
-import { getTextFromRteDoc } from '$/utilities/isomorphic/text';
+import { getTextFromRteDoc } from 'utils';
 
 import { sendNotification } from '../notification/send';
 import { NotificationPayload } from '../notification/types';

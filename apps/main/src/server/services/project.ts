@@ -1,4 +1,4 @@
-import { AllProjectsDocument } from '$/server/graphql/generated/project';
+import { AllProjectsDocument } from '@chirpy-dev/graphql';
 
 import { query } from '../common/gql';
 

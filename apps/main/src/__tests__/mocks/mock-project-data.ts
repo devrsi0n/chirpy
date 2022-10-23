@@ -1,4 +1,4 @@
-import { ProjectCardProps } from '../../blocks/project-card/project-card';
+import { ProjectCardProps } from '../../../../../packages/ui/src/blocks/project-card/project-card';
 
 export const project: ProjectCardProps['project'] = {
   id: '123',

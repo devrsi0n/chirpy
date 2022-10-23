@@ -11,27 +11,25 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentTrees } from '$/blocks/comment-trees';
-import { WidgetLayout } from '$/blocks/layout';
-import { PoweredBy } from '$/blocks/powered-by';
-import { CommentContextProvider } from '$/contexts/comment-context';
+import {
+  CommentTrees,
+  WidgetLayout,
+  PoweredBy,
+  CommentContextProvider,
+} from 'ui';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
   CommentTreeSubscriptionVariables,
   useCommentTreeSubscription,
-} from '$/graphql/generated/comment';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { query } from '$/server/common/gql';
-import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
-import {
+  ThemeOfPageDocument,
   PageByUrlOnlyDocument,
   FreshPagesDocument,
-} from '$/server/graphql/generated/page';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentLeafType } from '$/types/widget';
-import { isSSRMode } from '$/utilities/isomorphic/env';
+} from '@chirpy-dev/graphql';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { query } from '$/server/common/gql';
+import { CommonWidgetProps, Theme, CommentLeafType } from 'types';
+import { isSSRMode } from 'utils';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 

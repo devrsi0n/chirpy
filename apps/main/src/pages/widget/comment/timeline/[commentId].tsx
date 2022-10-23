@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import { cpDayjs } from 'ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -11,29 +11,28 @@ import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
-
-import { CommentTimeline } from '$/blocks/comment-timeline';
-import { WidgetLayout } from '$/blocks/layout';
-import { PoweredBy } from '$/blocks/powered-by';
-import { UserMenu } from '$/blocks/user-menu';
-import { IconButton } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { IconArrowLeft } from '$/components/icons';
-import { Link } from '$/components/link';
-import { CommentContextProvider } from '$/contexts/comment-context';
+import {
+  CommentTimeline,
+  WidgetLayout,
+  PoweredBy,
+  UserMenu,
+  IconButton,
+  Heading,
+  IconArrowLeft,
+  Link,
+  CommentContextProvider,
+} from 'ui';
 import {
   CommentTimelineDocument,
   CommentTimelineSubscription,
   useCommentTimelineSubscription,
-} from '$/graphql/generated/comment';
+  CommentsDocument,
+  ThemeOfPageDocument,
+} from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommentsDocument } from '$/server/graphql/generated/comment';
-import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentTimelineNode } from '$/types/widget';
-import { isSSRMode } from '$/utilities/isomorphic/env';
+import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
+import { isSSRMode } from 'utils';
 
 export default function CommentTimelineWidget(
   props: InferGetStaticPropsType<typeof getStaticProps>,
@@ -93,7 +92,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const comments = await query(
     CommentsDocument,
     {
-      newerThan: dayjs().subtract(1, 'day').toISOString(),
+      newerThan: cpDayjs().subtract(1, 'day').toISOString(),
     },
     'comments',
   );

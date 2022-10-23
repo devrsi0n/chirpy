@@ -1,6 +1,6 @@
 import { log } from 'next-axiom';
 
-import { NotificationType_Enum } from '$/graphql/generated/types';
+import { NotificationType_Enum } from '@chirpy-dev/graphql';
 
 import { sendNotificationEmail } from '../email/send-emails';
 import { NotificationPayload } from './types';

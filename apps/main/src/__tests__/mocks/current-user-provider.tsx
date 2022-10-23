@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { CurrentUserProvider } from '$/contexts/current-user-context';
+import { CurrentUserProvider } from 'ui';
 
-import * as userModule from '../../graphql/generated/user';
+import * as userModule from '@chirpy-dev/graphql';
 import { mockUserData } from './data/user';
 
 export type MockCurrentUserProviderProps = React.PropsWithChildren<{

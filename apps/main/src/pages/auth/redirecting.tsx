@@ -1,12 +1,9 @@
-import { useSession } from 'next-auth/react';
+import { useSession } from 'ui';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Spinner } from '$/components/spinner';
-import { useCurrentUser } from '$/contexts/current-user-context';
-import { useTimeout } from '$/hooks/use-timeout';
-import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from '$/lib/constants';
+import { SiteLayout, Spinner, useCurrentUser, useTimeout } from 'ui';
+import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from 'utils';
 import { hasValidUserProfile } from '$/utilities/user';
 
 export default function Redirecting(): JSX.Element {

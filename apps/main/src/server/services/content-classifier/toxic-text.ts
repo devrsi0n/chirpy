@@ -3,7 +3,8 @@ import '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev } from 'utils';
+import { ICheckToxicText } from 'types';
 
 const MIN_PREDICTION_CONFIDENCE = 0.9;
 
@@ -21,10 +22,6 @@ export function getToxicModel() {
     ]);
   }
   return global.toxicModelPromise;
-}
-
-export interface ICheckToxicText {
-  matchedLabels: string[];
 }
 
 export async function checkToxicText(

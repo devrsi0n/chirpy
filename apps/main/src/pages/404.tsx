@@ -1,13 +1,15 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Button } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { IconAlertCircleFill } from '$/components/icons';
-import { Link } from '$/components/link';
-import { List } from '$/components/list';
-import { Text } from '$/components/text';
+import {
+  SiteLayout,
+  Button,
+  Heading,
+  IconAlertCircleFill,
+  Link,
+  List,
+  Text,
+} from 'ui';
 
 export default function Custom404(): JSX.Element {
   return (

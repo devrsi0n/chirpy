@@ -1,13 +1,15 @@
 import { render as reactRender } from '@testing-library/react';
 import { Provider } from 'urql';
 
-import { ToastProvider } from '$/components/toast';
-import { createGqlClient } from '$/lib/gql-client';
-
 import '../mocks/mock-use-session';
 import '../mocks/next-router';
 
-import { CurrentUserContext, UserData } from '$/contexts/current-user-context';
+import {
+  ToastProvider,
+  CurrentUserContext,
+  UserData,
+  createGqlClient,
+} from 'ui';
 
 import { mockUserData } from '../mocks/data/user';
 

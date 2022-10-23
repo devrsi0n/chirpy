@@ -2,14 +2,16 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 
-import { CommentWidget } from '$/blocks/comment-widget';
-import { SiteLayout } from '$/blocks/layout';
-import { MDXComponents } from '$/blocks/mdx-components';
-import { Image } from '$/components/image';
-import { useHasMounted } from '$/hooks/use-has-mounted';
+import {
+  CommentWidget,
+  SiteLayout,
+  MDXComponents,
+  Image,
+  useHasMounted,
+} from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from 'types';
 import { getBannerProps } from '$/utilities/image';
 
 type BlogProps = MDXProps;

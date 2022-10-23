@@ -1,5 +1,7 @@
 import { Config } from 'stellate';
 
+// @ts-ignore
+const schema = require.resolve('@chirpy-dev/graphql/scripts/schema.graphql');
 const config: Config = {
   config: {
     enablePlayground: true,
@@ -16,7 +18,7 @@ const config: Config = {
     ],
     name: 'hasura',
     originUrl: 'https://hasura.chirpy.dev/v1/graphql',
-    schema: './scripts/graphql/schema.graphql',
+    schema,
     scopes: {
       AUTHENTICATED: 'header:authorization|header:x-hasura-admin-secret',
     },
@@ -27,7 +29,7 @@ const config: Config = {
       staging: {
         name: 'hasura-staging',
         originUrl: 'https://hasura-staging.chirpy.dev/v1/graphql',
-        schema: './scripts/graphql/schema.graphql',
+        schema,
       },
     },
   },

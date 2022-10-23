@@ -2,15 +2,11 @@ import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 import * as React from 'react';
 
-import { CommentWidget } from '$/blocks/comment-widget';
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
-import { Alert } from '$/components/alert';
+import { CommentWidget, SiteLayout, PageTitle, Alert } from 'ui';
 import { mutate } from '$/server/common/gql';
-import { DeleteStaleCommentsDocument } from '$/server/graphql/generated/comment';
-import { isENVDev } from '$/server/utilities/env';
-import { cpDayjs } from '$/utilities/date';
-import { getAppURL } from '$/utilities/isomorphic/env';
+import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
+import { isENVDev, getAppURL } from 'utils';
+import { cpDayjs } from 'ui';
 
 export default function PlayGround(): JSX.Element {
   const [showAlert, setShowAlert] = React.useState(true);

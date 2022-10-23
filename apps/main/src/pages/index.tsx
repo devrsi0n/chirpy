@@ -1,19 +1,18 @@
 import { GetStaticProps } from 'next';
 import * as React from 'react';
 
+import { HomeCommentWidgetPreview, HomeCommentWidgetPreviewProps } from 'ui';
 import {
-  HomeCommentWidgetPreview,
-  HomeCommentWidgetPreviewProps,
-} from '$/blocks/comment-widget-preview';
-import { FAQs } from '$/blocks/faqs';
-import { Features } from '$/blocks/features';
-import { SiteLayout } from '$/blocks/layout';
-import { Pricing } from '$/blocks/pricing';
-import { Button } from '$/components/button';
-import { IconArrowRight } from '$/components/icons';
-import { Link } from '$/components/link';
-import { Text } from '$/components/text';
-import { isENVDev } from '$/server/utilities/env';
+  FAQs,
+  Features,
+  SiteLayout,
+  Pricing,
+  Button,
+  IconArrowRight,
+  Link,
+  Text,
+} from 'ui';
+import { isENVDev } from 'utils';
 
 type HomeProps = HomeCommentWidgetPreviewProps;
 

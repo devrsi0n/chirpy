@@ -1,4 +1,4 @@
-import { EVENT_CLICK_CONTAINER } from '../../../main/src/lib/constants';
+import { EVENT_CLICK_CONTAINER } from 'utils';
 import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
 import type { ResponseError } from '../../../main/src/server/types/error';
 import type { GetPagByUrl } from '../../../main/src/server/types/page';

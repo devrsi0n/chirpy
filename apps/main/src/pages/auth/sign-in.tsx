@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { SignInForm } from '$/blocks/sign-in-form';
+import { SiteLayout, SignInForm } from 'ui';
 
 export default function SignInPage(): JSX.Element {
   const [allowAnonymous, setAllowAnonymous] = React.useState(false);

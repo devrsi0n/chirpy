@@ -1,33 +1,33 @@
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
-import { Avatar } from '$/components/avatar';
-import { Button } from '$/components/button';
-import { Heading } from '$/components/heading';
 import {
+  SiteLayout,
+  PageTitle,
+  Avatar,
+  Button,
+  Heading,
   IconEdit2,
   IconLink2,
   IconSave,
   IconTrash2,
   IconTwitter,
-} from '$/components/icons';
-import { Link } from '$/components/link';
-import { Popover } from '$/components/popover';
-import { Spinner } from '$/components/spinner';
-import { Text } from '$/components/text';
-import { TextArea } from '$/components/text-area';
-import { TextField } from '$/components/text-field';
-import { useToast } from '$/components/toast';
-import { useCurrentUser } from '$/contexts/current-user-context';
+  Link,
+  Popover,
+  Spinner,
+  Text,
+  TextArea,
+  TextField,
+  useToast,
+  useCurrentUser,
+  useBypassCacheRefetch,
+  useForm,
+  logger,
+} from 'ui';
 import {
   useCurrentUserQuery,
   useUpdateUserByPkMutation,
-} from '$/graphql/generated/user';
-import { useBypassCacheRefetch } from '$/hooks/use-bypass-cache-refetch';
-import { useForm } from '$/hooks/use-form';
-import { logger } from '$/lib/logger';
-import { EMAIL_REGEXP } from '$/utilities/validator';
+} from '@chirpy-dev/graphql';
+import { EMAIL_REGEXP } from 'ui/src/utils/validator';
 
 type FormFields = {
   name: string;

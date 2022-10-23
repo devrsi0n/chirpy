@@ -1,16 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import * as React from 'react';
 
-import { AnalyticsBlock } from '$/blocks/analytics';
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
+import { AnalyticsBlock, SiteLayout, PageTitle } from 'ui';
 import { query } from '$/server/common/gql';
 import {
   ProjectByDomainDocument,
   ProjectByDomainQuery,
-} from '$/server/graphql/generated/project';
+} from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from 'types';
 
 export type AnalyticsProps = {
   project: ProjectByDomainQuery['projects'][number];

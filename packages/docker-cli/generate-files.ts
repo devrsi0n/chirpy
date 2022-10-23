@@ -52,7 +52,7 @@ export async function generateFiles(
 
   const hasuraDCFile = await readCWDFile(HASURA_DC_TMPL_PATH);
 
-  let chirpyCaddy = await readCWDFile(CHIRPY_CADDY_TMPL_PATH);
+  const chirpyCaddy = await readCWDFile(CHIRPY_CADDY_TMPL_PATH);
   const chirpyCaddyResult = await eta.render(chirpyCaddy, {
     domain: chirpyDomain,
   });
@@ -71,7 +71,7 @@ export async function generateFiles(
   logDebug(verbose, 'Chirpy docker compose content', chirpyDCResult);
   await writeCWDFile('./chirpy/docker-compose.yml', chirpyDCResult);
 
-  let hasuraCaddy = await readCWDFile(HASURA_CADDY_TMPL_PATH);
+  const hasuraCaddy = await readCWDFile(HASURA_CADDY_TMPL_PATH);
   const hasuraCaddyResult = eta.render(hasuraCaddy, {
     domain: hasuraDomain,
   });

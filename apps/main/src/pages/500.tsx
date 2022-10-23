@@ -1,12 +1,8 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Button } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { Link } from '$/components/link';
-import { Text } from '$/components/text/text';
-import { FEEDBACK_LINK } from '$/lib/constants';
+import { SiteLayout, Button, Heading, Link, Text } from 'ui';
+import { FEEDBACK_LINK } from 'utils';
 
 export default function Custom500(): JSX.Element {
   const { query } = useRouter();

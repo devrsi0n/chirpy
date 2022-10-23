@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-import { ConfirmUserFields } from '$/blocks/confirm-user-fields';
-import { SiteLayout } from '$/blocks/layout';
-import { Button } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { Link } from '$/components/link';
-import { Text } from '$/components/text';
-import { useCurrentUser } from '$/contexts/current-user-context';
-import { useCelebration } from '$/hooks/use-celebration';
+import {
+  ConfirmUserFields,
+  SiteLayout,
+  Button,
+  Heading,
+  Link,
+  Text,
+  useCurrentUser,
+  useCelebration,
+} from 'ui';
 import { hasValidUserProfile } from '$/utilities/user';
 
 // export type WelcomeProps = React.PropsWithChildren<{}>;

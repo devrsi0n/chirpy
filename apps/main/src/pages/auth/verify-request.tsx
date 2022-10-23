@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Heading } from '$/components/heading';
-import { IconMail } from '$/components/icons';
-import { Text } from '$/components/text';
+import { SiteLayout, Heading, IconMail, Text } from 'ui';
 
 export default function VerifyRequest(): JSX.Element {
   return (

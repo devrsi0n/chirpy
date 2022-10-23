@@ -1,19 +1,22 @@
 import { LazyMotion } from 'framer-motion';
-import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 
-import { ToastProvider } from '$/components/toast';
-import { CurrentUserProvider } from '$/contexts/current-user-context';
-import { GQLClientProvider } from '$/contexts/gql-client-context';
-import { NotificationProvider } from '$/contexts/notification-context';
-import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '$/lib/constants';
+import {
+  ToastProvider,
+  CurrentUserProvider,
+  GQLClientProvider,
+  NotificationProvider,
+  // This is the same SessionProvider as next-auth/react,
+  // fix ref issue
+  SessionProvider,
+} from 'ui';
+import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from 'utils';
+import { CommonWidgetProps, PageProps } from 'types';
 
-import '$/styles/global-styles.scss';
-
-import { CommonWidgetProps, PageProps } from '$/types/page.type';
+import 'ui/src/styles/global-styles.scss';
 
 function App({
   Component,

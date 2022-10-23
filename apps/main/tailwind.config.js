@@ -41,7 +41,11 @@ const rem = (px) => `${round(px / 16)}rem`;
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
-  content: ['./src/**/*.{ts,tsx}', './.storybook/**/*.{ts,tsx}'],
+  content: [
+    './src/**/*.{ts,tsx}',
+    './.storybook/**/*.{ts,tsx}',
+    './node_modules/ui/src/**/*.{ts,tsx}',
+  ],
   theme: {
     colors,
     boxShadow: {

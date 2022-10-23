@@ -4,7 +4,7 @@ import { mockNotificationData } from '$/__tests__/mocks/data/notification-data';
 import {
   CurrentNotificationMessagesQuery,
   CurrentNotificationMessagesQueryVariables,
-} from '$/graphql/generated/notification';
+} from '@chirpy-dev/graphql';
 
 export const graphqlHandlers = [
   graphql.query('currentUser', (req, res, ctx) => {

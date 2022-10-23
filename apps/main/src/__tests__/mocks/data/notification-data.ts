@@ -1,4 +1,4 @@
-import { CurrentNotificationMessagesQuery } from '$/graphql/generated/notification';
+import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
 
 export const mockNotificationData: CurrentNotificationMessagesQuery = {
   notificationMessages: [

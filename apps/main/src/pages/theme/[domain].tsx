@@ -6,20 +6,20 @@ import {
 } from 'next';
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
 import {
+  SiteLayout,
   ThemeEditor,
   ThemeEditorProps,
   THEME_WIDGET_CLS,
-} from '$/blocks/theme-editor';
-import { WidgetThemeProvider } from '$/contexts/theme-context';
+  WidgetThemeProvider,
+} from 'ui';
 import { query } from '$/server/common/gql';
 import {
   ThemeProjectByPkDocument,
   ThemeProjectByPkQuery,
-} from '$/server/graphql/generated/project';
+} from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { Theme as ThemeType } from '$/types/theme.type';
+import { Theme as ThemeType } from 'types';
 
 export type ThemeProps = StaticProps;
 

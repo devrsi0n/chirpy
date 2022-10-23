@@ -1,7 +1,5 @@
 import { CookiesOptions } from 'next-auth';
-
-// Must use relative import because it's used by cypress
-import { isENVDev } from './env';
+import { isENVDev } from 'utils';
 
 /**
  * Copy from 'https://github.com/nextauthjs/next-auth/blob/227ff2259f/src/core/lib/cookie.ts' as we can't import it directly

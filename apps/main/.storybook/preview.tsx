@@ -1,12 +1,14 @@
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { SessionProvider } from 'next-auth/react';
 import * as React from 'react';
 
-import { CurrentUserProvider } from '$/contexts/current-user-context';
-import { GQLClientProvider } from '$/contexts/gql-client-context';
-import { useThemeVariables } from '$/contexts/theme-context/use-theme-variables';
+import {
+  SessionProvider,
+  CurrentUserProvider,
+  GQLClientProvider,
+  useThemeVariables,
+} from 'ui';
 import { loadFeatures } from '$/pages/_app';
 
 import '$/styles/global-styles.scss';

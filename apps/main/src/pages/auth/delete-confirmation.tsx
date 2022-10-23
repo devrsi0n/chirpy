@@ -1,8 +1,7 @@
 import * as React from 'react';
 
-import { SiteLayout } from '$/blocks/layout';
-import { Heading } from '$/components/heading';
-import { isSSRMode } from '$/utilities/isomorphic/env';
+import { SiteLayout, Heading } from 'ui';
+import { isSSRMode } from 'utils';
 
 function DeleteConfirmation(): JSX.Element {
   return (

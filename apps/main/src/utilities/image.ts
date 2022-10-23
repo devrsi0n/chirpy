@@ -1,4 +1,4 @@
-import { isSSRMode } from './isomorphic/env';
+import { isSSRMode } from 'utils';
 
 export type BannerProps = {
   src: string;

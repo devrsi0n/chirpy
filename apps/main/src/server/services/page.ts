@@ -4,11 +4,11 @@ import {
   InsertOnePageDocument,
   PageByUrlDocument,
   UpdatePagesDocument,
-} from '$/server/graphql/generated/page';
+  ProjectByDomainDocument,
+} from '@chirpy-dev/graphql';
 
 import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
 import { mutate, query } from '../common/gql';
-import { ProjectByDomainDocument } from '../graphql/generated/project';
 import { GetPagByUrl } from '../types/page';
 
 export async function getPage(

@@ -2,13 +2,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 
-import { Footer } from '$/blocks/footer';
-import { SiteLayout } from '$/blocks/layout';
-import { MDXComponents } from '$/blocks/mdx-components';
-import { SideBar, SideBarProps } from '$/blocks/side-bar';
+import { Footer, SiteLayout, MDXComponents, SideBar, SideBarProps } from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from '$/types/page.type';
+import { CommonPageProps } from 'types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
