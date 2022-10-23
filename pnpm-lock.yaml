@@ -224,7 +224,6 @@ importers:
       next: 12.3.1
       next-auth: 4.10.3
       next-axiom: 0.14.0
-      next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8
       next-plausible: 3.6.3
@@ -307,7 +306,6 @@ importers:
       next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_br325yun545l5vwdnneu6tztxq
       next-axiom: 0.14.0_next@12.3.1
-      next-compose-plugins: 2.2.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.6.3_azq6kxkn3od7qdylwkyksrwopy
@@ -17573,10 +17571,6 @@ packages:
     dependencies:
       next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       whatwg-fetch: 3.6.2
-    dev: false
-
-  /next-compose-plugins/2.2.1:
-    resolution: {integrity: sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==}
     dev: false
 
   /next-connect/0.12.2:
