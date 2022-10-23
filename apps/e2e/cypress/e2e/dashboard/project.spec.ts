@@ -41,7 +41,7 @@ describe('Project', () => {
     waitForProjectCardAppear();
   });
 
-  it('should show integration doc', () => {
+  it.skip('should show integration doc', () => {
     cy.findByRole('button', {
       name: /integrate guide/i,
     }).click();
