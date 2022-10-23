@@ -54,7 +54,7 @@ describe('Project', () => {
     );
   });
 
-  it('should active theme', () => {
+  it.skip('should active theme', () => {
     cy.findByRole('link', { name: /theme/i }).click();
     cy.url({ timeout: 60_000 }).should('include', '/theme/foobar.com');
     cy.findByLabelText(/primary color selector/i).click();
