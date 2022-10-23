@@ -1,7 +1,7 @@
 import {
   EVENT_CHANGE_THEME,
   EVENT_WIDGET_LOADED,
-} from '../../../main/src/lib/constants';
+} from 'utils';
 import { sendMessageToIframe } from './utilities';
 
 const ATTR_THEME = 'data-chirpy-theme';

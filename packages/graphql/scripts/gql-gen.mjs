@@ -14,5 +14,5 @@ console.log(chalk.blue('Generated frontend graphql'));
 
 const schemaPath = path.resolve(__dirname, 'schema.graphql');
 // Generate schema for stellate
-await $`gq http://127.0.0.1:8080/v1/graphql -H "X-Hasura-Admin-Secret: myadminsecretkey" --introspect > "${schemaPath}"`;
+await $`gq http://127.0.0.1:8080/v1/graphql -H "X-Hasura-Admin-Secret: c1b519db8df86cbe8cd625ee8548dc1f5aae41e22cf0059ee55ce6190725771c" --introspect > "${schemaPath}"`;
 console.log(chalk.blue('Generated graphql schema'));

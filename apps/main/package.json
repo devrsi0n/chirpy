@@ -112,7 +112,6 @@
     "eslint": "8.23.0",
     "fake-indexeddb": "4.0.0",
     "framer-motion": "6.5.1",
-    "graphqurl": "1.0.1",
     "intersection-observer": "0.12.2",
     "jest": "29.0.3",
     "jest-environment-jsdom": "29.0.3",
