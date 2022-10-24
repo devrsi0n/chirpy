@@ -43,6 +43,16 @@ jobs:
           package-manager: pnpm
           skip-step: install
           working-directory: ./apps/main
+          threshold: 1
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-script: npx jest --silent=false --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
+      
+      - uses: artiomtr/jest-coverage-report-action@v2
+        with:
+          annotations: none
+          package-manager: pnpm
+          skip-step: install
+          working-directory: ./packages/ui
           threshold: 26
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: npx jest --silent=false --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"

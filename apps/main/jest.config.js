@@ -16,13 +16,7 @@ const customJestConfig = {
     '^\\$/(.*)$': '<rootDir>/src/$1',
   },
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx}',
-    '<rootDir>/src/__tests__/',
-    '!./**/*.stories.{ts,tsx}',
-    '!./**/typings/',
-    '!./**/generated/',
-  ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
 };
 
 module.exports = createJestConfig(customJestConfig);
