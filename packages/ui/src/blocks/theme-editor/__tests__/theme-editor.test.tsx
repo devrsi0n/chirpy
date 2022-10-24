@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import * as nextThemesModule from 'next-themes';
 
-import { pageRender } from '$/__tests__/fixtures/page-render';
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 
 import { ThemeEditor } from '..';
 

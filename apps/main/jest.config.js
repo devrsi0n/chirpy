@@ -11,7 +11,7 @@ const customJestConfig = {
     '<rootDir>/src/__tests__/jest.setup.ts',
     '<rootDir>/scripts/jest/set-env.js',
   ],
-  testMatch: ['**/src/**/*.test.ts?(x)'],
+  testMatch: ['<rootDir>/src/**/*.test.ts?(x)'],
   moduleNameMapper: {
     '^\\$/(.*)$': '<rootDir>/src/$1',
   },
@@ -20,7 +20,7 @@ const customJestConfig = {
     '<rootDir>/src/**/*.{ts,tsx}',
     '<rootDir>/src/__tests__/',
     '!./**/*.stories.{ts,tsx}',
-    '!./**/types/',
+    '!./**/typings/',
     '!./**/generated/',
   ],
 };

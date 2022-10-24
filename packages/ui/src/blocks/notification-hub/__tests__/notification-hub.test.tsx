@@ -1,17 +1,16 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import * as notificationModule from '@chirpy-dev/graphql';
 
-import { pageRender } from '$/__tests__/fixtures/page-render';
-import * as notificationModule from '$/graphql/generated/notification';
-
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { NotificationHub } from '../notification-hub';
 import { messages } from '../stories/mock-data';
 
-jest.mock('$/graphql/generated/notification', () => {
+jest.mock('@chirpy-dev/graphql', () => {
   return {
     // Make exported object configable
     __esModule: true,
-    ...jest.requireActual('$/graphql/generated/notification'),
+    ...jest.requireActual('@chirpy-dev/graphql'),
   };
 });
 

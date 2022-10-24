@@ -1,24 +1,10 @@
 import { GetStaticProps } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
-import * as React from 'react';
+import { PrivacyPolicy } from 'ui';
+import { MDXProps } from 'types';
 
-import { SiteLayout, MDXComponents } from 'ui';
-import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
+import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 
-export default function PrivacyPolicy({
-  mdxSource,
-  frontMatter,
-}: MDXProps): JSX.Element {
-  return (
-    <SiteLayout title={frontMatter.title || 'Privacy policy'}>
-      <section>
-        <article className="prose mx-auto py-16 lg:prose-xl">
-          <MDXRemote {...mdxSource} components={MDXComponents} />
-        </article>
-      </section>
-    </SiteLayout>
-  );
-}
+export default PrivacyPolicy;
 
 export const getStaticProps: GetStaticProps<MDXProps> = async () => {
   const privacyPolicyProps = await getMDXPropsBySlug('privacy-policy');

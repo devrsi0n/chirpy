@@ -1,20 +1,20 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { pageRender } from '$/__tests__/fixtures/page-render';
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 import {
   generateCommentFragment,
   getTextsOfComment,
-} from '../../blocks/comment-timeline/__tests__/mock-data';
-import * as CommentContext from '../../contexts/comment-context/comment-context-provider';
+} from '../../../blocks/comment-timeline/__tests__/mock-data';
+import * as CommentContext from '../../../contexts/comment-context/comment-context-provider';
 
 import { CommentTrees } from '..';
 
-jest.mock('../../contexts/comment-context/comment-context-provider', () => {
+jest.mock('../../../contexts/comment-context/comment-context-provider', () => {
   return {
     // Make exported object configable
     __esModule: true,
     ...jest.requireActual(
-      '../../contexts/comment-context/comment-context-provider',
+      '../../../contexts/comment-context/comment-context-provider',
     ),
   };
 });

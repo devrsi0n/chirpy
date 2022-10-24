@@ -8,3 +8,4 @@ export * from './toxic-text';
 export * from './file';
 export * from './rte';
 export * from './global';
+export * from './mdx';

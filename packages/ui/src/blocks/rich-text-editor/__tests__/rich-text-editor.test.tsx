@@ -1,15 +1,13 @@
-import { composeStories } from '@storybook/testing-react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { pageRender } from 'src/__tests__/fixtures/page-render';
+import { RichTextEditor } from '../rich-text-editor';
 
-import * as stories from '../stories/rich-text-editor.stories';
-
-const { Default } = composeStories(stories);
 const mockOnSubmit = jest.fn();
 
 describe('rich-text-editor', () => {
   beforeEach(() => {
-    render(<Default onSubmit={mockOnSubmit} />);
+    pageRender(<RichTextEditor onSubmit={mockOnSubmit} />);
   });
 
   afterEach(() => {
@@ -33,8 +31,3 @@ describe('rich-text-editor', () => {
     // expect(mockOnSubmit).toHaveBeenCalledWith(testText);
   });
 });
-
-// const getAskNextTimeButton = () =>
-//   screen.getByRole('button', {
-//     name: 'Ask next time',
-//   });

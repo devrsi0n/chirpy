@@ -1,77 +1,25 @@
-import { cpDayjs } from 'ui';
+import { CommentTimelineWidget, cpDayjs } from 'ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
   GetStaticPaths,
-  InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
 import { log } from 'next-axiom';
-import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 import {
-  CommentTimeline,
-  WidgetLayout,
-  PoweredBy,
-  UserMenu,
-  IconButton,
-  Heading,
-  IconArrowLeft,
-  Link,
-  CommentContextProvider,
-} from 'ui';
-import {
   CommentTimelineDocument,
   CommentTimelineSubscription,
-  useCommentTimelineSubscription,
   CommentsDocument,
   ThemeOfPageDocument,
 } from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
 import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
-import { isSSRMode } from 'utils';
 
-export default function CommentTimelineWidget(
-  props: InferGetStaticPropsType<typeof getStaticProps>,
-): JSX.Element {
-  const [{ data }] = useCommentTimelineSubscription({
-    variables: { id: props.commentId },
-    pause: isSSRMode,
-  });
-
-  const comment = data?.commentByPk || props.comment;
-
-  return (
-    <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider
-        projectId={props.projectId}
-        pageId={comment?.pageId || ''}
-      >
-        <div className="mb-4 flex flex-row items-center justify-between">
-          {/* Can't use history.back() here in case user open this page individual */}
-          <Link
-            href={`/widget/comment/${encodeURIComponent(props.pageURL)}`}
-            variant="plain"
-          >
-            <IconButton className="translate-x-1">
-              <IconArrowLeft size={20} />
-            </IconButton>
-          </Link>
-          <Heading as="h4">
-            <span className="font-bold">{comment?.user.name}</span>
-            <span>{`'s comment timeline`}</span>
-          </Heading>
-          <UserMenu variant="Widget" />
-        </div>
-        {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
-        <PoweredBy />
-      </CommentContextProvider>
-    </WidgetLayout>
-  );
-}
+export default  CommentTimelineWidget
 type PathParams = {
   commentId: string;
 };

@@ -1,50 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { MDXRemote } from 'next-mdx-remote';
-import * as React from 'react';
 
-import {
-  CommentWidget,
-  SiteLayout,
-  MDXComponents,
-  Image,
-  useHasMounted,
-} from 'ui';
+import { BlogPost } from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
-import { getMDXPropsBySlug, MDXProps } from '$/server/mdx/mdx';
-import { CommonPageProps } from 'types';
-import { getBannerProps } from '$/utilities/image';
+import { getMDXPropsBySlug } from '$/server/mdx/mdx';
+import { CommonPageProps, MDXProps } from 'types';
 
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';
 
-export default function Blog({
-  mdxSource,
-  frontMatter,
-}: BlogProps): JSX.Element {
-  const hasMounted = useHasMounted();
-  const banner = React.useMemo(() => {
-    if (frontMatter?.banner && hasMounted) {
-      return getBannerProps(frontMatter.banner);
-    }
-  }, [frontMatter?.banner, hasMounted]);
-
-  return (
-    <SiteLayout title={frontMatter?.title || 'Blog'}>
-      <section className="flex flex-row space-x-2">
-        <article className="prose flex-1 overflow-y-auto">
-          {banner && (
-            <div className="pb-10">
-              <Image {...banner} layout="responsive" alt="banner" />
-            </div>
-          )}
-          {mdxSource && <MDXRemote {...mdxSource} components={MDXComponents} />}
-        </article>
-      </section>
-      <CommentWidget />
-    </SiteLayout>
-  );
-}
-
+export default BlogPost;
 type PathParam = {
   slug: string[];
 };

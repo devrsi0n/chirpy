@@ -1,5 +1,5 @@
 import { promises as fs } from 'fs';
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXProps } from 'types';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';
@@ -11,16 +11,6 @@ import rehypeSlug from 'rehype-slug';
 
 import { POST_ROOT } from '../common/constants';
 import { getFrontMatters } from './front-matter';
-
-export type MDXProps = {
-  mdxSource: MDXRemoteSerializeResult;
-  frontMatter: {
-    wordCount: number;
-    readingTime: ReturnType<typeof readingTime>;
-    slug: string | null;
-    [key: string]: $TsAny;
-  };
-};
 
 export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
   const { data, content } = await getFrontMatters(

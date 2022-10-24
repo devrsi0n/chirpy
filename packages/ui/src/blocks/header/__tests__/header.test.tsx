@@ -1,7 +1,6 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, screen } from '@testing-library/react';
 
-import '$/__tests__/mocks/next-router';
-
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { Header } from '..';
 
 Object.defineProperty(window, 'innerWidth', {
@@ -12,7 +11,7 @@ Object.defineProperty(window, 'innerWidth', {
 
 describe('Header', () => {
   beforeEach(() => {
-    render(<Header />);
+    pageRender(<Header />);
   });
 
   afterEach(() => {

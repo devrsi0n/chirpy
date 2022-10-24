@@ -1,8 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
+import { ICheckToxicText } from 'types';
 import { rest } from 'msw';
-
-import { ICheckToxicText } from '$/server/services/content-classifier/toxic-text';
 
 import { RichTextEditor } from '../rich-text-editor';
 
