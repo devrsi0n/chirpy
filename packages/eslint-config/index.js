@@ -33,7 +33,7 @@ module.exports = {
       },
     ],
 
-    'prettier/prettier': ['warn', require('@chirpy-dev/prettier-config')],
+    'prettier/prettier': ['warn', require('../prettier-config')],
 
     '@next/next/no-img-element': 'off',
     '@next/next/no-html-link-for-pages': ['error', 'apps/main/src/pages/'],

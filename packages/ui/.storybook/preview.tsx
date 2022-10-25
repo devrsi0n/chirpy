@@ -1,3 +1,4 @@
+import 'tailwindcss/tailwind.css';
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';

@@ -1,14 +1,14 @@
 {
   "name": "@chirpy-dev/comment-bootstrapper",
   "version": "0.1.0",
+  "license": "AGPL-3.0-or-later",
   "main": "./dist/index.js",
   "scripts": {
-    "dev": "vite",
     "build": "node ./scripts/build.js",
     "build:debug": "VITE_DEBUG=true pnpm build",
+    "dev": "vite",
     "test": "jest --silent=false"
   },
-  "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
@@ -24,8 +24,8 @@
     "jest": "29.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "utils": "workspace:*",
     "typescript": "4.8.3",
+    "utils": "workspace:*",
     "vite": "2.9.14"
   },
   "publishConfig": {

@@ -1,6 +1,7 @@
 {
   "name": "@chirpy-dev/eslint-config",
   "version": "0.1.1",
+  "license": "AGPL-3.0-or-later",
   "main": "./index.js",
   "dependencies": {
     "@chirpy-dev/prettier-config": "workspace:*",
@@ -23,6 +24,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "license": "AGPL-3.0-or-later"
+  }
 }

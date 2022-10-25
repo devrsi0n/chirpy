@@ -1,13 +1,13 @@
 {
   "name": "@chirpy-dev/graphql",
   "version": "0.0.1",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
-  "sideEffects": false,
   "license": "AGPL-3.0-or-later",
+  "main": "./src/index.ts",
   "scripts": {
     "watch": "GQL_WATCH=true zx ./scripts/gql-gen.mjs"
   },
+  "sideEffects": false,
+  "types": "./src/index.ts",
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@graphql-codegen/cli": "2.9.1",
@@ -23,9 +23,9 @@
     "graphql": "16.6.0",
     "graphql-tag": "2.12.6",
     "graphqurl": "1.0.1",
-    "urql": "3.0.3",
-    "typescript": "4.8.3",
     "react": "18.2.0",
+    "typescript": "4.8.3",
+    "urql": "3.0.3",
     "zx": "7.0.8"
   },
   "publishConfig": {

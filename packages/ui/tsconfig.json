@@ -9,8 +9,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    ".next"
+    "node_modules"
   ],
   "include": [
     "typings/**/*.d.ts",

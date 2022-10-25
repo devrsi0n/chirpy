@@ -1,18 +1,16 @@
 {
-  "name": "chirpy",
   "private": true,
+  "name": "chirpy",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
-    "lint": "eslint --fix ./",
-    "test": "turbo run test --filter=@chirpy-dev/main-app...",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
+    "changeset": "changeset",
+    "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i",
+    "lint": "eslint --fix ./",
+    "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish",
     "start:docker:local": "dotenv -e ./apps/main/.env.local docker compose up",
-    "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i"
-  },
-  "engines": {
-    "node": "16.x"
+    "test": "turbo run test --filter=@chirpy-dev/main-app...",
+    "version-packages": "changeset version"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.5",
@@ -28,10 +26,9 @@
     "simple-git-hooks": "2.8.0",
     "turbo": "1.3.1"
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+  "engines": {
+    "node": "16.x"
   },
-  "prettier": "@chirpy-dev/prettier-config",
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
@@ -58,6 +55,7 @@
       "next-auth@4.10.3": "patches/next-auth@4.10.3.patch"
     }
   },
+  "prettier": "@chirpy-dev/prettier-config",
   "renovate": {
     "extends": [
       "config:base",
@@ -109,5 +107,7 @@
       "📦 package"
     ]
   },
-  "license": "AGPL-3.0-or-later"
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  }
 }

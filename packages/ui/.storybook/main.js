@@ -9,7 +9,7 @@ module.exports = {
       lazyCompilation: true,
     },
   },
-  staticDirs: ['../public'],
+  staticDirs: ['../../../apps/main/public', '../public'],
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(ts|tsx)'],
   webpackFinal: (config) => {
     config.resolve.plugins = config.resolve.plugins || [];
