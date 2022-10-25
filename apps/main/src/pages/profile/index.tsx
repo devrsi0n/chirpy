@@ -1,3 +1,1 @@
-import { Profile } from 'ui';
-
-export default Profile;
+export { Profile as default } from 'ui';

@@ -9,10 +9,7 @@ import { getBannerProps } from '../../utils';
 
 type BlogProps = MDXProps;
 
-export function BlogPost({
-  mdxSource,
-  frontMatter,
-}: BlogProps): JSX.Element {
+export function BlogPost({ mdxSource, frontMatter }: BlogProps): JSX.Element {
   const hasMounted = useHasMounted();
   const banner = React.useMemo(() => {
     if (frontMatter?.banner && hasMounted) {

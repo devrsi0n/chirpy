@@ -1,3 +1,1 @@
-import { Custom500 } from 'ui';
-
-export default Custom500;
+export { Custom500 as default } from 'ui';

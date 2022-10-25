@@ -1,3 +1,1 @@
-import { Dashboard } from 'ui';
-
-export default Dashboard;
+export { Dashboard as default } from 'ui';

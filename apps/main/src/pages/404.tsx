@@ -1,3 +1,1 @@
-import { Custom404 } from 'ui';
-
-export default Custom404;
+export { Custom404 as default } from 'ui';

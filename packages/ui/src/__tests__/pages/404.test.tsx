@@ -1,6 +1,6 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { Custom404} from '../../pages/404';
+import { Custom404 } from '../../pages/404';
 import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {

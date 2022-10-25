@@ -1,12 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { AnalyticsByDomainPage, AnalyticsByDomainPageProps } from 'ui';
+import { AnalyticsByDomainPageProps } from 'ui';
 import { query } from '$/server/common/gql';
 import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 import { CommonPageProps } from 'types';
-
-export default AnalyticsByDomainPage;
 
 type PathParams = {
   domain: string;
@@ -52,3 +50,5 @@ export const getStaticProps: GetStaticProps<
     revalidate: 60 * 60,
   };
 };
+
+export { AnalyticsByDomainPage as default } from 'ui';

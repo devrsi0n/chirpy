@@ -45,4 +45,5 @@ export function Docs({
     </SiteLayout>
   );
 }
-export type { SideBarProps };
+
+export { type SideBarProps } from '../../blocks';

@@ -1,5 +1,6 @@
 {
   "rules": {
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "unicorn/consistent-function-scoping": "off"
   }
 }

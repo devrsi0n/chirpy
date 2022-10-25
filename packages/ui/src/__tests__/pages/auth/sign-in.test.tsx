@@ -1,6 +1,6 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import {SignInPage} from '../../../pages';
+import { SignInPage } from '../../../pages';
 import { pageRender } from '../../fixtures/page-render';
 
 describe('Sign in page', () => {

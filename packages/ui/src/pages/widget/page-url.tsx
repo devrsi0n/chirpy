@@ -14,9 +14,7 @@ export type PageCommentProps = CommonWidgetProps & {
  * Comment tree widget for a page
  * @param props
  */
-export function CommentWidgetPage(
-  props: PageCommentProps,
-): JSX.Element {
+export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
   let error = '';
   let pageId = '';
   let pageURL = '';

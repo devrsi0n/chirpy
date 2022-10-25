@@ -1,3 +1,1 @@
-import { VerifyRequest } from 'ui';
-
-export default VerifyRequest;
+export { VerifyRequest as default } from 'ui';

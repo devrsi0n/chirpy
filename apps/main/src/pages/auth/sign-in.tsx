@@ -1,3 +1,1 @@
-import { SignInPage } from 'ui';
-
-export default SignInPage;
+export { SignInPage as default } from 'ui';

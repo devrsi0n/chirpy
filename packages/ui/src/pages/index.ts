@@ -8,7 +8,6 @@ export * from './theme';
 export * from './404';
 export * from './500';
 export * from './app';
-export * from './document';
 export * from './home';
 export * from './widget';
 export * from './play';

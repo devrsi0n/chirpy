@@ -5,7 +5,7 @@ import * as graphqlModule from '@chirpy-dev/graphql';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { setMockedUser } from '../../../__tests__/fixtures/page-render';
 import { mockNextRouter } from '../../../__tests__/mocks/next-router';
-import {Welcome} from '../../../pages/auth/welcome';
+import { Welcome } from '../../../pages/auth/welcome';
 
 const mockUpdateUser = jest.fn().mockImplementation(() => {
   return Promise.resolve();
@@ -16,20 +16,22 @@ jest.mock('@chirpy-dev/graphql', () => ({
   ...jest.requireActual('@chirpy-dev/graphql'),
 }));
 
-jest.spyOn(graphqlModule, 'useUpdateUserFieldsMutation').mockImplementation(() => {
-  return [
-    {
-      data: {
-        updateUserByPk: {
-          __typename: 'User',
-          id: '1',
+jest
+  .spyOn(graphqlModule, 'useUpdateUserFieldsMutation')
+  .mockImplementation(() => {
+    return [
+      {
+        data: {
+          updateUserByPk: {
+            __typename: 'User',
+            id: '1',
+          },
         },
-      },
-      fetching: false,
-    } as any,
-    mockUpdateUser,
-  ];
-});
+        fetching: false,
+      } as any,
+      mockUpdateUser,
+    ];
+  });
 
 setMockedUser({
   email: '',

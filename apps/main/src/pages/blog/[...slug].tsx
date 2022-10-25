@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { BlogPost } from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 import { CommonPageProps, MDXProps } from 'types';
@@ -8,7 +7,6 @@ import { CommonPageProps, MDXProps } from 'types';
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';
 
-export default BlogPost;
 type PathParam = {
   slug: string[];
 };
@@ -52,3 +50,5 @@ export const getStaticProps: GetStaticProps<
     revalidate: 3600,
   };
 };
+
+export { BlogPost as default } from 'ui';

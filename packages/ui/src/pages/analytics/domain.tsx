@@ -8,7 +8,9 @@ export type AnalyticsByDomainPageProps = {
   project: ProjectByDomainQuery['projects'][number];
 };
 
-export function AnalyticsByDomainPage({ project }: AnalyticsByDomainPageProps): JSX.Element {
+export function AnalyticsByDomainPage({
+  project,
+}: AnalyticsByDomainPageProps): JSX.Element {
   return (
     <SiteLayout hideFullBleed title="Analytics">
       <section className="mx-auto px-4 xl:max-w-6xl">

@@ -1,13 +1,10 @@
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
-import { PlayGround } from 'ui';
 import { mutate } from '$/server/common/gql';
 import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
 import { isENVDev, getAppURL } from 'utils';
 import { cpDayjs } from 'ui';
-
-export default PlayGround;
 
 type StaticProps = {
   //
@@ -39,3 +36,5 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
     props: {},
   };
 };
+
+export { PlayGround as default } from 'ui';

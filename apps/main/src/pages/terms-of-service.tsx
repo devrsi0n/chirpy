@@ -1,10 +1,8 @@
 import { GetStaticProps } from 'next';
-import { TermsOfService } from 'ui';
+
 import { CommonPageProps, MDXProps } from 'types';
 
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
-
-export default TermsOfService;
 
 export const getStaticProps: GetStaticProps<
   CommonPageProps & MDXProps
@@ -12,3 +10,5 @@ export const getStaticProps: GetStaticProps<
   const termsProps = await getMDXPropsBySlug('terms-of-service');
   return { props: termsProps };
 };
+
+export { TermsOfService as default } from 'ui';

@@ -1,4 +1,4 @@
-import { CommentTimelineWidget, cpDayjs } from 'ui';
+import { cpDayjs } from 'ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -19,7 +19,6 @@ import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
 import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
 
-export default  CommentTimelineWidget
 type PathParams = {
   commentId: string;
 };
@@ -114,3 +113,5 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
 };
+
+export { CommentTimelineWidget as default } from 'ui';

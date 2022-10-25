@@ -1,3 +1,1 @@
-import { DeleteConfirmation } from 'ui';
-
-export default DeleteConfirmation;
+export { DeleteConfirmation as default } from 'ui';

@@ -5,12 +5,10 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
-import { ThemePage, ThemeProps } from 'ui';
+import { ThemeProps } from 'ui';
 import { query } from '$/server/common/gql';
 import { ThemeProjectByPkDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-
-export default ThemePage;
 
 type PathParams = {
   domain: string;
@@ -56,3 +54,5 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     revalidate: 60 * 60,
   };
 };
+
+export { ThemePage as default } from 'ui';

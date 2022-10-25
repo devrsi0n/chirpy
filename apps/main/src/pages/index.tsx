@@ -1,9 +1,7 @@
 import { GetStaticProps } from 'next';
 
-import { HomeProps, HomePage } from 'ui';
+import { HomeProps } from 'ui';
 import { isENVDev } from 'utils';
-
-export default HomePage;
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const buildDate = new Date().toISOString();
@@ -27,3 +25,5 @@ export const strings = {
     secondary: 'Learn More',
   },
 };
+
+export { HomePage as default } from 'ui';

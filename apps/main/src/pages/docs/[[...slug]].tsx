@@ -1,14 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { SideBarProps, Docs } from 'ui';
+import { SideBarProps } from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 import { CommonPageProps, MDXProps } from 'types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
-
-export default Docs;
 
 type PathParam = {
   slug: string[];
@@ -51,3 +49,5 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
     revalidate: 3600,
   };
 };
+
+export { Docs as default } from 'ui';

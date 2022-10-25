@@ -1,3 +1,1 @@
-import { Welcome } from 'ui';
-
-export default Welcome;
+export { Welcome as default } from 'ui';

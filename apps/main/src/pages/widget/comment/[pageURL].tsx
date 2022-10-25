@@ -10,7 +10,6 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentWidgetPage } from 'ui';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
@@ -29,7 +28,6 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
  * Comment tree widget for a page
  * @param props
  */
-export default  CommentWidgetPage
 
 type PathParams = {
   pageURL: string;
@@ -144,3 +142,5 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
 };
+
+export { CommentWidgetPage as default } from 'ui';

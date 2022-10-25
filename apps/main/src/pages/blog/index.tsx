@@ -1,6 +1,5 @@
 import { GetStaticProps } from 'next';
 
-import { BlogHome } from 'ui';
 import { getDirectories } from '$/server/mdx/files';
 import { Directory } from 'types';
 
@@ -9,8 +8,6 @@ const CONTAINER_FOLDER = 'blog';
 export type BlogHomeProps = {
   directories: Directory[];
 };
-
-export default  BlogHome
 
 export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
   const directories = await getDirectories(
@@ -24,3 +21,5 @@ export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
     revalidate: 3600,
   };
 };
+
+export { BlogHome as default } from 'ui';
