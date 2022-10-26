@@ -1,0 +1,34 @@
+{
+  "name": "@chirpy-dev/graphql",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "main": "./src/index.ts",
+  "scripts": {
+    "watch": "GQL_WATCH=true zx ./scripts/gql-gen.mjs"
+  },
+  "sideEffects": false,
+  "types": "./src/index.ts",
+  "devDependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "@graphql-codegen/cli": "2.9.1",
+    "@graphql-codegen/introspection": "2.2.0",
+    "@graphql-codegen/near-operation-file-preset": "2.4.0",
+    "@graphql-codegen/typed-document-node": "2.3.2",
+    "@graphql-codegen/typescript": "2.7.2",
+    "@graphql-codegen/typescript-operations": "2.5.2",
+    "@graphql-codegen/typescript-urql": "3.6.2",
+    "@graphql-typed-document-node/core": "3.1.1",
+    "@types/node": "16.11.45",
+    "csstype": "3.1.0",
+    "graphql": "16.6.0",
+    "graphql-tag": "2.12.6",
+    "graphqurl": "1.0.1",
+    "react": "18.2.0",
+    "typescript": "4.8.3",
+    "urql": "3.0.3",
+    "zx": "7.0.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

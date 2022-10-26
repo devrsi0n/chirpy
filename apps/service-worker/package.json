@@ -1,12 +1,12 @@
 {
   "name": "@chirpy-dev/service-worker",
   "version": "0.1.0",
+  "license": "AGPL-3.0-or-later",
   "main": "./src/index.ts",
   "scripts": {
     "build": "vite build",
     "build:local": "dotenv -e ../main/.env.local vite build"
   },
-  "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",

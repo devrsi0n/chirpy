@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { query } from '$/server/common/gql';
-import { PageUrLsOfProjectDocument } from '$/server/graphql/generated/project';
+import { PageUrLsOfProjectDocument } from '@chirpy-dev/graphql';
 import { badRequest } from '$/server/utilities/response';
 import { revalidateCommentWidgets } from '$/server/utilities/revalidate';
 

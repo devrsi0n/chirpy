@@ -8,6 +8,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
+const withTM = require('next-transpile-modules')([
+  'ui',
+  'utils',
+  '@chirpy-dev/graphql',
+]);
 
 const plugins = [
   withBundleAnalyzer,
@@ -19,6 +24,7 @@ const plugins = [
     enabled: true,
   }),
   withAxiom,
+  withTM,
 ];
 
 /** @type {import('next').NextConfig} */

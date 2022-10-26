@@ -2,14 +2,14 @@ import NextAuth from 'next-auth';
 import { log } from 'next-axiom';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '$/lib/constants';
-import { UserProjectsDocument } from '$/server/graphql/generated/project';
+import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from 'utils';
+import { UserProjectsDocument } from '@chirpy-dev/graphql';
 import { nextAuthAdapter } from '$/server/services/auth/auth-adapter';
 import { authProviders } from '$/server/services/auth/auth-providers';
 import { sendWelcomeLetter } from '$/server/services/email/send-emails';
 import { createAuthToken } from '$/server/utilities/create-token';
 import { defaultCookies } from '$/server/utilities/default-cookies';
-import { isENVDev } from '$/server/utilities/env';
+import { isENVDev } from 'utils';
 
 const client = getAdminGqlClient();
 

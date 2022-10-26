@@ -1,0 +1,16 @@
+{
+  "name": "@chirpy-dev/prettier-config",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "main": "./index.js",
+  "dependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "3.4.2",
+    "prettier-plugin-tailwindcss": "0.1.13"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -23,6 +23,7 @@ const hasuraURL = 'http://localhost:8080';
   const hasuraDCFile = await readRelativeFile(
     '../../services/hasura/docker-compose.eta',
   );
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const hasuraDCResult = await eta.render(hasuraDCFile, {
     HASURA_GRAPHQL_ADMIN_SECRET: hasuraAdminSecret,
     HASURA_GRAPHQL_JWT_SECRET: hasuraJwtSecret,
@@ -67,6 +68,6 @@ const hasuraURL = 'http://localhost:8080';
   cd(`../../services/hasura/`);
   await $`docker-compose up -d`;
   logDebug(true, '⌛️ Waiting for Hasura server');
-  await sleep(10000);
+  await sleep(10_000);
   await setupHasura();
 })();

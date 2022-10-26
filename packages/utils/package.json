@@ -1,0 +1,23 @@
+{
+  "name": "utils",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "types": "./src/index.ts",
+  "devDependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "@tiptap/core": "2.0.0-beta.199",
+    "@tiptap/react": "2.0.0-beta.199",
+    "@types/node": "16.11.45",
+    "@types/react": "18.0.19",
+    "@types/react-dom": "18.0.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "types": "workspace:*",
+    "typescript": "4.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

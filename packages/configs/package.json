@@ -1,0 +1,22 @@
+{
+  "name": "configs",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "main": "./index.js",
+  "sideEffects": false,
+  "dependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "@radix-ui/colors": "0.1.8",
+    "@tailwindcss/line-clamp": "0.4.2",
+    "@tailwindcss/typography": "0.5.7",
+    "color-convert": "2.0.1",
+    "postcss": "8.4.16",
+    "postcss-flexbugs-fixes": "5.0.2",
+    "postcss-preset-env": "7.8.1",
+    "tailwindcss": "3.1.8",
+    "typescript": "4.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
+import { getSession } from 'ui';
 import { PushSubscription } from 'web-push';
 
 import { mutate } from '$/server/common/gql';
 import {
   InsertOneNotificationSubscriptionDocument,
   InsertOneNotificationSubscriptionMutationVariables,
-} from '$/server/graphql/generated/notification';
+} from '@chirpy-dev/graphql';
 
 import { badRequest, unauthorized } from '../../utilities/response';
 import { isValidHttpUrl } from '../../utilities/url';

@@ -15,7 +15,7 @@ out/
 **/cypress/screenshots/
 **/cypress/videos/
 storybook-static/
+.swc
 
 docker-compose.yml
 config.yaml
-mockServiceWorker.js

@@ -1,12 +1,12 @@
 import { mutate, query } from '$/server/common/gql';
-import { AuthorByCommentIdDocument } from '$/server/graphql/generated/comment';
 import {
+  AuthorByCommentIdDocument,
   DeleteNotificationMessageDocument,
   DeleteNotificationMessageMutationVariables,
   InsertOneNotificationMessageDocument,
   InsertOneNotificationMessageMutationVariables,
-} from '$/server/graphql/generated/notification';
-import { UserByPkDocument } from '$/server/graphql/generated/user';
+  UserByPkDocument,
+} from '@chirpy-dev/graphql';
 
 export function getAuthorByCommentId(commentId: string) {
   return query(

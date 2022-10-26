@@ -2,9 +2,9 @@ import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
-import { getPublicEnvVar } from '$/utilities/isomorphic/env';
+import { getPublicEnvVar } from 'utils';
 
-import { getGqlClientOptions } from './gql-client';
+import { getGqlClientOptions } from 'ui';
 
 // Server WS client
 class ChirpyWebSocket extends WebSocket {

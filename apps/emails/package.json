@@ -1,10 +1,11 @@
 {
   "name": "@chirpy-dev/emails",
   "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
   "main": "./config.js",
   "scripts": {
-    "build:local": "maizzle build",
     "build": "maizzle build production",
+    "build:local": "maizzle build",
     "dev": "maizzle serve"
   },
   "dependencies": {
@@ -18,7 +19,6 @@
     "tailwindcss-email-variants": "2.0.0",
     "tailwindcss-mso": "1.2.0"
   },
-  "license": "AGPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   }

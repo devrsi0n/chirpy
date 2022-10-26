@@ -9,7 +9,9 @@ module.exports = {
     return [
       // We run @trivago/prettier-plugin-sort-imports before prettier-plugin-tailwindcss (included in eslint)
       // because @trivago/prettier-plugin-sort-imports conflicts with prettier-plugin-tailwindcss.
-      `prettier --config ${prettierSortImportsConfigPath} --write ${filenames.join(' ')}`,
+      `prettier --config ${prettierSortImportsConfigPath} --write ${filenames.join(
+        ' ',
+      )}`,
       `eslint --fix ${filenames.join(' ')}`,
     ];
   },

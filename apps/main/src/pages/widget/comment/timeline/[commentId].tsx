@@ -1,78 +1,24 @@
-import dayjs from 'dayjs';
+import { cpDayjs } from 'ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
   GetStaticPaths,
-  InferGetStaticPropsType,
   GetStaticPropsResult,
 } from 'next';
 import { log } from 'next-axiom';
-import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
-
-import { CommentTimeline } from '$/blocks/comment-timeline';
-import { WidgetLayout } from '$/blocks/layout';
-import { PoweredBy } from '$/blocks/powered-by';
-import { UserMenu } from '$/blocks/user-menu';
-import { IconButton } from '$/components/button';
-import { Heading } from '$/components/heading';
-import { IconArrowLeft } from '$/components/icons';
-import { Link } from '$/components/link';
-import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentTimelineDocument,
   CommentTimelineSubscription,
-  useCommentTimelineSubscription,
-} from '$/graphql/generated/comment';
+  CommentsDocument,
+  ThemeOfPageDocument,
+} from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommentsDocument } from '$/server/graphql/generated/comment';
-import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentTimelineNode } from '$/types/widget';
-import { isSSRMode } from '$/utilities/isomorphic/env';
+import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
 
-export default function CommentTimelineWidget(
-  props: InferGetStaticPropsType<typeof getStaticProps>,
-): JSX.Element {
-  const [{ data }] = useCommentTimelineSubscription({
-    variables: { id: props.commentId },
-    pause: isSSRMode,
-  });
-
-  const comment = data?.commentByPk || props.comment;
-
-  return (
-    <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider
-        projectId={props.projectId}
-        pageId={comment?.pageId || ''}
-      >
-        <div className="mb-4 flex flex-row items-center justify-between">
-          {/* Can't use history.back() here in case user open this page individual */}
-          <Link
-            href={`/widget/comment/${encodeURIComponent(props.pageURL)}`}
-            variant="plain"
-          >
-            <IconButton className="translate-x-1">
-              <IconArrowLeft size={20} />
-            </IconButton>
-          </Link>
-          <Heading as="h4">
-            <span className="font-bold">{comment?.user.name}</span>
-            <span>{`'s comment timeline`}</span>
-          </Heading>
-          <UserMenu variant="Widget" />
-        </div>
-        {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
-        <PoweredBy />
-      </CommentContextProvider>
-    </WidgetLayout>
-  );
-}
 type PathParams = {
   commentId: string;
 };
@@ -93,7 +39,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   const comments = await query(
     CommentsDocument,
     {
-      newerThan: dayjs().subtract(1, 'day').toISOString(),
+      newerThan: cpDayjs().subtract(1, 'day').toISOString(),
     },
     'comments',
   );
@@ -167,3 +113,5 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
 };
+
+export { CommentTimelineWidget as default } from 'ui';

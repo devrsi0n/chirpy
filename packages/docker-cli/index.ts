@@ -30,6 +30,7 @@ const parser = yargs(hideBin(process.argv))
         });
     },
     async (argv) => {
+      const { verbose } = argv;
       let { chirpyDomain, hasuraDomain } = argv;
       if (!chirpyDomain || !hasuraDomain) {
         throw new Error(`chirpy-domain and hasura-domain are required`);
@@ -43,12 +44,12 @@ const parser = yargs(hideBin(process.argv))
       }
       try {
         logDebug(
-          argv.verbose,
+          verbose,
           `Chirpy domain: ${chirpyDomain}, Hasura domain: ${hasuraDomain}`,
         );
 
         await generateFiles(chirpyDomain, hasuraDomain, {
-          verbose: argv.verbose,
+          verbose: verbose,
         });
         console.log(`✅ Generate files done`);
       } catch (error) {
@@ -60,7 +61,7 @@ const parser = yargs(hideBin(process.argv))
   .command(
     'migrate',
     'migrate the Hasura instance, including migrate and seen the Postgres database, apply Hasura metadata',
-    () => {},
+    () => ({}),
     async () => {
       if (!doesPathExist('./config.yaml')) {
         logError('You must run "migrate" command in hasura metadata folder');

@@ -1,41 +1,10 @@
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
-import * as React from 'react';
 
-import { CommentWidget } from '$/blocks/comment-widget';
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
-import { Alert } from '$/components/alert';
 import { mutate } from '$/server/common/gql';
-import { DeleteStaleCommentsDocument } from '$/server/graphql/generated/comment';
-import { isENVDev } from '$/server/utilities/env';
-import { cpDayjs } from '$/utilities/date';
-import { getAppURL } from '$/utilities/isomorphic/env';
-
-export default function PlayGround(): JSX.Element {
-  const [showAlert, setShowAlert] = React.useState(true);
-  return (
-    <SiteLayout title="Playground">
-      <div className="space-y-8">
-        <PageTitle>Playground</PageTitle>
-        {showAlert && (
-          <Alert
-            type="info"
-            title="Feel free to play around"
-            content={
-              process.env.DOCKER
-                ? `We don't remove comment automatically`
-                : 'We remove stale comments every 24 hours automatically.'
-            }
-            onClickDismiss={() => setShowAlert(false)}
-            hideDismissButton
-          />
-        )}
-      </div>
-      <CommentWidget />
-    </SiteLayout>
-  );
-}
+import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
+import { isENVDev, getAppURL } from 'utils';
+import { cpDayjs } from 'ui';
 
 type StaticProps = {
   //
@@ -67,3 +36,5 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
     props: {},
   };
 };
+
+export { PlayGround as default } from 'ui';

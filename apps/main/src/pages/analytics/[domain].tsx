@@ -1,45 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import * as React from 'react';
 
-import { AnalyticsBlock } from '$/blocks/analytics';
-import { SiteLayout } from '$/blocks/layout';
-import { PageTitle } from '$/blocks/page-title';
+import { AnalyticsByDomainPageProps } from 'ui';
 import { query } from '$/server/common/gql';
-import {
-  ProjectByDomainDocument,
-  ProjectByDomainQuery,
-} from '$/server/graphql/generated/project';
+import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { CommonPageProps } from '$/types/page.type';
-
-export type AnalyticsProps = {
-  project: ProjectByDomainQuery['projects'][number];
-};
-
-export default function Analytics({ project }: AnalyticsProps): JSX.Element {
-  return (
-    <SiteLayout hideFullBleed title="Analytics">
-      <section className="mx-auto px-4 xl:max-w-6xl">
-        <PageTitle className="pb-6">Analytics</PageTitle>
-        <AnalyticsBlock
-          site={{
-            domain: project?.domain,
-            offset: '0',
-            hasGoals: false,
-            insertedAt: project?.createdAt,
-            embedded: true,
-            background: '',
-            selfhosted: true,
-            cities: false,
-          }}
-          stuck={false}
-          loggedIn={true}
-          currentUserRole="owner"
-        />
-      </section>
-    </SiteLayout>
-  );
-}
+import { CommonPageProps } from 'types';
 
 type PathParams = {
   domain: string;
@@ -59,7 +24,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<
-  AnalyticsProps & CommonPageProps,
+  AnalyticsByDomainPageProps & CommonPageProps,
   PathParams
 > = async ({ params }) => {
   if (!params?.domain) {
@@ -85,3 +50,5 @@ export const getStaticProps: GetStaticProps<
     revalidate: 60 * 60,
   };
 };
+
+export { AnalyticsByDomainPage as default } from 'ui';

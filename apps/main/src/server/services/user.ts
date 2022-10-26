@@ -4,7 +4,7 @@ import { log } from 'next-axiom';
 import {
   UpdateUserByPkDocument,
   UserBeforeUpdateDocument,
-} from '$/server/graphql/generated/user';
+} from '@chirpy-dev/graphql';
 
 import { mutate, query } from '../common/gql';
 

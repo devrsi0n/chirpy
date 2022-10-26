@@ -44,7 +44,7 @@ jobs:
         continue-on-error: true
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          workingDir: './apps/main'
+          workingDir: './packages/ui'
           exitZeroOnChanges: true
           autoAcceptChanges: "main"
           skip: 'renovate/**'

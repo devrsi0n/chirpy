@@ -11,18 +11,12 @@ const customJestConfig = {
     '<rootDir>/src/__tests__/jest.setup.ts',
     '<rootDir>/scripts/jest/set-env.js',
   ],
-  testMatch: ['**/src/**/*.test.ts?(x)'],
+  testMatch: ['<rootDir>/src/**/*.test.ts?(x)'],
   moduleNameMapper: {
     '^\\$/(.*)$': '<rootDir>/src/$1',
   },
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx}',
-    '<rootDir>/src/__tests__/',
-    '!./**/*.stories.{ts,tsx}',
-    '!./**/types/',
-    '!./**/generated/',
-  ],
+  collectCoverageFrom: ['<rootDir>/src/**/*.{ts,tsx}'],
 };
 
 module.exports = createJestConfig(customJestConfig);

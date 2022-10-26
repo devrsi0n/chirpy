@@ -6,15 +6,11 @@ import {
   CreateAccountDocument,
   CreateAccountMutationVariables,
   DeleteAccountDocument,
-} from '$/server/graphql/generated/account';
-import {
   CreateSessionDocument,
   CreateSessionMutation,
   DeleteSessionDocument,
   SessionAndUserDocument,
   UpdateSessionDocument,
-} from '$/server/graphql/generated/session';
-import {
   CreateUserDocument,
   CreateUserMutation,
   CreateUserMutationVariables,
@@ -27,11 +23,9 @@ import {
   UserByEmailBeforeUpdateDocument,
   UserByEmailDocument,
   UserByPkBeforeUpdateDocument,
-} from '$/server/graphql/generated/user';
-import {
   DeleteVerificationTokenDocument,
   InsertOneVerificationTokenDocument,
-} from '$/server/graphql/generated/verification-token';
+} from '@chirpy-dev/graphql';
 
 import { getUserByPk } from '../mutation-event/utilities';
 import { generateUsername } from './utilities';

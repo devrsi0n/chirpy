@@ -6,32 +6,21 @@ import {
   GetStaticPaths,
 } from 'next';
 import { log } from 'next-axiom';
-import * as React from 'react';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import { CommentTrees } from '$/blocks/comment-trees';
-import { WidgetLayout } from '$/blocks/layout';
-import { PoweredBy } from '$/blocks/powered-by';
-import { CommentContextProvider } from '$/contexts/comment-context';
 import {
   CommentTreeDocument,
   CommentTreeSubscription,
   CommentTreeSubscriptionVariables,
-  useCommentTreeSubscription,
-} from '$/graphql/generated/comment';
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { query } from '$/server/common/gql';
-import { ThemeOfPageDocument } from '$/server/graphql/generated/page';
-import {
+  ThemeOfPageDocument,
   PageByUrlOnlyDocument,
   FreshPagesDocument,
-} from '$/server/graphql/generated/page';
-import { CommonWidgetProps } from '$/types/page.type';
-import { Theme } from '$/types/theme.type';
-import { CommentLeafType } from '$/types/widget';
-import { isSSRMode } from '$/utilities/isomorphic/env';
+} from '@chirpy-dev/graphql';
+import { getAdminGqlClient } from '$/lib/admin-gql-client';
+import { query } from '$/server/common/gql';
+import { CommonWidgetProps, Theme, CommentLeafType } from 'types';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -39,45 +28,6 @@ export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
  * Comment tree widget for a page
  * @param props
  */
-export default function CommentWidgetPage(
-  props: PageCommentProps,
-): JSX.Element {
-  let error = '';
-  let pageId = '';
-  let pageURL = '';
-
-  if (isStaticError(props)) {
-    error = props.error;
-  } else {
-    pageId = props.pageId;
-    pageURL = props.pageURL;
-  }
-  const [{ data }] = useCommentTreeSubscription({
-    variables: { pageURL },
-    pause: isSSRMode,
-  });
-  const comments =
-    data?.comments || (isStaticError(props) ? [] : props.comments || []);
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-  // TODO: resolve this comments undefined error
-  if (isStaticError(props)) {
-    return <p>Wrong page.</p>;
-  }
-
-  return (
-    <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider projectId={props.projectId} pageId={pageId}>
-        <div className="pt-1">
-          <CommentTrees comments={comments} />
-        </div>
-        <PoweredBy />
-      </CommentContextProvider>
-    </WidgetLayout>
-  );
-}
 
 type PathParams = {
   pageURL: string;
@@ -193,6 +143,4 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-function isStaticError(props: $TsAny): props is StaticError {
-  return !!props.error;
-}
+export { CommentWidgetPage as default } from 'ui';
