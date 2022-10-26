@@ -1,4 +1,3 @@
-import 'tailwindcss/tailwind.css';
 import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
@@ -12,6 +11,8 @@ import {
 } from '../src/contexts';
 import { loadFeatures } from '../src/pages/app';
 
+// TODO: fix tailwind not work in storybook,
+// use the tailwind CLI to build a separated css instead.
 import '../src/styles/global-styles.scss';
 
 import { sbGqlHandlers } from './msw/gql-handlers';

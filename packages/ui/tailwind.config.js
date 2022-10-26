@@ -38,7 +38,6 @@ const round = (num) =>
 const rem = (px) => `${round(px / 16)}rem`;
 // const em = (px, base) => `${round(px / base)}em`;
 
-console.log('@@@@test');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
