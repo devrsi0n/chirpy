@@ -107,7 +107,7 @@ importers:
       autoprefixer: 10.4.9
       glob: 8.0.3
       postcss: 8.4.16
-      tailwindcss: 3.1.8
+      tailwindcss: 3.2.1
       tailwindcss-box-shadow: 1.0.0
       tailwindcss-email-variants: 2.0.0
       tailwindcss-mso: 1.2.0
@@ -117,9 +117,9 @@ importers:
       autoprefixer: 10.4.9_postcss@8.4.16
       glob: 8.0.3
       postcss: 8.4.16
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
       tailwindcss-box-shadow: 1.0.0
-      tailwindcss-email-variants: 2.0.0_tailwindcss@3.1.8
+      tailwindcss-email-variants: 2.0.0_tailwindcss@3.2.1
       tailwindcss-mso: 1.2.0
 
   apps/main:
@@ -186,7 +186,7 @@ importers:
       shiki: 0.10.1
       stellate: 1.17.0
       superjson: 1.9.1
-      tailwindcss: 3.1.8
+      tailwindcss: 3.2.1
       type-fest: 2.19.0
       types: workspace:*
       typescript: 4.8.3
@@ -269,7 +269,7 @@ importers:
       jest: 29.0.3_@types+node@16.11.45
       postcss: 8.4.16
       stellate: 1.17.0
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
       typescript: 4.8.3
       webpack: 5.74.0
 
@@ -303,18 +303,18 @@ importers:
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2
       postcss-preset-env: 7.8.1
-      tailwindcss: 3.1.8
+      tailwindcss: 3.2.1
       typescript: 4.8.3
     dependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
       '@radix-ui/colors': 0.1.8
-      '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
-      '@tailwindcss/typography': 0.5.7_tailwindcss@3.1.8
+      '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.1
+      '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.1
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.16
       postcss-preset-env: 7.8.1_postcss@8.4.16
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
       typescript: 4.8.3
 
   packages/docker-cli:
@@ -561,7 +561,7 @@ importers:
       storybook-addon-next: 1.6.9
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
-      tailwindcss: 3.1.8
+      tailwindcss: 3.2.1
       type-fest: 2.19.0
       types: workspace:*
       typescript: 4.8.3
@@ -660,7 +660,7 @@ importers:
       sass-loader: 13.0.2_sass@1.54.9+webpack@5.74.0
       storybook-addon-next: 1.6.9_gb2slorzmle6zze7xeuwnzzhg4
       style-loader: 3.3.1_webpack@5.74.0
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
       type-fest: 2.19.0
       types: link:../types
       typescript: 4.8.3
@@ -7359,15 +7359,15 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.1.8:
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.1:
     resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
     dev: false
 
-  /@tailwindcss/typography/0.5.7_tailwindcss@3.1.8:
+  /@tailwindcss/typography/0.5.7_tailwindcss@3.2.1:
     resolution: {integrity: sha512-JTTSTrgZfp6Ki4svhPA4mkd9nmQ/j9EfE7SbHJ1cLtthKkpW2OxsFXzSmxbhYbEkfNIyAyhle5p4SYyKRbz/jg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -7376,7 +7376,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
     dev: false
 
   /@tensorflow-models/toxicity/1.2.2_ce7e77rhh6oipcy6kxvkentnmi:
@@ -8879,12 +8879,12 @@ packages:
       acorn: 7.4.1
     dev: true
 
-  /acorn-jsx/5.3.2_acorn@8.8.0:
+  /acorn-jsx/5.3.2_acorn@8.8.1:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.8.0
+      acorn: 8.8.1
 
   /acorn-node/1.8.2:
     resolution: {integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==}
@@ -13241,8 +13241,8 @@ packages:
     resolution: {integrity: sha512-DQmnRpLj7f6TgN/NYb0MTzJXL+vJF9h3pHy4JhCIs3zwcgez8xmGg3sXHcEO97BrmO2OSvCwMdfdlyl+E9KjOw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
-      acorn: 8.8.0
-      acorn-jsx: 5.3.2_acorn@8.8.0
+      acorn: 8.8.1
+      acorn-jsx: 5.3.2_acorn@8.8.1
       eslint-visitor-keys: 3.3.0
 
   /esprima/3.1.3:
@@ -18385,6 +18385,7 @@ packages:
 
   /nan/2.17.0:
     resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -18503,7 +18504,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18535,7 +18536,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18547,7 +18548,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -20140,8 +20141,8 @@ packages:
       postcss: 8.4.18
     dev: true
 
-  /postcss-nested/5.0.6_postcss@8.4.16:
-    resolution: {integrity: sha512-rKqm2Fk0KbA8Vt3AdGN0FB9OBOMDVajMG6ZCf/GoHgdxUJ4sBFp0A/uMIRm+MJUdo33YXEtjqIz8u7DAp8B7DA==}
+  /postcss-nested/6.0.0_postcss@8.4.16:
+    resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.2.14
@@ -23373,13 +23374,13 @@ packages:
     engines: {node: '>=12.13.0'}
     dev: false
 
-  /tailwindcss-email-variants/2.0.0_tailwindcss@3.1.8:
+  /tailwindcss-email-variants/2.0.0_tailwindcss@3.2.1:
     resolution: {integrity: sha512-oNiHQCnh2KPfShPjqJLD2PqEgSZ9J4BUJPq3nsufJraxmMq2bowI3651GQBsxh5usT9CgmUNEkDe04d80DN9gQ==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
     dependencies:
       lodash.get: 4.4.2
-      tailwindcss: 3.1.8_postcss@8.4.16
+      tailwindcss: 3.2.1_postcss@8.4.16
     dev: false
 
   /tailwindcss-mso/1.2.0:
@@ -23389,8 +23390,8 @@ packages:
       lodash.isobject: 3.0.2
     dev: false
 
-  /tailwindcss/3.1.8_postcss@8.4.16:
-    resolution: {integrity: sha512-YSneUCZSFDYMwk+TGq8qYFdCA3yfBRdBlS7txSq0LUmzyeqRe3a8fBQzbz9M3WS/iFT4BNf/nmw9mEzrnSaC0g==}
+  /tailwindcss/3.2.1_postcss@8.4.16:
+    resolution: {integrity: sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -23406,6 +23407,7 @@ packages:
       glob-parent: 6.0.2
       is-glob: 4.0.3
       lilconfig: 2.0.6
+      micromatch: 4.0.5
       normalize-path: 3.0.0
       object-hash: 3.0.0
       picocolors: 1.0.0
@@ -23413,7 +23415,7 @@ packages:
       postcss-import: 14.1.0_postcss@8.4.16
       postcss-js: 4.0.0_postcss@8.4.16
       postcss-load-config: 3.1.4_postcss@8.4.16
-      postcss-nested: 5.0.6_postcss@8.4.16
+      postcss-nested: 6.0.0_postcss@8.4.16
       postcss-selector-parser: 6.0.10
       postcss-value-parser: 4.2.0
       quick-lru: 5.1.1
@@ -23593,7 +23595,7 @@ packages:
     hasBin: true
     dependencies:
       '@jridgewell/source-map': 0.3.2
-      acorn: 8.8.0
+      acorn: 8.8.1
       commander: 2.20.3
       source-map-support: 0.5.21
 
@@ -23918,7 +23920,7 @@ packages:
     dependencies:
       '@types/json5': 0.0.29
       json5: 1.0.1
-      minimist: 1.2.6
+      minimist: 1.2.7
       strip-bom: 3.0.0
     dev: false
 
@@ -23927,7 +23929,7 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       json5: 2.2.1
-      minimist: 1.2.6
+      minimist: 1.2.7
       strip-bom: 3.0.0
     dev: true
 
