@@ -108,7 +108,7 @@ importers:
       glob: 8.0.3
       postcss: 8.4.16
       tailwindcss: 3.2.1
-      tailwindcss-box-shadow: 1.0.0
+      tailwindcss-box-shadow: 2.0.0
       tailwindcss-email-variants: 2.0.0
       tailwindcss-mso: 1.2.0
     dependencies:
@@ -118,7 +118,7 @@ importers:
       glob: 8.0.3
       postcss: 8.4.16
       tailwindcss: 3.2.1_postcss@8.4.16
-      tailwindcss-box-shadow: 1.0.0
+      tailwindcss-box-shadow: 2.0.0_tailwindcss@3.2.1
       tailwindcss-email-variants: 2.0.0_tailwindcss@3.2.1
       tailwindcss-mso: 1.2.0
 
@@ -23369,9 +23369,12 @@ packages:
     resolution: {integrity: sha512-qImOD23aDfnIDNqlG1NOehdB9IYsn1V9oByPjKY1nakv2MQYCEMyX033/q+aEtYCpmYK1cv2+NTmlH+ra6GA5A==}
     dev: true
 
-  /tailwindcss-box-shadow/1.0.0:
-    resolution: {integrity: sha512-H54nAGO+BIZiwvAp0LVh1tXGQ5GgaQMypAz4D7+Zkp0zLKtTNLRLocMT8bcZ3eVZ9EHKpU4i179q7O1P8gotfg==}
-    engines: {node: '>=12.13.0'}
+  /tailwindcss-box-shadow/2.0.0_tailwindcss@3.2.1:
+    resolution: {integrity: sha512-RZdePEMzIpiTG0FmbncVlY6Zkqp3tBhpyCoVpc8UQBZEdGY8TqVcIrE75Si4vIz/oGDAIFRKGeKFt2HLLbLHHQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0'
+    dependencies:
+      tailwindcss: 3.2.1_postcss@8.4.16
     dev: false
 
   /tailwindcss-email-variants/2.0.0_tailwindcss@3.2.1:
