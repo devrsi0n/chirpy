@@ -3,7 +3,7 @@ import '@tensorflow/tfjs';
 import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { isENVDev } from 'utils';
+import { isENVDev } from '@chirpy-dev/utils';
 import { ICheckToxicText } from 'types';
 
 const MIN_PREDICTION_CONFIDENCE = 0.9;

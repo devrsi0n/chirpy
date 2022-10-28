@@ -4,7 +4,7 @@ import { NextRouter } from 'next/router';
 import React from 'react';
 
 import { useIsDarkMode } from '../../../hooks/use-is-dark-mode';
-import { ANALYTICS_DOMAIN } from 'utils';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 
 import * as api from '../analytics-api';
 import styles from '../analytics.module.scss';

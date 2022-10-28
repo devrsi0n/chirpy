@@ -54,7 +54,7 @@
     "react-flip-move": "3.0.4",
     "super-tiny-icons": "0.4.0",
     "urql": "3.0.3",
-    "utils": "workspace:*"
+    "@chirpy-dev/utils": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "7.18.13",

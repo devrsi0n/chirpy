@@ -19,8 +19,8 @@ import {
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
-import { isENVProd } from 'utils';
-import { isValidDomain } from '../../utils';
+import { isENVProd } from '@chirpy-dev/utils';
+import { isValidDomain } from '../../utilities';
 
 type FormFields = {
   name: string;

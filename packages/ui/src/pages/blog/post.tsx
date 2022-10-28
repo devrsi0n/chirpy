@@ -5,7 +5,7 @@ import { MDXProps } from 'types';
 import { CommentWidget, SiteLayout, MDXComponents } from '../../blocks';
 import { useHasMounted } from '../../hooks';
 import { Image } from '../../components';
-import { getBannerProps } from '../../utils';
+import { getBannerProps } from '../../utilities';
 
 type BlogProps = MDXProps;
 

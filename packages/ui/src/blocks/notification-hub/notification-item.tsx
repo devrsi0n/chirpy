@@ -15,7 +15,7 @@ import { Text, TextProps } from '../../components/text';
 import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
 import { NotificationType_Enum } from '@chirpy-dev/graphql';
 import { useIsWidget } from '../../hooks/use-is-widget';
-import { cpDayjs } from '../../utils/date';
+import { cpDayjs } from '../../utilities/date';
 
 export type INotificationItemProps = {
   index: number;

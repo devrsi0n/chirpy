@@ -2,7 +2,7 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { Theme } from 'types';
-import { noop } from 'utils';
+import { noop } from '@chirpy-dev/utils';
 
 import { siteTheme } from './site-theme';
 import { useThemeVariables } from './use-theme-variables';

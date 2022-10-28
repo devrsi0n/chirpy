@@ -3,7 +3,7 @@ import { log } from 'next-axiom';
 
 import { mutate } from '$/server/common/gql';
 import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
-import { isENVDev, getAppURL } from 'utils';
+import { isENVDev, getAppURL } from '@chirpy-dev/utils';
 import { cpDayjs } from '@chirpy-dev/ui';
 
 type StaticProps = {

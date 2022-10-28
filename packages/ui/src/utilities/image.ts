@@ -1,4 +1,4 @@
-import { isSSRMode } from 'utils';
+import { isSSRMode } from '@chirpy-dev/utils';
 
 export type BannerProps = {
   src: string;

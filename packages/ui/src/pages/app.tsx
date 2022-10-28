@@ -13,7 +13,7 @@ import {
   // fix ref issue
   SessionProvider,
 } from '../contexts';
-import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from 'utils';
+import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy-dev/utils';
 import { CommonWidgetProps, PageProps } from 'types';
 
 export function App({
@@ -57,5 +57,5 @@ export { reportWebVitals } from 'next-axiom/dist/webVitals';
 
 export const loadFeatures = () =>
   import(
-    /* webpackChunkName: "framer-motion-features"*/ '../utils/framer-motion-features'
+    /* webpackChunkName: "framer-motion-features"*/ '../utilities/framer-motion-features'
   ).then((res) => res.default);

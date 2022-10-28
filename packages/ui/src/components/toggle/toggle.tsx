@@ -2,7 +2,7 @@ import { Switch } from '@headlessui/react';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { noop } from 'utils';
+import { noop } from '@chirpy-dev/utils';
 
 import { Text, TextProps } from '../text';
 

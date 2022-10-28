@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { logger } from '../utils/logger';
+import { logger } from '../utilities/logger';
 
 function useEventListener<WE extends keyof WindowEventMap = 'resize'>(
   eventName: WE,

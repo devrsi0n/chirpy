@@ -9,7 +9,7 @@ import {
   Link
 } from '../../../../components';
 import { usePrevious } from '../../../../hooks/use-previous';
-import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from 'utils';
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '@chirpy-dev/utils';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

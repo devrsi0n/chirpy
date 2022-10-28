@@ -5,7 +5,7 @@ import {
   useInsertOneLikeMutation,
 } from '@chirpy-dev/graphql';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 
 export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;
 

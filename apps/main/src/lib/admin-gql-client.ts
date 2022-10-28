@@ -2,7 +2,7 @@ import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
 
-import { getPublicEnvVar } from 'utils';
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 
 import { getGqlClientOptions } from '@chirpy-dev/ui';
 

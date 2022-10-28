@@ -3,8 +3,8 @@ import React from 'react';
 import FlipMove from 'react-flip-move';
 
 import { Link, Tabs } from '../../../../components';
-import { ANALYTICS_DOMAIN } from 'utils';
-import { getPublicEnvVar } from 'utils';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

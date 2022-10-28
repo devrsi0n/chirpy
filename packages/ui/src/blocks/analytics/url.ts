@@ -1,4 +1,4 @@
-import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from 'utils';
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '@chirpy-dev/utils';
 
 import { Site } from './type';
 

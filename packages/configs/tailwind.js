@@ -45,7 +45,7 @@ module.exports = {
   content: [
     './src/**/*.{ts,tsx}',
     './.storybook/**/*.{ts,tsx}',
-    './node_modules/ui/src/**/*.{ts,tsx}',
+    './node_modules/@chirpy-dev/ui/src/**/*.{ts,tsx}',
   ],
   theme: {
     colors,

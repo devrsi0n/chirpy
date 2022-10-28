@@ -19,7 +19,7 @@ import {
   FEEDBACK_LINK,
   SIGN_IN_SUCCESS_KEY,
   GRAPHQL_CACHE_DB_NAME,
-} from 'utils';
+} from '@chirpy-dev/utils';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';

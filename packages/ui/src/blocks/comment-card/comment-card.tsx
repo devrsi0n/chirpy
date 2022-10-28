@@ -16,10 +16,10 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { COMMENT_TREE_MAX_DEPTH, isENVDev } from 'utils';
-import { logger } from '../../utils/logger';
+import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
+import { logger } from '../../utilities/logger';
 import { CommentLeafType } from 'types';
-import { cpDayjs } from '../../utils/date';
+import { cpDayjs } from '../../utilities/date';
 
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor } from '../rich-text-editor';

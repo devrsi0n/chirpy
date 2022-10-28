@@ -6,7 +6,7 @@ import { Provider } from 'urql';
 import { CurrentUserContext, UserData } from '../../contexts';
 
 import { mockUserData } from '../mocks/data/user';
-import { createGqlClient } from '../../utils';
+import { createGqlClient } from '../../utilities';
 import { ToastProvider } from '../../components';
 
 export const mockRefetchUser = jest.fn();

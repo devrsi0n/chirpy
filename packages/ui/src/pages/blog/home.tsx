@@ -3,7 +3,7 @@ import { Directory } from 'types';
 
 import { SiteLayout } from '../../blocks';
 import { Heading, Image, Link } from '../../components';
-import { getBannerProps } from '../../utils';
+import { getBannerProps } from '../../utilities';
 
 export type BlogHomeProps = {
   directories: Directory[];

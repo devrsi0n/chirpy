@@ -12,7 +12,7 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 
 import {

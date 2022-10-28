@@ -3,7 +3,7 @@ import { JsonArray } from 'type-fest';
 import { RTEValue } from 'types';
 import { useToast } from '../../components/toast';
 import { useInsertOneCommentMutation } from '@chirpy-dev/graphql';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 
 import { useCurrentUser } from '../current-user-context';
 

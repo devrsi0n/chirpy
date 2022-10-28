@@ -1,6 +1,6 @@
 import { useCommentTimelineSubscription } from '@chirpy-dev/graphql';
 import { CommonWidgetProps, CommentTimelineNode } from 'types';
-import { isSSRMode } from 'utils';
+import { isSSRMode } from '@chirpy-dev/utils';
 
 import {
   CommentTimeline,

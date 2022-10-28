@@ -2,7 +2,7 @@ import { log } from 'next-axiom';
 import webpush from 'web-push';
 
 import { NotificationType_Enum } from '@chirpy-dev/graphql';
-import { FEEDBACK_LINK, getPublicEnvVar } from 'utils';
+import { FEEDBACK_LINK, getPublicEnvVar } from '@chirpy-dev/utils';
 import { mutate } from '$/server/common/gql';
 import {
   DeleteNotificationSubscriptionByPkDocument,

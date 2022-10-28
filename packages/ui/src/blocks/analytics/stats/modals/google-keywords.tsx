@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 import { Link } from '../../components/link';
-import { ANALYTICS_DOMAIN } from 'utils';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

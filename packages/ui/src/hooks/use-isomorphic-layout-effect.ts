@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { isSSRMode } from 'utils';
+import { isSSRMode } from '@chirpy-dev/utils';
 
 const useIsomorphicLayoutEffect = isSSRMode
   ? React.useEffect

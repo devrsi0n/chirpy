@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
-import { SIGN_IN_SUCCESS_KEY } from 'utils';
+import { SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 
 import { useEventListener } from './use-event-listener';
 

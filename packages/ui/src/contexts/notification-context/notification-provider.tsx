@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { logger } from '../../utils/logger';
-import { asyncNoop, noop } from 'utils';
+import { logger } from '../../utilities/logger';
+import { asyncNoop, noop } from '@chirpy-dev/utils';
 
 import { useCurrentUser } from '../current-user-context';
 import { useReloadWhenSwChange } from './use-reload-when-sw-change';

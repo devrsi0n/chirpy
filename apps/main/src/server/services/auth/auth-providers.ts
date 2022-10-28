@@ -6,7 +6,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-import { SESSION_MAX_AGE, isENVProd } from 'utils';
+import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
 import { query } from '$/server/common/gql';
 import { UserByPkDocument } from '@chirpy-dev/graphql';
 

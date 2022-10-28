@@ -1,4 +1,4 @@
-import { waitGraphql } from '../../fixtures/utils';
+import { waitGraphql } from '../../fixtures/@chirpy-dev/utils';
 
 describe('Project', () => {
   beforeEach(() => {

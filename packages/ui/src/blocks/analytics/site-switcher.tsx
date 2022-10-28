@@ -2,7 +2,7 @@
 import { Transition } from '@headlessui/react';
 import React from 'react';
 
-import { getPublicEnvVar } from 'utils';
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 
 import { getStats } from './analytics-api';
 import { Site } from './type';

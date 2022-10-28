@@ -1,6 +1,6 @@
 import { Primitive } from 'type-fest';
 
-import { WIDGET_COMMENT_PATH, isSSRMode } from 'utils';
+import { WIDGET_COMMENT_PATH, isSSRMode } from '@chirpy-dev/utils';
 
 import { formatISO } from './date';
 import { Query } from './query';

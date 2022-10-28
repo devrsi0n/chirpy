@@ -56,7 +56,7 @@
     "types": "workspace:*",
     "@chirpy-dev/ui": "workspace:*",
     "urql": "3.0.3",
-    "utils": "workspace:*",
+    "@chirpy-dev/utils": "workspace:*",
     "web-push": "3.5.0",
     "wonka": "6.0.0",
     "ws": "8.8.1"

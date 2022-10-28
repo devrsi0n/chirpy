@@ -12,7 +12,7 @@ import {
   fetchExchange,
 } from 'urql';
 
-import { isENVDev, getPublicEnvVar, isBrowser } from 'utils';
+import { isENVDev, getPublicEnvVar, isBrowser } from '@chirpy-dev/utils';
 
 export function createGqlClient(hasuraToken = ''): Client {
   return createClient(getGqlClientOptions(getAuthHeaders(hasuraToken)));

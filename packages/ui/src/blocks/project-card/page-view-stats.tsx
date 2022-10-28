@@ -4,8 +4,8 @@ import * as React from 'react';
 import { IconArrowUp } from '../../components/icons';
 import { Link } from '../../components/link';
 import { Text } from '../../components/text';
-import { ANALYTICS_DOMAIN } from 'utils';
-import { logger } from '../../utils/logger';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
+import { logger } from '../../utilities/logger';
 
 import { getStats } from '../analytics/analytics-api';
 

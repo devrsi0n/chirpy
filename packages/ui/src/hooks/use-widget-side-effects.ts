@@ -5,7 +5,7 @@ import {
   EVENT_CHANGE_THEME,
   EVENT_CLICK_CONTAINER,
   EVENT_WIDGET_LOADED,
-} from 'utils';
+} from '@chirpy-dev/utils';
 
 import { useEventListener } from './use-event-listener';
 

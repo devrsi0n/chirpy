@@ -6,7 +6,7 @@ import { APIError } from '$/server/common/api-error';
 import { getAPIHandler } from '$/server/common/api-handler';
 import { mutate } from '$/server/common/gql';
 import { DeleteUserDocument } from '@chirpy-dev/graphql';
-import { getAppURL } from 'utils';
+import { getAppURL } from '@chirpy-dev/utils';
 
 const handler = getAPIHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {

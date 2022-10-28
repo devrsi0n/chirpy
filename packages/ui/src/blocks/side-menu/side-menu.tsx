@@ -6,7 +6,7 @@ import { IconButton } from '../../components/button';
 import { IconMenu, IconX } from '../../components/icons';
 import { useClickOutside } from '../../hooks/use-click-outside';
 import { useFrozeBodyScroll } from '../../hooks/use-froze-scroll';
-import { isSSRMode } from 'utils';
+import { isSSRMode } from '@chirpy-dev/utils';
 
 import {
   SideMenuContextProvider,

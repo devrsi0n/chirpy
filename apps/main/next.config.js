@@ -10,7 +10,7 @@ const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
 const withTM = require('next-transpile-modules')([
   '@chirpy-dev/ui',
-  'utils',
+  '@chirpy-dev/utils',
   '@chirpy-dev/graphql',
 ]);
 

@@ -4,7 +4,7 @@ import {
   INotificationContext,
   NotificationContext,
 } from '../../contexts/notification-context';
-import { asyncNoop, noop } from 'utils';
+import { asyncNoop, noop } from '@chirpy-dev/utils';
 
 export type PredefinedNotificationProps = {
   children: React.ReactNode;

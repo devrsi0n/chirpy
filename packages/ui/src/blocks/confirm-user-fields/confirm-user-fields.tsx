@@ -10,9 +10,9 @@ import { useCurrentUser } from '../../contexts/current-user-context';
 import { useUpdateUserFieldsMutation } from '@chirpy-dev/graphql';
 import { useBypassCacheRefetch } from '../../hooks/use-bypass-cache-refetch';
 import { useForm } from '../../hooks/use-form';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 import { sleep } from './utils';
-import { EMAIL_REGEXP } from '../../utils/validator';
+import { EMAIL_REGEXP } from '../../utilities/validator';
 
 export type ConfirmUserFieldsProps = {
   //

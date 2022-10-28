@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Button, Heading, Link, SectionHeader, Text } from '../../components';
-import { FEEDBACK_LINK } from 'utils';
+import { FEEDBACK_LINK } from '@chirpy-dev/utils';
 
 import { FAQ } from './faq';
 import { FAQ_LIST } from './faq-data';

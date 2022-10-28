@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { logger } from '../utils/logger';
-import { isSSRMode } from 'utils';
+import { logger } from '../utilities/logger';
+import { isSSRMode } from '@chirpy-dev/utils';
 
 import { useEventListener } from './use-event-listener';
 

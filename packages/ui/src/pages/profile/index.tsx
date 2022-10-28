@@ -24,7 +24,7 @@ import {
   useCurrentUserQuery,
   useUpdateUserByPkMutation,
 } from '@chirpy-dev/graphql';
-import { EMAIL_REGEXP, logger } from '../../utils';
+import { EMAIL_REGEXP, logger } from '../../utilities';
 
 type FormFields = {
   name: string;

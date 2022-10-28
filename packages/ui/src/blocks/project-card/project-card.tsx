@@ -19,9 +19,9 @@ import {
   useDeleteProjectByPkMutation,
   UserDashboardProjectsQuery,
 } from '@chirpy-dev/graphql';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 import { listHoverable } from '../../styles/common';
-import { cpDayjs } from '../../utils/date';
+import { cpDayjs } from '../../utilities/date';
 
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
