@@ -4,7 +4,7 @@ import * as toxicity from '@tensorflow-models/toxicity';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { isENVDev } from '@chirpy-dev/utils';
-import { ICheckToxicText } from 'types';
+import { ICheckToxicText } from '@chirpy-dev/types';
 
 const MIN_PREDICTION_CONFIDENCE = 0.9;
 

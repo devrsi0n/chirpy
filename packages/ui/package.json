@@ -108,8 +108,8 @@
     "style-loader": "3.3.1",
     "tailwindcss": "3.2.1",
     "type-fest": "2.19.0",
-    "types": "workspace:*",
     "typescript": "4.8.4",
+    "@chirpy-dev/types": "workspace:*",
     "webpack": "5.74.0",
     "whatwg-fetch": "3.6.2"
   },

@@ -9,7 +9,7 @@ import {
   UseToggleALikeAction,
 } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { CommentLeafType, RTEValue } from 'types';
+import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
 
 import { CommentTrees } from '../comment-trees';
 import { PredefinedCurrentUser } from './predefined-current-user';

@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { SideBarProps } from '@chirpy-dev/ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
-import { CommonPageProps, MDXProps } from 'types';
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';

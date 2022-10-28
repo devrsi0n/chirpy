@@ -20,7 +20,7 @@ import {
 } from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommonWidgetProps, Theme, CommentLeafType } from 'types';
+import { CommonWidgetProps, Theme, CommentLeafType } from '@chirpy-dev/types';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 

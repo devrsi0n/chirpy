@@ -5,7 +5,7 @@ import { IconLoader, IconSend } from '../../../components/icons';
 import { useCurrentUser } from '../../../contexts/current-user-context';
 import { useNotificationContext } from '../../../contexts/notification-context';
 import { useAsync } from '../../../hooks/use-async';
-import type { ICheckToxicText, RTEValue } from 'types';
+import type { ICheckToxicText, RTEValue } from '@chirpy-dev/types';
 import { getTextFromRteValue } from '@chirpy-dev/utils';
 
 import { SignInButton } from '../../sign-in-button';

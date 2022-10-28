@@ -18,12 +18,12 @@ import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import { logger } from '../../utilities/logger';
-import { CommentLeafType } from 'types';
+import { CommentLeafType } from '@chirpy-dev/types';
 import { cpDayjs } from '../../utilities/date';
 
 import { Like, LikeAction } from '../like-action';
 import { RichTextEditor } from '../rich-text-editor';
-import { RTEValue } from 'types';
+import { RTEValue } from '@chirpy-dev/types';
 import { DeletedComment } from './deleted-comment';
 import { TimelineLinkButton } from './timeline-link-button';
 

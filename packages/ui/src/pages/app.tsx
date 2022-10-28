@@ -14,7 +14,7 @@ import {
   SessionProvider,
 } from '../contexts';
 import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy-dev/utils';
-import { CommonWidgetProps, PageProps } from 'types';
+import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
 
 export function App({
   Component,

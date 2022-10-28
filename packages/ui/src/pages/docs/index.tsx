@@ -7,7 +7,7 @@ import {
   SideBar,
   SideBarProps,
 } from '../../blocks';
-import { CommonPageProps, MDXProps } from 'types';
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 

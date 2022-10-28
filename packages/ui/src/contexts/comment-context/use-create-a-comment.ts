@@ -1,6 +1,6 @@
 import { JsonArray } from 'type-fest';
 
-import { RTEValue } from 'types';
+import { RTEValue } from '@chirpy-dev/types';
 import { useToast } from '../../components/toast';
 import { useInsertOneCommentMutation } from '@chirpy-dev/graphql';
 import { logger } from '../../utilities/logger';

@@ -130,6 +130,7 @@ importers:
       '@chirpy-dev/graphql': workspace:*
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
       '@chirpy-dev/ui': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@next/bundle-analyzer': 12.3.1
@@ -190,7 +191,6 @@ importers:
       superjson: 1.9.1
       tailwindcss: 3.2.1
       type-fest: 2.19.0
-      types: workspace:*
       typescript: 4.8.4
       urql: 3.0.3
       web-push: 3.5.0
@@ -199,6 +199,7 @@ importers:
       ws: 8.8.1
     dependencies:
       '@chirpy-dev/graphql': link:../../packages/graphql
+      '@chirpy-dev/types': link:../../packages/types
       '@chirpy-dev/ui': link:../../packages/ui
       '@chirpy-dev/utils': link:../../packages/utils
       '@radix-ui/colors': 0.1.8
@@ -237,7 +238,6 @@ importers:
       shiki: 0.10.1
       superjson: 1.9.1
       type-fest: 2.19.0
-      types: link:../../packages/types
       urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
       web-push: 3.5.0
       wonka: 6.0.0
@@ -478,6 +478,7 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/graphql': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@geist-ui/icons': 1.0.2
       '@headlessui/react': 1.7.3
@@ -564,7 +565,6 @@ importers:
       super-tiny-icons: 0.4.0
       tailwindcss: 3.2.1
       type-fest: 2.19.0
-      types: workspace:*
       typescript: 4.8.4
       urql: 3.0.3
       webpack: 5.74.0
@@ -615,6 +615,7 @@ importers:
       '@chirpy-dev/eslint-config': link:../eslint-config
       '@chirpy-dev/graphql': link:../graphql
       '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@chirpy-dev/types': link:../types
       '@storybook/addon-actions': 6.5.9_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.9_n6r6xdd2yjkiefh65dczmbeew4
       '@storybook/addon-interactions': 6.5.9_xcqfk6loynic6372z4tmnqfcmq
@@ -662,7 +663,6 @@ importers:
       style-loader: 3.3.1_webpack@5.74.0
       tailwindcss: 3.2.1_postcss@8.4.16
       type-fest: 2.19.0
-      types: link:../types
       typescript: 4.8.4
       webpack: 5.74.0
       whatwg-fetch: 3.6.2
@@ -670,6 +670,7 @@ importers:
   packages/utils:
     specifiers:
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
       '@tiptap/core': 2.0.0-beta.199
       '@tiptap/react': 2.0.0-beta.199
       '@types/node': 16.11.45
@@ -677,10 +678,10 @@ importers:
       '@types/react-dom': 18.0.6
       react: 18.2.0
       react-dom: 18.2.0
-      types: workspace:*
       typescript: 4.8.4
     devDependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@chirpy-dev/types': link:../types
       '@tiptap/core': 2.0.0-beta.199
       '@tiptap/react': 2.0.0-beta.199_la4wgmshzfaebh4rq27xtbsa3y
       '@types/node': 16.11.45
@@ -688,7 +689,6 @@ importers:
       '@types/react-dom': 18.0.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      types: link:../types
       typescript: 4.8.4
 
 packages:

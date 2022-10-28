@@ -6,7 +6,7 @@ import { Heading } from '../../components/heading';
 import { IconChevronRight } from '../../components/icons';
 import { Link } from '../../components/link';
 import { List } from '../../components/list';
-import { Directory } from 'types';
+import { Directory } from '@chirpy-dev/types';
 import { listHoverable } from '../../styles/common';
 
 import { SideMenu } from '../side-menu';

@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { CommentLeafType } from 'types';
+import { CommentLeafType } from '@chirpy-dev/types';
 
 export const PAGE_ID = 'b5a16120-593c-492f-ad94-e14d247485f3';
 export const PROJECT_ID = '3c5d2d41-e2df-4b31-98f8-6e471acab461';

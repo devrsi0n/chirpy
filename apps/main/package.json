@@ -53,7 +53,7 @@
     "shiki": "0.10.1",
     "superjson": "1.9.1",
     "type-fest": "2.19.0",
-    "types": "workspace:*",
+    "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/ui": "workspace:*",
     "urql": "3.0.3",
     "@chirpy-dev/utils": "workspace:*",

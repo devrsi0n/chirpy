@@ -2,7 +2,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
 
 import { SiteLayout, MDXComponents } from '../blocks';
-import { MDXProps } from 'types';
+import { MDXProps } from '@chirpy-dev/types';
 
 export function TermsOfService({
   mdxSource,

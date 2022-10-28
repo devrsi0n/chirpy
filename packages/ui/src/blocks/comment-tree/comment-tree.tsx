@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CommentLeafType, RTEValue } from 'types';
+import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';

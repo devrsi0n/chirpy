@@ -4,7 +4,7 @@ import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
 import { query } from '$/server/common/gql';
 import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { CommonPageProps } from 'types';
+import { CommonPageProps } from '@chirpy-dev/types';
 
 type PathParams = {
   domain: string;

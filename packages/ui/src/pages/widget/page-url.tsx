@@ -1,5 +1,5 @@
 import { useCommentTreeSubscription } from '@chirpy-dev/graphql';
-import { CommonWidgetProps, CommentLeafType } from 'types';
+import { CommonWidgetProps, CommentLeafType } from '@chirpy-dev/types';
 import { isSSRMode } from '@chirpy-dev/utils';
 import { CommentTrees, WidgetLayout, PoweredBy } from '../../blocks';
 import { CommentContextProvider } from '../../contexts';

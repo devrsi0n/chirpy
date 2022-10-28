@@ -17,7 +17,7 @@ import {
 } from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
+import { CommonWidgetProps, Theme, CommentTimelineNode } from '@chirpy-dev/types';
 
 type PathParams = {
   commentId: string;

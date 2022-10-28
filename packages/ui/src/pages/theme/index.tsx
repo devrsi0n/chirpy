@@ -1,5 +1,5 @@
 import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
-import { Theme as ThemeType } from 'types';
+import { Theme as ThemeType } from '@chirpy-dev/types';
 import {
   SiteLayout,
   ThemeEditor,

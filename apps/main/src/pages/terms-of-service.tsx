@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { CommonPageProps, MDXProps } from 'types';
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 

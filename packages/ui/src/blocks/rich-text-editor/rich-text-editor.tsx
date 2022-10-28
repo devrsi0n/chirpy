@@ -13,7 +13,7 @@ import { textInput } from '../../styles/common';
 
 import { MainButton } from './main-button';
 import { Toolbar } from './toolbar';
-import { RTEValue } from 'types';
+import { RTEValue } from '@chirpy-dev/types';
 
 interface IBaseProps {
   onSubmit?: (value: RTEValue) => Promise<void>;

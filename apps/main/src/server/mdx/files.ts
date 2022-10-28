@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 import { POST_ROOT } from '../common/constants';
-import { Directory, FileStructure } from 'types/src/file';
+import { Directory, FileStructure } from '@chirpy-dev/types';
 import { getFrontMatters } from './front-matter';
 
 const ignoreFileList = new Set(['meta.json']);
