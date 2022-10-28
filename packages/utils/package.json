@@ -7,6 +7,7 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
+    "@chirpy-dev/types": "workspace:*",
     "@tiptap/core": "2.0.0-beta.199",
     "@tiptap/react": "2.0.0-beta.199",
     "@types/node": "16.11.45",
@@ -14,8 +15,7 @@
     "@types/react-dom": "18.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.8.4",
-    "@chirpy-dev/types": "workspace:*"
+    "typescript": "4.8.4"
   },
   "publishConfig": {
     "access": "public"
