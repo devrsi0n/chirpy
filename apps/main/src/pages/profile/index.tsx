@@ -1,1 +1,1 @@
-export { Profile as default } from 'ui';
+export { Profile as default } from '@chirpy-dev/ui';

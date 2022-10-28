@@ -13,4 +13,4 @@ export const getStaticProps: GetStaticProps<MDXProps> = async () => {
   };
 };
 
-export { PrivacyPolicy as default } from 'ui';
+export { PrivacyPolicy as default } from '@chirpy-dev/ui';

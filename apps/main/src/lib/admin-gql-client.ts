@@ -4,7 +4,7 @@ import { WebSocket } from 'ws';
 
 import { getPublicEnvVar } from 'utils';
 
-import { getGqlClientOptions } from 'ui';
+import { getGqlClientOptions } from '@chirpy-dev/ui';
 
 // Server WS client
 class ChirpyWebSocket extends WebSocket {

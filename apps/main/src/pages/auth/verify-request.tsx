@@ -1,1 +1,1 @@
-export { VerifyRequest as default } from 'ui';
+export { VerifyRequest as default } from '@chirpy-dev/ui';

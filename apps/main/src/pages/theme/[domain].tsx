@@ -5,7 +5,7 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
-import { ThemeProps } from 'ui';
+import { ThemeProps } from '@chirpy-dev/ui';
 import { query } from '$/server/common/gql';
 import { ThemeProjectByPkDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
@@ -55,4 +55,4 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   };
 };
 
-export { ThemePage as default } from 'ui';
+export { ThemePage as default } from '@chirpy-dev/ui';

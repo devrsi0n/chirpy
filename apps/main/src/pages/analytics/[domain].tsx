@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { AnalyticsByDomainPageProps } from 'ui';
+import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
 import { query } from '$/server/common/gql';
 import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
@@ -51,4 +51,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export { AnalyticsByDomainPage as default } from 'ui';
+export { AnalyticsByDomainPage as default } from '@chirpy-dev/ui';

@@ -1,4 +1,4 @@
-import { cpDayjs } from 'ui';
+import { cpDayjs } from '@chirpy-dev/ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -114,4 +114,4 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
 };
 
-export { CommentTimelineWidget as default } from 'ui';
+export { CommentTimelineWidget as default } from '@chirpy-dev/ui';

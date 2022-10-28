@@ -9,7 +9,7 @@ const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
 const withTM = require('next-transpile-modules')([
-  'ui',
+  '@chirpy-dev/ui',
   'utils',
   '@chirpy-dev/graphql',
 ]);

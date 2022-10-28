@@ -54,7 +54,7 @@
     "superjson": "1.9.1",
     "type-fest": "2.19.0",
     "types": "workspace:*",
-    "ui": "workspace:*",
+    "@chirpy-dev/ui": "workspace:*",
     "urql": "3.0.3",
     "utils": "workspace:*",
     "web-push": "3.5.0",

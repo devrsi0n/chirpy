@@ -143,4 +143,4 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-export { CommentWidgetPage as default } from 'ui';
+export { CommentWidgetPage as default } from '@chirpy-dev/ui';

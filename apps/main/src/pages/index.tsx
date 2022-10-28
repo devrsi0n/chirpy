@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { HomeProps } from 'ui';
+import { HomeProps } from '@chirpy-dev/ui';
 import { isENVDev } from 'utils';
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
@@ -26,4 +26,4 @@ export const strings = {
   },
 };
 
-export { HomePage as default } from 'ui';
+export { HomePage as default } from '@chirpy-dev/ui';

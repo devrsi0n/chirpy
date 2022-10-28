@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { SideBarProps } from 'ui';
+import { SideBarProps } from '@chirpy-dev/ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 import { CommonPageProps, MDXProps } from 'types';
@@ -50,4 +50,4 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
   };
 };
 
-export { Docs as default } from 'ui';
+export { Docs as default } from '@chirpy-dev/ui';

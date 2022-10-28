@@ -1,1 +1,1 @@
-export { Redirecting as default } from 'ui';
+export { Redirecting as default } from '@chirpy-dev/ui';

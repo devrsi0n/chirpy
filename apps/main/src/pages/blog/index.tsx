@@ -22,4 +22,4 @@ export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
   };
 };
 
-export { BlogHome as default } from 'ui';
+export { BlogHome as default } from '@chirpy-dev/ui';

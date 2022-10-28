@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'ui';
+import { getSession } from '@chirpy-dev/ui';
 import { PushSubscription } from 'web-push';
 
 import { mutate } from '$/server/common/gql';

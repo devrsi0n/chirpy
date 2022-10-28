@@ -51,4 +51,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export { BlogPost as default } from 'ui';
+export { BlogPost as default } from '@chirpy-dev/ui';

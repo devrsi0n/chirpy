@@ -1,1 +1,1 @@
-export { DeleteConfirmation as default } from 'ui';
+export { DeleteConfirmation as default } from '@chirpy-dev/ui';

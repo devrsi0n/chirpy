@@ -11,4 +11,4 @@ export const getStaticProps: GetStaticProps<
   return { props: termsProps };
 };
 
-export { TermsOfService as default } from 'ui';
+export { TermsOfService as default } from '@chirpy-dev/ui';

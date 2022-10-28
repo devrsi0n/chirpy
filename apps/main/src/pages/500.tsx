@@ -1,1 +1,1 @@
-export { Custom500 as default } from 'ui';
+export { Custom500 as default } from '@chirpy-dev/ui';

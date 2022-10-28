@@ -1,3 +1,3 @@
-import 'ui/src/styles/global-styles.scss';
+import '@chirpy-dev/ui/src/styles/global-styles.scss';
 
-export { App as default, reportWebVitals } from 'ui';
+export { App as default, reportWebVitals } from '@chirpy-dev/ui';

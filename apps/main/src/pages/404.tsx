@@ -1,1 +1,1 @@
-export { Custom404 as default } from 'ui';
+export { Custom404 as default } from '@chirpy-dev/ui';

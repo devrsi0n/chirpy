@@ -1,5 +1,5 @@
 {
-  "name": "ui",
+  "name": "@chirpy-dev/ui",
   "version": "0.0.1",
   "license": "AGPL-3.0-or-later",
   "main": "./src/index.ts",

@@ -130,6 +130,7 @@ importers:
       '@chirpy-dev/graphql': workspace:*
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/ui': workspace:*
       '@next/bundle-analyzer': 12.3.1
       '@radix-ui/colors': 0.1.8
       '@relative-ci/agent': 3.1.3
@@ -190,7 +191,6 @@ importers:
       type-fest: 2.19.0
       types: workspace:*
       typescript: 4.8.4
-      ui: workspace:*
       urql: 3.0.3
       utils: workspace:*
       web-push: 3.5.0
@@ -199,6 +199,7 @@ importers:
       ws: 8.8.1
     dependencies:
       '@chirpy-dev/graphql': link:../../packages/graphql
+      '@chirpy-dev/ui': link:../../packages/ui
       '@radix-ui/colors': 0.1.8
       '@sendinblue/client': 3.2.2
       '@tensorflow-models/toxicity': 1.2.2_ce7e77rhh6oipcy6kxvkentnmi
@@ -236,7 +237,6 @@ importers:
       superjson: 1.9.1
       type-fest: 2.19.0
       types: link:../../packages/types
-      ui: link:../../packages/ui
       urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
       utils: link:../../packages/utils
       web-push: 3.5.0
@@ -18506,7 +18506,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18538,7 +18538,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18550,7 +18550,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
