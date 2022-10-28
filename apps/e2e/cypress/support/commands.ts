@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import '@testing-library/cypress/add-commands';
 
-import { waitGraphql } from '../fixtures/@chirpy-dev/utils';
+import { waitGraphql } from '../fixtures/utils';
 
 Cypress.Commands.add('login', () => {
   cy.intercept(Cypress.env('NEXT_PUBLIC_HASURA_HTTP_ORIGIN')).as('graphql');
