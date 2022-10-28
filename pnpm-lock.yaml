@@ -509,7 +509,7 @@ importers:
       '@types/react-dom': 18.0.6
       '@types/react-flatpickr': 3.8.7
       '@urql/devtools': 2.0.3
-      '@urql/exchange-graphcache': 5.0.1
+      '@urql/exchange-graphcache': 5.0.4
       '@urql/exchange-refocus': 1.0.0
       '@urql/storybook-addon': 2.0.1
       autoprefixer: 10.4.12
@@ -581,7 +581,7 @@ importers:
       '@tiptap/react': 2.0.0-beta.199_la4wgmshzfaebh4rq27xtbsa3y
       '@tiptap/starter-kit': 2.0.0-beta.199
       '@urql/devtools': 2.0.3_graphql@16.6.0
-      '@urql/exchange-graphcache': 5.0.1_graphql@16.6.0
+      '@urql/exchange-graphcache': 5.0.4_graphql@16.6.0
       '@urql/exchange-refocus': 1.0.0_graphql@16.6.0
       avvvatars-react: 0.4.2_vt6aeitzauirmcdhimiad2yjxy
       canvas-confetti: 1.5.1
@@ -8538,6 +8538,16 @@ packages:
       graphql: 16.6.0
       wonka: 6.0.0
 
+  /@urql/core/3.0.5_graphql@16.6.0:
+    resolution: {integrity: sha512-6/1HG+WEAcPs+hXSFnxWBTWkNUwa8dj2cHysWokMaFIbAioGtUaSdxp2q9FDMtWAIGdc640NFSt2B8itGLdoAA==}
+    peerDependencies:
+      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
+    dependencies:
+      '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
+      graphql: 16.6.0
+      wonka: 6.0.0
+    dev: false
+
   /@urql/devtools/2.0.3_graphql@16.6.0:
     resolution: {integrity: sha512-TktPLiBS9LcBPHD6qcnb8wqOVcg3Bx0iCtvQ80uPpfofwwBGJmqnQTjUdEFU6kwaLOFZULQ9+Uo4831G823mQw==}
     peerDependencies:
@@ -8566,12 +8576,12 @@ packages:
     dev: true
     optional: true
 
-  /@urql/exchange-graphcache/5.0.1_graphql@16.6.0:
-    resolution: {integrity: sha512-sbornx6SaAADycfEex0+npdJwhImSKa+76DAnOjF48wls5bYlG+ewDe0ipWdmV+gQ+t9SDFPLAHBzFURTlQacQ==}
+  /@urql/exchange-graphcache/5.0.4_graphql@16.6.0:
+    resolution: {integrity: sha512-h8wuyss+02SNIfQYt0MjRsKrBJ09N64J75fwMyZKThr+DGdWQVbpmJmEV9+GbzIwSK8oWZH8rs3jlvt7LWWPZA==}
     peerDependencies:
       graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || 16
     dependencies:
-      '@urql/core': 3.0.3_graphql@16.6.0
+      '@urql/core': 3.0.5_graphql@16.6.0
       graphql: 16.6.0
       wonka: 6.0.0
     dev: false
