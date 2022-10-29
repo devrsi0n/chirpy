@@ -302,7 +302,7 @@ importers:
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2
-      postcss-preset-env: 7.8.1
+      postcss-preset-env: 7.8.2
       tailwindcss: 3.2.1
       typescript: 4.8.4
     dependencies:
@@ -313,7 +313,7 @@ importers:
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.16
-      postcss-preset-env: 7.8.1_postcss@8.4.16
+      postcss-preset-env: 7.8.2_postcss@8.4.16
       tailwindcss: 3.2.1_postcss@8.4.16
       typescript: 4.8.4
 
@@ -18522,7 +18522,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18554,7 +18554,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18566,7 +18566,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -20212,8 +20212,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: false
 
-  /postcss-preset-env/7.8.1_postcss@8.4.16:
-    resolution: {integrity: sha512-8884CHxQaoN1i4iEK+JvzOe8emODb5R4p/0dw4yEdo7QM4RdUk2sBx0fnzFyJt8BLfZSCGeVkKZ4HC564waBpQ==}
+  /postcss-preset-env/7.8.2_postcss@8.4.16:
+    resolution: {integrity: sha512-rSMUEaOCnovKnwc5LvBDHUDzpGP+nrUeWZGWt9M72fBvckCi45JmnJigUr4QG4zZeOHmOCNCZnd2LKDvP++ZuQ==}
     engines: {node: ^12 || ^14 || >=16}
     peerDependencies:
       postcss: ^8.2
