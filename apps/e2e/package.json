@@ -11,7 +11,7 @@
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@testing-library/cypress": "8.0.3",
     "@types/node": "16.11.45",
-    "cypress": "10.3.0",
+    "cypress": "10.11.0",
     "dotenv": "16.0.1",
     "dotenv-cli": "5.1.0",
     "dotenv-expand": "8.0.3",
