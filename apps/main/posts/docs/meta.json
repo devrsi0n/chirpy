@@ -1,6 +1,6 @@
 {
   "directories": [
-    "index.mdx",
+    "welcome.mdx",
     "get-started.mdx",
     "features/privacy-friendly.mdx",
     "features/theme.mdx",

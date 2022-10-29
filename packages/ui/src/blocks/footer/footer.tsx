@@ -31,7 +31,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
       <nav
         className={`flex w-full flex-row flex-wrap justify-center space-x-6 leading-8`}
       >
-        <Link href="/docs/index" variant="secondary">
+        <Link href="/docs" variant="secondary">
           Docs
         </Link>
         <Link href="/blog" variant="secondary">

@@ -40,7 +40,7 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
                 />
               </Button>
             </Link>
-            <Link variant="plain" href="/docs/index" tabIndex={-1}>
+            <Link variant="plain" href="/docs" tabIndex={-1}>
               <Button>{strings.callToAction.secondary}</Button>
             </Link>
           </div>

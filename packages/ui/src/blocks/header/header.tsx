@@ -50,7 +50,7 @@ export function Header(): JSX.Element {
               <SideMenu.Item>
                 <Link
                   size="lg"
-                  href="/docs/index"
+                  href="/docs"
                   className={styles}
                   highlightPattern={/^\/docs/}
                 >
@@ -94,7 +94,7 @@ export function Header(): JSX.Element {
                   Pricing
                 </Link>
               )}
-              <Link href="/docs/index" highlightPattern={/^\/docs/}>
+              <Link href="/docs" highlightPattern={/^\/docs/}>
                 Docs
               </Link>
               <Link href="/blog" highlightPattern={/^\/blog/}>
