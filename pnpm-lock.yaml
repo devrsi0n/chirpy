@@ -159,7 +159,7 @@ importers:
       dotenv-expand: 8.0.3
       eslint: 8.23.0
       eta: 1.12.3
-      github-slugger: 1.4.0
+      github-slugger: 1.5.0
       graphql: 16.6.0
       graphql-tag: 2.12.6
       graphql-ws: 5.10.1
@@ -210,7 +210,7 @@ importers:
       '@tensorflow/tfjs-core': 3.18.0
       cors: 2.8.5
       eta: 1.12.3
-      github-slugger: 1.4.0
+      github-slugger: 1.5.0
       graphql: 16.6.0
       graphql-tag: 2.12.6_graphql@16.6.0
       graphql-ws: 5.10.1_graphql@16.6.0
@@ -14389,8 +14389,8 @@ packages:
       assert-plus: 1.0.0
     dev: false
 
-  /github-slugger/1.4.0:
-    resolution: {integrity: sha512-w0dzqw/nt51xMVmlaV1+JRzN+oCa1KfcgGEWhxUG16wbdA+Xnt/yoFO8Z8x/V82ZcZ0wy6ln9QDup5avbhiDhQ==}
+  /github-slugger/1.5.0:
+    resolution: {integrity: sha512-wIh+gKBI9Nshz2o46B0B3f5k/W+WI9ZAv6y5Dn5WJ5SK1t0TnDimB4WE5rmTD05ZAIn8HALCZVmCsvj0w0v0lw==}
 
   /github-url-from-git/1.5.0:
     resolution: {integrity: sha512-WWOec4aRI7YAykQ9+BHmzjyNlkfJFG8QLXnDTsLz/kZefq7qkzdfo4p6fkYYMIq1aj+gZcQs/1HQhQh3DPPxlQ==}
@@ -18522,7 +18522,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18554,7 +18554,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18566,7 +18566,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -21522,7 +21522,7 @@ packages:
     resolution: {integrity: sha512-X5v3wV/meuOX9NFcGhJvUpEjIvQl2gDvjg3z40RVprYFt7q3th4qMmYLULiu3gXvbNX1ppx+oaa6JyY1W67pTA==}
     dependencies:
       '@types/hast': 2.3.4
-      github-slugger: 1.4.0
+      github-slugger: 1.5.0
       hast-util-has-property: 2.0.0
       hast-util-heading-rank: 2.1.0
       hast-util-to-string: 2.0.0
@@ -21611,7 +21611,7 @@ packages:
   /remark-slug/6.1.0:
     resolution: {integrity: sha512-oGCxDF9deA8phWvxFuyr3oSJsdyUAxMFbA0mZ7Y1Sas+emILtO+e5WutF9564gDsEN4IXaQXm5pFo6MLH+YmwQ==}
     dependencies:
-      github-slugger: 1.4.0
+      github-slugger: 1.5.0
       mdast-util-to-string: 1.1.0
       unist-util-visit: 2.0.3
     dev: true
