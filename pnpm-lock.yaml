@@ -171,7 +171,7 @@ importers:
       next: 12.3.1
       next-auth: 4.10.3
       next-axiom: 0.14.0
-      next-connect: 0.12.2
+      next-connect: 0.13.0
       next-mdx-remote: 3.0.8
       next-plausible: 3.6.3
       next-themes: 0.2.1
@@ -221,7 +221,7 @@ importers:
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_br325yun545l5vwdnneu6tztxq
       next-axiom: 0.14.0_next@12.3.1
-      next-connect: 0.12.2
+      next-connect: 0.13.0
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.6.3_azq6kxkn3od7qdylwkyksrwopy
       next-themes: 0.2.1_azq6kxkn3od7qdylwkyksrwopy
@@ -18522,12 +18522,12 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
-  /next-connect/0.12.2:
-    resolution: {integrity: sha512-B/zKHPs5S7XWvAVsZVLvOeY2eL2U3g0W/BgCDetEJRcNDzxX2vi8rzqBuEoLLPlI8LvtHwujDVUFFjSgOEZTbA==}
+  /next-connect/0.13.0:
+    resolution: {integrity: sha512-f2G4edY01XomjCECSrgOpb/zzQinJO6Whd8Zds0+rLUYhj5cLwkh6FVvZsQCSSbxSc4k9nCwNuk5NLIhvO1gUA==}
     dependencies:
       trouter: 3.2.0
     dev: false
@@ -18554,7 +18554,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18566,7 +18566,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
