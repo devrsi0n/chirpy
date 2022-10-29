@@ -1,11 +1,9 @@
-import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
-import { SideBarProps } from '@chirpy-dev/ui';
+import { DocsProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
-import { getMDXPropsBySlug } from '$/server/mdx/mdx';
+import { getMDXPropsBySlug, getNearNav } from '$/server/mdx/mdx';
 
-type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
 
 type PathParam = {
@@ -36,15 +34,17 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
   if (!params?.slug) {
     return { notFound: true };
   }
-  const [mdxProps, directories] = await Promise.all([
+  const [mdxProps, directories, nearNav] = await Promise.all([
     getMDXPropsBySlug([CONTAINER_FOLDER, ...params.slug].join('/')),
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
+    getNearNav(CONTAINER_FOLDER, params.slug.join('/')),
   ]);
 
   return {
     props: {
       ...mdxProps,
       directories,
+      nearNav,
     },
     revalidate: 3600,
   };

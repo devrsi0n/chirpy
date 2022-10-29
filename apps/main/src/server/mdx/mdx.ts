@@ -1,4 +1,5 @@
 import { MDXProps } from '@chirpy-dev/types';
+import { NearNav } from '@chirpy-dev/ui';
 import { promises as fs } from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
@@ -37,6 +38,53 @@ export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
       ...data,
     },
   };
+}
+
+/**
+ * Get NearNav from near mdx files
+ */
+export async function getNearNav(subFolder: string, slug: string) {
+  const directory = `${slug}.mdx`;
+  const meta = await fs.readFile(
+    path.resolve(POST_ROOT, subFolder, 'meta.json'),
+    'utf8',
+  );
+  const metaJson = JSON.parse(meta) as {
+    directories: string[];
+  };
+  const index = metaJson.directories.indexOf(directory);
+  const nearNav: NearNav = {};
+  const getNearFrontMatter = async (idx: number) => {
+    const directoryPath = path.resolve(
+      POST_ROOT,
+      subFolder,
+      metaJson.directories[idx],
+    );
+    return await getFrontMatters(directoryPath);
+  };
+  if (index > 0) {
+    const prevFrontMatter = await getNearFrontMatter(index - 1);
+    nearNav.prev = {
+      title: prevFrontMatter.data.title,
+      link: path.join(
+        '/',
+        subFolder,
+        metaJson.directories[index - 1].replace('.mdx', ''),
+      ),
+    };
+  }
+  if (index < metaJson.directories.length - 1) {
+    const nextFrontMatter = await getNearFrontMatter(index + 1);
+    nearNav.next = {
+      title: nextFrontMatter.data.title,
+      link: path.join(
+        '/',
+        subFolder,
+        metaJson.directories[index + 1].replace('.mdx', ''),
+      ),
+    };
+  }
+  return nearNav;
 }
 
 export type FrontMatterData = {

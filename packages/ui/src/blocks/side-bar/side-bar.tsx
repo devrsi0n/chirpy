@@ -24,7 +24,7 @@ export function SideBar({ directories, title, className }: SideBarProps) {
   const header = (
     <>
       {title && hasValidDirectories && (
-        <Heading as="h4" className="px-1 pb-4 font-bold text-gray-1100">
+        <Heading as="h4" className="px-1 pb-4 font-semibold text-gray-1100">
           {title}
         </Heading>
       )}
@@ -34,13 +34,13 @@ export function SideBar({ directories, title, className }: SideBarProps) {
     <div>
       <aside
         className={clsx(
-          'sticky top-16 isolate hidden h-[calc(100vh-4rem)] w-full flex-shrink-0 flex-col items-start px-4 sm:flex md:w-64',
+          'sticky top-16 isolate hidden h-[calc(100vh-4rem)] w-full flex-shrink-0 flex-col items-start border-r border-gray-500 pl-4 text-gray-1200 sm:flex md:w-64',
           className,
         )}
       >
         {header}
         {hasValidDirectories && (
-          <div className="w-full overflow-y-auto">
+          <div className="w-full overflow-y-auto pr-1">
             <Directories directories={directories} />
           </div>
         )}
@@ -85,8 +85,9 @@ function Directories({
 
 function DirectoryItem({ directory: dir }: { directory: Directory }) {
   const router = useRouter();
-  const [isOpened, setIsOpened] = React.useState(false);
-  const isActive = isButtonActive(dir, router.asPath);
+  const [isOpened, setIsOpened] = React.useState(() =>
+    isButtonActive(dir, router.asPath),
+  );
   const listMarker = dir.route ? (
     <span className="mr-3.5 inline-block h-1.5 w-1.5 rounded-full bg-current hover:bg-gray-1200" />
   ) : (
@@ -99,6 +100,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
       }}
     />
   );
+
   return (
     <>
       {dir.route ? (
@@ -117,11 +119,7 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         </Link>
       ) : (
         <button
-          className={clsx(
-            `capitalize text-gray-1100`,
-            clickableItemStyle,
-            isActive && activeStyle,
-          )}
+          className={clsx(`capitalize`, clickableItemStyle)}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
           aria-label="Expand children routes"
@@ -141,10 +139,10 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
 }
 
 const clickableItemStyle = [
-  `transition flex flex-row items-center justify-start`,
+  `flex flex-row items-center justify-start`,
   listHoverable,
 ];
-const activeStyle = `text-gray-1200 font-bold`;
+const activeStyle = `bg-primary-500 border border-primary-700 text-primary-1100`;
 
 function isButtonActive(dir: Directory, pathname: string) {
   if (dir.route === pathname) {

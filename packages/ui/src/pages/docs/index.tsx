@@ -1,4 +1,5 @@
 import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
+import clsx from 'clsx';
 import { MDXRemote } from 'next-mdx-remote';
 
 import {
@@ -8,13 +9,28 @@ import {
   SideBar,
   SideBarProps,
 } from '../../blocks';
+import { IconChevronRight, Link } from '../../components';
+import { listHoverable } from '../../styles/common';
 
-type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
+export type DocNav = {
+  title: string;
+  link: string;
+};
+
+export type NearNav = {
+  prev?: DocNav;
+  next?: DocNav;
+};
+
+export type DocsProps = MDXProps &
+  Pick<SideBarProps, 'directories'> &
+  CommonPageProps & { nearNav: NearNav };
 
 export function Docs({
   mdxSource,
   frontMatter,
   directories = [],
+  nearNav,
 }: DocsProps): JSX.Element {
   return (
     <SiteLayout
@@ -22,7 +38,7 @@ export function Docs({
       hideFullBleed
       hideFooter
       styles={{
-        container: 'py-0',
+        container: 'py-0 md:mx-0',
       }}
     >
       <div className="flex min-h-full flex-col">
@@ -30,7 +46,7 @@ export function Docs({
           <SideBar
             className="pt-10"
             directories={directories}
-            title="Documentation"
+            title="Document"
           />
           <div className="flex-1">
             <article className="prose mx-auto overflow-x-hidden pt-10">
@@ -38,6 +54,41 @@ export function Docs({
                 <MDXRemote {...mdxSource} components={MDXComponents} />
               )}
             </article>
+            <section className="mt-10">
+              <div className="mx-auto flex max-w-[65ch] flex-row justify-between">
+                {nearNav.prev ? (
+                  <Link
+                    size="lg"
+                    variant="plain"
+                    href={nearNav.prev.link}
+                    className={clsx(
+                      'flex -translate-x-5 flex-row items-center px-3 py-2 text-gray-1200',
+                      listHoverable,
+                    )}
+                  >
+                    <IconChevronRight size={28} className="rotate-180" />
+                    <span>{nearNav.prev.title}</span>
+                  </Link>
+                ) : (
+                  // To fill left empty when there is only 1 next
+                  <div />
+                )}
+                {nearNav.next && (
+                  <Link
+                    size="lg"
+                    variant="plain"
+                    href={nearNav.next.link}
+                    className={clsx(
+                      'flex translate-x-5 flex-row items-center px-3 py-2 text-gray-1200',
+                      listHoverable,
+                    )}
+                  >
+                    <span>{nearNav.next.title}</span>
+                    <IconChevronRight size={28} className="" />
+                  </Link>
+                )}
+              </div>
+            </section>
             <Footer />
           </div>
         </section>
