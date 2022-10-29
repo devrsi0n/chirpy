@@ -6,7 +6,6 @@ import {
   WidgetThemeProviderProps,
 } from '../../contexts/theme-context';
 import { useWidgetSideEffects } from '../../hooks/use-widget-side-effects';
-
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
 
 export type WidgetLayoutProps = {

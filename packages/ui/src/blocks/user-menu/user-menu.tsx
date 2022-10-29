@@ -1,3 +1,8 @@
+import {
+  FEEDBACK_LINK,
+  SIGN_IN_SUCCESS_KEY,
+  GRAPHQL_CACHE_DB_NAME,
+} from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
@@ -15,11 +20,6 @@ import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
-import {
-  FEEDBACK_LINK,
-  SIGN_IN_SUCCESS_KEY,
-  GRAPHQL_CACHE_DB_NAME,
-} from '@chirpy-dev/utils';
 
 export type UserMenuProps = {
   variant: 'Widget' | 'Nav';

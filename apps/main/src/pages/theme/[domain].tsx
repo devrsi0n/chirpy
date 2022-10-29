@@ -1,3 +1,5 @@
+import { ThemeProjectByPkDocument } from '@chirpy-dev/graphql';
+import { ThemeProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -5,9 +7,7 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
-import { ThemeProps } from '@chirpy-dev/ui';
 import { query } from '$/server/common/gql';
-import { ThemeProjectByPkDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {

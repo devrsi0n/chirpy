@@ -36,7 +36,7 @@
     "build:local": {
       "cache": false
     },
-    "g:gql": {
+    "@chirpy-dev/graphql": {
       "inputs": ["src/**/*.graphql"],
       "cache": false
     }

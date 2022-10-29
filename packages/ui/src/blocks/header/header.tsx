@@ -6,7 +6,6 @@ import { UserMenu } from '../../blocks/user-menu';
 import { Link } from '../../components/link';
 import { Logo } from '../../components/logo';
 import { useCurrentUser } from '../../contexts/current-user-context';
-
 import { NotificationHub } from '../notification-hub';
 import { SideMenu } from '../side-menu';
 

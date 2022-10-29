@@ -2,10 +2,9 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { Link } from '../../components/link';
-
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
+import { Link } from '../../components/link';
 import numberFormatter from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';

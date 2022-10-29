@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { ConfirmUserFields, SiteLayout } from '../../blocks';
 import { Button, Heading, Link, Text } from '../../components';
-import { useCelebration } from '../../hooks';
 import { useCurrentUser } from '../../contexts';
+import { useCelebration } from '../../hooks';
 import { hasValidUserProfile } from '../../utilities';
 
 // export type WelcomeProps = React.PropsWithChildren<{}>;

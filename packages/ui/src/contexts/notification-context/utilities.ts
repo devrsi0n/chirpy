@@ -1,5 +1,6 @@
-import { logger } from '../../utilities/logger';
 import { getPublicEnvVar } from '@chirpy-dev/utils';
+
+import { logger } from '../../utilities/logger';
 
 const NOTIFICATION_DID_REGISTER_KEY =
   'chirpy.notification-subscription.did-register';

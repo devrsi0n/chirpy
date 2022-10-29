@@ -1,3 +1,4 @@
+import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import * as React from 'react';
 import FlipMove from 'react-flip-move';
@@ -6,11 +7,9 @@ import {
   IconMessageSquare,
   IconFile,
   IconExternalLink,
-  Link
+  Link,
 } from '../../../../components';
 import { usePrevious } from '../../../../hooks/use-previous';
-import { ANALYTICS_DOMAIN, WIDGET_COMMENT_PATH } from '@chirpy-dev/utils';
-
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';

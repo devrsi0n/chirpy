@@ -1,8 +1,8 @@
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
-import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';

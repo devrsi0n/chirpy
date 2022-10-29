@@ -4,7 +4,6 @@ import * as React from 'react';
 
 import { Divider } from '../../components/divider';
 import { IconImage, IconLink2 } from '../../components/icons';
-
 import { MarkButton, BlockButton } from './format-buttons';
 import { RTEPopoverButton } from './rte-popover-button';
 

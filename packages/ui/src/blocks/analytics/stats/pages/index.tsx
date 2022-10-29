@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Tabs } from '../../../../components/tabs';
-
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import { AnalyticsCard } from '../fine-components';

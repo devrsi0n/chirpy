@@ -1,10 +1,10 @@
+import { MDXProps } from '@chirpy-dev/types';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
-import { MDXProps } from '@chirpy-dev/types';
 
 import { CommentWidget, SiteLayout, MDXComponents } from '../../blocks';
-import { useHasMounted } from '../../hooks';
 import { Image } from '../../components';
+import { useHasMounted } from '../../hooks';
 import { getBannerProps } from '../../utilities';
 
 type BlogProps = MDXProps;

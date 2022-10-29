@@ -1,3 +1,4 @@
+import { useUpdateUserFieldsMutation } from '@chirpy-dev/graphql';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -7,12 +8,11 @@ import { IconCheck, IconLoader, IconSend } from '../../components/icons';
 import { TextField } from '../../components/text-field';
 import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { useUpdateUserFieldsMutation } from '@chirpy-dev/graphql';
 import { useBypassCacheRefetch } from '../../hooks/use-bypass-cache-refetch';
 import { useForm } from '../../hooks/use-form';
 import { logger } from '../../utilities/logger';
-import { sleep } from './utils';
 import { EMAIL_REGEXP } from '../../utilities/validator';
+import { sleep } from './utils';
 
 export type ConfirmUserFieldsProps = {
   //

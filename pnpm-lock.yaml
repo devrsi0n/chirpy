@@ -17,12 +17,12 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/prettier-config': workspace:*
       eslint: 8.23.0
+      husky: 8.0.1
       lint-staged: 13.0.3
       next: 12.3.1
       prettier: 2.7.1
       react: 18.2.0
       react-dom: 18.2.0
-      simple-git-hooks: 2.8.0
       turbo: 1.3.1
     devDependencies:
       '@changesets/changelog-github': 0.4.5
@@ -30,12 +30,12 @@ importers:
       '@chirpy-dev/eslint-config': link:packages/eslint-config
       '@chirpy-dev/prettier-config': link:packages/prettier-config
       eslint: 8.23.0
+      husky: 8.0.1
       lint-staged: 13.0.3
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       prettier: 2.7.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      simple-git-hooks: 2.8.0
       turbo: 1.3.1
 
   apps/comment-bootstrapper:
@@ -15458,6 +15458,12 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: true
 
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /hyperlinker/1.0.0:
     resolution: {integrity: sha512-Ty8UblRWFEcfSuIaajM34LdPXIhbs1ajEX/BBPv24J+enSVaEVY63xQ6lTO9VRYS5LAoghIG0IDJ+p+IPzKUQQ==}
     engines: {node: '>=4'}
@@ -22340,12 +22346,6 @@ packages:
 
   /signedsource/1.0.0:
     resolution: {integrity: sha512-6+eerH9fEnNmi/hyM1DXcRK3pWdoMQtlkQ+ns0ntzunjKqp5i3sKCc80ym8Fib3iaYhdJUOPdhlJWj1tvge2Ww==}
-    dev: true
-
-  /simple-git-hooks/2.8.0:
-    resolution: {integrity: sha512-ocmZQORwa6x9mxg+gVIAp5o4wXiWOHGXyrDBA0+UxGKIEKOyFtL4LWNKkP/2ornQPdlnlDGDteVeYP5FjhIoWA==}
-    hasBin: true
-    requiresBuild: true
     dev: true
 
   /sirv/1.0.19:

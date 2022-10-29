@@ -1,5 +1,6 @@
-import { $ } from 'zx';
 import which from 'which';
+import { $ } from 'zx';
+
 import { logError } from './log';
 
 export async function setupHasura() {

@@ -1,6 +1,5 @@
-import * as React from 'react';
-
 import { isBrowser } from '@chirpy-dev/utils';
+import * as React from 'react';
 
 const createElement = (id: string): HTMLElement => {
   const el = document.createElement('div');

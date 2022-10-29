@@ -1,5 +1,5 @@
-import { promises as fs } from 'fs';
 import { MDXProps } from '@chirpy-dev/types';
+import { promises as fs } from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
 import path from 'path';
 import readingTime from 'reading-time';

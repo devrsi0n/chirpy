@@ -4,7 +4,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { usePortal } from '../../hooks/use-portal';
-
 import { IToast } from './toast-context';
 import { ToastItem } from './toast-item';
 import { useToast } from './use-toast';

@@ -3,7 +3,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { border, textInput, textInputError } from '../../styles/common';
-
 import { easeInOutOpacity } from '../animation';
 import { Text } from '../text/text';
 

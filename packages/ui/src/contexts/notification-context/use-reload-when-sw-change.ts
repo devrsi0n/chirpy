@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
-
 import { checkServiceWorkerCompatibility } from './utilities';
 
 // export interface IUseReloadWhenSwChangeOptions {}

@@ -1,4 +1,5 @@
 import { EVENT_CHANGE_THEME, EVENT_WIDGET_LOADED } from '@chirpy-dev/utils';
+
 import { sendMessageToIframe } from './utilities';
 
 const ATTR_THEME = 'data-chirpy-theme';

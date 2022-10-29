@@ -1,11 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-
 import {
   InsertOnePageDocument,
   PageByUrlDocument,
   UpdatePagesDocument,
   ProjectByDomainDocument,
 } from '@chirpy-dev/graphql';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
 import { mutate, query } from '../common/gql';

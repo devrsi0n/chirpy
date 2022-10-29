@@ -1,6 +1,5 @@
-import * as React from 'react';
-
 import { noop } from '@chirpy-dev/utils';
+import * as React from 'react';
 
 export type ToastType = 'success' | 'warning' | 'error' | 'info';
 

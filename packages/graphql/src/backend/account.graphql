@@ -49,7 +49,10 @@ mutation createAccount(
 
 mutation deleteAccount($provider: String!, $providerAccountId: String!) {
   deleteAccounts(
-    where: { provider: { _eq: $provider }, providerAccountId: { _eq: $providerAccountId } }
+    where: {
+      provider: { _eq: $provider }
+      providerAccountId: { _eq: $providerAccountId }
+    }
   ) {
     returning {
       id

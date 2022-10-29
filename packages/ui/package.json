@@ -7,7 +7,6 @@
     "build:css": "NODE_ENV=production tailwindcss -o public/tailwind.css -m",
     "build:sb": "pnpm run build:css && build-storybook",
     "dev:css": "tailwindcss -o public/tailwind.css --watch",
-    "lint": "TIMING=1 eslint \"**/*.ts*\"",
     "dev": "concurrently 'start-storybook -p 6006' 'pnpm run dev:css'",
     "test": "DEBUG_PRINT_LIMIT=999999 jest --silent=false",
     "test:coverage": "DEBUG_PRINT_LIMIT=999999 jest --silent=false --coverage"

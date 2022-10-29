@@ -1,5 +1,5 @@
-import { CookiesOptions } from 'next-auth';
 import { isENVDev } from '@chirpy-dev/utils';
+import { CookiesOptions } from 'next-auth';
 
 /**
  * Copy from 'https://github.com/nextauthjs/next-auth/blob/227ff2259f/src/core/lib/cookie.ts' as we can't import it directly

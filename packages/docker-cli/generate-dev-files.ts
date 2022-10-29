@@ -1,14 +1,15 @@
-import * as eta from 'eta';
 import dotenv from 'dotenv';
+import * as eta from 'eta';
+import Yaml from 'yaml';
+import { cd, $, sleep } from 'zx';
+
+import { logDebug } from './log';
+import { setupHasura } from './setup-hasura';
 import {
   generateSecreats,
   readRelativeFile,
   writeRelativeFile,
 } from './utilities';
-import Yaml from 'yaml';
-import { logDebug } from './log';
-import { cd, $, sleep } from 'zx';
-import { setupHasura } from './setup-hasura';
 
 eta.configure({
   autoTrim: false,

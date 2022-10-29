@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Directory } from '@chirpy-dev/types';
+import * as React from 'react';
 
 import { SiteLayout } from '../../blocks';
 import { Heading, Image, Link } from '../../components';

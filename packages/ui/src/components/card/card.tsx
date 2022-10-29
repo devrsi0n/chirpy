@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { bluredBg } from '../../styles/common';
-
 import { PolymorphicComponentProps, Box } from '../box';
 
 type CustomComponentOwnProps = {

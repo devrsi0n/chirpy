@@ -14,8 +14,12 @@ export default defineConfig(({ command }) => {
   }
 
   const define = {
-    'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(process.env.NEXT_PUBLIC_APP_URL),
-    'process.env.NODE_ENV': JSON.stringify(isDev ? 'development' : 'production'),
+    'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(
+      process.env.NEXT_PUBLIC_APP_URL,
+    ),
+    'process.env.NODE_ENV': JSON.stringify(
+      isDev ? 'development' : 'production',
+    ),
     // Generate new id with build to force update the service worker
     'process.env.SW_CACHE_ID': JSON.stringify(`${Date.now()}`),
   };

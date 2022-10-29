@@ -1,3 +1,4 @@
+import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
@@ -9,8 +10,6 @@ import {
   UseToggleALikeAction,
 } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
-
 import { CommentTrees } from '../comment-trees';
 import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';

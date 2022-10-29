@@ -1,7 +1,6 @@
-import { GetStaticProps } from 'next';
-
 import { HomeProps } from '@chirpy-dev/ui';
 import { isENVDev } from '@chirpy-dev/utils';
+import { GetStaticProps } from 'next';
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const buildDate = new Date().toISOString();

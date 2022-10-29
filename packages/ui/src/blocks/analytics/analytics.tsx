@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Heading } from '../../components/heading';
-
 import styles from './analytics.module.scss';
 import Datepicker from './datepicker';
 import Filters from './filters';

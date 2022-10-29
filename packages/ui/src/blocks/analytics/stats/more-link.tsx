@@ -1,7 +1,5 @@
 // import React from 'react';
-
 // import { Link } from '../../../components';
-
 import { Site } from '../type';
 
 export type MoreLinkProps = {

@@ -11,7 +11,6 @@ import { Logo } from '../../components/logo';
 import { Text } from '../../components/text';
 import { Toggle } from '../../components/toggle';
 import { SIGN_IN_ERRORS } from '../../strings';
-
 import { CompanyRight } from '../footer';
 import { AnonymousUserSignIn } from './anonymous-user-sign-in';
 import { EmailSignIn } from './email-sign-in';

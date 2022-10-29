@@ -1,4 +1,5 @@
 // @refresh reset
+import { RTEValue } from '@chirpy-dev/types';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -10,10 +11,8 @@ import * as React from 'react';
 
 import { useLocalStorage } from '../../hooks/use-local-storage';
 import { textInput } from '../../styles/common';
-
 import { MainButton } from './main-button';
 import { Toolbar } from './toolbar';
-import { RTEValue } from '@chirpy-dev/types';
 
 interface IBaseProps {
   onSubmit?: (value: RTEValue) => Promise<void>;

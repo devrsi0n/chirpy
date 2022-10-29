@@ -1,13 +1,12 @@
 #!/usr/bin/env ts-node
-
-import { chalk } from 'zx';
-import { generateFiles } from './generate-files';
-import { setupHasura } from './setup-hasura';
-
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { doesPathExist, isValidDomain } from './utilities';
+import { chalk } from 'zx';
+
+import { generateFiles } from './generate-files';
 import { logDebug, logError } from './log';
+import { setupHasura } from './setup-hasura';
+import { doesPathExist, isValidDomain } from './utilities';
 
 const parser = yargs(hideBin(process.argv))
   .option('verbose', {

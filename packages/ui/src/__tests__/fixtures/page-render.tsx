@@ -1,13 +1,11 @@
 import { render as reactRender } from '@testing-library/react';
 import { Provider } from 'urql';
 
-// import '../mocks/next-router';
-
-import { CurrentUserContext, UserData } from '../../contexts';
-
-import { mockUserData } from '../mocks/data/user';
-import { createGqlClient } from '../../utilities';
 import { ToastProvider } from '../../components';
+// import '../mocks/next-router';
+import { CurrentUserContext, UserData } from '../../contexts';
+import { createGqlClient } from '../../utilities';
+import { mockUserData } from '../mocks/data/user';
 
 export const mockRefetchUser = jest.fn();
 const DEFAULT_USER_DATA = {

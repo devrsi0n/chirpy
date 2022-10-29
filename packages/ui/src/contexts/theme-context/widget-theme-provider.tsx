@@ -1,8 +1,7 @@
-import Head from 'next/head';
-import * as React from 'react';
-
 import { Theme } from '@chirpy-dev/types';
 import { noop } from '@chirpy-dev/utils';
+import Head from 'next/head';
+import * as React from 'react';
 
 import { siteTheme } from './site-theme';
 import { useThemeVariables } from './use-theme-variables';

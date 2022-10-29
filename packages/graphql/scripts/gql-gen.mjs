@@ -1,4 +1,5 @@
 #!/usr/bin/env zx
+
 /* eslint-disable no-console */
 import { $, path } from 'zx';
 

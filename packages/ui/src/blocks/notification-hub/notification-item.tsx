@@ -1,3 +1,5 @@
+import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
+import { NotificationType_Enum } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -12,8 +14,6 @@ import {
 import { Link } from '../../components/link';
 import { Menu } from '../../components/menu';
 import { Text, TextProps } from '../../components/text';
-import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
-import { NotificationType_Enum } from '@chirpy-dev/graphql';
 import { useIsWidget } from '../../hooks/use-is-widget';
 import { cpDayjs } from '../../utilities/date';
 

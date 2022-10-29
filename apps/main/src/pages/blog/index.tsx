@@ -1,7 +1,7 @@
+import { Directory } from '@chirpy-dev/types';
 import { GetStaticProps } from 'next';
 
 import { getDirectories } from '$/server/mdx/files';
-import { Directory } from '@chirpy-dev/types';
 
 const CONTAINER_FOLDER = 'blog';
 

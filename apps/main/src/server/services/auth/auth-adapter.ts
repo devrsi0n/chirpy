@@ -1,7 +1,3 @@
-import { camelCase, isArray, transform, isObject } from 'lodash';
-import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
-
-import { mutate, query } from '$/server/common/gql';
 import {
   CreateAccountDocument,
   CreateAccountMutationVariables,
@@ -26,6 +22,10 @@ import {
   DeleteVerificationTokenDocument,
   InsertOneVerificationTokenDocument,
 } from '@chirpy-dev/graphql';
+import { camelCase, isArray, transform, isObject } from 'lodash';
+import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
+
+import { mutate, query } from '$/server/common/gql';
 
 import { getUserByPk } from '../mutation-event/utilities';
 import { generateUsername } from './utilities';

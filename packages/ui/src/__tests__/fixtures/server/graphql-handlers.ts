@@ -1,10 +1,10 @@
-import { graphql } from 'msw';
-
-import { mockNotificationData } from '../../mocks/data/notification-data';
 import {
   CurrentNotificationMessagesQuery,
   CurrentNotificationMessagesQueryVariables,
 } from '@chirpy-dev/graphql';
+import { graphql } from 'msw';
+
+import { mockNotificationData } from '../../mocks/data/notification-data';
 
 export const graphqlHandlers = [
   graphql.query('currentUser', (req, res, ctx) => {

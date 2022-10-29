@@ -1,7 +1,6 @@
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
-
-import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

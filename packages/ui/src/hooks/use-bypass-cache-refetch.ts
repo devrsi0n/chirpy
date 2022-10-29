@@ -1,7 +1,7 @@
+import { Refetch } from '@chirpy-dev/types';
 import { useSession } from 'next-auth/react';
 
 import { getAuthHeaders } from '../utilities/gql-client';
-import { Refetch } from '@chirpy-dev/types';
 
 /**
  * Bypass gql cache

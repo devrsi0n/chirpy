@@ -4,7 +4,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { bluredOverlay, cardBg } from '../../styles/common';
-
 import { easeInOut, easeInOutOpacity } from '../animation';
 import { IconButton } from '../button';
 import { IconAlertTriangle, IconX } from '../icons';

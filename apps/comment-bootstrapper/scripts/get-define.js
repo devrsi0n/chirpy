@@ -6,7 +6,9 @@ function getDefine() {
   dotenv.config({ path: path.resolve(__dirname, `../../main/.env.local`) });
 
   return {
-    'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(process.env.NEXT_PUBLIC_APP_URL),
+    'process.env.NEXT_PUBLIC_APP_URL': JSON.stringify(
+      process.env.NEXT_PUBLIC_APP_URL,
+    ),
   };
 }
 

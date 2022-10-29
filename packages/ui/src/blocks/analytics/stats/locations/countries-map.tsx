@@ -1,11 +1,10 @@
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import * as d3 from 'd3';
 // @ts-ignore
 import Datamap from 'datamaps';
 import { NextRouter } from 'next/router';
 import React from 'react';
-
-import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';

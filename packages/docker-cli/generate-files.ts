@@ -1,6 +1,7 @@
+import * as eta from 'eta';
 import { $ } from 'zx';
 
-import * as eta from 'eta';
+import { logDebug } from './log';
 import {
   readCWDFile,
   moveCWDFile,
@@ -8,7 +9,6 @@ import {
   removeCWDFile,
   generateSecreats,
 } from './utilities';
-import { logDebug } from './log';
 
 type Options = {
   verbose?: boolean;
