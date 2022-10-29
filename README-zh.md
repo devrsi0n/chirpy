@@ -1,8 +1,8 @@
 # Chirpy
 
-![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=Chirpy&style=for-the-badge)
-[![chirpy](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
+[![Vercel](https://img.shields.io/github/deployments/devrsi0n/chirpy/production?color=black&logo=vercel)](https://github.com/devrsi0n/chirpy/deployments)
+[![Cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&logo=cypress&color=black)](https://dashboard.cypress.io/projects/2p3w5f/runs)
+[![Twitter Chirpy](https://img.shields.io/twitter/url?color=black&logoColor=black&url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
 
 <img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
