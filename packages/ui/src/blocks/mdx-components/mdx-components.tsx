@@ -27,7 +27,14 @@ interface PreProps {
 
 function Pre({ children, className, ...restProps }: PreProps): JSX.Element {
   return (
-    <pre {...restProps} className={clsx(styles.blockPre, className)}>
+    <pre
+      {...restProps}
+      className={clsx(
+        'not-prose whitespace-normal break-all',
+        styles.blockPre,
+        className,
+      )}
+    >
       {children}
     </pre>
   );

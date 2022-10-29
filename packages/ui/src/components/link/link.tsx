@@ -93,7 +93,11 @@ export const Link = React.forwardRef(function Link(
       {variant === 'plain' ? (
         <a
           {...commonProps}
-          className={clsx(disabled && disabledStyle, className)}
+          className={clsx(
+            size && sizeStyles[size],
+            disabled && disabledStyle,
+            className,
+          )}
           onClick={handler}
           ref={ref}
         >
