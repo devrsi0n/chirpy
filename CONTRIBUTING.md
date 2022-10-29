@@ -27,8 +27,8 @@ pnpm install
 # Copy .env-template to .env.local without any modification
 cp .env-template .env.local
 # See your changes in Storybook
-cd apps/main
-pnpm run sb
+cd packages/ui
+pnpm run dev
 ```
 
 ### Start the Hasura server
