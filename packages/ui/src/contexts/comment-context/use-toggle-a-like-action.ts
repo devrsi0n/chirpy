@@ -1,11 +1,12 @@
-import { useToast } from '../../components/toast';
-import { useCurrentUser } from '../../contexts/current-user-context';
 import {
   useDeleteLikeByPkMutation,
   useInsertOneLikeMutation,
 } from '@chirpy-dev/graphql';
+
+import { useToast } from '../../components/toast';
+import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
-import { logger } from '../../utils/logger';
+import { logger } from '../../utilities/logger';
 
 export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;
 

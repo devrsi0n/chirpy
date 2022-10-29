@@ -1,3 +1,7 @@
+import {
+  useCurrentUserQuery,
+  useUpdateUserByPkMutation,
+} from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { SiteLayout, PageTitle } from '../../blocks';
@@ -18,13 +22,9 @@ import {
   TextField,
   useToast,
 } from '../../components';
-import { useBypassCacheRefetch, useForm } from '../../hooks';
 import { useCurrentUser } from '../../contexts';
-import {
-  useCurrentUserQuery,
-  useUpdateUserByPkMutation,
-} from '@chirpy-dev/graphql';
-import { EMAIL_REGEXP, logger } from '../../utils';
+import { useBypassCacheRefetch, useForm } from '../../hooks';
+import { EMAIL_REGEXP, logger } from '../../utilities';
 
 type FormFields = {
   name: string;

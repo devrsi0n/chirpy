@@ -1,6 +1,5 @@
+import { RTEValue } from '@chirpy-dev/types';
 import { JSONContent } from '@tiptap/react';
-
-import { RTEValue } from 'types';
 
 export function getTextFromRteDoc(doc: JSONContent): string {
   let text = '';

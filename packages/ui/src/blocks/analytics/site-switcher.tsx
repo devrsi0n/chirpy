@@ -1,8 +1,7 @@
 // @ts-nocheck
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 import { Transition } from '@headlessui/react';
 import React from 'react';
-
-import { getPublicEnvVar } from 'utils';
 
 import { getStats } from './analytics-api';
 import { Site } from './type';
@@ -136,7 +135,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           <div className="py-1">
             <a
               href={`/${encodeURIComponent(this.props.site.domain)}/settings`}
-              className="focus:outline-none group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
+              className="group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
               role="menuitem"
             >
               <svg
@@ -186,7 +185,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
           <div className="py-1">
             <a
               href="/sites/new"
-              className="focus:outline-none group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
+              className="group flex items-center px-4 py-2 leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:bg-gray-100 focus:text-gray-900 focus:outline-none dark:text-gray-300 dark:hover:bg-gray-900 dark:hover:text-gray-100 dark:focus:bg-gray-900 dark:focus:text-gray-100 md:text-sm"
               role="menuitem"
             >
               <svg
@@ -238,7 +237,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       <div className="relative mr-2 inline-block text-left sm:mr-4">
         <button
           onClick={this.toggle.bind(this)}
-          className={`focus:outline-none inline-flex w-full items-center rounded-md py-2 font-bold leading-5 text-gray-700 transition duration-150 ease-in-out dark:text-gray-300 md:text-lg ${hoverClass}`}
+          className={`inline-flex w-full items-center rounded-md py-2 font-bold leading-5 text-gray-700 transition duration-150 ease-in-out focus:outline-none dark:text-gray-300 md:text-lg ${hoverClass}`}
         >
           <img
             src={`https://icons.duckduckgo.com/ip3/${this.props.site.domain}.ico`}

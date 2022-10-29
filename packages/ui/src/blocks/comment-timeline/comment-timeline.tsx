@@ -1,7 +1,6 @@
+import { CommentTimelineNode, RTEValue } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import * as React from 'react';
-
-import { CommentTimelineNode, RTEValue } from 'types';
 
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';

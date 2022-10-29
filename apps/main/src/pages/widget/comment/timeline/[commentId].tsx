@@ -1,4 +1,15 @@
-import { cpDayjs } from 'ui';
+import {
+  CommentTimelineDocument,
+  CommentTimelineSubscription,
+  CommentsDocument,
+  ThemeOfPageDocument,
+} from '@chirpy-dev/graphql';
+import {
+  CommonWidgetProps,
+  Theme,
+  CommentTimelineNode,
+} from '@chirpy-dev/types';
+import { cpDayjs } from '@chirpy-dev/ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -9,15 +20,9 @@ import { log } from 'next-axiom';
 import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
-import {
-  CommentTimelineDocument,
-  CommentTimelineSubscription,
-  CommentsDocument,
-  ThemeOfPageDocument,
-} from '@chirpy-dev/graphql';
+
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommonWidgetProps, Theme, CommentTimelineNode } from 'types';
 
 type PathParams = {
   commentId: string;
@@ -114,4 +119,4 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
 };
 
-export { CommentTimelineWidget as default } from 'ui';
+export { CommentTimelineWidget as default } from '@chirpy-dev/ui';

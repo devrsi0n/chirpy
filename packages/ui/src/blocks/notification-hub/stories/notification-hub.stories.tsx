@@ -1,7 +1,7 @@
+import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 import { getOperationName, Operation } from 'urql';
-import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
 
 import { NotificationHub } from '../notification-hub';
 import { messages } from './mock-data';

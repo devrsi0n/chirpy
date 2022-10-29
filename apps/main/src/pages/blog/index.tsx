@@ -1,7 +1,7 @@
+import { Directory } from '@chirpy-dev/types';
 import { GetStaticProps } from 'next';
 
 import { getDirectories } from '$/server/mdx/files';
-import { Directory } from 'types';
 
 const CONTAINER_FOLDER = 'blog';
 
@@ -22,4 +22,4 @@ export const getStaticProps: GetStaticProps<BlogHomeProps> = async () => {
   };
 };
 
-export { BlogHome as default } from 'ui';
+export { BlogHome as default } from '@chirpy-dev/ui';

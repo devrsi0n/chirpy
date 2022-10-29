@@ -1,11 +1,10 @@
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import Chart from 'chart.js/auto';
 import clsx from 'clsx';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
 import { useIsDarkMode } from '../../../hooks/use-is-dark-mode';
-import { ANALYTICS_DOMAIN } from 'utils';
-
 import * as api from '../analytics-api';
 import styles from '../analytics.module.scss';
 import LazyLoader from '../lazy-loader';

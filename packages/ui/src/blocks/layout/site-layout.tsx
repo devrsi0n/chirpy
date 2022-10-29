@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { SiteThemeProvider } from '../../contexts';
-
 import { Footer } from '../footer/footer';
 import { Header } from '../header/header';
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';

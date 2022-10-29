@@ -1,10 +1,9 @@
+import { ANALYTICS_DOMAIN, getPublicEnvVar } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
 
 import { Link } from '../../../../components/link';
-import { ANALYTICS_DOMAIN, getPublicEnvVar } from 'utils';
-
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';

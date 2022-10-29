@@ -1,9 +1,9 @@
+import { FEEDBACK_LINK } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { SiteLayout } from '../blocks';
 import { Button, Heading, Link, Text } from '../components';
-import { FEEDBACK_LINK } from 'utils';
 
 export function Custom500(): JSX.Element {
   const { query } = useRouter();

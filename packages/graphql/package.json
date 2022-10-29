@@ -4,7 +4,8 @@
   "license": "AGPL-3.0-or-later",
   "main": "./src/index.ts",
   "scripts": {
-    "watch": "GQL_WATCH=true zx ./scripts/gql-gen.mjs"
+    "build:local": "zx ./scripts/gql-gen.mjs",
+    "dev": "GQL_WATCH=true pnpm run build"
   },
   "sideEffects": false,
   "types": "./src/index.ts",

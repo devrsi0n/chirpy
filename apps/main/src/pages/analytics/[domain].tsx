@@ -1,10 +1,10 @@
+import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
+import { CommonPageProps } from '@chirpy-dev/types';
+import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { AnalyticsByDomainPageProps } from 'ui';
 import { query } from '$/server/common/gql';
-import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
 import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
-import { CommonPageProps } from 'types';
 
 type PathParams = {
   domain: string;
@@ -51,4 +51,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export { AnalyticsByDomainPage as default } from 'ui';
+export { AnalyticsByDomainPage as default } from '@chirpy-dev/ui';

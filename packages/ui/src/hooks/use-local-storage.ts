@@ -1,8 +1,7 @@
+import { isSSRMode } from '@chirpy-dev/utils';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { logger } from '../utils/logger';
-import { isSSRMode } from 'utils';
-
+import { logger } from '../utilities/logger';
 import { useEventListener } from './use-event-listener';
 
 type SetValue<S> = Dispatch<SetStateAction<S>>;

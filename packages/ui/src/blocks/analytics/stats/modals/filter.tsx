@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import React, { Fragment } from 'react';
 
 import { IconChevronDown } from '../../../../components/icons';
-
 import * as api from '../../analytics-api';
 import { parseQuery, formattedFilters, Query, FilterKey } from '../../query';
 import { Site } from '../../type';

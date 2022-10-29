@@ -15,13 +15,17 @@ bodyClass: bg-gray-100
                 <table class="w-full">
                   <tr>
                     <td
-                      class="leading-6 rounded bg-white p-12 text-left text-base text-gray-800 sm:px-6"
+                      class="rounded bg-white p-12 text-left text-base leading-6 text-gray-800 sm:px-6"
                     >
                       <p>Hello <strong><%= it.userName %></strong>,</p>
-                      <a href="<%= it.url %>" class="m-0 mb-6"> <%= it.title %> :</a>
+                      <a href="<%= it.url %>" class="m-0 mb-6">
+                        <%= it.title %> :</a
+                      >
                       <p class="m-0 mb-6">"<%= it.body %>"</p>
                       <component src="src/components/divider.html"></component>
-                      <component src="src/components/thanks-team.html"></component>
+                      <component
+                        src="src/components/thanks-team.html"
+                      ></component>
                     </td>
                   </tr>
                 </table>

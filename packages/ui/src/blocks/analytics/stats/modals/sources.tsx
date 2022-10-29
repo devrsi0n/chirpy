@@ -1,13 +1,12 @@
 // @ts-nocheck
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
 
-import { Link } from '../../components/link';
-import { ANALYTICS_DOMAIN } from 'utils';
-import { getPublicEnvVar } from 'utils';
-
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
+import { Link } from '../../components/link';
 import numberFormatter, { durationFormatter } from '../../number-formatter';
 import { parseQuery } from '../../query';
 import Modal from './modal';
@@ -188,7 +187,7 @@ class SourcesModal extends React.Component {
           <button
             onClick={this.loadMore.bind(this)}
             type="button"
-            className="focus:outline-none inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:ring active:bg-indigo-700"
+            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-indigo-500 focus:border-indigo-700 focus:outline-none focus:ring active:bg-indigo-700"
           >
             Load more
           </button>

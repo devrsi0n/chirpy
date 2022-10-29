@@ -3,8 +3,7 @@ import clsx from 'clsx';
 import { NextRouter, useRouter } from 'next/router';
 import React, { Fragment, useState } from 'react';
 
-import { Button , IconEdit2, IconX , Link } from '../../components';
-
+import { Button, IconEdit2, IconX, Link } from '../../components';
 import {
   appliedFilters,
   navigateToQuery,

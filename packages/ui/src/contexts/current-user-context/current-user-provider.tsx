@@ -1,9 +1,8 @@
+import { useCurrentUserQuery } from '@chirpy-dev/graphql';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
-import { useCurrentUserQuery } from '@chirpy-dev/graphql';
 import { useHasMounted } from '../../hooks/use-has-mounted';
-
 import {
   CurrentUserContext,
   CurrentUserContextType,

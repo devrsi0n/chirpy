@@ -1,3 +1,5 @@
+import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
+import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
@@ -8,13 +10,10 @@ import { ToastProvider } from '../components';
 import {
   CurrentUserProvider,
   GQLClientProvider,
-  NotificationProvider,
-  // This is the same SessionProvider as next-auth/react,
+  NotificationProvider, // This is the same SessionProvider as next-auth/react,
   // fix ref issue
   SessionProvider,
 } from '../contexts';
-import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from 'utils';
-import { CommonWidgetProps, PageProps } from 'types';
 
 export function App({
   Component,
@@ -57,5 +56,5 @@ export { reportWebVitals } from 'next-axiom/dist/webVitals';
 
 export const loadFeatures = () =>
   import(
-    /* webpackChunkName: "framer-motion-features"*/ '../utils/framer-motion-features'
+    /* webpackChunkName: "framer-motion-features"*/ '../utilities/framer-motion-features'
   ).then((res) => res.default);

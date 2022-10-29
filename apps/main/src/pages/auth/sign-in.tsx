@@ -1,1 +1,1 @@
-export { SignInPage as default } from 'ui';
+export { SignInPage as default } from '@chirpy-dev/ui';

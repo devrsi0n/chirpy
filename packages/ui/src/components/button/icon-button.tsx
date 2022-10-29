@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { ring } from '../../styles/common';
-
 import { BaseButton, BaseButtonProps } from './base-button';
 
 export type IconButtonColor = 'gray' | 'primary' | 'green' | 'yellow' | 'red';

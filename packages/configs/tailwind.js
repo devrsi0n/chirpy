@@ -38,14 +38,13 @@ const round = (num) =>
 const rem = (px) => `${round(px / 16)}rem`;
 // const em = (px, base) => `${round(px / base)}em`;
 
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
   content: [
     './src/**/*.{ts,tsx}',
     './.storybook/**/*.{ts,tsx}',
-    './node_modules/ui/src/**/*.{ts,tsx}',
+    './node_modules/@chirpy-dev/ui/src/**/*.{ts,tsx}',
   ],
   theme: {
     colors,

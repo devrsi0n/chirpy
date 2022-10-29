@@ -1,3 +1,4 @@
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 import { MDXRemote } from 'next-mdx-remote';
 
 import {
@@ -7,7 +8,6 @@ import {
   SideBar,
   SideBarProps,
 } from '../../blocks';
-import { CommonPageProps, MDXProps } from 'types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 

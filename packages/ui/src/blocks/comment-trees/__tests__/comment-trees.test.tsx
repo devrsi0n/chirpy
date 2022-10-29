@@ -1,13 +1,12 @@
 import { cleanup, screen } from '@testing-library/react';
 
+import { CommentTrees } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import {
   generateCommentFragment,
   getTextsOfComment,
 } from '../../../blocks/comment-timeline/__tests__/mock-data';
 import * as CommentContext from '../../../contexts/comment-context/comment-context-provider';
-
-import { CommentTrees } from '..';
 
 jest.mock('../../../contexts/comment-context/comment-context-provider', () => {
   return {

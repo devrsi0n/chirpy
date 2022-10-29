@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { Text } from '../../components/text';
-
 import { Heading } from '../heading';
 import styles from './divider.module.scss';
 

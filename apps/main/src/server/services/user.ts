@@ -1,10 +1,9 @@
-import { Profile as AuthProfile } from 'next-auth';
-import { log } from 'next-axiom';
-
 import {
   UpdateUserByPkDocument,
   UserBeforeUpdateDocument,
 } from '@chirpy-dev/graphql';
+import { Profile as AuthProfile } from 'next-auth';
+import { log } from 'next-axiom';
 
 import { mutate, query } from '../common/gql';
 

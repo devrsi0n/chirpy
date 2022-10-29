@@ -15,13 +15,16 @@ bodyClass: bg-gray-100
                 <table class="w-full">
                   <tr>
                     <td
-                      class="leading-6 rounded bg-white p-12 text-left text-base text-gray-800 sm:px-6"
+                      class="rounded bg-white p-12 text-left text-base leading-6 text-gray-800 sm:px-6"
                     >
-                      <p class="sm:leading-8 m-0 mb-6 text-2xl font-semibold text-black">
+                      <p
+                        class="m-0 mb-6 text-2xl font-semibold text-black sm:leading-8"
+                      >
                         Sign in as <strong><%= it.email %></strong>
                       </p>
                       <p class="m-0 mb-6">
-                        Please confirm your sign in request by clicking the button below:
+                        Please confirm your sign in request by clicking the
+                        button below:
                       </p>
                       <div class="leading-full">
                         <a
@@ -38,17 +41,28 @@ bodyClass: bg-gray-100
                               >&#8202;</i
                             ><!
                           [endif]-->
-                          <span style="mso-text-raise: 16px">Sign in &rarr;</span>
+                          <span style="mso-text-raise: 16px"
+                            >Sign in &rarr;</span
+                          >
                           <!--[if mso
-                            ]><i style="letter-spacing: 24px; mso-font-width: -100%">&#8202;</i><!
+                            ]><i
+                              style="
+                                letter-spacing: 24px;
+                                mso-font-width: -100%;
+                              "
+                              >&#8202;</i
+                            ><!
                           [endif]-->
                         </a>
                       </div>
                       <component src="src/components/divider.html"></component>
                       <p class="m-0 mb-4">
-                        If you did not request this email you can safely ignore it.
+                        If you did not request this email you can safely ignore
+                        it.
                       </p>
-                      <component src="src/components/thanks-team.html"></component>
+                      <component
+                        src="src/components/thanks-team.html"
+                      ></component>
                     </td>
                   </tr>
                 </table>

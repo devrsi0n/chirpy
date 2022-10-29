@@ -1,3 +1,5 @@
+import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
+import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
 import merge from 'lodash/merge';
 import { useTheme } from 'next-themes';
@@ -11,10 +13,7 @@ import { Popover } from '../../components/popover';
 import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
-import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
-import { logger } from '../../utils/logger';
-import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
-
+import { logger } from '../../utilities/logger';
 import {
   CommentWidgetPreview,
   CommentWidgetPreviewProps,

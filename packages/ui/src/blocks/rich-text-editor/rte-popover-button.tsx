@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Button } from '../../components/button';
 import { Popover } from '../../components/popover';
 import { TextField } from '../../components/text-field';
-
 import { BaseMarkButton } from './format-buttons';
 
 export type RTEPopoverButtonProps = {

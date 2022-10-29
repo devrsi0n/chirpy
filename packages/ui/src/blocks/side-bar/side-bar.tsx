@@ -1,3 +1,4 @@
+import { Directory } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -6,9 +7,7 @@ import { Heading } from '../../components/heading';
 import { IconChevronRight } from '../../components/icons';
 import { Link } from '../../components/link';
 import { List } from '../../components/list';
-import { Directory } from 'types';
 import { listHoverable } from '../../styles/common';
-
 import { SideMenu } from '../side-menu';
 
 export type SideBarProps = React.PropsWithChildren<{

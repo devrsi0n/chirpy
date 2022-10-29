@@ -6,8 +6,7 @@ import { Link } from '../../components/link';
 import { Text } from '../../components/text';
 import { TextField } from '../../components/text-field';
 import { useForm } from '../../hooks/use-form';
-import { EMAIL_REGEXP } from '../../utils/validator';
-
+import { EMAIL_REGEXP } from '../../utilities/validator';
 import { SignInProps } from './types';
 
 /**

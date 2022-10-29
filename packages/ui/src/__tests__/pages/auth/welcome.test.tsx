@@ -1,6 +1,6 @@
+import * as graphqlModule from '@chirpy-dev/graphql';
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import * as graphqlModule from '@chirpy-dev/graphql';
 
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { setMockedUser } from '../../../__tests__/fixtures/page-render';

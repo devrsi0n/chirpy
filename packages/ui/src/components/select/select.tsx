@@ -4,7 +4,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { listHoverable, bluredBg } from '../../styles/common';
-
 import { easeInOut } from '../animation';
 import { IconCheck, IconChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';

@@ -1,8 +1,8 @@
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
-import { CommonPageProps, MDXProps } from 'types';
 
 type BlogProps = MDXProps;
 const CONTAINER_FOLDER = 'blog';
@@ -51,4 +51,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export { BlogPost as default } from 'ui';
+export { BlogPost as default } from '@chirpy-dev/ui';

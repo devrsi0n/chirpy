@@ -1,8 +1,8 @@
+import { isSSRMode } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { SiteLayout } from '../../blocks';
 import { Heading } from '../../components';
-import { isSSRMode } from 'utils';
 
 export function DeleteConfirmation(): JSX.Element {
   return (

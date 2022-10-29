@@ -1,7 +1,7 @@
+import { useDeleteOneCommentMutation } from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
-import { useDeleteOneCommentMutation } from '@chirpy-dev/graphql';
 
 export type UseDeleteAComment = ReturnType<typeof useDeleteAComment>;
 

@@ -1,8 +1,7 @@
+import { Nullable } from '@chirpy-dev/types';
 import { Session } from 'next-auth';
 import * as React from 'react';
 import { OperationContext } from 'urql';
-
-import { Nullable } from 'types';
 
 export type UserData = Nullable<Session['user']>;
 

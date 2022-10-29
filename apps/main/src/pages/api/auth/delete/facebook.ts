@@ -1,3 +1,5 @@
+import { DeleteUserDocument } from '@chirpy-dev/graphql';
+import { getAppURL } from '@chirpy-dev/utils';
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
@@ -5,8 +7,6 @@ import { log } from 'next-axiom';
 import { APIError } from '$/server/common/api-error';
 import { getAPIHandler } from '$/server/common/api-handler';
 import { mutate } from '$/server/common/gql';
-import { DeleteUserDocument } from '@chirpy-dev/graphql';
-import { getAppURL } from 'utils';
 
 const handler = getAPIHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {

@@ -17,6 +17,9 @@
   },
   "dependencies": {
     "@chirpy-dev/graphql": "workspace:*",
+    "@chirpy-dev/types": "workspace:*",
+    "@chirpy-dev/ui": "workspace:*",
+    "@chirpy-dev/utils": "workspace:*",
     "@radix-ui/colors": "0.1.8",
     "@sendinblue/client": "3.2.2",
     "@tensorflow-models/toxicity": "1.2.2",
@@ -53,10 +56,7 @@
     "shiki": "0.10.1",
     "superjson": "1.9.1",
     "type-fest": "2.19.0",
-    "types": "workspace:*",
-    "ui": "workspace:*",
     "urql": "3.0.3",
-    "utils": "workspace:*",
     "web-push": "3.5.0",
     "wonka": "6.0.0",
     "ws": "8.8.1"

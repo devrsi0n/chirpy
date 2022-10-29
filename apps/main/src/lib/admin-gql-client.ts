@@ -1,10 +1,8 @@
+import { getGqlClientOptions } from '@chirpy-dev/ui';
+import { getPublicEnvVar } from '@chirpy-dev/utils';
 import { createClient as createWSClient } from 'graphql-ws';
 import { createClient, Client } from 'urql';
 import { WebSocket } from 'ws';
-
-import { getPublicEnvVar } from 'utils';
-
-import { getGqlClientOptions } from 'ui';
 
 // Server WS client
 class ChirpyWebSocket extends WebSocket {

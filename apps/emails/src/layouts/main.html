@@ -1,15 +1,23 @@
 <!DOCTYPE {{{ page.doctype || 'html' }}}>
-<html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
+<html
+  lang="{{ page.language || 'en' }}"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+>
   <head>
     <meta charset="{{ page.charset || 'utf-8' }}" />
     <meta name="x-apple-disable-message-reformatting" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
+    <meta
+      name="format-detection"
+      content="telephone=no, date=no, address=no, email=no"
+    />
     <!--[if mso]>
       <noscript>
         <xml>
-          <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
+          <o:OfficeDocumentSettings
+            xmlns:o="urn:schemas-microsoft-com:office:office"
+          >
             <o:PixelsPerInch>96</o:PixelsPerInch>
           </o:OfficeDocumentSettings>
         </xml>
@@ -44,23 +52,30 @@
   <body class="{{ page.bodyClass }}">
     <if condition="page.preheader">
       <div class="hidden">
-        {{{ page.preheader }}}&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj; &#160;&#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
-        &#847; &zwnj; &#160;&#847; &#847; &#847; &#847; &#847;
+        {{{ page.preheader }}}&#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847;
+        &#847; &#847; &#847; &#847; &#847; &#847; &#847; &#847; &zwnj;
+        &#160;&#847; &#847; &#847; &#847; &#847;
       </div>
     </if>
     <table class="w-[600px] sm:w-full" align="center">
       <tr>
         <td class="p-12 text-center sm:py-8 sm:px-6">
           <a href="https://chirpy.dev">
-            <img src="https://chirpy.dev/images/logo.png" width="100" alt="Chirpy's logo" />
+            <img
+              src="https://chirpy.dev/images/logo.png"
+              width="100"
+              alt="Chirpy's logo"
+            />
           </a>
         </td>
       </tr>
@@ -79,7 +94,9 @@
       </tr>
       <tr>
         <td class="block px-6 text-center text-base text-gray-600">
-          <p class="m-0 italic">Chirpy, a privacy-friendly and customizable Disqus alternate.</p>
+          <p class="m-0 italic">
+            Chirpy, a privacy-friendly and customizable Disqus alternate.
+          </p>
           <p class="cursor-default">
             <a
               href="https://chirpy.dev/docs/index"
@@ -93,13 +110,17 @@
               >GitHub</a
             >
             &bull;
-            <a href="https://chirpy.dev/blog" class="text-blue-500 no-underline hover:underline"
+            <a
+              href="https://chirpy.dev/blog"
+              class="text-blue-500 no-underline hover:underline"
               >Blog</a
             >
           </p>
         </td>
         <td class="block text-center">
-          <a href="@{{ unsubscribe }}" class="text-gray-500 no-underline hover:underline"
+          <a
+            href="@{{ unsubscribe }}"
+            class="text-gray-500 no-underline hover:underline"
             >Unsubscribe</a
           >
         </td>

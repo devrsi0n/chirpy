@@ -2,7 +2,6 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { useTimeout } from '../../hooks/use-timeout';
-
 import { IconButton, Button } from '../button';
 import { Card } from '../card';
 import { Heading } from '../heading';

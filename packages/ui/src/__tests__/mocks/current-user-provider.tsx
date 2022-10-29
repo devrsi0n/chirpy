@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as userModule from '@chirpy-dev/graphql';
+import * as React from 'react';
 
 import { CurrentUserProvider } from '../../contexts';
 import { mockUserData } from './data/user';

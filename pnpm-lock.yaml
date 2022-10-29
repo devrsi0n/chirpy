@@ -17,12 +17,12 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/prettier-config': workspace:*
       eslint: 8.23.0
+      husky: 8.0.1
       lint-staged: 13.0.3
       next: 12.3.1
       prettier: 2.7.1
       react: 18.2.0
       react-dom: 18.2.0
-      simple-git-hooks: 2.8.0
       turbo: 1.3.1
     devDependencies:
       '@changesets/changelog-github': 0.4.5
@@ -30,18 +30,19 @@ importers:
       '@chirpy-dev/eslint-config': link:packages/eslint-config
       '@chirpy-dev/prettier-config': link:packages/prettier-config
       eslint: 8.23.0
+      husky: 8.0.1
       lint-staged: 13.0.3
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       prettier: 2.7.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      simple-git-hooks: 2.8.0
       turbo: 1.3.1
 
   apps/comment-bootstrapper:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/utils': workspace:*
       '@testing-library/react': 13.3.0
       '@types/jest': 28.1.8
       '@types/node': 16.11.45
@@ -55,11 +56,11 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       typescript: 4.8.4
-      utils: workspace:*
       vite: 2.9.14
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
+      '@chirpy-dev/utils': link:../../packages/utils
       '@testing-library/react': 13.3.0_biqbaboplfbrettd7655fr4n2y
       '@types/jest': 28.1.8
       '@types/node': 16.11.45
@@ -73,7 +74,6 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       typescript: 4.8.4
-      utils: link:../../packages/utils
       vite: 2.9.14
 
   apps/e2e:
@@ -130,6 +130,9 @@ importers:
       '@chirpy-dev/graphql': workspace:*
       '@chirpy-dev/service-worker': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
+      '@chirpy-dev/ui': workspace:*
+      '@chirpy-dev/utils': workspace:*
       '@next/bundle-analyzer': 12.3.1
       '@radix-ui/colors': 0.1.8
       '@relative-ci/agent': 3.1.3
@@ -188,17 +191,17 @@ importers:
       superjson: 1.9.1
       tailwindcss: 3.2.1
       type-fest: 2.19.0
-      types: workspace:*
       typescript: 4.8.4
-      ui: workspace:*
       urql: 3.0.3
-      utils: workspace:*
       web-push: 3.5.0
       webpack: 5.74.0
       wonka: 6.0.0
       ws: 8.8.1
     dependencies:
       '@chirpy-dev/graphql': link:../../packages/graphql
+      '@chirpy-dev/types': link:../../packages/types
+      '@chirpy-dev/ui': link:../../packages/ui
+      '@chirpy-dev/utils': link:../../packages/utils
       '@radix-ui/colors': 0.1.8
       '@sendinblue/client': 3.2.2
       '@tensorflow-models/toxicity': 1.2.2_ce7e77rhh6oipcy6kxvkentnmi
@@ -235,10 +238,7 @@ importers:
       shiki: 0.10.1
       superjson: 1.9.1
       type-fest: 2.19.0
-      types: link:../../packages/types
-      ui: link:../../packages/ui
       urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
-      utils: link:../../packages/utils
       web-push: 3.5.0
       wonka: 6.0.0
       ws: 8.8.1
@@ -478,6 +478,8 @@ importers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/graphql': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
+      '@chirpy-dev/utils': workspace:*
       '@geist-ui/icons': 1.0.2
       '@headlessui/react': 1.7.3
       '@radix-ui/colors': 0.1.8
@@ -563,13 +565,12 @@ importers:
       super-tiny-icons: 0.4.0
       tailwindcss: 3.2.1
       type-fest: 2.19.0
-      types: workspace:*
       typescript: 4.8.4
       urql: 3.0.3
-      utils: workspace:*
       webpack: 5.74.0
       whatwg-fetch: 3.6.2
     dependencies:
+      '@chirpy-dev/utils': link:../utils
       '@geist-ui/icons': 1.0.2_react@18.2.0
       '@headlessui/react': 1.7.3_biqbaboplfbrettd7655fr4n2y
       '@radix-ui/colors': 0.1.8
@@ -609,12 +610,12 @@ importers:
       react-flip-move: 3.0.4_4vqqtxpblx3txl6pkcft5ke2i4_biqbaboplfbrettd7655fr4n2y
       super-tiny-icons: 0.4.0
       urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
-      utils: link:../utils
     devDependencies:
       '@babel/core': 7.18.13
       '@chirpy-dev/eslint-config': link:../eslint-config
       '@chirpy-dev/graphql': link:../graphql
       '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@chirpy-dev/types': link:../types
       '@storybook/addon-actions': 6.5.9_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.9_n6r6xdd2yjkiefh65dczmbeew4
       '@storybook/addon-interactions': 6.5.9_xcqfk6loynic6372z4tmnqfcmq
@@ -662,7 +663,6 @@ importers:
       style-loader: 3.3.1_webpack@5.74.0
       tailwindcss: 3.2.1_postcss@8.4.16
       type-fest: 2.19.0
-      types: link:../types
       typescript: 4.8.4
       webpack: 5.74.0
       whatwg-fetch: 3.6.2
@@ -670,6 +670,7 @@ importers:
   packages/utils:
     specifiers:
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
       '@tiptap/core': 2.0.0-beta.199
       '@tiptap/react': 2.0.0-beta.199
       '@types/node': 16.11.45
@@ -677,10 +678,10 @@ importers:
       '@types/react-dom': 18.0.6
       react: 18.2.0
       react-dom: 18.2.0
-      types: workspace:*
       typescript: 4.8.4
     devDependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@chirpy-dev/types': link:../types
       '@tiptap/core': 2.0.0-beta.199
       '@tiptap/react': 2.0.0-beta.199_la4wgmshzfaebh4rq27xtbsa3y
       '@types/node': 16.11.45
@@ -688,7 +689,6 @@ importers:
       '@types/react-dom': 18.0.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      types: link:../types
       typescript: 4.8.4
 
 packages:
@@ -15458,6 +15458,12 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: true
 
+  /husky/8.0.1:
+    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /hyperlinker/1.0.0:
     resolution: {integrity: sha512-Ty8UblRWFEcfSuIaajM34LdPXIhbs1ajEX/BBPv24J+enSVaEVY63xQ6lTO9VRYS5LAoghIG0IDJ+p+IPzKUQQ==}
     engines: {node: '>=4'}
@@ -18506,7 +18512,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18538,7 +18544,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18550,7 +18556,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
+      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -22340,12 +22346,6 @@ packages:
 
   /signedsource/1.0.0:
     resolution: {integrity: sha512-6+eerH9fEnNmi/hyM1DXcRK3pWdoMQtlkQ+ns0ntzunjKqp5i3sKCc80ym8Fib3iaYhdJUOPdhlJWj1tvge2Ww==}
-    dev: true
-
-  /simple-git-hooks/2.8.0:
-    resolution: {integrity: sha512-ocmZQORwa6x9mxg+gVIAp5o4wXiWOHGXyrDBA0+UxGKIEKOyFtL4LWNKkP/2ornQPdlnlDGDteVeYP5FjhIoWA==}
-    hasBin: true
-    requiresBuild: true
     dev: true
 
   /sirv/1.0.19:

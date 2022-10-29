@@ -1,13 +1,13 @@
+import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { SiteLayout } from '../../blocks';
 import { Spinner } from '../../components';
-import { useTimeout } from '../../hooks';
 import { useCurrentUser } from '../../contexts';
-import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from 'utils';
-import { hasValidUserProfile } from '../../utils';
+import { useTimeout } from '../../hooks';
+import { hasValidUserProfile } from '../../utilities';
 
 export function Redirecting(): JSX.Element {
   const { status } = useSession();

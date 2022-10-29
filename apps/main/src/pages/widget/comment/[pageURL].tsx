@@ -1,4 +1,13 @@
 import {
+  CommentTreeDocument,
+  CommentTreeSubscription,
+  CommentTreeSubscriptionVariables,
+  ThemeOfPageDocument,
+  PageByUrlOnlyDocument,
+  FreshPagesDocument,
+} from '@chirpy-dev/graphql';
+import { CommonWidgetProps, Theme, CommentLeafType } from '@chirpy-dev/types';
+import {
   GetStaticProps,
   InferGetStaticPropsType,
   GetStaticPropsResult,
@@ -10,17 +19,8 @@ import superjson from 'superjson';
 import { OperationResult } from 'urql';
 import { pipe, subscribe } from 'wonka';
 
-import {
-  CommentTreeDocument,
-  CommentTreeSubscription,
-  CommentTreeSubscriptionVariables,
-  ThemeOfPageDocument,
-  PageByUrlOnlyDocument,
-  FreshPagesDocument,
-} from '@chirpy-dev/graphql';
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
 import { query } from '$/server/common/gql';
-import { CommonWidgetProps, Theme, CommentLeafType } from 'types';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -143,4 +143,4 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-export { CommentWidgetPage as default } from 'ui';
+export { CommentWidgetPage as default } from '@chirpy-dev/ui';

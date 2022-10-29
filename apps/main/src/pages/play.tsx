@@ -1,10 +1,10 @@
+import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
+import { cpDayjs } from '@chirpy-dev/ui';
+import { isENVDev, getAppURL } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
 import { mutate } from '$/server/common/gql';
-import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
-import { isENVDev, getAppURL } from 'utils';
-import { cpDayjs } from 'ui';
 
 type StaticProps = {
   //
@@ -37,4 +37,4 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   };
 };
 
-export { PlayGround as default } from 'ui';
+export { PlayGround as default } from '@chirpy-dev/ui';

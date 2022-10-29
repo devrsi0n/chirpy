@@ -4,7 +4,6 @@ import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { bluredBg, listHoverable } from '../../styles/common';
-
 import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
 import { Button, IconButton } from '../button';

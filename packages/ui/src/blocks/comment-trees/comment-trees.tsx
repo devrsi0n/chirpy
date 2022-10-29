@@ -1,11 +1,10 @@
+import { CommentLeafType } from '@chirpy-dev/types';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
-import { CommentLeafType } from 'types';
-import { getCommentCount } from '../../utils/get-comment-count';
-
+import { getCommentCount } from '../../utilities/get-comment-count';
 import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';

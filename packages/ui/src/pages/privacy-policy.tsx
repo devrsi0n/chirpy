@@ -1,6 +1,6 @@
+import { MDXProps } from '@chirpy-dev/types';
 import { MDXRemote } from 'next-mdx-remote';
 import * as React from 'react';
-import { MDXProps } from 'types';
 
 import { SiteLayout, MDXComponents } from '../blocks';
 

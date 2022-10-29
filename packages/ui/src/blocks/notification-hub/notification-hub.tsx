@@ -1,3 +1,8 @@
+import {
+  useCurrentNotificationMessagesQuery,
+  useDeleteNotificationMessageMutation,
+  useHaveReadANotificationMutation,
+} from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { Badge } from '../../components/badge';
@@ -7,13 +12,7 @@ import { Menu } from '../../components/menu';
 import { Spinner } from '../../components/spinner';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import {
-  useCurrentNotificationMessagesQuery,
-  useDeleteNotificationMessageMutation,
-  useHaveReadANotificationMutation,
-} from '@chirpy-dev/graphql';
 import { useBypassCacheRefetch } from '../../hooks/use-bypass-cache-refetch';
-
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 

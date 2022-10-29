@@ -1,7 +1,7 @@
+import { NotificationSubscriptionsByUserIdDocument } from '@chirpy-dev/graphql';
 import { log } from 'next-axiom';
 
 import { query } from '$/server/common/gql';
-import { NotificationSubscriptionsByUserIdDocument } from '@chirpy-dev/graphql';
 
 import { pushWebNotification } from './push-web-notification';
 import { sendNotificationViaEmail } from './send-notification-via-email';

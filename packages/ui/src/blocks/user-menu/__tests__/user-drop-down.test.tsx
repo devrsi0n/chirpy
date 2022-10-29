@@ -1,10 +1,9 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { UserMenu, UserMenuProps } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { mockUserData } from '../../../__tests__/mocks/data/user';
-
-import { UserMenu, UserMenuProps } from '..';
 
 describe('UserMenu', () => {
   afterEach(() => {

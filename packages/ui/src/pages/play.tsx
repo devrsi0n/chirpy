@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { Alert } from '../components';
 import { CommentWidget, SiteLayout, PageTitle } from '../blocks';
+import { Alert } from '../components';
 
 export function PlayGround(): JSX.Element {
   const [showAlert, setShowAlert] = React.useState(true);

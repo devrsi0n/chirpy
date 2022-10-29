@@ -1,7 +1,6 @@
+import { Theme } from '@chirpy-dev/types';
 import { whiteA, blackA } from '@radix-ui/colors';
 import * as React from 'react';
-
-import { Theme } from 'types';
 
 import { siteTheme } from './site-theme';
 import { getThemeCSSVariablesString, translateRadixColor } from './utilities';

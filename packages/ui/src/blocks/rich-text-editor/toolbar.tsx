@@ -4,10 +4,8 @@ import * as React from 'react';
 
 import { Divider } from '../../components/divider';
 import { IconImage, IconLink2 } from '../../components/icons';
-
-import { MarkButton, HeadingButton, BlockButton } from './format-buttons';
+import { MarkButton, BlockButton } from './format-buttons';
 import { RTEPopoverButton } from './rte-popover-button';
-import styles from './toolbar.module.scss';
 
 export type ToolbarProps = React.PropsWithChildren<
   React.ComponentProps<'div'> & {
@@ -30,15 +28,11 @@ export function Toolbar({
       {...divProps}
     >
       <div className="flex flex-row items-center space-x-1">
-        <div className={styles.headingButtonGroup}>
-          <HeadingButton editor={editor} />
-          <Divider vertical />
-        </div>
         <MarkButton editor={editor} format="bold" />
         <MarkButton editor={editor} format="italic" />
         <MarkButton editor={editor} format="underline" />
         <MarkButton editor={editor} format="code" />
-        <div className={styles.blockButtonGroup}>
+        <div className="hidden flex-row space-x-1 xs:flex">
           <Divider vertical />
           <RTEPopoverButton
             label="Image url"

@@ -1,6 +1,5 @@
+import { MDXProps } from '@chirpy-dev/types';
 import { GetStaticProps } from 'next';
-
-import { MDXProps } from 'types';
 
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
 
@@ -13,4 +12,4 @@ export const getStaticProps: GetStaticProps<MDXProps> = async () => {
   };
 };
 
-export { PrivacyPolicy as default } from 'ui';
+export { PrivacyPolicy as default } from '@chirpy-dev/ui';

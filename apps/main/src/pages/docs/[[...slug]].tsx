@@ -1,9 +1,9 @@
+import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
+import { SideBarProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { SideBarProps } from 'ui';
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
-import { CommonPageProps, MDXProps } from 'types';
 
 type DocsProps = MDXProps & Pick<SideBarProps, 'directories'> & CommonPageProps;
 const CONTAINER_FOLDER = 'docs';
@@ -50,4 +50,4 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
   };
 };
 
-export { Docs as default } from 'ui';
+export { Docs as default } from '@chirpy-dev/ui';

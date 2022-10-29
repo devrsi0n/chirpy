@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
 import { Link } from '../../components/link';
-
 import styles from './mdx.module.scss';
 
 export const MDXComponents: Record<string, React.ReactNode> = {

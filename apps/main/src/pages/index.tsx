@@ -1,7 +1,6 @@
+import { HomeProps } from '@chirpy-dev/ui';
+import { isENVDev } from '@chirpy-dev/utils';
 import { GetStaticProps } from 'next';
-
-import { HomeProps } from 'ui';
-import { isENVDev } from 'utils';
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const buildDate = new Date().toISOString();
@@ -26,4 +25,4 @@ export const strings = {
   },
 };
 
-export { HomePage as default } from 'ui';
+export { HomePage as default } from '@chirpy-dev/ui';

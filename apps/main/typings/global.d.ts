@@ -1,5 +1,4 @@
 /// <reference types="types/src/global" />
-
 import * as toxicity from '@tensorflow-models/toxicity';
 
 declare global {

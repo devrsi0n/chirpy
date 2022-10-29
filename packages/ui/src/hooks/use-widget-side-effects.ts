@@ -1,11 +1,10 @@
-import { useTheme } from 'next-themes';
-import * as React from 'react';
-
 import {
   EVENT_CHANGE_THEME,
   EVENT_CLICK_CONTAINER,
   EVENT_WIDGET_LOADED,
-} from 'utils';
+} from '@chirpy-dev/utils';
+import { useTheme } from 'next-themes';
+import * as React from 'react';
 
 import { useEventListener } from './use-event-listener';
 

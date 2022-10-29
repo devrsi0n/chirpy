@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { IconArrow } from '../../components';
-
 import {
   CommentWidgetPreview,
   CommentWidgetPreviewProps,

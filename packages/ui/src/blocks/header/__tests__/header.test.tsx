@@ -1,7 +1,7 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { Header } from '..';
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 
 Object.defineProperty(window, 'innerWidth', {
   writable: true,

@@ -1,3 +1,4 @@
+import { isENVDev, getPublicEnvVar, isBrowser } from '@chirpy-dev/utils';
 import { devtoolsExchange } from '@urql/devtools';
 import { refocusExchange } from '@urql/exchange-refocus';
 import { createClient as createWSClient, Client as WsClient } from 'graphql-ws';
@@ -11,8 +12,6 @@ import {
   dedupExchange,
   fetchExchange,
 } from 'urql';
-
-import { isENVDev, getPublicEnvVar, isBrowser } from 'utils';
 
 export function createGqlClient(hasuraToken = ''): Client {
   return createClient(getGqlClientOptions(getAuthHeaders(hasuraToken)));

@@ -1,10 +1,10 @@
+import { asyncNoop, noop } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import {
   INotificationContext,
   NotificationContext,
 } from '../../contexts/notification-context';
-import { asyncNoop, noop } from 'utils';
 
 export type PredefinedNotificationProps = {
   children: React.ReactNode;

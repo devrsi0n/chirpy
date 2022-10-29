@@ -1,8 +1,7 @@
+import { ProjectByDomainQuery } from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { AnalyticsBlock, SiteLayout, PageTitle } from '../../blocks';
-
-import { ProjectByDomainQuery } from '@chirpy-dev/graphql';
 
 export type AnalyticsByDomainPageProps = {
   project: ProjectByDomainQuery['projects'][number];

@@ -1,8 +1,9 @@
-import * as React from 'react';
 import {
   useInsertOneProjectMutation,
   useUserDashboardProjectsQuery,
 } from '@chirpy-dev/graphql';
+import { isENVProd } from '@chirpy-dev/utils';
+import * as React from 'react';
 
 import {
   SiteLayout,
@@ -19,8 +20,7 @@ import {
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
-import { isENVProd } from 'utils';
-import { isValidDomain } from '../../utils';
+import { isValidDomain } from '../../utilities';
 
 type FormFields = {
   name: string;

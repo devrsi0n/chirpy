@@ -1,3 +1,5 @@
+import { UserByPkDocument } from '@chirpy-dev/graphql';
+import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
 import { Provider } from 'next-auth/providers';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import EmailProvider from 'next-auth/providers/email';
@@ -6,9 +8,7 @@ import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-import { SESSION_MAX_AGE, isENVProd } from 'utils';
 import { query } from '$/server/common/gql';
-import { UserByPkDocument } from '@chirpy-dev/graphql';
 
 import { sendVerificationEmail } from '../email/send-emails';
 import { createUser } from './auth-adapter';

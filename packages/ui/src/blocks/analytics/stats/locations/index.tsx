@@ -3,7 +3,6 @@ import React from 'react';
 
 import { Tabs } from '../../../../components/tabs';
 import { useIsDarkMode } from '../../../../hooks/use-is-dark-mode';
-
 import * as api from '../../analytics-api';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
