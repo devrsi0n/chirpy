@@ -173,7 +173,7 @@ importers:
       next-axiom: 0.14.0
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8
-      next-plausible: 3.6.3
+      next-plausible: 3.6.4
       next-themes: 0.2.1
       next-transpile-modules: 9.1.0
       next-urql: 4.0.0
@@ -223,7 +223,7 @@ importers:
       next-axiom: 0.14.0_next@12.3.1
       next-connect: 0.12.2
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
-      next-plausible: 3.6.3_azq6kxkn3od7qdylwkyksrwopy
+      next-plausible: 3.6.4_azq6kxkn3od7qdylwkyksrwopy
       next-themes: 0.2.1_azq6kxkn3od7qdylwkyksrwopy
       next-transpile-modules: 9.1.0
       next-urql: 4.0.0_react@18.2.0+urql@3.0.3
@@ -547,7 +547,7 @@ importers:
       next-auth: 4.10.3
       next-axiom: 0.14.0
       next-mdx-remote: 3.0.8
-      next-plausible: 3.6.3
+      next-plausible: 3.6.4
       next-themes: 0.2.1
       postcss: 8.4.16
       postcss-loader: 7.0.1
@@ -601,7 +601,7 @@ importers:
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_biqbaboplfbrettd7655fr4n2y
       next-axiom: 0.14.0_next@12.3.1
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
-      next-plausible: 3.6.3_azq6kxkn3od7qdylwkyksrwopy
+      next-plausible: 3.6.4_azq6kxkn3od7qdylwkyksrwopy
       next-themes: 0.2.1_azq6kxkn3od7qdylwkyksrwopy
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -18522,7 +18522,7 @@ packages:
     peerDependencies:
       next: ^12.1.4
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18547,14 +18547,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /next-plausible/3.6.3_azq6kxkn3od7qdylwkyksrwopy:
-    resolution: {integrity: sha512-KlpB0k/PPMq0udKOLgTcp6RAqGLiIi7956tXRD5w/gzzgVdp2i3xvnafG60Exjiz98go1Jj98n/PxD3WitKH6Q==}
+  /next-plausible/3.6.4_azq6kxkn3od7qdylwkyksrwopy:
+    resolution: {integrity: sha512-aHL4IL+gkkjs5ScB18LZ3LMEWXKR5VTvnMDs/fHNFHadOh23i37fD+VP5oAQLALR8Mde63l9JJljrw9DkvjWjQ==}
     peerDependencies:
-      next: ^11.1.0 || ^12.0.0
+      next: ^11.1.0 || ^12.0.0 || ^13.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18566,7 +18566,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
