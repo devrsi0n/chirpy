@@ -34,14 +34,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Install dependencies
-        run: pnpm install
+      # - name: Install dependencies
+      #   run: pnpm install
 
       - uses: artiomtr/jest-coverage-report-action@v2
         with:
           annotations: none
           package-manager: pnpm
-          skip-step: install
+          # skip-step: install
           working-directory: ./apps/main
           threshold: 1
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -51,7 +51,7 @@ jobs:
         with:
           annotations: none
           package-manager: pnpm
-          skip-step: install
+          # skip-step: install
           working-directory: ./packages/ui
           threshold: 26
           github-token: ${{ secrets.GITHUB_TOKEN }}
