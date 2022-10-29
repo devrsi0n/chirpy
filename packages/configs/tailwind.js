@@ -123,7 +123,7 @@ module.exports = {
         return {
           DEFAULT: {
             css: {
-              '--tw-prose-body': theme('colors.gray[1100]/1'),
+              '--tw-prose-body': theme('colors.gray[1200]/1'),
               '--tw-prose-headings': theme('colors.gray[1200]/1'),
               '--tw-prose-lead': theme('colors.gray[1000]/1'),
               '--tw-prose-links': theme('colors.gray[1200]/1'),

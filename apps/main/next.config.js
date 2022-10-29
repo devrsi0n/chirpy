@@ -45,6 +45,10 @@ const nextConfig = {
         source: '/api/stats/:path*',
         destination: `${analyticsDomain}/api/stats/:path*`,
       },
+      {
+        source: '/docs',
+        destination: '/docs/welcome',
+      },
     ];
   },
   async headers() {

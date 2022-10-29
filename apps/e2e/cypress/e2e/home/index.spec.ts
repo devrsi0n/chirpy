@@ -17,6 +17,6 @@ describe('Index', () => {
     cy.findByRole('button', {
       name: /learn more/i,
     }).click();
-    cy.url({ timeout: 60_000 }).should('include', '/docs/index');
+    cy.url({ timeout: 60_000 }).should('include', '/docs');
   });
 });

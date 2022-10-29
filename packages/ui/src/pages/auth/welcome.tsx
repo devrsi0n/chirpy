@@ -50,7 +50,7 @@ function FullFilled(): JSX.Element {
           </Link>
         </Button>
         <Button color="gray">
-          <Link href="/docs/index" variant="plain">
+          <Link href="/docs" variant="plain">
             Docs
           </Link>
         </Button>
