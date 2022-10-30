@@ -135,7 +135,7 @@ export function CommentCard({
               className="cursor-default !leading-none"
               dateTime={createdAt}
             >
-              {cpDayjs(createdAt).fromNow?.()}
+              {cpDayjs(createdAt).fromNow()}
             </Text>
           </div>
           <>

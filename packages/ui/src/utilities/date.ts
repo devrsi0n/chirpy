@@ -3,4 +3,5 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 dayjs.extend(relativeTime);
 
-export { default as cpDayjs } from 'dayjs';
+// eslint-disable-next-line unicorn/prefer-export-from
+export const cpDayjs = dayjs;
