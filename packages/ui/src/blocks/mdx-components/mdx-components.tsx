@@ -30,7 +30,7 @@ function Pre({ children, className, ...restProps }: PreProps): JSX.Element {
     <pre
       {...restProps}
       className={clsx(
-        'not-prose whitespace-normal break-all',
+        'not-prose whitespace-normal break-all md:whitespace-pre md:break-words',
         styles.blockPre,
         className,
       )}
