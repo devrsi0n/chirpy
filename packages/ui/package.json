@@ -36,7 +36,7 @@
     "datamaps": "0.5.9",
     "dayjs": "1.11.5",
     "debounce-promise": "3.1.2",
-    "framer-motion": "7.3.2",
+    "framer-motion": "7.6.2",
     "graphql": "16.6.0",
     "graphql-tag": "2.12.6",
     "graphql-ws": "5.10.1",
