@@ -357,7 +357,7 @@ importers:
       eslint-config-prettier: 8.5.0
       eslint-plugin-jest: 26.5.3
       eslint-plugin-prettier: 4.2.1
-      eslint-plugin-storybook: 0.6.1
+      eslint-plugin-storybook: 0.6.7
       eslint-plugin-unicorn: 43.0.2
       next: 12.3.1
       prettier: 2.7.1
@@ -372,7 +372,7 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.23.0
       eslint-plugin-jest: 26.5.3_dl7zegcddfw57oqurw42bc6bnm
       eslint-plugin-prettier: 4.2.1_tgumt6uwl2md3n6uqnggd6wvce
-      eslint-plugin-storybook: 0.6.1_nwctkcr5uyxf47tw7zkgamxmfq
+      eslint-plugin-storybook: 0.6.7_nwctkcr5uyxf47tw7zkgamxmfq
       eslint-plugin-unicorn: 43.0.2_eslint@8.23.0
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       prettier: 2.7.1
@@ -9480,7 +9480,7 @@ packages:
   /axios/0.21.4_debug@4.3.2:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.1
+      follow-redirects: 1.15.1_debug@4.3.2
     transitivePeerDependencies:
       - debug
     dev: false
@@ -11769,7 +11769,6 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
-    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -13047,8 +13046,8 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: false
 
-  /eslint-plugin-storybook/0.6.1_nwctkcr5uyxf47tw7zkgamxmfq:
-    resolution: {integrity: sha512-RHbxn4jqbXQ4dkDHUjI6y47hxF6h+aCsIyuXLfmA1sTtFtea3o1p9taQcsnzOFEE/szgLXxH9jsig9yc//2hug==}
+  /eslint-plugin-storybook/0.6.7_nwctkcr5uyxf47tw7zkgamxmfq:
+    resolution: {integrity: sha512-lcUsB+3PesKWXwwEHGSTCijKWDXuQ4ITVbnsSDMXRCR/cjGtHZIEcy2pp/Eh7nfWA/GZrDPpK97DsTWEzyN6Bw==}
     engines: {node: 12.x || 14.x || >= 16}
     peerDependencies:
       eslint: '>=6'
@@ -13057,6 +13056,7 @@ packages:
       '@typescript-eslint/experimental-utils': 5.30.6_nwctkcr5uyxf47tw7zkgamxmfq
       eslint: 8.23.0
       requireindex: 1.2.0
+      ts-dedent: 2.2.0
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -13900,7 +13900,7 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /follow-redirects/1.15.1:
+  /follow-redirects/1.15.1_debug@4.3.2:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -13908,6 +13908,8 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dependencies:
+      debug: 4.3.2
 
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -15353,7 +15355,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.1
+      follow-redirects: 1.15.1_debug@4.3.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -23798,7 +23800,6 @@ packages:
   /ts-dedent/2.2.0:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
-    dev: true
 
   /ts-log/2.2.4:
     resolution: {integrity: sha512-DEQrfv6l7IvN2jlzc/VTdZJYsWUnQNCsueYjMkC/iXoEoi5fNan6MjeDqkvhfzbmHgdz9UxDUluX3V5HdjTydQ==}
