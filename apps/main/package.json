@@ -28,7 +28,7 @@
     "@tensorflow/tfjs-core": "3.18.0",
     "cors": "2.8.5",
     "eta": "1.12.3",
-    "github-slugger": "1.4.0",
+    "github-slugger": "1.5.0",
     "graphql": "16.6.0",
     "graphql-tag": "2.12.6",
     "graphql-ws": "5.11.2",
