@@ -186,7 +186,7 @@ importers:
       rehype-autolink-headings: 6.1.1
       rehype-pretty-code: 0.4.0
       rehype-slug: 5.0.1
-      shiki: 0.10.1
+      shiki: 0.11.1
       stellate: 1.17.0
       superjson: 1.9.1
       tailwindcss: 3.2.1
@@ -233,9 +233,9 @@ importers:
       reading-time: 1.5.0
       rehype: 12.0.1
       rehype-autolink-headings: 6.1.1
-      rehype-pretty-code: 0.4.0_shiki@0.10.1
+      rehype-pretty-code: 0.4.0_shiki@0.11.1
       rehype-slug: 5.0.1
-      shiki: 0.10.1
+      shiki: 0.11.1
       superjson: 1.9.1
       type-fest: 2.19.0
       urql: 3.0.3_onqnqwb3ubg5opvemcqf7c2qhy
@@ -21476,14 +21476,14 @@ packages:
       unified: 10.1.2
     dev: false
 
-  /rehype-pretty-code/0.4.0_shiki@0.10.1:
+  /rehype-pretty-code/0.4.0_shiki@0.11.1:
     resolution: {integrity: sha512-Bp91nfo4blpgCXlvGP1hsG+kRFfjqBVU09o1RFcnNA62u+iIzJiJRGzpfBj4FaItq7CEQL5ASGB7vLxN5xCvyA==}
     engines: {node: ^12.16.0 || >=13.2.0}
     peerDependencies:
       shiki: '*'
     dependencies:
       parse-numeric-range: 1.3.0
-      shiki: 0.10.1
+      shiki: 0.11.1
     dev: false
 
   /rehype-slug/5.0.1:
@@ -22295,12 +22295,12 @@ packages:
     resolution: {integrity: sha512-8o/QEhSSRb1a5i7TFR0iM4G16Z0vYB2OQVs4G3aAFXjn3T6yEx8AZxy1PgDF7I00LZHYA3WxaSYIf5e5sAX8Rw==}
     dev: true
 
-  /shiki/0.10.1:
-    resolution: {integrity: sha512-VsY7QJVzU51j5o1+DguUd+6vmCmZ5v/6gYu4vyYAhzjuNQU6P/vmSy4uQaOhvje031qQMiW0d2BwgMH52vqMng==}
+  /shiki/0.11.1:
+    resolution: {integrity: sha512-EugY9VASFuDqOexOgXR18ZV+TbFrQHeCpEYaXamO+SZlsnT/2LxuLBX25GGtIrwaEVFXUAbUQ601SWE2rMwWHA==}
     dependencies:
       jsonc-parser: 3.0.0
       vscode-oniguruma: 1.6.2
-      vscode-textmate: 5.2.0
+      vscode-textmate: 6.0.0
     dev: false
 
   /side-channel/1.0.4:
@@ -24617,8 +24617,8 @@ packages:
     resolution: {integrity: sha512-KH8+KKov5eS/9WhofZR8M8dMHWN2gTxjMsG4jd04YhpbPR91fUj7rYQ2/XjeHCJWbg7X++ApRIU9NUwM2vTvLA==}
     dev: false
 
-  /vscode-textmate/5.2.0:
-    resolution: {integrity: sha512-Uw5ooOQxRASHgu6C7GVvUxisKXfSgW4oFlO+aa+PAkgmH89O3CXxEEzNRNtHSqtXFTl0nAC1uYj0GMSH27uwtQ==}
+  /vscode-textmate/6.0.0:
+    resolution: {integrity: sha512-gu73tuZfJgu+mvCSy4UZwd2JXykjK9zAZsfmDeut5dx/1a7FeTk0XwJsSuqQn+cuMCGVbIBfl+s53X4T19DnzQ==}
     dev: false
 
   /w3c-hr-time/1.0.2:
