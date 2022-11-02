@@ -170,7 +170,7 @@ importers:
       lodash: 4.17.21
       next: 12.3.1
       next-auth: 4.10.3
-      next-axiom: 0.14.0
+      next-axiom: 0.15.0
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8
       next-plausible: 3.6.4
@@ -220,7 +220,7 @@ importers:
       lodash: 4.17.21
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_br325yun545l5vwdnneu6tztxq
-      next-axiom: 0.14.0_next@12.3.1
+      next-axiom: 0.15.0_next@12.3.1
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.6.4_azq6kxkn3od7qdylwkyksrwopy
@@ -545,7 +545,7 @@ importers:
       msw-storybook-addon: 1.6.3
       next: 12.3.1
       next-auth: 4.10.3
-      next-axiom: 0.14.0
+      next-axiom: 0.15.0
       next-mdx-remote: 3.0.8
       next-plausible: 3.6.4
       next-themes: 0.2.1
@@ -599,7 +599,7 @@ importers:
       lodash: 4.17.21
       next: 12.3.1_v72kpxpma3xps5f7aqpsb5vf3u
       next-auth: 4.10.3_znuz5irtsx3b6gfuzekl2h7mzq_biqbaboplfbrettd7655fr4n2y
-      next-axiom: 0.14.0_next@12.3.1
+      next-axiom: 0.15.0_next@12.3.1
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.6.4_azq6kxkn3od7qdylwkyksrwopy
       next-themes: 0.2.1_azq6kxkn3od7qdylwkyksrwopy
@@ -18511,11 +18511,11 @@ packages:
     dev: false
     patched: true
 
-  /next-axiom/0.14.0_next@12.3.1:
-    resolution: {integrity: sha512-LLbiDcL79274HqaKTSipZo6B4SCLh++11BpVfg+cNTZoLb8VH1g7g14xgFBhKeDN+DaiDSg8Of7ZPqaYEcIUXQ==}
+  /next-axiom/0.15.0_next@12.3.1:
+    resolution: {integrity: sha512-43ajCZ9PFuihwVkdhTTKsAcdOvsCtugu7C0uKxkmbangq2Q7CwunnM6jcR1L1Pc/E+X3+Y4M99j9hZGOxoi7Lw==}
     engines: {node: '>=15'}
     peerDependencies:
-      next: ^12.1.4
+      next: '>= 12.1.4 < 14'
     dependencies:
       next: 12.3.1_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
