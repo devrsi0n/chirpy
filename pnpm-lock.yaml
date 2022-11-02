@@ -302,7 +302,7 @@ importers:
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2
-      postcss-preset-env: 7.8.1
+      postcss-preset-env: 7.8.2
       tailwindcss: 3.2.1
       typescript: 4.8.4
     dependencies:
@@ -313,7 +313,7 @@ importers:
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.16
-      postcss-preset-env: 7.8.1_postcss@8.4.16
+      postcss-preset-env: 7.8.2_postcss@8.4.16
       tailwindcss: 3.2.1_postcss@8.4.16
       typescript: 4.8.4
 
@@ -20207,8 +20207,8 @@ packages:
       postcss-value-parser: 4.2.0
     dev: false
 
-  /postcss-preset-env/7.8.1_postcss@8.4.16:
-    resolution: {integrity: sha512-8884CHxQaoN1i4iEK+JvzOe8emODb5R4p/0dw4yEdo7QM4RdUk2sBx0fnzFyJt8BLfZSCGeVkKZ4HC564waBpQ==}
+  /postcss-preset-env/7.8.2_postcss@8.4.16:
+    resolution: {integrity: sha512-rSMUEaOCnovKnwc5LvBDHUDzpGP+nrUeWZGWt9M72fBvckCi45JmnJigUr4QG4zZeOHmOCNCZnd2LKDvP++ZuQ==}
     engines: {node: ^12 || ^14 || >=16}
     peerDependencies:
       postcss: ^8.2
