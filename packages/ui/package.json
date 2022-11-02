@@ -82,7 +82,7 @@
     "@types/react-dom": "18.0.6",
     "@types/react-flatpickr": "3.8.7",
     "@urql/storybook-addon": "2.0.1",
-    "autoprefixer": "10.4.12",
+    "autoprefixer": "10.4.13",
     "babel-loader": "8.2.5",
     "chromatic": "6.7.0",
     "concurrently": "7.5.0",
