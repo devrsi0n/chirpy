@@ -1,3 +1,4 @@
+import { noop } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { CurrentUserContext, CurrentUserContextType } from '../../contexts';
@@ -27,6 +28,7 @@ export function PredefinedCurrentUser(
         name: 'Michael',
         image: '/images/avatars/male-2.jpeg',
       },
+      refetchUser: noop,
     }),
   );
   React.useEffect(() => {

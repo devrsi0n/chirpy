@@ -1,4 +1,5 @@
 import { Nullable } from '@chirpy-dev/types';
+import { noop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
 import * as React from 'react';
 import { OperationContext } from 'urql';
@@ -18,6 +19,7 @@ export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
   isSignIn: false,
   data: {},
   loading: true,
+  refetchUser: noop,
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>(
