@@ -26,6 +26,7 @@ import { camelCase, isArray, transform, isObject } from 'lodash';
 import { Adapter, AdapterSession, AdapterUser } from 'next-auth/adapters';
 
 import { mutate, query } from '$/server/common/gql';
+import { pick } from '$/server/utilities/object';
 
 import { getUserByPk } from '../mutation-event/utilities';
 import { generateUsername } from './utilities';
@@ -98,7 +99,7 @@ export function nextAuthAdapter(): Adapter {
           {
             // Add the existing user data to the update,
             // or it'll reset non-existing fields
-            ...existsUer,
+            ...pick(existsUer, 'email', 'name', 'image', 'emailVerified'),
             ...translateAdapterUserToQueryVairables(user),
           } as UpdateUserProfileByPkMutationVariables,
           'updateUserByPk',
@@ -117,11 +118,9 @@ export function nextAuthAdapter(): Adapter {
           {
             // Add the existing user data to the update,
             // or it'll reset non-existing fields
-            ...existsUer,
-            ...(translateAdapterUserToQueryVairables(
-              user,
-            ) as UpdateUserProfileByEmailMutationVariables),
-          },
+            ...pick(existsUer, 'email', 'name', 'image', 'emailVerified'),
+            ...translateAdapterUserToQueryVairables(user),
+          } as UpdateUserProfileByEmailMutationVariables,
           'updateUsers',
         );
         return translateUserToAdapterUser(data.returning[0]);
