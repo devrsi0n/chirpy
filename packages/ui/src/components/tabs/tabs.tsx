@@ -81,8 +81,8 @@ export function Tabs({
             {tabs.map((item) => (
               <BaseButton
                 className={clsx(
-                  `p-1 text-xs font-bold text-gray-1100 hover:text-primary-900`,
-                  selfValue === item.value && `text-primary-1000 underline`,
+                  `p-1 text-xs font-bold text-gray-1200 hover:text-primary-1000`,
+                  selfValue === item.value && `text-primary-1100 underline`,
                 )}
                 key={item.value}
                 onClick={() => handleClickTab(item)}

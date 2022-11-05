@@ -68,17 +68,17 @@ export default function Realtime(props: RealtimeProps) {
           router={router}
         />
         <div className="block w-full items-start justify-between md:flex">
-          <Sources site={props.site} query={query} timer={timer} />
-          <Pages site={props.site} query={query} timer={timer} />
-        </div>
-        <div className="block w-full items-start justify-between md:flex">
           <Locations
             router={router}
             site={props.site}
             query={query}
             timer={timer}
           />
+          <Pages site={props.site} query={query} timer={timer} />
+        </div>
+        <div className="block w-full items-start justify-between md:flex">
           <Devices site={props.site} query={query} />
+          <Sources site={props.site} query={query} timer={timer} />
         </div>
 
         {props.site.hasGoals && (
