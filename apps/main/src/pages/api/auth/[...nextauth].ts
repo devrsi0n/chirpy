@@ -2,6 +2,7 @@ import { UserProjectsDocument } from '@chirpy-dev/graphql';
 import { HASURA_TOKEN_MAX_AGE, SESSION_MAX_AGE } from '@chirpy-dev/utils';
 import { isENVDev } from '@chirpy-dev/utils';
 import NextAuth from 'next-auth';
+import { GoogleProfile } from 'next-auth/providers/google';
 import { log } from 'next-axiom';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
@@ -88,7 +89,10 @@ export default NextAuth({
     },
     async signIn({ account, profile }) {
       // Restrict access to people with verified accounts
-      if (account.provider === 'google' && profile.verified_email !== true) {
+      if (
+        account?.provider === 'google' &&
+        (profile as GoogleProfile).email_verified !== true
+      ) {
         return false;
       }
       return true;

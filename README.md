@@ -4,19 +4,19 @@
 [![Cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&logo=cypress&color=black)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 [![Twitter Chirpy](https://img.shields.io/twitter/url?color=black&logoColor=black&url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
 
-<img src="apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
+<img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
 👋 [Chirpy](https://chirpy.dev) is a privacy-friendly and customizable Disqus(comment system) alternate. Try it now: [Playground](https://chirpy.dev/play).
 
 <details>
     <summary>More screenshots</summary>
-    <img src="apps/main/public/images/blog/open-source/theme.png" width="800" alt="Widget theme" >
-    <img src="apps/main/public/images/blog/open-source/analytics.png" width="800" alt="Widget analytics" >
-    <img src="apps/main/public/images/docs/features/theme/dashboard.png" width="800" alt="Project dashboard" >
-    <img src="apps/main/public/images/docs/get-started/integration-guide.png" width="800" alt="Widget integration guide" >
-    <img src="apps/main/public/images/docs/features/privacy-friendly/anonymous-sign-in.png" width="800" alt="Anonymous sign-in" >
-    <img src="apps/main/public/images/docs/features/notifications/site-notification.png" width="800" alt="Site notification" >
-    <img src="apps/main/public/images/docs/features/anti-toxic-comment/example.png" width="800" alt="Anti toxic comment" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/blog/open-source/theme.png" width="800" alt="Widget theme" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/blog/open-source/analytics.png" width="800" alt="Widget analytics" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/docs/features/theme/dashboard.png" width="800" alt="Project dashboard" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/docs/get-started/integration-guide.png" width="800" alt="Widget integration guide" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/docs/features/privacy-friendly/anonymous-sign-in.png" width="800" alt="Anonymous sign-in" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/docs/features/notifications/site-notification.png" width="800" alt="Site notification" >
+    <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/docs/features/anti-toxic-comment/example.png" width="800" alt="Anti toxic comment" >
 </details>
 
 <br>

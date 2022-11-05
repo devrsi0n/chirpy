@@ -34,7 +34,7 @@ import { generateUsername } from './utilities';
 export async function createUser(user: Omit<AdapterUser, 'id'>) {
   // Fill missing username & name with email
   const username =
-    (user.username as string | null) ??
+    user.username ??
     (user.email
       ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         generateUsername((user.email as string).split('@').shift() || '')
@@ -185,6 +185,7 @@ export function nextAuthAdapter(): Adapter {
         },
         user: {
           ...user,
+          email: user.email || '',
           emailVerified: user.emailVerified
             ? new Date(user.emailVerified)
             : null,
@@ -267,6 +268,7 @@ function translateUserToAdapterUser(
   }
   return {
     ...user,
+    email: user.email || '',
     emailVerified: user?.emailVerified ? new Date(user?.emailVerified) : null,
   };
 }

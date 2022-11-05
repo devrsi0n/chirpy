@@ -1,15 +1,15 @@
 overwrite: true
 schema:
-  - ./scripts/graphql/graphql-schema.json
+  - ./scripts/graphql-schema.json
 documents:
-  - 'src/graphql/*.graphql'
+  - 'src/frontend/*.graphql'
 generates:
-  src/graphql/generated/types.ts:
+  src/frontend/generated/types.ts:
     plugins:
       - typescript
     config:
       enumsAsTypes: true
-  src/graphql:
+  src/frontend:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts

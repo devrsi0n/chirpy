@@ -47,7 +47,6 @@ export const Link = React.forwardRef(function Link(
     target: _target,
     scroll,
     shallow,
-    passHref = true,
     prefetch,
     highlightPattern,
     hideUnderline,
@@ -80,6 +79,12 @@ export const Link = React.forwardRef(function Link(
   const commonProps = {
     target,
     ...(target === '_blank' && { rel: 'noopener noreferrer' }),
+    href,
+    as,
+    replace,
+    scroll,
+    shallow,
+    prefetch,
     ...restProps,
   };
   const handler = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -89,53 +94,55 @@ export const Link = React.forwardRef(function Link(
   };
 
   return (
-    <NextLink {...{ href, as, replace, scroll, shallow, passHref, prefetch }}>
+    <>
       {variant === 'plain' ? (
-        <a
-          {...commonProps}
-          className={clsx(
-            size && sizeStyles[size],
-            disabled && disabledStyle,
-            className,
-          )}
-          onClick={handler}
-          ref={ref}
-        >
-          {children}
-        </a>
+        <NextLink {...commonProps} onClick={handler} ref={ref}>
+          <span
+            className={clsx(
+              size && sizeStyles[size],
+              disabled && disabledStyle,
+              className,
+            )}
+          >
+            {children}
+          </span>
+        </NextLink>
       ) : (
-        <a
+        <NextLink
           {...commonProps}
-          className={clsx(
-            `relative !no-underline transition duration-150 ease-in-out`,
-            size && sizeStyles[size],
-            highlight && `font-bold`,
-            variantStyles[variant],
-            disabled && disabledStyle,
-            className,
-          )}
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
           onClick={handler}
           ref={ref}
         >
-          {children}
-          {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
-            <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
-              <m.span
-                className="absolute inset-0 inline-block bg-current"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{
-                  scale: isHovering ? 1 : 0,
-                  opacity: isHovering ? 1 : 0,
-                }}
-                exit={{ scale: 0, opacity: 0 }}
-              />
-            </span>
-          )}
-        </a>
+          <span
+            className={clsx(
+              `relative !no-underline transition duration-150 ease-in-out`,
+              size && sizeStyles[size],
+              highlight && `font-bold`,
+              variantStyles[variant],
+              disabled && disabledStyle,
+              className,
+            )}
+          >
+            {children}
+            {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
+              <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
+                <m.span
+                  className="absolute inset-0 inline-block bg-current"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{
+                    scale: isHovering ? 1 : 0,
+                    opacity: isHovering ? 1 : 0,
+                  }}
+                  exit={{ scale: 0, opacity: 0 }}
+                />
+              </span>
+            )}
+          </span>
+        </NextLink>
       )}
-    </NextLink>
+    </>
   );
 });
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 /* eslint-disable no-console */
-import { $, path } from 'zx';
+import { $, path, YAML } from 'zx';
 
 const serverCodeGen = path.resolve(__dirname, 'server-codegen.yml');
 const clientCodeGen = path.resolve(__dirname, 'client-codegen.yml');

@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "build:local": "zx ./scripts/gql-gen.mjs",
-    "dev": "GQL_WATCH=true pnpm run build"
+    "dev": "GQL_WATCH=true pnpm run build:local"
   },
   "sideEffects": false,
   "types": "./src/index.ts",
