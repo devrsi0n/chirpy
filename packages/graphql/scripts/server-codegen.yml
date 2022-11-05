@@ -2,15 +2,15 @@ overwrite: true
 schema:
   - http://127.0.0.1:8080/v1/graphql:
       headers:
-        X-Hasura-Admin-Secret: 'myadminsecretkey'
-documents: 'src/server/graphql/*.graphql'
+        X-Hasura-Admin-Secret: 'c1b519db8df86cbe8cd625ee8548dc1f5aae41e22cf0059ee55ce6190725771c'
+documents: 'src/backend/*.graphql'
 generates:
-  src/server/graphql/generated/types.ts:
+  src/backend/generated/types.ts:
     plugins:
       - typescript
     config:
       enumsAsTypes: true
-  src/server/graphql:
+  src/backend:
     preset: near-operation-file
     presetConfig:
       baseTypesPath: ./generated/types.ts
@@ -19,7 +19,7 @@ generates:
     plugins:
       - typescript-operations
       - typed-document-node
-  ./scripts/graphql/graphql-schema.json:
+  ./scripts/graphql-schema.json:
     plugins:
       - 'introspection'
 config:

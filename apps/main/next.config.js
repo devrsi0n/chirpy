@@ -8,11 +8,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
-const withTM = require('next-transpile-modules')([
-  '@chirpy-dev/ui',
-  '@chirpy-dev/utils',
-  '@chirpy-dev/graphql',
-]);
 
 const plugins = [
   withBundleAnalyzer,
@@ -24,7 +19,6 @@ const plugins = [
     enabled: true,
   }),
   withAxiom,
-  withTM,
 ];
 
 /** @type {import('next').NextConfig} */
@@ -36,9 +30,13 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
     legacyBrowsers: false,
-    browsersListForSwc: true,
+    transpilePackages: [
+      '@chirpy-dev/ui',
+      '@chirpy-dev/utils',
+      '@chirpy-dev/graphql',
+      '@chirpy-dev/types',
+    ],
   },
-  swcMinify: true,
   async rewrites() {
     return [
       {

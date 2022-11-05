@@ -24,7 +24,6 @@ export function defaultCookies(useSecureCookies: boolean): CookiesOptions {
       name: `${cookiePrefix}next-auth.session-token`,
       options: {
         httpOnly: true,
-
         sameSite,
         path: '/',
         secure: useSecureCookies,
@@ -60,6 +59,15 @@ export function defaultCookies(useSecureCookies: boolean): CookiesOptions {
     },
     state: {
       name: `${cookiePrefix}next-auth.state`,
+      options: {
+        httpOnly: true,
+        sameSite,
+        path: '/',
+        secure: useSecureCookies,
+      },
+    },
+    nonce: {
+      name: `${cookiePrefix}next-auth.nonce`,
       options: {
         httpOnly: true,
         sameSite,
