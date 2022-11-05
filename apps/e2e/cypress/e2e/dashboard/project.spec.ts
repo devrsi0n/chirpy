@@ -1,7 +1,7 @@
 import { waitGraphql } from '../../fixtures/utils';
 
 describe('Project', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login();
     cy.visit('/dashboard');
     waitForProjectCardAppear();
