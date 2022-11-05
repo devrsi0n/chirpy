@@ -567,6 +567,7 @@ importers:
       webpack: 5.74.0
       whatwg-fetch: 3.6.2
     dependencies:
+      '@chirpy-dev/types': link:../types
       '@chirpy-dev/utils': link:../utils
       '@geist-ui/icons': 1.0.2_react@18.2.0
       '@headlessui/react': 1.7.4_biqbaboplfbrettd7655fr4n2y
@@ -612,7 +613,6 @@ importers:
       '@chirpy-dev/eslint-config': link:../eslint-config
       '@chirpy-dev/graphql': link:../graphql
       '@chirpy-dev/tsconfigs': link:../tsconfigs
-      '@chirpy-dev/types': link:../types
       '@storybook/addon-actions': 6.5.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/addon-essentials': 6.5.13_lwfyaqwa3stkkh7a7ybgtduyhu
       '@storybook/addon-interactions': 6.5.13_xexzi6whizj7q4rttl6ullzy44

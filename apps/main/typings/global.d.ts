@@ -1,4 +1,4 @@
-/// <reference types="types/src/global" />
+/// <reference types="@chirpy-dev/types/src/global" />
 import * as toxicity from '@tensorflow-models/toxicity';
 
 declare global {
