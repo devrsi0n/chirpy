@@ -41,7 +41,7 @@ describe('Project', () => {
     waitForProjectCardAppear();
   });
 
-  it.skip('should show integration doc', () => {
+  it('should show integration doc', () => {
     cy.findByRole('button', {
       name: /integrate guide/i,
     }).click();
@@ -54,7 +54,7 @@ describe('Project', () => {
     );
   });
 
-  it.skip('should active theme', () => {
+  it('should active theme', () => {
     cy.findByRole('link', { name: /theme/i }).click();
     cy.url({ timeout: 60_000 }).should('include', '/theme/foobar.com');
     cy.findByLabelText(/primary color selector/i).click();

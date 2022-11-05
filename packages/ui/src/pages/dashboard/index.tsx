@@ -19,7 +19,7 @@ import {
   TextField,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
-import { useForm } from '../../hooks';
+import { useBypassCacheRefetch, useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
 
 type FormFields = {
@@ -60,25 +60,29 @@ export function Dashboard(): JSX.Element {
   const handleCloseDialog = React.useCallback(() => {
     setShowDialog(false);
   }, []);
-  const { register, errors, handleSubmit, hasError } = useForm<FormFields>({
-    defaultValues: {
-      name: '',
-      domain: '',
-    },
-  });
-  const handleClickSubmit = handleSubmit(
-    React.useCallback(
-      async (fields, _event: unknown): Promise<void> => {
-        await insertProjectMutation({
-          // TODO: Team id?
-          name: fields.name,
-          domain: fields.domain,
-        });
-        setShowDialog(false);
-        fetchProjects();
+  const { register, errors, handleSubmit, hasError, setError } =
+    useForm<FormFields>({
+      defaultValues: {
+        name: '',
+        domain: '',
       },
-      [insertProjectMutation, fetchProjects],
-    ),
+    });
+  const forceRefetchProjects = useBypassCacheRefetch(fetchProjects);
+  const handleClickSubmit = handleSubmit(
+    async (fields, _event: unknown): Promise<void> => {
+      const { error } = await insertProjectMutation({
+        // TODO: Team id?
+        name: fields.name,
+        domain: fields.domain,
+      });
+      console.log(error);
+      if (error?.message?.includes('Uniqueness violation')) {
+        setError('domain', 'A project associated with this domain already');
+        return;
+      }
+      setShowDialog(false);
+      forceRefetchProjects();
+    },
   );
   const disableCreation = isENVProd && (projects?.length || 0) > 0;
 
