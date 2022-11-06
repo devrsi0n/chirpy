@@ -13,7 +13,7 @@
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
-    "@testing-library/react": "13.3.0",
+    "@testing-library/react": "13.4.0",
     "@types/jest": "28.1.8",
     "@types/node": "16.11.45",
     "@types/react": "18.0.24",

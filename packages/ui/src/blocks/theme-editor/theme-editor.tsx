@@ -1,7 +1,6 @@
 import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
 import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
-import merge from 'lodash/merge';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
 
@@ -14,6 +13,7 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
+import { mergeDeep } from '../../utilities/object';
 import {
   CommentWidgetPreview,
   CommentWidgetPreviewProps,
@@ -37,7 +37,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { showToast } = useToast();
   const handClickPrimaryColorFunction = (color: ColorSeries) => {
     return async () => {
-      const newTheme = merge({}, widgetTheme, {
+      const newTheme = mergeDeep(widgetTheme || {}, {
         colors: {
           light: { primary: color.light },
           dark: { primary: color.dark },

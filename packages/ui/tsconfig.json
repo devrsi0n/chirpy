@@ -3,7 +3,7 @@
   "extends": "@chirpy-dev/tsconfigs/base.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["jest", "node", "@chirpy-dev/types"]
+    "types": ["jest", "node"]
   },
   "exclude": ["node_modules"],
   "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]

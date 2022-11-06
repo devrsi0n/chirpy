@@ -10,10 +10,10 @@
     "@tailwindcss/line-clamp": "0.4.2",
     "@tailwindcss/typography": "0.5.7",
     "color-convert": "2.0.1",
-    "postcss": "8.4.16",
+    "postcss": "8.4.18",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "7.8.2",
-    "tailwindcss": "3.2.1",
+    "tailwindcss": "3.2.2",
     "typescript": "4.8.4"
   },
   "publishConfig": {
