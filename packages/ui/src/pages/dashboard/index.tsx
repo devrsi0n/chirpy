@@ -75,7 +75,6 @@ export function Dashboard(): JSX.Element {
         name: fields.name,
         domain: fields.domain,
       });
-      console.log(error);
       if (error?.message?.includes('Uniqueness violation')) {
         setError('domain', 'A project associated with this domain already');
         return;

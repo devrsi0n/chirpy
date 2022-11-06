@@ -109,7 +109,12 @@ export class CountriesMap extends React.Component<
           limit: 300,
         },
       )
-      .then((res) => this.setState({ loading: false, countries: res }));
+      .then((res) => {
+        return new Promise<void>((resolve) => {
+          // Draw map need to wait for element shows up
+          this.setState({ loading: false, countries: res }, () => resolve());
+        });
+      });
   }
 
   resizeMap = () => {

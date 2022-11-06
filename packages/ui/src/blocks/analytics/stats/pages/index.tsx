@@ -3,7 +3,7 @@ import React from 'react';
 import { Tabs } from '../../../../components/tabs';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
-import { AnalyticsCard } from '../fine-components';
+import { AnalyticsCard, CardHeader } from '../fine-components';
 import { PageRank } from './page-rank';
 
 export interface PagesProps extends Props {
@@ -16,7 +16,7 @@ export default function Pages(props: PagesProps): JSX.Element {
       <Tabs
         cacheKey="analytics.pages"
         initialValue="entry-pages"
-        leftItem={<h3 className="font-bold text-gray-1100">Pages</h3>}
+        leftItem={<CardHeader>Pages</CardHeader>}
       >
         <Tabs.Item label="Entry Pages" value="entry-pages">
           <PageRank

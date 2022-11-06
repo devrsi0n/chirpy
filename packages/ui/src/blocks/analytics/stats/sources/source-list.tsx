@@ -16,7 +16,7 @@ import { Props } from '../../type';
 import * as url from '../../url';
 import Bar from '../bar';
 import { EmptyState } from '../empty-state';
-import { AnalyticsCard, ViewNumber } from '../fine-components';
+import { AnalyticsCard, CardHeader, ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 import { Referrer } from './referrer-list';
 
@@ -28,7 +28,7 @@ export default function SourceList(props: SourceListProps): JSX.Element {
       <Tabs
         cacheKey="analytics.source-list"
         initialValue="all"
-        leftItem={<h3 className="font-bold text-gray-1100">Top Sources</h3>}
+        leftItem={<CardHeader>Top Sources</CardHeader>}
       >
         <Tabs.Item label="All" value="all">
           <AllSources {...props} />

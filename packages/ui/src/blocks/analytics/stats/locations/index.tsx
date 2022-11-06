@@ -1,13 +1,13 @@
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-import { Tabs } from '../../../../components/tabs';
+import { Tabs } from '../../../../components';
 import { useIsDarkMode } from '../../../../hooks/use-is-dark-mode';
 import * as api from '../../analytics-api';
 import { Timer } from '../../timer';
 import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
-import { AnalyticsCard } from '../fine-components';
+import { AnalyticsCard, CardHeader } from '../fine-components';
 import ListReport from '../reports/list';
 import { CountriesMap } from './countries-map';
 
@@ -23,7 +23,7 @@ export default function Locations(props: LocationsProps): JSX.Element {
       <Tabs
         cacheKey="analytics.locations"
         initialValue="map"
-        leftItem={<h3 className="font-bold text-gray-1100">Locations</h3>}
+        leftItem={<CardHeader>Locations</CardHeader>}
       >
         <Tabs.Item label="Map" value="map">
           <CountriesMap

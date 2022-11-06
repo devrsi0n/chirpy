@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
+import { Heading } from '../../../components';
 import styles from '../analytics.module.scss';
 
 export type CardProps = React.PropsWithChildren<{}>;
@@ -30,3 +31,16 @@ export const ViewNumber = (props: React.PropsWithChildren<{}>) => (
     {props.children}
   </span>
 );
+
+export type CardHeaderProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+export function CardHeader(props: CardHeaderProps): JSX.Element {
+  return (
+    <Heading as="h3" className="text-base font-bold">
+      {props.children}
+    </Heading>
+  );
+}

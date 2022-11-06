@@ -6,7 +6,7 @@ import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
 import { Props } from '../../type';
 import * as url from '../../url';
-import { AnalyticsCard } from '../fine-components';
+import { AnalyticsCard, CardHeader } from '../fine-components';
 import ListReport from '../reports/list';
 
 export interface DevicesProps extends Props {
@@ -19,7 +19,7 @@ export default function Devices(props: DevicesProps): JSX.Element {
       <Tabs
         cacheKey="analytics.devices"
         initialValue="browser"
-        leftItem={<h3 className="font-bold text-gray-1100">Devices</h3>}
+        leftItem={<CardHeader>Devices</CardHeader>}
       >
         <Tabs.Item label="Size" value="size">
           <ScreenSizes site={props.site} query={props.query} />

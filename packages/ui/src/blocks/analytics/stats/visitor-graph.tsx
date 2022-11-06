@@ -199,6 +199,8 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
       label,
     );
 
+    const scaleColor = darkTheme ? `hsl(0 0% 97.3%)` : undefined;
+
     return new Chart(this.ctx, {
       type: 'line',
       data: {
@@ -271,7 +273,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
               // @ts-ignore
               callback: numberFormatter,
               maxTicksLimit: 8,
-              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
+              color: scaleColor,
             },
             grid: {
               // @ts-ignore
@@ -289,7 +291,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
                   this.getLabelForValue(val),
                 );
               },
-              color: darkTheme ? `hsl(var(--tw-colors-grayd-1200))` : undefined,
+              color: scaleColor,
             },
           },
         },
@@ -596,7 +598,7 @@ export default function VisitorGraph(props: VisitorGraphProps) {
     <LazyLoader onVisible={onVisible}>
       <div
         className={clsx(
-          'main-graph relative w-full rounded bg-white shadow-xl dark:bg-gray-825',
+          'relative w-full rounded bg-white shadow-xl dark:bg-gray-825',
           loading && `z-20`,
         )}
       >
