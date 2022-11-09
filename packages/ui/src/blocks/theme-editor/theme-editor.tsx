@@ -1,24 +1,23 @@
 import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
 import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
-import { useTheme } from 'next-themes';
-import * as React from 'react';
 
 import { PageTitle } from '../../blocks/page-title';
 import { Alert } from '../../components/alert';
-import { IconButton } from '../../components/button';
 import { Heading, IHeadingProps } from '../../components/heading';
-import { Popover } from '../../components/popover';
 import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
+import { getColorFromCssVariable } from '../../utilities';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
 import {
   CommentWidgetPreview,
   CommentWidgetPreviewProps,
 } from '../comment-widget-preview';
-import { ColorSeries, colorOptions } from './colors';
+import { ThemeSelect } from '../theme-select';
+import { ColorPicker, ColorSeriesPicker } from './color-picker';
+import { COLOR_OPTIONS, useColors } from './colors';
 import { revalidateProjectPages } from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
@@ -28,41 +27,38 @@ export type ThemeEditorProps = {
 } & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
-  const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
-  const { resolvedTheme } = useTheme();
-  const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system'
-    ? 'light'
-    : resolvedTheme) || 'light') as keyof ColorSeries;
+  const { widgetTheme, setWidgetTheme } = useWidgetTheme();
+
   const [{}, updateTheme] = useUpdateThemeMutation();
   const { showToast } = useToast();
-  const handClickPrimaryColorFunction = (color: ColorSeries) => {
-    return async () => {
-      const newTheme = mergeDeep(widgetTheme || {}, {
-        colors: {
-          light: { primary: color.light },
-          dark: { primary: color.dark },
-        },
+  const handClickPrimaryColorFunction = async (colorKey: string) => {
+    const colorSeries = COLOR_OPTIONS[colorKey];
+    const newTheme = mergeDeep(widgetTheme || {}, {
+      colors: {
+        light: { primary: colorSeries.light },
+        dark: { primary: colorSeries.dark },
+      },
+    });
+    setWidgetTheme(newTheme);
+    try {
+      await updateTheme({
+        projectId: props.project.id,
+        theme: newTheme,
       });
-      setWidgetTheme(newTheme);
-      try {
-        await updateTheme({
-          projectId: props.project.id,
-          theme: newTheme,
-        });
-        await revalidateProjectPages(props.project.id, props.project.domain);
-        showToast({
-          type: 'info',
-          title: 'Theme has been saved',
-        });
-      } catch (error) {
-        logger.warn(`Save theme pages failed`, error);
-        showToast({
-          type: 'error',
-          title: 'Save theme failed',
-        });
-      }
-    };
+      await revalidateProjectPages(props.project.id, props.project.domain);
+      showToast({
+        type: 'info',
+        title: 'Theme has been saved',
+      });
+    } catch (error) {
+      logger.warn(`Save theme pages failed`, error);
+      showToast({
+        type: 'error',
+        title: 'Save theme failed',
+      });
+    }
   };
+  const primaryColorOptions = useColors({ level: 900 });
 
   return (
     <section className="px-2">
@@ -76,48 +72,26 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
               automatically.
             </Text>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-2">
+            <Text variant="secondary">Try your theme with different modes</Text>
+            <ThemeSelect />
+          </div>
+          <div className="space-y-6">
             <BoldHeading>Colors</BoldHeading>
-            <Text>Primary</Text>
-            <div className="flex flex-row items-center space-x-2">
-              <Popover>
-                <Popover.Button
-                  as={IconButton}
-                  aria-label="Click to expanded the color picker"
-                >
-                  <span
-                    aria-label="Primary color selector"
-                    className="inline-block h-6 w-6 rounded-full bg-primary-900"
-                  />
-                </Popover.Button>
-                <Popover.Panel>
-                  <ul className="flex flex-row space-x-3">
-                    {Object.entries(colorOptions).map(([key, color]) => (
-                      <li key={color[activeTheme][900]}>
-                        <IconButton
-                          onClick={handClickPrimaryColorFunction(color)}
-                          aria-label={`Color ${key}`}
-                        >
-                          <span
-                            className="inline-block h-6 w-6 rounded-full"
-                            style={{ background: color[activeTheme][900] }}
-                          />
-                        </IconButton>
-                      </li>
-                    ))}
-                  </ul>
-                </Popover.Panel>
-              </Popover>
-              <Text
-                className="mb-2 px-2 !leading-none"
-                variant="secondary"
-                aria-label="Selected color"
-                size="sm"
-              >
-                {widgetTheme?.colors[activeTheme].primary[900] ||
-                  siteTheme.colors[activeTheme].primary[900]}
-              </Text>
-            </div>
+            <ColorSeriesPicker
+              label="Primary"
+              colorOptions={primaryColorOptions}
+              onSelectColor={handClickPrimaryColorFunction}
+              styles={{ triggerButton: 'bg-primary-900' }}
+            />
+            <ColorPicker
+              label="Background"
+              hintText="You may save a color for dark mode as well"
+              value={getColorFromCssVariable('--tw-colors-bg')}
+              onSelectColor={(color) => {
+                console.log({ color });
+              }}
+            />
           </div>
         </aside>
         <div role="separator" className="my-6 border-b sm:mx-4 sm:border-r" />

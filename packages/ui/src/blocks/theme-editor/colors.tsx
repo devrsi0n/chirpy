@@ -16,6 +16,7 @@ import {
   violet,
   violetDark,
 } from '@radix-ui/colors';
+import { useTheme } from 'next-themes';
 
 import { translateRadixColor } from '../../contexts/theme-context/utilities';
 
@@ -23,7 +24,7 @@ export type ColorSeries = {
   light: Record<string, string>;
   dark: Record<string, string>;
 };
-export const colorOptions: Record<string, ColorSeries> = {
+export const COLOR_OPTIONS: Record<string, ColorSeries> = {
   red: {
     light: translateRadixColor(red),
     dark: translateRadixColor(redDark),
@@ -57,3 +58,28 @@ export const colorOptions: Record<string, ColorSeries> = {
     dark: translateRadixColor(pinkDark),
   },
 };
+
+export type UseActiveColorsOptions = {
+  level: number;
+};
+
+/**
+ * Get active colors, active means the theme user is using, `light` or `dark`
+ */
+export function useColors({
+  level,
+}: UseActiveColorsOptions): Record<string, string> {
+  const activeTheme = useActiveTheme();
+  return Object.entries(COLOR_OPTIONS).reduce((acc, [key, value]) => {
+    acc[key] = value[activeTheme][level];
+    return acc;
+  }, {} as Record<string, string>);
+}
+
+function useActiveTheme(): keyof ColorSeries {
+  const { resolvedTheme } = useTheme();
+  const activeTheme: keyof ColorSeries = ((resolvedTheme === 'system'
+    ? 'light'
+    : resolvedTheme) || 'light') as keyof ColorSeries;
+  return activeTheme;
+}

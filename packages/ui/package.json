@@ -33,6 +33,7 @@
     "avvvatars-react": "0.4.2",
     "canvas-confetti": "1.6.0",
     "chart.js": "3.8.0",
+    "class-variance-authority": "0.3.0",
     "clsx": "1.2.1",
     "d3": "3.5.17",
     "datamaps": "0.5.9",

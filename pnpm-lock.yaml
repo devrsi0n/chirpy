@@ -516,6 +516,7 @@ importers:
       canvas-confetti: 1.6.0
       chart.js: 3.8.0
       chromatic: 6.7.0
+      class-variance-authority: 0.3.0
       clsx: 1.2.1
       concurrently: 7.5.0
       configs: workspace:*
@@ -583,6 +584,7 @@ importers:
       avvvatars-react: 0.4.2_vt6aeitzauirmcdhimiad2yjxy
       canvas-confetti: 1.6.0
       chart.js: 3.8.0
+      class-variance-authority: 0.3.0_typescript@4.8.4
       clsx: 1.2.1
       d3: 3.5.17
       datamaps: 0.5.9
@@ -10348,6 +10350,17 @@ packages:
       static-extend: 0.1.2
     dev: true
 
+  /class-variance-authority/0.3.0_typescript@4.8.4:
+    resolution: {integrity: sha512-TFO+pzY9Gedqv8crPhprd647wxhvfpKevPPjiMcteEWsnkHX9yZrD1xMY3ZhRZnLwHUHCCP0LYO6KZIVag/5wQ==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 4.8.4
+    dev: false
+
   /clean-css/4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==}
     engines: {node: '>= 4.0'}
@@ -18195,7 +18208,7 @@ packages:
       '@panva/hkdf': 1.0.2
       cookie: 0.5.0
       jose: 4.10.4
-      next: 13.0.2_biqbaboplfbrettd7655fr4n2y
+      next: 13.0.2_36dhtzzjetle2gptjwci3pgnsi
       oauth: 0.9.15
       openid-client: 5.2.1
       preact: 10.11.2

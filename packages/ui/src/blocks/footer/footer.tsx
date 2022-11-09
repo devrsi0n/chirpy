@@ -1,25 +1,12 @@
 import clsx from 'clsx';
-import { useTheme } from 'next-themes';
 import * as React from 'react';
 
-import {
-  ClientOnly,
-  IconMoon,
-  IconSettings,
-  IconSun,
-  Link,
-  Select,
-  Text,
-} from '../../components';
+import { Link, Text } from '../../components';
+import { ThemeSelect } from '../theme-select';
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
 
 export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
-  const { theme, setTheme } = useTheme();
-  const handleChange = (value: string) => {
-    setTheme(value);
-  };
-
   return (
     <footer
       {...restProps}
@@ -51,28 +38,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5`}
       >
         <CompanyRight />
-        <ClientOnly>
-          <Select
-            value={theme || 'system'}
-            onChange={handleChange}
-            className="w-32"
-            placement="top"
-            aria-label="Mode selector"
-          >
-            <Select.Option value="light">
-              <IconSun size={16} />
-              <span>Light</span>
-            </Select.Option>
-            <Select.Option value="dark">
-              <IconMoon size={16} />
-              <span>Dark</span>
-            </Select.Option>
-            <Select.Option value="system">
-              <IconSettings size={16} />
-              <span>System</span>
-            </Select.Option>
-          </Select>
-        </ClientOnly>
+        <ThemeSelect />
       </div>
     </footer>
   );
