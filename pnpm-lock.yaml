@@ -104,7 +104,7 @@ importers:
       autoprefixer: 10.4.13
       glob: 8.0.3
       postcss: 8.4.16
-      tailwindcss: 3.2.1
+      tailwindcss: 3.2.4
       tailwindcss-box-shadow: 2.0.0
       tailwindcss-email-variants: 2.0.0
       tailwindcss-mso: 1.3.0
@@ -114,10 +114,10 @@ importers:
       autoprefixer: 10.4.13_postcss@8.4.16
       glob: 8.0.3
       postcss: 8.4.16
-      tailwindcss: 3.2.1_postcss@8.4.16
-      tailwindcss-box-shadow: 2.0.0_tailwindcss@3.2.1
-      tailwindcss-email-variants: 2.0.0_tailwindcss@3.2.1
-      tailwindcss-mso: 1.3.0_tailwindcss@3.2.1
+      tailwindcss: 3.2.4_postcss@8.4.16
+      tailwindcss-box-shadow: 2.0.0_tailwindcss@3.2.4
+      tailwindcss-email-variants: 2.0.0_tailwindcss@3.2.4
+      tailwindcss-mso: 1.3.0_tailwindcss@3.2.4
 
   apps/main:
     specifiers:
@@ -185,7 +185,7 @@ importers:
       shiki: 0.10.1
       stellate: 1.17.0
       superjson: 1.9.1
-      tailwindcss: 3.2.1
+      tailwindcss: 3.2.4
       type-fest: 3.1.0
       typescript: 4.8.4
       urql: 3.0.3
@@ -264,7 +264,7 @@ importers:
       jest: 29.2.2_@types+node@16.11.45
       postcss: 8.4.16
       stellate: 1.17.0
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
       typescript: 4.8.4
       webpack: 5.74.0
 
@@ -298,18 +298,18 @@ importers:
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2
       postcss-preset-env: 7.8.2
-      tailwindcss: 3.2.1
+      tailwindcss: 3.2.4
       typescript: 4.8.4
     dependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
       '@radix-ui/colors': 0.1.8
-      '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.1
-      '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.1
+      '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.4
+      '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.4
       color-convert: 2.0.1
       postcss: 8.4.16
       postcss-flexbugs-fixes: 5.0.2_postcss@8.4.16
       postcss-preset-env: 7.8.2_postcss@8.4.16
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
       typescript: 4.8.4
 
   packages/docker-cli:
@@ -560,7 +560,7 @@ importers:
       storybook-addon-next: 1.6.9
       style-loader: 3.3.1
       super-tiny-icons: 0.4.0
-      tailwindcss: 3.2.1
+      tailwindcss: 3.2.4
       type-fest: 3.1.0
       typescript: 4.8.4
       urql: 3.0.3
@@ -658,7 +658,7 @@ importers:
       sass-loader: 13.0.2_sass@1.54.9+webpack@5.74.0
       storybook-addon-next: 1.6.9_fbbzcnpcnp3zq4ermfx4oir2em
       style-loader: 3.3.1_webpack@5.74.0
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
       type-fest: 3.1.0
       typescript: 4.8.4
       webpack: 5.74.0
@@ -4538,7 +4538,7 @@ packages:
       prevent-widows: 1.0.2
       query-string: 7.1.1
       string-strip-html: 8.3.0
-      tailwindcss: 3.2.1_postcss@8.4.18
+      tailwindcss: 3.2.4_postcss@8.4.18
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -6788,15 +6788,15 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.1:
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.4:
     resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
     dev: false
 
-  /@tailwindcss/typography/0.5.7_tailwindcss@3.2.1:
+  /@tailwindcss/typography/0.5.7_tailwindcss@3.2.4:
     resolution: {integrity: sha512-JTTSTrgZfp6Ki4svhPA4mkd9nmQ/j9EfE7SbHJ1cLtthKkpW2OxsFXzSmxbhYbEkfNIyAyhle5p4SYyKRbz/jg==}
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders'
@@ -6805,7 +6805,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
     dev: false
 
   /@tensorflow-models/toxicity/1.2.2_ce7e77rhh6oipcy6kxvkentnmi:
@@ -9033,7 +9033,7 @@ packages:
   /axios/0.21.4_debug@4.3.2:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
     dependencies:
-      follow-redirects: 1.15.1_debug@4.3.2
+      follow-redirects: 1.15.1
     transitivePeerDependencies:
       - debug
     dev: false
@@ -11271,6 +11271,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -13396,7 +13397,7 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /follow-redirects/1.15.1_debug@4.3.2:
+  /follow-redirects/1.15.1:
     resolution: {integrity: sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -13404,8 +13405,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 4.3.2
 
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
@@ -14839,7 +14838,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.1_debug@4.3.2
+      follow-redirects: 1.15.1
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -17975,7 +17974,7 @@ packages:
     peerDependencies:
       next: '>= 12.1.4 < 14'
     dependencies:
-      next: 13.0.2_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18007,7 +18006,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 13.0.2_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18019,7 +18018,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.0.2_v72kpxpma3xps5f7aqpsb5vf3u
+      next: 13.0.2_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -22782,33 +22781,33 @@ packages:
     resolution: {integrity: sha512-qImOD23aDfnIDNqlG1NOehdB9IYsn1V9oByPjKY1nakv2MQYCEMyX033/q+aEtYCpmYK1cv2+NTmlH+ra6GA5A==}
     dev: true
 
-  /tailwindcss-box-shadow/2.0.0_tailwindcss@3.2.1:
+  /tailwindcss-box-shadow/2.0.0_tailwindcss@3.2.4:
     resolution: {integrity: sha512-RZdePEMzIpiTG0FmbncVlY6Zkqp3tBhpyCoVpc8UQBZEdGY8TqVcIrE75Si4vIz/oGDAIFRKGeKFt2HLLbLHHQ==}
     peerDependencies:
       tailwindcss: '>=3.0.0'
     dependencies:
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
     dev: false
 
-  /tailwindcss-email-variants/2.0.0_tailwindcss@3.2.1:
+  /tailwindcss-email-variants/2.0.0_tailwindcss@3.2.4:
     resolution: {integrity: sha512-oNiHQCnh2KPfShPjqJLD2PqEgSZ9J4BUJPq3nsufJraxmMq2bowI3651GQBsxh5usT9CgmUNEkDe04d80DN9gQ==}
     peerDependencies:
       tailwindcss: '>=3.1.0'
     dependencies:
       lodash.get: 4.4.2
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
     dev: false
 
-  /tailwindcss-mso/1.3.0_tailwindcss@3.2.1:
+  /tailwindcss-mso/1.3.0_tailwindcss@3.2.4:
     resolution: {integrity: sha512-aCdQrJaS0GM3/aTOG7T/KuUvoVJvpW4H+9Ao2aYfm3mjd515I5JtJqOcZRXaC99AOTfaKJ0skgRIt8h6LTkDNw==}
     peerDependencies:
       tailwindcss: '>=3.0.0'
     dependencies:
-      tailwindcss: 3.2.1_postcss@8.4.16
+      tailwindcss: 3.2.4_postcss@8.4.16
     dev: false
 
-  /tailwindcss/3.2.1_postcss@8.4.16:
-    resolution: {integrity: sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==}
+  /tailwindcss/3.2.4_postcss@8.4.16:
+    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
@@ -22840,8 +22839,8 @@ packages:
     transitivePeerDependencies:
       - ts-node
 
-  /tailwindcss/3.2.1_postcss@8.4.18:
-    resolution: {integrity: sha512-Uw+GVSxp5CM48krnjHObqoOwlCt5Qo6nw1jlCRwfGy68dSYb/LwS9ZFidYGRiM+w6rMawkZiu1mEMAsHYAfoLg==}
+  /tailwindcss/3.2.4_postcss@8.4.18:
+    resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
     peerDependencies:
