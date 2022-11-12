@@ -28,7 +28,7 @@ export function ColorSeriesPicker({
       <Text>{label}</Text>
       <div className="flex flex-row items-center space-x-2">
         <Popover>
-          <Popover.Button as={IconButton} aria-label="Color picker">
+          <Popover.Button as={IconButton} aria-label={`${label} color picker`}>
             <span className={`${pickerButtonStyle} ${styles.triggerButton}`} />
           </Popover.Button>
           <Popover.Panel>
