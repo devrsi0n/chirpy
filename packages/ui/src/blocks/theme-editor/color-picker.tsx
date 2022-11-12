@@ -101,4 +101,4 @@ export function ColorPicker({
 }
 
 const pickerButtonStyle =
-  'inline-block h-6 w-6 rounded-full border border-gray-500';
+  'inline-block h-6 w-6 rounded-full border border-gray-1000 hover:ring-gray-400 hover:ring-4';

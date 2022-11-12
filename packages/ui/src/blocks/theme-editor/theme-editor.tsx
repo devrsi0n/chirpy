@@ -6,6 +6,7 @@ import debounce from 'debounce-promise';
 import * as React from 'react';
 
 import { PageTitle } from '../../blocks/page-title';
+import { ClientOnly } from '../../components';
 import { Alert } from '../../components/alert';
 import { Heading, IHeadingProps } from '../../components/heading';
 import { Text } from '../../components/text';
@@ -20,10 +21,7 @@ import {
 } from '../comment-widget-preview';
 import { ColorPicker, ColorSeriesPicker } from './color-picker';
 import { COLOR_OPTIONS, useActiveColorMode, useColors } from './colors';
-import {
-  getHexColorFromCssVariable,
-  revalidateProjectPages,
-} from './utilities';
+import { hslToHex, revalidateProjectPages } from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
@@ -32,7 +30,7 @@ export type ThemeEditorProps = {
 } & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
-  const { widgetTheme, setWidgetTheme } = useWidgetTheme();
+  const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
 
   const [{}, updateTheme] = useUpdateThemeMutation();
   const { showToast } = useToast();
@@ -116,12 +114,19 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
               onSelectColor={handleSavePrimaryColor}
               styles={{ triggerButton: 'bg-primary-900' }}
             />
-            <ColorPicker
-              label="Background"
-              hintText="Remember to save a color for dark/light mode as well"
-              defaultValue={getHexColorFromCssVariable('--tw-colors-bg')}
-              onSelectColor={handleSaveBackground}
-            />
+            <ClientOnly>
+              <ColorPicker
+                key={activeMode}
+                label="Background"
+                hintText="Remember to save a color for dark/light mode as well"
+                defaultValue={hslToHex(
+                  widgetTheme?.colors[activeMode].bg ||
+                    siteTheme.colors[activeMode].bg ||
+                    '#fff',
+                )}
+                onSelectColor={handleSaveBackground}
+              />
+            </ClientOnly>
           </div>
         </aside>
         <div role="separator" className="my-6 border-b sm:mx-4 sm:border-r" />

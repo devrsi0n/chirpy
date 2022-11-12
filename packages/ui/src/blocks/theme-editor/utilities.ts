@@ -1,4 +1,4 @@
-import { getColorFromCssVariable } from '../../utilities';
+import { translateHslColor } from '../../contexts/theme-context/utilities';
 
 export async function revalidateProjectPages(
   projectId: string,
@@ -10,14 +10,12 @@ export async function revalidateProjectPages(
   ]);
 }
 
-export function getHexColorFromCssVariable(variable: string): string {
-  // '210 20% 98%'
-  const hslColor = getColorFromCssVariable(variable);
+export function hslToHex(hslColor: string) {
   if (!hslColor) {
     return '';
   }
-  const [h, s, l] = hslColor.split(' ');
-  return hslToHex(
+  const [h, s, l] = translateHslColor(hslColor).split(' ');
+  return hslNumberToHex(
     Number.parseInt(h, 10),
     Number.parseInt(s.replace('%', ''), 10),
     Number.parseInt(l.replace('%', ''), 10),
@@ -32,7 +30,7 @@ export function getHexColorFromCssVariable(variable: string): string {
  * @param lightness [0-100]
  * @returns hex color
  */
-export function hslToHex(
+function hslNumberToHex(
   hue: number,
   saturation: number,
   lightness: number,

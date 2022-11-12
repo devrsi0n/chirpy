@@ -103,6 +103,7 @@ export const getStaticProps: GetStaticProps<
         >,
         any
       >(
+        // @ts-ignore
         client.subscription(CommentTreeDocument, { pageURL }),
         subscribe((result) => {
           // log.debug(result);

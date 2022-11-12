@@ -22,7 +22,7 @@ function getThemeCSSVariables(
     const cssVariableKey =
       prefix && key ? [prefix, key].join('-') : prefix || key;
     if (typeof value === 'string') {
-      cssVariables.push([cssVariableKey, translateColor(value)]);
+      cssVariables.push([cssVariableKey, translateHslColor(value)]);
     } else if (typeof value === 'object' && value) {
       cssVariables.push(...getThemeCSSVariables(value, cssVariableKey));
     } else {
@@ -37,7 +37,7 @@ function getThemeCSSVariables(
  * Used by css variables
  * @param color
  */
-function translateColor(color: string) {
+export function translateHslColor(color: string) {
   const [, hsl] = /hsl\((.+)\)/.exec(color) || [];
   if (hsl) {
     return hsl.replace(/,/g, '');
