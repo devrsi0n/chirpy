@@ -1,3 +1,5 @@
+import { ColorSeriesKey } from '@chirpy-dev/types';
+
 export type CSSVariables = Array<[string, string]>;
 
 type NestedObject = { [key: string]: string | NestedObject };
@@ -54,7 +56,9 @@ function translateColor(color: string) {
  * @param color
  * @returns
  */
-export function translateRadixColor(color: Record<string, string>) {
+export function translateRadixColor(
+  color: Record<string, string>,
+): Record<ColorSeriesKey, string> {
   const result: Record<string, string> = {};
   for (const [key, value] of Object.entries(color)) {
     const [, num] = /\w(\d+)/.exec(key) || [];

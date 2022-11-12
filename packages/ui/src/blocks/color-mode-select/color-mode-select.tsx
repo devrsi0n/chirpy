@@ -8,7 +8,7 @@ import {
   Select,
 } from '../../components';
 
-export function ThemeSelect(): JSX.Element {
+export function ColorModeSelect(): JSX.Element {
   const { theme, setTheme } = useTheme();
   const handleChange = (value: string) => {
     setTheme(value);

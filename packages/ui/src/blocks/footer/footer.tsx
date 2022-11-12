@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { Link, Text } from '../../components';
-import { ThemeSelect } from '../theme-select';
+import { ColorModeSelect } from '../color-mode-select';
 
 export type FooterProps = React.ComponentPropsWithoutRef<'footer'>;
 
@@ -38,7 +38,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5`}
       >
         <CompanyRight />
-        <ThemeSelect />
+        <ColorModeSelect />
       </div>
     </footer>
   );

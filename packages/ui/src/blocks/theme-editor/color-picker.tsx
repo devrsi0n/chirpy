@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { IconButton, Popover, Text } from '../../components';
+import { hexToHSL } from './utilities';
 
 export type ColorSeriesPickerProps = {
   label: string;
@@ -65,7 +66,7 @@ export function ColorSeriesPicker({
 export type ColorPickerProps = {
   label: string;
   hintText: string;
-  value: string;
+  defaultValue: string;
   onSelectColor: (color: string) => void;
 };
 
@@ -73,8 +74,9 @@ export function ColorPicker({
   label,
   hintText,
   onSelectColor,
-  value,
+  defaultValue,
 }: ColorPickerProps): JSX.Element {
+  const [value, setValue] = React.useState(defaultValue);
   return (
     <section className="space-y-3">
       <div>
@@ -84,15 +86,19 @@ export function ColorPicker({
         </Text>
       </div>
       <input
-        className={`hover:cursor-pointer [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch-wrapper]:p-0 ${pickerButtonStyle}`}
+        className={`hover:cursor-pointer [&::-webkit-color-swatch]:rounded-full [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch-wrapper]:p-0 [&::-moz-color-swatch-wrapper]:p-0 ${pickerButtonStyle}`}
         type="color"
         name="colorPicker"
-        value={`hsl(${value.trim()})`}
-        onChange={(e) => onSelectColor(e.target.value)}
+        value={value}
+        onChange={(e) => {
+          const color = e.target.value;
+          setValue(color);
+          onSelectColor(hexToHSL(color));
+        }}
       />
     </section>
   );
 }
 
 const pickerButtonStyle =
-  'inline-block h-6 w-6 rounded-full border border-gray-600';
+  'inline-block h-6 w-6 rounded-full border border-gray-500';

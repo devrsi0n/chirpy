@@ -1,6 +1,9 @@
 import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
 import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
+import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
+import debounce from 'debounce-promise';
+import * as React from 'react';
 
 import { PageTitle } from '../../blocks/page-title';
 import { Alert } from '../../components/alert';
@@ -8,17 +11,19 @@ import { Heading, IHeadingProps } from '../../components/heading';
 import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
-import { getColorFromCssVariable } from '../../utilities';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
+import { ColorModeSelect } from '../color-mode-select';
 import {
   CommentWidgetPreview,
   CommentWidgetPreviewProps,
 } from '../comment-widget-preview';
-import { ThemeSelect } from '../theme-select';
 import { ColorPicker, ColorSeriesPicker } from './color-picker';
-import { COLOR_OPTIONS, useColors } from './colors';
-import { revalidateProjectPages } from './utilities';
+import { COLOR_OPTIONS, useActiveColorMode, useColors } from './colors';
+import {
+  getHexColorFromCssVariable,
+  revalidateProjectPages,
+} from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
@@ -31,7 +36,48 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
 
   const [{}, updateTheme] = useUpdateThemeMutation();
   const { showToast } = useToast();
-  const handClickPrimaryColorFunction = async (colorKey: string) => {
+  const saveTheme = debounce(
+    React.useCallback(
+      async (newTheme: Theme) => {
+        setWidgetTheme(newTheme);
+        try {
+          await updateTheme({
+            projectId: props.project.id,
+            theme: newTheme,
+          });
+          await revalidateProjectPages(props.project.id, props.project.domain);
+          showToast({
+            type: 'info',
+            title: 'Theme has been saved',
+          });
+        } catch (error) {
+          logger.warn(`Save theme pages failed`, error);
+          showToast({
+            type: 'error',
+            title: 'Save theme failed',
+          });
+        }
+      },
+      [
+        props.project.domain,
+        props.project.id,
+        setWidgetTheme,
+        showToast,
+        updateTheme,
+      ],
+    ),
+    1500,
+  );
+  const activeMode = useActiveColorMode();
+  const handleSaveBackground = async (color: string) => {
+    const newTheme = mergeDeep(widgetTheme || {}, {
+      colors: {
+        [activeMode]: { bg: color },
+      },
+    }) as Theme;
+    await saveTheme(newTheme);
+  };
+  const handleSavePrimaryColor = async (colorKey: string) => {
     const colorSeries = COLOR_OPTIONS[colorKey];
     const newTheme = mergeDeep(widgetTheme || {}, {
       colors: {
@@ -39,26 +85,9 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         dark: { primary: colorSeries.dark },
       },
     });
-    setWidgetTheme(newTheme);
-    try {
-      await updateTheme({
-        projectId: props.project.id,
-        theme: newTheme,
-      });
-      await revalidateProjectPages(props.project.id, props.project.domain);
-      showToast({
-        type: 'info',
-        title: 'Theme has been saved',
-      });
-    } catch (error) {
-      logger.warn(`Save theme pages failed`, error);
-      showToast({
-        type: 'error',
-        title: 'Save theme failed',
-      });
-    }
+    await saveTheme(newTheme);
   };
-  const primaryColorOptions = useColors({ level: 900 });
+  const primaryColorOptions = useColors({ level: '900' });
 
   return (
     <section className="px-2">
@@ -73,24 +102,25 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             </Text>
           </div>
           <div className="space-y-2">
-            <Text variant="secondary">Try your theme with different modes</Text>
-            <ThemeSelect />
+            <BoldHeading>Color Mode</BoldHeading>
+            <Text variant="secondary">
+              Preview your theme with different color modes
+            </Text>
+            <ColorModeSelect />
           </div>
           <div className="space-y-6">
             <BoldHeading>Colors</BoldHeading>
             <ColorSeriesPicker
               label="Primary"
               colorOptions={primaryColorOptions}
-              onSelectColor={handClickPrimaryColorFunction}
+              onSelectColor={handleSavePrimaryColor}
               styles={{ triggerButton: 'bg-primary-900' }}
             />
             <ColorPicker
               label="Background"
-              hintText="You may save a color for dark mode as well"
-              value={getColorFromCssVariable('--tw-colors-bg')}
-              onSelectColor={(color) => {
-                console.log({ color });
-              }}
+              hintText="Remember to save a color for dark/light mode as well"
+              defaultValue={getHexColorFromCssVariable('--tw-colors-bg')}
+              onSelectColor={handleSaveBackground}
             />
           </div>
         </aside>
@@ -109,7 +139,9 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             />
           </div>
           <div role="separator" className="my-5 h-[1px] w-20 bg-gray-300" />
-          <CommentWidgetPreview buildDate={props.buildDate} />
+          <div className="bg-bg">
+            <CommentWidgetPreview buildDate={props.buildDate} />
+          </div>
         </section>
       </div>
     </section>
