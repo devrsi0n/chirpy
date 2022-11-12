@@ -80,8 +80,6 @@ export const authProviders: Provider[] = [
         const user = await createUser({
           username: generateUsername(name),
           name,
-          email: '',
-          emailVerified: null,
         });
 
         return user;
