@@ -57,7 +57,7 @@ describe('Project', () => {
   it('should active theme', () => {
     cy.findByRole('link', { name: /theme/i }).click();
     cy.url({ timeout: 60_000 }).should('include', '/theme/foobar.com');
-    cy.findByLabelText(/primary color selector/i).click();
+    cy.findByLabelText(/primary color picker/i).click();
     cy.findByRole('button', { name: /color green/i }).click({ force: true });
     cy.findByRole('button', { name: /post/i }).should(
       'have.css',
