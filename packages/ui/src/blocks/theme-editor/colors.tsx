@@ -1,3 +1,4 @@
+import { ColorSeriesKey, ResolvedColorMode } from '@chirpy-dev/types';
 import {
   amber,
   amberDark,
@@ -16,14 +17,15 @@ import {
   violet,
   violetDark,
 } from '@radix-ui/colors';
+import { useTheme } from 'next-themes';
 
 import { translateRadixColor } from '../../contexts/theme-context/utilities';
 
 export type ColorSeries = {
-  light: Record<string, string>;
-  dark: Record<string, string>;
+  light: Record<ColorSeriesKey, string>;
+  dark: Record<ColorSeriesKey, string>;
 };
-export const colorOptions: Record<string, ColorSeries> = {
+export const COLOR_OPTIONS: Record<string, ColorSeries> = {
   red: {
     light: translateRadixColor(red),
     dark: translateRadixColor(redDark),
@@ -57,3 +59,27 @@ export const colorOptions: Record<string, ColorSeries> = {
     dark: translateRadixColor(pinkDark),
   },
 };
+
+export type UseActiveColorsOptions = {
+  level: ColorSeriesKey;
+};
+
+/**
+ * Get active colors, active means the theme user is using, `light` or `dark`
+ */
+export function useColors({
+  level,
+}: UseActiveColorsOptions): Record<string, string> {
+  const activeTheme = useActiveColorMode();
+  return Object.entries(COLOR_OPTIONS).reduce((acc, [key, value]) => {
+    acc[key] = value[activeTheme][level];
+    return acc;
+  }, {} as Record<string, string>);
+}
+
+export function useActiveColorMode(): ResolvedColorMode {
+  const { resolvedTheme } = useTheme();
+  const activeTheme =
+    (resolvedTheme === 'system' ? 'light' : resolvedTheme) || 'light';
+  return activeTheme as ResolvedColorMode;
+}

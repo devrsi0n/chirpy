@@ -1,3 +1,5 @@
+import { ColorSeriesKey } from '@chirpy-dev/types';
+
 export type CSSVariables = Array<[string, string]>;
 
 type NestedObject = { [key: string]: string | NestedObject };
@@ -20,7 +22,7 @@ function getThemeCSSVariables(
     const cssVariableKey =
       prefix && key ? [prefix, key].join('-') : prefix || key;
     if (typeof value === 'string') {
-      cssVariables.push([cssVariableKey, translateColor(value)]);
+      cssVariables.push([cssVariableKey, translateHslColor(value)]);
     } else if (typeof value === 'object' && value) {
       cssVariables.push(...getThemeCSSVariables(value, cssVariableKey));
     } else {
@@ -35,7 +37,7 @@ function getThemeCSSVariables(
  * Used by css variables
  * @param color
  */
-function translateColor(color: string) {
+export function translateHslColor(color: string) {
   const [, hsl] = /hsl\((.+)\)/.exec(color) || [];
   if (hsl) {
     return hsl.replace(/,/g, '');
@@ -54,7 +56,9 @@ function translateColor(color: string) {
  * @param color
  * @returns
  */
-export function translateRadixColor(color: Record<string, string>) {
+export function translateRadixColor(
+  color: Record<string, string>,
+): Record<ColorSeriesKey, string> {
   const result: Record<string, string> = {};
   for (const [key, value] of Object.entries(color)) {
     const [, num] = /\w(\d+)/.exec(key) || [];

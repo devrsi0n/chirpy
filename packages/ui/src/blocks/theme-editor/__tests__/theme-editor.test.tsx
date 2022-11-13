@@ -7,6 +7,7 @@ import { pageRender } from '../../../__tests__/fixtures/page-render';
 const PROJECT = {
   id: 'test-id',
   name: 'test-name',
+  domain: 'localhost',
 };
 
 jest.spyOn(nextThemesModule, 'useTheme').mockReturnValue({
@@ -27,7 +28,7 @@ describe('ThemeEditor', () => {
   it('should render the editor and the preview widget', () => {
     expect(
       screen.getByRole('button', {
-        name: 'Click to expanded the color picker',
+        name: 'Primary color picker',
       }),
     ).toBeTruthy();
     expect(

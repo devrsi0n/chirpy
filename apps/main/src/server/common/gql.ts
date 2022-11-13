@@ -50,7 +50,7 @@ export async function mutate<
     .toPromise();
   if (!data || !data[path] || error) {
     const message = `GQL mutation error, error: ${error}, data: ${data}`;
-    log.error(message);
+    log.error(message, { stack: error?.stack });
     throw new Error(message);
   }
   return data[path] as NonNullable<Data[Path]>;

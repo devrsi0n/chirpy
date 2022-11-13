@@ -25,3 +25,12 @@ declare module 'next-auth' {
     username?: string | null;
   }
 }
+
+declare module 'next-auth/adapters' {
+  export interface AdapterUser extends User {
+    id: string;
+    // Anonymous user doesn't have an email
+    email?: string | null;
+    emailVerified?: Date | null;
+  }
+}

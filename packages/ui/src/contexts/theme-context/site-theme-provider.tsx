@@ -9,10 +9,6 @@ export type SiteThemeProviderProps = {
 
 export function SiteThemeProvider(props: SiteThemeProviderProps): JSX.Element {
   const { styles } = useThemeVariables();
-  React.useEffect(() => {
-    // Add site specific global styles
-    document.body.classList.add('site');
-  }, []);
 
   return (
     <>

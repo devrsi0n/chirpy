@@ -78,6 +78,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       OperationResult<CommentTimelineSubscription>
     >((resolve /*reject*/) => {
       pipe<OperationResult<CommentTimelineSubscription>, any>(
+        // @ts-ignore
         client.subscription(CommentTimelineDocument, { id: commentId }),
         subscribe((result) => {
           // log.debug(result);
