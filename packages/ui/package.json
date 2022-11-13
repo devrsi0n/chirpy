@@ -99,7 +99,7 @@
     "jest-environment-jsdom": "29.2.2",
     "msw": "0.47.4",
     "msw-storybook-addon": "1.6.3",
-    "postcss": "8.4.18",
+    "postcss": "8.4.19",
     "postcss-loader": "7.0.1",
     "require-from-string": "2.0.2",
     "resolve-url-loader": "5.0.0",
