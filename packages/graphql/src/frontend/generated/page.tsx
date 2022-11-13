@@ -33,7 +33,7 @@ export const ThemeOfPageDocument = gql`
 export function useThemeOfPageQuery(
   options: Omit<Urql.UseQueryArgs<ThemeOfPageQueryVariables>, 'query'>,
 ) {
-  return Urql.useQuery<ThemeOfPageQuery>({
+  return Urql.useQuery<ThemeOfPageQuery, ThemeOfPageQueryVariables>({
     query: ThemeOfPageDocument,
     ...options,
   });

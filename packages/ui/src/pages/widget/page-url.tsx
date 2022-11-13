@@ -3,6 +3,7 @@ import { CommonWidgetProps, CommentLeafType } from '@chirpy-dev/types';
 import { isSSRMode } from '@chirpy-dev/utils';
 
 import { CommentTrees, WidgetLayout, PoweredBy } from '../../blocks';
+import { useCommentOrderBy } from '../../blocks/comment-trees/use-comment-order-by';
 import { CommentContextProvider } from '../../contexts';
 
 export type PageCommentProps = CommonWidgetProps & {
@@ -26,8 +27,9 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
     pageId = props.pageId;
     pageURL = props.pageURL;
   }
+  const [orderBy] = useCommentOrderBy();
   const [{ data }] = useCommentTreeSubscription({
-    variables: { pageURL },
+    variables: { pageURL, orderBy },
     pause: isSSRMode,
   });
   const comments =

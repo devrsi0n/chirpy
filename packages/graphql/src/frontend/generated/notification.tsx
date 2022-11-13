@@ -96,10 +96,10 @@ export function useCurrentNotificationMessagesQuery(
     'query'
   >,
 ) {
-  return Urql.useQuery<CurrentNotificationMessagesQuery>({
-    query: CurrentNotificationMessagesDocument,
-    ...options,
-  });
+  return Urql.useQuery<
+    CurrentNotificationMessagesQuery,
+    CurrentNotificationMessagesQueryVariables
+  >({ query: CurrentNotificationMessagesDocument, ...options });
 }
 export const HaveReadANotificationDocument = gql`
   mutation haveReadANotification($messageId: uuid!) {

@@ -31,4 +31,4 @@ export {
   useUserDashboardProjectsQuery,
 } from './generated/user';
 export type { UserDashboardProjectsQuery } from './generated/user';
-export type { NotificationType_Enum } from './generated/types';
+export type { NotificationType_Enum, Order_By } from './generated/types';

@@ -95,7 +95,7 @@ export const CurrentUserDocument = gql`
 export function useCurrentUserQuery(
   options: Omit<Urql.UseQueryArgs<CurrentUserQueryVariables>, 'query'>,
 ) {
-  return Urql.useQuery<CurrentUserQuery>({
+  return Urql.useQuery<CurrentUserQuery, CurrentUserQueryVariables>({
     query: CurrentUserDocument,
     ...options,
   });
@@ -177,8 +177,8 @@ export function useUserDashboardProjectsQuery(
     'query'
   >,
 ) {
-  return Urql.useQuery<UserDashboardProjectsQuery>({
-    query: UserDashboardProjectsDocument,
-    ...options,
-  });
+  return Urql.useQuery<
+    UserDashboardProjectsQuery,
+    UserDashboardProjectsQueryVariables
+  >({ query: UserDashboardProjectsDocument, ...options });
 }

@@ -19,10 +19,10 @@ fragment commentItem on Comment {
 }
 
 # Used in pages/widget/comment/[pageId].tsx
-subscription commentTree($pageURL: String!) {
+subscription commentTree($pageURL: String!, $orderBy: order_by = asc) {
   comments(
     where: { page: { url: { _eq: $pageURL } }, parentId: { _is_null: true } }
-    order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+    order_by: { likes_aggregate: { count: desc }, createdAt: $orderBy }
   ) {
     ...commentItem
     replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {
