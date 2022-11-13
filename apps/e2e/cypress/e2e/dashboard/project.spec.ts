@@ -4,7 +4,10 @@ describe('Project', () => {
   before(() => {
     cy.login();
     cy.visit('/dashboard');
-    waitForProjectCardAppear();
+    // Wait for spinner dismiss
+    cy.get(`[aria-label="Loading data"]`, { timeout: 10_000 }).should(
+      'not.exist',
+    );
     cy.get('body').then(($body) => {
       // Delete duplicated project if exist
       if ($body.find(`[aria-label='Project list']`).length > 0) {
