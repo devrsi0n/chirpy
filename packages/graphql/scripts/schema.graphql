@@ -1,0 +1,6672 @@
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
+
+"""whether this query should be cached (Hasura Cloud only)"""
+directive @cached(
+  """measured in seconds"""
+  ttl: Int! = 60
+
+  """refresh the cache entry"""
+  refresh: Boolean! = false
+) on QUERY
+
+"""
+columns and relationships of "Account"
+"""
+type Account {
+  accessToken: String
+  expiresAt: timestamptz
+  id: uuid!
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String!
+  providerAccountId: String!
+  refreshToken: String
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "Account"
+"""
+type Account_aggregate {
+  aggregate: Account_aggregate_fields
+  nodes: [Account!]!
+}
+
+"""
+aggregate fields of "Account"
+"""
+type Account_aggregate_fields {
+  count(columns: [Account_select_column!], distinct: Boolean): Int!
+  max: Account_max_fields
+  min: Account_min_fields
+}
+
+"""
+order by aggregate values of table "Account"
+"""
+input Account_aggregate_order_by {
+  count: order_by
+  max: Account_max_order_by
+  min: Account_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Account"
+"""
+input Account_arr_rel_insert_input {
+  data: [Account_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Account_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Account". All fields are combined with a logical 'AND'.
+"""
+input Account_bool_exp {
+  _and: [Account_bool_exp!]
+  _not: Account_bool_exp
+  _or: [Account_bool_exp!]
+  accessToken: String_comparison_exp
+  expiresAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  idToken: String_comparison_exp
+  oauthToken: String_comparison_exp
+  oauthTokenSecret: String_comparison_exp
+  provider: String_comparison_exp
+  providerAccountId: String_comparison_exp
+  refreshToken: String_comparison_exp
+  scope: String_comparison_exp
+  sessionState: String_comparison_exp
+  tokenType: String_comparison_exp
+  type: String_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Account"
+"""
+enum Account_constraint {
+  """unique or primary key constraint"""
+  Account_pkey
+
+  """unique or primary key constraint"""
+  Account_providerAccountId_provider_key
+}
+
+"""
+input type for inserting data into table "Account"
+"""
+input Account_insert_input {
+  accessToken: String
+  expiresAt: timestamptz
+  id: uuid
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String
+  providerAccountId: String
+  refreshToken: String
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Account_max_fields {
+  accessToken: String
+  expiresAt: timestamptz
+  id: uuid
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String
+  providerAccountId: String
+  refreshToken: String
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Account"
+"""
+input Account_max_order_by {
+  accessToken: order_by
+  expiresAt: order_by
+  id: order_by
+  idToken: order_by
+  oauthToken: order_by
+  oauthTokenSecret: order_by
+  provider: order_by
+  providerAccountId: order_by
+  refreshToken: order_by
+  scope: order_by
+  sessionState: order_by
+  tokenType: order_by
+  type: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Account_min_fields {
+  accessToken: String
+  expiresAt: timestamptz
+  id: uuid
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String
+  providerAccountId: String
+  refreshToken: String
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Account"
+"""
+input Account_min_order_by {
+  accessToken: order_by
+  expiresAt: order_by
+  id: order_by
+  idToken: order_by
+  oauthToken: order_by
+  oauthTokenSecret: order_by
+  provider: order_by
+  providerAccountId: order_by
+  refreshToken: order_by
+  scope: order_by
+  sessionState: order_by
+  tokenType: order_by
+  type: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Account"
+"""
+type Account_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Account!]!
+}
+
+"""
+on_conflict condition type for table "Account"
+"""
+input Account_on_conflict {
+  constraint: Account_constraint!
+  update_columns: [Account_update_column!]! = []
+  where: Account_bool_exp
+}
+
+"""Ordering options when selecting data from "Account"."""
+input Account_order_by {
+  accessToken: order_by
+  expiresAt: order_by
+  id: order_by
+  idToken: order_by
+  oauthToken: order_by
+  oauthTokenSecret: order_by
+  provider: order_by
+  providerAccountId: order_by
+  refreshToken: order_by
+  scope: order_by
+  sessionState: order_by
+  tokenType: order_by
+  type: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Account"""
+input Account_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Account"
+"""
+enum Account_select_column {
+  """column name"""
+  accessToken
+
+  """column name"""
+  expiresAt
+
+  """column name"""
+  id
+
+  """column name"""
+  idToken
+
+  """column name"""
+  oauthToken
+
+  """column name"""
+  oauthTokenSecret
+
+  """column name"""
+  provider
+
+  """column name"""
+  providerAccountId
+
+  """column name"""
+  refreshToken
+
+  """column name"""
+  scope
+
+  """column name"""
+  sessionState
+
+  """column name"""
+  tokenType
+
+  """column name"""
+  type
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Account"
+"""
+input Account_set_input {
+  accessToken: String
+  expiresAt: timestamptz
+  id: uuid
+  idToken: String
+  oauthToken: String
+  oauthTokenSecret: String
+  provider: String
+  providerAccountId: String
+  refreshToken: String
+  scope: String
+  sessionState: String
+  tokenType: String
+  type: String
+  userId: uuid
+}
+
+"""
+update columns of table "Account"
+"""
+enum Account_update_column {
+  """column name"""
+  accessToken
+
+  """column name"""
+  expiresAt
+
+  """column name"""
+  id
+
+  """column name"""
+  idToken
+
+  """column name"""
+  oauthToken
+
+  """column name"""
+  oauthTokenSecret
+
+  """column name"""
+  provider
+
+  """column name"""
+  providerAccountId
+
+  """column name"""
+  refreshToken
+
+  """column name"""
+  scope
+
+  """column name"""
+  sessionState
+
+  """column name"""
+  tokenType
+
+  """column name"""
+  type
+
+  """column name"""
+  userId
+}
+
+"""
+Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+"""
+input Boolean_comparison_exp {
+  _eq: Boolean
+  _gt: Boolean
+  _gte: Boolean
+  _in: [Boolean!]
+  _is_null: Boolean
+  _lt: Boolean
+  _lte: Boolean
+  _neq: Boolean
+  _nin: [Boolean!]
+}
+
+"""
+columns and relationships of "Comment"
+"""
+type Comment {
+  content(
+    """JSON select path"""
+    path: String
+  ): jsonb!
+  createdAt: timestamptz!
+  deletedAt: timestamptz
+  id: uuid!
+
+  """An array relationship"""
+  likes(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): [Like!]!
+
+  """An aggregate relationship"""
+  likes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): Like_aggregate!
+
+  """An object relationship"""
+  page: Page!
+  pageId: uuid!
+
+  """An object relationship"""
+  parent: Comment
+  parentId: uuid
+
+  """An array relationship"""
+  replies(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): [Comment!]!
+
+  """An aggregate relationship"""
+  replies_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): Comment_aggregate!
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "Comment"
+"""
+type Comment_aggregate {
+  aggregate: Comment_aggregate_fields
+  nodes: [Comment!]!
+}
+
+"""
+aggregate fields of "Comment"
+"""
+type Comment_aggregate_fields {
+  count(columns: [Comment_select_column!], distinct: Boolean): Int!
+  max: Comment_max_fields
+  min: Comment_min_fields
+}
+
+"""
+order by aggregate values of table "Comment"
+"""
+input Comment_aggregate_order_by {
+  count: order_by
+  max: Comment_max_order_by
+  min: Comment_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input Comment_append_input {
+  content: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "Comment"
+"""
+input Comment_arr_rel_insert_input {
+  data: [Comment_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Comment_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Comment". All fields are combined with a logical 'AND'.
+"""
+input Comment_bool_exp {
+  _and: [Comment_bool_exp!]
+  _not: Comment_bool_exp
+  _or: [Comment_bool_exp!]
+  content: jsonb_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  deletedAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  likes: Like_bool_exp
+  page: Page_bool_exp
+  pageId: uuid_comparison_exp
+  parent: Comment_bool_exp
+  parentId: uuid_comparison_exp
+  replies: Comment_bool_exp
+  updatedAt: timestamptz_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Comment"
+"""
+enum Comment_constraint {
+  """unique or primary key constraint"""
+  Comment_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input Comment_delete_at_path_input {
+  content: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input Comment_delete_elem_input {
+  content: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input Comment_delete_key_input {
+  content: String
+}
+
+"""
+input type for inserting data into table "Comment"
+"""
+input Comment_insert_input {
+  content: jsonb
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  likes: Like_arr_rel_insert_input
+  page: Page_obj_rel_insert_input
+  pageId: uuid
+  parent: Comment_obj_rel_insert_input
+  parentId: uuid
+  replies: Comment_arr_rel_insert_input
+  updatedAt: timestamptz
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Comment_max_fields {
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  pageId: uuid
+  parentId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Comment"
+"""
+input Comment_max_order_by {
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  pageId: order_by
+  parentId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Comment_min_fields {
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  pageId: uuid
+  parentId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Comment"
+"""
+input Comment_min_order_by {
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  pageId: order_by
+  parentId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Comment"
+"""
+type Comment_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Comment!]!
+}
+
+"""
+input type for inserting object relation for remote table "Comment"
+"""
+input Comment_obj_rel_insert_input {
+  data: Comment_insert_input!
+
+  """upsert condition"""
+  on_conflict: Comment_on_conflict
+}
+
+"""
+on_conflict condition type for table "Comment"
+"""
+input Comment_on_conflict {
+  constraint: Comment_constraint!
+  update_columns: [Comment_update_column!]! = []
+  where: Comment_bool_exp
+}
+
+"""Ordering options when selecting data from "Comment"."""
+input Comment_order_by {
+  content: order_by
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  likes_aggregate: Like_aggregate_order_by
+  page: Page_order_by
+  pageId: order_by
+  parent: Comment_order_by
+  parentId: order_by
+  replies_aggregate: Comment_aggregate_order_by
+  updatedAt: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Comment"""
+input Comment_pk_columns_input {
+  id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input Comment_prepend_input {
+  content: jsonb
+}
+
+"""
+select columns of table "Comment"
+"""
+enum Comment_select_column {
+  """column name"""
+  content
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  id
+
+  """column name"""
+  pageId
+
+  """column name"""
+  parentId
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Comment"
+"""
+input Comment_set_input {
+  content: jsonb
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  pageId: uuid
+  parentId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+update columns of table "Comment"
+"""
+enum Comment_update_column {
+  """column name"""
+  content
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  id
+
+  """column name"""
+  pageId
+
+  """column name"""
+  parentId
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+columns and relationships of "Like"
+"""
+type Like {
+  """An object relationship"""
+  comment: Comment!
+  commentId: uuid!
+  createdAt: timestamptz!
+  id: uuid!
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "Like"
+"""
+type Like_aggregate {
+  aggregate: Like_aggregate_fields
+  nodes: [Like!]!
+}
+
+"""
+aggregate fields of "Like"
+"""
+type Like_aggregate_fields {
+  count(columns: [Like_select_column!], distinct: Boolean): Int!
+  max: Like_max_fields
+  min: Like_min_fields
+}
+
+"""
+order by aggregate values of table "Like"
+"""
+input Like_aggregate_order_by {
+  count: order_by
+  max: Like_max_order_by
+  min: Like_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Like"
+"""
+input Like_arr_rel_insert_input {
+  data: [Like_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Like_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Like". All fields are combined with a logical 'AND'.
+"""
+input Like_bool_exp {
+  _and: [Like_bool_exp!]
+  _not: Like_bool_exp
+  _or: [Like_bool_exp!]
+  comment: Comment_bool_exp
+  commentId: uuid_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Like"
+"""
+enum Like_constraint {
+  """unique or primary key constraint"""
+  Like_commentId_userId_key
+
+  """unique or primary key constraint"""
+  Like_pkey
+}
+
+"""
+input type for inserting data into table "Like"
+"""
+input Like_insert_input {
+  comment: Comment_obj_rel_insert_input
+  commentId: uuid
+  createdAt: timestamptz
+  id: uuid
+  updatedAt: timestamptz
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Like_max_fields {
+  commentId: uuid
+  createdAt: timestamptz
+  id: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Like"
+"""
+input Like_max_order_by {
+  commentId: order_by
+  createdAt: order_by
+  id: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Like_min_fields {
+  commentId: uuid
+  createdAt: timestamptz
+  id: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Like"
+"""
+input Like_min_order_by {
+  commentId: order_by
+  createdAt: order_by
+  id: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Like"
+"""
+type Like_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Like!]!
+}
+
+"""
+on_conflict condition type for table "Like"
+"""
+input Like_on_conflict {
+  constraint: Like_constraint!
+  update_columns: [Like_update_column!]! = []
+  where: Like_bool_exp
+}
+
+"""Ordering options when selecting data from "Like"."""
+input Like_order_by {
+  comment: Comment_order_by
+  commentId: order_by
+  createdAt: order_by
+  id: order_by
+  updatedAt: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Like"""
+input Like_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Like"
+"""
+enum Like_select_column {
+  """column name"""
+  commentId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Like"
+"""
+input Like_set_input {
+  commentId: uuid
+  createdAt: timestamptz
+  id: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+update columns of table "Like"
+"""
+enum Like_update_column {
+  """column name"""
+  commentId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+columns and relationships of "Member"
+"""
+type Member {
+  """An object relationship"""
+  Role: Role!
+  createdAt: timestamptz!
+  id: uuid!
+  role: Role_enum!
+
+  """An object relationship"""
+  team: Team!
+  teamId: uuid!
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "Member"
+"""
+type Member_aggregate {
+  aggregate: Member_aggregate_fields
+  nodes: [Member!]!
+}
+
+"""
+aggregate fields of "Member"
+"""
+type Member_aggregate_fields {
+  count(columns: [Member_select_column!], distinct: Boolean): Int!
+  max: Member_max_fields
+  min: Member_min_fields
+}
+
+"""
+order by aggregate values of table "Member"
+"""
+input Member_aggregate_order_by {
+  count: order_by
+  max: Member_max_order_by
+  min: Member_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Member"
+"""
+input Member_arr_rel_insert_input {
+  data: [Member_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Member_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Member". All fields are combined with a logical 'AND'.
+"""
+input Member_bool_exp {
+  Role: Role_bool_exp
+  _and: [Member_bool_exp!]
+  _not: Member_bool_exp
+  _or: [Member_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  role: Role_enum_comparison_exp
+  team: Team_bool_exp
+  teamId: uuid_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Member"
+"""
+enum Member_constraint {
+  """unique or primary key constraint"""
+  Member_pkey
+
+  """unique or primary key constraint"""
+  Member_teamId_userId_key
+}
+
+"""
+input type for inserting data into table "Member"
+"""
+input Member_insert_input {
+  Role: Role_obj_rel_insert_input
+  createdAt: timestamptz
+  id: uuid
+  role: Role_enum
+  team: Team_obj_rel_insert_input
+  teamId: uuid
+  updatedAt: timestamptz
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Member_max_fields {
+  createdAt: timestamptz
+  id: uuid
+  teamId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Member"
+"""
+input Member_max_order_by {
+  createdAt: order_by
+  id: order_by
+  teamId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Member_min_fields {
+  createdAt: timestamptz
+  id: uuid
+  teamId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Member"
+"""
+input Member_min_order_by {
+  createdAt: order_by
+  id: order_by
+  teamId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Member"
+"""
+type Member_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Member!]!
+}
+
+"""
+on_conflict condition type for table "Member"
+"""
+input Member_on_conflict {
+  constraint: Member_constraint!
+  update_columns: [Member_update_column!]! = []
+  where: Member_bool_exp
+}
+
+"""Ordering options when selecting data from "Member"."""
+input Member_order_by {
+  Role: Role_order_by
+  createdAt: order_by
+  id: order_by
+  role: order_by
+  team: Team_order_by
+  teamId: order_by
+  updatedAt: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Member"""
+input Member_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Member"
+"""
+enum Member_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  role
+
+  """column name"""
+  teamId
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Member"
+"""
+input Member_set_input {
+  createdAt: timestamptz
+  id: uuid
+  role: Role_enum
+  teamId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+update columns of table "Member"
+"""
+enum Member_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  role
+
+  """column name"""
+  teamId
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+columns and relationships of "NotificationMessage"
+"""
+type NotificationMessage {
+  """Content of message, e.g. comment content"""
+  content: String
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: uuid!
+  createdAt: timestamptz!
+  deletedAt: timestamptz
+  id: uuid!
+
+  """An object relationship"""
+  notificationType: NotificationType!
+  read: Boolean!
+
+  """An object relationship"""
+  recipient: User!
+  recipientId: uuid!
+
+  """An object relationship"""
+  triggeredBy: User!
+  triggeredById: uuid!
+  type: NotificationType_enum!
+  url: String!
+}
+
+"""
+aggregated selection of "NotificationMessage"
+"""
+type NotificationMessage_aggregate {
+  aggregate: NotificationMessage_aggregate_fields
+  nodes: [NotificationMessage!]!
+}
+
+"""
+aggregate fields of "NotificationMessage"
+"""
+type NotificationMessage_aggregate_fields {
+  count(columns: [NotificationMessage_select_column!], distinct: Boolean): Int!
+  max: NotificationMessage_max_fields
+  min: NotificationMessage_min_fields
+}
+
+"""
+order by aggregate values of table "NotificationMessage"
+"""
+input NotificationMessage_aggregate_order_by {
+  count: order_by
+  max: NotificationMessage_max_order_by
+  min: NotificationMessage_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "NotificationMessage"
+"""
+input NotificationMessage_arr_rel_insert_input {
+  data: [NotificationMessage_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: NotificationMessage_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "NotificationMessage". All fields are combined with a logical 'AND'.
+"""
+input NotificationMessage_bool_exp {
+  _and: [NotificationMessage_bool_exp!]
+  _not: NotificationMessage_bool_exp
+  _or: [NotificationMessage_bool_exp!]
+  content: String_comparison_exp
+  contextId: uuid_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  deletedAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  notificationType: NotificationType_bool_exp
+  read: Boolean_comparison_exp
+  recipient: User_bool_exp
+  recipientId: uuid_comparison_exp
+  triggeredBy: User_bool_exp
+  triggeredById: uuid_comparison_exp
+  type: NotificationType_enum_comparison_exp
+  url: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "NotificationMessage"
+"""
+enum NotificationMessage_constraint {
+  """unique or primary key constraint"""
+  NotificationMessage_pkey
+
+  """unique or primary key constraint"""
+  NotificationMessage_type_triggeredById_contextId_recipientI_key
+}
+
+"""
+input type for inserting data into table "NotificationMessage"
+"""
+input NotificationMessage_insert_input {
+  """Content of message, e.g. comment content"""
+  content: String
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: uuid
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  notificationType: NotificationType_obj_rel_insert_input
+  read: Boolean
+  recipient: User_obj_rel_insert_input
+  recipientId: uuid
+  triggeredBy: User_obj_rel_insert_input
+  triggeredById: uuid
+  type: NotificationType_enum
+  url: String
+}
+
+"""aggregate max on columns"""
+type NotificationMessage_max_fields {
+  """Content of message, e.g. comment content"""
+  content: String
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: uuid
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  recipientId: uuid
+  triggeredById: uuid
+  url: String
+}
+
+"""
+order by max() on columns of table "NotificationMessage"
+"""
+input NotificationMessage_max_order_by {
+  """Content of message, e.g. comment content"""
+  content: order_by
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: order_by
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  recipientId: order_by
+  triggeredById: order_by
+  url: order_by
+}
+
+"""aggregate min on columns"""
+type NotificationMessage_min_fields {
+  """Content of message, e.g. comment content"""
+  content: String
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: uuid
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  recipientId: uuid
+  triggeredById: uuid
+  url: String
+}
+
+"""
+order by min() on columns of table "NotificationMessage"
+"""
+input NotificationMessage_min_order_by {
+  """Content of message, e.g. comment content"""
+  content: order_by
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: order_by
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  recipientId: order_by
+  triggeredById: order_by
+  url: order_by
+}
+
+"""
+response of any mutation on the table "NotificationMessage"
+"""
+type NotificationMessage_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [NotificationMessage!]!
+}
+
+"""
+on_conflict condition type for table "NotificationMessage"
+"""
+input NotificationMessage_on_conflict {
+  constraint: NotificationMessage_constraint!
+  update_columns: [NotificationMessage_update_column!]! = []
+  where: NotificationMessage_bool_exp
+}
+
+"""Ordering options when selecting data from "NotificationMessage"."""
+input NotificationMessage_order_by {
+  content: order_by
+  contextId: order_by
+  createdAt: order_by
+  deletedAt: order_by
+  id: order_by
+  notificationType: NotificationType_order_by
+  read: order_by
+  recipient: User_order_by
+  recipientId: order_by
+  triggeredBy: User_order_by
+  triggeredById: order_by
+  type: order_by
+  url: order_by
+}
+
+"""primary key columns input for table: NotificationMessage"""
+input NotificationMessage_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "NotificationMessage"
+"""
+enum NotificationMessage_select_column {
+  """column name"""
+  content
+
+  """column name"""
+  contextId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  id
+
+  """column name"""
+  read
+
+  """column name"""
+  recipientId
+
+  """column name"""
+  triggeredById
+
+  """column name"""
+  type
+
+  """column name"""
+  url
+}
+
+"""
+input type for updating data in table "NotificationMessage"
+"""
+input NotificationMessage_set_input {
+  """Content of message, e.g. comment content"""
+  content: String
+
+  """Triggered entity's id, e.g. CommentId or LikeId"""
+  contextId: uuid
+  createdAt: timestamptz
+  deletedAt: timestamptz
+  id: uuid
+  read: Boolean
+  recipientId: uuid
+  triggeredById: uuid
+  type: NotificationType_enum
+  url: String
+}
+
+"""
+update columns of table "NotificationMessage"
+"""
+enum NotificationMessage_update_column {
+  """column name"""
+  content
+
+  """column name"""
+  contextId
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  deletedAt
+
+  """column name"""
+  id
+
+  """column name"""
+  read
+
+  """column name"""
+  recipientId
+
+  """column name"""
+  triggeredById
+
+  """column name"""
+  type
+
+  """column name"""
+  url
+}
+
+"""
+columns and relationships of "NotificationSubscription"
+"""
+type NotificationSubscription {
+  createdAt: timestamptz
+  id: uuid!
+  subscription(
+    """JSON select path"""
+    path: String
+  ): jsonb!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "NotificationSubscription"
+"""
+type NotificationSubscription_aggregate {
+  aggregate: NotificationSubscription_aggregate_fields
+  nodes: [NotificationSubscription!]!
+}
+
+"""
+aggregate fields of "NotificationSubscription"
+"""
+type NotificationSubscription_aggregate_fields {
+  count(columns: [NotificationSubscription_select_column!], distinct: Boolean): Int!
+  max: NotificationSubscription_max_fields
+  min: NotificationSubscription_min_fields
+}
+
+"""
+order by aggregate values of table "NotificationSubscription"
+"""
+input NotificationSubscription_aggregate_order_by {
+  count: order_by
+  max: NotificationSubscription_max_order_by
+  min: NotificationSubscription_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input NotificationSubscription_append_input {
+  subscription: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "NotificationSubscription"
+"""
+input NotificationSubscription_arr_rel_insert_input {
+  data: [NotificationSubscription_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: NotificationSubscription_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "NotificationSubscription". All fields are combined with a logical 'AND'.
+"""
+input NotificationSubscription_bool_exp {
+  _and: [NotificationSubscription_bool_exp!]
+  _not: NotificationSubscription_bool_exp
+  _or: [NotificationSubscription_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  subscription: jsonb_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "NotificationSubscription"
+"""
+enum NotificationSubscription_constraint {
+  """unique or primary key constraint"""
+  NotificationSubscription_pkey
+
+  """unique or primary key constraint"""
+  NotificationSubscription_subscription_userId_key
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input NotificationSubscription_delete_at_path_input {
+  subscription: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input NotificationSubscription_delete_elem_input {
+  subscription: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input NotificationSubscription_delete_key_input {
+  subscription: String
+}
+
+"""
+input type for inserting data into table "NotificationSubscription"
+"""
+input NotificationSubscription_insert_input {
+  createdAt: timestamptz
+  id: uuid
+  subscription: jsonb
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type NotificationSubscription_max_fields {
+  createdAt: timestamptz
+  id: uuid
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "NotificationSubscription"
+"""
+input NotificationSubscription_max_order_by {
+  createdAt: order_by
+  id: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type NotificationSubscription_min_fields {
+  createdAt: timestamptz
+  id: uuid
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "NotificationSubscription"
+"""
+input NotificationSubscription_min_order_by {
+  createdAt: order_by
+  id: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "NotificationSubscription"
+"""
+type NotificationSubscription_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [NotificationSubscription!]!
+}
+
+"""
+on_conflict condition type for table "NotificationSubscription"
+"""
+input NotificationSubscription_on_conflict {
+  constraint: NotificationSubscription_constraint!
+  update_columns: [NotificationSubscription_update_column!]! = []
+  where: NotificationSubscription_bool_exp
+}
+
+"""Ordering options when selecting data from "NotificationSubscription"."""
+input NotificationSubscription_order_by {
+  createdAt: order_by
+  id: order_by
+  subscription: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: NotificationSubscription"""
+input NotificationSubscription_pk_columns_input {
+  id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input NotificationSubscription_prepend_input {
+  subscription: jsonb
+}
+
+"""
+select columns of table "NotificationSubscription"
+"""
+enum NotificationSubscription_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  subscription
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "NotificationSubscription"
+"""
+input NotificationSubscription_set_input {
+  createdAt: timestamptz
+  id: uuid
+  subscription: jsonb
+  userId: uuid
+}
+
+"""
+update columns of table "NotificationSubscription"
+"""
+enum NotificationSubscription_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  subscription
+
+  """column name"""
+  userId
+}
+
+"""
+columns and relationships of "NotificationType"
+"""
+type NotificationType {
+  comment: String!
+
+  """An array relationship"""
+  notificationMessages(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): [NotificationMessage!]!
+
+  """An aggregate relationship"""
+  notificationMessages_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): NotificationMessage_aggregate!
+  value: String!
+}
+
+"""
+aggregated selection of "NotificationType"
+"""
+type NotificationType_aggregate {
+  aggregate: NotificationType_aggregate_fields
+  nodes: [NotificationType!]!
+}
+
+"""
+aggregate fields of "NotificationType"
+"""
+type NotificationType_aggregate_fields {
+  count(columns: [NotificationType_select_column!], distinct: Boolean): Int!
+  max: NotificationType_max_fields
+  min: NotificationType_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "NotificationType". All fields are combined with a logical 'AND'.
+"""
+input NotificationType_bool_exp {
+  _and: [NotificationType_bool_exp!]
+  _not: NotificationType_bool_exp
+  _or: [NotificationType_bool_exp!]
+  comment: String_comparison_exp
+  notificationMessages: NotificationMessage_bool_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "NotificationType"
+"""
+enum NotificationType_constraint {
+  """unique or primary key constraint"""
+  NotificationType_pkey
+}
+
+enum NotificationType_enum {
+  """Comment deleted by moderator"""
+  CommentDeleted
+
+  """Received a comment"""
+  ReceivedAComment
+
+  """Received a like"""
+  ReceivedALike
+
+  """Received a reply"""
+  ReceivedAReply
+}
+
+"""
+Boolean expression to compare columns of type "NotificationType_enum". All fields are combined with logical 'AND'.
+"""
+input NotificationType_enum_comparison_exp {
+  _eq: NotificationType_enum
+  _in: [NotificationType_enum!]
+  _is_null: Boolean
+  _neq: NotificationType_enum
+  _nin: [NotificationType_enum!]
+}
+
+"""
+input type for inserting data into table "NotificationType"
+"""
+input NotificationType_insert_input {
+  comment: String
+  notificationMessages: NotificationMessage_arr_rel_insert_input
+  value: String
+}
+
+"""aggregate max on columns"""
+type NotificationType_max_fields {
+  comment: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type NotificationType_min_fields {
+  comment: String
+  value: String
+}
+
+"""
+response of any mutation on the table "NotificationType"
+"""
+type NotificationType_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [NotificationType!]!
+}
+
+"""
+input type for inserting object relation for remote table "NotificationType"
+"""
+input NotificationType_obj_rel_insert_input {
+  data: NotificationType_insert_input!
+
+  """upsert condition"""
+  on_conflict: NotificationType_on_conflict
+}
+
+"""
+on_conflict condition type for table "NotificationType"
+"""
+input NotificationType_on_conflict {
+  constraint: NotificationType_constraint!
+  update_columns: [NotificationType_update_column!]! = []
+  where: NotificationType_bool_exp
+}
+
+"""Ordering options when selecting data from "NotificationType"."""
+input NotificationType_order_by {
+  comment: order_by
+  notificationMessages_aggregate: NotificationMessage_aggregate_order_by
+  value: order_by
+}
+
+"""primary key columns input for table: NotificationType"""
+input NotificationType_pk_columns_input {
+  value: String!
+}
+
+"""
+select columns of table "NotificationType"
+"""
+enum NotificationType_select_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "NotificationType"
+"""
+input NotificationType_set_input {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "NotificationType"
+"""
+enum NotificationType_update_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+columns and relationships of "Page"
+"""
+type Page {
+  """An array relationship"""
+  comments(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): [Comment!]!
+
+  """An aggregate relationship"""
+  comments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): Comment_aggregate!
+  createdAt: timestamptz!
+  id: uuid!
+
+  """An object relationship"""
+  project: Project!
+  projectId: uuid!
+  title: String
+  updatedAt: timestamptz!
+  url: String!
+}
+
+"""
+aggregated selection of "Page"
+"""
+type Page_aggregate {
+  aggregate: Page_aggregate_fields
+  nodes: [Page!]!
+}
+
+"""
+aggregate fields of "Page"
+"""
+type Page_aggregate_fields {
+  count(columns: [Page_select_column!], distinct: Boolean): Int!
+  max: Page_max_fields
+  min: Page_min_fields
+}
+
+"""
+order by aggregate values of table "Page"
+"""
+input Page_aggregate_order_by {
+  count: order_by
+  max: Page_max_order_by
+  min: Page_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Page"
+"""
+input Page_arr_rel_insert_input {
+  data: [Page_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Page_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Page". All fields are combined with a logical 'AND'.
+"""
+input Page_bool_exp {
+  _and: [Page_bool_exp!]
+  _not: Page_bool_exp
+  _or: [Page_bool_exp!]
+  comments: Comment_bool_exp
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  project: Project_bool_exp
+  projectId: uuid_comparison_exp
+  title: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  url: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Page"
+"""
+enum Page_constraint {
+  """unique or primary key constraint"""
+  Page_pkey
+
+  """unique or primary key constraint"""
+  Page_url_key
+}
+
+"""
+input type for inserting data into table "Page"
+"""
+input Page_insert_input {
+  comments: Comment_arr_rel_insert_input
+  createdAt: timestamptz
+  id: uuid
+  project: Project_obj_rel_insert_input
+  projectId: uuid
+  title: String
+  updatedAt: timestamptz
+  url: String
+}
+
+"""aggregate max on columns"""
+type Page_max_fields {
+  createdAt: timestamptz
+  id: uuid
+  projectId: uuid
+  title: String
+  updatedAt: timestamptz
+  url: String
+}
+
+"""
+order by max() on columns of table "Page"
+"""
+input Page_max_order_by {
+  createdAt: order_by
+  id: order_by
+  projectId: order_by
+  title: order_by
+  updatedAt: order_by
+  url: order_by
+}
+
+"""aggregate min on columns"""
+type Page_min_fields {
+  createdAt: timestamptz
+  id: uuid
+  projectId: uuid
+  title: String
+  updatedAt: timestamptz
+  url: String
+}
+
+"""
+order by min() on columns of table "Page"
+"""
+input Page_min_order_by {
+  createdAt: order_by
+  id: order_by
+  projectId: order_by
+  title: order_by
+  updatedAt: order_by
+  url: order_by
+}
+
+"""
+response of any mutation on the table "Page"
+"""
+type Page_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Page!]!
+}
+
+"""
+input type for inserting object relation for remote table "Page"
+"""
+input Page_obj_rel_insert_input {
+  data: Page_insert_input!
+
+  """upsert condition"""
+  on_conflict: Page_on_conflict
+}
+
+"""
+on_conflict condition type for table "Page"
+"""
+input Page_on_conflict {
+  constraint: Page_constraint!
+  update_columns: [Page_update_column!]! = []
+  where: Page_bool_exp
+}
+
+"""Ordering options when selecting data from "Page"."""
+input Page_order_by {
+  comments_aggregate: Comment_aggregate_order_by
+  createdAt: order_by
+  id: order_by
+  project: Project_order_by
+  projectId: order_by
+  title: order_by
+  updatedAt: order_by
+  url: order_by
+}
+
+"""primary key columns input for table: Page"""
+input Page_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Page"
+"""
+enum Page_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  projectId
+
+  """column name"""
+  title
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  url
+}
+
+"""
+input type for updating data in table "Page"
+"""
+input Page_set_input {
+  createdAt: timestamptz
+  id: uuid
+  projectId: uuid
+  title: String
+  updatedAt: timestamptz
+  url: String
+}
+
+"""
+update columns of table "Page"
+"""
+enum Page_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  projectId
+
+  """column name"""
+  title
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  url
+}
+
+"""
+columns and relationships of "Project"
+"""
+type Project {
+  createdAt: timestamptz!
+  domain: String!
+  id: uuid!
+  name: String!
+
+  """An array relationship"""
+  pages(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): [Page!]!
+
+  """An aggregate relationship"""
+  pages_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): Page_aggregate!
+
+  """An object relationship"""
+  team: Team
+  teamId: uuid
+  theme(
+    """JSON select path"""
+    path: String
+  ): jsonb
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: User
+  userId: uuid
+}
+
+"""
+aggregated selection of "Project"
+"""
+type Project_aggregate {
+  aggregate: Project_aggregate_fields
+  nodes: [Project!]!
+}
+
+"""
+aggregate fields of "Project"
+"""
+type Project_aggregate_fields {
+  count(columns: [Project_select_column!], distinct: Boolean): Int!
+  max: Project_max_fields
+  min: Project_min_fields
+}
+
+"""
+order by aggregate values of table "Project"
+"""
+input Project_aggregate_order_by {
+  count: order_by
+  max: Project_max_order_by
+  min: Project_min_order_by
+}
+
+"""append existing jsonb value of filtered columns with new jsonb value"""
+input Project_append_input {
+  theme: jsonb
+}
+
+"""
+input type for inserting array relation for remote table "Project"
+"""
+input Project_arr_rel_insert_input {
+  data: [Project_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Project_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Project". All fields are combined with a logical 'AND'.
+"""
+input Project_bool_exp {
+  _and: [Project_bool_exp!]
+  _not: Project_bool_exp
+  _or: [Project_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  domain: String_comparison_exp
+  id: uuid_comparison_exp
+  name: String_comparison_exp
+  pages: Page_bool_exp
+  team: Team_bool_exp
+  teamId: uuid_comparison_exp
+  theme: jsonb_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Project"
+"""
+enum Project_constraint {
+  """unique or primary key constraint"""
+  Project_domain_key
+
+  """unique or primary key constraint"""
+  Project_pkey
+}
+
+"""
+delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+"""
+input Project_delete_at_path_input {
+  theme: [String!]
+}
+
+"""
+delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+"""
+input Project_delete_elem_input {
+  theme: Int
+}
+
+"""
+delete key/value pair or string element. key/value pairs are matched based on their key value
+"""
+input Project_delete_key_input {
+  theme: String
+}
+
+"""
+input type for inserting data into table "Project"
+"""
+input Project_insert_input {
+  createdAt: timestamptz
+  domain: String
+  id: uuid
+  name: String
+  pages: Page_arr_rel_insert_input
+  team: Team_obj_rel_insert_input
+  teamId: uuid
+  theme: jsonb
+  updatedAt: timestamptz
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Project_max_fields {
+  createdAt: timestamptz
+  domain: String
+  id: uuid
+  name: String
+  teamId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Project"
+"""
+input Project_max_order_by {
+  createdAt: order_by
+  domain: order_by
+  id: order_by
+  name: order_by
+  teamId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Project_min_fields {
+  createdAt: timestamptz
+  domain: String
+  id: uuid
+  name: String
+  teamId: uuid
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Project"
+"""
+input Project_min_order_by {
+  createdAt: order_by
+  domain: order_by
+  id: order_by
+  name: order_by
+  teamId: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Project"
+"""
+type Project_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Project!]!
+}
+
+"""
+input type for inserting object relation for remote table "Project"
+"""
+input Project_obj_rel_insert_input {
+  data: Project_insert_input!
+
+  """upsert condition"""
+  on_conflict: Project_on_conflict
+}
+
+"""
+on_conflict condition type for table "Project"
+"""
+input Project_on_conflict {
+  constraint: Project_constraint!
+  update_columns: [Project_update_column!]! = []
+  where: Project_bool_exp
+}
+
+"""Ordering options when selecting data from "Project"."""
+input Project_order_by {
+  createdAt: order_by
+  domain: order_by
+  id: order_by
+  name: order_by
+  pages_aggregate: Page_aggregate_order_by
+  team: Team_order_by
+  teamId: order_by
+  theme: order_by
+  updatedAt: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Project"""
+input Project_pk_columns_input {
+  id: uuid!
+}
+
+"""prepend existing jsonb value of filtered columns with new jsonb value"""
+input Project_prepend_input {
+  theme: jsonb
+}
+
+"""
+select columns of table "Project"
+"""
+enum Project_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  domain
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  teamId
+
+  """column name"""
+  theme
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Project"
+"""
+input Project_set_input {
+  createdAt: timestamptz
+  domain: String
+  id: uuid
+  name: String
+  teamId: uuid
+  theme: jsonb
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+update columns of table "Project"
+"""
+enum Project_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  domain
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  teamId
+
+  """column name"""
+  theme
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""User's role in teams"""
+type Role {
+  comment: String
+
+  """An array relationship"""
+  members(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): [Member!]!
+
+  """An aggregate relationship"""
+  members_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): Member_aggregate!
+  value: String!
+}
+
+"""
+aggregated selection of "Role"
+"""
+type Role_aggregate {
+  aggregate: Role_aggregate_fields
+  nodes: [Role!]!
+}
+
+"""
+aggregate fields of "Role"
+"""
+type Role_aggregate_fields {
+  count(columns: [Role_select_column!], distinct: Boolean): Int!
+  max: Role_max_fields
+  min: Role_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "Role". All fields are combined with a logical 'AND'.
+"""
+input Role_bool_exp {
+  _and: [Role_bool_exp!]
+  _not: Role_bool_exp
+  _or: [Role_bool_exp!]
+  comment: String_comparison_exp
+  members: Member_bool_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Role"
+"""
+enum Role_constraint {
+  """unique or primary key constraint"""
+  Role_pkey
+}
+
+enum Role_enum {
+  """Manager of a team"""
+  manager
+
+  """Normal user"""
+  user
+}
+
+"""
+Boolean expression to compare columns of type "Role_enum". All fields are combined with logical 'AND'.
+"""
+input Role_enum_comparison_exp {
+  _eq: Role_enum
+  _in: [Role_enum!]
+  _is_null: Boolean
+  _neq: Role_enum
+  _nin: [Role_enum!]
+}
+
+"""
+input type for inserting data into table "Role"
+"""
+input Role_insert_input {
+  comment: String
+  members: Member_arr_rel_insert_input
+  value: String
+}
+
+"""aggregate max on columns"""
+type Role_max_fields {
+  comment: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type Role_min_fields {
+  comment: String
+  value: String
+}
+
+"""
+response of any mutation on the table "Role"
+"""
+type Role_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Role!]!
+}
+
+"""
+input type for inserting object relation for remote table "Role"
+"""
+input Role_obj_rel_insert_input {
+  data: Role_insert_input!
+
+  """upsert condition"""
+  on_conflict: Role_on_conflict
+}
+
+"""
+on_conflict condition type for table "Role"
+"""
+input Role_on_conflict {
+  constraint: Role_constraint!
+  update_columns: [Role_update_column!]! = []
+  where: Role_bool_exp
+}
+
+"""Ordering options when selecting data from "Role"."""
+input Role_order_by {
+  comment: order_by
+  members_aggregate: Member_aggregate_order_by
+  value: order_by
+}
+
+"""primary key columns input for table: Role"""
+input Role_pk_columns_input {
+  value: String!
+}
+
+"""
+select columns of table "Role"
+"""
+enum Role_select_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "Role"
+"""
+input Role_set_input {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "Role"
+"""
+enum Role_update_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+columns and relationships of "Session"
+"""
+type Session {
+  createdAt: timestamptz!
+  expires: timestamptz!
+  id: uuid!
+  sessionToken: String!
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  user: User!
+  userId: uuid!
+}
+
+"""
+aggregated selection of "Session"
+"""
+type Session_aggregate {
+  aggregate: Session_aggregate_fields
+  nodes: [Session!]!
+}
+
+"""
+aggregate fields of "Session"
+"""
+type Session_aggregate_fields {
+  count(columns: [Session_select_column!], distinct: Boolean): Int!
+  max: Session_max_fields
+  min: Session_min_fields
+}
+
+"""
+order by aggregate values of table "Session"
+"""
+input Session_aggregate_order_by {
+  count: order_by
+  max: Session_max_order_by
+  min: Session_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "Session"
+"""
+input Session_arr_rel_insert_input {
+  data: [Session_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: Session_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "Session". All fields are combined with a logical 'AND'.
+"""
+input Session_bool_exp {
+  _and: [Session_bool_exp!]
+  _not: Session_bool_exp
+  _or: [Session_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  expires: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  sessionToken: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  user: User_bool_exp
+  userId: uuid_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Session"
+"""
+enum Session_constraint {
+  """unique or primary key constraint"""
+  Session_pkey
+
+  """unique or primary key constraint"""
+  Session_sessionToken_key
+}
+
+"""
+input type for inserting data into table "Session"
+"""
+input Session_insert_input {
+  createdAt: timestamptz
+  expires: timestamptz
+  id: uuid
+  sessionToken: String
+  updatedAt: timestamptz
+  user: User_obj_rel_insert_input
+  userId: uuid
+}
+
+"""aggregate max on columns"""
+type Session_max_fields {
+  createdAt: timestamptz
+  expires: timestamptz
+  id: uuid
+  sessionToken: String
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by max() on columns of table "Session"
+"""
+input Session_max_order_by {
+  createdAt: order_by
+  expires: order_by
+  id: order_by
+  sessionToken: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""aggregate min on columns"""
+type Session_min_fields {
+  createdAt: timestamptz
+  expires: timestamptz
+  id: uuid
+  sessionToken: String
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+order by min() on columns of table "Session"
+"""
+input Session_min_order_by {
+  createdAt: order_by
+  expires: order_by
+  id: order_by
+  sessionToken: order_by
+  updatedAt: order_by
+  userId: order_by
+}
+
+"""
+response of any mutation on the table "Session"
+"""
+type Session_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Session!]!
+}
+
+"""
+on_conflict condition type for table "Session"
+"""
+input Session_on_conflict {
+  constraint: Session_constraint!
+  update_columns: [Session_update_column!]! = []
+  where: Session_bool_exp
+}
+
+"""Ordering options when selecting data from "Session"."""
+input Session_order_by {
+  createdAt: order_by
+  expires: order_by
+  id: order_by
+  sessionToken: order_by
+  updatedAt: order_by
+  user: User_order_by
+  userId: order_by
+}
+
+"""primary key columns input for table: Session"""
+input Session_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Session"
+"""
+enum Session_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  sessionToken
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+input type for updating data in table "Session"
+"""
+input Session_set_input {
+  createdAt: timestamptz
+  expires: timestamptz
+  id: uuid
+  sessionToken: String
+  updatedAt: timestamptz
+  userId: uuid
+}
+
+"""
+update columns of table "Session"
+"""
+enum Session_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  sessionToken
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  userId
+}
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+
+  """does the column match the given case-insensitive pattern"""
+  _ilike: String
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+  _is_null: Boolean
+
+  """does the column match the given pattern"""
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+
+  """does the column NOT match the given case-insensitive pattern"""
+  _nilike: String
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """does the column NOT match the given pattern"""
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """does the column NOT match the given SQL regular expression"""
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """does the column match the given SQL regular expression"""
+  _similar: String
+}
+
+"""
+columns and relationships of "Team"
+"""
+type Team {
+  createdAt: timestamptz!
+  id: uuid!
+
+  """An array relationship"""
+  members(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): [Member!]!
+
+  """An aggregate relationship"""
+  members_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): Member_aggregate!
+  name: String!
+
+  """An array relationship"""
+  projects(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): [Project!]!
+
+  """An aggregate relationship"""
+  projects_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): Project_aggregate!
+  uid: String
+  updatedAt: timestamptz!
+}
+
+"""
+aggregated selection of "Team"
+"""
+type Team_aggregate {
+  aggregate: Team_aggregate_fields
+  nodes: [Team!]!
+}
+
+"""
+aggregate fields of "Team"
+"""
+type Team_aggregate_fields {
+  count(columns: [Team_select_column!], distinct: Boolean): Int!
+  max: Team_max_fields
+  min: Team_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "Team". All fields are combined with a logical 'AND'.
+"""
+input Team_bool_exp {
+  _and: [Team_bool_exp!]
+  _not: Team_bool_exp
+  _or: [Team_bool_exp!]
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  members: Member_bool_exp
+  name: String_comparison_exp
+  projects: Project_bool_exp
+  uid: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "Team"
+"""
+enum Team_constraint {
+  """unique or primary key constraint"""
+  Team_pkey
+
+  """unique or primary key constraint"""
+  Team_uid_key
+}
+
+"""
+input type for inserting data into table "Team"
+"""
+input Team_insert_input {
+  createdAt: timestamptz
+  id: uuid
+  members: Member_arr_rel_insert_input
+  name: String
+  projects: Project_arr_rel_insert_input
+  uid: String
+  updatedAt: timestamptz
+}
+
+"""aggregate max on columns"""
+type Team_max_fields {
+  createdAt: timestamptz
+  id: uuid
+  name: String
+  uid: String
+  updatedAt: timestamptz
+}
+
+"""aggregate min on columns"""
+type Team_min_fields {
+  createdAt: timestamptz
+  id: uuid
+  name: String
+  uid: String
+  updatedAt: timestamptz
+}
+
+"""
+response of any mutation on the table "Team"
+"""
+type Team_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [Team!]!
+}
+
+"""
+input type for inserting object relation for remote table "Team"
+"""
+input Team_obj_rel_insert_input {
+  data: Team_insert_input!
+
+  """upsert condition"""
+  on_conflict: Team_on_conflict
+}
+
+"""
+on_conflict condition type for table "Team"
+"""
+input Team_on_conflict {
+  constraint: Team_constraint!
+  update_columns: [Team_update_column!]! = []
+  where: Team_bool_exp
+}
+
+"""Ordering options when selecting data from "Team"."""
+input Team_order_by {
+  createdAt: order_by
+  id: order_by
+  members_aggregate: Member_aggregate_order_by
+  name: order_by
+  projects_aggregate: Project_aggregate_order_by
+  uid: order_by
+  updatedAt: order_by
+}
+
+"""primary key columns input for table: Team"""
+input Team_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "Team"
+"""
+enum Team_select_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  uid
+
+  """column name"""
+  updatedAt
+}
+
+"""
+input type for updating data in table "Team"
+"""
+input Team_set_input {
+  createdAt: timestamptz
+  id: uuid
+  name: String
+  uid: String
+  updatedAt: timestamptz
+}
+
+"""
+update columns of table "Team"
+"""
+enum Team_update_column {
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  name
+
+  """column name"""
+  uid
+
+  """column name"""
+  updatedAt
+}
+
+"""
+columns and relationships of "User"
+"""
+type User {
+  """An array relationship"""
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): [Account!]!
+
+  """An aggregate relationship"""
+  accounts_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): Account_aggregate!
+  bio: String
+
+  """An array relationship"""
+  comments(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): [Comment!]!
+
+  """An aggregate relationship"""
+  comments_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): Comment_aggregate!
+  createdAt: timestamptz!
+  email: String
+  emailVerified: timestamptz
+  id: uuid!
+
+  """User profile avatar"""
+  image: String
+
+  """An array relationship"""
+  likes(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): [Like!]!
+
+  """An aggregate relationship"""
+  likes_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): Like_aggregate!
+
+  """An array relationship"""
+  members(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): [Member!]!
+
+  """An aggregate relationship"""
+  members_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): Member_aggregate!
+  name: String
+
+  """An array relationship"""
+  notificationSubscriptions(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): [NotificationSubscription!]!
+
+  """An aggregate relationship"""
+  notificationSubscriptions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): NotificationSubscription_aggregate!
+
+  """An array relationship"""
+  projects(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): [Project!]!
+
+  """An aggregate relationship"""
+  projects_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): Project_aggregate!
+
+  """An array relationship"""
+  recipientNotificationMessages(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): [NotificationMessage!]!
+
+  """An aggregate relationship"""
+  recipientNotificationMessages_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): NotificationMessage_aggregate!
+
+  """An array relationship"""
+  sessions(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): [Session!]!
+
+  """An aggregate relationship"""
+  sessions_aggregate(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): Session_aggregate!
+
+  """An array relationship"""
+  triggeredNotificationMessages(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): [NotificationMessage!]!
+
+  """An aggregate relationship"""
+  triggeredNotificationMessages_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): NotificationMessage_aggregate!
+  twitterUserName: String
+  type: UserType_enum
+  updatedAt: timestamptz!
+
+  """An object relationship"""
+  userType: UserType
+  username: String
+  website: String
+}
+
+"""
+columns and relationships of "UserType"
+"""
+type UserType {
+  comment: String!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): [User!]!
+
+  """An aggregate relationship"""
+  users_aggregate(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): User_aggregate!
+  value: String!
+}
+
+"""
+aggregated selection of "UserType"
+"""
+type UserType_aggregate {
+  aggregate: UserType_aggregate_fields
+  nodes: [UserType!]!
+}
+
+"""
+aggregate fields of "UserType"
+"""
+type UserType_aggregate_fields {
+  count(columns: [UserType_select_column!], distinct: Boolean): Int!
+  max: UserType_max_fields
+  min: UserType_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "UserType". All fields are combined with a logical 'AND'.
+"""
+input UserType_bool_exp {
+  _and: [UserType_bool_exp!]
+  _not: UserType_bool_exp
+  _or: [UserType_bool_exp!]
+  comment: String_comparison_exp
+  users: User_bool_exp
+  value: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "UserType"
+"""
+enum UserType_constraint {
+  """unique or primary key constraint"""
+  UserType_pkey
+}
+
+enum UserType_enum {
+  """Site administrator"""
+  admin
+
+  """Anonymous widget vsisitor"""
+  anonymous
+
+  """Free user"""
+  free
+
+  """Paid user"""
+  pro
+}
+
+"""
+Boolean expression to compare columns of type "UserType_enum". All fields are combined with logical 'AND'.
+"""
+input UserType_enum_comparison_exp {
+  _eq: UserType_enum
+  _in: [UserType_enum!]
+  _is_null: Boolean
+  _neq: UserType_enum
+  _nin: [UserType_enum!]
+}
+
+"""
+input type for inserting data into table "UserType"
+"""
+input UserType_insert_input {
+  comment: String
+  users: User_arr_rel_insert_input
+  value: String
+}
+
+"""aggregate max on columns"""
+type UserType_max_fields {
+  comment: String
+  value: String
+}
+
+"""aggregate min on columns"""
+type UserType_min_fields {
+  comment: String
+  value: String
+}
+
+"""
+response of any mutation on the table "UserType"
+"""
+type UserType_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [UserType!]!
+}
+
+"""
+input type for inserting object relation for remote table "UserType"
+"""
+input UserType_obj_rel_insert_input {
+  data: UserType_insert_input!
+
+  """upsert condition"""
+  on_conflict: UserType_on_conflict
+}
+
+"""
+on_conflict condition type for table "UserType"
+"""
+input UserType_on_conflict {
+  constraint: UserType_constraint!
+  update_columns: [UserType_update_column!]! = []
+  where: UserType_bool_exp
+}
+
+"""Ordering options when selecting data from "UserType"."""
+input UserType_order_by {
+  comment: order_by
+  users_aggregate: User_aggregate_order_by
+  value: order_by
+}
+
+"""primary key columns input for table: UserType"""
+input UserType_pk_columns_input {
+  value: String!
+}
+
+"""
+select columns of table "UserType"
+"""
+enum UserType_select_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+input type for updating data in table "UserType"
+"""
+input UserType_set_input {
+  comment: String
+  value: String
+}
+
+"""
+update columns of table "UserType"
+"""
+enum UserType_update_column {
+  """column name"""
+  comment
+
+  """column name"""
+  value
+}
+
+"""
+aggregated selection of "User"
+"""
+type User_aggregate {
+  aggregate: User_aggregate_fields
+  nodes: [User!]!
+}
+
+"""
+aggregate fields of "User"
+"""
+type User_aggregate_fields {
+  count(columns: [User_select_column!], distinct: Boolean): Int!
+  max: User_max_fields
+  min: User_min_fields
+}
+
+"""
+order by aggregate values of table "User"
+"""
+input User_aggregate_order_by {
+  count: order_by
+  max: User_max_order_by
+  min: User_min_order_by
+}
+
+"""
+input type for inserting array relation for remote table "User"
+"""
+input User_arr_rel_insert_input {
+  data: [User_insert_input!]!
+
+  """upsert condition"""
+  on_conflict: User_on_conflict
+}
+
+"""
+Boolean expression to filter rows from the table "User". All fields are combined with a logical 'AND'.
+"""
+input User_bool_exp {
+  _and: [User_bool_exp!]
+  _not: User_bool_exp
+  _or: [User_bool_exp!]
+  accounts: Account_bool_exp
+  bio: String_comparison_exp
+  comments: Comment_bool_exp
+  createdAt: timestamptz_comparison_exp
+  email: String_comparison_exp
+  emailVerified: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  image: String_comparison_exp
+  likes: Like_bool_exp
+  members: Member_bool_exp
+  name: String_comparison_exp
+  notificationSubscriptions: NotificationSubscription_bool_exp
+  projects: Project_bool_exp
+  recipientNotificationMessages: NotificationMessage_bool_exp
+  sessions: Session_bool_exp
+  triggeredNotificationMessages: NotificationMessage_bool_exp
+  twitterUserName: String_comparison_exp
+  type: UserType_enum_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  userType: UserType_bool_exp
+  username: String_comparison_exp
+  website: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "User"
+"""
+enum User_constraint {
+  """unique or primary key constraint"""
+  User_email_key
+
+  """unique or primary key constraint"""
+  User_pkey
+
+  """unique or primary key constraint"""
+  User_username_key
+}
+
+"""
+input type for inserting data into table "User"
+"""
+input User_insert_input {
+  accounts: Account_arr_rel_insert_input
+  bio: String
+  comments: Comment_arr_rel_insert_input
+  createdAt: timestamptz
+  email: String
+  emailVerified: timestamptz
+  id: uuid
+
+  """User profile avatar"""
+  image: String
+  likes: Like_arr_rel_insert_input
+  members: Member_arr_rel_insert_input
+  name: String
+  notificationSubscriptions: NotificationSubscription_arr_rel_insert_input
+  projects: Project_arr_rel_insert_input
+  recipientNotificationMessages: NotificationMessage_arr_rel_insert_input
+  sessions: Session_arr_rel_insert_input
+  triggeredNotificationMessages: NotificationMessage_arr_rel_insert_input
+  twitterUserName: String
+  type: UserType_enum
+  updatedAt: timestamptz
+  userType: UserType_obj_rel_insert_input
+  username: String
+  website: String
+}
+
+"""aggregate max on columns"""
+type User_max_fields {
+  bio: String
+  createdAt: timestamptz
+  email: String
+  emailVerified: timestamptz
+  id: uuid
+
+  """User profile avatar"""
+  image: String
+  name: String
+  twitterUserName: String
+  updatedAt: timestamptz
+  username: String
+  website: String
+}
+
+"""
+order by max() on columns of table "User"
+"""
+input User_max_order_by {
+  bio: order_by
+  createdAt: order_by
+  email: order_by
+  emailVerified: order_by
+  id: order_by
+
+  """User profile avatar"""
+  image: order_by
+  name: order_by
+  twitterUserName: order_by
+  updatedAt: order_by
+  username: order_by
+  website: order_by
+}
+
+"""aggregate min on columns"""
+type User_min_fields {
+  bio: String
+  createdAt: timestamptz
+  email: String
+  emailVerified: timestamptz
+  id: uuid
+
+  """User profile avatar"""
+  image: String
+  name: String
+  twitterUserName: String
+  updatedAt: timestamptz
+  username: String
+  website: String
+}
+
+"""
+order by min() on columns of table "User"
+"""
+input User_min_order_by {
+  bio: order_by
+  createdAt: order_by
+  email: order_by
+  emailVerified: order_by
+  id: order_by
+
+  """User profile avatar"""
+  image: order_by
+  name: order_by
+  twitterUserName: order_by
+  updatedAt: order_by
+  username: order_by
+  website: order_by
+}
+
+"""
+response of any mutation on the table "User"
+"""
+type User_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [User!]!
+}
+
+"""
+input type for inserting object relation for remote table "User"
+"""
+input User_obj_rel_insert_input {
+  data: User_insert_input!
+
+  """upsert condition"""
+  on_conflict: User_on_conflict
+}
+
+"""
+on_conflict condition type for table "User"
+"""
+input User_on_conflict {
+  constraint: User_constraint!
+  update_columns: [User_update_column!]! = []
+  where: User_bool_exp
+}
+
+"""Ordering options when selecting data from "User"."""
+input User_order_by {
+  accounts_aggregate: Account_aggregate_order_by
+  bio: order_by
+  comments_aggregate: Comment_aggregate_order_by
+  createdAt: order_by
+  email: order_by
+  emailVerified: order_by
+  id: order_by
+  image: order_by
+  likes_aggregate: Like_aggregate_order_by
+  members_aggregate: Member_aggregate_order_by
+  name: order_by
+  notificationSubscriptions_aggregate: NotificationSubscription_aggregate_order_by
+  projects_aggregate: Project_aggregate_order_by
+  recipientNotificationMessages_aggregate: NotificationMessage_aggregate_order_by
+  sessions_aggregate: Session_aggregate_order_by
+  triggeredNotificationMessages_aggregate: NotificationMessage_aggregate_order_by
+  twitterUserName: order_by
+  type: order_by
+  updatedAt: order_by
+  userType: UserType_order_by
+  username: order_by
+  website: order_by
+}
+
+"""primary key columns input for table: User"""
+input User_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "User"
+"""
+enum User_select_column {
+  """column name"""
+  bio
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  email
+
+  """column name"""
+  emailVerified
+
+  """column name"""
+  id
+
+  """column name"""
+  image
+
+  """column name"""
+  name
+
+  """column name"""
+  twitterUserName
+
+  """column name"""
+  type
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  username
+
+  """column name"""
+  website
+}
+
+"""
+input type for updating data in table "User"
+"""
+input User_set_input {
+  bio: String
+  createdAt: timestamptz
+  email: String
+  emailVerified: timestamptz
+  id: uuid
+
+  """User profile avatar"""
+  image: String
+  name: String
+  twitterUserName: String
+  type: UserType_enum
+  updatedAt: timestamptz
+  username: String
+  website: String
+}
+
+"""
+update columns of table "User"
+"""
+enum User_update_column {
+  """column name"""
+  bio
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  email
+
+  """column name"""
+  emailVerified
+
+  """column name"""
+  id
+
+  """column name"""
+  image
+
+  """column name"""
+  name
+
+  """column name"""
+  twitterUserName
+
+  """column name"""
+  type
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  username
+
+  """column name"""
+  website
+}
+
+"""
+columns and relationships of "VerificationToken"
+"""
+type VerificationToken {
+  expires: timestamptz!
+  id: uuid!
+  identifier: String!
+  token: String!
+}
+
+"""
+aggregated selection of "VerificationToken"
+"""
+type VerificationToken_aggregate {
+  aggregate: VerificationToken_aggregate_fields
+  nodes: [VerificationToken!]!
+}
+
+"""
+aggregate fields of "VerificationToken"
+"""
+type VerificationToken_aggregate_fields {
+  count(columns: [VerificationToken_select_column!], distinct: Boolean): Int!
+  max: VerificationToken_max_fields
+  min: VerificationToken_min_fields
+}
+
+"""
+Boolean expression to filter rows from the table "VerificationToken". All fields are combined with a logical 'AND'.
+"""
+input VerificationToken_bool_exp {
+  _and: [VerificationToken_bool_exp!]
+  _not: VerificationToken_bool_exp
+  _or: [VerificationToken_bool_exp!]
+  expires: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  identifier: String_comparison_exp
+  token: String_comparison_exp
+}
+
+"""
+unique or primary key constraints on table "VerificationToken"
+"""
+enum VerificationToken_constraint {
+  """unique or primary key constraint"""
+  VerificationToken_identifier_token_key
+
+  """unique or primary key constraint"""
+  VerificationToken_pkey
+}
+
+"""
+input type for inserting data into table "VerificationToken"
+"""
+input VerificationToken_insert_input {
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+}
+
+"""aggregate max on columns"""
+type VerificationToken_max_fields {
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+}
+
+"""aggregate min on columns"""
+type VerificationToken_min_fields {
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+}
+
+"""
+response of any mutation on the table "VerificationToken"
+"""
+type VerificationToken_mutation_response {
+  """number of rows affected by the mutation"""
+  affected_rows: Int!
+
+  """data from the rows affected by the mutation"""
+  returning: [VerificationToken!]!
+}
+
+"""
+on_conflict condition type for table "VerificationToken"
+"""
+input VerificationToken_on_conflict {
+  constraint: VerificationToken_constraint!
+  update_columns: [VerificationToken_update_column!]! = []
+  where: VerificationToken_bool_exp
+}
+
+"""Ordering options when selecting data from "VerificationToken"."""
+input VerificationToken_order_by {
+  expires: order_by
+  id: order_by
+  identifier: order_by
+  token: order_by
+}
+
+"""primary key columns input for table: VerificationToken"""
+input VerificationToken_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "VerificationToken"
+"""
+enum VerificationToken_select_column {
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  identifier
+
+  """column name"""
+  token
+}
+
+"""
+input type for updating data in table "VerificationToken"
+"""
+input VerificationToken_set_input {
+  expires: timestamptz
+  id: uuid
+  identifier: String
+  token: String
+}
+
+"""
+update columns of table "VerificationToken"
+"""
+enum VerificationToken_update_column {
+  """column name"""
+  expires
+
+  """column name"""
+  id
+
+  """column name"""
+  identifier
+
+  """column name"""
+  token
+}
+
+scalar jsonb
+
+input jsonb_cast_exp {
+  String: String_comparison_exp
+}
+
+"""
+Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+"""
+input jsonb_comparison_exp {
+  _cast: jsonb_cast_exp
+
+  """is the column contained in the given json value"""
+  _contained_in: jsonb
+
+  """does the column contain the given json value at the top level"""
+  _contains: jsonb
+  _eq: jsonb
+  _gt: jsonb
+  _gte: jsonb
+
+  """does the string exist as a top-level key in the column"""
+  _has_key: String
+
+  """do all of these strings exist as top-level keys in the column"""
+  _has_keys_all: [String!]
+
+  """do any of these strings exist as top-level keys in the column"""
+  _has_keys_any: [String!]
+  _in: [jsonb!]
+  _is_null: Boolean
+  _lt: jsonb
+  _lte: jsonb
+  _neq: jsonb
+  _nin: [jsonb!]
+}
+
+"""mutation root"""
+type mutation_root {
+  """
+  delete single row from the table: "Account"
+  """
+  deleteAccountByPk(id: uuid!): Account
+
+  """
+  delete data from the table: "Account"
+  """
+  deleteAccounts(
+    """filter the rows which have to be deleted"""
+    where: Account_bool_exp!
+  ): Account_mutation_response
+
+  """
+  delete single row from the table: "Comment"
+  """
+  deleteCommentByPk(id: uuid!): Comment
+
+  """
+  delete data from the table: "Comment"
+  """
+  deleteComments(
+    """filter the rows which have to be deleted"""
+    where: Comment_bool_exp!
+  ): Comment_mutation_response
+
+  """
+  delete single row from the table: "Like"
+  """
+  deleteLikeByPk(id: uuid!): Like
+
+  """
+  delete data from the table: "Like"
+  """
+  deleteLikes(
+    """filter the rows which have to be deleted"""
+    where: Like_bool_exp!
+  ): Like_mutation_response
+
+  """
+  delete single row from the table: "Member"
+  """
+  deleteMemberByPk(id: uuid!): Member
+
+  """
+  delete data from the table: "Member"
+  """
+  deleteMembers(
+    """filter the rows which have to be deleted"""
+    where: Member_bool_exp!
+  ): Member_mutation_response
+
+  """
+  delete single row from the table: "NotificationMessage"
+  """
+  deleteNotificationMessageByPk(id: uuid!): NotificationMessage
+
+  """
+  delete data from the table: "NotificationMessage"
+  """
+  deleteNotificationMessages(
+    """filter the rows which have to be deleted"""
+    where: NotificationMessage_bool_exp!
+  ): NotificationMessage_mutation_response
+
+  """
+  delete single row from the table: "NotificationSubscription"
+  """
+  deleteNotificationSubscriptionByPk(id: uuid!): NotificationSubscription
+
+  """
+  delete data from the table: "NotificationSubscription"
+  """
+  deleteNotificationSubscriptions(
+    """filter the rows which have to be deleted"""
+    where: NotificationSubscription_bool_exp!
+  ): NotificationSubscription_mutation_response
+
+  """
+  delete single row from the table: "Page"
+  """
+  deletePageByPk(id: uuid!): Page
+
+  """
+  delete data from the table: "Page"
+  """
+  deletePages(
+    """filter the rows which have to be deleted"""
+    where: Page_bool_exp!
+  ): Page_mutation_response
+
+  """
+  delete single row from the table: "Project"
+  """
+  deleteProjectByPk(id: uuid!): Project
+
+  """
+  delete data from the table: "Project"
+  """
+  deleteProjects(
+    """filter the rows which have to be deleted"""
+    where: Project_bool_exp!
+  ): Project_mutation_response
+
+  """
+  delete single row from the table: "Role"
+  """
+  deleteRoleByPk(value: String!): Role
+
+  """
+  delete data from the table: "Role"
+  """
+  deleteRoles(
+    """filter the rows which have to be deleted"""
+    where: Role_bool_exp!
+  ): Role_mutation_response
+
+  """
+  delete single row from the table: "Session"
+  """
+  deleteSessionByPk(id: uuid!): Session
+
+  """
+  delete data from the table: "Session"
+  """
+  deleteSessions(
+    """filter the rows which have to be deleted"""
+    where: Session_bool_exp!
+  ): Session_mutation_response
+
+  """
+  delete single row from the table: "Team"
+  """
+  deleteTeamByPk(id: uuid!): Team
+
+  """
+  delete data from the table: "Team"
+  """
+  deleteTeams(
+    """filter the rows which have to be deleted"""
+    where: Team_bool_exp!
+  ): Team_mutation_response
+
+  """
+  delete single row from the table: "User"
+  """
+  deleteUserByPk(id: uuid!): User
+
+  """
+  delete single row from the table: "UserType"
+  """
+  deleteUserTypeByPk(value: String!): UserType
+
+  """
+  delete data from the table: "UserType"
+  """
+  deleteUserTypes(
+    """filter the rows which have to be deleted"""
+    where: UserType_bool_exp!
+  ): UserType_mutation_response
+
+  """
+  delete data from the table: "User"
+  """
+  deleteUsers(
+    """filter the rows which have to be deleted"""
+    where: User_bool_exp!
+  ): User_mutation_response
+
+  """
+  delete single row from the table: "VerificationToken"
+  """
+  deleteVerificationTokenByPk(id: uuid!): VerificationToken
+
+  """
+  delete data from the table: "VerificationToken"
+  """
+  deleteVerificationTokens(
+    """filter the rows which have to be deleted"""
+    where: VerificationToken_bool_exp!
+  ): VerificationToken_mutation_response
+
+  """
+  delete data from the table: "NotificationType"
+  """
+  delete_NotificationType(
+    """filter the rows which have to be deleted"""
+    where: NotificationType_bool_exp!
+  ): NotificationType_mutation_response
+
+  """
+  delete single row from the table: "NotificationType"
+  """
+  delete_NotificationType_by_pk(value: String!): NotificationType
+
+  """
+  insert data into the table: "Account"
+  """
+  insertAccounts(
+    """the rows to be inserted"""
+    objects: [Account_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Account_on_conflict
+  ): Account_mutation_response
+
+  """
+  insert data into the table: "Comment"
+  """
+  insertComments(
+    """the rows to be inserted"""
+    objects: [Comment_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Comment_on_conflict
+  ): Comment_mutation_response
+
+  """
+  insert data into the table: "Like"
+  """
+  insertLikes(
+    """the rows to be inserted"""
+    objects: [Like_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Like_on_conflict
+  ): Like_mutation_response
+
+  """
+  insert data into the table: "Member"
+  """
+  insertMembers(
+    """the rows to be inserted"""
+    objects: [Member_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Member_on_conflict
+  ): Member_mutation_response
+
+  """
+  insert data into the table: "NotificationMessage"
+  """
+  insertNotificationMessages(
+    """the rows to be inserted"""
+    objects: [NotificationMessage_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: NotificationMessage_on_conflict
+  ): NotificationMessage_mutation_response
+
+  """
+  insert data into the table: "NotificationSubscription"
+  """
+  insertNotificationSubscriptions(
+    """the rows to be inserted"""
+    objects: [NotificationSubscription_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: NotificationSubscription_on_conflict
+  ): NotificationSubscription_mutation_response
+
+  """
+  insert a single row into the table: "Account"
+  """
+  insertOneAccount(
+    """the row to be inserted"""
+    object: Account_insert_input!
+
+    """upsert condition"""
+    on_conflict: Account_on_conflict
+  ): Account
+
+  """
+  insert a single row into the table: "Comment"
+  """
+  insertOneComment(
+    """the row to be inserted"""
+    object: Comment_insert_input!
+
+    """upsert condition"""
+    on_conflict: Comment_on_conflict
+  ): Comment
+
+  """
+  insert a single row into the table: "Like"
+  """
+  insertOneLike(
+    """the row to be inserted"""
+    object: Like_insert_input!
+
+    """upsert condition"""
+    on_conflict: Like_on_conflict
+  ): Like
+
+  """
+  insert a single row into the table: "Member"
+  """
+  insertOneMember(
+    """the row to be inserted"""
+    object: Member_insert_input!
+
+    """upsert condition"""
+    on_conflict: Member_on_conflict
+  ): Member
+
+  """
+  insert a single row into the table: "NotificationMessage"
+  """
+  insertOneNotificationMessage(
+    """the row to be inserted"""
+    object: NotificationMessage_insert_input!
+
+    """upsert condition"""
+    on_conflict: NotificationMessage_on_conflict
+  ): NotificationMessage
+
+  """
+  insert a single row into the table: "NotificationSubscription"
+  """
+  insertOneNotificationSubscription(
+    """the row to be inserted"""
+    object: NotificationSubscription_insert_input!
+
+    """upsert condition"""
+    on_conflict: NotificationSubscription_on_conflict
+  ): NotificationSubscription
+
+  """
+  insert a single row into the table: "Page"
+  """
+  insertOnePage(
+    """the row to be inserted"""
+    object: Page_insert_input!
+
+    """upsert condition"""
+    on_conflict: Page_on_conflict
+  ): Page
+
+  """
+  insert a single row into the table: "Project"
+  """
+  insertOneProject(
+    """the row to be inserted"""
+    object: Project_insert_input!
+
+    """upsert condition"""
+    on_conflict: Project_on_conflict
+  ): Project
+
+  """
+  insert a single row into the table: "Role"
+  """
+  insertOneRole(
+    """the row to be inserted"""
+    object: Role_insert_input!
+
+    """upsert condition"""
+    on_conflict: Role_on_conflict
+  ): Role
+
+  """
+  insert a single row into the table: "Session"
+  """
+  insertOneSession(
+    """the row to be inserted"""
+    object: Session_insert_input!
+
+    """upsert condition"""
+    on_conflict: Session_on_conflict
+  ): Session
+
+  """
+  insert a single row into the table: "Team"
+  """
+  insertOneTeam(
+    """the row to be inserted"""
+    object: Team_insert_input!
+
+    """upsert condition"""
+    on_conflict: Team_on_conflict
+  ): Team
+
+  """
+  insert a single row into the table: "User"
+  """
+  insertOneUser(
+    """the row to be inserted"""
+    object: User_insert_input!
+
+    """upsert condition"""
+    on_conflict: User_on_conflict
+  ): User
+
+  """
+  insert a single row into the table: "UserType"
+  """
+  insertOneUserType(
+    """the row to be inserted"""
+    object: UserType_insert_input!
+
+    """upsert condition"""
+    on_conflict: UserType_on_conflict
+  ): UserType
+
+  """
+  insert a single row into the table: "VerificationToken"
+  """
+  insertOneVerificationToken(
+    """the row to be inserted"""
+    object: VerificationToken_insert_input!
+
+    """upsert condition"""
+    on_conflict: VerificationToken_on_conflict
+  ): VerificationToken
+
+  """
+  insert data into the table: "Page"
+  """
+  insertPages(
+    """the rows to be inserted"""
+    objects: [Page_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Page_on_conflict
+  ): Page_mutation_response
+
+  """
+  insert data into the table: "Project"
+  """
+  insertProjects(
+    """the rows to be inserted"""
+    objects: [Project_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Project_on_conflict
+  ): Project_mutation_response
+
+  """
+  insert data into the table: "Role"
+  """
+  insertRoles(
+    """the rows to be inserted"""
+    objects: [Role_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Role_on_conflict
+  ): Role_mutation_response
+
+  """
+  insert data into the table: "Session"
+  """
+  insertSessions(
+    """the rows to be inserted"""
+    objects: [Session_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Session_on_conflict
+  ): Session_mutation_response
+
+  """
+  insert data into the table: "Team"
+  """
+  insertTeams(
+    """the rows to be inserted"""
+    objects: [Team_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: Team_on_conflict
+  ): Team_mutation_response
+
+  """
+  insert data into the table: "UserType"
+  """
+  insertUserTypes(
+    """the rows to be inserted"""
+    objects: [UserType_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: UserType_on_conflict
+  ): UserType_mutation_response
+
+  """
+  insert data into the table: "User"
+  """
+  insertUsers(
+    """the rows to be inserted"""
+    objects: [User_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: User_on_conflict
+  ): User_mutation_response
+
+  """
+  insert data into the table: "VerificationToken"
+  """
+  insertVerificationTokens(
+    """the rows to be inserted"""
+    objects: [VerificationToken_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: VerificationToken_on_conflict
+  ): VerificationToken_mutation_response
+
+  """
+  insert data into the table: "NotificationType"
+  """
+  insert_NotificationType(
+    """the rows to be inserted"""
+    objects: [NotificationType_insert_input!]!
+
+    """upsert condition"""
+    on_conflict: NotificationType_on_conflict
+  ): NotificationType_mutation_response
+
+  """
+  insert a single row into the table: "NotificationType"
+  """
+  insert_NotificationType_one(
+    """the row to be inserted"""
+    object: NotificationType_insert_input!
+
+    """upsert condition"""
+    on_conflict: NotificationType_on_conflict
+  ): NotificationType
+
+  """
+  update single row of the table: "Account"
+  """
+  updateAccountByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Account_set_input
+    pk_columns: Account_pk_columns_input!
+  ): Account
+
+  """
+  update data of the table: "Account"
+  """
+  updateAccounts(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Account_set_input
+
+    """filter the rows which have to be updated"""
+    where: Account_bool_exp!
+  ): Account_mutation_response
+
+  """
+  update single row of the table: "Comment"
+  """
+  updateCommentByPk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: Comment_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: Comment_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: Comment_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: Comment_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: Comment_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Comment_set_input
+    pk_columns: Comment_pk_columns_input!
+  ): Comment
+
+  """
+  update data of the table: "Comment"
+  """
+  updateComments(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: Comment_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: Comment_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: Comment_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: Comment_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: Comment_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Comment_set_input
+
+    """filter the rows which have to be updated"""
+    where: Comment_bool_exp!
+  ): Comment_mutation_response
+
+  """
+  update single row of the table: "Like"
+  """
+  updateLikeByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Like_set_input
+    pk_columns: Like_pk_columns_input!
+  ): Like
+
+  """
+  update data of the table: "Like"
+  """
+  updateLikes(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Like_set_input
+
+    """filter the rows which have to be updated"""
+    where: Like_bool_exp!
+  ): Like_mutation_response
+
+  """
+  update single row of the table: "Member"
+  """
+  updateMemberByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Member_set_input
+    pk_columns: Member_pk_columns_input!
+  ): Member
+
+  """
+  update data of the table: "Member"
+  """
+  updateMembers(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Member_set_input
+
+    """filter the rows which have to be updated"""
+    where: Member_bool_exp!
+  ): Member_mutation_response
+
+  """
+  update single row of the table: "NotificationMessage"
+  """
+  updateNotificationMessageByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationMessage_set_input
+    pk_columns: NotificationMessage_pk_columns_input!
+  ): NotificationMessage
+
+  """
+  update data of the table: "NotificationMessage"
+  """
+  updateNotificationMessages(
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationMessage_set_input
+
+    """filter the rows which have to be updated"""
+    where: NotificationMessage_bool_exp!
+  ): NotificationMessage_mutation_response
+
+  """
+  update single row of the table: "NotificationSubscription"
+  """
+  updateNotificationSubscriptionByPk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: NotificationSubscription_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: NotificationSubscription_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: NotificationSubscription_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: NotificationSubscription_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: NotificationSubscription_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationSubscription_set_input
+    pk_columns: NotificationSubscription_pk_columns_input!
+  ): NotificationSubscription
+
+  """
+  update data of the table: "NotificationSubscription"
+  """
+  updateNotificationSubscriptions(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: NotificationSubscription_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: NotificationSubscription_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: NotificationSubscription_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: NotificationSubscription_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: NotificationSubscription_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationSubscription_set_input
+
+    """filter the rows which have to be updated"""
+    where: NotificationSubscription_bool_exp!
+  ): NotificationSubscription_mutation_response
+
+  """
+  update single row of the table: "Page"
+  """
+  updatePageByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Page_set_input
+    pk_columns: Page_pk_columns_input!
+  ): Page
+
+  """
+  update data of the table: "Page"
+  """
+  updatePages(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Page_set_input
+
+    """filter the rows which have to be updated"""
+    where: Page_bool_exp!
+  ): Page_mutation_response
+
+  """
+  update single row of the table: "Project"
+  """
+  updateProjectByPk(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: Project_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: Project_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: Project_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: Project_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: Project_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Project_set_input
+    pk_columns: Project_pk_columns_input!
+  ): Project
+
+  """
+  update data of the table: "Project"
+  """
+  updateProjects(
+    """append existing jsonb value of filtered columns with new jsonb value"""
+    _append: Project_append_input
+
+    """
+    delete the field or element with specified path (for JSON arrays, negative integers count from the end)
+    """
+    _delete_at_path: Project_delete_at_path_input
+
+    """
+    delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array
+    """
+    _delete_elem: Project_delete_elem_input
+
+    """
+    delete key/value pair or string element. key/value pairs are matched based on their key value
+    """
+    _delete_key: Project_delete_key_input
+
+    """prepend existing jsonb value of filtered columns with new jsonb value"""
+    _prepend: Project_prepend_input
+
+    """sets the columns of the filtered rows to the given values"""
+    _set: Project_set_input
+
+    """filter the rows which have to be updated"""
+    where: Project_bool_exp!
+  ): Project_mutation_response
+
+  """
+  update single row of the table: "Role"
+  """
+  updateRoleByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Role_set_input
+    pk_columns: Role_pk_columns_input!
+  ): Role
+
+  """
+  update data of the table: "Role"
+  """
+  updateRoles(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Role_set_input
+
+    """filter the rows which have to be updated"""
+    where: Role_bool_exp!
+  ): Role_mutation_response
+
+  """
+  update single row of the table: "Session"
+  """
+  updateSessionByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Session_set_input
+    pk_columns: Session_pk_columns_input!
+  ): Session
+
+  """
+  update data of the table: "Session"
+  """
+  updateSessions(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Session_set_input
+
+    """filter the rows which have to be updated"""
+    where: Session_bool_exp!
+  ): Session_mutation_response
+
+  """
+  update single row of the table: "Team"
+  """
+  updateTeamByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Team_set_input
+    pk_columns: Team_pk_columns_input!
+  ): Team
+
+  """
+  update data of the table: "Team"
+  """
+  updateTeams(
+    """sets the columns of the filtered rows to the given values"""
+    _set: Team_set_input
+
+    """filter the rows which have to be updated"""
+    where: Team_bool_exp!
+  ): Team_mutation_response
+
+  """
+  update single row of the table: "User"
+  """
+  updateUserByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: User_set_input
+    pk_columns: User_pk_columns_input!
+  ): User
+
+  """
+  update single row of the table: "UserType"
+  """
+  updateUserTypeByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: UserType_set_input
+    pk_columns: UserType_pk_columns_input!
+  ): UserType
+
+  """
+  update data of the table: "UserType"
+  """
+  updateUserTypes(
+    """sets the columns of the filtered rows to the given values"""
+    _set: UserType_set_input
+
+    """filter the rows which have to be updated"""
+    where: UserType_bool_exp!
+  ): UserType_mutation_response
+
+  """
+  update data of the table: "User"
+  """
+  updateUsers(
+    """sets the columns of the filtered rows to the given values"""
+    _set: User_set_input
+
+    """filter the rows which have to be updated"""
+    where: User_bool_exp!
+  ): User_mutation_response
+
+  """
+  update single row of the table: "VerificationToken"
+  """
+  updateVerificationTokenByPk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: VerificationToken_set_input
+    pk_columns: VerificationToken_pk_columns_input!
+  ): VerificationToken
+
+  """
+  update data of the table: "VerificationToken"
+  """
+  updateVerificationTokens(
+    """sets the columns of the filtered rows to the given values"""
+    _set: VerificationToken_set_input
+
+    """filter the rows which have to be updated"""
+    where: VerificationToken_bool_exp!
+  ): VerificationToken_mutation_response
+
+  """
+  update data of the table: "NotificationType"
+  """
+  update_NotificationType(
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationType_set_input
+
+    """filter the rows which have to be updated"""
+    where: NotificationType_bool_exp!
+  ): NotificationType_mutation_response
+
+  """
+  update single row of the table: "NotificationType"
+  """
+  update_NotificationType_by_pk(
+    """sets the columns of the filtered rows to the given values"""
+    _set: NotificationType_set_input
+    pk_columns: NotificationType_pk_columns_input!
+  ): NotificationType
+}
+
+"""column ordering options"""
+enum order_by {
+  """in ascending order, nulls last"""
+  asc
+
+  """in ascending order, nulls first"""
+  asc_nulls_first
+
+  """in ascending order, nulls last"""
+  asc_nulls_last
+
+  """in descending order, nulls first"""
+  desc
+
+  """in descending order, nulls first"""
+  desc_nulls_first
+
+  """in descending order, nulls last"""
+  desc_nulls_last
+}
+
+type query_root {
+  """
+  fetch data from the table: "NotificationType"
+  """
+  NotificationType(
+    """distinct select on columns"""
+    distinct_on: [NotificationType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationType_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationType_bool_exp
+  ): [NotificationType!]!
+
+  """
+  fetch aggregated fields from the table: "NotificationType"
+  """
+  NotificationType_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationType_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationType_bool_exp
+  ): NotificationType_aggregate!
+
+  """
+  fetch data from the table: "NotificationType" using primary key columns
+  """
+  NotificationType_by_pk(value: String!): NotificationType
+
+  """
+  fetch aggregated fields from the table: "Account"
+  """
+  accountAggregate(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): Account_aggregate!
+
+  """fetch data from the table: "Account" using primary key columns"""
+  accountByPk(id: uuid!): Account
+
+  """An array relationship"""
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): [Account!]!
+
+  """
+  fetch aggregated fields from the table: "Comment"
+  """
+  commentAggregate(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): Comment_aggregate!
+
+  """fetch data from the table: "Comment" using primary key columns"""
+  commentByPk(id: uuid!): Comment
+
+  """An array relationship"""
+  comments(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): [Comment!]!
+
+  """
+  fetch aggregated fields from the table: "Like"
+  """
+  likeAggregate(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): Like_aggregate!
+
+  """fetch data from the table: "Like" using primary key columns"""
+  likeByPk(id: uuid!): Like
+
+  """An array relationship"""
+  likes(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): [Like!]!
+
+  """
+  fetch aggregated fields from the table: "Member"
+  """
+  memberAggregate(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): Member_aggregate!
+
+  """fetch data from the table: "Member" using primary key columns"""
+  memberByPk(id: uuid!): Member
+
+  """An array relationship"""
+  members(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): [Member!]!
+
+  """An array relationship"""
+  notificationMessages(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): [NotificationMessage!]!
+
+  """
+  fetch aggregated fields from the table: "NotificationMessage"
+  """
+  notificationMessagesAggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): NotificationMessage_aggregate!
+
+  """
+  fetch data from the table: "NotificationMessage" using primary key columns
+  """
+  notificationMessagesByPk(id: uuid!): NotificationMessage
+
+  """
+  fetch aggregated fields from the table: "NotificationSubscription"
+  """
+  notificationSubscriptionAggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): NotificationSubscription_aggregate!
+
+  """
+  fetch data from the table: "NotificationSubscription" using primary key columns
+  """
+  notificationSubscriptionByPk(id: uuid!): NotificationSubscription
+
+  """An array relationship"""
+  notificationSubscriptions(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): [NotificationSubscription!]!
+
+  """
+  fetch aggregated fields from the table: "Page"
+  """
+  pageAggregate(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): Page_aggregate!
+
+  """fetch data from the table: "Page" using primary key columns"""
+  pageByPk(id: uuid!): Page
+
+  """An array relationship"""
+  pages(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): [Page!]!
+
+  """
+  fetch aggregated fields from the table: "Project"
+  """
+  projectAggregate(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): Project_aggregate!
+
+  """fetch data from the table: "Project" using primary key columns"""
+  projectByPk(id: uuid!): Project
+
+  """An array relationship"""
+  projects(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): [Project!]!
+
+  """
+  fetch aggregated fields from the table: "Role"
+  """
+  roleAggregate(
+    """distinct select on columns"""
+    distinct_on: [Role_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Role_order_by!]
+
+    """filter the rows returned"""
+    where: Role_bool_exp
+  ): Role_aggregate!
+
+  """fetch data from the table: "Role" using primary key columns"""
+  roleByPk(value: String!): Role
+
+  """
+  fetch data from the table: "Role"
+  """
+  roles(
+    """distinct select on columns"""
+    distinct_on: [Role_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Role_order_by!]
+
+    """filter the rows returned"""
+    where: Role_bool_exp
+  ): [Role!]!
+
+  """
+  fetch aggregated fields from the table: "Session"
+  """
+  sessionAggregate(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): Session_aggregate!
+
+  """fetch data from the table: "Session" using primary key columns"""
+  sessionByPk(id: uuid!): Session
+
+  """An array relationship"""
+  sessions(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): [Session!]!
+
+  """
+  fetch aggregated fields from the table: "Team"
+  """
+  teamAggregate(
+    """distinct select on columns"""
+    distinct_on: [Team_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Team_order_by!]
+
+    """filter the rows returned"""
+    where: Team_bool_exp
+  ): Team_aggregate!
+
+  """fetch data from the table: "Team" using primary key columns"""
+  teamByPk(id: uuid!): Team
+
+  """
+  fetch data from the table: "Team"
+  """
+  teams(
+    """distinct select on columns"""
+    distinct_on: [Team_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Team_order_by!]
+
+    """filter the rows returned"""
+    where: Team_bool_exp
+  ): [Team!]!
+
+  """
+  fetch aggregated fields from the table: "User"
+  """
+  userAggregate(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): User_aggregate!
+
+  """fetch data from the table: "User" using primary key columns"""
+  userByPk(id: uuid!): User
+
+  """
+  fetch aggregated fields from the table: "UserType"
+  """
+  userTypeAggregate(
+    """distinct select on columns"""
+    distinct_on: [UserType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [UserType_order_by!]
+
+    """filter the rows returned"""
+    where: UserType_bool_exp
+  ): UserType_aggregate!
+
+  """fetch data from the table: "UserType" using primary key columns"""
+  userTypeByPk(value: String!): UserType
+
+  """
+  fetch data from the table: "UserType"
+  """
+  userTypes(
+    """distinct select on columns"""
+    distinct_on: [UserType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [UserType_order_by!]
+
+    """filter the rows returned"""
+    where: UserType_bool_exp
+  ): [UserType!]!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): [User!]!
+
+  """
+  fetch aggregated fields from the table: "VerificationToken"
+  """
+  verificationTokenAggregate(
+    """distinct select on columns"""
+    distinct_on: [VerificationToken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [VerificationToken_order_by!]
+
+    """filter the rows returned"""
+    where: VerificationToken_bool_exp
+  ): VerificationToken_aggregate!
+
+  """
+  fetch data from the table: "VerificationToken" using primary key columns
+  """
+  verificationTokenByPk(id: uuid!): VerificationToken
+
+  """
+  fetch data from the table: "VerificationToken"
+  """
+  verificationTokens(
+    """distinct select on columns"""
+    distinct_on: [VerificationToken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [VerificationToken_order_by!]
+
+    """filter the rows returned"""
+    where: VerificationToken_bool_exp
+  ): [VerificationToken!]!
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "NotificationType"
+  """
+  NotificationType(
+    """distinct select on columns"""
+    distinct_on: [NotificationType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationType_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationType_bool_exp
+  ): [NotificationType!]!
+
+  """
+  fetch aggregated fields from the table: "NotificationType"
+  """
+  NotificationType_aggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationType_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationType_bool_exp
+  ): NotificationType_aggregate!
+
+  """
+  fetch data from the table: "NotificationType" using primary key columns
+  """
+  NotificationType_by_pk(value: String!): NotificationType
+
+  """
+  fetch aggregated fields from the table: "Account"
+  """
+  accountAggregate(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): Account_aggregate!
+
+  """fetch data from the table: "Account" using primary key columns"""
+  accountByPk(id: uuid!): Account
+
+  """An array relationship"""
+  accounts(
+    """distinct select on columns"""
+    distinct_on: [Account_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Account_order_by!]
+
+    """filter the rows returned"""
+    where: Account_bool_exp
+  ): [Account!]!
+
+  """
+  fetch aggregated fields from the table: "Comment"
+  """
+  commentAggregate(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): Comment_aggregate!
+
+  """fetch data from the table: "Comment" using primary key columns"""
+  commentByPk(id: uuid!): Comment
+
+  """An array relationship"""
+  comments(
+    """distinct select on columns"""
+    distinct_on: [Comment_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Comment_order_by!]
+
+    """filter the rows returned"""
+    where: Comment_bool_exp
+  ): [Comment!]!
+
+  """
+  fetch aggregated fields from the table: "Like"
+  """
+  likeAggregate(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): Like_aggregate!
+
+  """fetch data from the table: "Like" using primary key columns"""
+  likeByPk(id: uuid!): Like
+
+  """An array relationship"""
+  likes(
+    """distinct select on columns"""
+    distinct_on: [Like_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Like_order_by!]
+
+    """filter the rows returned"""
+    where: Like_bool_exp
+  ): [Like!]!
+
+  """
+  fetch aggregated fields from the table: "Member"
+  """
+  memberAggregate(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): Member_aggregate!
+
+  """fetch data from the table: "Member" using primary key columns"""
+  memberByPk(id: uuid!): Member
+
+  """An array relationship"""
+  members(
+    """distinct select on columns"""
+    distinct_on: [Member_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Member_order_by!]
+
+    """filter the rows returned"""
+    where: Member_bool_exp
+  ): [Member!]!
+
+  """An array relationship"""
+  notificationMessages(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): [NotificationMessage!]!
+
+  """
+  fetch aggregated fields from the table: "NotificationMessage"
+  """
+  notificationMessagesAggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationMessage_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationMessage_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationMessage_bool_exp
+  ): NotificationMessage_aggregate!
+
+  """
+  fetch data from the table: "NotificationMessage" using primary key columns
+  """
+  notificationMessagesByPk(id: uuid!): NotificationMessage
+
+  """
+  fetch aggregated fields from the table: "NotificationSubscription"
+  """
+  notificationSubscriptionAggregate(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): NotificationSubscription_aggregate!
+
+  """
+  fetch data from the table: "NotificationSubscription" using primary key columns
+  """
+  notificationSubscriptionByPk(id: uuid!): NotificationSubscription
+
+  """An array relationship"""
+  notificationSubscriptions(
+    """distinct select on columns"""
+    distinct_on: [NotificationSubscription_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [NotificationSubscription_order_by!]
+
+    """filter the rows returned"""
+    where: NotificationSubscription_bool_exp
+  ): [NotificationSubscription!]!
+
+  """
+  fetch aggregated fields from the table: "Page"
+  """
+  pageAggregate(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): Page_aggregate!
+
+  """fetch data from the table: "Page" using primary key columns"""
+  pageByPk(id: uuid!): Page
+
+  """An array relationship"""
+  pages(
+    """distinct select on columns"""
+    distinct_on: [Page_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Page_order_by!]
+
+    """filter the rows returned"""
+    where: Page_bool_exp
+  ): [Page!]!
+
+  """
+  fetch aggregated fields from the table: "Project"
+  """
+  projectAggregate(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): Project_aggregate!
+
+  """fetch data from the table: "Project" using primary key columns"""
+  projectByPk(id: uuid!): Project
+
+  """An array relationship"""
+  projects(
+    """distinct select on columns"""
+    distinct_on: [Project_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Project_order_by!]
+
+    """filter the rows returned"""
+    where: Project_bool_exp
+  ): [Project!]!
+
+  """
+  fetch aggregated fields from the table: "Role"
+  """
+  roleAggregate(
+    """distinct select on columns"""
+    distinct_on: [Role_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Role_order_by!]
+
+    """filter the rows returned"""
+    where: Role_bool_exp
+  ): Role_aggregate!
+
+  """fetch data from the table: "Role" using primary key columns"""
+  roleByPk(value: String!): Role
+
+  """
+  fetch data from the table: "Role"
+  """
+  roles(
+    """distinct select on columns"""
+    distinct_on: [Role_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Role_order_by!]
+
+    """filter the rows returned"""
+    where: Role_bool_exp
+  ): [Role!]!
+
+  """
+  fetch aggregated fields from the table: "Session"
+  """
+  sessionAggregate(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): Session_aggregate!
+
+  """fetch data from the table: "Session" using primary key columns"""
+  sessionByPk(id: uuid!): Session
+
+  """An array relationship"""
+  sessions(
+    """distinct select on columns"""
+    distinct_on: [Session_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Session_order_by!]
+
+    """filter the rows returned"""
+    where: Session_bool_exp
+  ): [Session!]!
+
+  """
+  fetch aggregated fields from the table: "Team"
+  """
+  teamAggregate(
+    """distinct select on columns"""
+    distinct_on: [Team_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Team_order_by!]
+
+    """filter the rows returned"""
+    where: Team_bool_exp
+  ): Team_aggregate!
+
+  """fetch data from the table: "Team" using primary key columns"""
+  teamByPk(id: uuid!): Team
+
+  """
+  fetch data from the table: "Team"
+  """
+  teams(
+    """distinct select on columns"""
+    distinct_on: [Team_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [Team_order_by!]
+
+    """filter the rows returned"""
+    where: Team_bool_exp
+  ): [Team!]!
+
+  """
+  fetch aggregated fields from the table: "User"
+  """
+  userAggregate(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): User_aggregate!
+
+  """fetch data from the table: "User" using primary key columns"""
+  userByPk(id: uuid!): User
+
+  """
+  fetch aggregated fields from the table: "UserType"
+  """
+  userTypeAggregate(
+    """distinct select on columns"""
+    distinct_on: [UserType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [UserType_order_by!]
+
+    """filter the rows returned"""
+    where: UserType_bool_exp
+  ): UserType_aggregate!
+
+  """fetch data from the table: "UserType" using primary key columns"""
+  userTypeByPk(value: String!): UserType
+
+  """
+  fetch data from the table: "UserType"
+  """
+  userTypes(
+    """distinct select on columns"""
+    distinct_on: [UserType_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [UserType_order_by!]
+
+    """filter the rows returned"""
+    where: UserType_bool_exp
+  ): [UserType!]!
+
+  """An array relationship"""
+  users(
+    """distinct select on columns"""
+    distinct_on: [User_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [User_order_by!]
+
+    """filter the rows returned"""
+    where: User_bool_exp
+  ): [User!]!
+
+  """
+  fetch aggregated fields from the table: "VerificationToken"
+  """
+  verificationTokenAggregate(
+    """distinct select on columns"""
+    distinct_on: [VerificationToken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [VerificationToken_order_by!]
+
+    """filter the rows returned"""
+    where: VerificationToken_bool_exp
+  ): VerificationToken_aggregate!
+
+  """
+  fetch data from the table: "VerificationToken" using primary key columns
+  """
+  verificationTokenByPk(id: uuid!): VerificationToken
+
+  """
+  fetch data from the table: "VerificationToken"
+  """
+  verificationTokens(
+    """distinct select on columns"""
+    distinct_on: [VerificationToken_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [VerificationToken_order_by!]
+
+    """filter the rows returned"""
+    where: VerificationToken_bool_exp
+  ): [VerificationToken!]!
+}
+
+scalar timestamptz
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+scalar uuid
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input uuid_comparison_exp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _is_null: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+

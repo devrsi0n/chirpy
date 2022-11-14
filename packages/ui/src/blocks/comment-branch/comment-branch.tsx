@@ -30,6 +30,10 @@ export function CommentBranch({
 }: CommentBranchProps): JSX.Element {
   return (
     <m.li
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      layout
       {...restProps}
       className={clsx(
         `space-y-2`,

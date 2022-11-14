@@ -24,6 +24,7 @@ export type CommentItemFragment = {
 
 export type CommentTreeSubscriptionVariables = Types.Exact<{
   pageURL: Types.Scalars['String'];
+  orderBy?: Types.InputMaybe<Types.Order_By>;
 }>;
 
 export type CommentTreeSubscription = {
@@ -242,10 +243,10 @@ export const CommentItemFragmentDoc = gql`
   }
 `;
 export const CommentTreeDocument = gql`
-  subscription commentTree($pageURL: String!) {
+  subscription commentTree($pageURL: String!, $orderBy: order_by = asc) {
     comments(
       where: { page: { url: { _eq: $pageURL } }, parentId: { _is_null: true } }
-      order_by: { likes_aggregate: { count: desc }, createdAt: asc }
+      order_by: { likes_aggregate: { count: desc }, createdAt: $orderBy }
     ) {
       ...commentItem
       replies(order_by: { likes_aggregate: { count: desc }, createdAt: asc }) {

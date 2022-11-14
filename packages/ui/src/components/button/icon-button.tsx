@@ -34,7 +34,7 @@ export const IconButton = React.forwardRef(function IconButton(
 });
 
 const COLOR_STYLES: Record<IconButtonColor, string> = {
-  gray: 'text-gray-1100 hover:bg-gray-400 hover:ring-gray-400',
+  gray: 'text-gray-1200 hover:bg-gray-400 hover:ring-gray-400',
   primary: 'text-primary-1100 hover:bg-primary-400 hover:ring-primary-400',
   green: 'text-green-1100 hover:bg-green-400 hover:ring-green-400',
   yellow: 'text-yellow-1100 hover:bg-yellow-400 hover:ring-yellow-400',
