@@ -27,9 +27,8 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
     pageId = props.pageId;
     pageURL = props.pageURL;
   }
-  const [orderBy] = useCommentOrderBy();
   const [{ data }] = useCommentTreeSubscription({
-    variables: { pageURL, orderBy },
+    variables: { pageURL },
     pause: isSSRMode,
   });
   const comments =
