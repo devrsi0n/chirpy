@@ -102,6 +102,7 @@ function sortComments(
   );
   for (const comment of orderedComments) {
     if (comment.replies?.length > 1) {
+      // @ts-ignore
       comment.replies = sortComments(comment.replies, orderBy);
     }
   }
