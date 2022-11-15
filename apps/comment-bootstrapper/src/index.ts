@@ -7,3 +7,13 @@ if (win && !win.$chirpyDisableAutoInjection) {
     initCommentWidget,
   };
 }
+
+// Detech browser back/forward button, and in-page navigation
+['hashchange', 'popstate'].forEach((eventName) => {
+  window.addEventListener(eventName, function () {
+    // Wait for page reload completed
+    setTimeout(() => {
+      initCommentWidget();
+    }, 5000);
+  });
+});
