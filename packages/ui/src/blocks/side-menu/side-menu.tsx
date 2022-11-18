@@ -48,7 +48,7 @@ export function SideMenu({
 }: SideMenuProps): JSX.Element {
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useClickOutside(() => isOpen && toggleOpen(0));
-  const [containerStyles, buttonStyles] = posStyles[position];
+  const [containerStyles, buttonStyles] = POS_STYLES[position];
   const backgroundVariant = React.useMemo(() => {
     const pos = circlePosStyle[position];
     return {
@@ -108,7 +108,7 @@ export function SideMenu({
       <IconButton
         aria-expanded={isOpen}
         onClick={() => toggleOpen()}
-        className={clsx('bg-gray-100', buttonStyles)}
+        className={clsx('bg-gray-400 p-1', buttonStyles)}
       >
         <span className="sr-only">Open navigation menu</span>
         <IconMenu className={clsx(isOpen && `hidden`)} />
@@ -120,7 +120,7 @@ export function SideMenu({
 
 SideMenu.Item = SideMenuItem;
 
-const posStyles = {
+const POS_STYLES = {
   tl: [`left-0`, `!absolute top-[18px] left-[18px]`],
   br: [`right-0`, `!fixed bottom-[18px] right-[18px]`],
 };

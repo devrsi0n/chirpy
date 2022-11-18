@@ -62,7 +62,7 @@ export function Docs({
                     variant="plain"
                     href={nearNav.prev.link}
                     className={clsx(
-                      'flex -translate-x-5 flex-row items-center px-3 py-2 text-gray-1200',
+                      'flex flex-row items-center px-3 py-2 text-gray-1200 sm:-translate-x-5',
                       listHoverable,
                     )}
                   >
@@ -79,7 +79,7 @@ export function Docs({
                     variant="plain"
                     href={nearNav.next.link}
                     className={clsx(
-                      'flex translate-x-5 flex-row items-center px-3 py-2 text-gray-1200',
+                      'flex flex-row items-center px-3 py-2 text-gray-1200 sm:translate-x-5',
                       listHoverable,
                     )}
                   >

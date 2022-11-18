@@ -21,11 +21,12 @@ body,
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: none;
+  appearance: none;
   outline: none;
 }
 
 ::selection {
-  @apply bg-green-800 text-white;
+  @apply bg-primary-900 text-primary-100;
 }
 
 :focus-visible {
