@@ -7,7 +7,10 @@ import * as React from 'react';
 import { useHasMounted } from '../../hooks/use-has-mounted';
 
 type Size = 'xs' | 'sm' | 'md' | 'lg';
-type Variant = 'primary' | 'secondary' | 'plain' | 'solid';
+/**
+ * 'nav' means header/footer nav links
+ */
+type Variant = 'nav' | 'primary' | 'secondary' | 'plain';
 
 export type LinkProps = React.PropsWithChildren<
   NextLinkProps &
@@ -31,10 +34,10 @@ const sizeStyles: Record<Size, string> = {
 };
 
 const variantStyles: Record<Variant, string> = {
-  primary: `text-gray-1200 whitespace-nowrap`,
+  nav: `text-gray-1200 whitespace-nowrap`,
+  primary: `text-primary-1000 hover:text-primary-1200`,
   secondary: `text-gray-1100`,
   plain: ``,
-  solid: `text-blue-1100 hover:text-blue-1200`,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -50,7 +53,7 @@ export const Link = React.forwardRef(function Link(
     prefetch,
     highlightPattern,
     hideUnderline,
-    variant = 'primary',
+    variant = 'nav',
     className,
     children,
     disabled,
@@ -125,7 +128,7 @@ export const Link = React.forwardRef(function Link(
           )}
         >
           {children}
-          {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
+          {!hideUnderline && ['nav', 'secondary'].includes(variant) && (
             <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
               <m.span
                 className="absolute inset-0 inline-block bg-current"

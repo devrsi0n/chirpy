@@ -222,7 +222,7 @@ export function Profile(): JSX.Element {
           ) : (
             website && (
               <Link
-                variant="solid"
+                variant="primary"
                 href={website}
                 className="flex w-fit flex-row space-x-2"
               >
@@ -240,7 +240,7 @@ export function Profile(): JSX.Element {
           ) : (
             twitterUserName && (
               <Link
-                variant="solid"
+                variant="primary"
                 href={`https://twitter.com/${twitterUserName}`}
                 className="flex w-fit flex-row items-center space-x-2"
               >
