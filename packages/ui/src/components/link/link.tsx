@@ -96,16 +96,17 @@ export const Link = React.forwardRef(function Link(
   return (
     <>
       {variant === 'plain' ? (
-        <NextLink {...commonProps} onClick={handler} ref={ref}>
-          <span
-            className={clsx(
-              size && sizeStyles[size],
-              disabled && disabledStyle,
-              className,
-            )}
-          >
-            {children}
-          </span>
+        <NextLink
+          {...commonProps}
+          className={clsx(
+            size && sizeStyles[size],
+            disabled && disabledStyle,
+            className,
+          )}
+          onClick={handler}
+          ref={ref}
+        >
+          {children}
         </NextLink>
       ) : (
         <NextLink
@@ -114,32 +115,29 @@ export const Link = React.forwardRef(function Link(
           onMouseLeave={() => setIsHovering(false)}
           onClick={handler}
           ref={ref}
+          className={clsx(
+            `relative !no-underline transition duration-150 ease-in-out`,
+            size && sizeStyles[size],
+            highlight && `font-bold`,
+            variantStyles[variant],
+            disabled && disabledStyle,
+            className,
+          )}
         >
-          <span
-            className={clsx(
-              `relative !no-underline transition duration-150 ease-in-out`,
-              size && sizeStyles[size],
-              highlight && `font-bold`,
-              variantStyles[variant],
-              disabled && disabledStyle,
-              className,
-            )}
-          >
-            {children}
-            {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
-              <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
-                <m.span
-                  className="absolute inset-0 inline-block bg-current"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{
-                    scale: isHovering ? 1 : 0,
-                    opacity: isHovering ? 1 : 0,
-                  }}
-                  exit={{ scale: 0, opacity: 0 }}
-                />
-              </span>
-            )}
-          </span>
+          {children}
+          {!hideUnderline && ['primary', 'secondary'].includes(variant) && (
+            <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
+              <m.span
+                className="absolute inset-0 inline-block bg-current"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{
+                  scale: isHovering ? 1 : 0,
+                  opacity: isHovering ? 1 : 0,
+                }}
+                exit={{ scale: 0, opacity: 0 }}
+              />
+            </span>
+          )}
         </NextLink>
       )}
     </>
