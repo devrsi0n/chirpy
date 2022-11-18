@@ -30,7 +30,6 @@ describe('NotificationHub', () => {
   it('should render the messages', async () => {
     await renderDefaultNotificationHub();
     expect(screen.getAllByAltText(/avatar/)).toHaveLength(3);
-    expect(screen.getAllByLabelText('Comment content')).toHaveLength(2);
   });
 
   it('Should mark the clicked message as read', async () => {
@@ -51,9 +50,7 @@ describe('NotificationHub', () => {
       .mockReturnValue([{} as any, deleteNotificationMessage]);
     await renderDefaultNotificationHub();
 
-    await userEvent.click(
-      screen.getAllByLabelText('Delete the notification message')[0],
-    );
+    await userEvent.click(screen.getAllByLabelText('Delete the message')[0]);
     expect(deleteNotificationMessage).toHaveBeenCalledTimes(1);
   });
 });
