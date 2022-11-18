@@ -41,7 +41,7 @@ export function NotificationItem({
     <Menu.Item
       key={message.id}
       className={clsx(
-        'mt-0 flex-col items-start rounded-none px-5 pt-3 pb-0 !text-left hover:rounded',
+        'group relative mt-0 flex-col items-start  rounded-none !p-0 !text-left hover:rounded',
         !message.read && `bg-gray-600/30`,
       )}
       onClickCapture={(e: any): void => {
@@ -55,38 +55,39 @@ export function NotificationItem({
       <Link
         href={message.url}
         variant="plain"
-        className="group mb-2 flex w-full flex-row items-start space-x-2"
+        className="flex w-full flex-row items-start space-x-2 px-5 pb-2 pt-3"
         target={isWidget ? '_blank' : '_self'}
       >
+        <button
+          type="button"
+          className="absolute top-1.5 right-1.5 hidden h-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block"
+          onClick={(e) => {
+            onClickDelete(message.id);
+            e.stopPropagation();
+          }}
+          ref={deleteButtonRef}
+          aria-label="Delete the message"
+        >
+          <IconX size={18} />
+        </button>
         {ICON_MAP[message.type]}
         <div className="flex-1">
-          <div className="flex flex-row justify-between">
-            <Avatar
-              src={message.triggeredBy.image}
-              alt={`${message.triggeredBy.name}'s avatar`}
-              email={message.triggeredBy.email}
-              name={message.triggeredBy.name}
-              username={message.triggeredBy.username}
-              className="mb-2"
-            />
-            <button
-              type="button"
-              className="hidden h-fit translate-x-3 -translate-y-1 rounded-full p-0.5 hover:bg-primary-600 group-hover:inline"
-              onClick={(e) => {
-                onClickDelete(message.id);
-                e.stopPropagation();
-              }}
-              ref={deleteButtonRef}
-              aria-label="Delete the notification message"
-            >
-              <IconX size={18} />
-            </button>
-          </div>
+          <Avatar
+            src={message.triggeredBy.image}
+            alt={`${message.triggeredBy.name}'s avatar`}
+            email={message.triggeredBy.email}
+            name={message.triggeredBy.name}
+            username={message.triggeredBy.username}
+            className="mb-2"
+          />
           <NotificationText className="flex flex-row space-x-1.5 leading-none">
-            <span className="max-w-[8rem] truncate font-bold">
+            <span
+              title={message.triggeredBy.name || ''}
+              className="max-w-[4rem] truncate font-bold"
+            >
               {message.triggeredBy.name}
             </span>
-            <span>{TITLE_MAP[message.type]}</span>
+            <span className="whitespace-nowrap">{TITLE_MAP[message.type]}</span>
           </NotificationText>
           <NotificationText
             variant="secondary"
@@ -103,7 +104,6 @@ export function NotificationItem({
               className="mt-2 max-w-[15rem] truncate"
               variant="secondary"
               title={message.content}
-              aria-label="Comment content"
             >
               {message.content}
             </NotificationText>
@@ -136,7 +136,7 @@ const TITLE_MAP: Record<NotificationType_Enum, string> = {
 const ICON_SIZE = 24;
 const COMMENT_ICON = (
   <span className="text-blue-900 group-hover:text-primary-900">
-    <IconMessageSquare size={ICON_SIZE} className="-scale-x-1" />
+    <IconMessageSquare size={ICON_SIZE} className="-scale-x-0.5" />
   </span>
 );
 

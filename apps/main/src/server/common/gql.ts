@@ -23,8 +23,12 @@ export async function query<
 ): Promise<NonNullable<Data[Path]>> {
   const { data, error } = await client.query(query, variables).toPromise();
   if (!data || !data[path] || error) {
-    const message = `GQL query error, error: ${error}, data: ${data}`;
-    log.error(message);
+    const message = `GQL query error, error: ${error}, data: ${JSON.stringify(
+      data,
+      null,
+      2,
+    )}`;
+    log.error(message, { stack: error?.stack });
     throw new Error(message);
   }
   return data[path] as NonNullable<Data[Path]>;
@@ -49,7 +53,11 @@ export async function mutate<
     .mutation(mutation, variables)
     .toPromise();
   if (!data || !data[path] || error) {
-    const message = `GQL mutation error, error: ${error}, data: ${data}`;
+    const message = `GQL mutation error, error: ${error}, data: ${JSON.stringify(
+      data,
+      null,
+      2,
+    )}`;
     log.error(message, { stack: error?.stack });
     throw new Error(message);
   }

@@ -15,7 +15,6 @@ eta.configure({
   autoTrim: false,
 });
 
-const chirpyURL = 'http://localhost:3000';
 const hasuraURL = 'http://localhost:8080';
 
 (async function generateDevFiles() {
@@ -29,7 +28,9 @@ const hasuraURL = 'http://localhost:8080';
     HASURA_GRAPHQL_ADMIN_SECRET: hasuraAdminSecret,
     HASURA_GRAPHQL_JWT_SECRET: hasuraJwtSecret,
     HASURA_EVENT_SECRET: hasuraEventSecret,
-    HASURA_GRAPHQL_EVENT_URL: chirpyURL,
+    // To let container call localhost
+    HASURA_GRAPHQL_EVENT_URL:
+      'http://host.docker.internal:3000/api/mutation-event',
   })!;
   // logDebug(true, `Hasura docker compose: ${hasuraDCResult}`);
   const hasuraYaml = Yaml.parse(hasuraDCResult);

@@ -45,7 +45,7 @@ export function NotificationHub(): JSX.Element {
             <Badge className="absolute top-1 right-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
-        <Menu.Items className={styles.menuItems}>
+        <Menu.Items>
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
