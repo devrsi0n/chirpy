@@ -25,7 +25,7 @@ export function HomeCommentWidgetPreview({
       <div className="w-full rounded-lg border border-gray-300 bg-gray-0 p-4">
         <CommentWidgetPreview
           hideCommentTimeline
-          rtePlaceholder="Comment widget (Markdown shortcuts supported)"
+          rtePlaceholder="Comment widget (Markdown supported)"
           buildDate={buildDate}
         />
       </div>

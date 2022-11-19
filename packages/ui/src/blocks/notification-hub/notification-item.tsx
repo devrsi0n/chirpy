@@ -60,7 +60,7 @@ export function NotificationItem({
       >
         <button
           type="button"
-          className="absolute top-1.5 right-1.5 hidden h-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block"
+          className="absolute top-1.5 right-1.5 inline-block h-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
           onClick={(e) => {
             onClickDelete(message.id);
             e.stopPropagation();

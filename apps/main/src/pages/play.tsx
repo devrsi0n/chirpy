@@ -1,6 +1,6 @@
 import { DeleteStaleCommentsDocument } from '@chirpy-dev/graphql';
 import { cpDayjs } from '@chirpy-dev/ui';
-import { isENVDev, getAppURL } from '@chirpy-dev/utils';
+import { getAppURL } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
@@ -18,9 +18,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
       props: {},
     };
   }
-  const beforeDate = cpDayjs()
-    .subtract(1, isENVDev ? 'hour' : 'day')
-    .toISOString();
+  const beforeDate = cpDayjs().subtract(1, 'day').toISOString();
   const data = await mutate(
     DeleteStaleCommentsDocument,
     {

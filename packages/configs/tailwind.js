@@ -61,6 +61,9 @@ module.exports = {
       '3xl': '0px 32px 64px -12px rgba(16, 24, 40, 0.14)',
       none: '0 0 #0000',
     },
+    future: {
+      hoverOnlyWhenSupported: true,
+    },
     extend: {
       // For analytics
       colors: {

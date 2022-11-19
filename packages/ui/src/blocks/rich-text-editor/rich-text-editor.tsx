@@ -81,12 +81,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   };
 
   return (
-    <section
-      className={clsx(
-        styles?.root,
-        !readOnly && `rounded border border-gray-500`,
-      )}
-    >
+    <section className={clsx(styles?.root)}>
       <EditorContent
         editor={editor}
         role="textbox"
@@ -94,7 +89,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         className={clsx(
           'prose !max-w-full pr-2 text-gray-1200',
           !readOnly && [
-            `!min-h-[4em] resize-y overflow-hidden rounded pl-2`,
+            `!min-h-[4em] resize-y overflow-hidden rounded-t border border-gray-500 pl-2 focus-within:border-primary-900`,
             textInput,
           ],
           styles?.editable,

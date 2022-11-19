@@ -1,10 +1,10 @@
 import { Order_By } from '@chirpy-dev/graphql';
 import { CommentLeafType } from '@chirpy-dev/types';
 import clsx from 'clsx';
-import { AnimatePresence, AnimateSharedLayout, m } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
-import { IconArrowUp, IconButton, Text } from '../../components';
+import { BaseButton, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
 import { useForceUpdate, useInterval } from '../../hooks';
@@ -49,19 +49,17 @@ export function CommentTrees({
         <div className="space-y-2">
           <RichTextEditor
             placeholder={
-              rtePlaceholder ||
-              `What are your thoughts? (Markdown shortcuts supported)`
+              rtePlaceholder || `What are your thoughts? (Markdown supported)`
             }
             onSubmit={createAComment}
           />
         </div>
         <div className="flex flex-row items-center justify-end space-x-1">
-          {orderedComments.length > 0 && (
-            <>
-              <Text variant="secondary" size="sm">
-                Order by
-              </Text>
-              <IconButton
+          {orderedComments.length > 1 && (
+            <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-0">
+              <BaseButton
+                aria-label="Reorder comments"
+                className="m-1 rounded border border-gray-700 bg-gray-0 p-0.5 text-gray-1200 shadow hover:bg-gray-200"
                 onClick={() =>
                   setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'))
                 }
@@ -72,8 +70,8 @@ export function CommentTrees({
                     orderBy === 'asc' && 'rotate-180',
                   )}
                 />
-              </IconButton>
-            </>
+              </BaseButton>
+            </div>
           )}
         </div>
         <ul className="space-y-5">

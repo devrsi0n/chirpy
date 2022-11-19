@@ -2,10 +2,10 @@ import { CommentLeafType } from '@chirpy-dev/types';
 import { RTEValue } from '@chirpy-dev/types';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import clsx from 'clsx';
-import { AnimatePresence, m, Variants } from 'framer-motion';
+import { AnimatePresence, m, MotionProps, Variants } from 'framer-motion';
 import * as React from 'react';
 
-import { easeInOut } from '../../components/animation';
+import { easeInOut, expanded } from '../../components/animation';
 import { Avatar } from '../../components/avatar';
 import { ActionButton, Button } from '../../components/button';
 import {
@@ -107,7 +107,7 @@ export function CommentCard({
   return (
     <m.article
       animate={containerAnimate}
-      variants={shakeVariants}
+      variants={SHAKE_VARIANTS}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
         `flex flex-row items-start space-x-3 rounded border border-gray-500 pt-4 pb-2 pl-4 shadow-xs`,
@@ -208,11 +208,21 @@ export function CommentCard({
             onClick={handleClickLinkAction}
           />
         </div>
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           {showReplyEditor && (
-            <m.div {...easeInOut} className="flex flex-col space-y-2 pr-6">
+            <m.div
+              initial="collapsed"
+              animate="open"
+              exit="collapsed"
+              variants={{
+                open: { opacity: 1, height: 'auto' },
+                collapsed: { opacity: 0, height: 0 },
+              }}
+              transition={{ duration: 0.2 }}
+              className="pr-6"
+            >
               <RichTextEditor
-                placeholder={`What are your thoughts? (Markdown shortcuts supported)`}
+                placeholder={`What are your thoughts? (Markdown supported)`}
                 onSubmit={handleSubmitReply}
                 styles={{ root: `mt-2` }}
                 isReply
@@ -226,7 +236,7 @@ export function CommentCard({
   );
 }
 
-const shakeVariants: Variants = {
+const SHAKE_VARIANTS: Variants = {
   shake: {
     translateX: [-20, 20, -10, 10, -5, 5, 0],
     transition: {

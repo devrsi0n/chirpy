@@ -1,8 +1,10 @@
 import { Directory } from '@chirpy-dev/types';
 import clsx from 'clsx';
+import { AnimatePresence, m } from 'framer-motion';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { expanded } from '../../components';
 import { Heading } from '../../components/heading';
 import { IconChevronRight } from '../../components/icons';
 import { Link } from '../../components/link';
@@ -119,7 +121,11 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
         </Link>
       ) : (
         <button
-          className={clsx(`capitalize`, clickableItemStyle)}
+          className={clsx(
+            `capitalize`,
+            clickableItemStyle,
+            isButtonActive(dir, router.asPath) && activeStyle,
+          )}
           type="button"
           onClick={() => setIsOpened((prev) => !prev)}
           aria-label="Expand children routes"
@@ -128,12 +134,17 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
           <span>{dir.title}</span>
         </button>
       )}
-      {dir.children && isOpened && (
-        <div className="flex flex-row items-stretch">
-          <div className="ml-0.5 w-3.5 border-l" />
-          <Directories directories={dir.children} />
-        </div>
-      )}
+      <AnimatePresence>
+        {dir.children && isOpened && (
+          <m.div
+            {...expanded}
+            className="flex flex-row items-stretch overflow-hidden"
+          >
+            <m.div className="ml-0.5 w-3.5 border-l" />
+            <Directories directories={dir.children} />
+          </m.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
