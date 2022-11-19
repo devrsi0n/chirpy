@@ -1,1 +1,1 @@
-export * from './ease-in-out';
+export * from './animation';
