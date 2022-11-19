@@ -7,6 +7,7 @@ import emailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
 import gitHubProvider from 'next-auth/providers/github';
 import googleProvider from 'next-auth/providers/google';
+import spofityProvider from 'next-auth/providers/spotify';
 import twitterProvider from 'next-auth/providers/twitter';
 
 import { query } from '$/server/common/gql';
@@ -42,7 +43,12 @@ export const authProviders: Provider[] = [
         timeout: REQUEST_TIMEOUT,
       },
     }),
-
+  process.env.SPOTIFY_CLIENT_ID &&
+    process.env.SPOTIFY_CLIENT_SECRET &&
+    spofityProvider({
+      clientId: process.env.SPOTIFY_CLIENT_ID,
+      clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    }),
   process.env.DISCORD_CLIENT_ID &&
     process.env.DISCORD_CLIENT_SECRET &&
     discordProvider({
