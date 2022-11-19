@@ -2,7 +2,6 @@ import { getProviders } from 'next-auth/react';
 import { StaticImageData } from 'next/image';
 import DiscordLogo from 'super-tiny-icons/images/svg/discord.svg';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
-import RedditLogo from 'super-tiny-icons/images/svg/reddit.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 
 import { useAsync } from '../../hooks/use-async';
@@ -31,7 +30,7 @@ export type AuthOption = {
   icon: React.FC;
 };
 
-export type SupportedProviders = 'twitter' | 'github' | 'reddit' | 'discord';
+export type SupportedProviders = 'twitter' | 'github' | 'discord';
 
 const AUTH_OPTIONS: Record<SupportedProviders, AuthOption> = {
   // TODO: Make google sign-in work
@@ -46,7 +45,6 @@ const AUTH_OPTIONS: Record<SupportedProviders, AuthOption> = {
   // },
   twitter: getAuthOption(TwitterLogo, 'Twitter', 24),
   github: getAuthOption(GitHubLogo, 'GitHub', 24),
-  reddit: getAuthOption(RedditLogo, 'Reddit', 24),
   discord: getAuthOption(DiscordLogo, 'Discord', 24),
 };
 

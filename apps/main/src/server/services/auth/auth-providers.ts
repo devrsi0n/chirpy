@@ -1,13 +1,12 @@
 import { UserByPkDocument } from '@chirpy-dev/graphql';
 import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
 import { Provider } from 'next-auth/providers';
-import CredentialsProvider from 'next-auth/providers/credentials';
-import DiscordProvider from 'next-auth/providers/discord';
+import credentialsProvider from 'next-auth/providers/credentials';
+import discordProvider from 'next-auth/providers/discord';
 import emailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
 import gitHubProvider from 'next-auth/providers/github';
 import googleProvider from 'next-auth/providers/google';
-import redditProvider from 'next-auth/providers/reddit';
 import twitterProvider from 'next-auth/providers/twitter';
 
 import { query } from '$/server/common/gql';
@@ -43,19 +42,10 @@ export const authProviders: Provider[] = [
         timeout: REQUEST_TIMEOUT,
       },
     }),
-  process.env.REDDIT_CLIENT_ID &&
-    redditProvider({
-      clientId: process.env.REDDIT_CLIENT_ID,
-      clientSecret: process.env.REDDIT_CLIENT_SECRET,
-      authorization: {
-        params: {
-          duration: 'permanent',
-        },
-      },
-    }),
+
   process.env.DISCORD_CLIENT_ID &&
     process.env.DISCORD_CLIENT_SECRET &&
-    DiscordProvider({
+    discordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
     }),
@@ -67,7 +57,7 @@ export const authProviders: Provider[] = [
         timeout: REQUEST_TIMEOUT,
       },
     }),
-  CredentialsProvider({
+  credentialsProvider({
     name: 'Anonymous',
     credentials: {
       name: {
