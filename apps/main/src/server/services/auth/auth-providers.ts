@@ -2,10 +2,12 @@ import { UserByPkDocument } from '@chirpy-dev/graphql';
 import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
 import { Provider } from 'next-auth/providers';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import EmailProvider from 'next-auth/providers/email';
+import DiscordProvider from 'next-auth/providers/discord';
+import emailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
-import GitHubProvider from 'next-auth/providers/github';
-import GoogleProvider from 'next-auth/providers/google';
+import gitHubProvider from 'next-auth/providers/github';
+import googleProvider from 'next-auth/providers/google';
+import redditProvider from 'next-auth/providers/reddit';
 import twitterProvider from 'next-auth/providers/twitter';
 
 import { query } from '$/server/common/gql';
@@ -17,16 +19,8 @@ import { generateUsername } from './utilities';
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
 
 export const authProviders: Provider[] = [
-  process.env.GITHUB_CLIENT_ID &&
-    GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      httpOptions: {
-        timeout: REQUEST_TIMEOUT,
-      },
-    }),
   process.env.GOOGLE_CLIENT_ID &&
-    GoogleProvider({
+    googleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       httpOptions: {
@@ -49,7 +43,30 @@ export const authProviders: Provider[] = [
         timeout: REQUEST_TIMEOUT,
       },
     }),
-
+  process.env.REDDIT_CLIENT_ID &&
+    redditProvider({
+      clientId: process.env.REDDIT_CLIENT_ID,
+      clientSecret: process.env.REDDIT_CLIENT_SECRET,
+      authorization: {
+        params: {
+          duration: 'permanent',
+        },
+      },
+    }),
+  process.env.DISCORD_CLIENT_ID &&
+    process.env.DISCORD_CLIENT_SECRET &&
+    DiscordProvider({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    }),
+  process.env.GITHUB_CLIENT_ID &&
+    gitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      httpOptions: {
+        timeout: REQUEST_TIMEOUT,
+      },
+    }),
   CredentialsProvider({
     name: 'Anonymous',
     credentials: {
@@ -87,7 +104,7 @@ export const authProviders: Provider[] = [
       return null;
     },
   }),
-  EmailProvider({
+  emailProvider({
     server: process.env.EMAIL_SERVER,
     from: process.env.EMAIL_FROM,
     maxAge: SESSION_MAX_AGE,

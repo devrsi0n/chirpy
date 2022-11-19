@@ -1,6 +1,8 @@
 import { getProviders } from 'next-auth/react';
 import { StaticImageData } from 'next/image';
+import DiscordLogo from 'super-tiny-icons/images/svg/discord.svg';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
+import RedditLogo from 'super-tiny-icons/images/svg/reddit.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 
 import { useAsync } from '../../hooks/use-async';
@@ -29,7 +31,7 @@ export type AuthOption = {
   icon: React.FC;
 };
 
-export type SupportedProviders = 'twitter' | 'github';
+export type SupportedProviders = 'twitter' | 'github' | 'reddit' | 'discord';
 
 const AUTH_OPTIONS: Record<SupportedProviders, AuthOption> = {
   // TODO: Make google sign-in work
@@ -42,20 +44,24 @@ const AUTH_OPTIONS: Record<SupportedProviders, AuthOption> = {
   //   name: 'Facebook',
   //   icon: getLogoComponent(FacebookLogo, 'facebook', 24),
   // },
-  twitter: {
-    name: 'Twitter',
-    icon: getLogoComponent(TwitterLogo, 'twitter', 24),
-  },
-  github: {
-    name: 'GitHub',
-    icon: getLogoComponent(GitHubLogo, 'github', 24),
-  },
+  twitter: getAuthOption(TwitterLogo, 'Twitter', 24),
+  github: getAuthOption(GitHubLogo, 'GitHub', 24),
+  reddit: getAuthOption(RedditLogo, 'Reddit', 24),
+  discord: getAuthOption(DiscordLogo, 'Discord', 24),
 };
 
-function getLogoComponent(data: StaticImageData, brand: string, size: number) {
-  return function SocialLogo() {
-    return (
-      <img src={data.src} width={size} height={size} alt={`Logo of ${brand}`} />
-    );
+function getAuthOption(data: StaticImageData, brand: string, size: number) {
+  return {
+    name: brand,
+    icon: function SocialLogo() {
+      return (
+        <img
+          src={data.src}
+          width={size}
+          height={size}
+          alt={`Logo of ${brand}`}
+        />
+      );
+    },
   };
 }
