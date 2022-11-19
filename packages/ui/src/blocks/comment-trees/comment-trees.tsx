@@ -49,8 +49,7 @@ export function CommentTrees({
         <div className="space-y-2">
           <RichTextEditor
             placeholder={
-              rtePlaceholder ||
-              `What are your thoughts? (Markdown shortcuts supported)`
+              rtePlaceholder || `What are your thoughts? (Markdown supported)`
             }
             onSubmit={createAComment}
           />
