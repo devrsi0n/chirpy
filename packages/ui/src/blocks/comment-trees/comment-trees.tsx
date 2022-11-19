@@ -56,7 +56,7 @@ export function CommentTrees({
           />
         </div>
         <div className="flex flex-row items-center justify-end space-x-1">
-          {orderedComments.length > 0 && (
+          {orderedComments.length > 1 && (
             <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-0">
               <BaseButton
                 aria-label="Reorder comments"

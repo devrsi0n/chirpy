@@ -22,7 +22,7 @@ export function Toolbar({
   return (
     <div
       className={clsx(
-        `rounded-b border-t border-gray-500 px-1 py-2 leading-none`,
+        `rounded-b border-x border-b border-gray-500 px-1 py-2 leading-none`,
         className,
       )}
       {...divProps}
@@ -34,15 +34,8 @@ export function Toolbar({
         <MarkButton editor={editor} format="code" />
         <div className="hidden flex-row space-x-1 xs:flex">
           <Divider vertical />
-          <RTEPopoverButton
-            label="Image url"
-            onClickGo={(url: string) => {
-              if (!url) return;
-              editor.chain().focus().setImage({ src: url }).run();
-            }}
-          >
-            <IconImage size={20} />
-          </RTEPopoverButton>
+          <BlockButton editor={editor} format="bulletList" />
+          <BlockButton editor={editor} format="blockquote" />
           <RTEPopoverButton
             label="URL"
             onClickGo={(url: string) => {
@@ -52,8 +45,15 @@ export function Toolbar({
           >
             <IconLink2 size={20} />
           </RTEPopoverButton>
-          <BlockButton editor={editor} format="bulletList" />
-          <BlockButton editor={editor} format="blockquote" />
+          <RTEPopoverButton
+            label="Image url"
+            onClickGo={(url: string) => {
+              if (!url) return;
+              editor.chain().focus().setImage({ src: url }).run();
+            }}
+          >
+            <IconImage size={20} />
+          </RTEPopoverButton>
         </div>
       </div>
       {children}
