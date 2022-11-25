@@ -1,4 +1,4 @@
-import { UserByPkDocument } from '@chirpy-dev/graphql';
+import { sendVerificationEmail } from '@chirpy-dev/emails';
 import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
 import { Provider } from 'next-auth/providers';
 import credentialsProvider from 'next-auth/providers/credentials';
@@ -9,10 +9,7 @@ import gitHubProvider from 'next-auth/providers/github';
 import googleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-import { query } from '$/server/common/gql';
-
-import { sendVerificationEmail } from '../email/send-emails';
-import { createUser } from './auth-adapter';
+import { prisma } from '../common/db';
 import { generateUsername } from './utilities';
 
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
@@ -72,21 +69,21 @@ export const authProviders: Provider[] = [
         process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23)
       ) {
         // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
-        const user = await query(
-          UserByPkDocument,
-          {
+        const user = await prisma.user.findUnique({
+          where: {
             id: process.env.TEST_USER_ID,
           },
-          'userByPk',
-        );
+        });
         return user;
       }
       if (credentials?.name) {
         const name = credentials.name.trim();
         // Always create a new user with the provided name
-        const user = await createUser({
-          username: generateUsername(name),
-          name,
+        const user = await prisma.user.create({
+          data: {
+            username: generateUsername(name),
+            name,
+          },
         });
 
         return user;

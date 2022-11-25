@@ -1,0 +1,21 @@
+{
+  "name": "@chirpy-dev/emails",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "sideEffects": false,
+  "types": "./src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "eta": "1.12.3"
+  },
+  "devDependencies": {
+    "typescript": "4.9.3"
+  },
+  "keywords": [],
+  "author": "devrsi0n",
+  "license": "AGPL-3.0-or-later"
+}

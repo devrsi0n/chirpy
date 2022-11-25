@@ -1,7 +1,7 @@
+import { sendNotificationEmail } from '@chirpy-dev/emails';
 import { NotificationType_Enum } from '@chirpy-dev/graphql';
 import { log } from 'next-axiom';
 
-import { sendNotificationEmail } from '../email/send-emails';
 import { NotificationPayload } from './types';
 
 export async function sendNotificationViaEmail(payload: NotificationPayload) {

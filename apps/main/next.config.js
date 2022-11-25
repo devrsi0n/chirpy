@@ -31,10 +31,12 @@ const nextConfig = {
     scrollRestoration: true,
     legacyBrowsers: false,
     transpilePackages: [
+      '@chirpy-dev/emails',
       '@chirpy-dev/ui',
       '@chirpy-dev/utils',
       '@chirpy-dev/graphql',
       '@chirpy-dev/types',
+      '@chirpy-dev/trpc',
     ],
   },
   async rewrites() {
