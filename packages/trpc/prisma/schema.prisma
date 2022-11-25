@@ -17,18 +17,18 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refreshToken      String?   @db.Text
-  accessToken       String?   @db.Text
+  refresh_token      String?   @db.Text
+  access_token       String?   @db.Text
   expiresAt         DateTime?
   tokenType         String?
   scope             String?
   idToken           String?   @db.Text
-  sessionState      String?
+  session_state      String?
   oauthTokenSecret  String?
   oauthToken        String?
   user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([providerAccountId, provider])
+  @@unique([provider, providerAccountId])
 }
 
 model Comment {

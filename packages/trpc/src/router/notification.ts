@@ -69,14 +69,24 @@ export const notificationRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) => {
+      const result = await prisma.notificationSubscription.findFirst({
+        where: {
+          subscription: {
+            equals: input.subscription,
+          },
+          userId: ctx.session.user.id,
+        },
+      });
+      if (result?.id) {
+        // Ignore duplicated subscription
+        return;
+      }
       await prisma.notificationSubscription.create({
         data: {
           subscription: input.subscription,
           userId: ctx.session.user.id,
         },
-        select: {
-          id: true,
-        },
+        select: {},
       });
     }),
 });
