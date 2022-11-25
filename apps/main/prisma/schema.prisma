@@ -32,19 +32,19 @@ model Account {
 }
 
 model Comment {
-  id            String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  pageId        String
-  parentId      String?
-  userId        String
-  content       Json
-  deletedAt     DateTime?
-  page          Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  parent       Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  replies Comment[] @relation("CommentToComment")
-  likes          Like[]
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  pageId    String
+  parentId  String?
+  userId    String
+  content   Json
+  deletedAt DateTime?
+  page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentToComment")
+  likes     Like[]
 }
 
 model Like {
@@ -53,8 +53,8 @@ model Like {
   updatedAt DateTime @updatedAt
   commentId String
   userId    String
-  Comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([commentId, userId])
 }
@@ -67,26 +67,26 @@ model Member {
   userId    String
   role      String
   Role      Role     @relation(fields: [role], references: [value], onDelete: Cascade)
-  Team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([teamId, userId])
 }
 
 model NotificationMessage {
-  id                                           String           @id @default(cuid())
-  createdAt                                    DateTime         @default(now())
-  type                                         String
-  recipientId                                  String
-  url                                          String           @db.Text
-  read                                         Boolean
-  deletedAt                                    DateTime?
-  triggeredById                                String
-  contextId                                    String
-  content                                      String?          @db.Text
-  User_NotificationMessage_recipientIdToUser   User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
-  User_NotificationMessage_triggeredByIdToUser User             @relation("NotificationMessage_triggeredByIdToUser", fields: [triggeredById], references: [id], onDelete: Cascade)
-  NotificationType                             NotificationType @relation(fields: [type], references: [value], onDelete: Cascade)
+  id               String           @id @default(cuid())
+  createdAt        DateTime         @default(now())
+  type             String
+  recipientId      String
+  url              String           @db.Text
+  read             Boolean
+  deletedAt        DateTime?
+  triggeredById    String
+  contextId        String
+  content          String?          @db.Text
+  recipient        User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
+  triggeredBy      User             @relation("NotificationMessage_triggeredByIdToUser", fields: [triggeredById], references: [id], onDelete: Cascade)
+  NotificationType NotificationType @relation(fields: [type], references: [value], onDelete: Cascade)
 
   @@unique([type, triggeredById, contextId, recipientId])
 }
@@ -96,16 +96,16 @@ model NotificationSubscription {
   userId       String
   subscription Json
   createdAt    DateTime? @default(now())
-  User         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Check uniqueness muanually because mysql doesn't allow it
   // @@unique([subscription, userId])
 }
 
 model NotificationType {
-  value               String                @id
-  comment             String
-  NotificationMessage NotificationMessage[]
+  value                String                @id
+  comment              String
+  notificationMessages NotificationMessage[]
 }
 
 model Page {
@@ -115,8 +115,8 @@ model Page {
   url       String    @unique(length: 191) @db.Text
   title     String?   @db.Text
   projectId String
-  Project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  Comment   Comment[]
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  comments  Comment[]
 }
 
 model Project {
@@ -128,15 +128,15 @@ model Project {
   userId    String?
   theme     Json?
   domain    String   @unique
-  Team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  User      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Page      Page[]
+  team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pages     Page[]
 }
 
 model Role {
   value   String   @id
   comment String?
-  Member  Member[]
+  members Member[]
 }
 
 model Session {
@@ -146,7 +146,7 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Team {
@@ -155,39 +155,39 @@ model Team {
   updatedAt DateTime  @updatedAt
   name      String
   uid       String?   @unique
-  Member    Member[]
-  Project   Project[]
+  members   Member[]
+  projects  Project[]
 }
 
 model User {
-  id                                                          String                     @id @default(cuid())
-  createdAt                                                   DateTime                   @default(now())
-  updatedAt                                                   DateTime                   @updatedAt
-  name                                                        String?
-  email                                                       String?                    @unique
-  emailVerified                                               DateTime?
-  image                                                       String?                    @db.Text
-  username                                                    String?                    @unique
-  type                                                        String?
-  bio                                                         String?
-  website                                                     String?
-  twitterUserName                                             String?
-  UserType                                                    UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade)
-  Account                                                     Account[]
-  Comment                                                     Comment[]
-  Like                                                        Like[]
-  Member                                                      Member[]
-  NotificationMessage_NotificationMessage_recipientIdToUser   NotificationMessage[]      @relation("NotificationMessage_recipientIdToUser")
-  NotificationMessage_NotificationMessage_triggeredByIdToUser NotificationMessage[]      @relation("NotificationMessage_triggeredByIdToUser")
-  NotificationSubscription                                    NotificationSubscription[]
-  Project                                                     Project[]
-  Session                                                     Session[]
+  id                            String                     @id @default(cuid())
+  createdAt                     DateTime                   @default(now())
+  updatedAt                     DateTime                   @updatedAt
+  name                          String?
+  email                         String?                    @unique
+  emailVerified                 DateTime?
+  image                         String?                    @db.Text
+  username                      String?                    @unique
+  type                          String?
+  bio                           String?
+  website                       String?
+  twitterUserName               String?
+  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade)
+  accounts                      Account[]
+  comments                      Comment[]
+  likes                         Like[]
+  members                       Member[]
+  receivedNotificationMessages  NotificationMessage[]      @relation("NotificationMessage_recipientIdToUser")
+  triggeredNotificationMessages NotificationMessage[]      @relation("NotificationMessage_triggeredByIdToUser")
+  notificationSubscriptions     NotificationSubscription[]
+  projects                      Project[]
+  sessions                      Session[]
 }
 
 model UserType {
-  value   String @id
+  value   String  @id
   comment String?
-  User    User[]
+  users   User[]
 }
 
 model VerificationToken {
