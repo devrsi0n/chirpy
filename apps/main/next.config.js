@@ -108,6 +108,14 @@ const nextConfig = {
       test: /\.html$/,
       loader: 'html-loader',
     });
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        net: false,
+        tls: false,
+        fs: false,
+      };
+    }
     return config;
   },
 };

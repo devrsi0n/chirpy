@@ -8,7 +8,6 @@ import { IconCheck, IconLoader, IconSend } from '../../components/icons';
 import { TextField } from '../../components/text-field';
 import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { useBypassCacheRefetch } from '../../hooks/use-bypass-cache-refetch';
 import { useForm } from '../../hooks/use-form';
 import { logger } from '../../utilities/logger';
 import { EMAIL_REGEXP } from '../../utilities/validator';
@@ -20,7 +19,7 @@ export type ConfirmUserFieldsProps = {
 
 export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
   const { data, loading: isLoadingUser, refetchUser } = useCurrentUser();
-  const refetchWithoutCache = useBypassCacheRefetch(refetchUser);
+
   const { register, errors, hasError, handleSubmit, setError, setFields } =
     useForm<FormFields>({
       defaultValues: {
@@ -53,7 +52,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           name: fields.name,
           username: fields.username,
         });
-        refetchWithoutCache();
+        refetchUser();
       } catch (error: any) {
         logger.debug(`Update user fields failed: ${error}`);
         if (/duplicate key.+users_username_key/.test(error.message)) {

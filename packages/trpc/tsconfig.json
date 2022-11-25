@@ -6,5 +6,11 @@
     "types": ["jest", "node"]
   },
   "exclude": ["node_modules"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../ui/src/utilities/trpc-client.ts",
+    "src/router/page.ts_"
+  ]
 }

@@ -1,13 +1,14 @@
 import { Nullable } from '@chirpy-dev/types';
-import { noop } from '@chirpy-dev/utils';
+import { asyncNoop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
 import * as React from 'react';
-import { OperationContext } from 'urql';
+
+import { trpcClient } from '../../utilities/trpc-client';
 
 export type UserData = Nullable<Session['user']>;
 
 export type CurrentUserContextType = {
-  refetchUser: (opts?: Partial<OperationContext> | undefined) => void;
+  refetchUser: ReturnType<typeof trpcClient.user.me.useQuery>['refetch'];
   loading: boolean;
   isSignIn: boolean;
   data: UserData & {
@@ -19,7 +20,8 @@ export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
   isSignIn: false,
   data: {},
   loading: true,
-  refetchUser: noop,
+  // @ts-ignore
+  refetchUser: asyncNoop,
 };
 
 export const CurrentUserContext = React.createContext<CurrentUserContextType>(

@@ -1,21 +1,17 @@
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
 import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
+import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 
 import { ToastProvider } from '../components';
-import {
-  CurrentUserProvider,
-  GQLClientProvider,
-  NotificationProvider, // This is the same SessionProvider as next-auth/react,
-  // fix ref issue
-  SessionProvider,
-} from '../contexts';
+import { CurrentUserProvider, NotificationProvider } from '../contexts';
+import { trpcClient } from '../utilities/trpc-client';
 
-export function App({
+export const App = trpcClient.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
@@ -36,21 +32,19 @@ export function App({
           }
         >
           <LazyMotion features={loadFeatures} strict>
-            <GQLClientProvider>
-              <CurrentUserProvider>
-                <ToastProvider>
-                  <NotificationProvider>
-                    <Component {...pageProps} />
-                  </NotificationProvider>
-                </ToastProvider>
-              </CurrentUserProvider>
-            </GQLClientProvider>
+            <CurrentUserProvider>
+              <ToastProvider>
+                <NotificationProvider>
+                  <Component {...pageProps} />
+                </NotificationProvider>
+              </ToastProvider>
+            </CurrentUserProvider>
           </LazyMotion>
         </NextThemesProvider>
       </SessionProvider>
     </PlausibleProvider>
   );
-}
+});
 
 export { reportWebVitals } from 'next-axiom/dist/webVitals';
 

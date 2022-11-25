@@ -1,8 +1,3 @@
-import {
-  useCurrentNotificationMessagesQuery,
-  useDeleteNotificationMessageMutation,
-  useHaveReadANotificationMutation,
-} from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { Badge } from '../../components/badge';
@@ -12,33 +7,33 @@ import { Menu } from '../../components/menu';
 import { Spinner } from '../../components/spinner';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { useBypassCacheRefetch } from '../../hooks/use-bypass-cache-refetch';
+import { trpcClient } from '../../utilities/trpc-client';
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
   const { data: userData } = useCurrentUser();
-  const [{ data, fetching }, refetchNotification] =
-    useCurrentNotificationMessagesQuery({
-      variables: {
-        userId: userData.id || '-1',
-      },
-      pause: !userData.id,
-    });
-  const refetchWithoutCache = useBypassCacheRefetch(refetchNotification);
-  const [{}, haveReadANotification] = useHaveReadANotificationMutation();
-  const [{}, deleteNotificationMessage] =
-    useDeleteNotificationMessageMutation();
-  const hasUnreadNotifications = data?.notificationMessages.some(
-    (msg) => !msg.read,
-  );
+  const {
+    data,
+    refetch: refechMessages,
+    status,
+  } = trpcClient.notification.messages.useQuery({
+    userId: userData.id || '-1',
+  });
+
+  const { mutateAsync: readANotification } =
+    trpcClient.notification.readAMessage.useMutation();
+
+  const { mutateAsync: deleteNotificationMessage } =
+    trpcClient.notification.readAMessage.useMutation();
+  const hasUnreadNotifications = data?.some((msg) => !msg.read);
   return (
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
         <Menu.Button
           className={styles.menuButton}
           // Refetch when opening the menu
-          onClick={(open) => !open && refetchNotification()}
+          onClick={(open) => !open && refechMessages()}
         >
           <IconBell size={22} />
           {hasUnreadNotifications && (
@@ -49,23 +44,24 @@ export function NotificationHub(): JSX.Element {
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
-          {fetching && (
+          {status === 'loading' && (
             <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
           )}
-          {data?.notificationMessages?.length || 0 > 0 ? (
+          {data && (data?.length || 0) > 0 ? (
             <div className="max-h-96 w-max overflow-y-auto">
-              {data?.notificationMessages.map((msg, index) => (
+              {data.map((msg, index) => (
                 <NotificationItem
                   key={msg.id}
                   message={msg}
                   index={index}
-                  length={data?.notificationMessages.length}
-                  onClickCapture={(messageId) =>
-                    haveReadANotification({ messageId })
-                  }
+                  length={data.length}
+                  onClickCapture={async (messageId) => {
+                    await readANotification({ messageId });
+                    await refechMessages();
+                  }}
                   onClickDelete={async (messageId) => {
                     await deleteNotificationMessage({ messageId });
-                    refetchWithoutCache();
+                    refechMessages();
                   }}
                 />
               ))}
