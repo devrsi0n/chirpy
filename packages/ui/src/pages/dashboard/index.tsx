@@ -1,7 +1,3 @@
-import {
-  useInsertOneProjectMutation,
-  useUserDashboardProjectsQuery,
-} from '@chirpy-dev/graphql';
 import { isENVProd } from '@chirpy-dev/utils';
 import * as React from 'react';
 
@@ -19,8 +15,9 @@ import {
   TextField,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
-import { useBypassCacheRefetch, useForm } from '../../hooks';
+import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
+import { trpcClient } from '../../utilities/trpc-client';
 
 type FormFields = {
   name: string;
@@ -33,25 +30,16 @@ export function Dashboard(): JSX.Element {
     loading: userLoading,
   } = useCurrentUser();
 
-  const [{ data, fetching: projectLoading }, fetchUserProjects] =
-    useUserDashboardProjectsQuery({
-      variables: {
-        id: id || '-1',
-      },
-      pause: !id,
-    });
-  const fetchProjects = React.useCallback(
-    (options?: Parameters<typeof fetchUserProjects>[0]) => {
-      if (!id) return;
-      fetchUserProjects({
-        ...options,
-      });
-    },
-    [id, fetchUserProjects],
-  );
-  const { projects } = data?.userByPk || {};
+  const {
+    data: projects,
+    refetch: fetchUserProjects,
+    status,
+  } = trpcClient.project.all.useQuery({
+    userId: id || '-1',
+  });
 
-  const [{}, insertProjectMutation] = useInsertOneProjectMutation();
+  const { mutateAsync: createAProject } =
+    trpcClient.project.create.useMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -67,20 +55,24 @@ export function Dashboard(): JSX.Element {
         domain: '',
       },
     });
-  const forceRefetchProjects = useBypassCacheRefetch(fetchProjects);
   const handleClickSubmit = handleSubmit(
     async (fields, _event: unknown): Promise<void> => {
-      const { error } = await insertProjectMutation({
-        // TODO: Team id?
-        name: fields.name,
-        domain: fields.domain,
-      });
-      if (error?.message?.includes('Uniqueness violation')) {
-        setError('domain', 'A project associated with this domain already');
-        return;
+      try {
+        await createAProject({
+          // TODO: Team id?
+          name: fields.name,
+          domain: fields.domain,
+        });
+      } catch (error: any) {
+        if (error?.message?.includes('Unique constraint')) {
+          setError('domain', 'A project associated with this domain already');
+          return;
+        }
+        throw error;
       }
+
       setShowDialog(false);
-      forceRefetchProjects();
+      fetchUserProjects();
     },
   );
   const disableCreation = isENVProd && (projects?.length || 0) > 0;
@@ -108,14 +100,14 @@ export function Dashboard(): JSX.Element {
                 <li key={project.id}>
                   <ProjectCard
                     project={project}
-                    onDeletedProject={fetchProjects}
+                    onDeletedProject={fetchUserProjects}
                   />
                 </li>
               ))}
             </ul>
             <div className="flex-1" />
           </div>
-        ) : projectLoading || userLoading ? (
+        ) : status === 'loading' || userLoading ? (
           <Spinner />
         ) : (
           <div className="py-6">
