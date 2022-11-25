@@ -445,6 +445,7 @@ importers:
       '@trpc/server': 10.1.0
       '@types/jest': 29.2.3
       '@types/node': 16.11.45
+      '@types/web-push': 3.3.2
       next: 13.0.5
       next-auth: 4.17.0
       next-axiom: 0.15.1
@@ -452,6 +453,7 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0
       typescript: 4.9.3
+      web-push: 3.5.0
       zod: 3.19.1
     dependencies:
       '@chirpy-dev/emails': link:../emails
@@ -460,11 +462,13 @@ importers:
       '@next-auth/prisma-adapter': 1.0.5_o53gfpk3vz2btjrokqfjjwwn3m
       '@prisma/client': 4.6.1_prisma@4.6.1
       '@trpc/server': 10.1.0
+      '@types/web-push': 3.3.2
       next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       next-auth: 4.17.0_7iuvftg57tblwyxclfkwku5xo4
       next-axiom: 0.15.1_next@13.0.5
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      web-push: 3.5.0
       zod: 3.19.1
     devDependencies:
       '@types/jest': 29.2.3
@@ -7638,6 +7642,7 @@ packages:
 
   /@types/node/18.7.16:
     resolution: {integrity: sha512-EQHhixfu+mkqHMZl1R2Ovuvn47PUw18azMJOTwSZr9/fhzHNGXAJ0ma0dayRVchprpCj0Kc1K1xKoWaATWF1qg==}
+    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -7775,7 +7780,7 @@ packages:
   /@types/web-push/3.3.2:
     resolution: {integrity: sha512-JxWGVL/m7mWTIg4mRYO+A6s0jPmBkr4iJr39DqJpRJAc+jrPiEe1/asmkwerzRon8ZZDxaZJpsxpv0Z18Wo9gw==}
     dependencies:
-      '@types/node': 18.7.16
+      '@types/node': 18.11.9
 
   /@types/webgl-ext/0.0.30:
     resolution: {integrity: sha512-LKVgNmBxN0BbljJrVUwkxwRYqzsAEPcZOe6S2T6ZaBDIrFp0qu4FNlpc5sM1tGbXUYFgdVQIoeLk1Y1UoblyEg==}
@@ -24165,7 +24170,7 @@ packages:
       http_ece: 1.1.0
       https-proxy-agent: 5.0.1
       jws: 4.0.0
-      minimist: 1.2.6
+      minimist: 1.2.7
       urlsafe-base64: 1.0.0
     transitivePeerDependencies:
       - supports-color

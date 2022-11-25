@@ -1,1 +1,3 @@
-export { nextAuth as default } from '@chirpy-dev/trpc';
+import { NextAuth, nextAuthOptions } from '@chirpy-dev/trpc';
+
+export default NextAuth(nextAuthOptions);

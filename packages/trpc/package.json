@@ -15,6 +15,8 @@
     "@next-auth/prisma-adapter": "1.0.5",
     "@prisma/client": "4.6.1",
     "@trpc/server": "10.1.0",
+    "@types/web-push": "3.3.2",
+    "web-push": "3.5.0",
     "next": "13.0.5",
     "next-auth": "4.17.0",
     "next-axiom": "0.15.1",

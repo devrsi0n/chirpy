@@ -9,5 +9,10 @@
     }
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../../packages/trpc/src/router/services/register.ts"
+  ]
 }

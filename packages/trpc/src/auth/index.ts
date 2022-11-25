@@ -1,5 +1,3 @@
-import NextAuth from 'next-auth';
+export { default as NextAuth } from 'next-auth';
 
-import { nextAuthOptions } from './auth-options';
-
-export const nextAuth = NextAuth(nextAuthOptions);
+export { nextAuthOptions } from './auth-options';

@@ -60,4 +60,23 @@ export const notificationRouter = router({
       });
       return result;
     }),
+  registerSubscriptionDevice: protectedProcedure
+    .input(
+      z.object({
+        subscription: z.object({
+          endpoint: z.string().url(),
+        }),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      await prisma.notificationSubscription.create({
+        data: {
+          subscription: input.subscription,
+          userId: ctx.session.user.id,
+        },
+        select: {
+          id: true,
+        },
+      });
+    }),
 });
