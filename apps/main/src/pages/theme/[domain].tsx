@@ -1,4 +1,4 @@
-import { ThemeProjectByPkDocument } from '@chirpy-dev/graphql';
+import { ssg } from '@chirpy-dev/trpc';
 import { ThemeProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
@@ -7,8 +7,7 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
-import { query } from '$/server/common/gql';
-import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
+import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {
   domain: string;
@@ -22,7 +21,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
     };
   }
   // TODO: only generated a subset of theme pages to improve build perf
-  const paths = await getAllProjectStaticPathsByDomain();
+  const paths = await getRecentProjectStaticPathsByDomain(50);
 
   return { paths, fallback: 'blocking' };
 };
@@ -38,19 +37,18 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { domain } = params;
-  const projects = await query(
-    ThemeProjectByPkDocument,
-    {
-      domain,
-    },
-    'projects',
-  );
-
-  if (!projects || !projects[0]) {
+  const project = await ssg.project.theme.fetch({
+    domain,
+  });
+  if (!project?.id) {
     return { notFound: true };
   }
   return {
-    props: { project: projects[0], buildDate: new Date().toISOString() },
+    props: {
+      trpcState: ssg.dehydrate(),
+      domain,
+      buildDate: new Date().toISOString(),
+    },
     revalidate: 60 * 60,
   };
 };

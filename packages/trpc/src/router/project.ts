@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db';
-import { router, protectedProcedure } from '../trpc-server';
+import { router, protectedProcedure, publicProcedure } from '../trpc-server';
 
 export const projectRouter = router({
   all: protectedProcedure
@@ -26,6 +26,21 @@ export const projectRouter = router({
         },
       });
       return projects;
+    }),
+  // Must use publicProcedure since it's used by ssg
+  theme: publicProcedure
+    .input(z.object({ domain: z.string() }))
+    .query(async ({ input }) => {
+      const project = await prisma.project.findUnique({
+        where: input,
+        select: {
+          id: true,
+          name: true,
+          domain: true,
+          theme: true,
+        },
+      });
+      return project;
     }),
   create: protectedProcedure
     .input(

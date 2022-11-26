@@ -1,5 +1,4 @@
 import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
-import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
@@ -14,6 +13,7 @@ import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
+import { RouterOutputs } from '../../utilities/trpc-client';
 import { ColorModeSelect } from '../color-mode-select';
 import {
   CommentWidgetPreview,
@@ -26,7 +26,7 @@ import { hslToHex, revalidateProjectPages } from './utilities';
 export const THEME_WIDGET_CLS = 'theme-widget';
 
 export type ThemeEditorProps = {
-  project: ThemeProjectByPkQuery['projects'][number];
+  project: NonNullable<RouterOutputs['project']['theme']>;
 } & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {

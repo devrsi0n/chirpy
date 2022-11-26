@@ -4,7 +4,7 @@ import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { query } from '$/server/common/gql';
-import { getAllProjectStaticPathsByDomain } from '$/server/services/project';
+import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {
   domain: string;
@@ -17,8 +17,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       fallback: 'blocking',
     };
   }
-  // TODO: only generated a subset of analytics pages
-  const paths = await getAllProjectStaticPathsByDomain();
+  const paths = await getRecentProjectStaticPathsByDomain(50);
 
   return { paths, fallback: 'blocking' };
 };
