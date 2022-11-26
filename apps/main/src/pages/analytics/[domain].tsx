@@ -1,9 +1,8 @@
-import { ProjectByDomainDocument } from '@chirpy-dev/graphql';
+import { ssg } from '@chirpy-dev/trpc';
 import { CommonPageProps } from '@chirpy-dev/types';
 import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { query } from '$/server/common/gql';
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {
@@ -30,23 +29,20 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const { domain } = params;
-  const projects = await query(
-    ProjectByDomainDocument,
-    {
-      domain,
-    },
-    'projects',
-  );
-  const [project] = projects;
-  if (!project.domain) {
+  const project = await ssg.project.byDomain.fetch(domain);
+  if (!project?.id) {
     return { notFound: true };
   }
 
   return {
     props: {
-      project: project,
+      project: {
+        ...project,
+        createdAt: project.createdAt.toISOString(),
+      },
     },
-    revalidate: 60 * 60,
+    // Only need the createdAt data
+    revalidate: 24 * 60 * 60,
   };
 };
 

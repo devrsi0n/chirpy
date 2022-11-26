@@ -1,5 +1,5 @@
 import { appRouter, createNextApiHandler } from '@chirpy-dev/trpc';
-import { createContext } from '@chirpy-dev/trpc/src/context';
+import { createContext } from '@chirpy-dev/trpc';
 import { log } from 'next-axiom';
 
 export default createNextApiHandler({

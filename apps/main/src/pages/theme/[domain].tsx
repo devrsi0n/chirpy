@@ -36,9 +36,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { domain } = params;
-  const project = await ssg.project.theme.fetch({
-    domain,
-  });
+  const project = await ssg.project.byDomain.fetch(domain);
   if (!project?.id) {
     return { notFound: true };
   }

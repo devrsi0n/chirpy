@@ -1,18 +1,14 @@
-import {
-  InsertOnePageDocument,
-  PageByUrlDocument,
-  UpdatePagesDocument,
-  ProjectByDomainDocument,
-} from '@chirpy-dev/graphql';
+import { Page, prisma } from '@chirpy-dev/trpc';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
-import { mutate, query } from '../common/gql';
-import { GetPagByUrl } from '../types/page';
+import { ResponseError } from '../types/error';
+
+export type PagePayload = Page | ResponseError;
 
 export async function getPage(
   req: NextApiRequest,
-  res: NextApiResponse<GetPagByUrl>,
+  res: NextApiResponse<PagePayload>,
 ): Promise<void> {
   const { url, domain, title } = req.query as {
     [key: string]: string;
@@ -28,67 +24,41 @@ export async function getPage(
       error: `url(${url}) and domain(${domain}) must be matched`,
     });
   }
-  const projects = await query(
-    ProjectByDomainDocument,
-    {
+  const project = await prisma.project.findUnique({
+    where: {
       domain,
     },
-    'projects',
-  );
-  const projectId = projects[0]?.id;
+    select: {
+      id: true,
+      name: true,
+      domain: true,
+      theme: true,
+      createdAt: true,
+    },
+  });
+  const projectId = project?.id;
   if (!projectId) {
     return res.status(500).json({
       code: ERR_UNMATCHED_DOMAIN,
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
     });
   }
-  const pages = await query(
-    PageByUrlDocument,
-    {
+  // Create page if not exist
+  const page = await prisma.page.upsert({
+    where: {
+      url,
+    },
+    create: {
       url,
       projectId,
+      title,
     },
-    'pages',
-  );
-  const page = pages[0];
+    update: {
+      title,
+    },
+  });
 
-  if (!page?.id) {
-    const insertOnePage = await mutate(
-      InsertOnePageDocument,
-      {
-        projectId,
-        url,
-        title: title || '',
-      },
-      'insertOnePage',
-    );
-
-    if (!insertOnePage?.id) {
-      // TODO: Handle duplicated pages
-      return res.status(500).json({
-        error: 'Create page failed',
-      });
-    }
-    return res.json(insertOnePage);
-  } else if (page.title !== title) {
-    const updatePages = await mutate(
-      UpdatePagesDocument,
-      {
-        projectId,
-        url,
-        title: title || '',
-      },
-      'updatePages',
-    );
-
-    if (updatePages?.affected_rows !== 1 || !updatePages?.returning[0].id) {
-      return res.status(500).json({
-        error: 'Update page error',
-      });
-    }
-  }
-
-  res.json(page);
+  return res.json(page);
 }
 
 const isLocalDomain = (domain: string) =>

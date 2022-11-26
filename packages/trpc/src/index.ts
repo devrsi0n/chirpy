@@ -1,8 +1,10 @@
 import { createProxySSGHelpers } from '@trpc/react-query/ssg';
 
+// import superjson from "superjson";
 import { createContextInner } from './context';
 import { appRouter } from './router';
 
+export { createContext } from './context';
 export * from './auth';
 export * from './trpc-server';
 export * from './common/db';
@@ -14,4 +16,5 @@ export const ssg = createProxySSGHelpers({
   ctx: createContextInner({
     session: null,
   }),
+  // transformer: superjson,
 });

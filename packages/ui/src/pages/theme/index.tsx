@@ -16,9 +16,7 @@ export type ThemeProps = {
 } & Pick<ThemeEditorProps, 'buildDate'>;
 
 export function ThemePage(props: ThemeProps): JSX.Element {
-  const { data: project } = trpcClient.project.theme.useQuery({
-    domain: props.domain,
-  });
+  const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
   return (
     <SiteLayout
       title={project?.name || 'Theme'}

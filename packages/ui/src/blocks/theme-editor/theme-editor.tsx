@@ -26,7 +26,7 @@ import { hslToHex, revalidateProjectPages } from './utilities';
 export const THEME_WIDGET_CLS = 'theme-widget';
 
 export type ThemeEditorProps = {
-  project: NonNullable<RouterOutputs['project']['theme']>;
+  project: NonNullable<RouterOutputs['project']['byDomain']>;
 } & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {

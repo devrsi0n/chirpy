@@ -1,8 +1,8 @@
 import { EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
 import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
+import type { PagePayload } from '../../../main/src/server/services/page';
 import type { ResponseError } from '../../../main/src/server/types/error';
-import type { GetPagByUrl } from '../../../main/src/server/types/page';
 import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,
@@ -49,7 +49,7 @@ export async function initCommentWidget(): Promise<void> {
       origin + pathname,
     )}&title=${encodeURIComponent(window.document.title)}`,
   );
-  const page: GetPagByUrl = await res.json();
+  const page: PagePayload = await res.json();
   if (isResponseError(page)) {
     if (page.code == ERR_UNMATCHED_DOMAIN) {
       return console.error(page.error);
@@ -96,7 +96,7 @@ export async function initCommentWidget(): Promise<void> {
   renderTarget.append(iframe);
 }
 
-function isResponseError(res: GetPagByUrl): res is ResponseError {
+function isResponseError(res: PagePayload): res is ResponseError {
   return !!(res as ResponseError).error;
 }
 

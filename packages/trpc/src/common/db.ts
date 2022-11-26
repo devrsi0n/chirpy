@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
+export type { Page, Project, User, NotificationMessage } from '@prisma/client';
+
 // Save it to global, but don't declare it since we may misuse it
 export const prisma: PrismaClient =
   // @ts-ignore

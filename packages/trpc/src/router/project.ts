@@ -28,20 +28,21 @@ export const projectRouter = router({
       return projects;
     }),
   // Must use publicProcedure since it's used by ssg
-  theme: publicProcedure
-    .input(z.object({ domain: z.string() }))
-    .query(async ({ input }) => {
-      const project = await prisma.project.findUnique({
-        where: input,
-        select: {
-          id: true,
-          name: true,
-          domain: true,
-          theme: true,
-        },
-      });
-      return project;
-    }),
+  byDomain: publicProcedure.input(z.string()).query(async ({ input }) => {
+    const project = await prisma.project.findUnique({
+      where: {
+        domain: input,
+      },
+      select: {
+        id: true,
+        name: true,
+        domain: true,
+        theme: true,
+        createdAt: true,
+      },
+    });
+    return project;
+  }),
   create: protectedProcedure
     .input(
       z.object({

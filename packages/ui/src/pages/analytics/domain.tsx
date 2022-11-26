@@ -1,10 +1,10 @@
-import { ProjectByDomainQuery } from '@chirpy-dev/graphql';
 import * as React from 'react';
+import { RouterOutputs } from 'src/utilities/trpc-client';
 
 import { AnalyticsBlock, SiteLayout, PageTitle } from '../../blocks';
 
 export type AnalyticsByDomainPageProps = {
-  project: ProjectByDomainQuery['projects'][number];
+  project: NonNullable<RouterOutputs['project']['byDomain']>;
 };
 
 export function AnalyticsByDomainPage({
@@ -16,10 +16,10 @@ export function AnalyticsByDomainPage({
         <PageTitle className="pb-6">Analytics</PageTitle>
         <AnalyticsBlock
           site={{
-            domain: project?.domain,
+            domain: project.domain,
             offset: '0',
             hasGoals: false,
-            insertedAt: project?.createdAt,
+            insertedAt: String(project.createdAt),
             embedded: true,
             background: '',
             selfhosted: true,
