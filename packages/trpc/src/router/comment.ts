@@ -114,10 +114,14 @@ export const commentRouter = router({
   delete: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
-      const data = await prisma.comment.deleteMany({
+      // Soft delete
+      const data = await prisma.comment.updateMany({
         where: {
           id: input,
           userId: ctx.session.user.id,
+        },
+        data: {
+          deletedAt: new Date(),
         },
       });
       return data;

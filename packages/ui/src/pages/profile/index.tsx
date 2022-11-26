@@ -1,7 +1,3 @@
-import {
-  useCurrentUserQuery,
-  useUpdateUserByPkMutation,
-} from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { SiteLayout, PageTitle } from '../../blocks';
@@ -23,8 +19,9 @@ import {
   useToast,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
-import { useBypassCacheRefetch, useForm } from '../../hooks';
+import { useForm } from '../../hooks';
 import { EMAIL_REGEXP, logger } from '../../utilities';
+import { trpcClient } from '../../utilities/trpc-client';
 
 type FormFields = {
   name: string;
@@ -35,26 +32,27 @@ type FormFields = {
 };
 
 export function Profile(): JSX.Element {
-  const { data: currentUser, isSignIn, refetchUser } = useCurrentUser();
-  const refetchWithoutCache = useBypassCacheRefetch(refetchUser);
-  const [{ data, fetching }] = useCurrentUserQuery({
-    variables: { id: currentUser.id || '-1' },
-    pause: !currentUser.id,
-  });
+  const { isSignIn, refetchUser } = useCurrentUser();
+  const {
+    data,
+    status,
+    refetch: refetchProfile,
+  } = trpcClient.user.myProfile.useQuery();
   const {
     name,
     email,
     bio,
     website,
     twitterUserName,
-    id,
     image,
     username,
     emailVerified,
     type,
-  } = data?.userByPk || {};
+  } = data || {};
+  const fetching = status === 'loading';
   const [isEditMode, setIsEditMode] = React.useState(false);
-  const [{}, updateUserByPk] = useUpdateUserByPkMutation();
+  const { mutateAsync: updateProfile } =
+    trpcClient.user.updateProfile.useMutation();
 
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
@@ -68,33 +66,35 @@ export function Profile(): JSX.Element {
   const { showToast } = useToast();
   const handleClickButton = handleSubmit(async (fields) => {
     if (isEditMode) {
-      const { error } = await updateUserByPk({
-        id: id || '-1',
-        name: fields.name,
-        email: fields.email,
-        bio: fields.bio,
-        website: fields.website,
-        twitterUserName: fields.twitter,
-      });
-      if (error) {
-        logger.error('Update user profile failed', error);
-        if (error.message.includes(`unique constraint \"User_email_key\"`)) {
-          showToast({
-            type: 'error',
-            title: `${fields.email} is in use`,
-            description:
-              'The email address you entered is already in use. Please try another one.',
-          });
-        } else {
-          showToast({
-            type: 'error',
-            title:
-              'Sorry, something wrong happened in our side, please try again later.',
-          });
+      try {
+        await updateProfile({
+          name: fields.name,
+          email: fields.email,
+          bio: fields.bio,
+          website: fields.website,
+          twitterUserName: fields.twitter,
+        });
+      } catch (error) {
+        if (error instanceof Error) {
+          logger.error('Update user profile failed', error);
+          if (error.message.includes(`Unique constraint`)) {
+            showToast({
+              type: 'error',
+              title: `${fields.email} is in use`,
+              description:
+                'The email address you entered is already in use. Please try another one.',
+            });
+          } else {
+            showToast({
+              type: 'error',
+              title:
+                'Sorry, something wrong happened in our side, please try again later.',
+            });
+          }
+          return;
         }
-        return;
       }
-      refetchWithoutCache();
+      await Promise.all([refetchProfile(), refetchUser()]);
       setIsEditMode(false);
     } else {
       setIsEditMode(true);

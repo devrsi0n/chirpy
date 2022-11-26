@@ -4,13 +4,45 @@ import { prisma } from '../common/db';
 import { router, protectedProcedure } from '../trpc-server';
 
 export const userRouter = router({
-  me: protectedProcedure
-    .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
-      const me = await prisma.user.findUnique({
+  me: protectedProcedure.query(async ({ ctx }) => {
+    const me = await prisma.user.findUnique({
+      where: {
+        id: ctx.session.user.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        image: true,
+      },
+    });
+    return me;
+  }),
+  myProfile: protectedProcedure.query(async ({ ctx }) => {
+    const me = await prisma.user.findUnique({
+      where: {
+        id: ctx.session.user.id,
+      },
+    });
+    return me;
+  }),
+  updateProfile: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().nullish(),
+        email: z.string().nullish(),
+        bio: z.string().nullish(),
+        website: z.string().nullish(),
+        twitterUserName: z.string().nullish(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const me = await prisma.user.update({
         where: {
-          id: input.id,
+          id: ctx.session.user.id,
         },
+        data: input,
       });
       return me;
     }),
