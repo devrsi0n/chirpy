@@ -34,8 +34,8 @@ export type CommentCardProps = {
   commentId: string;
   author: Author;
   content: RTEValue;
-  createdAt: string;
-  deletedAt?: string | null;
+  createdAt: string | Date;
+  deletedAt?: string | Date | null;
   likes: Like[];
   depth: number;
   /**
@@ -104,6 +104,7 @@ export function CommentCard({
   if (isDeleted) {
     return <DeletedComment />;
   }
+  const createdAtDate = cpDayjs(createdAt);
   return (
     <m.article
       animate={containerAnimate}
@@ -131,11 +132,11 @@ export function CommentCard({
             <Text
               variant="secondary"
               as="time"
-              title={createdAt}
+              title={createdAtDate.format('YYYY-MM-DD HH:mm:ss')}
               className="cursor-default !leading-none"
               dateTime={createdAt}
             >
-              {cpDayjs(createdAt).fromNow()}
+              {createdAtDate.fromNow()}
             </Text>
           </div>
           <>

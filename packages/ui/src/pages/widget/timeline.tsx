@@ -1,6 +1,4 @@
-import { useCommentTimelineSubscription } from '@chirpy-dev/graphql';
-import { CommonWidgetProps, CommentTimelineNode } from '@chirpy-dev/types';
-import { isSSRMode } from '@chirpy-dev/utils';
+import { CommonWidgetProps } from '@chirpy-dev/types';
 
 import {
   CommentTimeline,
@@ -10,29 +8,24 @@ import {
 } from '../../blocks';
 import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
+import { trpcClient } from '../../utilities/trpc-client';
 
 export type CommentTimelineWidgetProps = CommonWidgetProps & {
   commentId: string;
-  comment: CommentTimelineNode;
+  pageId: string;
   pageURL: string;
 };
 
 export function CommentTimelineWidget(
   props: CommentTimelineWidgetProps,
 ): JSX.Element {
-  const [{ data }] = useCommentTimelineSubscription({
-    variables: { id: props.commentId },
-    pause: isSSRMode,
+  const { data: comment } = trpcClient.comment.timeline.useQuery({
+    id: props.commentId,
   });
-
-  const comment = data?.commentByPk || props.comment;
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider
-        projectId={props.projectId}
-        pageId={comment?.pageId || ''}
-      >
+      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
           <Link
@@ -49,6 +42,7 @@ export function CommentTimelineWidget(
           </Heading>
           <UserMenu variant="Widget" />
         </div>
+        {/* @ts-ignore */}
         {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
         <PoweredBy />
       </CommentContextProvider>

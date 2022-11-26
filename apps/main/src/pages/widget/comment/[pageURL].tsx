@@ -82,13 +82,10 @@ export const getStaticProps: GetStaticProps<
   }
 
   try {
-    const comments = await ssg.comment.forest.fetch({
+    await ssg.comment.forest.prefetch({
       url: pageURL,
     });
 
-    if (!comments?.length) {
-      return { notFound: true };
-    }
     const pageByPk = await prisma.page.findUnique({
       where: {
         id: pageId,

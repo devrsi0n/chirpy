@@ -1,15 +1,6 @@
-import {
-  CommentTimelineDocument,
-  CommentTimelineSubscription,
-  CommentsDocument,
-  ThemeOfPageDocument,
-} from '@chirpy-dev/graphql';
-import {
-  CommonWidgetProps,
-  Theme,
-  CommentTimelineNode,
-} from '@chirpy-dev/types';
-import { cpDayjs } from '@chirpy-dev/ui';
+import { prisma, ssg } from '@chirpy-dev/trpc';
+import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
+import { CommentTimelineWidgetProps } from '@chirpy-dev/ui';
 import {
   GetStaticProps,
   GetStaticPropsContext,
@@ -18,21 +9,12 @@ import {
 } from 'next';
 import { log } from 'next-axiom';
 import superjson from 'superjson';
-import { OperationResult } from 'urql';
-import { pipe, subscribe } from 'wonka';
 
 import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { query } from '$/server/common/gql';
 
 type PathParams = {
   commentId: string;
 };
-
-type StaticProps = PathParams &
-  CommonWidgetProps & {
-    comment: CommentTimelineNode;
-    pageURL: string;
-  };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   if (process.env.DOCKER) {
@@ -41,13 +23,13 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       fallback: 'blocking',
     };
   }
-  const comments = await query(
-    CommentsDocument,
-    {
-      newerThan: cpDayjs().subtract(1, 'day').toISOString(),
+  const comments = await prisma.comment.findMany({
+    orderBy: { createdAt: 'desc' },
+    take: 50,
+    select: {
+      id: true,
     },
-    'comments',
-  );
+  });
 
   const paths =
     comments.map(({ id }) => ({
@@ -63,10 +45,13 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 const client = getAdminGqlClient();
 
-export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
+export const getStaticProps: GetStaticProps<
+  CommentTimelineWidgetProps,
+  PathParams
+> = async ({
   params,
 }: GetStaticPropsContext<PathParams>): Promise<
-  GetStaticPropsResult<StaticProps>
+  GetStaticPropsResult<CommentTimelineWidgetProps>
 > => {
   if (!params?.commentId) {
     return { notFound: true };
@@ -74,42 +59,40 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   const { commentId } = params;
 
   try {
-    const { data } = await new Promise<
-      OperationResult<CommentTimelineSubscription>
-    >((resolve /*reject*/) => {
-      pipe<OperationResult<CommentTimelineSubscription>, any>(
-        // @ts-ignore
-        client.subscription(CommentTimelineDocument, { id: commentId }),
-        subscribe((result) => {
-          // log.debug(result);
-          resolve(result);
-        }),
-      );
-    });
+    await ssg.comment.timeline.prefetch({ id: commentId });
 
-    if (!data?.commentByPk) {
-      return { notFound: true };
-    }
-
-    const pageByPk = await query(
-      ThemeOfPageDocument,
-      {
-        pageId: data.commentByPk.pageId,
+    const data = await prisma.comment.findUnique({
+      where: {
+        id: commentId,
       },
-      'pageByPk',
-    );
-    if (!pageByPk) {
-      log.error(`Can't find page info`);
+      select: {
+        page: {
+          select: {
+            id: true,
+            url: true,
+            project: {
+              select: {
+                id: true,
+                theme: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!data?.page.project.id) {
+      log.error(`Can't find theme info`);
       return { notFound: true };
     }
 
     return {
       props: {
-        projectId: pageByPk.project.id,
-        comment: data.commentByPk,
+        trpcState: ssg.dehydrate(),
+        pageId: data.page.id,
+        projectId: data.page.project.id,
         commentId,
-        pageURL: pageByPk.url,
-        theme: (pageByPk.project.theme as Theme) || null,
+        pageURL: data.page.url,
+        theme: (data.page.project.theme as Theme) || null,
         isWidget: true,
       },
       revalidate: 600,
