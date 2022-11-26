@@ -20,7 +20,6 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       fallback: 'blocking',
     };
   }
-  // TODO: only generated a subset of theme pages to improve build perf
   const paths = await getRecentProjectStaticPathsByDomain(50);
 
   return { paths, fallback: 'blocking' };

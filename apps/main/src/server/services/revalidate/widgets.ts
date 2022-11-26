@@ -1,7 +1,6 @@
-import { PageUrLsOfProjectDocument } from '@chirpy-dev/graphql';
+import { prisma } from '@chirpy-dev/trpc';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { query } from '$/server/common/gql';
 import { badRequest } from '$/server/utilities/response';
 import { revalidateCommentWidgets } from '$/server/utilities/revalidate';
 
@@ -14,14 +13,19 @@ export async function revalidateWidgets(
     badRequest(res, 'Invalid projectId');
     return;
   }
-  const project = await query(
-    PageUrLsOfProjectDocument,
-    {
+  const project = await prisma.project.findUnique({
+    where: {
       id: projectId,
     },
-    'projectByPk',
-  );
-  const pageURLs = project.pages.map((p) => p.url);
+    select: {
+      pages: {
+        select: {
+          url: true,
+        },
+      },
+    },
+  });
+  const pageURLs = project?.pages.map((p) => p.url) || [];
   await revalidateCommentWidgets(pageURLs, res);
   res.json({
     message: 'ok',

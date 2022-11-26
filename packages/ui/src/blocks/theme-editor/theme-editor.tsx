@@ -13,7 +13,7 @@ import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
-import { RouterOutputs } from '../../utilities/trpc-client';
+import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { ColorModeSelect } from '../color-mode-select';
 import {
   CommentWidgetPreview,
@@ -32,7 +32,8 @@ export type ThemeEditorProps = {
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
 
-  const [{}, updateTheme] = useUpdateThemeMutation();
+  const { mutateAsync: updateTheme } =
+    trpcClient.project.updateTheme.useMutation();
   const { showToast } = useToast();
   const saveTheme = debounce(
     React.useCallback(

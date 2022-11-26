@@ -87,4 +87,28 @@ export const projectRouter = router({
         },
       });
     }),
+  updateTheme: protectedProcedure
+    .input(
+      z.object({
+        projectId: z.string(),
+        theme: z.object({
+          colors: z.object({
+            light: z.any(),
+            dark: z.any(),
+          }),
+        }),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const project = await prisma.project.updateMany({
+        where: {
+          id: input.projectId,
+          userId: ctx.session.user.id,
+        },
+        data: {
+          theme: input.theme,
+        },
+      });
+      return project;
+    }),
 });

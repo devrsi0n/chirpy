@@ -10,7 +10,7 @@ export async function getRecentProjectStaticPathsByDomain(
       domain: true,
     },
     orderBy: {
-      createdAt: 'desc',
+      updatedAt: 'desc',
     },
     take,
   });
