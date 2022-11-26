@@ -1,6 +1,7 @@
 import { CommonWidgetProps } from '@chirpy-dev/types';
 
 import { CommentForest, WidgetLayout, PoweredBy } from '../../blocks';
+import { Text } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { trpcClient } from '../../utilities/trpc-client';
 
@@ -14,19 +15,23 @@ export type PageCommentProps = CommonWidgetProps & {
  * @param props
  */
 export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
-  const { data: comments } = trpcClient.comment.forest.useQuery({
+  const { data: comments, refetch } = trpcClient.comment.forest.useQuery({
     url: props.pageURL,
   });
 
   if (isStaticError(props) || !comments) {
     return (
-      <p>{`Can't find a Chirpy comment widget with this page, please contact the support.`}</p>
+      <Text>{`Can't find a Chirpy comment widget with this page, please contact the support.`}</Text>
     );
   }
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
+      <CommentContextProvider
+        projectId={props.projectId}
+        pageId={props.pageId}
+        refetchComments={refetch}
+      >
         <div className="pt-1">
           {/* @ts-ignore */}
           <CommentForest comments={comments} />

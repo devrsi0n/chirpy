@@ -38,6 +38,10 @@ const nextConfig = {
       '@chirpy-dev/types',
       '@chirpy-dev/trpc',
     ],
+    swcPlugins: [
+      // Allow Date/Map in getStaticProps
+      ['next-superjson-plugin', {}],
+    ],
   },
   async rewrites() {
     return [

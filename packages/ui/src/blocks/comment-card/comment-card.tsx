@@ -2,10 +2,10 @@ import { CommentLeafType } from '@chirpy-dev/types';
 import { RTEValue } from '@chirpy-dev/types';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import clsx from 'clsx';
-import { AnimatePresence, m, MotionProps, Variants } from 'framer-motion';
+import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
+import { trpcClient } from 'src/utilities/trpc-client';
 
-import { easeInOut, expanded } from '../../components/animation';
 import { Avatar } from '../../components/avatar';
 import { ActionButton, Button } from '../../components/button';
 import {
@@ -65,6 +65,7 @@ export function CommentCard({
   const handleSubmitReply = async (replyContent: RTEValue) => {
     try {
       await createAComment(replyContent, commentId);
+
       setShowReplyEditor(false);
     } catch (error) {
       showToast({

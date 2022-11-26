@@ -2,13 +2,13 @@ import { Order_By } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
-import { RouterOutputs } from 'src/utilities/trpc-client';
 
 import { BaseButton, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
 import { useForceUpdate, useInterval } from '../../hooks';
 import { getCommentCount } from '../../utilities/get-comment-count';
+import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';

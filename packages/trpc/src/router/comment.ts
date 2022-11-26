@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db';
-import { router, publicProcedure } from '../trpc-server';
+import { router, publicProcedure, protectedProcedure } from '../trpc-server';
 
 export const commentRouter = router({
   forest: publicProcedure
@@ -91,5 +91,35 @@ export const commentRouter = router({
         },
       });
       return result;
+    }),
+  create: protectedProcedure
+    .input(
+      z.object({
+        content: z.any(),
+        pageId: z.string(),
+        parentId: z.string().optional(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      const data = await prisma.comment.create({
+        data: {
+          content: input.content,
+          pageId: input.pageId,
+          parentId: input.parentId,
+          userId: ctx.session.user.id,
+        },
+      });
+      return data;
+    }),
+  delete: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const data = await prisma.comment.deleteMany({
+        where: {
+          id: input,
+          userId: ctx.session.user.id,
+        },
+      });
+      return data;
     }),
 });

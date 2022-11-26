@@ -1,20 +1,25 @@
-import { useInsertOneCommentMutation } from '@chirpy-dev/graphql';
 import { RTEValue } from '@chirpy-dev/types';
 import { JsonArray } from 'type-fest';
 
 import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
+import { trpcClient } from '../../utilities/trpc-client';
 import { useCurrentUser } from '../current-user-context';
+import { RefetchComments } from './comment-context';
 
 export type useCreateACommentOptions = {
   pageId: string;
-};
+} & RefetchComments;
 
 export type UseCreateAComment = ReturnType<typeof useCreateAComment>;
 
-export function useCreateAComment({ pageId }: useCreateACommentOptions) {
+export function useCreateAComment({
+  pageId,
+  refetchComments,
+}: useCreateACommentOptions) {
   const { isSignIn } = useCurrentUser();
-  const [{}, insertOneComment] = useInsertOneCommentMutation();
+  const { mutateAsync: insertOneComment } =
+    trpcClient.comment.create.useMutation();
   const { showToast } = useToast();
 
   const createAComment = async (reply: RTEValue, commentId?: string) => {
@@ -22,12 +27,13 @@ export function useCreateAComment({ pageId }: useCreateACommentOptions) {
       logger.error('Navigate to sign-in page');
       throw undefined;
     }
-    const { data } = await insertOneComment({
+    const data = await insertOneComment({
       parentId: commentId,
       content: reply as JsonArray,
       pageId,
     });
-    if (!data?.insertOneComment?.id) {
+    await refetchComments();
+    if (!data?.id) {
       showToast({
         type: 'error',
         title: `Server didn't respond, please try again later.`,

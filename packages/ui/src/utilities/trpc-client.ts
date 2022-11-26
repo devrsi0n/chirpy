@@ -20,6 +20,15 @@ export const trpcClient = createTRPCNext<AppRouter>({
           url: `${getBaseUrl()}/api/trpc`,
         }),
       ],
+      abortOnUnmount: true,
+      queryClientConfig: {
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 2,
+            cacheTime: 1000 * 60 * 60 * 72,
+          },
+        },
+      },
     };
   },
   ssr: false,

@@ -169,6 +169,7 @@ importers:
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8
       next-plausible: 3.6.4
+      next-superjson-plugin: 0.4.9
       next-themes: 0.2.1
       next-urql: 4.0.0
       nodemailer: 6.7.8
@@ -217,6 +218,7 @@ importers:
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-plausible: 3.6.4_7iuvftg57tblwyxclfkwku5xo4
+      next-superjson-plugin: 0.4.9_o7ninycgoz2lf73je52p7wq4ja
       next-themes: 0.2.1_7iuvftg57tblwyxclfkwku5xo4
       next-urql: 4.0.0_react@18.2.0+urql@3.0.3
       nodemailer: 6.7.8
@@ -14669,6 +14671,12 @@ packages:
       minimalistic-crypto-utils: 1.0.1
     dev: true
 
+  /hoist-non-react-statics/3.3.2:
+    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
+    dependencies:
+      react-is: 16.13.1
+    dev: false
+
   /hosted-git-info/2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
 
@@ -18037,7 +18045,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -18069,9 +18077,20 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /next-superjson-plugin/0.4.9_o7ninycgoz2lf73je52p7wq4ja:
+    resolution: {integrity: sha512-MSj40zj+ZRmFnZgZxOgQFD6efk3A5OQAPhU9e018JthWPjiE/Xx3HyxOsuOycoBDSxurBa6xH+m78SRr60JTXw==}
+    peerDependencies:
+      next: '>12.3.0'
+      superjson: ^1
+    dependencies:
+      hoist-non-react-statics: 3.3.2
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
+      superjson: 1.11.0
     dev: false
 
   /next-themes/0.2.1_7iuvftg57tblwyxclfkwku5xo4:
@@ -18081,7 +18100,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
