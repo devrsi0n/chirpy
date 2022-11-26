@@ -5,17 +5,17 @@ import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
 import { trpcClient } from '../../utilities/trpc-client';
 import { useCurrentUser } from '../current-user-context';
-import { RefetchComments } from './comment-context';
+import { RefetchComment } from './comment-context';
 
 export type useCreateACommentOptions = {
   pageId: string;
-} & RefetchComments;
+} & RefetchComment;
 
 export type UseCreateAComment = ReturnType<typeof useCreateAComment>;
 
 export function useCreateAComment({
   pageId,
-  refetchComments,
+  refetchComment: refetchComments,
 }: useCreateACommentOptions) {
   const { isSignIn } = useCurrentUser();
   const { mutateAsync: insertOneComment } =

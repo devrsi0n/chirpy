@@ -2,11 +2,11 @@ import * as React from 'react';
 
 import { useToast } from '../../components/toast';
 import { trpcClient } from '../../utilities/trpc-client';
-import { RefetchComments } from './comment-context';
+import { RefetchComment } from './comment-context';
 
 export type UseDeleteAComment = ReturnType<typeof useDeleteAComment>;
 
-export function useDeleteAComment(refetch: RefetchComments['refetchComments']) {
+export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
   const { mutateAsync: deleteOneComment } =
     trpcClient.comment.delete.useMutation();
   const { showToast } = useToast();

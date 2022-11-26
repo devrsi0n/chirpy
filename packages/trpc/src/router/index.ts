@@ -1,5 +1,6 @@
 import { router } from '../trpc-server';
 import { commentRouter } from './comment';
+import { likeRouter } from './like';
 import { notificationRouter } from './notification';
 import { projectRouter } from './project';
 import { userRouter } from './user';
@@ -9,7 +10,7 @@ export const appRouter = router({
   notification: notificationRouter,
   project: projectRouter,
   comment: commentRouter,
+  like: likeRouter,
 });
 
-// export type definition of API
 export type AppRouter = typeof appRouter;

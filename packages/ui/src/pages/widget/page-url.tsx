@@ -30,7 +30,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
       <CommentContextProvider
         projectId={props.projectId}
         pageId={props.pageId}
-        refetchComments={refetch}
+        refetchComment={refetch}
       >
         <div className="pt-1">
           {/* @ts-ignore */}

@@ -19,13 +19,17 @@ export type CommentTimelineWidgetProps = CommonWidgetProps & {
 export function CommentTimelineWidget(
   props: CommentTimelineWidgetProps,
 ): JSX.Element {
-  const { data: comment } = trpcClient.comment.timeline.useQuery({
+  const { data: comment, refetch } = trpcClient.comment.timeline.useQuery({
     id: props.commentId,
   });
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
+      <CommentContextProvider
+        projectId={props.projectId}
+        pageId={props.pageId}
+        refetchComment={refetch}
+      >
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
           <Link

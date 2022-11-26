@@ -4,23 +4,23 @@ import * as React from 'react';
 import {
   CommentContextType,
   CommentContext,
-  RefetchComments,
+  RefetchComment,
 } from './comment-context';
 import { useCreateAComment } from './use-create-a-comment';
 import { useDeleteAComment } from './use-delete-a-comment';
 import { useToggleALikeAction } from './use-toggle-a-like-action';
 
 export type CommentContextProviderProps = React.PropsWithChildren<
-  RefetchComments & Pick<CommentContextType, 'projectId' | 'pageId'>
+  RefetchComment & Pick<CommentContextType, 'projectId' | 'pageId'>
 >;
 
 export function CommentContextProvider(props: CommentContextProviderProps) {
   const createAComment = useCreateAComment({
     pageId: props.pageId,
-    refetchComments: props.refetchComments,
+    refetchComment: props.refetchComment,
   });
-  const deleteAComment = useDeleteAComment(props.refetchComments);
-  const toggleALikeAction = useToggleALikeAction();
+  const deleteAComment = useDeleteAComment(props.refetchComment);
+  const toggleALikeAction = useToggleALikeAction(props.refetchComment);
   const router = useRouter();
   const onClickCommentTimeline = React.useCallback(
     (href: string) => {
@@ -32,7 +32,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
     () => ({
       projectId: props.projectId,
       pageId: props.pageId,
-      refetchComments: props.refetchComments,
+      refetchComments: props.refetchComment,
       createAComment,
       deleteAComment,
       toggleALikeAction,
