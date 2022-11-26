@@ -26,5 +26,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "4.17.1"
   }
 }

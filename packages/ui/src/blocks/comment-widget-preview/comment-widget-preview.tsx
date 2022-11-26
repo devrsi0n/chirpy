@@ -10,7 +10,7 @@ import {
   UseToggleALikeAction,
 } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { CommentTrees } from '../comment-trees';
+import { CommentForest } from '../comment-forest';
 import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';
 import { getPreviewComments, PAGE_ID, PROJECT_ID } from './preview-data';
@@ -132,7 +132,7 @@ function CommentWidgetPreviewInternal(
   );
   return (
     <CommentContext.Provider value={commentContext}>
-      <CommentTrees
+      <CommentForest
         comments={previewComments}
         rtePlaceholder={props.rtePlaceholder || 'Preview'}
       />

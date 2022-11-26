@@ -4,16 +4,37 @@ import { prisma } from '../common/db';
 import { router, protectedProcedure } from '../trpc-server';
 
 export const commentRouter = router({
-  deleteStaleComments: protectedProcedure
-    .input(z.object({ beforeDate: z.string(), url: z.string() }))
-    .mutation(async ({ input }) => {
-      const result = await prisma.comment.deleteMany({
+  forest: protectedProcedure
+    .input(z.object({ url: z.string() }))
+    .query(async ({ input }) => {
+      const result = await prisma.comment.findMany({
         where: {
-          createdAt: {
-            lt: input.beforeDate,
-          },
           page: {
             url: input.url,
+          },
+          parentId: null,
+        },
+        include: {
+          user: true,
+          likes: true,
+          replies: {
+            include: {
+              user: true,
+              likes: true,
+              replies: {
+                include: {
+                  user: true,
+                  likes: true,
+                  replies: {
+                    include: {
+                      user: true,
+                      replies: true,
+                      likes: true,
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       });

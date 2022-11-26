@@ -43,7 +43,7 @@ export async function getPage(
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
     });
   }
-  // Create page if not exist
+  // Create page if not exist, or update the title
   const page = await prisma.page.upsert({
     where: {
       url,

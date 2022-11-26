@@ -1,12 +1,5 @@
-import {
-  CommentTreeDocument,
-  CommentTreeSubscription,
-  CommentTreeSubscriptionVariables,
-  ThemeOfPageDocument,
-  PageByUrlOnlyDocument,
-  FreshPagesDocument,
-} from '@chirpy-dev/graphql';
-import { CommonWidgetProps, Theme, CommentLeafType } from '@chirpy-dev/types';
+import { prisma, ssg } from '@chirpy-dev/trpc';
+import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
 import {
   GetStaticProps,
   InferGetStaticPropsType,
@@ -16,11 +9,6 @@ import {
 } from 'next';
 import { log } from 'next-axiom';
 import superjson from 'superjson';
-import { OperationResult } from 'urql';
-import { pipe, subscribe } from 'wonka';
-
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
-import { query } from '$/server/common/gql';
 
 export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
@@ -33,8 +21,6 @@ type PathParams = {
   pageURL: string;
 };
 
-const client = getAdminGqlClient();
-
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   if (process.env.DOCKER) {
@@ -43,13 +29,13 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       fallback: 'blocking',
     };
   }
-  const freshPages = await query(
-    FreshPagesDocument,
-    {
-      limit: 50,
+  const freshPages = await prisma.page.findMany({
+    orderBy: { createdAt: 'desc' },
+    take: 50,
+    select: {
+      url: true,
     },
-    'pages',
-  );
+  });
 
   const paths: { params: PathParams }[] =
     freshPages.map(({ url }) => {
@@ -67,7 +53,6 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 
 type StaticProps = PathParams &
   CommonWidgetProps & {
-    comments: CommentLeafType[];
     pageId: string;
   };
 type StaticError = {
@@ -86,50 +71,44 @@ export const getStaticProps: GetStaticProps<
     return { notFound: true };
   }
   const { pageURL } = params;
-  const pages = await query(PageByUrlOnlyDocument, { url: pageURL }, 'pages');
-  const pageId = pages?.[0]?.id;
+  const page = await prisma.page.findUnique({
+    where: {
+      url: pageURL,
+    },
+  });
+  const pageId = page?.id;
   if (!pageId) {
     return { notFound: true };
   }
 
   try {
-    const { data } = await new Promise<
-      OperationResult<CommentTreeSubscription>
-    >((resolve /*reject*/) => {
-      pipe<
-        OperationResult<
-          CommentTreeSubscription,
-          CommentTreeSubscriptionVariables
-        >,
-        any
-      >(
-        // @ts-ignore
-        client.subscription(CommentTreeDocument, { pageURL }),
-        subscribe((result) => {
-          // log.debug(result);
-          resolve(result);
-        }),
-      );
+    const comments = await ssg.comment.forest.fetch({
+      url: pageURL,
     });
 
-    if (!data?.comments) {
+    if (!comments?.length) {
       return { notFound: true };
     }
-    const { comments } = data;
-    const pageByPk = await query(
-      ThemeOfPageDocument,
-      {
-        pageId,
+    const pageByPk = await prisma.page.findUnique({
+      where: {
+        id: pageId,
       },
-      'pageByPk',
-    );
-    if (!pageByPk) {
+      select: {
+        project: {
+          select: {
+            id: true,
+            theme: true,
+          },
+        },
+      },
+    });
+    if (!pageByPk?.project.id) {
       log.error(`Can't find theme info`);
       return { notFound: true };
     }
     return {
       props: {
-        comments,
+        trpcState: ssg.dehydrate(),
         pageURL,
         pageId,
         projectId: pageByPk.project.id,

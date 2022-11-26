@@ -1,14 +1,14 @@
-import { CommentTreeSubscription } from '@chirpy-dev/graphql';
+import { RouterOutputs } from './trpc-client';
 
 export function getCommentCount(
-  comments: CommentTreeSubscription['comments'],
+  comments: RouterOutputs['comment']['forest'],
 ): number {
   let counter = 0;
   for (const comment of comments) {
     if (comment.replies) {
       counter +=
         getCommentCount(
-          comment.replies as unknown as CommentTreeSubscription['comments'],
+          comment.replies as unknown as RouterOutputs['comment']['forest'],
         ) + 1;
     } else {
       counter++;

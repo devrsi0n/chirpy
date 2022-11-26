@@ -1,12 +1,12 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { CommentTrees } from '..';
+import { CommentForest } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
+import * as CommentContext from '../../../contexts/comment-context/comment-context-provider';
 import {
   generateCommentFragment,
   getTextsOfComment,
-} from '../../../blocks/comment-timeline/__tests__/mock-data';
-import * as CommentContext from '../../../contexts/comment-context/comment-context-provider';
+} from '../../comment-timeline/__tests__/mock-data';
 
 jest.mock('../../../contexts/comment-context/comment-context-provider', () => {
   return {
@@ -39,9 +39,9 @@ const mockComments = [
   },
 ];
 
-describe('CommentTrees', () => {
+describe('CommentForest', () => {
   beforeEach(() => {
-    pageRender(<CommentTrees comments={mockComments as any} />);
+    pageRender(<CommentForest comments={mockComments as any} />);
   });
 
   afterEach(() => {

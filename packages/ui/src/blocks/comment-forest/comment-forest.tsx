@@ -1,8 +1,8 @@
 import { Order_By } from '@chirpy-dev/graphql';
-import { CommentLeafType } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
+import { RouterOutputs } from 'src/utilities/trpc-client';
 
 import { BaseButton, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
@@ -15,15 +15,15 @@ import { RichTextEditor } from '../rich-text-editor';
 import { UserMenu } from '../user-menu';
 import { useCommentOrderBy } from './use-comment-order-by';
 
-export type CommentTreesProps = {
-  comments: CommentLeafType[];
+export type CommentForestProps = {
+  comments: RouterOutputs['comment']['forest'];
   rtePlaceholder?: string;
 };
 
-export function CommentTrees({
+export function CommentForest({
   comments,
   rtePlaceholder,
-}: CommentTreesProps): JSX.Element {
+}: CommentForestProps): JSX.Element {
   const { createAComment } = useCommentContext();
   const commentCount = getCommentCount(comments);
   const [orderBy, setOrderBy] = useCommentOrderBy();
@@ -76,9 +76,11 @@ export function CommentTrees({
         </div>
         <ul className="space-y-5">
           <AnimatePresence>
-            {orderedComments?.map((comment: CommentLeafType) => (
-              <CommentTree key={comment.id} depth={1} comment={comment} />
-            ))}
+            {orderedComments?.map(
+              (comment: RouterOutputs['comment']['forest'][number]) => (
+                <CommentTree key={comment.id} depth={1} comment={comment} />
+              ),
+            )}
           </AnimatePresence>
         </ul>
       </div>
@@ -87,9 +89,9 @@ export function CommentTrees({
 }
 
 function sortComments(
-  comments: CommentLeafType[],
+  comments: RouterOutputs['comment']['forest'],
   orderBy?: Order_By,
-): CommentLeafType[] {
+): RouterOutputs['comment']['forest'] {
   if (!orderBy) {
     return comments;
   }
@@ -116,6 +118,6 @@ function formatTitle(count: number): string {
   return `${count} comments`;
 }
 
-function dateToNumber(date: string): number {
+function dateToNumber(date: string | Date): number {
   return new Date(date).getTime();
 }
