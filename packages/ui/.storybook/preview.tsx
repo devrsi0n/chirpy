@@ -1,14 +1,8 @@
-import { urqlDecorator } from '@urql/storybook-addon';
 import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import * as React from 'react';
 
-import {
-  SessionProvider,
-  CurrentUserProvider,
-  GQLClientProvider,
-  useThemeVariables,
-} from '../src/contexts';
+import { CurrentUserProvider, useThemeVariables } from '../src/contexts';
 import { loadFeatures } from '../src/pages/app';
 
 // TODO: fix tailwind not work in storybook,
@@ -24,23 +18,19 @@ initialize({
 
 export const decorators = [
   mswDecorator,
-  urqlDecorator,
+
   // @ts-ignore
   (Story) => {
     const { styles } = useThemeVariables();
     return (
-      <SessionProvider>
-        <GQLClientProvider>
-          <CurrentUserProvider>
-            <style>{styles}</style>
-            <LazyMotion features={loadFeatures}>
-              <div className="h-screen bg-bg pt-6">
-                <Story />
-              </div>
-            </LazyMotion>
-          </CurrentUserProvider>
-        </GQLClientProvider>
-      </SessionProvider>
+      <CurrentUserProvider>
+        <style>{styles}</style>
+        <LazyMotion features={loadFeatures}>
+          <div className="h-screen bg-bg pt-6">
+            <Story />
+          </div>
+        </LazyMotion>
+      </CurrentUserProvider>
     );
   },
 ];

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
+    "@sendinblue/client": "3.2.2",
     "eta": "1.12.3"
   },
   "devDependencies": {

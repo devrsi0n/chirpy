@@ -1,10 +1,8 @@
 import { render as reactRender } from '@testing-library/react';
-import { Provider } from 'urql';
 
 import { ToastProvider } from '../../components';
 // import '../mocks/next-router';
 import { CurrentUserContext, UserData } from '../../contexts';
-import { createGqlClient } from '../../utilities';
 import { mockUserData } from '../mocks/data/user';
 
 export const mockRefetchUser = jest.fn();
@@ -32,11 +30,9 @@ export function pageRender(ui: React.ReactElement) {
     wrapper: function TestingWrapper({ children }) {
       const mockedUser = getMockedUser();
       return (
-        <Provider value={createGqlClient()}>
-          <CurrentUserContext.Provider value={mockedUser}>
-            <ToastProvider>{children}</ToastProvider>
-          </CurrentUserContext.Provider>
-        </Provider>
+        <CurrentUserContext.Provider value={mockedUser}>
+          <ToastProvider>{children}</ToastProvider>
+        </CurrentUserContext.Provider>
       );
     },
   });

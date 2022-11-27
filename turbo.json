@@ -1,9 +1,8 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "^db:generate"]
     },
     "test": {
       "outputs": []
@@ -12,6 +11,7 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^db:generate"],
       "cache": false
     },
     "@chirpy-dev/main-app#build": {
@@ -36,8 +36,10 @@
     "build:local": {
       "cache": false
     },
-    "@chirpy-dev/graphql": {
-      "inputs": ["src/**/*.graphql"],
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
       "cache": false
     }
   },

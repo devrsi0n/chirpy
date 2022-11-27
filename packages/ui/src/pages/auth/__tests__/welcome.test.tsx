@@ -1,4 +1,3 @@
-import * as graphqlModule from '@chirpy-dev/graphql';
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -6,31 +5,24 @@ import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { setMockedUser } from '../../../__tests__/fixtures/page-render';
 import { mockNextRouter } from '../../../__tests__/mocks/next-router';
 import { Welcome } from '../../../pages/auth/welcome';
+import { trpcClient } from '../../../utilities/trpc-client';
 
 const mockUpdateUser = jest.fn().mockImplementation(() => {
   return Promise.resolve();
 });
-jest.mock('@chirpy-dev/graphql', () => ({
-  // Make exported object configurable
-  __esModule: true,
-  ...jest.requireActual('@chirpy-dev/graphql'),
-}));
-
 jest
-  .spyOn(graphqlModule, 'useUpdateUserFieldsMutation')
+  .spyOn(trpcClient.user.updateProfile, 'useMutation')
   .mockImplementation(() => {
-    return [
-      {
-        data: {
-          updateUserByPk: {
-            __typename: 'User',
-            id: '1',
-          },
+    return {
+      data: {
+        updateUserByPk: {
+          __typename: 'User',
+          id: '1',
         },
-        fetching: false,
-      } as any,
-      mockUpdateUser,
-    ];
+      },
+      status: 'success',
+      mutateAsync: mockUpdateUser,
+    } as any;
   });
 
 setMockedUser({

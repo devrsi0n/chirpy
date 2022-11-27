@@ -1,5 +1,5 @@
 import { prisma, ssg } from '@chirpy-dev/trpc';
-import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
+import { Theme } from '@chirpy-dev/types';
 import { CommentTimelineWidgetProps } from '@chirpy-dev/ui';
 import {
   GetStaticProps,
@@ -9,8 +9,6 @@ import {
 } from 'next';
 import { log } from 'next-axiom';
 import superjson from 'superjson';
-
-import { getAdminGqlClient } from '$/lib/admin-gql-client';
 
 type PathParams = {
   commentId: string;
@@ -42,8 +40,6 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
     fallback: 'blocking',
   };
 };
-
-const client = getAdminGqlClient();
 
 export const getStaticProps: GetStaticProps<
   CommentTimelineWidgetProps,

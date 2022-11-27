@@ -34,7 +34,6 @@
     "peerDependencyRules": {
       "ignoreMissing": [
         "@testing-library/dom",
-        "@urql/core",
         "@storybook/addons",
         "@storybook/client-api",
         "@storybook/preview-web",

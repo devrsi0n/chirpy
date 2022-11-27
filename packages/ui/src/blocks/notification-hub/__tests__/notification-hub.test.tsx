@@ -1,25 +1,16 @@
-import * as notificationModule from '@chirpy-dev/graphql';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '../../../__tests__/fixtures/page-render';
+import { trpcClient } from '../../../utilities/trpc-client';
 import { NotificationHub } from '../notification-hub';
 import { messages } from '../stories/mock-data';
 
-jest.mock('@chirpy-dev/graphql', () => {
-  return {
-    // Make exported object configable
-    __esModule: true,
-    ...jest.requireActual('@chirpy-dev/graphql'),
-  };
-});
-
-jest
-  .spyOn(notificationModule, 'useCurrentNotificationMessagesQuery')
-  .mockReturnValue([
-    { data: messages, fetching: false, stale: false },
-    jest.fn(),
-  ]);
+jest.spyOn(trpcClient.notification.messages, 'useQuery').mockReturnValue({
+  data: messages,
+  status: 'success',
+  refetch: jest.fn(),
+} as any);
 
 // Run storybook to see the UI visually
 describe('NotificationHub', () => {
@@ -34,9 +25,9 @@ describe('NotificationHub', () => {
 
   it('Should mark the clicked message as read', async () => {
     const haveReadANotification = jest.fn();
-    jest
-      .spyOn(notificationModule, 'useHaveReadANotificationMutation')
-      .mockReturnValue([{} as any, haveReadANotification]);
+    jest.spyOn(trpcClient.notification.read, 'useMutation').mockReturnValue({
+      mutateAsync: haveReadANotification,
+    } as any);
     await renderDefaultNotificationHub();
 
     await userEvent.click(screen.getAllByAltText(/avatar/)[0]);
@@ -45,9 +36,9 @@ describe('NotificationHub', () => {
 
   it('Should delete the message after click the delete button', async () => {
     const deleteNotificationMessage = jest.fn();
-    jest
-      .spyOn(notificationModule, 'useDeleteNotificationMessageMutation')
-      .mockReturnValue([{} as any, deleteNotificationMessage]);
+    jest.spyOn(trpcClient.notification.delete, 'useMutation').mockReturnValue({
+      mutateAsync: deleteNotificationMessage,
+    } as any);
     await renderDefaultNotificationHub();
 
     await userEvent.click(screen.getAllByLabelText('Delete the message')[0]);

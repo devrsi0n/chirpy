@@ -14,10 +14,7 @@ module.exports = {
   build: {
     templates: {
       destination: {
-        path: path.resolve(
-          __dirname,
-          '../main/src/server/services/email/templates',
-        ),
+        path: path.resolve(__dirname, '../../packages/emails/src/templates'),
       },
     },
   },

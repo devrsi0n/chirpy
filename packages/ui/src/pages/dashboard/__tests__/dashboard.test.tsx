@@ -1,45 +1,26 @@
-import * as graphqlModule from '@chirpy-dev/graphql';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { project } from '../../__tests__/mocks/mock-project-data';
-import { Dashboard } from '../../pages/dashboard';
-import { pageRender } from '../fixtures/page-render';
-
-jest.mock('@chirpy-dev/graphql', () => {
-  return {
-    // Make exported object configable
-    __esModule: true,
-    ...jest.requireActual('@chirpy-dev/graphql'),
-  };
-});
+import { Dashboard } from '..';
+import { pageRender } from '../../../__tests__/fixtures/page-render';
+import { project } from '../../../__tests__/mocks/mock-project-data';
+import { trpcClient } from '../../../utilities/trpc-client';
 
 const mockFetchUserProject = jest.fn();
-jest.spyOn(graphqlModule, 'useUserDashboardProjectsQuery').mockReturnValue([
-  {
-    data: {
-      userByPk: {
-        projects: [project],
-      },
-    },
-  } as any,
-  mockFetchUserProject,
-]);
+jest.spyOn(trpcClient.project.all, 'useQuery').mockReturnValue({
+  data: [project],
+  refetch: mockFetchUserProject,
+  status: 'success',
+} as any);
 
 const mockInsertProject = jest.fn();
-jest.spyOn(graphqlModule, 'useInsertOneProjectMutation').mockReturnValue([
-  {
-    loading: false,
-  } as any,
-  mockInsertProject,
-]);
+jest.spyOn(trpcClient.project.create, 'useMutation').mockReturnValue({
+  mutateAsync: mockInsertProject,
+} as any);
 const mockDeleteProject = jest.fn();
-jest.spyOn(graphqlModule, 'useDeleteProjectByPkMutation').mockReturnValue([
-  {
-    loading: false,
-  } as any,
-  mockDeleteProject,
-]);
+jest.spyOn(trpcClient.project.delete, 'useMutation').mockReturnValue({
+  mutateAsync: mockDeleteProject,
+} as any);
 
 describe('dashboard', () => {
   beforeEach(() => {
