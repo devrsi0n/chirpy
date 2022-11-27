@@ -1,7 +1,7 @@
-import { Order_By } from '@chirpy-dev/graphql';
-
 import { useLocalStorage } from '../../hooks';
 
+export type OrderBy = 'desc' | 'asc';
+
 export function useCommentOrderBy() {
-  return useLocalStorage<Order_By>('asc', 'comment-order-by');
+  return useLocalStorage<OrderBy>('asc', 'comment-order-by');
 }

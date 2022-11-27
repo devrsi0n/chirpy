@@ -2,7 +2,7 @@ import { getTextFromRteDoc, JSONContent } from '@chirpy-dev/utils';
 import { Comment } from '@prisma/client';
 import { NextApiResponse } from 'next';
 
-import { prisma } from '../common/db';
+import { prisma } from '../common/db-client';
 import { revalidateCommentWidget } from '../common/revalidate';
 import { sendNotification } from '../notification/send';
 import { NotificationPayload } from '../notification/types';

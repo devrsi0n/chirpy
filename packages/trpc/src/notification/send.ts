@@ -1,6 +1,6 @@
 import { log } from 'next-axiom';
 
-import { prisma } from '../common/db';
+import { prisma } from '../common/db-client';
 import { pushWebNotification } from './push-web-notification';
 import { sendNotificationViaEmail } from './send-notification-via-email';
 import { NotificationPayload } from './types';

@@ -1,6 +1,6 @@
 import { log } from 'next-axiom';
 
-import { NotificationMessage, prisma } from '../common/db';
+import { NotificationMessage, prisma } from '../common/db-client';
 
 export async function getAuthorByCommentId(commentId: string) {
   return await prisma.comment.findUnique({

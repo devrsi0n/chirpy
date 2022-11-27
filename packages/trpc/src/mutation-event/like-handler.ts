@@ -1,6 +1,6 @@
 import { NextApiResponse } from 'next';
 
-import { Like, prisma } from '../common/db';
+import { Like, prisma } from '../common/db-client';
 import { revalidateCommentWidget } from '../common/revalidate';
 import { deleteNotificationMessage, getAuthorByCommentId } from './utilities';
 

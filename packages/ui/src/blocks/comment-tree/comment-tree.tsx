@@ -1,12 +1,12 @@
-import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
+import { RTEValue } from '@chirpy-dev/types';
 import * as React from 'react';
-import { RouterOutputs } from 'src/utilities/trpc-client';
 
+import { CommentLeafType } from '../../types';
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';
 
 export type CommentProps = {
-  comment: RouterOutputs['comment']['forest'][number];
+  comment: CommentLeafType;
   depth: number;
 };
 

@@ -1,4 +1,3 @@
-import { Order_By } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
@@ -13,7 +12,7 @@ import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';
 import { UserMenu } from '../user-menu';
-import { useCommentOrderBy } from './use-comment-order-by';
+import { OrderBy, useCommentOrderBy } from './use-comment-order-by';
 
 export type CommentForestProps = {
   comments: RouterOutputs['comment']['forest'];
@@ -90,7 +89,7 @@ export function CommentForest({
 
 function sortComments(
   comments: RouterOutputs['comment']['forest'],
-  orderBy?: Order_By,
+  orderBy?: OrderBy,
 ): RouterOutputs['comment']['forest'] {
   if (!orderBy) {
     return comments;

@@ -1,4 +1,4 @@
-import { DeleteUserDocument } from '@chirpy-dev/graphql';
+import { prisma } from '@chirpy-dev/trpc';
 import { getAppURL } from '@chirpy-dev/utils';
 import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -6,7 +6,6 @@ import { log } from 'next-axiom';
 
 import { APIError } from '$/server/common/api-error';
 import { getAPIHandler } from '$/server/common/api-handler';
-import { mutate } from '$/server/common/gql';
 
 const handler = getAPIHandler();
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
@@ -19,13 +18,11 @@ handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   validateSignature(signature, payload);
 
   const { user_id: userId } = decodePayload(payload) as DecodedPayload;
-  await mutate(
-    DeleteUserDocument,
-    {
+  await prisma.user.delete({
+    where: {
       id: userId,
     },
-    'deleteUserByPk',
-  );
+  });
   const confirmationCode = getConfirmationCode();
   const url = `${getAppURL()}/auth/delete-confirmation?code=${confirmationCode}`;
   // Facebook requires the JSON to be non-quoted and formatted like this, so we need to create the JSON by hand:

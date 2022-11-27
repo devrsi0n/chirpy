@@ -1,4 +1,5 @@
-import { CommentLeafType, RTEValue } from '@chirpy-dev/types';
+import { Like, User } from '@chirpy-dev/trpc';
+import { RTEValue } from '@chirpy-dev/types';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
@@ -10,6 +11,7 @@ import {
   UseToggleALikeAction,
 } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
+import { CommentLeafType } from '../../types';
 import { CommentForest } from '../comment-forest';
 import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';
@@ -48,18 +50,18 @@ function CommentWidgetPreviewInternal(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {
         id: `${String(Math.random()).slice(2)}`,
-        content: reply,
-        parentId: commentId,
+        content: reply!,
+        parentId: commentId || null,
         pageId: PAGE_ID,
-        createdAt: new Date().toISOString(),
+        createdAt: new Date(),
         user: {
           id: data.id || '',
           name: data.name || '',
           image: data.image || '',
-        },
+        } as User,
         replies: [],
         likes: [],
-      };
+      } as unknown as CommentLeafType;
 
       if (!commentId) {
         // This is a root comment
@@ -97,7 +99,7 @@ function CommentWidgetPreviewInternal(
             comment.likes.push({
               id: likeId,
               userId: data.id || '',
-            });
+            } as unknown as Like);
           }
         }
         return [...prevData];
@@ -170,7 +172,7 @@ function deleteACommentById(
   const newComments: CommentLeafType[] = [];
   for (const comment of comments) {
     if (comment.id === id) {
-      comment.deletedAt = new Date().toISOString();
+      comment.deletedAt = new Date();
     }
 
     comment.replies = deleteACommentById(

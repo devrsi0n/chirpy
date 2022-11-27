@@ -1,4 +1,3 @@
-import { useDeleteProjectByPkMutation } from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { BaseButton, Button } from '../../components/button';
@@ -19,7 +18,7 @@ import { useToast } from '../../components/toast';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
-import { RouterOutputs } from '../../utilities/trpc-client';
+import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
@@ -42,12 +41,13 @@ export function ProjectCard({
     setDeletingProjectId('');
     setDeletingProject('');
   };
-  const [{ fetching: loading }, deleteProjectByPkMutation] =
-    useDeleteProjectByPkMutation();
+  const { mutateAsync: deleteProject, status } =
+    trpcClient.project.delete.useMutation();
+  const loading = status === 'loading';
   const { showToast } = useToast();
   const handleClickConfirmDelete = async () => {
     try {
-      await deleteProjectByPkMutation({
+      await deleteProject({
         id: deletingProjectId,
       });
       setDeletingProjectId('');

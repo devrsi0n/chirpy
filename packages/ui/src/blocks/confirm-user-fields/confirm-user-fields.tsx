@@ -1,4 +1,3 @@
-import { useUpdateUserFieldsMutation } from '@chirpy-dev/graphql';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -7,9 +6,10 @@ import { Card } from '../../components/card';
 import { IconCheck, IconLoader, IconSend } from '../../components/icons';
 import { TextField } from '../../components/text-field';
 import { useToast } from '../../components/toast';
-import { useCurrentUser } from '../../contexts/current-user-context';
+import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks/use-form';
 import { logger } from '../../utilities/logger';
+import { trpcClient } from '../../utilities/trpc-client';
 import { EMAIL_REGEXP } from '../../utilities/validator';
 import { sleep } from './utils';
 
@@ -38,7 +38,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoadingUser]);
-  const [{ fetching: loading }, updateUser] = useUpdateUserFieldsMutation();
+  const { mutateAsync: updateUser, status } =
+    trpcClient.user.updateProfile.useMutation();
+  const loading = status === 'loading';
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
   const { showToast } = useToast();
@@ -47,7 +49,6 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       if (!data.id || isSaved) return;
       try {
         await updateUser({
-          id: data.id,
           email: fields.email,
           name: fields.name,
           username: fields.username,

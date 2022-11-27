@@ -1,10 +1,8 @@
-import { CommentLeafType } from '@chirpy-dev/types';
 import { RTEValue } from '@chirpy-dev/types';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
-import { trpcClient } from 'src/utilities/trpc-client';
 
 import { Avatar } from '../../components/avatar';
 import { ActionButton, Button } from '../../components/button';
@@ -19,6 +17,7 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
+import { CommentLeafType } from '../../types';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
 import { Like, LikeAction } from '../like-action';

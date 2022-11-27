@@ -1,8 +1,7 @@
-import { prisma } from '@chirpy-dev/trpc';
+import { prisma, revalidateCommentWidgets } from '@chirpy-dev/trpc';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { badRequest } from '$/server/utilities/response';
-import { revalidateCommentWidgets } from '$/server/utilities/revalidate';
 
 export async function revalidateWidgets(
   req: NextApiRequest,

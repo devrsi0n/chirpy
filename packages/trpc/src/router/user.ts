@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { prisma } from '../common/db';
+import { prisma } from '../common/db-client';
 import { router, protectedProcedure } from '../trpc-server';
 
 export const userRouter = router({
@@ -31,6 +31,7 @@ export const userRouter = router({
     .input(
       z.object({
         name: z.string().nullish(),
+        username: z.string().nullish(),
         email: z.string().nullish(),
         bio: z.string().nullish(),
         website: z.string().nullish(),

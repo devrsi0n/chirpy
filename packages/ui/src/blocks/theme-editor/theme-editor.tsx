@@ -1,4 +1,3 @@
-import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
 import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';

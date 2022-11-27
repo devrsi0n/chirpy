@@ -2,7 +2,7 @@ import { type inferAsyncReturnType } from '@trpc/server';
 import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
 import { type Session } from 'next-auth';
 
-import { prisma } from './common/db';
+import { prisma } from './common/db-client';
 import { getServerAuthSession } from './common/get-server-auth-session';
 
 type CreateContextOptions = {

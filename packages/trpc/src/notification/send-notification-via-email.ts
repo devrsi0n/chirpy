@@ -1,5 +1,5 @@
 import { sendNotificationEmail } from '@chirpy-dev/emails';
-import { NotificationType_Enum } from '@chirpy-dev/graphql';
+import { NotificationType_Enum } from '@chirpy-dev/types';
 import { log } from 'next-axiom';
 
 import { NotificationPayload } from './types';

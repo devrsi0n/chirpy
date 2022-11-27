@@ -1,4 +1,4 @@
-import { CommentTimelineNode, RTEValue } from '@chirpy-dev/types';
+import { RTEValue } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -6,6 +6,8 @@ import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';
 import styles from './comment-linked-list.module.scss';
+
+export type CommentTimelineNode = RouterOutputs['comment']['timeline'];
 
 export type Comment = NonNullable<CommentTimelineNode>;
 
