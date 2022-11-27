@@ -1,3 +1,4 @@
+import { JSONContent } from '@tiptap/react';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
@@ -22,7 +23,7 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
             id: data.id,
             userId: data.userId,
             parentId: data.parentId,
-            content: data.content as string,
+            content: data.content as JSONContent,
           },
         });
         await refetch();

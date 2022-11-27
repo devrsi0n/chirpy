@@ -33,8 +33,8 @@ export type CommentCardProps = {
   commentId: string;
   author: Author;
   content: RTEValue;
-  createdAt: string | Date;
-  deletedAt?: string | Date | null;
+  createdAt: Date;
+  deletedAt?: Date | null;
   likes: Like[];
   depth: number;
   /**
@@ -134,7 +134,7 @@ export function CommentCard({
               as="time"
               title={createdAtDate.format('YYYY-MM-DD HH:mm:ss')}
               className="cursor-default !leading-none"
-              dateTime={createdAt}
+              dateTime={createdAtDate.toISOString()}
             >
               {createdAtDate.fromNow()}
             </Text>

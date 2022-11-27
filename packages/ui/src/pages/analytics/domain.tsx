@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { RouterOutputs } from 'src/utilities/trpc-client';
 
 import { AnalyticsBlock, SiteLayout, PageTitle } from '../../blocks';
+import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type AnalyticsByDomainPageProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;
@@ -19,7 +19,7 @@ export function AnalyticsByDomainPage({
             domain: project.domain,
             offset: '0',
             hasGoals: false,
-            insertedAt: String(project.createdAt),
+            insertedAt: project.createdAt.toISOString(),
             embedded: true,
             background: '',
             selfhosted: true,

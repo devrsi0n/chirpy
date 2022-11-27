@@ -1,10 +1,7 @@
 .github/ISSUE_TEMPLATE
 **/.next
 **/.cache
-**/generated
-services/hasura/metadata
 
 .github/PULL_REQUEST_TEMPLATE.md
 pnpm-lock.yaml
-**/schema.graphql
 **/email/templates/*.html

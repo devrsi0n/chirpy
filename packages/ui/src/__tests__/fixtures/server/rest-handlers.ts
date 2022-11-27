@@ -77,7 +77,6 @@ export const restHandlers = [
       ctx.status(200),
       ctx.json({
         expires: '2099-12-31T23:59:59.999Z',
-        hasuraToken: 'radom-token-skjadfhnkj',
         user: {
           id: 'user-id',
           name: 'session user name',

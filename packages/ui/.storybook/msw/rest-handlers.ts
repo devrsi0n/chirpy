@@ -13,7 +13,6 @@ export const sbRestHandlers = [
           editableProjectIds: ['2'],
         },
         expires: '2099-05-30T13:00:21.586Z',
-        hasuraToken: 'a-token',
       }),
     );
   }),

@@ -1,5 +1,5 @@
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
-import { ANALYTICS_DOMAIN, HASURA_TOKEN_MAX_AGE } from '@chirpy-dev/utils';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
 import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
@@ -17,11 +17,7 @@ export const App = trpcClient.withTRPC(function App({
 }: AppProps<PageProps>): JSX.Element {
   return (
     <PlausibleProvider domain={ANALYTICS_DOMAIN}>
-      <SessionProvider
-        {...(session && { session })}
-        // Refresh hasura token before it expires
-        refetchInterval={HASURA_TOKEN_MAX_AGE - 5 * 60}
-      >
+      <SessionProvider {...(session && { session })}>
         <NextThemesProvider
           attribute="class"
           // Widget and app themes are different

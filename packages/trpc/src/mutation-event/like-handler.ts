@@ -10,7 +10,7 @@ export type EventPayload = {
 };
 
 /**
- * Handle hasura like event, trigger revalidation of the comment page.
+ * Handle like INSERT & DELETE event, trigger revalidation of the comment page.
  * Only create a passive notification message (it's a low priority message),
  * we may send a web push only if user enables it manually.
  */

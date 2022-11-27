@@ -1,4 +1,5 @@
 import { RTEValue } from '@chirpy-dev/types';
+import { JSONContent } from '@chirpy-dev/utils';
 import { JsonArray } from 'type-fest';
 
 import { useToast } from '../../components/toast';
@@ -40,7 +41,7 @@ export function useCreateAComment({
         id: data.id,
         userId: data.userId,
         parentId: data.parentId,
-        content: data.content as string,
+        content: data.content as JSONContent,
       },
     });
     await refetchComments();

@@ -36,10 +36,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      project: {
-        ...project,
-        createdAt: project.createdAt.toISOString(),
-      },
+      project,
     },
     // Only need the createdAt data
     revalidate: 24 * 60 * 60,

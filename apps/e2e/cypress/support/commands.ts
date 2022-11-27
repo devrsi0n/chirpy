@@ -28,8 +28,6 @@ import '@testing-library/cypress/add-commands';
 import { waitGraphql } from '../fixtures/utils';
 
 Cypress.Commands.add('login', () => {
-  cy.intercept(Cypress.env('NEXT_PUBLIC_HASURA_HTTP_ORIGIN')).as('graphql');
-
   cy.visit('/auth/sign-in?allowAnonymous=true');
   cy.get('input[name=name]').type(Cypress.env('TEST_USER_ID'));
   cy.get('button[type=submit]').click();

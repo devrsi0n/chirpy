@@ -9,6 +9,9 @@ import { prisma } from '../common/db-client';
 import { authProviders } from './auth-providers';
 import { defaultCookies } from './default-cookies';
 
+// Fix build TS error
+import '../../typings/next-auth.d';
+
 export const nextAuthOptions: NextAuthOptions = {
   providers: authProviders,
   session: {
@@ -69,10 +72,10 @@ export const nextAuthOptions: NextAuthOptions = {
       const editableProjectIds = userData?.projects.map(({ id }) => id);
       // Extra properties should be added here, jwt only save a small set of data due to cookie size limitation
       session.user = {
-        name: session.user.name || userData.name || '',
-        username: session.user.username || userData.username || '',
-        email: session.user.email || userData.email || '',
-        image: session.user.image || userData.image || '',
+        name: session.user?.name || userData.name || '',
+        username: userData.username || '',
+        email: session.user?.email || userData.email || '',
+        image: session.user?.image || userData.image || '',
         id: userId,
         editableProjectIds,
       };

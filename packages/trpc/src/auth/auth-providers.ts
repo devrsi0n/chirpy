@@ -68,7 +68,6 @@ export const authProviders: Provider[] = [
         credentials?.name ===
         process.env.TEST_USER_ID?.replace(/-/g, '').slice(0, 23)
       ) {
-        // Sync with `services/hasura/seeds/default/1639909399233_user.sql`
         const user = await prisma.user.findUnique({
           where: {
             id: process.env.TEST_USER_ID,

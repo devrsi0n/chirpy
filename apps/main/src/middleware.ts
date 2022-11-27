@@ -1,4 +1,4 @@
-import { withAuth } from '@chirpy-dev/trpc';
+import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
 
 export default withAuth({
   callbacks: {
