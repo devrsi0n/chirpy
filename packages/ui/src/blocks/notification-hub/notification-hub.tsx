@@ -22,10 +22,10 @@ export function NotificationHub(): JSX.Element {
   });
 
   const { mutateAsync: readANotification } =
-    trpcClient.notification.readAMessage.useMutation();
+    trpcClient.notification.read.useMutation();
 
   const { mutateAsync: deleteNotificationMessage } =
-    trpcClient.notification.readAMessage.useMutation();
+    trpcClient.notification.delete.useMutation();
   const hasUnreadNotifications = data?.some((msg) => !msg.read);
   return (
     <div className="mr-4 flex flex-row items-center justify-center">

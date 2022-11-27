@@ -10,10 +10,21 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
   const { mutateAsync: deleteOneComment } =
     trpcClient.comment.delete.useMutation();
   const { showToast } = useToast();
+  const { mutate: createANotification } =
+    trpcClient.notification.create.useMutation();
   const deleteAComment = React.useCallback(
     async (commentId: string) => {
       try {
-        await deleteOneComment(commentId);
+        const data = await deleteOneComment(commentId);
+        createANotification({
+          op: 'DELETE',
+          comment: {
+            id: data.id,
+            userId: data.userId,
+            parentId: data.parentId,
+            content: data.content as string,
+          },
+        });
         await refetch();
         showToast({
           type: 'success',

@@ -18,7 +18,8 @@ export function useToggleALikeAction(
 
   const { showToast } = useToast();
   const handleSignIn = useSignInWindow();
-
+  const { mutate: createANotification } =
+    trpcClient.notification.create.useMutation();
   const toggleALikeAction = async (
     isLiked: boolean,
     likeId: string,
@@ -33,6 +34,13 @@ export function useToggleALikeAction(
       if (!data?.count) {
         return logger.error(`Can't delete the like, id ${likeId}`);
       }
+      createANotification({
+        op: 'DELETE',
+        like: {
+          id: likeId,
+          commentId: commentId,
+        },
+      });
       await refetch();
       return;
     }

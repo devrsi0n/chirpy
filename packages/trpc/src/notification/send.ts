@@ -1,20 +1,21 @@
-import { NotificationSubscriptionsByUserIdDocument } from '@chirpy-dev/graphql';
 import { log } from 'next-axiom';
 
-import { query } from '$/server/common/gql';
-
+import { prisma } from '../common/db';
 import { pushWebNotification } from './push-web-notification';
 import { sendNotificationViaEmail } from './send-notification-via-email';
 import { NotificationPayload } from './types';
 
 export async function sendNotification(payload: NotificationPayload) {
-  const notificationSubscriptions = await query(
-    NotificationSubscriptionsByUserIdDocument,
-    {
-      userId: payload.recipient.id,
-    },
-    'notificationSubscriptions',
-  );
+  const notificationSubscriptions =
+    await prisma.notificationSubscription.findMany({
+      where: {
+        userId: payload.recipient.id,
+      },
+      select: {
+        id: true,
+        subscription: true,
+      },
+    });
 
   if (
     !Array.isArray(notificationSubscriptions) ||

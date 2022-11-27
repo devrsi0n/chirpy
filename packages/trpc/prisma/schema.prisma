@@ -79,9 +79,10 @@ model NotificationMessage {
   type             String
   recipientId      String
   url              String           @db.Text
-  read             Boolean
+  read             Boolean          @default(false)
   deletedAt        DateTime?
   triggeredById    String
+  // TODO: Replace it with commentId & likeId
   contextId        String
   content          String?          @db.Text
   recipient        User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)

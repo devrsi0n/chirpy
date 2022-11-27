@@ -32,3 +32,5 @@ export function getTextFromRteValue(value: RTEValue): string {
   }
   return getTextFromRteDoc(value);
 }
+
+export { type JSONContent } from '@tiptap/react';

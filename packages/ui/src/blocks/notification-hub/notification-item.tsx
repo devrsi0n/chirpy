@@ -1,4 +1,3 @@
-import { RouterOutputs } from '@chirpy-dev/trpc';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -15,6 +14,7 @@ import { Menu } from '../../components/menu';
 import { Text, TextProps } from '../../components/text';
 import { useIsWidget } from '../../hooks/use-is-widget';
 import { cpDayjs } from '../../utilities/date';
+import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type INotificationItemProps = {
   index: number;

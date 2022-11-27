@@ -1,7 +1,9 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { prisma } from '../common/db';
 import { router, publicProcedure, protectedProcedure } from '../trpc-server';
+import { rteContentValidator } from './validator';
 
 export const commentRouter = router({
   forest: publicProcedure
@@ -95,7 +97,7 @@ export const commentRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        content: z.any(),
+        content: rteContentValidator,
         pageId: z.string(),
         parentId: z.string().optional(),
       }),
@@ -109,21 +111,45 @@ export const commentRouter = router({
           userId: ctx.session.user.id,
         },
       });
+
       return data;
     }),
   delete: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
-      // Soft delete
-      const data = await prisma.comment.updateMany({
+      const comments = await prisma.comment.findMany({
         where: {
           id: input,
-          userId: ctx.session.user.id,
+          page: {
+            project: {
+              id: {
+                // Only site owner can delete comments, currently
+                in: ctx.session.user.editableProjectIds,
+              },
+            },
+          },
+        },
+        select: {
+          id: true,
+          content: true,
+          userId: true,
+          parentId: true,
+        },
+      });
+      if (comments.length === 0) {
+        // Stop malicious user from deleting other users comments
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      // Soft delete
+      await prisma.comment.update({
+        where: {
+          id: input,
         },
         data: {
           deletedAt: new Date(),
         },
       });
-      return data;
+
+      return comments[0];
     }),
 });

@@ -441,6 +441,7 @@ importers:
     specifiers:
       '@chirpy-dev/emails': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/types': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@next-auth/prisma-adapter': 1.0.5
       '@prisma/client': 4.6.1
@@ -465,6 +466,7 @@ importers:
     dependencies:
       '@chirpy-dev/emails': link:../emails
       '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@chirpy-dev/types': link:../types
       '@chirpy-dev/utils': link:../utils
       '@next-auth/prisma-adapter': 1.0.5_o53gfpk3vz2btjrokqfjjwwn3m
       '@prisma/client': 4.6.1_prisma@4.6.1
@@ -7357,7 +7359,7 @@ packages:
       '@trpc/client': 10.2.0_@trpc+server@10.2.0
       '@trpc/react-query': 10.2.0_xdgyyx5u2iaaonjivvzelfawba
       '@trpc/server': 10.2.0
-      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
+      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
@@ -18077,7 +18079,7 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
-      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
+      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18100,7 +18102,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.0.5_biqbaboplfbrettd7655fr4n2y
+      next: 13.0.5_vgii64pd2ccbnbx2v3ro5gbin4
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false

@@ -1,4 +1,4 @@
-import { NotificationType_Enum } from '@chirpy-dev/graphql';
+import { NotificationType_Enum } from '@chirpy-dev/types';
 
 export type NotificationPayload = {
   recipient: {

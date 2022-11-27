@@ -12,7 +12,7 @@ export type RegisterNotificationSubscription = () => Promise<void>;
 
 export function useRegisterNotificationSubscription(): RegisterNotificationSubscription {
   const { mutateAsync: registerDevice } =
-    trpcClient.notification.registerSubscriptionDevice.useMutation();
+    trpcClient.notification.register.useMutation();
 
   // It's safe to register the service worker multiply times
   return React.useCallback(async () => {
