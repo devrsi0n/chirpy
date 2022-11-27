@@ -18,7 +18,6 @@ export const config = {
     '/analytics/:path*',
     '/profile/:path*',
     '/theme/:path*',
-    '/api/mutation-event',
-    '/api/revalidate/widgets',
+    '/api/content-classifier/toxic-text',
   ],
 };

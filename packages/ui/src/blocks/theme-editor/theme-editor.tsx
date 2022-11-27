@@ -20,7 +20,7 @@ import {
 } from '../comment-widget-preview';
 import { ColorPicker, ColorSeriesPicker } from './color-picker';
 import { COLOR_OPTIONS, useActiveColorMode, useColors } from './colors';
-import { hslToHex, revalidateProjectPages } from './utilities';
+import { hslToHex, useRevalidateProjectPages } from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
@@ -34,6 +34,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { mutateAsync: updateTheme } =
     trpcClient.project.updateTheme.useMutation();
   const { showToast } = useToast();
+  const revalidateProjectPages = useRevalidateProjectPages();
   const saveTheme = debounce(
     React.useCallback(
       async (newTheme: Theme) => {
