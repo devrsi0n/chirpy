@@ -27,9 +27,6 @@
     "react-dom": "18.2.0",
     "turbo": "1.6.3"
   },
-  "engines": {
-    "node": "16.x"
-  },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
