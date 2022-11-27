@@ -15,15 +15,15 @@
       "cache": false
     },
     "@chirpy-dev/main-app#build": {
-      "dependsOn": [
-        "^build",
-        "$NEXT_PUBLIC_APP_URL",
-        "$DATABASE_URL",
-        "$NEXTAUTH_SECRET",
-        "$EMAIL_API_KEY",
-        "$NEXT_PUBLIC_VAPID"
-      ],
-      "outputs": [".next/**"]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"],
+      "env": [
+        "NEXT_PUBLIC_APP_URL",
+        "DATABASE_URL",
+        "NEXTAUTH_SECRET",
+        "EMAIL_API_KEY",
+        "NEXT_PUBLIC_VAPID"
+      ]
     },
     "@chirpy-dev/service-worker#build": {
       "cache": false
@@ -41,5 +41,6 @@
       "cache": false
     }
   },
-  "globalDependencies": ["$GITHUB_TOKEN", "tsconfig.json", ".env.*"]
+  "globalDependencies": ["tsconfig.json", ".env.*"],
+  "globalEnv": ["GITHUB_TOKEN"]
 }
