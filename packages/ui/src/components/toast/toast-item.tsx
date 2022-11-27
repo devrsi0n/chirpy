@@ -33,7 +33,7 @@ export function ToastItem({
     () => {
       onDismiss(id);
     },
-    !persistent ? TOAST_DURATION : null,
+    persistent ? null : TOAST_DURATION,
   );
 
   const typeIcon = type ? typeIconMap[type] : null;

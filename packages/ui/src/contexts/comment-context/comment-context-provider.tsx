@@ -32,7 +32,6 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
     () => ({
       projectId: props.projectId,
       pageId: props.pageId,
-      refetchComments: props.refetchComment,
       createAComment,
       deleteAComment,
       toggleALikeAction,

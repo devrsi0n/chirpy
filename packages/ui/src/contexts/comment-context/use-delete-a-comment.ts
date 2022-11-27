@@ -39,7 +39,7 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
         });
       }
     },
-    [showToast, deleteOneComment],
+    [showToast, deleteOneComment, createANotification],
   );
   return deleteAComment;
 }

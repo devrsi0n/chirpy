@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { translateHslColor } from '../../contexts/theme-context/utilities';
 import { trpcClient } from '../../utilities/trpc-client';
 
@@ -7,12 +9,15 @@ export function useRevalidateProjectPages() {
   const { mutateAsync: revalidateTheme } =
     trpcClient.revalidate.theme.useMutation();
 
-  return async (projectId: string, domain: string) => {
-    await Promise.all([
-      revalidateWidget({ projectId }),
-      revalidateTheme({ domain }),
-    ]);
-  };
+  return React.useCallback(
+    async (projectId: string, domain: string) => {
+      await Promise.all([
+        revalidateWidget({ projectId }),
+        revalidateTheme({ domain }),
+      ]);
+    },
+    [revalidateWidget, revalidateTheme],
+  );
 }
 
 export function hslToHex(hslColor: string) {

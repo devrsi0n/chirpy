@@ -1,5 +1,3 @@
-import { getPublicEnvVar } from '@chirpy-dev/utils';
-
 import { logger } from '../../utilities/logger';
 
 const SERVICE_WORKER_ERROR = 'Service worker not supported';

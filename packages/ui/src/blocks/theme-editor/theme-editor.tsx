@@ -63,6 +63,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         setWidgetTheme,
         showToast,
         updateTheme,
+        revalidateProjectPages,
       ],
     ),
     1500,

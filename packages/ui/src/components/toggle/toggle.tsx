@@ -54,11 +54,11 @@ export function Toggle({
         onChange={disabled ? noop : onChange}
         onMouseDown={handleMoudDown}
         className={clsx(
-          !disabled
-            ? checked
-              ? `bg-primary-900 hover:bg-primary-1000`
-              : `bg-gray-400 hover:bg-gray-500`
-            : 'bg-gray-400',
+          disabled
+            ? 'bg-gray-400'
+            : checked
+            ? `bg-primary-900 hover:bg-primary-1000`
+            : `bg-gray-400 hover:bg-gray-500`,
           disabledStyle,
           `relative inline-flex h-5 w-9 flex-shrink-0 rounded-full border-2 border-transparent transition duration-200 ease-in-out focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-500`,
         )}

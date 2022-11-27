@@ -97,7 +97,7 @@ export function Dialog({
                     `flex flex-row space-x-4 shadow-xl`,
                     cardBg,
                     sizeStyles.content,
-                    !footer ? `rounded-xl` : `rounded-t-xl`,
+                    footer ? `rounded-t-xl` : `rounded-xl`,
                     styles.content,
                   )}
                 >

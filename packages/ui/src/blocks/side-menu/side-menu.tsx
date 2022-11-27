@@ -80,7 +80,7 @@ export function SideMenu({
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
-      custom={!isSSRMode ? document.body.clientHeight : undefined}
+      custom={isSSRMode ? undefined : document.body.clientHeight}
       className={clsx(
         'top-0 bottom-0 isolate h-[100vh] w-[250px]',
         containerStyles,

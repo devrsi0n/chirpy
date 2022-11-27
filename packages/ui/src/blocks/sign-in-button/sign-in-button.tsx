@@ -26,7 +26,7 @@ export function SignInButton({
     <Button
       color="primary"
       variant={variant}
-      onClick={() => (!inPageNav ? handleSignIn() : handleSessionAndSignIn())}
+      onClick={() => (inPageNav ? handleSessionAndSignIn() : handleSignIn())}
       {...restProps}
     >
       <span className="inline-flex flex-row items-center space-x-1">
