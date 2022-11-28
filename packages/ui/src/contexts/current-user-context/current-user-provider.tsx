@@ -20,7 +20,7 @@ export function CurrentUserProvider({
   const sessionIsLoading = sessionStatus === 'loading';
   const {
     data,
-    status: queryStatus,
+    isFetching,
     refetch: refetchUser,
   } = trpcClient.user.me.useQuery(undefined, {
     enabled: !!session?.user.id,
@@ -41,7 +41,7 @@ export function CurrentUserProvider({
       : {};
     return {
       data: _data,
-      loading: sessionIsLoading || queryStatus == 'loading',
+      loading: sessionIsLoading || isFetching,
       isSignIn: !!_data.id,
       refetchUser: refetchUser,
     };
@@ -50,7 +50,7 @@ export function CurrentUserProvider({
     session?.user,
     data,
     sessionIsLoading,
-    queryStatus,
+    isFetching,
     refetchUser,
   ]);
 

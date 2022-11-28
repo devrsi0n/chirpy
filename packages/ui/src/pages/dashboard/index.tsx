@@ -25,18 +25,12 @@ type FormFields = {
 };
 
 export function Dashboard(): JSX.Element {
-  const {
-    data: { id },
-    loading: userLoading,
-  } = useCurrentUser();
-
+  const { loading: userIsLoading } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,
-    status,
-  } = trpcClient.project.all.useQuery(undefined, {
-    enabled: !!id,
-  });
+    isFetching,
+  } = trpcClient.project.all.useQuery();
 
   const { mutateAsync: createAProject } =
     trpcClient.project.create.useMutation();
@@ -107,7 +101,7 @@ export function Dashboard(): JSX.Element {
             </ul>
             <div className="flex-1" />
           </div>
-        ) : status === 'loading' || userLoading ? (
+        ) : isFetching || userIsLoading ? (
           <Spinner />
         ) : (
           <div className="py-6">

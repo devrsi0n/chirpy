@@ -12,13 +12,13 @@ import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
-  const { data: userData } = useCurrentUser();
+  const { isSignIn } = useCurrentUser();
   const {
     data,
     refetch: refechMessages,
-    status,
+    isFetching,
   } = trpcClient.notification.messages.useQuery(undefined, {
-    enabled: !!userData.id,
+    enabled: !!isSignIn,
   });
 
   const { mutateAsync: readANotification } =
@@ -44,7 +44,7 @@ export function NotificationHub(): JSX.Element {
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>
-          {status === 'loading' && (
+          {isFetching && (
             <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
           )}
           {data && (data?.length || 0) > 0 ? (

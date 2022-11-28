@@ -5,7 +5,7 @@ import { CommentForest, WidgetLayout, PoweredBy } from '../../blocks';
 import { Text } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { trpcClient } from '../../utilities/trpc-client';
-import { useIntervalRefrsh } from './use-interval-refrsh';
+import { useRefetchInterval } from './use-refetch-interval';
 
 export type PageCommentProps = CommonWidgetProps & {
   pageURL: string;
@@ -17,10 +17,15 @@ export type PageCommentProps = CommonWidgetProps & {
  * @param props
  */
 export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
-  const { data: comments, refetch } = trpcClient.comment.forest.useQuery({
-    url: props.pageURL,
-  });
-  useIntervalRefrsh(refetch);
+  const refetchInterval = useRefetchInterval();
+  const { data: comments, refetch } = trpcClient.comment.forest.useQuery(
+    {
+      url: props.pageURL,
+    },
+    {
+      refetchInterval,
+    },
+  );
 
   if (isStaticError(props) || !comments) {
     return (

@@ -1,4 +1,5 @@
 import { CommonWidgetProps } from '@chirpy-dev/types';
+import * as React from 'react';
 
 import {
   CommentTimeline,
@@ -9,7 +10,7 @@ import {
 import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { trpcClient } from '../../utilities/trpc-client';
-import { useIntervalRefrsh } from './use-interval-refrsh';
+import { useRefetchInterval } from './use-refetch-interval';
 
 export type CommentTimelineWidgetProps = CommonWidgetProps & {
   commentId: string;
@@ -20,10 +21,15 @@ export type CommentTimelineWidgetProps = CommonWidgetProps & {
 export function CommentTimelineWidget(
   props: CommentTimelineWidgetProps,
 ): JSX.Element {
-  const { data: comment, refetch } = trpcClient.comment.timeline.useQuery({
-    id: props.commentId,
-  });
-  useIntervalRefrsh(refetch);
+  const refetchInterval = useRefetchInterval();
+  const { data: comment, refetch } = trpcClient.comment.timeline.useQuery(
+    {
+      id: props.commentId,
+    },
+    {
+      refetchInterval,
+    },
+  );
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">

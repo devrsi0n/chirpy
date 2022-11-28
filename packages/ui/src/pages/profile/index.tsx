@@ -35,7 +35,7 @@ export function Profile(): JSX.Element {
   const { isSignIn, refetchUser } = useCurrentUser();
   const {
     data,
-    status,
+    isFetching,
     refetch: refetchProfile,
   } = trpcClient.user.myProfile.useQuery();
   const {
@@ -49,7 +49,6 @@ export function Profile(): JSX.Element {
     emailVerified,
     type,
   } = data || {};
-  const fetching = status === 'loading';
   const [isEditMode, setIsEditMode] = React.useState(false);
   const { mutateAsync: updateProfile } =
     trpcClient.user.updateProfile.useMutation();
@@ -105,7 +104,7 @@ export function Profile(): JSX.Element {
     setIsEditMode(false);
   };
 
-  if (!isSignIn && fetching) {
+  if (!isSignIn && isFetching) {
     return (
       <ProfileContainer>
         <Spinner className="mt-20 justify-center" />
