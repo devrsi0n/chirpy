@@ -17,8 +17,8 @@ export function NotificationHub(): JSX.Element {
     data,
     refetch: refechMessages,
     status,
-  } = trpcClient.notification.messages.useQuery({
-    userId: userData.id || '-1',
+  } = trpcClient.notification.messages.useQuery(undefined, {
+    enabled: !!userData.id,
   });
 
   const { mutateAsync: readANotification } =

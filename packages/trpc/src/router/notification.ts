@@ -7,33 +7,31 @@ import { router, protectedProcedure } from '../trpc-server';
 import { rteContentValidator } from './validator';
 
 export const notificationRouter = router({
-  messages: protectedProcedure
-    .input(z.object({ userId: z.string() }))
-    .query(async ({ input }) => {
-      const messages = await prisma.notificationMessage.findMany({
-        where: {
-          recipientId: input.userId,
-        },
-        select: {
-          id: true,
-          type: true,
-          content: true,
-          createdAt: true,
-          read: true,
-          url: true,
-          triggeredBy: {
-            select: {
-              id: true,
-              name: true,
-              username: true,
-              image: true,
-              email: true,
-            },
+  messages: protectedProcedure.query(async ({ ctx }) => {
+    const messages = await prisma.notificationMessage.findMany({
+      where: {
+        recipientId: ctx.session.user.id,
+      },
+      select: {
+        id: true,
+        type: true,
+        content: true,
+        createdAt: true,
+        read: true,
+        url: true,
+        triggeredBy: {
+          select: {
+            id: true,
+            name: true,
+            username: true,
+            image: true,
+            email: true,
           },
         },
-      });
-      return messages;
-    }),
+      },
+    });
+    return messages;
+  }),
   read: protectedProcedure
     .input(z.object({ messageId: z.string() }))
     .mutation(async ({ input }) => {

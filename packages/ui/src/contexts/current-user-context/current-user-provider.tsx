@@ -22,7 +22,9 @@ export function CurrentUserProvider({
     data,
     status: queryStatus,
     refetch: refetchUser,
-  } = trpcClient.user.me.useQuery();
+  } = trpcClient.user.me.useQuery(undefined, {
+    enabled: !!session?.user.id,
+  });
   const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
     if (!hasMounted) {

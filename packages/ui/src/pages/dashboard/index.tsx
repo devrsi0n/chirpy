@@ -34,8 +34,8 @@ export function Dashboard(): JSX.Element {
     data: projects,
     refetch: fetchUserProjects,
     status,
-  } = trpcClient.project.all.useQuery({
-    userId: id || '-1',
+  } = trpcClient.project.all.useQuery(undefined, {
+    enabled: !!id,
   });
 
   const { mutateAsync: createAProject } =
