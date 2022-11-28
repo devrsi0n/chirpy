@@ -5,7 +5,6 @@ import * as React from 'react';
 import { BaseButton, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
-import { useForceUpdate, useInterval } from '../../hooks';
 import { getCommentCount } from '../../utilities/get-comment-count';
 import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentTree } from '../comment-tree';
@@ -27,11 +26,6 @@ export function CommentForest({
   const commentCount = getCommentCount(comments);
   const [orderBy, setOrderBy] = useCommentOrderBy();
   const orderedComments = sortComments(comments, orderBy);
-  const forceUpdate = useForceUpdate();
-  useInterval(() => {
-    // Refresh time tags (xxx minutes ago)
-    forceUpdate();
-  }, 10_000);
   return (
     <div className="space-y-4">
       <div className="flex flex-row items-center justify-between">
@@ -117,6 +111,6 @@ function formatTitle(count: number): string {
   return `${count} comments`;
 }
 
-function dateToNumber(date: string | Date): number {
-  return new Date(date).getTime();
+function dateToNumber(date: Date): number {
+  return date.getTime();
 }

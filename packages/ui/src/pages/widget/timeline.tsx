@@ -9,6 +9,7 @@ import {
 import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { trpcClient } from '../../utilities/trpc-client';
+import { useIntervalRefrsh } from './use-interval-refrsh';
 
 export type CommentTimelineWidgetProps = CommonWidgetProps & {
   commentId: string;
@@ -22,6 +23,7 @@ export function CommentTimelineWidget(
   const { data: comment, refetch } = trpcClient.comment.timeline.useQuery({
     id: props.commentId,
   });
+  useIntervalRefrsh(refetch);
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
@@ -46,7 +48,7 @@ export function CommentTimelineWidget(
           </Heading>
           <UserMenu variant="Widget" />
         </div>
-        {/* @ts-ignore */}
+
         {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
         <PoweredBy />
       </CommentContextProvider>

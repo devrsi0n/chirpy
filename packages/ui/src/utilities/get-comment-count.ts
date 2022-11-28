@@ -10,7 +10,7 @@ export function getCommentCount(
         getCommentCount(
           comment.replies as unknown as RouterOutputs['comment']['forest'],
         ) + 1;
-    } else {
+    } else if (!comment.deletedAt) {
       counter++;
     }
   }

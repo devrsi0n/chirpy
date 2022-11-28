@@ -2,7 +2,7 @@ import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
 
 export default withAuth({
   callbacks: {
-    authorized: ({ token, req }) => {
+    authorized: ({ token }) => {
       // Anonymous user doesn't have an email address
       return !!(token?.email || token?.name);
     },

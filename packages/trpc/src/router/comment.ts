@@ -3,7 +3,8 @@ import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 import { router, publicProcedure, protectedProcedure } from '../trpc-server';
-import { rteContentValidator } from './validator';
+import { COMMON_COMMENT_SELECTOR } from './utils/selector';
+import { rteContentValidator } from './utils/validator';
 
 export const commentRouter = router({
   forest: publicProcedure
@@ -17,21 +18,16 @@ export const commentRouter = router({
           parentId: null,
         },
         include: {
-          user: true,
-          likes: true,
+          ...COMMON_COMMENT_SELECTOR,
           replies: {
             include: {
-              user: true,
-              likes: true,
+              ...COMMON_COMMENT_SELECTOR,
               replies: {
                 include: {
-                  user: true,
-                  likes: true,
+                  ...COMMON_COMMENT_SELECTOR,
                   replies: {
                     include: {
-                      user: true,
-                      replies: true,
-                      likes: true,
+                      ...COMMON_COMMENT_SELECTOR,
                     },
                   },
                 },
@@ -50,21 +46,16 @@ export const commentRouter = router({
           id: input.id,
         },
         include: {
-          user: true,
-          likes: true,
+          ...COMMON_COMMENT_SELECTOR,
           replies: {
             include: {
-              user: true,
-              likes: true,
+              ...COMMON_COMMENT_SELECTOR,
               replies: {
                 include: {
-                  user: true,
-                  likes: true,
+                  ...COMMON_COMMENT_SELECTOR,
                   replies: {
                     include: {
-                      user: true,
-                      replies: true,
-                      likes: true,
+                      ...COMMON_COMMENT_SELECTOR,
                     },
                   },
                 },
@@ -73,17 +64,14 @@ export const commentRouter = router({
           },
           parent: {
             include: {
-              user: true,
-              likes: true,
+              ...COMMON_COMMENT_SELECTOR,
               parent: {
                 include: {
-                  user: true,
-                  likes: true,
+                  ...COMMON_COMMENT_SELECTOR,
                   parent: {
                     include: {
-                      user: true,
+                      ...COMMON_COMMENT_SELECTOR,
                       parent: true,
-                      likes: true,
                     },
                   },
                 },

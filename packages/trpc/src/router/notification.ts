@@ -4,7 +4,7 @@ import { prisma } from '../common/db-client';
 import { handleCommentEvent } from '../mutation-event/comment-handler';
 import { handleLikeEvent } from '../mutation-event/like-handler';
 import { router, protectedProcedure } from '../trpc-server';
-import { rteContentValidator } from './validator';
+import { rteContentValidator } from './utils/validator';
 
 export const notificationRouter = router({
   messages: protectedProcedure.query(async ({ ctx }) => {

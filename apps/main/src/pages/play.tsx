@@ -16,7 +16,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
       props: {},
     };
   }
-  const beforeDate = cpDayjs().subtract(1, 'day').toISOString();
+  const beforeDate = cpDayjs().subtract(1, 'day').toDate();
 
   const result = await prisma.comment.deleteMany({
     where: {
