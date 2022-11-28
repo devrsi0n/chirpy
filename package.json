@@ -3,6 +3,7 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "build": "trubo run build",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
     "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i",

@@ -12,7 +12,10 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Set up node
         uses: actions/setup-node@v1
@@ -42,8 +45,7 @@ jobs:
         run: pnpm install
 
       - name: Build next.js app
-        run: ./node_modules/.bin/next build
-        working-directory: ./apps/main
+        run: pnpm build
         env:
           ANALYZE: true
           RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
@@ -52,3 +54,4 @@ jobs:
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

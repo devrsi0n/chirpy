@@ -12,7 +12,7 @@
     "eslint-plugin-jest": "27.1.6",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-storybook": "0.6.7",
-    "eslint-plugin-unicorn": "45.0.0",
+    "eslint-plugin-unicorn": "45.0.1",
     "next": "13.0.5",
     "prettier": "2.8.0",
     "react": "18.2.0",
