@@ -21,39 +21,41 @@ export async function handleLikeEvent(
 ): Promise<void> {
   const promises = [];
   if (event.op === 'INSERT') {
-    const like = event.like;
+    const { like } = event;
     const recipientData = await getRecipientByLikeId(like.id);
-    if (recipientData) {
-      const recipient = recipientData.comment.user;
-      const triggerById = like.userId;
-      const { url } = recipientData.comment.page;
-      promises.push(
-        prisma.notificationMessage.create({
-          data: {
-            recipientId: recipient.id,
-            type: 'ReceivedALike',
-            triggeredById: triggerById,
-            url,
-            contextId: like.id,
-          },
-        }),
-        revalidateCommentWidget(url, res),
-      );
+    if (!recipientData) {
+      throw new Error(`Can't find recipient for like ${like.id}`);
     }
+    const recipient = recipientData.comment.user;
+    const triggerById = like.userId;
+    const { url } = recipientData.comment.page;
+    promises.push(
+      prisma.notificationMessage.create({
+        data: {
+          recipientId: recipient.id,
+          type: 'ReceivedALike',
+          triggeredById: triggerById,
+          url,
+          contextId: like.id,
+        },
+      }),
+      revalidateCommentWidget(url, res),
+    );
   } else if (event.op === 'DELETE') {
     const likeId = event.like.id;
     const authorData = await getAuthorByCommentId(event.like.commentId);
-    if (authorData) {
-      promises.push(
-        deleteNotificationMessage({
-          recipientId: authorData.user.id,
-          triggeredById: authUserId,
-          type: 'ReceivedALike',
-          contextId: likeId,
-        }),
-        revalidateCommentWidget(authorData.page.url, res),
-      );
+    if (!authorData) {
+      throw new Error(`Can't find author for comment ${event.like.commentId}`);
     }
+    promises.push(
+      deleteNotificationMessage({
+        recipientId: authorData.user.id,
+        triggeredById: authUserId,
+        type: 'ReceivedALike',
+        contextId: likeId,
+      }),
+      revalidateCommentWidget(authorData.page.url, res),
+    );
   }
   await Promise.allSettled(promises);
   return;

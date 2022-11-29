@@ -12,6 +12,14 @@ export const notificationRouter = router({
       where: {
         recipientId: ctx.session.user.id,
       },
+      orderBy: [
+        {
+          read: 'asc',
+        },
+        {
+          createdAt: 'desc',
+        },
+      ],
       select: {
         id: true,
         type: true,
@@ -90,7 +98,7 @@ export const notificationRouter = router({
         select: {},
       });
     }),
-  create: protectedProcedure
+  mutate: protectedProcedure
     .input(
       z.object({
         op: z.enum(['INSERT', 'DELETE']),

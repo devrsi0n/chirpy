@@ -22,8 +22,8 @@ export function useCreateAComment({
   const { mutateAsync: insertOneComment } =
     trpcClient.comment.create.useMutation();
   const { showToast } = useToast();
-  const { mutate: createANotification } =
-    trpcClient.notification.create.useMutation();
+  const { mutate: mutateANotification } =
+    trpcClient.notification.mutate.useMutation();
   const createAComment = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
       logger.error('Navigate to sign-in page');
@@ -35,7 +35,7 @@ export function useCreateAComment({
       pageId,
     });
     // Move it to server background process once we have a new arch
-    createANotification({
+    mutateANotification({
       op: 'INSERT',
       comment: {
         id: data.id,

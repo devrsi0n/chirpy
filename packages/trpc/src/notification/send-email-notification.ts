@@ -4,7 +4,7 @@ import { log } from 'next-axiom';
 
 import { NotificationPayload } from './types';
 
-export async function sendNotificationViaEmail(payload: NotificationPayload) {
+export async function sendEmailNotification(payload: NotificationPayload) {
   if (!payload.recipient.email) {
     log.warn(`No recipient email`, payload);
     return;

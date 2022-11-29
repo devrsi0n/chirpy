@@ -26,13 +26,13 @@ export async function getAuthorByCommentId(commentId: string) {
   });
 }
 
-export type CreateotificationMessageVairables = Pick<
+export type CreateNotificationMessageVairables = Pick<
   NotificationMessage,
   'recipientId' | 'triggeredById' | 'type' | 'contextId' | 'url' | 'content'
 >;
 
 export async function createOneNotificationMessage(
-  variables: CreateotificationMessageVairables,
+  variables: CreateNotificationMessageVairables,
 ) {
   return await prisma.notificationMessage.create({
     data: variables,

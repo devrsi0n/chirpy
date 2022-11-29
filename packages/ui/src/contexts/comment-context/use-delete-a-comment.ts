@@ -11,13 +11,13 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
   const { mutateAsync: deleteOneComment } =
     trpcClient.comment.delete.useMutation();
   const { showToast } = useToast();
-  const { mutate: createANotification } =
-    trpcClient.notification.create.useMutation();
+  const { mutate: mutateANotification } =
+    trpcClient.notification.mutate.useMutation();
   const deleteAComment = React.useCallback(
     async (commentId: string) => {
       try {
         const data = await deleteOneComment(commentId);
-        createANotification({
+        mutateANotification({
           op: 'DELETE',
           comment: {
             id: data.id,
@@ -39,7 +39,7 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
         });
       }
     },
-    [showToast, deleteOneComment, createANotification],
+    [showToast, deleteOneComment, mutateANotification],
   );
   return deleteAComment;
 }

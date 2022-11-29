@@ -1,4 +1,5 @@
 import { initTRPC, TRPCError } from '@trpc/server';
+import { log } from 'next-axiom';
 import superjson from 'superjson';
 
 import { type Context } from './context';
@@ -12,7 +13,19 @@ const t = initTRPC.context<Context>().create({
 
 export const router = t.router;
 
-export const publicProcedure = t.procedure;
+const logger = t.middleware(async ({ path, type, next }) => {
+  const start = Date.now();
+  const result = await next();
+  const durationMs = Date.now() - start;
+  result.ok
+    ? log.info('[tRPC Server] request ok:', { path, type, durationMs })
+    : log.error('[tRPC Server] request failed', { path, type, durationMs });
+  return result;
+});
+
+const loggedProcedure = t.procedure.use(logger);
+
+export const publicProcedure = loggedProcedure;
 
 /**
  * Reusable middleware to ensure
@@ -30,4 +43,4 @@ const isAuthed = t.middleware(({ ctx, next }) => {
   });
 });
 
-export const protectedProcedure = t.procedure.use(isAuthed);
+export const protectedProcedure = loggedProcedure.use(isAuthed);

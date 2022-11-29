@@ -18,8 +18,8 @@ export function useToggleALikeAction(
 
   const { showToast } = useToast();
   const handleSignIn = useSignInWindow();
-  const { mutate: createANotification } =
-    trpcClient.notification.create.useMutation();
+  const { mutate: mutateANotification } =
+    trpcClient.notification.mutate.useMutation();
   const toggleALikeAction = async (
     isLiked: boolean,
     likeId: string,
@@ -34,7 +34,7 @@ export function useToggleALikeAction(
       if (!data?.count) {
         return logger.error(`Can't delete the like, id ${likeId}`);
       }
-      createANotification({
+      mutateANotification({
         op: 'DELETE',
         like: {
           id: likeId,
@@ -55,6 +55,13 @@ export function useToggleALikeAction(
         });
         logger.error(`Can't create a like action`);
       }
+      mutateANotification({
+        op: 'INSERT',
+        like: {
+          id: data.id,
+          commentId: commentId,
+        },
+      });
       await refetch();
     } catch (error) {
       showToast({

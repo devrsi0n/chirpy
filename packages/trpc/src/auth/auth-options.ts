@@ -81,6 +81,7 @@ export const nextAuthOptions: NextAuthOptions = {
       };
       return session;
     },
+    // Link multiple accounts https://github.com/nextauthjs/next-auth/issues/296
     async signIn({ account, profile }) {
       // Restrict access to people with verified accounts
       if (
