@@ -9,7 +9,8 @@ import {
 } from './utilities';
 
 export type RegisterNotificationSubscription = () => Promise<void>;
-
+const NOTIFICATION_DID_REGISTER_KEY =
+  'chirpy.notification-subscription.did-register';
 export function useRegisterNotificationSubscription(): RegisterNotificationSubscription {
   const { mutateAsync: registerDevice } =
     trpcClient.notification.register.useMutation();
@@ -25,15 +26,13 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
         // Not supported
         return;
       }
-      let subscription = await registration.pushManager.getSubscription();
-      if (subscription) {
-        // Already registered
+      if (sessionStorage.getItem(NOTIFICATION_DID_REGISTER_KEY) === 'true') {
         return;
       }
       const vapidKey = urlBase64ToUint8Array(
         getPublicEnvVar('NEXT_PUBLIC_VAPID', process.env.NEXT_PUBLIC_VAPID),
       );
-      subscription = await registration.pushManager.subscribe({
+      const subscription = await registration.pushManager.subscribe({
         // This means all push events will result in a notification
         userVisibleOnly: true,
         applicationServerKey: vapidKey,
@@ -42,9 +41,11 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
       try {
         // Save the subscription details to server
         await registerDevice({
-          subscription: subscription,
+          subscription,
         });
+        sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
       } catch (error) {
+        sessionStorage.removeItem(NOTIFICATION_DID_REGISTER_KEY);
         logger.warn('Register notification subscription failed', error);
       }
     } catch (error) {

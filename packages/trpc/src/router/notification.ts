@@ -1,10 +1,14 @@
+import { log } from 'next-axiom';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 import { handleCommentEvent } from '../mutation-event/comment-handler';
 import { handleLikeEvent } from '../mutation-event/like-handler';
 import { router, protectedProcedure } from '../trpc-server';
-import { rteContentValidator } from './utils/validator';
+import {
+  notificationSubscriptionValidator,
+  rteContentValidator,
+} from './utils/validator';
 
 export const notificationRouter = router({
   messages: protectedProcedure.query(async ({ ctx }) => {
@@ -72,9 +76,7 @@ export const notificationRouter = router({
   register: protectedProcedure
     .input(
       z.object({
-        subscription: z.object({
-          endpoint: z.string().url(),
-        }),
+        subscription: notificationSubscriptionValidator,
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -88,6 +90,7 @@ export const notificationRouter = router({
       });
       if (result?.id) {
         // Ignore duplicated subscription
+        log.debug('Duplicated subscription');
         return;
       }
       await prisma.notificationSubscription.create({
@@ -95,7 +98,9 @@ export const notificationRouter = router({
           subscription: input.subscription,
           userId: ctx.session.user.id,
         },
-        select: {},
+        select: {
+          id: true,
+        },
       });
     }),
   mutate: protectedProcedure
