@@ -6,7 +6,6 @@ const mockUseSession = jest.spyOn(authModule, 'useSession');
 
 mockUseSession.mockReturnValue({
   data: {
-    hasuraToken: 'random-string-for-testing',
     user: {
       id: 1,
       email: '',

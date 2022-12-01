@@ -14,7 +14,10 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
 
     let script: ScriptElt = document.querySelector(`script[src="${src}"]`);
 
-    if (!script) {
+    if (script) {
+      // Grab existing script status from attribute and set to state.
+      setStatus(script.dataset.status as Status);
+    } else {
       script = document.createElement('script');
       script.src = src;
       script.async = true;
@@ -35,9 +38,6 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
 
       script.addEventListener('load', setAttributeFromEvent);
       script.addEventListener('error', setAttributeFromEvent);
-    } else {
-      // Grab existing script status from attribute and set to state.
-      setStatus(script.dataset.status as Status);
     }
 
     // Script event handler to update status in state

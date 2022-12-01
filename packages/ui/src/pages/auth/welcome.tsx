@@ -18,10 +18,10 @@ export function Welcome(/*props: WelcomeProps*/): JSX.Element {
 
   React.useEffect(() => {
     if (loading) return;
-    if (!hasValidUserProfile(data)) {
-      setIsFullFilled(false);
-    } else {
+    if (hasValidUserProfile(data)) {
       setIsFullFilled(true);
+    } else {
+      setIsFullFilled(false);
     }
   }, [data, loading]);
   return (

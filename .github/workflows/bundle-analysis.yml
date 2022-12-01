@@ -12,7 +12,10 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: Set up node
         uses: actions/setup-node@v1
@@ -42,17 +45,13 @@ jobs:
         run: pnpm install
 
       - name: Build next.js app
-        run: ./node_modules/.bin/next build
-        working-directory: ./apps/main
+        run: pnpm build
         env:
           ANALYZE: true
           RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
           HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
-          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-          NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_HTTP_ORIGIN }}
-          NEXT_PUBLIC_HASURA_WS_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_WS_ORIGIN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}

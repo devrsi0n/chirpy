@@ -1,13 +1,23 @@
-import { translateHslColor } from '../../contexts/theme-context/utilities';
+import * as React from 'react';
 
-export async function revalidateProjectPages(
-  projectId: string,
-  domain: string,
-) {
-  return await Promise.allSettled([
-    fetch(`/api/revalidate/widgets?projectId=${projectId}`),
-    fetch(`/api/revalidate/theme?domain=${domain}`),
-  ]);
+import { translateHslColor } from '../../contexts/theme-context/utilities';
+import { trpcClient } from '../../utilities/trpc-client';
+
+export function useRevalidateProjectPages() {
+  const { mutateAsync: revalidateWidget } =
+    trpcClient.revalidate.widget.useMutation();
+  const { mutateAsync: revalidateTheme } =
+    trpcClient.revalidate.theme.useMutation();
+
+  return React.useCallback(
+    async (projectId: string, domain: string) => {
+      await Promise.all([
+        revalidateWidget({ projectId }),
+        revalidateTheme({ domain }),
+      ]);
+    },
+    [revalidateWidget, revalidateTheme],
+  );
 }
 
 export function hslToHex(hslColor: string) {

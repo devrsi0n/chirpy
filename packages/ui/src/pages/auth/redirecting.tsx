@@ -1,5 +1,4 @@
 import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -10,15 +9,13 @@ import { useTimeout } from '../../hooks';
 import { hasValidUserProfile } from '../../utilities';
 
 export function Redirecting(): JSX.Element {
-  const { status } = useSession();
-
   const { data, loading } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {
     if (data.id) {
       localStorage.setItem(SIGN_IN_SUCCESS_KEY, 'true');
     }
-    if (status === 'loading' || loading) {
+    if (loading) {
       return;
     }
     if (!hasValidUserProfile(data)) {
@@ -28,7 +25,7 @@ export function Redirecting(): JSX.Element {
       sessionStorage.removeItem(CALLBACK_URL_KEY);
       router.push(callbackUrl || '/dashboard');
     }
-  }, [router, data, status, loading]);
+  }, [router, data, loading]);
   useTimeout(() => {
     if (!data.id) {
       router.push(

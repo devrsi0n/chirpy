@@ -1,4 +1,4 @@
-import { waitGraphql } from '../../fixtures/utils';
+import { waitTrpc } from '../../fixtures/utils';
 
 describe('Project', () => {
   before(() => {
@@ -24,7 +24,7 @@ describe('Project', () => {
         cy.findByRole('dialog')
           .findByRole('button', { name: /delete/i })
           .click();
-        waitGraphql();
+        waitTrpc();
       }
     });
 

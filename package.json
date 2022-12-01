@@ -3,11 +3,12 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
     "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i",
     "lint": "eslint --fix ./",
-    "release": "turbo run build --filter=@chirpy-dev/main-app... && changeset publish",
+    "release": "turbo run build && changeset publish",
     "start:docker:local": "dotenv -e ./apps/main/.env.local docker compose up",
     "test": "turbo run test --filter=@chirpy-dev/main-app...",
     "version-packages": "changeset version",
@@ -18,23 +19,19 @@
     "@changesets/cli": "2.25.2",
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/prettier-config": "workspace:*",
-    "eslint": "8.27.0",
+    "eslint": "8.28.0",
     "husky": "8.0.2",
-    "lint-staged": "13.0.3",
-    "next": "13.0.4",
-    "prettier": "2.7.1",
+    "lint-staged": "13.0.4",
+    "next": "13.0.5",
+    "prettier": "2.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "turbo": "1.6.3"
-  },
-  "engines": {
-    "node": "16.x"
   },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
         "@testing-library/dom",
-        "@urql/core",
         "@storybook/addons",
         "@storybook/client-api",
         "@storybook/preview-web",

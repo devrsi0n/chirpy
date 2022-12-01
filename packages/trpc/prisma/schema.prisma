@@ -1,0 +1,201 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// String -> varchar(191)
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  oauthTokenSecret  String?
+  oauthToken        String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  pageId    String
+  parentId  String?
+  userId    String
+  content   Json
+  deletedAt DateTime?
+  page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies   Comment[] @relation("CommentToComment")
+  likes     Like[]
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  commentId String
+  userId    String
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([commentId, userId])
+}
+
+model Member {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  teamId    String
+  userId    String
+  role      String
+  Role      Role     @relation(fields: [role], references: [value], onDelete: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([teamId, userId])
+}
+
+model NotificationMessage {
+  id               String           @id @default(cuid())
+  createdAt        DateTime         @default(now())
+  type             String
+  recipientId      String
+  url              String           @db.Text
+  read             Boolean          @default(false)
+  deletedAt        DateTime?
+  triggeredById    String
+  // TODO: Replace it with commentId & likeId
+  contextId        String
+  content          String?          @db.Text
+  recipient        User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
+  triggeredBy      User             @relation("NotificationMessage_triggeredByIdToUser", fields: [triggeredById], references: [id], onDelete: Cascade)
+  NotificationType NotificationType @relation(fields: [type], references: [value], onDelete: Cascade)
+
+  @@unique([type, triggeredById, contextId, recipientId])
+}
+
+model NotificationSubscription {
+  id           String    @id @default(cuid())
+  userId       String
+  subscription Json
+  createdAt    DateTime? @default(now())
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Check uniqueness muanually because mysql doesn't allow it
+  // @@unique([subscription, userId])
+}
+
+model NotificationType {
+  value                String                @id
+  comment              String
+  notificationMessages NotificationMessage[]
+}
+
+model Page {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  url       String    @unique(length: 191) @db.Text
+  title     String?   @db.Text
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  comments  Comment[]
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  teamId    String?
+  userId    String?
+  theme     Json?
+  domain    String   @unique
+  team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pages     Page[]
+}
+
+model Role {
+  value   String   @id
+  comment String?
+  members Member[]
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Team {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  name      String
+  uid       String?   @unique
+  members   Member[]
+  projects  Project[]
+}
+
+model User {
+  id                            String                     @id @default(cuid())
+  createdAt                     DateTime                   @default(now())
+  updatedAt                     DateTime                   @updatedAt
+  name                          String?
+  email                         String?                    @unique
+  emailVerified                 DateTime?
+  image                         String?                    @db.Text
+  username                      String?                    @unique
+  type                          String?
+  bio                           String?
+  website                       String?
+  twitterUserName               String?
+  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade)
+  accounts                      Account[]
+  comments                      Comment[]
+  likes                         Like[]
+  members                       Member[]
+  receivedNotificationMessages  NotificationMessage[]      @relation("NotificationMessage_recipientIdToUser")
+  triggeredNotificationMessages NotificationMessage[]      @relation("NotificationMessage_triggeredByIdToUser")
+  notificationSubscriptions     NotificationSubscription[]
+  projects                      Project[]
+  sessions                      Session[]
+}
+
+model UserType {
+  value   String  @id
+  comment String?
+  users   User[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  id         String   @id @default(cuid())
+
+  @@unique([identifier, token])
+}

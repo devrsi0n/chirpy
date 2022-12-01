@@ -46,6 +46,6 @@ export async function checkToxicText(
       return prev;
     },
     { matchedLabels: [] } as ICheckToxicText,
-  ) as ICheckToxicText;
+  ) as unknown as ICheckToxicText;
   res.status(200).json(resp);
 }

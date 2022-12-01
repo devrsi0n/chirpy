@@ -30,7 +30,7 @@ export function generateCommentFragment(fill: string) {
         },
       ],
     },
-    createdAt: `2021-06-21T14:12:13.813625+00:00`,
+    createdAt: new Date(`2021-06-21T14:12:13.813625+00:00`),
     likes: [
       {
         id: `like-id-${fill}`,

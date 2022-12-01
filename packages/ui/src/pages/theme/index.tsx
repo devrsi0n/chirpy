@@ -1,5 +1,5 @@
-import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import { Theme as ThemeType } from '@chirpy-dev/types';
+import { DehydratedState } from '@tanstack/react-query';
 
 import {
   SiteLayout,
@@ -8,24 +8,27 @@ import {
   THEME_WIDGET_CLS,
 } from '../../blocks';
 import { WidgetThemeProvider } from '../../contexts';
+import { trpcClient } from '../../utilities/trpc-client';
 
 export type ThemeProps = {
-  project: ThemeProjectByPkQuery['projects'][0];
+  trpcState: DehydratedState;
+  domain: string;
 } & Pick<ThemeEditorProps, 'buildDate'>;
 
 export function ThemePage(props: ThemeProps): JSX.Element {
+  const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
   return (
     <SiteLayout
-      title={props.project?.name || 'Theme'}
+      title={project?.name || 'Theme'}
       styles={{
         container: `!grid-cols-[1fr_min(105ch,calc(100%-32px))_1fr]`,
       }}
     >
       <WidgetThemeProvider
-        widgetTheme={props.project?.theme as ThemeType}
+        widgetTheme={project?.theme as ThemeType}
         selector={`.${THEME_WIDGET_CLS}`}
       >
-        <ThemeEditor {...props} />
+        <ThemeEditor project={project!} buildDate={props.buildDate} />
       </WidgetThemeProvider>
     </SiteLayout>
   );

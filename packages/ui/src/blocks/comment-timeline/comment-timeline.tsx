@@ -1,15 +1,18 @@
-import { CommentTimelineNode, RTEValue } from '@chirpy-dev/types';
+import { RTEValue } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import * as React from 'react';
 
+import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentBranch } from '../comment-branch';
 import { CommentCard } from '../comment-card';
 import styles from './comment-linked-list.module.scss';
 
+export type CommentTimelineNode = RouterOutputs['comment']['timeline'];
+
 export type Comment = NonNullable<CommentTimelineNode>;
 
 export type CommentTimelineProps = {
-  comment: Comment;
+  comment: RouterOutputs['comment']['timeline'];
 };
 
 /**
@@ -26,6 +29,7 @@ export function CommentTimeline({
       _parentComments.unshift(currComment.parent);
       currComment = currComment.parent;
     }
+    // @ts-ignore
     setAncestorComments(_parentComments);
   }, [comment]);
   let depth = 0;
@@ -38,7 +42,7 @@ export function CommentTimeline({
           return (
             <ParentBranch key={_comment.id}>
               <CommentCard
-                disableTimelineButton={_comment.id === comment.id}
+                disableTimelineButton={_comment.id === comment?.id}
                 commentId={_comment.id}
                 content={_comment.content as RTEValue}
                 author={_comment.user}
@@ -53,11 +57,11 @@ export function CommentTimeline({
       </ul>
       <div className="flex flex-col items-end">
         <ul className={clsx(styles.commentList, `space-y-2`)}>
-          {comment.replies?.map((reply) => (
+          {comment?.replies?.map((reply) => (
             <CommentBranch key={reply.id}>
               <CommentCard
                 commentId={reply.id}
-                content={reply.content}
+                content={reply.content as RTEValue}
                 author={reply.user}
                 likes={reply.likes}
                 depth={depth + 1}

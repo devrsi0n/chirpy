@@ -96,23 +96,27 @@ function getPanelStyles(
   const top = (height || 40) + 16;
 
   switch (placement) {
-    case 'top':
+    case 'top': {
       return {
         bottom,
         transform: `translateX(calc(50% - ${(width || DEFAULT_WIDTH) / 2}px))`,
       };
-    case 'topEnd':
+    }
+    case 'topEnd': {
       return {
         bottom,
         right: 0,
       };
-    case 'bottomEnd':
+    }
+    case 'bottomEnd': {
       return {
         top,
         right: 0,
       };
-    default:
+    }
+    default: {
       return {};
+    }
   }
 }
 
@@ -122,23 +126,27 @@ function getBeakStyles(
 ): React.CSSProperties {
   const bottom = '-8px';
   switch (placement) {
-    case 'top':
+    case 'top': {
       return {
         bottom,
         right: 'calc(50% - 8px)',
       };
-    case 'topEnd':
+    }
+    case 'topEnd': {
       return {
         bottom,
         right: `${width / 2}px`,
       };
-    case 'bottomEnd':
+    }
+    case 'bottomEnd': {
       return {
         top: '-8px',
         right: `${width / 2}px`,
       };
-    default:
+    }
+    default: {
       return {};
+    }
   }
 }
 

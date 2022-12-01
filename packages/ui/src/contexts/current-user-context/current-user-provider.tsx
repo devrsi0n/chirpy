@@ -1,8 +1,8 @@
-import { useCurrentUserQuery } from '@chirpy-dev/graphql';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { useHasMounted } from '../../hooks/use-has-mounted';
+import { trpcClient } from '../../utilities/trpc-client';
 import {
   CurrentUserContext,
   CurrentUserContextType,
@@ -16,11 +16,14 @@ export type CurrentUserProviderProps = {
 export function CurrentUserProvider({
   children,
 }: CurrentUserProviderProps): JSX.Element {
-  const { data: session, status } = useSession();
-  const sessionIsLoading = status === 'loading';
-  const [{ data: queryData, fetching }, refetchUser] = useCurrentUserQuery({
-    variables: { id: session?.user.id || '-1' },
-    pause: true,
+  const { data: session, status: sessionStatus } = useSession();
+  const sessionIsLoading = sessionStatus === 'loading';
+  const {
+    data,
+    isFetching,
+    refetch: refetchUser,
+  } = trpcClient.user.me.useQuery(undefined, {
+    enabled: !!session?.user.id,
   });
   const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
@@ -32,23 +35,23 @@ export function CurrentUserProvider({
     const _data: CurrentUserContextType['data'] = session?.user.id
       ? {
           ...session?.user,
-          ...queryData?.userByPk,
+          ...data,
           editableProjectIds: session?.user.editableProjectIds || [],
         }
       : {};
     return {
       data: _data,
-      loading: sessionIsLoading || fetching,
+      loading: sessionIsLoading || isFetching,
       isSignIn: !!_data.id,
-      refetchUser,
+      refetchUser: refetchUser,
     };
   }, [
-    session,
-    sessionIsLoading,
     hasMounted,
+    session?.user,
+    data,
+    sessionIsLoading,
+    isFetching,
     refetchUser,
-    fetching,
-    queryData?.userByPk,
   ]);
 
   return (

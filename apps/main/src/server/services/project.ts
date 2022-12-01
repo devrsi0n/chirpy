@@ -1,12 +1,19 @@
-import { AllProjectsDocument } from '@chirpy-dev/graphql';
-
-import { query } from '../common/gql';
+import { prisma } from '@chirpy-dev/trpc';
 
 export type AllProjectStaticPathParams = { params: { domain: string } }[];
 
-export async function getAllProjectStaticPathsByDomain(): Promise<AllProjectStaticPathParams> {
-  const projects = await query(AllProjectsDocument, {}, 'projects');
-
+export async function getRecentProjectStaticPathsByDomain(
+  take: number,
+): Promise<AllProjectStaticPathParams> {
+  const projects = await prisma.project.findMany({
+    select: {
+      domain: true,
+    },
+    orderBy: {
+      updatedAt: 'desc',
+    },
+    take,
+  });
   return (
     projects.map(({ domain }) => {
       return {

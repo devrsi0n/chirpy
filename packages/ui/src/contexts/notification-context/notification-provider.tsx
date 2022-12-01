@@ -3,11 +3,11 @@ import * as React from 'react';
 
 import { logger } from '../../utilities/logger';
 import { useCurrentUser } from '../current-user-context';
+import { useRegisterNotificationSubscription } from './use-register-device';
 import { useReloadWhenSwChange } from './use-reload-when-sw-change';
 import {
   askNotificationPermission,
   checkNotificationCompatibility,
-  registerNotificationSubscription,
 } from './utilities';
 
 export interface INotificationContext {
@@ -41,6 +41,7 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
   }, []);
 
   const { isSignIn } = useCurrentUser();
+  const registerSub = useRegisterNotificationSubscription();
   const registerNotification = React.useCallback(async (): Promise<void> => {
     if (!isSignIn) {
       return;
@@ -58,8 +59,8 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     }
 
     // We don't want to wait here for registering the service worker, we only need to wait for permission check
-    registerNotificationSubscription().then(() => setDidRegister(true));
-  }, [isSignIn]);
+    registerSub().then(() => setDidRegister(true));
+  }, [isSignIn, registerSub]);
   const value = React.useMemo(
     () => ({
       didRegister,
@@ -77,7 +78,7 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     // Register the service worker on first load
     if (!didRegister && Notification.permission === 'granted') {
       // Only register once on whole page
-      registerNotificationSubscription().then(() => setDidRegister(true));
+      registerSub().then(() => setDidRegister(true));
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

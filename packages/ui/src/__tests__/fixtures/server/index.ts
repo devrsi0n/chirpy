@@ -1,7 +1,6 @@
 import { setupServer } from 'msw/node';
 
-import { graphqlHandlers } from './graphql-handlers';
 import { restHandlers } from './rest-handlers';
 
-const handlers = [...restHandlers, ...graphqlHandlers];
+const handlers = [...restHandlers];
 export const server = setupServer(...handlers);

@@ -1,14 +1,14 @@
-import { useCommentTreeSubscription } from '@chirpy-dev/graphql';
-import { CommonWidgetProps, CommentLeafType } from '@chirpy-dev/types';
-import { isSSRMode } from '@chirpy-dev/utils';
+import { CommonWidgetProps } from '@chirpy-dev/types';
+import * as React from 'react';
 
-import { CommentTrees, WidgetLayout, PoweredBy } from '../../blocks';
-import { useCommentOrderBy } from '../../blocks/comment-trees/use-comment-order-by';
+import { CommentForest, WidgetLayout, PoweredBy } from '../../blocks';
+import { Text } from '../../components';
 import { CommentContextProvider } from '../../contexts';
+import { trpcClient } from '../../utilities/trpc-client';
+import { useRefetchInterval } from './use-refetch-interval';
 
 export type PageCommentProps = CommonWidgetProps & {
   pageURL: string;
-  comments: CommentLeafType[];
   pageId: string;
 };
 
@@ -17,36 +17,32 @@ export type PageCommentProps = CommonWidgetProps & {
  * @param props
  */
 export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
-  let error = '';
-  let pageId = '';
-  let pageURL = '';
+  const refetchInterval = useRefetchInterval();
+  const { data: comments, refetch } = trpcClient.comment.forest.useQuery(
+    {
+      url: props.pageURL,
+    },
+    {
+      refetchInterval,
+    },
+  );
 
-  if (isStaticError(props)) {
-    error = props.error;
-  } else {
-    pageId = props.pageId;
-    pageURL = props.pageURL;
-  }
-  const [{ data }] = useCommentTreeSubscription({
-    variables: { pageURL },
-    pause: isSSRMode,
-  });
-  const comments =
-    data?.comments || (isStaticError(props) ? [] : props.comments || []);
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-  // TODO: resolve this comments undefined error
-  if (isStaticError(props)) {
-    return <p>Wrong page.</p>;
+  if (isStaticError(props) || !comments) {
+    return (
+      <Text>{`Can't find a Chirpy comment widget with this page, please contact the support.`}</Text>
+    );
   }
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider projectId={props.projectId} pageId={pageId}>
+      <CommentContextProvider
+        projectId={props.projectId}
+        pageId={props.pageId}
+        refetchComment={refetch}
+      >
         <div className="pt-1">
-          <CommentTrees comments={comments} />
+          {/* @ts-ignore */}
+          <CommentForest comments={comments} />
         </div>
         <PoweredBy />
       </CommentContextProvider>

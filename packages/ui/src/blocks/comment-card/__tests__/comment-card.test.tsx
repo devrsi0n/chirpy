@@ -49,7 +49,7 @@ describe('CommentCard', () => {
     ).toBeInTheDocument();
 
     expect((document.querySelector('time') as HTMLTimeElement).dateTime).toBe(
-      staticProps.createdAt,
+      staticProps.createdAt.toISOString(),
     );
   });
 

@@ -3,7 +3,7 @@ export * from './comment-branch';
 export * from './comment-card';
 export * from './comment-timeline';
 export * from './comment-tree';
-export * from './comment-trees';
+export * from './comment-forest';
 export * from './comment-widget';
 export * from './comment-widget-preview';
 export * from './comment-widget-preview';

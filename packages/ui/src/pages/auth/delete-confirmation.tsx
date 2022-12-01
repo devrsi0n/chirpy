@@ -10,7 +10,7 @@ export function DeleteConfirmation(): JSX.Element {
       <div className="space-y-8">
         <Heading as="h1">
           Thanks, your facebook account was deleted. Status code{' '}
-          {!isSSRMode ? new URLSearchParams(location.search).get('code') : ''}
+          {isSSRMode ? '' : new URLSearchParams(location.search).get('code')}
         </Heading>
       </div>
     </SiteLayout>

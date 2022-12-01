@@ -1,9 +1,8 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build", "^db:generate"]
     },
     "test": {
       "outputs": []
@@ -12,20 +11,19 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^db:generate"],
       "cache": false
     },
     "@chirpy-dev/main-app#build": {
-      "dependsOn": [
-        "^build",
-        "$NEXT_PUBLIC_APP_URL",
-        "$NEXT_PUBLIC_HASURA_HTTP_ORIGIN",
-        "$NEXTAUTH_SECRET",
-        "$EMAIL_API_KEY",
-        "$HASURA_ADMIN_SECRET",
-        "$HASURA_EVENT_SECRET",
-        "$NEXT_PUBLIC_VAPID"
-      ],
-      "outputs": [".next/**"]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"],
+      "env": [
+        "NEXT_PUBLIC_APP_URL",
+        "DATABASE_URL",
+        "NEXTAUTH_SECRET",
+        "EMAIL_API_KEY",
+        "NEXT_PUBLIC_VAPID"
+      ]
     },
     "@chirpy-dev/service-worker#build": {
       "cache": false
@@ -36,10 +34,13 @@
     "build:local": {
       "cache": false
     },
-    "@chirpy-dev/graphql": {
-      "inputs": ["src/**/*.graphql"],
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
       "cache": false
     }
   },
-  "globalDependencies": ["$GITHUB_TOKEN", "tsconfig.json", ".env.*"]
+  "globalDependencies": ["tsconfig.json", ".env.*"],
+  "globalEnv": ["GITHUB_TOKEN"]
 }

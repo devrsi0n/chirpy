@@ -11,6 +11,9 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    env:
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
@@ -55,11 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          HASURA_EVENT_SECRET: ${{ secrets.HASURA_EVENT_SECRET }}
           HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
-          HASURA_ADMIN_SECRET: ${{ secrets.HASURA_ADMIN_SECRET }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-          NEXT_PUBLIC_HASURA_HTTP_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_HTTP_ORIGIN }}
-          NEXT_PUBLIC_HASURA_WS_ORIGIN: ${{ secrets.NEXT_PUBLIC_HASURA_WS_ORIGIN }}

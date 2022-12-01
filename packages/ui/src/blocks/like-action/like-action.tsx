@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { useToast } from '../../components';
 import { ActionButton, ActionButtonProps } from '../../components/button';
 import { IconHeart, IconHeartFill } from '../../components/icons';
 import { useCommentContext } from '../../contexts/comment-context';
@@ -42,9 +43,19 @@ export function LikeAction({
       }
       return false;
     });
-
-  const handleClickLike = () => {
-    toggleALikeAction(didLike, likedId, commentId);
+  const { showToast } = useToast();
+  const isPending = React.useRef(false);
+  const handleClickLike = async () => {
+    if (isPending.current) {
+      return showToast({
+        type: 'warning',
+        title: 'Click too quick',
+        description: "You're clicking too quick, please wait a moment.",
+      });
+    }
+    isPending.current = true;
+    await toggleALikeAction(didLike, likedId, commentId);
+    isPending.current = false;
   };
 
   const HeartComponent = didLike ? IconHeartFill : IconHeart;

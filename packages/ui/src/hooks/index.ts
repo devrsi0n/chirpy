@@ -1,6 +1,5 @@
 export * from './use-form';
 export * from './use-async';
-export * from './use-bypass-cache-refetch';
 export * from './use-celebration';
 export * from './use-click-outside';
 export * from './use-event-listener';

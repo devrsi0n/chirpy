@@ -1,7 +1,3 @@
-import {
-  useDeleteProjectByPkMutation,
-  UserDashboardProjectsQuery,
-} from '@chirpy-dev/graphql';
 import * as React from 'react';
 
 import { BaseButton, Button } from '../../components/button';
@@ -22,13 +18,12 @@ import { useToast } from '../../components/toast';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
+import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {
-  project: NonNullable<
-    UserDashboardProjectsQuery['userByPk']
-  >['projects'][number];
+  project: RouterOutputs['project']['all'][number];
   onDeletedProject: () => void;
 };
 
@@ -46,12 +41,13 @@ export function ProjectCard({
     setDeletingProjectId('');
     setDeletingProject('');
   };
-  const [{ fetching: loading }, deleteProjectByPkMutation] =
-    useDeleteProjectByPkMutation();
+  const { mutateAsync: deleteProject, status } =
+    trpcClient.project.delete.useMutation();
+  const loading = status === 'loading';
   const { showToast } = useToast();
   const handleClickConfirmDelete = async () => {
     try {
-      await deleteProjectByPkMutation({
+      await deleteProject({
         id: deletingProjectId,
       });
       setDeletingProjectId('');
@@ -138,7 +134,7 @@ export function ProjectCard({
               onClick={handleClickExpand}
               className="ml-4 rounded px-2 py-1 text-primary-900 hover:bg-primary-900 hover:text-white"
             >
-              {!isExpanded ? 'Show more' : 'Show less'}
+              {isExpanded ? 'Show less' : 'Show more'}
             </BaseButton>
           )}
         </div>

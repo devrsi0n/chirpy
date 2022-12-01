@@ -3,7 +3,6 @@ export const CALLBACK_URL_KEY = 'callback.url';
 
 // 30 days
 export const SESSION_MAX_AGE = 30 * 24 * 60 * 60;
-export const HASURA_TOKEN_MAX_AGE = 60 * 60;
 
 const EVENT_PREFIX = 'CP_EVENT_';
 

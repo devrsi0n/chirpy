@@ -1,9 +1,15 @@
 import { rest } from 'msw';
 
+import { mockNotificationMessages } from '../../../blocks/notification-hub/stories/mock-data';
+import { mockProject } from '../../mocks/mock-project-data';
+
 export const MOCK_CACHE = 'mock cache';
 export const MOCK_PAGE_ID = 'mock-page-id';
 
 export const mockLogout = jest.fn();
+
+export const mockDeleteNotification = jest.fn().mockReturnValue({});
+export const mockReadNotification = jest.fn().mockReturnValue({});
 
 afterEach(() => {
   mockLogout.mockReset();
@@ -15,6 +21,71 @@ export const restHandlers = [
       ctx.status(200),
       ctx.json({
         id: MOCK_PAGE_ID,
+      }),
+    );
+  }),
+  rest.get('*/api/trpc/notification.messages', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        input: {},
+        result: {
+          data: {
+            json: mockNotificationMessages,
+          },
+        },
+      }),
+    );
+  }),
+  rest.post('*/api/trpc/notification.delete', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        input: {},
+        result: {
+          data: {
+            json: mockDeleteNotification(),
+          },
+        },
+      }),
+    );
+  }),
+  rest.post('*/api/trpc/notification.read', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        input: {},
+        result: {
+          data: {
+            json: mockReadNotification(),
+          },
+        },
+      }),
+    );
+  }),
+  rest.post('*/api/trpc/user.updateProfile', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        input: {},
+        result: {
+          data: {
+            json: {},
+          },
+        },
+      }),
+    );
+  }),
+  rest.get('*/api/trpc/project.all', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        input: {},
+        result: {
+          data: {
+            json: [mockProject],
+          },
+        },
       }),
     );
   }),
@@ -77,7 +148,6 @@ export const restHandlers = [
       ctx.status(200),
       ctx.json({
         expires: '2099-12-31T23:59:59.999Z',
-        hasuraToken: 'radom-token-skjadfhnkj',
         user: {
           id: 'user-id',
           name: 'session user name',

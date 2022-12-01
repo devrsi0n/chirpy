@@ -1,5 +1,3 @@
-import { CurrentNotificationMessagesQuery } from '@chirpy-dev/graphql';
-import { NotificationType_Enum } from '@chirpy-dev/graphql';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -16,6 +14,7 @@ import { Menu } from '../../components/menu';
 import { Text, TextProps } from '../../components/text';
 import { useIsWidget } from '../../hooks/use-is-widget';
 import { cpDayjs } from '../../utilities/date';
+import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type INotificationItemProps = {
   index: number;
@@ -23,7 +22,7 @@ export type INotificationItemProps = {
    * Message array total length
    */
   length: number;
-  message: CurrentNotificationMessagesQuery['notificationMessages'][number];
+  message: RouterOutputs['notification']['messages'][number];
   onClickCapture: (messageId: string) => void;
   onClickDelete: (messageId: string) => void;
 };
@@ -126,7 +125,8 @@ function NotificationText({ className, ...restProps }: TextProps): JSX.Element {
   );
 }
 
-const TITLE_MAP: Record<NotificationType_Enum, string> = {
+// TODO: Use enum after mgrating to trpc
+const TITLE_MAP: Record<string, string> = {
   ReceivedAComment: 'left a comment',
   ReceivedAReply: 'replied to your comment',
   ReceivedALike: 'liked your comment',
@@ -140,7 +140,8 @@ const COMMENT_ICON = (
   </span>
 );
 
-const ICON_MAP: Record<NotificationType_Enum, JSX.Element> = {
+// TODO: Use enum after mgrating to trpc
+const ICON_MAP: Record<string, JSX.Element> = {
   ReceivedAComment: COMMENT_ICON,
   ReceivedAReply: COMMENT_ICON,
   ReceivedALike: (

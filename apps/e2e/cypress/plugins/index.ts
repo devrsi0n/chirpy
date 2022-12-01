@@ -20,9 +20,5 @@ export default function Plugins(
     0,
     23,
   );
-  config.env.HASURA_EVENT_SECRET = process.env.HASURA_EVENT_SECRET;
-  config.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN =
-    process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN;
-
   return config;
 }

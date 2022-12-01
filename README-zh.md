@@ -58,7 +58,6 @@
 - [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 - [![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)](https://www.cypress.io/)
 - [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
-- [urql](https://github.com/FormidableLabs/urql)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [tiptap](https://tiptap.dev)
 - [Plausible](https://github.com/plausible/analytics)

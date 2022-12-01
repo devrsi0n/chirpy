@@ -5,6 +5,7 @@ dist
 .DS_Store
 .next
 out/
+.env
 *.env.local
 .envproduction
 .vercel

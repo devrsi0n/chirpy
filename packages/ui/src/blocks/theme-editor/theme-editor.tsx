@@ -1,5 +1,3 @@
-import { useUpdateThemeMutation } from '@chirpy-dev/graphql';
-import { ThemeProjectByPkQuery } from '@chirpy-dev/graphql';
 import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
@@ -14,6 +12,7 @@ import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
+import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { ColorModeSelect } from '../color-mode-select';
 import {
   CommentWidgetPreview,
@@ -21,19 +20,21 @@ import {
 } from '../comment-widget-preview';
 import { ColorPicker, ColorSeriesPicker } from './color-picker';
 import { COLOR_OPTIONS, useActiveColorMode, useColors } from './colors';
-import { hslToHex, revalidateProjectPages } from './utilities';
+import { hslToHex, useRevalidateProjectPages } from './utilities';
 
 export const THEME_WIDGET_CLS = 'theme-widget';
 
 export type ThemeEditorProps = {
-  project: ThemeProjectByPkQuery['projects'][number];
+  project: NonNullable<RouterOutputs['project']['byDomain']>;
 } & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
 
-  const [{}, updateTheme] = useUpdateThemeMutation();
+  const { mutateAsync: updateTheme } =
+    trpcClient.project.updateTheme.useMutation();
   const { showToast } = useToast();
+  const revalidateProjectPages = useRevalidateProjectPages();
   const saveTheme = debounce(
     React.useCallback(
       async (newTheme: Theme) => {
@@ -62,6 +63,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
         setWidgetTheme,
         showToast,
         updateTheme,
+        revalidateProjectPages,
       ],
     ),
     1500,

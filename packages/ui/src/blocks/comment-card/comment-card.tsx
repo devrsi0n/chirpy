@@ -1,11 +1,9 @@
-import { CommentLeafType } from '@chirpy-dev/types';
 import { RTEValue } from '@chirpy-dev/types';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import clsx from 'clsx';
-import { AnimatePresence, m, MotionProps, Variants } from 'framer-motion';
+import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
 
-import { easeInOut, expanded } from '../../components/animation';
 import { Avatar } from '../../components/avatar';
 import { ActionButton, Button } from '../../components/button';
 import {
@@ -19,6 +17,7 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useCommentContext } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
+import { CommentLeafType } from '../../types';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
 import { Like, LikeAction } from '../like-action';
@@ -34,8 +33,8 @@ export type CommentCardProps = {
   commentId: string;
   author: Author;
   content: RTEValue;
-  createdAt: string;
-  deletedAt?: string | null;
+  createdAt: Date;
+  deletedAt?: Date | null;
   likes: Like[];
   depth: number;
   /**
@@ -65,6 +64,7 @@ export function CommentCard({
   const handleSubmitReply = async (replyContent: RTEValue) => {
     try {
       await createAComment(replyContent, commentId);
+
       setShowReplyEditor(false);
     } catch (error) {
       showToast({
@@ -104,6 +104,7 @@ export function CommentCard({
   if (isDeleted) {
     return <DeletedComment />;
   }
+  const createdAtDate = cpDayjs(createdAt);
   return (
     <m.article
       animate={containerAnimate}
@@ -131,11 +132,11 @@ export function CommentCard({
             <Text
               variant="secondary"
               as="time"
-              title={createdAt}
+              title={createdAtDate.format('YYYY-MM-DD HH:mm:ss')}
               className="cursor-default !leading-none"
-              dateTime={createdAt}
+              dateTime={createdAtDate.toISOString()}
             >
-              {cpDayjs(createdAt).fromNow()}
+              {createdAtDate.fromNow()}
             </Text>
           </div>
           <>
