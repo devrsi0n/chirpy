@@ -5,25 +5,6 @@ import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { setMockedUser } from '../../../__tests__/fixtures/page-render';
 import { mockNextRouter } from '../../../__tests__/mocks/next-router';
 import { Welcome } from '../../../pages/auth/welcome';
-import { trpcClient } from '../../../utilities/trpc-client';
-
-const mockUpdateUser = jest.fn().mockImplementation(() => {
-  return Promise.resolve();
-});
-jest
-  .spyOn(trpcClient.user.updateProfile, 'useMutation')
-  .mockImplementation(() => {
-    return {
-      data: {
-        updateUserByPk: {
-          __typename: 'User',
-          id: '1',
-        },
-      },
-      status: 'success',
-      mutateAsync: mockUpdateUser,
-    } as any;
-  });
 
 setMockedUser({
   email: '',
@@ -65,18 +46,6 @@ describe('Welcome', () => {
       name: /save/i,
     });
     await userEvent.click(saveButton);
-    await waitFor(
-      () =>
-        expect(mockUpdateUser).toHaveBeenCalledWith({
-          id: 'user-id-1',
-          email,
-          name: displayName,
-          username: userName,
-        }),
-      {
-        timeout: 1000,
-      },
-    );
 
     await waitFor(
       () => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'),

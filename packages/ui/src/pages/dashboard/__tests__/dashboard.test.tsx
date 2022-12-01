@@ -3,24 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Dashboard } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
-import { project } from '../../../__tests__/mocks/mock-project-data';
-import { trpcClient } from '../../../utilities/trpc-client';
-
-const mockFetchUserProject = jest.fn();
-jest.spyOn(trpcClient.project.all, 'useQuery').mockReturnValue({
-  data: [project],
-  refetch: mockFetchUserProject,
-  status: 'success',
-} as any);
-
-const mockInsertProject = jest.fn();
-jest.spyOn(trpcClient.project.create, 'useMutation').mockReturnValue({
-  mutateAsync: mockInsertProject,
-} as any);
-const mockDeleteProject = jest.fn();
-jest.spyOn(trpcClient.project.delete, 'useMutation').mockReturnValue({
-  mutateAsync: mockDeleteProject,
-} as any);
+import { mockProject } from '../../../__tests__/mocks/mock-project-data';
 
 describe('dashboard', () => {
   beforeEach(() => {
@@ -37,8 +20,10 @@ describe('dashboard', () => {
         name: 'Dashboard',
       }),
     ).toBeTruthy();
-    expect(screen.getByText(project.name)).toBeTruthy();
-    expect(screen.getByText(project.pages[0].title!)).toBeTruthy();
+    await waitFor(() => {
+      expect(screen.getByText(mockProject.name)).toBeTruthy();
+    });
+    expect(screen.getByText(mockProject.pages[0].title!)).toBeTruthy();
     expect(screen.getByText(/^Created \w+/)).toBeTruthy();
     await waitFor(() =>
       expect(screen.getByLabelText('Page views').textContent).toBe('212'),
@@ -46,6 +31,11 @@ describe('dashboard', () => {
   });
 
   it('should delete the project', async () => {
+    await waitFor(() => {
+      screen.getByRole('button', {
+        name: /show more project options/i,
+      });
+    });
     const menu = screen.getByRole('button', {
       name: /show more project options/i,
     });
@@ -60,7 +50,6 @@ describe('dashboard', () => {
     });
     expect(deleteButton).toBeTruthy();
     await userEvent.click(deleteButton);
-    expect(mockDeleteProject).toHaveBeenCalled();
     await waitFor(() =>
       expect(screen.queryByText(/Delete the project/)).toBeFalsy(),
     );

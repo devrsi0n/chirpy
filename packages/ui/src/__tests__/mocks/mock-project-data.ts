@@ -1,10 +1,10 @@
 import { ProjectCardProps } from '../../blocks/project-card/project-card';
 
-export const project: ProjectCardProps['project'] = {
+export const mockProject: ProjectCardProps['project'] = {
   id: '123',
   name: 'Test Project',
   domain: 'test.page',
-  createdAt: '2021-01-01T00:00:00.000Z',
+  createdAt: new Date('2021-01-01T00:00:00.000Z'),
   pages: [
     {
       id: '1',
