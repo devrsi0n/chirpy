@@ -34,7 +34,7 @@
     "html-loader": "4.2.0",
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.21",
-    "next": "13.0.5",
+    "next": "13.0.6",
     "next-axiom": "0.15.1",
     "next-connect": "0.13.0",
     "next-mdx-remote": "3.0.8",
@@ -51,9 +51,8 @@
     "rehype-slug": "5.1.0",
     "shiki": "0.11.1",
     "superjson": "1.11.0",
-    "type-fest": "3.2.0",
+    "type-fest": "3.3.0",
     "web-push": "3.5.0",
-    "wonka": "6.1.1",
     "ws": "8.11.0"
   },
   "devDependencies": {
