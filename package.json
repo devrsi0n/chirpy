@@ -42,15 +42,11 @@
       "allowedVersions": {
         "react": "18",
         "react-dom": "18",
-        "graphql": "16",
         "glob": "8",
         "core-js": "3",
         "@tensorflow/tfjs-core": "3",
         "@tensorflow/tfjs-converter": "3"
       }
-    },
-    "patchedDependencies": {
-      "react-flip-move@3.0.4": "patches/react-flip-move@3.0.4.patch"
     }
   },
   "prettier": "@chirpy-dev/prettier-config",
