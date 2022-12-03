@@ -1,7 +1,7 @@
 import { getPublicEnvVar } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { logger } from '../../utilities';
+import { cpDayjs, logger } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
 import {
   checkServiceWorkerCompatibility,
@@ -9,8 +9,9 @@ import {
 } from './utilities';
 
 export type RegisterNotificationSubscription = () => Promise<void>;
-const NOTIFICATION_DID_REGISTER_KEY =
-  'chirpy.notification-subscription.did-register';
+const NOTIFICATION_REGISTER_EXPIRED_AT =
+  'chirpy.notification-subscription.expired-at';
+
 export function useRegisterNotificationSubscription(): RegisterNotificationSubscription {
   const { mutateAsync: registerDevice } =
     trpcClient.notification.register.useMutation();
@@ -26,7 +27,10 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
         // Not supported
         return;
       }
-      if (sessionStorage.getItem(NOTIFICATION_DID_REGISTER_KEY) === 'true') {
+      const expirtedData = sessionStorage.getItem(
+        NOTIFICATION_REGISTER_EXPIRED_AT,
+      );
+      if (expirtedData && cpDayjs().isBefore(cpDayjs(expirtedData))) {
         return;
       }
       const vapidKey = urlBase64ToUint8Array(
@@ -43,9 +47,16 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
         await registerDevice({
           subscription,
         });
-        sessionStorage.setItem(NOTIFICATION_DID_REGISTER_KEY, 'true');
+        sessionStorage.setItem(
+          NOTIFICATION_REGISTER_EXPIRED_AT,
+          // Revalidate in a shorter time,
+          // in case the subscription is invalid,
+          // e.g. user disabled the permission,
+          // or switch to another account
+          cpDayjs().add(1, 'd').toISOString(),
+        );
       } catch (error) {
-        sessionStorage.removeItem(NOTIFICATION_DID_REGISTER_KEY);
+        sessionStorage.removeItem(NOTIFICATION_REGISTER_EXPIRED_AT);
         logger.warn('Register notification subscription failed', error);
       }
     } catch (error) {
