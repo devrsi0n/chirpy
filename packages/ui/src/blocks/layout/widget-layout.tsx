@@ -30,7 +30,10 @@ export function WidgetLayout({
     <WidgetThemeProvider widgetTheme={widgetTheme}>
       <LayoutWrapper title={title} className="min-h-full pt-14 pb-10 sm:mr-1">
         <Banner title="System maintenance">
-          Check out <Link href="/docs/system-maintenance">details</Link>
+          Check out
+          <Link target="_blank" href="/docs/system-maintenance">
+            details
+          </Link>
         </Banner>
         <AnimatePresence>
           <m.div

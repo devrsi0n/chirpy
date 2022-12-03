@@ -11,6 +11,7 @@
     "features/anti-toxic-comment.mdx",
     "features/moderate.mdx",
     "API/webhook.mdx",
-    "self-hosted.mdx"
+    "self-hosted.mdx",
+    "system-maintenance.mdx"
   ]
 }
