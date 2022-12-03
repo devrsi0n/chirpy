@@ -2,6 +2,7 @@ export * from './alert';
 export * from './animation';
 export * from './avatar';
 export * from './badge';
+export * from './banner';
 export * from './box';
 export * from './button';
 export * from './card';

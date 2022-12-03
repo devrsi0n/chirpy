@@ -1,6 +1,8 @@
 import { AnimatePresence, m } from 'framer-motion';
+import Link from 'next/link';
 import * as React from 'react';
 
+import { Banner } from '../../components';
 import {
   WidgetThemeProvider,
   WidgetThemeProviderProps,
@@ -27,6 +29,9 @@ export function WidgetLayout({
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
       <LayoutWrapper title={title} className="min-h-full pt-14 pb-10 sm:mr-1">
+        <Banner title="System maintainance">
+          Check out <Link href="/docs/system-maintainance">details</Link>
+        </Banner>
         <AnimatePresence>
           <m.div
             transition={{ duration: 0.35 }}
