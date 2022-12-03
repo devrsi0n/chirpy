@@ -78,27 +78,29 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      // Set comment foreign key to null manually
-      // to fix db `onDelete: NoAction` protection.
-      await prisma.comment.updateMany({
-        where: {
-          page: {
-            project: {
-              id: input.id,
+      await prisma.$transaction([
+        // Set comment foreign key to null manually
+        // to fix db `onDelete: NoAction` protection.
+        prisma.comment.updateMany({
+          where: {
+            page: {
+              project: {
+                id: input.id,
+              },
             },
           },
-        },
-        data: {
-          parentId: null,
-        },
-      });
-      await prisma.project.deleteMany({
-        where: {
-          id: input.id,
-          // User can only delete their own projects
-          userId: ctx.session.user.id,
-        },
-      });
+          data: {
+            parentId: null,
+          },
+        }),
+        prisma.project.deleteMany({
+          where: {
+            id: input.id,
+            // User can only delete their own projects
+            userId: ctx.session.user.id,
+          },
+        }),
+      ]);
     }),
   updateTheme: protectedProcedure
     .input(
