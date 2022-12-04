@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { useLocalStorage } from '../../hooks/use-local-storage';
+import { useLocalStorage } from '../../hooks/use-storage';
 import { BaseButton } from '../button';
 import { TabsConfig, TabsContext, TabsLabelItem } from './tabs-context';
 import { TabsItem } from './tabs-item';

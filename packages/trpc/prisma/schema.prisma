@@ -1,6 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialIntegrity"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -26,9 +25,10 @@ model Account {
   session_state     String?
   oauthTokenSecret  String?
   oauthToken        String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Comment {
@@ -40,11 +40,15 @@ model Comment {
   userId    String
   content   Json
   deletedAt DateTime?
-  page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   replies   Comment[] @relation("CommentToComment")
   likes     Like[]
+
+  @@index([pageId])
+  @@index([parentId])
+  @@index([userId])
 }
 
 model Like {
@@ -53,10 +57,11 @@ model Like {
   updatedAt DateTime @updatedAt
   commentId String
   userId    String
-  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([commentId, userId])
+  @@index([userId])
 }
 
 model Member {
@@ -66,11 +71,13 @@ model Member {
   teamId    String
   userId    String
   role      String
-  Role      Role     @relation(fields: [role], references: [value], onDelete: Cascade)
-  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Role      Role     @relation(fields: [role], references: [value], onDelete: Cascade, onUpdate: Cascade)
+  team      Team     @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([teamId, userId])
+  @@index([role])
+  @@index([userId])
 }
 
 model NotificationMessage {
@@ -85,11 +92,13 @@ model NotificationMessage {
   // TODO: Replace it with commentId & likeId
   contextId        String
   content          String?          @db.Text
-  recipient        User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade)
-  triggeredBy      User             @relation("NotificationMessage_triggeredByIdToUser", fields: [triggeredById], references: [id], onDelete: Cascade)
-  NotificationType NotificationType @relation(fields: [type], references: [value], onDelete: Cascade)
+  recipient        User             @relation("NotificationMessage_recipientIdToUser", fields: [recipientId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  triggeredBy      User             @relation("NotificationMessage_triggeredByIdToUser", fields: [triggeredById], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  NotificationType NotificationType @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([type, triggeredById, contextId, recipientId])
+  @@index([recipientId])
+  @@index([triggeredById])
 }
 
 model NotificationSubscription {
@@ -97,10 +106,12 @@ model NotificationSubscription {
   userId       String
   subscription Json
   createdAt    DateTime? @default(now())
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   // Check uniqueness muanually because mysql doesn't allow it
   // @@unique([subscription, userId])
+
+  @@index([userId])
 }
 
 model NotificationType {
@@ -116,8 +127,10 @@ model Page {
   url       String    @unique(length: 191) @db.Text
   title     String?   @db.Text
   projectId String
-  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   comments  Comment[]
+
+  @@index([projectId])
 }
 
 model Project {
@@ -129,9 +142,12 @@ model Project {
   userId    String?
   theme     Json?
   domain    String   @unique
-  team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade)
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   pages     Page[]
+
+  @@index([teamId])
+  @@index([userId])
 }
 
 model Role {
@@ -147,7 +163,9 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([userId])
 }
 
 model Team {
@@ -173,7 +191,7 @@ model User {
   bio                           String?
   website                       String?
   twitterUserName               String?
-  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade)
+  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
   accounts                      Account[]
   comments                      Comment[]
   likes                         Like[]
@@ -183,6 +201,8 @@ model User {
   notificationSubscriptions     NotificationSubscription[]
   projects                      Project[]
   sessions                      Session[]
+
+  @@index([type])
 }
 
 model UserType {

@@ -9,7 +9,7 @@ export * from './use-is-dark-mode';
 export * from './use-is-unmounting-ref';
 export * from './use-is-widget';
 export * from './use-isomorphic-layout-effect';
-export * from './use-local-storage';
+export * from './use-storage';
 export * from './use-mounted-promise';
 export * from './use-portal';
 export * from './use-previous';

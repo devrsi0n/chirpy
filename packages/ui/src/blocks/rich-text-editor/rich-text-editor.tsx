@@ -9,7 +9,7 @@ import StarterKit from '@tiptap/starter-kit';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { useLocalStorage } from '../../hooks/use-local-storage';
+import { useLocalStorage } from '../../hooks/use-storage';
 import { textInput } from '../../styles/common';
 import { MainButton } from './main-button';
 import { Toolbar } from './toolbar';

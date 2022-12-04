@@ -13,7 +13,7 @@
     "@types/node": "16.11.45",
     "@types/web-push": "3.3.2",
     "@types/which": "2.0.1",
-    "@types/yargs": "17.0.13",
+    "@types/yargs": "17.0.15",
     "dotenv": "16.0.3",
     "eta": "1.12.3",
     "ts-node": "10.9.1",

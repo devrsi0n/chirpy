@@ -1,11 +1,12 @@
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
+import { MaintenanceBanner } from '../../components';
 import {
   WidgetThemeProvider,
   WidgetThemeProviderProps,
 } from '../../contexts/theme-context';
-import { useWidgetSideEffects } from '../../hooks/use-widget-side-effects';
+import { useWidgetSideEffects } from '../../hooks';
 import { LayoutWrapper, LayoutWrapperProps } from './layout-wrapper';
 
 export type WidgetLayoutProps = {
@@ -27,8 +28,10 @@ export function WidgetLayout({
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
       <LayoutWrapper title={title} className="min-h-full pt-14 pb-10 sm:mr-1">
+        <MaintenanceBanner />
         <AnimatePresence>
           <m.div
+            className="mt-2"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
