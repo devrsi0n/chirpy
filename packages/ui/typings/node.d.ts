@@ -2,16 +2,13 @@ declare namespace NodeJS {
   interface ProcessEnv {
     // Additional environment variables
     NEXT_PUBLIC_APP_URL: string;
-    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: string;
-    NEXT_PUBLIC_HASURA_WS_ORIGIN: string;
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
+    NEXT_PUBLIC_MAINTENANCE_MODE: string;
 
     NEXTAUTH_SECRET: string;
     NEXTAUTH_URL: string;
     HASH_ALGORITHM: string;
-    HASURA_ADMIN_SECRET: string;
-    HASURA_EVENT_SECRET: string;
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;

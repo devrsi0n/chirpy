@@ -10,6 +10,21 @@ export function useLocalStorage<T>(
   initialValue: T,
   key?: string,
 ): [T | undefined, SetValue<T | undefined>, () => void] {
+  return useStorage(() => localStorage, initialValue, key);
+}
+
+export function useSessionStorage<T>(
+  initialValue: T,
+  key?: string,
+): [T | undefined, SetValue<T | undefined>, () => void] {
+  return useStorage(() => sessionStorage, initialValue, key);
+}
+
+function useStorage<T>(
+  getStorage: () => Storage,
+  initialValue: T,
+  key?: string,
+): [T | undefined, SetValue<T | undefined>, () => void] {
   // Get from local storage then
   // parse stored json or return initialValue
   const readValue = (): T => {
@@ -18,10 +33,10 @@ export function useLocalStorage<T>(
     }
 
     try {
-      const item = window.localStorage.getItem(key);
+      const item = getStorage().getItem(key);
       return item ? (parseJSON(item) as T) : initialValue;
     } catch (error) {
-      logger.warn(`Error reading localStorage key “${key}”:`, error);
+      logger.warn(`Error reading storage key “${key}”:`, error);
       return initialValue;
     }
   };
@@ -31,7 +46,7 @@ export function useLocalStorage<T>(
   const setValue: SetValue<T | undefined> = (value) => {
     if (typeof window == 'undefined') {
       logger.warn(
-        `Tried setting localStorage key “${key}” even though environment is not a client`,
+        `Tried setting storage key “${key}” even though environment is not a client`,
       );
     }
 
@@ -42,12 +57,12 @@ export function useLocalStorage<T>(
     }
 
     try {
-      window.localStorage.setItem(key, JSON.stringify(newValue));
+      getStorage().setItem(key, JSON.stringify(newValue));
       setStoredValue(newValue);
 
       window.dispatchEvent(new Event(customEventKey));
     } catch (error) {
-      logger.warn(`Error setting localStorage key “${key}”:`, error);
+      logger.warn(`Error setting storage key “${key}”:`, error);
     }
   };
 
@@ -66,7 +81,7 @@ export function useLocalStorage<T>(
 
   const removeItem = () => {
     if (key) {
-      window.localStorage.removeItem(key);
+      getStorage().removeItem(key);
     }
     // eslint-disable-next-line unicorn/no-useless-undefined
     setStoredValue(undefined);
