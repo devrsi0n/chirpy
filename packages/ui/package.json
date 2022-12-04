@@ -88,7 +88,7 @@
     "configs": "workspace:*",
     "css-loader": "6.7.2",
     "csstype": "3.1.1",
-    "downshift": "6.1.9",
+    "downshift": "6.1.12",
     "eslint": "8.29.0",
     "fake-indexeddb": "4.0.1",
     "html-loader": "4.2.0",
