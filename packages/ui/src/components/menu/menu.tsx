@@ -6,7 +6,7 @@ import * as React from 'react';
 import { bluredBg, listHoverable } from '../../styles/common';
 import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
-import { Button, IconButton } from '../button';
+import { BaseButton, Button, IconButton } from '../button';
 import { Divider } from '../divider';
 import { IconChevronDown } from '../icons';
 
@@ -120,6 +120,7 @@ function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
 export type MenuItemProps = React.PropsWithChildren<{
   disableAutoDismiss?: boolean;
   onClick?: () => void;
+  disabled?: boolean;
 }> &
   BoxProps;
 
@@ -143,7 +144,7 @@ function MenuItem({
       {
         (/* { active }: ItemRenderPropArg */) => (
           <Box
-            as={as}
+            as={as || BaseButton}
             onClick={onClick}
             className={clsx(
               listHoverable,

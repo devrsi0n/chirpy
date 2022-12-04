@@ -56,6 +56,9 @@ export function NotificationHub(): JSX.Element {
                   index={index}
                   length={data.length}
                   onClickCapture={async (messageId) => {
+                    if (!!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
+                      return;
+                    }
                     await readANotification({ messageId });
                     await refechMessages();
                   }}

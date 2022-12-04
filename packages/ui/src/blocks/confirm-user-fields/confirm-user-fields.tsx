@@ -114,7 +114,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       <Button
         className="w-full space-x-1"
         onClick={handleClickSubmit}
-        disabled={hasError || loading}
+        disabled={
+          hasError || loading || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+        }
         aria-label="Save"
         variant="solid"
         color="primary"

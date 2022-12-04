@@ -65,7 +65,12 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           (isSignIn ? (
             <></>
           ) : (
-            <Menu.Item className={itemStyle} onClick={handleSignIn}>
+            <Menu.Item
+              as="div"
+              className={itemStyle}
+              onClick={handleSignIn}
+              disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
+            >
               <IconLogIn size={14} />
               <p className="w-max">Sign in</p>
             </Menu.Item>
@@ -98,6 +103,8 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item
+              as="div"
+              disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
               onClick={async () => {
                 await signOut({

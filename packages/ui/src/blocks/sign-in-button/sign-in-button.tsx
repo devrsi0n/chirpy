@@ -28,6 +28,7 @@ export function SignInButton({
       variant={variant}
       onClick={() => (inPageNav ? handleSessionAndSignIn() : handleSignIn())}
       {...restProps}
+      disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
     >
       <span className="inline-flex flex-row items-center space-x-1">
         {signInLoading ? (

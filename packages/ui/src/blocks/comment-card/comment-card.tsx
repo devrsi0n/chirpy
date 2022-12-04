@@ -189,12 +189,15 @@ export function CommentCard({
             likes={likes}
             commentId={commentId}
             title="Like this comment"
+            disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
           />
           <span onClick={handlePressReply} className="flex justify-center">
             <ActionButton
               aria-label="Reply"
               color="blue"
-              disabled={disabledReply}
+              disabled={
+                disabledReply || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+              }
               title={
                 disabledReply
                   ? 'You have reached the maximum depth of replies'

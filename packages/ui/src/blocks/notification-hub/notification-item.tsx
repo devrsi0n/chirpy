@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { Avatar } from '../../components/avatar';
-import { Divider } from '../../components/divider';
+import { BaseButton, Avatar, Divider } from '../../components';
 import {
   IconHeartFill,
   IconMessageSquare,
@@ -38,6 +37,7 @@ export function NotificationItem({
   const isWidget = useIsWidget();
   return (
     <Menu.Item
+      as="div"
       key={message.id}
       className={clsx(
         'group relative mt-0 flex-col items-start  rounded-none !p-0 !text-left hover:rounded',
@@ -57,18 +57,19 @@ export function NotificationItem({
         className="flex w-full flex-row items-start space-x-2 px-5 pb-2 pt-3"
         target={isWidget ? '_blank' : '_self'}
       >
-        <button
+        <BaseButton
           type="button"
-          className="absolute top-1.5 right-1.5 inline-block h-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
+          className="!absolute top-1.5 right-1.5 inline-block h-fit w-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
           onClick={(e) => {
             onClickDelete(message.id);
             e.stopPropagation();
           }}
           ref={deleteButtonRef}
           aria-label="Delete the message"
+          disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
         >
           <IconX size={18} />
-        </button>
+        </BaseButton>
         {ICON_MAP[message.type]}
         <div className="flex-1">
           <Avatar

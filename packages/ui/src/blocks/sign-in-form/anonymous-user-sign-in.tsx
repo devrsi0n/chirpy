@@ -47,6 +47,7 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
           variant="solid"
           color="primary"
           className="w-full"
+          disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
         >
           Continue as anonymous user
         </Button>

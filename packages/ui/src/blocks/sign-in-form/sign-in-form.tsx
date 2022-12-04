@@ -113,6 +113,7 @@ export function SignInForm({
                       }
                       className="w-full px-0 md:justify-start md:pl-20"
                       size="lg"
+                      disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
                     >
                       <option.icon />
                       <span className="ml-2 text-left">

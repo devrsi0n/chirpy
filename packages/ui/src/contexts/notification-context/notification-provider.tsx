@@ -59,7 +59,7 @@ export function NotificationProvider({ children }: INotificationProviderProps) {
     }
 
     // We don't want to wait here for registering the service worker, we only need to wait for permission check
-    registerSub().then(() => setDidRegister(true));
+    registerSub().then((registered) => registered && setDidRegister(true));
   }, [isSignIn, registerSub]);
   const value = React.useMemo(
     () => ({

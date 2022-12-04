@@ -93,6 +93,7 @@ export function ProjectCard({
                   handleClickDeleteProjectMenu(project.id, project.name)
                 }
                 className="space-x-1"
+                disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               >
                 <IconTrash2 size={14} />
                 <span>Delete</span>
@@ -106,7 +107,12 @@ export function ProjectCard({
       </Text>
       <div className="flex flex-row space-x-2 px-6">
         <Link href={`/theme/${project.domain}`} variant="plain" tabIndex={-1}>
-          <Button color="primary" shadow={false} className="px-2 py-1">
+          <Button
+            color="primary"
+            shadow={false}
+            className="px-2 py-1"
+            disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
+          >
             Theme
           </Button>
         </Link>

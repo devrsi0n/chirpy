@@ -50,6 +50,7 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
           variant="solid"
           color="primary"
           className="w-full"
+          disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
         >
           Continue with email
         </Button>

@@ -201,6 +201,7 @@ export function Profile(): JSX.Element {
                 variant="solid"
                 color="primary"
                 aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
+                disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               >
                 {isEditMode ? <IconSave size={16} /> : <IconEdit2 size={16} />}
                 <span>{isEditMode ? 'Save' : 'Edit'}</span>

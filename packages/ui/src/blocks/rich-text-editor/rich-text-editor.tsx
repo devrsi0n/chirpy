@@ -99,7 +99,9 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         <Toolbar className="flex flex-row justify-between" editor={editor}>
           <MainButton
             rteValue={value}
-            disabled={editor.isEmpty}
+            disabled={
+              editor.isEmpty || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+            }
             isReply={isReply}
             onClickSubmit={handleSubmitReply}
             onClickDismiss={onClickDismiss}

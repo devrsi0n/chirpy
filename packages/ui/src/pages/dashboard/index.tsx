@@ -81,7 +81,9 @@ export function Dashboard(): JSX.Element {
             variant="solid"
             color="primary"
             className="space-x-1"
-            disabled={disableCreation}
+            disabled={
+              disableCreation || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+            }
           >
             <IconPlusCircle size={18} />
             <span>Create project</span>
