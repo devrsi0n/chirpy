@@ -16,12 +16,12 @@ export function Header(): JSX.Element {
       <MaintenanceBanner />
       <div
         className={clsx(
-          'relative mx-auto max-w-7xl py-3 px-2 shadow-xs transition duration-150 sm:px-6 lg:px-8',
+          'relative',
           // Can't use the normal backdrop-filter here as it'll cause nested blur elements not working in chrome.
           'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
         )}
       >
-        <section className="flex flex-row items-center justify-between">
+        <section className="mx-auto flex max-w-7xl flex-row items-center justify-between py-3 px-2 shadow-xs transition duration-150 sm:px-6 lg:px-8">
           <div className="flex items-center pl-3 sm:hidden">
             <SideMenu>
               {isSignIn ? (
