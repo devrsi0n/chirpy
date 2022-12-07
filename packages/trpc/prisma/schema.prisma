@@ -201,6 +201,7 @@ model User {
   notificationSubscriptions     NotificationSubscription[]
   projects                      Project[]
   sessions                      Session[]
+  Site                          Site[]
 
   @@index([type])
 }
@@ -218,4 +219,40 @@ model VerificationToken {
   id         String   @id @default(cuid())
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id            String   @id @default(cuid())
+  title         String?  @db.Text
+  description   String?  @db.Text
+  content       String?  @db.LongText
+  slug          String   @default(cuid())
+  image         String?  @db.Text
+  imageBlurhash String?  @db.LongText
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  published     Boolean  @default(false)
+  site          Site?    @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId        String?
+
+  @@unique([id, siteId], name: "post_site_constraint")
+  @@index([siteId])
+}
+
+model Site {
+  id            String   @id @default(cuid())
+  name          String?
+  description   String?  @db.Text
+  logo          String?
+  image         String?  @db.Text
+  imageBlurhash String?  @db.LongText
+  subdomain     String?  @unique
+  customDomain  String?  @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User?    @relation(fields: [userId], references: [id])
+  userId        String?
+  posts         Post[]
+
+  @@index([userId])
 }
