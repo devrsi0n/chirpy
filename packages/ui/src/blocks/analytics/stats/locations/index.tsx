@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
@@ -9,7 +10,16 @@ import { Props } from '../../type';
 import { apiPath, sitePath } from '../../url';
 import { AnalyticsCard, CardHeader } from '../fine-components';
 import ListReport from '../reports/list';
-import { CountriesMap } from './countries-map';
+
+// Have to load this component dynamically
+// because it uses datamap which is not SSR friendly
+const CountriesMap = dynamic(
+  () =>
+    import(/* webpackChunkName: "analytics-country-map"*/ './countries-map'),
+  {
+    ssr: false,
+  },
+);
 
 interface LocationsProps extends Props {
   timer: Timer;

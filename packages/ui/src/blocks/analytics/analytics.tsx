@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { ClientOnly } from '../../components';
 import { Heading } from '../../components/heading';
 import styles from './analytics.module.scss';
 import Datepicker from './datepicker';
@@ -17,14 +18,14 @@ import VisitorGraph from './stats/visitor-graph';
 import { Timer } from './timer';
 import { Site } from './type';
 
-export interface RealtimeProps {
+export interface AnalyticsProps {
   stuck: boolean;
   site: Site;
   loggedIn: boolean;
   currentUserRole: 'owner' | 'admin' | 'public';
 }
 
-export default function Realtime(props: RealtimeProps) {
+export function Analytics(props: AnalyticsProps) {
   const [query, setQuery] = React.useState(() =>
     parseQuery(window.location.search, props.site),
   );
@@ -68,12 +69,14 @@ export default function Realtime(props: RealtimeProps) {
           router={router}
         />
         <div className="block w-full items-start justify-between md:flex">
-          <Locations
-            router={router}
-            site={props.site}
-            query={query}
-            timer={timer}
-          />
+          <ClientOnly>
+            <Locations
+              router={router}
+              site={props.site}
+              query={query}
+              timer={timer}
+            />
+          </ClientOnly>
           <Pages site={props.site} query={query} timer={timer} />
         </div>
         <div className="block w-full items-start justify-between md:flex">

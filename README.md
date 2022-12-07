@@ -53,8 +53,8 @@ You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chi
 
 - [![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 - [![Next.js](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
-- [![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphql.org)
-- <a href="https://github.com/hasura/graphql-engine"><img width="70px" src="https://graphql-engine-cdn.hasura.io/img/powered_by_hasura_primary_lightbg.svg" /></a>
+- <img src="https://trpc.io/img/logo.svg" width="50" alt="tRPC logo" />
+- <img src="https://www.prisma.io/images/apple-touch-icon.png" width="50" alt="Prisma logo" />
 - [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 - [![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)](https://www.cypress.io/)
 - [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
@@ -72,7 +72,7 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 
 [![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=92c5af253f6a&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
 
-[![Stellate](https://stellate.co/badge.svg)](https://stellate.co/?ref=powered-by)
+<img src="https://planetscale.com/favicon.svg" width="80" alt="Planetscale logo" />
 
 ## 💅 Design system
 

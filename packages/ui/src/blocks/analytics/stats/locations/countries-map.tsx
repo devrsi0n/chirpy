@@ -33,7 +33,7 @@ interface CountriesState {
   loading: boolean;
 }
 
-export class CountriesMap extends React.Component<
+export default class CountriesMap extends React.Component<
   CountriesProps,
   CountriesState
 > {
