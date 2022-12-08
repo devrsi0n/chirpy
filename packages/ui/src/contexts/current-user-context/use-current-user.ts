@@ -3,7 +3,7 @@ import * as React from 'react';
 import {
   CurrentUserContext,
   CurrentUserContextType,
-} from '../../contexts/current-user-context/current-user-context';
+} from './current-user-context';
 
 export function useCurrentUser(): CurrentUserContextType {
   const context = React.useContext(CurrentUserContext);

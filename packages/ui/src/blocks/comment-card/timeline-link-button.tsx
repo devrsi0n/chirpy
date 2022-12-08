@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { ActionButton, ButtonProps } from '../../components/button';
 import { IconInfo } from '../../components/icons';
+import { useCurrentUser } from '../../contexts';
 import { useCommentContext } from '../../contexts/comment-context';
 
 type TimelineLinkButtonProps = {
@@ -13,8 +14,9 @@ export function TimelineLinkButton({
   href,
   onClick,
 }: TimelineLinkButtonProps): JSX.Element {
-  const { onClickCommentTimeline, hideCommentTimeline } = useCommentContext();
-  if (hideCommentTimeline) {
+  const { isPreview } = useCurrentUser();
+  const { onClickCommentTimeline } = useCommentContext();
+  if (isPreview) {
     return <></>;
   }
   return (

@@ -20,6 +20,7 @@ export function PredefinedCurrentUser(
     () => ({
       loading: false,
       isSignIn: true,
+      isPreview: true,
       data: {
         editableProjectIds: [],
         id: 'ffad5f9c-0c28-4c9b-a652-b21a2a42949b',

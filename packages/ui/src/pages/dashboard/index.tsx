@@ -11,8 +11,10 @@ import {
   Button,
   Dialog,
   IconPlusCircle,
+  Popover,
   Spinner,
   TextField,
+  Text,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
@@ -25,7 +27,7 @@ type FormFields = {
 };
 
 export function Dashboard(): JSX.Element {
-  const { loading: userIsLoading } = useCurrentUser();
+  const { loading: userIsLoading, data } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,
@@ -70,28 +72,44 @@ export function Dashboard(): JSX.Element {
     },
   );
   const disableCreation = isENVProd && (projects?.length || 0) > 0;
+  const isAnonymousUser = !!data.email;
 
   return (
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
-          <Button
-            onClick={handleCreateProject}
-            variant="solid"
-            color="primary"
-            className="space-x-1"
-            disabled={
-              disableCreation || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
-            }
-          >
-            <IconPlusCircle size={18} />
-            <span>Create project</span>
-          </Button>
+          <Popover>
+            <Popover.Button
+              onClick={handleCreateProject}
+              variant="solid"
+              color="primary"
+              className="space-x-1"
+              disabled={
+                disableCreation || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
+              }
+            >
+              <IconPlusCircle size={18} />
+              <span>Create project</span>
+            </Popover.Button>
+            <Popover.Panel>
+              {isAnonymousUser && (
+                <div>
+                  <Text>
+                    Sorry, you need an email with your account to create a
+                    project. Otherwise, you may lose access to your project.
+                  </Text>
+                  <Text>
+                    You can re-sign in with your email or social media account
+                  </Text>
+                </div>
+              )}
+            </Popover.Panel>
+          </Popover>
         </div>
         {projects?.length ? (
           <div className="flex flex-row">
-            <ul className="flex-1 space-y-6" aria-label="Project list">
+            <ul className="flex-1 space-y-6">
               {projects.map((project) => (
                 <li key={project.id}>
                   <ProjectCard
