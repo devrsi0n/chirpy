@@ -15,11 +15,13 @@ import {
   Spinner,
   TextField,
   Text,
+  Heading,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
+import { CreateProjectButton } from './create-project-button';
 
 type FormFields = {
   name: string;
@@ -71,41 +73,16 @@ export function Dashboard(): JSX.Element {
       fetchUserProjects();
     },
   );
-  const disableCreation = isENVProd && (projects?.length || 0) > 0;
-  const isAnonymousUser = !!data.email;
 
   return (
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
-          <Popover>
-            <Popover.Button
-              onClick={handleCreateProject}
-              variant="solid"
-              color="primary"
-              className="space-x-1"
-              disabled={
-                disableCreation || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
-              }
-            >
-              <IconPlusCircle size={18} />
-              <span>Create project</span>
-            </Popover.Button>
-            <Popover.Panel>
-              {isAnonymousUser && (
-                <div>
-                  <Text>
-                    Sorry, you need an email with your account to create a
-                    project. Otherwise, you may lose access to your project.
-                  </Text>
-                  <Text>
-                    You can re-sign in with your email or social media account
-                  </Text>
-                </div>
-              )}
-            </Popover.Panel>
-          </Popover>
+          <CreateProjectButton
+            projectCount={projects?.length}
+            onCreateProject={handleCreateProject}
+          />
         </div>
         {projects?.length ? (
           <div className="flex flex-row">

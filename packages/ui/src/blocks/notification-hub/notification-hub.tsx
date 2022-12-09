@@ -63,7 +63,6 @@ export function NotificationHub(): JSX.Element {
                     await refechMessages();
                   }}
                   onClickDelete={async (messageId) => {
-                    console.log('Clicking delete');
                     await deleteNotificationMessage({ messageId });
                     refechMessages();
                   }}
