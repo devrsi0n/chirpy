@@ -17,8 +17,7 @@ import { PredefinedCurrentUser } from './predefined-current-user';
 import { PredefinedNotification } from './predefined-notification';
 import { getPreviewComments, PAGE_ID, PROJECT_ID } from './preview-data';
 
-export interface CommentWidgetPreviewProps
-  extends Pick<CommentContextType, 'hideCommentTimeline'> {
+export interface CommentWidgetPreviewProps {
   rtePlaceholder?: string;
   buildDate: string;
 }
@@ -122,15 +121,8 @@ function CommentWidgetPreviewInternal(
       deleteAComment,
       toggleALikeAction,
       onClickCommentTimeline,
-      ...(props.hideCommentTimeline && { hideCommentTimeline: true }),
     }),
-    [
-      createAComment,
-      deleteAComment,
-      toggleALikeAction,
-      onClickCommentTimeline,
-      props.hideCommentTimeline,
-    ],
+    [createAComment, deleteAComment, toggleALikeAction, onClickCommentTimeline],
   );
   return (
     <CommentContext.Provider value={commentContext}>

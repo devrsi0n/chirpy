@@ -12,13 +12,13 @@ import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
 export function NotificationHub(): JSX.Element {
-  const { isSignIn } = useCurrentUser();
+  const { isSignIn, isPreview } = useCurrentUser();
   const {
     data,
     refetch: refechMessages,
     isFetching,
   } = trpcClient.notification.messages.useQuery(undefined, {
-    enabled: !!isSignIn,
+    enabled: !!isSignIn && !isPreview,
   });
 
   const { mutateAsync: readANotification } =
@@ -56,7 +56,7 @@ export function NotificationHub(): JSX.Element {
                   index={index}
                   length={data.length}
                   onClickCapture={async (messageId) => {
-                    if (!!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
+                    if (!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
                       return;
                     }
                     await readANotification({ messageId });

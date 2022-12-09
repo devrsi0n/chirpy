@@ -8,7 +8,6 @@ type ButtonDimension = { height?: number; width?: number };
 export type Placement = 'top' | 'topEnd' | 'bottomEnd';
 
 export interface IPopoverPanelProps {
-  buttonAs?: React.ElementType<Record<string, unknown>>;
   /**
    * TODO
    */

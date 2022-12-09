@@ -26,3 +26,12 @@ export const mockUserData = {
   ],
   editableProjectIds: EDITABLE_PROJECT_IDS,
 };
+
+export const mockRefetchUser = jest.fn();
+
+export const DEFAULT_USER_DATA = {
+  data: mockUserData,
+  isSignIn: true,
+  loading: false,
+  refetchUser: mockRefetchUser,
+};

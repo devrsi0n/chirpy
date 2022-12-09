@@ -18,6 +18,10 @@ export const config = {
     '/analytics/:path*',
     '/profile/:path*',
     '/theme/:path*',
-    '/api/content-classifier/toxic-text',
+
+    // Don't add /api/content-classifier/toxic-text here,
+    // it's used by the comment-widget-preview,
+    // so it should be public
+    // '/api/content-classifier/toxic-text',
   ],
 };

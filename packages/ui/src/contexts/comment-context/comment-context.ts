@@ -13,7 +13,6 @@ export type CommentContextType = {
   deleteAComment: UseDeleteAComment;
   toggleALikeAction: UseToggleALikeAction;
   onClickCommentTimeline: (href: string) => void;
-  hideCommentTimeline?: true;
 };
 
 export const CommentContext = React.createContext<CommentContextType>({

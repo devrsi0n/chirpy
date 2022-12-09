@@ -11,13 +11,17 @@ import {
   Button,
   Dialog,
   IconPlusCircle,
+  Popover,
   Spinner,
   TextField,
+  Text,
+  Heading,
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
+import { CreateProjectButton } from './create-project-button';
 
 type FormFields = {
   name: string;
@@ -25,7 +29,7 @@ type FormFields = {
 };
 
 export function Dashboard(): JSX.Element {
-  const { loading: userIsLoading } = useCurrentUser();
+  const { loading: userIsLoading, data } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,
@@ -69,29 +73,20 @@ export function Dashboard(): JSX.Element {
       fetchUserProjects();
     },
   );
-  const disableCreation = isENVProd && (projects?.length || 0) > 0;
 
   return (
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
-          <Button
-            onClick={handleCreateProject}
-            variant="solid"
-            color="primary"
-            className="space-x-1"
-            disabled={
-              disableCreation || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
-            }
-          >
-            <IconPlusCircle size={18} />
-            <span>Create project</span>
-          </Button>
+          <CreateProjectButton
+            projectCount={projects?.length}
+            onCreateProject={handleCreateProject}
+          />
         </div>
         {projects?.length ? (
           <div className="flex flex-row">
-            <ul className="flex-1 space-y-6" aria-label="Project list">
+            <ul className="flex-1 space-y-6">
               {projects.map((project) => (
                 <li key={project.id}>
                   <ProjectCard
