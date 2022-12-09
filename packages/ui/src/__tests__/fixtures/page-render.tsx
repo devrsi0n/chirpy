@@ -4,15 +4,7 @@ import { ToastProvider } from '../../components';
 // import '../mocks/next-router';
 import { CurrentUserContext, UserData } from '../../contexts';
 import { trpcClient } from '../../utilities';
-import { mockUserData } from '../mocks/data/user';
-
-export const mockRefetchUser = jest.fn();
-const DEFAULT_USER_DATA = {
-  data: mockUserData,
-  isSignIn: true,
-  loading: false,
-  refetchUser: mockRefetchUser,
-};
+import { DEFAULT_USER_DATA } from '../mocks/data/user';
 
 const getMockedUser = jest.fn().mockReturnValue(DEFAULT_USER_DATA);
 

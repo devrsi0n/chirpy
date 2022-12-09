@@ -63,6 +63,12 @@ function Modal({ router, site, onClick, maxWidth, children }: ModalProps) {
     router.push(`/${encodeURIComponent(site.domain)}${location.search}`);
   }
 
+  /**
+   * Decide whether to set max-width, and if so, to what.
+   * If no max-width is available, set width instead to min-content such that we can rely on widths set on th.
+   * On >md, we use the same behaviour as before: set width to 800 pixels.
+   * Note that When a max-width comes from the parent component, we rely on that *always*.
+   */
   function getStyle() {
     const styleObject: any = {};
     if (maxWidth) {

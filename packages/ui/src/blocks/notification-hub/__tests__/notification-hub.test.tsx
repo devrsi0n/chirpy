@@ -1,4 +1,4 @@
-import { screen, waitFor } from '@testing-library/react';
+import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '../../../__tests__/fixtures/page-render';
@@ -12,6 +12,7 @@ import { NotificationHub } from '../notification-hub';
 describe('NotificationHub', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    cleanup();
   });
 
   it('should render the messages', async () => {
@@ -23,6 +24,7 @@ describe('NotificationHub', () => {
     await renderDefaultNotificationHub();
 
     await userEvent.click(screen.getAllByAltText(/avatar/)[0]);
+
     expect(mockReadNotification).toHaveBeenCalledTimes(1);
   });
 
@@ -39,6 +41,8 @@ async function renderDefaultNotificationHub() {
   const notificationButton = screen.getByLabelText('click to open the menu');
   await userEvent.click(notificationButton);
   await waitFor(() => {
-    expect(screen.getAllByLabelText('Delete the message')[0]).toBeDefined();
+    expect(
+      screen.getAllByLabelText('Delete the message')[0],
+    ).toBeInTheDocument();
   });
 }

@@ -3142,6 +3142,10 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-white\/90 {
+  color: rgb(255 255 255 / 0.9);
+}
+
 .text-whitea-1200 {
   color: hsla(var(--tw-colors-whitea-1200));
 }
@@ -3531,6 +3535,11 @@ video {
 .hover\:bg-gray-1200:hover {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--tw-colors-gray-1200) / var(--tw-bg-opacity));
+}
+
+.hover\:bg-primary-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--tw-colors-primary-800) / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary-1000:hover {
@@ -4222,6 +4231,10 @@ video {
     flex-direction: column;
   }
 
+  .sm\:items-center {
+    align-items: center;
+  }
+
   .sm\:items-stretch {
     align-items: stretch;
   }
@@ -4256,6 +4269,12 @@ video {
     --tw-space-x-reverse: 0;
     margin-right: calc(0.75rem * var(--tw-space-x-reverse));
     margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
+  .sm\:space-x-1 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+    margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
   }
 
   .sm\:space-x-2 > :not([hidden]) ~ :not([hidden]) {
@@ -4331,6 +4350,10 @@ video {
 
   .sm\:pl-6 {
     padding-left: 1.5rem;
+  }
+
+  .sm\:pl-0 {
+    padding-left: 0px;
   }
 
   .sm\:pt-6 {
@@ -4841,4 +4864,8 @@ video {
 
 .\[\&\:\:-moz-color-swatch-wrapper\]\:p-0::-moz-color-swatch-wrapper {
   padding: 0px;
+}
+
+.\[\&_a\]\:underline a {
+  text-decoration-line: underline;
 }
