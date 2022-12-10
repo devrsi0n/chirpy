@@ -29,7 +29,7 @@ type FormFields = {
 };
 
 export function Dashboard(): JSX.Element {
-  const { loading: userIsLoading, data } = useCurrentUser();
+  const { loading: userIsLoading } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,

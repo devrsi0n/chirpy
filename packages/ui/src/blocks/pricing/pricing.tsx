@@ -98,7 +98,11 @@ function PricingCard({
       <Text className="mb-8" variant="secondary">
         {priceDescription}&#8203;
       </Text>
-      <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
+      <Link
+        variant="plain"
+        href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/sign-in`}
+        tabIndex={-1}
+      >
         <Button
           {...callToAction.buttonProps}
           variant="solid"

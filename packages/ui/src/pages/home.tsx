@@ -28,7 +28,11 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
-            <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
+            <Link
+              variant="plain"
+              href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/sign-in`}
+              tabIndex={-1}
+            >
               <Button
                 variant="solid"
                 color="primary"
