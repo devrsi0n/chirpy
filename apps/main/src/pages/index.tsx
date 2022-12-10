@@ -14,15 +14,4 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   };
 };
 
-export const strings = {
-  heroTitlePoint: 'Open source & privacy friendly',
-  heroTitle: 'Disqus alternate',
-  heroDescription:
-    'Build stronger, more engaged communities by integrating our moden comment system.',
-  callToAction: {
-    main: 'Get Early Access',
-    secondary: 'Learn More',
-  },
-};
-
 export { HomePage as default } from '@chirpy-dev/ui';

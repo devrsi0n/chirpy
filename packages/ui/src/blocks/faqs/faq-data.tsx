@@ -30,8 +30,7 @@ export const FAQ_LIST: FAQItem[] = [
   },
   {
     title: `What's your refund policy?`,
-    description: `Our refund policy is simple and straightforward. If you need to cancel your plan, you can do so at any time, 
-      and we'll refund you for any unused time on your plan. Just contact our support team to request a refund and we'll take care of the rest.`,
+    description: `Our refund policy is simple and straightforward. If you need to cancel your plan, you can do so at any time, and we'll refund you for any unused time on your plan. Just contact our support team to request a refund and we'll take care of the rest.`,
     icon: <IconCornerLeftDown />,
   },
   {
