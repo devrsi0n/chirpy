@@ -7,7 +7,7 @@ const contents: FeatureProps[] = [
   {
     heading: 'Easy customization',
     content:
-      'You can customize widget styles to match your design system easily. ✨',
+      'With our easy-to-use customization options, you can match the widget styles to your design system with just a few clicks.✨',
     icon: IconFigma,
   },
   {
@@ -15,9 +15,7 @@ const contents: FeatureProps[] = [
     content: (
       <>
         <span>
-          You only need minimal info to get started, you can sign-in as an
-          anonymous user or sign-in with email/magic link or social login
-          providers. We never track you or sell your data. Learn more about
+        Sign in quickly and easily with minimal info. Choose from anonymous, email/magic link, or social login options. We respect your privacy and never track or sell your data. Learn more about our privacy policy.
         </span>
         <Link className="ml-1" href="/docs/features/privacy-friendly">
           privacy.

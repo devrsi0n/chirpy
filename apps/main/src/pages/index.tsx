@@ -18,7 +18,7 @@ export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
   heroTitle: 'Disqus alternate',
   heroDescription:
-    'Build a better community by integrating a modern comment system.',
+    'Improve engagement and foster a sense of community among users.',
   callToAction: {
     main: 'Get Early Access',
     secondary: 'Learn More',
