@@ -15,10 +15,12 @@ const contents: FeatureProps[] = [
     content: (
       <>
         <span>
-        Sign in quickly and easily with minimal info. Choose from anonymous, email/magic link, or social login options. We respect your privacy and never track or sell your data. Learn more about our
+          Sign in quickly and easily with minimal info. Choose from anonymous,
+          email/magic link, or social login options. We respect your privacy and
+          never track or sell your data. Learn more about our
         </span>
         <Link className="ml-1" href="/docs/features/privacy-friendly">
-        privacy policy
+          privacy policy
         </Link>
         .
       </>

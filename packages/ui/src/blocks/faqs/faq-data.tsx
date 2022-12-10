@@ -38,7 +38,9 @@ export const FAQ_LIST: FAQItem[] = [
     title: `What browsers do you support?`,
     description: (
       <span>
-        Chirpy is built to work with the most recent versions of Chrome, Firefox, Safari, and Edge. If you're using one of these browsers, you can expect a seamless and enjoyable experience with Chirpy. 
+        {`Chirpy is built to work with the most recent versions of Chrome,
+        Firefox, Safari, and Edge. If you're using one of these browsers, you
+        can expect a seamless and enjoyable experience with Chirpy.`}
         <br />
         <span>{`We don't support Internet Explorer, so if you're using that browser, you may experience some compatibility issues.`}</span>
       </span>
@@ -50,9 +52,13 @@ export const FAQ_LIST: FAQItem[] = [
     description: (
       <span>
         Our payment is provided by{' '}
-        <Link href="https://www.paddle.com/">Paddle</Link>, a secure and reliable payment platform that supports all major credit and debit cards, 
-        as well as popular digital payment options like PayPal, Google Pay, and Apple Pay. 
-        With Paddle, you can be confident that your payment information is safe and that you'll have a smooth and hassle-free checkout experience.{' '}
+        <Link href="https://www.paddle.com/">Paddle</Link>
+        {`, a secure and
+        reliable payment platform that supports all major credit and debit
+        cards, as well as popular digital payment options like PayPal, Google
+        Pay, and Apple Pay. With Paddle, you can be confident that your payment
+        information is safe and that you'll have a smooth and hassle-free
+        checkout experience. `}
         <Link href="https://www.paddle.com/help/start/intro-to-paddle/which-payment-methods-do-you-support">
           More details
         </Link>
