@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, MutableRefObject } from 'react';
+import React from 'react';
 
 interface LazyLoaderProps {
   onVisible?: () => void;
@@ -7,38 +7,40 @@ interface LazyLoaderProps {
   style?: React.CSSProperties;
 }
 
-export default React.forwardRef<HTMLDivElement, LazyLoaderProps>(
-  function LazyLoader(props, ref): JSX.Element {
-    const observer = useRef<IntersectionObserver | null>(null);
+export default class LazyLoader extends React.Component<LazyLoaderProps> {
+  observer: IntersectionObserver;
+  element: HTMLElement;
+  componentDidMount() {
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          this.props.onVisible && this.props.onVisible();
+          this.observer.unobserve(this.element);
+        }
+      },
+      {
+        threshold: 0,
+      },
+    );
 
-    useEffect(() => {
-      const elm = (ref as MutableRefObject<HTMLDivElement>)?.current;
-      if (!elm) {
-        return;
-      }
-      observer.current = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting) {
-            props.onVisible && props.onVisible();
-            observer.current?.unobserve(elm);
-          }
-        },
-        {
-          threshold: 0,
-        },
-      );
+    this.observer.observe(this.element);
+  }
 
-      observer.current.observe(elm);
+  componentWillUnmount() {
+    this.observer.unobserve(this.element);
+  }
 
-      return () => {
-        observer.current?.unobserve(elm);
-      };
-    }, []);
-
+  render() {
     return (
-      <div ref={ref} className={props.className} style={props.style}>
-        {props.children}
+      <div
+        ref={(el) => {
+          this.element = el!;
+        }}
+        className={this.props.className}
+        style={this.props.style}
+      >
+        {this.props.children}
       </div>
     );
-  },
-);
+  }
+}

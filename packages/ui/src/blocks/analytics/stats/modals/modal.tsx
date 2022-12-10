@@ -17,59 +17,72 @@ interface ModalProps {
   maxWidth: number;
 }
 
-function Modal({ router, site, onClick, maxWidth, children }: ModalProps) {
-  const [viewport, setViewport] = useState(DEFAULT_WIDTH);
-  const node = useRef(null);
+interface ModalState {
+  viewport: number;
+}
 
-  useEffect(() => {
+class Modal extends React.Component<ModalProps, ModalState> {
+  node: React.RefObject<HTMLDivElement> = React.createRef();
+  state = {
+    viewport: DEFAULT_WIDTH,
+  };
+
+  componentDidMount() {
     document.body.style.overflow = 'hidden';
     document.body.style.height = '100vh';
 
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('keyup', handleKeyup);
-    window.addEventListener('resize', handleResize, false);
-    handleResize();
+    document.addEventListener('mousedown', this.handleClickOutside);
+    document.addEventListener('keyup', this.handleKeyup);
+    window.addEventListener('resize', this.handleResize, false);
+    this.handleResize();
+  }
 
-    return () => {
-      document.body.style.removeProperty('overflow');
-      document.body.style.removeProperty('height');
+  componentWillUnmount() {
+    document.body.style.removeProperty('overflow');
+    document.body.style.removeProperty('height');
 
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('keyup', handleKeyup);
-      window.removeEventListener('resize', handleResize, false);
-    };
-  }, []);
+    document.removeEventListener('mousedown', this.handleClickOutside);
+    document.removeEventListener('keyup', this.handleKeyup);
+    window.removeEventListener('resize', this.handleResize, false);
+  }
 
-  function handleClickOutside(e: MouseEvent) {
+  handleClickOutside = (e: MouseEvent) => {
     // @ts-ignore
-    if (node.current?.contains(e.target)) {
+    if (this.node.current?.contains(e.target)) {
       return;
     }
 
-    close();
-  }
+    this.close();
+  };
 
-  function handleKeyup(e: KeyboardEvent) {
+  handleKeyup = (e: KeyboardEvent) => {
     if (e.code === 'Escape') {
-      close();
+      this.close();
     }
-  }
+  };
 
-  function handleResize() {
-    setViewport(window.innerWidth);
-  }
+  handleResize = () => {
+    this.setState({ viewport: window.innerWidth });
+  };
 
-  function close() {
-    router.push(`/${encodeURIComponent(site.domain)}${location.search}`);
+  close() {
+    this.props.router.push(
+      `/${encodeURIComponent(this.props.site.domain)}${
+        this.props.location.search
+      }`,
+    );
   }
 
   /**
+   * @description
    * Decide whether to set max-width, and if so, to what.
    * If no max-width is available, set width instead to min-content such that we can rely on widths set on th.
    * On >md, we use the same behaviour as before: set width to 800 pixels.
    * Note that When a max-width comes from the parent component, we rely on that *always*.
    */
-  function getStyle() {
+  getStyle() {
+    const { maxWidth } = this.props;
+    const { viewport } = this.state;
     const styleObject: any = {};
     if (maxWidth) {
       styleObject.maxWidth = maxWidth;
@@ -79,21 +92,23 @@ function Modal({ router, site, onClick, maxWidth, children }: ModalProps) {
     return styleObject;
   }
 
-  return createPortal(
-    <div className="modal is-open" onClick={onClick}>
-      <div className="modal__overlay">
-        <button className="modal__close"></button>
-        <div
-          ref={node}
-          className="modal__container dark:bg-gray-800"
-          style={getStyle()}
-        >
-          {children}
+  render() {
+    return createPortal(
+      <div className="modal is-open" onClick={this.props.onClick}>
+        <div className="modal__overlay">
+          <button className="modal__close"></button>
+          <div
+            ref={this.node}
+            className="modal__container dark:bg-gray-800"
+            style={this.getStyle()}
+          >
+            {this.props.children}
+          </div>
         </div>
-      </div>
-    </div>,
-    document.querySelector('#modal_root')!,
-  );
+      </div>,
+      document.querySelector('#modal_root')!,
+    );
+  }
 }
 
 export default Modal;
