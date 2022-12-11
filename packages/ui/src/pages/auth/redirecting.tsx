@@ -23,7 +23,7 @@ export function Redirecting(): JSX.Element {
     } else if (data.id) {
       const callbackUrl = sessionStorage.getItem(CALLBACK_URL_KEY);
       sessionStorage.removeItem(CALLBACK_URL_KEY);
-      router.push(callbackUrl || '/dashboard');
+      router.push(callbackUrl || '/');
     }
   }, [router, data, loading]);
   useTimeout(() => {

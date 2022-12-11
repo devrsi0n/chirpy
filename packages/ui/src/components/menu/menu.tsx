@@ -71,10 +71,12 @@ function MenuButton({
   open,
   onClick,
   children,
+  ...buttonProps
 }: MenuButtonProps): JSX.Element {
   return (
     <div className={className}>
       <HeadlessMenu.Button
+        {...buttonProps}
         as={shape === 'circle' ? IconButton : Button}
         aria-label={ariaLabel}
         onClick={() => onClick?.(open)}
@@ -82,7 +84,10 @@ function MenuButton({
         {children}
         {shape === 'square' && (
           <IconChevronDown
-            className={clsx(`ml-2 -mr-1 h-5 w-5`, open && `rotate-180`)}
+            className={clsx(
+              `ml-2 -mr-1 h-5 w-5 transition`,
+              open && `rotate-180`,
+            )}
           />
         )}
       </HeadlessMenu.Button>

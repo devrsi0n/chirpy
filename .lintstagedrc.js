@@ -1,7 +1,5 @@
 module.exports = {
   '*.{json,md,scss,js}': ['prettier --write'],
-  '**/generated/**/*.{ts,tsx}': ['prettier --write'],
-  '*.graphql': ['prettier --write', 'cd packages/graphql && pnpm run build'],
   '*.{ts,tsx}': (filenames) => {
     const prettierSortImportsConfigPath = require.resolve(
       '@chirpy-dev/prettier-config/sort-imports.config',
@@ -12,7 +10,7 @@ module.exports = {
       `prettier --config ${prettierSortImportsConfigPath} --write ${filenames.join(
         ' ',
       )}`,
-      `eslint --fix ${filenames.join(' ')}`,
+      `eslint --fix --max-warnings=0 ${filenames.join(' ')}`,
     ];
   },
 };

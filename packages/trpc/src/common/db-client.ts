@@ -7,7 +7,6 @@ export type {
   Page,
   Project,
   User,
-  Team,
   Member,
   Comment,
   Like,

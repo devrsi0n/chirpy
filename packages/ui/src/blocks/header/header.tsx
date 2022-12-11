@@ -28,9 +28,9 @@ export function Header(): JSX.Element {
                 <SideMenu.Item>
                   <Link
                     size="lg"
-                    href="/dashboard"
+                    href="/"
                     className={styles}
-                    highlightPattern={/^\/dashboard/}
+                    highlightPattern={/^\/$/}
                   >
                     Dashboard
                   </Link>
@@ -86,7 +86,7 @@ export function Header(): JSX.Element {
               className={`mb-5 hidden w-full flex-wrap items-center space-x-8 sm:mb-0 sm:ml-8 sm:flex sm:border-l sm:border-gray-500 sm:pl-8`}
             >
               {isSignIn ? (
-                <Link href="/dashboard" highlightPattern={/^\/dashboard/}>
+                <Link href="/" highlightPattern={/^\/$/}>
                   Dashboard
                 </Link>
               ) : (

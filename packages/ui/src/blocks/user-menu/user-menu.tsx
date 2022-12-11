@@ -43,7 +43,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           username={username}
         />
       </Menu.Button>
-      <Menu.Items className="">
+      <Menu.Items>
         {name && (
           <div className="mx-6 py-2">
             <Text className="w-36 text-left line-clamp-2" bold>
@@ -67,6 +67,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           ) : (
             <Menu.Item
               as="div"
+              align="start"
               className={itemStyle}
               onClick={handleSignIn}
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
@@ -77,6 +78,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           ))}
         <Menu.Item
           as={MenuLink}
+          align="start"
           variant="plain"
           target="_blank"
           href={FEEDBACK_LINK}
@@ -87,13 +89,14 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
         {isSignIn && (
           <>
             {isNav && (
-              <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
+              <Menu.Item as={MenuLink} align="start" variant="plain" href="/">
                 <IconMonitor size={14} />
                 <span>Dashboard</span>
               </Menu.Item>
             )}
             <Menu.Item
               as={MenuLink}
+              align="start"
               variant="plain"
               href="/profile"
               target={isWidget ? '_blank' : undefined}
@@ -104,6 +107,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             <Menu.Divider />
             <Menu.Item
               as="div"
+              align="start"
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
               onClick={async () => {
@@ -133,4 +137,4 @@ const MenuLink = React.forwardRef(function MenuLink(
   );
 });
 
-const itemStyle = `justify-start space-x-1`;
+const itemStyle = `space-x-1`;

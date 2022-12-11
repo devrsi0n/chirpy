@@ -2,9 +2,11 @@ import { isENVProd } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import {
-  Button,
   Heading,
+  IconBook,
+  IconMessageSquare,
   IconPlusCircle,
+  Menu,
   Popover,
   Text,
 } from '../../components';
@@ -12,7 +14,7 @@ import { useCurrentUser } from '../../contexts';
 
 export type CreateProjectButtonProps = {
   projectCount?: number;
-  onCreateProject: () => void;
+  onClickCreateProject: () => void;
 };
 
 export function CreateProjectButton(
@@ -31,12 +33,11 @@ export function CreateProjectButton(
   const createButtonProps = {
     variant: 'solid',
     color: 'primary',
-    className: 'space-x-1',
   } as const;
   const createButtonChildren = (
     <>
       <IconPlusCircle size={18} />
-      <span>Create project</span>
+      <span className="ml-1 inline-block">Create</span>
     </>
   );
   return (
@@ -51,9 +52,21 @@ export function CreateProjectButton(
           </Popover.Panel>
         </Popover>
       ) : (
-        <Button onClick={props.onCreateProject} {...createButtonProps}>
-          {createButtonChildren}
-        </Button>
+        <Menu>
+          <Menu.Button shape="square" {...createButtonProps}>
+            {createButtonChildren}
+          </Menu.Button>
+          <Menu.Items>
+            <Menu.Item align="start">
+              <IconBook size={16} />
+              <span className="ml-1">Blog site</span>
+            </Menu.Item>
+            <Menu.Item align="start" onClick={props.onClickCreateProject}>
+              <IconMessageSquare size={16} />
+              <p className="ml-1 whitespace-nowrap">Comment project</p>
+            </Menu.Item>
+          </Menu.Items>
+        </Menu>
       )}
     </>
   );

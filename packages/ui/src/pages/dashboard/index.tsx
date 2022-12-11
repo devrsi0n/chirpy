@@ -1,4 +1,3 @@
-import { isENVProd } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import {
@@ -7,26 +6,11 @@ import {
   EmptyProjectCard,
   ProjectCard,
 } from '../../blocks';
-import {
-  Button,
-  Dialog,
-  IconPlusCircle,
-  Popover,
-  Spinner,
-  TextField,
-  Text,
-  Heading,
-} from '../../components';
+import { Spinner } from '../../components';
 import { useCurrentUser } from '../../contexts';
-import { useForm } from '../../hooks';
-import { isValidDomain } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
-import { CreateProjectButton } from './create-project-button';
-
-type FormFields = {
-  name: string;
-  domain: string;
-};
+import { CreateProjectButton } from './create-button';
+import { CreateProjectDialog } from './create-project-dialog';
 
 export function Dashboard(): JSX.Element {
   const { loading: userIsLoading } = useCurrentUser();
@@ -36,43 +20,7 @@ export function Dashboard(): JSX.Element {
     isFetching,
   } = trpcClient.project.all.useQuery();
 
-  const { mutateAsync: createAProject } =
-    trpcClient.project.create.useMutation();
-  const handleCreateProject = React.useCallback(() => {
-    setShowDialog(true);
-  }, []);
   const [showDialog, setShowDialog] = React.useState(false);
-
-  const handleCloseDialog = React.useCallback(() => {
-    setShowDialog(false);
-  }, []);
-  const { register, errors, handleSubmit, hasError, setError } =
-    useForm<FormFields>({
-      defaultValues: {
-        name: '',
-        domain: '',
-      },
-    });
-  const handleClickSubmit = handleSubmit(
-    async (fields, _event: unknown): Promise<void> => {
-      try {
-        await createAProject({
-          // TODO: Team id?
-          name: fields.name,
-          domain: fields.domain,
-        });
-      } catch (error: any) {
-        if (error?.message?.includes('Unique constraint')) {
-          setError('domain', 'A project associated with this domain already');
-          return;
-        }
-        throw error;
-      }
-
-      setShowDialog(false);
-      fetchUserProjects();
-    },
-  );
 
   return (
     <SiteLayout title="Dashboard">
@@ -81,7 +29,7 @@ export function Dashboard(): JSX.Element {
           <PageTitle>Dashboard</PageTitle>
           <CreateProjectButton
             projectCount={projects?.length}
-            onCreateProject={handleCreateProject}
+            onClickCreateProject={() => setShowDialog(true)}
           />
         </div>
         {projects?.length ? (
@@ -106,56 +54,14 @@ export function Dashboard(): JSX.Element {
           </div>
         )}
       </section>
-      <Dialog show={showDialog} title="New project" onClose={handleCloseDialog}>
-        <Dialog.Body>
-          <form className="flex w-80 flex-col space-y-4">
-            <TextField
-              {...register('name', {
-                required: { value: true, message: 'Name is required' },
-                pattern: {
-                  value: /^\w+$/,
-                  message: `Only word characters are allowed`,
-                },
-                minLength: { value: 3, message: 'At least 3 characters' },
-                maxLength: { value: 16, message: 'At most 16 characters' },
-              })}
-              aria-label="Name of this project"
-              label="Name"
-              errorMessage={errors.name}
-              placeholder="swift"
-              className="w-full"
-            />
-            <TextField
-              {...register('domain', {
-                required: { value: true, message: 'Domain is required' },
-                pattern: {
-                  value: isValidDomain,
-                  message: 'Invalid domain',
-                },
-              })}
-              label="Domain"
-              hintText="Associate your domain with this project"
-              errorMessage={errors.domain}
-              placeholder="example.com"
-              className="w-full"
-            />
-          </form>
-        </Dialog.Body>
-        <Dialog.Footer>
-          <Button onClick={handleCloseDialog} className="w-full sm:w-auto">
-            Cancel
-          </Button>
-          <Button
-            className="w-full sm:w-auto"
-            disabled={hasError}
-            color="primary"
-            variant="solid"
-            onClick={handleClickSubmit}
-          >
-            Create
-          </Button>
-        </Dialog.Footer>
-      </Dialog>
+      <CreateProjectDialog
+        show={showDialog}
+        onDismissDialog={() => setShowDialog(false)}
+        onSubmit={() => {
+          setShowDialog(false);
+          fetchUserProjects();
+        }}
+      />
     </SiteLayout>
   );
 }

@@ -20,7 +20,7 @@ describe('Header', () => {
     cy.login();
     loadHomePage();
     cy.get('header').findByRole('link', { name: 'Dashboard' }).click();
-    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
+    cy.url({ timeout: 60_000 }).should('include', '/');
     clickUserMenu();
     cy.get('header').findByText(testUser.name).should('be.visible');
     cy.get('header')
@@ -28,7 +28,7 @@ describe('Header', () => {
       .findByRole('menuitem', { name: 'Dashboard' })
       .should('be.visible')
       .click({ force: true });
-    cy.url({ timeout: 60_000 }).should('include', '/dashboard');
+    cy.url({ timeout: 60_000 }).should('include', '/');
 
     clickUserMenu();
     cy.get('header')

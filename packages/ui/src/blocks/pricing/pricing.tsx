@@ -1,10 +1,10 @@
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
 import { Button, ButtonProps } from '../../components/button';
 import { Card } from '../../components/card';
 import { Divider } from '../../components/divider';
 import { Heading } from '../../components/heading';
-import { Link } from '../../components/link';
 import { List } from '../../components/list';
 import { SectionHeader } from '../../components/section-header';
 import { Text } from '../../components/text';
@@ -98,19 +98,14 @@ function PricingCard({
       <Text className="mb-8" variant="secondary">
         {priceDescription}&#8203;
       </Text>
-      <Link
-        variant="plain"
-        href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/sign-in`}
-        tabIndex={-1}
+      <Button
+        {...callToAction.buttonProps}
+        variant="solid"
+        className="mb-8 w-full"
+        onClick={() => signIn()}
       >
-        <Button
-          {...callToAction.buttonProps}
-          variant="solid"
-          className="mb-8 w-full"
-        >
-          {callToAction.label}
-        </Button>
-      </Link>
+        {callToAction.label}
+      </Button>
       <Divider className="-mx-6 mb-8 max-w-none" />
       <Text bold className="mb-3" variant="secondary">{`WHAT'S INCLUDED`}</Text>
       <List className="space-y-2">

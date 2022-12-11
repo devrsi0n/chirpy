@@ -3,7 +3,7 @@ import { waitTrpc } from '../../fixtures/utils';
 describe('Project', () => {
   before(() => {
     cy.login();
-    cy.visit('/dashboard');
+    cy.visit('/');
     // Wait for spinner dismiss
     cy.get(`[aria-label="Loading data"]`, { timeout: 10_000 }).should(
       'not.exist',
@@ -68,7 +68,7 @@ describe('Project', () => {
       'rgb(48, 164, 108)',
     );
 
-    cy.visit('/dashboard');
+    cy.visit('/');
   });
 });
 

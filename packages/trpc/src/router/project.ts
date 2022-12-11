@@ -46,7 +46,6 @@ export const projectRouter = router({
       z.object({
         name: z.string(),
         domain: z.string(),
-        teamId: z.string().nullish(),
       }),
     )
     .mutation(async ({ input, ctx }) => {

@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
 import {
@@ -28,23 +29,18 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
-            <Link
-              variant="plain"
-              href={`${process.env.NEXT_PUBLIC_APP_URL}/auth/sign-in`}
-              tabIndex={-1}
+            <Button
+              variant="solid"
+              color="primary"
+              className="group space-x-1 hover:shadow-xl"
+              onClick={() => signIn()}
             >
-              <Button
-                variant="solid"
-                color="primary"
-                className="group space-x-1 hover:shadow-xl"
-              >
-                <span>{strings.callToAction.main}</span>
-                <IconArrowRight
-                  size="20px"
-                  className="inline-block transition group-hover:translate-x-1"
-                />
-              </Button>
-            </Link>
+              <span>{strings.callToAction.main}</span>
+              <IconArrowRight
+                size="20px"
+                className="inline-block transition group-hover:translate-x-1"
+              />
+            </Button>
             <Link variant="plain" href="/docs" tabIndex={-1}>
               <Button>{strings.callToAction.secondary}</Button>
             </Link>

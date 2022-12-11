@@ -47,11 +47,8 @@ describe('Welcome', () => {
     });
     await userEvent.click(saveButton);
 
-    await waitFor(
-      () => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'),
-      {
-        timeout: 4000,
-      },
-    );
+    await waitFor(() => expect(mockNextRouter.push).toHaveBeenCalledWith('/'), {
+      timeout: 4000,
+    });
   });
 });

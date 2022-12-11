@@ -37,7 +37,7 @@ export function useSignInWindow({
 
 function popupCenterWindow(
   url: string,
-  title: string,
+  target: string,
   width: number,
   height: number,
 ): Window | null {
@@ -66,7 +66,7 @@ function popupCenterWindow(
   }
   features.push('left=' + left, 'top=' + right, 'scrollbars=1');
 
-  const newWindow = window.open(url, title, features.join(','));
+  const newWindow = window.open(url, target, features.join(','));
   newWindow?.focus();
 
   return newWindow;
