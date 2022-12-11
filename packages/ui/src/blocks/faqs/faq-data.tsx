@@ -24,7 +24,6 @@ export const FAQ_LIST: FAQItem[] = [
   {
     title: 'Can I change my plan later?',
     description:
-      // Alternate: Yes, you can upgrade or downgrade your plan as needed. Simply contact our support team to discuss your options and find the right plan for your current and future needs
       'Yes, you can easily change your plan at any time. Our flexible pricing options allow you to scale your usage as your company grows, and our friendly team is here to help you find the right solution for your needs.',
     icon: <IconRepeat />,
   },
@@ -69,7 +68,7 @@ export const FAQ_LIST: FAQItem[] = [
     title: `Is self-hosted supported for Chirpy?`,
     description: (
       <span>
-        {`Yes, it is. Chirpy is available in both cloud and self-hosted versions. The self-hosted version offers the same features and capabilities as the cloud version, but with the added benefit of being able to host it on your own servers. This allows you to have complete control over your data, security, and configuration, and to tailor Chirpy to your unique business needs.`}
+        {`Yes, it is. It's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience. `}
         <Link href="https://chirpy.dev/docs/self-hosted">More details</Link>
       </span>
     ),
