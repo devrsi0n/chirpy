@@ -12,7 +12,7 @@ export const siteRouter = router({
         description: z.string(),
       }),
     )
-    .query(async ({ input, ctx }) => {
+    .mutation(async ({ input, ctx }) => {
       const result = await prisma.site.create({
         data: {
           ...input,

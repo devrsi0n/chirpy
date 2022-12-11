@@ -15,6 +15,7 @@ import { useCurrentUser } from '../../contexts';
 export type CreateProjectButtonProps = {
   projectCount?: number;
   onClickCreateProject: () => void;
+  onClickCreateSite: () => void;
 };
 
 export function CreateProjectButton(
@@ -57,7 +58,7 @@ export function CreateProjectButton(
             {createButtonChildren}
           </Menu.Button>
           <Menu.Items>
-            <Menu.Item align="start">
+            <Menu.Item align="start" onClick={props.onClickCreateSite}>
               <IconBook size={16} />
               <span className="ml-1">Blog site</span>
             </Menu.Item>

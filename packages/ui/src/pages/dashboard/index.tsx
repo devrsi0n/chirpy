@@ -11,6 +11,7 @@ import { useCurrentUser } from '../../contexts';
 import { trpcClient } from '../../utilities/trpc-client';
 import { CreateProjectButton } from './create-button';
 import { CreateProjectDialog } from './create-project-dialog';
+import { CreateSiteDialog } from './create-site-dialog';
 
 export function Dashboard(): JSX.Element {
   const { loading: userIsLoading } = useCurrentUser();
@@ -20,7 +21,8 @@ export function Dashboard(): JSX.Element {
     isFetching,
   } = trpcClient.project.all.useQuery();
 
-  const [showDialog, setShowDialog] = React.useState(false);
+  const [showProjectDialog, setShowProjectDialog] = React.useState(false);
+  const [showSiteDialog, setShowSiteDialog] = React.useState(false);
 
   return (
     <SiteLayout title="Dashboard">
@@ -29,7 +31,8 @@ export function Dashboard(): JSX.Element {
           <PageTitle>Dashboard</PageTitle>
           <CreateProjectButton
             projectCount={projects?.length}
-            onClickCreateProject={() => setShowDialog(true)}
+            onClickCreateProject={() => setShowProjectDialog(true)}
+            onClickCreateSite={() => setShowSiteDialog(true)}
           />
         </div>
         {projects?.length ? (
@@ -55,10 +58,18 @@ export function Dashboard(): JSX.Element {
         )}
       </section>
       <CreateProjectDialog
-        show={showDialog}
-        onDismissDialog={() => setShowDialog(false)}
+        show={showProjectDialog}
+        onDismiss={() => setShowProjectDialog(false)}
         onSubmit={() => {
-          setShowDialog(false);
+          setShowProjectDialog(false);
+          fetchUserProjects();
+        }}
+      />
+      <CreateSiteDialog
+        show={showSiteDialog}
+        onDismiss={() => setShowSiteDialog(false)}
+        onSubmit={() => {
+          setShowSiteDialog(false);
           fetchUserProjects();
         }}
       />

@@ -4,6 +4,7 @@ import { likeRouter } from './like';
 import { notificationRouter } from './notification';
 import { projectRouter } from './project';
 import { revalidateRouter } from './revalidate';
+import { siteRouter } from './site';
 import { userRouter } from './user';
 
 export const appRouter = router({
@@ -13,6 +14,7 @@ export const appRouter = router({
   comment: commentRouter,
   like: likeRouter,
   revalidate: revalidateRouter,
+  site: siteRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -217,7 +217,7 @@ export function Profile(): JSX.Element {
             <TextField
               {...register('website')}
               label="Website"
-              prefixNode="https://"
+              prefix="https://"
             />
           ) : (
             website && (
@@ -235,7 +235,7 @@ export function Profile(): JSX.Element {
             <TextField
               {...register('twitter')}
               label="Twitter"
-              prefixNode="https://twitter.com/"
+              prefix="https://twitter.com/"
             />
           ) : (
             twitterUserName && (

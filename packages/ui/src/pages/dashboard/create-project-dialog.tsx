@@ -6,7 +6,7 @@ import { isValidDomain, trpcClient } from '../../utilities';
 
 export type CreateProjectDialogProps = {
   show: boolean;
-  onDismissDialog: () => void;
+  onDismiss: () => void;
   onSubmit: () => void;
 };
 
@@ -48,7 +48,7 @@ export function CreateProjectDialog(
     <Dialog
       show={props.show}
       title="New comment project"
-      onClose={props.onDismissDialog}
+      onClose={props.onDismiss}
     >
       <Dialog.Body>
         <form className="flex w-80 flex-col space-y-4">
@@ -85,7 +85,7 @@ export function CreateProjectDialog(
         </form>
       </Dialog.Body>
       <Dialog.Footer>
-        <Button onClick={props.onDismissDialog} className="w-full sm:w-auto">
+        <Button onClick={props.onDismiss} className="w-full sm:w-auto">
           Cancel
         </Button>
         <Button
