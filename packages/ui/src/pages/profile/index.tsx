@@ -1,3 +1,4 @@
+import { EMAIL_RE } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { SiteLayout, PageTitle } from '../../blocks';
@@ -20,7 +21,7 @@ import {
 } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
-import { EMAIL_REGEXP, logger } from '../../utilities';
+import { logger } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
 
 type FormFields = {
@@ -152,7 +153,7 @@ export function Profile(): JSX.Element {
                 <TextField
                   {...register('email', {
                     pattern: {
-                      value: EMAIL_REGEXP,
+                      value: EMAIL_RE,
                       message: `Invalid email address`,
                     },
                   })}

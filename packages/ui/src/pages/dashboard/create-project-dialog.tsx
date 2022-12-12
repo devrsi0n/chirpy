@@ -1,8 +1,9 @@
+import { isValidDomain } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button, Dialog, TextField } from '../../components';
 import { useForm } from '../../hooks';
-import { isValidDomain, trpcClient } from '../../utilities';
+import { trpcClient } from '../../utilities';
 
 export type CreateProjectDialogProps = {
   show: boolean;

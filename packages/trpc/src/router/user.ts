@@ -1,3 +1,4 @@
+import { USERNAME_RE } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
@@ -29,10 +30,12 @@ export const userRouter = router({
   }),
   updateProfile: protectedProcedure
     .input(
+      // Sync validation with client,
+      // we may use zod in client as well to keep validation in sync
       z.object({
         name: z.string().nullish(),
-        username: z.string().nullish(),
-        email: z.string().nullish(),
+        username: z.string().min(3).max(16).regex(USERNAME_RE).nullish(),
+        email: z.string().email().nullish(),
         bio: z.string().nullish(),
         website: z.string().nullish(),
         twitterUserName: z.string().nullish(),

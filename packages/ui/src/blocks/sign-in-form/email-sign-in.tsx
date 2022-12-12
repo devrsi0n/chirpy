@@ -1,3 +1,4 @@
+import { EMAIL_RE } from '@chirpy-dev/utils';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
@@ -6,7 +7,6 @@ import { Link } from '../../components/link';
 import { Text } from '../../components/text';
 import { TextField } from '../../components/text-field';
 import { useForm } from '../../hooks/use-form';
-import { EMAIL_REGEXP } from '../../utilities/validator';
 import { SignInProps } from './types';
 
 /**
@@ -33,7 +33,7 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
       <TextField
         {...register('email', {
           pattern: {
-            value: EMAIL_REGEXP,
+            value: EMAIL_RE,
             message: 'Invalid email address',
           },
         })}

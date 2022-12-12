@@ -1,4 +1,5 @@
-export const EMAIL_REGEXP = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const USERNAME_RE = /^[\dA-Za-z]+$/;
+export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function isValidDomain(domain: string): boolean {
   try {

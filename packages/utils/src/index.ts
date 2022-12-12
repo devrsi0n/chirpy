@@ -3,3 +3,4 @@ export * from './function';
 export * from './text';
 export * from './constants';
 export * from './url';
+export * from './validator';

@@ -1,3 +1,4 @@
+import { EMAIL_RE, USERNAME_RE } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -10,7 +11,6 @@ import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks/use-form';
 import { logger } from '../../utilities/logger';
 import { trpcClient } from '../../utilities/trpc-client';
-import { EMAIL_REGEXP } from '../../utilities/validator';
 import { sleep } from './utils';
 
 export type ConfirmUserFieldsProps = {
@@ -80,7 +80,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {...register('email', {
           required: { value: true, message: 'Email is required' },
           pattern: {
-            value: EMAIL_REGEXP,
+            value: EMAIL_RE,
             message: `Invalid email address`,
           },
         })}
@@ -101,8 +101,8 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         {...register('username', {
           required: { value: true, message: 'ID is required' },
           pattern: {
-            value: /^\w+$/,
-            message: `Only word characters are allowed`,
+            value: USERNAME_RE,
+            message: `Only word or number characters are allowed`,
           },
           minLength: { value: 3, message: 'At least 3 characters' },
           maxLength: { value: 16, message: 'At most 16 characters' },
