@@ -1,15 +1,15 @@
-import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
+// import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
 import { NextRequest, NextResponse } from 'next/server';
 
 // TODO: Add auth for app pages
-const auth = withAuth({
-  callbacks: {
-    authorized: ({ token }) => {
-      // Anonymous user doesn't have an email address
-      return !!(token?.email || token?.name);
-    },
-  },
-});
+// const auth = withAuth({
+//   callbacks: {
+//     authorized: ({ token }) => {
+//       // Anonymous user doesn't have an email address
+//       return !!(token?.email || token?.name);
+//     },
+//   },
+// });
 
 export const authMatcher = [
   '/dashboard',
@@ -43,8 +43,8 @@ export const config = {
 export default function middleware(req: NextRequest) {
   const url = req.nextUrl;
 
-  // Get hostname of request (e.g. demo.chirpy.dev, demo.localhost:3000)
-  const hostname = req.headers.get('host') || 'demo.chirpy.dev';
+  // Get hostname of request (e.g. chirpy.dev, demo.localhost:3000)
+  const hostname = req.headers.get('host') || 'chirpy.dev';
 
   /*  You have to replace ".vercel.pub" with your own domain if you deploy this example under your domain.
       You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug

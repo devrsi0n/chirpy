@@ -22,6 +22,7 @@ export * from './page-title';
 export * from './powered-by';
 export * from './pricing';
 export * from './project-card';
+export * from './site-card';
 export * from './rich-text-editor';
 export * from './side-bar';
 export * from './side-menu';

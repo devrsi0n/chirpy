@@ -6,6 +6,37 @@ import { prisma } from '../common/db-client';
 import { protectedProcedure, router } from '../trpc-server';
 
 export const siteRouter = router({
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const sites = await prisma.site.findMany({
+      where: {
+        OR: [
+          {
+            managerId: ctx.session.user.id,
+          },
+          {
+            members: {
+              some: {
+                userId: ctx.session.user.id,
+              },
+            },
+          },
+        ],
+      },
+      select: {
+        id: true,
+        name: true,
+        subdomain: true,
+        createdAt: true,
+        posts: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    });
+    return sites;
+  }),
   create: protectedProcedure
     .input(
       z.object({
