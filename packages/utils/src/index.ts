@@ -4,3 +4,4 @@ export * from './text';
 export * from './constants';
 export * from './url';
 export * from './validator';
+export * from './router';

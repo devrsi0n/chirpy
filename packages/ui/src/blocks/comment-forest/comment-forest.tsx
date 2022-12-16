@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
-import { BaseButton, IconArrowUp } from '../../components';
+import { BaseButton, ClientOnly, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
 import { getCommentCount } from '../../utilities/get-comment-count';
@@ -57,12 +57,14 @@ export function CommentForest({
                   setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'))
                 }
               >
-                <IconArrowUp
-                  className={clsx(
-                    'transition',
-                    orderBy === 'asc' && 'rotate-180',
-                  )}
-                />
+                <ClientOnly>
+                  <IconArrowUp
+                    className={clsx(
+                      'transition',
+                      orderBy === 'asc' && 'rotate-180',
+                    )}
+                  />
+                </ClientOnly>
               </BaseButton>
             </div>
           )}

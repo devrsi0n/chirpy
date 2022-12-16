@@ -1,3 +1,5 @@
+import { ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN } from '@chirpy-dev/utils';
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
@@ -49,7 +51,21 @@ export const projectRouter = router({
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      const projects = await prisma.project.create({
+      const existing = await prisma.project.findFirst({
+        where: {
+          domain: input.domain,
+        },
+        select: {
+          domain: true,
+        },
+      });
+      if (existing?.domain) {
+        throw new TRPCError({
+          code: 'CONFLICT',
+          message: ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN,
+        });
+      }
+      const project = await prisma.project.create({
         data: {
           ...input,
           userId: ctx.session.user.id,
@@ -68,7 +84,7 @@ export const projectRouter = router({
           },
         },
       });
-      return projects;
+      return project;
     }),
   delete: protectedProcedure
     .input(

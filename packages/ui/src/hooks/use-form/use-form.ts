@@ -64,7 +64,13 @@ export function useForm<T extends FieldValue>({
           return;
         }
       }
-      await onSubmit(fields, e);
+      try {
+        await onSubmit(fields, e);
+      } catch {
+        // Don't throw error to the surface
+        // just prevent from resetting fields
+        return;
+      }
       setFields(defaultValues);
     };
     return onSubmitWrapper;

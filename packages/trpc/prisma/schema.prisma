@@ -189,11 +189,10 @@ model User {
   emailVerified                 DateTime?
   image                         String?                    @db.Text
   username                      String?                    @unique
-  type                          String?
   bio                           String?
   website                       String?
   twitterUserName               String?
-  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
+  kind                          UserKind                   @default(ANONYMOUS)
   accounts                      Account[]
   comments                      Comment[]
   likes                         Like[]
@@ -208,13 +207,16 @@ model User {
   // User as site member
   siteMembers                   SiteMember[]
 
-  @@index([type])
+  @@index([kind])
+  @@index([email])
 }
 
-model UserType {
-  value   String  @id
-  comment String?
-  users   User[]
+enum UserKind {
+  ADMIN
+  // Normal user with email or social accounts
+  USER
+  // User without email
+  ANONYMOUS
 }
 
 model VerificationToken {
@@ -228,9 +230,9 @@ model VerificationToken {
 
 model Post {
   id            String   @id @default(cuid())
-  title         String?  @db.Text
+  title         String   @db.Text
   description   String?  @db.Text
-  content       String?  @db.LongText
+  content       String   @db.LongText
   slug          String   @default(cuid())
   image         String?  @db.Text
   imageBlurhash String?  @db.LongText

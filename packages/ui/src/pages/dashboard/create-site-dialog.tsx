@@ -1,8 +1,9 @@
+import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button, Dialog, TextArea, TextField } from '../../components';
 import { useForm } from '../../hooks';
-import { trpcClient } from '../../utilities';
+import { isTRPCClientError, trpcClient } from '../../utilities';
 
 export type CreateSiteDialogProps = {
   show: boolean;
@@ -34,13 +35,12 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
           subdomain: fields.subdomain,
           description: fields.description,
         });
-      } catch (error: any) {
-        if (error?.message?.includes('Unique constraint')) {
-          setError(
-            'subdomain',
-            'A project associated with this domain already',
-          );
-          return;
+      } catch (error: unknown) {
+        if (
+          isTRPCClientError(error) &&
+          error.message === ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN
+        ) {
+          setError('subdomain', 'This subdomain already exists');
         }
         throw error;
       }
@@ -59,7 +59,7 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
             aria-label="Name of this site"
             label="Name"
             errorMessage={errors.name}
-            placeholder="blog"
+            placeholder="My blog"
             className="w-full"
           />
           <TextField
@@ -83,7 +83,7 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
             aria-label="description of this site"
             label="Description"
             errorMessage={errors.description}
-            placeholder="My blog"
+            placeholder="My awesome blog"
             className="w-full"
           />
         </form>

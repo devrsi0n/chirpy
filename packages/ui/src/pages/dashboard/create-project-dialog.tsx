@@ -1,9 +1,12 @@
-import { isValidDomain } from '@chirpy-dev/utils';
+import {
+  isValidDomain,
+  ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN,
+} from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button, Dialog, TextField } from '../../components';
 import { useForm } from '../../hooks';
-import { trpcClient } from '../../utilities';
+import { isTRPCClientError, trpcClient } from '../../utilities';
 
 export type CreateProjectDialogProps = {
   show: boolean;
@@ -36,9 +39,14 @@ export function CreateProjectDialog(
           domain: fields.domain,
         });
       } catch (error: any) {
-        if (error?.message?.includes('Unique constraint')) {
-          setError('domain', 'A project associated with this domain already');
-          return;
+        if (
+          isTRPCClientError(error) &&
+          error.message === ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN
+        ) {
+          setError(
+            'domain',
+            'This domain was already registered by another project',
+          );
         }
         throw error;
       }
