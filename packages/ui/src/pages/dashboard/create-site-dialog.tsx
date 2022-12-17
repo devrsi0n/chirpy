@@ -1,9 +1,10 @@
 import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { Button, Dialog, TextArea, TextField } from '../../components';
+import { Button, Dialog } from '../../components';
 import { useForm } from '../../hooks';
 import { isTRPCClientError, trpcClient } from '../../utilities';
+import { CreateSiteForm } from './create-site-form';
 
 export type CreateSiteDialogProps = {
   show: boolean;
@@ -50,40 +51,7 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
   return (
     <Dialog show={props.show} title="New blog site" onClose={props.onDismiss}>
       <Dialog.Body>
-        <form className="flex w-80 flex-col space-y-4">
-          <TextField
-            {...register('name', {
-              required: { value: true, message: 'Name is required' },
-              maxLength: { value: 64, message: 'At most 64 characters' },
-            })}
-            aria-label="Name of this site"
-            label="Name"
-            errorMessage={errors.name}
-            placeholder="My blog"
-          />
-          <TextField
-            {...register('subdomain', {
-              required: { value: true, message: 'Subdomain is required' },
-              pattern: {
-                value: /^[A-Za-z]+$/,
-                message: `Only word characters are allowed`,
-              },
-            })}
-            suffix=".chirpy.dev"
-            label="Subdomain"
-            errorMessage={errors.subdomain}
-            placeholder="blog"
-          />
-          <TextArea
-            {...register('description', {
-              maxLength: { value: 190, message: 'At most 190 characters' },
-            })}
-            aria-label="description of this site"
-            label="Description"
-            errorMessage={errors.description}
-            placeholder="My awesome blog"
-          />
-        </form>
+        <CreateSiteForm register={register} errors={errors} />
       </Dialog.Body>
       <Dialog.Footer>
         <Button onClick={props.onDismiss} className="w-full sm:w-auto">

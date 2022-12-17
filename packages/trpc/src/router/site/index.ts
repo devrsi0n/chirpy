@@ -1,9 +1,13 @@
-import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
-import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { prisma } from '../common/db-client';
-import { protectedProcedure, router } from '../trpc-server';
+import { prisma } from '../../common/db-client';
+import { protectedProcedure, router } from '../../trpc-server';
+import {
+  checkDuplicatedSubdomain,
+  checkUserAuthorization,
+  CREATE_INPUT_VALIDATION,
+  UPDATE_INPUT_VALIDATION,
+} from './utils';
 
 export const siteRouter = router({
   all: protectedProcedure.query(async ({ ctx }) => {
@@ -38,32 +42,31 @@ export const siteRouter = router({
     return sites;
   }),
   create: protectedProcedure
-    .input(
-      z.object({
-        name: z.string(),
-        subdomain: z.string(),
-        description: z.string(),
-      }),
-    )
+    .input(CREATE_INPUT_VALIDATION)
     .mutation(async ({ input, ctx }) => {
-      const existing = await prisma.site.findFirst({
-        where: {
-          subdomain: input.subdomain,
-        },
-        select: {
-          subdomain: true,
-        },
-      });
-      if (existing?.subdomain) {
-        throw new TRPCError({
-          code: 'CONFLICT',
-          message: ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN,
-        });
-      }
+      await checkDuplicatedSubdomain(input.subdomain);
       const result = await prisma.site.create({
         data: {
           ...input,
           managerId: ctx.session.user.id,
+        },
+      });
+      return result;
+    }),
+  update: protectedProcedure
+    .input(UPDATE_INPUT_VALIDATION)
+    .mutation(async ({ input, ctx }) => {
+      const site = await checkUserAuthorization(ctx.session.user.id, input.id);
+      if (site.subdomain !== input.subdomain) {
+        // Only check duplicated subdomain when it changes
+        await checkDuplicatedSubdomain(input.subdomain);
+      }
+      const result = await prisma.site.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          ...input,
         },
       });
       return result;

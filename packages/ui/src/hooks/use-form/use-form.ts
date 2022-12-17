@@ -1,10 +1,14 @@
 import * as React from 'react';
 
-import { Validator } from './type';
+import { Register, Validator } from './type';
 import { validate } from './validate';
 
 export type UseFormOptions<T> = {
   defaultValues: T;
+  /**
+   * @default true
+   */
+  resetAfterSubmit?: boolean;
 };
 
 export type FieldValue = {
@@ -19,6 +23,7 @@ export type ValidatorItem = Map<string, Validator>;
 
 export function useForm<T extends FieldValue>({
   defaultValues,
+  resetAfterSubmit = true,
 }: UseFormOptions<T>) {
   const [fields, setFields] = React.useState<T>(defaultValues || {});
 
@@ -36,7 +41,7 @@ export function useForm<T extends FieldValue>({
     return !errorMessage;
   };
 
-  const register = (name: string, validator?: Validator) => {
+  const register: Register = (name: string, validator?: Validator) => {
     if (validator) {
       validatorMapRef.current.set(name, validator);
     }
@@ -71,7 +76,9 @@ export function useForm<T extends FieldValue>({
         // just prevent from resetting fields
         return;
       }
-      setFields(defaultValues);
+      if (resetAfterSubmit) {
+        setFields(defaultValues);
+      }
     };
     return onSubmitWrapper;
   };
