@@ -37,7 +37,6 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
         errorMessage={errors?.name}
         type="text"
         label="Name"
-        className="w-full"
         placeholder="James Smith"
       />
       <div>

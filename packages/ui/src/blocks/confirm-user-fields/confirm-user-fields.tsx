@@ -76,7 +76,6 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   return (
     <Card as="form" className="w-fit space-y-4 rounded py-6 px-12 shadow-md">
       <TextField
-        className="w-full"
         {...register('email', {
           required: { value: true, message: 'Email is required' },
           pattern: {
@@ -89,7 +88,6 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.email}
       />
       <TextField
-        className="w-full"
         {...register('name', {
           required: { value: true, message: 'Dispaly name is required' },
         })}
@@ -97,7 +95,6 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         errorMessage={errors.name}
       />
       <TextField
-        className="w-full"
         {...register('username', {
           required: { value: true, message: 'ID is required' },
           pattern: {

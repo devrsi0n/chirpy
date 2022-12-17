@@ -16,6 +16,7 @@ export const userRouter = router({
         username: true,
         email: true,
         image: true,
+        kind: true,
       },
     });
     return me;

@@ -20,6 +20,7 @@ export type CurrentUserContextType = {
   isPreview?: true;
   data: UserData & {
     editableProjectIds?: string[];
+    isAnonymous?: boolean;
   };
 };
 

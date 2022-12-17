@@ -48,8 +48,9 @@ export function Profile(): JSX.Element {
     image,
     username,
     emailVerified,
-    type,
+    kind,
   } = data || {};
+  const isAnonymous = kind === 'ANONYMOUS';
   const [isEditMode, setIsEditMode] = React.useState(false);
   const { mutateAsync: updateProfile } =
     trpcClient.user.updateProfile.useMutation();
@@ -148,8 +149,7 @@ export function Profile(): JSX.Element {
                 <Text title="Username, can't edit">@{username}</Text>
               )}
               {/* We only allow no email or unverified anonymous user to edit the email */}
-              {isEditMode &&
-              (!email || (type === 'anonymous' && !emailVerified)) ? (
+              {isEditMode && (!email || (isAnonymous && !emailVerified)) ? (
                 <TextField
                   {...register('email', {
                     pattern: {
@@ -167,7 +167,7 @@ export function Profile(): JSX.Element {
                 email && (
                   <div>
                     <Text title="Email, can't edit it">{email}</Text>
-                    {type === 'anonymous' && !emailVerified && (
+                    {isAnonymous && !emailVerified && (
                       <Text variant="secondary" size="sm" className="mt-1.5">
                         This email address is unverified, you need to sign-in
                         with this email address to verify it

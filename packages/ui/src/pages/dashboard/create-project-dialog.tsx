@@ -75,7 +75,6 @@ export function CreateProjectDialog(
             label="Name"
             errorMessage={errors.name}
             placeholder="swift"
-            className="w-full"
           />
           <TextField
             {...register('domain', {
@@ -89,7 +88,6 @@ export function CreateProjectDialog(
             hintText="Associate your domain with this project"
             errorMessage={errors.domain}
             placeholder="example.com"
-            className="w-full"
           />
         </form>
       </Dialog.Body>

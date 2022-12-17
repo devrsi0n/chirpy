@@ -60,7 +60,6 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
             label="Name"
             errorMessage={errors.name}
             placeholder="My blog"
-            className="w-full"
           />
           <TextField
             {...register('subdomain', {
@@ -74,7 +73,6 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
             label="Subdomain"
             errorMessage={errors.subdomain}
             placeholder="blog"
-            className="w-full"
           />
           <TextArea
             {...register('description', {
@@ -84,7 +82,6 @@ export function CreateSiteDialog(props: CreateSiteDialogProps): JSX.Element {
             label="Description"
             errorMessage={errors.description}
             placeholder="My awesome blog"
-            className="w-full"
           />
         </form>
       </Dialog.Body>

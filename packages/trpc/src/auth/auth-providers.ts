@@ -82,6 +82,7 @@ export const authProviders: Provider[] = [
           data: {
             username: generateUsername(name),
             name,
+            kind: 'ANONYMOUS',
           },
         });
 

@@ -40,7 +40,6 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
         errorMessage={errors?.email}
         type="text"
         label="Email"
-        className="w-full"
         placeholder="james@example.com"
       />
       <div>

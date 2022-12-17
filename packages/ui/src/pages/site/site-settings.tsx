@@ -11,18 +11,29 @@ export type SiteSettingsProps = {
 
 export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
   const { data } = trpcClient.site.byId.useQuery(id);
-  const { register } = useForm({
+  const { register, setFields } = useForm({
     defaultValues: {
-      name: data?.name || '',
-      description: data?.description || '',
-      subdomain: data?.subdomain || '',
-      customDomain: data?.customDomain || '',
+      name: '',
+      description: '',
+      subdomain: '',
+      customDomain: '',
     },
   });
+  React.useEffect(() => {
+    if (data?.id) {
+      setFields({
+        name: data.name,
+        description: data.description || '',
+        subdomain: data.subdomain,
+        customDomain: data.customDomain || '',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
   return (
     <SiteLayout title="Site settings">
       <PageTitle>Site settings</PageTitle>
-      <form className="w-6xl space-y-4">
+      <form className="w-96 space-y-4">
         <TextField {...register('name')} label="Site name" />
         <TextArea {...register('description')} label="Site description" />
         <TextField {...register('subdomain')} label="Subdomain" />
