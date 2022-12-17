@@ -55,7 +55,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           ref={ref}
           type={type}
           className={clsx(
-            'px-3 py-2',
+            'w-full px-3 py-2',
             disabled && `bg-gray-300 text-gray-1100`,
             textInput,
             border,

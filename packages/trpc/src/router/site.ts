@@ -77,6 +77,7 @@ export const siteRouter = router({
         id: true,
         name: true,
         subdomain: true,
+        customDomain: true,
         description: true,
         posts: {
           select: {

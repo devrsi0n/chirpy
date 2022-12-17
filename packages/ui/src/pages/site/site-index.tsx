@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { SiteLayout } from '../../blocks';
-import { Heading, Text } from '../../components';
+import { Heading, Link, Text } from '../../components';
 import { trpcClient } from '../../utilities';
 
 export type SiteIndexProps = {
@@ -16,6 +16,9 @@ export function SiteIndex({ id }: SiteIndexProps): JSX.Element {
         <Heading as="h1">{`Posts for site ${data?.name}`}</Heading>
         <Text>{data?.subdomain}</Text>
       </div>
+      <Link variant="plain" href={`/site/${data?.id}/settings`}>
+        Settings
+      </Link>
       <section>
         <ul>
           {data?.posts.length || 0 > 0 ? (
