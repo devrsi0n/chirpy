@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { NextRouter } from 'next/router';
 import React from 'react';
 
-import { Tabs } from '../../../../components';
+import { Tabs } from '../../tabs';
 import { useIsDarkMode } from '../../../../hooks/use-is-dark-mode';
 import * as api from '../../analytics-api';
 import { Timer } from '../../timer';

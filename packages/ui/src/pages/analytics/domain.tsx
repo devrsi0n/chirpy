@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Analytics, SiteLayout, PageTitle } from '../../blocks';
+import { Analytics, SiteLayout, PageTitleDeprecated } from '../../blocks';
 import { ClientOnly } from '../../components';
 import { RouterOutputs } from '../../utilities/trpc-client';
 
@@ -14,7 +14,7 @@ export function AnalyticsByDomainPage({
   return (
     <SiteLayout hideFullBleed title="Analytics">
       <section className="mx-auto px-4 xl:max-w-6xl">
-        <PageTitle className="pb-6">Analytics</PageTitle>
+        <PageTitleDeprecated className="pb-6">Analytics</PageTitleDeprecated>
         <ClientOnly>
           <Analytics
             site={{

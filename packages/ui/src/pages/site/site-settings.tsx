@@ -2,7 +2,13 @@ import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { PageTitle, SiteLayout } from '../../blocks';
-import { Button, IconLoader, TextField, useToast } from '../../components';
+import {
+  Button,
+  IconLoader,
+  TextField,
+  useToast,
+  Tabs,
+} from '../../components';
 import { useForm } from '../../hooks';
 import { isTRPCClientError, trpcClient } from '../../utilities';
 import { CreateSiteForm } from '../dashboard/create-site-form';
@@ -71,24 +77,40 @@ export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
   });
   return (
     <SiteLayout title="Site settings">
-      <PageTitle>Site settings</PageTitle>
-      <CreateSiteForm register={register} errors={errors}>
-        <TextField
-          {...register('customDomain')}
-          label="Custom domain"
-          prefix="https://"
-        />
-        <Button
-          className="w-full sm:w-auto"
-          disabled={hasError || isLoading}
-          color="primary"
-          variant="solid"
-          onClick={handleClickSubmit}
-        >
-          {isLoading && <IconLoader className="animate-spin text-white" />}
-          <span>Save</span>
-        </Button>
-      </CreateSiteForm>
+      <PageTitle className="mb-4">Site settings</PageTitle>
+      <Tabs className="w-80" defaultValue="general">
+        <Tabs.List>
+          <Tabs.Trigger value="general">General</Tabs.Trigger>
+          <Tabs.Trigger value="customDomain">Custom domain</Tabs.Trigger>
+        </Tabs.List>
+        <Tabs.Content value="general">
+          <section className="w-fit pt-8">
+            <CreateSiteForm register={register} errors={errors}>
+              <Button
+                className="w-full sm:w-auto"
+                disabled={hasError || isLoading}
+                color="primary"
+                variant="solid"
+                onClick={handleClickSubmit}
+              >
+                {isLoading && (
+                  <IconLoader className="animate-spin text-white" />
+                )}
+                <span>Save</span>
+              </Button>
+            </CreateSiteForm>
+          </section>
+        </Tabs.Content>
+        <Tabs.Content value="customDomain">
+          <section className='pt-8'>
+            <TextField
+              {...register('customDomain')}
+              label="Custom domain"
+              prefix="https://"
+            />
+          </section>
+        </Tabs.Content>
+      </Tabs>
     </SiteLayout>
   );
 }

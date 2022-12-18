@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CommentWidget, SiteLayout, PageTitle } from '../blocks';
+import { CommentWidget, SiteLayout, PageTitleDeprecated } from '../blocks';
 import { Alert } from '../components';
 
 export function PlayGround(): JSX.Element {
@@ -8,7 +8,7 @@ export function PlayGround(): JSX.Element {
   return (
     <SiteLayout title="Playground">
       <div className="space-y-8">
-        <PageTitle>Playground</PageTitle>
+        <PageTitleDeprecated>Playground</PageTitleDeprecated>
         {showAlert && (
           <Alert
             type="info"

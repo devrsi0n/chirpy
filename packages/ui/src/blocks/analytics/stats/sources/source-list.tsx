@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
 
-import { Link, Tabs } from '../../../../components';
+import { Tabs } from '../../tabs';
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
 import FadeIn from '../../fade-in';
@@ -19,6 +19,7 @@ import { EmptyState } from '../empty-state';
 import { AnalyticsCard, CardHeader, ViewNumber } from '../fine-components';
 import MoreLink from '../more-link';
 import { Referrer } from './referrer-list';
+import { Link } from '../../../../components';
 
 interface SourceListProps extends AllSourcesProps {}
 

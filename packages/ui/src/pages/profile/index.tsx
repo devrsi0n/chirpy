@@ -1,7 +1,7 @@
 import { EMAIL_RE } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { SiteLayout, PageTitle } from '../../blocks';
+import { SiteLayout, PageTitleDeprecated } from '../../blocks';
 import {
   Avatar,
   Button,
@@ -117,7 +117,7 @@ export function Profile(): JSX.Element {
   return (
     <SiteLayout title={name || 'Profile'}>
       <ProfileContainer className="space-y-7">
-        <PageTitle>Profile</PageTitle>
+        <PageTitleDeprecated>Profile</PageTitleDeprecated>
         <section className="space-y-6">
           <div className="relative mt-1 flex h-40 w-full items-end justify-center rounded-t bg-gradient-to-r from-primary-900 to-plum-900">
             {(image || name || username || email) && (

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {
   SiteLayout,
-  PageTitle,
+  PageTitleDeprecated,
   EmptyProjectCard,
   ProjectCard,
   SiteCard,
@@ -30,7 +30,7 @@ export function Dashboard(): JSX.Element {
     <SiteLayout title="Dashboard">
       <section className="space-y-10">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
-          <PageTitle>Dashboard</PageTitle>
+          <PageTitleDeprecated>Dashboard</PageTitleDeprecated>
           <CreateProjectButton
             projectCount={projects?.length}
             onClickCreateProject={() => setShowProjectDialog(true)}
