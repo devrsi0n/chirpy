@@ -1,2 +1,2 @@
 export * from './site-index';
-export * from './site-settings';
+export * from './settings';

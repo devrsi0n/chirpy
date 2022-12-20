@@ -3,6 +3,7 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
