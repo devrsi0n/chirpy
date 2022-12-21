@@ -24,6 +24,11 @@
     "yargs": "17.6.2",
     "zx": "4.3.0"
   },
+  "devDependencies": {
+    "@chirpy-dev/eslint-config": "workspace:*",
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "eslint": "8.30.0"
+  },
   "keywords": [
     "CLI",
     "Chirpy",
