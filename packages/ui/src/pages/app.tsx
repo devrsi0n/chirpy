@@ -7,6 +7,8 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import * as React from 'react';
 
+import 'react-notion-x/src/styles.css';
+
 import { ToastProvider } from '../components';
 import { CurrentUserProvider, NotificationProvider } from '../contexts';
 import { trpcClient } from '../utilities/trpc-client';

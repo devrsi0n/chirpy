@@ -35,7 +35,6 @@ export const siteRouter = router({
         posts: {
           select: {
             id: true,
-            title: true,
           },
         },
       },
@@ -86,8 +85,6 @@ export const siteRouter = router({
         posts: {
           select: {
             id: true,
-            title: true,
-            description: true,
             slug: true,
             image: true,
           },
