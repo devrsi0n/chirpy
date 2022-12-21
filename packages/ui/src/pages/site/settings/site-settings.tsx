@@ -16,7 +16,7 @@ export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
   return (
     <SiteLayout title="Site settings">
       <PageTitle className="mb-4">Site settings</PageTitle>
-      <Tabs className="w-80" defaultValue="general">
+      <Tabs defaultValue="general">
         <Tabs.List>
           <Tabs.Trigger value="general">General</Tabs.Trigger>
           <Tabs.Trigger value="customDomain">Custom domain</Tabs.Trigger>

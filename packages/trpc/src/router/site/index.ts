@@ -2,11 +2,10 @@ import { z } from 'zod';
 
 import { prisma } from '../../common/db-client';
 import { protectedProcedure, router } from '../../trpc-server';
+import { checkDomain, createDomain, deleteDomain } from './domain';
 import {
-  checkCustomDomain,
   checkDuplicatedSubdomain,
   checkUserAuthorization,
-  createDomain,
   CREATE_INPUT_VALIDATION,
   UPDATE_INPUT_VALIDATION,
 } from './utils';
@@ -108,9 +107,18 @@ export const siteRouter = router({
       await checkUserAuthorization(ctx.session.user.id, input.siteId);
       return await createDomain(input.customDomain, input.siteId);
     }),
-  checkCustomDomain: protectedProcedure
-    .input(z.string())
-    .query(async ({ input }) => {
-      return checkCustomDomain(input);
+  checkDomain: protectedProcedure.input(z.string()).query(async ({ input }) => {
+    return checkDomain(input);
+  }),
+  deleteDomain: protectedProcedure
+    .input(
+      z.object({
+        siteId: z.string(),
+        customDomain: z.string(),
+      }),
+    )
+    .mutation(async ({ input, ctx }) => {
+      await checkUserAuthorization(ctx.session.user.id, input.siteId);
+      await deleteDomain(input.customDomain, input.siteId);
     }),
 });
