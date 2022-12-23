@@ -20,7 +20,8 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
           <h1 className="mt-1 w-full max-w-2xl text-center text-4xl font-black leading-snug text-gray-1200">
             <span className="inline-block bg-gradient-to-r from-primary-900 to-plum-900 bg-clip-text text-transparent">
               {strings.heroTitlePoint}
-            </span>{' '}
+            </span>
+            <br aria-hidden />
             <span>{strings.heroTitle}</span>
           </h1>
           <Text className="text-center" variant="secondary">
