@@ -8,7 +8,7 @@ import {
   RouterOutputs,
   trpcClient,
 } from '../../../../utilities';
-import { CreateSiteForm } from '../create-site-form';
+import { CreateSiteForm } from '../create/create-site-form';
 
 export type SiteGeneralSettingsProps = {
   siteId: string;

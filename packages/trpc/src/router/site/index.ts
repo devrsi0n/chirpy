@@ -50,6 +50,9 @@ export const siteRouter = router({
           ...input,
           managerId: ctx.session.user.id,
         },
+        select: {
+          id: true,
+        },
       });
       return result;
     }),

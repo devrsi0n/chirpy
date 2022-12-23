@@ -256,6 +256,10 @@ model Site {
   id            String       @id @default(cuid())
   name          String       @db.Text
   subdomain     String       @unique
+  // Notion template url
+  templateUrl   String       @db.Text
+  // Notion template record map
+  recordMap     Json
   description   String?      @db.Text
   logo          String?
   image         String?      @db.Text

@@ -1,5 +1,4 @@
 import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
-import clsx from 'clsx';
 import { MDXRemote } from 'next-mdx-remote';
 
 import {
@@ -9,8 +8,7 @@ import {
   SideBar,
   SideBarProps,
 } from '../../../blocks';
-import { IconChevronRight, Link } from '../../../components';
-import { listHoverable } from '../../../styles/common';
+import { PaginationLink } from './pagination';
 
 export type DocNav = {
   title: string;
@@ -57,35 +55,25 @@ export function Docs({
             <section className="mt-10">
               <div className="mx-auto flex max-w-[65ch] flex-row justify-between">
                 {nearNav.prev ? (
-                  <Link
-                    size="lg"
-                    variant="plain"
+                  <PaginationLink
                     href={nearNav.prev.link}
-                    className={clsx(
-                      'flex flex-row items-center px-3 py-2 text-gray-1200 sm:-translate-x-5',
-                      listHoverable,
-                    )}
+                    type="prev"
+                    className="sm:translate-x-5"
                   >
-                    <IconChevronRight size={28} className="rotate-180" />
-                    <span>{nearNav.prev.title}</span>
-                  </Link>
+                    {nearNav.prev.title}
+                  </PaginationLink>
                 ) : (
                   // To fill left empty when there is only 1 next
                   <div />
                 )}
                 {nearNav.next && (
-                  <Link
-                    size="lg"
-                    variant="plain"
+                  <PaginationLink
                     href={nearNav.next.link}
-                    className={clsx(
-                      'flex flex-row items-center px-3 py-2 text-gray-1200 sm:translate-x-5',
-                      listHoverable,
-                    )}
+                    type="prev"
+                    className="sm:translate-x-5"
                   >
-                    <span>{nearNav.next.title}</span>
-                    <IconChevronRight size={28} className="" />
-                  </Link>
+                    {nearNav.next.title}
+                  </PaginationLink>
                 )}
               </div>
             </section>

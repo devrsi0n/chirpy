@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { TextArea, TextField } from '../../../components';
-import { FormError, Register } from '../../../hooks';
+import { TextArea, TextField } from '../../../../components';
+import { FormError, Register } from '../../../../hooks';
 
 export type CreateSiteFormProps<T> = {
   register: Register;
@@ -13,6 +13,7 @@ export type SiteForm = {
   name: string;
   subdomain: string;
   description: string;
+  templateUrl: string;
 };
 
 export function CreateSiteForm<T extends SiteForm>({
@@ -31,6 +32,16 @@ export function CreateSiteForm<T extends SiteForm>({
         label="Name"
         errorMessage={errors.name}
         placeholder="My blog"
+      />
+      <TextArea
+        {...register('templateUrl', {})}
+        aria-label="Notion template URL"
+        label="Notion template URL"
+        errorMessage={errors.templateUrl}
+        styles={{
+          textarea: 'min-h-[7em]',
+        }}
+        hintText="Back to the previous page to get the template URL if you don't have one"
       />
       <TextField
         {...register('subdomain', {
