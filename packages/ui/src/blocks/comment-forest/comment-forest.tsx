@@ -29,7 +29,7 @@ export function CommentForest({
   return (
     <div className="space-y-4">
       <div className="flex flex-row items-center justify-between">
-        <Heading as="h3" className="!text-2xl">
+        <Heading as="h3" className="!text-display-xs">
           {formatTitle(commentCount)}
         </Heading>
         <div className="flex flex-row">

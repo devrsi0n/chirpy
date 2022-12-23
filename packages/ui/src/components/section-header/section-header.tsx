@@ -22,7 +22,10 @@ export function SectionHeader({
       <Text color="primary" className="mb-3 text-center font-semibold">
         {label}
       </Text>
-      <Heading as="h2" className="mb-6 text-center text-5xl font-semibold">
+      <Heading
+        as="h2"
+        className="mb-6 text-center text-display-lg font-semibold"
+      >
         {title}
       </Heading>
       <Text variant="secondary" className="mb-24 text-center">

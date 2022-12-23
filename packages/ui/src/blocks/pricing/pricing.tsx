@@ -89,7 +89,7 @@ function PricingCard({
       <Text className="mb-8" variant="secondary">
         All the basics for starting a new community
       </Text>
-      <Text className="mb-2 text-3xl">
+      <Text className="mb-2 text-display-sm">
         <span className="font-bold">${price}</span>
         <Text as="span" variant="secondary" size="base">
           /mo

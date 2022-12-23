@@ -17,10 +17,11 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
     <SiteLayout enableBgGradient title="" hideFullBleed>
       <section className="flex min-h-full flex-col items-center space-y-24">
         <div className="space-y-8">
-          <h1 className="mt-1 w-full max-w-2xl text-center text-4xl font-black leading-snug text-gray-1200">
+          <h1 className="mt-1 w-full max-w-2xl text-center text-display-md font-black leading-snug text-gray-1200">
             <span className="inline-block bg-gradient-to-r from-primary-900 to-plum-900 bg-clip-text text-transparent">
               {strings.heroTitlePoint}
-            </span>{' '}
+            </span>
+            <br aria-hidden />
             <span>{strings.heroTitle}</span>
           </h1>
           <Text className="text-center" variant="secondary">
