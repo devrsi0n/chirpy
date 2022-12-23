@@ -11,10 +11,10 @@ export type IHeadingProps = React.ComponentProps<'h1'> & {
 };
 
 const styles: Record<AS, string> = {
-  h1: `text-5xl`,
-  h2: `text-4xl`,
-  h3: `text-3xl`,
-  h4: `text-2xl`,
+  h1: `text-display-lg`,
+  h2: `text-display-md`,
+  h3: `text-display-sm`,
+  h4: `text-display-xs`,
   h5: `text-xl`,
   h6: `text-lg`,
 };

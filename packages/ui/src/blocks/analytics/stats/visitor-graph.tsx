@@ -416,7 +416,7 @@ class LineGraph extends React.Component<LineGraphProps, LineGraphState> {
           </div>
           <div className="my-1 flex items-center justify-between whitespace-nowrap">
             <strong
-              className="mr-4 text-xl text-gray-1200 md:text-2xl"
+              className="mr-4 text-xl text-gray-1200 md:text-display-xs"
               tooltip={this.topStatTooltip(stat)}
             >
               {this.topStatNumberShort(stat)}
