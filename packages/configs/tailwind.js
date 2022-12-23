@@ -64,29 +64,32 @@ module.exports = {
     future: {
       hoverOnlyWhenSupported: true,
     },
+    fontSize: {
+      xs: ['0.75rem', '1.125rem'],
+      sm: defaultTheme.fontSize.sm,
+      base: defaultTheme.fontSize.base,
+      lg: defaultTheme.fontSize.lg,
+      xl: ['1.25rem', '1.875rem'],
+      'display-xs': ['1.5rem', '2rem'],
+      'display-sm': ['1.875rem', '2.375rem'],
+      'display-md': [
+        '2.25rem',
+        { lineHeight: '2.75rem', letterSpacing: '-0.02em' },
+      ],
+      'display-lg': [
+        '3rem',
+        { lineHeight: '3.75rem', letterSpacing: '-0.02em' },
+      ],
+      'display-xl': [
+        '3.75rem',
+        { lineHeight: '4.5rem', letterSpacing: '-0.02em' },
+      ],
+      'display-2xl': [
+        '4.5rem',
+        { lineHeight: '5.625rem', letterSpacing: '-0.02em' },
+      ],
+    },
     extend: {
-      fontSize: {
-        xs: ['0.75rem', '1.125rem'],
-        xl: ['1.25rem', '1.875rem'],
-        'display-xs': ['1.5rem', '2rem'],
-        'display-sm': ['1.875rem', '2.375rem'],
-        'display-md': [
-          '2.25rem',
-          { lineHeight: '2.75rem', letterSpacing: '-0.02em' },
-        ],
-        'display-lg': [
-          '3rem',
-          { lineHeight: '3.75rem', letterSpacing: '-0.02em' },
-        ],
-        'display-xl': [
-          '3.75rem',
-          { lineHeight: '4.5rem', letterSpacing: '-0.02em' },
-        ],
-        'display-2xl': [
-          '4.5rem',
-          { lineHeight: '5.625rem', letterSpacing: '-0.02em' },
-        ],
-      },
       // For analytics
       colors: {
         'gray-950': 'rgb(13, 18, 30)',
