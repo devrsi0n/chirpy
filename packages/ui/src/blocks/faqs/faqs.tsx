@@ -32,7 +32,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
             <Text
               variant="secondary"
               className="max-w-xs md:max-w-full"
-            >{`Can't find the answer you're looking for? Please chat to our friendly team.`}</Text>
+            >{`If you can't find the answer to your question in our FAQs or documentation, our friendly support team is here to help.`}</Text>
           </div>
           <Link variant="plain" href={FEEDBACK_LINK} target="_blank">
             <Button variant="solid" color="primary">

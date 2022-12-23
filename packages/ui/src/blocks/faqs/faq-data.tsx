@@ -18,28 +18,29 @@ export const FAQ_LIST: FAQItem[] = [
   {
     title: 'Is there a free plan available?',
     description:
-      'Yes, we have a free plan for you. You can sign up for a free account and start using our service.',
+      'Yes, our free plan is designed to give you a taste of what our service has to offer. Sign up for a free account and experience the value of our platform for yourself.',
     icon: <IconHeart />,
   },
   {
     title: 'Can I change my plan later?',
     description:
-      'Of course. Our pricing scales with your company. Chat to our friendly team to find a solution that works for you.',
+      'Yes, you can easily change your plan at any time. Our flexible pricing options allow you to scale your usage as your company grows, and our friendly team is here to help you find the right solution for your needs.',
     icon: <IconRepeat />,
   },
   {
     title: `What's your refund policy?`,
-    description: `We understand that things change. You can cancel your plan at any time and we'll refund you the difference already paid.`,
+    description: `Our refund policy is simple and straightforward. If you need to cancel your plan, you can do so at any time, and we'll refund you for any unused time on your plan. Just contact our support team to request a refund and we'll take care of the rest.`,
     icon: <IconCornerLeftDown />,
   },
   {
     title: `What browsers do you support?`,
     description: (
       <span>
-        Chirpy is designed to work in the modern, recent releases of all major
-        browsers, including Chrome, Firefox, Safari, and Edge.
+        {`Chirpy is built to work with the most recent versions of Chrome,
+        Firefox, Safari, and Edge. If you're using one of these browsers, you
+        can expect a seamless and enjoyable experience with Chirpy.`}
         <br />
-        <span>{`We don't support Internet Explorer.`}</span>
+        <span>{`We don't support Internet Explorer, so if you're using that browser, you may experience some compatibility issues.`}</span>
       </span>
     ),
     icon: <IconChrome />,
@@ -49,8 +50,13 @@ export const FAQ_LIST: FAQItem[] = [
     description: (
       <span>
         Our payment is provided by{' '}
-        <Link href="https://www.paddle.com/">Paddle</Link>. We accept all major
-        credit, debit cards, PayPal, Google Pay, and Apple Pay.{' '}
+        <Link href="https://www.paddle.com/">Paddle</Link>
+        {`, a secure and
+        reliable payment platform that supports all major credit and debit
+        cards, as well as popular digital payment options like PayPal, Google
+        Pay, and Apple Pay. With Paddle, you can be confident that your payment
+        information is safe and that you'll have a smooth and hassle-free
+        checkout experience. `}
         <Link href="https://www.paddle.com/help/start/intro-to-paddle/which-payment-methods-do-you-support">
           More details
         </Link>
@@ -59,7 +65,7 @@ export const FAQ_LIST: FAQItem[] = [
     icon: <IconCreditCard />,
   },
   {
-    title: `Can Chirpy be self-hosted?`,
+    title: `Is self-hosted supported for Chirpy?`,
     description: (
       <span>
         {`Yes, it is. It's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience. `}
