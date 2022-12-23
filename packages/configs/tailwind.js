@@ -68,11 +68,24 @@ module.exports = {
       fontSize: {
         xs: ['0.75rem', '1.125rem'],
         xl: ['1.25rem', '1.875rem'],
-        '3xl': ['1.875rem', '2.375rem'],
-        '4xl': ['2.25rem', { lineHeight: '2.75rem', letterSpacing: '-0.02em' }],
-        '5xl': ['3rem', { lineHeight: '3.75rem', letterSpacing: '-0.02em' }],
-        '6xl': ['3.75rem', { lineHeight: '4.5rem', letterSpacing: '-0.02em' }],
-        '7xl': ['4.5rem', { lineHeight: '5.625rem', letterSpacing: '-0.02em' }],
+        'display-xs': ['1.5rem', '2rem'],
+        'display-sm': ['1.875rem', '2.375rem'],
+        'display-md': [
+          '2.25rem',
+          { lineHeight: '2.75rem', letterSpacing: '-0.02em' },
+        ],
+        'display-lg': [
+          '3rem',
+          { lineHeight: '3.75rem', letterSpacing: '-0.02em' },
+        ],
+        'display-xl': [
+          '3.75rem',
+          { lineHeight: '4.5rem', letterSpacing: '-0.02em' },
+        ],
+        'display-2xl': [
+          '4.5rem',
+          { lineHeight: '5.625rem', letterSpacing: '-0.02em' },
+        ],
       },
       // For analytics
       colors: {
