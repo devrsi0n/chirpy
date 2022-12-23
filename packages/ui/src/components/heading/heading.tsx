@@ -11,12 +11,12 @@ export type IHeadingProps = React.ComponentProps<'h1'> & {
 };
 
 const styles: Record<AS, string> = {
-  h1: `text-5xl tracking-tight`,
-  h2: `text-4xl tracking-tight`,
-  h3: `text-3xl tracking-tight`,
-  h4: `text-2xl`,
-  h5: `text-xl`,
-  h6: `text-lg`,
+  h1: `text-7xl`,
+  h2: `text-6xl`,
+  h3: `text-5xl`,
+  h4: `text-4xl`,
+  h5: `text-3xl`,
+  h6: `text-2xl`,
 };
 
 export function Heading(props: IHeadingProps): JSX.Element {
