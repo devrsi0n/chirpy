@@ -24,17 +24,17 @@
     "@trpc/react-query": "10.6.0",
     "@trpc/server": "10.6.0",
     "@types/web-push": "3.3.2",
-    "next": "13.0.7",
+    "next": "13.1.0",
     "next-auth": "4.17.0",
     "next-axiom": "0.15.1",
     "notion-client": "6.15.6",
     "notion-types": "6.15.6",
-    "type-fest": "3.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.11.0",
+    "type-fest": "3.3.0",
     "web-push": "3.5.0",
-    "zod": "3.19.1"
+    "zod": "3.20.2"
   },
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",

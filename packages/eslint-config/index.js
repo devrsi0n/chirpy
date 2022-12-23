@@ -65,6 +65,7 @@ module.exports = {
     {
       files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx'],
       rules: {
+        '@typescript-eslint/no-non-null-assertion': 'off',
         'react/display-name': 'off',
         'unicorn/prefer-event-target': 'off',
       },

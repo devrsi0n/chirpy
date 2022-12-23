@@ -7,6 +7,7 @@
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
+    "studio": "cd packages/trpc && pnpm prisma studio",
     "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i",
     "lint": "eslint --fix ./",
     "release": "turbo run build && changeset publish",
@@ -23,8 +24,8 @@
     "eslint": "8.30.0",
     "husky": "8.0.2",
     "lint-staged": "13.0.4",
-    "next": "13.0.7",
-    "prettier": "2.8.0",
+    "next": "13.1.0",
+    "prettier": "2.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "turbo": "1.6.3"

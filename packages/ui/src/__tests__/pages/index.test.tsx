@@ -1,6 +1,6 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { strings, HomePage } from '../../pages/home';
+import { strings, HomePage } from '../../pages/home/home';
 import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {

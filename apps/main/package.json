@@ -30,7 +30,7 @@
     "gray-matter": "4.0.3",
     "html-loader": "4.2.0",
     "lodash": "4.17.21",
-    "next": "13.0.7",
+    "next": "13.1.0",
     "next-axiom": "0.15.1",
     "next-connect": "0.13.0",
     "next-mdx-remote": "3.0.8",

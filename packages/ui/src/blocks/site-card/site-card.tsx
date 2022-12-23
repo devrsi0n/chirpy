@@ -31,7 +31,7 @@ export function SiteCard({ site }: SiteCardProps): JSX.Element {
           <List className="px-4">
             {posts.map((page) => (
               <List.Item key={page.id} className={listHoverable}>
-                <Text title={page.title}>{page.title}</Text>
+                {/* <Text title={page.title}>{page.title}</Text> */}
               </List.Item>
             ))}
           </List>
