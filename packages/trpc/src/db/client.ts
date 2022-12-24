@@ -3,19 +3,6 @@ import { PrismaClient } from '@prisma/client';
 import { log } from 'next-axiom';
 import SuperJSON from 'superjson';
 
-export type {
-  Page,
-  Project,
-  User,
-  Member,
-  Comment,
-  Like,
-  NotificationMessage,
-  NotificationSubscription,
-  Site,
-  Post,
-} from '@prisma/client';
-
 declare global {
   // eslint-disable-next-line no-var
   var _prismaClient: ReturnType<typeof getPrismaClient> | undefined;

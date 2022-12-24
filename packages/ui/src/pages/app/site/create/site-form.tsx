@@ -1,32 +1,37 @@
+import {
+  SITE_DESCRIPTION_VALIDATION,
+  SITE_NAME_VALIDATION,
+  SITE_SUBDOMAIN_VALIDATION,
+  SITE_TEMPLATE_URL_VALIDATION,
+} from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
 import { TextArea, TextField } from '../../../../components';
 import { FormError, Register } from '../../../../hooks';
 
-export type CreateSiteFormProps<T> = {
+export type SiteFormProps<T> = {
   register: Register;
   errors: FormError<T>;
   children?: React.ReactNode;
 };
 
-export type SiteForm = {
+export type SiteFormFields = {
   name: string;
   subdomain: string;
   description: string;
   templateUrl: string;
 };
 
-export function CreateSiteForm<T extends SiteForm>({
+export function SiteForm<T extends SiteFormFields>({
   register,
   errors,
   children,
-}: CreateSiteFormProps<T>): JSX.Element {
+}: SiteFormProps<T>): JSX.Element {
   return (
     <form className="flex w-80 flex-col space-y-4">
       <TextField
         {...register('name', {
-          required: { value: true, message: 'Name is required' },
-          maxLength: { value: 64, message: 'At most 64 characters' },
+          zod: SITE_NAME_VALIDATION,
         })}
         aria-label="Name of this site"
         label="Name"
@@ -34,7 +39,9 @@ export function CreateSiteForm<T extends SiteForm>({
         placeholder="My blog"
       />
       <TextArea
-        {...register('templateUrl', {})}
+        {...register('templateUrl', {
+          zod: SITE_TEMPLATE_URL_VALIDATION,
+        })}
         aria-label="Notion template URL"
         label="Notion template URL"
         errorMessage={errors.templateUrl}
@@ -45,11 +52,7 @@ export function CreateSiteForm<T extends SiteForm>({
       />
       <TextField
         {...register('subdomain', {
-          required: { value: true, message: 'Subdomain is required' },
-          pattern: {
-            value: /^[A-Za-z]+$/,
-            message: `Only word characters are allowed`,
-          },
+          zod: SITE_SUBDOMAIN_VALIDATION,
         })}
         suffix=".chirpy.dev"
         label="Subdomain"
@@ -58,7 +61,7 @@ export function CreateSiteForm<T extends SiteForm>({
       />
       <TextArea
         {...register('description', {
-          maxLength: { value: 190, message: 'At most 190 characters' },
+          zod: SITE_DESCRIPTION_VALIDATION,
         })}
         aria-label="description of this site"
         label="Description"

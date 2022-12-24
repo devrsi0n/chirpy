@@ -7,20 +7,15 @@ import { Button, Card } from '../../../../components';
 import { useForm } from '../../../../hooks';
 import { isTRPCClientError, trpcClient } from '../../../../utilities';
 import { PaginationLink } from '../../../home/docs/pagination';
-import { CreateSiteForm } from './create-site-form';
+import { SiteForm, SiteFormFields } from './site-form';
 
-type FormFields = {
-  name: string;
-  subdomain: string;
-  description: string;
-};
-
-export function SiteForm(): JSX.Element {
+export function CreateSiteForm(): JSX.Element {
   const { mutateAsync: createSite } = trpcClient.site.create.useMutation();
   const { register, errors, handleSubmit, hasError, setError } =
-    useForm<FormFields>({
+    useForm<SiteFormFields>({
       defaultValues: {
         name: '',
+        templateUrl: '',
         subdomain: '',
         description: '',
       },
@@ -35,6 +30,7 @@ export function SiteForm(): JSX.Element {
           name: fields.name,
           subdomain: fields.subdomain,
           description: fields.description,
+          templateUrl: fields.templateUrl,
         });
       } catch (error: unknown) {
         if (
@@ -54,7 +50,7 @@ export function SiteForm(): JSX.Element {
       <PageTitle>Create site</PageTitle>
       <div>
         <Card className="w-96 p-6">
-          <CreateSiteForm register={register} errors={errors} />
+          <SiteForm register={register} errors={errors} />
           <div className="mt-6">
             <Button
               className="w-full sm:w-auto"

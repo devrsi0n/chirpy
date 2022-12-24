@@ -1,1 +1,1 @@
-export { SiteForm as default } from '@chirpy-dev/ui';
+export { CreateSiteForm as default } from '@chirpy-dev/ui';

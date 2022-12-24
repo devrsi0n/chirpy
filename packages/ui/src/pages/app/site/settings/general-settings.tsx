@@ -8,7 +8,7 @@ import {
   RouterOutputs,
   trpcClient,
 } from '../../../../utilities';
-import { CreateSiteForm } from '../create/create-site-form';
+import { SiteForm } from '../create/site-form';
 
 export type SiteGeneralSettingsProps = {
   siteId: string;
@@ -25,6 +25,7 @@ export function SiteGeneralSettings({
         name: '',
         description: '',
         subdomain: '',
+        templateUrl: '',
       },
       resetAfterSubmit: false,
     });
@@ -34,6 +35,7 @@ export function SiteGeneralSettings({
         name: data.name,
         description: data.description || '',
         subdomain: data.subdomain,
+        templateUrl: data.templateUrl,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,7 +73,7 @@ export function SiteGeneralSettings({
   });
   return (
     <section className="w-fit pt-8">
-      <CreateSiteForm register={register} errors={errors}>
+      <SiteForm register={register} errors={errors}>
         <Button
           className="w-full sm:w-auto"
           disabled={hasError || isLoading}
@@ -82,7 +84,7 @@ export function SiteGeneralSettings({
           {isLoading && <IconLoader className="animate-spin text-white" />}
           <span>Save</span>
         </Button>
-      </CreateSiteForm>
+      </SiteForm>
     </section>
   );
 }

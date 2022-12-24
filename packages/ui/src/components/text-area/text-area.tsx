@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { border, textInput, textInputError } from '../../styles/common';
-import { Text } from '../text';
+import { TextFieldError, TextFieldHint } from '../text-field';
 
 export type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
   label: string;
@@ -40,16 +40,8 @@ export const TextArea = React.forwardRef(function TextArea(
           className || styles.textarea,
         )}
       />
-      {hintText && (
-        <Text variant="secondary" size="sm" className="mt-1.5">
-          {hintText}
-        </Text>
-      )}
-      {errorMessage && (
-        <p role="alert" className="text-xs text-red-700">
-          {errorMessage}
-        </p>
-      )}
+      <TextFieldHint>{hintText}</TextFieldHint>
+      <TextFieldError message={errorMessage} />
     </label>
   );
 });

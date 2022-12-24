@@ -1,4 +1,4 @@
-import { Like, User } from '@chirpy-dev/trpc';
+import { Like, User } from '@chirpy-dev/trpc/src/ui';
 import { RTEValue } from '@chirpy-dev/types';
 import * as React from 'react';
 
@@ -49,6 +49,7 @@ function CommentWidgetPreviewInternal(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {
         id: `${String(Math.random()).slice(2)}`,
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         content: reply!,
         parentId: commentId || null,
         pageId: PAGE_ID,

@@ -9,7 +9,7 @@ import gitHubProvider from 'next-auth/providers/github';
 import googleProvider from 'next-auth/providers/google';
 import twitterProvider from 'next-auth/providers/twitter';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../db/client';
 import { generateUsername } from './utilities';
 
 const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;

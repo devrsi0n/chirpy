@@ -1,7 +1,7 @@
 import { log } from 'next-axiom';
 import { z } from 'zod';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../db/client';
 import { handleCommentEvent } from '../mutation-event/comment-handler';
 import { handleLikeEvent } from '../mutation-event/like-handler';
 import { router, protectedProcedure } from '../trpc-server';

@@ -73,22 +73,44 @@ export const TextField = React.forwardRef(function TextfieldComponent(
           </div>
         )}
       </div>
-      {hintText && (
-        <Text variant="secondary" size="sm" className="mt-1.5">
-          {hintText}
-        </Text>
-      )}
-      <AnimatePresence>
-        {errorMessage && (
-          <m.p
-            {...easeInOutOpacity}
-            role="alert"
-            className="mt-1.5 text-sm leading-none text-red-900"
-          >
-            {errorMessage}
-          </m.p>
-        )}
-      </AnimatePresence>
+      <TextFieldHint>{hintText}</TextFieldHint>
+      <TextFieldError message={errorMessage} />
     </label>
   );
 });
+
+export type TextFieldErrorProps = {
+  message?: string;
+};
+
+export function TextFieldError({ message }: TextFieldErrorProps) {
+  return (
+    <AnimatePresence>
+      {message && (
+        <m.p
+          {...easeInOutOpacity}
+          role="alert"
+          className="mt-1.5 text-sm leading-none text-red-900"
+        >
+          {message}
+        </m.p>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export type TextFieldHint = {
+  children?: React.ReactNode;
+};
+
+export function TextFieldHint({ children }: TextFieldHint) {
+  return (
+    <>
+      {children && (
+        <Text variant="secondary" size="sm" className="mt-1.5">
+          {children}
+        </Text>
+      )}
+    </>
+  );
+}

@@ -1,4 +1,4 @@
-import { getNotionRecordMap, prisma } from '@chirpy-dev/trpc';
+import { getPageRecordMap, prisma } from '@chirpy-dev/trpc';
 import { SitesPostProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
@@ -50,7 +50,7 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
     return { notFound: true };
   }
   const [post] = site.posts;
-  const recordMap = await getNotionRecordMap(post.pageId, post.id);
+  const recordMap = await getPageRecordMap(post.pageId, post.id);
 
   return {
     props: {

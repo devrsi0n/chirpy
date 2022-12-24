@@ -1,4 +1,4 @@
-import type { Site } from '@chirpy-dev/trpc';
+import type { Site } from '@chirpy-dev/trpc/src/ui';
 import { useState } from 'react';
 
 import {

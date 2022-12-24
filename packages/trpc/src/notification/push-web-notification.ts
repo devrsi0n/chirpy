@@ -3,7 +3,7 @@ import { FEEDBACK_LINK, getPublicEnvVar } from '@chirpy-dev/utils';
 import { log } from 'next-axiom';
 import webpush, { PushSubscription } from 'web-push';
 
-import { prisma, NotificationSubscription } from '../common/db-client';
+import { prisma, NotificationSubscription } from '../db/client';
 import { NotificationPayload } from './types';
 
 export type WebNotificationPayload = {

@@ -1,7 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../db/client';
 import { router, publicProcedure, protectedProcedure } from '../trpc-server';
 import { COMMON_COMMENT_SELECTOR } from './utils/selector';
 import { rteContentValidator } from './utils/validator';

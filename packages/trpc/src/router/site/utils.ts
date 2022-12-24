@@ -1,18 +1,8 @@
 import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import { TRPCError } from '@trpc/server';
-import { z } from 'zod';
 
-import { prisma } from '../../common/db-client';
-
-export const CREATE_INPUT_VALIDATION = z.object({
-  name: z.string(),
-  subdomain: z.string().regex(/^[A-Za-z]+$/),
-  description: z.string(),
-});
-
-export const UPDATE_INPUT_VALIDATION = CREATE_INPUT_VALIDATION.extend({
-  id: z.string(),
-});
+import { prisma } from '../../db/client';
+import { notion } from '../../notion/client';
 
 export async function checkDuplicatedSubdomain(subdomain: string) {
   const existing = await prisma.site.findFirst({
@@ -52,4 +42,17 @@ export async function checkUserAuthorization(userId: string, siteId: string) {
     });
   }
   return site;
+}
+
+export async function getRecordMapByUrl(templateUrl: string) {
+  const url = new URL(templateUrl);
+  const pageId = url.pathname.split('-').pop();
+  if (!pageId) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: 'Invalid Notion template URL',
+    });
+  }
+  const recordMap = await notion.getPage(pageId);
+  return recordMap;
 }

@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { ZodError } from 'zod';
 
+import { useToast } from '../../components';
 import { Register, Validator } from './type';
 import { validate } from './validate';
 
@@ -61,7 +63,7 @@ export function useForm<T extends FieldValue>({
       ...(validator?.required && { required: true }),
     };
   };
-
+  const { showToast } = useToast();
   const handleSubmit = <E>(onSubmit: (data: T, event: E) => Promise<void>) => {
     const onSubmitWrapper: (e: E) => Promise<void> = async (e) => {
       for (const [name, validator] of validatorMapRef.current.entries()) {
@@ -71,7 +73,15 @@ export function useForm<T extends FieldValue>({
       }
       try {
         await onSubmit(fields, e);
-      } catch {
+      } catch (error) {
+        if (error instanceof ZodError) {
+          showToast({
+            type: 'error',
+            title: 'Validation error',
+            description: error.issues[0].message,
+            persistent: true,
+          });
+        }
         // Don't throw error to the surface
         // just prevent from resetting fields
         return;

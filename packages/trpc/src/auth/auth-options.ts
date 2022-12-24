@@ -5,7 +5,7 @@ import { NextAuthOptions } from 'next-auth';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { log } from 'next-axiom';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../db/client';
 import { authProviders } from './auth-providers';
 import { defaultCookies } from './default-cookies';
 

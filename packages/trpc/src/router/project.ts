@@ -2,7 +2,7 @@ import { ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN } from '@chirpy-dev/utils';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../db/client';
 import { router, protectedProcedure, publicProcedure } from '../trpc-server';
 
 export const projectRouter = router({

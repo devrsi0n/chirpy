@@ -1,10 +1,10 @@
 {
   "name": "@chirpy-dev/trpc",
   "version": "0.0.0",
-  "description": "",
-  "main": "./src/index.ts",
+  "description": "TRPC server for Chirpy",
   "sideEffects": false,
   "types": "./src/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
     "dev": "pscale connect chirpy dev --port 3309",
     "studio": "prisma studio",

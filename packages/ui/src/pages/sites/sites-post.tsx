@@ -1,4 +1,4 @@
-import { ExtendedRecordMap } from '@chirpy-dev/trpc';
+import { ExtendedRecordMap } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 import { NotionRenderer } from 'react-notion-x';
 
