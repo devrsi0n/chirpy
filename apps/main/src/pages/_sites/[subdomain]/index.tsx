@@ -1,4 +1,4 @@
-import { prisma } from '@chirpy-dev/trpc';
+import { getRecordMapByUrl, prisma } from '@chirpy-dev/trpc';
 import { SitesIndexProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
@@ -17,17 +17,34 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
   if (typeof params?.subdomain !== 'string') {
     return { notFound: true };
   }
+
   const site = await prisma.site.findUnique({
     where: {
       subdomain: params?.subdomain,
+    },
+    select: {
+      id: true,
+      templateUrl: true,
+      subdomain: true,
+      recordMap: true,
     },
   });
   if (!site?.id) {
     return { notFound: true };
   }
+  const recordMap = await getRecordMapByUrl(site?.templateUrl);
+  await prisma.site.update({
+    where: {
+      id: site.id,
+    },
+    data: {
+      recordMap: recordMap as $TsAny,
+    },
+  });
   return {
     props: {
-      subdomain: site.subdomain,
+      ...site,
+      recordMap,
     },
     revalidate: 3600,
   };

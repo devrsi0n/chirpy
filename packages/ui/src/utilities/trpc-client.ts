@@ -1,4 +1,4 @@
-import { type AppRouter } from '@chirpy-dev/trpc/src/router';
+import { type AppRouter } from '@chirpy-dev/trpc/src/ui';
 import { getBaseUrl } from '@chirpy-dev/utils';
 import { httpLink, loggerLink, TRPCClientError } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
