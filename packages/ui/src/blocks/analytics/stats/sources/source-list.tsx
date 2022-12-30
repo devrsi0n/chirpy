@@ -1,5 +1,4 @@
 import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
-import { getPublicEnvVar } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
@@ -114,10 +113,9 @@ class AllSources extends React.Component<AllSourcesProps> {
               href={url.setQuery('source', referrer.name)}
             >
               <img
-                src={`${getPublicEnvVar(
-                  'NEXT_PUBLIC_ANALYTICS_DOMAIN',
-                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
-                )}/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 className="mr-2 -mt-px inline h-4 w-4 align-middle"
                 alt={`Favorite icon for ${referrer.name}`}
               />

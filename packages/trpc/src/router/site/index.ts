@@ -1,8 +1,9 @@
+import { parseSubdomain } from '@chirpy-dev/utils';
 import { JsonObject } from 'type-fest';
 import { z } from 'zod';
 
 import { prisma } from '../../db/client';
-import { protectedProcedure, router } from '../../trpc-server';
+import { protectedProcedure, publicProcedure, router } from '../../trpc-server';
 import { checkDomain, createDomain, deleteDomain } from './domain';
 import {
   checkDuplicatedSubdomain,
@@ -129,5 +130,30 @@ export const siteRouter = router({
     .mutation(async ({ input, ctx }) => {
       await checkUserAuthorization(ctx.session.user.id, input.siteId);
       await deleteDomain(input.customDomain, input.siteId);
+    }),
+  increasePV: publicProcedure
+    .input(
+      z.object({
+        hostname: z.string(),
+      }),
+    )
+    .mutation(async ({ input }) => {
+      const subdomain = parseSubdomain(input.hostname);
+      const filter =
+        subdomain === null
+          ? {
+              customDomain: input.hostname,
+            }
+          : {
+              subdomain,
+            };
+      await prisma.site.update({
+        where: filter,
+        data: {
+          pv: {
+            increment: 1,
+          },
+        },
+      });
     }),
 });

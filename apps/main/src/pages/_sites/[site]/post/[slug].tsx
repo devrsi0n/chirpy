@@ -14,17 +14,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
   params,
 }) => {
-  if (
-    typeof params?.slug !== 'string' ||
-    typeof params?.subdomain !== 'string'
-  ) {
+  if (typeof params?.slug !== 'string' || typeof params?.site !== 'string') {
     return { notFound: true };
   }
   const site = await prisma.site.findFirst({
     where: {
       AND: [
         {
-          subdomain: params.subdomain,
+          ...(params.site.includes('.')
+            ? { subdomain: params.site }
+            : { customDomain: params.site }),
         },
         {
           posts: {
@@ -47,7 +46,7 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
     },
   });
   if (!site?.posts[0].slug) {
-    return { notFound: true };
+    return { notFound: true, revalidate: 10 };
   }
   const [post] = site.posts;
   const recordMap = await getPageRecordMap(post.pageId, post.id);

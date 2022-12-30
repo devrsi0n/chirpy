@@ -28,5 +28,6 @@
   "jestrunner.configPath": "jest.config.js",
   "jest.jestCommandLine": "npm run test --",
   "svg.preview.background": "white",
-  "tailwindCSS.experimental.configFile": "apps/main/tailwind.config.js"
+  "tailwindCSS.experimental.configFile": "apps/main/tailwind.config.js",
+  "eslint.packageManager": "pnpm"
 }

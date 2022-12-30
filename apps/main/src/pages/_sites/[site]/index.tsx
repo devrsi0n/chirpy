@@ -14,13 +14,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
   params,
 }) => {
-  if (typeof params?.subdomain !== 'string') {
+  if (typeof params?.site !== 'string') {
     return { notFound: true };
   }
 
   const site = await prisma.site.findUnique({
     where: {
-      subdomain: params?.subdomain,
+      ...(params.site.includes('.')
+        ? { subdomain: params.site }
+        : { customDomain: params.site }),
     },
     select: {
       id: true,
@@ -30,7 +32,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
     },
   });
   if (!site?.id) {
-    return { notFound: true };
+    return { notFound: true, revalidate: 10 };
   }
   const recordMap = await getRecordMapByUrl(site?.templateUrl);
   await prisma.site.update({

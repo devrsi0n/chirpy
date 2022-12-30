@@ -1,5 +1,6 @@
 // import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+import { parseMiddlewareUrl, sitesMiddlewares } from './server/middlewares';
 
 // TODO: Add auth for app pages
 // const auth = withAuth({
@@ -40,22 +41,9 @@ export const config = {
   ],
 };
 
-export default function middleware(req: NextRequest) {
-  const url = req.nextUrl;
+export default function middleware(req: NextRequest, ev: NextFetchEvent) {
+  const { url, hostname, currentHost } = parseMiddlewareUrl(req);
 
-  // Get hostname of request (e.g. chirpy.dev, demo.localhost:3000)
-  const hostname = req.headers.get('host') || 'chirpy.dev';
-
-  /*  You have to replace ".vercel.pub" with your own domain if you deploy this example under your domain.
-      You can also use wildcard subdomains on .vercel.app links that are associated with your Vercel team slug
-      in this case, our team slug is "platformize", thus *.platformize.vercel.app works. Do note that you'll
-      still need to add "*.platformize.vercel.app" as a wildcard domain on your Vercel dashboard. */
-  const currentHost =
-    process.env.NODE_ENV === 'production' && process.env.VERCEL === '1'
-      ? hostname
-          .replace(`.chirpy.dev`, '')
-          .replace(`.chirpy-dev.vercel.app`, '')
-      : hostname.replace(`.localhost:3000`, '');
   // rewrites for app pages
   if (currentHost == 'app') {
     if (
@@ -80,7 +68,5 @@ export default function middleware(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  // rewrite everything else to `/_sites/[site] dynamic route
-  url.pathname = `/_sites/${currentHost}${url.pathname}`;
-  return NextResponse.rewrite(url);
+  return sitesMiddlewares(req, ev);
 }

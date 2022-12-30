@@ -206,9 +206,13 @@ model User {
   managedSites                  Site[]
   // User as site member
   siteMembers                   SiteMember[]
+  // Null means free plan
+  planId                        String?
+  plan                          Plan?                      @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
 
   @@index([kind])
   @@index([email])
+  @@index([planId])
 }
 
 enum UserKind {
@@ -271,6 +275,7 @@ model Site {
   managerId     String
   posts         Post[]
   members       SiteMember[]
+  pv            Int          @default(0)
 
   @@index([managerId])
 }
@@ -292,4 +297,27 @@ model SiteMember {
   @@unique([siteId, userId])
   @@index([role])
   @@index([userId])
+}
+
+enum PlanType {
+  FREE // Free 14 days trial, 1k pv
+  USAGE1 // 5k pv / month
+  USAGE2 // 10k pv / month
+  USAGE3 // 25K pv / month
+  USAGE4 // 50K pv / month
+  USAGE5 // 100K pv / month
+  USAGE6 // 500K pv / month
+  USAGE7 // 1m pv / month
+  // ENTERPRISE
+}
+
+// Payment subscription plan (monthly)
+model Plan {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type      PlanType @unique
+  // Page view upper limit
+  pv        Int
+  users     User[]
 }

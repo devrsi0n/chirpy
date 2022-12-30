@@ -5,3 +5,4 @@ export * from './constants';
 export * from './url';
 export * from './validator';
 export * from './router';
+export * from './domain';

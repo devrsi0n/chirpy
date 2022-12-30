@@ -1,6 +1,5 @@
 import { prisma } from '@chirpy-dev/trpc';
 import { cpDayjs } from '@chirpy-dev/ui';
-import { getAppURL } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
@@ -24,7 +23,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
         lt: beforeDate,
       },
       page: {
-        url: `${getAppURL()}/play`,
+        url: `${process.env.NEXT_PUBLIC_APP_URL}/play`,
       },
     },
   });
