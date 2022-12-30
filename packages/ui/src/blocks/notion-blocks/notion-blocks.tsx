@@ -35,6 +35,8 @@ export function NotionBlocks(props: NotionBlocksProps): JSX.Element {
     <NotionRenderer
       recordMap={props.recordMap as unknown as ExtendedRecordMap}
       fullPage
+      // Remove breadcrumb navigation
+      disableHeader
       darkMode={false}
       components={{
         Code,

@@ -44,6 +44,12 @@ export async function checkUserAuthorization(userId: string, siteId: string) {
   return site;
 }
 
+export function getNotionId(tempplateUrl: string) {
+  const url = new URL(tempplateUrl);
+  const pageId = url.pathname.split('-').pop();
+  return pageId;
+}
+
 export async function getRecordMapByUrl(templateUrl: string) {
   const url = new URL(templateUrl);
   const pageId = url.pathname.split('-').pop();

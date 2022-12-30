@@ -17,43 +17,37 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
   if (typeof params?.slug !== 'string' || typeof params?.site !== 'string') {
     return { notFound: true };
   }
-  const site = await prisma.site.findFirst({
+  const post = await prisma.post.findFirst({
     where: {
       AND: [
         {
-          ...(params.site.includes('.')
-            ? { subdomain: params.site }
-            : { customDomain: params.site }),
+          site: {
+            ...(params.site.includes('.')
+              ? { customDomain: params.site }
+              : { subdomain: params.site }),
+          },
         },
         {
-          posts: {
-            some: {
-              slug: params.slug,
-            },
-          },
+          slug: params.slug,
         },
       ],
     },
     select: {
       id: true,
-      posts: {
-        select: {
-          id: true,
-          slug: true,
-          pageId: true,
-        },
-      },
+      slug: true,
+      pageId: true,
     },
   });
-  if (!site?.posts[0].slug) {
+  if (!post?.id) {
     return { notFound: true, revalidate: 10 };
   }
-  const [post] = site.posts;
+  // console.log({ params })
+
   const recordMap = await getPageRecordMap(post.pageId, post.id);
 
   return {
     props: {
-      slug: site?.posts[0].slug,
+      slug: post.slug,
       recordMap,
     },
     revalidate: 3600,

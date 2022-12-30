@@ -1,20 +1,26 @@
-import { ExtendedRecordMap } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
-import { NotionBlocks, PageTitle, SiteLayout } from '../../blocks';
+import { PageTitle } from '../../blocks';
+import { PostCard } from './components/post-card';
+import { SitesLayout } from './sites-layout';
+import { SitesPage } from './types';
 
 export type SitesIndexProps = {
   subdomain: string;
-  recordMap: ExtendedRecordMap;
+  pages: SitesPage[];
 };
 
 export function SitesIndex(props: SitesIndexProps): JSX.Element {
   return (
-    <SiteLayout title="Home">
+    <SitesLayout>
       <PageTitle>Site {props.subdomain}</PageTitle>
-      <NotionBlocks
-        recordMap={props.recordMap as unknown as ExtendedRecordMap}
-      />
-    </SiteLayout>
+      <ul>
+        {props.pages.map((page) => (
+          <li key={page.id}>
+            <PostCard {...page} />
+          </li>
+        ))}
+      </ul>
+    </SitesLayout>
   );
 }

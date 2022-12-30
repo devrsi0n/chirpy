@@ -2,6 +2,7 @@ import { ExtendedRecordMap } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
 import { NotionBlocks } from '../../blocks';
+import { SitesLayout } from './sites-layout';
 
 export type SitesPostProps = {
   slug: string;
@@ -10,11 +11,10 @@ export type SitesPostProps = {
 
 export function SitesPost(props: SitesPostProps): JSX.Element {
   return (
-    <div>
-      <h1>Post {props.slug}</h1>
+    <SitesLayout>
       <section>
         <NotionBlocks recordMap={props.recordMap} />
       </section>
-    </div>
+    </SitesLayout>
   );
 }

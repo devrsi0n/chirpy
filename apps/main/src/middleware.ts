@@ -1,5 +1,6 @@
 // import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+
 import { parseMiddlewareUrl, sitesMiddlewares } from './server/middlewares';
 
 // TODO: Add auth for app pages
@@ -34,8 +35,7 @@ export const config = {
      * 1. /api routes
      * 2. /_next (Next.js internals)
      * 3. /fonts (inside /public)
-     * 4. /examples (inside /public)
-     * 5. all root files inside /public (e.g. /favicon.ico)
+     * 4. all root files inside /public (e.g. /favicon.ico)
      */
     '/((?!api|_next|fonts|images|videos|bootstrap|[\\w-]+\\.\\w+).*)',
   ],
@@ -68,5 +68,6 @@ export default function middleware(req: NextRequest, ev: NextFetchEvent) {
     return NextResponse.rewrite(url);
   }
 
+  // Rewrite all other requests to the `sites` folder
   return sitesMiddlewares(req, ev);
 }

@@ -73,7 +73,7 @@ export function SiteGeneralSettings({
   });
   return (
     <section className="w-fit pt-8">
-      <SiteForm register={register} errors={errors}>
+      <SiteForm register={register} errors={errors} templateUrlFieldHint="">
         <Button
           className="w-full sm:w-auto"
           disabled={hasError || isLoading}

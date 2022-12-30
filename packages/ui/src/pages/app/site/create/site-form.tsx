@@ -13,6 +13,7 @@ export type SiteFormProps<T> = {
   register: Register;
   errors: FormError<T>;
   children?: React.ReactNode;
+  templateUrlFieldHint?: string;
 };
 
 export type SiteFormFields = {
@@ -25,6 +26,7 @@ export type SiteFormFields = {
 export function SiteForm<T extends SiteFormFields>({
   register,
   errors,
+  templateUrlFieldHint,
   children,
 }: SiteFormProps<T>): JSX.Element {
   return (
@@ -48,7 +50,10 @@ export function SiteForm<T extends SiteFormFields>({
         styles={{
           textarea: 'min-h-[7em]',
         }}
-        hintText="Back to the previous page to get the template URL if you don't have one"
+        hintText={
+          templateUrlFieldHint ??
+          "Back to the previous page to get the template URL if you don't have one"
+        }
       />
       <TextField
         {...register('subdomain', {

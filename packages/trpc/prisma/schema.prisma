@@ -236,9 +236,9 @@ model Post {
   id            String   @id @default(cuid())
   // Notion page id
   pageId        String
-  // Notion page content record map
-  recordMap     Json
   slug          String   @default(cuid())
+  // Notion page content record map
+  recordMap     Json?
   image         String?  @db.Text
   imageBlurhash String?  @db.LongText
   createdAt     DateTime @default(now())
@@ -247,10 +247,10 @@ model Post {
   site          Site     @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   siteId        String
 
-  // Id is unique per site
-  @@unique([id, siteId], name: "post_site_constraint")
   // Slug is unique per site, but not unique globally
   @@unique([slug, siteId], name: "post_slug_site_constraint")
+  // Page id is unique per site, but not unique globally
+  @@unique([pageId, siteId], name: "post_pageId_site_constraint")
   @@index([siteId])
   @@index([slug])
 }
