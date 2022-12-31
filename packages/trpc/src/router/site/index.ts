@@ -134,15 +134,15 @@ export const siteRouter = router({
   increasePV: publicProcedure
     .input(
       z.object({
-        hostname: z.string(),
+        host: z.string(),
       }),
     )
     .mutation(async ({ input }) => {
-      const subdomain = parseSubdomain(input.hostname);
+      const subdomain = parseSubdomain(input.host);
       const filter =
         subdomain === null
           ? {
-              customDomain: input.hostname,
+              customDomain: input.host,
             }
           : {
               subdomain,

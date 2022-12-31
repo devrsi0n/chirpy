@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { PageTitle } from '../../blocks';
 import { PostCard } from './components/post-card';
-import { SitesLayout } from './sites-layout';
+import { SitesLayout } from './components/sites-layout';
 import { SitesPage } from './types';
 
 export type SitesIndexProps = {

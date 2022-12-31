@@ -2,7 +2,7 @@ import { ExtendedRecordMap } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
 import { NotionBlocks } from '../../blocks';
-import { SitesLayout } from './sites-layout';
+import { SitesLayout } from './components/sites-layout';
 
 export type SitesPostProps = {
   slug: string;

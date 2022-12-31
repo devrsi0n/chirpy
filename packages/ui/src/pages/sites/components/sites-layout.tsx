@@ -2,7 +2,7 @@ import { isENVProd } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { trpcClient } from '../../utilities';
+import { trpcClient } from '../../../utilities';
 
 export type SitesLayoutProps = {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ async function useCalcPV() {
     }
     function handlePageLoaded() {
       increasePV({
-        hostname: location.hostname,
+        host: location.host,
       });
     }
     router.events.on('routeChangeComplete', handlePageLoaded);
