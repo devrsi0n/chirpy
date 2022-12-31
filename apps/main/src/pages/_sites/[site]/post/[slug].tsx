@@ -41,7 +41,6 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
   if (!post?.id) {
     return { notFound: true, revalidate: 10 };
   }
-  // console.log({ params })
 
   const recordMap = await getPageRecordMap(post.pageId, post.id);
 

@@ -18,8 +18,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const slugger = new Slugger();
-
 export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
   params,
 }) => {
@@ -71,7 +69,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
     pages.push({
       id,
       title,
-      slug: slugger.slug(title),
+      slug: Slugger.slug(title),
       image: getPageImageUrls(page, {
         mapImageUrl: (url) => url,
       })[0],
