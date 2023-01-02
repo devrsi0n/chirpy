@@ -19,10 +19,10 @@ export const nextAuthOptions: NextAuthOptions = {
     maxAge: SESSION_MAX_AGE,
   },
   pages: {
-    signIn: `${process.env.NEXTAUTH_URL}/auth/sign-in`,
-    newUser: `${process.env.NEXTAUTH_URL}'/auth/welcome?isNewUser=true`, // New users will be directed here on first sign in
-    error: `${process.env.NEXTAUTH_URL}'/auth/sign-in`, // Error code passed in query string as ?error=
-    verifyRequest: `${process.env.NEXTAUTH_URL}/auth/verify-request`,
+    signIn: `/auth/sign-in`,
+    newUser: `/auth/welcome?isNewUser=true`, // New users will be directed here on first sign in
+    error: `/auth/sign-in`, // Error code passed in query string as ?error=
+    verifyRequest: `/auth/verify-request`,
   },
   callbacks: {
     /**

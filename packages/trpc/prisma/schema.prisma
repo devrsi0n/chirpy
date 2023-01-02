@@ -209,10 +209,22 @@ model User {
   // Null means free plan
   planId                        String?
   plan                          Plan?                      @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
+  // Deprecated
+  type                          String?
+  // Deprecated
+  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([kind])
   @@index([email])
   @@index([planId])
+  @@index([type])
+}
+
+// Deprecated
+model UserType {
+  value   String  @id
+  comment String?
+  users   User[]
 }
 
 enum UserKind {

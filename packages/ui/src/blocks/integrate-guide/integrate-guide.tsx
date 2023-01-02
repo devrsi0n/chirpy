@@ -1,3 +1,4 @@
+import { HOME_DOMAIN } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button } from '../../components/button';
@@ -50,7 +51,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
                 script tag with your project id to the HTML:
               </Text>
               <Code>
-                {`<script defer src="${process.env.NEXT_PUBLIC_APP_URL}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
+                {`<script defer src="${HOME_DOMAIN}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
               </Code>
               <Text variant="secondary">
                 Then, add the data-chirpy-comment attribute to any HTML element

@@ -7,7 +7,7 @@ export type ParsedUrl = {
   /**
    * Get hostname of request (e.g. chirpy.dev, demo.localhost:3000)
    */
-  hostname: string;
+  host: string;
   /**
    * Subdomain or custom domain of request (e.g. chirpy, demo, exmaple.com)
    */
@@ -21,5 +21,5 @@ export function parseMiddlewareUrl(req: NextRequest): ParsedUrl {
   const hostname = req.headers.get('host') || 'chirpy.dev';
 
   const currentHost = parseSubdomain(hostname) || hostname;
-  return { url, hostname, currentHost };
+  return { url, host: hostname, currentHost };
 }

@@ -1,4 +1,5 @@
 // import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
+import { HOME_DOMAINS } from '@chirpy-dev/utils';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
 import { parseMiddlewareUrl, sitesMiddlewares } from './server/middlewares';
@@ -42,28 +43,21 @@ export const config = {
 };
 
 export default function middleware(req: NextRequest, ev: NextFetchEvent) {
-  const { url, hostname, currentHost } = parseMiddlewareUrl(req);
+  const { url, host, currentHost } = parseMiddlewareUrl(req);
 
   // rewrites for app pages
   if (currentHost == 'app') {
-    if (
-      url.pathname === '/login' &&
-      (req.cookies.get('next-auth.session-token') ||
-        req.cookies.get('__Secure-next-auth.session-token'))
-    ) {
-      url.pathname = '/';
-      return NextResponse.redirect(url);
-    }
-
     url.pathname = `/app${url.pathname}`;
     return NextResponse.rewrite(url);
   } else if (currentHost === 'widget') {
     url.pathname = `/widget${url.pathname}`;
-    return NextResponse.rewrite(url);
+    const rsp = NextResponse.rewrite(url);
+    rsp.headers.set('Access-Control-Allow-Origin', '*');
+    return rsp;
   }
 
   // rewrite root application to `/home` folder
-  if (hostname === 'localhost:3000' || hostname === 'chirpy-dev.vercel.app') {
+  if (HOME_DOMAINS.includes(host)) {
     url.pathname = `/home${url.pathname}`;
     return NextResponse.rewrite(url);
   }

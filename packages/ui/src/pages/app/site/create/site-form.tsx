@@ -59,7 +59,7 @@ export function SiteForm<T extends SiteFormFields>({
         {...register('subdomain', {
           zod: SITE_SUBDOMAIN_VALIDATION,
         })}
-        suffix=".chirpy.dev"
+        suffix={`.${process.env.NEXT_PUBLIC_HOST}`}
         label="Subdomain"
         errorMessage={errors.subdomain}
         placeholder="blog"

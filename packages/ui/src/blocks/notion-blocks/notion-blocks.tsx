@@ -32,19 +32,26 @@ export type NotionBlocksProps = {
 
 export function NotionBlocks(props: NotionBlocksProps): JSX.Element {
   return (
-    <NotionRenderer
-      recordMap={props.recordMap as unknown as ExtendedRecordMap}
-      fullPage
-      // Remove breadcrumb navigation
-      disableHeader
-      darkMode={false}
-      components={{
-        Code,
-        Collection,
-        Equation,
-        Modal,
-        Pdf,
-      }}
-    />
+    // Hide the properties view
+    <div className="[&_.notion-collection-page-properties]:hidden">
+      <NotionRenderer
+        recordMap={props.recordMap as unknown as ExtendedRecordMap}
+        fullPage
+        showCollectionViewDropdown={false}
+        showTableOfContents={false}
+        // Remove breadcrumb navigation
+        disableHeader
+        darkMode={false}
+        pageAside={false}
+        footer={false}
+        components={{
+          Code,
+          Collection,
+          Equation,
+          Modal,
+          Pdf,
+        }}
+      />
+    </div>
   );
 }

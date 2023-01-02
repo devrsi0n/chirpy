@@ -1,4 +1,4 @@
-import { isENVDev } from '@chirpy-dev/utils';
+import { HOME_DOMAIN, isENVDev } from '@chirpy-dev/utils';
 import { CookiesOptions } from 'next-auth';
 
 /**
@@ -19,6 +19,8 @@ export function defaultCookies(useSecureCookies: boolean): CookiesOptions {
   // https://stackoverflow.com/questions/45094712/iframe-not-reading-cookies-in-chrome
   // But we need to set it as `lax` in development
   const sameSite = isENVDev ? 'lax' : 'none';
+  const hostname = new URL(HOME_DOMAIN).hostname;
+  const domain = `.${hostname}`;
   return {
     sessionToken: {
       name: `${cookiePrefix}next-auth.session-token`,
@@ -27,6 +29,8 @@ export function defaultCookies(useSecureCookies: boolean): CookiesOptions {
         sameSite,
         path: '/',
         secure: useSecureCookies,
+        // Enable subdomains to share the session cookie
+        domain,
       },
     },
     callbackUrl: {

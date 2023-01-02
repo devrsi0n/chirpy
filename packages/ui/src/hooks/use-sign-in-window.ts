@@ -1,4 +1,4 @@
-import { SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
+import { HOME_DOMAIN, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
@@ -16,7 +16,7 @@ export function useSignInWindow({
   const popupWindow = React.useRef<Window | null>(null);
   const handleClickSignIn = () => {
     popupWindow.current = popupCenterWindow(
-      `${process.env.NEXT_PUBLIC_APP_URL}/auth/sign-in?allowAnonymous=true`,
+      `${HOME_DOMAIN}/auth/sign-in?allowAnonymous=true`,
       '_blank',
       width,
       height,

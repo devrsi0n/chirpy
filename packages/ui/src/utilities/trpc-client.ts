@@ -1,5 +1,4 @@
 import { type AppRouter } from '@chirpy-dev/trpc/src/ui';
-import { getBaseUrl } from '@chirpy-dev/utils';
 import { httpLink, loggerLink, TRPCClientError } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
@@ -16,7 +15,7 @@ export const trpcClient = createTRPCNext<AppRouter>({
             (opts.direction === 'down' && opts.result instanceof Error),
         }),
         httpLink({
-          url: `${getBaseUrl()}/api/trpc`,
+          url: `/api/trpc`,
         }),
       ],
       abortOnUnmount: true,
