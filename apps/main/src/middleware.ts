@@ -1,5 +1,5 @@
 // import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
-import { HOME_DOMAINS } from '@chirpy-dev/utils';
+import { isHomeHost } from '@chirpy-dev/utils';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
 import { parseMiddlewareUrl, sitesMiddlewares } from './server/middlewares';
@@ -35,7 +35,7 @@ export const config = {
      * Match all paths except for:
      * 1. /api routes
      * 2. /_next (Next.js internals)
-     * 3. /fonts (inside /public)
+     * 3. /fonts|images|videos|bootstrap (inside /public)
      * 4. all root files inside /public (e.g. /favicon.ico)
      */
     '/((?!api|_next|fonts|images|videos|bootstrap|[\\w-]+\\.\\w+).*)',
@@ -45,7 +45,7 @@ export const config = {
 export default function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { url, host, currentHost } = parseMiddlewareUrl(req);
 
-  // rewrites for app pages
+  // Rewrites for app pages
   if (currentHost == 'app') {
     url.pathname = `/app${url.pathname}`;
     return NextResponse.rewrite(url);
@@ -56,8 +56,8 @@ export default function middleware(req: NextRequest, ev: NextFetchEvent) {
     return rsp;
   }
 
-  // rewrite root application to `/home` folder
-  if (HOME_DOMAINS.includes(host)) {
+  // Rewrite root application to `/home` folder
+  if (isHomeHost(host)) {
     url.pathname = `/home${url.pathname}`;
     return NextResponse.rewrite(url);
   }

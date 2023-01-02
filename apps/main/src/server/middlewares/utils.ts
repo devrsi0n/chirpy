@@ -5,7 +5,7 @@ import { NextRequest } from 'next/server';
 export type ParsedUrl = {
   url: NextURL;
   /**
-   * Get hostname of request (e.g. chirpy.dev, demo.localhost:3000)
+   * Get host of request (e.g. chirpy.dev, demo.localhost:3000)
    */
   host: string;
   /**
@@ -17,9 +17,9 @@ export type ParsedUrl = {
 export function parseMiddlewareUrl(req: NextRequest): ParsedUrl {
   const url = req.nextUrl;
 
-  // Get hostname of request (e.g. chirpy.dev, demo.localhost:3000)
-  const hostname = req.headers.get('host') || 'chirpy.dev';
+  // Get host of request (e.g. chirpy.dev, demo.localhost:3000)
+  const host = req.headers.get('host') || 'chirpy.dev';
 
-  const currentHost = parseSubdomain(hostname) || hostname;
-  return { url, host: hostname, currentHost };
+  const currentHost = parseSubdomain(host) || host;
+  return { url, host, currentHost };
 }

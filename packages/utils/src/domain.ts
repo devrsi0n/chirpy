@@ -1,4 +1,4 @@
-export const HOME_DOMAINS = [
+export const HOME_HOSTS = [
   'chirpy.dev',
   'staging.chirpy.dev',
   'chirpy-dev.vercel.app',
@@ -6,8 +6,16 @@ export const HOME_DOMAINS = [
 ];
 
 export function parseSubdomain(host: string) {
+  // Vercel preview deployment URLs
+  const matchedList = /^(app|widget)\.chirpy-[\da-z\-]+\.vercel\.app$/.exec(
+    host,
+  );
+  if (matchedList?.[1]) {
+    return matchedList[1];
+  }
+
   let currentHost = host;
-  HOME_DOMAINS.forEach((homeDomain) => {
+  HOME_HOSTS.forEach((homeDomain) => {
     currentHost = currentHost.replace(`.${homeDomain}`, '');
   });
   if (currentHost === host) {
@@ -15,4 +23,10 @@ export function parseSubdomain(host: string) {
     return null;
   }
   return currentHost;
+}
+
+export function isHomeHost(host: string) {
+  return (
+    HOME_HOSTS.includes(host) || /^chirpy-[\da-z\-]+\.vercel\.app$/.test(host)
+  );
 }
