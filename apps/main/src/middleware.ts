@@ -44,7 +44,7 @@ export const config = {
 
 export default function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { url, host, currentHost } = parseMiddlewareUrl(req);
-
+  console.log({ url, host, currentHost });
   // Rewrites for app pages
   if (currentHost == 'app') {
     url.pathname = `/app${url.pathname}`;
