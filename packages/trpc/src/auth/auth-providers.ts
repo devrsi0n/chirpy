@@ -12,7 +12,7 @@ import twitterProvider from 'next-auth/providers/twitter';
 import { prisma } from '../db/client';
 import { generateUsername } from './utilities';
 
-const REQUEST_TIMEOUT = isENVProd ? 10_000 : 60_000;
+const REQUEST_TIMEOUT = isENVProd ? 10_000 : 20_000;
 
 export const authProviders: Provider[] = [
   process.env.GOOGLE_CLIENT_ID &&

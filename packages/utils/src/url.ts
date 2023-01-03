@@ -1,10 +1,10 @@
-import { isENVDev } from './env';
+const homeUrl = new URL(process.env.NEXT_PUBLIC_HOME_ORIGIN);
+const protocol = homeUrl.protocol;
 
-const protocol = `http${isENVDev ? '' : 's'}://`;
-
-export const API_URL = `${protocol}${process.env.NEXT_PUBLIC_HOST}/api`;
-export const APP_DOMAIN = `${protocol}app.${process.env.NEXT_PUBLIC_HOST}`;
-export const HOME_DOMAIN = `${protocol}${process.env.NEXT_PUBLIC_HOST}`;
+export const HOME_HOST: string = homeUrl.host;
+export const HOME_ORIGIN: string = process.env.NEXT_PUBLIC_HOME_ORIGIN;
+export const API_URL = `${HOME_ORIGIN}/api`;
+export const APP_ORIGIN = `${protocol}//app.${HOME_HOST}`;
 
 export function isValidHttpUrl(str: string): boolean {
   let url;

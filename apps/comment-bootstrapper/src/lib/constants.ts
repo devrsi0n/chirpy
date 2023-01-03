@@ -1,5 +1,5 @@
-import { isENVDev } from '@chirpy-dev/utils';
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 
-export const WIDGET_DOMAIN = `${isENVDev ? 'http' : 'https'}://widget.${
-  process.env.NEXT_PUBLIC_HOST
-}`;
+const homeUrl = new URL(HOME_ORIGIN);
+const { protocol, host } = homeUrl;
+export const WIDGET_DOMAIN = `${protocol}//widget.${host}`;

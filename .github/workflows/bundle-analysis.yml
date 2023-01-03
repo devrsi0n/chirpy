@@ -53,5 +53,5 @@ jobs:
           HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
-          NEXT_PUBLIC_HOST: ${{ secrets.NEXT_PUBLIC_HOST }}
+          NEXT_PUBLIC_HOME_ORIGIN: ${{ secrets.NEXT_PUBLIC_HOME_ORIGIN }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

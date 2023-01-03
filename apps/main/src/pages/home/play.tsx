@@ -1,6 +1,6 @@
 import { prisma } from '@chirpy-dev/trpc';
 import { cpDayjs } from '@chirpy-dev/ui';
-import { HOME_DOMAIN } from '@chirpy-dev/utils';
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
         lt: beforeDate,
       },
       page: {
-        url: `${HOME_DOMAIN}/play`,
+        url: `${HOME_ORIGIN}/play`,
       },
     },
   });

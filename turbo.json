@@ -18,7 +18,7 @@
       "dependsOn": ["^build"],
       "outputs": [".next/**"],
       "env": [
-        "NEXT_PUBLIC_HOST",
+        "NEXT_PUBLIC_HOME_ORIGIN",
         "DATABASE_URL",
         "NEXTAUTH_SECRET",
         "EMAIL_API_KEY",

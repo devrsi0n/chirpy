@@ -1,5 +1,10 @@
 import { sendWelcomeLetter } from '@chirpy-dev/emails';
-import { isENVDev, SESSION_MAX_AGE } from '@chirpy-dev/utils';
+import {
+  APP_ORIGIN,
+  HOME_ORIGIN,
+  isENVDev,
+  SESSION_MAX_AGE,
+} from '@chirpy-dev/utils';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextAuthOptions } from 'next-auth';
 import { GoogleProfile } from 'next-auth/providers/google';
@@ -19,10 +24,10 @@ export const nextAuthOptions: NextAuthOptions = {
     maxAge: SESSION_MAX_AGE,
   },
   pages: {
-    signIn: `/auth/sign-in`,
-    newUser: `/auth/welcome?isNewUser=true`, // New users will be directed here on first sign in
-    error: `/auth/sign-in`, // Error code passed in query string as ?error=
-    verifyRequest: `/auth/verify-request`,
+    signIn: `${APP_ORIGIN}/auth/sign-in`,
+    newUser: `${APP_ORIGIN}/auth/welcome?isNewUser=true`, // New users will be directed here on first sign in
+    error: `${APP_ORIGIN}/auth/sign-in`, // Error code passed in query string as ?error=
+    verifyRequest: `${APP_ORIGIN}/auth/verify-request`,
   },
   callbacks: {
     /**
@@ -106,7 +111,7 @@ export const nextAuthOptions: NextAuthOptions = {
       });
     },
   },
-  cookies: defaultCookies(process.env.NEXTAUTH_URL.startsWith('https://')),
+  cookies: defaultCookies(HOME_ORIGIN.startsWith('https')),
   adapter: PrismaAdapter(prisma),
   debug: isENVDev,
 };

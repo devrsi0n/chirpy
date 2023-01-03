@@ -51,6 +51,6 @@ jobs:
           cache-to: type=registry,ref=devrsi0n/chirpy:buildcache,mode=max
           # Don't put any sensitive key to build-args, as they'll be exposed to build history
           build-args: |
-            NEXT_PUBLIC_HOST=${{ secrets.NEXT_PUBLIC_HOST }}
+            NEXT_PUBLIC_HOME_ORIGIN=${{ secrets.NEXT_PUBLIC_HOME_ORIGIN }}
             NEXT_PUBLIC_ANALYTICS_DOMAIN=${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
             NEXTAUTH_URL=${{ secrets.NEXTAUTH_URL }}
