@@ -176,6 +176,7 @@ importers:
       typescript: 4.9.4
       web-push: 3.5.0
       webpack: 5.75.0
+      zod: 3.20.2
     dependencies:
       '@chirpy-dev/emails': link:../../packages/emails
       '@chirpy-dev/trpc': link:../../packages/trpc
@@ -212,6 +213,7 @@ importers:
       superjson: 1.11.0
       type-fest: 3.3.0
       web-push: 3.5.0
+      zod: 3.20.2
     devDependencies:
       '@chirpy-dev/comment-bootstrapper': link:../comment-bootstrapper
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config
@@ -22692,7 +22694,7 @@ packages:
     engines: {node: '>=10'}
 
   /zod/3.20.2:
-    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+    resolution: {integrity: sha1-BoYGZCyPUbMzOYH5HAqKs338KAc=}
     dev: false
 
   /zwitch/1.0.5:

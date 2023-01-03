@@ -1,13 +1,17 @@
+import bundleAnalyzer from '@next/bundle-analyzer';
+import { withPlausibleProxy } from 'next-plausible';
+import { RelativeCiAgentWebpackPlugin } from '@relative-ci/agent';
+import { withAxiom } from 'next-axiom';
+// Validate environment variables
+import './env/server.mjs';
+
 const useAnalysis = process.env.ANALYZE === 'true';
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
 const isProd = process.env.NODE_ENV === 'production';
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
 });
-const { withPlausibleProxy } = require('next-plausible');
-const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
-const { withAxiom } = require('next-axiom');
 
 const plugins = [
   withBundleAnalyzer,
@@ -123,7 +127,7 @@ const nextConfig = {
   },
 };
 
-module.exports = (/* _phase, { defaultConfig } */) =>
+export default (/* _phase, { defaultConfig } */) =>
   plugins.reduce((acc, plugin) => {
     if (Array.isArray(plugin)) {
       return plugin[0](acc, plugin[1]);

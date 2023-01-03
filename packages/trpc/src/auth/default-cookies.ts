@@ -20,7 +20,8 @@ export function defaultCookies(useSecureCookies: boolean): CookiesOptions {
   // But we need to set it as `lax` in development
   const sameSite = isENVDev ? 'lax' : 'none';
   const hostname = new URL(HOME_ORIGIN).hostname;
-  // Subdomain auth doesn't work in localhost
+  // Subdomain auth doesn't work in localhost,
+  // TODO: use https to make it work
   const domain = isENVDev ? undefined : `.${hostname}`;
   return {
     sessionToken: {

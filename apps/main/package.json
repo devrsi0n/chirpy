@@ -49,7 +49,8 @@
     "shiki": "0.11.1",
     "superjson": "1.11.0",
     "type-fest": "3.3.0",
-    "web-push": "3.5.0"
+    "web-push": "3.5.0",
+    "zod": "3.20.2"
   },
   "devDependencies": {
     "@chirpy-dev/comment-bootstrapper": "workspace:*",
