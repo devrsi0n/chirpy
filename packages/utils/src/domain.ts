@@ -1,8 +1,10 @@
 export const HOME_HOSTS = [
-  'chirpy.dev',
+  'chirpy-dev.vercel.app',
   'staging.chirpy.dev',
   'notion.chirpy.dev',
-  'chirpy-dev.vercel.app',
+  // All subdomains should come before the root domain,
+  // or the replacing will not work as expected
+  'chirpy.dev',
   'localhost:3000',
 ];
 
