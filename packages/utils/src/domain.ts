@@ -1,6 +1,7 @@
 export const HOME_HOSTS = [
   'chirpy.dev',
   'staging.chirpy.dev',
+  'notion.chirpy.dev',
   'chirpy-dev.vercel.app',
   'localhost:3000',
 ];
