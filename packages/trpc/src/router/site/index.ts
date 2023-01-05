@@ -1,9 +1,8 @@
-import { parseSubdomain } from '@chirpy-dev/utils';
 import { JsonObject } from 'type-fest';
 import { z } from 'zod';
 
 import { prisma } from '../../db/client';
-import { protectedProcedure, publicProcedure, router } from '../../trpc-server';
+import { protectedProcedure, router } from '../../trpc-server';
 import { checkDomain, createDomain, deleteDomain } from './domain';
 import {
   checkDuplicatedSubdomain,
@@ -17,7 +16,7 @@ import {
 
 export const siteRouter = router({
   all: protectedProcedure.query(async ({ ctx }) => {
-    const sites = await prisma.site.findMany({
+    const sites = await prisma.blogSite.findMany({
       where: {
         OR: [
           {
@@ -53,7 +52,7 @@ export const siteRouter = router({
       const recordMap = (await getRecordMapByUrl(
         input.templateUrl,
       )) as unknown as JsonObject;
-      const result = await prisma.site.create({
+      const result = await prisma.blogSite.create({
         data: {
           ...input,
           recordMap,
@@ -73,7 +72,7 @@ export const siteRouter = router({
         // Only check duplicated subdomain when it changes
         await checkDuplicatedSubdomain(input.subdomain);
       }
-      const result = await prisma.site.update({
+      const result = await prisma.blogSite.update({
         where: {
           id: input.id,
         },
@@ -84,7 +83,7 @@ export const siteRouter = router({
       return result;
     }),
   byId: protectedProcedure.input(z.string()).query(async ({ input }) => {
-    const result = await prisma.site.findUnique({
+    const result = await prisma.blogSite.findUnique({
       where: {
         id: input,
       },
@@ -99,7 +98,6 @@ export const siteRouter = router({
           select: {
             id: true,
             slug: true,
-            image: true,
           },
         },
       },
@@ -130,30 +128,5 @@ export const siteRouter = router({
     .mutation(async ({ input, ctx }) => {
       await checkUserAuthorization(ctx.session.user.id, input.siteId);
       await deleteDomain(input.customDomain, input.siteId);
-    }),
-  increasePV: publicProcedure
-    .input(
-      z.object({
-        host: z.string(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const subdomain = parseSubdomain(input.host);
-      const filter =
-        subdomain === null
-          ? {
-              customDomain: input.host,
-            }
-          : {
-              subdomain,
-            };
-      await prisma.site.update({
-        where: filter,
-        data: {
-          pv: {
-            increment: 1,
-          },
-        },
-      });
     }),
 });

@@ -16,6 +16,14 @@ export const SITE_TEMPLATE_URL_VALIDATION = z
       });
       return z.NEVER;
     }
+    if (url.hostname.endsWith(`.notion.so`)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `The Notion page isn't public, you need to share it to web first`,
+        fatal: true,
+      });
+      return z.NEVER;
+    }
     if (!url.hostname.endsWith(`.notion.site`)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,

@@ -1,4 +1,4 @@
-import type { Site } from '@chirpy-dev/trpc/src/ui';
+import type { BlogSite } from '@chirpy-dev/trpc/src/ui';
 import { useState } from 'react';
 
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../../../components';
 import { trpcClient } from '../../../../utilities';
 
-type DomainData = Pick<Site, 'customDomain' | 'id'>;
+type DomainData = Pick<BlogSite, 'customDomain' | 'id'>;
 
 interface DomainCardProps<T = DomainData> {
   data: T;

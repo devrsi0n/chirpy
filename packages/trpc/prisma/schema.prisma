@@ -202,10 +202,14 @@ model User {
   notificationSubscriptions     NotificationSubscription[]
   projects                      Project[]
   sessions                      Session[]
-  // User as site manager
-  managedSites                  Site[]
-  // User as site member
-  siteMembers                   SiteMember[]
+  // User as blog site manager
+  managedBlogSites              BlogSite[]
+  // User as blog site member
+  blogSiteMembers               BlogSiteMember[]
+  // User as docs site manager
+  managedDocsSites              DocsSite[]
+  // User as docs site member
+  docsSiteMembers               DocsSiteMember[]
   // Null means free plan
   planId                        String?
   plan                          Plan?                      @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
@@ -244,20 +248,39 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model BlogSite {
+  id           String           @id @default(cuid())
+  name         String           @db.Text
+  subdomain    String           @unique
+  // Notion template url
+  templateUrl  String           @db.Text
+  // Notion template record map
+  recordMap    Json
+  description  String?          @db.Text
+  logo         String?
+  customDomain String?          @unique
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  managerId    String
+  manager      User             @relation(fields: [managerId], references: [id])
+  posts        Post[]
+  members      BlogSiteMember[]
+
+  @@index([managerId])
+}
+
 model Post {
-  id            String   @id @default(cuid())
+  id        String   @id @default(cuid())
   // Notion page id
-  pageId        String
-  slug          String   @default(cuid())
+  pageId    String
+  slug      String   @default(cuid())
   // Notion page content record map
-  recordMap     Json?
-  image         String?  @db.Text
-  imageBlurhash String?  @db.LongText
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  published     Boolean  @default(false)
-  site          Site     @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  siteId        String
+  recordMap Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  site      BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId    String
 
   // Slug is unique per site, but not unique globally
   @@unique([slug, siteId], name: "post_slug_site_constraint")
@@ -267,44 +290,80 @@ model Post {
   @@index([slug])
 }
 
-// For blog
-model Site {
-  id            String       @id @default(cuid())
-  name          String       @db.Text
-  subdomain     String       @unique
+enum BlogSiteRole {
+  EDITOR
+}
+
+model BlogSiteMember {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  role      BlogSiteRole
+  siteId    String
+  site      BlogSite     @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([siteId, userId])
+  @@index([role])
+  @@index([userId])
+}
+
+model DocsSite {
+  id           String           @id @default(cuid())
+  name         String           @db.Text
+  subdomain    String           @unique
   // Notion template url
-  templateUrl   String       @db.Text
+  templateUrl  String           @db.Text
   // Notion template record map
-  recordMap     Json
-  description   String?      @db.Text
-  logo          String?
-  image         String?      @db.Text
-  imageBlurhash String?      @db.LongText
-  customDomain  String?      @unique
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  manager       User         @relation(fields: [managerId], references: [id])
-  managerId     String
-  posts         Post[]
-  members       SiteMember[]
-  pv            Int          @default(0)
+  recordMap    Json
+  description  String?          @db.Text
+  logo         String?
+  customDomain String?          @unique
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  managerId    String
+  manager      User             @relation(fields: [managerId], references: [id])
+  docs         Doc[]
+  members      DocsSiteMember[]
 
   @@index([managerId])
 }
 
-enum SiteRole {
-  editor
-}
-
-model SiteMember {
+model Doc {
   id        String   @id @default(cuid())
+  // Notion page id
+  pageId    String
+  slug      String   @default(cuid())
+  // Notion page content record map
+  recordMap Json?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
   siteId    String
+  site      DocsSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  // Slug is unique per site, but not unique globally
+  @@unique([slug, siteId], name: "doc_slug_docsSite_constraint")
+  // Page id is unique per site, but not unique globally
+  @@unique([pageId, siteId], name: "doc_pageId_docsSite_constraint")
+  @@index([siteId])
+  @@index([slug])
+}
+
+enum DocsSiteRole {
+  EDITOR
+}
+
+model DocsSiteMember {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  role      DocsSiteRole
   userId    String
-  role      SiteRole
-  site      Site     @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId    String
+  site      DocsSite     @relation(fields: [siteId], references: [id])
 
   @@unique([siteId, userId])
   @@index([role])

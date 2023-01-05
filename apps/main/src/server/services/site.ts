@@ -28,7 +28,7 @@ export const getSiteStaticProps: GetStaticProps<SiteStaticProps> = async ({
       notFound: true,
     };
   }
-  const data = await prisma.site.findUnique({
+  const data = await prisma.blogSite.findUnique({
     where: {
       id: params.id,
     },

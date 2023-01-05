@@ -57,7 +57,7 @@ export async function createDomain(domain: string, siteId: string) {
   }
 
   // Domain is successfully added
-  await prisma.site.update({
+  await prisma.blogSite.update({
     where: {
       id: siteId,
     },
@@ -116,7 +116,7 @@ export async function deleteDomain(
   }
   await response.json();
 
-  await prisma.site.update({
+  await prisma.blogSite.update({
     where: {
       id: siteId as string,
     },

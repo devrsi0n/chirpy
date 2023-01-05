@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
   if (typeof params?.site !== 'string') {
     return { notFound: true };
   }
-  const site = await prisma.site.findUnique({
+  const site = await prisma.blogSite.findUnique({
     where: {
       ...(params.site.includes('.')
         ? { customDomain: params.site }

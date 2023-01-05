@@ -5,7 +5,7 @@ import { prisma } from '../../db/client';
 import { notion } from '../../notion/client';
 
 export async function checkDuplicatedSubdomain(subdomain: string) {
-  const existing = await prisma.site.findFirst({
+  const existing = await prisma.blogSite.findFirst({
     where: {
       subdomain: subdomain,
     },
@@ -25,7 +25,7 @@ export async function checkDuplicatedSubdomain(subdomain: string) {
  * Check if the user has the rights
  */
 export async function checkUserAuthorization(userId: string, siteId: string) {
-  const site = await prisma.site.findFirst({
+  const site = await prisma.blogSite.findFirst({
     where: {
       id: siteId,
       managerId: userId,
