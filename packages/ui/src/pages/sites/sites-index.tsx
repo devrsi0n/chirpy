@@ -1,26 +1,44 @@
+import dynamic from 'next/dynamic';
 import * as React from 'react';
 
-import { PageTitle } from '../../blocks';
-import { PostCard } from './components/post-card';
-import { SitesLayout } from './components/sites-layout';
-import { SitesPage } from './types';
+import type { BlogSitesIndexProps } from './components/blog-sites-index';
+import type { DocsSitesIndexProps } from './components/docs-sites-index';
 
-export type SitesIndexProps = {
-  subdomain: string;
-  pages: SitesPage[];
+type BlogProps = {
+  blog: BlogSitesIndexProps;
 };
 
+type DocsProps = {
+  docs: DocsSitesIndexProps;
+};
+
+export type SitesIndexProps = BlogProps | DocsProps;
+
 export function SitesIndex(props: SitesIndexProps): JSX.Element {
-  return (
-    <SitesLayout>
-      <PageTitle>Site {props.subdomain}</PageTitle>
-      <ul>
-        {props.pages.map((page) => (
-          <li key={page.id}>
-            <PostCard {...page} />
-          </li>
-        ))}
-      </ul>
-    </SitesLayout>
-  );
+  if (isBlogProps(props)) {
+    return <DeferredBlogSitesIndex {...props.blog} />;
+  }
+  return <DeferredDocsSitesIndex {...props.docs} />;
+}
+
+const DeferredBlogSitesIndex = dynamic(
+  import(
+    /* webpackChunkName: "blog-sites-index"*/ './components/blog-sites-index'
+  ).then((module) => module.BlogSitesIndex),
+  {
+    ssr: true,
+  },
+);
+
+const DeferredDocsSitesIndex = dynamic(
+  import(
+    /* webpackChunkName: "docs-sites-index"*/ './components/docs-sites-index'
+  ).then((module) => module.DocsSitesIndex),
+  {
+    ssr: true,
+  },
+);
+
+function isBlogProps(props: SitesIndexProps): props is BlogProps {
+  return !!(props as BlogProps).blog;
 }

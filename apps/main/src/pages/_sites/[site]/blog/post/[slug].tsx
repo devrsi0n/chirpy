@@ -2,7 +2,7 @@ import { getPageRecordMap, prisma } from '@chirpy-dev/trpc';
 import { SitesPostProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-export { SitesPost as default } from '@chirpy-dev/ui';
+export { BlogPost as default } from '@chirpy-dev/ui';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {

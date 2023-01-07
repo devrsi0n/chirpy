@@ -250,7 +250,7 @@ model VerificationToken {
 
 model BlogSite {
   id           String           @id @default(cuid())
-  name         String           @db.Text
+  name         String
   subdomain    String           @unique
   // Notion template url
   templateUrl  String           @db.Text
@@ -311,7 +311,7 @@ model BlogSiteMember {
 
 model DocsSite {
   id           String           @id @default(cuid())
-  name         String           @db.Text
+  name         String
   subdomain    String           @unique
   // Notion template url
   templateUrl  String           @db.Text

@@ -9,7 +9,7 @@ export type SitesPostProps = {
   recordMap: ExtendedRecordMap;
 };
 
-export function SitesPost(props: SitesPostProps): JSX.Element {
+export function BlogPost(props: SitesPostProps): JSX.Element {
   return (
     <SitesLayout>
       <section>

@@ -13,8 +13,8 @@
     "@tiptap/react": "2.0.0-beta.204",
     "@types/node": "16.11.45",
     "@types/react": "18.0.26",
-    "@types/react-dom": "18.0.9",
-    "eslint": "8.30.0",
+    "@types/react-dom": "18.0.10",
+    "eslint": "8.31.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.4"

@@ -2,9 +2,9 @@ import Link from 'next/link';
 import * as React from 'react';
 
 import { Card, Heading } from '../../../components';
-import { SitesPage } from '../types';
+import { PostPage } from '../types';
 
-export type PostCardProps = SitesPage;
+export type PostCardProps = PostPage;
 
 export function PostCard(props: PostCardProps): JSX.Element {
   return (

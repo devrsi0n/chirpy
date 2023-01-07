@@ -1,4 +1,4 @@
-export type SitesPage = {
+export type PostPage = {
   id: string;
   title: string;
   slug: string;
