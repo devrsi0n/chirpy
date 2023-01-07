@@ -7,9 +7,12 @@ import { Image } from '../../../components';
 import { useHasMounted } from '../../../hooks';
 import { getBannerProps } from '../../../utilities';
 
-type BlogProps = MDXProps;
+type DeprecatedBlogProps = MDXProps;
 
-export function BlogPost({ mdxSource, frontMatter }: BlogProps): JSX.Element {
+export function DeprecatedBlogPost({
+  mdxSource,
+  frontMatter,
+}: DeprecatedBlogProps): JSX.Element {
   const hasMounted = useHasMounted();
   const banner = React.useMemo(() => {
     if (frontMatter?.banner && hasMounted) {
