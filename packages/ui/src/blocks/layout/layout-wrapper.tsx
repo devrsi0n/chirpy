@@ -14,13 +14,9 @@ export function LayoutWrapper({
   children,
   className,
 }: LayoutWrapperProps): JSX.Element {
-  const router = useRouter();
   return (
     <>
-      <Head>
-        <title>{title ? `${title}・Chirpy` : 'Chirpy'}</title>
-        <link rel="canonical" href={`https://chirpy.dev${router.asPath}`} />
-      </Head>
+      <LayoutTitle title={title} />
       <div
         className={clsx(
           `flex min-h-full flex-col font-sans text-gray-1100`,
@@ -30,5 +26,19 @@ export function LayoutWrapper({
         {children}
       </div>
     </>
+  );
+}
+
+export type LayoutTitleProps = {
+  title: string;
+};
+
+export function LayoutTitle({ title }: LayoutTitleProps): JSX.Element {
+  const router = useRouter();
+  return (
+    <Head>
+      <title>{title ? `${title}・Chirpy` : 'Chirpy'}</title>
+      <link rel="canonical" href={`https://chirpy.dev${router.asPath}`} />
+    </Head>
   );
 }

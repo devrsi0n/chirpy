@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { SignInButton } from '../../blocks/sign-in-button';
-import { UserMenu } from '../../blocks/user-menu';
+import { WidgetUserMenu } from '../../blocks/user-menu';
 import { Link, Logo, MaintenanceBanner } from '../../components';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { NotificationHub } from '../notification-hub';
@@ -107,7 +107,7 @@ export function Header(): JSX.Element {
             {isSignIn ? (
               <>
                 <NotificationHub />
-                <UserMenu variant="Nav" />
+                <WidgetUserMenu variant="Nav" />
               </>
             ) : (
               <SignInButton inPageNav />

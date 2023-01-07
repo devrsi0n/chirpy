@@ -10,7 +10,7 @@ import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';
-import { UserMenu } from '../user-menu';
+import { WidgetUserMenu } from '../user-menu';
 import { OrderBy, useCommentOrderBy } from './use-comment-order-by';
 
 export type CommentForestProps = {
@@ -34,7 +34,7 @@ export function CommentForest({
         </Heading>
         <div className="flex flex-row">
           <NotificationHub />
-          <UserMenu variant="Widget" />
+          <WidgetUserMenu variant="Widget" />
         </div>
       </div>
 

@@ -60,3 +60,4 @@ export { default as IconLogOut } from '@geist-ui/icons/logOut';
 export { default as IconMonitor } from '@geist-ui/icons/monitor';
 export { default as IconMail } from '@geist-ui/icons/mail';
 export { default as IconBook } from '@geist-ui/icons/book';
+export { default as IconHome } from '@geist-ui/icons/home';

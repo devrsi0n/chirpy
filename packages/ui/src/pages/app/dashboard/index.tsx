@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import {
-  SiteLayout,
   PageTitleDeprecated,
   EmptyProjectCard,
   ProjectCard,
@@ -10,6 +9,7 @@ import {
 import { Heading, Spinner } from '../../../components';
 import { useCurrentUser } from '../../../contexts';
 import { trpcClient } from '../../../utilities/trpc-client';
+import { AppLayout } from '../components/app-layout';
 import { CreateProjectButton } from './create-button';
 import { CreateProjectDialog } from './create-project-dialog';
 
@@ -25,7 +25,7 @@ export function Dashboard(): JSX.Element {
   const [showProjectDialog, setShowProjectDialog] = React.useState(false);
 
   return (
-    <SiteLayout title="Dashboard">
+    <AppLayout title="Dashboard">
       <section className="space-y-10">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitleDeprecated>Dashboard</PageTitleDeprecated>
@@ -92,6 +92,6 @@ export function Dashboard(): JSX.Element {
           fetchUserProjects();
         }}
       />
-    </SiteLayout>
+    </AppLayout>
   );
 }

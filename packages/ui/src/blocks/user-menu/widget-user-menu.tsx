@@ -6,6 +6,7 @@ import * as React from 'react';
 import { Avatar } from '../../components/avatar';
 import {
   IconLifeBuoy,
+  IconLogIn,
   IconLogOut,
   IconMonitor,
   IconUser,
@@ -14,10 +15,18 @@ import { Link, LinkProps } from '../../components/link';
 import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
+import { useSignInWindow } from '../../hooks/use-sign-in-window';
 
-export function UserMenu(): JSX.Element {
+export type UserMenuProps = {
+  variant: 'Widget' | 'Nav';
+};
+
+export function WidgetUserMenu(props: UserMenuProps): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
   const { image, name, email, username } = data;
+  const handleSignIn = useSignInWindow();
+  const isWidget = props.variant === 'Widget';
+  const isNav = props.variant === 'Nav';
 
   return (
     <Menu>
@@ -48,7 +57,21 @@ export function UserMenu(): JSX.Element {
           </div>
         )}
         {isSignIn && <Menu.Divider />}
-
+        {isWidget &&
+          (isSignIn ? (
+            <></>
+          ) : (
+            <Menu.Item
+              as="div"
+              align="start"
+              className={itemStyle}
+              onClick={handleSignIn}
+              disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
+            >
+              <IconLogIn size={14} />
+              <p className="w-max">Sign in</p>
+            </Menu.Item>
+          ))}
         <Menu.Item
           as={MenuLink}
           align="start"
@@ -61,16 +84,18 @@ export function UserMenu(): JSX.Element {
         </Menu.Item>
         {isSignIn && (
           <>
-            <Menu.Item as={MenuLink} align="start" variant="plain" href="/">
-              <IconMonitor size={14} />
-              <span>Dashboard</span>
-            </Menu.Item>
-
+            {isNav && (
+              <Menu.Item as={MenuLink} align="start" variant="plain" href="/">
+                <IconMonitor size={14} />
+                <span>Dashboard</span>
+              </Menu.Item>
+            )}
             <Menu.Item
               as={MenuLink}
               align="start"
               variant="plain"
               href="/profile"
+              target={isWidget ? '_blank' : undefined}
             >
               <IconUser size={14} />
               <span>Profile</span>
@@ -82,7 +107,9 @@ export function UserMenu(): JSX.Element {
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
               onClick={async () => {
-                await signOut();
+                await signOut({
+                  redirect: !isWidget,
+                });
                 localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
               }}
             >

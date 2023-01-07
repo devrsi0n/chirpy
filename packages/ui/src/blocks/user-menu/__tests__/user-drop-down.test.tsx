@@ -1,7 +1,7 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { UserMenu, UserMenuProps } from '..';
+import { WidgetUserMenu, UserMenuProps } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { mockUserData } from '../../../__tests__/mocks/data/user';
 
@@ -31,7 +31,7 @@ describe('UserMenu', () => {
 });
 
 async function renderMenu(variant: UserMenuProps['variant']) {
-  pageRender(<UserMenu variant={variant} />);
+  pageRender(<WidgetUserMenu variant={variant} />);
   const menuButton = screen.getByLabelText(/click to open the menu/i);
   await userEvent.click(menuButton);
 }

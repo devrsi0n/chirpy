@@ -5,7 +5,7 @@ import {
   CommentTimeline,
   WidgetLayout,
   PoweredBy,
-  UserMenu,
+  WidgetUserMenu,
 } from '../../blocks';
 import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
@@ -52,7 +52,7 @@ export function CommentTimelineWidget(
             <span className="font-bold">{comment?.user.name}</span>
             <span>{`'s comment timeline`}</span>
           </Heading>
-          <UserMenu variant="Widget" />
+          <WidgetUserMenu variant="Widget" />
         </div>
 
         {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}

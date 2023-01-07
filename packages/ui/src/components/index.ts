@@ -29,3 +29,4 @@ export * from './text-field';
 export * from './toast';
 export * from './toggle';
 export * from './video';
+export * from './progress-bar';
