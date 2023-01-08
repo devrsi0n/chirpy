@@ -1,5 +1,5 @@
 import { NotificationType_Enum } from '@chirpy-dev/types';
-import { FEEDBACK_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { log } from 'next-axiom';
 import webpush, { PushSubscription } from 'web-push';
 
@@ -53,7 +53,7 @@ export function pushWebNotification(payload: NotificationPayload) {
 
 const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
   vapidDetails: {
-    subject: FEEDBACK_LINK,
+    subject: SUPPORT_LINK,
     publicKey: process.env.NEXT_PUBLIC_VAPID,
     privateKey: process.env.PRIVATE_VAPID,
   },

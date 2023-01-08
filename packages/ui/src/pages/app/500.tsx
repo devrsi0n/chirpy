@@ -1,4 +1,4 @@
-import { FEEDBACK_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -27,7 +27,7 @@ export function Custom500(): JSX.Element {
             </Button>
           </Link>
           <Button>
-            <Link variant="plain" href={FEEDBACK_LINK}>
+            <Link variant="plain" href={SUPPORT_LINK}>
               Report it on GitHub
             </Link>
           </Button>

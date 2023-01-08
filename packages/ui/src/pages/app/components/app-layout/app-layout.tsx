@@ -46,7 +46,7 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
             <UserMenu />
           </div>
         </div>
-        <main className="flex-1">{props.children}</main>
+        <main className="flex-1 p-8">{props.children}</main>
       </div>
     </SiteThemeProvider>
   );

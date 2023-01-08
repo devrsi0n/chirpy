@@ -1,14 +1,14 @@
-import { Menu as HeadlessMenu } from '@headlessui/react';
+import { isENVProd } from '@chirpy-dev/utils';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { bluredBg, listHoverable } from '../../styles/common';
-import { easeInOut } from '../animation';
 import { Box, BoxProps } from '../box';
 import { BaseButton, Button, IconButton } from '../button';
 import { Divider } from '../divider';
 import { IconChevronDown } from '../icons';
+import styles from './menu.module.scss';
 
 export type Shape = 'circle' | 'square';
 
@@ -20,34 +20,25 @@ const ERROR = new Error(
   'Menu children only accept a Menu.Items and a Menu.Button',
 );
 
-export function Menu({ className, children }: MenuProps): JSX.Element {
-  const childrenArray = React.Children.toArray(
-    children,
-  ) as React.ReactElement[];
-  if (childrenArray.length !== 2) {
-    throw ERROR;
+export function Menu({ children }: MenuProps): JSX.Element {
+  if (!isENVProd) {
+    const childrenArray = React.Children.toArray(
+      children,
+    ) as React.ReactElement[];
+    if (childrenArray.length !== 2) {
+      throw ERROR;
+    }
+    const items = childrenArray.find(
+      (element) => element.type === MenuItems,
+    ) as React.ReactElement | undefined;
+    const button = childrenArray.find(
+      (element) => element.type === MenuButton,
+    ) as React.ReactElement | undefined;
+    if (!items || !button) {
+      throw ERROR;
+    }
   }
-  const items = childrenArray.find((element) => element.type === MenuItems) as
-    | React.ReactElement
-    | undefined;
-  const button = childrenArray.find(
-    (element) => element.type === MenuButton,
-  ) as React.ReactElement | undefined;
-  if (!items || !button) {
-    throw ERROR;
-  }
-  return (
-    <div className={clsx('relative inline-block text-left', className)}>
-      <HeadlessMenu>
-        {({ open }: { open: boolean }) => (
-          <>
-            {React.cloneElement(button, { open })}
-            {React.cloneElement(items, { open })}
-          </>
-        )}
-      </HeadlessMenu>
-    </div>
-  );
+  return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
 }
 
 Menu.Button = MenuButton;
@@ -73,52 +64,55 @@ function MenuButton({
   children,
   ...buttonProps
 }: MenuButtonProps): JSX.Element {
+  const AsButton = shape === 'circle' ? IconButton : Button;
   return (
     <div className={className}>
-      <HeadlessMenu.Button
-        {...buttonProps}
-        as={shape === 'circle' ? IconButton : Button}
-        aria-label={ariaLabel}
-        onClick={() => onClick?.(open)}
-      >
-        {children}
-        {shape === 'square' && (
-          <IconChevronDown
-            className={clsx(
-              `ml-2 -mr-1 h-5 w-5 transition`,
-              open && `rotate-180`,
-            )}
-          />
-        )}
-      </HeadlessMenu.Button>
+      <DropdownMenu.Trigger asChild>
+        <AsButton
+          {...buttonProps}
+          aria-label={ariaLabel}
+          onClick={() => onClick?.(open)}
+        >
+          {children}
+          {shape === 'square' && (
+            <IconChevronDown
+              className={clsx(
+                `ml-2 -mr-1 h-5 w-5 transition`,
+                open && `rotate-180`,
+              )}
+            />
+          )}
+        </AsButton>
+      </DropdownMenu.Trigger>
     </div>
   );
 }
 
 export type MenuItemsProps = {
   children: React.ReactNode;
-  open?: boolean;
   className?: string;
-};
+} & DropdownMenu.DropdownMenuContentProps;
 
-function MenuItems({ children, open, className }: MenuItemsProps): JSX.Element {
+function MenuItems({
+  children,
+  className,
+  ...contentProps
+}: MenuItemsProps): JSX.Element {
   return (
-    <AnimatePresence>
-      {open && (
-        <m.div {...easeInOut}>
-          <HeadlessMenu.Items
-            static
-            className={clsx(
-              `absolute right-0 z-30 mt-1 rounded-md border p-1 shadow-md outline-none`,
-              bluredBg,
-              className,
-            )}
-          >
-            {children}
-          </HeadlessMenu.Items>
-        </m.div>
-      )}
-    </AnimatePresence>
+    <DropdownMenu.Portal>
+      <DropdownMenu.Content
+        className={clsx(
+          styles.dropdownMenuContent,
+          bluredBg,
+          `rounded-md p-1`,
+          className,
+        )}
+        sideOffset={5}
+        {...contentProps}
+      >
+        {children}
+      </DropdownMenu.Content>
+    </DropdownMenu.Portal>
   );
 }
 
@@ -145,25 +139,21 @@ function MenuItem({
     children
   );
   return (
-    <HeadlessMenu.Item>
-      {
-        (/* { active }: ItemRenderPropArg */) => (
-          <Box
-            as={as || BaseButton}
-            onClick={onClick}
-            className={clsx(
-              listHoverable,
-              itemStyle,
-              !disableAutoDismiss && MenuItemPadding,
-              className,
-            )}
-            {...asProps}
-          >
-            {child}
-          </Box>
-        )
-      }
-    </HeadlessMenu.Item>
+    <DropdownMenu.Item className="">
+      <Box
+        as={as || BaseButton}
+        onClick={onClick}
+        className={clsx(
+          listHoverable,
+          itemStyle,
+          !disableAutoDismiss && MenuItemPadding,
+          className,
+        )}
+        {...asProps}
+      >
+        {child}
+      </Box>
+    </DropdownMenu.Item>
   );
 }
 

@@ -1,5 +1,4 @@
-import { FEEDBACK_LINK, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
-import clsx from 'clsx';
+import { SUPPORT_LINK, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
 
@@ -8,25 +7,18 @@ import {
   IconLifeBuoy,
   IconLogIn,
   IconLogOut,
-  IconMonitor,
   IconUser,
 } from '../../components/icons';
-import { Link, LinkProps } from '../../components/link';
 import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
+import { itemStyle, MenuLink } from './menu-link';
 
-export type UserMenuProps = {
-  variant: 'Widget' | 'Nav';
-};
-
-export function WidgetUserMenu(props: UserMenuProps): JSX.Element {
+export function WidgetUserMenu(): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
   const { image, name, email, username } = data;
   const handleSignIn = useSignInWindow();
-  const isWidget = props.variant === 'Widget';
-  const isNav = props.variant === 'Nav';
 
   return (
     <Menu>
@@ -57,45 +49,38 @@ export function WidgetUserMenu(props: UserMenuProps): JSX.Element {
           </div>
         )}
         {isSignIn && <Menu.Divider />}
-        {isWidget &&
-          (isSignIn ? (
-            <></>
-          ) : (
-            <Menu.Item
-              as="div"
-              align="start"
-              className={itemStyle}
-              onClick={handleSignIn}
-              disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
-            >
-              <IconLogIn size={14} />
-              <p className="w-max">Sign in</p>
-            </Menu.Item>
-          ))}
+        {isSignIn ? (
+          <></>
+        ) : (
+          <Menu.Item
+            as="div"
+            align="start"
+            className={itemStyle}
+            onClick={handleSignIn}
+            disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
+          >
+            <IconLogIn size={14} />
+            <p className="w-max">Sign in</p>
+          </Menu.Item>
+        )}
         <Menu.Item
           as={MenuLink}
           align="start"
           variant="plain"
           target="_blank"
-          href={FEEDBACK_LINK}
+          href={SUPPORT_LINK}
         >
           <IconLifeBuoy size={14} />
           <span>Feedback</span>
         </Menu.Item>
         {isSignIn && (
           <>
-            {isNav && (
-              <Menu.Item as={MenuLink} align="start" variant="plain" href="/">
-                <IconMonitor size={14} />
-                <span>Dashboard</span>
-              </Menu.Item>
-            )}
             <Menu.Item
               as={MenuLink}
               align="start"
               variant="plain"
               href="/profile"
-              target={isWidget ? '_blank' : undefined}
+              target={'_blank'}
             >
               <IconUser size={14} />
               <span>Profile</span>
@@ -108,7 +93,7 @@ export function WidgetUserMenu(props: UserMenuProps): JSX.Element {
               className={itemStyle}
               onClick={async () => {
                 await signOut({
-                  redirect: !isWidget,
+                  redirect: false,
                 });
                 localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
               }}
@@ -122,14 +107,3 @@ export function WidgetUserMenu(props: UserMenuProps): JSX.Element {
     </Menu>
   );
 }
-
-const MenuLink = React.forwardRef(function MenuLink(
-  { className, ...restProps }: LinkProps,
-  ref: React.Ref<HTMLAnchorElement>,
-): JSX.Element {
-  return (
-    <Link ref={ref} {...restProps} className={clsx(itemStyle, className)} />
-  );
-});
-
-const itemStyle = `space-x-1`;

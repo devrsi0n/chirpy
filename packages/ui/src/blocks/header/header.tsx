@@ -1,15 +1,16 @@
+import { APP_ORIGIN } from '@chirpy-dev/utils';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { SignInButton } from '../../blocks/sign-in-button';
-import { WidgetUserMenu } from '../../blocks/user-menu';
-import { Link, Logo, MaintenanceBanner } from '../../components';
+import { Button, Link, Logo, MaintenanceBanner } from '../../components';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { NotificationHub } from '../notification-hub';
 import { SideMenu } from '../side-menu';
 
 export function Header(): JSX.Element {
   const { isSignIn } = useCurrentUser();
+  const router = useRouter();
   const styles = `ml-[22px]`;
   return (
     <header className={clsx(`z-20 w-full sm:sticky sm:top-0 sm:left-0`)}>
@@ -24,29 +25,17 @@ export function Header(): JSX.Element {
         <section className="mx-auto flex max-w-7xl flex-row items-center justify-between py-3 px-2 shadow-xs transition duration-150 sm:px-6 lg:px-8">
           <div className="flex items-center pl-3 sm:hidden">
             <SideMenu>
-              {isSignIn ? (
-                <SideMenu.Item>
-                  <Link
-                    size="lg"
-                    href="/"
-                    className={styles}
-                    highlightPattern={/^\/$/}
-                  >
-                    Dashboard
-                  </Link>
-                </SideMenu.Item>
-              ) : (
-                <SideMenu.Item>
-                  <Link
-                    size="lg"
-                    href="/#pricing"
-                    className={styles}
-                    highlightPattern={/^\/#pricing/}
-                  >
-                    Pricing
-                  </Link>
-                </SideMenu.Item>
-              )}
+              <SideMenu.Item>
+                <Link
+                  size="lg"
+                  href="/#pricing"
+                  className={styles}
+                  highlightPattern={/^\/#pricing/}
+                >
+                  Pricing
+                </Link>
+              </SideMenu.Item>
+
               <SideMenu.Item>
                 <Link
                   size="lg"
@@ -85,15 +74,10 @@ export function Header(): JSX.Element {
             <nav
               className={`mb-5 hidden w-full flex-wrap items-center space-x-8 sm:mb-0 sm:ml-8 sm:flex sm:border-l sm:border-gray-500 sm:pl-8`}
             >
-              {isSignIn ? (
-                <Link href="/" highlightPattern={/^\/$/}>
-                  Dashboard
-                </Link>
-              ) : (
-                <Link href="/#pricing" highlightPattern={/^\/#pricing/}>
-                  Pricing
-                </Link>
-              )}
+              <Link href="/#pricing" highlightPattern={/^\/#pricing/}>
+                Pricing
+              </Link>
+
               <Link href="/docs" highlightPattern={/^\/docs/}>
                 Docs
               </Link>
@@ -106,8 +90,9 @@ export function Header(): JSX.Element {
           <div className="flex">
             {isSignIn ? (
               <>
-                <NotificationHub />
-                <WidgetUserMenu variant="Nav" />
+                <Button onClick={() => router.push(APP_ORIGIN)}>
+                  Go to dashboard
+                </Button>
               </>
             ) : (
               <SignInButton inPageNav />
