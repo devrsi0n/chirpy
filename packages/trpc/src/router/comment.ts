@@ -105,6 +105,20 @@ export const commentRouter = router({
   delete: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: ctx.session.user.id,
+        },
+        select: {
+          projects: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      });
+      const editableProjectIds =
+        user?.projects.map((project) => project.id) || [];
       const comments = await prisma.comment.findMany({
         where: {
           id: input,
@@ -112,7 +126,7 @@ export const commentRouter = router({
             project: {
               id: {
                 // Only site owner can delete comments, currently
-                in: ctx.session.user.editableProjectIds,
+                in: editableProjectIds,
               },
             },
           },

@@ -1,11 +1,17 @@
 import { USERNAME_RE } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { prisma } from '../db/client';
+import { prisma, User } from '../db';
 import { router, protectedProcedure } from '../trpc-server';
 
+export type MeOutput =
+  | (Pick<User, 'id' | 'name' | 'username' | 'email' | 'image' | 'kind'> & {
+      editableProjectIds: string[];
+    })
+  | null;
+
 export const userRouter = router({
-  me: protectedProcedure.query(async ({ ctx }) => {
+  me: protectedProcedure.query(async ({ ctx }): Promise<MeOutput> => {
     const me = await prisma.user.findUnique({
       where: {
         id: ctx.session.user.id,
@@ -17,9 +23,21 @@ export const userRouter = router({
         email: true,
         image: true,
         kind: true,
+        projects: {
+          select: {
+            id: true,
+          },
+        },
       },
     });
-    return me;
+    if (!me) {
+      return null;
+    }
+
+    return {
+      ...me,
+      editableProjectIds: me.projects.map((p) => p.id),
+    };
   }),
   myProfile: protectedProcedure.query(async ({ ctx }) => {
     const me = await prisma.user.findUnique({

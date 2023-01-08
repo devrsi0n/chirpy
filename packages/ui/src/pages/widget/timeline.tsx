@@ -52,7 +52,7 @@ export function CommentTimelineWidget(
             <span className="font-bold">{comment?.user.name}</span>
             <span>{`'s comment timeline`}</span>
           </Heading>
-          <WidgetUserMenu variant="Widget" />
+          <WidgetUserMenu />
         </div>
 
         {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}

@@ -19,6 +19,7 @@ export type CurrentUserContextType = {
   // we need to turn off some features if we are in preview mode
   isPreview?: true;
   data: UserData & {
+    username?: string | null;
     editableProjectIds?: string[];
     isAnonymous?: boolean;
   };

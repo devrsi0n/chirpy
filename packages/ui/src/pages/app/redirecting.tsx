@@ -5,26 +5,23 @@ import * as React from 'react';
 import { Spinner } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useTimeout } from '../../hooks';
-import { hasValidUserProfile } from '../../utilities';
 import { AppLayout } from './components/app-layout';
 
 export function Redirecting(): JSX.Element {
   const { data } = useCurrentUser();
   const router = useRouter();
+  const settled = React.useRef(false);
   React.useEffect(() => {
-    if (!data.id) {
+    if (!data.id || settled.current) {
       return;
     }
     if (sessionStorage.getItem(SIGN_IN_SUCCESS_KEY) !== 'true') {
       localStorage.setItem(SIGN_IN_SUCCESS_KEY, 'true');
     }
-    if (hasValidUserProfile(data)) {
-      const callbackUrl = sessionStorage.getItem(CALLBACK_URL_KEY);
-      sessionStorage.removeItem(CALLBACK_URL_KEY);
-      router.push(callbackUrl || '/');
-    } else {
-      router.push('/welcome?invalidProfile=true');
-    }
+    const callbackUrl = sessionStorage.getItem(CALLBACK_URL_KEY);
+    sessionStorage.removeItem(CALLBACK_URL_KEY);
+    router.push(callbackUrl || '/');
+    settled.current = true;
   }, [router, data]);
   useTimeout(() => {
     if (!data.id) {

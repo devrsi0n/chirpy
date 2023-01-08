@@ -36,7 +36,6 @@ export function CurrentUserProvider({
       ? {
           ...session?.user,
           ...data,
-          editableProjectIds: session?.user.editableProjectIds || [],
           isAnonymous: data?.kind === 'ANONYMOUS',
         }
       : {};

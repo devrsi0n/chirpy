@@ -38,7 +38,7 @@ export const nextAuthOptions: NextAuthOptions = {
      * @param profile Provider profile (only available on sign in)
      * @return JSON Web Token that will be saved
      */
-    async jwt({ token /* user  account, profile */ }) {
+    async jwt({ token, isNewUser /* user  account, profile */ }) {
       // TODO: Ask user to fill these fields, don't fill them automatically
       //if (user) {
       // await fillUserFields(
@@ -47,46 +47,46 @@ export const nextAuthOptions: NextAuthOptions = {
       //   account?.provider as any,
       // );
       //}
-      return {
-        ...token,
-      };
+      if (isNewUser) {
+        // Auto fill name and username when user signed in with email only
+        const user = await prisma.user.findUnique({
+          where: {
+            id: token.sub || '',
+          },
+        });
+        if (user?.email) {
+          let name: string | undefined;
+          const alias = user.email.split('@')[0];
+          if (!user.name) {
+            name = alias;
+          }
+          let username: string | undefined;
+          if (!user.username) {
+            username = alias;
+          }
+          if (name || username) {
+            await prisma.user.update({
+              where: {
+                id: user.id,
+              },
+              data: {
+                ...(username && { username }),
+                ...(name && { name }),
+              },
+            });
+          }
+        }
+      }
+      return token;
     },
     async session({ session, token }) {
       const userId = token.sub;
       if (!userId) {
         throw new Error(`Expect valid user id`);
       }
-      const userData = await prisma.user.findUnique({
-        where: {
-          id: userId,
-        },
-        select: {
-          name: true,
-          username: true,
-          email: true,
-          image: true,
-          kind: true,
-          projects: {
-            select: {
-              id: true,
-            },
-          },
-        },
-      });
-      if (!userData) {
-        throw new Error(`Can't find the user for id: ${userId}`);
-      }
-      const editableProjectIds = userData?.projects.map(({ id }) => id);
+
       // Extra properties should be added here, jwt only save a small set of data due to cookie size limitation
-      session.user = {
-        name: session.user?.name || userData.name || '',
-        username: userData.username || '',
-        email: session.user?.email || userData.email || '',
-        image: session.user?.image || userData.image || '',
-        kind: userData.kind,
-        id: userId,
-        editableProjectIds,
-      };
+      session.user.id = userId;
       return session;
     },
     // Link multiple accounts https://github.com/nextauthjs/next-auth/issues/296

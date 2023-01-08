@@ -1,77 +1,59 @@
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { ConfirmUserFields } from '../../blocks';
-import { Button, Heading, Link, Text } from '../../components';
+import { Button, Card, Heading, Link, Text } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useCelebration } from '../../hooks';
-import { hasValidUserProfile } from '../../utilities';
 import { AppLayout } from './components/app-layout';
 
 export function Welcome(): JSX.Element {
   useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
-  const [isFullFilled, setIsFullFilled] = React.useState(false);
+  const [isValidProfile, setIsValidProfile] = React.useState(true);
   React.useEffect(() => {
-    setIsFullFilled(isProfileFullFilled());
-  }, []);
-
-  React.useEffect(() => {
-    if (loading) return;
-    if (hasValidUserProfile(data)) {
-      setIsFullFilled(true);
+    if (!data.id) {
+      return;
+    }
+    if (data.name) {
+      setIsValidProfile(true);
     } else {
-      setIsFullFilled(false);
+      setIsValidProfile(false);
     }
   }, [data, loading]);
   return (
     <AppLayout title="Welcome">
-      {isFullFilled ? <FullFilled /> : <NotFullFilled />}
+      <div className="flex h-full items-center justify-center">
+        <Card className="flex w-fit flex-col items-center justify-center space-y-12 py-6 px-4">
+          <div className="space-y-2 text-center">
+            <Heading as="h2" className="!tracking-tight">
+              Welcome on board 🎉
+            </Heading>
+            <Text variant="secondary">
+              {isValidProfile
+                ? `Feel free to create a site, and publish your content.`
+                : `You profile is incomplete, you can update it in the profile page.`}
+            </Text>
+          </div>
+          <div className="space-x-4">
+            <Button variant="solid" color="primary">
+              <Link href="/" variant="plain">
+                Dashboard
+              </Link>
+            </Button>
+            <Button color="gray">
+              {isValidProfile ? (
+                <Link href={`${HOME_ORIGIN}/docs`} variant="plain">
+                  Docs
+                </Link>
+              ) : (
+                <Link href="/profile" variant="plain">
+                  My profile
+                </Link>
+              )}
+            </Button>
+          </div>
+        </Card>
+      </div>
     </AppLayout>
   );
-}
-
-function FullFilled(): JSX.Element {
-  return (
-    <section className="flex flex-col items-center justify-center space-y-12">
-      <div className="space-y-2 text-center">
-        <Heading as="h2" className="!tracking-tight">
-          Welcome on board 🎉
-        </Heading>
-        <Text variant="secondary">
-          Feel free to create a project, integrate a widget in your site, or
-          just explore!
-        </Text>
-      </div>
-      <div className="space-x-4">
-        <Button variant="solid" color="primary">
-          <Link href="/" variant="plain">
-            Dashboard
-          </Link>
-        </Button>
-        <Button color="gray">
-          <Link href="/docs" variant="plain">
-            Docs
-          </Link>
-        </Button>
-      </div>
-    </section>
-  );
-}
-
-function NotFullFilled() {
-  return (
-    <div className="flex flex-col items-center space-y-8 md:flex-row md:items-center md:space-y-0 md:space-x-8">
-      <div className="space-y-3">
-        <Heading as="h2" className="!tracking-tight">
-          Welcome on board
-        </Heading>
-        <Text variant="secondary">Just fill this form to get started</Text>
-      </div>
-      <ConfirmUserFields />
-    </div>
-  );
-}
-
-function isProfileFullFilled(): boolean {
-  return !location.search.includes('invalidProfile=true');
 }

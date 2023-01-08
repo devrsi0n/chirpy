@@ -31,13 +31,12 @@ export const getStaticPaths: GetStaticPaths<PathParam> = async () => {
 export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
   params,
 }) => {
-  if (!params?.slug) {
-    return { notFound: true };
-  }
+  // Render the welcome doc in index page
+  const slug = params?.slug || ['welcome'];
   const [mdxProps, directories, nearNav] = await Promise.all([
-    getMDXPropsBySlug([CONTAINER_FOLDER, ...params.slug].join('/')),
+    getMDXPropsBySlug([CONTAINER_FOLDER, ...slug].join('/')),
     getDirectories(CONTAINER_FOLDER, `/${CONTAINER_FOLDER}`),
-    getNearNav(CONTAINER_FOLDER, params.slug.join('/')),
+    getNearNav(CONTAINER_FOLDER, slug.join('/')),
   ]);
 
   return {

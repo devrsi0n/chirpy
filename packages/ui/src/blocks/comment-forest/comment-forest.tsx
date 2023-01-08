@@ -34,7 +34,7 @@ export function CommentForest({
         </Heading>
         <div className="flex flex-row">
           <NotificationHub />
-          <WidgetUserMenu variant="Widget" />
+          <WidgetUserMenu />
         </div>
       </div>
 
