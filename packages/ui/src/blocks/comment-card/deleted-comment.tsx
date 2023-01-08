@@ -6,6 +6,7 @@ export function DeletedComment(): JSX.Element {
   return (
     <div className="">
       <Link
+        origin="home"
         variant="plain"
         href="/docs/features/moderate#deleted-note"
         className="italic"

@@ -69,7 +69,7 @@ export const FAQ_LIST: FAQItem[] = [
     description: (
       <span>
         {`Yes, it is. It's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience. `}
-        <Link href="https://chirpy.dev/docs/self-hosted">More details</Link>
+        <Link href="/docs/self-hosted">More details</Link>
       </span>
     ),
     icon: <IconCloud />,
