@@ -1,5 +1,5 @@
 export * from './delete-confirmation';
-export * from './redirecting';
+export * from '../redirecting';
 export * from './sign-in';
 export * from './verify-request';
-export * from './welcome';
+export * from '../welcome';

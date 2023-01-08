@@ -1,12 +1,13 @@
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../../../blocks';
+import { PageTitle } from '../../../../blocks';
 import { Button, openInNewTab, Text, Video } from '../../../../components';
 import { PaginationLink } from '../../../home/docs/pagination';
+import { AppLayout } from '../../components/app-layout';
 
 export function CreateSite(): JSX.Element {
   return (
-    <SiteLayout title="Create site">
+    <AppLayout title="Create site">
       <PageTitle>Create your blog site</PageTitle>
       <section className="">
         <Text className="mb-4">
@@ -32,7 +33,7 @@ export function CreateSite(): JSX.Element {
           Next step
         </PaginationLink>
       </div>
-    </SiteLayout>
+    </AppLayout>
   );
 }
 

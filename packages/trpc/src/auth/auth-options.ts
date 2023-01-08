@@ -7,6 +7,7 @@ import {
 } from '@chirpy-dev/utils';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextAuthOptions } from 'next-auth';
+import { GithubProfile } from 'next-auth/providers/github';
 import { GoogleProfile } from 'next-auth/providers/google';
 import { log } from 'next-axiom';
 
@@ -25,7 +26,7 @@ export const nextAuthOptions: NextAuthOptions = {
   },
   pages: {
     signIn: `${APP_ORIGIN}/auth/sign-in`,
-    newUser: `${APP_ORIGIN}/auth/welcome?isNewUser=true`, // New users will be directed here on first sign in
+    newUser: `${APP_ORIGIN}/welcome?isNewUser=true`, // New users will be directed here on first sign in
     error: `${APP_ORIGIN}/auth/sign-in`, // Error code passed in query string as ?error=
     verifyRequest: `${APP_ORIGIN}/auth/verify-request`,
   },
@@ -64,6 +65,7 @@ export const nextAuthOptions: NextAuthOptions = {
           username: true,
           email: true,
           image: true,
+          kind: true,
           projects: {
             select: {
               id: true,
@@ -81,6 +83,7 @@ export const nextAuthOptions: NextAuthOptions = {
         username: userData.username || '',
         email: session.user?.email || userData.email || '',
         image: session.user?.image || userData.image || '',
+        kind: userData.kind,
         id: userId,
         editableProjectIds,
       };
@@ -92,6 +95,12 @@ export const nextAuthOptions: NextAuthOptions = {
       if (
         account?.provider === 'google' &&
         (profile as GoogleProfile).email_verified !== true
+      ) {
+        return false;
+      }
+      if (
+        account?.provider === 'github' &&
+        !(profile as GithubProfile)?.email
       ) {
         return false;
       }

@@ -2,32 +2,12 @@
 import { isHomeHost } from '@chirpy-dev/utils';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 
-import { parseMiddlewareUrl, sitesMiddlewares } from './server/middlewares';
-
-// TODO: Add auth for app pages
-// const auth = withAuth({
-//   callbacks: {
-//     authorized: ({ token }) => {
-//       // Anonymous user doesn't have an email address
-//       return !!(token?.email || token?.name);
-//     },
-//   },
-// });
-
-export const authMatcher = [
-  '/dashboard',
-  '/auth/delete-confirmation',
-  '/auth/redirecting',
-  '/auth/welcome',
-  '/analytics/:path*',
-  '/profile/:path*',
-  '/theme/:path*',
-
-  // Don't add /api/content-classifier/toxic-text here,
-  // it's used by the comment-widget-preview,
-  // so it should be public
-  // '/api/content-classifier/toxic-text',
-];
+import {
+  appMiddleware,
+  parseMiddlewareUrl,
+  sitesMiddlewares,
+  widgetMiddleware,
+} from './server/middlewares';
 
 export const config = {
   matcher: [
@@ -42,18 +22,17 @@ export const config = {
   ],
 };
 
-export default function middleware(req: NextRequest, ev: NextFetchEvent) {
+export default function middleware(
+  req: NextRequest,
+  ev: NextFetchEvent,
+): NextResponse {
   const { url, host, currentHost } = parseMiddlewareUrl(req);
   console.log({ url, host, currentHost });
   // Rewrites for app pages
   if (currentHost == 'app') {
-    url.pathname = `/app${url.pathname}`;
-    return NextResponse.rewrite(url);
+    return appMiddleware(req);
   } else if (currentHost === 'widget') {
-    url.pathname = `/widget${url.pathname}`;
-    const rsp = NextResponse.rewrite(url);
-    rsp.headers.set('Access-Control-Allow-Origin', '*');
-    return rsp;
+    return widgetMiddleware(req);
   }
 
   // Rewrite root application to `/home` folder

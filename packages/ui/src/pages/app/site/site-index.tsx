@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import { SiteLayout } from '../../../blocks';
 import { Heading, Link, Text } from '../../../components';
 import { trpcClient } from '../../../utilities';
+import { AppLayout } from '../components/app-layout';
 
 export type SiteIndexProps = {
   id: string;
@@ -11,7 +11,7 @@ export type SiteIndexProps = {
 export function SiteIndex({ id }: SiteIndexProps): JSX.Element {
   const { data } = trpcClient.site.byId.useQuery(id);
   return (
-    <SiteLayout title={`Posts for site ${data?.name}`}>
+    <AppLayout title={`Posts for site ${data?.name}`}>
       <div>
         <Heading as="h1">{`Posts for site ${data?.name}`}</Heading>
         <Text>{data?.subdomain}</Text>
@@ -34,6 +34,6 @@ export function SiteIndex({ id }: SiteIndexProps): JSX.Element {
           )}
         </ul>
       </section>
-    </SiteLayout>
+    </AppLayout>
   );
 }

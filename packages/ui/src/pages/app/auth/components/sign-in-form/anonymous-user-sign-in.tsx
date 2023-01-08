@@ -1,11 +1,11 @@
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Button } from '../../components/button';
-import { Link } from '../../components/link';
-import { Text } from '../../components/text';
-import { TextField } from '../../components/text-field';
-import { useForm } from '../../hooks/use-form';
+import { Button } from '../../../../../components/button';
+import { Link } from '../../../../../components/link';
+import { Text } from '../../../../../components/text';
+import { TextField } from '../../../../../components/text-field';
+import { useForm } from '../../../../../hooks/use-form';
 import { SignInProps } from './types';
 
 export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
@@ -19,7 +19,7 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
       event.preventDefault();
       await signIn('credentials', {
         ...fields,
-        callbackUrl: `${location.origin}/auth/redirecting`,
+        callbackUrl: `${location.origin}/redirecting`,
       });
     },
   );
@@ -54,7 +54,10 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
       <Text size="sm" variant="secondary">
         You can connect an email later, or stay anonymous as long as you like.
         Learn more about{' '}
-        <Link href="/docs/features/privacy-friendly#anonymous-sign-in">
+        <Link
+          origin="home"
+          href="/docs/features/privacy-friendly#anonymous-sign-in"
+        >
           anonymous sign-in
         </Link>
         .

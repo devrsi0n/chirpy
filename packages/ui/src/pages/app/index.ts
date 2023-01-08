@@ -6,3 +6,5 @@ export * from './site';
 export * from './theme';
 export * from './404';
 export * from './500';
+export * from './redirecting';
+export * from './welcome';

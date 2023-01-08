@@ -2,16 +2,16 @@ import clsx from 'clsx';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Alert } from '../../components/alert';
-import { Button } from '../../components/button';
-import { Divider } from '../../components/divider';
-import { Heading } from '../../components/heading';
-import { Link } from '../../components/link';
-import { Logo } from '../../components/logo';
-import { Text } from '../../components/text';
-import { Toggle } from '../../components/toggle';
-import { SIGN_IN_ERRORS } from '../../strings';
-import { CompanyRight } from '../footer';
+import { CompanyRight } from '../../../../../blocks/footer';
+import { Alert } from '../../../../../components/alert';
+import { Button } from '../../../../../components/button';
+import { Divider } from '../../../../../components/divider';
+import { Heading } from '../../../../../components/heading';
+import { Link } from '../../../../../components/link';
+import { Logo } from '../../../../../components/logo';
+import { Text } from '../../../../../components/text';
+import { Toggle } from '../../../../../components/toggle';
+import { SIGN_IN_ERRORS } from '../../../../../strings';
 import { AnonymousUserSignIn } from './anonymous-user-sign-in';
 import { EmailSignIn } from './email-sign-in';
 import styles from './sign-in-form.module.scss';
@@ -108,7 +108,7 @@ export function SignInForm({
                       key={option.name}
                       onClick={() =>
                         signIn(option.name.toLowerCase(), {
-                          callbackUrl: `${location.origin}/auth/redirecting`,
+                          callbackUrl: `${location.origin}/redirecting`,
                         })
                       }
                       className="w-full px-0 md:justify-start md:pl-20"
@@ -128,9 +128,14 @@ export function SignInForm({
           <Text className="py-3" size="sm" variant="secondary">
             {`By clicking the buttons above, you acknowledge that you have read
             and understood, and agree to Chirpy's `}
-            <Link href="/terms-of-service">Terms of Service</Link>
+            <Link origin="home" href="/terms-of-service">
+              Terms of Service
+            </Link>
             {' and '}
-            <Link href="/privacy-policy">Privacy Policy</Link>.
+            <Link origin="home" href="/privacy-policy">
+              Privacy Policy
+            </Link>
+            .
           </Text>
         </div>
         <div className="mb-8 ml-0 self-start justify-self-end sm:ml-8">

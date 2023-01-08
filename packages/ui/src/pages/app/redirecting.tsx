@@ -2,30 +2,30 @@ import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { SiteLayout } from '../../../blocks';
-import { Spinner } from '../../../components';
-import { useCurrentUser } from '../../../contexts';
-import { useTimeout } from '../../../hooks';
-import { hasValidUserProfile } from '../../../utilities';
+import { Spinner } from '../../components';
+import { useCurrentUser } from '../../contexts';
+import { useTimeout } from '../../hooks';
+import { hasValidUserProfile } from '../../utilities';
+import { AppLayout } from './components/app-layout';
 
 export function Redirecting(): JSX.Element {
-  const { data, loading } = useCurrentUser();
+  const { data } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {
-    if (data.id) {
-      localStorage.setItem(SIGN_IN_SUCCESS_KEY, 'true');
-    }
-    if (loading) {
+    if (!data.id) {
       return;
     }
-    if (!hasValidUserProfile(data)) {
-      router.push('/auth/welcome?invalidProfile=true');
-    } else if (data.id) {
+    if (sessionStorage.getItem(SIGN_IN_SUCCESS_KEY) !== 'true') {
+      localStorage.setItem(SIGN_IN_SUCCESS_KEY, 'true');
+    }
+    if (hasValidUserProfile(data)) {
       const callbackUrl = sessionStorage.getItem(CALLBACK_URL_KEY);
       sessionStorage.removeItem(CALLBACK_URL_KEY);
       router.push(callbackUrl || '/');
+    } else {
+      router.push('/welcome?invalidProfile=true');
     }
-  }, [router, data, loading]);
+  }, [router, data]);
   useTimeout(() => {
     if (!data.id) {
       router.push(
@@ -36,8 +36,8 @@ export function Redirecting(): JSX.Element {
     }
   }, 30_000);
   return (
-    <SiteLayout title="Redirecting">
+    <AppLayout title="Redirecting">
       <Spinner className="mt-24 justify-center" />
-    </SiteLayout>
+    </AppLayout>
   );
 }

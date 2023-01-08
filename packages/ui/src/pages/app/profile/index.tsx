@@ -1,7 +1,7 @@
 import { EMAIL_RE } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { SiteLayout, PageTitleDeprecated } from '../../../blocks';
+import { PageTitleDeprecated } from '../../../blocks';
 import {
   Avatar,
   Button,
@@ -23,6 +23,7 @@ import { useCurrentUser } from '../../../contexts';
 import { useForm } from '../../../hooks';
 import { logger } from '../../../utilities';
 import { trpcClient } from '../../../utilities/trpc-client';
+import { AppLayout } from '../components/app-layout';
 
 type FormFields = {
   name: string;
@@ -115,7 +116,7 @@ export function Profile(): JSX.Element {
   }
 
   return (
-    <SiteLayout title={name || 'Profile'}>
+    <AppLayout title={name || 'Profile'}>
       <ProfileContainer className="space-y-7">
         <PageTitleDeprecated>Profile</PageTitleDeprecated>
         <section className="space-y-6">
@@ -252,7 +253,7 @@ export function Profile(): JSX.Element {
           )}
         </section>
       </ProfileContainer>
-    </SiteLayout>
+    </AppLayout>
   );
 }
 

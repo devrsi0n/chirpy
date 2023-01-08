@@ -2,11 +2,12 @@ import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../../../blocks';
+import { PageTitle } from '../../../../blocks';
 import { Button, Card } from '../../../../components';
 import { useForm } from '../../../../hooks';
 import { isTRPCClientError, trpcClient } from '../../../../utilities';
 import { PaginationLink } from '../../../home/docs/pagination';
+import { AppLayout } from '../../components/app-layout';
 import { SiteForm, SiteFormFields } from './site-form';
 
 export function CreateSiteForm(): JSX.Element {
@@ -46,7 +47,7 @@ export function CreateSiteForm(): JSX.Element {
     },
   );
   return (
-    <SiteLayout title="Create site form">
+    <AppLayout title="Create site form">
       <PageTitle>Create site</PageTitle>
       <div>
         <Card className="w-96 p-6">
@@ -69,6 +70,6 @@ export function CreateSiteForm(): JSX.Element {
           Duplicate template
         </PaginationLink>
       </div>
-    </SiteLayout>
+    </AppLayout>
   );
 }

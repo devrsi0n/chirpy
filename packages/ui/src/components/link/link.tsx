@@ -1,3 +1,4 @@
+import { APP_ORIGIN, HOME_ORIGIN } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { m } from 'framer-motion';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
@@ -11,6 +12,7 @@ type Size = 'xs' | 'sm' | 'md' | 'lg';
  * 'nav' means header/footer nav links
  */
 type Variant = 'nav' | 'primary' | 'secondary' | 'plain';
+type Origin = 'home' | 'app';
 
 export type LinkProps = React.PropsWithChildren<
   NextLinkProps &
@@ -23,6 +25,7 @@ export type LinkProps = React.PropsWithChildren<
       variant?: Variant;
       hideUnderline?: boolean;
       disabled?: boolean;
+      origin?: Origin;
     }
 >;
 
@@ -38,6 +41,11 @@ const variantStyles: Record<Variant, string> = {
   primary: `text-primary-1000 hover:text-primary-1200`,
   secondary: `text-gray-1100`,
   plain: ``,
+};
+
+const originMap: Record<Origin, string> = {
+  home: HOME_ORIGIN,
+  app: APP_ORIGIN,
 };
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -57,6 +65,7 @@ export const Link = React.forwardRef(function Link(
     className,
     children,
     disabled,
+    origin,
     ...restProps
   }: LinkProps,
   ref: React.Ref<HTMLAnchorElement>,
@@ -64,6 +73,8 @@ export const Link = React.forwardRef(function Link(
   if (disabled) {
     href = '';
   }
+
+  href = `${(origin && originMap[origin]) || ''}${href}`;
   const router = useRouter();
   const mounted = useHasMounted();
   // highlight only apply on client

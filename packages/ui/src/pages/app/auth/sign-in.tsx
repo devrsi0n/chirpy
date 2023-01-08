@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { SiteLayout, SignInForm } from '../../../blocks';
+import { AuthLayout } from './components/auth-layout';
+import { SignInForm } from './components/sign-in-form';
 
 export function SignInPage(): JSX.Element {
   const [allowAnonymous, setAllowAnonymous] = React.useState(false);
@@ -10,19 +11,12 @@ export function SignInPage(): JSX.Element {
     }
   }, []);
   return (
-    <SiteLayout
-      title="Sign in"
-      styles={{
-        container: `mx-2 md:mx-0 py-0`,
-      }}
-      hideFooter
-      hideHeader
-    >
+    <AuthLayout title="Sign in" className="mx-2 py-0 md:mx-0">
       <SignInForm
         title="Sign in"
         subtitle="👋 Welcome! Please enter your details."
         allowAnonymous={allowAnonymous}
       />
-    </SiteLayout>
+    </AuthLayout>
   );
 }

@@ -4,7 +4,7 @@ import DiscordLogo from 'super-tiny-icons/images/svg/discord.svg';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 
-import { useAsync } from '../../hooks/use-async';
+import { useAsync } from '../../../../../hooks/use-async';
 
 // import FacebookLogo from 'super-tiny-icons/images/svg/facebook.svg';
 // import GoogleLogo from 'super-tiny-icons/images/svg/google.svg';

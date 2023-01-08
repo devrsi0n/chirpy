@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { pageRender } from '../../../../__tests__/fixtures/page-render';
 import { setMockedUser } from '../../../../__tests__/fixtures/page-render';
 import { mockNextRouter } from '../../../../__tests__/mocks/next-router';
-import { Welcome } from '../welcome';
+import { Welcome } from '../../welcome';
 
 setMockedUser({
   email: '',

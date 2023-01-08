@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-import { ConfirmUserFields, SiteLayout } from '../../../blocks';
-import { Button, Heading, Link, Text } from '../../../components';
-import { useCurrentUser } from '../../../contexts';
-import { useCelebration } from '../../../hooks';
-import { hasValidUserProfile } from '../../../utilities';
+import { ConfirmUserFields } from '../../blocks';
+import { Button, Heading, Link, Text } from '../../components';
+import { useCurrentUser } from '../../contexts';
+import { useCelebration } from '../../hooks';
+import { hasValidUserProfile } from '../../utilities';
+import { AppLayout } from './components/app-layout';
 
-// export type WelcomeProps = React.PropsWithChildren<{}>;
-
-export function Welcome(/*props: WelcomeProps*/): JSX.Element {
+export function Welcome(): JSX.Element {
   useCelebration('isNewUser');
   const { data, loading } = useCurrentUser();
   const [isFullFilled, setIsFullFilled] = React.useState(false);
@@ -25,9 +24,9 @@ export function Welcome(/*props: WelcomeProps*/): JSX.Element {
     }
   }, [data, loading]);
   return (
-    <SiteLayout title="Welcome">
+    <AppLayout title="Welcome">
       {isFullFilled ? <FullFilled /> : <NotFullFilled />}
-    </SiteLayout>
+    </AppLayout>
   );
 }
 
