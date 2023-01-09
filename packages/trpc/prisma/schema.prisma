@@ -252,9 +252,9 @@ model BlogSite {
   id           String           @id @default(cuid())
   name         String
   subdomain    String           @unique
-  // Notion template url
-  templateUrl  String           @db.Text
-  // Notion template record map
+  // Notion page url
+  pageUrl      String           @db.Text
+  // Notion page record map
   recordMap    Json
   description  String?          @db.Text
   logo         String?
@@ -313,9 +313,9 @@ model DocsSite {
   id           String           @id @default(cuid())
   name         String
   subdomain    String           @unique
-  // Notion template url
-  templateUrl  String           @db.Text
-  // Notion template record map
+  // Notion page url
+  pageUrl      String           @db.Text
+  // Notion page record map
   recordMap    Json
   description  String?          @db.Text
   logo         String?

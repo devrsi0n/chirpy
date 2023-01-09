@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
       select: {
         id: true,
         name: true,
-        templateUrl: true,
+        pageUrl: true,
         subdomain: true,
         recordMap: true,
       },
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
       select: {
         id: true,
         name: true,
-        templateUrl: true,
+        pageUrl: true,
         subdomain: true,
         recordMap: true,
       },
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
   if (!blogSite?.id && !docsSite?.id) {
     return { notFound: true, revalidate: 10 };
   }
-  const pageId = getNotionId((blogSite || docsSite)?.templateUrl || '');
+  const pageId = getNotionId((blogSite || docsSite)?.pageUrl || '');
   if (!pageId) {
     return { notFound: true, revalidate: 10 };
   }
@@ -79,7 +79,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
         page,
       );
       if (typeof lastEditedTime !== 'number') {
-        // Skip the template table page
+        // Skip the table page
         continue;
       }
       const title = getPageTitle(page);

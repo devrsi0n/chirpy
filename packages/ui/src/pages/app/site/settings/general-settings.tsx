@@ -25,7 +25,7 @@ export function SiteGeneralSettings({
         name: '',
         description: '',
         subdomain: '',
-        templateUrl: '',
+        pageUrl: '',
       },
       resetAfterSubmit: false,
     });
@@ -35,7 +35,7 @@ export function SiteGeneralSettings({
         name: data.name,
         description: data.description || '',
         subdomain: data.subdomain,
-        templateUrl: data.templateUrl,
+        pageUrl: data.pageUrl,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,7 +73,7 @@ export function SiteGeneralSettings({
   });
   return (
     <section className="w-fit pt-8">
-      <SiteForm register={register} errors={errors} templateUrlFieldHint="">
+      <SiteForm register={register} errors={errors} pageUrlFieldHint="">
         <Button
           className="w-full sm:w-auto"
           disabled={hasError || isLoading}

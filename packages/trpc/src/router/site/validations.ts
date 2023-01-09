@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-export const SITE_TEMPLATE_URL_VALIDATION = z
+export const SITE_PAGE_URL_VALIDATION = z
   .string({
-    required_error: 'Notion template URL is required',
+    required_error: 'Notion page URL is required',
   })
   .superRefine((val, ctx) => {
     let url: URL;
@@ -45,7 +45,7 @@ export const SITE_TEMPLATE_URL_VALIDATION = z
 
 export const SITE_NAME_VALIDATION = z
   .string()
-  .min(1, 'Name must contain at least 1 character')
+  .min(1, 'Name is required')
   .max(190, 'Name must contain at most 190 characters');
 
 export const SITE_SUBDOMAIN_VALIDATION = z
@@ -65,7 +65,7 @@ export const CREATE_INPUT_VALIDATION = z.object({
   name: SITE_NAME_VALIDATION,
   subdomain: SITE_SUBDOMAIN_VALIDATION,
   description: SITE_DESCRIPTION_VALIDATION,
-  templateUrl: SITE_TEMPLATE_URL_VALIDATION,
+  pageUrl: SITE_PAGE_URL_VALIDATION,
 });
 
 export const UPDATE_INPUT_VALIDATION = CREATE_INPUT_VALIDATION.extend({

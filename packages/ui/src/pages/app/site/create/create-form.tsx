@@ -16,7 +16,7 @@ export function CreateSiteForm(): JSX.Element {
     useForm<SiteFormFields>({
       defaultValues: {
         name: '',
-        templateUrl: '',
+        pageUrl: '',
         subdomain: '',
         description: '',
       },
@@ -31,7 +31,7 @@ export function CreateSiteForm(): JSX.Element {
           name: fields.name,
           subdomain: fields.subdomain,
           description: fields.description,
-          templateUrl: fields.templateUrl,
+          pageUrl: fields.pageUrl,
         });
       } catch (error: unknown) {
         if (

@@ -50,13 +50,13 @@ export function getNotionId(tempplateUrl: string) {
   return pageId;
 }
 
-export async function getRecordMapByUrl(templateUrl: string) {
-  const url = new URL(templateUrl);
+export async function getRecordMapByUrl(pageUrl: string) {
+  const url = new URL(pageUrl);
   const pageId = url.pathname.split('-').pop();
   if (!pageId) {
     throw new TRPCError({
       code: 'BAD_REQUEST',
-      message: 'Invalid Notion template URL',
+      message: 'Invalid Notion page URL',
     });
   }
   const recordMap = await notion.getPage(pageId);

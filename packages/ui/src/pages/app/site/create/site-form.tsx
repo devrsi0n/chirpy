@@ -2,7 +2,7 @@ import {
   SITE_DESCRIPTION_VALIDATION,
   SITE_NAME_VALIDATION,
   SITE_SUBDOMAIN_VALIDATION,
-  SITE_TEMPLATE_URL_VALIDATION,
+  SITE_PAGE_URL_VALIDATION,
 } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
@@ -13,20 +13,20 @@ export type SiteFormProps<T> = {
   register: Register;
   errors: FormError<T>;
   children?: React.ReactNode;
-  templateUrlFieldHint?: string;
+  pageUrlFieldHint?: string;
 };
 
 export type SiteFormFields = {
   name: string;
   subdomain: string;
   description: string;
-  templateUrl: string;
+  pageUrl: string;
 };
 
 export function SiteForm<T extends SiteFormFields>({
   register,
   errors,
-  templateUrlFieldHint,
+  pageUrlFieldHint,
   children,
 }: SiteFormProps<T>): JSX.Element {
   return (
@@ -41,18 +41,18 @@ export function SiteForm<T extends SiteFormFields>({
         placeholder="My blog"
       />
       <TextArea
-        {...register('templateUrl', {
-          zod: SITE_TEMPLATE_URL_VALIDATION,
+        {...register('pageUrl', {
+          zod: SITE_PAGE_URL_VALIDATION,
         })}
-        aria-label="Notion template URL"
-        label="Notion template URL"
-        errorMessage={errors.templateUrl}
+        aria-label="Notion page URL"
+        label="Notion page URL"
+        errorMessage={errors.pageUrl}
         styles={{
           textarea: 'min-h-[7em]',
         }}
         hintText={
-          templateUrlFieldHint ??
-          "Back to the previous page to get the template URL if you don't have one"
+          pageUrlFieldHint ??
+          "Back to the previous page to get the page URL if you don't have one"
         }
       />
       <TextField

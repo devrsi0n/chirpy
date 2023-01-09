@@ -50,7 +50,7 @@ export const siteRouter = router({
     .mutation(async ({ input, ctx }) => {
       await checkDuplicatedSubdomain(input.subdomain);
       const recordMap = (await getRecordMapByUrl(
-        input.templateUrl,
+        input.pageUrl,
       )) as unknown as JsonObject;
       const result = await prisma.blogSite.create({
         data: {
@@ -90,7 +90,7 @@ export const siteRouter = router({
       select: {
         id: true,
         name: true,
-        templateUrl: true,
+        pageUrl: true,
         subdomain: true,
         customDomain: true,
         description: true,
