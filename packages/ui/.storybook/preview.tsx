@@ -24,14 +24,14 @@ export const decorators = [
     const { styles } = useThemeVariables();
     return (
       <SessionProvider>
-        <CurrentUserProvider>
-          <style>{styles}</style>
-          <LazyMotion features={loadFeatures}>
-            <div className="h-screen bg-bg pt-6">
-              <Story />
-            </div>
-          </LazyMotion>
-        </CurrentUserProvider>
+        {/* <CurrentUserProvider> */}
+        <style>{styles}</style>
+        <LazyMotion features={loadFeatures}>
+          <div className="h-screen bg-bg pt-6">
+            <Story />
+          </div>
+        </LazyMotion>
+        {/* </CurrentUserProvider> */}
       </SessionProvider>
     );
   },
