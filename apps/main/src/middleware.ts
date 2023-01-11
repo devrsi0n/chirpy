@@ -27,7 +27,7 @@ export default function middleware(
   ev: NextFetchEvent,
 ): NextResponse {
   const { url, host, currentHost } = parseMiddlewareUrl(req);
-  console.log({ url, host, currentHost });
+  // console.log({ url, host, currentHost });
   // Rewrites for app pages
   if (currentHost == 'app') {
     return appMiddleware(req);

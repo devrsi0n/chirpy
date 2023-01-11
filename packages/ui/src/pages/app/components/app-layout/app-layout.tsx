@@ -6,10 +6,15 @@ import {
   Divider,
   IconBook,
   IconCreditCard,
+  IconFeather,
   IconHome,
+  IconLayers,
+  IconPlus,
   Logo,
 } from '../../../../components';
 import { SiteThemeProvider } from '../../../../contexts';
+import { trpcClient } from '../../../../utilities';
+import { CollapsibleNav } from './collapsible-nav';
 import { NavLink } from './nav-link';
 import { UsageCard } from './usage-card';
 
@@ -19,6 +24,7 @@ export type AppLayoutProps = {
 };
 
 export function AppLayout(props: AppLayoutProps): JSX.Element {
+  const { data: sites } = trpcClient.site.all.useQuery();
   return (
     <SiteThemeProvider>
       <LayoutTitle title={props.title} />
@@ -33,6 +39,29 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
             >
               Home
             </NavLink>
+            <CollapsibleNav
+              trigger={
+                <>
+                  <IconLayers size={24} />
+                  <span>Sites</span>
+                </>
+              }
+            >
+              {sites?.map((site) => (
+                <CollapsibleNav.Item
+                  href={`/site/${site.subdomain}`}
+                  key={site.id}
+                >
+                  {/* TODO: Use user defined logo */}
+                  <IconFeather size={18} />
+                  <span>{site.name}</span>
+                </CollapsibleNav.Item>
+              ))}
+              <CollapsibleNav.Item href="/site/create" key="create-site">
+                <IconPlus size={18} />
+                <span>Create new site</span>
+              </CollapsibleNav.Item>
+            </CollapsibleNav>
           </div>
           <div className="space-y-1">
             <NavLink href={`${HOME_ORIGIN}/docs`} icon={<IconBook size={24} />}>

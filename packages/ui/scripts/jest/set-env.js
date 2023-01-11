@@ -1,17 +1,10 @@
-process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = 'http://localhost:8080';
-process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN = 'ws://localhost:8080';
-process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000';
+process.env.NEXT_PUBLIC_HOME_ORIGIN = 'http://localhost:3000';
 
-process.env.NEXT_PUBLIC_HASURA_WS_ORIGIN = 'ws://localhost:8080/v1/graphql';
-process.env.NEXT_PUBLIC_HASURA_HTTP_ORIGIN = 'http://localhost:8080/v1/graphql';
 process.env.NEXT_PUBLIC_APP_URL = 'http://localhost:3000';
 process.env.NEXT_PUBLIC_VAPID = 'NEXT_PUBLIC_VAPID';
 process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN = 'http://localhost:3030';
 
 process.env.NEXTAUTH_URL = 'http://localhost:3000';
-
-process.env.HASURA_ADMIN_SECRET = 'HASURA_ADMIN_SECRET';
-process.env.HASURA_EVENT_SECRET = 'HASURA_EVENT_SECRET';
 
 process.env.HASH_ALGORITHM = 'HS512';
 process.env.NEXTAUTH_SECRET = 'NEXTAUTH_SECRET';

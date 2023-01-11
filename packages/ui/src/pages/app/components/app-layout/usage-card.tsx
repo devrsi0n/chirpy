@@ -9,14 +9,10 @@ import {
   ProgressBar,
   Text,
 } from '../../../../components';
-import { useLocalStorage } from '../../../../hooks';
 
 export function UsageCard(): JSX.Element {
   const router = useRouter();
-  const [isDismissed, setIsDismissed] = useLocalStorage(
-    false,
-    'usage-card-dismissed',
-  );
+  const [isDismissed, setIsDismissed] = React.useState(false);
   const handleClickDissmiss = () => {
     setIsDismissed(true);
   };

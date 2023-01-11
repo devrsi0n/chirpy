@@ -21,16 +21,16 @@ export function NavLink(props: NavLinkProps): JSX.Element {
   return (
     <Link
       href={props.href}
-      className={clsx(
-        'flex flex-row items-center space-x-3 rounded py-2 px-3 text-gray-1200',
-        listHoverableColor,
-        highlight && 'bg-gray-300',
-      )}
+      className={clsx(navItemStyle, highlight && 'bg-gray-300')}
     >
       {props.icon}
-      <span className="text-base font-semibold leading-none">
-        {props.children}
-      </span>
+      <span>{props.children}</span>
     </Link>
   );
 }
+
+export const navItemStyle = clsx(
+  'flex flex-row items-center space-x-3 rounded py-2 px-3 text-gray-1200 w-full',
+  'text-base font-semibold leading-none',
+  listHoverableColor,
+);

@@ -19,7 +19,7 @@ export const serverSchema = z.object({
 
   PRIVATE_VAPID: z.string().min(16),
   EMAIL_API_KEY: z.string().min(16),
-  TEST_USER_ID: z.string().min(16),
+  TEST_USER_ID: z.string().min(16).optional(),
   PROJECT_ID_VERCEL: z.string().startsWith('prj_'),
   AUTH_BEARER_TOKEN: z.string().min(16),
 

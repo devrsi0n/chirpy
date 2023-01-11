@@ -23,14 +23,15 @@ export const getSiteStaticPaths: GetStaticPaths = async () => {
 export const getSiteStaticProps: GetStaticProps<SiteStaticProps> = async ({
   params,
 }: GetStaticPropsContext): Promise<GetStaticPropsResult<SiteStaticProps>> => {
-  if (typeof params?.id !== 'string') {
+  if (typeof params?.subdomain !== 'string') {
     return {
       notFound: true,
+      revalidate: 10,
     };
   }
   const data = await prisma.blogSite.findUnique({
     where: {
-      id: params.id,
+      subdomain: params.subdomain,
     },
     select: {
       id: true,
@@ -39,11 +40,12 @@ export const getSiteStaticProps: GetStaticProps<SiteStaticProps> = async ({
   if (!data?.id) {
     return {
       notFound: true,
+      revalidate: 10,
     };
   }
   return {
     props: {
-      id: params.id,
+      id: data.id,
     },
   };
 };
