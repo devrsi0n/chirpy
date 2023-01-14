@@ -24,7 +24,7 @@
     "@trpc/react-query": "10.8.1",
     "@trpc/server": "10.8.1",
     "@types/web-push": "3.3.2",
-    "next": "13.1.1",
+    "next": "13.1.2",
     "next-auth": "4.17.0",
     "next-axiom": "0.15.1",
     "notion-client": "6.15.6",

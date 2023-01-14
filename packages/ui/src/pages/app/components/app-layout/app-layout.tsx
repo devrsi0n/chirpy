@@ -30,7 +30,7 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
       <LayoutTitle title={props.title} />
       <div className="flex h-full flex-row">
         <div className="flex w-72 flex-col justify-between border-r py-8 px-6">
-          <div className="space-y-1">
+          <div className="space-y-6">
             <Logo />
             <NavLink
               href="/"
@@ -63,15 +63,20 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
               </CollapsibleNav.Item>
             </CollapsibleNav>
           </div>
-          <div className="space-y-1">
-            <NavLink href={`${HOME_ORIGIN}/docs`} icon={<IconBook size={24} />}>
-              Documentation
-            </NavLink>
-            <NavLink href="/billing" icon={<IconCreditCard size={24} />}>
-              Billing
-            </NavLink>
+          <div className="space-y-6">
+            <div className="space-y-1">
+              <NavLink
+                href={`${HOME_ORIGIN}/docs`}
+                icon={<IconBook size={24} />}
+              >
+                Documentation
+              </NavLink>
+              <NavLink href="/billing" icon={<IconCreditCard size={24} />}>
+                Billing
+              </NavLink>
+            </div>
             <UsageCard />
-            <Divider className="!my-6" />
+            <Divider />
             <UserMenu />
           </div>
         </div>
