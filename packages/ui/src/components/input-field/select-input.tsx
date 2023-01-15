@@ -10,7 +10,7 @@ import { styles } from './styles';
 export type SelectInputProps = RadixSelect.SelectProps &
   Pick<RadixSelect.SelectTriggerProps, 'placeholder'>;
 
-export const SelectInput = React.forwardRef(function SelectInputComponent(
+const _SelectInput = React.forwardRef(function SelectInputComponent(
   props: SelectInputProps,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ): JSX.Element {
@@ -88,4 +88,6 @@ const SelectItem = React.forwardRef(
 );
 
 SelectItem.displayName = 'SelectInput.Item';
-SelectInput.Item = SelectItem;
+export const SelectInput = Object.assign(_SelectInput, {
+  Item: SelectItem,
+});
