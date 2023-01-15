@@ -22,6 +22,7 @@ export { default as IconCheck } from '@geist-ui/icons/check';
 export { default as IconLoader } from '@geist-ui/icons/loader';
 export { default as IconSend } from '@geist-ui/icons/send';
 export { default as IconChevronDown } from '@geist-ui/icons/chevronDown';
+export { default as IconChevronUp } from '@geist-ui/icons/chevronUp';
 export { default as IconAlertTriangle } from '@geist-ui/icons/alertTriangle';
 export { default as IconFolderPlus } from '@geist-ui/icons/folderPlus';
 export { default as IconCode } from '@geist-ui/icons/code';

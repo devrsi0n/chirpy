@@ -1144,6 +1144,10 @@ video {
   left: 50%;
 }
 
+.right-2 {
+  right: 0.5rem;
+}
+
 .-right-2 {
   right: -0.5rem;
 }
@@ -1178,6 +1182,10 @@ video {
 
 .bottom-4 {
   bottom: 1rem;
+}
+
+.left-2 {
+  left: 0.5rem;
 }
 
 .isolate {
@@ -1268,6 +1276,11 @@ video {
   margin-bottom: 1rem;
 }
 
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -1276,11 +1289,6 @@ video {
 .my-32 {
   margin-top: 8rem;
   margin-bottom: 8rem;
-}
-
-.mx-8 {
-  margin-left: 2rem;
-  margin-right: 2rem;
 }
 
 .mt-1 {
@@ -1606,6 +1614,10 @@ video {
 
 .max-h-60 {
   max-height: 15rem;
+}
+
+.max-h-80 {
+  max-height: 20rem;
 }
 
 .min-h-full {
@@ -3798,6 +3810,11 @@ video {
   background-color: hsl(var(--tw-colors-gray-100) / var(--tw-bg-opacity));
 }
 
+.focus\:bg-gray-300:focus {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--tw-colors-gray-300) / var(--tw-bg-opacity));
+}
+
 .focus\:text-gray-900:focus {
   --tw-text-opacity: 1;
   color: hsl(var(--tw-colors-gray-900) / var(--tw-text-opacity));
@@ -4014,6 +4031,79 @@ video {
 .group:focus .group-focus\:text-gray-500 {
   --tw-text-opacity: 1;
   color: hsl(var(--tw-colors-gray-500) / var(--tw-text-opacity));
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.data-\[state\=closed\]\:animate-fade-out[data-state=closed] {
+  animation: fade-out 0.3s ease-in;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.data-\[state\=open\]\:animate-bounce[data-state=open] {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.data-\[state\=closed\]\:animate-bounce[data-state=closed] {
+  animation: bounce 1s infinite;
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.data-\[state\=open\]\:animate-fade-out[data-state=open] {
+  animation: fade-out 0.3s ease-in;
+}
+
+.data-\[placeholder\]\:font-normal[data-placeholder] {
+  font-weight: 400;
+}
+
+.data-\[placeholder\]\:text-gray-900[data-placeholder] {
+  --tw-text-opacity: 1;
+  color: hsl(var(--tw-colors-gray-900) / var(--tw-text-opacity));
+}
+
+.data-\[disabled\]\:opacity-50[data-disabled] {
+  opacity: 0.5;
 }
 
 .dark .dark\:border-gray-500 {

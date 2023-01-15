@@ -1,8 +1,9 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { Button } from 'src/components/button';
 import { IconMessageSquare } from 'src/components/icons';
 
-import { InputField, TextInput as TextInputComponent } from '../input-field';
+import { InputField } from '../input-field';
+import { SelectInput } from '../select-input';
+import { TextInput as TextInputComponent } from '../text-input';
 
 type InputFieldType = typeof InputField;
 export default {
@@ -13,7 +14,7 @@ export default {
 export const TextInput: ComponentStory<InputFieldType> = (...args) => {
   return (
     <div className="mx-8 flex flex-col gap-6">
-      <InputField label="Default" {...args}>
+      <InputField label="Default">
         <TextInputComponent />
       </InputField>
       <InputField label="Hint text" hintText="This is a hint text">
@@ -45,6 +46,42 @@ export const TextInput: ComponentStory<InputFieldType> = (...args) => {
           placeholder="sixian"
           suffixNode={<IconMessageSquare size={16} />}
         />
+      </InputField>
+    </div>
+  );
+};
+
+export const Select: ComponentStory<InputFieldType> = (...args) => {
+  const items = ['Apple', 'Banana', 'Blueberry', 'Strawberry', 'Grapes'].map(
+    (f, i) => (
+      <SelectInput.Item
+        disabled={f === 'Grapes'}
+        key={`${f}-${i}`}
+        value={f.toLowerCase()}
+      >
+        {f}
+      </SelectInput.Item>
+    ),
+  );
+  return (
+    <div className="mx-8 flex flex-col gap-6">
+      <InputField label="Default">
+        <SelectInput placeholder="Select your fruit">{items}</SelectInput>
+      </InputField>
+      <InputField label="Hint text" hintText="This is a hint text">
+        <SelectInput placeholder="Select your fruit">{items}</SelectInput>
+      </InputField>
+      <InputField label="Long list" hintText="This is a long list">
+        <SelectInput placeholder="Select your fruit">
+          {Array.from({ length: 50 }, (_, i) => (
+            <SelectInput.Item key={i} value={i.toString()}>
+              {i}
+            </SelectInput.Item>
+          ))}
+        </SelectInput>
+      </InputField>
+      <InputField label="Disabled" hintText="This is disabled">
+        <SelectInput placeholder="Select your fruit" disabled />
       </InputField>
     </div>
   );
