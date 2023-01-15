@@ -9,7 +9,8 @@ import { listHoverableColor } from '../../../../styles/common';
 export type NavLinkProps = {
   children: React.ReactNode;
   href: string;
-  icon: React.ReactNode;
+  className?: string;
+  icon?: React.ReactNode;
   highlightPattern?: RegExp;
 };
 
@@ -21,7 +22,11 @@ export function NavLink(props: NavLinkProps): JSX.Element {
   return (
     <Link
       href={props.href}
-      className={clsx(navItemStyle, highlight && 'bg-gray-300')}
+      className={clsx(
+        navLinkStyle,
+        highlight && 'bg-gray-300',
+        props.className,
+      )}
     >
       {props.icon}
       <span>{props.children}</span>
@@ -29,8 +34,8 @@ export function NavLink(props: NavLinkProps): JSX.Element {
   );
 }
 
-export const navItemStyle = clsx(
+export const navLinkStyle = clsx(
   'flex flex-row items-center space-x-3 rounded py-2 px-3 text-gray-1200 w-full',
-  'text-base font-semibold leading-none',
+  'text-base font-semibold',
   listHoverableColor,
 );

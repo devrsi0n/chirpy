@@ -4,51 +4,92 @@ import { AnimatePresence, m, MotionProps } from 'framer-motion';
 import * as React from 'react';
 
 import { IconChevronDown, Link } from '../../../../components';
-import { navItemStyle } from './nav-link';
+import { navLinkStyle } from './nav-link';
 
 export type CollapsibleNavProps = {
   children: React.ReactNode;
-  trigger: React.ReactNode;
 };
 
 export function CollapsibleNav(props: CollapsibleNavProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
+  const childList = React.Children.toArray(props.children);
+  const trigger = childList.find(
+    (el) => (el as React.ReactElement).type === CollapsibleNavTrigger,
+  );
+  const content = childList.find(
+    (el) => (el as React.ReactElement).type === CollapsibleNavContent,
+  ) as React.ReactElement<
+    CollapsibleNavContentProps,
+    typeof CollapsibleNavContent
+  >;
   return (
     <Collapsible.Root open={isOpen} onOpenChange={setIsOpen}>
-      <Collapsible.Trigger className={navItemStyle}>
-        <div className="flex flex-1 items-center space-x-3">
-          {props.trigger}
-        </div>
-        <IconChevronDown
-          size={24}
-          className={clsx('transition duration-150', isOpen && 'rotate-180')}
-        />
-      </Collapsible.Trigger>
-      <Collapsible.Content forceMount>
-        <AnimatePresence>
-          {isOpen && (
-            <m.div {...slideMotion} className="ml-9" key="collapsible-content">
-              {props.children}
-            </m.div>
-          )}
-        </AnimatePresence>
-      </Collapsible.Content>
+      {trigger}
+      {content && React.cloneElement(content, { isOpen })}
     </Collapsible.Root>
   );
 }
 
-CollapsibleNav.Item = SitesNavItem;
+CollapsibleNav.Trigger = CollapsibleNavTrigger;
+CollapsibleNav.Content = CollapsibleNavContent;
+CollapsibleNav.Item = CollapsibleNavItem;
 
-export type SitesNavItemProps = {
-  href: string;
-  children: React.ReactNode;
+export type CollapsibleNavTriggerProps = Collapsible.CollapsibleTriggerProps;
+
+function CollapsibleNavTrigger(props: CollapsibleNavTriggerProps) {
+  return (
+    <Collapsible.Trigger
+      className={clsx(
+        navLinkStyle,
+        `[&>svg]:data-[state=open]:rotate-180`,
+        props.className,
+      )}
+    >
+      <div className="flex flex-1 items-center space-x-3">{props.children}</div>
+      <IconChevronDown size={24} className={clsx('transition duration-150')} />
+    </Collapsible.Trigger>
+  );
+}
+
+export type CollapsibleNavContentProps = Collapsible.CollapsibleContentProps & {
+  isOpen?: boolean;
 };
 
-function SitesNavItem(props: SitesNavItemProps) {
+function CollapsibleNavContent({
+  isOpen,
+  children,
+  ...restProps
+}: CollapsibleNavContentProps) {
   return (
-    <Link href={props.href} variant="plain" className={navItemStyle}>
-      {props.children}
-    </Link>
+    <Collapsible.Content forceMount {...restProps}>
+      <AnimatePresence>
+        {isOpen && (
+          <m.nav {...slideMotion} className="ml-9" key="collapsible-content">
+            {children}
+          </m.nav>
+        )}
+      </AnimatePresence>
+    </Collapsible.Content>
+  );
+}
+
+export type CollapsibleNavItemProps = {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+};
+
+function CollapsibleNavItem(props: CollapsibleNavItemProps) {
+  return (
+    <li>
+      <Link
+        href={props.href}
+        variant="plain"
+        className={clsx(navLinkStyle, props.className)}
+      >
+        {props.children}
+      </Link>
+    </li>
   );
 }
 

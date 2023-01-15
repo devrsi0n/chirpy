@@ -8,6 +8,11 @@ import { Menu } from '../../components/menu';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { itemStyle, MenuLink } from './menu-link';
 
+export async function handleSignOut() {
+  await signOut();
+  localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
+}
+
 export function UserMenu(): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
   const { image, name, email, username } = data;
@@ -52,10 +57,7 @@ export function UserMenu(): JSX.Element {
               align="start"
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
-              onClick={async () => {
-                await signOut();
-                localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
-              }}
+              onClick={handleSignOut}
             >
               <IconLogOut size={14} />
               <span className="w-max">Log out</span>
