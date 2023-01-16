@@ -11,13 +11,13 @@ export type TextInputProps = React.ComponentPropsWithoutRef<'input'> & {
 };
 
 export const TextInput = React.forwardRef(function TextInputComponent(
-  { error, prefixNode, suffixNode, ...inputProps }: TextInputProps,
+  { error, prefixNode, suffixNode, className, ...inputProps }: TextInputProps,
   forwardedRef: React.Ref<HTMLInputElement>,
 ): JSX.Element {
   return (
     <div
       className={clsx(
-        'max-w-sm',
+        'w-full',
         (prefixNode || suffixNode) && 'flex flex-row items-stretch',
       )}
     >
@@ -34,19 +34,21 @@ export const TextInput = React.forwardRef(function TextInputComponent(
         type="text"
         ref={forwardedRef}
         className={clsx(
+          'w-full',
           error
             ? 'focus-visible:border-red-800'
             : 'focus-visible:border-primary-800',
           error &&
             'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
           inputProps.disabled && styles.disabled,
-          'w-80 flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
+          'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
           styles.borderHover,
           styles.transition,
           styles.focus,
           'rounded-lg',
           prefixNode && 'rounded-tl-none rounded-bl-none',
           suffixNode && 'rounded-tr-none rounded-br-none',
+          className,
         )}
         {...inputProps}
       />

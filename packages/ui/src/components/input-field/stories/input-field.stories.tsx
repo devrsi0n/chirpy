@@ -1,8 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Button } from 'src/components';
+import { Divider } from 'src/components/divider';
 import { IconMessageSquare } from 'src/components/icons';
 
 import { InputField } from '../input-field';
 import { SelectInput } from '../select-input';
+import { TextAreaInput as TextAreaInputComponent } from '../text-area-input';
 import { TextInput as TextInputComponent } from '../text-input';
 
 type InputFieldType = typeof InputField;
@@ -17,15 +20,18 @@ export const TextInput: ComponentStory<InputFieldType> = (...args) => {
       <InputField label="Default">
         <TextInputComponent />
       </InputField>
-      <InputField label="Hint text" hintText="This is a hint text">
-        <TextInputComponent placeholder="alice@chirpy.dev" />
+      <InputField
+        label="Hint text"
+        hintText="This is a hint text to help user."
+      >
+        <TextInputComponent defaultValue="alice@chirpy.dev" />
       </InputField>
-      <InputField label="Disabled" hintText="This is a hint text">
+      <InputField label="Disabled" hintText="This is a hint text to help user.">
         <TextInputComponent placeholder="bob@chirpy.dev" disabled />
       </InputField>
       <InputField
         label="Error"
-        hintText="This is a hint text"
+        hintText="This is a hint text to help user."
         errorMessage="Email is invalid"
       >
         <TextInputComponent placeholder="charlie@chirpy.dev" />
@@ -68,7 +74,10 @@ export const Select: ComponentStory<InputFieldType> = (...args) => {
       <InputField label="Default">
         <SelectInput placeholder="Select your fruit">{items}</SelectInput>
       </InputField>
-      <InputField label="Hint text" hintText="This is a hint text">
+      <InputField
+        label="Hint text"
+        hintText="This is a hint text to help user."
+      >
         <SelectInput placeholder="Select your fruit">{items}</SelectInput>
       </InputField>
       <InputField label="Long list" hintText="This is a long list">
@@ -83,6 +92,90 @@ export const Select: ComponentStory<InputFieldType> = (...args) => {
       <InputField label="Disabled" hintText="This is disabled">
         <SelectInput placeholder="Select your fruit" disabled />
       </InputField>
+    </div>
+  );
+};
+
+export const TextAreaInput: ComponentStory<InputFieldType> = (...args) => {
+  return (
+    <div className="mx-8 flex flex-col gap-6">
+      <InputField label="Description">
+        <TextAreaInputComponent defaultValue="A story about Chirpy" />
+      </InputField>
+      <InputField
+        label="Hint text"
+        hintText="This is a hint text to help user."
+      >
+        <TextAreaInputComponent placeholder="Enter a description..." />
+      </InputField>
+      <InputField label="Disabled" hintText="This is a hint text to help user.">
+        <TextAreaInputComponent placeholder="This is disabled." disabled />
+      </InputField>
+      <InputField
+        label="Error"
+        hintText="This is a hint text to help user"
+        errorMessage="Email is invalid"
+      >
+        <TextAreaInputComponent placeholder="charlie@chirpy.dev" />
+      </InputField>
+    </div>
+  );
+};
+
+export const Form = () => {
+  return (
+    <div className="mx-8 flex flex-col items-center justify-center">
+      <div className="max-w-xl rounded-xl border border-gray-500 bg-white shadow-sm">
+        <div className="flex flex-col items-start justify-start gap-6 p-6">
+          <div className="flex w-full flex-row items-center justify-between gap-4">
+            <InputField label="First name">
+              <TextInputComponent defaultValue="Olivia" />
+            </InputField>
+
+            <InputField label="Last name">
+              <TextInputComponent defaultValue="Rhye" />
+            </InputField>
+          </div>
+
+          <InputField label="Description" hintText="Tell me about yourself">
+            <TextAreaInputComponent placeholder="Enter a description..." />
+          </InputField>
+
+          <InputField label="Email address">
+            <TextInputComponent
+              defaultValue="olivia"
+              suffixNode="@chirpy.dev"
+            />
+          </InputField>
+
+          <InputField label="Country">
+            <SelectInput placeholder="Select your country">
+              {[
+                'Australia',
+                'Canada',
+                'China',
+                'France',
+                'Germany',
+                'India',
+                'Japan',
+                'United Kingdom',
+                'United States',
+              ].map((c) => (
+                <SelectInput.Item key={c} value={c.toLowerCase()}>
+                  {c}
+                </SelectInput.Item>
+              ))}
+            </SelectInput>
+          </InputField>
+        </div>
+
+        {/* Footer */}
+        <Divider className="w-full" />
+        <div className="flex items-center justify-end gap-3 py-4 px-6">
+          <Button>Cancel</Button>
+          <Button>Save changes</Button>
+        </div>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import { IconChevronDown, IconChevronUp, IconCheck } from '../icons';
 import { styles } from './styles';
 
 export type SelectInputProps = RadixSelect.SelectProps &
-  Pick<RadixSelect.SelectTriggerProps, 'placeholder'>;
+  Pick<RadixSelect.SelectTriggerProps, 'placeholder'> & { className?: string };
 
 const _SelectInput = React.forwardRef(function SelectInputComponent(
   props: SelectInputProps,
@@ -24,7 +24,7 @@ const _SelectInput = React.forwardRef(function SelectInputComponent(
         <button
           className={clsx(
             props.disabled && styles.disabled,
-            'inline-flex w-80 items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
+            'inline-flex w-full min-w-[15rem] items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
             styles.borderHover,
             styles.focus,
             'focus-visible:border-primary-800',
