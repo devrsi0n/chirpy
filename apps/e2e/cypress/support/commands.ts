@@ -29,7 +29,7 @@ import { waitTrpc } from '../fixtures/utils';
 
 Cypress.Commands.add('login', () => {
   cy.intercept('/api/trpc/**').as('trpc');
-  cy.visit('/auth/sign-in?allowAnonymous=true');
+  cy.visit(`${Cypress.env('APP_ORIGIN')}/auth/sign-in?allowAnonymous=true`);
   cy.get('input[name=name]').type(Cypress.env('TEST_USER_ID'));
   cy.get('button[type=submit]').click();
   cy.wait(1000);

@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es6",
+    "isolatedModules": false,
     "types": ["cypress", "@testing-library/cypress", "node"]
   },
   "include": ["./**/*.ts"]

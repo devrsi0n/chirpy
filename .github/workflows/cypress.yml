@@ -55,5 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
+          NEXT_PUBLIC_HOME_ORIGIN: ${{ secrets.NEXT_PUBLIC_HOME_ORIGIN }}
           # DEBUG: 'cypress:*'
           # DEBUG_DEPTH: 9

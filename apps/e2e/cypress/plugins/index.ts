@@ -15,8 +15,10 @@ export default function Plugins(
 ): void | Cypress.ConfigOptions | Promise<Cypress.ConfigOptions> {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-
-  config.env.TEST_USER_ID = process.env.TEST_USER_ID?.replace(/-/g, '').slice(
+  if (!process.env.TEST_USER_ID?.length) {
+    throw new Error(`Expect env variable: TEST_USER_ID`);
+  }
+  config.env.TEST_USER_ID = process.env.TEST_USER_ID.replace(/-/g, '').slice(
     0,
     23,
   );
