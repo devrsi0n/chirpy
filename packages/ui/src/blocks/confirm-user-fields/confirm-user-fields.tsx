@@ -63,7 +63,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         } else {
           showToast({
             type: 'error',
-            title: 'Somethingwent wrong, please try again later.',
+            title: 'Something went wrong, please try again later.',
           });
         }
         return;
@@ -91,9 +91,9 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       <TextField
         className="w-full"
         {...register('name', {
-          required: { value: true, message: 'Dispaly name is required' },
+          required: { value: true, message: 'Display name is required' },
         })}
-        label="Dispaly name"
+        label="Display name"
         errorMessage={errors.name}
       />
       <TextField
