@@ -8,14 +8,20 @@ import { IconChevronDown, IconChevronUp, IconCheck } from '../icons';
 import { styles } from './styles';
 
 export type SelectInputProps = RadixSelect.SelectProps &
-  Pick<RadixSelect.SelectTriggerProps, 'placeholder'> & { className?: string };
+  Pick<RadixSelect.SelectTriggerProps, 'placeholder'> & {
+    className?: string;
+    onChange?: RadixSelect.SelectProps['onValueChange'];
+  };
 
 const _SelectInput = React.forwardRef(function SelectInputComponent(
   props: SelectInputProps,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ): JSX.Element {
   return (
-    <RadixSelect.Root {...props}>
+    <RadixSelect.Root
+      {...props}
+      onValueChange={props.onValueChange ?? props.onChange}
+    >
       <RadixSelect.Trigger
         asChild
         className="transition duration-150 ease-in-out data-[placeholder]:font-normal data-[placeholder]:text-gray-900"

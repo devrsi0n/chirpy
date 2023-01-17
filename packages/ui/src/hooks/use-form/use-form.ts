@@ -15,7 +15,7 @@ export type FormError<T> = {
   [key in keyof T]?: string;
 };
 
-export type ValidatorItem = Map<string, Validator>;
+export type ValidatorItem<T extends FieldValue> = Map<keyof T, Validator>;
 
 export function useForm<T extends FieldValue>({
   defaultValues,
@@ -23,9 +23,9 @@ export function useForm<T extends FieldValue>({
   const [fields, setFields] = React.useState<T>(defaultValues || {});
 
   const [errors, setErrors] = React.useState<FormError<T>>({});
-  const validatorMapRef = React.useRef<ValidatorItem>(new Map());
+  const validatorMapRef = React.useRef<ValidatorItem<T>>(new Map());
   const isValid = (
-    name: string,
+    name: keyof T,
     validator: Validator,
     value: string = fields[name],
   ): boolean => {
@@ -36,14 +36,14 @@ export function useForm<T extends FieldValue>({
     return !errorMessage;
   };
 
-  const register = (name: string, validator?: Validator) => {
+  const register = (name: keyof T, validator?: Validator) => {
     if (validator) {
       validatorMapRef.current.set(name, validator);
     }
-    const onChange: React.ChangeEventHandler<
-      HTMLInputElement | HTMLTextAreaElement
-    > = (e) => {
-      const { value } = e.target;
+    const onChange: (
+      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | string,
+    ) => void = (e) => {
+      const value = typeof e === 'string' ? e : e.target.value;
       setFields((prev) => ({ ...prev, [name]: value }));
       if (validator) {
         isValid(name, validator, value);
@@ -59,11 +59,20 @@ export function useForm<T extends FieldValue>({
 
   const handleSubmit = <E>(onSubmit: (data: T, event: E) => Promise<void>) => {
     const onSubmitWrapper: (e: E) => Promise<void> = async (e) => {
+      const formErrors: FormError<T> = {};
       for (const [name, validator] of validatorMapRef.current.entries()) {
-        if (!isValid(name, validator)) {
-          return;
+        const errorMessage = validate(validator, fields[name]);
+        if (errorMessage !== errors[name]) {
+          formErrors[name] = errorMessage;
         }
       }
+
+      // Show all errors at once
+      if (Object.keys(formErrors).length > 0) {
+        setErrors((prev) => ({ ...prev, ...formErrors }));
+        return;
+      }
+
       await onSubmit(fields, e);
       setFields(defaultValues);
     };

@@ -26,13 +26,20 @@ export function InputField({
   children,
   layout = 'vertical',
   className,
+  ...childrenProps
 }: InputFieldProps): JSX.Element {
   return layout === 'vertical' ? (
     <label
-      className={clsx('flex w-full flex-col items-start gap-1.5', className)}
+      className={clsx(
+        'flex h-full w-full flex-col items-start gap-1.5',
+        className,
+      )}
     >
       <p className="text-sm font-medium">{label}</p>
-      {React.cloneElement(children, { error: !!errorMessage })}
+      {React.cloneElement(children, {
+        error: !!errorMessage,
+        ...childrenProps,
+      })}
       {errorMessage && (
         <Text role="alert" variant="error" size="xs">
           {errorMessage}
