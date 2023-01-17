@@ -1,7 +1,6 @@
 import {
   violet,
   plum,
-  gray,
   blue,
   indigo,
   green,
@@ -12,7 +11,6 @@ import {
   violetDark,
   plumDark,
   grayDark,
-  mauveDark,
   blueDark,
   indigoDark,
   greenDark,
@@ -21,6 +19,7 @@ import {
   redDark,
   pinkDark,
   slateDark,
+  slate,
 } from '@radix-ui/colors';
 
 import { Theme } from '../../../../types/src/theme';
@@ -39,7 +38,7 @@ export function getColors() {
       plum: translateRadixColor(plum),
       gray: {
         0: 'hsl(0, 0%, 100%)',
-        ...translateRadixColor(gray),
+        ...translateRadixColor(slate),
       },
       blue: translateRadixColor(blue),
       indigo: translateRadixColor(indigo),
@@ -56,7 +55,7 @@ export function getColors() {
       plum: translateRadixColor(plumDark),
       gray: {
         0: grayDark.gray2,
-        ...translateRadixColor(mauveDark),
+        ...translateRadixColor(slateDark),
       },
       blue: translateRadixColor(blueDark),
       indigo: translateRadixColor(indigoDark),
