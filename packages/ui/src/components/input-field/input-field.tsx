@@ -1,6 +1,8 @@
 import clsx from 'clsx';
+import { AnimatePresence, m } from 'framer-motion';
 import React from 'react';
 
+import { easeInOutOpacity } from '../animation';
 import { Text } from '../text';
 import { SelectInputProps } from './select-input';
 import { TextInputProps } from './text-input';
@@ -40,16 +42,23 @@ export function InputField({
         error: !!errorMessage,
         ...childrenProps,
       })}
-      {errorMessage && (
-        <Text role="alert" variant="error" size="xs">
-          {errorMessage}
-        </Text>
-      )}
-      {!errorMessage && hintText && (
-        <Text variant="secondary" size="sm">
-          {hintText}
-        </Text>
-      )}
+      <AnimatePresence>
+        {errorMessage ? (
+          <m.div key={`${label}-error`} {...easeInOutOpacity}>
+            <Text role="alert" variant="error" size="sm">
+              {errorMessage}
+            </Text>
+          </m.div>
+        ) : (
+          hintText && (
+            <m.div key={`${label}-hint`} {...easeInOutOpacity}>
+              <Text variant="secondary" size="sm">
+                {hintText}
+              </Text>
+            </m.div>
+          )
+        )}
+      </AnimatePresence>
     </label>
   ) : (
     <label className={clsx('flex w-full flex-row justify-start', className)}>
@@ -63,11 +72,15 @@ export function InputField({
       </div>
       <div className="flex w-full flex-col gap-1.5">
         {React.cloneElement(children, { error: !!errorMessage })}
-        {errorMessage && (
-          <Text role="alert" variant="error" size="xs">
-            {errorMessage}
-          </Text>
-        )}
+        <AnimatePresence>
+          {errorMessage && (
+            <m.div {...easeInOutOpacity}>
+              <Text role="alert" variant="error" size="sm">
+                {errorMessage}
+              </Text>
+            </m.div>
+          )}
+        </AnimatePresence>
       </div>
     </label>
   );
