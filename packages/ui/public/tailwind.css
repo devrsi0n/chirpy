@@ -4038,6 +4038,10 @@ video {
   --tw-ring-offset-width: 2px;
 }
 
+.focus-visible\:ring-offset-1:focus-visible {
+  --tw-ring-offset-width: 1px;
+}
+
 .focus-visible\:ring-offset-bg:focus-visible {
   --tw-ring-offset-color: hsl(var(--tw-colors-bg) / 1);
 }
@@ -4045,6 +4049,11 @@ video {
 .active\:bg-indigo-700:active {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--tw-colors-indigo-700) / var(--tw-bg-opacity));
+}
+
+.enabled\:hover\:border-gray-800:hover:enabled {
+  --tw-border-opacity: 1;
+  border-color: hsl(var(--tw-colors-gray-800) / var(--tw-border-opacity));
 }
 
 .disabled\:cursor-not-allowed:disabled {
@@ -4058,6 +4067,12 @@ video {
 
 .disabled\:opacity-75:disabled {
   opacity: 0.75;
+}
+
+.disabled\:shadow-none:disabled {
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .group:hover .group-hover\:visible {

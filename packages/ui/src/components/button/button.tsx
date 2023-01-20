@@ -4,16 +4,24 @@ import * as React from 'react';
 import { BaseButton, BaseButtonProps } from './base-button';
 import styles from './button.module.scss';
 
-type Size = 'sm' | 'md' | 'lg' | 'xl';
-type Color = 'primary' | 'red' | 'gray';
-type Variant = 'solid' | 'default' | 'text' /*| 'ghost' */;
+type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+type Variant = 'primary' | 'secondary' | 'text';
 
 export type ButtonProps = BaseButtonProps & {
+  /**
+   * @default 'secondary'
+   */
   variant?: Variant;
   children: React.ReactNode;
-  color?: Color;
   disabled?: boolean;
+  danger?: boolean;
+  /**
+   * @default 'md'
+   */
   size?: Size;
+  /**
+   * @default true
+   */
   shadow?: boolean;
   /**
    * @default true
@@ -28,9 +36,9 @@ export const Button = React.forwardRef(function Button(
   ref: React.Ref<HTMLButtonElement>,
 ): JSX.Element {
   const {
-    variant = 'default',
-    color = 'gray',
+    variant = 'secondary',
     disabled = false,
+    danger = false,
     size = 'md',
     className,
     shadow = true,
@@ -67,11 +75,15 @@ export const Button = React.forwardRef(function Button(
       {...restProps}
       ref={_ref}
       className={clsx(
-        sizeStyles[size],
         className,
-        ColorVariantStyles[`${variant}-${color}` as VariantColor],
-        variant !== 'text' && shadow && `shadow-xs`,
-        rounded && `rounded-md`,
+        'transition duration-150 ease-in-out',
+        'focus-visible:ring-3 font-semibold focus:outline-none focus-visible:ring-opacity-50',
+        'h-fit',
+        sizeStyles[size],
+        danger ? VariantDangerStyles[variant] : VariantStyles[variant],
+        danger && 'focus-visible:ring-red-700',
+        variant !== 'text' && shadow && `shadow-sm`,
+        rounded && `rounded-lg`,
       )}
       onClick={clickHandler}
       disabled={disabled}
@@ -123,26 +135,24 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 }
 
 const sizeStyles: Record<Size, string> = {
-  sm: `py-1 px-2.5 text-sm space-x-1 font-semibold`,
-  md: `py-2 px-3 text-base`,
-  lg: `py-3 px-4 text-lg`,
-  xl: `py-4 px-5 text-xl`,
+  sm: `px-3.5 py-2 text-sm`,
+  md: `px-4 py-2.5 text-sm`,
+  lg: `px-4 py-2.5 text-base`,
+  xl: `px-5 py-3 text-base`,
+  '2xl': `px-7 py-4 text-lg`,
 };
 
-type VariantColor = `${Variant}-${Color}`;
+const VariantStyles: Record<Variant, string> = {
+  primary:
+    'bg-primary-900 text-whitea-1200 enabled:hover:bg-primary-1000 focus-visible:ring-primary-1000',
+  secondary:
+    'bg-gray-100 border border-gray-700 text-gray-1200 enabled:hover:border-gray-800 enabled:hover:bg-gray-300 focus-visible:ring-gray-700',
+  text: 'text-primary-1100 enabled:hover:text-primary-1200 focus-visible:ring-primary-1000',
+};
 
-type VariantColors = Record<VariantColor, string>;
-
-const ColorVariantStyles: VariantColors = {
-  'solid-primary': `bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:ring-primary-1000`,
-  'solid-red': `bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:ring-red-1000`,
-  'solid-gray': `bg-gray-1000 text-whitea-1200 hover:bg-gray-1100 focus-visible:ring-gray-1100`,
-
-  'default-primary': `border border-primary-700 text-primary-900 hover:border-primary-900 text-primary-1000`,
-  'default-red': `border border-red-700 text-red-900 hover:border-red-900 text-red-1000`,
-  'default-gray': `border text-gray-1100 hover:border-gray-900 text-gray-1200`,
-
-  'text-primary': `text-primary-900 hover:bg-gray-300`,
-  'text-red': `text-red-900 hover:bg-gray-300`,
-  'text-gray': `text-gray-1100 hover:bg-gray-300`,
+const VariantDangerStyles: Record<Variant, string> = {
+  primary: 'bg-red-900 text-whitea-1200 enabled:hover:bg-red-1000',
+  secondary:
+    'bg-gray-100 text-red-900 border border-red-700 enabled:hover:border-red-800 enabled:hover:bg-red-300 enabled:hover:text-red-1000',
+  text: 'text-red-900 enabled:hover:bg-red-300',
 };
