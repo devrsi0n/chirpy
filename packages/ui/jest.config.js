@@ -12,18 +12,25 @@ const customJestConfig = {
     '<rootDir>/scripts/jest/set-env.js',
   ],
   testMatch: ['<rootDir>/src/**/*.test.ts?(x)'],
-  moduleNameMapper: {
-    '^\\$/(.*)$': '<rootDir>/src/$1',
-  },
   moduleDirectories: ['node_modules', '<rootDir>/'],
   collectCoverageFrom: [
     '<rootDir>/src/**/*.{ts,tsx}',
     '<rootDir>/src/__tests__/',
     '!./**/*.stories.{ts,tsx}',
     '!./**/typings/',
-    '!./**/generated/',
   ],
   testEnvironment: 'jest-environment-jsdom',
 };
 
-module.exports = createJestConfig(customJestConfig);
+module.exports = async (...args) => {
+  const config = await createJestConfig(customJestConfig)(...args);
+  return {
+    ...config,
+    transformIgnorePatterns: [
+      // 'node_modules/(?!react-notion-x)',
+      // ...config.transformIgnorePatterns.filter(
+      //   (pattern) => pattern !== '/node_modules/',
+      // ),
+    ],
+  };
+};

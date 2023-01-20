@@ -46,6 +46,18 @@ jobs:
           threshold: 1
           github-token: ${{ secrets.GITHUB_TOKEN }}
           test-script: npx jest --silent=false --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
+          env:
+            NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+            HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
+            NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
+            NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ secrets.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
+            NEXT_PUBLIC_HOME_ORIGIN: ${{ secrets.NEXT_PUBLIC_HOME_ORIGIN }}
+            DATABASE_URL: ${{ secrets.DATABASE_URL }}
+            NEXT_PUBLIC_VAPID: ${{ secrets.NEXT_PUBLIC_VAPID }}
+            PRIVATE_VAPID: ${{ secrets.PRIVATE_VAPID }}
+            PROJECT_ID_VERCEL: ${{ secrets.PROJECT_ID_VERCEL }}
+            AUTH_BEARER_TOKEN: ${{ secrets.AUTH_BEARER_TOKEN }}
+            EMAIL_API_KEY: ${{ secrets.EMAIL_API_KEY }}
 
       - uses: artiomtr/jest-coverage-report-action@v2
         with:

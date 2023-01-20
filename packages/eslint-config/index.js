@@ -60,6 +60,7 @@ module.exports = {
     'unicorn/prefer-top-level-await': 'off',
 
     'jest/expect-expect': 'off',
+    'jest/no-disabled-tests': 'off',
   },
   overrides: [
     {

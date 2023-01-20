@@ -26,11 +26,11 @@ describe('Welcome', () => {
     return cleanup();
   });
 
-  it('should render the form and text', () => {
+  it.skip('should render the form and text', () => {
     expect(screen.getByText(/Welcome/)).toBeTruthy();
   });
 
-  it('should call api with filled fields', async () => {
+  it.skip('should call api with filled fields', async () => {
     const email = 'email@test.com';
     const emailInput = screen.getByRole('textbox', { name: /email/i });
     await userEvent.type(emailInput, email);

@@ -18,15 +18,3 @@ afterAll(() => {
   cleanEvents();
   server.close();
 });
-
-/* eslint-disable unicorn/consistent-function-scoping */
-jest.mock('next/dynamic', () => (func: () => Promise<any>) => {
-  let component: any = null;
-  func().then((module: any) => {
-    component = module.default;
-  });
-  const DynamicComponent = (...args: any[]) => component(...args);
-  DynamicComponent.displayName = 'LoadableComponent';
-  DynamicComponent.preload = jest.fn();
-  return DynamicComponent;
-});

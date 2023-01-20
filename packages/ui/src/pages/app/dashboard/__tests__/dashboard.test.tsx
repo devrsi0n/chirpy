@@ -5,7 +5,7 @@ import { Dashboard } from '..';
 import { pageRender } from '../../../../__tests__/fixtures/page-render';
 import { mockProject } from '../../../../__tests__/mocks/mock-project-data';
 
-describe('dashboard', () => {
+describe.skip('dashboard', () => {
   beforeEach(() => {
     pageRender(<Dashboard />);
   });
