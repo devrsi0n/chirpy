@@ -42,7 +42,7 @@ export const TextInput = React.forwardRef(function TextInputComponent(
             'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
           inputProps.disabled && styles.disabled,
           'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
-          styles.borderHover,
+          !inputProps.disabled && styles.borderHover,
           styles.transition,
           styles.focus,
           'rounded-lg',

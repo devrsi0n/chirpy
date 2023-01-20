@@ -31,7 +31,7 @@ const _SelectInput = React.forwardRef(function SelectInputComponent(
           className={clsx(
             props.disabled && styles.disabled,
             'inline-flex w-full min-w-[15rem] items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
-            styles.borderHover,
+            !props.disabled && styles.borderHover,
             styles.focus,
             'focus-visible:border-primary-800',
             styles.transition,
@@ -51,7 +51,7 @@ const _SelectInput = React.forwardRef(function SelectInputComponent(
             <RadixSelect.ScrollUpButton className="flex items-center justify-center text-gray-1200">
               <IconChevronUp />
             </RadixSelect.ScrollUpButton>
-            <RadixSelect.Viewport className="rounded-lg bg-white p-2 shadow-lg">
+            <RadixSelect.Viewport className="rounded-lg bg-gray-100 p-2 shadow-lg">
               {props.children}
             </RadixSelect.Viewport>
             <RadixSelect.ScrollDownButton className="flex items-center justify-center text-gray-1200">

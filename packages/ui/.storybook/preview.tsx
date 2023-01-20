@@ -1,9 +1,15 @@
 import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import * as React from 'react';
 
-import { CurrentUserProvider, useThemeVariables } from '../src/contexts';
+import { ColorModeSelect } from '../src/blocks/color-mode-select';
+import {
+  CurrentUserProvider,
+  SiteThemeProvider,
+  useThemeVariables,
+} from '../src/contexts';
 import { loadFeatures } from '../src/pages/app';
 
 // TODO: fix tailwind not work in storybook,
@@ -25,13 +31,18 @@ export const decorators = [
     return (
       <SessionProvider>
         {/* <CurrentUserProvider> */}
-        <style>{styles}</style>
-        <LazyMotion features={loadFeatures}>
-          <div className="h-screen bg-bg pt-6">
-            <Story />
-          </div>
-        </LazyMotion>
-        {/* </CurrentUserProvider> */}
+        <NextThemesProvider attribute="class" storageKey={'chirpy.sb.theme'}>
+          <SiteThemeProvider>
+            <style>{styles}</style>
+            <LazyMotion features={loadFeatures}>
+              <div className="h-screen bg-bg pt-6">
+                <Story />
+                <ColorModeSelect />
+              </div>
+            </LazyMotion>
+            {/* </CurrentUserProvider> */}
+          </SiteThemeProvider>
+        </NextThemesProvider>
       </SessionProvider>
     );
   },

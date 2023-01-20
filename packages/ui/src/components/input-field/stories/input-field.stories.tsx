@@ -144,7 +144,7 @@ export const Form = () => {
 
   return (
     <div className="mx-8 flex flex-col items-center justify-center">
-      <div className="max-w-xl rounded-xl border border-gray-500 bg-white shadow-sm">
+      <div className="max-w-xl rounded-xl border border-gray-500 bg-gray-100 shadow-sm">
         <div className="flex flex-col items-start justify-start gap-6 p-6">
           <div className="flex w-full flex-row items-start justify-between gap-4">
             <InputField

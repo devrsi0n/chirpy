@@ -23,7 +23,7 @@ export const TextAreaInput = React.forwardRef(function TextAreaInputComponent(
           'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
         textAreaProps.disabled && styles.disabled,
         'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
-        styles.borderHover,
+        !textAreaProps.disabled && styles.borderHover,
         styles.transition,
         styles.focus,
         'rounded-lg',
