@@ -22,6 +22,6 @@ export default function Plugins(
     0,
     23,
   );
-  config.env.APP_ORIGIN = process.env.APP_ORIGIN;
+  config.env.APP_ORIGIN = process.env.NEXT_PUBLIC_HOME_ORIGIN;
   return config;
 }
