@@ -22,6 +22,12 @@ export default function Plugins(
     0,
     23,
   );
-  config.env.APP_ORIGIN = process.env.NEXT_PUBLIC_HOME_ORIGIN;
+  if (!process.env.CYPRESS_BASE_URL) {
+    throw new Error(`Expect env variable: CYPRESS_BASE_URL`);
+  }
+  const CYPRESS_BASE_URL = process.env.CYPRESS_BASE_URL;
+  const homeUrl = new URL(CYPRESS_BASE_URL);
+  const protocol = homeUrl.protocol;
+  config.env.APP_ORIGIN = `${protocol}//app.${homeUrl.host}`;
   return config;
 }
