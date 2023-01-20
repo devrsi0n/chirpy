@@ -31,7 +31,7 @@ export const BaseButton = React.forwardRef(function BaseButton(
     <button
       {...allProps}
       className={clsx(
-        'relative inline-flex touch-none select-none flex-row items-center justify-center overflow-hidden transition duration-150 ease-in-out focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-75',
+        'relative inline-flex touch-none select-none flex-row items-center justify-center overflow-hidden transition duration-150 ease-in-out focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-75 disabled:shadow-none',
         className,
       )}
       onMouseDown={handleMouseDown}
