@@ -9,7 +9,6 @@ import { Welcome } from '../../welcome';
 setMockedUser({
   email: '',
   name: '',
-  username: '',
 });
 
 jest.mock('canvas-confetti');
