@@ -198,8 +198,7 @@ export function Profile(): JSX.Element {
               <Button
                 className="space-x-1"
                 onClick={handleClickButton}
-                variant="solid"
-                color="primary"
+                variant="primary"
                 aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
                 disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               >

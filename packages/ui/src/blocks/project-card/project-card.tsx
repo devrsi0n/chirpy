@@ -174,8 +174,8 @@ export function ProjectCard({
         <Dialog.Footer>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button
-            variant="solid"
-            color="red"
+            variant="primary"
+            danger
             onClick={handleClickConfirmDelete}
             disabled={loading}
           >

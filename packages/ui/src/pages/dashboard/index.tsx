@@ -148,8 +148,7 @@ export function Dashboard(): JSX.Element {
           <Button
             className="w-full sm:w-auto"
             disabled={hasError}
-            color="primary"
-            variant="solid"
+            variant="primary"
             onClick={handleClickSubmit}
           >
             Create

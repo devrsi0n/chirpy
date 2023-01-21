@@ -54,8 +54,7 @@ export function Custom404(): JSX.Element {
         <div className="flex items-center justify-center space-x-6">
           <Link href="/" variant="plain">
             <Button
-              variant="solid"
-              color="primary"
+              variant="primary"
               className="group space-x-1 transition hover:shadow-2xl"
             >
               <span>Back to homepage</span>

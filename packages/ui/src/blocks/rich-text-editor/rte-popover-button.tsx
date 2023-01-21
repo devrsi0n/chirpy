@@ -32,8 +32,7 @@ export function RTEPopoverButton({
           onChange={(e) => setValue(e.target.value)}
         />
         <Button
-          variant="solid"
-          color="primary"
+          variant="primary"
           size="sm"
           onClick={() => {
             onClickGo(value);

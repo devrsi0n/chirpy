@@ -99,11 +99,7 @@ function PricingCard({
         {priceDescription}&#8203;
       </Text>
       <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-        <Button
-          {...callToAction.buttonProps}
-          variant="solid"
-          className="mb-8 w-full"
-        >
+        <Button {...callToAction.buttonProps} className="mb-8 w-full">
           {callToAction.label}
         </Button>
       </Link>

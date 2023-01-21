@@ -44,12 +44,12 @@ function FullFilled(): JSX.Element {
         </Text>
       </div>
       <div className="space-x-4">
-        <Button variant="solid" color="primary">
+        <Button variant="primary">
           <Link href="/dashboard" variant="plain">
             Dashboard
           </Link>
         </Button>
-        <Button color="gray">
+        <Button>
           <Link href="/docs" variant="plain">
             Docs
           </Link>

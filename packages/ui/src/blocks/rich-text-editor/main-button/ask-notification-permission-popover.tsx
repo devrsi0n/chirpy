@@ -35,15 +35,10 @@ export function AskNotificationPermissionPopover({
             Get a push notification if there is a reply to your comment
           </Text>
           <div className="mt-5 space-x-2">
-            <Button size="sm" color="gray" onClick={onClickAskNextTime}>
+            <Button size="sm" onClick={onClickAskNextTime}>
               Ask next time
             </Button>
-            <Button
-              size="sm"
-              variant="solid"
-              color="primary"
-              onClick={onClickSure}
-            >
+            <Button size="sm" variant="primary" onClick={onClickSure}>
               Sure
             </Button>
           </div>

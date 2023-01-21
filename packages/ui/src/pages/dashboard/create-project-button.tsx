@@ -29,8 +29,7 @@ export function CreateProjectButton(
     disabledType = 'maintenanceMode';
   }
   const createButtonProps = {
-    variant: 'solid',
-    color: 'primary',
+    variant: 'primary',
     className: 'space-x-1',
   } as const;
   const createButtonChildren = (

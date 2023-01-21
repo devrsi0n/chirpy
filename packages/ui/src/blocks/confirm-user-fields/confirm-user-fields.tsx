@@ -118,8 +118,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
           hasError || loading || !!process.env.NEXT_PUBLIC_MAINTENANCE_MODE
         }
         aria-label="Save"
-        variant="solid"
-        color="primary"
+        variant="primary"
       >
         {isSaved ? (
           <IconCheck size={20} />
