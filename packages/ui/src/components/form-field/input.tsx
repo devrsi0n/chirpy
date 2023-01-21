@@ -4,14 +4,14 @@ import React from 'react';
 import { Text } from '../text';
 import { styles } from './styles';
 
-export type TextInputProps = React.ComponentPropsWithoutRef<'input'> & {
+export type InputProps = React.ComponentPropsWithoutRef<'input'> & {
   error?: boolean;
   prefixNode?: React.ReactNode;
   suffixNode?: React.ReactNode;
 };
 
-export const TextInput = React.forwardRef(function TextInputComponent(
-  { error, prefixNode, suffixNode, className, ...inputProps }: TextInputProps,
+export const Input = React.forwardRef(function InputComponent(
+  { error, prefixNode, suffixNode, className, ...inputProps }: InputProps,
   forwardedRef: React.Ref<HTMLInputElement>,
 ): JSX.Element {
   return (

@@ -3,12 +3,12 @@ import React from 'react';
 
 import { styles } from './styles';
 
-export type TextAreaInputProps = React.ComponentPropsWithoutRef<'textarea'> & {
+export type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
   error?: boolean;
 };
 
-export const TextAreaInput = React.forwardRef(function TextAreaInputComponent(
-  { error, className, ...textAreaProps }: TextAreaInputProps,
+export const TextArea = React.forwardRef(function TextArea(
+  { error, className, ...textAreaProps }: TextAreaProps,
   forwardedRef: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (

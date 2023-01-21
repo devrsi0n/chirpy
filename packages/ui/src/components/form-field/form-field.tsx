@@ -4,11 +4,11 @@ import React from 'react';
 
 import { easeInOutOpacity } from '../animation';
 import { Text } from '../text';
-import { SelectInputProps } from './select-input';
-import { TextInputProps } from './text-input';
+import { InputProps } from './input';
+import { SelectProps } from './select';
 
-export type InputFieldProps = {
-  children: React.ReactElement<TextInputProps | SelectInputProps>;
+export type FormFieldProps = {
+  children: React.ReactElement<InputProps | SelectProps>;
   label?: string;
   placeholder?: string;
   errorMessage?: string;
@@ -21,7 +21,7 @@ export type InputFieldProps = {
   layout?: 'vertical' | 'horizontal';
 };
 
-export function InputField({
+export function FormField({
   label,
   errorMessage,
   hintText,
@@ -29,7 +29,7 @@ export function InputField({
   layout = 'vertical',
   className,
   ...childrenProps
-}: InputFieldProps): JSX.Element {
+}: FormFieldProps): JSX.Element {
   return layout === 'vertical' ? (
     <label
       className={clsx(

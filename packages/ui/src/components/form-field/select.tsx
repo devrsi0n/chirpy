@@ -7,14 +7,14 @@ import { easeInOut } from '../animation';
 import { IconChevronDown, IconChevronUp, IconCheck } from '../icons';
 import { styles } from './styles';
 
-export type SelectInputProps = RadixSelect.SelectProps &
+export type SelectProps = RadixSelect.SelectProps &
   Pick<RadixSelect.SelectTriggerProps, 'placeholder'> & {
     className?: string;
     onChange?: RadixSelect.SelectProps['onValueChange'];
   };
 
-const _SelectInput = React.forwardRef(function SelectInputComponent(
-  props: SelectInputProps,
+const _Select = React.forwardRef(function SelectComponent(
+  props: SelectProps,
   forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ): JSX.Element {
   return (
@@ -93,7 +93,7 @@ const SelectItem = React.forwardRef(
   },
 );
 
-SelectItem.displayName = 'SelectInput.Item';
-export const SelectInput = Object.assign(_SelectInput, {
+SelectItem.displayName = 'Select.Item';
+export const Select = Object.assign(_Select, {
   Item: SelectItem,
 });

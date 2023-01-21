@@ -5,46 +5,43 @@ import { IconMessageSquare } from 'src/components/icons';
 import { useForm } from 'src/hooks';
 import { EMAIL_REGEXP } from 'src/utilities';
 
-import { InputField } from '../input-field';
-import { SelectInput } from '../select-input';
-import { TextAreaInput as TextAreaInputComponent } from '../text-area-input';
-import { TextInput as TextInputComponent } from '../text-input';
+import { FormField } from '../form-field';
+import { Input as TextInputComponent } from '../input';
+import { Select } from '../select';
+import { TextArea as TextAreaInputComponent } from '../text-area';
 
-type InputFieldType = typeof InputField;
+type FormFieldType = typeof FormField;
 export default {
-  title: 'Components/InputField',
-  component: InputField,
-} as ComponentMeta<InputFieldType>;
+  title: 'Components/FormField',
+  component: FormField,
+} as ComponentMeta<FormFieldType>;
 
-export const TextInput: ComponentStory<InputFieldType> = (...args) => {
+export const TextInput: ComponentStory<FormFieldType> = (...args) => {
   return (
     <div className="mx-8 flex flex-col gap-6">
-      <InputField label="Default">
+      <FormField label="Default">
         <TextInputComponent />
-      </InputField>
-      <InputField
-        label="Hint text"
-        hintText="This is a hint text to help user."
-      >
+      </FormField>
+      <FormField label="Hint text" hintText="This is a hint text to help user.">
         <TextInputComponent defaultValue="alice@chirpy.dev" />
-      </InputField>
-      <InputField label="Disabled" hintText="This is a hint text to help user.">
+      </FormField>
+      <FormField label="Disabled" hintText="This is a hint text to help user.">
         <TextInputComponent placeholder="bob@chirpy.dev" disabled />
-      </InputField>
-      <InputField
+      </FormField>
+      <FormField
         label="Error"
         hintText="This is a hint text to help user."
         errorMessage="Email is invalid"
       >
         <TextInputComponent placeholder="charlie@chirpy.dev" />
-      </InputField>
-      <InputField label="URL" hintText="Enter your domain">
+      </FormField>
+      <FormField label="URL" hintText="Enter your domain">
         <TextInputComponent prefixNode="https://" placeholder="chirpy.dev" />
-      </InputField>
-      <InputField label="Suffix" hintText="Look at my suffix">
+      </FormField>
+      <FormField label="Suffix" hintText="Look at my suffix">
         <TextInputComponent placeholder="sixian" suffixNode=".chirpy.dev" />
-      </InputField>
-      <InputField
+      </FormField>
+      <FormField
         label="Prefix and Suffix"
         hintText="Enter your subdomain"
         errorMessage="Invalid URL"
@@ -54,72 +51,66 @@ export const TextInput: ComponentStory<InputFieldType> = (...args) => {
           placeholder="sixian"
           suffixNode={<IconMessageSquare size={16} />}
         />
-      </InputField>
+      </FormField>
     </div>
   );
 };
 
-export const Select: ComponentStory<InputFieldType> = (...args) => {
+export const SelectInput: ComponentStory<FormFieldType> = (...args) => {
   const items = ['Apple', 'Banana', 'Blueberry', 'Strawberry', 'Grapes'].map(
     (f, i) => (
-      <SelectInput.Item
+      <Select.Item
         disabled={f === 'Grapes'}
         key={`${f}-${i}`}
         value={f.toLowerCase()}
       >
         {f}
-      </SelectInput.Item>
+      </Select.Item>
     ),
   );
   return (
     <div className="mx-8 flex flex-col gap-6">
-      <InputField label="Default">
-        <SelectInput placeholder="Select your fruit">{items}</SelectInput>
-      </InputField>
-      <InputField
-        label="Hint text"
-        hintText="This is a hint text to help user."
-      >
-        <SelectInput placeholder="Select your fruit">{items}</SelectInput>
-      </InputField>
-      <InputField label="Long list" hintText="This is a long list">
-        <SelectInput placeholder="Select your fruit">
+      <FormField label="Default">
+        <Select placeholder="Select your fruit">{items}</Select>
+      </FormField>
+      <FormField label="Hint text" hintText="This is a hint text to help user.">
+        <Select placeholder="Select your fruit">{items}</Select>
+      </FormField>
+      <FormField label="Long list" hintText="This is a long list">
+        <Select placeholder="Select your fruit">
           {Array.from({ length: 50 }, (_, i) => (
-            <SelectInput.Item key={i} value={i.toString()}>
+            <Select.Item key={i} value={i.toString()}>
               {i}
-            </SelectInput.Item>
+            </Select.Item>
           ))}
-        </SelectInput>
-      </InputField>
-      <InputField label="Disabled" hintText="This is disabled">
-        <SelectInput placeholder="Select your fruit" disabled />
-      </InputField>
+        </Select>
+      </FormField>
+      <FormField label="Disabled" hintText="This is disabled">
+        <Select placeholder="Select your fruit" disabled />
+      </FormField>
     </div>
   );
 };
 
-export const TextAreaInput: ComponentStory<InputFieldType> = (...args) => {
+export const TextAreaInput: ComponentStory<FormFieldType> = (...args) => {
   return (
     <div className="mx-8 flex flex-col gap-6">
-      <InputField label="Description">
+      <FormField label="Description">
         <TextAreaInputComponent defaultValue="A story about Chirpy" />
-      </InputField>
-      <InputField
-        label="Hint text"
-        hintText="This is a hint text to help user."
-      >
+      </FormField>
+      <FormField label="Hint text" hintText="This is a hint text to help user.">
         <TextAreaInputComponent placeholder="Enter a description..." />
-      </InputField>
-      <InputField label="Disabled" hintText="This is a hint text to help user.">
+      </FormField>
+      <FormField label="Disabled" hintText="This is a hint text to help user.">
         <TextAreaInputComponent placeholder="This is disabled." disabled />
-      </InputField>
-      <InputField
+      </FormField>
+      <FormField
         label="Error"
         hintText="This is a hint text to help user"
         errorMessage="Email is invalid"
       >
         <TextAreaInputComponent placeholder="charlie@chirpy.dev" />
-      </InputField>
+      </FormField>
     </div>
   );
 };
@@ -147,7 +138,7 @@ export const Form = () => {
       <div className="max-w-xl rounded-xl border border-gray-500 bg-gray-100 shadow-sm">
         <div className="flex flex-col items-start justify-start gap-6 p-6">
           <div className="flex w-full flex-row items-start justify-between gap-4">
-            <InputField
+            <FormField
               {...register('firstName', {
                 required: { value: true, message: 'First name is required' },
               })}
@@ -155,9 +146,9 @@ export const Form = () => {
               errorMessage={errors.firstName}
             >
               <TextInputComponent placeholder="Olivia" />
-            </InputField>
+            </FormField>
 
-            <InputField
+            <FormField
               {...register('lastName', {
                 required: { value: true, message: 'Last name is required' },
               })}
@@ -165,18 +156,18 @@ export const Form = () => {
               errorMessage={errors.lastName}
             >
               <TextInputComponent placeholder="Rhye" />
-            </InputField>
+            </FormField>
           </div>
 
-          <InputField
+          <FormField
             {...register('description')}
             label="Description"
             hintText="Tell me about yourself"
           >
             <TextAreaInputComponent placeholder="Enter a description..." />
-          </InputField>
+          </FormField>
 
-          <InputField
+          <FormField
             {...register('email', {
               required: { value: true, message: 'Email is required' },
               pattern: {
@@ -188,16 +179,16 @@ export const Form = () => {
             errorMessage={errors.email}
           >
             <TextInputComponent placeholder="olivia@chirpy.dev" />
-          </InputField>
+          </FormField>
 
-          <InputField
+          <FormField
             {...register('country', {
               required: { value: true, message: 'Country is required' },
             })}
             label="Country"
             errorMessage={errors.country}
           >
-            <SelectInput placeholder="Select your country">
+            <Select placeholder="Select your country">
               {[
                 'Australia',
                 'Canada',
@@ -209,12 +200,12 @@ export const Form = () => {
                 'United Kingdom',
                 'United States',
               ].map((c) => (
-                <SelectInput.Item key={c} value={c.toLowerCase()}>
+                <Select.Item key={c} value={c.toLowerCase()}>
                   {c}
-                </SelectInput.Item>
+                </Select.Item>
               ))}
-            </SelectInput>
-          </InputField>
+            </Select>
+          </FormField>
         </div>
 
         {/* Footer */}
