@@ -28,6 +28,7 @@ export default function Plugins(
   const CYPRESS_BASE_URL = process.env.CYPRESS_BASE_URL;
   const homeUrl = new URL(CYPRESS_BASE_URL);
   const protocol = homeUrl.protocol;
+  // TODO: Need to run local dev server to make app domain work on CI
   config.env.APP_ORIGIN = `${protocol}//app.${homeUrl.host}`;
   return config;
 }

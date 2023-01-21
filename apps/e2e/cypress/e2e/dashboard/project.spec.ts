@@ -1,7 +1,7 @@
 import { testUser } from '../../fixtures/user';
 import { waitTrpc } from '../../fixtures/utils';
 
-describe('Project', () => {
+describe.skip('Project', () => {
   before(() => {
     cy.login();
     Cypress.config('baseUrl', Cypress.env('APP_ORIGIN'));
