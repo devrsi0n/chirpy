@@ -56,8 +56,7 @@ export function MainButton({
   const isLoading = status === 'pending';
   const postButtonProps: Partial<ButtonProps> = {
     size: 'sm',
-    variant: 'solid',
-    color: 'primary',
+    variant: 'primary',
     disabled: isLoading || disabled,
     'aria-label': isLoading ? 'Posting' : 'Post',
   };

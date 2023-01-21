@@ -29,18 +29,19 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
-            <Button
-              variant="solid"
-              color="primary"
-              className="group space-x-1 hover:shadow-xl"
-              onClick={() => signIn()}
-            >
-              <span>{strings.callToAction.main}</span>
-              <IconArrowRight
-                size="20px"
-                className="inline-block transition group-hover:translate-x-1"
-              />
-            </Button>
+            <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
+              <Button
+                variant="primary"
+                className="group space-x-1 hover:shadow-xl"
+                onClick={() => signIn()}
+              >
+                <span>{strings.callToAction.main}</span>
+                <IconArrowRight
+                  size="20px"
+                  className="inline-block transition group-hover:translate-x-1"
+                />
+              </Button>
+            </Link>
             <Link variant="plain" href="/docs" tabIndex={-1}>
               <Button>{strings.callToAction.secondary}</Button>
             </Link>

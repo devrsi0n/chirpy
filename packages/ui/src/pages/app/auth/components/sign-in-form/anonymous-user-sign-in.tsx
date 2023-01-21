@@ -43,8 +43,7 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
         {children}
         <Button
           type="submit"
-          variant="solid"
-          color="primary"
+          variant="primary"
           className="w-full"
           disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
         >

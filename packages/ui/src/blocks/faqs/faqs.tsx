@@ -35,9 +35,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
             >{`If you can't find the answer to your question in our FAQs or documentation, our friendly support team is here to help.`}</Text>
           </div>
           <Link variant="plain" href={SUPPORT_LINK} target="_blank">
-            <Button variant="solid" color="primary">
-              Get in touch
-            </Button>
+            <Button variant="primary">Get in touch</Button>
           </Link>
         </div>
       </article>

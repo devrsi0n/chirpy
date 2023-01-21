@@ -100,7 +100,6 @@ function PricingCard({
       </Text>
       <Button
         {...callToAction.buttonProps}
-        variant="solid"
         className="mb-8 w-full"
         onClick={() => signIn()}
       >

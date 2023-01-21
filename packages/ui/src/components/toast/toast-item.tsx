@@ -51,8 +51,7 @@ export function ToastItem({
         {action && (
           <Button
             size="sm"
-            variant="solid"
-            color="primary"
+            variant="primary"
             className="ml-4"
             onClick={() => {
               action.onClick();
