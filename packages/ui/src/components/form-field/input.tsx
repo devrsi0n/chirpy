@@ -34,7 +34,7 @@ export const Input = React.forwardRef(function InputComponent(
         type="text"
         ref={forwardedRef}
         className={clsx(
-          'w-full',
+          'w-full bg-gray-0',
           error
             ? 'focus-visible:border-red-800'
             : 'focus-visible:border-primary-800',
@@ -42,7 +42,7 @@ export const Input = React.forwardRef(function InputComponent(
             'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
           inputProps.disabled && styles.disabled,
           'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
-          !inputProps.disabled && styles.borderHover,
+          !inputProps.disabled && !error && styles.borderHover,
           styles.transition,
           styles.focus,
           'rounded-lg',

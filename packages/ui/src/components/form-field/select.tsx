@@ -24,7 +24,7 @@ const _Select = React.forwardRef(function SelectComponent(
     >
       <RadixSelect.Trigger
         asChild
-        className="transition duration-150 ease-in-out data-[placeholder]:font-normal data-[placeholder]:text-gray-900"
+        className="bg-gray-0 transition duration-150 ease-in-out data-[placeholder]:font-normal data-[placeholder]:text-gray-900"
         ref={forwardedRef}
       >
         <button
