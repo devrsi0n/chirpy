@@ -1,4 +1,4 @@
-import { SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
+import { APP_ORIGIN, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
 import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
@@ -16,7 +16,7 @@ export function useSignInWindow({
   const popupWindow = React.useRef<Window | null>(null);
   const handleClickSignIn = () => {
     popupWindow.current = popupCenterWindow(
-      '/auth/sign-in?allowAnonymous=true',
+      `${APP_ORIGIN}/auth/sign-in?allowAnonymous=true`,
       '_blank',
       width,
       height,
@@ -37,7 +37,7 @@ export function useSignInWindow({
 
 function popupCenterWindow(
   url: string,
-  title: string,
+  target: string,
   width: number,
   height: number,
 ): Window | null {
@@ -66,7 +66,7 @@ function popupCenterWindow(
   }
   features.push('left=' + left, 'top=' + right, 'scrollbars=1');
 
-  const newWindow = window.open(url, title, features.join(','));
+  const newWindow = window.open(url, target, features.join(','));
   newWindow?.focus();
 
   return newWindow;

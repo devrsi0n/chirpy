@@ -60,11 +60,13 @@ module.exports = {
     'unicorn/prefer-top-level-await': 'off',
 
     'jest/expect-expect': 'off',
+    'jest/no-disabled-tests': 'off',
   },
   overrides: [
     {
       files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx'],
       rules: {
+        '@typescript-eslint/no-non-null-assertion': 'off',
         'react/display-name': 'off',
         'unicorn/prefer-event-target': 'off',
       },

@@ -15,10 +15,20 @@ export default function Plugins(
 ): void | Cypress.ConfigOptions | Promise<Cypress.ConfigOptions> {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-
-  config.env.TEST_USER_ID = process.env.TEST_USER_ID?.replace(/-/g, '').slice(
+  if (!process.env.TEST_USER_ID?.length) {
+    throw new Error(`Expect env variable: TEST_USER_ID`);
+  }
+  config.env.TEST_USER_ID = process.env.TEST_USER_ID.replace(/-/g, '').slice(
     0,
     23,
   );
+  if (!process.env.CYPRESS_BASE_URL) {
+    throw new Error(`Expect env variable: CYPRESS_BASE_URL`);
+  }
+  const CYPRESS_BASE_URL = process.env.CYPRESS_BASE_URL;
+  const homeUrl = new URL(CYPRESS_BASE_URL);
+  const protocol = homeUrl.protocol;
+  // TODO: Need to run local dev server to make app domain work on CI
+  config.env.APP_ORIGIN = `${protocol}//app.${homeUrl.host}`;
   return config;
 }

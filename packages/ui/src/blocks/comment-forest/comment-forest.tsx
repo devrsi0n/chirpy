@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
-import { BaseButton, IconArrowUp } from '../../components';
+import { BaseButton, ClientOnly, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
 import { getCommentCount } from '../../utilities/get-comment-count';
@@ -10,7 +10,7 @@ import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';
-import { UserMenu } from '../user-menu';
+import { WidgetUserMenu } from '../user-menu';
 import { OrderBy, useCommentOrderBy } from './use-comment-order-by';
 
 export type CommentForestProps = {
@@ -34,7 +34,7 @@ export function CommentForest({
         </Heading>
         <div className="flex flex-row">
           <NotificationHub />
-          <UserMenu variant="Widget" />
+          <WidgetUserMenu />
         </div>
       </div>
 
@@ -57,12 +57,14 @@ export function CommentForest({
                   setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'))
                 }
               >
-                <IconArrowUp
-                  className={clsx(
-                    'transition',
-                    orderBy === 'asc' && 'rotate-180',
-                  )}
-                />
+                <ClientOnly>
+                  <IconArrowUp
+                    className={clsx(
+                      'transition',
+                      orderBy === 'asc' && 'rotate-180',
+                    )}
+                  />
+                </ClientOnly>
               </BaseButton>
             </div>
           )}

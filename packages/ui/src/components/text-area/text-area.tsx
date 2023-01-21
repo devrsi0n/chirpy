@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { border, textInput, textInputError } from '../../styles/common';
+import { TextFieldError, TextFieldHint } from '../text-field';
 
 export type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
   label: string;
@@ -10,10 +11,18 @@ export type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
     textarea?: string;
   };
   errorMessage?: string;
+  hintText?: string;
 };
 
 export const TextArea = React.forwardRef(function TextArea(
-  { label, className, errorMessage, styles = {}, ...inputProps }: TextAreaProps,
+  {
+    label,
+    className,
+    errorMessage,
+    styles = {},
+    hintText,
+    ...inputProps
+  }: TextAreaProps,
   ref: React.Ref<HTMLTextAreaElement>,
 ): JSX.Element {
   return (
@@ -24,21 +33,15 @@ export const TextArea = React.forwardRef(function TextArea(
         name={label}
         ref={ref}
         className={clsx(
-          `rounded border px-2 leading-8`,
+          `min-h-[4.5em] rounded border px-2 leading-8`,
           textInput,
           border,
           !!errorMessage && textInputError,
           className || styles.textarea,
         )}
-        style={{
-          minHeight: '4.5em',
-        }}
       />
-      {errorMessage && (
-        <p role="alert" className="text-xs text-red-700">
-          {errorMessage}
-        </p>
-      )}
+      <TextFieldHint>{hintText}</TextFieldHint>
+      <TextFieldError message={errorMessage} />
     </label>
   );
 });

@@ -59,3 +59,8 @@ export { default as IconLogIn } from '@geist-ui/icons/logIn';
 export { default as IconLogOut } from '@geist-ui/icons/logOut';
 export { default as IconMonitor } from '@geist-ui/icons/monitor';
 export { default as IconMail } from '@geist-ui/icons/mail';
+export { default as IconBook } from '@geist-ui/icons/book';
+export { default as IconHome } from '@geist-ui/icons/home';
+export { default as IconLayers } from '@geist-ui/icons/layers';
+export { default as IconPlus } from '@geist-ui/icons/plus';
+export { default as IconFeather } from '@geist-ui/icons/feather';

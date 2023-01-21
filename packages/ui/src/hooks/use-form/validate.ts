@@ -1,3 +1,6 @@
+import { ZodError } from 'zod';
+
+import { logger } from '../../utilities';
 import { Validator } from './type';
 
 export function validate(validator: Validator, value: string): string {
@@ -24,6 +27,17 @@ export function validate(validator: Validator, value: string): string {
   }
   if (validator.minLength && value.length < validator.minLength.value) {
     errorMessage = validator.minLength.message;
+  }
+  if (validator.zod) {
+    try {
+      validator.zod.parse(value);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        errorMessage = error.issues[0].message;
+      } else {
+        logger.error(`Unexpected zod error`, error);
+      }
+    }
   }
 
   return errorMessage;

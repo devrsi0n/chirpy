@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next';
 
-import { Like, prisma } from '../common/db-client';
 import { revalidateCommentWidget } from '../common/revalidate';
+import { Like, prisma } from '../db';
 import { deleteNotificationMessage, getAuthorByCommentId } from './utilities';
 
 export type EventPayload = {

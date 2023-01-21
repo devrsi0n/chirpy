@@ -1,4 +1,4 @@
-import { getAppURL } from '@chirpy-dev/utils';
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 import { useTheme } from 'next-themes';
 import Script from 'next/script';
 import * as React from 'react';
@@ -17,7 +17,7 @@ export function CommentWidget(): JSX.Element {
       <Script
         src="/bootstrap/comment.js"
         strategy={'afterInteractive'}
-        data-chirpy-domain={new URL(getAppURL()).hostname}
+        data-chirpy-domain={new URL(HOME_ORIGIN).hostname}
       />
     </ClientOnly>
   );

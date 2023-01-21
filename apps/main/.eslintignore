@@ -1,5 +1,4 @@
 node_modules
-**/generated
 **/.next
 **/blocks/analytics
 **/public

@@ -1,4 +1,4 @@
-import { Like, User } from '@chirpy-dev/trpc';
+import { Like, User } from '@chirpy-dev/trpc/src/ui';
 import dayjs from 'dayjs';
 
 import { CommentLeafType } from '../../types';

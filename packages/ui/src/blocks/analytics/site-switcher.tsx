@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { getPublicEnvVar } from '@chirpy-dev/utils';
+
 import { Transition } from '@headlessui/react';
 import React from 'react';
 
@@ -112,10 +112,7 @@ export default class SiteSwitcher extends React.Component<SiteSwitcherProps> {
       >
         <span>
           <img
-            src={`${getPublicEnvVar(
-              'NEXT_PUBLIC_ANALYTICS_DOMAIN',
-              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
-            )}/favicon/sources/${encodeURIComponent(domain)}`}
+            src={`${process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}/favicon/sources/${encodeURIComponent(domain)}`}
             className="mr-2 inline w-4 align-middle"
             alt={`Favorite icon for ${domain}`}
           />

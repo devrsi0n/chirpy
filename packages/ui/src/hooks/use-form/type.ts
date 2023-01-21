@@ -1,3 +1,5 @@
+import { ZodType } from 'zod';
+
 export type ValidatorPatternChecker = (value: string) => boolean;
 
 export type Validator = {
@@ -17,4 +19,15 @@ export type Validator = {
     value: number;
     message: string;
   };
+  zod?: ZodType;
+};
+
+export type Register = (
+  name: string,
+  validator?: Validator,
+) => {
+  required?: boolean | undefined;
+  onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  name: string;
+  value: string;
 };

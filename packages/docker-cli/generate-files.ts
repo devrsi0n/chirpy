@@ -60,7 +60,7 @@ export async function generateFiles(
   const chirpyDCResult = await eta.render(chirpyDCFile, {
     NEXT_PUBLIC_HASURA_HTTP_ORIGIN: `https://${hasuraDomain}/v1/graphql`,
     NEXT_PUBLIC_HASURA_WS_ORIGIN: `wss://${hasuraDomain}/v1/graphql`,
-    NEXT_PUBLIC_APP_URL: chirpyURL,
+    NEXT_PUBLIC_HOME_ORIGIN: chirpyURL,
     NEXT_PUBLIC_VAPID: vapidKeys.publicKey,
     PRIVATE_VAPID: vapidKeys.privateKey,
     NEXTAUTH_URL: chirpyURL,

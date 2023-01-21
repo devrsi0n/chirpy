@@ -1,4 +1,3 @@
-import { getPublicEnvVar } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { cpDayjs, logger } from '../../utilities';
@@ -38,9 +37,7 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
       if (expirtedData && cpDayjs().isBefore(cpDayjs(expirtedData))) {
         return false;
       }
-      const vapidKey = urlBase64ToUint8Array(
-        getPublicEnvVar('NEXT_PUBLIC_VAPID', process.env.NEXT_PUBLIC_VAPID),
-      );
+      const vapidKey = urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID);
       const subscription = await registration.pushManager.subscribe({
         // This means all push events will result in a notification
         userVisibleOnly: true,

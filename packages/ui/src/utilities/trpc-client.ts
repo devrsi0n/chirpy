@@ -1,6 +1,5 @@
-import { type AppRouter } from '@chirpy-dev/trpc/src/router';
-import { getBaseUrl } from '@chirpy-dev/utils';
-import { httpLink, loggerLink } from '@trpc/client';
+import { type AppRouter } from '@chirpy-dev/trpc/src/ui';
+import { httpLink, loggerLink, TRPCClientError } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 import superjson from 'superjson';
@@ -16,7 +15,7 @@ export const trpcClient = createTRPCNext<AppRouter>({
             (opts.direction === 'down' && opts.result instanceof Error),
         }),
         httpLink({
-          url: `${getBaseUrl()}/api/trpc`,
+          url: `/api/trpc`,
         }),
       ],
       abortOnUnmount: true,
@@ -43,3 +42,9 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  * @example type HelloOutput = RouterOutputs['example']['hello']
  **/
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
+
+export function isTRPCClientError(
+  cause: unknown,
+): cause is TRPCClientError<AppRouter> {
+  return cause instanceof TRPCClientError;
+}

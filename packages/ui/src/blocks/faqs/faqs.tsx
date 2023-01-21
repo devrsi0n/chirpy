@@ -1,4 +1,4 @@
-import { FEEDBACK_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button, Heading, Link, SectionHeader, Text } from '../../components';
@@ -34,7 +34,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
               className="max-w-xs md:max-w-full"
             >{`If you can't find the answer to your question in our FAQs or documentation, our friendly support team is here to help.`}</Text>
           </div>
-          <Link variant="plain" href={FEEDBACK_LINK} target="_blank">
+          <Link variant="plain" href={SUPPORT_LINK} target="_blank">
             <Button variant="solid" color="primary">
               Get in touch
             </Button>

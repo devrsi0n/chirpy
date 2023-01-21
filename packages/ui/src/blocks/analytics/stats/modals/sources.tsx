@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
-import { getPublicEnvVar } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -115,10 +114,9 @@ class SourcesModal extends React.Component {
       <tr className="text-sm dark:text-gray-200" key={source.name}>
         <td className="p-2">
           <img
-            src={`${getPublicEnvVar(
-              'NEXT_PUBLIC_ANALYTICS_DOMAIN',
-              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
-            )}/favicon/sources/${encodeURIComponent(source.name)}`}
+            src={`${
+              process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+            }/favicon/sources/${encodeURIComponent(source.name)}`}
             className="mr-2 inline h-4 w-4 align-middle"
             alt={`Favorite icon for ${source.name}`}
           />

@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import * as React from 'react';
 
 import { CurrentUserProvider, useThemeVariables } from '../src/contexts';
-import { loadFeatures } from '../src/pages/app';
+import { loadFeatures } from '../src/pages/_app';
 
 // TODO: fix tailwind not work in storybook,
 // use the tailwind CLI to build a separated css instead.
