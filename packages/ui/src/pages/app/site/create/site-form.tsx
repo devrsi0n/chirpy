@@ -7,10 +7,10 @@ import {
 import * as React from 'react';
 
 import { TextArea, TextField } from '../../../../components';
-import { FormError, Register } from '../../../../hooks';
+import type { FieldValue, FormError, Register } from '../../../../hooks';
 
-export type SiteFormProps<T> = {
-  register: Register;
+export type SiteFormProps<T extends FieldValue> = {
+  register: Register<T>;
   errors: FormError<T>;
   children?: React.ReactNode;
   pageUrlFieldHint?: string;

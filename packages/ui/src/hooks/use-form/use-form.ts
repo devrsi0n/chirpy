@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ZodError } from 'zod';
 
 import { useToast } from '../../components';
-import { Register, Validator } from './type';
+import { FieldValue, FormError, KeyOf, Register, Validator } from './type';
 import { validate } from './validate';
 
 export type UseFormOptions<T> = {
@@ -13,15 +13,7 @@ export type UseFormOptions<T> = {
   resetAfterSubmit?: boolean;
 };
 
-export type FieldValue = {
-  [key in string]: string;
-};
-
-export type FormError<T> = {
-  [key in keyof T]?: string;
-};
-
-export type ValidatorItem<T extends FieldValue> = Map<keyof T, Validator>;
+export type ValidatorItem<T extends FieldValue> = Map<KeyOf<T>, Validator>;
 
 export function useForm<T extends FieldValue>({
   defaultValues,
@@ -32,7 +24,7 @@ export function useForm<T extends FieldValue>({
   const [errors, setErrors] = React.useState<FormError<T>>({});
   const validatorMapRef = React.useRef<ValidatorItem<T>>(new Map());
   const isValid = (
-    name: keyof T,
+    name: KeyOf<T>,
     validator: Validator,
     value: string = fields[name],
   ): boolean => {
@@ -43,7 +35,7 @@ export function useForm<T extends FieldValue>({
     return !errorMessage;
   };
 
-  const register: Register = (name: keyof T, validator?: Validator) => {
+  const register: Register<T> = (name: KeyOf<T>, validator?: Validator) => {
     if (validator) {
       validatorMapRef.current.set(name, validator);
     }
