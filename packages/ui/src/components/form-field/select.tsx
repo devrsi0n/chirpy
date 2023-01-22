@@ -30,7 +30,7 @@ const _Select = React.forwardRef(function SelectComponent(
         <button
           className={clsx(
             props.disabled && styles.disabled,
-            'inline-flex w-full min-w-[15rem] items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
+            'inline-flex w-full min-w-[15rem] touch-none select-none items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
             !props.disabled && styles.borderHover,
             styles.focus,
             'focus-visible:border-primary-800',
