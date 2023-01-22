@@ -51,7 +51,7 @@ const _Select = React.forwardRef(function SelectComponent(
             <RadixSelect.ScrollUpButton className="flex items-center justify-center text-gray-1200">
               <IconChevronUp />
             </RadixSelect.ScrollUpButton>
-            <RadixSelect.Viewport className="rounded-lg bg-gray-100 p-2 shadow-lg">
+            <RadixSelect.Viewport className="rounded-lg bg-gray-100 p-2 shadow-lg dark:bg-gray-300">
               {props.children}
             </RadixSelect.Viewport>
             <RadixSelect.ScrollDownButton className="flex items-center justify-center text-gray-1200">
