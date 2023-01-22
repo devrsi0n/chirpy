@@ -1,4 +1,3 @@
-import { getPublicEnvVar } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { cpDayjs, logger } from '../../utilities';
@@ -32,15 +31,13 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
         // Not supported
         return false;
       }
-      const expirtedData = sessionStorage.getItem(
+      const expiredData = sessionStorage.getItem(
         NOTIFICATION_REGISTER_EXPIRED_AT,
       );
-      if (expirtedData && cpDayjs().isBefore(cpDayjs(expirtedData))) {
+      if (expiredData && cpDayjs().isBefore(cpDayjs(expiredData))) {
         return false;
       }
-      const vapidKey = urlBase64ToUint8Array(
-        getPublicEnvVar('NEXT_PUBLIC_VAPID', process.env.NEXT_PUBLIC_VAPID),
-      );
+      const vapidKey = urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID);
       const subscription = await registration.pushManager.subscribe({
         // This means all push events will result in a notification
         userVisibleOnly: true,
@@ -70,5 +67,5 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
       logger.error('Service worker registration failed', error);
       throw error;
     }
-  }, [registerDevice]);
+  }, [registerDevice, isSignIn]);
 }

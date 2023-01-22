@@ -6,11 +6,10 @@ import * as React from 'react';
 
 import { ColorModeSelect } from '../src/blocks/color-mode-select';
 import {
-  CurrentUserProvider,
   SiteThemeProvider,
-  useThemeVariables,
+  useThemeVariables
 } from '../src/contexts';
-import { loadFeatures } from '../src/pages/app';
+import { loadFeatures } from '../src/pages/_app';
 
 // TODO: fix tailwind not work in storybook,
 // use the tailwind CLI to build a separated css instead.

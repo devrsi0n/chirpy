@@ -1,8 +1,9 @@
-import { EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
+import { API_URL, EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
 import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
 import type { PagePayload } from '../../../main/src/server/services/page';
 import type { ResponseError } from '../../../main/src/server/types/error';
+import { WIDGET_DOMAIN } from './constants';
 import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,
@@ -42,13 +43,17 @@ export async function initCommentWidget(): Promise<void> {
     );
   }
   const { origin, pathname } = window.location;
-  const res = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_APP_URL
-    }/api/page?domain=${domain}&url=${encodeURIComponent(
-      origin + pathname,
-    )}&title=${encodeURIComponent(window.document.title)}`,
-  );
+  let res: Response;
+  try {
+    res = await fetch(
+      `${API_URL}/page?domain=${domain}&url=${encodeURIComponent(
+        origin + pathname,
+      )}&title=${encodeURIComponent(window.document.title)}`,
+    );
+  } catch (error) {
+    console.error(`Failed to fetch page: ${error}`);
+    throw error;
+  }
   const page: PagePayload = await res.json();
   if (isResponseError(page)) {
     if (page.code == ERR_UNMATCHED_DOMAIN) {
@@ -75,7 +80,7 @@ export async function initCommentWidget(): Promise<void> {
     'message',
     (event) => {
       if (
-        event.origin === process.env.NEXT_PUBLIC_APP_URL &&
+        event.origin === WIDGET_DOMAIN &&
         event.data?.height &&
         event.data?.height !== previousHeight
       ) {
@@ -89,9 +94,9 @@ export async function initCommentWidget(): Promise<void> {
     sendMessageToIframe(iframe, EVENT_CLICK_CONTAINER);
   });
   observeWidgetLoadedEvent(iframe);
-  iframe.src = `${
-    process.env.NEXT_PUBLIC_APP_URL
-  }/widget/comment/${encodeURIComponent(page.url)}?referrer=${location.origin}`;
+  iframe.src = `${WIDGET_DOMAIN}/comment/${encodeURIComponent(
+    page.url,
+  )}?referrer=${location.origin}`;
   observeAndBroadcastThemeChange(iframe, renderTarget);
   renderTarget.append(iframe);
 }

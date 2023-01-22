@@ -2,7 +2,7 @@ import { JSONContent } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
 /**
- * type of
+ * validator of type
  * ```ts
  * export declare type JSONContent = {
  *  type?: string;

@@ -1,4 +1,4 @@
-import { ANALYTICS_DOMAIN, getPublicEnvVar } from '@chirpy-dev/utils';
+import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import React from 'react';
 import FlipMove from 'react-flip-move';
@@ -171,10 +171,9 @@ export default class Referrers extends React.Component<
               disabled={referrer.name === 'Direct / None'}
             >
               <img
-                src={`${getPublicEnvVar(
-                  'NEXT_PUBLIC_ANALYTICS_DOMAIN',
-                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
-                )}/favicon/sources/${encodeURIComponent(referrer.name)}`}
+                src={`${
+                  process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN
+                }/favicon/sources/${encodeURIComponent(referrer.name)}`}
                 referrerPolicy="no-referrer"
                 className="mr-2 -mt-px inline h-4 w-4 align-middle"
                 alt={`Favorite icon for ${referrer.name}`}

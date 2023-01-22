@@ -133,6 +133,7 @@ model Page {
   @@index([projectId])
 }
 
+// For comment widget
 model Project {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -168,6 +169,7 @@ model Session {
   @@index([userId])
 }
 
+// Deprecated, link member to project directly
 model Team {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
@@ -187,11 +189,10 @@ model User {
   emailVerified                 DateTime?
   image                         String?                    @db.Text
   username                      String?                    @unique
-  type                          String?
   bio                           String?
   website                       String?
   twitterUserName               String?
-  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
+  kind                          UserKind                   @default(USER)
   accounts                      Account[]
   comments                      Comment[]
   likes                         Like[]
@@ -201,14 +202,41 @@ model User {
   notificationSubscriptions     NotificationSubscription[]
   projects                      Project[]
   sessions                      Session[]
+  // User as blog site manager
+  managedBlogSites              BlogSite[]
+  // User as blog site member
+  blogSiteMembers               BlogSiteMember[]
+  // User as docs site manager
+  managedDocsSites              DocsSite[]
+  // User as docs site member
+  docsSiteMembers               DocsSiteMember[]
+  // Null means free plan
+  planId                        String?
+  plan                          Plan?                      @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
+  // Deprecated
+  type                          String?
+  // Deprecated
+  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
 
+  @@index([kind])
+  @@index([email])
+  @@index([planId])
   @@index([type])
 }
 
+// Deprecated
 model UserType {
   value   String  @id
   comment String?
   users   User[]
+}
+
+enum UserKind {
+  ADMIN
+  // Normal user with email or social accounts
+  USER
+  // User without email
+  ANONYMOUS
 }
 
 model VerificationToken {
@@ -218,4 +246,149 @@ model VerificationToken {
   id         String   @id @default(cuid())
 
   @@unique([identifier, token])
+}
+
+model BlogSite {
+  id           String           @id @default(cuid())
+  name         String
+  subdomain    String           @unique
+  // Notion page url
+  pageUrl      String           @db.Text
+  // Notion page record map
+  recordMap    Json
+  description  String?          @db.Text
+  logo         String?
+  customDomain String?          @unique
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  managerId    String
+  manager      User             @relation(fields: [managerId], references: [id])
+  posts        Post[]
+  members      BlogSiteMember[]
+
+  @@index([managerId])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  // Notion page id
+  pageId    String
+  slug      String   @default(cuid())
+  // Notion page content record map
+  recordMap Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  site      BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId    String
+
+  // Slug is unique per site, but not unique globally
+  @@unique([slug, siteId], name: "post_slug_site_constraint")
+  // Page id is unique per site, but not unique globally
+  @@unique([pageId, siteId], name: "post_pageId_site_constraint")
+  @@index([siteId])
+  @@index([slug])
+}
+
+enum BlogSiteRole {
+  EDITOR
+}
+
+model BlogSiteMember {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  role      BlogSiteRole
+  siteId    String
+  site      BlogSite     @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([siteId, userId])
+  @@index([role])
+  @@index([userId])
+}
+
+model DocsSite {
+  id           String           @id @default(cuid())
+  name         String
+  subdomain    String           @unique
+  // Notion page url
+  pageUrl      String           @db.Text
+  // Notion page record map
+  recordMap    Json
+  description  String?          @db.Text
+  logo         String?
+  customDomain String?          @unique
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  managerId    String
+  manager      User             @relation(fields: [managerId], references: [id])
+  docs         Doc[]
+  members      DocsSiteMember[]
+
+  @@index([managerId])
+}
+
+model Doc {
+  id        String   @id @default(cuid())
+  // Notion page id
+  pageId    String
+  slug      String   @default(cuid())
+  // Notion page content record map
+  recordMap Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  siteId    String
+  site      DocsSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  // Slug is unique per site, but not unique globally
+  @@unique([slug, siteId], name: "doc_slug_docsSite_constraint")
+  // Page id is unique per site, but not unique globally
+  @@unique([pageId, siteId], name: "doc_pageId_docsSite_constraint")
+  @@index([siteId])
+  @@index([slug])
+}
+
+enum DocsSiteRole {
+  EDITOR
+}
+
+model DocsSiteMember {
+  id        String       @id @default(cuid())
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  role      DocsSiteRole
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId    String
+  site      DocsSite     @relation(fields: [siteId], references: [id])
+
+  @@unique([siteId, userId])
+  @@index([role])
+  @@index([userId])
+}
+
+enum PlanType {
+  FREE // Free 14 days trial, 1k pv
+  USAGE1 // 5k pv / month
+  USAGE2 // 10k pv / month
+  USAGE3 // 25K pv / month
+  USAGE4 // 50K pv / month
+  USAGE5 // 100K pv / month
+  USAGE6 // 500K pv / month
+  USAGE7 // 1m pv / month
+  // ENTERPRISE
+}
+
+// Payment subscription plan (monthly)
+model Plan {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  type      PlanType @unique
+  // Page view upper limit
+  pv        Int
+  users     User[]
 }

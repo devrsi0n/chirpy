@@ -1,3 +1,4 @@
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 import Link from 'next/link';
 import * as React from 'react';
 
@@ -14,7 +15,7 @@ function MaintenanceBannerInner(): JSX.Element {
   return (
     <Banner title="System maintenance">
       {`Check out `}
-      <Link target="_blank" href="/docs/system-maintenance">
+      <Link target="_blank" href={`${HOME_ORIGIN}/docs/system-maintenance`}>
         details
       </Link>
     </Banner>

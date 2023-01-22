@@ -1,10 +1,16 @@
 import * as React from 'react';
+import { ZodError } from 'zod';
 
-import { Validator } from './type';
+import { useToast } from '../../components';
+import { Register, Validator } from './type';
 import { validate } from './validate';
 
 export type UseFormOptions<T> = {
   defaultValues: T;
+  /**
+   * @default true
+   */
+  resetAfterSubmit?: boolean;
 };
 
 export type FieldValue = {
@@ -19,6 +25,7 @@ export type ValidatorItem<T extends FieldValue> = Map<keyof T, Validator>;
 
 export function useForm<T extends FieldValue>({
   defaultValues,
+  resetAfterSubmit = true,
 }: UseFormOptions<T>) {
   const [fields, setFields] = React.useState<T>(defaultValues || {});
 
@@ -36,7 +43,7 @@ export function useForm<T extends FieldValue>({
     return !errorMessage;
   };
 
-  const register = (name: keyof T, validator?: Validator) => {
+  const register: Register = (name: keyof T, validator?: Validator) => {
     if (validator) {
       validatorMapRef.current.set(name, validator);
     }
@@ -56,7 +63,7 @@ export function useForm<T extends FieldValue>({
       ...(validator?.required && { required: true }),
     };
   };
-
+  const { showToast } = useToast();
   const handleSubmit = <E>(onSubmit: (data: T, event: E) => Promise<void>) => {
     const onSubmitWrapper: (e: E) => Promise<void> = async (e) => {
       const formErrors: FormError<T> = {};
@@ -73,8 +80,24 @@ export function useForm<T extends FieldValue>({
         return;
       }
 
-      await onSubmit(fields, e);
-      setFields(defaultValues);
+      try {
+        await onSubmit(fields, e);
+      } catch (error) {
+        if (error instanceof ZodError) {
+          showToast({
+            type: 'error',
+            title: 'Validation error',
+            description: error.issues[0].message,
+            persistent: true,
+          });
+        }
+        // Don't throw error to the surface
+        // just prevent from resetting fields
+        return;
+      }
+      if (resetAfterSubmit) {
+        setFields(defaultValues);
+      }
     };
     return onSubmitWrapper;
   };

@@ -1,9 +1,10 @@
 import { NotificationType_Enum } from '@chirpy-dev/types';
-import { FEEDBACK_LINK, getPublicEnvVar } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { log } from 'next-axiom';
 import webpush, { PushSubscription } from 'web-push';
 
-import { prisma, NotificationSubscription } from '../common/db-client';
+import { prisma } from '../db/client';
+import { NotificationSubscription } from '../db/types';
 import { NotificationPayload } from './types';
 
 export type WebNotificationPayload = {
@@ -52,11 +53,8 @@ export function pushWebNotification(payload: NotificationPayload) {
 
 const WEB_PUSH_OPTIONS: webpush.RequestOptions = {
   vapidDetails: {
-    subject: FEEDBACK_LINK,
-    publicKey: getPublicEnvVar(
-      'NEXT_PUBLIC_VAPID',
-      process.env.NEXT_PUBLIC_VAPID,
-    ),
+    subject: SUPPORT_LINK,
+    publicKey: process.env.NEXT_PUBLIC_VAPID,
     privateKey: process.env.PRIVATE_VAPID,
   },
   ...(process.env.PROXY && { proxy: process.env.PROXY }),

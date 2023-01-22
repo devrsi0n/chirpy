@@ -1,0 +1,1486 @@
+{
+  "block": {
+    "00019651-a18b-4260-8fd3-c9e7aa1d8a4e": {
+      "role": "reader",
+      "value": {
+        "id": "00019651-a18b-4260-8fd3-c9e7aa1d8a4e",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "f58df94a-591e-4c95-9135-a689fb01c299",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["Source: "],
+            [
+              "Food Icons on the Evolving Role of Mexican Cuisine in LA",
+              [
+                [
+                  "a",
+                  "http://blogs.getty.edu/iris/5-food-icons-on-the-evolving-role-of-mexican-cuisine-in-la/"
+                ]
+              ]
+            ]
+          ]
+        },
+        "copied_from": "f58df94a-591e-4c95-9135-a689fb01c299",
+        "created_time": 1671777962449,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962449,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "071b67dd-0a2c-414f-a6a7-7abf964fb4b2": {
+      "role": "reader",
+      "value": {
+        "id": "071b67dd-0a2c-414f-a6a7-7abf964fb4b2",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "df55ca10-5c1f-40dc-bdd9-16a7b27d34b6",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            [
+              "SS: This panel represents Mexican American cuisine in LA. What other kinds of Latin American cuisine or particular dishes from other regions do you like?",
+              [["b"]]
+            ]
+          ]
+        },
+        "copied_from": "df55ca10-5c1f-40dc-bdd9-16a7b27d34b6",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "0840c91b-8888-4490-9ba9-639d8c964f95": {
+      "role": "reader",
+      "value": {
+        "id": "0840c91b-8888-4490-9ba9-639d8c964f95",
+        "type": "header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "081dbd75-1efd-4be0-be34-3b85d0fc0aca",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "5a5e4f66-f45d-4394-8547-6df22cd00eb7",
+        "properties": {
+          "title": [
+            [
+              "🔗 Customize my site on Chirpy",
+              [["a", "https://app.chirpy.dev"]]
+            ]
+          ]
+        },
+        "copied_from": "081dbd75-1efd-4be0-be34-3b85d0fc0aca",
+        "created_time": 1671777962445,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962445,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "107b417c-8a90-454c-ba9b-ec1758ec8e88": {
+      "role": "reader",
+      "value": {
+        "id": "107b417c-8a90-454c-ba9b-ec1758ec8e88",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "29b450a8-d4e0-4029-a908-03efc51914a0",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["JG:", [["b"]]],
+            [
+              " El Salvadoreño cooking. It’s very basic, but the ways they use corn and greens and cheese. The fermentations are lovely."
+            ]
+          ]
+        },
+        "copied_from": "29b450a8-d4e0-4029-a908-03efc51914a0",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "117a1095-89be-46aa-ade4-fa3740e182dc": {
+      "role": "reader",
+      "value": {
+        "id": "117a1095-89be-46aa-ade4-fa3740e182dc",
+        "type": "header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "075372a2-f568-49da-ba1a-6a18f64176a7",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "properties": {
+          "title": [
+            [
+              "30 Reasons to Visit Belize in Photos: Landscapes, Food & Wildlife"
+            ]
+          ]
+        },
+        "copied_from": "075372a2-f568-49da-ba1a-6a18f64176a7",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "15d53c20-d3b4-4617-b939-fffcdf0bbc45": {
+      "role": "reader",
+      "value": {
+        "id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "type": "page",
+        "alive": true,
+        "format": {
+          "page_icon": "🧑‍💻",
+          "copied_from_pointer": {
+            "id": "498decf2-602b-4531-8f8a-d8298651eed7",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "content": [
+          "65c4a56e-42c0-4dc9-8c57-6e75dcb8df98",
+          "a785a475-9a9c-4d4b-9fd7-63b594bf2a37",
+          "42362c96-ee66-4299-bef0-2baea01f720d",
+          "eeb0e5cd-b65a-4cff-b556-58af8c60b484",
+          "835a7faa-3d57-4e3b-a5e4-d5b99f54b6c0",
+          "92b6d4cd-f155-4bd3-b2e6-e675537043bb",
+          "d58debe9-d5a8-4629-88fd-5f37d8ad610f",
+          "dbf82464-db39-48d2-a300-5032439609ab",
+          "8007bb77-06ea-451c-ac8e-77bfc5899b1d",
+          "c797310a-5ae2-4d83-92c5-fcd2804c6881"
+        ],
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+        "properties": {
+          "W;Di": [["engineering"]],
+          "b|oC": [["Yes"]],
+          "rXaI": [["‣", [["u", "320e6b10-f1e9-4529-b6b7-bada27f37ede"]]]],
+          "title": [["Why Chirpy migrate GraphQL to tRPC?"]]
+        },
+        "copied_from": "498decf2-602b-4531-8f8a-d8298651eed7",
+        "created_time": 1671777962446,
+        "parent_table": "collection",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962446,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "174e6bec-2a25-400f-8250-9993ca58e273": {
+      "role": "reader",
+      "value": {
+        "id": "174e6bec-2a25-400f-8250-9993ca58e273",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "d9100205-767f-4b2a-9459-427270c2f86a",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["RG:", [["b"]]],
+            [
+              " My personal approach to food is more of a craftsman. I like having my tools in hand, sort of creating and building, and my approach is much more trial and error. It’s part social scientist, and part repair person or builder. I put food out, and wait for the reaction, and see what we can push, what we can improve."
+            ]
+          ]
+        },
+        "copied_from": "d9100205-767f-4b2a-9459-427270c2f86a",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "1d54c1c9-883a-4c76-ad72-8f15e4dae4ca": {
+      "role": "reader",
+      "value": {
+        "id": "1d54c1c9-883a-4c76-ad72-8f15e4dae4ca",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "d4324b64-c0b2-49a8-8371-ff97beae61ab",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["JG:", [["b"]]],
+            [
+              " I’m a writer. Some people can call writers artists, some people cannot. In terms of food, there are people who approach cuisine from an art angle. Carlos Salgado is astonishing that way. His food is rooted in Mexican flavors, but there’s this level of abstraction in his food. Is it art as opposed to food? No, it’s food, but it’s being approached in a different way."
+            ]
+          ]
+        },
+        "copied_from": "d4324b64-c0b2-49a8-8371-ff97beae61ab",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "249c0f76-9ff2-4542-bbfe-3596c13a5db1": {
+      "role": "reader",
+      "value": {
+        "id": "249c0f76-9ff2-4542-bbfe-3596c13a5db1",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "b2e2311c-e693-4d20-880f-12623ce43db2",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [["Tamale with pepitas at Taco María in Costa Mesa"]]
+        },
+        "copied_from": "b2e2311c-e693-4d20-880f-12623ce43db2",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "29ff12b2-c814-4cef-82c3-aa6943a87757": {
+      "role": "reader",
+      "value": {
+        "id": "29ff12b2-c814-4cef-82c3-aa6943a87757",
+        "type": "image",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "0f703d55-0029-4ba0-af5e-1b1ab588ffab",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "source": [
+            [
+              "https://s3-us-west-2.amazonaws.com/public.notion-static.com/88676b3e-f102-4307-a850-8c1cf98f7794/edgar-castrejon-459814-unsplash.jpg"
+            ]
+          ]
+        },
+        "copied_from": "0f703d55-0029-4ba0-af5e-1b1ab588ffab",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "32c71edf-e563-48ff-8a0b-8c2d31549a87": {
+      "role": "reader",
+      "value": {
+        "id": "32c71edf-e563-48ff-8a0b-8c2d31549a87",
+        "type": "image",
+        "alive": true,
+        "format": {
+          "block_width": 1024,
+          "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7250b747-1af5-47c4-8e6c-a0c50d21967c/Untitled.png",
+          "block_full_width": false,
+          "block_page_width": true,
+          "block_aspect_ratio": 0.75,
+          "copied_from_pointer": {
+            "id": "9548750b-edf6-4d33-bbed-7ad370d3fb9c",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "block_preserve_scale": true
+        },
+        "version": 1,
+        "file_ids": ["7250b747-1af5-47c4-8e6c-a0c50d21967c"],
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "properties": {
+          "size": [["2080.3KB"]],
+          "title": [["Untitled"]],
+          "source": [
+            [
+              "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7250b747-1af5-47c4-8e6c-a0c50d21967c/Untitled.png"
+            ]
+          ]
+        },
+        "copied_from": "9548750b-edf6-4d33-bbed-7ad370d3fb9c",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "34ab5753-4457-4c2f-a32a-ac7402df9aaf": {
+      "role": "reader",
+      "value": {
+        "id": "34ab5753-4457-4c2f-a32a-ac7402df9aaf",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "d9e39bd1-9314-4a2e-a773-054cd1613ed7",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            [
+              "A conversation with Ray Garcia, Jonathan Gold, Evan Kleiman, Bricia Lopez, and Carlos Salgado about the evolving role of Mexican cuisine in LA as culture, art, and craft"
+            ]
+          ]
+        },
+        "copied_from": "d9e39bd1-9314-4a2e-a773-054cd1613ed7",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "37a426d9-aba1-4ff8-b380-71ec0ea7cde6": {
+      "role": "reader",
+      "value": {
+        "id": "37a426d9-aba1-4ff8-b380-71ec0ea7cde6",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "a878e576-5c3d-4973-8d23-93dbdc4537f3",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            [
+              "In the Getty Center auditorium for the recent “There Will Be Food“ panel."
+            ]
+          ]
+        },
+        "copied_from": "a878e576-5c3d-4973-8d23-93dbdc4537f3",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "37e1dc7e-83ba-4f0d-9390-91cd53c8f751": {
+      "role": "reader",
+      "value": {
+        "id": "37e1dc7e-83ba-4f0d-9390-91cd53c8f751",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "36066910-e8cb-416b-b574-7f8e83f507f6",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "5a5e4f66-f45d-4394-8547-6df22cd00eb7",
+        "copied_from": "36066910-e8cb-416b-b574-7f8e83f507f6",
+        "created_time": 1671777962445,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962445,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "42362c96-ee66-4299-bef0-2baea01f720d": {
+      "role": "reader",
+      "value": {
+        "id": "42362c96-ee66-4299-bef0-2baea01f720d",
+        "type": "sub_header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "73e43eb3-da93-4358-afe5-b50babe34f27",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": { "title": [["The Benefits of tRPC"]] },
+        "copied_from": "73e43eb3-da93-4358-afe5-b50babe34f27",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "52e24391-ef38-42fe-83a8-de5c9e03b674": {
+      "role": "reader",
+      "value": {
+        "id": "52e24391-ef38-42fe-83a8-de5c9e03b674",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "ac745fb9-0080-43e3-ae0e-67a5faef9f32",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["EK:", [["b"]]],
+            [
+              " Art to me often has an intellectual component. I think of food preparation as a craft–I don’t think of it as art."
+            ]
+          ]
+        },
+        "copied_from": "ac745fb9-0080-43e3-ae0e-67a5faef9f32",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "5a5e4f66-f45d-4394-8547-6df22cd00eb7": {
+      "role": "reader",
+      "value": {
+        "id": "5a5e4f66-f45d-4394-8547-6df22cd00eb7",
+        "type": "page",
+        "alive": true,
+        "format": {
+          "page_icon": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7630148e-6131-4cf4-ac68-26162ac643bd/favicon.png",
+          "copied_from_pointer": {
+            "id": "c1c17f47-bb36-4b12-a847-db9d5d4edf70",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "content": [
+          "611e1ff5-25fc-425a-b6e7-1e7db5f2e511",
+          "0840c91b-8888-4490-9ba9-639d8c964f95",
+          "37e1dc7e-83ba-4f0d-9390-91cd53c8f751"
+        ],
+        "version": 7,
+        "file_ids": ["7630148e-6131-4cf4-ac68-26162ac643bd"],
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "properties": { "title": [["Chirpy blog template"]] },
+        "copied_from": "c1c17f47-bb36-4b12-a847-db9d5d4edf70",
+        "permissions": [
+          {
+            "role": "editor",
+            "type": "user_permission",
+            "user_id": "a310beb0-ba25-483d-80a8-166f8ba45458"
+          },
+          {
+            "role": "reader",
+            "type": "public_permission",
+            "added_timestamp": 1671777968672
+          }
+        ],
+        "created_time": 1671777962449,
+        "parent_table": "space",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777960000,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "603677b1-3573-463b-b49a-44a98c3e7330": {
+      "role": "reader",
+      "value": {
+        "id": "603677b1-3573-463b-b49a-44a98c3e7330",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "4751ef6b-0afa-42ff-86b3-2842469455bc",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "copied_from": "4751ef6b-0afa-42ff-86b3-2842469455bc",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "611e1ff5-25fc-425a-b6e7-1e7db5f2e511": {
+      "role": "reader",
+      "value": {
+        "id": "611e1ff5-25fc-425a-b6e7-1e7db5f2e511",
+        "type": "collection_view",
+        "alive": true,
+        "format": {
+          "collection_pointer": {
+            "id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+            "table": "collection",
+            "spaceId": "f2b5bac7-289e-4eeb-be38-01b96321f4e4"
+          },
+          "copied_from_pointer": {
+            "id": "6fa6c41d-c3de-434f-9a99-14dc58dafee0",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "view_ids": [
+          "dc4cebf6-793b-494f-93c4-f108f99bb15f",
+          "fbde5778-c3af-4bef-988f-19a7deeac12d"
+        ],
+        "parent_id": "5a5e4f66-f45d-4394-8547-6df22cd00eb7",
+        "copied_from": "6fa6c41d-c3de-434f-9a99-14dc58dafee0",
+        "created_time": 1671777962446,
+        "parent_table": "block",
+        "collection_id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962446,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "65c4a56e-42c0-4dc9-8c57-6e75dcb8df98": {
+      "role": "reader",
+      "value": {
+        "id": "65c4a56e-42c0-4dc9-8c57-6e75dcb8df98",
+        "type": "sub_header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "d54d0d9a-891b-4fd3-896a-139776be32fa",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": { "title": [["Introduction"]] },
+        "copied_from": "d54d0d9a-891b-4fd3-896a-139776be32fa",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "7a47f7cf-e952-4c41-8639-f9d99d26b537": {
+      "role": "reader",
+      "value": {
+        "id": "7a47f7cf-e952-4c41-8639-f9d99d26b537",
+        "type": "header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "d9b6788c-e271-4906-bf1e-1b8baa3adcbb",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "properties": { "title": [["Where is Belize Located?"]] },
+        "copied_from": "d9b6788c-e271-4906-bf1e-1b8baa3adcbb",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "8007bb77-06ea-451c-ac8e-77bfc5899b1d": {
+      "role": "reader",
+      "value": {
+        "id": "8007bb77-06ea-451c-ac8e-77bfc5899b1d",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "ba3d1706-ad17-496c-a2aa-831a74baab2b",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": {
+          "title": [
+            [
+              "At Chirpy, we are always looking for ways to improve our user experience. After careful consideration, we decided to migrate our GraphQL API to tRPC. This change will provide users with improved performance, faster response times, greater scalability, and enhanced security. We have also provided users with extensive documentation and dedicated support to help them make the switch. We are confident that this transition will be beneficial for all users of Chirpy."
+            ]
+          ]
+        },
+        "copied_from": "ba3d1706-ad17-496c-a2aa-831a74baab2b",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "835a7faa-3d57-4e3b-a5e4-d5b99f54b6c0": {
+      "role": "reader",
+      "value": {
+        "id": "835a7faa-3d57-4e3b-a5e4-d5b99f54b6c0",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "96280831-29cb-467f-b888-3bcb740f85d3",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": {
+          "title": [
+            [
+              "Finally, tRPC is more secure than GraphQL. It has built-in mechanisms for authentication and authorization, allowing us to provide a secure connection for our users."
+            ]
+          ]
+        },
+        "copied_from": "96280831-29cb-467f-b888-3bcb740f85d3",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "92b6d4cd-f155-4bd3-b2e6-e675537043bb": {
+      "role": "reader",
+      "value": {
+        "id": "92b6d4cd-f155-4bd3-b2e6-e675537043bb",
+        "type": "sub_header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "8b449d84-4471-42f5-a843-85fd205dd5f6",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": { "title": [["Making the Switch"]] },
+        "copied_from": "8b449d84-4471-42f5-a843-85fd205dd5f6",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "a202c7ea-0bcf-444d-8d88-a232224c09ac": {
+      "role": "reader",
+      "value": {
+        "id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "type": "page",
+        "alive": true,
+        "format": {
+          "page_icon": "🏝️",
+          "page_cover": "https://images.unsplash.com/photo-1545579133-99bb5ab189bd?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+          "copied_from_pointer": {
+            "id": "6c4f714f-503d-4941-84ff-cb2d3232c357",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "page_cover_position": 0.5
+        },
+        "content": [
+          "7a47f7cf-e952-4c41-8639-f9d99d26b537",
+          "bdb75d5c-fe57-459d-9722-e151cff4d412",
+          "cfa02621-6f4c-4237-8a54-b8d93572b9bf",
+          "117a1095-89be-46aa-ade4-fa3740e182dc",
+          "32c71edf-e563-48ff-8a0b-8c2d31549a87",
+          "d8981c20-4188-45e4-a5e2-6d68d4518b92",
+          "b7b5ade8-d4d8-4d6e-b69c-e1067487b997"
+        ],
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+        "properties": {
+          "W;Di": [["travel"]],
+          "b|oC": [["Yes"]],
+          "rXaI": [["‣", [["u", "320e6b10-f1e9-4529-b6b7-bada27f37ede"]]]],
+          "title": [
+            ["Beautiful, Unbelizeable visit to Belize!", [["b"], ["b"]]]
+          ]
+        },
+        "copied_from": "6c4f714f-503d-4941-84ff-cb2d3232c357",
+        "created_time": 1671777962446,
+        "parent_table": "collection",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962446,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "a785a475-9a9c-4d4b-9fd7-63b594bf2a37": {
+      "role": "reader",
+      "value": {
+        "id": "a785a475-9a9c-4d4b-9fd7-63b594bf2a37",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "ea20134b-4411-41dd-96a1-9c46d2512cf0",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": {
+          "title": [
+            [
+              "At Chirpy, we strive to provide the best user experience possible. Recently, we made the decision to migrate our GraphQL API to a tRPC API. In this blog post, we will discuss the reasons why we chose to make this switch, the advantages of tRPC, and how users can make the most of tRPC."
+            ]
+          ]
+        },
+        "copied_from": "ea20134b-4411-41dd-96a1-9c46d2512cf0",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "b7b5ade8-d4d8-4d6e-b69c-e1067487b997": {
+      "role": "reader",
+      "value": {
+        "id": "b7b5ade8-d4d8-4d6e-b69c-e1067487b997",
+        "type": "image",
+        "alive": true,
+        "format": {
+          "block_width": 1022,
+          "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69d0e251-e348-44c1-81c7-b50342665184/Untitled.png",
+          "block_full_width": false,
+          "block_page_width": true,
+          "block_aspect_ratio": 0.7514677103718199,
+          "copied_from_pointer": {
+            "id": "87fa25c4-798c-4399-824f-ee0f585c9dd6",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "block_preserve_scale": true
+        },
+        "version": 1,
+        "file_ids": ["69d0e251-e348-44c1-81c7-b50342665184"],
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "properties": {
+          "size": [["1989.9KB"]],
+          "title": [["Untitled"]],
+          "source": [
+            [
+              "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69d0e251-e348-44c1-81c7-b50342665184/Untitled.png"
+            ]
+          ]
+        },
+        "copied_from": "87fa25c4-798c-4399-824f-ee0f585c9dd6",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "bdb75d5c-fe57-459d-9722-e151cff4d412": {
+      "role": "reader",
+      "value": {
+        "id": "bdb75d5c-fe57-459d-9722-e151cff4d412",
+        "type": "image",
+        "alive": true,
+        "format": {
+          "block_width": 690,
+          "block_height": 388,
+          "display_source": "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c326673-b846-419d-afee-6fb355b1c176/Untitled.png",
+          "block_full_width": false,
+          "block_page_width": false,
+          "block_aspect_ratio": 0.5623188405797102,
+          "copied_from_pointer": {
+            "id": "73866e5a-79f3-4bee-85e2-208926d71f59",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "block_preserve_scale": true
+        },
+        "version": 1,
+        "file_ids": ["2c326673-b846-419d-afee-6fb355b1c176"],
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "properties": {
+          "size": [["149.1KB"]],
+          "title": [["Untitled"]],
+          "source": [
+            [
+              "https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2c326673-b846-419d-afee-6fb355b1c176/Untitled.png"
+            ]
+          ]
+        },
+        "copied_from": "73866e5a-79f3-4bee-85e2-208926d71f59",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "be65d73f-394f-4877-9d0a-37cc517a540a": {
+      "role": "reader",
+      "value": {
+        "id": "be65d73f-394f-4877-9d0a-37cc517a540a",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "b27fca52-2013-4856-93b0-fa64e0104d0b",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            ["CS:", [["b"]]],
+            [
+              " The highest point in my life is being with close family and friends, in the backyard over a fire, cooking over the course of many hours, sitting under the sky, and just filling this space with so much warmth. When I’m cooking there, I feel much more like an artist than when I worked in the highest-concept restaurants. They are like museums of food, accessible only with a certain level of literacy on the part of the diner, with a certain level of cultural experience and background."
+            ]
+          ]
+        },
+        "copied_from": "b27fca52-2013-4856-93b0-fa64e0104d0b",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "c797310a-5ae2-4d83-92c5-fcd2804c6881": {
+      "role": "reader",
+      "value": {
+        "id": "c797310a-5ae2-4d83-92c5-fcd2804c6881",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "fbbc1217-5360-4a90-b948-83beb90eda85",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "copied_from": "fbbc1217-5360-4a90-b948-83beb90eda85",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "cd79422d-0802-4c89-8bef-679c7da0767b": {
+      "role": "reader",
+      "value": {
+        "id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "type": "page",
+        "alive": true,
+        "format": {
+          "page_icon": "🌮",
+          "page_cover": "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb",
+          "copied_from_pointer": {
+            "id": "dd0047b5-5771-4fd4-bbf5-254af6c70483",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "page_cover_position": 0.5
+        },
+        "content": [
+          "603677b1-3573-463b-b49a-44a98c3e7330",
+          "34ab5753-4457-4c2f-a32a-ac7402df9aaf",
+          "00019651-a18b-4260-8fd3-c9e7aa1d8a4e",
+          "e27d456a-fd6c-417e-aa7c-46175b64ef01",
+          "f527e752-0619-4f09-b180-6d18c9c69d34",
+          "52e24391-ef38-42fe-83a8-de5c9e03b674",
+          "174e6bec-2a25-400f-8250-9993ca58e273",
+          "e9e2765f-4522-46a0-aab7-c445fd5d504c",
+          "37a426d9-aba1-4ff8-b380-71ec0ea7cde6",
+          "1d54c1c9-883a-4c76-ad72-8f15e4dae4ca",
+          "be65d73f-394f-4877-9d0a-37cc517a540a",
+          "29ff12b2-c814-4cef-82c3-aa6943a87757",
+          "249c0f76-9ff2-4542-bbfe-3596c13a5db1",
+          "071b67dd-0a2c-414f-a6a7-7abf964fb4b2",
+          "107b417c-8a90-454c-ba9b-ec1758ec8e88",
+          "bba0a95e-5f47-424d-80df-2b0415d99968",
+          "c8ba193d-5aa6-4acd-b1c8-5f23ad8b75f5",
+          "224eaca7-496f-4183-b30e-b5e21b356657",
+          "fdc51220-9df7-4b0c-a98c-c5814ad8fc6b",
+          "1fabd568-4343-4816-92c5-13168220b96d",
+          "b150163e-9031-4400-af56-3333aceaff92",
+          "a27fd42f-fbe4-4fa5-b21e-98d0efed8f74",
+          "5b506f00-8efa-40ff-ae78-b920ea00e818",
+          "bef1724f-b6c6-415e-a374-9b2556ade48c",
+          "d28eff1b-b6df-4189-9107-2544d955c4d7"
+        ],
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+        "properties": {
+          "W;Di": [["food"]],
+          "b|oC": [["Yes"]],
+          "rXaI": [["‣", [["u", "320e6b10-f1e9-4529-b6b7-bada27f37ede"]]]],
+          "title": [["The evolving role of Mexican cuisine"]]
+        },
+        "copied_from": "dd0047b5-5771-4fd4-bbf5-254af6c70483",
+        "created_time": 1671777962446,
+        "parent_table": "collection",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962446,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "cfa02621-6f4c-4237-8a54-b8d93572b9bf": {
+      "role": "reader",
+      "value": {
+        "id": "cfa02621-6f4c-4237-8a54-b8d93572b9bf",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "a8aeb1e6-e8b3-4450-a0f5-2d30ce7b4023",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "copied_from": "a8aeb1e6-e8b3-4450-a0f5-2d30ce7b4023",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "d58debe9-d5a8-4629-88fd-5f37d8ad610f": {
+      "role": "reader",
+      "value": {
+        "id": "d58debe9-d5a8-4629-88fd-5f37d8ad610f",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "4b52d69f-0fc7-4a2f-b2a1-28aa78b04cdf",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": {
+          "title": [
+            [
+              "We understand that the transition from GraphQL to tRPC may be a challenge for some of our users. To make the process smoother, we have created extensive documentation on how to use tRPC and how to migrate existing code and applications. Additionally, we have set up a dedicated support team to assist users with any issues they may face during the transition."
+            ]
+          ]
+        },
+        "copied_from": "4b52d69f-0fc7-4a2f-b2a1-28aa78b04cdf",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "d8981c20-4188-45e4-a5e2-6d68d4518b92": {
+      "role": "reader",
+      "value": {
+        "id": "d8981c20-4188-45e4-a5e2-6d68d4518b92",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "cf2626c1-1380-48bc-bd2d-bb89ce395648",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+        "copied_from": "cf2626c1-1380-48bc-bd2d-bb89ce395648",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "dbf82464-db39-48d2-a300-5032439609ab": {
+      "role": "reader",
+      "value": {
+        "id": "dbf82464-db39-48d2-a300-5032439609ab",
+        "type": "sub_header",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "44524d7b-2b5a-469f-96fd-a5e0add02508",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": { "title": [["Conclusion"]] },
+        "copied_from": "44524d7b-2b5a-469f-96fd-a5e0add02508",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "e27d456a-fd6c-417e-aa7c-46175b64ef01": {
+      "role": "reader",
+      "value": {
+        "id": "e27d456a-fd6c-417e-aa7c-46175b64ef01",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "bf089991-a9b4-443f-b29f-0badbaad2320",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            [
+              "Together, critic Jonathan Gold, food scholar Evan Kleiman, and chefs Ray Garcia, Bricia Lopez, and Carlos Salgado have spent more than a lifetime preparing, eating, and writing about Latin American cuisine. Before their recent "
+            ],
+            [
+              "panel discussion",
+              [["a", "http://www.getty.edu/visit/cal/events/ev_2035.html"]]
+            ],
+            [
+              " at the Getty, offered in conjunction with Pacific Standard Time, they sat down with us to reflect on the role of Mexican cuisine in the life of Los Angeles and how we might expand our taste buds to go deeper."
+            ]
+          ]
+        },
+        "copied_from": "bf089991-a9b4-443f-b29f-0badbaad2320",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "e9e2765f-4522-46a0-aab7-c445fd5d504c": {
+      "role": "reader",
+      "value": {
+        "id": "e9e2765f-4522-46a0-aab7-c445fd5d504c",
+        "type": "image",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "9563f496-422e-454e-943a-81d9c7169d0e",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "source": [
+            [
+              "https://s3-us-west-2.amazonaws.com/public.notion-static.com/98d6f347-ca2d-47b7-bf48-47511630182f/maarten-van-den-heuvel-400626-unsplash.jpg"
+            ]
+          ]
+        },
+        "copied_from": "9563f496-422e-454e-943a-81d9c7169d0e",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "eeb0e5cd-b65a-4cff-b556-58af8c60b484": {
+      "role": "reader",
+      "value": {
+        "id": "eeb0e5cd-b65a-4cff-b556-58af8c60b484",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "19dd5654-3b93-4df9-b116-5d92394f4dfd",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+        "properties": {
+          "title": [
+            [
+              "When deciding to switch to tRPC, we had many factors to consider. Our primary consideration was the performance gains, as tRPC is more efficient than GraphQL. It also provides faster response times and greater scalability, allowing us to quickly and easily expand our services. Additionally, tRPC is language agnostic, meaning that no matter what language our users are using, they can easily integrate with our API."
+            ]
+          ]
+        },
+        "copied_from": "19dd5654-3b93-4df9-b116-5d92394f4dfd",
+        "created_time": 1671777962447,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962447,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    },
+    "f527e752-0619-4f09-b180-6d18c9c69d34": {
+      "role": "reader",
+      "value": {
+        "id": "f527e752-0619-4f09-b180-6d18c9c69d34",
+        "type": "text",
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "bdc1edf7-1db4-46ce-9434-0abeced036ff",
+            "table": "block",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          }
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "cd79422d-0802-4c89-8bef-679c7da0767b",
+        "properties": {
+          "title": [
+            [
+              "SS: As a chef (or critic), do you consider yourself an artist?",
+              [["b"]]
+            ]
+          ]
+        },
+        "copied_from": "bdc1edf7-1db4-46ce-9434-0abeced036ff",
+        "created_time": 1671777962448,
+        "parent_table": "block",
+        "created_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "created_by_table": "notion_user",
+        "last_edited_time": 1671777962448,
+        "last_edited_by_id": "a310beb0-ba25-483d-80a8-166f8ba45458",
+        "last_edited_by_table": "notion_user"
+      }
+    }
+  },
+  "space": {},
+  "collection": {
+    "4da982b6-6ccb-42c2-bace-d93ed1354b76": {
+      "role": "reader",
+      "value": {
+        "id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+        "name": [["Post table"]],
+        "alive": true,
+        "format": {
+          "copied_from_pointer": {
+            "id": "fc52e655-0378-4542-a6c9-c65b9dd09c6a",
+            "table": "collection",
+            "spaceId": "01ff0f74-3117-4bf7-bc95-7a22140d80c9"
+          },
+          "collection_page_properties": [
+            { "visible": true, "property": "W;Di" },
+            { "visible": false, "property": "b|oC" },
+            { "visible": false, "property": "rXaI" },
+            { "visible": false, "property": "VaIT" }
+          ]
+        },
+        "schema": {
+          "VaIT": {
+            "name": "Last edited time",
+            "type": "last_edited_time",
+            "time_format": "LT"
+          },
+          "W;Di": {
+            "name": "Tags",
+            "type": "multi_select",
+            "options": [
+              {
+                "id": "903a2491-92f0-41f7-8986-41d00c2be87a",
+                "color": "green",
+                "value": "travel"
+              },
+              {
+                "id": "e2c1372a-cb25-4b0f-a8fb-6dc9b989a4d8",
+                "color": "gray",
+                "value": "food"
+              },
+              {
+                "id": "d0e68038-f7cf-46e8-9455-9262b3542775",
+                "color": "pink",
+                "value": "engineering"
+              }
+            ]
+          },
+          "b|oC": { "name": "Published", "type": "checkbox" },
+          "rXaI": { "name": "Author", "type": "person" },
+          "title": { "name": "Name", "type": "title" }
+        },
+        "version": 1,
+        "migrated": true,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "611e1ff5-25fc-425a-b6e7-1e7db5f2e511",
+        "copied_from": "fc52e655-0378-4542-a6c9-c65b9dd09c6a",
+        "parent_table": "block"
+      }
+    }
+  },
+  "notion_user": {},
+  "signed_urls": {},
+  "collection_view": {
+    "dc4cebf6-793b-494f-93c4-f108f99bb15f": {
+      "role": "reader",
+      "value": {
+        "id": "dc4cebf6-793b-494f-93c4-f108f99bb15f",
+        "type": "table",
+        "alive": true,
+        "format": {
+          "table_wrap": true,
+          "property_filters": [
+            {
+              "id": "ee2228bf-fe42-4827-9609-5ef0137e8cea",
+              "filter": {
+                "filter": {
+                  "value": { "type": "exact" },
+                  "operator": "enum_contains"
+                },
+                "property": "W;Di"
+              }
+            }
+          ],
+          "table_properties": [
+            { "width": 276, "visible": true, "property": "title" },
+            { "width": 200, "visible": true, "property": "W;Di" },
+            { "width": 200, "visible": true, "property": "rXaI" },
+            { "width": 200, "visible": true, "property": "VaIT" },
+            { "width": 200, "visible": true, "property": "b|oC" },
+            { "width": 200, "visible": true, "property": "VVSv" },
+            { "visible": true, "property": "[{jN" }
+          ],
+          "collection_pointer": {
+            "id": "4da982b6-6ccb-42c2-bace-d93ed1354b76",
+            "table": "collection",
+            "spaceId": "f2b5bac7-289e-4eeb-be38-01b96321f4e4"
+          },
+          "collection_peek_mode": "center_peek",
+          "hide_table_vertical_lines": false,
+          "hide_linked_collection_name": true
+        },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "page_sort": [
+          "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+          "cd79422d-0802-4c89-8bef-679c7da0767b",
+          "15d53c20-d3b4-4617-b939-fffcdf0bbc45",
+          "7278c2ee-e7b8-4c1b-b1c1-d2bf51e63630"
+        ],
+        "parent_id": "611e1ff5-25fc-425a-b6e7-1e7db5f2e511",
+        "parent_table": "block"
+      }
+    },
+    "fbde5778-c3af-4bef-988f-19a7deeac12d": {
+      "role": "reader",
+      "value": {
+        "id": "fbde5778-c3af-4bef-988f-19a7deeac12d",
+        "name": "",
+        "type": "gallery",
+        "alive": true,
+        "format": { "gallery_cover": { "type": "page_content" } },
+        "version": 1,
+        "space_id": "f2b5bac7-289e-4eeb-be38-01b96321f4e4",
+        "parent_id": "611e1ff5-25fc-425a-b6e7-1e7db5f2e511",
+        "parent_table": "block"
+      }
+    }
+  },
+  "collection_query": {
+    "4da982b6-6ccb-42c2-bace-d93ed1354b76": {
+      "dc4cebf6-793b-494f-93c4-f108f99bb15f": {
+        "collection_group_results": {
+          "type": "results",
+          "hasMore": false,
+          "blockIds": [
+            "a202c7ea-0bcf-444d-8d88-a232224c09ac",
+            "cd79422d-0802-4c89-8bef-679c7da0767b",
+            "15d53c20-d3b4-4617-b939-fffcdf0bbc45"
+          ]
+        }
+      }
+    }
+  }
+}

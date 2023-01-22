@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import { Tabs } from '../../../../components/tabs';
+import { Tabs } from '../../tabs';
 import * as api from '../../analytics-api';
 import styles from '../../analytics.module.scss';
 import { Props } from '../../type';

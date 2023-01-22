@@ -87,7 +87,7 @@ export function ProjectCard({
                 <IconMoreVertical size={20} />
               </span>
             </Menu.Button>
-            <Menu.Items>
+            <Menu.Items side="bottom" align="end">
               <Menu.Item
                 onClick={() =>
                   handleClickDeleteProjectMenu(project.id, project.name)

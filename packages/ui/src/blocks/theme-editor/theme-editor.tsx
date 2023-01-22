@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import debounce from 'debounce-promise';
 import * as React from 'react';
 
-import { PageTitle } from '../../blocks/page-title';
+import { PageTitleDeprecated } from '../../blocks/page-title';
 import { ClientOnly } from '../../components';
 import { Alert } from '../../components/alert';
 import { Heading, IHeadingProps } from '../../components/heading';
@@ -91,7 +91,9 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
 
   return (
     <section className="px-2">
-      <PageTitle className="mb-10">Theme of {props.project?.name}</PageTitle>
+      <PageTitleDeprecated className="mb-10">
+        Theme of {props.project?.name}
+      </PageTitleDeprecated>
       <div className={`flex flex-col sm:flex-row ${THEME_WIDGET_CLS}`}>
         <aside className="flex-1 space-y-11 sm:pr-4">
           <div className="space-y-6">

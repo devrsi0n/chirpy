@@ -23,7 +23,7 @@ export function RTEPopoverButton({
       <Popover.Panel
         autoClose={false}
         styles={{
-          panel: 'flex flex-row items-end',
+          panel: 'flex flex-row items-end w-72',
         }}
       >
         <TextField

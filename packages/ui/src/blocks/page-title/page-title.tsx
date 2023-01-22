@@ -8,7 +8,7 @@ export type PageTitleProps = React.PropsWithChildren<
   React.ComponentPropsWithoutRef<'div'>
 >;
 
-export function PageTitle({
+export function PageTitleDeprecated({
   children,
   className,
   ...restProps
@@ -22,6 +22,20 @@ export function PageTitle({
         {children}
       </Heading>
       <div className={clsx('h-1 w-11 rounded', gradient)} />
+    </div>
+  );
+}
+
+export function PageTitle({
+  children,
+  className,
+  ...restProps
+}: PageTitleProps): JSX.Element {
+  return (
+    <div className={clsx('mb-6 w-fit', className)} {...restProps}>
+      <Heading as="h1" className="!text-4xl w-fit font-bold !leading-none">
+        {children}
+      </Heading>
     </div>
   );
 }

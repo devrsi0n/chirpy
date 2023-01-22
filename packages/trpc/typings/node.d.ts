@@ -1,7 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     // Additional environment variables
-    NEXT_PUBLIC_APP_URL: string;
+    NEXT_PUBLIC_HOST: string;
     NEXT_PUBLIC_HASURA_HTTP_ORIGIN: string;
     NEXT_PUBLIC_HASURA_WS_ORIGIN: string;
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;

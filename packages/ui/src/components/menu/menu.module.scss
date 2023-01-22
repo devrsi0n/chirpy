@@ -1,0 +1,58 @@
+.dropdownMenuContent,
+.dropdownMenuSubContent {
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.dropdownMenuContent[data-side='top'],
+.dropdownMenuSubContent[data-side='top'] {
+  animation-name: slideDownAndFade;
+}
+.dropdownMenuContent[data-side='right'],
+.dropdownMenuSubContent[data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+.dropdownMenuContent[data-side='bottom'],
+.dropdownMenuSubContent[data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+.dropdownMenuContent[data-side='left'],
+.dropdownMenuSubContent[data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
