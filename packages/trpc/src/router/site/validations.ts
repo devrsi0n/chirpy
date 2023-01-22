@@ -46,7 +46,7 @@ export const SITE_PAGE_URL_VALIDATION = z
 export const SITE_NAME_VALIDATION = z
   .string()
   .min(1, 'Name is required')
-  .max(190, 'Name must contain at most 190 characters');
+  .max(190, `Name is at most 190 characters`);
 
 export const SITE_SUBDOMAIN_VALIDATION = z
   .string()
@@ -58,8 +58,8 @@ export const SITE_SUBDOMAIN_VALIDATION = z
 
 export const SITE_DESCRIPTION_VALIDATION = z
   .string()
-  .min(1, 'Description must contain at least 1 character')
-  .max(190, 'Description must contain at most 190 characters');
+  .min(1, 'Description is required')
+  .max(190, 'Description is at most 190 characters');
 
 export const CREATE_INPUT_VALIDATION = z.object({
   name: SITE_NAME_VALIDATION,
