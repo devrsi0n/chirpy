@@ -29,5 +29,11 @@
   "jest.jestCommandLine": "npm run test --",
   "svg.preview.background": "white",
   "tailwindCSS.experimental.configFile": "apps/main/tailwind.config.js",
+  "tailwindCSS.experimental.classRegex": [
+    // string literals ending with styles/Styles
+    "[Ss]tyles[.\\s\\S]*=\\s*[\"'`]([^\"'`]*)[\"'`]",
+    // object
+    ["[sS]tyles[^=]*=\\s*([.\\s\\S]*)}", ":\\s*[\"'`]([^\"'`]*)[\"'`]"]
+  ],
   "eslint.packageManager": "pnpm"
 }

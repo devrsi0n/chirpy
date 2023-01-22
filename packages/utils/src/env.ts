@@ -18,4 +18,3 @@ export function getHostEnv(url = window.location.href) {
   }
   return 'unknown';
 }
-

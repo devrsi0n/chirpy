@@ -1,6 +1,6 @@
-import * as React from 'react';
 import * as RadixTabs from '@radix-ui/react-tabs';
 import clsx from 'clsx';
+import * as React from 'react';
 
 export type TabsProps = RadixTabs.TabsProps &
   React.RefAttributes<HTMLDivElement>;

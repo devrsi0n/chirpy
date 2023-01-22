@@ -1,4 +1,5 @@
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+
 import { parseMiddlewareUrl } from './utils';
 
 export function sitesMiddlewares(

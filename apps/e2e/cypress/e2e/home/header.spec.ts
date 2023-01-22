@@ -1,4 +1,3 @@
-
 describe('Header', () => {
   it('should show navigation links', () => {
     loadHomePage();

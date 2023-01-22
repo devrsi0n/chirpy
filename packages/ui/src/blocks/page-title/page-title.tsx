@@ -32,8 +32,8 @@ export function PageTitle({
   ...restProps
 }: PageTitleProps): JSX.Element {
   return (
-    <div className={clsx('w-fit mb-6', className)} {...restProps}>
-      <Heading as="h1" className="w-fit !text-4xl font-bold !leading-none">
+    <div className={clsx('mb-6 w-fit', className)} {...restProps}>
+      <Heading as="h1" className="!text-4xl w-fit font-bold !leading-none">
         {children}
       </Heading>
     </div>

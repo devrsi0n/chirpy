@@ -19,7 +19,7 @@ export function SectionHeader({
 }: SectionHeaderProps): JSX.Element {
   return (
     <>
-      <Text color="primary" className="mb-3 text-center font-semibold">
+      <Text variant="primary" className="mb-3 text-center font-semibold">
         {label}
       </Text>
       <Heading

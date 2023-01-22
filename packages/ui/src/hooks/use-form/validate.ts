@@ -3,8 +3,11 @@ import { ZodError } from 'zod';
 import { logger } from '../../utilities';
 import { Validator } from './type';
 
-export function validate(validator: Validator, value: string): string {
-  let errorMessage = '';
+export function validate(
+  validator: Validator,
+  value: string,
+): string | undefined {
+  let errorMessage: string | undefined;
   if (validator.required && !value) {
     errorMessage = validator.required.message;
   }
