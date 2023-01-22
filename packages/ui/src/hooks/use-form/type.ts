@@ -36,7 +36,7 @@ export type Register<T extends FieldValue> = (
   name: KeyOf<T>,
   validator?: Validator,
 ) => {
-  required?: boolean | undefined;
+  required?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   name: KeyOf<T>;
   value: string;
