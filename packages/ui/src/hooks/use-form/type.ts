@@ -22,12 +22,22 @@ export type Validator = {
   zod?: ZodType;
 };
 
-export type Register = (
-  name: string,
+export type KeyOf<T extends object> = keyof T & string;
+
+export type FieldValue = {
+  [key in string]: string;
+};
+
+export type FormError<T extends FieldValue> = {
+  [key in keyof T]?: string;
+};
+
+export type Register<T extends FieldValue> = (
+  name: KeyOf<T>,
   validator?: Validator,
 ) => {
-  required?: boolean | undefined;
+  required?: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  name: string;
+  name: KeyOf<T>;
   value: string;
 };
