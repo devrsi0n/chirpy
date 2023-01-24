@@ -110,7 +110,8 @@ type HeadingButtonProps = {
 type HeadingValue = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
-  const handleChange = (value: HeadingValue) => {
+  const handleChange = (v: string) => {
+    const value = Number.parseInt(v, 10) as HeadingValue;
     const instance = editor.chain().focus();
     if (value === 0) {
       instance.setParagraph().run();
@@ -120,17 +121,16 @@ export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
   };
   const value = getActiveBlockFormat(editor) || 0;
   return (
-    <Select<HeadingValue>
-      value={value}
+    <Select
+      value={value.toString()}
       name={headingList[value]}
-      onChange={handleChange}
-      className="w-36"
-      variant="borderless"
+      onValueChange={handleChange}
+      className="w-36 border-transparent"
     >
       {headingList.map((item, index) => (
-        <Select.Option value={index} key={item}>
+        <Select.Item value={index.toString()} key={item}>
           {item}
-        </Select.Option>
+        </Select.Item>
       ))}
     </Select>
   );

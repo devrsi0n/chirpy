@@ -1,151 +1,105 @@
-import { Listbox } from '@headlessui/react';
+import * as RadixSelect from '@radix-ui/react-select';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
-import * as React from 'react';
+import { m } from 'framer-motion';
+import React from 'react';
 
-import { listHoverable, bluredBg } from '../../styles/common';
+import {
+  disabled,
+  borderHover,
+  easeInOutTransition,
+  focusRing,
+} from '../../styles/common';
 import { easeInOut } from '../animation';
-import { IconCheck, IconChevronDownCircleFill } from '../icons';
-import styles from './select.module.scss';
+import { IconChevronDown, IconChevronUp, IconCheck } from '../icons';
 
-export type SelectVariant = 'borderless' | 'default';
-export type SelectPlacement = 'top' | 'bottom';
-export type SelectProps<T> = React.PropsWithChildren<{
-  name?: string;
-  value: T;
-  onChange(value: T): void;
-  label?: string;
-  className?: string;
-  variant?: SelectVariant;
-  placement?: SelectPlacement;
-  'aria-label'?: string;
-}>;
+export type SelectProps = RadixSelect.SelectProps &
+  Pick<RadixSelect.SelectTriggerProps, 'placeholder'> & {
+    className?: string;
+    onChange?: RadixSelect.SelectProps['onValueChange'];
+  };
 
-const VARIANT_CLASSES: Record<SelectVariant, string> = {
-  borderless: 'border border-transparent',
-  default: 'border',
-};
-
-const PLACEMENT_CLASSES: Record<SelectPlacement, string> = {
-  top: 'bottom-0',
-  bottom: '',
-};
-
-export function Select<T extends string | number = string>(
-  props: SelectProps<T>,
+const _Select = React.forwardRef(function SelectComponent(
+  props: SelectProps,
+  forwardedRef: React.ForwardedRef<HTMLButtonElement>,
 ): JSX.Element {
-  const {
-    name,
-    value,
-    children,
-    onChange,
-    label,
-    className,
-    variant = 'default',
-    placement = 'bottom',
-  } = props;
-  const childrenArray = React.Children.toArray(
-    children,
-  ) as React.ReactElement[];
-  // Find the selected option's children element
-  const selectedOptionChildren = childrenArray.find(
-    (elm) => elm.props.value === value,
-  )?.props.children;
   return (
-    <Listbox value={value} onChange={onChange}>
-      {({ open }) => (
-        <div className="text-gray-1100">
-          {label && (
-            <Listbox.Label className={`mb-1 block text-sm font-bold`}>
-              {label}
-            </Listbox.Label>
-          )}
-          <div className={clsx(`relative`, className)}>
-            <span className={`inline-block w-full`}>
-              <Listbox.Button
-                className={clsx(
-                  `relative w-full cursor-default rounded py-2 pl-3 pr-8 text-left transition duration-150 ease-in-out hover:border-primary-700 focus-visible:outline-none focus-visible:ring-primary-700`,
-                  VARIANT_CLASSES[variant],
-                )}
-                aria-label={props['aria-label']}
-              >
-                <span className={childrenWrapper}>
-                  {selectedOptionChildren || name || value}
-                </span>
-                <span
-                  className={clsx(
-                    'pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-gray-300',
-                    styles.icon,
-                  )}
-                >
-                  <IconChevronDownCircleFill size={18} />
-                </span>
-              </Listbox.Button>
-            </span>
-            <AnimatePresence>
-              {open && (
-                <m.div
-                  {...easeInOut}
-                  className={clsx(
-                    'absolute z-20 mt-1 w-full rounded-md shadow-lg',
-                    bluredBg,
-                    PLACEMENT_CLASSES[placement],
-                  )}
-                >
-                  <Listbox.Options
-                    static
-                    className="max-h-60 overflow-auto overscroll-contain rounded border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
-                  >
-                    {children}
-                  </Listbox.Options>
-                </m.div>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
-      )}
-    </Listbox>
-  );
-}
-
-Select.Option = SelectOption;
-
-type SelectOptionProps<T> = {
-  children: React.ReactNode;
-  value: T;
-  className?: string;
-};
-
-function SelectOption<T>({
-  value,
-  children,
-  className,
-}: SelectOptionProps<T>): JSX.Element {
-  return (
-    <Listbox.Option key={String(value)} value={value as $TsAny}>
-      {/* active includes hover event */}
-      {({ selected, active }) => (
-        <div
+    <RadixSelect.Root
+      {...props}
+      onValueChange={props.onValueChange ?? props.onChange}
+    >
+      <RadixSelect.Trigger
+        asChild
+        className="bg-gray-0 transition duration-150 ease-in-out data-[placeholder]:font-normal data-[placeholder]:text-gray-900"
+        ref={forwardedRef}
+      >
+        <button
           className={clsx(
-            active && listHoverable,
-            `relative cursor-pointer select-none py-2 pl-7 pr-4 text-gray-1100`,
+            props.className,
+            props.disabled && disabled,
+            'inline-flex w-full touch-none select-none items-center justify-between border py-2.5 px-3.5 font-medium text-gray-1200 shadow-xs',
+            !props.disabled && borderHover,
+            focusRing,
+            'focus-visible:border-primary-800',
+            easeInOutTransition,
+            'rounded-lg',
           )}
         >
-          <span className={clsx(childrenWrapper, className)}>{children}</span>
-          {selected && (
-            <span
-              className={clsx(
-                active && listHoverable,
-                `absolute inset-y-0 left-0 flex items-center pl-1.5`,
-              )}
-            >
-              <IconCheck size={16} />
-            </span>
-          )}
-        </div>
-      )}
-    </Listbox.Option>
-  );
-}
+          <RadixSelect.Value placeholder={props.placeholder} />
+          <RadixSelect.Icon>
+            <IconChevronDown size={20} />
+          </RadixSelect.Icon>
+        </button>
+      </RadixSelect.Trigger>
 
-const childrenWrapper = 'flex flex-row items-center space-x-1';
+      <RadixSelect.Portal>
+        <RadixSelect.Content asChild>
+          <m.div {...easeInOut}>
+            <RadixSelect.ScrollUpButton className="flex items-center justify-center text-gray-1200">
+              <IconChevronUp />
+            </RadixSelect.ScrollUpButton>
+            <RadixSelect.Viewport className="rounded-lg bg-gray-100 p-2 shadow-lg dark:bg-gray-300">
+              {props.children}
+            </RadixSelect.Viewport>
+            <RadixSelect.ScrollDownButton className="flex items-center justify-center text-gray-1200">
+              <IconChevronDown />
+            </RadixSelect.ScrollDownButton>
+          </m.div>
+        </RadixSelect.Content>
+      </RadixSelect.Portal>
+    </RadixSelect.Root>
+  );
+});
+
+const SelectItem = React.forwardRef(
+  (
+    {
+      children,
+      className,
+      ...props
+    }: React.ComponentProps<typeof RadixSelect.Item>,
+    forwardedRef: React.Ref<HTMLDivElement>,
+  ) => {
+    return (
+      <RadixSelect.Item
+        ref={forwardedRef}
+        className={clsx(
+          className,
+          'relative flex items-center justify-start rounded-md px-3.5 py-2.5 font-medium text-gray-1200 focus:bg-gray-300 dark:focus:bg-gray-500',
+          'data-[disabled]:opacity-50',
+          'select-none focus:outline-none',
+        )}
+        {...props}
+      >
+        <RadixSelect.ItemText>{children}</RadixSelect.ItemText>
+        <RadixSelect.ItemIndicator className="absolute right-2 inline-flex items-center text-primary-900">
+          <IconCheck size={20} />
+        </RadixSelect.ItemIndicator>
+      </RadixSelect.Item>
+    );
+  },
+);
+
+SelectItem.displayName = 'Select.Item';
+export const Select = Object.assign(_Select, {
+  Item: SelectItem,
+});
