@@ -4,9 +4,9 @@
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "analyze": "ANALYZE=true pnpm run build:local",
-    "build": "next build",
-    "build:docker": "next build",
-    "build:local": "dotenv -e .env.local -- next build",
+    "build": "tsc --noEmit && next build",
+    "build:docker": "tsc --noEmit && next build",
+    "build:local": "tsc --noEmit && dotenv -e .env.local -- next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",
     "start": "next start",
