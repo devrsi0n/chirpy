@@ -111,7 +111,7 @@ export function SignInForm({
                           callbackUrl: `${location.origin}/redirecting`,
                         })
                       }
-                      className="w-full px-0 md:justify-start md:pl-20"
+                      className="w-full"
                       size="lg"
                       disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
                     >
