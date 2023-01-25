@@ -70,6 +70,7 @@ export const Button = React.forwardRef(function Button(
     }
     onClick?.(event);
   };
+
   return (
     <BaseButton
       {...restProps}

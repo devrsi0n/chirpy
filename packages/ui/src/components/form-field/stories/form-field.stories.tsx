@@ -1,9 +1,9 @@
+import { EMAIL_RE } from '@chirpy-dev/utils';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from 'src/components';
 import { Divider } from 'src/components/divider';
 import { IconMessageSquare } from 'src/components/icons';
 import { useForm } from 'src/hooks';
-import { EMAIL_REGEXP } from 'src/utilities';
 
 import { FormField } from '../form-field';
 import { Input as TextInputComponent } from '../input';
@@ -16,7 +16,7 @@ export default {
   component: FormField,
 } as ComponentMeta<FormFieldType>;
 
-export const TextInput: ComponentStory<FormFieldType> = (...args) => {
+export const TextInput: ComponentStory<FormFieldType> = () => {
   return (
     <div className="mx-8 flex flex-col gap-6">
       <FormField label="Default">
@@ -56,7 +56,7 @@ export const TextInput: ComponentStory<FormFieldType> = (...args) => {
   );
 };
 
-export const SelectInput: ComponentStory<FormFieldType> = (...args) => {
+export const SelectInput: ComponentStory<FormFieldType> = () => {
   const items = ['Apple', 'Banana', 'Blueberry', 'Strawberry', 'Grapes'].map(
     (f, i) => (
       <Select.Item
@@ -92,7 +92,7 @@ export const SelectInput: ComponentStory<FormFieldType> = (...args) => {
   );
 };
 
-export const TextAreaInput: ComponentStory<FormFieldType> = (...args) => {
+export const TextAreaInput: ComponentStory<FormFieldType> = () => {
   return (
     <div className="mx-8 flex flex-col gap-6">
       <FormField label="Description">
@@ -171,7 +171,7 @@ export const Form = () => {
             {...register('email', {
               required: { value: true, message: 'Email is required' },
               pattern: {
-                value: EMAIL_REGEXP,
+                value: EMAIL_RE,
                 message: 'Invalid email address',
               },
             })}
@@ -220,8 +220,7 @@ export const Form = () => {
           </Button>
           <Button
             disabled={hasError}
-            variant="solid"
-            color="primary"
+            variant="primary"
             onClick={handleSubmit(async (data) => console.log(data))}
           >
             Save changes

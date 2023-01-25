@@ -20,6 +20,18 @@ const Template: ComponentStory<ButtonType> = (args: ButtonProps) => {
           </Button>
         ))}
       </div>
+      <div className="flex flex-row justify-center gap-6">
+        {variants.map((variant) => (
+          <Button
+            key={variant}
+            {...args}
+            variant={variant}
+            href="https://chirpy.dev"
+          >
+            Link
+          </Button>
+        ))}
+      </div>
     </div>
   );
 };

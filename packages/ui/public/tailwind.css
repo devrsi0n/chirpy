@@ -4753,10 +4753,6 @@ video {
     align-items: flex-start;
   }
 
-  .md\:justify-start {
-    justify-content: flex-start;
-  }
-
   .md\:space-x-6 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-x-reverse: 0;
     margin-right: calc(1.5rem * var(--tw-space-x-reverse));
@@ -4808,10 +4804,6 @@ video {
 
   .md\:pt-48 {
     padding-top: 12rem;
-  }
-
-  .md\:pl-20 {
-    padding-left: 5rem;
   }
 
   .md\:text-sm {

@@ -1,8 +1,10 @@
 import clsx from 'clsx';
+import NextLink from 'next/link';
 import * as React from 'react';
 
 export type BaseButtonProps = React.ComponentPropsWithRef<'button'> & {
   align?: ButtonAlign;
+  href?: string;
 };
 type ButtonAlign = 'start' | 'center';
 
@@ -14,6 +16,7 @@ export const BaseButton = React.forwardRef(function BaseButton(
     className,
     onClick,
     onMouseDown,
+    href,
     ...restProps
   }: BaseButtonProps,
   ref: React.Ref<HTMLButtonElement>,
@@ -31,14 +34,20 @@ export const BaseButton = React.forwardRef(function BaseButton(
     ...restProps,
   };
 
-  return (
+  const _className = clsx(
+    'relative inline-flex touch-none select-none flex-row items-center overflow-hidden transition duration-150 ease-in-out focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-75 disabled:shadow-none',
+    ITEM_ALIGN_MAP[align],
+    className,
+  );
+
+  return href && !allProps.disabled ? (
+    <NextLink className={_className} href={href}>
+      {children}
+    </NextLink>
+  ) : (
     <button
       {...allProps}
-      className={clsx(
-        'relative inline-flex touch-none select-none flex-row items-center overflow-hidden transition duration-150 ease-in-out focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-1 focus-visible:ring-offset-bg disabled:cursor-not-allowed disabled:opacity-75 disabled:shadow-none',
-        ITEM_ALIGN_MAP[align],
-        className,
-      )}
+      className={_className}
       onMouseDown={handleMouseDown}
       onClick={onClick}
       ref={ref}
