@@ -29,19 +29,17 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
-            <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
-              <Button
-                variant="primary"
-                className="group space-x-1 hover:shadow-xl"
-                onClick={() => signIn()}
-              >
-                <span>{strings.callToAction.main}</span>
-                <IconArrowRight
-                  size="20px"
-                  className="inline-block transition group-hover:translate-x-1"
-                />
-              </Button>
-            </Link>
+            <Button
+              variant="primary"
+              className="group space-x-1 hover:shadow-xl"
+              onClick={() => signIn()}
+            >
+              <span>{strings.callToAction.main}</span>
+              <IconArrowRight
+                size="20px"
+                className="inline-block transition group-hover:translate-x-1"
+              />
+            </Button>
             <Link variant="plain" href="/docs" tabIndex={-1}>
               <Button>{strings.callToAction.secondary}</Button>
             </Link>
@@ -62,7 +60,7 @@ export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
   heroTitle: 'Disqus alternate',
   heroDescription:
-    'Build stronger, more engaged communities by integrating our moden comment system.',
+    'Build stronger, more engaged communities by integrating our modern comment system.',
   callToAction: {
     main: 'Get Early Access',
     secondary: 'Learn More',
