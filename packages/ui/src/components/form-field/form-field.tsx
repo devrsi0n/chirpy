@@ -11,7 +11,6 @@ import type { TextAreaProps } from '../text-area';
 export type FormFieldProps = {
   children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   label?: string;
-  placeholder?: string;
   errorMessage?: string;
   hintText?: string;
   disabled?: boolean;
@@ -72,7 +71,10 @@ export function FormField({
         )}
       </div>
       <div className="flex w-full flex-col gap-1.5">
-        {React.cloneElement(children, { error: !!errorMessage })}
+        {React.cloneElement(children, {
+          error: !!errorMessage,
+          ...childrenProps,
+        })}
         <AnimatePresence>
           {errorMessage && (
             <m.div {...easeInOutOpacity}>

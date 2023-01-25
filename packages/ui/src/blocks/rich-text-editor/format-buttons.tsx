@@ -2,17 +2,16 @@ import { Editor } from '@tiptap/react';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { BaseButtonProps, BaseButton } from '../../components/button';
+import { BaseButton, BaseButtonProps } from '../../components/button';
 import {
+  Icon,
+  IconBlockQuote,
   IconBold,
   IconCode,
-  IconBlockQuote,
   IconItalic,
   IconList,
   IconUnderline,
-  Icon,
 } from '../../components/icons';
-import { Select } from '../../components/select';
 import { listHoverableColor } from '../../styles/common';
 
 type InlineFormat = 'bold' | 'italic' | 'underline' | 'code';
@@ -91,58 +90,4 @@ export function BlockButton({ format, editor }: BlockButtonProps): JSX.Element {
       <Icon size={20} />
     </BaseMarkButton>
   );
-}
-
-const headingList = [
-  'Paragraph',
-  'Heading 1',
-  'Heading 2',
-  'Heading 3',
-  'Heading 4',
-  'Heading 5',
-  'Heading 6',
-];
-
-type HeadingButtonProps = {
-  editor: Editor;
-};
-
-type HeadingValue = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-
-export function HeadingButton({ editor }: HeadingButtonProps): JSX.Element {
-  const handleChange = (v: string) => {
-    const value = Number.parseInt(v, 10) as HeadingValue;
-    const instance = editor.chain().focus();
-    if (value === 0) {
-      instance.setParagraph().run();
-    } else {
-      instance.toggleHeading({ level: value }).run();
-    }
-  };
-  const value = getActiveBlockFormat(editor) || 0;
-  return (
-    <Select
-      value={value.toString()}
-      name={headingList[value]}
-      onValueChange={handleChange}
-      className="w-36 border-transparent"
-    >
-      {headingList.map((item, index) => (
-        <Select.Item value={index.toString()} key={item}>
-          {item}
-        </Select.Item>
-      ))}
-    </Select>
-  );
-}
-
-function getActiveBlockFormat(editor: Editor): HeadingValue | undefined {
-  for (const index of Object.keys(headingList)) {
-    const level = +index as HeadingValue;
-    const isActive =
-      level === 0
-        ? editor.isActive('paragraph')
-        : editor.isActive('heading', { level });
-    if (isActive) return level;
-  }
 }

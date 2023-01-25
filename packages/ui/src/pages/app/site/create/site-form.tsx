@@ -6,7 +6,7 @@ import {
 } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
-import { TextArea, TextField } from '../../../../components';
+import { FormField, Input, TextArea } from '../../../../components';
 import type { FieldValue, FormError, Register } from '../../../../hooks';
 
 export type SiteFormProps<T extends FieldValue> = {
@@ -31,48 +31,48 @@ export function SiteForm<T extends SiteFormFields>({
 }: SiteFormProps<T>): JSX.Element {
   return (
     <form className="flex w-80 flex-col space-y-4">
-      <TextField
+      <FormField
         {...register('name', {
           zod: SITE_NAME_VALIDATION,
         })}
-        aria-label="Name of this site"
         label="Name"
         errorMessage={errors.name}
-        placeholder="My blog"
-      />
-      <TextArea
+      >
+        <Input placeholder="My blog" />
+      </FormField>
+
+      <FormField
         {...register('pageUrl', {
           zod: SITE_PAGE_URL_VALIDATION,
         })}
-        aria-label="Notion page URL"
         label="Notion page URL"
         errorMessage={errors.pageUrl}
-        styles={{
-          textarea: 'min-h-[7em]',
-        }}
         hintText={
           pageUrlFieldHint ??
           "Back to the previous page to get the page URL if you don't have one"
         }
-      />
-      <TextField
+      >
+        <TextArea className="min-h-[7em]" />
+      </FormField>
+
+      <FormField
         {...register('subdomain', {
           zod: SITE_SUBDOMAIN_VALIDATION,
         })}
-        suffix={`.chirpy.dev`}
         label="Subdomain"
         errorMessage={errors.subdomain}
-        placeholder="blog"
-      />
-      <TextArea
+      >
+        <Input suffix={`.chirpy.dev`} placeholder="blog" />
+      </FormField>
+      <FormField
         {...register('description', {
           zod: SITE_DESCRIPTION_VALIDATION,
         })}
-        aria-label="description of this site"
         label="Description"
         errorMessage={errors.description}
-        placeholder="My awesome blog"
-      />
+      >
+        <TextArea placeholder="My awesome blog" />
+      </FormField>
       {children}
     </form>
   );

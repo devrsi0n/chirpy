@@ -1,22 +1,28 @@
 import clsx from 'clsx';
 import React from 'react';
+
 import {
   borderHover,
   disabled,
   easeInOutTransition,
   focusRing,
-} from 'src/styles/common';
-
+} from '../../styles/common';
 import { Text } from '../text';
 
 export type InputProps = React.ComponentPropsWithoutRef<'input'> & {
   error?: boolean;
-  prefixNode?: React.ReactNode;
-  suffixNode?: React.ReactNode;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
 };
 
 export const Input = React.forwardRef(function InputComponent(
-  { error, prefixNode, suffixNode, className, ...inputProps }: InputProps,
+  {
+    error,
+    prefix: prefixNode,
+    suffix: suffixNode,
+    className,
+    ...inputProps
+  }: InputProps,
   forwardedRef: React.Ref<HTMLInputElement>,
 ): JSX.Element {
   return (

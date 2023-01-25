@@ -1,8 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '../../components/button';
-import { Popover } from '../../components/popover';
-import { TextField } from '../../components/text-field';
+import { Button, Popover, FormField, Input } from '../../components';
 import { BaseMarkButton } from './format-buttons';
 
 export type RTEPopoverButtonProps = {
@@ -26,11 +24,9 @@ export function RTEPopoverButton({
           panel: 'flex flex-row items-end w-72',
         }}
       >
-        <TextField
-          label={label}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
+        <FormField label={label}>
+          <Input value={value} onChange={(e) => setValue(e.target.value)} />
+        </FormField>
         <Button
           variant="solid"
           color="primary"

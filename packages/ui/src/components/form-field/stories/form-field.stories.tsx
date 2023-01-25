@@ -3,12 +3,12 @@ import { Button } from 'src/components';
 import { Divider } from 'src/components/divider';
 import { IconMessageSquare } from 'src/components/icons';
 import { useForm } from 'src/hooks';
-import { EMAIL_REGEXP } from 'src/utilities';
+import { z } from 'zod';
 
+import { Input as TextInputComponent } from '../../input';
+import { Select } from '../../select';
+import { TextArea as TextAreaInputComponent } from '../../text-area';
 import { FormField } from '../form-field';
-import { Input as TextInputComponent } from '../input';
-import { Select } from '../select';
-import { TextArea as TextAreaInputComponent } from '../text-area';
 
 type FormFieldType = typeof FormField;
 export default {
@@ -16,7 +16,7 @@ export default {
   component: FormField,
 } as ComponentMeta<FormFieldType>;
 
-export const TextInput: ComponentStory<FormFieldType> = (...args) => {
+export const TextInput: ComponentStory<FormFieldType> = () => {
   return (
     <div className="mx-8 flex flex-col gap-6">
       <FormField label="Default">
@@ -36,10 +36,10 @@ export const TextInput: ComponentStory<FormFieldType> = (...args) => {
         <TextInputComponent placeholder="charlie@chirpy.dev" />
       </FormField>
       <FormField label="URL" hintText="Enter your domain">
-        <TextInputComponent prefixNode="https://" placeholder="chirpy.dev" />
+        <TextInputComponent prefix="https://" placeholder="chirpy.dev" />
       </FormField>
       <FormField label="Suffix" hintText="Look at my suffix">
-        <TextInputComponent placeholder="sixian" suffixNode=".chirpy.dev" />
+        <TextInputComponent placeholder="sixian" suffix=".chirpy.dev" />
       </FormField>
       <FormField
         label="Prefix and Suffix"
@@ -47,16 +47,16 @@ export const TextInput: ComponentStory<FormFieldType> = (...args) => {
         errorMessage="Invalid URL"
       >
         <TextInputComponent
-          prefixNode="https://"
+          prefix="https://"
           placeholder="sixian"
-          suffixNode={<IconMessageSquare size={16} />}
+          suffix={<IconMessageSquare size={16} />}
         />
       </FormField>
     </div>
   );
 };
 
-export const SelectInput: ComponentStory<FormFieldType> = (...args) => {
+export const SelectInput: ComponentStory<FormFieldType> = () => {
   const items = ['Apple', 'Banana', 'Blueberry', 'Strawberry', 'Grapes'].map(
     (f, i) => (
       <Select.Item
@@ -92,7 +92,7 @@ export const SelectInput: ComponentStory<FormFieldType> = (...args) => {
   );
 };
 
-export const TextAreaInput: ComponentStory<FormFieldType> = (...args) => {
+export const TextAreaInput: ComponentStory<FormFieldType> = () => {
   return (
     <div className="mx-8 flex flex-col gap-6">
       <FormField label="Description">
@@ -169,11 +169,7 @@ export const Form = () => {
 
           <FormField
             {...register('email', {
-              required: { value: true, message: 'Email is required' },
-              pattern: {
-                value: EMAIL_REGEXP,
-                message: 'Invalid email address',
-              },
+              zod: z.string().email('Invalid email'),
             })}
             label="Email address"
             errorMessage={errors.email}
