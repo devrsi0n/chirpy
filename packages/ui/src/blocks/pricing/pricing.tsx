@@ -53,7 +53,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           callToAction={{
             label: 'Get started',
             buttonProps: {
-              color: 'primary',
+              variant: 'primary',
             },
           }}
           priceDescription="Free for now"
