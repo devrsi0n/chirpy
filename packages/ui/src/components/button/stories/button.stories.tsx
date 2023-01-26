@@ -10,6 +10,7 @@ export default {
 
 const variants: ButtonProps['variant'][] = ['primary', 'secondary', 'text'];
 
+// @ts-ignore
 const Template: ComponentStory<ButtonType> = (args: ButtonProps) => {
   return (
     <div className="flex flex-col gap-8">

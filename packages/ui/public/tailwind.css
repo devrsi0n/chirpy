@@ -3760,6 +3760,16 @@ video {
   background-color: hsl(var(--tw-colors-indigo-500) / var(--tw-bg-opacity));
 }
 
+.hover\:bg-red-1000:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--tw-colors-red-1000) / var(--tw-bg-opacity));
+}
+
+.hover\:bg-red-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: hsl(var(--tw-colors-red-300) / var(--tw-bg-opacity));
+}
+
 .hover\:text-primary-1100:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--tw-colors-primary-1100) / var(--tw-text-opacity));
@@ -3808,6 +3818,11 @@ video {
 .hover\:text-indigo-600:hover {
   --tw-text-opacity: 1;
   color: hsl(var(--tw-colors-indigo-600) / var(--tw-text-opacity));
+}
+
+.hover\:text-red-1000:hover {
+  --tw-text-opacity: 1;
+  color: hsl(var(--tw-colors-red-1000) / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

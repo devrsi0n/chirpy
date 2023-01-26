@@ -13,7 +13,6 @@ export type ButtonProps = BaseButtonProps & {
    */
   variant?: Variant;
   children: React.ReactNode;
-  disabled?: boolean;
   danger?: boolean;
   /**
    * @default 'md'
@@ -33,11 +32,10 @@ export type ButtonProps = BaseButtonProps & {
 // TODO: extract drip animation to the base button
 export const Button = React.forwardRef(function Button(
   props: ButtonProps,
-  ref: React.Ref<HTMLButtonElement>,
+  ref: React.Ref<HTMLButtonElement | HTMLAnchorElement>,
 ): JSX.Element {
   const {
     variant = 'secondary',
-    disabled = false,
     danger = false,
     size = 'md',
     className,
@@ -59,7 +57,7 @@ export const Button = React.forwardRef(function Button(
     setDripY(0);
   }, []);
   const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (disabled) {
+    if (props.disabled) {
       return;
     }
     if (_ref.current) {
@@ -87,7 +85,6 @@ export const Button = React.forwardRef(function Button(
         rounded && `rounded-lg`,
       )}
       onClick={clickHandler}
-      disabled={disabled}
     >
       {children}
       {dripShow && (

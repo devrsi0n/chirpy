@@ -19,7 +19,7 @@ export const BaseButton = React.forwardRef(function BaseButton(
     href,
     ...restProps
   }: BaseButtonProps,
-  ref: React.Ref<HTMLButtonElement>,
+  ref: React.Ref<HTMLButtonElement | HTMLAnchorElement>,
 ): JSX.Element {
   const handleMouseDown = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -41,7 +41,12 @@ export const BaseButton = React.forwardRef(function BaseButton(
   );
 
   return href && !allProps.disabled ? (
-    <NextLink className={_className} href={href}>
+    <NextLink
+      // link doesn't have `disabled` state
+      className={_className.replaceAll('enabled:', '')}
+      href={href}
+      ref={ref as React.ForwardedRef<HTMLAnchorElement>}
+    >
       {children}
     </NextLink>
   ) : (
@@ -50,7 +55,7 @@ export const BaseButton = React.forwardRef(function BaseButton(
       className={_className}
       onMouseDown={handleMouseDown}
       onClick={onClick}
-      ref={ref}
+      ref={ref as React.ForwardedRef<HTMLButtonElement>}
     >
       {children}
     </button>
