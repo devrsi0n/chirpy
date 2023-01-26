@@ -35,5 +35,7 @@
     // object
     ["[sS]tyles[^=]*=\\s*([.\\s\\S]*)}", ":\\s*[\"'`]([^\"'`]*)[\"'`]"]
   ],
-  "eslint.packageManager": "pnpm"
+  "eslint.packageManager": "pnpm",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "relative"
 }

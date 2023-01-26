@@ -2,10 +2,11 @@ import { EMAIL_RE } from '@chirpy-dev/utils';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
+import { Input } from '../../../../../components';
 import { Button } from '../../../../../components/button';
+import { FormField } from '../../../../../components/form-field';
 import { Link } from '../../../../../components/link';
 import { Text } from '../../../../../components/text';
-import { TextField } from '../../../../../components/text-field';
 import { useForm } from '../../../../../hooks/use-form';
 import { SignInProps } from './types';
 
@@ -30,7 +31,7 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
 
   return (
     <form onSubmit={handleClickSubmit} className="space-y-4">
-      <TextField
+      <FormField
         {...register('email', {
           pattern: {
             value: EMAIL_RE,
@@ -38,10 +39,10 @@ export function EmailSignIn({ children }: SignInProps): JSX.Element {
           },
         })}
         errorMessage={errors?.email}
-        type="text"
         label="Email"
-        placeholder="james@example.com"
-      />
+      >
+        <Input placeholder="james@example.com" />
+      </FormField>
       <div>
         {children}
         <Button

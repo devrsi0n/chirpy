@@ -5,18 +5,19 @@ import { PageTitleDeprecated } from '../../../blocks';
 import {
   Avatar,
   Button,
+  FormField,
   Heading,
   IconEdit2,
   IconLink2,
   IconSave,
   IconTrash2,
   IconTwitter,
+  Input,
   Link,
   Popover,
   Spinner,
   Text,
   TextArea,
-  TextField,
   useToast,
 } from '../../../components';
 import { useCurrentUser } from '../../../contexts';
@@ -136,13 +137,15 @@ export function Profile(): JSX.Element {
           <div className="flex flex-row items-start justify-between pt-4">
             <div className="space-y-4">
               {isEditMode ? (
-                <TextField
+                <FormField
                   {...register('name', {
                     required: { value: true, message: 'Name is required' },
                   })}
                   label="Name"
                   errorMessage={errors.name}
-                />
+                >
+                  <Input />
+                </FormField>
               ) : (
                 name && <Heading as="h4">{name}</Heading>
               )}
@@ -151,7 +154,7 @@ export function Profile(): JSX.Element {
               )}
               {/* We only allow no email or unverified anonymous user to edit the email */}
               {isEditMode && (!email || (isAnonymous && !emailVerified)) ? (
-                <TextField
+                <FormField
                   {...register('email', {
                     pattern: {
                       value: EMAIL_RE,
@@ -163,7 +166,9 @@ export function Profile(): JSX.Element {
                   hintText={
                     'You need to sign-in with this email address to verify it after saving'
                   }
-                />
+                >
+                  <Input />
+                </FormField>
               ) : (
                 email && (
                   <div>
@@ -211,16 +216,16 @@ export function Profile(): JSX.Element {
             </div>
           </div>
           {isEditMode ? (
-            <TextArea {...register('bio')} label="Bio" />
+            <FormField {...register('bio')} label="Bio">
+              <TextArea />
+            </FormField>
           ) : (
             bio && <Text variant="secondary">{bio}</Text>
           )}
           {isEditMode ? (
-            <TextField
-              {...register('website')}
-              label="Website"
-              prefix="https://"
-            />
+            <FormField {...register('website')} label="Website">
+              <Input prefix="https://" />
+            </FormField>
           ) : (
             website && (
               <Link
@@ -234,11 +239,9 @@ export function Profile(): JSX.Element {
             )
           )}
           {isEditMode ? (
-            <TextField
-              {...register('twitter')}
-              label="Twitter"
-              prefix="https://twitter.com/"
-            />
+            <FormField {...register('twitter')} label="Twitter">
+              <Input prefix="https://twitter.com/" />
+            </FormField>
           ) : (
             twitterUserName && (
               <Link

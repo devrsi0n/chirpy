@@ -13,27 +13,33 @@ export function ColorModeSelect(): JSX.Element {
   const handleChange = (value: string) => {
     setTheme(value);
   };
+  const container = 'flex items-center justify-start gap-2';
   return (
     <ClientOnly>
       <Select
         value={theme || 'system'}
-        onChange={handleChange}
-        className="w-32"
-        placement="top"
+        onValueChange={handleChange}
+        className="w-36"
         aria-label="Mode selector"
       >
-        <Select.Option value="light">
-          <IconSun size={16} />
-          <span>Light</span>
-        </Select.Option>
-        <Select.Option value="dark">
-          <IconMoon size={16} />
-          <span>Dark</span>
-        </Select.Option>
-        <Select.Option value="system">
-          <IconSettings size={16} />
-          <span>System</span>
-        </Select.Option>
+        <Select.Item value="light">
+          <div className={container}>
+            <IconSun size={20} />
+            <span>Light</span>
+          </div>
+        </Select.Item>
+        <Select.Item value="dark">
+          <div className={container}>
+            <IconMoon size={20} />
+            <span>Dark</span>
+          </div>
+        </Select.Item>
+        <Select.Item value="system">
+          <div className={container}>
+            <IconSettings size={20} />
+            <span>System</span>
+          </div>
+        </Select.Item>
       </Select>
     </ClientOnly>
   );
