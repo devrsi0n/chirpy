@@ -1,16 +1,13 @@
 import * as React from 'react';
 
 import { trpcClient } from '../../../../utilities';
-import { BaseLayout } from '../base-layout';
-import { MobileHeader } from './mobile-header';
-import { Sidebar } from './sidebar';
+import { MobileHeader } from '../app-layout/mobile-header';
+import { Sidebar } from '../app-layout/sidebar';
+import { BaseLayout, BaseLayoutProps } from '../base-layout';
 
-export type AppLayoutProps = {
-  children: React.ReactNode;
-  title: string;
-};
+export type SiteLayoutProps = Pick<BaseLayoutProps, 'children' | 'title'>;
 
-export function AppLayout(props: AppLayoutProps): JSX.Element {
+export function SiteLayout(props: SiteLayoutProps): JSX.Element {
   const { data: sites } = trpcClient.site.all.useQuery();
   return (
     <BaseLayout

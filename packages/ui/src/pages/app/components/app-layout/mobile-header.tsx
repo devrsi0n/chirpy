@@ -19,14 +19,16 @@ import { CollapsibleNav } from './collapsible-nav';
 import { NavLink, NavLinkProps } from './nav-link';
 import { SidebarProps } from './sidebar';
 
-export type HeaderNavProps = SidebarProps;
+export type MobileHeaderProps = SidebarProps & {
+  children: React.ReactNode;
+};
 
-export function HeaderNav(props: HeaderNavProps): JSX.Element {
+export function MobileHeader(props: MobileHeaderProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
   const { isSignIn, data } = useCurrentUser();
   const { image, name, email, username } = data;
   return (
-    <div className="block h-full md:hidden">
+    <>
       <Collapsible.Root
         open={isOpen}
         onOpenChange={setIsOpen}
@@ -119,8 +121,8 @@ export function HeaderNav(props: HeaderNavProps): JSX.Element {
           </AnimatePresence>
         </Collapsible.Content>
       </Collapsible.Root>
-      {!isOpen && <main className="h-full p-4">{props.children}</main>}
-    </div>
+      {!isOpen && props.children}
+    </>
   );
 }
 

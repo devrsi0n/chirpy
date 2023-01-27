@@ -20,12 +20,14 @@ const styles: Record<AS, string> = {
 };
 
 export function Heading(props: IHeadingProps): JSX.Element {
-  const { as: Component = 'h3', className, ...restProps } = props;
+  const { as: Component = 'h3', className, children, ...restProps } = props;
 
   return (
     <Component
       {...restProps}
       className={clsx(`text-gray-1200`, styles[Component], className)}
-    />
+    >
+      {children}
+    </Component>
   );
 }

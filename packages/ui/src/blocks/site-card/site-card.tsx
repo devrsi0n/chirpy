@@ -15,7 +15,7 @@ export function SiteCard({ site }: SiteCardProps): JSX.Element {
   return (
     <Card
       as={Link}
-      href={`/site/${site.id}`}
+      href={`/site/${site.subdomain}`}
       variant="plain"
       key={site.id}
       className="block space-y-4 pt-4"

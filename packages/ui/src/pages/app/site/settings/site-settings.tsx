@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import { PageTitle } from '../../../../blocks';
+import { PageTitle, SiteLayout } from '../../../../blocks';
 import { Tabs } from '../../../../components';
 import { trpcClient } from '../../../../utilities';
-import { AppLayout } from '../../components/app-layout';
 import { CustomDomainSettings } from './custom-domain-settings';
 import { SiteGeneralSettings } from './general-settings';
 
@@ -15,7 +14,7 @@ export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
   const { data } = trpcClient.site.byId.useQuery(id);
 
   return (
-    <AppLayout title="Site settings">
+    <SiteLayout title="Site settings">
       <PageTitle className="mb-4">Site settings</PageTitle>
       <Tabs defaultValue="general">
         <Tabs.List>
@@ -29,6 +28,6 @@ export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
           <CustomDomainSettings siteId={id} data={data} />
         </Tabs.Content>
       </Tabs>
-    </AppLayout>
+    </SiteLayout>
   );
 }

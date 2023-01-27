@@ -13,7 +13,7 @@
     "@types/node": "16.11.45",
     "@types/web-push": "3.3.2",
     "@types/which": "2.0.1",
-    "@types/yargs": "17.0.19",
+    "@types/yargs": "17.0.20",
     "dotenv": "16.0.3",
     "eta": "1.12.3",
     "ts-node": "10.9.1",
@@ -27,7 +27,7 @@
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "eslint": "8.31.0"
+    "eslint": "8.32.0"
   },
   "keywords": [
     "CLI",
