@@ -35,7 +35,7 @@ export function Welcome(): JSX.Element {
             </Text>
           </div>
           <div className="space-x-4">
-            <Button variant="solid" color="primary">
+            <Button variant="primary">
               <Link href="/" variant="plain">
                 Dashboard
               </Link>

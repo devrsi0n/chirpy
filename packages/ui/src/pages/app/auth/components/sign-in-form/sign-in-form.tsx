@@ -111,14 +111,14 @@ export function SignInForm({
                           callbackUrl: `${location.origin}/redirecting`,
                         })
                       }
-                      className="w-full px-0 md:justify-start md:pl-20"
+                      className="w-full"
                       size="lg"
                       disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
                     >
-                      <option.icon />
-                      <span className="ml-2 text-left">
-                        Sign in with {option.name}
-                      </span>
+                      <div className="flex w-48 items-center justify-start gap-2">
+                        <option.icon />
+                        <span>Sign in with {option.name}</span>
+                      </div>
                     </Button>
                   ))}
                 </div>

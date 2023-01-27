@@ -30,8 +30,7 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
           </Text>
           <div className="flex items-center justify-center space-x-6">
             <Button
-              variant="solid"
-              color="primary"
+              variant="primary"
               className="group space-x-1 hover:shadow-xl"
               onClick={() => signIn()}
             >
@@ -61,7 +60,7 @@ export const strings = {
   heroTitlePoint: 'Open source & privacy friendly',
   heroTitle: 'Disqus alternate',
   heroDescription:
-    'Build stronger, more engaged communities by integrating our moden comment system.',
+    'Build stronger, more engaged communities by integrating our modern comment system.',
   callToAction: {
     main: 'Get Early Access',
     secondary: 'Learn More',

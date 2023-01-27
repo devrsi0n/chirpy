@@ -216,8 +216,7 @@ export const Form = () => {
           </Button>
           <Button
             disabled={hasError}
-            variant="solid"
-            color="primary"
+            variant="primary"
             onClick={handleSubmit(async (data) => console.log(data))}
           >
             Save changes

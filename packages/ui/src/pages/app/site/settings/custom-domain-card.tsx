@@ -70,7 +70,6 @@ export function CustomDomainCard({ data }: DomainCardProps) {
               await reCheckCustomDomain();
             }}
             disabled={isFetching}
-            variant="default"
           >
             {isFetching && (
               <IconLoader size={20} className="animate-spin text-white" />
@@ -80,8 +79,8 @@ export function CustomDomainCard({ data }: DomainCardProps) {
           <Button
             onClick={handleClickDelete}
             disabled={isDeleting}
-            variant="solid"
-            color="red"
+            variant="primary"
+            danger
           >
             {isDeleting ? (
               <IconLoader className="animate-spin text-white" />

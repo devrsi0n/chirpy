@@ -56,12 +56,7 @@ export function ToxicTextPopover({
             sentences. You must remove them before posting.
           </Text>
           <div className="mt-5 flex justify-end">
-            <Button
-              size="sm"
-              variant="solid"
-              color="primary"
-              onClick={handleClickOk}
-            >
+            <Button size="sm" variant="primary" onClick={handleClickOk}>
               {`OK`}
             </Button>
           </div>

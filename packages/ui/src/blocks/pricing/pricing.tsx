@@ -53,7 +53,7 @@ export function Pricing({ id }: PricingProps): JSX.Element {
           callToAction={{
             label: 'Get started',
             buttonProps: {
-              color: 'primary',
+              variant: 'primary',
             },
           }}
           priceDescription="Free for now"
@@ -100,7 +100,6 @@ function PricingCard({
       </Text>
       <Button
         {...callToAction.buttonProps}
-        variant="solid"
         className="mb-8 w-full"
         onClick={() => signIn()}
       >

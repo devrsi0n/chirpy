@@ -16,7 +16,7 @@ const handleSessionAndSignIn = () => {
 };
 
 export function SignInButton({
-  variant = 'solid',
+  variant = 'primary',
   inPageNav,
   ...restProps
 }: SignInButtonProps): JSX.Element {

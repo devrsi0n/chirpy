@@ -28,8 +28,7 @@ export function RTEPopoverButton({
           <Input value={value} onChange={(e) => setValue(e.target.value)} />
         </FormField>
         <Button
-          variant="solid"
-          color="primary"
+          variant="primary"
           size="sm"
           onClick={() => {
             onClickGo(value);

@@ -77,8 +77,7 @@ export function SiteGeneralSettings({
         <Button
           className="w-full sm:w-auto"
           disabled={hasError || isLoading}
-          color="primary"
-          variant="solid"
+          variant="primary"
           onClick={handleClickSubmit}
         >
           {isLoading && <IconLoader className="animate-spin text-white" />}
