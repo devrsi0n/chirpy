@@ -2,9 +2,8 @@ import {
   isValidDomain,
   ROUTER_ERROR_DUPLICATED_PROJECT_DOMAIN,
 } from '@chirpy-dev/utils';
-import * as React from 'react';
 
-import { Button, Dialog, TextField } from '../../../components';
+import { Button, Dialog, FormField, Input } from '../../../components';
 import { useForm } from '../../../hooks';
 import { isTRPCClientError, trpcClient } from '../../../utilities';
 
@@ -61,7 +60,7 @@ export function CreateProjectDialog(
     >
       <Dialog.Body>
         <form className="flex w-80 flex-col space-y-4">
-          <TextField
+          <FormField
             {...register('name', {
               required: { value: true, message: 'Name is required' },
               pattern: {
@@ -74,9 +73,10 @@ export function CreateProjectDialog(
             aria-label="Name of this project"
             label="Name"
             errorMessage={errors.name}
-            placeholder="swift"
-          />
-          <TextField
+          >
+            <Input placeholder="swift" />
+          </FormField>
+          <FormField
             {...register('domain', {
               required: { value: true, message: 'Domain is required' },
               pattern: {
@@ -87,8 +87,9 @@ export function CreateProjectDialog(
             label="Domain"
             hintText="Associate your domain with this project"
             errorMessage={errors.domain}
-            placeholder="example.com"
-          />
+          >
+            <Input placeholder="example.com" />
+          </FormField>
         </form>
       </Dialog.Body>
       <Dialog.Footer>

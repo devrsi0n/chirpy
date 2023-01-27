@@ -1,10 +1,13 @@
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
 
-import { Button } from '../../../../../components/button';
-import { Link } from '../../../../../components/link';
-import { Text } from '../../../../../components/text';
-import { TextField } from '../../../../../components/text-field';
+import {
+  FormField,
+  Input,
+  Button,
+  Link,
+  Text,
+} from '../../../../../components';
 import { useForm } from '../../../../../hooks/use-form';
 import { SignInProps } from './types';
 
@@ -26,7 +29,7 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
 
   return (
     <form onSubmit={handleClickSubmit} className="space-y-4">
-      <TextField
+      <FormField
         {...register('name', {
           pattern: {
             value: /^[\w ]{3,24}$/,
@@ -35,10 +38,10 @@ export function AnonymousUserSignIn({ children }: SignInProps): JSX.Element {
           },
         })}
         errorMessage={errors?.name}
-        type="text"
         label="Name"
-        placeholder="James Smith"
-      />
+      >
+        <Input placeholder="James Smith" />
+      </FormField>
       <div>
         {children}
         <Button

@@ -2,8 +2,9 @@ import * as React from 'react';
 
 import {
   Button,
+  FormField,
   IconLoader,
-  TextField,
+  Input,
   useToast,
 } from '../../../../components';
 import { useForm } from '../../../../hooks';
@@ -93,11 +94,9 @@ export function CustomDomainSettings(
   }
   return (
     <section className="pt-8">
-      <TextField
-        {...register('customDomain')}
-        label="Custom domain"
-        prefix="https://"
-      />
+      <FormField {...register('customDomain')} label="Custom domain">
+        <Input prefix="https://" />
+      </FormField>
       <Button
         className="w-full sm:w-auto"
         disabled={hasError || isLoading}

@@ -1,14 +1,14 @@
-import { EMAIL_RE } from '@chirpy-dev/utils';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Button } from 'src/components';
 import { Divider } from 'src/components/divider';
 import { IconMessageSquare } from 'src/components/icons';
 import { useForm } from 'src/hooks';
+import { z } from 'zod';
 
+import { Input as TextInputComponent } from '../../input';
+import { Select } from '../../select';
+import { TextArea as TextAreaInputComponent } from '../../text-area';
 import { FormField } from '../form-field';
-import { Input as TextInputComponent } from '../input';
-import { Select } from '../select';
-import { TextArea as TextAreaInputComponent } from '../text-area';
 
 type FormFieldType = typeof FormField;
 export default {
@@ -36,10 +36,10 @@ export const TextInput: ComponentStory<FormFieldType> = () => {
         <TextInputComponent placeholder="charlie@chirpy.dev" />
       </FormField>
       <FormField label="URL" hintText="Enter your domain">
-        <TextInputComponent prefixNode="https://" placeholder="chirpy.dev" />
+        <TextInputComponent prefix="https://" placeholder="chirpy.dev" />
       </FormField>
       <FormField label="Suffix" hintText="Look at my suffix">
-        <TextInputComponent placeholder="sixian" suffixNode=".chirpy.dev" />
+        <TextInputComponent placeholder="sixian" suffix=".chirpy.dev" />
       </FormField>
       <FormField
         label="Prefix and Suffix"
@@ -47,9 +47,9 @@ export const TextInput: ComponentStory<FormFieldType> = () => {
         errorMessage="Invalid URL"
       >
         <TextInputComponent
-          prefixNode="https://"
+          prefix="https://"
           placeholder="sixian"
-          suffixNode={<IconMessageSquare size={16} />}
+          suffix={<IconMessageSquare size={16} />}
         />
       </FormField>
     </div>
@@ -169,11 +169,7 @@ export const Form = () => {
 
           <FormField
             {...register('email', {
-              required: { value: true, message: 'Email is required' },
-              pattern: {
-                value: EMAIL_RE,
-                message: 'Invalid email address',
-              },
+              zod: z.string().email('Invalid email'),
             })}
             label="Email address"
             errorMessage={errors.email}

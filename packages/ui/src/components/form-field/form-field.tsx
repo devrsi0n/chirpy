@@ -3,14 +3,14 @@ import { AnimatePresence, m } from 'framer-motion';
 import React from 'react';
 
 import { easeInOutOpacity } from '../animation';
+import type { InputProps } from '../input';
+import type { SelectProps } from '../select';
 import { Text } from '../text';
-import { InputProps } from './input';
-import { SelectProps } from './select';
+import type { TextAreaProps } from '../text-area';
 
 export type FormFieldProps = {
-  children: React.ReactElement<InputProps | SelectProps>;
+  children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   label?: string;
-  placeholder?: string;
   errorMessage?: string;
   hintText?: string;
   disabled?: boolean;
@@ -71,7 +71,10 @@ export function FormField({
         )}
       </div>
       <div className="flex w-full flex-col gap-1.5">
-        {React.cloneElement(children, { error: !!errorMessage })}
+        {React.cloneElement(children, {
+          error: !!errorMessage,
+          ...childrenProps,
+        })}
         <AnimatePresence>
           {errorMessage && (
             <m.div {...easeInOutOpacity}>

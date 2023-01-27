@@ -20,3 +20,10 @@ export const textInput = `placeholder-gray-900 bg-transparent`;
 export const textInputError = `border-red-700 focus-visible:border-red-800`;
 
 export const gradient = `bg-gradient-to-r from-primary-800 to-plum-800`;
+
+export const easeInOutTransition = 'transition duration-150 ease-in-out';
+export const focusRing =
+  'focus:outline-none focus-visible:ring-4 focus-visible:ring-primary-700 focus-visible:ring-opacity-25';
+export const disabled =
+  'cursor-not-allowed bg-gray-300 text-gray-1100 shadow-none';
+export const borderHover = 'hover:border-gray-800';

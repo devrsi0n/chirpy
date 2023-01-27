@@ -108,7 +108,7 @@ export function Dialog({
                       </div>
                     </div>
                   )}
-                  <div className="overflow-hidden text-left align-middle">
+                  <div className="overflow-hidden px-1 text-left align-middle">
                     {showDismissButton && (
                       <IconButton
                         className="!absolute right-3 top-3 bg-gray-300 p-0.5 dark:bg-gray-600 dark:hover:bg-gray-700"
