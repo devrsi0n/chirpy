@@ -13,7 +13,7 @@ import { prisma } from '../../db/client';
  * Adds a new domain to the Vercel project using a provided
  * `domain` & `siteId`
  */
-export async function createDomain(domain: string, siteId: string) {
+export async function createDomain(domain: string, subdomain: string) {
   let response: Response;
   try {
     response = await fetch(
@@ -59,7 +59,7 @@ export async function createDomain(domain: string, siteId: string) {
   // Domain is successfully added
   await prisma.blogSite.update({
     where: {
-      id: siteId,
+      subdomain,
     },
     data: {
       customDomain: domain,

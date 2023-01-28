@@ -15,6 +15,7 @@ import {
   Logo,
 } from '../../../../components';
 import { useCurrentUser } from '../../../../contexts';
+import { trpcClient } from '../../../../utilities';
 import { CollapsibleNav } from './collapsible-nav';
 import { NavLink, NavLinkProps } from './nav-link';
 import { SidebarProps } from './sidebar';
@@ -24,6 +25,7 @@ export type MobileHeaderProps = SidebarProps & {
 };
 
 export function MobileHeader(props: MobileHeaderProps): JSX.Element {
+  const { data: sites } = trpcClient.site.all.useQuery();
   const [isOpen, setIsOpen] = React.useState(false);
   const { isSignIn, data } = useCurrentUser();
   const { image, name, email, username } = data;
@@ -56,7 +58,7 @@ export function MobileHeader(props: MobileHeaderProps): JSX.Element {
                         <span>Sites</span>
                       </CollapsibleNav.Trigger>
                       <CollapsibleNav.Content>
-                        {props.sites?.map((site) => (
+                        {sites?.map((site) => (
                           <CollapsibleNav.Item
                             href={`/site/${site.subdomain}`}
                             key={site.id}

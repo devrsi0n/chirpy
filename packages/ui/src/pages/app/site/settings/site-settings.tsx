@@ -1,20 +1,21 @@
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../../../blocks';
+import { PageTitle } from '../../../../blocks';
 import { Tabs } from '../../../../components';
 import { trpcClient } from '../../../../utilities';
+import { AppLayout } from '../../components/app-layout';
 import { CustomDomainSettings } from './custom-domain-settings';
 import { SiteGeneralSettings } from './general-settings';
 
 export type SiteSettingsProps = {
-  id: string;
+  subdomain: string;
 };
 
-export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
-  const { data } = trpcClient.site.byId.useQuery(id);
+export function SiteSettings({ subdomain }: SiteSettingsProps): JSX.Element {
+  const { data } = trpcClient.site.bySubdomain.useQuery(subdomain);
 
   return (
-    <SiteLayout title="Site settings">
+    <AppLayout title="Site settings" subdomain={subdomain}>
       <PageTitle className="mb-4">Site settings</PageTitle>
       <Tabs defaultValue="general">
         <Tabs.List>
@@ -22,12 +23,12 @@ export function SiteSettings({ id }: SiteSettingsProps): JSX.Element {
           <Tabs.Trigger value="customDomain">Custom domain</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="general">
-          <SiteGeneralSettings siteId={id} data={data} />
+          <SiteGeneralSettings subdomain={subdomain} data={data} />
         </Tabs.Content>
         <Tabs.Content value="customDomain">
-          <CustomDomainSettings siteId={id} data={data} />
+          <CustomDomainSettings subdomain={subdomain} data={data} />
         </Tabs.Content>
       </Tabs>
-    </SiteLayout>
+    </AppLayout>
   );
 }

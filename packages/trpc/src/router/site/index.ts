@@ -67,14 +67,17 @@ export const siteRouter = router({
   update: protectedProcedure
     .input(UPDATE_INPUT_VALIDATION)
     .mutation(async ({ input, ctx }) => {
-      const site = await checkUserAuthorization(ctx.session.user.id, input.id);
+      const site = await checkUserAuthorization(
+        ctx.session.user.id,
+        input.subdomain,
+      );
       if (site.subdomain !== input.subdomain) {
         // Only check duplicated subdomain when it changes
         await checkDuplicatedSubdomain(input.subdomain);
       }
       const result = await prisma.blogSite.update({
         where: {
-          id: input.id,
+          subdomain: input.subdomain,
         },
         data: {
           ...input,
@@ -82,10 +85,10 @@ export const siteRouter = router({
       });
       return result;
     }),
-  byId: protectedProcedure.input(z.string()).query(async ({ input }) => {
+  bySubdomain: protectedProcedure.input(z.string()).query(async ({ input }) => {
     const result = await prisma.blogSite.findUnique({
       where: {
-        id: input,
+        subdomain: input,
       },
       select: {
         id: true,
@@ -107,13 +110,13 @@ export const siteRouter = router({
   createDomain: protectedProcedure
     .input(
       z.object({
-        siteId: z.string(),
+        subdomain: z.string(),
         customDomain: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      await checkUserAuthorization(ctx.session.user.id, input.siteId);
-      return await createDomain(input.customDomain, input.siteId);
+      await checkUserAuthorization(ctx.session.user.id, input.subdomain);
+      return await createDomain(input.customDomain, input.subdomain);
     }),
   checkDomain: protectedProcedure.input(z.string()).query(async ({ input }) => {
     return checkDomain(input);

@@ -42,7 +42,7 @@ export function CustomDomainCard({ data }: DomainCardProps) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         customDomain: data.customDomain!,
       });
-      void trpcCtx.site.byId.invalidate(data.id);
+      void trpcCtx.site.bySubdomain.invalidate(data.id);
     } catch {
       showToast({
         title: 'Error deleting domain',

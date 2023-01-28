@@ -4,7 +4,6 @@
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib",
   "editor.fontSize": 16,
   "cSpell.words": [
     "blacka",

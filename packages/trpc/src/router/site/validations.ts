@@ -69,5 +69,5 @@ export const CREATE_INPUT_VALIDATION = z.object({
 });
 
 export const UPDATE_INPUT_VALIDATION = CREATE_INPUT_VALIDATION.extend({
-  id: z.string(),
+  subdomain: z.string(),
 });

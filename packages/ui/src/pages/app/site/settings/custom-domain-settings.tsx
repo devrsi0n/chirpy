@@ -16,8 +16,8 @@ import {
 import { CustomDomainCard } from './custom-domain-card';
 
 export type CustomDomainSettingsProps = {
-  siteId: string;
-  data?: RouterOutputs['site']['byId'];
+  subdomain: string;
+  data?: RouterOutputs['site']['bySubdomain'];
 };
 
 export function CustomDomainSettings(
@@ -43,10 +43,10 @@ export function CustomDomainSettings(
   const handleClickSubmit = handleSubmit(async (fields) => {
     try {
       await createDomain({
-        siteId: props.siteId,
+        subdomain: props.subdomain,
         customDomain: fields.customDomain || '',
       });
-      trpcCtx.site.byId.invalidate(props.siteId);
+      trpcCtx.site.bySubdomain.invalidate(props.subdomain);
       showToast({
         title: 'Custom domain added successfully!',
         type: 'success',
