@@ -64,9 +64,9 @@ function CollapsibleNavContent({
     <Collapsible.Content forceMount {...restProps}>
       <AnimatePresence>
         {isOpen && (
-          <m.nav {...slideMotion} className="ml-9" key="collapsible-content">
+          <m.ul {...slideMotion} className="ml-9" key="collapsible-content">
             {children}
-          </m.nav>
+          </m.ul>
         )}
       </AnimatePresence>
     </Collapsible.Content>

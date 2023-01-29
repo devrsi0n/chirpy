@@ -1,13 +1,13 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Dashboard } from '..';
+import { DashboardHome } from '..';
 import { pageRender } from '../../../../__tests__/fixtures/page-render';
 import { mockProject } from '../../../../__tests__/mocks/mock-project-data';
 
 describe.skip('dashboard', () => {
   beforeEach(() => {
-    pageRender(<Dashboard />);
+    pageRender(<DashboardHome />);
   });
 
   afterEach(() => {

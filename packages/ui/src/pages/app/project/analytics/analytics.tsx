@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import { Analytics, PageTitleDeprecated } from '../../../blocks';
-import { ClientOnly } from '../../../components';
-import { RouterOutputs } from '../../../utilities/trpc-client';
-import { AppLayout } from '../components/app-layout';
+import { Analytics, PageTitleDeprecated } from '../../../../blocks';
+import { ClientOnly } from '../../../../components';
+import { RouterOutputs } from '../../../../utilities/trpc-client';
+import { AppLayout } from '../../components/app-layout';
 
-export type AnalyticsByDomainPageProps = {
+export type ProjectAnalyticsProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;
 };
 
-export function AnalyticsByDomainPage({
+export function ProjectAnalytics({
   project,
-}: AnalyticsByDomainPageProps): JSX.Element {
+}: ProjectAnalyticsProps): JSX.Element {
   return (
     <AppLayout title="Analytics">
       <section className="mx-auto px-4 xl:max-w-6xl">

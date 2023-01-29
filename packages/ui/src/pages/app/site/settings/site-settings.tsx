@@ -16,7 +16,7 @@ export function SiteSettings({ subdomain }: SiteSettingsProps): JSX.Element {
 
   return (
     <AppLayout title="Site settings" subdomain={subdomain}>
-      <PageTitle className="mb-4">Site settings</PageTitle>
+      <PageTitle className="mb-4">Site Settings</PageTitle>
       <Tabs defaultValue="general">
         <Tabs.List>
           <Tabs.Trigger value="general">General</Tabs.Trigger>

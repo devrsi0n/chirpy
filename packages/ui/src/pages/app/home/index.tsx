@@ -13,7 +13,7 @@ import { AppLayout } from '../components/app-layout';
 import { CreateProjectButton } from './create-button';
 import { CreateProjectDialog } from './create-project-dialog';
 
-export function Dashboard(): JSX.Element {
+export function DashboardHome(): JSX.Element {
   const { loading: userIsLoading } = useCurrentUser();
   const {
     data: projects,

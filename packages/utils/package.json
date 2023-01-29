@@ -14,7 +14,7 @@
     "@types/node": "16.11.45",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",
-    "eslint": "8.32.0",
+    "eslint": "8.33.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.4"

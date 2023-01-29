@@ -27,7 +27,7 @@
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "eslint": "8.32.0"
+    "eslint": "8.33.0"
   },
   "keywords": [
     "CLI",
