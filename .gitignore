@@ -17,7 +17,8 @@ out/
 **/cypress/videos/
 storybook-static/
 .swc
+.turbo
 
 docker-compose.yml
 config.yaml
-.turbo
+tsconfig.tsbuildinfo

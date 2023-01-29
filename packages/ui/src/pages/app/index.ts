@@ -3,7 +3,7 @@ export * from './auth';
 export * from './home';
 export * from './profile';
 export * from './site';
-export * from './project/theme';
+export * from './project';
 export * from './404';
 export * from './500';
 export * from './redirecting';

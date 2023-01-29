@@ -1,5 +1,5 @@
 import { ssg } from '@chirpy-dev/trpc';
-import { ThemeProps } from '@chirpy-dev/ui';
+import { ProjectThemeProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-type StaticProps = ThemeProps;
+type StaticProps = ProjectThemeProps;
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
@@ -50,4 +50,4 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   };
 };
 
-export { ThemePage as default } from '@chirpy-dev/ui';
+export { ProjectThemePage as default } from '@chirpy-dev/ui';
