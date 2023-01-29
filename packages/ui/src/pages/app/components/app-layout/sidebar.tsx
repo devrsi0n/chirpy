@@ -1,4 +1,4 @@
-import { HOME_ORIGIN } from '@chirpy-dev/utils';
+import { getSitesSubdomain, HOME_ORIGIN } from '@chirpy-dev/utils';
 import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
@@ -147,7 +147,9 @@ function SiteSidebar(props: SiteSidebarProps) {
                 {site?.posts.length || 0 > 0 ? (
                   site?.posts.map((post) => (
                     <CollapsibleNav.Item
-                      href={`/site/${post.id}`}
+                      href={`${getSitesSubdomain(props.subdomain)}/post/${
+                        post.slug
+                      }`}
                       key={post.id}
                     >
                       <IconFeather size={18} />

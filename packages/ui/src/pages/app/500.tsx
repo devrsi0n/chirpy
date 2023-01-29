@@ -4,14 +4,17 @@ import * as React from 'react';
 
 import { SiteLayout } from '../../blocks';
 import { Button, Heading, Link, Text } from '../../components';
+import { AppLayout } from './components/app-layout';
+import { isAppDomain } from './utils';
 
 export function Custom500(): JSX.Element {
   const { query } = useRouter();
   const message =
     query['message'] ||
     `We might have encountered some issues in our services...`;
+  const Container = isAppDomain ? AppLayout : SiteLayout;
   return (
-    <SiteLayout title="500">
+    <Container title="Server error">
       <section className="flex flex-col items-center space-y-8 px-4">
         <Heading className="font-bold">Oops! Something went wrong</Heading>
         <Text variant="secondary">{message}</Text>
@@ -32,6 +35,6 @@ export function Custom500(): JSX.Element {
           </Button>
         </div>
       </section>
-    </SiteLayout>
+    </Container>
   );
 }

@@ -9,7 +9,7 @@ export type SiteAnalyticsProps = {
 
 export function SiteAnalytics({ subdomain }: SiteAnalyticsProps): JSX.Element {
   return (
-    <AppLayout title="Site settings" subdomain={subdomain}>
+    <AppLayout title="Site Analytics" subdomain={subdomain}>
       <PageTitle className="mb-4">Site Analytics</PageTitle>
     </AppLayout>
   );

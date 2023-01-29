@@ -9,7 +9,7 @@ export type SiteDesignProps = {
 
 export function SiteDesign({ subdomain }: SiteDesignProps): JSX.Element {
   return (
-    <AppLayout title="Site settings" subdomain={subdomain}>
+    <AppLayout title="Site Design" subdomain={subdomain}>
       <PageTitle className="mb-4">Design</PageTitle>
     </AppLayout>
   );

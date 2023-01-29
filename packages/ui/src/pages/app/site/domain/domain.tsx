@@ -10,7 +10,7 @@ export type SiteDomainProps = {
 
 export function SiteDomain({ subdomain }: SiteDomainProps): JSX.Element {
   return (
-    <AppLayout title="Site settings" subdomain={subdomain}>
+    <AppLayout title="Site Domain" subdomain={subdomain}>
       <PageTitle className="mb-4">Domain</PageTitle>
       <Text>Custom domain & subdomain</Text>
     </AppLayout>

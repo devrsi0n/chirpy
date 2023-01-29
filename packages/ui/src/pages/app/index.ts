@@ -1,4 +1,4 @@
-export * from './project/analytics';
+export * from './billing';
 export * from './auth';
 export * from './home';
 export * from './profile';

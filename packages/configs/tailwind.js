@@ -118,7 +118,7 @@ module.exports = {
       },
       fill: colors,
       borderColor: (theme) => ({
-        DEFAULT: theme('colors.gray.700/1', 'currentColor'),
+        DEFAULT: theme('colors.gray.500/1', 'currentColor'),
       }),
       ringColor: (theme) => ({
         DEFAULT: theme('colors.gray.700/1', 'currentColor'),

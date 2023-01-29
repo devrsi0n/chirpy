@@ -9,7 +9,7 @@ export type SiteCommentsProps = {
 
 export function SiteComments({ subdomain }: SiteCommentsProps): JSX.Element {
   return (
-    <AppLayout title="Site settings" subdomain={subdomain}>
+    <AppLayout title="Site Comments" subdomain={subdomain}>
       <PageTitle className="mb-4">Comments</PageTitle>
     </AppLayout>
   );

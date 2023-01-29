@@ -15,7 +15,7 @@ export function SiteSettings({ subdomain }: SiteSettingsProps): JSX.Element {
   const { data } = trpcClient.site.bySubdomain.useQuery(subdomain);
 
   return (
-    <AppLayout title="Site settings" subdomain={subdomain}>
+    <AppLayout title="Site Settings" subdomain={subdomain}>
       <PageTitle className="mb-4">Site Settings</PageTitle>
       <Tabs defaultValue="general">
         <Tabs.List>

@@ -6,6 +6,10 @@ export const HOME_ORIGIN: string = process.env.NEXT_PUBLIC_HOME_ORIGIN;
 export const API_URL = `${HOME_ORIGIN}/api`;
 export const APP_ORIGIN = `${protocol}//app.${HOME_HOST}`;
 
+export function getSitesSubdomain(subdomain: string): string {
+  return `${protocol}//${subdomain}.${HOME_HOST}`;
+}
+
 export function isValidHttpUrl(str: string): boolean {
   let url;
 

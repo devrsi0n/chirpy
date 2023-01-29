@@ -1,1 +1,1 @@
-export { Dashboard as default } from '@chirpy-dev/ui';
+export { DashboardHome as default } from '@chirpy-dev/ui';
