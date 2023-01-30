@@ -145,19 +145,28 @@ function SiteSidebar(props: SiteSidebarProps) {
               </CollapsibleNav.Trigger>
               <CollapsibleNav.Content>
                 {site?.posts.length || 0 > 0 ? (
-                  site?.posts.map((post) => (
-                    <CollapsibleNav.Item
-                      href={`${getSitesSubdomain(props.subdomain)}/post/${
-                        post.slug
-                      }`}
-                      key={post.id}
-                    >
-                      <IconFeather size={18} />
-                      <span className="max-w-[140px] truncate first-letter:uppercase">
-                        {post.slug.replace(/-/g, ' ')}
-                      </span>
-                    </CollapsibleNav.Item>
-                  ))
+                  site?.posts.map((post) => {
+                    const title = post.slug.replace(/-/g, ' ');
+                    return (
+                      <CollapsibleNav.Item
+                        href={`${getSitesSubdomain(props.subdomain)}/post/${
+                          post.slug
+                        }`}
+                        key={post.id}
+                      >
+                        {/* Fix the icon is shrank */}
+                        <span className="w-[18px]">
+                          <IconFeather size={18} />
+                        </span>
+                        <span
+                          className="truncate first-letter:uppercase"
+                          title={title}
+                        >
+                          {title}
+                        </span>
+                      </CollapsibleNav.Item>
+                    );
+                  })
                 ) : (
                   <CollapsibleNav.Item
                     href={`${HOME_ORIGIN}/docs/how-to/create-a-post`}

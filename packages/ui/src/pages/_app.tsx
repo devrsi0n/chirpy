@@ -26,7 +26,7 @@ export const App = trpcClient.withTRPC(function App({
         strategy="lazyOnload"
         src="https://unpkg.com/@tinybirdco/flock.js"
         data-host="https://api.us-east.tinybird.co"
-        data-token="p.eyJ1IjogImRiNWMwMmY2LTZhODktNDcwMi1hYWYyLTY0ZDY4MjYyZTZmYSIsICJpZCI6ICI5YzNkZDM4Yy0yMTcxLTRhYTktODY3ZS0xYzgwMjg4YTVmY2UifQ.RHK4uiwEhxHIQ-R7Q7ksRtMwUQNMTg-jIqZB-KQnGFI"
+        data-token={process.env.NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN}
       />
       <PlausibleProvider domain={ANALYTICS_DOMAIN}>
         <SessionProvider {...(session && { session })}>

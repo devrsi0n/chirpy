@@ -3,6 +3,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_HOME_ORIGIN: string;
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
+    NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN: string;
 
     NEXTAUTH_SECRET: string;
     NEXTAUTH_URL: string;

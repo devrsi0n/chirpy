@@ -20,7 +20,7 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
         <main className="flex-1 p-8">{props.children}</main>
       </div>
       <div className="block h-full md:hidden">
-        <MobileHeader>
+        <MobileHeader subdomain={props.subdomain}>
           <main className="h-full p-4">{props.children}</main>
         </MobileHeader>
       </div>
