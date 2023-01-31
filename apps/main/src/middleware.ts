@@ -1,4 +1,3 @@
-// import { withAuth } from '@chirpy-dev/trpc/src/middlerware';
 import { isHomeHost } from '@chirpy-dev/utils';
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
 

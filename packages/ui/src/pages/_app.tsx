@@ -1,5 +1,5 @@
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
-import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
+import { ANALYTICS_DOMAIN, isBrowser } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
 import { SessionProvider } from 'next-auth/react';
 import PlausibleProvider from 'next-plausible';
@@ -20,14 +20,9 @@ export const App = trpcClient.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
+  const currentOrigin = isBrowser ? window.location.origin : null;
   return (
     <>
-      <Script
-        strategy="lazyOnload"
-        src="https://unpkg.com/@tinybirdco/flock.js"
-        data-host="https://api.us-east.tinybird.co"
-        data-token={process.env.NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN}
-      />
       <PlausibleProvider domain={ANALYTICS_DOMAIN}>
         <SessionProvider {...(session && { session })}>
           <NextThemesProvider
@@ -53,6 +48,13 @@ export const App = trpcClient.withTRPC(function App({
           </NextThemesProvider>
         </SessionProvider>
       </PlausibleProvider>
+      {currentOrigin && (
+        <Script
+          strategy="lazyOnload"
+          src="https://unpkg.com/@tinybirdco/flock.js"
+          data-proxy={currentOrigin}
+        />
+      )}
     </>
   );
 });
