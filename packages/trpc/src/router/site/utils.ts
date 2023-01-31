@@ -24,10 +24,13 @@ export async function checkDuplicatedSubdomain(subdomain: string) {
 /**
  * Check if the user has the rights
  */
-export async function checkUserAuthorization(userId: string, siteId: string) {
+export async function checkUserAuthorization(
+  userId: string,
+  subdomain: string,
+) {
   const site = await prisma.blogSite.findFirst({
     where: {
-      id: siteId,
+      subdomain,
       managerId: userId,
     },
     select: {

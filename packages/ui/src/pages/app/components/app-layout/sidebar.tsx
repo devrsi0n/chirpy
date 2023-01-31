@@ -1,87 +1,238 @@
-import { HOME_ORIGIN } from '@chirpy-dev/utils';
+import { getSitesSubdomain, HOME_ORIGIN } from '@chirpy-dev/utils';
+import { AnimatePresence, m } from 'framer-motion';
 import * as React from 'react';
 
 import { UserMenu } from '../../../../blocks';
 import {
+  Button,
   Divider,
+  easeInOutOpacity,
+  IconArrowLeft,
   IconBook,
   IconCreditCard,
+  IconEdit2,
   IconFeather,
+  IconFigma,
+  IconGlobe,
   IconHome,
   IconLayers,
+  IconMessageSquare,
+  IconPieChart,
   IconPlus,
+  IconSettings,
   Logo,
 } from '../../../../components';
-import { RouterOutputs } from '../../../../utilities';
+import { trpcClient } from '../../../../utilities';
 import { CollapsibleNav } from './collapsible-nav';
 import { NavLink } from './nav-link';
 import { UsageCard } from './usage-card';
 
 export type SidebarProps = {
-  sites: RouterOutputs['site']['all'] | undefined;
-  children: React.ReactNode;
+  subdomain?: string;
 };
 
-export function Sidebar({ sites, children }: SidebarProps) {
+export function Sidebar(props: SidebarProps) {
   return (
-    <div className="hidden h-full flex-row md:flex">
-      <aside className="flex w-72 flex-col justify-between border-r py-8 px-6">
-        <nav className="space-y-6">
-          <Logo />
-          <ul className="space-y-1">
+    <aside className="flex h-full w-72 flex-col justify-between border-r py-8 px-6">
+      <AnimatePresence>
+        {props.subdomain ? (
+          <SiteSidebar subdomain={props.subdomain} />
+        ) : (
+          <HomeSidebar />
+        )}
+      </AnimatePresence>
+    </aside>
+  );
+}
+
+function HomeSidebar() {
+  const { data: sites } = trpcClient.site.all.useQuery();
+  return (
+    <>
+      <m.nav key="home-sidebar" className="space-y-6" {...easeInOutOpacity}>
+        <Logo />
+        <ul className="space-y-1">
+          <NavLink
+            href="/"
+            highlightPattern={/^\/$/}
+            icon={<IconHome size={24} />}
+          >
+            Home
+          </NavLink>
+          <CollapsibleNav>
+            <CollapsibleNav.Trigger>
+              <IconLayers size={24} />
+              <span>Sites</span>
+            </CollapsibleNav.Trigger>
+            <CollapsibleNav.Content>
+              {sites?.map((site) => (
+                <CollapsibleNav.Item
+                  href={`/site/${site.subdomain}`}
+                  key={site.id}
+                >
+                  {/* TODO: Use user defined logo */}
+                  <IconFeather size={18} />
+                  <span>{site.name}</span>
+                </CollapsibleNav.Item>
+              ))}
+              <CollapsibleNav.Item href="/site/create" key="create-site">
+                <IconPlus size={18} />
+                <span>Create new site</span>
+              </CollapsibleNav.Item>
+            </CollapsibleNav.Content>
+          </CollapsibleNav>
+        </ul>
+      </m.nav>
+      <SidebarFooter />
+    </>
+  );
+}
+
+type SiteSidebarProps = {
+  subdomain: string;
+};
+
+function SiteSidebar(props: SiteSidebarProps) {
+  const { data: site } = trpcClient.site.bySubdomain.useQuery(props.subdomain);
+  return (
+    <>
+      <m.nav className="space-y-6" key="site-sidebar" {...easeInOutOpacity}>
+        <Logo />
+        <Button
+          variant="text"
+          href="/"
+          className="space-x-2 !pl-2.5 font-semibold"
+          size="lg"
+        >
+          <IconArrowLeft size={22} />
+          <span>Back to all sites home</span>
+        </Button>
+        <ul className="space-y-1">
+          <li>
             <NavLink
-              href="/"
+              href={`/site/${props.subdomain}`}
               highlightPattern={/^\/$/}
               icon={<IconHome size={24} />}
             >
-              Home
+              Site Home
             </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/site/${props.subdomain}/analytics`}
+              highlightPattern={
+                new RegExp(`^/site/${props.subdomain}/analytics`)
+              }
+              icon={<IconPieChart size={24} />}
+            >
+              Analytics
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/site/${props.subdomain}/domain`}
+              highlightPattern={new RegExp(`^/site/${props.subdomain}/domain`)}
+              icon={<IconGlobe size={24} />}
+            >
+              Domain
+            </NavLink>
+          </li>
+          <li>
             <CollapsibleNav>
               <CollapsibleNav.Trigger>
-                <IconLayers size={24} />
-                <span>Sites</span>
+                <IconEdit2 size={24} />
+                <span>Posts</span>
               </CollapsibleNav.Trigger>
               <CollapsibleNav.Content>
-                {sites?.map((site) => (
+                {site?.posts.length || 0 > 0 ? (
+                  site?.posts.map((post) => {
+                    const title = post.slug.replace(/-/g, ' ');
+                    return (
+                      <CollapsibleNav.Item
+                        href={`${getSitesSubdomain(props.subdomain)}/post/${
+                          post.slug
+                        }`}
+                        key={post.id}
+                      >
+                        {/* Fix the icon is shrank */}
+                        <span className="w-[18px]">
+                          <IconFeather size={18} />
+                        </span>
+                        <span
+                          className="truncate first-letter:uppercase"
+                          title={title}
+                        >
+                          {title}
+                        </span>
+                      </CollapsibleNav.Item>
+                    );
+                  })
+                ) : (
                   <CollapsibleNav.Item
-                    href={`/site/${site.subdomain}`}
-                    key={site.id}
+                    href={`${HOME_ORIGIN}/docs/how-to/create-a-post`}
                   >
-                    {/* TODO: Use user defined logo */}
-                    <IconFeather size={18} />
-                    <span>{site.name}</span>
+                    No posts, create one?
                   </CollapsibleNav.Item>
-                ))}
-                <CollapsibleNav.Item href="/site/create" key="create-site">
-                  <IconPlus size={18} />
-                  <span>Create new site</span>
-                </CollapsibleNav.Item>
+                )}
               </CollapsibleNav.Content>
             </CollapsibleNav>
-          </ul>
-        </nav>
-        <nav className="space-y-6">
-          <ul className="space-y-1">
-            <li>
-              <NavLink
-                href={`${HOME_ORIGIN}/docs`}
-                icon={<IconBook size={24} />}
-              >
-                Documentation
-              </NavLink>
-            </li>
-            <li>
-              <NavLink href="/billing" icon={<IconCreditCard size={24} />}>
-                Billing
-              </NavLink>
-            </li>
-          </ul>
-          <UsageCard />
-          <Divider />
-          <UserMenu />
-        </nav>
-      </aside>
-      <main className="flex-1 p-8">{children}</main>
-    </div>
+          </li>
+          <li>
+            <NavLink
+              href={`/site/${props.subdomain}/settings`}
+              highlightPattern={
+                new RegExp(`^/site/${props.subdomain}/settings`)
+              }
+              icon={<IconSettings size={24} />}
+            >
+              Site Settings
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/site/${props.subdomain}/design`}
+              highlightPattern={new RegExp(`^/site/${props.subdomain}/design`)}
+              icon={<IconFigma size={24} />}
+            >
+              Design
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              href={`/site/${props.subdomain}/comments`}
+              highlightPattern={
+                new RegExp(`^/site/${props.subdomain}/comments`)
+              }
+              icon={<IconMessageSquare size={24} />}
+            >
+              Comments
+            </NavLink>
+          </li>
+        </ul>
+      </m.nav>
+      <SidebarFooter />
+    </>
+  );
+}
+
+function SidebarFooter() {
+  return (
+    <m.nav className="space-y-6" key="sidebar-footer">
+      <ul className="space-y-1">
+        <li>
+          <NavLink href={`${HOME_ORIGIN}/docs`} icon={<IconBook size={24} />}>
+            Documentation
+          </NavLink>
+        </li>
+        <li>
+          <NavLink href="/billing" icon={<IconCreditCard size={24} />}>
+            Billing
+          </NavLink>
+        </li>
+      </ul>
+      <UsageCard />
+      <Divider />
+      <UserMenu />
+    </m.nav>
   );
 }

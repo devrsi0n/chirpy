@@ -10,10 +10,13 @@ import {
   List,
   Text,
 } from '../../components';
+import { AppLayout } from './components/app-layout';
+import { isAppDomain } from './utils';
 
 export function Custom404(): JSX.Element {
+  const Container = isAppDomain ? AppLayout : SiteLayout;
   return (
-    <SiteLayout title="404">
+    <Container title="Not found">
       <section className="flex flex-col items-center space-y-8 px-4 ">
         <div
           className={`flex justify-center text-gray-1000`}
@@ -63,7 +66,7 @@ export function Custom404(): JSX.Element {
           <Button>Learn More</Button>
         </div>
       </section>
-    </SiteLayout>
+    </Container>
   );
 }
 

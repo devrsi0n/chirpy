@@ -48,7 +48,7 @@ export function getColors() {
       orange: translateRadixColor(orange),
       red: translateRadixColor(red),
       pink: translateRadixColor(pink),
-      bg: 'hsl(210, 20%, 98%)',
+      bg: 'hsl(0, 0%, 100%)',
     },
     dark: {
       primary: translateRadixColor(violetDark),

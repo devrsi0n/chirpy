@@ -20,7 +20,7 @@ export function UsageCard(): JSX.Element {
     return <></>;
   }
   return (
-    <div className="relative bg-gray-300 px-4 py-5">
+    <div className="relative rounded-lg bg-gray-200 px-4 py-5">
       <Heading as="h6" className="mb-1 text-sm font-semibold">
         Used pageviews
       </Heading>

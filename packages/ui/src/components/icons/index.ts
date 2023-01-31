@@ -65,3 +65,5 @@ export { default as IconHome } from '@geist-ui/icons/home';
 export { default as IconLayers } from '@geist-ui/icons/layers';
 export { default as IconPlus } from '@geist-ui/icons/plus';
 export { default as IconFeather } from '@geist-ui/icons/feather';
+export { default as IconPieChart } from '@geist-ui/icons/pieChart';
+export { default as IconGlobe } from '@geist-ui/icons/globe';

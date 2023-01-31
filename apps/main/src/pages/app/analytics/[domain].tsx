@@ -1,6 +1,6 @@
 import { ssg } from '@chirpy-dev/trpc';
 import { CommonPageProps } from '@chirpy-dev/types';
-import { AnalyticsByDomainPageProps } from '@chirpy-dev/ui';
+import { ProjectAnalyticsProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
@@ -22,7 +22,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 export const getStaticProps: GetStaticProps<
-  AnalyticsByDomainPageProps & CommonPageProps,
+  ProjectAnalyticsProps & CommonPageProps,
   PathParams
 > = async ({ params }) => {
   if (!params?.domain) {
@@ -43,4 +43,4 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export { AnalyticsByDomainPage as default } from '@chirpy-dev/ui';
+export { ProjectAnalytics as default } from '@chirpy-dev/ui';

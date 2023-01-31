@@ -1,4 +1,5 @@
 import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { Button, IconLoader, useToast } from '../../../../components';
@@ -11,12 +12,12 @@ import {
 import { SiteForm } from '../create/site-form';
 
 export type SiteGeneralSettingsProps = {
-  siteId: string;
-  data?: RouterOutputs['site']['byId'];
+  subdomain: string;
+  data?: RouterOutputs['site']['bySubdomain'];
 };
 
 export function SiteGeneralSettings({
-  siteId,
+  subdomain,
   data,
 }: SiteGeneralSettingsProps): JSX.Element {
   const { register, setFields, errors, hasError, handleSubmit, setError } =
@@ -44,18 +45,23 @@ export function SiteGeneralSettings({
     trpcClient.site.update.useMutation();
   const trpcCtx = trpcClient.useContext();
   const { showToast } = useToast();
+  const router = useRouter();
   const handleClickSubmit = handleSubmit(async (fields) => {
     try {
-      const { ...otherFields } = fields;
       await updateSite({
-        id: siteId,
-        ...otherFields,
+        ...fields,
       });
-      trpcCtx.site.byId.invalidate(siteId);
+      trpcCtx.site.bySubdomain.invalidate(subdomain);
       showToast({
         title: 'Update site settings successfully!',
         type: 'success',
       });
+      if (fields.subdomain !== subdomain) {
+        setTimeout(() => {
+          // Redirect to new URL
+          router.push(`/site/${fields.subdomain}/settings`);
+        }, 3000);
+      }
     } catch (error) {
       if (
         isTRPCClientError(error) &&

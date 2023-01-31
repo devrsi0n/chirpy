@@ -5,17 +5,17 @@ import {
   ThemeEditor,
   ThemeEditorProps,
   THEME_WIDGET_CLS,
-} from '../../../blocks';
-import { WidgetThemeProvider } from '../../../contexts';
-import { trpcClient } from '../../../utilities/trpc-client';
-import { AppLayout } from '../components/app-layout';
+} from '../../../../blocks';
+import { WidgetThemeProvider } from '../../../../contexts';
+import { trpcClient } from '../../../../utilities/trpc-client';
+import { AppLayout } from '../../components/app-layout';
 
-export type ThemeProps = {
+export type ProjectThemeProps = {
   trpcState: DehydratedState;
   domain: string;
 } & Pick<ThemeEditorProps, 'buildDate'>;
 
-export function ThemePage(props: ThemeProps): JSX.Element {
+export function ProjectThemePage(props: ProjectThemeProps): JSX.Element {
   const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
   return (
     <AppLayout title={project?.name || 'Theme'}>

@@ -10,6 +10,7 @@
     "features/analytics.mdx",
     "features/anti-toxic-comment.mdx",
     "features/moderate.mdx",
+    "how-to/create-a-post.mdx",
     "API/webhook.mdx",
     "self-hosted.mdx",
     "system-maintenance.mdx"

@@ -60,3 +60,4 @@ jobs:
           PROJECT_ID_VERCEL: ${{ secrets.PROJECT_ID_VERCEL }}
           AUTH_BEARER_TOKEN: ${{ secrets.AUTH_BEARER_TOKEN }}
           EMAIL_API_KEY: ${{ secrets.EMAIL_API_KEY }}
+          NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN: ${{ secrets.NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN }}

@@ -1,14 +1,11 @@
 import { prisma } from '@chirpy-dev/trpc';
+import { SiteHomeProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from 'next';
-
-export type SiteStaticProps = {
-  id: string;
-};
 
 export const getSiteStaticPaths: GetStaticPaths = async () => {
   return {
@@ -18,11 +15,11 @@ export const getSiteStaticPaths: GetStaticPaths = async () => {
 };
 
 /**
- * Just make sure the site id is valid or redirect to 404
+ * Just make sure the site exists or redirect to 404
  */
-export const getSiteStaticProps: GetStaticProps<SiteStaticProps> = async ({
+export const getSiteStaticProps: GetStaticProps<SiteHomeProps> = async ({
   params,
-}: GetStaticPropsContext): Promise<GetStaticPropsResult<SiteStaticProps>> => {
+}: GetStaticPropsContext): Promise<GetStaticPropsResult<SiteHomeProps>> => {
   if (typeof params?.subdomain !== 'string') {
     return {
       notFound: true,
@@ -45,7 +42,7 @@ export const getSiteStaticProps: GetStaticProps<SiteStaticProps> = async ({
   }
   return {
     props: {
-      id: data.id,
+      subdomain: params.subdomain,
     },
   };
 };

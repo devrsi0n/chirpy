@@ -1,4 +1,4 @@
-export { SiteIndex as default } from '@chirpy-dev/ui';
+export { SiteHome as default } from '@chirpy-dev/ui';
 
 export {
   getSiteStaticPaths as getStaticPaths,
