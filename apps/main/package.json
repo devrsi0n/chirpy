@@ -47,8 +47,8 @@
     "rehype-pretty-code": "0.4.0",
     "rehype-slug": "5.1.0",
     "shiki": "0.11.1",
-    "superjson": "1.11.0",
-    "type-fest": "3.5.3",
+    "superjson": "1.12.2",
+    "type-fest": "3.5.4",
     "web-push": "3.5.0",
     "zod": "3.20.2"
   },
