@@ -6,6 +6,7 @@
   "types": "./src/index.ts",
   "main": "./src/index.ts",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "pscale connect chirpy dev --port 3309",
     "studio": "prisma studio",
     "db:generate": "prisma generate",

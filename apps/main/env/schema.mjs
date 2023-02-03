@@ -22,6 +22,7 @@ export const serverSchema = z.object({
   TEST_USER_ID: z.string().min(16).optional(),
   PROJECT_ID_VERCEL: z.string().startsWith('prj_'),
   AUTH_BEARER_TOKEN: z.string().min(16),
+  TINYBIRD_ADMIN_TOKEN: z.string().min(64),
 
   GITHUB_CLIENT_ID: z.string().min(10).optional(),
   GITHUB_CLIENT_SECRET: z.string().min(10).optional(),
@@ -37,7 +38,6 @@ export const clientSchema = z.object({
   NEXT_PUBLIC_VAPID: z.string().min(32),
   NEXT_PUBLIC_MAINTENANCE_MODE: z.enum(['true', 'false']).optional(),
   NEXT_PUBLIC_ANALYTICS_DOMAIN: z.string().url(),
-  NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN: z.string().min(64),
 });
 
 /**
@@ -53,5 +53,4 @@ export const clientEnv = {
   // @ts-expect-error
   NEXT_PUBLIC_MAINTENANCE_MODE: process.env.NEXT_PUBLIC_MAINTENANCE_MODE,
   NEXT_PUBLIC_ANALYTICS_DOMAIN: process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN,
-  NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN: process.env.NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN,
 };

@@ -1,5 +1,5 @@
 import { type AppRouter } from '@chirpy-dev/trpc/src/ui';
-import { httpLink, loggerLink, TRPCClientError } from '@trpc/client';
+import { httpBatchLink, loggerLink, TRPCClientError } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 import superjson from 'superjson';
@@ -14,7 +14,7 @@ export const trpcClient = createTRPCNext<AppRouter>({
             process.env.NODE_ENV === 'development' ||
             (opts.direction === 'down' && opts.result instanceof Error),
         }),
-        httpLink({
+        httpBatchLink({
           url: `/api/trpc`,
         }),
       ],

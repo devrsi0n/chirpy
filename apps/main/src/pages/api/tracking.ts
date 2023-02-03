@@ -1,11 +1,11 @@
+import { TINYBIRD_ORIGIN } from '@chirpy-dev/utils';
 import { NextRequest } from 'next/server';
 
-const HOST = 'api.us-east.tinybird.co';
 const DATASOURCE = 'analytics_events';
 
 export default async function tracking(req: NextRequest) {
   const response = await fetch(
-    `https://${HOST}/v0/events?name=${DATASOURCE}&token=${process.env.NEXT_PUBLIC_TINYBIRD_FLOCK_TOKEN}`,
+    `${TINYBIRD_ORIGIN}/v0/events?name=${DATASOURCE}&token=${process.env.TINYBIRD_ADMIN_TOKEN}`,
     {
       method: 'POST',
       body: JSON.stringify(await req.json()),
