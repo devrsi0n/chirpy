@@ -31,11 +31,13 @@ export async function client<T>(
   return data;
 }
 
-export type PipeParams<T> = Record<keyof T, string> & {
+type BasePipeParams = {
   limit: number;
   date_to: string;
   date_from: string;
 };
+
+export type PipeParams<T> = Record<keyof T, string> & BasePipeParams;
 
 export type BaseColumnType = 'String' | 'Date' | 'UInt64' | 'Float64';
 export type ColumnType = BaseColumnType | `Nullable(${BaseColumnType})`;
@@ -52,10 +54,10 @@ export type QueryPipe<T> = {
   statistics: Statistics;
 };
 
-export function queryPipe<T>(
+export function queryPipe<P, D = P>(
   name: string,
-  params: Partial<PipeParams<T>> = {},
-): Promise<QueryPipe<T>> {
+  params: Partial<PipeParams<P>> = {},
+): Promise<QueryPipe<D>> {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (!value) return;
@@ -63,4 +65,12 @@ export function queryPipe<T>(
   });
 
   return client(`/pipes/${name}.json?${searchParams}`);
+}
+
+export function queryUsage(
+  params: {
+    domains: string;
+  } & Pick<BasePipeParams, 'date_from' | 'date_to'>,
+): Promise<QueryPipe<{ pageviews: number; href: string; indices: number[] }>> {
+  return queryPipe('usage', params);
 }
