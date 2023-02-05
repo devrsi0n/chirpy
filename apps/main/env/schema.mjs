@@ -23,6 +23,8 @@ export const serverSchema = z.object({
   PROJECT_ID_VERCEL: z.string().startsWith('prj_'),
   AUTH_BEARER_TOKEN: z.string().min(16),
   TINYBIRD_ADMIN_TOKEN: z.string().min(64),
+  QSTASH_CURRENT_SIGNING_KEY: z.string().min(16),
+  QSTASH_NEXT_SIGNING_KEY: z.string().min(16),
 
   GITHUB_CLIENT_ID: z.string().min(10).optional(),
   GITHUB_CLIENT_SECRET: z.string().min(10).optional(),

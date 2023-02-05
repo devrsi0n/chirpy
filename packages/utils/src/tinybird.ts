@@ -31,6 +31,8 @@ export async function client<T>(
   return data;
 }
 
+export const dateFormat = 'YYYY-MM-DD';
+
 type BasePipeParams = {
   limit: number;
   date_to: string;
