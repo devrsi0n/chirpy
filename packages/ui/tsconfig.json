@@ -6,5 +6,10 @@
     "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "exclude": ["node_modules"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../utils/src/colors/site-theme.ts"
+  ]
 }

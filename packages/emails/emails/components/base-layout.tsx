@@ -39,7 +39,8 @@ export default function BaseLayout({
           body {
             -webkit-font-smoothing: antialiased;
             min-width: 320px;
-            background-color: ${colors.black000};
+            background-color: ${colors.gray[100]};
+            color: ${colors.gray[1200]};
           }
           a {
             color: inherit
@@ -50,8 +51,8 @@ export default function BaseLayout({
           }
           .code {
             font-family: ${fontFamily.mono};
-            color: ${colors.green200};
-            background-color: ${colors.zinc800};
+            color: ${colors.pink[200]};
+            background-color: ${colors.pink[900]};
             font-size: ${fontSize.sm}px;
             border-radius: ${borderRadius.sm}px;
             padding: ${spacing.s1}px ${spacing.s3}px;
@@ -101,7 +102,9 @@ export default function BaseLayout({
       `}</MjmlStyle>
       </MjmlHead>
 
-      <MjmlBody width={width}>{children}</MjmlBody>
+      <MjmlBody width={width} cssClass="gutter">
+        {children}
+      </MjmlBody>
     </Mjml>
   );
 }

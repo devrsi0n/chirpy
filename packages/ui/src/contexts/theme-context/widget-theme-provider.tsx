@@ -1,9 +1,9 @@
 import { Theme } from '@chirpy-dev/types';
 import { noop } from '@chirpy-dev/utils';
+import { siteTheme } from '@chirpy-dev/utils/src/colors/site-theme';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { siteTheme } from './site-theme';
 import { useThemeVariables } from './use-theme-variables';
 
 export type WidgetThemeProviderProps = {

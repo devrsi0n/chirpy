@@ -1,9 +1,11 @@
 import { Theme } from '@chirpy-dev/types';
+import {
+  siteTheme,
+  getThemeCSSVariablesString,
+  translateRadixColor,
+} from '@chirpy-dev/utils';
 import { whiteA, blackA } from '@radix-ui/colors';
 import * as React from 'react';
-
-import { siteTheme } from './site-theme';
-import { getThemeCSSVariablesString, translateRadixColor } from './utilities';
 
 const siteColors = siteTheme.colors;
 const FIXED_COLORS = {

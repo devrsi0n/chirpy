@@ -2,9 +2,12 @@
   "name": "@chirpy-dev/utils",
   "version": "0.0.1",
   "license": "AGPL-3.0-or-later",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "sideEffects": false,
   "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsup"
+  },
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
@@ -17,9 +20,13 @@
     "eslint": "8.33.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tsup": "6.5.0",
     "typescript": "4.9.5"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@radix-ui/colors": "0.1.8"
   }
 }

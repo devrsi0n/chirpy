@@ -54,7 +54,7 @@ export default function Link({ children, ...props }: LinkProps) {
       rel="noopener"
       {...getHrefPropsFromProps(props)}
       style={{
-        color: colors.blue400,
+        color: colors.primary[900],
         ...getStylePropsFromProps(props),
       }}
     >

@@ -7,3 +7,5 @@ export * from './validator';
 export * from './router';
 export * from './domain';
 export * from './tinybird';
+export * from './colors/site-theme';
+export * from './colors/utilities';

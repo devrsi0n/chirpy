@@ -7,9 +7,9 @@ type HeadingProps = React.ComponentProps<typeof Text>;
 
 const defaultProps = {
   fontFamily: fontFamily.sans,
-  fontWeight: fontWeight.normal,
+  fontWeight: fontWeight.semibold,
   lineHeight: lineHeight.tight,
-  fontSize: fontSize.xl,
+  fontSize: fontSize.lg,
 };
 
 export default function Heading(props: HeadingProps) {

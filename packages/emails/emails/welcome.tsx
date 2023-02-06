@@ -7,11 +7,11 @@ import Footer from './components/footer';
 import Header from './components/header';
 import Heading from './components/heading';
 import Text from './components/text';
-import { fontSize, colors, spacing, fontFamily, screens } from './theme';
+import { fontSize, spacing, fontFamily, screens } from './theme';
 
 const welcomeStyle = `
   .h1 > * {
-    font-size: 56px !important;
+    font-size: 24px !important;
   }
   .h2 > * {
     font-size: ${fontSize.lg}px !important;
@@ -22,7 +22,7 @@ const welcomeStyle = `
 
   @media (min-width:${screens.xs}) {
     .h1 > * {
-      font-size: 84px !important;
+      font-size: 32px !important;
     }
     .h2 > * {
       font-size: ${fontSize.xxl}px !important;
@@ -41,21 +41,18 @@ const Welcome = ({ includeUnsubscribe }: WelcomeProps) => {
   return (
     <BaseLayout width={600} style={welcomeStyle}>
       <Header />
-      <MjmlWrapper backgroundColor={colors.black}>
-        <MjmlSection paddingBottom={spacing.s11} cssClass="gutter">
+      <MjmlWrapper>
+        <MjmlSection paddingBottom={spacing.s11}>
           <MjmlColumn>
-            <Heading maxWidth={420} cssClass="h1" fontFamily={fontFamily.serif}>
-              Thank you <br />
-              for installing <br />
-              Mailing :)
+            <Heading maxWidth={420} cssClass="h1">
+              Welcome to Chirpy
             </Heading>
           </MjmlColumn>
         </MjmlSection>
-        <MjmlSection paddingBottom={spacing.s11} cssClass="gutter">
+        <MjmlSection paddingBottom={spacing.s11}>
           <MjmlColumn>
             <Heading cssClass="h2" paddingBottom={spacing.s6}>
-              <span style={{ color: colors.green300 }}>●</span> This is the
-              Preview Viewer
+              This is the Preview Viewer
             </Heading>
             <Text
               cssClass="p"
@@ -73,7 +70,6 @@ const Welcome = ({ includeUnsubscribe }: WelcomeProps) => {
 
             <Button
               href="https://github.com/sofn-xyz/mailing-templates"
-              backgroundColor={colors.green300}
               align="left"
               cssClass="sm-hidden"
             >
@@ -83,7 +79,6 @@ const Welcome = ({ includeUnsubscribe }: WelcomeProps) => {
             <MjmlSpacer height={spacing.s3} cssClass="lg-hidden" />
             <Button
               href="https://github.com/sofn-xyz/mailing-templates"
-              backgroundColor={colors.green300}
               align="right"
               cssClass="lg-hidden"
             >
@@ -92,44 +87,10 @@ const Welcome = ({ includeUnsubscribe }: WelcomeProps) => {
             </Button>
           </MjmlColumn>
         </MjmlSection>
-        <MjmlSection paddingBottom={spacing.s11} cssClass="gutter">
-          <MjmlColumn>
-            <Heading cssClass="h2" paddingBottom={spacing.s6}>
-              <span style={{ color: colors.blue }}>●</span> Analytics and
-              unsubscribe
-            </Heading>
-            <Text cssClass="p" paddingBottom={spacing.s7}>
-              Mailing Platform gives you analytics and drop-in unsubscribe links
-              + subscription preferences, so your users can control what email
-              they receive. When you try to send an email to an unsubscribed
-              user, Mailing will intelligently block the send.
-            </Text>
-            <Button
-              href="https://mailing.run/docs"
-              align="left"
-              backgroundColor={colors.blue}
-              cssClass="sm-hidden"
-            >
-              Check out the Docs{'  '}
-              <span style={{ fontFamily: fontFamily.serif }}>&rarr;</span>
-            </Button>
-            <MjmlSpacer height={spacing.s3} cssClass="lg-hidden" />
-            <Button
-              href="https://mailing.run/docs"
-              align="right"
-              backgroundColor={colors.blue}
-              cssClass="lg-hidden"
-            >
-              Check out the Docs{'  '}
-              <span style={{ fontFamily: fontFamily.serif }}>&rarr;</span>
-            </Button>
-            <MjmlSpacer height={spacing.s9} />
-          </MjmlColumn>
-        </MjmlSection>
       </MjmlWrapper>
       <Footer includeUnsubscribe={includeUnsubscribe} />
     </BaseLayout>
   );
 };
-Welcome.subject = 'Thank you for installing Mailing :)';
+
 export default Welcome;

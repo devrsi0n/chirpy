@@ -1,7 +1,7 @@
+import { siteTheme } from '@chirpy-dev/utils/src/colors/site-theme';
 import { cleanup, render, screen } from '@testing-library/react';
 
 import { WidgetThemeProvider, useWidgetTheme, SiteThemeProvider } from '..';
-import { siteTheme } from '../site-theme';
 
 describe('ThemeProvider', () => {
   afterEach(() => {
