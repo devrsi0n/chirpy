@@ -214,6 +214,7 @@ model User {
   planId                        String?
   plan                          Plan?                      @relation(fields: [planId], references: [id], onDelete: NoAction, onUpdate: Cascade)
   billingCycleStart             Int? // day of the month when the billing cycle starts
+  sentEmails                    SentEmail[]
 
   // Deprecated
   type     String?
@@ -267,6 +268,7 @@ model BlogSite {
   manager      User             @relation(fields: [managerId], references: [id])
   posts        Post[]
   members      BlogSiteMember[]
+  sentEmails   SentEmail[]
 
   @@index([managerId])
 }
@@ -328,6 +330,7 @@ model DocsSite {
   manager      User             @relation(fields: [managerId], references: [id])
   docs         Doc[]
   members      DocsSiteMember[]
+  sentEmails   SentEmail[]
 
   @@index([managerId])
 }
@@ -393,4 +396,35 @@ model Plan {
   // Page view upper limit
   pv        Int
   users     User[]
+}
+
+enum EmailType {
+  DOMAIN_INVALID
+  USAGE_EXCEEDED
+}
+
+model SentEmail {
+  id         String    @id @default(cuid())
+  type       EmailType
+  // e.g. Sent 5 usage exceeded emails
+  // Should be reset after user upgrade plan
+  count      Int       @default(1)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // Used for domain invalid email
+  blogSiteId String?
+  blogSite   BlogSite? @relation(fields: [blogSiteId], references: [id], onDelete: Cascade)
+  docsSiteId String?
+  docsSite   DocsSite? @relation(fields: [docsSiteId], references: [id], onDelete: Cascade)
+
+  // Account level email, e.g. usage exceeded
+  @@unique([type, userId])
+  // Site level email, e.g. domain invalid
+  @@unique([type, userId, blogSiteId])
+  @@unique([type, userId, docsSiteId])
+  @@index([userId])
+  @@index([blogSiteId])
+  @@index([docsSiteId])
 }

@@ -22,6 +22,7 @@
     "tfjs",
     "trpc",
     "tsconfigs",
+    "uglifyjs",
     "visx",
     "whitea",
     "wonka"
