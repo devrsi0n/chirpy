@@ -1,5 +1,6 @@
 import { Colors, ColorSeries } from '@chirpy-dev/types';
 import { siteTheme } from '@chirpy-dev/utils';
+// @ts-ignore
 import convert from 'color-convert';
 
 export const colors: Required<Colors> = {
@@ -12,12 +13,15 @@ export const colors: Required<Colors> = {
 function getRadixColor(colors: ColorSeries): ColorSeries {
   const result = {};
   for (let i = 100; i <= 1200; i += 100) {
+    // @ts-ignore
     const color = colors[i];
     const [, h, s, l] = /hsl\((\d+), ([\d.]+)%, ([\d.]+)%\)/.exec(color) || [];
     const rgb = convert.hsl
       .rgb(+h, +s, +l)
+      // @ts-ignore
       .map((c) => c.toString(16))
       .join('');
+    // @ts-ignore
     result[i] = `#${rgb}`;
   }
   return result as ColorSeries;

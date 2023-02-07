@@ -172,7 +172,6 @@ importers:
       esbuild: ^0.15.13
       esbuild-register: ^3.3.3
       eslint: 8.33.0
-      eta: 1.12.3
       fs-extra: ^10.1.0
       github-slugger: 1.5.0
       gray-matter: 4.0.3
@@ -306,7 +305,6 @@ importers:
       esbuild: 0.15.18
       esbuild-register: 3.4.2_esbuild@0.15.18
       eslint: 8.33.0
-      eta: 1.12.3
       fs-extra: 10.1.0
       html-minifier-terser: 7.1.0
       iron-session: 6.3.1_next@13.1.6
@@ -12545,6 +12543,7 @@ packages:
   /eta/1.12.3:
     resolution: {integrity: sha512-qHixwbDLtekO/d51Yr4glcaUJCIjGVJyTzuqV4GPlgZo1YpgOKG+avQynErZIYrfM6JIJdtiG2Kox8tbb+DoGg==}
     engines: {node: '>=6.0.0'}
+    dev: false
 
   /etag/1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
