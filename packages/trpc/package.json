@@ -6,6 +6,7 @@
   "types": "./src/index.ts",
   "main": "./src/index.ts",
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "pscale connect chirpy dev --port 3309",
     "studio": "prisma studio",
     "db:generate": "prisma generate",
@@ -42,7 +43,7 @@
     "@types/node": "16.11.45",
     "eslint": "8.33.0",
     "prisma": "4.9.0",
-    "typescript": "4.9.4"
+    "typescript": "4.9.5"
   },
   "keywords": [],
   "author": "devrsi0n",

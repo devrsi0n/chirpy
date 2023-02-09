@@ -1,6 +1,6 @@
+import { translateHslColor } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { translateHslColor } from '../../contexts/theme-context/utilities';
 import { trpcClient } from '../../utilities/trpc-client';
 
 export function useRevalidateProjectPages() {

@@ -1,8 +1,8 @@
+import { cpDayjs } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Card, Divider, Heading, Link, List, Text } from '../../components';
 import { listHoverable } from '../../styles/common';
-import { cpDayjs } from '../../utilities/date';
 import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type SiteCardProps = {

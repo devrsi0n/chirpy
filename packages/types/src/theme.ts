@@ -10,13 +10,19 @@ export type ColorSeriesKey =
   | '600'
   | '700'
   | '800'
-  | '900';
+  | '900'
+  | '1000'
+  | '1100'
+  | '1200';
 
+export type ColorSeries = {
+  [k in ColorSeriesKey]: CSS.Property.Color;
+};
 export type Colors = {
-  primary?: {
-    [k in ColorSeriesKey]: CSS.Property.Color;
-  };
+  primary?: ColorSeries;
   bg?: CSS.Property.Color;
+  gray?: ColorSeries;
+  pink?: ColorSeries;
 };
 
 export type Theme = {

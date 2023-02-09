@@ -8,5 +8,6 @@ export type {
   NotificationMessage,
   NotificationSubscription,
   BlogSite,
+  DocsSite,
   Post,
 } from '@prisma/client';

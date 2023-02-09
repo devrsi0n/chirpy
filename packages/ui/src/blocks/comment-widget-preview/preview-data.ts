@@ -1,5 +1,5 @@
 import { Like, User } from '@chirpy-dev/trpc/src/ui';
-import dayjs from 'dayjs';
+import { cpDayjs } from '@chirpy-dev/utils';
 
 import { CommentLeafType } from '../../types';
 
@@ -14,7 +14,7 @@ const UserJane = {
 } as unknown as User;
 
 export const getPreviewComments = (date: string): CommentLeafType[] => {
-  const dateTime = dayjs(date);
+  const dateTime = cpDayjs(date);
   return [
     {
       __typename: 'Comment',

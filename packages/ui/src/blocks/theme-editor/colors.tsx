@@ -1,4 +1,5 @@
 import { ColorSeriesKey, ResolvedColorMode } from '@chirpy-dev/types';
+import { translateRadixColor } from '@chirpy-dev/utils';
 import {
   amber,
   amberDark,
@@ -18,8 +19,6 @@ import {
   violetDark,
 } from '@radix-ui/colors';
 import { useTheme } from 'next-themes';
-
-import { translateRadixColor } from '../../contexts/theme-context/utilities';
 
 export type ColorSeries = {
   light: Record<ColorSeriesKey, string>;

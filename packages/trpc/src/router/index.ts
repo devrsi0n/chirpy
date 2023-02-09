@@ -1,4 +1,5 @@
 import { router } from '../trpc-server';
+import { analyticsRouter } from './analytics';
 import { commentRouter } from './comment';
 import { likeRouter } from './like';
 import { notificationRouter } from './notification';
@@ -15,7 +16,9 @@ export const appRouter = router({
   like: likeRouter,
   revalidate: revalidateRouter,
   site: siteRouter,
+  analytics: analyticsRouter,
 });
 
 export type AppRouter = typeof appRouter;
 export { getRecordMapByUrl, getNotionId } from './site/utils';
+export { getAllSitesUsage } from './analytics';

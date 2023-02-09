@@ -1,3 +1,4 @@
+import { Theme } from '@chirpy-dev/types';
 import {
   violet,
   plum,
@@ -22,7 +23,6 @@ import {
   slate,
 } from '@radix-ui/colors';
 
-import { Theme } from '../../../../types/src/theme';
 import { translateRadixColor } from './utilities';
 
 const siteColors = getColors();

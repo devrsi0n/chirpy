@@ -1,4 +1,3 @@
-export * from './date';
 export * from './logger';
 export * from './image';
 export * from './framer-motion-features';

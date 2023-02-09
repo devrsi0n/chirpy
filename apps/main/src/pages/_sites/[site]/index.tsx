@@ -2,6 +2,7 @@ import { getNotionId, prisma, notion } from '@chirpy-dev/trpc';
 import { SitesIndexProps, PostPage } from '@chirpy-dev/ui';
 import Slugger from 'github-slugger';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { log } from 'next-axiom';
 import {
   getAllPagesInSpace,
   getPageImageUrls,
@@ -31,13 +32,6 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
           ? { customDomain: params.site }
           : { subdomain: params.site }),
       },
-      select: {
-        id: true,
-        name: true,
-        pageUrl: true,
-        subdomain: true,
-        recordMap: true,
-      },
     }),
     prisma.docsSite.findUnique({
       where: {
@@ -45,23 +39,26 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
           ? { customDomain: params.site }
           : { subdomain: params.site }),
       },
-      select: {
-        id: true,
-        name: true,
-        pageUrl: true,
-        subdomain: true,
-        recordMap: true,
-      },
     }),
   ]);
   if (!blogSite?.id && !docsSite?.id) {
     return { notFound: true, revalidate: 10 };
   }
+
   const pageId = getNotionId((blogSite || docsSite)?.pageUrl || '');
   if (!pageId) {
     return { notFound: true, revalidate: 10 };
   }
   if (blogSite?.id) {
+    // Redirect to custom domain if avaliable
+    if (!params.site.includes('.') && blogSite.customDomain) {
+      return {
+        redirect: {
+          destination: `https://${blogSite.customDomain}`,
+          permanent: false,
+        },
+      };
+    }
     const getPage: typeof notion.getPage = async (...args) => {
       return notion.getPage(...args);
     };
@@ -119,7 +116,7 @@ export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
         });
       }),
     );
-    console.log({ pages });
+    log.debug('Notion pages', { pages });
     return {
       props: {
         blog: { ...blogSite, pages },
