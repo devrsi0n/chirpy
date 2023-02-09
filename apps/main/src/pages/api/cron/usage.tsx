@@ -1,6 +1,6 @@
-import { BlogSite, DocsSite, prisma } from '@chirpy-dev/trpc';
+import { getAllSitesUsage, prisma } from '@chirpy-dev/trpc';
 import { cpDayjs } from '@chirpy-dev/ui';
-import { dateFormat, isENVDev, queryUsage } from '@chirpy-dev/utils';
+import { isENVDev } from '@chirpy-dev/utils';
 import { verifySignature } from '@upstash/qstash/nextjs';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
@@ -88,33 +88,6 @@ async function updateUsage() {
       }
     }),
   );
-}
-
-async function getAllSitesUsage(
-  blogSites: BlogSite[],
-  docsSites: DocsSite[],
-  billingCycleStart: number | null,
-) {
-  const domains = [...blogSites, ...docsSites].map(
-    (site) =>
-      `https://${
-        site.customDomain || site.subdomain + isENVDev
-          ? '.localhost'
-          : '.chirpy.dev'
-      }`,
-  );
-  if (domains.length === 0) return 0;
-  const dateFrom = cpDayjs();
-  dateFrom.date(billingCycleStart || 1);
-  const usage = await queryUsage({
-    domains: domains.join(','),
-    date_from: dateFrom.format(dateFormat),
-    date_to: cpDayjs().format(dateFormat),
-  });
-  return usage.data.reduce((acc, { pageviews }) => {
-    acc += pageviews;
-    return acc;
-  }, 0);
 }
 
 /**

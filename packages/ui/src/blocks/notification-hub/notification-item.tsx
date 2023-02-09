@@ -1,3 +1,4 @@
+import { cpDayjs } from '@chirpy-dev/utils/src/date';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -12,7 +13,6 @@ import { Link } from '../../components/link';
 import { Menu } from '../../components/menu';
 import { Text, TextProps } from '../../components/text';
 import { useIsWidget } from '../../hooks/use-is-widget';
-import { cpDayjs } from '../../utilities/date';
 import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type INotificationItemProps = {

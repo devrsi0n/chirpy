@@ -1,5 +1,7 @@
 import { Colors, ColorSeries } from '@chirpy-dev/types';
-import { siteTheme } from '@chirpy-dev/utils';
+// Build @chirpy-dev/utils first if you face errors,
+// @ts-ignore
+import { siteTheme } from '@chirpy-dev/utils/dist';
 // @ts-ignore
 import convert from 'color-convert';
 

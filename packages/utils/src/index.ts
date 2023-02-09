@@ -6,6 +6,7 @@ export * from './url';
 export * from './validator';
 export * from './router';
 export * from './domain';
+export * from './date';
 export * from './tinybird';
 export * from './colors/site-theme';
 export * from './colors/utilities';

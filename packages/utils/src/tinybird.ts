@@ -1,3 +1,5 @@
+import { cpDayjs } from './date';
+
 export class QueryError extends Error {
   status: number;
   constructor(message: string, status: number) {
@@ -13,12 +15,16 @@ export async function client<T>(
   path: string,
   params?: RequestInit,
 ): Promise<T> {
-  const response = await fetch(`${TINYBIRD_ORIGIN}/v0${path}`, {
+  const url = `${TINYBIRD_ORIGIN}/v0${path}`;
+  const initParams = {
+    ...params,
     headers: {
+      ...params?.headers,
       Authorization: `Bearer ${process.env.TINYBIRD_ADMIN_TOKEN}`,
     },
-    ...params,
-  });
+  };
+  // console.log({ url, initParams });
+  const response = await fetch(url, initParams);
   type ClientResponse<T> = T & { error?: string };
   const data = (await response.json()) as ClientResponse<T>;
 
@@ -30,8 +36,6 @@ export async function client<T>(
   }
   return data;
 }
-
-export const dateFormat = 'YYYY-MM-DD';
 
 type BasePipeParams = {
   limit: number;
@@ -69,10 +73,27 @@ export function queryPipe<P, D = P>(
   return client(`/pipes/${name}.json?${searchParams}`);
 }
 
-export function queryUsage(
-  params: {
-    domains: string;
-  } & Pick<BasePipeParams, 'date_from' | 'date_to'>,
-): Promise<QueryPipe<{ pageviews: number; href: string; indices: number[] }>> {
-  return queryPipe('usage', params);
+const DATE_FORMAT = 'YYYY-MM-DD';
+
+/**
+ * Get pageviews usage
+ */
+export async function queryUsage(params: {
+  domains: string[];
+  billingCycleStart: number | null;
+}): Promise<number> {
+  const dateFrom = cpDayjs().date(params.billingCycleStart || 1);
+  const usage: QueryPipe<{
+    pageviews: number;
+    href: string;
+    indices: number[];
+  }> = await queryPipe('usage', {
+    date_from: dateFrom.format(DATE_FORMAT),
+    date_to: cpDayjs().format(DATE_FORMAT),
+    domains: params.domains.join(','),
+  });
+  return usage.data.reduce((acc, { pageviews }) => {
+    acc += pageviews;
+    return acc;
+  }, 0);
 }

@@ -9,25 +9,30 @@ import {
   ProgressBar,
   Text,
 } from '../../../../components';
+import { trpcClient } from '../../../../utilities';
 
 export function UsageCard(): JSX.Element {
   const router = useRouter();
   const [isDismissed, setIsDismissed] = React.useState(false);
+  const { data } = trpcClient.analytics.usage.useQuery();
+
   const handleClickDissmiss = () => {
     setIsDismissed(true);
   };
-  if (isDismissed) {
+  if (isDismissed || !data) {
     return <></>;
   }
+  const usagePercentage = Math.round((data.usage / data.usageLimit) * 100);
   return (
     <div className="relative rounded-lg bg-gray-200 px-4 py-5">
       <Heading as="h6" className="mb-1 text-sm font-semibold">
         Used pageviews
       </Heading>
       <Text variant="secondary" className="mb-4">
-        Your team has used 80% of your available pageviews. Need more?
+        Your team has used {usagePercentage}% of your available pageviews. Need
+        more?
       </Text>
-      <ProgressBar value={80} className="mb-4" />
+      <ProgressBar value={usagePercentage} className="mb-4" />
       <div className="flex flex-row space-x-3">
         <Button
           variant="text"

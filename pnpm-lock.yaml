@@ -647,7 +647,6 @@ importers:
       csstype: 3.1.1
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.7
       debounce-promise: 3.1.2
       downshift: 6.1.12
       eslint: 8.33.0
@@ -719,7 +718,6 @@ importers:
       clsx: 1.2.1
       d3: 3.5.17
       datamaps: 0.5.9
-      dayjs: 1.11.7
       debounce-promise: 3.1.2
       framer-motion: 9.0.1_biqbaboplfbrettd7655fr4n2y
       next: 13.1.6_zfxcdih27xecqpvxqrdjl5dz5e
@@ -805,6 +803,7 @@ importers:
       '@types/node': 16.11.45
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
+      dayjs: 1.11.7
       eslint: 8.33.0
       react: 18.2.0
       react-dom: 18.2.0
@@ -812,6 +811,7 @@ importers:
       typescript: 4.9.5
     dependencies:
       '@radix-ui/colors': 0.1.8
+      dayjs: 1.11.7
     devDependencies:
       '@chirpy-dev/eslint-config': link:../eslint-config
       '@chirpy-dev/tsconfigs': link:../tsconfigs
@@ -22038,7 +22038,7 @@ packages:
     engines: {node: '>=0.10.0'}
 
   /source-map/0.6.1:
-    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
+    resolution: {integrity: sha1-dHIq8y6WFOnCh6jQu95IteLxomM=}
     engines: {node: '>=0.10.0'}
 
   /source-map/0.7.4:
