@@ -1,6 +1,7 @@
+import { cpDayjs } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { cpDayjs, logger } from '../../utilities';
+import { logger } from '../../utilities';
 import { trpcClient } from '../../utilities/trpc-client';
 import { useCurrentUser } from '../current-user-context';
 import {

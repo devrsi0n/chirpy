@@ -1,6 +1,5 @@
 import { prisma } from '@chirpy-dev/trpc';
-import { cpDayjs } from '@chirpy-dev/ui';
-import { HOME_ORIGIN } from '@chirpy-dev/utils';
+import { HOME_ORIGIN, cpDayjs } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 

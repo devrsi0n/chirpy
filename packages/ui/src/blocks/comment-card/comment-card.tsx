@@ -1,6 +1,5 @@
 import { RTEValue } from '@chirpy-dev/types';
-import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
-import { cpDayjs } from '@chirpy-dev/utils/src/date';
+import { COMMENT_TREE_MAX_DEPTH, isENVDev, cpDayjs } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';

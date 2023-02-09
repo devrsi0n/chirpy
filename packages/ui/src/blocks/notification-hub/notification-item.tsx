@@ -1,4 +1,4 @@
-import { cpDayjs } from '@chirpy-dev/utils/src/date';
+import { cpDayjs } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import * as React from 'react';
 

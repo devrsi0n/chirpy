@@ -1,4 +1,4 @@
-import { cpDayjs } from '@chirpy-dev/utils/src/date';
+import { cpDayjs } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Card, Divider, Heading, Link, List, Text } from '../../components';
