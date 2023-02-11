@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import * as React from 'react';
 
-import { Card, Heading } from '../../../components';
-import { PostPage } from '../types';
+import { Card, Heading } from '../../../../components';
+import { PostPage } from '../../types';
 
 export type PostCardProps = PostPage;
 

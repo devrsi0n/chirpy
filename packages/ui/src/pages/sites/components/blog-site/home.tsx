@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { PageTitle } from '../../../blocks';
-import { PostPage } from '../types';
+import { PageTitle } from '../../../../blocks';
+import { PostPage } from '../../types';
+import { BlogSiteLayout } from './layout';
 import { PostCard } from './post-card';
-import { SitesLayout } from './sites-layout';
 
 export type BlogSitesIndexProps = {
   name: string;
@@ -12,7 +12,7 @@ export type BlogSitesIndexProps = {
 
 export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
   return (
-    <SitesLayout>
+    <BlogSiteLayout>
       <PageTitle>{props.name} Blog</PageTitle>
       <ul>
         {props.pages.map((page) => (
@@ -21,6 +21,6 @@ export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
           </li>
         ))}
       </ul>
-    </SitesLayout>
+    </BlogSiteLayout>
   );
 }

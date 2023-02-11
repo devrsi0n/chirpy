@@ -1,5 +1,5 @@
 import { getNotionId, prisma, notion } from '@chirpy-dev/trpc';
-import { SitesIndexProps, PostPage } from '@chirpy-dev/ui';
+import { SitesHomeProps, PostPage } from '@chirpy-dev/ui';
 import Slugger from 'github-slugger';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { log } from 'next-axiom';
@@ -10,7 +10,7 @@ import {
   getPageTitle,
 } from 'notion-utils';
 
-export { SitesIndex as default } from '@chirpy-dev/ui';
+export { SitesHome as default } from '@chirpy-dev/ui';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -19,7 +19,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<SitesIndexProps> = async ({
+export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
   params,
 }) => {
   if (typeof params?.site !== 'string') {

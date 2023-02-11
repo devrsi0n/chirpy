@@ -1,4 +1,5 @@
-import { SUPPORT_LINK } from '@chirpy-dev/utils';
+// @ts-ignore
+import { SUPPORT_LINK } from '@chirpy-dev/utils/dist';
 import { MjmlColumn, MjmlSection } from 'mjml-react';
 import React from 'react';
 
