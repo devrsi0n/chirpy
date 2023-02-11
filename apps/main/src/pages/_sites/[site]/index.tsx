@@ -25,20 +25,29 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
   if (typeof params?.site !== 'string') {
     return { notFound: true };
   }
+  const filterSite = {
+    ...(params.site.includes('.')
+      ? { customDomain: params.site }
+      : { subdomain: params.site }),
+  } as const;
   const [blogSite, docsSite] = await prisma.$transaction([
     prisma.blogSite.findUnique({
-      where: {
-        ...(params.site.includes('.')
-          ? { customDomain: params.site }
-          : { subdomain: params.site }),
+      where: filterSite,
+      include: {
+        posts: {
+          select: {
+            id: true,
+            pageId: true,
+            title: true,
+            slug: true,
+            coverImage: true,
+            updatedAt: true,
+          },
+        },
       },
     }),
     prisma.docsSite.findUnique({
-      where: {
-        ...(params.site.includes('.')
-          ? { customDomain: params.site }
-          : { subdomain: params.site }),
-      },
+      where: filterSite,
     }),
   ]);
   if (!blogSite?.id && !docsSite?.id) {
@@ -62,64 +71,71 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
     const getPage: typeof notion.getPage = async (...args) => {
       return notion.getPage(...args);
     };
-    const pages: PostPage[] = [];
-    const allpages = await getAllPagesInSpace(pageId, undefined, getPage);
-    // console.log('allpages', JSON.stringify(allpages, null, 2));
-    for (const [id, page] of Object.entries(allpages)) {
-      if (!page) {
-        continue;
+    let posts: PostPage[] = blogSite.posts;
+    try {
+      const allPages = await getAllPagesInSpace(pageId, undefined, getPage);
+      // console.log('allpages', JSON.stringify(allpages, null, 2));
+      for (const [id, page] of Object.entries(allPages)) {
+        if (!page) {
+          continue;
+        }
+        const firstBlock = page.block[id].value;
+        const lastEditedTime = getPageProperty(
+          'Last edited time',
+          firstBlock,
+          page,
+        );
+        if (typeof lastEditedTime !== 'number') {
+          // Skip the table page
+          continue;
+        }
+        const title = getPageTitle(page);
+        posts.push({
+          pageId: id,
+          title,
+          slug: Slugger.slug(title),
+          coverImage: getPageImageUrls(page, {
+            mapImageUrl: (url) => url,
+          })[0],
+          updatedAt: new Date(lastEditedTime),
+        });
       }
-      const firstBlock = page.block[id].value;
-      const lastEditedTime = getPageProperty(
-        'Last edited time',
-        firstBlock,
-        page,
-      );
-      if (typeof lastEditedTime !== 'number') {
-        // Skip the table page
-        continue;
-      }
-      const title = getPageTitle(page);
-      pages.push({
-        id,
-        title,
-        slug: Slugger.slug(title),
-        image: getPageImageUrls(page, {
-          mapImageUrl: (url) => url,
-        })[0],
-        lastEditedTime,
-      });
-    }
-    // Create or update posts
-    await prisma.$transaction(
-      pages.map((page) => {
-        const { id, slug } = page;
-        return prisma.post.upsert({
-          where: {
-            post_pageId_site_constraint: {
-              pageId: id,
-              siteId: blogSite.id,
-            },
-          },
-          create: {
-            pageId: id,
-            site: {
-              connect: {
-                id: blogSite.id,
+      // Create or update posts
+      await prisma.$transaction(
+        posts.map((page) => {
+          const { pageId } = page;
+          return prisma.post.upsert({
+            where: {
+              post_pageId_site_constraint: {
+                pageId: pageId,
+                siteId: blogSite.id,
               },
             },
-            slug,
-          },
-          update: {
-            slug,
-          },
-        });
-      }),
-    );
-    log.debug('Notion pages', { pages });
+            create: {
+              ...page,
+              site: {
+                connect: {
+                  id: blogSite.id,
+                },
+              },
+            },
+            update: {
+              ...page,
+            },
+          });
+        }),
+      );
+    } catch (error) {
+      log.error(
+        `Get or update posts error, reusing existing post data, error`,
+        error,
+      );
+      posts = blogSite.posts;
+    }
+    log.debug('Blog posts', { posts });
     return {
       props: {
-        blog: { ...blogSite, pages },
+        blog: { ...blogSite, posts },
       },
       revalidate: 3600,
     };

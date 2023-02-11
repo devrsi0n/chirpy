@@ -7,7 +7,7 @@ import { PostCard } from './post-card';
 
 export type BlogSitesIndexProps = {
   name: string;
-  pages: PostPage[];
+  posts: PostPage[];
 };
 
 export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
@@ -15,8 +15,8 @@ export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
     <BlogSiteLayout>
       <PageTitle>{props.name} Blog</PageTitle>
       <ul>
-        {props.pages.map((page) => (
-          <li key={page.id}>
+        {props.posts.map((page) => (
+          <li key={page.pageId}>
             <PostCard {...page} />
           </li>
         ))}
