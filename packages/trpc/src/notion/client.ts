@@ -11,6 +11,7 @@ export const notion =
     // apiBaseUrl: process.env.NOTION_API_BASE_URL,
   });
 
+// Reuse the same instance in dev to fix API error
 if (process.env.NODE_ENV !== 'production') {
   global._notionClient = notion;
 }

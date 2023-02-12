@@ -1,4 +1,10 @@
+import { HOME_ORIGIN } from '@chirpy-dev/utils';
 import * as React from 'react';
+
+import { SiteThemeProvider } from '../../../../contexts';
+import { BlogSiteFooter } from './footer';
+import { BlogSiteHeader } from './header';
+import { LinkMeta, LogoMeta } from './types';
 
 export type BlogSiteLayoutProps = {
   children: React.ReactNode;
@@ -6,8 +12,50 @@ export type BlogSiteLayoutProps = {
 
 export function BlogSiteLayout(props: BlogSiteLayoutProps): JSX.Element {
   return (
-    <div className="mx-auto max-w-[52rem] px-4 pb-28 sm:px-6 md:px-8 lg:max-w-6xl xl:px-12">
-      {props.children}
-    </div>
+    <SiteThemeProvider>
+      <BlogSiteHeader links={headerLinks} logo={logo} />
+      <main>{props.children}</main>
+      <BlogSiteFooter
+        links={footerLinks}
+        logo={logo}
+        copyright="© 2023 Chirpy"
+      />
+    </SiteThemeProvider>
   );
 }
+
+const logo: LogoMeta = {
+  src: '/favicon.png',
+  width: 32,
+  height: 32,
+};
+
+const headerLinks: LinkMeta[] = [
+  {
+    name: 'Home',
+    href: '/',
+  },
+  {
+    name: 'Product',
+    href: HOME_ORIGIN,
+  },
+  {
+    name: 'Design',
+    href: '/',
+  },
+];
+
+const footerLinks: LinkMeta[] = [
+  {
+    name: 'Home',
+    href: '/',
+  },
+  {
+    name: 'Privacy',
+    href: `${HOME_ORIGIN}/privacy`,
+  },
+  {
+    name: 'Policy',
+    href: `${HOME_ORIGIN}/policy`,
+  },
+];
