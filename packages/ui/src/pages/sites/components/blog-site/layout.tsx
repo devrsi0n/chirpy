@@ -4,6 +4,7 @@ import * as React from 'react';
 import { SiteThemeProvider } from '../../../../contexts';
 import { BlogSiteFooter } from './footer';
 import { BlogSiteHeader } from './header';
+import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
 export type BlogSiteLayoutProps = {
@@ -13,13 +14,17 @@ export type BlogSiteLayoutProps = {
 export function BlogSiteLayout(props: BlogSiteLayoutProps): JSX.Element {
   return (
     <SiteThemeProvider>
-      <BlogSiteHeader links={headerLinks} logo={logo} />
-      <main>{props.children}</main>
-      <BlogSiteFooter
-        links={footerLinks}
-        logo={logo}
-        copyright="© 2023 Chirpy"
-      />
+      <div className="min-h-full">
+        <BlogSiteHeader links={headerLinks} logo={logo} />
+        <main className={xAxisStyles.parent}>
+          <div className={xAxisStyles.child}>{props.children}</div>
+        </main>
+        <BlogSiteFooter
+          links={footerLinks}
+          logo={logo}
+          copyright="© 2023 Chirpy"
+        />
+      </div>
     </SiteThemeProvider>
   );
 }

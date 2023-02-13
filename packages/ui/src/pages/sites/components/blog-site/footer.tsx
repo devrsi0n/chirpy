@@ -1,6 +1,8 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
 import { Image, Link, Text } from '../../../../components';
+import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
 export type BlogSiteFooterProps = {
@@ -11,8 +13,10 @@ export type BlogSiteFooterProps = {
 
 export function BlogSiteFooter(props: BlogSiteFooterProps): JSX.Element {
   return (
-    <footer className="px-20 py-6">
-      <div className="flex items-center justify-between px-8">
+    <footer className={clsx('py-6', xAxisStyles.parent)}>
+      <div
+        className={clsx('flex items-center justify-between', xAxisStyles.child)}
+      >
         <Image {...props.logo} alt="Site logo" />
         <nav className="flex items-center space-x-8">
           {props.links.map((l) => (

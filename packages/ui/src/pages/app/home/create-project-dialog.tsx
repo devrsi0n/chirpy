@@ -85,7 +85,7 @@ export function CreateProjectDialog(
               },
             })}
             label="Domain"
-            hintText="Associate your domain with this project"
+            hint="Associate your domain with this project"
             errorMessage={errors.domain}
           >
             <Input placeholder="example.com" />
