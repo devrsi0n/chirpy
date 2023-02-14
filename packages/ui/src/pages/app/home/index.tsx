@@ -10,7 +10,6 @@ import { Heading, Spinner } from '../../../components';
 import { useCurrentUser } from '../../../contexts';
 import { trpcClient } from '../../../utilities/trpc-client';
 import { AppLayout } from '../components/app-layout';
-import { CreateProjectButton } from './create-button';
 import { CreateProjectDialog } from './create-project-dialog';
 
 export function DashboardHome(): JSX.Element {
@@ -30,10 +29,6 @@ export function DashboardHome(): JSX.Element {
       <section>
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Welcome back, {data.name}</PageTitle>
-          <CreateProjectButton
-            projectCount={projects?.length}
-            onClickCreateProject={() => setShowProjectDialog(true)}
-          />
         </div>
         <div>
           <Heading as="h4" className="mb-4 !text-lg font-semibold">
@@ -66,16 +61,13 @@ export function DashboardHome(): JSX.Element {
             All sites
           </Heading>
           {sites?.length ? (
-            <div className="flex flex-row">
-              <ul className="flex-1 space-y-6">
-                {sites.map((project) => (
-                  <li key={project.id}>
-                    <SiteCard site={project} />
-                  </li>
-                ))}
-              </ul>
-              <div className="flex-1" />
-            </div>
+            <ul className="flex flex-row flex-wrap gap-6">
+              {sites.map((project) => (
+                <li key={project.id}>
+                  <SiteCard site={project} />
+                </li>
+              ))}
+            </ul>
           ) : isFetchingSites || userIsLoading ? (
             <Spinner />
           ) : (
