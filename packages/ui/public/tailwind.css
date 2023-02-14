@@ -16,7 +16,7 @@
   /* 2 */
   border-style: solid;
   /* 2 */
-  border-color: hsl(var(--tw-colors-gray-700) / 1);
+  border-color: hsl(var(--tw-colors-gray-500) / 1);
   /* 2 */
 }
 
@@ -558,6 +558,11 @@ video {
   max-width: 65ch;
 }
 
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
 .prose :where([class~="lead"]):not(:where([class~="not-prose"] *)) {
   color: var(--tw-prose-lead);
   font-size: 1.25em;
@@ -911,11 +916,6 @@ video {
   line-height: 1.75;
 }
 
-.prose :where(p):not(:where([class~="not-prose"] *)) {
-  margin-top: 1.25em;
-  margin-bottom: 1.25em;
-}
-
 .prose :where(video):not(:where([class~="not-prose"] *)) {
   margin-top: 2em;
   margin-bottom: 2em;
@@ -1210,6 +1210,10 @@ video {
 
 .m-1 {
   margin: 0.25rem;
+}
+
+.m-32 {
+  margin: 8rem;
 }
 
 .mx-auto {
@@ -1785,6 +1789,10 @@ video {
 
 .w-48 {
   width: 12rem;
+}
+
+.w-\[18px\] {
+  width: 18px;
 }
 
 .w-96 {
@@ -3008,6 +3016,18 @@ video {
   padding-left: 0.25rem;
 }
 
+.\!pl-3 {
+  padding-left: 0.75rem !important;
+}
+
+.\!pl-2\.5 {
+  padding-left: 0.625rem !important;
+}
+
+.\!pl-2 {
+  padding-left: 0.5rem !important;
+}
+
 .pt-8 {
   padding-top: 2rem;
 }
@@ -3111,6 +3131,11 @@ video {
   letter-spacing: -0.02em;
 }
 
+.\!text-display-sm {
+  font-size: 1.875rem !important;
+  line-height: 2.375rem !important;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -3173,6 +3198,10 @@ video {
 
 .leading-4 {
   line-height: 1rem;
+}
+
+.leading-9 {
+  line-height: 2.25rem;
 }
 
 .tracking-wide {
@@ -3553,6 +3582,10 @@ video {
   -webkit-line-clamp: 2;
 }
 
+.first-letter\:uppercase::first-letter {
+  text-transform: uppercase;
+}
+
 .before\:absolute::before {
   content: var(--tw-content);
   position: absolute;
@@ -3706,11 +3739,6 @@ video {
 .hover\:bg-indigo-500:hover {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--tw-colors-indigo-500) / var(--tw-bg-opacity));
-}
-
-.hover\:bg-red-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--tw-colors-red-300) / var(--tw-bg-opacity));
 }
 
 .hover\:text-primary-1100:hover {

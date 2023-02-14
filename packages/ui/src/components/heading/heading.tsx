@@ -25,7 +25,7 @@ export function Heading(props: IHeadingProps): JSX.Element {
   return (
     <Component
       {...restProps}
-      className={clsx(`text-gray-1200`, styles[Component], className)}
+      className={clsx(className, `text-gray-1200`, styles[Component])}
     >
       {children}
     </Component>

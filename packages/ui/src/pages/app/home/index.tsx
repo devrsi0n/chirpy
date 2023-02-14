@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {
-  PageTitleDeprecated,
+  PageTitle,
   EmptyProjectCard,
   ProjectCard,
   SiteCard,
@@ -22,20 +22,21 @@ export function DashboardHome(): JSX.Element {
   } = trpcClient.project.all.useQuery();
   const { data: sites, isFetching: isFetchingSites } =
     trpcClient.site.all.useQuery();
+  const { data } = useCurrentUser();
   const [showProjectDialog, setShowProjectDialog] = React.useState(false);
 
   return (
     <AppLayout title="Dashboard">
-      <section className="space-y-10">
+      <section>
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
-          <PageTitleDeprecated>Dashboard</PageTitleDeprecated>
+          <PageTitle>Welcome back, {data.name}</PageTitle>
           <CreateProjectButton
             projectCount={projects?.length}
             onClickCreateProject={() => setShowProjectDialog(true)}
           />
         </div>
         <div>
-          <Heading as="h4" className="mb-4 font-semibold">
+          <Heading as="h4" className="mb-4 !text-lg font-semibold">
             My projects
           </Heading>
           {projects?.length ? (
@@ -61,8 +62,8 @@ export function DashboardHome(): JSX.Element {
           )}
         </div>
         <div>
-          <Heading as="h4" className="mb-4 font-semibold">
-            My sites
+          <Heading as="h4" className="mb-4 !text-lg font-semibold">
+            All sites
           </Heading>
           {sites?.length ? (
             <div className="flex flex-row">
