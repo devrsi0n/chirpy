@@ -4,7 +4,7 @@ import { JsonObject } from 'type-fest';
 import { prisma } from '../db/client';
 import { notion } from './client';
 
-export type { ExtendedRecordMap } from 'notion-types';
+export type { ExtendedRecordMap, PageMap } from 'notion-types';
 
 export async function getPageRecordMap(pageId: string, postId: string) {
   const recordMap = await notion.getPage(pageId);

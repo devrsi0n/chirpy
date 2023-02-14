@@ -1,4 +1,10 @@
-import { getNotionId, prisma, notion } from '@chirpy-dev/trpc';
+import {
+  getNotionId,
+  prisma,
+  notion,
+  ExtendedRecordMap,
+  PageMap,
+} from '@chirpy-dev/trpc';
 import { SitesHomeProps, PostPage } from '@chirpy-dev/ui';
 import Slugger from 'github-slugger';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -41,6 +47,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
             title: true,
             slug: true,
             coverImage: true,
+            recordMap: true,
             updatedAt: true,
           },
         },
@@ -71,67 +78,82 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
     const getPage: typeof notion.getPage = async (...args) => {
       return notion.getPage(...args);
     };
-    let posts: PostPage[] = blogSite.posts;
+
+    let allPages: PageMap;
     try {
-      const allPages = await getAllPagesInSpace(pageId, undefined, getPage);
-      // console.log('allpages', JSON.stringify(allpages, null, 2));
-      for (const [id, page] of Object.entries(allPages)) {
-        if (!page) {
-          continue;
-        }
-        const firstBlock = page.block[id].value;
-        const lastEditedTime = getPageProperty(
-          'Last edited time',
-          firstBlock,
-          page,
-        );
-        if (typeof lastEditedTime !== 'number') {
-          // Skip the table page
-          continue;
-        }
-        const title = getPageTitle(page);
-        posts.push({
-          pageId: id,
-          title,
-          slug: Slugger.slug(title),
-          coverImage: getPageImageUrls(page, {
-            mapImageUrl: (url) => url,
-          })[0],
-          updatedAt: new Date(lastEditedTime),
-        });
-      }
-      // Create or update posts
-      await prisma.$transaction(
-        posts.map((page) => {
-          const { pageId } = page;
-          return prisma.post.upsert({
-            where: {
-              post_pageId_site_constraint: {
-                pageId: pageId,
-                siteId: blogSite.id,
-              },
-            },
-            create: {
-              ...page,
-              site: {
-                connect: {
-                  id: blogSite.id,
-                },
-              },
-            },
-            update: {
-              ...page,
-            },
-          });
-        }),
-      );
+      allPages = await getAllPagesInSpace(pageId, undefined, getPage);
     } catch (error) {
       log.error(
-        `Get or update posts error, reusing existing post data, error`,
+        `Get or update posts error, reusing db post data, error`,
         error,
       );
-      posts = blogSite.posts;
+      allPages = blogSite.posts.reduce((acc, post) => {
+        // @ts-ignore
+        acc[post.pageId] = post.recordMap as ExtendedRecordMap;
+        return acc;
+      }, {} as PageMap);
     }
+    const posts: PostPage[] = [];
+    for (const [id, page] of Object.entries(allPages)) {
+      if (!page) {
+        continue;
+      }
+      const firstBlock = page.block[id].value;
+      const lastEditedTime = getPageProperty(
+        'Last edited time',
+        firstBlock,
+        page,
+      );
+      if (typeof lastEditedTime !== 'number') {
+        // Skip the table page
+        continue;
+      }
+      const tags = getPageProperty('Tags', firstBlock, page) as string[];
+      console.log({ tags });
+      const title = getPageTitle(page);
+      posts.push({
+        pageId: id,
+        title,
+        slug: Slugger.slug(title),
+        coverImage: getPageImageUrls(page, {
+          mapImageUrl: (url) => url,
+        })[0],
+        tags,
+        lastEditedTime,
+      });
+    }
+    // Create or update posts
+    await prisma.$transaction(
+      posts.map((page) => {
+        const {
+          pageId,
+          tags: _tags,
+          lastEditedTime: _lastEditedTime,
+          ...fields
+        } = page;
+        return prisma.post.upsert({
+          where: {
+            post_pageId_site_constraint: {
+              pageId: pageId,
+              siteId: blogSite.id,
+            },
+          },
+          create: {
+            pageId,
+            ...fields,
+            site: {
+              connect: {
+                id: blogSite.id,
+              },
+            },
+          },
+          update: {
+            ...fields,
+          },
+        });
+      }),
+    );
+
     log.debug('Blog posts', { posts });
     return {
       props: {
