@@ -1,12 +1,11 @@
-import { SUPPORT_LINK, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
+import { SIGN_IN_SUCCESS_KEY, SUPPORT_LINK } from '@chirpy-dev/utils';
 import { signOut } from 'next-auth/react';
-import * as React from 'react';
 
 import { Avatar } from '../../components/avatar';
 import { IconLifeBuoy, IconLogOut, IconUser } from '../../components/icons';
 import { Menu } from '../../components/menu';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { itemStyle, MenuLink } from './menu-link';
+import { MenuLink } from './menu-link';
 
 export async function handleSignOut() {
   await signOut();
@@ -32,7 +31,6 @@ export function UserMenu(): JSX.Element {
       <Menu.Items className="min-w-[200px]" align="start">
         <Menu.Item
           as={MenuLink}
-          align="start"
           variant="plain"
           target="_blank"
           href={SUPPORT_LINK}
@@ -42,25 +40,17 @@ export function UserMenu(): JSX.Element {
         </Menu.Item>
         {isSignIn && (
           <>
-            <Menu.Item
-              as={MenuLink}
-              align="start"
-              variant="plain"
-              href="/profile"
-            >
+            <Menu.Item as={MenuLink} variant="plain" href="/profile">
               <IconUser size={14} />
               <span>Profile</span>
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item
-              as="div"
-              align="start"
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
-              className={itemStyle}
               onClick={handleSignOut}
             >
               <IconLogOut size={14} />
-              <span className="w-max">Log out</span>
+              <span>Log out</span>
             </Menu.Item>
           </>
         )}
