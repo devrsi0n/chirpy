@@ -67,3 +67,4 @@ export { default as IconPlus } from '@geist-ui/icons/plus';
 export { default as IconFeather } from '@geist-ui/icons/feather';
 export { default as IconPieChart } from '@geist-ui/icons/pieChart';
 export { default as IconGlobe } from '@geist-ui/icons/globe';
+export { default as IconArrowUpRight } from '@geist-ui/icons/arrowUpRight';

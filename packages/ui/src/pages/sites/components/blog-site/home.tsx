@@ -19,7 +19,7 @@ export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
         decorator="Blog"
         privacyLink="/"
       />
-      <ul>
+      <ul className="grid grid-cols-3 gap-x-8 gap-y-12">
         {props.posts.map((page) => (
           <li key={page.pageId}>
             <PostCard {...page} />

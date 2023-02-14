@@ -71,37 +71,37 @@ const nextConfig = {
       },
       ...(isProd
         ? [
-            {
-              source: '/_next/static/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-            {
-              source: '/fonts/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-            {
-              source: '/videos/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-          ]
+          {
+            source: '/_next/static/(.*)',
+            locale: false,
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
+          },
+          {
+            source: '/fonts/(.*)',
+            locale: false,
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
+          },
+          {
+            source: '/videos/(.*)',
+            locale: false,
+            headers: [
+              {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+              },
+            ],
+          },
+        ]
         : []),
     ];
   },

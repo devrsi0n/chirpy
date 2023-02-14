@@ -23,6 +23,8 @@ body,
   -webkit-appearance: none;
   appearance: none;
   outline: none;
+  // Fix the unexpected black outline when clicking a focusable element
+  outline-color: transparent;
 }
 
 ::selection {
@@ -31,11 +33,13 @@ body,
 
 :focus-visible {
   outline: none;
+  outline-color: transparent;
 }
 
 input:focus,
 button:focus {
   outline: none;
+  outline-color: transparent;
 }
 
 @font-face {

@@ -51,9 +51,15 @@ export function BlogHero(props: BlogHeroProps): JSX.Element {
             )
           }
         >
-          <Input name="email" placeholder="Enter your email" />
+          <Input
+            name="email"
+            placeholder="Enter your email"
+            className="!py-3"
+          />
         </FormField>
-        <Button variant="primary">Subscribe</Button>
+        <Button size="xl" variant="primary">
+          Subscribe
+        </Button>
       </div>
     </section>
   );
