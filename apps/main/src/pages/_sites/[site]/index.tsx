@@ -109,7 +109,6 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
         continue;
       }
       const tags = getPageProperty('Tags', firstBlock, page) as string[];
-      console.log({ tags });
       const title = getPageTitle(page);
       posts.push({
         pageId: id,
@@ -157,7 +156,11 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
     log.debug('Blog posts', { posts });
     return {
       props: {
-        blog: { ...blogSite, posts },
+        blog: {
+          ...blogSite,
+          posts,
+          tags: [...new Set(posts.flatMap((p) => p.tags || []))],
+        },
       },
       revalidate: 3600,
     };

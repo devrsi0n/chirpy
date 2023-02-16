@@ -1,16 +1,21 @@
 import * as React from 'react';
 
+import { PrimaryTabs } from '../../../../components';
 import { PostPage } from '../../types';
 import { BlogHero } from './hero';
 import { BlogSiteLayout } from './layout';
 import { PostCard } from './post-card';
 
-export type BlogSitesIndexProps = {
+export type BlogHomeProps = {
   name: string;
   posts: PostPage[];
+  tags: string[];
 };
 
-export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
+const VIEW_ALL = 'View All';
+
+export function BlogHome(props: BlogHomeProps): JSX.Element {
+  const tags = [VIEW_ALL, ...props.tags];
   return (
     <BlogSiteLayout>
       <BlogHero
@@ -19,13 +24,34 @@ export function BlogSitesIndex(props: BlogSitesIndexProps): JSX.Element {
         decorator="Blog"
         privacyLink="/"
       />
-      <ul className="grid grid-cols-3 gap-x-8 gap-y-12">
-        {props.posts.map((page) => (
-          <li key={page.pageId}>
-            <PostCard {...page} />
-          </li>
-        ))}
-      </ul>
+      <section className="pb-24">
+        <PrimaryTabs defaultValue={VIEW_ALL}>
+          <PrimaryTabs.List className="mb-12">
+            {tags.map((tag) => (
+              <>
+                <PrimaryTabs.Trigger key={tag} value={tag}>
+                  {tag}
+                </PrimaryTabs.Trigger>
+              </>
+            ))}
+          </PrimaryTabs.List>
+          {tags.map((tag) => (
+            <PrimaryTabs.Content key={tag} value={tag}>
+              <ul className="grid grid-cols-3 gap-x-8 gap-y-12">
+                {props.posts
+                  .filter((p) =>
+                    tag === VIEW_ALL ? true : p.tags?.includes(tag),
+                  )
+                  .map((page) => (
+                    <li key={page.pageId}>
+                      <PostCard {...page} />
+                    </li>
+                  ))}
+              </ul>
+            </PrimaryTabs.Content>
+          ))}
+        </PrimaryTabs>
+      </section>
     </BlogSiteLayout>
   );
 }

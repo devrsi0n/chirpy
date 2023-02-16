@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic';
 import * as React from 'react';
 
-import type { BlogSitesIndexProps } from './components/blog-site/home';
+import type { BlogHomeProps } from './components/blog-site/home';
 import type { DocsSiteHomeProps } from './components/docs-site/home';
 
 type BlogProps = {
-  blog: BlogSitesIndexProps;
+  blog: BlogHomeProps;
 };
 
 type DocsProps = {
@@ -16,21 +16,21 @@ export type SitesHomeProps = BlogProps | DocsProps;
 
 export function SitesHome(props: SitesHomeProps): JSX.Element {
   if (isBlogProps(props)) {
-    return <DeferredBlogSitesIndex {...props.blog} />;
+    return <DeferredBlogHome {...props.blog} />;
   }
-  return <DeferredDocsSitesIndex {...props.docs} />;
+  return <DeferredDocsHome {...props.docs} />;
 }
 
-const DeferredBlogSitesIndex = dynamic(
+const DeferredBlogHome = dynamic(
   import(
     /* webpackChunkName: "blog-site-home"*/ './components/blog-site/home'
-  ).then((module) => module.BlogSitesIndex),
+  ).then((module) => module.BlogHome),
   {
     ssr: true,
   },
 );
 
-const DeferredDocsSitesIndex = dynamic(
+const DeferredDocsHome = dynamic(
   import(
     /* webpackChunkName: "docs-site-home"*/ './components/docs-site/home'
   ).then((module) => module.DocsSiteHome),

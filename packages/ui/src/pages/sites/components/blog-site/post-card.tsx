@@ -11,11 +11,7 @@ export function PostCard(props: PostCardProps): JSX.Element {
   return (
     <article className="group">
       <Link href={`/post/${props.slug}`} className="relative block">
-        <img
-          src={props.coverImage || ''}
-          alt="Post's cover image"
-          className="h-60 w-full object-cover"
-        />
+        <BlogImage src={props.coverImage} />
         <section className="mt-8 flex flex-col">
           <div className="flex w-fit items-center gap-2 rounded-full bg-primary-300 p-1 pr-2.5 text-xs font-medium text-primary-900">
             {tag && (
@@ -36,5 +32,31 @@ export function PostCard(props: PostCardProps): JSX.Element {
         </section>
       </Link>
     </article>
+  );
+}
+
+type BlogImageProps = {
+  src: string | null;
+};
+const FALLBACK_IMAGE = '/images/blog/placeholder.jpeg';
+function BlogImage({ src }: BlogImageProps) {
+  console.log({ src });
+  return (
+    <picture>
+      <img
+        onError={({ currentTarget }) => {
+          console.warn(
+            'Failed to load image, fallback to placeholder',
+            currentTarget.src,
+          );
+          // eslint-disable-next-line unicorn/prefer-add-event-listener
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src = FALLBACK_IMAGE;
+        }}
+        src={src || FALLBACK_IMAGE}
+        alt="Post's cover image"
+        className="h-60 w-full object-cover"
+      />
+    </picture>
   );
 }
