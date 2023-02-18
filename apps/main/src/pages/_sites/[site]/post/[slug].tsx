@@ -1,4 +1,4 @@
-import { getPageRecordMap, prisma } from '@chirpy-dev/trpc';
+import { getAndSavePageRecordMap, prisma } from '@chirpy-dev/trpc';
 import { SitesPostProps } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
     return { notFound: true, revalidate: 10 };
   }
 
-  const recordMap = await getPageRecordMap(post.pageId, post.id);
+  const recordMap = await getAndSavePageRecordMap(post.pageId, post.id);
 
   return {
     props: {

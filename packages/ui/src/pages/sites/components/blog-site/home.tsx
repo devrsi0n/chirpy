@@ -28,11 +28,9 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
         <PrimaryTabs defaultValue={VIEW_ALL}>
           <PrimaryTabs.List className="mb-12">
             {tags.map((tag) => (
-              <>
-                <PrimaryTabs.Trigger key={tag} value={tag}>
-                  {tag}
-                </PrimaryTabs.Trigger>
-              </>
+              <PrimaryTabs.Trigger key={tag} value={tag}>
+                {tag}
+              </PrimaryTabs.Trigger>
             ))}
           </PrimaryTabs.List>
           {tags.map((tag) => (

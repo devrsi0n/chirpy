@@ -1,16 +1,16 @@
 import {
   getNotionId,
   prisma,
-  notion,
   ExtendedRecordMap,
   PageMap,
+  getNotionPage,
+  defaultMapImageUrl,
 } from '@chirpy-dev/trpc';
 import { SitesHomeProps, PostFields, PostAuthor } from '@chirpy-dev/ui';
 import { isEqual } from '@chirpy-dev/utils';
 import Slugger from 'github-slugger';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { log } from 'next-axiom';
-import { Block } from 'notion-types';
 import {
   estimatePageReadTime,
   getAllPagesInSpace,
@@ -82,20 +82,22 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
         },
       };
     }
-    const getPage: typeof notion.getPage = async (...args) => {
-      return notion.getPage(...args);
-    };
 
     let allPages: PageMap;
-    try {
-      allPages = await getAllPagesInSpace(pageId, undefined, getPage);
-    } catch (error) {
-      log.error(`Get all posts error, reusing db post data, error`, error);
-      allPages = blogSite.posts.reduce((acc, post) => {
+    const getSavedPages = () =>
+      blogSite.posts.reduce((acc, post) => {
         // @ts-ignore
         acc[post.pageId] = post.recordMap as ExtendedRecordMap;
         return acc;
       }, {} as PageMap);
+    try {
+      allPages = await getAllPagesInSpace(pageId, undefined, getNotionPage);
+      if (Object.values(allPages).filter(Boolean).length === 0) {
+        allPages = getSavedPages();
+      }
+    } catch (error) {
+      log.error(`Get all posts error, reusing db post data, error`, error);
+      allPages = getSavedPages();
     }
     const posts: { fields: PostFields; recordMap: JsonObject }[] = [];
     for (const [pageId, pageRecordMap] of Object.entries(allPages)) {
@@ -228,56 +230,3 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
   }
   return { notFound: true, revalidate: 10 };
 };
-
-function defaultMapImageUrl(url: string, block: Block): string | null {
-  if (!url) {
-    return null;
-  }
-
-  if (url.startsWith('data:')) {
-    return url;
-  }
-
-  // more recent versions of notion don't proxy unsplash images
-  if (url.startsWith('https://images.unsplash.com')) {
-    return url;
-  }
-
-  try {
-    const u = new URL(url);
-
-    if (
-      u.pathname.startsWith('/secure.notion-static.com') &&
-      u.hostname.endsWith('.amazonaws.com') &&
-      u.searchParams.has('X-Amz-Credential') &&
-      u.searchParams.has('X-Amz-Signature') &&
-      u.searchParams.has('X-Amz-Algorithm')
-    ) {
-      // if the URL is already signed, then use it as-is
-      return url;
-    }
-  } catch {
-    // ignore invalid urls
-  }
-
-  if (url.startsWith('/images')) {
-    url = `https://www.notion.so${url}`;
-  }
-
-  url = `https://www.notion.so${
-    url.startsWith('/image') ? url : `/image/${encodeURIComponent(url)}`
-  }`;
-
-  const notionImageUrlV2 = new URL(url);
-  let table = block.parent_table === 'space' ? 'block' : block.parent_table;
-  if (table === 'collection' || table === 'team') {
-    table = 'block';
-  }
-  notionImageUrlV2.searchParams.set('table', table);
-  notionImageUrlV2.searchParams.set('id', block.id);
-  notionImageUrlV2.searchParams.set('cache', 'v2');
-
-  url = notionImageUrlV2.toString();
-
-  return url;
-}
