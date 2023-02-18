@@ -1,9 +1,18 @@
 import { Post } from '@chirpy-dev/trpc';
 
-export type PostPage = Pick<
+export type PostFields = Pick<
   Post,
   'pageId' | 'title' | 'slug' | 'coverImage'
 > & {
-  tags?: string[];
-  lastEditedTime?: number;
+  tags: string[];
+  lastEditedTime: number;
+  /** in minutes */
+  readingTime: number;
+  author: PostAuthor;
+};
+
+export type PostAuthor = {
+  id: string;
+  name: string | null;
+  image: string | null;
 };

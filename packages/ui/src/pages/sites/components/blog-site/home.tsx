@@ -1,14 +1,14 @@
 import * as React from 'react';
 
 import { PrimaryTabs } from '../../../../components';
-import { PostPage } from '../../types';
+import { PostFields } from '../../types';
 import { BlogHero } from './hero';
 import { BlogSiteLayout } from './layout';
 import { PostCard } from './post-card';
 
 export type BlogHomeProps = {
   name: string;
-  posts: PostPage[];
+  posts: PostFields[];
   tags: string[];
 };
 
@@ -42,9 +42,9 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
                   .filter((p) =>
                     tag === VIEW_ALL ? true : p.tags?.includes(tag),
                   )
-                  .map((page) => (
-                    <li key={page.pageId}>
-                      <PostCard {...page} />
+                  .map((post) => (
+                    <li key={post.pageId}>
+                      <PostCard {...post} />
                     </li>
                   ))}
               </ul>

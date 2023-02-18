@@ -10,9 +10,9 @@ type Size = 'sm' | 'md' | 'lg' | 'xl';
 export type AvatarProps = Omit<React.ComponentProps<'img'>, 'src' | 'alt'> &
   React.PropsWithChildren<{
     src: string | null | undefined;
-    email: string | null | undefined;
     name: string | null | undefined;
-    username: string | null | undefined;
+    email?: string | null | undefined;
+    username?: string | null | undefined;
     alt: string | null | undefined;
     size?: Size;
   }> & {

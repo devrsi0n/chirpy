@@ -44,6 +44,7 @@
     "next-superjson-plugin": "0.5.4",
     "next-themes": "0.2.1",
     "nodemailer": "6.9.1",
+    "notion-types": "6.15.6",
     "notion-utils": "6.15.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",

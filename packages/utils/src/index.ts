@@ -10,3 +10,4 @@ export * from './date';
 export * from './tinybird';
 export * from './colors/site-theme';
 export * from './colors/utilities';
+export * from './object';

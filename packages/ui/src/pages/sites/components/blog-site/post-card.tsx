@@ -1,15 +1,21 @@
+import { cpDayjs } from '@chirpy-dev/utils';
 import Link from 'next/link';
 import * as React from 'react';
 
-import { Heading, IconArrowUpRight } from '../../../../components';
-import { PostPage } from '../../types';
+import {
+  Avatar,
+  Heading,
+  IconArrowUpRight,
+  Text,
+} from '../../../../components';
+import { PostFields } from '../../types';
 
-export type PostCardProps = PostPage;
+export type PostCardProps = PostFields;
 
 export function PostCard(props: PostCardProps): JSX.Element {
   const [tag] = props.tags || [];
   return (
-    <article className="group">
+    <article>
       <Link href={`/post/${props.slug}`} className="relative block">
         <BlogImage src={props.coverImage} />
         <section className="mt-8 flex flex-col">
@@ -19,7 +25,7 @@ export function PostCard(props: PostCardProps): JSX.Element {
                 {tag}
               </span>
             )}
-            <span>8 min read</span>
+            <span>{props.readingTime} min read</span>
           </div>
           <div className="mt-4 flex items-start gap-4">
             <Heading as="h4" className="font-semibold">
@@ -28,6 +34,21 @@ export function PostCard(props: PostCardProps): JSX.Element {
             <span className="pt-1 pr-1">
               <IconArrowUpRight size={24} />
             </span>
+          </div>
+        </section>
+        <section className="mt-6 flex gap-3">
+          <Avatar
+            src={props.author.image}
+            name={props.author.name}
+            alt={`${props.author.name}'s avatar`}
+          />
+          <div>
+            <Text size="sm" className="font-semibold">
+              {props.author.name}
+            </Text>
+            <Text size="sm" variant="secondary">
+              {cpDayjs(props.lastEditedTime).format('DD MMM YYYY')}
+            </Text>
           </div>
         </section>
       </Link>
@@ -40,23 +61,20 @@ type BlogImageProps = {
 };
 const FALLBACK_IMAGE = '/images/blog/placeholder.jpeg';
 function BlogImage({ src }: BlogImageProps) {
-  console.log({ src });
   return (
-    <picture>
-      <img
-        onError={({ currentTarget }) => {
-          console.warn(
-            'Failed to load image, fallback to placeholder',
-            currentTarget.src,
-          );
-          // eslint-disable-next-line unicorn/prefer-add-event-listener
-          currentTarget.onerror = null; // prevents looping
-          currentTarget.src = FALLBACK_IMAGE;
-        }}
-        src={src || FALLBACK_IMAGE}
-        alt="Post's cover image"
-        className="h-60 w-full object-cover"
-      />
-    </picture>
+    <img
+      onError={({ currentTarget }) => {
+        console.warn(
+          'Failed to load image, fallback to placeholder',
+          currentTarget.src,
+        );
+        // eslint-disable-next-line unicorn/prefer-add-event-listener
+        currentTarget.onerror = null; // prevents looping
+        currentTarget.src = FALLBACK_IMAGE;
+      }}
+      src={src || FALLBACK_IMAGE}
+      alt="Post's cover image"
+      className="h-60 w-full object-cover"
+    />
   );
 }
