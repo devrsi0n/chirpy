@@ -23,7 +23,7 @@ function List(props: PrimaryTabsListProps): JSX.Element {
   return (
     <RadixTabs.List
       {...props}
-      className={clsx('flex w-fit gap-2', props.className)}
+      className={clsx('flex w-fit gap-2 text-gray-1100', props.className)}
     />
   );
 }

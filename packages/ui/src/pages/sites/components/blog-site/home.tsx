@@ -9,13 +9,14 @@ import { PostCard } from './post-card';
 export type BlogHomeProps = {
   name: string;
   posts: PostFields[];
-  tags: string[];
 };
 
 const VIEW_ALL = 'View All';
 
 export function BlogHome(props: BlogHomeProps): JSX.Element {
-  const tags = [VIEW_ALL, ...props.tags];
+  const featuredPost = props.posts.find((p) => p.featured);
+  const restPosts = props.posts.filter((p) => p.pageId !== featuredPost.pageId);
+  const tags = [VIEW_ALL, ...restPosts.flatMap((p) => p.tags || [])];
   return (
     <BlogSiteLayout>
       <BlogHero
@@ -24,6 +25,13 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
         decorator="Blog"
         privacyLink="/"
       />
+      {featuredPost && (
+        <PostCard
+          {...featuredPost}
+          orientation="horizontal"
+          className="mb-16"
+        />
+      )}
       <section className="pb-24">
         <PrimaryTabs defaultValue={VIEW_ALL}>
           <PrimaryTabs.List className="mb-12">
@@ -36,7 +44,7 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
           {tags.map((tag) => (
             <PrimaryTabs.Content key={tag} value={tag}>
               <ul className="grid grid-cols-3 gap-x-8 gap-y-12">
-                {props.posts
+                {restPosts
                   .filter((p) =>
                     tag === VIEW_ALL ? true : p.tags?.includes(tag),
                   )

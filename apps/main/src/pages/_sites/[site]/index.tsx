@@ -99,6 +99,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
       log.error(`Get all posts error, reusing db post data, error`, error);
       allPages = getSavedPages();
     }
+    // console.log(JSON.stringify(allPages, null, 2));
     const posts: { fields: PostFields; recordMap: JsonObject }[] = [];
     for (const [pageId, pageRecordMap] of Object.entries(allPages)) {
       if (!pageRecordMap) {
@@ -145,6 +146,16 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
             image: authorMeta[0][1],
           }
         : blogSite.manager;
+      const excerpt = getPageProperty(
+        'Excerpt',
+        rootBlock,
+        pageRecordMap,
+      ) as string;
+      const featured = getPageProperty(
+        'Featured',
+        rootBlock,
+        pageRecordMap,
+      ) as boolean;
       posts.push({
         fields: {
           pageId: pageId,
@@ -155,6 +166,8 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
           lastEditedTime,
           readingTime: Math.round(readingTime) || 1,
           author,
+          featured,
+          excerpt,
         },
         recordMap: pageRecordMap as unknown as JsonObject,
       });
@@ -204,16 +217,14 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
         }),
       );
     }
-
-    // log.debug('Blog posts', { posts });
+    const sortedPosts = posts
+      .map((p) => p.fields)
+      .sort((a, b) => (a.lastEditedTime || 0) - (b.lastEditedTime || 0));
     return {
       props: {
         blog: {
           name: blogSite.name,
-          posts: posts
-            .map((p) => p.fields)
-            .sort((a, b) => (a.lastEditedTime || 0) - (b.lastEditedTime || 0)),
-          tags: [...new Set(posts.flatMap((p) => p.fields.tags || []))],
+          posts: sortedPosts,
         },
       },
       revalidate: 3600,

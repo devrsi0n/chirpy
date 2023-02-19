@@ -9,6 +9,8 @@ export type PostFields = Pick<
   /** in minutes */
   readingTime: number;
   author: PostAuthor;
+  featured: boolean;
+  excerpt?: string;
 };
 
 export type PostAuthor = {

@@ -29,7 +29,7 @@ export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
       >
         <section
           className={clsx(
-            'mx-auto flex max-w-7xl items-center justify-between',
+            'flex items-center justify-between',
             xAxisStyles.child,
           )}
         >
