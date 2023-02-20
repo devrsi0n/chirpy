@@ -272,19 +272,19 @@ model BlogSite {
 }
 
 model Post {
-  id         String   @id @default(cuid())
+  id        String   @id @default(cuid())
   // Notion page id
-  pageId     String
-  slug       String   @default(cuid())
-  title      String   @default("Untitled")
-  coverImage String?
-  // Notion page content record map
-  recordMap  Json?
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  published  Boolean  @default(false)
-  site       BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  siteId     String
+  pageId    String
+  slug      String   @default(cuid())
+  // Notion page content record map,
+  // all the properties and texts are stored in the map,
+  // don't save them in the database
+  recordMap Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  site   BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId String
 
   // Slug is unique per site, but not unique globally
   @@unique([slug, siteId], name: "post_slug_site_constraint")

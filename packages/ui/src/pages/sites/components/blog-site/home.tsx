@@ -15,8 +15,10 @@ const VIEW_ALL = 'View All';
 
 export function BlogHome(props: BlogHomeProps): JSX.Element {
   const featuredPost = props.posts.find((p) => p.featured);
-  const restPosts = props.posts.filter((p) => p.pageId !== featuredPost.pageId);
-  const tags = [VIEW_ALL, ...restPosts.flatMap((p) => p.tags || [])];
+  const restPosts = props.posts.filter(
+    (p) => p.pageId !== featuredPost?.pageId,
+  );
+  const tags = [VIEW_ALL, ...new Set(restPosts.flatMap((p) => p.tags || []))];
   return (
     <BlogSiteLayout>
       <BlogHero

@@ -56,6 +56,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
             id: true,
             pageId: true,
             recordMap: true,
+            slug: true,
           },
         },
       },
@@ -156,11 +157,13 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
         rootBlock,
         pageRecordMap,
       ) as boolean;
+      const slug = getPageProperty('Slug', rootBlock, pageRecordMap) as string;
       posts.push({
         fields: {
           pageId: pageId,
           title,
-          slug: Slugger.slug(title),
+          // In case the wrong slug format
+          slug: encodeURIComponent(slug) || Slugger.slug(title),
           coverImage,
           tags,
           lastEditedTime,
@@ -176,18 +179,19 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
       const savedPost = blogSite.posts.find(
         (post) => post.pageId === p.fields.pageId,
       );
-      const shouldFilter =
+      const shouldUpsert =
         !savedPost ||
         !savedPost.recordMap ||
-        !isEqual(savedPost.recordMap as unknown as JsonObject, p.recordMap);
-      return shouldFilter;
+        !isEqual(savedPost.recordMap as unknown as JsonObject, p.recordMap) ||
+        savedPost.slug !== p.fields.slug;
+      return shouldUpsert;
     });
     if (upsertPosts.length > 0) {
       // Create or update posts
       await prisma.$transaction(
         upsertPosts.map((page) => {
           const {
-            fields: { pageId },
+            fields: { pageId, slug },
             recordMap,
           } = page;
           return prisma.post.upsert({
@@ -199,6 +203,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
             },
             create: {
               pageId,
+              slug,
               recordMap,
               site: {
                 connect: {
@@ -207,6 +212,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
               },
             },
             update: {
+              slug,
               recordMap,
             },
             select: {
