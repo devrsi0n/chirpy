@@ -1,15 +1,14 @@
-import { Post } from '@chirpy-dev/trpc';
-
-export type PostFields = Pick<
-  Post,
-  'pageId' | 'title' | 'slug' | 'coverImage'
-> & {
+export type PostFields = {
+  pageId: string;
+  title: string;
+  coverImage: string;
   tags: string[];
   lastEditedTime: number;
   /** in minutes */
   readingTime: number;
   author: PostAuthor;
   featured: boolean;
+  slug: string;
   excerpt?: string;
 };
 
