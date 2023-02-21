@@ -18,7 +18,7 @@ export type BlogHeroProps = {
 
 export function BlogHero(props: BlogHeroProps): JSX.Element {
   return (
-    <section className="py-24">
+    <section className="py-16 sm:py-24">
       {props.decorator && (
         <Text variant="primary" className="mb-3 font-semibold">
           {props.decorator}
@@ -28,13 +28,13 @@ export function BlogHero(props: BlogHeroProps): JSX.Element {
         {props.title}
       </Heading>
       {props.description && (
-        <Text variant="secondary" className="mt-8">
+        <Text variant="secondary" className="mt-4 sm:mt-8">
           {props.description}
         </Text>
       )}
-      <div className="mt-10 flex items-start gap-4">
+      <div className="mt-8 flex flex-col items-stretch gap-4 sm:mt-10 sm:flex-row">
         <FormField
-          className="!w-90"
+          className="w-full sm:!w-90"
           hint={
             props.privacyLink && (
               <span>

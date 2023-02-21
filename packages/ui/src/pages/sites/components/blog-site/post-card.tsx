@@ -27,14 +27,14 @@ export function PostCard({
     <article
       className={clsx(
         'flex flex-col',
-        isHorizontal && '!flex-row',
+        isHorizontal && 'sm:!flex-row',
         restProps.className,
       )}
     >
       <Link href={`/post/${restProps.slug}`} className="flex-1">
         <BlogImage src={restProps.coverImage} />
       </Link>
-      <div className={clsx(isHorizontal ? 'ml-8 max-w-sm' : 'mt-8')}>
+      <div className={clsx(isHorizontal ? 'sm:ml-8 sm:max-w-sm' : 'mt-8')}>
         <section className="flex flex-col">
           <p className="flex w-fit items-center gap-2 rounded-full bg-primary-300 p-1 pr-2.5 text-xs font-medium text-primary-900 dark:text-primary-1100">
             {tag && (
