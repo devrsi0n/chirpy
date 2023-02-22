@@ -6,7 +6,10 @@ import { Button, ButtonProps, IconLoader, IconLock } from '../../components';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
 
-export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
+export type SignInButtonProps = Pick<
+  ButtonProps,
+  'variant' | 'size' | 'className'
+> & {
   inPageNav?: boolean;
 };
 

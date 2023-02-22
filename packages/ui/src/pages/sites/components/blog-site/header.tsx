@@ -10,6 +10,7 @@ import {
 } from '../../../../blocks';
 import { IconMenu, IconX, Image, Link } from '../../../../components';
 import { useCurrentUser } from '../../../../contexts';
+import { useFrozeBodyScroll } from '../../../../hooks';
 import { bluredBg } from '../../../../styles/common';
 import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
@@ -22,6 +23,7 @@ export type BlogSiteHeaderProps = {
 export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
   const { isSignIn } = useCurrentUser();
   const [isOpen, setIsOpen] = React.useState(false);
+  useFrozeBodyScroll(isOpen);
   const logo = <Image {...props.logo} alt="Site logo" />;
   return (
     <>
@@ -62,41 +64,53 @@ export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
       <Collapsible.Root
         open={isOpen}
         onOpenChange={setIsOpen}
-        className={clsx(isOpen && 'h-full', 'relative block sm:hidden')}
+        className={clsx(isOpen && 'h-full', 'block sm:hidden')}
       >
-        <div
-          className={clsx(isOpen && 'h-full', 'absolute left-0 top-0 w-full')}
-        >
-          <header className="flex w-full border-b p-4">
-            <div className="flex w-full items-center justify-between">
-              {logo}
-              <Collapsible.Trigger>
-                {isOpen ? <IconX /> : <IconMenu />}
-              </Collapsible.Trigger>
-            </div>
-          </header>
-          <Collapsible.Content className={clsx(isOpen && 'h-full')} forceMount>
-            <AnimatePresence>
-              {isOpen && (
-                <div className={clsx(bluredBg)}>
-                  <nav className={clsx('flex flex-col gap-2 font-semibold')}>
-                    {props.links.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        className="py-3 px-4"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                    <div className="h-6" />
-                  </nav>
+        <header className="flex w-full border-b p-4">
+          <div className="flex w-full items-center justify-between">
+            {logo}
+            <Collapsible.Trigger>
+              {isOpen ? <IconX /> : <IconMenu />}
+            </Collapsible.Trigger>
+          </div>
+        </header>
+        <Collapsible.Content className={clsx('relative w-full')} forceMount>
+          <AnimatePresence>
+            {isOpen && (
+              <section
+                className={clsx(
+                  bluredBg,
+                  'absolute left-0 top-0 w-full shadow-lg',
+                )}
+              >
+                <nav
+                  className={clsx(
+                    'flex flex-col gap-2 border-b font-semibold',
+                    mobileSectionStyles,
+                  )}
+                >
+                  {props.links.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="py-3 px-4"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </nav>
+                <div className={clsx(mobileSectionStyles, 'px-4')}>
+                  <SignInButton className="w-full" inPageNav />
                 </div>
-              )}
-            </AnimatePresence>
-          </Collapsible.Content>
-        </div>
+                {/* Act as padding bottom to fix bluredBg doesn't work */}
+                <div className="h-6" />
+              </section>
+            )}
+          </AnimatePresence>
+        </Collapsible.Content>
       </Collapsible.Root>
     </>
   );
 }
+
+const mobileSectionStyles = `py-6`;

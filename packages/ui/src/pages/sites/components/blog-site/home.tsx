@@ -45,7 +45,7 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
           </PrimaryTabs.List>
           {tags.map((tag) => (
             <PrimaryTabs.Content key={tag} value={tag}>
-              <ul className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-3">
+              <ul className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
                 {restPosts
                   .filter((p) =>
                     tag === VIEW_ALL ? true : p.tags?.includes(tag),

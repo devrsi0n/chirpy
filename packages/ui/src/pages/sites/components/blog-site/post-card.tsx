@@ -31,7 +31,7 @@ export function PostCard({
         restProps.className,
       )}
     >
-      <Link href={`/post/${restProps.slug}`} className="flex-1">
+      <Link href={`/post/${restProps.slug}`} className="min-w-[200px] flex-1">
         <BlogImage src={restProps.coverImage} />
       </Link>
       <div className={clsx(isHorizontal ? 'sm:ml-8 sm:max-w-sm' : 'mt-8')}>
