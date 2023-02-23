@@ -3,15 +3,11 @@ import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
-import {
-  headerBlurBackgroundStyles,
-  SignInButton,
-  UserMenu,
-} from '../../../../blocks';
+import { headerBlurBackgroundStyles } from '../../../../blocks';
 import { IconMenu, IconX, Image, Link } from '../../../../components';
-import { useCurrentUser } from '../../../../contexts';
 import { useFrozeBodyScroll } from '../../../../hooks';
 import { bluredBg } from '../../../../styles/common';
+import { Search } from './search';
 import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
@@ -21,7 +17,6 @@ export type BlogSiteHeaderProps = {
 };
 
 export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
-  const { isSignIn } = useCurrentUser();
   const [isOpen, setIsOpen] = React.useState(false);
   useFrozeBodyScroll(isOpen);
   const logo = <Image {...props.logo} alt="Site logo" />;
@@ -56,7 +51,7 @@ export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
               </nav>
             </div>
             <div className="flex">
-              {isSignIn ? <UserMenu /> : <SignInButton inPageNav />}
+              <Search />
             </div>
           </section>
         </div>
@@ -99,11 +94,8 @@ export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
                     </Link>
                   ))}
                 </nav>
-                <div className={clsx(mobileSectionStyles, 'px-4')}>
-                  <SignInButton className="w-full" inPageNav />
-                </div>
                 {/* Act as padding bottom to fix bluredBg doesn't work */}
-                <div className="h-6" />
+                <div className="h-16" />
               </section>
             )}
           </AnimatePresence>
