@@ -8,13 +8,16 @@ export type SiteCardProps = {
   site: RouterOutputs['site']['all'][number];
 };
 
+export const cardStyle =
+  'block h-[170px] w-[350px] rounded-xl bg-gray-0 p-6 shadow-sm focus-visible:ring focus-visible:ring-gray-700';
+
 export function SiteCard({ site }: SiteCardProps): JSX.Element {
   return (
     <Card
       as={Link}
       href={`/site/${site.subdomain}`}
       key={site.id}
-      className="block min-h-[150px] min-w-[330px] max-w-sm rounded-xl bg-gray-0 p-6 shadow-sm focus-visible:ring focus-visible:ring-gray-700"
+      className={cardStyle}
       variant="plain"
     >
       <div className="flex w-full flex-row items-start gap-4">
