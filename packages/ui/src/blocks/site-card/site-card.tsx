@@ -31,7 +31,7 @@ export function SiteCard({ site }: SiteCardProps): JSX.Element {
             {site.subdomain}
           </Text>
         </div>
-        <SiteCardMenu />
+        <SiteCardMenu site={site} />
       </div>
       <div className="mt-6">
         <Text size="sm">Created {cpDayjs(site.createdAt).fromNow()}</Text>

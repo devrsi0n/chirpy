@@ -35,13 +35,13 @@ export function UserMenu(): JSX.Element {
           target="_blank"
           href={SUPPORT_LINK}
         >
-          <IconLifeBuoy size={14} />
+          <IconLifeBuoy size={16} />
           <span>Support</span>
         </Menu.Item>
         {isSignIn && (
           <>
             <Menu.Item as={MenuLink} variant="plain" href="/profile">
-              <IconUser size={14} />
+              <IconUser size={16} />
               <span>Profile</span>
             </Menu.Item>
             <Menu.Divider />
@@ -49,7 +49,7 @@ export function UserMenu(): JSX.Element {
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               onClick={handleSignOut}
             >
-              <IconLogOut size={14} />
+              <IconLogOut size={16} />
               <span>Log out</span>
             </Menu.Item>
           </>
