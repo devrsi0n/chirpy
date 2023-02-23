@@ -17,7 +17,7 @@ export function AppLayout(props: AppLayoutProps): JSX.Element {
       {/* Render Sidebar on desktop view, render MobileHeader on mobile view */}
       <div className="hidden h-full flex-row md:flex">
         <Sidebar subdomain={props.subdomain} />
-        <main className="flex-1 p-8">{props.children}</main>
+        <main className="flex-1 overflow-scroll p-8">{props.children}</main>
       </div>
       <div className="block h-full md:hidden">
         <MobileHeader subdomain={props.subdomain}>

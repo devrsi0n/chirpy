@@ -14,7 +14,7 @@ export function SiteCard({ site }: SiteCardProps): JSX.Element {
       as={Link}
       href={`/site/${site.subdomain}`}
       key={site.id}
-      className="block min-h-[150px] min-w-[330px] rounded-xl bg-gray-0 p-6 shadow-sm focus-visible:ring focus-visible:ring-gray-700"
+      className="block min-h-[150px] min-w-[330px] max-w-sm rounded-xl bg-gray-0 p-6 shadow-sm focus-visible:ring focus-visible:ring-gray-700"
       variant="plain"
     >
       <div className="flex w-full flex-row items-start gap-4">

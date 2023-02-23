@@ -61,7 +61,7 @@ export function DashboardHome(): JSX.Element {
             All sites
           </Heading>
           {sites?.length ? (
-            <ul className="flex flex-row flex-wrap gap-6">
+            <ul className="flex flex-col flex-wrap gap-6 md:flex-row">
               {sites.map((project) => (
                 <li key={project.id}>
                   <SiteCard site={project} />
