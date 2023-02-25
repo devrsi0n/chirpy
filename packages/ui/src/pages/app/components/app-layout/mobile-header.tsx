@@ -82,7 +82,7 @@ function SiteMobileHeader(props: SiteMobileHeaderProps) {
         </Button>
         <li>
           <HeaderNavLink href={`/site/${props.subdomain}`}>
-            Site Home
+            Site home
           </HeaderNavLink>
         </li>
         <li>

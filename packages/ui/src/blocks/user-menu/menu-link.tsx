@@ -12,4 +12,4 @@ export const MenuLink = React.forwardRef(function MenuLink(
   );
 });
 
-export const itemStyle = `space-x-1`;
+export const itemStyle = 'flex flex-row gap-2 items-center';

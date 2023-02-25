@@ -114,7 +114,7 @@ function SiteSidebar(props: SiteSidebarProps) {
               highlightPattern={/^\/$/}
               icon={<IconHome size={24} />}
             >
-              Site Home
+              Site home
             </NavLink>
           </li>
           <li>
@@ -185,7 +185,7 @@ function SiteSidebar(props: SiteSidebarProps) {
               }
               icon={<IconSettings size={24} />}
             >
-              Site Settings
+              Site settings
             </NavLink>
           </li>
           <li>

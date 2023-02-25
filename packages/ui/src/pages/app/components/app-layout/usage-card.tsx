@@ -11,6 +11,8 @@ import {
 } from '../../../../components';
 import { trpcClient } from '../../../../utilities';
 
+const USAGE_THRESHOLD = 80;
+
 export function UsageCard(): JSX.Element {
   const router = useRouter();
   const [isDismissed, setIsDismissed] = React.useState(false);
@@ -23,6 +25,11 @@ export function UsageCard(): JSX.Element {
     return <></>;
   }
   const usagePercentage = Math.round((data.usage / data.usageLimit) * 100);
+
+  if (usagePercentage < USAGE_THRESHOLD) {
+    return <></>;
+  }
+
   return (
     <div className="relative rounded-lg bg-gray-200 px-4 py-5">
       <Heading as="h6" className="mb-1 text-sm font-semibold">

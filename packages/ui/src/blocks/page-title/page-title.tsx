@@ -33,9 +33,7 @@ export function PageTitle({
 }: PageTitleProps): JSX.Element {
   return (
     <div className={clsx('mb-6 w-fit', className)} {...restProps}>
-      <Heading as="h1" className="!text-4xl w-fit font-bold !leading-none">
-        {children}
-      </Heading>
+      <Heading className="font-semibold">{children}</Heading>
     </div>
   );
 }

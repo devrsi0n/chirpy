@@ -5,9 +5,8 @@ import * as React from 'react';
 
 import { bluredBg, listHoverable } from '../../styles/common';
 import { Box, BoxProps } from '../box';
-import { BaseButton, Button, IconButton } from '../button';
+import { Button, IconButton } from '../button';
 import { Divider } from '../divider';
-import { IconChevronDown } from '../icons';
 import styles from './menu.module.scss';
 
 export type Shape = 'circle' | 'square';
@@ -74,14 +73,6 @@ function MenuButton({
           onClick={() => onClick?.(open)}
         >
           {children}
-          {shape === 'square' && (
-            <IconChevronDown
-              className={clsx(
-                `ml-2 -mr-1 h-5 w-5 transition`,
-                open && `rotate-180`,
-              )}
-            />
-          )}
         </AsButton>
       </DropdownMenu.Trigger>
     </div>
@@ -116,18 +107,16 @@ function MenuItems({
   );
 }
 
-export type MenuItemProps = React.PropsWithChildren<{
+export type MenuItemProps = {
   disableAutoDismiss?: boolean;
-  onClick?: () => void;
   disabled?: boolean;
-}> &
-  BoxProps;
+} & BoxProps;
 
 function MenuItem({
   as,
   children,
   disableAutoDismiss,
-  onClick,
+  disabled,
   className,
   ...asProps
 }: MenuItemProps): JSX.Element {
@@ -139,10 +128,12 @@ function MenuItem({
     children
   );
   return (
-    <DropdownMenu.Item className="">
+    <DropdownMenu.Item
+      disabled={disabled}
+      className="data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+    >
       <Box
-        as={as || BaseButton}
-        onClick={onClick}
+        as={as}
         className={clsx(
           listHoverable,
           itemStyle,
@@ -157,6 +148,6 @@ function MenuItem({
   );
 }
 
-export const MenuItemPadding = `px-6 py-2`;
+export const MenuItemPadding = `px-4 py-3`;
 
-const itemStyle = `transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right`;
+const itemStyle = `font-medium transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right gap-2`;
