@@ -3,20 +3,28 @@ import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
 
-import { headerBlurBackgroundStyles } from '../../../../blocks';
-import { IconMenu, IconX, Image, Link } from '../../../../components';
+import { headerBlurBackgroundStyles, CommandMenu } from '../../../../blocks';
+import {
+  IconFeather,
+  IconLink2,
+  IconMenu,
+  IconX,
+  Image,
+  Link,
+} from '../../../../components';
 import { useFrozeBodyScroll } from '../../../../hooks';
 import { bluredBg } from '../../../../styles/common';
-import { Search } from './search';
+import { PostFields } from '../../types';
 import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
-export type BlogSiteHeaderProps = {
+export type BlogHeaderProps = {
   links: LinkMeta[];
   logo: LogoMeta;
+  posts: PostFields[];
 };
 
-export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
+export function BlogHeader(props: BlogHeaderProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
   useFrozeBodyScroll(isOpen);
   const logo = <Image {...props.logo} alt="Site logo" />;
@@ -51,7 +59,28 @@ export function BlogSiteHeader(props: BlogSiteHeaderProps): JSX.Element {
               </nav>
             </div>
             <div className="flex">
-              <Search />
+              <CommandMenu>
+                <CommandMenu.Group heading="Links">
+                  {props.links.map((link) => (
+                    <CommandMenu.Item href={link.href} key={link.href}>
+                      <IconLink2 size={20} />
+                      <span>{link.name}</span>
+                    </CommandMenu.Item>
+                  ))}
+                </CommandMenu.Group>
+                <CommandMenu.Separator />
+                <CommandMenu.Group heading="Posts">
+                  {props.posts.slice(0, 3).map((post) => (
+                    <CommandMenu.Item
+                      key={post.pageId}
+                      href={`/post/${post.slug}`}
+                    >
+                      <IconFeather size={20} />
+                      <span>{post.title}</span>
+                    </CommandMenu.Item>
+                  ))}
+                </CommandMenu.Group>
+              </CommandMenu>
             </div>
           </section>
         </div>

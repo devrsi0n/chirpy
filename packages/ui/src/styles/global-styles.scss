@@ -15,6 +15,7 @@ html,
 body,
 #__next {
   height: 100%;
+  @apply font-sans text-gray-1100;
 }
 
 * {
@@ -168,4 +169,8 @@ h6:hover {
   & > a > .icon.icon-link {
     display: inline-block;
   }
+}
+
+[cmdk-overlay][data-state='open'] {
+  @apply fixed inset-0 animate-opacity bg-blacka-700 dark:bg-whitea-700;
 }

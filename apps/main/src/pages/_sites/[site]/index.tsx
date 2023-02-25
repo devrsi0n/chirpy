@@ -8,7 +8,7 @@ import {
 } from '@chirpy-dev/trpc';
 import { SitesHomeProps, PostFields, PostAuthor } from '@chirpy-dev/ui';
 import { isEqual } from '@chirpy-dev/utils';
-import Slugger from 'github-slugger';
+import { slug as getSlug } from 'github-slugger';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { log } from 'next-axiom';
 import {
@@ -163,7 +163,7 @@ export const getStaticProps: GetStaticProps<SitesHomeProps> = async ({
           pageId: pageId,
           title,
           // In case the wrong slug format
-          slug: encodeURIComponent(slug) || Slugger.slug(title),
+          slug: encodeURIComponent(slug) || getSlug(title),
           coverImage,
           tags,
           lastEditedTime,

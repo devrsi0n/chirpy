@@ -48,6 +48,7 @@ export const getStaticProps: GetStaticProps<SitesPostProps> = async ({
     props: {
       slug: post.slug,
       recordMap,
+      posts: [],
     },
     revalidate: 3600,
   };

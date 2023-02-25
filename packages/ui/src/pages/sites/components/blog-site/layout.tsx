@@ -3,19 +3,19 @@ import * as React from 'react';
 
 import { SiteThemeProvider } from '../../../../contexts';
 import { BlogSiteFooter } from './footer';
-import { BlogSiteHeader } from './header';
+import { BlogHeader, BlogHeaderProps } from './header';
 import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
 export type BlogSiteLayoutProps = {
   children: React.ReactNode;
-};
+} & Pick<BlogHeaderProps, 'posts'>;
 
 export function BlogSiteLayout(props: BlogSiteLayoutProps): JSX.Element {
   return (
     <SiteThemeProvider>
       <div className="min-h-full">
-        <BlogSiteHeader links={headerLinks} logo={logo} />
+        <BlogHeader links={headerLinks} logo={logo} posts={props.posts} />
         <main className={xAxisStyles.parent}>
           <div className={xAxisStyles.child}>{props.children}</div>
         </main>
