@@ -4,13 +4,13 @@ import { z } from 'zod';
 import { prisma } from '../db/client';
 import { handleCommentEvent } from '../mutation-event/comment-handler';
 import { handleLikeEvent } from '../mutation-event/like-handler';
-import { router, protectedProcedure } from '../trpc-server';
+import { tRouter, protectedProcedure } from '../trpc-server';
 import {
   notificationSubscriptionValidator,
   rteContentValidator,
 } from './utils/validator';
 
-export const notificationRouter = router({
+export const notificationRouter = tRouter({
   messages: protectedProcedure.query(async ({ ctx }) => {
     const messages = await prisma.notificationMessage.findMany({
       where: {

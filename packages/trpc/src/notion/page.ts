@@ -1,5 +1,5 @@
-import { log } from 'next-axiom';
-import { Block } from 'notion-types';
+import { isEqual } from '@chirpy-dev/utils';
+import { Block, ExtendedRecordMap } from 'notion-types';
 import { JsonObject } from 'type-fest';
 
 import { prisma } from '../db/client';
@@ -7,18 +7,28 @@ import { notion } from './client';
 
 export type { ExtendedRecordMap, PageMap } from 'notion-types';
 
-export async function getAndSavePageRecordMap(pageId: string, postId: string) {
+export async function getAndSavePageRecordMap(
+  pageId: string,
+  postId: string,
+  savedRecordMap: ExtendedRecordMap,
+) {
   const recordMap = await getNotionPage(pageId);
-  log.debug('recordMap', recordMap);
-  // Always update the recordMap when getting a new version
-  await prisma.post.update({
-    where: {
-      id: postId,
-    },
-    data: {
-      recordMap: recordMap as unknown as JsonObject,
-    },
-  });
+  if (
+    !isEqual(
+      recordMap as unknown as JsonObject,
+      savedRecordMap as unknown as JsonObject,
+    )
+  ) {
+    // Update the recordMap when getting a new version
+    await prisma.post.update({
+      where: {
+        id: postId,
+      },
+      data: {
+        recordMap: recordMap as unknown as JsonObject,
+      },
+    });
+  }
   return recordMap;
 }
 

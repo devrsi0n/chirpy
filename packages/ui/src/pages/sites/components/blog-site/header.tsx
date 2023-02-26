@@ -14,20 +14,20 @@ import {
 } from '../../../../components';
 import { useFrozeBodyScroll } from '../../../../hooks';
 import { bluredBg } from '../../../../styles/common';
-import { PostFields } from '../../types';
+import { trpcClient } from '../../../../utilities';
 import { xAxisStyles } from './styles';
 import { LinkMeta, LogoMeta } from './types';
 
 export type BlogHeaderProps = {
   links: LinkMeta[];
   logo: LogoMeta;
-  posts: PostFields[];
 };
 
 export function BlogHeader(props: BlogHeaderProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
   useFrozeBodyScroll(isOpen);
   const logo = <Image {...props.logo} alt="Site logo" />;
+  const { isFetching, data: posts } = trpcClient.command.searchBlog.useQuery();
   return (
     <>
       <header
@@ -69,14 +69,20 @@ export function BlogHeader(props: BlogHeaderProps): JSX.Element {
                   ))}
                 </CommandMenu.Group>
                 <CommandMenu.Separator />
+                {isFetching && (
+                  <CommandMenu.Loading>Loading posts</CommandMenu.Loading>
+                )}
                 <CommandMenu.Group heading="Posts">
-                  {props.posts.slice(0, 3).map((post) => (
+                  {posts?.map((post) => (
                     <CommandMenu.Item
-                      key={post.pageId}
+                      key={post.id}
                       href={`/post/${post.slug}`}
+                      value={`${post.title} ${post.slug}`}
                     >
-                      <IconFeather size={20} />
-                      <span>{post.title}</span>
+                      <span>
+                        <IconFeather size={20} />
+                      </span>
+                      <span className="line-clamp-1">{post.title}</span>
                     </CommandMenu.Item>
                   ))}
                 </CommandMenu.Group>

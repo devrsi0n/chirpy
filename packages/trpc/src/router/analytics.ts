@@ -1,9 +1,9 @@
 import { isENVDev, queryUsage } from '@chirpy-dev/utils';
 
 import { BlogSite, DocsSite, prisma } from '../db';
-import { protectedProcedure, router } from '../trpc-server';
+import { protectedProcedure, tRouter } from '../trpc-server';
 
-export const analyticsRouter = router({
+export const analyticsRouter = tRouter({
   usage: protectedProcedure.query(async ({ ctx }) => {
     const selectDomains = {
       select: {

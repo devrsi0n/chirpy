@@ -2,7 +2,7 @@ import { USERNAME_RE } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
 import { prisma, User } from '../db';
-import { router, protectedProcedure } from '../trpc-server';
+import { tRouter, protectedProcedure } from '../trpc-server';
 
 export type MeOutput =
   | (Pick<User, 'id' | 'name' | 'username' | 'email' | 'image' | 'kind'> & {
@@ -10,7 +10,7 @@ export type MeOutput =
     })
   | null;
 
-export const userRouter = router({
+export const userRouter = tRouter({
   me: protectedProcedure.query(async ({ ctx }): Promise<MeOutput> => {
     const me = await prisma.user.findUnique({
       where: {

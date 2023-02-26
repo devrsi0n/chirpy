@@ -20,7 +20,7 @@ export function BlogHome(props: BlogHomeProps): JSX.Element {
   );
   const tags = [VIEW_ALL, ...new Set(restPosts.flatMap((p) => p.tags || []))];
   return (
-    <BlogSiteLayout posts={props.posts}>
+    <BlogSiteLayout>
       <BlogHero
         title="Transforming designs into realities"
         description="Subscribe to learn about the latest in technology, user experience, and updates."

@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 import { revalidateCommentWidgets } from '../common/revalidate';
 import { prisma } from '../db/client';
-import { router, protectedProcedure } from '../trpc-server';
+import { tRouter, protectedProcedure } from '../trpc-server';
 
-export const revalidateRouter = router({
+export const revalidateRouter = tRouter({
   widget: protectedProcedure
     .input(z.object({ projectId: z.string() }))
     .mutation(async ({ input, ctx }) => {

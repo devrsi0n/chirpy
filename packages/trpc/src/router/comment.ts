@@ -2,11 +2,11 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { prisma } from '../db/client';
-import { router, publicProcedure, protectedProcedure } from '../trpc-server';
+import { tRouter, publicProcedure, protectedProcedure } from '../trpc-server';
 import { COMMON_COMMENT_SELECTOR } from './utils/selector';
 import { rteContentValidator } from './utils/validator';
 
-export const commentRouter = router({
+export const commentRouter = tRouter({
   forest: publicProcedure
     .input(z.object({ url: z.string() }))
     .query(async ({ input }) => {

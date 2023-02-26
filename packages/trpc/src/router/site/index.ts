@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../../db/client';
-import { protectedProcedure, router } from '../../trpc-server';
+import { protectedProcedure, tRouter } from '../../trpc-server';
 import { checkDomain, createDomain, deleteDomain } from './domain';
 import { checkDuplicatedSubdomain, checkUserAuthorization } from './utils';
 import {
@@ -9,7 +9,7 @@ import {
   UPDATE_INPUT_VALIDATION,
 } from './validations';
 
-export const siteRouter = router({
+export const siteRouter = tRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const sites = await prisma.blogSite.findMany({
       where: {

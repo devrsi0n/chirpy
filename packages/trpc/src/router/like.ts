@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 import { prisma } from '../db/client';
-import { router, protectedProcedure } from '../trpc-server';
+import { tRouter, protectedProcedure } from '../trpc-server';
 
-export const likeRouter = router({
+export const likeRouter = tRouter({
   create: protectedProcedure
     .input(z.object({ commentId: z.string() }))
     .mutation(async ({ input, ctx }) => {

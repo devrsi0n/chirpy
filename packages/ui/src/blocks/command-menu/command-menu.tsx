@@ -51,8 +51,7 @@ export function CommandMenu({ children }: CommandMenuProps): JSX.Element {
         )}
       >
         <Input />
-        <Command.List>
-          {/* {loading && <Command.Loading>Hang on…</Command.Loading>} */}
+        <Command.List className="h-[30vh] overflow-y-auto">
           <Command.Empty className="py-3 px-[18px]">
             No results found.
           </Command.Empty>
@@ -66,6 +65,7 @@ export function CommandMenu({ children }: CommandMenuProps): JSX.Element {
 CommandMenu.Group = Group;
 CommandMenu.Item = Item;
 CommandMenu.Separator = Separator;
+CommandMenu.Loading = Loading;
 
 function Group(props: React.ComponentProps<typeof Command.Group>): JSX.Element {
   return (
@@ -79,11 +79,12 @@ function Group(props: React.ComponentProps<typeof Command.Group>): JSX.Element {
   );
 }
 
-function Item(
-  props: React.ComponentProps<typeof Command.Item> & {
-    href: string;
-  },
-): JSX.Element {
+function Item({
+  href,
+  ...props
+}: React.ComponentProps<typeof Command.Item> & {
+  href: string;
+}): JSX.Element {
   const router = useRouter();
   return (
     <Command.Item
@@ -93,7 +94,7 @@ function Item(
         props.className,
       )}
       onSelect={() => {
-        router.push(props.href);
+        router.push(href);
       }}
     />
   );
@@ -124,5 +125,17 @@ function Input(props: React.ComponentProps<typeof Command.Input>): JSX.Element {
         )}
       />
     </div>
+  );
+}
+
+function Loading(
+  props: React.ComponentProps<typeof Command.Loading>,
+): JSX.Element {
+  return (
+    <Command.Loading
+      {...props}
+      // @ts-ignore
+      className={clsx(`py-3 px-[18px]`)}
+    />
   );
 }
