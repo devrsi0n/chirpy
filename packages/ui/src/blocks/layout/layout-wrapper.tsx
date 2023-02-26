@@ -17,12 +17,7 @@ export function LayoutWrapper({
   return (
     <>
       <LayoutTitle title={title} />
-      <div
-        className={clsx(
-          `flex min-h-full flex-col font-sans text-gray-1100`,
-          className,
-        )}
-      >
+      <div className={clsx(`flex min-h-full flex-col`, className)}>
         {children}
       </div>
     </>

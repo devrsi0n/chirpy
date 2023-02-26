@@ -163,7 +163,7 @@ export function Profile(): JSX.Element {
                   })}
                   label="Email"
                   errorMessage={errors.email}
-                  hintText={
+                  hint={
                     'You need to sign-in with this email address to verify it after saving'
                   }
                 >

@@ -1,3 +1,3 @@
-export * from './sites-index';
+export * from './sites-home';
 export * from './blog-post';
 export * from './types';

@@ -5,10 +5,10 @@
   "main": "./index.js",
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "3.7.1",
-    "prettier-plugin-tailwindcss": "0.2.2"
+    "prettier-plugin-tailwindcss": "0.2.3"
   },
   "devDependencies": {
-    "prettier": "2.8.3"
+    "prettier": "2.8.4"
   },
   "publishConfig": {
     "access": "public"

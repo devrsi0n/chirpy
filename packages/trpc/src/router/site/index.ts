@@ -1,20 +1,15 @@
-import { JsonObject } from 'type-fest';
 import { z } from 'zod';
 
 import { prisma } from '../../db/client';
-import { protectedProcedure, router } from '../../trpc-server';
+import { protectedProcedure, tRouter } from '../../trpc-server';
 import { checkDomain, createDomain, deleteDomain } from './domain';
-import {
-  checkDuplicatedSubdomain,
-  checkUserAuthorization,
-  getRecordMapByUrl,
-} from './utils';
+import { checkDuplicatedSubdomain, checkUserAuthorization } from './utils';
 import {
   CREATE_INPUT_VALIDATION,
   UPDATE_INPUT_VALIDATION,
 } from './validations';
 
-export const siteRouter = router({
+export const siteRouter = tRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const sites = await prisma.blogSite.findMany({
       where: {
@@ -49,13 +44,9 @@ export const siteRouter = router({
     .input(CREATE_INPUT_VALIDATION)
     .mutation(async ({ input, ctx }) => {
       await checkDuplicatedSubdomain(input.subdomain);
-      const recordMap = (await getRecordMapByUrl(
-        input.pageUrl,
-      )) as unknown as JsonObject;
       const result = await prisma.blogSite.create({
         data: {
           ...input,
-          recordMap,
           managerId: ctx.session.user.id,
         },
         select: {

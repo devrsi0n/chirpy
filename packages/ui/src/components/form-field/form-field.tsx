@@ -12,7 +12,7 @@ export type FormFieldProps = {
   children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   label?: string;
   errorMessage?: string;
-  hintText?: string;
+  hint?: React.ReactNode;
   disabled?: boolean;
   className?: string;
   /**
@@ -24,7 +24,7 @@ export type FormFieldProps = {
 export function FormField({
   label,
   errorMessage,
-  hintText,
+  hint,
   children,
   layout = 'vertical',
   className,
@@ -33,7 +33,8 @@ export function FormField({
   return layout === 'vertical' ? (
     <label
       className={clsx(
-        'flex h-full w-full flex-col items-start gap-1.5',
+        'flex h-full w-full flex-col items-start',
+        label && `gap-1.5`,
         className,
       )}
     >
@@ -50,10 +51,14 @@ export function FormField({
             </Text>
           </m.div>
         ) : (
-          hintText && (
-            <m.div key={`${label}-hint`} {...easeInOutOpacity}>
+          hint && (
+            <m.div
+              className="mt-1.5"
+              key={`${label}-hint`}
+              {...easeInOutOpacity}
+            >
               <Text variant="secondary" size="sm">
-                {hintText}
+                {hint}
               </Text>
             </m.div>
           )
@@ -64,9 +69,9 @@ export function FormField({
     <label className={clsx('flex w-full flex-row justify-start', className)}>
       <div className="flex w-full flex-col">
         <p className="pr-5 text-sm font-medium text-gray-1200">{label}</p>
-        {hintText && (
-          <Text variant="secondary" size="sm">
-            {hintText}
+        {hint && (
+          <Text className="mt-1.5" variant="secondary" size="sm">
+            {hint}
           </Text>
         )}
       </div>

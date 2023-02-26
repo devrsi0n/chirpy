@@ -19,6 +19,18 @@
       "port": 9229
     },
     {
+      "name": "Next.js: debug full stack",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run debug",
+      "cwd": "${workspaceFolder}/apps/main",
+      "serverReadyAction": {
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      }
+    },
+    {
       "type": "node",
       "name": "vscode-jest-tests",
       "request": "launch",

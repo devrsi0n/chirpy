@@ -98,6 +98,7 @@ module.exports = {
       },
       spacing: {
         44: '11rem',
+        90: '22.5rem',
       },
       width: {
         '31percent': '31%',
@@ -198,6 +199,20 @@ module.exports = {
             },
           },
         };
+      },
+      animation: {
+        opacity:
+          'opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal none running',
+      },
+      keyframes: {
+        opacity: {
+          '0%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
       },
     },
   },

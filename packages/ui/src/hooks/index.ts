@@ -19,3 +19,4 @@ export * from './use-sign-in-window';
 export * from './use-time';
 export * from './use-widget-side-effects';
 export * from './use-force-update';
+export * from './use-key-press-event';

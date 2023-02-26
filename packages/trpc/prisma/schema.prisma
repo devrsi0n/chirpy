@@ -257,8 +257,6 @@ model BlogSite {
   subdomain    String           @unique
   // Notion page url
   pageUrl      String           @db.Text
-  // Notion page record map
-  recordMap    Json
   description  String?          @db.Text
   logo         String?
   customDomain String?          @unique
@@ -278,13 +276,15 @@ model Post {
   // Notion page id
   pageId    String
   slug      String   @default(cuid())
-  // Notion page content record map
-  recordMap Json?
+  // Notion page content record map,
+  // all the properties and texts are stored in the map,
+  // don't save them in the database
+  recordMap Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  site      BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  siteId    String
+
+  site   BlogSite @relation(fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  siteId String
 
   // Slug is unique per site, but not unique globally
   @@unique([slug, siteId], name: "post_slug_site_constraint")

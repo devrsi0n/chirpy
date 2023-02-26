@@ -42,9 +42,9 @@ const sizeStyles: Record<Size, string> = {
   lg: `text-lg`,
   xl: `text-xl`,
 };
-const colorVariantStyles: Record<Variant, string> = {
+const variantStyles: Record<Variant, string> = {
   default: 'text-gray-1200',
-  primary: 'text-primary-1200',
+  primary: 'text-primary-900',
   secondary: 'text-gray-1100',
   success: 'text-green-900',
   error: 'text-red-900',
@@ -81,7 +81,7 @@ export function Text({
       {...restProps}
       className={clsx(
         `leading-normal`,
-        colorVariantStyles[variant],
+        variantStyles[variant],
         sizeStyles[size],
         bold && `font-bold`,
         italic && `italic`,

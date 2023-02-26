@@ -2,10 +2,10 @@ import * as RadixTabs from '@radix-ui/react-tabs';
 import clsx from 'clsx';
 import * as React from 'react';
 
-export type TabsProps = RadixTabs.TabsProps &
+export type UnderlineTabsProps = RadixTabs.TabsProps &
   React.RefAttributes<HTMLDivElement>;
 
-export function Tabs(props: TabsProps): JSX.Element {
+export function UnderlineTabs(props: UnderlineTabsProps): JSX.Element {
   return (
     <RadixTabs.Root
       {...props}
@@ -13,13 +13,13 @@ export function Tabs(props: TabsProps): JSX.Element {
     />
   );
 }
-Tabs.List = List;
-Tabs.Trigger = Trigger;
-Tabs.Content = Content;
+UnderlineTabs.List = List;
+UnderlineTabs.Trigger = Trigger;
+UnderlineTabs.Content = Content;
 
-export type TabsListProps = RadixTabs.TabsListProps &
+export type UnderlineTabsListProps = RadixTabs.TabsListProps &
   React.RefAttributes<HTMLDivElement>;
-function List(props: TabsListProps): JSX.Element {
+function List(props: UnderlineTabsListProps): JSX.Element {
   return (
     <RadixTabs.List
       {...props}
@@ -28,9 +28,9 @@ function List(props: TabsListProps): JSX.Element {
   );
 }
 
-export type TabsTriggerProps = RadixTabs.TabsTriggerProps &
+export type UnderlineTabsTriggerProps = RadixTabs.TabsTriggerProps &
   React.RefAttributes<HTMLButtonElement>;
-function Trigger(props: TabsTriggerProps): JSX.Element {
+function Trigger(props: UnderlineTabsTriggerProps): JSX.Element {
   return (
     <RadixTabs.Trigger
       {...props}
@@ -44,9 +44,9 @@ function Trigger(props: TabsTriggerProps): JSX.Element {
   );
 }
 
-export type TabsContentProps = RadixTabs.TabsContentProps &
+export type UnderlineTabsContentProps = RadixTabs.TabsContentProps &
   React.RefAttributes<HTMLDivElement>;
-function Content(props: TabsContentProps): JSX.Element {
+function Content(props: UnderlineTabsContentProps): JSX.Element {
   return (
     <RadixTabs.Content
       {...props}

@@ -47,7 +47,7 @@ export function SiteForm<T extends SiteFormFields>({
         })}
         label="Notion page URL"
         errorMessage={errors.pageUrl}
-        hintText={
+        hint={
           pageUrlFieldHint ??
           "Back to the previous page to get the page URL if you don't have one"
         }

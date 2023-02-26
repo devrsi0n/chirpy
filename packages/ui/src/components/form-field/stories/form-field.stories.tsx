@@ -22,28 +22,28 @@ export const TextInput: ComponentStory<FormFieldType> = () => {
       <FormField label="Default">
         <TextInputComponent />
       </FormField>
-      <FormField label="Hint text" hintText="This is a hint text to help user.">
+      <FormField label="Hint text" hint="This is a hint text to help user.">
         <TextInputComponent defaultValue="alice@chirpy.dev" />
       </FormField>
-      <FormField label="Disabled" hintText="This is a hint text to help user.">
+      <FormField label="Disabled" hint="This is a hint text to help user.">
         <TextInputComponent placeholder="bob@chirpy.dev" disabled />
       </FormField>
       <FormField
         label="Error"
-        hintText="This is a hint text to help user."
+        hint="This is a hint text to help user."
         errorMessage="Email is invalid"
       >
         <TextInputComponent placeholder="charlie@chirpy.dev" />
       </FormField>
-      <FormField label="URL" hintText="Enter your domain">
+      <FormField label="URL" hint="Enter your domain">
         <TextInputComponent prefix="https://" placeholder="chirpy.dev" />
       </FormField>
-      <FormField label="Suffix" hintText="Look at my suffix">
+      <FormField label="Suffix" hint="Look at my suffix">
         <TextInputComponent placeholder="sixian" suffix=".chirpy.dev" />
       </FormField>
       <FormField
         label="Prefix and Suffix"
-        hintText="Enter your subdomain"
+        hint="Enter your subdomain"
         errorMessage="Invalid URL"
       >
         <TextInputComponent
@@ -73,10 +73,10 @@ export const SelectInput: ComponentStory<FormFieldType> = () => {
       <FormField label="Default">
         <Select placeholder="Select your fruit">{items}</Select>
       </FormField>
-      <FormField label="Hint text" hintText="This is a hint text to help user.">
+      <FormField label="Hint text" hint="This is a hint text to help user.">
         <Select placeholder="Select your fruit">{items}</Select>
       </FormField>
-      <FormField label="Long list" hintText="This is a long list">
+      <FormField label="Long list" hint="This is a long list">
         <Select placeholder="Select your fruit">
           {Array.from({ length: 50 }, (_, i) => (
             <Select.Item key={i} value={i.toString()}>
@@ -85,7 +85,7 @@ export const SelectInput: ComponentStory<FormFieldType> = () => {
           ))}
         </Select>
       </FormField>
-      <FormField label="Disabled" hintText="This is disabled">
+      <FormField label="Disabled" hint="This is disabled">
         <Select placeholder="Select your fruit" disabled />
       </FormField>
     </div>
@@ -98,15 +98,15 @@ export const TextAreaInput: ComponentStory<FormFieldType> = () => {
       <FormField label="Description">
         <TextAreaInputComponent defaultValue="A story about Chirpy" />
       </FormField>
-      <FormField label="Hint text" hintText="This is a hint text to help user.">
+      <FormField label="Hint text" hint="This is a hint text to help user.">
         <TextAreaInputComponent placeholder="Enter a description..." />
       </FormField>
-      <FormField label="Disabled" hintText="This is a hint text to help user.">
+      <FormField label="Disabled" hint="This is a hint text to help user.">
         <TextAreaInputComponent placeholder="This is disabled." disabled />
       </FormField>
       <FormField
         label="Error"
-        hintText="This is a hint text to help user"
+        hint="This is a hint text to help user"
         errorMessage="Email is invalid"
       >
         <TextAreaInputComponent placeholder="charlie@chirpy.dev" />
@@ -162,7 +162,7 @@ export const Form = () => {
           <FormField
             {...register('description')}
             label="Description"
-            hintText="Tell me about yourself"
+            hint="Tell me about yourself"
           >
             <TextAreaInputComponent placeholder="Enter a description..." />
           </FormField>

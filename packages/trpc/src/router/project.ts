@@ -3,9 +3,9 @@ import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { prisma } from '../db/client';
-import { router, protectedProcedure, publicProcedure } from '../trpc-server';
+import { tRouter, protectedProcedure, publicProcedure } from '../trpc-server';
 
-export const projectRouter = router({
+export const projectRouter = tRouter({
   all: protectedProcedure.query(async ({ ctx }) => {
     const projects = await prisma.project.findMany({
       where: {

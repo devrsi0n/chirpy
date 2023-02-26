@@ -11,7 +11,7 @@ const t = initTRPC.context<Context>().create({
   },
 });
 
-export const router = t.router;
+export const tRouter = t.router;
 
 const logger = t.middleware(async ({ path, type, next }) => {
   const start = Date.now();

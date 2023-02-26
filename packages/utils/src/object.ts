@@ -39,3 +39,35 @@ export function mergeDeep(...objects: JsonObject[]) {
 function isObject(obj: unknown): obj is JsonObject {
   return !!obj && typeof obj === 'object' && !Array.isArray(obj);
 }
+
+/**
+ * Check 2 objects are equal, ignore the order of keys
+ */
+export function isEqual(obj1: JsonObject, obj2: JsonObject): boolean {
+  const entries1 = Object.entries(obj1);
+  const entries2 = Object.entries(obj2);
+
+  if (entries1.length !== entries2.length) {
+    return false;
+  }
+
+  for (const [key, val1] of entries1) {
+    const val2 = obj2[key];
+
+    if (typeof val1 !== typeof val2) {
+      return false;
+    }
+
+    if (val1 && val1 instanceof Object && val2 && val2 instanceof Object) {
+      if (
+        !isEqual(val1 as unknown as JsonObject, val2 as unknown as JsonObject)
+      ) {
+        return false;
+      }
+    } else if (val1 !== val2) {
+      return false;
+    }
+  }
+
+  return true;
+}

@@ -8,14 +8,14 @@
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@tiptap/core": "2.0.0-beta.204",
-    "@tiptap/react": "2.0.0-beta.204",
+    "@tiptap/core": "2.0.0-beta.218",
+    "@tiptap/react": "2.0.0-beta.218",
     "@types/node": "16.11.45",
-    "@types/react": "18.0.27",
-    "@types/react-dom": "18.0.10",
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
     "csstype": "3.1.1",
-    "eslint": "8.33.0",
-    "next": "13.1.6",
+    "eslint": "8.34.0",
+    "next": "13.2.1",
     "next-auth": "4.17.0",
     "next-mdx-remote": "3.0.8",
     "react": "18.2.0",
@@ -27,6 +27,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@tanstack/react-query": "4.24.4"
+    "@tanstack/react-query": "4.24.10"
   }
 }

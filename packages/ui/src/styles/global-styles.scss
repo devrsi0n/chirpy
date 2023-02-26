@@ -15,6 +15,7 @@ html,
 body,
 #__next {
   height: 100%;
+  @apply font-sans text-gray-1100;
 }
 
 * {
@@ -23,6 +24,8 @@ body,
   -webkit-appearance: none;
   appearance: none;
   outline: none;
+  // Fix the unexpected black outline when clicking a focusable element
+  outline-color: transparent;
 }
 
 ::selection {
@@ -31,11 +34,13 @@ body,
 
 :focus-visible {
   outline: none;
+  outline-color: transparent;
 }
 
 input:focus,
 button:focus {
   outline: none;
+  outline-color: transparent;
 }
 
 @font-face {
@@ -164,4 +169,8 @@ h6:hover {
   & > a > .icon.icon-link {
     display: inline-block;
   }
+}
+
+[cmdk-overlay][data-state='open'] {
+  @apply fixed inset-0 animate-opacity bg-blacka-700 dark:bg-whitea-700;
 }

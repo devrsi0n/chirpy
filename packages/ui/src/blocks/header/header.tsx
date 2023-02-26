@@ -15,13 +15,7 @@ export function Header(): JSX.Element {
   return (
     <header className={clsx(`z-20 w-full sm:sticky sm:top-0 sm:left-0`)}>
       <MaintenanceBanner />
-      <div
-        className={clsx(
-          'relative',
-          // Can't use the normal backdrop-filter here as it'll cause nested blur elements not working in chrome.
-          'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
-        )}
-      >
+      <div className={clsx(headerBlurBackgroundStyles)}>
         <section className="mx-auto flex max-w-7xl flex-row items-center justify-between py-3 px-2 shadow-xs transition duration-150 sm:px-6 lg:px-8">
           <div className="flex items-center pl-3 sm:hidden">
             <SideMenu>
@@ -35,7 +29,6 @@ export function Header(): JSX.Element {
                   Pricing
                 </Link>
               </SideMenu.Item>
-
               <SideMenu.Item>
                 <Link
                   size="lg"
@@ -77,7 +70,6 @@ export function Header(): JSX.Element {
               <Link href="/#pricing" highlightPattern={/^\/#pricing/}>
                 Pricing
               </Link>
-
               <Link href="/docs" highlightPattern={/^\/docs/}>
                 Docs
               </Link>
@@ -103,3 +95,7 @@ export function Header(): JSX.Element {
     </header>
   );
 }
+
+// Can't use the normal backdrop-filter here as it'll cause nested blur elements not working in chrome.
+export const headerBlurBackgroundStyles =
+  'relative before:-z-10 before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70';

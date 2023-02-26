@@ -1,4 +1,5 @@
 import { Theme } from '@chirpy-dev/types';
+import { mergeDeep } from '@chirpy-dev/utils/src/object';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
 import * as React from 'react';
@@ -11,7 +12,6 @@ import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
-import { mergeDeep } from '../../utilities/object';
 import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { ColorModeSelect } from '../color-mode-select';
 import {
