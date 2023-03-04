@@ -19,7 +19,7 @@ export function ColorModeSelect(): JSX.Element {
       <Select
         value={theme || 'system'}
         onValueChange={handleChange}
-        className="w-36"
+        className="!w-36"
         aria-label="Mode selector"
       >
         <Select.Item value="light">

@@ -90,7 +90,7 @@ function Item({
     <Command.Item
       {...props}
       className={clsx(
-        'flex items-center gap-2 py-3 px-[18px] hover:cursor-pointer aria-selected:bg-gray-600/40',
+        'mx-2 flex items-center gap-2 rounded-lg py-3 px-[10px] transition hover:cursor-pointer aria-selected:bg-primary-600/40 aria-selected:text-primary-1100',
         props.className,
       )}
       onSelect={() => {

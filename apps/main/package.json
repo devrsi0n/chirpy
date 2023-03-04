@@ -36,12 +36,12 @@
     "gray-matter": "4.0.3",
     "html-loader": "4.2.0",
     "lodash": "4.17.21",
-    "next": "13.2.1",
+    "next": "13.2.3",
     "next-axiom": "0.15.1",
     "next-connect": "0.13.0",
     "next-mdx-remote": "3.0.8",
     "next-plausible": "3.6.4",
-    "next-superjson-plugin": "0.5.4",
+    "next-superjson-plugin": "0.5.6",
     "next-themes": "0.2.1",
     "nodemailer": "6.9.1",
     "notion-types": "6.16.0",
@@ -60,7 +60,7 @@
     "zod": "3.20.6"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "13.2.1",
+    "@next/bundle-analyzer": "13.2.3",
     "@radix-ui/colors": "0.1.8",
     "@relative-ci/agent": "4.1.1",
     "@sendinblue/client": "3.2.2",

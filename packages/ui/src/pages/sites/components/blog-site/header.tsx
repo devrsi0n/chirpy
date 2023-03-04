@@ -27,7 +27,7 @@ export function BlogHeader(props: BlogHeaderProps): JSX.Element {
   const [isOpen, setIsOpen] = React.useState(false);
   useFrozeBodyScroll(isOpen);
   const logo = <Image {...props.logo} alt="Site logo" />;
-  const { isFetching, data: posts } = trpcClient.command.searchBlog.useQuery();
+  const { isLoading, data: posts } = trpcClient.command.searchBlog.useQuery();
   return (
     <>
       <header
@@ -69,23 +69,25 @@ export function BlogHeader(props: BlogHeaderProps): JSX.Element {
                   ))}
                 </CommandMenu.Group>
                 <CommandMenu.Separator />
-                {isFetching && (
+                {isLoading && (
                   <CommandMenu.Loading>Loading posts</CommandMenu.Loading>
                 )}
-                <CommandMenu.Group heading="Posts">
-                  {posts?.map((post) => (
-                    <CommandMenu.Item
-                      key={post.id}
-                      href={`/post/${post.slug}`}
-                      value={`${post.title} ${post.slug}`}
-                    >
-                      <span>
-                        <IconFeather size={20} />
-                      </span>
-                      <span className="line-clamp-1">{post.title}</span>
-                    </CommandMenu.Item>
-                  ))}
-                </CommandMenu.Group>
+                {posts?.length && (
+                  <CommandMenu.Group heading="Posts">
+                    {posts?.map((post) => (
+                      <CommandMenu.Item
+                        key={post.id}
+                        href={`/post/${post.slug}`}
+                        value={`${post.title} ${post.slug}`}
+                      >
+                        <span>
+                          <IconFeather size={20} />
+                        </span>
+                        <span className="line-clamp-1">{post.title}</span>
+                      </CommandMenu.Item>
+                    ))}
+                  </CommandMenu.Group>
+                )}
               </CommandMenu>
             </div>
           </section>
