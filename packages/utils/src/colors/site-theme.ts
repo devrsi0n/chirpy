@@ -34,6 +34,7 @@ export const siteTheme: Theme = {
 export function getColors() {
   return {
     light: {
+      white: 'hsl(0, 0%, 100%)',
       primary: translateRadixColor(violet),
       plum: translateRadixColor(plum),
       gray: {
@@ -51,6 +52,7 @@ export function getColors() {
       bg: 'hsl(0, 0%, 100%)',
     },
     dark: {
+      white: 'hsl(0, 0%, 100%)',
       primary: translateRadixColor(violetDark),
       plum: translateRadixColor(plumDark),
       gray: {

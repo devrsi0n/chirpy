@@ -27,6 +27,7 @@ export function SiteGeneralSettings({
         description: '',
         subdomain: '',
         pageUrl: '',
+        logo: '',
       },
       resetAfterSubmit: false,
     });
@@ -37,6 +38,7 @@ export function SiteGeneralSettings({
         description: data.description || '',
         subdomain: data.subdomain,
         pageUrl: data.pageUrl,
+        logo: data.logo || '',
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

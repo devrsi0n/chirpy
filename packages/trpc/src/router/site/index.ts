@@ -88,6 +88,7 @@ export const siteRouter = tRouter({
         subdomain: true,
         customDomain: true,
         description: true,
+        logo: true,
         posts: {
           select: {
             id: true,

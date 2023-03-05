@@ -142,14 +142,14 @@ const sizeStyles: Record<Size, string> = {
 
 const VariantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-primary-900 text-whitea-1200 enabled:hover:bg-primary-1000 focus-visible:ring-primary-1000',
+    'bg-primary-900 text-white enabled:hover:bg-primary-1000 focus-visible:ring-primary-1000',
   secondary:
-    'bg-gray-100 border border-gray-700 text-gray-1200 enabled:hover:border-gray-800 enabled:hover:bg-gray-300 focus-visible:ring-gray-700',
+    'bg-gray-100 border border-gray-700 text-gray-1200 enabled:hover:border-gray-800 enabled:hover:bg-gray-300 focus-visible:ring-gray-900',
   text: 'text-primary-1100 enabled:hover:text-primary-1200 focus-visible:ring-primary-1000',
 };
 
 const VariantDangerStyles: Record<ButtonVariant, string> = {
-  primary: 'bg-red-900 text-whitea-1200 enabled:hover:bg-red-1000',
+  primary: 'bg-red-900 text-white enabled:hover:bg-red-1000',
   secondary:
     'bg-gray-100 text-red-900 border border-red-700 enabled:hover:border-red-800 enabled:hover:bg-red-300 enabled:hover:text-red-1000',
   text: 'text-red-900 enabled:hover:bg-red-300',
