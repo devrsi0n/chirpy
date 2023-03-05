@@ -1,12 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-import {
-  borderHover,
-  disabled,
-  easeInOutTransition,
-  focusRing,
-} from '../../styles/common';
+import { getInputStyles } from '../input';
 
 export type TextAreaProps = React.ComponentPropsWithoutRef<'textarea'> & {
   error?: boolean;
@@ -21,17 +16,7 @@ export const TextArea = React.forwardRef(function TextArea(
       ref={forwardedRef}
       className={clsx(
         'min-h-[128px] w-full bg-gray-0',
-        error
-          ? 'focus-visible:border-red-800'
-          : 'focus-visible:border-primary-800',
-        error &&
-          'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
-        textAreaProps.disabled && disabled,
-        'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
-        !textAreaProps.disabled && !error && borderHover,
-        easeInOutTransition,
-        focusRing,
-        'rounded-lg',
+        getInputStyles(error),
         className,
       )}
       {...textAreaProps}

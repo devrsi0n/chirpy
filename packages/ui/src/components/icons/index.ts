@@ -69,3 +69,4 @@ export { default as IconPieChart } from '@geist-ui/icons/pieChart';
 export { default as IconGlobe } from '@geist-ui/icons/globe';
 export { default as IconArrowUpRight } from '@geist-ui/icons/arrowUpRight';
 export { default as IconSearch } from '@geist-ui/icons/search';
+export { default as IconUploadCloud } from '@geist-ui/icons/uploadCloud';

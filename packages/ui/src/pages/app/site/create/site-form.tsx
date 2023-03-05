@@ -6,6 +6,7 @@ import {
 } from '@chirpy-dev/trpc/src/ui';
 import * as React from 'react';
 
+import { Uploader } from '../../../../blocks';
 import { FormField, Input, TextArea } from '../../../../components';
 import type { FieldValue, FormError, Register } from '../../../../hooks';
 
@@ -21,6 +22,7 @@ export type SiteFormFields = {
   subdomain: string;
   description: string;
   pageUrl: string;
+  logo: string;
 };
 
 export function SiteForm<T extends SiteFormFields>({
@@ -30,7 +32,7 @@ export function SiteForm<T extends SiteFormFields>({
   children,
 }: SiteFormProps<T>): JSX.Element {
   return (
-    <form className="flex max-w-3xl flex-col gap-5">
+    <form className="flex flex-col gap-5">
       <FormField
         {...register('name', {
           zod: SITE_NAME_VALIDATION,
@@ -78,6 +80,16 @@ export function SiteForm<T extends SiteFormFields>({
         hint="Used for SEO and social media."
       >
         <TextArea placeholder="My awesome blog" />
+      </FormField>
+      <Divider />
+      <FormField
+        {...register('logo')}
+        label="Site logo"
+        errorMessage={errors.logo}
+        layout="horizontal"
+        hint="This will be displayed on your site."
+      >
+        <Uploader />
       </FormField>
       {children}
     </form>

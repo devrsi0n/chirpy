@@ -3,7 +3,7 @@ import React from 'react';
 
 import {
   borderHover,
-  disabled,
+  disabled as disabledStyles,
   easeInOutTransition,
   focusRing,
 } from '../../styles/common';
@@ -45,18 +45,8 @@ export const Input = React.forwardRef(function InputComponent(
         type="text"
         ref={forwardedRef}
         className={clsx(
-          'w-full bg-gray-0',
-          error
-            ? 'focus-visible:border-red-800'
-            : 'focus-visible:border-primary-800',
-          error &&
-            'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
-          inputProps.disabled && disabled,
-          'flex-row items-center gap-2 border py-2.5 px-3.5 text-gray-1200 placeholder-gray-900 shadow-xs',
-          !inputProps.disabled && !error && borderHover,
-          easeInOutTransition,
-          focusRing,
-          'rounded-lg',
+          'w-full',
+          getInputStyles(error),
           prefixNode && 'rounded-tl-none rounded-bl-none',
           suffixNode && 'rounded-tr-none rounded-br-none',
           className,
@@ -75,3 +65,16 @@ export const Input = React.forwardRef(function InputComponent(
     </div>
   );
 });
+
+export function getInputStyles(error?: boolean, disabled?: boolean) {
+  return clsx(
+    'text-gray-1200 placeholder-gray-900 shadow-xs',
+    error ? 'focus-visible:border-red-800' : 'focus-visible:border-primary-800',
+    error && 'border-red-700 hover:border-red-800 focus-visible:ring-red-700',
+    disabled && disabledStyles,
+    'flex-row items-center gap-2 border rounded-lg py-2.5 px-3.5',
+    !disabled && !error && borderHover,
+    easeInOutTransition,
+    focusRing,
+  );
+}

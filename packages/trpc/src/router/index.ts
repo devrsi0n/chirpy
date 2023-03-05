@@ -2,6 +2,7 @@ import { tRouter } from '../trpc-server';
 import { analyticsRouter } from './analytics';
 import { commandRouter } from './command';
 import { commentRouter } from './comment';
+import { imageRouter } from './image';
 import { likeRouter } from './like';
 import { notificationRouter } from './notification';
 import { projectRouter } from './project';
@@ -19,6 +20,7 @@ export const appRouter = tRouter({
   site: siteRouter,
   analytics: analyticsRouter,
   command: commandRouter,
+  image: imageRouter,
 });
 
 export type AppRouter = typeof appRouter;

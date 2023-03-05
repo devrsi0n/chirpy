@@ -18,6 +18,7 @@ export function CreateSiteForm(): JSX.Element {
         pageUrl: '',
         subdomain: '',
         description: '',
+        logo: '',
       },
     });
   const trpcCtx = trpcClient.useContext();
@@ -47,7 +48,7 @@ export function CreateSiteForm(): JSX.Element {
   );
   return (
     <AppLayout title="Create site form">
-      <section className="flex flex-col gap-10">
+      <section className="flex max-w-4xl flex-col gap-10">
         <p className="text-base font-semibold text-primary-900">
           Create new site
         </p>
@@ -57,7 +58,7 @@ export function CreateSiteForm(): JSX.Element {
           </Heading>
           <SiteForm register={register} errors={errors} />
         </div>
-        <div className="flex max-w-3xl justify-between">
+        <div className="flex justify-between">
           <PaginationLink type="prev" href="/site/create">
             Duplicate template
           </PaginationLink>

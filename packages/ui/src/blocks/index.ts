@@ -30,3 +30,4 @@ export * from './theme-editor';
 export * from './user-menu';
 export * from './notion-blocks';
 export * from './command-menu';
+export * from './uploader';
