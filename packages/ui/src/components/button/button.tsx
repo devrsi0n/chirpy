@@ -5,13 +5,13 @@ import { BaseButton, BaseButtonProps } from './base-button';
 import styles from './button.module.scss';
 
 type Size = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
-type Variant = 'primary' | 'secondary' | 'text';
+export type ButtonVariant = 'primary' | 'secondary' | 'text';
 
 export type ButtonProps = BaseButtonProps & {
   /**
    * @default 'secondary'
    */
-  variant?: Variant;
+  variant?: ButtonVariant;
   children: React.ReactNode;
   danger?: boolean;
   /**
@@ -140,7 +140,7 @@ const sizeStyles: Record<Size, string> = {
   '2xl': `px-7 py-4 text-lg`,
 };
 
-const VariantStyles: Record<Variant, string> = {
+const VariantStyles: Record<ButtonVariant, string> = {
   primary:
     'bg-primary-900 text-whitea-1200 enabled:hover:bg-primary-1000 focus-visible:ring-primary-1000',
   secondary:
@@ -148,7 +148,7 @@ const VariantStyles: Record<Variant, string> = {
   text: 'text-primary-1100 enabled:hover:text-primary-1200 focus-visible:ring-primary-1000',
 };
 
-const VariantDangerStyles: Record<Variant, string> = {
+const VariantDangerStyles: Record<ButtonVariant, string> = {
   primary: 'bg-red-900 text-whitea-1200 enabled:hover:bg-red-1000',
   secondary:
     'bg-gray-100 text-red-900 border border-red-700 enabled:hover:border-red-800 enabled:hover:bg-red-300 enabled:hover:text-red-1000',

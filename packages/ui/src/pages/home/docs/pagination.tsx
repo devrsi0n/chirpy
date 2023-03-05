@@ -1,20 +1,36 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
-import { Button, IconChevronRight } from '../../../components';
+import { Button, ButtonProps, IconArrowRight } from '../../../components';
 
 export type PaginationLinkProps = {
-  children: React.ReactNode;
-  href: string;
   type: 'prev' | 'next';
-  className?: string;
-};
+} & Pick<
+  ButtonProps,
+  'disabled' | 'variant' | 'className' | 'children' | 'href' | 'onClick'
+>;
 
-export function PaginationLink(props: PaginationLinkProps): JSX.Element {
+export function PaginationLink({
+  type,
+  children,
+  className,
+  ...buttonProps
+}: PaginationLinkProps): JSX.Element {
   return (
-    <Button href={props.href} className="items-center">
-      {props.type === 'prev' && <IconChevronRight size={20} />}
-      <span>{props.children}</span>
-      {props.type === 'next' && <IconChevronRight size={20} />}
+    <Button {...buttonProps} className={clsx('group items-center', className)}>
+      {type === 'prev' && (
+        <IconArrowRight
+          size={20}
+          className="rotate-180 transition-transform group-hover:-translate-x-1"
+        />
+      )}
+      <span>{children}</span>
+      {type === 'next' && (
+        <IconArrowRight
+          size={20}
+          className="transition-transform group-hover:translate-x-1"
+        />
+      )}
     </Button>
   );
 }

@@ -54,7 +54,7 @@ export function CreateSite(): JSX.Element {
         </section>
         <div>
           <PaginationLink type="next" href="/site/create/form">
-            Next
+            I have copied the URL
           </PaginationLink>
         </div>
       </section>

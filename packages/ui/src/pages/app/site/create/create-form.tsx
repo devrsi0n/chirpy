@@ -2,8 +2,7 @@ import { ROUTER_ERROR_DUPLICATED_SITE_SUBDOMAIN } from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { PageTitle } from '../../../../blocks';
-import { Button, Card } from '../../../../components';
+import { Heading } from '../../../../components';
 import { useForm } from '../../../../hooks';
 import { isTRPCClientError, trpcClient } from '../../../../utilities';
 import { PaginationLink } from '../../../home/docs/pagination';
@@ -48,27 +47,30 @@ export function CreateSiteForm(): JSX.Element {
   );
   return (
     <AppLayout title="Create site form">
-      <PageTitle>Create site</PageTitle>
-      <div>
-        <Card className="w-96 p-6">
+      <section className="flex flex-col gap-10">
+        <p className="text-base font-semibold text-primary-900">
+          Create new site
+        </p>
+        <div className="flex flex-col gap-8">
+          <Heading as="h1" className="text-display-md font-semibold">
+            Confirm site info
+          </Heading>
           <SiteForm register={register} errors={errors} />
-          <div className="mt-6">
-            <Button
-              className="w-full sm:w-auto"
-              disabled={hasError}
-              variant="primary"
-              onClick={handleClickSubmit}
-            >
-              Create
-            </Button>
-          </div>
-        </Card>
-      </div>
-      <div className="mt-6 flex justify-start">
-        <PaginationLink type="prev" href="/site/create/form">
-          Duplicate template
-        </PaginationLink>
-      </div>
+        </div>
+        <div className="flex max-w-3xl justify-between">
+          <PaginationLink type="prev" href="/site/create">
+            Duplicate template
+          </PaginationLink>
+          <PaginationLink
+            disabled={hasError}
+            variant="primary"
+            onClick={handleClickSubmit}
+            type="next"
+          >
+            Create
+          </PaginationLink>
+        </div>
+      </section>
     </AppLayout>
   );
 }
