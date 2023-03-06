@@ -48,8 +48,12 @@ export function useForm<T extends FieldValue>({
         isValid(name, validator, value);
       }
     };
+    const onError: (message: string) => void = (message) => {
+      setErrors((prev) => ({ ...prev, [name]: message }));
+    };
     return {
       onChange,
+      onError,
       name,
       value: fields[name],
       ...(validator?.required && { required: true }),

@@ -9,16 +9,16 @@ import { Text } from '../text';
 import type { TextAreaProps } from '../text-area';
 
 export type FormFieldProps = {
-  children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   label?: string;
   errorMessage?: string;
-  hint?: React.ReactNode;
-  disabled?: boolean;
-  className?: string;
+  children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   /**
    * @default 'vertical'
    */
   layout?: 'vertical' | 'horizontal';
+  className?: string;
+  hint?: React.ReactNode;
+  disabled?: boolean;
 };
 
 export function FormField({

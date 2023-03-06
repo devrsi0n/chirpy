@@ -89,7 +89,25 @@ export function SiteForm<T extends SiteFormFields>({
         layout="horizontal"
         hint="This will be displayed on your site."
       >
-        <Uploader />
+        <Uploader
+          accept="image/png, image/jpeg, image/jpg, image/webp, image/svg, image/gif"
+          description="SVG, PNG, JPG or WebP (max. 300 x 300px)"
+          onValidate={async (file: File) => {
+            return await new Promise((resolve, reject) => {
+              const img = new Image();
+              const objectUrl = URL.createObjectURL(file);
+              img.addEventListener('load', function () {
+                // @ts-expect-error
+                if (this.width > 300 || this.height > 300) {
+                  reject(new Error('Exceed the max image dimension'));
+                }
+                URL.revokeObjectURL(objectUrl);
+                resolve();
+              });
+              img.src = objectUrl;
+            });
+          }}
+        />
       </FormField>
       {children}
     </form>

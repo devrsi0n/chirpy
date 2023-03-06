@@ -2,15 +2,34 @@ import { useMutation } from '@tanstack/react-query';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { Avatar, getInputStyles, IconUploadCloud } from '../../components';
+import {
+  Avatar,
+  getInputStyles,
+  IconUploadCloud,
+  Spinner,
+  useToast,
+} from '../../components';
 import { trpcClient } from '../../utilities';
 
 export type UploaderProps = Pick<
   React.ComponentProps<'input'>,
-  'name' | 'accept' | 'className' | 'onChange'
->;
+  'name' | 'accept' | 'className'
+> & {
+  value?: string;
+  onChange?: (value: string) => void;
+  onError?: (message: string) => void;
+  onValidate?: (file: File) => Promise<void>;
+  description: string;
+};
 
-export function Uploader(props: UploaderProps): JSX.Element {
+export function Uploader({
+  value,
+  onChange,
+  onError,
+  description,
+  onValidate,
+  ...inputProps
+}: UploaderProps): JSX.Element {
   const inputId = React.useId();
   const { data: url } = trpcClient.image.uploadUrl.useQuery(undefined, {
     refetchOnWindowFocus: false,
@@ -18,24 +37,60 @@ export function Uploader(props: UploaderProps): JSX.Element {
     refetchInterval: 25 * 60 * 1000,
     refetchOnReconnect: false,
   });
-  const { data: uploadedRsp, mutate } = useMutation(async (file: File) => {
-    const formData = new FormData();
-    formData.append('file', file);
-    if (!url) {
-      throw new Error('No upload URL');
-    }
-    const resp = await fetch(url, {
-      method: 'POST',
-      body: formData,
-    });
-    const data: UploadResponse = await resp.json();
-    return data;
-  });
+  const { mutateAsync: deleteImage, status: deleteStatus } =
+    trpcClient.image.delete.useMutation();
+  const { showToast } = useToast();
+  const { mutateAsync: upload, status: uploadStatus } = useMutation(
+    async (file: File) => {
+      if (value) {
+        // Delete the stale image
+        try {
+          await deleteImage(value);
+        } catch {
+          // Ignore, we already save the log in backend
+        }
+      }
+      const formData = new FormData();
+      formData.append('file', file);
+      if (!url) {
+        showToast({
+          type: 'error',
+          title: 'No upload URL provided',
+          description:
+            'Please refresh the page and try again, or contact Chirpy support.',
+        });
+        throw new Error('No upload URL');
+      }
+      const resp = await fetch(url, {
+        method: 'POST',
+        body: formData,
+      });
+      const data: UploadResponse = await resp.json();
+      return data;
+    },
+    {
+      onSuccess(data) {
+        onError?.('');
+        onChange?.(data.result.variants[0]);
+      },
+      onError() {
+        showToast({
+          title: 'Upload failed',
+          type: 'error',
+          description: 'Please try again later, or contact Chirpy support.',
+        });
+        onError?.('Upload failed');
+      },
+    },
+  );
+  const isLoading = uploadStatus === 'loading' || deleteStatus === 'loading';
   return (
     <section className="flex flex-1 gap-5">
-      {uploadedRsp?.result.variants[0] ? (
+      {isLoading ? (
+        <Spinner />
+      ) : value ? (
         <picture className="w-30">
-          <img src={uploadedRsp.result.variants[0]} alt="Upload image" />
+          <img src={value} alt="Upload image" />
         </picture>
       ) : (
         <Avatar src={''} alt="Placeholder image" name="image" size="xl" />
@@ -43,22 +98,33 @@ export function Uploader(props: UploaderProps): JSX.Element {
       <div
         className={clsx(
           'cursor-pointer py-4 px-6',
-          props.className,
-          getInputStyles(),
+          inputProps.className,
+          getInputStyles(undefined, isLoading),
         )}
       >
         <input
-          accept="image/png, image/jpeg, image/jpg, image/webp, image/svg, image/gif"
-          {...props}
+          {...inputProps}
           type="file"
           className={'hidden'}
           id={inputId}
-          onChange={(event) => {
+          onChange={async (event) => {
+            if (isLoading) {
+              return;
+            }
             const file = event.target.files?.[0];
             if (!file) {
               return;
             }
-            mutate(file);
+            try {
+              await onValidate?.(file);
+              onError?.('');
+            } catch (error) {
+              if (error instanceof Error) {
+                onError?.(error.message);
+                return;
+              }
+            }
+            await upload(file);
           }}
         />
         <label
@@ -73,7 +139,7 @@ export function Uploader(props: UploaderProps): JSX.Element {
               Click to upload
             </span>
           </div>
-          <p>{`SVG, PNG, JPG or WebP (max. 300 x 300px)`}</p>
+          <p>{description}</p>
         </label>
       </div>
     </section>
