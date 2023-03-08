@@ -30,6 +30,6 @@
   "dependencies": {
     "@radix-ui/colors": "0.1.8",
     "dayjs": "1.11.7",
-    "type-fest": "3.6.0"
+    "type-fest": "3.6.1"
   }
 }

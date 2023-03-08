@@ -31,16 +31,16 @@ export function Uploader({
   ...inputProps
 }: UploaderProps): JSX.Element {
   const inputId = React.useId();
-  const { data: url } = trpcClient.image.uploadUrl.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-    // URL is valid for 30 minutes
-    refetchInterval: 25 * 60 * 1000,
-    refetchOnReconnect: false,
-  });
-  const { mutateAsync: deleteImage, status: deleteStatus } =
+  const { refetch: getUploadUrl, isLoading: gettingUrl } =
+    trpcClient.image.uploadUrl.useQuery(undefined, {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      enabled: false,
+    });
+  const { mutateAsync: deleteImage, isLoading: isDeleting } =
     trpcClient.image.delete.useMutation();
   const { showToast } = useToast();
-  const { mutateAsync: upload, status: uploadStatus } = useMutation(
+  const { mutateAsync: upload, isLoading: isUploading } = useMutation(
     async (file: File) => {
       if (value) {
         // Delete the stale image
@@ -52,16 +52,11 @@ export function Uploader({
       }
       const formData = new FormData();
       formData.append('file', file);
-      if (!url) {
-        showToast({
-          type: 'error',
-          title: 'No upload URL provided',
-          description:
-            'Please refresh the page and try again, or contact Chirpy support.',
-        });
+      const { data: uploadUrl } = await getUploadUrl();
+      if (!uploadUrl) {
         throw new Error('No upload URL');
       }
-      const resp = await fetch(url, {
+      const resp = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
       });
@@ -83,7 +78,7 @@ export function Uploader({
       },
     },
   );
-  const isLoading = uploadStatus === 'loading' || deleteStatus === 'loading';
+  const isLoading = gettingUrl || isUploading || isDeleting;
   return (
     <section className="flex flex-1 gap-5">
       {isLoading ? (

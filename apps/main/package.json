@@ -55,9 +55,9 @@
     "rehype-slug": "5.1.0",
     "shiki": "0.11.1",
     "superjson": "1.12.2",
-    "type-fest": "3.6.0",
+    "type-fest": "3.6.1",
     "web-push": "3.5.0",
-    "zod": "3.20.6"
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "13.2.3",
