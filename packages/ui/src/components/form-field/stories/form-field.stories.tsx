@@ -14,34 +14,52 @@ type FormFieldType = typeof FormField;
 export default {
   title: 'Components/FormField',
   component: FormField,
+  argTypes: {
+    layout: {
+      control: {
+        type: 'select',
+      },
+      options: ['vertical', 'horizontal'],
+    },
+  },
 } as ComponentMeta<FormFieldType>;
 
-export const TextInput: ComponentStory<FormFieldType> = () => {
+export const TextInput: ComponentStory<FormFieldType> = ({ layout }) => {
   return (
     <div className="mx-8 flex flex-col gap-6">
-      <FormField label="Default">
+      <FormField layout={layout} label="Default">
         <TextInputComponent />
       </FormField>
-      <FormField label="Hint text" hint="This is a hint text to help user.">
+      <FormField
+        layout={layout}
+        label="Hint text"
+        hint="This is a hint text to help user."
+      >
         <TextInputComponent defaultValue="alice@chirpy.dev" />
       </FormField>
-      <FormField label="Disabled" hint="This is a hint text to help user.">
+      <FormField
+        layout={layout}
+        label="Disabled"
+        hint="This is a hint text to help user."
+      >
         <TextInputComponent placeholder="bob@chirpy.dev" disabled />
       </FormField>
       <FormField
+        layout={layout}
         label="Error"
         hint="This is a hint text to help user."
         errorMessage="Email is invalid"
       >
         <TextInputComponent placeholder="charlie@chirpy.dev" />
       </FormField>
-      <FormField label="URL" hint="Enter your domain">
+      <FormField layout={layout} label="URL" hint="Enter your domain">
         <TextInputComponent prefix="https://" placeholder="chirpy.dev" />
       </FormField>
-      <FormField label="Suffix" hint="Look at my suffix">
+      <FormField layout={layout} label="Suffix" hint="Look at my suffix">
         <TextInputComponent placeholder="sixian" suffix=".chirpy.dev" />
       </FormField>
       <FormField
+        layout={layout}
         label="Prefix and Suffix"
         hint="Enter your subdomain"
         errorMessage="Invalid URL"
@@ -54,6 +72,9 @@ export const TextInput: ComponentStory<FormFieldType> = () => {
       </FormField>
     </div>
   );
+};
+TextInput.args = {
+  layout: 'horizontal',
 };
 
 export const SelectInput: ComponentStory<FormFieldType> = () => {
@@ -92,6 +113,10 @@ export const SelectInput: ComponentStory<FormFieldType> = () => {
   );
 };
 
+SelectInput.args = {
+  layout: 'horizontal',
+};
+
 export const TextAreaInput: ComponentStory<FormFieldType> = () => {
   return (
     <div className="mx-8 flex flex-col gap-6">
@@ -113,6 +138,10 @@ export const TextAreaInput: ComponentStory<FormFieldType> = () => {
       </FormField>
     </div>
   );
+};
+
+TextAreaInput.args = {
+  layout: 'horizontal',
 };
 
 type FormFields = {

@@ -31,7 +31,7 @@ export function Uploader({
   ...inputProps
 }: UploaderProps): JSX.Element {
   const inputId = React.useId();
-  const { refetch: getUploadUrl, isLoading: gettingUrl } =
+  const { refetch: getUploadUrl, isFetching: isGettingUrl } =
     trpcClient.image.uploadUrl.useQuery(undefined, {
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
@@ -78,9 +78,9 @@ export function Uploader({
       },
     },
   );
-  const isLoading = gettingUrl || isUploading || isDeleting;
+  const isLoading = isGettingUrl || isUploading || isDeleting;
   return (
-    <section className="flex flex-1 gap-5">
+    <section className=" flex flex-1 flex-col gap-5 sm:flex-row">
       {isLoading ? (
         <Spinner />
       ) : value ? (

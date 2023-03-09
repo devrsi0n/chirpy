@@ -14,6 +14,7 @@ export type FormFieldProps = {
   children: React.ReactElement<InputProps | SelectProps | TextAreaProps>;
   /**
    * @default 'vertical'
+   * Prefer layout, only render horizontal on sm or bigger screens even if layout is horizontal
    */
   layout?: 'vertical' | 'horizontal';
   className?: string;
@@ -30,66 +31,80 @@ export function FormField({
   className,
   ...childrenProps
 }: FormFieldProps): JSX.Element {
-  return layout === 'vertical' ? (
-    <label
-      className={clsx(
-        'flex h-full w-full flex-col items-start',
-        label && `gap-1.5`,
-        className,
-      )}
-    >
-      <p className="text-sm font-medium">{label}</p>
-      {React.cloneElement(children, {
-        error: !!errorMessage,
-        ...childrenProps,
-      })}
-      <AnimatePresence>
-        {errorMessage ? (
-          <m.div key={`${label}-error`} {...easeInOutOpacity}>
-            <Text role="alert" variant="error" size="sm">
-              {errorMessage}
-            </Text>
-          </m.div>
-        ) : (
-          hint && (
-            <m.div
-              className="mt-1.5"
-              key={`${label}-hint`}
-              {...easeInOutOpacity}
-            >
-              <Text variant="secondary" size="sm">
-                {hint}
-              </Text>
-            </m.div>
-          )
+  return (
+    <div data-selected-layout={layout}>
+      <label
+        data-layout="vertical"
+        className={clsx(
+          'h-full w-full ',
+          label && `gap-1.5`,
+          layout === 'vertical'
+            ? 'flex flex-col items-start'
+            : 'flex flex-col items-start sm:hidden',
+          className,
         )}
-      </AnimatePresence>
-    </label>
-  ) : (
-    <label className={clsx('flex w-full flex-row justify-start', className)}>
-      <div className="flex w-full flex-col">
-        <p className="pr-5 text-sm font-medium text-gray-1200">{label}</p>
-        {hint && (
-          <Text className="mt-1.5" variant="secondary" size="sm">
-            {hint}
-          </Text>
-        )}
-      </div>
-      <div className="flex w-full flex-col gap-1.5">
+      >
+        <p className="text-sm font-medium">{label}</p>
         {React.cloneElement(children, {
           error: !!errorMessage,
           ...childrenProps,
         })}
         <AnimatePresence>
-          {errorMessage && (
-            <m.div {...easeInOutOpacity}>
+          {errorMessage ? (
+            <m.div key={`${label}-error`} {...easeInOutOpacity}>
               <Text role="alert" variant="error" size="sm">
                 {errorMessage}
               </Text>
             </m.div>
+          ) : (
+            hint && (
+              <m.div
+                className="mt-1.5"
+                key={`${label}-hint`}
+                {...easeInOutOpacity}
+              >
+                <Text variant="secondary" size="sm">
+                  {hint}
+                </Text>
+              </m.div>
+            )
           )}
         </AnimatePresence>
-      </div>
-    </label>
+      </label>
+      <label
+        data-layout="horizontal"
+        className={clsx(
+          'w-full',
+          layout === 'horizontal'
+            ? 'hidden flex-row justify-start sm:flex'
+            : 'hidden',
+          className,
+        )}
+      >
+        <div className="flex w-full flex-col">
+          <p className="pr-5 text-sm font-medium text-gray-1200">{label}</p>
+          {hint && (
+            <Text className="mt-1.5" variant="secondary" size="sm">
+              {hint}
+            </Text>
+          )}
+        </div>
+        <div className="flex w-full flex-col gap-1.5">
+          {React.cloneElement(children, {
+            error: !!errorMessage,
+            ...childrenProps,
+          })}
+          <AnimatePresence>
+            {errorMessage && (
+              <m.div {...easeInOutOpacity}>
+                <Text role="alert" variant="error" size="sm">
+                  {errorMessage}
+                </Text>
+              </m.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </label>
+    </div>
   );
 }
