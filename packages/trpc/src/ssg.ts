@@ -1,10 +1,10 @@
-import { createProxySSGHelpers } from '@trpc/react-query/ssg';
+import { createServerSideHelpers } from '@trpc/react-query/server';
 import superjson from 'superjson';
 
 import { createContextInner } from './context';
 import { appRouter } from './router';
 
-export const ssg = createProxySSGHelpers({
+export const ssg = createServerSideHelpers({
   router: appRouter,
   // @ts-ignore
   ctx: createContextInner({

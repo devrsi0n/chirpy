@@ -27,16 +27,16 @@ const nextConfig = {
     output: 'standalone',
   }),
   productionBrowserSourceMaps: process.env.VERCEL_ENV !== 'production',
+  transpilePackages: [
+    '@chirpy-dev/emails',
+    '@chirpy-dev/ui',
+    '@chirpy-dev/utils',
+    '@chirpy-dev/types',
+    '@chirpy-dev/trpc',
+  ],
   experimental: {
     scrollRestoration: true,
     legacyBrowsers: false,
-    transpilePackages: [
-      '@chirpy-dev/emails',
-      '@chirpy-dev/ui',
-      '@chirpy-dev/utils',
-      '@chirpy-dev/types',
-      '@chirpy-dev/trpc',
-    ],
     swcPlugins: [
       // Allow Date/Map in getStaticProps
       ['next-superjson-plugin', {}],
