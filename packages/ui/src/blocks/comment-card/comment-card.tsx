@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { AnimatePresence, m, Variants } from 'framer-motion';
 import * as React from 'react';
 
+import { Dialog } from '../../components';
 import { Avatar } from '../../components/avatar';
 import { ActionButton, Button } from '../../components/button';
 import {
@@ -100,11 +101,12 @@ export function CommentCard({
   const isDeleted = !!deletedAt;
   const userHasModeratePermission =
     data?.editableProjectIds?.includes(projectId);
+  const createdAtDate = cpDayjs(createdAt);
+  const [showDelDialog, setShowDelDialog] = React.useState(false);
 
   if (isDeleted) {
     return <DeletedComment />;
   }
-  const createdAtDate = cpDayjs(createdAt);
   return (
     <m.article
       animate={containerAnimate}
@@ -141,45 +143,48 @@ export function CommentCard({
           </div>
           <>
             {userHasModeratePermission && (
-              <Menu className="mr-3">
-                <Menu.Button>
+              <Menu>
+                <Menu.Button className="mr-3">
                   <IconMoreVertical size={20} />
                 </Menu.Button>
                 <Menu.Items>
-                  <Menu.Item className="space-x-1" disableAutoDismiss>
-                    <Popover>
-                      <Popover.Panel placement="topEnd">
-                        <div className="flex flex-row items-center space-x-2">
-                          <Text size="sm" className="w-max">
-                            Are you sure?
-                          </Text>
-                          <Button
-                            size="sm"
-                            color="red"
-                            onClick={handleClickConfirmDelete}
-                          >
-                            Delete
-                          </Button>
-                        </div>
-                      </Popover.Panel>
-                      <Popover.Button as="button">
-                        <div
-                          className={clsx(
-                            `flex flex-row items-center`,
-                            MenuItemPadding,
-                          )}
-                        >
-                          <IconTrash2 size={16} />
-                          <span className="ml-1">Delete</span>
-                        </div>
-                      </Popover.Button>
-                    </Popover>
+                  <Menu.Item className="space-x-1">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowDelDialog(true);
+                      }}
+                      className={clsx(`flex flex-row items-center`)}
+                    >
+                      <IconTrash2 size={16} />
+                      <span className="ml-1">Delete</span>
+                    </button>
                   </Menu.Item>
                 </Menu.Items>
               </Menu>
             )}
           </>
         </div>
+        <Dialog
+          show={showDelDialog}
+          title="Delete comment"
+          onClose={() => setShowDelDialog(false)}
+          type="alert"
+        >
+          <Dialog.Body>
+            Are you sure you want to delete this comment?
+          </Dialog.Body>
+          <Dialog.Footer>
+            <Button onClick={() => setShowDelDialog(false)}>Cancel</Button>
+            <Button
+              variant="solid"
+              color="primary"
+              onClick={handleClickConfirmDelete}
+            >
+              Delete
+            </Button>
+          </Dialog.Footer>
+        </Dialog>
         <div className="mt-1 mb-1.5">
           <RichTextEditor initialValue={content} readOnly />
         </div>
