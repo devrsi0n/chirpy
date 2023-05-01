@@ -104,7 +104,7 @@ export function MainButton({
           </AskNotificationPermissionPopover>
         )
       ) : (
-        <SignInButton size="sm" />
+        <SignInButton size="sm">{buttonChildren}</SignInButton>
       )}
     </div>
   );

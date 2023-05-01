@@ -8,6 +8,7 @@ import { useSignInWindow } from '../../hooks/use-sign-in-window';
 
 export type SignInButtonProps = Pick<ButtonProps, 'variant' | 'size'> & {
   inPageNav?: boolean;
+  children?: React.ReactNode;
 };
 
 const handleSessionAndSignIn = () => {
@@ -18,10 +19,21 @@ const handleSessionAndSignIn = () => {
 export function SignInButton({
   variant = 'solid',
   inPageNav,
+  children,
   ...restProps
 }: SignInButtonProps): JSX.Element {
   const { loading: signInLoading } = useCurrentUser();
   const handleSignIn = useSignInWindow();
+  const defaultChildren = (
+    <>
+      {signInLoading ? (
+        <IconLoader aria-label="Signing in" className="h-5 w-5 animate-spin" />
+      ) : (
+        <IconLock size="14" />
+      )}
+      <span>Sign in</span>
+    </>
+  );
   return (
     <Button
       color="primary"
@@ -31,15 +43,7 @@ export function SignInButton({
       disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
     >
       <span className="inline-flex flex-row items-center space-x-1">
-        {signInLoading ? (
-          <IconLoader
-            aria-label="Signing in"
-            className="h-5 w-5 animate-spin"
-          />
-        ) : (
-          <IconLock size="14" />
-        )}
-        <span>Sign in</span>
+        {children || defaultChildren}
       </span>
     </Button>
   );
