@@ -23,6 +23,10 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
       createdAt: {
         lt: beforeDate,
       },
+      // Only delete comments that have no replies or there'll be a prisma error
+      replies: {
+        none: {},
+      },
       page: {
         url: `${getAppURL()}/play`,
       },

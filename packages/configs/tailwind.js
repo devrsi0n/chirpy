@@ -177,7 +177,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/line-clamp'),
     require('@tailwindcss/typography'),
     plugin(function ({ addVariant, e, postcss }) {
       addVariant('firefox', ({ container, separator }) => {

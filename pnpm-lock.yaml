@@ -261,7 +261,6 @@ importers:
     specifiers:
       '@chirpy-dev/tsconfigs': workspace:*
       '@radix-ui/colors': 0.1.8
-      '@tailwindcss/line-clamp': 0.4.2
       '@tailwindcss/typography': 0.5.8
       color-convert: 2.0.1
       postcss: 8.4.19
@@ -272,7 +271,6 @@ importers:
     dependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
       '@radix-ui/colors': 0.1.8
-      '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.3.2
       '@tailwindcss/typography': 0.5.8_tailwindcss@3.3.2
       color-convert: 2.0.1
       postcss: 8.4.19
@@ -5849,14 +5847,6 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.3.2:
-    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
-    peerDependencies:
-      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
-    dependencies:
-      tailwindcss: 3.3.2
-    dev: false
-
   /@tailwindcss/typography/0.5.8_tailwindcss@3.3.2:
     resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
     peerDependencies:
@@ -6380,7 +6370,7 @@ packages:
       '@trpc/client': 10.23.0_@trpc+server@10.23.0
       '@trpc/react-query': 10.23.0_t3pcg7vothk7q5wgbiqu772vzy
       '@trpc/server': 10.23.0
-      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
@@ -16214,7 +16204,7 @@ packages:
       '@panva/hkdf': 1.0.2
       cookie: 0.5.0
       jose: 4.11.1
-      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
       oauth: 0.9.15
       openid-client: 5.3.0
       preact: 10.11.3
@@ -16229,7 +16219,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
+      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
