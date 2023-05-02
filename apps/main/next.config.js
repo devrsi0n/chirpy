@@ -9,17 +9,7 @@ const { withPlausibleProxy } = require('next-plausible');
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
 
-const plugins = [
-  withBundleAnalyzer,
-  withPlausibleProxy({
-    customDomain: analyticsDomain,
-    trackOutboundLinks: true,
-    trackLocalhost: true,
-    selfHosted: true,
-    enabled: true,
-  }),
-  withAxiom,
-];
+const plugins = [withBundleAnalyzer, withPlausibleProxy(), withAxiom];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

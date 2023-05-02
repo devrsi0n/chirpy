@@ -16,7 +16,14 @@ export const App = trpcClient.withTRPC(function App({
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
   return (
-    <PlausibleProvider domain={ANALYTICS_DOMAIN}>
+    <PlausibleProvider
+      domain={ANALYTICS_DOMAIN}
+      customDomain={process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}
+      trackOutboundLinks
+      trackLocalhost
+      selfHosted
+      enabled
+    >
       <SessionProvider {...(session && { session })}>
         <NextThemesProvider
           attribute="class"

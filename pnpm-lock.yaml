@@ -156,7 +156,7 @@ importers:
       next-axiom: 0.15.1
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8
-      next-plausible: 3.6.4
+      next-plausible: 3.7.2
       next-superjson-plugin: 0.5.7
       next-themes: 0.2.1
       nodemailer: 6.7.8
@@ -195,7 +195,7 @@ importers:
       next-axiom: 0.15.1_next@13.3.4
       next-connect: 0.13.0
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
-      next-plausible: 3.6.4_vwuoxxmoeydgew5hhkavebkk4e
+      next-plausible: 3.7.2_vwuoxxmoeydgew5hhkavebkk4e
       next-superjson-plugin: 0.5.7_gy37pvkw3horpk5roowoogdxgm
       next-themes: 0.2.1_vwuoxxmoeydgew5hhkavebkk4e
       nodemailer: 6.7.8
@@ -534,7 +534,7 @@ importers:
       next-auth: 4.17.0
       next-axiom: 0.15.1
       next-mdx-remote: 3.0.8
-      next-plausible: 3.6.4
+      next-plausible: 3.7.2
       next-themes: 0.2.1
       postcss: 8.4.19
       postcss-loader: 7.0.2
@@ -591,7 +591,7 @@ importers:
       next-auth: 4.17.0_vwuoxxmoeydgew5hhkavebkk4e
       next-axiom: 0.15.1_next@13.3.4
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
-      next-plausible: 3.6.4_vwuoxxmoeydgew5hhkavebkk4e
+      next-plausible: 3.7.2_vwuoxxmoeydgew5hhkavebkk4e
       next-themes: 0.2.1_vwuoxxmoeydgew5hhkavebkk4e
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -6370,7 +6370,7 @@ packages:
       '@trpc/client': 10.23.0_@trpc+server@10.23.0
       '@trpc/react-query': 10.23.0_t3pcg7vothk7q5wgbiqu772vzy
       '@trpc/server': 10.23.0
-      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
+      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-ssr-prepass: 1.5.0_react@18.2.0
@@ -16204,7 +16204,7 @@ packages:
       '@panva/hkdf': 1.0.2
       cookie: 0.5.0
       jose: 4.11.1
-      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
+      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
       oauth: 0.9.15
       openid-client: 5.3.0
       preact: 10.11.3
@@ -16219,7 +16219,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.3.4_biqbaboplfbrettd7655fr4n2y
+      next: 13.3.4_kzvotn2zipzqwaptii5a7wxu3y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -16244,8 +16244,8 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /next-plausible/3.6.4_vwuoxxmoeydgew5hhkavebkk4e:
-    resolution: {integrity: sha512-aHL4IL+gkkjs5ScB18LZ3LMEWXKR5VTvnMDs/fHNFHadOh23i37fD+VP5oAQLALR8Mde63l9JJljrw9DkvjWjQ==}
+  /next-plausible/3.7.2_vwuoxxmoeydgew5hhkavebkk4e:
+    resolution: {integrity: sha512-9PqFiVtD1kZO5gHFYTcgilHhg2WhMzD6I4NK/RUh9DGavD1N11IhNAvyGLFmvB3f4FtHC9IoAsauYDtQBt+riA==}
     peerDependencies:
       next: ^11.1.0 || ^12.0.0 || ^13.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18

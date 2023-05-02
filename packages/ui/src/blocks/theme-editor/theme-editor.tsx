@@ -88,7 +88,6 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
     await saveTheme(newTheme);
   };
   const primaryColorOptions = useColors({ level: '900' });
-  console.log({ widgetTheme });
   return (
     <section className="px-2">
       <PageTitle className="mb-10">Theme of {props.project?.name}</PageTitle>
