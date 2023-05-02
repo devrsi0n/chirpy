@@ -76,7 +76,7 @@
     "postcss": "8.4.19",
     "tailwindcss": "3.3.2",
     "typescript": "4.9.3",
-    "webpack": "5.75.0"
+    "webpack": "5.76.0"
   },
   "publishConfig": {
     "access": "public"
