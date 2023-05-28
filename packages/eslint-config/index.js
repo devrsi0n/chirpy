@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
+  parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',

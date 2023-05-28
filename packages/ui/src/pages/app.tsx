@@ -1,10 +1,10 @@
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
-import { ANALYTICS_DOMAIN } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
 import { SessionProvider } from 'next-auth/react';
-import PlausibleProvider from 'next-plausible';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import Script from 'next/script';
 import * as React from 'react';
 
 import { ToastProvider } from '../components';
@@ -16,14 +16,10 @@ export const App = trpcClient.withTRPC(function App({
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
   return (
-    <PlausibleProvider
-      domain={ANALYTICS_DOMAIN}
-      customDomain={process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN}
-      trackOutboundLinks
-      trackLocalhost
-      selfHosted
-      enabled
-    >
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <SessionProvider {...(session && { session })}>
         <NextThemesProvider
           attribute="class"
@@ -45,7 +41,12 @@ export const App = trpcClient.withTRPC(function App({
           </LazyMotion>
         </NextThemesProvider>
       </SessionProvider>
-    </PlausibleProvider>
+      <Script
+        src="https://unpkg.com/@tinybirdco/flock.js"
+        data-host="https://api.tinybird.co"
+        data-token="p.eyJ1IjogIjI1YzY5MzRiLWU5NjctNDk1My05ZDNmLTIxOTk1MTA2MGJlNSIsICJpZCI6ICI2OTg1ZjQ5NS0yNWM3LTRiYmYtOWIyMy05M2FiZmNlNDhiZjcifQ.N2KCqkFyxKf6N_WoyRNoBgPQcIIbIrpsqz78DvW1c2g"
+      />
+    </>
   );
 });
 

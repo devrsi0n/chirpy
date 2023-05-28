@@ -23,6 +23,7 @@ const nextConfig = {
     '@chirpy-dev/utils',
     '@chirpy-dev/types',
     '@chirpy-dev/trpc',
+    '@chirpy-dev/analytics',
   ],
   experimental: {
     scrollRestoration: true,
