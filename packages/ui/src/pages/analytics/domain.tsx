@@ -1,12 +1,8 @@
 import {
   AnalyticsProvider,
-  Credentials,
   ErrorModal,
-  Footer,
   Header,
-  Meta,
   Widgets,
-  useAuth,
 } from '@chirpy-dev/analytics';
 import Head from 'next/head';
 import * as React from 'react';
@@ -27,7 +23,7 @@ export function AnalyticsByDomainPage({
         <link href="/css/analytics.css" rel="stylesheet" />
       </Head>
       <SiteLayout hideFullBleed title="Analytics">
-        <AnalyticsProvider>
+        <AnalyticsProvider domain={project.domain}>
           <section className="mx-auto px-4 xl:max-w-6xl" id="ats">
             <PageTitle className="pb-6">Analytics</PageTitle>
 

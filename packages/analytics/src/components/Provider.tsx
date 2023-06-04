@@ -6,6 +6,7 @@ import { QueryError } from '../lib/types/api';
 type IAnalyticsContext = {
   error: QueryError | null;
   setError: (error: QueryError | null) => void;
+  domain: string;
 };
 
 const AnalyticsContext = createContext<IAnalyticsContext>(
@@ -14,11 +15,13 @@ const AnalyticsContext = createContext<IAnalyticsContext>(
 
 export default function AnalyticsProvider({
   children,
+  domain,
 }: {
+  domain: string;
   children: ReactNode;
 }) {
   const [error, setError] = useState<QueryError | null>(null);
-  const value = useMemo(() => ({ error, setError }), [error]);
+  const value = useMemo(() => ({ error, setError, domain }), [error, domain]);
 
   return (
     <SWRConfig

@@ -1,3 +1,4 @@
+import { FEEDBACK_LINK } from '@chirpy-dev/utils';
 import { Button } from '@tremor/react';
 import { useRouter } from 'next/router';
 
@@ -6,17 +7,10 @@ import Modal from './Modal';
 import { useAnalytics } from './Provider';
 
 export default function ErrorModal() {
-  const router = useRouter();
   const { error, setError } = useAnalytics();
 
   const handleClose = () => {
     setError(null);
-    router.push('/', {
-      query: {
-        ...router.query,
-        token: null,
-      },
-    });
   };
 
   return (
@@ -49,16 +43,15 @@ export default function ErrorModal() {
         </Modal.Title>
         <div className="my-8">
           <Modal.Description>
-            {`Go to `}
+            {`Ask `}
             <a
-              href="https://docs.tinybird.co/api-reference/api-reference.html#authentication"
+              href={FEEDBACK_LINK}
               className="underline underline-offset-2"
               target="_blank"
               rel="noreferrer"
             >
-              https://docs.tinybird.co/api-reference/api-reference.html#authentication
+              Chirpy support
             </a>
-            {` for tips about how to fix this problem.`}
           </Modal.Description>
         </div>
         <div className="flex justify-end">

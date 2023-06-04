@@ -1,20 +1,20 @@
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useDomain from '../../lib/hooks/use-domain';
 import useParams from '../../lib/hooks/use-params';
 import useTopPages from '../../lib/hooks/use-top-pages';
 import { TopPagesSorting } from '../../lib/types/top-pages';
 import { cx, formatNumber } from '../../lib/utils';
+import { useAnalytics } from '../Provider';
 import Widget from '../Widget';
 
 export default function TopPagesWidget() {
   const { data, status, warning } = useTopPages();
-  const { domain } = useDomain();
   const [sorting, setSorting] = useParams({
     key: 'top_pages_sorting',
     values: Object.values(TopPagesSorting),
   });
+  const { domain } = useAnalytics();
   const chartData = useMemo(
     () =>
       (data?.data ?? []).map((d) => ({

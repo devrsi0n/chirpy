@@ -263,6 +263,7 @@ importers:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
+      '@chirpy-dev/utils': workspace:*
       '@headlessui/react': 1.6.6
       '@tremor/react': 2.11.0
       '@types/node': 18.7.6
@@ -281,6 +282,7 @@ importers:
       tsup: 6.7.0
       typescript: 4.7.4
     dependencies:
+      '@chirpy-dev/utils': link:../utils
       '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
       '@tremor/react': 2.11.0_biqbaboplfbrettd7655fr4n2y
       moment: 2.29.4

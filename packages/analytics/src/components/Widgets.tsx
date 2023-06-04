@@ -10,8 +10,8 @@ const enum WidgetHeight {
   Small = 216,
 }
 
-function lazyLoadWidget(
-  importPromise: () => LoaderComponent,
+function lazyLoadWidget<P = object>(
+  importPromise: () => LoaderComponent<P>,
   loaderSize?: number,
 ) {
   return dynamic(importPromise, {
