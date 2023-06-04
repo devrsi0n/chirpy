@@ -59,15 +59,9 @@ export default function useKpis() {
   const query = useQuery([kpi, startDate, endDate, 'kpis'], getKpis);
 
   const setKpi = (kpi: KpiType) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set('kpi', kpi);
-    router.push(
-      {
-        query: searchParams.toString(),
-      },
-      undefined,
-      { scroll: false },
-    );
+    const url = new URL(window.location.href);
+    url.searchParams.set('kpi', kpi);
+    router.push(url.href, undefined, { scroll: false });
   };
 
   return {

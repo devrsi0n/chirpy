@@ -32,7 +32,7 @@ export function AnalyticsByDomainPage({
             <PageTitle className="pb-6">Analytics</PageTitle>
 
             {/* <Meta /> */}
-            <div className="bg-body text-secondary min-h-screen px-5 py-5 text-sm leading-5 sm:px-10">
+            <div className="bg-body text-secondary min-h-screen py-5 text-sm leading-5">
               <div className="mx-auto max-w-7xl">
                 <div className="space-y-6 sm:space-y-10">
                   <Header />
