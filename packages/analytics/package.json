@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@headlessui/react": "1.6.6",
-    "@tremor/react": "2.0.2",
+    "@tremor/react": "2.11.0",
     "moment": "2.29.4",
     "next": "13.4.2",
     "react": "18.2.0",

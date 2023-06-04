@@ -28,7 +28,7 @@ export function AnalyticsByDomainPage({
       </Head>
       <SiteLayout hideFullBleed title="Analytics">
         <AnalyticsProvider>
-          <section className="mx-auto px-4 xl:max-w-6xl" id="analytics">
+          <section className="mx-auto px-4 xl:max-w-6xl" id="ats">
             <PageTitle className="pb-6">Analytics</PageTitle>
 
             {/* <Meta /> */}
