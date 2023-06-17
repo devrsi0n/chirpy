@@ -59,7 +59,7 @@ export default function TopPagesWidget() {
             {(data?.data ?? []).map(({ pathname, visits }) => (
               <div
                 key={pathname}
-                className="text-neutral-64 flex h-9 w-full items-center justify-end"
+                className="flex h-9 w-full items-center justify-end text-gray-1100"
               >
                 {formatNumber(visits ?? 0)}
               </div>
@@ -69,7 +69,7 @@ export default function TopPagesWidget() {
             {(data?.data ?? []).map(({ pathname, hits }) => (
               <div
                 key={pathname}
-                className="text-neutral-64 flex h-9 w-full items-center justify-end"
+                className="flex h-9 w-full items-center justify-end text-gray-1100"
               >
                 {formatNumber(hits)}
               </div>

@@ -13,11 +13,11 @@ export default function Header() {
           <img
             src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
             alt={`${domain} logo`}
-            width={16}
-            height={16}
+            width={32}
+            height={32}
             loading="lazy"
           />
-          <span className="text-lg leading-6">{domain}</span>
+          <span className="text-lg leading-6 text-gray-1100">{domain}</span>
         </h1>
         <CurrentVisitors />
       </div>

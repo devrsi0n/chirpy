@@ -3,10 +3,7 @@ import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
 import moment from 'moment';
 
 import useDateFilter from '../lib/hooks/use-date-filter';
-import {
-  DateFilter as DateFilterType,
-  DateRangePickerOption,
-} from '../lib/types/date-filter';
+import { DateFilter as DateFilterType } from '../lib/types/date-filter';
 import { QuestionIcon } from './Icons';
 
 export default function DateFilter() {
@@ -21,7 +18,7 @@ export default function DateFilter() {
           <div className="sr-only">What is the time zone used?</div>
         </Popover.Button>
 
-        <Popover.Panel className="bg-secondary absolute -right-10 bottom-6 z-[2] w-24 rounded px-2 py-1 text-xs font-light text-white">
+        <Popover.Panel className="absolute -right-10 bottom-6 z-[2] w-24 rounded bg-gray-0 px-2 py-1 text-xs font-light text-gray-900 shadow-sm">
           UTC timezone
         </Popover.Panel>
       </Popover>
@@ -30,6 +27,7 @@ export default function DateFilter() {
         <DateRangePicker
           value={dateRangePickerValue}
           onValueChange={onDateRangePickerValueChange}
+          enableSelect
         >
           <DateRangePickerItem value={DateFilterType.Today} from={new Date()}>
             Today

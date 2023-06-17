@@ -32,7 +32,7 @@ export default function TopDevicesWidget() {
               </div>
               {(data?.data ?? []).map(({ device, visits }, index) => (
                 <Fragment key={device}>
-                  <div className="text-neutral-64 z-10 flex h-9 items-center gap-2 rounded-md px-4 py-2 text-sm leading-5">
+                  <div className="z-10 flex h-9 items-center gap-2 rounded-md px-4 py-2 text-sm leading-5 text-gray-1100">
                     <div
                       className="h-4 min-w-[1rem]"
                       style={{
@@ -41,7 +41,7 @@ export default function TopDevicesWidget() {
                     />
                     <span>{device}</span>
                   </div>
-                  <div className="text-neutral-64 flex h-9 items-center justify-end">
+                  <div className="flex h-9 items-center justify-end text-gray-1100">
                     {formatNumber(visits)}
                   </div>
                 </Fragment>

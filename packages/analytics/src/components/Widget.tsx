@@ -97,8 +97,8 @@ function WidgetWarning({ children }: { children: ReactNode }) {
         </svg>
       </div>
       <div className="space-y-2">
-        <h3 className="text-secondary font-semibold">{children}</h3>
-        <div className="text-neutral-64 text-sm">
+        <h3 className="font-semibold text-gray-1100">{children}</h3>
+        <div className="text-sm text-gray-1100">
           <p>
             {`Check that the original datasource columns and pipe names match the ones from the original data project `}
             <a
@@ -116,7 +116,7 @@ function WidgetWarning({ children }: { children: ReactNode }) {
 
 function WidgetNoData() {
   return (
-    <div className="text-neutral-64 absolute inset-0 grid place-content-center">
+    <div className="absolute inset-0 grid place-content-center text-gray-1100">
       No data
     </div>
   );

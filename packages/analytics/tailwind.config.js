@@ -9,26 +9,14 @@ module.exports = {
   important: '#ats',
   darkMode: 'class',
   theme: {
-    fontFamily: {
-      sans: [typography.fontFamily, ...fontFamily.sans],
-    },
     extend: {
-      colors,
-      textColor: {
-        base: '#25283D',
+      fontFamily: {
+        sans: [typography.fontFamily, ...fontFamily.sans],
       },
-      fontSize: {
-        md: '1rem',
-      },
-      gridTemplateRows: {
-        '2-auto': 'repeat(2, auto)',
-        '3-auto': 'repeat(3, auto)',
-      },
-    },
-    transparent: 'transparent',
-    current: 'currentColor',
-    extend: {
       colors: {
+        transparent: 'transparent',
+        current: 'currentColor',
+        ...colors,
         // light mode
         tremor: {
           brand: {
@@ -110,10 +98,18 @@ module.exports = {
         'tremor-full': '9999px',
       },
       fontSize: {
+        md: '1rem',
         'tremor-label': ['0.75rem'],
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
         'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
         'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }],
+      },
+      textColor: {
+        base: '#25283D',
+      },
+      gridTemplateRows: {
+        '2-auto': 'repeat(2, auto)',
+        '3-auto': 'repeat(3, auto)',
       },
     },
   },

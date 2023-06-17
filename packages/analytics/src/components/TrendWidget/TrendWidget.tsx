@@ -20,7 +20,7 @@ export default function TrendWidget() {
     <Widget>
       <div className="flex items-center justify-between">
         <Widget.Title>Users in last 30 minutes</Widget.Title>
-        <h3 className="text-neutral-64 text-xl font-normal">
+        <h3 className="text-xl font-normal text-gray-1100">
           {data?.totalVisits ?? 0}
         </h3>
       </div>
