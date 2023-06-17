@@ -97,3 +97,14 @@ export async function queryUsage(params: {
     return acc;
   }, 0);
 }
+
+export type QuerySQL<T> = {
+  meta: Meta<T>[];
+  data: T[];
+  rows: number;
+  statistics: Statistics;
+};
+
+export function querySQL<T>(sql: string): Promise<QuerySQL<T>> {
+  return client(`/sql?q=${sql}`);
+}

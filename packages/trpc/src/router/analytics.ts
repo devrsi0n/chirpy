@@ -10,12 +10,13 @@ import {
 import { queryPipe, browsers, devices } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { router, protectedProcedure } from '../../trpc-server';
-import { getKpiTotals, getKpis } from './get-kpis';
-import { getTopLocations } from './get-top-locations';
-import { getTopPages } from './get-top-pages';
-import { getTopSources } from './get-topic-source';
-import { getTrend } from './get-trend';
+import { getCurrentVisitors } from '../analytics/get-current-visitors';
+import { getKpiTotals, getKpis } from '../analytics/get-kpis';
+import { getTopLocations } from '../analytics/get-top-locations';
+import { getTopPages } from '../analytics/get-top-pages';
+import { getTopSources } from '../analytics/get-topic-source';
+import { getTrend } from '../analytics/get-trend';
+import { router, protectedProcedure } from '../trpc-server';
 
 const DateInput = z.object({
   dateFrom: z.string().optional(),
@@ -35,6 +36,9 @@ export const analyticsRouter = router({
     .query(async ({ input }) => {
       return getKpis(input);
     }),
+  currentVisitor: protectedProcedure.query(async () => {
+    return getCurrentVisitors();
+  }),
   topBrowser: protectedProcedure.input(DateInput).query(async ({ input }) => {
     const { data: queryData } = await queryPipe<TopBrowsersData>(
       'top_browsers',

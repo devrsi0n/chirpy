@@ -1,7 +1,5 @@
+import { QueryError } from '@chirpy-dev/utils';
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
-import { SWRConfig } from 'swr';
-
-import { QueryError } from '../lib/types/api';
 
 type IAnalyticsContext = {
   error: QueryError | null;
@@ -24,23 +22,9 @@ export default function AnalyticsProvider({
   const value = useMemo(() => ({ error, setError, domain }), [error, domain]);
 
   return (
-    <SWRConfig
-      value={{
-        revalidateOnFocus: false,
-        refreshInterval: 120_000,
-        dedupingInterval: 0,
-        revalidateOnMount: true,
-        onError: (error) => {
-          if (error.status === 401 || error.status === 403) {
-            setError(error);
-          }
-        },
-      }}
-    >
-      <AnalyticsContext.Provider value={value}>
-        {children}
-      </AnalyticsContext.Provider>
-    </SWRConfig>
+    <AnalyticsContext.Provider value={value}>
+      {children}
+    </AnalyticsContext.Provider>
   );
 }
 
