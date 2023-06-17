@@ -1,8 +1,8 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { JSONContent } from '@tiptap/react';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
-import { trpcClient } from '../../utilities/trpc-client';
 import { RefetchComment } from './comment-context';
 
 export type UseDeleteAComment = ReturnType<typeof useDeleteAComment>;

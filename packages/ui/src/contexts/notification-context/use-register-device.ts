@@ -1,8 +1,8 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { getPublicEnvVar } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { cpDayjs, logger } from '../../utilities';
-import { trpcClient } from '../../utilities/trpc-client';
 import { useCurrentUser } from '../current-user-context';
 import {
   checkServiceWorkerCompatibility,

@@ -5,6 +5,9 @@
   "main": "./src/index.ts",
   "sideEffects": false,
   "types": "./src/index.ts",
+  "dependencies": {
+    "dayjs": "1.11.6"
+  },
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@chirpy-dev/types": "workspace:*",

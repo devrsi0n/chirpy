@@ -8,5 +8,15 @@
       "$/*": ["src/*"]
     }
   },
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../types/src/analytics/charts.ts",
+    "../types/src/analytics/top-browsers.ts",
+    "../utils/src/analytics/browsers.ts",
+    "../types/src/analytics/top-devices.ts",
+    "../utils/src/analytics/devices.ts",
+    "../types/src/analytics/top-locations.ts"
+  ]
 }

@@ -8,3 +8,8 @@ export * from './rte';
 export * from './global';
 export * from './mdx';
 export * from './notification';
+export * from './analytics/kpis';
+export * from './analytics/charts';
+export * from './analytics/top-browsers';
+export * from './analytics/top-devices';
+export * from './analytics/top-locations';

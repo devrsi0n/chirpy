@@ -1,7 +1,7 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { asyncNoop, noop } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { trpcClient } from '../../utilities/trpc-client';
 import { UseCreateAComment } from './use-create-a-comment';
 import { UseDeleteAComment } from './use-delete-a-comment';
 import { UseToggleALikeAction } from './use-toggle-a-like-action';

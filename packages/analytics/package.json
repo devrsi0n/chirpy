@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@chirpy-dev/utils": "workspace:*",
+    "@chirpy-dev/types": "workspace:*",
+    "@chirpy-dev/trpc": "workspace:*",
     "@headlessui/react": "1.6.6",
     "@tremor/react": "2.11.0",
     "moment": "2.29.4",
-    "next": "13.4.2",
+    "next": "13.4.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "9.4.0",

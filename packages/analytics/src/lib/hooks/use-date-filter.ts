@@ -14,7 +14,8 @@ export default function useDateFilter() {
     ([startDate, endDate, value]: DateRangePickerValue) => {
       const lastDays = value ?? DateFilter.Custom;
 
-      const searchParams = new URLSearchParams(window.location.search);
+      const url = new URL(window.location.href);
+      const { searchParams } = url;
       searchParams.set('last_days', lastDays);
 
       if (lastDays === DateFilter.Custom && startDate && endDate) {
@@ -24,13 +25,7 @@ export default function useDateFilter() {
         searchParams.delete('start_date');
         searchParams.delete('end_date');
       }
-      router.push(
-        {
-          query: searchParams.toString(),
-        },
-        undefined,
-        { scroll: false },
-      );
+      router.push(url.href, undefined, { scroll: false });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],

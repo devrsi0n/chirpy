@@ -1,4 +1,4 @@
-import { isENVProd } from '@chirpy-dev/utils';
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import {
@@ -7,20 +7,10 @@ import {
   EmptyProjectCard,
   ProjectCard,
 } from '../../blocks';
-import {
-  Button,
-  Dialog,
-  IconPlusCircle,
-  Popover,
-  Spinner,
-  TextField,
-  Text,
-  Heading,
-} from '../../components';
+import { Button, Dialog, Spinner, TextField } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
-import { trpcClient } from '../../utilities/trpc-client';
 import { CreateProjectButton } from './create-project-button';
 
 type FormFields = {

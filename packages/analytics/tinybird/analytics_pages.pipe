@@ -1,0 +1,30 @@
+TOKEN "dashboard" READ
+
+NODE analytics_pages_1
+DESCRIPTION >
+    Aggregate by pathname and calculate session and hits
+
+SQL >
+
+    SELECT
+        toDate(timestamp) AS date,
+        device,
+        browser,
+        location,
+        pathname,
+        uniqState(session_id) AS visits,
+        countState() AS hits
+    FROM analytics_hits
+    GROUP BY
+        date,
+        device,
+        browser,
+        location,
+        pathname
+
+TYPE materialized
+DATASOURCE analytics_pages_mv
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(date)"
+ENGINE_SORTING_KEY "date, device, browser, location, pathname"
+

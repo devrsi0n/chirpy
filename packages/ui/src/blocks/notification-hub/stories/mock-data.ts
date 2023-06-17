@@ -1,4 +1,4 @@
-import { RouterOutputs } from '../../../utilities/trpc-client';
+import { RouterOutputs } from '../@chirpy-dev/trpc/src/client';
 
 export const mockNotificationMessages: RouterOutputs['notification']['messages'] =
   [

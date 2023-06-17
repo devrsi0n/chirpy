@@ -1,6 +1,6 @@
 import { queryPipe } from '../api';
+import { KpisData, KpiTotals, KpiType } from '../constants/kpis';
 import { QueryError } from '../types/api';
-import { KpisData, KpiTotals, KpiType } from '../types/kpis';
 import useDateFilter from './use-date-filter';
 import useQuery from './use-query';
 

@@ -1,9 +1,10 @@
-import { type AppRouter } from '@chirpy-dev/trpc/src/router';
 import { getBaseUrl } from '@chirpy-dev/utils';
 import { httpLink, loggerLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
 import superjson from 'superjson';
+
+import { type AppRouter } from './router';
 
 export const trpcClient = createTRPCNext<AppRouter>({
   config() {

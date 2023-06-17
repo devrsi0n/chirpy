@@ -1,3 +1,4 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { SiteLayout, PageTitle } from '../../blocks';
@@ -21,7 +22,6 @@ import {
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { EMAIL_REGEXP, logger } from '../../utilities';
-import { trpcClient } from '../../utilities/trpc-client';
 
 type FormFields = {
   name: string;

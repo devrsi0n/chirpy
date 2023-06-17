@@ -1,14 +1,14 @@
+import { TopLocationsSorting } from '@chirpy-dev/types/src/analytics/top-locations';
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
 import useParams from '../../lib/hooks/use-params';
 import useTopLocations from '../../lib/hooks/use-top-locations';
-import { TopLocationsSorting } from '../../lib/types/top-locations';
 import { cx } from '../../lib/utils';
 import Widget from '../Widget';
 
 export default function TopLocationsWidget() {
-  const { data, status, warning } = useTopLocations();
+  const { data, status } = useTopLocations();
   const [sorting, setSorting] = useParams({
     key: 'top_locations_sorting',
     values: Object.values(TopLocationsSorting),
@@ -24,12 +24,8 @@ export default function TopLocationsWidget() {
 
   return (
     <Widget>
-      <Widget.Title>Top Pages</Widget.Title>
-      <Widget.Content
-        status={status}
-        noData={!data?.data?.length}
-        warning={warning?.message}
-      >
+      <Widget.Title>Top Locations</Widget.Title>
+      <Widget.Content status={status} noData={!data?.data?.length}>
         <div className="grid grid-cols-5 gap-x-4 gap-y-2">
           <div className="col-span-3 h-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
             Country

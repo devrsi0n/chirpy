@@ -1,3 +1,4 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { Theme as ThemeType } from '@chirpy-dev/types';
 import { DehydratedState } from '@tanstack/react-query';
 
@@ -8,7 +9,6 @@ import {
   THEME_WIDGET_CLS,
 } from '../../blocks';
 import { WidgetThemeProvider } from '../../contexts';
-import { trpcClient } from '../../utilities/trpc-client';
 
 export type ThemeProps = {
   trpcState: DehydratedState;

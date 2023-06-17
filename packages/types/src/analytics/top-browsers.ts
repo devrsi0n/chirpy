@@ -1,5 +1,3 @@
-import { Color } from '@tremor/react';
-
 export type BrowserType = 'chrome' | 'firefox' | 'safari' | 'opera' | 'ie';
 
 export type TopBrowsersData = {

@@ -17,15 +17,9 @@ export default function useParams<T extends string>({
       : defaultValue ?? values[0];
 
   const setParam = (param: T) => {
-    const searchParams = new URLSearchParams(window.location.search);
-    searchParams.set(key, param);
-    router.push(
-      {
-        query: searchParams.toString(),
-      },
-      undefined,
-      { scroll: false },
-    );
+    const url = new URL(window.location.href);
+    url.searchParams.set(key, param);
+    router.push(url.href, undefined, { scroll: false });
   };
 
   return [value, setParam];

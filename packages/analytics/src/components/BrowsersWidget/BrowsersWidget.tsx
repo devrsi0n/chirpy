@@ -7,16 +7,12 @@ import { tremorPieChartColors } from '../../styles/theme/tremor-colors';
 import Widget from '../Widget';
 
 export default function BrowsersWidget() {
-  const { data, status, warning } = useBrowsers();
+  const { data, status } = useBrowsers();
 
   return (
     <Widget>
       <Widget.Title>Top Browsers</Widget.Title>
-      <Widget.Content
-        status={status}
-        noData={!data?.data?.length}
-        warning={warning?.message}
-      >
+      <Widget.Content status={status} noData={!data?.data?.length}>
         <div className="grid h-full w-full grid-cols-2">
           <DonutChart
             variant="pie"

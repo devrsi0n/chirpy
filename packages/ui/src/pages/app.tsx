@@ -1,4 +1,6 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
+import { isBrowser } from '@chirpy-dev/utils';
 import { LazyMotion } from 'framer-motion';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
@@ -9,12 +11,12 @@ import * as React from 'react';
 
 import { ToastProvider } from '../components';
 import { CurrentUserProvider, NotificationProvider } from '../contexts';
-import { trpcClient } from '../utilities/trpc-client';
 
 export const App = trpcClient.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
+  const currentOrigin = isBrowser ? window.location.origin : null;
   return (
     <>
       <Head>
@@ -41,11 +43,13 @@ export const App = trpcClient.withTRPC(function App({
           </LazyMotion>
         </NextThemesProvider>
       </SessionProvider>
-      <Script
-        src="https://unpkg.com/@tinybirdco/flock.js"
-        data-host="https://api.tinybird.co"
-        data-token="p.eyJ1IjogIjI1YzY5MzRiLWU5NjctNDk1My05ZDNmLTIxOTk1MTA2MGJlNSIsICJpZCI6ICI2OTg1ZjQ5NS0yNWM3LTRiYmYtOWIyMy05M2FiZmNlNDhiZjcifQ.N2KCqkFyxKf6N_WoyRNoBgPQcIIbIrpsqz78DvW1c2g"
-      />
+      {currentOrigin && (
+        <Script
+          strategy="lazyOnload"
+          src="https://unpkg.com/@tinybirdco/flock.js"
+          data-proxy={currentOrigin}
+        />
+      )}
     </>
   );
 });

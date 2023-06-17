@@ -1,5 +1,3 @@
-import { Color } from '@tremor/react';
-
 export type DeviceType = 'desktop' | 'mobile-ios' | 'mobile-android' | 'bot';
 
 export type TopDevicesData = {

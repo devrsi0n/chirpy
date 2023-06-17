@@ -1,3 +1,4 @@
+import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { BaseButton, Button } from '../../components/button';
@@ -18,7 +19,6 @@ import { useToast } from '../../components/toast';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
-import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 

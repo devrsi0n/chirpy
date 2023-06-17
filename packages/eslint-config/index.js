@@ -59,6 +59,9 @@ module.exports = {
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
     'unicorn/prefer-top-level-await': 'off',
+    'unicorn/consistent-destructuring': 'off',
+    'unicorn/prefer-code-point': 'off',
+    'unicorn/prefer-spread': 'off',
 
     'jest/expect-expect': 'off',
   },

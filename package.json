@@ -3,6 +3,7 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
@@ -22,7 +23,7 @@
     "eslint": "8.40.0",
     "husky": "8.0.2",
     "lint-staged": "13.0.4",
-    "next": "13.4.2",
+    "next": "13.4.6",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",

@@ -1,8 +1,8 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { useHasMounted } from '../../hooks/use-has-mounted';
-import { trpcClient } from '../../utilities/trpc-client';
 import {
   CurrentUserContext,
   CurrentUserContextType,

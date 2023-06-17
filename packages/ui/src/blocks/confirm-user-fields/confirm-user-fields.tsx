@@ -1,3 +1,4 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -9,7 +10,6 @@ import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks/use-form';
 import { logger } from '../../utilities/logger';
-import { trpcClient } from '../../utilities/trpc-client';
 import { EMAIL_REGEXP } from '../../utilities/validator';
 import { sleep } from './utils';
 
@@ -74,7 +74,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     },
   );
   return (
-    <Card as="form" className="w-fit space-y-4 rounded py-6 px-12 shadow-md">
+    <Card as="form" className="w-fit space-y-4 rounded px-12 py-6 shadow-md">
       <TextField
         className="w-full"
         {...register('email', {
