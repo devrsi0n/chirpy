@@ -6,7 +6,7 @@ import useTrend from '../../lib/hooks/use-trend';
 import Widget from '../Widget';
 
 export default function TrendWidget() {
-  const { data, status, warning } = useTrend();
+  const { data, status } = useTrend();
   const chartData = useMemo(
     () =>
       (data?.data ?? []).map((d) => ({
@@ -28,7 +28,6 @@ export default function TrendWidget() {
         status={status}
         loaderSize={40}
         noData={!chartData?.length}
-        warning={warning?.message}
       >
         <BarChart
           data={chartData}

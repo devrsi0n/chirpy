@@ -7,8 +7,8 @@ import Widget from '../Widget';
 import KPIsTabs from './KpisTabs';
 
 export default function KPIsWidget() {
-  const { data, kpi, setKpi, kpiOption, warning, status } = useKpis();
-  const { data: kpiTotals, warning: warningTotals } = useKpiTotals();
+  const { data, kpi, setKpi, kpiOption, status } = useKpis();
+  const { data: kpiTotals } = useKpiTotals();
   const chartData = useMemo(
     () =>
       (data?.dates ?? []).map((date, index) => {
@@ -32,7 +32,6 @@ export default function KPIsWidget() {
       <Widget.Content
         status={status}
         noData={!chartData?.length}
-        warning={warning?.message}
         className="mt-4 pt-2"
       >
         <AreaChart

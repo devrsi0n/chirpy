@@ -1,5 +1,5 @@
 import { router } from '../trpc-server';
-import { analyticsRouter } from './analytics';
+import { analyticsRouter } from './analytics/analytics';
 import { commentRouter } from './comment';
 import { likeRouter } from './like';
 import { notificationRouter } from './notification';

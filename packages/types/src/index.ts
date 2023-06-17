@@ -13,3 +13,6 @@ export * from './analytics/charts';
 export * from './analytics/top-browsers';
 export * from './analytics/top-devices';
 export * from './analytics/top-locations';
+export * from './analytics/top-pages';
+export * from './analytics/top-sources';
+export * from './analytics/trend';

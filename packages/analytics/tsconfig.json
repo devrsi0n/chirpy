@@ -17,6 +17,10 @@
     "../utils/src/analytics/browsers.ts",
     "../types/src/analytics/top-devices.ts",
     "../utils/src/analytics/devices.ts",
-    "../types/src/analytics/top-locations.ts"
+    "../types/src/analytics/top-locations.ts",
+    "../trpc/src/router/analytics/get-top-pages.ts",
+    "../types/src/analytics/top-pages.ts",
+    "../types/src/analytics/top-sources.ts",
+    "../types/src/analytics/trend.ts"
   ]
 }

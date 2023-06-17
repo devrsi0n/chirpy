@@ -7,16 +7,12 @@ import { tremorPieChartColors } from '../../styles/theme/tremor-colors';
 import Widget from '../Widget';
 
 export default function TopDevicesWidget() {
-  const { data, warning, status } = useTopDevices();
+  const { data, status } = useTopDevices();
 
   return (
     <Widget>
       <Widget.Title>Top Devices</Widget.Title>
-      <Widget.Content
-        status={status}
-        noData={!data?.data?.length}
-        warning={warning?.message}
-      >
+      <Widget.Content status={status} noData={!data?.data?.length}>
         <div className="grid h-full w-full grid-cols-2">
           <DonutChart
             data={data?.data ?? []}

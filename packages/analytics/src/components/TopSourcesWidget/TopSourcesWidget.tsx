@@ -6,7 +6,7 @@ import { formatNumber } from '../../lib/utils';
 import Widget from '../Widget';
 
 export default function TopSourcesWidget() {
-  const { data, status, warning } = useTopSources();
+  const { data, status } = useTopSources();
   const chartData = useMemo(
     () =>
       (data?.data ?? []).map((d) => ({
@@ -20,11 +20,7 @@ export default function TopSourcesWidget() {
   return (
     <Widget>
       <Widget.Title>Top Sources</Widget.Title>
-      <Widget.Content
-        status={status}
-        noData={!chartData?.length}
-        warning={warning?.message}
-      >
+      <Widget.Content status={status} noData={!chartData?.length}>
         <div className="grid grid-cols-5 gap-x-4 gap-y-2">
           <div className="col-span-4 h-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
             Refs

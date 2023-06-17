@@ -1,15 +1,15 @@
+import { TopPagesSorting } from '@chirpy-dev/types';
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
 import useParams from '../../lib/hooks/use-params';
 import useTopPages from '../../lib/hooks/use-top-pages';
-import { TopPagesSorting } from '../../lib/types/top-pages';
 import { cx, formatNumber } from '../../lib/utils';
 import { useAnalytics } from '../Provider';
 import Widget from '../Widget';
 
 export default function TopPagesWidget() {
-  const { data, status, warning } = useTopPages();
+  const { data, status } = useTopPages();
   const [sorting, setSorting] = useParams({
     key: 'top_pages_sorting',
     values: Object.values(TopPagesSorting),
@@ -28,11 +28,7 @@ export default function TopPagesWidget() {
   return (
     <Widget>
       <Widget.Title>Top Pages</Widget.Title>
-      <Widget.Content
-        status={status}
-        noData={!chartData?.length}
-        warning={warning?.message}
-      >
+      <Widget.Content status={status} noData={!chartData?.length}>
         <div className="grid grid-cols-5 gap-x-4 gap-y-2">
           <div className="col-span-3 h-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
             Content

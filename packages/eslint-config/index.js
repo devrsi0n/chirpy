@@ -21,6 +21,7 @@ module.exports = {
     'no-console': 'off',
 
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -62,6 +63,7 @@ module.exports = {
     'unicorn/consistent-destructuring': 'off',
     'unicorn/prefer-code-point': 'off',
     'unicorn/prefer-spread': 'off',
+    'unicorn/prefer-string-replace-all': 'off',
 
     'jest/expect-expect': 'off',
   },
