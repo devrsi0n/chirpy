@@ -1,5 +1,5 @@
 import { Popover } from '@headlessui/react';
-import { DateRangePicker } from '@tremor/react';
+import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
 import moment from 'moment';
 
 import useDateFilter from '../lib/hooks/use-date-filter';
@@ -8,30 +8,6 @@ import {
   DateRangePickerOption,
 } from '../lib/types/date-filter';
 import { QuestionIcon } from './Icons';
-
-const dateFilterOptions: DateRangePickerOption[] = [
-  { text: 'Today', value: DateFilterType.Today, startDate: new Date() },
-  {
-    text: 'Yesterday',
-    value: DateFilterType.Yesterday,
-    startDate: moment().subtract(1, 'days').toDate(),
-  },
-  {
-    text: '7 days',
-    value: DateFilterType.Last7Days,
-    startDate: moment().subtract(7, 'days').toDate(),
-  },
-  {
-    text: '30 days',
-    value: DateFilterType.Last30Days,
-    startDate: moment().subtract(30, 'days').toDate(),
-  },
-  {
-    text: '12 months',
-    value: DateFilterType.Last12Months,
-    startDate: moment().subtract(12, 'months').toDate(),
-  },
-];
 
 export default function DateFilter() {
   const { dateRangePickerValue, onDateRangePickerValueChange } =
@@ -45,7 +21,7 @@ export default function DateFilter() {
           <div className="sr-only">What is the time zone used?</div>
         </Popover.Button>
 
-        <Popover.Panel className="bg-secondary absolute bottom-6 -right-10 z-[2] w-24 rounded py-1 px-2 text-xs font-light text-white">
+        <Popover.Panel className="bg-secondary absolute -right-10 bottom-6 z-[2] w-24 rounded px-2 py-1 text-xs font-light text-white">
           UTC timezone
         </Popover.Panel>
       </Popover>
@@ -54,9 +30,29 @@ export default function DateFilter() {
         <DateRangePicker
           value={dateRangePickerValue}
           onValueChange={onDateRangePickerValueChange}
-          options={dateFilterOptions}
-          enableYearPagination
-        />
+        >
+          <DateRangePickerItem value={DateFilterType.Today} from={new Date()}>
+            Today
+          </DateRangePickerItem>
+          <DateRangePickerItem
+            value={DateFilterType.Last7Days}
+            from={moment().subtract(7, 'days').toDate()}
+          >
+            Last 7 days
+          </DateRangePickerItem>
+          <DateRangePickerItem
+            value={DateFilterType.Last30Days}
+            from={moment().subtract(30, 'days').toDate()}
+          >
+            Last 30 days
+          </DateRangePickerItem>
+          <DateRangePickerItem
+            value={DateFilterType.Last12Months}
+            from={moment().subtract(12, 'months').toDate()}
+          >
+            Last 12 months
+          </DateRangePickerItem>
+        </DateRangePicker>
       </div>
     </div>
   );

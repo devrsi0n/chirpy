@@ -11,16 +11,16 @@ export default function useDateFilter() {
     useState<DateRangePickerValue>();
 
   const setDateFilter = useCallback(
-    ([startDate, endDate, value]: DateRangePickerValue) => {
-      const lastDays = value ?? DateFilter.Custom;
+    ({ from, to, selectValue }: DateRangePickerValue) => {
+      const lastDays = selectValue ?? DateFilter.Custom;
 
       const url = new URL(window.location.href);
       const { searchParams } = url;
       searchParams.set('last_days', lastDays);
 
-      if (lastDays === DateFilter.Custom && startDate && endDate) {
-        searchParams.set('start_date', moment(startDate).format(dateFormat));
-        searchParams.set('end_date', moment(endDate).format(dateFormat));
+      if (lastDays === DateFilter.Custom && from && to) {
+        searchParams.set('start_date', moment(from).format(dateFormat));
+        searchParams.set('end_date', moment(to).format(dateFormat));
       } else {
         searchParams.delete('start_date');
         searchParams.delete('end_date');
@@ -68,19 +68,19 @@ export default function useDateFilter() {
   }, [lastDays, router.query.start_date, router.query.end_date]);
 
   useEffect(() => {
-    setDateRangePickerValue([
-      moment(startDate).toDate(),
-      moment(endDate).toDate(),
-      lastDays === DateFilter.Custom ? null : lastDays,
-    ]);
+    setDateRangePickerValue({
+      from: moment(startDate).toDate(),
+      to: moment(endDate).toDate(),
+      selectValue: lastDays === DateFilter.Custom ? undefined : lastDays,
+    });
   }, [startDate, endDate, lastDays]);
 
   const onDateRangePickerValueChange = useCallback(
-    ([startDate, endDate, value]: DateRangePickerValue) => {
-      if (startDate && endDate) {
-        setDateFilter([startDate, endDate, value]);
+    ({ from, to, selectValue }: DateRangePickerValue) => {
+      if (from && to) {
+        setDateFilter({ from, to, selectValue });
       } else {
-        setDateRangePickerValue([startDate, endDate, value]);
+        setDateRangePickerValue({ from, to, selectValue });
       }
     },
     [setDateFilter],

@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
 
-import { APIError } from '$/server/common/api-error';
+import { APIError, HttpStatus } from '$/server/common/api-error';
 import { getAPIHandler } from '$/server/common/api-handler';
 
 const handler = getAPIHandler();
@@ -52,7 +52,7 @@ function validateSignature(actualSignature: string, payload: string) {
   // For some reason, the actual signature always has a '=' appended
   const actualSignatureWithEqualsSign = actualSignature + '=';
   if (actualSignatureWithEqualsSign !== expectedSignature) {
-    throw new APIError(401, 'Invalid signature');
+    throw new APIError(HttpStatus.UNAUTHORIZED, 'Invalid signature');
   }
 }
 

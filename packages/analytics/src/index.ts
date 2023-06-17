@@ -1,4 +1,3 @@
-export { default as Credentials } from './components/Credentials';
 export { default as Footer } from './components/Footer';
 export { default as ErrorModal } from './components/ErrorModal';
 export { default as Meta } from './components/Meta';
