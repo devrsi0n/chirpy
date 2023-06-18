@@ -18,7 +18,7 @@ export default function DateFilter() {
           <div className="sr-only">What is the time zone used?</div>
         </Popover.Button>
 
-        <Popover.Panel className="absolute -right-10 bottom-6 z-[2] w-24 rounded bg-gray-0 px-2 py-1 text-xs font-light text-gray-900 shadow-sm">
+        <Popover.Panel className="absolute -right-10 bottom-6 z-[2] w-24 rounded bg-gray-0 px-2 py-1 text-xs font-light text-gray-1200 shadow-sm">
           UTC timezone
         </Popover.Panel>
       </Popover>

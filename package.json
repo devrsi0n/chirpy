@@ -45,8 +45,11 @@
         "react-dom": "18",
         "glob": "8",
         "core-js": "3",
+        "tslib": "2",
+        "@babel/runtime": "7",
         "@tensorflow/tfjs-core": "3",
-        "@tensorflow/tfjs-converter": "3"
+        "@tensorflow/tfjs-converter": "3",
+        "@headlessui/react": "1"
       }
     }
   },

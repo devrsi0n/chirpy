@@ -27,7 +27,6 @@ export function AnalyticsByDomainPage({
           <section className="mx-auto px-4 xl:max-w-6xl" id="ats">
             <PageTitle className="pb-6">Analytics</PageTitle>
 
-            {/* <Meta /> */}
             <div className="bg-body text-secondary min-h-screen py-5 text-sm leading-5">
               <div className="mx-auto max-w-7xl">
                 <div className="space-y-6 sm:space-y-10">

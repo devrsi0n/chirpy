@@ -1,6 +1,5 @@
 import { FEEDBACK_LINK } from '@chirpy-dev/utils';
 import { Button } from '@tremor/react';
-import { useRouter } from 'next/router';
 
 import { colors } from '../styles/theme';
 import Modal from './Modal';
