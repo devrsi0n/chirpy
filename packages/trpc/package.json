@@ -27,13 +27,13 @@
     "@types/web-push": "3.3.2",
     "moment": "2.29.4",
     "next": "13.4.6",
-    "next-auth": "4.17.0",
+    "next-auth": "4.22.1",
     "next-axiom": "0.15.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "1.12.3",
     "web-push": "3.5.0",
-    "zod": "3.19.1"
+    "zod": "3.21.4"
   },
   "devDependencies": {
     "@types/jest": "29.2.3",

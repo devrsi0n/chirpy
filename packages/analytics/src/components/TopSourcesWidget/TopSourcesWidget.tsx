@@ -22,7 +22,7 @@ export default function TopSourcesWidget() {
       <Widget.Title>Top Sources</Widget.Title>
       <Widget.Content status={status} noData={!chartData?.length}>
         <div className="grid grid-cols-5 gap-x-4 gap-y-2">
-          <div className="col-span-4 h-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
+          <div className="col-span-4 h-5 text-xs font-semibold uppercase tracking-widest text-gray-1100">
             Refs
           </div>
           <div className="col-span-1 h-5 text-right text-xs font-semibold uppercase tracking-widest">
