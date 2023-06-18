@@ -41,6 +41,7 @@ type BasePipeParams = {
   limit: number;
   date_to: string;
   date_from: string;
+  domain: string;
 };
 
 export type PipeParams<T> = Record<keyof T, string> & BasePipeParams;
@@ -107,4 +108,8 @@ export type QuerySQL<T> = {
 
 export function querySQL<T>(sql: string): Promise<QuerySQL<T>> {
   return client(`/sql?q=${sql}`);
+}
+
+export function getTinybirdDomain(domain: string) {
+  return domain === 'localhost' ? `http://${domain}` : `https://${domain}`;
 }

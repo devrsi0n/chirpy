@@ -5,11 +5,11 @@ const isProd = process.env.NODE_ENV === 'production';
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
 });
-const { withPlausibleProxy } = require('next-plausible');
+
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
 
-const plugins = [withBundleAnalyzer, withPlausibleProxy(), withAxiom];
+const plugins = [withBundleAnalyzer, withAxiom];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

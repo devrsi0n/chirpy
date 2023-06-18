@@ -104,7 +104,7 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
   });
 
   return (
-    <div ref={dripRef} className="absolute top-0 bottom-0 left-0 right-0">
+    <div ref={dripRef} className="absolute bottom-0 left-0 right-0 top-0">
       <svg
         width="20"
         height="20"

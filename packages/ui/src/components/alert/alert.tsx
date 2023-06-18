@@ -40,7 +40,7 @@ export function Alert(props: AlertProps): JSX.Element {
     >
       <div
         className={clsx(
-          'flex flex-1 flex-col items-start space-y-3 sm:flex-row sm:space-y-0 sm:space-x-3',
+          'flex flex-1 flex-col items-start space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0',
           props.align === 'center' ? 'justify-center' : 'justify-start',
           props.styles?.container,
         )}

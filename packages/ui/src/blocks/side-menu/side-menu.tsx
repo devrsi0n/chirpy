@@ -82,7 +82,7 @@ export function SideMenu({
       animate={isOpen ? 'open' : 'closed'}
       custom={isSSRMode ? undefined : document.body.clientHeight}
       className={clsx(
-        'top-0 bottom-0 isolate h-[100vh] w-[250px]',
+        'bottom-0 top-0 isolate h-[100vh] w-[250px]',
         containerStyles,
         isAnimationEnd && `h-auto`,
         fixed ? `fixed` : `absolute sm:fixed`,

@@ -1,4 +1,4 @@
-import { FEEDBACK_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { Button } from '@tremor/react';
 
 import { colors } from '../styles/theme';
@@ -44,7 +44,7 @@ export default function ErrorModal() {
           <Modal.Description>
             {`Ask `}
             <a
-              href={FEEDBACK_LINK}
+              href={SUPPORT_LINK}
               className="underline underline-offset-2"
               target="_blank"
               rel="noreferrer"

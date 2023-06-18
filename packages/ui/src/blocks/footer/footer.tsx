@@ -35,7 +35,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         </Link>
       </nav>
       <div
-        className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-5`}
+        className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-5 sm:space-y-0`}
       >
         <CompanyRight />
         <ColorModeSelect />

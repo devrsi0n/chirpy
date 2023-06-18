@@ -12,7 +12,7 @@ export function Header(): JSX.Element {
   const { isSignIn } = useCurrentUser();
   const styles = `ml-[22px]`;
   return (
-    <header className={clsx(`z-20 w-full sm:sticky sm:top-0 sm:left-0`)}>
+    <header className={clsx(`z-20 w-full sm:sticky sm:left-0 sm:top-0`)}>
       <MaintenanceBanner />
       <div
         className={clsx(
@@ -21,7 +21,7 @@ export function Header(): JSX.Element {
           'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
         )}
       >
-        <section className="mx-auto flex max-w-7xl flex-row items-center justify-between py-3 px-2 shadow-xs transition duration-150 sm:px-6 lg:px-8">
+        <section className="mx-auto flex max-w-7xl flex-row items-center justify-between px-2 py-3 shadow-xs transition duration-150 sm:px-6 lg:px-8">
           <div className="flex items-center pl-3 sm:hidden">
             <SideMenu>
               {isSignIn ? (

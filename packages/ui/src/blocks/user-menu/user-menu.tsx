@@ -1,5 +1,5 @@
 import {
-  FEEDBACK_LINK,
+  SUPPORT_LINK,
   SIGN_IN_SUCCESS_KEY,
   GRAPHQL_CACHE_DB_NAME,
 } from '@chirpy-dev/utils';
@@ -46,13 +46,13 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
       <Menu.Items className="">
         {name && (
           <div className="mx-6 py-2">
-            <Text className="w-36 text-left line-clamp-2" bold>
+            <Text className="line-clamp-2 w-36 text-left" bold>
               {name}
             </Text>
             {email && (
               <Text
                 variant="secondary"
-                className="w-36 break-words text-left line-clamp-2"
+                className="line-clamp-2 w-36 break-words text-left"
                 size="sm"
               >
                 {email}
@@ -79,7 +79,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           as={MenuLink}
           variant="plain"
           target="_blank"
-          href={FEEDBACK_LINK}
+          href={SUPPORT_LINK}
         >
           <IconLifeBuoy size={14} />
           <span>Feedback</span>

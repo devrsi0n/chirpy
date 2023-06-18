@@ -41,7 +41,7 @@ export const TextField = React.forwardRef(function TextfieldComponent(
       </LabelWrapper>
       <div className={clsx(prefixNode && `flex flex-row items-stretch`)}>
         {prefixNode && (
-          <div className="flex flex-row items-center rounded-l border-t border-b border-l px-3">
+          <div className="flex flex-row items-center rounded-l border-b border-l border-t px-3">
             {prefixNode}
           </div>
         )}

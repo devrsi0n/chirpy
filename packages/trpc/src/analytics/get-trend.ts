@@ -2,11 +2,18 @@ import { Trend, TrendData } from '@chirpy-dev/types';
 import { queryPipe } from '@chirpy-dev/utils';
 import moment from 'moment';
 
+import { AnalyticsInput } from './constants';
+
 export async function getTrend({
-  dateFrom: date_from,
-  dateTo: date_to,
-}: { dateFrom?: string; dateTo?: string } = {}): Promise<Trend> {
-  const { data } = await queryPipe<TrendData>('trend', { date_from, date_to });
+  domain,
+  dateFrom,
+  dateTo,
+}: AnalyticsInput): Promise<Trend> {
+  const { data } = await queryPipe<TrendData>('trend_by_domain', {
+    domain,
+    date_from: dateFrom,
+    date_to: dateTo,
+  });
   const visits = data.map(({ visits }) => visits);
   const dates = data.map(({ t }) => {
     return moment(t).format('HH:mm');

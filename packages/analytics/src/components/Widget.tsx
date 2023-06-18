@@ -1,3 +1,4 @@
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { Card, Title } from '@tremor/react';
 import { ReactNode } from 'react';
 
@@ -100,12 +101,9 @@ function WidgetWarning({ children }: { children: ReactNode }) {
         <h3 className="font-semibold text-gray-1100">{children}</h3>
         <div className="text-sm text-gray-1100">
           <p>
-            {`Check that the original datasource columns and pipe names match the ones from the original data project `}
-            <a
-              href="https://github.com/tinybirdco/web-analytics-starter-kit/tinybird"
-              className="underline underline-offset-2"
-            >
-              https://github.com/tinybirdco/web-analytics-starter-kit/tinybird
+            {`Failed to load data, please ask`}
+            <a href={SUPPORT_LINK} className="underline underline-offset-2">
+              Chirpy support
             </a>
           </p>
         </div>

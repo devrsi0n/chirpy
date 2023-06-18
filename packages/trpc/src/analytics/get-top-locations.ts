@@ -1,22 +1,29 @@
 import {
   TopLocation,
   TopLocationsData,
-  TopLocationsSortingValue,
+  TopLocationsSorting,
+  TopLocationsSortingValueTuple,
 } from '@chirpy-dev/types';
 import { queryPipe } from '@chirpy-dev/utils';
+import { z } from 'zod';
+
+import { AnalyticsInput } from './constants';
+
+export const TOP_LOCATIONS_INPUT = AnalyticsInput.extend({
+  sorting: z.enum(
+    Object.values(TopLocationsSorting) as TopLocationsSortingValueTuple,
+  ),
+});
 
 export async function getTopLocations({
+  domain,
   sorting,
-  dateFrom: date_from,
-  dateTo: date_to,
-}: {
-  sorting: TopLocationsSortingValue;
-  dateFrom?: string;
-  dateTo?: string;
-}) {
+  dateFrom,
+  dateTo,
+}: z.infer<typeof TOP_LOCATIONS_INPUT>) {
   const { data: queryData } = await queryPipe<TopLocationsData>(
-    'top_locations',
-    { limit: 8, date_from, date_to },
+    'top_locations_by_domain',
+    { domain, limit: 8, date_from: dateFrom, date_to: dateTo },
   );
   const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
 

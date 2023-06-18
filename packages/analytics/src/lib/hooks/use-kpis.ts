@@ -2,6 +2,7 @@ import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { KpiType, isKpi } from '@chirpy-dev/types';
 import { useRouter } from 'next/router';
 
+import { useAnalytics } from '../../components/Provider';
 import { KPI_OPTIONS } from '../constants/kpis';
 import useDateFilter from './use-date-filter';
 
@@ -11,7 +12,9 @@ export default function useKpis() {
   const { kpi: kpiParam } = router.query;
   const kpi = isKpi(kpiParam) ? kpiParam : 'visits';
   const kpiOption = KPI_OPTIONS.find(({ value }) => value === kpi)!;
+  const { domain } = useAnalytics();
   const query = trpcClient.analytics.kpis.useQuery({
+    domain,
     kpi,
     dateFrom: startDate,
     dateTo: endDate,

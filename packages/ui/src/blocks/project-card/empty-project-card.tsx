@@ -6,7 +6,7 @@ import { Text } from '../../components/text';
 
 export function EmptyProjectCard(): JSX.Element {
   return (
-    <section className="flex w-fit flex-col items-center rounded border border-dashed py-8 px-12">
+    <section className="flex w-fit flex-col items-center rounded border border-dashed px-12 py-8">
       <span className="mb-4">
         <IconFolderPlus size={36} />
       </span>

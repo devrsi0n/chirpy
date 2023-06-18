@@ -45,6 +45,7 @@ export const App = trpcClient.withTRPC(function App({
       </SessionProvider>
       {currentOrigin && (
         <Script
+          id="chirpy-ats"
           strategy="lazyOnload"
           src="https://unpkg.com/@tinybirdco/flock.js"
           data-proxy={currentOrigin}

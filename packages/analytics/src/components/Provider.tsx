@@ -1,4 +1,4 @@
-import { QueryError } from '@chirpy-dev/utils';
+import { getTinybirdDomain, QueryError } from '@chirpy-dev/utils';
 import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
 
 type IAnalyticsContext = {
@@ -19,7 +19,14 @@ export default function AnalyticsProvider({
   children: ReactNode;
 }) {
   const [error, setError] = useState<QueryError | null>(null);
-  const value = useMemo(() => ({ error, setError, domain }), [error, domain]);
+  const value = useMemo(
+    () => ({
+      error,
+      setError,
+      domain: getTinybirdDomain(domain),
+    }),
+    [error, domain],
+  );
 
   return (
     <AnalyticsContext.Provider value={value}>

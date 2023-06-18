@@ -61,7 +61,7 @@ function FullFilled(): JSX.Element {
 
 function NotFullFilled() {
   return (
-    <div className="flex flex-col items-center space-y-8 md:flex-row md:items-center md:space-y-0 md:space-x-8">
+    <div className="flex flex-col items-center space-y-8 md:flex-row md:items-center md:space-x-8 md:space-y-0">
       <div className="space-y-3">
         <Heading as="h2" className="!tracking-tight">
           Welcome on board
