@@ -8,7 +8,6 @@ import {
 import { cpDayjs, queryPipe } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { trpcDayjs } from '../common/date';
 import { AnalyticsInput } from './constants';
 
 export const KPIS_INPUT = AnalyticsInput.extend({
@@ -58,7 +57,7 @@ export async function getKpis({
 }
 
 function arrayHasCurrentDate(dates: string[], isHourlyGranularity: boolean) {
-  const now = trpcDayjs
+  const now = cpDayjs()
     .utc()
     .format(isHourlyGranularity ? 'HH:00' : 'MMM DD, YYYY');
   return dates.at(-1) === now;
