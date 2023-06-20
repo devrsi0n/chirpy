@@ -1,4 +1,5 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { NOTIFICATION_SUBSCRIPTION_INPUT } from '@chirpy-dev/trpc/src/router/notification';
 import { getPublicEnvVar } from '@chirpy-dev/utils';
 import * as React from 'react';
 
@@ -50,7 +51,8 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
       try {
         // Save the subscription details to server
         await registerDevice({
-          subscription,
+          subscription:
+            subscription as unknown as NOTIFICATION_SUBSCRIPTION_INPUT,
         });
         sessionStorage.setItem(
           NOTIFICATION_REGISTER_EXPIRED_AT,

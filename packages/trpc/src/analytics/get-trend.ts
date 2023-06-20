@@ -1,7 +1,7 @@
 import { Trend, TrendData } from '@chirpy-dev/types';
 import { queryPipe } from '@chirpy-dev/utils';
-import moment from 'moment';
 
+import { trpcDayjs } from '../common/date';
 import { AnalyticsInput } from './constants';
 
 export async function getTrend({
@@ -16,7 +16,7 @@ export async function getTrend({
   });
   const visits = data.map(({ visits }) => visits);
   const dates = data.map(({ t }) => {
-    return moment(t).format('HH:mm');
+    return trpcDayjs(t).format('HH:mm');
   });
   const totalVisits = visits.reduce((a, b) => a + b, 0);
 

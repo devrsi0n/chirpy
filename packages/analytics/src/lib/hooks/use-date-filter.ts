@@ -1,5 +1,5 @@
+import { trpcDayjs } from '@chirpy-dev/trpc/src/common/date';
 import { DateRangePickerValue } from '@tremor/react';
-import moment from 'moment';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -19,8 +19,8 @@ export default function useDateFilter() {
       searchParams.set('last_days', lastDays);
 
       if (lastDays === DateFilter.Custom && from && to) {
-        searchParams.set('start_date', moment(from).format(dateFormat));
-        searchParams.set('end_date', moment(to).format(dateFormat));
+        searchParams.set('start_date', trpcDayjs(from).format(dateFormat));
+        searchParams.set('end_date', trpcDayjs(to).format(dateFormat));
       } else {
         searchParams.delete('start_date');
         searchParams.delete('end_date');
@@ -39,38 +39,38 @@ export default function useDateFilter() {
       : DateFilter.Last7Days;
 
   const { startDate, endDate } = useMemo(() => {
-    const today = moment().utc();
+    const today = trpcDayjs().utc();
     if (lastDays === DateFilter.Custom) {
       const startDateParam = router.query.start_date as string;
       const endDateParam = router.query.end_date as string;
 
       const startDate =
         startDateParam ||
-        moment(today)
+        trpcDayjs(today)
           .subtract(+DateFilter.Last7Days, 'days')
           .format(dateFormat);
-      const endDate = endDateParam || moment(today).format(dateFormat);
+      const endDate = endDateParam || trpcDayjs(today).format(dateFormat);
 
       return { startDate, endDate };
     }
 
-    const startDate = moment(today)
+    const startDate = trpcDayjs(today)
       .subtract(+lastDays, 'days')
       .format(dateFormat);
     const endDate =
       lastDays === DateFilter.Yesterday
-        ? moment(today)
+        ? trpcDayjs(today)
             .subtract(+DateFilter.Yesterday, 'days')
             .format(dateFormat)
-        : moment(today).format(dateFormat);
+        : trpcDayjs(today).format(dateFormat);
 
     return { startDate, endDate };
   }, [lastDays, router.query.start_date, router.query.end_date]);
 
   useEffect(() => {
     setDateRangePickerValue({
-      from: moment(startDate).toDate(),
-      to: moment(endDate).toDate(),
+      from: trpcDayjs(startDate).toDate(),
+      to: trpcDayjs(endDate).toDate(),
       selectValue: lastDays === DateFilter.Custom ? undefined : lastDays,
     });
   }, [startDate, endDate, lastDays]);

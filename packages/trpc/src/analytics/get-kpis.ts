@@ -1,14 +1,14 @@
 import {
   ALL_KPIS,
   ChartValue,
+  KpisData,
   KpiTotals,
   KpiType,
-  KpisData,
 } from '@chirpy-dev/types';
-import { queryPipe } from '@chirpy-dev/utils';
-import moment from 'moment';
+import { cpDayjs, queryPipe } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
+import { trpcDayjs } from '../common/date';
 import { AnalyticsInput } from './constants';
 
 export const KPIS_INPUT = AnalyticsInput.extend({
@@ -28,7 +28,7 @@ export async function getKpis({
   });
   const isHourlyGranularity = !!dateFrom && !!dateTo && dateFrom === dateTo;
   const dates = queryData.map(({ date }) =>
-    moment(date).format(isHourlyGranularity ? 'HH:mm' : 'MMM DD, YYYY'),
+    cpDayjs(date).format(isHourlyGranularity ? 'HH:mm' : 'MMM DD, YYYY'),
   );
   const isCurrentData = arrayHasCurrentDate(dates, isHourlyGranularity);
 
@@ -58,7 +58,7 @@ export async function getKpis({
 }
 
 function arrayHasCurrentDate(dates: string[], isHourlyGranularity: boolean) {
-  const now = moment()
+  const now = trpcDayjs
     .utc()
     .format(isHourlyGranularity ? 'HH:00' : 'MMM DD, YYYY');
   return dates.at(-1) === now;

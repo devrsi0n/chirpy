@@ -1,6 +1,6 @@
+import { cpDayjs } from '@chirpy-dev/utils';
 import { Popover } from '@headlessui/react';
 import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
-import moment from 'moment';
 
 import useDateFilter from '../lib/hooks/use-date-filter';
 import { DateFilter as DateFilterType } from '../lib/types/date-filter';
@@ -34,19 +34,19 @@ export default function DateFilter() {
           </DateRangePickerItem>
           <DateRangePickerItem
             value={DateFilterType.Last7Days}
-            from={moment().subtract(7, 'days').toDate()}
+            from={cpDayjs().subtract(7, 'days').toDate()}
           >
             Last 7 days
           </DateRangePickerItem>
           <DateRangePickerItem
             value={DateFilterType.Last30Days}
-            from={moment().subtract(30, 'days').toDate()}
+            from={cpDayjs().subtract(30, 'days').toDate()}
           >
             Last 30 days
           </DateRangePickerItem>
           <DateRangePickerItem
             value={DateFilterType.Last12Months}
-            from={moment().subtract(12, 'months').toDate()}
+            from={cpDayjs().subtract(12, 'months').toDate()}
           >
             Last 12 months
           </DateRangePickerItem>

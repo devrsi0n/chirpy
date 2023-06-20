@@ -1,5 +1,5 @@
+import { cpDayjs } from '@chirpy-dev/utils';
 import { BarChart } from '@tremor/react';
-import moment from 'moment';
 import { useMemo } from 'react';
 
 import useTrend from '../../lib/hooks/use-trend';
@@ -10,7 +10,7 @@ export default function TrendWidget() {
   const chartData = useMemo(
     () =>
       (data?.data ?? []).map((d) => ({
-        Date: moment(d.t).format('HH:mm'),
+        Date: cpDayjs(d.t).format('HH:mm'),
         'Number of visits': d.visits,
       })),
     [data],
