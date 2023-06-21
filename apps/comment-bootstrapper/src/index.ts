@@ -5,6 +5,7 @@ const win = window as any;
 if (win && !win.$chirpyDisableAutoInjection) {
   initCommentWidget();
   loadFlock();
+
   win.$chirpy = {
     initCommentWidget,
     loadFlock,
