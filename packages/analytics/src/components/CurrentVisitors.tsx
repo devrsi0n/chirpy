@@ -1,4 +1,4 @@
-import useCurrentVisitors from '../lib/hooks/use-current-visitors';
+import useCurrentVisitors from '../hooks/use-current-visitors';
 
 export default function CurrentVisitors() {
   const currentVisitors = useCurrentVisitors();

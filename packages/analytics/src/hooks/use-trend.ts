@@ -1,15 +1,14 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 
-import { useAnalytics } from '../../components/Provider';
+import { useAnalytics } from '../components/Provider';
 import useDateFilter from './use-date-filter';
 
-export default function useKpiTotals() {
+export default function useTrend() {
   const { startDate, endDate } = useDateFilter();
   const { domain } = useAnalytics();
-
-  return trpcClient.analytics.kpiTotal.useQuery({
+  return trpcClient.analytics.trend.useQuery({
+    domain,
     dateFrom: startDate,
     dateTo: endDate,
-    domain,
   });
 }

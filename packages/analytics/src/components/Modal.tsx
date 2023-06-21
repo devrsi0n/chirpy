@@ -1,7 +1,7 @@
 import { Dialog } from '@headlessui/react';
 import { forwardRef, HTMLAttributes } from 'react';
 
-import { cx } from '../lib/utils';
+import { cx } from '../utils';
 
 const ModalTitle = forwardRef<
   HTMLHeadingElement,

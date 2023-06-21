@@ -2,9 +2,9 @@ import { TopLocationsSorting } from '@chirpy-dev/types/src/analytics/top-locatio
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useParams from '../../lib/hooks/use-params';
-import useTopLocations from '../../lib/hooks/use-top-locations';
-import { cx } from '../../lib/utils';
+import useParams from '../../hooks/use-params';
+import useTopLocations from '../../hooks/use-top-locations';
+import { cx } from '../../utils';
 import Widget from '../Widget';
 
 export default function TopLocationsWidget() {

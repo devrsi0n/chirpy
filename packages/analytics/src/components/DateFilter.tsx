@@ -2,8 +2,8 @@ import { cpDayjs } from '@chirpy-dev/utils';
 import { Popover } from '@headlessui/react';
 import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
 
-import useDateFilter from '../lib/hooks/use-date-filter';
-import { DateFilter as DateFilterType } from '../lib/types/date-filter';
+import useDateFilter from '../hooks/use-date-filter';
+import { DateFilter as DateFilterType } from '../types/date-filter';
 import { QuestionIcon } from './Icons';
 
 export default function DateFilter() {

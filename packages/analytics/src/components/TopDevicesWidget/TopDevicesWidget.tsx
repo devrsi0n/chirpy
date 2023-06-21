@@ -1,9 +1,9 @@
 import { DonutChart } from '@tremor/react';
 import { Fragment } from 'react';
 
-import useTopDevices from '../../lib/hooks/use-top-devices';
-import { formatNumber } from '../../lib/utils';
+import useTopDevices from '../../hooks/use-top-devices';
 import { tremorPieChartColors } from '../../styles/theme/tremor-colors';
+import { formatNumber } from '../../utils';
 import Widget from '../Widget';
 
 export default function TopDevicesWidget() {

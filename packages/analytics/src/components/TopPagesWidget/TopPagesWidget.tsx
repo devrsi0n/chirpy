@@ -2,9 +2,9 @@ import { TopPagesSorting } from '@chirpy-dev/types';
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useParams from '../../lib/hooks/use-params';
-import useTopPages from '../../lib/hooks/use-top-pages';
-import { cx, formatNumber } from '../../lib/utils';
+import useParams from '../../hooks/use-params';
+import useTopPages from '../../hooks/use-top-pages';
+import { cx, formatNumber } from '../../utils';
 import { useAnalytics } from '../Provider';
 import Widget from '../Widget';
 
@@ -20,7 +20,7 @@ export default function TopPagesWidget() {
       (data?.data ?? []).map((d) => ({
         name: d.pathname,
         value: d[sorting],
-        href: `https://${domain}${d.pathname}`,
+        href: `${domain}${d.pathname}`,
       })),
     [data?.data, domain, sorting],
   );

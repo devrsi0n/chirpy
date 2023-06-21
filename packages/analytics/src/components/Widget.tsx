@@ -2,8 +2,8 @@ import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { Card, Title } from '@tremor/react';
 import { ReactNode } from 'react';
 
-import { QueryStatus } from '../lib/types/api';
-import { cx } from '../lib/utils';
+import { QueryStatus } from '../types/api';
+import { cx } from '../utils';
 import Loader from './Loader';
 
 type WidgetProps = {

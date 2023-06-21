@@ -2,7 +2,7 @@ import { cpDayjs } from '@chirpy-dev/utils';
 import { BarChart } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useTrend from '../../lib/hooks/use-trend';
+import useTrend from '../../hooks/use-trend';
 import Widget from '../Widget';
 
 export default function TrendWidget() {

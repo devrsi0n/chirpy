@@ -1,8 +1,8 @@
 import { AreaChart } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useKpiTotals from '../../lib/hooks/use-kpi-totals';
-import useKpis from '../../lib/hooks/use-kpis';
+import useKpiTotals from '../../hooks/use-kpi-totals';
+import useKpis from '../../hooks/use-kpis';
 import Widget from '../Widget';
 import KPIsTabs from './KpisTabs';
 

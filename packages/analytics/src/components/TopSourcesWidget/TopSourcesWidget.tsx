@@ -1,8 +1,8 @@
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 
-import useTopSources from '../../lib/hooks/use-top-sources';
-import { formatNumber } from '../../lib/utils';
+import useTopSources from '../../hooks/use-top-sources';
+import { formatNumber } from '../../utils';
 import Widget from '../Widget';
 
 export default function TopSourcesWidget() {

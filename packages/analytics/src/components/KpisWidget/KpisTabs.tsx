@@ -1,6 +1,6 @@
 import { KpiTotals, KpiType } from '@chirpy-dev/types';
 
-import { KPI_OPTIONS } from '../../lib/constants/kpis';
+import { KPI_OPTIONS } from '../../constants/kpis';
 
 type KpisTabsProps = {
   value: KpiType;

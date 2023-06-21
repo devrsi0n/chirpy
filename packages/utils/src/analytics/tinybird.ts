@@ -111,5 +111,5 @@ export function querySQL<T>(sql: string): Promise<QuerySQL<T>> {
 }
 
 export function getTinybirdDomain(domain: string) {
-  return domain === 'localhost' ? `http://${domain}` : `https://${domain}`;
+  return domain === 'localhost' ? `http://${domain}:3000` : `https://${domain}`;
 }

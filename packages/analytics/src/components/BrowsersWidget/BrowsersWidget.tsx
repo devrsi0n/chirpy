@@ -1,9 +1,9 @@
 import { DonutChart } from '@tremor/react';
 import { Fragment } from 'react';
 
-import useBrowsers from '../../lib/hooks/use-top-browsers';
-import { formatNumber } from '../../lib/utils';
+import useBrowsers from '../../hooks/use-top-browsers';
 import { tremorPieChartColors } from '../../styles/theme/tremor-colors';
+import { formatNumber } from '../../utils';
 import Widget from '../Widget';
 
 export default function BrowsersWidget() {
