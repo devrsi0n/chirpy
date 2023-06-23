@@ -9,6 +9,7 @@
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@tiptap/core": "2.0.3",
     "@tiptap/react": "2.0.3",
+    "@tiptap/pm": "2.0.3",
     "@types/node": "16.11.45",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",

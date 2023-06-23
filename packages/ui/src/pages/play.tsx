@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { CommentWidget, SiteLayout, PageTitle } from '../blocks';
+import { CommentWidget, PageTitle, SiteLayout } from '../blocks';
 import { Alert } from '../components';
 
 export function PlayGround(): JSX.Element {
@@ -13,11 +13,7 @@ export function PlayGround(): JSX.Element {
           <Alert
             type="info"
             title="Feel free to play around"
-            content={
-              process.env.DOCKER
-                ? `We don't remove comment automatically`
-                : 'We remove stale comments every 24 hours automatically.'
-            }
+            content={'We remove stale comments every 24 hours automatically.'}
             onClickDismiss={() => setShowAlert(false)}
             hideDismissButton
           />

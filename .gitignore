@@ -19,5 +19,4 @@ storybook-static/
 .swc
 .tinyb
 
-docker-compose.yml
 config.yaml

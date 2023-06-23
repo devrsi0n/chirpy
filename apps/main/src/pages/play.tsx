@@ -11,11 +11,6 @@ type StaticProps = {
 export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
-  if (process.env.DOCKER) {
-    return {
-      props: {},
-    };
-  }
   const beforeDate = cpDayjs().subtract(1, 'day').toDate();
 
   const result = await prisma.comment.deleteMany({

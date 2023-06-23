@@ -8,10 +8,10 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 ## Developing
 
-Chirpy is built upon [Next.js](https://nextjs.org) and [Hasura](https://github.com/hasura/graphql-engine). To run this project locally, you'll need to install the following:
+Chirpy is built upon [Next.js](https://nextjs.org). To run this project locally, you'll need to install the following:
 
-- [Docker](https://docs.docker.com/get-docker) & Docker Compose
-- [nodejs@16+](https://nodejs.org) & [pnpm@7+](https://pnpm.io/)
+- [nodejs@16+](https://nodejs.org)
+- [pnpm@7+](https://pnpm.io/)
 
 ### Fork and clone
 
@@ -24,23 +24,11 @@ If you only want to make UI changes, you can skip the back-end setup and do:
 
 ```bash
 pnpm install
-# Copy .env-template to .env.local without any modification
+# Copy .env-template to .env.local and fill your own values
 cp .env-template .env.local
 # See your changes in Storybook
 cd packages/ui
 pnpm run dev
-```
-
-### Start the Hasura server
-
-Hasura is used as the data server. You can setup a local Hasura server quickly by running the following command:
-
-```bash
-pnpm install
-cd <project-root>/packages/docker-cli
-# Generate Hasura docker-compose file and .env.local for main app,
-# run the contianer and migrate database/metadata
-pnpm run g:dev
 ```
 
 ### Start the frontend app

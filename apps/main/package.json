@@ -5,7 +5,6 @@
   "scripts": {
     "analyze": "ANALYZE=true pnpm run build:local",
     "build": "next build",
-    "build:docker": "next build",
     "build:local": "dotenv -e .env.local -- next build",
     "debug": "NODE_OPTIONS='--inspect' next dev",
     "dev": "next dev",

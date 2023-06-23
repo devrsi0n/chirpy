@@ -1,8 +1,9 @@
 const cpTwConfig = require('@chirpy-dev/configs/tailwind.js');
 const { primary, gray, yellow, red, green } = cpTwConfig.theme.colors;
 
-/** @type {import('tailwindcss').Config} */
+// We need a seperated tailwind configs as tremor need tailwind original colors, which aren't available in the default config
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{ts,tsx}', './node_modules/@tremor/react/**/*.js'],
   // To avoid naming conflicts, this is an individual package
@@ -62,7 +63,7 @@ module.exports = {
           background: {
             muted: '#131A2B', // custom
             subtle: '#1f2937', // gray-800
-            DEFAULT: gray[0],
+            DEFAULT: '#111827',
             emphasis: '#d1d5db', // gray-300
           },
           border: {

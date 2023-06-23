@@ -1,10 +1,10 @@
 import Document, {
-  Html,
-  Head,
-  Main,
-  NextScript,
   DocumentContext,
   DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
 } from 'next/document';
 
 export default class MyDocument extends Document {
@@ -39,9 +39,6 @@ and open-source Disqus alternate."
             as="font"
             crossOrigin="anonymous"
           />
-          {/* We use it to load public environment vairables because we need dynamic values for docker */}
-          {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-          {process.env.DOCKER && <script src="/__env.js" />}
           <meta charSet="utf-8" />
         </Head>
         <body>
