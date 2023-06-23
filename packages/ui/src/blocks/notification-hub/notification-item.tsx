@@ -1,3 +1,4 @@
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import clsx from 'clsx';
 import * as React from 'react';
 
@@ -13,7 +14,6 @@ import { Menu } from '../../components/menu';
 import { Text, TextProps } from '../../components/text';
 import { useIsWidget } from '../../hooks/use-is-widget';
 import { cpDayjs } from '../../utilities/date';
-import { RouterOutputs } from '../../utilities/trpc-client';
 
 export type INotificationItemProps = {
   index: number;
@@ -59,7 +59,7 @@ export function NotificationItem({
       >
         <BaseButton
           type="button"
-          className="!absolute top-1.5 right-1.5 inline-block h-fit w-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
+          className="!absolute right-1.5 top-1.5 inline-block h-fit w-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
           onClick={(e) => {
             onClickDelete(message.id);
             e.stopPropagation();

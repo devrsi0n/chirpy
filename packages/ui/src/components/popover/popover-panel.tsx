@@ -56,7 +56,7 @@ export const PopoverPanel = React.forwardRef(function PopoverPanel(
         <>
           <div
             className={clsx(
-              `relative flex space-x-4 rounded-lg py-3 px-5`,
+              `relative flex space-x-4 rounded-lg px-5 py-3`,
               panelBg,
               panelBorder,
               styles?.panel,
@@ -77,7 +77,7 @@ export const PopoverPanel = React.forwardRef(function PopoverPanel(
             className={clsx(
               `absolute h-4 w-4 rotate-45`,
               panelBg,
-              `border-t-0 border-l-0`,
+              `border-l-0 border-t-0`,
             )}
             style={getBeakStyles(placement, buttonRect?.width)}
           />

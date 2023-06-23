@@ -5,11 +5,11 @@ const isProd = process.env.NODE_ENV === 'production';
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
 });
-const { withPlausibleProxy } = require('next-plausible');
+
 const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
 const { withAxiom } = require('next-axiom');
 
-const plugins = [withBundleAnalyzer, withPlausibleProxy(), withAxiom];
+const plugins = [withBundleAnalyzer, withAxiom];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -23,6 +23,7 @@ const nextConfig = {
     '@chirpy-dev/utils',
     '@chirpy-dev/types',
     '@chirpy-dev/trpc',
+    '@chirpy-dev/analytics',
   ],
   experimental: {
     scrollRestoration: true,
@@ -55,40 +56,46 @@ const nextConfig = {
           },
         ],
       },
-      ...(isProd
-        ? [
-            {
-              source: '/_next/static/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-            {
-              source: '/fonts/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-            {
-              source: '/videos/(.*)',
-              locale: false,
-              headers: [
-                {
-                  key: 'Cache-Control',
-                  value: 'public, max-age=31536000, immutable',
-                },
-              ],
-            },
-          ]
-        : []),
+      {
+        source: '/_next/static/(.*)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/(.*)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/videos/(.*)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/css/(.*)',
+        locale: false,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=60, must-revalidate',
+          },
+        ],
+      },
     ];
   },
   webpack: function (config, options) {

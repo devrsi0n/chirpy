@@ -86,7 +86,7 @@ export function ColorPicker({
         </Text>
       </div>
       <input
-        className={`hover:cursor-pointer [&::-webkit-color-swatch]:rounded-full [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch-wrapper]:p-0 [&::-moz-color-swatch-wrapper]:p-0 ${pickerButtonStyle}`}
+        className={`hover:cursor-pointer [&::-moz-color-swatch-wrapper]:p-0 [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full ${pickerButtonStyle}`}
         type="color"
         name="colorPicker"
         value={value}

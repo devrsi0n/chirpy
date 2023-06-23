@@ -20,6 +20,7 @@ export function Card<E extends React.ElementType>({
   ...restProps
 }: CustomComponentProps<E>): JSX.Element {
   return (
+    // @ts-expect-error
     <Box
       className={clsx(
         bluredBg,

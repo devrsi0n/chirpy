@@ -27,7 +27,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
   return ReactDOM.createPortal(
     <ul
       className={clsx(
-        `fixed right-4 bottom-8 flex flex-col items-end space-y-2`,
+        `fixed bottom-8 right-4 flex flex-col items-end space-y-2`,
       )}
     >
       <AnimatePresence>

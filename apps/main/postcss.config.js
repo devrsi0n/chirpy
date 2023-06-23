@@ -1,1 +1,1 @@
-module.exports = require('configs').postcssConfig;
+module.exports = require('@chirpy-dev/configs').postcssConfig;

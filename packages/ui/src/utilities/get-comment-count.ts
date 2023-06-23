@@ -1,4 +1,4 @@
-import { RouterOutputs } from './trpc-client';
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 
 export function getCommentCount(
   comments: RouterOutputs['comment']['forest'],

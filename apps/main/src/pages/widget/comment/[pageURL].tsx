@@ -1,11 +1,11 @@
 import { prisma, ssg } from '@chirpy-dev/trpc';
 import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
 import {
-  GetStaticProps,
-  InferGetStaticPropsType,
-  GetStaticPropsResult,
-  GetStaticPropsContext,
   GetStaticPaths,
+  GetStaticProps,
+  GetStaticPropsContext,
+  GetStaticPropsResult,
+  InferGetStaticPropsType,
 } from 'next';
 import { log } from 'next-axiom';
 import superjson from 'superjson';
@@ -23,12 +23,6 @@ type PathParams = {
 
 // Get all project then prerender all their page comments
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  if (process.env.DOCKER) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
   const freshPages = await prisma.page.findMany({
     orderBy: { createdAt: 'desc' },
     take: 50,

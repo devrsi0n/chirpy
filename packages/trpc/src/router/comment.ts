@@ -1,10 +1,47 @@
+import { JSONContent } from '@chirpy-dev/utils';
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
-import { router, publicProcedure, protectedProcedure } from '../trpc-server';
+import { protectedProcedure, publicProcedure, router } from '../trpc-server';
 import { COMMON_COMMENT_SELECTOR } from './utils/selector';
-import { rteContentValidator } from './utils/validator';
+
+/**
+ * type of
+ * ```ts
+ * export declare type JSONContent = {
+ *  type?: string;
+ *   attrs?: Record<string, any>;
+ *   content?: JSONContent[];
+ *   marks?: {
+ *       type: string;
+ *       attrs?: Record<string, any>;
+ *       [key: string]: any;
+ *   }[];
+ *   text?: string;
+ *   [key: string]: any;
+ * };
+ * ```
+ */
+export const RTE_CONTENT_INPUT: z.ZodType<JSONContent> = z.lazy(
+  () =>
+    z
+      .object({
+        type: z.string().optional(),
+        attrs: z.record(z.any()).optional(),
+        content: z.array(RTE_CONTENT_INPUT).optional(),
+        marks: z
+          .array(
+            z.object({
+              type: z.string(),
+              attrs: z.record(z.any()).optional(),
+            }),
+          )
+          .optional(),
+        text: z.string().optional(),
+      })
+      .passthrough(), // Only check a sub set of fields, don't strip unknown fields
+);
 
 export const commentRouter = router({
   forest: publicProcedure
@@ -85,7 +122,7 @@ export const commentRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        content: rteContentValidator,
+        content: RTE_CONTENT_INPUT,
         pageId: z.string(),
         parentId: z.string().optional(),
       }),

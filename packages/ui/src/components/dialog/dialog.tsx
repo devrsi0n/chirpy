@@ -174,7 +174,7 @@ function DialogFooter({
     <div
       {...restProps}
       className={clsx(
-        'flex flex-col space-y-2 space-x-0 rounded-b-xl xs:flex-row xs:justify-end xs:space-y-0 xs:space-x-4',
+        'flex flex-col space-x-0 space-y-2 rounded-b-xl xs:flex-row xs:justify-end xs:space-x-4 xs:space-y-0',
         cardBg,
         SIZE_STYLES[size].footer,
         className,

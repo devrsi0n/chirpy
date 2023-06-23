@@ -1,3 +1,4 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { Badge } from '../../components/badge';
@@ -7,7 +8,6 @@ import { Menu } from '../../components/menu';
 import { Spinner } from '../../components/spinner';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
-import { trpcClient } from '../../utilities/trpc-client';
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
@@ -37,7 +37,7 @@ export function NotificationHub(): JSX.Element {
         >
           <IconBell size={22} />
           {hasUnreadNotifications && (
-            <Badge className="absolute top-1 right-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
+            <Badge className="absolute right-1 top-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
         <Menu.Items>
@@ -72,7 +72,7 @@ export function NotificationHub(): JSX.Element {
           ) : (
             <Text
               variant="secondary"
-              className="mx-5 mb-2 w-max rounded border border-dashed py-2 px-4 pb-2"
+              className="mx-5 mb-2 w-max rounded border border-dashed px-4 py-2 pb-2"
             >
               No messages yet
             </Text>

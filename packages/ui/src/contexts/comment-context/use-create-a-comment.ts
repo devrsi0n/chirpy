@@ -1,10 +1,10 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { RTEValue } from '@chirpy-dev/types';
 import { JSONContent } from '@chirpy-dev/utils';
 import { JsonArray } from 'type-fest';
 
 import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
-import { trpcClient } from '../../utilities/trpc-client';
 import { useCurrentUser } from '../current-user-context';
 import { RefetchComment } from './comment-context';
 

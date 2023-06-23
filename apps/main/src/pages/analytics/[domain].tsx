@@ -10,12 +10,6 @@ type PathParams = {
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  if (process.env.DOCKER) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
   const paths = await getRecentProjectStaticPathsByDomain(50);
 
   return { paths, fallback: 'blocking' };

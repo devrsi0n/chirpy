@@ -1,4 +1,4 @@
-import { FEEDBACK_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import { Button, Heading, Link, SectionHeader, Text } from '../../components';
@@ -24,7 +24,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
             {icon}
           </FAQ>
         ))}
-        <div className="col-span-full mt-8 flex flex-col rounded-lg bg-gray-0 px-5 py-8 lg:flex-row lg:items-start lg:justify-between lg:p-8">
+        <div className="col-span-full mt-8 flex flex-col rounded-lg bg-gray-100 px-5 py-8 dark:bg-gray-300 lg:flex-row lg:items-start lg:justify-between lg:p-8">
           <div className="sm:0 mb-6">
             <Heading as="h5" className="mb-2 font-semibold">
               Still have questions?
@@ -34,7 +34,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
               className="max-w-xs md:max-w-full"
             >{`Can't find the answer you're looking for? Please chat to our friendly team.`}</Text>
           </div>
-          <Link variant="plain" href={FEEDBACK_LINK} target="_blank">
+          <Link variant="plain" href={SUPPORT_LINK} target="_blank">
             <Button variant="solid" color="primary">
               Get in touch
             </Button>

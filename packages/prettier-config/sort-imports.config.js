@@ -5,6 +5,13 @@ const commonConfig = require('./common.config');
 module.exports = {
   ...commonConfig,
   plugins: [require('@ianvs/prettier-plugin-sort-imports')],
-  importOrder: ['^\\$/(.*)$', '^[../]', '^[./]'],
-  importOrderSeparation: true,
+  importOrder: [
+    '<BUILTIN_MODULES>',
+    '',
+    '<THIRD_PARTY_MODULES>',
+    '',
+    '^\\$/(.*)$',
+    '^[../]',
+    '^[./]',
+  ],
 };

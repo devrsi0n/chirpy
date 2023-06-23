@@ -1,7 +1,7 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { translateHslColor } from '../../contexts/theme-context/utilities';
-import { trpcClient } from '../../utilities/trpc-client';
 
 export function useRevalidateProjectPages() {
   const { mutateAsync: revalidateWidget } =

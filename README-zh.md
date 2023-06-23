@@ -6,7 +6,7 @@
 
 <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
 
-👋 [Chirpy](https://chirpy.dev) 是一个注重隐私保护和定制化的评论系统, 支持 docker 部署。在这里体验： [Playground](https://chirpy.dev/play).
+👋 [Chirpy](https://chirpy.dev) 是一个注重隐私保护和定制化的评论系统, 支持 vercel 部署。在这里体验： [Playground](https://chirpy.dev/play).
 
 <details>
     <summary>更多截图</summary>

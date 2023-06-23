@@ -94,7 +94,7 @@ export function Select<T extends string | number = string>(
                 >
                   <Listbox.Options
                     static
-                    className="max-h-60 overflow-auto overscroll-contain rounded border border-gray-400 py-1 px-0.5 text-base focus-visible:outline-none sm:text-sm"
+                    className="max-h-60 overflow-auto overscroll-contain rounded border border-gray-400 px-0.5 py-1 text-base focus-visible:outline-none sm:text-sm"
                   >
                     {children}
                   </Listbox.Options>

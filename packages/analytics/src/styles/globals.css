@@ -1,0 +1,45 @@
+/* Already have these styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset tremor font-family */
+:root {
+  --tr-font-family: 'Inter var' !important;
+}
+
+.arrow {
+  clip-path: polygon(50% 50%, 0 0, 100% 0);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+button[role='tab']:not([data-state='active']) > .arrow {
+  display: none;
+}
+
+.masonry-with-flex {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 1000px;
+}
+
+.ant-picker-active-bar {
+  background: transparent !important;
+}
+
+.ant-picker-range-separator {
+  padding-left: 0px !important;
+  padding-right: 16px !important;
+}
+
+.ant-picker-separator {
+  display: inline-flex;
+  color: #cbccd1;
+}
+
+.ant-picker-input > input {
+  outline: none;
+  max-width: 100px;
+}

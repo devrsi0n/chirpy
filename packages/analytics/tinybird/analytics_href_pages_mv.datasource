@@ -1,0 +1,15 @@
+# Data Source created from Pipe 'analytics_href_pages'
+
+SCHEMA >
+    `date` Date,
+    `href` String,
+    `device` String,
+    `browser` String,
+    `location` String,
+    `pathname` String,
+    `visits` AggregateFunction(uniq, String),
+    `hits` AggregateFunction(count)
+
+ENGINE "AggregatingMergeTree"
+ENGINE_PARTITION_KEY "toYYYYMM(date)"
+ENGINE_SORTING_KEY "date, href, device, browser, location, pathname"

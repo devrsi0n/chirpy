@@ -1,3 +1,4 @@
+import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
 import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
@@ -12,7 +13,6 @@ import { useToast } from '../../components/toast';
 import { useWidgetTheme } from '../../contexts/theme-context';
 import { logger } from '../../utilities/logger';
 import { mergeDeep } from '../../utilities/object';
-import { RouterOutputs, trpcClient } from '../../utilities/trpc-client';
 import { ColorModeSelect } from '../color-mode-select';
 import {
   CommentWidgetPreview,

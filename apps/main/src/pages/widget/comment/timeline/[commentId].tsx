@@ -2,9 +2,9 @@ import { prisma, ssg } from '@chirpy-dev/trpc';
 import { Theme } from '@chirpy-dev/types';
 import { CommentTimelineWidgetProps } from '@chirpy-dev/ui';
 import {
+  GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
-  GetStaticPaths,
   GetStaticPropsResult,
 } from 'next';
 import { log } from 'next-axiom';
@@ -15,12 +15,6 @@ type PathParams = {
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
-  if (process.env.DOCKER) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
   const comments = await prisma.comment.findMany({
     orderBy: { createdAt: 'desc' },
     take: 50,

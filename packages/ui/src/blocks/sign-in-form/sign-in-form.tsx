@@ -71,7 +71,7 @@ export function SignInForm({
   return (
     <div className="full-bleed flex h-full flex-row">
       <div className="flex h-full flex-1 flex-col items-center ">
-        <div className="mt-8 ml-0 self-start justify-self-end sm:ml-8">
+        <div className="ml-0 mt-8 self-start justify-self-end sm:ml-8">
           <Logo size="lg" hideSpacing />
         </div>
         <div className="flex h-full w-full flex-col justify-center space-y-8 py-7 sm:mx-2 sm:w-64 md:w-96">

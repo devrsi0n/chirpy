@@ -1,9 +1,8 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { Nullable } from '@chirpy-dev/types';
 import { asyncNoop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
 import * as React from 'react';
-
-import { trpcClient } from '../../utilities/trpc-client';
 
 export type UserData = Nullable<Session['user']>;
 

@@ -1,3 +1,4 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps } from '@chirpy-dev/types';
 import * as React from 'react';
 
@@ -9,7 +10,6 @@ import {
 } from '../../blocks';
 import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
-import { trpcClient } from '../../utilities/trpc-client';
 import { useRefetchInterval } from './use-refetch-interval';
 
 export type CommentTimelineWidgetProps = CommonWidgetProps & {

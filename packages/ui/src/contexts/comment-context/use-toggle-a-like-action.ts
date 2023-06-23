@@ -1,8 +1,9 @@
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
+
 import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
 import { logger } from '../../utilities/logger';
-import { trpcClient } from '../../utilities/trpc-client';
 import { RefetchComment } from './comment-context';
 
 export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;

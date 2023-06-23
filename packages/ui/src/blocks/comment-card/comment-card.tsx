@@ -113,7 +113,7 @@ export function CommentCard({
       variants={SHAKE_VARIANTS}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
-        `flex flex-row items-start space-x-3 rounded border border-gray-500 pt-4 pb-2 pl-4 shadow-xs`,
+        `flex flex-row items-start space-x-3 rounded border border-gray-500 pb-2 pl-4 pt-4 shadow-xs`,
       )}
       id={isENVDev ? commentId : undefined}
     >
@@ -185,7 +185,7 @@ export function CommentCard({
             </Button>
           </Dialog.Footer>
         </Dialog>
-        <div className="mt-1 mb-1.5">
+        <div className="mb-1.5 mt-1">
           <RichTextEditor initialValue={content} readOnly />
         </div>
         <div className="flex -translate-x-2 flex-row items-center space-x-6">

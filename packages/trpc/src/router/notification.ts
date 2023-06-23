@@ -1,14 +1,22 @@
+import { Prisma } from '@prisma/client';
 import { log } from 'next-axiom';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 import { handleCommentEvent } from '../mutation-event/comment-handler';
 import { handleLikeEvent } from '../mutation-event/like-handler';
-import { router, protectedProcedure } from '../trpc-server';
-import {
-  notificationSubscriptionValidator,
-  rteContentValidator,
-} from './utils/validator';
+import { protectedProcedure, router } from '../trpc-server';
+import { RTE_CONTENT_INPUT } from './comment';
+
+export const NOTIFICATION_SUBSCRIPTION_INPUT = z
+  .object({
+    endpoint: z.string().url(),
+  })
+  .passthrough();
+
+export type NOTIFICATION_SUBSCRIPTION_INPUT = z.infer<
+  typeof NOTIFICATION_SUBSCRIPTION_INPUT
+>;
 
 export const notificationRouter = router({
   messages: protectedProcedure.query(async ({ ctx }) => {
@@ -76,14 +84,14 @@ export const notificationRouter = router({
   register: protectedProcedure
     .input(
       z.object({
-        subscription: notificationSubscriptionValidator,
+        subscription: NOTIFICATION_SUBSCRIPTION_INPUT,
       }),
     )
     .mutation(async ({ input, ctx }) => {
       const result = await prisma.notificationSubscription.findFirst({
         where: {
           subscription: {
-            equals: input.subscription,
+            equals: input.subscription as Prisma.JsonObject,
           },
           userId: ctx.session.user.id,
         },
@@ -95,7 +103,7 @@ export const notificationRouter = router({
       }
       await prisma.notificationSubscription.create({
         data: {
-          subscription: input.subscription,
+          subscription: input.subscription as Prisma.JsonObject,
           userId: ctx.session.user.id,
         },
         select: {
@@ -112,7 +120,7 @@ export const notificationRouter = router({
             id: z.string(),
             userId: z.string(),
             parentId: z.string().nullable(),
-            content: rteContentValidator,
+            content: RTE_CONTENT_INPUT,
           })
           .nullish(),
         like: z

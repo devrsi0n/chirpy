@@ -3,13 +3,11 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
-    "build:docker:local": "docker system prune -af && dotenv -e ./apps/main/.env.local docker compose build",
     "changeset": "changeset",
-    "debug": "docker run -it --entrypoint=/bin/bash chirpy-chirpy-main -i",
     "lint": "eslint --fix ./",
     "release": "turbo run build && changeset publish",
-    "start:docker:local": "dotenv -e ./apps/main/.env.local docker compose up",
     "test": "turbo run test --filter=@chirpy-dev/main-app...",
     "version-packages": "changeset version",
     "prepare": "husky install"
@@ -19,14 +17,14 @@
     "@changesets/cli": "2.25.2",
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/prettier-config": "workspace:*",
-    "eslint": "8.39.0",
-    "husky": "8.0.2",
-    "lint-staged": "13.0.4",
-    "next": "13.3.4",
+    "eslint": "8.43.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.2",
+    "next": "13.4.7",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "turbo": "1.6.3"
+    "turbo": "1.10.5"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -44,16 +42,18 @@
         "react-dom": "18",
         "glob": "8",
         "core-js": "3",
+        "tslib": "2",
+        "@babel/runtime": "7",
         "@tensorflow/tfjs-core": "3",
-        "@tensorflow/tfjs-converter": "3"
+        "@tensorflow/tfjs-converter": "3",
+        "@headlessui/react": "1"
       }
     }
   },
   "prettier": "@chirpy-dev/prettier-config",
   "renovate": {
     "extends": [
-      "config:base",
-      "docker:disable"
+      "config:base"
     ],
     "prConcurrentLimit": 5,
     "packageRules": [

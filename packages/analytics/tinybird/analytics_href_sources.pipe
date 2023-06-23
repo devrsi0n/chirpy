@@ -1,0 +1,36 @@
+DESCRIPTION >
+	Duplicated of analytics_sources, support custom domain
+
+
+TOKEN "analytics_href_sources_endpoint_read_9063" READ
+
+NODE endpoint
+DESCRIPTION >
+    Aggregate by referral and calculate session and hits
+
+SQL >
+
+    %
+    SELECT
+        toDate(timestamp) AS date,
+        device,
+        browser,
+        location,
+        referrer,
+        uniqState(session_id) AS visits,
+        countState() AS hits
+    FROM analytics_hits
+    WHERE
+        domainWithoutWWW(referrer) != domainWithoutWWW(
+            {{
+                String(
+                    domain,
+                    'http://localhost:3000/',
+                    description="Domain to filter, like https://chirpy.dev",
+                    required=True,
+                )
+            }}
+        )
+    GROUP BY date, device, browser, location, referrer
+
+

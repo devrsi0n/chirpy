@@ -1,3 +1,4 @@
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
 import * as React from 'react';
@@ -6,7 +7,6 @@ import { BaseButton, IconArrowUp } from '../../components';
 import { Heading } from '../../components/heading';
 import { useCommentContext } from '../../contexts/comment-context';
 import { getCommentCount } from '../../utilities/get-comment-count';
-import { RouterOutputs } from '../../utilities/trpc-client';
 import { CommentTree } from '../comment-tree';
 import { NotificationHub } from '../notification-hub';
 import { RichTextEditor } from '../rich-text-editor';
@@ -49,10 +49,10 @@ export function CommentForest({
         </div>
         <div className="flex flex-row items-center justify-end space-x-1">
           {orderedComments.length > 1 && (
-            <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-0">
+            <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-100 dark:ring-gray-300">
               <BaseButton
                 aria-label="Reorder comments"
-                className="m-1 rounded border border-gray-700 bg-gray-0 p-0.5 text-gray-1200 shadow hover:bg-gray-200"
+                className="m-1 rounded border border-gray-700 bg-gray-100 p-0.5 text-gray-1200 shadow hover:bg-gray-200 dark:bg-gray-300"
                 onClick={() =>
                   setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'))
                 }

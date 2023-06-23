@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
+  parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
@@ -20,6 +21,7 @@ module.exports = {
     'no-console': 'off',
 
     '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -58,6 +60,10 @@ module.exports = {
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-json-parse-buffer': 'off',
     'unicorn/prefer-top-level-await': 'off',
+    'unicorn/consistent-destructuring': 'off',
+    'unicorn/prefer-code-point': 'off',
+    'unicorn/prefer-spread': 'off',
+    'unicorn/prefer-string-replace-all': 'off',
 
     'jest/expect-expect': 'off',
   },
