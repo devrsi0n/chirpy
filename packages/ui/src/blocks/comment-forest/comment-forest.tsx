@@ -49,10 +49,10 @@ export function CommentForest({
         </div>
         <div className="flex flex-row items-center justify-end space-x-1">
           {orderedComments.length > 1 && (
-            <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-0">
+            <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-100 dark:ring-gray-300">
               <BaseButton
                 aria-label="Reorder comments"
-                className="m-1 rounded border border-gray-700 bg-gray-0 p-0.5 text-gray-1200 shadow hover:bg-gray-200"
+                className="m-1 rounded border border-gray-700 bg-gray-100 p-0.5 text-gray-1200 shadow hover:bg-gray-200 dark:bg-gray-300"
                 onClick={() =>
                   setOrderBy((prev) => (prev === 'asc' ? 'desc' : 'asc'))
                 }

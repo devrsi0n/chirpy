@@ -22,7 +22,7 @@ export function HomeCommentWidgetPreview({
         </p>
         <IconArrow />
       </div>
-      <div className="w-full rounded-lg border border-gray-300 bg-gray-0 p-4">
+      <div className="w-full rounded-lg border border-gray-300 bg-gray-100 p-4 dark:bg-gray-300">
         <CommentWidgetPreview
           rtePlaceholder="Comment widget (Markdown supported)"
           buildDate={buildDate}

@@ -38,7 +38,7 @@ export default function KPIsWidget() {
           data={chartData}
           index="date"
           categories={[kpiOption.label]}
-          colors={['blue']}
+          colors={['violet']}
           valueFormatter={kpiOption.formatter}
           showLegend={false}
         />

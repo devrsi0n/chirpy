@@ -25,7 +25,7 @@ function lazyLoadWidget<P = object>(
 }
 
 const KPIsWidget = lazyLoadWidget(() => import('./KpisWidget'), 80);
-const BrowsersWidget = lazyLoadWidget(() => import('./BrowsersWidget'));
+const BrowsersWidget = lazyLoadWidget(() => import('./TopBrowsersWidget'));
 const TopPagesWidget = lazyLoadWidget(() => import('./TopPagesWidget'));
 const TrendWidget = lazyLoadWidget(() => import('./TrendWidget'), 40);
 const TopDevicesWidget = lazyLoadWidget(() => import('./TopDevicesWidget'));

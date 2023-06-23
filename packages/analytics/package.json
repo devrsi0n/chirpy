@@ -6,6 +6,7 @@
   "types": "./src/index.ts",
   "sideEffects": false,
   "scripts": {
+    "dev": "tailwindcss -i ./src/styles/globals.css -o ../../apps/main/public/css/analytics.css -m --watch",
     "build": "NODE_ENV=production tailwindcss -i ./src/styles/globals.css -o ../../apps/main/public/css/analytics.css -m"
   },
   "dependencies": {
@@ -13,13 +14,15 @@
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
     "@headlessui/react": "1.7.15",
-    "@tremor/react": "3.2.2",
-    "next": "13.4.6",
+    "@tremor/react": "3.2.3",
+    "clsx": "1.2.1",
+    "next": "13.4.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-intersection-observer": "9.4.0"
   },
   "devDependencies": {
+    "@chirpy-dev/configs": "workspace:*",
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@headlessui/tailwindcss": "0.1.3",

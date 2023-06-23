@@ -25,10 +25,10 @@ export default function BrowsersWidget() {
           />
           <div className="justify-self-end">
             <div className="grid grid-cols-2 gap-4 gap-y-1">
-              <div className="truncate text-center text-xs font-medium uppercase tracking-widest">
+              <div className="truncate text-center text-xs font-semibold uppercase tracking-widest">
                 Browser
               </div>
-              <div className="truncate text-right text-xs font-medium uppercase tracking-widest">
+              <div className="truncate text-right text-xs font-semibold uppercase tracking-widest">
                 Visitors
               </div>
               {(data?.data ?? []).map(({ browser, visits }, index) => (

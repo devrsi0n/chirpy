@@ -1,2 +1,2 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = require('configs').tailwindConfig;
+module.exports = require('@chirpy-dev/configs').tailwindConfig;

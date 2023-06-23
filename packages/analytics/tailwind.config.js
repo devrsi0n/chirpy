@@ -1,5 +1,5 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
-const { colors, typography } = require('./src/styles/theme');
+const cpTwConfig = require('@chirpy-dev/configs/tailwind.js');
+const { primary, gray, yellow, red, green } = cpTwConfig.theme.colors;
 
 /** @type {import('tailwindcss').Config} */
 
@@ -11,20 +11,22 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: [typography.fontFamily, ...fontFamily.sans],
+        ...cpTwConfig.theme.extend.fontFamily,
       },
       colors: {
-        transparent: 'transparent',
-        current: 'currentColor',
-        ...colors,
+        primary,
+        gray,
+        yellow,
+        red,
+        green,
         // light mode
         tremor: {
           brand: {
-            faint: '#eff6ff', // blue-50
-            muted: '#bfdbfe', // blue-200
-            subtle: '#60a5fa', // blue-400
-            DEFAULT: '#3b82f6', // blue-500
-            emphasis: '#1d4ed8', // blue-700
+            faint: primary[200], // blue-50
+            muted: primary[400], // blue-200
+            subtle: primary[600], // blue-400
+            DEFAULT: primary[700], // blue-500
+            emphasis: primary[900], // blue-700
             inverted: '#ffffff', // white
           },
           background: {
@@ -50,17 +52,17 @@ module.exports = {
         // dark mode
         'dark-tremor': {
           brand: {
-            faint: '#0B1229', // custom
-            muted: '#172554', // blue-950
-            subtle: '#1e40af', // blue-800
-            DEFAULT: '#3b82f6', // blue-500
-            emphasis: '#60a5fa', // blue-400
-            inverted: '#030712', // gray-950
+            faint: primary[200],
+            muted: primary[400],
+            subtle: primary[600],
+            DEFAULT: primary[700],
+            emphasis: primary[900],
+            inverted: gray[1200],
           },
           background: {
             muted: '#131A2B', // custom
             subtle: '#1f2937', // gray-800
-            DEFAULT: '#111827', // gray-900
+            DEFAULT: gray[0],
             emphasis: '#d1d5db', // gray-300
           },
           border: {
@@ -70,10 +72,10 @@ module.exports = {
             DEFAULT: '#1f2937', // gray-800
           },
           content: {
-            subtle: '#4b5563', // gray-600
-            DEFAULT: '#6b7280', // gray-600
-            emphasis: '#e5e7eb', // gray-200
-            strong: '#f9fafb', // gray-50
+            subtle: gray[800], // gray-600
+            DEFAULT: gray[1000], // gray-600
+            emphasis: gray[1100], // gray-200
+            strong: gray[1200], // gray-50
             inverted: '#000000', // black
           },
         },

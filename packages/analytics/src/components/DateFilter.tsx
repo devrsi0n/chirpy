@@ -14,11 +14,11 @@ export default function DateFilter() {
     <div className="flex items-center gap-4">
       <Popover className="relative h-4">
         <Popover.Button>
-          <QuestionIcon className="text-secondaryLight" />
+          <QuestionIcon className="text-gray-1100" />
           <div className="sr-only">What is the time zone used?</div>
         </Popover.Button>
 
-        <Popover.Panel className="absolute -right-10 bottom-6 z-[2] w-24 rounded bg-gray-0 px-2 py-1 text-xs font-light text-gray-1200 shadow-sm">
+        <Popover.Panel className="absolute -right-10 bottom-6 z-[2] w-24 rounded bg-gray-100 px-2 py-1 text-xs font-light text-gray-1200 shadow-sm dark:bg-gray-300">
           UTC timezone
         </Popover.Panel>
       </Popover>

@@ -1,5 +1,5 @@
 {
-  "name": "configs",
+  "name": "@chirpy-dev/configs",
   "version": "0.0.1",
   "license": "AGPL-3.0-or-later",
   "main": "./index.js",
@@ -11,7 +11,7 @@
     "color-convert": "2.0.1",
     "postcss": "8.4.24",
     "postcss-flexbugs-fixes": "5.0.2",
-    "postcss-preset-env": "8.5.0",
+    "postcss-preset-env": "8.5.1",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.3"
   },

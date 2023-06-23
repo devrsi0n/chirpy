@@ -24,7 +24,7 @@ export function FAQs({ id }: IFAQsProps): JSX.Element {
             {icon}
           </FAQ>
         ))}
-        <div className="col-span-full mt-8 flex flex-col rounded-lg bg-gray-0 px-5 py-8 lg:flex-row lg:items-start lg:justify-between lg:p-8">
+        <div className="col-span-full mt-8 flex flex-col rounded-lg bg-gray-100 px-5 py-8 dark:bg-gray-300 lg:flex-row lg:items-start lg:justify-between lg:p-8">
           <div className="sm:0 mb-6">
             <Heading as="h5" className="mb-2 font-semibold">
               Still have questions?

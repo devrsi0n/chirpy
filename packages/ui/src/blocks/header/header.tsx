@@ -18,7 +18,7 @@ export function Header(): JSX.Element {
         className={clsx(
           'relative',
           // Can't use the normal backdrop-filter here as it'll cause nested blur elements not working in chrome.
-          'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-0 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 before:dark:bg-opacity-70',
+          'before:z-index-[-1] before:absolute before:inset-0 before:bg-gray-100 before:bg-opacity-75 before:backdrop-blur-xl before:backdrop-saturate-150 dark:before:bg-gray-300 before:dark:bg-opacity-70',
         )}
       >
         <section className="mx-auto flex max-w-7xl flex-row items-center justify-between px-2 py-3 shadow-xs transition duration-150 sm:px-6 lg:px-8">

@@ -1,8 +1,8 @@
+const twColors = require('tailwindcss/colors');
 const colors = {
-  current: 'currentColor',
-  primary: '#0066FF',
-  primaryDark: '#0146AE',
-  primaryLight: '#e5f0ff',
+  primary: twColors.violet[500],
+  primaryDark: twColors.violet[700],
+  primaryLight: twColors.violet[200],
   secondary: '#25283D',
   secondaryLight: '#A5A7B4',
   success: '#1FCC83',

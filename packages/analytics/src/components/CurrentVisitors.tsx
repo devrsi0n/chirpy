@@ -4,7 +4,7 @@ export default function CurrentVisitors() {
   const currentVisitors = useCurrentVisitors();
   return (
     <div className="flex items-center gap-2">
-      <span className="bg-success h-2 w-2 rounded-full" />
+      <span className="h-2 w-2 rounded-full bg-green-700" />
       <p className="truncate text-gray-1200">{`${currentVisitors} current visitor${
         currentVisitors === 1 ? '' : 's'
       }`}</p>

@@ -6,7 +6,8 @@
   "sideEffects": false,
   "types": "./src/index.ts",
   "dependencies": {
-    "dayjs": "1.11.6"
+    "@tiptap/pm": "2.0.3",
+    "dayjs": "1.11.8"
   },
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",

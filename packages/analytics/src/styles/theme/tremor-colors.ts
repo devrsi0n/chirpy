@@ -27,7 +27,7 @@ const tremorColors: Record<Color, string> = {
 };
 
 export const tremorPieChartColors: [Color, string][] = [
-  ['blue', tremorColors.blue],
+  ['violet', tremorColors.violet],
   ['sky', tremorColors.sky],
   ['cyan', tremorColors.cyan],
   ['teal', tremorColors.teal],

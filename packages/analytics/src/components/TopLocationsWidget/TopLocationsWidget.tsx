@@ -27,7 +27,7 @@ export default function TopLocationsWidget() {
       <Widget.Title>Top Locations</Widget.Title>
       <Widget.Content status={status} noData={!data?.data?.length}>
         <div className="grid grid-cols-5 gap-x-4 gap-y-2">
-          <div className="col-span-3 h-5 text-xs font-semibold uppercase tracking-widest text-gray-500">
+          <div className="col-span-3 h-5 text-xs font-semibold uppercase tracking-widest text-gray-1100">
             Country
           </div>
           <div
