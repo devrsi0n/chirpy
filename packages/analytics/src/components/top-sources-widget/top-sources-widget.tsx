@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import useTopSources from '../../hooks/use-top-sources';
 import { formatNumber } from '../../utils';
-import Widget from '../Widget';
+import Widget from '../widget';
 
 export default function TopSourcesWidget() {
   const { data, status } = useTopSources();

@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 
 import useKpiTotals from '../../hooks/use-kpi-totals';
 import useKpis from '../../hooks/use-kpis';
-import Widget from '../Widget';
-import KPIsTabs from './KpisTabs';
+import Widget from '../widget';
+import KPIsTabs from './kpis-tabs';
 
 export default function KPIsWidget() {
   const { data, kpi, setKpi, kpiOption, status } = useKpis();

@@ -1,7 +1,7 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { TopPagesSorting } from '@chirpy-dev/types';
 
-import { useAnalytics } from '../components/Provider';
+import { useAnalytics } from '../components/provider';
 import useDateFilter from './use-date-filter';
 import useParams from './use-params';
 

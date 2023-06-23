@@ -5,7 +5,7 @@ import { ReactNode } from 'react';
 
 import { QueryStatus } from '../types/api';
 import { cx } from '../utils';
-import Loader from './Loader';
+import Loader from './loader';
 
 type WidgetProps = {
   children?: ReactNode;

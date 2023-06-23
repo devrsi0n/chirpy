@@ -4,7 +4,7 @@ import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
 
 import useDateFilter from '../hooks/use-date-filter';
 import { DateFilter as DateFilterType } from '../types/date-filter';
-import { QuestionIcon } from './Icons';
+import { QuestionIcon } from './icons';
 
 export default function DateFilter() {
   const { dateRangePickerValue, onDateRangePickerValueChange } =

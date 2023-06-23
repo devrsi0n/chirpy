@@ -1,9 +1,8 @@
 import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { Button } from '@tremor/react';
 
-import { colors } from '../styles/theme';
-import Modal from './Modal';
-import { useAnalytics } from './Provider';
+import Modal from './modal';
+import { useAnalytics } from './provider';
 
 export default function ErrorModal() {
   const { error, setError } = useAnalytics();
@@ -15,7 +14,7 @@ export default function ErrorModal() {
   return (
     <Modal isOpen={!!error} onClose={handleClose}>
       <Modal.Content>
-        <span className="mb-4 flex items-center gap-2 text-sm font-semibold text-red-600">
+        <span className="mb-4 flex items-center gap-2 text-sm font-semibold text-red-900">
           <svg
             width="16"
             height="16"
@@ -23,7 +22,7 @@ export default function ErrorModal() {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect width="16" height="16" rx="8" fill={colors.error} />
+            <rect width="16" height="16" rx="8" className="fill-red-900" />
             <path
               fillRule="evenodd"
               clipRule="evenodd"

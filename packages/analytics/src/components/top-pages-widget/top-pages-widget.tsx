@@ -5,8 +5,8 @@ import { useMemo } from 'react';
 import useParams from '../../hooks/use-params';
 import useTopPages from '../../hooks/use-top-pages';
 import { cx, formatNumber } from '../../utils';
-import { useAnalytics } from '../Provider';
-import Widget from '../Widget';
+import { useAnalytics } from '../provider';
+import Widget from '../widget';
 
 export default function TopPagesWidget() {
   const { data, status } = useTopPages();

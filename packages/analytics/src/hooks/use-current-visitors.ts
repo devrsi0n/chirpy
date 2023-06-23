@@ -1,6 +1,6 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 
-import { useAnalytics } from '../components/Provider';
+import { useAnalytics } from '../components/provider';
 
 export default function useCurrentVisitors() {
   const { domain } = useAnalytics();

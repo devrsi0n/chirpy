@@ -1,7 +1,7 @@
 import dynamic, { LoaderComponent } from 'next/dynamic';
 
-import InView from './InView';
-import Widget from './Widget';
+import InView from './in-view';
+import Widget from './widget';
 
 const enum WidgetHeight {
   XLarge = 588,
@@ -24,13 +24,15 @@ function lazyLoadWidget<P = object>(
   });
 }
 
-const KPIsWidget = lazyLoadWidget(() => import('./KpisWidget'), 80);
-const BrowsersWidget = lazyLoadWidget(() => import('./TopBrowsersWidget'));
-const TopPagesWidget = lazyLoadWidget(() => import('./TopPagesWidget'));
-const TrendWidget = lazyLoadWidget(() => import('./TrendWidget'), 40);
-const TopDevicesWidget = lazyLoadWidget(() => import('./TopDevicesWidget'));
-const TopSourcesWidget = lazyLoadWidget(() => import('./TopSourcesWidget'));
-const TopLocationsWidget = lazyLoadWidget(() => import('./TopLocationsWidget'));
+const KPIsWidget = lazyLoadWidget(() => import('./kpis-widget'), 80);
+const BrowsersWidget = lazyLoadWidget(() => import('./top-browsers-widget'));
+const TopPagesWidget = lazyLoadWidget(() => import('./top-pages-widget'));
+const TrendWidget = lazyLoadWidget(() => import('./trend-widget'), 40);
+const TopDevicesWidget = lazyLoadWidget(() => import('./top-devices-widget'));
+const TopSourcesWidget = lazyLoadWidget(() => import('./top-sources-widget'));
+const TopLocationsWidget = lazyLoadWidget(
+  () => import('./top-locations-widget'),
+);
 
 export default function Widgets() {
   return (

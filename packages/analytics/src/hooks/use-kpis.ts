@@ -2,7 +2,7 @@ import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { isKpi, KpiType } from '@chirpy-dev/types';
 import { useRouter } from 'next/router';
 
-import { useAnalytics } from '../components/Provider';
+import { useAnalytics } from '../components/provider';
 import { KPI_OPTIONS } from '../constants/kpis';
 import useDateFilter from './use-date-filter';
 

@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 
-import CurrentVisitors from './CurrentVisitors';
-import DateFilter from './DateFilter';
-import { useAnalytics } from './Provider';
+import CurrentVisitors from './current-visitors';
+import DateFilter from './date-filter';
+import { useAnalytics } from './provider';
 
 export default function Header() {
   const { domain } = useAnalytics();

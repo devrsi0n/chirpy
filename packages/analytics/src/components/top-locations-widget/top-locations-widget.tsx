@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import useParams from '../../hooks/use-params';
 import useTopLocations from '../../hooks/use-top-locations';
 import { cx } from '../../utils';
-import Widget from '../Widget';
+import Widget from '../widget';
 
 export default function TopLocationsWidget() {
   const { data, status } = useTopLocations();

@@ -3,7 +3,7 @@ import { BarChart } from '@tremor/react';
 import { useMemo } from 'react';
 
 import useTrend from '../../hooks/use-trend';
-import Widget from '../Widget';
+import Widget from '../widget';
 
 export default function TrendWidget() {
   const { data, status } = useTrend();
