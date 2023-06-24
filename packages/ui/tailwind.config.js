@@ -1,9 +1,12 @@
+const path = require("path");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  ...require('configs').tailwindConfig,
+  ...require('@chirpy-dev/configs').tailwindConfig,
   content: [
     './src/**/*.{ts,tsx}',
-    './.storybook/**/*.{ts,tsx}',
-    './node_modules/@chirpy-dev/ui/src/**/*.{ts,tsx}',
+    "./stories/**/*.{js,ts,jsx,tsx}",
+    // path.join(__dirname, './src/**/*.{ts,tsx}'),
+    // path.join(__dirname, "./stories/**/*.{js,ts,jsx,tsx}"),
   ],
 };

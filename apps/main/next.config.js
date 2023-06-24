@@ -1,6 +1,5 @@
 const useAnalysis = process.env.ANALYZE === 'true';
 const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
-const isProd = process.env.NODE_ENV === 'production';
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
@@ -13,9 +12,6 @@ const plugins = [withBundleAnalyzer, withAxiom];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  ...(process.env.DOCKER && {
-    output: 'standalone',
-  }),
   productionBrowserSourceMaps: process.env.VERCEL_ENV !== 'production',
   transpilePackages: [
     '@chirpy-dev/emails',

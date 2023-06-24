@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { userEvent, within } from '@storybook/testing-library';
 
 import { NotificationHub } from '../notification-hub';
@@ -7,19 +7,24 @@ type NotificationHubType = typeof NotificationHub;
 export default {
   title: 'Blocks/NotificationHub',
   component: NotificationHub,
-} as ComponentMeta<NotificationHubType>;
+} as Meta<NotificationHubType>;
 
-const Template: ComponentStory<NotificationHubType> = (args: any) => (
+const Template: StoryFn<NotificationHubType> = (args: any) => (
   <div>
     <NotificationHub {...args} />
   </div>
 );
 
-export const Empty = Template.bind({});
-export const Default = Template.bind({});
+export const Empty = {
+  render: Template,
+};
 
-Default.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  const notificationButton = canvas.getByLabelText('click to open the menu');
-  await userEvent.click(notificationButton);
+export const Default = {
+  render: Template,
+
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const notificationButton = canvas.getByLabelText('click to open the menu');
+    await userEvent.click(notificationButton);
+  },
 };
