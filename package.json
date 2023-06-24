@@ -29,13 +29,8 @@
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
-        "@testing-library/dom",
-        "@storybook/addons",
-        "@storybook/client-api",
-        "@storybook/preview-web",
         "@geist-ui/core",
-        "seedrandom",
-        "ts-node"
+        "less"
       ],
       "allowedVersions": {
         "react": "18",

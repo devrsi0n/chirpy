@@ -1,53 +1,52 @@
-import { LazyMotion } from 'framer-motion';
-import { initialize, mswDecorator } from 'msw-storybook-addon';
-import { SessionProvider } from 'next-auth/react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import * as React from 'react';
 
-import { CurrentUserProvider, useThemeVariables } from '../src/contexts';
-import { loadFeatures } from '../src/pages/app';
-
-// TODO: fix tailwind not work in storybook,
-// use the tailwind CLI to build a separated css instead.
-import '../src/styles/global-styles.scss';
+import { App } from '../src/pages/app';
 
 import { sbRestHandlers } from './msw/rest-handlers';
+
+import { Preview } from '@storybook/react';
+import "tailwindcss/tailwind.css";
 
 initialize({
   onUnhandledRequest: 'bypass',
 });
 
-export const decorators = [
-  mswDecorator,
-
-  // @ts-ignore
-  (Story) => {
-    const { styles } = useThemeVariables();
-    return (
-      <SessionProvider>
-        <CurrentUserProvider>
-          <style>{styles}</style>
-          <LazyMotion features={loadFeatures}>
-            <div className="h-screen bg-bg pt-6">
-              <Story />
-            </div>
-          </LazyMotion>
-        </CurrentUserProvider>
-      </SessionProvider>
-    );
-  },
-];
-
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+const preview: Preview = {
+  parameters: {
+    actions: { argTypesRegex: '^on.*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
+    },
+    msw: {
+      handlers: {
+        common: [...sbRestHandlers],
+      },
     },
   },
-  msw: {
-    handlers: {
-      common: [...sbRestHandlers],
-    },
-  },
+  loaders: [mswLoader],
+  // decorators: [
+  //   (Story): JSX.Element => {
+  //     return (
+  //       <App
+  //         // @ts-expect-error
+  //         Component={Story}
+  //         pageProps={{
+  //           session: {
+  //             user: {
+  //               name: 'test',
+  //               email: 'test@chirpy.dev',
+  //             },
+  //             expires: '2099-10-10T10:10:10.000Z',
+  //           },
+  //         }}
+  //       />
+  //     );
+  //   },
+  // ],
 };
+
+export default preview;

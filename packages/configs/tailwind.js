@@ -69,6 +69,7 @@ module.exports = {
         44: '11rem',
       },
       width: {
+        fit: 'fit-content',
         '31percent': '31%',
       },
       opacity: {
@@ -106,9 +107,6 @@ module.exports = {
       },
       scale: {
         '-1': '-1',
-      },
-      width: {
-        fit: 'fit-content',
       },
       height: {
         fit: 'fit-content',
