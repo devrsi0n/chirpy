@@ -5,5 +5,10 @@
     "baseUrl": ".",
     "types": ["node", "jest"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "../main/types/node.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../main/typings/*.d.ts",
+    "../main/src/server/services/types.ts"
+  ]
 }

@@ -1,6 +1,6 @@
 import { cleanup, render } from '@testing-library/react';
 
-import { initCommentWidget } from '../comment-bootstrapper';
+import { initCommentWidget } from '../comment';
 
 describe('comment', () => {
   beforeEach(() => {

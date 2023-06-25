@@ -43,6 +43,10 @@ const nextConfig = {
         source: '/docs',
         destination: '/docs/welcome',
       },
+      {
+        source: '/bootstrap/comment.js',
+        destination: '/bootstrapper.js',
+      },
     ];
   },
   async headers() {

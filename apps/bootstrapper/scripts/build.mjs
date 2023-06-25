@@ -1,6 +1,10 @@
-const { build } = require('vite');
-const path = require('path');
-const { getDefine } = require('./get-define');
+import { build } from 'vite';
+import { resolve } from 'path';
+import { getDefine } from './get-define.mjs';
+import * as url from 'url';
+// import dts from 'vite-plugin-dts'
+
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * @type {import('vite').InlineConfig}
@@ -17,6 +21,8 @@ const commonBuildConfig = {
   }),
 };
 
+const publicPath = resolve(__dirname, '../../main/public');
+
 /**
  * @type {import('vite').InlineConfig}
  */
@@ -24,12 +30,12 @@ const publicConfig = {
   build: {
     watch: !!process.env.VITE_DEBUG,
     lib: {
-      entry: path.resolve(__dirname, '../src/index.ts'),
-      name: 'comment',
-      fileName: () => 'comment.js',
+      entry: resolve(__dirname, '../src/index.ts'),
+      name: 'bootstrapper',
+      fileName: () => 'bootstrapper.js',
       formats: ['umd'],
     },
-    outDir: path.resolve(__dirname, '../../main/public/bootstrap'),
+    outDir: publicPath,
     ...commonBuildConfig,
   },
   ...commonConfig,
@@ -41,17 +47,19 @@ const publicConfig = {
 const libConfig = {
   build: {
     lib: {
-      entry: path.resolve(__dirname, '../src/lib/index.ts'),
+      entry: resolve(__dirname, '../src/lib/index.ts'),
       name: 'comment',
       fileName: () => 'index.js',
-      formats: ['cjs'],
+      formats: ['es', 'cjs'],
     },
-    outDir: path.resolve(__dirname, '../dist'),
+    outDir: resolve(__dirname, '../dist'),
     ...commonBuildConfig,
   },
   ...commonConfig,
+  // TODO: build TS definition files
+  // plugins: [dts()],
 };
 
-(async function buildComment() {
+(async function buildBootstrapper() {
   await Promise.all([build(publicConfig), build(libConfig)]);
 })();

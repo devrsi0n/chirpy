@@ -1,10 +1,8 @@
-import { Page, prisma } from '@chirpy-dev/trpc';
+import { prisma } from '@chirpy-dev/trpc';
+import { ERR_UNMATCHED_DOMAIN } from '@chirpy-dev/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { ERR_UNMATCHED_DOMAIN } from '../common/error-code';
-import { ResponseError } from '../types/error';
-
-export type PagePayload = Page | ResponseError;
+import { PagePayload } from './types';
 
 export async function getPage(
   req: NextApiRequest,

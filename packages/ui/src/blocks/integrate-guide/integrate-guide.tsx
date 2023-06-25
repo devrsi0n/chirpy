@@ -51,7 +51,7 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
                 script tag with your project id to the HTML:
               </Text>
               <Code>
-                {`<script defer src="${getAppURL()}/bootstrap/comment.js" data-chirpy-domain="${domain}"></script>`}
+                {`<script defer src="${getAppURL()}/bootstrapper.js" data-chirpy-domain="${domain}"></script>`}
               </Code>
               <Text variant="secondary">
                 Then, add the data-chirpy-comment attribute to any HTML element

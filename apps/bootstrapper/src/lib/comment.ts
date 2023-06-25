@@ -1,8 +1,7 @@
-import { EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
+import type { ResponseError } from '@chirpy-dev/types';
+import { ERR_UNMATCHED_DOMAIN, EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
-import { ERR_UNMATCHED_DOMAIN } from '../../../main/src/server/common/error-code';
-import type { PagePayload } from '../../../main/src/server/services/page';
-import type { ResponseError } from '../../../main/src/server/types/error';
+import type { PagePayload } from '../../../main/src/server/services/types';
 import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,

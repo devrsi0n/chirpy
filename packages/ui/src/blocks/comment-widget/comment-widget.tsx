@@ -15,7 +15,7 @@ export function CommentWidget(): JSX.Element {
         className="my-16"
       />
       <Script
-        src="/bootstrap/comment.js"
+        src="/bootstrapper.js"
         strategy={'afterInteractive'}
         data-chirpy-domain={new URL(getAppURL()).hostname}
       />

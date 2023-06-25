@@ -50,7 +50,7 @@
     "web-push": "3.6.3"
   },
   "devDependencies": {
-    "@chirpy-dev/comment-bootstrapper": "workspace:*",
+    "@chirpy-dev/bootstrapper": "workspace:*",
     "@chirpy-dev/configs": "workspace:*",
     "@chirpy-dev/emails": "workspace:*",
     "@chirpy-dev/eslint-config": "workspace:*",
@@ -59,7 +59,6 @@
     "@next/bundle-analyzer": "13.4.7",
     "@relative-ci/agent": "4.1.5",
     "@types/cors": "2.8.13",
-    "@types/github-slugger": "2.0.0",
     "@types/jest": "29.5.2",
     "@types/lodash": "4.14.195",
     "@types/node": "16.11.45",

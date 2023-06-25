@@ -28,7 +28,7 @@
     "@chirpy-dev/service-worker#build": {
       "cache": false
     },
-    "@chirpy-dev/comment-bootstrapper#build": {
+    "@chirpy-dev/bootstrapper#build": {
       "cache": false
     },
     "build:local": {

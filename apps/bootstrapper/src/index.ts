@@ -1,4 +1,4 @@
-import { initCommentWidget } from './lib/comment-bootstrapper';
+import { initCommentWidget } from './lib/comment';
 import { loadFlock } from './lib/load-flock';
 
 const win = window as any;

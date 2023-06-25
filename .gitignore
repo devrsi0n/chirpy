@@ -12,6 +12,7 @@ out/
 .cache
 **/public/bootstrap/*.js.map
 **/public/bootstrap/*.js
+**/public/bootstrapper.js
 **/public/sw.js*
 **/cypress/screenshots/
 **/cypress/videos/
