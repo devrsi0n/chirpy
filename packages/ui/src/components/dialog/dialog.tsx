@@ -1,6 +1,6 @@
 import { Dialog as HeadlessDialog } from '@headlessui/react';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 
 import { bluredOverlay, cardBg } from '../../styles/common';
@@ -83,12 +83,12 @@ export function Dialog({
           static
         >
           <div className="flex min-h-full items-center justify-center px-4">
-            <m.div {...easeInOutOpacity} className="fixed inset-0">
+            <motion.div {...easeInOutOpacity} className="fixed inset-0">
               <div
                 className={clsx(`fixed inset-0`, bluredOverlay, styles.overlay)}
               />
-            </m.div>
-            <m.div {...easeInOut}>
+            </motion.div>
+            <motion.div {...easeInOut}>
               <HeadlessDialog.Panel
                 className={clsx('relative inline-block ', styles.panel)}
               >
@@ -132,7 +132,7 @@ export function Dialog({
                 {footer &&
                   React.cloneElement(footer as React.ReactElement, { size })}
               </HeadlessDialog.Panel>
-            </m.div>
+            </motion.div>
           </div>
         </HeadlessDialog>
       )}

@@ -50,7 +50,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
             title: 'Theme has been saved',
           });
         } catch (error) {
-          logger.warn(`Save theme pages failed`, error);
+          logger.warn(`Save theme pages failed`, { error });
           showToast({
             type: 'error',
             title: 'Save theme failed',

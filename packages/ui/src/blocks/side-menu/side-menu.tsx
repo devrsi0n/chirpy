@@ -1,6 +1,6 @@
 import { isSSRMode } from '@chirpy-dev/utils';
 import clsx from 'clsx';
-import { m, useCycle, Variants } from 'framer-motion';
+import { motion, useCycle, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { IconButton } from '../../components/button';
@@ -76,7 +76,7 @@ export function SideMenu({
   useFrozeBodyScroll(isOpen);
 
   return (
-    <m.nav
+    <motion.nav
       initial={false}
       variants={navVariants}
       animate={isOpen ? 'open' : 'closed'}
@@ -95,7 +95,7 @@ export function SideMenu({
         definition === 'closed' && setIsAnimationEnd(true)
       }
     >
-      <m.div
+      <motion.div
         className={clsx(
           'absolute inset-0 bg-gray-200',
           isAnimationEnd && `!hidden`,
@@ -114,7 +114,7 @@ export function SideMenu({
         <IconMenu className={clsx(isOpen && `hidden`)} />
         <IconX className={clsx(!isOpen && `hidden`)} />
       </IconButton>
-    </m.nav>
+    </motion.nav>
   );
 }
 
@@ -144,12 +144,12 @@ function SideMenuItems({
   className,
 }: SideMenuItemsProps): JSX.Element {
   return (
-    <m.ul
+    <motion.ul
       className={clsx('absolute top-[75px] flex flex-col space-y-4', className)}
       variants={itemsVariants}
     >
       {children}
-    </m.ul>
+    </motion.ul>
   );
 }
 
@@ -181,8 +181,8 @@ export type SideMenuItemProps = {
 function SideMenuItem({ children }: SideMenuItemProps): JSX.Element {
   const { onClickMenuItem } = useSideMenuContext();
   return (
-    <m.li variants={itemVariants} onClick={onClickMenuItem}>
+    <motion.li variants={itemVariants} onClick={onClickMenuItem}>
       {children}
-    </m.li>
+    </motion.li>
   );
 }

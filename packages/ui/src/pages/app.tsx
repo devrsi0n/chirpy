@@ -1,10 +1,10 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
 import { isBrowser } from '@chirpy-dev/utils';
-import { LazyMotion } from 'framer-motion';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
+import { Inter } from 'next/font/google';
 import Head from 'next/head';
 import Script from 'next/script';
 import * as React from 'react';
@@ -12,13 +12,17 @@ import * as React from 'react';
 import { ToastProvider } from '../components';
 import { CurrentUserProvider, NotificationProvider } from '../contexts';
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
 export const App = trpcClient.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
   const currentOrigin = isBrowser ? window.location.origin : null;
   return (
-    <>
+    <div className={`${inter.variable} font-sans`}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
@@ -32,15 +36,13 @@ export const App = trpcClient.withTRPC(function App({
               : 'chirpy.theme'
           }
         >
-          <LazyMotion features={loadFeatures} strict>
-            <CurrentUserProvider>
-              <ToastProvider>
-                <NotificationProvider>
-                  <Component {...pageProps} />
-                </NotificationProvider>
-              </ToastProvider>
-            </CurrentUserProvider>
-          </LazyMotion>
+          <CurrentUserProvider>
+            <ToastProvider>
+              <NotificationProvider>
+                <Component {...pageProps} />
+              </NotificationProvider>
+            </ToastProvider>
+          </CurrentUserProvider>
         </NextThemesProvider>
       </SessionProvider>
       {currentOrigin && (
@@ -51,13 +53,8 @@ export const App = trpcClient.withTRPC(function App({
           data-proxy={currentOrigin}
         />
       )}
-    </>
+    </div>
   );
 });
 
 export { reportWebVitals } from 'next-axiom/dist/webVitals';
-
-export const loadFeatures = () =>
-  import(
-    /* webpackChunkName: "framer-motion-features"*/ '../utilities/framer-motion-features'
-  ).then((res) => res.default);

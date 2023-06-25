@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { m } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -130,7 +130,7 @@ export const Link = React.forwardRef(function Link(
           {children}
           {!hideUnderline && ['nav', 'secondary'].includes(variant) && (
             <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
-              <m.span
+              <motion.span
                 className="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{

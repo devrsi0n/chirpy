@@ -13,8 +13,8 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "0.4.7",
-    "@changesets/cli": "2.25.2",
+    "@changesets/changelog-github": "0.4.8",
+    "@changesets/cli": "2.26.1",
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/prettier-config": "workspace:*",
     "eslint": "8.43.0",
@@ -24,7 +24,7 @@
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "turbo": "1.10.5"
+    "turbo": "1.10.6"
   },
   "pnpm": {
     "peerDependencyRules": {

@@ -1,4 +1,4 @@
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 
 import { MaintenanceBanner } from '../../components';
@@ -30,7 +30,7 @@ export function WidgetLayout({
       <LayoutWrapper title={title} className="min-h-full pb-10 pt-14 sm:mr-1">
         <MaintenanceBanner />
         <AnimatePresence>
-          <m.div
+          <motion.div
             className="mt-2"
             transition={{ duration: 0.35 }}
             initial={{ opacity: 0 }}
@@ -38,7 +38,7 @@ export function WidgetLayout({
             exit={{ opacity: 0 }}
           >
             {children}
-          </m.div>
+          </motion.div>
         </AnimatePresence>
       </LayoutWrapper>
     </WidgetThemeProvider>

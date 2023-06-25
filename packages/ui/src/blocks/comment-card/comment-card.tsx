@@ -1,7 +1,7 @@
 import { RTEValue } from '@chirpy-dev/types';
 import { COMMENT_TREE_MAX_DEPTH, isENVDev } from '@chirpy-dev/utils';
 import clsx from 'clsx';
-import { AnimatePresence, m, Variants } from 'framer-motion';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import * as React from 'react';
 
 import { Dialog } from '../../components';
@@ -72,7 +72,7 @@ export function CommentCard({
         type: 'error',
         title: 'Replied failed, try again later',
       });
-      logger.error('Replied failed', error);
+      logger.error('Replied failed', { error });
     }
   };
   const handleDimissRTE = () => {
@@ -108,7 +108,7 @@ export function CommentCard({
     return <DeletedComment />;
   }
   return (
-    <m.article
+    <motion.article
       animate={containerAnimate}
       variants={SHAKE_VARIANTS}
       onAnimationComplete={() => setContainerAnimate('stop')}
@@ -219,7 +219,7 @@ export function CommentCard({
         </div>
         <AnimatePresence initial={false}>
           {showReplyEditor && (
-            <m.div
+            <motion.div
               initial="collapsed"
               animate="open"
               exit="collapsed"
@@ -237,11 +237,11 @@ export function CommentCard({
                 isReply
                 onClickDismiss={handleDimissRTE}
               />
-            </m.div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
-    </m.article>
+    </motion.article>
   );
 }
 

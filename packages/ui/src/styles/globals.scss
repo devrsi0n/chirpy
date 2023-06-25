@@ -38,24 +38,6 @@ button:focus {
   outline: none;
 }
 
-@font-face {
-  font-family: 'Inter var';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: optional;
-  src: url('/fonts/Inter/Inter-roman.var.woff2') format('woff2');
-  font-named-instance: 'Regular';
-}
-
-@font-face {
-  font-family: 'Inter var';
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: optional;
-  src: url('/fonts/Inter/Inter-italic.var.woff2') format('woff2');
-  font-named-instance: 'Italic';
-}
-
 // Header and footer
 .layout {
   width: clamp(540px, 70ch, 1080px);

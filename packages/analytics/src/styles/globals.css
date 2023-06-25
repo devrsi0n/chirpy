@@ -5,7 +5,7 @@
 
 /* Reset tremor font-family */
 :root {
-  --tr-font-family: 'Inter var' !important;
+  --tr-font-family: var(--font-inter) !important;
 }
 
 .arrow {

@@ -1,14 +1,11 @@
-import { LazyMotion } from 'framer-motion';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import { SessionProvider } from 'next-auth/react';
 import * as React from 'react';
 
 import { CurrentUserProvider, useThemeVariables } from '../src/contexts';
-import { loadFeatures } from '../src/pages/app';
-
 // TODO: fix tailwind not work in storybook,
 // use the tailwind CLI to build a separated css instead.
-import '../src/styles/global-styles.scss';
+import '../src/styles/globals.scss';
 
 import { sbRestHandlers } from './msw/rest-handlers';
 
@@ -26,11 +23,9 @@ export const decorators = [
       <SessionProvider>
         <CurrentUserProvider>
           <style>{styles}</style>
-          <LazyMotion features={loadFeatures}>
-            <div className="h-screen bg-bg pt-6">
-              <Story />
-            </div>
-          </LazyMotion>
+          <div className="h-screen bg-bg pt-6">
+            <Story />
+          </div>
         </CurrentUserProvider>
       </SessionProvider>
     );

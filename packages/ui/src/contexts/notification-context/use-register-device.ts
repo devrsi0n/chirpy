@@ -62,12 +62,12 @@ export function useRegisterNotificationSubscription(): RegisterNotificationSubsc
         return true;
       } catch (error) {
         sessionStorage.removeItem(NOTIFICATION_REGISTER_EXPIRED_AT);
-        logger.warn('Register notification subscription failed', error);
+        logger.warn('Register notification subscription failed', { error });
         throw error;
       }
     } catch (error) {
-      logger.error('Service worker registration failed', error);
+      logger.error('Service worker registration failed', { error });
       throw error;
     }
-  }, [registerDevice]);
+  }, [isSignIn, registerDevice]);
 }

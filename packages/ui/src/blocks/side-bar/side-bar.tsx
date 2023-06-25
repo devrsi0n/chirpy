@@ -1,6 +1,6 @@
 import { Directory } from '@chirpy-dev/types';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -136,13 +136,13 @@ function DirectoryItem({ directory: dir }: { directory: Directory }) {
       )}
       <AnimatePresence>
         {dir.children && isOpened && (
-          <m.div
+          <motion.div
             {...expanded}
             className="flex flex-row items-stretch overflow-hidden"
           >
-            <m.div className="ml-0.5 w-3.5 border-l" />
+            <motion.div className="ml-0.5 w-3.5 border-l" />
             <Directories directories={dir.children} />
-          </m.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

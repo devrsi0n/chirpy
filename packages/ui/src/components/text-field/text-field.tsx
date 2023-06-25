@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 
 import { border, textInput, textInputError } from '../../styles/common';
@@ -69,13 +69,13 @@ export const TextField = React.forwardRef(function TextfieldComponent(
       )}
       <AnimatePresence>
         {errorMessage && (
-          <m.p
+          <motion.p
             {...easeInOutOpacity}
             role="alert"
             className="mt-1.5 text-sm leading-none text-red-900"
           >
             {errorMessage}
-          </m.p>
+          </motion.p>
         )}
       </AnimatePresence>
     </label>

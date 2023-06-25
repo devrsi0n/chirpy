@@ -33,12 +33,6 @@ and open-source Disqus alternate."
           />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>
-          <link
-            rel="preload"
-            href="/fonts/Inter/Inter-roman.var.woff2"
-            as="font"
-            crossOrigin="anonymous"
-          />
           <meta charSet="utf-8" />
         </Head>
         <body>

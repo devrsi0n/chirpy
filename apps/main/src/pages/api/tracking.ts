@@ -53,7 +53,7 @@ export default async function tracking(req: NextRequest) {
     );
     return response;
   } catch (error) {
-    log.error('Error while sending tracking event to Tinybird', error);
+    log.error('Error while sending tracking event to Tinybird', { error });
     throw error;
   }
 }

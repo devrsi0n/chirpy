@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -32,7 +32,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
     >
       <AnimatePresence>
         {toasts.map((toast) => (
-          <m.li
+          <motion.li
             key={toast.id}
             layout
             transition={{ duration: 0.2 }}
@@ -41,7 +41,7 @@ export function ToastContainer(/* props: ToastContainerProps*/): JSX.Element {
             exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
           >
             <ToastItem {...toast} onDismiss={handleDismiss} />
-          </m.li>
+          </motion.li>
         ))}
       </AnimatePresence>
     </ul>,

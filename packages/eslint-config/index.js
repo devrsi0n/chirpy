@@ -1,13 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  plugins: ['@typescript-eslint', 'prettier', 'unicorn', 'jest'],
+  // plugins: ['@typescript-eslint', 'prettier'],
   parser: '@typescript-eslint/parser',
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:unicorn/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
+
     'next/core-web-vitals',
     'plugin:prettier/recommended',
     'plugin:storybook/recommended',
@@ -16,6 +15,9 @@ module.exports = {
     next: {
       rootDir: [path.resolve(__dirname, '../../apps/main/')],
     },
+  },
+  env: {
+    'jest/globals': true,
   },
   rules: {
     'no-console': 'off',
@@ -70,6 +72,8 @@ module.exports = {
   overrides: [
     {
       files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx'],
+      plugins: ['jest'],
+      extends: ['plugin:jest/recommended'],
       rules: {
         'react/display-name': 'off',
         'unicorn/prefer-event-target': 'off',

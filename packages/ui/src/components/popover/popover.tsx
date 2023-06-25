@@ -1,6 +1,6 @@
 import { Popover as HeadlessPopover } from '@headlessui/react';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 
 import { easeInOut } from '../animation';
@@ -59,12 +59,12 @@ function PopoverContent({ children, open }: IPopoverContentProps): JSX.Element {
       {button && React.cloneElement(button, { ref: buttonRef })}
       <AnimatePresence>
         {open && (
-          <m.div {...easeInOut}>
+          <motion.div {...easeInOut}>
             {panel &&
               React.cloneElement(panel, {
                 buttonRect: buttonRef.current?.getBoundingClientRect(),
               })}
-          </m.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

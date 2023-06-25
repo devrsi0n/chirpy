@@ -83,7 +83,7 @@ module.exports = {
       },
 
       fontFamily: {
-        sans: ['"Inter var"', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
       fill: colors,
       borderColor: (theme) => ({

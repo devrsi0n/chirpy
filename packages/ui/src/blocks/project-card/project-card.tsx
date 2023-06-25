@@ -54,7 +54,7 @@ export function ProjectCard({
       setDeletingProject('');
       onDeletedProject();
     } catch (error) {
-      logger.error('Delete project failed', error);
+      logger.error('Delete project failed', { error });
       showToast({
         type: 'error',
         title:

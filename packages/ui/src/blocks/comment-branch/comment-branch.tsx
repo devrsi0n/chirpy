@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { m, MotionProps } from 'framer-motion';
+import { motion, MotionProps } from 'framer-motion';
 import * as React from 'react';
 
 import styles from './comment-branch.module.scss';
@@ -29,7 +29,7 @@ export function CommentBranch({
   ...restProps
 }: CommentBranchProps): JSX.Element {
   return (
-    <m.li
+    <motion.li
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

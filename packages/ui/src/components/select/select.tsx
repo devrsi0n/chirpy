@@ -1,9 +1,9 @@
 import { Listbox } from '@headlessui/react';
 import clsx from 'clsx';
-import { AnimatePresence, m } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import * as React from 'react';
 
-import { listHoverable, bluredBg } from '../../styles/common';
+import { bluredBg, listHoverable } from '../../styles/common';
 import { easeInOut } from '../animation';
 import { IconCheck, IconChevronDownCircleFill } from '../icons';
 import styles from './select.module.scss';
@@ -84,7 +84,7 @@ export function Select<T extends string | number = string>(
             </span>
             <AnimatePresence>
               {open && (
-                <m.div
+                <motion.div
                   {...easeInOut}
                   className={clsx(
                     'absolute z-20 mt-1 w-full rounded-md shadow-lg',
@@ -98,7 +98,7 @@ export function Select<T extends string | number = string>(
                   >
                     {children}
                   </Listbox.Options>
-                </m.div>
+                </motion.div>
               )}
             </AnimatePresence>
           </div>
