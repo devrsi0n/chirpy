@@ -35,7 +35,7 @@ and open-source Disqus alternate."
           <link rel="alternate icon" href="/favicon.png"></link>
           <meta charSet="utf-8" />
         </Head>
-        <body>
+        <body className="font-sans">
           <Main />
           <NextScript />
         </body>

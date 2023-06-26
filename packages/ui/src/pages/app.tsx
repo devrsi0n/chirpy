@@ -16,13 +16,20 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 });
+
 export const App = trpcClient.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {
+  React.useEffect(() => {
+    // Only way to add a font to the body (to fix font for dialogs)
+    // since Next.js doesn't allow it in custom _document
+    document.body.classList.add(inter.variable);
+  }, []);
+
   const currentOrigin = isBrowser ? window.location.origin : null;
   return (
-    <div className={`${inter.variable} font-sans`}>
+    <div className={inter.variable}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
