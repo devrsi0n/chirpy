@@ -1,8 +1,4 @@
-import {
-  SUPPORT_LINK,
-  SIGN_IN_SUCCESS_KEY,
-  GRAPHQL_CACHE_DB_NAME,
-} from '@chirpy-dev/utils';
+import { SIGN_IN_SUCCESS_KEY, SUPPORT_LINK } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
@@ -111,7 +107,6 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
                   redirect: !isWidget,
                 });
                 localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
-                indexedDB.deleteDatabase(GRAPHQL_CACHE_DB_NAME);
               }}
             >
               <IconLogOut size={14} />
