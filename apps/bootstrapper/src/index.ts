@@ -1,14 +1,15 @@
 import { initCommentWidget } from './lib/comment';
-import { loadFlock } from './lib/load-flock';
 
 const win = window as any;
 if (win && !win.$chirpyDisableAutoInjection) {
-  initCommentWidget();
-  loadFlock();
+  try {
+    initCommentWidget();
+  } catch (error) {
+    console.error(`Failed to init comment widget: ${error}`);
+  }
 
   win.$chirpy = {
     initCommentWidget,
-    loadFlock,
   };
 }
 
@@ -17,8 +18,13 @@ if (win && !win.$chirpyDisableAutoInjection) {
   window.addEventListener(eventName, function () {
     // Wait for page reload completed
     setTimeout(() => {
-      initCommentWidget();
-      loadFlock();
+      try {
+        initCommentWidget();
+      } catch (error) {
+        console.error(
+          `Failed to init comment widget with in-page navigation: ${error}`,
+        );
+      }
     }, 5000);
   });
 });

@@ -2,6 +2,7 @@ import type { ResponseError } from '@chirpy-dev/types';
 import { ERR_UNMATCHED_DOMAIN, EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
 import type { PagePayload } from '../../../main/src/server/services/types';
+import { loadFlock } from './load-flock';
 import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,
@@ -55,6 +56,7 @@ export async function initCommentWidget(): Promise<void> {
     }
     throw new Error(page.error);
   }
+  loadFlock();
   if (!page) {
     console.error('Unexpected null from response');
     return;
