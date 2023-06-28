@@ -399,7 +399,7 @@ importers:
       '@chirpy-dev/utils': workspace:*
       '@next-auth/prisma-adapter': 1.0.7
       '@prisma/client': 4.16.1
-      '@tanstack/react-query': 4.29.17
+      '@tanstack/react-query': 4.29.19
       '@trpc/client': 10.32.0
       '@trpc/next': 10.32.0
       '@trpc/react-query': 10.32.0
@@ -425,10 +425,10 @@ importers:
       '@chirpy-dev/utils': link:../utils
       '@next-auth/prisma-adapter': 1.0.7_7qw3euhupn3rgyypnunrvlfu3i
       '@prisma/client': 4.16.1_prisma@4.16.1
-      '@tanstack/react-query': 4.29.17_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.32.0_@trpc+server@10.32.0
-      '@trpc/next': 10.32.0_peioism73flix2eombp66nzud4
-      '@trpc/react-query': 10.32.0_evodiyc46eqfpluzuk2du3blne
+      '@trpc/next': 10.32.0_w2n3r7jvghj7uca5wlaic4tt4m
+      '@trpc/react-query': 10.32.0_4p4q64otadlpco6ubb75p3wu7a
       '@trpc/server': 10.32.0
       '@types/web-push': 3.3.2
       dayjs: 1.11.8
@@ -452,7 +452,7 @@ importers:
   packages/types:
     specifiers:
       '@chirpy-dev/tsconfigs': workspace:*
-      '@tanstack/react-query': 4.29.17
+      '@tanstack/react-query': 4.29.19
       '@tiptap/core': 2.0.3
       '@tiptap/pm': 2.0.3
       '@tiptap/react': 2.0.3
@@ -468,7 +468,7 @@ importers:
       reading-time: 1.5.0
       typescript: 5.1.3
     dependencies:
-      '@tanstack/react-query': 4.29.17_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
     devDependencies:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
       '@tiptap/core': 2.0.3_@tiptap+pm@2.0.3
@@ -509,7 +509,7 @@ importers:
       '@storybook/react': 6.5.14
       '@storybook/testing-library': 0.0.13
       '@storybook/testing-react': 1.3.0
-      '@tanstack/react-query': 4.29.17
+      '@tanstack/react-query': 4.29.19
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 14.0.0
       '@testing-library/user-event': 14.4.3
@@ -582,7 +582,7 @@ importers:
       '@radix-ui/colors': 1.0.0
       '@radix-ui/react-dropdown-menu': 2.0.5_hrrtw4it2dqo6rzcqzvl36ff7i
       '@radix-ui/react-popover': 1.0.6_hrrtw4it2dqo6rzcqzvl36ff7i
-      '@tanstack/react-query': 4.29.17_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
       '@tiptap/core': 2.0.3_@tiptap+pm@2.0.3
       '@tiptap/extension-image': 2.0.3_@tiptap+core@2.0.3
       '@tiptap/extension-link': 2.0.3_7qxxgdyo6i4mk7xrbxa2xtsga4
@@ -6377,12 +6377,12 @@ packages:
       tailwindcss: 3.3.2
     dev: false
 
-  /@tanstack/query-core/4.29.17:
-    resolution: {integrity: sha512-iDbO8yZOpm1lqgq6L8mpxGbKaoiyZSjthxEB3WGU7mNPYss9q4H3Q67+e2xXGwkemEVmtEX/WwvtFitrvVU8TA==}
+  /@tanstack/query-core/4.29.19:
+    resolution: {integrity: sha512-uPe1DukeIpIHpQi6UzIgBcXsjjsDaLnc7hF+zLBKnaUlh7jFE/A+P8t4cU4VzKPMFB/C970n/9SxtpO5hmIRgw==}
     dev: false
 
-  /@tanstack/react-query/4.29.17_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-udOy/jgqiBHBAP93YPAU3QoVYO+Rtx9HT/10xGDQzC8iQU/wIxcIaT/usX+1NSzoUFYU5hUcPaNErPWZnR7XgA==}
+  /@tanstack/react-query/4.29.19_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-XiTIOHHQ5Cw1WUlHaD4fmVUMhoWjuNJlAeJGq7eM4BraI5z7y8WkZO+NR8PSuRnQGblpuVdjClQbDFtwxTtTUw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
@@ -6393,8 +6393,7 @@ packages:
       react-native:
         optional: true
     dependencies:
-      '@tanstack/query-core': 4.29.17
-      client-only: 0.0.1
+      '@tanstack/query-core': 4.29.19
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
@@ -6940,7 +6939,7 @@ packages:
       '@trpc/server': 10.32.0
     dev: false
 
-  /@trpc/next/10.32.0_peioism73flix2eombp66nzud4:
+  /@trpc/next/10.32.0_w2n3r7jvghj7uca5wlaic4tt4m:
     resolution: {integrity: sha512-qJ3yvJDTVmiOOPW1x/FCpmOvtcMJXnP2t3EbcUFrqwgH+D1KdbU2Kk1iSa89Gwy/BBEmXUxaKkWoM3e4Id80gw==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
@@ -6951,9 +6950,9 @@ packages:
       react: '>=16.8.0 || 18'
       react-dom: '>=16.8.0 || 18'
     dependencies:
-      '@tanstack/react-query': 4.29.17_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.32.0_@trpc+server@10.32.0
-      '@trpc/react-query': 10.32.0_evodiyc46eqfpluzuk2du3blne
+      '@trpc/react-query': 10.32.0_4p4q64otadlpco6ubb75p3wu7a
       '@trpc/server': 10.32.0
       next: 13.4.7_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
@@ -6961,7 +6960,7 @@ packages:
       react-ssr-prepass: 1.5.0_react@18.2.0
     dev: false
 
-  /@trpc/react-query/10.32.0_evodiyc46eqfpluzuk2du3blne:
+  /@trpc/react-query/10.32.0_4p4q64otadlpco6ubb75p3wu7a:
     resolution: {integrity: sha512-M4W1aGm3VAfQ9u4FJyK8M+pkcAV4lp32ZHxKnkRydxcsladhsqveZC9oqZqwklprEcYHtWU8v3R+jRGUjfCxpw==}
     peerDependencies:
       '@tanstack/react-query': ^4.18.0
@@ -6970,7 +6969,7 @@ packages:
       react: '>=16.8.0 || 18'
       react-dom: '>=16.8.0 || 18'
     dependencies:
-      '@tanstack/react-query': 4.29.17_biqbaboplfbrettd7655fr4n2y
+      '@tanstack/react-query': 4.29.19_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.32.0_@trpc+server@10.32.0
       '@trpc/server': 10.32.0
       react: 18.2.0
