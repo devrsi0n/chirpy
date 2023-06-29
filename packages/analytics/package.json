@@ -14,7 +14,7 @@
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
     "@headlessui/react": "1.7.15",
-    "@tremor/react": "3.2.3",
+    "@tremor/react": "3.2.6",
     "clsx": "1.2.1",
     "next": "13.4.7",
     "prop-types": "15.8.1",
