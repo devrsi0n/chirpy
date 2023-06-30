@@ -29,11 +29,11 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         title={
           <div>
             <Heading as="h2" className="mb-3 !leading-none">
-              Get Started with Chirpy Comment
+              Get Started with Chirpy Comment & Analytics
             </Heading>
-            <Text as="p" size="lg" variant="secondary">
+            <Text variant="secondary" className="font-normal">
               Integrate the widget into your website to start engaging with your
-              customer.
+              users.
             </Text>
           </div>
         }
@@ -41,24 +41,43 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
         styles={{ content: `!max-w-2xl sm:!px-14 sm:!py-10` }}
       >
         <Dialog.Body>
-          <div className="">
-            <Heading as="h3" className="mb-3">
-              Usage on any website
-            </Heading>
-            <div className="space-y-2">
+          <div className="flex flex-col gap-4">
+            <Heading as="h3">Usage on any website</Heading>
+            <div className="flex flex-col gap-2">
               <Text variant="secondary">
-                To embed the comment widget on your website, first add the
-                script tag with your project id to the HTML:
+                {`Chirpy is not just your average comment system - it's a feature-packed tool with powerful `}
+                <strong>built-in analytics</strong>
+                {`. With Chirpy, you can seamlessly integrate the analytics service and save time and effort.`}
               </Text>
-              <Code>
-                {`<script defer src="${getAppURL()}/bootstrapper.js" data-chirpy-domain="${domain}"></script>`}
-              </Code>
               <Text variant="secondary">
-                Then, add the data-chirpy-comment attribute to any HTML element
-                that should render the widget:
+                {`Getting started is a breeze. Simply follow these user-friendly steps:`}
               </Text>
-              <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
             </div>
+            <ol className="flex list-outside list-decimal flex-col gap-3 ps-4">
+              <li>
+                <div>
+                  <Text variant="secondary">
+                    {`Copy the script provided below and paste it into the body of your HTML, make sure it will be loaded on every page.`}
+                  </Text>
+                  <Code>
+                    {`<script defer src="${getAppURL()}/bootstrapper.js" data-chirpy-domain="${domain}"></script>`}
+                  </Code>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <Text variant="secondary">
+                    {`Then, add the data-chirpy-comment attribute to any page that should render the widget:`}
+                  </Text>
+                  <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
+                </div>
+              </li>
+              <li>
+                <Text variant="secondary">
+                  {`🎉 Congratulations! The comment widge is ready to go.`}
+                </Text>
+              </li>
+            </ol>
           </div>
         </Dialog.Body>
       </Dialog>

@@ -11,7 +11,7 @@ export function Code({
   return (
     <pre
       className={clsx(
-        'whitespace-pre-wrap rounded-sm bg-gray-300 px-3 py-6 text-gray-1200',
+        'whitespace-pre-wrap rounded-sm bg-gray-300 px-3 py-4 text-gray-1200',
         className,
       )}
       {...preProps}

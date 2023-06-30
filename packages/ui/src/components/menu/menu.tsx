@@ -11,18 +11,16 @@ import styles from './menu.module.scss';
 
 export type Shape = 'circle' | 'square';
 
-export type MenuProps = React.PropsWithChildren<{
-  className?: string;
-}>;
+export type MenuProps = DropdownMenu.DropdownMenuProps;
 
 const ERROR = new Error(
   'Menu children only accept a Menu.Items and a Menu.Button',
 );
 
-export function Menu({ children }: MenuProps): JSX.Element {
+export function Menu(props: MenuProps): JSX.Element {
   if (!isENVProd) {
     const childrenArray = React.Children.toArray(
-      children,
+      props.children,
     ) as React.ReactElement[];
     if (childrenArray.length !== 2) {
       throw ERROR;
@@ -37,7 +35,7 @@ export function Menu({ children }: MenuProps): JSX.Element {
       throw ERROR;
     }
   }
-  return <DropdownMenu.Root>{children}</DropdownMenu.Root>;
+  return <DropdownMenu.Root {...props} />;
 }
 
 Menu.Button = MenuButton;
@@ -57,7 +55,6 @@ export type MenuButtonProps = {
 function MenuButton({
   shape = 'circle',
   ariaLabel = 'click to open the menu',
-  className,
   open,
   onClick,
   children,
@@ -65,17 +62,15 @@ function MenuButton({
 }: MenuButtonProps): JSX.Element {
   const AsButton = shape === 'circle' ? IconButton : Button;
   return (
-    <div className={className}>
-      <DropdownMenu.Trigger asChild>
-        <AsButton
-          {...buttonProps}
-          aria-label={ariaLabel}
-          onClick={() => onClick?.(open)}
-        >
-          {children}
-        </AsButton>
-      </DropdownMenu.Trigger>
-    </div>
+    <DropdownMenu.Trigger asChild>
+      <AsButton
+        {...buttonProps}
+        aria-label={ariaLabel}
+        onClick={() => onClick?.(open)}
+      >
+        {children}
+      </AsButton>
+    </DropdownMenu.Trigger>
   );
 }
 

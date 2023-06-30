@@ -77,11 +77,11 @@ export function ProjectCard({
 
   return (
     <Card as="section" key={project.id} className="space-y-4 pt-4">
-      <div className="flex flex-row flex-nowrap items-center justify-between space-x-2 pl-6 pr-3">
+      <div className="flex flex-nowrap items-start justify-between space-x-2 pl-6 pr-3">
         <Heading as="h3">{project.name}</Heading>
         <div className="flex flex-row items-center space-x-2">
           <PageViewStats domain={project.domain} />
-          <Menu className="mr-1">
+          <Menu>
             <Menu.Button ariaLabel="Show more project options">
               <span className="p-1">
                 <IconMoreVertical size={20} />
@@ -95,7 +95,7 @@ export function ProjectCard({
                 className="space-x-1"
                 disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               >
-                <IconTrash2 size={14} />
+                <IconTrash2 size={16} />
                 <span>Delete</span>
               </Menu.Item>
             </Menu.Items>
