@@ -8,7 +8,7 @@ import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { SiteLayout, PageTitle } from '../../blocks';
+import { PageTitle, SiteLayout } from '../../blocks';
 
 export type AnalyticsByDomainPageProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;

@@ -42,9 +42,9 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
               </Link>
             </Tooltip.Trigger>
             <Tooltip.Portal>
-              <Tooltip.Content className="" sideOffset={5}>
+              <Tooltip.Content sideOffset={5}>
                 <div>
-                  <Text>PV of last 7 days,</Text>
+                  <Text>Pageview of last 7 days,</Text>
                   <Text>click to view analytics details</Text>
                 </div>
                 <Tooltip.Arrow />

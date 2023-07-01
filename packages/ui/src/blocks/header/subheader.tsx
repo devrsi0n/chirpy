@@ -1,14 +1,16 @@
 import clsx from 'clsx';
-import { Link } from '../../components/link';
 import { useRouter } from 'next/router';
+
+import { Link } from '../../components/link';
 import { useCurrentUser } from '../../contexts/current-user-context/use-current-user';
 
 export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
-  const { pathname } = useRouter();
-  const { data} = useCurrentUser();
-  if (!pathname.startsWith('/dashboard') && !pathname.startsWith('/settings')) {
+  const { asPath, pathname } = useRouter();
+  const { data } = useCurrentUser();
+  if (!asPath.startsWith('/dashboard') && !asPath.startsWith('/settings')) {
     return null;
   }
+  const isProjectLevel = pathname.startsWith('/dashboard/[username]/[domain]');
   return (
     <section
       className={clsx(
@@ -17,8 +19,44 @@ export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
       )}
     >
       <nav className="flex w-full max-w-7xl gap-8">
-        <Link href={`/dashboard/${data.username}`}>Overview</Link>
-        <Link href="/settings">Settings</Link>
+        {isProjectLevel ? (
+          <>
+            <Link
+              href={`/dashboard/${data.username}/${asPath.split('/')[3]}`}
+              highlightPattern={
+                new RegExp(
+                  `^/dashboard/${data.username}/${asPath.split('/')[3]}$`,
+                )
+              }
+            >
+              Project
+            </Link>
+            <Link
+              href={`/dashboard/${data.username}/${
+                asPath.split('/')[3]
+              }/analytics`}
+            >
+              Analytics
+            </Link>
+            <Link
+              href={`/dashboard/${data.username}/${asPath.split('/')[3]}/theme`}
+            >
+              Theme
+            </Link>
+            <Link
+              href={`/dashboard/${data.username}/${
+                asPath.split('/')[3]
+              }/settings`}
+            >
+              Settings
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href={`/dashboard/${data.username}`}>Overview</Link>
+            <Link href="/settings">Settings</Link>
+          </>
+        )}
       </nav>
     </section>
   );

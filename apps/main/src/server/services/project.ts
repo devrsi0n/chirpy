@@ -1,13 +1,20 @@
 import { prisma } from '@chirpy-dev/trpc';
 
-export type AllProjectStaticPathParams = { params: { domain: string } }[];
+export type AllProjectStaticPathParams = {
+  params: { domain: string; username: string };
+}[];
 
 export async function getRecentProjectStaticPathsByDomain(
-  take: number,
+  take = 50,
 ): Promise<AllProjectStaticPathParams> {
   const projects = await prisma.project.findMany({
     select: {
       domain: true,
+      user: {
+        select: {
+          username: true,
+        },
+      },
     },
     orderBy: {
       updatedAt: 'desc',
@@ -15,9 +22,10 @@ export async function getRecentProjectStaticPathsByDomain(
     take,
   });
   return (
-    projects.map(({ domain }) => {
+    projects.map(({ domain, user }) => {
       return {
         params: {
+          username: user?.username || '',
           domain,
         },
       };

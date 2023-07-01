@@ -9,10 +9,5 @@
     }
   },
   "exclude": ["node_modules", ".next"],
-  "include": [
-    "typings/**/*.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "../../packages/types/src/error.ts"
-  ]
+  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
 }

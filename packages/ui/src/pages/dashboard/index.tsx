@@ -1,4 +1,5 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { DehydratedState } from '@tanstack/react-query';
 import * as React from 'react';
 
 import {
@@ -12,7 +13,6 @@ import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
 import { CreateProjectButton } from './create-project-button';
-import { DehydratedState } from '@tanstack/react-query';
 
 type FormFields = {
   name: string;
@@ -22,10 +22,10 @@ type FormFields = {
 export type DashboardProps = {
   username: string;
   trpcState: DehydratedState;
-}
+};
 
 export function Dashboard(props: DashboardProps): JSX.Element {
-  const { loading: userIsLoading, } = useCurrentUser();
+  const { loading: userIsLoading } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,
@@ -155,4 +155,8 @@ export function Dashboard(props: DashboardProps): JSX.Element {
   );
 }
 
-export { RedirectToDashboard } from './redirect'
+export * from './redirect';
+export * from './project';
+export * from './theme';
+export * from './analytics';
+export * from './settings';

@@ -1,4 +1,5 @@
 import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { BaseButton, Button } from '../../components/button';
@@ -16,6 +17,7 @@ import { List } from '../../components/list';
 import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
+import { useCurrentUser } from '../../contexts';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
 import { logger } from '../../utilities/logger';
@@ -75,11 +77,18 @@ export function ProjectCard({
     setPageSize(newSize);
   }
 
+  const router = useRouter();
+  const { data } = useCurrentUser();
+
   return (
     <Card
       as="section"
       key={project.id}
       className="max-w-sm space-y-4 pt-4 hover:cursor-pointer"
+      role="button"
+      onClick={() => {
+        router.push(`/dashboard/${data.username}/${project.domain}`);
+      }}
     >
       <div className="flex flex-nowrap items-start justify-between space-x-2 pl-6 pr-3">
         <Heading as="h3">{project.name}</Heading>

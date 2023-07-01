@@ -1,14 +1,20 @@
-import * as React from 'react';
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { DehydratedState } from '@tanstack/react-query';
 import clsx from 'clsx';
+import * as React from 'react';
+
 import { PageTitle, SiteLayout } from '../../blocks';
 
 export type ProjectProps = {
-  children: React.ReactNode;
-  
+  domain: string;
+  trpcState: DehydratedState;
 };
 
 export function Project(props: ProjectProps): JSX.Element {
-  return <SiteLayout title='Project'>
-    <PageTitle>Project</PageTitle>
-  </SiteLayout>;
+  const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
+  return (
+    <SiteLayout title="Project">
+      <PageTitle>{project?.name}</PageTitle>
+    </SiteLayout>
+  );
 }

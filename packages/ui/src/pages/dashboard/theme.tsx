@@ -4,9 +4,9 @@ import { DehydratedState } from '@tanstack/react-query';
 
 import {
   SiteLayout,
+  THEME_WIDGET_CLS,
   ThemeEditor,
   ThemeEditorProps,
-  THEME_WIDGET_CLS,
 } from '../../blocks';
 import { WidgetThemeProvider } from '../../contexts';
 
