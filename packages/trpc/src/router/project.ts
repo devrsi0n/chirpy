@@ -27,6 +27,13 @@ export const projectRouter = router({
         domain: true,
         theme: true,
         createdAt: true,
+        pages: {
+          select: {
+            id: true,
+            title: true,
+            url: true,
+          },
+        },
       },
     });
     return project;

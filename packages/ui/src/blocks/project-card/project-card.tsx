@@ -12,7 +12,6 @@ import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
-import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {

@@ -49,7 +49,7 @@ export function GettingStartedBody({ domain }: { domain: string }) {
             <Text variant="secondary">
               {`Then, add the data-chirpy-comment attribute to any page that should render the comment widget:`}
             </Text>
-            <Code>{`<div data-chirpy-comment="true"></div>`}</Code>
+            <Code>{`<div data-chirpy-comment="true" id="chirpy-comment"></div>`}</Code>
           </div>
         </li>
         <li>

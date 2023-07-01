@@ -13,6 +13,7 @@ export function CommentWidget(): JSX.Element {
         data-chirpy-comment
         data-chirpy-theme={resolvedTheme || 'system'}
         className="my-16"
+        id="chirpy-comment"
       />
       <Script
         src="/bootstrapper.js"
