@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
-import { router, protectedProcedure, publicProcedure } from '../trpc-server';
+import { protectedProcedure, publicProcedure, router } from '../trpc-server';
 
 export const projectRouter = router({
   all: publicProcedure
@@ -64,7 +64,7 @@ export const projectRouter = router({
   delete: protectedProcedure
     .input(
       z.object({
-        id: z.string(),
+        domain: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -75,7 +75,7 @@ export const projectRouter = router({
           where: {
             page: {
               project: {
-                id: input.id,
+                domain: input.domain,
               },
             },
           },
@@ -85,7 +85,7 @@ export const projectRouter = router({
         }),
         prisma.project.deleteMany({
           where: {
-            id: input.id,
+            domain: input.domain,
             // User can only delete their own projects
             userId: ctx.session.user.id,
           },

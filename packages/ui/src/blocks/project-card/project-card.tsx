@@ -1,26 +1,17 @@
-import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { BaseButton, Button } from '../../components/button';
 import { Card } from '../../components/card';
-import { Dialog } from '../../components/dialog';
 import { Divider } from '../../components/divider';
 import { Heading } from '../../components/heading';
-import {
-  IconLoader,
-  IconMoreVertical,
-  IconTrash2,
-} from '../../components/icons';
 import { Link } from '../../components/link';
 import { List } from '../../components/list';
-import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
-import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts';
 import { listHoverable } from '../../styles/common';
 import { cpDayjs } from '../../utilities/date';
-import { logger } from '../../utilities/logger';
 import { IntegrateGuide } from '../integrate-guide';
 import { PageViewStats } from './page-view-stats';
 
@@ -33,37 +24,6 @@ export function ProjectCard({
   project,
   onDeletedProject,
 }: ProjectCardProps): JSX.Element {
-  const [deletingProjectName, setDeletingProject] = React.useState('');
-  const [deletingProjectId, setDeletingProjectId] = React.useState('');
-  const handleClickDeleteProjectMenu = (id: string, name: string) => {
-    setDeletingProjectId(id);
-    setDeletingProject(name);
-  };
-  const handleCloseDialog = () => {
-    setDeletingProjectId('');
-    setDeletingProject('');
-  };
-  const { mutateAsync: deleteProject, status } =
-    trpcClient.project.delete.useMutation();
-  const loading = status === 'loading';
-  const { showToast } = useToast();
-  const handleClickConfirmDelete = async () => {
-    try {
-      await deleteProject({
-        id: deletingProjectId,
-      });
-      setDeletingProjectId('');
-      setDeletingProject('');
-      onDeletedProject();
-    } catch (error) {
-      logger.error('Delete project failed', { error });
-      showToast({
-        type: 'error',
-        title:
-          'Sorry, something went wrong in our side, please try again later.',
-      });
-    }
-  };
   const [pageSize, setPageSize] = React.useState(5);
   const pages = project.pages.slice(0, pageSize);
   const showExpandBtn = project.pages.length > 5;
@@ -90,45 +50,14 @@ export function ProjectCard({
         router.push(`/dashboard/${data.username}/${project.domain}`);
       }}
     >
-      <div className="flex flex-nowrap items-start justify-between space-x-2 pl-6 pr-3">
+      <div className="flex flex-nowrap items-center justify-between space-x-2 px-6">
         <Heading as="h3">{project.name}</Heading>
-        <div className="flex flex-row items-center space-x-2">
-          <PageViewStats domain={project.domain} />
-          <Menu>
-            <Menu.Button ariaLabel="Show more project options">
-              <span className="p-1">
-                <IconMoreVertical size={20} />
-              </span>
-            </Menu.Button>
-            <Menu.Items>
-              <Menu.Item
-                onClick={() =>
-                  handleClickDeleteProjectMenu(project.id, project.name)
-                }
-                className="space-x-1"
-                disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
-              >
-                <IconTrash2 size={16} />
-                <span>Delete</span>
-              </Menu.Item>
-            </Menu.Items>
-          </Menu>
-        </div>
+        <PageViewStats domain={project.domain} />
       </div>
       <Text className="px-6" variant="secondary">
         {project.domain}
       </Text>
       <div className="flex flex-row space-x-2 px-6">
-        <Link href={`/theme/${project.domain}`} variant="plain" tabIndex={-1}>
-          <Button
-            color="primary"
-            shadow={false}
-            className="px-2 py-1"
-            disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
-          >
-            Theme
-          </Button>
-        </Link>
         <IntegrateGuide domain={project.domain} />
       </div>
       {pages.length > 0 ? (
@@ -168,34 +97,6 @@ export function ProjectCard({
           Created {cpDayjs(project.createdAt).fromNow()}
         </Text>
       </div>
-      <Dialog
-        type="alert"
-        title={
-          <>
-            Delete <span className="font-bold">{deletingProjectName}</span>
-          </>
-        }
-        show={!!deletingProjectName}
-        onClose={handleCloseDialog}
-      >
-        <Dialog.Body>
-          <Text>
-            All of your project data will be deleted permanently. This action
-            cannot be undone.
-          </Text>
-        </Dialog.Body>
-        <Dialog.Footer>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button
-            variant="solid"
-            color="red"
-            onClick={handleClickConfirmDelete}
-            disabled={loading}
-          >
-            {loading ? <IconLoader /> : 'Delete'}
-          </Button>
-        </Dialog.Footer>
-      </Dialog>
     </Card>
   );
 }

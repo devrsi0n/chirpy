@@ -160,3 +160,4 @@ export * from './project';
 export * from './theme';
 export * from './analytics';
 export * from './settings';
+export * from './getting-started';
