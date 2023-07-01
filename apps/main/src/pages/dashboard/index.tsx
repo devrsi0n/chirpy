@@ -1,1 +1,1 @@
-export { Dashboard as default } from '@chirpy-dev/ui';
+export { RedirectToDashboard as default } from '@chirpy-dev/ui';

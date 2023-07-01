@@ -76,7 +76,11 @@ export function ProjectCard({
   }
 
   return (
-    <Card as="section" key={project.id} className="max-w-sm space-y-4 pt-4">
+    <Card
+      as="section"
+      key={project.id}
+      className="max-w-sm space-y-4 pt-4 hover:cursor-pointer"
+    >
       <div className="flex flex-nowrap items-start justify-between space-x-2 pl-6 pr-3">
         <Heading as="h3">{project.name}</Heading>
         <div className="flex flex-row items-center space-x-2">

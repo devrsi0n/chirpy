@@ -11,13 +11,11 @@ export default withAuth({
 
 export const config = {
   matcher: [
-    '/dashboard',
+    '/dashboard/:path*',
     '/auth/delete-confirmation',
     '/auth/redirecting',
     '/auth/welcome',
-    '/analytics/:path*',
     '/profile/:path*',
-    '/theme/:path*',
 
     // Don't add /api/content-classifier/toxic-text here,
     // it's used by the comment-widget-preview,

@@ -70,7 +70,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
       }
       setIsSaved(true);
       await sleep(1);
-      router.push('/dashboard');
+      router.push(`/dashboard/${fields.username}`);
     },
   );
   return (

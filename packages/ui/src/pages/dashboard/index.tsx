@@ -12,19 +12,27 @@ import { useCurrentUser } from '../../contexts';
 import { useForm } from '../../hooks';
 import { isValidDomain } from '../../utilities';
 import { CreateProjectButton } from './create-project-button';
+import { DehydratedState } from '@tanstack/react-query';
 
 type FormFields = {
   name: string;
   domain: string;
 };
 
-export function Dashboard(): JSX.Element {
-  const { loading: userIsLoading, data } = useCurrentUser();
+export type DashboardProps = {
+  username: string;
+  trpcState: DehydratedState;
+}
+
+export function Dashboard(props: DashboardProps): JSX.Element {
+  const { loading: userIsLoading, } = useCurrentUser();
   const {
     data: projects,
     refetch: fetchUserProjects,
     isFetching,
-  } = trpcClient.project.all.useQuery();
+  } = trpcClient.project.all.useQuery({
+    username: props.username,
+  });
 
   const { mutateAsync: createAProject } =
     trpcClient.project.create.useMutation();
@@ -146,3 +154,5 @@ export function Dashboard(): JSX.Element {
     </SiteLayout>
   );
 }
+
+export { RedirectToDashboard } from './redirect'

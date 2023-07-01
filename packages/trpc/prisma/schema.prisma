@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -148,6 +149,7 @@ model Project {
 
   @@index([teamId])
   @@index([userId])
+  @@unique([userId, name])
 }
 
 model Role {

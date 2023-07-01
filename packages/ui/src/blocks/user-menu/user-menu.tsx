@@ -83,7 +83,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
         {isSignIn && (
           <>
             {isNav && (
-              <Menu.Item as={MenuLink} variant="plain" href="/dashboard">
+              <Menu.Item as={MenuLink} variant="plain" href={`/dashboard/${username}`}>
                 <IconMonitor size={14} />
                 <span>Dashboard</span>
               </Menu.Item>

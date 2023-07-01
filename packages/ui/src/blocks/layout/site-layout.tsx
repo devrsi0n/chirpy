@@ -18,7 +18,7 @@ export type LayoutProps = React.PropsWithChildren<{
 }> &
   Pick<LayoutWrapperProps, 'title'>;
 
-export default function SiteLayout({
+export function SiteLayout({
   title,
   hideHeader,
   hideFooter,

@@ -4,27 +4,17 @@ import { prisma } from '../common/db-client';
 import { router, protectedProcedure, publicProcedure } from '../trpc-server';
 
 export const projectRouter = router({
-  all: protectedProcedure.query(async ({ ctx }) => {
-    const projects = await prisma.project.findMany({
-      where: {
-        userId: ctx.session.user.id,
-      },
-      select: {
-        id: true,
-        name: true,
-        domain: true,
-        createdAt: true,
-        pages: {
-          select: {
-            id: true,
-            title: true,
-            url: true,
-          },
-        },
-      },
-    });
-    return projects;
-  }),
+  all: publicProcedure
+    .input(
+      z.object({
+        username: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      return getAllProjects({
+        username: input.username,
+      });
+    }),
   // Must use publicProcedure since it's used by ssg
   byDomain: publicProcedure.input(z.string()).query(async ({ input }) => {
     const project = await prisma.project.findUnique({
@@ -127,3 +117,27 @@ export const projectRouter = router({
       return project;
     }),
 });
+
+async function getAllProjects({ username }: { username: string }) {
+  const projects = await prisma.project.findMany({
+    where: {
+      user: {
+        username,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      domain: true,
+      createdAt: true,
+      pages: {
+        select: {
+          id: true,
+          title: true,
+          url: true,
+        },
+      },
+    },
+  });
+  return projects;
+}
