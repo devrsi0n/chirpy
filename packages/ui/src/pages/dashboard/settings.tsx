@@ -44,7 +44,7 @@ export function ProjectSettings({
   };
   return (
     <SiteLayout title="Project settings">
-      <PageTitle>Project settings - {name}</PageTitle>
+      <PageTitle>Project settings, {name}</PageTitle>
       <section className="mt-10 rounded border">
         <div className="space-y-3 p-5">
           <Heading as="h3" className="font-medium">

@@ -2,7 +2,7 @@ import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { BaseButton, Button } from '../../components/button';
+import { BaseButton } from '../../components/button';
 import { Card } from '../../components/card';
 import { Divider } from '../../components/divider';
 import { Heading } from '../../components/heading';
@@ -17,13 +17,9 @@ import { PageViewStats } from './page-view-stats';
 
 export type ProjectCardProps = {
   project: RouterOutputs['project']['all'][number];
-  onDeletedProject: () => void;
 };
 
-export function ProjectCard({
-  project,
-  onDeletedProject,
-}: ProjectCardProps): JSX.Element {
+export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
   const [pageSize, setPageSize] = React.useState(5);
   const pages = project.pages.slice(0, pageSize);
   const showExpandBtn = project.pages.length > 5;
@@ -57,9 +53,6 @@ export function ProjectCard({
       <Text className="px-6" variant="secondary">
         {project.domain}
       </Text>
-      <div className="flex flex-row space-x-2 px-6">
-        <IntegrateGuide domain={project.domain} />
-      </div>
       {pages.length > 0 ? (
         <div>
           <List className="px-4">
@@ -70,6 +63,10 @@ export function ProjectCard({
                   title={page.title || page.url}
                   variant="plain"
                   className="inline-block max-w-xs overflow-hidden text-ellipsis whitespace-nowrap"
+                  onClickCapture={(e) => {
+                    e.stopPropagation();
+                    e.nativeEvent.stopImmediatePropagation();
+                  }}
                 >
                   {page.title || page.url}
                 </Link>

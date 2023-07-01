@@ -5,6 +5,7 @@ import * as React from 'react';
 import { Link } from '../../components/link';
 import { Text } from '../../components/text';
 import { Tooltip } from '../../components/tooltip/tooltip';
+import { useCurrentUser } from '../../contexts';
 
 export type PageViewStatsProps = {
   domain: string;
@@ -15,6 +16,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
     domain: getTinybirdDomain(domain),
   });
   const pageviews = data?.pageviews;
+  const { data: user } = useCurrentUser();
   return (
     <>
       {typeof pageviews === 'number' && (
@@ -23,9 +25,13 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
             <Tooltip.Trigger asChild>
               <Link
                 variant="plain"
-                href={`/analytics/${domain}`}
+                href={`/dashboard/${user.username}/${domain}/analytics`}
                 aria-label={'View analytics'}
                 className="flex flex-row items-end space-x-1"
+                onClickCapture={(e) => {
+                  e.stopPropagation();
+                  e.nativeEvent.stopImmediatePropagation();
+                }}
               >
                 <Text
                   size="xl"

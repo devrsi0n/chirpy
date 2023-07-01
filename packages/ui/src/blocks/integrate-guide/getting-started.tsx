@@ -8,7 +8,7 @@ import { Text } from '../../components/text';
 export function GettingStarttedTitle(): React.ReactNode {
   return (
     <div>
-      <Heading as="h2" className="mb-3 !leading-none">
+      <Heading as="h2" className="mb-3 font-bold !leading-none">
         Getting Started
       </Heading>
       <Text variant="secondary" className="font-normal">

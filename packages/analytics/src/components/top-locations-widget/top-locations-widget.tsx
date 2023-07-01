@@ -1,4 +1,4 @@
-import { TopLocationsSorting } from '@chirpy-dev/types/src/analytics/top-locations';
+import { TopLocationsSorting } from '@chirpy-dev/types';
 import { BarList } from '@tremor/react';
 import { useMemo } from 'react';
 

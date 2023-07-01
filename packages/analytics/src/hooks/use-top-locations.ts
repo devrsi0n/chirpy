@@ -1,5 +1,5 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
-import { TopLocationsSorting } from '@chirpy-dev/types/src/analytics/top-locations';
+import { TopLocationsSorting } from '@chirpy-dev/types';
 
 import { useAnalytics } from '../components/provider';
 import useDateFilter from './use-date-filter';

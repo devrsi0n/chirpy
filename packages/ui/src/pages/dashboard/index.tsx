@@ -86,10 +86,7 @@ export function Dashboard(props: DashboardProps): JSX.Element {
           <ul className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
             {projects.map((project) => (
               <li key={project.id}>
-                <ProjectCard
-                  project={project}
-                  onDeletedProject={fetchUserProjects}
-                />
+                <ProjectCard project={project} />
               </li>
             ))}
           </ul>

@@ -1,5 +1,3 @@
 User-agent: *
 Disallow: /dashboard
-Disallow: /analytics
-Disallow: /theme
 Disallow: /widget
