@@ -90,7 +90,7 @@ function MenuItems({
         className={clsx(
           styles.dropdownMenuContent,
           bluredBg,
-          `rounded-md p-1`,
+          `z-20 rounded-md p-1`,
           className,
         )}
         sideOffset={5}

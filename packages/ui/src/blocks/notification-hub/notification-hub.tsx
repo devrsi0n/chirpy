@@ -15,7 +15,7 @@ export function NotificationHub(): JSX.Element {
   const { isSignIn, isPreview } = useCurrentUser();
   const {
     data,
-    refetch: refechMessages,
+    refetch: refetchMessages,
     isFetching,
   } = trpcClient.notification.messages.useQuery(undefined, {
     enabled: !!isSignIn && !isPreview,
@@ -33,11 +33,11 @@ export function NotificationHub(): JSX.Element {
         <Menu.Button
           className={styles.menuButton}
           // Refetch when opening the menu
-          onClick={(open) => !open && refechMessages()}
+          onClick={(open) => !open && refetchMessages()}
         >
           <IconBell size={22} />
           {hasUnreadNotifications && (
-            <Badge className="absolute right-1 top-1 !bg-red-900 ring-1 ring-white dark:ring-black" />
+            <Badge className="absolute right-0.5 top-0.5 !bg-red-900 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
         <Menu.Items>
@@ -60,11 +60,11 @@ export function NotificationHub(): JSX.Element {
                       return;
                     }
                     await readANotification({ messageId });
-                    await refechMessages();
+                    await refetchMessages();
                   }}
                   onClickDelete={async (messageId) => {
                     await deleteNotificationMessage({ messageId });
-                    refechMessages();
+                    refetchMessages();
                   }}
                 />
               ))}

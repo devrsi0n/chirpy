@@ -4,6 +4,7 @@ import * as React from 'react';
 
 import { Link } from '../../components/link';
 import { Text } from '../../components/text';
+import { Tooltip } from '../../components/tooltip/tooltip';
 
 export type PageViewStatsProps = {
   domain: string;
@@ -17,20 +18,40 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
   return (
     <>
       {typeof pageviews === 'number' && (
-        <Link
-          variant="plain"
-          href={`/analytics/${domain}`}
-          tabIndex={-1}
-          tooltip={'PV of last 7 days, click to view analytics details'}
-          aria-label={'View analytics'}
-          className="!flex flex-row items-end space-x-1"
-        >
-          <Text size="xl" className="!leading-none" aria-label="Page views">
-            {new Intl.NumberFormat(isSSRMode ? 'en-US' : navigator.language, {
-              notation: 'compact',
-            }).format(pageviews)}
-          </Text>
-        </Link>
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild>
+              <Link
+                variant="plain"
+                href={`/analytics/${domain}`}
+                aria-label={'View analytics'}
+                className="flex flex-row items-end space-x-1"
+              >
+                <Text
+                  size="xl"
+                  className="!leading-none"
+                  aria-label="Page views"
+                >
+                  {new Intl.NumberFormat(
+                    isSSRMode ? 'en-US' : navigator.language,
+                    {
+                      notation: 'compact',
+                    },
+                  ).format(pageviews)}
+                </Text>
+              </Link>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content className="" sideOffset={5}>
+                <div>
+                  <Text>PV of last 7 days,</Text>
+                  <Text>click to view analytics details</Text>
+                </div>
+                <Tooltip.Arrow />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
       )}
     </>
   );

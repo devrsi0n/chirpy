@@ -1,6 +1,4 @@
 const useAnalysis = process.env.ANALYZE === 'true';
-const analyticsDomain = process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN;
-const isProd = process.env.NODE_ENV === 'production';
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
@@ -35,10 +33,6 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      {
-        source: '/api/stats/:path*',
-        destination: `${analyticsDomain}/api/stats/:path*`,
-      },
       {
         source: '/docs',
         destination: '/docs/welcome',

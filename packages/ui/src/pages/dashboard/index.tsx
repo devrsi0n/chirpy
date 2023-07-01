@@ -2,10 +2,10 @@ import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import {
-  SiteLayout,
-  PageTitle,
   EmptyProjectCard,
+  PageTitle,
   ProjectCard,
+  SiteLayout,
 } from '../../blocks';
 import { Button, Dialog, Spinner, TextField } from '../../components';
 import { useCurrentUser } from '../../contexts';
@@ -75,19 +75,16 @@ export function Dashboard(): JSX.Element {
           />
         </div>
         {projects?.length ? (
-          <div className="flex flex-row">
-            <ul className="flex-1 space-y-6">
-              {projects.map((project) => (
-                <li key={project.id}>
-                  <ProjectCard
-                    project={project}
-                    onDeletedProject={fetchUserProjects}
-                  />
-                </li>
-              ))}
-            </ul>
-            <div className="flex-1" />
-          </div>
+          <ul className="grid flex-1 grid-cols-1 gap-4 sm:grid-cols-2">
+            {projects.map((project) => (
+              <li key={project.id}>
+                <ProjectCard
+                  project={project}
+                  onDeletedProject={fetchUserProjects}
+                />
+              </li>
+            ))}
+          </ul>
         ) : isFetching || userIsLoading ? (
           <Spinner />
         ) : (

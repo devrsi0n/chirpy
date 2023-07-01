@@ -67,7 +67,10 @@ export const Link = React.forwardRef(function Link(
   const router = useRouter();
   const mounted = useHasMounted();
   // highlight only apply on client
-  const highlight = mounted && highlightPattern?.test(router.asPath);
+  let highlight = mounted && highlightPattern?.test(router.asPath);
+  if (!highlight && variant === 'nav') {
+    highlight = mounted && router.pathname === href;
+  }
   const [isHovering, setIsHovering] = React.useState(false);
   const [target, setTarget] = React.useState(_target || '_self');
   React.useEffect(() => {
