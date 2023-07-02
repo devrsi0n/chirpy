@@ -11,8 +11,8 @@ export async function getPage(
   const { url, domain, title } = req.query as {
     [key: string]: string;
   };
-
-  const refererDomain = new URL(url).hostname;
+  const pageURL = new URL(url);
+  const refererDomain = pageURL.hostname;
   if (
     !url ||
     !domain ||
@@ -41,13 +41,15 @@ export async function getPage(
       error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
     });
   }
+  // URL's hash is not needed, or we'll treat it as a new URL
+  pageURL.hash = '';
   // Create page if not exist, or update the title
   const page = await prisma.page.upsert({
     where: {
-      url,
+      url: pageURL.href,
     },
     create: {
-      url,
+      url: pageURL.href,
       projectId,
       title,
     },

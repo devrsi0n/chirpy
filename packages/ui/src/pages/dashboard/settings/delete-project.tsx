@@ -1,7 +1,6 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../blocks';
 import {
   Button,
   Dialog,
@@ -9,18 +8,16 @@ import {
   IconLoader,
   Text,
   useToast,
-} from '../../components';
-import { logger } from '../../utilities';
+} from '../../../components';
+import { logger } from '../../../utilities';
+import { Card } from './card';
 
-export type ProjectSettingsProps = {
+type DeleteProjectProps = {
   domain: string;
   name: string;
 };
 
-export function ProjectSettings({
-  domain,
-  name,
-}: ProjectSettingsProps): JSX.Element {
+export function DeleteProject({ domain, name }: DeleteProjectProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const { mutateAsync: deleteProject, status } =
     trpcClient.project.delete.useMutation();
@@ -43,19 +40,16 @@ export function ProjectSettings({
     }
   };
   return (
-    <SiteLayout title="Project settings">
-      <PageTitle>Project settings, {name}</PageTitle>
-      <section className="mt-10 rounded border">
-        <div className="space-y-3 p-5">
-          <Heading as="h3" className="font-medium">
-            Delete project
-          </Heading>
+    <>
+      <Card>
+        <Card.Body>
+          <Card.Title>Delete project</Card.Title>
           <Text variant="secondary">
             Deleting this project will permanently remove all associated data,
             including comments and analytics. This action cannot be undone.
           </Text>
-        </div>
-        <footer className="flex justify-end border-t bg-gray-300 px-5 py-3">
+        </Card.Body>
+        <Card.Footer>
           <Button
             variant="solid"
             color="red"
@@ -66,8 +60,8 @@ export function ProjectSettings({
           >
             Delete
           </Button>
-        </footer>
-      </section>
+        </Card.Footer>
+      </Card>
       <Dialog
         type="alert"
         title={`Delete project ${name}`}
@@ -91,6 +85,6 @@ export function ProjectSettings({
           </Button>
         </Dialog.Footer>
       </Dialog>
-    </SiteLayout>
+    </>
   );
 }

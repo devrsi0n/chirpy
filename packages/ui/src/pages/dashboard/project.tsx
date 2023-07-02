@@ -1,4 +1,4 @@
-import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { DehydratedState } from '@tanstack/react-query';
 import clsx from 'clsx';
 import * as React from 'react';
@@ -10,7 +10,6 @@ import { listHoverable } from '../../styles/common';
 export type ProjectProps = {
   domain: string;
   trpcState: DehydratedState;
-  project: RouterOutputs['project']['byDomain'];
 };
 
 export function Project(props: ProjectProps): JSX.Element {
@@ -30,18 +29,26 @@ export function Project(props: ProjectProps): JSX.Element {
                 key={page.id}
                 className={clsx(
                   index !== project.pages.length - 1 && 'border-b',
-                  'flex items-center justify-between px-4 py-3',
+                  'flex items-center justify-between gap-4 px-4 py-3',
                 )}
               >
                 <Link
                   href={page.url}
                   variant="plain"
-                  className={clsx(listHoverable, 'inline-block max-w-sm')}
+                  className={clsx(listHoverable, 'flex flex-col')}
                 >
-                  {page.title || page.url}
+                  <span className="font-bold">{page.title}</span>
+                  <span className="text-sm">{page.url}</span>
                 </Link>
-                <Link href={url.href} variant="plain">
-                  <IconMessageSquare size={20} className="text-secondary" />
+                <Link
+                  href={url.href}
+                  variant="plain"
+                  className="rounded-full p-2 hover:bg-gray-300"
+                >
+                  <IconMessageSquare
+                    size={20}
+                    className="text-secondary -scale-x-1"
+                  />
                 </Link>
               </li>
             );

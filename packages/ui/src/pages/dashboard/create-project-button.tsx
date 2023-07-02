@@ -1,4 +1,3 @@
-import { isENVProd } from '@chirpy-dev/utils';
 import * as React from 'react';
 
 import {
@@ -19,11 +18,8 @@ export function CreateProjectButton(
   props: CreateProjectButtonProps,
 ): JSX.Element {
   const { data } = useCurrentUser();
-  // let disabledType: DisabledType | undefined = 'maintenanceMode';
   let disabledType: DisabledType | undefined;
-  if (isENVProd && (props.projectCount || 0) > 0) {
-    disabledType = 'projectLimit';
-  } else if (!data.email) {
+  if (!data.email) {
     disabledType = 'anonymous';
   } else if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
     disabledType = 'maintenanceMode';
@@ -59,7 +55,7 @@ export function CreateProjectButton(
   );
 }
 
-type DisabledType = 'anonymous' | 'projectLimit' | 'maintenanceMode';
+type DisabledType = 'anonymous' | 'maintenanceMode';
 const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
   anonymous: (
     <section className="w-[24rem]">
@@ -69,16 +65,6 @@ const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
       <Text className="mt-2" variant="secondary">
         Otherwise, you may lose access to your project after creation. You can
         re-sign in with your email or social media account.
-      </Text>
-    </section>
-  ),
-  projectLimit: (
-    <section className="w-[24rem]">
-      <Heading as="h5" className="font-bold">
-        Reached the maximum number of projects
-      </Heading>
-      <Text className="mt-2" variant="secondary">
-        You can delete an existing project to create a new one.
       </Text>
     </section>
   ),

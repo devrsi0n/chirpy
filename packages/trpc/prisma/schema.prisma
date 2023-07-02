@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["jsonProtocol"]
 }
 
@@ -135,21 +135,23 @@ model Page {
 }
 
 model Project {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
-  teamId    String?
-  userId    String?
-  theme     Json?
-  domain    String   @unique
-  team      Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  pages     Page[]
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  name            String
+  teamId          String?
+  userId          String?
+  theme           Json?
+  domain          String   @unique
+  team            Team?    @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user            User?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pages           Page[]
+  // Extra page identifiers, separated by commas
+  queryParameters String?
 
+  @@unique([userId, name])
   @@index([teamId])
   @@index([userId])
-  @@unique([userId, name])
 }
 
 model Role {

@@ -31,8 +31,7 @@ export type ThemeEditorProps = {
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
 
-  const { mutateAsync: updateTheme } =
-    trpcClient.project.updateTheme.useMutation();
+  const { mutateAsync: updateTheme } = trpcClient.project.update.useMutation();
   const { showToast } = useToast();
   const revalidateProjectPages = useRevalidateProjectPages();
   const saveTheme = debounce(

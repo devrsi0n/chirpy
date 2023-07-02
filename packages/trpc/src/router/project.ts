@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
+import { UPDATE_PROJECT_INPUT, updateProject } from '../project/update-project';
 import { protectedProcedure, publicProcedure, router } from '../trpc-server';
 
 export const projectRouter = router({
@@ -99,29 +100,10 @@ export const projectRouter = router({
         }),
       ]);
     }),
-  updateTheme: protectedProcedure
-    .input(
-      z.object({
-        projectId: z.string(),
-        theme: z.object({
-          colors: z.object({
-            light: z.any(),
-            dark: z.any(),
-          }),
-        }),
-      }),
-    )
+  update: protectedProcedure
+    .input(UPDATE_PROJECT_INPUT)
     .mutation(async ({ input, ctx }) => {
-      const project = await prisma.project.updateMany({
-        where: {
-          id: input.projectId,
-          userId: ctx.session.user.id,
-        },
-        data: {
-          theme: input.theme,
-        },
-      });
-      return project;
+      return await updateProject(input, ctx.session.user.id);
     }),
 });
 

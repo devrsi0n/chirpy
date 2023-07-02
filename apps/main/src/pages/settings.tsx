@@ -1,1 +1,1 @@
-export { ProjectSettings as default } from '@chirpy-dev/ui';
+export { Settings as default } from '@chirpy-dev/ui';

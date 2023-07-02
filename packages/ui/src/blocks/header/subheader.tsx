@@ -18,7 +18,7 @@ export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
         fixedPos && `z-10 sm:fixed sm:left-0 sm:top-0`,
       )}
     >
-      <nav className="flex w-full max-w-7xl gap-8">
+      <nav className="flex w-full max-w-7xl gap-8 overflow-y-auto">
         {isProjectLevel ? (
           <>
             <Link

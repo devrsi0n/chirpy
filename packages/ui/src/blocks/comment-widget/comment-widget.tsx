@@ -17,7 +17,7 @@ export function CommentWidget(): JSX.Element {
       />
       <Script
         src="/bootstrapper.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         data-chirpy-domain={new URL(getAppURL()).hostname}
       />
     </ClientOnly>

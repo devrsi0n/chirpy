@@ -41,6 +41,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       // trpcState: ssg.dehydrate(),
       domain,
       name: project.name,
+      id: project.id,
     },
     revalidate: 60 * 60,
   };
