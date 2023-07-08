@@ -3,6 +3,7 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
+    "bootstrap": "cd apps/bootstrapper && pnpm build && cd ../service-worker && pnpm build",
     "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "changeset": "changeset",
@@ -14,13 +15,13 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.8",
-    "@changesets/cli": "2.26.1",
+    "@changesets/cli": "2.26.2",
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/prettier-config": "workspace:*",
     "eslint": "8.44.0",
     "husky": "8.0.3",
     "lint-staged": "13.2.3",
-    "next": "13.4.7",
+    "next": "13.4.9",
     "prettier": "2.8.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",

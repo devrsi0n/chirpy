@@ -55,31 +55,14 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       <Card.Body>
         <Card.Title>Page identifier</Card.Title>
         <Text variant="secondary">
-          {`To distinguish between various pages on your site, we rely on the URL (excluding the `}
-          <Link
-            variant="primary"
-            href="https://en.wikipedia.org/wiki/URI_fragment"
-          >
-            {`fragment/hash`}
-          </Link>
-          {` and `}
+          {`Chirpy uses the URL domain + path of your page as the comment widget identifier by default, if you want to add `}
           <Link
             variant="primary"
             href="https://en.wikipedia.org/wiki/Query_string"
           >
             {`query parameters`}
           </Link>
-          {`) as the identifier.`}
-        </Text>
-        <Text variant="secondary">
-          {`For instance, if the URL of your page is `}
-          <em>https://example.com/blog?id=my-life#heading</em>
-          {` (assume it uses the id parameter to load different posts), then the page identifier would be `}
-          <em>https://example.com/blog</em>
-          {` by default, which loads the same widget on different pages, which might not be what you want.`}
-        </Text>
-        <Text variant="secondary">
-          {`If your page use query parameters as the identifier, please specify them below.`}
+          {` as the identifier, please specify them below.`}
         </Text>
         <div className="pt-6">
           <TextField
@@ -91,7 +74,8 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
             className="w-full"
             name="pageQueryParameters"
             label="Query parameters"
-            hintText="Multiply parameters must be separated by commas"
+            hintText="Multiple parameters must be separated by commas"
+            placeholder="id,name"
             errorMessage={error}
           />
         </div>

@@ -17,7 +17,7 @@ export function ProjectSettings({
 }: ProjectSettingsProps): JSX.Element {
   return (
     <SiteLayout title="Project settings">
-      <PageTitle>Project settings, {name}</PageTitle>
+      <PageTitle>Project settings</PageTitle>
       <PageIdentifier id={id} />
       <DeleteProject domain={domain} name={name} />
     </SiteLayout>

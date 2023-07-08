@@ -7,7 +7,9 @@ export type CardProps = {
 };
 
 export function Card(props: CardProps): JSX.Element {
-  return <section className="mt-10 rounded border">{props.children}</section>;
+  return (
+    <section className="mt-10 rounded-md border">{props.children}</section>
+  );
 }
 
 Card.Body = CardBody;
