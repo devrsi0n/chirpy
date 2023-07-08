@@ -31,6 +31,7 @@ export async function getPage(
       name: true,
       domain: true,
       theme: true,
+      queryParameters: true,
       createdAt: true,
     },
   });
@@ -43,6 +44,15 @@ export async function getPage(
   }
   // URL's hash is not needed, or we'll treat it as a new URL
   pageURL.hash = '';
+  const identifierParameters = project.queryParameters?.split(',') || [];
+  const toBeDeletedKeys: string[] = [];
+  pageURL.searchParams.forEach((_value, key) => {
+    if (!identifierParameters.includes(key)) {
+      toBeDeletedKeys.push(key);
+    }
+  });
+  toBeDeletedKeys.forEach((key) => pageURL.searchParams.delete(key));
+
   // Create page if not exist, or update the title
   const page = await prisma.page.upsert({
     where: {

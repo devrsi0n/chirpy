@@ -1,4 +1,8 @@
-import { trpcClient, TRPCClientError } from '@chirpy-dev/trpc/src/client';
+import {
+  RouterOutputs,
+  trpcClient,
+  TRPCClientError,
+} from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import {
@@ -12,12 +16,13 @@ import {
 import { logger } from '../../../utilities';
 import { Card } from './card';
 
-export type PageUrlProps = {
-  id: string;
-};
+export type PageUrlProps = Pick<
+  NonNullable<RouterOutputs['project']['byDomain']>,
+  'id' | 'queryParameters' | 'domain'
+>;
 
 export function PageIdentifier(props: PageUrlProps): JSX.Element {
-  const [parameter, setParameter] = React.useState('');
+  const [parameter, setParameter] = React.useState(props.queryParameters || '');
   const [error, setError] = React.useState('');
   const { mutateAsync, isLoading } = trpcClient.project.update.useMutation();
   const { showToast } = useToast();
@@ -26,6 +31,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       await mutateAsync({
         projectId: props.id,
         queryParameters: parameter,
+        domain: props.domain,
       });
       setError('');
       showToast({
@@ -55,7 +61,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       <Card.Body>
         <Card.Title>Page identifier</Card.Title>
         <Text variant="secondary">
-          {`Chirpy uses the URL domain + path of your page as the comment widget identifier by default, if you want to add `}
+          {`Chirpy uses the URL domain + path of your page as the identifier by default, if you want to add `}
           <Link
             variant="primary"
             href="https://en.wikipedia.org/wiki/Query_string"

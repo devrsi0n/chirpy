@@ -2,6 +2,13 @@ import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 
+const UPDATE_PROJECT_QUERY_PARAMETERS_INPUT = z.object({
+  projectId: z.string(),
+  // For revalidation
+  domain: z.string(),
+  queryParameters: z.string().regex(/^[\w-]+(?:,[\w-]+)*$/i),
+});
+
 export const UPDATE_PROJECT_INPUT = z
   .object({
     projectId: z.string(),
@@ -12,12 +19,7 @@ export const UPDATE_PROJECT_INPUT = z
       }),
     }),
   })
-  .or(
-    z.object({
-      projectId: z.string(),
-      queryParameters: z.string().regex(/^[\w-]+(?:,[\w-]+)*$/i),
-    }),
-  );
+  .or(UPDATE_PROJECT_QUERY_PARAMETERS_INPUT);
 
 export async function updateProject(
   input: z.infer<typeof UPDATE_PROJECT_INPUT>,
@@ -29,7 +31,7 @@ export async function updateProject(
       userId,
     },
     data: {
-      ...(isQueryParameters(input)
+      ...(isQueryParametersInput(input)
         ? {
             queryParameters: input.queryParameters,
           }
@@ -39,8 +41,8 @@ export async function updateProject(
   return project;
 }
 
-function isQueryParameters(
+export function isQueryParametersInput(
   input: z.infer<typeof UPDATE_PROJECT_INPUT>,
-): input is { queryParameters: string; projectId: string } {
+): input is z.infer<typeof UPDATE_PROJECT_QUERY_PARAMETERS_INPUT> {
   return 'queryParameters' in input;
 }

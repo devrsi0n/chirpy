@@ -5,6 +5,7 @@ import * as React from 'react';
 
 import { PageTitle, SiteLayout } from '../../blocks';
 import { Heading, IconMessageSquare, Link, Text } from '../../components';
+import { useCurrentUser } from '../../contexts';
 import { listHoverable } from '../../styles/common';
 
 export type ProjectProps = {
@@ -14,6 +15,7 @@ export type ProjectProps = {
 
 export function Project(props: ProjectProps): JSX.Element {
   const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
+  const { data: user } = useCurrentUser();
   return (
     <SiteLayout title="Project">
       <PageTitle>{project?.name}</PageTitle>
@@ -53,6 +55,17 @@ export function Project(props: ProjectProps): JSX.Element {
               </li>
             );
           })}
+          {!project?.pages.length && (
+            <li className="px-4 py-3">
+              No pages found,{' '}
+              <Link
+                href={`/dashboard/${user.username}/${project?.domain}/getting-started`}
+                variant="primary"
+              >
+                get started
+              </Link>
+            </li>
+          )}
         </ul>
       </section>
     </SiteLayout>

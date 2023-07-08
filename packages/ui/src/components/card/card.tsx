@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 
 import { bluredBg } from '../../styles/common';
-import { PolymorphicComponentProps, Box } from '../box';
+import { Box, PolymorphicComponentProps } from '../box';
 
 type CustomComponentOwnProps = {
   /**
@@ -24,7 +24,7 @@ export function Card<E extends React.ElementType>({
     <Box
       className={clsx(
         bluredBg,
-        `rounded border border-gray-400`,
+        `rounded border border-gray-400 transition`,
         shadow && `shadow-xs hover:shadow-lg`,
         className,
       )}

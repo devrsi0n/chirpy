@@ -1,5 +1,5 @@
-import { ReactNode } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useInView } from 'framer-motion';
+import React, { ReactNode } from 'react';
 
 type InViewProps = {
   children: ReactNode;
@@ -7,7 +7,8 @@ type InViewProps = {
 };
 
 export default function InView({ children, height }: InViewProps) {
-  const [ref, inView] = useInView({ threshold: 0, triggerOnce: true });
+  const ref = React.useRef<HTMLDivElement>(null);
+  const inView = useInView(ref);
   return (
     <div ref={ref} style={{ height }}>
       {inView && children}

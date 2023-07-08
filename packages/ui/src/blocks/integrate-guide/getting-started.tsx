@@ -30,7 +30,7 @@ export function GettingStartedBody({ domain }: { domain: string }) {
           {`. With Chirpy, you can seamlessly integrate the analytics service and save time and effort.`}
         </Text>
         <Text variant="secondary">
-          {`Getting started is a breeze. Simply follow these simple steps:`}
+          {`Getting started is a breeze. Simply follow these steps:`}
         </Text>
       </div>
       <ol className="flex list-outside list-decimal flex-col gap-3 ps-4">

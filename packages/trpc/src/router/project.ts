@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
-import { UPDATE_PROJECT_INPUT, updateProject } from '../project/update-project';
+import {
+  isQueryParametersInput,
+  UPDATE_PROJECT_INPUT,
+  updateProject,
+} from '../project/update-project';
 import { protectedProcedure, publicProcedure, router } from '../trpc-server';
 
 export const projectRouter = router({
@@ -28,6 +32,7 @@ export const projectRouter = router({
         domain: true,
         theme: true,
         createdAt: true,
+        queryParameters: true,
         pages: {
           select: {
             id: true,
@@ -103,7 +108,13 @@ export const projectRouter = router({
   update: protectedProcedure
     .input(UPDATE_PROJECT_INPUT)
     .mutation(async ({ input, ctx }) => {
-      return await updateProject(input, ctx.session.user.id);
+      const project = await updateProject(input, ctx.session.user.id);
+      if (isQueryParametersInput(input)) {
+        ctx.res.revalidate(
+          `/dashboard/${ctx.session.user}/${input.domain}/settings`,
+        );
+      }
+      return project;
     }),
 });
 

@@ -39,7 +39,7 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
     <Card
       as="section"
       key={project.id}
-      className="max-w-sm space-y-4 pt-4 hover:cursor-pointer"
+      className="max-w-sm space-y-4 pt-4 hover:cursor-pointer hover:border-primary-600"
       role="button"
       onClick={() => {
         router.push(`/dashboard/${data.username}/${project.domain}`);

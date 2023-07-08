@@ -32,6 +32,7 @@ export function Welcome(/*props: WelcomeProps*/): JSX.Element {
 }
 
 function FullFilled(): JSX.Element {
+  const { data } = useCurrentUser();
   return (
     <section className="flex flex-col items-center justify-center space-y-12">
       <div className="space-y-2 text-center">
@@ -45,7 +46,7 @@ function FullFilled(): JSX.Element {
       </div>
       <div className="space-x-4">
         <Button variant="solid" color="primary">
-          <Link href="/dashboard" variant="plain">
+          <Link href={`/dashboard/${data.username}`} variant="plain">
             Dashboard
           </Link>
         </Button>

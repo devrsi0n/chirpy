@@ -1,7 +1,6 @@
 import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
-import { Badge } from '../../components/badge';
 import { Heading } from '../../components/heading';
 import { IconBell } from '../../components/icons';
 import { Menu } from '../../components/menu';
@@ -37,7 +36,7 @@ export function NotificationHub(): JSX.Element {
         >
           <IconBell size={22} />
           {hasUnreadNotifications && (
-            <Badge className="absolute right-0.5 top-0.5 !bg-red-900 ring-1 ring-white dark:ring-black" />
+            <span className="absolute right-[3px] top-[1px] rounded-full bg-red-900 p-1 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
         <Menu.Items>
