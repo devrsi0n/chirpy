@@ -3,7 +3,7 @@ import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { log } from 'next-axiom';
 import webpush, { PushSubscription } from 'web-push';
 
-import { NotificationSubscription, prisma } from '../common/db-client';
+import { NotificationSubscription, prisma } from '../../common/db-client';
 import { NotificationPayload } from './types';
 
 export type WebNotificationPayload = {

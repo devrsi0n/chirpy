@@ -1,6 +1,5 @@
 export * from './authentication';
 export * from './page';
-export * from './error';
 export * from './theme';
 export * from './utilities';
 export * from './toxic-text';

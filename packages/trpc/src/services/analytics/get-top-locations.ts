@@ -7,9 +7,9 @@ import {
 import { queryPipe } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { AnalyticsInput } from './constants';
+import { ANALYTICS_INPUT } from './constants';
 
-export const TOP_LOCATIONS_INPUT = AnalyticsInput.extend({
+export const TOP_LOCATIONS_INPUT = ANALYTICS_INPUT.extend({
   sorting: z.enum(
     Object.values(TopLocationsSorting) as TopLocationsSortingValueTuple,
   ),

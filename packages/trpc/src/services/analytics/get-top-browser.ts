@@ -1,7 +1,7 @@
 import { TopBrowsersData } from '@chirpy-dev/types';
 import { browsers, queryPipe } from '@chirpy-dev/utils';
 
-import { AnalyticsInput } from './constants';
+import { ANALYTICS_INPUT } from './constants';
 
 export async function getTopBrowser(input: AnalyticsInput) {
   const { data: queryData } = await queryPipe<TopBrowsersData>(

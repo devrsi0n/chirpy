@@ -3,8 +3,8 @@ import { log } from 'next-axiom';
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
-import { handleCommentEvent } from '../mutation-event/comment-handler';
-import { handleLikeEvent } from '../mutation-event/like-handler';
+import { handleCommentEvent } from '../services/mutation-event/comment-handler';
+import { handleLikeEvent } from '../services/mutation-event/like-handler';
 import { protectedProcedure, router } from '../trpc-server';
 import { RTE_CONTENT_INPUT } from './comment';
 

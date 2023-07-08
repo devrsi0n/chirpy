@@ -8,9 +8,9 @@ import {
 import { cpDayjs, queryPipe } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { AnalyticsInput } from './constants';
+import { ANALYTICS_INPUT } from './constants';
 
-export const KPIS_INPUT = AnalyticsInput.extend({
+export const KPIS_INPUT = ANALYTICS_INPUT.extend({
   kpi: z.enum(ALL_KPIS),
 });
 

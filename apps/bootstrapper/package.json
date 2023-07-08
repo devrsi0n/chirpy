@@ -32,5 +32,11 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@chirpy-dev/trpc": "workspace:*",
+    "@trpc/client": "10.34.0",
+    "@trpc/server": "10.34.0",
+    "superjson": "1.12.4"
   }
 }

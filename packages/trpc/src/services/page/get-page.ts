@@ -1,16 +1,19 @@
-import { prisma } from '@chirpy-dev/trpc';
-import { ERR_UNMATCHED_DOMAIN } from '@chirpy-dev/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 
-import { PagePayload } from './types';
+import { prisma } from '../../common/db-client';
 
-export async function getPage(
-  req: NextApiRequest,
-  res: NextApiResponse<PagePayload>,
-): Promise<void> {
-  const { url, domain, title } = req.query as {
-    [key: string]: string;
-  };
+export const PAGE_BY_URL_INPUT = z.object({
+  url: z.string().url(),
+  domain: z.string(),
+  title: z.string(),
+});
+
+export async function getPage({
+  url,
+  domain,
+  title,
+}: z.infer<typeof PAGE_BY_URL_INPUT>) {
   const pageURL = new URL(url);
   const refererDomain = pageURL.hostname;
   if (
@@ -18,8 +21,9 @@ export async function getPage(
     !domain ||
     (!isLocalDomain(refererDomain) && domain !== refererDomain)
   ) {
-    return res.status(400).json({
-      error: `url(${url}) and domain(${domain}) must be matched`,
+    throw new TRPCError({
+      code: 'FORBIDDEN',
+      message: `url(${url}) and domain(${domain}) must be matched`,
     });
   }
   const project = await prisma.project.findUnique({
@@ -37,9 +41,9 @@ export async function getPage(
   });
   const projectId = project?.id;
   if (!projectId) {
-    return res.status(500).json({
-      code: ERR_UNMATCHED_DOMAIN,
-      error: `Wrong domain(${domain}), you may need to create a project first, or your configuration is wrong`,
+    throw new TRPCError({
+      code: 'FORBIDDEN',
+      message: `Wrong domain(${domain}), you may need to create the project first, or your configuration is wrong`,
     });
   }
   // URL's hash is not needed, or we'll treat it as a new URL
@@ -68,8 +72,7 @@ export async function getPage(
     },
   });
 
-  return res.json(page);
+  return page;
 }
-
 const isLocalDomain = (domain: string) =>
   ['localhost', '127.0.0.1'].includes(domain);

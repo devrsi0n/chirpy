@@ -1,7 +1,6 @@
-import type { ResponseError } from '@chirpy-dev/types';
-import { ERR_UNMATCHED_DOMAIN, EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
+import { EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
-import type { PagePayload } from '../../../main/src/server/services/types';
+import { client } from './client';
 import { loadFlock } from './load-flock';
 import {
   observeAndBroadcastThemeChange,
@@ -40,20 +39,11 @@ export async function initCommentWidget(): Promise<void> {
       `Can't find the render target, did you forget to add ${QUERY_RENDER_TARGET}?`,
     );
   }
-  const res = await fetch(
-    `${
-      process.env.NEXT_PUBLIC_APP_URL
-    }/api/page?domain=${domain}&url=${encodeURIComponent(
-      location.href,
-    )}&title=${encodeURIComponent(document.title)}`,
-  );
-  const page: PagePayload = await res.json();
-  if (isResponseError(page)) {
-    if (page.code == ERR_UNMATCHED_DOMAIN) {
-      return console.error(page.error);
-    }
-    throw new Error(page.error);
-  }
+  const page = await client.page.byUrl.query({
+    url: location.href,
+    title: document.title,
+    domain,
+  });
   loadFlock();
   if (!page) {
     console.error('Unexpected null from response');
@@ -93,10 +83,6 @@ export async function initCommentWidget(): Promise<void> {
   }/widget/comment/${encodeURIComponent(page.url)}?referrer=${location.origin}`;
   observeAndBroadcastThemeChange(iframe, renderTarget);
   renderTarget.append(iframe);
-}
-
-function isResponseError(res: PagePayload): res is ResponseError {
-  return !!(res as ResponseError).error;
 }
 
 const getIframeId = (id: string) => `chirpy-${id}`;

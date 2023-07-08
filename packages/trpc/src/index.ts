@@ -4,5 +4,5 @@ export * from './trpc-server';
 export * from './common/db-client';
 export * from './common/revalidate';
 export { createNextApiHandler } from '@trpc/server/adapters/next';
-export { appRouter } from './router';
+export * from './router';
 export { ssg } from './ssg';

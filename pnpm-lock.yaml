@@ -33,10 +33,13 @@ importers:
   apps/bootstrapper:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
+      '@chirpy-dev/trpc': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@chirpy-dev/types': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@testing-library/react': 14.0.0
+      '@trpc/client': 10.34.0
+      '@trpc/server': 10.34.0
       '@types/jest': 29.5.2
       '@types/node': 18.16.18
       '@types/react': 18.2.14
@@ -48,9 +51,15 @@ importers:
       jest: 29.6.1
       react: 18.2.0
       react-dom: 18.2.0
+      superjson: 1.12.4
       typescript: 5.1.6
       vite: 4.4.1
       vite-plugin-dts: 2.3.0
+    dependencies:
+      '@chirpy-dev/trpc': link:../../packages/trpc
+      '@trpc/client': 10.34.0_@trpc+server@10.34.0
+      '@trpc/server': 10.34.0
+      superjson: 1.12.4
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs

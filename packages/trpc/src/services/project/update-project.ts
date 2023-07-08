@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { prisma } from '../common/db-client';
+import { prisma } from '../../common/db-client';
 
 const UPDATE_PROJECT_QUERY_PARAMETERS_INPUT = z.object({
   projectId: z.string(),

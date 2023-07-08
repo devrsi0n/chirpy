@@ -1,23 +1,30 @@
-import { AnalyticsInput } from '../analytics/constants';
+import { ANALYTICS_INPUT } from '../services/analytics/constants';
 import {
   CURRENT_VISITORS_INPUT,
   getCurrentVisitors,
-} from '../analytics/get-current-visitors';
-import { KPIS_INPUT, getKpiTotals, getKpis } from '../analytics/get-kpis';
-import { getTopBrowser } from '../analytics/get-top-browser';
-import { getTopDevice } from '../analytics/get-top-device';
+} from '../services/analytics/get-current-visitors';
 import {
-  TOP_LOCATIONS_INPUT,
+  getKpis,
+  getKpiTotals,
+  KPIS_INPUT,
+} from '../services/analytics/get-kpis';
+import { getTopBrowser } from '../services/analytics/get-top-browser';
+import { getTopDevice } from '../services/analytics/get-top-device';
+import {
   getTopLocations,
-} from '../analytics/get-top-locations';
-import { TOP_PAGES_INPUT, getTopPages } from '../analytics/get-top-pages';
-import { getTopSources } from '../analytics/get-top-source';
-import { getTrend } from '../analytics/get-trend';
-import { router, protectedProcedure } from '../trpc-server';
+  TOP_LOCATIONS_INPUT,
+} from '../services/analytics/get-top-locations';
+import {
+  getTopPages,
+  TOP_PAGES_INPUT,
+} from '../services/analytics/get-top-pages';
+import { getTopSources } from '../services/analytics/get-top-source';
+import { getTrend } from '../services/analytics/get-trend';
+import { protectedProcedure, router } from '../trpc-server';
 
 export const analyticsRouter = router({
   kpiTotal: protectedProcedure
-    .input(AnalyticsInput)
+    .input(ANALYTICS_INPUT)
     .query(async ({ input }) => {
       return getKpiTotals(input);
     }),
@@ -30,12 +37,12 @@ export const analyticsRouter = router({
       return getCurrentVisitors(input);
     }),
   topBrowser: protectedProcedure
-    .input(AnalyticsInput)
+    .input(ANALYTICS_INPUT)
     .query(async ({ input }) => {
       return getTopBrowser(input);
     }),
   topDevice: protectedProcedure
-    .input(AnalyticsInput)
+    .input(ANALYTICS_INPUT)
     .query(async ({ input }) => {
       return getTopDevice(input);
     }),
@@ -50,11 +57,11 @@ export const analyticsRouter = router({
       return getTopPages(input);
     }),
   topSources: protectedProcedure
-    .input(AnalyticsInput)
+    .input(ANALYTICS_INPUT)
     .query(async ({ input }) => {
       return getTopSources(input);
     }),
-  trend: protectedProcedure.input(AnalyticsInput).query(async ({ input }) => {
+  trend: protectedProcedure.input(ANALYTICS_INPUT).query(async ({ input }) => {
     return getTrend(input);
   }),
 });

@@ -5,7 +5,7 @@ import {
   isQueryParametersInput,
   UPDATE_PROJECT_INPUT,
   updateProject,
-} from '../project/update-project';
+} from '../services/project/update-project';
 import { protectedProcedure, publicProcedure, router } from '../trpc-server';
 
 export const projectRouter = router({

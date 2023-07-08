@@ -3,6 +3,7 @@ import { analyticsRouter } from './analytics';
 import { commentRouter } from './comment';
 import { likeRouter } from './like';
 import { notificationRouter } from './notification';
+import { pageRouter } from './page';
 import { projectRouter } from './project';
 import { revalidateRouter } from './revalidate';
 import { userRouter } from './user';
@@ -15,6 +16,7 @@ export const appRouter = router({
   like: likeRouter,
   revalidate: revalidateRouter,
   analytics: analyticsRouter,
+  page: pageRouter,
 });
 
 export type AppRouter = typeof appRouter;
