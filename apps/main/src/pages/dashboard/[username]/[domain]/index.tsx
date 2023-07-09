@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
 }: GetStaticPropsContext<PathParams>): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
-  if (!params?.domain) {
+  if (!params?.domain || !params?.username) {
     return { notFound: true };
   }
   const { domain } = params;
@@ -38,8 +38,8 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   return {
     props: {
-      trpcState: ssg.dehydrate(),
-      domain,
+      ...project,
+      username: params.username,
     },
     revalidate: 60,
   };

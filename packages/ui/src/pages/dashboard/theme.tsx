@@ -1,26 +1,24 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import { Theme as ThemeType } from '@chirpy-dev/types';
-import { DehydratedState } from '@tanstack/react-query';
 
 import {
+  CommentWidgetPreviewProps,
   SiteLayout,
   THEME_WIDGET_CLS,
   ThemeEditor,
-  ThemeEditorProps,
 } from '../../blocks';
-import { Text } from '../../components';
 import { WidgetThemeProvider } from '../../contexts';
 
 export type ThemeProps = {
-  trpcState: DehydratedState;
-  domain: string;
-} & Pick<ThemeEditorProps, 'buildDate'>;
+  project: NonNullable<RouterOutputs['project']['byDomain']>;
+  username: string;
+} & Pick<CommentWidgetPreviewProps, 'buildDate'>;
 
-export function ThemePage(props: ThemeProps): JSX.Element {
-  const { data: project } = trpc.project.byDomain.useQuery(props.domain);
-  if (!project) {
-    return <Text>No project, please create one first</Text>;
-  }
+export function ThemePage({
+  project,
+  buildDate,
+  username,
+}: ThemeProps): JSX.Element {
   return (
     <SiteLayout
       title={project?.name || 'Theme'}
@@ -32,7 +30,11 @@ export function ThemePage(props: ThemeProps): JSX.Element {
         widgetTheme={project?.theme as ThemeType}
         selector={`.${THEME_WIDGET_CLS}`}
       >
-        <ThemeEditor project={project} buildDate={props.buildDate} />
+        <ThemeEditor
+          username={username}
+          project={project}
+          buildDate={buildDate}
+        />
       </WidgetThemeProvider>
     </SiteLayout>
   );

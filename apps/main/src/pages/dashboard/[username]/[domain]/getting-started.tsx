@@ -38,9 +38,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   return {
     props: {
-      // trpcState: ssg.dehydrate(),
       domain,
-      // name: project.name,
     },
     revalidate: 60,
   };

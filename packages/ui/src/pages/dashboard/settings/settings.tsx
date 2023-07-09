@@ -8,6 +8,7 @@ import { ProjectInfo } from './project-info';
 
 export type ProjectSettingsProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;
+  username: string;
 };
 
 export function ProjectSettings(props: ProjectSettingsProps): JSX.Element {
@@ -15,13 +16,19 @@ export function ProjectSettings(props: ProjectSettingsProps): JSX.Element {
   return (
     <SiteLayout title="Project settings">
       <PageTitle>Project settings</PageTitle>
-      <ProjectInfo id={id} domain={domain} name={name} />
+      <ProjectInfo
+        id={id}
+        domain={domain}
+        name={name}
+        username={props.username}
+      />
       <PageIdentifier
         id={id}
         domain={domain}
         queryParameters={queryParameters}
+        username={props.username}
       />
-      <DeleteProject domain={domain} name={name} />
+      <DeleteProject domain={domain} name={name} username={props.username} />
     </SiteLayout>
   );
 }

@@ -10,6 +10,7 @@ export type ProjectInfoProps = {
   id: string;
   name: string;
   domain: string;
+  username: string;
 };
 
 type FormFields = {
@@ -26,6 +27,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
       domain: props.domain,
     },
   });
+  const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
   const handleSave = handleSubmit(async (fields): Promise<void> => {
     try {
       await mutateAsync({
@@ -36,6 +38,9 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
       showToast({
         type: 'success',
         title: 'Page info updated',
+      });
+      void revalidate({
+        url: `/dashboard/${props.username}/${props.domain}/settings`,
       });
     } catch (error) {
       showToast({
@@ -79,6 +84,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
           errorMessage={errors.domain}
           placeholder="example.com"
           className="w-full"
+          disabled
         />
       </Card.Body>
       <Card.Footer>

@@ -1,14 +1,14 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Dashboard } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { mockProject } from '../../../__tests__/mocks/mock-project-data';
+import { DashboardHome } from '../home';
 
 describe('dashboard', () => {
   beforeEach(() => {
     // @ts-expect-error
-    pageRender(<Dashboard username="jest" trpcState={{}} />);
+    pageRender(<DashboardHome username="jest" trpcState={{}} />);
   });
 
   afterEach(() => {

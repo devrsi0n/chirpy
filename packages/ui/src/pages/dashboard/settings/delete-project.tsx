@@ -1,4 +1,5 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import {
@@ -14,19 +15,31 @@ import { Card } from './card';
 type DeleteProjectProps = {
   domain: string;
   name: string;
+  username: string;
 };
 
-export function DeleteProject({ domain, name }: DeleteProjectProps) {
+export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const { mutateAsync: deleteProject, status } =
     trpc.project.delete.useMutation();
   const loading = status === 'loading';
   const { showToast } = useToast();
+  const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
+  const router = useRouter();
   const handleClickConfirmDelete = async () => {
     try {
       await deleteProject({
         domain,
       });
+      setShowDialog(false);
+      showToast({
+        type: 'success',
+        title: 'Project deleted',
+      });
+      await revalidate({
+        url: `/dashboard/${username}`,
+      });
+      router.push(`/dashboard/${username}`);
     } catch (error) {
       logger.error('Delete project failed', { error });
       showToast({

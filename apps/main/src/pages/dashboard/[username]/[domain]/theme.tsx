@@ -11,6 +11,7 @@ import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {
   domain: string;
+  username: string;
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
@@ -26,7 +27,7 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
 }: GetStaticPropsContext<PathParams>): Promise<
   GetStaticPropsResult<StaticProps>
 > => {
-  if (!params?.domain) {
+  if (!params?.domain || !params?.username) {
     return { notFound: true };
   }
   const { domain } = params;
@@ -36,9 +37,9 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   }
   return {
     props: {
-      trpcState: ssg.dehydrate(),
-      domain,
+      project,
       buildDate: new Date().toISOString(),
+      username: params.username,
     },
     revalidate: 60,
   };

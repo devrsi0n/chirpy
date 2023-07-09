@@ -1,23 +1,4 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
-import * as React from 'react';
-
 import { translateHslColor } from '../../contexts/theme-context/utilities';
-
-export function useRevalidateProjectPages() {
-  const { mutateAsync: revalidateWidget } =
-    trpc.revalidate.widget.useMutation();
-  const { mutateAsync: revalidateTheme } = trpc.revalidate.theme.useMutation();
-
-  return React.useCallback(
-    async (projectId: string, domain: string) => {
-      await Promise.all([
-        revalidateWidget({ projectId }),
-        revalidateTheme({ domain }),
-      ]);
-    },
-    [revalidateWidget, revalidateTheme],
-  );
-}
 
 export function hslToHex(hslColor: string) {
   if (!hslColor) {

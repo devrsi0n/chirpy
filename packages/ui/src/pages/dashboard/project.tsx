@@ -1,36 +1,42 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
-import { DehydratedState } from '@tanstack/react-query';
 import clsx from 'clsx';
 import * as React from 'react';
 
 import { PageTitle, SiteLayout } from '../../blocks';
 import { Heading, IconMessageSquare, Link, Text } from '../../components';
-import { useCurrentUser } from '../../contexts';
 import { listHoverable } from '../../styles/common';
 
 export type ProjectProps = {
+  username: string;
   domain: string;
-  trpcState: DehydratedState;
+  name: string;
+  pages: {
+    id: string;
+    title: string | null;
+    url: string;
+  }[];
 };
 
-export function Project(props: ProjectProps): JSX.Element {
-  const { data: project } = trpc.project.byDomain.useQuery(props.domain);
-  const { data: user } = useCurrentUser();
+export function Project({
+  name,
+  domain,
+  pages,
+  username,
+}: ProjectProps): JSX.Element {
   return (
     <SiteLayout title="Project">
-      <PageTitle>{project?.name}</PageTitle>
+      <PageTitle>{name}</PageTitle>
       <section className="mt-6 space-y-4">
         <Heading>Pages</Heading>
         <Text variant="secondary">All pages that have a comment widget</Text>
         <ul className="rounded border">
-          {project?.pages.map((page, index) => {
+          {pages.map((page, index) => {
             const url = new URL(page.url);
             url.hash = 'chirpy-comment';
             return (
               <li
                 key={page.id}
                 className={clsx(
-                  index !== project.pages.length - 1 && 'border-b',
+                  index !== pages.length - 1 && 'border-b',
                   'flex items-center justify-between gap-4 px-4 py-3',
                 )}
               >
@@ -55,11 +61,11 @@ export function Project(props: ProjectProps): JSX.Element {
               </li>
             );
           })}
-          {!project?.pages.length && (
+          {pages.length === 0 && (
             <li className="px-4 py-3">
               No pages found,{' '}
               <Link
-                href={`/dashboard/${user.username}/${project?.domain}/getting-started`}
+                href={`/dashboard/${username}/${domain}/getting-started`}
                 variant="primary"
               >
                 get started

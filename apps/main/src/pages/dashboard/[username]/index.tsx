@@ -7,7 +7,7 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
-export { Dashboard as default } from '@chirpy-dev/ui';
+export { DashboardHome as default } from '@chirpy-dev/ui';
 
 type PathParams = {
   username: string;
@@ -51,14 +51,13 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   const { username } = params;
-  // prefetch projects
-  await ssg.project.all.fetch({
+  const projects = await ssg.project.all.fetch({
     username,
   });
 
   return {
     props: {
-      trpcState: ssg.dehydrate(),
+      projects,
       username,
     },
     revalidate: 60,

@@ -19,13 +19,16 @@ import { Card } from './card';
 export type PageUrlProps = Pick<
   NonNullable<RouterOutputs['project']['byDomain']>,
   'id' | 'queryParameters' | 'domain'
->;
+> & {
+  username: string;
+};
 
 export function PageIdentifier(props: PageUrlProps): JSX.Element {
   const [parameter, setParameter] = React.useState(props.queryParameters || '');
   const [error, setError] = React.useState('');
   const { mutateAsync, isLoading } = trpc.project.update.useMutation();
   const { showToast } = useToast();
+  const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
   const handleSaveQueryParameters = async () => {
     try {
       await mutateAsync({
@@ -37,6 +40,9 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       showToast({
         type: 'success',
         title: 'Page identifier updated',
+      });
+      void revalidate({
+        url: `/dashboard/${props.username}/${props.domain}/settings`,
       });
     } catch (error) {
       if (

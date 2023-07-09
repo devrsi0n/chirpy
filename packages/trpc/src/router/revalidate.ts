@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 import { revalidateCommentWidgets } from '../common/revalidate';
-import { router, protectedProcedure } from '../trpc-server';
+import { protectedProcedure, router } from '../trpc-server';
 
 export const revalidateRouter = router({
   widget: protectedProcedure
@@ -23,9 +23,9 @@ export const revalidateRouter = router({
       const pageURLs = project?.pages.map((p) => p.url) || [];
       await revalidateCommentWidgets(pageURLs, ctx.res);
     }),
-  theme: protectedProcedure
-    .input(z.object({ domain: z.string() }))
+  url: protectedProcedure
+    .input(z.object({ url: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      await ctx.res.revalidate(`/theme/${input.domain}`);
+      await ctx.res.revalidate(input.url);
     }),
 });
