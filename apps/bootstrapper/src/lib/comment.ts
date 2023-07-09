@@ -23,30 +23,32 @@ export async function initCommentWidget(): Promise<void> {
   // <iframe src="/widget/comment/xxxxx/xxxxxx"><iframe>
   const script: HTMLScriptElement | null = document.querySelector(QUERY_SCRIPT);
   if (!script) {
-    throw new Error(
-      `Can't find the chirpy domain, did you forget to add ${QUERY_SCRIPT} to your script?`,
+    console.error(
+      `[Chirpy] Can't find the chirpy domain, did you forget to add ${QUERY_SCRIPT} to your script?`,
     );
+    return;
   }
   const domain = script.dataset['chirpyDomain'];
   if (!domain) {
-    throw new Error(`No domain specified`);
-  }
-
-  const renderTarget: HTMLElement | null =
-    document.querySelector(QUERY_RENDER_TARGET);
-  if (!renderTarget) {
-    throw new Error(
-      `Can't find the render target, did you forget to add ${QUERY_RENDER_TARGET}?`,
-    );
+    console.error(`[Chirpy] No domain specified`);
+    return;
   }
   const page = await client.page.byUrl.query({
     url: location.href,
     title: document.title,
     domain,
   });
-  loadFlock();
   if (!page) {
-    console.error('Unexpected null from response');
+    console.error('[Chirpy] Unexpected empty response');
+    return;
+  }
+  loadFlock();
+  const renderTarget: HTMLElement | null =
+    document.querySelector(QUERY_RENDER_TARGET);
+  if (!renderTarget) {
+    console.log(
+      `[Chirpy] No comment target ${QUERY_RENDER_TARGET}, ignore this message if you only want to integrate analytics`,
+    );
     return;
   }
   const id = getIframeId(page.id);

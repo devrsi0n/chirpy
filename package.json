@@ -7,7 +7,7 @@
     "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "changeset": "changeset",
-    "lint": "eslint --fix ./",
+    "lint": "eslint --fix --max-warnings=0 ./",
     "release": "turbo run build && changeset publish",
     "test": "turbo run test --filter=@chirpy-dev/main-app...",
     "version-packages": "changeset version",

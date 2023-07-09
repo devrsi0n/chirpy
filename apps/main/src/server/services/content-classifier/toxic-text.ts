@@ -23,6 +23,7 @@ export function getToxicModel() {
   return global.toxicModelPromise;
 }
 
+// Don't move this function to trpc, as it needs nodejs runtime
 export async function checkToxicText(
   req: NextApiRequest,
   res: NextApiResponse<ICheckToxicText>,

@@ -20,6 +20,7 @@ export function AnalyticsByDomainPage({
   return (
     <>
       <Head>
+        {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link href="/css/analytics.css" rel="stylesheet" />
       </Head>
       <SiteLayout hideFullBleed title="Analytics">

@@ -6,7 +6,7 @@ export type SettingsProps = {
   //
 };
 
-export function Settings(props: SettingsProps): JSX.Element {
+export function Settings(_props: SettingsProps): JSX.Element {
   return (
     <SiteLayout title="Personal account settings">
       <PageTitle>Personal account settings</PageTitle>

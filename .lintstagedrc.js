@@ -10,7 +10,7 @@ module.exports = {
       `prettier --config ${prettierSortImportsConfigPath} --write ${filenames.join(
         ' ',
       )}`,
-      `eslint --fix ${filenames.join(' ')}`,
+      `eslint --fix --max-warnings=0 ${filenames.join(' ')}`,
     ];
   },
 };

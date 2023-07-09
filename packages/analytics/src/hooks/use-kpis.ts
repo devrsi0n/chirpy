@@ -11,7 +11,7 @@ export default function useKpis() {
   const router = useRouter();
   const { kpi: kpiParam } = router.query;
   const kpi = isKpi(kpiParam) ? kpiParam : 'visits';
-  const kpiOption = KPI_OPTIONS.find(({ value }) => value === kpi)!;
+  const kpiOption = KPI_OPTIONS.find(({ value }) => value === kpi);
   const { domain } = useAnalytics();
   const query = trpcClient.analytics.kpis.useQuery({
     domain,

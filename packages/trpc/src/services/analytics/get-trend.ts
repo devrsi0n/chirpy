@@ -1,7 +1,7 @@
 import { Trend, TrendData } from '@chirpy-dev/types';
 import { cpDayjs, queryPipe } from '@chirpy-dev/utils';
 
-import { ANALYTICS_INPUT } from './constants';
+import { AnalyticsInput } from './constants';
 
 export async function getTrend({
   domain,

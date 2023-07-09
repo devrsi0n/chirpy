@@ -10,8 +10,9 @@ export function getTextFromRteDoc(doc: JSONContent): string {
       text += ' ';
     }
     text += node?.text || '';
-    if (node?.content) {
-      node.content[node.content.length - 1].whiteSpace = true;
+    const lastContent = node?.content?.at(-1);
+    if (node?.content && lastContent) {
+      lastContent.whiteSpace = true;
       for (let i = node.content.length - 1; i >= 0; i--) {
         stack.push(node.content[i]);
       }

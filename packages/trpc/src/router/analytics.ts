@@ -8,6 +8,10 @@ import {
   getKpiTotals,
   KPIS_INPUT,
 } from '../services/analytics/get-kpis';
+import {
+  getPageViewMetric,
+  PAGEVIEW_METRIC_INPUT,
+} from '../services/analytics/get-pageview-metric';
 import { getTopBrowser } from '../services/analytics/get-top-browser';
 import { getTopDevice } from '../services/analytics/get-top-device';
 import {
@@ -64,4 +68,9 @@ export const analyticsRouter = router({
   trend: protectedProcedure.input(ANALYTICS_INPUT).query(async ({ input }) => {
     return getTrend(input);
   }),
+  pageviewMetric: protectedProcedure
+    .input(PAGEVIEW_METRIC_INPUT)
+    .query(async ({ input }) => {
+      return getPageViewMetric(input);
+    }),
 });

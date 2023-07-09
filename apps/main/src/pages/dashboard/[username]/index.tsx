@@ -34,7 +34,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
       .map((username) => ({
         params: {
           username: username as string,
-        }
+        },
       })),
     fallback: 'blocking',
   };

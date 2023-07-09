@@ -19,7 +19,9 @@ export default function KPIsWidget() {
 
         return {
           date: date.toUpperCase(),
-          [kpiOption.label]: value,
+          ...(kpiOption?.label && {
+            [kpiOption.label]: value,
+          }),
         };
       }),
     [data?.data, data?.dates, kpiOption],
@@ -37,9 +39,9 @@ export default function KPIsWidget() {
         <AreaChart
           data={chartData}
           index="date"
-          categories={[kpiOption.label]}
+          categories={[kpiOption?.label || '']}
           colors={['violet']}
-          valueFormatter={kpiOption.formatter}
+          valueFormatter={kpiOption?.formatter}
           showLegend={false}
         />
       </Widget.Content>

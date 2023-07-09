@@ -77,6 +77,7 @@ module.exports = {
       rules: {
         'react/display-name': 'off',
         'unicorn/prefer-event-target': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
       },
     },
   ],

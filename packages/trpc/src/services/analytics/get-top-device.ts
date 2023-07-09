@@ -1,7 +1,7 @@
 import { TopDevicesData } from '@chirpy-dev/types';
 import { devices, queryPipe } from '@chirpy-dev/utils';
 
-import { ANALYTICS_INPUT } from './constants';
+import { AnalyticsInput } from './constants';
 
 export async function getTopDevice(input: AnalyticsInput) {
   const { data: queryData } = await queryPipe<TopDevicesData>(

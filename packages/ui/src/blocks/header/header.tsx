@@ -8,7 +8,7 @@ import { Link, Logo, MaintenanceBanner } from '../../components';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { NotificationHub } from '../notification-hub';
 import { SideMenu } from '../side-menu';
-import { SubHeader, navBarStyles } from './subheader';
+import { navBarStyles, SubHeader } from './subheader';
 
 export function Header(): JSX.Element {
   const { isSignIn, data } = useCurrentUser();
@@ -25,7 +25,11 @@ export function Header(): JSX.Element {
               <SideMenu>
                 {isSignIn ? (
                   <SideMenu.Item>
-                    <Link size="lg" href={`/dashboard/${data.username}`} className={styles}>
+                    <Link
+                      size="lg"
+                      href={`/dashboard/${data.username}`}
+                      className={styles}
+                    >
                       Dashboard
                     </Link>
                   </SideMenu.Item>
@@ -64,7 +68,7 @@ export function Header(): JSX.Element {
             </div>
             <div className="flex flex-row sm:items-stretch sm:justify-start">
               <div className="flex flex-row items-center space-x-2">
-                <Logo showBadge className='[&>svg]:ps-0' />
+                <Logo showBadge className="[&>svg]:ps-0" />
               </div>
               <nav
                 className={`mb-5 hidden w-full flex-wrap items-center space-x-8 sm:mb-0 sm:ml-8 sm:flex sm:border-l sm:border-gray-500 sm:pl-8`}

@@ -1,7 +1,6 @@
 import {
   TopPagesData,
   TopPagesSorting,
-  TopPagesSortingValue,
   TopPagesSortingValueTuple,
 } from '@chirpy-dev/types';
 import { queryPipe } from '@chirpy-dev/utils';

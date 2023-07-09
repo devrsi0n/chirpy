@@ -8,7 +8,7 @@ import {
 import { cpDayjs, queryPipe } from '@chirpy-dev/utils';
 import { z } from 'zod';
 
-import { ANALYTICS_INPUT } from './constants';
+import { ANALYTICS_INPUT, AnalyticsInput } from './constants';
 
 export const KPIS_INPUT = ANALYTICS_INPUT.extend({
   kpi: z.enum(ALL_KPIS),
@@ -75,20 +75,20 @@ export async function getKpiTotals({
    * and removing it afterwards.
    *
    * Not the best approach, it'd be better to modify the kpis endpoint. But we don't want
-   * to break the backwards compatibility (breaking the dashboard for alreayd active users).
+   * to break the backwards compatibility (breaking the dashboard for already active users).
    *
    */
-  const date_to_aux = dateTo ? new Date(dateTo) : new Date();
-  date_to_aux.setDate(date_to_aux.getDate() + 1);
-  const date_to_aux_str = date_to_aux.toISOString().slice(0, 10);
+  const dateToAux = dateTo ? new Date(dateTo) : new Date();
+  dateToAux.setDate(dateToAux.getDate() + 1);
+  const dateToAuxStr = dateToAux.toISOString().slice(0, 10);
 
   const { data } = await queryPipe<KpisData>('kpis_by_domain', {
     domain,
     date_from: dateFrom,
-    date_to: date_to_aux_str,
+    date_to: dateToAuxStr,
   });
 
-  const queryData = data.filter((record) => record['date'] != date_to_aux_str);
+  const queryData = data.filter((record) => record['date'] != dateToAuxStr);
 
   // Sum total KPI value from the trend
   const sumKPITotal = (kpi: KpiType) =>
@@ -98,16 +98,16 @@ export async function getKpiTotals({
   const totalVisits = sumKPITotal('visits');
 
   // Sum total KPI value from the trend, ponderating using sessions
-  const _ponderatedKPIsTotal = (kpi: KpiType) =>
+  const ponderatedKPIsTotal = (kpi: KpiType) =>
     queryData.reduce(
       (prev, curr) => prev + ((curr[kpi] ?? 0) * curr['visits']) / totalVisits,
       0,
     );
 
   return {
-    avg_session_sec: _ponderatedKPIsTotal('avg_session_sec'),
+    avg_session_sec: ponderatedKPIsTotal('avg_session_sec'),
     pageviews: sumKPITotal('pageviews'),
     visits: totalVisits,
-    bounce_rate: _ponderatedKPIsTotal('bounce_rate'),
+    bounce_rate: ponderatedKPIsTotal('bounce_rate'),
   };
 }

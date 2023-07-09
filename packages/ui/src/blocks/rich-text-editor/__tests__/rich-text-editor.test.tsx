@@ -14,7 +14,7 @@ describe('rich-text-editor', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
+  // eslint-disable-next-line jest/expect-expect
   it('should post the text', async () => {
     const inputField = screen.getByRole('textbox');
     const testText = 'This is a testing text';

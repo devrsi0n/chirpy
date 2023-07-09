@@ -7,7 +7,8 @@ import { mockProject } from '../../../__tests__/mocks/mock-project-data';
 
 describe('dashboard', () => {
   beforeEach(() => {
-    pageRender(<Dashboard />);
+    // @ts-expect-error
+    pageRender(<Dashboard username="jest" trpcState={{}} />);
   });
 
   afterEach(() => {

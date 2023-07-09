@@ -8,6 +8,7 @@ import {
   ThemeEditor,
   ThemeEditorProps,
 } from '../../blocks';
+import { Text } from '../../components';
 import { WidgetThemeProvider } from '../../contexts';
 
 export type ThemeProps = {
@@ -17,6 +18,9 @@ export type ThemeProps = {
 
 export function ThemePage(props: ThemeProps): JSX.Element {
   const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
+  if (!project) {
+    return <Text>No project, please create one first</Text>;
+  }
   return (
     <SiteLayout
       title={project?.name || 'Theme'}
@@ -28,7 +32,7 @@ export function ThemePage(props: ThemeProps): JSX.Element {
         widgetTheme={project?.theme as ThemeType}
         selector={`.${THEME_WIDGET_CLS}`}
       >
-        <ThemeEditor project={project!} buildDate={props.buildDate} />
+        <ThemeEditor project={project} buildDate={props.buildDate} />
       </WidgetThemeProvider>
     </SiteLayout>
   );

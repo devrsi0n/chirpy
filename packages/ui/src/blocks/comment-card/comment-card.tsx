@@ -12,8 +12,7 @@ import {
   IconMoreVertical,
   IconTrash2,
 } from '../../components/icons';
-import { Menu, MenuItemPadding } from '../../components/menu';
-import { Popover } from '../../components/popover';
+import { Menu } from '../../components/menu';
 import { Text } from '../../components/text';
 import { useToast } from '../../components/toast';
 import { useCommentContext } from '../../contexts/comment-context';

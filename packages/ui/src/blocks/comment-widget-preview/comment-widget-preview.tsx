@@ -49,7 +49,7 @@ function CommentWidgetPreviewInternal(
     async (reply: RTEValue, commentId?: string | undefined) => {
       const newComment: CommentLeafType = {
         id: `${String(Math.random()).slice(2)}`,
-        content: reply!,
+        content: reply,
         parentId: commentId || null,
         pageId: PAGE_ID,
         createdAt: new Date(),
