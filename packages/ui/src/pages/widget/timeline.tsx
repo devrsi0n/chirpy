@@ -1,14 +1,14 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps } from '@chirpy-dev/types';
 import * as React from 'react';
 
 import {
   CommentTimeline,
-  WidgetLayout,
   PoweredBy,
   UserMenu,
+  WidgetLayout,
 } from '../../blocks';
-import { IconButton, Heading, IconArrowLeft, Link } from '../../components';
+import { Heading, IconArrowLeft, IconButton, Link } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { useRefetchInterval } from './use-refetch-interval';
 
@@ -22,7 +22,7 @@ export function CommentTimelineWidget(
   props: CommentTimelineWidgetProps,
 ): JSX.Element {
   const refetchInterval = useRefetchInterval();
-  const { data: comment, refetch } = trpcClient.comment.timeline.useQuery(
+  const { data: comment } = trpc.comment.timeline.useQuery(
     {
       id: props.commentId,
     },
@@ -33,11 +33,7 @@ export function CommentTimelineWidget(
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider
-        projectId={props.projectId}
-        pageId={props.pageId}
-        refetchComment={refetch}
-      >
+      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
           <Link

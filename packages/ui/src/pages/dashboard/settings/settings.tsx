@@ -4,6 +4,7 @@ import * as React from 'react';
 import { PageTitle, SiteLayout } from '../../../blocks';
 import { DeleteProject } from './delete-project';
 import { PageIdentifier } from './page-identifier';
+import { ProjectInfo } from './project-info';
 
 export type ProjectSettingsProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;
@@ -14,6 +15,7 @@ export function ProjectSettings(props: ProjectSettingsProps): JSX.Element {
   return (
     <SiteLayout title="Project settings">
       <PageTitle>Project settings</PageTitle>
+      <ProjectInfo id={id} domain={domain} name={name} />
       <PageIdentifier
         id={id}
         domain={domain}

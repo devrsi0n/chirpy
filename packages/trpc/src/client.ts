@@ -6,7 +6,8 @@ import superjson from 'superjson';
 
 import { type AppRouter } from './router';
 
-export const trpcClient = createTRPCNext<AppRouter>({
+// Shared trpc client, used by `analytics` and `ui` packages
+export const trpc = createTRPCNext<AppRouter>({
   config() {
     return {
       transformer: superjson,
@@ -30,6 +31,24 @@ export const trpcClient = createTRPCNext<AppRouter>({
         },
       },
     };
+  },
+  overrides: {
+    useMutation: {
+      /**
+       * This function is called whenever a `.useMutation` succeeds
+       **/
+      async onSuccess(opts) {
+        /**
+         * @note that order here matters:
+         * The order here allows route changes in `onSuccess` without
+         * having a flash of content change whilst redirecting.
+         **/
+        // Calls the `onSuccess` defined in the `useQuery()`-options:
+        await opts.originalFn();
+        // Invalidate all queries in the react-query cache:
+        await opts.queryClient.invalidateQueries();
+      },
+    },
   },
   ssr: false,
 });

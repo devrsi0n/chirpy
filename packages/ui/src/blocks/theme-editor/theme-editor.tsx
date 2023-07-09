@@ -1,4 +1,4 @@
-import { RouterOutputs, trpcClient } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs, trpc } from '@chirpy-dev/trpc/src/client';
 import { Theme } from '@chirpy-dev/types';
 import clsx from 'clsx';
 import debounce from 'debounce-promise';
@@ -31,7 +31,7 @@ export type ThemeEditorProps = {
 export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const { widgetTheme, setWidgetTheme, siteTheme } = useWidgetTheme();
 
-  const { mutateAsync: updateTheme } = trpcClient.project.update.useMutation();
+  const { mutateAsync: updateTheme } = trpc.project.update.useMutation();
   const { showToast } = useToast();
   const revalidateProjectPages = useRevalidateProjectPages();
   const saveTheme = debounce(

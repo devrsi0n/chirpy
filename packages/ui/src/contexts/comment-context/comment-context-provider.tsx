@@ -1,26 +1,21 @@
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import {
-  CommentContextType,
-  CommentContext,
-  RefetchComment,
-} from './comment-context';
+import { CommentContext, CommentContextType } from './comment-context';
 import { useCreateAComment } from './use-create-a-comment';
 import { useDeleteAComment } from './use-delete-a-comment';
 import { useToggleALikeAction } from './use-toggle-a-like-action';
 
 export type CommentContextProviderProps = React.PropsWithChildren<
-  RefetchComment & Pick<CommentContextType, 'projectId' | 'pageId'>
+  Pick<CommentContextType, 'projectId' | 'pageId'>
 >;
 
 export function CommentContextProvider(props: CommentContextProviderProps) {
   const createAComment = useCreateAComment({
     pageId: props.pageId,
-    refetchComment: props.refetchComment,
   });
-  const deleteAComment = useDeleteAComment(props.refetchComment);
-  const toggleALikeAction = useToggleALikeAction(props.refetchComment);
+  const deleteAComment = useDeleteAComment();
+  const toggleALikeAction = useToggleALikeAction();
   const router = useRouter();
   const onClickCommentTimeline = React.useCallback(
     (href: string) => {

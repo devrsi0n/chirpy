@@ -1,6 +1,6 @@
 import {
   RouterOutputs,
-  trpcClient,
+  trpc,
   TRPCClientError,
 } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
@@ -24,7 +24,7 @@ export type PageUrlProps = Pick<
 export function PageIdentifier(props: PageUrlProps): JSX.Element {
   const [parameter, setParameter] = React.useState(props.queryParameters || '');
   const [error, setError] = React.useState('');
-  const { mutateAsync, isLoading } = trpcClient.project.update.useMutation();
+  const { mutateAsync, isLoading } = trpc.project.update.useMutation();
   const { showToast } = useToast();
   const handleSaveQueryParameters = async () => {
     try {
@@ -53,13 +53,13 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
         title:
           'We apologize for the inconvenience. It seems that we are experiencing technical difficulties on our end. Please try again later.',
       });
-      logger.error('Update page url failed', { error });
+      logger.error('Update page identifier failed', { error });
     }
   };
   return (
     <Card>
+      <Card.Header>Page identifier</Card.Header>
       <Card.Body>
-        <Card.Title>Page identifier</Card.Title>
         <Text variant="secondary">
           {`Chirpy uses the URL domain + path of your page as the identifier by default, if you want to add `}
           <Link

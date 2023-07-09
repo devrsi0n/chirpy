@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { Heading } from '../../components/heading';
@@ -16,15 +16,15 @@ export function NotificationHub(): JSX.Element {
     data,
     refetch: refetchMessages,
     isFetching,
-  } = trpcClient.notification.messages.useQuery(undefined, {
+  } = trpc.notification.messages.useQuery(undefined, {
     enabled: !!isSignIn && !isPreview,
   });
 
   const { mutateAsync: readANotification } =
-    trpcClient.notification.read.useMutation();
+    trpc.notification.read.useMutation();
 
   const { mutateAsync: deleteNotificationMessage } =
-    trpcClient.notification.delete.useMutation();
+    trpc.notification.delete.useMutation();
   const hasUnreadNotifications = data?.some((msg) => !msg.read);
   return (
     <div className="mr-4 flex flex-row items-center justify-center">

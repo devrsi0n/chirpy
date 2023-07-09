@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { Theme as ThemeType } from '@chirpy-dev/types';
 import { DehydratedState } from '@tanstack/react-query';
 
@@ -17,7 +17,7 @@ export type ThemeProps = {
 } & Pick<ThemeEditorProps, 'buildDate'>;
 
 export function ThemePage(props: ThemeProps): JSX.Element {
-  const { data: project } = trpcClient.project.byDomain.useQuery(props.domain);
+  const { data: project } = trpc.project.byDomain.useQuery(props.domain);
   if (!project) {
     return <Text>No project, please create one first</Text>;
   }

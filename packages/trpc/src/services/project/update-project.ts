@@ -9,6 +9,12 @@ const UPDATE_PROJECT_QUERY_PARAMETERS_INPUT = z.object({
   queryParameters: z.string().regex(/^[\w-]+(?:,[\w-]+)*$/i),
 });
 
+const UPDATE_PROJECT_INFO_INPUT = z.object({
+  projectId: z.string(),
+  name: z.string(),
+  domain: z.string(),
+});
+
 export const UPDATE_PROJECT_INPUT = z
   .object({
     projectId: z.string(),
@@ -19,7 +25,8 @@ export const UPDATE_PROJECT_INPUT = z
       }),
     }),
   })
-  .or(UPDATE_PROJECT_QUERY_PARAMETERS_INPUT);
+  .or(UPDATE_PROJECT_QUERY_PARAMETERS_INPUT)
+  .or(UPDATE_PROJECT_INFO_INPUT);
 
 export async function updateProject(
   input: z.infer<typeof UPDATE_PROJECT_INPUT>,
@@ -35,6 +42,11 @@ export async function updateProject(
         ? {
             queryParameters: input.queryParameters,
           }
+        : isProjectInfoInput(input)
+        ? {
+            name: input.name,
+            domain: input.domain,
+          }
         : { theme: input.theme }),
     },
   });
@@ -45,4 +57,10 @@ export function isQueryParametersInput(
   input: z.infer<typeof UPDATE_PROJECT_INPUT>,
 ): input is z.infer<typeof UPDATE_PROJECT_QUERY_PARAMETERS_INPUT> {
   return 'queryParameters' in input;
+}
+
+export function isProjectInfoInput(
+  input: z.infer<typeof UPDATE_PROJECT_INPUT>,
+): input is z.infer<typeof UPDATE_PROJECT_INFO_INPUT> {
+  return 'name' in input && 'domain' in input;
 }

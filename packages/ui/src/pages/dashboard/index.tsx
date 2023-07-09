@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { DehydratedState } from '@tanstack/react-query';
 import * as React from 'react';
 
@@ -30,12 +30,11 @@ export function Dashboard(props: DashboardProps): JSX.Element {
     data: projects,
     refetch: fetchUserProjects,
     isFetching,
-  } = trpcClient.project.all.useQuery({
+  } = trpc.project.all.useQuery({
     username: props.username,
   });
 
-  const { mutateAsync: createAProject } =
-    trpcClient.project.create.useMutation();
+  const { mutateAsync: createAProject } = trpc.project.create.useMutation();
   const handleCreateProject = React.useCallback(() => {
     setShowDialog(true);
   }, []);
@@ -108,7 +107,7 @@ export function Dashboard(props: DashboardProps): JSX.Element {
                   value: /^\w+$/,
                   message: `Only word characters are allowed`,
                 },
-                minLength: { value: 3, message: 'At least 3 characters' },
+                minLength: { value: 1, message: 'At least 1 characters' },
                 maxLength: { value: 16, message: 'At most 16 characters' },
               })}
               aria-label="Name of this project"

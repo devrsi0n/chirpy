@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { RTEValue } from '@chirpy-dev/types';
 import { JSONContent } from '@chirpy-dev/utils';
 import { JsonArray } from 'type-fest';
@@ -6,24 +6,19 @@ import { JsonArray } from 'type-fest';
 import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
 import { useCurrentUser } from '../current-user-context';
-import { RefetchComment } from './comment-context';
 
 export type useCreateACommentOptions = {
   pageId: string;
-} & RefetchComment;
+};
 
 export type UseCreateAComment = ReturnType<typeof useCreateAComment>;
 
-export function useCreateAComment({
-  pageId,
-  refetchComment: refetchComments,
-}: useCreateACommentOptions) {
+export function useCreateAComment({ pageId }: useCreateACommentOptions) {
   const { isSignIn } = useCurrentUser();
-  const { mutateAsync: insertOneComment } =
-    trpcClient.comment.create.useMutation();
+  const { mutateAsync: insertOneComment } = trpc.comment.create.useMutation();
   const { showToast } = useToast();
   const { mutate: mutateANotification } =
-    trpcClient.notification.mutate.useMutation();
+    trpc.notification.mutate.useMutation();
   const createAComment = async (reply: RTEValue, commentId?: string) => {
     if (!isSignIn) {
       logger.error('Navigate to sign-in page');
@@ -44,7 +39,6 @@ export function useCreateAComment({
         content: data.content as JSONContent,
       },
     });
-    await refetchComments();
     if (!data?.id) {
       showToast({
         type: 'error',

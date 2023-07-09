@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
 import {
+  isProjectInfoInput,
   isQueryParametersInput,
   UPDATE_PROJECT_INPUT,
   updateProject,
@@ -109,10 +110,16 @@ export const projectRouter = router({
     .input(UPDATE_PROJECT_INPUT)
     .mutation(async ({ input, ctx }) => {
       const project = await updateProject(input, ctx.session.user.id);
-      if (isQueryParametersInput(input)) {
-        ctx.res.revalidate(
+      if (isQueryParametersInput(input) || isProjectInfoInput(input)) {
+        await ctx.res.revalidate(
           `/dashboard/${ctx.session.user}/${input.domain}/settings`,
         );
+      }
+      if (isProjectInfoInput(input)) {
+        await Promise.allSettled([
+          ctx.res.revalidate(`/dashboard/${ctx.session.user}/${input.domain}`),
+          ctx.res.revalidate(`/dashboard/${ctx.session.user}`),
+        ]);
       }
       return project;
     }),

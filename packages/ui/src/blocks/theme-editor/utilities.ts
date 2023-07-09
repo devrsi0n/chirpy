@@ -1,13 +1,12 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { translateHslColor } from '../../contexts/theme-context/utilities';
 
 export function useRevalidateProjectPages() {
   const { mutateAsync: revalidateWidget } =
-    trpcClient.revalidate.widget.useMutation();
-  const { mutateAsync: revalidateTheme } =
-    trpcClient.revalidate.theme.useMutation();
+    trpc.revalidate.widget.useMutation();
+  const { mutateAsync: revalidateTheme } = trpc.revalidate.theme.useMutation();
 
   return React.useCallback(
     async (projectId: string, domain: string) => {

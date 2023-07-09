@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { TopPagesSorting } from '@chirpy-dev/types';
 
 import { useAnalytics } from '../components/provider';
@@ -13,7 +13,7 @@ export default function useTopPages() {
     values: Object.values(TopPagesSorting),
   });
   const { domain } = useAnalytics();
-  return trpcClient.analytics.topPages.useQuery({
+  return trpc.analytics.topPages.useQuery({
     domain,
     dateFrom: startDate,
     dateTo: endDate,

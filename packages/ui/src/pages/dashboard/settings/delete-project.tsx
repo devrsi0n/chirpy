@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import {
@@ -19,16 +19,14 @@ type DeleteProjectProps = {
 export function DeleteProject({ domain, name }: DeleteProjectProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const { mutateAsync: deleteProject, status } =
-    trpcClient.project.delete.useMutation();
+    trpc.project.delete.useMutation();
   const loading = status === 'loading';
   const { showToast } = useToast();
-  const utils = trpcClient.useContext();
   const handleClickConfirmDelete = async () => {
     try {
       await deleteProject({
         domain,
       });
-      utils.project.all.invalidate();
     } catch (error) {
       logger.error('Delete project failed', { error });
       showToast({
@@ -41,8 +39,8 @@ export function DeleteProject({ domain, name }: DeleteProjectProps) {
   return (
     <>
       <Card>
+        <Card.Header>Delete project</Card.Header>
         <Card.Body>
-          <Card.Title>Delete project</Card.Title>
           <Text variant="secondary">
             Deleting this project will permanently remove all associated data,
             including comments and analytics. This action cannot be undone.

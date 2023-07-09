@@ -1,4 +1,3 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
 import { asyncNoop, noop } from '@chirpy-dev/utils';
 import * as React from 'react';
 
@@ -26,10 +25,3 @@ export const CommentContext = React.createContext<CommentContextType>({
 
 // eslint-disable-next-line unicorn/prefer-export-from
 export type { UseCreateAComment, UseDeleteAComment, UseToggleALikeAction };
-
-export type RefetchComment = {
-  refetchComment: ReturnType<
-    | typeof trpcClient.comment.forest.useQuery
-    | typeof trpcClient.comment.timeline.useQuery
-  >['refetch'];
-};

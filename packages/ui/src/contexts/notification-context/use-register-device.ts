@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { NOTIFICATION_SUBSCRIPTION_INPUT } from '@chirpy-dev/trpc/src/router/notification';
 import * as React from 'react';
 
@@ -16,7 +16,7 @@ const NOTIFICATION_REGISTER_EXPIRED_AT =
 export function useRegisterNotificationSubscription(): RegisterNotificationSubscription {
   const { isSignIn } = useCurrentUser();
   const { mutateAsync: registerDevice } =
-    trpcClient.notification.register.useMutation();
+    trpc.notification.register.useMutation();
 
   // It's safe to register the service worker multiply times
   return React.useCallback(async () => {

@@ -32,8 +32,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       project,
     },
-    // Only need the createdAt data
-    revalidate: 24 * 60 * 60,
+    revalidate: 60,
   };
 };
 

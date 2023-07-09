@@ -1,26 +1,23 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 
 import { useToast } from '../../components/toast';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { useSignInWindow } from '../../hooks/use-sign-in-window';
 import { logger } from '../../utilities/logger';
-import { RefetchComment } from './comment-context';
 
 export type UseToggleALikeAction = ReturnType<typeof useToggleALikeAction>;
 
-export function useToggleALikeAction(
-  refetch: RefetchComment['refetchComment'],
-) {
+export function useToggleALikeAction() {
   const {
     data: { id: currentUserId },
   } = useCurrentUser();
-  const { mutateAsync: insertOneLike } = trpcClient.like.create.useMutation();
-  const { mutateAsync: deleteLikeByPk } = trpcClient.like.delete.useMutation();
+  const { mutateAsync: insertOneLike } = trpc.like.create.useMutation();
+  const { mutateAsync: deleteLikeByPk } = trpc.like.delete.useMutation();
 
   const { showToast } = useToast();
   const handleSignIn = useSignInWindow();
   const { mutate: mutateANotification } =
-    trpcClient.notification.mutate.useMutation();
+    trpc.notification.mutate.useMutation();
   const toggleALikeAction = async (
     isLiked: boolean,
     likeId: string,
@@ -42,7 +39,6 @@ export function useToggleALikeAction(
           commentId: commentId,
         },
       });
-      await refetch();
       return;
     }
     try {
@@ -63,7 +59,6 @@ export function useToggleALikeAction(
           commentId: commentId,
         },
       });
-      await refetch();
     } catch (error) {
       showToast({
         type: 'error',

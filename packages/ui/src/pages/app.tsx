@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
 import { isBrowser } from '@chirpy-dev/utils';
 import { SessionProvider } from 'next-auth/react';
@@ -17,7 +17,7 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
-export const App = trpcClient.withTRPC(function App({
+export const App = trpc.withTRPC(function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<PageProps>): JSX.Element {

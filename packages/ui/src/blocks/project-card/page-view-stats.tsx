@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { getTinybirdDomain, isSSRMode } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import * as React from 'react';
@@ -14,7 +14,7 @@ export type PageViewStatsProps = {
 };
 
 export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
-  const { data } = trpcClient.analytics.pageviewMetric.useQuery({
+  const { data } = trpc.analytics.pageviewMetric.useQuery({
     domain: getTinybirdDomain(domain),
   });
   console.log({ data });
@@ -48,7 +48,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
             {typeof growthRate === 'number' && (
               <div
                 className={clsx(
-                  'flex flex-row items-end rounded-full p-1 font-semibold',
+                  'flex flex-row items-end rounded-full px-1.5 py-1 font-semibold',
                   growthRate > 0
                     ? `bg-green-300 text-green-1000`
                     : `bg-red-300 text-red-1100`,
@@ -57,6 +57,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
                 <IconArrowUp
                   size={14}
                   className={clsx(growthRate <= 0 && `rotate-180`)}
+                  strokeWidth={2}
                 />
                 <Text
                   size="xs"

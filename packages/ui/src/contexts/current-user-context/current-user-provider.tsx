@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
@@ -22,7 +22,7 @@ export function CurrentUserProvider({
     data,
     isFetching,
     refetch: refetchUser,
-  } = trpcClient.user.me.useQuery(undefined, {
+  } = trpc.user.me.useQuery(undefined, {
     enabled: !!session?.user.id,
   });
   const hasMounted = useHasMounted();

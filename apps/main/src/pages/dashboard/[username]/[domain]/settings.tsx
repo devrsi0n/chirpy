@@ -40,6 +40,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     props: {
       project,
     },
-    revalidate: 60 * 60,
+    revalidate: 60,
   };
 };

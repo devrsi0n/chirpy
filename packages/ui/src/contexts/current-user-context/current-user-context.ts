@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { Nullable } from '@chirpy-dev/types';
 import { asyncNoop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
@@ -6,9 +6,7 @@ import * as React from 'react';
 
 export type UserData = Nullable<Session['user']>;
 
-export type RefetchUser = ReturnType<
-  typeof trpcClient.user.me.useQuery
->['refetch'];
+export type RefetchUser = ReturnType<typeof trpc.user.me.useQuery>['refetch'];
 
 export type CurrentUserContextType = {
   refetchUser: RefetchUser;

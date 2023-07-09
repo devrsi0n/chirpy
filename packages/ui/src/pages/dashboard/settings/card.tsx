@@ -12,17 +12,17 @@ export function Card(props: CardProps): JSX.Element {
   );
 }
 
+Card.Header = CardHeader;
 Card.Body = CardBody;
-Card.Title = CardTitle;
 Card.Footer = CardFooter;
 
 export type CardTitleProps = {
   children: React.ReactNode;
 };
 
-function CardTitle(props: CardTitleProps): JSX.Element {
+function CardHeader(props: CardTitleProps): JSX.Element {
   return (
-    <Heading as="h3" className="font-medium">
+    <Heading as="h3" className="px-5 pt-5 font-medium">
       {props.children}
     </Heading>
   );

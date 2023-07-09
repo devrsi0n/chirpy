@@ -61,6 +61,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       trpcState: ssg.dehydrate(),
       username,
     },
-    revalidate: 60 * 60,
+    revalidate: 60,
   };
 };

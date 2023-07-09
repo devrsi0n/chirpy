@@ -42,6 +42,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
       domain,
       // name: project.name,
     },
-    revalidate: 60 * 60,
+    revalidate: 60,
   };
 };

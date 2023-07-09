@@ -1,4 +1,4 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -39,7 +39,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isLoadingUser]);
   const { mutateAsync: updateUser, status } =
-    trpcClient.user.updateProfile.useMutation();
+    trpc.user.updateProfile.useMutation();
   const loading = status === 'loading';
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();

@@ -1,18 +1,16 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { JSONContent } from '@tiptap/react';
 import * as React from 'react';
 
 import { useToast } from '../../components/toast';
-import { RefetchComment } from './comment-context';
 
 export type UseDeleteAComment = ReturnType<typeof useDeleteAComment>;
 
-export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
-  const { mutateAsync: deleteOneComment } =
-    trpcClient.comment.delete.useMutation();
+export function useDeleteAComment() {
+  const { mutateAsync: deleteOneComment } = trpc.comment.delete.useMutation();
   const { showToast } = useToast();
   const { mutate: mutateANotification } =
-    trpcClient.notification.mutate.useMutation();
+    trpc.notification.mutate.useMutation();
   const deleteAComment = React.useCallback(
     async (commentId: string) => {
       try {
@@ -26,7 +24,6 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
             content: data.content as JSONContent,
           },
         });
-        await refetch();
         showToast({
           type: 'success',
           title: 'Deleted successfully!',
@@ -39,7 +36,7 @@ export function useDeleteAComment(refetch: RefetchComment['refetchComment']) {
         });
       }
     },
-    [showToast, deleteOneComment, mutateANotification, refetch],
+    [showToast, deleteOneComment, mutateANotification],
   );
   return deleteAComment;
 }

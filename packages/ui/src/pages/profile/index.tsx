@@ -1,7 +1,7 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
-import { SiteLayout, PageTitle } from '../../blocks';
+import { PageTitle, SiteLayout } from '../../blocks';
 import {
   Avatar,
   Button,
@@ -37,7 +37,7 @@ export function Profile(): JSX.Element {
     data,
     isFetching,
     refetch: refetchProfile,
-  } = trpcClient.user.myProfile.useQuery();
+  } = trpc.user.myProfile.useQuery();
   const {
     name,
     email,
@@ -50,8 +50,7 @@ export function Profile(): JSX.Element {
     type,
   } = data || {};
   const [isEditMode, setIsEditMode] = React.useState(false);
-  const { mutateAsync: updateProfile } =
-    trpcClient.user.updateProfile.useMutation();
+  const { mutateAsync: updateProfile } = trpc.user.updateProfile.useMutation();
 
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {

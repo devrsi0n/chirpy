@@ -1,8 +1,8 @@
-import { trpcClient } from '@chirpy-dev/trpc/src/client';
+import { trpc } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps } from '@chirpy-dev/types';
 import * as React from 'react';
 
-import { CommentForest, WidgetLayout, PoweredBy } from '../../blocks';
+import { CommentForest, PoweredBy, WidgetLayout } from '../../blocks';
 import { Text } from '../../components';
 import { CommentContextProvider } from '../../contexts';
 import { useRefetchInterval } from './use-refetch-interval';
@@ -18,7 +18,7 @@ export type PageCommentProps = CommonWidgetProps & {
  */
 export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
   const refetchInterval = useRefetchInterval();
-  const { data: comments, refetch } = trpcClient.comment.forest.useQuery(
+  const { data: comments } = trpc.comment.forest.useQuery(
     {
       url: props.pageURL,
     },
@@ -35,11 +35,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider
-        projectId={props.projectId}
-        pageId={props.pageId}
-        refetchComment={refetch}
-      >
+      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
         <div className="pt-1">
           {/* @ts-ignore */}
           <CommentForest comments={comments} />
