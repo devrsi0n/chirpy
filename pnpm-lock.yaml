@@ -568,6 +568,7 @@ importers:
       next-themes: 0.2.1
       postcss: 8.4.25
       postcss-loader: 7.3.3
+      prism-react-renderer: 2.0.6
       react: 18.2.0
       react-dom: 18.2.0
       react-error-boundary: 4.0.10
@@ -620,6 +621,7 @@ importers:
       next-axiom: 0.17.0_next@13.4.9
       next-mdx-remote: 3.0.8_biqbaboplfbrettd7655fr4n2y
       next-themes: 0.2.1_hyjx7svporfhadhuakm5xolhha
+      prism-react-renderer: 2.0.6_react@18.2.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-error-boundary: 4.0.10_react@18.2.0
@@ -7464,6 +7466,10 @@ packages:
   /@types/pretty-hrtime/1.0.1:
     resolution: {integrity: sha512-VjID5MJb1eGKthz2qUerWT8+R4b9N+CHvGCzg9fn4kWZgaF9AhdYikQio3R7wV8YY1NsQKPaCwKz1Yff+aHNUQ==}
     dev: true
+
+  /@types/prismjs/1.26.0:
+    resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
+    dev: false
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -16951,7 +16957,7 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      next: 13.4.9_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
       oauth: 0.9.15
       openid-client: 5.4.2
       preact: 10.15.1
@@ -16966,7 +16972,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.4.9_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -17009,7 +17015,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.4.9_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -19082,6 +19088,16 @@ packages:
       condense-newlines: 0.2.1
       extend-shallow: 2.0.1
       js-beautify: 1.14.8
+    dev: false
+
+  /prism-react-renderer/2.0.6_react@18.2.0:
+    resolution: {integrity: sha512-ERzmAI5UvrcTw5ivfEG20/dYClAsC84eSED5p9X3oKpm0xPV4A5clFK1mp7lPIdKmbLnQYsPTGiOI7WS6gWigw==}
+    peerDependencies:
+      react: '>=16.0.0 || 18'
+    dependencies:
+      '@types/prismjs': 1.26.0
+      clsx: 1.2.1
+      react: 18.2.0
     dev: false
 
   /prisma/5.0.0:

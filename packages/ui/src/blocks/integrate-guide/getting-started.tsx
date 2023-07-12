@@ -39,7 +39,7 @@ export function GettingStartedBody({ domain }: { domain: string }) {
             <Text variant="secondary">
               {`Copy the script provided below and paste it into the body of your HTML, make sure it will be loaded on every page.`}
             </Text>
-            <Code>
+            <Code language="html">
               {`<script defer src="${getAppURL()}/bootstrapper.js" data-chirpy-domain="${domain}"></script>`}
             </Code>
           </div>
@@ -47,14 +47,23 @@ export function GettingStartedBody({ domain }: { domain: string }) {
         <li>
           <div>
             <Text variant="secondary">
-              {`Then, add the data-chirpy-comment attribute to any page that should render the comment widget:`}
+              {`Then, paste this html element to any page that should render the comment widget:`}
             </Text>
-            <Code>{`<div data-chirpy-comment="true" id="chirpy-comment"></div>`}</Code>
+            <Code language="html">{`<!--
+  The widget follows "system" settings for light/dark mode
+  by default, but you can manually select "light" or "dark"
+  mode for a consistent display
+-->
+<div
+  data-chirpy-theme="system"
+  data-chirpy-comment="true"
+  id="chirpy-comment"
+></div>`}</Code>
           </div>
         </li>
         <li>
           <Text variant="secondary">
-            {`🎉 Congratulations! The comment widget is ready to go.`}
+            {`🎉 Congratulations! The comment widget is ready to go live.`}
           </Text>
         </li>
       </ol>

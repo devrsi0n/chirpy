@@ -6,7 +6,7 @@ const text = 'Test code';
 
 describe('Code', () => {
   beforeEach(() => {
-    render(<Code>{text}</Code>);
+    render(<Code language="html">{text}</Code>);
   });
 
   afterEach(() => {
