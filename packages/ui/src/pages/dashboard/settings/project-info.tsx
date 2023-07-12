@@ -80,7 +80,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
             },
           })}
           label="Domain"
-          hintText="Associate your domain with this project"
+          hintText="Please create a new project if you need to change the domain"
           errorMessage={errors.domain}
           placeholder="example.com"
           className="w-full"

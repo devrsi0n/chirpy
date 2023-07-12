@@ -59,7 +59,7 @@
     "@next/bundle-analyzer": "13.4.9",
     "@relative-ci/agent": "4.1.5",
     "@types/cors": "2.8.13",
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.3",
     "@types/lodash": "4.14.195",
     "@types/node": "18.16.18",
     "@types/react": "18.2.14",

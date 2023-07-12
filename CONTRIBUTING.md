@@ -28,20 +28,22 @@ pnpm install
 cp .env-template .env.local
 # See your changes in Storybook
 cd packages/ui
-pnpm run dev
+pnpm dev
 ```
 
 ### Start the frontend app
 
 ```bash
-cd <project-root>/apps/main
-pnpm run dev
+# Generate required scripts
+pnpm boostrap
+# Start the main app
+pnpm dev
 ```
 
 ## Linting
 
 ```bash
-pnpm run lint
+pnpm lint
 ```
 
 ## Building
@@ -49,16 +51,16 @@ pnpm run lint
 Build the project locally, with:
 
 ```bash
-pnpm run build:local
+pnpm build:local
 ```
 
 ## Testing
 
 ```bash
 # For unit tests
-pnpm run test
+pnpm test
 # For e2e tests
-pnpm run cy:open
+pnpm cy:open
 ```
 
 ## Optional

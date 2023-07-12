@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import {
-  HomeCommentWidgetPreview,
-  HomeCommentWidgetPreviewProps,
+  CrispChatWithoutSSR,
   FAQs,
   Features,
-  SiteLayout,
+  HomeCommentWidgetPreview,
+  HomeCommentWidgetPreviewProps,
   Pricing,
+  SiteLayout,
 } from '../blocks';
 import { Button, IconArrowRight, Link, Text } from '../components';
 
@@ -52,6 +53,7 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
         <Pricing id="pricing" />
         <FAQs id="faqs" />
       </section>
+      <CrispChatWithoutSSR />
     </SiteLayout>
   );
 }

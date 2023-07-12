@@ -3,7 +3,7 @@
   "name": "chirpy",
   "license": "AGPL-3.0-or-later",
   "scripts": {
-    "bootstrap": "cd apps/bootstrapper && pnpm build && cd ../service-worker && pnpm build",
+    "bootstrap": "cd apps/bootstrapper && pnpm build && cd ../service-worker && pnpm build && cd ../../packages/trpc && pnpm db:generate",
     "dev": "cd apps/main && pnpm run dev",
     "build": "turbo run build --filter=@chirpy-dev/main-app...",
     "changeset": "changeset",

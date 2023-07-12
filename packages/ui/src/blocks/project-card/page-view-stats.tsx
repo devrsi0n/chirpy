@@ -17,10 +17,8 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
   const { data } = trpc.analytics.pageviewMetric.useQuery({
     domain: getTinybirdDomain(domain),
   });
-  console.log({ data });
   const pageviews = data?.pageviews;
   const growthRate = data?.growthRate;
-  // const growthRate = 1;
   const { data: user } = useCurrentUser();
 
   if (typeof pageviews !== 'number') {
