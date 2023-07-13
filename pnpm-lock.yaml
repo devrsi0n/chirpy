@@ -183,7 +183,7 @@ importers:
       shiki: 0.11.1
       superjson: 1.12.4
       tailwindcss: 3.3.2
-      type-fest: 3.12.0
+      type-fest: 3.13.0
       typescript: 5.1.6
       web-push: 3.6.3
       webpack: 5.88.1
@@ -220,7 +220,7 @@ importers:
       rehype-slug: 5.1.0
       shiki: 0.11.1
       superjson: 1.12.4
-      type-fest: 3.12.0
+      type-fest: 3.13.0
       web-push: 3.6.3
     devDependencies:
       '@chirpy-dev/bootstrapper': link:../bootstrapper
@@ -285,7 +285,7 @@ importers:
       autoprefixer: 10.4.14
       clsx: 1.2.1
       eslint: 8.44.0
-      framer-motion: 10.12.18
+      framer-motion: 10.12.20
       next: 13.4.9
       postcss: 8.4.25
       prop-types: 15.8.1
@@ -300,7 +300,7 @@ importers:
       '@headlessui/react': 1.7.15_biqbaboplfbrettd7655fr4n2y
       '@tremor/react': 3.4.1_giay2ad4xmn7hnncx5dhwcc7xy
       clsx: 1.2.1
-      framer-motion: 10.12.18_biqbaboplfbrettd7655fr4n2y
+      framer-motion: 10.12.20_biqbaboplfbrettd7655fr4n2y
       next: 13.4.9_biqbaboplfbrettd7655fr4n2y
       prop-types: 15.8.1
       react: 18.2.0
@@ -393,10 +393,10 @@ importers:
     specifiers:
       '@ianvs/prettier-plugin-sort-imports': 4.0.2
       prettier: 2.8.8
-      prettier-plugin-tailwindcss: 0.3.0
+      prettier-plugin-tailwindcss: 0.4.0
     dependencies:
       '@ianvs/prettier-plugin-sort-imports': 4.0.2_prettier@2.8.8
-      prettier-plugin-tailwindcss: 0.3.0_7zo47umuqqxtkbisuhbnj3rebm
+      prettier-plugin-tailwindcss: 0.4.0_7zo47umuqqxtkbisuhbnj3rebm
     devDependencies:
       prettier: 2.8.8
 
@@ -553,12 +553,12 @@ importers:
       debounce-promise: 3.1.2
       eslint: 8.44.0
       fake-indexeddb: 4.0.1
-      framer-motion: 10.12.18
+      framer-motion: 10.12.20
       html-loader: 4.2.0
       intersection-observer: 0.12.2
       jest: 29.6.1
       jest-environment-jsdom: 29.6.1
-      lucide-react: 0.258.0
+      lucide-react: 0.259.0
       msw: 1.2.2
       msw-storybook-addon: 1.6.3
       next: 13.4.9
@@ -583,7 +583,7 @@ importers:
       tailwind-merge: 1.13.2
       tailwindcss: 3.3.2
       tailwindcss-animate: 1.0.6
-      type-fest: 3.12.0
+      type-fest: 3.13.0
       typescript: 5.1.6
       webpack: 5.88.1
       whatwg-fetch: 3.6.2
@@ -614,8 +614,8 @@ importers:
       crisp-sdk-web: 1.0.19
       dayjs: 1.11.9
       debounce-promise: 3.1.2
-      framer-motion: 10.12.18_biqbaboplfbrettd7655fr4n2y
-      lucide-react: 0.258.0_react@18.2.0
+      framer-motion: 10.12.20_biqbaboplfbrettd7655fr4n2y
+      lucide-react: 0.259.0_react@18.2.0
       next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
       next-auth: 4.22.1_hyjx7svporfhadhuakm5xolhha
       next-axiom: 0.17.0_next@13.4.9
@@ -639,7 +639,7 @@ importers:
       '@storybook/addon-interactions': 6.5.14_5z22xbsn3ypgypfmhdwvj6ytke
       '@storybook/builder-webpack5': 6.5.14_ncsjgslpjebi7zfkpcb66aemte
       '@storybook/manager-webpack5': 6.5.14_ncsjgslpjebi7zfkpcb66aemte
-      '@storybook/react': 6.5.14_4r74vt6vcgywmfehezoeu62eri
+      '@storybook/react': 6.5.14_fnz4gxzipentqdf4lwk5k2taqa
       '@storybook/testing-library': 0.0.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/testing-react': 1.3.0_5ovxwtfmblkgtcmxxn7sgdn3m4
       '@testing-library/jest-dom': 5.16.5
@@ -675,7 +675,7 @@ importers:
       storybook-addon-next: 1.7.1_j7hlafynrcdxifykxnbbqwqu5a
       style-loader: 3.3.3_webpack@5.88.1
       tailwindcss: 3.3.2
-      type-fest: 3.12.0
+      type-fest: 3.13.0
       typescript: 5.1.6
       webpack: 5.88.1
       whatwg-fetch: 3.6.2
@@ -4037,7 +4037,7 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.10_6ufhxyx5c6zgd7jcvgbi5p6fhu:
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.10_qz4uszyjw4owgittnkuy545byy:
     resolution: {integrity: sha512-j0Ya0hCFZPd4x40qLzbhGsh9TMtdb+CJQiso+WxLOPNasohq9cc5SNUcwsZaRH6++Xh91Xkm/xHCkuIiIu0LUA==}
     engines: {node: '>= 10.13'}
     peerDependencies:
@@ -4073,7 +4073,7 @@ packages:
       react-refresh: 0.11.0
       schema-utils: 3.3.0
       source-map: 0.7.4
-      type-fest: 3.12.0
+      type-fest: 3.13.0
       webpack: 5.88.1
     dev: true
 
@@ -6180,7 +6180,7 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/react/6.5.14_4r74vt6vcgywmfehezoeu62eri:
+  /@storybook/react/6.5.14_fnz4gxzipentqdf4lwk5k2taqa:
     resolution: {integrity: sha512-SL0P5czN3g/IZAYw8ur9I/O8MPZI7Lyd46Pw+B1f7+Ou8eLmhqa8Uc8+3fU6v7ohtUDwsBiTsg3TAfTVEPog4A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
@@ -6211,7 +6211,7 @@ packages:
       '@babel/core': 7.22.8
       '@babel/preset-flow': 7.18.6_@babel+core@7.22.8
       '@babel/preset-react': 7.18.6_@babel+core@7.22.8
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_6ufhxyx5c6zgd7jcvgbi5p6fhu
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_qz4uszyjw4owgittnkuy545byy
       '@storybook/addons': 6.5.14_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-webpack5': 6.5.14_ncsjgslpjebi7zfkpcb66aemte
       '@storybook/client-logger': 6.5.14
@@ -6429,7 +6429,7 @@ packages:
         optional: true
     dependencies:
       '@storybook/csf': 0.0.2--canary.87bc651.0
-      '@storybook/react': 6.5.14_4r74vt6vcgywmfehezoeu62eri
+      '@storybook/react': 6.5.14_fnz4gxzipentqdf4lwk5k2taqa
       react: 18.2.0
     dev: true
 
@@ -12949,8 +12949,8 @@ packages:
       map-cache: 0.2.2
     dev: true
 
-  /framer-motion/10.12.18_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-cfhiUpPbj+0eEWKjuD+5cz5cMqH71xOtMxGiS/cSGfHn2OlHIEAqFnFyzEMENw5PxWR9bMVhatzzpD6lexmHZQ==}
+  /framer-motion/10.12.20_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-O4ODHTlov2cGHWjtMSuZhm2wX0eM33VK8+vCxren2uw9g3k/RubPCa0/tT6PtLzCvYgAhgKmaczVbY2qEJVWOw==}
     peerDependencies:
       react: ^18.0.0 || 18
       react-dom: ^18.0.0 || 18
@@ -16284,8 +16284,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /lucide-react/0.258.0_react@18.2.0:
-    resolution: {integrity: sha512-3evnpKadBrjLr2HHJ66eDZ1y0vPS6pm8NiNDaLqhddUUyJGnA+lfDPZfbVkuAFq7Xaa1TEy7Sg17sM7mHpMKrA==}
+  /lucide-react/0.259.0_react@18.2.0:
+    resolution: {integrity: sha512-dFBLc6jRDfcpD9NQ7NyFVa+YR3RHX6+bs+f/UiotvNPho+kd4WyeXWMCCchUf7i/pq3BAaHkbmtkbx/GxxHVUw==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || 18
     dependencies:
@@ -16972,7 +16972,7 @@ packages:
     peerDependencies:
       next: ^12.1.4 || ^13
     dependencies:
-      next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
+      next: 13.4.9_biqbaboplfbrettd7655fr4n2y
       whatwg-fetch: 3.6.2
     dev: false
 
@@ -17015,7 +17015,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.4.9_kfqkni5eoaprrm7esnti43gn2u
+      next: 13.4.9_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false
@@ -18970,8 +18970,8 @@ packages:
       fast-diff: 1.2.0
     dev: false
 
-  /prettier-plugin-tailwindcss/0.3.0_7zo47umuqqxtkbisuhbnj3rebm:
-    resolution: {integrity: sha512-009/Xqdy7UmkcTBpwlq7jsViDqXAYSOMLDrHAdTMlVZOrKfM2o9Ci7EMWTMZ7SkKBFTG04UM9F9iM2+4i6boDA==}
+  /prettier-plugin-tailwindcss/0.4.0_7zo47umuqqxtkbisuhbnj3rebm:
+    resolution: {integrity: sha512-Rna0sDPETA0KNhMHlN8wxKNgfSa8mTl2hPPAGxnbv6tUcHT6J4RQmQ8TLXyhB7Dm5Von4iHloBxTyClYM6wT0A==}
     engines: {node: '>=12.17.0'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -18979,7 +18979,7 @@ packages:
       '@shopify/prettier-plugin-liquid': '*'
       '@shufo/prettier-plugin-blade': '*'
       '@trivago/prettier-plugin-sort-imports': '*'
-      prettier: '>=2.2.0'
+      prettier: ^2.2 || ^3.0
       prettier-plugin-astro: '*'
       prettier-plugin-css-order: '*'
       prettier-plugin-import-sort: '*'
@@ -22465,6 +22465,11 @@ packages:
 
   /type-fest/3.12.0:
     resolution: {integrity: sha512-qj9wWsnFvVEMUDbESiilKeXeHL7FwwiFcogfhfyjmvT968RXSvnl23f1JOClTHYItsi7o501C/7qVllscUP3oA==}
+    engines: {node: '>=14.16'}
+    dev: false
+
+  /type-fest/3.13.0:
+    resolution: {integrity: sha512-Gur3yQGM9qiLNs0KPP7LPgeRbio2QTt4xXouobMCarR0/wyW3F+F/+OWwshg3NG0Adon7uQfSZBpB46NfhoF1A==}
     engines: {node: '>=14.16'}
 
   /type-is/1.6.18:

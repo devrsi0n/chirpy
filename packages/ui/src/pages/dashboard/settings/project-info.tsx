@@ -1,10 +1,10 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
+import { SettingsCard } from '../../../blocks';
 import { Button, Spinner, TextField, useToast } from '../../../components';
 import { useForm } from '../../../hooks';
 import { isValidDomain, logger } from '../../../utilities';
-import { Card } from './card';
 
 export type ProjectInfoProps = {
   id: string;
@@ -52,9 +52,9 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
     }
   });
   return (
-    <Card>
-      <Card.Header>Basic info</Card.Header>
-      <Card.Body>
+    <SettingsCard>
+      <SettingsCard.Header>Basic info</SettingsCard.Header>
+      <SettingsCard.Body>
         <TextField
           {...register('name', {
             required: { value: true, message: 'Name is required' },
@@ -86,8 +86,8 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
           className="w-full"
           disabled
         />
-      </Card.Body>
-      <Card.Footer>
+      </SettingsCard.Body>
+      <SettingsCard.Footer>
         <Button variant="solid" color="primary" onClick={handleSave}>
           {isLoading ? (
             <Spinner className="!text-gray-100">Save</Spinner>
@@ -95,7 +95,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
             'Save'
           )}
         </Button>
-      </Card.Footer>
-    </Card>
+      </SettingsCard.Footer>
+    </SettingsCard>
   );
 }

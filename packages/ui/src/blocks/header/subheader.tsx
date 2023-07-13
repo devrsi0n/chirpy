@@ -7,7 +7,7 @@ import { useCurrentUser } from '../../contexts/current-user-context/use-current-
 export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
   const { asPath, pathname } = useRouter();
   const { data } = useCurrentUser();
-  if (!asPath.startsWith('/dashboard') && !asPath.startsWith('/settings')) {
+  if (!asPath.startsWith('/dashboard') && !asPath.startsWith('/account')) {
     return null;
   }
   const isProjectLevel = pathname.startsWith('/dashboard/[username]/[domain]');
@@ -61,7 +61,7 @@ export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
         ) : (
           <>
             <Link href={`/dashboard/${data.username}`}>Overview</Link>
-            <Link href="/settings">Settings</Link>
+            <Link href="/account">Settings</Link>
           </>
         )}
       </nav>

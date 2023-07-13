@@ -2,6 +2,7 @@ import { trpc } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
+import { SettingsCard } from '../../../blocks';
 import {
   Button,
   Dialog,
@@ -10,7 +11,6 @@ import {
   useToast,
 } from '../../../components';
 import { logger } from '../../../utilities';
-import { Card } from './card';
 
 type DeleteProjectProps = {
   domain: string;
@@ -51,15 +51,15 @@ export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
   };
   return (
     <>
-      <Card>
-        <Card.Header>Delete project</Card.Header>
-        <Card.Body>
+      <SettingsCard>
+        <SettingsCard.Header>Delete project</SettingsCard.Header>
+        <SettingsCard.Body>
           <Text variant="secondary">
             Deleting this project will permanently remove all associated data,
             including comments and analytics. This action cannot be undone.
           </Text>
-        </Card.Body>
-        <Card.Footer>
+        </SettingsCard.Body>
+        <SettingsCard.Footer>
           <Button
             variant="solid"
             color="red"
@@ -70,8 +70,8 @@ export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
           >
             Delete
           </Button>
-        </Card.Footer>
-      </Card>
+        </SettingsCard.Footer>
+      </SettingsCard>
       <Dialog
         type="alert"
         title={`Delete project ${name}`}

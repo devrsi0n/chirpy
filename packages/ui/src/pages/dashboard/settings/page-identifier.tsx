@@ -5,6 +5,7 @@ import {
 } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
+import { SettingsCard } from '../../../blocks';
 import {
   Button,
   Link,
@@ -14,7 +15,6 @@ import {
   useToast,
 } from '../../../components';
 import { logger } from '../../../utilities';
-import { Card } from './card';
 
 export type PageUrlProps = Pick<
   NonNullable<RouterOutputs['project']['byDomain']>,
@@ -63,9 +63,9 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
     }
   };
   return (
-    <Card>
-      <Card.Header>Page identifier</Card.Header>
-      <Card.Body>
+    <SettingsCard>
+      <SettingsCard.Header>Page identifier</SettingsCard.Header>
+      <SettingsCard.Body>
         <Text variant="secondary">
           {`Chirpy uses the URL domain + path of your page as the identifier by default, if you want to add `}
           <Link
@@ -91,8 +91,8 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
             errorMessage={error}
           />
         </div>
-      </Card.Body>
-      <Card.Footer>
+      </SettingsCard.Body>
+      <SettingsCard.Footer>
         <Button
           color="primary"
           variant="solid"
@@ -105,7 +105,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
             'Save'
           )}
         </Button>
-      </Card.Footer>
-    </Card>
+      </SettingsCard.Footer>
+    </SettingsCard>
   );
 }

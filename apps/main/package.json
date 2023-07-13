@@ -46,7 +46,7 @@
     "rehype-slug": "5.1.0",
     "shiki": "0.11.1",
     "superjson": "1.12.4",
-    "type-fest": "3.12.0",
+    "type-fest": "3.13.0",
     "web-push": "3.6.3"
   },
   "devDependencies": {

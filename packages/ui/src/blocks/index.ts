@@ -29,3 +29,4 @@ export * from './sign-in-form';
 export * from './theme-editor';
 export * from './user-menu';
 export * from './crisp-chat';
+export * from './settings-card';

@@ -16,7 +16,7 @@
     "@headlessui/react": "1.7.15",
     "@tremor/react": "3.4.1",
     "clsx": "1.2.1",
-    "framer-motion": "10.12.18",
+    "framer-motion": "10.12.20",
     "next": "13.4.9",
     "prop-types": "15.8.1",
     "react": "18.2.0",
