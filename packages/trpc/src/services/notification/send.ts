@@ -1,3 +1,4 @@
+import { Settings } from '@prisma/client';
 import { log } from 'next-axiom';
 
 import { prisma } from '../../common/db-client';
@@ -5,7 +6,10 @@ import { pushWebNotification } from './push-web-notification';
 import { sendEmailNotification } from './send-email-notification';
 import { NotificationPayload } from './types';
 
-export async function sendNotification(payload: NotificationPayload) {
+export async function sendNotification(
+  payload: NotificationPayload,
+  userSettings: Pick<Settings, 'emailReply' | 'webPushReply'>,
+) {
   const notificationSubscriptions =
     await prisma.notificationSubscription.findMany({
       where: {
@@ -18,11 +22,12 @@ export async function sendNotification(payload: NotificationPayload) {
     });
 
   if (notificationSubscriptions.length === 0) {
-    log.error('No subscriptions found');
-    return;
+    log.info('No subscriptions found');
   }
   await Promise.allSettled([
-    ...notificationSubscriptions.map(pushWebNotification(payload)),
-    sendEmailNotification(payload),
+    ...(userSettings.webPushReply
+      ? notificationSubscriptions.map(pushWebNotification(payload))
+      : []),
+    ...(userSettings.emailReply ? [sendEmailNotification(payload)] : []),
   ]);
 }

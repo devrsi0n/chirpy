@@ -26,7 +26,7 @@ export async function handleCommentEvent(
   res: NextApiResponse,
   authUserId: string,
 ): Promise<void> {
-  const promises = [];
+  const revalidatePromises = [];
   const notificationPayloads: (NotificationPayload & { contextId: string })[] =
     [];
   if (event.op === 'INSERT') {
@@ -42,7 +42,7 @@ export async function handleCommentEvent(
       );
     }
     const url = siteOwnerData.page.url;
-    promises.push(revalidateCommentWidget(url, res));
+    revalidatePromises.push(revalidateCommentWidget(url, res));
     const ownerId = owner.id;
     const triggeredById = event.comment.userId;
     const triggeredBy = {
@@ -135,7 +135,7 @@ export async function handleCommentEvent(
     ]);
     if (authorData && triggeredBy) {
       const { url } = authorData.page;
-      promises.push(revalidateCommentWidget(url, res));
+      revalidatePromises.push(revalidateCommentWidget(url, res));
 
       const recipientId = authorData.user.id;
       if (recipientId !== triggeredById) {
@@ -157,8 +157,21 @@ export async function handleCommentEvent(
       }
     }
   }
+  const settings = await prisma.settings.upsert({
+    where: {
+      userId: authUserId,
+    },
+    update: {},
+    create: {
+      userId: authUserId,
+    },
+    select: {
+      emailReply: true,
+      webPushReply: true,
+    },
+  });
   await Promise.allSettled([
-    ...promises,
+    ...revalidatePromises,
     ...notificationPayloads.reduce((previous, { contextId, ...payload }) => {
       previous.push(
         createOneNotificationMessage({
@@ -169,7 +182,7 @@ export async function handleCommentEvent(
           contextId,
           content: payload.body,
         }),
-        sendNotification(payload),
+        sendNotification(payload, settings),
       );
       return previous;
     }, [] as Promise<any>[]),

@@ -26,7 +26,7 @@
     "@trpc/server": "10.34.0",
     "@types/web-push": "3.3.2",
     "dayjs": "1.11.9",
-    "next": "13.4.9",
+    "next": "13.4.10",
     "next-auth": "4.22.1",
     "next-axiom": "0.17.0",
     "react": "18.2.0",
