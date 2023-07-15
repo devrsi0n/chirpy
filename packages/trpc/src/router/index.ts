@@ -6,6 +6,7 @@ import { notificationRouter } from './notification';
 import { pageRouter } from './page';
 import { projectRouter } from './project';
 import { revalidateRouter } from './revalidate';
+import { settingsRouter } from './settings';
 import { userRouter } from './user';
 
 export const appRouter = router({
@@ -17,6 +18,7 @@ export const appRouter = router({
   revalidate: revalidateRouter,
   analytics: analyticsRouter,
   page: pageRouter,
+  settings: settingsRouter,
 });
 
 export type AppRouter = typeof appRouter;

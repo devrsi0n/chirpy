@@ -13,6 +13,7 @@ export type {
   Like,
   NotificationMessage,
   NotificationSubscription,
+  Settings,
 } from '@prisma/client';
 
 declare global {

@@ -61,7 +61,7 @@ export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
         ) : (
           <>
             <Link href={`/dashboard/${data.username}`}>Overview</Link>
-            <Link href="/account">Settings</Link>
+            <Link href="/account">Account</Link>
           </>
         )}
       </nav>

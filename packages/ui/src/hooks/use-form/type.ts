@@ -1,20 +1,30 @@
-export type ValidatorPatternChecker = (value: string) => boolean;
+export type ValidatorPatternChecker = (value: string | boolean) => boolean;
 
-export type Validator = {
+export type FieldValue = {
+  [key in string]: string | boolean;
+};
+
+export type Validator<TField extends FieldValue, VKey extends keyof TField> = {
   required?: {
     value: boolean;
     message: string;
   };
-  pattern?: {
-    value: RegExp | ValidatorPatternChecker;
-    message: string;
-  };
-  maxLength?: {
-    value: number;
-    message: string;
-  };
-  minLength?: {
-    value: number;
-    message: string;
-  };
+  pattern?: TField[VKey] extends string
+    ? {
+        value: RegExp | ValidatorPatternChecker;
+        message: string;
+      }
+    : never;
+  maxLength?: TField[VKey] extends string
+    ? {
+        value: number;
+        message: string;
+      }
+    : never;
+  minLength?: TField[VKey] extends string
+    ? {
+        value: number;
+        message: string;
+      }
+    : never;
 };
