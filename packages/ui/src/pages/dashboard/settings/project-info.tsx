@@ -4,6 +4,7 @@ import * as React from 'react';
 import { SettingsCard } from '../../../blocks';
 import { Button, Spinner, TextField, useToast } from '../../../components';
 import { useForm } from '../../../hooks';
+import { MUTATION_ERROR } from '../../../strings';
 import { isValidDomain, logger } from '../../../utilities';
 
 export type ProjectInfoProps = {
@@ -45,8 +46,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
     } catch (error) {
       showToast({
         type: 'error',
-        title:
-          'We apologize for the inconvenience. It seems that we are experiencing technical difficulties on our end. Please try again later.',
+        title: MUTATION_ERROR,
       });
       logger.error('Update project info failed', { error });
     }

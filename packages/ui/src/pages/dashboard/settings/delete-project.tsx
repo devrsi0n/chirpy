@@ -10,6 +10,7 @@ import {
   Text,
   useToast,
 } from '../../../components';
+import { MUTATION_ERROR } from '../../../strings';
 import { logger } from '../../../utilities';
 
 type DeleteProjectProps = {
@@ -44,8 +45,7 @@ export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
       logger.error('Delete project failed', { error });
       showToast({
         type: 'error',
-        title:
-          'We apologize for the inconvenience. It seems that we are experiencing technical difficulties on our end. Please try again later.',
+        title: MUTATION_ERROR,
       });
     }
   };

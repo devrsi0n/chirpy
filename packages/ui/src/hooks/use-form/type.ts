@@ -1,4 +1,4 @@
-export type ValidatorPatternChecker = (value: string | boolean) => boolean;
+export type ValidatorPatternChecker = (value: string) => boolean;
 
 export type FieldValue = {
   [key in string]: string | boolean;

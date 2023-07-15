@@ -14,6 +14,7 @@ import {
   TextField,
   useToast,
 } from '../../../components';
+import { MUTATION_ERROR } from '../../../strings';
 import { logger } from '../../../utilities';
 
 export type PageUrlProps = Pick<
@@ -56,8 +57,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       }
       showToast({
         type: 'error',
-        title:
-          'We apologize for the inconvenience. It seems that we are experiencing technical difficulties on our end. Please try again later.',
+        title: MUTATION_ERROR,
       });
       logger.error('Update page identifier failed', { error });
     }

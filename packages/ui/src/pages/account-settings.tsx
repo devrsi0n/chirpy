@@ -3,8 +3,18 @@ import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { PageTitle, SettingsCard, SiteLayout } from '../blocks';
-import { Button, Divider, Link, Spinner, Text, Toggle } from '../components';
+import {
+  Button,
+  Divider,
+  Link,
+  Spinner,
+  Text,
+  Toggle,
+  useToast,
+} from '../components';
 import { useForm } from '../hooks';
+import { MUTATION_ERROR } from '../strings';
+import { logger } from '../utilities';
 
 export type AccountSettingsProps = {
   //
@@ -35,10 +45,30 @@ type EmailForm = Pick<Settings, 'emailReply' | 'emailUsage' | 'emailReceipt'>;
 function EmailNotifications(props: EmailForm) {
   const { register, handleSubmit } = useForm<EmailForm>({
     defaultValues: {
-      ...props,
+      emailReceipt: props.emailReceipt,
+      emailReply: props.emailReply,
+      emailUsage: props.emailUsage,
     },
   });
-  const handleSave = handleSubmit(async () => {});
+  const { showToast } = useToast();
+  const { mutateAsync, isLoading } = trpc.settings.update.useMutation();
+
+  const handleSave = handleSubmit(async (fields) => {
+    try {
+      await mutateAsync(fields);
+      showToast({
+        type: 'success',
+        title: 'Email settings saved',
+      });
+    } catch (error) {
+      logger.error(`Save email settings failed`, { error });
+      showToast({
+        type: 'error',
+        title: MUTATION_ERROR,
+      });
+      throw error;
+    }
+  });
   return (
     <SettingsCard>
       <SettingsCard.Header>Email</SettingsCard.Header>
@@ -61,7 +91,11 @@ function EmailNotifications(props: EmailForm) {
       </SettingsCard.Body>
       <SettingsCard.Footer>
         <Button color="primary" variant="solid" onClick={handleSave}>
-          Save
+          {isLoading ? (
+            <Spinner className="!text-gray-100">Save</Spinner>
+          ) : (
+            'Save'
+          )}
         </Button>
       </SettingsCard.Footer>
     </SettingsCard>
@@ -76,10 +110,30 @@ type WebPushForm = Pick<
 function WebPushNotifications(props: WebPushForm) {
   const { register, handleSubmit } = useForm<WebPushForm>({
     defaultValues: {
-      ...props,
+      webPushReceipt: props.webPushReceipt,
+      webPushReply: props.webPushReply,
+      webPushUsage: props.webPushUsage,
     },
   });
-  const handleSave = handleSubmit(async () => {});
+  const { showToast } = useToast();
+  const { mutateAsync, isLoading } = trpc.settings.update.useMutation();
+
+  const handleSave = handleSubmit(async (fields) => {
+    try {
+      await mutateAsync(fields);
+      showToast({
+        type: 'success',
+        title: 'Web push settings saved',
+      });
+    } catch (error) {
+      logger.error(`Save web push settings failed`, { error });
+      showToast({
+        type: 'error',
+        title: MUTATION_ERROR,
+      });
+      throw error;
+    }
+  });
   return (
     <SettingsCard>
       <SettingsCard.Header>Web push</SettingsCard.Header>
@@ -113,7 +167,11 @@ function WebPushNotifications(props: WebPushForm) {
       </SettingsCard.Body>
       <SettingsCard.Footer>
         <Button color="primary" variant="solid" onClick={handleSave}>
-          Save
+          {isLoading ? (
+            <Spinner className="!text-gray-100">Save</Spinner>
+          ) : (
+            'Save'
+          )}
         </Button>
       </SettingsCard.Footer>
     </SettingsCard>

@@ -12,3 +12,6 @@ export const SIGN_IN_ERRORS = {
     'Sign in failed. Check the details you provided are correct.',
   Default: 'Unable to sign in.',
 };
+
+export const MUTATION_ERROR =
+  'We apologize for the inconvenience. It seems that we are experiencing technical difficulties on our end. Please try again later.';

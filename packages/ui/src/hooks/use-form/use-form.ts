@@ -94,8 +94,11 @@ export function useForm<TField extends FieldValue>({
           return;
         }
       }
-      await onSubmit(fields, e);
-      setFields(defaultValues);
+      try {
+        await onSubmit(fields, e);
+      } catch {
+        setFields(defaultValues);
+      }
     };
     return onSubmitWrapper;
   };
