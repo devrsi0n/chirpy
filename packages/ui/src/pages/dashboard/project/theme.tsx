@@ -6,8 +6,8 @@ import {
   SiteLayout,
   THEME_WIDGET_CLS,
   ThemeEditor,
-} from '../../blocks';
-import { WidgetThemeProvider } from '../../contexts';
+} from '../../../blocks';
+import { WidgetThemeProvider } from '../../../contexts';
 
 export type ThemeProps = {
   project: NonNullable<RouterOutputs['project']['byDomain']>;

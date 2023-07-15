@@ -1,7 +1,7 @@
 import { FieldValue, Validator } from './type';
 
-export function validate<T extends FieldValue>(
-  validator: Validator<T>,
+export function validate<TField extends FieldValue, VKey extends keyof TField>(
+  validator: Validator<TField, VKey>,
   value: string | boolean,
 ): string {
   let errorMessage = '';

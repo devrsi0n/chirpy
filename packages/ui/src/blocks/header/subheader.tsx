@@ -34,9 +34,9 @@ export function SubHeader({ fixedPos }: { fixedPos: boolean }) {
             <Link
               href={`/dashboard/${data.username}/${
                 asPath.split('/')[3]
-              }/getting-started`}
+              }/get-started`}
             >
-              Getting started
+              Get started
             </Link>
             <Link
               href={`/dashboard/${data.username}/${

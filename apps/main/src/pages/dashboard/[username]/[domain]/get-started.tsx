@@ -1,5 +1,5 @@
 import { ssg } from '@chirpy-dev/trpc';
-import { GettingStartedProps } from '@chirpy-dev/ui';
+import { GetStartedProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -9,7 +9,7 @@ import {
 
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
-export { GettingStarted as default } from '@chirpy-dev/ui';
+export { GetStarted as default } from '@chirpy-dev/ui';
 
 type PathParams = {
   domain: string;
@@ -21,7 +21,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-type StaticProps = GettingStartedProps;
+type StaticProps = GetStartedProps;
 
 export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   params,
@@ -40,6 +40,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     props: {
       domain,
     },
-    revalidate: 60,
+    revalidate: 60 * 60,
   };
 };

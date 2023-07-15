@@ -1,4 +1,4 @@
-import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs, useQuery } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -46,7 +46,10 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
       }}
     >
       <div className="flex flex-nowrap items-center justify-between space-x-2 px-6">
-        <Heading as="h3">{project.name}</Heading>
+        <div className="flex gap-2">
+          <DomainFavicon domain={project.domain} />
+          <Heading as="h3">{project.name}</Heading>
+        </div>
         <PageViewStats domain={project.domain} />
       </div>
       <Text className="px-6" variant="secondary">
@@ -95,4 +98,15 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
       </div>
     </Card>
   );
+}
+
+function DomainFavicon({ domain }: { domain: string }) {
+  const url = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+  const { data } = useQuery(['favicon-url', domain], () =>
+    fetch(url, { method: 'HEAD' }),
+  );
+  if (!data) {
+    return <></>;
+  }
+  return <img src={url} alt={`${domain} logo`} width={32} height={32} />;
 }

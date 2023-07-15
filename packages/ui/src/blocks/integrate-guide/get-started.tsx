@@ -5,11 +5,11 @@ import { Code } from '../../components/code';
 import { Heading } from '../../components/heading';
 import { Text } from '../../components/text';
 
-export function GettingStarttedTitle(): React.ReactNode {
+export function GetStarttedTitle(): React.ReactNode {
   return (
     <div>
       <Heading as="h2" className="mb-3 font-bold !leading-none">
-        Getting Started
+        Get Started
       </Heading>
       <Text variant="secondary" className="font-normal">
         Integrate the widget into your website to start engaging with your
@@ -19,7 +19,7 @@ export function GettingStarttedTitle(): React.ReactNode {
   );
 }
 
-export function GettingStartedBody({ domain }: { domain: string }) {
+export function GetStartedBody({ domain }: { domain: string }) {
   return (
     <div className="flex flex-col gap-4">
       <Heading as="h3">Usage on any website</Heading>

@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../blocks';
-import { Heading, IconMessageSquare, Link, Text } from '../../components';
-import { listHoverable } from '../../styles/common';
+import { PageTitle, SiteLayout } from '../../../blocks';
+import { Heading, IconMessageSquare, Link, Text } from '../../../components';
+import { listHoverable } from '../../../styles/common';
 
 export type ProjectProps = {
   username: string;
@@ -43,7 +43,10 @@ export function Project({
                 <Link
                   href={page.url}
                   variant="plain"
-                  className={clsx(listHoverable, 'flex flex-col')}
+                  className={clsx(
+                    listHoverable,
+                    'flex flex-col text-gray-1200',
+                  )}
                 >
                   <span className="font-bold">{page.title}</span>
                   <span className="text-sm">{page.url}</span>
@@ -65,7 +68,7 @@ export function Project({
             <li className="px-4 py-3">
               No pages found,{' '}
               <Link
-                href={`/dashboard/${username}/${domain}/getting-started`}
+                href={`/dashboard/${username}/${domain}/get-started`}
                 variant="primary"
               >
                 get started

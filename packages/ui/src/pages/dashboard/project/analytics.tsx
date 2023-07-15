@@ -4,18 +4,17 @@ import {
   Header,
   Widgets,
 } from '@chirpy-dev/analytics';
-import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import Head from 'next/head';
 import * as React from 'react';
 
-import { PageTitle, SiteLayout } from '../../blocks';
+import { PageTitle, SiteLayout } from '../../../blocks';
 
 export type AnalyticsByDomainPageProps = {
-  project: NonNullable<RouterOutputs['project']['byDomain']>;
+  domain: string;
 };
 
 export function AnalyticsByDomainPage({
-  project,
+  domain,
 }: AnalyticsByDomainPageProps): JSX.Element {
   return (
     <>
@@ -24,7 +23,7 @@ export function AnalyticsByDomainPage({
         <link href="/css/analytics.css" rel="stylesheet" />
       </Head>
       <SiteLayout hideFullBleed title="Analytics">
-        <AnalyticsProvider domain={project.domain}>
+        <AnalyticsProvider domain={domain}>
           <section className="mx-auto px-4 xl:max-w-6xl" id="ats">
             <PageTitle className="pb-6">Analytics</PageTitle>
 

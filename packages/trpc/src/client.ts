@@ -65,3 +65,4 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
 export { TRPCClientError } from '@trpc/react-query';
+export { useQuery } from '@tanstack/react-query';

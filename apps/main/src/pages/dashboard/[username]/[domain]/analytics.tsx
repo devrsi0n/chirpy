@@ -30,9 +30,9 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      project,
+      domain,
     },
-    revalidate: 60,
+    revalidate: 60 * 60,
   };
 };
 

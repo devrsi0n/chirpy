@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Button } from '../../components/button';
 import { Dialog } from '../../components/dialog';
-import { GettingStartedBody, GettingStarttedTitle } from './getting-started';
+import { GetStartedBody, GetStarttedTitle } from './get-started';
 
 export type IntegrateGuideProps = {
   domain: string;
@@ -23,12 +23,12 @@ export function IntegrateGuide({ domain }: IntegrateGuideProps): JSX.Element {
       <Dialog
         showDismissButton
         show={showDialog}
-        title={<GettingStarttedTitle />}
+        title={<GetStarttedTitle />}
         onClose={() => setShowDialog(false)}
         styles={{ content: `!max-w-2xl sm:!px-14 sm:!py-10` }}
       >
         <Dialog.Body>
-          <GettingStartedBody domain={domain} />
+          <GetStartedBody domain={domain} />
         </Dialog.Body>
       </Dialog>
     </div>
