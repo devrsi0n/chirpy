@@ -5,6 +5,7 @@ import * as React from 'react';
 
 import { Avatar } from '../../components/avatar';
 import {
+  IconCreditCard,
   IconLifeBuoy,
   IconLogIn,
   IconLogOut,
@@ -71,16 +72,11 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               <p className="w-max">Sign in</p>
             </Menu.Item>
           ))}
-        <Menu.Item
-          as={MenuLink}
-          variant="plain"
-          target="_blank"
-          href={SUPPORT_LINK}
-        >
-          <IconLifeBuoy size={14} />
-          <span>Feedback</span>
+        <Menu.Item as={MenuLink} variant="plain" href={`/dashboard/billings`}>
+          <IconCreditCard size={14} />
+          <span>Billings</span>
         </Menu.Item>
-        {isSignIn && (
+        {isSignIn ? (
           <>
             {isNav && (
               <Menu.Item
@@ -103,6 +99,16 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item
+              as={MenuLink}
+              variant="plain"
+              target="_blank"
+              href={SUPPORT_LINK}
+            >
+              <IconLifeBuoy size={14} />
+              <span>Feedback</span>
+            </Menu.Item>
+            <Menu.Divider />
+            <Menu.Item
               as="div"
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
@@ -117,6 +123,16 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               <span className="w-max">Log out</span>
             </Menu.Item>
           </>
+        ) : (
+          <Menu.Item
+            as={MenuLink}
+            variant="plain"
+            target="_blank"
+            href={SUPPORT_LINK}
+          >
+            <IconLifeBuoy size={14} />
+            <span>Feedback</span>
+          </Menu.Item>
         )}
       </Menu.Items>
     </Menu>

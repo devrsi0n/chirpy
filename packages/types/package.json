@@ -26,6 +26,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@tanstack/react-query": "4.29.19"
+    "@tanstack/react-query": "4.29.23"
   }
 }

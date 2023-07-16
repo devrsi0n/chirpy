@@ -10,8 +10,6 @@ declare namespace NodeJS {
     NEXTAUTH_SECRET: string;
     NEXTAUTH_URL: string;
     HASH_ALGORITHM: string;
-    HASURA_ADMIN_SECRET: string;
-    HASURA_EVENT_SECRET: string;
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;
@@ -29,5 +27,9 @@ declare namespace NodeJS {
 
     TEST_USER_ID: string;
     DOCKER: string;
+
+    STRIPE_SECRET_KEY: string;
+    STRIPE_PRICE_ID: string;
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
   }
 }
