@@ -5,3 +5,5 @@ export * from './project/theme';
 export * from './project/analytics';
 export * from './settings/settings';
 export * from './project/get-started';
+export * from './account-settings';
+export * from './billings';

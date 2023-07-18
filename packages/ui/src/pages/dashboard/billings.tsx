@@ -1,9 +1,9 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
-import { PageTitle, PricingCards, SiteLayout } from '../blocks';
-import { Heading, Text } from '../components';
-import { getStripe } from '../utilities/stripe';
+import { PageTitle, PricingCards, SiteLayout } from '../../blocks';
+import { Heading, Text } from '../../components';
+import { getStripe } from '../../utilities/stripe';
 
 export type BillingsProps = {
   //

@@ -1,7 +1,6 @@
 export * from './auth';
 export * from './blog';
 export * from './dashboard';
-export * from './account-settings';
 export * from './docs';
 export * from './profile';
 export * from './404';
@@ -12,4 +11,3 @@ export * from './widget';
 export * from './play';
 export * from './privacy-policy';
 export * from './terms-of-service';
-export * from './billings';

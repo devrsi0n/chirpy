@@ -2,7 +2,7 @@ import { Settings } from '@chirpy-dev/trpc';
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
-import { PageTitle, SettingsCard, SiteLayout } from '../blocks';
+import { PageTitle, SettingsCard, SiteLayout } from '../../blocks';
 import {
   Button,
   Divider,
@@ -11,10 +11,10 @@ import {
   Text,
   Toggle,
   useToast,
-} from '../components';
-import { useForm } from '../hooks';
-import { MUTATION_ERROR } from '../strings';
-import { logger } from '../utilities';
+} from '../../components';
+import { useForm } from '../../hooks';
+import { MUTATION_ERROR } from '../../strings';
+import { logger } from '../../utilities';
 
 export type AccountSettingsProps = {
   //
