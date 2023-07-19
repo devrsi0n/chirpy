@@ -6,6 +6,10 @@ export default createNextApiHandler({
   router: appRouter,
   createContext,
   onError: ({ path, error }) => {
+    if(process.env.NODE_ENV === "development") {
+      console.log(`❌ tRPC failed on ${path}: ${error}`);
+      return;
+    }
     log.error(`❌ tRPC failed on ${path}: ${error}`);
   },
 });

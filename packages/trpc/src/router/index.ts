@@ -22,5 +22,9 @@ export const appRouter = router({
   settings: settingsRouter,
   payment: paymentRouter,
 });
-
 export type AppRouter = typeof appRouter;
+
+export const corsRouter = router({
+  page: pageRouter
+})
+export type CorsRouter = typeof corsRouter;

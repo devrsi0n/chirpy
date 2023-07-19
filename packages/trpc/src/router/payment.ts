@@ -1,11 +1,7 @@
 import { getAppURL } from '@chirpy-dev/utils';
-import Stripe from 'stripe';
 
 import { protectedProcedure, router } from '../trpc-server';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-11-15',
-});
+import { stripe } from '../common/stripe';
 
 export const paymentRouter = router({
   checkout: protectedProcedure.mutation(async ({ ctx }) => {

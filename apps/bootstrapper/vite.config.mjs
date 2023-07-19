@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 
-import { getDefine } from './scripts/get-define';
+import { getDefine } from './scripts/get-define.mjs';
 
 export default defineConfig(({ command }) => {
   const isServe = command === 'serve';
