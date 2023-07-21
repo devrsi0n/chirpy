@@ -20,7 +20,7 @@
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/ui": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
-    "@radix-ui/colors": "1.0.0",
+    "@radix-ui/colors": "1.0.1",
     "@tensorflow-models/toxicity": "1.2.2",
     "@tensorflow/tfjs": "3.18.0",
     "@tensorflow/tfjs-converter": "3.18.0",
@@ -30,13 +30,14 @@
     "gray-matter": "4.0.3",
     "html-loader": "4.2.0",
     "lodash": "4.17.21",
+    "micro": "10.0.1",
     "next": "13.4.10",
     "next-axiom": "0.17.0",
     "next-connect": "0.12.2",
     "next-mdx-remote": "3.0.8",
     "next-superjson-plugin": "0.5.9",
     "next-themes": "0.2.1",
-    "nodemailer": "6.9.3",
+    "nodemailer": "6.9.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reading-time": "1.5.0",
@@ -45,7 +46,7 @@
     "rehype-pretty-code": "0.4.0",
     "rehype-slug": "5.1.0",
     "shiki": "0.11.1",
-    "superjson": "1.12.4",
+    "superjson": "1.13.1",
     "type-fest": "3.13.0",
     "web-push": "3.6.3"
   },
@@ -74,7 +75,7 @@
     "postcss": "8.4.26",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6",
-    "webpack": "5.88.1"
+    "webpack": "5.88.2"
   },
   "publishConfig": {
     "access": "public"

@@ -6,7 +6,7 @@
   "sideEffects": false,
   "dependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@radix-ui/colors": "1.0.0",
+    "@radix-ui/colors": "1.0.1",
     "@tailwindcss/typography": "0.5.9",
     "color-convert": "2.0.1",
     "postcss": "8.4.26",

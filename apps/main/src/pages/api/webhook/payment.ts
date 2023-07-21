@@ -1,50 +1,58 @@
-import { stripe } from '@chirpy-dev/trpc';
+import { stripe, Stripe } from '@chirpy-dev/trpc';
+import cors from 'cors';
+import { buffer } from 'micro';
+import { log } from 'next-axiom';
+
 import { getAPIHandler } from '../../../server/common/api-handler';
 
+// Stripe requires the raw body to construct the event.
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 const handler = getAPIHandler();
-handler.post(async (request, response) => {
-  let event = request.body;
-  // Only verify the event if you have an endpoint secret defined.
-  // Otherwise use the basic event deserialized with JSON.parse
+handler.use(cors);
+handler.post(async (req, res) => {
+  let event: Stripe.Event;
 
   // Get the signature sent by Stripe
-  const signature = request.headers['stripe-signature'];
+  const signature = req.headers['stripe-signature'];
   if (typeof signature !== 'string') {
-    throw new Error(`Expect stripe signature http to be string`);
+    throw new TypeError(`Expect stripe signature header to be string`);
   }
   try {
+    const buf = await buffer(req);
     event = stripe.webhooks.constructEvent(
-      request.body,
+      buf.toString(),
       signature,
       process.env.STRIPE_SIGN_SECRET,
     );
-  } catch (err) {
-    console.log(
-      `⚠️  Webhook signature verification failed.`,
-      (err as Error).message,
-    );
-    return response.status(400).end();
+  } catch (error) {
+    log.error(`⚠️  Webhook signature verification failed.`, { err: error });
+    return res.status(400).end();
   }
 
   switch (event.type) {
-    case 'payment_intent.succeeded':
-      const paymentIntent = event.data.object;
-      console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-      // Then define and call a method to handle the successful payment intent.
-      // handlePaymentIntentSucceeded(paymentIntent);
+    case 'payment_intent.succeeded': {
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      paymentIntent.customer;
       break;
-    case 'payment_method.attached':
-      const paymentMethod = event.data.object;
+    }
+    case 'payment_method.attached': {
+      // const paymentMethod = event.data.object;
       // Then define and call a method to handle the successful attachment of a PaymentMethod.
       // handlePaymentMethodAttached(paymentMethod);
       break;
-    default:
+    }
+    default: {
       // Unexpected event type
       console.log(`Unhandled event type ${event.type}.`);
+    }
   }
 
-  // Return a 200 response to acknowledge receipt of the event
-  response.status(200).end();
+  res.status(200).end();
 });
 
 export default handler;

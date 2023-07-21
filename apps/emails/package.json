@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@maizzle/cli": "1.5.6",
-    "@maizzle/framework": "4.4.6",
+    "@maizzle/framework": "4.4.7",
     "autoprefixer": "10.4.14",
     "glob": "8.0.3",
     "postcss": "8.4.26",
