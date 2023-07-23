@@ -1,15 +1,16 @@
 import { corsRouter, createNextApiHandler } from '@chirpy-dev/trpc';
 import { createContext } from '@chirpy-dev/trpc';
-import { log } from 'next-axiom';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { AxiomAPIRequest, withAxiom } from 'next-axiom';
+import { NextApiResponse } from 'next';
 import { nextCors } from '../../../server/common/cors';
 
-export default async function trpcCors(
-  req: NextApiRequest,
+export default withAxiom(async function trpcCors(
+  req: AxiomAPIRequest,
   res: NextApiResponse,
 ) {
   await nextCors(req, res);
-
+  
+  const log = req.log.with({ scope: 'trpc-cors' });
   return createNextApiHandler({
     router: corsRouter,
     createContext,
@@ -21,4 +22,4 @@ export default async function trpcCors(
       log.error(`❌ tRPC failed on ${path}: ${error}`);
     },
   })(req, res);
-}
+})

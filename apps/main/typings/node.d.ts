@@ -29,7 +29,7 @@ declare namespace NodeJS {
     DOCKER: string;
 
     STRIPE_SECRET_KEY: string;
-    STRIPE_PRICE_ID: string;
+    VERCEL_ENV: string;
     STRIPE_SIGN_SECRET: string;
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
   }

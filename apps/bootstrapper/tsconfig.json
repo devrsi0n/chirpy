@@ -8,7 +8,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../main/typings/*.d.ts",
-    "../main/src/server/services/types.ts"
+    "../main/typings/*.d.ts"
   ]
 }

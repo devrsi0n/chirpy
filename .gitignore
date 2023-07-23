@@ -19,5 +19,7 @@ out/
 storybook-static/
 .swc
 .tinyb
+.react-email
+yarn.lock
 
 config.yaml

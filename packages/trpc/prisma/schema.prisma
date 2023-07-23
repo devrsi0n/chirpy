@@ -182,20 +182,21 @@ model Team {
 }
 
 model User {
-  id                            String                     @id @default(cuid())
-  createdAt                     DateTime                   @default(now())
-  updatedAt                     DateTime                   @updatedAt
-  name                          String?
-  email                         String?                    @unique
-  emailVerified                 DateTime?
-  image                         String?                    @db.Text
-  username                      String?                    @unique
-  type                          String?
-  bio                           String?
-  website                       String?
-  twitterUserName               String?
-  userType                      UserType?                  @relation(fields: [type], references: [value], onDelete: Cascade, onUpdate: Cascade)
-  accounts                      Account[]
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name            String?
+  email           String?   @unique
+  emailVerified   DateTime?
+  image           String?   @db.Text
+  username        String?   @unique
+  type            String?
+  bio             String?
+  website         String?
+  twitterUserName String?
+  accounts        Account[]
+
   comments                      Comment[]
   likes                         Like[]
   members                       Member[]
@@ -207,7 +208,18 @@ model User {
 
   settings Settings?
 
+  plan            Plan?   @default(HOBBY)
+  // Billing cycle start day
+  billingCycleDay Int?
+  stripeId        String? @unique
+
   @@index([type])
+}
+
+enum Plan {
+  HOBBY
+  PRO
+  ENTERPRISE
 }
 
 model Settings {
@@ -225,12 +237,6 @@ model Settings {
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
-}
-
-model UserType {
-  value   String  @id
-  comment String?
-  users   User[]
 }
 
 model VerificationToken {

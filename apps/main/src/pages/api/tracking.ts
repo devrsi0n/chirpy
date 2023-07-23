@@ -1,5 +1,5 @@
 import { TINYBIRD_ORIGIN } from '@chirpy-dev/utils';
-import { log } from 'next-axiom';
+import { log as axiomLog } from 'next-axiom';
 import { NextRequest } from 'next/server';
 
 const DATASOURCE = 'analytics_events';
@@ -20,6 +20,10 @@ type TrackingPayload = {
   pathname: string;
   href: string;
 };
+
+const log = axiomLog.with({
+  scope: 'tracking',
+});
 
 /**
  * Tinybird proxy fixed API path, can't use alternative paths
@@ -53,8 +57,10 @@ export default async function tracking(req: NextRequest) {
     );
     return response;
   } catch (error) {
-    log.error('Error while sending tracking event to Tinybird', { error });
+    log.error('Error while sending tracking event to Tinybird', error as Error);
     throw error;
+  } finally {
+    await log.flush();
   }
 }
 

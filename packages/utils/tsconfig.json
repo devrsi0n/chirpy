@@ -9,5 +9,5 @@
     }
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx", "../trpc/src/services/payment/plan.ts"]
 }

@@ -1,0 +1,1 @@
+export {UpgradePlan} from './emails/upgrade-plan'

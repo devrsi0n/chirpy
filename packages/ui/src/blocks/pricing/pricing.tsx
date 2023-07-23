@@ -8,6 +8,7 @@ import { Divider } from '../../components/divider';
 import { Heading } from '../../components/heading';
 import { SectionHeader } from '../../components/section-header';
 import { Text } from '../../components/text';
+import { PLANS } from '@chirpy-dev/trpc/src/services/payment/plan';
 
 export type PricingProps = React.PropsWithChildren<{
   id?: string;
@@ -15,7 +16,7 @@ export type PricingProps = React.PropsWithChildren<{
 
 const COMMON_BENEFITS = [
   'Privacy-first, No Ads',
-  'Advanced analytics',
+  'Built-in analytics',
   'Rich text formatting',
   'Markdown shortcuts',
   'Third party sign in',
@@ -51,11 +52,13 @@ export function PricingCards({
   return (
     <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-start md:space-x-6 md:space-y-0">
       <PricingCard
-        plan="Hobby"
-        description="All the basics for starting a new community"
+        plan={PLANS[0].name}
+        description="Perfect plan for those just starting out with their communities"
         price={
           <div className="flex flex-col gap-1">
-            <h4 className="text-5xl font-semibold text-gray-1200">Free</h4>
+            <h4 className="text-5xl font-semibold text-gray-1200">
+              ${PLANS[0].price.amount}/month
+            </h4>
           </div>
         }
         callToAction={{
@@ -63,24 +66,31 @@ export function PricingCards({
           onClick: handleClickCTA,
           ...freePlanButton,
         }}
-        benefits={['Free up to 10k pageviews per month', ...COMMON_BENEFITS]}
+        benefits={[
+          `Free up to ${formateNum(PLANS[0].quota)} pageviews per month`,
+          ...COMMON_BENEFITS,
+        ]}
       />
       <PricingCard
-        plan="Pro"
+        plan={PLANS[1].name}
         description="Unblock next level communities with simple, usage based pricing"
         price={
           <div className="flex flex-col gap-1">
-            <h4 className="text-5xl font-semibold text-gray-1200">$6/month</h4>
+            <h4 className="text-5xl font-semibold text-gray-1200">
+              ${PLANS[1].price.amount}/month
+            </h4>
           </div>
         }
         benefits={[
-          '$5 / month for every additional 10k pageviews',
-          ...COMMON_BENEFITS,
-          'Comment with image',
+          'Everthing in Hobby',
+          `${formateNum(PLANS[1].quota)} pageviews included`,
+          '$5 / month for every additional 10K pageviews',
+          'Paste local images',
           'No branding',
           'Priority support',
         ]}
         callToAction={{
+          variant: 'solid',
           children: 'Get started',
           color: 'primary',
           onClick: handleClickCTA,
@@ -107,7 +117,7 @@ function PricingCard({
   callToAction,
 }: PricingCardProps): JSX.Element {
   return (
-    <Card className="p-6">
+    <Card className="h-[632px] max-w-sm p-6">
       <Heading as="h5" className="mb-4 font-medium">
         {plan}
       </Heading>
@@ -115,7 +125,7 @@ function PricingCard({
         {description}
       </Text>
       <div className="mb-6">{price}</div>
-      <Button {...callToAction} variant="solid" className="mb-8 w-full" />
+      <Button {...callToAction} className="mb-8 w-full" />
       <Divider className="-mx-6 mb-8 max-w-none" />
       <Text bold variant="secondary">{`WHAT'S INCLUDED`}</Text>
       <ul className="mt-3 flex flex-col gap-3">
@@ -130,4 +140,10 @@ function PricingCard({
       </ul>
     </Card>
   );
+}
+
+function formateNum(num: number) {
+  return Intl.NumberFormat(undefined, {
+    notation: 'compact',
+  }).format(num);
 }
