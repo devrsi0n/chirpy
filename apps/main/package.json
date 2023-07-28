@@ -63,7 +63,7 @@
     "@types/jest": "29.5.3",
     "@types/lodash": "4.14.195",
     "@types/node": "18.16.18",
-    "@types/react": "18.2.15",
+    "@types/react": "18.2.16",
     "@types/react-dom": "18.2.7",
     "@types/requestidlecallback": "0.3.5",
     "@types/web-push": "3.3.2",
