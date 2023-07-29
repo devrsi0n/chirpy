@@ -1,7 +1,7 @@
 import { Plan as PlanUnion } from '@prisma/client';
 
 export type Plan = {
-  name: string;
+  name: 'Hobby' | 'Pro';
   type: PlanUnion;
   quota: number;
   price: {
@@ -17,7 +17,7 @@ export const PLANS = [
   {
     name: 'Hobby',
     type: 'HOBBY',
-    quota: 5_000,
+    quota: 5000,
     price: {
       amount: 0,
       priceIds: {
@@ -73,15 +73,15 @@ export function isNewCustomer(
 
   if (
     // if the project is upgrading from hobby to pro
-    !previousAttr?.default_payment_method
+    previousAttr?.default_payment_method
   ) {
-    isNewCustomer = true;
-  } else {
     // if the project is upgrading from pro to enterprise
     const prevPriceId = previousAttr?.items?.data?.price?.[0]?.id;
     if (prevPriceId && getPlanByPriceId(prevPriceId)?.type === 'PRO') {
       isNewCustomer = true;
     }
+  } else {
+    isNewCustomer = true;
   }
 
   return isNewCustomer;

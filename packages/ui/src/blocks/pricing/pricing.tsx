@@ -1,3 +1,4 @@
+import { PLANS } from '@chirpy-dev/trpc/src/services/payment/plan';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -8,7 +9,6 @@ import { Divider } from '../../components/divider';
 import { Heading } from '../../components/heading';
 import { SectionHeader } from '../../components/section-header';
 import { Text } from '../../components/text';
-import { PLANS } from '@chirpy-dev/trpc/src/services/payment/plan';
 
 export type PricingProps = React.PropsWithChildren<{
   id?: string;
@@ -85,7 +85,7 @@ export function PricingCards({
           'Everthing in Hobby',
           `${formateNum(PLANS[1].quota)} pageviews included`,
           '$5 / month for every additional 10K pageviews',
-          'Paste local images',
+          'Paste local images (comming soon)',
           'No branding',
           'Priority support',
         ]}

@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/react-email",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "./index.ts",
   "license": "AGPL-3.0-or-later",
   "workspaces": [
@@ -13,13 +13,14 @@
   "dependencies": {
     "@radix-ui/colors": "1.0.1",
     "@react-email/components": "0.0.7",
+    "@sendinblue/client": "3.3.1",
     "color-convert": "2.0.1",
     "react-email": "1.9.4"
   },
   "devDependencies": {
     "@types/color-convert": "2.0.0",
     "@types/node": "18.16.18",
-    "@types/react": "18.2.15",
+    "@types/react": "18.2.17",
     "@types/react-dom": "18.2.7"
   },
   "publishConfig": {

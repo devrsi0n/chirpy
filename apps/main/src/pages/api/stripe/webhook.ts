@@ -1,9 +1,14 @@
-import { getPlanByPriceId, isNewCustomer, prisma, stripe, Stripe } from '@chirpy-dev/trpc';
-import cors from 'cors';
+import { sendUpgradePlanEmail } from '@chirpy-dev/react-email';
+import {
+  getPlanByPriceId,
+  isNewCustomer,
+  prisma,
+  stripe,
+  Stripe,
+} from '@chirpy-dev/trpc';
 import { buffer } from 'micro';
-import { AxiomAPIRequest, withAxiom } from 'next-axiom';
-
-import { getAPIHandler } from '../../../server/common/api-handler';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { log as axiomLog } from 'next-axiom';
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -12,18 +17,25 @@ export const config = {
   },
 };
 
-const handler = getAPIHandler();
-handler.use(cors);
+export default async function stripeWebhook(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 
-handler.post(async (req: AxiomAPIRequest, res) => {
-  const log = req.log.with({
-    scope: 'webhook-payment',
+  const log = axiomLog.with({
+    scope: 'stripe-webhook',
   });
   let event: Stripe.Event;
+  log.debug('stripe/webhook');
 
   // Get the signature sent by Stripe
   const signature = req.headers['stripe-signature'];
   if (typeof signature !== 'string') {
+    log.debug(`Missing stripe signature`);
     return res.status(400).json({
       error: 'missing the stripe-signature header',
     });
@@ -69,13 +81,15 @@ handler.post(async (req: AxiomAPIRequest, res) => {
       const priceId = subscriptionUpdated.items.data[0].price.id;
       const plan = getPlanByPriceId(priceId);
       if (!plan) {
+        log.error(
+          `Cant find the plan from webhook:\n${subscriptionUpdated.items.data}`,
+        );
         return res
           .status(400)
           .json({ error: `Can't find the plan for priceId${priceId}` });
       }
       const stripeId = subscriptionUpdated.customer.toString();
-      // If a user upgrades/downgrades their subscription, update their usage limit in the database.
-      const data = await prisma.user.update({
+      const user = await prisma.user.update({
         where: {
           stripeId,
         },
@@ -88,15 +102,20 @@ handler.post(async (req: AxiomAPIRequest, res) => {
           email: true,
         },
       });
-      if (!data) {
-        return res
-          .status(400)
-          .json({
-            error: `User(stripeId: ${stripeId}) not found in Stripe webhook ${event.type}`,
-          });
+      if (!user.email) {
+        log.error(`Can't find the user or email with stripeId:${stripeId}`);
+        return res.status(400).json({
+          error: `User(stripeId: ${stripeId}) not found in Stripe webhook ${event.type}`,
+        });
       }
-      if(isNewCustomer(event.data.previous_attributes)) {
-
+      if (isNewCustomer(event.data.previous_attributes)) {
+        await sendUpgradePlanEmail({
+          to: {
+            name: user.name || '',
+            email: user.email,
+          },
+          plan: 'Pro',
+        });
       }
       break;
     }
@@ -105,7 +124,7 @@ handler.post(async (req: AxiomAPIRequest, res) => {
     }
   }
 
+  log.debug(`Handle stripe webhook succeed`);
   res.status(200).end();
-});
-
-export default withAxiom(handler);
+  await log.flush();
+}

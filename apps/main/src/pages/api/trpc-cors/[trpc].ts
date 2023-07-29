@@ -1,25 +1,34 @@
-import { corsRouter, createNextApiHandler } from '@chirpy-dev/trpc';
-import { createContext } from '@chirpy-dev/trpc';
-import { AxiomAPIRequest, withAxiom } from 'next-axiom';
-import { NextApiResponse } from 'next';
+import {
+  corsRouter,
+  createContext,
+  createNextApiHandler,
+} from '@chirpy-dev/trpc';
+import { isENVProd } from '@chirpy-dev/utils';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { log as axiomLog } from 'next-axiom';
+
 import { nextCors } from '../../../server/common/cors';
 
-export default withAxiom(async function trpcCors(
-  req: AxiomAPIRequest,
+export default async function trpcCors(
+  req: NextApiRequest,
   res: NextApiResponse,
 ) {
   await nextCors(req, res);
-  
-  const log = req.log.with({ scope: 'trpc-cors' });
-  return createNextApiHandler({
+
+  const log = axiomLog.with({
+    scope: 'trpc',
+  });
+  const rsp = await createNextApiHandler({
     router: corsRouter,
     createContext,
     onError: ({ path, error }) => {
-      if(process.env.NODE_ENV === "development") {
+      if (!isENVProd) {
         console.log(`❌ tRPC failed on ${path}: ${error}`);
         return;
       }
       log.error(`❌ tRPC failed on ${path}: ${error}`);
     },
   })(req, res);
-})
+  await log.flush();
+  return rsp;
+}
