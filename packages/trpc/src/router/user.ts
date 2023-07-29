@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { prisma } from '../common/db-client';
-import { router, protectedProcedure } from '../trpc-server';
+import { protectedProcedure, router } from '../trpc-server';
 
 export const userRouter = router({
   me: protectedProcedure.query(async ({ ctx }) => {
@@ -15,6 +15,7 @@ export const userRouter = router({
         username: true,
         email: true,
         image: true,
+        plan: true,
       },
     });
     return me;

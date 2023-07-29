@@ -11,12 +11,10 @@ const plugins = [withBundleAnalyzer, withAxiom];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  ...(process.env.DOCKER && {
-    output: 'standalone',
-  }),
   productionBrowserSourceMaps: process.env.VERCEL_ENV !== 'production',
   transpilePackages: [
     '@chirpy-dev/emails',
+    '@chirpy-dev/react-email',
     '@chirpy-dev/ui',
     '@chirpy-dev/utils',
     '@chirpy-dev/types',

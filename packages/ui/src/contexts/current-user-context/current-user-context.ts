@@ -1,4 +1,4 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs, trpc } from '@chirpy-dev/trpc/src/client';
 import { Nullable } from '@chirpy-dev/types';
 import { asyncNoop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
@@ -15,9 +15,10 @@ export type CurrentUserContextType = {
   // We have a preview widget in home page,
   // we need to turn off some features if we are in preview mode
   isPreview?: true;
-  data: UserData & {
-    editableProjectIds?: string[];
-  };
+  data: UserData &
+    Nullable<NonNullable<RouterOutputs['user']['me']>> & {
+      editableProjectIds?: string[];
+    };
 };
 
 export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {

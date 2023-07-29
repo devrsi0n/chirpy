@@ -5,15 +5,12 @@ import {
 } from '@chirpy-dev/trpc';
 import { isENVProd } from '@chirpy-dev/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { log as axiomLog } from 'next-axiom';
+import { log } from 'next-axiom';
 
 export default async function trpcHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const log = axiomLog.with({
-    scope: 'trpc',
-  });
   const rsp = await createNextApiHandler({
     router: appRouter,
     createContext,
