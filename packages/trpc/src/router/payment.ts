@@ -28,7 +28,7 @@ export const paymentRouter = router({
     if (!session.url) {
       throw new Error('Expect a checkout session url');
     }
-    ctx.res.redirect(session.url);
+    return { sessionId: session.id };
   }),
 
   createPortal: protectedProcedure

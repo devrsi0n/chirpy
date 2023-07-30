@@ -5,6 +5,7 @@ import { PageTitle, PricingCards, SiteLayout } from '../../blocks';
 import { Heading, Text, useToast } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { triggerConfetti } from '../../hooks';
+import { getStripe } from '../../utilities/stripe';
 
 export type BillingsProps = {
   //
@@ -12,17 +13,30 @@ export type BillingsProps = {
 
 export function Billings(_props: BillingsProps): JSX.Element {
   const { data: user } = useCurrentUser();
-  const { mutate } = trpc.payment.checkout.useMutation();
+  const { mutate } = trpc.payment.checkout.useMutation({
+    async onSuccess(data) {
+      const stripe = await getStripe();
+      await stripe.redirectToCheckout({
+        sessionId: data.sessionId,
+      });
+    },
+  });
   const util = trpc.useContext();
+  const { showToast } = useToast();
   React.useEffect(() => {
     const url = new URL(location.href);
     if (url.searchParams.get('success') === 'true') {
       util.user.me.invalidate();
       url.searchParams.delete('success');
       triggerConfetti();
+    } else if (url.searchParams.get('canceled') === 'true') {
+      showToast({
+        type: 'info',
+        title: 'You have canceled the payment',
+      });
     }
-  }, [util.user.me]);
-  const { showToast } = useToast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <SiteLayout title="Billings">
