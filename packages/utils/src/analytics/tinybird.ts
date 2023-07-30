@@ -77,18 +77,17 @@ export function queryPipe<P, D = P>(
 const DATE_FORMAT = 'YYYY-MM-DD';
 
 /**
- * Get pageviews usage
+ * Get daily pageviews usage
  */
-export async function queryUsage(params: {
+export async function queryDailyPVUsage(params: {
   domains: string[];
-  billingCycleStart: number | null;
 }): Promise<number> {
-  const dateFrom = cpDayjs().date(params.billingCycleStart || 1);
+  const dateFrom = cpDayjs().subtract(1, 'day');
   const usage: QueryPipe<{
     pageviews: number;
     href: string;
     indices: number[];
-  }> = await queryPipe('usage', {
+  }> = await queryPipe('pv_by_domains', {
     date_from: dateFrom.format(DATE_FORMAT),
     date_to: cpDayjs().format(DATE_FORMAT),
     domains: params.domains.join(','),

@@ -208,10 +208,11 @@ model User {
 
   settings Settings?
 
-  plan            Plan?   @default(HOBBY)
+  plan                 Plan?   @default(HOBBY)
   // Billing cycle start day
-  billingCycleDay Int?
-  stripeId        String? @unique
+  billingCycleDay      Int?
+  stripeCustomerId     String?
+  stripeSubscriptionId String? @unique
 
   @@index([type])
 }

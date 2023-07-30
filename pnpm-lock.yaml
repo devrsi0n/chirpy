@@ -156,6 +156,7 @@ importers:
       '@types/react-dom': 18.2.7
       '@types/requestidlecallback': 0.3.5
       '@types/web-push': 3.3.2
+      '@upstash/qstash': 0.3.6
       cors: 2.8.5
       dotenv: 16.3.1
       dotenv-cli: 7.2.1
@@ -202,6 +203,7 @@ importers:
       '@tensorflow/tfjs': 3.18.0
       '@tensorflow/tfjs-converter': 3.18.0_br26fteayl44zj43fz4bazb7oq
       '@tensorflow/tfjs-core': 3.18.0
+      '@upstash/qstash': 0.3.6
       cors: 2.8.5
       github-slugger: 2.0.0
       gray-matter: 4.0.3
@@ -2846,6 +2848,10 @@ packages:
       lodash.once: 4.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /@deno/shim-crypto/0.3.1:
+    resolution: {integrity: sha512-ed4pNnfur6UbASEgF34gVxR9p7Mc3qF+Ygbmjiil8ws5IhNFhPDFy5vE5hQAUA9JmVsSxXPcVLM5Rf8LOZqQ5Q==}
     dev: false
 
   /@design-systems/utils/2.12.0_bwbutfx4xj25dewzmxso6o3wga:
@@ -8448,6 +8454,12 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.2.0
       eslint-visitor-keys: 3.4.1
+    dev: false
+
+  /@upstash/qstash/0.3.6:
+    resolution: {integrity: sha512-NKN4jbPhB5lfHoSIaU7AuQ3F+yGS20e/FBRiUuPetcKoi354wHhKj9AJFfkFT5SSeLq0XEsXRNynm8gqCS4HjQ==}
+    dependencies:
+      '@deno/shim-crypto': 0.3.1
     dev: false
 
   /@webassemblyjs/ast/1.11.6:
@@ -17891,7 +17903,7 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      next: 13.4.12_biqbaboplfbrettd7655fr4n2y
+      next: 13.4.12_p5kw2echqfn37sybhdujm4urde
       oauth: 0.9.15
       openid-client: 5.4.3
       preact: 10.16.0
@@ -17949,7 +17961,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.4.12_p5kw2echqfn37sybhdujm4urde
+      next: 13.4.12_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
     dev: false

@@ -7,6 +7,7 @@ import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
 
 type PathParams = {
   domain: string;
+  username: string;
 };
 
 export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
@@ -19,7 +20,7 @@ export const getStaticProps: GetStaticProps<
   AnalyticsByDomainPageProps & CommonPageProps,
   PathParams
 > = async ({ params }) => {
-  if (!params?.domain) {
+  if (!params?.domain || !params?.username) {
     return { notFound: true };
   }
   const { domain } = params;
