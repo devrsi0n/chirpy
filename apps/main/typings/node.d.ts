@@ -2,14 +2,11 @@ declare namespace NodeJS {
   interface ProcessEnv {
     // Additional environment variables
     NEXT_PUBLIC_APP_URL: string;
-    NEXT_PUBLIC_HASURA_HTTP_ORIGIN: string;
-    NEXT_PUBLIC_HASURA_WS_ORIGIN: string;
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
     NEXT_PUBLIC_COMMENT_DOMAIN: string;
 
     NEXTAUTH_SECRET: string;
     NEXTAUTH_URL: string;
-    HASH_ALGORITHM: string;
     NEXT_PUBLIC_VAPID: string;
     PRIVATE_VAPID: string;
     PROXY: string;
@@ -26,7 +23,6 @@ declare namespace NodeJS {
     FACEBOOK_APP_SECRET: string;
 
     TEST_USER_ID: string;
-    DOCKER: string;
 
     STRIPE_SECRET_KEY: string;
     VERCEL_ENV: string;

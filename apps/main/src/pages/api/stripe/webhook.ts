@@ -138,7 +138,7 @@ export default async function stripeWebhook(
         break;
       }
       default: {
-        log.warn(`Unhandled event type ${event.type}.`);
+        console.log(`Unhandled event type ${event.type}.`);
       }
     }
 

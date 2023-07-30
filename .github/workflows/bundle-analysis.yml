@@ -50,7 +50,6 @@ jobs:
           ANALYZE: true
           RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
-          HASH_ALGORITHM: ${{ secrets.HASH_ALGORITHM }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}

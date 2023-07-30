@@ -1,13 +1,17 @@
 const useAnalysis = process.env.ANALYZE === 'true';
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
+import bundler from '@next/bundle-analyzer';
+
+const withBundleAnalyzer = bundler({
   enabled: useAnalysis && process.env.NODE_ENV !== 'development',
 });
 
-const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent');
-const { withAxiom } = require('next-axiom');
+import { RelativeCiAgentWebpackPlugin } from '@relative-ci/agent';
+import { withAxiom } from 'next-axiom';
 
 const plugins = [withBundleAnalyzer, withAxiom];
+
+await import('./src/env.mjs');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -117,7 +121,7 @@ const nextConfig = {
   },
 };
 
-module.exports = (/* _phase, { defaultConfig } */) =>
+export default (/* _phase, { defaultConfig } */) =>
   plugins.reduce((acc, plugin) => {
     if (Array.isArray(plugin)) {
       return plugin[0](acc, plugin[1]);
