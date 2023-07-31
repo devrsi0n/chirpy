@@ -27,7 +27,7 @@ export async function fillUserFields(
 
     return;
   } catch (error) {
-    log.error('fill user fields failed', { error });
+    log.error('fill user fields failed', error as Error);
     return;
   }
 }

@@ -67,7 +67,7 @@ export function useToggleALikeAction() {
       // There is a `Unique constraint failed on the fields: (`userId`,`commentId`)` error
       // when a user click the like button again during this API processing
       // TODO: Refresh UI immediately, call APIs in the background
-      logger.error('Failed to insert a like', { error });
+      logger.error('Failed to insert a like', error as Error);
     }
   };
 

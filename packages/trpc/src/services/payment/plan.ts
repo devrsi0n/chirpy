@@ -54,35 +54,3 @@ export function getPriceIdByPlanName(name: (typeof PLANS)[number]['name']) {
   }
   return plan.price.priceIds[getEnv()];
 }
-
-export function isNewCustomer(
-  previousAttr:
-    | {
-        default_payment_method?: string;
-        items?: {
-          data?: {
-            price?: {
-              id?: string;
-            }[];
-          };
-        };
-      }
-    | undefined,
-) {
-  let isNewCustomer = false;
-
-  if (
-    // if the project is upgrading from hobby to pro
-    previousAttr?.default_payment_method
-  ) {
-    // if the project is upgrading from pro to enterprise
-    const prevPriceId = previousAttr?.items?.data?.price?.[0]?.id;
-    if (prevPriceId && getPlanByPriceId(prevPriceId)?.type === 'PRO') {
-      isNewCustomer = true;
-    }
-  } else {
-    isNewCustomer = true;
-  }
-
-  return isNewCustomer;
-}

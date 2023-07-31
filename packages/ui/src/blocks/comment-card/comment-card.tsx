@@ -71,7 +71,7 @@ export function CommentCard({
         type: 'error',
         title: 'Replied failed, try again later',
       });
-      logger.error('Replied failed', { error });
+      logger.error('Replied failed', error as Error);
     }
   };
   const handleDimissRTE = () => {

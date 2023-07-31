@@ -30,7 +30,10 @@ export function pushWebNotification(payload: NotificationPayload) {
         err.statusCode === 404 ||
         err.code === 'ERR_CRYPTO_ECDH_INVALID_PUBLIC_KEY'
       ) {
-        log.error('Subscription has expired or is no longer valid:', { error });
+        log.error(
+          'Subscription has expired or is no longer valid:',
+          error as Error,
+        );
         try {
           const deleteNotificationSubscriptionByPk =
             await prisma.notificationSubscription.delete({
@@ -40,7 +43,7 @@ export function pushWebNotification(payload: NotificationPayload) {
             });
           log.debug('Deleted subscription', deleteNotificationSubscriptionByPk);
         } catch (error) {
-          log.error('Error deleting subscription', { error });
+          log.error('Error deleting subscription', error as Error);
         }
         return;
       }

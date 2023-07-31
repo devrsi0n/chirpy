@@ -48,7 +48,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
         type: 'error',
         title: MUTATION_ERROR,
       });
-      logger.error('Update project info failed', { error });
+      logger.error('Update project info failed', error as Error);
     }
   });
   return (

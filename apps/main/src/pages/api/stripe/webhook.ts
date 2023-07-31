@@ -1,11 +1,5 @@
 import { sendUpgradePlanEmail } from '@chirpy-dev/react-email';
-import {
-  getPlanByPriceId,
-  isNewCustomer,
-  prisma,
-  stripe,
-  Stripe,
-} from '@chirpy-dev/trpc';
+import { getPlanByPriceId, prisma, stripe, Stripe } from '@chirpy-dev/trpc';
 import { buffer } from 'micro';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log as axiomLog } from 'next-axiom';
@@ -84,25 +78,26 @@ export default async function stripeWebhook(
         });
         break;
       }
+      case 'customer.subscription.created':
       case 'customer.subscription.updated': {
-        const subscriptionUpdated = event.data.object as Stripe.Subscription;
-        const priceId = subscriptionUpdated.items.data[0].price.id;
+        const subscription = event.data.object as Stripe.Subscription;
+        const priceId = subscription.items.data[0].price.id;
         const plan = getPlanByPriceId(priceId);
         if (!plan) {
           log.error(
-            `Cant find the plan from webhook:\n${subscriptionUpdated.items.data}`,
+            `Cant find the plan from webhook:\n${subscription.items.data}`,
           );
           return res
             .status(400)
             .json({ error: `Can't find the plan for priceId${priceId}` });
         }
-        const subscriptionId = getSubscriptionId(subscriptionUpdated);
+        const subscriptionId = getSubscriptionId(subscription);
         if (!subscriptionId) {
           log.error(
-            `subscriptionId(${subscriptionUpdated}) in Stripe webhook ${event.type}`,
+            `subscriptionId(${subscription}) in Stripe webhook ${event.type}`,
           );
           return res.status(400).json({
-            error: `Missing subscriptionId(${subscriptionUpdated.customer}) in Stripe webhook ${event.type}`,
+            error: `Missing subscriptionId(${subscription.customer}) in Stripe webhook ${event.type}`,
           });
         }
         const user = await prisma.user.update({
@@ -120,28 +115,54 @@ export default async function stripeWebhook(
         });
         if (!user.email) {
           log.error(
-            `Can't find the user or email with subscriptionId(${subscriptionUpdated})`,
+            `Can't find the user or email with subscriptionId(${subscription})`,
           );
           return res.status(400).json({
-            error: `User(subscriptionId(${subscriptionUpdated})) not found in Stripe webhook ${event.type}`,
+            error: `User(subscriptionId(${subscription})) not found in Stripe webhook ${event.type}`,
           });
         }
-        if (isNewCustomer(event.data.previous_attributes)) {
-          await sendUpgradePlanEmail({
-            to: {
-              name: user.name || '',
-              email: user.email,
-            },
-            plan: 'Pro',
+        await sendUpgradePlanEmail({
+          to: {
+            name: user.name || '',
+            email: user.email,
+          },
+          plan: 'Pro',
+        });
+        break;
+      }
+      case 'customer.subscription.deleted': {
+        const subscriptionDeleted = event.data.object as Stripe.Subscription;
+        const subscriptionId = getSubscriptionId(subscriptionDeleted);
+        const user = await prisma.user.update({
+          where: {
+            stripeSubscriptionId: subscriptionId,
+          },
+          data: {
+            plan: 'HOBBY',
+            stripeSubscriptionId: null,
+            stripeCustomerId: null,
+            billingCycleDay: null,
+          },
+          select: {
+            id: true,
+            name: true,
+          },
+        });
+        if (!user?.id) {
+          log.error(
+            `Can't find the user in Stripe webhook(customer.subscription.deleted): ${subscriptionDeleted}`,
+          );
+          return res.status(400).json({
+            error: `Can't find the user in Stripe webhook(customer.subscription.deleted): ${subscriptionDeleted}`,
           });
         }
+        log.warn(`User(${user.name}) has canceled their subscription`);
         break;
       }
       default: {
         console.log(`Unhandled event type ${event.type}.`);
       }
     }
-
     res.status(200).end();
   } finally {
     await log.flush();

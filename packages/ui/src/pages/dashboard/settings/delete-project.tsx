@@ -42,7 +42,7 @@ export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
       });
       router.push(`/dashboard/${username}`);
     } catch (error) {
-      logger.error('Delete project failed', { error });
+      logger.error('Delete project failed', error as Error);
       showToast({
         type: 'error',
         title: MUTATION_ERROR,

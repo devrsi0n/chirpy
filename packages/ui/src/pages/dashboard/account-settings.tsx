@@ -61,7 +61,7 @@ function EmailNotifications(props: EmailForm) {
         title: 'Email settings saved',
       });
     } catch (error) {
-      logger.error(`Save email settings failed`, { error });
+      logger.error(`Save email settings failed`, error as Error);
       showToast({
         type: 'error',
         title: MUTATION_ERROR,
@@ -126,7 +126,7 @@ function WebPushNotifications(props: WebPushForm) {
         title: 'Web push settings saved',
       });
     } catch (error) {
-      logger.error(`Save web push settings failed`, { error });
+      logger.error(`Save web push settings failed`, error as Error);
       showToast({
         type: 'error',
         title: MUTATION_ERROR,

@@ -59,7 +59,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
         type: 'error',
         title: MUTATION_ERROR,
       });
-      logger.error('Update page identifier failed', { error });
+      logger.error('Update page identifier failed', error as Error);
     }
   };
   return (

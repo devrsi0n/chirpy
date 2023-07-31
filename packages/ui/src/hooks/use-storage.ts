@@ -36,7 +36,7 @@ function useStorage<T>(
       const item = getStorage().getItem(key);
       return item ? (parseJSON(item) as T) : initialValue;
     } catch (error) {
-      logger.warn(`Error reading storage key “${key}”:`, { error });
+      logger.warn(`Error reading storage key “${key}”:`, error as Error);
       return initialValue;
     }
   };
@@ -62,7 +62,7 @@ function useStorage<T>(
 
       window.dispatchEvent(new Event(customEventKey));
     } catch (error) {
-      logger.warn(`Error setting storage key “${key}”:`, { error });
+      logger.warn(`Error setting storage key “${key}”:`, error as Error);
     }
   };
 
