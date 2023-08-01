@@ -2,7 +2,7 @@ import { PLANS } from '@chirpy-dev/trpc/src/services/payment/plan';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
-import { IconCheck } from '../../components';
+import { IconCheck, IconX } from '../../components';
 import { Button, ButtonProps } from '../../components/button';
 import { Card } from '../../components/card';
 import { Divider } from '../../components/divider';
@@ -13,15 +13,6 @@ import { Text } from '../../components/text';
 export type PricingProps = React.PropsWithChildren<{
   id?: string;
 }>;
-
-const COMMON_BENEFITS = [
-  'Privacy-first, No Ads',
-  'Built-in analytics',
-  'Rich text formatting',
-  'Markdown shortcuts',
-  'Third party sign in',
-  'Widget customization',
-];
 
 export function Pricing({ id }: PricingProps): JSX.Element {
   return (
@@ -67,10 +58,21 @@ export function PricingCards({
           ...freePlanButton,
         }}
         benefits={[
-          `Free up to ${formateNum(PLANS[0].quota)} pageviews per month`,
-          ...COMMON_BENEFITS,
+          <div className="md:h-[80px]" key="pv">
+            Up to {formateNum(PLANS[0].quota)} pageviews per month
+          </div>,
+          '1 month analytics data retention',
+          '1 project',
+          'Privacy-first, No Ads',
+          'Basic customization',
         ]}
-      />
+      >
+        {['Paste local images', 'No Chirpy branding', 'Priority support'].map(
+          (benefit) => (
+            <DisabledBenefit key={benefit}>{benefit}</DisabledBenefit>
+          ),
+        )}
+      </PricingCard>
       <PricingCard
         plan={PLANS[1].name}
         description="Unblock next level communities with simple, usage based pricing"
@@ -82,11 +84,14 @@ export function PricingCards({
           </div>
         }
         benefits={[
-          'Everthing in Hobby',
           `${formateNum(PLANS[1].quota)} pageviews included`,
           '$5 / month for every additional 10K pageviews',
+          '2 years analytics data retention',
+          'Up to 10 projects',
+          'Privacy-first, No Ads',
+          'Advanced customization',
           'Paste local images (comming soon)',
-          'No branding',
+          'No Chirpy branding',
           'Priority support',
         ]}
         callToAction={{
@@ -107,6 +112,7 @@ type PricingCardProps = {
   price: JSX.Element;
   callToAction: ButtonProps;
   benefits?: React.ReactNode[];
+  children?: React.ReactNode;
 };
 
 function PricingCard({
@@ -115,9 +121,10 @@ function PricingCard({
   price,
   benefits,
   callToAction,
+  children,
 }: PricingCardProps): JSX.Element {
   return (
-    <Card className="h-[632px] max-w-sm p-6">
+    <Card className="max-w-sm p-6 md:h-[724px]">
       <Heading as="h5" className="mb-4 font-medium">
         {plan}
       </Heading>
@@ -131,14 +138,29 @@ function PricingCard({
       <ul className="mt-3 flex flex-col gap-3">
         {benefits?.map((benefit, index) => (
           <li key={index} className="flex items-start gap-3">
-            <span className="rounded-full bg-green-400 p-1 text-green-800">
+            <span className="rounded-full bg-green-400 p-1 text-green-1000">
               <IconCheck size={14} strokeWidth={3} />
             </span>
             <span>{benefit}</span>
           </li>
         ))}
+        {children}
       </ul>
     </Card>
+  );
+}
+
+interface DisabledBenefitProps {
+  children: React.ReactNode;
+}
+function DisabledBenefit({ children }: DisabledBenefitProps) {
+  return (
+    <li className="flex items-start gap-3">
+      <span className="rounded-full bg-gray-400 p-1 text-gray-1000">
+        <IconX size={14} strokeWidth={3} />
+      </span>
+      <span>{children}</span>
+    </li>
   );
 }
 
