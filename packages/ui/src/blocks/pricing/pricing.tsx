@@ -41,7 +41,7 @@ export function PricingCards({
     router.push('/auth/sign-in');
   };
   return (
-    <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-start md:space-x-6 md:space-y-0">
+    <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-stretch md:space-x-6 md:space-y-0">
       <PricingCard
         plan={PLANS[0].name}
         description="Perfect plan for those just starting out with their communities"
@@ -124,7 +124,7 @@ function PricingCard({
   children,
 }: PricingCardProps): JSX.Element {
   return (
-    <Card className="max-w-sm p-6 md:h-[724px]">
+    <Card className="max-w-sm p-6">
       <Heading as="h5" className="mb-4 font-medium">
         {plan}
       </Heading>

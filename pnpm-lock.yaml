@@ -53,7 +53,7 @@ importers:
       react-dom: 18.2.0
       superjson: 1.13.1
       typescript: 5.1.6
-      vite: 4.4.7
+      vite: 4.4.8
       vite-plugin-dts: 2.3.0
     dependencies:
       '@chirpy-dev/trpc': link:../../packages/trpc
@@ -78,8 +78,8 @@ importers:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       typescript: 5.1.6
-      vite: 4.4.7_@types+node@18.16.18
-      vite-plugin-dts: 2.3.0_4nhay24eepyuhtwpjhggodwn7q
+      vite: 4.4.8_@types+node@18.16.18
+      vite-plugin-dts: 2.3.0_eqp2nugqt67gqz5h3msfk4jn5e
 
   apps/e2e:
     specifiers:
@@ -294,7 +294,7 @@ importers:
       dotenv-expand: 10.0.0
       eslint: 8.46.0
       typescript: 5.1.6
-      vite: 4.4.7
+      vite: 4.4.8
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
@@ -303,7 +303,7 @@ importers:
       dotenv-expand: 10.0.0
       eslint: 8.46.0
       typescript: 5.1.6
-      vite: 4.4.7
+      vite: 4.4.8
 
   packages/analytics:
     specifiers:
@@ -444,7 +444,7 @@ importers:
       '@chirpy-dev/types': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@next-auth/prisma-adapter': 1.0.7
-      '@prisma/client': 5.0.0
+      '@prisma/client': 5.1.1
       '@tanstack/react-query': 4.32.1
       '@trpc/client': 10.36.0
       '@trpc/next': 10.36.0
@@ -457,7 +457,7 @@ importers:
       next: 13.4.12
       next-auth: 4.22.3
       next-axiom: 0.17.0
-      prisma: 5.0.0
+      prisma: 5.1.1
       react: 18.2.0
       react-dom: 18.2.0
       stripe: 12.16.0
@@ -470,8 +470,8 @@ importers:
       '@chirpy-dev/tsconfigs': link:../tsconfigs
       '@chirpy-dev/types': link:../types
       '@chirpy-dev/utils': link:../utils
-      '@next-auth/prisma-adapter': 1.0.7_rp7uer2vz2g7l5qmb24pzs5g6i
-      '@prisma/client': 5.0.0_prisma@5.0.0
+      '@next-auth/prisma-adapter': 1.0.7_slzq4rgwgrkdjbmbogbxotlrpa
+      '@prisma/client': 5.1.1_prisma@5.1.1
       '@tanstack/react-query': 4.32.1_biqbaboplfbrettd7655fr4n2y
       '@trpc/client': 10.36.0_@trpc+server@10.36.0
       '@trpc/next': 10.36.0_d5tfmxadcelkv7qsidsgyzv2sy
@@ -491,7 +491,7 @@ importers:
     devDependencies:
       '@types/jest': 29.5.3
       '@types/node': 18.16.18
-      prisma: 5.0.0
+      prisma: 5.1.1
       typescript: 5.1.6
 
   packages/tsconfigs:
@@ -4072,13 +4072,13 @@ packages:
       - supports-color
     dev: true
 
-  /@next-auth/prisma-adapter/1.0.7_rp7uer2vz2g7l5qmb24pzs5g6i:
+  /@next-auth/prisma-adapter/1.0.7_slzq4rgwgrkdjbmbogbxotlrpa:
     resolution: {integrity: sha512-Cdko4KfcmKjsyHFrWwZ//lfLUbcLqlyFqjd/nYE2m3aZ7tjMNUjpks47iw7NTCnXf+5UWz5Ypyt1dSs1EP5QJw==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
     dependencies:
-      '@prisma/client': 5.0.0_prisma@5.0.0
+      '@prisma/client': 5.1.1_prisma@5.1.1
       next-auth: 4.22.3_54ux7fu2vrztxgcjbkegvwjefy
     dev: false
 
@@ -4422,8 +4422,8 @@ packages:
   /@popperjs/core/2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
 
-  /@prisma/client/5.0.0_prisma@5.0.0:
-    resolution: {integrity: sha512-XlO5ELNAQ7rV4cXIDJUNBEgdLwX3pjtt9Q/RHqDpGf43szpNJx2hJnggfFs7TKNx0cOFsl6KJCSfqr5duEU/bQ==}
+  /@prisma/client/5.1.1_prisma@5.1.1:
+    resolution: {integrity: sha512-fxcCeK5pMQGcgCqCrWsi+I2rpIbk0rAhdrN+ke7f34tIrgPwA68ensrpin+9+fZvuV2OtzHmuipwduSY6HswdA==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -4432,16 +4432,16 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584
-      prisma: 5.0.0
+      '@prisma/engines-version': 5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e
+      prisma: 5.1.1
     dev: false
 
-  /@prisma/engines-version/4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584:
-    resolution: {integrity: sha512-HHiUF6NixsldsP3JROq07TYBLEjXFKr6PdH8H4gK/XAoTmIplOJBCgrIUMrsRAnEuGyRoRLXKXWUb943+PFoKQ==}
+  /@prisma/engines-version/5.1.1-1.6a3747c37ff169c90047725a05a6ef02e32ac97e:
+    resolution: {integrity: sha512-owZqbY/wucbr65bXJ/ljrHPgQU5xXTSkmcE/JcbqE1kusuAXV/TLN3/exmz21SZ5rJ7WDkyk70J2G/n68iogbQ==}
     dev: false
 
-  /@prisma/engines/5.0.0:
-    resolution: {integrity: sha512-kyT/8fd0OpWmhAU5YnY7eP31brW1q1YrTGoblWrhQJDiN/1K+Z8S1kylcmtjqx5wsUGcP1HBWutayA/jtyt+sg==}
+  /@prisma/engines/5.1.1:
+    resolution: {integrity: sha512-NV/4nVNWFZSJCCIA3HIFJbbDKO/NARc9ej0tX5S9k2EVbkrFJC4Xt9b0u4rNZWL4V+F5LAjvta8vzEUw0rw+HA==}
     requiresBuild: true
 
   /@radix-ui/colors/1.0.1:
@@ -20099,13 +20099,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /prisma/5.0.0:
-    resolution: {integrity: sha512-KYWk83Fhi1FH59jSpavAYTt2eoMVW9YKgu8ci0kuUnt6Dup5Qy47pcB4/TLmiPAbhGrxxSz7gsSnJcCmkyPANA==}
+  /prisma/5.1.1:
+    resolution: {integrity: sha512-WJFG/U7sMmcc6TjJTTifTfpI6Wjoh55xl4AzopVwAdyK68L9/ogNo8QQ2cxuUjJf/Wa82z/uhyh3wMzvRIBphg==}
     engines: {node: '>=16.13'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 5.0.0
+      '@prisma/engines': 5.1.1
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -21487,8 +21487,8 @@ packages:
       inherits: 2.0.4
     dev: true
 
-  /rollup/3.26.3:
-    resolution: {integrity: sha512-7Tin0C8l86TkpcMtXvQu6saWH93nhG3dGQ1/+l5V2TDMceTxO7kDiK6GzbfLWNNxqJXm591PcEZUozZm51ogwQ==}
+  /rollup/3.27.0:
+    resolution: {integrity: sha512-aOltLCrYZ0FhJDm7fCqwTjIUEVjWjcydKBV/Zeid6Mn8BWgDCUBBWT5beM5ieForYNo/1ZHuGJdka26kvQ3Gzg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -24316,7 +24316,7 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite-plugin-dts/2.3.0_4nhay24eepyuhtwpjhggodwn7q:
+  /vite-plugin-dts/2.3.0_eqp2nugqt67gqz5h3msfk4jn5e:
     resolution: {integrity: sha512-WbJgGtsStgQhdm3EosYmIdTGbag5YQpZ3HXWUAPCDyoXI5qN6EY0V7NXq0lAmnv9hVQsvh0htbYcg0Or5Db9JQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -24332,15 +24332,15 @@ packages:
       kolorist: 1.8.0
       magic-string: 0.29.0
       ts-morph: 18.0.0
-      vite: 4.4.7_@types+node@18.16.18
+      vite: 4.4.8_@types+node@18.16.18
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
     dev: true
 
-  /vite/4.4.7:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
+  /vite/4.4.8:
+    resolution: {integrity: sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -24369,13 +24369,13 @@ packages:
     dependencies:
       esbuild: 0.18.17
       postcss: 8.4.27
-      rollup: 3.26.3
+      rollup: 3.27.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.4.7_@types+node@18.16.18:
-    resolution: {integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw==}
+  /vite/4.4.8_@types+node@18.16.18:
+    resolution: {integrity: sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -24405,7 +24405,7 @@ packages:
       '@types/node': 18.16.18
       esbuild: 0.18.17
       postcss: 8.4.27
-      rollup: 3.26.3
+      rollup: 3.27.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
