@@ -40,22 +40,23 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           username={username}
         />
       </Menu.Button>
-      <Menu.Items>
+      <Menu.Items className="mx-6">
         {name && (
-          <div className="mx-6 flex flex-col gap-1 py-2">
-            <Text className="line-clamp-2 w-36 text-left" bold>
-              <span>{name}</span>
-            </Text>
+          <div className="mx-4 w-36 space-y-1 py-2">
             {plan && plan !== 'HOBBY' && (
-              <p className="w-fit rounded-md border border-primary-700 px-2 py-1 text-xs font-normal text-primary-1000 first-letter:uppercase">
+              <span className="float-right mt-1 w-fit select-none rounded-md border border-primary-700 px-2 py-1 text-xs font-normal text-primary-1000 first-letter:uppercase">
                 {plan.toLowerCase()}
-              </p>
+              </span>
             )}
+            <Text className="line-clamp-2 text-left" bold>
+              {name}
+            </Text>
             {email && (
               <Text
                 variant="secondary"
-                className="line-clamp-2 w-36 break-words text-left"
+                className="line-clamp-2 break-words text-left"
                 size="sm"
+                title={email}
               >
                 {email}
               </Text>
@@ -63,10 +64,10 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
             {username && (
               <Text
                 variant="secondary"
-                className="line-clamp-2 w-36 break-words text-left"
+                className="line-clamp-2 break-words text-left"
                 size="sm"
               >
-                {username}
+                @{username}
               </Text>
             )}
           </div>
