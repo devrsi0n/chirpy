@@ -1,6 +1,7 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
 import { isBrowser } from '@chirpy-dev/utils';
+import clsx from 'clsx';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
@@ -29,7 +30,7 @@ export const App = trpc.withTRPC(function App({
 
   const currentOrigin = isBrowser ? window.location.origin : null;
   return (
-    <div className={inter.variable}>
+    <div className={clsx(inter.variable, 'h-full')}>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
