@@ -69,7 +69,7 @@ export function PricingCards({
             Up to {formateNum(hobby.pageviews)} pageviews per month
           </div>,
           '1 month analytics data retention',
-          `${hobby?.maxProjects || 1} project`,
+          `${hobby.maxProjectNum} project`,
           'Privacy-first, No Ads',
           'Basic customization',
         ]}
@@ -94,7 +94,7 @@ export function PricingCards({
           `${formateNum(pro.pageviews)} pageviews included`,
           '$5 / month for every additional 10K pageviews',
           '2 years analytics data retention',
-          'Up to 10 projects',
+          `Up to ${pro.maxProjectNum} projects`,
           'Privacy-first, No Ads',
           'Advanced customization',
           'Paste local images (comming soon)',

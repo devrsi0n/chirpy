@@ -1,8 +1,9 @@
+import { promises as fs } from 'fs';
+import path from 'path';
+
 import { MDXProps } from '@chirpy-dev/types';
 import { NearNav } from '@chirpy-dev/ui';
-import { promises as fs } from 'fs';
 import { serialize } from 'next-mdx-remote/serialize';
-import path from 'path';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings, {
   Options as AutolinkHeadingsOptions,
@@ -112,8 +113,6 @@ export async function getAllFilesFrontMatter(
 }
 
 const PRETTY_CODE_OPTIONS: Partial<Options> = {
-  // Use one of Shiki's packaged themes
-  theme: 'dracula',
   onVisitLine(node) {
     // Prevent lines from collapsing in `display: grid` mode, and
     // allow empty lines to be copy/pasted
