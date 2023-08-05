@@ -99,6 +99,7 @@ export default async function stripeWebhook(
           },
           data: {
             plan: plan.type,
+            stripeSubscriptionId: subscriptionId,
           },
           select: {
             id: true,
@@ -107,11 +108,10 @@ export default async function stripeWebhook(
           },
         });
         if (!user.email) {
-          log.error(
-            `Can't find the user or email with subscriptionId(${subscription})`,
-          );
+          const msg = `Can't find the user or email with subscriptionId(${subscriptionId})`;
+          log.error(msg);
           return res.status(400).json({
-            error: `User(subscriptionId(${subscription})) not found in Stripe webhook ${event.type}`,
+            error: msg,
           });
         }
         await sendUpgradePlanEmail({
@@ -171,7 +171,5 @@ function getCustomerId(customer: Stripe.Checkout.Session['customer']) {
 }
 
 function getSubscriptionItemId(sub: Stripe.Subscription) {
-  if (sub) {
-    return sub.items.data[0].id;
-  }
+  return sub.items.data[0].id;
 }
