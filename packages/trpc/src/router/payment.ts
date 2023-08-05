@@ -1,6 +1,7 @@
 import { getAppURL } from '@chirpy-dev/utils';
-import { z } from 'zod';
+import { TRPCError } from '@trpc/server';
 
+import { prisma } from '../common/db-client';
 import { stripe } from '../common/stripe';
 import { getPriceIdByPlanName } from '../services/payment/plan';
 import { protectedProcedure, router } from '../trpc-server';
@@ -9,7 +10,10 @@ export const paymentRouter = router({
   checkout: protectedProcedure.mutation(async ({ ctx }) => {
     const priceId = getPriceIdByPlanName('Pro');
     if (!priceId) {
-      throw new Error(`Can't find the priceId`);
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Can't find the priceId`,
+      });
     }
     const session = await stripe.checkout.sessions.create({
       line_items: [
@@ -26,22 +30,53 @@ export const paymentRouter = router({
       client_reference_id: ctx.session.user.id,
     });
     if (!session.url) {
-      throw new Error('Expect a checkout session url');
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'Expect a checkout session url',
+      });
     }
     return { sessionId: session.id };
   }),
-
-  createPortal: protectedProcedure
-    .input(
-      z.object({
-        stripeCustomerId: z.string(),
-      }),
-    )
-    .mutation(async ({ input }) => {
-      const portalSession = await stripe.billingPortal.sessions.create({
-        customer: input.stripeCustomerId,
-        return_url: `${getAppURL()}/dashboard/billings`,
+  upcomingInvoice: protectedProcedure.mutation(async ({ ctx }) => {
+    const user = await getUserStripeInfo(ctx.session.user.id);
+    if (!user?.stripeSubscriptionId || !user?.stripeCustomerId) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Can't find user's stripeSubscriptionId or stripeCustomerId`,
       });
-      return { portalUrl: portalSession.url };
-    }),
+    }
+    const invoice = await stripe.invoices.retrieveUpcoming({
+      customer: user.stripeCustomerId,
+      subscription: user.stripeSubscriptionId,
+    });
+    return invoice.lines;
+  }),
+  customerPortal: protectedProcedure.query(async ({ ctx }) => {
+    const user = await getUserStripeInfo(ctx.session.user.id);
+    if (!user?.stripeCustomerId) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Can't find user's stripeCustomerId`,
+      });
+    }
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: user.stripeCustomerId,
+      return_url: `${getAppURL()}/dashboard/billings`,
+    });
+    return { portalUrl: portalSession.url };
+  }),
 });
+
+async function getUserStripeInfo(id: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      stripeCustomerId: true,
+      stripeSubscriptionId: true,
+    },
+  });
+
+  return user;
+}

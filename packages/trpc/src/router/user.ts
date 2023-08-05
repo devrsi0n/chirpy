@@ -16,7 +16,6 @@ export const userRouter = router({
         email: true,
         image: true,
         plan: true,
-        stripeCustomerId: true,
       },
     });
     return me;
