@@ -72,6 +72,7 @@ export default async function stripeWebhook(
         });
         break;
       }
+      case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
         const priceId = subscription.items.data[0].price.id;
