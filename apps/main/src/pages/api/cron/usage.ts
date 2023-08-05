@@ -31,6 +31,7 @@ async function updateUsage() {
     const pv = await queryDailyPVUsage({
       domains: user.projects.map((p) => p.domain),
     });
+    // To avoid duplicated reports
     const idempotencyKey = `${user.stripeSubscriptionId}_${cpDayjs()
       .utc()
       .format('YYYY-MM-DD')}`;

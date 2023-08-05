@@ -53,7 +53,9 @@ export default async function stripeWebhook(
       case 'checkout.session.completed': {
         const checkoutSession = event.data.object as Stripe.Checkout.Session;
         const customerId = getCustomerId(checkoutSession.customer);
-        const subscriptionId = getSubscriptionId(checkoutSession.subscription);
+        const subscriptionId = getSubscriptionItemId(
+          checkoutSession.subscription,
+        );
         if (
           !checkoutSession.client_reference_id ||
           !customerId ||
@@ -91,7 +93,7 @@ export default async function stripeWebhook(
             .status(400)
             .json({ error: `Can't find the plan for priceId${priceId}` });
         }
-        const subscriptionId = getSubscriptionId(subscription);
+        const subscriptionId = getSubscriptionItemId(subscription);
         if (!subscriptionId) {
           log.error(
             `subscriptionId(${subscription}) in Stripe webhook ${event.type}`,
@@ -132,7 +134,7 @@ export default async function stripeWebhook(
       }
       case 'customer.subscription.deleted': {
         const subscriptionDeleted = event.data.object as Stripe.Subscription;
-        const subscriptionId = getSubscriptionId(subscriptionDeleted);
+        const subscriptionId = getSubscriptionItemId(subscriptionDeleted);
         const user = await prisma.user.update({
           where: {
             stripeSubscriptionId: subscriptionId,
@@ -177,10 +179,10 @@ function getCustomerId(customer: Stripe.Checkout.Session['customer']) {
   }
 }
 
-function getSubscriptionId(sub: Stripe.Checkout.Session['subscription']) {
+function getSubscriptionItemId(sub: Stripe.Checkout.Session['subscription']) {
   if (typeof sub === 'string') {
     return sub;
-  } else if (sub?.id) {
-    return sub.id;
+  } else if (sub) {
+    return sub.items.data[0].id;
   }
 }
