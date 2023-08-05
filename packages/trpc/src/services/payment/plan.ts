@@ -1,15 +1,18 @@
 import { Plan as PlanUnion } from '@prisma/client';
 
+type PlanPrice = {
+  amount: number;
+  priceId: string;
+  pageviews: number;
+  maxProjectNum: number;
+};
+
 export type Plan = {
   name: 'Hobby' | 'Pro';
   type: PlanUnion;
-  quota: number;
   price: {
-    amount: number;
-    priceIds: {
-      test: string;
-      production: string;
-    };
+    test: PlanPrice;
+    production: PlanPrice;
   };
 };
 
@@ -17,24 +20,38 @@ export const PLANS = [
   {
     name: 'Hobby',
     type: 'HOBBY',
-    quota: 5000,
     price: {
-      amount: 0,
-      priceIds: {
-        test: '',
-        production: '',
+      test: {
+        amount: 0,
+        // No needed
+        priceId: '',
+        pageviews: 1000,
+        maxProjectNum: 1,
+      },
+      production: {
+        amount: 0,
+        // No needed
+        priceId: '',
+        pageviews: 5000,
+        maxProjectNum: 1,
       },
     },
   },
   {
     name: 'Pro',
     type: 'PRO',
-    quota: 10_000,
     price: {
-      amount: 6,
-      priceIds: {
-        test: 'price_1NZ7FiFkzx77ql6gW7zIxmDK',
-        production: '',
+      test: {
+        amount: 6,
+        priceId: 'price_1NZ7FiFkzx77ql6gW7zIxmDK',
+        pageviews: 10_000,
+        maxProjectNum: 1,
+      },
+      production: {
+        amount: 6,
+        priceId: 'price_1NZ7FiFkzx77ql6gW7zIxmDK',
+        pageviews: 10_000,
+        maxProjectNum: 10,
       },
     },
   },
@@ -44,13 +61,15 @@ const getEnv = () =>
   process.env.VERCEL_ENV === 'production' ? 'production' : 'test';
 
 export function getPlanByPriceId(priceId: string) {
-  return PLANS.find((p) => p.price.priceIds[getEnv()] === priceId);
+  return PLANS.find((p) => p.price[getEnv()].priceId === priceId);
 }
 
-export function getPriceIdByPlanName(name: (typeof PLANS)[number]['name']) {
-  const plan = PLANS.find((p) => p.name === name);
-  if (!plan) {
-    return;
-  }
-  return plan.price.priceIds[getEnv()];
+export function getPlanPrice(type: PlanUnion) {
+  const plan = PLANS.find((p) => p.type === type);
+  return plan!.price[getEnv()];
+}
+
+export function getPriceId(type: PlanUnion) {
+  const plan = PLANS.find((p) => p.type === type);
+  return plan!.price[getEnv()].priceId;
 }

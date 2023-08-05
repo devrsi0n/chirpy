@@ -3,12 +3,12 @@ import { TRPCError } from '@trpc/server';
 
 import { prisma } from '../common/db-client';
 import { stripe } from '../common/stripe';
-import { getPriceIdByPlanName } from '../services/payment/plan';
+import { getPriceId } from '../services/payment/plan';
 import { protectedProcedure, router } from '../trpc-server';
 
 export const paymentRouter = router({
   checkout: protectedProcedure.mutation(async ({ ctx }) => {
-    const priceId = getPriceIdByPlanName('Pro');
+    const priceId = getPriceId('PRO');
     if (!priceId) {
       throw new TRPCError({
         code: 'BAD_REQUEST',

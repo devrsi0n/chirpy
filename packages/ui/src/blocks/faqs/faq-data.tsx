@@ -1,8 +1,8 @@
 import {
   IconChrome,
-  IconCloud,
   IconCornerLeftDown,
   IconCreditCard,
+  IconEye,
   IconHeart,
   IconRepeat,
   Link,
@@ -29,8 +29,13 @@ export const FAQ_LIST: FAQItem[] = [
   },
   {
     title: `What's your refund policy?`,
-    description: `We understand that things change. You can cancel your plan at any time and we'll refund you the difference already paid.`,
+    description: `We understand that things change. You can cancel your paid plan at any time and we'll refund you the difference already paid. No questions asked.`,
     icon: <IconCornerLeftDown />,
+  },
+  {
+    title: `Do pageviews count for all projects?`,
+    description: `Yes, all pageviews from your projects are included in your account's usage. You only need to pay once if you require more pageviews.`,
+    icon: <IconEye />,
   },
   {
     title: `What browsers do you support?`,
@@ -49,23 +54,13 @@ export const FAQ_LIST: FAQItem[] = [
     description: (
       <span>
         Our payment is provided by{' '}
-        <Link href="https://www.paddle.com/">Paddle</Link>. We accept all major
+        <Link href="https://stripe.com/">Stripe</Link>. We accept all major
         credit, debit cards, PayPal, Google Pay, and Apple Pay.{' '}
-        <Link href="https://www.paddle.com/help/start/intro-to-paddle/which-payment-methods-do-you-support">
+        <Link href="https://stripe.com/docs/payments/payment-methods/overview">
           More details
         </Link>
       </span>
     ),
     icon: <IconCreditCard />,
-  },
-  {
-    title: `Can Chirpy be self-hosted?`,
-    description: (
-      <span>
-        {`Yes, it is. It's exactly the same product as our Cloud solution, but you have to install, host and manage your own infrastructure while the Cloud version we manage everything for your ease and convenience. `}
-        <Link href="https://chirpy.dev/docs/self-hosted">More details</Link>
-      </span>
-    ),
-    icon: <IconCloud />,
   },
 ];

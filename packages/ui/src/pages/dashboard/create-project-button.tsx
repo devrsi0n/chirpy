@@ -1,9 +1,11 @@
+import { getPlanPrice } from '@chirpy-dev/trpc/src/services/payment/plan';
 import * as React from 'react';
 
 import {
   Button,
   Heading,
   IconPlusCircle,
+  Link,
   Popover,
   Text,
 } from '../../components';
@@ -18,8 +20,11 @@ export function CreateProjectButton(
   props: CreateProjectButtonProps,
 ): JSX.Element {
   const { data } = useCurrentUser();
+  const plan = getPlanPrice(data.plan || 'HOBBY');
   let disabledType: DisabledType | undefined;
-  if (!data.email) {
+  if ((props.projectCount || 0) >= plan.maxProjectNum) {
+    disabledType = 'projectLimit';
+  } else if (!data.email) {
     disabledType = 'anonymous';
   } else if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
     disabledType = 'maintenanceMode';
@@ -42,7 +47,7 @@ export function CreateProjectButton(
           <Popover.Button {...createButtonProps}>
             {createButtonChildren}
           </Popover.Button>
-          <Popover.Panel type="alert" placement="bottomEnd">
+          <Popover.Panel type="alert" placement="top">
             {DISABLED_MESSAGE_MAP[disabledType]}
           </Popover.Panel>
         </Popover>
@@ -55,7 +60,7 @@ export function CreateProjectButton(
   );
 }
 
-type DisabledType = 'anonymous' | 'maintenanceMode';
+type DisabledType = 'anonymous' | 'projectLimit' | 'maintenanceMode';
 const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
   anonymous: (
     <section className="w-[24rem]">
@@ -66,6 +71,17 @@ const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
         Otherwise, you may lose access to your project after creation. You can
         re-sign in with your email or social media account.
       </Text>
+    </section>
+  ),
+  projectLimit: (
+    <section className="w-[18rem]">
+      <Heading as="h5" className="font-bold">
+        Maximum projects reached
+      </Heading>
+      <p className="mt-2 space-x-1 text-gray-1100">
+        <span>Upgrade your plan to create more projects,</span>
+        <Link href="/dashboard/billings">Upgrade</Link>
+      </p>
     </section>
   ),
   maintenanceMode: (

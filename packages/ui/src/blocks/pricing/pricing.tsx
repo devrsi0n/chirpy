@@ -1,4 +1,7 @@
-import { PLANS } from '@chirpy-dev/trpc/src/services/payment/plan';
+import {
+  getPlanPrice,
+  PLANS,
+} from '@chirpy-dev/trpc/src/services/payment/plan';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -40,6 +43,8 @@ export function PricingCards({
   const handleClickCTA = () => {
     router.push('/auth/sign-in');
   };
+  const hobby = getPlanPrice('HOBBY');
+  const pro = getPlanPrice('PRO');
   return (
     <div className="flex w-full flex-col items-center space-y-4 md:flex-row md:items-stretch md:space-x-6 md:space-y-0">
       <PricingCard
@@ -48,7 +53,7 @@ export function PricingCards({
         price={
           <div className="flex flex-col gap-1">
             <h4 className="text-5xl font-semibold text-gray-1200">
-              ${PLANS[0].price.amount}/month
+              ${hobby.amount}/month
             </h4>
           </div>
         }
@@ -61,10 +66,10 @@ export function PricingCards({
         }}
         benefits={[
           <div className="md:h-[80px]" key="pv">
-            Up to {formateNum(PLANS[0].quota)} pageviews per month
+            Up to {formateNum(hobby.pageviews)} pageviews per month
           </div>,
           '1 month analytics data retention',
-          '1 project',
+          `${hobby?.maxProjects || 1} project`,
           'Privacy-first, No Ads',
           'Basic customization',
         ]}
@@ -81,12 +86,12 @@ export function PricingCards({
         price={
           <div className="flex flex-col gap-1">
             <h4 className="text-5xl font-semibold text-gray-1200">
-              ${PLANS[1].price.amount}/month
+              ${pro.amount}/month
             </h4>
           </div>
         }
         benefits={[
-          `${formateNum(PLANS[1].quota)} pageviews included`,
+          `${formateNum(pro.pageviews)} pageviews included`,
           '$5 / month for every additional 10K pageviews',
           '2 years analytics data retention',
           'Up to 10 projects',
