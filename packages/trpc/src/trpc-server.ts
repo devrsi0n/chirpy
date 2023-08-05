@@ -20,6 +20,7 @@ const logger = t.middleware(async ({ path, type, next }) => {
   result.ok
     ? log.info('[tRPC Server] request ok:', { path, type, durationMs })
     : log.error('[tRPC Server] request failed', { path, type, durationMs });
+  await log.flush();
   return result;
 });
 

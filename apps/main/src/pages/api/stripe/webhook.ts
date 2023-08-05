@@ -80,7 +80,6 @@ export default async function stripeWebhook(
         });
         break;
       }
-      case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
         const priceId = subscription.items.data[0].price.id;
@@ -93,18 +92,18 @@ export default async function stripeWebhook(
             .status(400)
             .json({ error: `Can't find the plan for priceId${priceId}` });
         }
+        const customerId = getCustomerId(subscription.customer);
         const subscriptionId = getSubscriptionItemId(subscription);
-        if (!subscriptionId) {
-          log.error(
-            `subscriptionId(${subscription}) in Stripe webhook ${event.type}`,
-          );
+        if (!subscriptionId || !customerId) {
+          const msg = `Missing subscriptionId(${subscription}) or customer${subscription.customer} in Stripe webhook ${event.type}`;
+          log.error(msg);
           return res.status(400).json({
-            error: `Missing subscriptionId(${subscription.customer}) in Stripe webhook ${event.type}`,
+            error: msg,
           });
         }
         const user = await prisma.user.update({
           where: {
-            stripeSubscriptionId: subscriptionId,
+            stripeCustomerId: customerId,
           },
           data: {
             plan: plan.type,
