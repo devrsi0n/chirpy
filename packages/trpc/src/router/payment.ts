@@ -54,10 +54,7 @@ export const paymentRouter = router({
   customerPortal: protectedProcedure.query(async ({ ctx }) => {
     const user = await getUserStripeInfo(ctx.session.user.id);
     if (!user?.stripeCustomerId) {
-      throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: `Can't find user's stripeCustomerId`,
-      });
+      return;
     }
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: user.stripeCustomerId,

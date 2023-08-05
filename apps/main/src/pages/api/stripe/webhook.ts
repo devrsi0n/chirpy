@@ -53,14 +53,7 @@ export default async function stripeWebhook(
       case 'checkout.session.completed': {
         const checkoutSession = event.data.object as Stripe.Checkout.Session;
         const customerId = getCustomerId(checkoutSession.customer);
-        const subscriptionId = getSubscriptionItemId(
-          checkoutSession.subscription,
-        );
-        if (
-          !checkoutSession.client_reference_id ||
-          !customerId ||
-          !subscriptionId
-        ) {
+        if (!checkoutSession.client_reference_id || !customerId) {
           log.error(
             `Missing client_reference_id(${checkoutSession.client_reference_id}) or customer(${checkoutSession.customer}) in Stripe webhook ${event.type}`,
           );
@@ -74,7 +67,6 @@ export default async function stripeWebhook(
           },
           data: {
             stripeCustomerId: customerId,
-            stripeSubscriptionId: subscriptionId,
             billingCycleDay: new Date().getUTCDate(),
           },
         });
@@ -178,10 +170,8 @@ function getCustomerId(customer: Stripe.Checkout.Session['customer']) {
   }
 }
 
-function getSubscriptionItemId(sub: Stripe.Checkout.Session['subscription']) {
-  if (typeof sub === 'string') {
-    return sub;
-  } else if (sub) {
+function getSubscriptionItemId(sub: Stripe.Subscription) {
+  if (sub) {
     return sub.items.data[0].id;
   }
 }

@@ -97,20 +97,22 @@ export function Billings(_props: BillingsProps): JSX.Element {
             }}
           />
         </div>
-        <div className="flex flex-col gap-1">
-          <Link
-            href={customerPortal?.portalUrl || ''}
-            target="_blank"
-            variant="plain"
-            className="flex items-center gap-1 text-lg font-semibold text-gray-1200 hover:underline"
-          >
-            <span>Stripe portal</span>
-            <IconExternalLink size={16} strokeWidth={2} />
-          </Link>
-          <Text variant="secondary">
-            Check your payment method and invoices
-          </Text>
-        </div>
+        {customerPortal?.portalUrl && (
+          <div className="flex flex-col gap-1">
+            <Link
+              href={customerPortal?.portalUrl || ''}
+              target="_blank"
+              variant="plain"
+              className="flex items-center gap-1 text-lg font-semibold text-gray-1200 hover:underline"
+            >
+              <span>Stripe portal</span>
+              <IconExternalLink size={16} strokeWidth={2} />
+            </Link>
+            <Text variant="secondary">
+              Check your payment method and invoices
+            </Text>
+          </div>
+        )}
       </section>
     </SiteLayout>
   );
