@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@chirpy-dev/trpc": "workspace:*",
-    "@trpc/client": "10.36.0",
-    "@trpc/server": "10.36.0",
+    "@trpc/client": "10.37.1",
+    "@trpc/server": "10.37.1",
     "superjson": "1.13.1"
   }
 }

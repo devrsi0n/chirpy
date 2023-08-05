@@ -1,4 +1,5 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { PageTitle, PricingCards, SiteLayout } from '../../blocks';
@@ -23,21 +24,38 @@ export function Billings(_props: BillingsProps): JSX.Element {
   });
   const util = trpc.useContext();
   const { showToast } = useToast();
+  const router = useRouter();
   React.useEffect(() => {
     const url = new URL(location.href);
     if (url.searchParams.get('success') === 'true') {
-      util.user.me.invalidate();
       url.searchParams.delete('success');
       triggerConfetti();
+      showToast({
+        type: 'success',
+        title: 'Thank you for upgrading',
+        description:
+          'Please wait several minutes for us to process your request',
+      });
+      // Update plan info after the webhook process
+      setTimeout(() => {
+        util.user.me.invalidate();
+      }, 60_000);
+      router.replace(url.href);
     } else if (url.searchParams.get('canceled') === 'true') {
       showToast({
         type: 'info',
         title: 'You have canceled the payment',
       });
+      url.searchParams.delete('canceled');
+      router.replace(url.href);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const { mutate: createPortal } = trpc.payment.createPortal.useMutation({
+    onSuccess: (data) => {
+      window.open(data.portalUrl, '_blank')?.focus();
+    },
+  });
   return (
     <SiteLayout title="Billings">
       <PageTitle>Billings</PageTitle>
@@ -56,6 +74,10 @@ export function Billings(_props: BillingsProps): JSX.Element {
                   title: 'You already in this plan',
                 });
                 return;
+              } else if (user.stripeCustomerId) {
+                createPortal({
+                  stripeCustomerId: user.stripeCustomerId,
+                });
               }
             },
           }}

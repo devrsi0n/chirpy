@@ -53,6 +53,8 @@ export function PricingCards({
           </div>
         }
         callToAction={{
+          variant: 'solid',
+          color: 'gray',
           children: 'Try It Free',
           onClick: handleClickCTA,
           ...freePlanButton,

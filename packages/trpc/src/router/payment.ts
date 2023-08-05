@@ -37,11 +37,11 @@ export const paymentRouter = router({
         stripeCustomerId: z.string(),
       }),
     )
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       const portalSession = await stripe.billingPortal.sessions.create({
         customer: input.stripeCustomerId,
         return_url: `${getAppURL()}/dashboard/billings`,
       });
-      ctx.res.redirect(portalSession.url);
+      return { portalUrl: portalSession.url };
     }),
 });
