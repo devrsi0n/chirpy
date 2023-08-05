@@ -21,7 +21,7 @@ export function LayoutWrapper({
         <title>{title ? `${title}・Chirpy` : 'Chirpy'}</title>
         <link rel="canonical" href={`https://chirpy.dev${router.asPath}`} />
       </Head>
-      <div className={clsx(`h-full font-sans text-gray-1100`, className)}>
+      <div className={clsx(`font-sans text-gray-1100`, className)}>
         {children}
       </div>
     </>

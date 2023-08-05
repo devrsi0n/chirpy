@@ -11,12 +11,6 @@ body {
   @apply bg-bg;
 }
 
-html,
-body,
-#__next {
-  height: 100%;
-}
-
 * {
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;

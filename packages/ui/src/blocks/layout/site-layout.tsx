@@ -40,7 +40,7 @@ export function SiteLayout({
         {!hideHeader && <Header />}
         <main
           className={clsx(
-            'h-full py-16 md:mx-4',
+            'py-16 md:mx-4',
             // https://www.joshwcomeau.com/css/full-bleed/
             !hideFullBleed && cssstyles.layoutMain,
             styles?.container,
