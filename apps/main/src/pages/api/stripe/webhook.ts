@@ -24,7 +24,6 @@ export default async function stripeWebhook(
     scope: 'stripe-webhook',
   });
   let event: Stripe.Event;
-  log.debug('stripe/webhook');
 
   // Get the signature sent by Stripe
   const signature = req.headers['stripe-signature'];
@@ -41,6 +40,7 @@ export default async function stripeWebhook(
       signature,
       process.env.STRIPE_SIGN_SECRET,
     );
+    log.debug(`stripe webhook type: ${event.type}`);
   } catch (error) {
     log.error(`⚠️  Webhook signature verification failed.`, error as Error);
     return res.status(400).json({
@@ -72,6 +72,7 @@ export default async function stripeWebhook(
         });
         break;
       }
+      case 'customer.subscription.create':
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
         const priceId = subscription.items.data[0].price.id;

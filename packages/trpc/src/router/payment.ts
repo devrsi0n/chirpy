@@ -51,7 +51,7 @@ export const paymentRouter = router({
     });
     return invoice.lines;
   }),
-  customerPortal: protectedProcedure.query(async ({ ctx }) => {
+  customerPortal: protectedProcedure.mutation(async ({ ctx }) => {
     const user = await getUserStripeInfo(ctx.session.user.id);
     if (!user?.stripeCustomerId) {
       return;
@@ -60,7 +60,7 @@ export const paymentRouter = router({
       customer: user.stripeCustomerId,
       return_url: `${getAppURL()}/dashboard/billings`,
     });
-    return { portalUrl: portalSession.url };
+    return { url: portalSession.url };
   }),
 });
 

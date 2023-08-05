@@ -3,13 +3,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { PageTitle, PricingCards, SiteLayout } from '../../blocks';
-import {
-  Heading,
-  IconExternalLink,
-  Link,
-  Text,
-  useToast,
-} from '../../components';
+import { Heading, IconExternalLink, Text, useToast } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { triggerConfetti } from '../../hooks';
 import { getStripe } from '../../utilities/stripe';
@@ -46,18 +40,26 @@ export function Billings(_props: BillingsProps): JSX.Element {
       setTimeout(() => {
         util.user.me.invalidate();
       }, 60_000);
-      router.replace(url.href);
+      router.replace(url.href, url.href, {
+        shallow: true,
+      });
     } else if (url.searchParams.get('canceled') === 'true') {
       showToast({
         type: 'info',
         title: 'You have canceled the payment',
       });
       url.searchParams.delete('canceled');
-      router.replace(url.href);
+      router.replace(url.href, url.href, {
+        shallow: true,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { data: customerPortal } = trpc.payment.customerPortal.useQuery();
+  const { mutate: createPortal } = trpc.payment.customerPortal.useMutation({
+    onSuccess: (data) => {
+      window.open(data?.url, '_blank');
+    },
+  });
   return (
     <SiteLayout title="Billings">
       <PageTitle>Billings</PageTitle>
@@ -70,7 +72,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
           <PricingCards
             freePlanButton={{
               children: user?.plan === 'HOBBY' ? 'Current plan' : 'Downgrade',
-              onClick: async () => {
+              onClick: () => {
                 if (user?.plan === 'HOBBY') {
                   showToast({
                     type: 'info',
@@ -78,7 +80,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
                   });
                   return;
                 } else {
-                  window.open(customerPortal?.portalUrl, '_blank')?.focus();
+                  createPortal();
                 }
               },
             }}
@@ -97,17 +99,16 @@ export function Billings(_props: BillingsProps): JSX.Element {
             }}
           />
         </div>
-        {customerPortal?.portalUrl && (
+        {user.plan !== 'HOBBY' && (
           <div className="flex flex-col gap-1">
-            <Link
-              href={customerPortal?.portalUrl || ''}
-              target="_blank"
-              variant="plain"
+            <button
+              type="button"
               className="flex items-center gap-1 text-lg font-semibold text-gray-1200 hover:underline"
+              onClick={() => createPortal()}
             >
               <span>Stripe portal</span>
               <IconExternalLink size={16} strokeWidth={2} />
-            </Link>
+            </button>
             <Text variant="secondary">
               Check your payment method and invoices
             </Text>
