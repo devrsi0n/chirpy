@@ -49,7 +49,7 @@ export function CreateProjectButton(
           <Popover.Button {...createButtonProps}>
             {createButtonChildren}
           </Popover.Button>
-          <Popover.Panel type="alert" placement="top">
+          <Popover.Panel type="alert" placement="bottomEnd">
             {DISABLED_MESSAGE_MAP[disabledType]}
           </Popover.Panel>
         </Popover>
@@ -91,7 +91,11 @@ const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
       </Heading>
       <Text className="mt-2" variant="secondary">
         You may lose access to your project after creation if there is no email
-        connected. Please re-sign in with your email or social media account.
+        connected. Please{' '}
+        <Link href="/auth/sign-in" variant="primary">
+          sign-in
+        </Link>{' '}
+        with your email or social media account.
       </Text>
     </section>
   ),
