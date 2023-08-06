@@ -158,6 +158,11 @@ export default async function stripeWebhook(
       }
     }
     res.status(200).end();
+  } catch (error) {
+    log.error(
+      `Handle stripe webhook event failed, error: ${error}, event:`,
+      event,
+    );
   } finally {
     await log.flush();
   }

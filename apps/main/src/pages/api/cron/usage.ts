@@ -1,6 +1,7 @@
 import { prisma, stripe } from '@chirpy-dev/trpc';
 import { cpDayjs, queryDailyPVUsage } from '@chirpy-dev/utils';
 import { verifySignature } from '@upstash/qstash/nextjs';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { log as axiomLog } from 'next-axiom';
 
 const log = axiomLog.with({
@@ -8,7 +9,7 @@ const log = axiomLog.with({
 });
 
 // This cron task runs on everyday
-async function updateUsage() {
+async function updateUsage(req: NextApiRequest, res: NextApiResponse) {
   const users = await prisma.user.findMany({
     where: {
       plan: {
@@ -47,17 +48,20 @@ async function updateUsage() {
         },
       );
     } catch (error) {
-      log.error(
-        `Usage report failed for item ID ${
-          user.stripeSubscriptionId
-        } with idempotency key ${idempotencyKey}: ${(
-          error as Error
-        ).toString()}`,
-      );
+      const msg = `Usage report failed for item ID ${
+        user.stripeSubscriptionId
+      } with idempotency key ${idempotencyKey}: ${(error as Error).toString()}`;
+      log.error(msg);
+      throw new Error(msg);
     }
   };
-  await Promise.allSettled(users.map((u) => updateUserUsage(u)));
+  try {
+    await Promise.allSettled(users.map((u) => updateUserUsage(u)));
+  } catch {
+    res.status(500).end('Create usage record failed');
+  }
   await log.flush();
+  res.status(200).end('ok');
 }
 
 const cron = () => {
