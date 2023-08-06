@@ -13,6 +13,7 @@
     "@chirpy-dev/trpc": "workspace:*",
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
+    "@chirpy-dev/ui": "workspace:*",
     "@headlessui/react": "1.7.16",
     "@tremor/react": "3.6.0",
     "clsx": "2.0.0",

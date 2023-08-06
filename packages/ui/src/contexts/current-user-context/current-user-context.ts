@@ -15,6 +15,7 @@ export type CurrentUserContextType = {
   // We have a preview widget in home page,
   // we need to turn off some features if we are in preview mode
   isPreview?: true;
+  isPaid?: boolean;
   data: UserData &
     Nullable<NonNullable<RouterOutputs['user']['me']>> & {
       editableProjectIds?: string[];

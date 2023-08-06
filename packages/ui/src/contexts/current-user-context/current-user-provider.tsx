@@ -44,6 +44,7 @@ export function CurrentUserProvider({
       loading: sessionIsLoading || isFetching,
       isSignIn: !!_data.id,
       refetchUser: refetchUser,
+      isPaid: _data.plan === 'PRO' || _data.plan === 'ENTERPRISE',
     };
   }, [
     hasMounted,

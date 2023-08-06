@@ -312,6 +312,7 @@ importers:
       '@chirpy-dev/trpc': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@chirpy-dev/types': workspace:*
+      '@chirpy-dev/ui': workspace:*
       '@chirpy-dev/utils': workspace:*
       '@headlessui/react': 1.7.16
       '@headlessui/tailwindcss': 0.2.0
@@ -333,6 +334,7 @@ importers:
     dependencies:
       '@chirpy-dev/trpc': link:../trpc
       '@chirpy-dev/types': link:../types
+      '@chirpy-dev/ui': link:../ui
       '@chirpy-dev/utils': link:../utils
       '@headlessui/react': 1.7.16_biqbaboplfbrettd7655fr4n2y
       '@tremor/react': 3.6.0_zrapbp5bhju6nhklhwf5u2ffs4
@@ -13492,16 +13494,6 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /follow-redirects/1.15.2:
-    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
-
   /follow-redirects/1.15.2_debug@4.3.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
@@ -14784,7 +14776,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2
+      follow-redirects: 1.15.2_debug@4.3.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug

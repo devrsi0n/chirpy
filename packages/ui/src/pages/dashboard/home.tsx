@@ -60,9 +60,9 @@ export function DashboardHome({
           url: `/dashboard/${username}`,
         });
         setShowDialog(false);
-        router.replace(router.asPath);
-      } catch (error: any) {
-        if (error?.message?.includes('Unique constraint')) {
+        router.push(`/dashboard/${username}/${fields.domain}/get-started`);
+      } catch (error: unknown) {
+        if ((error as Error)?.message?.includes('Unique constraint')) {
           setError('domain', 'A project associated with this domain already');
           return;
         }

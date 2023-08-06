@@ -103,10 +103,11 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
 function DomainFavicon({ domain }: { domain: string }) {
   return (
     <img
-      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=128`}
+      src={`https://www.google.com/s2/favicons?domain=https://${domain}&sz=128`}
       alt={`${domain} logo`}
       width={32}
       height={32}
+      className="h-fit"
     />
   );
 }

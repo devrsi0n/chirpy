@@ -1,3 +1,4 @@
+import { useCurrentUser } from '@chirpy-dev/ui';
 import { cpDayjs } from '@chirpy-dev/utils';
 import { Popover } from '@headlessui/react';
 import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
@@ -9,7 +10,7 @@ import { QuestionIcon } from './icons';
 export default function DateFilter() {
   const { dateRangePickerValue, onDateRangePickerValueChange } =
     useDateFilter();
-
+  const { isPaid } = useCurrentUser();
   return (
     <div className="flex items-center gap-4">
       <Popover className="relative h-4">
@@ -28,6 +29,11 @@ export default function DateFilter() {
           value={dateRangePickerValue}
           onValueChange={onDateRangePickerValueChange}
           enableSelect
+          minDate={
+            isPaid
+              ? cpDayjs().subtract(2, 'years').toDate()
+              : cpDayjs().subtract(1, 'month').toDate()
+          }
         >
           <DateRangePickerItem value={DateFilterType.Today} from={new Date()}>
             Today
@@ -44,12 +50,16 @@ export default function DateFilter() {
           >
             Last 30 days
           </DateRangePickerItem>
-          <DateRangePickerItem
-            value={DateFilterType.Last12Months}
-            from={cpDayjs().subtract(12, 'months').toDate()}
-          >
-            Last 12 months
-          </DateRangePickerItem>
+          {isPaid ? (
+            <DateRangePickerItem
+              value={DateFilterType.Last12Months}
+              from={cpDayjs().subtract(12, 'months').toDate()}
+            >
+              Last 12 months
+            </DateRangePickerItem>
+          ) : (
+            <></>
+          )}
         </DateRangePicker>
       </div>
     </div>

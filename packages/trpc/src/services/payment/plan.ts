@@ -45,11 +45,11 @@ export const PLANS = [
         amount: 6,
         priceId: 'price_1NZ7FiFkzx77ql6gW7zIxmDK',
         pageviews: 10_000,
-        maxProjectNum: 2,
+        maxProjectNum: 3,
       },
       production: {
         amount: 6,
-        priceId: '',
+        priceId: 'price_1Nc0cgFkzx77ql6gxoD33Lv0',
         pageviews: 10_000,
         maxProjectNum: 10,
       },

@@ -33,9 +33,9 @@ export function GetStartedBody({ domain }: { domain: string }) {
           {`Getting started is a breeze. Simply follow these steps:`}
         </Text>
       </div>
-      <ol className="flex list-outside list-decimal flex-col gap-3 ps-4">
+      <ol className="flex list-outside list-decimal flex-col gap-6 ps-4">
         <li>
-          <div>
+          <div className="space-y-2">
             <Text variant="secondary">
               {`Copy the script provided below and paste it into the body of your HTML, make sure it will be loaded on every page.`}
             </Text>
@@ -45,7 +45,7 @@ export function GetStartedBody({ domain }: { domain: string }) {
           </div>
         </li>
         <li>
-          <div>
+          <div className="space-y-2">
             <Text variant="secondary">
               {`Then, paste this html element to any page that should render the comment widget:`}
             </Text>

@@ -94,7 +94,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
   const primaryColorOptions = useColors({ level: '900' });
   return (
     <section className="px-2">
-      <PageTitle className="mb-10">Theme of {props.project?.name}</PageTitle>
+      <PageTitle className="mb-10">Theme</PageTitle>
       <div className={`flex flex-col sm:flex-row ${THEME_WIDGET_CLS}`}>
         <aside className="flex-1 space-y-11 sm:pr-4">
           <div className="space-y-6">
