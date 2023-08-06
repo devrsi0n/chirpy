@@ -1,6 +1,7 @@
 import { TINYBIRD_ORIGIN } from '@chirpy-dev/utils';
 import { log as axiomLog } from 'next-axiom';
 import { NextRequest } from 'next/server';
+import { edgeCors } from '../../server/common/edge-cors';
 
 const DATASOURCE = 'analytics_events';
 
@@ -55,16 +56,15 @@ export default async function tracking(req: NextRequest) {
         },
       },
     );
-    return new Response(JSON.stringify(await response.json()), {
-      status: response.status,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': '*',
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Credentials': 'false',
-        'Access-Control-Max-Age': '*',
-      },
-    });
+    return edgeCors(
+      req,
+      new Response(JSON.stringify(await response.json()), {
+        status: response.status,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    );
   } catch (error) {
     log.error('Error while sending tracking event to Tinybird', error as Error);
     throw error;
