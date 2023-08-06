@@ -15,7 +15,6 @@
   "sideEffects": false,
   "types": "./src/index.ts",
   "dependencies": {
-    "@chirpy-dev/analytics": "workspace:*",
     "@chirpy-dev/trpc": "workspace:*",
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",

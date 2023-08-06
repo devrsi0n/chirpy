@@ -539,7 +539,6 @@ importers:
   packages/ui:
     specifiers:
       '@babel/core': 7.22.9
-      '@chirpy-dev/analytics': workspace:*
       '@chirpy-dev/configs': workspace:*
       '@chirpy-dev/eslint-config': workspace:*
       '@chirpy-dev/trpc': workspace:*
@@ -629,7 +628,6 @@ importers:
       webpack: 5.88.2
       whatwg-fetch: 3.6.17
     dependencies:
-      '@chirpy-dev/analytics': link:../analytics
       '@chirpy-dev/trpc': link:../trpc
       '@chirpy-dev/types': link:../types
       '@chirpy-dev/utils': link:../utils
