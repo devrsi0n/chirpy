@@ -191,7 +191,6 @@ model User {
   emailVerified   DateTime?
   image           String?   @db.Text
   username        String?   @unique
-  type            String?
   bio             String?
   website         String?
   twitterUserName String?
@@ -213,8 +212,6 @@ model User {
   billingCycleDay      Int?
   stripeCustomerId     String? @unique
   stripeSubscriptionId String? @unique
-
-  @@index([type])
 }
 
 enum Plan {
