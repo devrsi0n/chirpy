@@ -58,7 +58,7 @@ export const PLANS = [
 ] satisfies Plan[];
 
 const getEnv = () =>
-  process.env.VERCEL_ENV === 'production' ? 'production' : 'test';
+  process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'production' : 'test';
 
 export function getPlanByPriceId(priceId: string) {
   return PLANS.find((p) => p.price[getEnv()].priceId === priceId);
