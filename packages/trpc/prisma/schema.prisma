@@ -148,7 +148,6 @@ model Project {
   // Extra page identifiers, separated by commas
   queryParameters String?
 
-  @@unique([userId, name])
   @@index([teamId])
   @@index([userId])
 }
