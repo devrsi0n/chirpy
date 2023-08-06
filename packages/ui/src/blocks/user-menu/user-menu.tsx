@@ -87,10 +87,12 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               <p className="w-max">Sign in</p>
             </Menu.Item>
           ))}
-        <Menu.Item as={MenuLink} variant="plain" href={`/dashboard/billings`}>
-          <IconCreditCard size={14} />
-          <span>Billings</span>
-        </Menu.Item>
+        {!isWidget && (
+          <Menu.Item as={MenuLink} variant="plain" href={`/dashboard/billings`}>
+            <IconCreditCard size={14} />
+            <span>Billings</span>
+          </Menu.Item>
+        )}
         {isSignIn ? (
           <>
             {isNav && (

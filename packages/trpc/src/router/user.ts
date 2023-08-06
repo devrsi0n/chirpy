@@ -25,6 +25,17 @@ export const userRouter = router({
       where: {
         id: ctx.session.user.id,
       },
+      select: {
+        id: true,
+        name: true,
+        username: true,
+        email: true,
+        image: true,
+        emailVerified: true,
+        bio: true,
+        website: true,
+        twitterUserName: true,
+      },
     });
     return me;
   }),

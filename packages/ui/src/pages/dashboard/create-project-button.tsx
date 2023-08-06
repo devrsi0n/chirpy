@@ -26,6 +26,8 @@ export function CreateProjectButton(
     disabledType = 'projectLimit';
   } else if (!data.email) {
     disabledType = 'anonymous';
+  } else if (!data.username) {
+    disabledType = 'invalidUsername';
   } else if (process.env.NEXT_PUBLIC_MAINTENANCE_MODE) {
     disabledType = 'maintenanceMode';
   }
@@ -60,16 +62,36 @@ export function CreateProjectButton(
   );
 }
 
-type DisabledType = 'anonymous' | 'projectLimit' | 'maintenanceMode';
+type DisabledType =
+  | 'invalidUsername'
+  | 'anonymous'
+  | 'projectLimit'
+  | 'maintenanceMode';
 const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
-  anonymous: (
-    <section className="w-[24rem]">
+  invalidUsername: (
+    <section className="w-[18rem]">
       <Heading as="h5" className="font-bold">
-        Connect an email with your account
+        Missing username
+      </Heading>
+      <p className="mt-2 space-x-1 text-gray-1100">
+        <span>
+          Please{' '}
+          <Link href="/profile" variant="primary">
+            add a username
+          </Link>{' '}
+          before creating a project
+        </span>
+      </p>
+    </section>
+  ),
+  anonymous: (
+    <section className="w-[20rem]">
+      <Heading as="h5" className="font-bold">
+        Missing email
       </Heading>
       <Text className="mt-2" variant="secondary">
-        Otherwise, you may lose access to your project after creation. You can
-        re-sign in with your email or social media account.
+        You may lose access to your project after creation if there is no email
+        connected. Please re-sign in with your email or social media account.
       </Text>
     </section>
   ),
@@ -80,7 +102,9 @@ const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
       </Heading>
       <p className="mt-2 space-x-1 text-gray-1100">
         <span>Upgrade your plan to create more projects,</span>
-        <Link href="/dashboard/billings">Upgrade</Link>
+        <Link href="/dashboard/billings" variant="primary">
+          Upgrade
+        </Link>
       </p>
     </section>
   ),

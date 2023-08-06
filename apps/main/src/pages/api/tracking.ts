@@ -55,7 +55,16 @@ export default async function tracking(req: NextRequest) {
         },
       },
     );
-    return response;
+    return new Response(JSON.stringify(await response.json()), {
+      status: response.status,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Credentials': 'false',
+        'Access-Control-Max-Age': '*',
+      },
+    });
   } catch (error) {
     log.error('Error while sending tracking event to Tinybird', error as Error);
     throw error;

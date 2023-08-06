@@ -1,4 +1,4 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
+import { RouterOutputs, trpc } from '@chirpy-dev/trpc/src/client';
 import * as React from 'react';
 
 import { PageTitle, SiteLayout } from '../../blocks';
@@ -25,6 +25,7 @@ import { EMAIL_REGEXP, logger } from '../../utilities';
 
 type FormFields = {
   name: string;
+  username: string;
   email: string;
   bio: string;
   website: string;
@@ -32,12 +33,25 @@ type FormFields = {
 };
 
 export function Profile(): JSX.Element {
-  const { isSignIn, refetchUser } = useCurrentUser();
-  const {
-    data,
-    isFetching,
-    refetch: refetchProfile,
-  } = trpc.user.myProfile.useQuery();
+  const { isSignIn } = useCurrentUser();
+  const { data } = trpc.user.myProfile.useQuery();
+
+  if (!isSignIn || !data) {
+    return (
+      <SiteLayout title={'Profile'}>
+        <PageTitle>Profile</PageTitle>
+        <ProfileContainer>
+          <Spinner className="mt-20 justify-center" />
+        </ProfileContainer>
+      </SiteLayout>
+    );
+  }
+  return <ProfileSection {...data} />;
+}
+
+function ProfileSection(
+  props: NonNullable<RouterOutputs['user']['myProfile']>,
+): JSX.Element {
   const {
     name,
     email,
@@ -47,13 +61,14 @@ export function Profile(): JSX.Element {
     image,
     username,
     emailVerified,
-  } = data || {};
+  } = props;
   const [isEditMode, setIsEditMode] = React.useState(false);
   const { mutateAsync: updateProfile } = trpc.user.updateProfile.useMutation();
 
-  const { register, errors, handleSubmit } = useForm<FormFields>({
+  const { register, errors, hasError, handleSubmit } = useForm<FormFields>({
     defaultValues: {
       name: name || '',
+      username: username || '',
       email: email || '',
       bio: bio || '',
       website: website || '',
@@ -61,54 +76,46 @@ export function Profile(): JSX.Element {
     },
   });
   const { showToast } = useToast();
-  const handleClickButton = handleSubmit(async (fields) => {
-    if (isEditMode) {
-      try {
-        await updateProfile({
-          name: fields.name,
-          email: fields.email,
-          bio: fields.bio,
-          website: fields.website,
-          twitterUserName: fields.twitter,
-        });
-      } catch (error) {
-        if (error instanceof Error) {
-          logger.error('Update user profile failed', error);
-          if (error.message.includes(`Unique constraint`)) {
-            showToast({
-              type: 'error',
-              title: `${fields.email} is in use`,
-              description:
-                'The email address you entered is already in use. Please try another one.',
-            });
-          } else {
-            showToast({
-              type: 'error',
-              title:
-                'Sorry, something wrong happened in our side, please try again later.',
-            });
-          }
-          return;
+  const utils = trpc.useContext();
+  const handleClickSubmit = handleSubmit(async (fields) => {
+    try {
+      await updateProfile({
+        name: fields.name,
+        username: fields.username,
+        email: fields.email,
+        bio: fields.bio,
+        website: fields.website,
+        twitterUserName: fields.twitter,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        logger.error('Update user profile failed', error);
+        if (error.message.includes(`Unique constraint`)) {
+          showToast({
+            type: 'error',
+            title: `${fields.email} is in use`,
+            description:
+              'The email address you entered is already in use. Please try another one.',
+          });
+        } else {
+          showToast({
+            type: 'error',
+            title:
+              'Sorry, something wrong happened in our side, please try again later.',
+          });
         }
       }
-      await Promise.all([refetchProfile(), refetchUser()]);
-      setIsEditMode(false);
-    } else {
-      setIsEditMode(true);
+      throw error;
     }
+    await Promise.allSettled([
+      utils.user.myProfile.invalidate(),
+      utils.user.me.invalidate(),
+    ]);
   });
 
   const handleClickDiscard = () => {
     setIsEditMode(false);
   };
-
-  if (!isSignIn && isFetching) {
-    return (
-      <ProfileContainer>
-        <Spinner className="mt-20 justify-center" />
-      </ProfileContainer>
-    );
-  }
 
   return (
     <SiteLayout title={name || 'Profile'}>
@@ -141,8 +148,25 @@ export function Profile(): JSX.Element {
               ) : (
                 name && <Heading as="h4">{name}</Heading>
               )}
-              {username && (
+              {username ? (
                 <Text title="Username, can't edit">@{username}</Text>
+              ) : isEditMode ? (
+                <TextField
+                  {...register('username', {
+                    required: { value: true, message: 'Username is required' },
+                    pattern: {
+                      value: /^\w+$/,
+                      message: `Only word characters are allowed`,
+                    },
+                    minLength: { value: 3, message: 'At least 3 characters' },
+                    maxLength: { value: 16, message: 'At most 16 characters' },
+                  })}
+                  label="Username"
+                  hintText="Required for creating projects"
+                  errorMessage={errors.username}
+                />
+              ) : (
+                <></>
               )}
               {/* We only allow no email or unverified anonymous user to edit the email */}
               {isEditMode && (!email || !emailVerified) ? (
@@ -181,12 +205,12 @@ export function Profile(): JSX.Element {
                     <span className="ml-1">Discard</span>
                   </Popover.Button>
                   <Popover.Panel>
-                    <div className="flex flex-row items-center space-x-2">
-                      <Text className="w-max">
+                    <div className="flex flex-col items-end gap-2">
+                      <Text className="w-60">
                         Your unsaved content will lost, are you sure?
                       </Text>
                       <Button size="sm" onClick={handleClickDiscard}>
-                        Confirm
+                        OK
                       </Button>
                     </div>
                   </Popover.Panel>
@@ -194,7 +218,15 @@ export function Profile(): JSX.Element {
               )}
               <Button
                 className="space-x-1"
-                onClick={handleClickButton}
+                onClick={async (e) => {
+                  if (isEditMode) {
+                    if (hasError) {
+                      return;
+                    }
+                    await handleClickSubmit(e);
+                  }
+                  setIsEditMode((prev) => !prev);
+                }}
                 variant="solid"
                 color="primary"
                 aria-label={`${isEditMode ? 'Save' : 'Edit'} profile`}
