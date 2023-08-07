@@ -1,0 +1,14 @@
+{
+  "name": "@chirpy-dev/flock",
+  "version": "0.0.1",
+  "license": "AGPL-3.0-or-later",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "devDependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
+    "@types/node": "18.16.18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

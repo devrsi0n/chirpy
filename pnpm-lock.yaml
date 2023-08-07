@@ -33,6 +33,7 @@ importers:
   apps/bootstrapper:
     specifiers:
       '@chirpy-dev/eslint-config': workspace:*
+      '@chirpy-dev/flock': workspace:*
       '@chirpy-dev/trpc': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@chirpy-dev/types': workspace:*
@@ -62,6 +63,7 @@ importers:
       superjson: 1.13.1
     devDependencies:
       '@chirpy-dev/eslint-config': link:../../packages/eslint-config
+      '@chirpy-dev/flock': link:../../packages/flock
       '@chirpy-dev/tsconfigs': link:../../packages/tsconfigs
       '@chirpy-dev/types': link:../../packages/types
       '@chirpy-dev/utils': link:../../packages/utils
@@ -428,6 +430,14 @@ importers:
     devDependencies:
       eslint: 8.46.0
 
+  packages/flock:
+    specifiers:
+      '@chirpy-dev/tsconfigs': workspace:*
+      '@types/node': 18.16.18
+    devDependencies:
+      '@chirpy-dev/tsconfigs': link:../tsconfigs
+      '@types/node': 18.16.18
+
   packages/prettier-config:
     specifiers:
       '@ianvs/prettier-plugin-sort-imports': 4.1.0
@@ -541,6 +551,7 @@ importers:
       '@babel/core': 7.22.9
       '@chirpy-dev/configs': workspace:*
       '@chirpy-dev/eslint-config': workspace:*
+      '@chirpy-dev/flock': workspace:*
       '@chirpy-dev/trpc': workspace:*
       '@chirpy-dev/tsconfigs': workspace:*
       '@chirpy-dev/types': workspace:*
@@ -628,6 +639,7 @@ importers:
       webpack: 5.88.2
       whatwg-fetch: 3.6.17
     dependencies:
+      '@chirpy-dev/flock': link:../flock
       '@chirpy-dev/trpc': link:../trpc
       '@chirpy-dev/types': link:../types
       '@chirpy-dev/utils': link:../utils

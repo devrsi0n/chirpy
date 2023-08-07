@@ -1,12 +1,11 @@
+import { loadFlock } from '@chirpy-dev/flock';
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import { CommonWidgetProps, PageProps } from '@chirpy-dev/types';
-import { isBrowser } from '@chirpy-dev/utils';
 import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 import { Inter } from 'next/font/google';
 import Head from 'next/head';
-import Script from 'next/script';
 import * as React from 'react';
 
 import { ToastProvider } from '../components';
@@ -25,9 +24,9 @@ export const App = trpc.withTRPC(function App({
     // Only way to add a font to the body (to fix font for dialogs)
     // since Next.js doesn't allow it in custom _document
     document.body.classList.add(inter.variable);
+    loadFlock();
   }, []);
 
-  const currentOrigin = isBrowser ? window.location.origin : null;
   return (
     <div className={inter.variable}>
       <Head>
@@ -52,14 +51,6 @@ export const App = trpc.withTRPC(function App({
           </CurrentUserProvider>
         </NextThemesProvider>
       </SessionProvider>
-      {currentOrigin && (
-        <Script
-          id="chirpy-ats"
-          strategy="afterInteractive"
-          src="https://unpkg.com/@tinybirdco/flock.js"
-          data-proxy={currentOrigin}
-        />
-      )}
     </div>
   );
 });

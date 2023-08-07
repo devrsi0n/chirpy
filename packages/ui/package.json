@@ -17,6 +17,7 @@
   "dependencies": {
     "@chirpy-dev/trpc": "workspace:*",
     "@chirpy-dev/types": "workspace:*",
+    "@chirpy-dev/flock": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
     "@geist-ui/icons": "1.0.2",
     "@headlessui/react": "1.7.16",

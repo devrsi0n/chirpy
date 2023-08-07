@@ -19,5 +19,6 @@
     "jsx": "preserve",
     "strictPropertyInitialization": false,
     "incremental": true
-  }
+  },
+  "include": ["typings/**/*.d.ts"]
 }

@@ -1,7 +1,7 @@
+import { loadFlock } from '@chirpy-dev/flock';
 import { EVENT_CLICK_CONTAINER } from '@chirpy-dev/utils';
 
 import { client } from './client';
-import { loadFlock } from './load-flock';
 import {
   observeAndBroadcastThemeChange,
   observeWidgetLoadedEvent,

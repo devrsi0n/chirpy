@@ -1,6 +1,7 @@
 import { TINYBIRD_ORIGIN } from '@chirpy-dev/utils';
 import { log as axiomLog } from 'next-axiom';
 import { NextRequest } from 'next/server';
+
 import { edgeCors } from '../../server/common/edge-cors';
 
 const DATASOURCE = 'analytics_events';
@@ -23,13 +24,10 @@ type TrackingPayload = {
 };
 
 const log = axiomLog.with({
-  scope: 'tracking',
+  scope: 'api-flock',
 });
 
-/**
- * Tinybird proxy fixed API path, can't use alternative paths
- */
-export default async function tracking(req: NextRequest) {
+export default async function flock(req: NextRequest) {
   try {
     const reqBody: TrackingEvent = await req.json();
     const payload: TrackingPayload = JSON.parse(reqBody.payload);

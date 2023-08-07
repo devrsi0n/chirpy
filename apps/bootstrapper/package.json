@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
+    "@chirpy-dev/flock": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",

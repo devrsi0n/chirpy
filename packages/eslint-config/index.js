@@ -66,6 +66,7 @@ module.exports = {
     'unicorn/prefer-code-point': 'off',
     'unicorn/prefer-spread': 'off',
     'unicorn/prefer-string-replace-all': 'off',
+    'unicorn/no-document-cookie': 'off',
 
     'jest/expect-expect': 'off',
   },
