@@ -29,6 +29,9 @@ const log = axiomLog.with({
 
 export default async function flock(req: NextRequest) {
   try {
+    if (req.method === 'OPTIONS') {
+      return edgeCors(req, new Response());
+    }
     const reqBody: TrackingEvent = await req.json();
     const payload: TrackingPayload = JSON.parse(reqBody.payload);
     const hrefOrigin = payload.href ? new URL(payload.href).origin : '';
