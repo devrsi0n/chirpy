@@ -9,6 +9,9 @@ import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
+import { useIsWidget } from '../../hooks';
+import clsx from 'clsx';
+import { Divider } from '../../components';
 
 export function NotificationHub(): JSX.Element {
   const { isSignIn, isPreview } = useCurrentUser();
@@ -26,6 +29,7 @@ export function NotificationHub(): JSX.Element {
   const { mutateAsync: deleteNotificationMessage } =
     trpc.notification.delete.useMutation();
   const hasUnreadNotifications = data?.some((msg) => !msg.read);
+  const isWidget = useIsWidget();
   return (
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
@@ -39,15 +43,23 @@ export function NotificationHub(): JSX.Element {
             <span className="absolute right-[3px] top-[1px] rounded-full bg-red-900 p-1 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
-        <Menu.Items>
-          <Heading as="h4" className="px-5 py-3 font-bold">
+        <Menu.Items className={clsx(isWidget && 'me-4')}>
+          <Heading
+            as="h5"
+            className={clsx('px-5 py-3 font-bold', isWidget && `text-base`)}
+          >
             Notifications
           </Heading>
           {isFetching && (
             <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
           )}
           {data && (data?.length || 0) > 0 ? (
-            <div className="max-h-96 w-max overflow-y-auto">
+            <div
+              className={clsx(
+                'w-max overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600',
+                isWidget ? 'max-h-56' : 'max-h-96',
+              )}
+            >
               {data.map((msg, index) => (
                 <NotificationItem
                   key={msg.id}
@@ -71,7 +83,10 @@ export function NotificationHub(): JSX.Element {
           ) : (
             <Text
               variant="secondary"
-              className="mx-5 mb-2 w-max rounded border border-dashed px-4 py-2 pb-2"
+              className={clsx(
+                'mx-5 mb-2 w-max rounded border border-dashed px-4 py-2 pb-2',
+                isWidget && 'text-sm',
+              )}
             >
               No messages yet
             </Text>

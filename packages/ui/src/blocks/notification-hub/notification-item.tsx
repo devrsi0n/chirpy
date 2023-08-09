@@ -2,7 +2,7 @@ import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { BaseButton, Avatar, Divider } from '../../components';
+import { BaseButton, Avatar } from '../../components';
 import {
   IconHeartFill,
   IconMessageSquare,
@@ -16,20 +16,15 @@ import { useIsWidget } from '../../hooks/use-is-widget';
 import { cpDayjs } from '../../utilities/date';
 
 export type INotificationItemProps = {
-  index: number;
-  /**
-   * Message array total length
-   */
-  length: number;
   message: RouterOutputs['notification']['messages'][number];
   onClickCapture: (messageId: string) => void;
   onClickDelete: (messageId: string) => void;
 };
 
 export function NotificationItem({
-  index,
+
   message,
-  length,
+
   onClickCapture,
   onClickDelete,
 }: INotificationItemProps): JSX.Element {
@@ -40,7 +35,7 @@ export function NotificationItem({
       as="div"
       key={message.id}
       className={clsx(
-        'group relative mt-0 flex-col items-start  rounded-none !p-0 !text-left hover:rounded',
+        'group relative mt-0 flex-col items-start rounded-none !p-0 !text-start hover:rounded',
         !message.read && `bg-gray-600/30`,
       )}
       onClickCapture={(e: any): void => {
@@ -51,68 +46,55 @@ export function NotificationItem({
         onClickCapture(message.id);
       }}
     >
+      <BaseButton
+        type="button"
+        className="!absolute right-1.5 top-1.5 inline-block h-fit w-fit rounded-full p-0.5 group-hover:inline-block hover:bg-primary-600 sm:hidden"
+        onClick={(e) => {
+          onClickDelete(message.id);
+          e.stopPropagation();
+        }}
+        ref={deleteButtonRef}
+        aria-label="Delete the message"
+        disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
+      >
+        <IconX size={18} />
+      </BaseButton>
       <Link
         href={message.url}
         variant="plain"
-        className="flex w-full flex-row items-start space-x-2 px-5 pb-2 pt-3"
+        className="flex w-full flex-row items-start gap-2 px-5 pb-2 pt-3"
         target={isWidget ? '_blank' : '_self'}
       >
-        <BaseButton
-          type="button"
-          className="!absolute right-1.5 top-1.5 inline-block h-fit w-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
-          onClick={(e) => {
-            onClickDelete(message.id);
-            e.stopPropagation();
-          }}
-          ref={deleteButtonRef}
-          aria-label="Delete the message"
-          disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
-        >
-          <IconX size={18} />
-        </BaseButton>
-        {ICON_MAP[message.type]}
+        <Avatar
+          src={message.triggeredBy.image}
+          alt={`${message.triggeredBy.name}'s avatar`}
+          email={message.triggeredBy.email}
+          name={message.triggeredBy.name}
+          username={message.triggeredBy.username}
+          className="mb-2"
+        />
         <div className="flex-1">
-          <Avatar
-            src={message.triggeredBy.image}
-            alt={`${message.triggeredBy.name}'s avatar`}
-            email={message.triggeredBy.email}
-            name={message.triggeredBy.name}
-            username={message.triggeredBy.username}
-            className="mb-2"
-          />
-          <NotificationText className="flex flex-row space-x-1.5 leading-none">
+          <div className="flex items-center gap-2">
             <span
               title={message.triggeredBy.name || ''}
-              className="max-w-[4rem] truncate font-bold"
+              className="max-w-[4rem] truncate"
             >
               {message.triggeredBy.name}
             </span>
-            <span className="whitespace-nowrap">{TITLE_MAP[message.type]}</span>
-          </NotificationText>
+            <time dateTime={message.createdAt.toString()} className="text-xs">
+              {cpDayjs(message.createdAt).fromNow()}
+            </time>
+          </div>
           <NotificationText
-            variant="secondary"
-            as="time"
             size="sm"
-            className="mt-1 block cursor-default leading-none"
-            dateTime={message.createdAt}
+            className="max-w-[15rem] truncate"
+            variant="secondary"
+            title={message.content || TITLE_MAP[message.type]}
           >
-            {cpDayjs(message.createdAt).fromNow()}
+            {message.content ? `"${message.content}"` : TITLE_MAP[message.type]}
           </NotificationText>
-          {message.content && (
-            <NotificationText
-              size="sm"
-              className="mt-2 max-w-[15rem] truncate"
-              variant="secondary"
-              title={message.content}
-            >
-              {message.content}
-            </NotificationText>
-          )}
         </div>
       </Link>
-      {index < length - 1 && (
-        <Divider className="w-full group-hover:bg-primary-400" />
-      )}
     </Menu.Item>
   );
 }
@@ -126,7 +108,7 @@ function NotificationText({ className, ...restProps }: TextProps): JSX.Element {
   );
 }
 
-// TODO: Use enum after mgrating to trpc
+// TODO: Use enum after migrating to trpc
 const TITLE_MAP: Record<string, string> = {
   ReceivedAComment: 'left a comment',
   ReceivedAReply: 'replied to your comment',
@@ -141,7 +123,7 @@ const COMMENT_ICON = (
   </span>
 );
 
-// TODO: Use enum after mgrating to trpc
+// TODO: Use enum after migrating to trpc
 const ICON_MAP: Record<string, JSX.Element> = {
   ReceivedAComment: COMMENT_ICON,
   ReceivedAReply: COMMENT_ICON,
