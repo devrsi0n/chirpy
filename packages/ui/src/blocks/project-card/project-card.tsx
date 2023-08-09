@@ -46,9 +46,11 @@ export function ProjectCard({ project }: ProjectCardProps): JSX.Element {
       }}
     >
       <div className="flex flex-nowrap items-center justify-between space-x-2 px-6">
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <DomainFavicon domain={project.domain} />
-          <Heading as="h3">{project.name}</Heading>
+          <Heading as="h3" className="leading-none">
+            {project.name}
+          </Heading>
         </div>
         <PageViewStats domain={project.domain} />
       </div>

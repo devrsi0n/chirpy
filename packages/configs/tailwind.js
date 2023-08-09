@@ -200,6 +200,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
     plugin(function ({ addVariant, e, postcss }) {
       addVariant('firefox', ({ container, separator }) => {
         const isFirefoxRule = postcss.atRule({

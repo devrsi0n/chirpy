@@ -120,11 +120,10 @@ const PRETTY_CODE_OPTIONS: Partial<Options> = {
       node.children = [{ type: 'text', value: ' ' }];
     }
   },
-  // Feel free to add classNames that suit your docs
   onVisitHighlightedLine(node) {
-    node.properties.className.push('highlighted');
+    node.properties.className?.push('highlighted');
   },
-  onVisitHighlightedWord(node) {
+  onVisitHighlightedChars(node) {
     node.properties.className = ['word'];
   },
 };

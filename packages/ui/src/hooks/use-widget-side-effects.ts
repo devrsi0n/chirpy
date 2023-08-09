@@ -36,25 +36,34 @@ export function useWidgetSideEffects(): void {
   const { setTheme } = useTheme();
 
   useEventListener('message', (event) => {
+    // Dismiss popup/menu
     if (event.data === EVENT_CLICK_CONTAINER) {
-      unexpandedPopup('[id^="headlessui-menu-button"]');
-      unexpandedPopup('[id^="headlessui-listbox-button"]');
-      unexpandedPopup('[id^="headlessui-popover-button"]');
+      selectAllElements('[aria-expanded="true"]', () => {
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
+      });
+      selectAllElements('[id^="headlessui-listbox-button"]', (element) => {
+        if (element.getAttribute('aria-expanded') === 'true') {
+          element.click();
+        }
+      });
+      selectAllElements('[id^="headlessui-popover-button"]', (element) => {
+        if (element.getAttribute('aria-expanded') === 'true') {
+          element.click();
+        }
+      });
     } else if (event.data.name === EVENT_CHANGE_THEME) {
       setTheme(event.data.value);
     }
   });
 }
 
-// Close popup when user clicks on the out side of iframe
-function unexpandedPopup(selectors: string): void {
+function selectAllElements(
+  selectors: string,
+  onSelect: (el: HTMLElement) => void,
+): void {
   window.document
     .querySelectorAll<HTMLDivElement>(selectors)
-    .forEach((element) => {
-      if (element.getAttribute('aria-expanded') === 'true') {
-        element.click();
-      }
-    });
+    .forEach((elm) => onSelect(elm));
 }
 
 function sendMessageToParentPage(data: $TsAny, projectOrigin: string) {

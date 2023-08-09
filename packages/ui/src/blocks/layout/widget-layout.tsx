@@ -27,7 +27,7 @@ export function WidgetLayout({
   useWidgetSideEffects();
   return (
     <WidgetThemeProvider widgetTheme={widgetTheme}>
-      <LayoutWrapper title={title} className="min-h-full pb-10 pt-14 sm:mr-1">
+      <LayoutWrapper title={title} className="pb-60 pt-14 sm:mr-1">
         <MaintenanceBanner />
         <AnimatePresence>
           <motion.div
