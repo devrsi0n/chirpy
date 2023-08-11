@@ -41,9 +41,7 @@ export function CommentForest({
       <div className="space-y-7">
         <div className="space-y-2">
           <RichTextEditor
-            placeholder={
-              rtePlaceholder || `What are your thoughts? (Markdown supported)`
-            }
+            placeholder={rtePlaceholder || `What are your thoughts?`}
             onSubmit={createAComment}
           />
         </div>

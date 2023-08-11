@@ -86,7 +86,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         role="textbox"
         aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
-          'prose !max-w-full pr-2 text-gray-1200',
+          'prose !max-w-full pe-2 text-gray-1200',
           !readOnly && [
             `!min-h-[4em] resize-y overflow-hidden rounded-t border border-gray-500 pl-2 focus-within:border-primary-900`,
             textInput,

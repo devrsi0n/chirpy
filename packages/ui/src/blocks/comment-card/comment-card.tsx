@@ -230,7 +230,7 @@ export function CommentCard({
               className="pr-6"
             >
               <RichTextEditor
-                placeholder={`What are your thoughts? (Markdown supported)`}
+                placeholder={`What are your thoughts?`}
                 onSubmit={handleSubmitReply}
                 styles={{ root: `mt-2` }}
                 isReply

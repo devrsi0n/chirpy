@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { Divider } from '../../components/divider';
 import { IconImage, IconLink2 } from '../../components/icons';
-import { MarkButton, BlockButton } from './format-buttons';
+import { BlockButton, MarkButton } from './format-buttons';
 import { RTEPopoverButton } from './rte-popover-button';
 
 export type ToolbarProps = React.PropsWithChildren<
@@ -22,17 +22,17 @@ export function Toolbar({
   return (
     <div
       className={clsx(
-        `rounded-b border-x border-b border-gray-500 px-1 py-2 leading-none`,
+        `overflow-y-auto rounded-b border-x border-b border-gray-500 px-1 py-2 leading-none`,
         className,
       )}
       {...divProps}
     >
-      <div className="flex flex-row items-center space-x-1">
+      <div className="flex flex-row items-center gap-1">
         <MarkButton editor={editor} format="bold" />
         <MarkButton editor={editor} format="italic" />
         <MarkButton editor={editor} format="underline" />
         <MarkButton editor={editor} format="code" />
-        <div className="hidden flex-row space-x-1 xs:flex">
+        <div className="hidden flex-row gap-1 sm:flex">
           <Divider vertical />
           <BlockButton editor={editor} format="bulletList" />
           <BlockButton editor={editor} format="blockquote" />
