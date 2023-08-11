@@ -32,13 +32,13 @@ export async function getPageViewMetric(
     }),
   ]);
   let growthRate =
-    (currMetric.pageviews - prevMetric.pageviews) / prevMetric.pageviews;
+    (currMetric.pageviews - prevMetric.pageviews) / (prevMetric.pageviews || 1);
   if (Number.isNaN(growthRate)) {
     growthRate = 0;
   }
   return {
     pageviews: currMetric.pageviews,
     prevPageviews: prevMetric.pageviews,
-    growthRate,
+    growthRate: Math.min(growthRate, 100),
   };
 }
