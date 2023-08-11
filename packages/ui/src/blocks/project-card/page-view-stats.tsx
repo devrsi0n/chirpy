@@ -43,18 +43,18 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
                 notation: 'compact',
               }).format(pageviews)}
             </Text>
-            {typeof growthRate === 'number' && (
+            {typeof growthRate?.value === 'number' && (
               <div
                 className={clsx(
                   'flex flex-row items-end rounded-full px-1.5 py-1 font-semibold',
-                  growthRate > 0
+                  growthRate.value > 0
                     ? `bg-green-300 text-green-1000`
                     : `bg-red-300 text-red-1100`,
                 )}
               >
                 <IconArrowUp
                   size={14}
-                  className={clsx(growthRate <= 0 && `rotate-180`)}
+                  className={clsx(growthRate.value <= 0 && `rotate-180`)}
                   strokeWidth={2}
                 />
                 <Text
@@ -62,7 +62,7 @@ export function PageViewStats({ domain }: PageViewStatsProps): JSX.Element {
                   className="!leading-none"
                   style={{ color: 'inherit' }}
                 >
-                  {Math.round(growthRate * 100)}%
+                  {growthRate.label}
                 </Text>
               </div>
             )}

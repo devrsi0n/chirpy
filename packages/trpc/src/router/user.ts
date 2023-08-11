@@ -4,22 +4,6 @@ import { prisma } from '../common/db-client';
 import { protectedProcedure, router } from '../trpc-server';
 
 export const userRouter = router({
-  me: protectedProcedure.query(async ({ ctx }) => {
-    const me = await prisma.user.findUnique({
-      where: {
-        id: ctx.session.user.id,
-      },
-      select: {
-        id: true,
-        name: true,
-        username: true,
-        email: true,
-        image: true,
-        plan: true,
-      },
-    });
-    return me;
-  }),
   myProfile: protectedProcedure.query(async ({ ctx }) => {
     const me = await prisma.user.findUnique({
       where: {

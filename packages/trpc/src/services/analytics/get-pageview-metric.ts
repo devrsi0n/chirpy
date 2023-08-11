@@ -39,6 +39,9 @@ export async function getPageViewMetric(
   return {
     pageviews: currMetric.pageviews,
     prevPageviews: prevMetric.pageviews,
-    growthRate: Math.min(growthRate, 100),
+    growthRate: {
+      value: growthRate,
+      label: `${Math.round(growthRate * 100)}${growthRate > 100 ? '+' : ''}%`,
+    },
   };
 }

@@ -77,6 +77,7 @@ function ProfileSection(
   });
   const { showToast } = useToast();
   const utils = trpc.useContext();
+  const { refetchUser } = useCurrentUser();
   const handleClickSubmit = handleSubmit(async (fields) => {
     try {
       await updateProfile({
@@ -109,7 +110,7 @@ function ProfileSection(
     }
     await Promise.allSettled([
       utils.user.myProfile.invalidate(),
-      utils.user.me.invalidate(),
+      refetchUser(),
     ]);
   });
 

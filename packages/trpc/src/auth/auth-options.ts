@@ -8,7 +8,6 @@ import { log } from 'next-axiom';
 import { prisma } from '../common/db-client';
 import { authProviders } from './auth-providers';
 import { defaultCookies } from './default-cookies';
-
 // Fix build TS error
 import '../../typings/next-auth.d';
 
@@ -59,6 +58,7 @@ export const nextAuthOptions: NextAuthOptions = {
           username: true,
           email: true,
           image: true,
+          plan: true,
           projects: {
             select: {
               id: true,
@@ -72,11 +72,12 @@ export const nextAuthOptions: NextAuthOptions = {
       const editableProjectIds = userData?.projects.map(({ id }) => id);
       // Extra properties should be added here, jwt only save a small set of data due to cookie size limitation
       session.user = {
-        name: session.user?.name || userData.name || '',
-        username: userData.username || '',
-        email: session.user?.email || userData.email || '',
-        image: session.user?.image || userData.image || '',
         id: userId,
+        name: userData.name || session.user?.name || '',
+        username: userData.username || '',
+        email: userData.email || session.user?.email || '',
+        image: userData.image || session.user?.image || '',
+        plan: userData.plan || 'HOBBY',
         editableProjectIds,
       };
       return session;

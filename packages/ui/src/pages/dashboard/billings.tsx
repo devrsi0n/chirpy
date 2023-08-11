@@ -13,7 +13,7 @@ export type BillingsProps = {
 };
 
 export function Billings(_props: BillingsProps): JSX.Element {
-  const { data: user } = useCurrentUser();
+  const { data: user, refetchUser } = useCurrentUser();
   const { mutate } = trpc.payment.checkout.useMutation({
     async onSuccess(data) {
       const stripe = await getStripe();
@@ -22,7 +22,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
       });
     },
   });
-  const util = trpc.useContext();
+
   const { showToast } = useToast();
   const router = useRouter();
   React.useEffect(() => {
@@ -38,7 +38,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
       });
       // Update plan info after the webhook process
       setTimeout(() => {
-        util.user.me.invalidate();
+        refetchUser();
       }, 60_000);
       router.replace(url.href, url.href, {
         shallow: true,
@@ -99,7 +99,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
             }}
           />
         </div>
-        {user.plan !== 'HOBBY' && (
+        {['HOBBY', 'ENTERPRISE'].includes(user?.plan || '') && (
           <div className="flex flex-col gap-1">
             <button
               type="button"

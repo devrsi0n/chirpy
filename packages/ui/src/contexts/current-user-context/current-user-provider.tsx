@@ -1,4 +1,3 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
@@ -16,15 +15,8 @@ export type CurrentUserProviderProps = {
 export function CurrentUserProvider({
   children,
 }: CurrentUserProviderProps): JSX.Element {
-  const { data: session, status: sessionStatus } = useSession();
+  const { data: session, status: sessionStatus, update } = useSession();
   const sessionIsLoading = sessionStatus === 'loading';
-  const {
-    data,
-    isFetching,
-    refetch: refetchUser,
-  } = trpc.user.me.useQuery(undefined, {
-    enabled: !!session?.user.id,
-  });
   const hasMounted = useHasMounted();
   const value = React.useMemo<CurrentUserContextType>(() => {
     if (!hasMounted) {
@@ -32,28 +24,20 @@ export function CurrentUserProvider({
       return EMPTY_CURRENT_USER_CONTEXT;
     }
     // Reset data if session is invalid
-    const _data: CurrentUserContextType['data'] = session?.user.id
+    const data: CurrentUserContextType['data'] = session?.user.id
       ? {
           ...session?.user,
-          ...data,
           editableProjectIds: session?.user.editableProjectIds || [],
         }
       : {};
     return {
-      data: _data,
-      loading: sessionIsLoading || isFetching,
-      isSignIn: !!_data.id,
-      refetchUser: refetchUser,
-      isPaid: _data.plan === 'PRO' || _data.plan === 'ENTERPRISE',
+      data,
+      loading: sessionIsLoading,
+      isSignIn: !!data.id,
+      refetchUser: update,
+      isPaid: ['HOBBY', 'ENTERPRISE'].includes(data?.plan || ''),
     };
-  }, [
-    hasMounted,
-    session?.user,
-    data,
-    sessionIsLoading,
-    isFetching,
-    refetchUser,
-  ]);
+  }, [hasMounted, session?.user, sessionIsLoading, update]);
 
   return (
     <CurrentUserContext.Provider value={value}>

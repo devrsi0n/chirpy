@@ -1,4 +1,3 @@
-import { RouterOutputs, trpc } from '@chirpy-dev/trpc/src/client';
 import { Nullable } from '@chirpy-dev/types';
 import { asyncNoop } from '@chirpy-dev/utils';
 import { Session } from 'next-auth';
@@ -6,7 +5,7 @@ import * as React from 'react';
 
 export type UserData = Nullable<Session['user']>;
 
-export type RefetchUser = ReturnType<typeof trpc.user.me.useQuery>['refetch'];
+export type RefetchUser = (data?: any) => Promise<Session | null>;
 
 export type CurrentUserContextType = {
   refetchUser: RefetchUser;
@@ -16,10 +15,7 @@ export type CurrentUserContextType = {
   // we need to turn off some features if we are in preview mode
   isPreview?: true;
   isPaid?: boolean;
-  data: UserData &
-    Nullable<NonNullable<RouterOutputs['user']['me']>> & {
-      editableProjectIds?: string[];
-    };
+  data: UserData;
 };
 
 export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
