@@ -136,7 +136,7 @@ type VariantColors = Record<VariantColor, string>;
 const ColorVariantStyles: VariantColors = {
   'solid-primary': `bg-primary-900 text-whitea-1200 hover:bg-primary-1000 focus-visible:ring-primary-1000`,
   'solid-red': `bg-red-900 text-whitea-1200 hover:bg-red-1000 focus-visible:ring-red-1000`,
-  'solid-gray': `bg-gray-1200 text-whitea-1200 hover:bg-gray-1100 focus-visible:ring-gray-1100`,
+  'solid-gray': `bg-gray-1200 text-gray-100 hover:bg-gray-1100 focus-visible:ring-gray-1100`,
 
   'default-primary': `border border-primary-700 text-primary-900 hover:border-primary-900 hover:text-primary-1000`,
   'default-red': `border border-red-700 text-red-900 hover:border-red-900 hover:text-red-1000`,

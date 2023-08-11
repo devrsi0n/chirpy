@@ -13,7 +13,7 @@ export type BillingsProps = {
 };
 
 export function Billings(_props: BillingsProps): JSX.Element {
-  const { data: user, refetchUser } = useCurrentUser();
+  const { data: user, refetchUser, isPaid } = useCurrentUser();
   const { mutate } = trpc.payment.checkout.useMutation({
     async onSuccess(data) {
       const stripe = await getStripe();
@@ -99,7 +99,7 @@ export function Billings(_props: BillingsProps): JSX.Element {
             }}
           />
         </div>
-        {['HOBBY', 'ENTERPRISE'].includes(user?.plan || '') && (
+        {isPaid && (
           <div className="flex flex-col gap-1">
             <button
               type="button"

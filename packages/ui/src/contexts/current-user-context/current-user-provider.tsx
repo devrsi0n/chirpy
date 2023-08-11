@@ -35,7 +35,7 @@ export function CurrentUserProvider({
       loading: sessionIsLoading,
       isSignIn: !!data.id,
       refetchUser: update,
-      isPaid: ['HOBBY', 'ENTERPRISE'].includes(data?.plan || ''),
+      isPaid: ['PRO', 'ENTERPRISE'].includes(data?.plan || ''),
     };
   }, [hasMounted, session?.user, sessionIsLoading, update]);
 
