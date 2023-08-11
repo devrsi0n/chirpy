@@ -16,14 +16,6 @@ afterEach(() => {
 });
 
 export const restHandlers = [
-  rest.get('*/api/page', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        id: MOCK_PAGE_ID,
-      }),
-    );
-  }),
   rest.get('*/api/trpc/notification.messages', (req, res, ctx) => {
     return res(
       ctx.status(200),

@@ -5,11 +5,14 @@ export async function getTopSources({
   dateFrom: date_from,
   dateTo: date_to,
 }: { dateFrom?: string; dateTo?: string } = {}): Promise<TopSources> {
-  const { data: queryData } = await queryPipe<TopSource>('top_sources', {
-    limit: 8,
-    date_from,
-    date_to,
-  });
+  const { data: queryData } = await queryPipe<TopSource>(
+    'top_sources_by_domain',
+    {
+      limit: 8,
+      date_from,
+      date_to,
+    },
+  );
 
   const data: TopSource[] = [...queryData]
     .sort((a, b) => b.visits - a.visits)
