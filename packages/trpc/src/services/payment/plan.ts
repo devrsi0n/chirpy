@@ -32,7 +32,7 @@ export const PLANS = [
         amount: 0,
         // No needed
         priceId: '',
-        pageviews: 5000,
+        pageviews: 1000,
         maxProjectNum: 1,
       },
     },

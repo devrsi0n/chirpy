@@ -24,7 +24,7 @@ export const FAQ_LIST: FAQItem[] = [
   {
     title: 'Can I change my plan later?',
     description:
-      'Of course. Our pricing scales with your company. Chat to our friendly team to find a solution that works for you.',
+      'Of course. Our pricing scales with your business, you can upgrade or downgrade your plan at any time.',
     icon: <IconRepeat />,
   },
   {
