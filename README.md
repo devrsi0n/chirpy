@@ -42,12 +42,8 @@ Like what you see? Give Chirpy a GitHub Star ⭐, it will help us a lot!
 Although Chirpy is ready to serve you and your users, we're working hard to add more features:
 
 - More custom options
-- Account plan
-- Payment
-
-## 📀 Self-hosted
-
-You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chirpy. Both the Cloud and self-hosted versions are equal. You need 2 servers and 2 domains to install, run and maintain multiple instances.
+- ~~Account plan~~
+- ~~Payment~~
 
 ## 🍡 Tech stacks
 
@@ -60,7 +56,7 @@ You can have a [self-hosted](https://chirpy.dev/docs/self-hosted) version of Chi
 - [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [tiptap](https://tiptap.dev)
-- [Plausible](https://github.com/plausible/analytics)
+- [Tinybird](https://www.tinybird.co)
 
 ## 🥇 Contribution
 

@@ -172,7 +172,7 @@ function DisabledBenefit({ children }: DisabledBenefitProps) {
 }
 
 function formateNum(num: number) {
-  return Intl.NumberFormat(undefined, {
+  return Intl.NumberFormat('en-US', {
     notation: 'compact',
   }).format(num);
 }

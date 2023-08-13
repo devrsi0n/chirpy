@@ -1,13 +1,21 @@
 import { TopSource, TopSources } from '@chirpy-dev/types';
 import { queryPipe } from '@chirpy-dev/utils';
 
+type TopSourceInput = {
+  domain: string;
+  dateFrom?: string;
+  dateTo?: string;
+};
+
 export async function getTopSources({
+  domain,
   dateFrom: date_from,
   dateTo: date_to,
-}: { dateFrom?: string; dateTo?: string } = {}): Promise<TopSources> {
+}: TopSourceInput): Promise<TopSources> {
   const { data: queryData } = await queryPipe<TopSource>(
     'top_sources_by_domain',
     {
+      domain,
       limit: 8,
       date_from,
       date_to,
