@@ -14,7 +14,7 @@ export type TextfieldProps = React.ComponentPropsWithoutRef<'input'> & {
     input?: string;
   };
   prefixNode?: React.ReactNode;
-  hintText?: string;
+  hintText?: React.ReactNode;
 };
 
 export const TextField = React.forwardRef(function TextfieldComponent(

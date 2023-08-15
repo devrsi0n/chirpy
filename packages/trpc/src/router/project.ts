@@ -123,6 +123,23 @@ export const projectRouter = router({
       }
       return project;
     }),
+  validate: publicProcedure
+    .input(
+      z.object({
+        domain: z.string(),
+      }),
+    )
+    // Use mutation to let client query on-demand
+    .mutation(async ({ input }) => {
+      const proj = await prisma.project.findUnique({
+        where: {
+          domain: input.domain,
+        },
+      });
+      if (proj?.id) {
+        return 'DOMAIN_UNIQUE_CONSTRAINT';
+      }
+    }),
 });
 
 async function getAllProjects({ username }: { username: string }) {

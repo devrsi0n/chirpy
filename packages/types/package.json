@@ -14,7 +14,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "csstype": "3.1.2",
-    "next": "13.4.13",
+    "next": "13.4.16",
     "next-auth": "4.23.0",
     "next-mdx-remote": "3.0.8",
     "react": "18.2.0",

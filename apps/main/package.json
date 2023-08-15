@@ -34,7 +34,7 @@
     "html-loader": "4.2.0",
     "lodash": "4.17.21",
     "micro": "10.0.1",
-    "next": "13.4.13",
+    "next": "13.4.16",
     "next-axiom": "0.17.0",
     "next-connect": "0.12.2",
     "next-mdx-remote": "3.0.8",
@@ -52,7 +52,7 @@
     "superjson": "1.13.1",
     "type-fest": "4.2.0",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.0"
   },
   "devDependencies": {
     "@chirpy-dev/bootstrapper": "workspace:*",
@@ -61,7 +61,7 @@
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/service-worker": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@next/bundle-analyzer": "13.4.13",
+    "@next/bundle-analyzer": "13.4.16",
     "@relative-ci/agent": "4.1.6",
     "@types/cors": "2.8.13",
     "@types/jest": "29.5.3",

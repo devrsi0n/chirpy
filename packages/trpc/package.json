@@ -26,7 +26,7 @@
     "@trpc/server": "10.37.1",
     "@types/web-push": "3.3.2",
     "dayjs": "1.11.9",
-    "next": "13.4.13",
+    "next": "13.4.16",
     "next-auth": "4.23.0",
     "next-axiom": "0.17.0",
     "react": "18.2.0",
@@ -34,7 +34,7 @@
     "stripe": "12.18.0",
     "superjson": "1.13.1",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.0"
   },
   "devDependencies": {
     "@types/jest": "29.5.3",

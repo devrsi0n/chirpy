@@ -67,7 +67,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
       <SettingsCard.Header>Page identifier</SettingsCard.Header>
       <SettingsCard.Body>
         <Text variant="secondary">
-          {`Chirpy uses the URL domain + path of your page as the identifier by default, if you want to add `}
+          {`Chirpy uses the URL domain + path of your pages as the identifier by default, if you want to add `}
           <Link
             variant="primary"
             href="https://en.wikipedia.org/wiki/Query_string"
