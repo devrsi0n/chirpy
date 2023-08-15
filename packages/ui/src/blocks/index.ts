@@ -12,7 +12,6 @@ export * from './faqs';
 export * from './features';
 export * from './footer';
 export * from './header';
-export * from './integrate-guide';
 export * from './layout';
 export * from './like-action';
 export * from './mdx-components';

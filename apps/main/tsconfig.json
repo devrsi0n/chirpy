@@ -6,7 +6,8 @@
     "types": ["jest", "node"],
     "paths": {
       "$/*": ["src/*"]
-    }
+    },
+    "jsx": "preserve"
   },
   "exclude": ["node_modules", ".next"],
   "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
