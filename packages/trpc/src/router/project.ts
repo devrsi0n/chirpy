@@ -50,6 +50,7 @@ export const projectRouter = router({
       z.object({
         name: z.string(),
         domain: z.string(),
+        queryParameters: z.string().optional(),
         teamId: z.string().nullish(),
       }),
     )

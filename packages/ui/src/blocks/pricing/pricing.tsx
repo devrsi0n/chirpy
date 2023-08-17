@@ -41,7 +41,7 @@ export function PricingCards({
 }: PricingCardsProps) {
   const router = useRouter();
   const handleClickCTA = () => {
-    router.push('/auth/sign-in');
+    router.push('/new');
   };
   const hobby = getPlanPrice('HOBBY');
   const pro = getPlanPrice('PRO');

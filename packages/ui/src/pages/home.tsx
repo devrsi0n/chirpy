@@ -29,7 +29,7 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
-            <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
+            <Link variant="plain" href="/new" tabIndex={-1}>
               <Button
                 variant="solid"
                 color="primary"

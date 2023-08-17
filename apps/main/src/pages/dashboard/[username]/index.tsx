@@ -58,7 +58,6 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   return {
     props: {
       projects,
-      username,
     },
     revalidate: 60,
   };

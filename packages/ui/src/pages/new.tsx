@@ -11,7 +11,7 @@ type FormFields = {
   domain: string;
   queryParameters: string;
 };
-export function Create(): JSX.Element {
+export function New(): JSX.Element {
   // Just save it, we'll create the project after user login
   const [savedFields, setSavedFields] = useLocalStorage<FormFields>(
     {
