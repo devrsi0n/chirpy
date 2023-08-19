@@ -72,7 +72,7 @@ export const strings = {
     </>
   ),
   callToAction: {
-    main: 'Get started',
+    main: 'Start building',
     secondary: 'Learn More',
   },
 };

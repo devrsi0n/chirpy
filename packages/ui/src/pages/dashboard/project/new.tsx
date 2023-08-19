@@ -15,6 +15,7 @@ export function New(): JSX.Element {
   const { data } = useCurrentUser();
   return (
     <CreateProject
+      title={`Create project`}
       onSubmit={async (fields) => {
         try {
           await createAProject({

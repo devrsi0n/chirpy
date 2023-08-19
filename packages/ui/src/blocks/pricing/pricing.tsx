@@ -103,7 +103,7 @@ export function PricingCards({
         ]}
         callToAction={{
           variant: 'solid',
-          children: 'Get started',
+          children: 'Start building',
           color: 'primary',
           onClick: handleClickCTA,
           ...payAsYouGoButton,

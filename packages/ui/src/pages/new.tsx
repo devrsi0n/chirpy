@@ -24,18 +24,20 @@ export function New(): JSX.Element {
   const router = useRouter();
   return (
     <CreateProject
+      title={`Let's build your community`}
       fields={savedFields}
       onSubmit={async (fields) => {
         setSavedFields(fields);
-        router.push('/auth/sign-in');
+        router.push('/auth/sign-in?onboarding=true');
       }}
     />
   );
 }
 
 export type CreateProjectProps = {
-  fields?: FormFields;
+  title: string;
   onSubmit: (fields: FormFields) => Promise<void>;
+  fields?: FormFields;
 };
 
 export function CreateProject(props: CreateProjectProps): JSX.Element {
@@ -59,8 +61,8 @@ export function CreateProject(props: CreateProjectProps): JSX.Element {
     await props.onSubmit(fields);
   });
   return (
-    <SiteLayout title={'Create project'}>
-      <PageTitle>Create project</PageTitle>
+    <SiteLayout title={props.title}>
+      <PageTitle>{props.title}</PageTitle>
       <div className="mt-8 flex max-w-lg flex-col gap-8">
         <TextField
           {...register('name', {
