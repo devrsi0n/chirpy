@@ -1,7 +1,6 @@
 # Chirpy | [简体中文](./README-zh.md)
 
 [![Vercel](https://img.shields.io/github/deployments/devrsi0n/chirpy/production?logo=vercel)](https://github.com/devrsi0n/chirpy/deployments)
-[![Cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 [![Twitter Chirpy](https://img.shields.io/twitter/url?url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
 
 <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >

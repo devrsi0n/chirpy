@@ -14,10 +14,10 @@
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/ui": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
-    "@headlessui/react": "1.7.16",
-    "@tremor/react": "3.6.1",
+    "@headlessui/react": "1.7.17",
+    "@tremor/react": "3.6.6",
     "clsx": "2.0.0",
-    "framer-motion": "10.16.0",
+    "framer-motion": "10.16.2",
     "next": "13.4.19",
     "prop-types": "15.8.1",
     "react": "18.2.0",
@@ -29,13 +29,13 @@
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@headlessui/tailwindcss": "0.2.0",
     "@types/node": "18.16.18",
-    "@types/react": "18.2.20",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.14",
-    "eslint": "8.47.0",
-    "postcss": "8.4.27",
+    "autoprefixer": "10.4.15",
+    "eslint": "8.48.0",
+    "postcss": "8.4.29",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "publishConfig": {
     "access": "public"

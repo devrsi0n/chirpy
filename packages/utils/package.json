@@ -6,20 +6,20 @@
   "sideEffects": false,
   "types": "./src/index.ts",
   "dependencies": {
-    "@tiptap/pm": "2.1.6",
+    "@tiptap/pm": "2.1.7",
     "dayjs": "1.11.9"
   },
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@chirpy-dev/types": "workspace:*",
-    "@tiptap/core": "2.1.6",
-    "@tiptap/react": "2.1.6",
+    "@tiptap/core": "2.1.7",
+    "@tiptap/react": "2.1.7",
     "@types/node": "18.16.18",
-    "@types/react": "18.2.20",
+    "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "publishConfig": {
     "access": "public"

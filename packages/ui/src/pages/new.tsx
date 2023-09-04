@@ -1,8 +1,10 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 import { PageTitle, SiteLayout } from '../blocks';
 import { Button, Link, TextField } from '../components';
+import { useCurrentUser } from '../contexts';
 import { useForm, useLocalStorage } from '../hooks';
 import { isValidDomain } from '../utilities';
 
@@ -19,9 +21,15 @@ export function New(): JSX.Element {
       domain: '',
       queryParameters: '',
     },
-    'project-creation',
+    'onboarding-project-creation',
   );
+  const { isSignIn } = useCurrentUser();
   const router = useRouter();
+  React.useEffect(() => {
+    if (isSignIn) {
+      router.push(`/dashboard/project/new`);
+    }
+  }, [isSignIn, router]);
   return (
     <CreateProject
       title={`Let's build your community`}
@@ -72,7 +80,7 @@ export function CreateProject(props: CreateProjectProps): JSX.Element {
               message: `Only word characters are allowed`,
             },
             minLength: { value: 1, message: 'At least 1 character' },
-            maxLength: { value: 16, message: 'At most 16 characters' },
+            maxLength: { value: 32, message: 'At most 32 characters' },
           })}
           aria-label="Name of this project"
           label="Name"
