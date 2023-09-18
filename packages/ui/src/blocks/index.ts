@@ -6,7 +6,6 @@ export * from './comment-forest';
 export * from './comment-widget';
 export * from './comment-widget-preview';
 export * from './comment-widget-preview';
-export * from './confirm-user-fields';
 export * from './error-fallback';
 export * from './faqs';
 export * from './features';

@@ -1,1 +1,1 @@
-export { New as default } from '@chirpy-dev/ui';
+export { NewProject as default } from '@chirpy-dev/ui';

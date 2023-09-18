@@ -13,9 +13,9 @@ type FormFields = {
   domain: string;
   queryParameters: string;
 };
-export function New(): JSX.Element {
-  // Just save it, we'll create the project after user login
-  const [savedFields, setSavedFields] = useLocalStorage<FormFields>(
+
+export function useOnboardingProject() {
+  return useLocalStorage<FormFields>(
     {
       name: '',
       domain: '',
@@ -23,6 +23,11 @@ export function New(): JSX.Element {
     },
     'onboarding-project-creation',
   );
+}
+
+export function New(): JSX.Element {
+  // Just save it, we'll create the project after user signin
+  const [savedFields, setSavedFields] = useOnboardingProject();
   const { isSignIn } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {

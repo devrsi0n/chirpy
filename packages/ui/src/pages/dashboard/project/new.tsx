@@ -7,7 +7,7 @@ import { MUTATION_ERROR } from '../../../strings';
 import { logger } from '../../../utilities/logger';
 import { CreateProject } from '../../new';
 
-export function New(): JSX.Element {
+export function NewProject(): JSX.Element {
   const router = useRouter();
   const { mutateAsync: createAProject } = trpc.project.create.useMutation();
   const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
@@ -25,6 +25,10 @@ export function New(): JSX.Element {
           await revalidate({
             url: `/dashboard/${data?.username}`,
           });
+          showToast({
+            type: 'success',
+            title: `Project created`,
+          });
           router.push(
             `/dashboard/${data?.username}/${fields.domain}/get-started`,
           );
@@ -35,7 +39,6 @@ export function New(): JSX.Element {
             title: `Create project failed`,
             description: MUTATION_ERROR,
           });
-          throw error;
         }
       }}
     />

@@ -1,4 +1,5 @@
 import { RouterOutputs, trpc } from '@chirpy-dev/trpc/src/client';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import { PageTitle, SiteLayout } from '../../blocks';
@@ -62,7 +63,10 @@ function ProfileSection(
     username,
     emailVerified,
   } = props;
-  const [isEditMode, setIsEditMode] = React.useState(false);
+  const router = useRouter();
+  const invalidProfile = router.query['invalid'] === 'true';
+  // Show edit mode
+  const [isEditMode, setIsEditMode] = React.useState(invalidProfile || false);
   const { mutateAsync: updateProfile } = trpc.user.updateProfile.useMutation();
 
   const { register, errors, hasError, handleSubmit } = useForm<FormFields>({
@@ -88,6 +92,9 @@ function ProfileSection(
         website: fields.website,
         twitterUserName: fields.twitter,
       });
+      if (invalidProfile) {
+        router.push('/auth/redirecting');
+      }
     } catch (error) {
       if (error instanceof Error) {
         logger.error('Update user profile failed', error);
@@ -121,7 +128,9 @@ function ProfileSection(
   return (
     <SiteLayout title={name || 'Profile'}>
       <ProfileContainer className="space-y-7">
-        <PageTitle>Profile</PageTitle>
+        <PageTitle>
+          {invalidProfile ? 'Update your profile to continue' : 'Profile'}
+        </PageTitle>
         <section className="space-y-6">
           <div className="relative mt-1 flex h-40 w-full items-end justify-center rounded-t bg-gradient-to-r from-primary-900 to-plum-900">
             {(image || name || username || email) && (
