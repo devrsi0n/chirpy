@@ -41,37 +41,37 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
         />
       </Menu.Button>
       <Menu.Items className="mx-6">
-        {name && (
-          <div className="mx-4 w-36 space-y-1 py-2">
-            {plan && plan !== 'HOBBY' && (
-              <span className="float-right mt-1 w-fit select-none rounded-md border border-primary-700 px-2 py-1 text-xs font-normal text-primary-1000 first-letter:uppercase">
-                {plan.toLowerCase()}
-              </span>
-            )}
+        <div className="mx-4 w-36 space-y-1 py-2">
+          {plan && plan !== 'HOBBY' && (
+            <span className="float-right mt-1 w-fit select-none rounded-md border border-primary-700 px-2 py-1 text-xs font-normal text-primary-1000 first-letter:uppercase">
+              {plan.toLowerCase()}
+            </span>
+          )}
+          {name && (
             <Text className="line-clamp-2 text-left" bold>
               {name}
             </Text>
-            {email && (
-              <Text
-                variant="secondary"
-                className="line-clamp-2 break-words text-left"
-                size="sm"
-                title={email}
-              >
-                {email}
-              </Text>
-            )}
-            {username && (
-              <Text
-                variant="secondary"
-                className="line-clamp-2 break-words text-left"
-                size="sm"
-              >
-                @{username}
-              </Text>
-            )}
-          </div>
-        )}
+          )}
+          {email && (
+            <Text
+              variant="secondary"
+              className="line-clamp-2 break-words text-left"
+              size="sm"
+              title={email}
+            >
+              {email}
+            </Text>
+          )}
+          {username && (
+            <Text
+              variant="secondary"
+              className="line-clamp-2 break-words text-left"
+              size="sm"
+            >
+              @{username}
+            </Text>
+          )}
+        </div>
         {isSignIn && <Menu.Divider />}
         {isWidget &&
           (isSignIn ? (

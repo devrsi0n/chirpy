@@ -38,16 +38,19 @@ export function SiteLayout({
         )}
       >
         {!hideHeader && <Header />}
-        <main
-          className={clsx(
-            'py-16 md:mx-4',
-            // https://www.joshwcomeau.com/css/full-bleed/
-            !hideFullBleed && cssstyles.layoutMain,
-            styles?.container,
-          )}
-        >
-          {children}
-        </main>
+        {/* Make main content to fill viewport even the content isn't tall enough */}
+        <div className="min-h-[calc(100vh-109px)]">
+          <main
+            className={clsx(
+              'py-16 md:mx-4',
+              // https://www.joshwcomeau.com/css/full-bleed/
+              !hideFullBleed && cssstyles.layoutMain,
+              styles?.container,
+            )}
+          >
+            {children}
+          </main>
+        </div>
         {!hideFooter && <Footer className="mt-auto" />}
       </LayoutWrapper>
     </SiteThemeProvider>

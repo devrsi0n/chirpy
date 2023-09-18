@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "@maizzle/cli": "1.5.6",
-    "@maizzle/framework": "4.4.7",
-    "autoprefixer": "10.4.14",
+    "@maizzle/framework": "4.5.0",
+    "autoprefixer": "10.4.15",
     "glob": "8.0.3",
-    "postcss": "8.4.27",
+    "postcss": "8.4.29",
     "tailwindcss": "3.3.3",
     "tailwindcss-box-shadow": "2.0.1",
     "tailwindcss-email-variants": "2.0.3",

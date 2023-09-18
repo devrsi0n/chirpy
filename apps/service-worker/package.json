@@ -11,10 +11,10 @@
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
     "dotenv": "16.3.1",
-    "dotenv-cli": "7.2.1",
+    "dotenv-cli": "7.3.0",
     "dotenv-expand": "10.0.0",
-    "eslint": "8.47.0",
-    "typescript": "5.1.6",
+    "eslint": "8.49.0",
+    "typescript": "5.2.2",
     "vite": "4.4.9"
   },
   "publishConfig": {

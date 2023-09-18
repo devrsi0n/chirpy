@@ -23,7 +23,7 @@ export type SignInFormProps = React.PropsWithChildren<{
   /**
    * @default false allow anonymous sign-in
    */
-  allowAnonymous?: boolean;
+  anonymous?: boolean;
 }>;
 
 type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
@@ -31,7 +31,7 @@ type SignInErrorKeys = keyof typeof SIGN_IN_ERRORS;
 export function SignInForm({
   title,
   subtitle,
-  allowAnonymous,
+  anonymous,
 }: SignInFormProps): JSX.Element {
   const [errorType, setErrorType] = React.useState<SignInErrorKeys | null>(
     null,
@@ -83,12 +83,12 @@ export function SignInForm({
           </div>
           <div className="space-y-6">
             <div>
-              {allowAnonymous && isAnonymous ? (
+              {anonymous && isAnonymous ? (
                 <AnonymousUserSignIn>{alert}</AnonymousUserSignIn>
               ) : (
                 <EmailSignIn>{alert}</EmailSignIn>
               )}
-              {allowAnonymous && (
+              {anonymous && (
                 <Toggle
                   checked={isAnonymous}
                   onChange={(value) => setIsAnonymous(value)}

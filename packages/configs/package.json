@@ -8,14 +8,14 @@
   "dependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
     "@radix-ui/colors": "1.0.1",
-    "@tailwindcss/typography": "0.5.9",
+    "@tailwindcss/typography": "0.5.10",
     "color-convert": "2.0.1",
-    "postcss": "8.4.27",
+    "postcss": "8.4.29",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "8.5.1",
     "tailwind-scrollbar": "3.0.5",
     "tailwindcss": "3.3.3",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "publishConfig": {
     "access": "public"
