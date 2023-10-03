@@ -195,7 +195,7 @@ importers:
       typescript: 5.1.6
       web-push: 3.6.4
       webpack: 5.88.2
-      zod: 3.21.4
+      zod: 3.22.3
     dependencies:
       '@chirpy-dev/analytics': link:../../packages/analytics
       '@chirpy-dev/emails': link:../../packages/emails
@@ -205,7 +205,7 @@ importers:
       '@chirpy-dev/ui': link:../../packages/ui
       '@chirpy-dev/utils': link:../../packages/utils
       '@radix-ui/colors': 1.0.1
-      '@t3-oss/env-nextjs': 0.6.0_zno6rcmvi3mruj4xg7lanqhjom
+      '@t3-oss/env-nextjs': 0.6.0_zvccsvsh5ymn3di735otj6wmki
       '@tensorflow-models/toxicity': 1.2.2_ce7e77rhh6oipcy6kxvkentnmi
       '@tensorflow/tfjs': 3.18.0
       '@tensorflow/tfjs-converter': 3.18.0_br26fteayl44zj43fz4bazb7oq
@@ -235,7 +235,7 @@ importers:
       superjson: 1.13.1
       type-fest: 4.2.0
       web-push: 3.6.4
-      zod: 3.21.4
+      zod: 3.22.3
     devDependencies:
       '@chirpy-dev/bootstrapper': link:../bootstrapper
       '@chirpy-dev/configs': link:../../packages/configs
@@ -478,7 +478,7 @@ importers:
       superjson: 1.13.1
       typescript: 5.1.6
       web-push: 3.6.4
-      zod: 3.21.4
+      zod: 3.22.3
     dependencies:
       '@chirpy-dev/emails': link:../emails
       '@chirpy-dev/tsconfigs': link:../tsconfigs
@@ -501,7 +501,7 @@ importers:
       stripe: 12.18.0
       superjson: 1.13.1
       web-push: 3.6.4
-      zod: 3.21.4
+      zod: 3.22.3
     devDependencies:
       '@types/jest': 29.5.3
       '@types/node': 18.16.18
@@ -7169,25 +7169,25 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
-  /@t3-oss/env-core/0.6.0_zno6rcmvi3mruj4xg7lanqhjom:
+  /@t3-oss/env-core/0.6.0_zvccsvsh5ymn3di735otj6wmki:
     resolution: {integrity: sha512-3FkPAba069WRZVVab/sB1m3eSGn/rZeypx5k+sWEu1d+k0OQdRDnvFS+7MtxYgqVrwaRk3b7yVnX2dgSPVmWPQ==}
     peerDependencies:
       typescript: '>=4.7.2'
       zod: ^3.0.0
     dependencies:
       typescript: 5.1.6
-      zod: 3.21.4
+      zod: 3.22.3
     dev: false
 
-  /@t3-oss/env-nextjs/0.6.0_zno6rcmvi3mruj4xg7lanqhjom:
+  /@t3-oss/env-nextjs/0.6.0_zvccsvsh5ymn3di735otj6wmki:
     resolution: {integrity: sha512-SpzcGNIbUYcQw4zPPFeRJqCC1560zL7QmB0puIqOnuCsmykPkqHPX+n9CNZLXVQerboHzfvb7Kd+jAdouk72Vw==}
     peerDependencies:
       typescript: '>=4.7.2'
       zod: ^3.0.0
     dependencies:
-      '@t3-oss/env-core': 0.6.0_zno6rcmvi3mruj4xg7lanqhjom
+      '@t3-oss/env-core': 0.6.0_zvccsvsh5ymn3di735otj6wmki
       typescript: 5.1.6
-      zod: 3.21.4
+      zod: 3.22.3
     dev: false
 
   /@tailwindcss/typography/0.5.9_tailwindcss@3.3.3:
@@ -13667,6 +13667,16 @@ packages:
       tslib: 1.14.1
     dev: true
 
+  /follow-redirects/1.15.2:
+    resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dev: false
+
   /follow-redirects/1.15.2_debug@4.3.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
@@ -14958,7 +14968,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2_debug@4.3.2
+      follow-redirects: 1.15.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -25288,6 +25298,10 @@ packages:
 
   /zod/3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+
+  /zod/3.22.3:
+    resolution: {integrity: sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==}
+    dev: false
 
   /zwitch/1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}

@@ -52,7 +52,7 @@
     "superjson": "1.13.1",
     "type-fest": "4.2.0",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.3"
   },
   "devDependencies": {
     "@chirpy-dev/bootstrapper": "workspace:*",

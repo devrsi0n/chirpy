@@ -34,7 +34,7 @@
     "stripe": "12.18.0",
     "superjson": "1.13.1",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.3"
   },
   "devDependencies": {
     "@types/jest": "29.5.3",
