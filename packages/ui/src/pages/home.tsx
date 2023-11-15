@@ -18,9 +18,6 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="" hideFullBleed>
       <NextSeo
-        title="Chirpy Home"
-        description="Open source & privacy-friendly Disqus alternate for your community"
-        canonical="https://chirpy.dev"
         twitter={{
           handle: '@ChirpyHQ',
           site: '@ChirpyHQ',
