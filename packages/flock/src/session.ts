@@ -24,7 +24,7 @@ export function setSessionId() {
 /**
  * Generate uuid to identify the session. Random, not data-derived
  */
-function getUUIDv4(): string {
+export function getUUIDv4(): string {
   try {
     return crypto.randomUUID();
   } catch {

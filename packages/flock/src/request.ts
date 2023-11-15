@@ -1,4 +1,4 @@
-import { getSessionId, setSessionId } from './session';
+import { getSessionId, getUUIDv4, setSessionId } from './session';
 
 /**
  * Try to mask PPI and potential sensible attributes
@@ -65,7 +65,8 @@ export function sendEvent(name: string, payload: Record<string, string>) {
       timestamp: new Date().toISOString(),
       action: name,
       version: '1',
-      session_id: getSessionId(),
+      // Sometimes we can't get a session id, fallback to uuid
+      session_id: getSessionId() || getUUIDv4(),
       payload: sanitizedPayload,
     }),
   );
