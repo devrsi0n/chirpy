@@ -6,7 +6,7 @@ export function getSessionId() {
     const [key, value] = el.split('=');
     cookie[key.trim()] = value;
   });
-  return cookie[COOKIE_NAME];
+  return cookie[COOKIE_NAME] || getUUIDv4();
 }
 
 export function setSessionId() {
