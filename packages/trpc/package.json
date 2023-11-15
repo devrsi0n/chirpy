@@ -24,23 +24,23 @@
     "@trpc/next": "10.37.1",
     "@trpc/react-query": "10.37.1",
     "@trpc/server": "10.37.1",
-    "@types/web-push": "3.3.2",
-    "dayjs": "1.11.9",
-    "next": "13.4.13",
-    "next-auth": "4.23.0",
+    "@types/web-push": "3.6.3",
+    "dayjs": "1.11.10",
+    "next": "14.0.2",
+    "next-auth": "4.24.5",
     "next-axiom": "0.17.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "stripe": "12.18.0",
     "superjson": "1.13.1",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.4"
   },
   "devDependencies": {
-    "@types/jest": "29.5.3",
+    "@types/jest": "29.5.8",
     "@types/node": "18.16.18",
     "prisma": "5.1.1",
-    "typescript": "5.1.6"
+    "typescript": "5.2.2"
   },
   "keywords": [],
   "author": "devrsi0n",

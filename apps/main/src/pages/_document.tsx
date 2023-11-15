@@ -29,7 +29,7 @@ and open-source Disqus alternate."
           <meta name="copyright" content="Chirpy Information Technology LLC" />
           <meta
             name="keywords"
-            content="comment system, privacy-friendly, customizable, open-source"
+            content="Disqus, comment, blog, comment system, privacy-friendly, SaaS, open-source"
           />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg"></link>
           <link rel="alternate icon" href="/favicon.png"></link>

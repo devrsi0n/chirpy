@@ -14,7 +14,7 @@
     "dotenv-cli": "7.2.1",
     "dotenv-expand": "10.0.0",
     "eslint": "8.47.0",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "vite": "4.4.9"
   },
   "publishConfig": {

@@ -34,7 +34,7 @@
     "html-loader": "4.2.0",
     "lodash": "4.17.21",
     "micro": "10.0.1",
-    "next": "13.4.13",
+    "next": "14.0.2",
     "next-axiom": "0.17.0",
     "next-connect": "0.12.2",
     "next-mdx-remote": "3.0.8",
@@ -52,7 +52,7 @@
     "superjson": "1.13.1",
     "type-fest": "4.2.0",
     "web-push": "3.6.4",
-    "zod": "3.21.4"
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@chirpy-dev/bootstrapper": "workspace:*",
@@ -61,16 +61,16 @@
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/service-worker": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@next/bundle-analyzer": "13.4.13",
+    "@next/bundle-analyzer": "14.0.2",
     "@relative-ci/agent": "4.1.6",
-    "@types/cors": "2.8.13",
-    "@types/jest": "29.5.3",
-    "@types/lodash": "4.14.197",
+    "@types/cors": "2.8.16",
+    "@types/jest": "29.5.8",
+    "@types/lodash": "4.14.201",
     "@types/node": "18.16.18",
-    "@types/react": "18.2.20",
-    "@types/react-dom": "18.2.7",
-    "@types/requestidlecallback": "0.3.5",
-    "@types/web-push": "3.3.2",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "@types/requestidlecallback": "0.3.7",
+    "@types/web-push": "3.6.3",
     "dotenv": "16.3.1",
     "dotenv-cli": "7.2.1",
     "dotenv-expand": "10.0.0",
@@ -79,9 +79,9 @@
     "postcss": "8.4.27",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "8.5.1",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.1.6",
-    "webpack": "5.88.2"
+    "tailwindcss": "3.3.5",
+    "typescript": "5.2.2",
+    "webpack": "5.89.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,3 +1,4 @@
+import { NextSeo } from 'next-seo';
 import * as React from 'react';
 
 import {
@@ -16,10 +17,23 @@ export type HomeProps = HomeCommentWidgetPreviewProps;
 export function HomePage({ buildDate }: HomeProps): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="" hideFullBleed>
+      <NextSeo
+        title="Chirpy Home"
+        description="Open source & privacy-friendly Disqus alternate for your community"
+        canonical="https://chirpy.dev"
+        twitter={{
+          handle: '@ChirpyHQ',
+          site: '@ChirpyHQ',
+          cardType: 'summary_large_image',
+        }}
+      />
       <section className="relative z-[1] flex min-h-full flex-col items-center space-y-24 px-2 sm:px-0">
         <div className="space-y-8">
-          <h1 className="mt-1 w-full max-w-4xl text-center text-4xl font-semibold leading-tight tracking-tight text-gray-1200 sm:text-6xl">
-            {strings.heroTitle}
+          <h1 className="mt-1 w-full max-w-2xl text-center text-4xl font-black leading-snug text-gray-1200">
+            <span className="inline-block bg-gradient-to-r from-primary-900 to-plum-900 bg-clip-text text-transparent">
+              {strings.heroTitlePoint}
+            </span>{' '}
+            <span>{strings.heroTitle}</span>
           </h1>
           <Text
             size="lg"
@@ -60,17 +74,10 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
 }
 
 export const strings = {
-  heroTitle:
-    'Take control of your data: discover the privacy-friendly comment system built for You',
-  heroDescription: (
-    <>
-      <span>
-        Chirpy is an open-source Disqus alternate to help you build better
-        communities.
-      </span>
-      <span>Trust by over 290 bloggers, creators and founders.</span>
-    </>
-  ),
+  heroTitlePoint: 'Open source & privacy-friendly',
+  heroTitle: 'Disqus alternate for your community',
+  heroDescription:
+    'Build a better community by integrating a modern comment system.',
   callToAction: {
     main: 'Get started',
     secondary: 'Learn More',
