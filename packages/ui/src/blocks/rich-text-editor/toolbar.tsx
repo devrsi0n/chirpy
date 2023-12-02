@@ -22,7 +22,7 @@ export function Toolbar({
   return (
     <div
       className={clsx(
-        `overflow-y-auto rounded-b border-x border-b border-gray-500 px-1 py-2 leading-none`,
+        `rounded-b border-x border-b border-gray-500 px-1 py-2 leading-none`,
         className,
       )}
       {...divProps}
@@ -32,7 +32,7 @@ export function Toolbar({
         <MarkButton editor={editor} format="italic" />
         <MarkButton editor={editor} format="underline" />
         <MarkButton editor={editor} format="code" />
-        <div className="hidden flex-row gap-1 sm:flex">
+        <div className="hidden flex-row gap-1 xs:flex">
           <Divider vertical />
           <BlockButton editor={editor} format="bulletList" />
           <BlockButton editor={editor} format="blockquote" />

@@ -72,6 +72,7 @@ export function Avatar({
         sizeStyle,
         className,
       )}
+      suppressHydrationWarning
     >
       {children}
     </img>

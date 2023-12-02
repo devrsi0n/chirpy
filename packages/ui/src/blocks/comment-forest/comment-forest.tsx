@@ -60,12 +60,13 @@ export function CommentForest({
                     'transition',
                     orderBy === 'asc' && 'rotate-180',
                   )}
+                  suppressHydrationWarning
                 />
               </BaseButton>
             </div>
           )}
         </div>
-        <ul className="space-y-5">
+        <ul className="space-y-5" suppressHydrationWarning>
           <AnimatePresence>
             {orderedComments?.map(
               (comment: RouterOutputs['comment']['forest'][number]) => (

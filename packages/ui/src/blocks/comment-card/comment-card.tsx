@@ -115,6 +115,7 @@ export function CommentCard({
         `flex flex-row items-start space-x-3 rounded border border-gray-500 pb-2 pl-4 pt-4 shadow-xs`,
       )}
       id={isENVDev ? commentId : undefined}
+      suppressHydrationWarning
     >
       <Avatar
         size="lg"
@@ -127,7 +128,7 @@ export function CommentCard({
       <div className="flex-1">
         <div className="flex flex-row items-start justify-between">
           <div className="flex flex-row items-start space-x-4">
-            <Text bold className="!leading-none">
+            <Text bold className="!leading-none" suppressHydrationWarning>
               {name}
             </Text>
             <Text
@@ -136,6 +137,7 @@ export function CommentCard({
               title={createdAtDate.format('YYYY-MM-DD HH:mm:ss')}
               className="cursor-default !leading-none"
               dateTime={createdAtDate.toISOString()}
+              suppressHydrationWarning
             >
               {createdAtDate.fromNow()}
             </Text>

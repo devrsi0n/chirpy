@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import { motion, MotionProps } from 'framer-motion';
 import * as React from 'react';
 
+import { useHasMounted } from '../../hooks';
 import styles from './comment-branch.module.scss';
 
 const DEFAULT_WIDTH = 1.2;
@@ -28,6 +29,10 @@ export function CommentBranch({
   className,
   ...restProps
 }: CommentBranchProps): JSX.Element {
+  const hasMounted = useHasMounted();
+  if (!hasMounted) {
+    return <></>;
+  }
   return (
     <motion.li
       initial={{ opacity: 0 }}
@@ -46,6 +51,7 @@ export function CommentBranch({
           '--comment-branch-height': `${height}rem`,
         } as React.CSSProperties
       }
+      suppressHydrationWarning
     />
   );
 }
