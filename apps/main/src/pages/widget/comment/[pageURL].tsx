@@ -32,13 +32,16 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   });
 
   const paths: { params: PathParams }[] =
-    freshPages.map(({ url }) => {
-      return {
-        params: {
-          pageURL: url,
-        },
-      };
-    }) || [];
+    freshPages
+      // Nodejs FS can't handle too long file name, so we just don't build static json for those
+      .filter(({ url }) => url.length < 128)
+      .map(({ url }) => {
+        return {
+          params: {
+            pageURL: url,
+          },
+        };
+      }) || [];
 
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.
