@@ -10,7 +10,7 @@ import {
   Pricing,
   SiteLayout,
 } from '../blocks';
-import { Button, IconArrowRight, Link, Text } from '../components';
+import { Button, IconArrowRight, IconGithub, Link, Text } from '../components';
 
 export type HomeProps = HomeCommentWidgetPreviewProps;
 
@@ -40,6 +40,16 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
             {strings.heroDescription}
           </Text>
           <div className="flex items-center justify-center space-x-6">
+            <Link
+              variant="plain"
+              href="https://github.com/devrsi0n/chirpy"
+              tabIndex={-1}
+            >
+              <Button className="gap-2">
+                <IconGithub size={20} />
+                {strings.callToAction.secondary}
+              </Button>
+            </Link>
             <Link variant="plain" href="/auth/sign-in" tabIndex={-1}>
               <Button
                 variant="solid"
@@ -52,9 +62,6 @@ export function HomePage({ buildDate }: HomeProps): JSX.Element {
                   className="inline-block transition group-hover:translate-x-1"
                 />
               </Button>
-            </Link>
-            <Link variant="plain" href="/docs" tabIndex={-1}>
-              <Button>{strings.callToAction.secondary}</Button>
             </Link>
           </div>
         </div>
@@ -77,6 +84,6 @@ export const strings = {
     'Build a better community by integrating a modern comment system.',
   callToAction: {
     main: 'Get started',
-    secondary: 'Learn More',
+    secondary: 'Star on GitHub',
   },
 };
