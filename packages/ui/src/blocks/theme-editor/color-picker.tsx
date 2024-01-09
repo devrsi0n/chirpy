@@ -86,7 +86,7 @@ export function ColorPicker({
         </Text>
       </div>
       <input
-        className={`hover:cursor-pointer [&::-moz-color-swatch-wrapper]:p-0 [&::-moz-color-swatch]:rounded-full [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full ${pickerButtonStyle}`}
+        className={`hover:cursor-pointer [&::-moz-color-swatch-wrapper]:p-0 [&::-moz-color-swatch]:rounded-full [&::-moz-color-swatch]:border-gray-600 [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-gray-600 ${pickerButtonStyle}`}
         type="color"
         name="colorPicker"
         value={value}
@@ -101,4 +101,4 @@ export function ColorPicker({
 }
 
 const pickerButtonStyle =
-  'inline-block h-6 w-6 rounded-full border border-gray-1000 hover:ring-gray-400 hover:ring-4';
+  'inline-block h-6 w-6 rounded-full hover:ring-gray-400 hover:ring-4';
