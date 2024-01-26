@@ -36,4 +36,61 @@ export const settingsRouter = router({
         data: input,
       });
     }),
+  deleteAccount: protectedProcedure.mutation(async ({ ctx }) => {
+    const userId = ctx.session.user.id;
+    await prisma.$transaction([
+      prisma.like.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.comment.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.project.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.member.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.notificationMessage.deleteMany({
+        where: {
+          OR: [
+            {
+              triggeredById: userId,
+            },
+            {
+              recipientId: userId,
+            },
+          ],
+        },
+      }),
+      prisma.notificationSubscription.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.settings.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.account.deleteMany({
+        where: {
+          userId,
+        },
+      }),
+      prisma.user.deleteMany({
+        where: {
+          id: userId,
+        },
+      }),
+    ]);
+  }),
 });
