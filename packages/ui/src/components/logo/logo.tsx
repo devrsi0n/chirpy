@@ -63,8 +63,6 @@ function LogoBadge({ showBadge }: { showBadge?: boolean }): JSX.Element {
     const host = getHostEnv();
     if (['staging', 'preview', 'localhost'].includes(host)) {
       setBadge(host);
-    } else if (host === 'prod') {
-      setBadge('Beta');
     }
   }, []);
 

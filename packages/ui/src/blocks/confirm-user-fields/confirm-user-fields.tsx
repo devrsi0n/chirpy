@@ -56,7 +56,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
         refetchUser();
       } catch (error: any) {
         logger.debug(`Update user fields failed: ${error}`);
-        if (/duplicate key.+users_username_key/.test(error.message)) {
+        if (/Unique constraint/.test(error.message)) {
           setError('username', 'Username already taken');
         } else if (/duplicate key.+users_email_key/.test(error.message)) {
           setError('email', 'Email already taken');

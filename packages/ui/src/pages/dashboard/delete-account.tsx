@@ -51,7 +51,7 @@ export function DeleteAccountCard() {
             analytics and related data. Please type in {key} to confirm. This
             action is not reversible, so please continue with caution.
           </Text>
-          <TextField name="key" label="Confirm delete" placeholder={key} />
+          <TextField name="key" label="Confirm" placeholder={key} />
         </SettingsCard.Body>
         <SettingsCard.Footer>
           <Button color="primary" variant="solid" type="submit">
