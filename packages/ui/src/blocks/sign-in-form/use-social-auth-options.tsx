@@ -2,12 +2,12 @@ import { getProviders } from 'next-auth/react';
 import { StaticImageData } from 'next/image';
 import DiscordLogo from 'super-tiny-icons/images/svg/discord.svg';
 import GitHubLogo from 'super-tiny-icons/images/svg/github.svg';
+import GoogleLogo from 'super-tiny-icons/images/svg/google.svg';
 import TwitterLogo from 'super-tiny-icons/images/svg/twitter.svg';
 
 import { useAsync } from '../../hooks/use-async';
 
 // import FacebookLogo from 'super-tiny-icons/images/svg/facebook.svg';
-// import GoogleLogo from 'super-tiny-icons/images/svg/google.svg';
 
 export function useSocialAuthOptions(): null | AuthOption[] {
   const { data } = useAsync(getProviders, true);
@@ -30,14 +30,10 @@ export type AuthOption = {
   icon: React.FC;
 };
 
-export type SupportedProviders = 'twitter' | 'github' | 'discord';
+export type SupportedProviders = 'twitter' | 'google' | 'github' | 'discord';
 
 const AUTH_OPTIONS: Record<SupportedProviders, AuthOption> = {
-  // TODO: Make google sign-in work
-  // {
-  //   name: 'Google',
-  //   icon: getLogoComponent(GoogleLogo, 'google', 26),
-  // },
+  google: getAuthOption(GoogleLogo, 'Google', 24),
   // TODO: add back facebook login once we can delete user account.
   // {
   //   name: 'Facebook',
