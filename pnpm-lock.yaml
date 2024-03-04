@@ -182,16 +182,16 @@ importers:
         version: 0.6.0(typescript@5.2.2)(zod@3.22.4)
       '@tensorflow-models/toxicity':
         specifier: 1.2.2
-        version: 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0)
+        version: 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@4.17.0)
       '@tensorflow/tfjs':
         specifier: 3.18.0
         version: 3.18.0
       '@tensorflow/tfjs-converter':
         specifier: 3.18.0
-        version: 3.18.0(@tensorflow/tfjs-core@3.18.0)
+        version: 3.18.0(@tensorflow/tfjs-core@4.17.0)
       '@tensorflow/tfjs-core':
-        specifier: 3.18.0
-        version: 3.18.0
+        specifier: 4.17.0
+        version: 4.17.0
       '@upstash/qstash':
         specifier: 0.3.6
         version: 0.3.6
@@ -2792,7 +2792,7 @@ packages:
     resolution: {integrity: sha512-JppheLu7S114aEs157fOZDjFqUDpm7eHdq5E8SSR0gUBTEK0cNSHsrSR5a66xs0z3RWuo46QvA3vawp8BxDHvg==}
     dependencies:
       dataloader: 1.4.0
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
     dev: true
@@ -7461,25 +7461,25 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0):
+  /@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@4.17.0):
     resolution: {integrity: sha512-DSMIoBzNyX7+4D4cGKjsFLbCuJz3bksYpwFHKAjTp4+tmgAGpNyg5nDXXI/IQp18nMTbLKgLruLWOxq5y7P4WQ==}
     peerDependencies:
       '@tensorflow/tfjs-converter': ^1.3.3 || 3
       '@tensorflow/tfjs-core': ^1.3.3 || 3
     dependencies:
-      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-core': 3.18.0
+      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@4.17.0)
+      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@4.17.0)
+      '@tensorflow/tfjs-core': 4.17.0
     dev: false
 
-  /@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0):
+  /@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@4.17.0):
     resolution: {integrity: sha512-fGCl/gwB7jmKCRI2FhgIBeIa/LCSUcjlEcckH2Bc2dIjhJ+2nspp+22lubxcseN6jjrmP42kkXt/reAPe+KJkQ==}
     peerDependencies:
       '@tensorflow/tfjs-converter': ^1.2.9 || 3
       '@tensorflow/tfjs-core': ^1.2.9 || 3
     dependencies:
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-core': 3.18.0
+      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@4.17.0)
+      '@tensorflow/tfjs-core': 4.17.0
     dev: false
 
   /@tensorflow/tfjs-backend-cpu@3.18.0(@tensorflow/tfjs-core@3.18.0):
@@ -7516,6 +7516,14 @@ packages:
       '@tensorflow/tfjs-core': 3.18.0
     dev: false
 
+  /@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.17.0):
+    resolution: {integrity: sha512-hpChA+zVNQOVwRnCfqDb1WI9jbEAKA6DuEm4m75Zb3dIlE6VVooDmAaHBhlc++z2q2G1sBzF9A4Bv48SUpN6vA==}
+    peerDependencies:
+      '@tensorflow/tfjs-core': 3.18.0 || 3
+    dependencies:
+      '@tensorflow/tfjs-core': 4.17.0
+    dev: false
+
   /@tensorflow/tfjs-core@3.18.0:
     resolution: {integrity: sha512-gMxisZozqsr5sCKlphF/eVBLg91MjlBiN60tjX8hJAu0WlSn6Gi5k65GNIL+Pq6hrxpvImcfdCmTH/2XJVZ0Mg==}
     engines: {yarn: '>= 1.3.2'}
@@ -7528,6 +7536,21 @@ packages:
       long: 4.0.0
       node-fetch: 2.6.7
       seedrandom: 2.4.3
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
+  /@tensorflow/tfjs-core@4.17.0:
+    resolution: {integrity: sha512-v9Q5430EnRpyhWNd9LVgXadciKvxLiq+sTrLKRowh26BHyAsams4tZIgX3lFKjB7b90p+FYifVMcqLTTHgjGpQ==}
+    engines: {yarn: '>= 1.3.2'}
+    dependencies:
+      '@types/long': 4.0.2
+      '@types/offscreencanvas': 2019.7.3
+      '@types/seedrandom': 2.4.34
+      '@webgpu/types': 0.1.38
+      long: 4.0.0
+      node-fetch: 2.6.12
+      seedrandom: 3.0.5
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -8359,6 +8382,10 @@ packages:
     resolution: {integrity: sha512-esIJx9bQg+QYF0ra8GnvfianIY8qWB0GBx54PK5Eps6m+xTj86KLavHv6qDhzKcu5UUOgNfJ2pWaIIV7TRUd9Q==}
     dev: false
 
+  /@types/offscreencanvas@2019.7.3:
+    resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
+    dev: false
+
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: true
@@ -8421,6 +8448,10 @@ packages:
 
   /@types/seedrandom@2.4.27:
     resolution: {integrity: sha512-YvMLqFak/7rt//lPBtEHv3M4sRNA+HGxrhFZ+DQs9K2IkYJbNwVIb8avtJfhDiuaUBX/AW0jnjv48FV8h3u9bQ==}
+    dev: false
+
+  /@types/seedrandom@2.4.34:
+    resolution: {integrity: sha512-ytDiArvrn/3Xk6/vtylys5tlY6eo7Ane0hvcx++TKo6RxQXuVfW0AF/oeWqAj9dN29SyhtawuXstgmPlwNcv/A==}
     dev: false
 
   /@types/semver@7.5.0:
@@ -9034,6 +9065,10 @@ packages:
 
   /@webgpu/types@0.1.20:
     resolution: {integrity: sha512-MFb5oyxX+A7PWQNjcY3kSCSG2FAHaBo7IJBWtxWFgsS20FtY3D9UY7lYqLZ6avS8fSkdSylIS4qiHzFlQUdXag==}
+    dev: false
+
+  /@webgpu/types@0.1.38:
+    resolution: {integrity: sha512-7LrhVKz2PRh+DD7+S+PVaFd5HxaWQvoMqBbsV9fNJO1pjUs1P8bM2vQVNfk+3URTqbuTI7gkXi0rfsN0IadoBA==}
     dev: false
 
   /@xmldom/xmldom@0.8.10:
@@ -18518,6 +18553,7 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: false
 
   /node-fetch@2.6.12:
     resolution: {integrity: sha512-C/fGU2E8ToujUivIO0H+tpQ6HWo4eEmchoPIoXtxCrVghxdKq+QOHqEZW7tuP3KlV3bC8FRMO5nMCC7Zm1VP6g==}
@@ -19415,6 +19451,7 @@ packages:
 
   /path-dirname@1.0.2:
     resolution: {integrity: sha512-ALzNPpyNq9AqXMBjeymIjFDAkAFH06mHJH/cSBHAgU0s4vfpBn6b2nf8tiRLvagKD8RbTpq2FKTBg7cl9l3c7Q==}
+    requiresBuild: true
     dev: true
 
   /path-exists@2.1.0:
@@ -22266,6 +22303,10 @@ packages:
 
   /seedrandom@2.4.3:
     resolution: {integrity: sha512-2CkZ9Wn2dS4mMUWQaXLsOAfGD+irMlLEeSP3cMxpGbgyOOzJGFa+MWCOMTOCMyZinHRPxyOj/S/C57li/1to6Q==}
+    dev: false
+
+  /seedrandom@3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
     dev: false
 
   /selderee@0.10.0:
