@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { useEventListener } from './use-event-listener';
+import { useInterval } from './use-time';
 
 export type useSignInWindowOptions = {
   width?: number;
@@ -14,23 +15,40 @@ export function useSignInWindow({
   height = 760,
 }: useSignInWindowOptions = {}): () => void {
   const popupWindow = React.useRef<Window | null>(null);
+  const [isSigningIn, setIsSigningIn] = React.useState(false);
   const handleClickSignIn = () => {
+    localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
     popupWindow.current = popupCenterWindow(
       '/auth/sign-in?allowAnonymous=true',
       '_blank',
       width,
       height,
     );
+    setIsSigningIn(true);
   };
 
   useEventListener('storage', async (event) => {
     if (event.key === SIGN_IN_SUCCESS_KEY && event.newValue === 'true') {
+      setIsSigningIn(false);
       popupWindow.current?.close();
       popupWindow.current = null;
       // Force to refresh session
       await getSession();
     }
   });
+
+  useInterval(
+    () => {
+      if (localStorage.getItem(SIGN_IN_SUCCESS_KEY) === 'true') {
+        setIsSigningIn(false);
+        popupWindow.current?.close();
+        popupWindow.current = null;
+        // Force to refresh session
+        void getSession();
+      }
+    },
+    isSigningIn ? 3000 : null,
+  );
 
   return handleClickSignIn;
 }
