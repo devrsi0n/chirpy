@@ -182,13 +182,13 @@ importers:
         version: 0.6.0(typescript@5.2.2)(zod@3.22.4)
       '@tensorflow-models/toxicity':
         specifier: 1.2.2
-        version: 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0)
+        version: 1.2.2(@tensorflow/tfjs-converter@4.17.0)(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs':
         specifier: 3.18.0
         version: 3.18.0
       '@tensorflow/tfjs-converter':
-        specifier: 3.18.0
-        version: 3.18.0(@tensorflow/tfjs-core@3.18.0)
+        specifier: 4.17.0
+        version: 4.17.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-core':
         specifier: 3.18.0
         version: 3.18.0
@@ -7461,24 +7461,24 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0):
+  /@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@4.17.0)(@tensorflow/tfjs-core@3.18.0):
     resolution: {integrity: sha512-DSMIoBzNyX7+4D4cGKjsFLbCuJz3bksYpwFHKAjTp4+tmgAGpNyg5nDXXI/IQp18nMTbLKgLruLWOxq5y7P4WQ==}
     peerDependencies:
       '@tensorflow/tfjs-converter': ^1.3.3 || 3
       '@tensorflow/tfjs-core': ^1.3.3 || 3
     dependencies:
-      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
+      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@4.17.0)(@tensorflow/tfjs-core@3.18.0)
+      '@tensorflow/tfjs-converter': 4.17.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-core': 3.18.0
     dev: false
 
-  /@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@3.18.0)(@tensorflow/tfjs-core@3.18.0):
+  /@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@4.17.0)(@tensorflow/tfjs-core@3.18.0):
     resolution: {integrity: sha512-fGCl/gwB7jmKCRI2FhgIBeIa/LCSUcjlEcckH2Bc2dIjhJ+2nspp+22lubxcseN6jjrmP42kkXt/reAPe+KJkQ==}
     peerDependencies:
       '@tensorflow/tfjs-converter': ^1.2.9 || 3
       '@tensorflow/tfjs-core': ^1.2.9 || 3
     dependencies:
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
+      '@tensorflow/tfjs-converter': 4.17.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-core': 3.18.0
     dev: false
 
@@ -7512,6 +7512,14 @@ packages:
     resolution: {integrity: sha512-hpChA+zVNQOVwRnCfqDb1WI9jbEAKA6DuEm4m75Zb3dIlE6VVooDmAaHBhlc++z2q2G1sBzF9A4Bv48SUpN6vA==}
     peerDependencies:
       '@tensorflow/tfjs-core': 3.18.0 || 3
+    dependencies:
+      '@tensorflow/tfjs-core': 3.18.0
+    dev: false
+
+  /@tensorflow/tfjs-converter@4.17.0(@tensorflow/tfjs-core@3.18.0):
+    resolution: {integrity: sha512-qFxIjPfomCuTrYxsFjtKbi3QfdmTTCWo+RvqD64oCMS0sjp7sUDNhJyKDoLx6LZhXlwXpHIVDJctLMRMwet0Zw==}
+    peerDependencies:
+      '@tensorflow/tfjs-core': 4.17.0 || 3
     dependencies:
       '@tensorflow/tfjs-core': 3.18.0
     dev: false
