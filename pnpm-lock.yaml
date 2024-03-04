@@ -128,13 +128,13 @@ importers:
         version: 1.5.6
       '@maizzle/framework':
         specifier: 4.4.7
-        version: 4.4.7(glob@8.0.3)
+        version: 4.4.7(glob@8.1.0)
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.27)
       glob:
-        specifier: 8.0.3
-        version: 8.0.3
+        specifier: 8.1.0
+        version: 8.1.0
       postcss:
         specifier: 8.4.27
         version: 8.4.27
@@ -4257,7 +4257,7 @@ packages:
       - zenObservable
     dev: false
 
-  /@maizzle/framework@4.4.7(glob@8.0.3):
+  /@maizzle/framework@4.4.7(glob@8.1.0):
     resolution: {integrity: sha512-bzf4IYSsRrqWZvuXh8W+rvcmbpoOXW3VOGD4gidBd/X0PDpCuQDhrU4gaJAp1GGca1cVYVqsThFTNyKciCqPew==}
     engines: {node: '>=14.0.0'}
     hasBin: true
@@ -4269,7 +4269,7 @@ packages:
       email-comb: 5.3.1
       front-matter: 4.0.2
       fs-extra: 10.1.0
-      glob-promise: 4.2.2(glob@8.0.3)
+      glob-promise: 4.2.2(glob@8.1.0)
       html-crush: 4.2.0
       is-url-superb: 5.0.0
       juice: 9.1.0
@@ -14439,14 +14439,14 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /glob-promise@4.2.2(glob@8.0.3):
+  /glob-promise@4.2.2(glob@8.1.0):
     resolution: {integrity: sha512-xcUzJ8NWN5bktoTIX7eOclO1Npxd/dyVqUJxlLIDasT4C7KZyqlPIwkdJ0Ypiy3p2ZKahTjK4M9uC3sNSfNMzw==}
     engines: {node: '>=12'}
     peerDependencies:
       glob: ^7.1.6 || 8
     dependencies:
       '@types/glob': 7.2.0
-      glob: 8.0.3
+      glob: 8.1.0
     dev: false
 
   /glob-to-regexp@0.3.0:
@@ -19415,6 +19415,7 @@ packages:
 
   /path-dirname@1.0.2:
     resolution: {integrity: sha512-ALzNPpyNq9AqXMBjeymIjFDAkAFH06mHJH/cSBHAgU0s4vfpBn6b2nf8tiRLvagKD8RbTpq2FKTBg7cl9l3c7Q==}
+    requiresBuild: true
     dev: true
 
   /path-exists@2.1.0:
