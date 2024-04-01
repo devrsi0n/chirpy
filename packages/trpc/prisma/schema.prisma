@@ -3,8 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("SUPABASE_URL")
   relationMode = "prisma"
 }
 
@@ -41,7 +41,7 @@ model Comment {
   content   Json
   deletedAt DateTime?
   page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   replies   Comment[] @relation("CommentToComment")
   likes     Like[]
@@ -124,7 +124,7 @@ model Page {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  url       String    @unique(length: 191) @db.Text
+  url       String    @unique() @db.Text
   title     String?   @db.Text
   projectId String
   project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
