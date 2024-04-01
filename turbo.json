@@ -19,7 +19,7 @@
       "outputs": [".next/**"],
       "env": [
         "NEXT_PUBLIC_APP_URL",
-        "DATABASE_URL",
+        "SUPABASE_URL",
         "NEXTAUTH_SECRET",
         "EMAIL_API_KEY",
         "NEXT_PUBLIC_VAPID"
