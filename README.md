@@ -81,4 +81,4 @@ AGPL 3.0
 
 ## More products from author
 
-[![Quotion - Apple Notes to blogs in minutes](./.github/quotion.png)](https://quotion.co)
+[![Quotion - Apple Notes to blogs in minutes](https://quotion.co/images/root/og-image.png)](https://quotion.co)
