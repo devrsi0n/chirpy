@@ -1,7 +1,6 @@
 # Chirpy | [简体中文](./README-zh.md)
 
 [![Vercel](https://img.shields.io/github/deployments/devrsi0n/chirpy/production?logo=vercel)](https://github.com/devrsi0n/chirpy/deployments)
-[![Cypress](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/2p3w5f&logo=cypress)](https://dashboard.cypress.io/projects/2p3w5f/runs)
 [![Twitter Chirpy](https://img.shields.io/twitter/url?url=https%3A%2F%2Ftwitter.com%2FChirpyHQ)](https://twitter.com/ChirpyHQ)
 
 <img src="https://raw.githubusercontent.com/devrsi0n/chirpy/main/apps/main/public/images/marketing/github.png" width="800" alt="Comment widget" >
@@ -52,7 +51,6 @@ Although Chirpy is ready to serve you and your users, we're working hard to add 
 - <img src="https://trpc.io/img/logo.svg" width="50" alt="tRPC logo" />
 - <img src="https://www.prisma.io/images/apple-touch-icon.png" width="50" alt="Prisma logo" />
 - [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-- [![cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)](https://www.cypress.io/)
 - [![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)](https://jestjs.io/)
 - [next-auth](https://github.com/nextauthjs/next-auth)
 - [tiptap](https://tiptap.dev)
@@ -65,10 +63,6 @@ You're welcome to contribute to this project. Please follow the [CONTRIBUTING](C
 ## 🚀 Hosting platforms
 
 [![Powered by Vercel](https://raw.githubusercontent.com/abumalick/powered-by-vercel/master/powered-by-vercel.svg)](https://vercel.com?utm_source=chirpy.dev)
-
-[![DigitalOcean Referral Badge](https://web-platforms.sfo2.digitaloceanspaces.com/WWW/Badge%203.svg)](https://www.digitalocean.com/?refcode=92c5af253f6a&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge)
-
-<img src="https://planetscale.com/favicon.svg" width="80" alt="Planetscale logo" />
 
 ## 💅 Design system
 
