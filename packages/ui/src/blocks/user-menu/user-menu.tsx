@@ -44,7 +44,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
         {name && (
           <div className="mx-4 w-36 space-y-1 py-2">
             {plan && plan !== 'HOBBY' && (
-              <span className="float-right mt-1 w-fit select-none rounded-md border border-primary-700 px-2 py-1 text-xs font-normal text-primary-1000 first-letter:uppercase">
+              <span className="float-right mt-1 w-fit select-none rounded-md border border-primary-700 px-2 py-1 text-xs font-medium text-primary-1000 first-letter:uppercase">
                 {plan.toLowerCase()}
               </span>
             )}

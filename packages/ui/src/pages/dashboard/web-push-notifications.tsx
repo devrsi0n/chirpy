@@ -51,7 +51,7 @@ export function WebPushNotifications(props: WebPushForm) {
     <SettingsCard>
       <SettingsCard.Header>Web push</SettingsCard.Header>
       <SettingsCard.Body>
-        <Text className="mb-8" variant="secondary">
+        <Text className="-mt-2" variant="secondary">
           {`What's `}
           <Link variant="primary" href="/docs/features/notifications#web-push">
             web push
@@ -81,7 +81,7 @@ export function WebPushNotifications(props: WebPushForm) {
       <SettingsCard.Footer>
         <Button color="primary" variant="solid" onClick={handleSave}>
           {isLoading ? (
-            <Spinner className="!text-gray-100">Save</Spinner>
+            <Spinner className="!text-gray-100">Saving</Spinner>
           ) : (
             'Save'
           )}

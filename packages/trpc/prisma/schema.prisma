@@ -232,6 +232,8 @@ model Settings {
   webPushUsage   Boolean @default(true)
   webPushReceipt Boolean @default(true)
 
+  sdkKey String? @unique
+
   user   User   @relation(fields: [userId], references: [id])
   userId String @unique
 }

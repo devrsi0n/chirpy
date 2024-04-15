@@ -8,6 +8,7 @@ import { useForm } from '../../hooks';
 import { MUTATION_ERROR } from '../../strings';
 import { logger } from '../../utilities';
 import { DeleteAccountCard } from './delete-account';
+import { SDK } from './sdk';
 import { WebPushNotifications } from './web-push-notifications';
 
 export type AccountSettingsProps = {
@@ -24,6 +25,7 @@ export function AccountSettings(_props: AccountSettingsProps): JSX.Element {
         {settings ? (
           <>
             <EmailNotifications {...settings} />
+            <SDK sdkKey={settings.sdkKey || ''} />
             <WebPushNotifications {...settings} />
             <DeleteAccountCard />
           </>

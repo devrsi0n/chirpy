@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
 import { Heading } from '../../components/heading';
@@ -8,7 +9,7 @@ export type SettingsCardProps = {
 
 export function SettingsCard(props: SettingsCardProps): JSX.Element {
   return (
-    <section className="mt-10 rounded-md border">{props.children}</section>
+    <section className="mt-10 rounded-lg border">{props.children}</section>
   );
 }
 
@@ -18,11 +19,12 @@ SettingsCard.Footer = CardFooter;
 
 export type CardTitleProps = {
   children: React.ReactNode;
+  className?: string;
 };
 
 function CardHeader(props: CardTitleProps): JSX.Element {
   return (
-    <Heading as="h3" className="px-5 pt-5 font-medium">
+    <Heading as="h3" className={clsx('px-5 pt-5 font-medium', props.className)}>
       {props.children}
     </Heading>
   );
