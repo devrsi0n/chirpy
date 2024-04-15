@@ -15,7 +15,7 @@
     "dotenv-expand": "10.0.0",
     "eslint": "8.47.0",
     "typescript": "5.2.2",
-    "vite": "4.4.9"
+    "vite": "4.5.3"
   },
   "publishConfig": {
     "access": "public"
