@@ -44,18 +44,19 @@ export function SDK(props: SDKForm) {
         <div className="flex gap-2">
           <p
             className="rounded border p-2 text-base text-gray-1000"
-            onClick={() => {
+            onClick={async () => {
               if (!props.sdkKey) {
                 console.error(`No SDK key found`);
                 return;
               }
+              await navigator.clipboard.writeText(props.sdkKey);
               showToast({
                 title: 'The API key is copied',
                 type: 'success',
               });
             }}
           >
-            {props.sdkKey || 'Click to generate'}
+            {props.sdkKey || 'Click to generate ->'}
           </p>
           <Button
             disabled={

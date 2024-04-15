@@ -2,7 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "^db:generate"]
+      "dependsOn": ["^build", "^generate"]
     },
     "test": {
       "outputs": []
@@ -11,7 +11,7 @@
       "outputs": []
     },
     "dev": {
-      "dependsOn": ["^db:generate"],
+      "dependsOn": ["^generate"],
       "cache": false
     },
     "@chirpy-dev/main-app#build": {
@@ -34,10 +34,10 @@
     "build:local": {
       "cache": false
     },
-    "db:generate": {
+    "generate": {
       "cache": false
     },
-    "db:push": {
+    "db": {
       "cache": false
     }
   },

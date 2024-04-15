@@ -23,3 +23,6 @@ storybook-static/
 yarn.lock
 
 config.yaml
+lib
+.env
+.env.*
