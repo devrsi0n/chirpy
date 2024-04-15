@@ -115,11 +115,11 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
       vite:
-        specifier: 4.4.9
-        version: 4.4.9(@types/node@18.16.18)
+        specifier: 4.5.3
+        version: 4.5.3(@types/node@18.16.18)
       vite-plugin-dts:
         specifier: 2.3.0
-        version: 2.3.0(@types/node@18.16.18)(vite@4.4.9)
+        version: 2.3.0(@types/node@18.16.18)(vite@4.5.3)
 
   apps/emails:
     dependencies:
@@ -405,8 +405,8 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
       vite:
-        specifier: 4.4.9
-        version: 4.4.9(@types/node@18.16.18)
+        specifier: 4.5.3
+        version: 4.5.3(@types/node@18.16.18)
 
   packages/analytics:
     dependencies:
@@ -24975,7 +24975,7 @@ packages:
       d3-timer: 3.0.1
     dev: false
 
-  /vite-plugin-dts@2.3.0(@types/node@18.16.18)(vite@4.4.9):
+  /vite-plugin-dts@2.3.0(@types/node@18.16.18)(vite@4.5.3):
     resolution: {integrity: sha512-WbJgGtsStgQhdm3EosYmIdTGbag5YQpZ3HXWUAPCDyoXI5qN6EY0V7NXq0lAmnv9hVQsvh0htbYcg0Or5Db9JQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -24991,15 +24991,15 @@ packages:
       kolorist: 1.8.0
       magic-string: 0.29.0
       ts-morph: 18.0.0
-      vite: 4.4.9(@types/node@18.16.18)
+      vite: 4.5.3(@types/node@18.16.18)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
     dev: true
 
-  /vite@4.4.9(@types/node@18.16.18):
-    resolution: {integrity: sha512-2mbUn2LlUmNASWwSCNSJ/EG2HuSRTnVNaydp6vMCm5VIqJsjMfbIWtbH2kDuwUVW5mMUKKZvGPX/rqeqVvv1XA==}
+  /vite@4.5.3(@types/node@18.16.18):
+    resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
