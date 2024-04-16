@@ -73,12 +73,25 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
     1500,
   );
   const activeMode = useActiveColorMode();
-  const handleSaveBackground = async (color: string) => {
-    const newTheme = mergeDeep(widgetTheme || {}, {
-      colors: {
-        [activeMode]: { bg: color },
+  const handleSaveBackground = async (color: string | null) => {
+    let newTheme: Theme = mergeDeep(
+      widgetTheme || {
+        colors: {
+          light: {},
+          dark: {},
+        },
       },
-    }) as Theme;
+      {},
+    );
+    if (color) {
+      newTheme = mergeDeep(newTheme, {
+        colors: {
+          [activeMode]: { bg: color },
+        },
+      }) as Theme;
+    } else {
+      delete newTheme.colors[activeMode].bg;
+    }
     await saveTheme(newTheme);
   };
   const handleSavePrimaryColor = async (colorKey: string) => {
@@ -130,6 +143,7 @@ export function ThemeEditor(props: ThemeEditorProps): JSX.Element {
                     '#fff',
                 )}
                 onSelectColor={handleSaveBackground}
+                onReset={() => handleSaveBackground(null)}
               />
             </ClientOnly>
           </div>

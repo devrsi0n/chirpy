@@ -73,7 +73,7 @@ export function DashboardHome({
 
   return (
     <SiteLayout title="Dashboard">
-      <section className="space-y-10">
+      <section className="space-y-10 pb-48">
         <div className="flex flex-col items-start space-y-5 sm:flex-row sm:justify-between sm:space-x-2 sm:space-y-0">
           <PageTitle>Dashboard</PageTitle>
           <CreateProjectButton

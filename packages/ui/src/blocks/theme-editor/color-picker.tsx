@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { IconButton, Popover, Text } from '../../components';
+import { Button, IconButton, Popover, Text } from '../../components';
 import { hexToHSL } from './utilities';
 
 export type ColorSeriesPickerProps = {
@@ -68,6 +68,7 @@ export type ColorPickerProps = {
   hintText: string;
   defaultValue: string;
   onSelectColor: (color: string) => void;
+  onReset: () => void;
 };
 
 export function ColorPicker({
@@ -75,6 +76,7 @@ export function ColorPicker({
   hintText,
   onSelectColor,
   defaultValue,
+  onReset,
 }: ColorPickerProps): JSX.Element {
   const [value, setValue] = React.useState(defaultValue);
   return (
@@ -85,17 +87,26 @@ export function ColorPicker({
           {hintText}
         </Text>
       </div>
-      <input
-        className={`hover:cursor-pointer [&::-moz-color-swatch-wrapper]:p-0 [&::-moz-color-swatch]:rounded-full [&::-moz-color-swatch]:border-gray-600 [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-gray-600 ${pickerButtonStyle}`}
-        type="color"
-        name="colorPicker"
-        value={value}
-        onChange={(e) => {
-          const color = e.target.value;
-          setValue(color);
-          onSelectColor(hexToHSL(color));
-        }}
-      />
+      <div className="flex items-center gap-8">
+        <input
+          className={`hover:cursor-pointer [&::-moz-color-swatch-wrapper]:p-0 [&::-moz-color-swatch]:rounded-full [&::-moz-color-swatch]:border-gray-600 [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-gray-600 ${pickerButtonStyle}`}
+          type="color"
+          name="colorPicker"
+          value={value}
+          onChange={(e) => {
+            const color = e.target.value;
+            setValue(color);
+            onSelectColor(hexToHSL(color));
+          }}
+        />
+        <Button
+          title="Reset to transparent background"
+          size="sm"
+          onClick={onReset}
+        >
+          Reset
+        </Button>
+      </div>
     </section>
   );
 }

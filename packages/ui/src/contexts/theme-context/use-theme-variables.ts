@@ -1,5 +1,5 @@
 import { Theme } from '@chirpy-dev/types';
-import { whiteA, blackA } from '@radix-ui/colors';
+import { blackA, whiteA } from '@radix-ui/colors';
 import * as React from 'react';
 
 import { siteTheme } from './site-theme';
@@ -23,16 +23,19 @@ export function useThemeVariables(theme?: Theme, selectors?: Selectors) {
     ...selectors,
   };
   const styles = React.useMemo(() => {
+    // Ignore site background, default widget background is transparent
+    const { bg: _, ...lightColors } = siteColors.light;
+    const { bg: __, ...darkColors } = siteColors.dark;
     const lightTheme = {
       colors: {
         ...FIXED_COLORS,
-        ...siteColors.light,
+        ...lightColors,
         ...theme?.colors.light,
       },
     };
     const darkTheme = {
       colors: {
-        ...siteColors.dark,
+        ...darkColors,
         ...theme?.colors.dark,
       },
     };
