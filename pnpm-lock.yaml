@@ -613,6 +613,9 @@ importers:
         specifier: 18.16.18
         version: 18.16.18
     devDependencies:
+      dotenv:
+        specifier: 16.3.1
+        version: 16.3.1
       typescript:
         specifier: 5.2.2
         version: 5.2.2

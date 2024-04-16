@@ -42,9 +42,8 @@ async function getProject(req: NextApiRequest, res: NextApiResponse) {
     res.status(401).end('Unauthorized, invalid API key');
     return;
   }
-  res.status(200).json({
-    project: setting.user.projects[0],
-  });
+  // console.log('setting', setting);
+  res.status(200).json(setting.user.projects[0] || null);
 }
 
 async function createProject(req: NextApiRequest, res: NextApiResponse) {

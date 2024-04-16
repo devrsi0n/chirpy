@@ -6,7 +6,10 @@ type RequestProps = {
 };
 
 export class ChirpySDK {
-  constructor(private apiKey: string) {}
+  constructor(
+    private apiKey: string,
+    private origin: string = 'https://chirpy.dev',
+  ) {}
 
   public getProject(domain: string): Promise<Project> {
     return this.request({ searchParams: { domain } });
@@ -21,7 +24,7 @@ export class ChirpySDK {
   }
 
   private async request({ searchParams, method = 'GET' }: RequestProps) {
-    const url = new URL('https://chirpy.dev/api/sdk/project');
+    const url = new URL(`${this.origin}/api/sdk/project`);
     Object.entries(searchParams).forEach(([key, value]) => {
       url.searchParams.set(key, value);
     });
