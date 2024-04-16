@@ -63,11 +63,28 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
       sdkKey: apiKey,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          projects: {
+            select: {
+              id: true,
+            },
+          },
+        },
+        select: {
+          plan: true,
+        },
+      },
     },
   });
   if (!setting) {
     res.status(401).end('Unauthorized, invalid API key');
+    return;
+  }
+  if (setting.user.plan === 'PRO' && setting.user.projects.length >= 10) {
+    res
+      .status(403)
+      .end('Forbidden, too many projects. Please upgrade to Enterprise plan');
     return;
   }
   const proj = await prisma.project.create({
@@ -97,11 +114,27 @@ async function deleteProject(req: NextApiRequest, res: NextApiResponse) {
       sdkKey: apiKey,
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          projects: {
+            where: {
+              domain,
+            },
+          },
+        },
+      },
     },
   });
   if (!setting) {
     res.status(401).end('Unauthorized, invalid API key');
+    return;
+  }
+  if (!setting.user.projects[0]) {
+    res
+      .status(401)
+      .end(
+        'Unauthorized, cannot delete a project that does not belong to the caller',
+      );
     return;
   }
   await prisma.project.delete({
