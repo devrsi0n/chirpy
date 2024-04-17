@@ -64,6 +64,11 @@ export const getStaticProps: GetStaticProps<
               select: {
                 id: true,
                 theme: true,
+                user: {
+                  select: {
+                    plan: true,
+                  },
+                },
               },
             },
           },
@@ -84,6 +89,7 @@ export const getStaticProps: GetStaticProps<
         pageURL: data.page.url,
         theme: (data.page.project.theme as Theme) || null,
         isWidget: true,
+        plan: data.page.project.user?.plan || 'HOBBY',
       },
       revalidate: 600,
     };

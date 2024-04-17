@@ -12,9 +12,10 @@ export type CommonPageProps = {
 
 export type CommonWidgetProps = {
   projectId: string;
+  isWidget: true;
+  plan: 'HOBBY' | 'PRO' | 'ENTERPRISE';
   theme?: Theme;
   session?: Session;
-  isWidget: true;
   trpcState?: DehydratedState;
 };
 

@@ -40,7 +40,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
           {/* @ts-ignore */}
           <CommentForest comments={comments} />
         </div>
-        <PoweredBy />
+        {props.plan === 'HOBBY' && <PoweredBy />}
       </CommentContextProvider>
     </WidgetLayout>
   );

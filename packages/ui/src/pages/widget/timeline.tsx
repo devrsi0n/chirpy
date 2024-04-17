@@ -52,7 +52,7 @@ export function CommentTimelineWidget(
         </div>
 
         {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
-        <PoweredBy />
+        {props.plan === 'HOBBY' && <PoweredBy />}
       </CommentContextProvider>
     </WidgetLayout>
   );
