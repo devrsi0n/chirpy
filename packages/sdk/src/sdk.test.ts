@@ -7,8 +7,11 @@ async function test() {
     process.env.CHIRPY_SDK_KEY!,
     'http://localhost:3000',
   );
-  const proj = await sdk.getProject('chirpy.dev');
-  console.log(proj);
+  const page = await sdk.getPage('http://localhost:3000/play');
+  console.log(page);
+  const user = await sdk.createUser('pickle@mac.com', 'Pickle');
+  console.log(user);
+  await sdk.linkPageAuthor('http://localhost:3000/play', user.id);
 }
 
 test();

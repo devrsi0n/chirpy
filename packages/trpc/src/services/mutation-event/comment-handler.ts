@@ -33,29 +33,49 @@ export async function handleCommentEvent(
     const commentId = event.comment.id;
     const body = getTextFromRteDoc(event.comment.content as JSONContent);
 
-    const siteOwnerData = await getSiteOwnerByTriggeredCommentId(commentId);
+    const ownerData = await getSiteOwnerAndPageAuthor(commentId);
 
-    const owner = siteOwnerData?.page.project.user;
-    if (!siteOwnerData || !owner?.id) {
+    const owner = ownerData?.page.project.user;
+    if (!ownerData || !owner?.id) {
       throw new Error(
         `Can't find the site owner for comment id (${commentId})`,
       );
     }
-    const url = siteOwnerData.page.url;
+    const url = ownerData.page.url;
     revalidatePromises.push(revalidateCommentWidget(url, res));
     const ownerId = owner.id;
     const triggeredById = event.comment.userId;
     const triggeredBy = {
       id: triggeredById,
-      name: siteOwnerData.user.name || siteOwnerData.user.username || 'Unnamed',
+      name: ownerData.user.name || ownerData.user.username || 'Unnamed',
     };
-    if (owner.id !== triggeredById) {
+    if (ownerId !== triggeredById) {
       // Notify the owner of the site that a comment has been added
       notificationPayloads.push({
         recipient: {
           id: ownerId,
           email: owner.email,
           name: owner.name || owner.username || 'Unnamed',
+        },
+        type: 'ReceivedAComment',
+        triggeredBy,
+        url,
+        body,
+        contextId: commentId,
+      });
+    }
+    const pageAuthor = ownerData?.page.author;
+    if (
+      pageAuthor &&
+      pageAuthor.id !== triggeredById &&
+      pageAuthor.id !== ownerId
+    ) {
+      // Notify the author of the page that a comment has been added
+      notificationPayloads.push({
+        recipient: {
+          id: pageAuthor.id,
+          email: pageAuthor.email,
+          name: pageAuthor.name || pageAuthor.username || 'Unnamed',
         },
         type: 'ReceivedAComment',
         triggeredBy,
@@ -92,9 +112,9 @@ export async function handleCommentEvent(
   } else if (event.op === 'DELETE') {
     const { comment } = event;
     // Delete the existing notification sent to the owner of site
-    const siteOwnerData = await getSiteOwnerByTriggeredCommentId(comment.id);
-    const ownerId = siteOwnerData?.page.project.user?.id;
-    if (!siteOwnerData || !ownerId) {
+    const ownerData = await getSiteOwnerAndPageAuthor(comment.id);
+    const ownerId = ownerData?.page.project.user?.id;
+    if (!ownerData || !ownerId) {
       throw new Error(
         `Can't find the site owner for comment id (${comment.id})`,
       );
@@ -105,6 +125,19 @@ export async function handleCommentEvent(
       await deleteNotificationMessage({
         triggeredById: comment.userId,
         recipientId: ownerId,
+        type: 'ReceivedAComment',
+        contextId,
+      });
+    }
+    const pageAuthor = ownerData.page.author;
+    if (
+      pageAuthor &&
+      pageAuthor.id !== comment.userId &&
+      pageAuthor.id !== ownerId
+    ) {
+      await deleteNotificationMessage({
+        triggeredById: comment.userId,
+        recipientId: pageAuthor.id,
         type: 'ReceivedAComment',
         contextId,
       });
@@ -190,7 +223,7 @@ export async function handleCommentEvent(
   return;
 }
 
-export async function getSiteOwnerByTriggeredCommentId(commentId: string) {
+export async function getSiteOwnerAndPageAuthor(commentId: string) {
   return await prisma.comment.findFirst({
     where: {
       id: commentId,
@@ -200,6 +233,14 @@ export async function getSiteOwnerByTriggeredCommentId(commentId: string) {
         select: {
           id: true,
           url: true,
+          author: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              username: true,
+            },
+          },
           project: {
             select: {
               user: {

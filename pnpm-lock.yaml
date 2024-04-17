@@ -613,6 +613,9 @@ importers:
         specifier: 18.16.18
         version: 18.16.18
     devDependencies:
+      '@chirpy-dev/tsconfigs':
+        specifier: workspace:*
+        version: link:../tsconfigs
       dotenv:
         specifier: 16.3.1
         version: 16.3.1

@@ -115,7 +115,10 @@ function CommentWidgetPreviewInternal(
   }, [showToast]);
   const commentContext: CommentContextType = React.useMemo(
     () => ({
-      pageId: PAGE_ID,
+      page: {
+        id: PAGE_ID,
+        authorId: null,
+      },
       projectId: PROJECT_ID,
       createAComment,
       deleteAComment,

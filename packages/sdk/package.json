@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/sdk",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "license": "AGPL-3.0-or-later",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -9,6 +9,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
+    "@chirpy-dev/tsconfigs": "workspace:*",
     "dotenv": "16.3.1",
     "typescript": "5.2.2"
   },

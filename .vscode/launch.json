@@ -6,10 +6,25 @@
   "configurations": [
     {
       "name": "Next.js: debug server-side",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "npm run debug",
-      "cwd": "${workspaceFolder}/apps/main"
+      "runtimeExecutable": "${workspaceFolder}/node_modules/next/dist/bin/next",
+      "env": {
+        "NODE_OPTIONS": "--inspect"
+      },
+      "cwd": "${workspaceFolder}/apps/main",
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${workspaceRoot}/apps/main/*"
+      },
+      "console": "integratedTerminal",
+
+      // Files to exclude from debugger (e.g. call stack)
+      "skipFiles": [
+        // Node.js internal core modules
+        "<node_internals>/**",
+        // Ignore all dependencies (optional)
+        "${workspaceFolder}/apps/main/node_modules/**"
+      ]
     },
     {
       "type": "node",

@@ -7,7 +7,10 @@ import { UseToggleALikeAction } from './use-toggle-a-like-action';
 
 export type CommentContextType = {
   projectId: string;
-  pageId: string;
+  page: {
+    id: string;
+    authorId: string | null;
+  };
   createAComment: UseCreateAComment;
   deleteAComment: UseDeleteAComment;
   toggleALikeAction: UseToggleALikeAction;
@@ -16,7 +19,10 @@ export type CommentContextType = {
 
 export const CommentContext = React.createContext<CommentContextType>({
   projectId: '',
-  pageId: '',
+  page: {
+    id: '',
+    authorId: null,
+  },
   createAComment: asyncNoop,
   deleteAComment: asyncNoop,
   toggleALikeAction: asyncNoop,

@@ -14,8 +14,11 @@ import { useRefetchInterval } from './use-refetch-interval';
 
 export type CommentTimelineWidgetProps = CommonWidgetProps & {
   commentId: string;
-  pageId: string;
-  pageURL: string;
+  page: {
+    id: string;
+    url: string;
+    authorId: string | null;
+  };
 };
 
 export function CommentTimelineWidget(
@@ -33,11 +36,11 @@ export function CommentTimelineWidget(
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
-      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
+      <CommentContextProvider projectId={props.projectId} page={props.page}>
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
           <Link
-            href={`/widget/comment/${encodeURIComponent(props.pageURL)}`}
+            href={`/widget/comment/${encodeURIComponent(props.page.url)}`}
             variant="plain"
           >
             <IconButton className="translate-x-1">

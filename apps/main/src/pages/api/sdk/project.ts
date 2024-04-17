@@ -1,5 +1,6 @@
 import { prisma } from '@chirpy-dev/trpc';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { z } from 'zod';
 
 import { getAPIHandler } from '$/server/common/api-handler';
 
@@ -46,6 +47,11 @@ async function getProject(req: NextApiRequest, res: NextApiResponse) {
   res.status(200).json(setting.user.projects[0] || null);
 }
 
+const SCHEMA = z.object({
+  domain: z.string(),
+  name: z.string(),
+});
+
 async function createProject(req: NextApiRequest, res: NextApiResponse) {
   const auth = req.headers.authorization;
   const apiKey = auth?.split(' ')[1];
@@ -53,11 +59,7 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
     res.status(401).end('Unauthorized, missing API key');
     return;
   }
-  const domain = req.query.domain as string;
-  if (!domain) {
-    res.status(400).end('Bad request, missing domain');
-    return;
-  }
+
   const setting = await prisma.settings.findUnique({
     where: {
       sdkKey: apiKey,
@@ -87,14 +89,26 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
       .end('Forbidden, too many projects. Please upgrade to Enterprise plan');
     return;
   }
-  const proj = await prisma.project.create({
-    data: {
-      name: req.query.name as string,
-      domain,
-      userId: setting.user.id,
-    },
-  });
-  res.status(200).json(proj);
+  const result = SCHEMA.safeParse(JSON.parse(req.body));
+  if (!result.success) {
+    res.status(400).end(`Bad request, ${result.error}`);
+    return;
+  }
+  try {
+    const proj = await prisma.project.create({
+      data: {
+        name: result.data.name,
+        domain: result.data.domain,
+        userId: setting.user.id,
+      },
+    });
+    res.status(200).json(proj);
+  } catch (error) {
+    console.error('create project failed', error);
+    res
+      .status(400)
+      .end(`Bad request, create project failed, double check your input`);
+  }
 }
 
 async function deleteProject(req: NextApiRequest, res: NextApiResponse) {

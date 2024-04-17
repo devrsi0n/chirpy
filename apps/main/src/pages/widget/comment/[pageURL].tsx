@@ -1,16 +1,14 @@
 import { prisma, ssg } from '@chirpy-dev/trpc';
-import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
+import { Theme } from '@chirpy-dev/types';
+import { PageCommentProps } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
   GetStaticPropsResult,
-  InferGetStaticPropsType,
 } from 'next';
 import { log } from 'next-axiom';
 import superjson from 'superjson';
-
-export type PageCommentProps = InferGetStaticPropsType<typeof getStaticProps>;
 
 /**
  * Comment tree widget for a page
@@ -48,10 +46,7 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
   return { paths, fallback: 'blocking' };
 };
 
-type StaticProps = PathParams &
-  CommonWidgetProps & {
-    pageId: string;
-  };
+type StaticProps = PageCommentProps;
 type StaticError = {
   error: string;
 };
@@ -72,6 +67,22 @@ export const getStaticProps: GetStaticProps<
     where: {
       url: pageURL,
     },
+    select: {
+      id: true,
+      url: true,
+      authorId: true,
+      project: {
+        select: {
+          id: true,
+          theme: true,
+          user: {
+            select: {
+              plan: true,
+            },
+          },
+        },
+      },
+    },
   });
   const pageId = page?.id;
   if (!pageId) {
@@ -83,37 +94,18 @@ export const getStaticProps: GetStaticProps<
       url: pageURL,
     });
 
-    const pageByPk = await prisma.page.findUnique({
-      where: {
-        id: pageId,
-      },
-      select: {
-        project: {
-          select: {
-            id: true,
-            theme: true,
-            user: {
-              select: {
-                plan: true,
-              },
-            },
-          },
-        },
-      },
-    });
-    if (!pageByPk?.project.id) {
-      log.error(`Can't find theme info`);
+    if (!page.project.id) {
+      log.error(`Can't find  the project`, page);
       return { notFound: true };
     }
     return {
       props: {
         trpcState: ssg.dehydrate(),
-        pageURL,
-        pageId,
-        projectId: pageByPk.project.id,
-        theme: (pageByPk.project.theme as Theme) || null,
+        page,
+        projectId: page.project.id,
+        theme: (page.project.theme as Theme) || null,
         isWidget: true,
-        plan: pageByPk.project.user?.plan || 'HOBBY',
+        plan: page.project.user?.plan || 'HOBBY',
       },
       revalidate: 5 * 60,
     };

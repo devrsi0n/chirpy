@@ -8,8 +8,11 @@ import { CommentContextProvider } from '../../contexts';
 import { useRefetchInterval } from './use-refetch-interval';
 
 export type PageCommentProps = CommonWidgetProps & {
-  pageURL: string;
-  pageId: string;
+  page: {
+    id: string;
+    url: string;
+    authorId: string | null;
+  };
 };
 
 /**
@@ -20,7 +23,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
   const refetchInterval = useRefetchInterval();
   const { data: comments } = trpc.comment.forest.useQuery(
     {
-      url: props.pageURL,
+      url: props.page.url,
     },
     {
       refetchInterval,
@@ -35,7 +38,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment">
-      <CommentContextProvider projectId={props.projectId} pageId={props.pageId}>
+      <CommentContextProvider projectId={props.projectId} page={props.page}>
         <div className="pt-1">
           {/* @ts-ignore */}
           <CommentForest comments={comments} />

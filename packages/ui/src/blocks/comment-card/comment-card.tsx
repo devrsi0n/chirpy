@@ -55,7 +55,8 @@ export function CommentCard({
 }: CommentCardProps): JSX.Element {
   const { image, name, username, email } = author;
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-  const { projectId, deleteAComment, createAComment } = useCommentContext();
+  const { projectId, page, deleteAComment, createAComment } =
+    useCommentContext();
   const { showToast } = useToast();
   const handleClickConfirmDelete = () => {
     deleteAComment(commentId);
@@ -102,6 +103,7 @@ export function CommentCard({
     data?.editableProjectIds?.includes(projectId);
   const createdAtDate = cpDayjs(createdAt);
   const [showDelDialog, setShowDelDialog] = React.useState(false);
+  const isPageAuthor = page.authorId === author.id;
 
   if (isDeleted) {
     return <DeletedComment />;
@@ -127,15 +129,22 @@ export function CommentCard({
       />
       <div className="flex-1">
         <div className="flex flex-row items-start justify-between">
-          <div className="flex flex-row items-start space-x-4">
-            <Text bold className="!leading-none" suppressHydrationWarning>
-              {name}
-            </Text>
+          <div className="space-y-2">
+            <div className="flex flex-row items-center gap-3">
+              <Text bold className="!leading-none" suppressHydrationWarning>
+                {name}
+              </Text>
+              {isPageAuthor && (
+                <p className="rounded-full border border-primary-600 px-1.5 py-1 text-xs leading-none text-primary-900">
+                  Author
+                </p>
+              )}
+            </div>
             <Text
               variant="secondary"
               as="time"
               title={createdAtDate.format('YYYY-MM-DD HH:mm:ss')}
-              className="cursor-default !leading-none"
+              className="block cursor-default !leading-none"
               dateTime={createdAtDate.toISOString()}
               suppressHydrationWarning
             >

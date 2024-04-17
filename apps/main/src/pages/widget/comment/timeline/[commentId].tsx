@@ -60,6 +60,7 @@ export const getStaticProps: GetStaticProps<
           select: {
             id: true,
             url: true,
+            authorId: true,
             project: {
               select: {
                 id: true,
@@ -76,17 +77,16 @@ export const getStaticProps: GetStaticProps<
       },
     });
     if (!data?.page.project.id) {
-      log.error(`Can't find theme info`);
+      log.error(`Can't find the project`, data || undefined);
       return { notFound: true };
     }
 
     return {
       props: {
         trpcState: ssg.dehydrate(),
-        pageId: data.page.id,
+        page: data.page,
         projectId: data.page.project.id,
         commentId,
-        pageURL: data.page.url,
         theme: (data.page.project.theme as Theme) || null,
         isWidget: true,
         plan: data.page.project.user?.plan || 'HOBBY',

@@ -6,13 +6,17 @@ import { useCreateAComment } from './use-create-a-comment';
 import { useDeleteAComment } from './use-delete-a-comment';
 import { useToggleALikeAction } from './use-toggle-a-like-action';
 
-export type CommentContextProviderProps = React.PropsWithChildren<
-  Pick<CommentContextType, 'projectId' | 'pageId'>
->;
+export type CommentContextProviderProps = React.PropsWithChildren<{
+  projectId: string;
+  page: {
+    id: string;
+    authorId: string | null;
+  };
+}>;
 
 export function CommentContextProvider(props: CommentContextProviderProps) {
   const createAComment = useCreateAComment({
-    pageId: props.pageId,
+    pageId: props.page.id,
   });
   const deleteAComment = useDeleteAComment();
   const toggleALikeAction = useToggleALikeAction();
@@ -26,7 +30,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
   const value: CommentContextType = React.useMemo(
     () => ({
       projectId: props.projectId,
-      pageId: props.pageId,
+      page: props.page,
       createAComment,
       deleteAComment,
       toggleALikeAction,
@@ -34,7 +38,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
     }),
     [
       props.projectId,
-      props.pageId,
+      props.page,
       createAComment,
       deleteAComment,
       toggleALikeAction,
