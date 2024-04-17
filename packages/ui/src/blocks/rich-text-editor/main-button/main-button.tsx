@@ -2,11 +2,12 @@ import type { ICheckToxicText, RTEValue } from '@chirpy-dev/types';
 import { getTextFromRteValue } from '@chirpy-dev/utils';
 import * as React from 'react';
 
-import { Button, ButtonProps } from '../../../components/button';
+import { ButtonProps } from '../../../components/button';
 import { IconLoader, IconSend } from '../../../components/icons';
 import { useCurrentUser } from '../../../contexts/current-user-context';
 import { useNotificationContext } from '../../../contexts/notification-context';
 import { useAsync } from '../../../hooks/use-async';
+import { useEventListener } from '../../../hooks/use-event-listener';
 import { SignInButton } from '../../sign-in-button';
 import { AskNotificationPermissionPopover } from './ask-notification-permission-popover';
 import { ToxicTextPopover } from './toxic-text-popover';
@@ -71,13 +72,17 @@ export function MainButton({
       <span>Post</span>
     </>
   );
+  useEventListener(
+    'keydown',
+    (e) => {
+      if (isReply && e.key === 'Escape') {
+        onClickDismiss?.();
+      }
+    },
+    window,
+  );
   return (
     <div className="flex flex-row justify-end space-x-2">
-      {isReply && (
-        <Button variant="text" size="sm" onClick={onClickDismiss}>
-          Cancel
-        </Button>
-      )}
       {isSignIn ? (
         !supportNotification || didRegister || didDeny || askNextTime ? (
           <ToxicTextPopover

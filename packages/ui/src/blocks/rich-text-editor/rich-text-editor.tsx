@@ -51,7 +51,7 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
         },
       }),
       Placeholder.configure({
-        placeholder,
+        placeholder: `${placeholder}${isReply ? ' Esc to close' : ' '}`,
         emptyEditorClass: 'rtePlaceholder',
       }),
       Image.configure({
