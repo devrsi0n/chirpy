@@ -82,7 +82,7 @@ export class ChirpySDK {
       return data;
     } catch {
       // ignore, no json response
-      console.log(`No JSON response, text: ${await res.text()}`);
+      console.log(`No JSON response`);
     }
   }
 }

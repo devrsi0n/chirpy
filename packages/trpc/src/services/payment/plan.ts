@@ -8,7 +8,7 @@ type PlanPrice = {
 };
 
 export type Plan = {
-  name: 'Hobby' | 'Pro';
+  name: 'Hobby' | 'Pro' | 'Enterprise';
   type: PlanUnion;
   price: {
     test: PlanPrice;
@@ -44,7 +44,7 @@ export const PLANS = [
       test: {
         amount: 6,
         priceId: 'price_1NZ7FiFkzx77ql6gW7zIxmDK',
-        pageviews: 10_000,
+        pageviews: 1000,
         maxProjectNum: 3,
       },
       production: {
@@ -52,6 +52,24 @@ export const PLANS = [
         priceId: 'price_1Nc0cgFkzx77ql6gxoD33Lv0',
         pageviews: 10_000,
         maxProjectNum: 10,
+      },
+    },
+  },
+  {
+    name: 'Enterprise',
+    type: 'ENTERPRISE',
+    price: {
+      test: {
+        amount: 99,
+        priceId: '',
+        pageviews: 1000,
+        maxProjectNum: 9,
+      },
+      production: {
+        amount: 99,
+        priceId: '',
+        pageviews: 9_999_999,
+        maxProjectNum: 99,
       },
     },
   },
