@@ -95,8 +95,16 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
   try {
-    const proj = await prisma.project.create({
-      data: {
+    const proj = await prisma.project.upsert({
+      where: {
+        domain: result.data.domain,
+      },
+      update: {
+        name: result.data.name,
+        domain: result.data.domain,
+        userId: setting.user.id,
+      },
+      create: {
         name: result.data.name,
         domain: result.data.domain,
         userId: setting.user.id,

@@ -147,6 +147,7 @@ export function CommentCard({
               className="block cursor-default !leading-none"
               dateTime={createdAtDate.toISOString()}
               suppressHydrationWarning
+              size="sm"
             >
               {createdAtDate.fromNow()}
             </Text>
