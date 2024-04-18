@@ -33,26 +33,45 @@ async function linkAuthor(req: NextApiRequest, res: NextApiResponse) {
   }
   const result = SCHEMA.safeParse(JSON.parse(req.body));
   if (!result.success) {
-    res.status(400).end('Bad request, expect pageURL and authorId');
+    res.status(400).end('Bad request, expect pageURL, email and name');
     return;
   }
-  const author = await prisma.user.upsert({
-    where: {
-      email: result.data.email,
-    },
-    create: {
-      email: result.data.email,
-      name: result.data.name,
-    },
-    update: {
-      name: result.data.name,
-    },
-  });
-  await prisma.page.update({
+  const [author, proj] = await Promise.all([
+    prisma.user.upsert({
+      where: {
+        email: result.data.email,
+      },
+      create: {
+        email: result.data.email,
+        name: result.data.name,
+      },
+      update: {
+        name: result.data.name,
+      },
+    }),
+    // Don'r upsert here, need to check user plan limitation first
+    prisma.project.findUnique({
+      where: {
+        domain: new URL(result.data.pageUrl).hostname,
+      },
+    }),
+  ]);
+  if (!proj) {
+    res
+      .status(400)
+      .end('Bad request, invalid page URL, please create a project first');
+    return;
+  }
+  await prisma.page.upsert({
     where: {
       url: result.data.pageUrl,
     },
-    data: {
+    create: {
+      url: result.data.pageUrl,
+      projectId: proj.id,
+      authorId: author.id,
+    },
+    update: {
       authorId: author.id,
     },
   });
