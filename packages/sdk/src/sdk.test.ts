@@ -11,7 +11,11 @@ async function test() {
   console.log(page);
   const user = await sdk.createUser('pickle@mac.com', 'Pickle');
   console.log(user);
-  await sdk.linkPageAuthor('http://localhost:3000/play', user.id);
+  await sdk.linkPageAuthor({
+    pageUrl: 'http://localhost:3000/play',
+    email: 'pickle@mac.com',
+    name: 'Pickle',
+  });
 }
 
 test();

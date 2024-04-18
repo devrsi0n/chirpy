@@ -7,6 +7,12 @@ type RequestProps = {
   body?: Record<string, any>;
 };
 
+type LinkPageAuthorParams = {
+  pageUrl: string;
+  email: string;
+  name: string;
+};
+
 export class ChirpySDK {
   constructor(
     private apiKey: string,
@@ -37,13 +43,10 @@ export class ChirpySDK {
     return this.request({ path: '/api/sdk/page', searchParams: { url } });
   }
 
-  public linkPageAuthor(pageUrl: string, authorId: string): Promise<void> {
+  public linkPageAuthor(params: LinkPageAuthorParams): Promise<void> {
     return this.request({
       path: '/api/sdk/page/link-author',
-      body: {
-        pageUrl,
-        authorId,
-      },
+      body: params,
       method: 'POST',
     });
   }
@@ -86,7 +89,7 @@ export class ChirpySDK {
       return data;
     } catch {
       // ignore, no json response
-      console.log(`No JSON response, ${await res.text()}`);
+      console.log(`No JSON response, text: ${await res.text()}`);
     }
   }
 }

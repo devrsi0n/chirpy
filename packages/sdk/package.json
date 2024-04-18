@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/sdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "AGPL-3.0-or-later",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

@@ -11,7 +11,8 @@ export default handler;
 
 const SCHEMA = z.object({
   pageUrl: z.string().url(),
-  authorId: z.string(),
+  email: z.string().email(),
+  name: z.string(),
 });
 
 async function linkAuthor(req: NextApiRequest, res: NextApiResponse) {
@@ -35,12 +36,24 @@ async function linkAuthor(req: NextApiRequest, res: NextApiResponse) {
     res.status(400).end('Bad request, expect pageURL and authorId');
     return;
   }
+  const author = await prisma.user.upsert({
+    where: {
+      email: result.data.email,
+    },
+    create: {
+      email: result.data.email,
+      name: result.data.name,
+    },
+    update: {
+      name: result.data.name,
+    },
+  });
   await prisma.page.update({
     where: {
       url: result.data.pageUrl,
     },
     data: {
-      authorId: result.data.authorId,
+      authorId: author.id,
     },
   });
   res.status(200).end('ok');
