@@ -605,17 +605,13 @@ importers:
         version: 2.8.8
 
   packages/sdk:
-    dependencies:
-      '@prisma/client':
-        specifier: 5.11.0
-        version: 5.11.0(prisma@5.11.0)
-      '@types/node':
-        specifier: 18.16.18
-        version: 18.16.18
     devDependencies:
       '@chirpy-dev/tsconfigs':
         specifier: workspace:*
         version: link:../tsconfigs
+      '@types/node':
+        specifier: 18.16.18
+        version: 18.16.18
       dotenv:
         specifier: 16.3.1
         version: 16.3.1

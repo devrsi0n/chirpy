@@ -28,6 +28,14 @@ async function getPage(req: NextApiRequest, res: NextApiResponse) {
     where: {
       url: req.query.url as string,
     },
+    include: {
+      comments: {
+        select: {
+          // Used to count comments
+          id: true,
+        },
+      },
+    },
   });
   res.status(200).json(page);
 }

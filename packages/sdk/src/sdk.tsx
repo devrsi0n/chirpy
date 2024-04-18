@@ -1,17 +1,10 @@
-import type { Page, Project, User } from '@prisma/client';
-
-type RequestProps = {
-  path: string;
-  searchParams?: Record<string, string>;
-  method?: 'GET' | 'POST' | 'DELETE';
-  body?: Record<string, any>;
-};
-
-type LinkPageAuthorParams = {
-  pageUrl: string;
-  email: string;
-  name: string;
-};
+import {
+  LinkPageAuthorParams,
+  PageResult,
+  RequestProps,
+  type Project,
+  type User,
+} from './types';
 
 export class ChirpySDK {
   constructor(
@@ -39,7 +32,7 @@ export class ChirpySDK {
     });
   }
 
-  public getPage(url: string): Promise<Page | null> {
+  public getPage(url: string): Promise<PageResult | null> {
     return this.request({ path: '/api/sdk/page', searchParams: { url } });
   }
 

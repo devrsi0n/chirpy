@@ -1,6 +1,6 @@
 {
   "name": "@chirpy-dev/sdk",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "license": "AGPL-3.0-or-later",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -10,14 +10,11 @@
   "sideEffects": false,
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
+    "@types/node": "18.16.18",
     "dotenv": "16.3.1",
     "typescript": "5.2.2"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "@prisma/client": "5.11.0",
-    "@types/node": "18.16.18"
   }
 }
