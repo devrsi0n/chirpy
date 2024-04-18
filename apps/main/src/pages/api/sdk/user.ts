@@ -36,9 +36,15 @@ async function createUser(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
   try {
-    const user = await prisma.user.create({
-      data: {
+    const user = await prisma.user.upsert({
+      where: {
         email: result.data.email,
+      },
+      create: {
+        email: result.data.email,
+        name: result.data.name,
+      },
+      update: {
         name: result.data.name,
       },
     });

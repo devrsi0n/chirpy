@@ -64,17 +64,16 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
     where: {
       sdkKey: apiKey,
     },
-    include: {
+    select: {
       user: {
-        include: {
+        select: {
+          id: true,
+          plan: true,
           projects: {
             select: {
               id: true,
             },
           },
-        },
-        select: {
-          plan: true,
         },
       },
     },
@@ -101,7 +100,6 @@ async function createProject(req: NextApiRequest, res: NextApiResponse) {
       },
       update: {
         name: result.data.name,
-        domain: result.data.domain,
         userId: setting.user.id,
       },
       create: {
