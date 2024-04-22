@@ -1,4 +1,8 @@
-import { CALLBACK_URL_KEY, SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
+import {
+  CALLBACK_URL_KEY,
+  SIGN_IN_SUCCESS_KEY,
+  TOKEN_KEY,
+} from '@chirpy-dev/utils';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 
@@ -9,9 +13,12 @@ import { useTimeout } from '../../hooks';
 import { hasValidUserProfile } from '../../utilities';
 
 export function Redirecting(): JSX.Element {
-  const { data, loading } = useCurrentUser();
+  const { data, jwtToken, loading } = useCurrentUser();
   const router = useRouter();
   React.useEffect(() => {
+    if (jwtToken) {
+      localStorage.setItem(TOKEN_KEY, jwtToken);
+    }
     if (data.id) {
       localStorage.setItem(SIGN_IN_SUCCESS_KEY, 'true');
     }
@@ -25,7 +32,7 @@ export function Redirecting(): JSX.Element {
       sessionStorage.removeItem(CALLBACK_URL_KEY);
       router.push(callbackUrl || `/dashboard/${data.username}`);
     }
-  }, [router, data, loading]);
+  }, [jwtToken, router, data, loading]);
   useTimeout(() => {
     if (!data.id) {
       router.push(

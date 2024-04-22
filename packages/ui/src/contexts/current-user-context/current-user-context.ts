@@ -16,11 +16,13 @@ export type CurrentUserContextType = {
   isPreview?: true;
   isPaid?: boolean;
   data: UserData;
+  jwtToken: string;
 };
 
 export const EMPTY_CURRENT_USER_CONTEXT: CurrentUserContextType = {
   isSignIn: false,
   data: {},
+  jwtToken: '',
   loading: false,
   refetchUser: asyncNoop as unknown as RefetchUser,
 };

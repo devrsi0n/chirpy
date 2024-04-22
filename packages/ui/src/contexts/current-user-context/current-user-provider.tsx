@@ -32,12 +32,13 @@ export function CurrentUserProvider({
       : {};
     return {
       data,
+      jwtToken: session?.jwtToken || '',
       loading: sessionIsLoading,
       isSignIn: !!data.id,
       refetchUser: update,
       isPaid: ['PRO', 'ENTERPRISE'].includes(data?.plan || ''),
     };
-  }, [hasMounted, session?.user, sessionIsLoading, update]);
+  }, [hasMounted, session?.user, session?.jwtToken, sessionIsLoading, update]);
 
   return (
     <CurrentUserContext.Provider value={value}>

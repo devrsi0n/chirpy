@@ -1,3 +1,4 @@
 # For local debugging
 /public/tf-models
 /public/__env.js
+*.js.map

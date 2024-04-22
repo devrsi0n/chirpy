@@ -1,5 +1,6 @@
 export const SIGN_IN_SUCCESS_KEY = 'sign-in.success';
 export const CALLBACK_URL_KEY = 'callback.url';
+export const TOKEN_KEY = 'jwt.token';
 
 // 30 days
 export const SESSION_MAX_AGE = 30 * 24 * 60 * 60;

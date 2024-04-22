@@ -5,6 +5,12 @@ declare module 'next-auth' {
    * Returned by `useSession`, `getSession` and received as a prop on the `Provider` React Context
    */
   interface Session {
+    /**
+     * The same JWT token set by cookie,
+     * used to authenticate the user in Safari via http header "Authorization: Bearer <token>",
+     * because Safari doesn't allow 3rd party cookies
+     */
+    jwtToken: string;
     user: {
       id: string;
       name: string;
