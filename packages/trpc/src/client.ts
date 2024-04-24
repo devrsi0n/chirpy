@@ -1,4 +1,4 @@
-import { getBaseUrl, TOKEN_KEY } from '@chirpy-dev/utils';
+import { getBaseUrl, TOKEN_KEY, WIDGET_HEADER } from '@chirpy-dev/utils';
 import { httpLink, loggerLink } from '@trpc/client';
 import { createTRPCNext } from '@trpc/next';
 import { type inferRouterInputs, type inferRouterOutputs } from '@trpc/server';
@@ -20,12 +20,15 @@ export const trpc = createTRPCNext<AppRouter>({
         httpLink({
           url: `${getBaseUrl()}/api/trpc`,
           headers() {
+            const isWidget = location.pathname.startsWith('/widget/');
             const token = localStorage.getItem(TOKEN_KEY);
-            if (!token) {
+            if (!isWidget || !token) {
               return {};
             }
+
             return {
               Authorization: `Bearer ${token}`,
+              [WIDGET_HEADER]: 'true',
             };
           },
         }),
