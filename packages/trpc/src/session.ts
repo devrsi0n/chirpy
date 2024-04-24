@@ -15,6 +15,7 @@ export function isWidgetRequest(req: NextApiRequest) {
 export async function getWidgetSession(
   req: NextApiRequest,
 ): Promise<Session | null> {
+  console.log('trpc http headers', req.headers);
   if (!isWidgetRequest(req)) {
     return null;
   }
@@ -23,6 +24,7 @@ export async function getWidgetSession(
   const token = await getToken({
     req,
   });
+  console.log('token', token);
   if (!token) {
     return null;
   }
@@ -31,5 +33,6 @@ export async function getWidgetSession(
     // @ts-expect-error
     session: {},
   });
-  return session as Session;
+  console.log('session', session);
+  return session as Session | null;
 }
