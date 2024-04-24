@@ -1,5 +1,4 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
-import { isFirefox, TOKEN_KEY } from '@chirpy-dev/utils';
+import { TOKEN_KEY } from '@chirpy-dev/utils';
 import * as React from 'react';
 import { z } from 'zod';
 
@@ -20,7 +19,6 @@ export function useSignInWindow({
   height = 760,
 }: useSignInWindowOptions = {}): () => void {
   const popupWindow = React.useRef<Window | null>(null);
-  const utils = trpc.useContext();
   const handleClickSignIn = () => {
     popupWindow.current = popupCenterWindow(
       '/auth/sign-in?allowAnonymous=true',
@@ -34,14 +32,7 @@ export function useSignInWindow({
         localStorage.setItem(TOKEN_KEY, result.data.jwt);
         popupWindow.current?.close();
         // Refresh nextauth session
-        if (isFirefox()) {
-          // Fix session in firefox
-          location.reload();
-        } else {
-          window.dispatchEvent(new Event('offline'));
-          window.dispatchEvent(new Event('online'));
-          utils.invalidate();
-        }
+        location.reload();
       }
     });
   };
