@@ -84,9 +84,8 @@ export function getNextAuthOptions(
           plan: userData.plan || 'HOBBY',
           editableProjectIds,
         };
-        session.jwtToken = await getToken({
+        session.jwt = await getToken({
           req,
-          secret: process.env.NEXTAUTH_SECRET,
           raw: true,
         });
         return session;

@@ -29,7 +29,7 @@ export function PredefinedCurrentUser(
         name: 'Michael',
         image: '/images/avatars/male-2.jpeg',
       },
-      jwtToken: '',
+      jwt: '',
       refetchUser: asyncNoop as any,
     }),
   );

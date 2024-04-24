@@ -10,6 +10,9 @@ import * as React from 'react';
 
 import { ToastProvider } from '../components';
 import { CurrentUserProvider, NotificationProvider } from '../contexts';
+import { setupWidgetSessionHeader } from './widget-header';
+
+setupWidgetSessionHeader();
 
 const inter = Inter({
   subsets: ['latin'],
@@ -42,7 +45,9 @@ export const App = trpc.withTRPC(function App({
               : 'chirpy.theme'
           }
         >
-          <CurrentUserProvider>
+          <CurrentUserProvider
+            isWidget={!!(pageProps as CommonWidgetProps).isWidget}
+          >
             <ToastProvider>
               <NotificationProvider>
                 <Component {...pageProps} />

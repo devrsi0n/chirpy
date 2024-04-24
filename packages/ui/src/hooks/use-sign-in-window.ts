@@ -1,54 +1,43 @@
-import { SIGN_IN_SUCCESS_KEY } from '@chirpy-dev/utils';
-import { getSession } from 'next-auth/react';
+import { trpc } from '@chirpy-dev/trpc/src/client';
+import { TOKEN_KEY } from '@chirpy-dev/utils';
 import * as React from 'react';
-
-import { useEventListener } from './use-event-listener';
-import { useInterval } from './use-time';
+import { z } from 'zod';
 
 export type useSignInWindowOptions = {
   width?: number;
   height?: number;
 };
 
+export const SignInSuccessSchema = z.object({
+  type: z.literal('sign-in-success'),
+  jwt: z.string().min(10),
+});
+
+export type SignInSuccess = z.infer<typeof SignInSuccessSchema>;
+
 export function useSignInWindow({
   width = 480,
   height = 760,
 }: useSignInWindowOptions = {}): () => void {
   const popupWindow = React.useRef<Window | null>(null);
-  const [isSigningIn, setIsSigningIn] = React.useState(false);
+  const utils = trpc.useContext();
+
   const handleClickSignIn = () => {
-    localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
     popupWindow.current = popupCenterWindow(
       '/auth/sign-in?allowAnonymous=true',
       '_blank',
       width,
       height,
     );
-    setIsSigningIn(true);
-  };
-
-  useEventListener('storage', async (event) => {
-    if (event.key === SIGN_IN_SUCCESS_KEY && event.newValue === 'true') {
-      setIsSigningIn(false);
-      popupWindow.current?.close();
-      popupWindow.current = null;
-      // Force to refresh session
-      await getSession();
-    }
-  });
-
-  useInterval(
-    () => {
-      if (localStorage.getItem(SIGN_IN_SUCCESS_KEY) === 'true') {
-        setIsSigningIn(false);
+    window.addEventListener('message', (e) => {
+      const result = SignInSuccessSchema.safeParse(e.data);
+      if (result.success) {
+        localStorage.setItem(TOKEN_KEY, result.data.jwt);
         popupWindow.current?.close();
-        popupWindow.current = null;
-        // Force to refresh session
-        void getSession();
+        utils.invalidate();
       }
-    },
-    isSigningIn ? 3000 : null,
-  );
+    });
+  };
 
   return handleClickSignIn;
 }

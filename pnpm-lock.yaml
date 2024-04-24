@@ -886,6 +886,9 @@ importers:
       tailwindcss-animate:
         specifier: 1.0.6
         version: 1.0.6(tailwindcss@3.3.5)
+      zod:
+        specifier: 3.22.4
+        version: 3.22.4
     devDependencies:
       '@babel/core':
         specifier: 7.22.10
@@ -18348,7 +18351,7 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.15.4
-      next: 14.1.1(@babel/core@7.12.9)(react-dom@18.2.0)(react@18.2.0)
+      next: 14.1.1(@babel/core@7.22.10)(react-dom@18.2.0)(react@18.2.0)(sass@1.69.5)
       oauth: 0.9.15
       openid-client: 5.6.1
       preact: 10.19.2

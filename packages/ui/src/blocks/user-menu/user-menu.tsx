@@ -1,4 +1,4 @@
-import { SIGN_IN_SUCCESS_KEY, SUPPORT_LINK } from '@chirpy-dev/utils';
+import { SUPPORT_LINK, TOKEN_KEY } from '@chirpy-dev/utils';
 import clsx from 'clsx';
 import { signOut } from 'next-auth/react';
 import * as React from 'react';
@@ -130,10 +130,10 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
               disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
               className={itemStyle}
               onClick={async () => {
+                localStorage.removeItem(TOKEN_KEY);
                 await signOut({
                   redirect: !isWidget,
                 });
-                localStorage.removeItem(SIGN_IN_SUCCESS_KEY);
               }}
             >
               <IconLogOut size={14} />

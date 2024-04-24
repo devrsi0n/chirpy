@@ -10,7 +10,7 @@ declare module 'next-auth' {
      * used to authenticate the user in Safari via http header "Authorization: Bearer <token>",
      * because Safari doesn't allow 3rd party cookies
      */
-    jwtToken: string;
+    jwt: string;
     user: {
       id: string;
       name: string;

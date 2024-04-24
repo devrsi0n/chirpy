@@ -1,7 +1,9 @@
+import { TOKEN_KEY } from '@chirpy-dev/utils';
 import { useSession } from 'next-auth/react';
 import * as React from 'react';
 
 import { useHasMounted } from '../../hooks/use-has-mounted';
+import type { SignInSuccess } from '../../hooks/use-sign-in-window';
 import {
   CurrentUserContext,
   CurrentUserContextType,
@@ -9,11 +11,13 @@ import {
 } from './current-user-context';
 
 export type CurrentUserProviderProps = {
+  isWidget: boolean;
   children: React.ReactNode;
 };
 
 export function CurrentUserProvider({
   children,
+  isWidget,
 }: CurrentUserProviderProps): JSX.Element {
   const { data: session, status: sessionStatus, update } = useSession();
   const sessionIsLoading = sessionStatus === 'loading';
@@ -32,13 +36,26 @@ export function CurrentUserProvider({
       : {};
     return {
       data,
-      jwtToken: session?.jwtToken || '',
       loading: sessionIsLoading,
       isSignIn: !!data.id,
       refetchUser: update,
       isPaid: ['PRO', 'ENTERPRISE'].includes(data?.plan || ''),
     };
-  }, [hasMounted, session?.user, session?.jwtToken, sessionIsLoading, update]);
+  }, [hasMounted, session?.user, sessionIsLoading, update]);
+
+  React.useEffect(() => {
+    if (session?.jwt) {
+      if (isWidget) {
+        // Refresh token
+        localStorage.setItem(TOKEN_KEY, session.jwt);
+      } else {
+        window.opener?.postMessage(
+          { type: 'sign-in-success', jwt: session.jwt } satisfies SignInSuccess,
+          '*',
+        );
+      }
+    }
+  }, [session?.jwt, isWidget]);
 
   return (
     <CurrentUserContext.Provider value={value}>
