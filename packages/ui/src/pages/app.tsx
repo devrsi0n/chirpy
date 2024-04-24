@@ -35,7 +35,7 @@ export const App = trpc.withTRPC(function App({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <SessionProvider {...(session && { session })}>
+      <SessionProvider {...(session && { session })} refetchWhenOffline={false}>
         <NextThemesProvider
           attribute="class"
           // Widget and app themes are different

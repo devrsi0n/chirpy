@@ -1,6 +1,5 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
 import { TOKEN_KEY } from '@chirpy-dev/utils';
-import { getSession } from 'next-auth/react';
 import * as React from 'react';
 import { z } from 'zod';
 
@@ -34,8 +33,10 @@ export function useSignInWindow({
       if (result.success) {
         localStorage.setItem(TOKEN_KEY, result.data.jwt);
         popupWindow.current?.close();
-        // Refresh the session
-        getSession();
+        // Refresh nextauth session by triggering a new online event
+        // Other nextauth functions won't work
+        window.dispatchEvent(new Event('offline'));
+        window.dispatchEvent(new Event('online'));
         utils.invalidate();
       }
     });
