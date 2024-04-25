@@ -1,4 +1,5 @@
 import { trpc } from '@chirpy-dev/trpc/src/client';
+import clsx from 'clsx';
 import * as React from 'react';
 
 import { Heading } from '../../components/heading';
@@ -7,6 +8,7 @@ import { Menu } from '../../components/menu';
 import { Spinner } from '../../components/spinner';
 import { Text } from '../../components/text';
 import { useCurrentUser } from '../../contexts/current-user-context';
+import { useIsWidget } from '../../hooks';
 import styles from './notification-hub.module.scss';
 import { NotificationItem } from './notification-item';
 
@@ -26,6 +28,7 @@ export function NotificationHub(): JSX.Element {
   const { mutateAsync: deleteNotificationMessage } =
     trpc.notification.delete.useMutation();
   const hasUnreadNotifications = data?.some((msg) => !msg.read);
+  const isWidget = useIsWidget();
   return (
     <div className="mr-4 flex flex-row items-center justify-center">
       <Menu>
@@ -47,7 +50,12 @@ export function NotificationHub(): JSX.Element {
             <Spinner className="absolute right-0 pr-6 pt-2"> </Spinner>
           )}
           {data && (data?.length || 0) > 0 ? (
-            <div className="max-h-96 w-max overflow-y-auto">
+            <div
+              className={clsx(
+                'w-max overflow-y-auto',
+                isWidget ? 'max-h-[20rem]' : 'max-h-96',
+              )}
+            >
               {data.map((msg, index) => (
                 <NotificationItem
                   key={msg.id}

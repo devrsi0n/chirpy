@@ -134,6 +134,9 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
                 await signOut({
                   redirect: !isWidget,
                 });
+                if (isWidget) {
+                  location.reload();
+                }
               }}
             >
               <IconLogOut size={14} />
