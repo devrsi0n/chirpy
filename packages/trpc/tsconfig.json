@@ -10,6 +10,6 @@
     "typings/**/*.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../../apps/main/typings/*.d.ts"
+    "../tsconfigs/typings/*.d.ts"
   ]
 }

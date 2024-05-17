@@ -6,5 +6,10 @@
     // "types": ["jest", "node"]
   },
   "exclude": ["node_modules"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "../tsconfigs/typings/*.d.ts",
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

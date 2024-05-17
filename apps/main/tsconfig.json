@@ -10,5 +10,10 @@
     "jsx": "preserve"
   },
   "exclude": ["node_modules", ".next"],
-  "include": ["typings/**/*.d.ts", "src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "typings/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "../../packages/tsconfigs/typings/*.d.ts"
+  ]
 }

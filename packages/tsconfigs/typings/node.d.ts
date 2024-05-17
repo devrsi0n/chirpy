@@ -3,7 +3,6 @@ declare namespace NodeJS {
     // Additional environment variables
     NEXT_PUBLIC_APP_URL: string;
     NEXT_PUBLIC_ANALYTICS_DOMAIN: string;
-    NEXT_PUBLIC_COMMENT_DOMAIN: string;
 
     NEXTAUTH_SECRET: string;
     NEXTAUTH_URL: string;

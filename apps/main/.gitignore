@@ -2,3 +2,4 @@
 /public/tf-models
 /public/__env.js
 *.js.map
+.vercel
