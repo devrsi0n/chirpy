@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import md5 from 'md5';
 import * as React from 'react';
 
 import { IconUser } from '../icons';
@@ -36,6 +37,20 @@ export function Avatar({
 }: AvatarProps): JSX.Element {
   alt ||= 'Default avatar';
   const [sizeStyle, iconSize] = sizeStyles[size];
+  const [gravatarUrl, setGravatarUrl] = React.useState('');
+
+  React.useEffect(() => {
+    if (email && !src) {
+      const img = new Image();
+      const url = `https://www.gravatar.com/avatar/${md5(
+        email.toLowerCase().trim(),
+      )}?s=${iconSize}&d=404`;
+      img.src = url;
+      img.addEventListener('load', () => setGravatarUrl(url));
+      // img.onerror = () => {};
+    }
+  }, [email, src, iconSize]);
+
   if (!src) {
     const placeholder = (
       <IconUser
@@ -44,6 +59,24 @@ export function Avatar({
         aria-label={alt}
       />
     );
+
+    if (gravatarUrl) {
+      return (
+        <img
+          src={gravatarUrl}
+          alt={alt}
+          className={clsx(
+            bg,
+            ring,
+            `flex select-none items-center justify-center rounded-full`,
+            sizeStyle,
+            className,
+          )}
+          {...imgProps}
+        />
+      );
+    }
+
     // Keep this order to reduce name collision
     const customAvatarValue = username || email || name;
     if (customAvatarValue) {
