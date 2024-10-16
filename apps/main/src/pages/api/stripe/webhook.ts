@@ -52,6 +52,9 @@ export default async function stripeWebhook(
     switch (event.type) {
       case 'checkout.session.completed': {
         const checkoutSession = event.data.object as Stripe.Checkout.Session;
+        if (checkoutSession.metadata?.quotion) {
+          return res.status(200).end();
+        }
         const customerId = getCustomerId(checkoutSession.customer);
         if (!checkoutSession.client_reference_id || !customerId) {
           log.error(
@@ -75,6 +78,9 @@ export default async function stripeWebhook(
       case 'customer.subscription.created':
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
+        if (subscription.metadata?.quotion) {
+          return res.status(200).end();
+        }
         const priceId = subscription.items.data[0].price.id;
         const plan = getPlanByPriceId(priceId);
         if (!plan) {
@@ -126,6 +132,9 @@ export default async function stripeWebhook(
       }
       case 'customer.subscription.deleted': {
         const subscriptionDeleted = event.data.object as Stripe.Subscription;
+        if (subscriptionDeleted.metadata?.quotion) {
+          return res.status(200).end();
+        }
         const subscriptionId = getSubscriptionItemId(subscriptionDeleted);
         const user = await prisma.user.update({
           where: {

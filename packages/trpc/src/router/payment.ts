@@ -22,6 +22,9 @@ export const paymentRouter = router({
         },
       ],
       mode: 'subscription',
+      metadata: {
+        chirpy: 'true',
+      },
       success_url: `${getAppURL()}/dashboard/billings?success=true&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${getAppURL()}/dashboard/billings?canceled=true`,
       automatic_tax: { enabled: true },
