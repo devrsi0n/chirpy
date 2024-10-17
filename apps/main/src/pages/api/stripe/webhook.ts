@@ -79,17 +79,19 @@ export default async function stripeWebhook(
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
         if (subscription.metadata?.quotion) {
-          return res.status(200).end();
+          return res
+            .status(200)
+            .json({ message: 'Ignored Quotion subscription' });
         }
         const priceId = subscription.items.data[0].price.id;
         const plan = getPlanByPriceId(priceId);
         if (!plan) {
-          log.error(
+          log.info(
             `Cant find the plan from webhook:\n${subscription.items.data}`,
           );
-          return res
-            .status(400)
-            .json({ error: `Can't find the plan for priceId${priceId}` });
+          return res.status(200).json({
+            message: `Can't find the plan for priceId:${priceId}. Ignored`,
+          });
         }
         const customerId = getCustomerId(subscription.customer);
         const subscriptionId = getSubscriptionItemId(subscription);
@@ -133,7 +135,9 @@ export default async function stripeWebhook(
       case 'customer.subscription.deleted': {
         const subscriptionDeleted = event.data.object as Stripe.Subscription;
         if (subscriptionDeleted.metadata?.quotion) {
-          return res.status(200).end();
+          return res
+            .status(200)
+            .json({ message: 'Ignored Quotion subscription' });
         }
         const subscriptionId = getSubscriptionItemId(subscriptionDeleted);
         const user = await prisma.user.update({
@@ -152,11 +156,11 @@ export default async function stripeWebhook(
           },
         });
         if (!user?.id) {
-          log.error(
+          log.info(
             `Can't find the user in Stripe webhook(customer.subscription.deleted): ${subscriptionDeleted}`,
           );
-          return res.status(400).json({
-            error: `Can't find the user in Stripe webhook(customer.subscription.deleted): ${subscriptionDeleted}`,
+          return res.status(200).json({
+            message: `Can't find the user in Stripe webhook(customer.subscription.deleted): ${subscriptionDeleted}. Ignored`,
           });
         }
         log.warn(`User(${user.name}) has canceled their subscription`);
