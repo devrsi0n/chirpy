@@ -1,6 +1,5 @@
 import { prisma, stripe } from '@chirpy-dev/trpc';
 import { cpDayjs, queryDailyPVUsage } from '@chirpy-dev/utils';
-import { verifySignature } from '@upstash/qstash/nextjs';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log as axiomLog } from 'next-axiom';
 
@@ -9,7 +8,18 @@ const log = axiomLog.with({
 });
 
 // This cron task runs on everyday
-async function updateUsage(req: NextApiRequest, res: NextApiResponse) {
+export default async function updateUsage(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  const authHeader = req.headers.authorization;
+  if (
+    !process.env.CRON_SECRET ||
+    authHeader !== `Bearer ${process.env.CRON_SECRET}`
+  ) {
+    return res.status(401).json({ success: false });
+  }
+
   const users = await prisma.user.findMany({
     where: {
       plan: {
@@ -63,15 +73,6 @@ async function updateUsage(req: NextApiRequest, res: NextApiResponse) {
   await log.flush();
   res.status(200).end('ok');
 }
-
-const cron = () => {
-  if (process.env.NODE_ENV === 'development') {
-    return updateUsage;
-  }
-  return verifySignature(updateUsage);
-};
-
-export default cron();
 
 export const config = {
   api: {

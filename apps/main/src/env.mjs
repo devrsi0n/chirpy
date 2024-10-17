@@ -1,5 +1,5 @@
-import { createEnv } from "@t3-oss/env-nextjs";
-import { z } from "zod";
+import { createEnv } from '@t3-oss/env-nextjs';
+import { z } from 'zod';
 
 export const env = createEnv({
   /**
@@ -8,9 +8,9 @@ export const env = createEnv({
    */
   server: {
     SUPABASE_URL: z.string().url(),
-    NODE_ENV: z.enum(["development", "test", "production"]),
+    NODE_ENV: z.enum(['development', 'test', 'production']),
     NEXTAUTH_SECRET:
-      process.env.NODE_ENV === "production"
+      process.env.NODE_ENV === 'production'
         ? z.string().min(1)
         : z.string().min(1).optional(),
     NEXTAUTH_URL: z.preprocess(
@@ -18,7 +18,7 @@ export const env = createEnv({
       // Since NextAuth.js automatically uses the VERCEL_URL if present.
       (str) => process.env.VERCEL_URL ?? str,
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-      process.env.VERCEL ? z.string().min(1) : z.string().url()
+      process.env.VERCEL ? z.string().min(1) : z.string().url(),
     ),
     PRIVATE_VAPID: z.string().min(1),
     EMAIL_API_KEY: z.string().min(1),
@@ -28,6 +28,7 @@ export const env = createEnv({
     QSTASH_NEXT_SIGNING_KEY: z.string().min(1),
     QSTASH_CURRENT_SIGNING_KEY: z.string().min(1),
     TINYBIRD_ADMIN_TOKEN: z.string().min(1),
+    CRON_SECRET: z.string().min(1),
   },
 
   /**
@@ -58,9 +59,11 @@ export const env = createEnv({
     QSTASH_NEXT_SIGNING_KEY: process.env.QSTASH_NEXT_SIGNING_KEY,
     QSTASH_CURRENT_SIGNING_KEY: process.env.QSTASH_CURRENT_SIGNING_KEY,
     TINYBIRD_ADMIN_TOKEN: process.env.TINYBIRD_ADMIN_TOKEN,
+    CRON_SECRET: process.env.CRON_SECRET,
 
     NEXT_PUBLIC_VAPID: process.env.NEXT_PUBLIC_VAPID,
-    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   /**

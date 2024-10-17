@@ -1,7 +1,13 @@
 {
   "functions": {
     "src/pages/**/*": {
-      "maxDuration": 50
+      "maxDuration": 90
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/usage",
+      "schedule": "0 0 * * *"
+    }
+  ]
 }
