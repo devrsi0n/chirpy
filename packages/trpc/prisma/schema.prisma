@@ -208,12 +208,15 @@ model User {
 
   settings Settings?
 
-  plan                 Plan?   @default(HOBBY)
+  plan                     Plan?   @default(HOBBY)
   // Billing cycle start day
-  billingCycleDay      Int?
-  stripeCustomerId     String? @unique
-  stripeSubscriptionId String? @unique
-  pages                Page[]
+  billingCycleDay          Int?
+  stripeCustomerId         String? @unique
+  stripeSubscriptionId     String? @unique
+  // For usage reporting
+  stripeSubscriptionItemId String?
+
+  pages                    Page[]
 }
 
 enum Plan {

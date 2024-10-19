@@ -1,5 +1,3 @@
-import { cpDayjs } from '../date';
-
 export class QueryError extends Error {
   status: number;
   constructor(message: string, status: number) {
@@ -72,30 +70,6 @@ export function queryPipe<P, D = P>(
   });
 
   return client(`/pipes/${name}.json?${searchParams}`);
-}
-
-const DATE_FORMAT = 'YYYY-MM-DD';
-
-/**
- * Get daily pageviews usage
- */
-export async function queryDailyPVUsage(params: {
-  domains: string[];
-}): Promise<number> {
-  const dateFrom = cpDayjs().subtract(1, 'day');
-  const usage: QueryPipe<{
-    pageviews: number;
-    href: string;
-    indices: number[];
-  }> = await queryPipe('pv_by_domains', {
-    date_from: dateFrom.format(DATE_FORMAT),
-    date_to: cpDayjs().format(DATE_FORMAT),
-    domains: params.domains.join(','),
-  });
-  return usage.data.reduce((acc, { pageviews }) => {
-    acc += pageviews;
-    return acc;
-  }, 0);
 }
 
 export type QuerySQL<T> = {

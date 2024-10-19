@@ -109,6 +109,7 @@ export default async function stripeWebhook(
           data: {
             plan: plan.type,
             stripeSubscriptionId: subscriptionId,
+            stripeSubscriptionItemId: subscription.items.data[0].id,
           },
           select: {
             id: true,

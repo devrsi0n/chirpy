@@ -13,6 +13,10 @@ docker compose up -d
 ```sh
 # 1. prototyping
 pnpm prisma db push
-# 2. generate migration history when ready
+
+# 2. generate migration history when ready. Will reset the db
 pnpm prisma migrate dev --name <new-feature>
+
+# 3. deploy
+pnpm dotenv -e .env.prod -- pnpm prisma migrate deploy
 ```

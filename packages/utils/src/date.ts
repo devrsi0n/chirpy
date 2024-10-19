@@ -8,3 +8,4 @@ dayjs.extend(relativeTime);
 
 // eslint-disable-next-line unicorn/prefer-export-from
 export const cpDayjs = dayjs;
+export type Dayjs = dayjs.Dayjs;
