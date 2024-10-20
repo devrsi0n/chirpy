@@ -1,6 +1,7 @@
 import { prisma, ssg } from '@chirpy-dev/trpc';
-import { Theme } from '@chirpy-dev/types';
-import { CommentTimelineWidgetProps } from '@chirpy-dev/ui';
+import { trpc } from '@chirpy-dev/trpc/src/client';
+import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
+import { Heading, IconArrowLeft, IconButton, Link } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -8,7 +9,15 @@ import {
   GetStaticPropsResult,
 } from 'next';
 import { log } from 'next-axiom';
+import * as React from 'react';
 import superjson from 'superjson';
+
+import { CommentTimeline } from '../../../../components/comment-timeline';
+import { WidgetLayout } from '../../../../components/layout';
+import { PoweredBy } from '../../../../components/powered-by';
+import { UserMenu } from '../../../../components/user-menu';
+import { CommentContextProvider } from '../../../../contexts/comment-context';
+import { useRefetchInterval } from '../../../../hooks/use-refetch-interval';
 
 type PathParams = {
   commentId: string;
@@ -99,4 +108,51 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-export { CommentTimelineWidget as default } from '@chirpy-dev/ui';
+export type CommentTimelineWidgetProps = CommonWidgetProps & {
+  commentId: string;
+  page: {
+    id: string;
+    url: string;
+    authorId: string | null;
+  };
+};
+
+export default function CommentTimelineWidget(
+  props: CommentTimelineWidgetProps,
+): JSX.Element {
+  const refetchInterval = useRefetchInterval();
+  const { data: comment } = trpc.comment.timeline.useQuery(
+    {
+      id: props.commentId,
+    },
+    {
+      refetchInterval,
+    },
+  );
+
+  return (
+    <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
+      <CommentContextProvider projectId={props.projectId} page={props.page}>
+        <div className="mb-4 flex flex-row items-center justify-between">
+          {/* Can't use history.back() here in case user open this page individual */}
+          <Link
+            href={`/widget/comment/${encodeURIComponent(props.page.url)}`}
+            variant="plain"
+          >
+            <IconButton className="translate-x-1">
+              <IconArrowLeft size={20} />
+            </IconButton>
+          </Link>
+          <Heading as="h4">
+            <span className="font-bold">{comment?.user.name}</span>
+            <span>{`'s comment timeline`}</span>
+          </Heading>
+          <UserMenu variant="Widget" />
+        </div>
+
+        {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
+        {props.plan === 'HOBBY' && <PoweredBy />}
+      </CommentContextProvider>
+    </WidgetLayout>
+  );
+}

@@ -1,8 +1,13 @@
 import { prisma } from '@chirpy-dev/trpc';
-import { cpDayjs } from '@chirpy-dev/ui';
+import { Alert, cpDayjs } from '@chirpy-dev/ui';
 import { getAppURL } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
+import * as React from 'react';
+
+import { CommentWidget } from '../components/comment-widget';
+import { SiteLayout } from '../components/layout';
+import { PageTitle } from '../components/page-title';
 
 type StaticProps = {
   //
@@ -37,4 +42,23 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   };
 };
 
-export { PlayGround as default } from '@chirpy-dev/ui';
+export default function PlayGround(): JSX.Element {
+  const [showAlert, setShowAlert] = React.useState(true);
+  return (
+    <SiteLayout title="Playground">
+      <div className="space-y-8">
+        <PageTitle>Playground</PageTitle>
+        {showAlert && (
+          <Alert
+            type="info"
+            title="Feel free to play around"
+            content={'We remove stale comments every 24 hours automatically.'}
+            onClickDismiss={() => setShowAlert(false)}
+            hideDismissButton
+          />
+        )}
+      </div>
+      <CommentWidget />
+    </SiteLayout>
+  );
+}

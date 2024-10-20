@@ -1,11 +1,11 @@
 import { isSSRMode } from '@chirpy-dev/utils';
 import { ImageProps } from 'next/image';
 
-export type BannerProps = {
+export type BannerImgProps = {
   src: string;
 } & Pick<ImageProps, 'width' | 'height'>;
 
-export function getBannerProps(banner?: string): BannerProps | null {
+export function getBannerProps(banner?: string): BannerImgProps | null {
   if (isSSRMode || !banner) {
     return null;
   }

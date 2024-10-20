@@ -2,7 +2,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 
 import { MDXProps } from '@chirpy-dev/types';
-import { NearNav } from '@chirpy-dev/ui';
 import { serialize } from 'next-mdx-remote/serialize';
 import readingTime from 'reading-time';
 import rehypeAutolinkHeadings, {
@@ -13,6 +12,16 @@ import rehypeSlug from 'rehype-slug';
 
 import { POST_ROOT } from '../common/constants';
 import { getFrontMatters } from './front-matter';
+
+type DocNav = {
+  title: string;
+  link: string;
+};
+
+export type NearNav = {
+  prev?: DocNav;
+  next?: DocNav;
+};
 
 export async function getMDXPropsBySlug(slug: string): Promise<MDXProps> {
   const { data, content } = await getFrontMatters(

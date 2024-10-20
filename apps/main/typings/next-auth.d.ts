@@ -6,6 +6,7 @@ declare module 'next-auth' {
    * Returned by `useSession`, `getSession` and received as a prop on the `Provider` React Context
    */
   interface Session {
+    jwt: string;
     hasuraToken: string;
     user: {
       id: string;
@@ -14,6 +15,7 @@ declare module 'next-auth' {
       email: string;
       image: string;
       editableProjectIds: string[];
+      plan: 'HOBBY' | 'PRO' | 'ENTERPRISE';
     };
   }
 

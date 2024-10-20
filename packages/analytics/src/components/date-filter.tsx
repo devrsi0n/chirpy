@@ -1,4 +1,3 @@
-import { useCurrentUser } from '@chirpy-dev/ui';
 import { cpDayjs } from '@chirpy-dev/utils';
 import { Popover } from '@headlessui/react';
 import { DateRangePicker, DateRangePickerItem } from '@tremor/react';
@@ -7,10 +6,9 @@ import useDateFilter from '../hooks/use-date-filter';
 import { DateFilter as DateFilterType } from '../types/date-filter';
 import { QuestionIcon } from './icons';
 
-export default function DateFilter() {
+export default function DateFilter({ isPaid }: { isPaid: boolean }) {
   const { dateRangePickerValue, onDateRangePickerValueChange } =
     useDateFilter();
-  const { isPaid } = useCurrentUser();
   return (
     <div className="flex items-center gap-4">
       <Popover className="relative h-4">

@@ -1,15 +1,48 @@
 import { ssg } from '@chirpy-dev/trpc';
-import { ProjectSettingsProps } from '@chirpy-dev/ui';
+import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import {
   GetStaticPaths,
   GetStaticProps,
   GetStaticPropsContext,
   GetStaticPropsResult,
 } from 'next';
+import * as React from 'react';
 
+import { PageTitle } from '$/components/page-title';
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
+import { DeleteProject } from '../../../../components/delete-project';
+import { SiteLayout } from '../../../../components/layout';
+import { PageIdentifier } from '../../../../components/page-identifier';
+import { ProjectInfo } from '../../../../components/project-info';
 
-export { ProjectSettings as default } from '@chirpy-dev/ui';
+export type ProjectSettingsProps = {
+  project: NonNullable<RouterOutputs['project']['byDomain']>;
+  username: string;
+};
+
+export default function ProjectSettings(
+  props: ProjectSettingsProps,
+): JSX.Element {
+  const { domain, name, id, queryParameters } = props.project;
+  return (
+    <SiteLayout title="Project settings">
+      <PageTitle>Project settings</PageTitle>
+      <ProjectInfo
+        id={id}
+        domain={domain}
+        name={name}
+        username={props.username}
+      />
+      <PageIdentifier
+        id={id}
+        domain={domain}
+        queryParameters={queryParameters}
+        username={props.username}
+      />
+      <DeleteProject domain={domain} name={name} username={props.username} />
+    </SiteLayout>
+  );
+}
 
 type PathParams = {
   domain: string;

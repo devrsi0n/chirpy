@@ -1,10 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
-
 import CurrentVisitors from './current-visitors';
 import DateFilter from './date-filter';
 import { useAnalytics } from './provider';
 
-export default function Header() {
+export default function Header({ isPaid }: { isPaid: boolean }) {
   const { domain } = useAnalytics();
   return (
     <header className="flex flex-col justify-between gap-6 lg:flex-row">
@@ -23,7 +21,7 @@ export default function Header() {
         </h1>
         <CurrentVisitors />
       </div>
-      <DateFilter />
+      <DateFilter isPaid={isPaid} />
     </header>
   );
 }

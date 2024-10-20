@@ -6,12 +6,14 @@ import {
 } from '@chirpy-dev/analytics';
 import { ssg } from '@chirpy-dev/trpc';
 import { CommonPageProps } from '@chirpy-dev/types';
-import { PageTitle, SiteLayout } from '@chirpy-dev/ui';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import * as React from 'react';
 
+import { PageTitle } from '$/components/page-title';
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
+import { SiteLayout } from '../../../../components/layout';
+import { useCurrentUser } from '../../../../contexts';
 
 export type AnalyticsByDomainPageProps = {
   domain: string;
@@ -21,6 +23,7 @@ export type AnalyticsByDomainPageProps = {
 export default function AnalyticsByDomainPage({
   domain,
 }: AnalyticsByDomainPageProps): JSX.Element {
+  const { isPaid } = useCurrentUser();
   return (
     <>
       <Head>
@@ -35,7 +38,7 @@ export default function AnalyticsByDomainPage({
             <div className="bg-body text-secondary min-h-screen py-5 text-sm leading-5">
               <div className="mx-auto max-w-7xl">
                 <div className="space-y-6 sm:space-y-10">
-                  <Header />
+                  <Header isPaid={!!isPaid} />
                   <section>
                     <ErrorModal />
                     <Widgets />

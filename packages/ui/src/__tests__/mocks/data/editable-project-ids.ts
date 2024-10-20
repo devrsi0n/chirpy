@@ -1,1 +1,0 @@
-export const EDITABLE_PROJECT_IDS = ['021431de-3624-43b9-8cd7-1fbf66842796'];

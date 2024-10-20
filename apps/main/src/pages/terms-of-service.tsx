@@ -1,7 +1,11 @@
 import { CommonPageProps, MDXProps } from '@chirpy-dev/types';
 import { GetStaticProps } from 'next';
+import { MDXRemote } from 'next-mdx-remote';
+import * as React from 'react';
 
 import { getMDXPropsBySlug } from '$/server/mdx/mdx';
+import { SiteLayout } from '../components/layout';
+import { MDXComponents } from '../components/mdx-components';
 
 export const getStaticProps: GetStaticProps<
   CommonPageProps & MDXProps
@@ -10,4 +14,17 @@ export const getStaticProps: GetStaticProps<
   return { props: termsProps };
 };
 
-export { TermsOfService as default } from '@chirpy-dev/ui';
+export default function TermsOfService({
+  mdxSource,
+  frontMatter,
+}: MDXProps): JSX.Element {
+  return (
+    <SiteLayout title={frontMatter.title || 'Terms of service'}>
+      <section>
+        <article className="prose mx-auto lg:prose-xl">
+          <MDXRemote {...mdxSource} components={MDXComponents} />
+        </article>
+      </section>
+    </SiteLayout>
+  );
+}

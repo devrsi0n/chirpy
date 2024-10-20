@@ -1,6 +1,7 @@
 import { prisma, ssg } from '@chirpy-dev/trpc';
-import { Theme } from '@chirpy-dev/types';
-import { PageCommentProps } from '@chirpy-dev/ui';
+import { trpc } from '@chirpy-dev/trpc/src/client';
+import { CommonWidgetProps, Theme } from '@chirpy-dev/types';
+import { Text } from '@chirpy-dev/ui';
 import {
   GetStaticPaths,
   GetStaticProps,
@@ -8,7 +9,14 @@ import {
   GetStaticPropsResult,
 } from 'next';
 import { log } from 'next-axiom';
+import * as React from 'react';
 import superjson from 'superjson';
+
+import { CommentForest } from '../../../components/comment-forest';
+import { WidgetLayout } from '../../../components/layout';
+import { PoweredBy } from '../../../components/powered-by';
+import { CommentContextProvider } from '../../../contexts';
+import { useRefetchInterval } from '../../../hooks/use-refetch-interval';
 
 /**
  * Comment tree widget for a page
@@ -47,9 +55,6 @@ export const getStaticPaths: GetStaticPaths<PathParams> = async () => {
 };
 
 type StaticProps = PageCommentProps;
-type StaticError = {
-  error: string;
-};
 
 export const getStaticProps: GetStaticProps<
   StaticProps | StaticError,
@@ -115,4 +120,53 @@ export const getStaticProps: GetStaticProps<
   }
 };
 
-export { CommentWidgetPage as default } from '@chirpy-dev/ui';
+export type PageCommentProps = CommonWidgetProps & {
+  page: {
+    id: string;
+    url: string;
+    authorId: string | null;
+  };
+};
+
+/**
+ * Comment tree widget for a page
+ * @param props
+ */
+export default function CommentWidgetPage(
+  props: PageCommentProps,
+): JSX.Element {
+  const refetchInterval = useRefetchInterval();
+  const { data: comments } = trpc.comment.forest.useQuery(
+    {
+      url: props.page.url,
+    },
+    {
+      refetchInterval,
+    },
+  );
+
+  if (isStaticError(props) || !comments) {
+    return (
+      <Text>{`Can't find a Chirpy comment widget with this page, please contact the support.`}</Text>
+    );
+  }
+
+  return (
+    <WidgetLayout widgetTheme={props.theme} title="Comment">
+      <CommentContextProvider projectId={props.projectId} page={props.page}>
+        <div className="pt-1">
+          <CommentForest comments={comments} />
+        </div>
+        {props.plan === 'HOBBY' && <PoweredBy />}
+      </CommentContextProvider>
+    </WidgetLayout>
+  );
+}
+
+type StaticError = {
+  error: string;
+};
+
+function isStaticError(props: $TsAny): props is StaticError {
+  return !!props.error;
+}
