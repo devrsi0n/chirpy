@@ -26,7 +26,7 @@
     "@t3-oss/env-nextjs": "0.6.0",
     "@tanstack/react-query": "4.32.6",
     "@tensorflow-models/toxicity": "1.2.2",
-    "@tensorflow/tfjs": "3.18.0",
+    "@tensorflow/tfjs": "4.22.0",
     "@tensorflow/tfjs-converter": "3.18.0",
     "@tensorflow/tfjs-core": "3.18.0",
     "@tiptap/extension-image": "2.1.12",
