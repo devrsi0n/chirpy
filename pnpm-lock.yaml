@@ -188,16 +188,16 @@ importers:
         version: 4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@tensorflow-models/toxicity':
         specifier: 1.2.2
-        version: 1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@3.18.0))(@tensorflow/tfjs-core@3.18.0)
+        version: 1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.22.0))(@tensorflow/tfjs-core@4.22.0)
       '@tensorflow/tfjs':
         specifier: 3.18.0
-        version: 3.18.0(seedrandom@2.4.3)
+        version: 3.18.0(seedrandom@3.0.5)
       '@tensorflow/tfjs-converter':
         specifier: 3.18.0
-        version: 3.18.0(@tensorflow/tfjs-core@3.18.0)
+        version: 3.18.0(@tensorflow/tfjs-core@4.22.0)
       '@tensorflow/tfjs-core':
-        specifier: 3.18.0
-        version: 3.18.0
+        specifier: 4.22.0
+        version: 4.22.0
       '@tiptap/extension-image':
         specifier: 2.1.12
         version: 2.1.12(@tiptap/core@2.1.12(@tiptap/pm@2.1.12))
@@ -4037,6 +4037,10 @@ packages:
     resolution: {integrity: sha512-gMxisZozqsr5sCKlphF/eVBLg91MjlBiN60tjX8hJAu0WlSn6Gi5k65GNIL+Pq6hrxpvImcfdCmTH/2XJVZ0Mg==}
     engines: {yarn: '>= 1.3.2'}
 
+  '@tensorflow/tfjs-core@4.22.0':
+    resolution: {integrity: sha512-LEkOyzbknKFoWUwfkr59vSB68DMJ4cjwwHgicXN0DUi3a0Vh1Er3JQqCI1Hl86GGZQvY8ezVrtDIvqR1ZFW55A==}
+    engines: {yarn: '>= 1.3.2'}
+
   '@tensorflow/tfjs-data@3.18.0':
     resolution: {integrity: sha512-s43vISJh8K/UN2E2zGRhtj/Kyn8dr4ll8EQkapwzm7fGO9afXCnMsTp6rkZq3fFXouCYA2k1B/j7JssIDr50+w==}
     peerDependencies:
@@ -4482,6 +4486,9 @@ packages:
   '@types/offscreencanvas@2019.3.0':
     resolution: {integrity: sha512-esIJx9bQg+QYF0ra8GnvfianIY8qWB0GBx54PK5Eps6m+xTj86KLavHv6qDhzKcu5UUOgNfJ2pWaIIV7TRUd9Q==}
 
+  '@types/offscreencanvas@2019.7.3':
+    resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
+
   '@types/parse-json@4.0.0':
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
 
@@ -4523,6 +4530,9 @@ packages:
 
   '@types/seedrandom@2.4.27':
     resolution: {integrity: sha512-YvMLqFak/7rt//lPBtEHv3M4sRNA+HGxrhFZ+DQs9K2IkYJbNwVIb8avtJfhDiuaUBX/AW0jnjv48FV8h3u9bQ==}
+
+  '@types/seedrandom@2.4.34':
+    resolution: {integrity: sha512-ytDiArvrn/3Xk6/vtylys5tlY6eo7Ane0hvcx++TKo6RxQXuVfW0AF/oeWqAj9dN29SyhtawuXstgmPlwNcv/A==}
 
   '@types/semver@7.5.0':
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
@@ -4818,6 +4828,9 @@ packages:
 
   '@webgpu/types@0.1.20':
     resolution: {integrity: sha512-MFb5oyxX+A7PWQNjcY3kSCSG2FAHaBo7IJBWtxWFgsS20FtY3D9UY7lYqLZ6avS8fSkdSylIS4qiHzFlQUdXag==}
+
+  '@webgpu/types@0.1.38':
+    resolution: {integrity: sha512-7LrhVKz2PRh+DD7+S+PVaFd5HxaWQvoMqBbsV9fNJO1pjUs1P8bM2vQVNfk+3URTqbuTI7gkXi0rfsN0IadoBA==}
 
   '@xmldom/xmldom@0.8.10':
     resolution: {integrity: sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==}
@@ -7515,6 +7528,7 @@ packages:
   fstream@1.0.12:
     resolution: {integrity: sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg==}
     engines: {node: '>=0.6'}
+    deprecated: This package is no longer supported.
 
   function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -11794,6 +11808,9 @@ packages:
   seedrandom@2.4.3:
     resolution: {integrity: sha512-2CkZ9Wn2dS4mMUWQaXLsOAfGD+irMlLEeSP3cMxpGbgyOOzJGFa+MWCOMTOCMyZinHRPxyOj/S/C57li/1to6Q==}
 
+  seedrandom@3.0.5:
+    resolution: {integrity: sha512-8OwmbklUNzwezjGInmZ+2clQmExQPvomqjL7LFqOYqtmuxRgQYqOD3mHaU+MvZn5FLUeVxVfQjwLZW/n/JFuqg==}
+
   selderee@0.10.0:
     resolution: {integrity: sha512-DEL/RW/f4qLw/NrVg97xKaEBC8IpzIG2fvxnzCp3Z4yk4jQ3MXom+Imav9wApjxX2dfS3eW7x0DXafJr85i39A==}
 
@@ -14784,7 +14801,7 @@ snapshots:
   '@changesets/get-github-info@0.5.2':
     dependencies:
       dataloader: 1.4.0
-      node-fetch: 2.6.11
+      node-fetch: 2.6.12
     transitivePeerDependencies:
       - encoding
 
@@ -16927,7 +16944,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.89.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.47.0)(typescript@5.2.2)(webpack@4.47.0)
       glob: 7.2.3
@@ -17410,7 +17427,7 @@ snapshots:
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
       express: 4.18.2
-      file-loader: 6.2.0(webpack@5.89.0)
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fs-extra: 9.1.0
       html-webpack-plugin: 4.5.2(webpack@4.47.0)
@@ -17828,16 +17845,16 @@ snapshots:
     optionalDependencies:
       react-dom: 18.2.0(react@18.2.0)
 
-  '@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@3.18.0))(@tensorflow/tfjs-core@3.18.0)':
+  '@tensorflow-models/toxicity@1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.22.0))(@tensorflow/tfjs-core@4.22.0)':
     dependencies:
-      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@3.18.0))(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-core': 3.18.0
+      '@tensorflow-models/universal-sentence-encoder': 1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.22.0))(@tensorflow/tfjs-core@4.22.0)
+      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@4.22.0)
+      '@tensorflow/tfjs-core': 4.22.0
 
-  '@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@3.18.0))(@tensorflow/tfjs-core@3.18.0)':
+  '@tensorflow-models/universal-sentence-encoder@1.2.2(@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.22.0))(@tensorflow/tfjs-core@4.22.0)':
     dependencies:
-      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
-      '@tensorflow/tfjs-core': 3.18.0
+      '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@4.22.0)
+      '@tensorflow/tfjs-core': 4.22.0
 
   '@tensorflow/tfjs-backend-cpu@3.18.0(@tensorflow/tfjs-core@3.18.0)':
     dependencies:
@@ -17859,6 +17876,10 @@ snapshots:
     dependencies:
       '@tensorflow/tfjs-core': 3.18.0
 
+  '@tensorflow/tfjs-converter@3.18.0(@tensorflow/tfjs-core@4.22.0)':
+    dependencies:
+      '@tensorflow/tfjs-core': 4.22.0
+
   '@tensorflow/tfjs-core@3.18.0':
     dependencies:
       '@types/long': 4.0.2
@@ -17872,12 +17893,24 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@tensorflow/tfjs-data@3.18.0(@tensorflow/tfjs-core@3.18.0)(seedrandom@2.4.3)':
+  '@tensorflow/tfjs-core@4.22.0':
+    dependencies:
+      '@types/long': 4.0.2
+      '@types/offscreencanvas': 2019.7.3
+      '@types/seedrandom': 2.4.34
+      '@webgpu/types': 0.1.38
+      long: 4.0.0
+      node-fetch: 2.6.12
+      seedrandom: 3.0.5
+    transitivePeerDependencies:
+      - encoding
+
+  '@tensorflow/tfjs-data@3.18.0(@tensorflow/tfjs-core@3.18.0)(seedrandom@3.0.5)':
     dependencies:
       '@tensorflow/tfjs-core': 3.18.0
       '@types/node-fetch': 2.6.2
       node-fetch: 2.6.11
-      seedrandom: 2.4.3
+      seedrandom: 3.0.5
     transitivePeerDependencies:
       - encoding
 
@@ -17885,13 +17918,13 @@ snapshots:
     dependencies:
       '@tensorflow/tfjs-core': 3.18.0
 
-  '@tensorflow/tfjs@3.18.0(seedrandom@2.4.3)':
+  '@tensorflow/tfjs@3.18.0(seedrandom@3.0.5)':
     dependencies:
       '@tensorflow/tfjs-backend-cpu': 3.18.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-backend-webgl': 3.18.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-converter': 3.18.0(@tensorflow/tfjs-core@3.18.0)
       '@tensorflow/tfjs-core': 3.18.0
-      '@tensorflow/tfjs-data': 3.18.0(@tensorflow/tfjs-core@3.18.0)(seedrandom@2.4.3)
+      '@tensorflow/tfjs-data': 3.18.0(@tensorflow/tfjs-core@3.18.0)(seedrandom@3.0.5)
       '@tensorflow/tfjs-layers': 3.18.0(@tensorflow/tfjs-core@3.18.0)
       argparse: 1.0.10
       chalk: 4.1.2
@@ -18381,6 +18414,8 @@ snapshots:
 
   '@types/offscreencanvas@2019.3.0': {}
 
+  '@types/offscreencanvas@2019.7.3': {}
+
   '@types/parse-json@4.0.0': {}
 
   '@types/parse5@5.0.3': {}
@@ -18421,6 +18456,8 @@ snapshots:
   '@types/scheduler@0.16.6': {}
 
   '@types/seedrandom@2.4.27': {}
+
+  '@types/seedrandom@2.4.34': {}
 
   '@types/semver@7.5.0': {}
 
@@ -18843,6 +18880,8 @@ snapshots:
       '@xtuc/long': 4.2.2
 
   '@webgpu/types@0.1.20': {}
+
+  '@webgpu/types@0.1.38': {}
 
   '@xmldom/xmldom@0.8.10': {}
 
@@ -21403,7 +21442,7 @@ snapshots:
       eslint: 8.47.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.47.0)
       eslint-plugin-react: 7.33.2(eslint@8.47.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.47.0)
@@ -21431,7 +21470,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.47.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21453,7 +21492,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -27404,6 +27443,8 @@ snapshots:
       kind-of: 6.0.3
 
   seedrandom@2.4.3: {}
+
+  seedrandom@3.0.5: {}
 
   selderee@0.10.0:
     dependencies:
