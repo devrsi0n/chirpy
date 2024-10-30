@@ -9,6 +9,7 @@ import {
   UseCreateAComment,
   UseDeleteAComment,
   UseToggleALikeAction,
+  type UseToggleAPinAction,
 } from '../../contexts/comment-context';
 import { useCurrentUser } from '../../contexts/current-user-context';
 import { CommentLeafType } from '../../types';
@@ -113,6 +114,20 @@ function CommentWidgetPreviewInternal(
       type: 'info',
     });
   }, [showToast]);
+
+  const toggleAPinAction: UseToggleAPinAction = React.useCallback(
+    async (commentId: string, pinnedAt?: Date | null) => {
+      setPreviewComments((prevData) => {
+        const comment = findCommentById(prevData, commentId);
+        if (comment) {
+          comment.pinnedAt = pinnedAt ? null : new Date();
+        }
+        return [...prevData];
+      });
+    },
+    [],
+  );
+
   const commentContext: CommentContextType = React.useMemo(
     () => ({
       page: {
@@ -123,14 +138,26 @@ function CommentWidgetPreviewInternal(
       createAComment,
       deleteAComment,
       toggleALikeAction,
+      toggleAPinAction,
       onClickCommentTimeline,
     }),
-    [createAComment, deleteAComment, toggleALikeAction, onClickCommentTimeline],
+    [
+      createAComment,
+      deleteAComment,
+      toggleALikeAction,
+      toggleAPinAction,
+      onClickCommentTimeline,
+    ],
   );
+  const unpinnedComments = previewComments.filter(
+    (comment) => !comment.pinnedAt,
+  );
+  const pinnedComments = previewComments.filter((comment) => comment.pinnedAt);
   return (
     <CommentContext.Provider value={commentContext}>
       <CommentForest
-        comments={previewComments}
+        comments={unpinnedComments}
+        pinnedComments={pinnedComments}
         rtePlaceholder={props.rtePlaceholder || 'Preview'}
       />
     </CommentContext.Provider>

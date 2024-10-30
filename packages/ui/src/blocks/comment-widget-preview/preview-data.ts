@@ -38,6 +38,7 @@ export const getPreviewComments = (date: string): CommentLeafType[] => {
       pageId: PAGE_ID,
       user: UserJane,
       likes: [],
+      pinnedAt: null,
       replies: [
         {
           id: '87110a09-9a4b-4f41-8784-6f8512449ddf',
@@ -69,6 +70,7 @@ export const getPreviewComments = (date: string): CommentLeafType[] => {
               userId: UserJane.id,
             } as Like,
           ],
+          pinnedAt: null,
           replies: [],
         },
       ] as any,
@@ -99,6 +101,7 @@ export const getPreviewComments = (date: string): CommentLeafType[] => {
       } as User,
       likes: [],
       replies: [],
+      pinnedAt: null,
     } as any,
   ];
 };

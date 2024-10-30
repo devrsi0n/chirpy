@@ -90,9 +90,14 @@ export const getStaticProps: GetStaticProps<
   }
 
   try {
-    await ssg.comment.forest.prefetch({
-      url: pageURL,
-    });
+    await Promise.all([
+      ssg.comment.forest.prefetch({
+        url: pageURL,
+      }),
+      ssg.comment.pinnedComments.prefetch({
+        url: pageURL,
+      }),
+    ]);
 
     if (!page.project.id) {
       log.error(`Can't find  the project`, page);

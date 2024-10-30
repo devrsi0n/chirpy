@@ -14,11 +14,13 @@ import { UserMenu } from '../user-menu';
 import { OrderBy, useCommentOrderBy } from './use-comment-order-by';
 
 export type CommentForestProps = {
+  pinnedComments: RouterOutputs['comment']['pinnedComments'];
   comments: RouterOutputs['comment']['forest'];
   rtePlaceholder?: string;
 };
 
 export function CommentForest({
+  pinnedComments,
   comments,
   rtePlaceholder,
 }: CommentForestProps): JSX.Element {
@@ -45,6 +47,19 @@ export function CommentForest({
             onSubmit={createAComment}
           />
         </div>
+        {pinnedComments.length > 0 && (
+          <ul className="space-y-5" suppressHydrationWarning>
+            <AnimatePresence>
+              {pinnedComments.map(
+                (
+                  comment: RouterOutputs['comment']['pinnedComments'][number],
+                ) => (
+                  <CommentTree key={comment.id} depth={1} comment={comment} />
+                ),
+              )}
+            </AnimatePresence>
+          </ul>
+        )}
         <div className="flex flex-row items-center justify-end space-x-1">
           {orderedComments.length > 1 && (
             <div className="shadow-inner rounded-lg border border-gray-700 bg-gray-500 ring-1 ring-gray-100 dark:ring-gray-300">
@@ -87,11 +102,26 @@ function sortComments(
   if (!orderBy) {
     return comments;
   }
-  const orderedComments = [...comments].sort((a, b) =>
-    orderBy === 'asc'
+
+  const orderedComments = [...comments].sort((a, b) => {
+    // Sort pinned comments first
+    if (a.pinnedAt && !b.pinnedAt) return -1;
+    if (!a.pinnedAt && b.pinnedAt) return 1;
+
+    // If both are pinned, sort by pinnedAt date
+    if (a.pinnedAt && b.pinnedAt) {
+      return orderBy === 'asc'
+        ? dateToNumber(a.pinnedAt) - dateToNumber(b.pinnedAt)
+        : dateToNumber(b.pinnedAt) - dateToNumber(a.pinnedAt);
+    }
+
+    // Then sort by date
+    return orderBy === 'asc'
       ? dateToNumber(a.createdAt) - dateToNumber(b.createdAt)
-      : dateToNumber(b.createdAt) - dateToNumber(a.createdAt),
-  );
+      : dateToNumber(b.createdAt) - dateToNumber(a.createdAt);
+  });
+
+  // Recursively sort replies
   for (const comment of orderedComments) {
     if (comment.replies?.length > 1) {
       // @ts-ignore

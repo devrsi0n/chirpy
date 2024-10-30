@@ -30,6 +30,7 @@ function CommentTree({ comment, depth }: CommentProps): JSX.Element {
         depth={depth}
         createdAt={comment.createdAt}
         deletedAt={comment.deletedAt}
+        pinnedAt={comment.pinnedAt}
       />
       <div className="flex flex-col items-end">
         <ul className="w-[calc(100%-2rem)] sm:w-[calc(100%-4rem)]">

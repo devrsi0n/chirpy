@@ -6,7 +6,6 @@
   "sideEffects": false,
   "types": "./src/index.ts",
   "scripts": {
-    "dev": "pscale connect chirpy dev --port 3309",
     "studio": "prisma studio",
     "generate": "prisma generate",
     "push": "prisma db push",

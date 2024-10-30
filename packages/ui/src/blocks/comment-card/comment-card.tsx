@@ -10,6 +10,7 @@ import { ActionButton, Button } from '../../components/button';
 import {
   IconMessageSquare,
   IconMoreVertical,
+  IconPin,
   IconTrash2,
 } from '../../components/icons';
 import { Menu } from '../../components/menu';
@@ -41,6 +42,7 @@ export type CommentCardProps = {
    * Disable the timeline button, avoid navigate to the same page
    */
   disableTimelineButton?: boolean;
+  pinnedAt?: Date | null;
 };
 
 export function CommentCard({
@@ -52,10 +54,11 @@ export function CommentCard({
   likes,
   disableTimelineButton,
   deletedAt,
+  pinnedAt,
 }: CommentCardProps): JSX.Element {
   const { image, name, username, email } = author;
   const [showReplyEditor, setShowReplyEditor] = React.useState(false);
-  const { projectId, page, deleteAComment, createAComment } =
+  const { projectId, page, deleteAComment, createAComment, toggleAPinAction } =
     useCommentContext();
   const { showToast } = useToast();
   const handleClickConfirmDelete = () => {
@@ -114,11 +117,19 @@ export function CommentCard({
       variants={SHAKE_VARIANTS}
       onAnimationComplete={() => setContainerAnimate('stop')}
       className={clsx(
-        `flex flex-row items-start space-x-3 rounded border border-gray-500 pb-2 pl-4 pt-4 shadow-xs`,
+        `relative flex flex-row items-start space-x-3 rounded border border-gray-500 pb-2 pl-4 pt-4 shadow-xs`,
       )}
       id={isENVDev ? commentId : undefined}
       suppressHydrationWarning
     >
+      {pinnedAt && (
+        <span
+          className="absolute left-1 top-1"
+          title={`Pinned by moderator at ${pinnedAt.toLocaleString()}`}
+        >
+          <IconPin size={18} />
+        </span>
+      )}
       <Avatar
         size="lg"
         src={image}
@@ -158,18 +169,29 @@ export function CommentCard({
                 <Menu.Button className="mr-3">
                   <IconMoreVertical size={20} />
                 </Menu.Button>
-                <Menu.Items>
-                  <Menu.Item className="space-x-1">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setShowDelDialog(true);
-                      }}
-                      className={clsx(`flex flex-row items-center`)}
-                    >
-                      <IconTrash2 size={16} />
-                      <span className="ml-1">Delete</span>
-                    </button>
+                <Menu.Items side="left" align="start">
+                  <Menu.Item
+                    className="space-x-1"
+                    onClick={() => {
+                      setShowDelDialog(true);
+                    }}
+                    as="button"
+                  >
+                    <IconTrash2 size={16} />
+                    <span className="ml-1">Delete</span>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="space-x-1"
+                    as="button"
+                    onClick={() => {
+                      toggleAPinAction(commentId, pinnedAt);
+                    }}
+                  >
+                    <IconPin
+                      size={16}
+                      className={clsx(pinnedAt && 'rotate-45')}
+                    />
+                    <span className="ml-1">{pinnedAt ? 'Unpin' : 'Pin'}</span>
                   </Menu.Item>
                 </Menu.Items>
               </Menu>

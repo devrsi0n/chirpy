@@ -62,3 +62,4 @@ export { default as IconMail } from '@geist-ui/icons/mail';
 export { default as IconEye } from '@geist-ui/icons/eye';
 export { default as IconGithub } from '@geist-ui/icons/github';
 export { default as IconRefreshCw } from '@geist-ui/icons/refreshCw';
+export { default as IconPin } from '@geist-ui/icons/pin';

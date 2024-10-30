@@ -29,6 +29,9 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
       refetchInterval,
     },
   );
+  const { data: pinnedComments } = trpc.comment.pinnedComments.useQuery({
+    url: props.page.url,
+  });
 
   if (isStaticError(props) || !comments) {
     return (
@@ -41,7 +44,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
       <CommentContextProvider projectId={props.projectId} page={props.page}>
         <div className="pt-1">
           {/* @ts-ignore */}
-          <CommentForest comments={comments} />
+          <CommentForest comments={comments} pinnedComments={pinnedComments} />
         </div>
         {props.plan === 'HOBBY' && <PoweredBy />}
       </CommentContextProvider>

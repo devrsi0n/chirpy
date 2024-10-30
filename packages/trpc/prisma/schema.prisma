@@ -39,6 +39,7 @@ model Comment {
   parentId  String?
   userId    String
   content   Json
+  pinnedAt  DateTime?
   deletedAt DateTime?
   page      Page      @relation(fields: [pageId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   parent    Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Restrict, onUpdate: Restrict)
@@ -216,7 +217,7 @@ model User {
   // For usage reporting
   stripeSubscriptionItemId String?
 
-  pages                    Page[]
+  pages Page[]
 }
 
 enum Plan {

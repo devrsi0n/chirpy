@@ -5,6 +5,7 @@ import { CommentContext, CommentContextType } from './comment-context';
 import { useCreateAComment } from './use-create-a-comment';
 import { useDeleteAComment } from './use-delete-a-comment';
 import { useToggleALikeAction } from './use-toggle-a-like-action';
+import { useToggleAPinAction } from './use-toggle-a-pin-action';
 
 export type CommentContextProviderProps = React.PropsWithChildren<{
   projectId: string;
@@ -20,6 +21,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
   });
   const deleteAComment = useDeleteAComment();
   const toggleALikeAction = useToggleALikeAction();
+  const toggleAPinAction = useToggleAPinAction();
   const router = useRouter();
   const onClickCommentTimeline = React.useCallback(
     (href: string) => {
@@ -35,6 +37,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
       deleteAComment,
       toggleALikeAction,
       onClickCommentTimeline,
+      toggleAPinAction,
     }),
     [
       props.projectId,
@@ -42,6 +45,7 @@ export function CommentContextProvider(props: CommentContextProviderProps) {
       createAComment,
       deleteAComment,
       toggleALikeAction,
+      toggleAPinAction,
       onClickCommentTimeline,
     ],
   );

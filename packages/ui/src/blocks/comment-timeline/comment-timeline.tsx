@@ -50,6 +50,7 @@ export function CommentTimeline({
                 depth={depth}
                 createdAt={_comment.createdAt}
                 deletedAt={_comment.deletedAt}
+                pinnedAt={_comment.pinnedAt}
               />
             </ParentBranch>
           );
@@ -67,6 +68,7 @@ export function CommentTimeline({
                 depth={depth + 1}
                 createdAt={reply.createdAt}
                 deletedAt={reply.deletedAt}
+                pinnedAt={reply.pinnedAt}
               />
             </CommentBranch>
           ))}

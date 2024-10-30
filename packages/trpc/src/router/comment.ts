@@ -53,6 +53,7 @@ export const commentRouter = router({
             url: input.url,
           },
           parentId: null,
+          pinnedAt: null,
         },
         include: {
           ...COMMON_COMMENT_SELECTOR,
@@ -176,5 +177,72 @@ export const commentRouter = router({
       });
 
       return comments[0];
+    }),
+  pinnedComments: publicProcedure
+    .input(z.object({ url: z.string() }))
+    .query(async ({ input }) => {
+      const result = await prisma.comment.findMany({
+        where: {
+          page: {
+            url: input.url,
+          },
+          parentId: null,
+          pinnedAt: {
+            not: null,
+          },
+        },
+        include: {
+          ...COMMON_COMMENT_SELECTOR,
+          replies: {
+            include: {
+              ...COMMON_COMMENT_SELECTOR,
+              replies: {
+                include: {
+                  ...COMMON_COMMENT_SELECTOR,
+                  replies: {
+                    include: {
+                      ...COMMON_COMMENT_SELECTOR,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      });
+      return result;
+    }),
+  togglePin: protectedProcedure
+    .input(z.object({ id: z.string(), pinned: z.boolean() }))
+    .mutation(async ({ input, ctx }) => {
+      const comments = await prisma.comment.findMany({
+        where: {
+          id: input.id,
+          page: {
+            project: {
+              id: {
+                // Only site owner can pin comments, currently
+                in: ctx.session.user.editableProjectIds,
+              },
+            },
+          },
+        },
+        select: {
+          id: true,
+        },
+      });
+      if (comments.length === 0) {
+        // Stop malicious user from pinning other users comments
+        throw new TRPCError({ code: 'UNAUTHORIZED' });
+      }
+      const comment = await prisma.comment.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          pinnedAt: input.pinned ? new Date() : null,
+        },
+      });
+      return comment;
     }),
 });
