@@ -15,6 +15,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
 
   const result = await prisma.comment.deleteMany({
     where: {
+      pinnedAt: null,
       createdAt: {
         lt: beforeDate,
       },
