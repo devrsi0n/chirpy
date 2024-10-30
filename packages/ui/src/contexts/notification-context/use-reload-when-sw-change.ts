@@ -1,13 +1,11 @@
 import * as React from 'react';
 
-import { useToast } from '../../components/toast';
 import { logger } from '../../utilities/logger';
 import { checkServiceWorkerCompatibility } from './utilities';
 
 // export interface IUseReloadWhenSwChangeOptions {}
 
 export function useReloadWhenSwChange() {
-  const { showToast } = useToast();
   React.useEffect(() => {
     if (!checkServiceWorkerCompatibility()) {
       return;
@@ -38,26 +36,16 @@ export function useReloadWhenSwChange() {
       registration.update();
 
       handleNewServiceWorker(registration, () => {
-        showToast({
-          type: 'info',
-          title: 'New version available',
-          persistent: true,
-          action: {
-            label: 'Refresh',
-            onClick: () => {
-              if (!registration.waiting) {
-                // Just to ensure registration.waiting is available before
-                // calling postMessage()
-                return;
-              }
+        if (!registration.waiting) {
+          // Just to ensure registration.waiting is available before
+          // calling postMessage()
+          return;
+        }
 
-              registration.waiting.postMessage('skipWaiting');
-            },
-          },
-        });
+        registration.waiting.postMessage('skipWaiting');
       });
     });
-  }, [showToast]);
+  }, []);
 }
 
 function handleNewServiceWorker(
