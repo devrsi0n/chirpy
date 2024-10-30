@@ -42,7 +42,7 @@ export function NotificationHub(): JSX.Element {
             <span className="absolute right-[3px] top-[1px] rounded-full bg-red-900 p-1 ring-1 ring-white dark:ring-black" />
           )}
         </Menu.Button>
-        <Menu.Items>
+        <Menu.Items side="left" align="start">
           <Heading as="h4" className="px-5 py-3 font-bold">
             Notifications
           </Heading>

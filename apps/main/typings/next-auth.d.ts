@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import NextAuth from 'next-auth';
+import { Plan as PlanUnion } from '@prisma/client';
 
 declare module 'next-auth' {
   /**
@@ -13,6 +14,7 @@ declare module 'next-auth' {
       username: string;
       email: string;
       image: string;
+      plan: PlanUnion;
       editableProjectIds: string[];
     };
   }
