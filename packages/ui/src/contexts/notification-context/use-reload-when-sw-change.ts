@@ -27,52 +27,59 @@ export function useReloadWhenSwChange() {
     }
 
     navigator.serviceWorker.register('/sw.js').then((registration) => {
-      // Track updates to the Service Worker.
       if (!navigator.serviceWorker.controller) {
-        // The window client isn't currently controlled so it's a new service
-        // worker that will activate immediately
         return;
       }
       registration.update();
 
-      handleNewServiceWorker(registration, () => {
-        if (!registration.waiting) {
-          // Just to ensure registration.waiting is available before
-          // calling postMessage()
-          return;
+      // Handle both page refresh/close and SPA navigation
+      const skipWaitingOnNavigation = () => {
+        if (registration.waiting) {
+          logger.debug('Activating new service worker on navigation');
+          registration.waiting.postMessage('skipWaiting');
         }
+      };
 
-        registration.waiting.postMessage('skipWaiting');
+      // Listen for regular page unload
+      window.addEventListener('beforeunload', skipWaitingOnNavigation);
+
+      // Listen for SPA navigation
+      window.addEventListener('popstate', skipWaitingOnNavigation);
+      const originalPushState = history.pushState.bind(history);
+      const originalReplaceState = history.replaceState.bind(history);
+
+      history.pushState = (...args) => {
+        originalPushState(...args);
+        skipWaitingOnNavigation();
+      };
+
+      history.replaceState = (...args) => {
+        originalReplaceState(...args);
+        skipWaitingOnNavigation();
+      };
+
+      registration.addEventListener('updatefound', () => {
+        registration.installing?.addEventListener(
+          'statechange',
+          (event: Event) => {
+            // @ts-ignore
+            if (event.target?.state === 'installed' && registration.waiting) {
+              // Will activate on next navigation
+              logger.debug(
+                'New service worker installed, waiting for navigation',
+              );
+            }
+          },
+        );
       });
+
+      // Cleanup
+      return () => {
+        window.removeEventListener('beforeunload', skipWaitingOnNavigation);
+        window.removeEventListener('popstate', skipWaitingOnNavigation);
+        history.pushState = originalPushState;
+        history.replaceState = originalReplaceState;
+      };
     });
   }, []);
-}
-
-function handleNewServiceWorker(
-  registration: ServiceWorkerRegistration,
-  callback: () => void,
-) {
-  if (registration.waiting) {
-    // SW is waiting to activate. Can occur if multiple clients open and
-    // one of the clients is refreshed.
-    return callback();
-  }
-
-  function listenInstalledStateChange() {
-    registration.installing?.addEventListener('statechange', (event: Event) => {
-      // @ts-ignore
-      if (event.target?.state === 'installed') {
-        // A new service worker is available, inform the user
-        callback();
-      }
-    });
-  }
-
-  if (registration.installing) {
-    return listenInstalledStateChange();
-  }
-
-  // We are currently controlled so a new SW may be found...
-  // Add a listener in case a new SW is found,
-  registration.addEventListener('updatefound', listenInstalledStateChange);
 }
