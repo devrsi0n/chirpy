@@ -40,7 +40,7 @@ export function UserMenu(props: UserMenuProps): JSX.Element {
           username={username}
         />
       </Menu.Button>
-      <Menu.Items side="left" align="start">
+      <Menu.Items {...(isWidget ? { side: 'left', align: 'start' } : {})}>
         {name && (
           <div className="mx-4 w-36 space-y-1 py-2">
             {plan && plan !== 'HOBBY' && (
