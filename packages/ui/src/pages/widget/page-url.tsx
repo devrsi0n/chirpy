@@ -78,7 +78,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
       refetchInterval,
     },
   );
-  const { data: pinnedComments } = trpc.comment.pinnedComments.useQuery({
+  const { data: pinnedComments = [] } = trpc.comment.pinnedComments.useQuery({
     url: props.page.url,
   });
 
@@ -93,7 +93,7 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
     '@context': 'https://schema.org',
     '@type': 'DiscussionForumPosting',
     url: props.page.url,
-    comment: comments.map((comment: ForestComment) =>
+    comment: [...comments, ...pinnedComments].map((comment: ForestComment) =>
       createCommentJsonLd(comment, props.page.url),
     ) as Comment[],
   };
