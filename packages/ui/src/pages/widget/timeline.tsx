@@ -1,14 +1,22 @@
-import { trpc } from '@chirpy-dev/trpc/src/client';
-import { CommonWidgetProps } from '@chirpy-dev/types';
+import { trpc, type RouterOutputs } from '@chirpy-dev/trpc/src/client';
+import { CommonWidgetProps, type RTEValue } from '@chirpy-dev/types';
+import { getTextFromRteValue } from '@chirpy-dev/utils';
 import * as React from 'react';
+import type {
+  Comment,
+  InteractionCounter,
+  LikeAction,
+  Person,
+} from 'schema-dts';
 
 import {
-  CommentTimeline,
+  CommentTimeline as CommentTimelineComponent,
   PoweredBy,
   UserMenu,
   WidgetLayout,
 } from '../../blocks';
 import { Heading, IconArrowLeft, IconButton, Link } from '../../components';
+import { JSONLD } from '../../components/json-ld/json-ld';
 import { CommentContextProvider } from '../../contexts';
 import { useRefetchInterval } from './use-refetch-interval';
 
@@ -20,6 +28,56 @@ export type CommentTimelineWidgetProps = CommonWidgetProps & {
     authorId: string | null;
   };
 };
+
+type TimelineComment = NonNullable<RouterOutputs['comment']['timeline']>;
+/**
+ * Creates a JSON-LD comment structure recursively for a comment and its replies
+ */
+function createCommentJsonLd(
+  comment: TimelineComment,
+  pageUrl: string,
+): Comment | null {
+  const author: Person = {
+    '@type': 'Person',
+    name: comment.user.name || '',
+    image: comment.user.image || undefined,
+  };
+
+  const commentJsonLd: Comment = {
+    '@type': 'Comment',
+    text: getTextFromRteValue(comment.content as RTEValue),
+    dateCreated: comment.createdAt.toISOString(),
+    author: author,
+    url: `${pageUrl}#comment-${comment.id}`,
+    mainEntityOfPage: pageUrl,
+  };
+
+  // Add likes information if available
+  if (comment.likes && comment.likes.length > 0) {
+    commentJsonLd.interactionStatistic = {
+      '@type': 'InteractionCounter',
+      interactionType: 'https://schema.org/LikeAction' as unknown as LikeAction,
+      userInteractionCount: comment.likes.length,
+    } as InteractionCounter;
+  }
+
+  // Add information about parent comment if it exists
+  if (comment.parentId) {
+    commentJsonLd.parentItem = {
+      '@type': 'Comment',
+      url: `${pageUrl}#comment-${comment.parentId}`,
+    } as Comment;
+  }
+
+  // Recursively process replies (if they exist in the timeline data)
+  if (comment.replies && comment.replies.length > 0) {
+    commentJsonLd.comment = comment.replies
+      .map((reply: any) => createCommentJsonLd(reply, pageUrl))
+      .filter(Boolean) as Comment[];
+  }
+
+  return commentJsonLd;
+}
 
 export function CommentTimelineWidget(
   props: CommentTimelineWidgetProps,
@@ -34,8 +92,18 @@ export function CommentTimelineWidget(
     },
   );
 
+  // Generate JSON-LD data for the comment timeline
+  const jsonLdData = comment
+    ? createCommentJsonLd(comment, props.page.url)
+    : null;
+
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">
+      {jsonLdData && (
+        <JSONLD<Comment>
+          data={{ '@context': 'https://schema.org', ...jsonLdData }}
+        />
+      )}
       <CommentContextProvider projectId={props.projectId} page={props.page}>
         <div className="mb-4 flex flex-row items-center justify-between">
           {/* Can't use history.back() here in case user open this page individual */}
@@ -54,7 +122,9 @@ export function CommentTimelineWidget(
           <UserMenu variant="Widget" />
         </div>
 
-        {comment?.id && <CommentTimeline key={comment.id} comment={comment} />}
+        {comment?.id && (
+          <CommentTimelineComponent key={comment.id} comment={comment} />
+        )}
         {props.plan === 'HOBBY' && <PoweredBy />}
       </CommentContextProvider>
     </WidgetLayout>
