@@ -33,23 +33,21 @@ type TimelineComment = NonNullable<RouterOutputs['comment']['timeline']>;
 /**
  * Creates a JSON-LD comment structure recursively for a comment and its replies
  */
-function createCommentJsonLd(
-  comment: TimelineComment,
-  pageUrl: string,
-): Comment | null {
+function createCommentJsonLd(comment: TimelineComment): Comment | null {
   const author: Person = {
     '@type': 'Person',
     name: comment.user.name || '',
     image: comment.user.image || undefined,
   };
 
+  const jsonldUrl = `https://chirpy.dev/widget/comment/timeline/${comment.id}`;
   const commentJsonLd: Comment = {
     '@type': 'Comment',
     text: getTextFromRteValue(comment.content as RTEValue),
     dateCreated: comment.createdAt.toISOString(),
     author: author,
-    url: `${pageUrl}#comment-${comment.id}`,
-    mainEntityOfPage: pageUrl,
+    url: jsonldUrl,
+    mainEntityOfPage: jsonldUrl,
   };
 
   // Add likes information if available
@@ -65,14 +63,14 @@ function createCommentJsonLd(
   if (comment.parentId) {
     commentJsonLd.parentItem = {
       '@type': 'Comment',
-      url: `${pageUrl}#comment-${comment.parentId}`,
+      url: `https://chirpy.dev/widget/comment/timeline/${comment.parentId}`,
     } as Comment;
   }
 
   // Recursively process replies (if they exist in the timeline data)
   if (comment.replies && comment.replies.length > 0) {
     commentJsonLd.comment = comment.replies
-      .map((reply: any) => createCommentJsonLd(reply, pageUrl))
+      .map((reply: any) => createCommentJsonLd(reply))
       .filter(Boolean) as Comment[];
   }
 
@@ -93,9 +91,7 @@ export function CommentTimelineWidget(
   );
 
   // Generate JSON-LD data for the comment timeline
-  const jsonLdData = comment
-    ? createCommentJsonLd(comment, props.page.url)
-    : null;
+  const jsonLdData = comment ? createCommentJsonLd(comment) : null;
 
   return (
     <WidgetLayout widgetTheme={props.theme} title="Comment timeline">

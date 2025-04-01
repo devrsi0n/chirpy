@@ -88,13 +88,17 @@ export function CommentWidgetPage(props: PageCommentProps): JSX.Element {
     );
   }
 
+  const jsonldUrl = `https://chirpy.dev/widget/comment/${encodeURIComponent(
+    props.page.url,
+  )}`;
   // Create JSON-LD structured data for the comments
   const jsonLdData: WithContext<DiscussionForumPosting> = {
     '@context': 'https://schema.org',
     '@type': 'DiscussionForumPosting',
-    url: props.page.url,
+    headline: `Comments on ${props.page.url} - Powered by Chirpy`,
+    url: jsonldUrl,
     comment: [...comments, ...pinnedComments].map((comment: ForestComment) =>
-      createCommentJsonLd(comment, props.page.url),
+      createCommentJsonLd(comment, jsonldUrl),
     ) as Comment[],
   };
 
