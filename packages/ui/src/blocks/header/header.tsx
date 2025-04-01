@@ -51,7 +51,11 @@ export function Header(): JSX.Element {
                   </Link>
                 </SideMenu.Item>
                 <SideMenu.Item>
-                  <Link size="lg" href="/blog" className={styles}>
+                  <Link
+                    size="lg"
+                    href="https://blog.chirpy.dev"
+                    className={styles}
+                  >
                     Blog
                   </Link>
                 </SideMenu.Item>
@@ -81,7 +85,7 @@ export function Header(): JSX.Element {
                   </Link>
                 )}
                 <Link href="/docs">Docs</Link>
-                <Link href="/blog">Blog</Link>
+                <Link href="https://blog.chirpy.dev">Blog</Link>
                 <Link href="https://github.com/devrsi0n/chirpy">GitHub</Link>
               </nav>
             </div>

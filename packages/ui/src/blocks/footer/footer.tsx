@@ -24,7 +24,7 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         <Link href="/docs" variant="secondary">
           Docs
         </Link>
-        <Link href="/blog" variant="secondary">
+        <Link href="https://blog.chirpy.dev" variant="secondary">
           Blog
         </Link>
         <Link href="/#pricing" variant="secondary">
