@@ -24,7 +24,7 @@
     "@radix-ui/colors": "1.0.1",
     "@t3-oss/env-nextjs": "0.6.0",
     "@tensorflow-models/toxicity": "1.2.2",
-    "@tensorflow/tfjs": "3.18.0",
+    "@tensorflow/tfjs": "4.22.0",
     "@tensorflow/tfjs-converter": "3.18.0",
     "@tensorflow/tfjs-core": "3.18.0",
     "@upstash/qstash": "0.3.6",
