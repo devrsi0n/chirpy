@@ -2,15 +2,15 @@ import { Editor } from '@tiptap/react';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { BaseButtonProps, BaseButton } from '../../components/button';
+import { BaseButton, BaseButtonProps } from '../../components/button';
 import {
+  Icon,
+  IconBlockQuote,
   IconBold,
   IconCode,
-  IconBlockQuote,
   IconItalic,
   IconList,
   IconUnderline,
-  Icon,
 } from '../../components/icons';
 import { Select } from '../../components/select';
 import { listHoverableColor } from '../../styles/common';
@@ -29,7 +29,7 @@ export const BaseMarkButton = React.forwardRef(function BaseMarkButton(
   return (
     <BaseButton
       className={clsx(
-        `rounded p-1.5 text-gray-1100`,
+        `flex gap-1 rounded p-1.5 text-gray-1100`,
         listHoverableColor,
         isActive && `bg-primary-300 text-primary-1000`,
         className,
@@ -72,6 +72,7 @@ type BlockButtonFormat = 'bulletList' | 'blockquote';
 export type BlockButtonProps = {
   format: BlockButtonFormat;
   editor: Editor;
+  children?: React.ReactNode;
 };
 
 const blockMap: Record<BlockButtonFormat, [Icon, string]> = {
@@ -79,7 +80,11 @@ const blockMap: Record<BlockButtonFormat, [Icon, string]> = {
   blockquote: [IconBlockQuote, 'toggleBlockquote'],
 };
 
-export function BlockButton({ format, editor }: BlockButtonProps): JSX.Element {
+export function BlockButton({
+  format,
+  editor,
+  children,
+}: BlockButtonProps): JSX.Element {
   const [Icon, methodName] = blockMap[format];
   return (
     <BaseMarkButton
@@ -89,6 +94,7 @@ export function BlockButton({ format, editor }: BlockButtonProps): JSX.Element {
       }}
     >
       <Icon size={20} />
+      <span>{children}</span>
     </BaseMarkButton>
   );
 }

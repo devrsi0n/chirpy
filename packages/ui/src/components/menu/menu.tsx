@@ -5,7 +5,7 @@ import * as React from 'react';
 
 import { bluredBg, listHoverable } from '../../styles/common';
 import { Box, BoxProps } from '../box';
-import { Button, IconButton } from '../button';
+import { Button, IconButton, type ButtonProps } from '../button';
 import { Divider } from '../divider';
 import styles from './menu.module.scss';
 
@@ -50,6 +50,7 @@ export type MenuButtonProps = {
   ariaLabel?: string;
   open?: boolean;
   onClick?(open?: boolean): void;
+  variant?: ButtonProps['variant'];
 };
 
 function MenuButton({
