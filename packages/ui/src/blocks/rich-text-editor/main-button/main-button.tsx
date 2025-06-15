@@ -6,6 +6,7 @@ import { ButtonProps } from '../../../components/button';
 import { IconLoader, IconSend } from '../../../components/icons';
 import { useCurrentUser } from '../../../contexts/current-user-context';
 import { useNotificationContext } from '../../../contexts/notification-context';
+import { useLocalStorage } from '../../../hooks';
 import { useAsync } from '../../../hooks/use-async';
 import { useEventListener } from '../../../hooks/use-event-listener';
 import { SignInButton } from '../../sign-in-button';
@@ -54,6 +55,10 @@ export function MainButton({
     await handleCheckToxicTextBeforeSubmit();
   };
   const [askNextTime, setAskNextTime] = React.useState(false);
+  const [dontAskAgain, setDontAskAgain] = useLocalStorage(
+    false,
+    'chirpy-dont-ask-notification',
+  );
   const isLoading = status === 'pending';
   const postButtonProps: Partial<ButtonProps> = {
     size: 'sm',
@@ -84,7 +89,11 @@ export function MainButton({
   return (
     <div className="flex flex-row justify-end space-x-2">
       {isSignIn ? (
-        !supportNotification || didRegister || didDeny || askNextTime ? (
+        !supportNotification ||
+        didRegister ||
+        didDeny ||
+        askNextTime ||
+        dontAskAgain ? (
           <ToxicTextPopover
             buttonProps={postButtonProps}
             onClickSubmit={handleCheckToxicTextBeforeSubmit}
@@ -95,6 +104,10 @@ export function MainButton({
           </ToxicTextPopover>
         ) : (
           <AskNotificationPermissionPopover
+            onClickDontAskAgain={() => {
+              setDontAskAgain(true);
+              handleCheckToxicTextBeforeSubmit();
+            }}
             onClickAskNextTime={() => {
               setAskNextTime(true);
               handleCheckToxicTextBeforeSubmit();

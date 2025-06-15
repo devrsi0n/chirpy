@@ -4,7 +4,7 @@ import * as React from 'react';
 import { BaseButton, BaseButtonProps } from './base-button';
 import styles from './button.module.scss';
 
-type Size = 'sm' | 'md' | 'lg' | 'xl';
+type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type Color = 'primary' | 'red' | 'gray';
 type Variant = 'solid' | 'default' | 'text' /*| 'ghost' */;
 
@@ -123,6 +123,7 @@ function ButtonDrip({ x = 0, y = 0, onCompleted }: ButtonDripProps) {
 }
 
 const sizeStyles: Record<Size, string> = {
+  xs: `py-0.5 px-2 text-xs space-x-1`,
   sm: `py-1 px-2.5 text-sm space-x-1`,
   md: `py-2 px-3 text-base`,
   lg: `py-3 px-4 text-lg`,
