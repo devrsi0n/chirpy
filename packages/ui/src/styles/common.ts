@@ -10,7 +10,7 @@ export const bluredBg = `
 
 export const border = `border outline-none focus-visible:border-primary-900`;
 
-export const listHoverableColor = `transition hover:bg-primary-400 hover:text-primary-1100`;
+export const listHoverableColor = `transition hover:bg-primary-400 hover:text-primary-1100 dark:hover:text-white`;
 export const listHoverable = `px-2 py-1 rounded ${listHoverableColor}`;
 
 export const ring = `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-bg focus-visible:ring-offset-2 focus-visible:ring-primary-700`;

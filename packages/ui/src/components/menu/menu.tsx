@@ -145,4 +145,4 @@ function MenuItem({
 
 export const MenuItemPadding = `px-4 py-3`;
 
-const itemStyle = `font-medium transition flex flex-row items-center border-none text-gray-1200 cursor-pointer w-full text-sm text-right gap-2`;
+const itemStyle = `font-medium transition flex flex-row items-center border-none text-gray-1100 cursor-pointer w-full text-sm text-right gap-2`;

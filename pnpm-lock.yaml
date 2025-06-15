@@ -30,8 +30,8 @@ importers:
         specifier: 13.2.3
         version: 13.2.3(enquirer@2.3.6)
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       prettier:
         specifier: 2.8.8
         version: 2.8.8
@@ -214,11 +214,11 @@ importers:
         specifier: 10.0.1
         version: 10.0.1
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-axiom:
         specifier: 0.17.0
-        version: 0.17.0(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
+        version: 0.17.0(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
       next-connect:
         specifier: 0.12.2
         version: 0.12.2
@@ -227,10 +227,10 @@ importers:
         version: 3.0.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-superjson-plugin:
         specifier: 0.5.9
-        version: 0.5.9(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(superjson@1.13.1)
+        version: 0.5.9(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(superjson@1.13.1)
       next-themes:
         specifier: 0.2.1
-        version: 0.2.1(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       nodemailer:
         specifier: 6.9.4
         version: 6.9.4
@@ -287,8 +287,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/tsconfigs
       '@next/bundle-analyzer':
-        specifier: 14.1.0
-        version: 14.1.0
+        specifier: 14.1.4
+        version: 14.1.4
       '@relative-ci/agent':
         specifier: 4.1.6
         version: 4.1.6(webpack@5.89.0)
@@ -435,8 +435,8 @@ importers:
         specifier: 10.16.5
         version: 10.16.5(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       prop-types:
         specifier: 15.8.1
         version: 15.8.1
@@ -563,8 +563,8 @@ importers:
         specifier: 48.0.1
         version: 48.0.1(eslint@8.47.0)
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       prettier:
         specifier: 2.8.8
         version: 2.8.8
@@ -635,7 +635,7 @@ importers:
         version: link:../utils
       '@next-auth/prisma-adapter':
         specifier: 1.0.7
-        version: 1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+        version: 1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@prisma/client':
         specifier: 5.11.0
         version: 5.11.0(prisma@5.11.0)
@@ -647,7 +647,7 @@ importers:
         version: 10.37.1(@trpc/server@10.37.1)
       '@trpc/next':
         specifier: 10.37.1
-        version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/server@10.37.1)(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/server@10.37.1)(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@trpc/react-query':
         specifier: 10.37.1
         version: 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -664,14 +664,14 @@ importers:
         specifier: 5.0.7
         version: 5.0.7
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-axiom:
         specifier: 0.17.0
-        version: 0.17.0(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
+        version: 0.17.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -737,11 +737,11 @@ importers:
         specifier: 3.1.2
         version: 3.1.2
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-mdx-remote:
         specifier: 3.0.8
         version: 3.0.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -851,23 +851,23 @@ importers:
         specifier: 2.3.0
         version: 2.3.0
       next:
-        specifier: 14.1.1
-        version: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+        specifier: 14.1.4
+        version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-axiom:
         specifier: 0.17.0
-        version: 0.17.0(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
+        version: 0.17.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
       next-mdx-remote:
         specifier: 3.0.8
         version: 3.0.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-seo:
         specifier: 6.4.0
-        version: 6.4.0(next@14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 6.4.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-themes:
         specifier: 0.2.1
-        version: 0.2.1(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.2.1(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       prism-react-renderer:
         specifier: 2.0.6
         version: 2.0.6(react@18.2.0)
@@ -1027,7 +1027,7 @@ importers:
         version: 13.3.2(sass@1.69.5)(webpack@5.89.0)
       storybook-addon-next:
         specifier: 1.7.1
-        version: 1.7.1(@storybook/addon-actions@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@storybook/addons@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(next@14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(postcss@8.4.27)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)(webpack@5.89.0)
+        version: 1.7.1(@storybook/addon-actions@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@storybook/addons@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(postcss@8.4.27)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)(webpack@5.89.0)
       style-loader:
         specifier: 3.3.3
         version: 3.3.3(webpack@5.89.0)
@@ -2765,65 +2765,65 @@ packages:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
 
-  '@next/bundle-analyzer@14.1.0':
-    resolution: {integrity: sha512-RJWjnlMp/1WSW0ahAdawV22WgJiC6BVaFS5Xfhw6gP7NJEX3cAJjh4JqSHKGr8GnLNRaFCVTQdDPoX84E421BA==}
+  '@next/bundle-analyzer@14.1.4':
+    resolution: {integrity: sha512-IpF/18HcAOcfHRr24tqPOUpMmVKIqvkCxIubMeRYWCXs3jm7niPGrt8Mu74yMDzfGlUwgQA6Xd6BUc5+jQxcEg==}
 
-  '@next/env@14.1.1':
-    resolution: {integrity: sha512-7CnQyD5G8shHxQIIg3c7/pSeYFeMhsNbpU/bmvH7ZnDql7mNRgg8O2JZrhrc/soFnfBnKP4/xXNiiSIPn2w8gA==}
+  '@next/env@14.1.4':
+    resolution: {integrity: sha512-e7X7bbn3Z6DWnDi75UWn+REgAbLEqxI8Tq2pkFOFAMpWAWApz/YCUhtWMWn410h8Q2fYiYL7Yg5OlxMOCfFjJQ==}
 
   '@next/eslint-plugin-next@14.1.0':
     resolution: {integrity: sha512-x4FavbNEeXx/baD/zC/SdrvkjSby8nBn8KcCREqk6UuwvwoAPZmaV8TFCAuo/cpovBRTIY67mHhe86MQQm/68Q==}
 
-  '@next/swc-darwin-arm64@14.1.1':
-    resolution: {integrity: sha512-yDjSFKQKTIjyT7cFv+DqQfW5jsD+tVxXTckSe1KIouKk75t1qZmj/mV3wzdmFb0XHVGtyRjDMulfVG8uCKemOQ==}
+  '@next/swc-darwin-arm64@14.1.4':
+    resolution: {integrity: sha512-ubmUkbmW65nIAOmoxT1IROZdmmJMmdYvXIe8211send9ZYJu+SqxSnJM4TrPj9wmL6g9Atvj0S/2cFmMSS99jg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@14.1.1':
-    resolution: {integrity: sha512-KCQmBL0CmFmN8D64FHIZVD9I4ugQsDBBEJKiblXGgwn7wBCSe8N4Dx47sdzl4JAg39IkSN5NNrr8AniXLMb3aw==}
+  '@next/swc-darwin-x64@14.1.4':
+    resolution: {integrity: sha512-b0Xo1ELj3u7IkZWAKcJPJEhBop117U78l70nfoQGo4xUSvv0PJSTaV4U9xQBLvZlnjsYkc8RwQN1HoH/oQmLlQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@14.1.1':
-    resolution: {integrity: sha512-YDQfbWyW0JMKhJf/T4eyFr4b3tceTorQ5w2n7I0mNVTFOvu6CGEzfwT3RSAQGTi/FFMTFcuspPec/7dFHuP7Eg==}
+  '@next/swc-linux-arm64-gnu@14.1.4':
+    resolution: {integrity: sha512-457G0hcLrdYA/u1O2XkRMsDKId5VKe3uKPvrKVOyuARa6nXrdhJOOYU9hkKKyQTMru1B8qEP78IAhf/1XnVqKA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@14.1.1':
-    resolution: {integrity: sha512-fiuN/OG6sNGRN/bRFxRvV5LyzLB8gaL8cbDH5o3mEiVwfcMzyE5T//ilMmaTrnA8HLMS6hoz4cHOu6Qcp9vxgQ==}
+  '@next/swc-linux-arm64-musl@14.1.4':
+    resolution: {integrity: sha512-l/kMG+z6MB+fKA9KdtyprkTQ1ihlJcBh66cf0HvqGP+rXBbOXX0dpJatjZbHeunvEHoBBS69GYQG5ry78JMy3g==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@14.1.1':
-    resolution: {integrity: sha512-rv6AAdEXoezjbdfp3ouMuVqeLjE1Bin0AuE6qxE6V9g3Giz5/R3xpocHoAi7CufRR+lnkuUjRBn05SYJ83oKNQ==}
+  '@next/swc-linux-x64-gnu@14.1.4':
+    resolution: {integrity: sha512-BapIFZ3ZRnvQ1uWbmqEGJuPT9cgLwvKtxhK/L2t4QYO7l+/DxXuIGjvp1x8rvfa/x1FFSsipERZK70pewbtJtw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@14.1.1':
-    resolution: {integrity: sha512-YAZLGsaNeChSrpz/G7MxO3TIBLaMN8QWMr3X8bt6rCvKovwU7GqQlDu99WdvF33kI8ZahvcdbFsy4jAFzFX7og==}
+  '@next/swc-linux-x64-musl@14.1.4':
+    resolution: {integrity: sha512-mqVxTwk4XuBl49qn2A5UmzFImoL1iLm0KQQwtdRJRKl21ylQwwGCxJtIYo2rbfkZHoSKlh/YgztY0qH3wG1xIg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@14.1.1':
-    resolution: {integrity: sha512-1L4mUYPBMvVDMZg1inUYyPvFSduot0g73hgfD9CODgbr4xiTYe0VOMTZzaRqYJYBA9mana0x4eaAaypmWo1r5A==}
+  '@next/swc-win32-arm64-msvc@14.1.4':
+    resolution: {integrity: sha512-xzxF4ErcumXjO2Pvg/wVGrtr9QQJLk3IyQX1ddAC/fi6/5jZCZ9xpuL9Tzc4KPWMFq8GGWFVDMshZOdHGdkvag==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-ia32-msvc@14.1.1':
-    resolution: {integrity: sha512-jvIE9tsuj9vpbbXlR5YxrghRfMuG0Qm/nZ/1KDHc+y6FpnZ/apsgh+G6t15vefU0zp3WSpTMIdXRUsNl/7RSuw==}
+  '@next/swc-win32-ia32-msvc@14.1.4':
+    resolution: {integrity: sha512-WZiz8OdbkpRw6/IU/lredZWKKZopUMhcI2F+XiMAcPja0uZYdMTZQRoQ0WZcvinn9xZAidimE7tN9W5v9Yyfyw==}
     engines: {node: '>= 10'}
     cpu: [ia32]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@14.1.1':
-    resolution: {integrity: sha512-S6K6EHDU5+1KrBDLko7/c1MNy/Ya73pIAmvKeFwsF4RmBFJSO7/7YeD4FnZ4iBdzE69PpQ4sOMU9ORKeNuxe8A==}
+  '@next/swc-win32-x64-msvc@14.1.4':
+    resolution: {integrity: sha512-4Rto21sPfw555sZ/XNLqfxDUNeLhNYGO2dlPqsnuCg8N8a2a9u1ltqBOPQ4vj1Gf7eJC0W2hHG2eYUHuiXgY2w==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -9719,8 +9719,8 @@ packages:
       react: '*'
       react-dom: '*'
 
-  next@14.1.1:
-    resolution: {integrity: sha512-McrGJqlGSHeaz2yTRPkEucxQKe5Zq7uPwyeHNmJaZNY4wx9E9QdxmTp310agFRoMuIYgQrCrT3petg13fSVOww==}
+  next@14.1.4:
+    resolution: {integrity: sha512-1WTaXeSrUwlz/XcnhGTY7+8eiaFvdet5z9u3V2jb+Ek1vFo0VhHKSAIJvDWfQpttWjnyw14kBeq28TPq7bTeEQ==}
     engines: {node: '>=18.17.0'}
     hasBin: true
     peerDependencies:
@@ -15788,49 +15788,49 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@prisma/client': 5.11.0(prisma@5.11.0)
-      next-auth: 4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next-auth: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
-  '@next/bundle-analyzer@14.1.0':
+  '@next/bundle-analyzer@14.1.4':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@next/env@14.1.1': {}
+  '@next/env@14.1.4': {}
 
   '@next/eslint-plugin-next@14.1.0':
     dependencies:
       glob: 10.3.10
 
-  '@next/swc-darwin-arm64@14.1.1':
+  '@next/swc-darwin-arm64@14.1.4':
     optional: true
 
-  '@next/swc-darwin-x64@14.1.1':
+  '@next/swc-darwin-x64@14.1.4':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@14.1.1':
+  '@next/swc-linux-arm64-gnu@14.1.4':
     optional: true
 
-  '@next/swc-linux-arm64-musl@14.1.1':
+  '@next/swc-linux-arm64-musl@14.1.4':
     optional: true
 
-  '@next/swc-linux-x64-gnu@14.1.1':
+  '@next/swc-linux-x64-gnu@14.1.4':
     optional: true
 
-  '@next/swc-linux-x64-musl@14.1.1':
+  '@next/swc-linux-x64-musl@14.1.4':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@14.1.1':
+  '@next/swc-win32-arm64-msvc@14.1.4':
     optional: true
 
-  '@next/swc-win32-ia32-msvc@14.1.1':
+  '@next/swc-win32-ia32-msvc@14.1.4':
     optional: true
 
-  '@next/swc-win32-x64-msvc@14.1.1':
+  '@next/swc-win32-x64-msvc@14.1.4':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -18133,13 +18133,13 @@ snapshots:
     dependencies:
       '@trpc/server': 10.37.1
 
-  '@trpc/next@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/server@10.37.1)(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@trpc/next@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/react-query@10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/server@10.37.1)(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@tanstack/react-query': 4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@trpc/client': 10.37.1(@trpc/server@10.37.1)
       '@trpc/react-query': 10.37.1(@tanstack/react-query@4.32.6(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@trpc/client@10.37.1(@trpc/server@10.37.1))(@trpc/server@10.37.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@trpc/server': 10.37.1
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-ssr-prepass: 1.5.0(react@18.2.0)
@@ -21395,7 +21395,7 @@ snapshots:
       eslint: 8.47.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.47.0)
       eslint-plugin-react: 7.33.2(eslint@8.47.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.47.0)
@@ -21423,7 +21423,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.47.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21445,7 +21445,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -24882,13 +24882,13 @@ snapshots:
     dependencies:
       type-fest: 2.19.0
 
-  next-auth@4.24.5(next@14.1.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-auth@4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.23.2
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.15.4
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       oauth: 0.9.15
       openid-client: 5.6.1
       preact: 10.19.2
@@ -24899,9 +24899,14 @@ snapshots:
     optionalDependencies:
       nodemailer: 6.9.4
 
-  next-axiom@0.17.0(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)):
+  next-axiom@0.17.0(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)):
     dependencies:
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      whatwg-fetch: 3.6.2
+
+  next-axiom@0.17.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)):
+    dependencies:
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       whatwg-fetch: 3.6.2
 
   next-connect@0.12.2:
@@ -24919,27 +24924,59 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  next-seo@6.4.0(next@14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-seo@6.4.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  next-superjson-plugin@0.5.9(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(superjson@1.13.1):
+  next-superjson-plugin@0.5.9(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(superjson@1.13.1):
     dependencies:
       hoist-non-react-statics: 3.3.2
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       superjson: 1.13.1
 
-  next-themes@0.2.1(next@14.1.1(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-themes@0.2.1(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  next@14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5):
+  next-themes@0.2.1(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@next/env': 14.1.1
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+
+  next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5):
+    dependencies:
+      '@next/env': 14.1.4
+      '@swc/helpers': 0.5.2
+      busboy: 1.6.0
+      caniuse-lite: 1.0.30001580
+      graceful-fs: 4.2.11
+      postcss: 8.4.31
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      styled-jsx: 5.1.1(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react@18.2.0)
+    optionalDependencies:
+      '@next/swc-darwin-arm64': 14.1.4
+      '@next/swc-darwin-x64': 14.1.4
+      '@next/swc-linux-arm64-gnu': 14.1.4
+      '@next/swc-linux-arm64-musl': 14.1.4
+      '@next/swc-linux-x64-gnu': 14.1.4
+      '@next/swc-linux-x64-musl': 14.1.4
+      '@next/swc-win32-arm64-msvc': 14.1.4
+      '@next/swc-win32-ia32-msvc': 14.1.4
+      '@next/swc-win32-x64-msvc': 14.1.4
+      sass: 1.69.5
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+
+  next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5):
+    dependencies:
+      '@next/env': 14.1.4
       '@swc/helpers': 0.5.2
       busboy: 1.6.0
       caniuse-lite: 1.0.30001580
@@ -24949,15 +24986,15 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       styled-jsx: 5.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react@18.2.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 14.1.1
-      '@next/swc-darwin-x64': 14.1.1
-      '@next/swc-linux-arm64-gnu': 14.1.1
-      '@next/swc-linux-arm64-musl': 14.1.1
-      '@next/swc-linux-x64-gnu': 14.1.1
-      '@next/swc-linux-x64-musl': 14.1.1
-      '@next/swc-win32-arm64-msvc': 14.1.1
-      '@next/swc-win32-ia32-msvc': 14.1.1
-      '@next/swc-win32-x64-msvc': 14.1.1
+      '@next/swc-darwin-arm64': 14.1.4
+      '@next/swc-darwin-x64': 14.1.4
+      '@next/swc-linux-arm64-gnu': 14.1.4
+      '@next/swc-linux-arm64-musl': 14.1.4
+      '@next/swc-linux-x64-gnu': 14.1.4
+      '@next/swc-linux-x64-musl': 14.1.4
+      '@next/swc-win32-arm64-msvc': 14.1.4
+      '@next/swc-win32-ia32-msvc': 14.1.4
+      '@next/swc-win32-x64-msvc': 14.1.4
       sass: 1.69.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -27770,13 +27807,13 @@ snapshots:
 
   store2@2.14.2: {}
 
-  storybook-addon-next@1.7.1(@storybook/addon-actions@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@storybook/addons@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(next@14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(postcss@8.4.27)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)(webpack@5.89.0):
+  storybook-addon-next@1.7.1(@storybook/addon-actions@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@storybook/addons@6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(postcss@8.4.27)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)(webpack@5.89.0):
     dependencies:
       '@storybook/addon-actions': 6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@storybook/addons': 6.5.14(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       image-size: 1.0.2
       loader-utils: 3.2.1
-      next: 14.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
+      next: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       postcss-loader: 7.3.3(postcss@8.4.27)(webpack@5.89.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -28071,6 +28108,14 @@ snapshots:
   style-to-object@0.4.1:
     dependencies:
       inline-style-parser: 0.1.1
+
+  styled-jsx@5.1.1(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react@18.2.0):
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+    optionalDependencies:
+      '@babel/core': 7.12.9
+      babel-plugin-macros: 3.1.0
 
   styled-jsx@5.1.1(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react@18.2.0):
     dependencies:

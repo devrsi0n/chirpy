@@ -27,7 +27,6 @@ const nextConfig = {
   ],
   experimental: {
     scrollRestoration: true,
-    useDeploymentId: true,
     swcPlugins: [
       // Allow Date/Map in getStaticProps
       ['next-superjson-plugin', {}],
