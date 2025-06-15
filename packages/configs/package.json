@@ -10,7 +10,7 @@
     "@radix-ui/colors": "1.0.1",
     "@tailwindcss/typography": "0.5.10",
     "color-convert": "2.0.1",
-    "postcss": "8.4.27",
+    "postcss": "8.4.31",
     "postcss-flexbugs-fixes": "5.0.2",
     "postcss-preset-env": "8.5.1",
     "tailwind-scrollbar": "3.0.5",
