@@ -1,5 +1,5 @@
 import { sendVerificationEmail } from '@chirpy-dev/emails';
-import { SESSION_MAX_AGE, isENVProd } from '@chirpy-dev/utils';
+import { isENVProd, SESSION_MAX_AGE } from '@chirpy-dev/utils';
 import { Provider } from 'next-auth/providers';
 import credentialsProvider from 'next-auth/providers/credentials';
 import discordProvider from 'next-auth/providers/discord';
@@ -98,13 +98,17 @@ export const authProviders: Provider[] = [
       identifier: email,
       url /*provider: { server, from }*/,
     }) {
-      await sendVerificationEmail({
-        to: {
-          email,
-          name: email,
-        },
-        url,
-      });
+      try {
+        await sendVerificationEmail({
+          to: {
+            email,
+            name: email,
+          },
+          url,
+        });
+      } catch (error) {
+        console.error('Error sending verification email', error);
+      }
     },
   }),
 ].filter((p) => !!p) as Provider[];
