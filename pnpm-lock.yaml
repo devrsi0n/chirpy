@@ -232,8 +232,8 @@ importers:
         specifier: 0.2.1
         version: 0.2.1(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       nodemailer:
-        specifier: 6.9.4
-        version: 6.9.4
+        specifier: 6.9.9
+        version: 6.9.9
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -635,7 +635,7 @@ importers:
         version: link:../utils
       '@next-auth/prisma-adapter':
         specifier: 1.0.7
-        version: 1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
+        version: 1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
       '@prisma/client':
         specifier: 5.11.0
         version: 5.11.0(prisma@5.11.0)
@@ -668,7 +668,7 @@ importers:
         version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-axiom:
         specifier: 0.17.0
         version: 0.17.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
@@ -741,7 +741,7 @@ importers:
         version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-mdx-remote:
         specifier: 3.0.8
         version: 3.0.8(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -855,7 +855,7 @@ importers:
         version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
       next-auth:
         specifier: 4.24.5
-        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       next-axiom:
         specifier: 0.17.0
         version: 0.17.0(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))
@@ -4833,6 +4833,7 @@ packages:
 
   acorn-import-assertions@1.9.0:
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
 
@@ -7500,6 +7501,7 @@ packages:
   fstream@1.0.12:
     resolution: {integrity: sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg==}
     engines: {node: '>=0.6'}
+    deprecated: This package is no longer supported.
 
   function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -9201,6 +9203,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.isfinite@3.3.2:
     resolution: {integrity: sha512-7FGG40uhC8Mm633uKW1r58aElFlBlxCrg9JfSi3P6aYiWmfiWF0PgMd86ZUsxE5GwWPdHoS2+48bwTh2VPkIQA==}
@@ -9213,6 +9216,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.pull@4.1.0:
     resolution: {integrity: sha512-EM7CVTzXfkTyusQdN7mgGPh2ZfkKfQ5lA9U+X7NNDeEgKEaO65dB5Kh8+Ppap0X1wQOndPjKP/VVTis7hFvkzg==}
@@ -9780,8 +9784,8 @@ packages:
   node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
 
-  nodemailer@6.9.4:
-    resolution: {integrity: sha512-CXjQvrQZV4+6X5wP6ZIgdehJamI63MFoYFGGPtHudWym9qaEHDNdPzaj5bfMCvxG1vhAileSWW90q7nL0N36mA==}
+  nodemailer@6.9.9:
+    resolution: {integrity: sha512-dexTll8zqQoVJEZPwQAKzxxtFn0qTnjdQTchoU6Re9BUUGBJiOy3YMn/0ShTW6J5M0dfQ1NeDeRTTl4oIWgQMA==}
     engines: {node: '>=6.0.0'}
 
   nopt@6.0.0:
@@ -15788,10 +15792,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
+  '@next-auth/prisma-adapter@1.0.7(@prisma/client@5.11.0(prisma@5.11.0))(next-auth@4.24.5(next@14.1.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))':
     dependencies:
       '@prisma/client': 5.11.0(prisma@5.11.0)
-      next-auth: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next-auth: 4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   '@next/bundle-analyzer@14.1.4':
     dependencies:
@@ -16919,7 +16923,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.89.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.47.0)(typescript@5.2.2)(webpack@4.47.0)
       glob: 7.2.3
@@ -17402,7 +17406,7 @@ snapshots:
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
       express: 4.18.2
-      file-loader: 6.2.0(webpack@5.89.0)
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fs-extra: 9.1.0
       html-webpack-plugin: 4.5.2(webpack@4.47.0)
@@ -21395,7 +21399,7 @@ snapshots:
       eslint: 8.47.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.47.0)
       eslint-plugin-react: 7.33.2(eslint@8.47.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.47.0)
@@ -21423,7 +21427,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.47.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21445,7 +21449,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -24882,7 +24886,7 @@ snapshots:
     dependencies:
       type-fest: 2.19.0
 
-  next-auth@4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  next-auth@4.24.5(next@14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5))(nodemailer@6.9.9)(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@babel/runtime': 7.23.2
       '@panva/hkdf': 1.1.1
@@ -24897,7 +24901,7 @@ snapshots:
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
     optionalDependencies:
-      nodemailer: 6.9.4
+      nodemailer: 6.9.9
 
   next-axiom@0.17.0(next@14.1.4(@babel/core@7.12.9)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)):
     dependencies:
@@ -25053,7 +25057,7 @@ snapshots:
 
   node-releases@2.0.13: {}
 
-  nodemailer@6.9.4: {}
+  nodemailer@6.9.9: {}
 
   nopt@6.0.0:
     dependencies:
