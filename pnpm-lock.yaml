@@ -661,8 +661,8 @@ importers:
         specifier: 1.11.10
         version: 1.11.10
       nanoid:
-        specifier: 5.0.7
-        version: 5.0.7
+        specifier: 5.0.9
+        version: 5.0.9
       next:
         specifier: 14.1.4
         version: 14.1.4(@babel/core@7.22.10)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.69.5)
@@ -4833,6 +4833,7 @@ packages:
 
   acorn-import-assertions@1.9.0:
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
 
@@ -7500,6 +7501,7 @@ packages:
   fstream@1.0.12:
     resolution: {integrity: sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg==}
     engines: {node: '>=0.6'}
+    deprecated: This package is no longer supported.
 
   function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -9201,6 +9203,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.isfinite@3.3.2:
     resolution: {integrity: sha512-7FGG40uhC8Mm633uKW1r58aElFlBlxCrg9JfSi3P6aYiWmfiWF0PgMd86ZUsxE5GwWPdHoS2+48bwTh2VPkIQA==}
@@ -9213,6 +9216,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.pull@4.1.0:
     resolution: {integrity: sha512-EM7CVTzXfkTyusQdN7mgGPh2ZfkKfQ5lA9U+X7NNDeEgKEaO65dB5Kh8+Ppap0X1wQOndPjKP/VVTis7hFvkzg==}
@@ -9644,8 +9648,8 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.0.7:
-    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
+  nanoid@5.0.9:
+    resolution: {integrity: sha512-Aooyr6MXU6HpvvWXKoVoXwKMs/KyVakWwg7xQfv5/S/RIgJMy0Ifa45H9qqYy7pTCszrHzP21Uk4PZq2HpEM8Q==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -16919,7 +16923,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.89.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.47.0)(typescript@5.2.2)(webpack@4.47.0)
       glob: 7.2.3
@@ -17402,7 +17406,7 @@ snapshots:
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
       express: 4.18.2
-      file-loader: 6.2.0(webpack@5.89.0)
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fs-extra: 9.1.0
       html-webpack-plugin: 4.5.2(webpack@4.47.0)
@@ -21395,7 +21399,7 @@ snapshots:
       eslint: 8.47.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.47.0)
       eslint-plugin-react: 7.33.2(eslint@8.47.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.47.0)
@@ -21423,7 +21427,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.47.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21445,7 +21449,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -24850,7 +24854,7 @@ snapshots:
 
   nanoid@3.3.7: {}
 
-  nanoid@5.0.7: {}
+  nanoid@5.0.9: {}
 
   nanomatch@1.2.13:
     dependencies:
