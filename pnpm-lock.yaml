@@ -128,13 +128,13 @@ importers:
         version: 1.5.6
       '@maizzle/framework':
         specifier: 4.4.7
-        version: 4.4.7(glob@8.0.3)
+        version: 4.4.7(glob@8.1.0)
       autoprefixer:
         specifier: 10.4.16
         version: 10.4.16(postcss@8.4.27)
       glob:
-        specifier: 8.0.3
-        version: 8.0.3
+        specifier: 8.1.0
+        version: 8.1.0
       postcss:
         specifier: 8.4.27
         version: 8.4.27
@@ -4833,6 +4833,7 @@ packages:
 
   acorn-import-assertions@1.9.0:
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
 
@@ -7500,6 +7501,7 @@ packages:
   fstream@1.0.12:
     resolution: {integrity: sha512-WvJ193OHa0GHPEL+AycEJgxvBEwyfRkN1vhjca23OaPVMCaLCXTd5qAu82AjTcgP1UJmytkOKb63Ypde7raDIg==}
     engines: {node: '>=0.6'}
+    deprecated: This package is no longer supported.
 
   function-bind@1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -9201,6 +9203,7 @@ packages:
 
   lodash.isequal@4.5.0:
     resolution: {integrity: sha512-pDo3lu8Jhfjqls6GkMgpahsF9kCyayhgykjyLMNFTKWrpVdAQtYyB4muAMWozBB4ig/dtWAmsMxLEI8wuz+DYQ==}
+    deprecated: This package is deprecated. Use require('node:util').isDeepStrictEqual instead.
 
   lodash.isfinite@3.3.2:
     resolution: {integrity: sha512-7FGG40uhC8Mm633uKW1r58aElFlBlxCrg9JfSi3P6aYiWmfiWF0PgMd86ZUsxE5GwWPdHoS2+48bwTh2VPkIQA==}
@@ -9213,6 +9216,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.pull@4.1.0:
     resolution: {integrity: sha512-EM7CVTzXfkTyusQdN7mgGPh2ZfkKfQ5lA9U+X7NNDeEgKEaO65dB5Kh8+Ppap0X1wQOndPjKP/VVTis7hFvkzg==}
@@ -15623,7 +15627,7 @@ snapshots:
       - zen-observable
       - zenObservable
 
-  '@maizzle/framework@4.4.7(glob@8.0.3)':
+  '@maizzle/framework@4.4.7(glob@8.1.0)':
     dependencies:
       '@maizzle/cli': 1.5.6
       autoprefixer: 10.4.16(postcss@8.4.27)
@@ -15632,7 +15636,7 @@ snapshots:
       email-comb: 5.3.1
       front-matter: 4.0.2
       fs-extra: 10.1.0
-      glob-promise: 4.2.2(glob@8.0.3)
+      glob-promise: 4.2.2(glob@8.1.0)
       html-crush: 4.2.0
       is-url-superb: 5.0.0
       juice: 9.1.0
@@ -16919,7 +16923,7 @@ snapshots:
       case-sensitive-paths-webpack-plugin: 2.4.0
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
-      file-loader: 6.2.0(webpack@4.47.0)
+      file-loader: 6.2.0(webpack@5.89.0)
       find-up: 5.0.0
       fork-ts-checker-webpack-plugin: 4.1.6(eslint@8.47.0)(typescript@5.2.2)(webpack@4.47.0)
       glob: 7.2.3
@@ -17402,7 +17406,7 @@ snapshots:
       core-js: 3.26.1
       css-loader: 3.6.0(webpack@4.47.0)
       express: 4.18.2
-      file-loader: 6.2.0(webpack@5.89.0)
+      file-loader: 6.2.0(webpack@4.47.0)
       find-up: 5.0.0
       fs-extra: 9.1.0
       html-webpack-plugin: 4.5.2(webpack@4.47.0)
@@ -21395,7 +21399,7 @@ snapshots:
       eslint: 8.47.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.47.0)
       eslint-plugin-react: 7.33.2(eslint@8.47.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.47.0)
@@ -21423,7 +21427,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 8.47.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21445,7 +21449,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint@8.47.0))(eslint@8.47.0))(eslint@8.47.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.3.0(eslint@8.47.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.47.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -22339,10 +22343,10 @@ snapshots:
       '@types/glob': 8.1.0
       glob: 7.2.3
 
-  glob-promise@4.2.2(glob@8.0.3):
+  glob-promise@4.2.2(glob@8.1.0):
     dependencies:
       '@types/glob': 7.2.0
-      glob: 8.0.3
+      glob: 8.1.0
 
   glob-to-regexp@0.3.0: {}
 
