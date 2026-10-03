@@ -29,7 +29,7 @@
     "@tanstack/react-query": "4.32.6",
     "@tiptap/core": "2.1.12",
     "@tiptap/extension-image": "2.1.12",
-    "@tiptap/extension-link": "2.1.12",
+    "@tiptap/extension-link": "2.10.4",
     "@tiptap/extension-placeholder": "2.1.12",
     "@tiptap/extension-underline": "2.1.12",
     "@tiptap/pm": "2.1.12",
