@@ -32,7 +32,7 @@
     "github-slugger": "2.0.0",
     "gray-matter": "4.0.3",
     "html-loader": "4.2.0",
-    "lodash": "4.17.21",
+    "lodash": "4.18.1",
     "micro": "10.0.1",
     "next": "14.1.4",
     "next-axiom": "0.17.0",
