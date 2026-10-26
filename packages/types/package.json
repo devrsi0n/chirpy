@@ -7,7 +7,7 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@tiptap/core": "2.1.12",
+    "@tiptap/core": "3.30.4",
     "@tiptap/pm": "2.1.12",
     "@tiptap/react": "2.1.12",
     "@types/node": "18.16.18",
