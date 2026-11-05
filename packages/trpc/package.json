@@ -22,7 +22,7 @@
     "@trpc/client": "10.37.1",
     "@trpc/next": "10.37.1",
     "@trpc/react-query": "10.37.1",
-    "@trpc/server": "10.37.1",
+    "@trpc/server": "10.45.3",
     "@types/web-push": "3.6.3",
     "dayjs": "1.11.10",
     "nanoid": "5.0.7",
