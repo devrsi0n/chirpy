@@ -14,7 +14,7 @@
     "@chirpy-dev/types": "workspace:*",
     "@chirpy-dev/ui": "workspace:*",
     "@chirpy-dev/utils": "workspace:*",
-    "@headlessui/react": "1.7.16",
+    "@headlessui/react": "1.7.19",
     "@tremor/react": "3.6.1",
     "clsx": "2.0.0",
     "framer-motion": "10.16.5",
