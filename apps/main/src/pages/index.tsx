@@ -2,14 +2,16 @@ import { HomeProps } from '@chirpy-dev/ui';
 import { isENVDev } from '@chirpy-dev/utils';
 import { GetStaticProps } from 'next';
 
+import { serializePageProps } from '$/utilities/page-props';
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const buildDate = new Date().toISOString();
   return {
-    props: {
+    props: serializePageProps({
       // We need a fixed date to fix SSR hydration mismatch error.
       // Used by predefined comments in comment-widget-preview
       buildDate,
-    },
+    }),
     revalidate: isENVDev ? 1 : 2 * 24 * 60 * 60,
   };
 };

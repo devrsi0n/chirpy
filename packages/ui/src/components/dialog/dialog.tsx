@@ -33,8 +33,7 @@ const SIZE_STYLES: Record<
 };
 
 export type DialogChild =
-  | React.ReactElement<DialogBodyProps>
-  | React.ReactElement<DialogFooterProps>;
+  React.ReactElement<DialogBodyProps> | React.ReactElement<DialogFooterProps>;
 
 export type DialogProps = {
   children: DialogChild | DialogChild[];
@@ -90,7 +89,7 @@ export function Dialog({
             </motion.div>
             <motion.div {...easeInOut}>
               <HeadlessDialog.Panel
-                className={clsx('relative inline-block ', styles.panel)}
+                className={clsx('relative inline-block', styles.panel)}
               >
                 <div
                   className={clsx(

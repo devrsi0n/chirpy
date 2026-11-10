@@ -28,13 +28,13 @@ export const RTE_CONTENT_INPUT: z.ZodType<JSONContent> = z.lazy(
     z
       .object({
         type: z.string().optional(),
-        attrs: z.record(z.any()).optional(),
+        attrs: z.record(z.string(), z.any()).optional(),
         content: z.array(RTE_CONTENT_INPUT).optional(),
         marks: z
           .array(
             z.object({
               type: z.string(),
-              attrs: z.record(z.any()).optional(),
+              attrs: z.record(z.string(), z.any()).optional(),
             }),
           )
           .optional(),

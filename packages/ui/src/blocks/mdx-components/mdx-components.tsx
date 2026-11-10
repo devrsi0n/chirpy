@@ -3,10 +3,10 @@ import clsx from 'clsx';
 import { Link } from '../../components/link';
 import styles from './mdx.module.scss';
 
-export const MDXComponents: Record<string, React.ReactNode> = {
+export const MDXComponents = {
   a: MDXLink,
   pre: Pre,
-} as unknown as Record<string, React.ReactNode>;
+};
 
 type MDXLinkProps = {
   children?: React.ReactNode;
@@ -21,7 +21,7 @@ function MDXLink(props: MDXLinkProps): JSX.Element {
 }
 
 interface PreProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 

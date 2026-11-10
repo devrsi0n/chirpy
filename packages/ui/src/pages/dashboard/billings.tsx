@@ -6,7 +6,6 @@ import { PageTitle, PricingCards, SiteLayout } from '../../blocks';
 import { Heading, IconExternalLink, Text, useToast } from '../../components';
 import { useCurrentUser } from '../../contexts';
 import { triggerConfetti } from '../../hooks';
-import { getStripe } from '../../utilities/stripe';
 
 export type BillingsProps = {
   //
@@ -15,11 +14,8 @@ export type BillingsProps = {
 export function Billings(_props: BillingsProps): JSX.Element {
   const { data: user, refetchUser, isPaid } = useCurrentUser();
   const { mutate } = trpc.payment.checkout.useMutation({
-    async onSuccess(data) {
-      const stripe = await getStripe();
-      await stripe.redirectToCheckout({
-        sessionId: data.sessionId,
-      });
+    onSuccess(data) {
+      window.location.assign(data.url);
     },
   });
 

@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { pageRender } from 'src/__tests__/fixtures/page-render';
 
+import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { RichTextEditor } from '../rich-text-editor';
 
 const mockOnSubmit = jest.fn();
@@ -14,7 +14,7 @@ describe('rich-text-editor', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  // eslint-disable-next-line jest/expect-expect
+
   it('should post the text', async () => {
     const inputField = screen.getByRole('textbox');
     const testText = 'This is a testing text';

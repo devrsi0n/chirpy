@@ -1,4 +1,4 @@
-import { render, screen, cleanup } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import * as React from 'react';
 
 import { Avatar } from '../avatar';
@@ -11,12 +11,28 @@ describe('Avatar', () => {
 
   it('should render avatar', async () => {
     const mockAlt = 'This is a testing avatart alt';
-    render(<Avatar src="http://example.com" alt={mockAlt} />);
+    render(
+      <Avatar
+        src="http://example.com"
+        alt={mockAlt}
+        email={null}
+        name={null}
+        username={null}
+      />,
+    );
     expect(screen.getByAltText(mockAlt)).toBeTruthy();
   });
 
   it('should render a placeholder if no src', () => {
-    render(<Avatar alt="avatar placeholder" />);
+    render(
+      <Avatar
+        alt="avatar placeholder"
+        src={null}
+        email={null}
+        name={null}
+        username={null}
+      />,
+    );
     expect(screen.getByLabelText(/avatar placeholder/i)).toBeTruthy();
   });
 });

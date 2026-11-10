@@ -1,4 +1,7 @@
-import { NotificationType_Enum } from '@chirpy-dev/types';
+import {
+  NotificationType_Enum,
+  type WebNotificationPayload,
+} from '@chirpy-dev/types';
 import { SUPPORT_LINK } from '@chirpy-dev/utils';
 import { log } from 'next-axiom';
 import webpush, { PushSubscription } from 'web-push';
@@ -6,9 +9,7 @@ import webpush, { PushSubscription } from 'web-push';
 import { NotificationSubscription, prisma } from '../../common/db-client';
 import { NotificationPayload } from './types';
 
-export type WebNotificationPayload = {
-  title: string;
-} & Pick<NotificationPayload, 'body' | 'url'>;
+export type { WebNotificationPayload } from '@chirpy-dev/types';
 
 export type NotificationSubscriptionPayload = Pick<
   NotificationSubscription,

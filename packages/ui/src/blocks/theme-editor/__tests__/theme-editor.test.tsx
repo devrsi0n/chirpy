@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react';
-import * as nextThemesModule from 'next-themes';
 
 import { ThemeEditor } from '..';
 import { pageRender } from '../../../__tests__/fixtures/page-render';
@@ -10,14 +9,19 @@ const PROJECT = {
   domain: 'localhost',
 };
 
-jest.spyOn(nextThemesModule, 'useTheme').mockReturnValue({
-  resolvedTheme: 'system',
-} as any);
+jest.mock('next-themes', () => ({
+  ...jest.requireActual('next-themes'),
+  useTheme: () => ({ resolvedTheme: 'system' }),
+}));
 
 describe('ThemeEditor', () => {
   beforeEach(() => {
     pageRender(
-      <ThemeEditor project={PROJECT} buildDate={new Date().toISOString()} />,
+      <ThemeEditor
+        project={PROJECT}
+        username="jest"
+        buildDate={new Date().toISOString()}
+      />,
     );
   });
 

@@ -1,6 +1,8 @@
 import { Config } from 'tailwindcss';
 
 export let tailwindConfig: Config;
-export default {
-  tailwindConfig,
+declare const configs: {
+  tailwindConfig: Config;
 };
+
+export default configs;

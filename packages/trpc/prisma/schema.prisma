@@ -4,7 +4,6 @@ generator client {
 
 datasource db {
   provider     = "postgresql"
-  url          = env("SUPABASE_URL")
   relationMode = "prisma"
 }
 

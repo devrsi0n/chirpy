@@ -43,11 +43,11 @@ export async function updateProject(
             queryParameters: input.queryParameters,
           }
         : isProjectInfoInput(input)
-        ? {
-            name: input.name,
-            domain: input.domain,
-          }
-        : { theme: input.theme }),
+          ? {
+              name: input.name,
+              domain: input.domain,
+            }
+          : { theme: input.theme }),
     },
   });
   return project;

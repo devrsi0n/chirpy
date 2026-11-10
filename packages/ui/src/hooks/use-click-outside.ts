@@ -8,7 +8,6 @@ export function useClickOutside(
   callbackRef.current = callback;
 
   React.useEffect(() => {
-    // eslint-disable-next-line unicorn/consistent-function-scoping
     const listener = (event: MouseEvent) => {
       if (
         containerRef.current &&

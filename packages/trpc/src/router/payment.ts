@@ -38,7 +38,7 @@ export const paymentRouter = router({
         message: 'Expect a checkout session url',
       });
     }
-    return { sessionId: session.id };
+    return { sessionId: session.id, url: session.url };
   }),
   upcomingInvoice: protectedProcedure.mutation(async ({ ctx }) => {
     const user = await getUserStripeInfo(ctx.session.user.id);

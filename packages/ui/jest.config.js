@@ -6,7 +6,7 @@ const createJestConfig = nextJest({
 });
 
 const customJestConfig = {
-  testEnvironment: 'jsdom',
+  testTimeout: 10000,
   setupFilesAfterEnv: [
     '<rootDir>/src/__tests__/jest.setup.ts',
     '<rootDir>/scripts/jest/set-env.js',
@@ -23,7 +23,7 @@ const customJestConfig = {
     '!./**/typings/',
     '!./**/generated/',
   ],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: '<rootDir>/jest-environment.js',
 };
 
 module.exports = createJestConfig(customJestConfig);

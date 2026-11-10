@@ -5,6 +5,8 @@ export function generateCommentCard(fill: number) {
       id: fill.toString(),
       name: `author-name-${fill}`,
       image: `author-avatar-${fill}`,
+      username: null,
+      email: null,
     },
     content: {
       type: 'doc',

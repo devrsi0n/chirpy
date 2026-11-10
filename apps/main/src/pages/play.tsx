@@ -4,6 +4,8 @@ import { getAppURL } from '@chirpy-dev/utils';
 import { GetStaticProps, GetStaticPropsResult } from 'next';
 import { log } from 'next-axiom';
 
+import { serializePageProps } from '$/utilities/page-props';
+
 type StaticProps = {
   //
 };
@@ -34,7 +36,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (): Promise<
   return {
     revalidate: 60 * 60,
     // We only need it to trigger periodicity tasks, no need props
-    props: {},
+    props: serializePageProps({}),
   };
 };
 

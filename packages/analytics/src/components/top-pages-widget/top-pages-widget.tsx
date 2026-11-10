@@ -53,7 +53,7 @@ export default function TopPagesWidget() {
           </div>
 
           <div className="col-span-3">
-            <BarList data={chartData} valueFormatter={(_) => ''} />
+            <BarList data={chartData} valueFormatter={() => ''} />
           </div>
           <div className="col-span-1 row-span-4 flex flex-col gap-2">
             {(data?.data ?? []).map(({ pathname, visits }) => (

@@ -12,7 +12,7 @@ export function DeleteAccountCard() {
   const key =
     session?.user.name || session?.user.username || session?.user.email;
   const { showToast } = useToast();
-  const { mutateAsync, isLoading } = trpc.settings.deleteAccount.useMutation();
+  const { mutateAsync, isPending } = trpc.settings.deleteAccount.useMutation();
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ export function DeleteAccountCard() {
         </SettingsCard.Body>
         <SettingsCard.Footer>
           <Button color="primary" variant="solid" type="submit">
-            {isLoading ? (
+            {isPending ? (
               <Spinner className="!text-gray-100">Save</Spinner>
             ) : (
               'Save'

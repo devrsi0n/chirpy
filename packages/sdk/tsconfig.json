@@ -3,14 +3,15 @@
   "extends": "@chirpy-dev/tsconfigs/base.json",
   "compilerOptions": {
     "target": "ES2020",
-    "module": "CommonJS",
+    "module": "Node16",
+    "moduleResolution": "Node16",
     "noEmit": false,
     "declaration": true,
-    "baseUrl": ".",
     "types": ["node"],
     "outDir": "lib",
+    "rootDir": "src",
     "paths": {
-      "$/*": ["src/*"]
+      "$/*": ["./src/*"]
     }
   },
   "exclude": ["node_modules"],

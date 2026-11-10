@@ -14,7 +14,7 @@ import {
 export function Custom404(): JSX.Element {
   return (
     <SiteLayout title="404">
-      <section className="flex flex-col items-center space-y-8 px-4 ">
+      <section className="flex flex-col items-center space-y-8 px-4">
         <div
           className={`flex justify-center text-gray-1000`}
           style={

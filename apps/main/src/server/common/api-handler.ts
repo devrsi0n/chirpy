@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { log } from 'next-axiom';
-import connect, { ErrorHandler } from 'next-connect';
+import { createRouter } from 'next-connect';
 
 import { APIError } from './api-error';
 
-export const handleInternalFailure: ErrorHandler<
-  NextApiRequest,
-  NextApiResponse
-> = (error, req, res) => {
-  log.error('internal error', error);
+export const handleInternalFailure = (
+  error: unknown,
+  req: NextApiRequest,
+  res: NextApiResponse,
+) => {
+  log.error('internal error', { error: String(error) });
   log.error('query', req.query);
   log.error('body', req.body);
 
@@ -16,10 +17,8 @@ export const handleInternalFailure: ErrorHandler<
     return res.status(error.httpStatus).send(error.message);
   }
 
-  res.status(500).end(`[Chirpy] error: ${error.toString()}`);
+  res.status(500).end(`[Chirpy] error: ${String(error)}`);
 };
 
 export const getAPIHandler = () =>
-  connect<NextApiRequest, NextApiResponse>({
-    onError: handleInternalFailure,
-  });
+  createRouter<NextApiRequest, NextApiResponse>();

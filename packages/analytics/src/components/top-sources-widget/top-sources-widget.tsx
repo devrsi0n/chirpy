@@ -30,7 +30,7 @@ export default function TopSourcesWidget() {
           </div>
 
           <div className="col-span-4">
-            <BarList data={chartData} valueFormatter={(_) => ''} />
+            <BarList data={chartData} valueFormatter={() => ''} />
           </div>
           <div className="col-span-1 row-span-4 flex flex-col gap-2">
             {(data?.data ?? []).map(({ referrer, visits }) => (

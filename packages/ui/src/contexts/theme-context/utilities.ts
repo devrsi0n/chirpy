@@ -1,4 +1,5 @@
 import { ColorSeriesKey } from '@chirpy-dev/types';
+import convert from 'color-convert';
 
 export type CSSVariables = Array<[string, string]>;
 
@@ -38,6 +39,14 @@ function getThemeCSSVariables(
  * @param color
  */
 export function translateHslColor(color: string) {
+  if (/^#[\da-f]{6}(?:[\da-f]{2})?$/i.test(color)) {
+    const [h, s, l] = convert.hex.hsl(color.slice(1, 7));
+    if (color.length === 9) {
+      const alpha = Number.parseInt(color.slice(7), 16) / 255;
+      return `${h}, ${s}%, ${l}%, ${alpha}`;
+    }
+    return `${h} ${s}% ${l}%`;
+  }
   const [, hsl] = /hsl\((.+)\)/.exec(color) || [];
   if (hsl) {
     return hsl.replace(/,/g, '');

@@ -27,7 +27,7 @@ export type PageUrlProps = Pick<
 export function PageIdentifier(props: PageUrlProps): JSX.Element {
   const [parameter, setParameter] = React.useState(props.queryParameters || '');
   const [error, setError] = React.useState('');
-  const { mutateAsync, isLoading } = trpc.project.update.useMutation();
+  const { mutateAsync, isPending } = trpc.project.update.useMutation();
   const { showToast } = useToast();
   const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
   const handleSaveQueryParameters = async () => {
@@ -99,7 +99,7 @@ export function PageIdentifier(props: PageUrlProps): JSX.Element {
           onClick={handleSaveQueryParameters}
           disabled={!!process.env.NEXT_PUBLIC_MAINTENANCE_MODE}
         >
-          {isLoading ? (
+          {isPending ? (
             <Spinner className="!text-gray-100">Save</Spinner>
           ) : (
             'Save'

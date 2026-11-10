@@ -20,7 +20,7 @@ type FormFields = {
 };
 
 export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
-  const { isLoading, mutateAsync } = trpc.project.update.useMutation();
+  const { isPending, mutateAsync } = trpc.project.update.useMutation();
   const { showToast } = useToast();
   const { register, errors, handleSubmit } = useForm<FormFields>({
     defaultValues: {
@@ -89,7 +89,7 @@ export function ProjectInfo(props: ProjectInfoProps): JSX.Element {
       </SettingsCard.Body>
       <SettingsCard.Footer>
         <Button variant="solid" color="primary" onClick={handleSave}>
-          {isLoading ? (
+          {isPending ? (
             <Spinner className="!text-gray-100">Save</Spinner>
           ) : (
             'Save'

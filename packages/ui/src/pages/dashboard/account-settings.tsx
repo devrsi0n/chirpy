@@ -48,7 +48,7 @@ function EmailNotifications(props: EmailForm) {
     },
   });
   const { showToast } = useToast();
-  const { mutateAsync, isLoading } = trpc.settings.update.useMutation();
+  const { mutateAsync, isPending } = trpc.settings.update.useMutation();
 
   const handleSave = handleSubmit(async (fields) => {
     try {
@@ -88,7 +88,7 @@ function EmailNotifications(props: EmailForm) {
       </SettingsCard.Body>
       <SettingsCard.Footer>
         <Button color="primary" variant="solid" onClick={handleSave}>
-          {isLoading ? (
+          {isPending ? (
             <Spinner className="!text-gray-100">Save</Spinner>
           ) : (
             'Save'

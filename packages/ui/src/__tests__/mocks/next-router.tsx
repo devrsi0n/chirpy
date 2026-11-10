@@ -1,4 +1,5 @@
 import EventEmitter from 'events';
+
 import { NextRouter } from 'next/router';
 
 jest.mock('next/router', () => ({
@@ -22,6 +23,7 @@ export const mockNextRouter: NextRouter = {
   reload: jest.fn().mockResolvedValue(true),
   prefetch: jest.fn(() => Promise.resolve()),
   back: jest.fn().mockResolvedValue(true),
+  forward: jest.fn(),
   beforePopState: jest.fn().mockResolvedValue(true),
   events: {
     on: jest.fn().mockImplementation(emitter.on),

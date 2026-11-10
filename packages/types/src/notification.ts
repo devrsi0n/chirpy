@@ -1,3 +1,9 @@
+export type WebNotificationPayload = {
+  title: string;
+  body: string;
+  url: string;
+};
+
 export type NotificationType_Enum =
   /** Comment deleted by moderator */
   | 'CommentDeleted'

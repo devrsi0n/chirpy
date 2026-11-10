@@ -42,8 +42,10 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   const [value, setValue, remove] = useLocalStorage(initialValue, 'rte-value');
 
   const editor = useEditor({
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: true,
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false, underline: false }),
       Underline,
       Link.configure({
         HTMLAttributes: {
@@ -61,6 +63,9 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
       }),
     ],
     editable: !readOnly,
+    editorProps: {
+      attributes: { 'aria-label': isReply ? 'Reply editor' : 'Comment editor' },
+    },
     content: initialValue || value,
     onUpdate({ editor }) {
       const newVal = editor?.getJSON() || {};
@@ -69,22 +74,20 @@ export function RichTextEditor(props: IRichTextEditorProps): JSX.Element {
   });
   React.useEffect(() => {
     if (initialValue) {
-      editor?.commands?.setContent(initialValue);
+      editor?.commands?.setContent(initialValue, { emitUpdate: false });
     }
   }, [initialValue, editor]);
 
   const handleSubmitReply = async () => {
     await onSubmit?.(value);
     remove();
-    editor?.commands?.clearContent();
+    editor?.commands?.clearContent(false);
   };
 
   return (
     <section className={clsx(styles?.root)}>
       <EditorContent
         editor={editor}
-        role="textbox"
-        aria-label={isReply ? 'Reply editor' : 'Comment editor'}
         className={clsx(
           'prose !max-w-full pe-2 text-gray-1200',
           !readOnly && [

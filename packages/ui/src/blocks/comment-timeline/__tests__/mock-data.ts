@@ -1,9 +1,11 @@
 import { CommentTimelineProps } from '../comment-timeline';
 
-export function generateComment(): CommentTimelineProps['comment'] {
+export function generateComment(): NonNullable<
+  CommentTimelineProps['comment']
+> {
   return {
-    parent: generateCommentFragment('parent-1'),
     ...generateCommentFragment('1'),
+    parent: generateCommentFragment('parent-1'),
     replies: [generateCommentFragment('sub-1')],
   };
 }
@@ -15,6 +17,8 @@ export function generateCommentFragment(fill: string) {
       id: String(counter++),
       name: `author-name-${fill}`,
       image: `author-avatar-${fill}`,
+      username: null,
+      email: null,
     },
     content: {
       type: 'doc',
@@ -31,6 +35,10 @@ export function generateCommentFragment(fill: string) {
       ],
     },
     createdAt: new Date(`2021-06-21T14:12:13.813625+00:00`),
+    updatedAt: new Date('2021-06-21T14:12:13.813Z'),
+    userId: `author-${fill}`,
+    pinnedAt: null,
+    deletedAt: null,
     likes: [
       {
         id: `like-id-${fill}`,
@@ -40,10 +48,14 @@ export function generateCommentFragment(fill: string) {
 
     pageId: `page-id-${fill}`,
     parentId: `parent-id-${fill}`,
+    parent: null,
+    replies: [],
   };
 }
 
-export function getTextsOfComment(comment: CommentTimelineProps['comment']) {
+export function getTextsOfComment(
+  comment: NonNullable<CommentTimelineProps['comment']>,
+) {
   return {
     parent: {
       text: comment.parent

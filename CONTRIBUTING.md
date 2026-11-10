@@ -10,8 +10,8 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 Chirpy is built upon [Next.js](https://nextjs.org). To run this project locally, you'll need to install the following:
 
-- [nodejs@16+](https://nodejs.org)
-- [pnpm@7+](https://pnpm.io/)
+- [nodejs@24.11+](https://nodejs.org)
+- [pnpm@11.28+](https://pnpm.io/)
 
 ### Fork and clone
 

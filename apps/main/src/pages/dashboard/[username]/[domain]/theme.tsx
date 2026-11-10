@@ -8,6 +8,7 @@ import {
 } from 'next';
 
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
+import { serializePageProps } from '$/utilities/page-props';
 
 type PathParams = {
   domain: string;
@@ -36,11 +37,11 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   return {
-    props: {
+    props: serializePageProps({
       project,
       buildDate: new Date().toISOString(),
       username: params.username,
-    },
+    }),
     revalidate: 60,
   };
 };

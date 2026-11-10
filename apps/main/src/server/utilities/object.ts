@@ -11,8 +11,11 @@ export function pick<T extends Record<string, unknown>, U extends keyof T>(
   obj: T,
   ...keys: Array<U>
 ): Pick<T, U> {
-  return keys.reduce((acc, key) => {
-    acc[key] = obj[key];
-    return acc;
-  }, {} as Pick<T, U>);
+  return keys.reduce(
+    (acc, key) => {
+      acc[key] = obj[key];
+      return acc;
+    },
+    {} as Pick<T, U>,
+  );
 }

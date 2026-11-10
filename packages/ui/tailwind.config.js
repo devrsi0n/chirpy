@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  ...require('configs').tailwindConfig,
+  ...require('@chirpy-dev/configs').tailwindConfig,
   content: [
     './src/**/*.{ts,tsx}',
     './.storybook/**/*.{ts,tsx}',

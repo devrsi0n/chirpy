@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { getAllFileStructures, getDirectories } from '$/server/mdx/files';
 import { getMDXPropsBySlug, getNearNav } from '$/server/mdx/mdx';
+import { serializePageProps } from '$/utilities/page-props';
 
 const CONTAINER_FOLDER = 'docs';
 
@@ -35,11 +36,11 @@ export const getStaticProps: GetStaticProps<DocsProps, PathParam> = async ({
   ]);
 
   return {
-    props: {
+    props: serializePageProps({
       ...mdxProps,
       directories,
       nearNav,
-    },
+    }),
     revalidate: 3600,
   };
 };

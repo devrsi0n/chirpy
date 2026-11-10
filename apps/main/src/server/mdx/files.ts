@@ -1,6 +1,7 @@
-import { Directory, FileStructure } from '@chirpy-dev/types';
 import { promises as fs } from 'fs';
 import path from 'path';
+
+import { Directory, FileStructure } from '@chirpy-dev/types';
 
 import { POST_ROOT } from '../common/constants';
 import { getFrontMatters } from './front-matter';
@@ -47,7 +48,7 @@ export async function getDirectories(
 ): Promise<Directory[]> {
   const directories: Directory[] = [];
   const metaPath = path.join(POST_ROOT, subFolder, 'meta.json');
-  // eslint-disable-next-line unicorn/prefer-json-parse-buffer
+
   const metaContent = await fs.readFile(metaPath, 'utf8');
   const { directories: orderedDirectories } = JSON.parse(metaContent) as {
     directories: string[];

@@ -1,1 +1,1 @@
-export const LOGO_URL = 'https://chirpy.dev/images/logo.png'
+export const LOGO_URL = 'https://chirpy.dev/images/logo.png';

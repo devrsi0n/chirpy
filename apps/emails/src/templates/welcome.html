@@ -4,68 +4,63 @@ preheader: 'Welcome to Chirpy'
 bodyClass: bg-gray-100
 ---
 
-<extends src="src/layouts/main.html">
-  <block name="template">
-    <table class="w-full font-sans">
-      <tr>
-        <td align="center" class="bg-gray-100">
-          <table class="w-[600px] sm:w-full">
-            <tr>
-              <td align="center" class="sm:px-6">
-                <table class="w-full">
-                  <tr>
-                    <td
-                      class="rounded bg-white p-12 text-left text-base leading-6 text-gray-800 sm:px-6"
-                    >
-                      <p>Hello <strong><%= it.userName %></strong>,</p>
-                      <p class="m-0 mb-6">
-                        I sincerely appreciate you joining us at Chirpy! I know
-                        you'll love it when you see how easy it is to reach your
-                        customers with Chirpy.
-                      </p>
-                      <p>
-                        You can get started quickly by creating a project and
-                        integrating it to your website.
-                      </p>
-                      <div class="leading-full">
-                        <a
-                          href="https://chirpy.dev/dashboard"
-                          class="inline-block rounded bg-blue-500 px-6 py-4 text-center text-base font-semibold text-white no-underline hover:bg-blue-600"
+<component src="src/layouts/main.html">
+  <table class="w-full font-sans">
+    <tr>
+      <td align="center" class="bg-gray-100">
+        <table class="w-[600px] sm:w-full">
+          <tr>
+            <td align="center" class="sm:px-6">
+              <table class="w-full">
+                <tr>
+                  <td
+                    class="rounded bg-white p-12 text-left text-base leading-6 text-gray-800 sm:px-6"
+                  >
+                    <p>Hello <strong><%= it.userName %></strong>,</p>
+                    <p class="m-0 mb-6">
+                      I sincerely appreciate you joining us at Chirpy! I know
+                      you'll love it when you see how easy it is to reach your
+                      customers with Chirpy.
+                    </p>
+                    <p>
+                      You can get started quickly by creating a project and
+                      integrating it to your website.
+                    </p>
+                    <div class="leading-full">
+                      <a
+                        href="https://chirpy.dev/dashboard"
+                        class="inline-block rounded bg-blue-500 px-6 py-4 text-center text-base font-semibold text-white no-underline hover:bg-blue-600"
+                      >
+                        <!--[if mso
+                          ]><i
+                            style="
+                              letter-spacing: 24px;
+                              mso-font-width: -100%;
+                              mso-text-raise: 30px;
+                            "
+                            >&#8202;</i
+                          ><!
+                        [endif]-->
+                        <span style="mso-text-raise: 16px"
+                          >Dashboard &rarr;</span
                         >
-                          <!--[if mso
-                            ]><i
-                              style="
-                                letter-spacing: 24px;
-                                mso-font-width: -100%;
-                                mso-text-raise: 30px;
-                              "
-                              >&#8202;</i
-                            ><!
-                          [endif]-->
-                          <span style="mso-text-raise: 16px"
-                            >Dashboard &rarr;</span
-                          >
-                          <!--[if mso
-                            ]><i
-                              style="
-                                letter-spacing: 24px;
-                                mso-font-width: -100%;
-                              "
-                              >&#8202;</i
-                            ><!
-                          [endif]-->
-                        </a>
-                      </div>
-                      <component src="src/components/divider.html"></component>
-                      <component src="src/components/thanks.html"></component>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </block>
-</extends>
+                        <!--[if mso
+                          ]><i
+                            style="letter-spacing: 24px; mso-font-width: -100%"
+                            >&#8202;</i
+                          ><!
+                        [endif]-->
+                      </a>
+                    </div>
+                    <component src="src/components/divider.html"></component>
+                    <component src="src/components/thanks.html"></component>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</component>

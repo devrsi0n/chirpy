@@ -23,7 +23,6 @@ export function mergeDeep(...objects: JsonObject[]) {
       const oVal = obj[key];
 
       if (Array.isArray(pVal) && Array.isArray(oVal)) {
-        // eslint-disable-next-line unicorn/prefer-spread
         prev[key] = pVal.concat(...oVal);
       } else if (isObject(pVal) && isObject(oVal)) {
         prev[key] = mergeDeep(pVal, oVal);

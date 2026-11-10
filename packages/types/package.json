@@ -7,25 +7,25 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "@tiptap/core": "2.1.12",
-    "@tiptap/pm": "2.1.12",
-    "@tiptap/react": "2.1.12",
-    "@types/node": "18.16.18",
-    "@types/react": "18.2.37",
-    "@types/react-dom": "18.2.15",
-    "csstype": "3.1.2",
-    "next": "14.1.4",
-    "next-auth": "4.24.5",
-    "next-mdx-remote": "3.0.8",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "@tiptap/core": "3.33.0",
+    "@tiptap/pm": "3.33.0",
+    "@tiptap/react": "3.33.0",
+    "@types/node": "26.6.6",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "csstype": "3.2.3",
+    "next": "16.4.6",
+    "next-auth": "4.24.15",
+    "next-mdx-remote": "6.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "reading-time": "1.5.0",
-    "typescript": "5.2.2"
+    "typescript": "6.0.3"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@tanstack/react-query": "4.32.6"
+    "@tanstack/react-query": "5.107.1"
   }
 }

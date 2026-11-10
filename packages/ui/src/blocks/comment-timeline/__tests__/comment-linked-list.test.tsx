@@ -3,19 +3,11 @@ import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import { CommentTimeline } from '../comment-timeline';
 import { generateComment, getTextsOfComment } from './mock-data';
 
-const mockHandleSubmitReply = jest.fn();
-const mockHandleClickLikeAction = jest.fn();
 const mockComment = generateComment();
 
 describe('CommentLinkedList', () => {
   beforeEach(() => {
-    render(
-      <CommentTimeline
-        comment={mockComment}
-        onSubmitReply={mockHandleSubmitReply}
-        onClickLikeAction={mockHandleClickLikeAction}
-      />,
-    );
+    render(<CommentTimeline comment={mockComment} />);
   });
 
   afterEach(() => {

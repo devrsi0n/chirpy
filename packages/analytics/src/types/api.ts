@@ -1,4 +1,4 @@
-export type QueryStatus = 'idle' | 'loading' | 'updating' | 'error' | 'success';
+export type QueryStatus = 'pending' | 'error' | 'success';
 
 export class QueryError extends Error {
   status: number;

@@ -1,12 +1,15 @@
 import { prisma } from '@chirpy-dev/trpc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { getAPIHandler } from '$/server/common/api-handler';
+import {
+  getAPIHandler,
+  handleInternalFailure,
+} from '$/server/common/api-handler';
 
 const handler = getAPIHandler();
 handler.get(getPage);
 
-export default handler;
+export default handler.handler({ onError: handleInternalFailure });
 
 async function getPage(req: NextApiRequest, res: NextApiResponse) {
   const auth = req.headers.authorization;

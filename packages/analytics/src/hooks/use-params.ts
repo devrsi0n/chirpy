@@ -14,7 +14,7 @@ export default function useParams<T extends string>({
   const value =
     typeof param === 'string' && values.includes(param)
       ? param
-      : defaultValue ?? values[0];
+      : (defaultValue ?? values[0]);
 
   const setParam = (param: T) => {
     const url = new URL(window.location.href);

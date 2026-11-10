@@ -1,8 +1,10 @@
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pageRender } from '../../../__tests__/fixtures/page-render';
-import { setMockedUser } from '../../../__tests__/fixtures/page-render';
+import {
+  pageRender,
+  setMockedUser,
+} from '../../../__tests__/fixtures/page-render';
 import { mockNextRouter } from '../../../__tests__/mocks/next-router';
 import { Welcome } from '../../../pages/auth/welcome';
 
@@ -48,7 +50,10 @@ describe('Welcome', () => {
     await userEvent.click(saveButton);
 
     await waitFor(
-      () => expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard'),
+      () =>
+        expect(mockNextRouter.push).toHaveBeenCalledWith(
+          `/dashboard/${userName}`,
+        ),
       {
         timeout: 4000,
       },

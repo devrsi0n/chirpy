@@ -12,6 +12,7 @@ import Head from 'next/head';
 import * as React from 'react';
 
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
+import { serializePageProps } from '$/utilities/page-props';
 
 export type AnalyticsByDomainPageProps = {
   domain: string;
@@ -75,9 +76,9 @@ export const getStaticProps: GetStaticProps<
   }
 
   return {
-    props: {
+    props: serializePageProps({
       domain,
-    },
+    }),
     revalidate: 60 * 60,
   };
 };

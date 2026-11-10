@@ -7,6 +7,8 @@ import {
   GetStaticPropsResult,
 } from 'next';
 
+import { serializePageProps } from '$/utilities/page-props';
+
 export { DashboardHome as default } from '@chirpy-dev/ui';
 
 type PathParams = {
@@ -56,10 +58,10 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
   });
 
   return {
-    props: {
+    props: serializePageProps({
       projects,
       username,
-    },
+    }),
     revalidate: 60,
   };
 };

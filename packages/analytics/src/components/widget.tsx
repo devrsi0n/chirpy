@@ -71,7 +71,7 @@ function WidgetContent({
 }: WidgetContentProps) {
   return (
     <div className={cx(className, 'mt-4 h-full')}>
-      {status === 'loading' ? (
+      {status === 'pending' ? (
         <WidgetLoading loaderSize={loaderSize} />
       ) : status === 'error' ? (
         <WidgetWarning>{warning}</WidgetWarning>

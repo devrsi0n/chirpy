@@ -70,7 +70,7 @@ export function SignInForm({
   const authOptions = useSocialAuthOptions();
   return (
     <div className="full-bleed flex h-full flex-row">
-      <div className="flex h-full flex-1 flex-col items-center ">
+      <div className="flex h-full flex-1 flex-col items-center">
         <div className="ml-0 mt-8 self-start justify-self-end sm:ml-8">
           <Logo size="lg" hideSpacing />
         </div>

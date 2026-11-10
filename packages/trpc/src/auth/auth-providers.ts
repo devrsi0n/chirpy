@@ -1,12 +1,12 @@
 import { sendVerificationEmail } from '@chirpy-dev/emails';
 import { isENVProd, SESSION_MAX_AGE } from '@chirpy-dev/utils';
-import { Provider } from 'next-auth/providers';
 import credentialsProvider from 'next-auth/providers/credentials';
 import discordProvider from 'next-auth/providers/discord';
 import emailProvider from 'next-auth/providers/email';
 import facebookProvider from 'next-auth/providers/facebook';
 import gitHubProvider from 'next-auth/providers/github';
 import googleProvider from 'next-auth/providers/google';
+import { Provider } from 'next-auth/providers/index';
 import twitterProvider from 'next-auth/providers/twitter';
 
 import { prisma } from '../common/db-client';

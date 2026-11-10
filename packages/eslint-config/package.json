@@ -5,22 +5,22 @@
   "main": "./index.js",
   "dependencies": {
     "@chirpy-dev/prettier-config": "workspace:*",
-    "@typescript-eslint/eslint-plugin": "6.3.0",
-    "@typescript-eslint/parser": "6.3.0",
-    "eslint-config-next": "14.1.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-jest": "27.2.3",
-    "eslint-plugin-prettier": "4.2.1",
-    "eslint-plugin-storybook": "0.6.7",
-    "eslint-plugin-unicorn": "48.0.1",
-    "next": "14.1.4",
-    "prettier": "2.8.8",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.2.2"
+    "@typescript-eslint/eslint-plugin": "8.72.2",
+    "@typescript-eslint/parser": "8.72.2",
+    "eslint-config-next": "16.4.6",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-jest": "29.17.0",
+    "eslint-plugin-prettier": "5.5.7",
+    "eslint-plugin-storybook": "10.6.6",
+    "eslint-plugin-unicorn": "65.0.1",
+    "next": "16.4.6",
+    "prettier": "3.9.10",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "6.0.3"
   },
   "devDependencies": {
-    "eslint": "8.47.0"
+    "eslint": "9.39.5"
   },
   "publishConfig": {
     "access": "public"

@@ -1,7 +1,7 @@
 import { ICheckToxicText } from '@chirpy-dev/types';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { within, userEvent } from '@storybook/testing-library';
-import { rest } from 'msw';
+import { Meta, StoryFn } from '@storybook/nextjs';
+import { http, HttpResponse } from 'msw';
+import { userEvent, within } from 'storybook/test';
 
 import { RichTextEditor } from '../rich-text-editor';
 
@@ -16,9 +16,9 @@ export default {
       action: true,
     },
   },
-} as ComponentMeta<typeof RichTextEditor>;
+} as Meta<typeof RichTextEditor>;
 
-const Template: ComponentStory<typeof RichTextEditor> = (args) => (
+const Template: StoryFn<typeof RichTextEditor> = (args) => (
   <RichTextEditor {...args} />
 );
 
@@ -32,13 +32,8 @@ Default.parameters = {
   msw: {
     handlers: {
       toxic: [
-        rest.get('*/api/content-classifier/toxic-text', (req, res, ctx) => {
-          return res(
-            ctx.status(200),
-            ctx.json<ICheckToxicText>({
-              matchedLabels: [],
-            }),
-          );
+        http.get('*/api/content-classifier/toxic-text', () => {
+          return HttpResponse.json<ICheckToxicText>({ matchedLabels: [] });
         }),
       ],
     },

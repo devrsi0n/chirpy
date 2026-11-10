@@ -2,9 +2,14 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@chirpy-dev/tsconfigs/base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "types": ["jest", "node", "@testing-library/jest-dom"]
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "./typings/*.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "./typings/*.d.ts",
+    "../tsconfigs/typings/*.d.ts",
+    "../../apps/main/typings/html.d.ts"
+  ]
 }

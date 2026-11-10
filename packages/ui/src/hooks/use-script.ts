@@ -32,7 +32,6 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
       // Store status in attribute on script
       // This can be read by other instances of this hook
       const setAttributeFromEvent = (event: Event) => {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         script!.dataset.status = getStatus(event);
       };
 
@@ -43,7 +42,7 @@ export function useScript(src: string, dataset?: DOMStringMap): Status {
     // Script event handler to update status in state
     // Note: Even if the script already exists we still need to add
     // event handlers to update the state for *this* hook instance.
-    // eslint-disable-next-line unicorn/consistent-function-scoping
+
     const setStateFromEvent = (event: Event) => {
       setStatus(getStatus(event));
     };

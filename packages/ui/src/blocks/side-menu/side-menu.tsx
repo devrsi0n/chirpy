@@ -49,7 +49,7 @@ export function SideMenu({
   const [isOpen, toggleOpen] = useCycle(false, true);
   const containerRef = useClickOutside(() => isOpen && toggleOpen(0));
   const [containerStyles, buttonStyles] = POS_STYLES[position];
-  const backgroundVariant = React.useMemo(() => {
+  const backgroundVariant = React.useMemo<Variants>(() => {
     const pos = circlePosStyle[position];
     return {
       open: (height = 1000) => ({

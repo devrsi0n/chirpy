@@ -12,7 +12,7 @@ export async function sendUpgradePlanEmail(
 ) {
   return sendEmail({
     to: props.to,
-    content: render(
+    content: await render(
       UpgradePlan({
         plan: props.plan,
         name: props.to.name,

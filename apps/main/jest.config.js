@@ -1,3 +1,6 @@
+// Unit tests use fixtures rather than deployment credentials.
+process.env.SKIP_ENV_VALIDATION = '1';
+
 const nextJest = require('next/jest');
 
 const createJestConfig = nextJest({

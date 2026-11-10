@@ -19,6 +19,8 @@ jest.mock('../../../contexts/comment-context/comment-context-provider', () => {
 
 const mockDeleteAComment = jest.fn();
 jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
+  page: { id: 'a-page-id', url: 'https://example.com', authorId: null },
+  toggleAPinAction: jest.fn(),
   pageId: 'a-page-id',
   projectId: EDITABLE_PROJECT_IDS[0],
   deleteAComment: mockDeleteAComment,
@@ -93,7 +95,9 @@ describe('CommentCard', () => {
         name: /delete/i,
       }),
     );
-    const confirmWrapper = screen.getByLabelText(/popover panel/i);
+    const confirmWrapper = await screen.findByRole('dialog', {
+      name: 'Delete comment',
+    });
 
     const confirmButton = within(confirmWrapper).getByRole('button', {
       name: /delete/i,

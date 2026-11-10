@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import CurrentVisitors from './current-visitors';
 import DateFilter from './date-filter';
 import { useAnalytics } from './provider';

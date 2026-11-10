@@ -25,13 +25,6 @@ const nextConfig = {
     '@chirpy-dev/trpc',
     '@chirpy-dev/analytics',
   ],
-  experimental: {
-    scrollRestoration: true,
-    swcPlugins: [
-      // Allow Date/Map in getStaticProps
-      ['next-superjson-plugin', {}],
-    ],
-  },
   async rewrites() {
     return [
       {
@@ -119,10 +112,12 @@ const nextConfig = {
   },
 };
 
-export default (/* _phase, { defaultConfig } */) =>
+const createNextConfig = (/* _phase, { defaultConfig } */) =>
   plugins.reduce((acc, plugin) => {
     if (Array.isArray(plugin)) {
       return plugin[0](acc, plugin[1]);
     }
     return plugin(acc);
   }, nextConfig);
+
+export default createNextConfig;

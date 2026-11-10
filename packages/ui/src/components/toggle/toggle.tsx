@@ -57,8 +57,8 @@ export function Toggle({
           disabled
             ? 'bg-gray-400'
             : checked
-            ? `bg-primary-900 hover:bg-primary-1000`
-            : `bg-gray-400 hover:bg-gray-500`,
+              ? `bg-primary-900 hover:bg-primary-1000`
+              : `bg-gray-400 hover:bg-gray-500`,
           disabledStyle,
           `relative inline-flex h-5 w-9 flex-shrink-0 rounded-full border-2 border-transparent transition duration-200 ease-in-out focus-visible:outline-none focus-visible:ring focus-visible:ring-primary-500`,
         )}
@@ -67,7 +67,7 @@ export function Toggle({
           <span
             className={clsx(
               checked ? `translate-x-4` : `translate-x-0`,
-              disabled ? 'bg-gray-100' : 'bg-white ',
+              disabled ? 'bg-gray-100' : 'bg-white',
               `inline-block h-4 w-4 rounded-full shadow-sm transition duration-200 ease-in-out`,
             )}
           />

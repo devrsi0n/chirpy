@@ -63,10 +63,7 @@ export function CreateProjectButton(
 }
 
 type DisabledType =
-  | 'invalidUsername'
-  | 'anonymous'
-  | 'projectLimit'
-  | 'maintenanceMode';
+  'invalidUsername' | 'anonymous' | 'projectLimit' | 'maintenanceMode';
 const DISABLED_MESSAGE_MAP: Record<DisabledType, JSX.Element> = {
   invalidUsername: (
     <section className="w-[18rem]">

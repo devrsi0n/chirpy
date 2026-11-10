@@ -71,10 +71,13 @@ export function useColors({
   level,
 }: UseActiveColorsOptions): Record<string, string> {
   const activeTheme = useActiveColorMode();
-  return Object.entries(COLOR_OPTIONS).reduce((acc, [key, value]) => {
-    acc[key] = value[activeTheme][level];
-    return acc;
-  }, {} as Record<string, string>);
+  return Object.entries(COLOR_OPTIONS).reduce(
+    (acc, [key, value]) => {
+      acc[key] = value[activeTheme][level];
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
 }
 
 export function useActiveColorMode(): ResolvedColorMode {

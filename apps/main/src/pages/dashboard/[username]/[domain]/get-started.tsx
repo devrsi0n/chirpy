@@ -8,6 +8,7 @@ import {
 } from 'next';
 
 import { getRecentProjectStaticPathsByDomain } from '$/server/services/project';
+import { serializePageProps } from '$/utilities/page-props';
 
 export { GetStarted as default } from '@chirpy-dev/ui';
 
@@ -37,9 +38,9 @@ export const getStaticProps: GetStaticProps<StaticProps, PathParams> = async ({
     return { notFound: true };
   }
   return {
-    props: {
+    props: serializePageProps({
       domain,
-    },
+    }),
     revalidate: 60 * 60,
   };
 };

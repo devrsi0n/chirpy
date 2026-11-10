@@ -47,7 +47,7 @@
         {{{ page.css }}}
       </style>
     </if>
-    <block name="head"></block>
+    <link rel="stylesheet" href="src/css/tailwind.css" inline />
   </head>
   <body class="{{ page.bodyClass }}">
     <if condition="page.preheader">
@@ -86,7 +86,7 @@
       aria-label="{{{ page.title || '' }}}"
       lang="{{ page.language || 'en' }}"
     >
-      <block name="template"></block>
+      <yield></yield>
     </div>
     <table class="w-[600px] sm:w-full" align="center">
       <tr>

@@ -1,6 +1,6 @@
 import { cleanup, screen } from '@testing-library/react';
 
-import { strings, HomePage } from '../../pages/home';
+import { HomePage, strings } from '../../pages/home';
 import { pageRender } from '../fixtures/page-render';
 
 describe('Index page', () => {
@@ -18,6 +18,6 @@ describe('Index page', () => {
   });
 
   it('should render the pricing', () => {
-    expect(screen.getByText('Simple, transparent pricing')).toBeInTheDocument();
+    expect(screen.getByText('Simple, usage based pricing')).toBeInTheDocument();
   });
 });

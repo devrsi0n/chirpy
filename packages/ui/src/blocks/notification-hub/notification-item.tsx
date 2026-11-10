@@ -2,7 +2,7 @@ import { RouterOutputs } from '@chirpy-dev/trpc/src/client';
 import clsx from 'clsx';
 import * as React from 'react';
 
-import { BaseButton, Avatar, Divider } from '../../components';
+import { Avatar, BaseButton, Divider } from '../../components';
 import {
   IconHeartFill,
   IconMessageSquare,
@@ -40,7 +40,7 @@ export function NotificationItem({
       as="div"
       key={message.id}
       className={clsx(
-        'group relative mt-0 flex-col items-start  rounded-none !p-0 !text-left hover:rounded',
+        'group relative mt-0 flex-col items-start rounded-none !p-0 !text-left hover:rounded',
         !message.read && `bg-gray-600/30`,
       )}
       onClickCapture={(e: any): void => {
@@ -59,7 +59,7 @@ export function NotificationItem({
       >
         <BaseButton
           type="button"
-          className="!absolute right-1.5 top-1.5 inline-block h-fit w-fit rounded-full p-0.5 hover:bg-primary-600 group-hover:inline-block sm:hidden"
+          className="!absolute right-1.5 top-1.5 inline-block h-fit w-fit rounded-full p-0.5 group-hover:inline-block hover:bg-primary-600 sm:hidden"
           onClick={(e) => {
             onClickDelete(message.id);
             e.stopPropagation();

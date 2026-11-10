@@ -1,4 +1,5 @@
-import { NextSeo } from 'next-seo';
+import { generateNextSeo } from 'next-seo/pages';
+import Head from 'next/head';
 import * as React from 'react';
 
 import {
@@ -17,13 +18,15 @@ export type HomeProps = HomeCommentWidgetPreviewProps;
 export function HomePage({ buildDate }: HomeProps): JSX.Element {
   return (
     <SiteLayout enableBgGradient title="" hideFullBleed>
-      <NextSeo
-        twitter={{
-          handle: '@ChirpyHQ',
-          site: '@ChirpyHQ',
-          cardType: 'summary_large_image',
-        }}
-      />
+      <Head>
+        {generateNextSeo({
+          twitter: {
+            handle: '@ChirpyHQ',
+            site: '@ChirpyHQ',
+            cardType: 'summary_large_image',
+          },
+        })}
+      </Head>
       <section className="relative z-[1] flex min-h-full flex-col items-center space-y-24 px-2 sm:px-0">
         <div className="space-y-8">
           <h1 className="mt-1 w-full max-w-2xl text-center text-4xl font-black leading-snug text-gray-1200">

@@ -8,20 +8,37 @@ import './mocks/mock-framer-motion';
 import { server } from './fixtures/server';
 import { cleanEvents } from './mocks/next-router';
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+document.elementFromPoint = () => document.body;
+Range.prototype.getBoundingClientRect = () => new DOMRect();
+Range.prototype.getClientRects = () => [] as unknown as DOMRectList;
+
+beforeAll(() => server.listen({ onUnhandledFrame: 'warn' }));
 // afterEach(() => server.resetHandlers());
 afterAll(() => {
   cleanEvents();
   server.close();
 });
 
-/* eslint-disable unicorn/consistent-function-scoping */
-jest.mock('next/dynamic', () => (func: () => Promise<any>) => {
-  let component: any = null;
-  func().then((module: any) => {
-    component = module.default;
-  });
-  const DynamicComponent = (...args: any[]) => component(...args);
+jest.mock('next/dynamic', () => (load: () => Promise<any>) => {
+  const React = jest.requireActual('react');
+  const DynamicComponent = (props: any) => {
+    const [Component, setComponent] = React.useState(null);
+    React.useEffect(() => {
+      let mounted = true;
+      load().then((module: any) => {
+        if (mounted) setComponent(() => module.default || module);
+      });
+      return () => {
+        mounted = false;
+      };
+    }, []);
+    return Component ? React.createElement(Component, props) : null;
+  };
   DynamicComponent.displayName = 'LoadableComponent';
   DynamicComponent.preload = jest.fn();
   return DynamicComponent;

@@ -1,15 +1,13 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/nextjs';
 
 import { ToastItem } from '../toast-item';
 
 export default {
   title: 'Components/ToastItem',
   component: ToastItem,
-} as ComponentMeta<typeof ToastItem>;
+} as Meta<typeof ToastItem>;
 
-const Template: ComponentStory<typeof ToastItem> = (args) => (
-  <ToastItem {...args} />
-);
+const Template: StoryFn<typeof ToastItem> = (args) => <ToastItem {...args} />;
 
 export const TitleOnly = Template.bind({});
 TitleOnly.args = {

@@ -1,4 +1,5 @@
 module.exports = {
+  content: ['./src/**/*.html'],
   theme: {
     screens: {
       sm: { max: '600px' },

@@ -4,9 +4,6 @@ import * as React from 'react';
 
 const LazyAvvvatar = dynamic(
   () => import(/* webpackChunkName: "custom-avatar" */ 'avvvatars-react'),
-  {
-    suspense: true,
-  },
 );
 
 export function DeferredCustomAvatar({

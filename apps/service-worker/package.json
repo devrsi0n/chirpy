@@ -10,12 +10,14 @@
   "devDependencies": {
     "@chirpy-dev/eslint-config": "workspace:*",
     "@chirpy-dev/tsconfigs": "workspace:*",
-    "dotenv": "16.3.1",
-    "dotenv-cli": "7.2.1",
-    "dotenv-expand": "10.0.0",
-    "eslint": "8.47.0",
-    "typescript": "5.2.2",
-    "vite": "4.4.9"
+    "dotenv": "18.0.10",
+    "dotenv-cli": "11.1.0",
+    "dotenv-expand": "1000.0.0",
+    "eslint": "9.39.5",
+    "typescript": "6.0.3",
+    "vite": "8.3.7",
+    "@types/node": "26.6.6",
+    "@chirpy-dev/types": "workspace:*"
   },
   "publishConfig": {
     "access": "public"

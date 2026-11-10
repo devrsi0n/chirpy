@@ -1,5 +1,5 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { userEvent, within } from '@storybook/testing-library';
+import { Meta, StoryFn } from '@storybook/nextjs';
+import { userEvent, within } from 'storybook/test';
 
 import { NotificationHub } from '../notification-hub';
 
@@ -7,9 +7,9 @@ type NotificationHubType = typeof NotificationHub;
 export default {
   title: 'Blocks/NotificationHub',
   component: NotificationHub,
-} as ComponentMeta<NotificationHubType>;
+} as Meta<NotificationHubType>;
 
-const Template: ComponentStory<NotificationHubType> = (args: any) => (
+const Template: StoryFn<NotificationHubType> = (args: any) => (
   <div>
     <NotificationHub {...args} />
   </div>

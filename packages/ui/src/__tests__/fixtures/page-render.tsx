@@ -1,9 +1,9 @@
+import { trpc as trpcClient } from '@chirpy-dev/trpc/src/client';
 import { render as reactRender } from '@testing-library/react';
 
 import { ToastProvider } from '../../components';
 // import '../mocks/next-router';
 import { CurrentUserContext, UserData } from '../../contexts';
-import { trpcClient } from '../../utilities';
 import { DEFAULT_USER_DATA } from '../mocks/data/user';
 
 const getMockedUser = jest.fn().mockReturnValue(DEFAULT_USER_DATA);
@@ -24,7 +24,7 @@ export function pageRender(ui: React.ReactElement) {
   });
 }
 
-function Wrapper({ children }: { children: React.ReactElement }): JSX.Element {
+function Wrapper({ children }: { children: React.ReactNode }): JSX.Element {
   // @ts-ignore
   return <TrpcWrapper Component={() => children} pageProps={{}} />;
 }

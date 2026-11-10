@@ -1,14 +1,15 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pageRender } from '../../../__tests__/fixtures/page-render';
 import { mockProject } from '../../../__tests__/mocks/mock-project-data';
+import { mockNextRouter } from '../../../__tests__/mocks/next-router';
 import { DashboardHome } from '../home';
+import { DeleteProject } from '../settings/delete-project';
 
 describe('dashboard', () => {
   beforeEach(() => {
-    // @ts-expect-error
-    pageRender(<DashboardHome username="jest" trpcState={{}} />);
+    pageRender(<DashboardHome username="jest" projects={[mockProject]} />);
   });
 
   afterEach(() => {
@@ -32,30 +33,26 @@ describe('dashboard', () => {
   });
 
   it('should delete the project', async () => {
-    await waitFor(() => {
-      screen.getByRole('button', {
-        name: /show more project options/i,
-      });
-    });
-    const menu = screen.getByRole('button', {
-      name: /show more project options/i,
-    });
-    await userEvent.click(menu);
-    const deleteOption = screen.getByRole('menuitem', {
-      name: /delete/i,
-    });
-    expect(deleteOption).toBeTruthy();
-    await userEvent.click(deleteOption);
+    pageRender(
+      <DeleteProject
+        domain={mockProject.domain}
+        name={mockProject.name}
+        username="jest"
+      />,
+    );
     const deleteButton = screen.getByRole('button', {
       name: /delete/i,
     });
     expect(deleteButton).toBeTruthy();
     await userEvent.click(deleteButton);
-    await waitFor(() =>
-      expect(screen.queryByText(/Delete the project/)).toBeFalsy(),
+    const dialog = await screen.findByRole('dialog', {
+      name: `Delete project ${mockProject.name}`,
+    });
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'Delete' }),
     );
     await waitFor(() =>
-      expect(screen.getByLabelText('Page views').textContent).toBe('212'),
+      expect(mockNextRouter.push).toHaveBeenCalledWith('/dashboard/jest'),
     );
   });
 });

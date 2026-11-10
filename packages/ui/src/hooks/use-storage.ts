@@ -83,7 +83,7 @@ function useStorage<T>(
     if (key) {
       getStorage().removeItem(key);
     }
-    // eslint-disable-next-line unicorn/no-useless-undefined
+
     setStoredValue(undefined);
   };
 

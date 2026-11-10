@@ -10,16 +10,9 @@
 */
 
 module.exports = {
+  postcss: { options: { from: 'src/css/tailwind.css' } },
   build: {
-    templates: {
-      source: 'src/templates',
-      destination: {
-        path: 'build_local',
-      },
-      assets: {
-        source: 'src/images',
-        destination: 'images',
-      },
-    },
+    content: ['src/templates/**/*.html'],
+    output: { path: 'build_local', from: ['src/templates'] },
   },
 };

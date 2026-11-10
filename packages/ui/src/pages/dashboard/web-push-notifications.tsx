@@ -29,7 +29,7 @@ export function WebPushNotifications(props: WebPushForm) {
     },
   });
   const { showToast } = useToast();
-  const { mutateAsync, isLoading } = trpc.settings.update.useMutation();
+  const { mutateAsync, isPending } = trpc.settings.update.useMutation();
 
   const handleSave = handleSubmit(async (fields) => {
     try {
@@ -80,7 +80,7 @@ export function WebPushNotifications(props: WebPushForm) {
       </SettingsCard.Body>
       <SettingsCard.Footer>
         <Button color="primary" variant="solid" onClick={handleSave}>
-          {isLoading ? (
+          {isPending ? (
             <Spinner className="!text-gray-100">Saving</Spinner>
           ) : (
             'Save'

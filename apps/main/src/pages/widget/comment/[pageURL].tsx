@@ -10,6 +10,8 @@ import {
 import { log } from 'next-axiom';
 import superjson from 'superjson';
 
+import { serializePageProps } from '$/utilities/page-props';
+
 /**
  * Comment tree widget for a page
  * @param props
@@ -104,14 +106,14 @@ export const getStaticProps: GetStaticProps<
       return { notFound: true };
     }
     return {
-      props: {
+      props: serializePageProps({
         trpcState: ssg.dehydrate(),
         page,
         projectId: page.project.id,
         theme: (page.project.theme as Theme) || null,
         isWidget: true,
         plan: page.project.user?.plan || 'HOBBY',
-      },
+      }),
       revalidate: 5 * 60,
     };
   } catch (error) {

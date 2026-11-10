@@ -21,6 +21,8 @@ jest.mock('../../../contexts/comment-context/comment-context-provider', () => {
 const mockOnSubmitReply = jest.fn();
 const mockOnClickLikeAction = jest.fn();
 jest.spyOn(CommentContext, 'useCommentContext').mockImplementation(() => ({
+  page: { id: 'a-page-id', url: 'https://example.com', authorId: null },
+  toggleAPinAction: jest.fn(),
   pageId: 'a-page-id',
   projectId: 'a-project-id',
   deleteAComment: jest.fn(),
@@ -41,7 +43,9 @@ const mockComments = [
 
 describe('CommentForest', () => {
   beforeEach(() => {
-    pageRender(<CommentForest comments={mockComments as any} />);
+    pageRender(
+      <CommentForest comments={mockComments as any} pinnedComments={[]} />,
+    );
   });
 
   afterEach(() => {

@@ -15,4 +15,5 @@ mockUseSession.mockReturnValue({
     },
   } as any,
   status: 'authenticated',
+  update: jest.fn(),
 });

@@ -1,4 +1,5 @@
 import { isENVDev } from '@chirpy-dev/utils';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 import { log } from 'next-axiom';
 import SuperJSON from 'superjson';
@@ -17,12 +18,12 @@ export type {
 } from '@prisma/client';
 
 declare global {
-  // eslint-disable-next-line no-var
   var _prismaClient: ReturnType<typeof getPrismaClient> | undefined;
 }
 
 function getPrismaClient() {
   return new PrismaClient({
+    adapter: new PrismaPg({ connectionString: process.env.SUPABASE_URL }),
     log: isENVDev
       ? ['error', 'warn']
       : [

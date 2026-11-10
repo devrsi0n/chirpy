@@ -1,85 +1,172 @@
-const path = require('path');
+const path = require('node:path');
+const next = require('eslint-config-next/core-web-vitals');
+const typescript = require('@typescript-eslint/eslint-plugin');
+const unicorn = require('eslint-plugin-unicorn').default;
+const storybook = require('eslint-plugin-storybook');
+const prettier = require('eslint-plugin-prettier/recommended');
+const jest = require('eslint-plugin-jest');
 
-module.exports = {
-  // plugins: ['@typescript-eslint', 'prettier'],
-  parser: '@typescript-eslint/parser',
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'plugin:unicorn/recommended',
-
-    'next/core-web-vitals',
-    'plugin:prettier/recommended',
-    'plugin:storybook/recommended',
-  ],
-  settings: {
-    next: {
-      rootDir: [path.resolve(__dirname, '../../apps/main/')],
+module.exports = [
+  ...next,
+  {
+    plugins: {
+      '@typescript-eslint': next.find(
+        (config) => config.plugins?.['@typescript-eslint'],
+      ).plugins['@typescript-eslint'],
     },
   },
-  env: {
-    'jest/globals': true,
-  },
-  rules: {
-    'no-console': 'off',
-
-    '@typescript-eslint/ban-ts-comment': 'off',
-    '@typescript-eslint/ban-types': 'warn',
-    '@typescript-eslint/no-namespace': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_',
-      },
-    ],
-
-    'prettier/prettier': ['warn', require('../prettier-config')],
-
-    '@next/next/no-img-element': 'off',
-    '@next/next/no-html-link-for-pages': ['error', 'apps/main/src/pages/'],
-
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-
-    'unicorn/filename-case': [
-      'error',
-      {
-        case: 'kebabCase',
-        ignore: [/^\[.+]\.tsx?$/],
-      },
-    ],
-    'unicorn/no-array-reduce': 'off',
-    'unicorn/no-null': 'off',
-    'unicorn/no-abusive-eslint-disable': 'off',
-    'unicorn/no-array-for-each': 'off',
-    'unicorn/import-style': 'off',
-    'unicorn/prevent-abbreviations': 'off',
-    'unicorn/prefer-node-protocol': 'off',
-    'unicorn/prefer-module': 'off',
-    'unicorn/prefer-json-parse-buffer': 'off',
-    'unicorn/prefer-top-level-await': 'off',
-    'unicorn/consistent-destructuring': 'off',
-    'unicorn/prefer-code-point': 'off',
-    'unicorn/prefer-spread': 'off',
-    'unicorn/prefer-string-replace-all': 'off',
-    'unicorn/no-document-cookie': 'off',
-
-    'jest/expect-expect': 'off',
-  },
-  overrides: [
-    {
-      files: ['**/__tests__/**/*.ts', '**/__tests__/**/*.tsx'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended'],
-      rules: {
-        'react/display-name': 'off',
-        'unicorn/prefer-event-target': 'off',
-        '@typescript-eslint/no-non-null-assertion': 'off',
-      },
+  ...typescript.configs['flat/recommended'].map(
+    ({ plugins, ...config }) => config,
+  ),
+  {
+    ...unicorn.configs.recommended,
+    rules: {
+      ...unicorn.configs.recommended.rules,
+      // Preserve the existing lint policy while upgrading the plugin.
+      'unicorn/better-dom-traversing': 'off',
+      'unicorn/consistent-assert': 'off',
+      'unicorn/consistent-compound-words': 'off',
+      'unicorn/consistent-date-clone': 'off',
+      'unicorn/consistent-empty-array-spread': 'off',
+      'unicorn/consistent-existence-index-check': 'off',
+      'unicorn/consistent-json-file-read': 'off',
+      'unicorn/consistent-template-literal-escape': 'off',
+      'unicorn/dom-node-dataset': 'off',
+      'unicorn/isolated-functions': 'off',
+      'unicorn/no-accessor-recursion': 'off',
+      'unicorn/no-anonymous-default-export': 'off',
+      'unicorn/no-array-fill-with-reference-type': 'off',
+      'unicorn/no-array-from-fill': 'off',
+      'unicorn/no-array-reverse': 'off',
+      'unicorn/no-array-sort': 'off',
+      'unicorn/no-await-in-promise-methods': 'off',
+      'unicorn/no-blob-to-file': 'off',
+      'unicorn/no-canvas-to-image': 'off',
+      'unicorn/no-confusing-array-splice': 'off',
+      'unicorn/no-duplicate-set-values': 'off',
+      'unicorn/no-exports-in-scripts': 'off',
+      'unicorn/no-immediate-mutation': 'off',
+      'unicorn/no-incorrect-query-selector': 'off',
+      'unicorn/no-instanceof-builtins': 'off',
+      'unicorn/no-invalid-fetch-options': 'off',
+      'unicorn/no-invalid-file-input-accept': 'off',
+      'unicorn/no-late-current-target-access': 'off',
+      'unicorn/no-magic-array-flat-depth': 'off',
+      'unicorn/no-manually-wrapped-comments': 'off',
+      'unicorn/no-named-default': 'off',
+      'unicorn/no-negation-in-equality-check': 'off',
+      'unicorn/no-single-promise-in-promise-methods': 'off',
+      'unicorn/no-this-outside-of-class': 'off',
+      'unicorn/no-unnecessary-array-flat-depth': 'off',
+      'unicorn/no-unnecessary-array-splice-count': 'off',
+      'unicorn/no-unnecessary-nested-ternary': 'off',
+      'unicorn/no-unnecessary-polyfills': 'off',
+      'unicorn/no-unnecessary-slice-end': 'off',
+      'unicorn/no-unused-array-method-return': 'off',
+      'unicorn/no-useless-collection-argument': 'off',
+      'unicorn/no-useless-error-capture-stack-trace': 'off',
+      'unicorn/no-useless-iterator-to-array': 'off',
+      'unicorn/prefer-array-last-methods': 'off',
+      'unicorn/prefer-bigint-literals': 'off',
+      'unicorn/prefer-class-fields': 'off',
+      'unicorn/prefer-classlist-toggle': 'off',
+      'unicorn/prefer-get-or-insert-computed': 'off',
+      'unicorn/prefer-global-this': 'off',
+      'unicorn/prefer-https': 'off',
+      'unicorn/prefer-import-meta-properties': 'off',
+      'unicorn/prefer-includes-over-repeated-comparisons': 'off',
+      'unicorn/prefer-iterator-concat': 'off',
+      'unicorn/prefer-iterator-to-array-at-end': 'off',
+      'unicorn/prefer-math-abs': 'off',
+      'unicorn/prefer-math-min-max': 'off',
+      'unicorn/prefer-queue-microtask': 'off',
+      'unicorn/prefer-response-static-json': 'off',
+      'unicorn/prefer-simple-condition-first': 'off',
+      'unicorn/prefer-single-call': 'off',
+      'unicorn/prefer-split-limit': 'off',
+      'unicorn/prefer-string-match-all': 'off',
+      'unicorn/prefer-string-pad-start-end': 'off',
+      'unicorn/prefer-string-raw': 'off',
+      'unicorn/prefer-string-repeat': 'off',
+      'unicorn/prefer-structured-clone': 'off',
+      'unicorn/require-css-escape': 'off',
+      'unicorn/require-module-attributes': 'off',
+      'unicorn/require-module-specifiers': 'off',
+      'unicorn/require-passive-events': 'off',
+      'unicorn/switch-case-break-position': 'off',
+      'unicorn/try-complexity': 'off',
     },
-  ],
-};
+  },
+  ...storybook.configs['flat/recommended'],
+  prettier,
+  {
+    settings: {
+      next: { rootDir: [path.resolve(__dirname, '../../apps/main/')] },
+    },
+    rules: {
+      'no-console': 'off',
+
+      '@typescript-eslint/ban-ts-comment': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+
+      'prettier/prettier': ['warn', require('../prettier-config')],
+
+      '@next/next/no-img-element': 'off',
+      '@next/next/no-html-link-for-pages': ['error', 'apps/main/src/pages/'],
+
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
+
+      'unicorn/filename-case': [
+        'error',
+        {
+          case: 'kebabCase',
+          checkDirectories: false,
+          ignore: [/^\[.+]\.tsx?$/],
+        },
+      ],
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-abusive-eslint-disable': 'off',
+      'unicorn/no-array-for-each': 'off',
+      'unicorn/import-style': 'off',
+      'unicorn/prevent-abbreviations': 'off',
+      'react-hooks/refs': 'off',
+      'react-hooks/immutability': 'off',
+      'react-hooks/preserve-manual-memoization': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      'react-hooks/set-state-in-effect': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      'unicorn/prefer-node-protocol': 'off',
+      'unicorn/prefer-module': 'off',
+      'unicorn/prefer-top-level-await': 'off',
+      'unicorn/consistent-destructuring': 'off',
+      'unicorn/prefer-code-point': 'off',
+      'unicorn/prefer-spread': 'off',
+      'unicorn/prefer-string-replace-all': 'off',
+      'unicorn/no-document-cookie': 'off',
+
+      'jest/expect-expect': 'off',
+    },
+  },
+  {
+    files: ['**/__tests__/**/*.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    ...jest.configs['flat/recommended'],
+    rules: {
+      ...jest.configs['flat/recommended'].rules,
+      'react/display-name': 'off',
+      'unicorn/prefer-event-target': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      'jest/expect-expect': 'off',
+    },
+  },
+];

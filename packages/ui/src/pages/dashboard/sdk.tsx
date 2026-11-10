@@ -11,7 +11,7 @@ type SDKForm = {
 };
 export function SDK(props: SDKForm) {
   const { showToast } = useToast();
-  const { mutateAsync: generateKey, isLoading } =
+  const { mutateAsync: generateKey, isPending } =
     trpc.settings.generateKey.useMutation();
   const { data: session } = useSession();
 
@@ -61,13 +61,13 @@ export function SDK(props: SDKForm) {
           <Button
             disabled={
               !['ENTERPRISE', 'PRO'].includes(session?.user?.plan || '') ||
-              isLoading
+              isPending
             }
             variant="text"
             onClick={handleRegenerate}
             aria-label="Regenerate API key"
           >
-            {isLoading ? (
+            {isPending ? (
               <Spinner className="!text-gray-100">Generating</Spinner>
             ) : (
               <IconRefreshCw size={16} />

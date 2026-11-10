@@ -2,14 +2,17 @@ import { prisma } from '@chirpy-dev/trpc';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { z } from 'zod';
 
-import { getAPIHandler } from '$/server/common/api-handler';
+import {
+  getAPIHandler,
+  handleInternalFailure,
+} from '$/server/common/api-handler';
 
 const handler = getAPIHandler();
 handler.get(getProject);
 handler.post(createProject);
 handler.delete(deleteProject);
 
-export default handler;
+export default handler.handler({ onError: handleInternalFailure });
 
 async function getProject(req: NextApiRequest, res: NextApiResponse) {
   const auth = req.headers.authorization;

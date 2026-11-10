@@ -23,7 +23,7 @@ export function DeleteProject({ domain, name, username }: DeleteProjectProps) {
   const [showDialog, setShowDialog] = React.useState(false);
   const { mutateAsync: deleteProject, status } =
     trpc.project.delete.useMutation();
-  const loading = status === 'loading';
+  const loading = status === 'pending';
   const { showToast } = useToast();
   const { mutateAsync: revalidate } = trpc.revalidate.url.useMutation();
   const router = useRouter();

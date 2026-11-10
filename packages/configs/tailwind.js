@@ -1,7 +1,6 @@
 // @ts-nocheck
 const defaultTheme = require('tailwindcss/defaultTheme');
 const radixColors = require('@radix-ui/colors');
-const convert = require('color-convert');
 const plugin = require('tailwindcss/plugin');
 
 const colors = {
@@ -235,12 +234,7 @@ function getRadixColor(colors, prefix) {
   const result = {};
   for (let i = 1; i <= 12; i++) {
     const color = colors[`${prefix}${i}`];
-    const [, h, s, l] = /hsl\((\d+), ([\d.]+)%, ([\d.]+)%\)/.exec(color);
-    const rgb = convert.hsl
-      .rgb(+h, +s, +l)
-      .map((c) => c.toString(16))
-      .join('');
-    result[i * 100] = `#${rgb}`;
+    result[i * 100] = color;
   }
   return result;
 }

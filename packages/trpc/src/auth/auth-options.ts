@@ -10,7 +10,7 @@ import { prisma } from '../common/db-client';
 import { authProviders } from './auth-providers';
 import { defaultCookies } from './default-cookies';
 // Fix build TS error
-import '../../typings/next-auth.d';
+import type {} from '../../typings/next-auth';
 
 export function getNextAuthOptions(
   req: GetTokenParams['req'],

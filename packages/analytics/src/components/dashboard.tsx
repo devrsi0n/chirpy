@@ -17,7 +17,7 @@ function lazyLoadWidget<P = object>(
   return dynamic(importPromise, {
     loading: () => (
       <Widget>
-        <Widget.Content status="loading" loaderSize={loaderSize} />
+        <Widget.Content status="pending" loaderSize={loaderSize} />
       </Widget>
     ),
     ssr: false,

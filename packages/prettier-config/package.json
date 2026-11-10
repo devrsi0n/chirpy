@@ -4,11 +4,11 @@
   "license": "AGPL-3.0-or-later",
   "main": "./index.js",
   "dependencies": {
-    "@ianvs/prettier-plugin-sort-imports": "4.1.0",
-    "prettier-plugin-tailwindcss": "0.4.1"
+    "@ianvs/prettier-plugin-sort-imports": "4.7.1",
+    "prettier-plugin-tailwindcss": "0.8.1"
   },
   "devDependencies": {
-    "prettier": "2.8.8"
+    "prettier": "3.9.10"
   },
   "publishConfig": {
     "access": "public"

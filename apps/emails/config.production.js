@@ -12,12 +12,9 @@ const path = require('path');
 
 module.exports = {
   build: {
-    templates: {
-      destination: {
-        path: path.resolve(__dirname, '../../packages/emails/src/templates'),
-      },
+    output: {
+      path: path.resolve(__dirname, '../../packages/emails/src/templates'),
     },
   },
-  inlineCSS: true,
-  removeUnusedCSS: true,
+  css: { inline: true, purge: true },
 };

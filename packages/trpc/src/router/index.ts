@@ -25,6 +25,6 @@ export const appRouter = router({
 export type AppRouter = typeof appRouter;
 
 export const corsRouter = router({
-  page: pageRouter
-})
+  page: pageRouter,
+});
 export type CorsRouter = typeof corsRouter;

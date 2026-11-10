@@ -10,6 +10,8 @@ import {
 import { log } from 'next-axiom';
 import superjson from 'superjson';
 
+import { serializePageProps } from '$/utilities/page-props';
+
 type PathParams = {
   commentId: string;
 };
@@ -82,7 +84,7 @@ export const getStaticProps: GetStaticProps<
     }
 
     return {
-      props: {
+      props: serializePageProps({
         trpcState: ssg.dehydrate(),
         page: data.page,
         projectId: data.page.project.id,
@@ -90,7 +92,7 @@ export const getStaticProps: GetStaticProps<
         theme: (data.page.project.theme as Theme) || null,
         isWidget: true,
         plan: data.page.project.user?.plan || 'HOBBY',
-      },
+      }),
       revalidate: 600,
     };
   } catch (error) {

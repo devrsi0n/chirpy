@@ -2,10 +2,9 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@chirpy-dev/tsconfigs/base.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "types": ["jest", "node"],
     "paths": {
-      "$/*": ["src/*"]
+      "$/*": ["./src/*"]
     },
     "jsx": "preserve"
   },

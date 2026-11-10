@@ -17,7 +17,9 @@ export type ConfirmUserFieldsProps = {
   //
 };
 
-export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Element {
+export function ConfirmUserFields(
+  /*props: ConfirmUserFieldsProps*/
+): JSX.Element {
   const { data, loading: isLoadingUser, refetchUser } = useCurrentUser();
 
   const { register, errors, hasError, handleSubmit, setError, setFields } =
@@ -40,7 +42,7 @@ export function ConfirmUserFields(/*props: ConfirmUserFieldsProps*/): JSX.Elemen
   }, [data, isLoadingUser]);
   const { mutateAsync: updateUser, status } =
     trpc.user.updateProfile.useMutation();
-  const loading = status === 'loading';
+  const loading = status === 'pending';
   const [isSaved, setIsSaved] = React.useState(false);
   const router = useRouter();
   const { showToast } = useToast();

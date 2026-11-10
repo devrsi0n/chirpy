@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/nextjs';
 
 import { IconCloud } from '../../icons';
 import { Menu } from '../menu';
@@ -7,9 +7,9 @@ type MenuType = typeof Menu;
 export default {
   title: 'Components/Menu',
   component: Menu,
-} as ComponentMeta<MenuType>;
+} as Meta<MenuType>;
 
-const Template: ComponentStory<MenuType> = () => {
+const Template: StoryFn<MenuType> = () => {
   return (
     <div className="flex flex-row justify-center">
       <Menu>

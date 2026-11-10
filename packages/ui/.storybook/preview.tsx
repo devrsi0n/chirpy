@@ -1,4 +1,4 @@
-import { initialize, mswDecorator } from 'msw-storybook-addon';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 import { SessionProvider } from 'next-auth/react';
 import * as React from 'react';
 
@@ -10,12 +10,12 @@ import '../src/styles/globals.scss';
 import { sbRestHandlers } from './msw/rest-handlers';
 
 initialize({
-  onUnhandledRequest: 'bypass',
+  onUnhandledFrame: 'bypass',
 });
 
-export const decorators = [
-  mswDecorator,
+export const loaders = [mswLoader];
 
+export const decorators = [
   // @ts-ignore
   (Story) => {
     const { styles } = useThemeVariables();

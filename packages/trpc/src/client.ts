@@ -8,9 +8,9 @@ import { type AppRouter } from './router';
 
 // Shared trpc client, used by `analytics` and `ui` packages
 export const trpc = createTRPCNext<AppRouter>({
+  transformer: superjson,
   config() {
     return {
-      transformer: superjson,
       links: [
         loggerLink({
           enabled: (opts) =>
@@ -18,6 +18,7 @@ export const trpc = createTRPCNext<AppRouter>({
             (opts.direction === 'down' && opts.result instanceof Error),
         }),
         httpLink({
+          transformer: superjson,
           url: `${getBaseUrl()}/api/trpc`,
           headers() {
             const isWidget = location.pathname.startsWith('/widget/');
@@ -38,7 +39,7 @@ export const trpc = createTRPCNext<AppRouter>({
         defaultOptions: {
           queries: {
             staleTime: 1000 * 30,
-            cacheTime: 1000 * 60 * 60 * 72,
+            gcTime: 1000 * 60 * 60 * 72,
           },
         },
       },

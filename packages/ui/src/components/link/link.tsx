@@ -40,7 +40,6 @@ const variantStyles: Record<Variant, string> = {
   plain: ``,
 };
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
 export const Link = React.forwardRef(function Link(
   {
     size,
@@ -132,7 +131,7 @@ export const Link = React.forwardRef(function Link(
         >
           {children}
           {!hideUnderline && ['nav', 'secondary'].includes(variant) && (
-            <span className="absolute bottom-0 left-0 -mb-1 hidden  h-0.5 w-full overflow-hidden sm:inline-block">
+            <span className="absolute bottom-0 left-0 -mb-1 hidden h-0.5 w-full overflow-hidden sm:inline-block">
               <motion.span
                 className="absolute inset-0 inline-block bg-current"
                 initial={{ scale: 0, opacity: 0 }}

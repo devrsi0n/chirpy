@@ -20,7 +20,9 @@ const baseUrl = process.env.VERCEL_URL
 export const StripeWelcomeEmail = () => (
   <Html>
     <Head />
-    <Preview>You're now ready to make live transactions with Stripe!</Preview>
+    <Preview>
+      You&apos;re now ready to make live transactions with Stripe!
+    </Preview>
     <Body style={main}>
       <Container style={container}>
         <Section style={box}>
@@ -32,32 +34,27 @@ export const StripeWelcomeEmail = () => (
           />
           <Hr style={hr} />
           <Text style={paragraph}>
-            Thanks for submitting your account information. You're now ready to
-            make live transactions with Stripe!
+            Thanks for submitting your account information. You&apos;re now
+            ready to make live transactions with Stripe!
           </Text>
           <Text style={paragraph}>
             You can view your payments and a variety of other information about
             your account right from your dashboard.
           </Text>
-          <Button
-            pX={10}
-            pY={10}
-            style={button}
-            href="https://dashboard.stripe.com/login"
-          >
+          <Button style={button} href="https://dashboard.stripe.com/login">
             View your Stripe Dashboard
           </Button>
           <Hr style={hr} />
           <Text style={paragraph}>
-            If you haven't finished your integration, you might find our{' '}
+            If you haven&apos;t finished your integration, you might find our{' '}
             <Link style={anchor} href="https://stripe.com/docs">
               docs
             </Link>{' '}
             handy.
           </Text>
           <Text style={paragraph}>
-            Once you're ready to start accepting payments, you'll just need to
-            use your live{' '}
+            Once you&apos;re ready to start accepting payments, you&apos;ll just
+            need to use your live{' '}
             <Link
               style={anchor}
               href="https://dashboard.stripe.com/login?redirect=%2Fapikeys"
@@ -73,7 +70,7 @@ export const StripeWelcomeEmail = () => (
             .
           </Text>
           <Text style={paragraph}>
-            Finally, we've put together a{' '}
+            Finally, we&apos;ve put together a{' '}
             <Link
               style={anchor}
               href="https://stripe.com/docs/checklist/website"
@@ -83,8 +80,8 @@ export const StripeWelcomeEmail = () => (
             to ensure your website conforms to card network standards.
           </Text>
           <Text style={paragraph}>
-            We'll be here to help you with any step along the way. You can find
-            answers to most questions and get in touch with us on our{' '}
+            We&apos;ll be here to help you with any step along the way. You can
+            find answers to most questions and get in touch with us on our{' '}
             <Link style={anchor} href="https://support.stripe.com/">
               support site
             </Link>
@@ -138,6 +135,7 @@ const anchor = {
 };
 
 const button = {
+  padding: '10px',
   backgroundColor: '#656ee8',
   borderRadius: '5px',
   color: '#fff',

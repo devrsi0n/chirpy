@@ -1,8 +1,11 @@
 {
-  "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "$schema": "https://turborepo.dev/schema.json",
+  "globalDependencies": ["tsconfig.json", ".env.*"],
+  "globalEnv": ["GITHUB_TOKEN"],
+  "tasks": {
     "build": {
-      "dependsOn": ["^build", "^generate"]
+      "dependsOn": ["^build", "^generate"],
+      "outputs": ["dist/**", "lib/**"]
     },
     "test": {
       "outputs": []
@@ -16,7 +19,7 @@
     },
     "@chirpy-dev/main-app#build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**"],
+      "outputs": [".next/**", "!.next/cache/**"],
       "env": [
         "NEXT_PUBLIC_APP_URL",
         "SUPABASE_URL",
@@ -39,8 +42,25 @@
     },
     "db": {
       "cache": false
+    },
+    "@chirpy-dev/analytics#build": {
+      "cache": false,
+      "outputs": []
     }
   },
-  "globalDependencies": ["tsconfig.json", ".env.*"],
-  "globalEnv": ["GITHUB_TOKEN"]
+  "globalPassThroughEnv": [
+    "SKIP_ENV_VALIDATION",
+    "SUPABASE_URL",
+    "NEXTAUTH_*",
+    "NEXT_PUBLIC_*",
+    "PRIVATE_VAPID",
+    "EMAIL_API_KEY",
+    "STRIPE_*",
+    "SW_CACHE_ID",
+    "QSTASH_*",
+    "TINYBIRD_ADMIN_TOKEN",
+    "CRON_SECRET",
+    "ANALYZE",
+    "RELATIVE_CI_KEY"
+  ]
 }
