@@ -82,3 +82,7 @@
 ## ⚖️ 许可证
 
 AGPL 3.0
+
+## 作者的其他产品
+
+[Layerwise](https://layerwise.app) — 在电脑上用 AI 构建全栈应用，实时预览并发布上线。

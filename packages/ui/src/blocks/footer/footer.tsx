@@ -39,6 +39,9 @@ export function Footer({ className, ...restProps }: FooterProps): JSX.Element {
         <Link href="https://quotion.co" variant="secondary">
           Quotion
         </Link>
+        <Link href="https://layerwise.app" variant="secondary">
+          Layerwise
+        </Link>
       </nav>
       <div
         className={`flex w-full flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-5 sm:space-y-0`}

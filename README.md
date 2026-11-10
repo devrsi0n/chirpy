@@ -75,4 +75,6 @@ AGPL 3.0
 
 ## More products from author
 
+[Layerwise](https://layerwise.app) — Build full-stack apps with AI on your computer, preview them live, and publish them online.
+
 [![Quotion - Apple Notes to blogs in minutes](https://quotion.co/images/root/og-image.png)](https://quotion.co)
